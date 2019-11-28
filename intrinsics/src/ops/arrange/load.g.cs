@@ -122,22 +122,22 @@ namespace Z0
                 => vload(n, in head(src));
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vload<T>(Block128<T> src)
+        public static Vector128<T> vload<T>(in Block128<T> src)
             where T : unmanaged
                 =>  vload(n128,src.Data);
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vload<T>(ConstBlock128<T> src)
+        public static Vector128<T> vload<T>(in ConstBlock128<T> src)
             where T : unmanaged
                 =>  vload(n128,src.Data);
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vload<T>(Block256<T> src)
+        public static Vector256<T> vload<T>(in Block256<T> src)
             where T : unmanaged
                 =>  vload(n256,src.Data);
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vload<T>(ConstBlock256<T> src)
+        public static Vector256<T> vload<T>(in ConstBlock256<T> src)
             where T : unmanaged
                 => vload(n256,src.Data);
 

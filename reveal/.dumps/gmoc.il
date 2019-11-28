@@ -1,4 +1,4 @@
-// 2019-11-27 00:53:14:479
+// 2019-11-27 21:54:09:331
 sbyte sar_g8i(sbyte lhs, int offset)
 {
     IL_0000: ldarg.0
@@ -7,7 +7,7 @@ sbyte sar_g8i(sbyte lhs, int offset)
     IL_0007: ret
 
 }
-byte sar_b8u(byte lhs, int offset)
+byte sar_d8u(byte lhs, int offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -23,7 +23,7 @@ byte sar_g8u(byte lhs, int offset)
     IL_0007: ret
 
 }
-short sar_b16i(short lhs, int offset)
+short sar_d16i(short lhs, int offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -39,7 +39,7 @@ short sar_g16i(short lhs, int offset)
     IL_0007: ret
 
 }
-ushort sar_b16u(ushort lhs, int offset)
+ushort sar_d16u(ushort lhs, int offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -55,7 +55,7 @@ ushort sar_g16u(ushort lhs, int offset)
     IL_0007: ret
 
 }
-int sar_b32i(int lhs, int offset)
+int sar_d32i(int lhs, int offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -71,7 +71,7 @@ int sar_g32i(int lhs, int offset)
     IL_0007: ret
 
 }
-uint sar_b32u(uint lhs, int offset)
+uint sar_d32u(uint lhs, int offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -87,7 +87,7 @@ uint sar_g32u(uint lhs, int offset)
     IL_0007: ret
 
 }
-long sar_b64i(long lhs, int offset)
+long sar_d64i(long lhs, int offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -103,7 +103,7 @@ long sar_g64i(long lhs, int offset)
     IL_0007: ret
 
 }
-ulong sar_b64u(ulong lhs, int offset)
+ulong sar_d64u(ulong lhs, int offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1877,7 +1877,7 @@ double pow_g64f(double b, uint exp)
     IL_0007: ret
 
 }
-sbyte sar_b8i(sbyte lhs, int offset)
+sbyte sar_d8i(sbyte lhs, int offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1

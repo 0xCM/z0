@@ -34,7 +34,7 @@ namespace Z0
             {
                 var input = Random.BitString(grid.PointCount);
                 for(var index=0; index<input.Length; index++)
-                    grid[index] = input[index];
+                    grid.SetBit(index, input[index]);
 
                 var output = grid.ToBitString();
                 Claim.eq(input,output);                                            
@@ -61,7 +61,7 @@ namespace Z0
                 var bs = Random.BitString((int)NatMath.mul(m,n));
 
                 for(var i=0; i<bs.Length; i++)
-                    bg[i] = bs[i];
+                    bg.SetBit(i, bs[i]);
                 
                 Claim.eq(bg.ToBitString(), bs);        
             }
@@ -91,7 +91,7 @@ namespace Z0
                     Claim.yea(b1 == b2);
 
                     dstA[row,col] = b1;
-                    dstB[bitpos] = b2;                    
+                    dstB.SetBit(bitpos, b2);                    
                 }
                 var bsA = dstA.ToBitString();
                 var bsB = dstB.ToBitString();
@@ -167,6 +167,76 @@ namespace Z0
         void emit_grid_maps()
             => GridWriter.EmitGridMaps();
 
+        protected void nbg_and_check<M,N,T>(M m = default, N n = default, T t = default)
+            where M : unmanaged,ITypeNat
+            where N : unmanaged,ITypeNat
+            where T : unmanaged
+        {
+            var gx = Random.BitGrid(m,n,t);
+            var gy = Random.BitGrid(m,n,t);
+            var gz = BitGrid.alloc(m,n,t);
+
+            Claim.eq(gz.BlockCount, BitCalcs.blockcount(n256,m,n,t));            
+            Claim.eq(gz.CellCount, BitCalcs.cellcount(m,n,t));
+            
+            BitGrid.and(gx,gy,gz);
+            
+            for(var block=0; block<gx.BlockCount; block++)
+                Claim.eq(ginx.vand(gx[block], gy[block]), gz[block]);   
+
+        }
+
+        protected void nbg_xor_check<M,N,T>(M m = default, N n = default, T t = default)
+            where M : unmanaged,ITypeNat
+            where N : unmanaged,ITypeNat
+            where T : unmanaged
+        {
+            var gx = Random.BitGrid(m,n,t);
+            var gy = Random.BitGrid(m,n,t);
+            var gz = BitGrid.alloc(m,n,t);
+
+            Claim.eq(gz.BlockCount, BitCalcs.blockcount(n256,m,n,t));            
+            Claim.eq(gz.CellCount, BitCalcs.cellcount(m,n,t));
+            
+            BitGrid.xor(gx,gy,gz);
+            
+            for(var block=0; block<gx.BlockCount; block++)
+                Claim.eq(ginx.vxor(gx[block], gy[block]), gz[block]);   
+        }
+
+        protected void gbg_and_check<T>(int m, int n, T t = default)
+            where T : unmanaged
+        {
+            var gx = Random.BitGrid(m,n,t);
+            var gy = Random.BitGrid(m,n,t);
+            var gz = BitGrid.alloc(m,n,t);
+
+            Claim.eq(gz.BlockCount, BitCalcs.blockcount(n256,m,n,t));            
+            Claim.eq(gz.CellCount, BitCalcs.cellcount<T>(m,n));
+            
+            BitGrid.and(gx,gy,gz);
+            
+            for(var block=0; block<gx.BlockCount; block++)
+                Claim.eq(ginx.vand(gx[block], gy[block]), gz[block]);   
+
+        }
+
+        protected void gbg_xor_check<T>(int m, int n, T t = default)
+            where T : unmanaged
+        {
+            var gx = Random.BitGrid(m,n,t);
+            var gy = Random.BitGrid(m,n,t);
+            var gz = BitGrid.alloc(m,n,t);
+
+            Claim.eq(gz.BlockCount, BitCalcs.blockcount(n256,m,n,t));            
+            Claim.eq(gz.CellCount, BitCalcs.cellcount<T>(m,n));
+            
+            BitGrid.xor(gx,gy,gz);
+            
+            for(var block=0; block<gx.BlockCount; block++)
+                Claim.eq(ginx.vxor(gx[block], gy[block]), gz[block]);   
+
+        }
     }
 
 }

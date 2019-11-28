@@ -88,9 +88,9 @@ namespace Z0
             this.RowCount = rows;
             this.ColCount = cols;
             this.SegWidth = segwidth;
-            this.StorageBytes = BitCalcs.bytecount(rows, cols);
+            this.StorageBytes = BitCalcs.bytecount((int)rows, (int)cols);
             this.StorageBits = StorageBytes*8;
-            this.StorageSegs = BitCalcs.segcount(rows,cols,segwidth);
+            this.StorageSegs = BitCalcs.cellcount((int)rows,(int)cols,(int)segwidth);
         }
 
         [MethodImpl(Inline)]

@@ -5,19 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-
-    public static class Stacked
-    {
-        [MethodImpl(NotInline)]
-        public static Stacked<T> alloc<T>(int capacity)
-            where T : unmanaged
-                =>  Stacked<T>.Alloc(capacity);
-    }
 
     public ref struct Stacked<T>
         where T : unmanaged
@@ -26,21 +16,15 @@ namespace Z0
 
         int pos;
 
-        int count;
-
         Span<T> buffer;
 
-        [MethodImpl(Inline)]
-        public static Stacked<T> Alloc(int capacity)
-            => new Stacked<T>(new T[capacity]);
 
         [MethodImpl(Inline)]
-        Stacked(Span<T> buffer)
+        internal Stacked(Span<T> buffer)
         {
             this.buffer = buffer;
             this.capacity = buffer.Length;
             this.pos = 0;
-            this.count = 0;
         }
 
         [MethodImpl(Inline)]
@@ -49,8 +33,7 @@ namespace Z0
             if(pos > MaxPos)
                 --pos;
             
-            seek(ref Head, pos++) = src; 
-            
+            seek(ref Head, pos++) = src;             
         }
 
         [MethodImpl(Inline)]
@@ -75,7 +58,7 @@ namespace Z0
             get => capacity - 1;
         }
 
-        public int Count
+        public int Enqueued
         {
             [MethodImpl(Inline)]
             get => pos + 1;

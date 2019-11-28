@@ -9,9 +9,9 @@ namespace Z0
 
     using static zfunc;
     
-    public class t_bg_row : t_bg<t_bg_row>
+    public class t_fbg_row : t_bg<t_fbg_row>
     {        
-        public void nbg_row_8x4x32()
+        public void fbg_row_8x4x32()
         {
             var m = n8;
             var n = n4;
@@ -28,7 +28,7 @@ namespace Z0
             }
         }
 
-        public void nbg_row_16x16x256()
+        public void fbg_row_16x16x256()
         {
             var m = n16;
             var n = n16;

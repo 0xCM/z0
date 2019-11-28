@@ -29,7 +29,7 @@ namespace Z0
     	public readonly byte[] Data;
 	
         string FormatData()
-            => Data.FormatHex(true, false, false, true).Select(x => x.ToString()).Concat(" ");
+            => Data.FormatHex(true, false, false, true);//.Select(x => x.ToString()).Concat(" ");
 
 		public override string ToString() 
 			=> $"{Address.FormatHex()}: {FormatData()}";

@@ -10,6 +10,7 @@ namespace Z0
 
     using static zfunc;
     using static As;     
+    using static AsIn;     
 
     public static class BitStore
     {

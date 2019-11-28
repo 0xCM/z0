@@ -35,15 +35,16 @@ namespace Z0
         public static ushort add_g16u(ushort lhs, ushort rhs)
             => gmath.add(lhs,rhs);
 
+
         public static int add_d32i(int lhs, int rhs)
             => math.add(lhs,rhs);
   
         public static int add_g32i(int lhs, int rhs)
             => gmath.add(lhs,rhs);
 
-        public static uint add_d32u(uint lhs, uint rhs)
+       public static uint add_d32u(uint lhs, uint rhs)
             => math.add(lhs,rhs);
- 
+
         public static uint add_g32u(uint lhs, uint rhs)
             => gmath.add(lhs,rhs);
 
@@ -70,6 +71,7 @@ namespace Z0
 
         public static double add_g64f(double lhs, double rhs)
             => gfp.add(lhs,rhs);                                
+
     }
 
 }

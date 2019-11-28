@@ -1,8 +1,8 @@
-// 2019-11-27 00:53:15:172
+// 2019-11-27 21:54:10:123
 int work_ring_buffer()
 {
     IL_0000: ldc.i4.s 64
-    IL_0002: call Z0.RingBuffer`1<System.Byte> Z0.RingBuffer::alloc<System.Byte>(System.Int32)
+    IL_0002: call Z0.RingBuffer`1<System.Byte> Z0.MicroBuffers::ring<System.Byte>(System.Int32)
     IL_0007: stloc.0
     IL_0008: ldloca.s V_0
     IL_000A: ldc.i4.3

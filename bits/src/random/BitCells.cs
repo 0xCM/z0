@@ -25,7 +25,7 @@ namespace Z0
         public static BitCells<N,T> BitCells<N,T>(this IPolyrand random)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => Z0.BitCells.load<N,T>(random.Stream<T>().ToSpan(BitCalcs.segcount<N,N1,T>()));
+                => Z0.BitCells.load<N,T>(random.Stream<T>().ToSpan(BitCalcs.cellcount<N,N1,T>()));
 
         /// <summary>
         /// Produces a generic bitcell container over a specified number of bits

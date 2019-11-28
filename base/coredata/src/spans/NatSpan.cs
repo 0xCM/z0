@@ -140,6 +140,18 @@ namespace Z0
             => data.Fill(value);
 
         [MethodImpl(Inline)]
+        public void Clear()
+            => data.Clear();
+
+        [MethodImpl(Inline)]
+        public Span<T> Slice(int offset)
+            => data.Slice(offset);
+
+        [MethodImpl(Inline)]
+        public Span<T> Slice(int offset, int count)
+            => data.Slice(offset, count);
+
+        [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()
             => data.GetEnumerator();
 

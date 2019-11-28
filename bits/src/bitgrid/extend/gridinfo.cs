@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class BitGridX
+    public static class GridInfoX
     {
         /// <summary>
         /// Calculates a grid layout from a specification
@@ -22,6 +22,9 @@ namespace Z0
 
         public static GridStats Stats(this GridMap map)
             => GridStats.Define(map);
+
+        public static string Format(this GridStats stats, int? colpad = null, char? delimiter = null)
+            => GridStats.Format(stats, colpad, delimiter);
 
     }
 

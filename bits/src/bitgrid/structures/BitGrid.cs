@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;
 
@@ -21,12 +22,12 @@ namespace Z0
         /// <summary>
         /// The number of grid rows
         /// </summary>
-        public readonly ushort RowCount;
+        public readonly int RowCount;
 
         /// <summary>
         /// The number of grid columns
         /// </summary>
-        public readonly ushort ColCount;
+        public readonly int ColCount;
 
         [MethodImpl(Inline)]
         public static bool operator ==(in BitGrid<T> g1, in BitGrid<T> g2)
@@ -37,7 +38,7 @@ namespace Z0
             => !g1.Equals(g2);
         
         [MethodImpl(Inline)]
-        internal BitGrid(Block256<T> data, ushort rows, ushort width)
+        internal BitGrid(Block256<T> data, int rows, int width)
         {
             this.data = data;
             this.RowCount = rows;
@@ -62,7 +63,7 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => data.CellCount;
+            get => BitCalcs.cellcount<T>(RowCount, ColCount);
         }
 
         public int BlockCount
@@ -89,14 +90,40 @@ namespace Z0
             set => BitGrid.setbit(ColCount, row, col, value, ref Head);
         }
 
-        public bit this[int pos]
+        [MethodImpl(Inline)]
+        public void SetBit(int index, bit state)
+            => BitGrid.setbit(index, state, ref Head);
+
+        [MethodImpl(Inline)]
+        public bit ReadBit(int index)
+            => BitGrid.readbit(in Head, index);
+
+        /// <summary>
+        /// Transfers 256-bit cpu vectors to/from blocked storage
+        /// </summary>
+        public Vector256<T> this[int block]
         {
             [MethodImpl(Inline)]
-            get => BitGrid.readbit(in Head, pos);
+            get => BitGrid.read(this, block);
 
             [MethodImpl(Inline)]
-            set => BitGrid.setbit(pos, value, ref Head);
+            set => BitGrid.write(value, this, block);
         }
+
+        /// <summary>
+        /// Reads/writes an index-identified grid cell
+        /// </summary>
+        /// <param name="index">The 0-based linear cell index</param>
+        [MethodImpl(Inline)]
+        public ref T Cell(int index)
+            => ref Unsafe.Add(ref Head, index);
+
+        /// <summary>
+        /// Returns the 256-bit block corresponding to a block index
+        /// </summary>
+        /// <param name="block">The block index</param>
+        public Block256<T> Block(int block)
+            => data.Block(block);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid<T> rhs)

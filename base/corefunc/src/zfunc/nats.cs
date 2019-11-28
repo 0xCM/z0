@@ -207,6 +207,8 @@ partial class zfunc
 
     public static N49 n49 => default;
 
+    public static N50 n50 => default;
+
     public static N50 n51 => default;
 
     public static N52 n52 => default;

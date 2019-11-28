@@ -7,8 +7,6 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Linq;
-    using System.Collections.Generic;
 
     using static zfunc;
     using static LogicOps;
@@ -21,14 +19,13 @@ namespace Z0.Logix
     {
         public static int work_ring_buffer()
         {
-            var buffer = RingBuffer.alloc<byte>(64);
+            var buffer = MicroBuffers.ring<byte>(64);
             buffer.Push(3);
             buffer.Push(4);
             var x = buffer.Pop();
             var y = buffer.Pop();
             return x + y;
         }
-
 
 
         public static ref BitStack push(bit src, ref BitStack dst)
@@ -123,7 +120,6 @@ namespace Z0.Logix
 
         public static Vector256<ulong> cnotimply_v256(Vector256<ulong> a, Vector256<ulong> b)
             => cnotimply(a,b);
-
     }
 
     public static class lbmoc

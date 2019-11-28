@@ -15,53 +15,54 @@ namespace Z0
         /// <summary>
         /// Multiplies two primal values
         /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
+        /// <param name="a">The left value</param>
+        /// <param name="b">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T mul<T>(T lhs, T rhs)
+        public static T mul<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return mulu(lhs,rhs);
+                return mul_u(a,b);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return muli(lhs,rhs);
-            else return gfp.mul(lhs,rhs);
+                return mul_i(a,b);
+            else 
+                return gfp.mul(a,b);
         }
 
 
         [MethodImpl(Inline)]
-        static T muli<T>(T lhs, T rhs)
+        static T mul_i<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(math.mul(int8(lhs), int8(rhs)));
+                 return generic<T>(math.mul(int8(a), int8(b)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(math.mul(int16(lhs), int16(rhs)));
+                 return generic<T>(math.mul(int16(a), int16(b)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(math.mul(int32(lhs), int32(rhs)));
+                 return generic<T>(math.mul(int32(a), int32(b)));
             else
-                 return generic<T>(math.mul(int64(lhs), int64(rhs)));
+                 return generic<T>(math.mul(int64(a), int64(b)));
         }
 
         [MethodImpl(Inline)]
-        static T mulu<T>(T lhs, T rhs)
+        static T mul_u<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.mul(uint8(lhs), uint8(rhs)));
+                return generic<T>(math.mul(uint8(a), uint8(b)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.mul(uint16(lhs), uint16(rhs)));
+                return generic<T>(math.mul(uint16(a), uint16(b)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(math.mul(uint32(lhs), uint32(rhs)));
+                return generic<T>(math.mul(uint32(a), uint32(b)));
             else 
-                return generic<T>(math.mul(uint64(lhs), uint64(rhs)));
+                return generic<T>(math.mul(uint64(a), uint64(b)));
         }
     }
 }

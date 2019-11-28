@@ -1,4 +1,4 @@
-// 2019-11-27 00:53:14:105
+// 2019-11-27 21:54:08:883
 bool vtestz_d128x32i(Vector128<int> src, Vector128<int> mask)
 {
     IL_0000: ldarg.0
@@ -1072,12 +1072,10 @@ Vector256<double> ones_256x64f()
     IL_000A: ret
 
 }
-Vector256<sbyte> vperm4x64(Vector256<sbyte> x)
+Vector256<byte> pattern_lanemerge_256x8u()
 {
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4 228
-    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.SByte> Z0.dinx::vperm4x64(System.Runtime.Intrinsics.Vector256`1<System.SByte>,Z0.Perm4)
-    IL_000B: ret
+    IL_0000: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.ginx::vlanemerge<System.Byte>()
+    IL_0005: ret
 
 }
 Vector256<int> vpermvar8x32_256x32i(Vector256<int> src, Vector256<uint> spec)

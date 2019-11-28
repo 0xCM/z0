@@ -42,6 +42,18 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static BitGrid64<T> rotl<M,N,T>(BitGrid64<M,N,T> gx, int shift)
+            where T : unmanaged
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+        {
+            var gz = new BitGrid64<T>(0ul);
+            gcells.rotl(in gx.Head, shift, ref gz.Head, gx.CellCount);
+            return gz;
+        }
+
+
+        [MethodImpl(Inline)]
         public static BitGrid64<T> rotr<T>(BitGrid64<T> gx, int shift)
             where T : unmanaged
         {

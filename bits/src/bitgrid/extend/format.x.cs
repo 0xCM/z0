@@ -12,6 +12,16 @@ namespace Z0
 
     partial class BitGridX
     {
+        public static string Format<T>(this BitGrid<T> src)
+            where T : unmanaged
+                => src.Data.Bytes.FormatMatrixBits(src.ColCount);
+
+        public static string Format<M,N,T>(this BitGrid<M,N,T> src)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => src.Data.Bytes.FormatMatrixBits(src.ColCount);
+
         public static string Format<M,N,T>(this BitGrid32<M,N,T> src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -35,16 +45,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.ToSpan().FormatMatrixBits(src.ColCount);
-
-        public static string Format<T>(this BitGrid<T> src)
-            where T : unmanaged
-                => src.ToBitString().Format(blockWidth:1,rowWidth:src.ColCount);
-
-        public static string Format<T>(this RowBits<T> src)
-            where T : unmanaged
-                => src.Bytes.FormatMatrixBits(src.RowWidth);
         
-        public static string Format(this GridStats stats, int? colpad = null, char? delimiter = null)
-            => GridStats.Format(stats, colpad, delimiter);
     }
 }

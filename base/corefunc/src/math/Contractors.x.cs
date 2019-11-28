@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Threading;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Diagnostics;
+    
     using static As;
+    using static AsIn;     
 
     using static zfunc;    
 
@@ -75,6 +74,5 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
-
     }
 }

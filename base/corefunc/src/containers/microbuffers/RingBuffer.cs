@@ -5,20 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-
-    public static class RingBuffer
-    {
-        [MethodImpl(NotInline)]
-        public static RingBuffer<T> alloc<T>(int capacity)
-            where T : unmanaged
-                =>  RingBuffer<T>.Init(capacity);
-            
-    }
 
     public ref struct RingBuffer<T>
         where T : unmanaged
@@ -34,12 +23,9 @@ namespace Z0
 
         int count;
     
-        [MethodImpl(Inline)]
-        internal static RingBuffer<T> Init(int capacity)
-            => new RingBuffer<T>(new T[capacity]);
 
         [MethodImpl(Inline)]
-        RingBuffer(Span<T> buffer)
+        internal RingBuffer(Span<T> buffer)
         {
             this.buffer = buffer;
             this.capacity = buffer.Length;

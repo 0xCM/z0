@@ -42,7 +42,6 @@ namespace Z0.Logix
             where T:unmanaged
                 => @false<T>();
 
-
         [MethodImpl(Inline)]
         public static T @false<T>(T a, T b, T c)
             where T:unmanaged
@@ -58,7 +57,6 @@ namespace Z0.Logix
             where T:unmanaged
                 => @true<T>();
 
-
         [MethodImpl(Inline)]
         public static T @true<T>(T a, T b, T c)
             where T:unmanaged
@@ -72,7 +70,18 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static T xor1<T>(T a)
             where T : unmanaged
-                => gmath.xor1(a); 
+        {
+            if(typeof(T) == typeof(byte))
+                return As.generic<T>(math.xor1(As.uint8(a)));
+            else if(typeof(T) == typeof(ushort))
+                return As.generic<T>(math.xor1(As.uint16(a)));
+            else if(typeof(T) == typeof(uint))
+                return As.generic<T>(math.xor1(As.uint32(a)));
+            else if(typeof(T) == typeof(ulong))
+                return As.generic<T>(math.xor1(As.uint64(a)));
+            else
+                throw unsupported<T>();
+        }
 
         /// <summary>
         /// Promotes a T to the full splendor of a scalar, with all scalar bits enabled if

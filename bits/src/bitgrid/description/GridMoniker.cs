@@ -160,6 +160,17 @@ namespace Z0
                 => new GridMoniker<T>(rows,cols);
 
         /// <summary>
+        /// Defines a moniker predicated on grid dimensions and parametric storage type
+        /// </summary>
+        /// <param name="rows">The number of rows in the grid</param>
+        /// <param name="cols">The number of columns in the grid</param>
+        /// <typeparam name="T">The storage type</typeparam>
+        [MethodImpl(Inline)]
+        public static GridMoniker<T> FromDim<T>(int rows, int cols)
+            where T : unmanaged
+                => new GridMoniker<T>((ushort)rows,(ushort)cols);
+
+        /// <summary>
         /// Defines a moniker predicated on its integral identifier
         /// </summary>
         /// <param name="rows">The number of rows in the grid</param>

@@ -222,104 +222,104 @@ namespace Z0
             =>  BitConverter.DoubleToInt64Bits(src).FormatHex(zpad, specifier, uppercase, prespec);
 
         /// <summary>
-        /// Produces a stream of hex strings from a stream of scalars
+        /// Formats a scalar stream as a hex string
         /// </summary>
         /// <param name="src">The source number</param>
         /// <param name="zpad">Specifies whether each value should be left-padded with zeros commensurate with size of the data type </param>
         /// <param name="specifier">Specifies whether the hex numeric specifier shold prefix the output</param>
         /// <param name="uppercase">Specifies whether the hex digits A - F should be formmatted uppercase</param>
-        public static IEnumerable<string> FormatHex(this IEnumerable<byte> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
-            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec));
+        public static string FormatHex(this IEnumerable<byte> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec)).Select(x => x.ToString()).Concat(" ");
 
         /// <summary>
-        /// Produces a stream of hex strings from a stream of scalars
+        /// Formats a scalar stream as a hex string
         /// </summary>
         /// <param name="src">The source number</param>
         /// <param name="zpad">Specifies whether each value should be left-padded with zeros commensurate with size of the data type </param>
         /// <param name="specifier">Specifies whether the hex numeric specifier shold prefix the output</param>
         /// <param name="uppercase">Specifies whether the hex digits A - F should be formmatted uppercase</param>
-        public static IEnumerable<string> FormatHex(this IEnumerable<sbyte> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
-            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec));
+        public static string FormatHex(this IEnumerable<sbyte> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec)).Select(x => x.ToString()).Concat(" ");
 
         /// <summary>
-        /// Produces a stream of hex strings from a stream of scalars
+        /// Formats a scalar stream as a hex string
         /// </summary>
         /// <param name="src">The source number</param>
         /// <param name="zpad">Specifies whether each value should be left-padded with zeros commensurate with size of the data type </param>
         /// <param name="specifier">Specifies whether the hex numeric specifier shold prefix the output</param>
         /// <param name="uppercase">Specifies whether the hex digits A - F should be formmatted uppercase</param>
-        public static IEnumerable<string> FormatHex(this IEnumerable<short> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
-            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec));
+        public static string FormatHex(this IEnumerable<short> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec)).Select(x => x.ToString()).Concat(" ");
 
         /// <summary>
-        /// Produces a stream of hex strings from a stream of scalars
+        /// Formats a scalar stream as a hex string
         /// </summary>
         /// <param name="src">The source number</param>
         /// <param name="zpad">Specifies whether each value should be left-padded with zeros commensurate with size of the data type </param>
         /// <param name="specifier">Specifies whether the hex numeric specifier shold prefix the output</param>
         /// <param name="uppercase">Specifies whether the hex digits A - F should be formmatted uppercase</param>
-        public static IEnumerable<string> FormatHex(this IEnumerable<ushort> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
-            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec));
+        public static string FormatHex(this IEnumerable<ushort> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec)).Select(x => x.ToString()).Concat(" ");
 
         /// <summary>
-        /// Produces a stream of hex strings from a stream of scalars
+        /// Formats a scalar stream as a hex string
         /// </summary>
         /// <param name="src">The source number</param>
         /// <param name="zpad">Specifies whether each value should be left-padded with zeros commensurate with size of the data type </param>
         /// <param name="specifier">Specifies whether the hex numeric specifier shold prefix the output</param>
         /// <param name="uppercase">Specifies whether the hex digits A - F should be formmatted uppercase</param>
-        public static IEnumerable<string> FormatHex(this IEnumerable<int> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
-            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec));
+        public static string FormatHex(this IEnumerable<int> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec)).Select(x => x.ToString()).Concat(" ");
 
         /// <summary>
-        /// Produces a stream of hex strings from a stream of scalars
+        /// Formats a scalar stream as a hex string
         /// </summary>
         /// <param name="src">The source number</param>
         /// <param name="zpad">Specifies whether each value should be left-padded with zeros commensurate with size of the data type </param>
         /// <param name="specifier">Specifies whether the hex numeric specifier shold prefix the output</param>
         /// <param name="uppercase">Specifies whether the hex digits A - F should be formmatted uppercase</param>
-        public static IEnumerable<string> FormatHex(this IEnumerable<uint> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
-            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec));
+        public static string FormatHex(this IEnumerable<uint> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec)).Select(x => x.ToString()).Concat(" ");
 
         /// <summary>
-        /// Produces a stream of hex strings from a stream of scalars
+        /// Formats a scalar stream as a hex string
         /// </summary>
         /// <param name="src">The source number</param>
         /// <param name="zpad">Specifies whether each value should be left-padded with zeros commensurate with size of the data type </param>
         /// <param name="specifier">Specifies whether the hex numeric specifier shold prefix the output</param>
         /// <param name="uppercase">Specifies whether the hex digits A - F should be formmatted uppercase</param>
-        public static IEnumerable<string> FormatHex(this IEnumerable<long> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
-            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec));
+        public static string FormatHex(this IEnumerable<long> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec)).Select(x => x.ToString()).Concat(" ");
 
         /// <summary>
-        /// Produces a stream of hex strings from a stream of scalars
+        /// Formats a scalar stream as a hex string
         /// </summary>
         /// <param name="src">The source number</param>
         /// <param name="zpad">Specifies whether each value should be left-padded with zeros commensurate with size of the data type </param>
         /// <param name="specifier">Specifies whether the hex numeric specifier shold prefix the output</param>
         /// <param name="uppercase">Specifies whether the hex digits A - F should be formmatted uppercase</param>
-        public static IEnumerable<string> FormatHex(this IEnumerable<ulong> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
-            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec));
+        public static string FormatHex(this IEnumerable<ulong> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec)).Select(x => x.ToString()).Concat(" ");
 
         /// <summary>
-        /// Produces a stream of hex strings from a stream of scalars
+        /// Formats a scalar stream as a hex string
         /// </summary>
         /// <param name="src">The source number</param>
         /// <param name="zpad">Specifies whether each value should be left-padded with zeros commensurate with size of the data type </param>
         /// <param name="specifier">Specifies whether the hex numeric specifier shold prefix the output</param>
         /// <param name="uppercase">Specifies whether the hex digits A - F should be formmatted uppercase</param>
-        public static IEnumerable<string> FormatHex(this IEnumerable<float> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
-            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec));
+        public static string FormatHex(this IEnumerable<float> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+            => src.Select(x => x.FormatHex(zpad, specifier, uppercase, prespec)).Select(x => x.ToString()).Concat(" ");
 
         /// <summary>
-        /// Produces a stream of hex strings from a stream of scalars
+        /// Formats a scalar stream as a hex string
         /// </summary>
         /// <param name="src">The source number</param>
         /// <param name="zpad">Specifies whether each value should be left-padded with zeros commensurate with size of the data type </param>
         /// <param name="specifier">Specifies whether the hex numeric specifier shold prefix the output</param>
         /// <param name="uppercase">Specifies whether the hex digits A - F should be formmatted uppercase</param>
-        public static IEnumerable<string> FormatHex(this IEnumerable<double> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
-            => src.Select(x => x.FormatHex(zpad, specifier,uppercase, prespec));
+        public static string FormatHex(this IEnumerable<double> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+            => src.Select(x => x.FormatHex(zpad, specifier,uppercase, prespec)).Select(x => x.ToString()).Concat(" ");
  
         public static string FormatHex(this byte[] src, char sep, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             => src.ToReadOnlySpan().FormatHex(sep,zpad,specifier,uppercase,prespec);

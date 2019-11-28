@@ -39,19 +39,14 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-        {
-            return new BitGrid<M, N, T>(src);
-        }
+                => new BitGrid<M, N, T>(src);
 
         [MethodImpl(NotInline)]
         public static BitGrid<M,N,T> load<M,N,T>(M m, N n, Block256<T> src)
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged
-        {
-
-            return new BitGrid<M,N,T>(src);
-        }
+                => new BitGrid<M,N,T>(src);
 
         /// <summary>
         /// Forms a 1x64 grid from the lower 64 bits of a vector

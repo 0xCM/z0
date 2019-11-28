@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
     
-    public class t_bg_define : t_bg<t_bg_define>
+    public class t_gbg_define : t_bg<t_gbg_define>
     {        
         public void gbg_define_32x32x32()
         {
@@ -36,15 +36,6 @@ namespace Z0
 
             nbg_define_check(n,n,zero);                
         }
-
-        public void nbg_define_3x5x8()
-            => nbg_define_check(n3,n5, z8);
-
-        public void nbg_define_17x11x8()
-            => nbg_define_check(n17,n11, z8);
-
-        public void nbg_define_30x30x32()
-            => nbg_define_check(n30,n30, z32);
 
 
     }

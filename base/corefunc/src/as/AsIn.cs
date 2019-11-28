@@ -114,13 +114,14 @@ namespace Z0
 
     partial class As
     {
-
-
         [MethodImpl(Inline)]
         public static sbyte int8<T>(T src)
-            => Unsafe.As<T,sbyte>(ref src);
-        
-            
+            => Unsafe.As<T,sbyte>(ref src);        
+
+        [MethodImpl(Inline)]
+        public static byte uint8<T>(T src)
+            => Unsafe.As<T,byte>(ref src);        
+
         [MethodImpl(Inline)]
         public static short int16<T>(T src)
             => Unsafe.As<T,short>(ref src);

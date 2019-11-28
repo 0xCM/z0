@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
@@ -16,11 +14,7 @@ namespace Z0
         ulong state;
 
         [MethodImpl(Inline)]
-        public static BitStack Init(ulong state = 0)
-            => new BitStack(state);
-
-        [MethodImpl(Inline)]
-        BitStack(ulong state)
+        internal BitStack(ulong state)
             => this.state  = state;
 
         [MethodImpl(Inline)]

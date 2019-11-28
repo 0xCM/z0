@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// A grid of natural dimensions M and N such that M*N = 64
+    /// A grid of natural dimensions M and N such that M*N = 32
     /// </summary>
     /// <remarks>
     ///  Conforming dimensions include 1x32, 32x1, 2x16, 16x2, 4x8, and 8x4.

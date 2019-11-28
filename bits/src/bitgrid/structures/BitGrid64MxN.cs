@@ -45,7 +45,7 @@ namespace Z0
         /// <summary>
         /// The number of cells covered by the grid
         /// </summary>
-        public static int CellCount => BitGrid64<T>.GridCells;
+        public static int GridCells => BitGrid64<T>.GridCells;
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid64<M,N,T>(Block64<T> src)
@@ -87,6 +87,24 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => data.Scalar;
+        }
+
+        public int CellCount
+        {
+            [MethodImpl(Inline)]
+            get => GridCells;
+        }
+
+        public Span<T> Cells
+        {
+            [MethodImpl(Inline)]
+            get => data.Cells;
+        }
+
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref data.Head;
         }
 
         /// <summary>

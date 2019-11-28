@@ -17,25 +17,22 @@ partial class zfunc
     /// </summary>
     /// <typeparam name="T">The primal source type</typeparam>
     [MethodImpl(Inline)]
-    public static bit signed<T>()
+    public static bool signed<T>()
         where T : unmanaged
-            => signedint<T>() || floating<T>();
+        => typeof(T) == typeof(sbyte) 
+        || typeof(T) == typeof(short) 
+        || typeof(T) == typeof(int) 
+        || typeof(T) == typeof(long)
+        || typeof(T) == typeof(float) 
+        || typeof(T) == typeof(double);
 
-    /// <summary>
-    /// Returns true if the primal source type is unsigned, false otherwise
-    /// </summary>
-    /// <typeparam name="T">The primal source type</typeparam>
-    [MethodImpl(Inline)]
-    public static bit unsigned<T>()
-        where T : unmanaged
-            => unsignedint<T>();
 
     /// <summary>
     /// Returns true if the specified type is an unsigned primal integral type
     /// </summary>
     /// <typeparam name="T">The type to evaluate</typeparam>
     [MethodImpl(Inline)]
-    public static bit unsignedint<T>()
+    public static bool unsigned<T>()
         where T : unmanaged
         => typeof(T) == typeof(byte) 
         || typeof(T) == typeof(ushort) 
@@ -47,7 +44,7 @@ partial class zfunc
     /// </summary>
     /// <typeparam name="T">The type to evaluate</typeparam>
     [MethodImpl(Inline)]
-    public static bit signedint<T>()
+    public static bool signedint<T>()
         where T : unmanaged
         => typeof(T) == typeof(sbyte) 
         || typeof(T) == typeof(short) 
@@ -59,16 +56,23 @@ partial class zfunc
     /// </summary>
     /// <typeparam name="T">The type to evaluate</typeparam>
     [MethodImpl(Inline)]
-    public static bit integral<T>()
+    public static bool integral<T>()
         where T : unmanaged
-            => signedint<T>() || unsignedint<T>();
+        => typeof(T) == typeof(byte) 
+        || typeof(T) == typeof(ushort) 
+        || typeof(T) == typeof(uint) 
+        || typeof(T) == typeof(ulong)
+        || typeof(T) == typeof(sbyte) 
+        || typeof(T) == typeof(short) 
+        || typeof(T) == typeof(int) 
+        || typeof(T) == typeof(long);
 
     /// <summary>
     /// Returns true if the spedified type is a 32-bit or 64-bit floating point
     /// </summary>
     /// <typeparam name="T">The type to evaluate</typeparam>
     [MethodImpl(Inline)]
-    public static bit floating<T>()
+    public static bool floating<T>()
         where T : unmanaged
             => typeof(T) == typeof(float) 
             || typeof(T) == typeof(double);
@@ -83,7 +87,7 @@ partial class zfunc
         where T : unmanaged
             =>  floating<T>() ? AsciLower.f  
               : signedint<T>() ? AsciLower.i  
-              : unsignedint<T>() ?  AsciLower.u 
+              : unsigned<T>() ?  AsciLower.u 
               : AsciSym.Question;
 
     /// <summary>
@@ -96,7 +100,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static IEnumerable<T> range<T>(T x0, T x1, T? step = null)
         where T : unmanaged
-            => range_dispatch_1(x0,x1,step);
+            => range_1(x0,x1,step);
 
     /// <summary>
     /// Defines a generic complex number
@@ -135,7 +139,7 @@ partial class zfunc
     }
 
     [MethodImpl(Inline)]
-    static IEnumerable<T> range_dispatch_1<T>(T x0, T x1, T? step = null)
+    static IEnumerable<T> range_1<T>(T x0, T x1, T? step = null)
         where T : unmanaged
     {
         if(typeof(T) == typeof(sbyte))
@@ -147,12 +151,12 @@ partial class zfunc
         else if(typeof(T) == typeof(ushort))
             return range16u(x0,x1,step);
         else
-            return range_dispatch_2(x0,x1,step);
+            return range_2(x0,x1,step);
 
     }
 
     [MethodImpl(Inline)]
-    static IEnumerable<T> range_dispatch_2<T>(T x0, T x1, T? step = null)
+    static IEnumerable<T> range_2<T>(T x0, T x1, T? step = null)
         where T : unmanaged
     {
         if(typeof(T) == typeof(int))
@@ -164,12 +168,12 @@ partial class zfunc
         else if(typeof(T) == typeof(ulong))
             return range64u(x0,x1,step);
         else
-            return range_dispatch_3(x0,x1,step);
+            return range_3(x0,x1,step);
 
     }
 
     [MethodImpl(Inline)]
-    static IEnumerable<T> range_dispatch_3<T>(T x0, T x1, T? step = null)
+    static IEnumerable<T> range_3<T>(T x0, T x1, T? step = null)
         where T : unmanaged
     {
         if(typeof(T) == typeof(float))

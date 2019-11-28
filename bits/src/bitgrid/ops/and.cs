@@ -14,24 +14,75 @@ namespace Z0
     partial class BitGrid
     {        
         /// <summary>
-        /// Computes the bitwise AND between the operands
+        /// Computes the bitwise AND between generic bitgrids and stores the result to a caller-supplied target
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <param name="gz">The target grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly BitGrid<T> and<T>(in BitGrid<T> gx, in BitGrid<T> gy, in BitGrid<T> gz)
+            where T : unmanaged
+        {
+            var blocks = gz.BlockCount;
+            for(var i=0; i<blocks; i++)
+                gz[i] = ginx.vand(gx[i],gy[i]);
+            return ref gz;
+        }
+
+        /// <summary>
+        /// Computes the bitwise AND between generic bitgrids and returns the allocated result
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid<M,N,T> and<M,N,T>(BitGrid<M,N,T> gx, BitGrid<M,N,T> gy)
+        public static BitGrid<T> and<T>(in BitGrid<T> gx, in BitGrid<T> gy)
+            where T : unmanaged
+        {
+            var gz = alloc<T>(gx.RowCount, gx.ColCount);
+            and(gx,gy,gz);
+            return gz;
+        }
+
+        /// <summary>
+        /// Computes the bitwise AND between natural bitgrids and stores the result to a caller-supplied target
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <param name="gz">The target grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly BitGrid<M,N,T> and<M,N,T>(in BitGrid<M,N,T> gx, in BitGrid<M,N,T> gy, in BitGrid<M,N,T> gz)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-
-            return default;
+            var blocks = gz.BlockCount;
+            for(var i=0; i<blocks; i++)
+                gz[i] = ginx.vand(gx[i],gy[i]);
+            return ref gz;
         }
 
+        /// <summary>
+        /// Computes the bitwise AND between generic bitgrids and returns the allocated result
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid<M,N,T> and<M,N,T>(in BitGrid<M,N,T> gx, in BitGrid<M,N,T> gy)
+            where T : unmanaged
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+        {
+            var gz = alloc<M,N,T>();    
+            and(gx,gy,gz);
+            return gz;
+        }
 
         /// <summary>
-        /// Computes the bitwise AND between the operands
+        /// Computes the bitwise AND between fixed-width 32-bit generic bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -42,7 +93,20 @@ namespace Z0
                 => math.and(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise AND between the operands
+        /// Computes the bitwise AND between fixed-width 32-bit natural bitgrids
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid32<M,N,T> and<M,N,T>(BitGrid32<M,N,T> gx, BitGrid32<M,N,T> gy)
+            where T : unmanaged
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+                => math.and(gx,gy);
+
+        /// <summary>
+        /// Computes the bitwise AND between fixed-width 64-bit grids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -53,7 +117,21 @@ namespace Z0
                 => math.and(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise AND between the operands
+        /// Computes the bitwise AND between fixed-width 64-bit natural bitgrids
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid64<M,N,T> and<M,N,T>(BitGrid64<M,N,T> gx, BitGrid64<M,N,T> gy)
+            where T : unmanaged
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+                => math.and(gx,gy);
+
+
+        /// <summary>
+        /// Computes the bitwise AND between fixed-width 128-bit generic bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -64,7 +142,7 @@ namespace Z0
                 => ginx.vand<T>(gx,gy);
     
         /// <summary>
-        /// Computes the bitwise AND between the operands
+        /// Computes the bitwise AND between fixed-width 256-bit generic bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -75,7 +153,7 @@ namespace Z0
                 => ginx.vand<T>(gx,gy);    
 
         /// <summary>
-        /// Computes the bitwise AND between the operands
+        /// Computes the bitwise AND between 128-bit fixed-width natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -88,7 +166,7 @@ namespace Z0
                 => ginx.vand<T>(gx,gy);    
 
         /// <summary>
-        /// Computes the bitwise AND between the operands
+        /// Computes the bitwise AND between 256-bit fixed-width natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>

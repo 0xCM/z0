@@ -13,60 +13,11 @@ namespace Z0
     /// <summary>
     /// Represents a contiguous block of memory that represents the machine code for a method
     /// </summary>
-    public readonly struct MethodMemory
+    public readonly struct MethodData
     {        
-        [MethodImpl(Inline)]
-        public static MethodMemory Read(MethodInfo m)
-        {                        
-            // Note that this is just POC; to really read the method properly,
-            //one must know where it ends, and I'm not sure if that can be done
-            //without cracking open the method table of the PE file...
-            return MethodMemory.ReadUntil(m, NatSpan.alloc<N32,byte>(), 0xc3, 0xe0);
-        }
 
         [MethodImpl(Inline)]
-        public static MethodMemory Read<T>(string method)
-        {
-            return Read(method<T>(method));
-        }
-
-        [MethodImpl(Inline)]
-        static unsafe ref byte Read(byte* pByte, ref byte dst)
-        {
-            dst = Unsafe.Read<byte>(pByte);
-            return ref dst;
-        }
-
-        static unsafe MethodMemory ReadUntil<N>(MethodInfo m, NatSpan<N,byte> dst, params byte[] conditions)
-            where N : unmanaged, ITypeNat
-        {
-            
-            var pSrc = (byte*)m.Prepare().ToPointer();
-
-            bool MeetsCondition(byte candidate)
-            {
-                for(var i=0; i<conditions.Length; i++)
-                    if(conditions[i] == candidate)
-                        return true;
-                return false;
-            }
-            
-            var offset = 0;
-            var offsetMax = (int)(new N().NatValue);
-            var refLocalBuf = default(byte);
-            ref var data = ref refLocalBuf;
-            var pSrcCurrent = pSrc;            
-            while(offset < offsetMax && !MeetsCondition(data))
-                data = ref Read(pSrcCurrent++, ref dst[offset++]);                
-            
-            var startAddress = (ulong)pSrc;
-            var endAddress = (ulong)pSrcCurrent;
-            var bytesRead = (int)(endAddress - startAddress);
-            return new MethodMemory(m, startAddress, endAddress, dst.Unsized.Slice(0, bytesRead));         
-        }
-        
-        [MethodImpl(Inline)]
-        public MethodMemory(MethodInfo method, ulong StartAddress, ulong EndAddress, Span<byte> body)
+        public MethodData(MethodInfo method, ulong StartAddress, ulong EndAddress, byte[] body)
         {
             this.Method = method;
             this.StartAddress = StartAddress;

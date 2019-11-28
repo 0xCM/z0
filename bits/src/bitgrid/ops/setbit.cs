@@ -11,16 +11,6 @@ namespace Z0
 
     partial class BitGrid
     {
-        /// <summary>
-        /// Retrieves a reference to the segment determined by a linear bit position
-        /// </summary>
-        /// <param name="bitpos">The linear bit position</param>
-        /// <param name="src">A reference to grid storage</param>
-        /// <typeparam name="T">The storage segment type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T segment<T>(int bitpos, ref T src)            
-            where T : unmanaged   
-                => ref seek(ref src, bitpos / bitsize<T>());
 
         /// <summary>
         /// Sets the state of a grid bit identified by its linear position
@@ -32,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void setbit<T>(int bitpos, bit state, ref T dst)    
             where T : unmanaged
-                => gbits.set(ref segment(bitpos, ref dst), (byte)(bitpos % bitsize<T>()), state);      
+                => gbits.set(ref cell(ref dst, bitpos), (byte)(bitpos % bitsize<T>()), state);      
 
         /// <summary>
         /// Sets the state of an a coordinate-identified bit

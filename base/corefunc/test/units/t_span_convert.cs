@@ -2,13 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
     using static zfunc;
 
-    public sealed class SpanConversionTest : UnitTest<SpanConversionTest>
+    public sealed class t_span_convert : UnitTest<t_span_convert>
     {
 
         void VerifySpanBytesToValue<T>(Span<byte> src, T expect)

@@ -1,4 +1,4 @@
-// 2019-11-27 00:53:14:975
+// 2019-11-27 21:54:09:903
 BitGrid64<uint> bg64_and_32(BitGrid64<uint> gx, BitGrid64<uint> gy)
 {
     IL_0000: ldarg.0
@@ -204,14 +204,5 @@ bit readbit_g_position(in ulong src, int pos)
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.BitGrid::readbit<System.UInt64>(System.UInt64&,System.Int32)
     IL_0007: ret
-
-}
-BitGrid<uint> bg_load_32x32x32(Span<uint> src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.s 32
-    IL_0003: ldc.i4.s 32
-    IL_0005: call Z0.BitGrid`1<System.UInt32> Z0.BitGrid::load<System.UInt32>(System.Span`1<System.UInt32>,System.UInt16,System.UInt16)
-    IL_000A: ret
 
 }

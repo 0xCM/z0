@@ -18,7 +18,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => src.Data.ToBitString(BitCalcs.points(m,n));
+                => src.Data.ToBitString(BitCalcs.pointcount(m,n));
 
         [MethodImpl(Inline)]
         public static BitString ToBitString<T>(this BitGrid<T> src)
