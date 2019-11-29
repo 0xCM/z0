@@ -15,10 +15,10 @@ namespace Z0
     {
 
         public static Vector128<byte> rotl_128x16_pattern()
-            => DataPatterns.rotl(n128, n16);
+            => PatternData.rotl(n128, n16);
 
         public static Vector128<byte> rotl_128x32_pattern()
-            => DataPatterns.rotl(n128, n32);
+            => PatternData.rotl(n128, n32);
 
         public static Vector128<byte> rotl_g128x8u(Vector128<byte> src, byte offset)
             => ginx.vrotl(src,offset);

@@ -64,54 +64,5 @@ namespace Z0
         public void vlt_256x64u()
             => vlt_check<ulong>(n256);
 
-        void vlt_check<T>(N128 n)
-            where T : unmanaged
-        {
-            var ones = ginx.vones<T>(n);
-            var one = vcell(ones,0);
-            
-            for(var i=0; i< SampleSize; i++)
-            {
-                var x = Random.Blocks<T>(n);
-                var y = Random.Blocks<T>(n);
-                var z = DataBlocks.alloc<T>(n);
-                
-                for(var j=0; j<z.CellCount; j++)
-                    if(gmath.lt(x[j],y[j]))
-                        z[j] = one;
-
-                var expect = ginx.vload(n, in head(z));
-                var actual = ginx.vlt(x.LoadVector(),y.LoadVector());
-                var result = ginx.veq(expect,actual);
-                var equal = ginx.vtestc(result,ones);
-                Claim.yea(equal);       
-
-            }
-        }
-
-        void vlt_check<T>(N256 n)
-            where T : unmanaged
-        {
-            var ones = ginx.vones<T>(n);
-            var one = vcell(ginx.vlo(ones),0);
-            
-            for(var i=0; i< SampleSize; i++)
-            {
-                var x = Random.Blocks<T>(n);
-                var y = Random.Blocks<T>(n);
-                var z = DataBlocks.alloc<T>(n);
-                
-                for(var j=0; j<z.CellCount; j++)
-                    if(gmath.lt(x[j],y[j]))
-                        z[j] = one;
-                
-                var expect = ginx.vload(n, in head(z));
-                var actual = ginx.vlt(x.LoadVector(),y.LoadVector());
-                var result = ginx.veq(expect,actual);
-                var equal = ginx.vtestc(result,ones);
-                Claim.yea(equal);       
-
-            }
-        }
     }
 }

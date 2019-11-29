@@ -119,12 +119,12 @@ namespace Z0.Test
         public void negate_blocks_256x64u()
             => vnegate_blocks_check<ulong>(n256);
 
-        void vnegate_blocks_check<T>(N128 n)
+        protected void vnegate_blocks_check<T>(N128 n)
             where T : unmanaged
         {
             var blocks = SampleSize;
             var stats = VBlockStats.Calc<N128,T>(blocks);
-            var step = stats.StepSize;
+            var step = stats.BlockLength;
             var cells = stats.CellCount;
 
             var src = Random.Blocks<T>(n, blocks);
@@ -134,12 +134,12 @@ namespace Z0.Test
                 Claim.eq(gmath.negate(src[i]), dst[i]);
         }
 
-        void vnegate_blocks_check<T>(N256 n)
+        protected void vnegate_blocks_check<T>(N256 n)
             where T : unmanaged
         {
             var blocks = SampleSize;
             var stats = VBlockStats.Calc<N256,T>(blocks);
-            var step = stats.StepSize;
+            var step = stats.BlockLength;
             var cells = stats.CellCount;
 
             var src = Random.Blocks<T>(n, blocks);
@@ -149,7 +149,7 @@ namespace Z0.Test
                 Claim.eq(gmath.negate(src[i]), dst[i]);
         }
 
-        void negate_check<T>(N128 n)
+        protected void negate_check<T>(N128 n)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
@@ -161,7 +161,7 @@ namespace Z0.Test
             }
         }
 
-        void vnegate_check<T>(N256 n)
+        protected void vnegate_check<T>(N256 n)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)

@@ -75,10 +75,10 @@ namespace Z0
         public void vhi_256x64f()
             => vhi_check<double>(n256);
 
-        void vhi_check<T>(N128 n)
+        protected void vhi_check<T>(N128 n)
             where T : unmanaged
         {
-            var count = vcount<T>(n);
+            var count = vlength<T>(n);
             for(var sample=0; sample< SampleSize; sample++)
             {                
                 var x = Random.CpuVector<T>(n);
@@ -89,10 +89,10 @@ namespace Z0
             }
         }
 
-        void vhi_check<T>(N256 n)
+        protected void vhi_check<T>(N256 n)
             where T : unmanaged
         {
-            var count = vcount<T>(n);
+            var count = vlength<T>(n);
             for(var sample=0; sample< SampleSize; sample++)
             {                
                 var x = Random.CpuVector<T>(n);

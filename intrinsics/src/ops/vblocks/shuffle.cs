@@ -31,7 +31,5 @@ namespace Z0
             for(var i=0; i< count; i++)
                 vstore(ginx.vshuf16x8(xb.LoadVector(i), yb.LoadVector(i)), ref zb.BlockSeek(i));                             
         } 
-
     }
-
 }

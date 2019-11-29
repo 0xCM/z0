@@ -39,10 +39,10 @@ namespace Z0
                 => vstore(vnand(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
-        public static void nand<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)
+        public static void nand<T>(N128 n, int vcount, int blocklen, in T a, in T b, ref T z)
             where T : unmanaged
         {
-            for(int i=0, offset = 0; i < vcount; i++, offset += step)
+            for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
                 nand(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 
@@ -52,10 +52,10 @@ namespace Z0
                 => vstore(vnand(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
-        public static void nand<T>(N256 n, int vcount, int step, in T a, in T b, ref T z)
+        public static void nand<T>(N256 n, int vcount, int blocklen, in T a, in T b, ref T z)
             where T : unmanaged
         {
-            for(int i=0, offset = 0; i < vcount; i++, offset += step)
+            for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
                 nand(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 

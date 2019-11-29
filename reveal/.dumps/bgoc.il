@@ -1,4 +1,4 @@
-// 2019-11-28 20:16:39:809
+// 2019-11-29 12:55:51:907
 BitGrid64<N8,N8,ulong> bg_fw64_transpose_8x8x64(BitGrid64<N8,N8,ulong> g)
 {
     IL_0000: ldarg.0
@@ -30,7 +30,7 @@ BitGrid64<N8,N8,ulong> bg_fw64_transpose_8x8x64_ur(BitGrid64<N8,N8,ulong> g)
     IL_003C: stind.i1
     IL_003D: ldloc.2
     IL_003E: ldc.i4.1
-    IL_003F: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
+    IL_003F: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Int32)
     IL_0044: stloc.2
     IL_0045: ldloca.s V_1
     IL_0047: ldc.i4.6
@@ -42,7 +42,7 @@ BitGrid64<N8,N8,ulong> bg_fw64_transpose_8x8x64_ur(BitGrid64<N8,N8,ulong> g)
     IL_0059: stind.i1
     IL_005A: ldloc.2
     IL_005B: ldc.i4.1
-    IL_005C: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
+    IL_005C: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Int32)
     IL_0061: stloc.2
     IL_0062: ldloca.s V_1
     IL_0064: ldc.i4.5
@@ -54,7 +54,7 @@ BitGrid64<N8,N8,ulong> bg_fw64_transpose_8x8x64_ur(BitGrid64<N8,N8,ulong> g)
     IL_0076: stind.i1
     IL_0077: ldloc.2
     IL_0078: ldc.i4.1
-    IL_0079: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
+    IL_0079: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Int32)
     IL_007E: stloc.2
     IL_007F: ldloca.s V_1
     IL_0081: ldc.i4.4
@@ -66,7 +66,7 @@ BitGrid64<N8,N8,ulong> bg_fw64_transpose_8x8x64_ur(BitGrid64<N8,N8,ulong> g)
     IL_0093: stind.i1
     IL_0094: ldloc.2
     IL_0095: ldc.i4.1
-    IL_0096: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
+    IL_0096: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Int32)
     IL_009B: stloc.2
     IL_009C: ldloca.s V_1
     IL_009E: ldc.i4.3
@@ -78,7 +78,7 @@ BitGrid64<N8,N8,ulong> bg_fw64_transpose_8x8x64_ur(BitGrid64<N8,N8,ulong> g)
     IL_00B0: stind.i1
     IL_00B1: ldloc.2
     IL_00B2: ldc.i4.1
-    IL_00B3: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
+    IL_00B3: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Int32)
     IL_00B8: stloc.2
     IL_00B9: ldloca.s V_1
     IL_00BB: ldc.i4.2
@@ -90,7 +90,7 @@ BitGrid64<N8,N8,ulong> bg_fw64_transpose_8x8x64_ur(BitGrid64<N8,N8,ulong> g)
     IL_00CD: stind.i1
     IL_00CE: ldloc.2
     IL_00CF: ldc.i4.1
-    IL_00D0: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
+    IL_00D0: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Int32)
     IL_00D5: stloc.2
     IL_00D6: ldloca.s V_1
     IL_00D8: ldc.i4.1
@@ -102,7 +102,7 @@ BitGrid64<N8,N8,ulong> bg_fw64_transpose_8x8x64_ur(BitGrid64<N8,N8,ulong> g)
     IL_00EA: stind.i1
     IL_00EB: ldloc.2
     IL_00EC: ldc.i4.1
-    IL_00ED: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
+    IL_00ED: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Int32)
     IL_00F2: stloc.2
     IL_00F3: ldloca.s V_1
     IL_00F5: ldc.i4.0

@@ -57,11 +57,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return As.vgeneric<T>(dinx.vnot(vcast8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vnot(vcast16u(x)));
+                return vgeneric<T>(dinx.vnot(vcast16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vnot(vcast32u(x)));
+                return vgeneric<T>(dinx.vnot(vcast32u(x)));
             else
-                return generic<T>(dinx.vnot(vcast64u(x)));
+                return vgeneric<T>(dinx.vnot(vcast64u(x)));
         }
 
         [MethodImpl(Inline)]
@@ -73,9 +73,9 @@ namespace Z0
             else if(typeof(T) == typeof(short))
                 return As.vgeneric<T>(dinx.vnot(vcast16i(x)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vnot(vcast32i(x)));
+                return vgeneric<T>(dinx.vnot(vcast32i(x)));
             else
-                return generic<T>(dinx.vnot(vcast64i(x)));
+                return vgeneric<T>(dinx.vnot(vcast64i(x)));
         }
 
         [MethodImpl(Inline)]
@@ -83,13 +83,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vnot(vcast8u(x)));
+                return vgeneric<T>(dinx.vnot(vcast8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vnot(vcast16u(x)));
+                return vgeneric<T>(dinx.vnot(vcast16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vnot(vcast32u(x)));
+                return vgeneric<T>(dinx.vnot(vcast32u(x)));
             else
-                return generic<T>(dinx.vnot(vcast64u(x)));
+                return vgeneric<T>(dinx.vnot(vcast64u(x)));
         }
 
         [MethodImpl(Inline)]
@@ -97,13 +97,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vnot(vcast8i(x)));
+                return vgeneric<T>(dinx.vnot(vcast8i(x)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vnot(vcast16i(x)));
+                return vgeneric<T>(dinx.vnot(vcast16i(x)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vnot(vcast32i(x)));
+                return vgeneric<T>(dinx.vnot(vcast32i(x)));
             else
-                return generic<T>(dinx.vnot(vcast64i(x)));
+                return vgeneric<T>(dinx.vnot(vcast64i(x)));
         }
     }
 }

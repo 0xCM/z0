@@ -42,18 +42,18 @@ namespace Z0
                 => vstore(vrotl(n,in a, shift), ref z);
 
         [MethodImpl(Inline)]
-        public static void rotl<T>(N128 n, int vcount, int step, in T a, int shift, ref T z)
+        public static void rotl<T>(N128 n, int vcount, int blocklen, in T a, int shift, ref T z)
             where T : unmanaged
         {
-            for(int i=0, offset = 0; i < vcount; i++, offset += step)
+            for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
                 rotl(n, in skip(in a, offset), shift, ref seek(ref z, offset));
         }
 
         [MethodImpl(Inline)]
-        public static void rotl<T>(N256 n, int vcount, int step, in T a, int shift, ref T z)
+        public static void rotl<T>(N256 n, int vcount, int blocklen, in T a, int shift, ref T z)
             where T : unmanaged
         {
-            for(int i=0, offset = 0; i < vcount; i++, offset += step)
+            for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
                 rotl(n, in skip(in a, offset), shift, ref seek(ref z, offset));
         }
 

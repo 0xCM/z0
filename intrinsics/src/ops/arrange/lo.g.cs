@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vlo<T>(Vector128<T> src)
             where T : unmanaged
-                =>  As.generic<T>(dinx.vmovelo(v64u(src)));
+                =>  As.vgeneric<T>(dinx.vmovelo(v64u(src)));
 
         /// <summary>
         /// Extracts the lo 128-bit lane of the source vector to scalar targets

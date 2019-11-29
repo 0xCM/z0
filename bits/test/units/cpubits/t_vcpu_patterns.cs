@@ -13,7 +13,7 @@ namespace Z0
     {
         public void pattern_clearalt_256x8()
         {
-            var tr = ginx.valtclear<byte>(n256);
+            var tr = ginx.vpclearalt<byte>(n256);
             for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.CpuVector<byte>(n256);
@@ -25,7 +25,7 @@ namespace Z0
                         xs[j] = 0;
                 }
 
-                var xt = xs.TakeVector();
+                var xt = xs.LoadVector();
 
                 Claim.eq(xt,y);
             }

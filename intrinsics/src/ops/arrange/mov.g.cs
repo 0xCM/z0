@@ -70,9 +70,9 @@ namespace Z0
             else if(typeof(T) == typeof(short))
                 return As.vgeneric<T>(dinx.vmov(n, int16(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vmov(n,int32(src)));
+                return vgeneric<T>(dinx.vmov(n,int32(src)));
             else
-                return generic<T>(dinx.vmov(n,int64(src)));
+                return vgeneric<T>(dinx.vmov(n,int64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -82,11 +82,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return As.vgeneric<T>(dinx.vmov(n, uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vmov(n,uint16(src)));
+                return vgeneric<T>(dinx.vmov(n,uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vmov(n,uint32(src)));
+                return vgeneric<T>(dinx.vmov(n,uint32(src)));
             else 
-                return generic<T>(dinx.vmov(n,uint64(src)));
+                return vgeneric<T>(dinx.vmov(n,uint64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -94,9 +94,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinx.vmov(n,float32(src)));
+                return vgeneric<T>(dinx.vmov(n,float32(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinx.vmov(n,float64(src)));
+                return vgeneric<T>(dinx.vmov(n,float64(src)));
             else 
                 throw unsupported<T>();
         }
@@ -106,13 +106,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vmov(n,int8(src)));
+                return vgeneric<T>(dinx.vmov(n,int8(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vmov(n,int16(src)));
+                return vgeneric<T>(dinx.vmov(n,int16(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vmov(n,int32(src)));
+                return vgeneric<T>(dinx.vmov(n,int32(src)));
             else
-                return generic<T>(dinx.vmov(n,int64(src)));
+                return vgeneric<T>(dinx.vmov(n,int64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -120,13 +120,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vmov(n,uint8(src)));
+                return vgeneric<T>(dinx.vmov(n,uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vmov(n,uint16(src)));
+                return vgeneric<T>(dinx.vmov(n,uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vmov(n,uint32(src)));
+                return vgeneric<T>(dinx.vmov(n,uint32(src)));
             else 
-                return generic<T>(dinx.vmov(n,uint64(src)));
+                return vgeneric<T>(dinx.vmov(n,uint64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -134,9 +134,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinx.vmov(n,float32(src)));
+                return vgeneric<T>(dinx.vmov(n,float32(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinx.vmov(n,float64(src)));
+                return vgeneric<T>(dinx.vmov(n,float64(src)));
             else 
                 throw unsupported<T>();
         }

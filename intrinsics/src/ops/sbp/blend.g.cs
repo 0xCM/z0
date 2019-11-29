@@ -145,13 +145,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vblend32x8(vcast8u(x), vcast8u(y), spec));
+                return vgeneric<T>(dinx.vblend32x8(vcast8u(x), vcast8u(y), spec));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vblend32x8(vcast16u(x), vcast16u(y), spec));
+                return vgeneric<T>(dinx.vblend32x8(vcast16u(x), vcast16u(y), spec));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vblend32x8(vcast32u(x), vcast32u(y), spec));
+                return vgeneric<T>(dinx.vblend32x8(vcast32u(x), vcast32u(y), spec));
             else
-                return generic<T>(dinx.vblend32x8(vcast64u(x), vcast64u(y), spec));
+                return vgeneric<T>(dinx.vblend32x8(vcast64u(x), vcast64u(y), spec));
         }
 
         [MethodImpl(Inline)]
@@ -159,13 +159,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vblend32x8(vcast8i(x), vcast8i(y), spec));
+                return vgeneric<T>(dinx.vblend32x8(vcast8i(x), vcast8i(y), spec));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vblend32x8(vcast16i(x), vcast16i(y), spec));
+                return vgeneric<T>(dinx.vblend32x8(vcast16i(x), vcast16i(y), spec));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vblend32x8(vcast32i(x), vcast32i(y), spec));
+                return vgeneric<T>(dinx.vblend32x8(vcast32i(x), vcast32i(y), spec));
             else
-                return generic<T>(dinx.vblend32x8(vcast64i(x), vcast64i(y), spec));
+                return vgeneric<T>(dinx.vblend32x8(vcast64i(x), vcast64i(y), spec));
         }
 
         [MethodImpl(Inline)]
@@ -173,13 +173,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vblend8x32(vcast8u(x), vcast8u(y), spec));
+                return vgeneric<T>(dinx.vblend8x32(vcast8u(x), vcast8u(y), spec));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vblend8x32(vcast16u(x), vcast16u(y), spec));
+                return vgeneric<T>(dinx.vblend8x32(vcast16u(x), vcast16u(y), spec));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vblend8x32(vcast32u(x), vcast32u(y), spec));
+                return vgeneric<T>(dinx.vblend8x32(vcast32u(x), vcast32u(y), spec));
             else
-                return generic<T>(dinx.vblend8x32(vcast64u(x), vcast64u(y), spec));
+                return vgeneric<T>(dinx.vblend8x32(vcast64u(x), vcast64u(y), spec));
         }
 
         [MethodImpl(Inline)]
@@ -187,13 +187,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vblend8x32(vcast8i(x), vcast8i(y), spec));
+                return vgeneric<T>(dinx.vblend8x32(vcast8i(x), vcast8i(y), spec));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vblend8x32(vcast16i(x), vcast16i(y), spec));
+                return vgeneric<T>(dinx.vblend8x32(vcast16i(x), vcast16i(y), spec));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vblend8x32(vcast32i(x), vcast32i(y), spec));
+                return vgeneric<T>(dinx.vblend8x32(vcast32i(x), vcast32i(y), spec));
             else
-                return generic<T>(dinx.vblend8x32(vcast64i(x), vcast64i(y), spec));
+                return vgeneric<T>(dinx.vblend8x32(vcast64i(x), vcast64i(y), spec));
         }
 
         [MethodImpl(Inline)]
@@ -203,11 +203,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return As.vgeneric<T>(dinx.vblend16x8(vcast8u(x), vcast8u(y), spec));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vblend16x8(vcast16u(x), vcast16u(y), spec));
+                return vgeneric<T>(dinx.vblend16x8(vcast16u(x), vcast16u(y), spec));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vblend16x8(vcast32u(x), vcast32u(y), spec));
+                return vgeneric<T>(dinx.vblend16x8(vcast32u(x), vcast32u(y), spec));
             else
-                return generic<T>(dinx.vblend16x8(vcast64u(x), vcast64u(y), spec));
+                return vgeneric<T>(dinx.vblend16x8(vcast64u(x), vcast64u(y), spec));
         }
 
         [MethodImpl(Inline)]
@@ -219,9 +219,9 @@ namespace Z0
             else if(typeof(T) == typeof(short))
                 return As.vgeneric<T>(dinx.vblend16x8(vcast16i(x), vcast16i(y), spec));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vblend16x8(vcast32i(x), vcast32i(y), spec));
+                return vgeneric<T>(dinx.vblend16x8(vcast32i(x), vcast32i(y), spec));
             else
-                return generic<T>(dinx.vblend16x8(vcast64i(x), vcast64i(y), spec));
+                return vgeneric<T>(dinx.vblend16x8(vcast64i(x), vcast64i(y), spec));
         }
 
         [MethodImpl(Inline)]
@@ -231,11 +231,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return As.vgeneric<T>(dinx.vblend8x16(vcast8u(x), vcast8u(y), spec));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vblend8x16(vcast16u(x), vcast16u(y), spec));
+                return vgeneric<T>(dinx.vblend8x16(vcast16u(x), vcast16u(y), spec));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vblend8x16(vcast32u(x), vcast32u(y), spec));
+                return vgeneric<T>(dinx.vblend8x16(vcast32u(x), vcast32u(y), spec));
             else
-                return generic<T>(dinx.vblend8x16(vcast64u(x), vcast64u(y), spec));
+                return vgeneric<T>(dinx.vblend8x16(vcast64u(x), vcast64u(y), spec));
         }
 
         [MethodImpl(Inline)]
@@ -247,9 +247,9 @@ namespace Z0
             else if(typeof(T) == typeof(short))
                 return As.vgeneric<T>(dinx.vblend8x16(vcast16i(x), vcast16i(y), spec));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vblend8x16(vcast32i(x), vcast32i(y), spec));
+                return vgeneric<T>(dinx.vblend8x16(vcast32i(x), vcast32i(y), spec));
             else
-                return generic<T>(dinx.vblend8x16(vcast64i(x), vcast64i(y), spec));
+                return vgeneric<T>(dinx.vblend8x16(vcast64i(x), vcast64i(y), spec));
         }
 
         [MethodImpl(Inline)]
@@ -257,13 +257,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vblend8x16(vcast8u(x), vcast8u(y), spec));
+                return vgeneric<T>(dinx.vblend8x16(vcast8u(x), vcast8u(y), spec));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vblend8x16(vcast16u(x), vcast16u(y), spec));
+                return vgeneric<T>(dinx.vblend8x16(vcast16u(x), vcast16u(y), spec));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vblend8x16(vcast32u(x), vcast32u(y), spec));
+                return vgeneric<T>(dinx.vblend8x16(vcast32u(x), vcast32u(y), spec));
             else
-                return generic<T>(dinx.vblend8x16(vcast64u(x), vcast64u(y), spec));
+                return vgeneric<T>(dinx.vblend8x16(vcast64u(x), vcast64u(y), spec));
         }
 
         [MethodImpl(Inline)]
@@ -271,13 +271,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vblend8x16(vcast8i(x), vcast8i(y), spec));
+                return vgeneric<T>(dinx.vblend8x16(vcast8i(x), vcast8i(y), spec));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vblend8x16(vcast16i(x), vcast16i(y), spec));
+                return vgeneric<T>(dinx.vblend8x16(vcast16i(x), vcast16i(y), spec));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vblend8x16(vcast32i(x), vcast32i(y), spec));
+                return vgeneric<T>(dinx.vblend8x16(vcast32i(x), vcast32i(y), spec));
             else
-                return generic<T>(dinx.vblend8x16(vcast64i(x), vcast64i(y), spec));
+                return vgeneric<T>(dinx.vblend8x16(vcast64i(x), vcast64i(y), spec));
         }
 
         [MethodImpl(Inline)]
@@ -289,9 +289,9 @@ namespace Z0
             else if(typeof(T) == typeof(short))
                 return As.vgeneric<T>(dinx.vblend4x32(vcast16i(x), vcast16i(y), spec));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vblend4x32(vcast32i(x), vcast32i(y), spec));
+                return vgeneric<T>(dinx.vblend4x32(vcast32i(x), vcast32i(y), spec));
             else
-                return generic<T>(dinx.vblend4x32(vcast64i(x), vcast64i(y), spec));
+                return vgeneric<T>(dinx.vblend4x32(vcast64i(x), vcast64i(y), spec));
         }
 
         [MethodImpl(Inline)]
@@ -301,11 +301,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return As.vgeneric<T>(dinx.vblend4x32(vcast8u(x), vcast8u(y), spec));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vblend4x32(vcast16u(x), vcast16u(y), spec));
+                return vgeneric<T>(dinx.vblend4x32(vcast16u(x), vcast16u(y), spec));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vblend4x32(vcast32u(x), vcast32u(y), spec));
+                return vgeneric<T>(dinx.vblend4x32(vcast32u(x), vcast32u(y), spec));
             else
-                return generic<T>(dinx.vblend4x32(vcast64u(x), vcast64u(y), spec));
+                return vgeneric<T>(dinx.vblend4x32(vcast64u(x), vcast64u(y), spec));
         }
 
     }

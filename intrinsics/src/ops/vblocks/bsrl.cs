@@ -42,18 +42,18 @@ namespace Z0
                 => vstore(vbsrl(n, in a, shift), ref z);
 
         [MethodImpl(Inline)]
-        public static void bsrl<T>(N128 n, int vcount, int step, in T a, int shift, ref T z)
+        public static void bsrl<T>(N128 n, int vcount, int blocklen, in T a, int shift, ref T z)
             where T : unmanaged
         {
-            for(int i=0, offset = 0; i < vcount; i++, offset += step)
+            for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
                 bsrl(n, in skip(in a, offset), shift, ref seek(ref z, offset));
         }
 
         [MethodImpl(Inline)]
-        public static void bsrl<T>(N256 n, int vcount, int step, in T a, int shift, ref T z)
+        public static void bsrl<T>(N256 n, int vcount, int blocklen, in T a, int shift, ref T z)
             where T : unmanaged
         {
-            for(int i=0, offset = 0; i < vcount; i++, offset += step)
+            for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
                 bsrl(n, in skip(in a, offset), shift, ref seek(ref z, offset));
         }
 

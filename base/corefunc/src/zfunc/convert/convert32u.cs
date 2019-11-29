@@ -12,7 +12,6 @@ namespace Z0
 
     partial class Converter
     {
-
         [MethodImpl(Inline)]
         public static T convert<T>(uint src)
             where T : unmanaged
@@ -31,31 +30,30 @@ namespace Z0
                 return convertx<T>(src);
         }
 
-
         [MethodImpl(Inline)]
         static T converti<T>(uint src)
         {
             if(typeof(T) == typeof(sbyte))
-                return g8i<T>((sbyte)src);
+                return AsIn.generic<T>((sbyte)src);
             else if(typeof(T) == typeof(short))
-                return g16i<T>((short)src);
+                return AsIn.generic<T>((short)src);
             else if(typeof(T) == typeof(int))
-                return g32i<T>((int)src);
+                return AsIn.generic<T>((int)src);
             else  
-                return g64i<T>((long)src);           
+                return AsIn.generic<T>((long)src);           
         }
 
         [MethodImpl(Inline)]
         static T convertu<T>(uint src)
         {
             if(typeof(T) == typeof(byte))
-                return g8u<T>((byte)src);
+                return AsIn.generic<T>((byte)src);
             else if(typeof(T) == typeof(ushort))
-                return g16u<T>((ushort)src);
+                return AsIn.generic<T>((ushort)src);
             else if(typeof(T) == typeof(uint))
-                return g32u<T>((uint)src);
+                return AsIn.generic<T>((uint)src);
             else  
-                return g64u<T>((ulong)src);
+                return AsIn.generic<T>((ulong)src);
         }
 
         [MethodImpl(Inline)]

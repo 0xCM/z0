@@ -69,11 +69,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return As.vgeneric<T>(dinx.vand(vcast8u(x), vcast8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vand(vcast16u(x), vcast16u(y)));
+                return vgeneric<T>(dinx.vand(vcast16u(x), vcast16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vand(vcast32u(x), vcast32u(y)));
+                return vgeneric<T>(dinx.vand(vcast32u(x), vcast32u(y)));
             else
-                return generic<T>(dinx.vand(vcast64u(x), vcast64u(y)));
+                return vgeneric<T>(dinx.vand(vcast64u(x), vcast64u(y)));
         }
 
         [MethodImpl(Inline)]
@@ -85,9 +85,9 @@ namespace Z0
             else if(typeof(T) == typeof(short))
                 return As.vgeneric<T>(dinx.vand(vcast16i(x), vcast16i(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vand(vcast32i(x), vcast32i(y)));
+                return vgeneric<T>(dinx.vand(vcast32i(x), vcast32i(y)));
             else
-                return generic<T>(dinx.vand(vcast64i(x), vcast64i(y)));
+                return vgeneric<T>(dinx.vand(vcast64i(x), vcast64i(y)));
         }
 
 
@@ -96,13 +96,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vand(vcast8u(x), vcast8u(y)));
+                return vgeneric<T>(dinx.vand(vcast8u(x), vcast8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vand(vcast16u(x), vcast16u(y)));
+                return vgeneric<T>(dinx.vand(vcast16u(x), vcast16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vand(vcast32u(x), vcast32u(y)));
+                return vgeneric<T>(dinx.vand(vcast32u(x), vcast32u(y)));
             else
-                return generic<T>(dinx.vand(vcast64u(x), vcast64u(y)));
+                return vgeneric<T>(dinx.vand(vcast64u(x), vcast64u(y)));
         }
 
         [MethodImpl(Inline)]
@@ -110,13 +110,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vand(vcast8i(x), vcast8i(y)));
+                return vgeneric<T>(dinx.vand(vcast8i(x), vcast8i(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vand(vcast16i(x), vcast16i(y)));
+                return vgeneric<T>(dinx.vand(vcast16i(x), vcast16i(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vand(vcast32i(x), vcast32i(y)));
+                return vgeneric<T>(dinx.vand(vcast32i(x), vcast32i(y)));
             else
-                return generic<T>(dinx.vand(vcast64i(x), vcast64i(y)));
+                return vgeneric<T>(dinx.vand(vcast64i(x), vcast64i(y)));
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Z0
             this.BlockCount = blocks;
             this.BlockWidth = blockwidth;
             this.CellWidth = cellwidth;
-            this.StepSize = BlockWidth / CellWidth;
+            this.BlockLength = BlockWidth / CellWidth;
             this.CellCount = (BlockWidth * BlockCount)/CellWidth;
         }
 
@@ -47,7 +47,7 @@ namespace Z0
 
         public readonly int CellWidth;
 
-        public readonly int StepSize;
+        public readonly int BlockLength;
 
         public readonly int CellCount;
     }
@@ -62,7 +62,7 @@ namespace Z0
             this.BlockWidth = blockwidth;
             this.CellWidth = bitsize<T>();
             var calcs = VBlockStats.Calc(BlockCount, BlockWidth, CellWidth);
-            this.StepSize = calcs.StepSize;
+            this.BlockLength = calcs.BlockLength;
             this.CellCount = calcs.CellCount;
         }
 
@@ -72,7 +72,7 @@ namespace Z0
 
         public readonly int CellWidth;
 
-        public readonly int StepSize;
+        public readonly int BlockLength;
 
         public readonly int CellCount;
     }
@@ -88,7 +88,7 @@ namespace Z0
             this.BlockWidth = natval<N>();
             this.CellWidth = bitsize<T>();
             var calcs = VBlockStats.Calc(BlockCount, BlockWidth, CellWidth);
-            this.StepSize = calcs.StepSize;
+            this.BlockLength = calcs.BlockLength;
             this.CellCount = calcs.CellCount;
         }
 
@@ -98,7 +98,7 @@ namespace Z0
 
         public readonly int CellWidth;
 
-        public readonly int StepSize;
+        public readonly int BlockLength;
 
         public readonly int CellCount;
     }

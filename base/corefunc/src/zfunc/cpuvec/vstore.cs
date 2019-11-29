@@ -51,7 +51,23 @@ partial class zfunc
     }
 
     [MethodImpl(Inline)]
-    static void vstore128_u<T>(Vector128<T> src, ref T dst)
+    public static Span<T> vstore<T>(Vector128<T> src, Span<T> dst)
+        where T : unmanaged            
+    {
+        vstore(src, ref head(dst));
+        return dst;
+    }
+
+    [MethodImpl(Inline)]
+    public static Span<T> vstore<T>(Vector256<T> src, Span<T> dst)
+        where T : unmanaged            
+    {
+        vstore(src, ref head(dst));
+        return dst;
+    }
+
+    [MethodImpl(Inline)]
+    static unsafe void vstore128_u<T>(Vector128<T> src, ref T dst)
         where T : unmanaged
     {
         if(typeof(T) == typeof(byte))
@@ -65,7 +81,7 @@ partial class zfunc
     }
 
     [MethodImpl(Inline)]
-    static void vstore128_i<T>(Vector128<T> src, ref T dst)
+    static unsafe void vstore128_i<T>(Vector128<T> src, ref T dst)
         where T : unmanaged
     {
         if(typeof(T) == typeof(sbyte))
@@ -79,7 +95,7 @@ partial class zfunc
     }
 
     [MethodImpl(Inline)]
-    static void vstore128_f<T>(Vector128<T> src, ref T dst)
+    static unsafe void vstore128_f<T>(Vector128<T> src, ref T dst)
         where T : unmanaged
     {
         if(typeof(T) == typeof(float))
@@ -91,7 +107,7 @@ partial class zfunc
     }
 
     [MethodImpl(Inline)]
-    static void vstore256_u<T>(Vector256<T> src, ref T dst)
+    static unsafe void vstore256_u<T>(Vector256<T> src, ref T dst)
         where T : unmanaged
     {
         if(typeof(T) == typeof(byte))
@@ -105,7 +121,7 @@ partial class zfunc
     }
 
     [MethodImpl(Inline)]
-    static void vstore256_i<T>(Vector256<T> src, ref T dst)
+    static unsafe void vstore256_i<T>(Vector256<T> src, ref T dst)
         where T : unmanaged
     {
         if(typeof(T) == typeof(sbyte))
@@ -119,7 +135,7 @@ partial class zfunc
     }
 
     [MethodImpl(Inline)]
-    static void vstore256_f<T>(Vector256<T> src, ref T dst)
+    static unsafe void vstore256_f<T>(Vector256<T> src, ref T dst)
         where T : unmanaged
     {
         if(typeof(T) == typeof(float))

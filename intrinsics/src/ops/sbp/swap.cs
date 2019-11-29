@@ -19,7 +19,7 @@ namespace Z0
         static Vector128<T> swapspec<T>(N128 n, params Swap[] swaps)
             where T : unmanaged  
         {
-            var len = vcount<T>(n);
+            var len = vlength<T>(n);
             var src = DataBlocks.safeload(n, range(default, gmath.add(default, convert<T>(len - 1))).ToArray().AsSpan());
             var dst = src.Swap(swaps);
             return ginx.vload(n, in dst.Head);

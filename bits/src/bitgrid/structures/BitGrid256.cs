@@ -86,7 +86,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         internal BitGrid256(in Block256<T> src)
-            => this.data = src.TakeVector();
+            => this.data = src.LoadVector();
 
         public Vector256<T> Data
         {

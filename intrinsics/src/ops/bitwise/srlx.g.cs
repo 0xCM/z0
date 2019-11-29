@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vsrlx<T>(Vector128<T> src, int shift)        
             where T : unmanaged
-                => generic<T>(dinx.vsrlx(v64u(src), shift));
+                => vgeneric<T>(dinx.vsrlx(v64u(src), shift));
 
         /// <summary>
         /// Shifts each 128 bit lane rightward at bit-level resolution
@@ -33,6 +33,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vsrlx<T>(Vector256<T> src, int shift)        
             where T : unmanaged
-                => generic<T>(dinx.vsrlx(v64u(src), shift));
+                => vgeneric<T>(dinx.vsrlx(v64u(src), shift));
     }
 }

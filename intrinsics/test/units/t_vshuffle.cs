@@ -39,7 +39,7 @@ namespace Z0
         {
             var n = n128;
             var src = ginx.vload(n, in head(Inc8u));
-            var spec = DataPatterns.rotl(n128, n8);
+            var spec = PatternData.rotl(n128, n8);
             var dst = dinx.vshuf16x8(src,spec);
             Claim.eq(spec,dst);
         }
@@ -48,7 +48,7 @@ namespace Z0
         {
             var n = n128;
             var src = ginx.vload(n, in head(Inc8u));
-            var spec = DataPatterns.rotr(n128, n8);
+            var spec = PatternData.rotr(n128, n8);
             var dst = dinx.vshuf16x8(src,spec);
             Claim.eq(spec,dst);
         }
@@ -57,8 +57,8 @@ namespace Z0
         {
             var n = n128;
             var src = ginx.vload(n, in head(Inc8u));
-            var spec1 = DataPatterns.rotl(n128, n8);
-            var spec2 = DataPatterns.rotr(n128, n8);
+            var spec1 = PatternData.rotl(n128, n8);
+            var spec2 = PatternData.rotr(n128, n8);
             var dst = dinx.vshuf16x8(dinx.vshuf16x8(src,spec1), spec2);
             Claim.eq(src,dst);
         }
@@ -106,7 +106,7 @@ namespace Z0
 
             var shufspec = perm.ToShuffleSpec();
             var dst = dinx.vshuf16x8(src,shufspec);
-            var expect = DataPatterns.decrements<byte>(n128);
+            var expect = PatternData.decrements<byte>(n128);
             Claim.eq(expect, dst);
 
             var dstPerm = dst.ToPerm();

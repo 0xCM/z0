@@ -99,7 +99,7 @@ namespace Z0
             var src = Random.Blocks<float>(n256,samples);
             for(var i=0; i<samples; i++)
             {
-                var srcVector = src.TakeVector(i);
+                var srcVector = src.LoadVector(i);
                 var srcSpan = srcVector.ToSpan();
 
                 var mmExpect = BitVector.alloc(n32);
@@ -118,7 +118,7 @@ namespace Z0
             var src = Random.Blocks<double>(n256, samples);
             for(var i=0; i<samples; i++)
             {
-                var srcVector = src.TakeVector(i);
+                var srcVector = src.LoadVector(i);
                 var srcSpan = srcVector.ToSpan();
 
                 var mmExpect = BitVector.alloc(n32);

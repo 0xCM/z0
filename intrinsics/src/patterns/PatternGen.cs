@@ -16,6 +16,24 @@ namespace Z0
     public static class VecPatternGen
     {
         /// <summary>
+        /// Creates a vector populated with component values that alternate between the first operand and the second
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vpalt<T>(N128 n, T a, T b)
+            where T : unmanaged
+        {            
+            var data = DataBlocks.alloc<T>(n);
+            var len = DataBlocks.blocklen<T>(n);
+            ref var mem = ref head(data);
+            for(var i=0; i<len; i++)
+                seek(ref mem, i) = even(i) ? a : b;
+            return ginx.vload(n, in head(data));
+        }
+
+        /// <summary>
         /// Creates a 128-bit vector with components that decrease by uint step from an initial value
         /// </summary>
         /// <param name="first">The value of the first component</param>
@@ -60,7 +78,6 @@ namespace Z0
                         
             return ginx.vload(n, in mem);
         }    
-
 
         /// <summary>
         /// Creates a 128-bit vector with components that decrease by a specified step from an initial value

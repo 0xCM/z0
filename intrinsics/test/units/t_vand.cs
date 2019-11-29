@@ -116,7 +116,7 @@ namespace Z0
         {
             var blocks = SampleSize;
             var stats = VBlockStats.Calc(blocks,n, default(T));
-            var step = stats.StepSize;
+            var step = stats.BlockLength;
             var cells = stats.CellCount;
 
             var lhs = Random.Blocks<T>(n, blocks);
@@ -132,7 +132,7 @@ namespace Z0
         {
             var blocks = SampleSize;
             var stats = VBlockStats.Calc(blocks,n, default(T));
-            var step = stats.StepSize;
+            var step = stats.BlockLength;
             var cells = stats.CellCount;
 
             var lhs = Random.Blocks<T>(n, blocks);

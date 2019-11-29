@@ -42,8 +42,8 @@ namespace Z0
         public void reverse_128x8u_basecase()
         {
             var n = n128;
-            var v1 = DataPatterns.increments<byte>(n);
-            var v2 = DataPatterns.decrements<byte>(n);
+            var v1 = PatternData.increments<byte>(n);
+            var v2 = PatternData.decrements<byte>(n);
             var v3 = dinx.vreverse(v1);
             Claim.eq(v2,v3);
         }
@@ -51,8 +51,8 @@ namespace Z0
         public void reverse_256x8u_basecase()
         {
             var n = n256;
-            var v1 = DataPatterns.increments<byte>(n);
-            var v2 = DataPatterns.decrements<byte>(n);            
+            var v1 = ginx.vincrements<byte>(n);
+            var v2 = ginx.vdecrements<byte>(n);            
             var v3 = dinx.vreverse(v1);
             Claim.eq(v2,v3);
 
@@ -61,7 +61,7 @@ namespace Z0
         public void alt_256x8u_basecase()
         {
             var n = n256;
-            var x = ginx.valt(n, 0xAA, 0x55);
+            var x = ginx.vpalt(n, 0xAA, 0x55);
             var xs = x.ToSpan();
             for(var i=0; i<xs.Length; i++)
                 Claim.eq(even(i) ? 0xAA : 0x55,  xs[i]);
@@ -87,10 +87,10 @@ namespace Z0
         {
             var n = n128;
 
-            var u = DataPatterns.increments<uint>(n);
+            var u = PatternData.increments<uint>(n);
             Claim.eq(dinx.vparts(n,0,1,2,3), u);
 
-            var v = DataPatterns.decrements<uint>(n);
+            var v = PatternData.decrements<uint>(n);
             Claim.eq(dinx.vparts(n,3,2,1,0),v);
 
             Claim.eq(v, dinx.vperm4x32(u, Perm4.DCBA));
@@ -130,7 +130,7 @@ namespace Z0
                 else
                     spec[k] = k;
             }
-            return dinx.vperm8x32i(src,ginx.vload(n256, head(spec)));
+            return dinx.vperm8x32(src,ginx.vload(n256, head(spec)));
         }
 
         public void swap_256_i32()

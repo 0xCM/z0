@@ -116,7 +116,7 @@ namespace Z0
         {
             var blocks = SampleSize;
             var stats = VBlockStats.Calc<N128,T>(blocks);
-            var step = stats.StepSize;
+            var step = stats.BlockLength;
             var cells = stats.CellCount;
 
             var xb = Random.Blocks<T>(n, blocks);
@@ -196,7 +196,7 @@ namespace Z0
         {
             var blocks = SampleSize;
             var stats = VBlockStats.Calc<N256,T>(blocks);
-            var step = stats.StepSize;
+            var step = stats.BlockLength;
             var cells = stats.CellCount;
 
             var xb = Random.Blocks<T>(n, blocks);
@@ -221,14 +221,14 @@ namespace Z0
             {
                 var srcX = Random.Blocks<T>(n);
                 var srcY = Random.Blocks<T>(n);
-                var vX = srcX.TakeVector();
-                var vY = srcY.TakeVector();
+                var vX = srcX.LoadVector();
+                var vY = srcY.LoadVector();
                 
                 var dstExpect = DataBlocks.alloc<T>(n);
                 for(var i=0; i< dstExpect.CellCount; i++)
                     dstExpect[i] = gmath.xor(srcX[i], srcY[i]);
                 
-                var expect = dstExpect.TakeVector();
+                var expect = dstExpect.LoadVector();
                 var actual = ginx.vxor(vX,vY);
                 Claim.eq(expect,actual);                
             }
@@ -241,14 +241,14 @@ namespace Z0
             {
                 var srcX = Random.Blocks<T>(n);
                 var srcY = Random.Blocks<T>(n);
-                var vX = srcX.TakeVector();
-                var vY = srcY.TakeVector();
+                var vX = srcX.LoadVector();
+                var vY = srcY.LoadVector();
 
                 var dstExpect = DataBlocks.alloc<T>(n);
                 for(var i=0; i< dstExpect.CellCount; i++)
                     dstExpect[i] = gmath.xor(srcX[i], srcY[i]);
                 
-                var expect = dstExpect.TakeVector();
+                var expect = dstExpect.LoadVector();
                 var actual = ginx.vxor(vX,vY);
                 Claim.eq(expect,actual);
                 

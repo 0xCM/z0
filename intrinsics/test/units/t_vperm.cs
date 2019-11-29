@@ -168,8 +168,8 @@ namespace Z0
 
         public void perm256u8()
         {
-            var x = DataPatterns.increments<byte>(n256);
-            var y = DataPatterns.decrements<byte>(n256);
+            var x = ginx.vincrements<byte>(n256);
+            var y = ginx.vdecrements<byte>(n256);
             var z = dinx.vreverse(dinx.vshuf32x8(x,y));
             Claim.eq(x,z);
 

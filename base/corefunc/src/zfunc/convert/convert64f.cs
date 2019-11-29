@@ -62,11 +62,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return g32f<T>((float)src);
+                return As.generic<T>((float)src);
             else if(typeof(T) == typeof(double))
-                return g64f<T>(src);
+                return As.generic<T>(src);
             else if(typeof(T) == typeof(char))
-                return g16ch<T>((char)(int)src);
+                return As.generic<T>((char)(int)src);
             else            
                 return unhandled<double,T>(src);
         }

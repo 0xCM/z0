@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vswaphl<T>(Vector128<T> x)
             where T : unmanaged
-                => generic<T>(dinx.vswaphl(v64u(x)));        
+                => vgeneric<T>(dinx.vswaphl(v64u(x)));        
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes of the source vector

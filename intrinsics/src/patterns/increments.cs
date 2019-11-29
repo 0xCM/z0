@@ -7,23 +7,31 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-    using System.Linq;
     using System.Runtime.Intrinsics.X86;
     
     using static zfunc;    
-    using static As;
     
     partial class ginx
     {
+        /// <summary>
+        /// Creates a 128-bit vector with component values 0, 1, ... k - 1 where k is the length of the target vector
+        /// </summary>
+        /// <param name="n">The vector bit-width selector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<T> vincrements<T>(N128 n)
             where T : unmanaged
-                => DataPatterns.increments<T>(n);
+                => PatternData.increments<T>(n);
 
+        /// <summary>
+        /// Creates a 256-bit vector with component values 0, 1, ... k - 1 where k is the length of the target vector
+        /// </summary>
+        /// <param name="n">The vector bit-width selector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> vincrements<T>(N256 n)
             where T : unmanaged
-                => DataPatterns.increments<T>(n);
+                => PatternData.increments<T>(n);
 
         /// <summary>
         /// Creates a 128-bit vector with components that increase by unit step from an initial value
@@ -34,20 +42,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vincrements<T>(N128 n, T first)
             where T : unmanaged
-        {
-            var current = first;
-            var data = DataBlocks.alloc<T>(n);
-            var len = DataBlocks.blocklen<T>(n);
-            ref var mem = ref head(data);
-            for(var i=0; i<len; i++)
-            {
-                seek(ref mem, i) = current;
-                gmath.inc(ref current);
-            }
-
-            return vload(n, in mem);
-        }
-
+                => vadd(vincrements<T>(n), first);
 
         /// <summary>
         /// Creates a 256-bit vector with components that increase by unit step from an initial value
@@ -58,21 +53,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vincrements<T>(N256 n, T first)
             where T : unmanaged
-        {
-            var current = first;
-            var data = DataBlocks.alloc<T>(n);
-            var len = DataBlocks.blocklen<T>(n);
-            ref var mem = ref head(data);
-            for(var i=0; i<len; i++)
-            {
-                seek(ref mem, i) = current;
-                gmath.inc(ref current);
-            }
-
-            return vload(n, in mem);
-        }            
-
-
+                => vadd(vincrements<T>(n), first);
     }
-
 }

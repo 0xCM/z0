@@ -20,7 +20,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static Vector128<T> @true<T>(N128 n)
             where T:unmanaged
-                => ginx.vones<T>(n128);
+                => ginx.vpones<T>(n128);
 
         [MethodImpl(Inline)]
         public static Vector128<T> @false<T>(Vector128<T> x)
@@ -30,7 +30,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static Vector128<T> @true<T>(Vector128<T> x)
             where T:unmanaged
-                => ginx.vones<T>(n128);
+                => ginx.vpones<T>(n128);
 
         [MethodImpl(Inline)]
         public static Vector128<T> @false<T>(Vector128<T> x, Vector128<T> y)
@@ -40,7 +40,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static Vector128<T> @true<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T:unmanaged
-                => ginx.vones<T>(n128);
+                => ginx.vpones<T>(n128);
 
         [MethodImpl(Inline)]
         public static Vector128<T> @false<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z)
@@ -50,7 +50,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static Vector128<T> @true<T>(Vector128<T> x, Vector128<T> y)
             where T:unmanaged
-                => ginx.vones<T>(n128);
+                => ginx.vpones<T>(n128);
 
 
         [MethodImpl(Inline)]

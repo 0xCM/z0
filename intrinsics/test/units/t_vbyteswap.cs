@@ -12,7 +12,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vbswap : IntrinsicTest<t_vbswap>
+    public class t_vbyteswap : IntrinsicTest<t_vbyteswap>
     {   
         public void vbyteswap_basecase()
         {

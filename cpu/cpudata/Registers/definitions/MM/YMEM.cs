@@ -225,7 +225,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Vector256<T> Vector<T>()
             where T : unmanaged
-                => As.generic<T>(vymm);
+                => As.vgeneric<T>(vymm);
 
     }
 

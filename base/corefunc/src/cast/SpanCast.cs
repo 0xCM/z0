@@ -12,6 +12,7 @@ namespace Z0
 
     public static partial class As
     {
+
         [MethodImpl(Inline)]
         public static Span<short> int16<T>(Span<T> src)
             where T : unmanaged
@@ -52,57 +53,45 @@ namespace Z0
             where T : unmanaged
                 => cast<T,double>(src);
 
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<short> int16<T>(in ReadOnlySpan<T> src)
+            where T : unmanaged
+                => cast<T,short>(src);
 
         [MethodImpl(Inline)]
-        public static Span<T> generic<T>(Span<sbyte> src)
+        public static ReadOnlySpan<ushort> uint16<T>(in ReadOnlySpan<T> src)
             where T : unmanaged
-                => cast<sbyte,T>(src);
+                => cast<T,ushort>(src);
 
         [MethodImpl(Inline)]
-        public static Span<T> generic<T>(Span<byte> src)
+        public static ReadOnlySpan<int> int32<T>(in ReadOnlySpan<T> src)
             where T : unmanaged
-                => cast<byte,T>(src);
+                => cast<T,int>(src);
 
         [MethodImpl(Inline)]
-        public static Span<T> generic<T>(Span<short> src)
+        public static ReadOnlySpan<uint> uint32<T>(in ReadOnlySpan<T> src)
             where T : unmanaged
-                => cast<short,T>(src);
+                => cast<T,uint>(src);
 
         [MethodImpl(Inline)]
-        public static Span<T> generic<T>(Span<ushort> src)
+        public static ReadOnlySpan<long> int64<T>(in ReadOnlySpan<T> src)
             where T : unmanaged
-                => cast<ushort,T>(src);
+                => cast<T,long>(src);
 
         [MethodImpl(Inline)]
-        public static Span<T> generic<T>(Span<int> src)
+        public static ReadOnlySpan<ulong> uint64<T>(in ReadOnlySpan<T> src)
             where T : unmanaged
-                => cast<int,T>(src);
+                => cast<T,ulong>(src);
 
         [MethodImpl(Inline)]
-        public static Span<T> generic<T>(Span<uint> src)
+        public static ReadOnlySpan<float> float32<T>(in ReadOnlySpan<T> src)
             where T : unmanaged
-                => cast<uint,T>(src);
+                => cast<T,float>(src);
 
         [MethodImpl(Inline)]
-        public static Span<T> generic<T>(Span<long> src)
+        public static ReadOnlySpan<double> float64<T>(in ReadOnlySpan<T> src)
             where T : unmanaged
-                => cast<long,T>(src);
-
-        [MethodImpl(Inline)]
-        public static Span<T> generic<T>(Span<ulong> src)
-            where T : unmanaged
-                => cast<ulong,T>(src);
-
-        [MethodImpl(Inline)]
-        public static Span<T> generic<T>(Span<float> src)
-            where T : unmanaged
-                => cast<float,T>(src);
-
-        [MethodImpl(Inline)]
-        public static Span<T> generic<T>(Span<double> src)
-            where T : unmanaged
-                => cast<double,T>(src);
+                => cast<T,double>(src);
 
     }
-
 }

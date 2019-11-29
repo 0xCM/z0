@@ -48,9 +48,9 @@ namespace Z0
             else if(typeof(T) == typeof(short))
                 return As.vgeneric<T>(Vector128.CreateScalarUnsafe(int16(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(Vector128.CreateScalarUnsafe(int32(src)));
+                return vgeneric<T>(Vector128.CreateScalarUnsafe(int32(src)));
             else 
-                return generic<T>(Vector128.CreateScalarUnsafe(int64(src)));
+                return vgeneric<T>(Vector128.CreateScalarUnsafe(int64(src)));
         }        
 
         [MethodImpl(Inline)]
@@ -60,11 +60,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return As.vgeneric<T>(Vector128.CreateScalarUnsafe(uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Vector128.CreateScalarUnsafe(uint16(src)));
+                return vgeneric<T>(Vector128.CreateScalarUnsafe(uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Vector128.CreateScalarUnsafe(uint32(src)));
+                return vgeneric<T>(Vector128.CreateScalarUnsafe(uint32(src)));
             else 
-                return generic<T>(Vector128.CreateScalarUnsafe(uint64(src)));
+                return vgeneric<T>(Vector128.CreateScalarUnsafe(uint64(src)));
         }        
 
         [MethodImpl(Inline)]
@@ -72,9 +72,9 @@ namespace Z0
             where T : unmanaged
         {            
             if(typeof(T) == typeof(float))
-                return generic<T>(Vector128.CreateScalarUnsafe(float32(src)));
+                return vgeneric<T>(Vector128.CreateScalarUnsafe(float32(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(Vector128.CreateScalarUnsafe(float64(src)));
+                return vgeneric<T>(Vector128.CreateScalarUnsafe(float64(src)));
             else 
                 throw unsupported<T>();
         }        

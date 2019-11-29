@@ -87,7 +87,7 @@ namespace Z0
         void vunits_check<T>(N128 n)
             where T : unmanaged
         {
-            var units = DataPatterns.uints<T>(n).ToSpan();
+            var units = PatternData.uints<T>(n).ToSpan();
             for(var i=0; i<units.Length; i++)
                 Claim.eq(gmath.one<T>(), units[i]);
         }
@@ -95,7 +95,7 @@ namespace Z0
         void vunits_check<T>(N256 n)
             where T : unmanaged
         {
-            var units = DataPatterns.uints<T>(n).ToSpan();
+            var units = PatternData.uints<T>(n).ToSpan();
             for(var i=0; i<units.Length; i++)
                 Claim.eq(gmath.one<T>(), units[i]);
         }
@@ -103,7 +103,7 @@ namespace Z0
         void vones_check<T>(N128 n)
             where T : unmanaged
         {
-            var ones = ginx.vones<T>(n);
+            var ones = ginx.vpones<T>(n);
             var bs = ones.ToBitString();
             Claim.eq(n,bs.Length);
             Claim.eq(n,bs.PopCount());
@@ -112,7 +112,7 @@ namespace Z0
         void vones_check<T>(N256 n)
             where T : unmanaged
         {
-            var ones = ginx.vones<T>(n);
+            var ones = ginx.vpones<T>(n);
             var bs = ones.ToBitString();
             Claim.eq(n,bs.Length);
             Claim.eq(n,bs.PopCount());

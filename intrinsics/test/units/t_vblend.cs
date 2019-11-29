@@ -21,8 +21,8 @@ namespace Z0
             var y = dinx.vpartsi(n,8,9,A,B,C,D,E,F);
             var e = dinx.vpartsi(n,0,9,2,B,4,D,6,F);
             var o = dinx.vpartsi(n,8,1,A,3,C,5,E,7);
-            var mEven = DataPatterns.blendspec(n,w,false);
-            var mOdd = DataPatterns.blendspec(n,w,true);
+            var mEven = PatternData.blendspec(n,false,w);
+            var mOdd = PatternData.blendspec(n,true,w);
             Claim.eq(e,ginx.vblend32x8(x,y,mEven));
             Claim.eq(o,ginx.vblend32x8(x,y,mOdd));
 
@@ -36,8 +36,8 @@ namespace Z0
             var y = dinx.vparts(n,4,5,6,7);
             var e = dinx.vparts(n,0,5,2,7);
             var o = dinx.vparts(n,4,1,6,3);
-            var mEven = DataPatterns.blendspec(n,w,false);
-            var mOdd = DataPatterns.blendspec(n,w,true);
+            var mEven = PatternData.blendspec(n,false,w);
+            var mOdd = PatternData.blendspec(n,true,w);
             Claim.eq(e,ginx.vblend32x8(x,y,mEven));
             Claim.eq(o,ginx.vblend32x8(x,y,mOdd));
 
@@ -52,19 +52,19 @@ namespace Z0
             for(var sample=0; sample<SampleSize; sample++)
             {
                 var xs = Random.Blocks<ulong>(n);
-                var x = xs.TakeVector();
+                var x = xs.LoadVector();
                 Claim.eq(x,dinx.vparts(n, xs[0], xs[1], xs[2], xs[3]));
 
                 var ys = Random.Blocks<ulong>(n);
-                var y = ys.TakeVector();
+                var y = ys.LoadVector();
                 Claim.eq(y,dinx.vparts(n, ys[0], ys[1], ys[2], ys[3]));
 
-                var m = DataPatterns.blendspec(n256,n64,false);
+                var m = PatternData.blendspec(n256,false,n64);
 
                 var es = DataBlocks.alloc<ulong>(n);
                 for(var i=0; i<es.CellCount; i++)
                     es[i] = odd(i) ? ys[i] : xs[i];
-                var expect = es.TakeVector();
+                var expect = es.LoadVector();
                 var actual = ginx.vblend32x8(x,y,m);
 
                 Claim.eq(expect,actual);

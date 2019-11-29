@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vshuf16x8<T>(Vector256<T> src, Vector256<byte> spec)
             where T : unmanaged
-                => generic<T>(dinx.vshuf16x8(v8u(src), spec));
+                => vgeneric<T>(dinx.vshuf16x8(v8u(src), spec));
     }
 
 }

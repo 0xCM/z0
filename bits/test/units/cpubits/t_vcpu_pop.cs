@@ -19,9 +19,9 @@ namespace Z0
             var src = Random.Blocks<ulong>(n, blocks, (0,uint.MaxValue));
             Claim.eq(cells, src.CellCount);
 
-            var x0 = src.TakeVector(0);
-            var x1 = src.TakeVector(1);
-            var x2 = src.TakeVector(2);
+            var x0 = src.LoadVector(0);
+            var x1 = src.LoadVector(1);
+            var x2 = src.LoadVector(2);
             var pop2 = 0u;
             var pop3 = 0u;
             for(var i=0; i< src.CellCount; i++)
@@ -43,9 +43,9 @@ namespace Z0
             var src = Random.Blocks<ulong>(n, blocks, (0,uint.MaxValue));
             Claim.eq(cells, src.CellCount);
 
-            var x0 = src.TakeVector(0);
-            var x1 = src.TakeVector(1);
-            var x2 = src.TakeVector(2);
+            var x0 = src.LoadVector(0);
+            var x1 = src.LoadVector(1);
+            var x2 = src.LoadVector(2);
             var pop2 = 0u;
             var pop3 = 0u;
             for(var i=0; i< src.CellCount; i++)

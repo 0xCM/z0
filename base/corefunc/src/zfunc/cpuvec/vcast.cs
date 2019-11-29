@@ -10,7 +10,6 @@ using System.Runtime.Intrinsics;
 using Z0;
 partial class zfunc
 {
-
     [MethodImpl(Inline)]
     public static ref Vector128<sbyte> vcast8i<T>(in Vector128<T> src)
         where T : unmanaged        
@@ -110,6 +109,4 @@ partial class zfunc
     public static ref Vector256<double> vcast64f<T>(in Vector256<T> src)
         where T : unmanaged        
             => ref Unsafe.As<Vector256<T>,Vector256<double>>(ref mutable(in src));
-
-
 }

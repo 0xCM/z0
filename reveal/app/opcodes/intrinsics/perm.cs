@@ -19,7 +19,7 @@ namespace Z0
             => dinx.vperm4x64(x, Perm4.ABCD);        
             
         public static Vector256<int> vpermvar8x32_256x32i(Vector256<int> src, Vector256<uint> spec)
-            => dinx.vperm8x32i(src,spec);
+            => dinx.vperm8x32(src,spec);
 
         public static Vector256<uint> vpermvar8x32_256x32u(Vector256<uint> src, Vector256<uint> spec)
             => dinx.vperm8x32(src,spec);

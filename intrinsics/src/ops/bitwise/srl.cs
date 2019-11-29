@@ -95,9 +95,9 @@ namespace Z0
         public static Vector128<byte> vsrl(Vector128<byte> src, int shift)
         {
             var x = vconvert(src, out Vector256<ushort> _);
-            var mask =  ginx.valtclear<byte>(n256);
+            var mask =  ginx.vpclearalt<byte>(n256);
             var a = vshuf16x8(v8u(dinx.vsrl(x, shift)), mask);
-            var perm = ginx.vlanemerge<byte>();
+            var perm = ginx.vplanemerge<byte>();
             return vlo(vshuf32x8(a, perm));
         }
 
@@ -193,7 +193,7 @@ namespace Z0
             
             // Shift each part with a concrete intrinsic anc convert back to bytes and truncate overflows 
             // to set up the component pattern [X 0 X 0 ... X 0] in each vector
-            var mask = ginx.valtclear<byte>(n256);
+            var mask = ginx.vpclearalt<byte>(n256);
             var a = vshuf16x8(v8u(dinx.vsrl(x, shift)), mask);
             var b = vshuf16x8(v8u(dinx.vsrl(y, shift)), mask);
                         
@@ -201,11 +201,10 @@ namespace Z0
             // back into a single vector. The strategey is to condense
             // each vector via the "lane merge" pattern and construct
             // the result vector via insertion of these condensed vectors
-            var perm = ginx.vlanemerge<byte>();
-            return vinsert(
+            var perm = ginx.vplanemerge<byte>();
+            return vconcat(
                 vlo(vshuf32x8(a, perm)), 
-                vlo(vshuf32x8(b, perm)), 
-                    out Vector256<byte> _);            
+                vlo(vshuf32x8(b, perm)));            
         } 
 
         /// <summary>

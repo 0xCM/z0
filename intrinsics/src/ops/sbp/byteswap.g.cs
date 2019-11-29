@@ -22,11 +22,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return x;
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vbyteswap(vcast16u(x)));
+                return vgeneric<T>(dinx.vbyteswap(vcast16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vbyteswap(vcast32u(x)));            
+                return vgeneric<T>(dinx.vbyteswap(vcast32u(x)));            
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vbyteswap(vcast64u(x)));            
+                return vgeneric<T>(dinx.vbyteswap(vcast64u(x)));            
             else
                 throw unsupported<T>();
         }
@@ -38,11 +38,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return x;
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vbyteswap(vcast16u(x)));
+                return vgeneric<T>(dinx.vbyteswap(vcast16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vbyteswap(vcast32u(x)));            
+                return vgeneric<T>(dinx.vbyteswap(vcast32u(x)));            
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vbyteswap(vcast64u(x)));            
+                return vgeneric<T>(dinx.vbyteswap(vcast64u(x)));            
             else
                 throw unsupported<T>();
         }

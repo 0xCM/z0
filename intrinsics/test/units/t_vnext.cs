@@ -74,7 +74,7 @@ namespace Z0
                 var xp = x.Prior();
                 var xps = xp.ToSpan();
 
-                var uints = ginx.vunits<T>(n);
+                var uints = ginx.vpunits<T>(n);
                 
                 Claim.yea(ginx.vadd<T>(xp, uints).Equals(x));
                 Claim.yea(ginx.vsub<T>(xn, uints).Equals(x));
@@ -99,7 +99,7 @@ namespace Z0
                 var xp = x.Prior();
                 var xps = xp.ToSpan();
 
-                var uints = ginx.vunits<T>(n);
+                var uints = ginx.vpunits<T>(n);
                 
                 Claim.yea(ginx.vadd<T>(xp, uints).Equals(x));
                 Claim.yea(ginx.vsub<T>(xn, uints).Equals(x));

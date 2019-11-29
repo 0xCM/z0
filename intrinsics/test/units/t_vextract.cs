@@ -36,50 +36,26 @@ namespace Z0
         public void vextract_128x64u()
             => vextract_check<ulong>(n128);
 
-        public void extract256()
-        {
-            vextract_check<byte>(n256);
-            vextract_check<sbyte>(n256);
-            vextract_check<short>(n256);
-            vextract_check<ushort>(n256);
-            vextract_check<int>(n256);
-            vextract_check<uint>(n256);
-            vextract_check<long>(n256);
-            vextract_check<ulong>(n256);
-            
-        }
+        public void vextract_256x8i()
+            => vextract_check<sbyte>(n256);
 
-        void vextract_check<T>(N128 n)
-            where T : unmanaged
-        {
+        public void vextract_256x8u()
+            => vextract_check<byte>(n256);
 
-            var len = vcount<T>(n);
-            var src = Random.CpuVector<T>(n);
-            var actual = src.ToSpan();
-            var expect = span<T>(len);
-            src.Store(expect);
-            for(byte i = 0; i< len; i++)
-                Claim.eq(expect[i], actual[i]);
-        }
-            
-        void vextract_check<T>(N256 n)
-            where T : unmanaged
-        {
-            var len = vcount<T>(n);
-            var half = len >> 1;
-            var src = Random.CpuVector<T>(n);
-            var srcData = src.Store(span<T>(len));
-            
-            var x0 = ginx.vlo(src);
-            var y0 = x0.Store(span<T>(half));
-            var z0 = srcData.Slice(0, half);
-            Claim.eq(y0,z0);
+        public void vextract_256x16u()
+            => vextract_check<ushort>(n256);
 
-            var x1 = ginx.vhi(src);
-            var y1 = x1.Store(span<T>(half));
-            var z1 = srcData.Slice(half);
-            Claim.eq(y1,z1);
+        public void vextract_256x32i()
+            => vextract_check<int>(n256);
 
-        }
+        public void vextract_256x32u()
+            => vextract_check<uint>(n256);
+
+        public void vextract_256x64i()
+            => vextract_check<long>(n256);
+
+        public void vextract_256x64u()
+            => vextract_check<ulong>(n256);
+
     }
 }

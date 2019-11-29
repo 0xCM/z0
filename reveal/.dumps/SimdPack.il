@@ -1,4 +1,4 @@
-// 2019-11-28 20:16:39:983
+// 2019-11-29 12:55:52:051
 Vector128<uint> pack(NatSpan<N128,bit> src)
 {
     IL_0000: call Z0.N1 zfunc::get_n1()
@@ -30,7 +30,7 @@ void pack1(ref Vector128<uint> xmm0, ref Vector128<uint> xmm1, in uint src, byte
     IL_0007: ldarg.1
     IL_0008: ldobj System.Runtime.Intrinsics.Vector128`1<System.UInt32>
     IL_000D: ldarg.3
-    IL_000E: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Byte)
+    IL_000E: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Int32)
     IL_0013: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vor(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
     IL_0018: stobj System.Runtime.Intrinsics.Vector128`1<System.UInt32>
     IL_001D: ldarg.1

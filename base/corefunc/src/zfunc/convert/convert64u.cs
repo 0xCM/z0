@@ -12,7 +12,6 @@ namespace Z0
 
     partial class Converter
     {
-
         [MethodImpl(Inline)]
         public static T convert<T>(ulong src)
             where T : unmanaged
@@ -57,31 +56,17 @@ namespace Z0
                 return generic<T>((ulong)src);
         }
 
-        [MethodImpl(Inline)]
-        static ref T convertx<T>(ulong src, out T dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                dst = g32f<T>((float)src);
-            else if(typeof(T) == typeof(double))
-                dst = g64f<T>((double)(long)src);
-            else if(typeof(T) == typeof(char))
-                dst = g16ch<T>((char)(short)src);
-            else            
-                throw unsupported<T>();
-            return ref dst;
-        }
 
         [MethodImpl(Inline)]
         static T convertx<T>(ulong src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return g32f<T>((float)src);
+                return As.generic<T>((float)src);
             else if(typeof(T) == typeof(double))
-                return g64f<T>((double)(long)src);
+                return As.generic<T>((double)(long)src);
             else if(typeof(T) == typeof(char))
-                return g16ch<T>((char)src);
+                return As.generic<T>((char)src);
             else            
                 return unhandled<ulong,T>(src);
         }

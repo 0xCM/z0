@@ -96,11 +96,11 @@ namespace Z0
             var x = vconvert(src, out Vector256<ushort> _);
 
             // Truncate overflows to set up the component pattern [X 0 X 0 ... X 0]
-            var mask =  ginx.valtclear<byte>(n256);
+            var mask =  ginx.vpclearalt<byte>(n256);
             var a = vshuf16x8(v8u(dinx.vsll(x, shift)), mask);
 
             // Transform the result back the source space
-            var perm = ginx.vlanemerge<byte>();
+            var perm = ginx.vplanemerge<byte>();
             return vlo(vshuf32x8(a, perm));
         }
 
@@ -187,7 +187,7 @@ namespace Z0
 
             // Shift each part with a concrete intrinsic anc convert back to bytes and truncate overflows 
             // to set up the component pattern [X 0 X 0 ... X 0] in each vector
-            var mask =  ginx.valtclear<byte>(n256);
+            var mask =  ginx.vpclearalt<byte>(n256);
             var a = vshuf16x8(v8u(dinx.vsll(x, shift)), mask);
             var b = vshuf16x8(v8u(dinx.vsll(y, shift)), mask);
 
@@ -195,11 +195,10 @@ namespace Z0
             // back into a single vector. The strategey is to condense
             // each vector via the "lane merge" pattern and construct
             // the result vector via insertion of these condensed vectors
-            var permSpec = ginx.vlanemerge<byte>();
-            return dinx.vinsert(
+            var permSpec = ginx.vplanemerge<byte>();
+            return dinx.vconcat(
                 vlo(vshuf32x8(a, permSpec)), 
-                vlo(vshuf32x8(b, permSpec)), 
-                    out Vector256<byte> _);            
+                vlo(vshuf32x8(b, permSpec)));            
         }
 
         /// <summary>

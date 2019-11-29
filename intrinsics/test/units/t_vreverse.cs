@@ -54,6 +54,17 @@ namespace Z0
             }
         }
 
+        public void vreverse_256x64u()
+        {
+            for(var i=0; i< SampleSize; i++)
+            {
+                var inc = ginx.vincrements<ulong>(n256);
+                var dec = ginx.vdecrements<ulong>(n256);
+                var y = dinx.vreverse(inc);
+                Claim.eq(dec,y);
+            }
+        }
+
     }
 
 }

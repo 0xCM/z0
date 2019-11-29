@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vrotrx<T>(Vector128<T> src, int shift)        
             where T : unmanaged
-                => generic<T>(dinx.vrotrx(v64u(src), shift));
+                => vgeneric<T>(dinx.vrotrx(v64u(src), shift));
 
         /// <summary>
         /// Rotates the each 128-bit lane rightward at bit-level resolution
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vrotrx<T>(Vector256<T> src, int shift)        
             where T : unmanaged
-                => generic<T>(dinx.vrotrx(v64u(src), shift));
+                => vgeneric<T>(dinx.vrotrx(v64u(src), shift));
     }
 
 }

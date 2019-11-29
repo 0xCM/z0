@@ -11,7 +11,7 @@ namespace Z0
     
     using static zfunc;    
 
-    public static class CpuVecX
+    public static partial class CpuVecX
     {
         /// <summary>
         /// Extracts the value of an index-identified component from the source vector
@@ -119,145 +119,28 @@ namespace Z0
         public static Vector256<T> Prior<T>(this Vector256<T> src)
             where T : unmanaged
                 => ginx.vprior<T>(src);
- 
-        [MethodImpl(Inline)]
-        public static Vector256<T> LoadVector<T>(this in ConstBlock256<T> src, int block = 0)            
-            where T : unmanaged      
-        {      
-            ginx.vload(in src.BlockSeek(block), out Vector256<T> x);
-            return x;
-        }
-
-        [MethodImpl(Inline)]
-        public static Vector128<T> LoadVector<T>(this in ConstBlock128<T> src, int block = 0)            
-            where T : unmanaged      
-        {      
-            ginx.vload(in src.BlockSeek(block), out Vector128<T> x);
-            return x;
-        }
 
         /// <summary>
-        /// Loads a 128-bit vector from a span beginning at a specified offset
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The position of the fist source element </param>
-        [MethodImpl(Inline)]
-        public static Vector128<T> LoadVector<T>(this Span<T> src, N128 n, int offset = 0)
-            where T : unmanaged            
-                => ginx.vload(n, in seek(src, offset));
-
-        /// <summary>
-        /// Loads a 256-bit vector from a span beginning at a specified offset
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The position of the fist source element </param>
-        [MethodImpl(Inline)]
-        public static Vector256<T> LoadVector<T>(this Span<T> src, N256 n, int offset = 0)
-            where T : unmanaged            
-                => ginx.vload(n,in seek(src, offset));
-
-        /// <summary>
-        /// Loads a 128-bit vector from a span beginning at a specified offset
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The position of the fist source element </param>
-        [MethodImpl(Inline)]
-        public static Vector128<T> LoadVector<T>(this ReadOnlySpan<T> src, N128 n, int offset = 0)
-            where T : unmanaged            
-                => ginx.vload(n,in skip(src, offset));
-
-        /// <summary>
-        /// Loads a 256-bit vector from a span beginning at a specified offset
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The position of the fist source element </param>
-        [MethodImpl(Inline)]
-        public static Vector256<T> LoadVector<T>(this ReadOnlySpan<T> src, N256 n, int offset = 0)
-            where T : unmanaged            
-                => ginx.vload(n,in skip(src, offset));
-
-        /// <summary>
-        /// Loads a 128-bit vector from a blocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<T> LoadVector<T>(this in Block128<T> src, int block = 0)            
-            where T : unmanaged            
-                => ginx.vload(n128, in src.BlockSeek(block));
-
-        /// <summary>
-        /// Loads a 256-bit vector from a blocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<T> LoadVector<T>(this in Block256<T> src, int block = 0)            
-            where T : unmanaged            
-                => ginx.vload(n256, in src.BlockSeek(block));
-
-        /// <summary>
-        /// Specifies the length, i.e. the number of components, of an
-        /// intrnsic vector
+        /// Returns the number of source vector components
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primitive type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static int Length<T>(this Vector128<T> src)
             where T : unmanaged            
-                => vcount<T>(n128);
-
-        [MethodImpl(Inline)]
-        public static Span<T> Store<T>(this Vector128<T> src, Span<T> dst)
-            where T : unmanaged            
-        {
-            vstore(src, ref head(dst));
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static Span<T> Store<T>(this Vector256<T> src, Span<T> dst)
-            where T : unmanaged            
-        {
-            vstore(src, ref head(dst));
-            return dst;
-        }
+                => vlength<T>(n128);
 
         /// <summary>
-        /// Specifies the length, i.e. the number of components, of an
-        /// intrnsic vector
+        /// Returns the number of source vector components
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primitive type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static int Length<T>(this Vector256<T> src)
             where T : unmanaged            
-                => vcount<T>(n256);
+                => vlength<T>(n256);
 
-        /// <summary>
-        /// Loads a 256-bit cpu vector from a compatibly-blocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<T> TakeVector<T>(this in Block256<T> src, int block = 0)
-            where T : unmanaged
-                => ginx.vload(n256, in src.BlockSeek(block));
-
-        /// <summary>
-        /// Loads a 128-bit cpu vector from a compatibly-blocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<T> TakeVector<T>(this in Block128<T> src, int block = 0)
-            where T : unmanaged
-                => ginx.vload(n128, in src.BlockSeek(block));
-
+ 
         /// <summary>
         /// Combines two 128-bit source vectors into a 128-bit target vector via a mapping function
         /// </summary>
@@ -270,8 +153,8 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(vcount<S>(n128), vcount<T>(n128));
-            var dstLen = vcount<T>(n128);
+            var xLen = Math.Min(vlength<S>(n128), vlength<T>(n128));
+            var dstLen = vlength<T>(n128);
             var lhsData = lhs.ToSpan();
             var rhsData = rhs.ToSpan();
             Span<T> dst = new T[dstLen];
@@ -291,8 +174,8 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(vcount<S>(n128), vcount<T>(n128));
-            var dstLen = vcount<T>(n128);
+            var xLen = Math.Min(vlength<S>(n128), vlength<T>(n128));
+            var dstLen = vlength<T>(n128);
             var data = src.ToSpan();            
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
@@ -313,7 +196,7 @@ namespace Z0
         public static Vector256<T> Merge<T>(this Vector128<T> x, Vector128<T> y, Func<T,T> f)
             where T : unmanaged
         {
-            var srcLen = vcount<T>(n128);
+            var srcLen = vlength<T>(n128);
             var dstLen = 2*srcLen;
             var lhsData = x.ToSpan();
             var rhsData = y.ToSpan();
@@ -339,8 +222,8 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(vcount<S>(n256), vcount<T>(n256));
-            var dstLen = vcount<T>(n256);
+            var xLen = Math.Min(vlength<S>(n256), vlength<T>(n256));
+            var dstLen = vlength<T>(n256);
             var data = src.ToSpan();            
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
@@ -361,8 +244,8 @@ namespace Z0
             where S : unmanaged
         {
             var n = n256;
-            var xLen = Math.Min(vcount<S>(n), vcount<T>(n));
-            var dstLen = vcount<T>(n);
+            var xLen = Math.Min(vlength<S>(n), vlength<T>(n));
+            var dstLen = vlength<T>(n);
             var lhsData = x.ToSpan();
             var rhsData = y.ToSpan();
             Span<T> dst = new T[dstLen];

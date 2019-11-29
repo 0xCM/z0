@@ -60,9 +60,9 @@ namespace Z0
             else if(typeof(T) == typeof(short))
                  return As.vgeneric<T>(dinx.vdec(vcast16i(lhs)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vdec(vcast32i(lhs)));
+                 return vgeneric<T>(dinx.vdec(vcast32i(lhs)));
             else
-                 return generic<T>(dinx.vdec(vcast64i(lhs)));
+                 return vgeneric<T>(dinx.vdec(vcast64i(lhs)));
         }
 
         [MethodImpl(Inline)]
@@ -72,11 +72,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return As.vgeneric<T>(dinx.vdec(vcast8u(lhs)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vdec(vcast16u(lhs)));
+                return vgeneric<T>(dinx.vdec(vcast16u(lhs)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vdec(vcast32u(lhs)));
+                return vgeneric<T>(dinx.vdec(vcast32u(lhs)));
             else 
-                return generic<T>(dinx.vdec(vcast64u(lhs)));
+                return vgeneric<T>(dinx.vdec(vcast64u(lhs)));
         }
 
         [MethodImpl(Inline)]
@@ -84,13 +84,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vdec(vcast8i(lhs)));
+                 return vgeneric<T>(dinx.vdec(vcast8i(lhs)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vdec(vcast16i(lhs)));
+                 return vgeneric<T>(dinx.vdec(vcast16i(lhs)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vdec(vcast32i(lhs)));
+                 return vgeneric<T>(dinx.vdec(vcast32i(lhs)));
             else
-                 return generic<T>(dinx.vdec(vcast64i(lhs)));
+                 return vgeneric<T>(dinx.vdec(vcast64i(lhs)));
         }
 
         [MethodImpl(Inline)]
@@ -98,13 +98,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vdec(vcast8u(lhs)));
+                return vgeneric<T>(dinx.vdec(vcast8u(lhs)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vdec(vcast16u(lhs)));
+                return vgeneric<T>(dinx.vdec(vcast16u(lhs)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vdec(vcast32u(lhs)));
+                return vgeneric<T>(dinx.vdec(vcast32u(lhs)));
             else 
-                return generic<T>(dinx.vdec(vcast64u(lhs)));
+                return vgeneric<T>(dinx.vdec(vcast64u(lhs)));
         }
 
     }

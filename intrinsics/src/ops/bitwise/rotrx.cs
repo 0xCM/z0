@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="shift">The shift selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vrotlx(Vector128<byte> src, N8 shift)
-            => vshuf16x8(src, DataPatterns.rotl(n128, shift));   
+            => vshuf16x8(src, PatternData.rotl(n128, shift));   
 
         /// <summary>
         /// Rotates the full 128-bit vector content leftward by 16 bits
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="shift">The shift selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vrotlx(Vector128<byte> src, N16 shift)
-            => vshuf16x8(src, DataPatterns.rotl(n128, shift));
+            => vshuf16x8(src, PatternData.rotl(n128, shift));
 
         /// <summary>
         /// Rotates the full 128-bit vector content leftward by 24 bits
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="shift">The shift selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vrotlx(Vector128<byte> src, N24 shift)
-            => vshuf16x8(src, DataPatterns.rotl(n128, shift));
+            => vshuf16x8(src, PatternData.rotl(n128, shift));
 
         /// <summary>
         /// Rotates the full 128-bit vector content leftward by 32 bits
@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="shift">The shift selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vrotlx(Vector128<byte> src, N32 shift)
-            => vshuf16x8(src, DataPatterns.rotl(n128, shift));
+            => vshuf16x8(src, PatternData.rotl(n128, shift));
 
         /// <summary>
         /// Rotates the full 128-bit vector content rightward by 8 bits
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="shift">The shift selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vrotrx(Vector128<byte> src, N8 shift)
-            => vshuf16x8(src, DataPatterns.rotr(n128, shift));
+            => vshuf16x8(src, PatternData.rotr(n128, shift));
 
         /// <summary>
         /// Rotates the full 128-bit vector content rightward by 16 bits
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="shift">The shift selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vrotrx(Vector128<byte> src, N16 shift)
-            => vshuf16x8(src, DataPatterns.rotr(n128, shift));
+            => vshuf16x8(src, PatternData.rotr(n128, shift));
 
         /// <summary>
         /// Rotates the full 128-bit vector content rightward by 24 bits
@@ -102,7 +102,7 @@ namespace Z0
         /// <param name="shift">The shift selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vrotrx(Vector128<byte> src, N24 shift)
-            => vshuf16x8(src, DataPatterns.rotr(n128, shift));
+            => vshuf16x8(src, PatternData.rotr(n128, shift));
 
         /// <summary>
         /// Rotates the full 128-bit vector content rightward by 32 bits
@@ -111,6 +111,6 @@ namespace Z0
         /// <param name="shift">The shift selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vrotrx(Vector128<byte> src, N32 shift)
-            => vshuf16x8(src, DataPatterns.rotr(n128, shift));
+            => vshuf16x8(src, PatternData.rotr(n128, shift));
     }
 }

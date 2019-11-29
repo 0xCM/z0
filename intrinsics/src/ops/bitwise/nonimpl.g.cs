@@ -28,11 +28,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return As.vgeneric<T>(dinx.vnonimpl(vcast8u(x), vcast8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vnonimpl(vcast16u(x),vcast16u(y)));
+                return vgeneric<T>(dinx.vnonimpl(vcast16u(x),vcast16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vnonimpl(vcast32u(x), vcast32u(y)));
+                return vgeneric<T>(dinx.vnonimpl(vcast32u(x), vcast32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vnonimpl(vcast64u(x), vcast64u(y)));
+                return vgeneric<T>(dinx.vnonimpl(vcast64u(x), vcast64u(y)));
             else 
                 throw unsupported<T>();
         }
@@ -48,13 +48,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vnonimpl(vcast8u(x), vcast8u(y)));
+                return vgeneric<T>(dinx.vnonimpl(vcast8u(x), vcast8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vnonimpl(vcast16u(x),vcast16u(y)));
+                return vgeneric<T>(dinx.vnonimpl(vcast16u(x),vcast16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vnonimpl(vcast32u(x), vcast32u(y)));
+                return vgeneric<T>(dinx.vnonimpl(vcast32u(x), vcast32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vnonimpl(vcast64u(x), vcast64u(y)));
+                return vgeneric<T>(dinx.vnonimpl(vcast64u(x), vcast64u(y)));
             else 
                 throw unsupported<T>();
         }

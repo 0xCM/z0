@@ -31,10 +31,10 @@ namespace Z0
                 => vstore(vblend32x8(n,in a, in b, in spec), ref z);                    
 
         [MethodImpl(Inline)]
-        public static void blend32x8<T>(N256 n, int vcount, int step, in T a,  in T b, in byte spec, ref T z)
+        public static void blend32x8<T>(N256 n, int vcount, int blocklen, in T a,  in T b, in byte spec, ref T z)
             where T : unmanaged
         {
-            for(int i=0, offset = 0; i < vcount; i++, offset += step)
+            for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
                 blend32x8(n, in skip(in a, offset), in skip(in b, offset), in skip(in spec, offset), ref seek(ref z, offset));
         }
 

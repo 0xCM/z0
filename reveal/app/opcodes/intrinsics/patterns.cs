@@ -15,25 +15,25 @@ namespace Z0
     partial class inxoc
     {
         public static Vector128<byte> ones_128x8u()
-            => ginx.vones<byte>(n128);
+            => ginx.vpones<byte>(n128);
 
         public static Vector128<ulong> ones_128x64u()
-            => ginx.vones<ulong>(n128);
+            => ginx.vpones<ulong>(n128);
 
         public static Vector256<byte> ones_256x8u()
-            => ginx.vones<byte>(n256);
+            => ginx.vpones<byte>(n256);
 
         public static Vector256<ulong> ones_256x64u()
-            => ginx.vones<ulong>(n256);
+            => ginx.vpones<ulong>(n256);
 
         public static Vector256<double> ones_256x64f()
-            => ginx.vones<double>(n256);
+            => ginx.vpones<double>(n256);
 
         public static Vector256<byte> pattern_lanemerge_256x8u()            
-            => ginx.vlanemerge<byte>();
+            => ginx.vplanemerge<byte>();
 
         public static Vector256<ushort> pattern_lanemerge_256x16u()            
-            => ginx.vlanemerge<ushort>();
+            => ginx.vplanemerge<ushort>();
 
 
     }

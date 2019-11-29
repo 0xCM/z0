@@ -13,8 +13,42 @@ namespace Z0
     using static zfunc;
     using static HexConst;
 
-    public static class DataPatterns
+    public static class PatternData
     {
+        /// <summary>
+        /// Creates a vector that decribes a lo/hi lane merge permutation
+        /// For example, if X = [A E B F | C G D H] then the lane merge pattern P will
+        /// describe a permutation that has the following effect: permute(X,P) = [A B C D | E F G H]
+        /// </summary>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> lanemerge<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return ginx.vload<T>(n256,LaneMerge256x8u);
+            else if(typeof(T) == typeof(ushort))
+                return ginx.vload<T>(n256,LaneMerge256x16u);
+            else 
+                return default;
+        }
+
+        /// <summary>
+        /// Creates a shuffle mask that clears ever-other vector component
+        /// </summary>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> clearalt<T>(N256 n)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return ginx.vload<T>(n,ClearAlt256x8u);
+            else if(typeof(T) == typeof(ushort))
+                return ginx.vload<T>(n,ClearAlt256x16u);
+            else 
+                return default;
+        }
+
         [MethodImpl(Inline)]
         public static Vector128<T> increments<T>(N128 n)
             where T : unmanaged
@@ -112,35 +146,40 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-
         [MethodImpl(Inline)]
-        public static Vector128<byte> byteswap<T>(N128 n)
-            where T : unmanaged
+        public static Vector128<byte> byteswap<W>(N128 n, W w = default)
+            where W : unmanaged, ITypeNat
         {
-            if(typeof(T) == typeof(ushort))
+            if(typeof(W) == typeof(N16))
                 return ginx.vload(n, BSwap_128x16u);
-            else if(typeof(T) == typeof(uint))
+            else if(typeof(W) == typeof(N32))
                 return ginx.vload(n, BSwap_128x32u);
-            else if(typeof(T) == typeof(ulong))
+            else if(typeof(W) == typeof(N64))
                 return ginx.vload(n, BSwap_128x64u);
             else
-                throw unsupported<T>();            
+                throw unsupported<W>();            
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<byte> byteswap<T>(N256 n)
-            where T : unmanaged
+        public static Vector256<byte> byteswap<W>(N256 n, W w = default)
+            where W : unmanaged, ITypeNat
         {
-            if(typeof(T) == typeof(ushort))
+            if(typeof(W) == typeof(N16))
                 return ginx.vload(n, BSwap_256x16u);
-            else if(typeof(T) == typeof(uint))
+            else if(typeof(W) == typeof(N32))
                 return ginx.vload(n, BSwap_256x32u);
-            else if(typeof(T) == typeof(ulong))
+            else if(typeof(W) == typeof(N64))
                 return ginx.vload(n, BSwap_256x64u);
             else
-                throw unsupported<T>();            
+                throw unsupported<W>();            
         }
 
+        /// <summary>
+        /// Defines a blend specification for 2 256-bit vectors that selects either the odd or even components from each vector
+        /// </summary>
+        /// <param name="n">The vector width selector</param>
+        /// <param name="odd">Whether to select odd or even components</param>
+        /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<byte> blendspec<T>(N256 n, bit odd)
             where T : unmanaged
@@ -149,7 +188,7 @@ namespace Z0
                 return blendspec(n, n8, odd);
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
                 return blendspec(n, n16, odd);
-            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
+            else if(typeof(T) == typeof(uint) ||typeof(T) == typeof(int))
                 return blendspec(n, n32, odd);
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
                 return blendspec(n, n64, odd);
@@ -157,20 +196,42 @@ namespace Z0
                 throw unsupported<T>();            
         }
 
+        /// <summary>
+        /// Defines a blend specification for 2 256-bit vectors that selects either the odd or even components from each vector
+        /// </summary>
+        /// <param name="n">The vector width selector</param>
+        /// <param name="odd">Whether to select odd or even components</param>
+        /// <typeparam name="N">The component width type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<byte> blendspec(N256 n, N8 width, bit odd)
+        public static Vector256<byte> blendspec<N>(N256 n, bit odd, N w = default)
+            where N : unmanaged, ITypeNat
+        {
+            if(typeof(N) == typeof(N8))   
+                return blendspec(n, n8, odd);
+            else if(typeof(N) == typeof(N16))   
+                return blendspec(n, n16, odd);
+            else if(typeof(N) == typeof(N32))   
+                return blendspec(n, n32, odd);
+            else if(typeof(N) == typeof(N64))   
+                return blendspec(n, n64, odd);
+            else
+                throw unsupported<N>();            
+        }
+
+        [MethodImpl(Inline)]
+        static Vector256<byte> blendspec(N256 n, N8 width, bit odd)
             => ginx.vload(n,odd ? BlendSpec_Odd_256x8 : BlendSpec_Even_256x8);
 
         [MethodImpl(Inline)]
-        public static Vector256<byte> blendspec(N256 n, N16 width, bit odd)
+        static Vector256<byte> blendspec(N256 n, N16 width, bit odd)
             => ginx.vload(n,odd ? BlendSpec_Odd_256x16 : BlendSpec_Even_256x16);
 
         [MethodImpl(Inline)]
-        public static Vector256<byte> blendspec(N256 n, N32 width, bit odd)
+        static Vector256<byte> blendspec(N256 n, N32 width, bit odd)
             => ginx.vload(n,odd ? BlendSpec_Odd_256x32 : BlendSpec_Even_256x32);
 
         [MethodImpl(Inline)]
-        public static Vector256<byte> blendspec(N256 n, N64 width, bit odd)
+        static Vector256<byte> blendspec(N256 n, N64 width, bit odd)
             => ginx.vload(n,odd ? BlendSpec_Odd_256x64 : BlendSpec_Even_256x64);
 
         [MethodImpl(Inline)]
@@ -234,19 +295,27 @@ namespace Z0
             => new byte[16]{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0};
 
         public static ReadOnlySpan<byte> Inc256x8u  
-            => new byte[32]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,
-                    16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
+            => new byte[32]{
+                0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,
+                16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
+                };
         static ReadOnlySpan<byte> Inc256x16u  
-            => new byte[32]{0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,
-                16,0,17,0,18,0,19,0,20,0,21,0,22,0,23,0};
+            => new byte[32]{
+                0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,
+                8,0,9,0,10,0,11,0,12,0,13,0,14,0,15,0
+                };
 
         static ReadOnlySpan<byte> Inc256x32u  
-            => new byte[32]{0,0,0,0,1,0,0,0,2,0,0,0,3,0,0,0,
-                20,0,0,0,21,0,0,0,22,0,0,0,23,0,0,0};
+            => new byte[32]{
+                0,0,0,0,1,0,0,0,2,0,0,0,3,0,0,0,
+                4,0,0,0,5,0,0,0,6,0,0,0,7,0,0,0
+                };
 
         static ReadOnlySpan<byte> Inc256x64u  
-            => new byte[32]{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
-                18,0,0,0,0,0,0,0,19,0,0,0,0,0,0,0};
+            => new byte[32]{
+                0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
+                2,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0
+                };
 
         static ReadOnlySpan<byte> Dec128x8u 
             => new byte[16]{F,E,D,C,B,A,9,8,7,6,5,4,3,2,1,0};
@@ -261,20 +330,28 @@ namespace Z0
             => new byte[16]{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
         static ReadOnlySpan<byte> Dec256x8u  
-            => new byte[32]{31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,
-                15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0};
+            => new byte[32]{
+                31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,
+                15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0
+                };
 
         static ReadOnlySpan<byte> Dec256x16u  
-            => new byte[32]{23,0,22,0,21,0,20,0,19,0,18,0,17,0,16,0,
-                7,0,6,0,5,0,4,0,3,0,2,0,1,0,0,0};
+            => new byte[32]{
+                15,0,14,0,13,0,12,0,11,0,10,0,9,0,8,0,
+                7,0,6,0,5,0,4,0,3,0,2,0,1,0,0,0
+                };
 
         static ReadOnlySpan<byte> Dec256x32u  
-            => new byte[32]{23,0,0,0,22,0,0,0,21,0,0,0,20,0,0,0,
-                3,0,0,0,2,0,0,0,1,0,0,0,0,0,0,0};
+            => new byte[32]{
+                7,0,0,0,6,0,0,0,5,0,0,0,4,0,0,0,
+                3,0,0,0,2,0,0,0,1,0,0,0,0,0,0,0
+                };
 
         static ReadOnlySpan<byte> Dec256x64u  
-            => new byte[32]{19,0,0,0,0,0,0,0,18,0,0,0,0,0,0,0,
-                1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+            => new byte[32]{
+                3,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,
+                1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+                };
 
         static ReadOnlySpan<byte> RotL_128x8u
             => new byte[16*7]
@@ -549,6 +626,18 @@ namespace Z0
                 1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
                 1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
                 };
+
+        static ReadOnlySpan<byte> LaneMerge256x8u 
+            => new byte[32]{0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31};
+        
+        static ReadOnlySpan<byte> LaneMerge256x16u 
+            => new byte[32]{0x00,0x00,0x02,0x00,0x04,0x00,0x06,0x00,0x08,0x00,0x0A,0x00,0x0C,0x00,0x0E,0x00,0x01,0x00,0x03,0x00,0x05,0x00,0x07,0x00,0x09,0x00,0x0B,0x00,0x0D,0x00,0x0F,0x00 };
+        
+        static ReadOnlySpan<byte> ClearAlt256x8u 
+            => new byte[32]{0x00,0xff,0x02,0xff,0x04,0xff,0x06,0xff,0x08,0xff,0x0a,0xff,0x0c,0xff,0x0e,0xff,0x00,0xff,0x02,0xff,0x04,0xff,0x06,0xff,0x08,0xff,0x0a,0xff,0x0c,0xff,0x0e,0xff};        
+        
+        static ReadOnlySpan<byte> ClearAlt256x16u 
+            => new byte[32]{0x00,0x00,0xff,0xff,0x02,0x00,0xff,0xff,0x04,0x00,0xff,0xff,0x06,0x00,0xff,0xff,0x00,0x00,0xff,0xff,0x02,0x00,0xff,0xff,0x04,0x00,0xff,0xff,0x06,0x00,0xff,0xff};
 
     }
 }

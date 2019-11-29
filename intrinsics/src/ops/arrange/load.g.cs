@@ -79,20 +79,85 @@ namespace Z0
                 throw unsupported<T>();
         }
 
+        /// <summary>
+        /// Loads a 128-bit vector from the first 128 bits of the source
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="offset">The position of the fist source element </param>
         [MethodImpl(Inline)]
         public static Vector128<T> vload<T>(N128 n, Span<T> src)
             where T : unmanaged
                 => vload(n, in head(src));
 
+        /// <summary>
+        /// Loads a 128-bit vector beginning at a specified source cell offset
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="offset">The position of the fist source element </param>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vload<T>(N128 n, Span<T> src, int offset)
+            where T : unmanaged            
+                => vload(n, in seek(src, offset));
+
+        /// <summary>
+        /// Loads a 128-bit vector from the first 128 bits of the source
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="offset">The position of the fist source element </param>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vload<T>(N128 n, ReadOnlySpan<T> src)
+            where T : unmanaged
+                => vload(n, in head(src));
+
+        /// <summary>
+        /// Loads a 128-bit vector beginning at a specified source cell offset
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="offset">The position of the fist source element </param>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vload<T>(N128 n, ReadOnlySpan<T> src, int offset)
+            where T : unmanaged            
+                => vload(n, in skip(src, offset));
+
+        /// <summary>
+        /// Loads a 256-bit vector from the first 256 bits of the source
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="offset">The position of the fist source element </param>
         [MethodImpl(Inline)]
         public static Vector256<T> vload<T>(N256 n, Span<T> src)
             where T : unmanaged
                 => vload(n, in head(src));
 
+        /// <summary>
+        /// Loads a 256-bit vector beginning at a specified source cell offset
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="offset">The position of the fist source element </param>
         [MethodImpl(Inline)]
-        public static Vector128<T> vload<T>(N128 n, ReadOnlySpan<T> src)
+        public static Vector256<T> vload<T>(N256 n, Span<T> src, int offset)
+            where T : unmanaged            
+                => vload(n, in seek(src, offset));
+
+        /// <summary>
+        /// Loads a 256-bit vector from the first 256 bits of the source
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="offset">The position of the fist source element </param>
+        [MethodImpl(Inline)]
+        public static Vector256<T> vload<T>(N256 n, ReadOnlySpan<T> src)
             where T : unmanaged
                 => vload(n, in head(src));
+
+        /// <summary>
+        /// Loads a 256-bit vector beginning at a specified source cell offset
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="offset">The position of the fist source element </param>
+        [MethodImpl(Inline)]
+        public static Vector256<T> vload<T>(N256 n, ReadOnlySpan<T> src, int offset)
+            where T : unmanaged            
+                => vload(n, in skip(src, offset));
 
         /// <summary>
         /// Loads a generic 128-bit cpu vector from a bytespan
@@ -116,30 +181,93 @@ namespace Z0
             where T : unmanaged
                 => vload(n, MemoryMarshal.Cast<byte,T>(src));
 
-        [MethodImpl(Inline)]
-        public static Vector256<T> vload<T>(N256 n, ReadOnlySpan<T> src)
-            where T : unmanaged
-                => vload(n, in head(src));
-
+        /// <summary>
+        /// Loads a 128-bit vector from the first 128-bit source block
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<T> vload<T>(in Block128<T> src)
             where T : unmanaged
                 =>  vload(n128,src.Data);
 
+        /// <summary>
+        /// Loads a block-identified 128-bit vector
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vload<T>(in Block128<T> src, int block)            
+            where T : unmanaged      
+                => vload(in src.BlockSeek(block), out Vector128<T> x);
+
+        /// <summary>
+        /// Loads a 128-bit vector from the first 128-bit source block
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<T> vload<T>(in ConstBlock128<T> src)
             where T : unmanaged
                 =>  vload(n128,src.Data);
 
+        /// <summary>
+        /// Loads a block-identified 128-bit vector
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vload<T>(in ConstBlock128<T> src, int block)            
+            where T : unmanaged      
+                => vload(in src.BlockSeek(block), out Vector128<T> x);
+
+        /// <summary>
+        /// Loads a 256-bit vector from the first 256-bit source block
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> vload<T>(in Block256<T> src)
             where T : unmanaged
                 =>  vload(n256,src.Data);
 
+        /// <summary>
+        /// Loads a block-identified 256-bit vector
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> vload<T>(in Block256<T> src, int block)            
+            where T : unmanaged      
+                => vload(in src.BlockSeek(block), out Vector256<T> x);
+
+        /// <summary>
+        /// Loads a 256-bit vector from the first 256-bit source block
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> vload<T>(in ConstBlock256<T> src)
             where T : unmanaged
                 => vload(n256,src.Data);
+
+        /// <summary>
+        /// Loads a block-identified 256-bit vector
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> vload<T>(in ConstBlock256<T> src, int block)            
+            where T : unmanaged      
+                => vload(in src.BlockSeek(block), out Vector256<T> x);
 
         [MethodImpl(Inline)]
         public static unsafe ref Vector128<T> vload<T>(T* pSrc, out Vector128<T> dst)
