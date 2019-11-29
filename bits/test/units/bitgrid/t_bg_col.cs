@@ -16,7 +16,8 @@ namespace Z0
         {
             var m = n32;
             var n = n2;
-            var xg = Random.BitGrid(m,n);
+            var t = z64;
+            var xg = Random.BitGrid(m,n,t);
             var xs = xg.ToSpan().ToBitString().Transpose(m,n);
 
             for(var i=0; i<n; i++)
@@ -32,7 +33,8 @@ namespace Z0
         {
             var m = n8;
             var n = n4;
-            var xg = Random.BitGrid(m,n);
+            var t = z32;
+            var xg = Random.BitGrid(m,n,t);
             var xs = xg.ToSpan().ToBitString().Transpose(m,n);
 
             for(var i=0; i<n; i++)
@@ -48,7 +50,8 @@ namespace Z0
 
             var m = n8;
             var n = n8;
-            var xg = Random.BitGrid(m,n);
+            var t = z64;
+            var xg = Random.BitGrid(m,n,t);
             var xs = xg.ToSpan().ToBitString().Transpose(m,n);
             for(var i=0; i<n; i++)
             {
@@ -63,7 +66,8 @@ namespace Z0
         {
             var m = n32;
             var n = n8;
-            var xg = Random.BitGrid<ulong>(m,n);
+            var t = z64;
+            var xg = Random.BitGrid(m,n,t);
             var xs = xg.ToSpan().ToBitString().Transpose(m,n);
             for(var i=0; i<n; i++)
             {

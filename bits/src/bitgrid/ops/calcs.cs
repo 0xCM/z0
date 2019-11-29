@@ -80,12 +80,12 @@ namespace Z0
         /// </summary>
         /// <param name="m">The row count representative</param>
         /// <param name="n">The col count representative</param>
-        /// <param name="zero">The segment type zero representative</param>
+        /// <param name="t">The segment type zero representative</param>
         /// <typeparam name="M">The row type</typeparam>
         /// <typeparam name="N">The col type</typeparam>
         /// <typeparam name="T">The storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static int cellcount<M,N,T>(M m = default, N n = default, T zero = default)
+        public static int cellcount<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -99,7 +99,7 @@ namespace Z0
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blockcount<T>(N256 block, int m, int n, T zero = default)
+        public static int blockcount<T>(N256 block, int m, int n, T t = default)
             where T : unmanaged
                 => DataBlocks.blockalign<T>(block, cellcount<T>(m,n));
 
@@ -109,16 +109,17 @@ namespace Z0
         /// <param name="block">The block size selctor</param>
         /// <param name="m">The row count representative</param>
         /// <param name="n">The col count representative</param>
-        /// <param name="zero">The cell type representative</param>
+        /// <param name="t">The cell type representative</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blockcount<M,N,T>(N256 block, M m = default, N n = default, T zero = default)
+        public static int blockcount<M,N,T>(N256 block, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => DataBlocks.blockalign<T>(block, cellcount<T>(natval(m),natval(n)));
+                => DataBlocks.blockalign<T>(block, cellcount<T>(natval(m), natval(n)));
+
 
         /// <summary>
         /// Computes the number of points in a grid, predicated on row and column counts
@@ -126,7 +127,7 @@ namespace Z0
         /// <param name="rows">The grid row count</param>
         /// <param name="cols">The grid col count</param>
         [MethodImpl(Inline)]
-        public static int pointcount(int rows, int cols)
+        public static int pointscount(int rows, int cols)
             => rows * cols;
 
         /// <summary>

@@ -28,7 +28,7 @@ namespace Z0
         /// <summary>
         /// The grid dimension
         /// </summary>
-        public static Dim<M,N> Dimension => default;        
+        public static GridDim<M,N,T> Dimension => default;        
 
         /// <summary>
         /// The number of bytes covered by the grid
@@ -48,7 +48,7 @@ namespace Z0
         /// <summary>
         /// The number of cells covered by the grid
         /// </summary>
-        public static int CellCount => BitGrid32<T>.GridCells;
+        public static int GridCells => BitGrid32<T>.GridCells;
 
 
         [MethodImpl(Inline)]
@@ -79,6 +79,39 @@ namespace Z0
         internal BitGrid32(uint src)
             => this.data = src;
 
+        public uint Data
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
+
+        public int CellCount
+        {
+            [MethodImpl(Inline)]
+            get => data.CellCount;
+        }
+
+        /// <summary>
+        /// The number of covered bits
+        /// </summary>
+        public int PointCount
+        {
+            [MethodImpl(Inline)]
+            get => BitCount;
+        }
+
+        public Span<T> Cells
+        {
+            [MethodImpl(Inline)]
+            get => data.Cells;
+        }
+
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref data.Head;
+        }
+
         /// <summary>
         /// The number of rows in the grid
         /// </summary>
@@ -89,11 +122,20 @@ namespace Z0
         /// </summary>
         public int ColCount => natval<N>();  
 
-        public uint Scalar
+        /// <summary>
+        /// Reads/writes an index-identified cell
+        /// </summary>
+        public ref T this[int cell]
         {
             [MethodImpl(Inline)]
-            get => data.Scalar;
+            get => ref data[cell];
         }
+
+        /// <summary>
+        /// The characterizing grid moniker
+        /// </summary>
+        public readonly GridMoniker<T> Moniker
+            => GridMoniker.FromDim<T>(RowCount, ColCount);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid32<M,N,T> rhs)

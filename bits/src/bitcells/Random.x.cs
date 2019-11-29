@@ -13,7 +13,6 @@ namespace Z0
 
     partial class BitRng
     {
-
         /// <summary>
         /// Produces a natural bitcell container
         /// </summary>

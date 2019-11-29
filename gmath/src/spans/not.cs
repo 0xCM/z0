@@ -28,7 +28,6 @@ namespace Z0
         public static Span<T> not<T>(Span<T> src)
             where T : unmanaged
                 => not(src,src);
-
         
         /// <summary>
         /// Allocates a new span into which the bitwise complement of each source element is stored
@@ -39,8 +38,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> not<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => not(src, src.Replicate(true));
-        
-
+                => not(src, src.Replicate(true));    
     }
 }

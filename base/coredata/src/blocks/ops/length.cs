@@ -18,6 +18,28 @@ namespace Z0
         /// <param name="lhs">The left span</param>
         /// <param name="rhs">The right span</param>
         [MethodImpl(Inline)]   
+        public static int length<S,T>(in Block32<S> lhs, in Block32<T> rhs)
+            where S : unmanaged
+            where T : unmanaged
+                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : badsize<int>(lhs.CellCount,rhs.CellCount);
+
+        /// <summary>
+        /// Returns the length of spans of equal length; otherwise raises an error
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        [MethodImpl(Inline)]   
+        public static int length<S,T>(in ConstBlock32<S> lhs, in ConstBlock32<T> rhs)
+            where S : unmanaged
+            where T : unmanaged
+                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : badsize<int>(lhs.CellCount,rhs.CellCount);
+
+        /// <summary>
+        /// Returns the length of spans of equal length; otherwise raises an error
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        [MethodImpl(Inline)]   
         public static int length<S,T>(in Block64<S> lhs, in Block64<T> rhs)
             where S : unmanaged
             where T : unmanaged
@@ -77,7 +99,5 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
                 => lhs.CellCount == rhs.CellCount ? lhs.CellCount : badsize<int>(lhs.CellCount,rhs.CellCount);
-
     }
-
 }

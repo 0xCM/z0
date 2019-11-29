@@ -13,20 +13,6 @@ namespace Z0
 
     public static partial class BitRng
     {
-        /// <summary>
-        /// Produces a stream of random 4-bit bitvectors
-        /// </summary>
-        /// <param name="random">The random source</param>
-        public static IRandomStream<BitVector4> BitVectors(this IPolyrand random, N4 n)
-        {
-            IEnumerable<BitVector4> produce()
-            {            
-                while(true)
-                    yield return random.BitVector(n4);
-            }
-
-            return stream(produce(), random.RngKind);            
-        }
 
         /// <summary>
         /// Populates a caller-supplied target with random bits

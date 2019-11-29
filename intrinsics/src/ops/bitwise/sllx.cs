@@ -17,18 +17,18 @@ namespace Z0
         /// Shifts the entire 128-bit vector leftwards at bit-level resolution
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The number of bits the shift leftward</param>
+        /// <param name="shift">The number of bits the shift leftward</param>
         /// <remarks>Taken from http://programming.sirrida.de</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vsllx(Vector128<ulong> src, byte offset)        
+        public static Vector128<ulong> vsllx(Vector128<ulong> src, int shift)        
         {
-            if(offset >= 64)
-                return vsll(vbsll(src, 8), (byte)(offset - 64));     
+            if(shift >= 64)
+                return vsll(vbsll(src, 8), shift - 64);     
             else
             {           
                 var x = vbsll(src, 8);
-                var y = vsll(src, offset);
-                return vor(y, vsrl(x, (byte)(64 - offset)));
+                var y = vsll(src, shift);
+                return vor(y, vsrl(x, 64 - shift));
             }
         }
 
@@ -36,18 +36,18 @@ namespace Z0
         /// Shifts each 128-bit lane leftwards at bit-level resolution
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The number of bits the shift leftward</param>
+        /// <param name="shift">The number of bits the shift leftward</param>
         /// <remarks>Taken from http://programming.sirrida.de</remarks>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vsllx(Vector256<ulong> src, byte offset)        
+        public static Vector256<ulong> vsllx(Vector256<ulong> src, int shift)        
         {
-            if(offset >= 64)
-                return vsll(vbsll(src, 8), (byte)(offset - 64));     
+            if(shift >= 64)
+                return vsll(vbsll(src, 8), shift - 64);     
             else
             {           
                 var x = vbsll(src, 8);
-                var y = vsll(src, offset);
-                return vor(y, vsrl(x, (byte)(64 - offset)));
+                var y = vsll(src, shift);
+                return vor(y, vsrl(x, 64 - shift));
             }
         }
 

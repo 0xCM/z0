@@ -60,14 +60,10 @@ namespace Z0
             => vbc_check<int>(n256);   
 
         public void vbc_256x32u()
-        {
-            vbc_check<uint>(n256);   
-        }
+            => vbc_check<uint>(n256);   
 
         public void vbc_256x64i()
-        {
-            vbc_check<long>(n256);   
-        }
+            => vbc_check<long>(n256);   
 
         public void vbc_256x64u()
             => vbc_check<ulong>(n256);   
@@ -78,25 +74,6 @@ namespace Z0
         public void vbc_256x64f()
             => vbc_check<double>(n256);
 
-        void vbc_check<T>(N128 n)
-            where T : unmanaged
-        {
-            var x = Random.Next<T>();
-            var vX = ginx.vbroadcast(n,x);
-            var data = vX.ToSpan();
-            for(var i=0; i<data.Length; i++)
-                Claim.eq(x,data[i]);            
-        }
-
-        void vbc_check<T>(N256 n)
-            where T : unmanaged
-        {
-            var x = Random.Next<T>();
-            var vX = ginx.vbroadcast(n,x);
-            var data = vX.ToSpan();
-            for(var i=0; i<data.Length; i++)
-                Claim.eq(x,data[i]);
-        }
 
     }
 

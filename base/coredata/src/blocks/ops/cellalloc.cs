@@ -9,10 +9,14 @@ namespace Z0
     using System.Runtime.InteropServices;    
         
     using static zfunc;
-    using static nfunc;
 
     partial class DataBlocks
     {
+        [MethodImpl(Inline)]
+        public static Block32<T> cellalloc<T>(N32 n, int cellcount)
+            where T : unmanaged        
+                => alloc<T>(n, blockalign<T>(n, cellcount));
+
         [MethodImpl(Inline)]
         public static Block64<T> cellalloc<T>(N64 n, int cellcount)
             where T : unmanaged        
@@ -27,8 +31,5 @@ namespace Z0
         public static Block256<T> cellalloc<T>(N256 n, int cellcount)
             where T : unmanaged        
                 => alloc<T>(n, blockalign<T>(n, cellcount));
-
-
     }
-
 }

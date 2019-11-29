@@ -191,7 +191,7 @@ namespace Z0
 
         }
 
-        void vxor_blocks_check<T>(N256 n)
+        protected void vxor_blocks_check<T>(N256 n)
             where T : unmanaged
         {
             var blocks = SampleSize;
@@ -214,7 +214,7 @@ namespace Z0
                 Claim.eq(gmath.xor(xb[i],yb[i]), zb[i]);
         }
 
-        void vxor_check<T>(N128 n)
+        protected void vxor_check<T>(N128 n)
             where T : unmanaged
         {
             for(var block = 0; block < SampleSize; block++)
@@ -234,7 +234,7 @@ namespace Z0
             }
         }
 
-        void vxor_check<T>(N256 n)
+        protected void vxor_check<T>(N256 n)
             where T : unmanaged
         {            
             for(var block = 0; block < SampleSize; block++)

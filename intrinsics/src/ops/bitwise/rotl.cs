@@ -13,175 +13,118 @@ namespace Z0
     partial class dinx
     {                
         /// <summary>
-        /// Rotates each component the source vector leftwards by a specified offset
+        /// Rotates each component the source vector leftwards by a specified shift
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vrotl(Vector128<byte> src, byte offset)
-        {
-            const byte seglen = 8;
-            return dinx.vor(
-                dinx.vsll(src, offset),
-                dinx.vsrl(src, (byte)(seglen - offset))
-                );             
-        }
+        public static Vector128<byte> vrotl(Vector128<byte> src, int shift)
+            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, 8 - shift));             
         
         /// <summary>
-        /// Rotates each component the source vector leftwards by a specified offset
+        /// Rotates each component the source vector leftwards by a specified shift
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vrotl(Vector128<ushort> src, byte offset)
-        {
-            const byte seglen = 16;
-            return dinx.vor(
-                dinx.vsll(src, offset),
-                dinx.vsrl(src, (byte)(seglen - offset))
-                );             
-        }
+        public static Vector128<ushort> vrotl(Vector128<ushort> src, int shift)
+            => dinx.vor(dinx.vsll(src, shift), dinx.vsrl(src, 16 - shift));             
 
 
         /// <summary>
-        /// Rotates each component the source vector leftwards by a specified offset
+        /// Rotates each component the source vector leftwards by a specified shift
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vrotl(Vector128<uint> src, byte offset)
-        {
-            const byte seglen = 32;
-            var x = dinx.vsll(src, offset);
-            var y = dinx.vsrl(src, (byte)(seglen-offset));   
-            return dinx.vor(x,y);             
-        }
+        public static Vector128<uint> vrotl(Vector128<uint> src, int shift)
+            => dinx.vor(dinx.vsll(src, shift), dinx.vsrl(src, 32-shift));
 
         /// <summary>
-        /// Rotates each component the source vector leftwards by a specified offset
+        /// Rotates each component the source vector leftwards by a specified shift
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vrotl(Vector128<ulong> src, byte offset)
-        {
-            const byte seglen = 64;
-            var x = dinx.vsll(src, offset);
-            var y = dinx.vsrl(src, (byte)(seglen - offset));   
-            return dinx.vor(x,y);             
-        }
+        public static Vector128<ulong> vrotl(Vector128<ulong> src, int shift)
+            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, 64 - shift));             
 
         /// <summary>
-        /// Rotates each component the source vector leftwards by a specified offset
+        /// Rotates each component the source vector leftwards by a specified shift
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> vrotl(Vector256<byte> src, byte offset)
-        {
-            const byte seglen = 8;
-            var x = dinx.vsll(src, offset);
-            var y = dinx.vsrl(src, (byte)(seglen - offset));   
-            return dinx.vor(x,y);             
-        }
+        public static Vector256<byte> vrotl(Vector256<byte> src, int shift)
+            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, 8 - shift));             
 
         /// <summary>
-        /// Rotates each component the source vector leftwards by a specified offset
+        /// Rotates each component the source vector leftwards by a specified shift
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vrotl(Vector256<ushort> src, byte offset)
-        {
-            const byte seglen = 16;
-            var x = dinx.vsll(src, offset);
-            var y = dinx.vsrl(src, (byte)(seglen - offset));   
-            return dinx.vor(x,y);             
-        }
+        public static Vector256<ushort> vrotl(Vector256<ushort> src, int shift)
+            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, 16 - shift));             
 
         /// <summary>
-        /// Rotates each component the source vector leftwards by a specified offset
+        /// Rotates each component the source vector leftwards by a specified shift
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vrotl(Vector256<uint> src, byte offset)
-        {
-            const byte seglen = 32;
-            var x = dinx.vsll(src, offset);
-            var y = dinx.vsrl(src, (byte)(seglen - offset));   
-            return dinx.vor(x,y);             
-        }
+        public static Vector256<uint> vrotl(Vector256<uint> src, int shift)
+            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, 32 - shift));             
 
         /// <summary>
-        /// Rotates each component the source vector leftwards by a specified offset
+        /// Rotates each component the source vector leftwards by a specified shift
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vrotl(Vector256<ulong> src, byte offset)
-        {
-            const byte seglen = 64;
-            var x = dinx.vsll(src, offset);
-            var y = dinx.vsrl(src, (byte)(seglen - offset));   
-            return dinx.vor(x,y);             
-        }
+        public static Vector256<ulong> vrotl(Vector256<ulong> src, int shift)
+            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, 64 - shift));             
 
         /// <summary>
         /// Rotates each component the source vector leftwards by the amount specified
-        /// int the corresponding offset vector component
+        /// int the corresponding shift vector component
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offsets">The offset vector</param>
+        /// <param name="shift">The shift vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vrotl(Vector128<ulong> src, Vector128<ulong> offsets)
-        {
-            var x = dinx.vsllv(src,offsets);
-            var y = dinx.vsrlv(src, dinx.vsub(Vector128u64,offsets));
-            return dinx.vor(x,y);
-        }
+        public static Vector128<ulong> vrotl(Vector128<ulong> src, Vector128<ulong> shift)
+            => dinx.vor(dinx.vsllv(src,shift),dinx.vsrlv(src, dinx.vsub(Vector128u64,shift)));
 
         /// <summary>
         /// Rotates each component the source vector leftwards by the amount specified
-        /// int the corresponding offset vector component
+        /// int the corresponding shift vector component
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offsets">The offset vector</param>
+        /// <param name="shift">The shift vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vrotl(Vector128<uint> src, Vector128<uint> offsets)
-        {
-            var x = dinx.vsllv(src, offsets);
-            var y = dinx.vsrlv(src, dinx.vsub(Vector128u32, offsets));
-            return dinx.vor(x,y);
-        }
+        public static Vector128<uint> vrotl(Vector128<uint> src, Vector128<uint> shift)
+            => dinx.vor(dinx.vsllv(src, shift),dinx.vsrlv(src, dinx.vsub(Vector128u32, shift)));
 
         /// <summary>
         /// Rotates each component the source vector leftwards by the 
-        /// corresponding component the offsets vector
+        /// corresponding component the shifts vector
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offsets">The offset vector</param>
+        /// <param name="shift">The shift vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vrotl(Vector256<ulong> src, Vector256<ulong> offsets)
-        {
-            var x = dinx.vsllv(src,offsets);
-            var y = dinx.vsrlv(src, dinx.vsub(Vector256u64,offsets));
-            return dinx.vor(x,y);
-        }
+        public static Vector256<uint> vrotl(Vector256<uint> src, Vector256<uint> shift)
+            => dinx.vor(dinx.vsllv(src,shift), dinx.vsrlv(src, dinx.vsub(Vector256u32,shift)));
 
         /// <summary>
         /// Rotates each component the source vector leftwards by the 
-        /// corresponding component the offsets vector
+        /// corresponding component the shifts vector
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offsets">The offset vector</param>
+        /// <param name="shift">The shift vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vrotl(Vector256<uint> src, Vector256<uint> offsets)
-        {
-            var x = dinx.vsllv(src,offsets);
-            var y = dinx.vsrlv(src, dinx.vsub(Vector256u32,offsets));
-            return dinx.vor(x,y);
-        }
+        public static Vector256<ulong> vrotl(Vector256<ulong> src, Vector256<ulong> shift)
+            => dinx.vor(dinx.vsllv(src,shift),dinx.vsrlv(src, dinx.vsub(Vector256u64,shift)));
+
 
 
     }

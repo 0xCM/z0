@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// The grid dimension
         /// </summary>
-        public static Dim<M,N> Dim => default;
+        public static GridDim<M,N,T> Dim => default;
 
         /// <summary>
         /// The number of bytes covered by the grid
@@ -45,7 +45,7 @@ namespace Z0
         /// <summary>
         /// The number of cells covered by the grid
         /// </summary>
-        public static int CellCount => BitGrid256<T>.GridCells;
+        public static int GridCells => BitGrid256<T>.GridCells;
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<T>(in BitGrid256<M,N,T> src)
@@ -70,6 +70,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator BitGrid256<T>(in BitGrid256<M,N,T> src)
             => new BitGrid256<T>(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitGrid256<M,N,T>(Vector256<byte> src)
+            => new BitGrid256<M,N,T>(src.As<byte,T>());
 
         [MethodImpl(Inline)]
         public static BitGrid256<M,N,T> operator & (in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
@@ -113,6 +117,33 @@ namespace Z0
             get => data;
         }
 
+        public int CellCount
+        {
+            [MethodImpl(Inline)]
+            get => GridCells;
+        }
+
+        public Span<T> Cells
+        {
+            [MethodImpl(Inline)]
+            get => data.ToSpan<T>();
+        }
+
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref head(Cells);
+        }
+
+        /// <summary>
+        /// The number of covered bits
+        /// </summary>
+        public int PointCount
+        {
+            [MethodImpl(Inline)]
+            get => BitCount;
+        }
+
         /// <summary>
         /// The number of rows in the grid
         /// </summary>
@@ -122,6 +153,21 @@ namespace Z0
         /// The number of columns in the grid
         /// </summary>
         public int ColCount => natval<N>();  
+
+        /// <summary>
+        /// Reads an index-identified cell
+        /// </summary>
+        public T this[int cell]
+        {
+            [MethodImpl(Inline)]
+            get => data.GetElement(cell);
+        }
+
+        /// <summary>
+        /// The characterizing grid moniker
+        /// </summary>
+        public readonly GridMoniker<T> Moniker
+            => GridMoniker.FromDim<T>(RowCount, ColCount);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid256<M,N,T> rhs)

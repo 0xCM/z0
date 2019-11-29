@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector128<T> vrotl<T>(Vector128<T> x, byte offset)
+        public static Vector128<T> vrotl<T>(Vector128<T> x, int offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector256<T> vrotl<T>(Vector256<T> x, byte offset)
+        public static Vector256<T> vrotl<T>(Vector256<T> x, int offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector128<T> vrotr<T>(Vector128<T> x, byte offset)
+        public static Vector128<T> vrotr<T>(Vector128<T> x, int offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector256<T> vrotr<T>(Vector256<T> x, byte offset)
+        public static Vector256<T> vrotr<T>(Vector256<T> x, int offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

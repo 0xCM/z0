@@ -55,7 +55,7 @@ namespace Z0
                 if(a != b)
                 {
                     Trace($"{opname} failed for operands {x} and {y}: {a} != {b}");
-                    Claim.fail($"{opname}"); 
+                    Claim.fail(); 
                 }
             }
         }

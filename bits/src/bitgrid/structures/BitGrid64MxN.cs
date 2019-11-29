@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// The grid dimension
         /// </summary>
-        public static Dim<M,N> Dim => default;
+        public static GridDim<M,N,T> Dim => default;
 
         /// <summary>
         /// The number of bytes covered by the grid
@@ -83,17 +83,39 @@ namespace Z0
         internal BitGrid64(Block64<T> src)
             => this.data = src.As<ulong>().Head;
 
-        public ulong Scalar
+        public ulong Data
         {
             [MethodImpl(Inline)]
-            get => data.Scalar;
+            get => data;
         }
 
+        /// <summary>
+        /// The number of allocated cells
+        /// </summary>
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => GridCells;
+            get => data.CellCount;
         }
+
+        /// <summary>
+        /// The number of covered bits
+        /// </summary>
+        public int PointCount
+        {
+            [MethodImpl(Inline)]
+            get => BitCount;
+        }
+
+        /// <summary>
+        /// The number of grid rows
+        /// </summary>
+        public int RowCount => natval<M>();         
+
+        /// <summary>
+        /// The number of grid columns
+        /// </summary>
+        public int ColCount => natval<N>();  
 
         public Span<T> Cells
         {
@@ -101,6 +123,9 @@ namespace Z0
             get => data.Cells;
         }
 
+        /// <summary>
+        /// The leading storage cell
+        /// </summary>
         public ref T Head
         {
             [MethodImpl(Inline)]
@@ -108,14 +133,24 @@ namespace Z0
         }
 
         /// <summary>
-        /// The number of rows in the grid
+        /// Reads/writes an index-identified cell
         /// </summary>
-        public int RowCount => natval<M>();         
+        public ref T this[int cell]
+        {
+            [MethodImpl(Inline)]
+            get => ref data[cell];
+        }
 
+        [MethodImpl(Inline)]
+        public BitGrid64<U> As<U>()
+            where U : unmanaged
+                => data.As<U>();
+        
         /// <summary>
-        /// The number of columns in the grid
+        /// The characterizing grid moniker
         /// </summary>
-        public int ColCount => natval<N>();  
+        public readonly GridMoniker<T> Moniker
+            => GridMoniker.FromDim<T>(RowCount, ColCount);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid64<M,N,T> rhs)

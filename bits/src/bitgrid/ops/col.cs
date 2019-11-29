@@ -83,7 +83,7 @@ namespace Z0
         public static BitVector<N32,uint> col<N,T>(BitGrid32<N32,N,T> g, int index)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => g.Scalar;
+                => g.Data;
 
         /// <summary>
         /// Extracts an index-identifed 2-bit grid column
@@ -167,7 +167,7 @@ namespace Z0
         public static BitVector<N64,ulong> col<N,T>(BitGrid64<N64,N,T> g, int index)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => g.Scalar;
+                => g.Data;
 
         /// <summary>
         /// Extracts an index-identifed 16-bit grid column

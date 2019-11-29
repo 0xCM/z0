@@ -10,8 +10,6 @@ namespace Z0
     using static zfunc;
     using BM = Z0.BitMatrix;
 
-
-
     public static partial class BitRng
     {
         /// <summary>
@@ -144,51 +142,5 @@ namespace Z0
             where T : unmanaged
                 => BM.load(n,random.Span<T>(Z0.BitMatrix<N,T>.TotalCellCount));
  
-        /// <summary>
-        /// Allocates and populates a bitgrid
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="n">The matrix order</param>
-        /// <param name="rep">A scalar representative</param>
-        /// <typeparam name="N">The order type</typeparam>
-        /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid<M,N,T> BitGrid<M,N,T>(this IPolyrand random, M m = default, N n = default, T zero = default)
-            where M : unmanaged,ITypeNat
-            where N : unmanaged,ITypeNat
-            where T : unmanaged
-        {
-            var grid = Z0.BitGrid.alloc(m,n,zero);
-            var segments = BitCalcs.cellcount(m,n,zero);
-            random.Fill(segments, ref grid.Head);
-            return grid;
-        }
-
-        [MethodImpl(Inline)]
-        public static BitGrid<T> BitGrid<T>(this IPolyrand random, ushort rows, ushort cols)
-            where T : unmanaged
-        {
-            var grid = Z0.BitGrid.alloc<T>(rows,cols);
-            random.Fill(grid.CellCount, ref grid.Head);
-            return grid;
-        }
-
-        /// <summary>
-        /// Allocates and populates a bitgrid
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="n">The matrix order</param>
-        /// <param name="rep">A scalar representative</param>
-        /// <typeparam name="N">The order type</typeparam>
-        /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid<M,N,T> Fill<M,N,T>(this IPolyrand random, BitGrid<M,N,T> dst)
-            where M : unmanaged,ITypeNat
-            where N : unmanaged,ITypeNat
-            where T : unmanaged
-        {
-            random.Fill(dst.Data.CellCount, ref dst.Head);
-            return dst;
-        }
     }
 }

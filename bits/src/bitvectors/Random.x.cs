@@ -11,6 +11,8 @@ namespace Z0
 
     using static zfunc;
 
+    using BV = Z0.BitVector;
+
     public static partial class BitRng
     {
         [MethodImpl(Inline)]
@@ -68,6 +70,21 @@ namespace Z0
             var v = random.CpuVector<T>(w);
             var clamp = w - math.min(w, natval(n));
             return ginx.vsrlx(v,(byte)clamp);
+        }
+
+        /// <summary>
+        /// Produces a stream of random 4-bit bitvectors
+        /// </summary>
+        /// <param name="random">The random source</param>
+        public static IRandomStream<BitVector4> BitVectors(this IPolyrand random, N4 n)
+        {
+            IEnumerable<BitVector4> produce()
+            {            
+                while(true)
+                    yield return random.BitVector(n4);
+            }
+
+            return stream(produce(), random.RngKind);            
         }
 
         /// <summary>

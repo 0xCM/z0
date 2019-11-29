@@ -18,6 +18,16 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
+        public static Block32<byte> bytes<T>(in Block32<T> src, N64 n = default)
+            where T : unmanaged
+                => new Block32<byte>(src.As<byte>());
+
+        /// <summary>
+        /// Reimagines a 64-bit bloocked span of generic values as a span of bytes
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The source value type</typeparam>
+        [MethodImpl(Inline)]
         public static Block64<byte> bytes<T>(in Block64<T> src, N64 n = default)
             where T : unmanaged
                 => new Block64<byte>(src.As<byte>());
@@ -41,6 +51,5 @@ namespace Z0
         public static Block256<byte> bytes<T>(Block256<T> src, N256 n = default)
             where T : unmanaged
                 => new Block256<byte>(src.As<byte>());
-
     }
 }

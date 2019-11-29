@@ -5,17 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.Intrinsics;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.IO;
     
     using static zfunc;
 
     public class t_vcompare : IntrinsicTest<t_vcompare>
     {        
-
         public void cmp_gt_128x8i()
             => cmp_gt_check<sbyte>(n128);
 
@@ -64,55 +60,6 @@ namespace Z0
         public void cmp_gt_256x64u()
             => cmp_gt_check<ulong>(n256);
 
-        void cmp_gt_check<T>(N128 n)
-            where T : unmanaged
-        {
-            var ones = ginx.vones<T>(n);
-            var one = vcell(ones,0);
-            
-            for(var i=0; i< SampleSize; i++)
-            {
-                var x = Random.Blocks<T>(n);
-                var y = Random.Blocks<T>(n);
-                var z = DataBlocks.alloc<T>(n);
-                
-                for(var j=0; j<z.CellCount; j++)
-                    if(gmath.gt(x[j],y[j]))
-                        z[j] = one;
-
-                var expect = ginx.vload(n, in head(z));
-                var actual = ginx.vgt(x.LoadVector(),y.LoadVector());
-                var result = ginx.veq(expect,actual);
-                var equal = ginx.vtestc(result,ones);
-                Claim.yea(equal);       
-
-            }
-        }
-
-        void cmp_gt_check<T>(N256 n)
-            where T : unmanaged
-        {
-            var ones = ginx.vones<T>(n);
-            var one = vcell(ginx.vlo(ones),0);
-            
-            for(var i=0; i< SampleSize; i++)
-            {
-                var x = Random.Blocks<T>(n);
-                var y = Random.Blocks<T>(n);
-                var z = DataBlocks.alloc<T>(n);
-                
-                for(var j=0; j<z.CellCount; j++)
-                    if(gmath.gt(x[j],y[j]))
-                        z[j] = one;
-                
-                var expect = ginx.vload(n, in head(z));
-                var actual = ginx.vgt(x.LoadVector(),y.LoadVector());
-                var result = ginx.veq(expect,actual);
-                var equal = ginx.vtestc(result,ones);
-                Claim.yea(equal);       
-
-            }
-        }
 
         void Report<T>(Block128<T> x, Block128<T> y, Vector128<T> expect, Vector128<T> actual, Vector128<T> result)
             where T : unmanaged

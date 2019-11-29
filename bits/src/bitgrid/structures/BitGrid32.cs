@@ -60,7 +60,7 @@ namespace Z0
         internal BitGrid32(uint data)
             => this.data = data;
         
-        public uint Scalar
+        public uint Data
         {
             [MethodImpl(Inline)]
             get => data;
@@ -70,6 +70,15 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => GridCells;
+        }
+
+        /// <summary>
+        /// The number of covered bits
+        /// </summary>
+        public int PointCount
+        {
+            [MethodImpl(Inline)]
+            get => BitCount;
         }
 
         public Span<T> Cells
@@ -82,6 +91,15 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref head(Cells);
+        }
+
+        /// <summary>
+        /// Reads/writes an index-identified cell
+        /// </summary>
+        public ref T this[int cell]
+        {
+            [MethodImpl(Inline)]
+            get => ref Unsafe.Add(ref Head, cell);
         }
 
         [MethodImpl(Inline)]

@@ -27,12 +27,39 @@ namespace Z0
         
         int CellWidth {get;}
     }
-    
-    public interface IGridDim<M,N,T> : IGridDim
+
+    public interface IGridDim<T> : IGridDim
+        where T : unmanaged
+    {
+
+    }
+
+    public interface IGridDim<M,N,T> : IGridDim<T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
+
+    }
+
+    public readonly struct GridDim<T> : IGridDim<T>
+        where T : unmanaged
+    {
+        public GridDim(int rows, int cols)
+        {
+            this.RowCount = rows;
+            this.ColCount = cols;
+        }
+
+        public int RowCount {get;}
+
+        public int ColCount {get;}
+
+        public int CellWidth
+        {
+            [MethodImpl(Inline)]
+            get => bitsize<T>();
+        }
 
     }
 
@@ -41,6 +68,10 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
+        [MethodImpl(Inline)]
+        public static implicit operator GridDim<T>(GridDim<M,N,T> src)
+            => new GridDim<T>(src.RowCount, src.ColCount);
+
         public int RowCount
         {
             [MethodImpl(Inline)]
@@ -53,10 +84,31 @@ namespace Z0
             get => natval<N>();
         }
 
+        /// <summary>
+        /// The bit width of a storage cell
+        /// </summary>
         public int CellWidth
         {
             [MethodImpl(Inline)]
             get => bitsize<T>();
+        }
+
+        /// <summary>
+        /// The number of cells required cover a grid
+        /// </summary>
+        public int CellCount
+        {
+            [MethodImpl(Inline)]
+            get => BitCalcs.cellcount<M,N,T>();
+        }
+
+        /// <summary>
+        /// The number of bytes required to cover a grid
+        /// </summary>
+        public int ByteCount
+        {
+            [MethodImpl(Inline)]
+            get => BitCalcs.bytecount<M,N>();
         }
 
     }

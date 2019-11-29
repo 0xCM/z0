@@ -14,7 +14,6 @@ namespace Z0
 
     partial class ginx
     {
-
         /// <summary>
         /// Computes x ^ ~y for vectors x and y
         /// </summary>
@@ -90,7 +89,6 @@ namespace Z0
                 return generic<T>(dinx.vxornot(vcast64i(x), vcast64i(y)));
         }
 
- 
         [MethodImpl(Inline)]
         static Vector128<T> vxornot_128f<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
@@ -142,6 +140,5 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
-
     }
 }

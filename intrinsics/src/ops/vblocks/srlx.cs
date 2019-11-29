@@ -15,7 +15,7 @@ namespace Z0
     partial class vblock
     {     
         [MethodImpl(Inline)]
-        public static Vector128<T> vsrlx<T>(N128 n, in T a, byte shift)
+        public static Vector128<T> vsrlx<T>(N128 n, in T a, int shift)
             where T : unmanaged
         {                    
             vload(a, out Vector128<T> vA);
@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vsrlx<T>(N256 n, in T a, byte shift)
+        public static Vector256<T> vsrlx<T>(N256 n, in T a, int shift)
             where T : unmanaged
         {                    
             vload(a, out Vector256<T> vA);
@@ -31,17 +31,17 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void srlx<T>(N128 n, in T a, byte shift, ref T z)
+        public static void srlx<T>(N128 n, in T a, int shift, ref T z)
             where T : unmanaged
                 => vstore(vsrlx(n, in a, shift), ref z);
 
         [MethodImpl(Inline)]
-        public static void srlx<T>(N256 n, in T a, byte shift, ref T z)
+        public static void srlx<T>(N256 n, in T a, int shift, ref T z)
             where T : unmanaged
                 => vstore(vsrlx(n,in a, shift), ref z); 
 
         [MethodImpl(Inline)]
-        public static void srlx<T>(N128 n, int vcount, int step, in T a, byte shift, ref T z)
+        public static void srlx<T>(N128 n, int vcount, int step, in T a, int shift, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
@@ -49,7 +49,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void srlx<T>(N256 n, int vcount, int step, in T a, byte shift, ref T z)
+        public static void srlx<T>(N256 n, int vcount, int step, in T a, int shift, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
@@ -57,7 +57,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void srlx<T>(in ConstBlock128<T> xb, byte shift, in Block128<T> zb)
+        public static void srlx<T>(in ConstBlock128<T> xb, int shift, in Block128<T> zb)
             where T : unmanaged
         {
             var count = zb.BlockCount;
@@ -66,7 +66,7 @@ namespace Z0
         } 
 
         [MethodImpl(Inline)]
-        public static void srlx<T>(in ConstBlock256<T> xb, byte shift, in Block256<T> zb)
+        public static void srlx<T>(in ConstBlock256<T> xb, int shift, in Block256<T> zb)
             where T : unmanaged
         {
             var count = zb.BlockCount;

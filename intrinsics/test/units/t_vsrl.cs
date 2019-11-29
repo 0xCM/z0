@@ -62,7 +62,7 @@ namespace Z0
         public void vsrl_256x64u_bench()
             => vsrl_bench<ulong>(n256);
 
-        void vsrl_check<T>(N128 n)
+        protected void vsrl_check<T>(N128 n)
             where T : unmanaged
         {
 
@@ -73,14 +73,14 @@ namespace Z0
                 var dst = ginx.vsrl(src,offset);
                 for(var j=0; j<dst.Length(); j++)
                 {
-                    var x = vcell(dst, (byte)j);
-                    var y = vcell(src, (byte)j);
+                    var x = vcell(dst, j);
+                    var y = vcell(src, j);
                     Claim.eq(x, gmath.srl(y,offset));
                 }
             }
         }
 
-        void vsrl_check<T>(N256 n)
+        protected void vsrl_check<T>(N256 n)
             where T : unmanaged
         {
 
@@ -96,19 +96,19 @@ namespace Z0
 
                 for(var j=0; j<a.Length()/2; j++)
                 {
-                    var x = vcell(ginx.vlo(a), (byte)j);
-                    var y = vcell(ginx.vlo(src), (byte)j);
+                    var x = vcell(ginx.vlo(a), j);
+                    var y = vcell(ginx.vlo(src), j);
                     Claim.eq(x, gmath.srl(y,offset));
 
-                    x = vcell(ginx.vhi(a), (byte)j);
-                    y = vcell(ginx.vhi(src), (byte)j);
+                    x = vcell(ginx.vhi(a), j);
+                    y = vcell(ginx.vhi(src), j);
                     Claim.eq(x, gmath.srl(y,offset));
 
                 }
             }
         }
 
-        void vsrl_bench<T>(N128 n)
+        protected void vsrl_bench<T>(N128 n)
             where T : unmanaged
         {
             var opcount = RoundCount * CycleCount;
@@ -130,7 +130,7 @@ namespace Z0
 
         }
 
-        void vsrl_bench<T>(N256 n)
+        protected void vsrl_bench<T>(N256 n)
             where T : unmanaged
         {
             var opcount = RoundCount * CycleCount;

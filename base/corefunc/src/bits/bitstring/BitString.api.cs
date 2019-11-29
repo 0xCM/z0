@@ -69,19 +69,14 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
-        public static BitString scalar<T>(T src)
+        public static BitString scalar<T>(T src, int? maxbits = null)
             where T : unmanaged
-                => new BitString(BitStore.bitseq(src));                
+                => new BitString(BitStore.bitseq(src, maxbits ?? bitsize<T>()));                
 
-        /// <summary>
-        /// Constructs a bitstring from primal value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitString scalar<T>(T src, int maxlen)
-            where T : unmanaged
-                => new BitString(BitStore.bitseq(src,maxlen));                
+        // [MethodImpl(Inline)]
+        // public static BitString scalar<T>(T src, int maxlen)
+        //     where T : unmanaged
+        //         => new BitString(BitStore.bitseq(src,maxlen));                
 
         /// <summary>
         /// Constructs a bitstring from span of scalar values
@@ -117,11 +112,11 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitString from<T>(Span<T> src, BitSize? maxlen = null)
+        public static BitString from<T>(Span<T> src, int? maxbits = null)
             where T : unmanaged
         {
             var segbits = bitsize<T>();
-            var bitcount = maxlen ?? segbits*src.Length;
+            var bitcount = maxbits ?? segbits*src.Length;
             var k = 0;
             var bitseq = new byte[bitcount];
             for(int i=0; i<src.Length; i++)
@@ -134,14 +129,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]   
-        public static BitString from<T>(Vector128<T> src)
+        public static BitString from<T>(Vector128<T> src, int? maxbits = null)
             where T : unmanaged        
-                => BitString.from(src.ToSpan(), null);
-
-        [MethodImpl(Inline)]   
-        public static BitString from<T>(Vector128<T> src, int maxwidth)
-            where T : unmanaged        
-                => BitString.from(src.ToSpan(), maxwidth);
+                => BitString.from(src.ToSpan(), maxbits);
 
         /// <summary>
         /// Assembles a bitstring from primal parts ordered from lo to hi

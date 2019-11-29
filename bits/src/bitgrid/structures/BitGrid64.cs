@@ -64,7 +64,7 @@ namespace Z0
         public BitGrid64(Block64<T>  src)
             => this.data = src.As<ulong>().Head;
 
-        public ulong Scalar
+        public ulong Data
         {
             [MethodImpl(Inline)]
             get => data;
@@ -74,6 +74,15 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => GridCells;
+        }
+
+        /// <summary>
+        /// The number of covered bits
+        /// </summary>
+        public int PointCount
+        {
+            [MethodImpl(Inline)]
+            get => BitCount;
         }
 
         public Span<T> Cells
@@ -88,9 +97,23 @@ namespace Z0
             get => ref head(Cells);
         }
 
+        /// <summary>
+        /// Reads/writes an index-identified cell
+        /// </summary>
+        public ref T this[int cell]
+        {
+            [MethodImpl(Inline)]
+            get => ref Unsafe.Add(ref Head, cell);
+        }
+
         [MethodImpl(Inline)]
         public bool Equals(BitGrid64<T> rhs)
             => data.Equals(rhs.data);
+
+        [MethodImpl(Inline)]
+        public BitGrid64<U> As<U>()
+            where U : unmanaged
+                => data;
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

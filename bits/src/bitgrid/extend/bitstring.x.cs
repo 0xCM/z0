@@ -12,47 +12,69 @@ namespace Z0
 
     partial class BitGridX
     {   
-
         [MethodImpl(Inline)]
-        public static BitString ToBitString<M,N,T>(this BitGrid<M,N,T> src, M m = default, N n = default)
+        public static BitString ToBitString<M,N,T>(this BitGrid<M,N,T> g)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => src.Data.ToBitString(BitCalcs.pointcount(m,n));
+                => g.Data.ToBitString(g.PointCount);
 
         [MethodImpl(Inline)]
-        public static BitString ToBitString<T>(this BitGrid<T> src)
+        public static BitString ToBitString<T>(this BitGrid<T> g)
             where T : unmanaged
-                => src.Data.ToBitString(src.RowCount * src.ColCount);
+                => g.Data.ToBitString(g.PointCount);
+
+        [MethodImpl(Inline)]
+        public static BitString ToBitString<T>(this BitGrid32<T> g)
+            where T : unmanaged
+                => g.Data.ToBitString(g.PointCount);
+
 
         [MethodImpl(Inline)]
         public static BitString ToBitString<M,N,T>(this BitGrid32<M,N,T> g)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => g.Scalar.ToBitString();
+                => g.Data.ToBitString(g.PointCount);
+
+        [MethodImpl(Inline)]
+        public static BitString ToBitString<T>(this BitGrid64<T> g)
+            where T : unmanaged
+                => g.Data.ToBitString();
 
         [MethodImpl(Inline)]
         public static BitString ToBitString<M,N,T>(this BitGrid64<M,N,T> g)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => g.Scalar.ToBitString();
+                => g.Data.ToBitString(g.PointCount);
+
+
+        [MethodImpl(Inline)]
+        public static BitString ToBitString<T>(this BitGrid128<T> g)
+            where T : unmanaged
+                => g.Data.ToBitString(g.PointCount);
+
 
         [MethodImpl(Inline)]
         public static BitString ToBitString<M,N,T>(this BitGrid128<M,N,T> g)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => g.Data.ToBitString();
+                => g.Data.ToBitString(g.PointCount);
+
+        [MethodImpl(Inline)]
+        public static BitString ToBitString<T>(this BitGrid256<T> g)
+            where T : unmanaged
+                => g.Data.ToBitString(g.PointCount);
 
         [MethodImpl(Inline)]
         public static BitString ToBitString<M,N,T>(this BitGrid256<M,N,T> g)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => g.Data.ToBitString();
+                => g.Data.ToBitString(g.PointCount);
 
-    }
 
+   }
 }

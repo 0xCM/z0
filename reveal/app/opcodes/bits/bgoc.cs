@@ -17,6 +17,33 @@ namespace Z0
     /// </summary>
     partial class bgoc
     {        
+        public static BitGrid64<N8,N8,ulong> bg_fw64_transpose_8x8x64(BitGrid64<N8,N8,ulong> g)
+            => BitGrid.transpose(g);
+
+        public static BitGrid64<N8,N8,ulong> bg_fw64_transpose_8x8x64_ur(BitGrid64<N8,N8,ulong> g)
+        {
+            ulong src = g;
+            var dst = BitGrid.alloc<byte>(n64,n8,n8);
+            var x = dinx.vmov(n128,src);
+            dst[7] = (byte)dinx.vmovemask(v8u(x));
+            x = dinx.vsll(x,1);
+            dst[6] = (byte)dinx.vmovemask(v8u(x));
+            x = dinx.vsll(x,1);
+            dst[5] = (byte)dinx.vmovemask(v8u(x));
+            x = dinx.vsll(x,1);
+            dst[4] = (byte)dinx.vmovemask(v8u(x));
+            x = dinx.vsll(x,1);
+            dst[3] = (byte)dinx.vmovemask(v8u(x));
+            x = dinx.vsll(x,1);
+            dst[2] = (byte)dinx.vmovemask(v8u(x));
+            x = dinx.vsll(x,1);
+            dst[1] = (byte)dinx.vmovemask(v8u(x));
+            x = dinx.vsll(x,1);
+            dst[0] = (byte)dinx.vmovemask(v8u(x));
+
+            return dst.As<ulong>();
+        }
+
         public static BitGrid64<uint> bg64_and_32(BitGrid64<uint> gx, BitGrid64<uint> gy)
             => BitGrid.and(gx,gy);
 

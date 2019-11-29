@@ -12,7 +12,8 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Defines a grid of bits over a contiguous sequence of primal values
+    /// Defines a grid of bits over a contiguous sequence of primal values stored in blocks of 256 bits
+    /// 
     /// </summary>
     public readonly ref struct BitGrid<T>
         where T : unmanaged
@@ -66,6 +67,15 @@ namespace Z0
             get => BitCalcs.cellcount<T>(RowCount, ColCount);
         }
 
+        /// <summary>
+        /// The number of covered bits
+        /// </summary>
+        public int PointCount
+        {
+            [MethodImpl(Inline)]
+            get => RowCount * ColCount;
+        }
+
         public int BlockCount
         {
             [MethodImpl(Inline)]
@@ -77,9 +87,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data.BlockWidth;
         }
-
-        public readonly GridMoniker<T> Moniker
-            => GridMoniker.FromDim<T>(RowCount, ColCount);
 
         public bit this[int row, int col]
         {
@@ -122,8 +129,12 @@ namespace Z0
         /// Returns the 256-bit block corresponding to a block index
         /// </summary>
         /// <param name="block">The block index</param>
+        [MethodImpl(Inline)]
         public Block256<T> Block(int block)
             => data.Block(block);
+
+        public readonly GridMoniker<T> Moniker
+            => GridMoniker.FromDim<T>(RowCount, ColCount);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid<T> rhs)

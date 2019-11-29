@@ -49,6 +49,10 @@ namespace Z0
             => new BitGrid128<T>(data);
 
         [MethodImpl(Inline)]
+        public static implicit operator BitGrid128<T>(Vector128<byte> src)
+            => new BitGrid128<T>(src.As<byte,T>());
+
+        [MethodImpl(Inline)]
         public static bit operator ==(in BitGrid128<T> gx, in BitGrid128<T> gy)
             => BitGrid.same(gx,gy);
 
@@ -64,10 +68,46 @@ namespace Z0
         internal BitGrid128(in Block128<T> src)
             => this.data = src.TakeVector();
 
+        public Vector128<T> Data
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
+
         public int CellCount
         {
             [MethodImpl(Inline)]
             get => GridCells;
+        }
+
+        /// <summary>
+        /// The number of covered bits
+        /// </summary>
+        public int PointCount
+        {
+            [MethodImpl(Inline)]
+            get => BitCount;
+        }
+
+        public Span<T> Cells
+        {
+            [MethodImpl(Inline)]
+            get => data.ToSpan<T>();
+        }
+
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref head(Cells);
+        }
+
+        /// <summary>
+        /// Reads an index-identified cell
+        /// </summary>
+        public T this[int cell]
+        {
+            [MethodImpl(Inline)]
+            get => data.GetElement(cell);
         }
 
         public override bool Equals(object obj)

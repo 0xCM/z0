@@ -40,7 +40,7 @@ namespace Z0.Test
 
         }
 
-        void nonzero128_check<T>(N128 n = default)
+        protected void nonzero128_check<T>(N128 n = default)
             where T : unmanaged
         {
             
@@ -54,7 +54,7 @@ namespace Z0.Test
             Claim.nea(ginx.vnonz(vzero<T>(n)));
         }
 
-        void nonzero256_check<T>(N256 n = default)
+        protected void nonzero256_check<T>(N256 n = default)
             where T : unmanaged
         {
             var  src = Random.Blocks<T>(n, blocks: SampleSize);

@@ -35,7 +35,6 @@ namespace Z0
             key = (byte)value;
         }
 
-
         /// <summary>
         /// Loads a cpu vector from a lookup table
         /// </summary>
@@ -46,7 +45,6 @@ namespace Z0
             ref var mem = ref byteref(src);
             return ginx.vload(n128, in mem);
         }
-
 
         /// <summary>
         /// Loads a cpu vector from a lookup table

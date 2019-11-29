@@ -278,7 +278,7 @@ namespace Z0.Logix
 
                 var z3 = SC(sa, sb, sc);
                 if(!ScalarOps.same(z3, z0.Scalar))
-                    Claim.fail($"Evalutation of ternary op {id} failed");
+                    Claim.failmsg($"Evalutation of ternary op {id} failed");
 
                 var v1 = ginx.vbroadcast(n256,sa);
                 var v2 = ginx.vbroadcast(n256,sb);

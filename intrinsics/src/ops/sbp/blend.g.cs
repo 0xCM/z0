@@ -81,7 +81,7 @@ namespace Z0
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vblend8x32_u(x, y, spec);
+                return vblend8x32_i(x, y, spec);
             else 
                 throw unsupported<T>();
         }
@@ -99,7 +99,7 @@ namespace Z0
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vblend8x16_u(x, y, spec);
+                return vblend8x16_i(x, y, spec);
             else 
                 throw unsupported<T>();
         }
@@ -117,7 +117,7 @@ namespace Z0
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vblend8x16_u(x, y, spec);
+                return vblend8x16_i(x, y, spec);
             else 
                 throw unsupported<T>();
         }
@@ -135,7 +135,7 @@ namespace Z0
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vblend4x32_u(x, y, spec);
+                return vblend4x32_i(x, y, spec);
             else 
                 throw unsupported<T>();
         }

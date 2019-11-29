@@ -141,25 +141,5 @@ namespace Z0
         public static Vector256<ulong> vswaphl(Vector256<ulong> x)
             => dinx.vperm2x128(x,x, Perm2x4.DA);
 
-        [MethodImpl(Inline)]
-        public static Vector128<ushort> vbswap(Vector128<ushort> x)
-        {
-            var spec = DataPatterns.bswap<ushort>(n128);
-            return v16u(vshuf16x8(v8u(x), spec));
-        }
-
-        [MethodImpl(Inline)]
-        public static Vector128<uint> vbswap(Vector128<uint> x)
-        {
-            var spec = DataPatterns.bswap<uint>(n128);
-            return v32u(vshuf16x8(v8u(x), spec));
-        }
-
-        [MethodImpl(Inline)]
-        public static Vector128<ulong> vbswap(Vector128<ulong> x)
-        {
-            var spec = DataPatterns.bswap<ulong>(n128);
-            return v64u(vshuf16x8(v8u(x), spec));
-        }
     }
 }

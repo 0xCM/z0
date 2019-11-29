@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
@@ -17,7 +16,7 @@ namespace Z0
     {    
         
         [MethodImpl(Inline)]
-        public static Vector128<T> vsrl<T>(Vector128<T> x, byte offset)
+        public static Vector128<T> vsrl<T>(Vector128<T> x, int offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -31,7 +30,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vsrl<T>(Vector256<T> x, byte offset)
+        public static Vector256<T> vsrl<T>(Vector256<T> x, int offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

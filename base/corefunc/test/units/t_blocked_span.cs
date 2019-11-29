@@ -150,14 +150,14 @@ namespace Z0.Test
 
             var block2 = x.Block(1);
             Claim.eq(4, block2.CellCount);
-            Claim.eq(block2,DataBlocks.partload(n128,5,6,7,8));
+            Claim.eq(block2,DataBlocks.parts(n128,5,6,7,8));
 
         }
         public void Load1()
         {
             var x = DataBlocks.safeload(n128,span<int>(1,2,3,4,5,6,7,8));
             Claim.eq(x.BlockCount,2);
-            Claim.eq(x, DataBlocks.partload(n128,1,2,3,4,5,6,7,8));
+            Claim.eq(x, DataBlocks.parts(n128,1,2,3,4,5,6,7,8));
             
         }
 

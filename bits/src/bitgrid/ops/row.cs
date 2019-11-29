@@ -83,7 +83,7 @@ namespace Z0
         public static BitVector<N32,uint> row<M,T>(BitGrid32<M,N32,T> g, int index)
             where T : unmanaged
             where M : unmanaged, ITypeNat
-                => g.Scalar;
+                => g.Data;
 
         /// <summary>
         /// Extracts an index-identifed row
@@ -167,7 +167,7 @@ namespace Z0
         public static BitVector<N64,ulong> row<M,T>(BitGrid64<M,N64,T> g, int index)
             where T : unmanaged
             where M : unmanaged, ITypeNat
-                => g.Scalar;
+                => g.Data;
 
         [MethodImpl(Inline)]
         public static BitVector<N16,ushort> row<T>(in BitGrid256<N16,N16,T> g, int index)

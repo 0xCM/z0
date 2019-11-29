@@ -24,7 +24,7 @@ namespace Z0
         /// <summary>
         /// The grid dimension
         /// </summary>
-        public static Dim<M,N> Dim => default;
+        public static GridDim<M,N,T> Dim => default;
 
         [MethodImpl(Inline)]
         public static bit operator ==(in BitGrid<M,N,T> g1, in BitGrid<M,N,T> g2)
@@ -58,10 +58,6 @@ namespace Z0
             get => ref data.Head;
         }
 
-        /// <summary>
-        /// The natural width of the grid, equivalent in numeric value to the column count
-        /// </summary>
-        public N GridWidth => default;
 
         /// <summary>
         /// The number of grid rows
@@ -87,7 +83,7 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.cellcount<T>(RowCount, ColCount);
+            get => BitCalcs.cellcount<M,N,T>();
         }
 
         /// <summary>
@@ -96,7 +92,7 @@ namespace Z0
         public int PointCount
         {
             [MethodImpl(Inline)]
-            get => NatMath.mul<M,N>(); 
+            get => BitCalcs.pointcount<M,N>(); 
         }
 
         /// <summary>
@@ -107,14 +103,14 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data.BlockCount;
         }
-         
+
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => BitGrid.readbit(GridWidth, in Head, row, col);
+            get => BitGrid.readbit(ColCount, in Head, row, col);
 
             [MethodImpl(Inline)]
-            set => BitGrid.setbit(GridWidth, row, col, value, ref Head);
+            set => BitGrid.setbit(ColCount, row, col, value, ref Head);
         }
 
         [MethodImpl(Inline)]

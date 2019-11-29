@@ -49,6 +49,10 @@ namespace Z0
             => new BitGrid256<T>(data);
 
         [MethodImpl(Inline)]
+        public static implicit operator BitGrid256<T>(Vector256<byte> src)
+            => new BitGrid256<T>(src.As<byte,T>());
+
+        [MethodImpl(Inline)]
         public static BitGrid256<T> operator & (in BitGrid256<T> gx, in BitGrid256<T> gy)
             => BitGrid.and(gx,gy);
 
@@ -84,10 +88,46 @@ namespace Z0
         internal BitGrid256(in Block256<T> src)
             => this.data = src.TakeVector();
 
+        public Vector256<T> Data
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
+
+        public Span<T> Cells
+        {
+            [MethodImpl(Inline)]
+            get => data.ToSpan<T>();
+        }
+
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref head(Cells);
+        }
+
         public int CellCount
         {
             [MethodImpl(Inline)]
             get => GridCells;
+        }
+
+        /// <summary>
+        /// The number of covered bits
+        /// </summary>
+        public int PointCount
+        {
+            [MethodImpl(Inline)]
+            get => BitCount;
+        }
+
+        /// <summary>
+        /// Reads an index-identified cell
+        /// </summary>
+        public T this[int cell]
+        {
+            [MethodImpl(Inline)]
+            get => data.GetElement(cell);
         }
 
         public override bool Equals(object obj)

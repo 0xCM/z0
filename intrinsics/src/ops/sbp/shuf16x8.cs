@@ -29,7 +29,6 @@ namespace Z0
         public static Vector128<sbyte> vshuf16x8(Vector128<sbyte> src, Vector128<sbyte> spec)
             => Shuffle(src, spec);
 
-
         /// <summary>
         /// __m128i _mm_shuffle_epi8 (__m128i a, __m128i b) PSHUFB xmm, xmm/m128
         /// </summary>

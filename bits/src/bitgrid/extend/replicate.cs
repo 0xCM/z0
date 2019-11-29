@@ -29,14 +29,14 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new BitGrid32<M, N, T>(src.Scalar);
+                => new BitGrid32<M, N, T>(src.Data);
 
         [MethodImpl(Inline)]
         public static BitGrid64<M,N,T> Replicate<M,N,T>(this BitGrid64<M,N,T> src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new BitGrid64<M, N, T>(src.Scalar);
+                => new BitGrid64<M, N, T>(src.Data);
 
         [MethodImpl(Inline)]
         public static BitGrid128<M,N,T> Replicate<M,N,T>(this BitGrid128<M,N,T> src)

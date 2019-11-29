@@ -56,7 +56,7 @@ namespace Z0
         public static bit testz<T>(N128 n, int vcount, int step, in T a)
             where T : unmanaged
         {
-            var result = true;
+            var result = bit.On;
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
                 result &= testz(n, in skip(in a, offset));
             return result;
@@ -66,7 +66,7 @@ namespace Z0
         public static bit testz<T>(N128 n, int vcount, int step, in T a, in T b)
             where T : unmanaged
         {
-            var result = true;
+            var result = bit.On;
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
                 result &= vtestz(n, in skip(in a, offset), in skip(in b, offset));
             return result;
@@ -76,7 +76,7 @@ namespace Z0
         public static bit testz<T>(N256 n, int vcount, int step, in T a)
             where T : unmanaged
         {
-            var result = true;
+            var result = bit.On;
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
                 result &= testz(n, in skip(in a, offset));
             return result;
@@ -86,13 +86,10 @@ namespace Z0
         public static bit testz<T>(N256 n, int vcount, int step, in T a, in T b)
             where T : unmanaged
         {
-            var result = true;
+            var result = bit.On;
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
                 result &= vtestz(n, in skip(in a, offset), in skip(in b, offset));
             return result;
         }
-
-
     }
-
 }

@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
 
-    public class t_vcount : IntrinsicTest<t_vcount>
+    public class t_vnext : IntrinsicTest<t_vnext>
     {   
         public void next_128x8i()
             => next_check<byte>(n128);
@@ -62,8 +62,7 @@ namespace Z0
         public void next_256x64u()
             => next_check<ulong>(n256);
 
-
-        void next_check<T>(N128 n)
+        protected void next_check<T>(N128 n)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
@@ -88,7 +87,7 @@ namespace Z0
             }
         }
 
-        void next_check<T>(N256 n)
+        protected void next_check<T>(N256 n)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)

@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
@@ -30,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this sbyte src)
+        public static BitString ToBitString(this sbyte src, int? maxbits = null)
             => BitString.scalar(src);
 
         /// <summary>
@@ -38,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this byte src)
+        public static BitString ToBitString(this byte src, int? maxbits = null)
             => BitString.scalar(src);
 
         /// <summary>
@@ -46,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this short src)
+        public static BitString ToBitString(this short src, int? maxbits = null)
             => BitString.scalar(src);
 
         /// <summary>
@@ -54,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this ushort src)
+        public static BitString ToBitString(this ushort src, int? maxbits = null)
             => BitString.scalar(src);
 
         /// <summary>
@@ -62,7 +60,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this int src)
+        public static BitString ToBitString(this int src, int? maxbits = null)
             => BitString.scalar(src);
 
         /// <summary>
@@ -70,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this uint src)
+        public static BitString ToBitString(this uint src, int? maxbits = null)
             => BitString.scalar(src);
 
         /// <summary>
@@ -78,7 +76,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this long src)
+        public static BitString ToBitString(this long src, int? maxbits = null)
             => BitString.scalar(src);
 
         /// <summary>
@@ -86,7 +84,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this ulong src)
+        public static BitString ToBitString(this ulong src, int? maxbits = null)
             => BitString.scalar(src);
 
         /// <summary>
@@ -94,7 +92,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this float src)
+        public static BitString ToBitString(this float src, int? maxbits = null)
             => BitString.scalar(src);
 
         /// <summary>
@@ -102,7 +100,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this double src)
+        public static BitString ToBitString(this double src, int? maxbits = null)
             => BitString.scalar(src);
 
         /// <summary>
@@ -134,7 +132,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this Span<T> src, BitSize? maxbits = null)
+        public static BitString ToBitString<T>(this Span<T> src, int? maxbits = null)
             where T : unmanaged
                 => BitString.from(src, maxbits); 
 
@@ -152,99 +150,54 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this Block64<T> src, int maxbits)
+        public static BitString ToBitString<T>(this Block64<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.from(src.Data, maxbits);
+                => BitString.from(src.Data, maxbits ?? Block64<T>.N);
 
         /// <summary>
         /// Converts datablock content to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this Block128<T> src)
+        public static BitString ToBitString<T>(this Block128<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.from(src.Data);
+                => BitString.from(src.Data, maxbits ?? Block128<T>.N);
 
         /// <summary>
         /// Converts datablock content to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this Block128<T> src, int maxbits)
+        public static BitString ToBitString<T>(this Block256<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.from(src.Data, maxbits);
+                => BitString.from(src.Data, maxbits ?? Block256<T>.N);
 
         /// <summary>
         /// Converts datablock content to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this Block256<T> src)
+        public static BitString ToBitString<T>(this ConstBlock64<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.from(src.Data);
+                => BitString.from(src.Data, maxbits ?? ConstBlock64<T>.N);
 
         /// <summary>
         /// Converts datablock content to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this Block256<T> src, int maxbits)
+        public static BitString ToBitString<T>(this ConstBlock128<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.from(src.Data, maxbits);
+                => BitString.from(src.Data, maxbits ?? ConstBlock128<T>.N);
 
         /// <summary>
         /// Converts datablock content to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this ConstBlock64<T> src)
+        public static BitString ToBitString<T>(this ConstBlock256<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.from(src.Data);
-
-        /// <summary>
-        /// Converts datablock content to a bitstring
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this ConstBlock64<T> src, int maxbits)
-            where T : unmanaged
-                => BitString.from(src.Data, maxbits);
-
-        /// <summary>
-        /// Converts datablock content to a bitstring
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this ConstBlock128<T> src)
-            where T : unmanaged
-                => BitString.from(src.Data);
-
-        /// <summary>
-        /// Converts datablock content to a bitstring
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this ConstBlock128<T> src, int maxbits)
-            where T : unmanaged
-                => BitString.from(src.Data, maxbits);
-
-        /// <summary>
-        /// Converts datablock content to a bitstring
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this ConstBlock256<T> src)
-            where T : unmanaged
-                => BitString.from(src.Data);
-
-        /// <summary>
-        /// Converts datablock content to a bitstring
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this ConstBlock256<T> src, int maxbits)
-            where T : unmanaged
-                => BitString.from(src.Data, maxbits);
+                => BitString.from(src.Data, maxbits ?? ConstBlock256<T>.N);
 
         /// <summary>
         /// Converts a bitview to a bitstring
@@ -270,9 +223,9 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]   
-        public static BitString ToBitString<T>(this Vector128<T> src, BitSize? maxwidth = null)
+        public static BitString ToBitString<T>(this Vector128<T> src, int? maxbits = null)
             where T : unmanaged        
-                => BitString.from(src.ToSpan(), maxwidth);
+                => BitString.from(src.ToSpan(), maxbits);
         
         /// <summary>
         /// Converts an 256-bit intrinsic vector representation to a bistring
@@ -280,9 +233,9 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]   
-        public static BitString ToBitString<T>(this Vector256<T> src, BitSize? maxwidth = null)
+        public static BitString ToBitString<T>(this Vector256<T> src, int? maxbits = null)
             where T : unmanaged        
-                => BitString.from(src.ToSpan(), maxwidth);        
+                => BitString.from(src.ToSpan(), maxbits);        
 
         /// <summary>
         /// Extracts the even bits
@@ -354,7 +307,6 @@ namespace Z0
                 => BitString.transpose(bs,m,n);
         
         public static BitString Transpose(this BitString bs, int m, int n)        
-            => BitString.transpose(bs,m,n);
-                    
+            => BitString.transpose(bs,m,n);                    
     }
 }

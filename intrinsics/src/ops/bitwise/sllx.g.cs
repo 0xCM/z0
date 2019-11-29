@@ -20,20 +20,20 @@ namespace Z0
         /// Shifts the full 128 bits of a vector leftward at bit-level resolution
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The number of bits to shift</param>
+        /// <param name="shift">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public static Vector128<T> vsllx<T>(Vector128<T> src, byte offset)        
+        public static Vector128<T> vsllx<T>(Vector128<T> src, int shift)        
             where T : unmanaged
-                => generic<T>(dinx.vsllx(v64u(src), offset));
+                => generic<T>(dinx.vsllx(v64u(src), shift));
 
         /// <summary>
         /// Shifts each 128 bit lane leftward at bit-level resolution
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The number of bits to shift</param>
+        /// <param name="shift">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public static Vector256<T> vsllx<T>(Vector256<T> src, byte offset)        
+        public static Vector256<T> vsllx<T>(Vector256<T> src, int shift)        
             where T : unmanaged
-                => generic<T>(dinx.vsllx(v64u(src), offset));
+                => generic<T>(dinx.vsllx(v64u(src), shift));
     }
 }

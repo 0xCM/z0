@@ -15,10 +15,11 @@ namespace Z0
         {
             var m = n8;
             var n = n4;
+            var t = z32;
             
-            var bg = Random.BitGrid(m,n);
+            var bg = Random.BitGrid(m,n,t);
             var bs = bg.ToBitString();
-            var data = bg.Scalar;
+            var data = bg.Data;
 
             for(var r = 0; r < m; r++)
             {                
@@ -32,8 +33,9 @@ namespace Z0
         {
             var m = n16;
             var n = n16;
+            var t = z16;
             
-            var bg = Random.BitGrid<ushort>(m,n);
+            var bg = Random.BitGrid(m,n,t);
             var bs = bg.ToBitString();
             var data = bg.ToSpan();
             

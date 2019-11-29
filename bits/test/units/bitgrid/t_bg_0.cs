@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="rows">The number of grid rows</param>
         /// <param name="cols">The number of grid columns</param>
         /// <typeparam name="T">The grid cell type</typeparam>
-        protected void gbg_bitread_check<T>(ushort rows, ushort cols)
+        protected void gbg_bitread_check<T>(int rows, int cols)
             where T : unmanaged
         {
             for(var i = 0; i < SampleSize; i++)
@@ -99,7 +99,7 @@ namespace Z0
             }
         }
 
-        protected void gbg_bitread_bench<T>(ushort M, ushort N, int cycles, SystemCounter counter = default)
+        protected void gbg_bitread_bench<T>(int M, int N, int cycles, SystemCounter counter = default)
             where T : unmanaged
         {
             var last = bit.Off;

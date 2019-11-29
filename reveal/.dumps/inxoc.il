@@ -1,4 +1,4 @@
-// 2019-11-27 21:54:08:883
+// 2019-11-28 20:16:38:649
 bool vtestz_d128x32i(Vector128<int> src, Vector128<int> mask)
 {
     IL_0000: ldarg.0
@@ -1078,6 +1078,27 @@ Vector256<byte> pattern_lanemerge_256x8u()
     IL_0005: ret
 
 }
+Vector256<ushort> pattern_lanemerge_256x16u()
+{
+    IL_0000: call System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.ginx::vlanemerge<System.UInt16>()
+    IL_0005: ret
+
+}
+Vector128<ushort> vbswap_128x16u(Vector128<ushort> x)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.dinx::vbswap(System.Runtime.Intrinsics.Vector128`1<System.UInt16>)
+    IL_0006: ret
+
+}
+Vector256<sbyte> vperm4x64(Vector256<sbyte> x)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4 228
+    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.SByte> Z0.dinx::vperm4x64(System.Runtime.Intrinsics.Vector256`1<System.SByte>,Z0.Perm4)
+    IL_000B: ret
+
+}
 Vector256<int> vpermvar8x32_256x32i(Vector256<int> src, Vector256<uint> spec)
 {
     IL_0000: ldarg.0
@@ -1092,30 +1113,6 @@ Vector256<uint> vpermvar8x32_256x32u(Vector256<uint> src, Vector256<uint> spec)
     IL_0001: ldarg.1
     IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.dinx::vperm8x32(System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
     IL_0007: ret
-
-}
-Vector256<byte> vpermvar32x8_256x8u(Vector256<byte> a, Vector256<byte> spec)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.dinx::vshuf32x8(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Runtime.Intrinsics.Vector256`1<System.Byte>)
-    IL_0007: ret
-
-}
-Vector128<byte> rotl_128x16_pattern()
-{
-    IL_0000: call Z0.N128 zfunc::get_n128()
-    IL_0005: call Z0.N16 zfunc::get_n16()
-    IL_000A: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.DataPatterns::rotl(Z0.N128,Z0.N16)
-    IL_000F: ret
-
-}
-Vector128<byte> rotl_128x32_pattern()
-{
-    IL_0000: call Z0.N128 zfunc::get_n128()
-    IL_0005: call Z0.N32 zfunc::get_n32()
-    IL_000A: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.DataPatterns::rotl(Z0.N128,Z0.N32)
-    IL_000F: ret
 
 }
 Vector128<byte> rotl_g128x8u(Vector128<byte> src, byte offset)

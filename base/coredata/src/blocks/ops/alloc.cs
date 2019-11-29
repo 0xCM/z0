@@ -14,12 +14,26 @@ namespace Z0
     partial class DataBlocks
     {
         /// <summary>
+        /// Allocates a specified number of 32-bit blocks, filled with an optional pattern
+        /// </summary>
+        /// <param name="blocks">The number of blocks for which memory should be alocated</param>
+        /// <param name="fill">An optional value that, if specified, is used to initialize the cell values</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Block32<T> alloc<T>(N32 n, int blocks)
+            where T : unmanaged        
+        {
+            Span<T> data = new T[blocks * blocklen<T>(n)];
+            return new Block32<T>(data);
+        }
+
+        /// <summary>
         /// Allocates 1 64-bit block
         /// </summary>
         /// <param name="n">The bit selector</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block64<T> alloc<T>(N64 n)
+        public static Block32<T> alloc<T>(N32 n)
             where T : unmanaged        
                 => alloc<T>(n,1);
 
@@ -36,6 +50,16 @@ namespace Z0
             Span<T> data = new T[blocks * blocklen<T>(n)];
             return new Block64<T>(data);
         }
+
+        /// <summary>
+        /// Allocates 1 64-bit block
+        /// </summary>
+        /// <param name="n">The bit selector</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Block64<T> alloc<T>(N64 n)
+            where T : unmanaged        
+                => alloc<T>(n,1);
 
         /// <summary>
         /// Allocates a 128-bit 1-block span 

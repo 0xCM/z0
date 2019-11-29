@@ -114,7 +114,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static Vector128<byte> bswap<T>(N128 n)
+        public static Vector128<byte> byteswap<T>(N128 n)
             where T : unmanaged
         {
             if(typeof(T) == typeof(ushort))
@@ -123,6 +123,20 @@ namespace Z0
                 return ginx.vload(n, BSwap_128x32u);
             else if(typeof(T) == typeof(ulong))
                 return ginx.vload(n, BSwap_128x64u);
+            else
+                throw unsupported<T>();            
+        }
+
+        [MethodImpl(Inline)]
+        public static Vector256<byte> byteswap<T>(N256 n)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(ushort))
+                return ginx.vload(n, BSwap_256x16u);
+            else if(typeof(T) == typeof(uint))
+                return ginx.vload(n, BSwap_256x32u);
+            else if(typeof(T) == typeof(ulong))
+                return ginx.vload(n, BSwap_256x64u);
             else
                 throw unsupported<T>();            
         }
@@ -370,7 +384,6 @@ namespace Z0
         static ReadOnlySpan<byte> BSwap_128x16u
             => new byte[16]{1,0,3,2,5,4,7,6,9,8,B,A,D,C,F,E};
 
-
         /// <summary>
         /// Shuffle pattern that, when applied, swaps the byte-level representation of 32-bit unsigned integers
         /// </summary>
@@ -382,6 +395,35 @@ namespace Z0
         /// </summary>
         static ReadOnlySpan<byte> BSwap_128x64u
             => new byte[16]{7,6,5,4,3,2,1,0,F,E,D,C,B,A,9,8};
+
+
+        /// <summary>
+        /// Shuffle pattern that, when applied, swaps the byte-level representation of 16-bit unsigned integers
+        /// </summary>
+        static ReadOnlySpan<byte> BSwap_256x16u
+            => new byte[32]{
+                1,0,3,2,5,4,7,6,9,8,B,A,D,C,F,E,
+                1,0,3,2,5,4,7,6,9,8,B,A,D,C,F,E
+                };
+
+        /// <summary>
+        /// Shuffle pattern that, when applied, swaps the byte-level representation of 32-bit unsigned integers
+        /// </summary>
+        static ReadOnlySpan<byte> BSwap_256x32u
+            => new byte[32]{
+                3,2,1,0,7,6,5,4,B,A,9,8,F,E,D,C,
+                3,2,1,0,7,6,5,4,B,A,9,8,F,E,D,C
+                };
+
+
+        /// <summary>
+        /// Shuffle pattern that, when applied, swaps the byte-level representation of 64-bit unsigned integers
+        /// </summary>
+        static ReadOnlySpan<byte> BSwap_256x64u
+            => new byte[32]{
+                7,6,5,4,3,2,1,0,F,E,D,C,B,A,9,8,
+                7,6,5,4,3,2,1,0,F,E,D,C,B,A,9,8
+                };
 
         /// <summary>
         /// Defines a mask for an even 256x8-bit blend
