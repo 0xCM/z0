@@ -15,11 +15,21 @@ namespace Z0
     partial class ginx
     {
 
+        /// <summary>
+        /// Reverses the source vector components
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<T> vreverse<T>(Vector128<T> x)
             where T : unmanaged
                 => vreverse_1(x);
 
+        /// <summary>
+        /// Reverses the source vector components
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> vreverse<T>(Vector256<T> x)
             where T : unmanaged
@@ -89,8 +99,6 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
-
-
     }
 
 }

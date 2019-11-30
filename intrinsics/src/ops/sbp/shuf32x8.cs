@@ -26,6 +26,20 @@ namespace Z0
             return vor(x,y);
         }
 
+        [MethodImpl(Inline)]
+        public static Vector256<ushort> vshuf32x8(Vector256<ushort> a, Vector256<byte> spec)
+            => v16u(vshuf32x8(v8u(a), spec));
+
+        [MethodImpl(Inline)]
+        public static Vector256<uint> vshuf32x8(Vector256<uint> a, Vector256<byte> spec)
+            => v32u(vshuf32x8(v8u(a), spec));
+
+        [MethodImpl(Inline)]
+        public static Vector256<ulong> vshuf32x8(Vector256<ulong> a, Vector256<byte> spec)
+            => v64u(vshuf32x8(v8u(a), spec));
+
+
+
         const byte M70 = 0b01110000;
 
         const byte MF0 = 0b11110000;

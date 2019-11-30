@@ -19,6 +19,34 @@ namespace Z0
 
     partial class dinx
     {
+        [MethodImpl(Inline)]
+        public static void vcrosspack(Vector128<byte> x, Vector128<byte> y, out Vector128<byte> lo, out Vector128<byte> hi)
+        {
+            lo = vunpacklo(x,y);
+            hi = vunpackhi(x,y);
+        }
+
+        [MethodImpl(Inline)]
+        public static void vcrosspack(Vector128<ushort> x, Vector128<ushort> y, out Vector128<ushort> lo, out Vector128<ushort> hi)
+        {
+            lo = vunpacklo(x,y);
+            hi = vunpackhi(x,y);
+        }
+
+        /// <summary>
+        /// ([x0 x1 x2 x3], [y0 y1 y2 63]) -> ([x0 x1 y0 y1], [x2 x3 y2 y3])
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="lo"></param>
+        /// <param name="hi"></param>
+        [MethodImpl(Inline)]
+        public static void vcrosspack(Vector128<uint> x, Vector128<uint> y, out Vector128<uint> lo, out Vector128<uint> hi)
+        {
+            lo = vunpacklo(x,y);
+            hi = vunpackhi(x,y);
+        }
+
 
         /// <summary>
         /// ([x0 x1], [y0 y1]) -> ([x0 y0], [x1 y1])
@@ -29,6 +57,27 @@ namespace Z0
         /// <param name="hi"></param>
         [MethodImpl(Inline)]
         public static void vcrosspack(Vector128<ulong> x, Vector128<ulong> y, out Vector128<ulong> lo, out Vector128<ulong> hi)
+        {
+            lo = vunpacklo(x,y);
+            hi = vunpackhi(x,y);
+        }
+
+        [MethodImpl(Inline)]
+        public static void vcrosspack(Vector256<byte> x, Vector256<byte> y, out Vector256<byte> lo, out Vector256<byte> hi)
+        {
+            lo = vunpacklo(x,y);
+            hi = vunpackhi(x,y);
+        }
+
+        [MethodImpl(Inline)]
+        public static void vcrosspack(Vector256<ushort> x, Vector256<ushort> y, out Vector256<ushort> lo, out Vector256<ushort> hi)
+        {
+            lo = vunpacklo(x,y);
+            hi = vunpackhi(x,y);
+        }
+
+        [MethodImpl(Inline)]
+        public static void vcrosspack(Vector256<uint> x, Vector256<uint> y, out Vector256<uint> lo, out Vector256<uint> hi)
         {
             lo = vunpacklo(x,y);
             hi = vunpackhi(x,y);

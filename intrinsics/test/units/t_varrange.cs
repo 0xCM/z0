@@ -18,11 +18,11 @@ namespace Z0
             var n = n256;
             var width = n32;
 
-            var x0 = dinx.vparts(n,0,1,2,3,4,5,6,7);
+            var x0 = dinx.vparts(n, 0,1,2,3,4,5,6,(uint)7);
             var y0 = dinx.vduplicate(n0,width,x0);
             var z0 = dinx.vduplicate(n1,width,x0);
-            Claim.eq(y0, dinx.vparts(n,0,0,2,2,4,4,6,6));
-            Claim.eq(z0, dinx.vparts(n,1,1,3,3,5,5,7,7));            
+            Claim.eq(y0, dinx.vparts(n, 0,0,2,2,4,4,6,(uint)6));
+            Claim.eq(z0, dinx.vparts(n, 1,1,3,3,5,5,7,(uint)7));            
 
             var x1 = dinx.vparts(n,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
             var y1 = dinx.vduplicate(n0,width,x1);

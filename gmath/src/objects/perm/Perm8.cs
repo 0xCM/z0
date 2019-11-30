@@ -69,36 +69,37 @@ namespace Z0
     }
 
     [StructLayout(LayoutKind.Sequential, Size = 32)]
-    public struct Perm8Spec
+    public ref struct Perm8Spec
     {
-        Perm8[] terms;
+        Span<Perm8> terms;
 
-        public static readonly Perm8Spec Identity = new Perm8Spec(
-            Perm8.A, Perm8.B, Perm8.C, Perm8.D, 
-            Perm8.E, Perm8.F, Perm8.G, Perm8.H);
+        public static Perm8Spec Identity 
+        {
+            [MethodImpl(Inline)]
+            get => new Perm8Spec(Perm8.A, Perm8.B, Perm8.C, Perm8.D, Perm8.E, Perm8.F, Perm8.G, Perm8.H);
+        }
 
+        [MethodImpl(Inline)]
         Perm8Spec(params Perm8[] terms)
             => this.terms = terms;
 
-        public Perm8 this[Perm8 index]
+        [MethodImpl(Inline)]
+        Perm8Spec(Span<Perm8> terms)
+            => this.terms = terms;
+
+        public ref Perm8 this[Perm8 index]
         {
             [MethodImpl(Inline)]
-            get => terms[(int)index];
-            [MethodImpl(Inline)]
-            set => terms[(int)index] = value;
+            get => ref seek(ref head(terms), (int)index);
         }
 
         [MethodImpl(Inline)]
         public Perm8Spec Replicate()
-        {
-            var dst = new Perm8[8];
-            terms.CopyTo(dst);
-            return new Perm8Spec(dst);
-        }
+            => new Perm8Spec(terms.Replicate());
 
         [MethodImpl(Inline)]        
-        public Span<T> ToSpan<T>()
+        public Span<T> AsSpan<T>()
             where T : unmanaged
-                => terms.AsSpan().As<Perm8, T>();
+                => terms.As<Perm8, T>();
     }
 }

@@ -34,7 +34,7 @@ namespace Z0
         public void vspread_128x8u()
         {
             var src = ginx.vincrements<byte>(n128);
-            dinx.vspread(src, out var lo, out var hi);
+            dinx.vexpand(src, out var lo, out var hi);
             var loExpect = ginx.vincrements<ushort>(n128);
             var hiExpect = ginx.vincrements<ushort>(n128,8);
             Claim.eq(loExpect, lo);
@@ -49,7 +49,7 @@ namespace Z0
         public void vspread_128x8u_128x16u()
         {
             var src = ginx.vincrements<byte>(n128);            
-            dinx.vspread(src, out Vector128<ushort> lo, out Vector128<ushort> hi);
+            dinx.vexpand(src, out Vector128<ushort> lo, out Vector128<ushort> hi);
             for(var i=0; i<8; i++)
                 Claim.eq(src.Item(i), lo.Item(i));
             

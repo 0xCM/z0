@@ -246,13 +246,13 @@ namespace Z0
 
         /// <summary>
         /// __m256i _mm256_unpacklo_epi64 (__m256i a, __m256i b) VPUNPCKLQDQ ymm, ymm, ymm/m256
-        /// Forms the vector z := [vlo(x), vhi(y)] from vectors x and y
+        /// Forms the vector z := [vlo(x), vlo(y)] from vectors x and y
         /// </summary>
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vunpacklo(Vector256<ulong> x, Vector256<ulong> y)
-            => UnpackLow(x, y);
+            => UnpackLow(x,y);
 
         /// <summary>
         /// Forms the vector z := [vhi(x), vhi(y)] from vectors x and y

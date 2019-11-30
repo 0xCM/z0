@@ -17,14 +17,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vpermd<T>(Vector256<T> x, Perm8Spec spec)
             where T : unmanaged
-                => vperm8x32(x, vload(n256, in head(spec.ToSpan<uint>())));
+                => vperm8x32(x, vload(n256, in head(spec.AsSpan<uint>())));
 
         /// <summary>
         /// Applies a cross-lane permutation over 8 32-bit segments in the source vector as indicated by the perm spec
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The perm spec</param>
-        /// <typeparam name="T">The primal component type</typeparam>
+        /// <typeparam name="T">The vector component type</typeparam>
         public static Vector256<T> vperm8x32<T>(Vector256<T> x, Vector256<uint> spec)        
             where T : unmanaged
         {

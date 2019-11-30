@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vshufx32(Vector256<uint> src, Arrange4 spec)
+        public static Vector256<uint> vshuf4x32(Vector256<uint> src, Arrange4 spec)
             => Shuffle(src, (byte)spec);
     }
 

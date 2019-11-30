@@ -11,10 +11,19 @@ namespace Z0
     
     using static zfunc;    
     using static As;
-    using static aux;
     
     partial class ginx
     {
+        [MethodImpl(Inline)]
+        public static Vector128<T> vmov<T>(T src, int index, Vector128<T> dst)
+            where T : unmanaged
+                => dst.WithElement(index, src);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vmov<T>(T src, int index, Vector256<T> dst)
+            where T : unmanaged
+                => dst.WithElement(index, src);
+
         /// <summary>
         /// Loads a scalar into the first component of a 128-bit vector
         /// </summary>
@@ -23,7 +32,6 @@ namespace Z0
         public static Vector128<T> vmov<T>(N128 n, T src)
             where T : unmanaged
         {
-
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
@@ -46,7 +54,6 @@ namespace Z0
         public static Vector256<T> vmov<T>(N256 n, T src)
             where T : unmanaged
         {
-
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 

@@ -17,10 +17,10 @@ namespace Z0
         {
             var n = n256;
             var w = n32;
-            var x = dinx.vpartsi(n,0,1,2,3,4,5,6,7);
-            var y = dinx.vpartsi(n,8,9,A,B,C,D,E,F);
-            var e = dinx.vpartsi(n,0,9,2,B,4,D,6,F);
-            var o = dinx.vpartsi(n,8,1,A,3,C,5,E,7);
+            var x = dinx.vparts(n,0,1,2,3,4,5,6,7);
+            var y = dinx.vparts(n,8,9,A,B,C,D,E,F);
+            var e = dinx.vparts(n,0,9,2,B,4,D,6,F);
+            var o = dinx.vparts(n,8,1,A,3,C,5,E,7);
             var mEven = PatternData.blendspec(n,false,w);
             var mOdd = PatternData.blendspec(n,true,w);
             Claim.eq(e,ginx.vblend32x8(x,y,mEven));
@@ -127,15 +127,15 @@ namespace Z0
         public void vblend_8x32_256x32u_basecase()
         {
             var n = n256;
-            var x = dinx.vparts(n, 1, 3, 5, 7, 9,  11, 13, 15);
-            var y = dinx.vparts(n, 2, 4, 6, 8, 10, 12, 14, 16);
+            var x = dinx.vparts(n, 1, 3, 5, 7, 9,  11, 13, (uint)15);
+            var y = dinx.vparts(n, 2, 4, 6, 8, 10, 12, 14, (uint)16);
             var spec = Blend8x32.LLLLLLLL;
             var z = dinx.vblend8x32(x,y, spec);
             Claim.eq(z,x);
 
             spec = Blend8x32.LRLRLRLR;
             z = dinx.vblend8x32(x,y, spec);
-            Claim.eq(z,dinx.vparts(n,1,4,5,8,9,12,13,16));
+            Claim.eq(z, dinx.vparts(n, 1,4,5,8,9,12,13,(uint)16));
 
             spec = Blend8x32.RRRRRRRR;
             z = dinx.vblend8x32(x,y, spec);

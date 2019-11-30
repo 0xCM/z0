@@ -21,14 +21,10 @@ namespace Z0
             => vtestz_check<short>(n128);
 
         public void vtestz_128x16u()
-        {
-            vtestz_check<ushort>(n128);
-        }
+            => vtestz_check<ushort>(n128);
 
         public void vtestz_128x32i()
-        {
-            vtestz_check<int>(n128);
-        }
+            => vtestz_check<int>(n128);
 
         public void vtestz_g128x32u()
         {
@@ -67,9 +63,7 @@ namespace Z0
         }
 
         public void vtestz_256x16u()
-        {
-            vtestz_check<ushort>(n256);
-        }
+            => vtestz_check<ushort>(n256);
 
         public void vtestz_256x32i()
         {
@@ -82,14 +76,10 @@ namespace Z0
         }
 
         public void vtestz_256x64i()
-        {
-            vtestz_check<long>(n256);
-        }
+            => vtestz_check<long>(n256);
 
         public void vtestz_256x64u()
-        {
-            vtestz_check<ulong>(n256);
-        }
+            => vtestz_check<ulong>(n256);
 
         public void vtestz_256x32f()
         {
@@ -97,55 +87,8 @@ namespace Z0
         }
 
         public void vtestz_256x64f()
-        {
-            vtestz_check<double>(n256);
-        }
+            => vtestz_check<double>(n256);
 
 
-        public void vtestz_check<T>(N128 n = default)
-            where T : unmanaged
-        {
-            // Creates a mask corresponding to each off bit in the source vector
-            // thereby establishing the the context where testz will return true
-            // since all mask-identified source bits are disabled
-
-            for(var i=0; i< SampleSize; i++)
-            {
-                var x = Random.CpuVector<T>(n128);
-                var xbs = x.ToBitString();
-                var ybs = BitString.alloc(xbs.Length);
-                for(var j = 0; j<xbs.Length; j++)
-                    if(!xbs[j])
-                        ybs[j] = Bit.On;
-
-                var y = ybs.ToCpuVector<T>(n128);
-
-                var z = ginx.vtestz(x,y);
-                Claim.yea(z);
-            }
-        }
-
-        public void vtestz_check<T>(N256 n = default)
-            where T : unmanaged
-        {
-            // Creates a mask corresponding to each off bit in the source vector
-            // thereby establishing the the context where testz will return true
-            // since all mask-identified source bits are disabled
-
-            for(var i=0; i< SampleSize; i++)
-            {
-                var x = Random.CpuVector<T>(n256);
-                var xbs = x.ToBitString();
-                var ybs = BitString.alloc(xbs.Length);
-                for(var j = 0; j<xbs.Length; j++)
-                    if(!xbs[j])
-                        ybs[j] = Bit.On;
-
-                var y = ybs.ToCpuVector<T>(n256);
-
-                var z = ginx.vtestz(x,y);
-                Claim.yea(z);
-            }
-        }
     }
 }

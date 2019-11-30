@@ -36,15 +36,6 @@ namespace Z0
 
         protected static NatSeq<N2,N1,N3> n213 = default;
 
-        protected const byte z8 = 0;
-        
-        protected const ushort z16 = 0;
-
-        protected const uint z32 = 0;
-
-        protected const ulong z64 = 0;
-
-
     }
 
 

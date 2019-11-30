@@ -8,34 +8,40 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
     using static System.Runtime.Intrinsics.X86.Avx;
+    using static System.Runtime.Intrinsics.X86.Avx2;
     
     using static As;
     using static zfunc;    
 
     partial class dfp
     {
+        /// <summary>
+        /// __m256 _mm256_moveldup_ps (__m256 a) VMOVSLDUP ymm, ymm/m256
+        /// </summary>
+        /// <param name="even"></param>
+        /// <param name="src"></param>
+        /// <returns></returns>
         [MethodImpl(Inline)]
         public static Vector256<float> vduplicate(N0 even, Vector256<float> src)
             => DuplicateEvenIndexed(src);
 
+        /// <summary>
+        /// __m256 _mm256_movehdup_ps (__m256 a) VMOVSHDUP ymm, ymm/m256
+        /// </summary>
+        /// <param name="odd"></param>
+        /// <param name="src"></param>
+        /// <returns></returns>
         [MethodImpl(Inline)]
         public static Vector256<float> vduplicate(N1 odd, Vector256<float> src)
             => DuplicateOddIndexed(src);
-
 
         [MethodImpl(Inline)]
         public static Vector256<double> duplicate(N0 even, Vector256<double> src)
             => DuplicateEvenIndexed(src);
 
         [MethodImpl(Inline)]
-        public static Vector256<float> dupeven(Vector256<float> src)
-            => DuplicateEvenIndexed(src);
-
-        [MethodImpl(Inline)]
-        public static Vector256<float> dupodd(Vector256<float> src)
-            => DuplicateOddIndexed(src);
-
-
+        public static Vector256<double> duplicate(N1 odd, Vector256<double> src)
+            => DuplicateEvenIndexed(ShiftRightLogical(src.AsUInt64(),64).AsDouble());
     }
 
 }

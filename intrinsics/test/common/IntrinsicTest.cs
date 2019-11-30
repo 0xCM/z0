@@ -285,6 +285,225 @@ namespace Z0
 
         }
 
+        protected void vreverse_check<N,T>(N n = default, T t = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            if(typeof(N) == typeof(N128))
+                vreverse_check<T>(n128);
+            else if(typeof(N) == typeof(N256))
+                vreverse_check<T>(n256);
+            else
+                throw unsupported<N>();        
+        }
+
+        protected void vreverse_check<T>(N128 n)
+            where T : unmanaged
+        {
+            for(var i=0; i< SampleSize; i++)
+            {
+                var inc = ginx.vincrements<T>(n);
+                var dec = ginx.vdecrements<T>(n);
+                var y = ginx.vreverse(inc);
+                Claim.eq(dec, y);
+                Claim.eq(inc, ginx.vreverse(y));
+            }
+        }
+
+        protected void vreverse_check<T>(N256 n)
+            where T : unmanaged
+        {
+            for(var i=0; i< SampleSize; i++)
+            {
+                var inc = ginx.vincrements<T>(n);
+                var dec = ginx.vdecrements<T>(n);
+                var y = ginx.vreverse(inc);
+                Claim.eq(dec, y);
+                Claim.eq(inc, ginx.vreverse(y));
+            }
+        }
+
+        protected void vxor_blocks_check<T>(N256 n)
+            where T : unmanaged
+        {
+            var blocks = SampleSize;
+
+            var stats = VBlockStats.Calc<N256,T>(blocks);
+            Claim.eq(n/bitsize<T>(), stats.BlockLength);
+
+            var xb = Random.Blocks<T>(n, blocks);
+            var yb = Random.Blocks<T>(n, blocks);
+            var zb = DataBlocks.alloc<T>(n, blocks);
+            
+            vblock.xor(n, blocks, stats.BlockLength, in xb.Head, in yb.Head, ref zb.Head);
+            
+            for(var i=0; i<stats.CellCount; i++)
+                Claim.eq(gmath.xor(xb[i],yb[i]), zb[i]);
+
+            zb.Clear();
+            vblock.xor(xb, yb, zb);
+
+            for(var i=0; i<stats.CellCount; i++)
+                Claim.eq(gmath.xor(xb[i],yb[i]), zb[i]);
+        }
+
+        protected void vxor_check<T>(N128 n)
+            where T : unmanaged
+        {
+            for(var block = 0; block < SampleSize; block++)
+            {
+                var bX = Random.Blocks<T>(n);
+                var bY = Random.Blocks<T>(n);
+                var vX = bX.LoadVector();
+                var vY = bY.LoadVector();
+                
+                var bExpect = DataBlocks.alloc<T>(n);
+                for(var i=0; i< bExpect.CellCount; i++)
+                    bExpect[i] = gmath.xor(bX[i], bY[i]);
+                
+                var vExpect = bExpect.LoadVector();
+                var vActual = ginx.vxor(vX,vY);
+                Claim.eq(vExpect,vActual);
+            }
+        }
+
+        protected void vxor_check<T>(N256 n)
+            where T : unmanaged
+        {            
+            for(var block = 0; block < SampleSize; block++)
+            {
+                var bX = Random.Blocks<T>(n);
+                var bY = Random.Blocks<T>(n);
+                var vX = bX.LoadVector();
+                var vY = bY.LoadVector();
+
+                var bExpect = DataBlocks.alloc<T>(n);
+                for(var i=0; i< bExpect.CellCount; i++)
+                    bExpect[i] = gmath.xor(bX[i], bY[i]);
+                
+                var vExpect = bExpect.LoadVector();
+                var vActual = ginx.vxor(vX,vY);
+                Claim.eq(vExpect,vActual);
+                
+            }
+        } 
+
+        protected void vxor_blocks_check<T>(N128 n)
+            where T : unmanaged
+        {
+            var blocks = SampleSize;
+            var stats = VBlockStats.Calc<N128,T>(blocks);
+
+            var xb = Random.Blocks<T>(n, blocks);
+            var yb = Random.Blocks<T>(n, blocks);
+            var zb = DataBlocks.alloc<T>(n, blocks);
+            vblock.xor(n, blocks, stats.BlockLength, in xb.Head, in yb.Head, ref zb.Head);
+
+            for(var i=0; i<stats.CellCount; i++)
+                Claim.eq(gmath.xor(xb[i],yb[i]), zb[i]);
+            
+            zb.Clear();
+            vblock.xor(xb, yb, zb);
+            for(var i=0; i<stats.CellCount; i++)
+                Claim.eq(gmath.xor(xb[i],yb[i]), zb[i]);
+        }
+
+        protected void xor_gmath_bench<T>(N256 n, SystemCounter counter = default)
+            where T : unmanaged
+        {
+            var opname = $"xor_gmath_{moniker<T>()}";
+            var blocks = 8;
+            var blocklen = DataBlocks.blocklen<T>(n);
+            var xb = Random.Blocks<T>(n,blocks);
+            var yb = Random.Blocks<T>(n,blocks);
+            var zb = DataBlocks.alloc<T>(n,blocks);
+            var opcount = 0;
+            var cellcount = xb.CellCount;
+
+            counter.Start();
+            for(var i=0; i<CycleCount; i++, opcount += cellcount)
+            {                
+                for(var block = 0; block< blocks; block++)
+                for(var cell = 0; cell < blocklen; cell++)
+                    zb.Block(block)[cell] = gmath.xor(xb.Block(block)[cell], yb.Block(block)[cell]);                                    
+            }
+            counter.Stop();
+            Benchmark(opname, counter,opcount);
+        }
+
+        protected void xor_intrinsic_bench<T>(N256 n, SystemCounter counter = default)
+            where T : unmanaged
+        {
+            var opname = $"xor_ginx_{moniker<T>()}";
+            var blocks = 8;
+            var blocklen = DataBlocks.blocklen<T>(n);
+            var xb = Random.Blocks<T>(n,blocks);
+            var yb = Random.Blocks<T>(n,blocks);
+            var zb = DataBlocks.alloc<T>(n,blocks);
+            var opcount = 0;
+            var cellcount = xb.CellCount;
+
+            counter.Start();
+            for(var i=0; i<CycleCount; i++, opcount += cellcount)
+                vblock.xor(xb, yb, zb);
+            counter.Stop();
+            Benchmark(opname, counter,opcount);
+
+        }
+
+        protected void vxor_bench<T>(N256 n)
+            where T : unmanaged
+        {
+            xor_gmath_bench<T>(n);
+            xor_intrinsic_bench<T>(n);
+        }
+
+        protected void vtestz_check<T>(N128 n = default)
+            where T : unmanaged
+        {
+            // Creates a mask corresponding to each off bit in the source vector
+            // thereby establishing the the context where testz will return true
+            // since all mask-identified source bits are disabled
+
+            for(var i=0; i< SampleSize; i++)
+            {
+                var x = Random.CpuVector<T>(n128);
+                var xbs = x.ToBitString();
+                var ybs = BitString.alloc(xbs.Length);
+                for(var j = 0; j<xbs.Length; j++)
+                    if(!xbs[j])
+                        ybs[j] = Bit.On;
+
+                var y = ybs.ToCpuVector<T>(n128);
+
+                var z = ginx.vtestz(x,y);
+                Claim.yea(z);
+            }
+        }
+
+        protected void vtestz_check<T>(N256 n = default)
+            where T : unmanaged
+        {
+            // Creates a mask corresponding to each off bit in the source vector
+            // thereby establishing the the context where testz will return true
+            // since all mask-identified source bits are disabled
+
+            for(var i=0; i< SampleSize; i++)
+            {
+                var x = Random.CpuVector<T>(n256);
+                var xbs = x.ToBitString();
+                var ybs = BitString.alloc(xbs.Length);
+                for(var j = 0; j<xbs.Length; j++)
+                    if(!xbs[j])
+                        ybs[j] = Bit.On;
+
+                var y = ybs.ToCpuVector<T>(n256);
+
+                var z = ginx.vtestz(x,y);
+                Claim.yea(z);
+            }
+        }
+
     }
 
 }

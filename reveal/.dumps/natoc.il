@@ -1,11 +1,4 @@
-// 2019-11-29 12:55:50:789
-ITypeNat natwidth_8u()
-{
-    IL_0000: ldc.i4.0
-    IL_0001: call Z0.ITypeNat zfunc::natwidth<System.Byte>(System.Byte)
-    IL_0006: ret
-
-}
+// 2019-11-30 01:56:08:888
 ulong digits_encode_1_0()
 {
     IL_0000: ldc.i4.s 48

@@ -15,6 +15,7 @@ namespace Z0
 
     partial class dinx
     {
+
         /// <summary>
         /// Creates a target vector where each component is initialized with the same value
         /// </summary>

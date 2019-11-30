@@ -110,8 +110,7 @@ namespace Z0
 
         /// <summary>
         /// __m256i _mm256_shufflelo_epi16 (__m256i a, const int imm8)VPSHUFLW ymm, ymm/m256, imm8
-        /// Shuffles the lo 64 bits of each 128-bit lane as determined by the shuffle spec and leaves
-        /// the hi 64 bits of each 128-bit lane unchanged
+        /// Shuffles the lo 64 bits of each 128-bit lane as determined by the shuffle spec and leaves the hi 64 bits of each 128-bit lane unchanged
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>

@@ -19,15 +19,14 @@ namespace Z0
         static Vector128<T> swapspec<T>(N128 n, params Swap[] swaps)
             where T : unmanaged  
         {
-            var len = vlength<T>(n);
-            var src = DataBlocks.safeload(n, range(default, gmath.add(default, convert<T>(len - 1))).ToArray().AsSpan());
+            var src = ginx.vincrements<T>(n).ToSpan();
             var dst = src.Swap(swaps);
-            return ginx.vload(n, in dst.Head);
+            return ginx.vload(n, in head(src));
         }
 
         [MethodImpl(Inline)]
         public static Vector128<byte> vswap(Vector128<byte> src, params Swap[] swaps)
-            => vshuf16x8(src,swapspec<byte>(n128,swaps));
+            => vshuf16x8(src, swapspec<byte>(n128, swaps));
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
