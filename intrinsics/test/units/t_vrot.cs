@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
@@ -64,36 +61,6 @@ namespace Z0
         public void vrotr_128x64()
             => vrotr_check<ulong>(n128);
 
-        public void vrotl_128x8_bench()
-            => vrotl_bench<byte>(n128);
-
-        public void vrotl_128x16_bench()
-            => vrotl_bench<ushort>(n128);
-
-        public void vrotl_128x32_bench()
-            => vrotl_bench<uint>(n128);
-
-        public void vrotl_128x64_bench()
-            => vrotl_bench<ulong>(n128);
-
-        public void vrotr_128x8_bench()
-            => rotr_bench<byte>(n128);
-
-        public void vrotr_128x16_bench()
-        {
-            rotr_bench<ushort>(n128);
-        }
-
-        public void vrotr_128x32_bench()
-        {
-            rotr_bench<uint>(n128);
-        }
-
-        public void vrotr_128x64_bench()
-        {
-            rotr_bench<ulong>(n128);
-        }
-
         public void vrotl_256x8()
             => vrotl_check<byte>(n256);
 
@@ -118,15 +85,35 @@ namespace Z0
         public void vrotr_256x64()
             => vrotr_check<ulong>(n256);
 
+        public void vrotl_128x8_bench()
+            => vrotl_bench<byte>(n128);
+
+        public void vrotl_128x16_bench()
+            => vrotl_bench<ushort>(n128);
+
+        public void vrotl_128x32_bench()
+            => vrotl_bench<uint>(n128);
+
+        public void vrotl_128x64_bench()
+            => vrotl_bench<ulong>(n128);
+
+        public void vrotr_128x8_bench()
+            => rotr_bench<byte>(n128);
+
+        public void vrotr_128x16_bench()
+            => rotr_bench<ushort>(n128);
+
+        public void vrotr_128x32_bench()
+            => rotr_bench<uint>(n128);
+
+        public void vrotr_128x64_bench()
+            => rotr_bench<ulong>(n128);
+
         public void vrotl_256x8_bench()
-        {
-            vrotl_bench<byte>(n256);
-        }
+            => vrotl_bench<byte>(n256);
 
         public void vrotl_256x16_bench()
-        {
-            vrotl_bench<ushort>(n256);
-        }
+            => vrotl_bench<ushort>(n256);
 
         public void vrotl_256x32_bench()
         {
@@ -139,9 +126,7 @@ namespace Z0
         }
 
         public void vrotr_256x8_bench()
-        {
-            vrotr_bench<byte>(n256);
-        }
+            => vrotr_bench<byte>(n256);
 
         public void vrotr_256x16_bench()
         {
@@ -160,71 +145,7 @@ namespace Z0
             vrotr_bench<ulong>(n256);
         }
 
-        void vrotl_check<T>(N128 n)
-            where T : unmanaged
-        {
-            var offMin = 2;
-            var offMax = bitsize<T>() - 2;
-            for(var sample=0; sample<SampleSize; sample++)
-            {
-                var x = Random.CpuVector<T>(n128);
-                var offset = Random.Next(offMin,offMax);
-                var result = ginx.vrotl(x,(byte)offset).ToSpan();
-                var expect = x.ToSpan().Map(src => gbits.rotl(src, offset));
-                for(var i=0; i<expect.Length; i++)
-                    Claim.eq(expect[i],result[i]);
-            }
-        }
-
-        void vrotl_check<T>(N256 n)
-            where T : unmanaged
-        {
-            byte offMin = 2;
-            byte offMax = (byte)(bitsize<T>() - 2);
-            for(var sample=0; sample<SampleSize; sample++)
-            {
-                var x = Random.CpuVector<T>(n256);
-                var offset = Random.Next(offMin,offMax);
-                var result = ginx.vrotl(x,offset).ToSpan();
-                var expect = x.ToSpan().Map(src => gbits.rotl(src, (int)offset));
-                for(var i=0; i<expect.Length; i++)
-                    Claim.eq(expect[i],result[i]);
-            }
-        }
-
-        void vrotr_check<T>(N256 n)
-            where T : unmanaged
-        {
-            byte offMin = 2;
-            byte offMax = (byte)(bitsize<T>() - 2);
-            for(var sample=0; sample<SampleSize; sample++)
-            {
-                var x = Random.CpuVector<T>(n256);
-                var offset = Random.Next(offMin,offMax);
-                var result = ginx.vrotr(x,offset).ToSpan();
-                var expect = x.ToSpan().Map(src => gbits.rotr(src, (int)offset));
-                for(var i=0; i<expect.Length; i++)
-                    Claim.eq(expect[i],result[i]);
-            }
-        }
-
-        void vrotr_check<T>(N128 n)
-            where T : unmanaged
-        {
-            byte offMin = 2;
-            byte offMax = (byte)(bitsize<T>() - 2);
-            for(var sample=0; sample<SampleSize; sample++)
-            {
-                var x = Random.CpuVector<T>(n128);
-                var offset = Random.Next(offMin,offMax);
-                var result = ginx.vrotr(x,offset).ToSpan();
-                var expect = x.ToSpan().Map(src => gbits.rotr(src, (int)offset));
-                for(var i=0; i<expect.Length; i++)
-                    Claim.eq(expect[i],result[i]);
-            }
-        }
-
-        void vrotl_bench<T>(N256 n)
+        protected void vrotl_bench<T>(N256 n)
             where T : unmanaged
         {
             var bz = bitsize<T>();
@@ -247,7 +168,7 @@ namespace Z0
             Collect((opcount,sw,opname));
         }
 
-        void rotr_bench<T>(N128 n)
+        protected void rotr_bench<T>(N128 n)
             where T : unmanaged
         {
             var bz = bitsize<T>();
@@ -270,7 +191,7 @@ namespace Z0
             Collect((opcount,sw,opname));
         }
 
-        void vrotr_bench<T>(N256 n)
+        protected void vrotr_bench<T>(N256 n)
             where T : unmanaged
         {
             var bz = bitsize<T>();
@@ -293,7 +214,7 @@ namespace Z0
             Collect((opcount,sw,opname));
         }
 
-        void vrotl_bench<T>(N128 n)
+        protected void vrotl_bench<T>(N128 n)
             where T : unmanaged
         {
             var bz = bitsize<T>();
@@ -315,7 +236,6 @@ namespace Z0
             }
             Collect((opcount,sw,opname));
         }
-
     }
 
 }

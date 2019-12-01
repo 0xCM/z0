@@ -18,9 +18,9 @@ namespace Z0
         public static void VerifyUnaryOp<T>(IPolyrand random, int blocks, Vector128UnaryOp<T> inXOp, Func<T,T> primalOp)
             where T : unmanaged
         {
-            var blocklen = Block128<T>.BlockLength;                     
             
             var src = random.ConstBlocks<T>(n128,blocks);
+            var blocklen = src.BlockLength;
             Claim.eq(blocks*blocklen,src.CellCount);
                         
             var expect = DataBlocks.alloc<T>(n128,blocks);
@@ -44,8 +44,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                vstore(vExpect, ref expect.BlockSeek(block));
-                vstore(vActual, ref actual.BlockSeek(block));
+                vstore(vExpect, ref expect.BlockRef(block));
+                vstore(vActual, ref actual.BlockRef(block));
             }
             Claim.eq(expect, actual);
         }
@@ -79,8 +79,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                vstore(vExpect, ref expect.BlockSeek(block));
-                vstore(vActual, ref actual.BlockSeek(block));
+                vstore(vExpect, ref expect.BlockRef(block));
+                vstore(vActual, ref actual.BlockRef(block));
             }
             Claim.eq(expect, actual);
         }
@@ -89,9 +89,9 @@ namespace Z0
         public static void VerifyBinOp<T>(IPolyrand random, int blocks, Vector128BinOp<T> inXOp, Func<T,T,T> primalOp)
             where T : unmanaged
         {
-            var blocklen = Block128<T>.BlockLength;                     
             
             var lhs = random.ConstBlocks<T>(n128,blocks);
+            var blocklen = lhs.BlockLength;
             Claim.eq(blocks*blocklen,lhs.CellCount);
             
             var rhs = random.ConstBlocks<T>(n128,blocks);
@@ -119,8 +119,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                vstore(vExpect, ref expect.BlockSeek(block));
-                vstore(vActual, ref actual.BlockSeek(block));
+                vstore(vExpect, ref expect.BlockRef(block));
+                vstore(vActual, ref actual.BlockRef(block));
             }
             Claim.eq(expect, actual);
         }
@@ -159,8 +159,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                vstore(vExpect, ref expect.BlockSeek(block));
-                vstore(vActual, ref actual.BlockSeek(block));
+                vstore(vExpect, ref expect.BlockRef(block));
+                vstore(vActual, ref actual.BlockRef(block));
             }
             Claim.eq(expect, actual);
         }

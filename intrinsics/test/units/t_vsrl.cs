@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
@@ -61,52 +59,6 @@ namespace Z0
 
         public void vsrl_256x64u_bench()
             => vsrl_bench<ulong>(n256);
-
-        protected void vsrl_check<T>(N128 n)
-            where T : unmanaged
-        {
-
-            for(var i=0; i< SampleSize; i++)
-            {
-                var src = Random.CpuVector<T>(n);
-                var offset = Random.Next<byte>(2,7);
-                var dst = ginx.vsrl(src,offset);
-                for(var j=0; j<dst.Length(); j++)
-                {
-                    var x = vcell(dst, j);
-                    var y = vcell(src, j);
-                    Claim.eq(x, gmath.srl(y,offset));
-                }
-            }
-        }
-
-        protected void vsrl_check<T>(N256 n)
-            where T : unmanaged
-        {
-
-            for(var i=0; i< SampleSize; i++)
-            {
-                var src = Random.CpuVector<T>(n);
-                var offset = Random.Next<byte>(2,7);
-                var vOffset = ginx.vscalar(convert<byte,T>(offset));
-
-                var a = ginx.vsrl(src, offset);
-                var b = ginx.vsrl(src, vOffset);
-                Claim.eq(a,b);
-
-                for(var j=0; j<a.Length()/2; j++)
-                {
-                    var x = vcell(ginx.vlo(a), j);
-                    var y = vcell(ginx.vlo(src), j);
-                    Claim.eq(x, gmath.srl(y,offset));
-
-                    x = vcell(ginx.vhi(a), j);
-                    y = vcell(ginx.vhi(src), j);
-                    Claim.eq(x, gmath.srl(y,offset));
-
-                }
-            }
-        }
 
         protected void vsrl_bench<T>(N128 n)
             where T : unmanaged

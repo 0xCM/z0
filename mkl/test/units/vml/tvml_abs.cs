@@ -15,7 +15,7 @@ namespace Z0.Mkl.Test
         public void vAbsF32()
         {
             var src = Random.VectorBlock<float>(Pow2.T08);
-            var dst1 = src.Replicate(true);
+            var dst1 = src.Replicate();
             mkl.abs(src, ref dst1);
             var dst2 = src.Replicate();
             mathspan.fabs(src,dst2.Unblocked);
@@ -25,7 +25,7 @@ namespace Z0.Mkl.Test
         public void vAbsF64()
         {
             var src = Random.VectorBlock<double>(Pow2.T08);
-            var dst1 = src.Replicate(true);
+            var dst1 = src.Replicate();
             mkl.abs(src, ref dst1);
             var dst2 = src.Replicate();
             mathspan.fabs(src,dst2.Unblocked);

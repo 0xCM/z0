@@ -164,5 +164,6 @@ namespace Z0
         public static Vector256<byte> vcompact(Vector256<uint> x0, Vector256<uint> x1, Vector256<uint> x2, Vector256<uint> x3, out Vector256<byte> dst)            
             => dst = vcompact(x0,x1,x2,x3);
 
+
     }
 }

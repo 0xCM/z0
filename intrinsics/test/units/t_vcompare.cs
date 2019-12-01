@@ -59,32 +59,5 @@ namespace Z0
 
         public void cmp_gt_256x64u()
             => cmp_gt_check<ulong>(n256);
-
-
-        void Report<T>(Block128<T> x, Block128<T> y, Vector128<T> expect, Vector128<T> actual, Vector128<T> result)
-            where T : unmanaged
-        {
-            var pad = 5;
-            Trace("left", x.FormatList(pad:pad));
-            Trace("right", y.FormatList(pad:pad));
-            Trace("expect", expect.FormatList(pad:pad));
-            Trace("actual", actual.FormatList(pad:pad));
-            Trace("result", result.FormatList(pad:pad));
-
-        }
-
-        void Report<T>(Block256<T> x, Block256<T> y, Vector256<T> expect, Vector256<T> actual, Vector256<T> result)
-            where T : unmanaged
-        {
-            var pad = 5;
-            Trace("left", x.FormatList(pad:pad));
-            Trace("right", y.FormatList(pad:pad));
-            Trace("expect", expect.FormatList(pad:pad));
-            Trace("actual", actual.FormatList(pad:pad));
-            Trace("result", result.FormatList(pad:pad));
-
-        }
-
     }
-
 }

@@ -44,7 +44,7 @@ namespace Z0
         {
             var count = zb.BlockCount;
             for(var i=0; i< count; i++)
-                vstore(ginx.vperm8x32(xb.LoadVector(i), yb.LoadVector(i)), ref zb.BlockSeek(i));                             
+                vstore(ginx.vperm8x32(xb.LoadVector(i), yb.LoadVector(i)), ref zb.BlockRef(i));                             
         } 
 
         [MethodImpl(Inline)]
@@ -53,7 +53,7 @@ namespace Z0
         {
             var count = zb.BlockCount;
             for(var i=0; i< count; i++)
-                vstore(ginx.vperm2x128(xb.LoadVector(i), yb.LoadVector(i), spec), ref zb.BlockSeek(i));                             
+                vstore(ginx.vperm2x128(xb.LoadVector(i), yb.LoadVector(i), spec), ref zb.BlockRef(i));                             
         } 
 
     }

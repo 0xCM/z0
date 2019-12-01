@@ -145,6 +145,15 @@ partial class zfunc
         => ref head(src.AsUInt32());
 
     /// <summary>
+    /// Presents the span head as a reference to a signed 32-bit integer
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly int head32i(ReadOnlySpan<byte> src)
+        => ref head(src.AsInt32());
+
+    /// <summary>
     /// Presents the span head as a reference to an unsigned 32-bit integer
     /// </summary>
     /// <param name="src">The source span</param>
@@ -179,6 +188,15 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static ref readonly ulong head64(ReadOnlySpan<byte> src)
         => ref head(src.AsUInt64());
+
+    /// <summary>
+    /// Presents the span head as a reference to a signed 64-bit integer
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly long head64i(ReadOnlySpan<byte> src)
+        => ref head(src.AsInt64());
 
     /// <summary>
     /// Presents the span head as a reference to an unsigned 64-bit integer

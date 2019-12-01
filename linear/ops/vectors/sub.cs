@@ -44,7 +44,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            var dst = x.Replicate(true);
+            var dst = x.Replicate();
             sub(x,y, ref dst);
             return dst;
         }
@@ -74,7 +74,7 @@ namespace Z0
         public static VBlock256<T> sub<T>(VBlock256<T> x, VBlock256<T> y)
             where T : unmanaged
         {                
-            var z = x.Replicate(true);
+            var z = x.Replicate();
             return sub(x,y,ref z);
         }
     }

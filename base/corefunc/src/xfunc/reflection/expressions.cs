@@ -82,7 +82,7 @@ namespace Z0
                 : selector.Body;
 
         /// <summary>
-        /// Extracts the <see cref="PropertyInfo"/> for the property referenced by a <see cref="MemberExpression"/>
+        /// Extracts the property info for the property referenced by an expression delegate
         /// </summary>
         /// <typeparam name="P">The property type</typeparam>
         /// <param name="selector">The selecting expression that identifies the desired member</param>
@@ -90,7 +90,7 @@ namespace Z0
             => cast<PropertyInfo>(cast<MemberExpression>(selector.SelectionSubject()).Member);
 
         /// <summary>
-        /// Extracts the <see cref="PropertyInfo"/> for the property referenced by a <see cref="MemberExpression"/>
+        /// Extracts the property info for the property referenced by an expression delegate
         /// </summary>
         /// <typeparam name="T">The declaring type</typeparam>
         /// <typeparam name="P">The property type</typeparam>
@@ -99,7 +99,7 @@ namespace Z0
             => cast<PropertyInfo>(cast<MemberExpression>(selector.SelectionSubject()).Member);
 
         /// <summary>
-        /// Determines the name of the property as identified by the selector
+        /// Determines the name of the property as identified by an expression delegate
         /// </summary>
         /// <typeparam name="T">The declaring type</typeparam>
         /// <typeparam name="P">The property type</typeparam>
@@ -108,7 +108,7 @@ namespace Z0
             => selector.GetProperty().Name;
 
         /// <summary>
-        /// Extracts the <see cref="FieldInfo"/> for the property referenced by a <see cref="MemberExpression"/>
+        /// Extracts the field info for the field referenced by an expression delegate
         /// </summary>
         /// <typeparam name="F">The field type</typeparam>
         /// <param name="selector">The selecting expression that identifies the desired member</param>
@@ -116,7 +116,7 @@ namespace Z0
             => cast<FieldInfo>(cast<MemberExpression>(selector.SelectionSubject()).Member);
 
         /// <summary>
-        /// Extracts the <see cref="PropertyInfo"/> for the property referenced by a <see cref="MemberExpression"/>
+        /// Extracts the field info for the field referenced by an expression delegate
         /// </summary>
         /// <typeparam name="T">The declaring type</typeparam>
         /// <typeparam name="P">The property type</typeparam>
@@ -125,7 +125,7 @@ namespace Z0
             => cast<FieldInfo>(cast<MemberExpression>(selector.SelectionSubject()).Member);
 
         /// <summary>
-        /// Extracts the <see cref="MemberInfo"/> for the member referenced by a <see cref="MemberExpression"/>
+        /// Extracts the member info for the member referenced by an expression delegate
         /// </summary>
         /// <typeparam name="T">The first selector parameter</typeparam>
         /// <typeparam name="M">The member type</typeparam>
@@ -134,7 +134,7 @@ namespace Z0
             => cast<MemberInfo>(cast<MemberExpression>(selector.Body).Member);
 
         /// <summary>
-        /// Extracts the <see cref="ValueMember"/> for the member referenced by a <see cref="MemberExpression"/>
+        /// Extracts the <see cref="ValueMember"/> for the member referenced by a an expression delegate
         /// </summary>
         /// <typeparam name="T">The member selector</typeparam>
         /// <typeparam name="M">The member type</typeparam>
@@ -157,7 +157,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Extracts the name of the value member referenced by a <see cref="MemberExpression"/>
+        /// Extracts the name of the value member referenced by an expression delegate
         /// </summary>
         /// <typeparam name="T">The member selector</typeparam>
         /// <typeparam name="M">The member type</typeparam>
@@ -166,7 +166,7 @@ namespace Z0
             => selector.GetValueMember().Name;
 
         /// <summary>
-        /// Extracts the <see cref="MethodInfo"/> for the function referenced by a <see cref="MethodCallExpression"/>
+        /// Extracts the method info for the function referenced by an expression delegate
         /// </summary>
         /// <typeparam name="T">The function return type</typeparam>
         /// <param name="selector">The call expression</param>
@@ -181,7 +181,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Extracts the <see cref="MethodInfo"/> for the function referenced by a <see cref="MethodCallExpression"/>
+        /// Extracts the method info for the function referenced by an expression delegate
         /// </summary>
         /// <typeparam name="T1">The first function argument</typeparam>
         /// <typeparam name="T2">The function return type</typeparam>
@@ -190,7 +190,7 @@ namespace Z0
             => cast<MethodCallExpression>(selector.Body).Method;
 
         /// <summary>
-        /// Extracts the <see cref="MethodInfo"/> for the function referenced by a <see cref="MethodCallExpression"/>
+        /// Extracts the method info for the function referenced by an expression delegate
         /// </summary>
         /// <typeparam name="T1">The first function argument</typeparam>
         /// <typeparam name="T2">The second function argument</typeparam>
@@ -201,7 +201,7 @@ namespace Z0
             => cast<MethodCallExpression>(selector.Body).Method;
 
         /// <summary>
-        /// Extracts the <see cref="MethodInfo"/> for the function referenced by a <see cref="MethodCallExpression"/>
+        /// Extracts the method info for the function referenced by an expression delegate
         /// </summary>
         /// <typeparam name="T1">The first function argument</typeparam>
         /// <typeparam name="T2">The second function argument</typeparam>
@@ -212,7 +212,7 @@ namespace Z0
             => cast<MethodCallExpression>(selector.Body).Method;
 
         /// <summary>
-        /// Extracts the <see cref="MethodInfo"/> for the action referenced by a <see cref="MethodCallExpression"/>
+        /// Extracts the method for the action referenced by an an expression delegate
         /// </summary>
         /// <typeparam name="T">The action argument</typeparam>
         /// <param name="selector">Specifies the call expression</param>
@@ -220,7 +220,7 @@ namespace Z0
             => cast<MethodCallExpression>(selector.Body).Method;
 
         /// <summary>
-        /// Extracts the <see cref="MethodInfo"/> for the action referenced by a <see cref="MethodCallExpression"/>
+        /// Extracts the method info for the action referenced by an expression delegate
         /// </summary>
         /// <typeparam name="T1">The first action argument</typeparam>
         /// <typeparam name="T2">The second action argument</typeparam>
@@ -229,7 +229,7 @@ namespace Z0
             => cast<MethodCallExpression>(selector.Body).Method;
 
         /// <summary>
-        /// Extracts the <see cref="MethodInfo"/> for the action referenced by a <see cref="MethodCallExpression"/>
+        /// Extracts the method info for the action referenced by an expression delegate
         /// </summary>
         /// <typeparam name="T1">The first action argument</typeparam>
         /// <typeparam name="T2">The second action argument</typeparam>
@@ -239,7 +239,7 @@ namespace Z0
             => cast<MethodCallExpression>(selector.Body).Method;
 
         /// <summary>
-        /// Extracts the <see cref="MethodInfo"/> for the action referenced by a <see cref="MethodCallExpression"/>
+        /// Extracts the method info for the action referenced by an expression delegate
         /// </summary>
         /// <typeparam name="T1">The first action argument</typeparam>
         /// <typeparam name="T2">The second action argument</typeparam>
@@ -251,24 +251,16 @@ namespace Z0
             => cast<MethodCallExpression>(selector.Body).Method;
 
         /// <summary>
-        /// Returns the expression if it is a logical conjunction and None otherwise
+        /// Extracts property info from a member expression, if possbile, and otherwise returns null
         /// </summary>
         /// <param name="x">The expression to examine</param>
-        static Option<X> TryGetConjunction<X>(this X x)
-            where X : Expression
-            => x.NodeType == ExpressionType.AndAlso ? x : none<X>();
-
-        /// <summary>
-        /// Returns the expression if it is a logical disjunction and None otherwise
-        /// </summary>
-        /// <param name="x">The expression to examine</param>
-        static Option<X> TryGetDisjunction<X>(this X x)
-            where X : Expression
-                => x.NodeType == ExpressionType.OrElse ? x : none<X>();
-
         public static PropertyInfo GetAccessedProperty(this Expression x)
             => cast<PropertyInfo>(cast<MemberExpression>(x)?.Member);
 
+        /// <summary>
+        /// Extracts member info from an expression, if possbile; otherwise returns none
+        /// </summary>
+        /// <param name="x">The expression to examine</param>
         public static Option<MemberInfo> TryGetAccessedMember(this Expression X)
         {
             var M = tryCast<MemberExpression>(X).ValueOrDefault();
@@ -278,9 +270,10 @@ namespace Z0
                 return tryCast<LambdaExpression>(X).Select(y => y.Body.TryGetAccessedMember().ValueOrDefault());
         }
 
-        static object GetConstant(this Expression x)
-            => cast<ConstantExpression>(x)?.Value;
-
+        /// <summary>
+        /// Extracts property info from an expression, if possbile; otherwise returns none
+        /// </summary>
+        /// <param name="x">The expression to examine</param>
         public static Option<PropertyInfo> TryGetAccesedProperty(this Expression x)
         {
             var candiate = tryCast<MemberExpression>(x).Select(GetAccessedProperty);
@@ -330,7 +323,6 @@ namespace Z0
         /// <param name="x">The expression to examine</param>
         public static bool IsMemberAccess(this Expression x)
             => x.NodeType == ExpressionType.MemberAccess;
-
 
         /// <summary>
         /// Tests whether the test expression is a function call
@@ -517,5 +509,28 @@ namespace Z0
             var callResult = XPR.Call(instance, method, x1, x2, x3);
             return XPR.Lambda<Func<X1, X2, X3, X4, Y>>(callResult, x1, x2, x3, x4).Compile();
         }
+
+        /// <summary>
+        /// Returns the expression if it is a logical conjunction and None otherwise
+        /// </summary>
+        /// <param name="x">The expression to examine</param>
+        static Option<X> TryGetConjunction<X>(this X x)
+            where X : Expression
+            => x.NodeType == ExpressionType.AndAlso ? x : none<X>();
+
+        /// <summary>
+        /// Returns the expression if it is a logical disjunction and None otherwise
+        /// </summary>
+        /// <param name="x">The expression to examine</param>
+        static Option<X> TryGetDisjunction<X>(this X x)
+            where X : Expression
+                => x.NodeType == ExpressionType.OrElse ? x : none<X>();
+
+        /// <summary>
+        /// Extracts the value from a constant expression or returns 
+        /// </summary>
+        /// <param name="x">The expression to examine</param>
+        static object GetConstant(this Expression x)
+            => cast<ConstantExpression>(x)?.Value;
     }
 }

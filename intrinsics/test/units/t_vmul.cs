@@ -5,17 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.IO;
     
     using static zfunc;
 
     public class tv_mul : IntrinsicTest<tv_mul>
     {
-
         public void mul256_u64()
         {
             var n = n256;
@@ -27,7 +23,6 @@ namespace Z0
             }
         }
 
-
         public void umul64_check()
         {
             for(var i=0; i< SampleSize; i++)
@@ -38,8 +33,6 @@ namespace Z0
                 Claim.eq(z, Math128.mul(xi,yi));
             }
         }
-
-
 
     }
 }

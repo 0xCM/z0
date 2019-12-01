@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static zfunc;
- 
+
     public class t_vcompact : IntrinsicTest<t_vcompact>
     {
-
         public void vcompact_basecase_128()
         {
             var n = n128;
@@ -28,20 +27,7 @@ namespace Z0
             Claim.eq(abcdExpect, abcdActual);
             
         }
-
-
-        public void vunpack_basecase()
-        {
-            var n = n256;
-            var a = ginx.vincrements<ulong>(n);
-            var b = ginx.vincrements<ulong>(n,4);
-            var c = dinx.vunpacklo(a,b);
-            Trace(a.Format());
-            Trace(b.Format());
-            Trace($"lo", dinx.vunpacklo(a,b).Format());
-            Trace($"hi", dinx.vunpackhi(a,b).Format());
-        }
-
+        
         public void vcompact_basecase_256()
         {
             var n = n256;

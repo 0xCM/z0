@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.IO;
     using System.Runtime.Intrinsics;
     
     using static zfunc;
@@ -14,14 +13,6 @@ namespace Z0
     
     public class t_vshuffle : IntrinsicTest<t_vshuffle>
     {        
-
-        static Vector256<byte> to8u(Vector256<ushort> src)
-        {
-            var xs = src.ToSpan();
-            var i = 0;
-            return perm16x16_spec(xs[i++],xs[i++],xs[i++],xs[i++],xs[i++],xs[i++],xs[i++],xs[i++],xs[i++],xs[i++],xs[i++],xs[i++],xs[i++],xs[i++],xs[i++],xs[i]);
-        }
-
         static ReadOnlySpan<byte> perm_add_data 
             => new byte[32]{0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,14,14,15,15,16};
 
@@ -92,7 +83,6 @@ namespace Z0
 
             return dinx.vparts(n256,
                 b0,b1, b2,b3, b4,b5, b6,b7, b8,b9, bA,bB, bC,bD, bE,bF, b10,b11, b12,b13, b14,b15, b16,b17, b18,b19, b1A,b1B, b1C,b1D, b1E,b1F);
-
         }
 
         public static Vector256<ushort> vshuf16x16(Vector256<ushort> a, Vector256<ushort> spec)
@@ -102,18 +92,10 @@ namespace Z0
         {
             var x = ginx.vincrements<ushort>(n256).AsByte();            
             var spec = perm16x16_spec(15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0);
-            var y = dinx.vshuf32x8(x,spec);
-            
-            Trace(x.Format());
-            Trace(spec.Format());
-            Trace(y.Format());
-            
+            var y = dinx.vshuf32x8(x,spec);                    
             var z = broadcast(ginx.vincrements<ushort>(n256), out Vector256<byte> _);
-            Trace(z.Format());
-                    
         }
     
-
         public void shuffle_16x8_128x8u_basecase()
         {
             var n = n128;
@@ -154,13 +136,13 @@ namespace Z0
         public void vperm_4x32_128x32u_basecase()
         {
             var n = n128;
-            var src = dinx.vparts(1u,2u,3u,4u);
+            var src = dinx.vparts(n128,1,2,3,4);
             var spec = Perm4.ABCD;
-            var y = dinx.vparts(4u,3u,2u,1u);
+            var y = dinx.vparts(n128,4,3,2,1);
             var x = dinx.vperm4x32(src, Perm4.ABCD);
             Claim.eq(x, src);
 
-            y = dinx.vparts(4u,3u,2u,1u);
+            y = dinx.vparts(n128,4,3,2,1);
             spec = Perm4.DCBA;
             x = dinx.vperm4x32(src,spec);
             Claim.eq(x, y); 
@@ -193,12 +175,10 @@ namespace Z0
 
         }
 
-
-        public void vperm_4x16()
+        public void vperm_4x16_basecase()
         {
             var id = dinx.vparts(n128,0,1,2,3,6,7,8,9);
             Claim.eq(dinx.vperm4x16(dinx.vparts(n128,0,1,2,3,6,7,8,9), Perm4.ADCB, Perm4.ADCB), dinx.vparts(n128,0,3,2,1,6,9,8,7));
-
         }
 
         public void vperm_4x32_128x32u()

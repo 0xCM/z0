@@ -21,29 +21,17 @@ namespace Z0
 
         public static N64 N => default;
 
-        /// <summary>
-        /// The number of cells in the block
-        /// </summary>
-        public static int BlockLength => blocklen<T>(N);
-
-        /// <summary>
-        /// The size, in bytes, of a block 
-        /// </summary>
-        /// <typeparam name="T">The primitive type</typeparam>
-        /// <remarks>Should always be 8 irrespective of the cell type</remarks>
-        public static int BlockSize =>  Unsafe.SizeOf<T>() * BlockLength; 
-
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(in Block64<T> src)
             => src.data;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T> (in Block64<T> src)
-            => src.ReadOnly();
+        public static implicit operator ReadOnlySpan<T>(in Block64<T> src)
+            => src.data;
 
         [MethodImpl(Inline)]
         public static implicit operator ConstBlock64<T>(in Block64<T> src)
-            => new ConstBlock64<T>(src);
+            => new ConstBlock64<T>(src.data);
 
         [MethodImpl(Inline)]
         public static bool operator == (in Block64<T> lhs, in Block64<T> rhs)
@@ -55,9 +43,7 @@ namespace Z0
                     
         [MethodImpl(Inline)]
         internal Block64(Span<T> src)
-        {
-            this.data = src;
-        }
+            => this.data = src;
 
         /// <summary>
         /// The leading storage cell
@@ -96,12 +82,48 @@ namespace Z0
         }
 
         /// <summary>
+        /// The number of allocated bits
+        /// </summary>
+        public int BitCount 
+        {
+            [MethodImpl(Inline)]
+            get => bitcount<T>(CellCount);
+        }
+
+        /// <summary>
+        /// The number of allocated bytes
+        /// </summary>
+        public int ByteCount 
+        {
+            [MethodImpl(Inline)]
+            get => bytecount<T>(CellCount);
+        }
+
+        /// <summary>
+        /// The number of cells in a block
+        /// </summary>
+        public int BlockLength
+        {
+            [MethodImpl(Inline)]
+            get => blocklen<T>(N);
+        }
+
+        /// <summary>
         /// The number of covered blocks
         /// </summary>
         public int BlockCount 
         {
             [MethodImpl(Inline)]
-            get => data.Length / BlockLength; 
+            get => blockcount<T>(N,CellCount);
+        }
+
+        /// <summary>
+        /// The bit width of a cell
+        /// </summary>
+        public int CellWidth 
+        {
+            [MethodImpl(Inline)]
+            get => cellwidth<T>();
         }
 
         /// <summary>
@@ -131,15 +153,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref T BlockSeek(int index)
             => ref Unsafe.Add(ref Head, index*BlockLength); 
-
-        /// <summary>
-        /// Extracts a block-relative slice
-        /// </summary>
-        /// <param name="offset">The block-relative offset at which to begin extraction</param>
-        /// <param name="count">The number of blocks to extract</param>
-        [MethodImpl(Inline)]
-        public Block64<T> BlockSlice(int offset, int count)
-            => new Block64<T>(data.Slice(offset*BlockLength, BlockLength * count));
 
         [MethodImpl(Inline)]
         public Span<T> Slice(int offset)

@@ -173,8 +173,8 @@ namespace Z0
         public string Format(char? delimiter = null)
             => data.FormatList(delimiter ?? AsciSym.Comma);    
 
-        public VBlock256<N,T> Replicate(bool structureOnly = false)
-            => new VBlock256<N,T>(data.Replicate(structureOnly));
+        public VBlock256<N,T> Replicate()
+            => new VBlock256<N,T>(data.Replicate());
 
         public VBlock256<T> Denaturalize()
             => data;

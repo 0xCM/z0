@@ -11,36 +11,76 @@ namespace Z0
     
     partial class math
     {        
+        /// <summary>
+        /// Computes b := a % m
+        /// </summary>
+        /// <param name="a">The source value</param>
+        /// <param name="m">The modulus</param>
         [MethodImpl(Inline)]
-        public static sbyte mod(sbyte a, sbyte b)
-            => (sbyte)(a % b);
+        public static sbyte mod(sbyte a, sbyte m)
+            => (sbyte)(a % m);
 
+        /// <summary>
+        /// Computes b := a % m
+        /// </summary>
+        /// <param name="a">The source value</param>
+        /// <param name="m">The modulus</param>
         [MethodImpl(Inline)]
-        public static byte mod(byte a, byte b)
-            => (byte)(a % b);
+        public static byte mod(byte a, byte m)
+            => (byte)(a % m);
 
+        /// <summary>
+        /// Computes b := a % m
+        /// </summary>
+        /// <param name="a">The source value</param>
+        /// <param name="m">The modulus</param>
         [MethodImpl(Inline)]
-        public static short mod(short a, short b)
-            => (short)(a % b);
+        public static short mod(short a, short m)
+            => (short)(a % m);
 
+        /// <summary>
+        /// Computes b := a % m
+        /// </summary>
+        /// <param name="a">The source value</param>
+        /// <param name="m">The modulus</param>
         [MethodImpl(Inline)]
-        public static ushort mod(ushort a, ushort b)
-            => (ushort)(a % b);
+        public static ushort mod(ushort a, ushort m)
+            => (ushort)(a % m);
 
+        /// <summary>
+        /// Computes b := a % m
+        /// </summary>
+        /// <param name="a">The source value</param>
+        /// <param name="m">The modulus</param>
         [MethodImpl(Inline)]
-        public static int mod(int a, int b)
-            => a % b;
+        public static int mod(int a, int m)
+            => a % m;
 
+        /// <summary>
+        /// Computes b := a % m
+        /// </summary>
+        /// <param name="a">The source value</param>
+        /// <param name="m">The modulus</param>
         [MethodImpl(Inline)]
-        public static uint mod(uint a, uint b)
-            => a % b;
+        public static uint mod(uint a, uint m)
+            => a % m;
 
+        /// <summary>
+        /// Computes b := a % m
+        /// </summary>
+        /// <param name="a">The source value</param>
+        /// <param name="m">The modulus</param>
         [MethodImpl(Inline)]
-        public static long mod(long a, long b)
-            => a % b;
+        public static long mod(long a, long m)
+            => a % m;
 
+        /// <summary>
+        /// Computes b := a % m
+        /// </summary>
+        /// <param name="a">The source value</param>
+        /// <param name="m">The modulus</param>
         [MethodImpl(Inline)]
-        public static ulong mod(ulong a, ulong b)
-            => a % b;
+        public static ulong mod(ulong a, ulong m)
+            => a % m;
     }
 }

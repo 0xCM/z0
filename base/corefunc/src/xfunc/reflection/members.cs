@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.ComponentModel;
     using System.Reflection;
     using System.Runtime.CompilerServices;
     
@@ -316,10 +315,22 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         /// <param name="declared">Whether a literal is rquired to be declared by the type</param>
-        /// <returns></returns>
         public static IEnumerable<FieldInfo> Literals(this Type src, bool declared = true)
             => src.Fields(declared).Literal();
 
+        /// <summary>
+        /// Enumerates the literals defined by a type indexed by declaration order
+        /// </summary>
+        /// <param name="src">The source type</param>
+        /// <param name="declared">Whether a literal is rquired to be declared by the type</param>
+        public static IEnumerable<(int b, T value)> LiteralValues<T>(this Type src, int? maxcount = null)    
+        {
+            var literals = src.Literals().ToArray();
+            var count = Math.Min(maxcount ?? literals.Length, literals.Length);
+            for(var i=0; i<count; i++)
+                yield return (i, (T)Convert.ChangeType(literals[i].GetValue(null), typeof(T)));
+        }
+                
         /// <summary>
         /// Selects the immutable fields from a stream
         /// </summary>

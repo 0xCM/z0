@@ -14,51 +14,6 @@ namespace Z0
     {
 
         /// <summary>
-        /// Calculates the number of bytes required to represent a block constituent
-        /// </summary>
-        /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline)]
-        public static int cellsize<T>()
-            where T : unmanaged        
-                => Unsafe.SizeOf<T>();
-
-        /// <summary>
-        /// Calculates the number of bytes requred to represent a block
-        /// </summary>
-        /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline)]
-        public static int blocksize<T>(N32 n)
-            where T : unmanaged        
-                => Block32<T>.BlockSize;
-
-        /// <summary>
-        /// Calculates the number of bytes requred to represent a block
-        /// </summary>
-        /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline)]
-        public static int blocksize<T>(N64 n)
-            where T : unmanaged        
-                => Block64<T>.BlockSize;
-
-        /// <summary>
-        /// Calculates the number of bytes requred to represent a block
-        /// </summary>
-        /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline)]
-        public static int blocksize<T>(N128 n)
-            where T : unmanaged        
-                => Unsafe.SizeOf<T>() * blocklen<T>(n);
-
-        /// <summary>
-        /// Calculates the number of bytes requred to represent a block
-        /// </summary>
-        /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline)]
-        public static int blocksize<T>(N256 n)
-            where T : unmanaged        
-                => Unsafe.SizeOf<T>() * blocklen<T>(n);
-
-        /// <summary>
         /// Computes the minimum number of 64-bit blocks required to cover a specified number of cells
         /// </summary>
         /// <param name="cellcount">The number of cells to cover</param>

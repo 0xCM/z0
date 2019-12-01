@@ -5,12 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static nfunc;
     using static zfunc;
 
     partial class Linear
@@ -28,7 +24,7 @@ namespace Z0
             where N : unmanaged, ITypeNat            
             where T : unmanaged   
         { 
-            var dst = src.Replicate(true);
+            var dst = src.Replicate();
             add(src, scalar, ref dst);
             return dst;            
         }
@@ -66,7 +62,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            var dst = x.Replicate(true);
+            var dst = x.Replicate();
             return add(x, y, ref dst);
         }
 
@@ -132,7 +128,5 @@ namespace Z0
             mathspan.add(x.Unsized, y.Unsized, z.Unsized);
             return ref z;
         }
-
     }
-
 }

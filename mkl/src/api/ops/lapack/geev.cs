@@ -27,8 +27,8 @@ namespace Z0.Mkl
             var v = 'V';
             var wr = NatSpan.alloc<N,double>();
             var wi = NatSpan.alloc<N,double>();
-            var lVec = A.Replicate(true);
-            var rVec = A.Replicate(true);             
+            var lVec = A.Replicate();
+            var rVec = A.Replicate();             
                         
             exitcode = LAPACK.LAPACKE_dgeev(RowMajor, v, v, n, ref head(A), lda, ref head(wr), ref head(wi), 
                 ref head(lVec), ldvl, ref head(rVec), ldvr);

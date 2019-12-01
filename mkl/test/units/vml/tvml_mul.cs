@@ -18,7 +18,7 @@ namespace Z0.Mkl.Test
             var dst1 = Vector.blockalloc<float>(lhs.Length);
             mkl.mul(lhs,rhs, ref dst1);
             
-            var dst2 = lhs.Replicate(true);
+            var dst2 = lhs.Replicate();
             mathspan.mul(lhs,rhs, dst2.Unblocked);
             Claim.yea(dst1 == dst2);
         }
@@ -30,7 +30,7 @@ namespace Z0.Mkl.Test
             var dst1 = Vector.blockalloc<N256,double>();
             mkl.mul(lhs,rhs, ref dst1);
             
-            var dst2 = lhs.Replicate(true);
+            var dst2 = lhs.Replicate();
             mathspan.mul(lhs.Unsized,rhs.Unsized, dst2.Unsized);
             Claim.yea(dst1 == dst2);
         }
@@ -50,7 +50,7 @@ namespace Z0.Mkl.Test
 
             var lhs2 = lhs1.Replicate();
             var rhs2 = rhs1.Replicate();
-            var dst2 = dst1.Replicate(true);
+            var dst2 = dst1.Replicate();
 
             var sw2 = stopwatch();
             for(var i=0; i<cycles; i++)

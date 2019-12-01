@@ -243,8 +243,8 @@ namespace Z0
         /// Creates a copy of the matrix
         /// </summary>
         [MethodImpl(Inline)]
-        public MBlock256<N,T> Replicate(bool structureOnly = false)
-            => new MBlock256<N,T>(data.ReadOnly().Replicate(structureOnly));
+        public MBlock256<N,T> Replicate()
+            => new MBlock256<N,T>(data.ReadOnly().Replicate());
 
         public override bool Equals(object other)
             => throw new NotSupportedException();

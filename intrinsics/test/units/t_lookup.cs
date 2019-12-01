@@ -17,7 +17,8 @@ namespace Z0
     {
         static ulong select2(ulong a, ulong b, ulong c)
             => c ^ ((c^b) & a);
-        public void lut16_example()
+        
+        public void lut16_basecase()
         {
             
             var a = Random.Next<ulong>();
@@ -25,8 +26,8 @@ namespace Z0
             var mask = Random.Next<ulong>();
             var merged = select2(mask,a, b);
             var sel2 = gmath.select(mask,a,b);
-            Trace(merged.ToBitString().Format());
-            Trace(sel2.ToBitString().Format());
+            // Trace(merged.ToBitString().Format());
+            // Trace(sel2.ToBitString().Format());
 
             
             var nCount = n16;
@@ -40,9 +41,10 @@ namespace Z0
             var lut = LUT.From(nCount,values).Vector;
             var keys = dinx.vparts(n128, 15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0);
             var selected = dinx.vshuf16x8(lut,keys);
-            Trace(lut.Format());
-            Trace(keys.Format());
-            Trace(selected.Format());
+
+            // Trace(lut.Format());
+            // Trace(keys.Format());
+            // Trace(selected.Format());
 
         }
         public void lut16_rep_check()
@@ -94,12 +96,8 @@ namespace Z0
             var selected = dinx.vshuf16x8(items, x);
             Claim.eq(items,selected);
 
-
         }
-
     }
-
-
 }
 
 

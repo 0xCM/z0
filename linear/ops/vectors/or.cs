@@ -29,7 +29,7 @@ namespace Z0
         public static VBlock256<T> or<T>(VBlock256<T> lhs, VBlock256<T> rhs)
             where T : unmanaged
         {
-            var dst = lhs.Replicate(true);
+            var dst = lhs.Replicate();
             vblock.or(lhs.Data, rhs.Data, dst.Data);
             return dst;
         }
@@ -40,7 +40,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            var dst = x.Replicate(true);
+            var dst = x.Replicate();
             return or(x,y,ref dst);
         }
 

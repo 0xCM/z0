@@ -20,7 +20,7 @@ namespace Z0
 
         const byte D = 0b11;
 
-        public void perm4_digits_check()
+        public void perm4_digits_basecase()
         {
             var dABCD = Perm4.ABCD.Digits();
             Claim.eq(NatSpan.parts(n4, A, B, C, D), dABCD);
@@ -36,7 +36,7 @@ namespace Z0
 
         }
 
-        public void shuffle_hi_128x16u_check()
+        public void shuffle_hi_128x16u_basecase()
         {
             var x = ginx.vincrements<ushort>(n128);
             var xs = x.ToSpan();
@@ -55,7 +55,7 @@ namespace Z0
 
         }
 
-        public void shuffle_lo_128x16u_check()
+        public void shuffle_lo_128x16u_basecase()
         {
             var x = ginx.vincrements<ushort>(n128);
             var xs = x.ToSpan();

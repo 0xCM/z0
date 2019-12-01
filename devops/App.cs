@@ -57,7 +57,9 @@ namespace Z0
         {
 
         
-            //PopCountGen.GenToFile();
+            PopCountGen.GenToFile();
+            Pow2Gen.GenToFile();
+            Pow2M1Gen.GenToFile();
             BitCharsGen.GenToFile();
 
         }

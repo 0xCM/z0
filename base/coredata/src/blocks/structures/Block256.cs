@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;    
         
     using static zfunc;
+    using static DataBlocks;
 
     /// <summary>
     /// Encapsulates a span that can be evenly partitioned into 256-bit blocks
@@ -22,17 +23,21 @@ namespace Z0
         public static N256 N => default;
 
         /// <summary>
-        /// The number of cells in the block
+        /// The number of cells in a block
         /// </summary>
-        public static int BlockLength => Vector256<T>.Count;
+        public static int BlockLength => blocklen<T>(N);
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(in Block256<T> src)
             => src.data;
 
         [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<T>(in Block256<T> src)
+            => src.data;
+
+        [MethodImpl(Inline)]
         public static implicit operator ConstBlock256<T>(in Block256<T> src)
-            => new ConstBlock256<T>(src);
+            => new ConstBlock256<T>(src.data);
 
         [MethodImpl(Inline)]
         public static bool operator == (in Block256<T> lhs, in Block256<T> rhs)
@@ -44,15 +49,11 @@ namespace Z0
         
         [MethodImpl(Inline)]
         internal Block256(T[] src)
-        {
-            data = src;
-        }                
+            => this.data = src;
 
         [MethodImpl(Inline)]
         internal Block256(Span<T> src)
-        {
-            this.data = src;
-        }
+            => this.data = src;
 
         /// <summary>
         /// The leading storage cell
@@ -100,12 +101,39 @@ namespace Z0
         }
 
         /// <summary>
+        /// The number of allocated bits
+        /// </summary>
+        public int BitCount 
+        {
+            [MethodImpl(Inline)]
+            get => bitcount<T>(CellCount);
+        }
+
+        /// <summary>
+        /// The number of allocated bytes
+        /// </summary>
+        public int ByteCount 
+        {
+            [MethodImpl(Inline)]
+            get => bytecount<T>(CellCount);
+        }
+
+        /// <summary>
         /// The number of covered blocks
         /// </summary>
         public int BlockCount 
         {
             [MethodImpl(Inline)]
-            get => data.Length / BlockLength; 
+            get => blockcount<T>(N,CellCount);
+        }
+
+        /// <summary>
+        /// The bit width of a cell
+        /// </summary>
+        public int CellWidth 
+        {
+            [MethodImpl(Inline)]
+            get => cellwidth<T>();
         }
 
         /// <summary>
@@ -134,19 +162,10 @@ namespace Z0
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block
         /// </summary>
-        /// <param name="blockIndex">The index of the desired block</param>
+        /// <param name="block">The index of the desired block</param>
         [MethodImpl(Inline)]
-        public ref T BlockSeek(int blockIndex)
-            => ref Unsafe.Add(ref Head, blockIndex * BlockLength);
-
-        /// <summary>
-        /// Extracts a block-relative slice
-        /// </summary>
-        /// <param name="start">The block-relative index at which to begin extraction</param>
-        /// <param name="count">The number of blocks to extract</param>
-        [MethodImpl(Inline)]
-        public Block256<T> BlockSlice(int start, int count)
-            => new Block256<T>(data.Slice(start*BlockLength, BlockLength * count));
+        public ref T BlockRef(int block)
+            => ref Unsafe.Add(ref Head, block * BlockLength);
 
         /// <summary>
         /// Slices an elementwise span from the source
@@ -193,7 +212,8 @@ namespace Z0
         public Block256<S> As<S>()                
             where S : unmanaged
                 => new Block256<S>(MemoryMarshal.Cast<T,S>(data)); 
-  
+
+            
         public override bool Equals(object rhs) 
             => throw new NotSupportedException();
 

@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
     
     using static zfunc;
 
@@ -132,82 +131,6 @@ namespace Z0
 
         public void max_block_256x64f()
             => max_block_check<double>(n256);
-
-        void max_check<T>(N256 n)
-            where T : unmanaged
-        {
-
-            for(var sample=0; sample<SampleSize; sample++)
-            {
-                var x = Random.CpuVector<T>(n);
-                var y = Random.CpuVector<T>(n);
-
-                var xs = x.ToSpan();
-                var ys = y.ToSpan();
-                var zs = DataBlocks.alloc<T>(n);
-                for(var i=0; i<zs.CellCount; i++)
-                    zs[i] = gmath.max(xs[i],ys[i]);
-                
-                var expect = zs.LoadVector();                
-                var actual = ginx.vmax(x,y);
-                Claim.eq(expect,actual);                
-            }
-        }
-
-        void max_check<T>(N128 n)
-            where T : unmanaged
-        {
-
-            for(var sample=0; sample<SampleSize; sample++)
-            {
-                var x = Random.CpuVector<T>(n);
-                var y = Random.CpuVector<T>(n);
-
-                var xs = x.ToSpan();
-                var ys = y.ToSpan();
-                var zs = DataBlocks.alloc<T>(n);
-                for(var i=0; i<zs.CellCount; i++)
-                    zs[i] = gmath.max(xs[i],ys[i]);
-                
-                var expect = zs.LoadVector();                
-                var actual = ginx.vmax(x,y);
-                Claim.eq(expect,actual);                
-            }
-        }
-
-        void max_block_check<T>(N128 n)
-            where T : unmanaged
-        {
-            var blocks = SampleSize;
-            var stats = VBlockStats.Calc(blocks,n, default(T));
-            var step = stats.BlockLength;
-            var cells = stats.CellCount;
-
-            var lhs = Random.Blocks<T>(n, blocks);
-            var rhs = Random.Blocks<T>(n, blocks);
-            var dst = DataBlocks.alloc<T>(n, blocks);
-            vblock.max(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
-            for(var i=0; i<cells; i++)
-                Claim.eq(gmath.max(lhs[i],rhs[i]), dst[i]);
-        }
-
-        void max_block_check<T>(N256 n)
-            where T : unmanaged
-        {
-            var blocks = SampleSize;
-            var stats = VBlockStats.Calc(blocks,n, default(T));
-            var step = stats.BlockLength;
-            var cells = stats.CellCount;
-
-            var lhs = Random.Blocks<T>(n, blocks);
-            var rhs = Random.Blocks<T>(n, blocks);
-            var dst = DataBlocks.alloc<T>(n, blocks);
-            vblock.max(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
-            for(var i=0; i<cells; i++)
-                Claim.eq(gmath.max(lhs[i],rhs[i]), dst[i]);
-        }
-
-
     }
 
 }

@@ -20,7 +20,7 @@ namespace Z0
         {
             var count = zb.BlockCount;
             for(var i=0; i< count; i++)
-                vstore(ginx.vshuf16x8(xb.LoadVector(i), yb.LoadVector(i)), ref zb.BlockSeek(i));                             
+                vstore(ginx.vshuf16x8(xb.LoadVector(i), yb.LoadVector(i)), ref zb.BlockRef(i));                             
         } 
 
         [MethodImpl(Inline)]
@@ -29,7 +29,7 @@ namespace Z0
         {
             var count = zb.BlockCount;
             for(var i=0; i< count; i++)
-                vstore(ginx.vshuf16x8(xb.LoadVector(i), yb.LoadVector(i)), ref zb.BlockSeek(i));                             
+                vstore(ginx.vshuf16x8(xb.LoadVector(i), yb.LoadVector(i)), ref zb.BlockRef(i));                             
         } 
     }
 }

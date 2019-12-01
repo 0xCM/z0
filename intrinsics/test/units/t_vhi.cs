@@ -75,33 +75,6 @@ namespace Z0
         public void vhi_256x64f()
             => vhi_check<double>(n256);
 
-        protected void vhi_check<T>(N128 n)
-            where T : unmanaged
-        {
-            var count = vlength<T>(n);
-            for(var sample=0; sample< SampleSize; sample++)
-            {                
-                var x = Random.CpuVector<T>(n);
-                var h = ginx.vhi(x);
-
-                for(int i=0, j = count/2; j < count; i++, j++)
-                    Claim.eq(x.Item(j), h.Item(i));
-            }
-        }
-
-        protected void vhi_check<T>(N256 n)
-            where T : unmanaged
-        {
-            var count = vlength<T>(n);
-            for(var sample=0; sample< SampleSize; sample++)
-            {                
-                var x = Random.CpuVector<T>(n);
-                var h = ginx.vhi(x);
-
-                for(int i=0, j = count/2; j < count; i++, j++)
-                    Claim.eq(x.Item(j), h.Item(i));
-            }
-        }
 
     }
 

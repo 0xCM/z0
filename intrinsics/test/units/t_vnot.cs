@@ -11,7 +11,6 @@ namespace Z0
 
     public class t_vnot : IntrinsicTest<t_vnot>
     {
-
         public void vnot_128x8i()
             => vnot_check<sbyte>(n128);
 
@@ -59,7 +58,6 @@ namespace Z0
 
         public void vnot_256x64u()
             => vnot_check<ulong>(n256);
-
    }
 
 }

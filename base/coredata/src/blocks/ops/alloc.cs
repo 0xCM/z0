@@ -28,7 +28,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Allocates 1 64-bit block
+        /// Allocates 1 32-bit block
         /// </summary>
         /// <param name="n">The bit selector</param>
         /// <typeparam name="T">The element type</typeparam>

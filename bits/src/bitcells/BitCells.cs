@@ -311,8 +311,8 @@ namespace Z0
             return gmath.or(part1, part2);              
         }
 
-        public BitCells<T> Replicate(bool structureOnly = false)
-            => new BitCells<T>(data.Replicate(structureOnly));
+        public BitCells<T> Replicate()
+            => new BitCells<T>(data.Replicate());
                     
         [MethodImpl(Inline)]
         public bool Equals(in BitCells<T> y)

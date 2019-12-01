@@ -51,7 +51,7 @@ namespace Z0.Mkl
         public void Getrf64_A()
         {
             var A = DGETRF_In;
-            var X = A.Replicate(true);
+            var X = A.Replicate();
             Span<int> pivots = new int[18];
             mkl.getrf(A, pivots, ref X);
             X.Apply(x => x.Round(1));

@@ -14,15 +14,7 @@ namespace Z0
 
     public class t_vperm : IntrinsicTest<t_vperm>
     {
-        const Perm4 A = Perm4.A;
-
-        const Perm4 B = Perm4.B;
-
-        const Perm4 C = Perm4.C;
-
-        const Perm4 D = Perm4.D;
-
-        public void perm4x16()
+        public void vperm_4x16()
         {
             var n = n128;
             var x = dinx.vparts(n,0,1,2,3,4,5,6,7);
@@ -53,7 +45,7 @@ namespace Z0
             Claim.eq(f0,f1);
         }
 
-        public void perm4x64()
+        public void vperm_4x64()
         {
          
             var n = n256;
@@ -111,7 +103,7 @@ namespace Z0
             iter(pmaps, m => Trace(m.perm.ToString(), m.format));
         }
 
-        public void perm_2x128()
+        public void vperm_2x128()
         {
             var n = n256;
             var x = dinx.vparts(n, 0, 1, 2, 3);
@@ -172,7 +164,6 @@ namespace Z0
             var y = ginx.vdecrements<byte>(n256);
             var z = dinx.vreverse(dinx.vshuf32x8(x,y));
             Claim.eq(x,z);
-
         }
 
         public void perm4_reverse_check()
@@ -207,5 +198,15 @@ namespace Z0
             }
 
         }
+
+        const Perm4 A = Perm4.A;
+
+        const Perm4 B = Perm4.B;
+
+        const Perm4 C = Perm4.C;
+
+        const Perm4 D = Perm4.D;
+
+
     }
 }

@@ -13,6 +13,26 @@ namespace Z0
     partial class DataBlocks
     {
         [MethodImpl(Inline)]
+        public static int blockcount<T>(N32 n, int cellcount)
+            where T : unmanaged
+                => cellcount/blocklen<T>(n);
+
+        [MethodImpl(Inline)]
+        public static int blockcount<T>(N64 n, int cellcount)
+            where T : unmanaged
+                => cellcount/blocklen<T>(n);
+
+        [MethodImpl(Inline)]
+        public static int blockcount<T>(N128 n, int cellcount)
+            where T : unmanaged
+                => cellcount/blocklen<T>(n);
+
+        [MethodImpl(Inline)]
+        public static int blockcount<T>(N256 n, int cellcount)
+            where T : unmanaged
+                => cellcount/blocklen<T>(n);
+
+        [MethodImpl(Inline)]
         public static int blockcount<T>(N32 n, int length, out int uncovered)
             where T : unmanaged   
         {       
@@ -43,34 +63,6 @@ namespace Z0
             uncovered = length % blocklen<T>(n);
             return length/blocklen<T>(n);
         }
-
-        [MethodImpl(Inline)]
-        public static int blockcount<T>(N256 n,int srclen)
-            where T : unmanaged        
-        {
-            var bz = blockcount<T>(n,srclen, out int remainder);
-            return remainder == 0 ? bz : bz + 1;
-        }
-
-        /// <summary>
-        /// Calculates the number of whole blocks into which a sequence of cells may be partitioned
-        /// </summary>
-        /// <param name="cellcount">The length of the cell sequence</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static int wholeblocks<T>(N128 n, int cellcount)
-            where T : unmanaged  
-                => cellcount / Block128<T>.BlockLength;
-
-        /// <summary>
-        /// Calculates the number of whole blocks into which a sequence of cells may be partitioned
-        /// </summary>
-        /// <param name="cellcount">The length of the cell sequence</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static int wholeblocks<T>(N256 n, int cellcount)
-            where T : unmanaged  
-                => cellcount / Block256<T>.BlockLength;
 
         /// <summary>
         /// Computes the minimum number of 256-bit blocks that can hold a table of data
@@ -125,6 +117,5 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
                 => lhs.BlockCount == rhs.BlockCount ? lhs.BlockCount : badsize<int>(lhs.BlockCount,rhs.BlockCount);
-
     }
 }

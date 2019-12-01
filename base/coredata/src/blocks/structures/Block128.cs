@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;    
         
     using static zfunc;
+    using static DataBlocks;
 
     /// <summary>
     /// Encapsulates a span that can be evenly partitioned into 128-bit blocks
@@ -21,18 +22,18 @@ namespace Z0
 
         public static N128 N => default;
 
-        /// <summary>
-        /// The number of cells in the block
-        /// </summary>
-        public static int BlockLength => Vector128<T>.Count;
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(in Block128<T> src)
             => src.data;
 
         [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<T>(in Block128<T> src)
+            => src.data;
+
+        [MethodImpl(Inline)]
         public static implicit operator ConstBlock128<T>(in Block128<T> src)
-            => new ConstBlock128<T>(src);
+            => new ConstBlock128<T>(src.data);
 
         [MethodImpl(Inline)]
         public static bool operator == (in Block128<T> lhs, in Block128<T> rhs)
@@ -44,9 +45,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         internal Block128(Span<T> src)
-        {
-            this.data = src;
-        }
+            => this.data = src;
 
         /// <summary>
         /// The leading storage cell
@@ -94,12 +93,48 @@ namespace Z0
         }
 
         /// <summary>
+        /// The number of allocated bits
+        /// </summary>
+        public int BitCount 
+        {
+            [MethodImpl(Inline)]
+            get => bitcount<T>(CellCount);
+        }
+
+        /// <summary>
+        /// The number of allocated bytes
+        /// </summary>
+        public int ByteCount 
+        {
+            [MethodImpl(Inline)]
+            get => bytecount<T>(CellCount);
+        }
+
+        /// <summary>
         /// The number of covered blocks
         /// </summary>
         public int BlockCount 
         {
             [MethodImpl(Inline)]
-            get => data.Length / BlockLength; 
+            get => blockcount<T>(N,CellCount);
+        }
+
+        /// <summary>
+        /// The number of cells in a block
+        /// </summary>
+        public int BlockLength
+        {
+            [MethodImpl(Inline)]
+            get => blocklen<T>(N);        
+        }
+
+        /// <summary>
+        /// The bit width of a cell
+        /// </summary>
+        public int CellWidth 
+        {
+            [MethodImpl(Inline)]
+            get => cellwidth<T>();
         }
 
         /// <summary>
@@ -128,31 +163,10 @@ namespace Z0
         /// <summary>
         /// Returns the leading cell of an index-identified block
         /// </summary>
-        /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
+        /// <param name="block">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         [MethodImpl(Inline)]
-        public ref T BlockSeek(int index)
-            => ref Unsafe.Add(ref Head, index*BlockLength); 
-
-        /// <summary>
-        /// Extracts a block-relative slice
-        /// </summary>
-        /// <param name="offset">The block-relative offset at which to begin extraction</param>
-        /// <param name="count">The number of blocks to extract</param>
-        [MethodImpl(Inline)]
-        public Block128<T> BlockSlice(int offset, int count)
-            => new Block128<T>(data.Slice(offset*BlockLength, BlockLength * count));
-
-        /// <summary>
-        /// Returns an index-identified block
-        /// </summary>
-        /// <param name="n">The block width selector</param>
-        /// <param name="blockIndex">The index of the block, with respect to 64-bit blocks</param>
-        [MethodImpl(Inline)]
-        public Block64<T> Block(N64 n, int blockIndex)
-        {
-            var count = BlockLength >> 1;
-            return new Block64<T>(data.Slice(blockIndex * count, count));
-        }
+        public ref T BlockRef(int block)
+            => ref Unsafe.Add(ref Head, block*BlockLength); 
 
         [MethodImpl(Inline)]
         public Span<T> Slice(int offset)
@@ -166,7 +180,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public Span<T> Slice(int offset, int length)
             => data.Slice(offset,length);
-
 
         [MethodImpl(Inline)]
         public T[] ToArray()

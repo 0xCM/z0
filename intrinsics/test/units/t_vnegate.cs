@@ -2,13 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.IO;
     
     using static zfunc;
 
@@ -118,59 +115,5 @@ namespace Z0.Test
 
         public void negate_blocks_256x64u()
             => vnegate_blocks_check<ulong>(n256);
-
-        protected void vnegate_blocks_check<T>(N128 n)
-            where T : unmanaged
-        {
-            var blocks = SampleSize;
-            var stats = VBlockStats.Calc<N128,T>(blocks);
-            var step = stats.BlockLength;
-            var cells = stats.CellCount;
-
-            var src = Random.Blocks<T>(n, blocks);
-            var dst = DataBlocks.alloc<T>(n, blocks);
-            vblock.negate(n, blocks, step, in src.Head, ref dst.Head);
-            for(var i=0; i<cells; i++)
-                Claim.eq(gmath.negate(src[i]), dst[i]);
-        }
-
-        protected void vnegate_blocks_check<T>(N256 n)
-            where T : unmanaged
-        {
-            var blocks = SampleSize;
-            var stats = VBlockStats.Calc<N256,T>(blocks);
-            var step = stats.BlockLength;
-            var cells = stats.CellCount;
-
-            var src = Random.Blocks<T>(n, blocks);
-            var dst = DataBlocks.alloc<T>(n, blocks);
-            vblock.negate(n, blocks, step, in src.Head, ref dst.Head);
-            for(var i=0; i<cells; i++)
-                Claim.eq(gmath.negate(src[i]), dst[i]);
-        }
-
-        protected void negate_check<T>(N128 n)
-            where T : unmanaged
-        {
-            for(var i=0; i<SampleSize; i++)
-            {
-                var x = Random.CpuVector<T>(n);
-                var y = ginx.vnegate(x);
-                var z = x.ToSpan().Map(gmath.negate).LoadVector(n);
-                Claim.eq(y,z);
-            }
-        }
-
-        protected void vnegate_check<T>(N256 n)
-            where T : unmanaged
-        {
-            for(var i=0; i<SampleSize; i++)
-            {
-                var x = Random.CpuVector<T>(n);
-                var y = ginx.vnegate(x);
-                var z = x.ToSpan().Map(gmath.negate).LoadVector(n);
-                Claim.eq(y,z);
-            }
-        }
-    }
+   }
 }

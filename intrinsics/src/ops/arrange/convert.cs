@@ -20,34 +20,6 @@ namespace Z0
     partial class dinx
     {                
         /// <summary>
-        /// __m128i _mm_cvtepi8_epi16 (__m128i a) PMOVSXBW xmm, xmm/m64
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<short> vconvert(Vector128<sbyte> src, out Vector128<short> dst)
-        {
-            dst = ConvertToVector128Int16(src);
-            return dst;
-        }
-
-        /// <summary>
-        /// PMOVSXBW xmm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        internal static unsafe Vector128<short> vconvert(ref sbyte src, out Vector128<short> dst)
-        {
-            dst = ConvertToVector128Int16(ptr(ref src));
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static Vector128<short> vconvert(in Block64<sbyte> src, out Vector128<short> dst)
-            => vconvert(ref src.Head, out dst);
-
-        /// <summary>
         /// __m128i _mm_cvtepi8_epi32 (__m128i a) PMOVSXBD xmm, xmm/m32
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -60,14 +32,14 @@ namespace Z0
         }
 
         /// <summary>
-        /// PMOVSXBD xmm, m32
+        /// __m128i _mm_cvtepi8_epi16 (__m128i a) PMOVSXBW xmm, xmm/m64
         /// </summary>
-        /// <param name="src">The memory source</param>
+        /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<int> vconvert(ref sbyte src, out Vector128<int> dst)
+        public static Vector128<short> vconvert(Vector128<sbyte> src, out Vector128<short> dst)
         {
-            dst = ConvertToVector128Int32(ptr(ref src));
+            dst = ConvertToVector128Int16(src);
             return dst;
         }
 
@@ -84,18 +56,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// PMOVSXBQ xmm, m16
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<long> vconvert(ref sbyte src, out Vector128<long> dst)
-        {
-            dst = ConvertToVector128Int64(ptr(ref src));
-            return dst;
-        }
-
-        /// <summary>
         /// __m128i _mm_cvtepu8_epi16 (__m128i a) PMOVZXBW xmm, xmm/m64
         /// Zero extends 8 packed 8-bit integers the low 8 bytes of xmm2/m64 to 8 packed 16-bit integers xmm1.
         /// </summary>
@@ -107,22 +67,6 @@ namespace Z0
             dst = ConvertToVector128Int16(src);
             return dst;
         }
-
-        /// <summary>
-        /// PMOVZXBW xmm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        internal static unsafe Vector128<short> vconvert(ref byte src, out Vector128<short> dst)
-        {
-            dst = ConvertToVector128Int16(ptr(ref src));
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static Vector128<short> vconvert(in Block64<byte> src, out Vector128<short> dst)
-            => vconvert(ref src.Head, out dst);
 
         /// <summary>
         /// __m128i _mm_cvtepu8_epi16 (__m128i a) PMOVZXBW xmm, xmm/m64
@@ -148,33 +92,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// PMOVZXBW xmm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        internal static unsafe Vector128<ushort> vconvert(ref byte src, out Vector128<ushort> dst)
-        {
-            dst = v16u(ConvertToVector128Int16(ptr(ref src)));
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static Vector128<ushort> vconvert(in Block64<byte> src, out Vector128<ushort> dst)
-            => vconvert(ref src.Head, out dst);
-
-        [MethodImpl(Inline)]
-        internal static void vconvert(ref byte src, out Vector128<ushort> lo, out Vector128<ushort> hi)
-        {
-            vconvert(ref src, out lo);
-            vconvert(ref seek(ref src, 8), out hi);            
-        }
-
-        [MethodImpl(Inline)]
-        public static void vconvert(in Block128<byte> src, out Vector128<ushort> lo, out Vector128<ushort> hi)
-            => vconvert(ref src.Head, out lo, out hi);
-
-        /// <summary>
         /// __m128i _mm_cvtepu8_epi32 (__m128i a) PMOVZXBD xmm, xmm/m32
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -183,18 +100,6 @@ namespace Z0
         public static Vector128<int> vconvert(Vector128<byte> src, out Vector128<int> dst)
         {
             dst = ConvertToVector128Int32(src);
-            return dst;
-        }
-
-        /// <summary>
-        /// PMOVZXBD xmm, m32
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        internal static unsafe Vector128<int> vconvert(ref byte src, out Vector128<int> dst)
-        {
-            dst = ConvertToVector128Int32(ptr(ref src));
             return dst;
         }
 
@@ -211,26 +116,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// PMOVZXBD xmm, m32
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        internal static unsafe Vector128<uint> vconvert(ref byte src, out Vector128<uint> dst)
-        {
-            dst = v32u(ConvertToVector128Int32(ptr(ref src)));
-            return dst;
-        }
-
-
-        [MethodImpl(Inline)]
-        public static void vconvert(in Block64<byte> src, out Vector128<uint> x0, out Vector128<uint> x1)
-        {
-            vconvert(ref src.Head, out x0);
-            vconvert(ref seek(ref src.Head, 4), out x1);
-        }            
-
-        /// <summary>
         /// __m128i _mm_cvtepi32_epi64 (__m128i a) PMOVSXDQ xmm, xmm/m64
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -242,17 +127,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// PMOVZXBQ xmm, m16
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<long> vconvert(ref byte src, out Vector128<long> dst)
-        {
-            dst = ConvertToVector128Int64(ptr(ref src));
-            return dst;
-        }
 
         /// <summary>
         /// __m128i _mm_cvtepu8_epi64 (__m128i a) PMOVZXBQ xmm, xmm/m16
@@ -267,18 +141,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// PMOVZXBQ xmm, m16
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<ulong> vconvert(ref byte src, out Vector128<ulong> dst)
-        {
-            dst = v64u(ConvertToVector128Int64(ptr(ref src)));
-            return dst;
-        }
-
-        /// <summary>
         /// __m128i _mm_cvtepi16_epi32 (__m128i a) PMOVSXWD xmm, xmm/m64
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -290,17 +152,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// PMOVSXWD xmm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<int> vconvert(ref short src, out Vector128<int> dst)
-        {
-            dst = ConvertToVector128Int32(ptr(ref src));
-            return dst;
-        }
 
         /// <summary>
         /// __m128i _mm_cvtepi16_epi64 (__m128i a) PMOVSXWQ xmm, xmm/m32
@@ -314,17 +165,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// PMOVSXWQ xmm, m32
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<long> vconvert(ref short src, out Vector128<long> dst)
-        {
-            dst = ConvertToVector128Int64(ptr(ref src));
-            return dst;
-        }
 
         /// <summary>
         /// __m128i _mm_cvtepu16_epi32 (__m128i a) PMOVZXWD xmm, xmm/m64
@@ -350,17 +190,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// PMOVSXWD xmm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<uint> vconvert(ref ushort src, out Vector128<uint> dst)
-        {
-            dst = v32u(ConvertToVector128Int32(ptr(ref src)));
-            return dst;
-        }
 
         /// <summary>
         ///  __m128i _mm_cvtepu16_epi64 (__m128i a) PMOVZXWQ xmm, xmm/m32
@@ -374,17 +203,6 @@ namespace Z0
            return dst;
         }
 
-        /// <summary>
-        /// PMOVZXWQ xmm, m32
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<long> vconvert(ref ushort src, out Vector128<long> dst)
-        {
-            dst = ConvertToVector128Int64(ptr(ref src));
-            return dst;
-        }
 
         /// <summary>
         ///  __m128i _mm_cvtepu16_epi64 (__m128i a) PMOVZXWQ xmm, xmm/m32
@@ -398,17 +216,6 @@ namespace Z0
            return dst;
         }
 
-        /// <summary>
-        /// PMOVZXWQ xmm, m32
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<ulong> vconvert(ref ushort src, out Vector128<ulong> dst)
-        {
-            dst = v64u(ConvertToVector128Int64(ptr(ref src)));
-            return dst;
-        }
 
         /// <summary>
         /// __m128i _mm_cvtepi32_epi64 (__m128i a) PMOVSXDQ xmm, xmm/m64
@@ -422,17 +229,6 @@ namespace Z0
            return dst;
         }
 
-        /// <summary>
-        /// PMOVSXDQ xmm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<long> vconvert(ref int src, out Vector128<long> dst)
-        {
-           dst = ConvertToVector128Int64(ptr(ref src));
-           return dst;
-        }
 
         /// <summary>
         /// __m128i _mm_cvtepu32_epi64 (__m128i a) PMOVZXDQ xmm, xmm/m64
@@ -447,17 +243,6 @@ namespace Z0
            return dst;
         }
 
-        /// <summary>
-        /// PMOVZXDQ xmm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<long> vconvert(ref uint src, out Vector128<long> dst)
-        {
-           dst = ConvertToVector128Int64(ptr(ref src));
-           return dst;
-        }
 
         /// <summary>
         /// __m128i _mm_cvtepu32_epi64 (__m128i a) PMOVZXDQ xmm, xmm/m64
@@ -473,18 +258,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// PMOVZXDQ xmm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<ulong> vconvert(ref uint src, out Vector128<ulong> dst)
-        {
-           dst = v64u(ConvertToVector128Int64(ptr(ref src)));
-           return dst;
-        }
-
-        /// <summary>
         /// __m256i _mm256_cvtepi8_epi16 (__m128i a) VPMOVSXBW ymm, xmm/m128
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -496,17 +269,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// VPMOVSXBW ymm, m128
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<short> vconvert(ref sbyte src, out Vector256<short> dst)
-        {
-            dst = ConvertToVector256Int16(ptr(ref src));
-            return dst;
-        }
 
         /// <summary>
         /// __m256i _mm256_cvtepi8_epi32 (__m128i a) VPMOVSXBD ymm, xmm/m128
@@ -521,18 +283,6 @@ namespace Z0
         }
 
         /// <summary>
-        ///  VPMOVSXBD ymm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<int> vconvert(ref sbyte src, out Vector256<int> dst)
-        {
-            dst = ConvertToVector256Int32(ptr(ref src));
-            return dst;
-        }
-
-        /// <summary>
         /// __m256i _mm256_cvtepi8_epi64 (__m128i a) VPMOVSXBQ ymm, xmm/m128
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -541,18 +291,6 @@ namespace Z0
         public static Vector256<long> vconvert(Vector128<sbyte> src, out Vector256<long> dst)
         {
             dst = ConvertToVector256Int64(src);
-            return dst;
-        }
-
-        /// <summary>
-        ///  VPMOVSXBQ ymm, m32
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<long> vconvert(ref sbyte src, out Vector256<long> dst)
-        {
-            dst = ConvertToVector256Int64(ptr(ref src));
             return dst;
         }
 
@@ -570,18 +308,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// VPMOVZXBW ymm, m128
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]        
-        public static unsafe Vector256<short> vconvert(ref byte src, out Vector256<short> dst)
-        {
-            dst = ConvertToVector256Int16(ptr(ref src));
-            return dst;
-        }
-
-        /// <summary>
         ///  __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
         /// src[i] -> dst[i], i = 0,...,15
         /// </summary>
@@ -594,17 +320,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// VPMOVZXBW ymm, m128
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<ushort> vconvert(ref byte src, out Vector256<ushort> dst)
-        {
-            dst = v16u(ConvertToVector256Int16(ptr(ref src)));
-            return dst;
-        }
 
         /// <summary>
         /// Zero extends each of the 16 8-bit integers in the lo half of the source to the lo target
@@ -620,18 +335,6 @@ namespace Z0
             hi = v16u(ConvertToVector256Int16(vhi(src)));
         }
 
-        /// <summary>
-        /// Distributes the first block of 16 bytes from the source to the lo target and the second 16-byte block to the hi target
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="lo">The lo target</param>
-        /// <param name="hi">The hi target</param>
-        [MethodImpl(Inline)]
-        public static unsafe void vconvert(ref byte src, out Vector256<ushort> lo, out Vector256<ushort> hi)
-        {
-            lo = v16u(ConvertToVector256Int16(ptr(ref src)));
-            hi = v16u(ConvertToVector256Int16(ptr(ref src, 16)));
-        }
 
         /// <summary>
         ///  __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
@@ -822,18 +525,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// VPMOVZXWD ymm, m128
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<uint> vconvert(ref ushort src, out Vector256<uint> dst)
-        {
-            dst = v32u(ConvertToVector256Int32(ptr(ref src)));
-            return dst;
-        }
-
         [MethodImpl(Inline)]
         public static void vconvert(Vector256<ushort> src, out Vector256<uint> lo, out Vector256<uint> hi)
         {
@@ -842,11 +533,26 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static void vconvert(Vector256<short> src, out Vector256<int> lo, out Vector256<int> hi)
+        {
+            lo = ConvertToVector256Int32(vlo(src));
+            hi = ConvertToVector256Int32(vhi(src));            
+        }
+
+        [MethodImpl(Inline)]
         public static unsafe void vconvert(ref ushort src, out Vector256<uint> lo, out Vector256<uint> hi)
         {
             lo = v32u(ConvertToVector256Int32(ptr(ref src)));
             hi = v32u(ConvertToVector256Int32(ptr(ref src,8)));
         }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vconvert(ref short src, out Vector256<int> lo, out Vector256<int> hi)
+        {
+            lo = ConvertToVector256Int32(ptr(ref src));
+            hi = ConvertToVector256Int32(ptr(ref src,8));
+        }
+
 
         /// <summary>
         /// __m256i _mm256_cvtepu16_epi64 (__m128i a) VPMOVZXWQ ymm, xmm
@@ -884,18 +590,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// VPMOVZXWQ ymm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> vconvert(ref ushort src, out Vector256<ulong> dst)
-        {
-            dst = v64u(ConvertToVector256Int64(ptr(ref src)));
-            return dst;
-        }
-
         [MethodImpl(Inline)]
         public static void vconvert(Vector256<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
         {
@@ -903,16 +597,7 @@ namespace Z0
             hi = v64u(ConvertToVector256Int64(vhi(src)));
         }
 
-        [MethodImpl(Inline)]
-        internal static unsafe void vconvert(ref ushort src, out Vector256<ulong> lo, out Vector256<ulong> hi)
-        {
-            lo = v64u(ConvertToVector256Int64(ptr(ref src)));
-            hi = v64u(ConvertToVector256Int64(ptr(ref src, 8)));
-        }
 
-        [MethodImpl(Inline)]
-        public static unsafe void vconvert(in Block256<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
-            => vconvert(ref src.Head, out lo, out hi);
         
         /// <summary>
         /// __m256i _mm256_cvtepi32_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
@@ -927,22 +612,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// VPMOVSXDQ ymm, m128
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        internal static unsafe Vector256<long> vconvert(ref int src, out Vector256<long> dst)
-        {
-            dst = ConvertToVector256Int64(ptr(ref src));
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<long> vconvert(in Block128<int> src, out Vector256<long> dst)
-            => vconvert(ref src.Head, out dst);
-
-        /// <summary>
         ///  __m256i _mm256_cvtepu32_epi64 (__m128i a) VPMOVZXDQ ymm, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -953,22 +622,6 @@ namespace Z0
             dst = ConvertToVector256Int64(src);
             return dst;
         }
-
-        /// <summary>
-        /// VPMOVZXDQ ymm, m128
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        internal static unsafe Vector256<long> vconvert(ref uint src, out Vector256<long> dst)
-        {
-            dst = ConvertToVector256Int64(ptr(ref src));
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<long> vconvert(in Block128<uint> src, out Vector256<long> dst)
-            => vconvert(ref src.Head, out dst);
 
         /// <summary>
         /// _m256i _mm256_cvtepu32_epi64 (__m128i a) VPMOVZXDQ ymm, xmm
@@ -982,22 +635,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// VPMOVZXDQ ymm, m128
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        internal static unsafe Vector256<ulong> vconvert(ref uint src, out Vector256<ulong> dst)
-        {
-            dst = v64u(ConvertToVector256Int64(ptr(ref src)));
-            return dst;
-        }
-    
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> vconvert(in Block128<uint> src, out Vector256<ulong> dst)
-            => vconvert(ref src.Head, out dst);
-
         [MethodImpl(Inline)]
         public static void vconvert(Vector256<uint> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
         {
@@ -1005,15 +642,5 @@ namespace Z0
             hi = v64u(ConvertToVector256Int64(vhi(src)));
         }
 
-        [MethodImpl(Inline)]
-        internal static unsafe void vconvert(ref uint src, out Vector256<ulong> lo, out Vector256<ulong> hi)
-        {
-            lo = v64u(ConvertToVector256Int64(ptr(ref src)));
-            hi = v64u(ConvertToVector256Int64(ptr(ref src,4)));
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe void vconvert(in Block256<uint> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
-            => vconvert(ref src.Head, out lo, out hi);
     }
 }

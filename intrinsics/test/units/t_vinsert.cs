@@ -5,10 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.IO;
     
     using static zfunc;
 
@@ -43,26 +41,5 @@ namespace Z0
         
         public void vinsert_128x64f()
             => vinsert_check<double>(n128);
-
-        void vinsert_check<T>(N128 n)
-            where T : unmanaged
-        {
-            for(var i=0; i < SampleSize; i++)
-            {
-                var v128Src = Random.CpuVector<T>(n128);
-                var srcSpan = v128Src.ToSpan();
-
-                var dst = default(Vector256<T>);
-                
-                var vLo = ginx.vinsert(v128Src, dst,0);
-                var vLoSpan = vLo.ToSpan().Slice(0, vLo.Length()/2);
-
-                var vHi = ginx.vinsert(v128Src, dst, 1);
-                var vHiSpan = vHi.ToSpan().Slice(vLo.Length()/2);
-
-                Claim.eq(srcSpan, vLoSpan);
-                Claim.eq(srcSpan, vHiSpan);
-            }
-        }
     }
 }

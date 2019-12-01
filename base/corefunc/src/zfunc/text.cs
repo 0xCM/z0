@@ -29,6 +29,16 @@ partial class zfunc
         => "\r\n";
 
     /// <summary>
+    /// Creates a c/c#-style single-line comment
+    /// </summary>
+    /// <param name="description">The comment text</param>
+    [MethodImpl(Inline)]   
+    public static string comment(string description)
+        => string.IsNullOrWhiteSpace(description) 
+         ? string.Empty 
+         : concat("//", description, eol());
+
+    /// <summary>
     /// Formats the source value as a string
     /// </summary>
     /// <param name="x">The source value</param>

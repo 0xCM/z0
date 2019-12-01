@@ -5,17 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.IO;
     
     using static zfunc;
-    using static nfunc;
 
     public class t_vpatterns : IntrinsicTest<t_vpatterns>
     {
-
         public void vones_128()
         {
             var n = n128;
@@ -83,41 +78,5 @@ namespace Z0
 
         public void vunits_256x64u()
             => vunits_check<ulong>(n256);
-
-        void vunits_check<T>(N128 n)
-            where T : unmanaged
-        {
-            var units = PatternData.uints<T>(n).ToSpan();
-            for(var i=0; i<units.Length; i++)
-                Claim.eq(gmath.one<T>(), units[i]);
-        }
-        
-        void vunits_check<T>(N256 n)
-            where T : unmanaged
-        {
-            var units = PatternData.uints<T>(n).ToSpan();
-            for(var i=0; i<units.Length; i++)
-                Claim.eq(gmath.one<T>(), units[i]);
-        }
-
-        void vones_check<T>(N128 n)
-            where T : unmanaged
-        {
-            var ones = ginx.vpones<T>(n);
-            var bs = ones.ToBitString();
-            Claim.eq(n,bs.Length);
-            Claim.eq(n,bs.PopCount());
-        }
-
-        void vones_check<T>(N256 n)
-            where T : unmanaged
-        {
-            var ones = ginx.vpones<T>(n);
-            var bs = ones.ToBitString();
-            Claim.eq(n,bs.Length);
-            Claim.eq(n,bs.PopCount());
-        }
-
-    }
-
+   }
 }

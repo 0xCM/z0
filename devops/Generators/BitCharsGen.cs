@@ -47,7 +47,7 @@ namespace Z0
         {
             var filename = OutFile;
             var outpath = LogArea.App.TargetPath(filename);
-            print($"Emitting generated code to {outpath}");
+            print($"Generating {outpath}");
 
             using var dst = LogArea.App.LogWriter(filename);
             

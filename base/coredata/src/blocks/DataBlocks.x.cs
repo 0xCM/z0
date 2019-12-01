@@ -13,87 +13,37 @@ namespace Z0
     using static zfunc;
     using static DataBlocks;
 
-    public static class BlockExtend    
+    public static partial class BlockExtend    
     {
-        /// <summary>
-        /// Reverses the covered cells
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static void Reverse<T>(this in Block32<T> src)
+        public static ref T BlockRef<T>(in Block32<T> src, int index)
             where T : unmanaged
-                => src.Data.Reverse();
+                => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
+        
+        [MethodImpl(Inline)]
+        public static ref T BlockRef<T>(in Block64<T> src, int index)
+            where T : unmanaged
+                => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
 
-        /// <summary>
-        /// Reverses the covered cells
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static void Reverse<T>(this in Block64<T> src)
+        public static ref readonly T BlockRef<T>(in ConstBlock32<T> src, int index)
             where T : unmanaged
-                => src.Data.Reverse();
+                => ref Unsafe.Add(ref Unsafe.AsRef(in src.Head), index*src.BlockLength);  
 
-        /// <summary>
-        /// Reverses the covered cells
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static void Reverse<T>(this in Block128<T> src)
+        public static ref readonly T BlockRef<T>(in ConstBlock64<T> src, int index)
             where T : unmanaged
-                => src.Data.Reverse();
+                => ref Unsafe.Add(ref Unsafe.AsRef(in src.Head), index*src.BlockLength);  
 
-        /// <summary>
-        /// Reverses the covered cells
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static void Reverse<T>(this in Block256<T> src)
+        public static ref readonly T BlockRef<T>(in ConstBlock128<T> src, int index)
             where T : unmanaged
-                => src.Data.Reverse();
+                => ref Unsafe.Add(ref Unsafe.AsRef(in src.Head), index*src.BlockLength);  
 
-        /// <summary>
-        /// Zero-fills the block
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static void Clear<T>(this in Block32<T> src)
+        public static ref readonly T BlockRef<T>(in ConstBlock256<T> src, int index)
             where T : unmanaged
-                => src.Data.Clear();
-
-        /// <summary>
-        /// Zero-fills the block
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static void Clear<T>(this in Block64<T> src)
-            where T : unmanaged
-                => src.Data.Clear();
-
-        /// <summary>
-        /// Zero-fills the block
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static void Clear<T>(this in Block128<T> src)
-            where T : unmanaged
-                => src.Data.Clear();
-
-        /// <summary>
-        /// Zero-fills the block
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static void Clear<T>(this in Block256<T> src)
-            where T : unmanaged
-                => src.Data.Clear();
+                => ref Unsafe.Add(ref Unsafe.AsRef(in src.Head), index*src.BlockLength);  
 
         /// <summary>
         /// Constructs a 128-bit blocked span from an unblocked span
@@ -135,126 +85,14 @@ namespace Z0
              where T : unmanaged
                 => DataBlocks.safeload(n,src);
 
-        /// <summary>
-        /// Clones a blocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block256<T> Replicate<T>(this in Block256<T> src, bool structureOnly = false)
-            where T : unmanaged
-        {
-            Span<T> dst = new T[src.CellCount];
-            if(!structureOnly)
-                src.CopyTo(dst);
-            return new Block256<T>(dst);
-        }
+        static N32 n32 => default;
 
-        /// <summary>
-        /// Clones a blocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block256<T> Replicate<T>(this in ConstBlock256<T> src, bool structureOnly = false)
-            where T : unmanaged
-        {
-            Span<T> dst = new T[src.CellCount];
-            if(!structureOnly)
-                src.CopyTo(dst);
-            return new Block256<T>(dst);
-        }
+        static N64 n64 => default;
 
-        [MethodImpl(Inline)]
-        public static Block32<T> Block<T>(this Block32<T> src, int blockIndex, N64 n = default)
-            where T : unmanaged
-                => new Block32<T>(src.Slice(blockIndex * blocklen<T>(n), blocklen<T>(n)));
+        static N128 n128 => default;
 
-        [MethodImpl(Inline)]
-        public static Block32<T> Blocks<T>(this Block32<T> src, int blockIndex, int blockCount, N32 n = default)
-            where T : unmanaged
-                => new Block32<T>(src.Slice(blockIndex * blocklen<T>(n), blockCount * blocklen<T>(n)));
+        static N256 n256 => default;
 
-        [MethodImpl(Inline)]
-        public static Block64<T> Block<T>(this Block64<T> src, int blockIndex, N64 n = default)
-            where T : unmanaged
-                => new Block64<T>(src.Slice(blockIndex * blocklen<T>(n), blocklen<T>(n)));
-        
-        [MethodImpl(Inline)]
-        public static Block64<T> Blocks<T>(this Block64<T> src, int blockIndex, int blockCount, N64 n = default)
-            where T : unmanaged
-                => new Block64<T>(src.Slice(blockIndex * blocklen<T>(n), blockCount * blocklen<T>(n)));
 
-        [MethodImpl(Inline)]
-        public static Block128<T> Block<T>(this Block128<T> src, int blockIndex, N128 n = default)
-            where T : unmanaged
-                => new Block128<T>(src.Slice(blockIndex * blocklen<T>(n), blocklen<T>(n)));
-        
-        [MethodImpl(Inline)]
-        public static Block128<T> Blocks<T>(this Block128<T> src, int blockIndex, int blockCount, N128 n = default)
-            where T : unmanaged
-                => new Block128<T>(src.Slice(blockIndex * blocklen<T>(n), blockCount * blocklen<T>(n)));
-
-        [MethodImpl(Inline)]
-        public static ConstBlock128<T> Block<T>(this ConstBlock128<T> src, int blockIndex, N128 n = default)
-            where T : unmanaged
-            => new ConstBlock128<T>(src.Data.Slice(blockIndex * blocklen<T>(n), blocklen<T>(n)));
-
-        [MethodImpl(Inline)]
-        public static ConstBlock128<T> Blocks<T>(this ConstBlock128<T> src,int blockIndex, int blockCount, N128 n = default)
-            where T : unmanaged
-                => new ConstBlock128<T>(src.Data.Slice(blockIndex * blocklen<T>(n), blockCount * blocklen<T>(n)));
-
-        [MethodImpl(Inline)]
-        public static Block256<T> Block<T>(this Block256<T> src, int blockIndex, N256 n = default)
-            where T : unmanaged
-            => new Block256<T>(src.Slice(blockIndex * blocklen<T>(n), blocklen<T>(n)));
-            
-        [MethodImpl(Inline)]
-        public static Block256<T> Blocks<T>(this Block256<T> src, int blockIndex, int blockCount, N256 n = default)
-            where T : unmanaged
-                => new Block256<T>(src.Slice(blockIndex *  blocklen<T>(n) , blockCount * blocklen<T>(n)));
-
-        [MethodImpl(Inline)]
-        public static ConstBlock256<T> Block<T>(this ConstBlock256<T> src, int blockIndex, N256 n = default)
-            where T : unmanaged
-            => new ConstBlock256<T>(src.Data.Slice(blockIndex * blocklen<T>(n), blocklen<T>(n)));
-
-        [MethodImpl(Inline)]
-        public static ConstBlock256<T> Blocks<T>(this ConstBlock256<T> src,int blockIndex, int blockCount, N256 n = default)
-            where T : unmanaged
-                => new ConstBlock256<T>(src.Data.Slice(blockIndex * blocklen<T>(n), blockCount * blocklen<T>(n)));
-
-        /// <summary>
-        /// Presents the allocated data as a blocked read-only span
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static ConstBlock32<T> ReadOnly<T>(this Block32<T> src)
-            where T : unmanaged
-                => new ConstBlock32<T>(src);
-
-        /// <summary>
-        /// Presents the allocated data as a blocked read-only span
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static ConstBlock64<T> ReadOnly<T>(this Block64<T> src)
-            where T : unmanaged
-                => new ConstBlock64<T>(src);
-
-        /// <summary>
-        /// Presents the allocated data as a blocked read-only span
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static ConstBlock128<T> ReadOnly<T>(this Block128<T> src)
-            where T : unmanaged
-                => new ConstBlock128<T>(src);
-
-        /// <summary>
-        /// Presents the allocated data as a blocked read-only span
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static ConstBlock256<T> ReadOnly<T>(this Block256<T> src)
-            where T : unmanaged
-                => new ConstBlock256<T>(src);
     }
 }

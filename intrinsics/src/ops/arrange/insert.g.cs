@@ -15,7 +15,6 @@ namespace Z0
     
     partial class ginx
     {
-
         /// <summary>
         /// Overwrites a 128-bit lane in the target with the content of the source vector
         /// </summary>

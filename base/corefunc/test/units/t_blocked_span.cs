@@ -41,35 +41,6 @@ namespace Z0.Test
         }
 
 
-        public void db_blocksize_128()
-        {
-            const int size = 16;
-            N128 n = default;
-
-            Claim.eq(size, DataBlocks.blocksize<sbyte>(n));          
-            Claim.eq(size, DataBlocks.blocksize<byte>(n));          
-            Claim.eq(size, DataBlocks.blocksize<short>(n));            
-            Claim.eq(size, DataBlocks.blocksize<int>(n));            
-            Claim.eq(size, DataBlocks.blocksize<float>(n));          
-            Claim.eq(size, DataBlocks.blocksize<double>(n));          
-            Claim.eq(size, DataBlocks.blocksize<long>(n));          
-        }
-
-        public void db_blocksize_256()
-        {
-            const int size = 32;
-            N256 n = default;
-
-            Claim.eq(size, DataBlocks.blocksize<sbyte>(n));          
-            Claim.eq(size, DataBlocks.blocksize<byte>(n));          
-            Claim.eq(size, DataBlocks.blocksize<short>(n));            
-            Claim.eq(size, DataBlocks.blocksize<int>(n));            
-            Claim.eq(size, DataBlocks.blocksize<float>(n));          
-            Claim.eq(size, DataBlocks.blocksize<double>(n));          
-            Claim.eq(size, DataBlocks.blocksize<long>(n));          
-
-        }
-
         public void db_blocklen_128()
         {
             N128 n = default;
@@ -165,11 +136,12 @@ namespace Z0.Test
         {
 
             var blocks = Pow2.T08;   
-            var blocklen = Block128<int>.BlockLength;                     
+                        
             var src = Random.ConstBlocks<int>(n128,blocks);
             var dst = DataBlocks.alloc<int>(n128,blocks);
 
             Claim.eq(src.CellCount, dst.CellCount);
+            var blocklen = src.BlockLength;
 
             for(int block = 0, idx = 0; block<blocks; block++, idx ++)
             {

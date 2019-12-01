@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;    
         
     using static zfunc;
+    using static DataBlocks;
 
     /// <summary>
     /// Encapsulates a readonly span that can be evenly partitioned into 32-bit blocks
@@ -22,12 +23,7 @@ namespace Z0
         /// The natural block width
         /// </summary>
         public static N32 N => default;
-
-        /// <summary>
-        /// The number of cells per block
-        /// </summary>
-        public static int BlockLength => DataBlocks.blocklen<T>(N);
-
+        
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(in ConstBlock32<T> src)
             => src.data;
@@ -39,18 +35,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator != (in ConstBlock32<T> lhs, in ConstBlock32<T> rhs)
             => lhs.data != rhs.data;
-        
+
+        [MethodImpl(Inline)]
+        internal ConstBlock32(Span<T> src)
+            => this.data = src;
+
         [MethodImpl(Inline)]
         internal ConstBlock32(ReadOnlySpan<T> src)
-        {
-            data = src;
-        }
+            => this.data = src;
 
         [MethodImpl(Inline)]
         internal ConstBlock32(in Block32<T> src)
-        {
-            data = src;
-        }
+            => this.data = src.Data;
 
         public ReadOnlySpan<T> Data
         {
@@ -74,12 +70,48 @@ namespace Z0
         }
 
         /// <summary>
+        /// The number of allocated bits
+        /// </summary>
+        public int BitCount 
+        {
+            [MethodImpl(Inline)]
+            get => bitcount<T>(CellCount);
+        }
+
+        /// <summary>
+        /// The number of allocated bytes
+        /// </summary>
+        public int ByteCount 
+        {
+            [MethodImpl(Inline)]
+            get => bytecount<T>(CellCount);
+        }
+
+        /// <summary>
+        /// The number of cells in a block
+        /// </summary>
+        public int BlockLength
+        {
+            [MethodImpl(Inline)]
+            get => blocklen<T>(N);
+        }
+
+        /// <summary>
         /// The number of covered blocks
         /// </summary>
         public int BlockCount 
         {
             [MethodImpl(Inline)]
-            get => data.Length / BlockLength; 
+            get => blockcount<T>(N,CellCount);
+        }
+
+        /// <summary>
+        /// The bit width of a cell
+        /// </summary>
+        public int CellWidth 
+        {
+            [MethodImpl(Inline)]
+            get => cellwidth<T>();
         }
 
         /// <summary>
@@ -102,15 +134,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref readonly T BlockSeek(int index)
             => ref Unsafe.Add(ref Unsafe.AsRef(in Head), index*BlockLength);  
-
-        /// <summary>
-        /// Extracts a block-relative slice
-        /// </summary>
-        /// <param name="offset">The block-relative offset at which to begin extraction</param>
-        /// <param name="count">The number of blocks to extract</param>
-        [MethodImpl(Inline)]
-        public ConstBlock32<T> BlockSlice(int offset, int count)
-            => new ConstBlock32<T>(data.Slice(offset*BlockLength, BlockLength * count));
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<T> Slice(int start)

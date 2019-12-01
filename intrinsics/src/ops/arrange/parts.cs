@@ -49,6 +49,13 @@ namespace Z0
         /// Defines a 128-bit cpu vector componentwise, from least -> most significant
         /// </summary>
         [MethodImpl(Inline)]
+        public static Vector128<int> vpartsi(N128 n, int x0, int x1, int x2, int x3)
+            => Vector128.Create(x0,x1, x2, x3);
+
+        /// <summary>
+        /// Defines a 128-bit cpu vector componentwise, from least -> most significant
+        /// </summary>
+        [MethodImpl(Inline)]
         public static Vector128<long> vpartsi(N128 n, long x0, long x1)
             => Vector128.Create(x0,x1);
 

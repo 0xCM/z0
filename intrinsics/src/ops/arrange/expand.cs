@@ -25,7 +25,20 @@ namespace Z0
         public static void vexpand(Vector128<byte> x, out Vector128<ushort> lo, out Vector128<ushort> hi)
         {            
             vconvert(x, out lo);
-            vconvert(v8u(vhi(x)), out hi);
+            vconvert(vhi(x), out hi);
+        }
+
+        /// <summary>
+        /// 16x8w -> (8x16w, 8x16w)
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="lo">The target for the lower source elements</param>
+        /// <param name="hi">The target for the upper source elements</param>
+        [MethodImpl(Inline)]
+        public static void vexpand(Vector128<sbyte> x, out Vector128<short> lo, out Vector128<short> hi)
+        {            
+            vconvert(x, out lo);
+            vconvert(vhi(x), out hi);
         }
 
         /// <summary>
@@ -38,12 +51,30 @@ namespace Z0
             => vconvert(src, out dst);
 
         /// <summary>
+        /// 16x8w -> 16x16w
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<short> vexpand(Vector128<sbyte> src, out Vector256<short> dst)
+            => vconvert(src, out dst);
+
+        /// <summary>
         /// 8x16w -> 8x32w
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public static Vector256<uint> vexpand(Vector128<ushort> src, out Vector256<uint> dst)
+            => vconvert(src, out dst);
+
+        /// <summary>
+        /// 8x16w -> 8x32w
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<int> vexpand(Vector128<short> src, out Vector256<int> dst)
             => vconvert(src, out dst);
 
         /// <summary>
@@ -61,12 +92,35 @@ namespace Z0
         }
 
         /// <summary>
+        /// 8x16w -> (4x32w,4x32w)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The target for the lower source elements</param>
+        /// <param name="hi">The target for the upper source elements</param>
+        [MethodImpl(Inline)]
+        public static void vexpand(Vector128<short> src, out Vector128<int> lo, out Vector128<int> hi)
+        {
+            vconvert(src, out Vector256<int> dst);
+            lo = vlo(dst);
+            hi = vhi(dst);
+        }
+
+        /// <summary>
         /// 4x32w -> 4x64w
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vexpand(Vector128<uint> src, out Vector256<ulong> dst)
+            => vconvert(src, out dst);
+
+        /// <summary>
+        /// 4x32w -> 4x64w
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<long> vexpand(Vector128<int> src, out Vector256<long> dst)
             => vconvert(src, out dst);
 
         /// <summary>
@@ -96,6 +150,19 @@ namespace Z0
         }
 
         /// <summary>
+        /// 8x32w -> (4x64w,4x64w)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The target for the lower source elements</param>
+        /// <param name="hi">The target for the upper source elements</param>
+        [MethodImpl(Inline)]
+        public static void vexpand(Vector256<int> src, out Vector256<long> lo, out Vector256<long> hi)
+        {
+            vconvert(vlo(src), out lo);
+            vconvert(vhi(src), out hi);
+        }
+
+        /// <summary>
         /// 32x8w -> (8x32w, 8x32w, 8x32w, 8x32w)
         /// </summary>
         /// <param name="src"></param>
@@ -110,5 +177,7 @@ namespace Z0
             vconvert(lo, out x0, out x1);
             vconvert(hi, out x2, out x3);
         }
+
+
     }
 }

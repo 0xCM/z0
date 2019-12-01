@@ -21,7 +21,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            var dst = x.Replicate(true);
+            var dst = x.Replicate();
             vblock.xor(x.Data,y.Data,dst.Data);
             return dst;
         }
@@ -40,7 +40,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            var dst = src.Replicate(true);
+            var dst = src.Replicate();
             sll(src, offset, dst);
             return dst;
         }
@@ -59,7 +59,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            var dst = src.Replicate(true);
+            var dst = src.Replicate();
             return srl(src,offset,ref dst);
         }
 

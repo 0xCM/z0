@@ -57,22 +57,60 @@ namespace Z0
             return fmt.ToString();
         }
 
-        public static string FormatHex(this ReadOnlySpan<byte> src, char sep, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
+        public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
+            bool uppercase = false, bool prespec = true, int? segwidth = null)
         {
             var sb =sbuild();
             var pre = (specifier && prespec) ? "0x" : string.Empty;
             var post = (specifier && !prespec) ? "h" : string.Empty;
             var spec = uppercase ? "X" : "x";
-            
+            var width = segwidth ?? int.MaxValue;
+            var counter = 0;
+            if(segwidth != null)
+                sb.AppendLine();
+
             for(var i=0; i<src.Length; i++)
             {
+                
                 var value = src[i].ToString(spec);
                 var padded = zpad ? value.PadLeft(2,AsciDigits.A0) : value;
+
+
                 sb.Append(concat(pre, padded, post));
                 if(i != src.Length - 1)
                     sb.Append(sep);
+                
+                if(++counter == width)
+                {
+                    sb.AppendLine();
+                    counter = 0;
+                }
+                
             }
             return sb.ToString();
+        }
+
+        public static string FormatHexBytes(this Span<byte> src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
+            bool uppercase = false, bool prespec = true, int? segwidth = null)
+                => src.ReadOnly().FormatHexBytes(sep,zpad,specifier,uppercase,prespec,segwidth);
+
+        public static string FormatHexBytes<T>(this Span<T> src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
+            bool uppercase = false, bool prespec = true)
+                where T : unmanaged
+                    => src.ReadOnly().AsBytes().FormatHexBytes(sep,zpad,specifier,uppercase,prespec, size<T>());
+        
+
+        public static string FormatHexProp<T>(this Span<T> src, string propname = null, string description = null)
+            where T : unmanaged
+        {            
+            var prop = text();
+            var name = propname ?? "HexData";
+            prop.Append(comment(description));
+            prop.Append(($"static ReadOnlySpan<byte> {name} => new byte[]" + AsciSym.LBrace));
+            prop.Append(src.FormatHexBytes());
+            prop.Append(AsciSym.RBrace);
+            prop.Append(AsciSym.Semicolon);
+            return prop.ToString();
         }
 
         [MethodImpl(Inline)]
@@ -321,8 +359,8 @@ namespace Z0
         public static string FormatHex(this IEnumerable<double> src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             => src.Select(x => x.FormatHex(zpad, specifier,uppercase, prespec)).Select(x => x.ToString()).Concat(" ");
  
-        public static string FormatHex(this byte[] src, char sep, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
-            => src.ToReadOnlySpan().FormatHex(sep,zpad,specifier,uppercase,prespec);
+        public static string FormatHex(this byte[] src, char sep, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, int? segwidth = null)
+            => src.ToReadOnlySpan().FormatHexBytes(sep,zpad,specifier,uppercase,prespec);
  
         /// <summary>
         /// Formats a scalar value as a sequence of hex digits
@@ -506,79 +544,6 @@ namespace Z0
              where T : unmanaged
                 => src.ToSpan().FormatHex(bracket,sep, specifier); 
                 
-
-        /// <summary>
-        /// Formats a span of integral type as a blocked hex
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="sep">The character to use as a separator, if applicable</param>
-        /// <param name="specifier">Whether to prefix each block with the canonical hex specifier, "0x"</param>
-        /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatHexBlocks<T>(this ReadOnlySpan<T> src, int? width, char? sep, bool specifier)
-            where T : unmanaged
-                => src.FormatHex().SeparateBlocks(width ?? size<T>()*2, sep ?? AsciSym.Space, specifier ? "0x" : string.Empty);
-
-        /// <summary>
-        /// Formats a span of integral type as a blocked hex
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="sep">The character to use as a separator, if applicable</param>
-        /// <param name="specifier">Whether to prefix each block with the canonical hex specifier, "0x"</param>
-        /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatHexBlocks<T>(this Span<T> src, int? width, char? sep, bool specifier)
-            where T : unmanaged
-                => src.ReadOnly().FormatHexBlocks(width,sep,specifier);
-
-        /// <summary>
-        /// Formats span cells as blocked hex
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="width">The block width</param>
-        /// <param name="sep">The block delimiter</param>
-        /// <typeparam name="T">The cell component type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatHexBlocks<T>(this Span<T> src, int? width = null, char? sep = null)
-            where T : unmanaged
-                => src.ReadOnly().FormatHexBlocks(width, sep, false);
-
-        /// <summary>
-        /// Formats span cells as blocked hex
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="width">The block width</param>
-        /// <param name="sep">The block delimiter</param>
-        /// <typeparam name="T">The cell component type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatHexBlocks<T>(this Block128<T> src, int? width = null, char? sep = null)
-            where T : unmanaged
-                => src.Data.FormatHexBlocks(width, sep);
-        
-        /// <summary>
-        /// Formats span cells as blocked hex
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="width">The block width</param>
-        /// <param name="sep">The block delimiter</param>
-        /// <typeparam name="T">The cell component type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatHexBlocks<T>(this Block256<T> src, int? width = null, char? sep = null)
-            where T : unmanaged
-                => src.Data.FormatHexBlocks(width, sep);
-
-        /// <summary>
-        /// Formats span cells as blocked hex
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="width">The block width</param>
-        /// <param name="sep">The block delimiter</param>
-        /// <typeparam name="T">The cell component type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatHexBlocks<N,T>(this NatSpan<N,T> src, int? width = null, char? sep = null)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => src.Unsized.FormatHexBlocks(width,sep);
 
     }
 

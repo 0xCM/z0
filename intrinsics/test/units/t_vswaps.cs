@@ -5,18 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.IO;
     
     using static zfunc;
-    using static nfunc;
 
     public class t_vswaps : IntrinsicTest<t_vswaps>
-    {
-        
+    {        
         public void transpose_check()
         {
             var a = dinx.vparts(n128, 0u,1,2,3);
@@ -30,8 +25,7 @@ namespace Z0
             var x1 = dinx.vunpackhi(v8u(a), v8u(b));
             var y1 = dinx.vunpackhi(v8u(c), v8u(d));
             var z2 = v8u(dinx.vunpacklo(v16u(x1),v16u(y1)));
-            var z3 = v8u(dinx.vunpackhi(v16u(x1),v16u(y1)));
-                            
+            var z3 = v8u(dinx.vunpackhi(v16u(x1),v16u(y1)));                            
         }
 
         public void transpose_4x4_check()
@@ -63,17 +57,6 @@ namespace Z0
             for(var i=0; i < order; i++)
             for(var j=0; j < order; j++)
                 Claim.eq(A[i,j], B[j,i]);
-
-        }
-
-        public void shift_test()
-        {
-            var m = dinx.vbroadcast(n128, (ushort)0xFF);
-            var x = ginx.vincrements<byte>(n128);
-            dinx.vconvert(x, out Vector256<ushort> y);
-            var z = dinx.vsll(y,1);
-            var z0 = dinx.vand(dinx.vlo(z),m);
-            var z1 = dinx.vand(dinx.vhi(z),m);
         }
 
         public void perm_swaps()
@@ -91,6 +74,5 @@ namespace Z0
             var x3 = dinx.vswap(src, chain).ToSpan();
             Claim.eq(x3[15],(byte)0);            
         }
-
     }
 }

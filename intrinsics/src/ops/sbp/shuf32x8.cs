@@ -38,8 +38,6 @@ namespace Z0
         public static Vector256<ulong> vshuf32x8(Vector256<ulong> a, Vector256<byte> spec)
             => v64u(vshuf32x8(v8u(a), spec));
 
-
-
         const byte M70 = 0b01110000;
 
         const byte MF0 = 0b11110000;

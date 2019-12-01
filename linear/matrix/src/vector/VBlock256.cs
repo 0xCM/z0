@@ -106,8 +106,8 @@ namespace Z0
             where U : unmanaged
               => new VBlock256<U>(convert<T,U>(data));
 
-        public VBlock256<T> Replicate(bool structureOnly = false)
-            => new VBlock256<T>(data.Replicate(structureOnly));
+        public VBlock256<T> Replicate()
+            => new VBlock256<T>(data.Replicate());
 
         public bool Equals(VBlock256<T> rhs)
         {

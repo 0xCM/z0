@@ -26,7 +26,7 @@ namespace Z0
         {
             var bytes = src.AsBytes();
             var decl = $"public static ReadOnlySpan<byte> {name}{bitsize<T>()}{suffix<T>()}";
-            var data = embrace(bytes.FormatHex(sep: AsciSym.Comma, specifier:true));
+            var data = embrace(bytes.FormatHexBytes(sep: AsciSym.Comma, specifier:true));
             var rhs = $"new byte[{bytes.Length}]" + data;
             return $"{decl} => {rhs};";
         }
