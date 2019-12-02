@@ -14,6 +14,11 @@ namespace Z0
     partial class BlockExtend    
     {
        [MethodImpl(Inline)]
+        public static void Fill<T>(this Block16<T> src,T value)
+            where T : unmanaged
+                => src.Data.Fill(value);
+
+       [MethodImpl(Inline)]
         public static void Fill<T>(this Block32<T> src,T value)
             where T : unmanaged
                 => src.Data.Fill(value);

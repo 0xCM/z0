@@ -24,7 +24,7 @@ namespace Z0
         {
             ulong src = g;
             var dst = BitGrid.alloc<byte>(n64,n8,n8);
-            var x = dinx.vmov(n128,src);
+            var x = dinx.vmovscalar(n128,src);
             dst[7] = (byte)dinx.vmovemask(v8u(x));
             x = dinx.vsll(x,1);
             dst[6] = (byte)dinx.vmovemask(v8u(x));

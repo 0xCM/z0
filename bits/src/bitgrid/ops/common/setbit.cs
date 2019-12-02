@@ -11,7 +11,6 @@ namespace Z0
 
     partial class BitGrid
     {
-
         /// <summary>
         /// Sets the state of a grid bit identified by its linear position
         /// </summary>
@@ -52,8 +51,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => setbit(BitCalcs.bitpos(natval(width),row,col), state, ref dst);
-
-
     }
 
 }

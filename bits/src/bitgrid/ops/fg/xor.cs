@@ -13,6 +13,16 @@ namespace Z0
 
     partial class BitGrid
     {        
+        /// <summary>
+        /// Computes the bitwise XOR between fixed-width 16-bit generic bitgrids
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid16<T> xor<T>(BitGrid16<T> gx, BitGrid16<T> gy)
+            where T : unmanaged
+                => math.xor(gx,gy);
 
         /// <summary>
         /// Computes the bitwise XOR between fixed-width 32-bit generic bitgrids

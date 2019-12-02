@@ -8,12 +8,10 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.IO;
     using static AsIn;
     using static As;
 
     using static zfunc;
-
 
     /// <summary>
     /// Specifies a memory size UOM in bits
@@ -21,31 +19,29 @@ namespace Z0
     public readonly struct BitSize
     {
         /// <summary>
-        /// Calculates the (minimum) number of segments required to hold 
-        /// a contiguous sequence of bits
+        /// Calculates the (minimum) number of cells required to hold a contiguous sequence of bits
         /// </summary>
-        /// <param name="capacity">The number of bits that comprise each segment</param>
-        /// <param name="bitcount">The number of bits</param>
-        public static int Segments(BitSize capacity, BitSize bitcount)
+        /// <param name="cellwidth">The number of bits that comprise each segment</param>
+        /// <param name="totalbits">The number of bits</param>
+        public static int CellCount(BitSize cellwidth, BitSize totalbits)
         {
-            if(capacity >= bitcount)
+            if(cellwidth >= totalbits)
                 return 1;
             else
             {
-                var q = Math.DivRem(bitcount, capacity, out int r);
+                var q = Math.DivRem(totalbits, cellwidth, out int r);
                 return r == 0 ? q : q + 1;
             }
         }
 
         /// <summary>
-        /// Calculates the minimum number of segments required to hold a contiguous sequence of bits
+        /// Calculates the minimum number of cells required to hold a contiguous sequence of bits
         /// </summary>
-        /// <param name="segsize">The number of bytes that comprise each segment</param>
-        /// <param name="bitcount">The number of bits</param>
-        /// <typeparam name="T">The segment type</typeparam>
-        public static int Segments<T>(int bitcount)
+        /// <param name="totalbits">The number of bits</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        public static int CellCount<T>(int totalbits)
             where T : unmanaged
-                => Segments(bitsize<T>(), bitcount);
+                => CellCount(bitsize<T>(), totalbits);
 
         /// <summary>
         /// Calculates a canonical bijection from a contiguous sequence of bits onto a contiguous sequence of segments

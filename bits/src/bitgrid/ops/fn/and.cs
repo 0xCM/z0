@@ -13,9 +13,21 @@ namespace Z0
 
     partial class BitGrid
     {        
+        /// <summary>
+        /// Computes the bitwise AND between fixed-width natural bitgrids
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid16<M,N,T> and<M,N,T>(BitGrid16<M,N,T> gx, BitGrid16<M,N,T> gy)
+            where T : unmanaged
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+                => math.and(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise AND between fixed-width 32-bit natural bitgrids
+        /// Computes the bitwise AND between fixed-width natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -27,9 +39,8 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => math.and(gx,gy);
 
-
         /// <summary>
-        /// Computes the bitwise AND between fixed-width 64-bit natural bitgrids
+        /// Computes the bitwise AND between fixed-width natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -42,7 +53,7 @@ namespace Z0
                 => math.and(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise AND between 128-bit fixed-width natural bitgrids
+        /// Computes the bitwise AND between fixed-width natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -55,7 +66,7 @@ namespace Z0
                 => ginx.vand<T>(gx,gy);    
 
         /// <summary>
-        /// Computes the bitwise AND between 256-bit fixed-width natural bitgrids
+        /// Computes the bitwise AND between fixed-width natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -66,8 +77,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
                 => ginx.vand<T>(gx,gy);    
-
-
     }
-
 }

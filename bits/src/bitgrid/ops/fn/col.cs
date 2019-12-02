@@ -20,6 +20,42 @@ namespace Z0
         /// <param name="index">The zero-based column index, in the inclusive range 0...7</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
+        public static bit col<N,T>(BitGrid16<N1,N,T> g, int index)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => Bits.gather(g, BitMask.Lsb16x1 << index) == 1;            
+
+        /// <summary>
+        /// Extracts an index-identifed 4-bit grid column
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        /// <param name="index">The zero-based column index, in the inclusive range 0...3</param>
+        /// <typeparam name="T">The grid cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N4,byte> col<N,T>(BitGrid16<N4,N4,T> g, int index)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => (byte)Bits.gather(g, BitMask.Lsb16x4 << index);            
+
+        /// <summary>
+        /// Extracts an index-identifed 4-bit grid column
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        /// <param name="index">The zero-based column index, either 0 or 1</param>
+        /// <typeparam name="T">The grid cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N8,byte> col<N,T>(BitGrid16<N2,N8,T> g, int index)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => (byte)Bits.gather(g, BitMask.Lsb16x8 << index);            
+
+        /// <summary>
+        /// Extracts an index-identifed 1-bit grid column
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        /// <param name="index">The zero-based column index, in the inclusive range 0...7</param>
+        /// <typeparam name="T">The grid cell type</typeparam>
+        [MethodImpl(Inline)]
         public static bit col<N,T>(BitGrid32<N1,N,T> g, int index)
             where T : unmanaged
             where N : unmanaged, ITypeNat

@@ -14,10 +14,34 @@ namespace Z0
     partial class BitGrid
     {        
         /// <summary>
-        /// Extracts an index-identifed row
+        /// Extracts an index-identifed 1-bit grid row
         /// </summary>
         /// <param name="g">The source grid</param>
         /// <param name="index">The zero-based row index, in the inclusive range 0...15</param>
+        /// <typeparam name="T">The grid cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static bit row<M,T>(BitGrid16<M,N1,T> g, int index)
+            where T : unmanaged
+            where M : unmanaged, ITypeNat
+                => Bits.extract(g, index*1, 1) == 1;
+
+        /// <summary>
+        /// Extracts an index-identifed 4-bit grid row
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        /// <param name="index">The zero-based row index, in the inclusive range 0...15</param>
+        /// <typeparam name="T">The grid cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N4,byte> row<M,T>(BitGrid16<N4,N4,T> g, int index)
+            where T : unmanaged
+            where M : unmanaged, ITypeNat
+                => (byte)Bits.extract(g, index*2, 4);
+
+        /// <summary>
+        /// Extracts an index-identifed 1-bit grid row
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        /// <param name="index">The zero-based row index, in the inclusive range 0...31</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
         public static bit row<M,T>(BitGrid32<M,N1,T> g, int index)

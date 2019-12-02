@@ -23,7 +23,6 @@ namespace Z0
             byte x8, byte x9, byte xa, byte xb, byte xc, byte xd, byte xe, byte xf)
                 => Vector128.Create(x0,x1, x2, x3, x4, x5, x6, x7,x8,x9,xa,xb,xc,xd,xe,xf);
 
-
         /// <summary>
         /// Defines a 128-bit cpu vector componentwise, from least -> most significant
         /// </summary>

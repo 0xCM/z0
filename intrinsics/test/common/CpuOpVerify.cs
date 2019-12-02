@@ -19,7 +19,7 @@ namespace Z0
             where T : unmanaged
         {
             
-            var src = random.ConstBlocks<T>(n128,blocks);
+            var src = random.Blocks<T>(n128,blocks).ReadOnly();
             var blocklen = src.BlockLength;
             Claim.eq(blocks*blocklen,src.CellCount);
                         
@@ -54,7 +54,7 @@ namespace Z0
             where T : unmanaged
         {
             
-            var src = random.ConstBlocks<T>(n256,blocks);
+            var src = random.Blocks<T>(n256,blocks).ReadOnly();
             var blocklen = src.BlockLength;                     
 
             Claim.eq(blocks*blocklen,src.CellCount);
@@ -91,11 +91,11 @@ namespace Z0
             where T : unmanaged
         {
             
-            var lhs = random.ConstBlocks<T>(n128,blocks);
+            var lhs = random.Blocks<T>(n128,blocks).ReadOnly();
             var blocklen = lhs.BlockLength;
             Claim.eq(blocks*blocklen,lhs.CellCount);
             
-            var rhs = random.ConstBlocks<T>(n128,blocks);
+            var rhs = random.Blocks<T>(n128,blocks).ReadOnly();
             Claim.eq(blocks*blocklen,rhs.CellCount);
             
             var expect = DataBlocks.alloc<T>(n128,blocks);
@@ -130,11 +130,11 @@ namespace Z0
         public static void VerifyBinOp<T>(IPolyrand random, int blocks, Vector256BinOp<T> inXOp, Func<T,T,T> primalOp)
             where T : unmanaged
         {                    
-            var lhs = random.ConstBlocks<T>(n256, blocks);
+            var lhs = random.Blocks<T>(n256, blocks).ReadOnly();
             var blocklen = lhs.BlockLength;                     
             Claim.eq(blocks*blocklen,lhs.CellCount);
             
-            var rhs = random.ConstBlocks<T>(n256,blocks);
+            var rhs = random.Blocks<T>(n256,blocks).ReadOnly();
             Claim.eq(blocks*blocklen,rhs.CellCount);
             
             var expect = DataBlocks.alloc<T>(n256,blocks);

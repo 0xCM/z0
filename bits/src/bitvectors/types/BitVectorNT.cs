@@ -19,7 +19,8 @@ namespace Z0
     /// First, the bit width of the primal cell which determines the maximum number of
     /// bits that can be covered. Next is the natural parametric width that defines an
     /// upper bound for the effective width. Finally, is the effective bitvector width, a value
-    /// which is bounded above by the the natural width/remarks>
+    /// which is bounded above by the the natural width
+    /// </remarks>
     public struct BitVector<N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged

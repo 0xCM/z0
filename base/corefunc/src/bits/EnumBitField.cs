@@ -36,7 +36,7 @@ namespace Z0
         /// <summary>
         /// Reads or Sets a value-identified field
         /// </summary>
-        public Bit this[T id]
+        public bit this[T id]
         {            
             [MethodImpl(Inline)]
             get => bits[0, System.Convert.ToByte(id)];

@@ -90,7 +90,7 @@ namespace Z0
         public static VBlock256<N,T> blockalloc<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                =>  VBlock256<N,T>.Load(DataBlocks.alloc<N,T>(n256));
+                => VBlock256<N,T>.Load(DataBlocks.taballoc<T>(n256, natval(n)));
         
         /// <summary>
         /// Allocates a block vector optionally filled with a specified value

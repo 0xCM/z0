@@ -11,6 +11,15 @@ namespace Z0
 
     public class t_vcompact : IntrinsicTest<t_vcompact>
     {
+        public void vcompact_2x128x64u_128x32u()
+        {
+            var n = n128;
+            var x0 = dinx.vparts(n, 25, 50);
+            var x1 = dinx.vparts(n, 75, 10);
+            dinx.vcompact(x0,x1, out var dst);
+            var expect = dinx.vparts(n,25,50,75,10);
+            Claim.eq(expect,dst);
+        }
         public void vcompact_basecase_128()
         {
             var n = n128;

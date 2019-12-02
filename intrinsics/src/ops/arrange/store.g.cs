@@ -13,6 +13,35 @@ namespace Z0
 
     partial class ginx
     {
+        /// <summary>
+        /// Stores the source vector to a blocked container
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target block</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static void vstore<T>(Vector128<T> src, in Block128<T> dst)
+            where T : unmanaged
+                => vstore(src, ref dst.Head, 0);
+
+        /// <summary>
+        /// Stores the source vector to a blocked container
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target block</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static void vstore<T>(Vector256<T> src, in Block256<T> dst)
+            where T : unmanaged
+                => vstore(src, ref dst.Head, 0);
+
+        /// <summary>
+        /// Stores the source vector to a reference cell
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target reference</param>
+        /// <param name="offset">The target offset</param>
+        /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
         public static void vstore<T>(Vector128<T> src, ref T dst, int offset)
             where T : unmanaged
@@ -32,12 +61,12 @@ namespace Z0
         }
 
         /// <summary>
-        /// Stores 256-bit vector data to a target reference starting at a cell-relative offset
+        /// Stores the source vector to a reference cell
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target block</param>
+        /// <param name="dst">The target reference</param>
         /// <param name="offset">The target offset</param>
-        /// <typeparam name="T">The vector cell type</typeparam>
+        /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
         public static void vstore<T>(Vector256<T> src, ref T dst, int offset)
             where T : unmanaged
@@ -54,42 +83,6 @@ namespace Z0
                 vstore256_i(src, ref dst, offset);
             else 
                 vstore256_f(src, ref dst, offset);
-        }
-
-        /// <summary>
-        /// Stores 128-bit vector data to a target block
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target block</param>
-        /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static void vstore<T>(Vector128<T> src, Block128<T> dst)
-            where T : unmanaged
-                => vstore(src, ref dst.Head, 0);
-
-        /// <summary>
-        /// Stores 256-bit vector data to a target block
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target block</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
-        public static void vstore<T>(Vector256<T> src, Block256<T> dst)
-            where T : unmanaged
-                => vstore(src, ref dst.Head, 0);
-
-        [MethodImpl(Inline)]
-        static unsafe void vstore_i<T>(Vector128<T> src, ref T dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                dinx.vstore(vcast8i(src), ref int8(ref dst));
-            else if(typeof(T) == typeof(short))
-                dinx.vstore(vcast16i(src), ref int16(ref dst));
-            else if(typeof(T) == typeof(int))
-                dinx.vstore(vcast32i(src), ref int32(ref dst));
-            else 
-                dinx.vstore(vcast64i(src), ref int64(ref dst));
         }
 
         [MethodImpl(Inline)]

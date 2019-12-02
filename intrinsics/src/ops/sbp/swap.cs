@@ -80,7 +80,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<ulong> vswaphl(Vector128<ulong> x)
-            => vinsert(vcell(x,0), vmov(n128,vcell(x,1)), 1);
+            => vinsert(vcell(x,0), vmovscalar(n128,vcell(x,1)), 1);
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -88,7 +88,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<long> vswaphl(Vector128<long> x)
-            => vinsert(vcell(x,0), vmov(n128,vcell(x,1)), 1);
+            => vinsert(vcell(x,0), vmovscalar(n128,vcell(x,1)), 1);
 
         /// <summary>
         /// Swaps the source vectors' hi/lo 128-bit lanes

@@ -13,7 +13,23 @@ namespace Z0
     partial class DataBlocks
     {
         /// <summary>
-        /// Creates 64-bit blocked span from a parameter array and raises an error if the data source is not block-aligned
+        /// Creates 16-bit blocked container from a parameter array and raises an error if the data source is not block-aligned
+        /// </summary>
+        /// <param name="n">The bitness selector</param>
+        /// <param name="src">The source data</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Block16<T> parts<T>(N16 n, params T[] src)
+            where T : unmanaged        
+        {
+            if(!aligned<T>(n,src.Length))
+                badsize(n, src.Length);      
+            
+            return new Block16<T>(src);
+        }
+
+        /// <summary>
+        /// Creates 32-bit blocked span from a parameter array and raises an error if the data source is not block-aligned
         /// </summary>
         /// <param name="n">The bitness selector</param>
         /// <param name="src">The source data</param>
@@ -24,6 +40,7 @@ namespace Z0
         {
             if(!aligned<T>(n,src.Length))
                 badsize(n, src.Length);      
+            
             return new Block32<T>(src);
         }
 
@@ -39,6 +56,7 @@ namespace Z0
         {
             if(!aligned<T>(n,src.Length))
                 badsize(n, src.Length);      
+            
             return new Block64<T>(src);
         }
 

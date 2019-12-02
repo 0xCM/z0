@@ -16,6 +16,14 @@ namespace Z0
         /// Presents the allocated data as a blocked read-only span
         /// </summary>
         [MethodImpl(Inline)]
+        public static ConstBlock16<T> ReadOnly<T>(this Block16<T> src)
+            where T : unmanaged
+                => new ConstBlock16<T>(src.Data);
+
+        /// <summary>
+        /// Presents the allocated data as a blocked read-only span
+        /// </summary>
+        [MethodImpl(Inline)]
         public static ConstBlock32<T> ReadOnly<T>(this Block32<T> src)
             where T : unmanaged
                 => new ConstBlock32<T>(src.Data);

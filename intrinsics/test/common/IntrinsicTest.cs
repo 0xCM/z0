@@ -44,7 +44,7 @@ namespace Z0
             {
                 var x = Random.Blocks<T>(n);
                 var y = Random.Blocks<T>(n);
-                var z = DataBlocks.alloc<T>(n);
+                var z = DataBlocks.single<T>(n);
                 
                 for(var j=0; j<z.CellCount; j++)
                     if(gmath.gt(x[j],y[j]))
@@ -69,7 +69,7 @@ namespace Z0
             {
                 var x = Random.Blocks<T>(n);
                 var y = Random.Blocks<T>(n);
-                var z = DataBlocks.alloc<T>(n);
+                var z = DataBlocks.single<T>(n);
                 
                 for(var j=0; j<z.CellCount; j++)
                     if(gmath.gt(x[j],y[j]))
@@ -136,7 +136,7 @@ namespace Z0
             {
                 var x = Random.Blocks<T>(n);
                 var y = Random.Blocks<T>(n);
-                var z = DataBlocks.alloc<T>(n);
+                var z = DataBlocks.single<T>(n);
                 
                 for(var j=0; j<z.CellCount; j++)
                     if(gmath.lt(x[j],y[j]))
@@ -161,7 +161,7 @@ namespace Z0
             {
                 var x = Random.Blocks<T>(n);
                 var y = Random.Blocks<T>(n);
-                var z = DataBlocks.alloc<T>(n);
+                var z = DataBlocks.single<T>(n);
                 
                 for(var j=0; j<z.CellCount; j++)
                     if(gmath.lt(x[j],y[j]))
@@ -221,7 +221,7 @@ namespace Z0
                 var vX = srcX.LoadVector();
                 var vY = srcY.LoadVector();
                 
-                var dstExpect = DataBlocks.alloc<T>(n);
+                var dstExpect = DataBlocks.single<T>(n);
                 for(var i=0; i< dstExpect.CellCount; i++)
                     dstExpect[i] = gmath.or(srcX[i], srcY[i]);
                 
@@ -241,7 +241,7 @@ namespace Z0
                 var vX = srcX.LoadVector();
                 var vY = srcY.LoadVector();
 
-                var dstExpect = DataBlocks.alloc<T>(n);
+                var dstExpect = DataBlocks.single<T>(n);
                 for(var i=0; i< dstExpect.CellCount; i++)
                     dstExpect[i] = gmath.or(srcX[i], srcY[i]);
                 
@@ -357,7 +357,7 @@ namespace Z0
                 var vX = bX.LoadVector();
                 var vY = bY.LoadVector();
                 
-                var bExpect = DataBlocks.alloc<T>(n);
+                var bExpect = DataBlocks.single<T>(n);
                 for(var i=0; i< bExpect.CellCount; i++)
                     bExpect[i] = gmath.xor(bX[i], bY[i]);
                 
@@ -377,7 +377,7 @@ namespace Z0
                 var vX = bX.LoadVector();
                 var vY = bY.LoadVector();
 
-                var bExpect = DataBlocks.alloc<T>(n);
+                var bExpect = DataBlocks.single<T>(n);
                 for(var i=0; i< bExpect.CellCount; i++)
                     bExpect[i] = gmath.xor(bX[i], bY[i]);
                 
@@ -841,7 +841,7 @@ namespace Z0
 
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
-                var zs = DataBlocks.alloc<T>(n);
+                var zs = DataBlocks.single<T>(n);
                 for(var i=0; i<zs.CellCount; i++)
                     zs[i] = gmath.max(xs[i],ys[i]);
                 
@@ -862,7 +862,7 @@ namespace Z0
 
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
-                var zs = DataBlocks.alloc<T>(n);
+                var zs = DataBlocks.single<T>(n);
                 for(var i=0; i<zs.CellCount; i++)
                     zs[i] = gmath.max(xs[i],ys[i]);
                 
@@ -914,7 +914,7 @@ namespace Z0
 
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
-                var zs = DataBlocks.alloc<T>(n);
+                var zs = DataBlocks.single<T>(n);
                 for(var i=0; i<zs.CellCount; i++)
                     zs[i] = gmath.min(xs[i],ys[i]);
                 
@@ -934,7 +934,7 @@ namespace Z0
 
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
-                var zs = DataBlocks.alloc<T>(n);
+                var zs = DataBlocks.single<T>(n);
                 for(var i=0; i<zs.CellCount; i++)
                     zs[i] = gmath.min(xs[i],ys[i]);
                 

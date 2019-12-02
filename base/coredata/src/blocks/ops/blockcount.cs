@@ -13,6 +13,16 @@ namespace Z0
     partial class DataBlocks
     {
         [MethodImpl(Inline)]
+        public static int blockcount<T>(N8 n, int cellcount)
+            where T : unmanaged
+                => cellcount/blocklen<T>(n);
+
+        [MethodImpl(Inline)]
+        public static int blockcount<T>(N16 n, int cellcount)
+            where T : unmanaged
+                => cellcount/blocklen<T>(n);
+
+        [MethodImpl(Inline)]
         public static int blockcount<T>(N32 n, int cellcount)
             where T : unmanaged
                 => cellcount/blocklen<T>(n);
@@ -31,6 +41,22 @@ namespace Z0
         public static int blockcount<T>(N256 n, int cellcount)
             where T : unmanaged
                 => cellcount/blocklen<T>(n);
+
+        [MethodImpl(Inline)]
+        public static int blockcount<T>(N8 n, int length, out int uncovered)
+            where T : unmanaged   
+        {       
+            uncovered = length % blocklen<T>(n);
+            return length/blocklen<T>(n);
+        }
+
+        [MethodImpl(Inline)]
+        public static int blockcount<T>(N16 n, int length, out int uncovered)
+            where T : unmanaged   
+        {       
+            uncovered = length % blocklen<T>(n);
+            return length/blocklen<T>(n);
+        }
 
         [MethodImpl(Inline)]
         public static int blockcount<T>(N32 n, int length, out int uncovered)

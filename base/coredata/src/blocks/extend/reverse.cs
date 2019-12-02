@@ -11,10 +11,19 @@ namespace Z0
     using System.Collections.Generic;
 
     using static zfunc;
-    using static DataBlocks;
 
     partial class BlockExtend    
     {
+        /// <summary>
+        /// Reverses the covered cells
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static void Reverse<T>(this Block16<T> src)
+            where T : unmanaged
+                => src.Data.Reverse();
+
         /// <summary>
         /// Reverses the covered cells
         /// </summary>
@@ -54,7 +63,6 @@ namespace Z0
         public static void Reverse<T>(this Block256<T> src)
             where T : unmanaged
                 => src.Data.Reverse();
-
     }
 
 }

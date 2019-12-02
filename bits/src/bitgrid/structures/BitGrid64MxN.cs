@@ -48,7 +48,7 @@ namespace Z0
         public static int GridCells => BitGrid64<T>.GridCells;
 
         [MethodImpl(Inline)]
-        public static implicit operator BitGrid64<M,N,T>(Block64<T> src)
+        public static implicit operator BitGrid64<M,N,T>(in Block64<T> src)
             => new BitGrid64<M, N, T>(src);
 
         [MethodImpl(Inline)]

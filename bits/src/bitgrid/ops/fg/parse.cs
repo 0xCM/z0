@@ -13,6 +13,17 @@ namespace Z0
 
     partial class BitGrid
     {        
+        /// <summary>
+        /// Hydrates a fixed-width 16-bit dimensionless grid from a bitstring
+        /// </summary>
+        /// <param name="bs">The source bitstring</param>
+        /// <param name="n">The number of bitstring bits to parse</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid16<T> parse<T>(BitString bs, N16 n, T t = default)
+            where T : unmanaged
+                => bs.TakeUInt16();
 
         /// <summary>
         /// Hydrates a fixed-width 32-bit dimensionless grid from a bitstring
@@ -51,7 +62,7 @@ namespace Z0
                 => dinx.vload(n, head(bs.Pack(0,n)));
 
         /// <summary>
-        /// Hydrates a fixed-width 128-bit dimensionless grid from a bitstring
+        /// Hydrates a fixed-width 256-bit dimensionless grid from a bitstring
         /// </summary>
         /// <param name="bs">The source bitstring</param>
         /// <param name="n">The number of bitstring bits to parse</param>

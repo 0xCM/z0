@@ -15,6 +15,7 @@ namespace Z0
 
         /// <summary>
         /// (8x16w,8x16w) -> 16x8w
+        /// Compacts 16 16-bit integers to 16 8-bit integers
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -24,6 +25,7 @@ namespace Z0
 
         /// <summary>
         /// (8x16w,8x16w) -> 16x8w
+        /// Compacts 16 16-bit integers to 16 8-bit integers
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -34,6 +36,7 @@ namespace Z0
 
         /// <summary>
         /// (16x16w,16x16w) -> 32x8w
+        /// Compacts 32 16-bit integers to 32 8-bit integers
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -43,6 +46,7 @@ namespace Z0
 
         /// <summary>
         /// (16x16w,16x16w) -> 32x8w
+        /// Compacts 32 16-bit integers to 32 8-bit integers
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -53,6 +57,7 @@ namespace Z0
 
         /// <summary>
         /// 16x16w -> 16x8w
+        /// Compacts 16 16-bit integers to 16 8-bit integers
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -62,6 +67,7 @@ namespace Z0
 
         /// <summary>
         /// (4x32w,4x32w) -> 8x16w
+        /// Compacts 8 32-bit integers to 8 16-bit integers
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -71,6 +77,7 @@ namespace Z0
 
         /// <summary>
         /// 8x32w -> 8x16w
+        /// Compacts 8 32-bit integers to 8 16-bit integers
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -80,6 +87,7 @@ namespace Z0
 
         /// <summary>
         /// (4x32w,4x32w) -> 8x16w
+        /// Compacts 8 32-bit integers to 8 16-bit integers
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -90,6 +98,7 @@ namespace Z0
 
         /// <summary>
         /// (8x32w,8x32w) -> 16x16w
+        /// Compacts 16 32-bit integers to 16 16-bit integers
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
         /// <remarks>The vpackus intrinsic emits a vector in the following form: 
@@ -103,6 +112,7 @@ namespace Z0
 
         /// <summary>
         /// (8x32w,8x32w) -> 16x16w
+        /// Compacts 16 32-bit integers to 16 16-bit integers
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -112,6 +122,7 @@ namespace Z0
 
         /// <summary>
         /// (4x32w,4x32w,4x32w,4x32w) -> 16x8w
+        /// Compacts 16 32-bit integers to 16 8-bit integers
         /// </summary>
         /// <param name="x0">The first source vector</param>
         /// <param name="x1">The second source vector</param>
@@ -127,6 +138,7 @@ namespace Z0
 
         /// <summary>
         /// (4x32w,4x32w,4x32w,4x32w) -> 16x8w
+        /// Compacts 16 32-bit integers to 16 8-bit integers
         /// </summary>
         /// <param name="x0">The first source vector</param>
         /// <param name="x1">The second source vector</param>
@@ -138,7 +150,19 @@ namespace Z0
             => dst = vcompact(x0,x1,x2,x3);
 
         /// <summary>
+        /// (8x32w, 8x32w) -> 16x8w
+        /// Compacts 16 32-bit integers to 16 8-bit integers
+        /// </summary>
+        /// <param name="x0">The first source vector</param>
+        /// <param name="x1">The second source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vcompact(Vector256<uint> x0, Vector256<uint> x1, out Vector128<byte> dst)            
+            => vcompact(vcompact(x0,x1, out Vector256<ushort> _), out dst);
+
+        /// <summary>
         /// (8x32w,8x32w,8x32w,8x32w) -> 32x8w
+        /// Compacts 32 32-bit integers to 32 8-bit integers
         /// </summary>
         /// <param name="x0">The first source vector</param>
         /// <param name="x1">The second source vector</param>
@@ -154,6 +178,7 @@ namespace Z0
 
         /// <summary>
         /// (8x32w,8x32w,8x32w,8x32w) -> 32x8w
+        /// Compacts 32 32-bit integers to 32 8-bit integers
         /// </summary>
         /// <param name="x0">The first source vector</param>
         /// <param name="x1">The second source vector</param>
@@ -164,6 +189,11 @@ namespace Z0
         public static Vector256<byte> vcompact(Vector256<uint> x0, Vector256<uint> x1, Vector256<uint> x2, Vector256<uint> x3, out Vector256<byte> dst)            
             => dst = vcompact(x0,x1,x2,x3);
 
-
+        [MethodImpl(Inline)]
+        public static Vector128<uint> vcompact(Vector128<ulong> x0, Vector128<ulong> x1, out Vector128<uint> dst)
+        {            
+            dst = vparts(n128, (uint)vcell(x0, 0),(uint)vcell(x0, 1),(uint)vcell(x1, 0),(uint)vcell(x1, 1));
+            return dst;
+        }
     }
 }

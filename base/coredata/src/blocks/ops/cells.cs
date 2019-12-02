@@ -13,6 +13,20 @@ namespace Z0
     partial class DataBlocks
     {
         /// <summary>
+        /// Creates a 16-bit blocked container from 1 16-bit cell
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static Block16<ushort> cells(N16 n, ushort x0)
+            => parts(n,x0);
+
+        /// <summary>
+        /// Creates a 16-bit blocked container from 1 64-bit cell
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static Block16<ulong> cells(N16 n, ulong x0)
+            => parts(n,x0);
+
+        /// <summary>
         /// Creates a 32-bit blocked container from 1 64-bit cell
         /// </summary>
         [MethodImpl(Inline)]

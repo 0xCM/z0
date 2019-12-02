@@ -19,9 +19,31 @@ namespace Z0
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
+        public static Block16<T> Reblock<T>(this Block32<T> src, N16 n)
+             where T : unmanaged
+                => new Block16<T>(src.Data);
+
+        /// <summary>
+        /// Converts 64-bit blocks to 32-bit blocks without allocation
+        /// </summary>
+        /// <param name="src">The source blocks</param>
+        /// <param name="n">The target block width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
         public static Block32<T> Reblock<T>(this Block64<T> src, N32 n)
              where T : unmanaged
                 => new Block32<T>(src.Data);
+
+        /// <summary>
+        /// Converts 128-bit blocks to 16-bit blocks without allocation
+        /// </summary>
+        /// <param name="src">The source blocks</param>
+        /// <param name="n">The target block width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Block16<T> Reblock<T>(this Block128<T> src, N16 n)
+             where T : unmanaged
+                => new Block16<T>(src.Data);
 
         /// <summary>
         /// Converts 128-bit blocks to 32-bit blocks without allocation
@@ -44,6 +66,17 @@ namespace Z0
         public static Block64<T> Reblock<T>(this Block128<T> src, N64 n)
              where T : unmanaged
                 => new Block64<T>(src.Data);
+
+        /// <summary>
+        /// Converts 256-bit blocks to 16-bit blocks without allocation
+        /// </summary>
+        /// <param name="src">The source blocks</param>
+        /// <param name="n">The target block width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Block16<T> Reblock<T>(this Block256<T> src, N16 n)
+             where T : unmanaged
+                => new Block16<T>(src.Data);
 
         /// <summary>
         /// Converts 256-bit blocks to 32-bit blocks without allocation
@@ -79,6 +112,28 @@ namespace Z0
                 => new Block128<T>(src.Data);
 
         /// <summary>
+        /// Converts 32-bit blocks to 32-bit blocks without allocation
+        /// </summary>
+        /// <param name="src">The source blocks</param>
+        /// <param name="n">The target block width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ConstBlock16<T> Reblock<T>(this ConstBlock32<T> src, N16 n)
+             where T : unmanaged
+                => new ConstBlock16<T>(src.Data);
+
+        /// <summary>
+        /// Converts 64-bit blocks to 16-bit blocks without allocation
+        /// </summary>
+        /// <param name="src">The source blocks</param>
+        /// <param name="n">The target block width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ConstBlock16<T> Reblock<T>(this ConstBlock64<T> src, N16 n)
+             where T : unmanaged
+                => new ConstBlock16<T>(src.Data);
+
+        /// <summary>
         /// Converts 64-bit blocks to 32-bit blocks without allocation
         /// </summary>
         /// <param name="src">The source blocks</param>
@@ -88,6 +143,17 @@ namespace Z0
         public static ConstBlock32<T> Reblock<T>(this ConstBlock64<T> src, N32 n)
              where T : unmanaged
                 => new ConstBlock32<T>(src.Data);
+
+        /// <summary>
+        /// Converts 128-bit blocks to 16-bit blocks without allocation
+        /// </summary>
+        /// <param name="src">The source blocks</param>
+        /// <param name="n">The target block width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ConstBlock16<T> Reblock<T>(this ConstBlock128<T> src, N16 n)
+             where T : unmanaged
+                => new ConstBlock16<T>(src.Data);
 
         /// <summary>
         /// Converts 128-bit blocks to 32-bit blocks without allocation
@@ -110,6 +176,17 @@ namespace Z0
         public static ConstBlock64<T> Reblock<T>(this ConstBlock128<T> src, N64 n)
              where T : unmanaged
                 => new ConstBlock64<T>(src.Data);
+
+        /// <summary>
+        /// Converts 256-bit blocks to 16-bit blocks without allocation
+        /// </summary>
+        /// <param name="src">The source blocks</param>
+        /// <param name="n">The target block width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ConstBlock16<T> Reblock<T>(this ConstBlock256<T> src, N16 n)
+             where T : unmanaged
+                => new ConstBlock16<T>(src.Data);
 
         /// <summary>
         /// Converts 256-bit blocks to 32-bit blocks without allocation

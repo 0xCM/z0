@@ -19,6 +19,17 @@ namespace Z0
         /// <param name="cellcount">The number of cells to cover</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
+        public static Block16<T> cellalloc<T>(N16 n, int cellcount)
+            where T : unmanaged        
+                => alloc<T>(n, blockalign<T>(n, cellcount));
+
+        /// <summary>
+        /// Allocates a 32-bit block container to cover a specified number of cells
+        /// </summary>
+        /// <param name="n">The block width selector</param>
+        /// <param name="cellcount">The number of cells to cover</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
         public static Block32<T> cellalloc<T>(N32 n, int cellcount)
             where T : unmanaged        
                 => alloc<T>(n, blockalign<T>(n, cellcount));

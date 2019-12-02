@@ -13,6 +13,7 @@ namespace Z0
 
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N = 128
+    /// Conforming dimensions include 1x128, 128x1, 2x64, 64x2, 4x32, 32x4, 8x16, and 16x8
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     public readonly ref struct BitGrid128<M,N,T>
@@ -70,7 +71,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator BitGrid128<M,N,T>(Vector128<byte> src)
             => new BitGrid128<M,N,T>(src.As<byte,T>());
-
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid128<T>(in BitGrid128<M,N,T> src)

@@ -13,68 +13,114 @@ namespace Z0
     partial class DataBlocks
     {
         /// <summary>
-        /// Loads 64-bit segments from a span, raising an error if said source does not evenly partition
+        /// Loads a span into a blocked container without checks
         /// </summary>
-        /// <param name="n">The partition bit width</param>
-        /// <param name="src">The data source</param>
-        /// <param name="offset">The source offset</param>
+        /// <param name="src">The source span</param>
+        /// <param name="n">The block width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block32<T> load<T>(N32 n, Span<T> src, int offset = 0)
+        internal static Block16<T> load<T>(Span<T> src, N16 n)
             where T : unmanaged
-        {
-            if(!aligned<T>(n,src.Length - offset))
-                badsize(n, src.Length - offset);      
-            return new Block32<T>(offset == 0 ? src : src.Slice(offset));
-        }
+                => new Block16<T>(src);
 
         /// <summary>
-        /// Loads 64-bit segments from a span, raising an error if said source does not evenly partition
+        /// Loads a span into a blocked container without checks
         /// </summary>
-        /// <param name="n">The partition bit width</param>
-        /// <param name="src">The data source</param>
-        /// <param name="offset">The source offset</param>
+        /// <param name="src">The source span</param>
+        /// <param name="n">The block width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block64<T> load<T>(N64 n, Span<T> src, int offset = 0)
+        internal static Block32<T> load<T>(Span<T> src, N32 n)
             where T : unmanaged
-        {
-            if(!aligned<T>(n,src.Length - offset))
-                badsize(n, src.Length - offset);      
-            return new Block64<T>(offset == 0 ? src : src.Slice(offset));
-        }
+                => new Block32<T>(src);
 
         /// <summary>
-        /// Loads 128-bit segments from a span, raising an error if said source does not evenly partition
+        /// Loads a span into a blocked container without checks
         /// </summary>
-        /// <param name="n">The partition bit width</param>
-        /// <param name="src">The data source</param>
-        /// <param name="offset">The source offset</param>
+        /// <param name="src">The source span</param>
+        /// <param name="n">The block width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block128<T> load<T>(N128 n, Span<T> src, int offset = 0)
+        internal static Block64<T> load<T>(Span<T> src, N64 n)
             where T : unmanaged
-        {
-            if(!aligned<T>(n, src.Length - offset))
-                badsize(n, src.Length - offset);      
-            return new Block128<T>(offset == 0 ? src : src.Slice(offset));
-        }
+                => new Block64<T>(src);
 
         /// <summary>
-        /// Loads 128-bit segments from a span, raising an error if said source does not evenly partition
+        /// Loads a span into a blocked container without checks
         /// </summary>
-        /// <param name="n">The partition bit width</param>
-        /// <param name="src">The data source</param>
-        /// <param name="offset">The source offset</param>
+        /// <param name="src">The source span</param>
+        /// <param name="n">The block width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block256<T> load<T>(N256 n, Span<T> src, int offset = 0)
+        internal static Block128<T> load<T>(Span<T> src, N128 n)
             where T : unmanaged
-        {
-            if(!aligned<T>(n,src.Length - offset))
-                badsize(n, src.Length - offset);      
-            return new Block256<T>(offset == 0 ? src : src.Slice(offset));
-        }
+                => new Block128<T>(src);
+
+        /// <summary>
+        /// Loads a span into a blocked container without checks
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="n">The block width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        internal static Block256<T> load<T>(Span<T> src, N256 n)
+            where T : unmanaged
+                => new Block256<T>(src);
+
+        /// <summary>
+        /// Loads a span into a blocked container without checks
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="n">The block width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        internal static ConstBlock16<T> load<T>(ReadOnlySpan<T> src, N16 n)
+            where T : unmanaged
+                => new ConstBlock16<T>(src);
+
+        /// <summary>
+        /// Loads a span into a blocked container without checks
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="n">The block width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        internal static ConstBlock32<T> load<T>(ReadOnlySpan<T> src, N32 n)
+            where T : unmanaged
+                => new ConstBlock32<T>(src);
+
+        /// <summary>
+        /// Loads a span into a blocked container without checks
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="n">The block width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        internal static ConstBlock64<T> load<T>(ReadOnlySpan<T> src, N64 n)
+            where T : unmanaged
+                => new ConstBlock64<T>(src);
+
+        /// <summary>
+        /// Loads a span into a blocked container without checks
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="n">The block width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        internal static ConstBlock128<T> load<T>(ReadOnlySpan<T> src, N128 n)
+            where T : unmanaged
+                => new ConstBlock128<T>(src);
+
+        /// <summary>
+        /// Loads a span into a blocked container without checks
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="n">The block width</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        internal static ConstBlock256<T> load<T>(ReadOnlySpan<T> src, N256 n)
+            where T : unmanaged
+                => new ConstBlock256<T>(src);
     }
 
 }

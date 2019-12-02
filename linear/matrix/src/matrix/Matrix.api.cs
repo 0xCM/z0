@@ -51,30 +51,30 @@ namespace Z0
         /// Allocates a blocked square matrix of natual dimension
         /// </summary>
         /// <param name="n">The square dimension; specified, if desired, to aid type inference</param>
-        /// <param name="exemplar">An example value; specified, if desired, to aid type inference</param>
+        /// <param name="t">An example value; specified, if desired, to aid type inference</param>
         /// <typeparam name="N">The natural dimension type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static MBlock256<N,T> blockalloc<N,T>(N n = default, T exemplar = default)
+        public static MBlock256<N,T> blockalloc<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => DataBlocks.alloc<N,N,T>(n256); 
+                => DataBlocks.taballoc<T>(n256, natval(n), natval(n)); 
 
         /// <summary>
         /// Allocates a blocked matrix of natual dimensions
         /// </summary>
         /// <param name="m">The row count, specified if desired to aid type inference</param>
         /// <param name="n">The column count, specified if desired to aid type inference</param>
-        /// <param name="exemplar">An example value, specified if desired to aid type inference</param>
+        /// <param name="t">An example value, specified if desired to aid type inference</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static MBlock256<M,N,T> blockalloc<M,N,T>(M m = default, N n = default, T exemplar = default)
+        public static MBlock256<M,N,T> blockalloc<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => DataBlocks.alloc<M,N,T>(n256); 
+                => DataBlocks.taballoc<T>(n256, natval(m), natval(n)); 
 
         /// <summary>
         /// Allocates a matrix of natual dimensions
@@ -300,7 +300,7 @@ namespace Z0
             if(n != doc.Rows[0].Cells.Length)
                 return default;
 
-            var dst =  Matrix.blockload<M,N,T>(DataBlocks.alloc<M,N,T>(n256));
+            var dst =  Matrix.blockload<M,N,T>(DataBlocks.taballoc<T>(n256,natval<M>(),natval<N>()));
             for(var i = 0; i<doc.Rows.Length; i++)
             {
                 ref readonly var row = ref doc[i];

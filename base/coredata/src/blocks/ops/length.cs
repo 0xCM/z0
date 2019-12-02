@@ -13,7 +13,29 @@ namespace Z0
     partial class DataBlocks
     {
         /// <summary>
-        /// Returns the length of spans of equal length; otherwise raises an error
+        /// Returns the length of 32-bit blocked containers of equal length; otherwise raises an error
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        [MethodImpl(Inline)]   
+        public static int length<S,T>(in Block16<S> lhs, in Block16<T> rhs)
+            where S : unmanaged
+            where T : unmanaged
+                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : badsize<int>(lhs.CellCount,rhs.CellCount);
+
+        /// <summary>
+        /// Returns the length of 32-bit const blocked containers of equal length; otherwise raises an error
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        [MethodImpl(Inline)]   
+        public static int length<S,T>(in ConstBlock16<S> lhs, in ConstBlock16<T> rhs)
+            where S : unmanaged
+            where T : unmanaged
+                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : badsize<int>(lhs.CellCount,rhs.CellCount);
+
+        /// <summary>
+        /// Returns the length of 32-bit blocked containers of equal length; otherwise raises an error
         /// </summary>
         /// <param name="lhs">The left span</param>
         /// <param name="rhs">The right span</param>
@@ -24,7 +46,7 @@ namespace Z0
                 => lhs.CellCount == rhs.CellCount ? lhs.CellCount : badsize<int>(lhs.CellCount,rhs.CellCount);
 
         /// <summary>
-        /// Returns the length of spans of equal length; otherwise raises an error
+        /// Returns the length of 32-bit const blocked containers of equal length; otherwise raises an error
         /// </summary>
         /// <param name="lhs">The left span</param>
         /// <param name="rhs">The right span</param>

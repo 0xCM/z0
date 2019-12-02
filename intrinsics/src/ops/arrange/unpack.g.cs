@@ -16,7 +16,7 @@ namespace Z0
     partial class ginx
     {
         /// <summary>
-        /// Forms the vector z := [vlo(x), vlo(y)] from vectors x and y
+        /// 
         /// </summary>
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
@@ -40,7 +40,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Forms the vector z := [vlo(x), vlo(y)] from vectors x and y
+        /// 
         /// </summary>
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
@@ -64,7 +64,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Forms the vector z := [vhi(x), vhi(y)] from vectors x and y
+        /// 
         /// </summary>
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
@@ -88,7 +88,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Forms the vector z := [vhi(x), vhi(y)] from vectors x and y
+        /// 
         /// </summary>
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>

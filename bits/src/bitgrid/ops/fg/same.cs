@@ -13,9 +13,19 @@ namespace Z0
 
     partial class BitGrid
     {        
+        /// <summary>
+        /// Returns 1 if the source grids have identical conent and 0 otherwise
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The grid cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static bit same<T>(BitGrid16<T> gx, BitGrid16<T> gy)
+            where T : unmanaged
+                => math.eq(gx,gy);
 
         /// <summary>
-        /// Returns 1 if the left grid content is identical to the right grid content and 0 otherwise
+        /// Returns 1 if the source grids have identical conent and 0 otherwise
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -26,7 +36,7 @@ namespace Z0
                 => math.eq(gx,gy);
 
         /// <summary>
-        /// Returns 1 if the left grid content is identical to the right grid content and 0 otherwise
+        /// Returns 1 if the source grids have identical conent and 0 otherwise
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -37,7 +47,7 @@ namespace Z0
                 => math.eq(gx,gy);
 
         /// <summary>
-        /// Returns 1 if the left grid content is identical to the right grid content and 0 otherwise
+        /// Returns 1 if the source grids have identical conent and 0 otherwise
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -48,7 +58,7 @@ namespace Z0
                 => ginx.vsame(gx.data,gy.data);
 
         /// <summary>
-        /// Returns 1 if the left grid content is identical to the right grid content and 0 otherwise
+        /// Returns 1 if the source grids have identical conent and 0 otherwise
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>

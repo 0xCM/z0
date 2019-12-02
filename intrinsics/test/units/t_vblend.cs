@@ -61,7 +61,7 @@ namespace Z0
 
                 var m = PatternData.blendspec(n256,false,n64);
 
-                var es = DataBlocks.alloc<ulong>(n);
+                var es = DataBlocks.single<ulong>(n);
                 for(var i=0; i<es.CellCount; i++)
                     es[i] = odd(i) ? ys[i] : xs[i];
                 var expect = es.LoadVector();

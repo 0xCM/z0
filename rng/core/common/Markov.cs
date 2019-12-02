@@ -86,8 +86,8 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var data = DataBlocks.alloc<N,N,T>(n256);
             var n = nati<N>();
+            var data = DataBlocks.taballoc<T>(n256, n, n);
             for(int row=0; row < n; row++)
                 random.MarkovSpan<T>(data.Slice(row*n, n));                            
             return Z0.Matrix.blockload<N,T>(data);

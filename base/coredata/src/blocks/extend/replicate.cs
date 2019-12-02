@@ -16,7 +16,21 @@ namespace Z0
     partial class BlockExtend    
     {
         /// <summary>
-        /// Clones a blocked span
+        /// Clones a 32-bit blocked container
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Block16<T> Replicate<T>(this Block16<T> src)
+            where T : unmanaged
+        {
+            Span<T> dst = new T[src.CellCount];
+            src.CopyTo(dst);
+            return new Block16<T>(dst);
+        }
+
+        /// <summary>
+        /// Clones a 32-bit blocked container
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
@@ -69,6 +83,20 @@ namespace Z0
             Span<T> dst = new T[src.CellCount];
             src.CopyTo(dst);
             return new Block256<T>(dst);
+        }
+
+        /// <summary>
+        /// Clones a blocked span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Block16<T> Replicate<T>(this ConstBlock16<T> src)
+            where T : unmanaged
+        {
+            Span<T> dst = new T[src.CellCount];
+            src.CopyTo(dst);
+            return new Block16<T>(dst);
         }
 
         /// <summary>

@@ -18,6 +18,16 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
+        public static void Clear<T>(this Block16<T> src)
+            where T : unmanaged
+                => src.Data.Clear();
+
+        /// <summary>
+        /// Zero-fills the block
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
         public static void Clear<T>(this Block32<T> src)
             where T : unmanaged
                 => src.Data.Clear();

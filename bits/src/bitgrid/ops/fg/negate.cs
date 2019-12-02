@@ -43,7 +43,6 @@ namespace Z0
             where T : unmanaged
                 => ginx.vnegate<T>(gx);
 
-
         /// <summary>
         /// Computes the two's complement negation of source grid
         /// </summary>

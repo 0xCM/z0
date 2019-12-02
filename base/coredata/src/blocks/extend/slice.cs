@@ -13,6 +13,15 @@ namespace Z0
 
     partial class BlockExtend    
     {
+        [MethodImpl(Inline)]
+        public static Span<T> Slice<T>(this Block16<T> src, int offset)
+            where T : unmanaged
+                => src.Data.Slice(offset);
+            
+        [MethodImpl(Inline)]
+        public static Span<T> Slice<T>(this Block16<T> src, int offset, int length)
+            where T : unmanaged
+                => src.Data.Slice(offset,length);            
 
         [MethodImpl(Inline)]
         public static Span<T> Slice<T>(this Block32<T> src, int offset)
@@ -53,6 +62,16 @@ namespace Z0
         public static Span<T> Slice<T>(this Block256<T> src, int offset, int length)
             where T : unmanaged
                 => src.Data.Slice(offset,length);             
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> Slice<T>(this ConstBlock16<T> src, int offset)
+            where T : unmanaged
+                => src.Data.Slice(offset);
+            
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> Slice<T>(this ConstBlock16<T> src, int offset, int length)
+            where T : unmanaged
+                => src.Data.Slice(offset,length);            
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> Slice<T>(this ConstBlock32<T> src, int offset)

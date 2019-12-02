@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         public static int CellCapacity => bitsize<T>();
 
-        public static BitCells<T> Zero => new BitCells<T>(DataBlocks.alloc<T>(n256));
+        public static BitCells<T> Zero => new BitCells<T>(DataBlocks.single<T>(n256));
 
         [MethodImpl(Inline)]
         public static implicit operator BitCells<T>(Span<T> src)
@@ -119,7 +119,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitCells(T src, int bitcount)
         {            
-            this.data = DataBlocks.alloc<T>(n256);
+            this.data = DataBlocks.single<T>(n256);
             head(this.data) = src;
             this.MaxBitCount = CellCapacity;
             this.SegLength = MaxBitCount;
@@ -133,7 +133,7 @@ namespace Z0
             this.data = DataBlocks.safeload(n256,src);
             this.MaxBitCount = src.Length * CellCapacity;
             this.BitCount = n;
-            this.SegLength = BitSize.Segments<T>(MaxBitCount);            
+            this.SegLength = BitSize.CellCount<T>(MaxBitCount);            
             this.BitMap = BitSize.BitMap<T>(MaxBitCount);
         }
 
@@ -143,7 +143,7 @@ namespace Z0
             this.data = src;
             this.MaxBitCount = src.CellCount * CellCapacity;
             this.BitCount = src.BlockCount * 256;
-            this.SegLength = BitSize.Segments<T>(MaxBitCount);            
+            this.SegLength = BitSize.CellCount<T>(MaxBitCount);            
             this.BitMap = BitSize.BitMap<T>(MaxBitCount);
         }
 

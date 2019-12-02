@@ -12,9 +12,38 @@ namespace Z0
 
     partial class DataBlocks
     {
+        /// <summary>
+        /// Computes the minimum number of 8-bit blocks required to cover a specified number of cells
+        /// </summary>
+        /// <param name="cellcount">The number of cells to cover</param>
+        /// <typeparam name="T">The element type</typeparam>
+        /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
+        /// resolve the computation to a constant an no runtime computations will occur</remarks>
+        [MethodImpl(Inline)]
+        public static int blockalign<T>(N8 n, int cellcount)
+            where T : unmanaged        
+        {
+            var blockcount = cellcount / blocklen<T>(n);
+            return cellcount % blocklen<T>(n) == 0 ? blockcount : blockcount + 1;
+        } 
 
         /// <summary>
-        /// Computes the minimum number of 64-bit blocks required to cover a specified number of cells
+        /// Computes the minimum number of 32-bit blocks required to cover a specified number of cells
+        /// </summary>
+        /// <param name="cellcount">The number of cells to cover</param>
+        /// <typeparam name="T">The element type</typeparam>
+        /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
+        /// resolve the computation to a constant an no runtime computations will occur</remarks>
+        [MethodImpl(Inline)]
+        public static int blockalign<T>(N16 n, int cellcount)
+            where T : unmanaged        
+        {
+            var blockcount = cellcount / blocklen<T>(n);
+            return cellcount % blocklen<T>(n) == 0 ? blockcount : blockcount + 1;
+        } 
+
+        /// <summary>
+        /// Computes the minimum number of 32-bit blocks required to cover a specified number of cells
         /// </summary>
         /// <param name="cellcount">The number of cells to cover</param>
         /// <typeparam name="T">The element type</typeparam>

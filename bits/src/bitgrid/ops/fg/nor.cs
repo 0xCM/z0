@@ -8,12 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
-    using static zfunc;
 
+    using static zfunc;
 
     partial class BitGrid
     {                
-
         /// <summary>
         /// Computes the bitwise NOR between fixed-width 32-bit generic bitgrids
         /// </summary>
@@ -57,8 +56,6 @@ namespace Z0
         public static BitGrid256<T> nor<T>(in BitGrid256<T> gx, in BitGrid256<T> gy)
             where T : unmanaged
                 => ginx.vnor<T>(gx,gy);    
-
-
     }
 
 }

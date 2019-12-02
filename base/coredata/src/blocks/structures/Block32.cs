@@ -136,7 +136,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Block32<S> As<S>()                
             where S : unmanaged
-                => DataBlocks.safeload(N,MemoryMarshal.Cast<T,S>(data));                    
+                => new Block32<S>(MemoryMarshal.Cast<T,S>(data));                    
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()

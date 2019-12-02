@@ -13,6 +13,31 @@ namespace Z0
     public static class BitCalcs
     {
         /// <summary>
+        /// Calculates the (minimum) number of cells required to hold a contiguous sequence of bits
+        /// </summary>
+        /// <param name="cellwidth">The number of bits that comprise each segment</param>
+        /// <param name="totalbits">The number of bits</param>
+        [MethodImpl(Inline)]
+        public static int cellcount(int cellwidth, int totalbits)
+        {
+            if(cellwidth >= totalbits)
+                return 1;
+
+            var cells = totalbits / cellwidth;
+            return cells + (totalbits % cellwidth == 0 ? 0 : 1);
+        }
+
+        /// <summary>
+        /// Calculates the minimum number of cells required to hold a contiguous sequence of bits
+        /// </summary>
+        /// <param name="totalbits">The number of bits</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int cellcount<T>(int totalbits)
+            where T : unmanaged
+                => cellcount(bitsize<T>(), totalbits);
+
+        /// <summary>
         /// Computes the 0-based linear index determined by a row/col coordinate
         /// </summary>
         /// <param name="row">The 0-based row index</param>

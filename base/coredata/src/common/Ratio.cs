@@ -5,17 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Text;
-    using System.Linq;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
 
     /// <summary>
-    /// Defines a ratio between two values, a measure that indicates how many
-    /// times the first number contains the second
+    /// Defines a ratio between two values, a measure that indicates how many times the first number contains the second
     /// </summary>
     /// <remarks>See https://en.wikipedia.org/wiki/Ratio</remarks>
     public readonly ref struct Ratio<T>
@@ -48,7 +43,5 @@ namespace Z0
 
         public string Format()
             => $"{A}:{B}";
-
     }
-
 }

@@ -19,6 +19,29 @@ namespace Z0
         /// <typeparam name="T">The data type</typeparam>
         /// <remarks>The use of this method is discouraged</remarks>
         [MethodImpl(NotInline)]
+        public static Block16<T> safeload<T>(N16 n, Span<T> src)
+            where T : unmanaged
+        {
+        
+            
+            var bz = blockcount<T>(n, src.Length, out int remainder);
+            if(remainder == 0)
+                return new Block16<T>(src);
+            else
+            {
+                var dst = alloc<T>(n, bz + 1);
+                src.CopyTo(dst);
+                return dst;
+            }
+        }
+
+        /// <summary>
+        /// Loads 32-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The data type</typeparam>
+        /// <remarks>The use of this method is discouraged</remarks>
+        [MethodImpl(NotInline)]
         public static Block32<T> safeload<T>(N32 n, Span<T> src)
             where T : unmanaged
         {
@@ -55,18 +78,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Loads an unsized 64-bit blocked span from a natural unblocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The span index at which to begin the load</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block64<T> safeload<N,T>(N64 n, in NatSpan<N,T> src)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat<N>, INatDivisible<N,N64>
-                => safeload(n, src.Unsized);
-
-        /// <summary>
         /// Loads 128-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked
         /// </summary>
         /// <param name="src">The source span</param>
@@ -86,17 +97,6 @@ namespace Z0
                 return dst;
             }
         }
-        /// <summary>
-        /// Loads an unsized 64-bit blocked span from a natural unblocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The span index at which to begin the load</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block128<T> safeload<N,T>(N128 n, in NatSpan<N,T> src)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat<N>, INatDivisible<N,N64>
-                => safeload(n, src.Unsized);
 
         /// <summary>
         /// Loads 256-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked

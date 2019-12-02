@@ -12,10 +12,22 @@ namespace Z0
     using static zfunc;
 
     partial class BitGrid
-    {        
-        
+    {                
         /// <summary>
-        /// Computes the bitwise NAND between fixed-width 32-bit natural bitgrids
+        /// Computes the bitwise NAND between fixed-width natural bitgrids
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid16<M,N,T> nand<M,N,T>(BitGrid16<M,N,T> gx, BitGrid16<M,N,T> gy)
+            where T : unmanaged
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+                => math.nand(gx,gy);
+
+        /// <summary>
+        /// Computes the bitwise NAND between fixed-width natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -28,7 +40,7 @@ namespace Z0
                 => math.nand(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise NAND between fixed-width 64-bit natural bitgrids
+        /// Computes the bitwise NAND between fixed-width natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -41,7 +53,7 @@ namespace Z0
                 => math.nand(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise NAND between 128-bit fixed-width natural bitgrids
+        /// Computes the bitwise NAND between fixed-width natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -54,7 +66,7 @@ namespace Z0
                 => ginx.vnand<T>(gx,gy);    
 
         /// <summary>
-        /// Computes the bitwise NAND between 256-bit fixed-width natural bitgrids
+        /// Computes the bitwise NAND between fixed-width natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>

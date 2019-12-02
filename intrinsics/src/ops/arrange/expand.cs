@@ -177,7 +177,5 @@ namespace Z0
             vconvert(lo, out x0, out x1);
             vconvert(hi, out x2, out x3);
         }
-
-
     }
 }

@@ -12,9 +12,20 @@ namespace Z0.Test
     
     using static zfunc;
 
-    
-    public class t_blocked_span : UnitTest<t_blocked_span>
+    public class t_blocks : UnitTest<t_blocks>
     {
+        
+
+        public void db_16_basecase()
+        {
+            
+            var b1 = Random.Blocks<byte>(n16,64);
+            var b2 = b1.As<ulong>();
+            Claim.eq(b1.BitCount, b2.BitCount);
+            
+        }
+
+        
         public  void CellSize()
         {
             Claim.eq(1, DataBlocks.cellsize<sbyte>());
@@ -54,9 +65,9 @@ namespace Z0.Test
             Claim.eq(2, DataBlocks.blocklen<ulong>(n));
             Claim.eq(4, DataBlocks.blocklen<float>(n));
             Claim.eq(2, DataBlocks.blocklen<double>(n));                
-            Claim.eq(8, DataBlocks.blocklen<int>(n,2));
-            Claim.eq(4, DataBlocks.blocklen<long>(n, 2));
-            Claim.eq(32, DataBlocks.blocklen<byte>(n, 2));
+            Claim.eq(8, DataBlocks.blockedcells<int>(n,2));
+            Claim.eq(4, DataBlocks.blockedcells<long>(n, 2));
+            Claim.eq(32, DataBlocks.blockedcells<byte>(n, 2));
 
 
         }
@@ -108,8 +119,6 @@ namespace Z0.Test
             Claim.eq(1, DataBlocks.wholeblocks<double>(n256, 4));
         }
 
-
-
         public void BlockSlice()
         {
             var x = DataBlocks.safeload(n128,span<int>(1,2,3,4,5,6,7,8));
@@ -137,7 +146,7 @@ namespace Z0.Test
 
             var blocks = Pow2.T08;   
                         
-            var src = Random.ConstBlocks<int>(n128,blocks);
+            var src = Random.Blocks<int>(n128,blocks).ReadOnly();
             var dst = DataBlocks.alloc<int>(n128,blocks);
 
             Claim.eq(src.CellCount, dst.CellCount);

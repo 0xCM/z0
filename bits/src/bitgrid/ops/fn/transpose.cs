@@ -18,7 +18,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = alloc64<N8,N8,byte>();            
-            var src = dinx.vmov(n128,g);
+            var src = dinx.vmovscalar(n128,g);
             for(var i=7; i>= 0; i--)
             {
                 dst[i] = (byte)dinx.vmovemask(v8u(src));

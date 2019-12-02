@@ -25,7 +25,7 @@ namespace Z0
         public static Vector128<T> vpalt<T>(N128 n, T a, T b)
             where T : unmanaged
         {            
-            var data = DataBlocks.alloc<T>(n);
+            var data = DataBlocks.single<T>(n);
             var len = DataBlocks.blocklen<T>(n);
             ref var mem = ref head(data);
             for(var i=0; i<len; i++)
@@ -44,7 +44,7 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = DataBlocks.alloc<T>(n);
+            var data = DataBlocks.single<T>(n);
             var len = DataBlocks.blocklen<T>(n);
             ref var mem = ref head(data);
             for(var i=0; i < len; i++)
@@ -67,7 +67,7 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = DataBlocks.alloc<T>(n);
+            var data = DataBlocks.single<T>(n);
             var len = DataBlocks.blocklen<T>(n);
             ref var mem = ref head(data);
             for(var i=0; i < len; i++)
@@ -90,7 +90,7 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = DataBlocks.alloc<T>(n);
+            var data = DataBlocks.single<T>(n);
             var len = DataBlocks.blocklen<T>(n);
             ref var mem = ref head(data);
             for(var i=0; i < len; i++)
@@ -112,7 +112,7 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = DataBlocks.alloc<T>(n);
+            var data = DataBlocks.single<T>(n);
             var len = DataBlocks.blocklen<T>(n);
             ref var mem = ref head(data);
             for(var i=0; i < len; i++)
@@ -127,7 +127,7 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = DataBlocks.alloc<T>(n);
+            var data = DataBlocks.single<T>(n);
             var len = DataBlocks.blocklen<T>(n);
             ref var mem = ref head(data);
             for(var i=0; i < len; i++)
@@ -143,7 +143,7 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = DataBlocks.alloc<T>(n);
+            var data = DataBlocks.single<T>(n);
             var len = DataBlocks.blocklen<T>(n);
             ref var mem = ref head(data);
             for(var i=0; i < len; i++)
@@ -165,7 +165,7 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = DataBlocks.alloc<T>(n);
+            var data = DataBlocks.single<T>(n);
             var len = DataBlocks.blocklen<T>(n);
             ref var mem = ref head(data);
             for(var i=0; i<len; i++)
@@ -186,7 +186,7 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = DataBlocks.alloc<T>(n);
+            var data = DataBlocks.single<T>(n);
             var len = DataBlocks.blocklen<T>(n);
             ref var mem = ref head(data);
             for(var i=0; i<len; i++)
@@ -201,7 +201,7 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = DataBlocks.alloc<T>(n);
+            var data = DataBlocks.single<T>(n);
             var len = DataBlocks.blocklen<T>(n);
             ref var mem = ref head(data);
             for(var i=0; i<len; i++)
@@ -217,7 +217,7 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = DataBlocks.alloc<T>(n);
+            var data = DataBlocks.single<T>(n);
             var len = DataBlocks.blocklen<T>(n);
             ref var mem = ref head(data);
             for(var i=0; i<len; i++)

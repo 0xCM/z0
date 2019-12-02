@@ -14,7 +14,18 @@ namespace Z0
     partial class BitGrid
     {        
         /// <summary>
-        /// Computes the bitwise NAND between fixed-width 32-bit generic bitgrids
+        /// Computes the bitwise NAND between fixed-width bitgrids
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid16<T> nand<T>(BitGrid16<T> gx, BitGrid16<T> gy)
+            where T : unmanaged
+                => math.nand(gx,gy);
+
+        /// <summary>
+        /// Computes the bitwise NAND between fixed-width bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -25,7 +36,7 @@ namespace Z0
                 => math.nand(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise NAND between fixed-width 64-bit grids
+        /// Computes the bitwise NAND between fixed-width bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -36,7 +47,7 @@ namespace Z0
                 => math.nand(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise NAND between fixed-width 128-bit generic bitgrids
+        /// Computes the bitwise NAND between fixed-width bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -47,7 +58,7 @@ namespace Z0
                 => ginx.vnand<T>(gx,gy);
     
         /// <summary>
-        /// Computes the bitwise NAND between fixed-width 256-bit generic bitgrids
+        /// Computes the bitwise NAND between fixed-width bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -56,8 +67,6 @@ namespace Z0
         public static BitGrid256<T> nand<T>(in BitGrid256<T> gx, in BitGrid256<T> gy)
             where T : unmanaged
                 => ginx.vnand<T>(gx,gy);    
-
-
     }
 
 }

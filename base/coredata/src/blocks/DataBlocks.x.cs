@@ -12,45 +12,9 @@ namespace Z0
 
     public static partial class BlockExtend    
     {
-        /// <summary>
-        /// Constructs a 128-bit blocked span from an unblocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block32<T> ToBlock32<T>(this Span<T> src, N32 n = default)
-             where T : unmanaged
-                => DataBlocks.safeload(n,src);
+        static N8 n8 => default;
 
-        /// <summary>
-        /// Constructs a 128-bit blocked span from an unblocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block64<T> ToBlock64<T>(this Span<T> src, N64 n = default)
-             where T : unmanaged
-                => DataBlocks.safeload(n,src);
-
-        /// <summary>
-        /// Constructs a 128-bit blocked span from an unblocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block128<T> ToBlock128<T>(this Span<T> src, N128 n = default)
-             where T : unmanaged
-                => DataBlocks.safeload(n,src);
-
-        /// <summary>
-        /// Constructs a 128-bit blocked span from an unblocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block256<T> ToBlock256<T>(this Span<T> src, N256 n = default)
-             where T : unmanaged
-                => DataBlocks.safeload(n,src);
+        static N16 n16 => default;
 
         static N32 n32 => default;
 

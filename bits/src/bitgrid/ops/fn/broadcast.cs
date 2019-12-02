@@ -29,17 +29,25 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            dst = amplify(cell, out uint _);
+            dst = zfunc.broadcast(cell, out uint _);
             return ref dst;
         }
 
+        /// <summary>
+        /// Transmits the content of a single cell to all cells in a grid
+        /// </summary>
+        /// <param name="cell">The source cell</param>
+        /// <param name="dst">The target grid</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The col count type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly BitGrid64<M,N,T> broadcast<M,N,T>(T cell, out BitGrid64<M,N,T> dst)    
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            dst = amplify(cell, out ulong _);
+            dst = zfunc.broadcast(cell, out ulong _);
             return ref dst;
         }
 
@@ -52,7 +60,6 @@ namespace Z0
             dst = state ? maxval<ulong>() : 0ul;
         }
 
-
         [MethodImpl(Inline)]
         public static ref readonly BitGrid128<M,N,T> broadcast<M,N,T>(bit state, out BitGrid128<M,N,T> dst)    
             where M : unmanaged, ITypeNat
@@ -63,6 +70,14 @@ namespace Z0
               return ref dst;
         }
 
+        /// <summary>
+        /// Transmits the content of a single cell to all cells in a grid
+        /// </summary>
+        /// <param name="cell">The source cell</param>
+        /// <param name="dst">The target grid</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The col count type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly BitGrid128<M,N,T> broadcast<M,N,T>(T cell, out BitGrid128<M,N,T> dst)    
             where M : unmanaged, ITypeNat
@@ -78,10 +93,9 @@ namespace Z0
         /// </summary>
         /// <param name="cell">The source cell</param>
         /// <param name="dst">The target grid</param>
-        /// <typeparam name="M"></typeparam>
-        /// <typeparam name="N"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The col count type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly BitGrid256<M,N,T> broadcast<M,N,T>(T cell, out BitGrid256<M,N,T> dst)    
             where M : unmanaged, ITypeNat

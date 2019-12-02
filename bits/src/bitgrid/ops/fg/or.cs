@@ -13,9 +13,19 @@ namespace Z0
 
     partial class BitGrid
     {        
+        /// <summary>
+        /// Computes the bitwise OR between fixed-width bitgrids
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid16<T> or<T>(BitGrid16<T> gx, BitGrid16<T> gy)
+            where T : unmanaged
+                => math.or(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise OR between fixed-width 32-bit generic bitgrids
+        /// Computes the bitwise OR between fixed-width bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -26,7 +36,7 @@ namespace Z0
                 => math.or(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise OR between fixed-width 64-bit grids
+        /// Computes the bitwise OR between fixed-width bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -37,7 +47,7 @@ namespace Z0
                 => math.or(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise OR between fixed-width 128-bit generic bitgrids
+        /// Computes the bitwise OR between fixed-width bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -48,7 +58,7 @@ namespace Z0
                 => ginx.vor<T>(gx,gy);
     
         /// <summary>
-        /// Computes the bitwise OR between fixed-width 256-bit generic bitgrids
+        /// Computes the bitwise OR between fixed-width bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>

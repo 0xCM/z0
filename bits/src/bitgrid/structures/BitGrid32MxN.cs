@@ -63,6 +63,10 @@ namespace Z0
             => new BitGrid32<T>(src.data);
 
         [MethodImpl(Inline)]
+        public static implicit operator BitGrid32<M,N,T>(in Block32<T> src)
+            => new BitGrid32<M, N, T>(src);
+
+        [MethodImpl(Inline)]
         public static implicit operator BitGrid32<M,N,T>(BitGrid32<T> src)
             => new BitGrid32<M,N,T>(src.Data);
 

@@ -14,21 +14,31 @@ namespace Z0
     partial class BitGrid
     {
         [MethodImpl(Inline)]
+        public static BitGrid16<T> rotl<T>(BitGrid16<T> gx, int shift)
+            where T : unmanaged
+        {
+            var dst = zeros<T>(n16);
+            gcells.rotl(in gx.Head, shift, ref dst.Head, gx.CellCount);
+            return dst;
+        }
+
+
+        [MethodImpl(Inline)]
         public static BitGrid32<T> rotl<T>(BitGrid32<T> gx, int shift)
             where T : unmanaged
         {
-            var gz = new BitGrid32<T>(0u);
-            gcells.rotl(in gx.Head, shift, ref gz.Head, gx.CellCount);
-            return gz;
+            var dst = zeros<T>(n32);
+            gcells.rotl(in gx.Head, shift, ref dst.Head, gx.CellCount);
+            return dst;
         }
 
         [MethodImpl(Inline)]
         public static BitGrid64<T> rotl<T>(BitGrid64<T> gx, int shift)
             where T : unmanaged
         {
-            var gz = new BitGrid64<T>(0ul);
-            gcells.rotl(in gx.Head, shift, ref gz.Head, gx.CellCount);
-            return gz;
+            var dst = zeros<T>(n64);
+            gcells.rotl(in gx.Head, shift, ref dst.Head, gx.CellCount);
+            return dst;
         }
 
         [MethodImpl(Inline)]

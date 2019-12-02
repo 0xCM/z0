@@ -11,9 +11,9 @@ namespace Z0
     using static zfunc;    
 
     /// <summary>
-    /// Defines a generic bitvector over a primal type
+    /// Defines a generic bitvector over a primal cell
     /// </summary>
-    /// <typeparam name="T">The type over which the vector is defined</typeparam>
+    /// <typeparam name="T">The cell type</typeparam>
     public struct BitVector<T>
         where T : unmanaged
     {
