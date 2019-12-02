@@ -258,5 +258,30 @@ namespace Z0.Logix
         public static IVarExpr<T> Var2<T>(this VariedExpr<N3,T> src, T value)
             where T : unmanaged
                 => src.Var2().Assign(value);
+
+        /// <summary>
+        /// Transforms a bitstring into a literal logic sequence
+        /// </summary>
+        /// <param name="bs">The source bitstring</param>
+        public static LiteralLogicSeq ToLogicSeq(this BitString bs)
+        {
+            var terms = new bit[bs.Length];
+            for(var i=0; i<terms.Length; i++)
+                terms[i] = bs[i];
+            return new LiteralLogicSeq(terms);
+        }
+
+        /// <summary>
+        /// Transforms a bitstring into a literal logic sequence of natural length
+        /// </summary>
+        /// <param name="bs">The source bitstring</param>
+        /// <typeparam name="N">The length type</typeparam>
+        [MethodImpl(Inline)]
+        public static LiteralLogicSeq<N> ToLogicSeq<N>(this BitString src, N n = default)
+            where N : unmanaged, ITypeNat
+        {
+            Nat.require<N>(src.Length);
+            return new LiteralLogicSeq<N>(src.ToLogicSeq().Terms);
+        }
     }
 }

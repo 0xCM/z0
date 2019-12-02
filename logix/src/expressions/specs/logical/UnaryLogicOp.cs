@@ -5,17 +5,25 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
 
-
     /// <summary>
-    /// Represents a logical operator over one operand
+    /// Defines an untyped unary logic operator expression
     /// </summary>
     public class UnaryLogicOp : IUnaryLogicOp
     {
+        /// <summary>
+        /// The operator kind
+        /// </summary>
+        public UnaryLogicOpKind OpKind {get;}
+
+        /// <summary>
+        /// The operand
+        /// </summary>
+        public ILogicExpr Arg {get;}
+
         [MethodImpl(Inline)]
         public UnaryLogicOp(UnaryLogicOpKind op, ILogicExpr arg)
         {
@@ -23,13 +31,8 @@ namespace Z0.Logix
             this.Arg = arg;
         }
 
-        public ILogicExpr Arg {get;}
-
-        public UnaryLogicOpKind OpKind {get;}
-
         public string Format()
             => OpKind.Format(Arg);        
     }
-
 
 }

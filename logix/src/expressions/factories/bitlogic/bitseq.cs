@@ -5,8 +5,6 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
@@ -19,7 +17,7 @@ namespace Z0.Logix
         /// <param name="terms">The sequence terms</param>
         [MethodImpl(Inline)]
         public static LiteralLogicSeq bitseq(params bit[] terms)
-            => LiteralLogicSeq.FromBits(terms);
+            => new LiteralLogicSeq(terms);
 
         /// <summary>
         /// Defines a bit sequence expression of natural length
@@ -29,6 +27,9 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static LiteralLogicSeq<N> bitseq<N>(N length, params bit[] terms)
             where N : unmanaged, ITypeNat
-                => LiteralLogicSeq.FromBits(length,terms);
+        {
+            Nat.require<N>(terms.Length);
+            return new LiteralLogicSeq<N>(terms);
+        }
     }
 }

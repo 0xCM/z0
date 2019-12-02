@@ -50,7 +50,4 @@ namespace Z0.Logix
         /// </summary>
         int Length {get;}
     }
-
-
-
 }

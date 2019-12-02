@@ -50,7 +50,6 @@ namespace Z0
         /// </summary>
         public static int GridCells => BitGrid32<T>.GridCells;
 
-
         [MethodImpl(Inline)]
         public static implicit operator BitGrid32<M,N,T>(uint src)
             => new BitGrid32<M, N, T>(src);
@@ -65,7 +64,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid32<M,N,T>(BitGrid32<T> src)
-            => new BitGrid32<M,N,T>(src);
+            => new BitGrid32<M,N,T>(src.Data);
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitGrid32<M,N,T> g1, BitGrid32<M,N,T> g2)
@@ -78,6 +77,10 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitGrid32(uint src)
             => this.data = src;
+
+        [MethodImpl(Inline)]
+        internal BitGrid32(Block32<T> src)
+            => this.data = src.As<uint>().Head;
 
         public uint Data
         {

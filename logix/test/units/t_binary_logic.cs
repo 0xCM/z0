@@ -14,7 +14,7 @@ namespace Z0.Logix
     using static LogicEngine;
     using BL = BinaryLogicOpKind;
 
-    public class t_binary_logic : UnitTest<t_binary_logic>
+    public class t_binary_logic : LogixTest<t_binary_logic>
     {
         protected override int CycleCount => Pow2.T08;
                 
@@ -163,7 +163,7 @@ namespace Z0.Logix
             for(var sample=0; sample<SampleSize; sample++)          
             {
                 var bs = Random.BitString(2,7);
-                var x = LiteralLogicSeq.FromBitString(bs);
+                var x = bs.ToLogicSeq();
                 var y = BitVector.from(n8,bs);
                 for(var i=0; i<bs.Length; i++)
                 {
@@ -178,71 +178,5 @@ namespace Z0.Logix
             logic_op_bench(true);
             logic_op_bench(false);
         }
-
-        void logic_op_check(BL kind, Func<bit,bit,bit> rule)
-        {
-            var lhsBits = Random.BitSpan(SampleSize);
-            var rhsBits = Random.BitSpan(SampleSize);
-            for(var i=0; i<SampleSize; i++)
-            {
-                var a = lhsBits[i];
-                var b = rhsBits[i];
-                var expect = rule(a,b);
-                var actual = LogicOpApi.eval(kind, a,b);
-                Claim.eq(expect, actual);
-            }
-
-        }
-
-        void logic_expr_check(BL kind, Func<bit,bit,bit> rule)
-        {
-            var v1 = lvar(1);
-            var v2 = lvar(2);
-            var expr = binary(kind, v1,v2);
-
-            foreach(var seq in bitcombo(n2)) 
-            {
-                var s1 = seq[0];
-                var s2 = seq[1];
-                v1.Set(s1);
-                v2.Set(s2);
-                var expect = rule(s1,s2);
-                var e1 = eval(expr);
-                Claim.eq(expect,e1);
-            }
-        }
-
-        void logic_op_bench(bool lookup, SystemCounter clock = default)
-        {
-            var opname = $"ops/logical/lookup[{lookup}]";
-
-            var lhsSamples = Random.Bits().Take(SampleSize).ToArray();
-            var rhsSamples = Random.Bits().Take(SampleSize).ToArray();
-            var result = bit.Off;
-            var kinds = LogicOpApi.BinaryOpKinds;
-            var opcount = 0;
-
-            clock.Start();
-
-            if(lookup)
-            {
-                for(var i=0; i<CycleCount; i++)
-                for(var sample=0; sample< SampleSize; sample++)
-                for(var k=0; k< kinds.Length; k++, opcount++)
-                    result = LogicOpApi.lookup(kinds[k])(lhsSamples[sample], rhsSamples[sample]);
-            }
-            else
-            {
-                for(var i=0; i<CycleCount; i++)
-                for(var sample=0; sample< SampleSize; sample++)
-                for(var k=0; k< kinds.Length; k++, opcount++)
-                    result = LogicOpApi.eval(kinds[k],lhsSamples[sample], rhsSamples[sample]);
-            }
-
-            clock.Stop();
-
-            Benchmark(opname, clock, opcount);
-        }
-
     }
 }

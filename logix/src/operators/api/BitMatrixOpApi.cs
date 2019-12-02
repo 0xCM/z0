@@ -16,18 +16,11 @@ namespace Z0.Logix
     using static OpHelpers;
     using static BitMatrixOps;
 
-    // public delegate BitMatrix<T> BitMatrixUnaryOp<T>(in BitMatrix<T> A)
-    //     where T : unmanaged;
-
     public delegate ref BitMatrix<T> BitMatrixUnaryRefOp<T>(in BitMatrix<T> A, ref BitMatrix<T> Z)
         where T : unmanaged;
 
-    // public delegate BitMatrix<T> BitMatrixBinaryOp<T>(in BitMatrix<T> A, in BitMatrix<T> B)
-    //     where T : unmanaged;
-
     public delegate ref BitMatrix<T> BitMatrixBinaryRefOp<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
         where T : unmanaged;
-
 
     /// <summary>
     /// Defines services for bitmatrix operators
@@ -148,14 +141,10 @@ namespace Z0.Logix
 
         }
 
-
         static BitMatrix<T> dne<T,E>(E kind,BitMatrix<T> A, BitMatrix<T> B = default)
             where T : unmanaged
             where E : unmanaged, Enum
                 =>  throw new NotSupportedException($"{kind}");
 
     }
-
 }
-
-

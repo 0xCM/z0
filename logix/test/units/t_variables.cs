@@ -127,10 +127,10 @@ namespace Z0.Logix
 
             for(var i=0; i< SampleSize; i++)
             {
-                var a = Random.Set(v0);
-                var b = Random.Set(v1);
-                var c = Random.Set(v2);
-                var d = Random.Set(v3);
+                var a = Random.SetNext(v0);
+                var b = Random.SetNext(v1);
+                var c = Random.SetNext(v2);
+                var d = Random.SetNext(v3);
 
                 var expect = op1(op0(a,b), op0(c,d));
                 var actual = LogicEngine.eval(expr).Value;
@@ -156,8 +156,8 @@ namespace Z0.Logix
             var expr = binary(kind,v0,v1);
             for(var i=0; i< SampleSize; i++)
             {
-                var a = Random.Set(v0);
-                var b = Random.Set(v1);
+                var a = Random.SetNext(v0);
+                var b = Random.SetNext(v1);
                 var expect = op(a, b);   
                 var actual = LogicEngine.eval(expr).Value;
                 Claim.eq(expect,actual);          

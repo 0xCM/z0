@@ -5,7 +5,6 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
@@ -16,29 +15,20 @@ namespace Z0.Logix
    public sealed class LiteralLogicSeq<N> : ILiteralLogicSeq
         where N : unmanaged, ITypeNat
     {
-        internal static LiteralLogicSeq<N> FromBitString(BitString src)
-        {
-            Nat.require<N>(src.Length);
-            return new LiteralLogicSeq<N>(LiteralLogicSeq.FromBitString(src).Terms);
-        }
-
-        internal static LiteralLogicSeq<N> FromBits(params bit[] src)
-        {
-            Nat.require<N>(src.Length);
-            return new LiteralLogicSeq<N>(src);
-        }
+        public bit[] Terms {get;}
 
         [MethodImpl(Inline)]
-        LiteralLogicSeq(bit[] terms)
+        internal LiteralLogicSeq(bit[] terms)
         {
             this.Terms = terms;
         }
-            
-        public bit[] Terms {get;}
-        
+                    
         public bit this[int index]
         {
+            [MethodImpl(Inline)]
             get => Terms[index];
+            
+            [MethodImpl(Inline)]
             set => Terms[index] = value;
         }
 

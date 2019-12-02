@@ -5,8 +5,6 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
@@ -48,6 +46,16 @@ namespace Z0.Logix
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
         public static LogicVariable<T> lvar<T>(string name, bit init = default)
+            where T : unmanaged
+                => new LogicVariable<T>(name, init);
+
+        /// <summary>
+        /// Defines a typed logic variable expression initialized to a literal value
+        /// </summary>
+        /// <param name="name">The variable's name</param>
+        /// <param name="init">The variable's initial value</param>
+        [MethodImpl(Inline)]
+        public static LogicVariable<T> lvar<T>(string name, ILogicExpr<T> init)
             where T : unmanaged
                 => new LogicVariable<T>(name, init);
 
@@ -99,23 +107,20 @@ namespace Z0.Logix
         /// <summary>
         /// Creates a varied expression predicated on a specified variable sequence
         /// </summary>
-        /// <param name="subject">The variable-dependent expression</param>
-        /// <param name="variables">The variable sequence</param>
+        /// <param name="expr">The variable-dependent expression</param>
+        /// <param name="vars">The variable sequence</param>
         [MethodImpl(Inline)]
-        public static VariedLogicExpr varied(ILogicExpr subject, params LogicVariable[] variables)
-            => VariedLogicExpr.Define(subject, variables);
+        public static VariedLogicExpr varied(ILogicExpr expr, params LogicVariable[] vars)
+            => new VariedLogicExpr(expr, vars);
 
         /// <summary>
         /// Creates a varied expression predicated on a specified variable sequence
         /// </summary>
-        /// <param name="subject">The variable-dependent expression</param>
-        /// <param name="variables">The variable sequence</param>
+        /// <param name="expr">The variable-dependent expression</param>
+        /// <param name="vars">The variable sequence</param>
         [MethodImpl(Inline)]
-        public static VariedLogicExpr<T> varied<T>(ILogicExpr<T> subject, params LogicVariable<T>[] variables)
+        public static VariedLogicExpr<T> varied<T>(ILogicExpr<T> expr, params LogicVariable<T>[] vars)
             where T : unmanaged
-                => VariedLogicExpr.Define(subject, variables);
-
- 
+                => new VariedLogicExpr<T>(expr, vars); 
     }   
-
 }

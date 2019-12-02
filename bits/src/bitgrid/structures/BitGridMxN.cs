@@ -58,7 +58,6 @@ namespace Z0
             get => ref data.Head;
         }
 
-
         /// <summary>
         /// The number of grid rows
         /// </summary>
@@ -78,6 +77,16 @@ namespace Z0
         }
 
         /// <summary>
+        /// The number of allocated 256-bit blocks 
+        /// </summary>
+        public int BlockCount
+        {
+            [MethodImpl(Inline)]
+            get => data.BlockCount;
+        }
+
+
+        /// <summary>
         /// The number of cells over which the grid is defined
         /// </summary>
         public int CellCount
@@ -89,19 +98,10 @@ namespace Z0
         /// <summary>
         /// The number of bits covered by the grid
         /// </summary>
-        public int PointCount
+        public int BitCount
         {
             [MethodImpl(Inline)]
             get => BitCalcs.pointcount<M,N>(); 
-        }
-
-        /// <summary>
-        /// The number of allocated 256-bit blocks 
-        /// </summary>
-        public int BlockCount
-        {
-            [MethodImpl(Inline)]
-            get => data.BlockCount;
         }
 
         public bit this[int row, int col]
@@ -113,6 +113,18 @@ namespace Z0
             set => BitGrid.setbit(ColCount, row, col, value, ref Head);
         }
 
+        /// <summary>
+        /// Transfers 256-bit cpu vectors to/from blocked storage
+        /// </summary>
+        public Vector256<T> this[int block]
+        {
+            [MethodImpl(Inline)]
+            get => BitGrid.vector(this, block);
+
+            [MethodImpl(Inline)]
+            set => BitGrid.store(value, this, block);
+        }
+
         [MethodImpl(Inline)]
         public void SetBit(int index, bit state)
             => BitGrid.setbit(index, state, ref Head);
@@ -120,18 +132,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public bit ReadBit(int index)
             => BitGrid.readbit(in Head, index);
-
-        /// <summary>
-        /// Transfers 256-bit cpu vectors to/from blocked storage
-        /// </summary>
-        public Vector256<T> this[int block]
-        {
-            [MethodImpl(Inline)]
-            get => BitGrid.read(this, block);
-
-            [MethodImpl(Inline)]
-            set => BitGrid.write(value, this, block);
-        }
 
         /// <summary>
         /// Reads/writes an index-identified grid cell

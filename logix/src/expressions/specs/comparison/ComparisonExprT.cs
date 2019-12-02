@@ -5,24 +5,19 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
 
+    /// <summary>
+    /// Defines a typed comparison expression
+    /// </summary>
     public sealed class ComparisonExpr<T> : IComparisonExpr<T>
         where T : unmanaged
     {
-
-        [MethodImpl(Inline)]
-        public ComparisonExpr(ComparisonKind kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
-        {
-            this.ComparisonKind = kind;
-            this.LeftArg = lhs;
-            this.RightArg = rhs;
-            this.Vars = vars;
-        }
-
+        /// <summary>
+        /// The operator kind
+        /// </summary>
         public ComparisonKind ComparisonKind {get;}
 
         /// <summary>
@@ -35,8 +30,20 @@ namespace Z0.Logix
         /// </summary>
         public IExpr<T> RightArg {get;}
 
+        /// <summary>
+        /// The variables upon which the operands depend
+        /// </summary>
         public IVarExpr<T>[] Vars {get;}
 
+
+        [MethodImpl(Inline)]
+        public ComparisonExpr(ComparisonKind kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
+        {
+            this.ComparisonKind = kind;
+            this.LeftArg = lhs;
+            this.RightArg = rhs;
+            this.Vars = vars;
+        }
 
         public void SetVars(params IExpr<T>[] values)
         {

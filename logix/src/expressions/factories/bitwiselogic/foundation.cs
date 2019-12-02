@@ -10,7 +10,6 @@ namespace Z0.Logix
     
     using static zfunc;
 
-
     public static partial class TypedLogicSpec
     {
         /// <summary>
@@ -79,7 +78,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static RangeExpr<T> rangexpr<T>(T min, T max, T? step = null)
             where T : unmanaged
-                => new RangeExpr<T>(min,max,step);
+                => new RangeExpr<T>(min,max,step ?? gmath.one<T>());
 
         
 

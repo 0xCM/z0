@@ -26,8 +26,6 @@ namespace Z0.Logix
             Claim.nea(result);
 
         }
-
-
         
     }
 

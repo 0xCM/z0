@@ -85,10 +85,10 @@ namespace Z0
 
             ref var g32src = ref g32.Head;
             
-            var row124 = ginx.vload(n, g32.BlockSeek(124*cpr));
-            var row125 = ginx.vload(n, g32.BlockSeek(125*cpr));
-            var row126 = ginx.vload(n, g32.BlockSeek(126*cpr));
-            var row127 = ginx.vload(n, g32.BlockSeek(127*cpr));
+            var row124 = ginx.vload(n, g32.BlockRef(124*cpr));
+            var row125 = ginx.vload(n, g32.BlockRef(125*cpr));
+            var row126 = ginx.vload(n, g32.BlockRef(126*cpr));
+            var row127 = ginx.vload(n, g32.BlockRef(127*cpr));
             
             var diagA = dinx.vgather(n, ref g32src, dinx.vpartsi(n, 496, 501, 506, 511));
             var diagB = dinx.vparts(n, g32[496], g32[501], g32[506], g32[511]);

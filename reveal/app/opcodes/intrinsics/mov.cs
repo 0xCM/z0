@@ -73,8 +73,6 @@ namespace Z0
         public static Vector256<ulong> vconvert_xspan32u_v256x64u(Block128<uint> src, out Vector256<ulong> dst)        
             => dinx.vmovblock(src, out dst);
 
-        public static unsafe void vconvert_ymem32u_v2x256x64u(Block256<uint> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
-            => dinx.vmovblock(src, out lo, out hi);
 
         public static Vector256<byte> valignr256x4n(Vector256<byte> x, Vector256<byte> y)
             => dinx.valignr(x,y,n4);

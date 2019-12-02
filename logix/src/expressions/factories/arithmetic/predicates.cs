@@ -5,7 +5,6 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
@@ -14,11 +13,25 @@ namespace Z0.Logix
 
     public static class PredicateSpec
     {
+        /// <summary>
+        /// Defines a typed comparison predicate over operand expressions
+        /// </summary>
+        /// <param name="kind">The comparison kind</param>
+        /// <param name="a">The left expression</param>
+        /// <param name="b">The right expression</param>
+        /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
         public static ComparisonPred<T> compare<T>(ComparisonKind kind, IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => new ComparisonPred<T>(kind,a,b);
 
+        /// <summary>
+        /// Defines a typed comparison predicate over literal operands
+        /// </summary>
+        /// <param name="kind">The comparison kind</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
         public static ComparisonPred<T> compare<T>(ComparisonKind kind, T a, T b)
             where T : unmanaged
@@ -134,5 +147,4 @@ namespace Z0.Logix
             where T : unmanaged
                 => compare(GtEq, a, b);
     }
-
 }

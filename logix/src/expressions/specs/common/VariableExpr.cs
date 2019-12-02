@@ -5,7 +5,6 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
@@ -13,13 +12,6 @@ namespace Z0.Logix
     public sealed class VariableExpr<T> : IVarExpr<T>
         where T : unmanaged
     {
-        [MethodImpl(Inline)]
-        public VariableExpr(string name, IExpr<T> value)
-        {
-            this.Value = value;
-            this.Name = name;
-        }
-
         /// <summary>
         /// The name of the variable
         /// </summary>
@@ -29,6 +21,13 @@ namespace Z0.Logix
         /// The value of the variable
         /// </summary>
         public IExpr<T> Value {get; private set;}
+
+        [MethodImpl(Inline)]
+        public VariableExpr(string name, IExpr<T> value)
+        {
+            this.Value = value;
+            this.Name = name;
+        }
         
         /// <summary>
         /// Updates the variable's value

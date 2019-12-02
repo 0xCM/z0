@@ -5,7 +5,6 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
@@ -13,14 +12,11 @@ namespace Z0.Logix
     public sealed class UnaryLogicOp<T> : UnaryLogicOp,  IUnaryLogicOp<T>
         where T : unmanaged
     {
-        [MethodImpl(Inline)]
-        public UnaryLogicOp(UnaryLogicOpKind op, ILogicExpr<T> arg)
-            : base(op,arg)
-        {
-            this.Arg = arg;
-        }
-
         public new ILogicExpr<T> Arg{get;}
 
+        [MethodImpl(Inline)]
+        internal UnaryLogicOp(UnaryLogicOpKind op, ILogicExpr<T> arg)
+            : base(op,arg)
+                => this.Arg = arg;
     }
 }

@@ -32,7 +32,7 @@ namespace Z0
             
             for(var i=0; i< SampleSize; i++)
             {
-                var input = Random.BitString(grid.PointCount);
+                var input = Random.BitString(grid.BitCount);
                 for(var index=0; index<input.Length; index++)
                     grid.SetBit(index, input[index]);
 

@@ -15,6 +15,26 @@ namespace Z0.Logix
     /// </summary>
     public class TernaryLogicOp : ITernaryLogicOp
     {
+        /// <summary>
+        /// The operator kind
+        /// </summary>
+        public TernaryOpKind OpKind {get;}
+
+        /// <summary>
+        /// The first operand
+        /// </summary>
+        public ILogicExpr FirstArg {get;}
+
+        /// <summary>
+        /// The second operand
+        /// </summary>
+        public ILogicExpr SecondArg {get;}
+
+        /// <summary>
+        /// The third operand
+        /// </summary>
+        public ILogicExpr ThirdArg {get;}
+
         [MethodImpl(Inline)]
         public TernaryLogicOp(TernaryOpKind op, ILogicExpr arg1, ILogicExpr arg2, ILogicExpr arg3)
         {
@@ -24,20 +44,10 @@ namespace Z0.Logix
             this.ThirdArg = arg3;
         }
 
-        public ILogicExpr FirstArg {get;}
-
-        public ILogicExpr SecondArg {get;}
-
-        public ILogicExpr ThirdArg {get;}
-
-        public TernaryOpKind OpKind {get;}
-
         public string Format()
             => OpKind.Format(FirstArg,SecondArg,ThirdArg);        
         
         public override string ToString()
             => Format();
     }
-
-
 }

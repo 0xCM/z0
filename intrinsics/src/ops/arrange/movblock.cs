@@ -395,7 +395,118 @@ namespace Z0
             hi = v64u(ConvertToVector256Int64(constptr(in src.Head,4)));
         }
 
+        /// <summary>
+        /// VPMOVZXBQ ymm, m32
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<long> vmovblock(in ConstBlock32<byte> src, out Vector256<long> dst)
+        {
+            dst = ConvertToVector256Int64(constptr(in src.Head));
+            return dst;
+        }
+
+        /// <summary>
+        /// VPMOVZXBD ymm, m64
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<uint> vmovblock(in ConstBlock64<byte> src, out Vector256<uint> dst)
+        {
+            dst = v32u(ConvertToVector256Int32(constptr(in src.Head)));
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vmovblock(in ConstBlock256<uint> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
+        {
+            lo = v64u(ConvertToVector256Int64(constptr(in src.LoBlock(0).Head)));
+            hi = v64u(ConvertToVector256Int64(constptr(in src.HiBlock(0).Head)));   
+        }
+
+        /// <summary>
+        /// VPMOVZXWQ ymm, m64
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<long> vmovblock(in ConstBlock64<ushort> src, out Vector256<long> dst)
+        {
+            dst = ConvertToVector256Int64(constptr(in src.Head));
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vmovblock(in ConstBlock256<ushort> src, out Vector256<uint> lo, out Vector256<uint> hi)
+        {
+            lo = v32u(ConvertToVector256Int32(constptr(in src.LoBlock(0).Head)));
+            hi = v32u(ConvertToVector256Int32(constptr(in src.HiBlock(0).Head)));
+        }
+
+        /// <summary>
+        /// VPMOVSXWD ymm, m128
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="lo"></param>
+        /// <param name="hi"></param>
+        [MethodImpl(Inline)]
+        public static unsafe void vmovblock(in ConstBlock256<ushort> src, out Vector256<int> lo, out Vector256<int> hi)
+        {
+            lo = ConvertToVector256Int32(constptr(in src.LoBlock(0).Head));
+            hi = ConvertToVector256Int32(constptr(in src.HiBlock(0).Head));
+        }
+
+        /// <summary>
+        /// VPMOVSXWQ ymm, m64
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<long> vconvert(in ConstBlock64<ushort> src, out Vector256<long> dst)
+        {
+            dst = ConvertToVector256Int64(constptr(in src.Head));
+            return dst;
+        }
+
+        /// <summary>
+        /// VPMOVSXWD ymm, m128
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<int> vconvert(in ConstBlock128<short> src, out Vector256<int> dst)
+        {
+            dst = ConvertToVector256Int32(constptr(in src.Head));
+            return dst;
+        }
+
+        /// <summary>
+        /// VPMOVZXBQ ymm, m32
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<ulong> vconvert(in ConstBlock32<byte> src, out Vector256<ulong> dst)
+        {
+            dst = v64u(ConvertToVector256Int64(constptr(in src.Head)));
+            return dst;
+        }
+
+        /// <summary>
+        /// VPMOVZXBD ymm, m64
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<int> vconvert(ref ConstBlock64<byte> src, out Vector256<int> dst)
+        {
+            dst = ConvertToVector256Int32(constptr(in src.Head));
+            return dst;
+        }
+
+
 
     }
-
 }

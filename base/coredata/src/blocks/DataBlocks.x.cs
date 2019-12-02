@@ -7,44 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Linq;
-    using System.Collections.Generic;
 
     using static zfunc;
-    using static DataBlocks;
 
     public static partial class BlockExtend    
     {
-        [MethodImpl(Inline)]
-        public static ref T BlockRef<T>(in Block32<T> src, int index)
-            where T : unmanaged
-                => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
-        
-        [MethodImpl(Inline)]
-        public static ref T BlockRef<T>(in Block64<T> src, int index)
-            where T : unmanaged
-                => ref Unsafe.Add(ref src.Head, index*src.BlockLength); 
-
-        [MethodImpl(Inline)]
-        public static ref readonly T BlockRef<T>(in ConstBlock32<T> src, int index)
-            where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.AsRef(in src.Head), index*src.BlockLength);  
-
-        [MethodImpl(Inline)]
-        public static ref readonly T BlockRef<T>(in ConstBlock64<T> src, int index)
-            where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.AsRef(in src.Head), index*src.BlockLength);  
-
-        [MethodImpl(Inline)]
-        public static ref readonly T BlockRef<T>(in ConstBlock128<T> src, int index)
-            where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.AsRef(in src.Head), index*src.BlockLength);  
-
-        [MethodImpl(Inline)]
-        public static ref readonly T BlockRef<T>(in ConstBlock256<T> src, int index)
-            where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.AsRef(in src.Head), index*src.BlockLength);  
-
         /// <summary>
         /// Constructs a 128-bit blocked span from an unblocked span
         /// </summary>
@@ -92,7 +59,5 @@ namespace Z0
         static N128 n128 => default;
 
         static N256 n256 => default;
-
-
     }
 }

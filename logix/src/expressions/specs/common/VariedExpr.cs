@@ -5,25 +5,33 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
 
+    /// <summary>
+    /// Defines a variable-dependent typed expression
+    /// </summary>
+    /// <typeparam name="T">The operand type</typeparam>
     public sealed class VariedExpr<T> : IVariedExpr<T>
         where T : unmanaged
     {
+        /// <summary>
+        /// A variable-dependent expression
+        /// </summary>
+        public IExpr<T> BaseExpr {get;}
+
+        /// <summary>
+        /// The variables upon which the expression depends
+        /// </summary>
+        public IVarExpr<T>[] Vars {get;}
+
         [MethodImpl(Inline)]
         internal VariedExpr(IExpr<T> baseExpr, params VariableExpr<T>[] variables)
         {
             this.BaseExpr = baseExpr;
             this.Vars = variables;
         }
-
-        public IExpr<T> BaseExpr {get;}
-
-        public IVarExpr<T>[] Vars {get;}
-
 
         [MethodImpl(Inline)]
         public void SetVars(params T[] values)
@@ -36,27 +44,31 @@ namespace Z0.Logix
         public string Format()
             => string.Empty;
 
+        [MethodImpl(Inline)]
         public void SetVars(params IVarExpr<T>[] values)
-        {
-            throw new NotImplementedException();
-        }
+            => OpHelpers.Set(this,values);
+
     }
 
-   public sealed class VariedExpr<N,T>  : IVariedExpr<T>
+    /// <summary>
+    ///  Defines a typed expression over a variable sequence of natural length
+    /// </summary>
+    /// <typeparam name="N">The sequence length type</typeparam>
+    /// <typeparam name="T">The operand type</typeparam>
+    public sealed class VariedExpr<N,T>  : IVariedExpr<T>
         where T : unmanaged
         where N : unmanaged, ITypeNat
     {        
+        public IExpr<T> BaseExpr {get;}
+
+        public IVarExpr<T>[] Vars {get;}
+
         [MethodImpl(Inline)]
         internal VariedExpr(IExpr<T> baseExpr, params IVarExpr<T>[] variables)
         {
             this.BaseExpr = baseExpr;
             this.Vars = variables;
         }
-
-
-        public IExpr<T> BaseExpr {get;}
-
-        public IVarExpr<T>[] Vars {get;}
 
         [MethodImpl(Inline)]
         public void SetVars(params T[] values)

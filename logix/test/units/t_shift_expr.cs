@@ -5,18 +5,13 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
     using static zfunc;
-    using static TypedLogicSpec;
 
-    public class t_shift_expr : UnitTest<t_shift_expr>
-    {
-
-        
+    public class t_shift_expr : TypedLogixTest<t_shift_expr>
+    {        
        // ~ sll
 
         public void check_sll_8u()
@@ -141,59 +136,5 @@ namespace Z0.Logix
 
         public void check_rotr_256x64u()
             => check_op_256<ulong>(ShiftOpKind.Rotr);
-
- 
-       void check_op<T>(ShiftOpKind op)
-            where T : unmanaged
-        {
-            var v1 = variable<T>(1);
-            var offset = 6;
-            var expr = shift(op,v1,offset);
-            
-            for(var i=0; i< SampleSize; i++)
-            {
-                var a = Random.Next<T>();
-                v1.Set(a);   
-                T actual = LogicEngine.eval(expr);
-                T expect = ScalarOpApi.eval(op,a,offset);
-                Claim.eq(actual,expect);                            
-            }
-        }
-
-        void check_op_128<T>(ShiftOpKind op)
-            where T : unmanaged
-        {
-            var v1 = variable(1, default(Vector128<T>));
-            var offset = 6;
-            var expr = shift(op,v1,offset);
-            
-            for(var i=0; i< SampleSize; i++)
-            {
-                var a = Random.CpuVector<T>(n128);
-                v1.Set(a);   
-                Vector128<T> actual = LogicEngine.eval(expr);
-                Vector128<T> expect = CpuOpApi.eval(op,a,offset);
-                Claim.eq(actual,expect);                            
-            }
-        }
-
-        void check_op_256<T>(ShiftOpKind op)
-            where T : unmanaged
-        {
-            var v1 = variable(1, default(Vector256<T>));
-            var offset = 6;
-            var expr = shift(op,v1,offset);
-            
-            for(var i=0; i< SampleSize; i++)
-            {
-                var a = Random.CpuVector<T>(n256);
-                v1.Set(a);   
-                Vector256<T> actual = LogicEngine.eval(expr);
-                Vector256<T> expect = CpuOpApi.eval(op,a,offset);
-                Claim.eq(actual,expect);                            
-            }
-        }
-
-
     }
 }

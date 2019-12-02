@@ -5,7 +5,6 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
@@ -16,6 +15,11 @@ namespace Z0.Logix
     public sealed class LiteralExpr<T> : ILiteralExpr<T>
         where T : unmanaged
     {
+        /// <summary>
+        /// The literal value
+        /// </summary>
+        public T Value {get;}
+
         /// <summary>
         /// Implicitly converts a literal expression to the underlying value 
         /// </summary>
@@ -46,18 +50,6 @@ namespace Z0.Logix
             this.Value= value;
         }            
 
-        /// <summary>
-        /// The expression classifier
-        /// </summary>
-        public TypedExprKind ExprKind 
-            => TypedExprKind.Literal;
-
-        /// <summary>
-        /// The literal value
-        /// </summary>
-        public T Value {get;}
-
-
         [MethodImpl(Inline)]
         public bool Equals(T other)
         {
@@ -79,6 +71,4 @@ namespace Z0.Logix
         public override string ToString() 
             => Format();
     }
-
-
 }

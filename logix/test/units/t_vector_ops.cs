@@ -5,7 +5,6 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.Intrinsics;
     
     using static zfunc;
@@ -26,7 +25,7 @@ namespace Z0.Logix
             vector_op256_bench<uint>(false);
         }
 
-        void vector_op128_bench<T>(bool lookup, N128 n = default, SystemCounter clock = default)
+        protected void vector_op128_bench<T>(bool lookup, N128 n = default, SystemCounter clock = default)
             where T : unmanaged
         {
             var opname = $"ops/vector128[{typename<T>()}]/lookup[{lookup}]";
@@ -67,7 +66,7 @@ namespace Z0.Logix
             Benchmark(opname, clock, opcount);
         }
 
-        void vector_op256_bench<T>(bool lookup, N256 n = default, SystemCounter clock = default)
+        protected void vector_op256_bench<T>(bool lookup, N256 n = default, SystemCounter clock = default)
             where T : unmanaged
         {
             var opname = $"ops/vector256[{typename<T>()}]/lookup[{lookup}]";
@@ -109,8 +108,6 @@ namespace Z0.Logix
 
             Benchmark(opname, clock, opcount);
         }
-
-
     }
 
 }

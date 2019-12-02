@@ -5,14 +5,35 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
 
+    /// <summary>
+    /// Defines an untyped comparison expression
+    /// </summary>
     public sealed class ComparisonExpr : IComparisonExpr
-    {
+    {        
+        /// <summary>
+        /// The operator kind
+        /// </summary>
+        public ComparisonKind ComparisonKind {get;}
+
+        /// <summary>
+        /// The left operand
+        /// </summary>
+        public ILogicExpr Lhs {get;}
         
+        /// <summary>
+        /// The right operand
+        /// </summary>
+        public ILogicExpr Rhs {get;}
+
+        /// <summary>
+        /// The variables upon which the operands depend
+        /// </summary>
+        public ILogicVarExpr[] Vars {get;}
+
         [MethodImpl(Inline)]
         public static ComparisonExpr<T> Define<T>(ComparisonKind kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
             where T : unmanaged
@@ -29,21 +50,6 @@ namespace Z0.Logix
             this.Rhs = rhs;
             this.Vars = vars;
         }
-
-
-        public ComparisonKind ComparisonKind {get;}
-
-        /// <summary>
-        /// The left expression
-        /// </summary>
-        public ILogicExpr Lhs {get;}
-        
-        /// <summary>
-        /// The right expression
-        /// </summary>
-        public ILogicExpr Rhs {get;}
-
-        public ILogicVarExpr[] Vars {get;}
 
         public void SetVars(params ILogicExpr[] values)
         {
@@ -86,7 +92,6 @@ namespace Z0.Logix
             Vars[1].Set(b);
             Vars[2].Set(c);
         }
-
 
         public string Format()
             => Lhs.Format() + " == " + Rhs.Format();

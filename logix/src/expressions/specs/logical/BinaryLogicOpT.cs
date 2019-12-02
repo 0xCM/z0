@@ -5,17 +5,26 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
 
     /// <summary>
-    /// Represents a logical operator over two typed logical expressions
+    /// Defines a typed binary logical operator expression
     /// </summary>
     public sealed class BinaryLogicOp<T> : BinaryLogicOp, IBinaryLogicOp<T>
         where T : unmanaged
     {
+        /// <summary>
+        /// The left operand
+        /// </summary>
+        public new ILogicExpr<T> LeftArg {get;}
+
+        /// <summary>
+        /// The right operand
+        /// </summary>
+        public new ILogicExpr<T> RightArg {get;}
+
         [MethodImpl(Inline)]
         public BinaryLogicOp(BinaryLogicOpKind op, ILogicExpr<T> left, ILogicExpr<T> right)
             : base(op,left,right)
@@ -23,12 +32,5 @@ namespace Z0.Logix
             this.LeftArg = left;
             this.RightArg = right;
         }
-
-        public new ILogicExpr<T> LeftArg {get;}
-
-        public new ILogicExpr<T> RightArg {get;}
     }
-
-
-
 }

@@ -33,17 +33,19 @@ namespace Z0
         public static implicit operator ConstBlock64<T>(in Block64<T> src)
             => new ConstBlock64<T>(src.data);
 
-        [MethodImpl(Inline)]
-        public static bool operator == (in Block64<T> lhs, in Block64<T> rhs)
-            => lhs.data == rhs.data;
-
-        [MethodImpl(Inline)]
-        public static bool operator != (in Block64<T> lhs, in Block64<T> rhs)
-            => lhs.data != rhs.data;
                     
         [MethodImpl(Inline)]
         internal Block64(Span<T> src)
             => this.data = src;
+
+        /// <summary>
+        /// The unblocked storage cells
+        /// </summary>
+        public Span<T> Data
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
 
         /// <summary>
         /// The leading storage cell
@@ -52,24 +54,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref MemoryMarshal.GetReference(data);
-        }
-
-        /// <summary>
-        /// Reads/Writes an index-identified cell
-        /// </summary>
-        public ref T this[int ix] 
-        {
-            [MethodImpl(Inline)]
-            get => ref Unsafe.Add(ref Head, ix);
-        }
-
-        /// <summary>
-        /// The encapsulated storage
-        /// </summary>
-        public Span<T> Data
-        {
-            [MethodImpl(Inline)]
-            get => data;
         }
 
         /// <summary>
@@ -147,28 +131,22 @@ namespace Z0
         }
 
         /// <summary>
-        /// Returns the leading cell of an index-identified block
+        /// Indexes directly into the underlying storage cells
         /// </summary>
-        /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
-        [MethodImpl(Inline)]
-        public ref T BlockSeek(int index)
-            => ref Unsafe.Add(ref Head, index*BlockLength); 
+        public ref T this[int ix] 
+        {
+            [MethodImpl(Inline)]
+            get => ref Unsafe.Add(ref Head, ix);
+        }
 
+        /// <summary>
+        /// Reinterprets the storage cell type
+        /// </summary>
+        /// <typeparam name="S">The target cell type</typeparam>
         [MethodImpl(Inline)]
-        public Span<T> Slice(int offset)
-            => data.Slice(offset);
-            
-        [MethodImpl(Inline)]
-        public Span<T> Slice(int offset, int length)
-            => data.Slice(offset,length);            
-
-        [MethodImpl(Inline)]
-        public T[] ToArray()
-            => data.ToArray();   
-
-        [MethodImpl(Inline)]
-        public void Fill(T value)
-            => data.Fill(value);
+        public Block64<S> As<S>()                
+            where S : unmanaged
+                => new Block64<S>(MemoryMarshal.Cast<T,S>(data));                    
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()
@@ -176,25 +154,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref T GetPinnableReference()
-            => ref data.GetPinnableReference();
-
-        [MethodImpl(Inline)]
-        public void CopyTo(Span<T> dst)
-            => data.CopyTo(dst);
-
-        [MethodImpl(Inline)]
-        public bool TryCopyTo(Span<T> dst)
-            => data.TryCopyTo(dst);
-                
-        [MethodImpl(Inline)]
-        public Block64<S> As<S>()                
-            where S : unmanaged
-                => DataBlocks.safeload(N,MemoryMarshal.Cast<T,S>(data));                    
-
-        public override bool Equals(object rhs) 
-            => throw new NotSupportedException();
-
-        public override int GetHashCode() 
-            => throw new NotSupportedException();        
-    }
+            => ref data.GetPinnableReference();                
+   }
 }

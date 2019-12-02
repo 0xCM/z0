@@ -5,26 +5,18 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
 
-
     /// <summary>
-    /// Joins an operator with left and right operands
+    /// Defines a unary bitwise operator expression
     /// </summary>
     public sealed class UnaryBitwiseOpSpec<T> : IUnaryBitwiseOp<T>
         where T : unmanaged
     {
-        public UnaryBitwiseOpSpec(UnaryBitwiseOpKind op, IExpr<T> operand)
-        {
-            this.OpKind = op;
-            this.Arg = operand;
-        }
-        
         /// <summary>
-        /// The operator
+        /// The operator kind
         /// </summary>
         public UnaryBitwiseOpKind OpKind {get;}
 
@@ -33,13 +25,16 @@ namespace Z0.Logix
         /// </summary>
         public IExpr<T> Arg {get;}
 
+        public UnaryBitwiseOpSpec(UnaryBitwiseOpKind op, IExpr<T> operand)
+        {
+            this.OpKind = op;
+            this.Arg = operand;
+        }
+        
         public string Format()
             => OpKind.Format(Arg);
 
         public override string ToString()
             => Format();
-
     }
-
-
 }

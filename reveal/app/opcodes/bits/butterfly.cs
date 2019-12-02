@@ -16,9 +16,6 @@ namespace Z0
         public static void bs_and(in Block256<uint> x, in Block256<uint> y, Block256<uint> z)
             => vblock.and(n256,x.BlockCount, 256/32, in x.Head, in y.Head, ref z.Head);
 
-        public static void s_and(Span<uint> x, Span<uint> y, Span<uint> z)
-            => vblock.and(n256, x.Length/8, Block256<uint>.BlockLength, in head(x), in head(y), ref head(z));
-
         public static BitVector128 and_128(BitVector128 x, BitVector128 y)
             => x & y;
 

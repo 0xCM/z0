@@ -53,9 +53,10 @@ namespace Z0
         public static void VerifyUnaryOp<T>(IPolyrand random, int blocks, Vector256UnaryOp<T> inXOp, Func<T,T> primalOp)
             where T : unmanaged
         {
-            var blocklen = Block256<T>.BlockLength;                     
             
             var src = random.ConstBlocks<T>(n256,blocks);
+            var blocklen = src.BlockLength;                     
+
             Claim.eq(blocks*blocklen,src.CellCount);
                         
             var expect = DataBlocks.alloc<T>(n256, blocks);
@@ -128,10 +129,9 @@ namespace Z0
 
         public static void VerifyBinOp<T>(IPolyrand random, int blocks, Vector256BinOp<T> inXOp, Func<T,T,T> primalOp)
             where T : unmanaged
-        {
-            var blocklen = Block256<T>.BlockLength;                     
-            
+        {                    
             var lhs = random.ConstBlocks<T>(n256, blocks);
+            var blocklen = lhs.BlockLength;                     
             Claim.eq(blocks*blocklen,lhs.CellCount);
             
             var rhs = random.ConstBlocks<T>(n256,blocks);

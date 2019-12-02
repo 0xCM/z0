@@ -50,7 +50,6 @@ namespace Z0
             get => CellWidth >= RowWidth ? 1 : PaddingRequired ? WholeRowCells + 1 : WholeRowCells;
         }
 
-
         public static int TotalCellCount
         {
             [MethodImpl(Inline)]

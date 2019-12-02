@@ -127,7 +127,6 @@ namespace Z0
             return dst;
         }
 
-
         /// <summary>
         /// __m128i _mm_cvtepu8_epi64 (__m128i a) PMOVZXBQ xmm, xmm/m16
         /// </summary>
@@ -152,7 +151,6 @@ namespace Z0
             return dst;
         }
 
-
         /// <summary>
         /// __m128i _mm_cvtepi16_epi64 (__m128i a) PMOVSXWQ xmm, xmm/m32
         /// </summary>
@@ -164,7 +162,6 @@ namespace Z0
             dst = ConvertToVector128Int64(src);
             return dst;
         }
-
 
         /// <summary>
         /// __m128i _mm_cvtepu16_epi32 (__m128i a) PMOVZXWD xmm, xmm/m64
@@ -190,7 +187,6 @@ namespace Z0
             return dst;
         }
 
-
         /// <summary>
         ///  __m128i _mm_cvtepu16_epi64 (__m128i a) PMOVZXWQ xmm, xmm/m32
         /// </summary>
@@ -202,7 +198,6 @@ namespace Z0
            dst = ConvertToVector128Int64(src);
            return dst;
         }
-
 
         /// <summary>
         ///  __m128i _mm_cvtepu16_epi64 (__m128i a) PMOVZXWQ xmm, xmm/m32
@@ -216,7 +211,6 @@ namespace Z0
            return dst;
         }
 
-
         /// <summary>
         /// __m128i _mm_cvtepi32_epi64 (__m128i a) PMOVSXDQ xmm, xmm/m64
         /// </summary>
@@ -228,7 +222,6 @@ namespace Z0
            dst = ConvertToVector128Int64(src);
            return dst;
         }
-
 
         /// <summary>
         /// __m128i _mm_cvtepu32_epi64 (__m128i a) PMOVZXDQ xmm, xmm/m64
@@ -335,7 +328,6 @@ namespace Z0
             hi = v16u(ConvertToVector256Int16(vhi(src)));
         }
 
-
         /// <summary>
         ///  __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
         /// Zero extend 8 packed 8-bit integers the low 8 bytes of xmm2/m64 to 8 packed 32-bit integers ymm1
@@ -349,17 +341,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// VPMOVZXBD ymm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<int> vconvert(ref byte src, out Vector256<int> dst)
-        {
-            dst = ConvertToVector256Int32(ptr(ref src));
-            return dst;
-        }
 
         /// <summary>
         ///  __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
@@ -375,18 +356,6 @@ namespace Z0
         }        
 
         /// <summary>
-        /// VPMOVZXBD ymm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<uint> vconvert(ref byte src, out Vector256<uint> dst)
-        {
-            dst = v32u(ConvertToVector256Int32(ptr(ref src)));
-            return dst;
-        }
-
-        /// <summary>
         /// __m256i _mm256_cvtepu8_epi64 (__m128i a) VPMOVZXBQ ymm, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -395,18 +364,6 @@ namespace Z0
         public static Vector256<long> vconvert(Vector128<byte> src, out Vector256<long> dst)
         {
             dst = ConvertToVector256Int64(src);
-            return dst;
-        }
-
-        /// <summary>
-        /// VPMOVZXBQ ymm, m32
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<long> vconvert(ref byte src, out Vector256<long> dst)
-        {
-            dst = ConvertToVector256Int64(ptr(ref src));
             return dst;
         }
 
@@ -423,18 +380,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// VPMOVZXBQ ymm, m32
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> vconvert(ref byte src, out Vector256<ulong> dst)
-        {
-            dst = v64u(ConvertToVector256Int64(ptr(ref src)));
-            return dst;
-        }
-
-        /// <summary>
         /// __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -446,17 +391,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// VPMOVSXWD ymm, m128
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<int> vconvert(ref short src, out Vector256<int> dst)
-        {
-            dst = ConvertToVector256Int32(ptr(ref src));
-            return dst;
-        }
 
         [MethodImpl(Inline)]
         public static Vector256<uint> vconvert(Vector128<short> src, out Vector256<uint> dst)
@@ -477,17 +411,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// VPMOVSXWQ ymm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<long> vconvert(ref short src, out Vector256<long> dst)
-        {
-            dst = ConvertToVector256Int64(ptr(ref src));
-            return dst;
-        }
 
         /// <summary>
         /// __m256i _mm256_cvtepu16_epi32 (__m128i a) VPMOVZXWD ymm, xmm
@@ -539,21 +462,6 @@ namespace Z0
             hi = ConvertToVector256Int32(vhi(src));            
         }
 
-        [MethodImpl(Inline)]
-        public static unsafe void vconvert(ref ushort src, out Vector256<uint> lo, out Vector256<uint> hi)
-        {
-            lo = v32u(ConvertToVector256Int32(ptr(ref src)));
-            hi = v32u(ConvertToVector256Int32(ptr(ref src,8)));
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe void vconvert(ref short src, out Vector256<int> lo, out Vector256<int> hi)
-        {
-            lo = ConvertToVector256Int32(ptr(ref src));
-            hi = ConvertToVector256Int32(ptr(ref src,8));
-        }
-
-
         /// <summary>
         /// __m256i _mm256_cvtepu16_epi64 (__m128i a) VPMOVZXWQ ymm, xmm
         /// </summary>
@@ -563,18 +471,6 @@ namespace Z0
         public static Vector256<long> vconvert(Vector128<ushort> src, out Vector256<long> dst)
         {
             dst = ConvertToVector256Int64(src);
-            return dst;
-        }
-
-        /// <summary>
-        /// VPMOVZXWQ ymm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<long> vconvert(ref ushort src, out Vector256<long> dst)
-        {
-            dst = ConvertToVector256Int64(ptr(ref src));
             return dst;
         }
 
@@ -596,8 +492,6 @@ namespace Z0
             lo = v64u(ConvertToVector256Int64(vlo(src)));
             hi = v64u(ConvertToVector256Int64(vhi(src)));
         }
-
-
         
         /// <summary>
         /// __m256i _mm256_cvtepi32_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
@@ -641,6 +535,5 @@ namespace Z0
             lo = v64u(ConvertToVector256Int64(vlo(src)));
             hi = v64u(ConvertToVector256Int64(vhi(src)));
         }
-
     }
 }

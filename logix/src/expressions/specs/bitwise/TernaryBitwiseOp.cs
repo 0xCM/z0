@@ -5,32 +5,20 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
 
     /// <summary>
-    /// Represents a bitwise operator over three operands
+    /// Defines a typed ternary bitwise operator expression
     /// </summary>
     public sealed class TernaryBitwiseOp<T> : ITernaryBitwiseOp<T>
         where T : unmanaged
     {
-        [MethodImpl(Inline)]
-        public TernaryBitwiseOp(TernaryOpKind op, IExpr<T> first, IExpr<T> second, IExpr<T> third)
-        {
-            this.OpKind = op;
-            this.FirstArg = first;
-            this.SecondArg = second;
-            this.ThirdArg = third;
-        }
-
-
         /// <summary>
-        /// The operator
+        /// The operator kind
         /// </summary>
         public TernaryOpKind OpKind {get;}
-
 
         /// <summary>
         /// The first operand
@@ -47,13 +35,19 @@ namespace Z0.Logix
         /// </summary>
         public IExpr<T> ThirdArg {get;}
 
+        [MethodImpl(Inline)]
+        public TernaryBitwiseOp(TernaryOpKind op, IExpr<T> first, IExpr<T> second, IExpr<T> third)
+        {
+            this.OpKind = op;
+            this.FirstArg = first;
+            this.SecondArg = second;
+            this.ThirdArg = third;
+        }
+
         public string Format()
             => OpKind.Format(FirstArg,SecondArg,ThirdArg);
         
         public override string ToString()
             => Format();
-
     }
-
- 
 }

@@ -5,29 +5,18 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
 
     /// <summary>
-    /// Captures a comparison expression along with with its operands
+    /// Defines a typed comparison predicate
     /// </summary>
     public sealed class ComparisonPred<T> : IComparisonPred<T>
         where T : unmanaged
     {
-        [MethodImpl(Inline)]
-        public ComparisonPred(ComparisonKind op, IExpr<T> left, IExpr<T> right, params IVarExpr<T>[] vars)
-        {
-            this.ComparisonKind = op;
-            this.LeftArg = left;
-            this.RightArg = right;
-            this.Vars = vars;
-        }
-        
-
         /// <summary>
-        /// The operator
+        /// The operator kind
         /// </summary>
         public ComparisonKind ComparisonKind {get;}
 
@@ -41,8 +30,19 @@ namespace Z0.Logix
         /// </summary>
         public IExpr<T> RightArg {get;}
 
+        /// <summary>
+        /// The variables upon which the operands depend
+        /// </summary>
         public IVarExpr<T>[] Vars {get;}
 
+        [MethodImpl(Inline)]
+        public ComparisonPred(ComparisonKind op, IExpr<T> left, IExpr<T> right, params IVarExpr<T>[] vars)
+        {
+            this.ComparisonKind = op;
+            this.LeftArg = left;
+            this.RightArg = right;
+            this.Vars = vars;
+        }    
 
         public void SetVars(params IExpr<T>[] values)
         {
@@ -62,14 +62,10 @@ namespace Z0.Logix
         public void SetVar(int index, T value)
             => Vars[index].Set(value);
          
-
         public string Format()
             => ComparisonKind.Format(LeftArg,RightArg);
         
         public override string ToString()
             => Format();
-
     }
-
-
 }

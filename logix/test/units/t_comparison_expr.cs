@@ -5,13 +5,9 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using static LogicEngine;
-    using CS = TypedComparisonSpec;
 
     public class t_comparison_expr : TypedLogixTest<t_comparison_expr>
     {
@@ -39,7 +35,6 @@ namespace Z0.Logix
             scalar_lteq_expr_check<ulong>();
         }
 
-
         public void scalar_gt_expr_check()
         {
             scalar_gt_expr_check<byte>();
@@ -52,7 +47,6 @@ namespace Z0.Logix
             scalar_gt_expr_check<ulong>();
         }
 
-
         public void scalar_gteq_expr_check()
         {
             scalar_gteq_expr_check<byte>();
@@ -64,77 +58,5 @@ namespace Z0.Logix
             scalar_gteq_expr_check<long>();
             scalar_gteq_expr_check<ulong>();
         }
-
-
- 
-        void scalar_lt_expr_check<T>()
-            where T : unmanaged
-        {
-            var va = var_a<T>();
-            var vb = var_b<T>();
-            var x = CS.lt(va,vb);
-            for(var i=0; i<SampleSize; i++)
-            {
-                var a = va.Set(Random);
-                var b = vb.Set(Random);
-                var result = eval(x).Value;
-                var expect = ScalarOpApi.eval(ComparisonKind.Lt,a,b);                
-                Claim.eq(expect,result);            
-            }
-        }
-
-        void scalar_lteq_expr_check<T>()
-            where T : unmanaged
-        {
-            var va = var_a<T>();
-            var vb = var_b<T>();
-            var x = CS.lteq(va,vb);
-            for(var i=0; i<SampleSize; i++)
-            {
-                var a = va.Set(Random);
-                var b = vb.Set(Random);
-                var result = eval(x).Value;
-                var expect = ScalarOpApi.eval(ComparisonKind.LtEq,a,b);                
-                Claim.eq(expect,result);
-            }
-        }
-
-        void scalar_gt_expr_check<T>()
-            where T : unmanaged
-        {
-            var va = var_a<T>();
-            var vb = var_b<T>();
-            var x = CS.gt(va,vb);
-            for(var i=0; i<SampleSize; i++)
-            {
-                var a = va.Set(Random);
-                var b = vb.Set(Random);
-                var expect = ScalarOpApi.eval(ComparisonKind.Gt,a,b);   
-                var actual = eval(x).Value;
-                if(gmath.neq(actual,expect))             
-                    Trace($"{a} > {b}?");
-                Claim.eq(expect,actual);            
-            }
-
-        }
-
-        void scalar_gteq_expr_check<T>()
-            where T : unmanaged
-        {
-            var va = var_a<T>();
-            var vb = var_b<T>();
-            var x = CS.gteq(va,vb);
-            for(var i=0; i<SampleSize; i++)
-            {
-                var a = va.Set(Random);
-                var b = vb.Set(Random);
-                var expect = ScalarOpApi.eval(ComparisonKind.GtEq,a,b);
-                var actual = eval(x).Value;
-                Claim.eq(expect,actual);
-            }
-
-        }
-
-   }
-
+  }
 }

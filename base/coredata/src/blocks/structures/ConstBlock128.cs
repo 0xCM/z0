@@ -29,30 +29,26 @@ namespace Z0
             => src.data;
 
         [MethodImpl(Inline)]
-        public static bool operator == (in ConstBlock128<T> lhs, in ConstBlock128<T> rhs)
-            => lhs.data == rhs.data;
-
-        [MethodImpl(Inline)]
-        public static bool operator != (in ConstBlock128<T> lhs, in ConstBlock128<T> rhs)
-            => lhs.data != rhs.data;
-    
-        [MethodImpl(Inline)]
-        internal ConstBlock128(Span<T> src)
-            => this.data = src;
-
-        [MethodImpl(Inline)]
         internal ConstBlock128(ReadOnlySpan<T> src)
             => this.data = src;
-
-        [MethodImpl(Inline)]
-        internal ConstBlock128(in Block128<T> src)
-            => this.data = src.Data;
         
+        /// <summary>
+        /// The unblocked storage cells
+        /// </summary>
         public ReadOnlySpan<T> Data
         {
             [MethodImpl(Inline)]
             get => data;
         }
+
+        /// <summary>
+        /// The leading storage cell
+        /// </summary>
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref MemoryMarshal.GetReference<T>(data);
+        }            
 
         /// <summary>
         /// The number of allocated cells
@@ -119,12 +115,10 @@ namespace Z0
             get => data.IsEmpty;
         }
             
-        public ref T Head
-        {
-            [MethodImpl(Inline)]
-            get => ref MemoryMarshal.GetReference<T>(data);
-        }            
 
+        /// <summary>
+        /// Indexes directly into the underlying storage cells
+        /// </summary>
         public ref readonly T this[int ix] 
         {
             [MethodImpl(Inline)]
@@ -132,24 +126,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ref readonly T BlockSeek(int index)
-            => ref Unsafe.Add(ref Head, index*blocklen<T>(N));
-
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<T> Slice(int start)
-            => data.Slice(start);
-
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<T> Slice(int start, int length)
-            => data.Slice(start,length);
-            
-        [MethodImpl(Inline)]
-        public Span<T> ToSpan()
-            => new Span<T>(data.ToArray());
-
-        [MethodImpl(Inline)]
-        public T[] ToArray()
-            => data.ToArray();   
+        public ConstBlock128<S> As<S>()                
+            where S : unmanaged
+                => new ConstBlock128<S>(MemoryMarshal.Cast<T,S>(data));                    
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<T>.Enumerator GetEnumerator()
@@ -157,28 +136,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly T GetPinnableReference()
-            => ref data.GetPinnableReference();
-
-        [MethodImpl(Inline)]
-        public void CopyTo(Span<T> dst)
-            => data.CopyTo(dst);
-
-        [MethodImpl(Inline)]
-        public bool TryCopyTo(Span<T> dst)
-            => data.TryCopyTo(dst);
-                
-        [MethodImpl(Inline)]
-        public ConstBlock128<S> As<S>()                
-            where S : unmanaged
-                => new ConstBlock128<S>(MemoryMarshal.Cast<T,S>(data));                    
- 
-        public override string ToString() 
-            => data.ToString();
-
-        public override bool Equals(object rhs) 
-            => throw new NotSupportedException();
-
-        public override int GetHashCode() 
-            => throw new NotSupportedException();        
-    }
+            => ref data.GetPinnableReference();                 
+   }
 }

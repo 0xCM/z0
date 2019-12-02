@@ -5,13 +5,24 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
 
+    /// <summary>
+    /// Defines an untyped logic variable
+    /// </summary>
     public sealed class LogicVariable : ILogicVarExpr
     {
+        /// <summary>
+        /// The variable name
+        /// </summary>
+        public string Name {get;}
+
+        /// <summary>
+        /// The varible value
+        /// </summary>
+        public ILogicExpr Value {get; private set;}
 
         [MethodImpl(Inline)]
         public LogicVariable(string name, ILogicExpr init)
@@ -27,15 +38,6 @@ namespace Z0.Logix
             this.Value = new LiteralLogicExpr(init);
         }
 
-        /// <summary>
-        /// The variable name
-        /// </summary>
-        public string Name {get;}
-
-        /// <summary>
-        /// The varible value
-        /// </summary>
-        public ILogicExpr Value {get; private set;}
 
         [MethodImpl(Inline)]
         public void Set(ILogicExpr value)
@@ -49,7 +51,6 @@ namespace Z0.Logix
             this.Value = new LiteralLogicExpr(value);
         }
 
-
         [MethodImpl(Inline)]
         public void Set(IExpr value)
             => Value = (ILogicExpr)value;
@@ -62,10 +63,5 @@ namespace Z0.Logix
         
         public override string ToString()
             => Format();
-
     }
-
-
-
-
 }

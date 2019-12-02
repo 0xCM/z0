@@ -5,7 +5,6 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
@@ -16,16 +15,8 @@ namespace Z0.Logix
     public sealed class BinaryBitwiseOp<T> : IBinaryBitwiseOp<T>
         where T : unmanaged
     {
-        [MethodImpl(Inline)]
-        public BinaryBitwiseOp(BinaryBitwiseOpKind op, IExpr<T> left, IExpr<T> right)
-        {
-            this.OpKind = op;
-            this.LeftArg = left;
-            this.RightArg = right;
-        }
-
         /// <summary>
-        /// The operator
+        /// The operator kind
         /// </summary>
         public BinaryBitwiseOpKind OpKind {get;}
 
@@ -38,6 +29,14 @@ namespace Z0.Logix
         /// The right operand
         /// </summary>
         public IExpr<T> RightArg {get;}
+
+        [MethodImpl(Inline)]
+        public BinaryBitwiseOp(BinaryBitwiseOpKind op, IExpr<T> left, IExpr<T> right)
+        {
+            this.OpKind = op;
+            this.LeftArg = left;
+            this.RightArg = right;
+        }
 
         /// <summary>
         /// Renders the expression in canonical form

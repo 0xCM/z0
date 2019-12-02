@@ -5,16 +5,20 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
 
     /// <summary>    
-    /// Defines an untyped literal expression
+    /// Defines an untyped literal logic expression
     /// </summary>
     public sealed class LiteralLogicExpr : ILogicLiteral
     {
+        /// <summary>
+        /// The literal value
+        /// </summary>
+        public bit Value {get;}
+
         /// <summary>
         /// Implicitly converts a literal expression to the underlying value 
         /// </summary>
@@ -33,15 +37,7 @@ namespace Z0.Logix
 
         [MethodImpl(Inline)]
         public LiteralLogicExpr(bit value)
-        {                
-            this.Value= value;
-        }            
-
-
-        /// <summary>
-        /// The literal value
-        /// </summary>
-        public bit Value {get;}
+            => this.Value= value;
 
         public string Format()
             => Format(false);

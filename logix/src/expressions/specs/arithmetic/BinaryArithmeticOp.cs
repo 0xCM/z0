@@ -5,17 +5,31 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
 
     /// <summary>
-    /// Captures a binary arithmetic operator along with with its operands
+    /// Defines a typed binary arithmetic operator expression
     /// </summary>
     public sealed class BinaryArithmeticOp<T> : IBinaryArithmeticOp<T>
         where T : unmanaged
     {
+        /// <summary>
+        /// The operator kind
+        /// </summary>
+        public BinaryArithmeticOpKind OpKind {get;}
+
+        /// <summary>
+        /// The left operand
+        /// </summary>
+        public IExpr<T> LeftArg {get;}
+
+        /// <summary>
+        /// The right operand
+        /// </summary>
+        public IExpr<T> RightArg {get;}
+
         public BinaryArithmeticOp(BinaryArithmeticOpKind op, IExpr<T> lhs, IExpr<T> rhs)
         {
             this.OpKind = op;
@@ -23,22 +37,6 @@ namespace Z0.Logix
             this.RightArg = rhs;
         }
         
-
-        /// <summary>
-        /// The operator
-        /// </summary>
-        public BinaryArithmeticOpKind OpKind {get;}
-
-        /// <summary>
-        /// The operand
-        /// </summary>
-        public IExpr<T> LeftArg {get;}
-
-        /// <summary>
-        /// The operand
-        /// </summary>
-        public IExpr<T> RightArg {get;}
-
         /// <summary>
         /// Renders the expression in canonical form
         /// </summary>
@@ -47,8 +45,5 @@ namespace Z0.Logix
         
         public override string ToString()
             => Format();
-
     }
-
-
 }

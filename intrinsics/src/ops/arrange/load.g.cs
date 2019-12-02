@@ -223,7 +223,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vload<T>(in ConstBlock128<T> src, int block)            
             where T : unmanaged      
-                => vload(in src.BlockSeek(block), out Vector128<T> x);
+                => vload(in src.BlockRef(block), out Vector128<T> x);
 
         /// <summary>
         /// Loads a 256-bit vector from the first 256-bit source block
@@ -267,7 +267,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vload<T>(in ConstBlock256<T> src, int block)            
             where T : unmanaged      
-                => vload(in src.BlockSeek(block), out Vector256<T> x);
+                => vload(in src.BlockRef(block), out Vector256<T> x);
 
         [MethodImpl(Inline)]
         public static unsafe ref Vector128<T> vload<T>(T* pSrc, out Vector128<T> dst)

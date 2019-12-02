@@ -129,6 +129,7 @@ namespace Z0
             where T : unmanaged
                 => BM.load(m, n, random.Span<T>(BitGridSpec.define(m,n,default(T)).TotalCellCount));
 
+
         /// <summary>
         /// Produces an generic bitmatrix of natural order
         /// </summary>

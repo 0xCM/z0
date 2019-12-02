@@ -111,10 +111,10 @@ namespace Z0
         public Vector256<T> this[int block]
         {
             [MethodImpl(Inline)]
-            get => BitGrid.read(this, block);
+            get => BitGrid.vector(this, block);
 
             [MethodImpl(Inline)]
-            set => BitGrid.write(value, this, block);
+            set => BitGrid.store(value, this, block);
         }
 
         /// <summary>

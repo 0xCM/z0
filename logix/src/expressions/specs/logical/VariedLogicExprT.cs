@@ -5,17 +5,26 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    using Z0;
+
     using static zfunc;
 
     /// <summary>
-    /// Defines a logic expression that is parametrized by one or more variables
+    /// Defines a typed logic expression over one or more variables
     /// </summary>
     public sealed class VariedLogicExpr<T> : IVariedLogicExpr<T> 
         where T : unmanaged
     {        
+        /// <summary>
+        /// The variable-dependent expression
+        /// </summary>
+        public ILogicExpr<T> BaseExpr {get;}
+
+        /// <summary>
+        /// The variables that parametrize the base expression
+        /// </summary>
+        public ILogicVarExpr<T>[] Vars {get;}
+
     
         [MethodImpl(Inline)]
         public VariedLogicExpr(ILogicExpr<T> baseExpr, params ILogicVarExpr<T>[] variables)
@@ -23,10 +32,6 @@ namespace Z0.Logix
             this.BaseExpr = baseExpr;
             this.Vars = variables;
         }
-
-        public ILogicExpr<T> BaseExpr {get;}
-
-        public ILogicVarExpr<T>[] Vars {get;}
 
         ILogicExpr IVariedLogicExpr.BaseExpr 
             => BaseExpr;
@@ -41,8 +46,6 @@ namespace Z0.Logix
                 Vars[i].Set(values[i]);
         }
 
-
-
         public string Format()
             => BaseExpr.Format();
 
@@ -56,5 +59,4 @@ namespace Z0.Logix
             throw new NotImplementedException();
         }
     }
-
 }
