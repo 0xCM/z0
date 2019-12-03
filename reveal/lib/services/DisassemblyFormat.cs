@@ -28,7 +28,7 @@ namespace Z0
 
         public static string FormatCil(this MethodDisassembly src)
         {
-            var format = sbuild();
+            var format = text();
             format.AppendLine(src.MethodSig.Format());
             format.AppendLine(AsciSym.LBrace.ToString());
             format.AppendLine(src.CilBody.ToString());
@@ -47,7 +47,7 @@ namespace Z0
             var baseAddress = src.Instructions[0].IP;
 
             var formatter = new MasmFormatter(FormatOptions);
-            var sb = sbuild();
+            var sb = text();
 
             var writer = new StringWriter(sb);
             var output = new AsmFormatterOutput(writer, baseAddress);
@@ -84,7 +84,7 @@ namespace Z0
             var formatter = new MasmFormatter(FormatOptions);
             var baseAddress = src.Instructions.First().IP;
 
-            var sb = sbuild();
+            var sb = text();
             var writer = new StringWriter(sb);
             var output = new AsmFormatterOutput(writer, baseAddress);
             for(var j = 0; j< src.Instructions.Length; j++)

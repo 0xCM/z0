@@ -22,17 +22,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int lsbpos<T>(T src)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return Bits.lsbpos(uint8(src));
-            else if(typeof(T) == typeof(ushort))
-                return Bits.lsbpos(uint16(src));
-            else if(typeof(T) == typeof(uint))
-                return Bits.lsbpos(uint32(src));
-            else if(typeof(T) == typeof(ulong))
-                return Bits.lsbpos(uint64(src));
-            else            
-                throw unsupported<T>();
-        }           
+                => ntz(src);
+        // {
+        //     if(typeof(T) == typeof(byte))
+        //         return Bits.lsbpos(uint8(src));
+        //     else if(typeof(T) == typeof(ushort))
+        //         return Bits.lsbpos(uint16(src));
+        //     else if(typeof(T) == typeof(uint))
+        //         return Bits.lsbpos(uint32(src));
+        //     else if(typeof(T) == typeof(ulong))
+        //         return Bits.lsbpos(uint64(src));
+        //     else            
+        //         throw unsupported<T>();
+        // }           
     }
 }

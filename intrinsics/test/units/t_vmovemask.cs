@@ -57,7 +57,7 @@ namespace Z0
                 var mask = 0u;
                 for(var r=0; r<srcCpuVec.Length(); r++)
                     if(BitMask.test(srcBlock[r], hibit))
-                        BitMask.enable(ref mask, r);
+                        mask = BitMask.enable(mask, r);
                 
                 var expect = mask.ToBitVector(bytes).ToBitString();
                 var actual = dinx.vmovemask(srcCpuVec).ToBitVector(bytes).ToBitString();
@@ -85,7 +85,7 @@ namespace Z0
                 var mask = 0u;
                 for(var r=0; r<srcCpuVec.Length(); r++)
                     if(BitMask.test(srcBlock[r], hibit))
-                        BitMask.enable(ref mask, r);
+                        mask = BitMask.enable(mask, r);
                 
                 var expect = mask.ToBitVector(bytes).ToBitString();
                 var actual = dinx.vmovemask(srcCpuVec).ToBitVector(bytes).ToBitString();

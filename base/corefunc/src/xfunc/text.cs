@@ -626,7 +626,7 @@ namespace Z0
         public static string SeparateBlocks(this string src, int blocklen, char sep, string blockprefix)
         {
             var parts = src.Partition(blocklen).ToArray();            
-            var result = sbuild();
+            var result = text();
             var prefix = blockprefix ?? string.Empty;
             var lastindex = parts.Length - 1;
             for(var i=0; i<parts.Length; i++)
@@ -646,7 +646,7 @@ namespace Z0
         /// <param name="c">The character to intersperse</param>
         public static string Intersperse(this string src, char c)
         {
-            var sb = sbuild();
+            var sb = text();
             foreach(var item in src)
             {
                 sb.Append(item);

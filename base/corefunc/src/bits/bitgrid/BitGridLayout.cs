@@ -88,7 +88,7 @@ namespace Z0
 
         public string Format()
         {
-            var format = sbuild();
+            var format = text();
             format.Append($"RowCount = {RowCount}, ");
             format.Append($"ColCount = {ColCount}, ");
             format.Append($"CellCount = {BitCount}, ");

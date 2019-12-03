@@ -5,12 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Diagnostics;
 
     using static zfunc;
 
@@ -247,7 +243,5 @@ namespace Z0
         public static ulong TakeUInt64<T>(this Span<T> src)
             where T : unmanaged        
                 => src.ReadOnly().TakeUInt64();         
-
     }
-
 }

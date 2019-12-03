@@ -48,7 +48,7 @@ namespace Z0
             if(count == 0)
                 return string.Empty;
 
-            var sb = sbuild();   
+            var sb = text();   
             for(var i=0; i<src.Operands.Length; i++)
             {
                 sb.Append(src.Operands[i].Format());
@@ -83,7 +83,7 @@ namespace Z0
         
         public static string FormatInstructions(this AsmFuncInfo src, int? pad = null)
         {
-            var format = sbuild();            
+            var format = text();            
             for(var i = 0; i< src.InstructionCount; i++)
             {
                 var insx = src.Instructions[i];
@@ -157,7 +157,7 @@ namespace Z0
             if(!string.IsNullOrWhiteSpace(src.SegmentRegister))
                 items.Add((src.SegmentPrefix,"sr"));
 
-            var sb = sbuild();
+            var sb = text();
             for(var i=0; i<items.Count; i++)
             {
                 var item = items[i];

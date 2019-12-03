@@ -69,16 +69,16 @@ namespace Z0
 
             var actual = Gf8.products();
 
-            var text = sbuild();
+            var description = text();
             for(var i=0; i<7; i++)
             {
                 for(var j=0; j<7; j++)
                 {                    
-                    text.Append(expect[i,j].ToBitString().Truncate(3).Format());
+                    description.Append(expect[i,j].ToBitString().Truncate(3).Format());
                     if(j != 6)
-                        text.Append(AsciSym.Pipe);
+                        description.Append(AsciSym.Pipe);
                 }
-                text.AppendLine();
+                description.AppendLine();
             }
 
             for(var i=0; i<7; i++)

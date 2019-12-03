@@ -10,8 +10,6 @@ using Z0;
 
 partial class zfunc
 {
-
-
     /// <summary>
     /// A bit with state 1
     /// </summary>

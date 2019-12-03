@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="src"></param>
         /// <returns></returns>
         [MethodImpl(Inline)]
-        public static Vector256<float> vduplicate(N0 even, Vector256<float> src)
+        public static Vector256<float> vdup32(N0 even, Vector256<float> src)
             => DuplicateEvenIndexed(src);
 
         /// <summary>
@@ -32,15 +32,21 @@ namespace Z0
         /// <param name="src"></param>
         /// <returns></returns>
         [MethodImpl(Inline)]
-        public static Vector256<float> vduplicate(N1 odd, Vector256<float> src)
+        public static Vector256<float> vdup32(N1 odd, Vector256<float> src)
             => DuplicateOddIndexed(src);
 
+        /// <summary>
+        /// __m256d _mm256_movedup_pd (__m256d a) VMOVDDUP ymm, ymm/m256
+        /// </summary>
+        /// <param name="even"></param>
+        /// <param name="src"></param>
+        /// <returns></returns>
         [MethodImpl(Inline)]
-        public static Vector256<double> duplicate(N0 even, Vector256<double> src)
+        public static Vector256<double> vdup64(N0 even, Vector256<double> src)
             => DuplicateEvenIndexed(src);
 
         [MethodImpl(Inline)]
-        public static Vector256<double> duplicate(N1 odd, Vector256<double> src)
+        public static Vector256<double> vdup64(N1 odd, Vector256<double> src)
             => DuplicateEvenIndexed(ShiftRightLogical(src.AsUInt64(),64).AsDouble());
     }
 

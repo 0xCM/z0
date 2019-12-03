@@ -1,4 +1,4 @@
-// 2019-11-30 01:56:09:941
+// 2019-12-02 13:14:43:031
 uint pop_3x128(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
 {
     IL_0000: ldarg.0
@@ -302,24 +302,6 @@ void bs_and(in Block256<uint> x, in Block256<uint> y, Block256<uint> z)
     IL_001A: call System.UInt32& Z0.Block256`1<System.UInt32>::get_Head()
     IL_001F: call System.Void Z0.vblock::and<System.UInt32>(Z0.N256,System.Int32,System.Int32,System.UInt32&,System.UInt32&,System.UInt32&)
     IL_0024: ret
-
-}
-void s_and(Span<uint> x, Span<uint> y, Span<uint> z)
-{
-    IL_0000: call Z0.N256 zfunc::get_n256()
-    IL_0005: ldarga.s x
-    IL_0007: call System.Int32 System.Span`1<System.UInt32>::get_Length()
-    IL_000C: ldc.i4.8
-    IL_000D: div
-    IL_000E: call System.Int32 Z0.Block256`1<System.UInt32>::get_BlockLength()
-    IL_0013: ldarg.0
-    IL_0014: call System.UInt32& zfunc::head<System.UInt32>(System.Span`1<System.UInt32>)
-    IL_0019: ldarg.1
-    IL_001A: call System.UInt32& zfunc::head<System.UInt32>(System.Span`1<System.UInt32>)
-    IL_001F: ldarg.2
-    IL_0020: call System.UInt32& zfunc::head<System.UInt32>(System.Span`1<System.UInt32>)
-    IL_0025: call System.Void Z0.vblock::and<System.UInt32>(Z0.N256,System.Int32,System.Int32,System.UInt32&,System.UInt32&,System.UInt32&)
-    IL_002A: ret
 
 }
 BitVector128 and_128(BitVector128 x, BitVector128 y)
@@ -1026,6 +1008,15 @@ uint blsmsk_g32u(uint src)
     IL_0000: ldarg.0
     IL_0001: call System.UInt32 Z0.gbits::blsmsk<System.UInt32>(System.UInt32)
     IL_0006: ret
+
+}
+Vector128<uint> vcompact(Vector128<ulong> x0, Vector128<ulong> x1, out Vector128<uint> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vcompact(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>&)
+    IL_0008: ret
 
 }
 byte gather_d8u(byte src, byte mask)

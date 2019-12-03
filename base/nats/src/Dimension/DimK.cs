@@ -5,7 +5,7 @@
 namespace Z0
 {
     /// <summary>
-    /// Specifies a dimension with an arbitrary number of axes
+    /// Defines a dimension with an arbitrary number of axes
     /// </summary>
     public readonly struct DimK : IDim
     {
@@ -15,9 +15,7 @@ namespace Z0
             => new DimInfo(src.Order, src.Axes, src.Volume);
 
         public DimK(params ulong[] Axes)
-        {
-            this.Axes = Axes;            
-        }
+            => this.Axes = Axes;            
 
         public ulong this[int index]
         {

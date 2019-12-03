@@ -40,7 +40,7 @@ namespace Z0
             where T : unmanaged
         {
             var delimiter = sep ?? AsciSym.Space;
-            var fmt = sbuild();
+            var fmt = text();
             if(bracket)
                 fmt.Append(AsciSym.LBracket);
 
@@ -60,7 +60,7 @@ namespace Z0
         public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true, int? segwidth = null)
         {
-            var sb =sbuild();
+            var sb =text();
             var pre = (specifier && prespec) ? "0x" : string.Empty;
             var post = (specifier && !prespec) ? "h" : string.Empty;
             var spec = uppercase ? "X" : "x";

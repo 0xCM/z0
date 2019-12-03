@@ -311,7 +311,7 @@ namespace Z0
         {
             var next = (long)Points.Next(Int64.MaxValue);
             var negative = BitMask.test(next, 7);
-            var result = BitMask.test(next, 7) ? BitMask.enable(ref next, 63) : next;
+            var result = BitMask.test(next, 7) ? BitMask.enable(next, 63) : next;
             return result;
         }
 

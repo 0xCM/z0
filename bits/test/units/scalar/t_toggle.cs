@@ -5,71 +5,42 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
 
     using static zfunc;
-    using static Bit;
 
     public class t_toggle : t_sb<t_toggle>
     {
-        public void toggle_8i()
-        {
-            check_toggle<sbyte>();
+        public void sb_toggle_8i()
+            => sb_toggle_check<sbyte>();
             
-        }
+        public void sb_toggle_8u()
+            => sb_toggle_check<byte>();
 
-        public void toggle_8u()
-        {
-            check_toggle<byte>();
-        }
+        public void sb_toggle_16i()
+            => sb_toggle_check<short>();
 
-        public void toggle_16i()
-        {
-            check_toggle<short>();
-            
-        }
+        public void sb_toggle_16u()
+            => sb_toggle_check<ushort>();
 
-        public void toggle_16u()
-        {
-            check_toggle<ushort>();
-        }
+        public void sb_toggle_32i()
+            => sb_toggle_check<int>();
 
+        public void sb_toggle_32u()
+            => sb_toggle_check<uint>();
 
-        public void toggle_32i()
-        {
-            check_toggle<int>();            
-        }
+        public void sb_toggle_64i()
+            => sb_toggle_check<long>();
 
-        public void toggle_32u()
-        {
-            check_toggle<uint>();
-        }
+        public void sb_toggle_64u()
+            => sb_toggle_check<ulong>();
 
-        public void toggle_64i()
-        {
-            check_toggle<long>();            
-        }
+        public void sb_toggle_32f()
+            => sb_toggle_check<float>();
 
+        public void sb_toggle_64f()
+            => sb_toggle_check<double>();        
 
-        public void toggle_64u()
-        {
-            check_toggle<ulong>();
-
-        }
-
-        public void toggle_32f()
-        {
-            check_toggle<float>();
-        }
-
-        public void toggle_64f()
-        {
-            check_toggle<double>();        
-
-        }        
-
-        public void testbits()
+        public void sb_testbit()
         {
             Claim.yea(gbits.test(0b00000101, (byte)0));
             Claim.nea(gbits.test(0b00000101, (byte)1));
@@ -80,30 +51,30 @@ namespace Z0
             Claim.yea(gbits.test(0b00000111, (byte)2));
         }
 
-        public void bitsizes()
+        public void sb_bitsize()
         {
-            Claim.eq(8, BitSize.Size<byte>());
-            Claim.eq(8, BitSize.Size<sbyte>());
-            Claim.eq(16, BitSize.Size<short>());
-            Claim.eq(16, BitSize.Size<ushort>());
-            Claim.eq(32, BitSize.Size<int>());
-            Claim.eq(32, BitSize.Size<uint>());
-            Claim.eq(64, BitSize.Size<long>());
-            Claim.eq(64, BitSize.Size<ulong>());
-            Claim.eq(32, BitSize.Size<float>());
-            Claim.eq(64, BitSize.Size<double>());
+            Claim.eq(8, bitsize<byte>());
+            Claim.eq(8, bitsize<sbyte>());
+            Claim.eq(16, bitsize<short>());
+            Claim.eq(16, bitsize<ushort>());
+            Claim.eq(32, bitsize<int>());
+            Claim.eq(32, bitsize<uint>());
+            Claim.eq(64, bitsize<long>());
+            Claim.eq(64, bitsize<ulong>());
+            Claim.eq(32, bitsize<float>());
+            Claim.eq(64, bitsize<double>());
         }
 
-        public void enablebits()
+        public void sb_enable_basecase()
         {
             var x1 = (sbyte)0;
-            var y1 = BitMask.enable(ref x1, 7);
+            var y1 = BitMask.enable(x1, 7);
             Claim.eq(SByte.MinValue, y1);
             Claim.eq("10000000", y1.ToBitString());
 
 
             var x2 = (byte)0;
-            var y2 = BitMask.enable(ref x2, 7);
+            var y2 = BitMask.enable(x2, 7);
             Claim.eq(SByte.MinValue, (sbyte)y1);
             Claim.eq("10000000", y1.ToBitString());
 
@@ -111,28 +82,6 @@ namespace Z0
             Claim.eq(x3 >> 10, -1);
             
         }
-
-        void check_toggle<T>(int count = DefaultSampleSize)
-            where T : unmanaged
-        {
-            var src = Random.Span<T>(count).ReadOnly();
-            var tLen = bitsize<T>();
-            var srcLen = src.Length;
-            for(var i = 0; i< srcLen; i++)
-            {
-                var x = src[i];
-                for(byte j =0; j< tLen; j++)
-                {
-                    var before = gbits.test(x, j);
-                    BitMaskG.toggle(ref x, j);
-                    var after = gbits.test(x, j);
-                    Claim.neq(before, after);
-                    BitMaskG.toggle(ref x, j);
-                    Claim.eq(x, src[i]);
-                }
-            }
-        }
-
     }
 
 }

@@ -31,7 +31,7 @@ namespace Z0
             var abExpect = ginx.vincrements<ushort>(n);
             Claim.eq(abExpect, abActual);
 
-            var abcdActual = dinx.vcompact(a,b,c,d);
+            dinx.vcompact(a,b,c,d, out var abcdActual);
             var abcdExpect = ginx.vincrements<byte>(n);
             Claim.eq(abcdExpect, abcdActual);
             
@@ -49,13 +49,18 @@ namespace Z0
             Claim.eq(abExpect, abActual);
 
 
-            var abcdActual = dinx.vcompact(a,b,c,d);
+            dinx.vcompact(a,b,c,d, out var abcdActual);
             var abcdExpect = ginx.vincrements<byte>(n);
             Claim.eq(abcdExpect, abcdActual);
 
-
             Claim.eq(dinx.vcompact(ginx.vincrements<ushort>(n), out Vector128<byte> dst), ginx.vincrements<byte>(n128));
 
+            //inversion
+            dinx.vinflate(abcdActual, out var a0, out var b0, out var c0, out var d0);
+            Claim.eq(a,a0);
+            Claim.eq(b,b0);
+            Claim.eq(c,c0);
+            Claim.eq(d,d0);
         }
 
     }

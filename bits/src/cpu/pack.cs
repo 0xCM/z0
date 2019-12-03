@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static byte vpack8x1x8(ReadOnlySpan<byte> src)
         {
-            var x = ginx.vscalar(in head64(src));
+            var x = ginx.vscalar(n128, head64(src));
             x = ginx.vsll(x,7);
             return (byte)ginx.vmovemask(x);
         }

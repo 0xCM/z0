@@ -11,15 +11,15 @@ namespace Z0
     public class t_sb_bzhi : t_sb<t_sb_bzhi>
     {    
         public void bzhi_8u_check()
-            => bzhi_check<byte>();
+            => sb_bzhi_check<byte>();
 
         public void bzhi_16u_check()
-            => bzhi_check<ushort>();
+            => sb_bzhi_check<ushort>();
 
         public void bzhi_32u_check()
-            => bzhi_check<uint>();
+            => sb_bzhi_check<uint>();
 
         public void bzhi_64u_check()
-            => bzhi_check<ulong>();
+            => sb_bzhi_check<ulong>();
     }
 }

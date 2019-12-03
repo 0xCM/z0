@@ -56,7 +56,7 @@ namespace Z0
 
         public string Format()
         {
-            var format = sbuild();
+            var format = text();
             var title = Method.Name;
             format.Append(StartAddress.FormatHex(false,true));
             format.Append(AsciSym.Colon);

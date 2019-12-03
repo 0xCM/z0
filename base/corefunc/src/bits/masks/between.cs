@@ -10,9 +10,6 @@ namespace Z0
 
     using static zfunc;
 
-    /// <summary>
-    /// Defines non-parametric bitmasking and selection functions
-    /// </summary>
     partial class BitMask
     {
         /// <summary>
@@ -115,5 +112,4 @@ namespace Z0
         public static double between(double src, byte i0, byte i1)        
             => BitConverter.Int64BitsToDouble(between(BitConverter.DoubleToInt64Bits(src), i0, i1));
     }
-
 }

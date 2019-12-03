@@ -53,7 +53,7 @@ namespace Z0
 
             var x7 = dinx.vparts(n128,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
             var y7 = dinx.vparts(n256,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
-            dinx.vexpand(x7, out Vector256<ushort> z7);
+            dinx.vinflate(x7, out Vector256<ushort> z7);
             Claim.eq(y7,z7);
         }
     }

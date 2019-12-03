@@ -32,6 +32,18 @@ namespace Z0
             }
         }
 
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vsrlx(Vector128<byte> src, int shift)        
+            => v8u(vsrlx(v64u(src), shift));
+        
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> vsrlx(Vector128<ushort> src, int shift)        
+            => v16u(vsrlx(v64u(src), shift));
+
+        [MethodImpl(Inline)]
+        public static Vector128<uint> vsrlx(Vector128<uint> src, int shift)        
+            => v32u(vsrlx(v64u(src), shift));
+
         /// <summary>
         /// Shifts each 128-bit lane rightwards at bit-level resolution
         /// </summary>
@@ -50,5 +62,17 @@ namespace Z0
                 return vor(y, vsll(x, 64 - shift));
             }
         }
+
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vsrlx(Vector256<byte> src, int shift)        
+            => v8u(vsrlx(v64u(src), shift));
+        
+        [MethodImpl(Inline)]
+        public static Vector256<ushort> vsrlx(Vector256<ushort> src, int shift)        
+            => v16u(vsrlx(v64u(src), shift));
+
+        [MethodImpl(Inline)]
+        public static Vector256<uint> vsrlx(Vector256<uint> src, int shift)        
+            => v32u(vsrlx(v64u(src), shift));
     }
 }

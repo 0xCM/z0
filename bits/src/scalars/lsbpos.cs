@@ -43,7 +43,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int lsbpos(ulong src)
             => ntz(src); //log2(blsi(src));    
-
-
     }
 }

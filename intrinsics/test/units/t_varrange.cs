@@ -19,14 +19,14 @@ namespace Z0
             var width = n32;
 
             var x0 = dinx.vparts(n, 0,1,2,3,4,5,6,(uint)7);
-            var y0 = dinx.vduplicate(n0,width,x0);
-            var z0 = dinx.vduplicate(n1,width,x0);
+            var y0 = dinx.vdup32(n0,x0);
+            var z0 = dinx.vdup32(n1,x0);
             Claim.eq(y0, dinx.vparts(n, 0,0,2,2,4,4,6,(uint)6));
             Claim.eq(z0, dinx.vparts(n, 1,1,3,3,5,5,7,(uint)7));            
 
             var x1 = dinx.vparts(n,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
-            var y1 = dinx.vduplicate(n0,width,x1);
-            var z1 = dinx.vduplicate(n1,width,x1);
+            var y1 = dinx.vdup32(n0,x1);
+            var z1 = dinx.vdup32(n1,x1);
             Claim.eq(y1, dinx.vparts(n,0,1, 0,1, 4,5, 4,5, 8,9, 8,9, C,D, C,D));
             Claim.eq(z1, dinx.vparts(n,2,3, 2,3, 6,7, 6,7, A,B, A,B, E,F, E,F));
             
@@ -35,8 +35,8 @@ namespace Z0
                 ulong.MaxValue & 0xCCCCCCCC88888888, 
                 ulong.MaxValue & 0x3333333377777777,
                 ulong.MaxValue & 0x2222222244444444);
-            var y2 = dinx.vduplicate(n0,width,x2);
-            var z2 = dinx.vduplicate(n1,width,x2);
+            var y2 = dinx.vdup64(n0,x2);
+            var z2 = dinx.vdup64(n1,x2);
         }
         
         public void reverse_128x8u_basecase()

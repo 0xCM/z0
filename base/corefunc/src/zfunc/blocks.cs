@@ -15,33 +15,6 @@ using Z0;
 partial class zfunc
 {
     /// <summary>
-    /// Interprets 8 elements of a bytespan as an unsigned 64-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <param name="offset">The offset at which the first byte begins</param>
-    [MethodImpl(Inline)]
-    public static ref ulong block64u(Span<byte> src, int offset)
-        => ref head(MemoryMarshal.Cast<byte,ulong>(src.Slice(offset, 8)));
-
-    /// <summary>
-    /// Interprets 4 elements of a span of unsigned 16-bit integers as an unsigned 64-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <param name="offset">The offset at which the first byte begins</param>
-    [MethodImpl(Inline)]
-    public static ref ulong block64u(Span<ushort> src, int offset)
-        => ref head(MemoryMarshal.Cast<ushort,ulong>(src.Slice(offset, 4)));
-
-    /// <summary>
-    /// Interprets 2 elements of a span of unsigned 32-bit integers as an unsigned 64-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <param name="offset">The offset at which the first byte begins</param>
-    [MethodImpl(Inline)]
-    public static ref ulong block64u(Span<uint> src, int offset)
-        => ref head(MemoryMarshal.Cast<uint,ulong>(src.Slice(offset, 2)));
-
-    /// <summary>
     /// Allocates a specified number of 64-bit blocks
     /// </summary>
     /// <param name="n">The bit width selector</param>

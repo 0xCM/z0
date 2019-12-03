@@ -275,14 +275,14 @@ namespace Z0
             return ref src;            
         }
         
-        
-         
-
+                 
         [MethodImpl(Inline)]        
         public static ref ulong bitmask_set(ref ulong src, byte pos, bit state)            
         {
-            if(state) BitMask.enable(ref src, pos);
-            else BitMask.disable(ref src, pos);
+            if(state) 
+                src = BitMask.enable(src, pos);
+            else 
+                src = BitMask.disable(src, pos);
             return ref src;
         }
 

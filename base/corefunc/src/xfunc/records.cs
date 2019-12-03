@@ -5,10 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Threading.Tasks;
     using System.Collections.Generic;
-    using System.Reflection;
-    using System.Threading;
     using System.Linq;
 
     using static zfunc;
@@ -23,8 +20,6 @@ namespace Z0
             => Record.CreateType(spec);
 
         public static IEnumerable<Type> CreateTypes(this IEnumerable<RecordSpec> specs)
-            => Record.CreateTypes(specs.ToArray());
-         
+            => Record.CreateTypes(specs.ToArray());         
     }
-
 }

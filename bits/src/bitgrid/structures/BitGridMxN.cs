@@ -35,7 +35,7 @@ namespace Z0
             => !BitGrid.same(g1,g2);
 
         [MethodImpl(Inline)]
-        internal BitGrid(Block256<T> data)
+        internal BitGrid(in Block256<T> data)
         {
             this.data = data;
         }
@@ -84,7 +84,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data.BlockCount;
         }
-
 
         /// <summary>
         /// The number of cells over which the grid is defined

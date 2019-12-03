@@ -40,7 +40,7 @@ namespace Z0
         {
             var pad = colpad ?? 10;
             var sep = delimiter ?? AsciSym.Pipe;
-            var format = sbuild();
+            var format = text();
             format.Append($"moniker".PadRight(pad));
             format.Append($" {sep} rows".PadRight(pad));
             format.Append($" {sep} cols".PadRight(pad));
@@ -58,7 +58,7 @@ namespace Z0
 
         public static string Format(GridStats stats, int? colpad = null, char? delimiter = null)
         {
-            var format = sbuild();
+            var format = text();
             var pad = colpad ?? 10;
             var sep = delimiter ?? AsciSym.Pipe;
             format.Append($"{stats.Moniker}".PadRight(pad));

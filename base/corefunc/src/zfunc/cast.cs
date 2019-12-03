@@ -124,7 +124,6 @@ partial class zfunc
         return ref dst;
     }
 
-
     [MethodImpl(Inline)]
     public static ReadOnlySpan<T> cast<S,T>(ReadOnlySpan<S> src)                
         where S : unmanaged

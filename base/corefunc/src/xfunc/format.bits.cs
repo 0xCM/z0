@@ -112,7 +112,7 @@ namespace Z0
         public static string FormatBits<T>(this ReadOnlySpan<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
             where T : unmanaged
         {
-            var sb = sbuild();
+            var sb = text();
             for(var i=0; i<src.Length; i++)
             {
                 var bs = BitString.scalar(src[i]).Format(tlz,specifier,blockWidth);

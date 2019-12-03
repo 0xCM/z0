@@ -57,14 +57,14 @@ namespace Z0
                 var b = bitstring(Bits.butterfly(n4, a));
                 var c = bitstring(a);
 
-                Claim.eq(uint8(c[0..3]), uint8(b[0..3]));
-                Claim.eq(uint8(c[4..7]), uint8(b[8..11]));
-                Claim.eq(uint8(c[8..11]), uint8(b[4..7]));
-                Claim.eq(uint8(c[12..15]), uint8(b[12..15]));
-                Claim.eq(uint8(c[16..19]), uint8(b[16..19]));
-                Claim.eq(uint8(c[20..23]), uint8(b[24..27]));
-                Claim.eq(uint8(c[24..27]), uint8(b[20..23]));
-                Claim.eq(uint8(c[28..31]), uint8(b[28..31]));                            
+                Claim.eq(BitString.uint8(c[0..3]), BitString.uint8(b[0..3]));
+                Claim.eq(BitString.uint8(c[4..7]), BitString.uint8(b[8..11]));
+                Claim.eq(BitString.uint8(c[8..11]), BitString.uint8(b[4..7]));
+                Claim.eq(BitString.uint8(c[12..15]), BitString.uint8(b[12..15]));
+                Claim.eq(BitString.uint8(c[16..19]), BitString.uint8(b[16..19]));
+                Claim.eq(BitString.uint8(c[20..23]), BitString.uint8(b[24..27]));
+                Claim.eq(BitString.uint8(c[24..27]), BitString.uint8(b[20..23]));
+                Claim.eq(BitString.uint8(c[28..31]), BitString.uint8(b[28..31]));                            
             }
 
         }

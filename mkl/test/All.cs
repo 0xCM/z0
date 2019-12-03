@@ -114,7 +114,7 @@ namespace Z0.Mkl
         [MethodImpl(Inline)]
         public static (Stopwatch timer, string report) input(string firstTitle, object firstValue, string secondTitle, object secondValue, bool silent = true)
         {
-            var report = sbuild();
+            var report = text();
             report.AppendLine(input(firstTitle, firstValue, silent));
             report.AppendLine(input(secondTitle, secondValue, silent));
             return (stopwatch(), report.ToString());
@@ -248,7 +248,7 @@ namespace Z0.Mkl
             var time = snapshot(timer); 
             var finaleMsg = finale(nameof(c), c.Format(), timer, silent, method);
                 
-            var report = sbuild();
+            var report = text();
             report.AppendLine(introMsg);
             report.AppendLine(startMsg);
             report.AppendLine(finaleMsg);
@@ -257,7 +257,7 @@ namespace Z0.Mkl
         
         public static void gemm()
         {
-            var report = sbuild();
+            var report = text();
             report.AppendLine(gemm<N3,N4>());
             report.AppendLine(gemm<N5,N7>());
             report.AppendLine(gemm<N10,N10>());

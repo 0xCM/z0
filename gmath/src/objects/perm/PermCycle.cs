@@ -39,7 +39,7 @@ namespace Z0
 
         public string Format()
         {
-            var sb = sbuild();
+            var sb = text();
             sb.Append(AsciSym.LParen);
             for(var i=0; i< Terms.Length; i++)            
             {

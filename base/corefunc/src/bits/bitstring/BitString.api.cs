@@ -5,16 +5,23 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
     using static zfunc;
-    using static As;
 
     partial struct BitString
     {
+        /// <summary>
+        /// Constructs a bitstring from primal value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitString scalar<T>(T src, int? maxbits = null)
+            where T : unmanaged
+                => new BitString(BitStore.bitseq(src, maxbits ?? bitsize<T>()));                
+
         /// <summary>
         /// Allocates a bitstring with a specified length
         /// </summary>
@@ -64,55 +71,13 @@ namespace Z0
         }
 
         /// <summary>
-        /// Constructs a bitstring from primal value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitString scalar<T>(T src, int? maxbits = null)
-            where T : unmanaged
-                => new BitString(BitStore.bitseq(src, maxbits ?? bitsize<T>()));                
-
-        // [MethodImpl(Inline)]
-        // public static BitString scalar<T>(T src, int maxlen)
-        //     where T : unmanaged
-        //         => new BitString(BitStore.bitseq(src,maxlen));                
-
-        /// <summary>
-        /// Constructs a bitstring from span of scalar values
-        /// </summary>
-        /// <param name="data">The source span</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitString from<T>(ReadOnlySpan<T> data, int? maxbits = null)
-            where T : unmanaged
-        {
-            int segbits = bitsize<T>();
-            var bitcount = maxbits ?? segbits*data.Length;
-            Span<byte> bitseq = new byte[bitcount];
-
-            ref var dst = ref head(bitseq);
-            ref readonly var src = ref head(data);
-            var srclen = data.Length;
-
-            var k = 0;
-            for(int i=0; i<srclen; i++)
-            {
-                ref readonly var bits = ref head(BitStore.bitseq(skip(in src, i)));
-                for(var j = 0; j<segbits && k<bitcount; j++, k++)
-                    seek(ref dst, k) = skip(in bits, j);
-            }
-            
-            return new BitString(bitseq);
-        }
-
-        /// <summary>
         /// Constructs a bitstring from span of scalar values
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The primal type</typeparam>
+        /// <param name="maxbits">The maximum number of bits to extract from the source</param>
         [MethodImpl(Inline)]
-        public static BitString from<T>(Span<T> src, int? maxbits = null)
+        public static BitString from<T>(ReadOnlySpan<T> src, int? maxbits = null)
             where T : unmanaged
         {
             var segbits = bitsize<T>();
@@ -128,20 +93,38 @@ namespace Z0
             return new BitString(bitseq);
         }
 
+        /// <summary>
+        /// Constructs a bitstring from span of scalar values
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="maxbits">The maximum number of bits to extract from the source</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitString from<T>(Span<T> src, int? maxbits = null)
+            where T : unmanaged
+                => from(src.ReadOnly(), maxbits);
+
+        /// <summary>
+        /// Populates a bitstring from a 128-bit cpu vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="maxbits">The maximum number of bits to extract from the source</param>
+        /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]   
         public static BitString from<T>(Vector128<T> src, int? maxbits = null)
             where T : unmanaged        
                 => BitString.from(src.ToSpan(), maxbits);
 
         /// <summary>
-        /// Assembles a bitstring from primal parts ordered from lo to hi
+        /// Populates a bitstring from a 256-bit cpu vector
         /// </summary>
-        /// <param name="parts">The primal values that define bitstring segments</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitString from<T>(T[] parts)
-            where T : unmanaged
-                => from(parts.AsSpan(), bitsize<T>() * parts.Length);
+        /// <param name="src">The source vector</param>
+        /// <param name="maxbits">The maximum number of bits to extract</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]   
+        public static BitString from<T>(Vector256<T> src, int? maxbits = null)
+            where T : unmanaged        
+                => BitString.from(src.ToSpan(), maxbits);
 
         /// <summary>
         /// Constructs a bitstring from a power of 2
@@ -188,28 +171,20 @@ namespace Z0
             => new BitString(src);
 
         /// <summary>
-        /// Projects the bitstring onto a span via a supplied transformation
+        /// Projects a bitstring onto a caller-allocated span via a supplied transformation
         /// </summary>
         /// <param name="f">The transformation</param>
         /// <typeparam name="T">The span element type</typeparam>
         [MethodImpl(Inline)]
-        public void map<T>(Func<bit,T> f, Span<T> dst)
+        public static void map<T>(BitString src, Func<bit,T> f, Span<T> dst)
         {
             for(var i=0; i<dst.Length; i++)
-                dst[i] = f((bit)bitseq[i]);
+                dst[i] = f((bit)src.bitseq[i]);
         }
 
-        /// <summary>
-        /// Projects the bitstring onto a span via a supplied transformation
-        /// </summary>
-        /// <param name="f">The transformation</param>
-        /// <typeparam name="T">The span element type</typeparam>
-        public Span<T> map<T>(Func<bit,T> f)
-        {
-            Span<T> dst = new T[Length];
-            map(f,dst);
-            return dst;
-        }
+        [MethodImpl(Inline)]
+        public static byte uint8(BitString src)
+            => src.Scalar<byte>(0);
 
     }
 }

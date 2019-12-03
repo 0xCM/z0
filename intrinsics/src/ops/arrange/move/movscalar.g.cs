@@ -19,21 +19,21 @@ namespace Z0
         /// </summary>
         /// <param name="a">The scalar to load</param>
         [MethodImpl(Inline)]
-        public static Vector128<T> vmovscalar<T>(N128 n, T src)
+        public static Vector128<T> vscalar<T>(N128 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vmovscalar_u(n, src);
+                return vscalar_u(n, src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vmovscalar_i(n, src);
+                return vscalar_i(n, src);
             else 
-                return vmovscalar_f(n, src);
+                return vscalar_f(n, src);
         }
 
         /// <summary>
@@ -41,31 +41,31 @@ namespace Z0
         /// </summary>
         /// <param name="a">The scalar to load</param>
         [MethodImpl(Inline)]
-        public static Vector256<T> vmovscalar<T>(N256 n, T src)
+        public static Vector256<T> vscalar<T>(N256 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vmovscalar_u(n, src);
+                return vscalar_u(n, src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vmovscalar_i(n, src);
+                return vscalar_i(n, src);
             else 
-                return vmovscalar_f(n, src);
+                return vscalar_f(n, src);
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vmovscalar_i<T>(N128 n, T src)
+        static Vector128<T> vscalar_i<T>(N128 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return As.vgeneric<T>(dinx.vmovscalar(n, int8(src)));
+                return vgeneric<T>(dinx.vmovscalar(n, int8(src)));
             else if(typeof(T) == typeof(short))
-                return As.vgeneric<T>(dinx.vmovscalar(n, int16(src)));
+                return vgeneric<T>(dinx.vmovscalar(n, int16(src)));
             else if(typeof(T) == typeof(int))
                 return vgeneric<T>(dinx.vmovscalar(n,int32(src)));
             else
@@ -73,11 +73,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vmovscalar_u<T>(N128 n, T src)
+        static Vector128<T> vscalar_u<T>(N128 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vmovscalar(n, uint8(src)));
+                return vgeneric<T>(dinx.vmovscalar(n, uint8(src)));
             else if(typeof(T) == typeof(ushort))
                 return vgeneric<T>(dinx.movscalar(n,uint16(src)));
             else if(typeof(T) == typeof(uint))
@@ -87,7 +87,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vmovscalar_f<T>(N128 n, T src)
+        static Vector128<T> vscalar_f<T>(N128 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -99,7 +99,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vmovscalar_i<T>(N256 n, T src)
+        static Vector256<T> vscalar_i<T>(N256 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -113,7 +113,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vmovscalar_u<T>(N256 n, T src)
+        static Vector256<T> vscalar_u<T>(N256 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -127,7 +127,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vmovscalar_f<T>(N256 n, T src)
+        static Vector256<T> vscalar_f<T>(N256 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -137,5 +137,8 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
+
+
+
     }
 }

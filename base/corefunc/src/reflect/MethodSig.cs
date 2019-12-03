@@ -63,14 +63,12 @@ namespace Z0
                 
         public string Format()
         {
-            var sigtext = sbuild();            
+            var sigtext = text();            
             sigtext.Append(ReturnType.Format());
             sigtext.Append(AsciSym.Space);
             sigtext.Append(MethodName);
             sigtext.Append(ValueParams.Format(true));
-            var text = sigtext.ToString();
-            return text;
-            
+            return sigtext.ToString();            
         }
 
         public override string ToString()

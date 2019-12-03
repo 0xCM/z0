@@ -15,7 +15,6 @@ namespace Z0
     /// </summary>
     public readonly struct BitFormat
     {        
-
         /// <summary>
         /// Indicates whether leading zeros should be trimmed
         /// </summary>

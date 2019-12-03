@@ -100,7 +100,7 @@ public static class nfunc
     [MethodImpl(Inline)]   
     public static Dim<K> dim<K>()
         where K : unmanaged, ITypeNat
-            => Dim.Define<K>();
+            => Dim.define<K>();
 
     /// <summary>
     /// Constructs a 1-component natural dimension
@@ -109,7 +109,7 @@ public static class nfunc
     [MethodImpl(Inline)]   
     public static Dim<K> dim<K>(K k)
         where K : unmanaged, ITypeNat
-            => Dim.Define<K>();
+            => Dim.define<K>();
 
     /// <summary>
     /// Constructs a 2-component natural dimension
@@ -120,7 +120,7 @@ public static class nfunc
     public static Dim<K1,K2> dim<K1,K2>()
         where K1 : unmanaged, ITypeNat
         where K2 : unmanaged, ITypeNat
-            => Dim.Define<K1,K2>();
+            => Dim.define<K1,K2>();
 
     /// <summary>
     /// Constructs a 2-component natural dimension
@@ -131,7 +131,7 @@ public static class nfunc
     public static Dim<K1,K2> dim<K1,K2>(K1 k1, K2 k2)
         where K1 : unmanaged, ITypeNat
         where K2 : unmanaged, ITypeNat
-            => Dim.Define<K1,K2>();
+            => Dim.define<K1,K2>();
 
     /// <summary>
     /// Constructs a 3-component natural dimension
@@ -144,7 +144,7 @@ public static class nfunc
         where K1 : unmanaged, ITypeNat
         where K2 : unmanaged, ITypeNat
         where K3 : unmanaged, ITypeNat
-            => Dim.Define<K1,K2,K3>();
+            => Dim.define<K1,K2,K3>();
 
     /// <summary>
     /// Constructs a 3-component natural dimension
@@ -157,7 +157,7 @@ public static class nfunc
         where K1 : unmanaged, ITypeNat
         where K2 : unmanaged, ITypeNat
         where K3 : unmanaged, ITypeNat
-            => Dim.Define<K1,K2,K3>();
+            => Dim.define<K1,K2,K3>();
 
     /// <summary>
     /// Demands truth that is enforced with an exeption upon false

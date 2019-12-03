@@ -20,62 +20,6 @@ namespace Z0
 
     partial class aux
     {
-        [MethodImpl(Inline)]
-        public static void vcstore_i<T>(Vector128<T> src, Vector128<byte> mask, ref byte dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                dinx.vcstore(vcast8i(src), mask, ref dst);
-            else if(typeof(T) == typeof(short))
-                dinx.vcstore(vcast16i(src), mask, ref dst);
-            else if(typeof(T) == typeof(int))
-                dinx.vcstore(vcast32i(src), mask, ref dst);
-            else 
-                dinx.vcstore(vcast64i(src), mask, ref dst);
-        }
-
-        [MethodImpl(Inline)]
-        public static void vcstore_u<T>(Vector128<T> src, Vector128<byte> mask, ref byte dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                dinx.vcstore(vcast8u(src), mask, ref dst);
-            else if(typeof(T) == typeof(ushort))
-                dinx.vcstore(vcast16u(src), mask, ref dst);
-            else if(typeof(T) == typeof(uint))
-                dinx.vcstore(vcast32u(src), mask, ref dst);
-            else 
-                dinx.vcstore(vcast64u(src), mask, ref dst);
-        }
-
-
-        [MethodImpl(Inline)]
-        public static void vcstore_i<T>(Vector256<T> src, Vector256<byte> mask, ref byte dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                dinx.vcstore(vcast8i(src), mask, ref dst);
-            else if(typeof(T) == typeof(short))
-                dinx.vcstore(vcast16i(src), mask, ref dst);
-            else if(typeof(T) == typeof(int))
-                dinx.vcstore(vcast32i(src), mask, ref dst);
-            else 
-                dinx.vcstore(vcast64i(src), mask, ref dst);
-        }
-
-        [MethodImpl(Inline)]
-        public static void vcstore_u<T>(Vector256<T> src, Vector256<byte> mask, ref byte dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                dinx.vcstore(vcast8u(src), mask, ref dst);
-            else if(typeof(T) == typeof(ushort))
-                dinx.vcstore(vcast16u(src), mask, ref dst);
-            else if(typeof(T) == typeof(uint))
-                dinx.vcstore(vcast32u(src), mask, ref dst);
-            else 
-                dinx.vcstore(vcast64u(src), mask, ref dst);
-        }
 
         [MethodImpl(Inline)]
         public static Vector128<T> vunpacklo_i<T>(Vector128<T> x, Vector128<T> y)

@@ -42,7 +42,7 @@ namespace Z0
         public string GenLookups(Type valueType, string rootName)
         {
             //public static ulong Seed00 => Lookup(0)
-            var sb = sbuild();
+            var sb = text();
             for(var i=0; i<Data.Length; i++)
                 sb.AppendLine($"public static {valueType.Name} {rootName}{i} => Lookup({i})");
             return sb.ToString();
@@ -50,7 +50,7 @@ namespace Z0
 
         public static string FormatBytes(byte[] src, int seglen, int lpad = 0, char? sep = null)
         {
-            var dst = sbuild();
+            var dst = text();
             var delimiter = sep ?? AsciSym.Comma;
             var margin = AsciSym.Space.Replicate(lpad);
             for(var i=0; i<src.Length; i++)
@@ -70,7 +70,7 @@ namespace Z0
         public string GenAccessor(int offset = 0, int seglen = 8)
         {
             var src = Data;
-            var dst = sbuild();
+            var dst = text();
             var linepad = AsciSym.Space.Replicate(offset + 4);
             var margin = new string(' ',offset);
             dst.AppendLine(($"{margin}static ReadOnlySpan<byte> {PropName} => new byte[]"));

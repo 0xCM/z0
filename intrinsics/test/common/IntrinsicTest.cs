@@ -682,7 +682,7 @@ namespace Z0
             {
                 var src = Random.CpuVector<T>(n);
                 var offset = Random.Next<byte>(2,7);
-                var vOffset = ginx.vscalar(convert<byte,T>(offset));
+                var vOffset = ginx.vscalar(n128, convert<byte,T>(offset));
 
                 var a = ginx.vsrl(src, offset);
                 var b = ginx.vsrl(src, vOffset);

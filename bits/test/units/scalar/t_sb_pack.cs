@@ -25,6 +25,13 @@ namespace Z0
 
             var bsAssembly = BitString.assemble("10101000", "11100101", "00111000","10100111").Format();
             Claim.eq(bsExpect, bsAssembly);
+
+            var a =  0b111010010110011010111001110000100001101ul;
+            var abs = BitString.parse("111010010110011010111001110000100001101");
+            var abs_packed = abs.Pack(0, 8);
+            var abs_joined = abs_packed.TakeUInt64();
+            Claim.Equals(a,abs_joined);
+
         }
 
         public void sb_pack_1x8()
@@ -47,10 +54,9 @@ namespace Z0
                 Bits.split(x,out var x0, out var x1);
                 var y = Bits.pack(x0, x1);
                 Claim.eq(x,y);
-                Claim.eq(x, BitConverter.ToUInt16(new byte[]{x0, x1}));
+                Claim.eq(x, BitConvert.ToUInt16(new byte[]{x0, x1}));
             }
         }
-
 
         public void sb_pack_4x32()
         {
@@ -60,7 +66,7 @@ namespace Z0
                 Bits.split(x, out var x0, out var x1, out var x2, out var x3);
                 var y = Bits.pack(x0, x1, x2, x3);
                 Claim.eq(x,y);
-                Claim.eq(x, BitConverter.ToUInt32(new byte[]{x0, x1, x2, x3}));
+                Claim.eq(x, BitConvert.ToUInt32(new byte[]{x0, x1, x2, x3}));
             }
 
         }
@@ -100,15 +106,6 @@ namespace Z0
             Claim.eq(y3,z3);
         }
 
-        public void pack_bistring()
-        {
-            var x =  0b111010010110011010111001110000100001101ul;
-            var xbs = BitString.parse("111010010110011010111001110000100001101");
-            var packed = xbs.Pack(0, 8);
-            var joined = packed.TakeUInt64();
-            Claim.Equals(x,joined);
-        }
-
         public void pack_roundtrip()
         {            
             gsb_pack_check<uint>(43);
@@ -145,21 +142,21 @@ namespace Z0
         public static ref byte pack(byte x0, byte x1, byte x2, byte x3, byte x4, byte x5, byte x6, byte x7, byte pos, ref byte dst)
         {
           if(BitMask.test(x0, pos)) 
-            BitMask.enable(ref dst, 0);
+            dst = BitMask.enable(dst, 0);
           if(BitMask.test(x1, pos)) 
-            BitMask.enable(ref dst, 1);
+            dst = BitMask.enable(dst, 1);
           if(BitMask.test(x2, pos)) 
-            BitMask.enable(ref dst, 2);
+            dst = BitMask.enable(dst, 2);
           if(BitMask.test(x3, pos)) 
-            BitMask.enable(ref dst, 3);
+            dst = BitMask.enable(dst, 3);
           if(BitMask.test(x4, pos)) 
-            BitMask.enable(ref dst, 4);
+            dst = BitMask.enable(dst, 4);
           if(BitMask.test(x5, pos)) 
-            BitMask.enable(ref dst, 5);
+            dst = BitMask.enable(dst, 5);
           if(BitMask.test(x6, pos)) 
-            BitMask.enable(ref dst, 6);
+            dst = BitMask.enable(dst, 6);
           if(BitMask.test(x7, pos)) 
-            BitMask.enable(ref dst, 7);
+            dst = BitMask.enable(dst, 7);
           return ref dst;
         }
 
@@ -254,82 +251,5 @@ namespace Z0
                 Claim.eq(y1.ToBitString(), y2.ToBitString());
             }            
         }    
-    
-        /// <summary>
-        /// Packs bits into bytes
-        /// </summary>
-        /// <param name="src">The source values</param>
-        /// <remarks>Adapted from https://stackoverflow.com/questions/713057/convert-bool-to-byte</remarks>
-        static Span<byte> pack(ReadOnlySpan<bit> src, Span<byte> dst)
-        {
-            int srcLen = src.Length;
-            for (int i = 0; i < srcLen; i++)
-                if (src[i])
-                    dst[i >> 3] |= (byte)((byte)1 << (i & 0x07));
-            return dst;
-        }
-
-        static Span<byte> pack(ReadOnlySpan<bit> src)
-        {
-            int srcLen = src.Length;
-            int dstLen = srcLen >> 3;
-            
-            if ((srcLen & 0x07) != 0) 
-                ++dstLen;
-
-            return pack(src, new byte[dstLen]);            
-        }
-
-        protected void gsb_pack_check<T>(int bitcount)
-            where T : unmanaged
-        {
-            var src = Random.BitString(bitcount);
-            Claim.eq(bitcount, src.Length);
-
-            var x = src.ToBitSpan();
-            Claim.eq(bitcount, x.Length);
-            
-            var y = pack(x);
-            var sizeT = size<T>();
-            
-            var q = Math.DivRem(bitcount, 8, out int r);
-            var bytes = q + (r == 0 ? 0 : 1);
-            Claim.eq(bytes, y.Length);
-
-            var bulk = cast<T>(y,out Span<byte> rem);
-
-            var merged = rem.Length != 0 ? bulk.Extend(bulk.Length + 1) : bulk;
-            if(merged.Length != bulk.Length)
-                merged[merged.Length - 1] = rem.TakeScalar<T>();
-
-            var bsOutput = merged.ToBitString().Truncate(bitcount);
-            Claim.eq(src, bsOutput);
-            Claim.eq((src & ~bsOutput).PopCount(),0);    
-
-        }
-
-        /// <summary>
-        /// Verifies the correct operation of the generic pack function that compresses sizeof(T)*8 bits into a single T value
-        /// </summary>
-        /// <param name="cycles">The number of times the test is repeated</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        protected void gsb_pack_1xN_check<T>()
-            where T : unmanaged
-        {
-            Span<byte> _dst = new byte[bitsize<T>()];
-
-            for(var cycle=0; cycle<SampleSize; cycle++)
-            {
-                var src = Random.Next<T>();
-                var unpacked = gbits.unpack(src, _dst);
-                for(var j = 0; j<unpacked.Length; j++)
-                    Claim.eq((Bit)gbits.test(src, j), (Bit)unpacked[j]);
-                
-                var dst = default(T);
-                gbits.pack(unpacked, ref dst);
-                Claim.eq(src, dst);
-            }
-        }
-
     }
 }

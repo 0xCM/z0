@@ -149,7 +149,7 @@ namespace Z0.Test
 
         static string FormatTable<T>(T[,] entries, uint offset = 0)
         {
-            var sb = sbuild();
+            var sb = text();
             var m = entries.GetLength(0);
             var n = entries.GetLength(1);
 

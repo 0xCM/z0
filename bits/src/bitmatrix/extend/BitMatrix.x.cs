@@ -50,7 +50,7 @@ namespace Z0
         internal static string FormatMatrixBits(this Span<byte> src, int width)            
         {
             var dst = gbits.bitchars(src);
-            var sb = sbuild();
+            var sb = text();
             for(var i=0; i<dst.Length; i+= width)
             {
                 var remaining = dst.Length - i;

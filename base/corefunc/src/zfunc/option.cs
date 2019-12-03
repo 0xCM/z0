@@ -7,14 +7,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Diagnostics;
 
 using Z0;
 
 
 partial class zfunc
 {
-
    /// <summary>
     /// Constructs a non-valued option
     /// </summary>
@@ -149,7 +147,6 @@ partial class zfunc
     /// <typeparam name="Y">The function output type</typeparam>
     /// <param name="resource"></param>
     /// <param name="f"></param>
-    /// <returns></returns>
     public static Option<Y> Use<X, Y>(X resource, Func<X, Y> f,Action<Exception> error = null)
         where X : IDisposable
     {
@@ -166,8 +163,5 @@ partial class zfunc
             return none<Y>();
         }
     }
-
-
-
 
 }

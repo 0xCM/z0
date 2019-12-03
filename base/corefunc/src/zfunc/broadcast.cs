@@ -11,28 +11,6 @@ using static Z0.As;
 partial class zfunc
 {
     /// <summary>
-    /// Replicates the source values as many times as necessary to overwrite all bits in the target
-    /// </summary>
-    /// <param name="src">The source value</param>
-    /// <param name="dst">The target value</param>
-    /// <typeparam name="S">The source type</typeparam>
-    /// <typeparam name="T">The target type</typeparam>
-    public static ref T amplify<S,T>(S src, out T dst)
-        where S : unmanaged
-        where T : unmanaged
-    {
-        if(typeof(S) == typeof(byte))
-            dst = amplify(As.uint8(src), out dst);
-        else if(typeof(S) == typeof(ushort))
-            dst = amplify(As.uint16(src), out dst);
-        else if(typeof(S) == typeof(uint))
-            dst = amplify(As.uint32(src), out dst);
-        else
-            throw unsupported<S>();
-        return ref dst;
-    }
-
-    /// <summary>
     /// Overwrites all target bits with the pattern define by the source bits, with source pattern bits
     /// repeated or truncated as necessary
     /// </summary>
@@ -54,6 +32,28 @@ partial class zfunc
             return ref broadcast(As.uint64(src), out dst);
         else
             throw unsupported<S>();
+    }
+
+    /// <summary>
+    /// Replicates the source values as many times as necessary to overwrite all bits in the target
+    /// </summary>
+    /// <param name="src">The source value</param>
+    /// <param name="dst">The target value</param>
+    /// <typeparam name="S">The source type</typeparam>
+    /// <typeparam name="T">The target type</typeparam>
+    public static ref T amplify<S,T>(S src, out T dst)
+        where S : unmanaged
+        where T : unmanaged
+    {
+        if(typeof(S) == typeof(byte))
+            dst = amplify(As.uint8(src), out dst);
+        else if(typeof(S) == typeof(ushort))
+            dst = amplify(As.uint16(src), out dst);
+        else if(typeof(S) == typeof(uint))
+            dst = amplify(As.uint32(src), out dst);
+        else
+            throw unsupported<S>();
+        return ref dst;
     }
 
     [MethodImpl(Inline)]

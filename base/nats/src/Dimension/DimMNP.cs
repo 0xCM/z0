@@ -4,22 +4,32 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Runtime.CompilerServices;
+
     using static nfunc;
+    using static constant;     
  
-     /// <summary>
-    /// Specifies a cubical dimension
+    /// <summary>
+    /// Defines a cubical dimension
     /// </summary>
-    public readonly struct Dim3 : IDim
+    public readonly struct Dim3 : IDim3
     {
+        /// <summary>
+        /// The first axis, e.g. the x-axis
+        /// </summary>
         public readonly ulong I;
 
+        /// <summary>
+        /// The first axis, e.g. the y-axis
+        /// </summary>
         public readonly ulong J;
 
+        /// <summary>
+        /// The first axis, e.g. the z-axis
+        /// </summary>
         public readonly ulong K;
 
-        public static implicit operator DimInfo(Dim3 src)
-            => new DimInfo(src.Order, new ulong[]{src.I, src.J, src.K}, src.Volume);
-
+        [MethodImpl(Inline)]
         public Dim3(ulong I, ulong J, ulong K)
         {
             this.I = I;
@@ -30,14 +40,41 @@ namespace Z0
         public ulong Volume
             => I * J * K;
 
-        public ulong this[int axis]            
-            => axis == 0 ? I 
+        /// <summary>
+        /// Returns the axis corresponding to its 0-based index
+        /// </summary>
+        public ulong this[int axis] 
+        {           
+            [MethodImpl(Inline)]
+            get => 
+               axis == 0 ? I 
             :  axis == 1 ? J
             :  axis == 2 ? K
             :  0;
+        }
 
+        /// <summary>
+        /// The axis count - 3
+        /// </summary>
         public int Order 
-            => 3;
+        {
+            [MethodImpl(Inline)]
+            get => 3;
+        }
+
+        ulong IDim3.I => I;
+
+        ulong IDim3.J => J;
+
+        ulong IDim3.K => K;
+
+        public DimInfo Describe()
+            => new DimInfo(Order, new ulong[]{I, J, K}, Volume);
+        public string Format()
+            => $"{I}×{J}×{K}";
+
+        public override string ToString()
+            => Format();
     }
 
     /// <summary>
@@ -46,15 +83,12 @@ namespace Z0
     /// <typeparam name="M">The type of the first dimension</typeparam>
     /// <typeparam name="N">The type of the second dimension</typeparam>
     /// <typeparam name="P">The type of the third dimension</typeparam>
-    public readonly struct Dim<M,N,P> : IDim
+    public readonly struct Dim<M,N,P> : IDim3
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where P : unmanaged, ITypeNat
     {
         public static Dim<M,N,P> Rep => default;
-
-        public static implicit operator DimInfo(Dim<M,N,P> src)
-            => new DimInfo(3, new ulong[]{natu<M>(), natu<N>(), natu<P>()}, natu<M>() * natu<N>()* natu<P>());
 
         public static implicit operator Dim3(Dim<M,N,P> x)
             => new Dim3(x.I, x.J, x.K);
@@ -63,41 +97,70 @@ namespace Z0
             => new DimK(x.I, x.J, x.J);
 
         /// <summary>
-        /// Specifies the first component of the dimension
+        /// The first axis, e.g. the x-axis
         /// </summary>
         public ulong I 
-            => natu<M>();
+        {
+            [MethodImpl(Inline)]
+            get => natu<M>();
+        }
         
         /// <summary>
-        /// Specifies the second component of the dimension
+        /// The first axis, e.g. the y-axis
         /// </summary>
         public ulong J 
-            => natu<N>();
+        {
+            [MethodImpl(Inline)]
+            get => natu<N>();
+        }
 
         /// <summary>
-        /// Specifies the third component of the dimension
+        /// The first axis, e.g. the z-axis
         /// </summary>
         public ulong K 
-            => natu<P>();
+        {
+            [MethodImpl(Inline)]
+            get => natu<P>();
+        }
 
+        /// <summary>
+        /// The volume bound by the box defined by the three axes
+        /// </summary>
         public ulong Volume
-            => I*J*K;
+        {
+            [MethodImpl(Inline)]
+            get => NatMath.mul<M,N,P>();
+        }
 
-        public ulong this[int axis]            
-            => axis == 0 ? I 
-            :  axis == 1 ? J
-            :  axis == 2 ? K
+        /// <summary>
+        /// Returns the axis corresponding to its 0-based index
+        /// </summary>
+        public ulong this[int axis]   
+        {         
+            [MethodImpl(Inline)]
+            get => 
+               axis == 0 ? natu<M>() 
+            :  axis == 1 ? natu<N>()
+            :  axis == 2 ? natu<P>()
             :  0;
+        }
 
+        /// <summary>
+        /// The axis count - 3
+        /// </summary>
         public int Order 
-            => 3;
+        {
+            [MethodImpl(Inline)]
+            get => 3;
+        }
 
         public string Format()
             => $"{I}×{J}×{K}";
 
-        public override string  ToString()
+        public override string ToString()
             => Format();
+
+        public DimInfo Describe()
+            => new DimInfo(3, new ulong[]{natu<M>(), natu<N>(), natu<P>()}, Volume);
     }
-
-
 }

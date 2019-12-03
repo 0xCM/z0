@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;
     using static As;
@@ -15,6 +16,8 @@ namespace Z0
     partial class bvoc
     {
 
+        public static Vector128<uint> vcompact(Vector128<ulong> x0, Vector128<ulong> x1, out Vector128<uint> dst)
+            => dinx.vcompact(x0,x1, out dst);
         public static byte gather_d8u(byte src, byte mask)
             => Bits.gather(src,mask);
 

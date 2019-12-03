@@ -26,5 +26,26 @@ namespace Z0
 
     }
 
+    public interface IDim1 : IDim
+    {
+        ulong I {get;}   
+    }
+
+    public interface IDim2 : IDim
+    {
+        ulong I {get;}   
+
+        ulong J {get;}   
+    }
+
+    public interface IDim3 : IDim
+    {
+        ulong I {get;}   
+
+        ulong J {get;}   
+
+        ulong K {get;}   
+
+    }
 
 }

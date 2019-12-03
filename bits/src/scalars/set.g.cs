@@ -38,10 +38,7 @@ namespace Z0
         public static ref T set<T>(ref T src, byte pos, bit value)            
             where T : unmanaged
         {
-            if(value)
-                enable(ref src, pos);
-            else
-                disable(ref src, pos);
+            src = set(src, pos, value);
             return ref src;
         }
     }

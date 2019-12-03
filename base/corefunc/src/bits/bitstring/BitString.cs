@@ -505,7 +505,7 @@ namespace Z0
             else
             {
                 var sep = blocksep ?? ' ';
-                var sb = sbuild();
+                var sb = text();
                 var blocks = Partition(blockWidth.Value).Reverse();
                 var lastix = blocks.Length - 1;
                 var counter = 0;
@@ -547,7 +547,7 @@ namespace Z0
             else
             {
                 var blockWidth = style.BlockWidth;
-                var sb = sbuild();
+                var sb = text();
                 var blocks = Partition(blockWidth).Reverse();
                 var lastix = blocks.Length - 1;
                 var counter = 0;
@@ -575,7 +575,6 @@ namespace Z0
                 return  (specifier ? "0b" : string.Empty) + (tlz ? x.TrimStart('0') : x);
             }            
         }
-
 
         /// <summary>
         /// Formats bitstring using default parameter values
@@ -606,56 +605,13 @@ namespace Z0
             return bits.TakeScalar<T>();
         }
 
-        /// <summary>
-        /// Renders a non-allocating mutable view over a source span segment that is presented as an individual target value
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The index of the first source element</param>
-        /// <param name="length">The number of source elements required to constitute a target type</param>
-        /// <typeparam name="S">The source element type</typeparam>
-        /// <typeparam name="T">The target element type</typeparam>
-        [MethodImpl(Inline)]
-        static ref T TakeSingle<S,T>(Span<S> src, int offset = 0, int? length = null)
-            where S : unmanaged
-            where T : unmanaged
-                => ref MemoryMarshal.AsRef<T>(src.AsBytes(offset,length));
-
         [MethodImpl(Inline)]
         readonly T PackSingle<T>(int offset)
             where T : unmanaged
         {                        
             var src = bitseq.ToReadOnlySpan();
             var packed = PackedBits(src, offset, size<T>());
-            return packed.Length != 0 ? TakeSingle<byte,T>(packed) : default;
-        }
-
-        [MethodImpl(Inline)]
-        static bool HasBitSpecifier(in string bs)
-        {
-            if(bs.Length < 2)
-                return false;            
-            return bs[0] == '0' && bs[1] == 'b';        
-        }
-
-        /// <summary>
-        /// Constructs a bitstring from a span of primal values
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        static BitString FromScalars<T>(ReadOnlySpan<T> src, int? maxlen = null)
-            where T : unmanaged
-                 => new BitString(ReadBitSeq(src, maxlen));
-
-        static Span<byte> ReadBitSeq<T>(ReadOnlySpan<T> src, int? maxlen = null)
-            where T : unmanaged
-        {
-            require(typeof(T) != typeof(char));            
-            var seglen = Unsafe.SizeOf<T>()*8;
-            Span<byte> dst = new byte[src.Length * seglen];
-            for(var i=0; i<src.Length; i++)
-                BitStore.bitseq(src[i]).CopyTo(dst, i*seglen);
-            return maxlen != null && dst.Length >= maxlen ?  dst.Slice(0,maxlen.Value) :  dst;
+            return packed.Length != 0 ? packed.AsSingle<byte,T>() : default;
         }
 
         static Span<byte> PackedBits(ReadOnlySpan<byte> src, int offset = 0, int? minlen = null)
@@ -676,7 +632,7 @@ namespace Z0
                 {
                     var srcIx = i + k + offset;
                     if(srcIx < srcLen && src[srcIx] != 0)
-                        BitMask.enable(ref x, k);
+                        x = BitMask.enable(x, k);
                 }
             }
             return dst;

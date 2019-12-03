@@ -219,7 +219,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
         {
-            var sb = sbuild();
+            var sb = text();
             for(var i=0; i< RowCount; i++)
                  sb.AppendLine(GetRow(i).Format(blockWidth:1));
             return sb.ToString();

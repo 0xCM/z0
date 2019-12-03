@@ -88,8 +88,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static UInt128 clmul(ulong lhs, ulong rhs)
         {
-            var a = ginx.vscalar(lhs);
-            var b = ginx.vscalar(rhs);
+            var a = ginx.vscalar(n128, lhs);
+            var b = ginx.vscalar(n128, rhs);
             return CarrylessMultiply(a,b,0x00);
         }
 

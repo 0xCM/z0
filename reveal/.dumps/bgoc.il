@@ -1,4 +1,4 @@
-// 2019-11-30 01:56:10:328
+// 2019-12-02 13:14:43:353
 BitGrid64<N8,N8,ulong> bg_fw64_transpose_8x8x64(BitGrid64<N8,N8,ulong> g)
 {
     IL_0000: ldarg.0
@@ -18,7 +18,7 @@ BitGrid64<N8,N8,ulong> bg_fw64_transpose_8x8x64_ur(BitGrid64<N8,N8,ulong> g)
     IL_001B: stloc.1
     IL_001C: call Z0.N128 zfunc::get_n128()
     IL_0021: ldloc.0
-    IL_0022: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vmov(Z0.N128,System.UInt64)
+    IL_0022: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vmovscalar(Z0.N128,System.UInt64)
     IL_0027: stloc.2
     IL_0028: ldloca.s V_1
     IL_002A: ldc.i4.7

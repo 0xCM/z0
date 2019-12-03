@@ -90,7 +90,7 @@ namespace Z0
             for(var i=0; i<bs.Length; i++)
                 if(bs[i]) terms.Add($"{variable ?? 'x'}^{i}");
             
-            var sb = sbuild();
+            var sb = text();
             terms.Reverse();
             return string.Join($" + ", terms);            
         }

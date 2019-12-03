@@ -28,7 +28,7 @@ namespace Z0.Test
         static void EmitNames()
         {
             var methods = typeof(LAPACK).DeclaredMethods().Select(x => x.Name).ToReadOnlyList();
-            var sb = sbuild();
+            var sb = text();
             methods.Iterate(m => sb.AppendLine(m));
                         
             WriteText(sb.ToString(), FileName.Define("lapacke.list"));

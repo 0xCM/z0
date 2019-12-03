@@ -11,7 +11,7 @@ namespace Z0
     /// <summary>
     /// Specifies a dimension with one axis
     /// </summary>
-    public readonly struct Dim1 : IDim
+    public readonly struct Dim1 : IDim1
     {
         public readonly ulong I;
 
@@ -31,6 +31,17 @@ namespace Z0
         
         public int Order 
             => 1;
+
+        ulong IDim1.I => I;
+
+        public string Format()
+            => $"{I}";
+
+        public override string ToString()
+            => Format();
+
+        public DimInfo Describe()
+            => new DimInfo(Order, new ulong[]{I}, Volume);
     }
 
     /// <summary>
@@ -38,11 +49,9 @@ namespace Z0
     /// or the dimensions of a square matrix that contains N vectors of dimension N
     /// </summary>
     /// <typeparam name="N">The dimension type</typeparam>
-    public readonly struct Dim<N> : IDim
+    public readonly struct Dim<N> : IDim1
         where N : unmanaged, ITypeNat
     {
-        public static Dim<N> Rep => default;
-
         public static implicit operator ulong(Dim<N> x)
             => x.I;
     
@@ -52,11 +61,8 @@ namespace Z0
         public static implicit operator DimK(Dim<N> x)
             => new DimK(x.I);
 
-        public static implicit operator DimInfo(Dim<N> src)
-            => new DimInfo(1, new ulong[]{natu<N>()}, natu<N>());
-
         /// <summary>
-        /// Specifies the value of the dimension component
+        /// The one-dimensional axis
         /// </summary>
         public ulong I 
             => natu<N>();
@@ -66,7 +72,7 @@ namespace Z0
 
         public ulong this[int axis]            
             => axis == 0 ? I : 0;
-        
+                 
         public int Order 
             => 1;
 
@@ -75,5 +81,8 @@ namespace Z0
  
         public override string ToString()
             => Format();
+
+        public DimInfo Describe()
+            => new DimInfo(1, new ulong[]{natu<N>()}, natu<N>());
     }
 }

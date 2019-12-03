@@ -5,11 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Threading;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Diagnostics;
 
     using static zfunc;
 
@@ -31,6 +28,9 @@ namespace Z0
     public unsafe ref struct BitView<T>
         where T : unmanaged
     {
+        /// <summary>
+        /// The data over which the view is constructed
+        /// </summary>
         public readonly Span<byte> Bytes;
 
         [MethodImpl(Inline)]

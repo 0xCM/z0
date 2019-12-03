@@ -43,7 +43,6 @@ partial class zfunc
     /// </summary>
     /// <param name="x">The source value</param>
     /// <typeparam name="T">The source type</typeparam>
-    /// <returns></returns>
     [MethodImpl(Inline)]
     public static string format<T>(T x)
         => x == null ? string.Empty : x.ToString();
@@ -245,7 +244,7 @@ partial class zfunc
     /// <param name="content">An content array</param>
     public static string lines(params string[] content)
     {
-        var sb = sbuild();
+        var sb = text();
         foreach(var item in content)
             sb.AppendLine(item);
         return sb.ToString();
@@ -267,7 +266,6 @@ partial class zfunc
     /// <summary>
     /// Produces a ',' character
     /// </summary>
-    /// <returns></returns>
     [MethodImpl(Inline)]
     public static string comma()
         => ",";
@@ -291,23 +289,19 @@ partial class zfunc
     /// <summary>
     /// Produces a ";" character
     /// </summary>
-    /// <returns></returns>
-    [MethodImpl(Inline)]
     public static string semicolon()
         => AsciSym.Semicolon.ToString();
 
     /// <summary>
     /// Produces a "." character
     /// </summary>
-    /// <returns></returns>
     [MethodImpl(Inline)]
     public static string dot()
         => AsciSym.Dot.ToString();
 
     /// <summary>
-    /// Produces a colon character
+    /// Produces a ':' character
     /// </summary>
-    /// <returns></returns>
     [MethodImpl(Inline)]
     public static string colon()
         => AsciSym.Colon.ToString();
@@ -547,7 +541,6 @@ partial class zfunc
     public static string remove(string text, string substring)
         => text.Replace(substring, String.Empty);
 
-
     /// <summary>
     /// Functional equivalalent of <see cref="string.Join(string, IEnumerable{string})"/>
     /// </summary>
@@ -576,55 +569,11 @@ partial class zfunc
             ? toString(subject as string, ifMissing)
             : (subject != null ? subject.ToString() : ifMissing ?? estring());
 
-
-    [MethodImpl(Inline)]
-    public static string hexstring(byte src)
-        => src.ToString("X");
-
-    [MethodImpl(Inline)]
-    public static string hexstring(sbyte src)
-        => src.ToString("X");
-
-    [MethodImpl(Inline)]
-    public static string hexstring(short src)
-        => src.ToString("X");
-
-    [MethodImpl(Inline)]
-    public static string hexstring(ushort src)
-        => src.ToString("X");
-
-    [MethodImpl(Inline)]
-    public static string hexstring(int src)
-        => src.ToString("X");
-
-    [MethodImpl(Inline)]
-    public static string hexstring(uint src)
-        => src.ToString("X");
-
-    [MethodImpl(Inline)]
-    public static string hexstring(long src)
-        => src.ToString("X");
-
-    [MethodImpl(Inline)]
-    public static string hexstring(ulong src)
-        => src.ToString("X");
-
-    [MethodImpl(Inline)]   
-    public static string hexstring(BigInteger x)
-        => x.ToString("X");
-
-    [MethodImpl(Inline)]   
-    public static string hexstring(decimal src)
-    {
-        var parts = Decimal.GetBits(src);        
-        return hexstring(parts[0]) + hexstring(parts[1]) + hexstring(parts[2]) + hexstring(parts[3]);
-    }
     /// <summary>
     /// Defines a symbol
     /// </summary>
     /// <param name="name">The name of the symbol</param>
     /// <param name="description">Formal or informal description depending on context/needs</param>
-    /// <returns></returns>
     [MethodImpl(Inline)]   
     public static Symbol symbol(string name)
         => new Symbol(name);
@@ -646,40 +595,18 @@ partial class zfunc
         => first.ToString() + concat(rest.Select(x => x.ToString()));
 
     /// <summary>
-    /// Conditionally emits the value of a command flag predicated on the evaluation of a given value
-    /// </summary>
-    /// <param name="value">The value to evaluate</param>
-    /// <param name="flag">The text to emit when the value is evaluated to true</param>
-    /// <returns></returns>
-    [MethodImpl(Inline)]
-    public static string cmdFlag(bool value, string flag, string arg = null)
-        => not(value) ? estring() : flag + arg ?? estring();
-
-    /// <summary>
-    /// Conditionally emits the value of a command flag predicated on the evaluation of a given value
-    /// </summary>
-    /// <param name="value">The value to evaluate</param>
-    /// <param name="flag">The text to emit when the value is evaluated to true</param>
-    /// <returns></returns>
-    [MethodImpl(Inline)]
-    public static string cmdFlag(string value, string flag, string arg = null)
-        => empty(value) ? estring() : flag + arg ?? estring();
-
-    /// <summary>
     /// Creates a complied regular expression from the supplied pattern
     /// </summary>
     /// <param name="pattern">The regex pattern/></param>
-    /// <returns></returns>
-    [DebuggerStepThrough]
-    public static Regex regex(string pattern)
+    [MethodImpl(Inline)]
+    static Regex regex(string pattern)
         => new Regex(pattern, RegexOptions.Compiled);
 
     /// <summary>
     /// Creates a complied regular expression and (c)aches it
     /// </summary>
     /// <param name="pattern">The regex pattern/></param>
-    /// <returns></returns>
-    [DebuggerStepThrough]
+    [MethodImpl(Inline)]
     public static Regex regexc(string pattern)
         => _regexCache.GetOrAdd(pattern, p => regex(p));
     
@@ -758,9 +685,6 @@ partial class zfunc
         => string.Join(sep, values);
 
     [MethodImpl(Inline)]
-    public static StringBuilder sbuild(string s0 = null)
-        => s0 != null ? new StringBuilder(s0) : new StringBuilder();
-
     public static StringBuilder text()
         => new StringBuilder();
 

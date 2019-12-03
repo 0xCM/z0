@@ -16,11 +16,13 @@ namespace Z0
 
     public static class Cl
     {
+        static N128 n => default;
+
         [MethodImpl(Inline)]
         public static UInt128 clmul(ulong x, ulong y)
         {
-            var u = ginx.vscalar(x);
-            var v = ginx.vscalar(y);
+            var u = ginx.vscalar(n, x);
+            var v = ginx.vscalar(n, y);
             var z = CarrylessMultiply(u, v, 0);
             var dst = default(UInt128);
             vstore(z, ref dst.lo);
@@ -30,8 +32,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vec128<ulong> clmul(ulong x, ulong y, out Vec128<ulong> dst)
         {
-            var u = ginx.vscalar(x);
-            var v = ginx.vscalar(y);
+            var u = ginx.vscalar(n, x);
+            var v = ginx.vscalar(n, y);
             dst = CarrylessMultiply(u, v, 0);
             return ref dst;
         }
@@ -50,8 +52,8 @@ namespace Z0
         public static ref UInt128 clmul(ulong x, ulong y, ref UInt128 dst)
         {
 
-            var u = ginx.vscalar(x);
-            var v = ginx.vscalar(y);
+            var u = ginx.vscalar(n, x);
+            var v = ginx.vscalar(n, y);
             var z = CarrylessMultiply(u, v, 0);
             vstore(z,ref dst.lo);
             return ref dst;

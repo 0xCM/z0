@@ -7,10 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
-    using Z0;
  
     using static zfunc;
-    using static BitMasks;
 
     partial class BitParts
     {        
@@ -191,6 +189,5 @@ namespace Z0
             /// </summary>
             Select = Part0 | Part1 | Part2 | Part3 | Part4
         }
-
     }
 }

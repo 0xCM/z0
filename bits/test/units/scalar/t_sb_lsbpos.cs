@@ -16,7 +16,6 @@ namespace Z0
             Claim.eq(3, gbits.lsbpos((byte)0b111000));
             Claim.eq(2, gbits.lsbpos(0b0001011000100u));
             Claim.eq(5, gbits.lsbpos(0b000101100000u));
-
         }
 
         public void sb_lsbpos_8()

@@ -36,7 +36,7 @@ namespace Z0.Logix
 
         public string Format()
         {
-            var sb = sbuild();
+            var sb = text();
             
             for(var i=0; i<Answered.Length; i++)
             {

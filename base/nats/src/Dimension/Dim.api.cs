@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="N">The axis type</typeparam>
         [MethodImpl(Inline)]
-        public static Dim<N> Define<N>()
+        public static Dim<N> define<N>(N n = default)
             where N : unmanaged, ITypeNat
                 => default;
 
@@ -26,7 +26,7 @@ namespace Z0
         /// <typeparam name="M">The type of the first axis</typeparam>
         /// <typeparam name="N">The type of the second axis</typeparam>
         [MethodImpl(Inline)]
-        public static Dim<M,N> Define<M,N>()
+        public static Dim<M,N> define<M,N>(M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
                 => default;
@@ -38,7 +38,7 @@ namespace Z0
         /// <typeparam name="N">The type of the second axis</typeparam>
         /// <typeparam name="P">The type of the third axis</typeparam>
         [MethodImpl(Inline)]
-        public static Dim<M,N,P> Define<M,N,P>()
+        public static Dim<M,N,P> define<M,N,P>(M m = default, N n = default, P p = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where P : unmanaged, ITypeNat
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="i">The length of the first axis</param>
         [MethodImpl(Inline)]
-        public static Dim1 Define(ulong i)
+        public static Dim1 define(ulong i)
             => new Dim1(i);
 
         /// <summary>
@@ -57,22 +57,21 @@ namespace Z0
         /// </summary>
         /// <param name="i">The length of the first axis</param>
         [MethodImpl(Inline)]
-        public static Dim2 Define(ulong i, ulong j)
+        public static Dim2 define(ulong i, ulong j)
             => new Dim2(i, j);
 
         /// <summary>
         /// Defines a dimension of order 3 
         /// </summary>
         /// <param name="i">The length of the first axis</param>
-        public static Dim3 Define(ulong i, ulong j, ulong k)
+        public static Dim3 define(ulong i, ulong j, ulong k)
             => new Dim3(i, j, k);
 
-
         /// <summary>
-        /// Constructs a dimension of arbitrary order
+        /// Defines a dimension of arbitrary order
         /// </summary>
         /// <param name="axes">The axes that comprise the dimension</param>
-        public static DimK Define(params ulong[] axes)
+        public static DimK define(params ulong[] axes)
             => new DimK(axes);
 
     }

@@ -16,51 +16,76 @@ namespace Z0
 
     partial class dinx
     {
+        
         [MethodImpl(Inline)]
-        public static Vector256<byte> vduplicate(N0 parity, N32 width, Vector256<byte> src)
-            => v8u(dfp.vduplicate(parity, v32f(src)));
+        public static Vector256<byte> vdup32(N0 parity, Vector256<byte> src)
+            => v8u(dfp.vdup32(parity, v32f(src)));
+        
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vdup32(N1 parity, Vector256<byte> src)
+            => v8u(dfp.vdup32(parity, v32f(src)));
 
         [MethodImpl(Inline)]
-        public static Vector256<byte> vduplicate(N1 parity, N32 width, Vector256<byte> src)
-            => v8u(dfp.vduplicate(parity, v32f(src)));
+        public static void vduplicate(Vector256<byte> src, out Vector256<byte> even, out Vector256<byte> odd)
+        {
+            even = vdup32(n0,src);
+            odd = vdup32(n1,src);
+        }
 
-        // [0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F] -> [0,1, 0,1, 4,5, 4,5, 8,9, 8,9, C,D, C,D]
+        // [0,1,2, ... ,E,F] -> [0,1, 0,1, ..., C,D, C,D]
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vduplicate(N0 parity, N32 width, Vector256<ushort> src)
-            => v16u(dfp.vduplicate(parity, v32f(src)));
+        public static Vector256<ushort> vdup32(N0 parity, Vector256<ushort> src)
+            => v16u(dfp.vdup32(parity, v32f(src)));
 
-        // [0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F] -> [2,3, 2,3, 6,7, 6,7, A,B, A,B, E,F, E,F]
+        // [0,1,2, ... ,E,F] -> [2,3, 2,3, ...,  E,F, E,F]
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vduplicate(N1 parity, N32 width, Vector256<ushort> src)
-            => v16u(dfp.vduplicate(parity, v32f(src)));
+        public static Vector256<ushort> vdup32(N1 parity, Vector256<ushort> src)
+            => v16u(dfp.vdup32(parity, v32f(src)));
+
+        [MethodImpl(Inline)]
+        public static void vdup32(Vector256<ushort> src, out Vector256<ushort> even, out Vector256<ushort> odd)
+        {
+            even = vdup32(n0,src);
+            odd = vdup32(n1,src);
+        }
 
         // [0 1 2 3 4 5 6 7] -> [0 0 2 2 4 4 6 6]
 
         [MethodImpl(Inline)]
-        public static Vector256<uint> vduplicate(N0 parity, N32 width, Vector256<uint> src)
-            => v32u(dfp.vduplicate(parity, v32f(src)));
+        public static Vector256<uint> vdup32(N0 parity, Vector256<uint> src)
+            => v32u(dfp.vdup32(parity, v32f(src)));
 
         // [0 1 2 3 4 5 6 7] -> [1 1 3 3 5 5 7 7]
 
         [MethodImpl(Inline)]
-        public static Vector256<uint> vduplicate(N1 parity, N32 width, Vector256<uint> src)
-            => v32u(dfp.vduplicate(parity, v32f(src)));
+        public static Vector256<uint> vdup32(N1 parity, Vector256<uint> src)
+            => v32u(dfp.vdup32(parity, v32f(src)));
 
         // [0 1 2 3 4 5 6 7] -> ([0 0 2 2 4 4 6 6], [1 1 3 3 5 5 7 7])
         [MethodImpl(Inline)]
-        public static void vduplicate(N32 width, Vector256<uint> src, out Vector256<uint> even, out Vector256<uint> odd)
+        public static void vdup32(Vector256<uint> src, out Vector256<uint> even, out Vector256<uint> odd)
         {
-            even = vduplicate(n0,width,src);
-            odd = vduplicate(n1,width,src);
+            even = vdup32(n0, src);
+            odd = vdup32(n1, src);
         }
 
+        // [0 1 2 3] -> [0 0 2 2]
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vduplicate(N0 parity, N32 width, Vector256<ulong> src)
-            => v64u(dfp.vduplicate(parity, v32f(src)));
+        public static Vector256<ulong> vdup64(N0 parity, Vector256<ulong> src)
+            => v64u(dfp.vdup64(parity, v64f(src)));
 
+        // [0 1 2 3] -> [1 1 3 3]
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vduplicate(N1 parity, N32 width, Vector256<ulong> src)
-            => v64u(dfp.vduplicate(parity, v32f(src)));
+        public static Vector256<ulong> vdup64(N1 parity, Vector256<ulong> src)
+            => v64u(dfp.vdup64(parity, v64f(src)));
+    
+        // [0 1 2 3] -> ([0 0 2 2],[1 1 3 3])
+        [MethodImpl(Inline)]
+        public static void vdup64(Vector256<ulong> src, out Vector256<ulong> even, out Vector256<ulong> odd)
+        {
+            even = vdup64(n0,src);
+            odd = vdup64(n1,src);
+        }
     }
 
 }

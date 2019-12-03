@@ -33,7 +33,7 @@ namespace Z0
 
         public string Format(bool onlyInstructions = true)
         {
-            var desc = sbuild();
+            var desc = text();
             if(!onlyInstructions)
             {
                 desc.AppendLine(FullName);

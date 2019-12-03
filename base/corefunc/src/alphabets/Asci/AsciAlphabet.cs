@@ -36,7 +36,7 @@ namespace Z0
 
         public string Format()
         {
-            var fmt = sbuild();
+            var fmt = text();
             foreach(var s in Symbols)
                 fmt.Append(s.Format());
             return fmt.ToString();

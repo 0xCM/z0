@@ -11,7 +11,6 @@ namespace Z0
 
     partial class BitMatrix
     {
-
         /// <summary>
         /// Constructs the a generic graph determined by a generic adjacency bitmatrix
         /// </summary>

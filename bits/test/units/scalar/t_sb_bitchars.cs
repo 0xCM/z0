@@ -13,34 +13,34 @@ namespace Z0
     {
 
         public void bitchars_8u()
-            => bitchars_check<byte>();
+            => sb_bitchars_check<byte>();
 
         public void bitchars_8i()
-            => bitchars_check<sbyte>();
+            => sb_bitchars_check<sbyte>();
 
         public void bitchars_16u()
-            => bitchars_check<ushort>();
+            => sb_bitchars_check<ushort>();
 
         public void bitchars_16i()
-            => bitchars_check<short>();
+            => sb_bitchars_check<short>();
 
         public void bitchars_32()
-            => bitchars_check<uint>();
+            => sb_bitchars_check<uint>();
 
         public void bitchars_32i()
-            => bitchars_check<int>();
+            => sb_bitchars_check<int>();
 
         public void bitchars_64u()
-            => bitchars_check<ulong>();
+            => sb_bitchars_check<ulong>();
 
         public void bitchars_64i()
-            => bitchars_check<long>();
+            => sb_bitchars_check<long>();
 
         public void bitchars_32f()
-            => bitchars_check<float>();
+            => sb_bitchars_check<float>();
 
         public void bitchars_64f()
-            => bitchars_check<double>();
+            => sb_bitchars_check<double>();
     }
 
 }
