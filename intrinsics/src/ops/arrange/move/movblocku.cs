@@ -267,6 +267,5 @@ namespace Z0
             vmovblock(src.LoBlock(0), out lo);
             vmovblock(src.HiBlock(0), out hi);
         }
-
     }
 }

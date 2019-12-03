@@ -31,7 +31,6 @@ namespace Z0
             return dst;
         }
 
-
         /// <summary>
         /// PMOVSXBQ xmm, m16
         /// </summary>

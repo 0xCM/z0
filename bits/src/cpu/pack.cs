@@ -6,14 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using Z0;
  
     using static zfunc;
     
     partial class CpuBits
     {         
-
-
         //pack 32 1-bit values from 32 8-bit segments
         [MethodImpl(Inline)]
         public static uint vpack32x1x8(ReadOnlySpan<byte> src)

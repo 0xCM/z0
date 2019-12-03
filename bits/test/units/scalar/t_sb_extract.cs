@@ -10,9 +10,9 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_extract : t_sb<t_extract>
+    public class t_sb_extract : t_sb<t_sb_extract>
     {        
-        public void extract_32u()
+        public void sb_extract_32u()
         {
             var src = 0b00001010110000101001_001_111_011_001u;
             var bsSrc = src.ToBitString().Format(true);
@@ -41,7 +41,7 @@ namespace Z0
             Claim.eq(x3,y3);            
         }
 
-        public void extract_64u()
+        public void sb_extract_64u()
         {
             var bv8 = BitVector.from(n8, 0b10000000);
             var bv16 = bv8.Concat(bv8);

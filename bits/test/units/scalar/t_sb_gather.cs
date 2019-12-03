@@ -35,8 +35,6 @@ namespace Z0
             => sb_gather_check<uint>();
 
         public void sb_gather_64()
-            => sb_gather_check<ulong>();
-        
-
+            => sb_gather_check<ulong>();        
     }
 }

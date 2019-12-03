@@ -6,10 +6,8 @@ namespace Z0.Test
 {        
     using System;
     using System.Collections.Generic;
-    using System.Reflection;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Text;
     using System.IO;
 
     using Z0.Mkl;
@@ -33,7 +31,6 @@ namespace Z0.Test
                         
             WriteText(sb.ToString(), FileName.Define("lapacke.list"));
         }
-
     }
 
     public class App : TestApp<App>

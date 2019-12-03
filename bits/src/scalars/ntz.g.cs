@@ -21,18 +21,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int ntz<T>(T src)
             where T : unmanaged
-                => gmath.eq(src,default) 
-                ? (int)bitsize<T>() 
-                : ntz_dispatch(src);
-
-        /// <summary>
-        /// Counts the number of trailing zero bits in the source
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        static int ntz_dispatch<T>(T src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                  return Bits.ntz(uint8(src));
@@ -45,6 +33,7 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
+
     }
 
 }

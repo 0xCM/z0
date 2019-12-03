@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.InteropServices;    
         
     using static zfunc;
-    using static nfunc;
 
     partial class DataBlocks
     {

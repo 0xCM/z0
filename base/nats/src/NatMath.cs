@@ -258,17 +258,26 @@ namespace Z0
                 return default(T);
         }
 
+        /// <summary>
+        /// Computes k := 2^n - 1
+        /// </summary>
+        /// <param name="n">The power of 2 exponent, between 0 and 64</param>
+        /// <typeparam name="K">The exponent type</typeparam>
         [MethodImpl(Inline)]
-        public static ulong pow2m1<N>(N n = default)
-            where N : unmanaged, ITypeNat
-                => pow2(n) - 1ul;
+        public static ulong pow2m1<K>(K n = default)
+            where K : unmanaged, ITypeNat
+        {
+            if(typeof(K) == typeof(N64))
+                return ulong.MaxValue;
+            else
+                return pow2(n) - 1ul;
+        }
 
         /// <summary>
         /// Computes k := 2^n
         /// </summary>
-        /// <param name="n"></param>
-        /// <typeparam name="K"></typeparam>
-        /// <returns></returns>
+        /// <param name="n">The power of 2 exponent, between 0 and 63</param>
+        /// <typeparam name="K">The exponent type</typeparam>
         [MethodImpl(Inline)]
         public static ulong pow2<K>(K n = default)
             where K : unmanaged, ITypeNat
@@ -434,9 +443,34 @@ namespace Z0
             else if(typeof(K) == typeof(N55))
                 return 1ul << 55;
             else
-                return 1ul << natval<K>(); 
+                return pow2_56(n);
         }
- 
+
+        [MethodImpl(Inline)]
+        static ulong pow2_56<K>(K n = default)
+            where K : unmanaged, ITypeNat
+        {
+            if(typeof(K) == typeof(N56))
+                return 1ul << 56;
+            else if(typeof(K) == typeof(N57))
+                return 1ul << 57;
+            else if(typeof(K) == typeof(N58))
+                return 1ul << 58;
+            else if(typeof(K) == typeof(N59))
+                return 1ul << 59;
+            else if(typeof(K) == typeof(N60))
+                return 1ul << 60;
+            else if(typeof(K) == typeof(N61))
+                return 1ul << 61;
+            else if(typeof(K) == typeof(N62))
+                return 1ul << 62;
+            else if(typeof(K) == typeof(N63))
+                return 1ul << 63;
+            else
+                return 0;
+
+        }
+
         [MethodImpl(Inline)]
         static ulong rotrN<K3,K1,K2>(K1 k1 = default, K2 k2 = default, K3 k3 = default)
             where K3 : unmanaged, ITypeNat

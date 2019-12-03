@@ -488,6 +488,30 @@ namespace Z0
                 => random.CpuVector<T>(n256);
 
         /// <summary>
+        /// Creates a 256-bit fixed-size bitgrid of dimension 4x64
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="m">The row count representative</param>
+        /// <param name="n">The col count representative</param>
+        /// <param name="t">The cell type representative</param>
+        [MethodImpl(Inline)]
+        public static BitGrid256<N4,N64,T> BitGrid<T>(this IPolyrand random, N4 m, N64 n, T t = default)
+            where T : unmanaged            
+                => random.CpuVector<T>(n256);
+
+        /// <summary>
+        /// Creates a 256-bit fixed-size bitgrid of dimension 64x4
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="m">The row count representative</param>
+        /// <param name="n">The col count representative</param>
+        /// <param name="t">The cell type representative</param>
+        [MethodImpl(Inline)]
+        public static BitGrid256<N64,N4,T> BitGrid<T>(this IPolyrand random, N64 m, N4 n, T t = default)
+            where T : unmanaged            
+                => random.CpuVector<T>(n256);
+
+        /// <summary>
         /// Creates a 256-bit fixed-size bitgrid of dimension 8x32
         /// </summary>
         /// <param name="random">The random source</param>
@@ -522,6 +546,8 @@ namespace Z0
         public static BitGrid256<N16,N16,T> BitGrid<T>(this IPolyrand random, N16 m, N16 n, T t = default)
             where T : unmanaged            
                 => random.CpuVector<T>(n256);
+
+
     }
 
 }

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;
     
@@ -13,41 +14,93 @@ namespace Z0
     {        
         public void nbg_row_32x8x4()
         {
+            var t = z32;
             var m = n8;
             var n = n4;
-            var t = z32;
             
-            var bg = Random.BitGrid(m,n,t);
-            var bs = bg.ToBitString();
-            var data = bg.Data;
+            for(var i=0; i<SampleSize; i++)
+            {
+                var bg = Random.BitGrid(m,n,t);
+                var bs = BitGrid.bitstring(bg); 
 
-            for(var r = 0; r < m; r++)
-            {                
-                var r1 = BitGrid.row(bg,r);
-                var r2 = bs.Slice(r*n,n);
-                var r3 = BitGrid.nrow(bg,r);
-                Claim.eq(r1, r2.ToBitVector(n4));                
-                Claim.eq(r1, r3);
+                for(var row = 0; row < m; row++)
+                {                
+                    var r1 = BitGrid.row(bg,row);
+                    var r2 = bs.Slice(row*n,n);
+                    var r3 = BitGrid.nrow(bg,row);
+                    var r4 = BitVector.from(n, r2);
+                    Claim.eq(r1, r4);
+                    Claim.eq(r1, r3);
+                }
+            }
+        }
+
+        public void nbg_row_32x4x8()
+        {
+            var t = z32;
+            var m = n4;
+            var n = n8;
+            
+            for(var i=0; i<SampleSize; i++)
+            {
+                var bg = Random.BitGrid(m,n,t);
+                var bs = BitGrid.bitstring(bg); 
+
+                for(var row = 0; row < m; row++)
+                {                
+                    var r1 = BitGrid.row(bg,row);
+                    var r2 = bs.Slice(row*n,n);
+                    var r3 = BitGrid.nrow(bg,row);
+                    var r4 = BitVector.from(n, r2);
+                    Claim.eq(r1, r4);
+                    Claim.eq(r1, r3);
+                }
+            }
+        }
+
+
+        public void nbg_row_256x4x64()
+        {
+            var w = n256;
+            var m = n4;
+            var n = n64;
+            var t = z64;
+            
+            for(var i=0; i<SampleSize; i++)
+            {
+                var bg = Random.BitGrid(m,n,t);
+                var bs = BitGrid.bitstring(bg); 
+                var bd = BitGrid.store(bg);
+                
+                for(var row = 0; row<m; row++)
+                {
+                    var row1 = BitGrid.row(bg,row);
+                    var row2 = bd[row].ToBitVector();
+                    Claim.eq(row1,row2);
+                }
             }
         }
 
         public void nbg_row_256x16x16()
         {
+            var t = z16;
             var m = n16;
             var n = n16;
-            var t = z16;
             
-            var bg = Random.BitGrid(m,n,t);
-            var bs = bg.ToBitString();
-            var data = bg.ToSpan();
-            
-            for(var i = 0; i<m; i++)
+            for(var i=0; i<SampleSize; i++)
             {
-                var row1 = BitGrid.row(bg,i);
-                var row2 = data[i].ToBitVector();
-                Claim.eq(row1,row2);
+                var bg = Random.BitGrid(m,n,t);
+                var bs = BitGrid.bitstring(bg); 
+                var bd = BitGrid.store(bg);
+                
+                for(var row = 0; row<m; row++)
+                {
+                    var row1 = BitGrid.row(bg,row);
+                    var row2 = bd[row].ToBitVector();
+                    Claim.eq(row1,row2);
+                }
             }
         }
-    }
 
+    }
 }

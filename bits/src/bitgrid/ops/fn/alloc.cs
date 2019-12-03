@@ -11,7 +11,6 @@ namespace Z0
 
     using static zfunc;
 
-
     partial class BitGrid
     {
         /// <summary>

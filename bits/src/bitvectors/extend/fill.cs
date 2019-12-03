@@ -11,19 +11,16 @@ namespace Z0
 
     using static zfunc;
 
-    partial class BitGrid
-    {        
+    partial class BitVectorX
+    {
+
         /// <summary>
-        /// Computes the bitwise NOR between fixed-width natural bitgrids
+        /// Sets all the bits to align with the source value
         /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
-        /// <typeparam name="T">The cell type</typeparam>
+        /// <param name="value">The source value</param>
         [MethodImpl(Inline)]
-        public static BitGrid16<M,N,T> nor<M,N,T>(BitGrid16<M,N,T> gx, BitGrid16<M,N,T> gy)
+        public static void Fill<T>(this BitVector<T> src, bit value)
             where T : unmanaged
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-                => math.nor(gx,gy);
+             => src.data = gmath.mul(gmath.maxval<T>(), convert<uint,T>((uint)value));
     }
 }

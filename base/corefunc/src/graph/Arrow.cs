@@ -5,12 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using static MathSym;    
 
     /// <summary>
     /// Represents an arrow that has a common source/target type

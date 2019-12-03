@@ -10,7 +10,6 @@ using System.Runtime.CompilerServices;
 
 using Z0;
 
-
 partial class zfunc
 {
    /// <summary>

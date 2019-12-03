@@ -14,7 +14,6 @@ namespace Z0
 
     partial class BitGrid
     {        
-
         /// <summary>
         /// Extracts an index-identifed 1-bit grid row
         /// </summary>
@@ -186,7 +185,7 @@ namespace Z0
         /// Extracts an index-identifed 8-bit grid row
         /// </summary>
         /// <param name="g">The source grid</param>
-        /// <param name="index">The zero-based column index, in the inclusive range 0...7</param>
+        /// <param name="index">The zero-based column index in the range [0...7]</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitVector<N8,byte> row<T>(BitGrid64<N8,N8,T> g, int index)
@@ -194,21 +193,92 @@ namespace Z0
                 => (byte)Bits.extract(g,index*8, 8);
 
         /// <summary>
-        /// Presents grid content as a bitvector
+        /// Extracts an index-identifed 64-bit grid row
         /// </summary>
         /// <param name="g">The source grid</param>
-        /// <param name="index">The zero-based row index, in the inclusive range 0...1</param>
+        /// <param name="index">The zero-based column index, either 0 or 1</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<N64,ulong> row<T>(BitGrid64<N1,N64,T> g, int index)
+        public static BitVector<N64,ulong> row<T>(in BitGrid128<N2,N64,T> g, int index)
             where T : unmanaged
-                => g.Data;
+                => v64u(g.Data).GetElement(index);
 
+        /// <summary>
+        /// Extracts an index-identifed 32-bit grid row
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        /// <param name="index">The zero-based column index in the range [0...3]</param>
+        /// <typeparam name="T">The grid cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N32,uint> row<T>(in BitGrid128<N4,N32,T> g, int index)
+            where T : unmanaged
+                => v32u(g.Data).GetElement(index);
+
+        /// <summary>
+        /// Extracts an index-identifed 16-bit grid row
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        /// <param name="index">The zero-based column index in the range [0...7]</param>
+        /// <typeparam name="T">The grid cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N16,ushort> row<T>(in BitGrid128<N8,N16,T> g, int index)
+            where T : unmanaged
+                => v16u(g.Data).GetElement(index);
+
+        /// <summary>
+        /// Extracts an index-identifed 8-bit grid row
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        /// <param name="index">The zero-based column index in the range [0...15]</param>
+        /// <typeparam name="T">The grid cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N8,byte> row<T>(in BitGrid128<N16,N8,T> g, int index)
+            where T : unmanaged
+                => v8u(g.Data).GetElement(index);
+
+        /// <summary>
+        /// Extracts an index-identifed 64-bit grid row
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        /// <param name="index">The zero-based column index in the range [0...3]</param>
+        /// <typeparam name="T">The grid cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N64,ulong> row<T>(in BitGrid256<N4,N64,T> g, int index)
+            where T : unmanaged
+                => v64u(g.Data).GetElement(index);
+
+        /// <summary>
+        /// Extracts an index-identifed 32-bit grid row
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        /// <param name="index">The zero-based column index in the range [0...7]</param>
+        /// <typeparam name="T">The grid cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N32,uint> row<T>(in BitGrid256<N8,N32,T> g, int index)
+            where T : unmanaged
+                => v32u(g.Data).GetElement(index);
+
+        /// <summary>
+        /// Extracts an index-identifed 8-bit grid row
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        /// <param name="index">The zero-based column index in the range [0...31]</param>
+        /// <typeparam name="T">The grid cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N8,byte> row<T>(in BitGrid256<N32,N8,T> g, int index)
+            where T : unmanaged
+                => v8u(g.Data).GetElement(index);
+
+        /// <summary>
+        /// Extracts an index-identifed 16-bit grid row
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        /// <param name="index">The zero-based column index in the range [0...15]</param>
+        /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitVector<N16,ushort> row<T>(in BitGrid256<N16,N16,T> g, int index)
             where T : unmanaged
-                => v16u(g.data).GetElement(index);
-
+                => v16u(g.Data).GetElement(index);
 
         [MethodImpl(Inline)]
         public static BitVector<N,T> nrow<M,N,T>(BitGrid16<M,N,T> g, int index)

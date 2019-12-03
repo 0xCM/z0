@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;    
     
     using static zfunc;    
-    using static aux;
 
     partial class ginx
     {
@@ -82,6 +81,5 @@ namespace Z0
         public static void vmstore<T>(Vector256<T> src, Vector256<ulong> mask, ref ulong dst)
             where T : unmanaged
                 => dinx.vmstore(v64u(src),mask,ref dst);
-
     }
 }

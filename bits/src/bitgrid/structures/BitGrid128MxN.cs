@@ -21,7 +21,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
     {                
-        readonly Vector128<T> data;
+        internal readonly Vector128<T> data;
 
         /// <summary>
         /// The grid dimension

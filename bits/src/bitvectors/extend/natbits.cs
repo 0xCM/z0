@@ -20,31 +20,13 @@ namespace Z0
         /// <typeparam name="N">The natural type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> ToNatural<N,T>(this BitVector<T> src, N n = default)
+        public static BitVector<N,T> ToNatBits<N,T>(this BitVector<T> src, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => BitVector.natural<N,T>(src.Scalar);
-
-        /// <summary>
-        /// Converts the vector content to a bitring representation
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> Replicate<N,T>(this BitVector<N,T> src)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => src.Scalar;
-
-        /// <summary>
-        /// Converts the vector content to a bitring representation
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitString ToBitString<N,T>(this BitVector<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => BitVector.bitstring(x);
         
         [MethodImpl(Inline)]
-        public static BitVector<N,T> ToBitVector<N,T>(this BitString src)
+        public static BitVector<N,T> ToNatBits<N,T>(this BitString src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => BitVector.natural<N,T>(src);
@@ -84,11 +66,6 @@ namespace Z0
         public static BitVector<N,ulong> ToNatBits<N>(this ulong src, N n = default)
             where N : unmanaged, ITypeNat
                 => src;        
-
-        [MethodImpl(Inline)]
-        public static string Format<N,T>(this BitVector<N,T> src, BitFormat? fmt = null)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => BitVector.format(src,fmt);
     }
+
 }

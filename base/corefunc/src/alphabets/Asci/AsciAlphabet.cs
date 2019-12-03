@@ -41,6 +41,5 @@ namespace Z0
                 fmt.Append(s.Format());
             return fmt.ToString();
         }
-
     }
 }

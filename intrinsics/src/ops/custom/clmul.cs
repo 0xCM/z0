@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Numerics;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     using static System.Runtime.Intrinsics.X86.Pclmulqdq;
@@ -15,7 +14,6 @@ namespace Z0
         
     partial class dinx
     {                
-
         /// <summary>
         /// Multiplies two two 256-bit/u64 vectors to yield a 256-bit/u64 vector; only provides reasonable
         /// results if there's no 64-bit overflow

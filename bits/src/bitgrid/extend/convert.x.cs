@@ -12,7 +12,6 @@ namespace Z0
 
     partial class BitGridX
     {   
-
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<M,N,T>(this BitGrid32<M,N,T> src)
             where M : unmanaged, ITypeNat
@@ -40,26 +39,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.Data.ToSpan();
-
-        [MethodImpl(Inline)]
-        public static BitMatrix<T> ToBitMatrix<T>(this BitGrid<N8,N8,T> src)
-            where T : unmanaged
-                => BitMatrix.load(src.Data);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix<T> ToBitMatrix<T>(this BitGrid<N16,N16,T> src)
-            where T : unmanaged
-                => BitMatrix.load(src.Data);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix<T> ToBitMatrix<T>(this BitGrid<N32,N32,T> src)
-            where T : unmanaged
-                => BitMatrix.load(src.Data);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix<T> ToBitMatrix<T>(this BitGrid<N64,N64,T> src)
-            where T : unmanaged
-                => BitMatrix.load(src.Data);
 
         [MethodImpl(Inline)]
         public static BitMatrix<M,N,T> ToBitMatrix<M,N,T>(this BitGrid<M,N,T> src)
@@ -461,8 +440,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.parse(bs,bitcount,m,n,t);
-                 
+                => BitGrid.parse(bs,bitcount,m,n,t);                 
     }
 
 }

@@ -12,7 +12,6 @@ namespace Z0
 
     partial class BitMatrix
     {
-
         /// <summary>
         /// Transposes a copy of the matrix
         /// </summary>

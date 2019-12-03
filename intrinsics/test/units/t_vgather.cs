@@ -256,9 +256,6 @@ namespace Z0
                 var vActual = dinx.vgather(n, ref src, vIdx);
                 Claim.eq(vExpect, vActual);
             }            
-
         }
-
     }
-
 }

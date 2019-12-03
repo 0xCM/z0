@@ -23,7 +23,5 @@ namespace Z0
         public static Vector256<T> vmovcell<T>(T src, int index, Vector256<T> dst)
             where T : unmanaged
                 => dst.WithElement(index, src);
-
     }
-
 }

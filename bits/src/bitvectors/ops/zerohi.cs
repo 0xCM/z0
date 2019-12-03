@@ -69,7 +69,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 zerohi(BitVector64 src, int pos)
             => gbits.zerohi(src.data, pos);
-
     }
-
 }

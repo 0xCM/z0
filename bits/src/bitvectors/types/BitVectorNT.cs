@@ -44,6 +44,14 @@ namespace Z0
         public static T Zero => default;
 
         /// <summary>
+        /// Directly assigns a value to a vector storage cell, bypassing masked initialization
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        internal static BitVector<N,T> Inject(T src)
+            => new BitVector<N, T>(src, true);
+
+        /// <summary>
         /// Implicitly convers a scalar to a bitvector
         /// </summary>
         /// <param name="src">The scalar value</param>
@@ -238,6 +246,10 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitVector(T data)
             => this.data = gmath.and(gbits.lomask<N,T>(), data);
+
+        [MethodImpl(Inline)]
+        BitVector(T data, bit inject)
+            => this.data = data;
 
         /// <summary>
         /// The scalar representation of the vector

@@ -34,8 +34,8 @@ namespace Z0
                 var b = modprod(x,y);
                 Claim.yea(a == b);            
 
-                var zx = x.ToCells();
-                var zy = y.ToCells();
+                var zx = x.ToBitCells();
+                var zy = y.ToBitCells();
                 var c = zx % zy;
                 Claim.yea(a == c);
             }            
@@ -51,8 +51,8 @@ namespace Z0
                 var b = modprod(x,y);
                 Claim.yea(a == b);   
 
-                var zx = x.ToCells();
-                var zy = y.ToCells();
+                var zx = x.ToBitCells();
+                var zy = y.ToBitCells();
                 var c = zx % zy;
                 Claim.yea(a == c);
 
@@ -87,8 +87,8 @@ namespace Z0
                 var b = modprod(x,y);
                 Claim.yea(a == b);
 
-                var zx = x.ToCells();
-                var zy = y.ToCells();
+                var zx = x.ToBitCells();
+                var zy = y.ToBitCells();
                 bit c = zx % zy;
                 Claim.yea(a == c);            
             }

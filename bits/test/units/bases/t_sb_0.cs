@@ -229,17 +229,15 @@ namespace Z0
             }
         }
 
-        protected void sb_lsbpos_check<T>()
+        protected void sb_ntz_check<T>()
             where T : unmanaged
         {
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.Next<T>();
-                var xpos = gbits.lsbpos(x);
                 var ntzX = gbits.ntz(x);
                 var y = BitString.scalar(x);
                 var ntzY = y.Ntz();
-                var ypos = ntzY;
 
                 if(ntzX != ntzY)
                 {
@@ -248,7 +246,6 @@ namespace Z0
                 }
 
                 Claim.eq(ntzX, ntzY);
-                Claim.eq(xpos, ypos);
             }
         }
 

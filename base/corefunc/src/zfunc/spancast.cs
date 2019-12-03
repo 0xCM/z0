@@ -6,14 +6,11 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;    
 using System.Runtime.Intrinsics;
-using System.Linq;
-using System.Collections.Generic;
 
 using Z0;
 
 partial class zfunc
 {    
-
     /// <summary>
     /// Presents a span of generic values as a span of bytes
     /// </summary>
@@ -23,7 +20,6 @@ partial class zfunc
     public static Span<byte> bytes<T>(Span<T> src)
         where T : unmanaged
             => MemoryMarshal.AsBytes(src);
-
 
     [MethodImpl(Inline)]
     public static ReadOnlySpan<sbyte> int8<T>(ReadOnlySpan<T> src)

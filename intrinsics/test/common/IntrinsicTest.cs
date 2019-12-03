@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     
@@ -1005,6 +1004,5 @@ namespace Z0
             Claim.eq(n,bs.Length);
             Claim.eq(n,bs.PopCount());
         }
-
     }
 }

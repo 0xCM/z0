@@ -10,7 +10,6 @@ namespace Z0
 
     public class t_sb_blsr : t_sb<t_sb_blsr>
     {
-
         public void blsr_8()
             => sb_blsr_check<byte>();
 
@@ -22,8 +21,5 @@ namespace Z0
 
         public void sb_blsr_64()
             => sb_blsr_check<ulong>();
-
-
     }
-
 }
