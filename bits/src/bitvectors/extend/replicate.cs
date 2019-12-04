@@ -47,11 +47,11 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector4 Replicate(this BitVector4 src)
-            => new BitVector4(src.data,true);
+            => BitVector.replicate(src);
 
         [MethodImpl(Inline)]
         public static BitVector8 Replicate(this BitVector4 src, N2 n)
-            => src.Concat(src);
+            => BitVector.replicate(src,n);
 
         /// <summary>
         /// Concatenates an 8-bit vector with itself to produce a 16-bit vector
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="n">The duplication factor</param>
         [MethodImpl(Inline)]
         public static BitVector16 Replicate(this BitVector8 src, N2 n)
-            => src.Concat(src);
+            => BitVector.replicate(src,n);
 
         /// <summary>
         /// Concatenates four copies of an 8-bit vector to produce a 32-bit vector
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="n">The duplication factor</param>
         [MethodImpl(Inline)]
         public static BitVector32 Replicate(this BitVector8 src, N4 n)
-            => src.Replicate(n2).Replicate(n2);
+            => BitVector.replicate(src,n);
 
         /// <summary>
         /// Concatenates eight copies of an 8-bit vector to produce a 64-bit vector
@@ -78,14 +78,14 @@ namespace Z0
         /// <param name="n">The duplication factor</param>
         [MethodImpl(Inline)]
         public static BitVector64 Replicate(this BitVector8 src, N8 n)
-            => src.Replicate(n4).Replicate(n2);
+            => BitVector.replicate(src,n);
 
         /// <summary>
         /// Creates a copy of the vector
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitVector16 Replicate(this BitVector16 x)
-            => x.data;
+        public static BitVector16 Replicate(this BitVector16 src)
+            => BitVector.replicate(src);
 
         /// <summary>
         /// Concatenates a 16-bit vector with itself to produce a 32-bit vector
@@ -94,19 +94,16 @@ namespace Z0
         /// <param name="n">The duplication factor</param>
         [MethodImpl(Inline)]
         public static BitVector32 Replicate(this BitVector16 src, N2 n)
-            => src.Concat(src);
+            => BitVector.replicate(src,n);
 
         /// <summary>
-        /// Concatenates four copies of a 16-bit vector to produce a 64-bit vector
+        /// Creates a 64-bit vector by concatenating 4 source replicants
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="n">The duplication factor</param>
         [MethodImpl(Inline)]
-        public static BitVector64 Replicate(this BitVector16 x, N4 n)
-        {
-            var y = x.Replicate(n2);
-            return y.Replicate(n2);
-        }
+        public static BitVector64 Replicate(this BitVector16 src, N4 n)
+            => BitVector.replicate(src,n);
 
         /// <summary>
         /// Creates a copy of the source vector
@@ -114,28 +111,21 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector32 Replicate(this BitVector32 src)
-            => new BitVector32(src.data);
+            => BitVector.replicate(src);
 
         /// <summary>
-        /// Contatenates a 32-bit vector with itself to produce a 64-bit vector
+        /// Creates a 64-bit vector by concatenating the source vector with a replicant
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 Replicate(this BitVector32 src, N2 n)
-            => src.Concat(src);
+            => BitVector.replicate(src,n);
 
         /// <summary>
         /// Creates a copy of the source vector
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitVector64 Replicate(this BitVector64 x)
-            => x.data;
-
-        /// <summary>
-        /// Creates a copy of the source vector
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitVector128 Replicate(this BitVector128 src)
-            => new BitVector128(src.x0,src.x1);
+        public static BitVector64 Replicate(this BitVector64 src)
+            => BitVector.replicate(src);
     }
 }

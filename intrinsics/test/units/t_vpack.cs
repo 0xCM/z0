@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vpack : IntrinsicTest<t_vpack>
+    public class t_vpack : t_vinx<t_vpack>
     {
         public void pack32x1_basecase()
         {            

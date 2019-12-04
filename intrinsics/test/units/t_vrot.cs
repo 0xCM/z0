@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_vrot : IntrinsicTest<t_vrot>
+    public class t_vrot : t_vinx<t_vrot>
     {
         public void vrotrx_128x8u()
         {

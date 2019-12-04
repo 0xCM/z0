@@ -100,6 +100,7 @@ namespace Z0
             Disassemble(typeof(memoc));    
             Disassemble(typeof(inxoc));    
             Disassemble(typeof(gmoc));    
+            Disassemble(typeof(sinxoc));    
             Disassemble(typeof(zfoc));    
             Disassemble(typeof(bvoc));    
             Disassemble(typeof(bmoc));    

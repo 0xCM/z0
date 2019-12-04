@@ -145,8 +145,8 @@ namespace Z0
         /// <param name="cols">The number of columns in the grid</param>
         /// <param name="segwidth">The width of a storage segment</param>
         [MethodImpl(Inline)]
-        public static GridMoniker FromSpecs(ushort rows, ushort cols, ushort segwidth)
-            => new GridMoniker(rows, cols, segwidth);
+        public static GridMoniker FromSpecs(int rows, int cols, int segwidth)
+            => new GridMoniker((ushort)rows, (ushort)cols, (ushort)segwidth);
 
         /// <summary>
         /// Defines a moniker predicated on grid dimensions and parametric storage type

@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vmax : IntrinsicTest<t_vmax>
+    public class t_vmax : t_vinx<t_vmax>
     {
         public void max_128x8i()
             => max_check<sbyte>(n128);

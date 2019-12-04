@@ -5,16 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.Intrinsics;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using static HexConst;
 
-
-    public class IntrinsicFormat : IntrinsicTest<IntrinsicFormat>
+    public class t_vformat : t_vinx<t_vformat>
     {   
         public static string DescribeShuffle<T>(Vector256<T> src, byte spec, Vector256<T> dst)
             where T : unmanaged

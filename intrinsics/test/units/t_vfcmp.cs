@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vfcmp : IntrinsicTest<t_vfcmp>
+    public class t_vfcmp : t_vinx<t_vfcmp>
     {                    
         public void eq_128xf64()
             => cmp_128x64_check(FpCmpMode.EQ_OQ);
@@ -116,7 +116,7 @@ namespace Z0
                 rhs.StoreTo(ref head(rDst));
 
                 var expect = fmath.fcmp(lDst, rDst, mode);
-                var actual = dfp.vcmpf(lhs, rhs, mode);
+                var actual = fpinx.vcmpf(lhs, rhs, mode);
                 Claim.eq(expect,actual);
             }
 
@@ -136,7 +136,7 @@ namespace Z0
                 y.StoreTo(ref head(yDst));
 
                 var expect = fmath.fcmp(xDst, yDst, mode);
-                var actual = dfp.cmpf(x, y, mode);
+                var actual = fpinx.cmpf(x, y, mode);
                 Claim.eq(expect,actual);
             }
         }
@@ -155,7 +155,7 @@ namespace Z0
                 y.StoreTo(ref head(yDst));
 
                 var expect = fmath.fcmp(xDst, yDst, mode);
-                var actual = dfp.cmpf(x, y, mode);
+                var actual = fpinx.cmpf(x, y, mode);
                 Claim.eq(expect,actual);
             }
         }

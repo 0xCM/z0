@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static Vector128<float> vnand(Vector128<float> x, Vector128<float> y)
-            => dfp.vnot(And(x, y));
+            => fpinx.vnot(And(x, y));
         
         /// <summary>
         /// Computes ~(x & y) for vectors x and y
@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static Vector128<double> vnand(Vector128<double> x, Vector128<double> y)
-            => dfp.vnot(And(x, y));
+            => fpinx.vnot(And(x, y));
 
         /// <summary>
         /// Computes ~(x & y) for vectors x and y
@@ -188,7 +188,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static Vector256<float> vnand(Vector256<float> x, Vector256<float> y)
-            => dfp.vnot(And(x, y));
+            => fpinx.vnot(And(x, y));
         
         /// <summary>
         /// Computes ~(x & y) for vectors x and y
@@ -197,7 +197,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static Vector256<double> vnand(Vector256<double> x, Vector256<double> y)
-            => dfp.vnot(And(x, y));
+            => fpinx.vnot(And(x, y));
 
    }
 

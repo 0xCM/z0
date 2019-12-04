@@ -10,7 +10,7 @@ namespace Z0
     using static zfunc;
     using static HexConst;
 
-    public class t_vspread : IntrinsicTest<t_vspread>
+    public class t_vspread : t_vinx<t_vspread>
     {     
 
         public void vmaskstore_128x8u_basecase()

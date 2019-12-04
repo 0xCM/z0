@@ -24,46 +24,17 @@ namespace Z0
         public static T scatter<T>(T src, T mask)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return scatter_u(src,mask);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return scatter_i(src,mask);
-            else 
-                throw unsupported<T>();
-        }           
-
-        [MethodImpl(Inline)]
-        static T scatter_i<T>(T src, T mask)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(Bits.scatter(int8(src), int8(mask)));
-            else if(typeof(T) == typeof(short))
-                return generic<T>(Bits.scatter(int16(src), int16(mask)));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(Bits.scatter(int32(src), int32(mask)));
-            else 
-                return generic<T>(Bits.scatter(int64(src), int64(mask)));
-        }           
-
-        [MethodImpl(Inline)]
-        static T scatter_u<T>(T src, T mask)
-            where T : unmanaged
-        {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.scatter(uint8(src), uint8(mask)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(Bits.scatter(uint16(src), uint16(mask)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(Bits.scatter(uint32(src), uint32(mask)));
-            else 
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.scatter(uint64(src), uint64(mask)));
+            else            
+                throw unsupported<T>();
         }           
+
     }
 }

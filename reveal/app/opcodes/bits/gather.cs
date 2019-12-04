@@ -22,7 +22,7 @@ namespace Z0
             => Bits.gather(src,mask);
 
         public static byte gather_g8u(byte src, byte mask)
-            => gbits.gather(in src,in mask);
+            => gbits.gather(src,mask);
 
         public static ushort gather_d16u(ushort src, ushort mask)
             => Bits.gather(src,mask);
@@ -34,13 +34,13 @@ namespace Z0
             => Bits.gather(src,mask);
 
         public static uint gather_g32u(uint src, uint mask)
-            => gbits.gather(in src,in mask);
+            => gbits.gather(src,mask);
 
         public static ulong gather_d64u(ulong src, ulong mask)
             => Bits.gather(src,mask);
 
         public static ulong gather_g64u(ulong src, ulong mask)
-            => gbits.gather(in src,in mask);
+            => gbits.gather(src,mask);
 
     }
 

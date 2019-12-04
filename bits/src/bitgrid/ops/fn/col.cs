@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit col<T>(BitGrid16<N1,N16,T> g, int index)
             where T : unmanaged
-                => Bits.gather(g, BitMask.Lsb16x1 << index) == 1;            
+                => (bit)(g.Data & (BitMask.Lsb16x1 << index));
 
         /// <summary>
         /// Extracts an index-identifed 2-bit grid column
@@ -33,8 +33,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<N2,byte> col<T>(BitGrid16<N2,N8,T> g, int index)
             where T : unmanaged
-                => (byte)Bits.gather(g, BitMask.Lsb16x2 << index);            
-
+                => (byte)Bits.gather(g, (uint)(BitMask.Lsb16x2 << index));            
+                
         /// <summary>
         /// Extracts an index-identifed 8-bit grid column
         /// </summary>
@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<N8,byte> col<T>(BitGrid16<N8,N2,T> g, int index)
             where T : unmanaged
-                => (byte)Bits.gather(g, BitMask.Lsb16x8 << index);            
+                => (byte)Bits.gather(g, (uint)(BitMask.Lsb16x8 << index));            
 
         /// <summary>
         /// Extracts an index-identifed 4-bit grid column
@@ -55,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<N4,byte> col<T>(BitGrid16<N4,N4,T> g, int index)
             where T : unmanaged
-                => (byte)Bits.gather(g, BitMask.Lsb16x4 << index);            
+                => (byte)Bits.gather(g, (uint)(BitMask.Lsb16x4 << index));            
 
         /// <summary>
         /// Extracts an index-identifed 1-bit grid column

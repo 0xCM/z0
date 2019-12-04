@@ -13,7 +13,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vand : IntrinsicTest<t_vand>
+    public class t_vand : t_vinx<t_vand>
     {
         public void vand_128x8i()
             => vand_128_check<sbyte>();

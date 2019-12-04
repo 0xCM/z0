@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vgather : IntrinsicTest<t_vgather>
+    public class t_vgather : t_vinx<t_vgather>
     {
 
         public void vgather_128_basecase()

@@ -12,7 +12,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class dfp
+    partial class fpinx
     {
         /// <summary>
         /// __m256 _mm256_broadcast_ss (float const * mem_addr) VBROADCASTSS ymm, m32

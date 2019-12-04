@@ -37,7 +37,7 @@ namespace Z0
         public static ref readonly BitGrid16<T> broadcast<T>(T cell, out BitGrid16<T> dst)    
             where T : unmanaged
         {
-            dst = zfunc.broadcast(cell, out ushort _);
+            dst = zbroadcast(cell, out ushort _);
             return ref dst;
         }
 
@@ -65,7 +65,7 @@ namespace Z0
         public static ref readonly BitGrid32<T> broadcast<T>(T cell, out BitGrid32<T> dst)    
             where T : unmanaged
         {
-            dst = zfunc.broadcast(cell, out uint _);
+            dst = zbroadcast(cell, out uint _);
             return ref dst;
         }
 
@@ -93,7 +93,7 @@ namespace Z0
         public static ref readonly BitGrid64<T> broadcast<T>(T cell, out BitGrid64<T> dst)    
             where T : unmanaged
         {
-            dst = zfunc.broadcast(cell, out ulong _);
+            dst = zbroadcast(cell, out ulong _);
             return ref dst;
         }
 

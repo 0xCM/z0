@@ -10,7 +10,7 @@ namespace Z0
     using static zfunc;
     using static HexConst;
 
-    public class t_varrange : IntrinsicTest<t_varrange>
+    public class t_varrange : t_vinx<t_varrange>
     {     
 
         public void duplicate32x0_256x32u_basecase()

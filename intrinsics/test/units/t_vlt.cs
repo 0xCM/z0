@@ -5,16 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.Intrinsics;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.IO;
     
     using static zfunc;
 
-
-    public class t_vlt : IntrinsicTest<t_vlt>
+    public class t_vlt : t_vinx<t_vlt>
     {        
         public void vlt_128x8i()
             => vlt_check<sbyte>(n128);

@@ -13,7 +13,7 @@ namespace Z0
     using static As;
     using static zfunc;    
 
-    partial class dfp
+    partial class fpinx
     {
         /// <summary>
         /// __m256 _mm256_moveldup_ps (__m256 a) VMOVSLDUP ymm, ymm/m256

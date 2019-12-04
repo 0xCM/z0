@@ -10,7 +10,7 @@ namespace Z0
     using static zfunc;
     using static HexConst;
 
-    public class t_vblend : IntrinsicTest<t_vblend>
+    public class t_vblend : t_vinx<t_vblend>
     {
         
         public void vblend_32x8_256x32u_basecase()

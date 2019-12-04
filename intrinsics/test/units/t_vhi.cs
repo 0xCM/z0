@@ -12,7 +12,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vhi : IntrinsicTest<t_vhi>
+    public class t_vhi : t_vinx<t_vhi>
     {   
 
         public void vhi_128x8u()

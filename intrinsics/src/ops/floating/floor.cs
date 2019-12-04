@@ -17,7 +17,7 @@ namespace Z0
     using static As;
     using static AsIn;
 
-    partial class dfp
+    partial class fpinx
     {
         /// <summary>
         /// __m128 _mm_floor_ps (__m128 a) ROUNDPS xmm, xmm/m128, imm8(9)

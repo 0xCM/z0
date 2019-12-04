@@ -11,7 +11,7 @@ namespace Z0.Test
 
     using static zfunc;
 
-    public class t_vavg : IntrinsicTest<t_vavg>
+    public class t_vavg : t_vinx<t_vavg>
     {     
         public void vavg_256x8u_check()
         {            

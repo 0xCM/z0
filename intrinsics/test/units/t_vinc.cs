@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vinc : IntrinsicTest<t_vinc>
+    public class t_vinc : t_vinx<t_vinc>
     {
         public void vinc_128x8u()
             => inc_check<byte>(n128);

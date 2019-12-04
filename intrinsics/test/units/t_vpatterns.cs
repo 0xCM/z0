@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vpatterns : IntrinsicTest<t_vpatterns>
+    public class t_vpatterns : t_vinx<t_vpatterns>
     {
         public void vones_128()
         {

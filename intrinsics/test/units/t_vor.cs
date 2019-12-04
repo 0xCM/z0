@@ -9,7 +9,7 @@ namespace Z0
     using static zfunc;
     using D = GDel;
 
-    public class t_vor : IntrinsicTest<t_vor>
+    public class t_vor : t_vinx<t_vor>
     {
 
         public void vor_128x8i()

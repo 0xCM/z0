@@ -13,7 +13,7 @@ namespace Z0.Test
     using static zfunc;
 
 
-    public class t_vabs : IntrinsicTest<t_vabs>
+    public class t_vabs : t_vinx<t_vabs>
     {
 
         public void vabs_256x64()

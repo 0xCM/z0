@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vnot : IntrinsicTest<t_vnot>
+    public class t_vnot : t_vinx<t_vnot>
     {
         public void vnot_128x8i()
             => vnot_check<sbyte>(n128);

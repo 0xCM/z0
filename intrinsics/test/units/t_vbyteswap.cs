@@ -5,14 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
     using static zfunc;
 
-    public class t_vbyteswap : IntrinsicTest<t_vbyteswap>
+    public class t_vbyteswap : t_vinx<t_vbyteswap>
     {   
         public void vbyteswap_basecase()
         {
@@ -47,18 +45,10 @@ namespace Z0
             
             var z32 = dinx.vbyteswap(x32);
             Claim.eq(y32,z32);
-
         }
-        
-        public void vbyteswap_16()
-        {
-            for(var i=0; i< SampleSize; i++)
-            {
-                var a = Random.Next<ushort>();
-                var b = bswap(bswap(a));
-                Claim.eq(a,b);
-            }
 
+        public void vbyteswap_128x16()
+        {
             for(var i=0; i< SampleSize; i++)
             {
                 var a = Random.CpuVector<ushort>(n128);
@@ -68,7 +58,10 @@ namespace Z0
                 for(var j = 0; j<sa.Length; j++)
                     Claim.eq(bswap(sa[j]), sb[j]);
             }
+        }
 
+        public void vbyteswap_256x16()
+        {
             for(var i=0; i< SampleSize; i++)
             {
                 var a = Random.CpuVector<ushort>(n256);
@@ -78,10 +71,19 @@ namespace Z0
                 for(var j = 0; j<sa.Length; j++)
                     Claim.eq(bswap(sa[j]), sb[j]);
             }
-
         }
 
-        public void vbyteswap_32()
+        public void sbyteswap_16()
+        {
+            for(var i=0; i< SampleSize; i++)
+            {
+                var a = Random.Next<ushort>();
+                var b = bswap(bswap(a));
+                Claim.eq(a,b);
+            }
+        }
+
+        public void sbyteswap_32()
         {
             
             for(var i=0; i< SampleSize; i++)
@@ -90,7 +92,10 @@ namespace Z0
                 var b = bswap(bswap(a));
                 Claim.eq(a,b);
             }
+        }
 
+        public void vbyteswap_128x32()
+        {
             for(var i=0; i< SampleSize; i++)
             {
                 var a = Random.CpuVector<uint>(n128);
@@ -100,7 +105,10 @@ namespace Z0
                 for(var j = 0; j<sa.Length; j++)
                     Claim.eq(bswap(sa[j]), sb[j]);
             }
+        }
 
+        public void vbyteswap_256x32()
+        {
             for(var i=0; i< SampleSize; i++)
             {
                 var a = Random.CpuVector<uint>(n256);
@@ -110,10 +118,9 @@ namespace Z0
                 for(var j = 0; j<sa.Length; j++)
                     Claim.eq(bswap(sa[j]), sb[j]);
             }
-
         }
 
-        public void vbyteswap_64()
+        public void sbyteswap_64()
         {
             var a = (ulong)uint.MaxValue << 32;
             var b = (ulong)uint.MaxValue;
@@ -126,7 +133,10 @@ namespace Z0
                 var y = bswap(bswap(x));
                 Claim.eq(x,y);
             }
+        }
 
+        public void vbyteswap_128x64()
+        {
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.CpuVector<ulong>(n128);
@@ -136,6 +146,10 @@ namespace Z0
                 for(var j = 0; j<xs.Length; j++)
                     Claim.eq(bswap(xs[j]), ys[j]);
             }
+        }
+
+        public void vbyteswap_256x64()
+        {
 
             for(var i=0; i< SampleSize; i++)
             {
@@ -146,9 +160,6 @@ namespace Z0
                 for(var j = 0; j<xs.Length; j++)
                     Claim.eq(bswap(xs[j]), ys[j]);
             }
-
         }
-
     }
-
 }

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Linq;
+    using System.Reflection;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
@@ -195,6 +196,37 @@ namespace Z0
 
             }
         }
+
+        /// <summary>
+        /// Constructs a uri for a local method
+        /// </summary>
+        /// <param name="m">The local method</param>
+        /// <param name="parent">The parent method name</param>
+        protected static string LocalUri(MethodInfo m, string parent)   
+        {
+            var localName = m.Name.Replace($"<{parent}>",string.Empty).Replace("g__", string.Empty);
+            var pipeidx = localName.TryGetFirstIndexOf(AsciSym.Pipe);
+            pipeidx.OnSome(idx => localName = localName.Substring(0,idx));   
+            return $"{m.DeclaringType.DisplayName()}/{parent}/{localName}";
+
+        }
+
+        protected void RunLocals([CallerMemberName] string parent = null, string localbase = "case")
+        {
+            var methods = GetType().Methods().WithNameLike($"__{localbase}").Where(m => m.Name.Contains(parent));
+            foreach(var local in methods)
+            {
+                var uri = LocalUri(local,parent); 
+                
+                local.Invoke(this, new object[]{});
+                
+                Trace($"{uri} executed");
+            }
+        }
+
+        protected void RunLocals(MethodBase parent, string localbase = "case")
+            => RunLocals(parent.Name, localbase);
+
 
         protected void opcheck<K>(BinaryOp<K> baseline, BinaryOp<K> subject) 
             where K : unmanaged

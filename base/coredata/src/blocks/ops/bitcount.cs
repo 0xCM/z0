@@ -13,6 +13,17 @@ namespace Z0
     partial class DataBlocks
     {
         /// <summary>
+        /// Computes the number of bits covered by parametric row/col types
+        /// </summary>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The col coun type</typeparam>
+        [MethodImpl(Inline)]
+        public static int bitcount<M,N>(M m = default, N n = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+                => NatMath.mul(m,n);
+
+        /// <summary>
         /// Computes the number of bits covered by a specified cell count and width
         /// </summary>
         /// <param name="cellcount">The number of allocated cells</param>

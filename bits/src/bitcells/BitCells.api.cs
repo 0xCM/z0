@@ -238,6 +238,11 @@ namespace Z0
                 => 256 / bitsize<T>();
 
         [MethodImpl(Inline)]
+        public static void and<T>(in BitCells<T> x, in BitCells<T> y, ref BitCells<T> z)        
+            where T : unmanaged
+                => vblock.and(n256, x.BlockCount, stepsize<T>(), in x.Head, y.Head, ref z.Head);
+
+        [MethodImpl(Inline)]
         public static BitCells<T> and<T>(in BitCells<T> x,in BitCells<T> y)
             where T : unmanaged
         {
@@ -245,11 +250,6 @@ namespace Z0
             and(x,y,ref z);
             return z;
         }
-
-        [MethodImpl(Inline)]
-        public static void and<T>(in BitCells<T> x, in BitCells<T> y, ref BitCells<T> z)        
-            where T : unmanaged
-                => vblock.and(n256, x.BlockCount, stepsize<T>(), in x.Head, y.Head, ref z.Head);
 
         /// <summary>
         /// Computes the scalar product between this vector and another of identical length

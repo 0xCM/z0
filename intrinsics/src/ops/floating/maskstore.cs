@@ -12,7 +12,7 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class dfp
+    partial class fpinx
     {
         /// <summary>
         /// void _mm_maskstore_ps (float * mem_addr, __m128i mask, __m128 a) VMASKMOVPS m128, xmm, xmm

@@ -12,10 +12,20 @@ namespace Z0
 
     partial class BitGrid
     {                
+        [MethodImpl(Inline)]
+        public static BitGrid64<N16,N4,ushort> cells(N64 w, N16 m, N4 n, 
+            ushort x0, ushort x1, ushort x2, ushort x3)
+                => first(DataBlocks.cells(w, x0,x1,x2,x3),m, n);
+
+
+        [MethodImpl(Inline)]
+        public static BitGrid64<N4,N16,ulong> cells(N64 w, N4 m, N16 n, ulong src)
+            => DataBlocks.cells(w, src);
 
         [MethodImpl(Inline)]
         public static BitGrid128<N8,N16,ushort> cells(N128 w, N8 m, N16 n, 
-            ushort x0, ushort x1, ushort x2, ushort x3, ushort x4, ushort x5, ushort x6, ushort x7)
+            ushort x0, ushort x1, ushort x2, ushort x3, 
+            ushort x4, ushort x5, ushort x6, ushort x7)
                 => first(DataBlocks.cells(w, x0,x1,x2,x3,x4,x5,x6,x7),m,n);
 
         [MethodImpl(Inline)]

@@ -23,6 +23,40 @@ partial class zfunc
             => src.GetElement(index);
 
     /// <summary>
+    /// Extracts the first component of the source vector
+    /// </summary>
+    /// <param name="src">The source vector</param>
+    /// <typeparam name="T">The primal component type</typeparam>
+    [MethodImpl(Inline)]
+    public static T vhead<T>(Vector128<T> src)
+        where T : unmanaged
+            => vcell(src,0);
+
+    /// <summary>
+    /// Extracts a T-indexed component from a vector obtained by converting the S-vector to a T-vector
+    /// </summary>
+    /// <param name="src">The source vector</param>
+    /// <param name="index">The index of the component to extract</param>
+    /// <typeparam name="T">The primal component type</typeparam>
+    [MethodImpl(Inline)]
+    public static T vcell<S,T>(Vector128<S> src, int index)
+        where S : unmanaged
+        where T : unmanaged
+            => src.As<S,T>().GetElement(index);
+
+    /// <summary>
+    /// Extracts the first T-indexed component after converting the S-vector to a T-vector
+    /// </summary>
+    /// <param name="src">The source vector</param>
+    /// <param name="index">The index of the component to extract</param>
+    /// <typeparam name="T">The primal component type</typeparam>
+    [MethodImpl(Inline)]
+    public static T vhead<S,T>(Vector128<S> src)
+        where S : unmanaged
+        where T : unmanaged
+            => vcell<S,T>(src,0);
+
+    /// <summary>
     /// Sets an index-identified component to a specified value
     /// </summary>
     /// <param name="src">The source vector</param>

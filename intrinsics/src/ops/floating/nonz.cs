@@ -13,7 +13,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class dfp
+    partial class fpinx
     {
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise

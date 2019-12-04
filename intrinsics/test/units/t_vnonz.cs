@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vnonz : IntrinsicTest<t_vnonz>
+    public class t_vnonz : t_vinx<t_vnonz>
     {
         public void vnonz_basecase()
         {

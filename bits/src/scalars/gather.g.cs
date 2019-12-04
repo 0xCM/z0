@@ -26,17 +26,17 @@ namespace Z0
         /// <param name="src">The source vale</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static T gather<T>(in T src, in T mask)
+        public static T gather<T>(T src, T mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.gather(uint8(in src), uint8(in mask)));
+                return generic<T>(Bits.gather(uint8(src), uint8(mask)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.gather(uint16(in src), uint16(in mask)));
+                return generic<T>(Bits.gather(uint16(src), uint16(mask)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.gather(uint32(in src), uint32(in mask)));
+                return generic<T>(Bits.gather(uint32(src), uint32(mask)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.gather(uint64(in src), uint64(in mask)));
+                return generic<T>(Bits.gather(uint64(src), uint64(mask)));
             else            
                 throw unsupported<T>();
         }           

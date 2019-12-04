@@ -14,34 +14,91 @@ namespace Z0
     using static As;
 
     partial class BitVector
-    {
+    {        
+        /// <summary>
+        /// Creates an 8-bit vector by concatenating a pair of 4-bit vectors
+        /// </summary>
+        /// <param name="lo">The lower bits of the new vector</param>
+        /// <param name="hi">The upper bits of the new vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector8 concat(BitVector4 lo, BitVector4 hi)
+            => from(n8,hi.data << 4 | lo.data);
+
+        /// <summary>
+        /// Creates a 16-bit vector by concatenating 4 4-bit vectors
+        /// </summary>
+        /// <param name="x0">The first segment that froms the least significant bits of the new vector</param>
+        /// <param name="x1">The second segment</param>
+        /// <param name="x2">The third segment</param>
+        /// <param name="x3">The last segment that forms the most significant bits of the new vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector16 concat(BitVector4 x0, BitVector4 x1, BitVector4 x2, BitVector4 x3)
+            => concat(concat(x0,x1), concat(x2,x3));
+
+        /// <summary>
+        /// Creates an 16-bit vector by concatenating a pair of 8-bit vectors
+        /// </summary>
+        /// <param name="lo">The lower bits of the new vector</param>
+        /// <param name="hi">The upper bits of the new vector</param>
         [MethodImpl(Inline)]
         public static BitVector16 concat(BitVector8 lo, BitVector8 hi)
             => from(n16, lo.data, hi.data);
 
+        /// <summary>
+        /// Creates a 32-bit vector by concatenating a pair of 16-bit vectors
+        /// </summary>
+        /// <param name="lo">The lower bits of the new vector</param>
+        /// <param name="hi">The upper bits of the new vector</param>
         [MethodImpl(Inline)]
         public static BitVector32 concat(BitVector16 lo, BitVector16 hi)
             => from(n32, lo.data, hi.data);
 
+        /// <summary>
+        /// Creates a 32-bit vector by concatenating 4 8-bit vectors
+        /// </summary>
+        /// <param name="x0">The first segment that froms the least significant bits of the new vector</param>
+        /// <param name="x1">The second segment</param>
+        /// <param name="x2">The third segment</param>
+        /// <param name="x3">The last segment that forms the most significant bits of the new vector</param>
         [MethodImpl(Inline)]
         public static BitVector32 concat(BitVector8 x0, BitVector8 x1, BitVector8 x2,  BitVector8 x3)
             => from(n32, x0.data, x1.data, x2.data, x3.data);
 
+        /// <summary>
+        /// Creates a 64-bit vector by concatenating 8 8-bit vectors
+        /// </summary>
+        /// <param name="x0">The first segment that froms the least significant bits of the new vector</param>
+        /// <param name="x1">The second segment</param>
+        /// <param name="x2">The third segment</param>
+        /// <param name="x3">The fourth segment</param>
+        /// <param name="x4">The fifth segment</param>
+        /// <param name="x5">The sixth segment</param>
+        /// <param name="x6">The pentultimate segment</param>
+        /// <param name="x3">The last segment that forms the most significant bits of the new vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector64 concat(BitVector8 x0, BitVector8 x1, BitVector8 x2,  BitVector8 x3, 
+            BitVector8 x4, BitVector8 x5, BitVector8 x6,  BitVector8 x7)
+                => concat(concat(x0,x1,x2,x3),concat(x4,x5,x6,x7));
+
+        /// <summary>
+        /// Creates a 64-bit vector by concatenating 4 16-bit vectors
+        /// </summary>
+        /// <param name="x0">The first segment that forms the least significant bits of the new vector</param>
+        /// <param name="x1">The second segment</param>
+        /// <param name="x2">The third segment</param>
+        /// <param name="x3">The last segment that forms the most significant bits of the new vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 concat(BitVector16 x0, BitVector16 x1, BitVector16 x2, BitVector16 x3)
             => from(n64, x0.data, x1.data, x2.data, x3.data);
 
+        /// <summary>
+        /// Creates a 64-bit vector by concatenating a pair of 32-bit vectors
+        /// </summary>
+        /// <param name="lo">The lower bits of the new vector</param>
+        /// <param name="hi">The upper bits of the new vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 concat(BitVector32 lo, BitVector32 hi)
             => from(n64, lo.data, hi.data);
-
-        [MethodImpl(Inline)]
-        public static BitVector128 concat(BitVector64 lo, BitVector64 hi)
-            => from(n128, lo.data, hi.data);
-
-        [MethodImpl(Inline)]
-        public static BitVector128 concat(BitVector32 x0, BitVector32 x1, BitVector32 x2, BitVector32 x3)
-            => from(n128, x0.data, x1.data, x2.data, x3.data);
 
     }
 

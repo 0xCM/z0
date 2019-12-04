@@ -104,7 +104,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="M">The type of the first dimension</typeparam>
     /// <typeparam name="N">The type of the second dimension</typeparam>
-    public readonly struct Dim<M,N> : IDim2
+    public readonly struct Dim<M,N> : IDim2, IDim<M,N>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
     {        

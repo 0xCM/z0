@@ -23,9 +23,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dfp.vbroadcast(n256,-0.0f));
+                return vgeneric<T>(fpinx.vbroadcast(n256,-0.0f));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dfp.vbroadcast(n256,-0.0));
+                return vgeneric<T>(fpinx.vbroadcast(n256,-0.0));
             else 
                 return default;
         }

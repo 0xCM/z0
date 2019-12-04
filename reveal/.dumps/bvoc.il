@@ -1,4 +1,4 @@
-// 2019-12-02 13:14:43:031
+// 2019-12-03 18:10:51:228
 uint pop_3x128(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
 {
     IL_0000: ldarg.0
@@ -968,18 +968,22 @@ ref ulong bitmask_set(ref ulong src, byte pos, bit state)
 {
     IL_0000: ldarg.2
     IL_0001: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_0006: brfalse.s IL_0012
+    IL_0006: brfalse.s IL_0014
     IL_0008: ldarg.0
-    IL_0009: ldarg.1
-    IL_000A: call System.UInt64& Z0.BitMask::enable(System.UInt64&,System.Int32)
-    IL_000F: pop
-    IL_0010: br.s IL_001A
-    IL_0012: ldarg.0
-    IL_0013: ldarg.1
-    IL_0014: call System.UInt64& Z0.BitMask::disable(System.UInt64&,System.Int32)
-    IL_0019: pop
-    IL_001A: ldarg.0
-    IL_001B: ret
+    IL_0009: ldarg.0
+    IL_000A: ldind.i8
+    IL_000B: ldarg.1
+    IL_000C: call System.UInt64 Z0.BitMask::enable(System.UInt64,System.Int32)
+    IL_0011: stind.i8
+    IL_0012: br.s IL_001E
+    IL_0014: ldarg.0
+    IL_0015: ldarg.0
+    IL_0016: ldind.i8
+    IL_0017: ldarg.1
+    IL_0018: call System.UInt64 Z0.BitMask::disable(System.UInt64,System.Int32)
+    IL_001D: stind.i8
+    IL_001E: ldarg.0
+    IL_001F: ret
 
 }
 byte blsmsk_d8u(byte src)
@@ -1029,10 +1033,10 @@ byte gather_d8u(byte src, byte mask)
 }
 byte gather_g8u(byte src, byte mask)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarga.s mask
-    IL_0004: call System.Byte Z0.gbits::gather<System.Byte>(System.Byte&,System.Byte&)
-    IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Byte Z0.gbits::gather<System.Byte>(System.Byte,System.Byte)
+    IL_0007: ret
 
 }
 ushort gather_d16u(ushort src, ushort mask)
@@ -1045,10 +1049,10 @@ ushort gather_d16u(ushort src, ushort mask)
 }
 ushort gather_g16u(ushort src, ushort mask)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarga.s mask
-    IL_0004: call System.UInt16 Z0.gbits::gather<System.UInt16>(System.UInt16&,System.UInt16&)
-    IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt16 Z0.gbits::gather<System.UInt16>(System.UInt16,System.UInt16)
+    IL_0007: ret
 
 }
 uint gather_d32u(uint src, uint mask)
@@ -1061,10 +1065,10 @@ uint gather_d32u(uint src, uint mask)
 }
 uint gather_g32u(uint src, uint mask)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarga.s mask
-    IL_0004: call System.UInt32 Z0.gbits::gather<System.UInt32>(System.UInt32&,System.UInt32&)
-    IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt32 Z0.gbits::gather<System.UInt32>(System.UInt32,System.UInt32)
+    IL_0007: ret
 
 }
 ulong gather_d64u(ulong src, ulong mask)
@@ -1077,10 +1081,10 @@ ulong gather_d64u(ulong src, ulong mask)
 }
 ulong gather_g64u(ulong src, ulong mask)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarga.s mask
-    IL_0004: call System.UInt64 Z0.gbits::gather<System.UInt64>(System.UInt64&,System.UInt64&)
-    IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt64 Z0.gbits::gather<System.UInt64>(System.UInt64,System.UInt64)
+    IL_0007: ret
 
 }
 uint max_val_nbv_4()

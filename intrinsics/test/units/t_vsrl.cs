@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_vsrl : IntrinsicTest<t_vsrl>
+    public class t_vsrl : t_vinx<t_vsrl>
     {
         public void vsrl_128x8u()
             => vsrl_check<byte>(n128);

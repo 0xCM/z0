@@ -18,7 +18,7 @@ partial class zfunc
     /// <param name="dst">The target value</param>
     /// <typeparam name="S">The source type</typeparam>
     /// <typeparam name="T">The target type</typeparam>
-    public static ref T broadcast<S,T>(S src, out T dst)
+    public static ref T zbroadcast<S,T>(S src, out T dst)
         where S : unmanaged
         where T : unmanaged
     {

@@ -8,7 +8,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_vxor : IntrinsicTest<t_vxor>
+    public class t_vxor : t_vinx<t_vxor>
     {
         public void vxor_128x8i()
             => vxor_check<sbyte>(n128);

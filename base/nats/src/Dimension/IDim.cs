@@ -38,6 +38,23 @@ namespace Z0
         ulong J {get;}   
     }
 
+    public interface IDim<M,N>
+        where M : unmanaged, ITypeNat
+        where N : unmanaged, ITypeNat
+    {
+
+        /// <summary>
+        /// Specifies the first component of the dimension
+        /// </summary>
+        int RowCount => nfunc.nati<M>();
+        
+        /// <summary>
+        /// Specifies the second component of the dimension
+        /// </summary>
+        int ColCount => nfunc.nati<M>();
+
+    }
+
     public interface IDim3 : IDim
     {
         ulong I {get;}   

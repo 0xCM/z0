@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vinsert : IntrinsicTest<t_vinsert>
+    public class t_vinsert : t_vinx<t_vinsert>
     {
         public void vinsert_128x8i()
             => vinsert_check<sbyte>(n128);            

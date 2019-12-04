@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vcover : IntrinsicTest<t_vcover>
+    public class t_vcover : t_vinx<t_vcover>
     {
         public void vcover_basecase()
         {            

@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vmovemask : IntrinsicTest<t_vmovemask>
+    public class t_vmovemask : t_vinx<t_vmovemask>
     {
         public void pack_test()
         {
@@ -107,7 +107,7 @@ namespace Z0
                     if(BitMask.test(srcSpan[r], 31))
                         BitVector.enable(mmExpect,r);
                 
-                var mmActual = dfp.vmovemask(srcVector).ToBitVector(n32);
+                var mmActual = fpinx.vmovemask(srcVector).ToBitVector(n32);
                 Claim.yea(mmExpect == mmActual);
             }
         }
@@ -126,7 +126,7 @@ namespace Z0
                     if(BitMask.test(srcSpan[r], 63))
                         BitVector.enable(mmExpect,r);
                 
-                var mmActual = dfp.vmovemask(srcVector).ToBitVector(n32);
+                var mmActual = fpinx.vmovemask(srcVector).ToBitVector(n32);
                 Claim.yea(mmExpect == mmActual);
             }
         }

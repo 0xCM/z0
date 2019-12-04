@@ -21,7 +21,7 @@ namespace Z0
     using static As;
     using static zfunc;    
 
-    partial class dfp
+    partial class fpinx
     {
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector

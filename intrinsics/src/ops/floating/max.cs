@@ -14,7 +14,7 @@ namespace Z0
     using static As;
     using static zfunc;    
 
-    partial class dfp
+    partial class fpinx
     {
         ///  __m128 _mm_max_ps (__m128 a, __m128 b) MAXPS xmm, xmm/m128
         /// </summary>

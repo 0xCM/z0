@@ -100,7 +100,7 @@ namespace Z0
         public int BitCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.pointcount<M,N>(); 
+            get => BitCalcs.bitcount<M,N>(); 
         }
 
         public bit this[int row, int col]

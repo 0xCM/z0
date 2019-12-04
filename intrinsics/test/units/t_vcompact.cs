@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vcompact : IntrinsicTest<t_vcompact>
+    public class t_vcompact : t_vinx<t_vcompact>
     {
         public void vcompact_2x128x64u_128x32u()
         {

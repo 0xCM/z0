@@ -12,10 +12,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using static zfunc;
 
-    public static partial class dinx
-    {
-
-    }
 
     /// <summary>
     /// Namescope for custom intrinsic operators
@@ -25,15 +21,6 @@ namespace Z0
 
     }
 
-    /// <summary>
-    /// Defines direct floating-point operations
-    /// </summary>
-    public static partial class dfp
-    {
-        [MethodImpl(Inline)]
-        static FloatComparisonMode fpmode(FpCmpMode m)
-            => (FloatComparisonMode)m;
-    }
 
     public static partial class dfpx
     {
@@ -41,6 +28,17 @@ namespace Z0
 
     }
 
+    /// <summary>
+    /// Direct vectorized intrinsics
+    /// </summary>
+    public static partial class dinx
+    {
+
+    }
+
+    /// <summary>
+    /// Generic vectorized intrinsics
+    /// </summary>
     public static partial class ginx
     {        
         public static IEnumerable<MethodInfo> BinOps()
@@ -50,11 +48,20 @@ namespace Z0
 
     }
 
+    /// <summary>
+    /// Direct vectorized floating-point intrinsics
+    /// </summary>
+    public static partial class fpinx
+    {
+        [MethodImpl(Inline)]
+        static FloatComparisonMode fpmode(FpCmpMode m)
+            => (FloatComparisonMode)m;
+    }
 
     /// <summary>
-    /// Continer for internal helpers
+    /// Generic floating-point intrinsics
     /// </summary>
-    internal static partial class aux
+    public static partial class gfpinx
     {
 
     }
@@ -62,6 +69,30 @@ namespace Z0
     public static partial class vblock
     {
         
+    }
+
+    /// <summary>
+    /// Direct scalar intrinsics
+    /// </summary>
+    public static partial class sinx
+    {
+
+    }
+
+    /// <summary>
+    /// Generic scalar intrinsics
+    /// </summary>
+    public static partial class gsinx
+    {
+
+    }
+
+    /// <summary>
+    /// Internal helpers
+    /// </summary>
+    internal static partial class aux
+    {
+
     }
 
 }

@@ -12,7 +12,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;    
     using static zfunc;    
 
-    partial class dfp
+    partial class fpinx
     {
         /// <summary>
         /// __m128 _mm_dp_ps (__m128 a, __m128 b, const int imm8) DPPS xmm, xmm/m128, imm8

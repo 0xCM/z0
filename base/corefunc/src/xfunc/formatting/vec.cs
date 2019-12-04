@@ -10,15 +10,11 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Text.RegularExpressions;
-    using System.Text;
 
     using static zfunc;
-    using static nfunc;
 
     partial class xfunc
     {
-
         /// <summary>
         /// Formats a stream as a vector
         /// </summary>
@@ -27,7 +23,6 @@ namespace Z0
         /// <typeparam name="T">The item type</typeparam>
         public static string FormatAsVector<T>(this IEnumerable<T> src, string sep = ", ")
             => AsciSym.Lt + string.Join(sep, src.Select(x => x.ToString())).TrimEnd() + AsciSym.Gt;
-
 
         /// <summary>
         /// Formats a readonly span as a vector

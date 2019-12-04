@@ -14,7 +14,6 @@ namespace Z0
     
     partial class vblock
     {     
-
         [MethodImpl(Inline)]
         public static Vector128<T> vand<T>(N128 n, in T a, in T b)
             where T : unmanaged

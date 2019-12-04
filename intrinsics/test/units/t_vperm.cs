@@ -12,7 +12,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vperm : IntrinsicTest<t_vperm>
+    public class t_vperm : t_vinx<t_vperm>
     {
         public void vperm_4x16()
         {

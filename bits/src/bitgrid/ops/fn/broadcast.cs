@@ -29,7 +29,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            dst = zfunc.broadcast(cell, out uint _);
+            dst = zbroadcast(cell, out uint _);
             return ref dst;
         }
 
@@ -47,7 +47,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            dst = zfunc.broadcast(cell, out ulong _);
+            dst = zbroadcast(cell, out ulong _);
             return ref dst;
         }
 

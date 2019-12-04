@@ -10,9 +10,165 @@ namespace Z0
     
     using static zfunc;
 
-    public abstract class IntrinsicTest<X> : UnitTest<X>
-        where X : IntrinsicTest<X>
+
+    /// <summary>
+    /// Base type for vectorized intrinsic tests
+    /// </summary>
+    /// <typeparam name="X">The concrete subtype</typeparam>
+    public abstract class t_vinx<X> : t_inx<X>
+        where X : t_vinx<X>
     {
+        public static void VerifyUnaryOp<T>(IPolyrand random, int blocks, Vector128UnaryOp<T> inXOp, Func<T,T> primalOp)
+            where T : unmanaged
+        {
+            
+            var src = random.Blocks<T>(n128,blocks).ReadOnly();
+            var blocklen = src.BlockLength;
+            Claim.eq(blocks*blocklen,src.CellCount);
+                        
+            var expect = DataBlocks.alloc<T>(n128,blocks);
+            Claim.eq(blocks, expect.BlockCount);
+
+            var actual = DataBlocks.alloc<T>(n128,blocks);
+            Claim.eq(blocks, actual.BlockCount);
+
+            var tmp = new T[blocklen];
+            
+            for(var block = 0; block < blocks; block++)
+            {
+                var offset = block*blocklen;
+                for(var i =0; i<blocklen; i++)
+                    tmp[i] = primalOp(src[offset + i]);
+
+                var vExpect = ginx.vload<T>(n128, in head(tmp));
+             
+                var vX = src.LoadVector(block);
+                var vActual = inXOp(vX);
+
+                Claim.eq(vExpect, vActual);
+            
+                vstore(vExpect, ref expect.BlockRef(block));
+                vstore(vActual, ref actual.BlockRef(block));
+            }
+            Claim.eq(expect, actual);
+        }
+
+        public static void VerifyUnaryOp<T>(IPolyrand random, int blocks, Vector256UnaryOp<T> inXOp, Func<T,T> primalOp)
+            where T : unmanaged
+        {
+            
+            var src = random.Blocks<T>(n256,blocks).ReadOnly();
+            var blocklen = src.BlockLength;                     
+
+            Claim.eq(blocks*blocklen,src.CellCount);
+                        
+            var expect = DataBlocks.alloc<T>(n256, blocks);
+            Claim.eq(blocks, expect.BlockCount);
+
+            var actual = DataBlocks.alloc<T>(n256,blocks);
+            Claim.eq(blocks, actual.BlockCount);
+
+            var tmp = new T[blocklen];
+            
+            for(var block = 0; block < blocks; block++)
+            {
+                var offset = block*blocklen;
+                for(var i =0; i<blocklen; i++)
+                    tmp[i] = primalOp(src[offset + i]);
+
+                var vExpect = ginx.vload<T>(n256, in head(tmp));
+             
+                var vX = src.LoadVector(block);
+                var vActual = inXOp(vX);
+
+                Claim.eq(vExpect, vActual);
+            
+                vstore(vExpect, ref expect.BlockRef(block));
+                vstore(vActual, ref actual.BlockRef(block));
+            }
+            Claim.eq(expect, actual);
+        }
+
+
+        public static void VerifyBinOp<T>(IPolyrand random, int blocks, Vector128BinOp<T> inXOp, Func<T,T,T> primalOp)
+            where T : unmanaged
+        {
+            
+            var lhs = random.Blocks<T>(n128,blocks).ReadOnly();
+            var blocklen = lhs.BlockLength;
+            Claim.eq(blocks*blocklen,lhs.CellCount);
+            
+            var rhs = random.Blocks<T>(n128,blocks).ReadOnly();
+            Claim.eq(blocks*blocklen,rhs.CellCount);
+            
+            var expect = DataBlocks.alloc<T>(n128,blocks);
+            Claim.eq(blocks, expect.BlockCount);
+
+            var actual = DataBlocks.alloc<T>(n128,blocks);
+            Claim.eq(blocks, actual.BlockCount);
+
+            Span<T> tmp = stackalloc T[blocklen];
+            
+            for(var block = 0; block < blocks; block++)
+            {
+                var offset = block*blocklen;
+                for(var i =0; i<blocklen; i++)
+                    tmp[i] = primalOp(lhs[offset + i], rhs[offset + i]);
+
+                ginx.vload(in head(tmp), out Vector128<T> vExpect);
+             
+                var vX = lhs.LoadVector(block);
+                var vY = rhs.LoadVector(block);
+                var vActual = inXOp(vX,vY);
+
+                Claim.eq(vExpect, vActual);
+            
+                vstore(vExpect, ref expect.BlockRef(block));
+                vstore(vActual, ref actual.BlockRef(block));
+            }
+            Claim.eq(expect, actual);
+        }
+
+
+        public static void VerifyBinOp<T>(IPolyrand random, int blocks, Vector256BinOp<T> inXOp, Func<T,T,T> primalOp)
+            where T : unmanaged
+        {                    
+            var lhs = random.Blocks<T>(n256, blocks).ReadOnly();
+            var blocklen = lhs.BlockLength;                     
+            Claim.eq(blocks*blocklen,lhs.CellCount);
+            
+            var rhs = random.Blocks<T>(n256,blocks).ReadOnly();
+            Claim.eq(blocks*blocklen,rhs.CellCount);
+            
+            var expect = DataBlocks.alloc<T>(n256,blocks);
+            Claim.eq(blocks, expect.BlockCount);
+
+            var actual = DataBlocks.alloc<T>(n256,blocks);
+            Claim.eq(blocks, actual.BlockCount);
+
+            Span<T> tmp = stackalloc T[blocklen];
+            
+            for(var block = 0; block < blocks; block++)
+            {
+                var offset = block*blocklen;
+                for(var i =0; i<blocklen; i++)
+                    tmp[i] = primalOp(lhs[offset + i], rhs[offset + i]);
+
+                ginx.vload(in head(tmp), out Vector256<T> vExpect);
+             
+                var vX = lhs.LoadVector(block);
+                var vY = rhs.LoadVector(block);
+                var vActual = inXOp(vX,vY);
+
+                Claim.eq(vExpect, vActual);
+            
+                vstore(vExpect, ref expect.BlockRef(block));
+                vstore(vActual, ref actual.BlockRef(block));
+            }
+            Claim.eq(expect, actual);
+        }
+
+
         protected void vbc_check<T>(N128 n)
             where T : unmanaged
         {
@@ -564,11 +720,11 @@ namespace Z0
 
         protected void add128_check<T>()
             where T : unmanaged
-                => CpuOpVerify.VerifyBinOp(Random, SampleSize, new Vector128BinOp<T>(ginx.vadd), gmath.add<T>);
+                => VerifyBinOp(Random, SampleSize, new Vector128BinOp<T>(ginx.vadd), gmath.add<T>);
 
         protected void add256_check<T>()
             where T : unmanaged
-                => CpuOpVerify.VerifyBinOp(Random, SampleSize, new Vector256BinOp<T>(ginx.vadd<T>), gmath.add<T>);
+                => VerifyBinOp(Random, SampleSize, new Vector256BinOp<T>(ginx.vadd<T>), gmath.add<T>);
 
         protected void vinsert_check<T>(N128 n)
             where T : unmanaged
@@ -1003,6 +1159,164 @@ namespace Z0
             var bs = ones.ToBitString();
             Claim.eq(n,bs.Length);
             Claim.eq(n,bs.PopCount());
+        }
+
+        protected void sub_check<T>(N128 n)
+            where T : unmanaged
+            => VerifyBinOp(Random, SampleSize, new Vector128BinOp<T>(ginx.vsub), gmath.sub<T>);
+
+        protected void sub_check<T>(N256 n)
+            where T : unmanaged
+                => VerifyBinOp(Random, SampleSize, new Vector256BinOp<T>(ginx.vsub), gmath.sub<T>);
+
+        protected void sub_block_check<T>(N256 n)
+            where T : unmanaged
+        {
+            var lhs = Random.Blocks<T>(n256,SampleSize).ReadOnly();
+            var rhs = Random.Blocks<T>(n256,SampleSize).ReadOnly();
+            var dstA = lhs.Replicate();
+            vblock.sub(lhs, rhs, dstA);
+            var dstB = DataBlocks.alloc<T>(n256,lhs.BlockCount);
+            for(var i = 0; i < dstA.CellCount; i++)
+                dstB[i] = gmath.sub(lhs[i], rhs[i]);
+            Claim.yea(dstA.Identical(dstB));
+        }
+
+        protected void next_check<T>(N128 n)
+            where T : unmanaged
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var x = Random.CpuVector<T>(n);
+                var xs = x.ToSpan();
+                var xn = x.Next();
+                var xns = xn.ToSpan();
+                var xp = x.Prior();
+                var xps = xp.ToSpan();
+
+                var uints = ginx.vpunits<T>(n);
+                
+                Claim.yea(ginx.vadd<T>(xp, uints).Equals(x));
+                Claim.yea(ginx.vsub<T>(xn, uints).Equals(x));
+
+                for(var j=0; j< x.Length(); j++)
+                {
+                    Claim.eq(xns[j], gmath.inc(xs[j]));
+                    Claim.eq(xps[j], gmath.dec(xs[j]));
+                }
+            }
+        }
+
+        protected void next_check<T>(N256 n)
+            where T : unmanaged
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var x = Random.CpuVector<T>(n);
+                var xs = x.ToSpan();
+                var xn = x.Next();
+                var xns = xn.ToSpan();
+                var xp = x.Prior();
+                var xps = xp.ToSpan();
+
+                var uints = ginx.vpunits<T>(n);
+                
+                Claim.yea(ginx.vadd<T>(xp, uints).Equals(x));
+                Claim.yea(ginx.vsub<T>(xn, uints).Equals(x));
+
+                for(var j=0; j< x.Length(); j++)
+                {
+                    Claim.eq(xns[j], gmath.inc(xs[j]));
+                    Claim.eq(xps[j], gmath.dec(xs[j]));
+                }
+            }
+        }
+
+        protected void vsll_check<T>(N128 n)
+            where T : unmanaged
+        {
+
+            for(var i=0; i< SampleSize; i++)
+            {
+                var src = Random.CpuVector<T>(n);
+                var offset = Random.Next<byte>(2,7);
+                var dst = ginx.vsll(src,offset);
+                for(var j=0; j<dst.Length(); j++)
+                {
+                    var x = vcell(dst, (byte)j);
+                    var y = vcell(src, (byte)j);
+                    Claim.eq(x, gmath.sll(y,offset));
+                }
+            }
+
+        }
+
+        protected void vsll_check<T>(N256 n)
+            where T : unmanaged
+        {
+            for(var i=0; i< SampleSize; i++)
+            {
+                var src = Random.CpuVector<T>(n);
+                var offset = Random.Next<byte>(2,7);
+                var vOffset = ginx.vscalar(n128,convert<byte,T>(offset));
+
+                var a = ginx.vsll(src, offset);
+                var b = ginx.vsll(src, vOffset);
+                Claim.eq(a,b);
+
+                for(var j=0; j<a.Length()/2; j++)
+                {
+                    var x = vcell(ginx.vlo(a), (byte)j);
+                    var y = vcell(ginx.vlo(src), (byte)j);
+                    Claim.eq(x, gmath.sll(y,offset));
+
+                    x = vcell(ginx.vhi(a), (byte)j);
+                    y = vcell(ginx.vhi(src), (byte)j);
+                    Claim.eq(x, gmath.sll(y,offset));
+                }
+            }
+        }
+
+        protected void vsll_bench<T>(N128 n)
+            where T : unmanaged
+        {
+            var opcount = RoundCount * CycleCount;
+            var last = vzero<T>(n);
+            var sw = stopwatch(false);
+            var bitlen = bitsize<T>();
+            var opname = $"sll_{n}x{bitlen}u";
+
+            for(var i=0; i<opcount; i++)
+            {
+                var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
+                var x = Random.CpuVector<T>(n);
+                sw.Start();
+                last = ginx.vsll(x,offset);
+                sw.Stop();
+            
+            }
+            Collect((opcount, sw, opname));
+        }
+
+        protected void vsll_bench<T>(N256 n)
+            where T : unmanaged
+        {
+            var opcount = RoundCount * CycleCount;
+            var last = vzero<T>(n);
+            var sw = stopwatch(false);
+            var bitlen = bitsize<T>();
+            var opname = $"sll_{n}x{bitlen}u";
+
+            for(var i=0; i<opcount; i++)
+            {
+                var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
+                var x = Random.CpuVector<T>(n256);
+                sw.Start();
+                last = ginx.vsll(x,offset);
+                sw.Stop();
+            
+            }
+            Collect((opcount, sw, opname));
         }
     }
 }

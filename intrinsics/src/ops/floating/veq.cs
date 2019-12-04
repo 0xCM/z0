@@ -16,7 +16,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class dfp
+    partial class fpinx
     {
 
 

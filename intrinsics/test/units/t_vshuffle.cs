@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;
     using static HexConst;
     
-    public class t_vshuffle : IntrinsicTest<t_vshuffle>
+    public class t_vshuffle : t_vinx<t_vshuffle>
     {        
         static ReadOnlySpan<byte> perm_add_data 
             => new byte[32]{0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,14,14,15,15,16};

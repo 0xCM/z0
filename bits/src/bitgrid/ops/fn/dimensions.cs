@@ -14,6 +14,7 @@ namespace Z0
 
     partial class BitGrid
     {                
+
         /// <summary>
         /// Enumerates the valid dimensions for a 16-bit fixed bitgrid
         /// </summary>
@@ -101,7 +102,52 @@ namespace Z0
             yield return Dim.define(n16,n16);
         }
 
-        public static IEnumerable<IDim2> dimensions(ulong w)
+        /// <summary>
+        /// Computes dimension information for a grid predicated on parametric types
+        /// </summary>
+        /// <param name="m">The row count representative</param>
+        /// <param name="n">The col count representative</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="M">The row type</typeparam>
+        /// <typeparam name="N">The col type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        public static GridDim<M,N,T> dimension<M,N,T>(M m = default, N n = default, T t = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => default;
+
+        /// <summary>
+        /// Computes dimension information for a blocked grid predicated on parametric types
+        /// </summary>
+        /// <param name="w">The block width representative</param>
+        /// <param name="m">The row count representative</param>
+        /// <param name="n">The col count representative</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="W">The block width</typeparam>
+        /// <typeparam name="M">The row type</typeparam>
+        /// <typeparam name="N">The col type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        public static GridDim<W,M,N,T> dimension<W,M,N,T>(W w = default, M m = default, N n = default, T t = default)
+            where W : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => default;
+
+        /// <summary>
+        /// Enunerates the valid grid dimensions where the total bit width is a power of 2
+        /// </summary>
+        /// <typeparam name="W">The grid dimension type</typeparam>
+        public static IEnumerable<IDim2> p2dimensions<W>()
+            where W : unmanaged,  ITypeNat<W>, INatPow2<W>
+                => p2dimensions(natval<W>());
+
+        /// <summary>
+        /// Enunerates the valid grid dimensions where the total bit width is a power of 2
+        /// </summary>
+        /// <param name="w">A power of 2 that specifies the bit width of the grid</param>
+        public static IEnumerable<IDim2> p2dimensions(ulong w)
         {
             ulong m = 1;
             ulong n = w;

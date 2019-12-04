@@ -266,8 +266,5 @@ namespace Z0.Test
 
             TypeCaseEnd<N>();
         }
-
-
     }
-
 }

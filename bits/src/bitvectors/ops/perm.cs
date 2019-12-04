@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The permutation</param>
         [MethodImpl(Inline)]
-        public static BitVector4 perm(BitVector4 src, Perm spec)
+        public static BitVector4 perm(BitVector4 src, in Perm spec)
         {
             var dst = src.Replicate();
             var width = src.Width;

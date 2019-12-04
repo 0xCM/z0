@@ -15,7 +15,7 @@ namespace Z0
     using static As;
     using static zfunc;    
 
-    partial class dfp
+    partial class fpinx
     {
         /// <summary>
         /// int _mm_extract_ps (__m128 a, const int imm8)EXTRACTPS xmm, xmm/m32, imm8

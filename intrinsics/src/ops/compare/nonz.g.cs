@@ -74,9 +74,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dfp.vnonz(vcast32f(src));
+                return fpinx.vnonz(vcast32f(src));
             else if(typeof(T) == typeof(double))
-                return dfp.vnonz(vcast64f(src));
+                return fpinx.vnonz(vcast64f(src));
             else 
                 throw unsupported<T>();
         }
@@ -138,9 +138,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dfp.vnonz(vcast32f(src));
+                return fpinx.vnonz(vcast32f(src));
             else if(typeof(T) == typeof(double))
-                return dfp.vnonz(vcast64f(src));
+                return fpinx.vnonz(vcast64f(src));
             else 
                 throw unsupported<T>();
         }

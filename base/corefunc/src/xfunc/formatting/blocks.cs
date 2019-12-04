@@ -5,12 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Text.RegularExpressions;
     using System.Text;
 
     using static zfunc;
@@ -56,7 +52,5 @@ namespace Z0
         public static string FormatCellBlocks<T>(this Span<T> src, int? cellpad = null, char? padchar = null, bool padright = true)        
             where T : unmanaged
                 => src.ReadOnly().FormatCellBlocks(cellpad, padchar, padright);
-
     }
-
 }

@@ -12,7 +12,7 @@ namespace Z0.Test
     
     using static zfunc;
 
-    public class t_vsllv : IntrinsicTest<t_vsllv>
+    public class t_vsllv : t_vinx<t_vsllv>
     {
 
 

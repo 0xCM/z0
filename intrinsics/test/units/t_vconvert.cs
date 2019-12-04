@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;
     using static HexConst;
 
-    public class t_vconvert : IntrinsicTest<t_vconvert>
+    public class t_vconvert : t_vinx<t_vconvert>
     {   
 
 

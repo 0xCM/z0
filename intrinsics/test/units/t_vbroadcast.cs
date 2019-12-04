@@ -5,14 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.IO;
     
     using static zfunc;
 
-    public class t_vbc : IntrinsicTest<t_vbc>
+    public class t_vbroadcast : t_vinx<t_vbroadcast>
     {
         public void vbc_128x8i()
             => vbc_check<sbyte>(n128);   
@@ -73,8 +71,5 @@ namespace Z0
 
         public void vbc_256x64f()
             => vbc_check<double>(n256);
-
-
     }
-
 }

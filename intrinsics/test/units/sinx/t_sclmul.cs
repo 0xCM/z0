@@ -5,15 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.IO;
     
     using static zfunc;
-    using static nfunc;
 
-    public class t_clmul : IntrinsicTest<t_clmul>
+    public class t_sclmul : t_sinx<t_sclmul>
     {
 
         //Cant get this to check

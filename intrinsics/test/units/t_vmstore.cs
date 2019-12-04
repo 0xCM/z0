@@ -10,7 +10,7 @@ namespace Z0
     using static zfunc;
     using static HexConst;
 
-    public class t_vmstore : IntrinsicTest<t_vmstore>
+    public class t_vmstore : t_vinx<t_vmstore>
     {   
         const byte Y = Pow2.T07;
 

@@ -14,7 +14,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class dfp
+    partial class fpinx
     {
         /// <summary>
         /// __m128d _mm_sub_ps (__m128d a, __m128d b) SUBPS xmm, xmm/m128

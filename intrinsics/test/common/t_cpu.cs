@@ -5,21 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     
     using static zfunc;
-    using static IMM;
 
-    public abstract class CpuTest<T> : UnitTest<T>
-        where T : CpuTest<T>, new()
+    public abstract class t_cpu<T> : t_inx<T>
+        where T : t_cpu<T>, new()
     {
-
         protected Cpu cpu;
 
-        protected CpuTest()
+        protected t_cpu()
         {
             cpu = Cpu.Init();
         }
@@ -70,7 +66,5 @@ namespace Z0
         protected string FormatImm<X>(Imm8 imm)
             where X : unmanaged
                 => imm.FormatBlocked<X>();
-
     }
-
 }

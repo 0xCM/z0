@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class tv_mul : IntrinsicTest<tv_mul>
+    public class tv_mul : t_vinx<tv_mul>
     {
         public void mul256_u64()
         {

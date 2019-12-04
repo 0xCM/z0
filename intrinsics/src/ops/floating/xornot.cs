@@ -15,7 +15,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class dfp
+    partial class fpinx
     {
         /// <summary>
         /// Computes XOR(x,NOT(y)) for vectors x and y

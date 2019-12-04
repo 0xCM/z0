@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vnegate : IntrinsicTest<t_vnegate>
+    public class t_vnegate : t_vinx<t_vnegate>
     {
         public void negate_128x8i()
             => negate_check<sbyte>(n128);

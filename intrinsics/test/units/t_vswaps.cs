@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vswaps : IntrinsicTest<t_vswaps>
+    public class t_vswaps : t_vinx<t_vswaps>
     {        
         public void transpose_check()
         {

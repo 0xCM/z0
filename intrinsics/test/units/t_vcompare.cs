@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vcompare : IntrinsicTest<t_vcompare>
+    public class t_vcompare : t_vinx<t_vcompare>
     {        
         public void cmp_gt_128x8i()
             => cmp_gt_check<sbyte>(n128);

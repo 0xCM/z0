@@ -12,17 +12,6 @@ namespace Z0
     using static nfunc;
     partial class DataBlocks
     {
-        /// <summary>
-        /// Computes the number of T-cells that comprise an N-block
-        /// </summary>
-        /// <param name="n">The bit width representative</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static int blocklen<N,T>(N n = default, T t = default)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => NatMath.div(n,N8.Rep)/Unsafe.SizeOf<T>();
         
         /// <summary>
         /// Computes the number of blocks required to cover a specified number of bits
@@ -107,6 +96,19 @@ namespace Z0
         public static int blocklen<T>(N256 n)
             where T : unmanaged
                 => 32/Unsafe.SizeOf<T>();
+
+        /// <summary>
+        /// Computes the number of T-cells that comprise an N-block
+        /// </summary>
+        /// <param name="n">The bit width representative</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int blocklen<N,T>(N n = default, T t = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => NatMath.div(n,N8.Rep)/Unsafe.SizeOf<T>();
+
     }
 
 }
