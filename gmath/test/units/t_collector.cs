@@ -2,25 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
-    using System.Linq;
 
     using static zfunc;
 
-    /*
-unsigned a, b, c;
-unsigned sum;
-unsigned MSB_carry;
-
-sum = a + b;
-MSB_carry = (unsigned)(sum < x); // 1 or 0
-
-c = sum/2 | (MSB_carry << 31);    
-     */
-
-    public class t_collector : UnitTest<t_collector>
+    public class t_collector : t_gmath<t_collector>
     {
         //http://0x80.pl/notesen/2012-07-02-average-unsigned-ints.html
         public static uint avg(uint a, uint b)
@@ -88,7 +76,5 @@ c = sum/2 | (MSB_carry << 31);
             Claim.eq(max, c.Max);
             Claim.eq(msAvg, (int)c.Mean);            
         }
-
     }
-
 }

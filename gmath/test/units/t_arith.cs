@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -11,13 +11,8 @@ namespace Z0.Test
 
     using D = GDel;
 
-    class t_arith : UnitTest<t_arith>
+    public class t_arith : t_gmath<t_arith>
     {
-        public t_arith()
-            : base()
-        {
-
-        }
      
         public void inc()
         {

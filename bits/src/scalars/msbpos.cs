@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Numerics;
     using System.Runtime.Intrinsics.X86;
  
     using static zfunc;
@@ -14,7 +13,7 @@ namespace Z0
     partial class Bits
     {                 
         /// <summary>
-        /// Computes the position of the highest enabled source bit, a number between 0 and 31
+        /// Computes the position of the highest enabled source bit, a number between 0 and 7
         /// </summary>
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline)]
@@ -22,7 +21,7 @@ namespace Z0
             => bitsize<byte>() - 1 - nlz(src);
 
         /// <summary>
-        /// Computes the position of the highest enabled source bit, a number between 0 and 63
+        /// Computes the position of the highest enabled source bit, a number between 0 and 15
         /// </summary>
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline)]

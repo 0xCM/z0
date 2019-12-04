@@ -184,4 +184,13 @@ namespace Z0
         /// </summary>
         RRRR = 0b1111
     }
+
+    public static class BlendExtensions
+    {
+        [MethodImpl(Inline)]
+        public static string Format(this Blend4x32 src)                
+            => BitString.scalar((byte)src).Format(true);
+
+    }
+
 }

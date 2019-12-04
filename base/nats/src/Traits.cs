@@ -120,7 +120,7 @@ namespace Z0
     }
 
     public interface INatDivisible<K> : INatDivisible<K,K>
-        where K : unmanaged, ITypeNat//, ITypeNat<K>
+        where K : unmanaged, ITypeNat
     {
 
     }
@@ -140,7 +140,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Requires n:K & n1:K1 & n2:K2 => n1 <= n <= n2
+    /// Requires k1 <= k <= k2
     /// </summary>
     /// <typeparam name="K1">The first nat type</typeparam>
     /// <typeparam name="K2">The second nat type</typeparam>
@@ -153,7 +153,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Requires n1:T1 & n2:T2 => n1 == n2
+    /// Requires k1 == k2
     /// </summary>
     /// <typeparam name="K1">The first nat type</typeparam>
     /// <typeparam name="K2">The second nat type</typeparam>
@@ -165,7 +165,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Requires n1:T1 & n2:T2 => n1 != n2
+    /// Requires k1 != k2
     /// </summary>
     /// <typeparam name="K1">The first nat type</typeparam>
     /// <typeparam name="K2">The second nat type</typeparam>
@@ -177,11 +177,43 @@ namespace Z0
     }
 
     /// <summary>
-    /// Requires k1:K1, k2:K2 => k1 > k2
+    /// Requires k1 < k2
+    /// </summary>
+    public interface INatLt<K1,K2> : INatDemand<K1,K2>
+        where K1: unmanaged, ITypeNat
+        where K2: unmanaged, ITypeNat
+    {
+        
+    }
+
+    /// <summary>
+    /// Requires k1 <= k2
+    /// </summary>
+    public interface INatLtEq<K1,K2> : INatDemand<K1,K2>
+        where K1: unmanaged, ITypeNat
+        where K2: unmanaged, ITypeNat
+    {
+        
+    }
+
+    /// <summary>
+    /// Requires k1 > k2
     /// </summary>
     /// <typeparam name="K1">The larger nat type</typeparam>
     /// <typeparam name="K2">The smaller nat type</typeparam>
     public interface INatGt<K1,K2> : INatDemand<K1,K2>
+        where K1: unmanaged, ITypeNat
+        where K2: unmanaged, ITypeNat
+    {
+        
+    }
+
+    /// <summary>
+    /// Requires k1 >= k2
+    /// </summary>
+    /// <typeparam name="K1">The larger nat type</typeparam>
+    /// <typeparam name="K2">The smaller nat type</typeparam>
+    public interface INatGtEq<K1,K2> : INatDemand<K1,K2>
         where K1: unmanaged, ITypeNat
         where K2: unmanaged, ITypeNat
     {
@@ -352,16 +384,6 @@ namespace Z0
         where K : unmanaged, ITypeNat
     {
 
-    }
-
-    /// <summary>
-    /// Requires n1:T1 & n2:T2 => n1 < T2
-    /// </summary>
-    public interface INatLt<K1,K2> : INatDemand<K1,K2>
-        where K1: unmanaged, ITypeNat
-        where K2: unmanaged, ITypeNat
-    {
-        
     }
 
     /// <summary>

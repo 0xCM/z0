@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using static zfunc;
-    using static As;
-    using static AsIn;
 
     partial class gbits
     {
@@ -49,7 +47,7 @@ namespace Z0
         public static Span<char> bitchars<T>(ReadOnlySpan<T> src, int? maxlen = null)
             where T : unmanaged
         {
-            var seglen = Unsafe.SizeOf<T>()*8;
+            var seglen = bitsize<T>();
             Span<char> dst = new char[src.Length * seglen];
             for(var i=0; i<src.Length; i++)
                 bitchars(src[i]).CopyTo(dst, i*seglen);
@@ -64,15 +62,12 @@ namespace Z0
         public static ref T parse<T>(ReadOnlySpan<char> src, int offset, out T dst)
             where T : unmanaged
         {            
-            var last = Math.Min(Unsafe.SizeOf<T>()*8, src.Length) - 1;                                    
-            dst = gmath.zero<T>();
+            var last = math.min(bitsize<T>(), src.Length) - 1;                                    
+            dst = default;
             for(int i=offset, pos = 0; i<= last; i++, pos++)
-                if(src[i] == Bit.One)
-                    gbits.enable(ref dst, pos);                        
+                if(src[i] == bit.One)
+                    dst = gbits.enable(dst, pos);                        
             return ref dst;
         }
-
-
-
     }
 }

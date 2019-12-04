@@ -29,6 +29,22 @@ namespace Z0
         }
 
         /// <summary>
+        /// Registers natural constraint failure
+        /// </summary>
+        /// <param name="name">The name of the constraint that failed</param>
+        /// <param name="value">The subject value</param>
+        /// <param name="raise">Specifies whether to raise an error</param>
+        /// <typeparam name="K">The natural type for which a constraint failed</typeparam>
+        [MethodImpl(Inline)]   
+        static bool failure<K>(string name, ulong value, bool raise = true)
+            where K : unmanaged, ITypeNat
+        {
+            if(raise) 
+                DemandException.Throw("eq", value, natu<K>());
+            return false;
+        }
+
+        /// <summary>
         /// Registers a natural constraint failure
         /// </summary>
         /// <param name="name">The name of the constraint that failed</param>

@@ -5,16 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
 
     using static zfunc;
 
     public class t_partition : UnitTest<t_partition>
     {        
 
-
-        public void part_points_32i_check()
+        public void part_points_32i()
         {
             points_check(0, 99, 1);
             points_check(0, 99, 1);
@@ -22,38 +19,34 @@ namespace Z0
             points_check(100, 234, 5);
             points_check(100, 235, 5);
             points_check(-100, 75, 3);
-
         }
 
-        public void part_points_32u_check()
+        public void part_points_32u()
         {
             points_check(0u, 99u, 1u);
 
         }
 
-        public void part_points_64i_check()
+        public void part_points_64i()
         {
             points_check(0L, 99L, 1L);
         }
 
-        public void part_points_64u_check()
+        public void part_points_64u()
         {
             points_check(0ul,99ul, 1ul);
-
         }
 
-        public void part_points_32f_check()
+        public void part_points_32f()
         {
             points_check(-250.75f, 100.20f, 1.0f);
-
         }
 
-        public void part_points_64f_check()
+        public void part_points_64f()
         {
             points_check(0.0, 99.0, 1.0);
             points_check(0.0, 100, 0.5);
             points_check(-250.75, 100.20, 1.0);
-
         }
 
         public void part0()
@@ -105,7 +98,6 @@ namespace Z0
             Claim.eq(1, dst.First());
             Claim.eq(100, dst.Last());
         }
-
         
         public void part6()
         {
@@ -115,7 +107,7 @@ namespace Z0
             Claim.yea(dst.Last().Closed);
         }
 
-        void points_check<T>(T min, T max, T width)
+        protected void points_check<T>(T min, T max, T width)
             where T : unmanaged
         {
             var points = open(min, max).PartPoints(width); 

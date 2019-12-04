@@ -8,52 +8,39 @@ namespace Z0
 
     using static zfunc;
 
-    using D = GDel;
-
-    public class t_gcd : UnitTest<t_add>
+    public class t_gcd : t_gmath<t_add>
     {
         protected override int CycleCount => Pow2.T13;
 
+        public void gcdbin_8u()
+            => gcdbin_check((byte)2, (byte)225);
 
-        public void bingcd_8u_check()
-        {
-            gcdbin_check((byte)2, (byte)225);
-        }   
+        public void gcdbin_8u_bench()
+            => gcdbin_bench((byte)2, (byte)225);
 
-        public void bingcd_8u_bench()
-        {
-            gcdbin_bench((byte)2, (byte)225);
-        }   
-
-        public void bingcd_16u_check()
+        public void gcdbin_16u()
         {
             gcdbin_check((ushort)2, (ushort)22000);
         }   
 
-        public void bingcd_16u_bench()
-        {
-            gcdbin_bench((ushort)2, (ushort)22000);
-        }   
+        public void gcdbin_16u_bench()
+            => gcdbin_bench((ushort)2, (ushort)22000);
 
-        public void bingcd_32u_check()
-        {
-            gcdbin_check(2u, 500000u);
-        }   
+        public void gcdbin_32u()
+            => gcdbin_check(2u, 500000u);
 
-        public void bingcd_32u_bench()
+        public void gcdbin_32u_bench()
         {
             gcdbin_bench(2u, 500000u);
         }   
 
-        public void bingcd_64u_check()
+        public void gcdbin_64u_check()
         {
             gcdbin_check(2ul, 500000ul);
         }   
 
-        public void bingcd_64u_bench()
-        {
-            gcdbin_bench(2ul, 500000ul);
-        }   
+        public void gcdbin_64u_bench()
+            => gcdbin_bench(2ul, 500000ul);
 
         void gcdbin_check<T>(T min, T max)
             where T : unmanaged
@@ -89,9 +76,7 @@ namespace Z0
 
             Benchmark($"gcdbin{moniker<T>()}", subject);
             Benchmark($"gcd{moniker<T>()}", compare);
-
         }
-
 
         /// <summary>
         /// Extended binary gcd

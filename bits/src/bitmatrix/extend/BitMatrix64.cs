@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="perm">The source permutation</param>
         [MethodImpl(Inline)]
-        public static BitMatrix64 ToBitMatrix(this Perm<N64> perm)            
+        public static BitMatrix64 ToBitMatrix(this NatPerm<N64> perm)            
         {
             var dst = BitMatrix.alloc(n64);
             for(var row = 0; row<perm.Length; row++)

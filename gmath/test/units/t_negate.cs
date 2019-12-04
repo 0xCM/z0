@@ -12,7 +12,7 @@ namespace Z0
 
     public class t_negate : UnitTest<t_add>
     {
-        public void negateu()
+        public void negate_basecase()
         {
             var x1 = 128ul;
             var y1 = 18446744073709551488;
@@ -35,58 +35,35 @@ namespace Z0
             Claim.eq(y4,z4);            
 
         }
+
         public void negate_8i()
-        {
-            opcheck(x => (sbyte)-x, D.negate<sbyte>());
-        }
+            => opcheck(x => (sbyte)-x, D.negate<sbyte>());
 
         public void negate_8u()
-        {
-            opcheck(math.negate, D.negate<byte>());
-        }
+            => opcheck(math.negate, D.negate<byte>());
 
         public void negate_16i()
-        {
-            opcheck(x => (short)-x, D.negate<short>());
-        }
+            => opcheck(x => (short)-x, D.negate<short>());
 
         public void negate_16u()
-        {
-            VerifyOp(math.negate, D.negate<ushort>());
-        }
+            => VerifyOp(math.negate, D.negate<ushort>());
 
         public void negate_32i()
-        {
-            opcheck(x => -x, D.negate<int>());
-        }
+            => opcheck(x => -x, D.negate<int>());
 
         public void negate_32u()
-        {
-            opcheck(math.negate, D.negate<uint>());
-        }
+            => opcheck(math.negate, D.negate<uint>());
 
         public void negate_64i()
-        {
-            opcheck(x => -x, D.negate<long>());
-        }
+            => opcheck(x => -x, D.negate<long>());
 
         public void negate_64u()
-        {
-            opcheck(math.negate, D.negate<ulong>());
-        }
+            => opcheck(math.negate, D.negate<ulong>());
 
         public void negate_32f()
-        {
-            opcheck(x => -x, D.negate<float>());
-        }
-
+            => opcheck(x => -x, D.negate<float>());
+     
         public void negate_64f()
-        {
-            opcheck(x => -x, D.negate<double>());              
-        }
-
-
+            => opcheck(x => -x, D.negate<double>());              
     }
-
-
 }

@@ -13,26 +13,6 @@ namespace Z0
     public static class BitMatrixX
     {   
         /// <summary>
-        /// Interchanges span elements i and j
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="i">An index of a span element</param>
-        /// <param name="j">An index of a span element</param>
-        /// <typeparam name="T">The span element type</typeparam>
-        [MethodImpl(Inline)]
-        public static void Swap<T>(this Span<T> src, int i, int j)
-            where T : unmanaged
-        {
-            if(i==j)
-                return;
-            
-            ref var data = ref head(src);
-            var a = seek(ref data, i);
-            seek(ref data, i) = skip(in data, j);
-            seek(ref data, j) = a;
-        }
-
-        /// <summary>
         /// Loads a generic bitmatrix from size-conformant sequence of row bits
         /// </summary>
         /// <param name="src">The source bits</param>
@@ -47,35 +27,6 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
                     => BitMatrix.load<N,T>(src.Data);                    
-        internal static string FormatMatrixBits(this Span<byte> src, int width)            
-        {
-            var dst = gbits.bitchars(src);
-            var sb = text();
-            for(var i=0; i<dst.Length; i+= width)
-            {
-                var remaining = dst.Length - i;
-                var segment = math.min(remaining, width);
-                var rowbits = dst.Slice(i, segment);
-                var row = new string(rowbits.Intersperse(AsciSym.Space));                                
-                sb.AppendLine(row);
-            }
-            return sb.ToString();
-        }       
-
-        [MethodImpl(Inline)]
-        internal static string FormatMatrixBits<T>(this Span<T> src)
-            where T : unmanaged
-                => src.AsBytes().FormatMatrixBits(bitsize<T>());
-
-        [MethodImpl(Inline)]
-        internal static string FormatMatrixBits<T>(this Span<T> src, int rowlen)
-            where T : unmanaged
-                => src.AsBytes().FormatMatrixBits(rowlen);
-
-        [MethodImpl(Inline)]
-        public static string Format<T>(this BitMatrix<T> src)
-            where T : unmanaged
-                => src.Data.FormatMatrixBits();
 
         [MethodImpl(Inline)]
         public static RowBits<T> ToRowBits<T>(this BitMatrix<T> src)
@@ -97,32 +48,11 @@ namespace Z0
             return BitString.fromseq(bits);                            
         }
 
-
         [MethodImpl(Inline)]
         public static Span<byte> Pack<M,N,T>(this BitMatrix<M,N,T> src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.ToBitString().ToPackedBytes();
-
-        /// <summary>
-        /// Part of a pattern to do cross-lane 256-bit shuffles
-        /// </summary>
-        /// <remarks> See https://stackoverflow.com/questions/30669556/shuffle-elements-of-m256i-vector</remarks>
-        static ReadOnlySpan<byte> Tr16x16A => new byte[]
-        {
-            0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 
-            0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70,
-            0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 
-            0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0        
-        };
-
-        static ReadOnlySpan<byte> Tr16x16B => new byte[]
-        {
-            0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 
-            0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0,
-            0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 
-            0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70        
-        };
     }
 }

@@ -2,18 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
     using System.Linq;
 
     using static zfunc;
 
-    public class t_abs : UnitTest<t_abs>
-    {
-        
-        
-        public void abs8i()
+    public class t_abs : t_gmath<t_abs>
+    {                
+        public void abs_8i()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -22,7 +20,7 @@ namespace Z0.Test
             }
         }
 
-        public void abs16i()
+        public void abs_16i()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -31,7 +29,7 @@ namespace Z0.Test
             }
         }
 
-        public void abs32i()
+        public void abs_32i()
         {
 
             for(var i=0; i<SampleSize; i++)
@@ -42,7 +40,7 @@ namespace Z0.Test
 
         }
 
-        public void abs64i()
+        public void abs_64i()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -51,7 +49,5 @@ namespace Z0.Test
             }
 
         }
-
     }
-
 }

@@ -92,14 +92,14 @@ namespace Z0
             {
                 var perm = perms.First();
                 Claim.contains(all,perm);
-                var symbols = PermSpec.symbols(perm);
+                var symbols = Perm.literals(perm);
                 Claim.eq(4, symbols.Length);
             }
         }
 
         void perm4x64_mapformat()
         {
-            var pmaps = PermSpec.maps(n4);
+            var pmaps = Perm.mappings(n4);
             iter(pmaps, m => Trace(m.perm.ToString(), m.format));
         }
 
@@ -175,7 +175,7 @@ namespace Z0
             var pbs_actual = BitString.scalar((byte)p);            
             Claim.eq(pbs_expect, pbs_actual);
             
-            var p_assembled = PermSpec.assemble(Perm4.D, Perm4.C, Perm4.B, Perm4.A);            
+            var p_assembled = Perm.assemble(Perm4.D, Perm4.C, Perm4.B, Perm4.A);            
             Claim.eq(p, p_assembled);            
             
             var pformat_actual = p.FormatMap();
@@ -193,7 +193,7 @@ namespace Z0
             var symbol = default(Perm4);
             for(var i=0; i<expect.Length; i++)
             {
-                Claim.yea(PermSpec.symbol(perm, i, out symbol));
+                Claim.yea(Perm.literal(perm, i, out symbol));
                 Claim.eq(expect[i], symbol);
             }
 

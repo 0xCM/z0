@@ -16,7 +16,7 @@ namespace Z0
     partial class NatProve
     {    
         /// <summary>
-        /// Attempts to prove that k1:K1 & k2:K2 =>  k1 + k2 = expected 
+        /// Attempts to prove that k1 + k2 = expected 
         /// Signals success by returning evidence
         /// Signals failure by raising an error
         /// </summary>
@@ -30,6 +30,13 @@ namespace Z0
             return Nat.add<K1,K2>();
         } 
 
+        /// <summary>
+        /// Attempts to prove that k1 + k2 = expected 
+        /// Signals success by returning evidence
+        /// Signals failure by raising an error
+        /// </summary>
+        /// <typeparam name="K1">The first type</typeparam>
+        /// <typeparam name="K2">The second type</typeparam>
         public static NatSum<K1,K2> add<K1,K2>(int expected)
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
@@ -39,7 +46,7 @@ namespace Z0
         } 
 
         /// <summary>
-        /// Attempts to prove that k1:K1 & k2:K2 =>  k1 + k2 = expected 
+        /// Attempts to prove that k1 + k2 = expected 
         /// Signals success by returning evidence
         /// Signals failure by raising an error
         /// </summary>
@@ -56,7 +63,7 @@ namespace Z0
         } 
 
         /// <summary>
-        /// Attempts to prove that k1:K1 & k2:K2 =>  k1 + k2 = expected 
+        /// Attempts to prove that k1 + k2 = expected 
         /// Signals success by returning evidence
         /// Signals failure by raising an error
         /// </summary>

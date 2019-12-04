@@ -73,7 +73,7 @@ namespace Z0
             var pbs_actual = BitString.scalar((byte)p);            
             Claim.eq(pbs_expect, pbs_actual);
             
-            var p_assembled = PermSpec.assemble(Perm4.D, Perm4.C, Perm4.B, Perm4.A);            
+            var p_assembled = Perm.assemble(Perm4.D, Perm4.C, Perm4.B, Perm4.A);            
             Claim.eq(p, p_assembled);            
             
             var pformat_actual = p.FormatMap();
@@ -85,14 +85,14 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var p1 = Random.Perm<N>();
-            var p2 = p1 * Perm<N>.Identity;
+            var p2 = p1 * NatPerm<N>.Identity;
             Claim.yea(p1 == p2);
         }
 
        void perm_identity_check<N>(N rep = default)
             where N : unmanaged, ITypeNat
         {
-            var permA = Perm<N>.Identity;
+            var permA = NatPerm<N>.Identity;
             var n = nati<N>();
             Claim.eq(n, permA.Length);
             Claim.eq(n, permA.Terms.Length);
@@ -100,7 +100,7 @@ namespace Z0
             var terms = range(0, n-1).ToArray();
             Claim.eq(n, terms.Length);
 
-            var permB = Perm.Define(new N(), terms);
+            var permB = Perm.natural(new N(), terms);
             Claim.yea(permA == permB);
         }
 
@@ -112,7 +112,7 @@ namespace Z0
                 var p1 = Random.Perm(n);
                 var p2 = ~ p1;
                 var p3 = p1 * p2;                    
-                Claim.yea(p3 == Perm<N>.Identity);
+                Claim.yea(p3 == NatPerm<N>.Identity);
             }
         }
     }

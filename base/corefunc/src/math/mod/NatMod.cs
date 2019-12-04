@@ -249,10 +249,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Mod<N> Invert()
-            =>  default;//new Mod<N>(Inverse(state));
-
-        [MethodImpl(Inline)]
         public string Format()
             => $"{state}(mod {_Mod.n})";
 

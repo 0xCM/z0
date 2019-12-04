@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The permutation definition</param>
         [MethodImpl(Inline)]
-        public static BitMatrix8 premul(in Perm<N8> spec, in BitMatrix8 A)
+        public static BitMatrix8 premul(in NatPerm<N8> spec, in BitMatrix8 A)
         {
             var P = spec.ToBitMatrix();
             return P * A;
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="spec">The permutation definition</param>
         /// <param name="A">The target matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix16 premul(in Perm<N16> spec, BitMatrix16 A)
+        public static BitMatrix16 premul(in NatPerm<N16> spec, BitMatrix16 A)
         {
             var P = spec.ToBitMatrix();
             return P * A;;
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="spec">The permutation definition</param>
         /// <param name="A">The target matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix32 premul(in Perm<N32> spec, in BitMatrix32 A)
+        public static BitMatrix32 premul(in NatPerm<N32> spec, in BitMatrix32 A)
         {
             var P = spec.ToBitMatrix();
             return P * A;
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="spec">The permutation definition</param>
         /// <param name="A">The target matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix64 premul(in Perm<N64> spec, in BitMatrix64 A)
+        public static BitMatrix64 premul(in NatPerm<N64> spec, in BitMatrix64 A)
         {
             var P = spec.ToBitMatrix();
             return P * A;;

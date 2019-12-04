@@ -146,12 +146,6 @@ namespace Z0
             where U : unmanaged
                 => data.As<U>();
         
-        /// <summary>
-        /// The characterizing grid moniker
-        /// </summary>
-        public readonly GridMoniker<T> Moniker
-            => GridMoniker.FromDim<T>(RowCount, ColCount);
-
         [MethodImpl(Inline)]
         public bool Equals(BitGrid64<M,N,T> rhs)
             => data.Equals(rhs.data);

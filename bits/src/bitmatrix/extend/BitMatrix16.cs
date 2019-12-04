@@ -24,13 +24,14 @@ namespace Z0
         /// </summary>
         /// <param name="perm">The source permutation</param>
         [MethodImpl(Inline)]
-        public static BitMatrix16 ToBitMatrix(this Perm<N16> perm)
+        public static BitMatrix16 ToBitMatrix(this NatPerm<N16> perm)
         {
             var dst = BitMatrix16.Alloc();
             for(var row = 0; row<perm.Length; row++)
                 dst[row,perm[row]] = Bit.On;
             return dst;
         }
+
 
         /// <summary>
         /// Creates a generic matrix from the primal source data

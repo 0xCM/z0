@@ -2,19 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
-    using System.Linq;
 
     using static zfunc;
 
     using D = GDel;
 
     public class t_mod : UnitTest<t_mod>
-    {
-            
-        
+    {                
         public void mod()
         {
             VerifyOp((x,y) => (sbyte)(x % y), D.mod<sbyte>(),true);
@@ -29,7 +26,6 @@ namespace Z0.Test
             VerifyOp((x,y) => (x % y), D.mod<double>(),true);
               
         }
-
 
         public void mod_mul()
         {
@@ -59,19 +55,6 @@ namespace Z0.Test
             mod_dec_check(n32);
             mod_dec_check(n64);
             mod_dec_check(n128);
-        }
-
-        public void mod_inv()
-        {
-            mod_inverse_check(n3);
-            mod_inverse_check(n5);
-            mod_inverse_check(n7);
-            mod_inverse_check(n11);
-            mod_inverse_check(n13);
-            mod_inverse_check(n17);
-            mod_inverse_check(n19);
-            mod_inverse_check(n31);
-            mod_inverse_check(N41);
         }
 
         public void mod_add()
@@ -117,7 +100,7 @@ namespace Z0.Test
             Claim.eq(Mod.Define(14,n), b14a);
         }
 
-        void mod_add_check<N>(int samples, N n = default)
+        protected void mod_add_check<N>(int samples, N n = default)
             where N :unmanaged, ITypeNat
         {
             TypeCaseStart<N>();
@@ -172,7 +155,7 @@ namespace Z0.Test
 
         }
 
-        void mod_mul_check<N>(N n = default)
+        protected void mod_mul_check<N>(N n = default)
             where N : unmanaged, ITypeNat
         {
             TypeCaseStart<N>();
@@ -192,24 +175,7 @@ namespace Z0.Test
             TypeCaseEnd<N>();
         }
  
-        void mod_inverse_check<N>(N n = default)
-            where N : unmanaged, ITypeNat
-        {
-
-            TypeCaseStart<N>();
-            var n0 = Mod.Define(n);
-            var n1 = n0 + 1u;
-            for(var i=1u; i<n.NatValue; i++)
-            {
-                var x = n0 + i;
-                var y = x.Invert();
-                var z = x * y;
-                Claim.eq(n1, z);
-            }
-            TypeCaseEnd<N>();
-        }
-
-        void mod_dec_check<N>(N n = default)
+        protected void mod_dec_check<N>(N n = default)
             where N :unmanaged, ITypeNat
         {
             TypeCaseStart<N>();
@@ -237,7 +203,7 @@ namespace Z0.Test
 
         }
 
-        void mod_inc_check<N>(N n = default)
+        protected void mod_inc_check<N>(N n = default)
             where N :unmanaged, ITypeNat
         {
             TypeCaseStart<N>();

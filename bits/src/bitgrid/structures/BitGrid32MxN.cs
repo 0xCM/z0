@@ -138,11 +138,10 @@ namespace Z0
             get => ref data[cell];
         }
 
-        /// <summary>
-        /// The characterizing grid moniker
-        /// </summary>
-        public readonly GridMoniker<T> Moniker
-            => GridMoniker.FromDim<T>(RowCount, ColCount);
+        [MethodImpl(Inline)]
+        public BitGrid32<U> As<U>()
+            where U : unmanaged
+                => data.As<U>();
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid32<M,N,T> rhs)

@@ -182,7 +182,7 @@ namespace Z0
                 => NatVal.From(mul(k1,k2) << natval(shift));
 
         /// <summary>
-        /// Computes := a*b >> offset
+        /// Computes k := a*b >> offset
         /// </summary>
         [MethodImpl(Inline)]
         public static NatVal srlprod<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 shift = default)
@@ -227,6 +227,56 @@ namespace Z0
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
                 => gteq(k,k1) && lteq(k,k2);
+
+        /// <summary>
+        /// Computes b := k1 * k2 < k3
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static bool prodlt<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 k3 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+            where K3 : unmanaged, ITypeNat
+                => mul(k1,k2) < natval(k3);
+
+        /// <summary>
+        /// Computes b := k1 * k2 <= k3
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static bool prodlteq<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 k3 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+            where K3 : unmanaged, ITypeNat
+                => mul(k1,k2) <= natval(k3);
+
+        /// <summary>
+        /// Computes b := k1 * k2 > k3
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static bool prodgt<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 k3 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+            where K3 : unmanaged, ITypeNat
+                => mul(k1,k2) > natval(k3);
+
+        /// <summary>
+        /// Computes b := k1 * k2 >= k3
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static bool prodgteq<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 k3 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+            where K3 : unmanaged, ITypeNat
+                => mul(k1,k2) >= natval(k3);
+
+        /// <summary>
+        /// Computes b := k1 * k2 == k3
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static bool prodeq<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 k3 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+            where K3 : unmanaged, ITypeNat
+                => mul(k1,k2) == natval(k3);
 
         [MethodImpl(Inline)]
         public static T rotr<T,K1,K2>(K1 k1 = default, K2 k2 = default, T zero = default)

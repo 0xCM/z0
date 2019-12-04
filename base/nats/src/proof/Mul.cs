@@ -14,7 +14,7 @@ namespace Z0
     partial class NatProve
     {
         /// <summary>
-        /// Attempts to prove that k1:K1 & k2:K2 =>  k1 * k2 = expected 
+        /// Attempts to prove k1 * k2 = expected 
         /// Signals success by returning evidence
         /// Signals failure by raising an error
         /// </summary>
@@ -29,7 +29,7 @@ namespace Z0
         } 
 
         /// <summary>
-        /// Attempts to prove that k1:K1 & k2:K2 =>  k1 * k2 = expected 
+        /// Attempts to prove k1 * k2 = expected 
         /// Signals success by returning evidence
         /// Signals failure by raising an error
         /// </summary>
@@ -44,7 +44,6 @@ namespace Z0
             eq<Product<K1,K2>>(expected);
             return Nat.product<K1,K2>();
         } 
-
     }
 
 }

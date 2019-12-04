@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The permutation definition</param>
         /// <param name="A">The matrix to be permuted</param>
-        public static ref BitMatrix<T> permute<T>(Perm spec, ref BitMatrix<T> A)
+        public static ref BitMatrix<T> permute<T>(PermSpec spec, ref BitMatrix<T> A)
             where T : unmanaged
         {
             for(var row = 0; row < spec.Length; row++)
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="perm">The permutation to apply</param>
         /// <param name="A">The matrix to be permuted</param>
-        public static ref BitMatrix8 permute(in Perm<N8> perm, ref BitMatrix8 A)
+        public static ref BitMatrix8 permute(in NatPerm<N8> perm, ref BitMatrix8 A)
         {
             for(var row = 0; row < perm.Length; row++)
                 if(perm[row] != row)
@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="perm">The permutation to apply</param>
         /// <param name="A">The matrix to be permuted</param>
-        public static ref BitMatrix16 permute(in Perm<N16> perm, ref BitMatrix16 A)
+        public static ref BitMatrix16 permute(in NatPerm<N16> perm, ref BitMatrix16 A)
         {
             for(var row = 0; row < perm.Length; row++)
                 if(perm[row] != row)
@@ -56,7 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="perm">The permutation definition</param>
         /// <param name="A">The source/target matrix</param>
-        public static ref BitMatrix32 permute(in Perm<N32> perm, ref BitMatrix32 A)
+        public static ref BitMatrix32 permute(in NatPerm<N32> perm, ref BitMatrix32 A)
         {
             for(var row = 0; row < perm.Length; row++)
                 if(perm[row] != row)
@@ -69,7 +69,7 @@ namespace Z0
         /// </summary>
         /// <param name="perm">The permutation definition</param>
         /// <param name="A">The source/target matrix</param>
-        public static ref BitMatrix64 permute(in Perm<N64> perm, ref BitMatrix64 A)
+        public static ref BitMatrix64 permute(in NatPerm<N64> perm, ref BitMatrix64 A)
         {
             for(var row = 0; row < perm.Length; row++)
                 if(perm[row] != row)

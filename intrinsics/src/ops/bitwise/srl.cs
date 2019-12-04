@@ -20,11 +20,11 @@ namespace Z0
     {         
         [MethodImpl(Inline)]
         public static Vector256<sbyte> vsrl(Vector256<sbyte> src, Vector128<sbyte> shift)
-            => vsrl(src, (byte)shift.Item(0));
+            => vsrl(src, vcell(shift,0));
 
         [MethodImpl(Inline)]
         public static Vector256<byte> vsrl(Vector256<byte> src, Vector128<byte> shift)
-            => vsrl(src, shift.Item(0));
+            => vsrl(src, vcell(shift,0));
 
         /// <summary>
         /// __m256i _mm256_srl_epi16 (__m256i a, __m128i count) VPSRLW ymm, ymm, xmm/m128

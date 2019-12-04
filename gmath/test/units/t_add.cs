@@ -10,7 +10,7 @@ namespace Z0
     using static zfunc;
     using D = GDel;
     
-    public class t_add : UnitTest<t_add>
+    public class t_add : t_gmath<t_add>
     {
         protected override int CycleCount => Pow2.T16;
 
@@ -20,7 +20,7 @@ namespace Z0
         public void add_8u()
             => opcheck((x,y) => (byte)(x + y), D.add<byte>());
 
-        public void add_16i_check()
+        public void add_16i()
             => opcheck((x,y) => (short)(x + y), D.add<short>());
 
         public void add_16u()
@@ -46,17 +46,12 @@ namespace Z0
 
 
         public void add_g8i_bench()
-        {
-            var x = closed(1,2);
-            gadd_bench<sbyte>();
+            => gadd_bench<sbyte>();
 
-        }
 
         public void add_g8u_bench()
-        {
-            gadd_bench<byte>();
+            => gadd_bench<byte>();
 
-        }
 
         public void add_g16i_bench()
         {

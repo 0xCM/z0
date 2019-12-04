@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static nfunc;
     using static constant;    
@@ -17,57 +13,40 @@ namespace Z0
     partial class NatProve
     {
         /// <summary>
-        /// Attempts to prove t:uint & k:K => t > k
+        /// Attempts to prove k > a
         /// Signals success by returning true
-        /// Signals failure by either returning false or raising an error
+        /// Signals failure by raising an error
         /// </summary>
-        /// <param name="t">The value to test</param>
-        /// <param name="raise">Specifies whether an error should be raised if the check fails</param>
+        /// <param name="a">The value to test</param>
         /// <typeparam name="K">The natural representative</typeparam>
         [MethodImpl(Inline)]   
-        public static bool gt<K>(uint t, bool raise = true)
+        public static bool gt<K>(K k, ulong a)
             where K : unmanaged, ITypeNat 
-                =>  natu<K>() > t ? true : failure<K>("gt", t, raise);
+                =>  natu<K>() > a ? true : failure<K>("gt", a);
 
         /// <summary>
-        /// Attempts to prove t:uint & k:K => t >= k
+        /// Attempts to prove k >= a
         /// Signals success by returning true
-        /// Signals failure by either returning false or raising an error
+        /// Signals failure by raising an error
         /// </summary>
         /// <param name="t">The value to test</param>
-        /// <param name="raise">Specifies whether an error should be raised if the check fails</param>
         /// <typeparam name="K">The natural representative</typeparam>
         [MethodImpl(Inline)]   
-        public static bool gteq<K>(uint test, bool raise = true)
+        public static bool gteq<K>(K k, ulong a)
             where K : unmanaged, ITypeNat 
-                =>  natu<K>() >= test ? true : failure<K>("gteq", test, raise);
+                =>  natu<K>() >= a ? true : failure<K>("gteq", a);
 
         /// <summary>
-        /// Attempts to prove k1:K1 & k2:K2 => k1 > k2
+        /// Attempts to prove k1 > k2
         /// Signals success by returning evidence
         /// Signals failure by raising an error
         /// </summary>
         /// <typeparam name="K1">The larger type</typeparam>
         /// <typeparam name="K2">The smaller type</typeparam>
         [MethodImpl(Inline)]   
-        public static NatGt<K1,K2> gt<K1,K2>()
-            where K1: unmanaged, ITypeNat
-            where K2: unmanaged, ITypeNat
-                => new NatGt<K1,K2>(natrep<K1>(),natrep<K2>());                             
-
-        /// <summary>
-        /// Attempts to prove k1:K1 & k2:K2 => k1 > k2
-        /// Signals success by returning evidence
-        /// Signals failure by raising an error
-        /// </summary>
-        /// <typeparam name="K1">The larger type</typeparam>
-        /// <typeparam name="K2">The smaller type</typeparam>
-        [MethodImpl(Inline)]   
-        public static NatGt<K1,K2> gt<K1,K2>(K1 k1, K2 k2)
+        public static NatGt<K1,K2> gt<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
                 => new NatGt<K1,K2>(k1,k2);                             
-
     }
-
 }

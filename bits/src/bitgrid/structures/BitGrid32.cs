@@ -103,6 +103,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public BitGrid32<U> As<U>()
+            where U : unmanaged
+                => data;
+
+        [MethodImpl(Inline)]
         public bool Equals(BitGrid32<T> rhs)
             => data.Equals(rhs.data);
 

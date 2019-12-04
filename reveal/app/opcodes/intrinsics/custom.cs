@@ -13,14 +13,6 @@ namespace Z0
     partial class inxoc
     {                
 
-        public static uint item_get_128x32u_1(Vector128<uint> x)
-            => CpuVec128.item(x, 1);
-
-        public static uint item_get_128x32u_2(Vector128<uint> x)
-            => CpuVec128.item(x, 2);
-
-        public static Vector128<uint> item_set_128x32u_2(Vector128<uint> x, uint value)
-            => CpuVec128.item(x, 2,value);
 
 
         public static Vector256<uint> avxpack1(NatSpan<N8,uint> src, int offset)

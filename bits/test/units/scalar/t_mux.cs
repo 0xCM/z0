@@ -5,17 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
 
-    public class t_mux : UnitTest<t_mux>
+    public class t_sb_mux : t_sb<t_sb_mux>
     {
-        public void check_mux4()
-        {
-            
+        public void mux_4()
+        {            
             for(var i=0; i< SampleSize; i++)
             {
                 var input = Random.BitSpan(4);
@@ -33,7 +30,7 @@ namespace Z0
             }
         }
 
-        public void check_mux8()
+        public void mux_8()
         {
             for(var i=0; i< SampleSize; i++)
             {
@@ -52,7 +49,7 @@ namespace Z0
             }
         }
 
-        public void check_mux16()
+        public void mux_16()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -65,7 +62,7 @@ namespace Z0
 
         }
 
-        public void check_mux32()
+        public void mux_32()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -77,7 +74,7 @@ namespace Z0
             }
         }
 
-        public void check_mux64()
+        public void mux_64()
         {
             for(var i=0; i<SampleSize; i++)
             {

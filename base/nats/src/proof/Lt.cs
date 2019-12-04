@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.Linq;
 
     using static nfunc;
     using static constant;
@@ -17,31 +13,30 @@ namespace Z0
     partial class NatProve
     {
         /// <summary>
-        /// Attempts to prove t:uint & k:K => t < k
+        /// Attempts to prove k < a
         /// Signals success by returning true
-        /// Signals failure by either returning false or raising an error
+        /// Signals failure by raising an error
         /// </summary>
-        /// <param name="t">The value to test</param>
-        /// <param name="raise">Specifies whether an error should be raised if the check fails</param>
+        /// <param name="k">The natural value</param>
+        /// <param name="a">The value to test</param>
         /// <typeparam name="K">The natural representative</typeparam>
         [MethodImpl(Inline)]   
-        public static bool lt<K>(uint t, bool raise = true)
+        public static bool lt<K>(K k, ulong a)
             where K : unmanaged, ITypeNat 
-                =>  natu<K>() < t ? true : failure<K>("lt", t, raise);
+                =>  natu<K>() < a ? true : failure<K>("lt", a);
 
         /// <summary>
-        /// Attempts to prove t:uint & k:K => t <= k
+        /// Attempts to prove k <= a
         /// Signals success by returning true
-        /// Signals failure by either returning false or raising an error
+        /// Signals failure by raising an error
         /// </summary>
+        /// <param name="k">The natural value</param>
         /// <param name="t">The value to test</param>
-        /// <param name="raise">Specifies whether an error should be raised if the check fails</param>
         /// <typeparam name="K">The natural representative</typeparam>
         [MethodImpl(Inline)]   
-        public static bool lteq<K>(uint t, bool raise = true)
+        public static bool lteq<K>(K k, ulong t)
             where K : unmanaged, ITypeNat 
-                =>  natu<K>() <= t ? true : failure<K>("lteq", t, raise);
-
+                =>  natu<K>() <= t ? true : failure<K>("lteq", t);
 
         /// <summary>
         /// Attempts to construct evidence that k1 < k2

@@ -18,6 +18,10 @@ namespace Z0
 
         const uint _on = 1;
 
+        public const char Zero = '0';
+
+        public const char One = '1';
+
         /// <summary>
         /// Constructs a disabled bit
         /// </summary>

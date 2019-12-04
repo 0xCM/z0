@@ -11,21 +11,35 @@ namespace Z0
     
     public class t_sub : UnitTest<t_sub>
     {
+        public void sub_8i()        
+            => VerifyOp((x,y) => (sbyte)(x - y), D.sub<sbyte>());
 
-        public void Sub()
+        public void sub_8u()        
+            => VerifyOp((x,y) => (byte)(x - y), D.sub<byte>());
+
+        public void sub_16i()        
+            => VerifyOp((x,y) => (short)(x - y), D.sub<short>());
+
+        public void sub_16u()        
+            => VerifyOp((x,y) => (ushort)(x - y), D.sub<ushort>());
+
+        public void sub_32i()        
+            => VerifyOp((x,y) => x - y, D.sub<int>());
+
+        public void sub_32u()        
+            => VerifyOp((x,y) => x - y, D.sub<uint>());
+
+        public void sub_64i()        
+            => VerifyOp((x,y) => x - y, D.sub<long>());
+
+        public void sub_64u()        
+            => VerifyOp((x,y) => x - y, D.sub<ulong>());
+
+        public void sub_f()
         {
-            VerifyOp((x,y) => (sbyte)(x - y), D.sub<sbyte>());
-            VerifyOp((x,y) => (byte)(x - y), D.sub<byte>());
-            VerifyOp((x,y) => (short)(x - y), D.sub<short>());
-            VerifyOp((x,y) => (ushort)(x - y), D.sub<ushort>());
-            VerifyOp((x,y) => (x - y), D.sub<int>());
-            VerifyOp((x,y) => (x - y), D.sub<uint>());
-            VerifyOp((x,y) => (x - y), D.sub<long>());
-            VerifyOp((x,y) => (x - y), D.sub<ulong>());
             VerifyOp((x,y) => (x - y), D.sub<float>());
             VerifyOp((x,y) => (x - y), D.sub<double>());              
         }
-
     }
 
 }

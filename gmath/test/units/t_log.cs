@@ -2,10 +2,9 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
@@ -23,10 +22,6 @@ namespace Z0.Test
             Claim.eq(math.log2(Pow2.T60),60);
             Claim.eq(math.log2(Pow2.T63),63);
         }
-
-
-
     }
-
 }
 

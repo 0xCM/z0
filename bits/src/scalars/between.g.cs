@@ -24,18 +24,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T between<T>(T src, int p0, int p1)
             where T : unmanaged
-                => between(src,(byte)p0, (byte)p1);
-
-        /// <summary>
-        /// Extracts a contiguous range of bits from a primal source inclusively between two index positions
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="rhs">The left bit position</param>
-        /// <param name="dst">The right bit position</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static T between<T>(T src, byte p0, byte p1)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
                 || typeof(T) == typeof(ushort) 
@@ -53,7 +41,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        static T between_i<T>(T src, byte p0, byte p1)
+        static T between_i<T>(T src, int p0, int p1)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -67,7 +55,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T between_u<T>(T src, byte p0, byte p1)
+        static T between_u<T>(T src, int p0, int p1)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -81,13 +69,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T between_f<T>(T src, byte p0, byte p1)
+        static T between_f<T>(T src, int p0, int p1)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
                  return generic<T>(Bits.between(float32(src), p0, p1));
             else if(typeof(T) == typeof(double))
-                 return generic<T>(Bits.between(float64(src), p0, p1));
+                 return generic<T>(Bits.between(float64(src),  p0, p1));
             else            
                 throw unsupported<T>();
         }

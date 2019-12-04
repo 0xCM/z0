@@ -682,7 +682,7 @@ namespace Z0
                 var h = ginx.vhi(x);
 
                 for(int i=0, j = count/2; j < count; i++, j++)
-                    Claim.eq(x.Item(j), h.Item(i));
+                    Claim.eq(vcell(x,j), h.Item(i));
             }
         }
 

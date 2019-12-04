@@ -22,63 +22,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T Item<T>(this Vector128<T> src, int index)
             where T : unmanaged
-                => CpuVec128.item(src,index);
+                => vcell(src,index);
 
-        /// <summary>
-        /// Extracts the value of an index-identified component from the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="index">The component index</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static T Item<T>(this Vector256<T> src, int index)
-            where T : unmanaged
-                => src.GetElement(index);
-
-        /// <summary>
-        /// Sets the value of an index-identified source vector component
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="index">The component index</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<T> Insert<T>(this Vector128<T> src, int index, T value)
-            where T : unmanaged
-                => src.WithElement(index,value);
-
-        /// <summary>
-        /// Sets the value of an index-identified source vector component
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="index">The component index</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<T> Insert<T>(this Vector256<T> src, int index, T value)
-            where T : unmanaged
-                => src.WithElement(index,value);
-
-        [MethodImpl(Inline)]
-        public static string Format(this Blend4x32 src)                
-            => BitString.scalar((byte)src).Format(true);
-
-        /// <summary>
-        /// Defines a shuffle spec from a permutation
-        /// </summary>
-        /// <param name="src">The defining permutation</param>
-        [MethodImpl(Inline)]
-        public static Vector128<byte> ToShuffleSpec(this Perm<N16> src)
-        {
-            var data = src.Terms.Convert<byte>();
-            return ginx.vload(n128,in head(data));
-        }
-
-        [MethodImpl(Inline)]
-        public static Perm<N16> ToPerm(this Vector128<byte> src)
-        {
-            Span<byte> dst = new byte[16];
-            vstore(src, ref head(dst));
-            return Perm.Define(n16, dst.Convert<int>());
-        }
 
         /// <summary>
         /// Increments each source vector component by a unit
@@ -140,7 +85,6 @@ namespace Z0
             where T : unmanaged            
                 => vlength<T>(n256);
 
- 
         /// <summary>
         /// Combines two 128-bit source vectors into a 128-bit target vector via a mapping function
         /// </summary>

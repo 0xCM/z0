@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The permutation spec</param>
         [MethodImpl(Inline)]
-        public static BitMatrix64 from(Perm<N64> spec)
+        public static BitMatrix64 from(NatPerm<N64> spec)
         {
             var id = BitMatrix64.Identity;
             permute(spec, ref id);

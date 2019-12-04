@@ -12,10 +12,10 @@ namespace Z0
     partial class gmoc
     {
         public static Perm4 perm4_assemble_id()
-            => PermSpec.assemble(Perm4.A, Perm4.B, Perm4.C, Perm4.D);
+            => Perm.assemble(Perm4.A, Perm4.B, Perm4.C, Perm4.D);
 
         public static Perm4 perm4_assemble_rid()
-            => PermSpec.assemble(Perm4.D, Perm4.C, Perm4.B, Perm4.A);
+            => Perm.assemble(Perm4.D, Perm4.C, Perm4.B, Perm4.A);
 
     }
 

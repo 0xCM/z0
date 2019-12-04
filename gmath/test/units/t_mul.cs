@@ -11,34 +11,34 @@ namespace Z0
     
     public class t_mul : UnitTest<t_mul>
     {
-        public void mul8i()        
+        public void mul_8i()        
             => VerifyOp((x,y) => (sbyte)(x * y), D.mul<sbyte>());
         
-        public void mul8u()        
+        public void mul_8u()        
             => VerifyOp((x,y) => (byte)(x * y), D.mul<byte>());
                 
-        public void mul16i()        
+        public void mul_16i()        
             => VerifyOp((x,y) => (short)(x * y), D.mul<short>());        
 
-        public void mul16u()        
+        public void mul_16u()        
             => VerifyOp((x,y) => (ushort)(x * y), D.mul<ushort>());            
         
-        public void mul32i()        
+        public void mul_32i()        
             => VerifyOp((x,y) => (x * y), D.mul<int>());            
         
-        public void mul32u()        
+        public void mul_32u()        
             => VerifyOp((x,y) => (x * y), D.mul<uint>());
                 
-        public void mul64i()        
+        public void mul_64i()        
             => VerifyOp((x,y) => (x * y), D.mul<long>());                    
 
-        public void mul64u()
+        public void mul_64u()
             => VerifyOp((x,y) => (x * y), D.mul<ulong>());            
         
-        public void mul32f()        
+        public void mul_32f()        
             => VerifyOp((x,y) => (x * y), D.mul<float>());
         
-        public void mul64f()        
+        public void mul_64f()        
             => VerifyOp((x,y) => (x * y), D.mul<double>());                  
     }
 }

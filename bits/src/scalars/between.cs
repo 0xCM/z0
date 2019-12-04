@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static sbyte between(sbyte src, byte i0, byte i1)        
+        public static sbyte between(sbyte src, int i0, int i1)        
             => BitMask.between(src, i0, i1);
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static byte between(byte src, byte i0, byte i1)        
+        public static byte between(byte src, int i0, int i1)        
             => BitMask.between(src, i0, i1);
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static short between(short src, byte i0, byte i1)        
+        public static short between(short src, int i0, int i1)        
             => BitMask.between(src, i0, i1);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static ushort between(ushort src, byte i0, byte i1)        
+        public static ushort between(ushort src, int i0, int i1)        
             => BitMask.between(src, i0, i1);
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static uint between(uint src, byte i0, byte i1)        
+        public static uint between(uint src, int i0, int i1)        
             => BitMask.between(src, i0, i1);
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static int between(int src, byte i0, byte i1)        
+        public static int between(int src, int i0, int i1)        
             => BitMask.between(src, i0, i1);
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static ulong between(ulong src, byte i0, byte i1)
+        public static ulong between(ulong src, int i0, int i1)
             => BitMask.between(src, i0, i1);
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static long between(long src, byte i0, byte i1)
+        public static long between(long src, int i0, int i1)
             => BitMask.between(src, i0, i1);
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static float between(float src, byte i0, byte i1)
+        public static float between(float src, int i0, int i1)
             => BitMask.between(src, i0, i1);
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static double between(double src, byte i0, byte i1)
+        public static double between(double src, int i0, int i1)
             => BitMask.between(src, i0, i1);
 
     }
