@@ -10,7 +10,6 @@ namespace Z0
  
     public class t_sb_cnonimpl : t_sb<t_sb_cnonimpl>
     {
-
         public void sb_cnonimpl_8u()
             => sb_cnonimpl_check<byte>();
 
@@ -22,6 +21,5 @@ namespace Z0
 
         public void sb_cnonimpl_64u()
             => sb_cnonimpl_check<ulong>();
-
     }
 }

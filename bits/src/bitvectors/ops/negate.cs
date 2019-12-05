@@ -16,38 +16,6 @@ namespace Z0
         /// <summary>
         /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x
         /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<T> negate<T>(BitVector<T> x)
-            where T : unmanaged
-                => gmath.negate(x.Scalar);
-
-        /// <summary>
-        /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> negate<N,T>(BitVector<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gmath.negate(x.Scalar);
-
-        /// <summary>
-        /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector128<N,T> negate<N,T>(in BitVector128<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => ginx.vnegate(x.data);
-
-        /// <summary>
-        /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x
-        /// </summary>
         /// <param name="x">The left bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector4 negate(BitVector4 x)
@@ -88,12 +56,33 @@ namespace Z0
         /// <summary>
         /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x
         /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector128 negate(in BitVector128 x)
-        {
-            var z = alloc(n128);
-            vblock.negate(n128, in x.x0, ref z.x0);
-            return z;
-        }
+        public static BitVector<T> negate<T>(BitVector<T> x)
+            where T : unmanaged
+                => gmath.negate(x.Scalar);
+
+        /// <summary>
+        /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> negate<N,T>(BitVector<N,T> x)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gmath.negate(x.Scalar);
+
+        /// <summary>
+        /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> negate<N,T>(in BitVector128<N,T> x)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => ginx.vnegate(x.data);
     }
 }

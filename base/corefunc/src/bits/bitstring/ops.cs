@@ -13,7 +13,22 @@ namespace Z0
     partial struct BitString
     {
         /// <summary>
-        /// Computes the bitwise complement of the source
+        /// Constructs a bitstring from text
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        public static BitString parse(string src)                
+        {
+            src = src.RemoveWhitespace();
+            var len = src.Length;
+            var lastix = len - 1;
+            Span<byte> dst = new byte[len];
+            for(var i=0; i<= lastix; i++)
+                dst[lastix - i] = src[i] == Bit.Zero ? (byte)0 : (byte)1;
+            return new BitString(dst);                        
+        }
+
+        /// <summary>
+        /// Computes the bitwise complement of the source operand
         /// </summary>
         /// <param name="src">The source bits</param>
         public static BitString not(BitString src)
@@ -28,53 +43,68 @@ namespace Z0
         /// <summary>
         /// Computes the bitwise and between the operands
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        public static BitString and(BitString lhs, BitString rhs)
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        public static BitString and(BitString a, BitString b)
         {            
-            var len = length(lhs.bitseq, rhs.bitseq);
+            var len = length(a.bitseq, b.bitseq);
             var dst = alloc(len);
             for(var i=0; i< len; i++)
-                dst[i] = lhs[i] & rhs[i];
+                dst[i] = a[i] & b[i];
             return dst;
         }
 
         /// <summary>
         /// Computes the bitwise or between the operands
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        public static BitString or(BitString lhs, BitString rhs)
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        public static BitString or(BitString a, BitString b)
         {            
-            var len = length(lhs.bitseq, rhs.bitseq);
+            var len = length(a.bitseq, b.bitseq);
             var dst = alloc(len);
             for(var i=0; i< len; i++)
-                dst[i] = lhs[i] | rhs[i];
+                dst[i] = a[i] | b[i];
             return dst;
         }
 
-        public static BitString xor(BitString lhs, BitString rhs)
+        /// <summary>
+        /// Computes the bitwise xor between the operands
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        public static BitString xor(BitString a, BitString b)
         {            
-            var len = length(lhs.bitseq,rhs.bitseq);
+            var len = length(a.bitseq,b.bitseq);
             var dst = alloc(len);
             for(var i=0; i< len; i++)
-                dst[i] = lhs[i] ^ rhs[i];
+                dst[i] = a[i] ^ b[i];
             return dst;
         }
 
-        public static BitString srl(BitString lhs, int offset)
+        /// <summary>
+        /// Applies a logical right-shift to the source
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        /// <param name="shift">The shift offset</param>
+        public static BitString srl(BitString src, int shift)
         {            
-            var dst = alloc(lhs.Length);
-            for(var i=lhs.Length - offset; i>=0; i--)
-                dst[i] = lhs[i];
+            var dst = alloc(src.Length);
+            for(var i=src.Length - shift; i>=0; i--)
+                dst[i] = src[i];
             return dst;
         }
 
-        public static BitString sll(BitString lhs, int offset)
+        /// <summary>
+        /// Applies a logical left-shift to the source
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        /// <param name="shift">The shift offset</param>
+        public static BitString sll(BitString src, int shift)
         {            
-            var dst = alloc(lhs.Length);
-            for(var i=offset; i<dst.Length; i++)
-                dst[i] = lhs[i];
+            var dst = alloc(src.Length);
+            for(var i=shift; i<dst.Length; i++)
+                dst[i] = src[i];
             return dst;
         }
 
@@ -103,7 +133,8 @@ namespace Z0
         }
 
         /// <summary>
-        /// Pretends the source bitstring is an mxn matrix and computes the transposition maxtrix of dimension nxm encoded as a bitstring
+        /// Considers the source bitstring as a row-major encoding of an mxn matrix and computes 
+        /// the transposition maxtrix of dimension nxm similary encoded as a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="m">The source row count</param>
@@ -124,7 +155,8 @@ namespace Z0
         }
 
         /// <summary>
-        /// Pretends the source bitstring is an mxn matrix and computes the transposition maxtrix of dimension nxm encoded as a bitstring
+        /// Considers the source bitstring as a row-major encoding of an mxn matrix and computes 
+        /// the transposition maxtrix of dimension nxm similary encoded as a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="m">The source row count</param>
@@ -156,7 +188,6 @@ namespace Z0
         /// <param name="dst">The target</param>
         /// <param name="start">The target index at which to begin</param>
         /// <param name="len">The number of bits to overwrite</param>
-        /// <returns></returns>
         public static BitString inject(BitString src, BitString dst, int start, int len)
         {
             for(int i=start, j=0; i< start + len; i++, j++)
@@ -164,6 +195,11 @@ namespace Z0
             return dst;
         }
 
+        /// <summary>
+        /// Intersperses the source bitstring with content from another
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        /// <param name="value">The interspersal value</param>
         public static BitString intersperse(BitString src, BitString value)
         {
             var len = Math.Min(src.Length, value.Length);            
@@ -178,11 +214,34 @@ namespace Z0
             return dst;
         }
 
+        /// <summary>
+        /// Clears a contiguous sequence of bits between two indices
+        /// </summary>
+        /// <param name="src">The source bistring</param>
+        /// <param name="i0">The index of the first bit to clear</param>
+        /// <param name="i1">The index of the last bit to clear</param>
         public static BitString clear(BitString src, int i0, int i1)
         {
             for(var i=i0; i<=i1; i++)
                 src[i] = off;
             return src;
+        }
+
+        /// <summary>
+        /// Rotates the bits leftwards by a specified offset
+        /// </summary>
+        /// <param name="shift">The magnitude of the rotation</param>
+        public static BitString rotl(BitString bs, int shift)
+        {
+            Span<byte> dst = bs.bitseq.Replicate();
+            Span<byte> src = stackalloc byte[bs.Length];
+            dst.CopyTo(src);
+            var cut = bs.Length - shift;
+            var seg1 = src.Slice(0, cut);
+            var seg2 = src.Slice(cut);
+            seg2.CopyTo(dst, 0);
+            seg1.CopyTo(dst, shift);
+            return BitString.fromseq(dst);
         }
     }
 }

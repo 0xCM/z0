@@ -18,38 +18,6 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
-        public static bit dot<T>(BitVector<T> x, BitVector<T> y)
-            where T : unmanaged
-                => parity(and(x,y));
-
-        /// <summary>
-        /// Computes the scalar product between two bitvectors
-        /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline)]
-        public static bit dot<N,T>(BitVector<N,T> x, BitVector<N,T> y)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => parity(and(x,y));
-
-        /// <summary>
-        /// Computes the scalar product between two bitvectors
-        /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline)]
-        public static bit dot<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => parity(and(x,y));
-
-        /// <summary>
-        /// Computes the scalar product between two bitvectors
-        /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline)]
         public static bit dot(BitVector4 x, BitVector4 y)
             => parity(and(x, y));              
 
@@ -95,8 +63,30 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
-        public static bit dot(in BitVector128 x, in BitVector128 y)
-            => parity(and(x, y));              
+        public static bit dot<T>(BitVector<T> x, BitVector<T> y)
+            where T : unmanaged
+                => parity(and(x,y));
 
+        /// <summary>
+        /// Computes the scalar product between two bitvectors
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
+        [MethodImpl(Inline)]
+        public static bit dot<N,T>(BitVector<N,T> x, BitVector<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => parity(and(x,y));
+
+        /// <summary>
+        /// Computes the scalar product between two bitvectors
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
+        [MethodImpl(Inline)]
+        public static bit dot<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => parity(and(x,y));
     }
 }

@@ -13,8 +13,8 @@ namespace Z0
 
     /// <summary>
     /// Defines a grid of bits over a contiguous sequence of primal values stored in blocks of 256 bits
-    /// 
     /// </summary>
+    /// <typeparam name="T">The grid cell type</typeparam>
     public readonly ref struct BitGrid<T>
         where T : unmanaged
     {                
@@ -80,12 +80,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => data.BlockCount;
-        }
-
-        public int BlockWidth
-        {
-            [MethodImpl(Inline)]
-            get => data.BlockWidth;
         }
 
         public bit this[int row, int col]

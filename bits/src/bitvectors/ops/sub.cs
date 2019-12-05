@@ -75,17 +75,5 @@ namespace Z0
         public static BitVector64 sub(BitVector64 x, BitVector64 y)
             => gmath.sub(x.data, y.data);
 
-        /// <summary>
-        /// Computes the arithmetic difference z := x - y for bitvectors x and y
-        /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 sub(in BitVector128 x, in BitVector128 y)
-        {
-            var z = BitVector.alloc(n128);
-            Math128.sub(in x.x0, in y.x0, ref z.x0);
-            return z;
-        }
     }
 }

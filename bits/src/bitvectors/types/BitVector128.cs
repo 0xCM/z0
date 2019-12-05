@@ -26,11 +26,6 @@ namespace Z0
         public static BitVector128 Zero => default;
 
         /// <summary>
-        /// Allocates a vector that has the least bit enabled and all others disabled
-        /// </summary>
-        public static BitVector128 One => BitVector.from(N,1);
-
-        /// <summary>
         /// Allocates a vector with all bits enabled
         /// </summary>
         public static BitVector128 Ones => BitVector.from(N,UInt64.MaxValue, UInt64.MaxValue);
@@ -148,98 +143,6 @@ namespace Z0
         public static BitVector128 operator &(in BitVector128 x, in BitVector128 y)
             => BitVector.and(x,y);
 
-        /// <summary>
-        /// Computes the bitwise OR of the operands
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 operator |(in BitVector128 x, in BitVector128 y)
-            => BitVector.or(x,y);
-
-        /// <summary>
-        /// Computes the bitwise XOR of the operands
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 operator ^(in BitVector128 x, in BitVector128 y)
-            => BitVector.xor(x,y);
-
-        /// <summary>
-        /// Computes the scalar product of the operands
-        /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
-        public static bit operator %(in BitVector128 x, in BitVector128 y)
-            => BitVector.dot(x,y);
-
-        /// <summary>
-        /// Computes the bitwise complement of the operand
-        /// </summary>
-        /// <param name="x">The source operand</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 operator ~(in BitVector128 x)
-            => BitVector.not(x);
-
-        /// <summary>
-        /// Computes the two's complement of the operand
-        /// </summary>
-        /// <param name="x">The source operand</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 operator -(in BitVector128 x)
-            => BitVector.negate(x);
-
-        /// <summary>
-        /// Computes the arithmetic difference between the operands
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 operator - (in BitVector128 x, in BitVector128 y)
-            => BitVector.sub(x,y);
-
-        /// <summary>
-        /// Computes the arithmetic sum of the operands
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 operator + (in BitVector128 x, in BitVector128 y)
-            => BitVector.add(x,y);
-
-        /// <summary>
-        /// Arithmetically increments the operand
-        /// </summary>
-        /// <param name="lhs">The source operand</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 operator ++(in BitVector128 x)
-            => BitVector.inc(x);
-
-        /// <summary>
-        /// Arithmetically decrements the operand
-        /// </summary>
-        /// <param name="lhs">The source operand</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 operator --(in BitVector128 x)
-            => BitVector.dec(x);
-
-        /// <summary>
-        /// Returns true if the source vector is nonzero, false otherwise
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static bool operator true(in BitVector128 src)
-            => src.Nonempty;
-
-        /// <summary>
-        /// Returns false if the source vector is the zero vector, false otherwise
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static bool operator false(in BitVector128 src)
-            => !src.Nonempty;
 
         [MethodImpl(Inline)]
         public static Bit operator !(in BitVector128 src)
@@ -350,6 +253,6 @@ namespace Z0
             => HashCode.Combine(x0,x1);
 
         public override string ToString()
-            => this.Format(); 
+            => string.Empty;
     }
 }

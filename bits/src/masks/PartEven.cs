@@ -5,177 +5,169 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics.X86;
-    using Z0;
  
     using static zfunc;
-    using static Bits;
 
     partial class BitParts
     {        
-
         /// <summary>
-        /// Identifies the odd bits in a 4-bit sgement
+        /// Identifies the even bits in a 4-bit segment
         /// </summary>
         [Flags]
-        public enum Odd4 : byte
+        public enum Even4 : byte
         {
             /// <summary>
-            /// Identifies the bit at position 1
+            /// Identifies the bit at position 0
             /// </summary>
-            Bit1 = 0b10,
+            Bit0 = Pow2.T00,
             
             /// <summary>
-            /// Identifies the bit at position 3
+            /// Identifies the bit at position 2
             /// </summary>
-            Bit3 = Bit1 << 2,
+            Bit2 = Bit0 << 2,
                                                 
             /// <summary>
-            /// Selects all odd bits from the segment
+            /// Selects the even bits in a 4-bit segment
             /// </summary>
-            Select = Bit1 |  Bit3
+            Select = Bit0 |  Bit2 
         }
 
         /// <summary>
-        /// Identifies the odd bits in an 8-bit segment at bit-level granularity
+        /// Identifies the even bits in an 8-bit segment
         /// </summary>
         [Flags]
-        public enum Odd8 : byte
+        public enum Even8 : byte
         {
             /// <summary>
-            /// Identifies the bit at position 1
+            /// Identifies the bit at position 0
             /// </summary>
-            Bit1 = 0b10,
+            Bit0 = Pow2.T00,
             
             /// <summary>
-            /// Identifies the bit at position 3
+            /// Identifies the bit at position 2
             /// </summary>
-            Bit3 = Bit1 << 2,            
-            
+            Bit2 = Bit0 << 2,
+                        
             /// <summary>
-            /// Identifies the bit at position 5
+            /// Identifies the bit at position 4
             /// </summary>
-            Bit5 = Bit3 << 2,            
-            
+            Bit4 = Bit2 << 2,
+                        
             /// <summary>
-            /// Identifies the bit at position 7
+            /// Identifies the bit at position 6
             /// </summary>
-            Bit7 = Bit5 << 2,
-            
+            Bit6 = Bit4 << 2,
+                        
             /// <summary>
-            /// Selects all odd bits from the segment
+            /// Selects the even bits in a byte
             /// </summary>
-            Select = Bit1 |  Bit3 |  Bit5 |  Bit7
+            Select = Bit0 |  Bit2 |  Bit4 | Bit6 
 
         }
 
         /// <summary>
-        /// Identifies odd bits in a 16-bit segment
+        /// Identifies the even bits in a 16-bit segment
         /// </summary>
         [Flags]
-        public enum Odd16 : ushort
+        public enum Even16 : ushort
         {
             /// <summary>
-            /// Identifies the odd bits in the first byte
+            /// Identifies the even bits in the first byte
             /// </summary>
-            Byte0 = Odd8.Select,
+            Byte0 = Even8.Select,
             
             /// <summary>
-            /// Identifies the odd bits in the second byte
+            /// Identifies the even bits in the second byte
             /// </summary>
             Byte1 = Byte0 << 8,
 
             /// <summary>
-            /// Selects the odd bits in a 16-bit segment
+            /// Selects the even bits in a 16-bit segment
             /// </summary>
             Select = Byte0 | Byte1
         }
 
         /// <summary>
-        /// Identifies odd bits in a 32-bit segment
+        /// Identifies even bits in a 32-bit segment
         /// </summary>
         [Flags]
-        public enum Odd32 : uint
+        public enum Even32 : uint
         {
             /// <summary>
-            /// Identifies the odd bits in the first byte
+            /// Identifies the even bits in the first byte
             /// </summary>
-            Byte0 = Odd8.Select,
+            Byte0 = Even8.Select,
             
             /// <summary>
-            /// Identifies the odd bits in the second byte
+            /// Identifies the even bits in the second byte
             /// </summary>
             Byte1 = Byte0 << 8,
 
             /// <summary>
-            /// Identifies the odd bits in the third byte
+            /// Identifies the even bits in the third byte
             /// </summary>
             Byte2 = Byte1 << 8,
 
             /// <summary>
-            /// Identifies the odd bits in the fourth byte
+            /// Identifies the even bits in the fourth byte
             /// </summary>
             Byte3 = Byte2 << 8,
 
             /// <summary>
-            /// Selects the odd bits in a 32-bit segment
+            /// Selects the even bits in a 32-bit segment
             /// </summary>
             Select = Byte0 | Byte1 | Byte2 | Byte3
         }
-
+ 
         /// <summary>
-        /// Identifies odd bits in a 64-bit segment
+        /// Identifies even bits in a 64-bit segment
         /// </summary>
         [Flags]
-        public enum Odd64 : ulong
+        public enum Even64 : ulong
         {
             /// <summary>
-            /// Identifies the odd bits in the first byte
+            /// Identifies the even bits in the first byte
             /// </summary>
-            Byte0 = Odd8.Select,
+            Byte0 = Even8.Select,
             
             /// <summary>
-            /// Identifies the odd bits in the second byte
+            /// Identifies the even bits in the second byte
             /// </summary>
             Byte1 = Byte0 << 8,
 
             /// <summary>
-            /// Identifies the odd bits in the third byte
+            /// Identifies the even bits in the third byte
             /// </summary>
             Byte2 = Byte1 << 8,
 
             /// <summary>
-            /// Identifies the odd bits in the fourth byte
+            /// Identifies the even bits in the fourth byte
             /// </summary>
             Byte3 = Byte2 << 8,
 
             /// <summary>
-            /// Identifies the odd bits in the fifth byte
+            /// Identifies the even bits in the fifth byte
             /// </summary>
             Byte4 = Byte3 << 8,
 
             /// <summary>
-            /// Identifies the odd bits in the sixth byte
+            /// Identifies the even bits in the sixth byte
             /// </summary>
             Byte5 = Byte4 << 8,
 
             /// <summary>
-            /// Identifies the odd bits in the seventh byte
+            /// Identifies the even bits in the seventh byte
             /// </summary>
             Byte6 = Byte5 << 8,
 
             /// <summary>
-            /// Identifies the odd bits in the eight byte
+            /// Identifies the even bits in the eighth byte
             /// </summary>
             Byte7 = Byte6 << 8,
 
-            /// <summary>
-            /// Selects the odd bits in a 64-bit segment
-            /// </summary>
             Select = Byte0 | Byte1 | Byte2 | Byte3 | Byte4 | Byte5 | Byte6 | Byte7
         }
 
     }
+
 }

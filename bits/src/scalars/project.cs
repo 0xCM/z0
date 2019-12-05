@@ -51,8 +51,6 @@ namespace Z0
         public static ulong project(ulong src, Even64 spec)
             => scatter(src, (ulong)spec);
 
-
-
         // ~ odd
         // ~ ------------------------------------------------------------------
 

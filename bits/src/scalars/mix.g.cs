@@ -5,22 +5,21 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using static zfunc;
+
     using static As;
     using static AsIn;
 
+    using static zfunc;
+
     partial class gbits
     {
-
         /// <summary>
-        /// Selects/intersperses even bits from the source operands
+        /// Blends alternating even operand bits 
         /// </summary>
         /// <param name="parity">The parity selector</param>
         /// <param name="x">The left operand</param>
-        /// <param name="y">The riight operand</param>
+        /// <param name="y">The right operand</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static T mix<T>(N0 parity, T x, T y)        
@@ -39,11 +38,11 @@ namespace Z0
         }
 
         /// <summary>
-        /// Selects/intersperses odd bits from the source operands
+        /// Blends alternating odd operand bits 
         /// </summary>
         /// <param name="parity">The parity selector</param>
         /// <param name="x">The left operand</param>
-        /// <param name="y">The riight operand</param>
+        /// <param name="y">The right operand</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static T mix<T>(N1 parity, T x, T y)        
@@ -60,7 +59,5 @@ namespace Z0
             else            
                 throw unsupported<T>();
         }
-
     }
-
 }

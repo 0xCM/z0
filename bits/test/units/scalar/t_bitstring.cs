@@ -7,103 +7,101 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.IO;
     
     using static zfunc;
 
     public class t_bitstring : t_sb<t_bitstring>
-    {
-        public void bs_sar_8i_check()
-            => bs_sar_check<sbyte>();
+    {                
+        public void bs_seq_8u()
+            => bs_seq_check<byte>();
 
-        public void bs_sar_8u_check()
-            => bs_sar_check<byte>();
+        public void bs_seq_16u()
+            => bs_seq_check<ushort>();
+
+        public void bs_seq_32u()
+            => bs_seq_check<uint>();
+
+        public void bs_seq_64u()
+            => bs_seq_check<ulong>();
+
+        public void bs_fromscalar_8u()
+            => bs_fromscalar_check<byte>();
+
+        public void bs_fromscalar_8i()
+            => bs_fromscalar_check<sbyte>();
+
+        public void bs_fromscalar_16i()
+            => bs_fromscalar_check<short>();
+
+        public void bs_fromscalar_16u()
+            => bs_fromscalar_check<ushort>();
+
+        public void bs_fromscalar_32i()
+            => bs_fromscalar_check<int>();
+
+        public void bs_fromscalar_32u()
+            => bs_fromscalar_check<uint>();
+
+        public void bs_fromscalar_64u()
+            => bs_fromscalar_check<ulong>();
+
+        public void bs_fromscalar_64i()
+            => bs_fromscalar_check<long>();
+
+        public void bs_convert_8u()
+            => bs_convert_check<byte>();
+
+        public void bs_convert_16u()
+            => bs_convert_check<ushort>();
+        
+        public void bs_convert_32u()
+            => bs_convert_check<uint>();
+
+        public void bs_convert_64u()
+            => bs_convert_check<ulong>();
+
+        public void bs_rep_8u()
+            => bs_rep_check<byte>();
+
+        public void bs_rep_16u()
+            => bs_rep_check<ushort>();
+
+        public void bs_rep_32u()
+            => bs_rep_check<uint>();
+
+        public void bs_rep_64u()
+            => bs_rep_check<ulong>();
+
+        public void bs_parse_range()
+        {
+            bs_parse_range_check(13, 61);
+            bs_parse_range_check(2, 9);
+
+        }
+
+        public void bs_parse_8u()
+            => bs_parse_check<byte>();
+
+        public void bs_parse_8i()
+            => bs_parse_check<sbyte>();
+
+        public void bs_parse_16i()
+            => bs_parse_check<short>();
+
+        public void bs_parse_16u()
+            => bs_parse_check<ushort>();
+
+        public void bs_parse()
+        {
             
-        public void bs_sar_16i_check()        
-            => bs_sar_check<short>();            
-        
-        public void bs_sar_16u_check()        
-            => bs_sar_check<ushort>();
-        
-        public void bs_sar_32i_check()        
-            => bs_sar_check<int>();            
-        
-        public void bs_sar_32u_check()        
-            => bs_sar_check<uint>();            
-        
-        public void bs_sar_64i_check()        
-            => bs_sar_check<long>();           
-    
-        public void bs_sar_64u_check()        
-            => bs_sar_check<ulong>();
-                
-        public void bsfromscalar()
-        {
-            bsfromscalar_check<byte>();
-            bsfromscalar_check<sbyte>();
-            bsfromscalar_check<ushort>();
-            bsfromscalar_check<short>();
-            bsfromscalar_check<uint>();
-            bsfromscalar_check<int>();
-            bsfromscalar_check<ulong>();
-            bsfromscalar_check<long>();
-        }
-
-        public void bsconvert()
-        {
-            bsconvert_check<byte>();
-            bsconvert_check<ushort>();
-            bsconvert_check<uint>();
-            bsconvert_check<ulong>();
-
-
-            var n1 = Random.Next<uint>();
-            var n1bs = n1.ToBitString();
-            var bs1Num = n1bs.TakeUInt64();
-            Claim.eq((ulong)n1, bs1Num);
+            bs_parse_check<uint>();
+            bs_parse_check<int>();
+            bs_parse_check<ulong>();
+            bs_parse_check<long>();
 
         }
 
-        public void bsparse()
-        {
-            bsparse_check1<byte>();
-            bsparse_check1<sbyte>();
-            bsparse_check1<ushort>();
-            bsparse_check1<short>();
-            bsparse_check1<uint>();
-            bsparse_check1<int>();
-            bsparse_check1<ulong>();
-            bsparse_check1<long>();
-
-            bsparse_check2(13, 61);
-            bsparse_check2(2, 9);
-
-        }
-
-        public void bsseq()
-        {
-            
-            bsseq_check1<byte>();
-            bsseq_check1<ushort>();
-            bsseq_check1<uint>();
-            bsseq_check1<ulong>();
-
-            bsseq_check2<byte>();
-            bsseq_check2<ushort>();
-            bsseq_check2<uint>();
-            bsseq_check2<ulong>();
-        }
-
-        public void bsrep()
-        {
-            bsrep_check<byte>();
-            bsrep_check<ushort>();
-            bsrep_check<uint>();
-            bsrep_check<ulong>();
-
-        }
-
-        public void bspow2()
+        public void bs_pow2()
         {
             for(var i=0; i<=231; i++)
             {
@@ -225,7 +223,7 @@ namespace Z0
             }
         }    
 
-        public void bsblocks()
+        public void bs_partition()
         {
             var src = "0000010100001100101010001";
             var bs = BitString.parse(src);
@@ -311,97 +309,46 @@ namespace Z0
 
         }
 
-         void bs_sar_check<T>()
+        protected void bs_seq_check<T>()
             where T : unmanaged
         {
-
-            var signed = signedint<T>();
-            var bitsize = BitSize.Size<T>();
-            var bs10 = BitString.parse("1" + repeat('0', bitsize - 1).Concat());
-            var x10 = bs10.TakeScalar<T>();
-            var bs11 = BitString.parse("11" + repeat('0', bitsize - 2).Concat());
-            var x11 = bs11.TakeScalar<T>();
-            var bs01 = BitString.parse("01" + repeat('0', bitsize - 2).Concat());
-            var x01 = bs01.TakeScalar<T>();
-            var y = gmath.sar(x10, 1);
-            if(signed)
-                Claim.eq(x11, y);
-            else
-                Claim.eq(x01, y);
-
-        }
-
-        void bsrep_check<T>()
-            where T : unmanaged
-        {
-            TypeCaseStart<T>();
-            var src = Random.Span<T>(SampleSize);
-            for(var i=0; i<src.Length; i++)
+            void case1()
             {
-                var x = src[i];
-                var bs = BitString.scalar(src[i]);
-                var y = bs.TakeScalar<T>();
-                Claim.eq(x,y);
-                Claim.eq(bs.Format(), BitString.scalar(y).Format());
+                var src = Random.Span<T>(SampleSize);
+                for(var i=0; i<src.Length; i++)
+                {
+                    var x0 = src[i];
+                    var x1 = gbits.bitseq(x0);                
+                    gbits.packseq(x1, out T x2);
+                    Claim.eq(x0, x2);
+                }
             }
 
-            TypeCaseEnd<T>();                
-        }
-
-        void bsfromscalar_check<T>()
-            where T : unmanaged
-        {
-            TypeCaseStart<T>();
-            var src = Random.Span<T>(SampleSize);
-            for(var i=0; i<src.Length; i++)
+            void case2()
             {
-                var bc1 =  BitString.scalar(src[i]).Format();
-                var bc3 = BitString.scalar(src[i]);
-                Claim.eq(bc1,bc3);
+                var src = Random.Span<T>(SampleSize);
+                for(var i=0; i<src.Length; i++)
+                {
+                    var x0 = src[i];
+                    var x1 = gbits.bitseq(x0);
+                    var seqlen = x1.Length;
+                    Claim.eq(seqlen, bitsize<T>());
+
+                    for(byte j = 0; j < seqlen; j++)
+                        Claim.eq(gbits.test(x0, j), (bit)(x1[j] == 1));
+                }
+
             }
+            
+            case1();
+            
+            case2();
 
-            TypeCaseEnd<T>();
         }
-
-        void bsseq_check1<T>()
-            where T : unmanaged
-        {
-            TypeCaseStart<T>();
-            var src = Random.Span<T>(SampleSize);
-            for(var i=0; i<src.Length; i++)
-            {
-                var x0 = src[i];
-                var x1 = gbits.bitseq(x0);                
-                gbits.packseq(x1, out T x2);
-                Claim.eq(x0, x2);
-            }
-            TypeCaseEnd<T>();
-        }
-
-        void bsseq_check2<T>()
-            where T : unmanaged
-        {
-            TypeCaseStart<T>();
-            var src = Random.Span<T>(SampleSize);
-            for(var i=0; i<src.Length; i++)
-            {
-                var x0 = src[i];
-                var x1 = gbits.bitseq(x0);
-                var seqlen = x1.Length;
-                Claim.eq(seqlen, bitsize<T>());
-
-                for(byte j = 0; j < seqlen; j++)
-                    Claim.eq(gbits.test(x0, j), (bit)(x1[j] == 1));
-            }
-
-            TypeCaseEnd<T>();
-        }
-
  
-         void bsconvert_check<T>()
+        protected void bs_convert_check<T>()
             where T : unmanaged
         {
-            TypeCaseStart<T>();
             var src = Random.Span<T>(SampleSize);
             foreach(var x in src)
             {
@@ -409,13 +356,11 @@ namespace Z0
                 var z = y.TakeScalar<T>();
                 Claim.eq(x,z);
             }
-            TypeCaseEnd<T>();            
         }
 
-        void bsparse_check1<T>()
+        void bs_parse_check<T>()
             where T : unmanaged
         {
-            TypeCaseStart<T>();
             var src = Random.Span<T>(SampleSize);
             for(var i=0; i<src.Length; i++)
             {
@@ -424,13 +369,12 @@ namespace Z0
                 Claim.eq(src[i], y);                
             }
 
-            TypeCaseEnd<T>();
         }
 
         protected void TraceError(string msg)
             => Trace(errorMsg(msg));
 
-        void bsparse_check2(int minlen, int maxlen)
+        protected void bs_parse_range_check(int minlen, int maxlen)
         {
             for(var cycle=0; cycle< CycleCount; cycle++)
             {            
@@ -447,8 +391,5 @@ namespace Z0
                 Claim.eq(x,z);
             }
         }
-
-
     }
-
 }

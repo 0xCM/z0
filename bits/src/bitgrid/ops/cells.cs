@@ -56,7 +56,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid256<N16,N16,ulong> cells(N256 w, N16 m, N16 n, ulong x0, ulong x1, ulong x2, ulong x3)
             => first(DataBlocks.cells(w, x0,x1,x2,x3),m,n);
-
     }
-
 }

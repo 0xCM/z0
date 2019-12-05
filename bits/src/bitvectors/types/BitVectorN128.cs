@@ -117,6 +117,7 @@ namespace Z0
         public static BitVector128<N,T> operator >>(in BitVector128<N,T> x, int s)
             => BitVector.srl(x,s);
 
+
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
         /// </summary>
@@ -175,6 +176,24 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => natval<N>();
+        }
+
+        /// <summary>
+        /// The bitvector's lower 64 bits
+        /// </summary>
+        public BitVector64 Lo
+        {
+            [MethodImpl(Inline)]
+            get => vcell(v64u(data),0);
+        }
+
+        /// <summary>
+        /// The bitvector's upper 64 bits
+        /// </summary>
+        public BitVector64 Hi
+        {
+            [MethodImpl(Inline)]
+            get => vcell(v64u(data),1);
         }
 
         /// <summary>

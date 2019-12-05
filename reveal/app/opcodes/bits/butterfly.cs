@@ -16,20 +16,10 @@ namespace Z0
         public static void bs_and(in Block256<uint> x, in Block256<uint> y, Block256<uint> z)
             => vblock.and(n256,x.BlockCount, 256/32, in x.Head, in y.Head, ref z.Head);
 
-        public static BitVector128 and_128(BitVector128 x, BitVector128 y)
-            => x & y;
-
-        public static BitVector128 xnor_128(BitVector128 x, BitVector128 y)
-            => BitVector.xnor(x,y);
-
-        public static void partition(BitVector128 x, Span<BitVector32> dst)
-            => BitVector.partition(x, dst);
 
         public static bit dot_64(BitVector64 x, BitVector64 y)
             => x % y;
 
-        public static bit dot_128(BitVector128 x, BitVector128 y)
-            => BitVector.dot(x,y);
 
         public static byte butterfly_8x1(byte x)
             => gbits.butterfly(n1,x);

@@ -12,7 +12,6 @@ namespace Z0
 
     partial class BitVector
     {
-
         /// <summary>
         /// Creates a copy of the source vector
         /// </summary>
@@ -115,6 +114,15 @@ namespace Z0
         public static BitVector64 replicate(BitVector64 src)
             => src;
 
+        /// <summary>
+        /// Counts the number of enabled bits in the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> replicate<N,T>(in BitVector128<N,T> x)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => x.data;        
     }
-
 }

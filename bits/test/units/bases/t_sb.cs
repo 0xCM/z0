@@ -56,14 +56,14 @@ namespace Z0
             for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.Next<T>();                
-                var bsx = BitString.scalar(x);
-                var bsxRef = bsx.Replicate();
-                Claim.eq(x,bsx.TakeScalar<T>());
-                x = gbits.rotl(x, offset);
-                bsx.RotL(offset);
+                var y = BitString.scalar(x);
+                Claim.eq(x, y.TakeScalar<T>());
                 
-                var y = bsx.TakeScalar<T>();
-                Claim.eq(x,y);
+                x = gbits.rotl(x, offset);
+                y = y.RotL(offset);
+                
+                var z = y.TakeScalar<T>();
+                Claim.eq(x,z);
             }
         }
 
@@ -300,15 +300,15 @@ namespace Z0
             }
         }
 
-        protected void sb_bzhi_check<T>()
+        protected void sb_zerohi_check<T>()
             where T : unmanaged
         {
             var width = bitsize<T>();
             for(var i=0; i< width; i++)
-                sb_bzhi_check<T>(i);            
+                sb_zerohi_check<T>(i);            
         }
 
-        protected void sb_bzhi_check<T>(int maxlen)
+        protected void sb_zerohi_check<T>(int maxlen)
             where T : unmanaged
         {
             var width = bitsize<T>();
@@ -338,9 +338,9 @@ namespace Z0
                 var j = Random.Next(2, width - width/2);
                 var y = gbits.zerohi(x, (int)j);
 
-                var x0 = gbits.segment(x,0,j - 1);
-                var y0 = gbits.segment(y,0,j - 1);
-                var y1 = gbits.segment(y,j, width - 1);
+                var x0 = gbits.bitseg(x,0,j - 1);
+                var y0 = gbits.bitseg(y,0,j - 1);
+                var y1 = gbits.bitseg(y,j, width - 1);
                 Claim.eq(x0,y0);
                 Claim.nea(gmath.nonzero(y1));                        
             }
@@ -455,5 +455,31 @@ namespace Z0
             }
         }
 
+
+        protected void bs_rep_check<T>()
+            where T : unmanaged
+        {
+            var src = Random.Span<T>(SampleSize);
+            for(var i=0; i<src.Length; i++)
+            {
+                var x = src[i];
+                var bs = BitString.scalar(src[i]);
+                var y = bs.TakeScalar<T>();
+                Claim.eq(x,y);
+                Claim.eq(bs.Format(), BitString.scalar(y).Format());
+            }
+        }
+
+        protected void bs_fromscalar_check<T>()
+            where T : unmanaged
+        {
+            var src = Random.Span<T>(SampleSize);
+            for(var i=0; i<src.Length; i++)
+            {
+                var bc1 =  BitString.scalar(src[i]).Format();
+                var bc3 = BitString.scalar(src[i]);
+                Claim.eq(bc1,bc3);
+            }
+        }
     }
 }

@@ -9,8 +9,7 @@ namespace Z0
     using static zfunc;
 
     public class t_sb_ntz : t_sb<t_sb_ntz>
-    {
-        
+    {        
         public void sb_ntz_basecase()
         {
             Claim.eq(3, gbits.ntz((byte)0b111000));

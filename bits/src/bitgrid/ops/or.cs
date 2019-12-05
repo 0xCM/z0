@@ -14,6 +14,38 @@ namespace Z0
     partial class BitGrid
     {        
         /// <summary>
+        /// Computes the bitwise OR between generic bitgrids and stores the result to a caller-supplied target
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <param name="gz">The target grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly BitGrid<T> or<T>(in BitGrid<T> gx, in BitGrid<T> gy, in BitGrid<T> gz)
+            where T : unmanaged
+        {
+            var blocks = gz.BlockCount;
+            for(var i=0; i<blocks; i++)
+                gz[i] = ginx.vor(gx[i],gy[i]);
+            return ref gz;
+        }
+
+        /// <summary>
+        /// Computes the bitwise OR between generic bitgrids and returns the allocated result
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid<T> or<T>(in BitGrid<T> gx, in BitGrid<T> gy)
+            where T : unmanaged
+        {
+            var gz = alloc<T>(gx.RowCount, gx.ColCount);
+            or(gx,gy,gz);
+            return gz;
+        }
+
+        /// <summary>
         /// Computes the bitwise OR between fixed-width bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
@@ -132,38 +164,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
                 => ginx.vor<T>(gx,gy);    
-
-        /// <summary>
-        /// Computes the bitwise OR between generic bitgrids and stores the result to a caller-supplied target
-        /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
-        /// <param name="gz">The target grid</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly BitGrid<T> or<T>(in BitGrid<T> gx, in BitGrid<T> gy, in BitGrid<T> gz)
-            where T : unmanaged
-        {
-            var blocks = gz.BlockCount;
-            for(var i=0; i<blocks; i++)
-                gz[i] = ginx.vor(gx[i],gy[i]);
-            return ref gz;
-        }
-
-        /// <summary>
-        /// Computes the bitwise OR between generic bitgrids and returns the allocated result
-        /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid<T> or<T>(in BitGrid<T> gx, in BitGrid<T> gy)
-            where T : unmanaged
-        {
-            var gz = alloc<T>(gx.RowCount, gx.ColCount);
-            or(gx,gy,gz);
-            return gz;
-        }
 
         /// <summary>
         /// Computes the bitwise OR between natural bitgrids and stores the result to a caller-supplied target

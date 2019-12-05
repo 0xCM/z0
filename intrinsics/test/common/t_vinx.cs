@@ -10,7 +10,6 @@ namespace Z0
     
     using static zfunc;
 
-
     /// <summary>
     /// Base type for vectorized intrinsic tests
     /// </summary>

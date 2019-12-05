@@ -18,7 +18,52 @@ namespace Z0
         /// </summary>
         /// <param name="g">The source grid</param>
         [MethodImpl(Inline)]
+        public static BitString bitstring<T>(in BitGrid<T> g)
+            where T : unmanaged
+                => g.Data.ToBitString(g.PointCount);
+ 
+         /// <summary>
+        /// Converts a grid to an equivalent linear bitstring representation
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        [MethodImpl(Inline)]
         public static BitString bitstring<T>(BitGrid16<T> g)
+            where T : unmanaged
+                => g.Data.ToBitString(g.PointCount);
+
+        /// <summary>
+        /// Converts a grid to an equivalent linear bitstring representation
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        [MethodImpl(Inline)]
+        public static BitString bitstring<T>(BitGrid32<T> g)
+            where T : unmanaged
+                => g.Data.ToBitString(g.PointCount);
+
+        /// <summary>
+        /// Converts a grid to an equivalent linear bitstring representation
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        [MethodImpl(Inline)]
+        public static BitString bitstring<T>(BitGrid64<T> g)
+            where T : unmanaged
+                => g.Data.ToBitString();
+
+        /// <summary>
+        /// Converts a grid to an equivalent linear bitstring representation
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        [MethodImpl(Inline)]
+        public static BitString bitstring<T>(in BitGrid128<T> g)
+            where T : unmanaged
+                => g.Data.ToBitString(g.PointCount);
+
+        /// <summary>
+        /// Converts a grid to an equivalent linear bitstring representation
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        [MethodImpl(Inline)]
+        public static BitString bitstring<T>(in BitGrid256<T> g)
             where T : unmanaged
                 => g.Data.ToBitString(g.PointCount);
 
@@ -40,15 +85,6 @@ namespace Z0
         /// Converts a grid to an equivalent linear bitstring representation
         /// </summary>
         /// <param name="g">The source grid</param>
-        [MethodImpl(Inline)]
-        public static BitString bitstring<T>(BitGrid32<T> g)
-            where T : unmanaged
-                => g.Data.ToBitString(g.PointCount);
-
-        /// <summary>
-        /// Converts a grid to an equivalent linear bitstring representation
-        /// </summary>
-        /// <param name="g">The source grid</param>
         /// <typeparam name="M">The row type</typeparam>
         /// <typeparam name="N">The col type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
@@ -58,15 +94,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => g.Data.ToBitString(g.PointCount);
-
-        /// <summary>
-        /// Converts a grid to an equivalent linear bitstring representation
-        /// </summary>
-        /// <param name="g">The source grid</param>
-        [MethodImpl(Inline)]
-        public static BitString bitstring<T>(BitGrid64<T> g)
-            where T : unmanaged
-                => g.Data.ToBitString();
 
         /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
@@ -86,15 +113,6 @@ namespace Z0
         /// Converts a grid to an equivalent linear bitstring representation
         /// </summary>
         /// <param name="g">The source grid</param>
-        [MethodImpl(Inline)]
-        public static BitString bitstring<T>(in BitGrid128<T> g)
-            where T : unmanaged
-                => g.Data.ToBitString(g.PointCount);
-
-        /// <summary>
-        /// Converts a grid to an equivalent linear bitstring representation
-        /// </summary>
-        /// <param name="g">The source grid</param>
         /// <typeparam name="M">The row type</typeparam>
         /// <typeparam name="N">The col type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
@@ -102,15 +120,6 @@ namespace Z0
         public static BitString bitstring<M,N,T>(in BitGrid128<M,N,T> g)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => g.Data.ToBitString(g.PointCount);
-
-        /// <summary>
-        /// Converts a grid to an equivalent linear bitstring representation
-        /// </summary>
-        /// <param name="g">The source grid</param>
-        [MethodImpl(Inline)]
-        public static BitString bitstring<T>(in BitGrid256<T> g)
             where T : unmanaged
                 => g.Data.ToBitString(g.PointCount);
 
@@ -141,15 +150,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => g.Data.ToBitString(g.BitCount);
-
-        /// <summary>
-        /// Converts a grid to an equivalent linear bitstring representation
-        /// </summary>
-        /// <param name="g">The source grid</param>
-        [MethodImpl(Inline)]
-        public static BitString bitstring<T>(in BitGrid<T> g)
-            where T : unmanaged
-                => g.Data.ToBitString(g.PointCount);
     }
-
 }

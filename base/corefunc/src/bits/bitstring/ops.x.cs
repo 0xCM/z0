@@ -74,6 +74,13 @@ namespace Z0
             => BitString.sll(bs,shift);
 
         /// <summary>
+        /// Rotates the bits leftwards by a specified offset
+        /// </summary>
+        /// <param name="offset">The magnitude of the rotation</param>
+        public static BitString RotL(this BitString bs, int offset)
+            => BitString.rotl(bs, offset);
+
+        /// <summary>
         /// Pretends the source bitstring is an mxn matrix and computes the transposition maxtrix of dimension nxm encoded as a bitstring
         /// </summary>
         /// <param name="bs">The source bits</param>

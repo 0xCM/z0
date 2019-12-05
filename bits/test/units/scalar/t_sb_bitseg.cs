@@ -8,7 +8,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_sb_bitrange : t_sb<t_sb_bitrange>
+    public class t_sb_bitseg : t_sb<t_sb_bitseg>
     {
         public void sb_range_basecase()
         {
@@ -18,7 +18,7 @@ namespace Z0
 
             Span<byte> dst = stackalloc byte[8];
                         
-            var r1 = gbits.segment(U64_00, 0, 7);
+            var r1 = gbits.bitseg(U64_00, 0, 7);
             Claim.eq((byte)0b11110000, r1);
 
             gbits.segment(U64_00, 0, 7, dst, 0);
@@ -44,8 +44,8 @@ namespace Z0
                 var x = Random.Next<uint>();
                 Bits.split(x,out var x0, out var x1);
 
-                var y0 = gbits.segment(x, 0, 15);
-                var y1 = gbits.segment(x, 16, 31);
+                var y0 = gbits.bitseg(x, 0, 15);
+                var y1 = gbits.bitseg(x, 16, 31);
 
                 Claim.eq(y0,x0);
                 Claim.eq(y1,x1);
@@ -58,8 +58,8 @@ namespace Z0
             {
                 var x = Random.Next<ulong>();
                 Bits.split(x, out var x0, out var x1);
-                var y0 = gbits.segment(x, 0, 31);
-                var y1 = gbits.segment(x, 32, 63);
+                var y0 = gbits.bitseg(x, 0, 31);
+                var y1 = gbits.bitseg(x, 32, 63);
 
                 Claim.eq(y0,x0);
                 Claim.eq(y1,x1);
@@ -72,12 +72,12 @@ namespace Z0
             {
                 var x = Random.Next<ushort>();
                 
-                var x0 = gbits.segment(x,0, 2);                
-                var x1 = gmath.sll(gbits.segment(x,3, 5),3);
-                var x2 = gmath.sll(gbits.segment(x,6, 8),6);
-                var x3 = gmath.sll(gbits.segment(x,9, 11),9);
-                var x4 = gmath.sll(gbits.segment(x,12, 14),12);
-                var x5 = gmath.sll(gbits.segment(x,15, 15),15);
+                var x0 = gbits.bitseg(x,0, 2);                
+                var x1 = gmath.sll(gbits.bitseg(x,3, 5),3);
+                var x2 = gmath.sll(gbits.bitseg(x,6, 8),6);
+                var x3 = gmath.sll(gbits.bitseg(x,9, 11),9);
+                var x4 = gmath.sll(gbits.bitseg(x,12, 14),12);
+                var x5 = gmath.sll(gbits.bitseg(x,15, 15),15);
                 var y = x0;
                 y |= x1;
                 y |= x2;

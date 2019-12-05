@@ -8,11 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
  
     using static zfunc;
-    using static As;
 
     partial class Bits
     {         
-
         /// <summary>
         /// Concatenates the bits of 2 unsigned 8-bit integers to produce an unsigned 16-bit integer
         /// [a b] -> ab
@@ -71,8 +69,5 @@ namespace Z0
             | (ulong)x7 << 7 * 8
             ;
         }        
- 
-
     }
-
 }

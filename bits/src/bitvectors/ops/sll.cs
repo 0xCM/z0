@@ -90,18 +90,6 @@ namespace Z0
         public static BitVector64 sll(BitVector64 x, int s)
             => math.sll(x.Scalar,s);
  
-        /// <summary>
-        /// Computes z := x << s for a bitvector x and shift offset s
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="s">The shift amount</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 sll(BitVector128 x, int s)
-        {
-            var z = BitVector.alloc(n128);
-            vblock.sllx(n128, in x.x0, (byte)s, ref z.x0);
-            return z;
-        }
     }
 
 }

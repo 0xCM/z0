@@ -114,9 +114,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged            
                 => new SubGrid64<M, N, T>(convert<T,ulong>(data));
-
-
-
     }
 
 }

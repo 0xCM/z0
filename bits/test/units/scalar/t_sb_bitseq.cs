@@ -11,34 +11,34 @@ namespace Z0
 
     public class t_sb_bitseq : t_sb<t_sb_bitseq>
     {
-        public void bitseq_8u()
+        public void sb_bitseq_8u()
             => sb_bitseq_check<byte>();
 
-        public void bitseq_8i()
+        public void sb_bitseq_8i()
             => sb_bitseq_check<sbyte>();
 
-        public void bitseq_16u()
+        public void sb_bitseq_16u()
             => sb_bitseq_check<ushort>();
 
-        public void bitseq_16i()
+        public void sb_bitseq_16i()
             => sb_bitseq_check<short>();
 
-        public void bitseq_32()
+        public void sb_bitseq_32()
             => sb_bitseq_check<uint>();
 
-        public void bitseq_32i()
+        public void sb_bitseq_32i()
             => sb_bitseq_check<int>();
 
-        public void bitseq_64u()
+        public void sb_bitseq_64u()
             => sb_bitseq_check<ulong>();
 
-        public void bitseq_64i()
+        public void sb_bitseq_64i()
             => sb_bitseq_check<long>();
 
-        public void bitseq_32f()
+        public void sb_bitseq_32f()
             => sb_bitseq_check<float>();
 
-        public void bitseq_64f()
+        public void sb_bitseq_64f()
             => sb_bitseq_check<double>();
     }
 }

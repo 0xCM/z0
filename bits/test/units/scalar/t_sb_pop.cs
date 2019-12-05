@@ -25,7 +25,7 @@ namespace Z0
         {
             Span<byte> bits16 = stackalloc byte[16];
             var src = (ushort)0b11001111;
-            BitParts.unpack16x1(src,bits16);
+            Bits.unpack16x1(src,bits16);
             var bitsPC = bits16.PopCount();
             Claim.eq(6,bitsPC);
 

@@ -13,6 +13,26 @@ namespace Z0
     public static partial class BitMasks
     {        
         /// <summary>
+        /// [01010101 ... 01010101]
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        public static T alteven<T>(T src)
+            where T : unmanaged
+                => convert<ulong,T>(Bits.scatter(convert<T,ulong>(src), Even));
+
+        /// <summary>
+        /// [10101010 ... 10101010]
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        public static T altodd<T>(T src)
+            where T : unmanaged
+                => convert<ulong,T>(Bits.scatter(convert<T,ulong>(src), Odd));
+
+        /// <summary>
         /// [00000001 ... 00000001]
         /// </summary>
         /// <param name="src">The source value</param>
@@ -171,6 +191,10 @@ namespace Z0
         public static T msb32x1<T>(T src)
             where T : unmanaged
                 => convert<ulong,T>(Bits.scatter(convert<T,ulong>(src), Msb64x32x1));
+
+        public const ulong Even = 0b01010101_01010101_01010101_01010101_01010101_01010101_01010101_01010101;
+        
+        public const ulong Odd =  0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010;
 
     }
 

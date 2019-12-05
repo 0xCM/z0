@@ -127,8 +127,8 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         [MethodImpl(Inline)]
-        public static BitVector128 BitVector(this IPolyrand random, N128 n)
-            => (random.Next<ulong>(), random.Next<ulong>());
+        public static BitVector128<N128,ulong> BitVector(this IPolyrand random, N128 n)
+            => random.CpuVector<ulong>(n);
 
         /// <summary>
         /// Produces a stream of random 4-bit bitvectors

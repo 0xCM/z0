@@ -7,13 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
  
     using static zfunc;
     using static BitParts;
    
     partial class Bits
     {                
+        /// <summary>
+        /// Blends alternating even operand bits 
+        /// </summary>
+        /// <param name="parity">The parity selector</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static byte mix(N0 parity, byte x, byte y)
         {
@@ -24,6 +29,12 @@ namespace Z0
             return (byte)xEy;
         }
 
+        /// <summary>
+        /// Blends alternating odd operand bits 
+        /// </summary>
+        /// <param name="parity">The parity selector</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static byte mix(N1 parity, byte x, byte y)
         {
@@ -34,6 +45,12 @@ namespace Z0
             return (byte)xOy;
         }
 
+        /// <summary>
+        /// Blends alternating even operand bits 
+        /// </summary>
+        /// <param name="parity">The parity selector</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static ushort mix(N0 parity, ushort x, ushort y)
         {
@@ -44,6 +61,12 @@ namespace Z0
             return (ushort)xEy;
         }
 
+        /// <summary>
+        /// Blends alternating odd operand bits 
+        /// </summary>
+        /// <param name="parity">The parity selector</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static ushort mix(N1 parity, ushort x, ushort y)
         {
@@ -54,6 +77,12 @@ namespace Z0
             return (ushort)xOy;
         }
 
+        /// <summary>
+        /// Blends alternating even operand bits 
+        /// </summary>
+        /// <param name="parity">The parity selector</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static uint mix(N0 parity, uint x, uint y)
         {
@@ -64,6 +93,12 @@ namespace Z0
             return xEy;
         }
 
+        /// <summary>
+        /// Blends alternating odd operand bits 
+        /// </summary>
+        /// <param name="parity">The parity selector</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static uint mix(N1 parity, uint x, uint y)
         {
@@ -74,6 +109,12 @@ namespace Z0
             return xOy;
         }
 
+        /// <summary>
+        /// Blends alternating even operand bits 
+        /// </summary>
+        /// <param name="parity">The parity selector</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static ulong mix(N0 parity, ulong x, ulong y)
         {
@@ -84,6 +125,12 @@ namespace Z0
             return xEy;
         }
 
+        /// <summary>
+        /// Blends alternating odd operand bits 
+        /// </summary>
+        /// <param name="parity">The parity selector</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static ulong mix(N1 parity, ulong x, ulong y)
         {

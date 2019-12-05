@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics.X86;
  
     using static zfunc;
     using static As;
@@ -160,25 +159,6 @@ namespace Z0
             seek(ref target, 7) = BitMasks.lsb8x1(src >> 56);
         }
  
-
-        /// <summary>
-        /// Partitions the first 8 bits of a 32-bit source into 4 target segments each with an effective width of 2
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target memory location</param>
-        [MethodImpl(Inline)]
-        public static void part8x2(uint src, ref byte dst)
-        {
-            const uint M2 = 0b11;
-            seek(ref dst, 0) = (byte)(src >> 0 & M2);
-            seek(ref dst, 1) = (byte)(src >> 2 & M2);
-            seek(ref dst, 2) = (byte)(src >> 4 & M2);
-            seek(ref dst, 3) = (byte)(src >> 6 & M2);
-        }
-
-        // ~ Nx3
-        // ~ ------------------------------------------------------------------
-
         /// <summary>
         /// Partitions a 64-bit source value into 64 individual bit values
         /// </summary>
@@ -195,16 +175,34 @@ namespace Z0
         }
 
         /// <summary>
+        /// Partitions the first 8 bits of a 32-bit source into 4 target segments each with an effective width of 2
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="dst">The target memory location</param>
+        [MethodImpl(Inline)]
+        public static void part8x2(uint src, ref byte dst)
+        {
+            const uint M2 = 0b11;
+            seek(ref dst, 0) = (byte)(src >> 0 & M2);
+            seek(ref dst, 1) = (byte)(src >> 2 & M2);
+            seek(ref dst, 2) = (byte)(src >> 4 & M2);
+            seek(ref dst, 3) = (byte)(src >> 6 & M2);
+        }
+
+        // ~ Nx2
+        // ~ ------------------------------------------------------------------
+ 
+        /// <summary>
         /// Partitions the source into 4 target segments of physical widht 8 and effective width 2
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The target memory location</param>
         [MethodImpl(Inline)]
         public static void part8x2(byte src, ref byte dst)
-            => Bits.part8x2((uint)src, ref dst);
+            => part8x2((uint)src, ref dst);
 
         /// <summary>
-        /// Partitions the first 16 bits of a 32-bit source into 8 target segments each with an effective width of 2
+        /// Partitions a 16-bit source into 8 target segments each with an effective width of 2
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The target memory location</param>
@@ -214,6 +212,10 @@ namespace Z0
             part8x2((byte)src, ref dst);
             part8x2((byte)(src >> 8), ref seek(ref dst, 4));
         }
+
+        [MethodImpl(Inline)]
+        public static void part16x2(ushort src, Block64<byte> dst)
+            => part16x2(src, ref dst.Head);
 
         /// <summary>
         /// Partitions a 32-bit source into 16 target segments each with an effective width of 2
@@ -226,6 +228,10 @@ namespace Z0
             part16x2((ushort)src, ref dst);
             part16x2((ushort)(src >> 16), ref seek(ref dst, 8));
         }        
+
+        [MethodImpl(Inline)]
+        public static void part32x2(ushort src, Block128<byte> dst)
+            => part16x2(src, ref dst.Head);
 
         // ~ Nx3
         // ~ ------------------------------------------------------------------
@@ -581,21 +587,28 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline)]
-        public static void part64x16(ulong src, Span<ushort> dst)
+        public static void part64x16(ulong src, Block64<ushort> dst)
             => head64(dst) = src; 
  
         // ~ Nx32
         // ~ ------------------------------------------------------------------
 
-       [MethodImpl(Inline)]
+        /// <summary>
+        /// Partitions a 64-bit source value into 2 segments of width 32
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="dst">A target span of sufficient length</param>
+        [MethodImpl(Inline)]
         public static void part64x32(ulong src, Span<uint> dst)
             => head64(dst) = src;
 
+        /// <summary>
+        /// Partitions a 64-bit source value into 2 segments of width 32
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline)]
         public static void part64x32(ulong src, ref uint dst)
             => uint64(ref dst) = src;
-
- 
     }
-
 }

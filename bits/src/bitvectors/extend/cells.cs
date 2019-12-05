@@ -14,18 +14,6 @@ namespace Z0
     partial class BitVectorX
     {
 
-        [MethodImpl(Inline)]
-        public static BitCells<T> ToBitCells<T>(this BitVector<T> src)
-            where T : unmanaged
-                => BitCells.literals(src.Scalar);
-
-
-        [MethodImpl(Inline)]
-        public static BitCells<N,T> ToBitCells<N,T>(this BitVector128<N,T> src, N n = default)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => BitCells.load(src.data.ToSpan(),n);
-
         /// <summary>
         /// Converts the source bitvector to bit cells
         /// </summary>
@@ -61,6 +49,16 @@ namespace Z0
             where T : unmanaged
                 => BitCells.load(src,len);
 
+        [MethodImpl(Inline)]
+        public static BitCells<T> ToBitCells<T>(this BitVector<T> src)
+            where T : unmanaged
+                => BitCells.literals(src.Scalar);
+
+        [MethodImpl(Inline)]
+        public static BitCells<N,T> ToBitCells<N,T>(this BitVector128<N,T> src, N n = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BitCells.load(src.data.ToSpan(),n);
     }
 
 }

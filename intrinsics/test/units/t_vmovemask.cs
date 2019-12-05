@@ -37,6 +37,30 @@ namespace Z0
             Trace(m.FormatBits());            
 
         }
+        // 4x64
+        // [A0 A1 A2 A3 A4 A5 A6 A7]
+        // [B0 B1 B2 B3 B4 B5 B6 B7]
+        // [C0 C1 C2 C3 C4 C5 C6 C7]
+        // [D0 D1 D2 D3 D4 D5 D6 D7]
+        public void vgather_movemask()
+        {
+            var n = n256;
+            var w = n1024;
+            var ix = n256;
+            var pattern = ginx.vbroadcast(n, 0b00010001_00010001_00010001_00010001u);
+
+            var data = span(range<uint>(0,(uint)(w-1)));
+            Claim.eq(data.Length, w);
+
+            ref var src = ref head(data);
+            for(var i=0; i< w; i+=8)
+                ginx.vstore(pattern, ref src, i);
+
+            for(var i=0; i < w; i+= 8)
+                Claim.eq(pattern,ginx.vload(n, in src, i));                
+
+
+        }
 
         public void movemask_256x8u()
         {

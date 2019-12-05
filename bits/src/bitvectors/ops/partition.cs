@@ -10,7 +10,6 @@ namespace Z0
     using Z0;
 
     using static zfunc;
-    using static BitParts;
 
     partial class BitVector
     {
@@ -55,15 +54,5 @@ namespace Z0
             Bits.part64x8(src, bytes(dst));
             return dst;
         }
-
-        [MethodImpl(Inline)]
-        public static Span<BitVector32> partition(in BitVector128 src, Span<BitVector32> dst)
-        {            
-            ref var target = ref head(dst.AsUInt32());
-            Bits.part64x32(src.x0, ref target);
-            Bits.part64x32(src.x1, ref seek(ref target,2));
-            return dst;
-        }
-
     }
 }

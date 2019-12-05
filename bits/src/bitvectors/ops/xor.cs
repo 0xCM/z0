@@ -11,40 +11,6 @@ namespace Z0
 
     partial class BitVector
     {
-        /// <summary>
-        /// Computes  z := x ^ y from bitvectors x and y
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<T> xor<T>(BitVector<T> x, BitVector<T> y)
-            where T : unmanaged
-                => gmath.xor(x.Scalar,y.Scalar);
-
-        /// <summary>
-        /// Computes the bitvector z := x ^ y from bitvectors x and y
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> xor<N,T>(BitVector<N,T> x, BitVector<N,T> y)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gmath.xor(x.Scalar, y.Scalar);
-
-        /// <summary>
-        /// Computes the bitvector z := x ^ y from bitvectors x and y
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector128<N,T> xor<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => ginx.vxor(x.data,y.data);
 
         /// <summary>
         /// Computes  z := x ^ y from bitvectors x and y
@@ -94,10 +60,36 @@ namespace Z0
         /// <summary>
         /// Computes  z := x ^ y from bitvectors x and y
         /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="y">The right bitvector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector128 xor(in BitVector128 x, in BitVector128 y)
-            => from(n128, gmath.xor(x.x0, y.x0), gmath.xor(x.x1,  y.x1));
+        public static BitVector<T> xor<T>(BitVector<T> x, BitVector<T> y)
+            where T : unmanaged
+                => gmath.xor(x.Scalar,y.Scalar);
+
+        /// <summary>
+        /// Computes the bitvector z := x ^ y from bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> xor<N,T>(BitVector<N,T> x, BitVector<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gmath.xor(x.Scalar, y.Scalar);
+
+        /// <summary>
+        /// Computes the bitvector z := x ^ y from bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> xor<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => ginx.vxor(x.data,y.data);
     }
 }

@@ -13,6 +13,17 @@ namespace Z0
 
     partial class BitGrid
     {
+        [MethodImpl(Inline)]
+        public static bit same<T>(in BitGrid<T> gx, in BitGrid<T> gy)
+            where T : unmanaged
+        {
+            var blocks = gx.BlockCount;
+            for(var i=0; i<blocks; i++)
+                if(!ginx.vsame(gx[i],gy[i]))
+                       return false;
+            return true;        
+        }
+
         /// <summary>
         /// Returns 1 if the source grids have identical conent and 0 otherwise
         /// </summary>
@@ -96,17 +107,6 @@ namespace Z0
             return true;        
         }
 
-        [MethodImpl(Inline)]
-        public static bit same<T>(in BitGrid<T> gx, in BitGrid<T> gy)
-            where T : unmanaged
-        {
-            var blocks = gx.BlockCount;
-            for(var i=0; i<blocks; i++)
-                if(!ginx.vsame(gx[i],gy[i]))
-                       return false;
-            return true;        
-        }
- 
-    }
 
+    }
 }

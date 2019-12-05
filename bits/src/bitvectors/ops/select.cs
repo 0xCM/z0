@@ -19,41 +19,6 @@ namespace Z0
         /// <param name="y">The primary choice</param>
         /// <param name="z">The alternative choice</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> select<T>(BitVector<T> x, BitVector<T> y, BitVector<T> z)
-            where T : unmanaged
-                => gmath.select(x.data, y.data, z.data);
-
-        /// <summary>
-        /// Computes the bitvector z := x ^ y from bitvectors x and y
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> select<N,T>(BitVector<N,T> x, BitVector<N,T> y, BitVector<N,T> z)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gmath.select(x.data, y.data, z.data);
-
-        /// <summary>
-        /// Computes the bitvector z := x ^ y from bitvectors x and y
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector128<N,T> select<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y, in BitVector128<N,T> z)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => ginx.vselect(x.data, y.data, z.data);
-
-        /// <summary>
-        /// Computes the bitwise ternary select for bitvector operands
-        /// </summary>
-        /// <param name="x">The pivot/mask vector</param>
-        /// <param name="y">The primary choice</param>
-        /// <param name="z">The alternative choice</param>
-        [MethodImpl(Inline)]
         public static BitVector4 select(BitVector4 x, BitVector4 y, BitVector4 z)
             => gmath.select(x.data, y.data, z.data);
 
@@ -96,13 +61,40 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 select(BitVector64 x, BitVector64 y, BitVector64 z)
             => gmath.select(x.data, y.data, z.data);
-
+ 
+        /// <summary>
+        /// Computes the bitwise ternary select for bitvector operands
+        /// </summary>
+        /// <param name="x">The pivot/mask vector</param>
+        /// <param name="y">The primary choice</param>
+        /// <param name="z">The alternative choice</param>
         [MethodImpl(Inline)]
-        public static BitVector128 select(in BitVector128 x, in BitVector128 y, in BitVector128 z)
-        {
-            var selected = BitVector.alloc(n128);
-            vblock.select(n128, x.x0, y.x0,z.x0, ref selected.x0);
-            return selected;
-        }        
-    }
+        public static BitVector<T> select<T>(BitVector<T> x, BitVector<T> y, BitVector<T> z)
+            where T : unmanaged
+                => gmath.select(x.data, y.data, z.data);
+
+        /// <summary>
+        /// Computes the bitvector z := x ^ y from bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> select<N,T>(BitVector<N,T> x, BitVector<N,T> y, BitVector<N,T> z)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gmath.select(x.data, y.data, z.data);
+
+        /// <summary>
+        /// Computes the bitvector z := x ^ y from bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> select<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y, in BitVector128<N,T> z)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => ginx.vselect(x.data, y.data, z.data); 
+   }
 }

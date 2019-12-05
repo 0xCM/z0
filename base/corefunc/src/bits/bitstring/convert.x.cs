@@ -126,16 +126,7 @@ namespace Z0
                 => BitString.from(src, maxbits); 
 
         /// <summary>
-        /// Converts datablock content to a bitstring
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this Block64<T> src)
-            where T : unmanaged
-                => BitString.from(src.Data);
-
-        /// <summary>
-        /// Converts datablock content to a bitstring
+        /// Converts blocked content to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
@@ -144,7 +135,7 @@ namespace Z0
                 => BitString.from(src.Data, maxbits ?? Block64<T>.N);
 
         /// <summary>
-        /// Converts datablock content to a bitstring
+        /// Converts blocked content to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
@@ -162,7 +153,7 @@ namespace Z0
                 => BitString.from(src.Data, maxbits ?? Block256<T>.N);
 
         /// <summary>
-        /// Converts datablock content to a bitstring
+        /// Converts blocked content to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
@@ -171,7 +162,7 @@ namespace Z0
                 => BitString.from(src.Data, maxbits ?? ConstBlock64<T>.N);
 
         /// <summary>
-        /// Converts datablock content to a bitstring
+        /// Converts blocked content to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        

@@ -61,12 +61,15 @@ namespace Z0
         /// Counts the number of trailing zeros
         /// </summary>
         [MethodImpl(Inline)]
-        public static int ntz(in BitVector128 x)
+        public static int ntz<N,T>(in BitVector128<N,T> x)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
         {
-            if(x.x0 == 0)
-                return gbits.ntz(x.x1) + 64;
+            var lo = x.Lo;
+            if(lo != 0)
+                return gbits.ntz(lo);
             else
-                return gbits.ntz(x.x0);
+                return gbits.ntz(x.Hi) + 64;
         }
     }
 }

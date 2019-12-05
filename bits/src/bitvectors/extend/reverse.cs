@@ -64,13 +64,6 @@ namespace Z0
         public static BitVector64 Reverse(this BitVector64 src)
             => BitVector.rev(src);
 
-        /// <summary>
-        /// Reverses the vector bits
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 Reverse(this BitVector128 src)
-            => BitVector.rev(src);
 
     }
 

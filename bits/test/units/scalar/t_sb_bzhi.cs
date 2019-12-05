@@ -8,18 +8,18 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_sb_bzhi : t_sb<t_sb_bzhi>
+    public class t_sb_zerohi : t_sb<t_sb_zerohi>
     {    
-        public void bzhi_8u_check()
-            => sb_bzhi_check<byte>();
+        public void sb_zerohi_8u()
+            => sb_zerohi_check<byte>();
 
-        public void bzhi_16u_check()
-            => sb_bzhi_check<ushort>();
+        public void sb_zerohi_16u()
+            => sb_zerohi_check<ushort>();
 
-        public void bzhi_32u_check()
-            => sb_bzhi_check<uint>();
+        public void sb_zerohi_32u()
+            => sb_zerohi_check<uint>();
 
-        public void bzhi_64u_check()
-            => sb_bzhi_check<ulong>();
+        public void sb_zerohi_64u()
+            => sb_zerohi_check<ulong>();
     }
 }

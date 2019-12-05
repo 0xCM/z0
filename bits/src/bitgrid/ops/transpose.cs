@@ -54,21 +54,14 @@ namespace Z0
         // 60 61 62 63
 
 
-
         [MethodImpl(Inline)]
         public static BitGrid64<N4,N16,ulong> transpose2(BitGrid64<N16,N4,ulong> A)
         {
             const ulong C =0b0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001;
-            //const ulong R0 =0b0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_1111_1111_1111_1111;
-            //const ulong R = (1ul << 16) - 1;
-            //var R2 = NatMath.pow2m1<N16>();
             var r = A.RowCount;
             var c = A.ColCount;
             var R = math.pow2m1(r);
-            
-
-            
-
+                    
             var c0 = Bits.gather(A.Data, C << 0);
             var c1 = Bits.gather(A.Data, C << 1);
             var c2 = Bits.gather(A.Data, C << 2);
@@ -90,7 +83,5 @@ namespace Z0
                 (ulong)A.Col(2) << 32 | 
                 (ulong)A.Col(3) << 48
                 );
-
     }
-
 }

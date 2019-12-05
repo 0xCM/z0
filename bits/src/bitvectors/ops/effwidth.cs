@@ -12,26 +12,6 @@ namespace Z0
 
     partial class BitVector
     {
-        /// <summary>
-        /// Computes the effective width of the vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static int effwidth<T>(BitVector<T> x)
-            where T : unmanaged
-                => bitsize<T>() - nlz(x);
-
-        /// <summary>
-        /// Computes the effective width of the vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static int effwidth<N,T>(BitVector<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => x.Width - nlz(x);
 
         /// <summary>
         /// Counts the number of leading zero bits
@@ -60,13 +40,26 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int effwidth(BitVector64 x)
             => x.Width - nlz(x);
+ 
+        /// <summary>
+        /// Computes the effective width of the vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static int effwidth<T>(BitVector<T> x)
+            where T : unmanaged
+                => bitsize<T>() - nlz(x);
 
         /// <summary>
-        /// Counts the number of leading zeros
+        /// Computes the effective width of the vector
         /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static int effwidth(in BitVector128 x)
-            => x.Width - nlz(x);
+        public static int effwidth<N,T>(BitVector<N,T> x)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => x.Width - nlz(x);
     }
-
 }

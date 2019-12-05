@@ -5,16 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
     using System.Collections.Generic;
-    using System.Linq;
+
     using static zfunc;
 
     partial class BitGrid
     {                
-
         /// <summary>
         /// Enumerates the valid dimensions for a 16-bit fixed bitgrid
         /// </summary>

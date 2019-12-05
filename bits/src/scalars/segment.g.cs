@@ -21,9 +21,8 @@ namespace Z0
         /// <param name="first">The 0-based index of the first selected bit</param>
         /// <param name="last">The 0-based index of the last selected bit</param>
         [MethodImpl(Inline)]
-        public static T segment<T>(T a, int first, int last)
-        {
-            
+        public static T bitseg<T>(T a, int first, int last)
+        {            
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.segment(uint8(a), first, last));
             else if(typeof(T) == typeof(ushort))
@@ -48,7 +47,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void segment<T>(T a, int first, int last, Span<byte> dst, int offset)
             where T : unmanaged
-                => bytes(gbits.segment(a,first,last)).Slice(0, BitCalcs.bytecount(last - first + 1)).CopyTo(dst,offset);                 
-
+                => bytes(gbits.bitseg(a,first,last)).Slice(0, BitCalcs.bytecount(last - first + 1)).CopyTo(dst,offset);
     }
 }

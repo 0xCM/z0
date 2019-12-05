@@ -5,28 +5,26 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
  
     using static zfunc;
-
+    
     partial class BitParts
     {        
         /// <summary>
-        /// Partitions a 24-bit container into 12-bit segments
+        /// Partitions a 32-bit container into 16-bit segments
         /// </summary>
         [Flags]
-        public enum Part24x12 : uint
+        public enum Part32x16 : uint
         {
             /// <summary>
             /// The total count of partitioned bits
             /// </summary>
-            Length = 24,
+            Length = 32,
 
             /// <summary>
             /// The partition width
             /// </summary>
-            Width = 12,
+            Width = 16,
 
             /// <summary>
             /// The partition count
@@ -36,7 +34,7 @@ namespace Z0
             /// <summary>
             /// Identifies partition 0/1
             /// </summary>
-            Part0 = Part12x1.Select,
+            Part0 = Part16x1.Select,
 
             /// <summary>
             /// Identifies partition 1/1
@@ -48,22 +46,21 @@ namespace Z0
             /// </summary>
             Select = Part0 | Part1
         }
-
         /// <summary>
-        /// Partitions a 36-bit container into 12-bit segments
+        /// Partitions a 48-bit container into 16-bit segments
         /// </summary>
         [Flags]
-        public enum Part36x12 : uint
+        public enum Part48x16 : ulong
         {
             /// <summary>
             /// The total count of partitioned bits
             /// </summary>
-            Length = 36,
+            Length = 48,
 
             /// <summary>
             /// The partition width
             /// </summary>
-            Width = 12,
+            Width = 16,
 
             /// <summary>
             /// The partition count
@@ -73,7 +70,7 @@ namespace Z0
             /// <summary>
             /// Identifies partition 0/2
             /// </summary>
-            Part0 = Part12x1.Select,
+            Part0 = Part16x1.Select,
 
             /// <summary>
             /// Identifies partition 1/2
@@ -90,22 +87,22 @@ namespace Z0
             /// </summary>
             Select = Part0 | Part1 | Part2
         }
-
+ 
         /// <summary>
-        /// Partitions a 48-bit container into 12-bit segments
+        /// Partitions a 64-bit container into 16-bit segments
         /// </summary>
         [Flags]
-        public enum Part48x12 : uint
+        public enum Part64x16 : ulong
         {
             /// <summary>
             /// The total count of partitioned bits
             /// </summary>
-            Length = 48,
+            Length = 64,
 
             /// <summary>
             /// The partition width
             /// </summary>
-            Width = 12,
+            Width = 16,
 
             /// <summary>
             /// The partition count
@@ -115,7 +112,7 @@ namespace Z0
             /// <summary>
             /// Identifies partition 0/3
             /// </summary>
-            Part0 = Part12x1.Select,
+            Part0 = Part16x1.Select,
 
             /// <summary>
             /// Identifies partition 1/3
@@ -136,58 +133,6 @@ namespace Z0
             /// Selects all container bits
             /// </summary>
             Select = Part0 | Part1 | Part2 | Part3
-        }
-
-        /// <summary>
-        /// Partitions a 60-bit container into segments of width 12
-        /// </summary>
-        [Flags]
-        public enum Part60x12 : uint
-        {
-            /// <summary>
-            /// The total count of partitioned bits
-            /// </summary>
-            Length = 60,
-
-            /// <summary>
-            /// The partition width
-            /// </summary>
-            Width = 12,
-
-            /// <summary>
-            /// The partition count
-            /// </summary>
-            Count = Length/Width,
-
-            /// <summary>
-            /// Identifies partition 0/4
-            /// </summary>
-            Part0 = Part12x1.Select,
-
-            /// <summary>
-            /// Identifies partition 1/4
-            /// </summary>
-            Part1 = Part0 << (int)Width,
-
-            /// <summary>
-            /// Identifies partition 2/4
-            /// </summary>
-            Part2 = Part1 << (int)Width,
-
-            /// <summary>
-            /// Identifies partition 3/4
-            /// </summary>
-            Part3 = Part2 << (int)Width,
-
-            /// <summary>
-            /// Identifies partition 4/4
-            /// </summary>
-            Part4 = Part3 << (int)Width,
-
-            /// <summary>
-            /// Selects all container bits
-            /// </summary>
-            Select = Part0 | Part1 | Part2 | Part3 | Part4
-        }
+        } 
     }
 }

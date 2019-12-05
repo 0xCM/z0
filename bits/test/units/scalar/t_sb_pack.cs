@@ -157,14 +157,14 @@ namespace Z0
                     pack(x0, x1, x2, x3, x4, x5, x6, x7, pos, ref dst);
                     
                     var j = 0;
-                    Claim.yea(gbits.match(dst, j++, x0, pos));
-                    Claim.yea(gbits.match(dst, j++, x1, pos));
-                    Claim.yea(gbits.match(dst, j++, x2, pos));
-                    Claim.yea(gbits.match(dst, j++, x3, pos));
-                    Claim.yea(gbits.match(dst, j++, x4, pos));
-                    Claim.yea(gbits.match(dst, j++, x5, pos));
-                    Claim.yea(gbits.match(dst, j++, x6, pos));
-                    Claim.yea(gbits.match(dst, j++, x7, pos));                    
+                    Claim.yea(gbits.bitmatch(dst, j++, x0, pos));
+                    Claim.yea(gbits.bitmatch(dst, j++, x1, pos));
+                    Claim.yea(gbits.bitmatch(dst, j++, x2, pos));
+                    Claim.yea(gbits.bitmatch(dst, j++, x3, pos));
+                    Claim.yea(gbits.bitmatch(dst, j++, x4, pos));
+                    Claim.yea(gbits.bitmatch(dst, j++, x5, pos));
+                    Claim.yea(gbits.bitmatch(dst, j++, x6, pos));
+                    Claim.yea(gbits.bitmatch(dst, j++, x7, pos));                    
                 }
             }
         }
@@ -249,7 +249,7 @@ namespace Z0
 
                 var up1 = BitStore.select((byte)i);
                 Span<byte> up2 = stackalloc byte[8];
-                BitParts.unpack8x1(b, up2);
+                Bits.unpack8x1(b, up2);
                 Claim.eq(BitString.fromseq(up1), BitString.fromseq(up2));
             }
         }
@@ -261,7 +261,7 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)
             {
                 var src = Random.Next<ulong>();
-                BitParts.unpack64x1(src, dst);
+                Bits.unpack64x1(src, dst);
                 var bitsPC = dst.PopCount();
                 var bytes = BitConvert.GetBytes(src);
                 var bytesPC = bytes.PopCount();
@@ -276,8 +276,8 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.Next<uint>();
-                BitParts.unpack32x1(x, y1);
-                BitParts.unpack32x1(x, y2);
+                Bits.unpack32x1(x, y1);
+                Bits.unpack32x1(x, y2);
                 Claim.eq(y1.ToBitString(), y2.ToBitString());
             }            
         }    

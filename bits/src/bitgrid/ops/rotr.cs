@@ -13,7 +13,6 @@ namespace Z0
 
     partial class BitGrid
     {
-
         [MethodImpl(Inline)]
         public static BitGrid16<T> rotr<T>(BitGrid16<T> gx, int shift)
             where T : unmanaged
@@ -50,6 +49,19 @@ namespace Z0
         public static BitGrid256<T> rotr<T>(in BitGrid256<T> gx, int shift)
             where T : unmanaged
                 => ginx.vrotr<T>(gx,(byte)shift);
-    }
 
+        [MethodImpl(Inline)]
+        public static BitGrid128<M,N,T> rotr<M,N,T>(in BitGrid128<M,N,T> gx, int shift)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
+                => ginx.vrotr<T>(gx,(byte)shift);
+
+        [MethodImpl(Inline)]
+        public static BitGrid256<M,N,T> rotr<M,N,T>(in BitGrid256<M,N,T> gx, int shift)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
+                => ginx.vrotr<T>(gx,(byte)shift);
+    }
 }

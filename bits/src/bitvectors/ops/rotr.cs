@@ -13,41 +13,6 @@ namespace Z0
     partial class BitVector
     {
         /// <summary>
-        /// Rotates source bits rightward
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="s">The rotation magnitude</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<T> rotr<T>(BitVector<T> x, int s)
-            where T : unmanaged
-                => gbits.rotr(x.Scalar,s);
-
-        /// <summary>
-        /// Rotates source bits rightward
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="s">The rotation magnitude</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> rotr<N,T>(BitVector<N,T> x, int s)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gbits.rotr(x.Scalar, s, x.Width);
-
-        /// <summary>
-        /// Rotates source bits rightward
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="s">The rotation magnitude</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector128<N,T> rotr<N,T>(in BitVector128<N,T> x, int s)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => ginx.vrotrx(x.data, (byte)s);
-
-        /// <summary>
         /// Computes a rightward bit rotation
         /// </summary>
         /// <param name="x">The source bitvector</param>
@@ -97,12 +62,34 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source bitvector</param>
         /// <param name="s">The rotation magnitude</param>
+        /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector128 rotr(in BitVector128 x, int s)
-        {
-            var z = BitVector.alloc(n128);
-            vblock.rotrx(n128, in x.x0, (byte)s, ref z.x0);
-            return z;
-        }
+        public static BitVector<T> rotr<T>(BitVector<T> x, int s)
+            where T : unmanaged
+                => gbits.rotr(x.Scalar,s);
+
+        /// <summary>
+        /// Rotates source bits rightward
+        /// </summary>
+        /// <param name="x">The source bitvector</param>
+        /// <param name="s">The rotation magnitude</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> rotr<N,T>(BitVector<N,T> x, int s)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gbits.rotr(x.Scalar, s, x.Width);
+
+        /// <summary>
+        /// Rotates source bits rightward
+        /// </summary>
+        /// <param name="x">The source bitvector</param>
+        /// <param name="s">The rotation magnitude</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> rotr<N,T>(in BitVector128<N,T> x, int s)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => ginx.vrotrx(x.data, (byte)s);
     }
 }
