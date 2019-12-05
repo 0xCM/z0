@@ -352,7 +352,7 @@ namespace Z0
             for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.Next<T>();
-                var y0 = gbits.blsr(x);
+                var y0 = gbits.lsboff(x);
                 var y1 = gmath.and(gmath.sub(x, gmath.one<T>()), x);
                 Claim.eq(y0,y1);
             }
@@ -437,7 +437,7 @@ namespace Z0
         /// </summary>
         /// <param name="cycles">The number of times the test is repeated</param>
         /// <typeparam name="T">The primal type</typeparam>
-        protected void gsb_pack_1xN_check<T>()
+        protected void sb_pack_1xN_check<T>()
             where T : unmanaged
         {
             Span<byte> _dst = new byte[bitsize<T>()];

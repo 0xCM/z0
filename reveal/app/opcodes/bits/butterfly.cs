@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class bvoc
+    public static class butterflyoc
     {
 
         public static void bs_and(in Block256<uint> x, in Block256<uint> y, Block256<uint> z)

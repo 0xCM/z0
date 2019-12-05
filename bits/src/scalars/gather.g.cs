@@ -5,12 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics.X86;
-    using static System.Runtime.Intrinsics.X86.Bmi2;
-    using static System.Runtime.Intrinsics.X86.Bmi2.X64;
  
     using static zfunc;
 
@@ -19,7 +14,6 @@ namespace Z0
 
     partial class gbits
     {
-
         /// <summary>
         /// Extracts mask-identified bits from the source and deposits the result to the contiguous low bits of a zero-initialied target 
         /// </summary>

@@ -60,6 +60,6 @@ namespace Z0
         /// <param name="src">The source bitstring</param>
         [MethodImpl(Inline)]
         public static BitVector<uint> generic(byte x0, byte x1, byte x2, byte x3)
-            => generic(Bits.pack(x0,x1,x2,x3));
+            => generic(Bits.concat(x0,x1,x2,x3));
     }
 }

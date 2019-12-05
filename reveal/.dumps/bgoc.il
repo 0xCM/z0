@@ -1,4 +1,4 @@
-// 2019-12-03 18:10:51:436
+// 2019-12-04 23:04:08:224
 BitGrid64<N8,N8,ulong> bg_fw64_transpose_8x8x64(BitGrid64<N8,N8,ulong> g)
 {
     IL_0000: ldarg.0
@@ -177,36 +177,6 @@ BitGrid256<N32,N8,uint> bg_and_16x4_128x32(BitGrid256<N32,N8,uint> gx, BitGrid25
     IL_001A: ldloca.s V_2
     IL_001C: call Z0.BitGrid256`3<Z0.N32,Z0.N8,System.UInt32> Z0.BitGrid256`3<Z0.N32,Z0.N8,System.UInt32>::op_Implicit(Z0.BitGrid256`1<System.UInt32>&)
     IL_0021: ret
-
-}
-void set_bit(ref uint src, byte pos, bit state)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.UInt32& Z0.gbits::set<System.UInt32>(System.UInt32&,System.Byte,Z0.bit)
-    IL_0008: pop
-    IL_0009: ret
-
-}
-void set_bit_on(ref uint src, byte pos)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.bit::get_On()
-    IL_0007: call System.UInt32& Z0.gbits::set<System.UInt32>(System.UInt32&,System.Byte,Z0.bit)
-    IL_000C: pop
-    IL_000D: ret
-
-}
-void set_bit_off(ref uint src, byte pos)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.bit::get_Off()
-    IL_0007: call System.UInt32& Z0.gbits::set<System.UInt32>(System.UInt32&,System.Byte,Z0.bit)
-    IL_000C: pop
-    IL_000D: ret
 
 }
 bit read_bit_from_vector(in BitCells<N23,byte> src)

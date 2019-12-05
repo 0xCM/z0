@@ -27,6 +27,15 @@ namespace Z0
         public static string GenAccessor(byte[] data, string propName, int offset = 4, int seglen = 8)
             => new InlineData(data,propName).GenAccessor(offset,seglen);
 
+        public static string GenAccessor(Span<byte> data, string propName, int offset = 4, int seglen = 8)
+            => new InlineData(data,propName).GenAccessor(offset,seglen);
+
+        public InlineData(Span<byte> data, string propName)
+        {
+            this.Data = data.ToArray();
+            this.PropName = propName;
+        }
+
         public InlineData(byte[] data, string propName)
         {
             this.Data = data;

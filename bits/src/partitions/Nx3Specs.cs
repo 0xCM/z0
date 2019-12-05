@@ -45,16 +45,6 @@ namespace Z0
             Part1 = Part0 << (int)Width,
 
             /// <summary>
-            /// Identifies the first partition
-            /// </summary>
-            First = Part0,
-
-            /// <summary>
-            /// Identifies the last partition
-            /// </summary>
-            Last = Part1,
-
-            /// <summary>
             /// Selects all container bits
             /// </summary>
             Select = Part0 | Part1
@@ -95,16 +85,6 @@ namespace Z0
             /// Identifies partition 2/2
             /// </summary>
             Part2 = Part1 << (int)Width,
-
-            /// <summary>
-            /// Identifies the first partition
-            /// </summary>
-            First = Part0,
-
-            /// <summary>
-            /// Identifies the last partition
-            /// </summary>
-            Last = Part2,
 
             /// <summary>
             /// Selects all container bits
@@ -153,16 +133,6 @@ namespace Z0
             /// Identifies partition 3/3
             /// </summary>
             Part3 = Part2 << (int)Width,
-
-            /// <summary>
-            /// Identifies the first partition
-            /// </summary>
-            First = Part0,
-
-            /// <summary>
-            /// Identifies the last partition
-            /// </summary>
-            Last = Part3,
 
             /// <summary>
             /// Selects all container bits
@@ -215,16 +185,6 @@ namespace Z0
             /// Identifies partition 4/4
             /// </summary>
             Part4 = Part3 << (int)Width,
-
-            /// <summary>
-            /// Identifies the first partition
-            /// </summary>
-            First = Part0,
-
-            /// <summary>
-            /// Identifies the last partition
-            /// </summary>
-            Last = Part4,
 
             /// <summary>
             /// Selects all container bits
@@ -282,16 +242,6 @@ namespace Z0
             /// Identifies partition 5/5
             /// </summary>
             Part5 = Part4 << (int)Width,
-
-            /// <summary>
-            /// Identifies the first partition
-            /// </summary>
-            First = Part0,
-
-            /// <summary>
-            /// Identifies the last partition
-            /// </summary>
-            Last = Part5,
 
             /// <summary>
             /// Selects all container bits
@@ -354,16 +304,6 @@ namespace Z0
             /// Identifies partition 6/6
             /// </summary>
             Part6 = Part5 << (int)Width,
-
-            /// <summary>
-            /// Identifies the first partition
-            /// </summary>
-            First = Part0,
-
-            /// <summary>
-            /// Identifies the last partition
-            /// </summary>
-            Last = Part6,
 
             /// <summary>
             /// Selects all container bits
@@ -433,16 +373,6 @@ namespace Z0
             Part7 = Part6 << (int)Width,
 
             /// <summary>
-            /// Identifies the first partition
-            /// </summary>
-            First = Part0,
-
-            /// <summary>
-            /// Identifies the last partition
-            /// </summary>
-            Last = Part7,
-
-            /// <summary>
             /// Selects all container bits
             /// </summary>
             Select = Part0 | Part1 | Part2 | Part3 | Part4 | Part5 | Part6 | Part7,
@@ -471,7 +401,7 @@ namespace Z0
             Count = Length/Width,
 
             /// <summary>
-            /// Specifies partition 1
+            /// Identifies partition 1
             /// </summary>
             Part0 = Part3x1.Select,
 
@@ -516,16 +446,6 @@ namespace Z0
             Part8 = Part7 << (int)Width,
 
             /// <summary>
-            /// Identifies the first partition
-            /// </summary>
-            First = Part0,
-
-            /// <summary>
-            /// Identifies the last partition
-            /// </summary>
-            Last = Part8,
-
-            /// <summary>
             /// Selects all container bits
             /// </summary>
             Select = Part0 | Part1 | Part2 | Part3 | Part4 | Part5 | Part6 | Part7 | Part8,
@@ -553,64 +473,54 @@ namespace Z0
             Count = Length/Width,
 
             /// <summary>
-            /// Specifies partition 1
+            /// Identifies partition 0
             /// </summary>
             Part0 = Part3x1.Select,
 
             /// <summary>
-            /// Specifies partition 2
+            /// Identifies partition 1
             /// </summary>
             Part1 = Part0 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 3
+            /// Identifies partition 2
             /// </summary>
             Part2 = Part1 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 4
+            /// Identifies partition 3
             /// </summary>
             Part3 = Part2 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 5
+            /// Identifies partition 4
             /// </summary>
             Part4 = Part3 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 6
+            /// Identifies partition 5
             /// </summary>
             Part5 = Part4 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 7
+            /// Identifies partition 6
             /// </summary>
             Part6 = Part5 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 8
+            /// Identifies partition 7
             /// </summary>
             Part7 = Part6 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 9
+            /// Identifies partition 8
             /// </summary>
             Part8 = Part7 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 10
+            /// Identifies partition 9
             /// </summary>
             Part9 = Part8 << (int)Width,
-
-            /// <summary>
-            /// Identifies the first partition
-            /// </summary>
-            First = Part0,
-
-            /// <summary>
-            /// Identifies the last partition
-            /// </summary>
-            Last = Part9,
 
             /// <summary>
             /// Selects all container bits
@@ -641,69 +551,59 @@ namespace Z0
             Count = Length/Width,
 
             /// <summary>
-            /// Specifies partition 1
+            /// Identifies partition 1
             /// </summary>
             Part0 = Part3x1.Select,
 
             /// <summary>
-            /// Specifies partition 2
+            /// Identifies partition 2
             /// </summary>
             Part1 = Part0 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 3
+            /// Identifies partition 3
             /// </summary>
             Part2 = Part1 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 4
+            /// Identifies partition 4
             /// </summary>
             Part3 = Part2 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 5
+            /// Identifies partition 5
             /// </summary>
             Part4 = Part3 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 6
+            /// Identifies partition 6
             /// </summary>
             Part5 = Part4 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 7
+            /// Identifies partition 7
             /// </summary>
             Part6 = Part5 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 8
+            /// Identifies partition 8
             /// </summary>
             Part7 = Part6 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 9
+            /// Identifies partition 9
             /// </summary>
             Part8 = Part7 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 10
+            /// Identifies partition 10
             /// </summary>
             Part9 = Part8 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 11
+            /// Identifies partition 11
             /// </summary>
             Part10 = Part9 << (int)Width,
-
-            /// <summary>
-            /// Identifies the first partition
-            /// </summary>
-            First = Part0,
-
-            /// <summary>
-            /// Identifies the last partition
-            /// </summary>
-            Last = Part10,
 
             /// <summary>
             /// Selects all container bits
@@ -733,74 +633,64 @@ namespace Z0
             Count = Length/Width,
 
             /// <summary>
-            /// Specifies partition 1
+            /// Identifies partition 0
             /// </summary>
             Part0 = Part3x1.Select,
 
             /// <summary>
-            /// Specifies partition 2
+            /// Identifies partition 1
             /// </summary>
             Part1 = Part0 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 3
+            /// Identifies partition 2
             /// </summary>
             Part2 = Part1 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 4
+            /// Identifies partition 3
             /// </summary>
             Part3 = Part2 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 5
+            /// Identifies partition 4
             /// </summary>
             Part4 = Part3 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 6
+            /// Identifies partition 5
             /// </summary>
             Part5 = Part4 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 7
+            /// Identifies partition 6
             /// </summary>
             Part6 = Part5 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 8
+            /// Identifies partition 7
             /// </summary>
             Part7 = Part6 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 9
+            /// Identifies partition 8
             /// </summary>
             Part8 = Part7 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 10
+            /// Identifies partition 9
             /// </summary>
             Part9 = Part8 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 11
+            /// Identifies partition 10
             /// </summary>
             Part10 = Part9 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 11
+            /// Identifies partition 11
             /// </summary>
             Part11 = Part10 << (int)Width,
-
-            /// <summary>
-            /// Identifies the first partition
-            /// </summary>
-            First = Part0,
-
-            /// <summary>
-            /// Identifies the last partition
-            /// </summary>
-            Last = Part11,
 
             /// <summary>
             /// Selects all container bits
@@ -808,6 +698,7 @@ namespace Z0
             Select = Part0 | Part1 | Part2 | Part3 | Part4 | Part5 | Part6 | Part7 | Part8 | Part9 | Part10 | Part11,
         }
 
+ 
     }
 
 }

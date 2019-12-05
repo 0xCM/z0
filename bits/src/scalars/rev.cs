@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static ushort rev(ushort src)
-            => pack(rev(hi(src)),rev(lo(src)));
+            => concat(rev(hi(src)),rev(lo(src)));
 
         [MethodImpl(Inline)]
         public static uint rev(uint x)
@@ -44,6 +44,6 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static ulong rev(ulong src)
-            => pack(rev(hi(src)),rev(lo(src)));
+            => concat(rev(hi(src)),rev(lo(src)));
     }
 }

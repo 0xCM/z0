@@ -1,4 +1,4 @@
-// 2019-12-03 18:10:50:917
+// 2019-12-04 23:04:09:036
 sbyte sar_g8i(sbyte lhs, int offset)
 {
     IL_0000: ldarg.0
@@ -1523,7 +1523,7 @@ Perm4:byte perm4_assemble_id()
     IL_0001: ldc.i4.1
     IL_0002: ldc.i4.2
     IL_0003: ldc.i4.3
-    IL_0004: call Z0.Perm4 Z0.PermSpec::assemble(Z0.Perm4,Z0.Perm4,Z0.Perm4,Z0.Perm4)
+    IL_0004: call Z0.Perm4 Z0.Perm::assemble(Z0.Perm4,Z0.Perm4,Z0.Perm4,Z0.Perm4)
     IL_0009: ret
 
 }
@@ -1533,7 +1533,7 @@ Perm4:byte perm4_assemble_rid()
     IL_0001: ldc.i4.2
     IL_0002: ldc.i4.1
     IL_0003: ldc.i4.0
-    IL_0004: call Z0.Perm4 Z0.PermSpec::assemble(Z0.Perm4,Z0.Perm4,Z0.Perm4,Z0.Perm4)
+    IL_0004: call Z0.Perm4 Z0.Perm::assemble(Z0.Perm4,Z0.Perm4,Z0.Perm4,Z0.Perm4)
     IL_0009: ret
 
 }

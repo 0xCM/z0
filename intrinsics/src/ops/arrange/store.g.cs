@@ -14,7 +14,31 @@ namespace Z0
     partial class ginx
     {
         /// <summary>
-        /// Stores the source vector to a blocked container
+        /// Stores vector content to a span
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target block</param>
+        /// <param name="offset">The target offset at which storage should begin</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static void vstore<T>(Vector128<T> src, Span<T> dst, int offset = 0)
+            where T : unmanaged
+                => vstore(src, ref head(dst), offset);
+
+        /// <summary>
+        /// Stores vector content to a span
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target block</param>
+        /// <param name="offset">The target offset at which storage should begin</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static void vstore<T>(Vector256<T> src, Span<T> dst, int offset = 0)
+            where T : unmanaged
+                => vstore(src, ref head(dst), offset);
+
+        /// <summary>
+        /// Stores the source vector to the head of a blocked container
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target block</param>
@@ -22,7 +46,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vstore<T>(Vector128<T> src, in Block128<T> dst)
             where T : unmanaged
-                => vstore(src, ref dst.Head, 0);
+                => vstore(src, ref dst.Head);
+
+        /// <summary>
+        /// Stores the source vector to a specified block in a blocked container
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target block</param>
+        /// <param name="block">The 0-based block index at which storage should begin</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static void vstore<T>(Vector128<T> src, in Block128<T> dst, int block)
+            where T : unmanaged
+                => vstore(src, ref dst.Block(block).Head);
 
         /// <summary>
         /// Stores the source vector to a blocked container
@@ -33,7 +69,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vstore<T>(Vector256<T> src, in Block256<T> dst)
             where T : unmanaged
-                => vstore(src, ref dst.Head, 0);
+                => vstore(src, ref dst.Head);
+
+        /// <summary>
+        /// Stores the source vector to a specified block in a blocked container
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target block</param>
+        /// <param name="block">The 0-based block index at which storage should begin</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static void vstore<T>(Vector256<T> src, in Block256<T> dst, int block)
+            where T : unmanaged
+                => vstore(src, ref dst.Block(block).Head);
 
         /// <summary>
         /// Stores the source vector to a reference cell
@@ -43,7 +91,7 @@ namespace Z0
         /// <param name="offset">The target offset</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static void vstore<T>(Vector128<T> src, ref T dst, int offset)
+        public static void vstore<T>(Vector128<T> src, ref T dst, int offset = 0)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -68,7 +116,7 @@ namespace Z0
         /// <param name="offset">The target offset</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static void vstore<T>(Vector256<T> src, ref T dst, int offset)
+        public static void vstore<T>(Vector256<T> src, ref T dst, int offset = 0)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 

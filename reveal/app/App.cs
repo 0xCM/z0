@@ -96,20 +96,21 @@ namespace Z0
         void Disassemble(bool asm, bool cil)
         {
             Disassemble(new ExperimentalScenarios());
+            Disassemble(typeof(bvoc));    
+            Disassemble(typeof(bitmatoc));    
+            Disassemble(typeof(bgoc));   
             Disassemble(typeof(natoc));    
+            Disassemble(typeof(bitmaskoc));
+            Disassemble(typeof(butterflyoc));    
             Disassemble(typeof(memoc));    
             Disassemble(typeof(inxoc));    
             Disassemble(typeof(gmoc));    
             Disassemble(typeof(sinxoc));    
-            Disassemble(typeof(zfoc));    
-            Disassemble(typeof(bvoc));    
-            Disassemble(typeof(bmoc));    
             Disassemble(typeof(convoc));   
-            Disassemble(typeof(bgoc));   
+            Disassemble(typeof(sbitsoc));    
             Disassemble(typeof(SimdPack));
             Disassemble(typeof(logixoc));
-            Disassemble(typeof(BitParts));  
-            Disassemble(typeof(Bits));
+            Disassemble(typeof(zfoc));    
 
         }
 

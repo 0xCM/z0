@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
-    using static System.Runtime.Intrinsics.X86.Bmi1;
-    using static System.Runtime.Intrinsics.X86.Bmi1.X64;
  
     using static zfunc;
     
@@ -19,24 +16,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The soruce value</param>
         [MethodImpl(Inline)]
-        public static sbyte lo(sbyte src)
-            => (sbyte)(0xF & src);
-
-        /// <summary>
-        /// Extracts the lower 4 bits from the source
-        /// </summary>
-        /// <param name="src">The soruce value</param>
-        [MethodImpl(Inline)]
         public static byte lo(byte src)
             => (byte)(0xF & src);
-
-        /// <summary>
-        /// Extracts the lower 8 bits from the source
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
-        public static sbyte lo(short src)
-            => (sbyte)src;
 
         /// <summary>
         /// Extracts the lower 8 bits from the source
@@ -51,24 +32,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static short lo(int src)
-            => (short)src;        
-
-        /// <summary>
-        /// Extracts the lower 16 bits from the source
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
         public static ushort lo(uint src)
             => (ushort)src;
-
-        /// <summary>
-        /// Extracts the lower half of the bits from the source
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
-        public static int lo(long src)
-            => (int)src;
 
         /// <summary>
         /// Extracts the lower half of the bits from the source

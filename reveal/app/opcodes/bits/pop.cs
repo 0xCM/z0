@@ -33,10 +33,10 @@ namespace Z0
             => CpuBits.vpop(x,y,z);
 
         public static void part64x1_byte(ulong src, Span<byte> dst)
-            => BitParts.part64x1(src, dst);
+            => Bits.part64x1(src, dst);
 
         public static void part64x1_bit(ulong src, Span<bit> dst)
-            => BitParts.part64x1(src, dst);
+            => Bits.part64x1(src, dst);
 
 
     }

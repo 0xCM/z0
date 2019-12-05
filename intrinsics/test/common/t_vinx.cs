@@ -415,7 +415,7 @@ namespace Z0
             var src = Random.CpuVector<T>(n);
             var actual = src.ToSpan();
             var expect = span<T>(len);
-            src.Store(expect);
+            src.StoreTo(expect);
             for(byte i = 0; i< len; i++)
                 Claim.eq(expect[i], actual[i]);
         }
@@ -426,15 +426,18 @@ namespace Z0
             var len = vlength<T>(n);
             var half = len >> 1;
             var src = Random.CpuVector<T>(n);
-            var srcData = src.Store(span<T>(len));
+            var srcData = span<T>(len);
+            src.StoreTo(srcData);
             
             var x0 = ginx.vlo(src);
-            var y0 = x0.Store(span<T>(half));
+            var y0 = span<T>(half);
+            x0.StoreTo(y0);
             var z0 = srcData.Slice(0, half);
             Claim.eq(y0,z0);
 
             var x1 = ginx.vhi(src);
-            var y1 = x1.Store(span<T>(half));
+            var y1 = span<T>(half);
+            x1.StoreTo(y1);
             var z1 = srcData.Slice(half);
             Claim.eq(y1,z1);
 

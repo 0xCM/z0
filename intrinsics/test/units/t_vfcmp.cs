@@ -102,6 +102,7 @@ namespace Z0
         public void ngteq_256xf32()
             => cmp_256xf32_check(FpCmpMode.NGE_UQ);
 
+
         protected void cmp_128x64_check(FpCmpMode mode)
         {
             for(var i = 0; i<SampleSize; i++)

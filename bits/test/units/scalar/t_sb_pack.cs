@@ -10,14 +10,45 @@ namespace Z0
 
     public class t_sb_pack : t_sb<t_sb_pack>
     {
-        public void sb_pack_basecae()
+        public void sb_pack_bits_64x1_basecase()
+        {
+            var src = ulong.MaxValue;
+            Span<bit> dst = new bit[64];
+            Bits.part64x1(src,dst);
+            for(var i=0; i< dst.Length; i++)
+                Claim.yea(dst[i]);
+        }
+
+        public void sb_pack_8x1_basecase()
+        {
+            void case1()
+            {
+                var src = DataBlocks.single<byte>(n256);
+                ginx.vpones<byte>(n256).StoreTo(src);
+                var dst = Bits.pack8x1(src);
+                Claim.eq(dst,uint.MaxValue);
+
+            }
+
+            void case2()
+            {
+                var src = DataBlocks.single<byte>(n128);
+                ginx.vpones<byte>(n128).StoreTo(src);
+                var dst = Bits.pack8x1(src);
+                Claim.eq(dst,ushort.MaxValue);
+            }
+
+            RunLocals();
+        }
+
+        public void sb_pack_basecase()
         {
             var x = 0b10100111001110001110010110101000;
             var x0 = (byte)0b10101000;
             var x1 = (byte)0b11100101;
             var x2 = (byte)0b00111000;
             var x3 = (byte)0b10100111;
-            Claim.eq(x, Bits.pack(x0, x1, x2,x3));
+            Claim.eq(x, Bits.concat(x0, x1, x2,x3));
 
             var bsExpect = "10100111001110001110010110101000";
             var bsActual = x.ToBitString().Format();
@@ -31,20 +62,19 @@ namespace Z0
             var abs_packed = abs.Pack(0, 8);
             var abs_joined = abs_packed.TakeUInt64();
             Claim.Equals(a,abs_joined);
-
         }
 
         public void sb_pack_1x8()
-            => gsb_pack_1xN_check<byte>();
+            => sb_pack_1xN_check<byte>();
 
         public void sb_pack_1x16()
-            => gsb_pack_1xN_check<ushort>();
+            => sb_pack_1xN_check<ushort>();
 
         public void sb_pack_1x32()
-            => gsb_pack_1xN_check<uint>();
+            => sb_pack_1xN_check<uint>();
 
         public void sb_pack_1x64()
-            => gsb_pack_1xN_check<ulong>();
+            => sb_pack_1xN_check<ulong>();
 
         public void sb_pack_2x16()
         {
@@ -52,7 +82,7 @@ namespace Z0
             foreach(var x in src)
             {
                 Bits.split(x,out var x0, out var x1);
-                var y = Bits.pack(x0, x1);
+                var y = Bits.concat(x0, x1);
                 Claim.eq(x,y);
                 Claim.eq(x, BitConvert.ToUInt16(new byte[]{x0, x1}));
             }
@@ -64,7 +94,7 @@ namespace Z0
             foreach(var x in src)
             {
                 Bits.split(x, out var x0, out var x1, out var x2, out var x3);
-                var y = Bits.pack(x0, x1, x2, x3);
+                var y = Bits.concat(x0, x1, x2, x3);
                 Claim.eq(x,y);
                 Claim.eq(x, BitConvert.ToUInt32(new byte[]{x0, x1, x2, x3}));
             }
@@ -77,7 +107,7 @@ namespace Z0
             foreach(var x in src)
             {
                 Bits.split(x, out var x0, out var x1, out var x2, out var x3, out var x4, out var x5, out var x6, out var x7);
-                var y = Bits.pack(x0, x1, x2, x3, x4, x5, x6, x7);
+                var y = Bits.concat(x0, x1, x2, x3, x4, x5, x6, x7);
                 Claim.eq(x,y);
                 Claim.eq(x, BitConverter.ToUInt64(new byte[]{x0, x1, x2, x3, x4, x5, x6, x7}));
             }
@@ -199,7 +229,7 @@ namespace Z0
             var rhs = Random.Array<byte>(len);
             for(var i=0; i<len; i++)
             {
-                var dst = Bits.pack(lhs[i], rhs[i]);
+                var dst = Bits.concat(lhs[i], rhs[i]);
                 Bits.split(dst,out var x0, out var x1);
                 
                 Claim.eq(x0, lhs[i]);

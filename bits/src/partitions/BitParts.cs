@@ -377,34 +377,6 @@ namespace Z0
             Select = Bit7 | Bit15 | Bit23 | Bit31 | Byte39 | Byte47 | Bit55 | Bit63
         }
  
-        [MethodImpl(Inline)]
-        static ulong project(ulong src, ulong mask)
-            => Bits.scatter(src,mask);    
-
-        [MethodImpl(Inline)]
-        static uint project(uint src, uint mask)
-            => Bits.scatter(src,mask);    
-
-        [MethodImpl(Inline)]
-        static ushort project(ushort src, ushort mask)
-            => Bits.scatter(src,mask);    
-
-        [MethodImpl(Inline)]
-        static byte select(byte src, byte mask)
-            => Bits.gather(src,mask);    
-
-        [MethodImpl(Inline)]
-        static ushort select(ushort src, ushort mask)
-            => Bits.gather(src,mask);    
-
-        [MethodImpl(Inline)]
-        static uint select(uint src, uint mask)
-            => Bits.gather(src,mask);    
-
-        [MethodImpl(Inline)]
-        static ulong select(ulong src, ulong mask)
-            => Bits.gather(src,mask);    
-
 
     }
 }

@@ -263,8 +263,8 @@ namespace Z0
         [MethodImpl(Inline)]    
         public BitVector128(uint x00, uint x01, uint x10, uint x11)
         {
-            this.x0 = Bits.pack(x00,x01);
-            this.x1 = Bits.pack(x10, x11);
+            this.x0 = Bits.concat(x00,x01);
+            this.x1 = Bits.concat(x10, x11);
         }
 
         /// <summary>

@@ -1,0 +1,38 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2019
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    
+    using static zfunc;
+    
+    using static As;
+    using static AsIn;
+
+    partial class gbits
+    {
+        /// <summary>
+        /// Disables the least set bit in the source and logically equivalent to the composite operation (src - 1) & src that 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static T lsboff<T>(T src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(Bits.lsboff(uint8(src)));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(Bits.lsboff(uint16(src)));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(Bits.lsboff(uint32(src)));
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>(Bits.lsboff(uint64(src)));
+            else            
+                throw unsupported<T>();
+        }           
+    }
+}
