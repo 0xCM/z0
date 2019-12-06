@@ -221,5 +221,26 @@ namespace Z0
             char? blocksep = null, int? rowWidth = null)
                 where T : unmanaged        
                     => src.ToBitString().Format(tlz, specifier, blockWidth ?? bitsize<T>(), blocksep ,rowWidth);
+
+        /// <summary>
+        /// Block-formats the vector, e.g. [01010101 01010101 ... 01010101] where the size of each block is the bit-width of a component
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]   
+        public static string FormatBitBlocks<T>(this Vector128<T> src)
+            where T : unmanaged        
+                => bracket(src.ToBitString().Format(false, false, bitsize<T>(), AsciSym.Space,null));
+
+        /// <summary>
+        /// Block-formats the vector, e.g. [01010101 01010101 ... 01010101] where the size of each block is the bit-width of a component
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]   
+        public static string FormatBitBlocks<T>(this Vector256<T> src)
+            where T : unmanaged        
+                => bracket(src.ToBitString().Format(false, false, bitsize<T>(), AsciSym.Space,null));
+
     }
 }

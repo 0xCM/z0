@@ -33,7 +33,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BitGrid64<N16,N4,long> ToBitGrid(this Perm16 src)
+        public static BitGrid64<N16,N4,ulong> ToBitGrid(this Perm16 src)
             => BitGrid.from(src);
 
         [MethodImpl(Inline)]
@@ -41,7 +41,7 @@ namespace Z0
             => BitGrid.from(src);
 
         [MethodImpl(Inline)]
-        public static Perm16 ToPerm16(this BitGrid64<N16,N4,long> src)
+        public static Perm16 ToPerm16(this BitGrid64<N16,N4,ulong> src)
             => BitGrid.perm(src);
 
         /// <summary>

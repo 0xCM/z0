@@ -14,7 +14,6 @@ namespace Z0
 
     partial class ginx
     {
-
         [MethodImpl(Inline)]
         public static Vector128<T> vbyteswap<T>(Vector128<T> x)
             where T : unmanaged
@@ -46,8 +45,6 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
-
-
 
     }
 

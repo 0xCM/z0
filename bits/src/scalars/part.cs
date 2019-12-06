@@ -10,7 +10,7 @@ namespace Z0
  
     using static zfunc;
     using static As;
-
+    
     partial class Bits
     {
         // ~ Nx1
@@ -368,7 +368,7 @@ namespace Z0
         public static void part24x3(uint src, ref byte dst)
         {
             const ulong M = BitMasks.Lsb64x8x3;
-            seek64(ref dst, 0) = Bits.scatter((ulong)src, M);        
+            seek64(ref dst, 0) = dinx.scatter((ulong)src, M);        
         }
 
         /// <summary>
@@ -389,8 +389,8 @@ namespace Z0
         public static void part27x3(uint src, ref byte dst)
         {
             const ulong M = BitMasks.Lsb64x8x3;
-            seek64(ref dst, 0) = Bits.scatter((ulong)src, M);
-            seek16(ref dst, 4) = (byte)Bits.scatter((ulong)(src >> 24), M);
+            seek64(ref dst, 0) = dinx.scatter((ulong)src, M);
+            seek16(ref dst, 4) = (byte)dinx.scatter((ulong)(src >> 24), M);
         }
 
         /// <summary>
@@ -411,8 +411,8 @@ namespace Z0
         public static void part30x3(uint src, ref byte dst)
         {
             const ulong M = BitMasks.Lsb64x8x3;
-            seek64(ref dst, 0) = Bits.scatter((ulong)src, M);
-            seek16(ref dst, 4) = (ushort)Bits.scatter((ulong)(src >> 24), M);
+            seek64(ref dst, 0) = dinx.scatter((ulong)src, M);
+            seek16(ref dst, 4) = (ushort)dinx.scatter((ulong)(src >> 24), M);
         }
 
         /// <summary>

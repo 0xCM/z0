@@ -1,4 +1,4 @@
-// 2019-12-04 23:04:08:307
+// 2019-12-05 18:50:57:775
 ulong lsb_64x8x3(ulong src)
 {
     IL_0000: ldarg.0
@@ -34,13 +34,6 @@ ulong mask_1x64u(int exp0)
     IL_0006: ret
 
 }
-ulong mask_loop(Span<int> exponents)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt64 Z0.Bits::mask(System.Span`1<System.Int32>)
-    IL_0006: ret
-
-}
 ulong mask_2x64u(int exp0, int exp1)
 {
     IL_0000: ldarg.0
@@ -58,13 +51,6 @@ ulong mask_3x64u(int exp0, int exp1, int exp2)
     IL_0008: ret
 
 }
-ulong mask_4x64u_loop(Span<int> src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt64 Z0.Bits::mask(System.Span`1<System.Int32>)
-    IL_0006: ret
-
-}
 ulong mask_5x64u(int exp0, int exp1, int exp2, int exp3, int exp4)
 {
     IL_0000: ldarg.0
@@ -74,13 +60,6 @@ ulong mask_5x64u(int exp0, int exp1, int exp2, int exp3, int exp4)
     IL_0004: ldarg.s exp4
     IL_0006: call System.UInt64 Z0.Bits::mask(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
     IL_000B: ret
-
-}
-ulong mask_5x64u_loop(Span<int> src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt64 Z0.Bits::mask(System.Span`1<System.Int32>)
-    IL_0006: ret
 
 }
 ulong mask_6x64u(int exp0, int exp1, int exp2, int exp3, int exp4, int exp5)

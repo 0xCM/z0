@@ -11,14 +11,16 @@ namespace Z0
     using static zfunc;
 
     partial class dinx
-    {
+    {   
 
         // ~ 16x16w <-> 16x8w
+        // ~ 16:8 <-> 16
         // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// (8x16w,8x16w) -> 16x8w
         /// Compacts 16 16-bit integers to 16 8-bit integers
+        /// 16:16 -> 8
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -29,6 +31,7 @@ namespace Z0
         /// <summary>
         /// (8x16w,8x16w) -> 16x8w
         /// Compacts 16 16-bit integers to 16 8-bit integers
+        /// 16:16 -> 8
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -39,6 +42,7 @@ namespace Z0
 
         /// <summary>
         /// 16x8w -> (8x16w, 8x16w)
+        /// 16:8 -> 16
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="lo">The target for the lower source elements</param>
@@ -50,13 +54,14 @@ namespace Z0
             vconvert(vhi(x), out hi);
         }
 
-
         // ~ 32x16w <-> 32x8w
+        // ~ 32:8 <-> 16
         // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// (16x16w,16x16w) -> 32x8w
         /// Compacts 32 16-bit integers to 32 8-bit integers
+        /// 32:16 -> 8
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -67,6 +72,7 @@ namespace Z0
         /// <summary>
         /// (16x16w,16x16w) -> 32x8w
         /// Compacts 32 16-bit integers to 32 8-bit integers
+        /// 32:16 -> 8
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -77,6 +83,7 @@ namespace Z0
 
         /// <summary>
         /// 32x8w -> (16x16w,16x16w)
+        /// 32:8 -> 16
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="x0">The first target vector</param>
@@ -86,11 +93,13 @@ namespace Z0
             => vconvert(src, out x0, out x1);
 
         // ~ 16x16w <-> 16x8w
+        // ~ 16:8 <-> 16
         // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// 16x16w -> 16x8w
         /// Compacts 16 16-bit integers to 16 8-bit integers
+        /// 16:16 -> 8
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -100,6 +109,7 @@ namespace Z0
 
         /// <summary>
         /// 16x8w -> 16x16w
+        /// 16:8 -> 16
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -108,11 +118,13 @@ namespace Z0
             => vconvert(src, out dst);
 
         // ~ 8x16w <-> 8x32w
+        // ~ 8:16 <-> 32
         // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// (4x32w,4x32w) -> 8x16w
         /// Compacts 8 32-bit integers to 8 16-bit integers
+        /// 8:32 -> 16
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -122,6 +134,7 @@ namespace Z0
 
         /// <summary>
         /// 8x16w -> (4x32w,4x32w)
+        /// 8:16 -> 32
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="x0">The first target vector</param>
@@ -135,11 +148,13 @@ namespace Z0
         }
 
         // ~ 8x32w <-> 8x16w
+        // ~ 8:16 <-> 32
         // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// 8x32w -> 8x16w
         /// Compacts 8 32-bit integers to 8 16-bit integers
+        /// 8:32 -> 16
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -148,7 +163,21 @@ namespace Z0
             => dst = vcompact(vlo(x),vhi(x));
 
         /// <summary>
+        /// (4x32w,4x32w) -> 8x16w
+        /// Compacts 8 32-bit integers to 8 16-bit integers
+        /// 8:32 -> 16
+        /// </summary>
+        /// <param name="x">The first source vector</param>
+        /// <param name="y">The second source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> vcompact(Vector128<uint> x, Vector128<uint> y, out Vector128<ushort> dst)
+            => dst = vcompact(x,y);
+
+        /// <summary>
         /// 8x16w -> 8x32w
+        /// Expands 8 16-bit integers to 8 32-bit integers
+        /// 8:16 -> 32
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -157,24 +186,14 @@ namespace Z0
             => vconvert(src, out dst);
 
 
-        /// <summary>
-        /// (4x32w,4x32w) -> 8x16w
-        /// Compacts 8 32-bit integers to 8 16-bit integers
-        /// </summary>
-        /// <param name="x">The first source vector</param>
-        /// <param name="y">The second source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<ushort> vcompact(Vector128<uint> x, Vector128<uint> y, out Vector128<ushort> dst)
-            => dst = vcompact(x,y);
-    
-
         // ~ 16x32w <-> 16x16w
+        // ~ 16x16 <-> 32
         // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// (8x32w,8x32w) -> 16x16w
         /// Compacts 16 32-bit integers to 16 16-bit integers
+        /// 16:32 -> 16
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
         /// <remarks>The vpackus intrinsic emits a vector in the following form: 
@@ -190,6 +209,7 @@ namespace Z0
         /// <summary>
         /// (8x32w,8x32w) -> 16x16w
         /// Compacts 16 32-bit integers to 16 16-bit integers
+        /// 16:32 -> 16
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -199,6 +219,8 @@ namespace Z0
 
         /// <summary>
         /// 16x16w -> (8x32w, 8x32w)
+        /// Expands 16 16-bit integers to 16 32-bit integers
+        /// 16:16 -> 32
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="lo">The target for the lower source elements</param>
@@ -212,11 +234,13 @@ namespace Z0
 
 
         // ~ 16x32w <-> 16x8w
+        // ~ 16:8 <-> 32
         // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// (4x32w,4x32w,4x32w,4x32w) -> 16x8w
         /// Compacts 16 32-bit integers to 16 8-bit integers
+        /// 16:32 -> 8
         /// </summary>
         /// <param name="x0">The first source vector</param>
         /// <param name="x1">The second source vector</param>
@@ -229,6 +253,7 @@ namespace Z0
 
         /// <summary>
         /// 16x8x -> (4x32w, 4x32w, 4x32w, 4x32w)
+        /// 16:8 -> 32
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="x0">The first target vector</param>
@@ -247,6 +272,7 @@ namespace Z0
         /// <summary>
         /// (8x32w, 8x32w) -> 16x8w
         /// Compacts 16 32-bit integers to 16 8-bit integers
+        /// 16:32 -> 8
         /// </summary>
         /// <param name="x0">The first source vector</param>
         /// <param name="x1">The second source vector</param>
@@ -257,6 +283,7 @@ namespace Z0
 
         /// <summary>
         /// 16x8w -> (8x32w,8x32w)
+        /// 16:8 -> 32
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="x0">The first target vector</param>
@@ -269,11 +296,13 @@ namespace Z0
         }
 
         // ~ 32x32w <-> 32x8w
+        // ~ 32:8 <-> 32
         // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// (8x32w,8x32w,8x32w,8x32w) -> 32x8w
         /// Compacts 32 32-bit integers to 32 8-bit integers
+        /// 32:32 -> 8
         /// </summary>
         /// <param name="x0">The first source vector</param>
         /// <param name="x1">The second source vector</param>
@@ -286,6 +315,7 @@ namespace Z0
 
         /// <summary>
         /// 32x8w -> (8x32w, 8x32w, 8x32w, 8x32w)
+        /// 32:8 -> 32
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="x0">The first target vector that receives the first 64-bit segment from the source vector </param>
@@ -301,11 +331,13 @@ namespace Z0
         }
 
         // ~ 4x64w <-> 4x32w
+        // ~ 4:32 <-> 64
         // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// (2x64w,2x64w) -> 4x32w
         /// Compacts 4 64-bit integers to 4 32-bit integers
+        /// 4:64 -> 32
         /// </summary>
         /// <param name="x0">The first source vector</param>
         /// <param name="x1">The second source vector</param>
@@ -316,6 +348,7 @@ namespace Z0
 
         /// <summary>
         /// 4x32w -> (2x64w, 2x64w)
+        /// 4:32 -> 64
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="x0">The first target vector</param>
@@ -331,6 +364,7 @@ namespace Z0
         /// <summary>
         /// 4x64w -> 4x32w
         /// Compacts 4 64-bit integers to 4 32-bit integers
+        /// 4:64 -> 32
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -340,6 +374,7 @@ namespace Z0
 
         /// <summary>
         /// 4x32w -> 4x64w
+        /// 4:32 -> 64
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -348,10 +383,12 @@ namespace Z0
             => vconvert(src, out dst);
 
         // ~ 8x64w <-> 8x32w
+        // ~ 8:32 <-> 64
         // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// (4x64w,4x64w) -> 8x32w
+        /// 8:64 -> 32
         /// </summary>
         /// <param name="x0">The first source vector</param>
         /// <param name="x1">The second source vector</param>
@@ -362,6 +399,7 @@ namespace Z0
             
         /// <summary>
         /// 8x32w -> (4x64w,4x64w)
+        /// 8:32 -> 64
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="lo">The target for the lower source elements</param>

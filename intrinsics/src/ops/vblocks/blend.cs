@@ -22,7 +22,7 @@ namespace Z0
             vload(a, out Vector256<T> vA);
             vload(b, out Vector256<T> vB);
             vload(spec, out Vector256<byte> vSpec);
-            return ginx.vblend32x8(vA,vB,vSpec);
+            return ginx.vblend(vA,vB,vSpec);
         }
 
         [MethodImpl(Inline)]
@@ -44,7 +44,7 @@ namespace Z0
         {
             var count = zb.BlockCount;
             for(var block=0; block< count; block++)
-                vstore(ginx.vblend32x8(xb.LoadVector(block), yb.LoadVector(block), zb.LoadVector(block)), ref dst.BlockRef(block));                             
+                vstore(ginx.vblend(xb.LoadVector(block), yb.LoadVector(block), zb.LoadVector(block)), ref dst.BlockRef(block));                             
         } 
     }
 }

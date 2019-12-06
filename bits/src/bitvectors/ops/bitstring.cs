@@ -69,7 +69,7 @@ namespace Z0
         public static BitString bitstring<N,T>(in BitVector128<N,T> x)
             where T : unmanaged   
             where N : unmanaged, ITypeNat
-                => BitString.from(x.data, x.Width);
+                => BitString.vector(x.data, x.Width);
 
         /// <summary>
         /// Converts the vector content to a bitring representation

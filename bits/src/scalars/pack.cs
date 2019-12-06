@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="dst">The target</param>
         [MethodImpl(Inline)]
         public static byte pack8x1(in ConstBlock64<byte> src)
-            => (byte) gather(head64(src), BitMasks.Lsb64x8x1);
+            => (byte) dinx.gather(head64(src), BitMasks.Lsb64x8x1);
 
         /// <summary>
         /// Consecutively packs the first bit of each source byte into a 16-bit target
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="dst">The target</param>
         [MethodImpl(Inline)]
         public static ushort pack8x1(in ConstBlock128<byte> src)
-            => (ushort) dinx.vmovemask(dinx.vsll(v64u(src.LoadVector()),7));            
+            => (ushort) dinx.vtakemask(dinx.vsll(v64u(src.LoadVector()),7));            
 
         /// <summary>
         /// Consecutively packs the first bit of each source byte into a 32-bit target
@@ -40,6 +40,6 @@ namespace Z0
         /// <param name="dst">The target</param>
         [MethodImpl(Inline)]
         public static uint pack8x1(in ConstBlock256<byte> src)
-            => dinx.vmovemask(dinx.vsll(v64u(src.LoadVector()),7));            
+            => dinx.vtakemask(dinx.vsll(v64u(src.LoadVector()),7));            
     }
 }

@@ -78,6 +78,6 @@ namespace Z0
         public static BitString ToBitString<N,T>(this BitVector128<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitString.from(src.data, src.Width);       
+                => BitString.vector(src.data, src.Width);       
     }
 }

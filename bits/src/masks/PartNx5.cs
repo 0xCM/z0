@@ -246,6 +246,365 @@ namespace Z0
         }
 
         /// <summary>
+        /// Partitions a 35-bit container into 5-bit segments
+        /// </summary>
+        [Flags]
+        public enum Part35x5 : ulong
+        {
+            /// <summary>
+            /// The total count of partitioned bits
+            /// </summary>
+            Length = 35,
+
+            /// <summary>
+            /// The partition width
+            /// </summary>
+            Width = 5,
+
+            /// <summary>
+            /// The partition count
+            /// </summary>
+            Count = Length/Width,
+
+            /// <summary>
+            /// Identifies partition 0
+            /// </summary>
+            Part0 = Part5x1.Select,
+
+            /// <summary>
+            /// Identifies partition 1
+            /// </summary>
+            Part1 = Part0 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 2
+            /// </summary>
+            Part2 = Part1 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 3
+            /// </summary>
+            Part3 = Part2 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 4
+            /// </summary>
+            Part4 = Part3 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 5
+            /// </summary>
+            Part5 = Part4 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 6
+            /// </summary>
+            Part6 = Part5 << (int)Width,
+
+            /// <summary>
+            /// Selects all container bits
+            /// </summary>
+            Select = Part0 | Part1 | Part2 | Part3 | Part4 | Part5 | Part6
+        }
+
+        /// <summary>
+        /// Partitions a 40-bit container into 5-bit segments
+        /// </summary>
+        [Flags]
+        public enum Part40x5 : ulong
+        {
+            /// <summary>
+            /// The total count of partitioned bits
+            /// </summary>
+            Length = 40,
+
+            /// <summary>
+            /// The partition width
+            /// </summary>
+            Width = 5,
+
+            /// <summary>
+            /// The partition count
+            /// </summary>
+            Count = Length/Width,
+
+            /// <summary>
+            /// Identifies partition 0
+            /// </summary>
+            Part0 = Part5x1.Select,
+
+            /// <summary>
+            /// Identifies partition 1
+            /// </summary>
+            Part1 = Part0 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 2
+            /// </summary>
+            Part2 = Part1 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 3
+            /// </summary>
+            Part3 = Part2 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 4
+            /// </summary>
+            Part4 = Part3 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 5
+            /// </summary>
+            Part5 = Part4 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 6
+            /// </summary>
+            Part6 = Part5 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 7
+            /// </summary>
+            Part7 = Part6 << (int)Width,
+
+            /// <summary>
+            /// Selects all container bits
+            /// </summary>
+            Select = Part0 | Part1 | Part2 | Part3 | Part4 | Part5 | Part6 | Part7
+        }
+
+        /// <summary>
+        /// Partitions a 45-bit container into 5-bit segments
+        /// </summary>
+        [Flags]
+        public enum Part45x5 : ulong
+        {
+            /// <summary>
+            /// The total count of partitioned bits
+            /// </summary>
+            Length = 45,
+
+            /// <summary>
+            /// The partition width
+            /// </summary>
+            Width = 5,
+
+            /// <summary>
+            /// The partition count
+            /// </summary>
+            Count = Length/Width,
+
+            /// <summary>
+            /// Identifies partition 0
+            /// </summary>
+            Part0 = Part5x1.Select,
+
+            /// <summary>
+            /// Identifies partition 1
+            /// </summary>
+            Part1 = Part0 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 2
+            /// </summary>
+            Part2 = Part1 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 3
+            /// </summary>
+            Part3 = Part2 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 4
+            /// </summary>
+            Part4 = Part3 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 5
+            /// </summary>
+            Part5 = Part4 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 6
+            /// </summary>
+            Part6 = Part5 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 7
+            /// </summary>
+            Part7 = Part6 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 8
+            /// </summary>
+            Part8 = Part7 << (int)Width,
+
+            /// <summary>
+            /// Selects all container bits
+            /// </summary>
+            Select = Part0 | Part1 | Part2 | Part3 | Part4 | Part5 | Part6 | Part7 | Part8
+        }
+
+        /// <summary>
+        /// Partitions a 50-bit container into 5-bit segments
+        /// </summary>
+        [Flags]
+        public enum Part50x5 : ulong
+        {
+            /// <summary>
+            /// The total count of partitioned bits
+            /// </summary>
+            Length = 50,
+
+            /// <summary>
+            /// The partition width
+            /// </summary>
+            Width = 5,
+
+            /// <summary>
+            /// The partition count
+            /// </summary>
+            Count = Length/Width,
+
+            /// <summary>
+            /// Identifies partition 0
+            /// </summary>
+            Part0 = Part5x1.Select,
+
+            /// <summary>
+            /// Identifies partition 1
+            /// </summary>
+            Part1 = Part0 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 2
+            /// </summary>
+            Part2 = Part1 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 3
+            /// </summary>
+            Part3 = Part2 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 4
+            /// </summary>
+            Part4 = Part3 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 5
+            /// </summary>
+            Part5 = Part4 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 6
+            /// </summary>
+            Part6 = Part5 << (int)Width,
+
+            /// Identifies partition 7
+            /// </summary>
+            Part7 = Part6 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 8
+            /// </summary>
+            Part8 = Part7 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 9
+            /// </summary>
+            Part9 = Part8 << (int)Width,
+
+            /// <summary>
+            /// Selects all container bits
+            /// </summary>
+            Select = Part0 | Part1 | Part2 | Part3 | Part4 | Part5 | Part6 | Part7 | Part8 | Part9
+        }
+
+        /// <summary>
+        /// Partitions a 50-bit container into 5-bit segments
+        /// </summary>
+        [Flags]
+        public enum Part55x5 : ulong
+        {
+            /// <summary>
+            /// The total count of partitioned bits
+            /// </summary>
+            Length = 55,
+
+            /// <summary>
+            /// The partition width
+            /// </summary>
+            Width = 5,
+
+            /// <summary>
+            /// The partition count
+            /// </summary>
+            Count = Length/Width,
+
+            /// <summary>
+            /// Identifies partition 0
+            /// </summary>
+            Part0 = Part5x1.Select,
+
+            /// <summary>
+            /// Identifies partition 1
+            /// </summary>
+            Part1 = Part0 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 2
+            /// </summary>
+            Part2 = Part1 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 3
+            /// </summary>
+            Part3 = Part2 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 4
+            /// </summary>
+            Part4 = Part3 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 5
+            /// </summary>
+            Part5 = Part4 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 6
+            /// </summary>
+            Part6 = Part5 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 7
+            /// </summary>
+            Part7 = Part6 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 8
+            /// </summary>
+            Part8 = Part7 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 9
+            /// </summary>
+            Part9 = Part8 << (int)Width,
+
+            /// <summary>
+            /// Identifies partition 9
+            /// </summary>
+            Part10 = Part9 << (int)Width,
+
+            /// <summary>
+            /// Selects all container bits
+            /// </summary>
+            Select = Part0 | Part1 | Part2 | Part3 | Part4 | Part5 | Part6 | Part7 | Part8 | Part9 | Part10
+        }
+
+        /// <summary>
         /// Partitions a 60-bit container into 5-bit segments
         /// </summary>
         [Flags]
@@ -329,7 +688,7 @@ namespace Z0
             /// <summary>
             /// Selects all container bits
             /// </summary>
-            Select = Part0 | Part1 | Part2 | Part3 | Part4 | Part5 | Part6 | Part7 | Part8 | Part9 | Part10
+            Select = Part0 | Part1 | Part2 | Part3 | Part4 | Part5 | Part6 | Part7 | Part8 | Part9 | Part10 | Part11
         }
 
     }

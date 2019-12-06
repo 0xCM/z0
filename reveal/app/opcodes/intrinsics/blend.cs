@@ -34,22 +34,22 @@ namespace Z0
             => dinx.vrotlx(x, 1);
 
         public static Vector128<short> vblend_128x16u_LLLLLLLL(Vector128<short> x, Vector128<short> y)        
-            => dinx.vblend8x16(x,y,Blend8x16.LLLLLLLL);
+            => dinx.vblend(x,y,Blend8x16.LLLLLLLL);
 
         public static Vector128<short> vblend_128x16u_RRRRRRRR(Vector128<short> x, Vector128<short> y)        
-            => dinx.vblend8x16(x,y,Blend8x16.RRRRRRRR);
+            => dinx.vblend(x,y,Blend8x16.RRRRRRRR);
 
         public static Vector128<short> vblend_128x16u_LLLLRRRR(Vector128<short> x, Vector128<short> y)        
-            => dinx.vblend8x16(x,y,Blend8x16.LLLLRRRR);
+            => dinx.vblend(x,y,Blend8x16.LLLLRRRR);
 
         public static Vector128<short> vblend_128x16u_RRRRLLLL(Vector128<short> x, Vector128<short> y)        
-            => dinx.vblend8x16(x,y,Blend8x16.RRRRLLLL);
+            => dinx.vblend(x,y,Blend8x16.RRRRLLLL);
 
         public static Vector128<short> vblend_128x16u_LRLRLRLR(Vector128<short> x, Vector128<short> y)        
-            => dinx.vblend8x16(x,y,Blend8x16.LRLRLRLR);
+            => dinx.vblend(x,y,Blend8x16.LRLRLRLR);
 
         public static Vector128<short> vblend_128x16u_RLRLRLRL(Vector128<short> x, Vector128<short> y)        
-            => dinx.vblend8x16(x,y,Blend8x16.RLRLRLRL);
+            => dinx.vblend(x,y,Blend8x16.RLRLRLRL);
 
 
 

@@ -31,8 +31,6 @@ namespace Z0
             return dst;
         }
 
-
-
         /// <summary>
         /// 4x64w -> 4x32w
         /// </summary>

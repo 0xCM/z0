@@ -14,7 +14,6 @@ namespace Z0
 
     partial class ginx
     {
-
         /// <summary>
         /// Reverses the source vector components
         /// </summary>

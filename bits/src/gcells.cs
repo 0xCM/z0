@@ -13,7 +13,6 @@ namespace Z0
 
     public static class gcells
     {
-
         /// <summary>
         /// Rotates source cells leftward and deposits the result in a caller-supplied target
         /// </summary>

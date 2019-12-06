@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="b">The right operand</param>
         public static BitString and(BitString a, BitString b)
         {            
-            var len = length(a.bitseq, b.bitseq);
+            var len = length(a.data, b.data);
             var dst = alloc(len);
             for(var i=0; i< len; i++)
                 dst[i] = a[i] & b[i];
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="b">The right operand</param>
         public static BitString or(BitString a, BitString b)
         {            
-            var len = length(a.bitseq, b.bitseq);
+            var len = length(a.data, b.data);
             var dst = alloc(len);
             for(var i=0; i< len; i++)
                 dst[i] = a[i] | b[i];
@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="b">The right operand</param>
         public static BitString xor(BitString a, BitString b)
         {            
-            var len = length(a.bitseq,b.bitseq);
+            var len = length(a.data,b.data);
             var dst = alloc(len);
             for(var i=0; i< len; i++)
                 dst[i] = a[i] ^ b[i];
@@ -233,7 +233,7 @@ namespace Z0
         /// <param name="shift">The magnitude of the rotation</param>
         public static BitString rotl(BitString bs, int shift)
         {
-            Span<byte> dst = bs.bitseq.Replicate();
+            Span<byte> dst = bs.data.Replicate();
             Span<byte> src = stackalloc byte[bs.Length];
             dst.CopyTo(src);
             var cut = bs.Length - shift;
@@ -241,7 +241,7 @@ namespace Z0
             var seg2 = src.Slice(cut);
             seg2.CopyTo(dst, 0);
             seg1.CopyTo(dst, shift);
-            return BitString.fromseq(dst);
+            return BitString.bitseq(dst);
         }
     }
 }

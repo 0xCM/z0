@@ -62,7 +62,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(this Block128<T> src)            
             where T : unmanaged            
-                => ginx.vload(src);
+                => ginx.vload(src.ReadOnly());
 
         /// <summary>
         /// Loads a 128-bit vector from the first 128-bit block
@@ -84,7 +84,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(this Block128<T> src, int block)            
             where T : unmanaged            
-                => ginx.vload(src, block);
+                => ginx.vload(src.ReadOnly(), block);
 
         /// <summary>
         /// Loads a block-identified 128-bit vector

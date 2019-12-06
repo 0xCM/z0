@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;    
     
     using static zfunc;    
-    using static aux;
+    using static As;
 
     partial class ginx
     {        
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vlo<T>(Vector128<T> src)
             where T : unmanaged
-                =>  As.vgeneric<T>(dinx.vmovelo(v64u(src)));
+                =>  vgeneric<T>(zerohi(v64u(src)));
 
         /// <summary>
         /// Extracts the lo 128-bit lane of the source vector to scalar targets
@@ -61,5 +61,48 @@ namespace Z0
             else 
                 return vlo_f(src);
         }
+
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> vlo_i<T>(Vector256<T> src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return vgeneric<T>(dinx.vlo(vcast8i(src)));
+            else if(typeof(T) == typeof(short))
+                return vgeneric<T>(dinx.vlo(vcast16i(src)));
+            else if(typeof(T) == typeof(int))
+                return vgeneric<T>(dinx.vlo(vcast32i(src)));
+            else
+                return vgeneric<T>(dinx.vlo(vcast64i(src)));
+        }
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> vlo_u<T>(Vector256<T> src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return vgeneric<T>(dinx.vlo(vcast8u(src)));
+            else if(typeof(T) == typeof(ushort))
+                return vgeneric<T>(dinx.vlo(vcast16u(src)));
+            else if(typeof(T) == typeof(uint))
+                return vgeneric<T>(dinx.vlo(vcast32u(src)));
+            else 
+                return vgeneric<T>(dinx.vlo(vcast64u(src)));
+        }
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> vlo_f<T>(Vector256<T> src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return vgeneric<T>(fpinx.vlo(vcast32f(src)));
+            else if(typeof(T) == typeof(double))
+                return vgeneric<T>(fpinx.vlo(vcast64f(src)));
+            else 
+                throw unsupported<T>();
+        }
+ 
+
     }
 }

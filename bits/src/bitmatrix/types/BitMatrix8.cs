@@ -145,7 +145,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitVector8 Col(int index)
-            => BitVector.from(n8, Bits.gather((ulong)this, (C0 << index)));
+            => BitVector.from(n8, dinx.gather((ulong)this, (C0 << index)));
 
         const ulong C0 = 
             (1ul << 64 - 1*8) | (1ul << 64 - 2*8) | (1ul << 64 - 3*8) | (1ul << 64 - 4*8) | 

@@ -138,8 +138,8 @@ namespace Z0
 
             Vector256<ulong> v2a = vzero64u(n), v2b = vzero64u(n), v4a = vzero64u(n), v4b = vzero64u(n);
 
-            vcsa(v1, vload(n,in data, 0*step), vload(n, in data, 1*step), out v2a, out v1);
-            vcsa(v1, vload(n,in data, 2*step), vload(n, in data, 3*step), out v2b, out v1);
+            vcsa(v1, ginx.vload(n,in data, 0*step), ginx.vload(n, in data, 1*step), out v2a, out v1);
+            vcsa(v1, ginx.vload(n,in data, 2*step), ginx.vload(n, in data, 3*step), out v2b, out v1);
             vcsa(v2, v2a, v2b, out v4a, out v2);
 
             return vsum(v4a);

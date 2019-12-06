@@ -34,7 +34,7 @@ namespace Z0
             var pattern = scalar(src);
             for(var i=0; i<reps; i++)
                 pattern.BitSeq.CopyTo(bitseq, i*capacity);
-            return fromseq(bitseq);            
+            return BitString.bitseq(bitseq);            
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         public static void map<T>(BitString src, Func<bit,T> f, Span<T> dst)
         {
             for(var i=0; i<dst.Length; i++)
-                dst[i] = f((bit)src.bitseq[i]);
+                dst[i] = f((bit)src.data[i]);
         }
 
         /// <summary>

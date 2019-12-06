@@ -37,7 +37,108 @@ partial class zfunc
             => (T*)Unsafe.AsPointer(ref seek(ref src, offset));
 
     /// <summary>
-    /// Presents a readonly reference as a generic pointer
+    /// Returns a generic pointer to the leading cell of the first block of a 16-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* ptr<T>(in Block16<T> src)
+        where T : unmanaged
+            => ptr(ref src.Head);
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of the first block of a 32-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* ptr<T>(in Block32<T> src)
+        where T : unmanaged
+            => ptr(ref src.Head);
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of the first block of a 64-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* ptr<T>(in Block64<T> src)
+        where T : unmanaged
+            => ptr(ref src.Head);
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of the first block of a 128-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* ptr<T>(in Block128<T> src)
+        where T : unmanaged
+            => ptr(ref src.Head);
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of the first block of a 256-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* ptr<T>(in Block256<T> src)
+        where T : unmanaged
+            => ptr(ref src.Head);
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of an index-identified block of a 16-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* ptr<T>(in Block16<T> src, int block)
+        where T : unmanaged
+            => ptr(ref src.Block(block).Head);
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of an index-identified block of a 32-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* ptr<T>(in Block32<T> src, int block)
+        where T : unmanaged
+            => ptr(ref src.Block(block).Head);
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of an index-identified block of a 64-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* ptr<T>(in Block64<T> src, int block)
+        where T : unmanaged
+            => ptr(ref src.Block(block).Head);
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of an index-identified block of a 128-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* ptr<T>(in Block128<T> src, int block)
+        where T : unmanaged
+            => ptr(ref src.Block(block).Head);
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of an index-identified block of a 256-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* ptr<T>(in Block256<T> src, int block)
+        where T : unmanaged
+            => ptr(ref src.Block(block).Head);
+
+    /// <summary>
+    /// Presents a readonly reference as a generic pointer which should intself be considered constant
+    /// but, as far as the author is aware, no facility within the language can encode that constraint
     /// </summary>
     /// <param name="src">The memory reference</param>
     /// <typeparam name="T">The reference type</typeparam>
@@ -56,6 +157,107 @@ partial class zfunc
     public static unsafe T* constptr<T>(in T src, int offset)
         where T : unmanaged
             => ptr(ref mutable(in skip(in src, offset)));
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of the first block of a constant 16-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* constptr<T>(in ConstBlock16<T> src)
+        where T : unmanaged
+            => ptr(ref mutable(in src.Head));
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of the first block of a constant 32-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* constptr<T>(in ConstBlock32<T> src)
+        where T : unmanaged
+            => ptr(ref mutable(in src.Head));
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of the first block of a constant 64-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* constptr<T>(in ConstBlock64<T> src)
+        where T : unmanaged
+            => ptr(ref mutable(in src.Head));
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of the first block of a constant 128-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* constptr<T>(in ConstBlock128<T> src)
+        where T : unmanaged
+            => ptr(ref mutable(in src.Head));
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of the first block of a constant 256-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* constptr<T>(in ConstBlock256<T> src)
+        where T : unmanaged
+            => ptr(ref mutable(in src.Head));
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of the index-identified block of a constant 16-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* constptr<T>(in ConstBlock16<T> src, int block)
+        where T : unmanaged
+            => ptr(ref mutable(in src.Block(block).Head));
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of the index-identified block of a constant 32-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* constptr<T>(in ConstBlock32<T> src, int block)
+        where T : unmanaged
+            => ptr(ref mutable(in src.Block(block).Head));
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of the index-identified block of a constant 64-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* constptr<T>(in ConstBlock64<T> src, int block)
+        where T : unmanaged
+            => ptr(ref mutable(in src.Block(block).Head));
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of the index-identified block of a constant 128-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* constptr<T>(in ConstBlock128<T> src, int block)
+        where T : unmanaged
+            => ptr(ref mutable(in src.Block(block).Head));
+
+    /// <summary>
+    /// Returns a generic pointer to the leading cell of the index-identified block of a constant 256-bit blocked container
+    /// </summary>
+    /// <param name="src">The source block</param>
+    /// <typeparam name="T">The reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe T* constptr<T>(in ConstBlock256<T> src, int block)
+        where T : unmanaged
+            => ptr(ref mutable(in src.Block(block).Head));
+
 
     /// <summary>
     /// Converts a generic reference into a void pointer
@@ -86,7 +288,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe byte* pbyte<T>(ref T r)
         where T : unmanaged
-            =>ptr<T,byte>(ref r);
+            => ptr<T,byte>(ref r);
 
     /// <summary>
     /// Presents a generic reference as an sbyte pointer
@@ -96,7 +298,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe sbyte* psbyte<T>(ref T r)
         where T : unmanaged
-            =>ptr<T,sbyte>(ref r);
+            => ptr<T,sbyte>(ref r);
 
     /// <summary>
     /// Presents a generic reference as a byte pointer
@@ -106,7 +308,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe byte* puint8<T>(ref T r)
         where T : unmanaged
-            =>ptr<T,byte>(ref r);
+            => ptr<T,byte>(ref r);
 
     /// <summary>
     /// Presents a generic reference as an sbyte pointer

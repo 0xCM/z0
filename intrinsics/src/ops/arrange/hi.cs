@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<sbyte> vhi(Vector128<sbyte> src)
-            =>  v8i(vmovscalar(n128,v64u(src).GetElement(1)));
+            =>  v8i(vscalar(n128,v64u(src).GetElement(1)));
 
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vhi(Vector128<byte> src)
-            =>  v8u(vmovscalar(n128,vcell(v64u(src),1)));
+            =>  v8u(vscalar(n128,vcell(v64u(src),1)));
 
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<short> vhi(Vector128<short> src)
-            =>  v16i(vmovscalar(n128,v64u(src).GetElement(1)));
+            =>  v16i(vscalar(n128,v64u(src).GetElement(1)));
 
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<ushort> vhi(Vector128<ushort> src)
-            =>  v16u(vmovscalar(n128,v64u(src).GetElement(1)));
+            =>  v16u(vscalar(n128,v64u(src).GetElement(1)));
 
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<int> vhi(Vector128<int> src)
-            =>  v32i(vmovscalar(n128,v64u(src).GetElement(1)));
+            =>  v32i(vscalar(n128,v64u(src).GetElement(1)));
 
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<uint> vhi(Vector128<uint> src)
-            =>  v32u(vmovscalar(n128,v64u(src).GetElement(1)));
+            =>  v32u(vscalar(n128,v64u(src).GetElement(1)));
 
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<long> vhi(Vector128<long> src)
-            =>  vmovscalar(n128, src.GetElement(1));
+            =>  vscalar(n128, src.GetElement(1));
 
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector
@@ -77,7 +77,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<ulong> vhi(Vector128<ulong> src)
-            =>  vmovscalar(n128,src.GetElement(1));
+            =>  vscalar(n128,src.GetElement(1));
 
         /// <summary>
         /// __m128i _mm256_extracti128_si256 (__m256i a, const int imm8) VEXTRACTI128 xmm,  ymm, imm8

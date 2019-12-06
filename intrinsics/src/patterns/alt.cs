@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vpalt<T>(N256 n, T a, T b)
             where T : unmanaged
-                => vblend32x8(vbroadcast(n,a), vbroadcast(n,b), PatternData.blendspec<T>(n,false));
+                => vblend(vbroadcast(n,a), vbroadcast(n,b), PatternData.blendspec<T>(n,false));
 
     }
 }

@@ -45,7 +45,7 @@ namespace Z0
             Span<byte> bits = stackalloc byte[src.RowCount*src.ColCount];
             for(var i=0;i<src.RowCount; i++)
                 src[i].ToBitString().BitSeq.CopyTo(bits.Slice(i*src.ColCount));
-            return BitString.fromseq(bits);                            
+            return BitString.bitseq(bits);                            
         }
 
         [MethodImpl(Inline)]

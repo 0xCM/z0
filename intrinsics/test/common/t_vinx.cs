@@ -191,7 +191,7 @@ namespace Z0
         protected void cmp_gt_check<T>(N128 n, T t = default)
             where T : unmanaged
         {
-            var ones = ginx.vpones<T>(n);
+            var ones = ginx.vones<T>(n);
             var one = vcell(ones,0);
             
             for(var i=0; i< SampleSize; i++)
@@ -216,7 +216,7 @@ namespace Z0
         protected void cmp_gt_check<T>(N256 n, T t = default)
             where T : unmanaged
         {
-            var ones = ginx.vpones<T>(n);
+            var ones = ginx.vones<T>(n);
             var one = vcell(ginx.vlo(ones),0);
             
             for(var i=0; i< SampleSize; i++)
@@ -283,7 +283,7 @@ namespace Z0
         protected void vlt_check<T>(N128 n)
             where T : unmanaged
         {
-            var ones = ginx.vpones<T>(n);
+            var ones = ginx.vones<T>(n);
             var one = vcell(ones,0);
             
             for(var i=0; i< SampleSize; i++)
@@ -308,7 +308,7 @@ namespace Z0
         protected void vlt_check<T>(N256 n)
             where T : unmanaged
         {
-            var ones = ginx.vpones<T>(n);
+            var ones = ginx.vones<T>(n);
             var one = vcell(ginx.vlo(ones),0);
             
             for(var i=0; i< SampleSize; i++)
@@ -1148,7 +1148,7 @@ namespace Z0
         protected void vones_check<T>(N128 n)
             where T : unmanaged
         {
-            var ones = ginx.vpones<T>(n);
+            var ones = ginx.vones<T>(n);
             var bs = ones.ToBitString();
             Claim.eq(n,bs.Length);
             Claim.eq(n,bs.PopCount());
@@ -1157,7 +1157,7 @@ namespace Z0
         protected void vones_check<T>(N256 n)
             where T : unmanaged
         {
-            var ones = ginx.vpones<T>(n);
+            var ones = ginx.vones<T>(n);
             var bs = ones.ToBitString();
             Claim.eq(n,bs.Length);
             Claim.eq(n,bs.PopCount());

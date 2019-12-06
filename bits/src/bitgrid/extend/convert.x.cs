@@ -41,6 +41,41 @@ namespace Z0
                 => src.Data.ToSpan();
 
         [MethodImpl(Inline)]
+        public static Span<T> ToSpan<M,N,T>(this SubGrid16<M,N,T> src)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BitConvert.GetBytes(src.Data).As<T>();
+        
+        [MethodImpl(Inline)]
+        public static Span<T> ToSpan<M,N,T>(this SubGrid32<M,N,T> src)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BitConvert.GetBytes(src.Data).As<T>();
+
+        [MethodImpl(Inline)]
+        public static Span<T> ToSpan<M,N,T>(this SubGrid64<M,N,T> src)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BitConvert.GetBytes(src.Data).As<T>();
+
+        [MethodImpl(Inline)]
+        public static Span<T> ToSpan<M,N,T>(this SubGrid128<M,N,T> src)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => src.Data.ToSpan();
+
+        [MethodImpl(Inline)]
+        public static Span<T> ToSpan<M,N,T>(this SubGrid256<M,N,T> src)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => src.Data.ToSpan();
+
+        [MethodImpl(Inline)]
         public static BitMatrix<M,N,T> ToBitMatrix<M,N,T>(this BitGrid<M,N,T> src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat

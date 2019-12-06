@@ -127,21 +127,12 @@ namespace Z0
             => perm.Terms;
 
         /// <summary>
-        /// Term evaluator/manipulator where i is in the discrete domain [0, N-1]
+        /// Term evaluator/manipulator where
         /// </summary>
         public ref int this[int i]
         {
             [MethodImpl(Inline)]
             get => ref perm[i];
-        }
-
-        /// <summary>
-        /// Term evaluator/manipulator where i is in the discrete domain [0, N-1]
-        /// </summary>
-        public ref int this[uint i]
-        {
-            [MethodImpl(Inline)]
-            get => ref perm[(int)i];
         }
 
         /// <summary>

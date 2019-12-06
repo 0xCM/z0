@@ -9,9 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;    
     
     using static zfunc;    
-    using static AsIn;    
     using static As;
-    using static aux;
 
     partial class ginx
     {        
@@ -59,6 +57,45 @@ namespace Z0
                 return vhi_i(src);
             else 
                 return vhi_f(src);
+        }
+        [MethodImpl(Inline)]
+        static Vector128<T> vhi_i<T>(Vector256<T> src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return vgeneric<T>(dinx.vhi(vcast8i(src)));
+            else if(typeof(T) == typeof(short))
+                return vgeneric<T>(dinx.vhi(vcast16i(src)));
+            else if(typeof(T) == typeof(int))
+                return vgeneric<T>(dinx.vhi(vcast32i(src)));
+            else
+                return vgeneric<T>(dinx.vhi(vcast64i(src)));
+        }
+
+        [MethodImpl(Inline)]
+        static Vector128<T> vhi_u<T>(Vector256<T> src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return vgeneric<T>(dinx.vhi(vcast8u(src)));
+            else if(typeof(T) == typeof(ushort))
+                return vgeneric<T>(dinx.vhi(vcast16u(src)));
+            else if(typeof(T) == typeof(uint))
+                return vgeneric<T>(dinx.vhi(vcast32u(src)));
+            else 
+                return vgeneric<T>(dinx.vhi(vcast64u(src)));
+        }
+
+        [MethodImpl(Inline)]
+        static Vector128<T> vhi_f<T>(Vector256<T> src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return vgeneric<T>(fpinx.vhi(vcast32f(src)));
+            else if(typeof(T) == typeof(double))
+                return vgeneric<T>(fpinx.vhi(vcast64f(src)));
+            else 
+                throw unsupported<T>();
         }
     }
 }

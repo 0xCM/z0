@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T[] ToArray<T>(this Block32<T> src, int block)
             where T : unmanaged
-                => src.Data.ToArray();
+                => src.Block(block).Data.ToArray();
 
         /// <summary>
         /// Extracts an index-identified block
@@ -34,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T[] ToArray<T>(this Block64<T> src, int block)
             where T : unmanaged
-                => src.Data.ToArray();
+                => src.Block(block).Data.ToArray();
 
         /// <summary>
         /// Extracts an index-identified block
@@ -45,7 +45,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T[] ToArray<T>(this Block128<T> src, int block)
             where T : unmanaged
-                => src.Data.ToArray();
+                => src.Block(block).Data.ToArray();
 
         /// <summary>
         /// Extracts an index-identified block
@@ -56,7 +56,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T[] ToArray<T>(this Block256<T> src, int block)
             where T : unmanaged
-                => src.Data.ToArray();
+                => src.Block(block).Data.ToArray();
 
         /// <summary>
         /// Extracts an index-identified block
@@ -67,7 +67,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T[] ToArray<T>(this ConstBlock32<T> src, int block)
             where T : unmanaged
-                => src.Data.ToArray();
+                => src.Block(block).Data.ToArray();
 
         /// <summary>
         /// Extracts an index-identified block
@@ -78,7 +78,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T[] ToArray<T>(this ConstBlock64<T> src, int block)
             where T : unmanaged
-                => src.Data.ToArray();
+                => src.Block(block).Data.ToArray();
 
         /// <summary>
         /// Extracts an index-identified block
@@ -89,7 +89,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T[] ToArray<T>(this ConstBlock128<T> src, int block)
             where T : unmanaged
-                => src.Data.ToArray();
+                => src.Block(block).Data.ToArray();
 
         /// <summary>
         /// Extracts an index-identified block
@@ -100,8 +100,88 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T[] ToArray<T>(this ConstBlock256<T> src, int block)
             where T : unmanaged
-                => src.Data.ToArray();
+                => src.Block(block).Data.ToArray();
  
+        /// <summary>
+        /// Extracts all container blocks to a contiguous array
+        /// </summary>
+        /// <param name="src">The source block container</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static T[] ToArray<T>(this Block32<T> src)
+            where T : unmanaged
+                => src.Data.ToArray();
+
+        /// <summary>
+        /// Extracts all container blocks to a contiguous array
+        /// </summary>
+        /// <param name="src">The source block container</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static T[] ToArray<T>(this Block64<T> src)
+            where T : unmanaged
+                => src.Data.ToArray();
+
+        /// <summary>
+        /// Extracts all container blocks to a contiguous array
+        /// </summary>
+        /// <param name="src">The source block container</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static T[] ToArray<T>(this Block128<T> src)
+            where T : unmanaged
+                => src.Data.ToArray();
+
+        /// <summary>
+        /// Extracts all container blocks to a contiguous array
+        /// </summary>
+        /// <param name="src">The source block container</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static T[] ToArray<T>(this Block256<T> src)
+            where T : unmanaged
+                => src.Data.ToArray();
+
+        /// <summary>
+        /// Extracts all container blocks to a contiguous array
+        /// </summary>
+        /// <param name="src">The source block container</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static T[] ToArray<T>(this ConstBlock32<T> src)
+            where T : unmanaged
+                => src.Data.ToArray();
+
+        /// <summary>
+        /// Extracts all container blocks to a contiguous array
+        /// </summary>
+        /// <param name="src">The source block container</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static T[] ToArray<T>(this ConstBlock64<T> src)
+            where T : unmanaged
+                => src.Data.ToArray();
+
+        /// <summary>
+        /// Extracts all container blocks to a contiguous array
+        /// </summary>
+        /// <param name="src">The source block container</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static T[] ToArray<T>(this ConstBlock128<T> src)
+            where T : unmanaged
+                => src.Data.ToArray();
+
+        /// <summary>
+        /// Extracts all container blocks to a contiguous array
+        /// </summary>
+        /// <param name="src">The source block container</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static T[] ToArray<T>(this ConstBlock256<T> src)
+            where T : unmanaged
+                => src.Data.ToArray(); 
+  
     }
 
 }

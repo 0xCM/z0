@@ -65,14 +65,14 @@ namespace Z0
             Claim.eq(bv64.ToBitString(), bs64);
             Claim.eq(bv64, bs64.ToBitVector(n64));
 
-            var bv64x = Bits.gather(bv64, BitMask.Msb64x8).ToBitVector();
+            var bv64x = dinx.gather(bv64, BitMask.Msb64x8).ToBitVector();
             Claim.eq((byte)0xFF, bv64x.Byte(0));
 
             var unpacked = new byte[]{1,0,0,1,1,0,1,1};
             var x = BitConverter.ToUInt64(unpacked,0);
-            var y = Bits.gather(x, BitMask.Lsb64x8).ToBitVector();
+            var y = dinx.gather(x, BitMask.Lsb64x8).ToBitVector();
             var z1 = y.Byte(0).ToBitString();
-            var z2 = BitString.fromseq(unpacked);
+            var z2 = BitString.bitseq(unpacked);
             Claim.eq(z1,z2);        
         }
     }

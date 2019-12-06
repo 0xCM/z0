@@ -35,7 +35,7 @@ namespace Z0
         static void pack1(ref Vector128<uint> xmm0, ref Vector128<uint> xmm1, in uint src, byte step, int offset)
         {
             xmm0 = vor(xmm0, vsll(xmm1, step));
-            xmm1 = vload(n128, in skip(in src, offset));
+            xmm1 = ginx.vload(n128, in skip(in src, offset));
         }
 
         static Vector128<uint> pack(N1 width, N32 n, in uint src)
@@ -44,9 +44,9 @@ namespace Z0
             var nv = n128;
             var current = 0;
                         
-            var xmm1 = vload(nv, in src);            
+            var xmm1 = ginx.vload(nv, in src);            
             var xmm0 = xmm1;            
-            xmm1 = vload(nv, in skip(in src, current += step));
+            xmm1 = ginx.vload(nv, in skip(in src, current += step));
 
             pack1(ref xmm0, ref xmm1, in src, 1, current += step);
             pack1(ref xmm0, ref xmm1, in src, 2, current += step);

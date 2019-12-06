@@ -105,7 +105,7 @@ namespace Z0
         {
             for(var i=0; i<=231; i++)
             {
-                var bs = BitString.frompow2(i);
+                var bs = BitString.pow2(i);
                 Claim.eq((int)bs.Length, i + 1);
                 for(var j=0; j<bs.Length; j++)
                 {

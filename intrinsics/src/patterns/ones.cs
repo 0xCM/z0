@@ -16,21 +16,41 @@ namespace Z0
         /// <summary>
         /// Creates a 128-bit vector with all bits enabled
         /// </summary>
-        /// <param name="n">The bitness selector</param>
+        /// <param name="n">The vector width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> vpones<T>(N128 n)
+        public static Vector128<T> vones<T>(N128 n)
             where T : unmanaged
                 => ginx.veq(default(Vector128<T>), default(Vector128<T>));
 
         /// <summary>
         /// Creates a 256-bit vector with all bits enabled
         /// </summary>
-        /// <param name="n">The bitness selector</param>
+        /// <param name="n">The vector width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vpones<T>(N256 n)
+        public static Vector256<T> vones<T>(N256 n)
             where T : unmanaged
                 => ginx.veq(default(Vector256<T>), default(Vector256<T>));
+
+        /// <summary>
+        /// Creates a 128-bit zero-filled vector
+        /// </summary>
+        /// <param name="n">The vector width selector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vzero<T>(N128 n)
+            where T : unmanaged
+            => default;
+
+        /// <summary>
+        /// Creates a 128-bit zero-filled vector
+        /// </summary>
+        /// <param name="n">The vector width selector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> vzero<T>(N256 n)
+            where T : unmanaged
+            => default;
     }
 }

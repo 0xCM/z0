@@ -39,7 +39,7 @@ namespace Z0.Logix
             => LogicExprKind.Literal;
 
         public BitString ToBitString()
-            => BitString.from(Terms);    
+            => BitString.bitspan(Terms);    
 
         public string Format()
             => ToBitString().Format();

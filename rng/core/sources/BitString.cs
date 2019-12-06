@@ -91,7 +91,7 @@ namespace Z0
         public static BitString BitString(this IPolyrand random, BitSize len)
         {
             var bytes = random.Span<byte>(len.MaxByteCount);
-            return Z0.BitString.from(bytes, len);        
+            return Z0.BitString.scalars(bytes, len);        
         }
 
         /// <summary>

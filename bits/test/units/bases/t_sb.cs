@@ -27,7 +27,7 @@ namespace Z0
                 var src = Random.Next<T>();
                 var mask = Random.Next<T>();
                 var s1 = BitRef.scatter(src,mask);
-                var s2 = gbits.scatter(src,mask);
+                var s2 = ginx.scatter(src,mask);
                 Claim.eq(s1,s2);
             }
         }
@@ -40,7 +40,7 @@ namespace Z0
                 var src = Random.Next<T>();
                 var mask = Random.Next<T>();
                 var s1 = BitRef.gather(src,mask);
-                var s2 = gbits.gather(src,mask);
+                var s2 = ginx.gather(src,mask);
                 Claim.eq(s1,s2);
             }
         }
@@ -119,7 +119,7 @@ namespace Z0
             var x = Random.Span<S>(SampleSize);
             Span<T> y1 = new T[x.Length * bitsize<S>()];
             gbits.unpack(x,y1);
-            var y2 = BitString.from(x);
+            var y2 = BitString.scalars(x);
             for(var i=0; i< y1.Length; i++)
             {
                 var expect = y2[i] ? one<T>() : zero<T>();

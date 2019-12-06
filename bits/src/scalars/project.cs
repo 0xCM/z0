@@ -9,6 +9,8 @@ namespace Z0
  
     using static zfunc;
     using static BitParts;
+    
+    using static dinx;
 
     partial class Bits
     {        
@@ -487,6 +489,51 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint project(uint src, Part30x5 part)
             => scatter(src, (uint)part);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The target partition</param>
+        [MethodImpl(Inline)]
+        public static ulong project(ulong src, Part35x5 part)
+            => scatter(src, (ulong)part);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The target partition</param>
+        [MethodImpl(Inline)]
+        public static ulong project(ulong src, Part40x5 part)
+            => scatter(src, (ulong)part);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The target partition</param>
+        [MethodImpl(Inline)]
+        public static ulong project(ulong src, Part45x5 part)
+            => scatter(src, (ulong)part);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The target partition</param>
+        [MethodImpl(Inline)]
+        public static ulong project(ulong src, Part50x5 part)
+            => scatter(src, (ulong)part);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The target partition</param>
+        [MethodImpl(Inline)]
+        public static ulong project(ulong src, Part55x5 part)
+            => scatter(src, (ulong)part);
 
         /// <summary>
         /// Maps low source bits to mask-identified bits of an empty target

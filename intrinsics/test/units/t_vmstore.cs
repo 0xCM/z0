@@ -31,10 +31,11 @@ namespace Z0
                 var v2 = Random.CpuVector<byte>(n);
                 var v3 = Random.CpuVector<byte>(n);
 
-                dinx.vmstore(v0, m0, ref dst.Head);
-                dinx.vmstore(v1, m1, ref dst.Head);
-                dinx.vmstore(v2, m2, ref dst.Head);
-                dinx.vmstore(v3, m3, ref dst.Head);
+                dinx.vmstore(v0, m0, dst);
+                dinx.vmstore(v1, m1, dst);
+                dinx.vmstore(v2, m2, dst);
+                dinx.vmstore(v3, m3, dst);
+
 
                 var v4 = ginx.vload(dst);
                 var v5 = dinx.vparts(n128, 

@@ -155,7 +155,7 @@ namespace Z0
         /// <param name="y"></param>
         [MethodImpl(Inline)]
         public static Vector256<long> vmin(Vector256<long> x, Vector256<long> y)
-            => vblend32x8(y, x, v8u(vlt(x,y)));
+            => vblend(y, x, v8u(vlt(x,y)));
 
 
     }

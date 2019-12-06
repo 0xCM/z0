@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N <= 64
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
+    [StructLayout(LayoutKind.Sequential, Size=8)]
     public readonly ref struct SubGrid64<M,N,T>
         where T : unmanaged
         where N : unmanaged, ITypeNat
@@ -26,21 +26,7 @@ namespace Z0
         /// The grid dimension
         /// </summary>
         public static GridDim<M,N,T> Dim => default;
-
-        /// <summary>
-        /// The number of bytes covered by the grid
-        /// </summary>
-        const int ByteCount = BitGrid64<T>.ByteCount;
         
-        /// <summary>
-        /// The number of bits covered by a grid cell
-        /// </summary>
-        static int CellSize => BitGrid64<T>.CellSize;
-
-        /// <summary>
-        /// The number of cells covered by the grid
-        /// </summary>
-        static int GridCells => BitGrid64<T>.GridCells;
 
         [MethodImpl(Inline)]
         public static implicit operator SubGrid64<M,N,T>(in Block64<T> src)
@@ -82,15 +68,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => data;
-        }
-
-        /// <summary>
-        /// The number of allocated cells
-        /// </summary>
-        public int CellCount
-        {
-            [MethodImpl(Inline)]
-            get => data.CellCount;
         }
 
         /// <summary>

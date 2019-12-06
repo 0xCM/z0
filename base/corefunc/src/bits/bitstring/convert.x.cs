@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
         public static BitString ToBitString(this Span<bit> src)
-            => BitString.from((ReadOnlySpan<bit>)src); 
+            => BitString.bitspan((ReadOnlySpan<bit>)src); 
 
         /// <summary>
         /// Converts a readonly bitspan to a bitstring
@@ -106,15 +106,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
         public static BitString ToBitString(this ReadOnlySpan<bit> src)
-            => BitString.from(src);
-
-        /// <summary>
-        /// Converts a readonly bitspan to a bitstring
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
-        public static BitString ToBitString(this bit[] src)
-            => BitString.from(src);
+            => BitString.bitspan(src);
 
         /// <summary>
         /// Converts span content to a to a bitstring
@@ -123,7 +115,7 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static BitString ToBitString<T>(this Span<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.from(src, maxbits); 
+                => BitString.scalars(src, maxbits); 
 
         /// <summary>
         /// Converts blocked content to a bitstring
@@ -132,7 +124,7 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static BitString ToBitString<T>(this Block64<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.from(src.Data, maxbits ?? Block64<T>.N);
+                => BitString.scalars(src.Data, maxbits ?? Block64<T>.N);
 
         /// <summary>
         /// Converts blocked content to a bitstring
@@ -141,7 +133,7 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static BitString ToBitString<T>(this Block128<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.from(src.Data, maxbits ?? Block128<T>.N);
+                => BitString.scalars(src.Data, maxbits ?? Block128<T>.N);
 
         /// <summary>
         /// Converts datablock content to a bitstring
@@ -150,7 +142,7 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static BitString ToBitString<T>(this Block256<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.from(src.Data, maxbits ?? Block256<T>.N);
+                => BitString.scalars(src.Data, maxbits ?? Block256<T>.N);
 
         /// <summary>
         /// Converts blocked content to a bitstring
@@ -159,7 +151,7 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static BitString ToBitString<T>(this ConstBlock64<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.from(src.Data, maxbits ?? ConstBlock64<T>.N);
+                => BitString.scalars(src.Data, maxbits ?? ConstBlock64<T>.N);
 
         /// <summary>
         /// Converts blocked content to a bitstring
@@ -168,7 +160,7 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static BitString ToBitString<T>(this ConstBlock128<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.from(src.Data, maxbits ?? ConstBlock128<T>.N);
+                => BitString.scalars(src.Data, maxbits ?? ConstBlock128<T>.N);
 
         /// <summary>
         /// Converts datablock content to a bitstring
@@ -177,7 +169,7 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static BitString ToBitString<T>(this ConstBlock256<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.from(src.Data, maxbits ?? ConstBlock256<T>.N);
+                => BitString.scalars(src.Data, maxbits ?? ConstBlock256<T>.N);
 
         /// <summary>
         /// Converts a bitview to a bitstring
@@ -205,7 +197,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static BitString ToBitString<T>(this Vector128<T> src, int? maxbits = null)
             where T : unmanaged        
-                => BitString.from(src.ToSpan(), maxbits);
+                => BitString.scalars(src.ToSpan(), maxbits);
         
         /// <summary>
         /// Converts an 256-bit intrinsic vector representation to a bistring
@@ -215,7 +207,17 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static BitString ToBitString<T>(this Vector256<T> src, int? maxbits = null)
             where T : unmanaged        
-                => BitString.from(src.ToSpan(), maxbits);        
+                => BitString.scalars(src.ToSpan(), maxbits);        
+
+        /// <summary>
+        /// Converts an enumeration value to a bitstring
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The enumeration type</typeparam>
+        [MethodImpl(Inline)]   
+        public static BitString ToBitString<T>(this T src)
+            where T : unmanaged, Enum
+                => BitString.@enum(src);
 
     }
 }

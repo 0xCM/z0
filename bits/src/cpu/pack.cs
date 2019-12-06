@@ -17,7 +17,7 @@ namespace Z0
         {
             var x = v64u(ginx.vload(n256, in head(src)));
             x = ginx.vsll(x,7);
-            return ginx.vmovemask(x);
+            return ginx.vtakemask(x);
         }
 
         //pack 16 1-bit values from 16 8-bit segments
@@ -26,7 +26,7 @@ namespace Z0
         {
             var x = v64u(ginx.vload(n128, in head(src)));
             x = ginx.vsll(x,7);
-            return (ushort)ginx.vmovemask(x);
+            return (ushort)ginx.vtakemask(x);
         }
 
         //pack 8 1-bit values from 8 8-bit segments
@@ -35,7 +35,7 @@ namespace Z0
         {
             var x = ginx.vscalar(n128, head64(src));
             x = ginx.vsll(x,7);
-            return (byte)ginx.vmovemask(x);
+            return (byte)ginx.vtakemask(x);
         }
     }
 }

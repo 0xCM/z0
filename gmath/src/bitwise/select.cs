@@ -27,22 +27,20 @@ namespace Z0
             => or(and(a,b), nonimpl(a,c)); 
 
         [MethodImpl(Inline)]
-        public static byte merge(byte mask, byte a, byte b)
-            =>  xor(b, and(xor(b,a), mask));
+        public static byte blend(byte a, byte b, byte mask)
+            =>  xor(a, and(xor(a,b), mask));
 
         [MethodImpl(Inline)]
-        public static ushort merge(ushort mask, ushort a, ushort b)
-            =>  xor(b, and(xor(b,a), mask));
+        public static ushort blend(ushort a, ushort b, ushort mask)
+            =>  xor(a, and(xor(a,b), mask));
 
         [MethodImpl(Inline)]
-        public static uint merge(uint mask, uint a, uint b)
-            =>  xor(b, and(xor(b,a), mask));
+        public static uint blend(uint a, uint b, uint mask)
+            =>  xor(a, and(xor(a,b), mask));
         
         [MethodImpl(Inline)]
-        public static ulong merge(ulong mask, ulong a, ulong b)
-            =>  xor(b, and(xor(b,a), mask));
-
-
+        public static ulong blend(ulong a, ulong b,ulong mask)
+            =>  xor(a, and(xor(a,b), mask));
 
     }
 

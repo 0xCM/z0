@@ -19,7 +19,6 @@ namespace Z0
     
     partial class dinx
     {
-
         /// <summary>
         /// Creates a 256-bit vector by concatenating two 128-bit source vectors
         /// </summary>

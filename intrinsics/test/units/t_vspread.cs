@@ -22,7 +22,7 @@ namespace Z0
             var mask = dinx.vparts(n, skip, pick, skip, skip, skip, pick, pick, pick, skip, skip, skip, pick, pick, pick, skip, skip);
             var dst = DataBlocks.single<byte>(n);
             dst.Fill(FF);
-            ginx.vmstore(src, mask, ref dst.Head);
+            ginx.vmstore(src, mask, dst);
             for(var i=0; i<16; i++)
             {
                 var expect = gbits.test(mask.Item(i), 7) ? AA : FF;

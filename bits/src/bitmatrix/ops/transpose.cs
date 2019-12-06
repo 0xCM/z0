@@ -27,10 +27,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref BitMatrix8 transpose_v1(in BitMatrix8 A, ref BitMatrix8 Z)
         {
-            var x = dinx.vmovscalar(n128,(ulong)A);
+            var x = dinx.vscalar(n128,(ulong)A);
             for(var i=7; i>= 0; i--)
             {
-                Z[i] = (byte)dinx.vmovemask(v8u(x));
+                Z[i] = (byte)dinx.vtakemask(v8u(x));
                 x = dinx.vsll(x,1);
             }
             return ref Z;
@@ -44,7 +44,7 @@ namespace Z0
             var data = 0ul;
             for(var i=0; i<8; i++)
             {
-                data |= (Bits.gather(src, BitMask.Lsb64x8) << i*8);
+                data |= (dinx.gather(src, BitMask.Lsb64x8) << i*8);
                 src >>= 1;
             }
             return (BitMatrix8)data;
@@ -58,7 +58,7 @@ namespace Z0
             var data = 0ul;
             for(var i=0; i<8; i++)
             {
-                data |= (Bits.gather(src, BitMask.Lsb64x8) << i*8);
+                data |= (dinx.gather(src, BitMask.Lsb64x8) << i*8);
                 src >>= 1;
             }
 

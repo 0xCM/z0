@@ -13,7 +13,7 @@ namespace Z0
     using static DataBlocks;
 
     /// <summary>
-    /// Encapsulates a span that can be evenly partitioned into 128-bit blocks
+    /// Encapsulates a span that with content length can be evenly partitioned into 128-bit blocks
     /// </summary>
     public readonly ref struct Block128<T>
         where T : unmanaged
@@ -21,7 +21,6 @@ namespace Z0
         readonly Span<T> data;
 
         public static N128 N => default;
-
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(in Block128<T> src)
@@ -34,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ConstBlock128<T>(in Block128<T> src)
             => new ConstBlock128<T>(src.data);
-        
+
         [MethodImpl(Inline)]
         internal Block128(Span<T> src)
             => this.data = src;

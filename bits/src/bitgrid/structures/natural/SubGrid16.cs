@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N <= 16
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
+    [StructLayout(LayoutKind.Sequential, Size=2)]
     public readonly ref struct SubGrid16<M,N,T>
         where T : unmanaged
         where N : unmanaged, ITypeNat
@@ -26,21 +26,6 @@ namespace Z0
         /// The grid dimension
         /// </summary>
         public static GridDim<M,N,T> Dim => default;
-
-        /// <summary>
-        /// The number of bytes covered by the grid
-        /// </summary>
-        const int ByteCount = BitGrid16<T>.ByteCount;
-        
-        /// <summary>
-        /// The number of bits covered by a grid cell
-        /// </summary>
-        static int CellSize => BitGrid16<T>.CellSize;
-
-        /// <summary>
-        /// The number of cells covered by the grid
-        /// </summary>
-        static int GridCells => BitGrid16<T>.GridCells;
 
         [MethodImpl(Inline)]
         public static implicit operator SubGrid16<M,N,T>(in Block16<T> src)

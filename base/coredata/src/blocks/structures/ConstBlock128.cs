@@ -44,7 +44,7 @@ namespace Z0
         /// <summary>
         /// The leading storage cell
         /// </summary>
-        public ref T Head
+        public ref readonly T Head
         {
             [MethodImpl(Inline)]
             get => ref MemoryMarshal.GetReference<T>(data);
@@ -122,7 +122,7 @@ namespace Z0
         public ref readonly T this[int ix] 
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.Add(ref Head, ix);
+            get => ref Unsafe.Add(ref MemoryMarshal.GetReference<T>(data), ix);
         }
 
         [MethodImpl(Inline)]

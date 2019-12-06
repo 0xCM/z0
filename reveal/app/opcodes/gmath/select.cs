@@ -15,7 +15,7 @@ namespace Z0
             => gmath.select(a,b,c);
 
         public static ulong select_2(ulong a, ulong b, ulong c)
-            => gmath.merge(a,b,c);
+            => gmath.blend(a,b,c);
 
     }
 

@@ -24,22 +24,22 @@ namespace Z0
         {
             ulong src = g;
             var dst = BitGrid.alloc<byte>(n64,n8,n8);
-            var x = dinx.vmovscalar(n128,src);
-            dst[7] = (byte)dinx.vmovemask(v8u(x));
+            var x = dinx.vscalar(n128,src);
+            dst[7] = (byte)dinx.vtakemask(v8u(x));
             x = dinx.vsll(x,1);
-            dst[6] = (byte)dinx.vmovemask(v8u(x));
+            dst[6] = (byte)dinx.vtakemask(v8u(x));
             x = dinx.vsll(x,1);
-            dst[5] = (byte)dinx.vmovemask(v8u(x));
+            dst[5] = (byte)dinx.vtakemask(v8u(x));
             x = dinx.vsll(x,1);
-            dst[4] = (byte)dinx.vmovemask(v8u(x));
+            dst[4] = (byte)dinx.vtakemask(v8u(x));
             x = dinx.vsll(x,1);
-            dst[3] = (byte)dinx.vmovemask(v8u(x));
+            dst[3] = (byte)dinx.vtakemask(v8u(x));
             x = dinx.vsll(x,1);
-            dst[2] = (byte)dinx.vmovemask(v8u(x));
+            dst[2] = (byte)dinx.vtakemask(v8u(x));
             x = dinx.vsll(x,1);
-            dst[1] = (byte)dinx.vmovemask(v8u(x));
+            dst[1] = (byte)dinx.vtakemask(v8u(x));
             x = dinx.vsll(x,1);
-            dst[0] = (byte)dinx.vmovemask(v8u(x));
+            dst[0] = (byte)dinx.vtakemask(v8u(x));
 
             return dst.As<ulong>();
         }

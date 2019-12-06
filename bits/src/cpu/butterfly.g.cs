@@ -13,8 +13,8 @@ namespace Z0
     using static As;
     using static AsIn;
     
-    partial class gbits
-    {    
+    partial class gvbits
+    {
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
         /// </summary>
@@ -25,13 +25,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(Bits.vbutterfly(n, vcast8u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n, vcast8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast16u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast32u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast64u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -46,13 +46,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(Bits.vbutterfly(n, vcast8u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n, vcast8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast16u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast32u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast64u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -70,11 +70,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return x;
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast16u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast32u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast64u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -92,9 +92,9 @@ namespace Z0
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort))
                 return x;
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast32u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast64u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -111,7 +111,7 @@ namespace Z0
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort) || typeof(T) == typeof(uint))
                 return x;
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast64u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -126,13 +126,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast8u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast16u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast32u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast64u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -147,13 +147,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast8u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast16u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast32u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast64u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -171,11 +171,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return x;
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast16u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast32u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast64u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -193,9 +193,9 @@ namespace Z0
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort))
                 return x;
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast32u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast64u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -212,9 +212,11 @@ namespace Z0
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort) || typeof(T) == typeof(uint))
                 return x;
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(Bits.vbutterfly(n,vcast64u(x)));
+                return vgeneric<T>(CpuBits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
+ 
     }
+
 }

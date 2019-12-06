@@ -22,7 +22,7 @@ namespace Z0
             // 128 bits of output which represents the packing of 128 source bits, each of shich should be on
             var output = SimdPack.pack(input);
             
-            Claim.eq(ginx.vpones<uint>(n128), output);            
+            Claim.eq(ginx.vones<uint>(n128), output);            
         }
 
         public void pack8_basecase()

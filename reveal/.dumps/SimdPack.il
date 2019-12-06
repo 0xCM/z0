@@ -1,4 +1,4 @@
-// 2019-12-04 23:04:09:364
+// 2019-12-05 18:50:58:899
 Vector128<uint> pack(NatSpan<N128,bit> src)
 {
     IL_0000: call Z0.N1 zfunc::get_n1()
@@ -38,7 +38,7 @@ void pack1(ref Vector128<uint> xmm0, ref Vector128<uint> xmm1, in uint src, byte
     IL_0023: ldarg.2
     IL_0024: ldarg.s offset
     IL_0026: call System.UInt32& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<System.UInt32>(System.UInt32&,System.Int32)
-    IL_002B: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vload(Z0.N128,System.UInt32&)
+    IL_002B: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ginx::vload<System.UInt32>(Z0.N128,System.UInt32&)
     IL_0030: stobj System.Runtime.Intrinsics.Vector128`1<System.UInt32>
     IL_0035: ret
 
@@ -51,7 +51,7 @@ Vector128<uint> pack(N1 width, N32 n, in uint src)
     IL_0007: stloc.1
     IL_0008: ldloc.0
     IL_0009: ldarg.2
-    IL_000A: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vload(Z0.N128,System.UInt32&)
+    IL_000A: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ginx::vload<System.UInt32>(Z0.N128,System.UInt32&)
     IL_000F: stloc.2
     IL_0010: ldloc.2
     IL_0011: stloc.3
@@ -63,7 +63,7 @@ Vector128<uint> pack(N1 width, N32 n, in uint src)
     IL_0017: dup
     IL_0018: stloc.1
     IL_0019: call System.UInt32& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<System.UInt32>(System.UInt32&,System.Int32)
-    IL_001E: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vload(Z0.N128,System.UInt32&)
+    IL_001E: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ginx::vload<System.UInt32>(Z0.N128,System.UInt32&)
     IL_0023: stloc.2
     IL_0024: ldloca.s V_3
     IL_0026: ldloca.s V_2

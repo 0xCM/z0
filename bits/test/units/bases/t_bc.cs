@@ -170,7 +170,7 @@ namespace Z0
             var bc = BitCells.load<N,T>(src);
             var pc1 = bc.Pop();
 
-            var bs = BitString.from(src);
+            var bs = BitString.scalars(src);
             var pc2 = bs.PopCount();
 
             Claim.eq(pc1,pc2);

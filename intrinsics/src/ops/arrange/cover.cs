@@ -81,6 +81,7 @@ namespace Z0
 
         /// <summary>
         /// 8x32w -> 32x8w
+        /// [0 1 2 3 4 5 6 7] -> [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7]
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -90,6 +91,7 @@ namespace Z0
 
         /// <summary>
         /// 2x64w -> 16x8w
+        /// [0,1] -> [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1]
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -99,6 +101,7 @@ namespace Z0
 
         /// <summary>
         /// 4x64w -> 32x8w
+        /// [0, 1, 2, 3] -> [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3]
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>

@@ -28,6 +28,11 @@ namespace Z0
 
     }
 
+    public static partial class gvbits
+    {
+
+    }
+
     /// <summary>
     /// Defines bitwise reference operations
     /// </summary>

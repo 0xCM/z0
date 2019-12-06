@@ -33,12 +33,12 @@ namespace Z0
             var z4 = dinx.vcover(x4, out Vector128<uint> _);
             Claim.eq(y4,z4);
 
-            var x5 =dinx.vparts(n256,1,2,3,4);
+            var x5 =dinx.vparts(n256,0,1,2,3);
             var y5 = dinx.vparts(n256,
+                 0, 0, 0, 0, 0, 0, 0, 0,
                  1, 1, 1, 1, 1, 1, 1, 1, 
                  2, 2, 2, 2, 2, 2, 2, 2, 
-                 3, 3, 3, 3, 3, 3, 3, 3, 
-                 4, 4, 4, 4, 4, 4, 4, 4);
+                 3, 3, 3, 3, 3, 3, 3, 3);
             dinx.vcover(x5, out Vector256<byte> z5);
             Claim.eq(y5,z5);
 

@@ -31,18 +31,18 @@ namespace Z0
         public void transpose_4x4_check()
         {
             var order = n4;        
-            var cells = order*order;
-            var src = new uint[cells];
             var n = n128;
+            var cells = order*order;
+            var src = DataBlocks.alloc<uint>(n,order);
             int step = order;
-        
-            for(var i=0u; i< cells; i++)
-                src[i] = i;
 
-            var a = ginx.vload(n, head(src), step*0);
-            var b = ginx.vload(n, head(src), step*1);
-            var c = ginx.vload(n, head(src), step*2);
-            var d = ginx.vload(n, head(src), step*3);
+            for(var i=0; i< cells; i++)
+                src[i] = (uint)i;
+
+            var a = ginx.vload(src.Block(0));
+            var b = ginx.vload(src.Block(1));
+            var c = ginx.vload(src.Block(2));
+            var d = ginx.vload(src.Block(3));
             dinx.vtranspose(ref a, ref b, ref c, ref d);
             
             
@@ -52,7 +52,7 @@ namespace Z0
             ginx.vstore(c, ref head(dst), step*2);
             ginx.vstore(d, ref head(dst), step*3);
 
-            var A = Matrix.load(order, src);
+            var A = Matrix.load(order, src.ToArray());
             var B = Matrix.load(order, dst);
             for(var i=0; i < order; i++)
             for(var j=0; j < order; j++)

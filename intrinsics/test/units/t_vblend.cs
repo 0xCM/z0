@@ -12,7 +12,78 @@ namespace Z0
 
     public class t_vblend : t_vinx<t_vblend>
     {
-        
+        public void vblend_8x16_basecases()
+        {
+            var n = n128;
+            var x = dinx.vparts(n, 0,2,4,6,8,A,C,E); 
+            var y = dinx.vparts(n, 1,3,5,7,9,B,D,F); 
+            
+            Claim.eq(x, dinx.vblend(x,y, Blend8x16.LLLLLLLL));          
+            Claim.eq(y, dinx.vblend(x,y, Blend8x16.RRRRRRRR));
+            Claim.eq(dinx.vparts(n, 0,2,4,6,9,B,D,F), dinx.vblend(x,y, Blend8x16.LLLLRRRR));
+            Claim.eq(dinx.vparts(n, 1,3,5,7,8,A,C,E), dinx.vblend(x,y, Blend8x16.RRRRLLLL));
+
+        }
+
+        public void vblend_4x64_basecases()
+        {            
+            var n = n256;
+            var w = n64;
+            var left = dinx.vparts(n,0,1,2,3);
+            var right = dinx.vparts(n,4,5,6,7);
+
+            Claim.eq(dinx.vparts(n,0,5,2,7),dinx.vblend(left, right, Blend4x64.LRLR));    
+            Claim.eq(dinx.vparts(n,4,1,6,3),dinx.vblend(left, right, Blend4x64.RLRL));    
+            Claim.eq(dinx.vparts(n,0,1,2,3),dinx.vblend(left, right, Blend4x64.LLLL));    
+            Claim.eq(dinx.vparts(n,4,5,6,7),dinx.vblend(left, right, Blend4x64.RRRR));    
+        }
+
+        public void vblend_2x64_basecases()
+        {
+            var n = n128;
+            var w = n64;
+            var left =  dinx.vparts(n,0,1);
+            var right = dinx.vparts(n,4,5);
+            Claim.eq(dinx.vparts(n, 0, 5),dinx.vblend(left, right, Blend2x64.LR));
+            Claim.eq(dinx.vparts(n, 4, 1),dinx.vblend(left, right, Blend2x64.RL));
+            Claim.eq(dinx.vparts(n, 0, 1),dinx.vblend(left, right, Blend2x64.LL));
+            Claim.eq(dinx.vparts(n, 4, 5),dinx.vblend(left, right, Blend2x64.RR));
+        }
+
+        public void vblend_4x32_basecases()
+        {
+            var n = n128;
+            var w = n32;
+            var left =  dinx.vparts(n,0,1,2,3);
+            var right = dinx.vparts(n,4,5,6,7);
+            Claim.eq(dinx.vparts(n,0,5,2,7), dinx.vblend(left,right,Blend4x32.LRLR));
+            Claim.eq(dinx.vparts(n,4,1,6,3), dinx.vblend(left,right,Blend4x32.RLRL));
+            Claim.eq(dinx.vparts(n,0,1,6,7), dinx.vblend(left,right,Blend4x32.LLRR));
+            Claim.eq(dinx.vparts(n,4,5,2,3), dinx.vblend(left,right,Blend4x32.RRLL));
+        }
+
+        public void vblend_8x32_basecases()
+        {
+            var n = n256;
+            var w = n32;    
+            var left =  dinx.vparts(n,0,1,2,3,4,5,6,7);
+            var right = dinx.vparts(n,8,9,A,B,C,D,E,F);            
+            Claim.eq(dinx.vparts(n,0,9,2,B,4,D,6,F),dinx.vblend(left,right, Blend8x32.LRLRLRLR));
+            Claim.eq(dinx.vparts(n,8,1,A,3,C,5,E,7),dinx.vblend(left,right, Blend8x32.RLRLRLRL));
+            Claim.eq(dinx.vparts(n,0,1,A,B,4,5,E,F),dinx.vblend(left,right, Blend8x32.LLRRLLRR));
+            Claim.eq(dinx.vparts(n,8,9,2,3,C,D,6,7),dinx.vblend(left,right, Blend8x32.RRLLRRLL));
+
+            
+            var lrpattern = v32u(ginx.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
+            for(var i=0; i < 8; i++)
+                Claim.eq(vcell(lrpattern,i), even(i) ? 0u : uint.MaxValue);
+            
+            var zero = ginx.vzero<uint>(n);            
+            var ones = ginx.vones<uint>(n);
+            Claim.eq(lrpattern, dinx.vblend(zero, ones, Blend8x32.LRLRLRLR));
+            
+        }
+
         public void vblend_32x8_256x32u_basecase()
         {
             var n = n256;
@@ -23,8 +94,8 @@ namespace Z0
             var o = dinx.vparts(n,8,1,A,3,C,5,E,7);
             var mEven = PatternData.blendspec(n,false,w);
             var mOdd = PatternData.blendspec(n,true,w);
-            Claim.eq(e,ginx.vblend32x8(x,y,mEven));
-            Claim.eq(o,ginx.vblend32x8(x,y,mOdd));
+            Claim.eq(e,ginx.vblend(x,y,mEven));
+            Claim.eq(o,ginx.vblend(x,y,mOdd));
 
         }
 
@@ -38,8 +109,8 @@ namespace Z0
             var o = dinx.vparts(n,4,1,6,3);
             var mEven = PatternData.blendspec(n,false,w);
             var mOdd = PatternData.blendspec(n,true,w);
-            Claim.eq(e,ginx.vblend32x8(x,y,mEven));
-            Claim.eq(o,ginx.vblend32x8(x,y,mOdd));
+            Claim.eq(e,ginx.vblend(x,y,mEven));
+            Claim.eq(o,ginx.vblend(x,y,mOdd));
 
         }
 
@@ -65,82 +136,11 @@ namespace Z0
                 for(var i=0; i<es.CellCount; i++)
                     es[i] = odd(i) ? ys[i] : xs[i];
                 var expect = es.LoadVector();
-                var actual = ginx.vblend32x8(x,y,m);
+                var actual = ginx.vblend(x,y,m);
 
                 Claim.eq(expect,actual);
 
             }
-        }
-
-        public void vblend_8x16_128x16u_basecase()
-        {
-            var n = n128;
-            var x = dinx.vparts(n, 0,2,4,6,8,10,12,14); 
-            var y = dinx.vparts(n, 1,3,5,7,9,11,13,15); 
-            
-            var z = dinx.vblend8x16(x,y, Blend8x16.LLLLLLLL);
-            Claim.eq(x,z);          
-
-            z = dinx.vblend8x16(x,y, Blend8x16.RRRRRRRR);
-            Claim.eq(z,y);
-
-            z = dinx.vblend8x16(x,y, Blend8x16.LLLLRRRR);
-            Claim.eq(dinx.vparts(n, 0,2,4,6,9,11,13,15), z);
-
-            z = dinx.vblend8x16(x,y, Blend8x16.RRRRLLLL);
-            Claim.eq(dinx.vparts(n,1,3,5,7,8,10,12,14), z);
-
-        }
-        public void vblend_4x32_128x32u_basecase()
-        {   
-            var n = n128;
-
-            var x = dinx.vparts(n,1u,3,5,7);
-            var y = dinx.vparts(n,2u,4,6,8);
-
-            var spec = Blend4x32.LLLL;
-            var z = dinx.vblend4x32(x,y, spec);
-            Claim.eq(z,x);
-
-            spec = Blend4x32.LLLR;
-            z = dinx.vblend4x32(x,y, spec);
-            Claim.eq(z, dinx.vparts(n,1u,3,5,8));
-
-            spec = Blend4x32.LLRL;
-            z = dinx.vblend4x32(x,y, spec);
-            Claim.eq(z, dinx.vparts(n,1u,3,6,7));
-
-            spec = Blend4x32.LLRR;
-            z = dinx.vblend4x32(x,y, spec);
-            Claim.eq(z, dinx.vparts(n,1u,3,6,8));
-
-            spec = Blend4x32.RLLL;
-            z = dinx.vblend4x32(x,y, spec);
-            Claim.eq(z, dinx.vparts(n,2u,3,5,7));
-
-
-            spec = Blend4x32.RRRR;
-            z = dinx.vblend4x32(x,y, spec);
-            Claim.eq(z,y);
-        }
-
-        public void vblend_8x32_256x32u_basecase()
-        {
-            var n = n256;
-            var x = dinx.vparts(n, 1, 3, 5, 7, 9,  11, 13, (uint)15);
-            var y = dinx.vparts(n, 2, 4, 6, 8, 10, 12, 14, (uint)16);
-            var spec = Blend8x32.LLLLLLLL;
-            var z = dinx.vblend8x32(x,y, spec);
-            Claim.eq(z,x);
-
-            spec = Blend8x32.LRLRLRLR;
-            z = dinx.vblend8x32(x,y, spec);
-            Claim.eq(z, dinx.vparts(n, 1,4,5,8,9,12,13,(uint)16));
-
-            spec = Blend8x32.RRRRRRRR;
-            z = dinx.vblend8x32(x,y, spec);
-            Claim.eq(z,y);
-
         }
     }
 }

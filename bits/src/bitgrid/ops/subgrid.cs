@@ -14,7 +14,7 @@ namespace Z0
     partial class BitGrid
     {
         /// <summary>
-        /// Allocates a 0-filled subgrid
+        /// Allocates a 0-filled 16-bit subgrid
         /// </summary>
         /// <param name="w">The total bit-width selector</param>
         /// <param name="m">The row count representative</param>
@@ -31,7 +31,7 @@ namespace Z0
                 => new SubGrid16<M, N, T>(z16);
 
         /// <summary>
-        /// Allocates a populated subgrid
+        /// Allocates a populated 16-bit subgrid
         /// </summary>
         /// <param name="w">The total bit-width selector</param>
         /// <param name="data">The data with which to populate the grid</param>
@@ -48,7 +48,7 @@ namespace Z0
                 => new SubGrid16<M, N, T>(convert<T,ushort>(data));
 
         /// <summary>
-        /// Allocates a 0-filled subgrid
+        /// Allocates a 0-filled 32-bit subgrid
         /// </summary>
         /// <param name="w">The total bit-width selector</param>
         /// <param name="m">The row count representative</param>
@@ -65,7 +65,7 @@ namespace Z0
                 => new SubGrid32<M, N, T>(z32);
 
         /// <summary>
-        /// Allocates a populated subgrid
+        /// Allocates a populated 32-bit subgrid
         /// </summary>
         /// <param name="w">The total bit-width selector</param>
         /// <param name="data">The data with which to populate the grid</param>
@@ -82,7 +82,7 @@ namespace Z0
                 => new SubGrid32<M, N, T>(convert<T,uint>(data));
 
         /// <summary>
-        /// Allocates a 0-filled subgrid
+        /// Allocates a 0-filled 64-bitsubgrid
         /// </summary>
         /// <param name="w">The total bit-width selector</param>
         /// <param name="m">The row count representative</param>
@@ -99,7 +99,7 @@ namespace Z0
                 => new SubGrid64<M, N, T>(z64);
 
         /// <summary>
-        /// Allocates a populated subgrid
+        /// Allocates a populated 64-bit subgrid
         /// </summary>
         /// <param name="w">The total bit-width selector</param>
         /// <param name="data">The data with which to populate the grid</param>
@@ -114,6 +114,75 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged            
                 => new SubGrid64<M, N, T>(convert<T,ulong>(data));
+
+
+        /// <summary>
+        /// Allocates a 0-filled 128-bit subgrid
+        /// </summary>
+        /// <param name="w">The total bit-width selector</param>
+        /// <param name="m">The row count representative</param>
+        /// <param name="n">The col count representative</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="M">The row type</typeparam>
+        /// <typeparam name="N">The col type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static SubGrid128<M,N,T> subgrid<M,N,T>(N128 w, M m = default, N n = default, T t = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged            
+                => new SubGrid128<M, N, T>(default);
+
+        /// <summary>
+        /// Allocates a populated 128-bit subgrid
+        /// </summary>
+        /// <param name="data">The data with which to populate the grid</param>
+        /// <param name="m">The row count representative</param>
+        /// <param name="n">The col count representative</param>
+        /// <typeparam name="M">The row type</typeparam>
+        /// <typeparam name="N">The col type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static SubGrid128<M,N,T> subgrid<M,N,T>(Vector128<T> data, M m = default, N n = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged            
+                => new SubGrid128<M, N, T>(data);
+
+
+        /// <summary>
+        /// Allocates a 0-filled 256-bit subgrid
+        /// </summary>
+        /// <param name="w">The total bit-width selector</param>
+        /// <param name="m">The row count representative</param>
+        /// <param name="n">The col count representative</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="M">The row type</typeparam>
+        /// <typeparam name="N">The col type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static SubGrid256<M,N,T> subgrid<M,N,T>(N256 w, M m = default, N n = default, T t = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged            
+                => new SubGrid256<M, N, T>(default);
+
+        /// <summary>
+        /// Allocates a populated 256-bit subgrid
+        /// </summary>
+        /// <param name="data">The data with which to populate the grid</param>
+        /// <param name="m">The row count representative</param>
+        /// <param name="n">The col count representative</param>
+        /// <typeparam name="M">The row type</typeparam>
+        /// <typeparam name="N">The col type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static SubGrid256<M,N,T> subgrid<M,N,T>(Vector256<T> data, M m = default, N n = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged            
+                => new SubGrid256<M, N, T>(data);
+
     }
 
 }

@@ -35,8 +35,8 @@ namespace Z0
         /// <remarks>Code generation for this is good; type-specific specializations exist for convenience. Algorithm
         /// taken from https://graphics.stanford.edu/~seander/bithacks.html</remarks>
         [MethodImpl(Inline)]
-        public static T merge<T>(T mask, T a, T b)
+        public static T blend<T>(T a, T b, T mask)
             where T : unmanaged
-                => xor(b, and(xor(b,a), mask));
+                => xor(a, and(xor(a,b), mask));
     }
 }

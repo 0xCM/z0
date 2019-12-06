@@ -101,7 +101,7 @@ namespace Z0
             Disassemble(typeof(bgoc));   
             Disassemble(typeof(natoc));    
             Disassemble(typeof(bitmaskoc));
-            Disassemble(typeof(butterflyoc));    
+            Disassemble(typeof(cpubitsoc));    
             Disassemble(typeof(memoc));    
             Disassemble(typeof(inxoc));    
             Disassemble(typeof(gmoc));    

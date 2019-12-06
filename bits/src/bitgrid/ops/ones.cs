@@ -55,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid128<T> ones<T>(N128 n, T t = default)
             where T : unmanaged
-                => ginx.vpones<T>(n);
+                => ginx.vones<T>(n);
 
         /// <summary>
         /// Retuns a one-filled bitgrid
@@ -66,7 +66,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid256<T> ones<T>(N256 n, T t = default)
             where T : unmanaged
-                => ginx.vpones<T>(n);
+                => ginx.vones<T>(n);
 
         /// <summary>
         /// Returns a 1-filled natural bitgrid 
@@ -134,7 +134,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => ginx.vpones<T>(width);
+                => ginx.vones<T>(width);
 
         /// <summary>
         /// Returns a 1-filled natural bitgrid 
@@ -151,7 +151,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => ginx.vpones<T>(width);
+                => ginx.vones<T>(width);
 
         [MethodImpl(Inline)]
         public static ref readonly BitGrid<M,N,T> ones<M,N,T>(in BitGrid<M,N,T> dst)

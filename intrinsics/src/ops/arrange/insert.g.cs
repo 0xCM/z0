@@ -10,8 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static zfunc;    
-    using static As;
-    using static aux;
+    using static As;    
     
     partial class ginx
     {
@@ -39,6 +38,47 @@ namespace Z0
             else 
                 return vinsert_f(src,dst,index);
         }
+
+
+        [MethodImpl(Inline)]
+        static Vector256<T> vinsert_i<T>(Vector128<T> src, Vector256<T> dst, int index)        
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return vgeneric<T>(dinx.vinsert(vcast8i(src), vcast8i(dst), index));
+            else if(typeof(T) == typeof(short))
+                return vgeneric<T>(dinx.vinsert(vcast16i(src), vcast16i(dst), index));
+            else if(typeof(T) == typeof(int))
+                return vgeneric<T>(dinx.vinsert(vcast32i(src), vcast32i(dst), index));
+            else 
+                return vgeneric<T>(dinx.vinsert(vcast64i(src), vcast64i(dst), index));
+        }
+
+        [MethodImpl(Inline)]
+        static Vector256<T> vinsert_u<T>(Vector128<T> src, Vector256<T> dst, int index)        
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return vgeneric<T>(dinx.vinsert(vcast8u(src), vcast8u(dst), index));
+            else if(typeof(T) == typeof(ushort))
+                return vgeneric<T>(dinx.vinsert(vcast16u(src), vcast16u(dst), index));
+            else if(typeof(T) == typeof(uint))
+                return vgeneric<T>(dinx.vinsert(vcast64i(src), vcast64i(dst), index));
+            else 
+                return vgeneric<T>(dinx.vinsert(vcast64u(src), vcast64u(dst), index));
+        }
+
+        [MethodImpl(Inline)]
+        static Vector256<T> vinsert_f<T>(Vector128<T> src, Vector256<T> dst, int index)        
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return vgeneric<T>(fpinx.vinsert(vcast32f(src), vcast32f(dst), index));
+            else if(typeof(T) == typeof(double))
+                return vgeneric<T>(fpinx.vinsert(vcast64f(src), vcast64f(dst), index));
+            else
+                throw unsupported<T>();
+        } 
 
     }
 }

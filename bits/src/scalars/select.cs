@@ -9,6 +9,7 @@ namespace Z0
  
     using static zfunc;
     using static BitParts;
+    using static dinx;
 
     partial class Bits
     {        
@@ -499,6 +500,51 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint select(uint src, Part30x5 part)
             => gather(src, (uint)part);
+
+        /// <summary>
+        /// Maps mask-identified source bits to the low bits of an empty target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The source partition to select/extract</param>
+        [MethodImpl(Inline)]
+        public static ulong select(ulong src, Part35x5 part)
+            => gather(src, (ulong)part);
+
+        /// <summary>
+        /// Maps mask-identified source bits to the low bits of an empty target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The source partition to select/extract</param>
+        [MethodImpl(Inline)]
+        public static ulong select(ulong src, Part40x5 part)
+            => gather(src, (ulong)part);
+
+        /// <summary>
+        /// Maps mask-identified source bits to the low bits of an empty target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The source partition to select/extract</param>
+        [MethodImpl(Inline)]
+        public static ulong select(ulong src, Part45x5 part)
+            => gather(src, (ulong)part);
+
+        /// <summary>
+        /// Maps mask-identified source bits to the low bits of an empty target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The source partition to select/extract</param>
+        [MethodImpl(Inline)]
+        public static ulong select(ulong src, Part50x5 part)
+            => gather(src, (ulong)part);
+
+        /// <summary>
+        /// Maps mask-identified source bits to the low bits of an empty target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The source partition to select/extract</param>
+        [MethodImpl(Inline)]
+        public static ulong select(ulong src, Part55x5 part)
+            => gather(src, (ulong)part);
 
        /// <summary>
         /// Maps mask-identified source bits to the low bits of an empty target 

@@ -24,7 +24,7 @@ namespace Z0
             void case1()
             {
                 var src = DataBlocks.single<byte>(n256);
-                ginx.vpones<byte>(n256).StoreTo(src);
+                ginx.vones<byte>(n256).StoreTo(src);
                 var dst = Bits.pack8x1(src);
                 Claim.eq(dst,uint.MaxValue);
 
@@ -33,7 +33,7 @@ namespace Z0
             void case2()
             {
                 var src = DataBlocks.single<byte>(n128);
-                ginx.vpones<byte>(n128).StoreTo(src);
+                ginx.vones<byte>(n128).StoreTo(src);
                 var dst = Bits.pack8x1(src);
                 Claim.eq(dst,ushort.MaxValue);
             }
@@ -250,7 +250,7 @@ namespace Z0
                 var up1 = BitStore.select((byte)i);
                 Span<byte> up2 = stackalloc byte[8];
                 Bits.unpack8x1(b, up2);
-                Claim.eq(BitString.fromseq(up1), BitString.fromseq(up2));
+                Claim.eq(BitString.bitseq(up1), BitString.bitseq(up2));
             }
         }
 

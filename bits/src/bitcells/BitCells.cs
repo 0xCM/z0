@@ -227,7 +227,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public readonly BitString ToBitString()
-            => BitString.from<T>(data, BitCount); 
+            => BitString.scalars<T>(data, BitCount); 
 
         /// <summary>
         /// Counts the vector's enabled bits

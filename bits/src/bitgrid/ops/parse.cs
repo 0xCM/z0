@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid128<T> parse<T>(BitString bs, N128 n, T t = default)
             where T : unmanaged
-                => dinx.vload(n, head(bs.Pack(0,n)));
+                => ginx.vload(n, bs.Pack(0,n));
 
         /// <summary>
         /// Hydrates a fixed-width 256-bit dimensionless grid from a bitstring
@@ -71,7 +71,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid256<T> parse<T>(BitString bs, N256 n, T t = default)
             where T : unmanaged
-                => dinx.vload(n, head(bs.Pack(0,n)));
+                => ginx.vload(n, bs.Pack(0,n));
          
         /// <summary>
         /// Hydrates a fixed-width natural bitgrid from a bitstring

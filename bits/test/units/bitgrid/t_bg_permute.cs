@@ -11,7 +11,16 @@ namespace Z0
     
     public class t_bg_permute : t_bg<t_bg_permute>
     {        
-        public void nbg_permute_16x4()
+        const int bc1 = 32*5;
+        public void bg_permute_32x5()
+        {
+            var p = Perm.natural(n32);
+            Claim.eq(p.Length,32);
+            
+            var g = BitGrid.from(p);
+            Trace(g.Format());
+        }
+        public void bg_permute_16x4()
         {
             var identity = Perm16.Identity;
             var iterms = identity.Literals();
@@ -30,11 +39,10 @@ namespace Z0
             var g1 = id.ToBitGrid();
             var iperm = id.ToNatural();
             var g2 = iperm.ToBitGrid();
-            Claim.yea(g1 == g2);
-
-            
-
+            Claim.yea(g1 == g2);        
         }
+
+
         
     }
 }

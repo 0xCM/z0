@@ -76,7 +76,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitVector16 Col(int index)
-            => BitVector.from(n16, Bits.gather(this,(C0 << index)));
+            => BitVector.from(n16, dinx.gather(this,(C0 << index)));
 
         // C0 = [0001 0001 ... 0001]
         // C1 = C0 << 1 = [0010 0010 ... 0010]

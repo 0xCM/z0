@@ -12,6 +12,33 @@ namespace Z0
 
     public class t_vmovemask : t_vinx<t_vmovemask>
     {
+
+        public void makemask_128()
+        {
+
+            for(var i=0; i< SampleSize; i++)
+            {
+                var x = Random.BitVector(n16);
+                var z = dinx.vtakemask(dinx.vmakemask(x));
+                Claim.eq(z,x);
+            }
+
+        }
+
+        public void makemask_256()
+        {
+
+            for(var i=0; i< SampleSize; i++)
+            {
+                var x = Random.BitVector(n32);
+                var z = dinx.vtakemask(dinx.vmakemask(x));
+                Claim.eq(z,x);
+
+            }
+
+        }
+
+
         public void pack_test()
         {
             var x = dinx.vparts(n128,0,1,2,4,4,5,6,7);
@@ -29,7 +56,7 @@ namespace Z0
             Span<uint> m = new uint[8];
             for(var i=0; i<8; i++)
             {
-                m[i] = ginx.vmovemask(x);
+                m[i] = ginx.vtakemask(x);
                 x = ginx.vsll(x,1);
             }
 
@@ -53,11 +80,12 @@ namespace Z0
             Claim.eq(data.Length, w);
 
             ref var src = ref head(data);
-            for(var i=0; i< w; i+=8)
-                ginx.vstore(pattern, ref src, i);
 
-            for(var i=0; i < w; i+= 8)
-                Claim.eq(pattern,ginx.vload(n, in src, i));                
+            // for(var i=0; i< w; i+=8)
+            //     ginx.vstore(pattern, ref src, i);
+
+            // for(var i=0; i < w; i+= 8)
+            //     Claim.eq(pattern,ginx.vload(n, in src, i));                
 
 
         }
@@ -84,7 +112,7 @@ namespace Z0
                         mask = BitMask.enable(mask, r);
                 
                 var expect = mask.ToBitVector(bytes).ToBitString();
-                var actual = dinx.vmovemask(srcCpuVec).ToBitVector(bytes).ToBitString();
+                var actual = dinx.vtakemask(srcCpuVec).ToBitVector(bytes).ToBitString();
                 Claim.eq(expect, actual);
             }
         }
@@ -112,7 +140,7 @@ namespace Z0
                         mask = BitMask.enable(mask, r);
                 
                 var expect = mask.ToBitVector(bytes).ToBitString();
-                var actual = dinx.vmovemask(srcCpuVec).ToBitVector(bytes).ToBitString();
+                var actual = dinx.vtakemask(srcCpuVec).ToBitVector(bytes).ToBitString();
                 Claim.eq(expect, actual);
             }
         }

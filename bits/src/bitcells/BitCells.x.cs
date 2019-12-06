@@ -96,7 +96,7 @@ namespace Z0
         public static BitString ToBitString<N,T>(this BitCells<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitString.from(src.Data, src.Width); 
+                => BitString.scalars(src.Data, src.Width); 
 
         [MethodImpl(Inline)]
         public static string Format<N,T>(this BitCells<N,T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
