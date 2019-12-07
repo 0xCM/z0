@@ -211,6 +211,5 @@ namespace Z0
         public static BitVector<N32,uint> col<T>(in BitGrid256<N32,N8,T> g, int index)
             where T : unmanaged
                 => ginx.vtakemask(ginx.vsll(g.Data, (byte)(7 - index)));
-
     }
 }

@@ -14,13 +14,18 @@ namespace Z0
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N <= 64
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size=8)]
+    [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     public readonly ref struct SubGrid64<M,N,T>
         where T : unmanaged
         where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
     {                
-        readonly BitGrid64<T> data;
+        readonly ulong data;
+
+        /// <summary>
+        /// The number of bytes covered by the grid
+        /// </summary>
+        public const int ByteCount = 8;
 
         /// <summary>
         /// The grid dimension
@@ -70,14 +75,18 @@ namespace Z0
             get => data;
         }
 
-        /// <summary>
-        /// The number of covered bits
-        /// </summary>
-        public int PointCount
+        public Span<T> Cells
         {
             [MethodImpl(Inline)]
-            get => NatMath.mul<M,N>();
+            get => Data.AsBytes().As<T>();
         }
+
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref head(Cells);
+        }
+
 
         /// <summary>
         /// The number of grid rows
@@ -89,28 +98,30 @@ namespace Z0
         /// </summary>
         public int ColCount => natval<N>();  
 
-        public Span<T> Cells
-        {
-            [MethodImpl(Inline)]
-            get => data.Cells;
-        }
 
         /// <summary>
-        /// The leading storage cell
+        /// The number of covered bits
         /// </summary>
-        public ref T Head
+        public int BitCount
         {
             [MethodImpl(Inline)]
-            get => ref data.Head;
+            get => NatMath.mul<M,N>();
         }
 
         /// <summary>
         /// Reads/writes an index-identified cell
         /// </summary>
-        public ref T this[int cell]
+        [MethodImpl(Inline)]
+        public ref T Cell(int index)
+            => ref Unsafe.Add(ref Head, index);
+
+        /// <summary>
+        /// Extracts row content as a bitvector
+        /// </summary>
+        public BitVector<N,T> this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref data[cell];
+            get => BitGrid.row(this,index);
         }
 
         [MethodImpl(Inline)]
@@ -118,7 +129,7 @@ namespace Z0
             where P : unmanaged, ITypeNat
             where Q : unmanaged, ITypeNat
             where U : unmanaged
-                => data.As<U>();
+                => new SubGrid64<P,Q,U>(data);
         
         [MethodImpl(Inline)]
         public bool Equals(SubGrid64<M,N,T> rhs)

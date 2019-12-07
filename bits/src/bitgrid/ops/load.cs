@@ -466,8 +466,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged
-                => new BitGrid<M,N,T>(src);
-  
+                => new BitGrid<M,N,T>(src);  
     }
-
 }

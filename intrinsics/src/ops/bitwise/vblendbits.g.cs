@@ -13,7 +13,6 @@ namespace Z0
 
     partial class ginx
     {
-
         /// <summary>
         /// Blends the left and right vectors at the bit-level as specified by the mask operand.
         /// </summary>
@@ -39,7 +38,5 @@ namespace Z0
         public static Vector256<T> vblendbits<T>(Vector256<T> x, Vector256<T> y, Vector256<T> mask)
             where T : unmanaged
                 => vxor(x, vand(vxor(x,y), mask));
-
     }
-
 }

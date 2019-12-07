@@ -12,6 +12,74 @@ namespace Z0
 
     public class t_vblend : t_vinx<t_vblend>
     {
+        public void vblend_permute()
+        {
+
+            // x: 0 1 2 3 4 5 6 7  
+            // y: 8 9 A B C D E F
+            
+            // paired blends
+            // a: 0 9 2 B 4 D 6 F    (LRLRLRLR) (x,y)
+            // b: 8 1 A 3 C 5 E 7    (RLRLRLRL) (x,y)
+            
+            // formatted as a permutation
+            // 0 1 2 3 4 5 6 7 8 9 A B C D E F
+            // 0 9 2 B 4 D 6 F 8 1 A 3 C 5 E 7 
+            
+            // As a product of transpositions
+            // (1 9)(3 B)(5 D)(7 F)
+
+            var n = n128;
+            var x = dinx.vparts(n, 0,1,2,3,4,5,6,7); 
+            var y = dinx.vparts(n, 8,9,A,B,C,D,E,F); 
+
+            var a = dinx.vblend(x,y, Blend8x16.LRLRLRLR);
+            var b = dinx.vblend(x,y, Blend8x16.RLRLRLRL);
+            var c = dinx.vparts(n, 0,9,2,B,4,D,6,F);
+            var d = dinx.vparts(n, 8,1,A,3,C,5,E,7);
+            Claim.eq(a,c);
+            Claim.eq(b,d);
+
+            var perm = Perm.natural(n16, (1,9), (3,B), (5,D), (7,F));
+            var bg = perm.ToBitGrid();
+            for(var i=0; i< bg.RowCount; i++)
+                Claim.eq(bg.Row(i).As<byte>(), perm[i]);
+
+            var swaps = perm.CalcSwaps().ToArray();
+            Claim.eq(4,swaps.Length);
+
+            Claim.eq(swaps[0].i, 1);
+            Claim.eq(swaps[0].j, 9);
+            Claim.eq(swaps[1].i, 3);
+            Claim.eq(swaps[1].j, B);
+            Claim.eq(swaps[2].i, 5);
+            Claim.eq(swaps[2].j, D);
+            Claim.eq(swaps[3].i, 7);
+            Claim.eq(swaps[3].j, F);
+
+            
+            void report1()
+            {
+                for(var i=0; i< swaps.Length; i++)
+                    Trace($"{swaps[i]}");
+            }            
+
+            void report2()
+            {
+                 Trace(perm.Format());
+                 //Trace(bg.Format(showrow:true));
+
+            }        
+
+            // for(var i=0; i<bgA.RowCount; i++)
+            //     Trace(bgA.Row(i).Format());
+            
+
+
+
+        }
+        
+        
         public void vblend_8x16_basecases()
         {
             var n = n128;

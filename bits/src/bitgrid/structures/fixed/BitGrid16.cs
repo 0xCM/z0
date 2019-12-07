@@ -20,30 +20,15 @@ namespace Z0
     {                
         readonly ushort data;        
 
+        readonly byte rows;
+
+        readonly byte cols;
+
         /// <summary>
         /// The number of bytes covered by the grid
         /// </summary>
         public const int ByteCount = 2;
-
-        /// <summary>
-        /// The number of bits covered by the grid
-        /// </summary>
-        public const int BitCount = ByteCount * 8;
         
-        /// <summary>
-        /// The number of cells covered by the grid
-        /// </summary>
-        public static int GridCells => ByteCount/size<T>();
-
-        /// <summary>
-        /// The number of bits covered by a grid cell
-        /// </summary>
-        public static int CellSize => bitsize<T>();
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid16<T>(ushort src)
-            => new BitGrid16<T>(src);
-
         [MethodImpl(Inline)]
         public static implicit operator ushort(BitGrid16<T> src)
             => src.data;
@@ -57,8 +42,12 @@ namespace Z0
             => gx.data != gy.data;
 
         [MethodImpl(Inline)]
-        internal BitGrid16(ushort data)
-            => this.data = data;
+        internal BitGrid16(ushort data, int rows, int cols)
+        {
+            this.data = data;
+            this.rows = (byte)rows;
+            this.cols = (byte)cols;
+        }
         
         public ushort Data
         {
@@ -66,19 +55,31 @@ namespace Z0
             get => data;
         }
 
+        public int RowCount
+        {
+            [MethodImpl(Inline)]
+            get => rows;
+        }
+
+        public int ColCount
+        {
+            [MethodImpl(Inline)]
+            get => cols;
+        }
+
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => GridCells;
+            get => ByteCount/size<T>();
         }
 
         /// <summary>
         /// The number of covered bits
         /// </summary>
-        public int PointCount
+        public int BitCount
         {
             [MethodImpl(Inline)]
-            get => BitCount;
+            get => ByteCount * 8;
         }
 
         public Span<T> Cells
@@ -96,6 +97,13 @@ namespace Z0
         /// <summary>
         /// Reads/writes an index-identified cell
         /// </summary>
+        [MethodImpl(Inline)]
+        public ref T Cell(int index)
+            => ref Unsafe.Add(ref Head, index);
+
+        /// <summary>
+        /// Reads/writes an index-identified cell
+        /// </summary>
         public ref T this[int cell]
         {
             [MethodImpl(Inline)]
@@ -105,8 +113,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitGrid16<U> As<U>()
             where U : unmanaged
-                => data;
-
+                => new BitGrid16<U>(data,rows, cols);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid16<T> rhs)

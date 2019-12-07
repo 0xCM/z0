@@ -544,8 +544,6 @@ namespace Z0
         public static ulong project(ulong src, Part60x5 part)
             => scatter(src, (ulong)part);
 
-
-
         // ~ Nx6
         // ~ ------------------------------------------------------------------
         /// <summary>

@@ -13,13 +13,41 @@ namespace Z0
 
     partial class BitVectorX
     {
+        /// <summary>
+        /// Returns true of all bits are enabled, false otherwise
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static bit TestC(this BitVector8 src)
+            => (byte.MaxValue & src.data) == byte.MaxValue;
+
+        /// <summary>
+        /// Returns true of all bits are enabled, false otherwise
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static bit TestC(this BitVector16 src)
+            => (ushort.MaxValue & src.data) == ushort.MaxValue;
 
         /// <summary>
         /// Returns true of all bits are enabled, false otherwise
         /// </summary>
         [MethodImpl(Inline)]
         public static bit TestC(this BitVector32 src)
-            => (UInt32.MaxValue & src.data) == UInt32.MaxValue;
-        
+            => (uint.MaxValue & src.data) == uint.MaxValue;
+
+        /// <summary>
+        /// Returns true of all bits are enabled, false otherwise
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static bit TestC(this BitVector64 src)
+            => (ulong.MaxValue & src.data) == ulong.MaxValue;
+
+        /// <summary>
+        /// Returns true of all bits are enabled, false otherwise
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static bit TestC<T>(this BitVector<T> src)
+            where T : unmanaged
+                => gmath.eq(gmath.and(gmath.maxval<T>(), src.data), gmath.maxval<T>());
+
     }
 }

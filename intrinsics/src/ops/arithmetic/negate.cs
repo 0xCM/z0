@@ -12,7 +12,6 @@ namespace Z0
 
     partial class dinx    
     {
-
         /// <summary>
         /// Negates the source vector
         /// </summary>

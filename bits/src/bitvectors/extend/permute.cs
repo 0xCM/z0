@@ -14,28 +14,6 @@ namespace Z0
     partial class BitVectorX
     {
         /// <summary>
-        /// Applies a permutation to a copy of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="p">The permutation</param>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> Permute<N,T>(this BitVector<N,T> src, in PermSpec p)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => BitVector.perm(src,p);
-
-        /// <summary>
-        /// Applies a permutation to a copy of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="p">The permutation</param>
-        /// <typeparam name="T">The storage cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<T> Permute<T>(this BitVector<T> src, in PermSpec p)
-            where T : unmanaged
-                => BitVector.perm(src,p);
-
-        /// <summary>
         /// Applies a permutation to copy of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -79,6 +57,26 @@ namespace Z0
         public static BitVector64 Permute(this BitVector64 src, in PermSpec p)
             => BitVector.perm(src,p);
 
+        /// <summary>
+        /// Applies a permutation to a copy of the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="p">The permutation</param>
+        /// <typeparam name="T">The storage cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<T> Permute<T>(this BitVector<T> src, in PermSpec p)
+            where T : unmanaged
+                => BitVector.perm(src,p);
+  
+        /// <summary>
+        /// Applies a permutation to a copy of the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="p">The permutation</param>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> Permute<N,T>(this BitVector<N,T> src, in PermSpec p)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BitVector.perm(src,p);
     }
-
 }

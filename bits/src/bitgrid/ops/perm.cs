@@ -15,15 +15,36 @@ namespace Z0
     {        
 
         [MethodImpl(Inline)]
-        public static BitGrid32<uint> from(Perm8 src)
-            => (uint)src;
+        public static SubGrid32<N8,N3,uint> perm(Perm8 p)
+            => (uint)p;
+
+        [MethodImpl(Inline)]
+        public static SubGrid32<N8,N3,uint> perm(NatPerm<N8> p)
+            => (uint)p.ToLiteral();
 
 
         [MethodImpl(Inline)]
-        public static BitGrid64<N16,N4,ulong> from(Perm16 src)
-            => (ulong)src;
+        public static BitGrid64<N16,N4,ulong> perm(Perm16 p)
+            => (ulong)p;
 
-        public static SubGrid256<N32,N5,ulong> from(NatPerm<N32> src)
+
+        [MethodImpl(Inline)]
+        public static BitGrid64<N16,N4,ulong> perm(NatPerm<N16> p)
+        {
+            var dst = 0ul;
+            int length = n16;
+            int m = n16;
+            int n = n4;
+            for(var i=0; i<length; i++)
+                dst |= ((ulong)p[i] << i*n);
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static Perm16 perm(BitGrid64<N16,N4,ulong> g)
+            => (Perm16)g.Data;
+
+        public static SubGrid256<N32,N5,ulong> perm(NatPerm<N32> p)
         {
             var m = n32;
             var n = n5;
@@ -31,27 +52,12 @@ namespace Z0
             var dst = DataBlocks.alloc<ulong>(w);
             var mask = BitMasks.Lsb64x8x5;
             var bs = BitString.alloc(w);
-            for(int i=0, j=0 ; i< src.Length; i++, j+=5)
-                bs.Inject(src[i].ToBitString(),j, 5);
+            for(int i=0, j=0 ; i< p.Length; i++, j+=5)
+                bs.Inject(p[i].ToBitString(),j, 5);
             return BitGrid.subgrid(bs.ToCpuVector<ulong>(w), m,n);
-
-            // for(int i=0, j=0, k=0; i<src.Length; i++, j+=5)
-            // {
-            //     if(j >= 63)
-            //     {
-            //         j = 0;
-            //         k++;
-            //     }
-
-            //     dst[k] |= (ulong)src[i] << j;
-            // }
-            //return BitGrid.subgrid(dst.LoadVector(),m, n);
         }
 
         
-        [MethodImpl(Inline)]
-        public static Perm16 perm(BitGrid64<N16,N4,ulong> src)
-            => (Perm16)src.Data;
     }
 
 }

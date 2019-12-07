@@ -61,20 +61,12 @@ namespace Z0
         /// <summary>
         /// The number of grid rows
         /// </summary>
-        public int RowCount
-        {
-            [MethodImpl(Inline)]
-            get => natval<M>();
-        }
+        public int RowCount => natval<M>();
 
         /// <summary>
         /// The number of grid columns
         /// </summary>
-        public int ColCount
-        {
-            [MethodImpl(Inline)]
-            get => natval<N>();
-        }
+        public int ColCount => natval<N>();
 
         /// <summary>
         /// The number of allocated 256-bit blocks 
@@ -147,8 +139,6 @@ namespace Z0
         public Block256<T> Block(int block)
             => data.Block(block);
 
-        public GridMoniker<T> Moniker
-            => GridMoniker.FromTypes<M,N,T>();
             
         [MethodImpl(Inline)]
         public bool Equals(BitGrid<M,N,T> rhs)

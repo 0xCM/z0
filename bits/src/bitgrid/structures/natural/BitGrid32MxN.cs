@@ -23,33 +23,18 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
     {                
-        readonly BitGrid32<T> data;
+        readonly uint data;
+
+        /// <summary>
+        /// The number of bytes covered by the grid
+        /// </summary>
+        public const int ByteCount = 4;
 
         /// <summary>
         /// The grid dimension
         /// </summary>
         public static GridDim<M,N,T> Dimension => default;        
-
-        /// <summary>
-        /// The number of bytes covered by the grid
-        /// </summary>
-        public const int ByteCount = BitGrid32<T>.ByteCount;
         
-        /// <summary>
-        /// The number of bits covered by the grid
-        /// </summary>
-        public const int BitCount = BitGrid32<T>.BitCount;
-
-        /// <summary>
-        /// The number of bits covered by a grid cell
-        /// </summary>
-        public static int CellSize => BitGrid32<T>.CellSize;
-
-        /// <summary>
-        /// The number of cells covered by the grid
-        /// </summary>
-        public static int GridCells => BitGrid32<T>.GridCells;
-
         [MethodImpl(Inline)]
         public static implicit operator BitGrid32<M,N,T>(uint src)
             => new BitGrid32<M, N, T>(src);
@@ -60,7 +45,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid32<T>(BitGrid32<M,N,T> src)
-            => new BitGrid32<T>(src.data);
+            => new BitGrid32<T>(src.data, natval<M>(), natval<N>());
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid32<M,N,T>(in Block32<T> src)
@@ -82,6 +67,7 @@ namespace Z0
         internal BitGrid32(uint src)
             => this.data = src;
 
+
         [MethodImpl(Inline)]
         internal BitGrid32(Block32<T> src)
             => this.data = src.As<uint>().Head;
@@ -92,31 +78,32 @@ namespace Z0
             get => data;
         }
 
-        public int CellCount
-        {
-            [MethodImpl(Inline)]
-            get => data.CellCount;
-        }
-
-        /// <summary>
-        /// The number of covered bits
-        /// </summary>
-        public int PointCount
-        {
-            [MethodImpl(Inline)]
-            get => BitCount;
-        }
 
         public Span<T> Cells
         {
             [MethodImpl(Inline)]
-            get => data.Cells;
+            get => data.AsBytes().As<T>();
         }
 
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref data.Head;
+            get => ref head(Cells);
+        }
+
+        public int CellCount
+        {
+            [MethodImpl(Inline)]
+            get => ByteCount/size<T>();
+        }
+
+        /// <summary>
+        /// The number of covered bits
+        /// </summary>
+        public int BitCount
+        {
+            [MethodImpl(Inline)]
+            get => NatMath.mul<M,N>();
         }
 
         /// <summary>
@@ -132,22 +119,33 @@ namespace Z0
         /// <summary>
         /// Reads/writes an index-identified cell
         /// </summary>
-        public ref T this[int cell]
+        [MethodImpl(Inline)]
+        public ref T Cell(int index)
+            => ref Unsafe.Add(ref Head, index);
+
+        /// <summary>
+        /// Extracts row contant as a bitvector
+        /// </summary>
+        public BitVector<N,T> this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref data[cell];
+            get => BitGrid.row(this,row);
         }
 
+        /// <summary>
+        /// Converts the current grid defined over T-cells to a target grid defined over U-cells
+        /// </summary>
+        /// <typeparam name="U">The target type</typeparam>
         [MethodImpl(Inline)]
-        public BitGrid32<U> As<U>()
+        public BitGrid32<M,N,U> As<U>()
             where U : unmanaged
-                => data.As<U>();
+                => new BitGrid32<M, N, U>(data);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid32<M,N,T> rhs)
             => data.Equals(rhs.data);
 
-       public override bool Equals(object obj)
+        public override bool Equals(object obj)
             => throw new NotSupportedException();
 
         public override int GetHashCode()

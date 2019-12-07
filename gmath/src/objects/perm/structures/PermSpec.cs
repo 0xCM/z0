@@ -240,6 +240,29 @@ namespace Z0
             return this;
         }
 
+        
+        public Span<Swap> CalcSwaps()
+        {
+            var max = terms.Length/2;
+            Span<Swap> swaps = new Swap[max];
+            var count = 0;
+            for(var i=0; i< max; i++)
+            {                
+                var image = terms[i];
+
+                if(i != image)
+                {
+                    var a = terms[image];
+                    var b = terms[a];
+                    if(image == b)
+                        swaps[count++] = (a,image);
+                }
+
+            }
+
+            return swaps.Slice(0,count);
+        }
+
         /// <summary>
         /// Computes a permutation cycle originating at a specified point
         /// </summary>

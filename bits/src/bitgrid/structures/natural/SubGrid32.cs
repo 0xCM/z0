@@ -14,19 +14,23 @@ namespace Z0
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N <= 32
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size=4)]
+    [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     public readonly ref struct SubGrid32<M,N,T>
         where T : unmanaged
         where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
     {                
-        readonly BitGrid32<T> data;
+        readonly uint data;
+
+        /// <summary>
+        /// The number of bytes covered by the grid
+        /// </summary>
+        public const int ByteCount = 4;
 
         /// <summary>
         /// The grid dimension
         /// </summary>
         public static GridDim<M,N,T> Dim => default;
-
         
         [MethodImpl(Inline)]
         public static implicit operator SubGrid32<M,N,T>(in Block32<T> src)
@@ -42,7 +46,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid32<T>(SubGrid32<M,N,T> src)
-            => new BitGrid32<T>(src.data);
+            => new BitGrid32<T>(src.data,natval<M>(),natval<N>());
 
         [MethodImpl(Inline)]
         public static implicit operator SubGrid32<M,N,T>(BitGrid32<T> src)
@@ -70,56 +74,57 @@ namespace Z0
             get => data;
         }
 
-        /// <summary>
-        /// The number of allocated cells
-        /// </summary>
+        public Span<T> Cells
+        {
+            [MethodImpl(Inline)]
+            get => data.AsBytes().As<T>();
+        }
+
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref head(Cells);
+        }
+
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => data.CellCount;
+            get => ByteCount/size<T>();
         }
 
         /// <summary>
         /// The number of covered bits
         /// </summary>
-        public int PointCount
+        public int BitCount
         {
             [MethodImpl(Inline)]
             get => NatMath.mul<M,N>();
         }
 
         /// <summary>
-        /// The number of grid rows
+        /// The number of rows in the grid
         /// </summary>
         public int RowCount => natval<M>();         
 
         /// <summary>
-        /// The number of grid columns
+        /// The number of columns in the grid
         /// </summary>
         public int ColCount => natval<N>();  
-
-        public Span<T> Cells
-        {
-            [MethodImpl(Inline)]
-            get => data.Cells;
-        }
-
-        /// <summary>
-        /// The leading storage cell
-        /// </summary>
-        public ref T Head
-        {
-            [MethodImpl(Inline)]
-            get => ref data.Head;
-        }
 
         /// <summary>
         /// Reads/writes an index-identified cell
         /// </summary>
-        public ref T this[int cell]
+        [MethodImpl(Inline)]
+        public ref T Cell(int index)
+            => ref Unsafe.Add(ref Head, index);
+
+        /// <summary>
+        /// Extracts row content as a bitvector
+        /// </summary>
+        public BitVector<N,T> this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref data[cell];
+            get => BitGrid.row(this, index);
         }
 
         [MethodImpl(Inline)]
@@ -127,7 +132,7 @@ namespace Z0
             where P : unmanaged, ITypeNat
             where Q : unmanaged, ITypeNat
             where U : unmanaged
-                => data.As<U>();
+                => new SubGrid32<P, Q, U>(data);
         
         [MethodImpl(Inline)]
         public bool Equals(SubGrid32<M,N,T> rhs)

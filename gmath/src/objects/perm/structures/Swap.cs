@@ -172,6 +172,9 @@ namespace Z0
         public Swap Replicate()
             => (i,j);
 
+        public override string ToString()
+            => Format();
+
         public override int GetHashCode()
             => HashCode.Combine(i,j);
              

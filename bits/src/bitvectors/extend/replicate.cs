@@ -14,27 +14,6 @@ namespace Z0
     partial class BitVectorX
     {
         /// <summary>
-        /// Creates a copy of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The storage cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> Replicate<N,T>(this BitVector<N,T> src)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => BitVector.inject<N,T>(src.data);
-
-        /// <summary>
-        /// Creates a copy of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The storage cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<T> Replicate<T>(this BitVector<T> src)
-            where T : unmanaged
-                => src.Scalar;
-
-        /// <summary>
         /// Creates a copy of the vector
         /// </summary>
         [MethodImpl(Inline)]
@@ -49,6 +28,10 @@ namespace Z0
         public static BitVector4 Replicate(this BitVector4 src)
             => BitVector.replicate(src);
 
+        /// <summary>
+        /// Concatenates a 4-bit vector with itself to produce a 8-bit vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector8 Replicate(this BitVector4 src, N2 n)
             => BitVector.replicate(src,n);
@@ -125,7 +108,28 @@ namespace Z0
         /// Creates a copy of the source vector
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitVector64 Replicate(this BitVector64 src)
+        public static BitVector64 Replicate(this BitVector64 src)        
             => BitVector.replicate(src);
+
+        /// <summary>
+        /// Creates a copy of the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The storage cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<T> Replicate<T>(this BitVector<T> src)
+            where T : unmanaged
+                => src.Scalar;
+
+        /// <summary>
+        /// Creates a copy of the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The storage cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> Replicate<N,T>(this BitVector<N,T> src)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => BitVector.inject<N,T>(src.data);
     }
 }

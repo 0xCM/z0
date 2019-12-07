@@ -23,33 +23,18 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
     {                
-        readonly BitGrid16<T> data;
+        readonly ushort data;
+
+        /// <summary>
+        /// The number of bytes covered by the grid
+        /// </summary>
+        public const int ByteCount = 2;
 
         /// <summary>
         /// The grid dimension
         /// </summary>
         public static GridDim<M,N,T> Dimension => default;        
-
-        /// <summary>
-        /// The number of bytes covered by the grid
-        /// </summary>
-        public const int ByteCount = BitGrid16<T>.ByteCount;
         
-        /// <summary>
-        /// The number of bits covered by the grid
-        /// </summary>
-        public const int BitCount = BitGrid16<T>.BitCount;
-
-        /// <summary>
-        /// The number of bits covered by a grid cell
-        /// </summary>
-        public static int CellSize => BitGrid16<T>.CellSize;
-
-        /// <summary>
-        /// The number of cells covered by the grid
-        /// </summary>
-        public static int GridCells => BitGrid16<T>.GridCells;
-
         [MethodImpl(Inline)]
         public static implicit operator BitGrid16<M,N,T>(ushort src)
             => new BitGrid16<M, N, T>(src);
@@ -57,15 +42,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ushort(BitGrid16<M,N,T> src)
             => src.data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid16<T>(BitGrid16<M,N,T> src)
-            => new BitGrid16<T>(src.data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid16<M,N,T>(BitGrid16<T> src)
-            => new BitGrid16<M,N,T>(src.Data);
-
+        
         [MethodImpl(Inline)]
         public static implicit operator BitGrid16<M,N,T>(in Block16<T> src)
             => new BitGrid16<M, N, T>(src);
@@ -92,31 +69,37 @@ namespace Z0
             get => data;
         }
 
+        /// <summary>
+        /// The number of allocated cells
+        /// </summary>
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => data.CellCount;
+            get => ByteCount/size<T>();
         }
 
         /// <summary>
         /// The number of covered bits
         /// </summary>
-        public int PointCount
+        public int BitCount
         {
             [MethodImpl(Inline)]
-            get => BitCount;
+            get => NatMath.mul<M,N>();
         }
 
         public Span<T> Cells
         {
             [MethodImpl(Inline)]
-            get => data.Cells;
+            get => data.AsBytes().As<T>();
         }
 
+        /// <summary>
+        /// The leading storage cell
+        /// </summary>
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref data.Head;
+            get => ref head(Cells);
         }
 
         /// <summary>
@@ -132,16 +115,23 @@ namespace Z0
         /// <summary>
         /// Reads/writes an index-identified cell
         /// </summary>
-        public ref T this[int cell]
+        [MethodImpl(Inline)]
+        public ref T Cell(int index)
+            => ref Unsafe.Add(ref Head, index);
+
+        /// <summary>
+        /// Extracts row contant as a bitvector
+        /// </summary>
+        public BitVector<N,T> this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref data[cell];
+            get => BitGrid.row(this,index);
         }
 
         [MethodImpl(Inline)]
-        public BitGrid16<U> As<U>()
+        public BitGrid16<M,N,U> As<U>()
             where U : unmanaged
-                => data.As<U>();
+                => new BitGrid16<M,N,U>(data);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid16<M,N,T> rhs)

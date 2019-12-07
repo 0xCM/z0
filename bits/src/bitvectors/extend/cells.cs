@@ -13,7 +13,50 @@ namespace Z0
 
     partial class BitVectorX
     {
+        /// <summary>
+        /// Constructs a 16-bit bitvector from a sequence of bit cells
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="n">The target width selector</param>
+        /// <typeparam name="T">The primal cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector16 ToBitVector<T>(this BitCells<T> src, N16 n)
+            where T : unmanaged
+                => src.Data.TakeUInt16();
 
+        /// <summary>
+        /// Constructs a 32-bit bitvector from a sequence of bit cells
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="n">The target width selector</param>
+        /// <typeparam name="T">The primal cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector32 ToBitVector<T>(this BitCells<T> src, N32 n)
+            where T : unmanaged
+                => src.Data.TakeUInt32();
+
+        /// <summary>
+        /// Constructs a 64-bit bitvector from a sequence of bit cells
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="n">The target width selector</param>
+        /// <typeparam name="T">The primal cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector64 ToBitVector<T>(this BitCells<T> src, N64 n)
+            where T : unmanaged
+                => src.Data.TakeUInt64();
+
+        /// <summary>
+        /// Constructs an 8-bit bitvector from a sequence of bit cells
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="n">The target width selector</param>
+        /// <typeparam name="T">The primal cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector8 ToBitVector<T>(this BitCells<T> src, N8 n)        
+            where T : unmanaged
+                => src.Data.TakeUInt8();
+ 
         /// <summary>
         /// Converts the source bitvector to bit cells
         /// </summary>
@@ -39,7 +82,7 @@ namespace Z0
             => src;
 
         /// <summary>
-        /// Constructs a bitvector from a primal span
+        /// Extracts the bitcells froma span
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="len">The bitvector length, if specified</param>
@@ -49,6 +92,11 @@ namespace Z0
             where T : unmanaged
                 => BitCells.load(src,len);
 
+        /// <summary>
+        /// Extracts the bitcells from a source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitCells<T> ToBitCells<T>(this BitVector<T> src)
             where T : unmanaged
@@ -60,5 +108,4 @@ namespace Z0
             where T : unmanaged
                 => BitCells.load(src.data.ToSpan(),n);
     }
-
 }

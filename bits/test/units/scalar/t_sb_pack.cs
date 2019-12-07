@@ -234,7 +234,6 @@ namespace Z0
                 
                 Claim.eq(x0, lhs[i]);
                 Claim.eq(x1, rhs[i]);
-
             }        
         }
 

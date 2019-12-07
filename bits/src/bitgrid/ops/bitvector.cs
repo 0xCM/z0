@@ -60,6 +60,5 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
                 => g.Data;
-
     }
 }

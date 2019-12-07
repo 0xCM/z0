@@ -87,7 +87,7 @@ namespace Z0
             {
                 var x = Random.BitVector<N,T>();
                 var y = BitVector.rev(x);
-                var z = x.ToBitString().Reverse().ToNatBits<N,T>();
+                var z = x.ToBitString().Reverse().ToBitVector<N,T>();
                 Claim.eq(y,z);
             }
         }
@@ -103,7 +103,7 @@ namespace Z0
                 Claim.eq(natval<N>(), x.Width);
                 Claim.eq(x.Width, y.Length);
                 
-                var z = y.ToNatBits<N,T>();                        
+                var z = y.ToBitVector<N,T>();                        
                 Claim.eq(x,z);
             }           
         }

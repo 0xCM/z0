@@ -14,13 +14,18 @@ namespace Z0
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N <= 16
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size=2)]
+    [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     public readonly ref struct SubGrid16<M,N,T>
         where T : unmanaged
         where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
     {                
-        readonly BitGrid16<T> data;
+        readonly ushort data;
+
+        /// <summary>
+        /// The maximum number of bytes covered by the grid
+        /// </summary>
+        public const int ByteCount = 2;
 
         /// <summary>
         /// The grid dimension
@@ -39,13 +44,6 @@ namespace Z0
         public static implicit operator ushort(SubGrid16<M,N,T> src)
             => src.data;
 
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid16<T>(SubGrid16<M,N,T> src)
-            => new BitGrid16<T>(src.data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator SubGrid16<M,N,T>(BitGrid16<T> src)
-            => new SubGrid16<M,N,T>(src);
 
         [MethodImpl(Inline)]
         public static bool operator ==(SubGrid16<M,N,T> g1, SubGrid16<M,N,T> g2)
@@ -75,13 +73,13 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => data.CellCount;
+            get => ByteCount/size<T>();
         }
 
         /// <summary>
         /// The number of covered bits
         /// </summary>
-        public int PointCount
+        public int BitCount
         {
             [MethodImpl(Inline)]
             get => NatMath.mul<M,N>();
@@ -100,25 +98,29 @@ namespace Z0
         public Span<T> Cells
         {
             [MethodImpl(Inline)]
-            get => data.Cells;
+            get => data.AsBytes().As<T>();
         }
 
-        /// <summary>
-        /// The leading storage cell
-        /// </summary>
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref data.Head;
+            get => ref head(Cells);
         }
 
         /// <summary>
         /// Reads/writes an index-identified cell
         /// </summary>
-        public ref T this[int cell]
+        [MethodImpl(Inline)]
+        public ref T Cell(int index)
+            => ref Unsafe.Add(ref Head, index);
+
+        /// <summary>
+        /// Extracts row content as a bitvector
+        /// </summary>
+        public BitVector<N,T> this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref data[cell];
+            get => BitGrid.row(this,index);
         }
 
         [MethodImpl(Inline)]
@@ -126,7 +128,7 @@ namespace Z0
             where P : unmanaged, ITypeNat
             where Q : unmanaged, ITypeNat
             where U : unmanaged
-                => data.As<U>();
+               => new SubGrid16<P, Q, U>(data);
         
         [MethodImpl(Inline)]
         public bool Equals(SubGrid16<M,N,T> rhs)

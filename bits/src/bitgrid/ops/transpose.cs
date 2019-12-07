@@ -21,7 +21,7 @@ namespace Z0
             var src = dinx.vscalar(n128,g);
             for(var i=7; i>= 0; i--)
             {
-                dst[i] = (byte)dinx.vtakemask(v8u(src));
+                dst.Cell(i) = (byte)dinx.vtakemask(v8u(src));
                 src = dinx.vsll(src,1);
             }
             return dst.As<T>();

@@ -13,16 +13,6 @@ namespace Z0
 
     partial class BitGrid
     {        
-        /// <summary>
-        /// Retuns a one-filled bitgrid
-        /// </summary>
-        /// <param name="n">The width selector</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid16<T> ones<T>(N16 n, T t = default)
-            where T : unmanaged
-                => ushort.MaxValue;
 
         /// <summary>
         /// Retuns a one-filled bitgrid
@@ -31,9 +21,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid32<T> ones<T>(N32 n, T t = default)
+        public static BitGrid32<T> ones<T>(N32 n, int rows, int cols, T t = default)
             where T : unmanaged
-                => uint.MaxValue;
+                => bg32<T>(rows,cols, uint.MaxValue);
 
         /// <summary>
         /// Retuns a one-filled bitgrid
@@ -45,28 +35,6 @@ namespace Z0
         public static BitGrid64<T> ones<T>(N64 n, T t = default)
             where T : unmanaged
                 => ulong.MaxValue;
-
-        /// <summary>
-        /// Retuns a one-filled bitgrid
-        /// </summary>
-        /// <param name="n">The width selector</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid128<T> ones<T>(N128 n, T t = default)
-            where T : unmanaged
-                => ginx.vones<T>(n);
-
-        /// <summary>
-        /// Retuns a one-filled bitgrid
-        /// </summary>
-        /// <param name="n">The width selector</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid256<T> ones<T>(N256 n, T t = default)
-            where T : unmanaged
-                => ginx.vones<T>(n);
 
         /// <summary>
         /// Returns a 1-filled natural bitgrid 
@@ -190,8 +158,5 @@ namespace Z0
             ones(dst);
             return dst;
         }
-
-
     }
-
 }

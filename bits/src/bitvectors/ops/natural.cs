@@ -57,7 +57,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bitstring</param>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> natural<N,T>(BitString src, N n = default)
+        public static BitVector<N,T> natural<N,T>(BitString src, N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => gbits.packseq(src.Slice(0, natval(n)).BitSeq, out T _);

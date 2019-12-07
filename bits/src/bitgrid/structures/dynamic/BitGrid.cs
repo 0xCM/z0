@@ -39,11 +39,11 @@ namespace Z0
             => !g1.Equals(g2);
         
         [MethodImpl(Inline)]
-        internal BitGrid(Block256<T> data, int rows, int width)
+        internal BitGrid(Block256<T> data, int rows, int cols)
         {
             this.data = data;
             this.RowCount = rows;
-            this.ColCount = width;
+            this.ColCount = cols;
         }
 
         public Block256<T> Data
@@ -70,7 +70,7 @@ namespace Z0
         /// <summary>
         /// The number of covered bits
         /// </summary>
-        public int PointCount
+        public int BitCount
         {
             [MethodImpl(Inline)]
             get => RowCount * ColCount;
@@ -126,9 +126,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public Block256<T> Block(int block)
             => data.Block(block);
-
-        public readonly GridMoniker<T> Moniker
-            => GridMoniker.FromDim<T>(RowCount, ColCount);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid<T> rhs)

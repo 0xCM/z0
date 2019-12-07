@@ -263,6 +263,9 @@ namespace Z0
             return this;
         }
 
+        public Span<Swap> CalcSwaps()        
+            => perm.CalcSwaps();
+
         /// <summary>
         /// Computes a permutation cycle originating at a specified point
         /// </summary>

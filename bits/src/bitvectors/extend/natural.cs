@@ -30,7 +30,6 @@ namespace Z0
         public static BitVector<N8,byte> ToNatural(this BitVector8 src)
             => BitVector.inject(src.data,n8);
 
-
         /// <summary>
         /// Converts the source bitvector to an equivalent natural/generic bitvector
         /// </summary>
@@ -39,7 +38,26 @@ namespace Z0
         public static BitVector<N32,uint> ToNatural(this BitVector32 src)
             => BitVector.inject(src.data,n32);
 
+        /// <summary>
+        /// Converts the source bitvector to an equivalent natural/generic bitvector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector<N64,ulong> ToNatural(this BitVector64 src)
+            => BitVector.inject(src.data,n64);
 
+        /// <summary>
+        /// Converts a generic bitvector to natural bitvector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="N">The natural type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> ToNatural<N,T>(this BitVector<T> src, N n = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => BitVector.natural<N,T>(src.Scalar);
 
+     
     }
 }

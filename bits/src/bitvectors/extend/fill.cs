@@ -21,6 +21,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<T>(this BitVector<T> src, bit value)
             where T : unmanaged
-             => src.data = gmath.mul(gmath.maxval<T>(), convert<uint,T>((uint)value));
+                => src.data = gmath.mul(gmath.maxval<T>(), convert<uint,T>((uint)value));
     }
 }

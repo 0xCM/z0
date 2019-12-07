@@ -121,7 +121,7 @@ namespace Z0
         public ref readonly T this[int ix] 
         {
             [MethodImpl(Inline)]
-            get => ref data[ix];
+            get => ref Unsafe.Add(ref Unsafe.AsRef(in Head), ix);
         }
 
         /// <summary>

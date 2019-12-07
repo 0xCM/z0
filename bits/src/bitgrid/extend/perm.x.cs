@@ -33,31 +33,26 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BitGrid64<N16,N4,ulong> ToBitGrid(this Perm16 src)
-            => BitGrid.from(src);
+        public static SubGrid32<N8,N3,uint> ToBitGrid(this Perm8 src)
+            => BitGrid.perm(src);
 
         [MethodImpl(Inline)]
-        public static BitGrid32<uint> ToBitGrid(this Perm8 src)
-            => BitGrid.from(src);
+        public static BitGrid32<uint> ToBitGrid(this NatPerm<N8> perm)
+            => BitGrid.perm(perm);
+
+        [MethodImpl(Inline)]
+        public static BitGrid64<N16,N4,ulong> ToBitGrid(this Perm16 src)
+            => BitGrid.perm(src);
+
+        [MethodImpl(Inline)]
+        public static BitGrid64<N16,N4,ulong> ToBitGrid(this NatPerm<N16> src)
+            => BitGrid.perm(src);
+
 
         [MethodImpl(Inline)]
         public static Perm16 ToPerm16(this BitGrid64<N16,N4,ulong> src)
             => BitGrid.perm(src);
 
-        /// <summary>
-        /// Creates the bitgrid determined by a permutation
-        /// </summary>
-        /// <param name="perm">The source permutation</param>
-        [MethodImpl(Inline)]
-        public static BitGrid32<uint> ToBitGrid(this NatPerm<N8> perm)
-            => (uint)perm.ToLiteral();
 
-        /// <summary>
-        /// Creates the bitgrid determined by a permutation
-        /// </summary>
-        /// <param name="perm">The source permutation</param>
-        [MethodImpl(Inline)]
-        public static BitGrid64<N16,N4,ulong> ToBitGrid(this NatPerm<N16> perm)
-            => (ulong)perm.ToLiteral();
     }
 }

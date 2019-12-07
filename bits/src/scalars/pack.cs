@@ -41,5 +41,26 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint pack8x1(in ConstBlock256<byte> src)
             => dinx.vtakemask(dinx.vsll(v64u(src.LoadVector()),7));            
+
+        /// <summary>
+        /// Packs a 128-bit block into a 64-bit integer by selecting the lower 4 bits of each 8-bit cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="block">The block index</param>
+        [MethodImpl(Inline)]
+        public static ulong pack16x4(in ConstBlock128<byte> src, int block = 0)
+        {
+            const int length = 16;
+            const int seglen = 4;
+            const int mask = length - 1;
+            
+            var terms = src.Block(block);
+            var dst = 0ul;
+            for(var i=0; i<length; i++)
+                dst |= (((ulong)terms[i] << i*seglen) & mask);
+            return dst;
+            
+        }
+
     }
 }

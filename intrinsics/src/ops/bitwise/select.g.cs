@@ -13,8 +13,6 @@ namespace Z0
 
     partial class ginx
     {
-
-
         /// <summary>
         /// Defines the ternary bitwise select operator over three vectors,
         /// select(x, y, z) := or(and(x, y), and(not(x), z)) = or(and(x,y), notimply(x,z));

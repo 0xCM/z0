@@ -24,29 +24,14 @@ namespace Z0
         internal readonly Vector128<T> data;
 
         /// <summary>
+        /// The number of bytes covered by the grid
+        /// </summary>
+        public const int ByteCount = 16;
+
+        /// <summary>
         /// The grid dimension
         /// </summary>
         public static GridDim<M,N,T> Dim => default;
-
-        /// <summary>
-        /// The number of bytes covered by the grid
-        /// </summary>
-        public const int ByteCount = BitGrid128<T>.ByteCount;
-        
-        /// <summary>
-        /// The number of bits covered by the grid
-        /// </summary>
-        public const int BitCount = BitGrid128<T>.BitCount;
-
-        /// <summary>
-        /// The number of bits covered by a grid cell
-        /// </summary>
-        public static int CellSize => BitGrid128<T>.CellSize;
-
-        /// <summary>
-        /// The number of cells covered by the grid
-        /// </summary>
-        public static int GridCells => BitGrid128<T>.GridCells;
 
         [MethodImpl(Inline)]
         public static implicit operator Vector128<T>(in BitGrid128<M,N,T> src)
@@ -55,10 +40,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Block128<T>(in BitGrid128<M,N,T> src)
             => src.data.ToBlock();
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid128<M,N,T>(in BitGrid128<T> src)
-            => new BitGrid128<M,N,T>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid128<M,N,T>(in Block128<T> src)
@@ -71,10 +52,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator BitGrid128<M,N,T>(Vector128<byte> src)
             => new BitGrid128<M,N,T>(src.As<byte,T>());
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid128<T>(in BitGrid128<M,N,T> src)
-            => new BitGrid128<T>(src.data);
 
         [MethodImpl(Inline)]
         public static BitGrid128<M,N,T> operator & (in BitGrid128<M,N,T> gx, in BitGrid128<M,N,T> gy)
@@ -118,31 +95,22 @@ namespace Z0
             get => data;
         }
 
+        /// <summary>
+        /// The number of allocated cells
+        /// </summary>
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => GridCells;
+            get => ByteCount/size<T>();
         }
 
         /// <summary>
         /// The number of covered bits
         /// </summary>
-        public int PointCount
+        public int BitCount
         {
             [MethodImpl(Inline)]
-            get => BitCount;
-        }
-
-        public Span<T> Cells
-        {
-            [MethodImpl(Inline)]
-            get => data.ToSpan<T>();
-        }
-
-        public ref T Head
-        {
-            [MethodImpl(Inline)]
-            get => ref head(Cells);
+            get => NatMath.mul<M,N>();
         }
 
         /// <summary>
@@ -158,17 +126,9 @@ namespace Z0
         /// <summary>
         /// Reads an index-identified cell
         /// </summary>
-        public T this[int cell]
-        {
-            [MethodImpl(Inline)]
-            get => data.GetElement(cell);
-        }
-
-        /// <summary>
-        /// The characterizing grid moniker
-        /// </summary>
-        public readonly GridMoniker<T> Moniker
-            => GridMoniker.FromDim<T>(RowCount, ColCount);
+        [MethodImpl(Inline)]
+        public T Cell(int cell)
+            => data.GetElement(cell);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid128<M,N,T> rhs)

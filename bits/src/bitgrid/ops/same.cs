@@ -13,27 +13,7 @@ namespace Z0
 
     partial class BitGrid
     {
-        [MethodImpl(Inline)]
-        public static bit same<T>(in BitGrid<T> gx, in BitGrid<T> gy)
-            where T : unmanaged
-        {
-            var blocks = gx.BlockCount;
-            for(var i=0; i<blocks; i++)
-                if(!ginx.vsame(gx[i],gy[i]))
-                       return false;
-            return true;        
-        }
 
-        /// <summary>
-        /// Returns 1 if the source grids have identical conent and 0 otherwise
-        /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
-        /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static bit same<T>(BitGrid16<T> gx, BitGrid16<T> gy)
-            where T : unmanaged
-                => math.eq(gx,gy);
 
         /// <summary>
         /// Returns 1 if the source grids have identical conent and 0 otherwise
@@ -57,36 +37,30 @@ namespace Z0
             where T : unmanaged
                 => math.eq(gx,gy);
 
-        /// <summary>
-        /// Returns 1 if the source grids have identical conent and 0 otherwise
-        /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
-        /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static bit same<T>(in BitGrid128<T> gx, in BitGrid128<T> gy)
-            where T : unmanaged
-                => ginx.vsame(gx.data,gy.data);
-
-        /// <summary>
-        /// Returns 1 if the source grids have identical conent and 0 otherwise
-        /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
-        /// <typeparam name="T">The grid cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static bit same<T>(in BitGrid256<T> gx, in BitGrid256<T> gy)
-            where T : unmanaged
-                => ginx.vsame(gx.data,gy.data);
          
-
-       [MethodImpl(Inline)]
+        /// <summary>
+        /// Returns 1 if the source grids have identical conent and 0 otherwise
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="M"></typeparam>
+        /// <typeparam name="N"></typeparam>
+        /// <typeparam name="T">The grid cell type</typeparam>
+        [MethodImpl(Inline)]
         public static bit same<M,N,T>(in BitGrid128<M,N,T> gx, in BitGrid128<M,N,T> gy)
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
                 => ginx.vsame<T>(gx,gy);    
 
+        /// <summary>
+        /// Returns 1 if the source grids have identical conent and 0 otherwise
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="M"></typeparam>
+        /// <typeparam name="N"></typeparam>
+        /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
         public static bit same<M,N,T>(in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
             where T : unmanaged
@@ -94,6 +68,25 @@ namespace Z0
             where M : unmanaged, ITypeNat
                 => ginx.vsame<T>(gx,gy);    
  
+        [MethodImpl(Inline)]
+        public static bit same<T>(in BitGrid<T> gx, in BitGrid<T> gy)
+            where T : unmanaged
+        {
+            var blocks = gx.BlockCount;
+            for(var i=0; i<blocks; i++)
+                if(!ginx.vsame(gx[i],gy[i]))
+                       return false;
+            return true;        
+        }
+
+        /// <summary>
+        /// Returns 1 if the source grids have identical conent and 0 otherwise
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="M"></typeparam>
+        /// <typeparam name="N"></typeparam>
+        /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
         public static bit same<M,N,T>(in BitGrid<M,N,T> gx, in BitGrid<M,N,T> gy)
             where T : unmanaged
@@ -106,7 +99,5 @@ namespace Z0
                        return false;
             return true;        
         }
-
-
     }
 }

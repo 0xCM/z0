@@ -13,7 +13,6 @@ namespace Z0
 
     public static partial class BitVectorX
     {
-
         /// <summary>
         /// Extracts a 128-bit cpu vector from a bitsring of length 128 or greater
         /// </summary>
@@ -33,6 +32,5 @@ namespace Z0
         public static Vector256<T> ToCpuVector<T>(this BitString src, N256 n)
             where T : unmanaged
                 => src.Pack().As<byte, T>().Blocked(n).LoadVector();
-
     }
 }

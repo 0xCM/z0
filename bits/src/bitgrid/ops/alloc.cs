@@ -13,6 +13,31 @@ namespace Z0
 
     partial class BitGrid
     {
+
+        /// <summary>
+        /// Retuns a zero-filled bitgrid
+        /// </summary>
+        /// <param name="n">The width selector</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid32<T> alloc<T>(N32 n, int rows, int cols)
+            where T : unmanaged
+                => new BitGrid32<T>(0, rows, cols);
+
+
+        /// <summary>
+        /// Retuns a zero-filled bitgrid
+        /// </summary>
+        /// <param name="n">The width selector</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid64<T> alloc<T>(N64 n)
+            where T : unmanaged
+                => default;
+
+
         /// <summary>
         /// Allocates a generic bitgrid
         /// </summary>
@@ -20,7 +45,7 @@ namespace Z0
         /// <param name="cols">The number of grid columns</param>
         /// <typeparam name="T">The segment type</typeparam>
         [MethodImpl(NotInline)]
-        public static BitGrid<T> alloc<T>(int rows, int cols, T zero = default)
+        public static BitGrid<T> alloc<T>(int rows, int cols, T t = default)
             where T : unmanaged
         {            
             var blocksize = n256;
@@ -36,7 +61,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(NotInline)]
-        public static BitGrid<M,N,T> alloc<M,N,T>(M m = default, N n = default, T zero = default)
+        public static BitGrid<M,N,T> alloc<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -483,6 +508,29 @@ namespace Z0
         public static BitGrid256<N16,N16,T> alloc<T>(N256 w, N16 m = default, N16 n = default, T fill = default)
             where T : unmanaged            
                 => alloc256(m,n,fill);
+
+
+        /// <summary>
+        /// Retuns a zero-filled bitgrid
+        /// </summary>
+        /// <param name="n">The width selector</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        static BitGrid16<T> bg16<T>(int rows, int cols, ushort data)
+            where T : unmanaged
+                => new BitGrid16<T>(data, rows, cols);
+
+        /// <summary>
+        /// Retuns a zero-filled bitgrid
+        /// </summary>
+        /// <param name="n">The width selector</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        static BitGrid32<T> bg32<T>(int rows, int cols, uint data)
+            where T : unmanaged
+                => new BitGrid32<T>(data, rows, cols);
 
         [MethodImpl(Inline)]
         static BitGrid16<M,N,T> alloc16<M,N,T>(M m = default, N n = default)

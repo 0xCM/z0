@@ -20,32 +20,17 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
     {                
-        readonly BitGrid64<T> data;
+        readonly ulong data;
+
+        /// <summary>
+        /// The number of bytes covered by the grid
+        /// </summary>
+        public const int ByteCount = 8;
 
         /// <summary>
         /// The grid dimension
         /// </summary>
         public static GridDim<M,N,T> Dim => default;
-
-        /// <summary>
-        /// The number of bytes covered by the grid
-        /// </summary>
-        public const int ByteCount = BitGrid64<T>.ByteCount;
-        
-        /// <summary>
-        /// The number of bits covered by the grid
-        /// </summary>
-        public const int BitCount = BitGrid64<T>.BitCount;
-
-        /// <summary>
-        /// The number of bits covered by a grid cell
-        /// </summary>
-        public static int CellSize => BitGrid64<T>.CellSize;
-
-        /// <summary>
-        /// The number of cells covered by the grid
-        /// </summary>
-        public static int GridCells => BitGrid64<T>.GridCells;
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid64<M,N,T>(in Block64<T> src)
@@ -89,22 +74,31 @@ namespace Z0
             get => data;
         }
 
-        /// <summary>
-        /// The number of allocated cells
-        /// </summary>
+        public Span<T> Cells
+        {
+            [MethodImpl(Inline)]
+            get => Data.AsBytes().As<T>();
+        }
+
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref head(Cells);
+        }
+
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => data.CellCount;
+            get => ByteCount/size<T>();
         }
 
         /// <summary>
         /// The number of covered bits
         /// </summary>
-        public int PointCount
+        public int BitCount
         {
             [MethodImpl(Inline)]
-            get => BitCount;
+            get => NatMath.mul<M,N>();
         }
 
         /// <summary>
@@ -117,34 +111,30 @@ namespace Z0
         /// </summary>
         public int ColCount => natval<N>();  
 
-        public Span<T> Cells
-        {
-            [MethodImpl(Inline)]
-            get => data.Cells;
-        }
-
-        /// <summary>
-        /// The leading storage cell
-        /// </summary>
-        public ref T Head
-        {
-            [MethodImpl(Inline)]
-            get => ref data.Head;
-        }
-
         /// <summary>
         /// Reads/writes an index-identified cell
         /// </summary>
-        public ref T this[int cell]
+        [MethodImpl(Inline)]
+        public ref T Cell(int index)
+            => ref Unsafe.Add(ref Head, index);
+
+        /// <summary>
+        /// Extracts row content as a bitvector
+        /// </summary>
+        public BitVector<N,T> this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref data[cell];
+            get => BitGrid.row(this,index);
         }
 
+        /// <summary>
+        /// Converts the current grid defined over T-cells to a target grid defined over U-cells
+        /// </summary>
+        /// <typeparam name="U">The target type</typeparam>
         [MethodImpl(Inline)]
-        public BitGrid64<U> As<U>()
+        public BitGrid64<M,N,U> As<U>()
             where U : unmanaged
-                => data.As<U>();
+                => new BitGrid64<M,N,U>(data);
         
         [MethodImpl(Inline)]
         public bool Equals(BitGrid64<M,N,T> rhs)

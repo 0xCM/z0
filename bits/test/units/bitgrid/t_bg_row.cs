@@ -12,7 +12,7 @@ namespace Z0
     
     public class t_bg_row : t_bg<t_bg_row>
     {        
-        public void nbg_row_32x8x4()
+        public void bg_row_32x8x4()
         {
             var t = z32;
             var m = n8;
@@ -27,15 +27,13 @@ namespace Z0
                 {                
                     var r1 = BitGrid.row(bg,row);
                     var r2 = bs.Slice(row*n,n);
-                    var r3 = BitGrid.nrow(bg,row);
                     var r4 = BitVector.from(n, r2);
                     Claim.eq(r1, r4);
-                    Claim.eq(r1, r3);
                 }
             }
         }
 
-        public void nbg_row_32x4x8()
+        public void bg_row_32x4x8()
         {
             var t = z32;
             var m = n4;
@@ -50,16 +48,14 @@ namespace Z0
                 {                
                     var r1 = BitGrid.row(bg,row);
                     var r2 = bs.Slice(row*n,n);
-                    var r3 = BitGrid.nrow(bg,row);
                     var r4 = BitVector.from(n, r2);
                     Claim.eq(r1, r4);
-                    Claim.eq(r1, r3);
                 }
             }
         }
 
 
-        public void nbg_row_256x4x64()
+        public void bg_row_256x4x64()
         {
             var w = n256;
             var m = n4;
@@ -81,7 +77,7 @@ namespace Z0
             }
         }
 
-        public void nbg_row_256x16x16()
+        public void bg_row_256x16x16()
         {
             var t = z16;
             var m = n16;
@@ -102,5 +98,23 @@ namespace Z0
             }
         }
 
+        public void bg_row_128x32x4()
+        {
+            var t = z32;
+            var m = n32;
+            var n = n4;
+
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var bg = Random.BitGrid(m,n,t);
+                var bs = BitGrid.bitstring(bg);
+                for(var row = 0; row<m; row++)
+                {
+                    var r1 = BitGrid.row(bg,row);
+                    var r2 = BitVector.natural(bs.Slice(row*n,n), n, z8);
+                    Claim.eq(r1,r2);
+                }
+            }
+        }
     }
 }

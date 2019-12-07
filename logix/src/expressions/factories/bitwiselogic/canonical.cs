@@ -31,7 +31,6 @@ namespace Z0.Logix
             where T : unmanaged
                 => literal(ginx.vones<T>(n));
 
-
         /// <summary>
         /// Defines a 128-bit cpu vector where all bits are on
         /// </summary>

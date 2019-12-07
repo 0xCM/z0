@@ -12,112 +12,121 @@ namespace Z0
 
     partial class BitGridX
     {
-        internal static string FormatMatrixBits(this Span<byte> src, int rowlen, int? maxbits = null)            
+        /// <summary>
+        /// Formats a bytespan as a bitmatrix
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="rowlen">The number of bits in each row</param>
+        /// <param name="maxbits">The maximum number of bits to format</param>
+        /// <param name="showrow">Indicates whether the content of each row shold be preceded by the row index</param>
+        internal static string FormatMatrixBits(this Span<byte> src, int rowlen, int? maxbits = null, bool showrow = false) 
         {
             var dst = gbits.bitchars(src);
             var sb = text();
             var limit = maxbits ?? dst.Length;
 
-            for(var i=0; i<limit; i+= rowlen)
+            for(int i=0, rowidx=0; i<limit; i+= rowlen, rowidx++)
             {
                 var remaining = dst.Length - i;
                 var segment = math.min(remaining, rowlen);
                 var rowbits = dst.Slice(i, segment);
-                var row = new string(rowbits.Intersperse(AsciSym.Space));                                
-                sb.AppendLine(row);
+                var rowprefix = showrow ? $"{rowidx.ToString().PadRight(3)} | " : string.Empty;
+                var rowformat = rowprefix +  new string(rowbits.Intersperse(AsciSym.Space));
+                sb.AppendLine(rowformat);
             }
             return sb.ToString();
         }       
 
-        internal static string FormatMatrixBits<T>(this Span<T> src, int rowlen, int? maxbits = null)
+        /// <summary>
+        /// Formats the content of a generic span of primal cells as a bitmatrix
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="rowlen">The number of bits in each row</param>
+        /// <param name="maxbits">The maximum number of bits to format</param>
+        /// <param name="showrow">Indicates whether the content of each row shold be preceded by the row index</param>
+        /// <typeparam name="T">The primal cell type</typeparam>
+        internal static string FormatMatrixBits<T>(this Span<T> src, int rowlen, int? maxbits = null, bool showrow = false)
             where T : unmanaged
-                => src.AsBytes().FormatMatrixBits(rowlen, maxbits);
+                => src.AsBytes().FormatMatrixBits(rowlen, maxbits, showrow);
 
-        public static string Format<T>(this BitGrid<T> src, int? maxbits = null)
+        public static string Format<T>(this BitGrid<T> src, int? maxbits = null, bool showrow = false)
             where T : unmanaged
-                => BitGrid.format(src,maxbits);
+                => BitGrid.format(src, maxbits, showrow);
 
-        public static string Format<T>(this BitGrid32<T> src, int? cols = null, int? maxbits = null)
+        public static string Format<T>(this BitGrid32<T> src, int? cols = null, int? maxbits = null, bool showrow = false)
             where T : unmanaged
-                => BitGrid.format(src,cols,maxbits);
+                => BitGrid.format(src, cols, maxbits, showrow);
 
-        public static string Format<T>(this BitGrid64<T> src, int? cols = null, int? maxbits = null)
+        public static string Format<T>(this BitGrid64<T> src, int? cols = null, int? maxbits = null, bool showrow = false)
             where T : unmanaged
-                => BitGrid.format(src,cols,maxbits);
+                => BitGrid.format(src, cols, maxbits, showrow);
 
-        public static string Format<T>(this BitGrid128<T> src, int? cols = null, int? maxbits = null)
-            where T : unmanaged
-                => BitGrid.format(src,cols,maxbits);
 
-        public static string Format<T>(this BitGrid256<T> src, int? cols = null, int? maxbits = null)
-            where T : unmanaged
-                => BitGrid.format(src,cols,maxbits);
-
-        public static string Format<M,N,T>(this BitGrid<M,N,T> src, int? maxbits = null)
+        public static string Format<M,N,T>(this BitGrid<M,N,T> src, int? maxbits = null, bool showrow = false)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.format(src,maxbits);
+                => BitGrid.format(src, maxbits, showrow);
 
-        public static string Format<M,N,T>(this BitGrid16<M,N,T> src, int? maxbits = null)
+        public static string Format<M,N,T>(this BitGrid16<M,N,T> src, int? maxbits = null, bool showrow = false)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.format(src,maxbits);
+                => BitGrid.format(src, maxbits, showrow);
 
-        public static string Format<M,N,T>(this BitGrid32<M,N,T> src, int? maxbits = null)
+        public static string Format<M,N,T>(this BitGrid32<M,N,T> src, int? maxbits = null, bool showrow = false)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.format(src,maxbits);
+                => BitGrid.format(src, maxbits, showrow);
 
-        public static string Format<M,N,T>(this BitGrid64<M,N,T> src, int? maxbits = null)
+        public static string Format<M,N,T>(this BitGrid64<M,N,T> src, int? maxbits = null, bool showrow = false)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.format(src,maxbits);
+                => BitGrid.format(src,maxbits,showrow);
 
-        public static string Format<M,N,T>(this BitGrid128<M,N,T> src, int? maxbits = null)
+        public static string Format<M,N,T>(this BitGrid128<M,N,T> src, int? maxbits = null, bool showrow = false)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.format(src,maxbits);
+                => BitGrid.format(src, maxbits, showrow);
 
-        public static string Format<M,N,T>(this BitGrid256<M,N,T> src, int? maxbits = null)
+        public static string Format<M,N,T>(this BitGrid256<M,N,T> src, int? maxbits = null, bool showrow = false)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.format(src,maxbits);
+                => BitGrid.format(src, maxbits, showrow);
 
-        public static string Format<M,N,T>(this SubGrid16<M,N,T> src, int? maxbits = null)
+        public static string Format<M,N,T>(this SubGrid16<M,N,T> src, int? maxbits = null, bool showrow = false)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.format(src,maxbits);
+                => BitGrid.format(src, maxbits, showrow);
 
-        public static string Format<M,N,T>(this SubGrid32<M,N,T> src, int? maxbits = null)
+        public static string Format<M,N,T>(this SubGrid32<M,N,T> src, int? maxbits = null, bool showrow = false)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.format(src,maxbits);
+                => BitGrid.format(src, maxbits, showrow);
 
-        public static string Format<M,N,T>(this SubGrid64<M,N,T> src, int? maxbits = null)
+        public static string Format<M,N,T>(this SubGrid64<M,N,T> src, int? maxbits = null, bool showrow = false)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.format(src,maxbits);
+                => BitGrid.format(src, maxbits, showrow);
 
-        public static string Format<M,N,T>(this SubGrid128<M,N,T> src, int? maxbits = null)
+        public static string Format<M,N,T>(this SubGrid128<M,N,T> src, int? maxbits = null, bool showrow = false)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.format(src,maxbits);
+                => BitGrid.format(src, maxbits, showrow);
 
-        public static string Format<M,N,T>(this SubGrid256<M,N,T> src, int? maxbits = null)
+        public static string Format<M,N,T>(this SubGrid256<M,N,T> src, int? maxbits = null, bool showrow = false)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.format(src,maxbits);
+                => BitGrid.format(src, maxbits, showrow);
 
     }
 }

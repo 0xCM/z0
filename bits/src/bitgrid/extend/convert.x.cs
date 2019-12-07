@@ -430,52 +430,44 @@ namespace Z0
                 => x;
 
         [MethodImpl(Inline)]
-        public static BitGrid32<T> ToBitGrid<T>(this BitString bs, N32 bitcount, T t = default)
+        public static BitGrid32<T> ToBitGrid<T>(this BitString bs, N32 w, int rows, int cols, T t = default)
             where T : unmanaged
-                => BitGrid.parse(bs,bitcount,t);
+                => BitGrid.parse<T>(bs, w, rows, cols);
 
         [MethodImpl(Inline)]
-        public static BitGrid32<M,N,T> ToBitGrid<M,N,T>(this BitString bs, N32 bitcount, M m = default, N n = default, T t = default)
+        public static BitGrid32<M,N,T> ToBitGrid<M,N,T>(this BitString bs, N32 w, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.parse(bs,bitcount,m,n,t);
+                => BitGrid.parse(bs,w,m,n,t);
 
         [MethodImpl(Inline)]
-        public static BitGrid64<T> ToBitGrid<T>(this BitString bs, N64 bitcount, T t = default)
+        public static BitGrid64<T> ToBitGrid<T>(this BitString bs, N64 w, T t = default)
             where T : unmanaged
-                => BitGrid.parse(bs,bitcount,t);
+                => BitGrid.parse(bs,w,t);
 
         [MethodImpl(Inline)]
-        public static BitGrid64<M,N,T> ToBitGrid<M,N,T>(this BitString bs, N64 bitcount, M m = default, N n = default, T t = default)
+        public static BitGrid64<M,N,T> ToBitGrid<M,N,T>(this BitString bs, N64 w, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.parse(bs,bitcount,m,n,t);
+                => BitGrid.parse(bs,w,m,n,t);
+
 
         [MethodImpl(Inline)]
-        public static BitGrid128<T> ToBitGrid<T>(this BitString bs, N128 bitcount, T t = default)
-            where T : unmanaged
-                => BitGrid.parse(bs,bitcount,t);
-
-        [MethodImpl(Inline)]
-        public static BitGrid128<M,N,T> ToBitGrid<M,N,T>(this BitString bs, N128 bitcount, M m = default, N n = default, T t = default)
+        public static BitGrid128<M,N,T> ToBitGrid<M,N,T>(this BitString bs, N128 w, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.parse(bs,bitcount,m,n,t);
+                => BitGrid.parse(bs,w,m,n,t);
+
 
         [MethodImpl(Inline)]
-        public static BitGrid256<T> ToBitGrid<T>(this BitString bs, N256 bitcount, T t = default)
-            where T : unmanaged
-                => BitGrid.parse(bs,bitcount,t);
-
-        [MethodImpl(Inline)]
-        public static BitGrid256<M,N,T> ToBitGrid<M,N,T>(this BitString bs, N256 bitcount, M m = default, N n = default, T t = default)
+        public static BitGrid256<M,N,T> ToBitGrid<M,N,T>(this BitString bs, N256 w, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.parse(bs,bitcount,m,n,t);                 
+                => BitGrid.parse(bs,w,m,n,t);                 
     }
 
 }

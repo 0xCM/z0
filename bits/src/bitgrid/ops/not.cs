@@ -13,41 +13,6 @@ namespace Z0
 
     partial class BitGrid
     {        
-        /// <summary>
-        /// Computes the bitwise complement of the source grid and deposits the result int a caller-supplied target
-        /// </summary>
-        /// <param name="gx">The source grid</param>
-        /// <param name="gz">The target grid</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly BitGrid<T> not<T>(in BitGrid<T> gx, in BitGrid<T> gz)
-            where T : unmanaged
-        {
-            var blocks = gz.BlockCount;
-            for(var i=0; i<blocks; i++)
-                gz[i] = ginx.vnot(gx[i]);
-            return ref gz;
-        }
-
-        /// <summary>
-        /// Computes the bitwise complement of the source grid
-        /// </summary>
-        /// <param name="gx">The source grid</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid<T> not<T>(in BitGrid<T> gx)
-            where T : unmanaged
-                => not(gx, alloc<T>(gx.RowCount, gx.ColCount));
-
-        /// <summary>
-        /// Computes the bitwise complement of the source grid
-        /// </summary>
-        /// <param name="gx">The source grid</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid16<T> not<T>(BitGrid16<T> gx)
-            where T : unmanaged
-                => math.not(gx);
 
         /// <summary>
         /// Computes the bitwise complement of the source grid
@@ -57,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid32<T> not<T>(BitGrid32<T> gx)
             where T : unmanaged
-                => math.not(gx);
+                => bg32<T>(gx.RowCount, gx.ColCount, math.not(gx));
 
         /// <summary>
         /// Computes the bitwise complement of the source grid
@@ -68,27 +33,7 @@ namespace Z0
         public static BitGrid64<T> not<T>(BitGrid64<T> gx)
             where T : unmanaged
                 => math.not(gx);
-
-        /// <summary>
-        /// Computes the bitwise complement of the source grid
-        /// </summary>
-        /// <param name="gx">The source grid</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid128<T> not<T>(in BitGrid128<T> gx)
-            where T : unmanaged
-                => ginx.vnot<T>(gx);
-
-        /// <summary>
-        /// Computes the bitwise complement of the source grid
-        /// </summary>
-        /// <param name="gx">The source grid</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid256<T> not<T>(in BitGrid256<T> gx)
-            where T : unmanaged
-                => ginx.vnot<T>(gx);
-         
+                         
         /// <summary>
         /// Computes the bitwise complement of the source grid
         /// </summary>
@@ -177,5 +122,32 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
                 => not(gx, alloc<M,N,T>());
+
+        /// <summary>
+        /// Computes the bitwise complement of the source grid and deposits the result int a caller-supplied target
+        /// </summary>
+        /// <param name="gx">The source grid</param>
+        /// <param name="gz">The target grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly BitGrid<T> not<T>(in BitGrid<T> gx, in BitGrid<T> gz)
+            where T : unmanaged
+        {
+            var blocks = gz.BlockCount;
+            for(var i=0; i<blocks; i++)
+                gz[i] = ginx.vnot(gx[i]);
+            return ref gz;
+        }
+
+        /// <summary>
+        /// Computes the bitwise complement of the source grid
+        /// </summary>
+        /// <param name="gx">The source grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid<T> not<T>(in BitGrid<T> gx)
+            where T : unmanaged
+                => not(gx, alloc<T>(gx.RowCount, gx.ColCount));
+
     }
 }

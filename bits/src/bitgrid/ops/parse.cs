@@ -13,17 +13,6 @@ namespace Z0
 
     partial class BitGrid
     {        
-        /// <summary>
-        /// Hydrates a fixed-width 16-bit dimensionless grid from a bitstring
-        /// </summary>
-        /// <param name="bs">The source bitstring</param>
-        /// <param name="n">The number of bitstring bits to parse</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid16<T> parse<T>(BitString bs, N16 n, T t = default)
-            where T : unmanaged
-                => bs.TakeUInt16();
 
         /// <summary>
         /// Hydrates a fixed-width 32-bit dimensionless grid from a bitstring
@@ -33,9 +22,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid32<T> parse<T>(BitString bs, N32 n, T t = default)
+        public static BitGrid32<T> parse<T>(BitString bs, N32 n, int rows, int cols, T t = default)
             where T : unmanaged
-                => bs.TakeUInt32();
+                => bg32<T>(rows, cols, bs.TakeUInt32());
 
         /// <summary>
         /// Hydrates a fixed-width 64-bit dimensionless grid from a bitstring
@@ -49,30 +38,6 @@ namespace Z0
             where T : unmanaged
                 => bs.TakeUInt64();
 
-        /// <summary>
-        /// Hydrates a fixed-width 128-bit dimensionless grid from a bitstring
-        /// </summary>
-        /// <param name="bs">The source bitstring</param>
-        /// <param name="n">The number of bitstring bits to parse</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid128<T> parse<T>(BitString bs, N128 n, T t = default)
-            where T : unmanaged
-                => ginx.vload(n, bs.Pack(0,n));
-
-        /// <summary>
-        /// Hydrates a fixed-width 256-bit dimensionless grid from a bitstring
-        /// </summary>
-        /// <param name="bs">The source bitstring</param>
-        /// <param name="n">The number of bitstring bits to parse</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid256<T> parse<T>(BitString bs, N256 n, T t = default)
-            where T : unmanaged
-                => ginx.vload(n, bs.Pack(0,n));
-         
         /// <summary>
         /// Hydrates a fixed-width natural bitgrid from a bitstring
         /// </summary>
@@ -89,7 +54,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => parse(bs, w, t);
+                => bs.TakeUInt16();
 
         /// <summary>
         /// Hydrates a fixed-width natural bitgrid from a bitstring
@@ -107,7 +72,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => parse(bs, w, t);
+                => bs.TakeUInt32();
 
         /// <summary>
         /// Hydrates a 64-bit natural bitgrid from a bitstring
@@ -125,7 +90,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => parse(bs, w, t);
+                => bs.TakeUInt64();
 
         /// <summary>
         /// Hydrates a 128-bit natural bitgrid from a bitstring
@@ -143,7 +108,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => parse(bs,w,t);
+                => ginx.vload(w, bs.Pack(0,w));
 
         /// <summary>
         /// Hydrates a 256-bit natural bitgrid from a bitstring
@@ -161,6 +126,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => parse(bs,w,t);
+                => ginx.vload(w, bs.Pack(0,w));
     }
 }

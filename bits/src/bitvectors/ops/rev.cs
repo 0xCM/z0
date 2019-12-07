@@ -52,7 +52,7 @@ namespace Z0
         public static BitVector64 rev(BitVector64 x)        
             => gbits.rev(x.data);
 
-         /// <summary>
+        /// <summary>
         /// Reverses the bits in the source vector
         /// </summary>
         /// <param name="x">The source vector</param>

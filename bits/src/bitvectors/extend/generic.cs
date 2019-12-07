@@ -45,6 +45,36 @@ namespace Z0
         public static BitVector<ulong> ToGeneric(this BitVector64 src)
             => src.data;
 
-    }
+        /// <summary>
+        /// Defines an 8-bit generic bitvector from an unsigned integer of commensurate width
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector<byte> ToGenericBits(this byte src)
+            => src;
 
+        /// <summary>
+        /// Defines a 16-bit generic bitvector from an unsigned integer of commensurate width
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector<ushort> ToGenericBits(this ushort src)
+            => src;
+
+        /// <summary>
+        /// Defines a 32-bit generic bitvector from an unsigned integer of commensurate width
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector<uint> ToGenericBits(this uint src)
+            => src;
+
+        /// <summary>
+        /// Defines a 64-bit generic bitvector from an unsigned integer of commensurate width
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector<ulong> ToGenericBits(this ulong src)
+            => src;        
+    }
 }

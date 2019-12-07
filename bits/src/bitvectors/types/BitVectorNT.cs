@@ -314,6 +314,15 @@ namespace Z0
         public readonly bool Equals(BitVector<N,T> y)
             => gmath.eq(data, y.data);
 
+        /// <summary>
+        /// Creates a new vector by converting the underlying cell to the target type 
+        /// </summary>
+        /// <typeparam name="U">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public BitVector<N,U> As<U>()
+            where U : unmanaged
+                => convert<T,U>(data);
+
         public readonly override bool Equals(object obj)
             => obj is BitVector<N,T> x && Equals(x);
         

@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N <= 256
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size=32)]
+    [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     public readonly ref struct SubGrid256<M,N,T>
         where T : unmanaged
         where N : unmanaged, ITypeNat
@@ -23,10 +23,14 @@ namespace Z0
         internal readonly Vector256<T> data;
 
         /// <summary>
+        /// The maximum number of bytes covered by the grid
+        /// </summary>
+        public const int ByteCount = 32;
+
+        /// <summary>
         /// The grid dimension
         /// </summary>
-        public static GridDim<M,N,T> Dim => default;
-        
+        public static GridDim<M,N,T> Dim => default;        
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<T>(in SubGrid256<M,N,T> src)
@@ -40,17 +44,11 @@ namespace Z0
         public static implicit operator SubGrid256<M,N,T>(in Block256<T> src)
             => new SubGrid256<M, N, T>(src);
 
-        [MethodImpl(Inline)]
-        public static implicit operator SubGrid256<M,N,T>(in BitGrid256<T> src)
-            => new SubGrid256<M,N,T>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator SubGrid256<M,N,T>(Vector256<T> src)
             => new SubGrid256<M,N,T>(src);
 
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid256<T>(in SubGrid256<M,N,T> src)
-            => new BitGrid256<T>(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator SubGrid256<M,N,T>(Vector256<byte> src)
@@ -93,11 +91,10 @@ namespace Z0
         /// </summary>
         public int ColCount => natval<N>();  
 
-
         /// <summary>
         /// The number of covered bits
         /// </summary>
-        public int PointCount
+        public int BitCount
         {
             [MethodImpl(Inline)]
             get => NatMath.mul<M,N>();
@@ -106,11 +103,10 @@ namespace Z0
         /// <summary>
         /// Reads an index-identified cell
         /// </summary>
-        public T this[int cell]
-        {
-            [MethodImpl(Inline)]
-            get => data.GetElement(cell);
-        }
+        [MethodImpl(Inline)]
+        public T Cell(int cell)
+            => data.GetElement(cell);
+
 
         [MethodImpl(Inline)]
         public SubGrid256<P,Q,U> As<P,Q,U>()

@@ -34,7 +34,16 @@ namespace Z0
 
         LLLLRRRR = 0b11110000,
 
-        RRRRLLLL = 0b00001111
+        RRRRLLLL = 0b00001111,
+
+        RRLLLLRR = 0b00111100,
+        
+        LLRRRRLL = 0b11000011,
+
+        RRRLLRRR = 0b00011000,
+
+        LLLRRLLL = 0b11100111,
+
     }
 
     [Flags]

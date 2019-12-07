@@ -120,23 +120,6 @@ namespace Z0
             => src;
 
         /// <summary>
-        /// Constructs a generic bitvector from bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> ToBitVector<T>(this BitString src)
-            where T : unmanaged
-                => BitVector.generic<T>(src);
-
-        /// <summary>
-        /// Constructs a 128-bit bitvector from bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 ToBitVector(this BitString src, N128 n)
-            => BitVector.from(n,src);
-
-        /// <summary>
         /// Creates a 128-bit bitvector from a 8-bit signed integer
         /// </summary>
         /// <param name="src">The source value</param>
@@ -249,41 +232,6 @@ namespace Z0
             => src;
 
         /// <summary>
-        /// Constructs a 4-bit bitvector from bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector4 ToBitVector(this BitString src, N4 n)
-            => BitVector.from(n,src);
-
-
-        /// <summary>
-        /// Constructs a 32-bit bitvector from bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector32 ToBitVector(this BitString src, N32 n)
-            => BitVector.from(n, src);
-
-        [MethodImpl(Inline)]
-        public static BitVector32 ToBitVector<T>(this BitCells<T> src, N32 n)
-            where T : unmanaged
-                => src.Data.TakeUInt32();
- 
-        /// <summary>
-        /// Constructs a 16-bit bitvector from bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector16 ToBitVector(this BitString src, N16 n)
-            => src.TakeUInt16();
-
-        [MethodImpl(Inline)]
-        public static BitVector16 ToBitVector<T>(this BitCells<T> src, N16 n)
-            where T : unmanaged
-                => src.Data.TakeUInt16();
-
-        /// <summary>
         /// Constructs a 16-bit bitvector from a 16-bit scalar
         /// </summary>
         /// <param name="src">The source value</param>
@@ -300,31 +248,12 @@ namespace Z0
             => src;
 
         /// <summary>
-        /// Constructs a 64-bit bitvector from bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector64 ToBitVector(this BitString src, N64 n)
-            => BitVector.from(n,src);
-
-        /// <summary>
         /// Constructs a 64-bit bitvector from a 64-bit primal value
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitVector64 ToBitVector(this ulong src)
             => src;
-
-        /// <summary>
-        /// Constructs a 64-bit bitvector from a sequence of bit cells
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="n">The target width selector</param>
-        /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector64 ToBitVector<T>(this BitCells<T> src, N64 n)
-            where T : unmanaged
-                => src.Data.TakeUInt64();
 
         /// <summary>
         /// Constructs a canonical 8-bit bitvector from an 8-bit primal value
@@ -335,25 +264,6 @@ namespace Z0
             => src;
 
         /// <summary>
-        /// Constructs an 8-bit bitvector from a sequence of bit cells
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="n">The target width selector</param>
-        /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector8 ToBitVector<T>(this BitCells<T> src, N8 n)        
-            where T : unmanaged
-                => src.Data.TakeUInt8();
-
-        /// <summary>
-        /// Constructs a 8-bit bitvector from bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector8 ToBitVector(this BitString src, N8 n)
-            => BitVector.from(n,src);
-
-        /// <summary>
         /// Constructs a canonical 32-bit bitvector from a 32-bit primal value
         /// </summary>
         /// <param name="src">The source value</param>
@@ -361,6 +271,5 @@ namespace Z0
         public static BitVector32 ToBitVector(this uint src)
             => src;
 
-    }
-
+   }
 }

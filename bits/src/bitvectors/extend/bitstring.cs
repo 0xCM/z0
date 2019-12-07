@@ -55,6 +55,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => BitVector.bitstring(x);
 
+
         /// <summary>
         /// Extracts the represented data as a bitstring
         /// </summary>
@@ -79,5 +80,62 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitString.vector(src.data, src.Width);       
+
+        /// <summary>
+        /// Constructs a 4-bit bitvector from bitstring
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector4 ToBitVector(this BitString src, N4 n)
+            => BitVector.from(n,src);
+
+        /// <summary>
+        /// Constructs a 8-bit bitvector from bitstring
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector8 ToBitVector(this BitString src, N8 n)
+            => BitVector.from(n,src);
+
+        /// <summary>
+        /// Constructs a 16-bit bitvector from bitstring
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector16 ToBitVector(this BitString src, N16 n)
+            => src.TakeUInt16();
+
+        /// <summary>
+        /// Constructs a 32-bit bitvector from bitstring
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector32 ToBitVector(this BitString src, N32 n)
+            => BitVector.from(n, src); 
+
+        /// <summary>
+        /// Constructs a 64-bit bitvector from bitstring
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector64 ToBitVector(this BitString src, N64 n)
+            => BitVector.from(n,src);
+
+        /// <summary>
+        /// Constructs a generic bitvector from bitstring
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> ToBitVector<T>(this BitString src)
+            where T : unmanaged
+                => BitVector.generic<T>(src);
+
+
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> ToBitVector<N,T>(this BitString src, N n = default, T t =default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => BitVector.natural<N,T>(src);
+
     }
 }

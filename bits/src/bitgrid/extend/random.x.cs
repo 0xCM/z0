@@ -81,28 +81,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Creates a 16-bit fixed-size dimensionless bitgrid
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="w">The grid bit width</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid16<T> BitGrid<T>(this IPolyrand random, N16 w, T t = default)
-            where T : unmanaged
-                => random.Next<ushort>();
-
-        /// <summary>
-        /// Creates a 32-bit fixed-size dimensionless bitgrid
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="w">The grid bit width</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid32<T> BitGrid<T>(this IPolyrand random, N32 w, T t = default)
-            where T : unmanaged
-                => random.Next<uint>();
-
-        /// <summary>
         /// Creates a 64-bit fixed-size dimensionless bitgrid
         /// </summary>
         /// <param name="random">The random source</param>
@@ -113,27 +91,7 @@ namespace Z0
             where T : unmanaged
                 => random.Next<ulong>();
 
-        /// <summary>
-        /// Creates a 128-bit fixed-size dimensionless bitgrid
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="w">The grid bit width</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid128<T> BitGrid<T>(this IPolyrand random, N128 w, T t = default)
-            where T : unmanaged
-                => random.CpuVector<T>(w);
 
-        /// <summary>
-        /// Creates a 256-bit fixed-size dimensionless bitgrid
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="w">The grid bit width</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid256<T> BitGrid<T>(this IPolyrand random, N256 w, T t = default)
-            where T : unmanaged
-                => random.CpuVector<T>(w);
 
         /// <summary>
         /// Creates a 1x16 16-bit fixed-size bitgrid

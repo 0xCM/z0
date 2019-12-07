@@ -12,17 +12,6 @@ namespace Z0
 
     partial class BitGrid
     {
-        [MethodImpl(Inline)]
-        public static RowBits<T> rowcells<M,N,T>(in BitGrid<M,N,T> g, int row)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-            where M : unmanaged, ITypeNat
-        {
-            int rowcells = (natval<N>() / 8)/size<T>();
-            int rowoffset = ((row*natval<N>())/8)/size<T>();
-            return RowBits.transfer(g.Data.Slice(rowoffset, rowcells));
-        }
-
         /// <summary>
         /// Reads/manipulates a cell identified by a linear bit position
         /// </summary>
@@ -59,5 +48,17 @@ namespace Z0
         public static ref T cell<T>(in BitGrid<T> src, int bitpos)
             where T : unmanaged
                 => ref seek(ref src.Head, bitpos / bitsize<T>()); 
+ 
+        [MethodImpl(Inline)]
+        public static RowBits<T> rowcells<M,N,T>(in BitGrid<M,N,T> g, int row)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
+        {
+            int rowcells = (natval<N>() / 8)/size<T>();
+            int rowoffset = ((row*natval<N>())/8)/size<T>();
+            return RowBits.transfer(g.Data.Slice(rowoffset, rowcells));
+        }
+ 
     }
 }

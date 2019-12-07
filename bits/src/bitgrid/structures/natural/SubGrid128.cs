@@ -14,13 +14,19 @@ namespace Z0
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N <= 128
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size=16)]
+    [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     public readonly ref struct SubGrid128<M,N,T>
         where T : unmanaged
         where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
     {                
         internal readonly Vector128<T> data;
+
+        /// <summary>
+        /// The number of bytes covered by the grid
+        /// </summary>
+        public const int ByteCount = 16;
+
 
         /// <summary>
         /// The grid dimension
@@ -39,17 +45,11 @@ namespace Z0
         public static implicit operator SubGrid128<M,N,T>(in Block128<T> src)
             => new SubGrid128<M, N, T>(src);
 
-        [MethodImpl(Inline)]
-        public static implicit operator SubGrid128<M,N,T>(in BitGrid128<T> src)
-            => new SubGrid128<M,N,T>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator SubGrid128<M,N,T>(Vector128<T> src)
             => new SubGrid128<M,N,T>(src);
 
-        [MethodImpl(Inline)]
-        public static implicit operator BitGrid128<T>(in SubGrid128<M,N,T> src)
-            => new BitGrid128<T>(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator SubGrid128<M,N,T>(Vector128<byte> src)
@@ -92,11 +92,10 @@ namespace Z0
         /// </summary>
         public int ColCount => natval<N>();  
 
-
         /// <summary>
         /// The number of covered bits
         /// </summary>
-        public int PointCount
+        public int BitCount
         {
             [MethodImpl(Inline)]
             get => NatMath.mul<M,N>();
@@ -105,11 +104,9 @@ namespace Z0
         /// <summary>
         /// Reads an index-identified cell
         /// </summary>
-        public T this[int cell]
-        {
-            [MethodImpl(Inline)]
-            get => data.GetElement(cell);
-        }
+        [MethodImpl(Inline)]
+        public T Cell(int cell)
+            => data.GetElement(cell);
 
         [MethodImpl(Inline)]
         public SubGrid128<P,Q,U> As<P,Q,U>()

@@ -512,6 +512,30 @@ namespace Z0
         public static void part32x4(uint src, Span<byte> dst)
             => part32x4(src, ref head(dst));
 
+        // ~ Nx5
+        // ~ ------------------------------------------------------------------
+
+        [MethodImpl(Inline)]
+        public static void Part15x5(ushort src, Block32<byte> dst)
+        {
+            const ushort M = BitMasks.Lsb16x8x5;
+            head16(dst) = dinx.scatter(src, M);            
+        }
+
+        [MethodImpl(Inline)]
+        public static void Part30x5(uint src, Block32<byte> dst)
+        {
+            const uint M = BitMasks.Lsb32x8x5;
+            head32(dst) = dinx.scatter(src, M);            
+        }
+
+        [MethodImpl(Inline)]
+        public static void Part60x5(ulong src, Block64<byte> dst)
+        {
+            const ulong M = BitMasks.Lsb64x8x5;
+            head64(dst) = dinx.scatter(src, M);            
+        }
+
         // ~ Nx8
         // ~ ------------------------------------------------------------------
 

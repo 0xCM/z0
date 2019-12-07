@@ -35,14 +35,6 @@ namespace Z0
             where T : unmanaged
                 => BitGrid.bitstring(g);
 
-        /// <summary>
-        /// Converts a grid to an equivalent linear bitstring representation
-        /// </summary>
-        /// <param name="g">The source grid</param>
-        [MethodImpl(Inline)]
-        public static BitString ToBitString<T>(this BitGrid16<T> g)
-            where T : unmanaged
-                => BitGrid.bitstring(g);
 
         /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
@@ -108,15 +100,6 @@ namespace Z0
         /// Converts a grid to an equivalent linear bitstring representation
         /// </summary>
         /// <param name="g">The source grid</param>
-        [MethodImpl(Inline)]
-        public static BitString ToBitString<T>(this BitGrid128<T> g)
-            where T : unmanaged
-                => BitGrid.bitstring(g);
-
-        /// <summary>
-        /// Converts a grid to an equivalent linear bitstring representation
-        /// </summary>
-        /// <param name="g">The source grid</param>
         /// <typeparam name="M">The row type</typeparam>
         /// <typeparam name="N">The col type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
@@ -127,14 +110,6 @@ namespace Z0
             where T : unmanaged
                 => BitGrid.bitstring(g);
 
-        /// <summary>
-        /// Converts a grid to an equivalent linear bitstring representation
-        /// </summary>
-        /// <param name="g">The source grid</param>
-        [MethodImpl(Inline)]
-        public static BitString ToBitString<T>(this BitGrid256<T> g)
-            where T : unmanaged
-                => BitGrid.bitstring(g);
 
         /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
