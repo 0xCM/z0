@@ -63,6 +63,13 @@ namespace Z0
         public static void CopyTo<T>(this ConstBlock256<T> src, Span<T> dst)
             where T : unmanaged
                 => src.Data.CopyTo(dst);
+
+        [MethodImpl(Inline)]
+        public static void CopyTo<N,T>(this NatBlock<N,T> src,Span<T> dst)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => src.Data.CopyTo(dst);
+
     }
 
 }

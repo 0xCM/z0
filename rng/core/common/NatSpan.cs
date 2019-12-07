@@ -25,10 +25,10 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static NatSpan<N,T> NatSpan<N,T>(this IPolyrand random, N n = default, Interval<T>? domain = null, Func<T,bool> filter = null)
+        public static NatBlock<N,T> NatSpan<N,T>(this IPolyrand random, N n = default, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged  
             where N : unmanaged, ITypeNat
-                => Z0.NatSpan.load(random.Span<T>((int)n.NatValue, domain, filter),n);                                    
+                => DataBlocks.checkedload(random.Span<T>((int)n.NatValue, domain, filter),n);                                    
 
         /// <summary>
         /// Allocates a table span of natural dimensions and populates the cells with random values
@@ -40,11 +40,11 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static NatSpan<M,N,T> NatSpan<M,N,T>(this IPolyrand random, M rows = default, N cols = default)
+        public static TableSpan<M,N,T> NatSpan<M,N,T>(this IPolyrand random, M rows = default, N cols = default)
             where T : unmanaged  
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Z0.NatSpan.load<M, N, T>(random.Span<T>(nfunc.muli(rows, cols)), rows, cols);
+                => Z0.TableSpan.load<M, N, T>(random.Span<T>(nfunc.muli(rows, cols)), rows, cols);
 
         /// <summary>
         /// Allocates a table span of natural dimensions and populates the cells with random values that
@@ -58,11 +58,11 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static NatSpan<M,N,T> NatSpan<M,N,T>(this IPolyrand random, M rows, N cols, Interval<T> domain)
+        public static TableSpan<M,N,T> NatSpan<M,N,T>(this IPolyrand random, M rows, N cols, Interval<T> domain)
             where T : unmanaged  
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Z0.NatSpan.load<M, N, T>(random.Span(nfunc.muli(rows, cols), domain), rows, cols);
+                => Z0.TableSpan.load<M, N, T>(random.Span(nfunc.muli(rows, cols), domain), rows, cols);
 
     }
 

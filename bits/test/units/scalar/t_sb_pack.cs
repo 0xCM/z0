@@ -41,6 +41,66 @@ namespace Z0
             RunLocals();
         }
 
+        public void sb_pack_8x1_32()
+        {
+            var count = n4;
+            var block = n32;
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var bs = Random.BitString(count);
+                var bitseq = bs.BitSeq.Blocked(block);
+                uint packed = Bits.pack8x1(bitseq);
+                for(var i=0; i< count; i++)
+                    Claim.eq(bs[i], BitMask.test(packed, i));
+
+            }
+        }
+
+        public void sb_pack_8x1_64()
+        {
+            var count = n8;
+            var block = n64;
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var bs = Random.BitString(count);
+                var bitseq = bs.BitSeq.Blocked(block);
+                uint packed = Bits.pack8x1(bitseq);
+                for(var i=0; i< count; i++)
+                    Claim.eq(bs[i], BitMask.test(packed, i));
+
+            }
+        }
+
+        public void sb_pack_8x1_128()
+        {
+            var count = n16;
+            var block = n128;
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var bs = Random.BitString(count);
+                var bitseq = bs.BitSeq.Blocked(block);
+                uint packed = Bits.pack8x1(bitseq);
+                for(var i=0; i< count; i++)
+                    Claim.eq(bs[i], BitMask.test(packed, i));
+
+            }
+        }
+
+        public void sb_pack_8x1_256()
+        {
+            var count = n32;
+            var block = n256;
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var bs = Random.BitString(count);
+                var bitseq = bs.BitSeq.Blocked(block);
+                uint packed = Bits.pack8x1(bitseq);
+                for(var i=0; i< count; i++)
+                    Claim.eq(bs[i], BitMask.test(packed, i));
+
+            }
+        }
+
         public void sb_pack_basecase()
         {
             var x = 0b10100111001110001110010110101000;

@@ -91,7 +91,7 @@ partial class zfunc
     /// <typeparam name="S">The source type</typeparam>
     /// <typeparam name="T">The target type</typeparam>
     [MethodImpl(Inline)]   
-    public static Span<T> convert<N,S,T>(NatSpan<N,S> src)
+    public static Span<T> convert<N,S,T>(NatBlock<N,S> src)
         where N : unmanaged, ITypeNat
         where T : unmanaged
         where S : unmanaged

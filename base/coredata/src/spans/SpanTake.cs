@@ -52,28 +52,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// If the source is nonempty, converts the leading element to an 8-bit signed integer;
-        /// otherwise, returns 0
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline)]
-        public static sbyte TakeInt8<T>(this ReadOnlySpan<T> src)
-            where T : unmanaged        
-            => src.Length > 0 ? (sbyte)src.AsBytes()[0] : (sbyte)0;            
-
-        /// <summary>
-        /// If the source is nonempty, converts the leading element to an 8-bit signed integer;
-        /// otherwise, returns 0
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline)]
-        public static sbyte TakeInt8<T>(this Span<T> src)
-            where T : unmanaged        
-                => src.ReadOnly().TakeInt8();
-
-        /// <summary>
         /// If the source is nonempty, converts the leading element to an 8-bit unsigned integer;
         /// otherwise, returns 0
         /// </summary>
@@ -94,31 +72,6 @@ namespace Z0
         public static byte TakeUInt8<T>(this Span<T> src)
             where T : unmanaged        
                 => src.ReadOnly().TakeUInt8();
- 
-        /// <summary>
-        /// Converts the leading elements of a primal source span to a 16-bit signed integer,
-        /// 0-filling the high bits if the source is too short
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline)]
-        public static short TakeInt16<T>(this ReadOnlySpan<T> src)
-            where T : unmanaged        
-        {
-            Span<byte> dst = stackalloc byte[2];       
-            return BitConverter.ToInt16(src.AsBytes().TakeBytes(dst));
-        }
-
-        /// <summary>
-        /// Converts the leading elements of a primal source span to a 16-bit signed integer,
-        /// 0-filling the high bits if the source is too short
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline)]
-        public static short TakeInt16<T>(this Span<T> src)
-            where T : unmanaged        
-                => src.ReadOnly().TakeInt16();
 
         /// <summary>
         /// Converts the leading elements of a primal source span to a 16-bit unsigned integer,
@@ -160,17 +113,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Converts the leading elements of a primal source span to a 32-bit signed integer,
-        /// 0-filling the high bits if the source is too short
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline)]
-        public static int TakeInt32<T>(this Span<T> src)
-            where T : unmanaged        
-                => src.ReadOnly().TakeInt32();
-
-        /// <summary>
         /// Converts the leading elements of a primal source span to a 32-bit usigned integer,
         /// 0-filling the high bits if the source is too short
         /// </summary>
@@ -208,17 +150,6 @@ namespace Z0
             Span<byte> dst = stackalloc byte[8];       
             return BitConverter.ToInt64(src.AsBytes().TakeBytes(dst));
         }
-
-        /// <summary>
-        /// Converts the leading elements of a primal source span to a 64-bit signed integer,
-        /// 0-filling the high bits if the source is too short
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline)]
-        public static long TakeInt64<T>(this Span<T> src)
-            where T : unmanaged        
-                => src.ReadOnly().TakeInt64();
 
         /// <summary>
         /// Converts the leading elements of a primal source span to a 64-bit unsigned integer,

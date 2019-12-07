@@ -124,7 +124,7 @@ namespace Z0
                 => VBlock256<N, T>.Load(src);
 
         [MethodImpl(Inline)]
-        public static VBlock256<N,T> blockload<N,T>(NatSpan<N,T> src)
+        public static VBlock256<N,T> blockload<N,T>(NatBlock<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src;

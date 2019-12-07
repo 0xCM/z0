@@ -23,7 +23,7 @@ namespace Z0
                 => (re,im);
 
         
-        public static NatSpan<N,Complex<T>> FromPaired<N,T>(NatSpan<N,T> re, NatSpan<N,T> im)
+        public static NatBlock<N,Complex<T>> FromPaired<N,T>(NatBlock<N,T> re, NatBlock<N,T> im)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {

@@ -15,10 +15,10 @@ namespace Z0
         /// Computes the digigs corresponding to each 2-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
-        public static NatSpan<N4, byte> Digits(this Perm4 src)
+        public static NatBlock<N4, byte> Digits(this Perm4 src)
         {
             var scalar = (byte)src;
-            var dst = NatSpan.alloc<N4,byte>();
+            var dst = DataBlocks.natalloc<N4,byte>();
             dst[0] = BitMask.between(scalar, 0, 1);
             dst[1] = BitMask.between(scalar, 2, 3);
             dst[2] = BitMask.between(scalar, 4, 5);
@@ -26,10 +26,10 @@ namespace Z0
             return dst;
         }
 
-        public static NatSpan<N16, HexDigit> Digits(this Perm16 src)
+        public static NatBlock<N16, HexDigit> Digits(this Perm16 src)
         {
             var scalar = (ulong)src;
-            var dst = NatSpan.alloc<N16,HexDigit>();
+            var dst = DataBlocks.natalloc<N16,HexDigit>();
             dst[0] = (HexDigit)BitMask.between(scalar, 0, 3);
             dst[1] = (HexDigit)BitMask.between(scalar, 4, 7);
             dst[2] = (HexDigit)BitMask.between(scalar, 8, 11);

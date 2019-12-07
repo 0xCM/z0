@@ -34,12 +34,13 @@ namespace Z0
         public static implicit operator ConstBlock128<T>(in Block128<T> src)
             => new ConstBlock128<T>(src.data);
 
+
         [MethodImpl(Inline)]
         internal Block128(Span<T> src)
             => this.data = src;
 
         /// <summary>
-        /// The unblocked storage cells
+        /// The backing storage
         /// </summary>
         public Span<T> Data
         {
@@ -54,6 +55,15 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref MemoryMarshal.GetReference(data);
+        }
+
+        /// <summary>
+        /// True if no capacity exists, false otherwise
+        /// </summary>
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => data.IsEmpty;
         }
 
         /// <summary>
@@ -75,24 +85,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// The number of allocated bits
-        /// </summary>
-        public int BitCount 
-        {
-            [MethodImpl(Inline)]
-            get => bitcount<T>(CellCount);
-        }
-
-        /// <summary>
-        /// The number of allocated bytes
-        /// </summary>
-        public int ByteCount 
-        {
-            [MethodImpl(Inline)]
-            get => bytecount<T>(CellCount);
-        }
-
-        /// <summary>
         /// The number of covered blocks
         /// </summary>
         public int BlockCount 
@@ -108,38 +100,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => blocklen<T>(N);        
-        }
-
-        /// <summary>
-        /// The bit width of a cell
-        /// </summary>
-        public int CellWidth 
-        {
-            [MethodImpl(Inline)]
-            get => cellwidth<T>();
-        }
-
-        /// <summary>
-        /// The bit width of a block
-        /// </summary>
-        public int BlockWidth => N;
-
-        /// <summary>
-        /// The number of cells per block, synonymous with block length
-        /// </summary>
-        public int BlockCells
-        {
-            [MethodImpl(Inline)]
-            get => BlockLength;
-        }
-
-        /// <summary>
-        /// True if no capacity exists, false otherwise
-        /// </summary>
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => data.IsEmpty;
         }
 
         /// <summary>

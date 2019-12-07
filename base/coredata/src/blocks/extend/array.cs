@@ -181,7 +181,13 @@ namespace Z0
         public static T[] ToArray<T>(this ConstBlock256<T> src)
             where T : unmanaged
                 => src.Data.ToArray(); 
-  
+
+        [MethodImpl(Inline)]
+        public static T[] ToArray<N,T>(this NatBlock<N,T> src)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => src.Data.ToArray(); 
+ 
     }
 
 }

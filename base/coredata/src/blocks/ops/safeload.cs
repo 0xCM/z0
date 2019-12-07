@@ -12,6 +12,7 @@ namespace Z0
 
     partial class DataBlocks
     {
+
         /// <summary>
         /// Loads 32-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked
         /// </summary>
@@ -21,8 +22,7 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static Block16<T> safeload<T>(N16 n, Span<T> src)
             where T : unmanaged
-        {
-        
+        {        
             
             var bz = blockcount<T>(n, src.Length, out int remainder);
             if(remainder == 0)
@@ -126,9 +126,10 @@ namespace Z0
         /// <param name="offset">The span index at which to begin the load</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block256<T> safeload<N,T>(N256 n, in NatSpan<N,T> src)
+        public static Block256<T> safeload<N,T>(N256 n, in NatBlock<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => safeload(n,src.Unsized);
+                => safeload(n,src.Data);
+         
     }
 }

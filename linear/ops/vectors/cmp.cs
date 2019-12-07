@@ -17,7 +17,7 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static NatSpan<N,bool> eq<N,T>(VBlock256<N,T> lhs, VBlock256<N,T> rhs)
+        public static NatBlock<N,bool> eq<N,T>(VBlock256<N,T> lhs, VBlock256<N,T> rhs)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
                 => mathspan.eq<T>(lhs.Unsized, rhs.Unsized).NatLoad<N,bool>();            
@@ -48,31 +48,31 @@ namespace Z0
                 => mathspan.lteq<T>(lhs.Unblocked, rhs.Unblocked);
 
         [MethodImpl(Inline)]
-        public static NatSpan<N,bool> neq<N,T>(in VBlock256<N,T> lhs, in VBlock256<N,T> rhs)
+        public static NatBlock<N,bool> neq<N,T>(in VBlock256<N,T> lhs, in VBlock256<N,T> rhs)
             where N : unmanaged, ITypeNat
             where T : unmanaged           
                 => mathspan.neq<T>(lhs.Unsized, rhs.Unsized).NatLoad<N,bool>();                   
 
         [MethodImpl(Inline)]
-        public static NatSpan<N,bool> gt<N,T>(in VBlock256<N,T> lhs, in VBlock256<N,T> rhs)
+        public static NatBlock<N,bool> gt<N,T>(in VBlock256<N,T> lhs, in VBlock256<N,T> rhs)
             where N : unmanaged, ITypeNat
             where T : unmanaged            
                 => mathspan.gt<T>(lhs.Unsized, rhs.Unsized).NatLoad<N,bool>();            
         
         [MethodImpl(Inline)]
-        public static NatSpan<N,bool> gteq<N,T>(in VBlock256<N,T> lhs, in VBlock256<N,T> rhs)
+        public static NatBlock<N,bool> gteq<N,T>(in VBlock256<N,T> lhs, in VBlock256<N,T> rhs)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
                 => mathspan.gteq<T>(lhs.Unsized, rhs.Unsized).NatLoad<N,bool>();            
 
         [MethodImpl(Inline)]
-        public static NatSpan<N,bool> lt<N,T>(in VBlock256<N,T> lhs, in VBlock256<N,T> rhs)
+        public static NatBlock<N,bool> lt<N,T>(in VBlock256<N,T> lhs, in VBlock256<N,T> rhs)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
                 => mathspan.lt<T>(lhs.Unsized, rhs.Unsized).NatLoad<N,bool>();            
 
         [MethodImpl(Inline)]
-        public static NatSpan<N,bool> lteq<N,T>(in VBlock256<N,T> lhs, in VBlock256<N,T> rhs)
+        public static NatBlock<N,bool> lteq<N,T>(in VBlock256<N,T> lhs, in VBlock256<N,T> rhs)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
                 => mathspan.lteq<T>(lhs.Unsized, rhs.Unsized).NatLoad<N,bool>();

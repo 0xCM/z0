@@ -38,6 +38,12 @@ namespace Z0
             where T : unmanaged
                 => src.Data.Fill(value);
 
+        [MethodImpl(Inline)]
+        public static void Fill<N,T>(this NatBlock<N,T> src,T value)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => src.Data.Fill(value);
+
     }
 
 }

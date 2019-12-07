@@ -16,14 +16,6 @@ namespace Z0.Test
     {
         
 
-        public void db_16_basecase()
-        {
-            
-            var b1 = Random.Blocks<byte>(n16,64);
-            var b2 = b1.As<ulong>();
-            Claim.eq(b1.BitCount, b2.BitCount);
-            
-        }
 
         
         public  void CellSize()
@@ -88,36 +80,6 @@ namespace Z0.Test
 
         }
 
-        public void BlockCount()
-        {
-            Claim.eq(1, DataBlocks.wholeblocks<sbyte>(n128,16));
-            Claim.eq(1, DataBlocks.wholeblocks<byte>(n128,16));
-
-            Claim.eq(1, DataBlocks.wholeblocks<short>(n128,8));
-            Claim.eq(1, DataBlocks.wholeblocks<ushort>(n128,8));
-
-            Claim.eq(1, DataBlocks.wholeblocks<int>(n128,4));
-            Claim.eq(1, DataBlocks.wholeblocks<uint>(n128,4));
-            Claim.eq(1, DataBlocks.wholeblocks<float>(n128,4));
-
-            Claim.eq(1, DataBlocks.wholeblocks<long>(n128,2));
-            Claim.eq(1, DataBlocks.wholeblocks<ulong>(n128,2));
-            Claim.eq(1, DataBlocks.wholeblocks<double>(n128,2));
-
-            Claim.eq(1, DataBlocks.wholeblocks<sbyte>(n256, 32));
-            Claim.eq(1, DataBlocks.wholeblocks<byte>(n256, 32));
-
-            Claim.eq(1, DataBlocks.wholeblocks<short>(n256, 16));
-            Claim.eq(1, DataBlocks.wholeblocks<ushort>(n256, 16));
-
-            Claim.eq(1, DataBlocks.wholeblocks<int>(n256, 8));
-            Claim.eq(1, DataBlocks.wholeblocks<uint>(n256, 8));
-            Claim.eq(1, DataBlocks.wholeblocks<float>(n256, 8));
-
-            Claim.eq(1, DataBlocks.wholeblocks<long>(n256, 4));
-            Claim.eq(1, DataBlocks.wholeblocks<ulong>(n256, 4));
-            Claim.eq(1, DataBlocks.wholeblocks<double>(n256, 4));
-        }
 
         public void BlockSlice()
         {

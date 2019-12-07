@@ -11,16 +11,17 @@ namespace Z0
 
     public class t_sb_rot : t_sb<t_sb_rot>
     {
-        public void gsb_rotl_8()
+
+        public void sb_rotl_8()
             => sb_rotl_check<byte>();
 
-        public void gsb_rotl_16()
+        public void sb_rotl_16()
             => sb_rotl_check<ushort>();
 
-        public void gsb_rotl_32()
+        public void sb_rotl_32()
             => sb_rotl_check<uint>();
 
-        public void gsb_rotl_64()
+        public void sb_rotl_64()
             => sb_rotl_check<ulong>();
     }
 }

@@ -18,7 +18,7 @@ namespace Z0
     /// <typeparam name="M">The row count type</typeparam>
     /// <typeparam name="N">The row count type</typeparam>
     /// <typeparam name="T">The span element type</typeparam>
-     public readonly ref struct NatSpan<M,N,T>
+     public readonly ref struct TableSpan<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
@@ -50,19 +50,19 @@ namespace Z0
         /// </summary>
         public static int CellCount => RowLenth * ColLength;
 
-        public static implicit operator NatSpan<M,N,T>(T[] src)
-            => new NatSpan<M, N, T>(src);
+        public static implicit operator TableSpan<M,N,T>(T[] src)
+            => new TableSpan<M, N, T>(src);
 
-        public static implicit operator NatSpan<M,N,T>(Span<T> src)
-            => new NatSpan<M, N, T>(src);
+        public static implicit operator TableSpan<M,N,T>(Span<T> src)
+            => new TableSpan<M, N, T>(src);
 
-        public static implicit operator NatSpan<M,N,T>(Block256<T> src)
-            => new NatSpan<M, N, T>(src);
+        public static implicit operator TableSpan<M,N,T>(Block256<T> src)
+            => new TableSpan<M, N, T>(src);
 
-        public static implicit operator Span<T>(NatSpan<M,N,T> src)
+        public static implicit operator Span<T>(TableSpan<M,N,T> src)
             => src.data;
 
-        public static implicit operator ReadOnlySpan<T> (NatSpan<M,N,T> src)
+        public static implicit operator ReadOnlySpan<T> (TableSpan<M,N,T> src)
             => src.data;
 
         /// <summary>
@@ -71,48 +71,48 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="U">The source element type</typeparam>
         [MethodImpl(Inline)]
-        public static NatSpan<M,N,T> CheckedTransfer(Span<T> src)
+        public static TableSpan<M,N,T> CheckedTransfer(Span<T> src)
         {
             require(src.Length >= CellCount, $"length(src) = {src.Length} < {CellCount} = SpanLength");               
-            return new NatSpan<M,N,T>(src);
+            return new TableSpan<M,N,T>(src);
         }
 
         [MethodImpl(Inline)]
-        internal NatSpan(ref T src)
+        internal TableSpan(ref T src)
         {
             data = MemoryMarshal.CreateSpan(ref src, CellCount);
         }
 
         [MethodImpl(Inline)]        
-        internal NatSpan(Span<T> src)
+        internal TableSpan(Span<T> src)
         {
             require(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
             data = src;
         }
 
         [MethodImpl(Inline)]        
-        internal NatSpan(T[] src)
+        internal TableSpan(T[] src)
         {
             require(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
             data = src;
         }
 
         [MethodImpl(Inline)]
-        internal NatSpan(T value)
+        internal TableSpan(T value)
         {         
             this.data = new Span<T>(new T[CellCount]);
             this.data.Fill(value);
         }
 
         [MethodImpl(Inline)]
-        internal NatSpan(ReadOnlySpan<T> src)
+        internal TableSpan(ReadOnlySpan<T> src)
         {
             require(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
             data = src.ToArray();
         }
 
         [MethodImpl(Inline)]
-        internal NatSpan(Block256<T> src)
+        internal TableSpan(Block256<T> src)
         {
             require(src.CellCount == CellCount, $"length(src) = {src.CellCount} != {CellCount} = SpanLength");         
             this.data = src.Data;
@@ -173,18 +173,18 @@ namespace Z0
             => data.TryCopyTo(dst);
 
         [MethodImpl(Inline)]
-        public NatSpan<M,N,T> Replicate()        
-            => new NatSpan<M, N, T>(data.ToArray());
+        public TableSpan<M,N,T> Replicate()        
+            => new TableSpan<M, N, T>(data.ToArray());
 
         [MethodImpl(Inline)]
         bool IsRowHead(int index)
             => index == 0 || index % RowLenth == 0;
 
-        public NatSpan<I,J,T> SubSpan<I,J>((uint r, uint c) origin, Dim<I,J> dim = default)
+        public TableSpan<I,J,T> SubSpan<I,J>((uint r, uint c) origin, Dim<I,J> dim = default)
             where I : unmanaged, ITypeNat
             where J : unmanaged, ITypeNat
         {            
-            var  dst = NatSpan.alloc<I,J,T>();
+            var  dst = TableSpan.alloc<I,J,T>();
             var curidx = 0;
             for(var i = origin.r; i < (origin.r + dim.I); i++)
             for(var j = origin.c; j < (origin.c + dim.J); j++)
@@ -193,7 +193,7 @@ namespace Z0
             return dst;
         }
 
-        public ref NatSpan<M,T> Col(int col, ref NatSpan<M,T> dst)
+        public ref NatBlock<M,T> Col(int col, ref NatBlock<M,T> dst)
         {
             if(col < 0 || col >= ColCount)
                 ThrowOutOfRange(col, 0, ColCount - 1);
@@ -204,7 +204,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public NatSpan<N,T> Row(int row)
+        public NatBlock<N,T> Row(int row)
         {
             if(row < 0 || row >= RowCount)
                 throw OutOfRange(row, 0, RowCount - 1);
@@ -213,13 +213,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public NatSpan<N,T> Row<I>()
+        public NatBlock<N,T> Row<I>()
             where I : unmanaged, ITypeNat
                 => Row(nati<I>());
 
-        public NatSpan<N,M,T> Transpose()
+        public TableSpan<N,M,T> Transpose()
         {
-            var dst = NatSpan.alloc<N,M,T>();                
+            var dst = TableSpan.alloc<N,M,T>();                
             for(var r = 0; r < RowCount; r++)
             for(var c = 0; c < ColCount; c++)
                 dst[c, r] = this[r, c];

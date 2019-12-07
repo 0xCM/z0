@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ConstBlock256<T>(in Block256<T> src)
             => new ConstBlock256<T>(src.data);
-        
+
         [MethodImpl(Inline)]
         internal Block256(Span<T> src)
             => this.data = src;
@@ -66,30 +66,21 @@ namespace Z0
         }
 
         /// <summary>
+        /// True if no capacity exists, false otherwise
+        /// </summary>
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => data.IsEmpty;
+        }
+
+        /// <summary>
         /// The number of allocated cells 
         /// </summary>
         public int CellCount 
         {
             [MethodImpl(Inline)]
             get => data.Length;
-        }
-
-        /// <summary>
-        /// The number of allocated bits
-        /// </summary>
-        public int BitCount 
-        {
-            [MethodImpl(Inline)]
-            get => bitcount<T>(CellCount);
-        }
-
-        /// <summary>
-        /// The number of allocated bytes
-        /// </summary>
-        public int ByteCount 
-        {
-            [MethodImpl(Inline)]
-            get => bytecount<T>(CellCount);
         }
 
         /// <summary>
@@ -109,38 +100,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => blocklen<T>(N);
         }            
-
-        /// <summary>
-        /// The bit width of a cell
-        /// </summary>
-        public int CellWidth 
-        {
-            [MethodImpl(Inline)]
-            get => cellwidth<T>();
-        }
-
-        /// <summary>
-        /// The bit width of a block
-        /// </summary>
-        public int BlockWidth => N;
-
-        /// <summary>
-        /// The number of cells per block, synonymous with block length
-        /// </summary>
-        public int BlockCells
-        {
-            [MethodImpl(Inline)]
-            get => BlockLength;
-        }
-
-        /// <summary>
-        /// True if no capacity exists, false otherwise
-        /// </summary>
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => data.IsEmpty;
-        }
 
         /// <summary>
         /// Indexes directly into the underlying storage cells

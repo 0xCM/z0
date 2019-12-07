@@ -23,16 +23,16 @@ namespace Z0
         public void perm4_digits_basecase()
         {
             var dABCD = Perm4.ABCD.Digits();
-            Claim.eq(NatSpan.parts(n4, A, B, C, D), dABCD);
+            Claim.eq(DataBlocks.natparts(n4, A, B, C, D), dABCD);
 
             var dDCBA = Perm4.DCBA.Digits();
-            Claim.eq(NatSpan.parts(n4, D, C, B, A), dDCBA);
+            Claim.eq(DataBlocks.natparts(n4, D, C, B, A), dDCBA);
 
             var dACBD = Perm4.ACBD.Digits();
-            Claim.eq(NatSpan.parts(n4, A, C, B, D), dACBD);
+            Claim.eq(DataBlocks.natparts(n4, A, C, B, D), dACBD);
 
             var dCBDA = Perm4.CBDA.Digits();
-            Claim.eq(NatSpan.parts(n4, C, B, D, A), dCBDA);
+            Claim.eq(DataBlocks.natparts(n4, C, B, D, A), dCBDA);
         }
 
         public void vpermhi_4x16_basecase()

@@ -27,7 +27,7 @@ namespace Z0
 
         public void pack8_basecase()
         {
-            var src = NatSpan.parts(n8,1u,0u,1u,1u,1u,0u,0u,0u);            
+            var src = DataBlocks.natparts(n8,1u,0u,1u,1u,1u,0u,0u,0u);            
             var dst = AvxBitpack.pack(src,0);
             Trace(src.FormatBits());
             Trace(dst.FormatBits());
@@ -38,7 +38,7 @@ namespace Z0
             var n = n32;
 
             var bits = Random.BitSpan(n);
-            var src = NatSpan.alloc(n,0u);
+            var src = DataBlocks.natalloc(n,0u);
             for(var i=0; i<src.Length; i++)
                 src[i] = (uint)bits[i];
 

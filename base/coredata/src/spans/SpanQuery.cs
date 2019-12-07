@@ -5,12 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Diagnostics;
 
     using static zfunc;
 
@@ -39,32 +35,6 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static ref T Last<T>(this Span<T> src)
-        {
-            if(src.IsEmpty)
-                ThrowEmptySpanError();
-            return ref src[src.Length - 1];
-        }
-
-        /// <summary>
-        /// Returns a readonly reference to the first element of a nonempty span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly T First<T>(this ReadOnlySpan<T> src)
-        {
-            if(src.IsEmpty)
-                ThrowEmptySpanError();
-            return ref MemoryMarshal.GetReference(src);
-        }
-
-        /// <summary>
-        /// Returns a readonly reference to the last element of a nonempty span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly T Last<T>(this ReadOnlySpan<T> src)
         {
             if(src.IsEmpty)
                 ThrowEmptySpanError();

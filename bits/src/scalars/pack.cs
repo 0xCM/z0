@@ -13,8 +13,18 @@ namespace Z0
     partial class Bits
     {         
         /// <summary>
+        /// Consecutively packs the first bit of each source byte into the lower 4 bits of an 8-bit target
+        /// dst := [bit(0, src[0]), bit(0, src[1]), ... bit(0, src[3])]
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="dst">The target</param>
+        [MethodImpl(Inline)]
+        public static byte pack8x1(in ConstBlock32<byte> src)
+            => (byte) dinx.gather(head64(src), BitMasks.Lsb32x8x1);
+
+        /// <summary>
         /// Consecutively packs the first bit of each source byte into an 8-bit target
-        /// dst := [bit(0, src[0]), bit(0, src[1]), ... bit(0, src[15])]
+        /// dst := [bit(0, src[0]), bit(0, src[1]), ... bit(0, src[7])]
         /// </summary>
         /// <param name="src">The source</param>
         /// <param name="dst">The target</param>

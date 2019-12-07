@@ -306,6 +306,7 @@ namespace Z0
 
         // ~ Nx3
         // ~ ------------------------------------------------------------------
+        
         /// <summary>
         /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>

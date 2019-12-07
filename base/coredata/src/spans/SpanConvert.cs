@@ -160,7 +160,6 @@ namespace Z0
             where T : unmanaged
                 => MemoryMarshal.Cast<sbyte,T>(src);
 
-
         /// <summary>
         /// Reimagines a span of signed 16-bit unsigned integers as a span of generic values
         /// </summary>

@@ -390,10 +390,10 @@ namespace Z0
         /// <summary>
         /// Renders the content as a natural bitspan
         /// </summary>
-        public NatSpan<N,bit> ToBitSpan<N>(N n = default)
+        public NatBlock<N,bit> ToBitSpan<N>(N n = default)
             where N : unmanaged, ITypeNat
         {
-            var dst = NatSpan.alloc<N,bit>();
+            var dst = DataBlocks.natalloc<N,bit>();
             for(var i=0; i< data.Length; i++)
                 dst[i] = (bit)data[i];
             return dst;

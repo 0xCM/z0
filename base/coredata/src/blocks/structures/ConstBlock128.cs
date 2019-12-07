@@ -33,7 +33,7 @@ namespace Z0
             => this.data = src;
         
         /// <summary>
-        /// The unblocked storage cells
+        /// The backing storage
         /// </summary>
         public ReadOnlySpan<T> Data
         {
@@ -50,6 +50,12 @@ namespace Z0
             get => ref MemoryMarshal.GetReference<T>(data);
         }            
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => data.IsEmpty;
+        }
+
         /// <summary>
         /// The number of allocated cells
         /// </summary>
@@ -57,24 +63,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => data.Length;
-        }
-
-        /// <summary>
-        /// The number of allocated bits
-        /// </summary>
-        public int BitCount 
-        {
-            [MethodImpl(Inline)]
-            get => bitcount<T>(CellCount);
-        }
-
-        /// <summary>
-        /// The number of allocated bytes
-        /// </summary>
-        public int ByteCount 
-        {
-            [MethodImpl(Inline)]
-            get => bytecount<T>(CellCount);
         }
 
         /// <summary>
@@ -94,28 +82,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => blocklen<T>(N);
         }
-
-        /// <summary>
-        /// The bit width of a block
-        /// </summary>
-        public int BlockWidth => N;
-
-        /// <summary>
-        /// The bit width of a cell
-        /// </summary>
-        public int CellWidth 
-        {
-            [MethodImpl(Inline)]
-            get => cellwidth<T>();
-        }
-        
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => data.IsEmpty;
-        }
-            
-
+                    
         /// <summary>
         /// Indexes directly into the underlying storage cells
         /// </summary>

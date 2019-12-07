@@ -70,7 +70,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-        NatSpan<N,T> Next();
+        NatBlock<N,T> Next();
     }
 
 }

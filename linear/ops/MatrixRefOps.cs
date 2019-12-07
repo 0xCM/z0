@@ -19,7 +19,7 @@ namespace Z0
     /// </summary>
     public static class MatrixRefOps
     {
-        public static NatSpan<M,P,double> Mul<M,N,P>(NatSpan<M,N,double> lhs, NatSpan<N,P,double> rhs)
+        public static TableSpan<M,P,double> Mul<M,N,P>(TableSpan<M,N,double> lhs, TableSpan<N,P,double> rhs)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where P : unmanaged, ITypeNat
@@ -27,7 +27,7 @@ namespace Z0
             var m = nati<M>();
             var n = nati<N>();
             var p = nati<P>();
-            var dst = NatSpan.alloc<M,P,double>();
+            var dst = TableSpan.alloc<M,P,double>();
             for(var r = 0; r< m; r++)
                 for(var c = 0; c < p; c++)
                     for(var i=0; i<nati<N>(); i++)

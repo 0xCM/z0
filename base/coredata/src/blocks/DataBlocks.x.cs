@@ -23,5 +23,19 @@ namespace Z0
         static N128 n128 => default;
 
         static N256 n256 => default;
+
+        /// <summary>
+        /// Presents an unsized span as one of natural length
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="n">The target size</param>
+        /// <typeparam name="N">The target type</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]        
+        public static NatBlock<N,T> NatLoad<N,T>(this Span<T> src, N n = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => DataBlocks.checkedload(src,n);
+
     }
 }

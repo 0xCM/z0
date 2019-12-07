@@ -39,7 +39,7 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">THe component type</typeparam>
         [MethodImpl(Inline)]   
-        public static implicit operator NatSpan<N,T>(VBlock256<N,T> src)
+        public static implicit operator NatBlock<N,T>(VBlock256<N,T> src)
             => src.data;
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">THe component type</typeparam>
         [MethodImpl(Inline)]   
-        public static implicit operator VBlock256<N,T>(NatSpan<N,T> src)
+        public static implicit operator VBlock256<N,T>(NatBlock<N,T> src)
             => new VBlock256<N,T>(src);
 
         [MethodImpl(Inline)]   
@@ -94,7 +94,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal VBlock256(NatSpan<N,T> src)
+        internal VBlock256(NatBlock<N,T> src)
         {
             data = DataBlocks.safeload(n256,src);
         }

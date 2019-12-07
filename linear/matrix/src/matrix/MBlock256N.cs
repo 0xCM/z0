@@ -47,7 +47,7 @@ namespace Z0
             => src.ToRectangular();
 
         [MethodImpl(Inline)]
-        public static implicit operator NatSpan<N,T>(MBlock256<N,T> src)
+        public static implicit operator NatBlock<N,T>(MBlock256<N,T> src)
             => src.Natural;
 
         [MethodImpl(Inline)]
@@ -152,7 +152,7 @@ namespace Z0
         /// <summary>
         /// Provides access to the underlying data as a span of natural dimensions
         /// </summary>
-        public NatSpan<N,T> Natural
+        public NatBlock<N,T> Natural
         {
             [MethodImpl(Inline)]
             get => data;

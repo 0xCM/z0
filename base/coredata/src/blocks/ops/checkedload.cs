@@ -9,9 +9,11 @@ namespace Z0
     using System.Runtime.InteropServices;    
         
     using static zfunc;
+    using static nfunc;
 
     partial class DataBlocks
     {
+
         /// <summary>
         /// Loads 16-bit segments from a span, raising an error if said source does not evenly partition
         /// </summary>
@@ -173,7 +175,7 @@ namespace Z0
         /// <param name="offset">The span index at which to begin the load</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ConstBlock128<T> checkedload<T>(N128 n, ReadOnlySpan<T> src, int offset, int length)
+        public static ConstBlock256<T> checkedload<T>(N256 n, ReadOnlySpan<T> src, int offset = 0)
             where T : unmanaged
         {
             if(!aligned<T>(n,src.Length - offset))
@@ -181,5 +183,24 @@ namespace Z0
 
             return load(offset == 0 ? src : src.Slice(offset), n);
         }         
+
+        /// <summary>
+        /// Verifies correct source span length prior to backing store assignment
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="U">The source element type</typeparam>
+        [MethodImpl(Inline)]
+        public static NatBlock<N,T> checkedload<N,T>(Span<T> src, N n = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            if(src.Length < nati<N>())
+                badsize(nati<N>(), src.Length);      
+
+            return new NatBlock<N, T>(src);
+        }
+
+
     }
+
 }

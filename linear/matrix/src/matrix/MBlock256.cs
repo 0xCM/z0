@@ -54,7 +54,7 @@ namespace Z0
         public static implicit operator MBlock256<M,N,T>(in Block256<T> src)
             => new MBlock256<M,N,T>(src);
 
-        public static implicit operator NatSpan<M,N,T>(in MBlock256<M,N,T> A)
+        public static implicit operator TableSpan<M,N,T>(in MBlock256<M,N,T> A)
             => A.Natural;
 
         public static implicit operator Block256<T>(in MBlock256<M,N,T> A)
@@ -174,7 +174,7 @@ namespace Z0
         /// <summary>
         /// Provides access to the underlying data as a span of natural dimensions
         /// </summary>
-        public NatSpan<M,N,T> Natural
+        public TableSpan<M,N,T> Natural
         {
             [MethodImpl(Inline)]
             get => data;

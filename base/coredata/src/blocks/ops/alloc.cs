@@ -9,9 +9,39 @@ namespace Z0
     using System.Runtime.InteropServices;    
         
     using static zfunc;
+    using static nfunc;
 
     partial class DataBlocks
     {
+        [MethodImpl(NotInline)]   
+        public static NatBlock<N,T> natalloc<N,T>(N n = default, T t = default) 
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            Span<T> data = new T[natval<N>()];
+            return new NatBlock<N,T>(data);
+        }
+
+
+        [MethodImpl(Inline)]   
+        public static NatBlock<N,T> natload<N,T>(ref T src, N n = default)    
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {                
+            var data = MemoryMarshal.CreateSpan(ref src, natval<N>());
+            return new NatBlock<N,T>(data);
+        }
+
+
+        [MethodImpl(Inline)]   
+        public static NatBlock<N,T> natparts<N,T>(N n, params T[] cells) 
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            Span<T> src = cells;
+            return checkedload(src,n);
+        }
+
         /// <summary>
         /// Allocates a specified number of 16-bit blocks, filled with an optional pattern
         /// </summary>

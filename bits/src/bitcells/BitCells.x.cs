@@ -61,27 +61,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => src.Data.TakeUInt16();
 
-        /// <summary>
-        /// Converts the least significant elements of generic natural bitvector to a 32-bit primal bitvector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primal source type</typeparam>        
-        [MethodImpl(Inline)]
-        public static BitVector32 ToPrimal<N,T>(this BitCells<N,T> src, N32 n)        
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => src.Data.TakeUInt32();
-
-        /// <summary>
-        /// Converts the leading elements of generic bitvector to a 64-bit primal bitvector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primal source type</typeparam>        
-        [MethodImpl(Inline)]
-        public static BitVector64 ToPrimal<N,T>(this BitCells<N,T> src, N64 n)        
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => src.Data.TakeUInt64();
 
         [MethodImpl(Inline)]
         public static BitCells<T> ToCells<N,T>(this BitCells<N,T> src)

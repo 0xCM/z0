@@ -45,17 +45,6 @@ namespace Z0
         public static BitVector64 ToBitVector<T>(this BitCells<T> src, N64 n)
             where T : unmanaged
                 => src.Data.TakeUInt64();
-
-        /// <summary>
-        /// Constructs an 8-bit bitvector from a sequence of bit cells
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="n">The target width selector</param>
-        /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector8 ToBitVector<T>(this BitCells<T> src, N8 n)        
-            where T : unmanaged
-                => src.Data.TakeUInt8();
  
         /// <summary>
         /// Converts the source bitvector to bit cells

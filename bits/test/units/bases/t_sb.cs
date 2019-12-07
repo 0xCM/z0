@@ -338,9 +338,9 @@ namespace Z0
                 var j = Random.Next(2, width - width/2);
                 var y = gbits.zerohi(x, (int)j);
 
-                var x0 = gbits.bitseg(x,0,j - 1);
-                var y0 = gbits.bitseg(y,0,j - 1);
-                var y1 = gbits.bitseg(y,j, width - 1);
+                var x0 = gbits.segment(x,0,j - 1);
+                var y0 = gbits.segment(y,0,j - 1);
+                var y1 = gbits.segment(y,j, width - 1);
                 Claim.eq(x0,y0);
                 Claim.nea(gmath.nonzero(y1));                        
             }

@@ -23,9 +23,6 @@ namespace Z0
         {
             var a = srcbits / blockwidth;
             return a + (srcbits % a == 0 ? 0 : 1);
-            // var a = blockwidth*blockwidth;
-            // var whole = srcbits/a;
-            // return whole + (srcbits % a == 0 ? 0 : 1);
         }
 
         /// <summary>
