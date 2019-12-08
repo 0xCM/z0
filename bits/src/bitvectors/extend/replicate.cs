@@ -119,7 +119,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> Replicate<T>(this BitVector<T> src)
             where T : unmanaged
-                => src.Scalar;
+                 => BitVector.replicate(src);
 
         /// <summary>
         /// Creates a copy of the source vector
@@ -130,6 +130,18 @@ namespace Z0
         public static BitVector<N,T> Replicate<N,T>(this BitVector<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BitVector.inject<N,T>(src.data);
+                => BitVector.replicate(src);
+
+        /// <summary>
+        /// Creates a copy of the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The storage cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> Replicate<N,T>(this BitVector128<N,T> src)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => BitVector.replicate(src);
+
     }
 }

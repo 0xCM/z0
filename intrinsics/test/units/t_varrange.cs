@@ -104,7 +104,7 @@ namespace Z0
             var x = dinx.vparts(n,1,2,3,4);
             var y = dinx.vparts(n,5,6,7,8);
             var expect = dinx.vparts(n,2,6,4,8);
-            var actual = dinx.vunpackhi(x,y);
+            var actual = dinx.vmergehi(x,y);
             Claim.eq(expect, actual);
         }
 
@@ -113,7 +113,7 @@ namespace Z0
             var n = n256;
             var x = dinx.vparts(n,1u,2,3,4,5,6,7,8);
             var y = dinx.vparts(n,10u,12,13,14,15,16,17,18);
-            var actual = dinx.vunpackhi(x,y);
+            var actual = dinx.vmergehi(x,y);
             var expect = dinx.vparts(n, 3u,13,4,14,7,17,8,18);
             Claim.eq(expect, actual);
         }

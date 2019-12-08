@@ -52,5 +52,24 @@ namespace Z0
         public static BitVector64 disable(BitVector64 x, int index)
             => BitMask.disable(x, index);
 
+        /// <summary>
+        /// Disables a bit if it is enabled
+        /// </summary>
+        /// <param name="index">The position of the bit to disable</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> disable<T>(BitVector<T> x, int index)
+            where T : unmanaged
+                => gbits.disable(x.data,index);
+
+        /// <summary>
+        /// Disables a bit if it is enabled
+        /// </summary>
+        /// <param name="index">The position of the bit to disable</param>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> disable<N,T>(BitVector<N,T> x, int index)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gbits.disable(x.data,index);
+
     }
 }

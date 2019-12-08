@@ -67,6 +67,51 @@ namespace Z0
         }
 
         /// <summary>
+        /// PMOVZXBW xmm, m64
+        /// Evenly distributes cells from the leading source block across the target
+        /// 64x8:[0 1 2 3 4 5 6 7] -> 128x16:[0 1 2 3 4 5 6 7]
+        /// 8:8 -> 16
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<ushort> vloadblock(in ConstBlock64<byte> src, out Vector128<ushort> dst)
+        {
+            dst = v16u(ConvertToVector128Int16(constptr(in src.Head)));
+            return dst;
+        }
+
+        /// <summary>
+        /// VPMOVZXBD ymm, m64
+        /// Evenly distributes cells from the leading source block across the target
+        /// 64x8:[0 1 2 3 4 5 6 7] -> 256x32:[0 1 2 3 4 5 6 7]
+        /// 8:8 -> 32
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<uint> vloadblock(in ConstBlock64<byte> src, out Vector256<uint> dst)
+        {
+            dst = v32u(ConvertToVector256Int32(constptr(in src.Head)));
+            return dst;
+        }
+
+        /// <summary>
+        /// VPMOVZXBW ymm, m128
+        /// Evenly distributes cells from the leading source block across the target
+        /// 128x8:[0 1 2 3 4 5 6 7 8 9 A B C D E F] -> 256x16:[0 1 2 3 4 5 6 7 8 9 A B C D E F]
+        /// 16:8 -> 16
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<ushort> vloadblock(in ConstBlock128<byte> src, out Vector256<ushort> dst)
+        {
+            dst = v16u(ConvertToVector256Int16(constptr(in src.Head)));
+            return dst;
+        }
+
+        /// <summary>
         /// VPMOVZXWQ ymm, m64
         /// Evenly distributes cells from the leading source block across the target
         /// 64x16:[0 1 2 3] -> 256x64:[0 1 2 3]
@@ -97,21 +142,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// PMOVZXBW xmm, m64
-        /// Evenly distributes cells from the leading source block across the target
-        /// 64x8:[0 1 2 3 4 5 6 7] -> 128x16:[0 1 2 3 4 5 6 7]
-        /// 8:8 -> 16
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<ushort> vloadblock(in ConstBlock64<byte> src, out Vector128<ushort> dst)
-        {
-            dst = v16u(ConvertToVector128Int16(constptr(in src.Head)));
-            return dst;
-        }
-
-        /// <summary>
         /// PMOVSXWD xmm, m64
         /// Evenly distributes cells from the leading source block across the target
         /// 64x16:[0 1 2 3] -> 128x32:[0 1 2 3]
@@ -123,21 +153,6 @@ namespace Z0
         public static unsafe Vector128<uint> vloadblock(in ConstBlock64<ushort> src, out Vector128<uint> dst)
         {
             dst = v32u(ConvertToVector128Int32(constptr(in src.Head)));
-            return dst;
-        }
-
-        /// <summary>
-        /// VPMOVZXBD ymm, m64
-        /// Evenly distributes cells from the leading source block across the target
-        /// 64x8:[0 1 2 3 4 5 6 7] -> 256x32:[0 1 2 3 4 5 6 7]
-        /// 8:8 -> 32
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<uint> vloadblock(in ConstBlock64<byte> src, out Vector256<uint> dst)
-        {
-            dst = v32u(ConvertToVector256Int32(constptr(in src.Head)));
             return dst;
         }
 
@@ -156,20 +171,6 @@ namespace Z0
            return dst;
         }
 
-        /// <summary>
-        /// VPMOVZXBW ymm, m128
-        /// Evenly distributes cells from the leading source block across the target
-        /// 128x8:[0 1 2 3 4 5 6 7 8 9 A B C D E F] -> 256x16:[0 1 2 3 4 5 6 7 8 9 A B C D E F]
-        /// 16:8 -> 16
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<ushort> vloadblock(in ConstBlock128<byte> src, out Vector256<ushort> dst)
-        {
-            dst = v16u(ConvertToVector256Int16(constptr(in src.Head)));
-            return dst;
-        }
 
         /// <summary>
         /// VPMOVZXWD ymm, m128

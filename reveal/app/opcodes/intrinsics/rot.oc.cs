@@ -14,11 +14,17 @@ namespace Z0
     partial class inxoc
     {
 
-        public static Vector128<byte> rotl_128x16_pattern()
-            => PatternData.rotl(n128, n16);
+        public static Vector128<byte> vrotlx_n8(Vector128<byte> x)
+            => dinx.vrotlx(x, n8);
 
-        public static Vector128<byte> rotl_128x32_pattern()
-            => PatternData.rotl(n128, n32);
+        public static Vector128<byte> vrotlx_n16(Vector128<byte> x)
+            => dinx.vrotlx(x, n16);
+
+        public static Vector128<ulong> vrotlx_128(Vector128<ulong> x)
+            => dinx.vrotlx(x, 8);
+
+        public static Vector128<ulong> vrotlx_7(Vector128<ulong> x)
+            => dinx.vrotlx(x, n7);
 
         public static Vector128<byte> rotl_g128x8u(Vector128<byte> src, byte offset)
             => ginx.vrotl(src,offset);

@@ -12,9 +12,118 @@ namespace Z0
     
     using static zfunc;
     using static HexConst;
+    using static As;
 
     public static class PatternData
     {
+        
+        /// <summary>
+        /// Loads a 128-bit pattern described by a readonly bytespan
+        /// </summary>
+        /// <param name="n">The vector width selector</param>
+        /// <param name="src">The pattern data source</param>
+        /// <typeparam name="T">The target vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector128<T> load<T>(N128 n, ReadOnlySpan<byte> src)
+            where T : unmanaged
+                => vgeneric<T>(ginx.vload(n, in head(src)));
+
+        /// <summary>
+        /// Loads a 128-bit pattern described by a readonly bytespan
+        /// </summary>
+        /// <param name="n">The vector width selector</param>
+        /// <param name="src">The pattern data source</param>
+        /// <typeparam name="T">The target vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> load(N128 n, ReadOnlySpan<byte> src)
+            => load<byte>(n,src);
+
+        /// <summary>
+        /// Loads a 256-bit pattern described by a readonly bytespan
+        /// </summary>
+        /// <param name="n">The vector width selector</param>
+        /// <param name="src">The pattern data source</param>
+        /// <typeparam name="T">The target vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> load<T>(N256 n, ReadOnlySpan<byte> src)
+            where T : unmanaged
+                => vgeneric<T>(ginx.vload(n, in head(src)));
+
+        /// <summary>
+        /// Loads a 256-bit pattern described by a readonly bytespan
+        /// </summary>
+        /// <param name="n">The vector width selector</param>
+        /// <param name="src">The pattern data source</param>
+        /// <typeparam name="T">The target vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<byte> load(N256 n, ReadOnlySpan<byte> src)
+            => load<byte>(n,src);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> increments<T>(N128 n)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
+                return load<T>(n,Inc128x8u);
+            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
+                return load<T>(n,Inc128x16u);
+            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
+                return load<T>(n,Inc128x32u);
+            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
+                return load<T>(n,Inc128x64u);
+            else
+                throw unsupported<T>();
+        }
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> increments<T>(N256 n)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
+                return load<T>(n,Inc256x8u);
+            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
+                return load<T>(n,Inc256x16u);
+            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
+                return load<T>(n,Inc256x32u);
+            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
+                return load<T>(n,Inc256x64u);
+            else
+                throw unsupported<T>();
+        }
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> decrements<T>(N128 n)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
+                return load<T>(n,Dec128x8u);
+            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
+                return load<T>(n,Dec128x16u);
+            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
+                return load<T>(n,Dec128x32u);
+            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
+                return load<T>(n,Dec128x64u);
+            else
+                throw unsupported<T>();
+        }
+
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> decrements<T>(N256 n)
+            where T : unmanaged
+        {            
+            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
+                return load<T>(n,Dec256x8u);
+            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
+                return load<T>(n,Dec256x16u);
+            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
+                return load<T>(n,Dec256x32u);
+            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
+                return load<T>(n,Dec256x64u);
+            else
+                throw unsupported<T>();
+        }
+
         /// <summary>
         /// Creates a vector that decribes a lo/hi lane merge permutation
         /// For example, if X = [A E B F | C G D H] then the lane merge pattern P will
@@ -26,9 +135,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return ginx.vload<T>(n256,LaneMerge256x8u);
+                return load<T>(n256,LaneMerge256x8u);
             else if(typeof(T) == typeof(ushort))
-                return ginx.vload<T>(n256,LaneMerge256x16u);
+                return load<T>(n256,LaneMerge256x16u);
             else 
                 return default;
         }
@@ -42,41 +151,26 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return ginx.vload<T>(n,ClearAlt256x8u);
+                return load<T>(n,ClearAlt256x8u);
             else if(typeof(T) == typeof(ushort))
-                return ginx.vload<T>(n,ClearAlt256x16u);
+                return load<T>(n,ClearAlt256x16u);
             else 
                 return default;
         }
 
-        [MethodImpl(Inline)]
-        public static Vector128<T> increments<T>(N128 n)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return ginx.vload<T>(n,Inc128x8u);
-            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return ginx.vload<T>(n,Inc128x16u);
-            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
-                return ginx.vload<T>(n,Inc128x32u);
-            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return ginx.vload<T>(n,Inc128x64u);
-            else
-                throw unsupported<T>();
-        }
 
         [MethodImpl(Inline)]
         public static Vector128<T> uints<T>(N128 n)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return ginx.vload<T>(n,Units_128x8u);
+                return load<T>(n,Units128x8u);
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return ginx.vload<T>(n,Units_128x16u);
+                return load<T>(n,Units128x16u);
             else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
-                return ginx.vload<T>(n,Units_128x32u);
+                return load<T>(n,Units128x32u);
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return ginx.vload<T>(n,Units_128x64u);
+                return load<T>(n,Units128x64u);
             else
                 throw unsupported<T>();
         }
@@ -86,76 +180,28 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return ginx.vload<T>(n,Units_256x8u);
+                return load<T>(n,Units256x8u);
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return ginx.vload<T>(n,Units_256x16u);
+                return load<T>(n,Units256x16u);
             else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
-                return ginx.vload<T>(n,Units_256x32u);
+                return load<T>(n,Units256x32u);
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return ginx.vload<T>(n,Units_256x64u);
+                return load<T>(n,Units256x64u);
             else
                 throw unsupported<T>();
         }
 
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> increments<T>(N256 n)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return ginx.vload<T>(n,Inc256x8u);
-            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return ginx.vload<T>(n,Inc256x16u);
-            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
-                return ginx.vload<T>(n,Inc256x32u);
-            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return ginx.vload<T>(n,Inc256x64u);
-            else
-                throw unsupported<T>();
-        }
-
-        [MethodImpl(Inline)]
-        public static Vector128<T> decrements<T>(N128 n)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return ginx.vload<T>(n,Dec128x8u);
-            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return ginx.vload<T>(n,Dec128x16u);
-            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
-                return ginx.vload<T>(n,Dec128x32u);
-            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return ginx.vload<T>(n,Dec128x64u);
-            else
-                throw unsupported<T>();
-        }
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> decrements<T>(N256 n)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return ginx.vload<T>(n,Dec256x8u);
-            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return ginx.vload<T>(n,Dec256x16u);
-            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
-                return ginx.vload<T>(n,Dec256x32u);
-            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return ginx.vload<T>(n,Dec256x64u);
-            else
-                throw unsupported<T>();
-        }
 
         [MethodImpl(Inline)]
         public static Vector128<byte> byteswap<W>(N128 n, W w = default)
             where W : unmanaged, ITypeNat
         {
             if(typeof(W) == typeof(N16))
-                return ginx.vload(n, BSwap_128x16u);
+                return load<byte>(n, ByteSwap128x16u);
             else if(typeof(W) == typeof(N32))
-                return ginx.vload(n, BSwap_128x32u);
+                return load<byte>(n, ByteSwap128x32u);
             else if(typeof(W) == typeof(N64))
-                return ginx.vload(n, BSwap_128x64u);
+                return load<byte>(n, ByteSwap128x64u);
             else
                 throw unsupported<W>();            
         }
@@ -165,11 +211,11 @@ namespace Z0
             where W : unmanaged, ITypeNat
         {
             if(typeof(W) == typeof(N16))
-                return ginx.vload(n, BSwap_256x16u);
+                return load<byte>(n, BSwap256x16u);
             else if(typeof(W) == typeof(N32))
-                return ginx.vload(n, BSwap_256x32u);
+                return load<byte>(n, BSwap256x32u);
             else if(typeof(W) == typeof(N64))
-                return ginx.vload(n, BSwap_256x64u);
+                return load<byte>(n, BSwap256x64u);
             else
                 throw unsupported<W>();            
         }
@@ -220,51 +266,51 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector256<byte> blendspec(N256 n, N8 width, bit odd)
-            => ginx.vload(n,odd ? BlendSpec_Odd_256x8 : BlendSpec_Even_256x8);
+            => load<byte>(n,odd ? BlendSpec_Odd_256x8 : BlendSpec_Even_256x8);
 
         [MethodImpl(Inline)]
         static Vector256<byte> blendspec(N256 n, N16 width, bit odd)
-            => ginx.vload(n,odd ? BlendSpec_Odd_256x16 : BlendSpec_Even_256x16);
+            => load<byte>(n,odd ? BlendSpec_Odd_256x16 : BlendSpec_Even_256x16);
 
         [MethodImpl(Inline)]
         static Vector256<byte> blendspec(N256 n, N32 width, bit odd)
-            => ginx.vload(n,odd ? BlendSpec_Odd_256x32 : BlendSpec_Even_256x32);
+            => load<byte>(n,odd ? BlendSpec_Odd_256x32 : BlendSpec_Even_256x32);
 
         [MethodImpl(Inline)]
         static Vector256<byte> blendspec(N256 n, N64 width, bit odd)
-            => ginx.vload(n,odd ? BlendSpec_Odd_256x64 : BlendSpec_Even_256x64);
+            => load<byte>(n,odd ? BlendSpec_Odd_256x64 : BlendSpec_Even_256x64);
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotl(N128 n, N8 offset)
-            => ginx.vload(n, RotL8_128x8u);
+            => load<byte>(n, RotL8_128x8u);
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotl(N128 n, N16 offset)
-            => ginx.vload(n,RotL16_128x8u);
+            => load<byte>(n,RotL16_128x8u);
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotl(N128 n, N24 offset)
-            => ginx.vload(n,RotL24_128x8u);
+            => load<byte>(n,RotL24_128x8u);
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotl(N128 n, N32 offset)
-            => ginx.vload(n,RotL32_128x8u);
+            => load<byte>(n,RotL32_128x8u);
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotl(N128 n, N40 offset)
-            => ginx.vload(n,RotL40_128x8u);
+            => load<byte>(n,RotL40_128x8u);
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotl(N128 n, N48 offset)
-            => ginx.vload(n,RotL48_128x8u);
+            => load<byte>(n,RotL48_128x8u);
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotr(N128 n, N8 offset)
-            => ginx.vload(n,RotR8_128x8u);
+            => load<byte>(n,RotR8_128x8u);
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotr(N128 n, N16 offset)
-            => ginx.vload(n,RotR16_128x8u);
+            => load<byte>(n,RotR16_128x8u);
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotr(N128 n, N24 offset)
@@ -458,26 +504,26 @@ namespace Z0
         /// <summary>
         /// Shuffle pattern that, when applied, swaps the byte-level representation of 16-bit unsigned integers
         /// </summary>
-        static ReadOnlySpan<byte> BSwap_128x16u
+        static ReadOnlySpan<byte> ByteSwap128x16u
             => new byte[16]{1,0,3,2,5,4,7,6,9,8,B,A,D,C,F,E};
 
         /// <summary>
         /// Shuffle pattern that, when applied, swaps the byte-level representation of 32-bit unsigned integers
         /// </summary>
-        static ReadOnlySpan<byte> BSwap_128x32u
+        static ReadOnlySpan<byte> ByteSwap128x32u
             => new byte[16]{3,2,1,0,7,6,5,4,B,A,9,8,F,E,D,C};
 
         /// <summary>
         /// Shuffle pattern that, when applied, swaps the byte-level representation of 64-bit unsigned integers
         /// </summary>
-        static ReadOnlySpan<byte> BSwap_128x64u
+        static ReadOnlySpan<byte> ByteSwap128x64u
             => new byte[16]{7,6,5,4,3,2,1,0,F,E,D,C,B,A,9,8};
 
 
         /// <summary>
         /// Shuffle pattern that, when applied, swaps the byte-level representation of 16-bit unsigned integers
         /// </summary>
-        static ReadOnlySpan<byte> BSwap_256x16u
+        static ReadOnlySpan<byte> BSwap256x16u
             => new byte[32]{
                 1,0,3,2,5,4,7,6,9,8,B,A,D,C,F,E,
                 1,0,3,2,5,4,7,6,9,8,B,A,D,C,F,E
@@ -486,7 +532,7 @@ namespace Z0
         /// <summary>
         /// Shuffle pattern that, when applied, swaps the byte-level representation of 32-bit unsigned integers
         /// </summary>
-        static ReadOnlySpan<byte> BSwap_256x32u
+        static ReadOnlySpan<byte> BSwap256x32u
             => new byte[32]{
                 3,2,1,0,7,6,5,4,B,A,9,8,F,E,D,C,
                 3,2,1,0,7,6,5,4,B,A,9,8,F,E,D,C
@@ -496,7 +542,7 @@ namespace Z0
         /// <summary>
         /// Shuffle pattern that, when applied, swaps the byte-level representation of 64-bit unsigned integers
         /// </summary>
-        static ReadOnlySpan<byte> BSwap_256x64u
+        static ReadOnlySpan<byte> BSwap256x64u
             => new byte[32]{
                 7,6,5,4,3,2,1,0,F,E,D,C,B,A,9,8,
                 7,6,5,4,3,2,1,0,F,E,D,C,B,A,9,8
@@ -590,38 +636,38 @@ namespace Z0
                 0,0,0,0,0,0,0,0,  
             };
 
-        static ReadOnlySpan<byte> Units_128x8u
+        static ReadOnlySpan<byte> Units128x8u
             => new byte[16]{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
 
-        static ReadOnlySpan<byte> Units_128x16u
+        static ReadOnlySpan<byte> Units128x16u
             => new byte[16]{1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0};
 
-        static ReadOnlySpan<byte> Units_128x32u
+        static ReadOnlySpan<byte> Units128x32u
             => new byte[16]{1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0};
 
-        static ReadOnlySpan<byte> Units_128x64u
+        static ReadOnlySpan<byte> Units128x64u
             => new byte[16]{1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0};
 
-       static ReadOnlySpan<byte> Units_256x8u
+       static ReadOnlySpan<byte> Units256x8u
             => new byte[32]{
                 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
                 };
 
-        static ReadOnlySpan<byte> Units_256x16u
+        static ReadOnlySpan<byte> Units256x16u
             => new byte[32]{
                 1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,
                 1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0
                 };
 
 
-        static ReadOnlySpan<byte> Units_256x32u
+        static ReadOnlySpan<byte> Units256x32u
             => new byte[32]{
                 1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,
                 1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0
                 };
 
-        static ReadOnlySpan<byte> Units_256x64u
+        static ReadOnlySpan<byte> Units256x64u
             => new byte[32]{
                 1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
                 1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0

@@ -27,24 +27,24 @@
 // ~ Functions
 // ~ --------------------------------------------------------------------------
 // ~ [vcompact, vinflate]
-// ~ 16:8 <-> 16
-// ~ 16:8 <-> 32
+// ~ 16:8 <-> 16 | Packs 2 128x16 vectors into 1 128x8 vector and the inverse
+// ~ 16:8 <-> 32 
 // ~ 32:8 <-> 32
-// ~ 32:8 <-> 16
+// ~ 32:8 <-> 16 | Packs 2 256x16 vectors int 1 256x8 vector and the inverse
 // ~ 16:8 <-> 16
 // ~ 8:16 <-> 32
 // ~ 16x16 <-> 32
 // ~ 4:32 <-> 64
 // ~ 8:32 <-> 64
 // ~
-// ~ vmovblock
-// ~ 2:8 -> 64
-// ~ 4:8 -> 32
-// ~ 4:8 -> 64
-// ~ 8:8 -> 16
-// ~ 8:8 -> 32
-// ~ 16:8 -> 16
-// ~ 2:16 -> 64
+// ~ vloadblock
+// ~ 2:8 -> 64  | Projects 2 8-bit values onto a 128x64 vector
+// ~ 4:8 -> 32  | Projects 4 8-bit values onto a 128x32 vector
+// ~ 4:8 -> 64  | Projects 4 8-bit values onto a 256x64 vector
+// ~ 8:8 -> 16  | Projects 8 8-bit values onto a 128x16 vector
+// ~ 8:8 -> 32  | Projects 8 8-bit values onto a 256x32 vector
+// ~ 16:8 -> 16 | Projects 8 8-bit values onto a 256x16 vector
+// ~ 2:16 -> 64 | Projects 2 16-bit values onto a 128x64 vector
 // ~ 4:16 -> 32
 // ~ 4:16 -> 64
 // ~ 8:16 -> 32

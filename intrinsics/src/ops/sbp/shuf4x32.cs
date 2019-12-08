@@ -56,6 +56,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<uint> vshuf4x32(Vector256<uint> src, Arrange4 spec)
             => Shuffle(src, (byte)spec);
+
+ 
     }
 
 }

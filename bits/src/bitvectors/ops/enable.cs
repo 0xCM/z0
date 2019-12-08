@@ -51,5 +51,25 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 enable(BitVector64 x, int index)
             => BitMask.enable(x, index);
+
+        /// <summary>
+        /// Enables a bit if it is disabled
+        /// </summary>
+        /// <param name="index">The position of the bit to enable</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> enable<T>(BitVector<T> x, int index)
+            where T : unmanaged
+                => gbits.enable(x.data,index);
+
+        /// <summary>
+        /// Enables a bit if it is disabled
+        /// </summary>
+        /// <param name="index">The position of the bit to enable</param>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> enable<N,T>(BitVector<N,T> x, int index)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gbits.enable(x.data,index);
+
     }
 }

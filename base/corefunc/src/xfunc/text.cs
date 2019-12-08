@@ -640,7 +640,7 @@ namespace Z0
         }    
 
         /// <summary>
-        /// Creates a new string by weaving a specified character between each character in a source string
+        /// Creates a new string by weaving a specified character between each character in the source
         /// </summary>
         /// <param name="src">The source string</param>
         /// <param name="c">The character to intersperse</param>
@@ -651,6 +651,22 @@ namespace Z0
             {
                 sb.Append(item);
                 sb.Append(c);
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Creates a new string by weaving a substring between each character in the source
+        /// </summary>
+        /// <param name="src">The source string</param>
+        /// <param name="sep">The value to intersperse</param>
+        public static string Intersperse(this string src, string sep)
+        {
+            var sb = text();
+            foreach(var item in src)
+            {
+                sb.Append(item);
+                sb.Append(sep);
             }
             return sb.ToString();
         }

@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Defines a 32-bit grid sans dimensional content
+    /// Defines a 32-bit grid
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     public readonly ref struct BitGrid32<T>

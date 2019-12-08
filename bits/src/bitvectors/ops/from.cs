@@ -266,65 +266,6 @@ namespace Z0
         public static BitVector64 from(N64 n, BitString src)
             => src.TakeUInt64();
 
-        /// <summary>
-        /// Creates a vector from a primal source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 from(N128 n, byte src)
-            => from(n,(ulong)src);
-
-        /// <summary>
-        /// Creates a vector from a primal source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 from(N128 n, ushort src)
-            => from(n,(ulong)src);
-
-        /// <summary>
-        /// Creates a vector from a primal source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 from(N128 n, uint src)
-            => from(n,(ulong)src);
-
-        /// <summary>
-        /// Creates a vector from a primal source value
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitVector128 from(N128 n, ulong lo)
-            => new BitVector128(lo,0);
-
-        /// <summary>
-        /// Creates a vector from two unsigned 64-bit integers
-        /// </summary>
-        /// <param name="src">The source bitstring</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 from(N128 n, uint x0, uint x1, uint x2, uint x3)
-            => new BitVector128(x0,x1,x2,x3);
-
-        /// <summary>
-        /// Creates a vector from two unsigned 64-bit integers
-        /// </summary>
-        /// <param name="src">The source bitstring</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 from(N128 n, ulong lo, ulong hi)
-            => new BitVector128(lo,hi);
-
-        /// <summary>
-        /// Creates a vector from a bitstring
-        /// </summary>
-        /// <param name="src">The source bitstring</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 from(N128 n, BitString src)
-        {
-            var x0 = src.TakeUInt64(0);            
-            var x1 = src.Length > 64 ? src.TakeUInt64(64) : 0ul;
-            return from(n,x0, x1);
-        }
-
         [MethodImpl(Inline)]
         public static BitVector128<N,T> from<N,T>(BitString src, N128 n = default, T zero = default)
             where T : unmanaged   

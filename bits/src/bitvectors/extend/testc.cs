@@ -49,5 +49,19 @@ namespace Z0
             where T : unmanaged
                 => gmath.eq(gmath.and(gmath.maxval<T>(), src.data), gmath.maxval<T>());
 
+        /// <summary>
+        /// Returns true of all bits are enabled, false otherwise
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static bit TestC<N,T>(this BitVector<N,T> src, N n = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gmath.eq(gmath.and(gmath.maxval<T>(), src.data), gmath.maxval<T>());
+
+        [MethodImpl(Inline)]
+        public static bit TestC<N,T>(this BitVector128<N,T> src)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => ginx.vtestc(src.data);
     }
 }

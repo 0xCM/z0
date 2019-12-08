@@ -6,12 +6,50 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    
+    using System.Runtime.Intrinsics;
+
     using static zfunc;
     using static HexConst;
 
     public class t_vblend : t_vinx<t_vblend>
     {
+        
+        public void valignr_examples()
+        {
+            void example1()
+            {
+                var n = n128;
+                var x = ginx.vbroadcast(n, (byte)1);
+                var y = ginx.vbroadcast(n, (byte)2);
+                Trace($"x{n}", x.Format());
+                Trace($"y{n}", y.Format());                
+                Trace("valignr/3",ginx.valignr(x,y, 3).Format());
+                Trace("valignr/4",ginx.valignr(x,y, 4).Format());
+                Trace("valignr/5",ginx.valignr(x,y, 5).Format());
+                Trace("valignr/6",ginx.valignr(x,y, 6).Format());
+                Trace("valignr/7",ginx.valignr(x,y, 7).Format());
+                Trace("valignr/8",ginx.valignr(x,y, 8).Format());
+            }
+
+            void example2()
+            {
+                var n = n256;
+                var x = ginx.vbroadcast(n, (byte)1);
+                var y = ginx.vbroadcast(n, (byte)2);
+                Trace($"x{n}", x.Format(seplanes:true));
+                Trace($"y{n}", y.Format(seplanes:true));                
+                Trace("valignr/3",ginx.valignr(x,y, 3).Format(seplanes:true));
+                Trace("valignr/4",ginx.valignr(x,y, 4).Format(seplanes:true));
+                Trace("valignr/5",ginx.valignr(x,y, 5).Format(seplanes:true));
+                Trace("valignr/6",ginx.valignr(x,y, 6).Format(seplanes:true));
+                Trace("valignr/7",ginx.valignr(x,y, 7).Format(seplanes:true));
+                Trace("valignr/8",ginx.valignr(x,y, 8).Format(seplanes:true));
+            }
+
+            example1();
+            example2();
+        }
+
         public void vblend_permute()
         {
 
@@ -79,6 +117,7 @@ namespace Z0
 
         }
         
+
         
         public void vblend_8x16_basecases()
         {

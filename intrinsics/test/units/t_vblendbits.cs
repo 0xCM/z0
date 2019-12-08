@@ -17,9 +17,8 @@ namespace Z0
         public void vblendbits_basecases()
         {
             var n = n256;
-            //LRLRLRLR
-            //10101010
-            var mask =  dinx.vbroadcast(n, (byte)0b10101010);
+            var pattern = BitVector.natural(n8,(byte)0b10101010);
+            var mask =  dinx.vbroadcast(n, pattern);
             var zero = ginx.vzero<byte>(n);
             var ones =  ginx.vones<byte>(n);
             var blend = dinx.vblendbits(zero,ones,mask);

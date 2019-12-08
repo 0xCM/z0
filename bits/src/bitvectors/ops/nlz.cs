@@ -12,38 +12,6 @@ namespace Z0
 
     partial class BitVector
     {
-        /// <summary>
-        /// Counts the number of leading zero bits
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static int nlz<T>(BitVector<T> x)
-            where T : unmanaged
-                => gbits.nlz(x.data);
-
-        /// <summary>
-        /// Counts the number of leading zero bits
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static int nlz<N,T>(BitVector<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                =>  gbits.nlz(x.data) - x.Width;
-
-        /// <summary>
-        /// Counts the number of leading zero bits
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static int nlz<N,T>(BitVector128<N,T> x, N n = default)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-        {
-            // var cell = v64u(x.data,1);
-            // int width = natval(n);
-            // if(width < 64 || cell == 0)
-            //     cell = v64u(x.data,0);            
-            // return width - Bits.nlz(cell);
-            return default;
-        }
                 
         /// <summary>
         /// Counts the number of leading zero bits
@@ -81,17 +49,36 @@ namespace Z0
             => gbits.nlz(x.data);
 
         /// <summary>
-        /// Counts the number of leading zeros
+        /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline)]
-        public static int nlz(in BitVector128 x)
-        {
-            if(x.x1 == 0)
-                return 64 + gbits.nlz(x.x0);
-            else
-                return gbits.nlz(x.x1);
-        }
+        public static int nlz<T>(BitVector<T> x)
+            where T : unmanaged
+                => gbits.nlz(x.data);
 
+        /// <summary>
+        /// Counts the number of leading zero bits
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static int nlz<N,T>(BitVector<N,T> x)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                =>  gbits.nlz(x.data) - x.Width;
+
+        /// <summary>
+        /// Counts the number of leading zero bits
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static int nlz<N,T>(BitVector128<N,T> x, N n = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            // if(x.x1 == 0)
+            //     return 64 + gbits.nlz(x.x0);
+            // else
+            //     return gbits.nlz(x.x1);
+            return default;
+        }
 
     }
 }

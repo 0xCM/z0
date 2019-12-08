@@ -86,7 +86,7 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.BitVector<N,T>();
-                var y = BitVector.rev(x);
+                var y = BitVector.reverse(x);
                 var z = x.ToBitString().Reverse().ToBitVector<N,T>();
                 Claim.eq(y,z);
             }

@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> zerohi<T>(Vector128<T> src)
+        public static Vector128<T> vzerohi<T>(Vector128<T> src)
             where T : unmanaged
                 => MoveScalar(v64u(src)).As<ulong,T>();
 
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> zerohi<T>(Vector256<T> src)
+        public static Vector256<T> vzerohi<T>(Vector256<T> src)
             where T : unmanaged
                 => vinsert(vlo(src), default,0);
 

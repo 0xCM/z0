@@ -12,22 +12,6 @@ namespace Z0
 
     partial class BitVector
     {
-        /// <summary>
-        /// Counts the number of trailing zero bits
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static int ntz<T>(in BitVector<T> x)
-            where T : unmanaged
-                => gbits.ntz(x.data);
-
-        /// <summary>
-        /// Counts the number of trailing zero bits
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static int ntz<N,T>(in BitVector<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gbits.ntz(x.data);
 
         /// <summary>
         /// Counts the number of trailing zero bits
@@ -56,6 +40,23 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int ntz(BitVector64 x)
             => gbits.ntz(x.data);
+
+        /// <summary>
+        /// Counts the number of trailing zero bits
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static int ntz<T>(in BitVector<T> x)
+            where T : unmanaged
+                => gbits.ntz(x.data);
+
+        /// <summary>
+        /// Counts the number of trailing zero bits
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static int ntz<N,T>(in BitVector<N,T> x)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gbits.ntz(x.data);
 
         /// <summary>
         /// Counts the number of trailing zeros

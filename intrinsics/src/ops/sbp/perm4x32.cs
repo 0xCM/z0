@@ -23,17 +23,8 @@ namespace Z0
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vperm4x32(Vector128<byte> src, Perm4 spec)
-            => v8u(Shuffle(v32u(src),(byte)spec));
-
-        /// <summary>
-        /// __m128i _mm_shuffle_epi32 (__m128i a, int immediate) PSHUFD xmm, xmm/m128, imm8
-        /// </summary>
-        /// <param name="src">The content vector</param>
-        /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
-        public static Vector128<ushort> vperm4x32(Vector128<ushort> src, Perm4 spec)
-            => v16u(Shuffle(v32u(src),(byte)spec));
+        public static Vector128<uint> vperm4x32(Vector128<uint> src, Perm4 spec)
+            => Shuffle(src,(byte)spec);
 
         /// <summary>
         /// __m128i _mm_shuffle_epi32 (__m128i a, int immediate)PSHUFD xmm, xmm/m128, imm8
@@ -43,44 +34,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<int> vperm4x32(Vector128<int> src, Perm4 spec)
             => Shuffle(src,(byte)spec);
-
-        /// <summary>
-        /// __m128i _mm_shuffle_epi32 (__m128i a, int immediate) PSHUFD xmm, xmm/m128, imm8
-        /// </summary>
-        /// <param name="src">The content vector</param>
-        /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
-        public static Vector128<uint> vperm4x32(Vector128<uint> src, Perm4 spec)
-            => Shuffle(src,(byte)spec);
-
-        /// <summary>
-        /// __m128i _mm_shuffle_epi32 (__m128i a, int immediate) PSHUFD xmm, xmm/m128, imm8
-        /// </summary>
-        /// <param name="src">The content vector</param>
-        /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
-        public static Vector128<ulong> vperm4x32(Vector128<ulong> src, Perm4 spec)
-            => v64u(Shuffle(v32u(src),(byte)spec));
-
-        ///<summary>
-        /// __m256i _mm256_shuffle_epi32 (__m256i a, const int imm8) VPSHUFD ymm, ymm/m256, imm8
-        /// Shuffles 32-bit source segments within 128-bit lanes
-        /// </summary>
-        /// <param name="src">The content vector</param>
-        /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
-        public static Vector256<byte> vperm4x32(Vector256<byte> src, Perm4 spec)
-            => v8u(Shuffle(v32u(src), (byte)spec));
-
-        ///<summary>
-        /// __m256i _mm256_shuffle_epi32 (__m256i a, const int imm8) VPSHUFD ymm, ymm/m256, imm8
-        /// Shuffles 32-bit source segments within 128-bit lanes
-        /// </summary>
-        /// <param name="src">The content vector</param>
-        /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
-        public static Vector256<ushort> vperm4x32(Vector256<ushort> src, Perm4 spec)
-            => v16u(Shuffle(v32u(src), (byte)spec));
 
         ///<summary>
         /// __m256i _mm256_shuffle_epi32 (__m256i a, const int imm8) VPSHUFD ymm, ymm/m256, imm8
@@ -102,14 +55,5 @@ namespace Z0
         public static Vector256<uint> vperm4x32(Vector256<uint> src, Perm4 spec)
             => Shuffle(src, (byte)spec);
 
-        ///<summary>
-        /// __m256i _mm256_shuffle_epi32 (__m256i a, const int imm8) VPSHUFD ymm, ymm/m256, imm8
-        /// Shuffles 32-bit source segments within 128-bit lanes
-        /// </summary>
-        /// <param name="src">The content vector</param>
-        /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
-        public static Vector256<ulong> vperm4x32(Vector256<ulong> src, Perm4 spec)
-            => v64u(Shuffle(v32u(src), (byte)spec));
     }
 }

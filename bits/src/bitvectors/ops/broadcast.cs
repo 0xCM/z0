@@ -59,16 +59,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BitVector128 broadcast(N128 n, uint a)
-            => new BitVector128(a,a,a,a);
-
-        [MethodImpl(Inline)]
-        public static BitVector128 broadcast(N128 n, ulong a)
-            => new BitVector128(a,a);
-
-        [MethodImpl(Inline)]
-        public static BitVector128 broadcast(N128 n, bit b)
-            => b ? BitVector128.Ones : BitVector128.Zero;
+        public static BitVector128<N,T> broadcast<N,T>(N128 w, T a, N n = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => ginx.vbroadcast(w,a);
 
     }
 

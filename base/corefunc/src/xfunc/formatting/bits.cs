@@ -223,24 +223,24 @@ namespace Z0
                     => src.ToBitString().Format(tlz, specifier, blockWidth ?? bitsize<T>(), blocksep ,rowWidth);
 
         /// <summary>
-        /// Block-formats the vector, e.g. [01010101 01010101 ... 01010101] where the size of each block is the bit-width of a component
+        /// Block-formats the vector, e.g. [01010101 01010101 ... 01010101] where by default the size of each block is the bit-width of a component
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]   
-        public static string FormatBitBlocks<T>(this Vector128<T> src)
+        public static string FormatBitBlocks<T>(this Vector128<T> src, int? blocksize = null)
             where T : unmanaged        
-                => bracket(src.ToBitString().Format(false, false, bitsize<T>(), AsciSym.Space,null));
+                => bracket(src.ToBitString().Format(false, false, blocksize ?? bitsize<T>(), AsciSym.Space,null));
 
         /// <summary>
-        /// Block-formats the vector, e.g. [01010101 01010101 ... 01010101] where the size of each block is the bit-width of a component
+        /// Block-formats the vector, e.g. [01010101 01010101 ... 01010101] where default the size of each block is the bit-width of a component
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]   
-        public static string FormatBitBlocks<T>(this Vector256<T> src)
+        public static string FormatBitBlocks<T>(this Vector256<T> src, int? blocksize = null)
             where T : unmanaged        
-                => bracket(src.ToBitString().Format(false, false, bitsize<T>(), AsciSym.Space,null));
+                => bracket(src.ToBitString().Format(false, false, blocksize ?? bitsize<T>(), AsciSym.Space,null));
 
     }
 }

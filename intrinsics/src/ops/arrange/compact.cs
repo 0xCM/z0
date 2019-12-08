@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
+    using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static zfunc;
 
     partial class dinx
     {   
-
         // ~ 16x16w <-> 16x8w
         // ~ 16:8 <-> 16
         // ~ ------------------------------------------------------------------
@@ -57,6 +57,16 @@ namespace Z0
         // ~ 32x16w <-> 32x8w
         // ~ 32:8 <-> 16
         // ~ ------------------------------------------------------------------
+
+        /// <summary>
+        /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8) VPERMQ ymm, ymm/m256, imm8
+        /// Permutes 4 64-bit segments of the source vector, across lanes, per the perm spec
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="spec">The permutation spec</param>
+        [MethodImpl(Inline)]
+        static Vector256<byte> vperm4x64(Vector256<byte> x, Perm4 spec)
+            => Permute4x64(x.AsUInt64(), (byte)spec).AsByte(); 
 
         /// <summary>
         /// (16x16w,16x16w) -> 32x8w
@@ -189,6 +199,16 @@ namespace Z0
         // ~ 16x32w <-> 16x16w
         // ~ 16x16 <-> 32
         // ~ ------------------------------------------------------------------
+
+        /// <summary>
+        /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8) VPERMQ ymm, ymm/m256, imm8
+        /// Permutes 4 64-bit segments of the source vector, across lanes, per the perm spec
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="spec">The permutation spec</param>
+        [MethodImpl(Inline)]
+        static Vector256<ushort> vperm4x64(Vector256<ushort> x, Perm4 spec)
+            => Permute4x64(x.AsUInt64(), (byte)spec).AsUInt16(); 
 
         /// <summary>
         /// (8x32w,8x32w) -> 16x16w

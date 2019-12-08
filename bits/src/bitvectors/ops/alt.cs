@@ -13,28 +13,6 @@ namespace Z0
     partial class BitVector
     {
         /// <summary>
-        /// Creates a bitvector with uniformly alternating states where the state of 
-        /// the first bit is determine by a parity bit
-        /// </summary>
-        /// <param name="parity">The state of the first bit</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> alt<T>(bit parity)
-            where T : unmanaged
-                => parity ? convert<T>(x5555555555555555) : convert<T>(xAAAAAAAAAAAAAAAA);        
-
-        /// <summary>
-        /// Creates a bitvector with uniformly alternating states where the state of 
-        /// the first bit is determine by a parity bit
-        /// </summary>
-        /// <param name="parity">The state of the first bit</param>
-        /// <param name="n">The width selector</param>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> alt<N,T>(bit parity, N n = default)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => natural<N,T>(parity ? convert<T>(x5555555555555555) : convert<T>(xAAAAAAAAAAAAAAAA));        
-
-        /// <summary>
         /// Creates a bitvector with uniformly alternating states where the state of the
         /// first bit is determine by a specified parity bit
         /// </summary>
@@ -75,15 +53,26 @@ namespace Z0
             => parity ? x5555555555555555 : xAAAAAAAAAAAAAAAA;
 
         /// <summary>
-        /// Creates a bitvector with uniformly alternating states where the state of the
-        /// first bit is determine by a specified parity bit
+        /// Creates a bitvector with uniformly alternating states where the state of 
+        /// the first bit is determine by a parity bit
         /// </summary>
-        /// <param name="n">The width selector</param>
         /// <param name="parity">The state of the first bit</param>
         [MethodImpl(Inline)]
-        public static BitVector128 alt(N128 n, bit parity)
-            => parity ? (x5555555555555555,x5555555555555555) 
-                      : (xAAAAAAAAAAAAAAAA,xAAAAAAAAAAAAAAAA);
+        public static BitVector<T> alt<T>(bit parity)
+            where T : unmanaged
+                => parity ? convert<T>(x5555555555555555) : convert<T>(xAAAAAAAAAAAAAAAA);        
+
+        /// <summary>
+        /// Creates a bitvector with uniformly alternating states where the state of 
+        /// the first bit is determined by a parity bit
+        /// </summary>
+        /// <param name="parity">The state of the first bit</param>
+        /// <param name="n">The width selector</param>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> alt<N,T>(bit parity, N n = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => natural<N,T>(parity ? convert<T>(x5555555555555555) : convert<T>(xAAAAAAAAAAAAAAAA));        
 
     }
 }

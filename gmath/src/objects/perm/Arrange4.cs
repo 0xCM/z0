@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     public enum Arrange4 : byte
     {
-         /// <summary>
+        /// <summary>
         /// Identifies the first of four symbols
         /// </summary>
         A = Perm4.A,
@@ -37,6 +37,10 @@ namespace Z0
         /// </summary>
         D = Perm4.D,
 
+        ABCD = A | (B << 2) | (C << 4) | (D << 6),
+
+        DCBA = D | (C << 2) | (B << 4) | (A << 6),
+
         AAAA = A | (A << 2) | (A << 4) | (A << 6),
         
         BBBB = B | (B << 2) | (B << 4) | (B << 6),
@@ -47,6 +51,25 @@ namespace Z0
 
         AABB = A | (A<< 2) | (B << 4) | (B << 6),
 
-        DCBA = D | (C << 2) | (B << 4) | (A << 6),
+        BBAA = B | (B<< 2) | (A << 4) | (A << 6),
+
+
+   }
+
+   public enum Arrange2 : byte
+   {
+        A = 0b0,
+
+        B = 0b01,
+
+        C = 0b10,
+
+        D = 0b11,
+
+        AB = 0b1110_0100,    
+
+        BA = 0b0100_1110,
+
+
    }
 }

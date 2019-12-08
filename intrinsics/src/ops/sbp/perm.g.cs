@@ -14,10 +14,30 @@ namespace Z0
 
     partial class ginx
     {
+        /// <summary>
+        /// Permutes 4 128-bit source lanes from 2 256-bit vectors as described by the perm spec
+        /// </summary>
+        /// <param name="x">The first source vector</param>
+        /// <param name="y">The second source vector</param>
+        /// <param name="spec">The perm spec</param>
+        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vpermd<T>(Vector256<T> x, Perm8Spec spec)
+        public static Vector256<T> vperm2x128<T>(Vector256<T> x, Vector256<T> y, Perm2x4 spec)
             where T : unmanaged
-                => vperm8x32(x, vload(n256, in head(spec.AsSpan<uint>())));
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return vperm2x128_u(x,y,spec);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return vperm2x128_i(x,y,spec);
+            else 
+                return vperm2x128_f(x,y,spec);
+        }
 
         /// <summary>
         /// Applies a cross-lane permutation over 8 32-bit segments in the source vector as indicated by the perm spec
@@ -29,13 +49,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vperm8x32(vcast8u(x), spec));
+                return vgeneric<T>(v8u(dinx.vperm8x32(v32u(x), spec)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vperm8x32(vcast16u(x),spec));
+                return vgeneric<T>(v16u(dinx.vperm8x32(v32u(x), spec)));
             else if(typeof(T) == typeof(uint))
                 return vgeneric<T>(dinx.vperm8x32(vcast32u(x), spec));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vperm8x32(vcast64u(x), spec));
+                return vgeneric<T>(v64u(dinx.vperm8x32(v32u(x), spec)));
             else
                 throw unsupported<T>();
         }
@@ -64,42 +84,16 @@ namespace Z0
                 return vperm4x64_f(x,spec);
         }
 
-        /// <summary>
-        /// Permutes 4 128-bit source lanes from 2 256-bit vectors as described by the perm spec
-        /// </summary>
-        /// <param name="x">The first source vector</param>
-        /// <param name="y">The second source vector</param>
-        /// <param name="spec">The perm spec</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<T> vperm2x128<T>(Vector256<T> x, Vector256<T> y, Perm2x4 spec)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vperm2x128_u(x,y,spec);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vperm2x128_i(x,y,spec);
-            else 
-                return vperm2x128_f(x,y,spec);
-        }
-
- 
         [MethodImpl(Inline)]
         static Vector256<T> vperm4x64_u<T>(Vector256<T> x, Perm4 spec)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vperm4x64(vcast8u(x), spec));
+                return vgeneric<T>(v8u(dinx.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vperm4x64(vcast16u(x), spec));
+                return vgeneric<T>(v16u(dinx.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vperm4x64(vcast32u(x), spec));
+                return vgeneric<T>(v32u(dinx.vperm4x64(v64u(x), spec)));
             else
                 return vgeneric<T>(dinx.vperm4x64(vcast64u(x), spec));
         }
@@ -109,11 +103,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vperm4x64(vcast8i(x), spec));
+                return vgeneric<T>(v8i(dinx.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vperm4x64(vcast16i(x), spec));
+                return vgeneric<T>(v16i(dinx.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vperm4x64(vcast32i(x), spec));
+                return vgeneric<T>(v32i(dinx.vperm4x64(v64u(x), spec)));
             else
                 return vgeneric<T>(dinx.vperm4x64(vcast64i(x), spec));
         }
@@ -123,7 +117,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(fpinx.vperm4x64(vcast32f(x), spec));
+                return vgeneric<T>(v32f(fpinx.vperm4x64(v64f(x), spec)));
             else if(typeof(T) == typeof(double))
                 return vgeneric<T>(fpinx.vperm4x64(vcast64f(x), spec));
             else

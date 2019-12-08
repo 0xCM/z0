@@ -22,7 +22,7 @@ namespace Z0
                 var v1 = Random.BitVector(n8);
                 var v2 = mat * v1;
                 var v3 = v1.Replicate();
-                v3 = BitVector.rev(v3);
+                v3 = BitVector.reverse(v3);
                 Claim.eq(v3,v2);
             }
         }
@@ -52,7 +52,7 @@ namespace Z0
                 var v1 = Random.BitVector(n64);
                 var v2 = mat * v1;
                 var v3 = v1.Replicate();
-                v3 = BitVector.rev(v3);
+                v3 = BitVector.reverse(v3);
                 Claim.eq(v3,v2);
             }
         }

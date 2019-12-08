@@ -1,23 +1,23 @@
-// 2019-12-05 18:50:58:899
-Vector128<uint> pack(NatSpan<N128,bit> src)
+// 2019-12-07 18:40:03:165
+Vector128<uint> pack(NatBlock<N128,bit> src)
 {
     IL_0000: call Z0.N1 zfunc::get_n1()
     IL_0005: call Z0.N32 zfunc::get_n32()
     IL_000A: ldarga.s src
-    IL_000C: call Z0.NatSpan`2<Z0.N128,System.UInt32> Z0.NatSpan`2<Z0.N128,Z0.bit>::As<System.UInt32>()
+    IL_000C: call Z0.NatBlock`2<Z0.N128,System.UInt32> Z0.NatBlock`2<Z0.N128,Z0.bit>::As<System.UInt32>()
     IL_0011: stloc.0
     IL_0012: ldloca.s V_0
-    IL_0014: call System.UInt32& zfunc::head<Z0.N128,System.UInt32>(Z0.NatSpan`2<Z0.N128,System.UInt32>&)
+    IL_0014: call System.UInt32& zfunc::head<Z0.N128,System.UInt32>(Z0.NatBlock`2<Z0.N128,System.UInt32>&)
     IL_0019: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.SimdPack::pack(Z0.N1,Z0.N32,System.UInt32&)
     IL_001E: ret
 
 }
-Vector128<uint> pack(N1 width, NatSpan<N128,uint> src)
+Vector128<uint> pack(N1 width, NatBlock<N128,uint> src)
 {
     IL_0000: ldarg.0
     IL_0001: call Z0.N32 zfunc::get_n32()
     IL_0006: ldarga.s src
-    IL_0008: call System.UInt32& zfunc::head<Z0.N128,System.UInt32>(Z0.NatSpan`2<Z0.N128,System.UInt32>&)
+    IL_0008: call System.UInt32& zfunc::head<Z0.N128,System.UInt32>(Z0.NatBlock`2<Z0.N128,System.UInt32>&)
     IL_000D: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.SimdPack::pack(Z0.N1,Z0.N32,System.UInt32&)
     IL_0012: ret
 

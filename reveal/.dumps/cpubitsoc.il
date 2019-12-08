@@ -1,55 +1,4 @@
-// 2019-12-05 18:50:57:933
-Vector128<byte> makemask_128x8u(BitVector16 src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.CpuBits::vmakemask(Z0.BitVector16)
-    IL_0006: ret
-
-}
-Vector128<byte> makemask_128x8u_literal()
-{
-    IL_0000: ldc.i4 64764
-    IL_0005: call Z0.BitVector16 Z0.BitVector16::op_Implicit(System.UInt16)
-    IL_000A: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.CpuBits::vmakemask(Z0.BitVector16)
-    IL_000F: ret
-
-}
-Vector256<byte> makemask_256x8u(BitVector32 src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.CpuBits::vmakemask(Z0.BitVector32)
-    IL_0006: ret
-
-}
-Vector256<byte> makemask_256x8u_literal()
-{
-    IL_0000: ldc.i4 -252645184
-    IL_0005: call Z0.BitVector32 Z0.BitVector32::op_Implicit(System.UInt32)
-    IL_000A: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.CpuBits::vmakemask(Z0.BitVector32)
-    IL_000F: ret
-
-}
-Vector128<byte> makemask_g128x8u(BitVector16 src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.gvbits::vmakemask<System.Byte>(Z0.BitVector16)
-    IL_0006: ret
-
-}
-Vector128<ushort> makemask_g128x16u(BitVector16 src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.gvbits::vmakemask<System.UInt16>(Z0.BitVector16)
-    IL_0006: ret
-
-}
-Vector256<uint> makemask_g256x32u(BitVector32 src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.gvbits::vmakemask<System.UInt32>(Z0.BitVector32)
-    IL_0006: ret
-
-}
+// 2019-12-07 18:40:02:092
 byte butterfly_8x1(byte x)
 {
     IL_0000: call Z0.N1 zfunc::get_n1()
@@ -396,6 +345,29 @@ BitVector32 alt_32()
     IL_000F: ret
 
 }
+BitVector<uint> alt_32g()
+{
+    IL_0000: call Z0.bit zfunc::get_off()
+    IL_0005: call Z0.BitVector`1<System.UInt32> Z0.BitVector::alt<System.UInt32>(Z0.bit)
+    IL_000A: ret
+
+}
+bit dot_32g(BitVector<uint> x, BitVector<uint> y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.BitVector::dot<System.UInt32>(Z0.BitVector`1<System.UInt32>,Z0.BitVector`1<System.UInt32>)
+    IL_0007: ret
+
+}
+BitMatrix<uint> oprod_1(BitVector32 x, BitVector32 y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitMatrix`1<System.UInt32> Z0.BitVector::oprod(Z0.BitVector32,Z0.BitVector32)
+    IL_0007: ret
+
+}
 BitMatrix<uint> oprod_2(BitVector<uint> x, BitVector<uint> y)
 {
     IL_0000: ldarg.0
@@ -427,33 +399,6 @@ ReadOnlySpan<Char> bitchars_8u(byte value)
     IL_0000: ldarg.0
     IL_0001: call System.ReadOnlySpan`1<System.Char> Z0.BitStore::bitchars(System.Byte)
     IL_0006: ret
-
-}
-void bitchars_8u(byte value, Span<Char> dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldc.i4.0
-    IL_0003: call System.Void Z0.BitStore::bitchars<System.Byte>(System.Byte,System.Span`1<System.Char>,System.Int32)
-    IL_0008: ret
-
-}
-void bitchars_16u(ushort value, Span<Char> dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldc.i4.0
-    IL_0003: call System.Void Z0.BitStore::bitchars<System.UInt16>(System.UInt16,System.Span`1<System.Char>,System.Int32)
-    IL_0008: ret
-
-}
-void bitchars_32u(uint value, Span<Char> dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldc.i4.0
-    IL_0003: call System.Void Z0.BitStore::bitchars<System.UInt32>(System.UInt32,System.Span`1<System.Char>,System.Int32)
-    IL_0008: ret
 
 }
 void bitchars_64u(ulong value, Span<Char> dst)

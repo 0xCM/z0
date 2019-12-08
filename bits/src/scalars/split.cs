@@ -13,17 +13,90 @@ namespace Z0
     partial class Bits
     {                        
         /// <summary>
+        /// Partitions the source value into two parts predicated on an index
+        /// [1010 11111 0011] |> split 4 = [1010 1111] [0011]
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="index">The index that partitions the source</param>
+        /// <param name="x0">The lo partition</param>
+        /// <param name="x1">The hi partition</param>
+        [MethodImpl(Inline)]
+        public static void split(byte src, int index, out byte x0, out byte x1)
+        {
+            x1 = (byte)(src >> index);
+            x0 = (byte)(src & ((byte)Pow2.pow(index) - 1));
+        }
+
+        /// <summary>
+        /// Partitions the source value into two parts predicated on an index
+        /// [1010 11111 0011] |> split 4 = [1010 1111] [0011]
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="index">The index that partitions the source</param>
+        /// <param name="x0">The lo partition</param>
+        /// <param name="x1">The hi partition</param>
+        [MethodImpl(Inline)]
+        public static void split(ushort src, int index, out ushort x0, out ushort x1)
+        {
+            x1 = (ushort)(src >> index);
+            x0 = (ushort)(src & ((ushort)Pow2.pow(index) - 1));
+        }
+
+        /// <summary>
+        /// Partitions the source value into two parts predicated on an index
+        /// [1010 11111 0011] |> split 4 = [1010 1111] [0011]
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="index">The index that partitions the source</param>
+        /// <param name="x0">The lo partition</param>
+        /// <param name="x1">The hi partition</param>
+        [MethodImpl(Inline)]
+        public static void split(uint src, int index, out uint x0, out uint x1)
+        {
+            x1 = src >> index;
+            x0 =  src & ((uint)Pow2.pow(index) - 1);
+        }
+
+        /// <summary>
+        /// Partitions the source value into two parts predicated on an index
+        /// [1010 11111 0011] |> split 4 = [1010 1111] [0011]
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="index">The index that partitions the source</param>
+        /// <param name="x0">The lo partition</param>
+        /// <param name="x1">The hi partition</param>
+        [MethodImpl(Inline)]
+        public static void split(ulong src, int index, out ulong x0, out ulong x1)
+        {
+            x1 = src >> index;
+            x0 =  src & (Pow2.pow(index) - 1);
+        }
+
+        /// <summary>
         /// Partitions an 8-bit source upper and lower parts, each with an effective width of 4 bits
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="x0">Taken from bits 0-3 of the source value</param>
-        /// <param name="x1">Taken from bits 4-7 of the source value</param>
+        /// <param name="x0">Receives sourc bits [0..3]</param>
+        /// <param name="x1">Receives sourc bits [4..7]</param>
         [MethodImpl(Inline)]
         public static void split(byte src, out byte x0, out byte x1)
         {
             x0 = (byte)(src &0xF);
             x1 = (byte)(src >> 4);
         }        
+
+        /// <summary>
+        /// Partitions an 8-bit source value into upper and lower parts of effective width 4,
+        /// sending the lo part to the output parameter and returning the hi part
+        /// <param name="src">The source value</param>
+        /// <param name="x0">Receives source bits [0..3]</param>
+        [MethodImpl(Inline)]
+        public static byte split(byte src, out byte x0)
+        { 
+            x0 = (byte)(src & 0xF);
+            return (byte)(src >> 4);
+        }
+
 
         /// <summary>
         /// Partitions a 16-bit source value into upper and lower 8-bit parts
@@ -36,6 +109,18 @@ namespace Z0
         {
             x0 = (byte)src;
             x1 = (byte)(src >>8);
+        }
+
+        /// <summary>
+        /// Partitions a 16-bit source value into upper and lower 8-bit parts,
+        /// sending the lo part to the output parameter and returning the hi part
+        /// <param name="src">The source value</param>
+        /// <param name="x0">Receives source bits [0..7]</param>
+        [MethodImpl(Inline)]
+        public static byte split(ushort src, out byte x0)
+        { 
+            x0 = (byte)src;
+            return (byte)(src >> 8);
         }
 
         /// <summary>
@@ -52,6 +137,18 @@ namespace Z0
         }
 
         /// <summary>
+        /// Partitions a 64-bit source value into upper and lower 32-bit parts,
+        /// sending the lo part to the output parameter and returning the hi part
+        /// <param name="src">The source value</param>
+        /// <param name="x0">Receives source bits [0..31]</param>
+        [MethodImpl(Inline)]
+        public static ushort split(uint src, out ushort x0)
+        { 
+            x0 = (ushort)src;
+            return (ushort)(src >> 16);
+        }
+
+        /// <summary>
         /// Partitions a 64-bit source value into upper and lower 32-bit parts
         /// <param name="src">The source value</param>
         /// <param name="x0">Receives source bits [0..31]</param>
@@ -61,6 +158,18 @@ namespace Z0
         { 
             x0 = (uint)src;
             x1 = (uint)(src >> 32);
+        }
+
+        /// <summary>
+        /// Partitions a 64-bit source value into upper and lower 32-bit parts,
+        /// sending the lo part to the output parameter and returning the hi part
+        /// <param name="src">The source value</param>
+        /// <param name="x0">Receives source bits [0..31]</param>
+        [MethodImpl(Inline)]
+        public static uint split(ulong src, out uint x0)
+        { 
+            x0 = (uint)src;
+            return (uint)(src >> 32);
         }
 
         /// <summary>

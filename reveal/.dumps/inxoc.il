@@ -1,4 +1,4 @@
-// 2019-12-05 18:50:58:207
+// 2019-12-07 18:40:02:333
 bool vtestz_g128x16u(Vector128<ushort> src, Vector128<ushort> mask)
 {
     IL_0000: ldarg.0
@@ -338,6 +338,36 @@ Vector128<double> vadd_g128x64f(Vector128<double> lhs, Vector128<double> rhs)
     IL_0007: ret
 
 }
+Vector256<ushort> vmerge16(Vector128<ushort> x, Vector128<ushort> y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldc.i4 204
+    IL_0007: ldc.i4.s 51
+    IL_0009: call System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.dinx::vmerge(System.Runtime.Intrinsics.Vector128`1<System.UInt16>,System.Runtime.Intrinsics.Vector128`1<System.UInt16>,Z0.Blend8x16,Z0.Blend8x16)
+    IL_000E: ret
+
+}
+Vector256<uint> vmerge32(Vector128<uint> x, Vector128<uint> y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldc.i4.s 12
+    IL_0004: ldc.i4.s 12
+    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.dinx::vmerge(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>,Z0.Blend4x32,Z0.Blend4x32)
+    IL_000B: ret
+
+}
+Vector256<ulong> vmerge64(Vector128<ulong> x, Vector128<ulong> y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldc.i4.2
+    IL_0003: ldc.i4.1
+    IL_0004: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vmerge(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,Z0.Blend2x64,Z0.Blend2x64)
+    IL_0009: ret
+
+}
 Vector128<ulong> vreverse_128x64u(Vector128<ulong> x)
 {
     IL_0000: ldarg.0
@@ -359,20 +389,20 @@ Vector256<byte> vreverse_256x8u(Vector256<byte> x)
     IL_0006: ret
 
 }
-Vector128<byte> vrotlx_n8(Vector128<byte> x)
+Vector128<ulong> vsrlx_128(Vector128<ulong> x)
 {
     IL_0000: ldarg.0
-    IL_0001: call Z0.N8 zfunc::get_n8()
-    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.dinx::vrotlx(System.Runtime.Intrinsics.Vector128`1<System.Byte>,Z0.N8)
-    IL_000B: ret
+    IL_0001: ldc.i4.8
+    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vsrlx(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
+    IL_0007: ret
 
 }
-Vector128<ulong> vrotlx_8(Vector128<ulong> x)
+Vector256<ulong> vsrlx_256(Vector256<ulong> x)
 {
     IL_0000: ldarg.0
-    IL_0001: ldc.i4.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vrotlx(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Int32)
-    IL_0007: ret
+    IL_0001: ldc.i4.s 13
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vsrlx(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Byte)
+    IL_0008: ret
 
 }
 Vector128<short> vblend_128x16u_LLLLLLLL(Vector128<short> x, Vector128<short> y)
@@ -380,7 +410,7 @@ Vector128<short> vblend_128x16u_LLLLLLLL(Vector128<short> x, Vector128<short> y)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldc.i4.0
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.dinx::vblend16(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>,Z0.Blend8x16)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.dinx::vblend(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>,Z0.Blend8x16)
     IL_0008: ret
 
 }
@@ -389,7 +419,7 @@ Vector128<short> vblend_128x16u_RRRRRRRR(Vector128<short> x, Vector128<short> y)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldc.i4 255
-    IL_0007: call System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.dinx::vblend16(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>,Z0.Blend8x16)
+    IL_0007: call System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.dinx::vblend(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>,Z0.Blend8x16)
     IL_000C: ret
 
 }
@@ -398,7 +428,7 @@ Vector128<short> vblend_128x16u_LLLLRRRR(Vector128<short> x, Vector128<short> y)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldc.i4 240
-    IL_0007: call System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.dinx::vblend16(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>,Z0.Blend8x16)
+    IL_0007: call System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.dinx::vblend(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>,Z0.Blend8x16)
     IL_000C: ret
 
 }
@@ -407,7 +437,7 @@ Vector128<short> vblend_128x16u_RRRRLLLL(Vector128<short> x, Vector128<short> y)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldc.i4.s 15
-    IL_0004: call System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.dinx::vblend16(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>,Z0.Blend8x16)
+    IL_0004: call System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.dinx::vblend(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>,Z0.Blend8x16)
     IL_0009: ret
 
 }
@@ -416,7 +446,7 @@ Vector128<short> vblend_128x16u_LRLRLRLR(Vector128<short> x, Vector128<short> y)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldc.i4 170
-    IL_0007: call System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.dinx::vblend16(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>,Z0.Blend8x16)
+    IL_0007: call System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.dinx::vblend(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>,Z0.Blend8x16)
     IL_000C: ret
 
 }
@@ -425,7 +455,7 @@ Vector128<short> vblend_128x16u_RLRLRLRL(Vector128<short> x, Vector128<short> y)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldc.i4.s 85
-    IL_0004: call System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.dinx::vblend16(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>,Z0.Blend8x16)
+    IL_0004: call System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.dinx::vblend(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>,Z0.Blend8x16)
     IL_0009: ret
 
 }
@@ -550,11 +580,11 @@ Vector256<ulong> vcmplt_g256x64u(Vector256<ulong> x, Vector256<ulong> y)
     IL_0007: ret
 
 }
-Vector256<uint> avxpack1(NatSpan<N8,uint> src, int offset)
+Vector256<uint> avxpack1(NatBlock<N8,uint> src, int offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.AvxBitpack::pack(Z0.NatSpan`2<Z0.N8,System.UInt32>,System.Int32)
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.AvxBitpack::pack(Z0.NatBlock`2<Z0.N8,System.UInt32>,System.Int32)
     IL_0007: ret
 
 }
@@ -1010,42 +1040,6 @@ Vector256<ulong> vconvert_xspan32u_v256x64u(Block128<uint> src, out Vector256<ul
     IL_0010: ret
 
 }
-Vector256<byte> valignr256x4n(Vector256<byte> x, Vector256<byte> y)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.N4 zfunc::get_n4()
-    IL_0007: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.dinx::valignr<Z0.N4>(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Runtime.Intrinsics.Vector256`1<System.Byte>,Z0.N4)
-    IL_000C: ret
-
-}
-Vector256<byte> valignr256x4(Vector256<byte> x, Vector256<byte> y)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldc.i4.4
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.dinx::valignr(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Runtime.Intrinsics.Vector256`1<System.Byte>,Z0.VAlignR)
-    IL_0008: ret
-
-}
-Vector128<byte> valignr128x4n(Vector128<byte> x, Vector128<byte> y)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.N4 zfunc::get_n4()
-    IL_0007: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.dinx::valignr<Z0.N4>(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Runtime.Intrinsics.Vector128`1<System.Byte>,Z0.N4)
-    IL_000C: ret
-
-}
-Vector128<byte> valignr128x4(Vector128<byte> x, Vector128<byte> y)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldc.i4.4
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.dinx::valignr(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Runtime.Intrinsics.Vector128`1<System.Byte>,Z0.VAlignR)
-    IL_0008: ret
-
-}
 Vector128<byte> packus(Vector128<ushort> x, Vector128<ushort> y)
 {
     IL_0000: ldarg.0
@@ -1065,35 +1059,35 @@ Vector256<byte> packus(Vector256<ushort> x, Vector256<ushort> y)
 Vector128<byte> ones_128x8u()
 {
     IL_0000: call Z0.N128 zfunc::get_n128()
-    IL_0005: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.ginx::vpones<System.Byte>(Z0.N128)
+    IL_0005: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.ginx::vones<System.Byte>(Z0.N128)
     IL_000A: ret
 
 }
 Vector128<ulong> ones_128x64u()
 {
     IL_0000: call Z0.N128 zfunc::get_n128()
-    IL_0005: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.ginx::vpones<System.UInt64>(Z0.N128)
+    IL_0005: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.ginx::vones<System.UInt64>(Z0.N128)
     IL_000A: ret
 
 }
 Vector256<byte> ones_256x8u()
 {
     IL_0000: call Z0.N256 zfunc::get_n256()
-    IL_0005: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.ginx::vpones<System.Byte>(Z0.N256)
+    IL_0005: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.ginx::vones<System.Byte>(Z0.N256)
     IL_000A: ret
 
 }
 Vector256<ulong> ones_256x64u()
 {
     IL_0000: call Z0.N256 zfunc::get_n256()
-    IL_0005: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.ginx::vpones<System.UInt64>(Z0.N256)
+    IL_0005: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.ginx::vones<System.UInt64>(Z0.N256)
     IL_000A: ret
 
 }
 Vector256<double> ones_256x64f()
 {
     IL_0000: call Z0.N256 zfunc::get_n256()
-    IL_0005: call System.Runtime.Intrinsics.Vector256`1<System.Double> Z0.ginx::vpones<System.Double>(Z0.N256)
+    IL_0005: call System.Runtime.Intrinsics.Vector256`1<System.Double> Z0.ginx::vones<System.Double>(Z0.N256)
     IL_000A: ret
 
 }
@@ -1114,14 +1108,6 @@ Vector128<ushort> vbswap_128x16u(Vector128<ushort> x)
     IL_0000: ldarg.0
     IL_0001: call System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.dinx::vbyteswap(System.Runtime.Intrinsics.Vector128`1<System.UInt16>)
     IL_0006: ret
-
-}
-Vector256<sbyte> vperm4x64(Vector256<sbyte> x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4 228
-    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.SByte> Z0.dinx::vperm4x64(System.Runtime.Intrinsics.Vector256`1<System.SByte>,Z0.Perm4)
-    IL_000B: ret
 
 }
 Vector256<int> vpermvar8x32_256x32i(Vector256<int> src, Vector256<uint> spec)
@@ -1148,20 +1134,36 @@ Vector256<byte> vpermvar32x8_256x8u(Vector256<byte> a, Vector256<byte> spec)
     IL_0007: ret
 
 }
-Vector128<byte> rotl_128x16_pattern()
+Vector128<byte> vrotlx_n8(Vector128<byte> x)
 {
-    IL_0000: call Z0.N128 zfunc::get_n128()
-    IL_0005: call Z0.N16 zfunc::get_n16()
-    IL_000A: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.PatternData::rotl(Z0.N128,Z0.N16)
-    IL_000F: ret
+    IL_0000: ldarg.0
+    IL_0001: call Z0.N8 zfunc::get_n8()
+    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.dinx::vrotlx(System.Runtime.Intrinsics.Vector128`1<System.Byte>,Z0.N8)
+    IL_000B: ret
 
 }
-Vector128<byte> rotl_128x32_pattern()
+Vector128<byte> vrotlx_n16(Vector128<byte> x)
 {
-    IL_0000: call Z0.N128 zfunc::get_n128()
-    IL_0005: call Z0.N32 zfunc::get_n32()
-    IL_000A: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.PatternData::rotl(Z0.N128,Z0.N32)
-    IL_000F: ret
+    IL_0000: ldarg.0
+    IL_0001: call Z0.N16 zfunc::get_n16()
+    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.dinx::vrotlx(System.Runtime.Intrinsics.Vector128`1<System.Byte>,Z0.N16)
+    IL_000B: ret
+
+}
+Vector128<ulong> vrotlx_128(Vector128<ulong> x)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.8
+    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vrotlx(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
+    IL_0007: ret
+
+}
+Vector128<ulong> vrotlx_7(Vector128<ulong> x)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.N7 zfunc::get_n7()
+    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vrotlx(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,Z0.N7)
+    IL_000B: ret
 
 }
 Vector128<byte> rotl_g128x8u(Vector128<byte> src, byte offset)

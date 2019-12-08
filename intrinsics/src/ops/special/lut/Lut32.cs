@@ -5,35 +5,51 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     
     using static zfunc;
     
-    [StructLayout(LayoutKind.Sequential, Size = Size)]
-    public struct Lut32
+    /// <summary>
+    /// Defines content for a parallel 32-way lookup
+    /// </summary>
+    public readonly struct Lut32
     {
-        public const int Size = 32;
+        readonly Vector256<byte> data;
 
-        Lut16 Lo;
+        [MethodImpl(Inline)]
+        public static implicit operator Vector256<byte>(Lut32 src)
+            => src.data;
 
-        Lut16 Hi;
+        [MethodImpl(Inline)]
+        internal Lut32(Vector256<byte> data)
+            => this.data = data;
 
-        public Vector256<byte> Vector
+        [MethodImpl(Inline)]
+        internal Lut32(in ConstBlock256<byte> data)
+            => this.data = data.LoadVector();
+
+        public byte this[int i]
         {
             [MethodImpl(Inline)]
-            get => LUT.LoadVector(in this);
+            get => data.GetElement(i);
 
             [MethodImpl(Inline)]
-            set => LUT.From(value, ref this);
+            set => data.WithElement(i,value);
         }
 
-        public Span<byte> Bytes
+        public Vector256<byte> Data
         {
             [MethodImpl(Inline)]
-            get => LUT.AsSpan(in this);
+            get => data;
+        }
+
+        public int Count
+        {
+            [MethodImpl(Inline)]
+            get => 32;
         }
     }
+
 }

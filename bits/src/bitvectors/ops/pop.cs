@@ -52,13 +52,6 @@ namespace Z0
         public static uint pop(BitVector64 x)
             => gbits.pop(x.data);
 
-        /// <summary>
-        /// Counts the number of enabled bits in the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static uint pop(in BitVector128 x)
-            => gbits.pop(x.x0) + gbits.pop(x.x1);
  
          /// <summary>
         /// Counts the number of enabled bits in the source vector

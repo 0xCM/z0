@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="shift">The number of bits the shift leftward</param>
         /// <remarks>Taken from http://programming.sirrida.de</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vsllx(Vector128<ulong> src, int shift)        
+        public static Vector128<ulong> vsllx(Vector128<ulong> src, byte shift)        
         {
             if(shift >= 64)
                 return vsll(vbsll(src, 8), shift - 64);     
@@ -33,15 +33,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<byte> vsllx(Vector128<byte> src, int shift)        
+        public static Vector128<byte> vsllx(Vector128<byte> src, byte shift)        
             => v8u(vsllx(v64u(src), shift));
         
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vsllx(Vector128<ushort> src, int shift)        
+        public static Vector128<ushort> vsllx(Vector128<ushort> src, byte shift)        
             => v16u(vsllx(v64u(src), shift));
 
         [MethodImpl(Inline)]
-        public static Vector128<uint> vsllx(Vector128<uint> src, int shift)        
+        public static Vector128<uint> vsllx(Vector128<uint> src, byte shift)        
             => v32u(vsllx(v64u(src), shift));
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="shift">The number of bits the shift leftward</param>
         /// <remarks>Taken from http://programming.sirrida.de</remarks>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vsllx(Vector256<ulong> src, int shift)        
+        public static Vector256<ulong> vsllx(Vector256<ulong> src, byte shift)        
         {
             if(shift >= 64)
                 return vsll(vbsll(src, 8), shift - 64);     
@@ -64,15 +64,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<byte> vsllx(Vector256<byte> src, int shift)        
+        public static Vector256<byte> vsllx(Vector256<byte> src, byte shift)        
             => v8u(vsllx(v64u(src), shift));
         
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vsllx(Vector256<ushort> src, int shift)        
+        public static Vector256<ushort> vsllx(Vector256<ushort> src, byte shift)        
             => v16u(vsllx(v64u(src), shift));
 
         [MethodImpl(Inline)]
-        public static Vector256<uint> vsllx(Vector256<uint> src, int shift)        
+        public static Vector256<uint> vsllx(Vector256<uint> src, byte shift)        
             => v32u(vsllx(v64u(src), shift));
 
     }

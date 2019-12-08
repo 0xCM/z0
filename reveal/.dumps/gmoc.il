@@ -1,4 +1,4 @@
-// 2019-12-05 18:50:58:592
+// 2019-12-07 18:40:02:822
 sbyte sar_g8i(sbyte lhs, int offset)
 {
     IL_0000: ldarg.0
@@ -133,7 +133,7 @@ ulong select_2(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.gmath::merge<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.gmath::blend<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }

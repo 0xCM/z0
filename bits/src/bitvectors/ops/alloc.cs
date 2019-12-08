@@ -15,26 +15,6 @@ namespace Z0
     partial class BitVector
     {
 
-        /// <summary>
-        /// Allocates a generic bitvector
-        /// </summary>
-        /// <param name="n">The number of bits to store</param>
-        /// <typeparam name="T">The primal storage type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<T> alloc<T>(T fill = default)
-            where T : unmanaged
-                => BitVector.generic(fill);
-
-        /// <summary>
-        /// Allocates a natural bitvector
-        /// </summary>
-        /// <param name="n">The number of bits to store</param>
-        /// <typeparam name="T">The primal storage type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> alloc<N,T>(N n = default, T fill = default)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => new BitVector<N, T>(fill);
 
         /// <summary>
         /// Allocates a 4-bit primal bitvector
@@ -77,11 +57,25 @@ namespace Z0
             => default;
 
         /// <summary>
-        /// Allocates a primal 128-bit bitvector
+        /// Allocates a generic bitvector
         /// </summary>
-        /// <param name="n">The width discriminator</param>
+        /// <param name="n">The number of bits to store</param>
+        /// <typeparam name="T">The primal storage type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector128 alloc(N128 n)
-            => default;
+        public static BitVector<T> alloc<T>(T fill = default)
+            where T : unmanaged
+                => BitVector.generic(fill);
+
+        /// <summary>
+        /// Allocates a natural bitvector
+        /// </summary>
+        /// <param name="n">The number of bits to store</param>
+        /// <typeparam name="T">The primal storage type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> alloc<N,T>(N n = default, T fill = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => new BitVector<N, T>(fill);
+
     }
 }

@@ -22,15 +22,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vcrosspack(Vector128<byte> x, Vector128<byte> y, out Vector128<byte> lo, out Vector128<byte> hi)
         {
-            lo = vunpacklo(x,y);
-            hi = vunpackhi(x,y);
+            lo = vmergelo(x,y);
+            hi = vmergehi(x,y);
         }
 
         [MethodImpl(Inline)]
         public static void vcrosspack(Vector128<ushort> x, Vector128<ushort> y, out Vector128<ushort> lo, out Vector128<ushort> hi)
         {
-            lo = vunpacklo(x,y);
-            hi = vunpackhi(x,y);
+            lo = vmergelo(x,y);
+            hi = vmergehi(x,y);
         }
 
         /// <summary>
@@ -43,8 +43,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vcrosspack(Vector128<uint> x, Vector128<uint> y, out Vector128<uint> lo, out Vector128<uint> hi)
         {
-            lo = vunpacklo(x,y);
-            hi = vunpackhi(x,y);
+            lo = vmergelo(x,y);
+            hi = vmergehi(x,y);
         }
 
 
@@ -58,29 +58,29 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vcrosspack(Vector128<ulong> x, Vector128<ulong> y, out Vector128<ulong> lo, out Vector128<ulong> hi)
         {
-            lo = vunpacklo(x,y);
-            hi = vunpackhi(x,y);
+            lo = vmergelo(x,y);
+            hi = vmergehi(x,y);
         }
 
         [MethodImpl(Inline)]
         public static void vcrosspack(Vector256<byte> x, Vector256<byte> y, out Vector256<byte> lo, out Vector256<byte> hi)
         {
-            lo = vunpacklo(x,y);
-            hi = vunpackhi(x,y);
+            lo = vmergelo(x,y);
+            hi = vmergehi(x,y);
         }
 
         [MethodImpl(Inline)]
         public static void vcrosspack(Vector256<ushort> x, Vector256<ushort> y, out Vector256<ushort> lo, out Vector256<ushort> hi)
         {
-            lo = vunpacklo(x,y);
-            hi = vunpackhi(x,y);
+            lo = vmergelo(x,y);
+            hi = vmergehi(x,y);
         }
 
         [MethodImpl(Inline)]
         public static void vcrosspack(Vector256<uint> x, Vector256<uint> y, out Vector256<uint> lo, out Vector256<uint> hi)
         {
-            lo = vunpacklo(x,y);
-            hi = vunpackhi(x,y);
+            lo = vmergelo(x,y);
+            hi = vmergehi(x,y);
         }
 
         /// <summary>
@@ -93,8 +93,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vcrosspack(Vector256<ulong> x, Vector256<ulong> y, out Vector256<ulong> lo, out Vector256<ulong> hi)
         {
-            lo = vunpacklo(x,y);
-            hi = vunpackhi(x,y);
+            lo = vmergelo(x,y);
+            hi = vmergehi(x,y);
         }
 
     }

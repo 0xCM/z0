@@ -15,16 +15,6 @@ namespace Z0
         /// Constructs a bitvector formed from the n most significant bits of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="n">The count of least significant bits</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> msbseg<T>(BitVector<T> x, int n)                
-            where T : unmanaged
-                => between(x, x.Width - n, x.Width - 1);                
-
-        /// <summary>
-        /// Constructs a bitvector formed from the n most significant bits of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
         /// <param name="n">The count of most significant bits</param>
         [MethodImpl(Inline)]
         public static BitVector4 msbseg(BitVector4 x, int n)                
@@ -65,5 +55,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 msbseg(BitVector64 x, int n)                
             => BitVector.between(x.data, x.Width - n, x.Width - 1);
+ 
+        /// <summary>
+        /// Constructs a bitvector formed from the n most significant bits of the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="n">The count of least significant bits</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> msbseg<T>(BitVector<T> x, int n)                
+            where T : unmanaged
+                => between(x, x.Width - n, x.Width - 1);                
+
+
     }
 }

@@ -8,7 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
     using System.Runtime.Intrinsics.X86;
-    
+
+    using static System.Runtime.Intrinsics.X86.Avx;
+    using static System.Runtime.Intrinsics.X86.Avx2;
+    using static System.Runtime.Intrinsics.X86.Sse2;
+
     using static zfunc;
 
     partial class dinx
@@ -20,28 +24,24 @@ namespace Z0
         /// <param name="shift">The number of bits to shift rightward</param>
         /// <remarks>Taken from http://programming.sirrida.de</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vsrlx(Vector128<ulong> src, int shift)        
+        public static Vector128<ulong> vsrlx(Vector128<ulong> src, byte shift)        
         {
             if(shift >= 64)
                 return vsrl(vbsrl(src, 8), shift - 64);     
             else
-            {
-                var x = vbsrl(src, 8);
-                var y = vsrl(src, shift);
-                return vor(y, vsll(x, 64 - shift));
-            }
+                return vor(vsrl(src, shift), vsll(vbsrl(src, 8), 64 - shift));
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<byte> vsrlx(Vector128<byte> src, int shift)        
+        public static Vector128<byte> vsrlx(Vector128<byte> src, byte shift)        
             => v8u(vsrlx(v64u(src), shift));
         
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vsrlx(Vector128<ushort> src, int shift)        
+        public static Vector128<ushort> vsrlx(Vector128<ushort> src, byte shift)        
             => v16u(vsrlx(v64u(src), shift));
 
         [MethodImpl(Inline)]
-        public static Vector128<uint> vsrlx(Vector128<uint> src, int shift)        
+        public static Vector128<uint> vsrlx(Vector128<uint> src, byte shift)        
             => v32u(vsrlx(v64u(src), shift));
 
         /// <summary>
@@ -51,28 +51,24 @@ namespace Z0
         /// <param name="shift">The number of bits to shift rightward</param>
         /// <remarks>Taken from http://programming.sirrida.de</remarks>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vsrlx(Vector256<ulong> src, int shift)        
+        public static Vector256<ulong> vsrlx(Vector256<ulong> src, byte shift)        
         {
             if(shift >= 64)
                 return vsrl(vbsrl(src, 8), shift - 64);     
             else
-            {
-                var x = vbsrl(src, 8);
-                var y = vsrl(src, shift);
-                return vor(y, vsll(x, 64 - shift));
-            }
+                return vor(vsrl(src, shift), vsll(vbsrl(src, 8), 64 - shift));
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<byte> vsrlx(Vector256<byte> src, int shift)        
+        public static Vector256<byte> vsrlx(Vector256<byte> src, byte shift)        
             => v8u(vsrlx(v64u(src), shift));
         
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vsrlx(Vector256<ushort> src, int shift)        
+        public static Vector256<ushort> vsrlx(Vector256<ushort> src, byte shift)        
             => v16u(vsrlx(v64u(src), shift));
 
         [MethodImpl(Inline)]
-        public static Vector256<uint> vsrlx(Vector256<uint> src, int shift)        
+        public static Vector256<uint> vsrlx(Vector256<uint> src, byte shift)        
             => v32u(vsrlx(v64u(src), shift));
     }
 }

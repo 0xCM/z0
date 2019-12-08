@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector4 Reverse(this BitVector4 src)
-            => BitVector.rev(src);
+            => BitVector.reverse(src);
 
         /// <summary>
         /// Reverses the vector bits
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector8 Reverse(this BitVector8 src)
-            => BitVector.rev(src);
+            => BitVector.reverse(src);
 
         /// <summary>
         /// Reverses the vector bits
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector16 Reverse(this BitVector16 src)
-            => BitVector.rev(src);
+            => BitVector.reverse(src);
 
         /// <summary>
         /// Reverses the vector bits
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector32 Reverse(this BitVector32 src)
-            => BitVector.rev(src);
+            => BitVector.reverse(src);
 
         /// <summary>
         /// Reverses the vector bits
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 Reverse(this BitVector64 src)
-            => BitVector.rev(src);
+            => BitVector.reverse(src);
 
         /// <summary>
         /// Reverses a copy of the source vector
@@ -62,7 +62,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> Reverse<T>(this BitVector<T> src)
             where T : unmanaged
-                => BitVector.rev(src);
+                => BitVector.reverse(src);
 
         /// <summary>
         /// Reverses the bits in the source vector
@@ -73,6 +73,6 @@ namespace Z0
         public static BitVector<N,T> Reverse<N,T>(this BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BitVector.rev(x);
+                => BitVector.reverse(x);
     }
 }

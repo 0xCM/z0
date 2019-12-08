@@ -15,69 +15,41 @@ namespace Z0
     /// <summary>
     /// Defines content for a parallel 16-way lookup
     /// </summary>
-    /// <remarks>
-    /// Each struct data member specifies 1 of 16 identifying keys; ultimately, this data structure
-    /// provides a view over 16 bytes of data that is convenient for expressing bit-level lookup problems
-    /// </remarks>
-    [StructLayout(LayoutKind.Sequential, Size = Size)]
-    public struct Lut16
+    public readonly struct Lut16
     {
-        public const int Size = 16;
+        readonly Vector128<byte> data;
 
-        LookupKey key0;
+        [MethodImpl(Inline)]
+        public static implicit operator Vector128<byte>(Lut16 src)
+            => src.data;
 
-        LookupKey key1;
+        [MethodImpl(Inline)]
+        internal Lut16(Vector128<byte> data)
+            => this.data = data;
 
-        LookupKey key2;
+        [MethodImpl(Inline)]
+        internal Lut16(in ConstBlock128<byte> data)
+            => this.data = data.LoadVector();
 
-        LookupKey key3;
-
-        LookupKey key4;
-
-        LookupKey key5;
-
-        LookupKey key6;
-
-        LookupKey key7;
-         
-        LookupKey key8;
-
-        LookupKey key9;
-
-        LookupKey keyA;
-
-        LookupKey keyB;
-
-        LookupKey keyC;
-
-        LookupKey keyD;
-
-        LookupKey keyE;
-
-        LookupKey keyF;
-
-        public LookupKey this[LookupSlot key]
+        public byte this[int i]
         {
             [MethodImpl(Inline)]
-            get => LUT.GetKey(in this, key);
+            get => data.GetElement(i);
 
             [MethodImpl(Inline)]
-            set => LUT.SetKey(ref this, key, value);
+            set => data.WithElement(i,value);
         }
 
-        public Vector128<byte> Vector
+        public Vector128<byte> Data
         {
             [MethodImpl(Inline)]
-            get => LUT.LoadVector(in this);
-
-            [MethodImpl(Inline)]
-            set => LUT.From(value, ref this);
+            get => data;
         }
 
-        public Span<byte> Bytes
+        public int Count
         {
             [MethodImpl(Inline)]
-            get => LUT.AsSpan(in this);
+            get => 16;
         }
     }
 }

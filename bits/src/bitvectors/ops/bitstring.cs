@@ -51,34 +51,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString bitstring(BitVector64 x)
             => BitString.scalar(x.Scalar);
-
-        /// <summary>
-        /// Converts the vector to a bitstring
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitString bitstring(BitVector128 x)
-            => BitString.scalar(x.x1) + BitString.scalar(x.x0);
-
-         /// <summary>
-        /// Converts the vector to a bistring representation
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="N">The bitvector width</typeparam>
-        /// <typeparam name="T">The storage cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitString bitstring<N,T>(in BitVector128<N,T> x)
-            where T : unmanaged   
-            where N : unmanaged, ITypeNat
-                => BitString.vector(x.data, x.Width);
-
-        /// <summary>
-        /// Converts the vector content to a bitring representation
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitString bitstring<N,T>(BitVector<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => BitString.scalar<T>(x.Scalar, x.Width);
         
         /// <summary>
         /// Extracts the represented data as a bitstring
@@ -95,5 +67,29 @@ namespace Z0
         public static BitString bitstring<T>(BitVector<T> src, int width)
             where T : unmanaged
                 => BitString.scalar<T>(src.Scalar, width);
+
+        /// <summary>
+        /// Converts the vector content to a bitring representation
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitString bitstring<N,T>(BitVector<N,T> x)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => BitString.scalar<T>(x.Scalar, x.Width);
+
+
+        /// <summary>
+        /// Converts the vector to a bistring representation
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="N">The bitvector width</typeparam>
+        /// <typeparam name="T">The storage cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitString bitstring<N,T>(in BitVector128<N,T> x)
+            where T : unmanaged   
+            where N : unmanaged, ITypeNat
+                => BitString.vector(x.data, x.Width);
+
+
     }
 }

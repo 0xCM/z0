@@ -101,15 +101,5 @@ namespace Z0
         public static bit parity(BitVector64 src)
             => odd(pop(src));
 
-        /// <summary>
-        /// Computes the parity of the source vector, which is 1 if an odd number of its components are enabled and 0 otherwise
-        /// </summary>
-        /// <remarks>
-        /// The parity function p:{0,1}x...x{0,1} -> {0,1} is a boolean function that attains the 
-        /// value 1 when an odd number of its input values are 1 and 0 otherwise.
-        /// </remarks>
-        [MethodImpl(Inline)]
-        public static bit parity(in BitVector128 src)
-            => odd(pop(src));
     }
 }

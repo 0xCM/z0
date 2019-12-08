@@ -78,7 +78,9 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<byte> vreverse(Vector256<byte> src)
-            => vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
+            => vshuf32x8(src, PatternData.decrements<byte>(n256));
+
+            //=> vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
 
         /// <summary>
         /// Reverses the source vector components
@@ -87,6 +89,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<sbyte> vreverse(Vector256<sbyte> src)
             => vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
+
 
         /// <summary>
         /// Reverses the source vector components
@@ -126,7 +129,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<long> vreverse(Vector256<long> src)
-            => vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
+            => vperm4x64(src,Perm4.DCBA); 
 
         /// <summary>
         /// Reverses the source vector components
@@ -134,7 +137,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vreverse(Vector256<ulong> src)
-            => vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
+            => vperm4x64(src,Perm4.DCBA);
 
         static Vector256<uint> MRev256u32 
             => vparts(n256, 7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);       

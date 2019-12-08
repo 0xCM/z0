@@ -34,7 +34,6 @@ namespace Z0
         public static BitString ToBitString(this BitVector16 src)
             => BitVector.bitstring(src);
 
-
         [MethodImpl(Inline)]
         public static BitString ToBitString(this BitVector32 src)
              => BitVector.bitstring(src);
@@ -46,40 +45,6 @@ namespace Z0
         public static BitString ToBitString(this BitVector64 x)
             => BitVector.bitstring(x);
 
-        /// <summary>
-        /// Converts the vector content to a bitring representation
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitString ToBitString<N,T>(this BitVector<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => BitVector.bitstring(x);
-
-
-        /// <summary>
-        /// Extracts the represented data as a bitstring
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitString ToBitString<T>(this BitVector<T> src)
-            where T : unmanaged
-                => BitVector.bitstring(src);
-
-        /// <summary>
-        /// Extracts the represented data as a bitstring truncated to a specified width
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitString ToBitString<T>(this BitVector<T> src, int width)
-            where T : unmanaged
-                => BitVector.bitstring(src,width);
-
-        /// <summary>
-        /// Converts the vector to a bitstring
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitString ToBitString<N,T>(this BitVector128<N,T> src)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => BitString.vector(src.data, src.Width);       
 
         /// <summary>
         /// Constructs a 4-bit bitvector from bitstring
@@ -122,6 +87,40 @@ namespace Z0
             => BitVector.from(n,src);
 
         /// <summary>
+        /// Converts the vector to a bitstring
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitString ToBitString<N,T>(this BitVector128<N,T> src)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BitString.vector(src.data, src.Width);       
+
+        /// <summary>
+        /// Converts the vector content to a bitring representation
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitString ToBitString<N,T>(this BitVector<N,T> x)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => BitVector.bitstring(x);
+
+        /// <summary>
+        /// Extracts the represented data as a bitstring
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitString ToBitString<T>(this BitVector<T> src)
+            where T : unmanaged
+                => BitVector.bitstring(src);
+
+        /// <summary>
+        /// Extracts the represented data as a bitstring truncated to a specified width
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitString ToBitString<T>(this BitVector<T> src, int width)
+            where T : unmanaged
+                => BitVector.bitstring(src,width);
+
+        /// <summary>
         /// Constructs a generic bitvector from bitstring
         /// </summary>
         /// <param name="src">The source value</param>
@@ -130,12 +129,10 @@ namespace Z0
             where T : unmanaged
                 => BitVector.generic<T>(src);
 
-
         [MethodImpl(Inline)]
         public static BitVector<N,T> ToBitVector<N,T>(this BitString src, N n = default, T t =default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => BitVector.natural<N,T>(src);
-
     }
 }

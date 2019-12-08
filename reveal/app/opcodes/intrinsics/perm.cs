@@ -15,8 +15,6 @@ namespace Z0
 
         public static Vector128<ushort> vbswap_128x16u(Vector128<ushort> x)
             => dinx.vbyteswap(x);
-        public static Vector256<sbyte> vperm4x64(Vector256<sbyte> x)
-            => dinx.vperm4x64(x, Perm4.ABCD);        
             
         public static Vector256<int> vpermvar8x32_256x32i(Vector256<int> src, Vector256<uint> spec)
             => dinx.vperm8x32(src,spec);

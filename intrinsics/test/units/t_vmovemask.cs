@@ -111,8 +111,8 @@ namespace Z0
                     if(BitMask.test(srcBlock[r], hibit))
                         mask = BitMask.enable(mask, r);
                 
-                var expect = mask.ToBitVector(bytes).ToBitString();
-                var actual = dinx.vtakemask(srcCpuVec).ToBitVector(bytes).ToBitString();
+                var expect = mask.ToBitVector().ToBitString();
+                var actual = dinx.vtakemask(srcCpuVec).ToBitVector().ToBitString();
                 Claim.eq(expect, actual);
             }
         }
@@ -159,7 +159,7 @@ namespace Z0
                     if(BitMask.test(srcSpan[r], 31))
                         BitVector.enable(mmExpect,r);
                 
-                var mmActual = fpinx.vmovemask(srcVector).ToBitVector(n32);
+                var mmActual = fpinx.vmovemask(srcVector).ToBitVector();
                 Claim.yea(mmExpect == mmActual);
             }
         }
@@ -178,7 +178,7 @@ namespace Z0
                     if(BitMask.test(srcSpan[r], 63))
                         BitVector.enable(mmExpect,r);
                 
-                var mmActual = fpinx.vmovemask(srcVector).ToBitVector(n32);
+                var mmActual = fpinx.vmovemask(srcVector).ToBitVector();
                 Claim.yea(mmExpect == mmActual);
             }
         }

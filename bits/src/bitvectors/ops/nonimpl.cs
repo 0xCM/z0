@@ -11,38 +11,6 @@ namespace Z0
 
     partial class BitVector
     {
-        /// <summary>
-        /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<T> nonimpl<T>(BitVector<T> x, BitVector<T> y)
-            where T : unmanaged
-                => gmath.nonimpl(x.Scalar, y.Scalar);
-
-        /// <summary>
-        /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
-        /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> nonimpl<N,T>(BitVector<N,T> x, BitVector<N,T> y)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gmath.nonimpl(x.Scalar, y.Scalar);
-
-        /// <summary>
-        /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
-        /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline)]
-        public static BitVector128<N,T> nonimpl<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => ginx.vnonimpl(x.data, y.data);
 
         /// <summary>
         /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
@@ -88,15 +56,39 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 nonimpl(BitVector64 x, BitVector64 y)
             => math.nonimpl(x.data, y.data);
- 
+
         /// <summary>
-        /// Computes the bitvector z: = ~(x ^ y) from bitvectors x and y
+        /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<T> nonimpl<T>(BitVector<T> x, BitVector<T> y)
+            where T : unmanaged
+                => gmath.nonimpl(x.Scalar, y.Scalar);
+
+        /// <summary>
+        /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
-        public static BitVector128 nonimpl(in BitVector128 x, in BitVector128 y)
-            => from(n128, gmath.nonimpl(x.x0, y.x0), gmath.nonimpl(x.x1,  y.x1));
+        public static BitVector<N,T> nonimpl<N,T>(BitVector<N,T> x, BitVector<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gmath.nonimpl(x.Scalar, y.Scalar);
+
+        /// <summary>
+        /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> nonimpl<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => ginx.vnonimpl(x.data, y.data);
 
     }
 }

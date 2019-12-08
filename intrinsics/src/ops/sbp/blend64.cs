@@ -46,6 +46,10 @@ namespace Z0
         public static Vector128<ulong> vblend(Vector128<ulong> x, Vector128<ulong> y, Blend2x64 spec)        
             => v64u(Blend(v64f(x), v64f(y), (byte)spec));
 
+        [MethodImpl(Inline)]
+        public static Vector128<ulong> vblend(Vector128<ulong> x, Vector128<ulong> y, byte spec)        
+            => v64u(Blend(v64f(x), v64f(y), spec));
+
         /// <summary>
         /// __m256d _mm256_blend_pd (__m256d a, __m256d b, const int imm8) VBLENDPD ymm, ymm, ymm/m256, imm8
         /// </summary>

@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public static Vector128<T> vrotlx<T>(Vector128<T> src, int shift)        
+        public static Vector128<T> vrotlx<T>(Vector128<T> src, byte shift)        
             where T : unmanaged
                 => vgeneric<T>(dinx.vrotlx(v64u(src), shift));
 
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public static Vector256<T> vrotlx<T>(Vector256<T> src, int shift)        
+        public static Vector256<T> vrotlx<T>(Vector256<T> src, byte shift)        
             where T : unmanaged
                 => vgeneric<T>(dinx.vrotlx(v64u(src), shift));
     }

@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="count">The number of bytes to shift</param>
         /// <typeparam name="T">THe primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> vbsrl<T>(Vector128<T> x, int count)
+        public static Vector128<T> vbsrl<T>(Vector128<T> x, byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="count">The number of bytes to shift</param>
         /// <typeparam name="T">THe primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vbsrl<T>(Vector256<T> x, int count)
+        public static Vector256<T> vbsrl<T>(Vector256<T> x, byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

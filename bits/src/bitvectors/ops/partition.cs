@@ -54,5 +54,35 @@ namespace Z0
             Bits.part64x8(src, bytes(dst));
             return dst;
         }
+
+        [MethodImpl(Inline)]
+        public static Span<BitVector<byte>> partition(BitVector<ushort> src, Span<BitVector<byte>> dst)
+        {
+            Bits.part16x8(src, bytes(dst));
+            return dst;
+        }
+
+
+        [MethodImpl(Inline)]
+        public static Span<BitVector<byte>> partition(BitVector<uint> src, Span<BitVector<byte>> dst)
+        {
+            Bits.part32x8(src, bytes(dst));
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static Span<BitVector<ushort>> partition(BitVector<uint> src, Span<BitVector<ushort>> dst)
+        {
+            Bits.part32x16(src,dst.AsUInt16());
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static Span<BitVector<byte>> partition(BitVector<ulong> src, Span<BitVector<byte>> dst)
+        {            
+            Bits.part64x8(src, bytes(dst));
+            return dst;
+        }
+
     }
 }

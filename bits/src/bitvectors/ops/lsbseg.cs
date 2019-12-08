@@ -14,14 +14,6 @@ namespace Z0
 
     partial class BitVector
     {
-        /// <summary>
-        /// Constructs a bitvector formed from the n lest significant bits of the current vector
-        /// </summary>
-        /// <param name="n">The count of least significant bits</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> lsbseg<T>(BitVector<T> x, int n)                
-            where T : unmanaged
-                => between(x, 0, n - 1);                
 
         /// <summary>
         /// Constructs a bitvector formed from the n lest significant bits of the current vector
@@ -62,5 +54,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 lsbseg(BitVector64 x, int n)                
             => between(x.data,0, n-1);
+
+
+        /// <summary>
+        /// Constructs a bitvector formed from the n lest significant bits of the source vector
+        /// </summary>
+        /// <param name="n">The count of least significant bits</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> lsbseg<T>(BitVector<T> x, int n)                
+            where T : unmanaged
+                => between(x, 0, n - 1);                
+
     }
 }

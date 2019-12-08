@@ -79,7 +79,6 @@ namespace Z0
         /// </summary>
         /// <param name="src"></param>
         /// <param name="shift"></param>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vsll(Vector256<ulong> src, Vector128<ulong> shift)
             => ShiftLeftLogical(src, shift);
@@ -103,7 +102,6 @@ namespace Z0
             var perm = ginx.vplanemerge<byte>();
             return vlo(vshuf32x8(a, perm));
         }
-
 
         /// <summary>
         /// Shifts each componet in the source vector leftwards by a specified number of bits

@@ -11,7 +11,6 @@ namespace Z0
 
     partial class BitVector
     {
-
         /// <summary>
         /// Computes  z := x ^ y from bitvectors x and y
         /// </summary>

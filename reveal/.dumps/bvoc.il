@@ -1,4 +1,4 @@
-// 2019-12-05 18:50:57:576
+// 2019-12-07 18:40:01:661
 Vector128<uint> vcompact(Vector128<ulong> x0, Vector128<ulong> x1, out Vector128<uint> dst)
 {
     IL_0000: ldarg.0
@@ -12,7 +12,7 @@ byte gather_d8u(byte src, byte mask)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Byte Z0.Bits::gather(System.Byte,System.Byte)
+    IL_0002: call System.Byte Z0.dinx::gather(System.Byte,System.Byte)
     IL_0007: ret
 
 }
@@ -20,7 +20,7 @@ byte gather_g8u(byte src, byte mask)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Byte Z0.gbits::gather<System.Byte>(System.Byte,System.Byte)
+    IL_0002: call System.Byte Z0.ginx::gather<System.Byte>(System.Byte,System.Byte)
     IL_0007: ret
 
 }
@@ -28,7 +28,7 @@ ushort gather_d16u(ushort src, ushort mask)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt16 Z0.Bits::gather(System.UInt16,System.UInt16)
+    IL_0002: call System.UInt16 Z0.dinx::gather(System.UInt16,System.UInt16)
     IL_0007: ret
 
 }
@@ -36,7 +36,7 @@ ushort gather_g16u(ushort src, ushort mask)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt16 Z0.gbits::gather<System.UInt16>(System.UInt16,System.UInt16)
+    IL_0002: call System.UInt16 Z0.ginx::gather<System.UInt16>(System.UInt16,System.UInt16)
     IL_0007: ret
 
 }
@@ -44,7 +44,7 @@ uint gather_d32u(uint src, uint mask)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt32 Z0.Bits::gather(System.UInt32,System.UInt32)
+    IL_0002: call System.UInt32 Z0.dinx::gather(System.UInt32,System.UInt32)
     IL_0007: ret
 
 }
@@ -52,7 +52,7 @@ uint gather_g32u(uint src, uint mask)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt32 Z0.gbits::gather<System.UInt32>(System.UInt32,System.UInt32)
+    IL_0002: call System.UInt32 Z0.ginx::gather<System.UInt32>(System.UInt32,System.UInt32)
     IL_0007: ret
 
 }
@@ -60,7 +60,7 @@ ulong gather_d64u(ulong src, ulong mask)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.Bits::gather(System.UInt64,System.UInt64)
+    IL_0002: call System.UInt64 Z0.dinx::gather(System.UInt64,System.UInt64)
     IL_0007: ret
 
 }
@@ -68,7 +68,7 @@ ulong gather_g64u(ulong src, ulong mask)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.gbits::gather<System.UInt64>(System.UInt64,System.UInt64)
+    IL_0002: call System.UInt64 Z0.ginx::gather<System.UInt64>(System.UInt64,System.UInt64)
     IL_0007: ret
 
 }

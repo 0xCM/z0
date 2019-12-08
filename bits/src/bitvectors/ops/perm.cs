@@ -13,37 +13,6 @@ namespace Z0
     partial class BitVector
     {
         /// <summary>
-        /// Rearranges the vector as specified by a permutation
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <param name="spec">The permutation</param>
-        public static BitVector<T> perm<T>(BitVector<T> src, in PermSpec spec)
-            where T : unmanaged
-        {
-            var dst = src.Replicate();
-            var width = src.Width;
-
-            for(var i=0; i<width; i++)
-            {
-                ref readonly var j = ref spec[i];
-                if(j != i)
-                    dst[i] = src[j];
-            }
-            return dst;
-        }
-
-        public static BitVector<N,T> perm<N,T>(BitVector<N,T> src, in PermSpec spec)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-        {
-            var dst = src.Replicate();
-            var n = src.Width;
-            for(var i=0; i<n; i++)
-                dst[i] = src[spec[i]];
-            return dst;
-        }
-
-        /// <summary>
         /// Permutes the vector corrding to the spec
         /// </summary>
         /// <param name="spec">The permutation</param>
@@ -128,5 +97,38 @@ namespace Z0
             }
             return dst;
         }        
+
+        /// <summary>
+        /// Rearranges the vector as specified by a permutation
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="spec">The permutation</param>
+        public static BitVector<T> perm<T>(BitVector<T> src, in PermSpec spec)
+            where T : unmanaged
+        {
+            var dst = src.Replicate();
+            var width = src.Width;
+
+            for(var i=0; i<width; i++)
+            {
+                ref readonly var j = ref spec[i];
+                if(j != i)
+                    dst[i] = src[j];
+            }
+            return dst;
+        }
+
+        public static BitVector<N,T> perm<N,T>(BitVector<N,T> src, in PermSpec spec)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            var dst = src.Replicate();
+            var n = src.Width;
+            for(var i=0; i<n; i++)
+                dst[i] = src[spec[i]];
+            return dst;
+        }
+
+
     }
 }

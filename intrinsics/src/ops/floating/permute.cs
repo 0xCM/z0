@@ -26,15 +26,6 @@ namespace Z0
             => Permute4x64(x, (byte)spec); 
 
         /// <summary>
-        /// __m256d _mm256_permute4x64_pd (__m256d a, const int imm8)VPERMPD ymm, ymm/m256, imm8
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <param name="spec">The permutation spec</param>
-        [MethodImpl(Inline)]
-        public static Vector256<float> vperm4x64(Vector256<float> x, Perm4 spec)
-            => Permute4x64(x.AsUInt64(), (byte)spec).AsSingle(); 
-
-        /// <summary>
         /// __m256d _mm256_permute4x64_pd (__m256d a, const int imm8) VPERMPD ymm, ymm/m256, imm8
         /// Permutes components in the source vector across lanes as specified by the control byte
         /// </summary>
@@ -53,6 +44,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<float> vperm8x32(Vector256<float> src, Vector256<int> spec)
             => PermuteVar8x32(src, spec);
+
+        /// <summary>
+        /// __m256 _mm256_permutevar8x32_ps (__m256 a, __m256i idx)VPERMPS ymm, ymm/m256, ymm
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="spec">The perm spec</param>
+        [MethodImpl(Inline)]
+        public static Vector256<float> vperm8x32(Vector256<float> src, Vector256<uint> spec)
+            => PermuteVar8x32(src, spec.AsInt32());
 
         /// <summary>
         /// __m256 _mm256_permute2f128_ps (__m256 a, __m256 b, int imm8) VPERM2F128 ymm, ymm, ymm/m256, imm8

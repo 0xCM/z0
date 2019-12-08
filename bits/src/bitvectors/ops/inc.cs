@@ -12,15 +12,6 @@ namespace Z0
 
     partial class BitVector
     {
-        /// <summary>
-        /// Arithmetically increments the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<T> inc<T>(BitVector<T> x)
-            where T : unmanaged
-                => gmath.inc(x.data);
 
         [MethodImpl(Inline)]
         public static BitVector4 inc(BitVector4 x)
@@ -64,15 +55,25 @@ namespace Z0
             => gmath.inc(x.data);
 
         /// <summary>
-        /// Increments the source vector
+        /// Arithmetically increments the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector128 inc(in BitVector128 x)        
-        {            
-            var y  = alloc(n128);
-            Math128.inc(in x.x0, ref y.x0);
-            return x;
-        }
+        public static BitVector<T> inc<T>(BitVector<T> x)
+            where T : unmanaged
+                => gmath.inc(x.data);
+
+        /// <summary>
+        /// Arithmetically increments the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> inc<N,T>(BitVector<N,T> x)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gmath.inc(x.data);
+
     }
 }

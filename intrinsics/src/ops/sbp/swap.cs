@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<sbyte> vswaphl(Vector128<sbyte> x)
-            => v8i(vswaphl(v64u(x)));
+            => vshuf2x64(x, Arrange2.BA);  
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vswaphl(Vector128<byte> x)
-            => v8u(vswaphl(v64u(x)));
+            => vshuf2x64(x, Arrange2.BA);  
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<short> vswaphl(Vector128<short> x)
-            => v16i(vswaphl(v64u(x)));
+            => vshuf2x64(x, Arrange2.BA);  
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<ushort> vswaphl(Vector128<ushort> x)
-            => v16u(vswaphl(v64u(x)));
+            => vshuf2x64(x, Arrange2.BA);  
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<int> vswaphl(Vector128<int> x)
-            => v32i(vswaphl(v64u(x)));
+            => vshuf2x64(x, Arrange2.BA);  
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -72,15 +72,15 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<uint> vswaphl(Vector128<uint> x)
-            => v32u(vswaphl(v64u(x)));
+            => vshuf2x64(x, Arrange2.BA);  
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vswaphl(Vector128<ulong> x)
-            => vinsert(vcell(x,0), vscalar(n128,vcell(x,1)), 1);
+        public static Vector128<ulong> vswaphl(Vector128<ulong> x)            
+            => vshuf2x64(x, Arrange2.BA);  
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -88,7 +88,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<long> vswaphl(Vector128<long> x)
-            => vinsert(vcell(x,0), vscalar(n128,vcell(x,1)), 1);
+            => vshuf2x64(x, Arrange2.BA);  
 
         /// <summary>
         /// Swaps the source vectors' hi/lo 128-bit lanes
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<byte> vswaphl(Vector256<byte> x)
-            => dinx.vperm2x128(x,x, Perm2x4.DA);
+            => vperm2x128(x,x, Perm2x4.DA);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<sbyte> vswaphl(Vector256<sbyte> x)
-            => dinx.vperm2x128(x,x, Perm2x4.DA);
+            => vperm2x128(x,x, Perm2x4.DA);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
@@ -112,7 +112,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<short> vswaphl(Vector256<short> x)
-            => dinx.vperm2x128(x,x, Perm2x4.DA);
+            => vperm2x128(x,x, Perm2x4.DA);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
@@ -120,7 +120,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<ushort> vswaphl(Vector256<ushort> x)
-            => dinx.vperm2x128(x,x, Perm2x4.DA);
+            => vperm2x128(x,x, Perm2x4.DA);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
@@ -128,7 +128,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<long> vswaphl(Vector256<long> x)
-            => dinx.vperm2x128(x,x, Perm2x4.DA);
+            => vperm2x128(x,x, Perm2x4.DA);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
@@ -136,6 +136,6 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vswaphl(Vector256<ulong> x)
-            => dinx.vperm2x128(x,x, Perm2x4.DA);
+            => vperm2x128(x,x, Perm2x4.DA);
     }
 }

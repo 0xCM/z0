@@ -49,7 +49,6 @@ namespace Z0
             ? new Func<string,int,string>((s,n) => s.PadRight(n)) 
             : new Func<string,int,string>((s,n) => s.PadLeft(n));
 
-
         /// <summary>
         /// Formats a 128-bit cpu vector as indicated by the specified options
         /// </summary>
@@ -75,13 +74,18 @@ namespace Z0
         /// <param name="sep">The character that intersperses the vector components</param>
         /// <param name="pad">The component padding length</param>
         /// <typeparam name="T">The component type type</typeparam>
-        public static string Format<T>(this Vector256<T> src, SeqFmtKind sfmt = SeqFmtKind.List, char sep = ',', int pad = 0)
+        public static string Format<T>(this Vector256<T> src, SeqFmtKind sfmt = SeqFmtKind.List, char sep = ',', int pad = 0, bool seplanes = false)
             where T : unmanaged
         {
-            var elements = src.ToSpan();
-            return sfmt == SeqFmtKind.Vector 
-                ? elements.FormatAsVector(sep.ToString()) 
-                : elements.FormatList(sep,0,pad);
+            if(seplanes)
+                return $"{src.GetLower().Format(sfmt, sep, pad)} {src.GetUpper().Format(sfmt, sep, pad)}";
+            else
+            {
+                var elements = src.ToSpan();
+                return sfmt == SeqFmtKind.Vector 
+                    ? elements.FormatAsVector(sep.ToString()) 
+                    : elements.FormatList(sep,0,pad);
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitVector4 rev(BitVector4 x)        
+        public static BitVector4 reverse(BitVector4 x)        
             => gbits.rev(x.data);
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitVector8 rev(BitVector8 x)        
+        public static BitVector8 reverse(BitVector8 x)        
             => gbits.rev(x.data);
         
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitVector16 rev(BitVector16 x)        
+        public static BitVector16 reverse(BitVector16 x)        
             => gbits.rev(x.data);
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 rev(BitVector32 x)        
+        public static BitVector32 reverse(BitVector32 x)        
             => gbits.rev(x.data);
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitVector64 rev(BitVector64 x)        
+        public static BitVector64 reverse(BitVector64 x)        
             => gbits.rev(x.data);
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> rev<T>(BitVector<T> x)
+        public static BitVector<T> reverse<T>(BitVector<T> x)
             where T : unmanaged
                 => gbits.rev(x.Scalar);
 
@@ -68,9 +68,11 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> rev<N,T>(BitVector<N,T> x)
+        public static BitVector<N,T> reverse<N,T>(BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => gmath.srl(gbits.rev(x.Scalar), bitsize<T>() - x.Width);       
+ 
+ 
     }
 }

@@ -16,110 +16,21 @@ namespace Z0
     public static class LUT
     {        
 
-        /// <summary>
-        /// Retrieves a slot-identified key from a lookup table
-        /// </summary>
-        /// <param name="table">The source table</param>
-        /// <param name="slot">The key slot</param>
         [MethodImpl(Inline)]
-        public static LookupKey GetKey(in Lut16 table, LookupSlot slot)
-        {
-            ref var key = ref seekb(ref Unsafe.As<Lut16,byte>(ref mutable(in table)), (byte)slot);
-            return (LookupKey)key;
-        }
+        public static Lut16 define(Vector128<byte> src)
+            => new Lut16(src);
 
         [MethodImpl(Inline)]
-        public static void SetKey(ref Lut16 table, LookupSlot slot, LookupKey value)
-        {
-            ref var key = ref seekb(ref Unsafe.As<Lut16,byte>(ref table), (byte)slot);
-            key = (byte)value;
-        }
+        public static Lut16 define(ConstBlock128<byte> src)
+            => new Lut16(src);
 
-        /// <summary>
-        /// Loads a cpu vector from a lookup table
-        /// </summary>
-        /// <param name="src">The source table</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> LoadVector(in Lut16 src)
-        {
-            ref var mem = ref byteref(src);
-            return ginx.vload(n128, in mem);
-        }
+        public static Lut32 define(Vector256<byte> src)
+            => new Lut32(src);
 
-        /// <summary>
-        /// Loads a cpu vector from a lookup table
-        /// </summary>
-        /// <param name="src">The source table</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> LoadVector(in Lut32 src)
-        {
-            ref var mem = ref byteref(src);
-            return ginx.vload(n256, in mem);
-        }
-
-        /// <summary>
-        /// Loads a span from lookup table content
-        /// </summary>
-        /// <param name="src">The source table</param>
-        [MethodImpl(Inline)]
-        public static unsafe Span<byte> AsSpan(in Lut16 src)
-        {
-            ref var mem = ref Unsafe.As<Lut16,byte>(ref mutable(in src));
-            return new Span<byte>(constptr(in src), Lut16.Size);
-        }
-
-        /// <summary>
-        /// Loads a span from lookup table content
-        /// </summary>
-        /// <param name="src">The source table</param>
-        [MethodImpl(Inline)]
-        public static unsafe Span<byte> AsSpan(in Lut32 src)
-        {
-            ref var mem = ref Unsafe.As<Lut32,byte>(ref mutable(in src));
-            return new Span<byte>(constptr(in src), Lut32.Size);
-        }
-
-        /// <summary>
-        /// Loads an existing lookup table from a source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target table</param>
-        [MethodImpl(Inline)]
-        public static ref Lut16 From(Vector128<byte> src, ref Lut16 dst)
-        {            
-            ref var mem = ref Unsafe.As<Lut16,byte>(ref dst);
-            vstore(src, ref mem);
-            return ref dst;            
-        }
-
-        /// <summary>
-        /// Loads an existing lookup table from a source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target table</param>
-        [MethodImpl(Inline)]
-        public static ref Lut32 From(Vector256<byte> src, ref Lut32 dst)
-        {            
-            ref var mem = ref Unsafe.As<Lut32,byte>(ref dst);
-            vstore(src, ref mem);
-            return ref dst;            
-        }
-
-        /// <summary>
-        /// Defines a 16-key lookup table from the elements in a span
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Lut16 From(N16 n, Span<byte> src)
-            => head(MemoryMarshal.Cast<byte,Lut16>(src));
-
-        /// <summary>
-        /// Defines a 32-key lookup table from the elements in a span
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Lut32 From(N32 n, Span<byte> src)
-            => head(MemoryMarshal.Cast<byte,Lut32>(src));
+        public static Lut32 define(ConstBlock256<byte> src)
+            => new Lut32(src);
 
     }
 }
