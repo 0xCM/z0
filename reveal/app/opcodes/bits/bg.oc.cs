@@ -17,6 +17,9 @@ namespace Z0
     /// </summary>
     partial class bgoc
     {        
+        public static BitGrid256<N16,N16,ushort> transpose(BitGrid256<N16,N16,ushort> g)                
+            => BitGrid.transpose(g);
+
         public static bit read_bit_from_vector(in BitCells<N23,byte> src)
             => BitGrid.readbit(in src.Head, 3);
 
@@ -31,8 +34,6 @@ namespace Z0
 
         public static bit readbit_g_position(in ulong src, int pos)    
             => BitGrid.readbit<ulong>(in src, pos);
-
-
 
     }
 

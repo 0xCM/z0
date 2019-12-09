@@ -110,15 +110,7 @@ namespace Z0
         protected virtual int Scale
             => DefaultScale;
         
-        protected virtual Interval<byte> ShiftRange<K>()
-            where K : unmanaged
-        {
-            var offsetMin = (byte)1;
-            var offsetMax = (byte)(bitsize<K>() - 2);
-            return closed(offsetMin,offsetMax);                
-        }
-
-        protected void Benchmark(string opname,TimeSpan time)
+        protected void Benchmark(string opname, TimeSpan time)
         {
             Collect((OpCount, time, opname));
         }
@@ -127,16 +119,6 @@ namespace Z0
         {
             Collect((opcount, time, opname));
         }
-
-        protected void RunBench<K>(Func<K,K,long,SystemCounter,OpTime> benchmark, K? s0 = null, K? s1 = null)
-            where K : unmanaged
-        {
-            var a = s0 ?? Random.Next<K>();
-            var b = s1 ?? Random.Next<K>();
-            var counter = SystemCounter.New();
-            Collect(benchmark(a,b,OpCount,counter));
-        }
-
 
         /// <summary>
         /// Collects benchmark stats for worker that processes a sample array
@@ -183,7 +165,6 @@ namespace Z0
             return Benchmark(worker, oplabel, bounds.Left, bounds.Right);
         }
 
-
         protected void opcheck<K>(UnaryOp<K> baseline, UnaryOp<K> subject) 
             where K : unmanaged
         {
@@ -193,7 +174,6 @@ namespace Z0
                 var x = baseline(a);
                 var y = subject(a);
                 Claim.eq(x,y);
-
             }
         }
 
@@ -208,7 +188,6 @@ namespace Z0
             var pipeidx = localName.TryGetFirstIndexOf(AsciSym.Pipe);
             pipeidx.OnSome(idx => localName = localName.Substring(0,idx));   
             return $"{m.DeclaringType.DisplayName()}/{parent}/{localName}";
-
         }
 
         protected void RunLocals([CallerMemberName] string parent = null, string localbase = "case")
@@ -226,7 +205,6 @@ namespace Z0
 
         protected void RunLocals(MethodBase parent, string localbase = "case")
             => RunLocals(parent.Name, localbase);
-
 
         protected void opcheck<K>(BinaryOp<K> baseline, BinaryOp<K> subject) 
             where K : unmanaged

@@ -86,7 +86,7 @@ namespace Z0.Logix
             where T : unmanaged
         {
             var v1 = variable(1, default(Vector128<T>));
-            var offset = 6;
+            byte offset = 6;
             var expr = shift(op,v1,offset);
             
             for(var i=0; i< SampleSize; i++)
@@ -103,7 +103,7 @@ namespace Z0.Logix
             where T : unmanaged
         {
             var v1 = variable(1, default(Vector256<T>));
-            var offset = 6;
+            byte offset = 6;
             var expr = shift(op,v1,offset);
             
             for(var i=0; i< SampleSize; i++)

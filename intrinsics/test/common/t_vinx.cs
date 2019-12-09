@@ -720,13 +720,52 @@ namespace Z0
                 Claim.eq(gmath.add(lhs[i],rhs[i]), dst[i]);
         }
 
-        protected void add128_check<T>()
-            where T : unmanaged
-                => VerifyBinOp(Random, SampleSize, new Vector128BinOp<T>(ginx.vadd), gmath.add<T>);
 
-        protected void add256_check<T>()
+        protected void add_check<T>(N128 n)
             where T : unmanaged
-                => VerifyBinOp(Random, SampleSize, new Vector256BinOp<T>(ginx.vadd<T>), gmath.add<T>);
+        {
+            var length = BitCalcs.cellcount<T>(n);
+            Span<T> xbuffer = stackalloc T[length];
+            Span<T> ybuffer = stackalloc T[length];
+            Span<T> zbuffer = stackalloc T[length];
+            for(var sample=0; sample<SampleSize; sample++)
+            {
+                var x = Random.CpuVector<T>(n);
+                x.StoreTo(xbuffer);
+
+                var y = Random.CpuVector<T>(n);
+                y.StoreTo(ybuffer);
+
+                var z = ginx.vadd(x,y);
+                z.StoreTo(zbuffer);
+                
+                for(var i=0; i< length; i++)
+                    Claim.eq(gmath.add(xbuffer[i],ybuffer[i]), zbuffer[i]);                
+            }
+        }
+
+        protected void add_check<T>(N256 n)
+            where T : unmanaged
+        {
+            var length = BitCalcs.cellcount<T>(n);
+            Span<T> xbuffer = stackalloc T[length];
+            Span<T> ybuffer = stackalloc T[length];
+            Span<T> zbuffer = stackalloc T[length];
+            for(var sample=0; sample<SampleSize; sample++)
+            {
+                var x = Random.CpuVector<T>(n);
+                x.StoreTo(xbuffer);
+
+                var y = Random.CpuVector<T>(n);
+                y.StoreTo(ybuffer);
+
+                var z = ginx.vadd(x,y);
+                z.StoreTo(zbuffer);
+                
+                for(var i=0; i< length; i++)
+                    Claim.eq(gmath.add(xbuffer[i],ybuffer[i]), zbuffer[i]);                
+            }
+        }
 
         protected void vinsert_check<T>(N128 n)
             where T : unmanaged
@@ -784,14 +823,14 @@ namespace Z0
         protected void vrotr_check<T>(N256 n)
             where T : unmanaged
         {
-            var minshift = 2;
-            var maxshift = bitsize<T>() - 2;
+            byte minshift = 2;
+            byte maxshift = (byte)(bitsize<T>() - 2);
             for(var sample=0; sample<SampleSize; sample++)
             {
                 var x = Random.CpuVector<T>(n256);
                 var offset = Random.Next(minshift,maxshift);
                 var result = ginx.vrotr(x,offset).ToSpan();
-                var expect = x.ToSpan().Map(src => gbits.rotr(src, (int)offset));
+                var expect = x.ToSpan().Map(src => gbits.rotr(src, offset));
                 for(var i=0; i<expect.Length; i++)
                     Claim.eq(expect[i],result[i]);
             }
@@ -800,14 +839,14 @@ namespace Z0
         protected void vrotr_check<T>(N128 n)
             where T : unmanaged
         {
-            var minshift = 2;
-            var maxshift = bitsize<T>() - 2;
+            byte minshift = 2;
+            byte maxshift = (byte)(bitsize<T>() - 2);
             for(var sample=0; sample<SampleSize; sample++)
             {
                 var x = Random.CpuVector<T>(n128);
                 var offset = Random.Next(minshift,maxshift);
                 var result = ginx.vrotr(x,offset).ToSpan();
-                var expect = x.ToSpan().Map(src => gbits.rotr(src, (int)offset));
+                var expect = x.ToSpan().Map(src => gbits.rotr(src, offset));
                 for(var i=0; i<expect.Length; i++)
                     Claim.eq(expect[i],result[i]);
             }
@@ -842,7 +881,7 @@ namespace Z0
                 var vOffset = ginx.vscalar(n128, convert<byte,T>(offset));
 
                 var a = ginx.vsrl(src, offset);
-                var b = ginx.vsrl(src, vOffset);
+                var b = ginx.vsrlr(src, vOffset);
                 Claim.eq(a,b);
 
                 for(var j=0; j<a.Length()/2; j++)
@@ -1263,7 +1302,7 @@ namespace Z0
                 var vOffset = ginx.vscalar(n128,convert<byte,T>(offset));
 
                 var a = ginx.vsll(src, offset);
-                var b = ginx.vsll(src, vOffset);
+                var b = ginx.vsllr(src, vOffset);
                 Claim.eq(a,b);
 
                 for(var j=0; j<a.Length()/2; j++)

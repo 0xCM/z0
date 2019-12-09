@@ -17,12 +17,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static void unpack8x1(uint src, ref ulong dst)
-            => dst = dinx.scatter(src, (ulong)BitMask.Lsb64x8);
+            => dst = dinx.scatter(src, (ulong)BitMasks.Lsb64x8);
 
         [MethodImpl(Inline)]
         public static void unpack16x1(uint src, ref ulong dst)
         {
-            const ulong M = (ulong)BitMask.Lsb64x8;
+            const ulong M = (ulong)BitMasks.Lsb64x8;
 
             seek(ref dst, 0) = dinx.scatter(src, M);
             seek(ref dst, 1) = dinx.scatter(src >> 8, M);

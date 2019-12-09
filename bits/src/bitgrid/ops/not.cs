@@ -13,6 +13,15 @@ namespace Z0
 
     partial class BitGrid
     {        
+        /// <summary>
+        /// Computes the bitwise complement of the source grid
+        /// </summary>
+        /// <param name="gx">The source grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid16<T> not<T>(BitGrid16<T> gx)
+            where T : unmanaged
+                => bg16<T>(gx.RowCount, gx.ColCount, math.not(gx));
 
         /// <summary>
         /// Computes the bitwise complement of the source grid
@@ -32,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid64<T> not<T>(BitGrid64<T> gx)
             where T : unmanaged
-                => math.not(gx);
+                => bg64<T>(gx.RowCount, gx.ColCount, math.not(gx));
                          
         /// <summary>
         /// Computes the bitwise complement of the source grid

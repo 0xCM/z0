@@ -82,7 +82,7 @@ namespace Z0
     /// <summary>
     /// Generic scalar intrinsics
     /// </summary>
-    public static partial class gsinx
+    public static partial class ginxs
     {
 
     }

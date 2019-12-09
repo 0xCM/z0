@@ -13,9 +13,19 @@ namespace Z0
 
     partial class BitGrid
     {        
+        /// <summary>
+        /// Computes the bitwise XNOR between generic bitgrids
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid16<T> xnor<T>(BitGrid16<T> gx, BitGrid16<T> gy)
+            where T : unmanaged
+                => bg16<T>(gx.RowCount, gx.ColCount, math.xnor(gx,gy));
 
         /// <summary>
-        /// Computes the bitwise XNOR between fixed-width bitgrids
+        /// Computes the bitwise XNOR between generic bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -26,7 +36,7 @@ namespace Z0
                 => bg32<T>(gx.RowCount, gx.ColCount, math.xnor(gx,gy));
 
         /// <summary>
-        /// Computes the bitwise XNOR between fixed-width bitgrids
+        /// Computes the bitwise XNOR between generic bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -34,10 +44,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid64<T> xnor<T>(BitGrid64<T> gx, BitGrid64<T> gy)
             where T : unmanaged
-                => math.xnor(gx,gy);
+                => bg64<T>(gx.RowCount, gx.ColCount, math.xnor(gx,gy));
 
         /// <summary>
-        /// Computes the bitwise XNOR between fixed-width 32-bit natural bitgrids
+        /// Computes the bitwise XNOR between natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -50,7 +60,7 @@ namespace Z0
                 => math.xnor(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise XNOR between fixed-width 64-bit natural bitgrids
+        /// Computes the bitwise XNOR between natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -63,7 +73,7 @@ namespace Z0
                 => math.xnor(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise XNOR between 128-bit fixed-width natural bitgrids
+        /// Computes the bitwise XNOR between natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>

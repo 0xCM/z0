@@ -22,9 +22,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static byte mix(N0 parity, byte x, byte y)
         {
-            var mask = Even8.Select;
-            var xE = Bits.project(select(x,mask), Even8.Select);
-            var yE = Bits.project(select(y,mask), Odd8.Select);
+            var mask = BitMasks.Even8;
+            var xE = project(select(x, mask), BitMasks.Even8);
+            var yE = project(select(y, mask), BitMasks.Odd8);
             var xEy = xE | yE;
             return (byte)xEy;
         }
@@ -38,9 +38,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static byte mix(N1 parity, byte x, byte y)
         {
-            var mask = Odd8.Select;
-            var xO = Bits.project(select(x, mask), Even8.Select);
-            var yO = Bits.project(select(y, mask), Odd8.Select);
+            var mask = BitMasks.Odd8;
+            var xO = project(select(x, mask), BitMasks.Even8);
+            var yO = project(select(y, mask), BitMasks.Odd8);
             var xOy = xO | yO;
             return (byte)xOy;
         }
@@ -54,9 +54,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ushort mix(N0 parity, ushort x, ushort y)
         {
-            var mask = Even16.Select;
-            var xE = Bits.project(select(x,mask), Even16.Select);
-            var yE = Bits.project(select(y,mask), Odd16.Select);
+            var mask = BitMasks.Even16;
+            var xE = Bits.project(select(x, mask), BitMasks.Even16);
+            var yE = Bits.project(select(y, mask), BitMasks.Odd16);
             var xEy = xE | yE;
             return (ushort)xEy;
         }
@@ -70,9 +70,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ushort mix(N1 parity, ushort x, ushort y)
         {
-            var mask = Odd16.Select;
-            var xO = Bits.project(select(x, mask), Even16.Select);
-            var yO = Bits.project(select(y, mask), Odd16.Select);
+            var mask = BitMasks.Odd16;
+            var xO = Bits.project(select(x, mask), BitMasks.Even16);
+            var yO = Bits.project(select(y, mask), BitMasks.Odd16);
             var xOy = xO | yO;
             return (ushort)xOy;
         }
@@ -86,9 +86,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint mix(N0 parity, uint x, uint y)
         {
-            var mask = Even32.Select;
-            var xE = Bits.project(select(x,mask), Even32.Select);
-            var yE = Bits.project(select(y,mask), Odd32.Select);
+            var mask = BitMasks.Even32;
+            var xE = Bits.project(select(x,mask),  BitMasks.Even32);
+            var yE = Bits.project(select(y,mask),  BitMasks.Odd32);
             var xEy = xE | yE;
             return xEy;
         }
@@ -102,9 +102,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint mix(N1 parity, uint x, uint y)
         {
-            var mask = Odd32.Select;
-            var xO = Bits.project(select(x, mask), Even32.Select);
-            var yO = Bits.project(select(y, mask), Odd32.Select);
+            var mask =  BitMasks.Odd32;
+            var xO = Bits.project(select(x, mask),  BitMasks.Even32);
+            var yO = Bits.project(select(y, mask),  BitMasks.Odd32);
             var xOy = xO | yO;
             return xOy;
         }
@@ -118,9 +118,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong mix(N0 parity, ulong x, ulong y)
         {
-            var mask = Even64.Select;
-            var xE = Bits.project(select(x,mask), Even64.Select);
-            var yE = Bits.project(select(y,mask), Odd64.Select);
+            var mask = BitMasks.Even64;
+            var xE = Bits.project(select(x,mask), BitMasks.Even64);
+            var yE = Bits.project(select(y,mask), BitMasks.Odd64);
             var xEy = xE | yE;
             return xEy;
         }
@@ -134,9 +134,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong mix(N1 parity, ulong x, ulong y)
         {
-            var mask = Odd64.Select;
-            var xO = Bits.project(select(x, mask), Even64.Select);
-            var yO = Bits.project(select(y, mask), Odd64.Select);
+            var mask = BitMasks.Odd64;
+            var xO = Bits.project(select(x, mask), BitMasks.Even64);
+            var yO = Bits.project(select(y, mask), BitMasks.Odd64);
             var xOy = xO | yO;
             return xOy;
         }

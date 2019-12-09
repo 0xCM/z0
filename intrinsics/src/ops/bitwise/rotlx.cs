@@ -20,7 +20,9 @@ namespace Z0
         /// <param name="shift">The number of bits to rotate</param>
         [MethodImpl(Inline)]
         public static Vector128<ulong> vrotlx(Vector128<ulong> src, byte shift)
-            => vor(vsllx(src, shift), vsrlx(src, (byte)(128 - shift)));
+        {
+            return vor(vsllx(src, shift), vsrlx(src, (byte)(128 - shift)));
+        }
 
         /// <summary>
         /// Rotates each 128 lane leftward a bit-level resolution

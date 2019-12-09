@@ -13,8 +13,6 @@ namespace Z0
 
     partial class BitGrid
     {
-
-
         /// <summary>
         /// Returns 1 if the source grids have identical conent and 0 otherwise
         /// </summary>

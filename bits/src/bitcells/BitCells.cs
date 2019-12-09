@@ -214,7 +214,7 @@ namespace Z0
             set
             {
                 ref readonly var loc = ref Location(index);
-                gbits.set(ref data[loc.Segment], (byte)loc.Offset, value);
+                data[loc.Segment] = gbits.set(data[loc.Segment], (byte)loc.Offset, value);
             }
         }
 

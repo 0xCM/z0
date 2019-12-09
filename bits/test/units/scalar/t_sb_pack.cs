@@ -309,7 +309,7 @@ namespace Z0
                 var up1 = BitStore.select((byte)i);
                 Span<byte> up2 = stackalloc byte[8];
                 Bits.unpack8x1(b, up2);
-                Claim.eq(BitString.bitseq(up1), BitString.bitseq(up2));
+                Claim.eq(BitString.load(up1), BitString.load(up2));
             }
         }
 

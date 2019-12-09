@@ -97,7 +97,6 @@ namespace Z0
         {
             Disassemble(new ExperimentalScenarios());
             Disassemble(typeof(bvoc));    
-            Disassemble(typeof(bitmatoc));    
             Disassemble(typeof(bgoc));   
             Disassemble(typeof(natoc));    
             Disassemble(typeof(bitmaskoc));
@@ -105,7 +104,7 @@ namespace Z0
             Disassemble(typeof(memoc));    
             Disassemble(typeof(inxoc));    
             Disassemble(typeof(gmoc));    
-            Disassemble(typeof(sinxoc));    
+            Disassemble(typeof(ginxsoc));    
             Disassemble(typeof(convoc));   
             Disassemble(typeof(sbitsoc));    
             Disassemble(typeof(SimdPack));

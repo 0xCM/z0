@@ -18,8 +18,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vrotl(Vector128<byte> src, int shift)
-            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, 8 - shift));             
+        public static Vector128<byte> vrotl(Vector128<byte> src, byte shift)
+            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, (byte)(8 - shift)));             
         
         /// <summary>
         /// Rotates each component the source vector leftwards by a specified shift
@@ -27,18 +27,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vrotl(Vector128<ushort> src, int shift)
-            => dinx.vor(dinx.vsll(src, shift), dinx.vsrl(src, 16 - shift));             
-
-
-        /// <summary>
-        /// Rotates each component the source vector leftwards by a specified shift
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="shift">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
-        public static Vector128<uint> vrotl(Vector128<uint> src, int shift)
-            => dinx.vor(dinx.vsll(src, shift), dinx.vsrl(src, 32-shift));
+        public static Vector128<ushort> vrotl(Vector128<ushort> src, byte shift)
+            => dinx.vor(dinx.vsll(src, shift), dinx.vsrl(src, (byte)(16 - shift)));             
 
         /// <summary>
         /// Rotates each component the source vector leftwards by a specified shift
@@ -46,8 +36,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vrotl(Vector128<ulong> src, int shift)
-            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, 64 - shift));             
+        public static Vector128<uint> vrotl(Vector128<uint> src, byte shift)
+            => dinx.vor(dinx.vsll(src, shift), dinx.vsrl(src, (byte)(32-shift)));
 
         /// <summary>
         /// Rotates each component the source vector leftwards by a specified shift
@@ -55,8 +45,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> vrotl(Vector256<byte> src, int shift)
-            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, 8 - shift));             
+        public static Vector128<ulong> vrotl(Vector128<ulong> src, byte shift)
+            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, (byte)(64 - shift)));             
 
         /// <summary>
         /// Rotates each component the source vector leftwards by a specified shift
@@ -64,8 +54,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vrotl(Vector256<ushort> src, int shift)
-            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, 16 - shift));             
+        public static Vector256<byte> vrotl(Vector256<byte> src, byte shift)
+            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, (byte)(8 - shift)));             
 
         /// <summary>
         /// Rotates each component the source vector leftwards by a specified shift
@@ -73,8 +63,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vrotl(Vector256<uint> src, int shift)
-            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, 32 - shift));             
+        public static Vector256<ushort> vrotl(Vector256<ushort> src, byte shift)
+            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, (byte)(16 - shift)));             
 
         /// <summary>
         /// Rotates each component the source vector leftwards by a specified shift
@@ -82,8 +72,17 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vrotl(Vector256<ulong> src, int shift)
-            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, 64 - shift));             
+        public static Vector256<uint> vrotl(Vector256<uint> src, byte shift)
+            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, (byte)(32 - shift)));             
+
+        /// <summary>
+        /// Rotates each component the source vector leftwards by a specified shift
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="shift">The magnitude of the rotation</param>
+        [MethodImpl(Inline)]
+        public static Vector256<ulong> vrotl(Vector256<ulong> src, byte shift)
+            => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, (byte)(64 - shift)));             
 
         /// <summary>
         /// Rotates each component the source vector leftwards by the amount specified

@@ -13,7 +13,7 @@ namespace Z0
     using static As;
     using static AsIn;
     
-    partial class gsinx
+    partial class ginxs
     {
 
         /// <summary>
@@ -31,5 +31,19 @@ namespace Z0
             dst = vhead<S,T>(ginx.vbroadcast(n128, src));
             return ref dst;
         }
+
+        /// <summary>
+        /// Broadcasts an S-cell over a T-cell
+        /// </summary>
+        /// <param name="src">The source cell value</param>
+        /// <param name="dst">The target cell</param>
+        /// <typeparam name="S">The source cell type</typeparam>
+        /// <typeparam name="T">The target cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static T sbroadcast<S,T>(S src)
+            where S : unmanaged
+            where T : unmanaged
+                => vhead<S,T>(ginx.vbroadcast(n128, src));
+       
     }
 }

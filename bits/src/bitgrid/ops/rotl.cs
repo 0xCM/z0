@@ -13,50 +13,72 @@ namespace Z0
 
     partial class BitGrid
     {
-
+        /// <summary>
+        /// Circulates grid content clockwise
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        /// <param name="shift">The rotation amount</param>
+        /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid32<T> rotl<T>(BitGrid32<T> gx, int shift)
+        public static BitGrid16<T> rotl<T>(BitGrid16<T> g, int shift)
             where T : unmanaged
-                => bg32<T>(gx.RowCount, gx.ColCount, Bits.rotl(gx, shift));
+                => bg16<T>(g.RowCount, g.ColCount, Bits.rotl(g, shift));
 
+        /// <summary>
+        /// Circulates grid content clockwise
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        /// <param name="shift">The rotation amount</param>
+        /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid64<T> rotl<T>(BitGrid64<T> gx, int shift)
+        public static BitGrid32<T> rotl<T>(BitGrid32<T> g, int shift)
             where T : unmanaged
-                => Bits.rotl(gx.Data,shift);
+                => bg32<T>(g.RowCount, g.ColCount, Bits.rotl(g, shift));
+
+        /// <summary>
+        /// Circulates grid content clockwise
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        /// <param name="shift">The rotation amount</param>
+        /// <typeparam name="T">The grid cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid64<T> rotl<T>(BitGrid64<T> g, int shift)
+            where T : unmanaged
+                => bg64<T>(g.RowCount, g.ColCount, Bits.rotl(g, shift));
 
         [MethodImpl(Inline)]
-        public static BitGrid16<M,N,T> rotl<M,N,T>(BitGrid16<M,N,T> gx, int shift)
+        public static BitGrid16<M,N,T> rotl<M,N,T>(BitGrid16<M,N,T> g, int shift)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Bits.rotl(gx.Data,shift);
+                => Bits.rotl(g.Data,shift);
 
         [MethodImpl(Inline)]
-        public static BitGrid32<M,N,T> rotl<M,N,T>(BitGrid32<M,N,T> gx, int shift)
+        public static BitGrid32<M,N,T> rotl<M,N,T>(BitGrid32<M,N,T> g, int shift)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Bits.rotl(gx.Data,shift);
+                => Bits.rotl(g.Data,shift);
 
         [MethodImpl(Inline)]
-        public static BitGrid64<M,N,T> rotl<M,N,T>(BitGrid64<M,N,T> gx, int shift)
+        public static BitGrid64<M,N,T> rotl<M,N,T>(BitGrid64<M,N,T> g, int shift)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Bits.rotl(gx.Data,shift);
+                => Bits.rotl(g.Data,shift);
 
         [MethodImpl(Inline)]
-        public static BitGrid128<M,N,T> rotl<M,N,T>(in BitGrid128<M,N,T> gx, int shift)
+        public static BitGrid128<M,N,T> rotl<M,N,T>(in BitGrid128<M,N,T> g, int shift)
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => ginx.vrotl<T>(gx,(byte)shift);
+                => ginx.vrotl<T>(g,(byte)shift);
 
         [MethodImpl(Inline)]
-        public static BitGrid256<M,N,T> rotl<M,N,T>(in BitGrid256<M,N,T> gx, int shift)
+        public static BitGrid256<M,N,T> rotl<M,N,T>(in BitGrid256<M,N,T> g, int shift)
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => ginx.vrotl<T>(gx,(byte)shift);
+                => ginx.vrotl<T>(g,(byte)shift);
     }
 }

@@ -1,4 +1,13 @@
-// 2019-12-07 18:40:02:092
+// 2019-12-08 17:58:48:952
+Vector128<uint> vcompact(Vector128<ulong> x0, Vector128<ulong> x1, out Vector128<uint> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vcompact(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>&)
+    IL_0008: ret
+
+}
 byte butterfly_8x1(byte x)
 {
     IL_0000: call Z0.N1 zfunc::get_n1()
@@ -399,6 +408,33 @@ ReadOnlySpan<Char> bitchars_8u(byte value)
     IL_0000: ldarg.0
     IL_0001: call System.ReadOnlySpan`1<System.Char> Z0.BitStore::bitchars(System.Byte)
     IL_0006: ret
+
+}
+void bitchars_8u(byte value, Span<Char> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldc.i4.0
+    IL_0003: call System.Void Z0.BitStore::bitchars<System.Byte>(System.Byte,System.Span`1<System.Char>,System.Int32)
+    IL_0008: ret
+
+}
+void bitchars_16u(ushort value, Span<Char> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldc.i4.0
+    IL_0003: call System.Void Z0.BitStore::bitchars<System.UInt16>(System.UInt16,System.Span`1<System.Char>,System.Int32)
+    IL_0008: ret
+
+}
+void bitchars_32u(uint value, Span<Char> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldc.i4.0
+    IL_0003: call System.Void Z0.BitStore::bitchars<System.UInt32>(System.UInt32,System.Span`1<System.Char>,System.Int32)
+    IL_0008: ret
 
 }
 void bitchars_64u(ulong value, Span<Char> dst)

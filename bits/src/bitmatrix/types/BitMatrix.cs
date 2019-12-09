@@ -77,7 +77,7 @@ namespace Z0
             get => gbits.test(data[row],col);
             
             [MethodImpl(Inline)]
-            set => gbits.set(ref data[row], (byte)col, value);
+            set => data[row] = gbits.set(data[row], (byte)col, value);
         }
 
         [MethodImpl(Inline)]

@@ -27,7 +27,7 @@ namespace Z0
         public static Vector128<ulong> vsrlx(Vector128<ulong> src, byte shift)        
         {
             if(shift >= 64)
-                return vsrl(vbsrl(src, 8), shift - 64);     
+                return vsrl(vbsrl(src, 8), (byte)(shift - 64));     
             else
                 return vor(vsrl(src, shift), vsll(vbsrl(src, 8), 64 - shift));
         }
@@ -54,9 +54,9 @@ namespace Z0
         public static Vector256<ulong> vsrlx(Vector256<ulong> src, byte shift)        
         {
             if(shift >= 64)
-                return vsrl(vbsrl(src, 8), shift - 64);     
+                return vsrl(vbsrl(src, 8), (byte)(shift - 64));     
             else
-                return vor(vsrl(src, shift), vsll(vbsrl(src, 8), 64 - shift));
+                return vor(vsrl(src, shift), vsll(vbsrl(src, 8), (byte)(64 - shift)));
         }
 
         [MethodImpl(Inline)]

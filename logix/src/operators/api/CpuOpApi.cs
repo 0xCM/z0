@@ -229,7 +229,7 @@ namespace Z0.Logix
         /// <param name="offset">The shift amount</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> eval<T>(ShiftOpKind kind, Vector128<T> a, int offset)
+        public static Vector128<T> eval<T>(ShiftOpKind kind, Vector128<T> a, byte offset)
             where T : unmanaged
         {
             switch(kind)
@@ -250,7 +250,7 @@ namespace Z0.Logix
         /// <param name="offset">The shift amount</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> eval<T>(ShiftOpKind kind, Vector256<T> a, int offset)
+        public static Vector256<T> eval<T>(ShiftOpKind kind, Vector256<T> a, byte offset)
             where T : unmanaged
         {
             switch(kind)

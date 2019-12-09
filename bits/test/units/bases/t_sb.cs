@@ -67,21 +67,6 @@ namespace Z0
             }
         }
 
-       protected void sb_clear_check<T>()
-            where T : unmanaged
-        {
-            var width = (int)bitsize<T>();
-            var p0 = Random.Next(2, width/2 - 1);
-            var p1 = Random.Next(width/2 + 1, width - 2);
-            for(var i=0; i<SampleSize; i++)
-            {
-                var x = Random.Next<T>();
-                var y = BitString.scalar(gbits.clear(x, p0,p1));
-                var z = BitString.scalar(x).Clear(p0,p1);
-                Claim.eq(y,z);            
-            }
-        }
-
         protected void sb_bitview_check<T>()
             where T : unmanaged
         {

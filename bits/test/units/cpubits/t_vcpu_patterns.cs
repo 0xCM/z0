@@ -9,9 +9,9 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_vcpu_patterns : t_vcpu<t_vcpu_patterns>
+    public class t_vpatterns : t_vcpu<t_vpatterns>
     {
-        public void pattern_clearalt_256x8()
+        public void clearalt_256x8()
         {
             var tr = ginx.vpclearalt<byte>(n256);
             for(var i=0; i<SampleSize; i++)

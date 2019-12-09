@@ -55,6 +55,10 @@ namespace Z0
             => new BitGrid256<M,N,T>(src.As<byte,T>());
 
         [MethodImpl(Inline)]
+        public static implicit operator BitGrid256<M,N,T>(Vector256<ushort> src)
+            => new BitGrid256<M,N,T>(src.As<ushort,T>());
+
+        [MethodImpl(Inline)]
         public static BitGrid256<M,N,T> operator & (in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
             => BitGrid.and(gx,gy);
 

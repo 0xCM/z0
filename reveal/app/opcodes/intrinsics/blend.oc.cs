@@ -37,14 +37,6 @@ namespace Z0
             => dinx.vreverse(x);
 
 
-
-        public static Vector128<ulong> vsrlx_128(Vector128<ulong> x)
-            => dinx.vsrlx(x, 8);
-
-        public static Vector256<ulong> vsrlx_256(Vector256<ulong> x)
-            => dinx.vsrlx(x, 13);
-
-
         public static Vector128<short> vblend_128x16u_LLLLLLLL(Vector128<short> x, Vector128<short> y)        
             => dinx.vblend(x,y,Blend8x16.LLLLLLLL);
 

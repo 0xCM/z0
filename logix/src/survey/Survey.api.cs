@@ -21,7 +21,7 @@ namespace Z0.Logix
         /// <param name="length">The number of questions in the survey</param>
         /// <param name="width">The (uniform) number of choices in each question</param>
         /// <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
-        public static Survey<T> Template<T>(uint id, string name, uint length, uint width)
+        public static Survey<T> Template<T>(uint id, string name, int length, int width)
             where T : unmanaged
         {
 
@@ -61,7 +61,7 @@ namespace Z0.Logix
         /// <param name="length">The number of questions in the survey</param>
         /// <typeparam name="T">The primal data type used for survey aspect representation</typeparam>
         [MethodImpl(Inline)]
-        public static Survey<T> Template<T>(uint id, string name, uint length)
+        public static Survey<T> Template<T>(uint id, string name, int length)
             where T : unmanaged
                 => Template<T>(id,name, length, bitsize<T>());
 

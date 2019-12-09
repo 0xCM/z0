@@ -269,7 +269,7 @@ namespace Z0
                 ref readonly var row = ref doc[i];
                 for(var j = 0; j<row.Cells.Length; j++)
                 {
-                    gmath.parse<T>(row.Cells[j].CellValue, out T cell);
+                    var cell = gmath.parse<T>(row.Cells[j].CellValue);
                     dst[i,j] = cell;
                 }                
             }
@@ -305,10 +305,7 @@ namespace Z0
             {
                 ref readonly var row = ref doc[i];
                 for(var j = 0; j<row.Cells.Length; j++)
-                {
-                    gmath.parse<T>(row.Cells[j].CellValue, out T cell);
-                    dst[i,j] = cell;
-                }                
+                    dst[i,j] = gmath.parse<T>(row.Cells[j].CellValue);
             }
 
             return dst;

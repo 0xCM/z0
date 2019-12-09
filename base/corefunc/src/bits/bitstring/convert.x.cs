@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
         public static BitString ToBitString(this Span<bit> src)
-            => BitString.bitspan((ReadOnlySpan<bit>)src); 
+            => BitString.load((ReadOnlySpan<bit>)src); 
 
         /// <summary>
         /// Converts a readonly bitspan to a bitstring
@@ -106,7 +106,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
         public static BitString ToBitString(this ReadOnlySpan<bit> src)
-            => BitString.bitspan(src);
+            => BitString.load(src);
 
         /// <summary>
         /// Converts span content to a to a bitstring

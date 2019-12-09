@@ -220,7 +220,63 @@ namespace Z0
         public static string FormatBits<T>(this Vector256<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
             char? blocksep = null, int? rowWidth = null)
                 where T : unmanaged        
-                    => src.ToBitString().Format(tlz, specifier, blockWidth ?? bitsize<T>(), blocksep ,rowWidth);
+                    => src.ToBitString().Format(tlz, specifier, blockWidth ?? bitsize<T>(), blocksep ,rowWidth);        
+
+        /// <summary>
+        /// Block-formats the source value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="blocksize">The length of a block in bits; defaults to 8</param>
+        /// <param name="specifier">If true, output will begin with the '0b' binary specifier</param>
+        /// <param name="underscores">If true, the underscore character '_' will be used to delimit blocks, otherwise, spaces will be used</param>
+        [MethodImpl(Inline)]
+        static string BitBlocks<T>(T src, int? blocksize = null, bool specifier = false, bool underscores = false)
+            where T : unmanaged
+            => bracket(BitString.scalar(src).Format(false, specifier, blocksize ?? 8, underscores ? AsciSym.Underscore : AsciSym.Space, null));
+
+        /// <summary>
+        /// Block-formats the source value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="blocksize">The length of a block in bits; defaults to 8</param>
+        /// <param name="specifier">If true, output will begin with the '0b' binary specifier</param>
+        /// <param name="underscores">If true, the underscore character '_' will be used to delimit blocks, otherwise, spaces will be used</param>
+        [MethodImpl(Inline)]
+        public static string FormatBitBlocks(this byte src, int? blocksize = null, bool specifier = false, bool underscores = false)
+            =>  BitBlocks(src, blocksize, specifier, underscores);
+
+        /// <summary>
+        /// Block-formats the source value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="blocksize">The length of a block in bits; defaults to 8</param>
+        /// <param name="specifier">If true, output will begin with the '0b' binary specifier</param>
+        /// <param name="underscores">If true, the underscore character '_' will be used to delimit blocks, otherwise, spaces will be used</param>
+        [MethodImpl(Inline)]
+        public static string FormatBitBlocks(this ushort src, int? blocksize = null, bool specifier = false, bool underscores = false)
+            =>  BitBlocks(src, blocksize, specifier, underscores);
+
+        /// <summary>
+        /// Block-formats the source value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="blocksize">The length of a block in bits; defaults to 8</param>
+        /// <param name="specifier">If true, output will begin with the '0b' binary specifier</param>
+        /// <param name="underscores">If true, the underscore character '_' will be used to delimit blocks, otherwise, spaces will be used</param>
+        [MethodImpl(Inline)]
+        public static string FormatBitBlocks(this uint src, int? blocksize = null, bool specifier = false, bool underscores = false)
+            =>  BitBlocks(src, blocksize, specifier, underscores);
+
+        /// <summary>
+        /// Block-formats the source value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="blocksize">The length of a block in bits; defaults to 8</param>
+        /// <param name="specifier">If true, output will begin with the '0b' binary specifier</param>
+        /// <param name="underscores">If true, the underscore character '_' will be used to delimit blocks, otherwise, spaces will be used</param>
+        [MethodImpl(Inline)]
+        public static string FormatBitBlocks(this ulong src, int? blocksize = null, bool specifier = false, bool underscores = false)
+            =>  BitBlocks(src, blocksize, specifier, underscores);
 
         /// <summary>
         /// Block-formats the vector, e.g. [01010101 01010101 ... 01010101] where by default the size of each block is the bit-width of a component

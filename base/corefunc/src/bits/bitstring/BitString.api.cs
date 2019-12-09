@@ -30,11 +30,11 @@ namespace Z0
             where T : unmanaged
         {
             BitSize capacity = Unsafe.SizeOf<T>() * 8;
-            Span<byte> bitseq = new byte[capacity*reps];            
+            var bitseq = new byte[capacity*reps];            
             var pattern = scalar(src);
             for(var i=0; i<reps; i++)
                 pattern.BitSeq.CopyTo(bitseq, i*capacity);
-            return BitString.bitseq(bitseq);            
+            return BitString.load(bitseq);            
         }
 
         /// <summary>
@@ -49,15 +49,5 @@ namespace Z0
                 dst[i] = f((bit)src.data[i]);
         }
 
-        /// <summary>
-        /// Extracts a scalar value from a bitstring
-        /// </summary>
-        /// <param name="src">The source bitstring</param>
-        /// <param name="offset">The bit position at which to begin extraction</param>
-        /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline)]
-        public static T scalar<T>(BitString src, int offset = 0)
-            where T : unmanaged 
-                => src.Scalar<T>(offset);
     }
 }

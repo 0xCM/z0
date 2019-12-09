@@ -6,15 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;
 
     public class t_sb_mask : t_sb<t_sb_mask>
     {
-        
-
-        
-        
+                    
         public void sb_mask_basecase()
         {
             void case1()
@@ -31,7 +29,6 @@ namespace Z0
                 seq[9] = 0;
                 seq[11] = 0;
                 Claim.yea(bs.Format(true) == string.Empty);
-
             }
 
             void case2()
@@ -56,9 +53,39 @@ namespace Z0
 
             }
 
+            void case4()
+            {
+                Claim.eq(8 - 3, Bits.pop(gbits.himask<byte>(3)));
+                Claim.eq(32 - 24, Bits.pop(gbits.himask<uint>(24)));
+                Claim.eq(32 - 17, Bits.pop(gbits.himask<uint>(17)));
+
+            }
+
             RunLocals();
         }
 
+
+        public void takemask_basecases()
+        {
+            void example()
+            {
+                var x1 = 0b10000000_10000000_10000000_10000000u;            
+                var e1 = 0b11000000_11000000_11000000_00000000u;
+                var a1 = gbits.clearbyte(x1,0) | (x1 << 7);
+                Claim.eq(e1,a1);
+
+            }
+
+            // [1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000]
+            // [1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000]
+            var x = ginx.vbroadcast(n256, (byte)Pow2.T07);
+            var m = ginx.vtakemask(x);
+            Claim.eq(uint.MaxValue,m);
+
+
+            
+
+        }
 
     }
 

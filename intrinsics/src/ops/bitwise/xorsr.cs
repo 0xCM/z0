@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="shift">The amount by which to shift each component</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vxorsr(Vector128<byte> x, int shift)
+        public static Vector128<byte> vxorsr(Vector128<byte> x, byte shift)
             => dinx.vxor(x, vsrl(x,shift));
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="shift">The amount by which to shift each component</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vxorsr(Vector128<ushort> x, int shift)
+        public static Vector128<ushort> vxorsr(Vector128<ushort> x, byte shift)
             => dinx.vxor(x, vsrl(x,shift));
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="shift">The amount by which to shift each component</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vxorsr(Vector128<uint> x, int shift)
+        public static Vector128<uint> vxorsr(Vector128<uint> x, byte shift)
             => dinx.vxor(x,vsrl(x,shift));
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="shift">The amount by which to shift each component</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vxorsr(Vector128<ulong> x, int shift)
+        public static Vector128<ulong> vxorsr(Vector128<ulong> x, byte shift)
             => dinx.vxor(x, vsrl(x,shift));
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="shift">The amount by which to shift each component</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> vxorsr(Vector256<byte> x, int shift)
+        public static Vector256<byte> vxorsr(Vector256<byte> x, byte shift)
             => dinx.vxor(x, vsrl(x,shift));
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="shift">The amount by which to shift each component</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vxorsr(Vector256<ushort> x, int shift)
+        public static Vector256<ushort> vxorsr(Vector256<ushort> x, byte shift)
             => dinx.vxor(x, vsrl(x,shift));
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="shift">The amount by which to shift each component</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vxorsr(Vector256<uint> x, int shift)
+        public static Vector256<uint> vxorsr(Vector256<uint> x, byte shift)
             => dinx.vxor(x, vsrl(x,shift));
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="shift">The amount by which to shift each component</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vxorsr(Vector256<ulong> x, int shift)
+        public static Vector256<ulong> vxorsr(Vector256<ulong> x, byte shift)
             => dinx.vxor(x, vsrl(x,shift));
 
         /// <summary>

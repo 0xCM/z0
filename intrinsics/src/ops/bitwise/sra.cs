@@ -23,8 +23,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift rightwards</param>
         [MethodImpl(Inline)]
-        public static Vector256<short> vsra(Vector256<short> src, int shift)
-            => ShiftRightArithmetic(src, (byte)shift);
+        public static Vector256<short> vsra(Vector256<short> src, byte shift)
+            => ShiftRightArithmetic(src, shift);
 
         /// <summary>
         /// __m256i _mm256_srai_epi32 (__m256i a, int imm8) VPSRAD ymm, ymm, imm8
@@ -33,8 +33,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift rightwards</param>
         [MethodImpl(Inline)]
-        public static Vector256<int> vsra(Vector256<int> src, int shift)
-            => ShiftRightArithmetic(src, (byte)shift);
+        public static Vector256<int> vsra(Vector256<int> src, byte shift)
+            => ShiftRightArithmetic(src, shift);
 
         /// <summary>
         /// _mm_srav_epi32, avx2, shift-right variable arithmetic:

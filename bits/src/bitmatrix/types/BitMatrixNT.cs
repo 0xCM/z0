@@ -134,7 +134,7 @@ namespace Z0
             set
             {
                 var cell = GridLayout.Row(row)[col];                                
-                gbits.set(ref Data[cell.Segment], (byte)cell.Offset, value);
+                Data[cell.Segment] = gbits.set(Data[cell.Segment], (byte)cell.Offset, value);
 
             }
         }            

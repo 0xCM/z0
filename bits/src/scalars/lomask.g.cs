@@ -11,25 +11,28 @@ namespace Z0
 
     partial class gbits
     {
-
         /// <summary>
-        /// Reurns a sequence of N enabled bits, starting from index 0 and extendint to index n - 1
+        /// Defines a sequence of N enabled bits, starting from index 0 and extending to index n - 1
         /// </summary>
         /// <typeparam name="N">The enabled bit count type</typeparam>
         [MethodImpl(Inline)]
-        public static T lomask<N,T>()
+        public static T lomask<N,T>(N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => convert<ulong,T>(Bits.lomask<N>());
+                => convert<ulong,T>(Bits.lomask(n));
 
         /// <summary>
-        /// Reurns a sequence of N enabled bits, starting from index 0 and extendint to index n - 1
+        /// Reurns a sequence of N enabled bits, starting from index 0 and extending to index n - 1
         /// </summary>
-        /// <typeparam name="N">The enabled bit count type</typeparam>
         [MethodImpl(Inline)]
         public static T lomask<T>(int n)
             where T : unmanaged
                 => convert<ulong,T>(Bits.lomask(n));
+
+        [MethodImpl(Inline)]
+        public static T himask<T>(int n)
+            where T : unmanaged
+                => convert<ulong,T>(Bits.lomask(bitsize<T>() - n - 1) << n);
 
     }
 

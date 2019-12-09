@@ -7,14 +7,10 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Collections.Concurrent;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.IO;
     
     using static zfunc;    
-    using static math;
-    using static ansi;
 
     /// <summary>
     /// Base type for test applications
@@ -39,8 +35,8 @@ namespace Z0
                         return false;
             }
             return true;
-
         }
+
         /// <summary>
         /// Executes the tests defined by a host type
         /// </summary>

@@ -12,14 +12,14 @@ namespace Z0
     using static zfunc;
 
 
-    public static class sinxoc
+    public static class ginxsoc
     {
 
         public static ulong sbroadcast_8x64(byte pattern)
-            => gsinx.sbroadcast(pattern, out ulong _);
+            => ginxs.sbroadcast(pattern, out ulong _);
 
         public static ulong sbroadcast_8x64_const()
-            => gsinx.sbroadcast((byte)0b11001100, out ulong _);
+            => ginxs.sbroadcast((byte)0b11001100, out ulong _);
 
     }
 }

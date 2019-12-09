@@ -13,15 +13,16 @@ namespace Z0
 
     partial class BitGrid
     {        
+
         /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
         /// </summary>
         /// <param name="g">The source grid</param>
         [MethodImpl(Inline)]
-        public static BitString bitstring<T>(in BitGrid<T> g)
+        public static BitString bitstring<T>(BitGrid16<T> g)
             where T : unmanaged
                 => g.Data.ToBitString(g.BitCount);
- 
+
         /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
         /// </summary>
@@ -123,5 +124,15 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => g.Data.ToBitString(g.BitCount);
+ 
+         /// <summary>
+        /// Converts a grid to an equivalent linear bitstring representation
+        /// </summary>
+        /// <param name="g">The source grid</param>
+        [MethodImpl(Inline)]
+        public static BitString bitstring<T>(in BitGrid<T> g)
+            where T : unmanaged
+                => g.Data.ToBitString(g.BitCount);
+
     }
 }

@@ -1,4 +1,4 @@
-// 2019-12-07 18:40:02:986
+// 2019-12-08 17:58:49:727
 int convert_g32f_to_g32i(float src)
 {
     IL_0000: ldarg.0
@@ -399,27 +399,6 @@ double convert_g8i_to_g64f(sbyte src)
     IL_0000: ldarg.0
     IL_0001: call System.Double Z0.Converter::convert<System.SByte,System.Double>(System.SByte)
     IL_0006: ret
-
-}
-Char convert_8i_to_ch16(sbyte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.u2
-    IL_0002: ret
-
-}
-Char convert_g8i_to_gch16(sbyte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Char Z0.Converter::convert<System.SByte,System.Char>(System.SByte)
-    IL_0006: ret
-
-}
-sbyte convert_8u_to_8i(byte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.i1
-    IL_0002: ret
 
 }
 sbyte convert_g8u_to_g8i(byte src)

@@ -13,11 +13,22 @@ namespace Z0
     partial struct BitString
     {
         /// <summary>
+        /// Extracts a scalar value from a bitstring
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        /// <param name="offset">The bit position at which to begin extraction</param>
+        /// <typeparam name="T">The scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public static T scalar<T>(BitString src, int offset = 0)
+            where T : unmanaged 
+                => src.Scalar<T>(offset);
+
+        /// <summary>
         /// Constructs a bitstring from text
         /// </summary>
         /// <param name="src">The bit source</param>
         public static BitString parse(string src)                
-        {
+        {            
             src = src.RemoveWhitespace();
             var len = src.Length;
             var lastix = len - 1;
@@ -233,7 +244,7 @@ namespace Z0
         /// <param name="shift">The magnitude of the rotation</param>
         public static BitString rotl(BitString bs, int shift)
         {
-            Span<byte> dst = bs.data.Replicate();
+            var dst = bs.data.Replicate();
             Span<byte> src = stackalloc byte[bs.Length];
             dst.CopyTo(src);
             var cut = bs.Length - shift;
@@ -241,7 +252,7 @@ namespace Z0
             var seg2 = src.Slice(cut);
             seg2.CopyTo(dst, 0);
             seg1.CopyTo(dst, shift);
-            return BitString.bitseq(dst);
+            return BitString.load(dst);
         }
     }
 }

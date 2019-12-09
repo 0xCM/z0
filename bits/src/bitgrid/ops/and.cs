@@ -13,7 +13,6 @@ namespace Z0
 
     partial class BitGrid
     {        
-
         /// <summary>
         /// Computes the bitwise AND between fixed-width 32-bit generic bitgrids
         /// </summary>
@@ -45,8 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid64<T> and<T>(BitGrid64<T> gx, BitGrid64<T> gy)
             where T : unmanaged
-                => math.and(gx,gy);
-
+                => bg64<T>(gx.RowCount, gx.ColCount, math.and(gx,gy));
          
         /// <summary>
         /// Computes the bitwise AND between fixed-width natural bitgrids

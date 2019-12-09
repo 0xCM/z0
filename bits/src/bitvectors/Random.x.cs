@@ -165,7 +165,7 @@ namespace Z0
             where T : unmanaged
         {
             var v = random.Next<T>();
-            int clamp = bitsize<T>() - math.min(bitsize<T>(), (uint)wmax);
+            var clamp = bitsize<T>() - math.min(bitsize<T>(), wmax);
             return gmath.srl(v,clamp);
         }    
 

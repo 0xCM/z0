@@ -30,10 +30,6 @@ namespace Z0
         readonly byte cols; 
 
         [MethodImpl(Inline)]
-        public static implicit operator BitGrid64<T>(ulong src)
-            => new BitGrid64<T>(src);
-
-        [MethodImpl(Inline)]
         public static implicit operator ulong(BitGrid64<T> src)
             => src.data;
 
@@ -46,7 +42,7 @@ namespace Z0
             => gx.data != gy.data;
 
         [MethodImpl(Inline)]
-        internal BitGrid64(ulong data)
+        public BitGrid64(ulong data, int rows, int cols)
         {
             this.data = data;
             this.rows = 0;
@@ -54,11 +50,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public BitGrid64(ulong data, int rows, int cols)
+        internal BitGrid64(ulong data, GridDim dim)
         {
             this.data = data;
-            this.rows = 0;
-            this.cols = 0;
+            this.rows = (byte)dim.RowCount;
+            this.cols = (byte)dim.ColCount;
         }
 
         public ulong Data
@@ -91,7 +87,7 @@ namespace Z0
         public int BitCount
         {
             [MethodImpl(Inline)]
-            get => ByteCount * 8;
+            get => RowCount * ColCount;
         }
 
         public Span<T> Cells
@@ -126,10 +122,10 @@ namespace Z0
         public bool Equals(BitGrid64<T> rhs)
             => data.Equals(rhs.data);
 
-        [MethodImpl(Inline)]
+       [MethodImpl(Inline)]
         public BitGrid64<U> As<U>()
             where U : unmanaged
-                => data;
+                => new BitGrid64<U>(data,rows,cols);
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

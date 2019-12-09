@@ -1,4 +1,11 @@
-// 2019-12-07 18:40:01:767
+// 2019-12-08 17:58:48:730
+BitGrid256<N16,N16,ushort> transpose(BitGrid256<N16,N16,ushort> g)
+{
+    IL_0000: ldarga.s g
+    IL_0002: call Z0.BitGrid256`3<Z0.N16,Z0.N16,System.UInt16> Z0.BitGrid::transpose(Z0.BitGrid256`3<Z0.N16,Z0.N16,System.UInt16>&)
+    IL_0007: ret
+
+}
 bit read_bit_from_vector(in BitCells<N23,byte> src)
 {
     IL_0000: ldarg.0

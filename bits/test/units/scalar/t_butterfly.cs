@@ -76,7 +76,7 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.CpuVector<uint>(n);
-                var y = gvbits.vbutterfly(w, x);
+                var y = gbits.vbutterfly(w, x);
                 var xs = x.ToSpan();
                 var zs = DataBlocks.single<uint>(n);
                 for(var j=0; j<zs.CellCount; j++)
@@ -94,7 +94,7 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.CpuVector<uint>(n);
-                var y = gvbits.vbutterfly(w, x);
+                var y = gbits.vbutterfly(w, x);
                 var xs = x.ToSpan();
                 var zs = DataBlocks.single<uint>(n);
                 for(var j=0; j<zs.CellCount; j++)
@@ -112,7 +112,7 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.CpuVector<ulong>(n);
-                var y = gvbits.vbutterfly(w, x);
+                var y = gbits.vbutterfly(w, x);
                 var xs = x.ToSpan();
                 var zs = DataBlocks.single<ulong>(n);
                 for(var j=0; j<zs.CellCount; j++)
@@ -130,7 +130,7 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.CpuVector<ulong>(n);
-                var y = gvbits.vbutterfly(w, x);
+                var y = gbits.vbutterfly(w, x);
                 var xs = x.ToSpan();
                 var zs = DataBlocks.single<ulong>(n);
                 for(var j=0; j<zs.CellCount; j++)

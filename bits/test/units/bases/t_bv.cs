@@ -92,14 +92,15 @@ namespace Z0
             }
         }
 
-        protected  void nbv_bs_check<N,T>()
+        protected void nbv_bs_check<N,T>()
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
+            var storage = new byte[natval<N>()];
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.BitVector<N,T>();
-                var y = x.ToBitString();
+                var y = x.ToBitString(storage);
                 Claim.eq(natval<N>(), x.Width);
                 Claim.eq(x.Width, y.Length);
                 

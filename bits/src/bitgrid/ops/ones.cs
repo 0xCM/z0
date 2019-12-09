@@ -13,6 +13,16 @@ namespace Z0
 
     partial class BitGrid
     {        
+        /// <summary>
+        /// Retuns a one-filled bitgrid
+        /// </summary>
+        /// <param name="n">The width selector</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid16<T> ones<T>(N16 n, int rows, int cols, T t = default)
+            where T : unmanaged
+                => bg16<T>(rows,cols, ushort.MaxValue);
 
         /// <summary>
         /// Retuns a one-filled bitgrid
@@ -32,9 +42,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid64<T> ones<T>(N64 n, T t = default)
+        public static BitGrid64<T> ones<T>(N64 n, int rows, int cols, T t = default)
             where T : unmanaged
-                => ulong.MaxValue;
+                => bg64<T>(rows,cols, ulong.MaxValue);
 
         /// <summary>
         /// Returns a 1-filled natural bitgrid 

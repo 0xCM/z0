@@ -22,7 +22,7 @@ namespace Z0
             var n = bitsize<T>();            
             var dst = default(T);
             for(byte i=0; i < n; i++)
-                gbits.set(ref dst, i,A[i,i]);
+                dst = gbits.set(dst, i,A[i,i]);
             return dst;                    
         }
 
@@ -46,7 +46,7 @@ namespace Z0
             const uint N = 16;            
             var dst = (ushort)0;
             for(byte i=0; i < N; i++)
-                gbits.set(ref dst, i,A[i,i]);
+                dst = gbits.set(dst, i,A[i,i]);
             return dst;                    
         }
 
@@ -59,7 +59,7 @@ namespace Z0
             const uint N = 32;            
             var dst = 0u;
             for(byte i=0; i < N; i++)
-                gbits.set(ref dst, i,A[i,i]);
+                dst = gbits.set(dst, i,A[i,i]);
             return dst;                    
         }
 
@@ -72,7 +72,7 @@ namespace Z0
             const uint N = 64;            
             var dst = 0ul;
             for(byte i=0; i < N; i++)
-                gbits.set(ref dst, i, A[i,i]);
+                dst = gbits.set(dst, i, A[i,i]);
             return dst;                    
         }
     }

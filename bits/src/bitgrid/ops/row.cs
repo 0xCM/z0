@@ -195,6 +195,10 @@ namespace Z0
             where T : unmanaged
                 => v16u(g.Data).GetElement(index);
 
+        [MethodImpl(Inline)]
+        public static BitGrid256<N16,N16,T> row<T>(in BitGrid256<N16,N16,T> g, int index, BitVector<N16,ushort> data)
+            where T : unmanaged
+                => v16u(g.Data).WithElement(index, data);
 
         /// <summary>
         /// Extracts an index-identifed 64-bit grid row

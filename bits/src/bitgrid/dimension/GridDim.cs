@@ -13,88 +13,77 @@ namespace Z0
     /// <summary>
     /// Defines grid dimensions based on specification without parametrization
     /// </summary>
-    public readonly struct GridDim : IGridDim
-    {
-        public GridDim(int rows, int cols, int cellwidth, int? blockwidth = null)
-        {
-            this.RowCount = rows;
-            this.ColCount = cols;
-            this.CellWidth = cellwidth;
-            this.BlockWidth = blockwidth ?? CellWidth;
-        }
-
+    public readonly struct GridDim 
+    {        
         /// <summary>
         /// The number of grid rows
         /// </summary>
-        public int RowCount {get;}
+        public readonly int RowCount;
 
         /// <summary>
         /// The number of grid columns
         /// </summary>
-        public int ColCount {get;}
+        public readonly int ColCount;
 
-        /// <summary>
-        /// The bit width of a storage cell
-        /// </summary>
-        public int CellWidth {get;}
+        public static GridDim Empty => default;
 
-        /// <summary>
-        /// The bit width of a storage block
-        /// </summary>
-        public int BlockWidth {get;}
-
-        /// <summary>
-        /// The total number gb of grid bits determined by gb := MxN
-        /// </summary>
-        public int BitCount
+        public static GridDim Parse(string s)
         {
-            [MethodImpl(Inline)]
-            get => RowCount * ColCount;
+            var parts = s.Split('x');
+            if(parts.Length == 2)
+            {
+                if(gmath.parse(parts[0], out int m))
+                if(gmath.parse(parts[1], out int n))
+                    return (m,n);
+            }
+            return Empty;
         }
 
-        /// <summary>
-        /// The number of cells required cover a grid
-        /// </summary>
-        public int CellCount
-        {
-            [MethodImpl(Inline)]
-            get => BitCalcs.cellcount(RowCount,ColCount, CellWidth);
-        }
+        public static bool operator ==(GridDim d1, GridDim d2)
+            => d1.Equals(d2);
 
-        /// <summary>
-        /// The number of bytes required to cover a grid
-        /// </summary>
-        public int ByteCount
-        {
-            [MethodImpl(Inline)]
-            get => BitCalcs.bytecount(RowCount, ColCount);
-        }
+        public static bool operator !=(GridDim d1, GridDim d2)
+            => !d1.Equals(d2);
 
-        /// <summary>
-        /// A semantic identifier that characterizes/identifies a grid
-        /// </summary>
-        public GridMoniker Moniker 
-        {
-            [MethodImpl(Inline)]
-            get => GridMoniker.FromSpecs(RowCount,ColCount,CellWidth);
-        }
-
-        /// <summary>
-        /// Computes the 0-based linear index determined by a row/col coordinate
-        /// </summary>
-        /// <param name="row">The 0-based row index</param>
-        /// <param name="col">The 0-based col index</param>
         [MethodImpl(Inline)]
-        public int Pos(int row, int col)
-            => BitCalcs.bitpos(ColCount, row, col);
+        public static implicit operator GridDim((int rows, int cols) src)
+            => new GridDim(src.rows,src.cols);
+
+        [MethodImpl(Inline)]
+        public static implicit operator (int rows, int cols)(GridDim src)
+            => (src.RowCount, src.ColCount);
+
+        [MethodImpl(Inline)]
+        public GridDim(int rows, int cols)
+        {
+            this.RowCount = rows;
+            this.ColCount = cols;
+        }
 
         /// <summary>
-        /// Returns a dimension expression of the form RxCxWw where 
-        /// R := row count
-        /// C := column count
-        /// W := cell width
+        /// Formats the dimension in canonical form
         /// </summary>
         public string Format()
-            => $"{RowCount}x{ColCount}x{CellWidth}w";
+            => $"{RowCount}x{ColCount}";
+
+        [MethodImpl(Inline)]
+        public void Deconstruct(out int rows, out int cols)
+        {
+            rows = RowCount;
+            cols = ColCount;
+        }
+
+        [MethodImpl(Inline)]
+        public bool Equals(GridDim src)
+            => src.RowCount == RowCount && src.ColCount == ColCount;
+
+        public override string ToString()
+            => Format();
+        
+        public override int GetHashCode()
+            => HashCode.Combine(RowCount,ColCount);
+        
+        public override bool Equals(object obj)
+            => obj is GridDim d && Equals(d);
     }
 }

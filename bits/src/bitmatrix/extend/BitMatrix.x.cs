@@ -42,10 +42,10 @@ namespace Z0
             where T : unmanaged
 
         {
-            Span<byte> bits = stackalloc byte[src.RowCount*src.ColCount];
+            Span<byte> bits = new byte[src.RowCount*src.ColCount];
             for(var i=0;i<src.RowCount; i++)
                 src[i].ToBitString().BitSeq.CopyTo(bits.Slice(i*src.ColCount));
-            return BitString.bitseq(bits);                            
+            return BitString.load(bits);                            
         }
 
         [MethodImpl(Inline)]

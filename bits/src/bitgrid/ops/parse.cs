@@ -13,6 +13,17 @@ namespace Z0
 
     partial class BitGrid
     {        
+        /// <summary>
+        /// Hydrates a fixed-width 32-bit dimensionless grid from a bitstring
+        /// </summary>
+        /// <param name="bs">The source bitstring</param>
+        /// <param name="n">The number of bitstring bits to parse</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid16<T> parse<T>(BitString bs, N16 n, int rows, int cols, T t = default)
+            where T : unmanaged
+                => bg16<T>(rows, cols, bs.TakeUInt16());
 
         /// <summary>
         /// Hydrates a fixed-width 32-bit dimensionless grid from a bitstring
@@ -34,9 +45,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid64<T> parse<T>(BitString bs, N64 n, T t = default)
+        public static BitGrid64<T> parse<T>(BitString bs, N64 n, int rows, int cols, T t = default)
             where T : unmanaged
-                => bs.TakeUInt64();
+                => bg64<T>(rows, cols, bs.TakeUInt64());
 
         /// <summary>
         /// Hydrates a fixed-width natural bitgrid from a bitstring

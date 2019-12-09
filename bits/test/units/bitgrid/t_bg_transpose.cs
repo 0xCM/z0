@@ -11,31 +11,44 @@ namespace Z0
     
     public class t_bg_transpose : t_bg<t_bg_transpose>
     {        
-
-        public void algorithm()
+        static Span<int> GetPositions<M,N>(int col, M m= default, N n = default)
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
         {
+            Span<int> positions = new int[natval(m)];
+            for(var row = 0; row < positions.Length; row++)
+                positions[row] = BitGrid.colidx(n, row, col);
+            return positions;
+        }
+        static Span<int> GetSegments<M,N,T>(int col, M m= default, N n = default, T t = default)
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var positions = GetPositions(col,m,n);
+            var segwidth = bitsize<T>();
+            Span<int> segments = new int[natval(m)];            
+            for(var i=0; i<positions.Length; i++)
+                segments[i] = positions[i]/segwidth;
+            return segments;
+        }
 
-            /*
-                1   2   3   4
-                5   6   7   8
-                9   10  11  12
-                13  14  15  16
+        public void bg_transpose_256x16x16()
+        {            
+            var w = n256;
+            var m = n16;
+            var n = n16;
+            var t = z16;
+            ushort pattern = 0b1100110011001100;
 
-
-                1   5   9   13
-                2   6   10  14
-                3   7   11  15
-                4   8   12  16
-
-                1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16
-                1   5   9   13  2   6   10  14  3   7   11  15  4   8   12  16
-
-            */
+            var g = BitGrid.broadcast(w, pattern, m,n);
+            var gT = BitGrid.transpose(g);
+            var bsT = g.ToBitString().Transpose(m,n).ToBitGrid(w,m,n,t);
+            Claim.yea(gT == bsT);
 
         }
 
-
-        public void nbg_transpose_8x8()
+        void nbg_transpose_8x8()
         {
             var w = n64;
             var m = n8;

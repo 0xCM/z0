@@ -46,7 +46,7 @@ namespace Z0
             => BitString.clear(src,i0,i1);
 
         [MethodImpl(Inline)]
-        public static BitString Inject(this BitString dst, BitString src, int start, int len)
+        public static BitString BitMap(this BitString dst, BitString src, int start, int len)
             => BitString.inject(src,dst,start,len);
 
         [MethodImpl(Inline)]

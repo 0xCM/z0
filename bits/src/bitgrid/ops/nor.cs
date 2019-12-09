@@ -20,6 +20,17 @@ namespace Z0
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
+        public static BitGrid16<T> nor<T>(BitGrid16<T> gx, BitGrid16<T> gy)
+            where T : unmanaged
+                => bg16<T>(gx.RowCount, gx.ColCount, math.nor(gx,gy));
+
+        /// <summary>
+        /// Computes the bitwise NOR between fixed-width 32-bit generic bitgrids
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
         public static BitGrid32<T> nor<T>(BitGrid32<T> gx, BitGrid32<T> gy)
             where T : unmanaged
                 => bg32<T>(gx.RowCount, gx.ColCount, math.nor(gx,gy));
@@ -33,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid64<T> nor<T>(BitGrid64<T> gx, BitGrid64<T> gy)
             where T : unmanaged
-                => math.nor(gx,gy);
+                => bg64<T>(gx.RowCount, gx.ColCount, math.nor(gx,gy));
          
         /// <summary>
         /// Computes the bitwise NOR between fixed-width natural bitgrids

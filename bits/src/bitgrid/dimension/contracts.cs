@@ -23,15 +23,6 @@ namespace Z0
         /// </summary>
         int ColCount {get;}
         
-        /// <summary>
-        /// The bit-width of a grid storage cell
-        /// </summary>
-        int CellWidth {get;}
-
-        /// <summary>
-        /// The width of a grid block
-        /// </summary>
-        int BlockWidth {get;}
 
     }
 

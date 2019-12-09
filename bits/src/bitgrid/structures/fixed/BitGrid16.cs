@@ -42,6 +42,14 @@ namespace Z0
             => gx.data != gy.data;
 
         [MethodImpl(Inline)]
+        internal BitGrid16(ushort data, GridDim dim)
+        {
+            this.data = data;
+            this.rows = (byte)dim.RowCount;
+            this.cols = (byte)dim.ColCount;
+        }
+
+        [MethodImpl(Inline)]
         internal BitGrid16(ushort data, int rows, int cols)
         {
             this.data = data;
@@ -79,7 +87,7 @@ namespace Z0
         public int BitCount
         {
             [MethodImpl(Inline)]
-            get => ByteCount * 8;
+            get => RowCount * ColCount;
         }
 
         public Span<T> Cells

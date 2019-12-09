@@ -11,9 +11,8 @@ namespace Z0
 
     using static zfunc;
     using static As;
-    using static AsIn;
     
-    partial class gvbits
+    partial class gbits
     {
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -216,7 +215,5 @@ namespace Z0
             else            
                 throw unsupported<T>();
         }
- 
     }
-
 }

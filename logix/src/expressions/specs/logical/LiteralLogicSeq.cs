@@ -41,7 +41,7 @@ namespace Z0.Logix
             => Terms.Length;
 
         public BitString ToBitString()
-            => BitString.bitspan(Terms);
+            => BitString.load(Terms);
         
         public string Format()
             => ToBitString().Format();

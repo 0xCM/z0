@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="offset">The shift offset</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> vxors<T>(Vector128<T> x, int offset)
+        public static Vector128<T> vxors<T>(Vector128<T> x, byte offset)
             where T : unmanaged
                 => vxor(x,vxor(vsll(x, offset),vsrl(x,offset)));
 
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="offset">The shift offset</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vxors<T>(Vector256<T> x, int offset)
+        public static Vector256<T> vxors<T>(Vector256<T> x, byte offset)
             where T : unmanaged
                 => vxor(x,vxor(vsll(x, offset),vsrl(x,offset)));
 
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The amount by which to shift each component</param>
         [MethodImpl(Inline)]
-        public static Vector128<T> vxorsr<T>(Vector128<T> x, int shift)
+        public static Vector128<T> vxorsr<T>(Vector128<T> x, byte shift)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The amount by which to shift each component</param>
         [MethodImpl(Inline)]
-        public static Vector256<T> vxorsr<T>(Vector256<T> x, int shift)
+        public static Vector256<T> vxorsr<T>(Vector256<T> x, byte shift)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -80,7 +80,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The amount by which to shift each component</param>
         [MethodImpl(Inline)]
-        public static Vector128<T> vxorsl<T>(Vector128<T> x, int shift)
+        public static Vector128<T> vxorsl<T>(Vector128<T> x, byte shift)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -99,7 +99,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The amount by which to shift each component</param>
         [MethodImpl(Inline)]
-        public static Vector256<T> vxorsl<T>(Vector256<T> x, int shift)
+        public static Vector256<T> vxorsl<T>(Vector256<T> x, byte shift)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

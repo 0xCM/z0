@@ -83,13 +83,6 @@ namespace Z0
                 this.data[i] = (byte)src[i];
         }
 
-        [MethodImpl(Inline)]
-        BitString(bit[] src)
-        {
-            this.data = new byte[src.Length];
-            for(var i=0; i<src.Length; i++)
-                this.data[i] = (byte)src[i];
-        }
 
         /// <summary>
         /// Queries/manipulates bit at specified index
@@ -297,7 +290,7 @@ namespace Z0
         /// </summary>
         public BitString Replicate()
         {
-            Span<byte> dst = new byte[Length];
+            var dst = new byte[Length];
             data.CopyTo(dst);
             return new BitString(dst);
         }
@@ -308,10 +301,11 @@ namespace Z0
         /// <param name="n">Then number of times to replicate the bistring in the target</param>
         public BitString Replicate(int n)
         {            
-            Span<byte> dst = new byte[Length*n];
+            var data = new byte[Length*n];
+            Span<byte> dst = data;
             for(var i=0; i<n; i++)
                 data.CopyTo(dst.Slice(i*Length));
-            return new BitString(dst);
+            return new BitString(data);
         }
  
         /// <summary>
@@ -320,7 +314,7 @@ namespace Z0
         /// <param name="tail">The trailing bits</param>
         public BitString Concat(BitString tail)
         {
-            Span<byte> dst = new byte[Length + tail.Length];
+            var dst = new byte[Length + tail.Length];
             tail.BitSeq.CopyTo(dst);
             BitSeq.CopyTo(dst, tail.Length);
             return new BitString(dst);

@@ -6,11 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;
 
     public class t_vcpu_pop : t_vcpu<t_vcpu_pop>
     {
+
         public void vcpu_pop_3x256()
         {
             var n = n256;
@@ -141,8 +143,5 @@ namespace Z0
             }
             Benchmark($"pop_1x64_lookup", counter, opcount);
         }
-
-
     }
-
 }

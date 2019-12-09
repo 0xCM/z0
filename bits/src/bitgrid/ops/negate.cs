@@ -19,6 +19,16 @@ namespace Z0
         /// <param name="gx">The source grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
+        public static BitGrid16<T> negate<T>(BitGrid16<T> gx)
+            where T : unmanaged
+                => bg16<T>(gx.RowCount, gx.ColCount, math.negate(gx));
+
+        /// <summary>
+        /// Computes the two's complement negation of source grid
+        /// </summary>
+        /// <param name="gx">The source grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
         public static BitGrid32<T> negate<T>(BitGrid32<T> gx)
             where T : unmanaged
                 => bg32<T>(gx.RowCount, gx.ColCount, math.negate(gx));
@@ -31,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid64<T> negate<T>(BitGrid64<T> gx)
             where T : unmanaged
-                => math.negate(gx);
+                => bg64<T>(gx.RowCount, gx.ColCount, math.negate(gx));
 
         /// <summary>
         /// Computes the two's complement negation of the source grid

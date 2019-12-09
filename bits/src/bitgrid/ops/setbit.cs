@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void setbit<T>(int bitpos, bit state, ref T dst)    
             where T : unmanaged
-                => gbits.set(ref cell(ref dst, bitpos), (byte)(bitpos % bitsize<T>()), state);      
+                => cell(ref dst, bitpos) = gbits.set(cell(ref dst, bitpos), (byte)(bitpos % bitsize<T>()), state);      
 
         /// <summary>
         /// Sets the state of an a coordinate-identified bit

@@ -13,149 +13,28 @@ namespace Z0
 
     partial class BitGrid
     {
-
         /// <summary>
-        /// Transmits the source state to all bits in a target grid
+        /// Allocates and fills a dynamically-sized generic grid
         /// </summary>
-        /// <param name="state">The source state</param>
-        /// <param name="dst">The target grid</param>
+        /// <param name="rows">The number of grid rows</param>
+        /// <param name="cols">The number of grid columns</param>
+        /// <param name="cell">The data to replicate across all grid cells</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly BitGrid64<T> broadcast<T>(bit state, out BitGrid64<T> dst)    
+        public static BitGrid<T> broadcast<T>(int rows, int cols, T cell)            
             where T : unmanaged
         {
-            dst = state ? maxval<ulong>() : 0ul;
-            return ref dst;
-        }
-
-        /// <summary>
-        /// Transmits the content of a single cell to all cells in a grid
-        /// </summary>
-        /// <param name="cell">The source cell</param>
-        /// <param name="dst">The target grid</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly BitGrid64<T> broadcast<T>(T cell, out BitGrid64<T> dst)    
-            where T : unmanaged
-        {
-            dst = gsinx.sbroadcast(cell, out ulong _);
-            return ref dst;
-        }
-
-         
-        [MethodImpl(Inline)]
-        public static ref readonly BitGrid32<M,N,T> broadcast<M,N,T>(bit state, out BitGrid32<M,N,T> dst)    
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            dst = state ? maxval<uint>() : 0u;
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref readonly BitGrid32<M,N,T> broadcast<M,N,T>(T cell, out BitGrid32<M,N,T> dst)    
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            dst = gsinx.sbroadcast(cell, out uint _);
-            return ref dst;
+            var g = alloc<T>(rows,cols);
+            g.Data.Fill(cell);
+            return g;
         }
 
         /// <summary>
-        /// Transmits the content of a single cell to all cells in a grid
+        /// Fills a caller-allocated generic grid
         /// </summary>
-        /// <param name="cell">The source cell</param>
+        /// <param name="cell">The data to replicate across all grid cells</param>
         /// <param name="dst">The target grid</param>
-        /// <typeparam name="M">The row count type</typeparam>
-        /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly BitGrid64<M,N,T> broadcast<M,N,T>(T cell, out BitGrid64<M,N,T> dst)    
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            dst = gsinx.sbroadcast(cell, out ulong _);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static void broadcast<M,N,T>(bit state, out BitGrid64<M,N,T> dst)    
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            dst = state ? maxval<ulong>() : 0ul;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref readonly BitGrid128<M,N,T> broadcast<M,N,T>(bit state, out BitGrid128<M,N,T> dst)    
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-              dst = ginx.vbroadcast(n128,state ? maxval<T>() : zero<T>());
-              return ref dst;
-        }
-
-        /// <summary>
-        /// Transmits the content of a single cell to all cells in a grid
-        /// </summary>
-        /// <param name="cell">The source cell</param>
-        /// <param name="dst">The target grid</param>
-        /// <typeparam name="M">The row count type</typeparam>
-        /// <typeparam name="N">The col count type</typeparam>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly BitGrid128<M,N,T> broadcast<M,N,T>(T cell, out BitGrid128<M,N,T> dst)    
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            dst = ginx.vbroadcast(n128,cell);
-            return ref dst;
-        }
-
-        /// <summary>
-        /// Transmits the content of a single cell to all cells in a grid
-        /// </summary>
-        /// <param name="cell">The source cell</param>
-        /// <param name="dst">The target grid</param>
-        /// <typeparam name="M">The row count type</typeparam>
-        /// <typeparam name="N">The col count type</typeparam>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly BitGrid256<M,N,T> broadcast<M,N,T>(T cell, out BitGrid256<M,N,T> dst)    
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            dst = ginx.vbroadcast(n256,cell);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref readonly BitGrid<M,N,T> broadcast<M,N,T>(bit state, in BitGrid<M,N,T> dst)    
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            dst.Data.Fill(state ? gmath.maxval<T>() : gmath.zero<T>());
-            return ref dst;
-        }
-
-         [MethodImpl(Inline)]
-        public static ref readonly BitGrid<M,N,T> broadcast<M,N,T>(T cell, in BitGrid<M,N,T> dst)    
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            dst.Data.Fill(cell);
-            return ref dst;
-        }
-
         [MethodImpl(Inline)]
         public static ref readonly BitGrid<T> broadcast<T>(T cell, in BitGrid<T> dst)            
             where T : unmanaged
@@ -164,13 +43,133 @@ namespace Z0
             return ref dst;
         }
 
+        /// <summary>
+        /// Transmits the content of a single cell to all cells in a grid
+        /// </summary>
+        /// <param name="cell">The source cell</param>
+        /// <param name="dst">The target grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly BitGrid<T> broadcast<T>(bit state, in BitGrid<T> dst)    
+        public static BitGrid16<T> broadcast<T>(N16 w, int rows, int cols, T cell)    
+            where T : unmanaged
+                => define<T>(w,rows, cols, ginxs.sbroadcast<T,ushort>(cell));
+
+        /// <summary>
+        /// Transmits the content of a single cell to all cells in a grid
+        /// </summary>
+        /// <param name="cell">The source cell</param>
+        /// <param name="dst">The target grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid32<T> broadcast<T>(N32 w, int rows, int cols, T cell)    
+            where T : unmanaged
+                => define<T>(w,rows, cols, ginxs.sbroadcast<T,uint>(cell));
+
+        /// <summary>
+        /// Transmits the content of a single cell to all cells in a grid
+        /// </summary>
+        /// <param name="cell">The source cell</param>
+        /// <param name="dst">The target grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid64<T> broadcast<T>(N64 w, int rows, int cols, T cell)    
+            where T : unmanaged
+                => define<T>(w,rows, cols, ginxs.sbroadcast<T,ulong>(cell));
+
+        /// <summary>
+        /// Transmits the content of a single cell to all cells in a grid
+        /// </summary>
+        /// <param name="cell">The source cell</param>
+        /// <param name="dst">The target grid</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The col count type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid32<M,N,T> broadcast<M,N,T>(N32 w, T cell,  M m = default, N n = default)    
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => ginxs.sbroadcast<T,uint>(cell);
+
+        /// <summary>
+        /// Transmits the content of a single cell to all cells in a grid
+        /// </summary>
+        /// <param name="cell">The source cell</param>
+        /// <param name="dst">The target grid</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The col count type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid64<M,N,T> broadcast<M,N,T>(N64 w, T cell,  M m = default, N n = default)    
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => ginxs.sbroadcast(cell, out ulong _);
+
+        /// <summary>
+        /// Transmits the content of a single cell to all cells in a grid
+        /// </summary>
+        /// <param name="cell">The source cell</param>
+        /// <param name="dst">The target grid</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The col count type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid128<M,N,T> broadcast<M,N,T>(N128 w, T cell,  M m = default, N n = default)    
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => ginx.vbroadcast(w,cell);
+
+        /// <summary>
+        /// Transmits the content of a single cell to all cells in a grid
+        /// </summary>
+        /// <param name="cell">The source cell</param>
+        /// <param name="dst">The target grid</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The col count type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid256<M,N,T> broadcast<M,N,T>(N256 w, T cell,  M m = default, N n = default)    
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => ginx.vbroadcast(w,cell);
+
+        /// <summary>
+        /// Allocates and fills a dymanically-sized natural grid
+        /// </summary>
+        /// <param name="cell">The data to replicate across all grid cells</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The col count type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid<M,N,T> broadcast<M,N,T>(T cell, M m = default, N n = default)    
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            dst.Data.Fill(state ? gmath.maxval<T>() : gmath.zero<T>());            
-            return ref dst;
+            var grid = alloc<M,N,T>();
+            grid.Data.Fill(cell);
+            return grid;
         }
 
+        /// <summary>
+        /// Fills a caller-allocated natural grid
+        /// </summary>
+        /// <param name="cell">The data to replicate across all grid cells</param>
+        /// <param name="dst">The target grid</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The col count type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly BitGrid<M,N,T> broadcast<M,N,T>(T cell, in BitGrid<M,N,T> dst)    
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            dst.Data.Fill(cell);
+            return ref dst;
+        }
     }
 }

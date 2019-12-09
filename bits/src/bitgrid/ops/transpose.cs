@@ -17,7 +17,7 @@ namespace Z0
         public static BitGrid64<N8,N8,T> transpose<T>(BitGrid64<N8,N8,T> g)        
             where T : unmanaged
         {
-            var dst = alloc64<N8,N8,byte>();            
+            var dst = alloc64<N8,N8,byte>();                        
             var src = dinx.vscalar(n128,g);
             for(var i=7; i>= 0; i--)
             {
@@ -35,23 +35,6 @@ namespace Z0
             where Q : unmanaged, ITypeNat
             where T : unmanaged
                 => src.Data;
-
-        //  0  1  2  3
-        //  4  5  6  7
-        //  8  9 10 11
-        // 12 13 14 15
-        // 16 17 18 19
-        // 20 21 22 23
-        // 24 25 26 27
-        // 28 29 30 31
-        // 32 33 34 35 
-        // 36 37 38 39
-        // 40 41 42 43 
-        // 44 45 46 47 
-        // 48 49 50 51
-        // 52 53 54 55
-        // 56 57 58 59
-        // 60 61 62 63
 
 
         [MethodImpl(Inline)]
@@ -83,5 +66,37 @@ namespace Z0
                 (ulong)A.Col(2) << 32 | 
                 (ulong)A.Col(3) << 48
                 );
+
+
+        [MethodImpl(Inline)]
+        static Vector256<T> vT16x16<T>(in Vector256<T> src, in Vector256<T> g0, int i, int j)
+            where T : unmanaged
+        {
+            const uint E = BitMasks.Even32;
+            const uint O = BitMasks.Odd32;
+
+            var mask = ginx.vtakemask(src, (byte)i);
+            var gT = gcell(g0, i, convert<T>(Bits.select(mask, E)));
+            gT = gcell(gT, j, convert<T>(Bits.select(mask, O)));
+            return gT;
+        }
+
+        [MethodImpl(Inline)]
+        public static BitGrid256<N16,N16,ushort> transpose(in BitGrid256<N16,N16,ushort> g)                
+        {
+            var gT = default(Vector256<ushort>);
+            var src = g.Data;
+
+            gT = vT16x16(src, gT, 0, 8);
+            gT = vT16x16(src, gT, 1, 9);
+            gT = vT16x16(src, gT, 2, 10);
+            gT = vT16x16(src, gT, 3, 11);
+            gT = vT16x16(src, gT, 4, 12);
+            gT = vT16x16(src, gT, 5, 13);
+            gT = vT16x16(src, gT, 6, 14);
+            gT = vT16x16(src, gT, 7, 15);
+
+            return load(gT,n16,n16);
+        }
     }
 }

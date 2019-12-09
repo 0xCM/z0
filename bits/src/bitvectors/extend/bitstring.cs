@@ -93,7 +93,7 @@ namespace Z0
         public static BitString ToBitString<N,T>(this BitVector128<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitString.vector(src.data, src.Width);       
+                => BitString.load(src.data, src.Width);       
 
         /// <summary>
         /// Converts the vector content to a bitring representation
@@ -103,6 +103,15 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => BitVector.bitstring(x);
+
+        /// <summary>
+        /// Converts the vector content to a bitring representation
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitString ToBitString<N,T>(this BitVector<N,T> x, byte[] storage)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => BitVector.bitstring(x,storage);
 
         /// <summary>
         /// Extracts the represented data as a bitstring

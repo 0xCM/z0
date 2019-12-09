@@ -25,11 +25,7 @@ namespace Z0
             if(shift >= 64)
                 return vsll(vbsll(src, 8), shift - 64);     
             else
-            {           
-                var x = vbsll(src, 8);
-                var y = vsll(src, shift);
-                return vor(y, vsrl(x, 64 - shift));
-            }
+                return vor(vsll(src, shift), vsrl(vbsll(src, 8), (byte)(64 - shift)));
         }
 
         [MethodImpl(Inline)]
@@ -56,11 +52,7 @@ namespace Z0
             if(shift >= 64)
                 return vsll(vbsll(src, 8), shift - 64);     
             else
-            {           
-                var x = vbsll(src, 8);
-                var y = vsll(src, shift);
-                return vor(y, vsrl(x, 64 - shift));
-            }
+                return vor(vsll(src, shift), vsrl(vbsll(src, 8), (byte)(64 - shift)));
         }
 
         [MethodImpl(Inline)]

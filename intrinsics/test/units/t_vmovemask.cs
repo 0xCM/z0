@@ -140,7 +140,7 @@ namespace Z0
                         mask = BitMask.enable(mask, r);
                 
                 var expect = mask.ToBitVector(bytes).ToBitString();
-                var actual = dinx.vtakemask(srcCpuVec).ToBitVector(bytes).ToBitString();
+                var actual = dinx.vtakemask(srcCpuVec).ToBitVector().ToBitString();
                 Claim.eq(expect, actual);
             }
         }

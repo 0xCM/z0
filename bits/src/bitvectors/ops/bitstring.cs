@@ -77,6 +77,14 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => BitString.scalar<T>(x.Scalar, x.Width);
 
+        /// <summary>
+        /// Converts the vector content to a bitring representation
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitString bitstring<N,T>(BitVector<N,T> x, byte[] storage)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => BitString.scalar<T>(x.Scalar, storage, x.Width);
 
         /// <summary>
         /// Converts the vector to a bistring representation
@@ -88,8 +96,6 @@ namespace Z0
         public static BitString bitstring<N,T>(in BitVector128<N,T> x)
             where T : unmanaged   
             where N : unmanaged, ITypeNat
-                => BitString.vector(x.data, x.Width);
-
-
+                => BitString.load(x.data, x.Width);
     }
 }

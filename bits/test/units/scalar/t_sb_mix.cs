@@ -29,7 +29,7 @@ namespace Z0
             for(var i=0; i<SampleSize; i++)
             {
                 BitVector64 x = Random.BitVector(n64);
-                BitVector32 y = (uint)Bits.select(x, Even64.Select);
+                BitVector32 y = (uint)Bits.select(x, BitMasks.Even64);
                 BitVector32 z = default;
 
                 for(int j=0, k = 0; j<64; j+=2, k++)
@@ -41,7 +41,7 @@ namespace Z0
             for(var i=0; i<SampleSize; i++)
             {
                 BitVector64 x = Random.BitVector(n64);
-                BitVector32 y = (uint)Bits.select(x, Odd64.Select);
+                BitVector32 y = (uint)Bits.select(x, BitMasks.Odd64);
                 BitVector32 z = default;
 
                 for(int j=1, k = 0; j<64; j+=2, k++)
@@ -56,10 +56,10 @@ namespace Z0
             
             var x = Random.Next<uint>();
             var y = Random.Next<uint>();
-            var xE = Bits.project(Bits.select(x,Even32.Select), Even32.Select);
-            var xO = Bits.project(Bits.select(x,Odd32.Select), Even32.Select);
-            var yE = Bits.project(Bits.select(y,Even32.Select), Odd32.Select);
-            var yO = Bits.project(Bits.select(y,Odd32.Select), Odd32.Select);
+            var xE = Bits.project(Bits.select(x,BitMasks.Even32), BitMasks.Even32);
+            var xO = Bits.project(Bits.select(x,BitMasks.Odd32), BitMasks.Even32);
+            var yE = Bits.project(Bits.select(y,BitMasks.Even32), BitMasks.Odd32);
+            var yO = Bits.project(Bits.select(y,BitMasks.Odd32), BitMasks.Odd32);
             var xEy = xE | yE;
             var xOy = xO | yO;
             var t = text();

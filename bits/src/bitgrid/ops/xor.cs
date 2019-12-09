@@ -13,9 +13,19 @@ namespace Z0
 
     partial class BitGrid
     {        
+        /// <summary>
+        /// Computes the bitwise xor between generic bitgrids
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid16<T> xor<T>(BitGrid16<T> gx, BitGrid16<T> gy)
+            where T : unmanaged
+                => bg16<T>(gx.RowCount, gx.ColCount, math.xor(gx,gy));
 
         /// <summary>
-        /// Computes the bitwise XOR between fixed-width 32-bit generic bitgrids
+        /// Computes the bitwise xor between generic bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -26,7 +36,7 @@ namespace Z0
                 => bg32<T>(gx.RowCount, gx.ColCount, math.xor(gx,gy));
 
         /// <summary>
-        /// Computes the bitwise XOR between fixed-width 64-bit grids
+        /// Computes the bitwise xor between generic bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -34,10 +44,25 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid64<T> xor<T>(BitGrid64<T> gx, BitGrid64<T> gy)
             where T : unmanaged
+                => bg64<T>(gx.RowCount, gx.ColCount, math.xor(gx,gy));
+
+        /// <summary>
+        /// Computes the bitwise xor between natural bitgrids
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The col count type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid16<M,N,T> xor<M,N,T>(BitGrid16<M,N,T> gx, BitGrid16<M,N,T> gy)
+            where T : unmanaged
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
                 => math.xor(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise XOR between fixed-width 32-bit natural bitgrids
+        /// Computes the bitwise xor between natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -52,7 +77,7 @@ namespace Z0
                 => math.xor(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise XOR between fixed-width 64-bit natural bitgrids
+        /// Computes the bitwise xor between natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -67,7 +92,7 @@ namespace Z0
                 => math.xor(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise XOR between 128-bit fixed-width natural bitgrids
+        /// Computes the bitwise xor between natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -82,7 +107,7 @@ namespace Z0
                 => ginx.vxor<T>(gx,gy);    
 
         /// <summary>
-        /// Computes the bitwise XOR between 256-bit fixed-width natural bitgrids
+        /// Computes the bitwise xor between natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -114,7 +139,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the bitwise XOR between generic bitgrids and returns the allocated result
+        /// Computes the bitwise xor between unfixed generic bitgrids and returns the allocated result
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -129,7 +154,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the bitwise XOR between natural bitgrids and stores the result to a caller-supplied target
+        /// Computes the bitwise xor unfixed natural bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -150,7 +175,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the bitwise XOR between generic bitgrids and returns the allocated result
+        /// Computes the bitwise xor between natural dynamic bitgrids
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>

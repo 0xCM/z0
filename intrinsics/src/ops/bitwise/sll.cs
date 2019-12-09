@@ -15,74 +15,7 @@ namespace Z0
     using static zfunc;
     
     partial class dinx
-    {   
-        [MethodImpl(Inline)]
-        public static Vector256<sbyte> vsll(Vector256<sbyte> src, Vector128<sbyte> shift)
-            => vsll(src, (byte)shift.Item(0));
-
-        [MethodImpl(Inline)]
-        public static Vector256<byte> vsll(Vector256<byte> src, Vector128<byte> shift)
-            => vsll(src, shift.Item(0));
-
-        /// <summary>
-        /// __m256i _mm256_sll_epi16 (__m256i a, __m128i count)VPSLLW ymm, ymm, xmm/m128
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="shift"></param>
-        /// <returns></returns>
-        [MethodImpl(Inline)]
-        public static Vector256<short> vsll(Vector256<short> src, Vector128<short> shift)
-            => ShiftLeftLogical(src, shift);
-
-        /// <summary>
-        /// __m256i _mm256_sll_epi16 (__m256i a, __m128i count) VPSLLW ymm, ymm, xmm/m128
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="shift"></param>
-        /// <returns></returns>
-        [MethodImpl(Inline)]
-        public static Vector256<ushort> vsll(Vector256<ushort> src, Vector128<ushort> shift)
-            => ShiftLeftLogical(src, shift);
-
-        /// <summary>
-        ///  __m256i _mm256_sll_epi32 (__m256i a, __m128i count) VPSLLD ymm, ymm, xmm/m128
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="shift"></param>
-        /// <returns></returns>
-        [MethodImpl(Inline)]
-        public static Vector256<int> vsll(Vector256<int> src, Vector128<int> shift)
-            => ShiftLeftLogical(src, shift);
-
-        /// <summary>
-        ///  __m256i _mm256_sll_epi32 (__m256i a, __m128i count) VPSLLD ymm, ymm, xmm/m128
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="shift"></param>
-        /// <returns></returns>
-        [MethodImpl(Inline)]
-        public static Vector256<uint> vsll(Vector256<uint> src, Vector128<uint> shift)
-            => ShiftLeftLogical(src, shift);
-
-        /// <summary>
-        /// _m256i _mm256_sll_epi64 (__m256i a, __m128i count)VPSLLQ ymm, ymm, xmm/m128
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="shift"></param>
-        /// <returns></returns>
-        [MethodImpl(Inline)]
-        public static Vector256<long> vsll(Vector256<long> src, Vector128<long> shift)
-            => ShiftLeftLogical(src, shift);
-
-        /// <summary>
-        /// _m256i _mm256_sll_epi64 (__m256i a, __m128i count)VPSLLQ ymm, ymm, xmm/m128
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="shift"></param>
-        [MethodImpl(Inline)]
-        public static Vector256<ulong> vsll(Vector256<ulong> src, Vector128<ulong> shift)
-            => ShiftLeftLogical(src, shift);
-
+    {           
         /// <summary>
         /// Shifts each componet in the source vector leftwards by a specified number of bits
         /// </summary>
@@ -96,7 +29,7 @@ namespace Z0
 
             // Truncate overflows to set up the component pattern [X 0 X 0 ... X 0]
             var mask =  ginx.vpclearalt<byte>(n256);
-            var a = vshuf16x8(v8u(dinx.vsll(x, shift)), mask);
+            var a = vshuf16x8(v8u(vsll(x, shift)), mask);
 
             // Transform the result back the source space
             var perm = ginx.vplanemerge<byte>();

@@ -7,70 +7,98 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
-    using Z0;
  
     using static zfunc;
     
      partial class Bits
      {                
+
           /// <summary>
-          /// Clears a contiguous range of bits from the source
+          /// Disables a sequence of 8 source bits starting at a specified index
           /// </summary>
           /// <param name="src">The bit source</param>
-          /// <param name="first">The position of the first bit to clear</param>
-          /// <param name="last">The position of the last bit to clear</param>
+          /// <param name="index">The index at which to begin clearing bits</param>
           [MethodImpl(Inline)]
-          public static byte clear(byte src, int first, int last)
+          public static ushort clearbyte(ushort src, int index)
           {
-               var before = extract(src,0,first);
-               var after = extract(src, last + 1, 8 - last);
-               var cleared = (byte)(((after << (last - first)) << (first + 1)) | before);
-               return cleared;                      
+               var mask = uint.MaxValue ^ ((uint)byte.MaxValue << index);
+               return (ushort)(mask & src);
+          }
+     
+          /// <summary>
+          /// Disables a sequence of 8 source bits starting at a specified index
+          /// </summary>
+          /// <param name="src">The bit source</param>
+          /// <param name="index">The index at which to begin clearing bits</param>
+          [MethodImpl(Inline)]
+          public static uint clearbyte(uint src, int index)
+          {
+               var mask = uint.MaxValue ^ ((uint)byte.MaxValue << index);
+               return mask & src;
           }
 
           /// <summary>
-          /// Clears a contiguous range of bits from the source
+          /// Disables a sequence of 8 source bits starting at a specified index
           /// </summary>
           /// <param name="src">The bit source</param>
-          /// <param name="first">The position of the first bit to clear</param>
-          /// <param name="last">The position of the last bit to clear</param>
+          /// <param name="index">The index at which to begin clearing bits</param>
           [MethodImpl(Inline)]
-          public static ushort clear(ushort src, int first, int last)
+          public static ulong clearbyte(ulong src, int index)
           {
-               var before = extract(src,0,first);
-               var after = extract(src, last + 1, 16 - last);
-               var cleared = (ushort)(((after << (last - first)) << (first + 1)) | before);
-               return cleared;                      
+               var mask = ulong.MaxValue ^ ((ulong)byte.MaxValue << index);
+               return mask & src;
           }
 
           /// <summary>
-          /// Clears a contiguous range of bits from the source
+          /// Disables a sequence of bits starting at a specified index
           /// </summary>
           /// <param name="src">The bit source</param>
-          /// <param name="first">The position of the first bit to clear</param>
-          /// <param name="last">The position of the last bit to clear</param>
+          /// <param name="index">The index at which to begin clearing bits</param>
+          /// <param name="count">The number of bits to clear</param>
           [MethodImpl(Inline)]
-          public static uint clear(uint src, int first, int last)
+          public static byte clear(byte src, int index, int count)
           {
-               var before = extract(src,0,first);
-               var after = extract(src, last + 1, 32 - last);
-               var cleared = ((after << (last - first)) << (first + 1)) | before;
-               return cleared;                      
+               var mask = (uint)ushort.MaxValue ^ ((uint)lomask(count - 1) << index);
+               return (byte)(mask & src);
           }
 
           /// <summary>
-          /// Clears a contiguous range of bits from the source
+          /// Disables a sequence of bits starting at a specified index
           /// </summary>
           /// <param name="src">The bit source</param>
-          /// <param name="first">The position of the first bit to clear</param>
-          /// <param name="last">The position of the last bit to clear</param>
+          /// <param name="index">The index at which to begin clearing bits</param>
+          /// <param name="count">The number of bits to clear</param>
           [MethodImpl(Inline)]
-          public static ulong clear(ulong src, int first, int last)
+          public static ushort clear(ushort src, int index, int count)
           {
-               var part0 = extract(src,0,first);
-               var part2 = extract(src, last + 1, 64 - last);
-               var cleared = ((part2 << (last - first)) << (first + 1)) | part0;
-               return cleared;                      
-          } 
+               var mask = (uint)ushort.MaxValue ^ ((uint)lomask(count - 1) << index);
+               return (ushort)(mask & src);
+          }
+
+          /// <summary>
+          /// Disables a sequence of bits starting at a specified index
+          /// </summary>
+          /// <param name="src">The bit source</param>
+          /// <param name="index">The index at which to begin clearing bits</param>
+          /// <param name="count">The number of bits to clear</param>
+          [MethodImpl(Inline)]
+          public static uint clear(uint src, int index, int count)
+          {
+               var mask = uint.MaxValue ^ ((uint)lomask(count - 1) << index);
+               return mask & src;
+          }
+
+          /// <summary>
+          /// Disables a sequence of bits starting at a specified index
+          /// </summary>
+          /// <param name="src">The bit source</param>
+          /// <param name="index">The index at which to begin clearing bits</param>
+          /// <param name="count">The number of bits to clear</param>
+          [MethodImpl(Inline)]
+          public static ulong clear(ulong src, int index, int count)
+          {
+               var mask = ulong.MaxValue ^ (lomask(count - 1) << index);
+               return mask & src;
+          }
      }
 }

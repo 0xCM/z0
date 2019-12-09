@@ -14,7 +14,7 @@ namespace Z0
         public void gather_masks()
         {
 
-            var m2 = BitMask.Lsb32x8;
+            var m2 = BitMasks.Lsb32x8;
             var x2 = dinx.gather(UInt32.MaxValue, m2);
             var y2 = dinx.scatter(x2, m2).ToBitVector();
             var bv = m2.ToBitVector();
