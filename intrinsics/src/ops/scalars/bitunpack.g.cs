@@ -14,7 +14,7 @@ namespace Z0
     partial class ginxs
     {
         [MethodImpl(Inline)]
-        public static void unpack<T>(byte src, in Block64<T> dst, int block = 0)
+        public static void unpackbits<T>(byte src, in Block64<T> dst, int block = 0)
             where T : unmanaged
         {
             var m = BitMask.lsb<ulong>(n8);
@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void unpack<T>(ushort src, in Block128<T> dst, int block = 0)
+        public static void unpackbits<T>(ushort src, in Block128<T> dst, int block = 0)
             where T : unmanaged
         {
             var m = BitMask.lsb<ulong>(n8);
@@ -33,7 +33,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void unpack<T>(uint src, in Block256<T> dst, int block = 0)
+        public static void unpackbits<T>(uint src, in Block256<T> dst, int block = 0)
             where T : unmanaged
         {
             var m = BitMask.lsb<ulong>(n8);
@@ -45,11 +45,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void unpack<T>(ulong src, in Block256<T> lo, in Block256<T> hi, int block = 0)
+        public static void unpackbits<T>(ulong src, in Block256<T> lo, in Block256<T> hi, int block = 0)
             where T : unmanaged
         {
-            unpack((uint)src, lo);
-            unpack((uint)(src >> 32), hi);
+            unpackbits((uint)src, lo);
+            unpackbits((uint)(src >> 32), hi);
         }
 
     }

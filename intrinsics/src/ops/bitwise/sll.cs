@@ -17,26 +17,17 @@ namespace Z0
     partial class dinx
     {           
         /// <summary>
-        /// Shifts each componet in the source vector leftwards by a specified number of bits
+        /// Defines the unfortunately missing _mm_slli_epi8 that shifts each vector component
+        /// leftward by a common number of bits
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to shift each component</param>
+        /// <param name="shift">The number of bits to shift left</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vsll(Vector128<byte> src, int shift)
+        public static Vector128<byte> vsll(Vector128<byte> src, byte shift)
         {
-                return vsll8(src,(byte)shift);
-            /*            
-            // Lift the source vector into a space where the SLL operation exists and perform it there
-            var x = vconvert(src, out Vector256<ushort> _);
-
-            // Truncate overflows to set up the component pattern [X 0 X 0 ... X 0]
-            var mask =  ginx.vpclearalt<byte>(n256);
-            var a = vshuf16x8(v8u(vsll(x, shift)), mask);
-
-            // Transform the result back the source space
-            var perm = ginx.vplanemerge<byte>();
-            return vlo(vshuf32x8(a, perm));
-            */
+            var y = v8u(dinx.vsll(v64u(src), shift));
+            var m = vmask.msb<byte>(n128, n8, (byte)(8 - shift));
+            return dinx.vand(y,m);
         }
 
         /// <summary>
@@ -45,7 +36,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift each component</param>
         [MethodImpl(Inline)]
-        public static Vector128<sbyte> vsll(Vector128<sbyte> src, int shift)
+        public static Vector128<sbyte> vsll(Vector128<sbyte> src, byte shift)
             => vsll(src.AsByte(), shift).AsSByte();
 
         /// <summary>
@@ -54,7 +45,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift each component</param>
         [MethodImpl(Inline)]
-        public static Vector256<sbyte> vsll(Vector256<sbyte> src, int shift)
+        public static Vector256<sbyte> vsll(Vector256<sbyte> src, byte shift)
             => vsll(src.AsByte(), shift).AsSByte();
 
         /// <summary>
@@ -64,7 +55,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vsll(Vector128<ushort> src, int shift)
+        public static Vector128<ushort> vsll(Vector128<ushort> src, byte shift)
             => ShiftLeftLogical(src, (byte)shift);
 
         /// <summary>
@@ -74,7 +65,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public static Vector128<int> vsll(Vector128<int> src, int shift)
+        public static Vector128<int> vsll(Vector128<int> src, byte shift)
             => ShiftLeftLogical(src, (byte)shift);
 
         /// <summary>
@@ -84,7 +75,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vsll(Vector128<uint> src, int shift)
+        public static Vector128<uint> vsll(Vector128<uint> src, byte shift)
             => ShiftLeftLogical(src, (byte)shift);
 
         /// <summary>
@@ -94,7 +85,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public static Vector128<long> vsll(Vector128<long> src, int shift)
+        public static Vector128<long> vsll(Vector128<long> src, byte shift)
             => ShiftLeftLogical(src, (byte)shift);
 
         /// <summary>
@@ -104,37 +95,21 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vsll(Vector128<ulong> src, int shift)
+        public static Vector128<ulong> vsll(Vector128<ulong> src, byte shift)
             => ShiftLeftLogical(src, (byte)shift);
 
         /// <summary>
-        /// Shifts each componet in the source vector leftwards by a specified number of bits
+        /// Defines the unfortunately missing _mm256_slli_epi16 that shifts each vector component
+        /// leftward by a common number of bits
         /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to shift each component</param>
+        /// <param name="x">The source vector</param>
+        /// <param name="shift">The number of bits to shift left</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> vsll(Vector256<byte> src, int shift)
+        public static Vector256<byte> vsll(Vector256<byte> src, byte shift)
         {
-                return vsll8(src,(byte)shift);
-
-            // //Fan the hi/lo parts of the u8 source vector across 2 u16 vectors
-            // var x = vconvert(vlo(src), out Vector256<ushort> _);
-            // var y = vconvert(vhi(src), out Vector256<ushort> _);
-
-            // // Shift each part with a concrete intrinsic anc convert back to bytes and truncate overflows 
-            // // to set up the component pattern [X 0 X 0 ... X 0] in each vector
-            // var mask =  ginx.vpclearalt<byte>(n256);
-            // var a = vshuf16x8(v8u(dinx.vsll(x, shift)), mask);
-            // var b = vshuf16x8(v8u(dinx.vsll(y, shift)), mask);
-
-            // // Each vector contains 16 values that need to be merged
-            // // back into a single vector. The strategey is to condense
-            // // each vector via the "lane merge" pattern and construct
-            // // the result vector via insertion of these condensed vectors
-            // var permSpec = ginx.vplanemerge<byte>();
-            // return dinx.vconcat(
-            //     vlo(vshuf32x8(a, permSpec)), 
-            //     vlo(vshuf32x8(b, permSpec)));            
+            var y = v8u(dinx.vsll(v64u(src), shift));
+            var m = vmask.msb<byte>(n256, n8, (byte)(8 - shift));
+            return dinx.vand(y,m);
         }
 
         /// <summary>
@@ -144,7 +119,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public static Vector128<short> vsll(Vector128<short> src, int shift)
+        public static Vector128<short> vsll(Vector128<short> src, byte shift)
             => ShiftLeftLogical(src, (byte)shift);
 
         /// <summary>
@@ -154,7 +129,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public static Vector256<short> vsll(Vector256<short> src, int shift)
+        public static Vector256<short> vsll(Vector256<short> src, byte shift)
             => ShiftLeftLogical(src, (byte)shift);
 
         /// <summary>
@@ -164,7 +139,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vsll(Vector256<ushort> src, int shift)
+        public static Vector256<ushort> vsll(Vector256<ushort> src, byte shift)
             => ShiftLeftLogical(src, (byte)shift);
 
         /// <summary>
@@ -174,7 +149,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public static Vector256<int> vsll(Vector256<int> src, int shift)
+        public static Vector256<int> vsll(Vector256<int> src, byte shift)
             => ShiftLeftLogical(src, (byte)shift);
 
         /// <summary>
@@ -184,7 +159,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vsll(Vector256<uint> src, int shift)
+        public static Vector256<uint> vsll(Vector256<uint> src, byte shift)
             => ShiftLeftLogical(src, (byte)shift);
 
         /// <summary>
@@ -194,7 +169,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public static Vector256<long> vsll(Vector256<long> src, int shift)
+        public static Vector256<long> vsll(Vector256<long> src, byte shift)
             => ShiftLeftLogical(src, (byte)shift);
 
         /// <summary>
@@ -204,7 +179,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vsll(Vector256<ulong> src, int shift)
+        public static Vector256<ulong> vsll(Vector256<ulong> src, byte shift)
             => ShiftLeftLogical(src, (byte)shift); 
     }
 }

@@ -14,28 +14,28 @@ namespace Z0
     public static class inxsoc
     {
         public static void unpack(byte src, in Block64<byte> dst)
-            => ginxs.unpack(src,dst);
+            => ginxs.unpackbits(src,dst);
 
         public static void unpack(ushort src, in Block128<byte> dst)
-            => ginxs.unpack(src,dst);
+            => ginxs.unpackbits(src,dst);
 
         public static uint pack64x8u(ConstBlock64<byte> src)
-            => ginxs.pack(src);
+            => ginxs.bitpack(src);
 
         public static uint pack128x8u(ConstBlock128<byte> src)
-            => ginxs.pack(src);
+            => ginxs.bitpack(src);
 
         public static uint pack256x8u(ConstBlock256<byte> src)
-            => ginxs.pack(src);
+            => ginxs.bitpack(src);
 
         public static ulong pack512x64u(ConstBlock256<byte> lo, ConstBlock256<byte> hi)
-            => ginxs.pack(lo,hi);
+            => ginxs.bitpack(lo,hi);
 
         public static void unpack(uint src, in Block256<byte> dst)
-            => ginxs.unpack(src,dst);
+            => ginxs.unpackbits(src,dst);
 
         public static void unpack(ulong src, in Block256<byte> lo,in Block256<byte> hi)
-            => ginxs.unpack(src,lo,hi);
+            => ginxs.unpackbits(src,lo,hi);
 
         public static ulong broadcast_8x64(byte pattern)
             => ginxs.broadcast(pattern, out ulong _);

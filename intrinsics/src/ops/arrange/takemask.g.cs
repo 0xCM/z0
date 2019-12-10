@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ushort vtakemask<T>(Vector128<T> src, byte index)
             where T : unmanaged
-                => (ushort)MoveMask(v8u(dinx.vsll(v64u(src), 7 - index)));
+                => (ushort)MoveMask(v8u(dinx.vsll(v64u(src), (byte)(7 - index))));
 
         /// <summary>
         /// int _mm256_movemask_epi8 (__m256i a) VPMOVMSKB reg, ymm
@@ -55,6 +55,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint vtakemask<T>(Vector256<T> src, byte index)
             where T : unmanaged
-                => (uint)MoveMask(v8u(dinx.vsll(v64u(src), 7 - index)));
+                => (uint)MoveMask(v8u(dinx.vsll(v64u(src), (byte)(7 - index))));
     }
 }

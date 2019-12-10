@@ -22,7 +22,26 @@ namespace Z0
             return new NatBlock<N,T>(data);
         }
 
+        /// <summary>
+        /// Loads a natural block from blocked storage
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="n">The length representative</param>
+        /// <typeparam name="N">The length type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]   
+        public static NatBlock<N,T> natload<N,T>(in Block256<T> src, N n = default)    
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => new NatBlock<N, T>(src.data);
 
+        /// <summary>
+        /// Loads a natural block from a reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="n">The length representative</param>
+        /// <typeparam name="N">The length type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]   
         public static NatBlock<N,T> natload<N,T>(ref T src, N n = default)    
             where N : unmanaged, ITypeNat
@@ -31,7 +50,6 @@ namespace Z0
             var data = MemoryMarshal.CreateSpan(ref src, natval<N>());
             return new NatBlock<N,T>(data);
         }
-
 
         [MethodImpl(Inline)]   
         public static NatBlock<N,T> natparts<N,T>(N n, params T[] cells) 

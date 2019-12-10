@@ -22,7 +22,7 @@ namespace Z0
                 var x = Random.CpuVector<byte>(w);
                 for(byte shift = 1; shift < 8; shift++)                
                 {
-                    var actual = dinx.vsll8(x, shift);
+                    var actual = dinx.vsll(x, shift);
                     var expect = mathspan.sll(x.ToSpan(), shift).LoadVector(w);
                     Claim.eq(actual,expect);
                 }
@@ -37,7 +37,7 @@ namespace Z0
                 var x = Random.CpuVector<byte>(w);
                 for(byte shift = 1; shift < 8; shift++)                
                 {
-                    var actual = dinx.vsll8(x, shift);
+                    var actual = dinx.vsll(x, shift);
                     var expect = mathspan.sll(x.ToSpan(), shift).LoadVector(w);
                     Claim.eq(actual,expect);
                 }
@@ -52,7 +52,7 @@ namespace Z0
                 var x = Random.CpuVector<byte>(w);
                 for(byte shift = 1; shift < 8; shift++)                
                 {
-                    var actual = dinx.vsrl8(x, shift);
+                    var actual = dinx.vsrl(x, shift);
                     var expect = mathspan.srl(x.ToSpan(), shift).LoadVector(w);
                     Claim.eq(actual,expect);
                 }
@@ -67,7 +67,7 @@ namespace Z0
                 var x = Random.CpuVector<byte>(w);
                 for(byte shift = 1; shift < 8; shift++)                
                 {
-                    var actual = dinx.vsrl8(x, shift);
+                    var actual = dinx.vsrl(x, shift);
                     var expect = mathspan.srl(x.ToSpan(), shift).LoadVector(w);
                     Claim.eq(actual,expect);
                 }
@@ -79,7 +79,7 @@ namespace Z0
             var w = n128;
             byte shift = 3;
             var x = Random.CpuVector<byte>(w);
-            var actual = dinx.vsll8(x,shift);
+            var actual = dinx.vsll(x,shift);
             
             var xs = x.ToSpan();
             var es = DataBlocks.alloc<byte>(w);
@@ -99,7 +99,7 @@ namespace Z0
             var w = n128;
             byte shift = 3;
             var x = Random.CpuVector<byte>(w);
-            var actual = dinx.vsrl8(x,shift);
+            var actual = dinx.vsrl(x,shift);
             
             var xs = x.ToSpan();
             var es = DataBlocks.alloc<byte>(w);

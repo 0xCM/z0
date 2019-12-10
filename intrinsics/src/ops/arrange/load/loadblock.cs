@@ -213,8 +213,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void vloadblock(in ConstBlock32<byte> src, out Vector128<ulong> lo, out Vector128<ulong> hi)
         {
-            vloadblock(src.LoBlock(0), out lo);
-            vloadblock(src.HiBlock(0), out hi);                
+            lo = v64u(ConvertToVector128Int64(constptr(in src.Head)));
+            hi = v64u(ConvertToVector128Int64(constptr(in src.Head,2)));
         }
 
         /// <summary>
@@ -225,10 +225,10 @@ namespace Z0
         /// <param name="lo">The lower taret</param>
         /// <param name="hi">The upper taret</param>
         [MethodImpl(Inline)]
-        public static void vloadblock(in ConstBlock64<byte> src, out Vector128<uint> x0, out Vector128<uint> x1)
+        public static unsafe void vloadblock(in ConstBlock64<byte> src, out Vector128<uint> lo, out Vector128<uint> hi)
         {
-            vloadblock(src.LoBlock(0), out x0);
-            vloadblock(src.HiBlock(0), out x1);
+            lo = v32u(ConvertToVector128Int32(constptr(in src.Head)));
+            hi = v32u(ConvertToVector128Int32(constptr(in src.Head,4)));            
         }            
 
         /// <summary>
@@ -239,10 +239,10 @@ namespace Z0
         /// <param name="lo">The lower taret</param>
         /// <param name="hi">The upper taret</param>
         [MethodImpl(Inline)]
-        public static void vloadblock(in Block128<byte> src, out Vector128<ushort> lo, out Vector128<ushort> hi)
+        public static unsafe void vloadblock(in Block128<byte> src, out Vector128<ushort> lo, out Vector128<ushort> hi)
         {
-            vloadblock(src.LoBlock(0), out lo);
-            vloadblock(src.HiBlock(0), out hi);
+            lo = v16u(ConvertToVector128Int16(constptr(in src.Head)));
+            hi = v16u(ConvertToVector128Int16(constptr(in src.Head,8)));
         }            
 
         /// <summary>
@@ -255,8 +255,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void vloadblock(in ConstBlock256<byte> src, out Vector256<ushort> lo, out Vector256<ushort> hi)
         {
-            vloadblock(src.LoBlock(0), out lo);
-            vloadblock(src.HiBlock(0), out hi);
+            lo = v16u(ConvertToVector256Int16(constptr(in src.Head)));
+            hi = v16u(ConvertToVector256Int16(constptr(in src.Head,16)));
         }
 
         /// <summary>
@@ -270,8 +270,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void vloadblock(in ConstBlock128<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
         {
-            vloadblock(src.LoBlock(0), out lo);
-            vloadblock(src.HiBlock(0), out hi);
+            lo = v64u(ConvertToVector256Int64(constptr(in src.Head)));
+            hi = v64u(ConvertToVector256Int64(constptr(in src.Head,4)));
         }
 
         /// <summary>
@@ -284,8 +284,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void vloadblock(in ConstBlock256<uint> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
         {
-            vloadblock(src.LoBlock(0), out lo);
-            vloadblock(src.HiBlock(0), out hi);
+            lo = v64u(ConvertToVector256Int64(constptr(in src.Head)));
+            hi = v64u(ConvertToVector256Int64(constptr(in src.Head,4)));
         }
 
         /// <summary>
@@ -298,8 +298,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void vloadblock(in ConstBlock256<ushort> src, out Vector256<uint> lo, out Vector256<uint> hi)
         {
-            vloadblock(src.LoBlock(0), out lo);
-            vloadblock(src.HiBlock(0), out hi);
+            lo = v32u(ConvertToVector256Int32(constptr(in src.Head)));
+            hi = v32u(ConvertToVector256Int32(constptr(in src.Head, 8)));
         }
 
         #endregion
@@ -498,7 +498,6 @@ namespace Z0
             return dst;
         }
 
-
         /// <summary>
         /// VPMOVSXDQ ymm, m128
         /// </summary>
@@ -573,19 +572,6 @@ namespace Z0
             hi = ConvertToVector128Int64(constptr(in skip(in src.Head, 2)));            
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="lo">The lower taret</param>
-        /// <param name="hi">The upper taret</param>
-        [MethodImpl(Inline)]
-        public static unsafe void vmovblock(in ConstBlock256<ushort> src, out Vector256<int> lo, out Vector256<int> hi)
-        {
-            vloadblock(src.LoBlock(0), out lo);
-            vloadblock(src.HiBlock(0), out hi);
-        }
- 
 
         #endregion
 

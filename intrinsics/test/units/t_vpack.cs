@@ -25,25 +25,7 @@ namespace Z0
             Claim.eq(ginx.vones<uint>(n128), output);            
         }
 
-        public void pack8_basecase()
-        {
-            var src = DataBlocks.natparts(n8,1u,0u,1u,1u,1u,0u,0u,0u);            
-            var dst = AvxBitpack.pack(src,0);
-        }
 
-        public void pack32()
-        {
-            var n = n32;
-
-            var bits = Random.BitSpan(n);
-            var src = DataBlocks.natalloc(n,0u);
-            for(var i=0; i<src.Length; i++)
-                src[i] = (uint)bits[i];
-
-            var dst = AvxBitpack.pack(src,0);
-            
-                
-        }
 
         static int pop(ReadOnlySpan<bit> src)
         {

@@ -21,8 +21,7 @@ namespace Z0
     {
         internal readonly Span<T> data;
 
-        static N n => default;
-    
+        static N n => default;    
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(in NatBlock<N,T> src)
@@ -37,15 +36,7 @@ namespace Z0
             => src.data;
 
         [MethodImpl(Inline)]
-        public static implicit operator NatBlock<N,T>(in Block256<T> src)
-            => new NatBlock<N, T>(src);
-    
-        [MethodImpl(Inline)]
         internal NatBlock(Span<T> src)
-            => this.data = src;
-
-        [MethodImpl(Inline)]
-        internal NatBlock(in Block256<T> src)
             => this.data = src;
 
         /// <summary>
@@ -84,10 +75,10 @@ namespace Z0
         /// <summary>
         /// Indexes directly into the underlying storage cells
         /// </summary>
-        public ref T this[int ix] 
+        public ref T this[int index] 
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.Add(ref Head, ix);
+            get => ref Unsafe.Add(ref Head, index);
         }
 
         [MethodImpl(Inline)]

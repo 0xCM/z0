@@ -148,14 +148,13 @@ namespace Z0
             get => data;
         }
 
-
         /// <summary>
         /// Provides access to the underlying data as a span of natural dimensions
         /// </summary>
         public NatBlock<N,T> Natural
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => DataBlocks.natload<N,T>(data);
         }
 
         /// <summary>

@@ -23,7 +23,7 @@ namespace Z0
         public static Vector128<ulong> vsllx(Vector128<ulong> src, byte shift)        
         {
             if(shift >= 64)
-                return vsll(vbsll(src, 8), shift - 64);     
+                return vsll(vbsll(src, 8), (byte)(shift - 64));     
             else
                 return vor(vsll(src, shift), vsrl(vbsll(src, 8), (byte)(64 - shift)));
         }
@@ -50,7 +50,7 @@ namespace Z0
         public static Vector256<ulong> vsllx(Vector256<ulong> src, byte shift)        
         {
             if(shift >= 64)
-                return vsll(vbsll(src, 8), shift - 64);     
+                return vsll(vbsll(src, 8), (byte)(shift - 64));     
             else
                 return vor(vsll(src, shift), vsrl(vbsll(src, 8), (byte)(64 - shift)));
         }

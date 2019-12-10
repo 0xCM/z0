@@ -12,37 +12,49 @@ namespace Z0
 
     partial class MathX
     {
-        [MethodImpl(Inline)]
-        public static bit Identical<T>(this ConstBlock128<T> xb, ConstBlock128<T> yb)        
-                where T : unmanaged        
-        {
-            var len = DataBlocks.length(xb,yb);
-            for(var i = 0; i< len; i++)
-                if(gmath.neq(xb[i],yb[i]))
-                    return false;
-            return true;
-        }
-
-        [MethodImpl(Inline)]
-        public static bit Identical<T>(this ConstBlock256<T> xb, ConstBlock256<T> yb)        
-            where T : unmanaged        
-        {
-            var len = DataBlocks.length(xb,yb);
-            for(var i = 0; i< len; i++)
-                if(gmath.neq(xb[i],yb[i]))
-                    return false;
-            return true;
-        }
-
-        [MethodImpl(Inline)]
-        public static bit Identical<T>(this Block256<T> xb, Block256<T> yb)        
-            where T : unmanaged        
-                => xb.ReadOnly().Identical(yb);
-
+        /// <summary>
+        /// Returns 1 if left and right blocks cover identical cells and 0 otherwise
+        /// </summary>
+        /// <param name="xb">The left block</param>
+        /// <param name="yb">The right block</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static bit Identical<T>(this Block128<T> xb, Block128<T> yb)        
             where T : unmanaged        
-                => xb.ReadOnly().Identical(yb);
+                => xb.Data.Identical(yb.Data);
+
+        /// <summary>
+        /// Returns 1 if left and right blocks cover identical cells and 0 otherwise
+        /// </summary>
+        /// <param name="xb">The left block</param>
+        /// <param name="yb">The right block</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static bit Identical<T>(this Block256<T> xb, Block256<T> yb)        
+            where T : unmanaged        
+                => xb.Data.Identical(yb.Data);
+
+        /// <summary>
+        /// Returns 1 if left and right blocks cover identical cells and 0 otherwise
+        /// </summary>
+        /// <param name="xb">The left block</param>
+        /// <param name="yb">The right block</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static bit Identical<T>(this ConstBlock128<T> xb, ConstBlock128<T> yb)        
+            where T : unmanaged        
+                => xb.Data.Identical(yb.Data);
+
+        /// <summary>
+        /// Returns 1 if left and right blocks cover identical cells and 0 otherwise
+        /// </summary>
+        /// <param name="xb">The left block</param>
+        /// <param name="yb">The right block</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static bit Identical<T>(this ConstBlock256<T> xb, ConstBlock256<T> yb)        
+            where T : unmanaged        
+                => xb.Data.Identical(yb.Data);
 
         /// <summary>
         /// Returns 1 if the left and right spans contain identical content and 0 otherwise

@@ -13,7 +13,6 @@ namespace Z0
     
     partial class inxs
     {
-
         [MethodImpl(Inline)]
         public static ref ushort broadcast(byte src, out ushort dst)
         {

@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="index">An integer between 0 and 7</param>
         [MethodImpl(Inline)]
         public static ushort vtakemask(Vector128<byte> src, byte index)
-            => vtakemask(vsll(v64u(src), 7 - index));
+            => vtakemask(vsll(v64u(src), (byte)(7 - index)));
 
         /// <summary>
         /// Creates a 32-bit mask from each byte at a byte-relative bit index
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="index">An integer between 0 and 7</param>
         [MethodImpl(Inline)]
         public static ushort vtakemask(Vector128<ushort> src, byte index)
-            => vtakemask(vsll(v64u(src), 7 - index));
+            => vtakemask(vsll(v64u(src), (byte)(7 - index)));
 
         /// <summary>
         /// Creates a 32-bit mask from each byte at a byte-relative bit index
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="index">An integer between 0 and 7</param>
         [MethodImpl(Inline)]
         public static ushort vtakemask(Vector128<uint> src, byte index)
-            => vtakemask(vsll(v64u(src), 7 - index));
+            => vtakemask(vsll(v64u(src), (byte)(7 - index)));
 
         /// <summary>
         /// Creates a 32-bit mask from each byte at a byte-relative bit index
@@ -123,7 +123,7 @@ namespace Z0
         /// <param name="index">An integer between 0 and 7</param>
         [MethodImpl(Inline)]
         public static ushort vtakemask(Vector128<ulong> src, byte index)
-            => vtakemask(vsll(v64u(src), 7 - index));
+            => vtakemask(vsll(v64u(src), (byte)(7 - index)));
 
         /// <summary>
         /// Creates a 32-bit mask from each byte at a byte-relative bit index
@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="index">An integer between 0 and 7</param>
         [MethodImpl(Inline)]
         public static uint vtakemask(Vector256<byte> src, byte index)
-            => vtakemask(vsll(v64u(src), 7 - index));
+            => vtakemask(vsll(v64u(src), (byte)(7 - index)));
 
         /// <summary>
         /// Creates a 32-bit mask from each byte at a byte-relative bit index
@@ -141,7 +141,7 @@ namespace Z0
         /// <param name="index">An integer between 0 and 7</param>
         [MethodImpl(Inline)]
         public static uint vtakemask(Vector256<ushort> src, byte index)
-            => vtakemask(vsll(v64u(src), 7 - index));
+            => vtakemask(vsll(v64u(src), (byte)(7 - index)));
 
         /// <summary>
         /// Creates a 32-bit mask from each byte at a byte-relative bit index
@@ -150,7 +150,7 @@ namespace Z0
         /// <param name="index">An integer between 0 and 7</param>
         [MethodImpl(Inline)]
         public static uint vtakemask(Vector256<uint> src, byte index)
-            => vtakemask(vsll(src, 7 - index));
+            => vtakemask(vsll(src, (byte)(7 - index)));
 
         /// <summary>
         /// Creates a 32-bit mask from each byte at a byte-relative bit index
@@ -159,7 +159,7 @@ namespace Z0
         /// <param name="index">An integer between 0 and 7</param>
         [MethodImpl(Inline)]
         public static uint vtakemask(Vector256<ulong> src, byte index)
-            => vtakemask(vsll(src, 7 - index));
+            => vtakemask(vsll(src, (byte)(7 - index)));
 
         [MethodImpl(Inline)]
         public static ushort takemask(Vector128<byte> src, byte offset, byte index)

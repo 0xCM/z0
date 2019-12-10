@@ -13,14 +13,14 @@ namespace Z0
     partial class inxoc
     {                
         public static Vector128<byte> vsll8_128(Vector128<byte> src, byte shift)
-            => dinx.vsll8(src,shift);
+            => dinx.vsll(src,shift);
 
         public static Vector256<byte> vsll8_256(Vector256<byte> src, byte shift)
-            => dinx.vsll8(src,shift);
+            => dinx.vsll(src,shift);
 
-        public static Vector256<uint> avxpack1(NatBlock<N8,uint> src, int offset)
-            => AvxBitpack.pack(src, offset);
-        
+        public static Vector128<byte> msb_mask_v128()
+            => vmask.msb<byte>(n128,n8, 4);
+            
         public static ulong sum_256x64u(Vector256<ulong> src)
             => dinx.vsum(src);
 

@@ -16,7 +16,7 @@ namespace Z0
     partial class ginx
     {
         [MethodImpl(Inline)]
-        public static Vector128<T> vsll<T>(Vector128<T> x, int shift)
+        public static Vector128<T> vsll<T>(Vector128<T> x, byte shift)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -34,7 +34,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vsll<T>(Vector256<T> x, int shift)
+        public static Vector256<T> vsll<T>(Vector256<T> x, byte shift)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -54,7 +54,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        static Vector128<T> vsll_i<T>(Vector128<T> x, int shift)
+        static Vector128<T> vsll_i<T>(Vector128<T> x, byte shift)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -68,7 +68,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vsll_u<T>(Vector128<T> x, int shift)
+        static Vector128<T> vsll_u<T>(Vector128<T> x, byte shift)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -82,7 +82,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vsll_i<T>(Vector256<T> x, int shift)
+        static Vector256<T> vsll_i<T>(Vector256<T> x, byte shift)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -96,7 +96,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vsll_u<T>(Vector256<T> x, int shift)
+        static Vector256<T> vsll_u<T>(Vector256<T> x, byte shift)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

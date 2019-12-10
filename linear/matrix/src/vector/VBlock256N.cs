@@ -40,7 +40,7 @@ namespace Z0
         /// <typeparam name="T">THe component type</typeparam>
         [MethodImpl(Inline)]   
         public static implicit operator NatBlock<N,T>(VBlock256<N,T> src)
-            => src.data;
+            => DataBlocks.natload<N,T>(src.data);
 
         /// <summary>
         /// Slice => Vec
