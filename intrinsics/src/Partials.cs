@@ -74,7 +74,7 @@ namespace Z0
     /// <summary>
     /// Direct scalar intrinsics
     /// </summary>
-    public static partial class sinx
+    public static partial class inxs
     {
 
     }

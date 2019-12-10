@@ -17,7 +17,7 @@ namespace Z0
     public readonly ref struct ConstBlock64<T>
         where T : unmanaged
     {
-        readonly ReadOnlySpan<T> data;
+        internal readonly ReadOnlySpan<T> data;
 
         /// <summary>
         /// The natural block width
@@ -87,13 +87,39 @@ namespace Z0
         }
 
         /// <summary>
-        /// Indexes directly into the underlying storage cells
+        /// Mediates readonly access to the the underlying storage cells via linear index
         /// </summary>
-        public ref readonly T this[int ix] 
+        public ref readonly T this[int index] 
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.Add(ref Unsafe.AsRef(in Head), ix);
+            get => ref Unsafe.Add(ref Unsafe.AsRef(in Head), index);
         }
+
+        /// <summary>
+        /// Mediates readonly access to the the underlying storage cells via block index and block-relative cell index
+        /// </summary>
+        public ref readonly T this[int block, int segment] 
+        {
+            [MethodImpl(Inline)]
+            get => ref Cell(block, segment);
+        }
+
+        /// <summary>
+        /// Mediates readonly access to the the underlying storage cells via block index and block-relative cell index
+        /// </summary>
+        /// <param name="block">The block index</param>
+        /// <param name="segment">The cell relative block index</param>
+        [MethodImpl(Inline)]
+        public ref readonly T Cell(int block, int segment)
+            => ref Unsafe.Add(ref Unsafe.AsRef(in Head), BlockLength*block + segment);
+
+        /// <summary>
+        /// Non-allocating operation that wraps a span around the content of an index-identified block
+        /// </summary>
+        /// <param name="block">The block index</param>
+        [MethodImpl(Inline)]
+        public ReadOnlySpan<T> SpanBlock(int block)    
+            => data.Slice(block * blocklen<T>(N), blocklen<T>(N));
 
         /// <summary>
         /// Reinterprets the storage cell type

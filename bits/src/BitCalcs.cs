@@ -15,27 +15,27 @@ namespace Z0
         /// <summary>
         /// Calculates the (minimum) number of cells required to hold a contiguous sequence of bits
         /// </summary>
-        /// <param name="cellwidth">The number of bits that comprise each segment</param>
-        /// <param name="totalbits">The number of bits</param>
+        /// <param name="cw">The bit-width of a cell</param>
+        /// <param name="bc">The total number of bits</param>
         [MethodImpl(Inline)]
-        public static int cellcount(int cellwidth, int totalbits)
+        public static int cellcount(int cw, int bc)
         {
-            if(cellwidth >= totalbits)
+            if(cw >= bc)
                 return 1;
 
-            var cells = totalbits / cellwidth;
-            return cells + (totalbits % cellwidth == 0 ? 0 : 1);
+            var cells = bc / cw;
+            return cells + (bc % cw == 0 ? 0 : 1);
         }
 
         /// <summary>
         /// Calculates the minimum number of cells required to hold a contiguous sequence of bits
         /// </summary>
-        /// <param name="totalbits">The number of bits</param>
+        /// <param name="bc">The total number of bits</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int cellcount<T>(int totalbits)
+        public static int cellcount<T>(int bc)
             where T : unmanaged
-                => cellcount(bitsize<T>(), totalbits);
+                => cellcount(bitsize<T>(), bc);
 
         /// <summary>
         /// Computes the 0-based linear index determined by column width and a row/col coordinate

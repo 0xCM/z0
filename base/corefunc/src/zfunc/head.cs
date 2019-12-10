@@ -19,7 +19,79 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe ref T head<T>(T[] src)
         => ref src[0];
-    
+
+    /// <summary>
+    /// Interprets a readonly generic reference as a readonly uint8 reference
+    /// </summary>
+    /// <param name="src">The source reference</param>
+    /// <typeparam name="T">The source type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly byte const8<T>(in T src)
+        => ref Unsafe.As<T,byte>(ref Unsafe.AsRef(in src));
+
+    /// <summary>
+    /// Interprets a readonly generic reference as a readonly uint16 reference
+    /// </summary>
+    /// <param name="src">The source reference</param>
+    /// <typeparam name="T">The source type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly ushort const16<T>(in T src)
+        => ref Unsafe.As<T,ushort>(ref Unsafe.AsRef(in src));
+
+    /// <summary>
+    /// Interprets a readonly generic reference as a readonly uint32 reference
+    /// </summary>
+    /// <param name="src">The source reference</param>
+    /// <typeparam name="T">The source type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly uint const32<T>(in T src)
+        => ref Unsafe.As<T,uint>(ref Unsafe.AsRef(in src));
+
+    /// <summary>
+    /// Interprets a readonly generic reference as a readonly uint64 reference
+    /// </summary>
+    /// <param name="src">The source reference</param>
+    /// <typeparam name="T">The source type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly ulong const64<T>(in T src)
+        => ref Unsafe.As<T,ulong>(ref Unsafe.AsRef(in src));
+
+    /// <summary>
+    /// Interprets a generic reference as a uint8 reference
+    /// </summary>
+    /// <param name="src">The source reference</param>
+    /// <typeparam name="T">The source type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref byte ref8<T>(ref T src)
+        => ref Unsafe.As<T,byte>(ref src);
+
+    /// <summary>
+    /// Interprets a generic reference as a uint16 reference
+    /// </summary>
+    /// <param name="src">The source reference</param>
+    /// <typeparam name="T">The source type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref ushort ref16<T>(ref T src)
+        => ref Unsafe.As<T,ushort>(ref src);
+
+    /// <summary>
+    /// Interprets a generic reference as a uint32 reference
+    /// </summary>
+    /// <param name="src">The source reference</param>
+    /// <typeparam name="T">The source type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref uint ref32<T>(ref T src)
+        => ref Unsafe.As<T,uint>(ref src);
+
+    /// <summary>
+    /// Interprets a generic reference as a uint64 reference
+    /// </summary>
+    /// <param name="src">The source reference</param>
+    /// <typeparam name="T">The source type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref ulong ref64<T>(ref T src)
+        => ref Unsafe.As<T,ulong>(ref src);
+
     /// <summary>
     /// Returns a reference to the location of the first span element
     /// </summary>
@@ -177,8 +249,9 @@ partial class zfunc
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(Inline)]
-    public static ref ulong head64(Span<byte> src)
-        => ref head(src.AsUInt64());
+    public static ref ulong head64<T>(Span<T> src)
+        where T : unmanaged
+            => ref head(src.AsUInt64());
 
     /// <summary>
     /// Presents the span head as a reference to an unsigned 64-bit integer
@@ -186,8 +259,9 @@ partial class zfunc
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(Inline)]
-    public static ref readonly ulong head64(ReadOnlySpan<byte> src)
-        => ref head(src.AsUInt64());
+    public static ref readonly ulong head64<T>(ReadOnlySpan<T> src)
+        where T : unmanaged
+            => ref head(src.AsUInt64());
 
     /// <summary>
     /// Presents the span head as a reference to a signed 64-bit integer

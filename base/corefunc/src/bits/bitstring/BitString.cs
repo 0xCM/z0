@@ -301,11 +301,12 @@ namespace Z0
         /// <param name="n">Then number of times to replicate the bistring in the target</param>
         public BitString Replicate(int n)
         {            
-            var data = new byte[Length*n];
-            Span<byte> dst = data;
+            var storage = new byte[Length*n];
+            Span<byte> dst = storage;
+
             for(var i=0; i<n; i++)
                 data.CopyTo(dst.Slice(i*Length));
-            return new BitString(data);
+            return new BitString(storage);
         }
  
         /// <summary>

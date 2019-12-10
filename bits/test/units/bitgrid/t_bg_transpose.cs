@@ -11,28 +11,6 @@ namespace Z0
     
     public class t_bg_transpose : t_bg<t_bg_transpose>
     {        
-        static Span<int> GetPositions<M,N>(int col, M m= default, N n = default)
-            where N : unmanaged, ITypeNat
-            where M : unmanaged, ITypeNat
-        {
-            Span<int> positions = new int[natval(m)];
-            for(var row = 0; row < positions.Length; row++)
-                positions[row] = BitGrid.colidx(n, row, col);
-            return positions;
-        }
-        static Span<int> GetSegments<M,N,T>(int col, M m= default, N n = default, T t = default)
-            where N : unmanaged, ITypeNat
-            where M : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            var positions = GetPositions(col,m,n);
-            var segwidth = bitsize<T>();
-            Span<int> segments = new int[natval(m)];            
-            for(var i=0; i<positions.Length; i++)
-                segments[i] = positions[i]/segwidth;
-            return segments;
-        }
-
         public void bg_transpose_256x16x16()
         {            
             var w = n256;
@@ -45,7 +23,6 @@ namespace Z0
             var gT = BitGrid.transpose(g);
             var bsT = g.ToBitString().Transpose(m,n).ToBitGrid(w,m,n,t);
             Claim.yea(gT == bsT);
-
         }
 
         void nbg_transpose_8x8()
@@ -69,7 +46,6 @@ namespace Z0
                     Trace(bstg.Format());
                     Claim.fail();
                 }
-
             }
         }
 
@@ -101,15 +77,8 @@ namespace Z0
                     Trace("!=");
                     Trace(tr2.Format());
                     Claim.fail();
-
                 }
-
-
             }
-
         }
-
-
     }
-
 }

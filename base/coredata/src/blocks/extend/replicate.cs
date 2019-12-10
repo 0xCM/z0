@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block16<T> Replicate<T>(this Block16<T> src)
+        public static Block16<T> Replicate<T>(this in Block16<T> src)
             where T : unmanaged
         {
             Span<T> dst = new T[src.CellCount];
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block32<T> Replicate<T>(this Block32<T> src)
+        public static Block32<T> Replicate<T>(this in Block32<T> src)
             where T : unmanaged
         {
             Span<T> dst = new T[src.CellCount];
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block64<T> Replicate<T>(this Block64<T> src)
+        public static Block64<T> Replicate<T>(this in Block64<T> src)
             where T : unmanaged
         {
             Span<T> dst = new T[src.CellCount];
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block128<T> Replicate<T>(this Block128<T> src)
+        public static Block128<T> Replicate<T>(this in Block128<T> src)
             where T : unmanaged
         {
             Span<T> dst = new T[src.CellCount];
@@ -77,7 +77,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block256<T> Replicate<T>(this Block256<T> src)
+        public static Block256<T> Replicate<T>(this in Block256<T> src)
             where T : unmanaged
         {
             Span<T> dst = new T[src.CellCount];
@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block16<T> Replicate<T>(this ConstBlock16<T> src)
+        public static Block16<T> Replicate<T>(this in ConstBlock16<T> src)
             where T : unmanaged
         {
             Span<T> dst = new T[src.CellCount];
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block32<T> Replicate<T>(this ConstBlock32<T> src)
+        public static Block32<T> Replicate<T>(this in ConstBlock32<T> src)
             where T : unmanaged
         {
             Span<T> dst = new T[src.CellCount];
@@ -119,7 +119,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block64<T> Replicate<T>(this ConstBlock64<T> src)
+        public static Block64<T> Replicate<T>(this in ConstBlock64<T> src)
             where T : unmanaged
         {
             Span<T> dst = new T[src.CellCount];
@@ -133,7 +133,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block128<T> Replicate<T>(this ConstBlock128<T> src)
+        public static Block128<T> Replicate<T>(this in ConstBlock128<T> src)
             where T : unmanaged
         {
             Span<T> dst = new T[src.CellCount];
@@ -147,7 +147,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block256<T> Replicate<T>(this ConstBlock256<T> src)
+        public static Block256<T> Replicate<T>(this in ConstBlock256<T> src)
             where T : unmanaged
         {
             Span<T> dst = new T[src.CellCount];
@@ -161,7 +161,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static NatBlock<N,T> Replicate<N,T>(this NatBlock<N,T> src)
+        public static NatBlock<N,T> Replicate<N,T>(this in NatBlock<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {

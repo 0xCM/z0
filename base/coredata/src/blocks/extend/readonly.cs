@@ -16,7 +16,7 @@ namespace Z0
         /// Presents the allocated data as a blocked read-only span
         /// </summary>
         [MethodImpl(Inline)]
-        public static ConstBlock16<T> ReadOnly<T>(this Block16<T> src)
+        public static ConstBlock16<T> ReadOnly<T>(this in Block16<T> src)
             where T : unmanaged
                 => new ConstBlock16<T>(src.Data);
 
@@ -24,7 +24,7 @@ namespace Z0
         /// Presents the allocated data as a blocked read-only span
         /// </summary>
         [MethodImpl(Inline)]
-        public static ConstBlock32<T> ReadOnly<T>(this Block32<T> src)
+        public static ConstBlock32<T> ReadOnly<T>(this in Block32<T> src)
             where T : unmanaged
                 => new ConstBlock32<T>(src.Data);
 
@@ -32,7 +32,7 @@ namespace Z0
         /// Presents the allocated data as a blocked read-only span
         /// </summary>
         [MethodImpl(Inline)]
-        public static ConstBlock64<T> ReadOnly<T>(this Block64<T> src)
+        public static ConstBlock64<T> ReadOnly<T>(this in Block64<T> src)
             where T : unmanaged
                 => new ConstBlock64<T>(src.Data);
 
@@ -40,7 +40,7 @@ namespace Z0
         /// Presents the allocated data as a blocked read-only span
         /// </summary>
         [MethodImpl(Inline)]
-        public static ConstBlock128<T> ReadOnly<T>(this Block128<T> src)
+        public static ConstBlock128<T> ReadOnly<T>(this in Block128<T> src)
             where T : unmanaged
                 => new ConstBlock128<T>(src.Data);
 
@@ -48,7 +48,7 @@ namespace Z0
         /// Presents the allocated data as a blocked read-only span
         /// </summary>
         [MethodImpl(Inline)]
-        public static ConstBlock256<T> ReadOnly<T>(this Block256<T> src)
+        public static ConstBlock256<T> ReadOnly<T>(this in Block256<T> src)
             where T : unmanaged
                 => new ConstBlock256<T>(src.Data);
     }

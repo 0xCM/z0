@@ -50,33 +50,31 @@ namespace Z0
         public void vblendbits_256x64u()
             => vblendbits_check<ulong>(n256);
 
-        protected void vblendbits_check<T>(N256 n)
+        protected void vblendbits_check<T>(N256 w)
             where T : unmanaged
         {
+            var count = w/bitsize<T>();
             for(var sample=0; sample<SampleSize; sample++)
             {
 
-                var x = Random.CpuVector<T>(n);
-                var y = Random.CpuVector<T>(n);
-                var m = Random.CpuVector<T>(n);
+                var x = Random.CpuVector<T>(w);
+                var y = Random.CpuVector<T>(w);
+                var m = Random.CpuVector<T>(w);
                 var r = ginx.vblendbits(x,y,m);
-                
-                var xs = x.ToSpan();
-                var ys = y.ToSpan();
-                var ms = m.ToSpan();
-                var rs = r.ToSpan();
-                for(var i = 0; i<xs.Length; i++)
-                    Claim.eq(rs[i],gmath.blend(xs[i],ys[i],ms[i]));
+
+                for(var i = 0; i<count; i++)
+                    Claim.eq(vcell(r,i),gmath.blend(vcell(x,i),vcell(y,i), vcell(m,i)));
 
                 vblendbits_drill(x,y,m,r);                    
             }
 
         }
 
-        protected void vblendbits_drill<T>(Vector256<T> left, Vector256<T> right, Vector256<T> mask,Vector256<T> result)
+        protected void vblendbits_drill<T>(Vector256<T> left, Vector256<T> right, Vector256<T> mask, Vector256<T> result)
             where T : unmanaged
         {
-            
+            var ld = DataBlocks.alloc<byte>(n256);
+
             var lbs = left.ToBitString();
             var rbs = right.ToBitString();
             var bsm = mask.ToBitString();
@@ -90,23 +88,19 @@ namespace Z0
             
         }
 
-        protected void vblendbits_check<T>(N128 n)
+        protected void vblendbits_check<T>(N128 w)
             where T : unmanaged
         {
+            var count = w/bitsize<T>();            
             for(var sample=0; sample<SampleSize; sample++)
             {
-                var left = Random.CpuVector<T>(n);
-                var right = Random.CpuVector<T>(n);
-                var mask = Random.CpuVector<T>(n);
-                var result = ginx.vblendbits(left,right,mask);
-                
-                var ls = left.ToSpan();
-                var rs = right.ToSpan();
-                var ms = mask.ToSpan();
-                var os = result.ToSpan();
-                for(var i = 0; i<ls.Length; i++)
-                    Claim.eq(os[i],gmath.blend(ls[i],rs[i],ms[i]));
+                var x = Random.CpuVector<T>(w);
+                var y = Random.CpuVector<T>(w);
+                var m = Random.CpuVector<T>(w);
+                var r = ginx.vblendbits(x,y,m);
 
+                for(var i = 0; i<count; i++)
+                    Claim.eq(vcell(r,i),gmath.blend(vcell(x,i),vcell(y,i), vcell(m,i)));
             }
         }
     }

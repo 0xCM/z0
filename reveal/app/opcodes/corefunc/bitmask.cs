@@ -13,6 +13,8 @@ namespace Z0
 
     partial class zfoc
     {
+        
+
         public static bit testbit_d8i(sbyte src, int pos)
             => BitMask.test(src,pos);
 

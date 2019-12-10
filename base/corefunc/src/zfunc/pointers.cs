@@ -94,7 +94,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe T* ptr<T>(in Block16<T> src, int block)
         where T : unmanaged
-            => ptr(ref src.Block(block).Head);
+            => ptr(ref src.BlockRef(block));
 
     /// <summary>
     /// Returns a generic pointer to the leading cell of an index-identified block of a 32-bit blocked container
@@ -104,7 +104,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe T* ptr<T>(in Block32<T> src, int block)
         where T : unmanaged
-            => ptr(ref src.Block(block).Head);
+            => ptr(ref src.BlockRef(block));
 
     /// <summary>
     /// Returns a generic pointer to the leading cell of an index-identified block of a 64-bit blocked container
@@ -114,7 +114,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe T* ptr<T>(in Block64<T> src, int block)
         where T : unmanaged
-            => ptr(ref src.Block(block).Head);
+            => ptr(ref src.BlockRef(block));
 
     /// <summary>
     /// Returns a generic pointer to the leading cell of an index-identified block of a 128-bit blocked container
@@ -124,7 +124,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe T* ptr<T>(in Block128<T> src, int block)
         where T : unmanaged
-            => ptr(ref src.Block(block).Head);
+            => ptr(ref src.BlockRef(block));
 
     /// <summary>
     /// Returns a generic pointer to the leading cell of an index-identified block of a 256-bit blocked container
@@ -134,7 +134,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe T* ptr<T>(in Block256<T> src, int block)
         where T : unmanaged
-            => ptr(ref src.Block(block).Head);
+            => ptr(ref src.BlockRef(block));
 
     /// <summary>
     /// Presents a readonly reference as a generic pointer which should intself be considered constant
@@ -216,7 +216,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe T* constptr<T>(in ConstBlock16<T> src, int block)
         where T : unmanaged
-            => ptr(ref mutable(in src.Block(block).Head));
+            => ptr(ref mutable(in src.BlockRef(block)));
 
     /// <summary>
     /// Returns a generic pointer to the leading cell of the index-identified block of a constant 32-bit blocked container
@@ -226,7 +226,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe T* constptr<T>(in ConstBlock32<T> src, int block)
         where T : unmanaged
-            => ptr(ref mutable(in src.Block(block).Head));
+            => ptr(ref mutable(in src.BlockRef(block)));
 
     /// <summary>
     /// Returns a generic pointer to the leading cell of the index-identified block of a constant 64-bit blocked container
@@ -236,7 +236,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe T* constptr<T>(in ConstBlock64<T> src, int block)
         where T : unmanaged
-            => ptr(ref mutable(in src.Block(block).Head));
+            => ptr(ref mutable(in src.BlockRef(block)));
 
     /// <summary>
     /// Returns a generic pointer to the leading cell of the index-identified block of a constant 128-bit blocked container
@@ -246,7 +246,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe T* constptr<T>(in ConstBlock128<T> src, int block)
         where T : unmanaged
-            => ptr(ref mutable(in src.Block(block).Head));
+            => ptr(ref mutable(in src.BlockRef(block)));
 
     /// <summary>
     /// Returns a generic pointer to the leading cell of the index-identified block of a constant 256-bit blocked container
@@ -256,7 +256,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe T* constptr<T>(in ConstBlock256<T> src, int block)
         where T : unmanaged
-            => ptr(ref mutable(in src.Block(block).Head));
+            => ptr(ref mutable(in src.BlockRef(block)));
 
 
     /// <summary>

@@ -24,6 +24,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<byte> vsll(Vector128<byte> src, int shift)
         {
+                return vsll8(src,(byte)shift);
+            /*            
             // Lift the source vector into a space where the SLL operation exists and perform it there
             var x = vconvert(src, out Vector256<ushort> _);
 
@@ -34,6 +36,7 @@ namespace Z0
             // Transform the result back the source space
             var perm = ginx.vplanemerge<byte>();
             return vlo(vshuf32x8(a, perm));
+            */
         }
 
         /// <summary>
@@ -112,24 +115,26 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<byte> vsll(Vector256<byte> src, int shift)
         {
-            //Fan the hi/lo parts of the u8 source vector across 2 u16 vectors
-            var x = vconvert(vlo(src), out Vector256<ushort> _);
-            var y = vconvert(vhi(src), out Vector256<ushort> _);
+                return vsll8(src,(byte)shift);
 
-            // Shift each part with a concrete intrinsic anc convert back to bytes and truncate overflows 
-            // to set up the component pattern [X 0 X 0 ... X 0] in each vector
-            var mask =  ginx.vpclearalt<byte>(n256);
-            var a = vshuf16x8(v8u(dinx.vsll(x, shift)), mask);
-            var b = vshuf16x8(v8u(dinx.vsll(y, shift)), mask);
+            // //Fan the hi/lo parts of the u8 source vector across 2 u16 vectors
+            // var x = vconvert(vlo(src), out Vector256<ushort> _);
+            // var y = vconvert(vhi(src), out Vector256<ushort> _);
 
-            // Each vector contains 16 values that need to be merged
-            // back into a single vector. The strategey is to condense
-            // each vector via the "lane merge" pattern and construct
-            // the result vector via insertion of these condensed vectors
-            var permSpec = ginx.vplanemerge<byte>();
-            return dinx.vconcat(
-                vlo(vshuf32x8(a, permSpec)), 
-                vlo(vshuf32x8(b, permSpec)));            
+            // // Shift each part with a concrete intrinsic anc convert back to bytes and truncate overflows 
+            // // to set up the component pattern [X 0 X 0 ... X 0] in each vector
+            // var mask =  ginx.vpclearalt<byte>(n256);
+            // var a = vshuf16x8(v8u(dinx.vsll(x, shift)), mask);
+            // var b = vshuf16x8(v8u(dinx.vsll(y, shift)), mask);
+
+            // // Each vector contains 16 values that need to be merged
+            // // back into a single vector. The strategey is to condense
+            // // each vector via the "lane merge" pattern and construct
+            // // the result vector via insertion of these condensed vectors
+            // var permSpec = ginx.vplanemerge<byte>();
+            // return dinx.vconcat(
+            //     vlo(vshuf32x8(a, permSpec)), 
+            //     vlo(vshuf32x8(b, permSpec)));            
         }
 
         /// <summary>

@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> LoadVector<T>(this Block128<T> src)            
+        public static Vector128<T> LoadVector<T>(this in Block128<T> src)            
             where T : unmanaged            
                 => ginx.vload(src.ReadOnly());
 
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> LoadVector<T>(this ConstBlock128<T> src)            
+        public static Vector128<T> LoadVector<T>(this in ConstBlock128<T> src)            
             where T : unmanaged      
                 => ginx.vload(src);
 
@@ -82,9 +82,9 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> LoadVector<T>(this Block128<T> src, int block)            
+        public static Vector128<T> LoadVector<T>(this in Block128<T> src, int block)            
             where T : unmanaged            
-                => ginx.vload(src.ReadOnly(), block);
+                => ginx.vload(src, block);
 
         /// <summary>
         /// Loads a block-identified 128-bit vector
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> LoadVector<T>(this ConstBlock128<T> src, int block)            
+        public static Vector128<T> LoadVector<T>(this in ConstBlock128<T> src, int block)            
             where T : unmanaged      
                 => ginx.vload(src,block);
 
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> LoadVector<T>(this Block256<T> src)            
+        public static Vector256<T> LoadVector<T>(this in Block256<T> src)            
             where T : unmanaged            
                 => ginx.vload(src);
 
@@ -115,7 +115,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> LoadVector<T>(this ConstBlock256<T> src)            
+        public static Vector256<T> LoadVector<T>(this in ConstBlock256<T> src)            
             where T : unmanaged      
                 => ginx.vload(src);
 
@@ -126,7 +126,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> LoadVector<T>(this Block256<T> src, int block)            
+        public static Vector256<T> LoadVector<T>(this in Block256<T> src, int block)            
             where T : unmanaged            
                 => ginx.vload(src,block);
 
@@ -137,7 +137,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> LoadVector<T>(this ConstBlock256<T> src, int block)            
+        public static Vector256<T> LoadVector<T>(this in ConstBlock256<T> src, int block)            
             where T : unmanaged      
                 => ginx.vload(src,block);
     }

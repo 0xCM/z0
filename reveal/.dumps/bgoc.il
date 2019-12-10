@@ -1,4 +1,13 @@
-// 2019-12-08 17:58:48:730
+// 2019-12-09 22:27:11:745
+Vector256<byte> bitgrid_vector256(BitGrid<byte> src, int block)
+{
+    IL_0000: ldarga.s src
+    IL_0002: ldarg.1
+    IL_0003: call Z0.N256 zfunc::get_n256()
+    IL_0008: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.BitGrid::vector<System.Byte>(Z0.BitGrid`1<System.Byte>&,System.Int32,Z0.N256)
+    IL_000D: ret
+
+}
 BitGrid256<N16,N16,ushort> transpose(BitGrid256<N16,N16,ushort> g)
 {
     IL_0000: ldarga.s g

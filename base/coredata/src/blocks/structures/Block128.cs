@@ -18,7 +18,7 @@ namespace Z0
     public readonly ref struct Block128<T>
         where T : unmanaged
     {
-        readonly Span<T> data;
+        internal readonly Span<T> data;
 
         public static N128 N => default;
 
@@ -33,7 +33,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ConstBlock128<T>(in Block128<T> src)
             => new ConstBlock128<T>(src.data);
-
 
         [MethodImpl(Inline)]
         internal Block128(Span<T> src)
@@ -103,13 +102,39 @@ namespace Z0
         }
 
         /// <summary>
-        /// Indexes directly into the underlying storage cells
+        /// Mediates access to the underlying storage cells via linear index
         /// </summary>
-        public ref T this[int ix] 
+        public ref T this[int index] 
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.Add(ref Head, ix);
+            get => ref Unsafe.Add(ref Head, index);
         }
+
+        /// <summary>
+        /// Mediates access to the the underlying storage cells via block index and block-relative cell index
+        /// </summary>
+        public ref T this[int block, int segment] 
+        {
+            [MethodImpl(Inline)]
+            get => ref Cell(block, segment);
+        }
+
+        /// <summary>
+        /// Mediates access to the the underlying storage cells via block index and block-relative cell index
+        /// </summary>
+        /// <param name="block">The block index</param>
+        /// <param name="segment">The cell relative block index</param>
+        [MethodImpl(Inline)]
+        public ref T Cell(int block, int segment)
+            => ref Unsafe.Add(ref Head, BlockLength*block + segment);
+
+        /// <summary>
+        /// Non-allocating operation that wraps a span around the content of an index-identified block
+        /// </summary>
+        /// <param name="block">The block index</param>
+        [MethodImpl(Inline)]
+        public Span<T> SpanBlock(int block)    
+            => data.Slice(block * blocklen<T>(N), blocklen<T>(N));
 
         /// <summary>
         /// Reinterprets the storage cell type

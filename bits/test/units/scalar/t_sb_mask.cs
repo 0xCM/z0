@@ -55,13 +55,26 @@ namespace Z0
 
             void case4()
             {
-                Claim.eq(8 - 3, Bits.pop(gbits.himask<byte>(3)));
-                Claim.eq(32 - 24, Bits.pop(gbits.himask<uint>(24)));
-                Claim.eq(32 - 17, Bits.pop(gbits.himask<uint>(17)));
+                var lomask = gbits.lomask<uint>(6);
+                var himask = gbits.himask<uint>(8);
+                var src = uint.MaxValue;
+                var dst = gmath.xor(gmath.xor(src,lomask), himask);
+                Claim.eq(7, gbits.ntz(dst));
+                Claim.eq(8, gbits.nlz(dst));
 
             }
 
-            RunLocals();
+
+            case1();
+            case2();
+            case3();
+            case4();
+        }
+
+
+        public void sb_mask_hilo()
+        {
+
         }
 
 

@@ -9,7 +9,6 @@ namespace Z0
     using System.Reflection;
 
     using static zfunc;
-    using static BitParts;
 
     public abstract class t_bits<T> : UnitTest<T>
         where T : t_bits<T>, new()

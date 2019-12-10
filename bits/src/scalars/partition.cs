@@ -13,6 +13,26 @@ namespace Z0
     
     partial class Bits
     {
+        /// <summary>
+        /// [00000001 ... 00000001]
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        static T lsb8x1<T>(T src)
+            where T : unmanaged
+                => convert<ulong,T>(dinx.scatter(convert<T,ulong>(src), BitMasks.Lsb64x8));
+
+        /// <summary>
+        /// [00000000 00000000 00000000 0000001 00000000 00000000 00000000 0000001]
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        static T lsb32x1<T>(T src)
+            where T : unmanaged
+                => convert<ulong,T>(dinx.scatter(convert<T,ulong>(src), BitMasks.Lsb64x32));
+
         // ~ Nx1
         // ~ ------------------------------------------------------------------
 
@@ -134,10 +154,10 @@ namespace Z0
         public static void part32x1(uint src, Span<byte> dst)
         {
             ref var target = ref head64(dst);
-            seek(ref target, 0) = BitMasks.lsb8x1((ulong)src);
-            seek(ref target, 1) = BitMasks.lsb8x1((ulong)src >> 8);
-            seek(ref target, 2) = BitMasks.lsb8x1((ulong)src >> 16);
-            seek(ref target, 3) = BitMasks.lsb8x1((ulong)src >> 24);
+            seek(ref target, 0) = lsb8x1((ulong)src);
+            seek(ref target, 1) = lsb8x1((ulong)src >> 8);
+            seek(ref target, 2) = lsb8x1((ulong)src >> 16);
+            seek(ref target, 3) = lsb8x1((ulong)src >> 24);
         }
 
         /// <summary>
@@ -149,14 +169,14 @@ namespace Z0
         public static void part64x1(ulong src, Span<byte> dst)
         {
             ref var target = ref head64(dst);
-            seek(ref target, 0) = BitMasks.lsb8x1(src);
-            seek(ref target, 1) = BitMasks.lsb8x1(src >> 8);
-            seek(ref target, 2) = BitMasks.lsb8x1(src >> 16);
-            seek(ref target, 3) = BitMasks.lsb8x1(src >> 24);
-            seek(ref target, 4) = BitMasks.lsb8x1(src >> 32);
-            seek(ref target, 5) = BitMasks.lsb8x1(src >> 40);
-            seek(ref target, 6) = BitMasks.lsb8x1(src >> 48);
-            seek(ref target, 7) = BitMasks.lsb8x1(src >> 56);
+            seek(ref target, 0) = lsb8x1(src);
+            seek(ref target, 1) = lsb8x1(src >> 8);
+            seek(ref target, 2) = lsb8x1(src >> 16);
+            seek(ref target, 3) = lsb8x1(src >> 24);
+            seek(ref target, 4) = lsb8x1(src >> 32);
+            seek(ref target, 5) = lsb8x1(src >> 40);
+            seek(ref target, 6) = lsb8x1(src >> 48);
+            seek(ref target, 7) = lsb8x1(src >> 56);
         }
  
         /// <summary>
@@ -171,7 +191,7 @@ namespace Z0
             // thus, the target covers 32 64-bit segments where each segment covers 2 bit values            
             ref var target = ref head(dst.As<bit,ulong>());
             for(int i=0; i<32; i++)
-                seek(ref target, i) = BitMasks.lsb32x1(src >> i);
+                seek(ref target, i) = lsb32x1(src >> i);
         }
 
         /// <summary>
@@ -519,21 +539,21 @@ namespace Z0
         public static void Part15x5(ushort src, Block32<byte> dst)
         {
             const ushort M = BitMasks.Lsb16x8x5;
-            head16(dst) = dinx.scatter(src, M);            
+            ref32(ref dst.Head) = dinx.scatter(src, M);            
         }
 
         [MethodImpl(Inline)]
         public static void Part30x5(uint src, Block32<byte> dst)
         {
             const uint M = BitMasks.Lsb32x8x5;
-            head32(dst) = dinx.scatter(src, M);            
+            ref32(ref dst.Head) = dinx.scatter(src, M);            
         }
 
         [MethodImpl(Inline)]
         public static void Part60x5(ulong src, Block64<byte> dst)
         {
             const ulong M = BitMasks.Lsb64x8x5;
-            head64(dst) = dinx.scatter(src, M);            
+            ref64(ref dst.Head) = dinx.scatter(src, M);            
         }
 
         // ~ Nx8

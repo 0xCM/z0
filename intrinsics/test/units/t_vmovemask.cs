@@ -99,7 +99,6 @@ namespace Z0
 
             for(var i=0; i<SampleSize; i++)
             {                
-                var srcBlock = src.Block(i);
                 var srcCpuVec = src.LoadVector(i);
                 var srcBitVec = srcCpuVec.ToSpan().ToBitCells(bits);
                 
@@ -108,7 +107,7 @@ namespace Z0
                                                 
                 var mask = 0u;
                 for(var r=0; r<srcCpuVec.Length(); r++)
-                    if(BitMask.test(srcBlock[r], hibit))
+                    if(BitMask.test(src[i,r], hibit))
                         mask = BitMask.enable(mask, r);
                 
                 var expect = mask.ToBitVector().ToBitString();
@@ -127,7 +126,6 @@ namespace Z0
             for(var i=0; i<SampleSize; i++)
             {
                 
-                var srcBlock = src.Block(i);
                 var srcCpuVec = src.LoadVector(i);
                 var srcBitVec = srcCpuVec.ToSpan().ToBitCells(bits);
                 
@@ -136,7 +134,7 @@ namespace Z0
                                                 
                 var mask = 0u;
                 for(var r=0; r<srcCpuVec.Length(); r++)
-                    if(BitMask.test(srcBlock[r], hibit))
+                    if(BitMask.test(src[i,r], hibit))
                         mask = BitMask.enable(mask, r);
                 
                 var expect = mask.ToBitVector(bytes).ToBitString();

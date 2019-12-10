@@ -12,8 +12,11 @@ namespace Z0
     
     partial class inxoc
     {                
+        public static Vector128<byte> vsll8_128(Vector128<byte> src, byte shift)
+            => dinx.vsll8(src,shift);
 
-
+        public static Vector256<byte> vsll8_256(Vector256<byte> src, byte shift)
+            => dinx.vsll8(src,shift);
 
         public static Vector256<uint> avxpack1(NatBlock<N8,uint> src, int offset)
             => AvxBitpack.pack(src, offset);

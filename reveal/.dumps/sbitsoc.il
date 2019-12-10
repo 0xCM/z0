@@ -1,4 +1,4 @@
-// 2019-12-08 17:58:49:822
+// 2019-12-09 22:27:12:624
 uint pack32x1(ConstBlock256<byte> src)
 {
     IL_0000: ldarga.s src
@@ -41,7 +41,7 @@ byte inject_8u(byte src, byte dst, int start, int len)
     IL_0001: ldarg.1
     IL_0002: ldarg.2
     IL_0003: ldarg.3
-    IL_0004: call System.Byte Z0.gbits::inject<System.Byte>(System.Byte,System.Byte,System.Int32,System.Int32)
+    IL_0004: call System.Byte Z0.gbits::bitmap<System.Byte>(System.Byte,System.Byte,System.Int32,System.Int32)
     IL_0009: ret
 
 }
@@ -51,7 +51,7 @@ ushort inject_16u(ushort src, ushort dst, int start, int len)
     IL_0001: ldarg.1
     IL_0002: ldarg.2
     IL_0003: ldarg.3
-    IL_0004: call System.UInt16 Z0.gbits::inject<System.UInt16>(System.UInt16,System.UInt16,System.Int32,System.Int32)
+    IL_0004: call System.UInt16 Z0.gbits::bitmap<System.UInt16>(System.UInt16,System.UInt16,System.Int32,System.Int32)
     IL_0009: ret
 
 }
@@ -61,7 +61,7 @@ uint inject_32u(uint src, uint dst, int start, int len)
     IL_0001: ldarg.1
     IL_0002: ldarg.2
     IL_0003: ldarg.3
-    IL_0004: call System.UInt32 Z0.gbits::inject<System.UInt32>(System.UInt32,System.UInt32,System.Int32,System.Int32)
+    IL_0004: call System.UInt32 Z0.gbits::bitmap<System.UInt32>(System.UInt32,System.UInt32,System.Int32,System.Int32)
     IL_0009: ret
 
 }
@@ -71,7 +71,7 @@ ulong inject_64u(ulong src, ulong dst, int start, int len)
     IL_0001: ldarg.1
     IL_0002: ldarg.2
     IL_0003: ldarg.3
-    IL_0004: call System.UInt64 Z0.gbits::inject<System.UInt64>(System.UInt64,System.UInt64,System.Int32,System.Int32)
+    IL_0004: call System.UInt64 Z0.gbits::bitmap<System.UInt64>(System.UInt64,System.UInt64,System.Int32,System.Int32)
     IL_0009: ret
 
 }
@@ -229,34 +229,6 @@ ulong gather_g64u(ulong src, ulong mask)
     IL_0001: ldarg.1
     IL_0002: call System.UInt64 Z0.ginx::gather<System.UInt64>(System.UInt64,System.UInt64)
     IL_0007: ret
-
-}
-ulong lsb_64x8x3(ulong src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt64 Z0.BitMasks::lsb8x3<System.UInt64>(System.UInt64)
-    IL_0006: ret
-
-}
-uint lsb_32x8x3(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt32 Z0.BitMasks::lsb8x3<System.UInt32>(System.UInt32)
-    IL_0006: ret
-
-}
-ushort lsb_16x8x3(ushort src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt16 Z0.BitMasks::lsb8x3<System.UInt16>(System.UInt16)
-    IL_0006: ret
-
-}
-byte lsb_8x3(byte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Byte Z0.BitMasks::lsb8x3<System.Byte>(System.Byte)
-    IL_0006: ret
 
 }
 ulong mask_1x64u(int exp0)

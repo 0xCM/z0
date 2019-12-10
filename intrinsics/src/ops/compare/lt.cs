@@ -72,17 +72,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<long> vlt(Vector128<long> x, Vector128<long> y)
         {
-            var a = ginx.vinsert(x,default,0);
-            var b = ginx.vinsert(y,default,0);
-            return ginx.vlo(vlt(a,b));
+            var a = vconcat(x,y);
+            var b = vswaphl(a);
+            return vlo(vlt(a,b));
         }
 
         [MethodImpl(Inline)]
         public static Vector128<ulong> vlt(Vector128<ulong> x, Vector128<ulong> y)
         {
-            var a = ginx.vinsert(x,default,0);
-            var b = ginx.vinsert(y,default,0);
-            return ginx.vlo(vlt(a,b));
+            var a = vconcat(x,y);
+            var b = vswaphl(a);
+            return vlo(vlt(a,b));
         }
         
         [MethodImpl(Inline)]
@@ -138,7 +138,6 @@ namespace Z0
             return CompareLessThan(mx,my).AsUInt64();
         }
     }
-
 
     static class X86Missing
     {

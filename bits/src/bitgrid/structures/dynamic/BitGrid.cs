@@ -18,7 +18,7 @@ namespace Z0
     public readonly ref struct BitGrid<T>
         where T : unmanaged
     {                
-        readonly Block256<T> data;
+        internal readonly Block256<T> data;
 
         /// <summary>
         /// The number of grid rows
@@ -124,8 +124,8 @@ namespace Z0
         /// </summary>
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
-        public Block256<T> Block(int block)
-            => data.Block(block);
+        public Span<T> Block(int block)
+            => data.SpanBlock(block);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid<T> rhs)

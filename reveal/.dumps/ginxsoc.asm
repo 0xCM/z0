@@ -1,6 +1,6 @@
-; 2019-12-08 17:58:49:575
+; 2019-12-09 18:19:01:093
 ; function: ulong sbroadcast_8x64(byte pattern)
-; location: [7FFDD8E61450h, 7FFDD8E61471h]
+; location: [7FFDD8E90450h, 7FFDD8E90471h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -14,7 +14,7 @@
 ; static ReadOnlySpan<byte> sbroadcast_8x64Bytes => new byte[34]{0x50,0xC5,0xF8,0x77,0x90,0x0F,0xB6,0xC1,0x88,0x44,0x24,0x04,0x48,0x8D,0x44,0x24,0x04,0xC4,0xE2,0x79,0x78,0x44,0x24,0x04,0xC4,0xE1,0xF9,0x7E,0xC0,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ulong sbroadcast_8x64_const()
-; location: [7FFDD8E61490h, 7FFDD8E614B2h]
+; location: [7FFDD8E90490h, 7FFDD8E904B2h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90

@@ -85,13 +85,13 @@ namespace Z0.Test
         {
             var x = DataBlocks.safeload(n128,span<int>(1,2,3,4,5,6,7,8));
 
-            var block0 = x.Block(0);
-            Claim.eq(4, block0.CellCount);   
+            var block0 = x.SpanBlock(0);
+            Claim.eq(4, block0.Length);   
             var y = DataBlocks.safeload(n128,span(1,2,3,4));         
             Claim.eq(block0, y);
 
-            var block2 = x.Block(1);
-            Claim.eq(4, block2.CellCount);
+            var block2 = x.SpanBlock(1);
+            Claim.eq(4, block2.Length);
             Claim.eq(block2,DataBlocks.parts(n128,5,6,7,8));
 
         }

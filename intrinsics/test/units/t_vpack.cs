@@ -29,8 +29,6 @@ namespace Z0
         {
             var src = DataBlocks.natparts(n8,1u,0u,1u,1u,1u,0u,0u,0u);            
             var dst = AvxBitpack.pack(src,0);
-            Trace(src.FormatBits());
-            Trace(dst.FormatBits());
         }
 
         public void pack32()
@@ -44,12 +42,7 @@ namespace Z0
 
             var dst = AvxBitpack.pack(src,0);
             
-        
-            
-            Trace(bits.FormatBits());
-            Trace(src.FormatBits());
-            Trace(dst.FormatBits());
-            
+                
         }
 
         static int pop(ReadOnlySpan<bit> src)

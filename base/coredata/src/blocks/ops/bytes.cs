@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static Block128<byte> bytes<T>(Block128<T> src, N128 n = default)
+        public static Block128<byte> bytes<T>(in Block128<T> src, N128 n = default)
             where T : unmanaged
                 => new Block128<byte>(src.As<byte>());
 
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static Block256<byte> bytes<T>(Block256<T> src, N256 n = default)
+        public static Block256<byte> bytes<T>(in Block256<T> src, N256 n = default)
             where T : unmanaged
                 => new Block256<byte>(src.As<byte>());
     }

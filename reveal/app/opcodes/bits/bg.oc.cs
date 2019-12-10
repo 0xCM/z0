@@ -17,6 +17,12 @@ namespace Z0
     /// </summary>
     partial class bgoc
     {        
+
+        public static Vector256<byte> bitgrid_vector256(BitGrid<byte> src, int block)        
+            => BitGrid.vector(src, block,n256);
+
+
+            
         public static BitGrid256<N16,N16,ushort> transpose(BitGrid256<N16,N16,ushort> g)                
             => BitGrid.transpose(g);
 

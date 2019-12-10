@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static void Clear<T>(this Block16<T> src)
+        public static void Clear<T>(this in Block16<T> src)
             where T : unmanaged
                 => src.Data.Clear();
 
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static void Clear<T>(this Block32<T> src)
+        public static void Clear<T>(this in Block32<T> src)
             where T : unmanaged
                 => src.Data.Clear();
 
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static void Clear<T>(this Block64<T> src)
+        public static void Clear<T>(this in Block64<T> src)
             where T : unmanaged
                 => src.Data.Clear();
 
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static void Clear<T>(this Block128<T> src)
+        public static void Clear<T>(this in Block128<T> src)
             where T : unmanaged
                 => src.Data.Clear();
 
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static void Clear<T>(this Block256<T> src)
+        public static void Clear<T>(this in Block256<T> src)
             where T : unmanaged
                 => src.Data.Clear();
     }

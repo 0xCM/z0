@@ -22,7 +22,6 @@ namespace Z0
             return ginx.vtakemask(x);
         }
 
-
         /// <summary>
         /// Pack 16 1-bit values
         /// </summary>
@@ -58,7 +57,7 @@ namespace Z0
             ref var target = ref head(dst);
             var blocks = math.min(src.BlockCount,dst.Length);
             for(var i=0; i<blocks; i++)
-                seek(ref target, i) = ginx.vtakemask(ginx.vsll(src.Block(i).LoadVector(),7));                
+                seek(ref target, i) = ginx.vtakemask(ginx.vsll(src.LoadVector(i),7));                
         }
     }
 }

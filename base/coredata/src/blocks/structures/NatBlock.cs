@@ -10,6 +10,7 @@ namespace Z0
 
     using static nfunc;
     using static zfunc;
+    using static DataBlocks;
 
     /// <summary>
     /// Defines a span of natural length N
@@ -18,13 +19,13 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-        readonly Span<T> data;
+        internal readonly Span<T> data;
 
         static N n => default;
     
 
         [MethodImpl(Inline)]
-        public static implicit operator Span<T>(NatBlock<N,T> src)
+        public static implicit operator Span<T>(in NatBlock<N,T> src)
             => src.data;
 
         [MethodImpl(Inline)]
@@ -32,11 +33,11 @@ namespace Z0
             => DataBlocks.checkedload(src,n);
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T> (NatBlock<N,T> src)
+        public static implicit operator ReadOnlySpan<T> (in NatBlock<N,T> src)
             => src.data;
 
         [MethodImpl(Inline)]
-        public static implicit operator NatBlock<N,T>(Block256<T> src)
+        public static implicit operator NatBlock<N,T>(in Block256<T> src)
             => new NatBlock<N, T>(src);
     
         [MethodImpl(Inline)]
@@ -44,7 +45,7 @@ namespace Z0
             => this.data = src;
 
         [MethodImpl(Inline)]
-        internal NatBlock(Block256<T> src)
+        internal NatBlock(in Block256<T> src)
             => this.data = src;
 
         /// <summary>

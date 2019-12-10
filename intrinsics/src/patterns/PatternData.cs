@@ -15,8 +15,7 @@ namespace Z0
     using static As;
 
     public static class PatternData
-    {
-        
+    {        
         /// <summary>
         /// Loads a 128-bit pattern described by a readonly bytespan
         /// </summary>

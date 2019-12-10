@@ -14,32 +14,32 @@ namespace Z0
     partial class BlockExtend    
     {
        [MethodImpl(Inline)]
-        public static void Fill<T>(this Block16<T> src,T value)
+        public static void Fill<T>(this in Block16<T> src,T value)
             where T : unmanaged
                 => src.Data.Fill(value);
 
        [MethodImpl(Inline)]
-        public static void Fill<T>(this Block32<T> src,T value)
+        public static void Fill<T>(this in Block32<T> src,T value)
             where T : unmanaged
                 => src.Data.Fill(value);
 
         [MethodImpl(Inline)]
-        public static void Fill<T>(this Block64<T> src,T value)
+        public static void Fill<T>(this in Block64<T> src,T value)
             where T : unmanaged
                 => src.Data.Fill(value);
 
         [MethodImpl(Inline)]
-        public static void Fill<T>(this Block128<T> src,T value)
+        public static void Fill<T>(this in Block128<T> src,T value)
             where T : unmanaged
                 => src.Data.Fill(value);
 
         [MethodImpl(Inline)]
-        public static void Fill<T>(this Block256<T> src,T value)
+        public static void Fill<T>(this in Block256<T> src,T value)
             where T : unmanaged
                 => src.Data.Fill(value);
 
         [MethodImpl(Inline)]
-        public static void Fill<N,T>(this NatBlock<N,T> src,T value)
+        public static void Fill<N,T>(this in NatBlock<N,T> src,T value)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.Data.Fill(value);

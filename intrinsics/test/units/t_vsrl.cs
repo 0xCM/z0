@@ -60,47 +60,5 @@ namespace Z0
         public void vsrl_256x64u_bench()
             => vsrl_bench<ulong>(n256);
 
-        protected void vsrl_bench<T>(N128 n)
-            where T : unmanaged
-        {
-            var opcount = RoundCount * CycleCount;
-            var last = vzero<T>(n);
-            var sw = stopwatch(false);
-            var bitlen = bitsize<T>();
-            var opname = $"srl_{n}x{bitlen}u";
-
-            for(var i=0; i<opcount; i++)
-            {
-                var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVector<T>(n);
-                sw.Start();
-                last = ginx.vsrl(x,offset);
-                sw.Stop();
-            
-            }
-            Collect((opcount, sw, opname));
-
-        }
-
-        protected void vsrl_bench<T>(N256 n)
-            where T : unmanaged
-        {
-            var opcount = RoundCount * CycleCount;
-            var last = vzero<T>(n);
-            var sw = stopwatch(false);
-            var bitlen = bitsize<T>();
-            var opname = $"srl_{n}x{bitlen}u";
-
-            for(var i=0; i<opcount; i++)
-            {
-                var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVector<T>(n);
-                sw.Start();
-                last = ginx.vsrl(x,offset);
-                sw.Stop();
-            
-            }
-            Collect((opcount, sw, opname));
-        }        
     }
 }

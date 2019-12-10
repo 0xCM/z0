@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static BitParts;
         
     public class t_sb_mix : t_sb<t_sb_mix>
     {

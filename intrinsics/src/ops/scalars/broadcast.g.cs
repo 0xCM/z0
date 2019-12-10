@@ -15,7 +15,6 @@ namespace Z0
     
     partial class ginxs
     {
-
         /// <summary>
         /// Broadcasts an S-cell over a T-cell
         /// </summary>
@@ -24,7 +23,7 @@ namespace Z0
         /// <typeparam name="S">The source cell type</typeparam>
         /// <typeparam name="T">The target cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T sbroadcast<S,T>(S src, out T dst)
+        public static ref T broadcast<S,T>(S src, out T dst)
             where S : unmanaged
             where T : unmanaged
         {
@@ -40,7 +39,7 @@ namespace Z0
         /// <typeparam name="S">The source cell type</typeparam>
         /// <typeparam name="T">The target cell type</typeparam>
         [MethodImpl(Inline)]
-        public static T sbroadcast<S,T>(S src)
+        public static T broadcast<S,T>(S src)
             where S : unmanaged
             where T : unmanaged
                 => vhead<S,T>(ginx.vbroadcast(n128, src));

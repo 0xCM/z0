@@ -13,6 +13,8 @@ namespace Z0
     
     partial class dinx
     {    
+
+
         /// <summary>
         /// Distributes each bit of the source to the hi bit of each byte in the target
         /// </summary>

@@ -39,10 +39,10 @@ namespace Z0
             for(var i=0; i< cells; i++)
                 src[i] = (uint)i;
 
-            var a = ginx.vload(src.Block(0));
-            var b = ginx.vload(src.Block(1));
-            var c = ginx.vload(src.Block(2));
-            var d = ginx.vload(src.Block(3));
+            var a = src.LoadVector(0);
+            var b = src.LoadVector(1);
+            var c = src.LoadVector(2);
+            var d = src.LoadVector(3);
             dinx.vtranspose(ref a, ref b, ref c, ref d);
             
             

@@ -131,6 +131,7 @@ namespace Z0
             where T : unmanaged      
                 => vload(in src.BlockRef(block), out Vector128<T> x);
 
+
         /// <summary>
         /// Loads a 256-bit vector from the leading source block
         /// </summary>

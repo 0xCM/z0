@@ -69,7 +69,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        static Vector256<T> vT16x16<T>(in Vector256<T> src, in Vector256<T> g0, int i, int j)
+        static Vector256<T> vT16x16step<T>(in Vector256<T> src, in Vector256<T> g0, int i, int j)
             where T : unmanaged
         {
             const uint E = BitMasks.Even32;
@@ -87,14 +87,14 @@ namespace Z0
             var gT = default(Vector256<ushort>);
             var src = g.Data;
 
-            gT = vT16x16(src, gT, 0, 8);
-            gT = vT16x16(src, gT, 1, 9);
-            gT = vT16x16(src, gT, 2, 10);
-            gT = vT16x16(src, gT, 3, 11);
-            gT = vT16x16(src, gT, 4, 12);
-            gT = vT16x16(src, gT, 5, 13);
-            gT = vT16x16(src, gT, 6, 14);
-            gT = vT16x16(src, gT, 7, 15);
+            gT = vT16x16step(src, gT, 0, 8);
+            gT = vT16x16step(src, gT, 1, 9);
+            gT = vT16x16step(src, gT, 2, 10);
+            gT = vT16x16step(src, gT, 3, 11);
+            gT = vT16x16step(src, gT, 4, 12);
+            gT = vT16x16step(src, gT, 5, 13);
+            gT = vT16x16step(src, gT, 6, 14);
+            gT = vT16x16step(src, gT, 7, 15);
 
             return load(gT,n16,n16);
         }

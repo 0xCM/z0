@@ -89,7 +89,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void store<T>(Vector256<T> src, BitGrid<T> dst, int block)
             where T : unmanaged
-                => ginx.vstore(src, dst.Block(block));
+                => ginx.vstore(src, ref dst.data.BlockRef(block));
 
         /// <summary>
         /// Stores a 256-bit cpu vector to an index-identified block
@@ -104,7 +104,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                =>  ginx.vstore(src, dst.Block(block));
+                => ginx.vstore(src, ref dst.data.BlockRef(block));
 
     }
 }

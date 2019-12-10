@@ -52,7 +52,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid16<T> broadcast<T>(N16 w, int rows, int cols, T cell)    
             where T : unmanaged
-                => define<T>(w,rows, cols, ginxs.sbroadcast<T,ushort>(cell));
+                => define<T>(w,rows, cols, ginxs.broadcast<T,ushort>(cell));
 
         /// <summary>
         /// Transmits the content of a single cell to all cells in a grid
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid32<T> broadcast<T>(N32 w, int rows, int cols, T cell)    
             where T : unmanaged
-                => define<T>(w,rows, cols, ginxs.sbroadcast<T,uint>(cell));
+                => define<T>(w,rows, cols, ginxs.broadcast<T,uint>(cell));
 
         /// <summary>
         /// Transmits the content of a single cell to all cells in a grid
@@ -74,7 +74,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid64<T> broadcast<T>(N64 w, int rows, int cols, T cell)    
             where T : unmanaged
-                => define<T>(w,rows, cols, ginxs.sbroadcast<T,ulong>(cell));
+                => define<T>(w,rows, cols, ginxs.broadcast<T,ulong>(cell));
 
         /// <summary>
         /// Transmits the content of a single cell to all cells in a grid
@@ -89,7 +89,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => ginxs.sbroadcast<T,uint>(cell);
+                => ginxs.broadcast<T,uint>(cell);
 
         /// <summary>
         /// Transmits the content of a single cell to all cells in a grid
@@ -104,7 +104,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => ginxs.sbroadcast(cell, out ulong _);
+                => ginxs.broadcast(cell, out ulong _);
 
         /// <summary>
         /// Transmits the content of a single cell to all cells in a grid

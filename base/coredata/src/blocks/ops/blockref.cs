@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly T blockref<T>(ConstBlock16<T> src, int index)
+        public static ref readonly T blockref<T>(in ConstBlock16<T> src, int index)
             where T : unmanaged
                 => ref Unsafe.Add(ref Unsafe.AsRef(in src.Head), index*src.BlockLength);  
 
@@ -85,7 +85,7 @@ namespace Z0
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly T blockref<T>(ConstBlock32<T> src, int index)
+        public static ref readonly T blockref<T>(in ConstBlock32<T> src, int index)
             where T : unmanaged
                 => ref Unsafe.Add(ref Unsafe.AsRef(in src.Head), index*src.BlockLength);  
 
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly T blockref<T>(ConstBlock64<T> src, int index)
+        public static ref readonly T blockref<T>(in ConstBlock64<T> src, int index)
             where T : unmanaged
                 => ref Unsafe.Add(ref Unsafe.AsRef(in src.Head), index*src.BlockLength);  
 
@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly T blockref<T>(ConstBlock128<T> src, int index)
+        public static ref readonly T blockref<T>(in ConstBlock128<T> src, int index)
             where T : unmanaged
                 => ref Unsafe.Add(ref Unsafe.AsRef(in src.Head), index*src.BlockLength);  
 
@@ -118,7 +118,7 @@ namespace Z0
         /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly T blockref<T>(ConstBlock256<T> src, int index)
+        public static ref readonly T blockref<T>(in ConstBlock256<T> src, int index)
             where T : unmanaged
                 => ref Unsafe.Add(ref Unsafe.AsRef(in src.Head), index*src.BlockLength);  
     }

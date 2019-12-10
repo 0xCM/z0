@@ -14,114 +14,114 @@ namespace Z0
     partial class BlockExtend    
     {
         [MethodImpl(Inline)]
-        public static Span<T> Slice<T>(this Block16<T> src, int offset)
+        public static Span<T> Slice<T>(this in Block16<T> src, int offset)
             where T : unmanaged
                 => src.Data.Slice(offset);
             
         [MethodImpl(Inline)]
-        public static Span<T> Slice<T>(this Block16<T> src, int offset, int length)
+        public static Span<T> Slice<T>(this in Block16<T> src, int offset, int length)
             where T : unmanaged
                 => src.Data.Slice(offset,length);            
 
         [MethodImpl(Inline)]
-        public static Span<T> Slice<T>(this Block32<T> src, int offset)
+        public static Span<T> Slice<T>(this in Block32<T> src, int offset)
             where T : unmanaged
                 => src.Data.Slice(offset);
             
         [MethodImpl(Inline)]
-        public static Span<T> Slice<T>(this Block32<T> src, int offset, int length)
+        public static Span<T> Slice<T>(this in Block32<T> src, int offset, int length)
             where T : unmanaged
                 => src.Data.Slice(offset,length);            
 
         [MethodImpl(Inline)]
-        public static Span<T> Slice<T>(this Block64<T> src, int offset)
+        public static Span<T> Slice<T>(this in Block64<T> src, int offset)
             where T : unmanaged
                 => src.Data.Slice(offset);
             
         [MethodImpl(Inline)]
-        public static Span<T> Slice<T>(this Block64<T> src, int offset, int length)
+        public static Span<T> Slice<T>(this in Block64<T> src, int offset, int length)
             where T : unmanaged
                 => src.Data.Slice(offset,length);            
 
         [MethodImpl(Inline)]
-        public static Span<T> Slice<T>(this Block128<T> src, int offset)
+        public static Span<T> Slice<T>(this in Block128<T> src, int offset)
             where T : unmanaged
                 => src.Data.Slice(offset);
             
         [MethodImpl(Inline)]
-        public static Span<T> Slice<T>(this Block128<T> src, int offset, int length)
+        public static Span<T> Slice<T>(this in Block128<T> src, int offset, int length)
             where T : unmanaged
                 => src.Data.Slice(offset,length);            
 
         [MethodImpl(Inline)]
-        public static Span<T> Slice<T>(this Block256<T> src, int offset)
+        public static Span<T> Slice<T>(this in Block256<T> src, int offset)
             where T : unmanaged
                 => src.Data.Slice(offset);
             
         [MethodImpl(Inline)]
-        public static Span<T> Slice<T>(this Block256<T> src, int offset, int length)
+        public static Span<T> Slice<T>(this in Block256<T> src, int offset, int length)
             where T : unmanaged
                 => src.Data.Slice(offset,length);             
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this ConstBlock16<T> src, int offset)
+        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock16<T> src, int offset)
             where T : unmanaged
                 => src.Data.Slice(offset);
             
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this ConstBlock16<T> src, int offset, int length)
+        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock16<T> src, int offset, int length)
             where T : unmanaged
                 => src.Data.Slice(offset,length);            
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this ConstBlock32<T> src, int offset)
+        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock32<T> src, int offset)
             where T : unmanaged
                 => src.Data.Slice(offset);
             
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this ConstBlock32<T> src, int offset, int length)
+        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock32<T> src, int offset, int length)
             where T : unmanaged
                 => src.Data.Slice(offset,length);            
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this ConstBlock64<T> src, int offset)
+        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock64<T> src, int offset)
             where T : unmanaged
                 => src.Data.Slice(offset);
             
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this ConstBlock64<T> src, int offset, int length)
+        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock64<T> src, int offset, int length)
             where T : unmanaged
                 => src.Data.Slice(offset,length);            
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this ConstBlock128<T> src, int offset)
+        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock128<T> src, int offset)
             where T : unmanaged
                 => src.Data.Slice(offset);
             
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this ConstBlock128<T> src, int offset, int length)
+        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock128<T> src, int offset, int length)
             where T : unmanaged
                 => src.Data.Slice(offset,length);            
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this ConstBlock256<T> src, int offset)
+        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock256<T> src, int offset)
             where T : unmanaged
                 => src.Data.Slice(offset);
             
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this ConstBlock256<T> src, int offset, int length)
+        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock256<T> src, int offset, int length)
             where T : unmanaged
                 => src.Data.Slice(offset,length);             
 
 
         [MethodImpl(Inline)]
-        public static Span<T> Slice<N,T>(this NatBlock<N,T> src, int offset)
+        public static Span<T> Slice<N,T>(this in NatBlock<N,T> src, int offset)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.Data.Slice(offset);
 
         [MethodImpl(Inline)]
-        public static Span<T> Slice<N,T>(this NatBlock<N,T> src, int offset, int length)
+        public static Span<T> Slice<N,T>(this in NatBlock<N,T> src, int offset, int length)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.Data.Slice(offset, length);

@@ -21,7 +21,7 @@ namespace Z0
     /// <summary>
     /// Floating-point scalar intrinsics
     /// </summary>
-    public static class fpsinx
+    public static class inxsfp
     {
 
         [MethodImpl(Inline)]

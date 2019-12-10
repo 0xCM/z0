@@ -19,7 +19,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {                
-        readonly Block256<T> data;
+        internal readonly Block256<T> data;
 
         /// <summary>
         /// The grid dimension
@@ -136,9 +136,8 @@ namespace Z0
         /// Returns the 256-bit block corresponding to a block index
         /// </summary>
         /// <param name="block">The block index</param>
-        public Block256<T> Block(int block)
-            => data.Block(block);
-
+        public Span<T> SpanBlock(int block)
+            => data.SpanBlock(block);
             
         [MethodImpl(Inline)]
         public bool Equals(BitGrid<M,N,T> rhs)

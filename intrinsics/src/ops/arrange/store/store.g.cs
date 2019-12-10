@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vstore<T>(Vector128<T> src, in Block128<T> dst, int block)
             where T : unmanaged
-                => vstore(src, ref dst.Block(block).Head);
+                => vstore(src, ref dst.BlockRef(block));
 
         /// <summary>
         /// Stores the source vector to a blocked container
@@ -81,7 +81,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vstore<T>(Vector256<T> src, in Block256<T> dst, int block)
             where T : unmanaged
-                => vstore(src, ref dst.Block(block).Head);
+                => vstore(src, ref dst.BlockRef(block));
 
         /// <summary>
         /// Stores the source vector to a reference cell

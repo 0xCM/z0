@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static void Reverse<T>(this Block16<T> src)
+        public static void Reverse<T>(this in Block16<T> src)
             where T : unmanaged
                 => src.Data.Reverse();
 
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static void Reverse<T>(this Block32<T> src)
+        public static void Reverse<T>(this in Block32<T> src)
             where T : unmanaged
                 => src.Data.Reverse();
 
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static void Reverse<T>(this Block64<T> src)
+        public static void Reverse<T>(this in Block64<T> src)
             where T : unmanaged
                 => src.Data.Reverse();
 
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static void Reverse<T>(this Block128<T> src)
+        public static void Reverse<T>(this in Block128<T> src)
             where T : unmanaged
                 => src.Data.Reverse();
 
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static void Reverse<T>(this Block256<T> src)
+        public static void Reverse<T>(this in Block256<T> src)
             where T : unmanaged
                 => src.Data.Reverse();
     }

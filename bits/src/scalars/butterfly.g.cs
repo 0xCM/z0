@@ -57,11 +57,11 @@ namespace Z0
         }
 
         /// <summary>
-        /// Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
+        /// [0 1 2 3 | 4 5 6 7 ] -> [0 2 1 3 | 4 6 5 7 ]
+        /// Swaps the interior 4-bit segments of each 16-bit segment.
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        /// <remarks> [0 1 2 3 | 4 5 6 7 | 8 9 A B | C D E F] -> [0 2 1 3 | 4 6 5 7 | 8 A 9 B | C E D F]</remarks>
         [MethodImpl(Inline)]
         public static T butterfly<T>(N4 n, T x)
             where T : unmanaged
@@ -79,11 +79,11 @@ namespace Z0
         }
 
         /// <summary>
-        /// Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments of each 32-bit segment.
+        /// [0 1 2 3 | 4 5 6 7] -> [0 2 1 3 | 4 6 5 7]
+        /// Swaps the interior 8-bit segments of each 32-bit segment.
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        /// <remarks> [0 1 2 3 | 4 5 6 7] -> [0 2 1 3 | 4 6 5 7]</remarks>
         [MethodImpl(Inline)]
         public static T butterfly<T>(N8 n, T x)
             where T : unmanaged

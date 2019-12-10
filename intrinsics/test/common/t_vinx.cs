@@ -167,22 +167,21 @@ namespace Z0
             Claim.eq(expect, actual);
         }
 
-
-        protected void vbc_check<T>(N128 n)
+        protected void vbroadcast_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
             var x = Random.Next<T>();
-            var vX = ginx.vbroadcast(n,x);
+            var vX = ginx.vbroadcast(w,x);
             var data = vX.ToSpan();
             for(var i=0; i<data.Length; i++)
                 Claim.eq(x,data[i]);            
         }
 
-        protected void vbc_check<T>(N256 n)
+        protected void vbroadcast_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
             var x = Random.Next<T>();
-            var vX = ginx.vbroadcast(n,x);
+            var vX = ginx.vbroadcast(w,x);
             var data = vX.ToSpan();
             for(var i=0; i<data.Length; i++)
                 Claim.eq(x,data[i]);
@@ -234,16 +233,15 @@ namespace Z0
                 var result = ginx.veq(expect,actual);
                 var equal = ginx.vtestc(result,ones);
                 Claim.yea(equal);       
-
             }
         }
 
-        protected void vnot_check<T>(N128 n = default)
+        protected void vnot_check<T>(N128 w = default, T t = default)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.CpuVector<T>(n);
+                var x = Random.CpuVector<T>(w);
 
                 var actual = ginx.vnot(x);
                 var bsX = x.ToBitString();
@@ -254,17 +252,17 @@ namespace Z0
                     Claim.neq(bsX[j],bsY[j]);
 
                 var xData = x.ToSpan();
-                var expect  = ginx.vload(n, in head(mathspan.not(xData)));
+                var expect  = ginx.vload(w, in head(mathspan.not(xData)));
                 Claim.eq(expect,actual);
             }
         }
 
-        protected void vnot_check<T>(N256 n = default)
+        protected void vnot_check<T>(N256 w = default, T t = default)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.CpuVector<T>(n);
+                var x = Random.CpuVector<T>(w);
                 var actual = ginx.vnot(x);
                 
                 var bsX = x.ToBitString();
@@ -274,29 +272,29 @@ namespace Z0
                     Claim.neq(bsX[j],bsY[j]);
 
                 var xData = x.ToSpan();                
-                var expect  = ginx.vload(n, in head(mathspan.not(xData)));
+                var expect  = ginx.vload(w, in head(mathspan.not(xData)));
                 Claim.eq(expect,actual);
 
             }
         }
          
-        protected void vlt_check<T>(N128 n)
+        protected void vlt_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var ones = ginx.vones<T>(n);
+            var ones = ginx.vones<T>(w);
             var one = vcell(ones,0);
             
             for(var i=0; i< SampleSize; i++)
             {
-                var x = Random.Blocks<T>(n);
-                var y = Random.Blocks<T>(n);
-                var z = DataBlocks.single<T>(n);
+                var x = Random.Blocks<T>(w);
+                var y = Random.Blocks<T>(w);
+                var z = DataBlocks.single<T>(w);
                 
                 for(var j=0; j<z.CellCount; j++)
                     if(gmath.lt(x[j],y[j]))
                         z[j] = one;
 
-                var expect = ginx.vload(n, in head(z));
+                var expect = ginx.vload(w, in head(z));
                 var actual = ginx.vlt(x.LoadVector(),y.LoadVector());
                 var result = ginx.veq(expect,actual);
                 var equal = ginx.vtestc(result,ones);
@@ -305,23 +303,23 @@ namespace Z0
             }
         }
 
-        protected void vlt_check<T>(N256 n)
+        protected void vlt_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var ones = ginx.vones<T>(n);
+            var ones = ginx.vones<T>(w);
             var one = vcell(ginx.vlo(ones),0);
             
             for(var i=0; i< SampleSize; i++)
             {
-                var x = Random.Blocks<T>(n);
-                var y = Random.Blocks<T>(n);
-                var z = DataBlocks.single<T>(n);
+                var x = Random.Blocks<T>(w);
+                var y = Random.Blocks<T>(w);
+                var z = DataBlocks.single<T>(w);
                 
                 for(var j=0; j<z.CellCount; j++)
                     if(gmath.lt(x[j],y[j]))
                         z[j] = one;
                 
-                var expect = ginx.vload(n, in head(z));
+                var expect = ginx.vload(w, in head(z));
                 var actual = ginx.vlt(x.LoadVector(),y.LoadVector());
                 var result = ginx.veq(expect,actual);
                 var equal = ginx.vtestc(result,ones);
@@ -330,52 +328,51 @@ namespace Z0
             }
         }
 
-        protected void vor_blocks_check<T>(N128 n)
+        protected void vor_blocks_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
             var blocks = SampleSize;
-            var stats = VBlockStats.Calc<N128,T>(blocks);
+            var stats = BlockStats.Calc<N128,T>(blocks);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
-            var lhs = Random.Blocks<T>(n, blocks);
-            var rhs = Random.Blocks<T>(n, blocks);
-            var dst = DataBlocks.alloc<T>(n, blocks);
+            var lhs = Random.Blocks<T>(w, blocks);
+            var rhs = Random.Blocks<T>(w, blocks);
+            var dst = DataBlocks.alloc<T>(w, blocks);
             
-            vblock.or(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
+            vblock.or(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.or(lhs[i],rhs[i]), dst[i]);
         }
 
-
-        protected void vor_blocks_check<T>(N256 n)
+        protected void vor_blocks_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
             var blocks = SampleSize;
-            var stats = VBlockStats.Calc<N256,T>(blocks);
+            var stats = BlockStats.Calc<N256,T>(blocks);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
-            var lhs = Random.Blocks<T>(n, blocks);
-            var rhs = Random.Blocks<T>(n, blocks);
-            var dst = DataBlocks.alloc<T>(n, blocks);
+            var lhs = Random.Blocks<T>(w, blocks);
+            var rhs = Random.Blocks<T>(w, blocks);
+            var dst = DataBlocks.alloc<T>(w, blocks);
             
-            vblock.or(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
+            vblock.or(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.or(lhs[i],rhs[i]), dst[i]);
         }
      
-        protected void vor_check<T>(N128 n)
+        protected void vor_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
             for(var block = 0; block < SampleSize; block++)
             {
-                var srcX = Random.Blocks<T>(n);
-                var srcY = Random.Blocks<T>(n);
+                var srcX = Random.Blocks<T>(w);
+                var srcY = Random.Blocks<T>(w);
                 var vX = srcX.LoadVector();
                 var vY = srcY.LoadVector();
                 
-                var dstExpect = DataBlocks.single<T>(n);
+                var dstExpect = DataBlocks.single<T>(w);
                 for(var i=0; i< dstExpect.CellCount; i++)
                     dstExpect[i] = gmath.or(srcX[i], srcY[i]);
                 
@@ -401,8 +398,7 @@ namespace Z0
                 
                 var expect = dstExpect.LoadVector();
                 var actual = ginx.vor(vX,vY);
-                Claim.eq(expect,actual);
-                
+                Claim.eq(expect,actual);               
             }
         } 
 
@@ -454,7 +450,7 @@ namespace Z0
                 throw unsupported<N>();        
         }
 
-        protected void vreverse_check<T>(N128 n)
+        protected void vreverse_check<T>(N128 n, T t = default)
             where T : unmanaged
         {
             for(var i=0; i< SampleSize; i++)
@@ -467,7 +463,7 @@ namespace Z0
             }
         }
 
-        protected void vreverse_check<T>(N256 n)
+        protected void vreverse_check<T>(N256 n, T t = default)
             where T : unmanaged
         {
             for(var i=0; i< SampleSize; i++)
@@ -480,12 +476,12 @@ namespace Z0
             }
         }
 
-        protected void vxor_blocks_check<T>(N256 n)
+        protected void vxor_blocks_check<T>(N256 n, T t = default)
             where T : unmanaged
         {
             var blocks = SampleSize;
 
-            var stats = VBlockStats.Calc<N256,T>(blocks);
+            var stats = BlockStats.Calc<N256,T>(blocks);
             Claim.eq(n/bitsize<T>(), stats.BlockLength);
 
             var xb = Random.Blocks<T>(n, blocks);
@@ -504,7 +500,7 @@ namespace Z0
                 Claim.eq(gmath.xor(xb[i],yb[i]), zb[i]);
         }
 
-        protected void vxor_check<T>(N128 n)
+        protected void vxor_check<T>(N128 n, T t = default)
             where T : unmanaged
         {
             for(var block = 0; block < SampleSize; block++)
@@ -524,7 +520,7 @@ namespace Z0
             }
         }
 
-        protected void vxor_check<T>(N256 n)
+        protected void vxor_check<T>(N256 n, T t = default)
             where T : unmanaged
         {            
             for(var block = 0; block < SampleSize; block++)
@@ -544,11 +540,11 @@ namespace Z0
             }
         } 
 
-        protected void vxor_blocks_check<T>(N128 n)
+        protected void vxor_blocks_check<T>(N128 n, T t = default)
             where T : unmanaged
         {
             var blocks = SampleSize;
-            var stats = VBlockStats.Calc<N128,T>(blocks);
+            var stats = BlockStats.Calc<N128,T>(blocks);
 
             var xb = Random.Blocks<T>(n, blocks);
             var yb = Random.Blocks<T>(n, blocks);
@@ -564,57 +560,8 @@ namespace Z0
                 Claim.eq(gmath.xor(xb[i],yb[i]), zb[i]);
         }
 
-        protected void xor_gmath_bench<T>(N256 n, SystemCounter counter = default)
-            where T : unmanaged
-        {
-            var opname = $"xor_gmath_{moniker<T>()}";
-            var blocks = 8;
-            var blocklen = DataBlocks.blocklen<T>(n);
-            var xb = Random.Blocks<T>(n,blocks);
-            var yb = Random.Blocks<T>(n,blocks);
-            var zb = DataBlocks.alloc<T>(n,blocks);
-            var opcount = 0;
-            var cellcount = xb.CellCount;
 
-            counter.Start();
-            for(var i=0; i<CycleCount; i++, opcount += cellcount)
-            {                
-                for(var block = 0; block< blocks; block++)
-                for(var cell = 0; cell < blocklen; cell++)
-                    zb.Block(block)[cell] = gmath.xor(xb.Block(block)[cell], yb.Block(block)[cell]);                                    
-            }
-            counter.Stop();
-            Benchmark(opname, counter,opcount);
-        }
-
-        protected void xor_intrinsic_bench<T>(N256 n, SystemCounter counter = default)
-            where T : unmanaged
-        {
-            var opname = $"xor_ginx_{moniker<T>()}";
-            var blocks = 8;
-            var blocklen = DataBlocks.blocklen<T>(n);
-            var xb = Random.Blocks<T>(n,blocks);
-            var yb = Random.Blocks<T>(n,blocks);
-            var zb = DataBlocks.alloc<T>(n,blocks);
-            var opcount = 0;
-            var cellcount = xb.CellCount;
-
-            counter.Start();
-            for(var i=0; i<CycleCount; i++, opcount += cellcount)
-                vblock.xor(xb, yb, zb);
-            counter.Stop();
-            Benchmark(opname, counter,opcount);
-
-        }
-
-        protected void vxor_bench<T>(N256 n)
-            where T : unmanaged
-        {
-            xor_gmath_bench<T>(n);
-            xor_intrinsic_bench<T>(n);
-        }
-
-        protected void vtestz_check<T>(N128 n = default)
+        protected void vtestz_check<T>(N128 n = default, T t = default)
             where T : unmanaged
         {
             // Creates a mask corresponding to each off bit in the source vector
@@ -637,7 +584,7 @@ namespace Z0
             }
         }
 
-        protected void vtestz_check<T>(N256 n = default)
+        protected void vtestz_check<T>(N256 n = default, T t = default)
             where T : unmanaged
         {
             // Creates a mask corresponding to each off bit in the source vector
@@ -660,7 +607,7 @@ namespace Z0
             }
         }
 
-        protected void vhi_check<T>(N128 n)
+        protected void vhi_check<T>(N128 n, T t = default)
             where T : unmanaged
         {
             var count = vlength<T>(n);
@@ -674,7 +621,7 @@ namespace Z0
             }
         }
 
-        protected void vhi_check<T>(N256 n)
+        protected void vhi_check<T>(N256 n, T t = default)
             where T : unmanaged
         {
             var count = vlength<T>(n);
@@ -688,11 +635,11 @@ namespace Z0
             }
         }
 
-       protected void add_blocks_check<T>(N128 n)
+       protected void add_blocks_check<T>(N128 n, T t = default)
             where T : unmanaged
         {
             var blocks = SampleSize;
-            var stats = VBlockStats.Calc<N128,T>(blocks);
+            var stats = BlockStats.Calc<N128,T>(blocks);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
@@ -704,11 +651,11 @@ namespace Z0
                 Claim.eq(gmath.add(lhs[i],rhs[i]), dst[i]);
         }
 
-        protected void add_blocks_check<T>(N256 n)
+        protected void add_blocks_check<T>(N256 n, T t = default)
             where T : unmanaged
         {
             var blocks = SampleSize;
-            var stats = VBlockStats.Calc<N256,T>(blocks);
+            var stats = BlockStats.Calc<N256,T>(blocks);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
@@ -852,51 +799,7 @@ namespace Z0
             }
         }
 
-        protected void vsrl_check<T>(N128 n)
-            where T : unmanaged
-        {
 
-            for(var i=0; i< SampleSize; i++)
-            {
-                var src = Random.CpuVector<T>(n);
-                var offset = Random.Next<byte>(2,7);
-                var dst = ginx.vsrl(src,offset);
-                for(var j=0; j<dst.Length(); j++)
-                {
-                    var x = vcell(dst, j);
-                    var y = vcell(src, j);
-                    Claim.eq(x, gmath.srl(y,offset));
-                }
-            }
-        }
-
-        protected void vsrl_check<T>(N256 n)
-            where T : unmanaged
-        {
-
-            for(var i=0; i< SampleSize; i++)
-            {
-                var src = Random.CpuVector<T>(n);
-                var offset = Random.Next<byte>(2,7);
-                var vOffset = ginx.vscalar(n128, convert<byte,T>(offset));
-
-                var a = ginx.vsrl(src, offset);
-                var b = ginx.vsrlr(src, vOffset);
-                Claim.eq(a,b);
-
-                for(var j=0; j<a.Length()/2; j++)
-                {
-                    var x = vcell(ginx.vlo(a), j);
-                    var y = vcell(ginx.vlo(src), j);
-                    Claim.eq(x, gmath.srl(y,offset));
-
-                    x = vcell(ginx.vhi(a), j);
-                    y = vcell(ginx.vhi(src), j);
-                    Claim.eq(x, gmath.srl(y,offset));
-
-                }
-            }
-        }
 
         protected void vnonz_check<T>(N128 n)
             where T : unmanaged
@@ -928,7 +831,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocks = SampleSize;
-            var stats = VBlockStats.Calc<N128,T>(blocks);
+            var stats = BlockStats.Calc<N128,T>(blocks);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
@@ -943,7 +846,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocks = SampleSize;
-            var stats = VBlockStats.Calc<N256,T>(blocks);
+            var stats = BlockStats.Calc<N256,T>(blocks);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
@@ -996,7 +899,7 @@ namespace Z0
 
                 for(var block = 0; block < blocks; block++)
                 for(var cell = 0; cell < blocklen; cell++)
-                    eb.Block(block)[cell] = gmath.inc(xb.Block(block)[cell]);
+                    eb[block,cell] = gmath.inc(xb[block,cell]);
 
                 Claim.eq(eb,zb);
             }
@@ -1020,7 +923,7 @@ namespace Z0
 
                 for(var block = 0; block < blocks; block++)
                 for(var cell = 0; cell < blocklen; cell++)
-                    eb.Block(block)[cell] = gmath.inc(xb.Block(block)[cell]);
+                    eb[block,cell] = gmath.inc(xb[block,cell]);
 
                 Claim.eq(eb,zb);
             }
@@ -1072,7 +975,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocks = SampleSize;
-            var stats = VBlockStats.Calc(blocks,n, default(T));
+            var stats = BlockStats.Calc(blocks,n, default(T));
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
@@ -1088,7 +991,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocks = SampleSize;
-            var stats = VBlockStats.Calc(blocks,n, default(T));
+            var stats = BlockStats.Calc(blocks,n, default(T));
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
@@ -1120,17 +1023,17 @@ namespace Z0
             }
         }
 
-        protected void min_check<T>(N128 n)
+        protected void min_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
             for(var sample=0; sample<SampleSize; sample++)
             {
-                var x = Random.CpuVector<T>(n);
-                var y = Random.CpuVector<T>(n);
+                var x = Random.CpuVector<T>(w);
+                var y = Random.CpuVector<T>(w);
 
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
-                var zs = DataBlocks.single<T>(n);
+                var zs = DataBlocks.single<T>(w);
                 for(var i=0; i<zs.CellCount; i++)
                     zs[i] = gmath.min(xs[i],ys[i]);
                 
@@ -1140,77 +1043,77 @@ namespace Z0
             }
         }
 
-        protected void min_block_check<T>(N128 n)
+        protected void min_block_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
             var blocks = SampleSize;
-            var stats = VBlockStats.Calc(blocks,n, default(T));
+            var stats = BlockStats.Calc(blocks,w, default(T));
 
-            var lhs = Random.Blocks<T>(n, blocks);
-            var rhs = Random.Blocks<T>(n, blocks);
-            var dst = DataBlocks.alloc<T>(n, blocks);
-            vblock.min(n, blocks, stats.BlockLength, in lhs.Head, in rhs.Head, ref dst.Head);
+            var lhs = Random.Blocks<T>(w, blocks);
+            var rhs = Random.Blocks<T>(w, blocks);
+            var dst = DataBlocks.alloc<T>(w, blocks);
+            vblock.min(w, blocks, stats.BlockLength, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<stats.CellCount; i++)
                 Claim.eq(gmath.min(lhs[i],rhs[i]), dst[i]);
         }
 
-        protected void min_block_check<T>(N256 n)
+        protected void min_block_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
             var blocks = SampleSize;
-            var stats = VBlockStats.Calc(blocks,n, default(T));
+            var stats = BlockStats.Calc(blocks,w, default(T));
 
-            var lhs = Random.Blocks<T>(n, blocks);
-            var rhs = Random.Blocks<T>(n, blocks);
-            var dst = DataBlocks.alloc<T>(n, blocks);
-            vblock.min(n, blocks, stats.BlockLength, in lhs.Head, in rhs.Head, ref dst.Head);
+            var lhs = Random.Blocks<T>(w, blocks);
+            var rhs = Random.Blocks<T>(w, blocks);
+            var dst = DataBlocks.alloc<T>(w, blocks);
+            vblock.min(w, blocks, stats.BlockLength, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<stats.CellCount; i++)
                 Claim.eq(gmath.min(lhs[i],rhs[i]), dst[i]);
         }
 
-        protected void vunits_check<T>(N128 n)
+        protected void vunits_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var units = PatternData.uints<T>(n).ToSpan();
+            var units = PatternData.uints<T>(w).ToSpan();
             for(var i=0; i<units.Length; i++)
                 Claim.eq(gmath.one<T>(), units[i]);
         }
         
-        protected void vunits_check<T>(N256 n)
+        protected void vunits_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var units = PatternData.uints<T>(n).ToSpan();
+            var units = PatternData.uints<T>(w).ToSpan();
             for(var i=0; i<units.Length; i++)
                 Claim.eq(gmath.one<T>(), units[i]);
         }
 
-        protected void vones_check<T>(N128 n)
+        protected void vones_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var ones = ginx.vones<T>(n);
+            var ones = ginx.vones<T>(w);
             var bs = ones.ToBitString();
-            Claim.eq(n,bs.Length);
-            Claim.eq(n,bs.PopCount());
+            Claim.eq(w,bs.Length);
+            Claim.eq(w,bs.PopCount());
         }
 
-        protected void vones_check<T>(N256 n)
+        protected void vones_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var ones = ginx.vones<T>(n);
+            var ones = ginx.vones<T>(w);
             var bs = ones.ToBitString();
-            Claim.eq(n,bs.Length);
-            Claim.eq(n,bs.PopCount());
+            Claim.eq(w,bs.Length);
+            Claim.eq(w,bs.PopCount());
         }
 
-        protected void sub_check<T>(N128 n)
+        protected void sub_check<T>(N128 w, T t = default)
             where T : unmanaged
             => VerifyBinOp(Random, SampleSize, new Vector128BinOp<T>(ginx.vsub), gmath.sub<T>);
 
-        protected void sub_check<T>(N256 n)
+        protected void sub_check<T>(N256 w, T t = default)
             where T : unmanaged
                 => VerifyBinOp(Random, SampleSize, new Vector256BinOp<T>(ginx.vsub), gmath.sub<T>);
 
-        protected void sub_block_check<T>(N256 n)
+        protected void sub_block_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
             var lhs = Random.Blocks<T>(n256,SampleSize).ReadOnly();
@@ -1223,19 +1126,19 @@ namespace Z0
             Claim.yea(dstA.Identical(dstB));
         }
 
-        protected void next_check<T>(N128 n)
+        protected void next_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.CpuVector<T>(n);
+                var x = Random.CpuVector<T>(w);
                 var xs = x.ToSpan();
                 var xn = x.Next();
                 var xns = xn.ToSpan();
                 var xp = x.Prior();
                 var xps = xp.ToSpan();
 
-                var uints = ginx.vpunits<T>(n);
+                var uints = ginx.vpunits<T>(w);
                 
                 Claim.yea(ginx.vadd<T>(xp, uints).Equals(x));
                 Claim.yea(ginx.vsub<T>(xn, uints).Equals(x));
@@ -1248,19 +1151,19 @@ namespace Z0
             }
         }
 
-        protected void next_check<T>(N256 n)
+        protected void next_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.CpuVector<T>(n);
+                var x = Random.CpuVector<T>(w);
                 var xs = x.ToSpan();
                 var xn = x.Next();
                 var xns = xn.ToSpan();
                 var xp = x.Prior();
                 var xps = xp.ToSpan();
 
-                var uints = ginx.vpunits<T>(n);
+                var uints = ginx.vpunits<T>(w);
                 
                 Claim.yea(ginx.vadd<T>(xp, uints).Equals(x));
                 Claim.yea(ginx.vsub<T>(xn, uints).Equals(x));
@@ -1273,57 +1176,140 @@ namespace Z0
             }
         }
 
-        protected void vsll_check<T>(N128 n)
+        protected void vsll_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-
-            for(var i=0; i< SampleSize; i++)
+            var maxshift = (byte)bitsize<T>();
+            for(var i=0; i < SampleSize; i++)
             {
-                var src = Random.CpuVector<T>(n);
-                var offset = Random.Next<byte>(2,7);
-                var dst = ginx.vsll(src,offset);
-                for(var j=0; j<dst.Length(); j++)
-                {
-                    var x = vcell(dst, (byte)j);
-                    var y = vcell(src, (byte)j);
-                    Claim.eq(x, gmath.sll(y,offset));
-                }
-            }
-
-        }
-
-        protected void vsll_check<T>(N256 n)
-            where T : unmanaged
-        {
-            for(var i=0; i< SampleSize; i++)
-            {
-                var src = Random.CpuVector<T>(n);
-                var offset = Random.Next<byte>(2,7);
-                var vOffset = ginx.vscalar(n128,convert<byte,T>(offset));
-
-                var a = ginx.vsll(src, offset);
-                var b = ginx.vsllr(src, vOffset);
-                Claim.eq(a,b);
-
-                for(var j=0; j<a.Length()/2; j++)
-                {
-                    var x = vcell(ginx.vlo(a), (byte)j);
-                    var y = vcell(ginx.vlo(src), (byte)j);
-                    Claim.eq(x, gmath.sll(y,offset));
-
-                    x = vcell(ginx.vhi(a), (byte)j);
-                    y = vcell(ginx.vhi(src), (byte)j);
-                    Claim.eq(x, gmath.sll(y,offset));
-                }
+                var x = Random.CpuVector<T>(w);
+                var shift = Random.Next<byte>(1, maxshift);
+                var actual = ginx.vsll(x, shift);
+                var expect = mathspan.sll(x.ToSpan(), shift).LoadVector(w);
+                Claim.eq(actual,expect);
             }
         }
 
-        protected void vsll_bench<T>(N128 n)
+        protected void vsll_check<T>(N256 w, T t = default)
+            where T : unmanaged
+        {
+            var maxshift = (byte)bitsize<T>();
+            for(var i=0; i < SampleSize; i++)
+            {
+                var x = Random.CpuVector<T>(w);
+                var shift = Random.Next<byte>(1, maxshift);
+                var actual = ginx.vsll(x, shift);
+                var expect = mathspan.sll(x.ToSpan(), shift).LoadVector(w);
+                Claim.eq(actual,expect);
+
+            }
+        }
+
+        protected void vsrl_check<T>(N128 w, T t = default)
+            where T : unmanaged
+        {
+            var maxshift = (byte)bitsize<T>();
+            for(var i=0; i < SampleSize; i++)
+            {
+                var x = Random.CpuVector<T>(w);
+                var shift = Random.Next<byte>(1, maxshift);
+                var actual = ginx.vsrl(x, shift);
+                var expect = mathspan.srl(x.ToSpan(), shift).LoadVector(w);
+                Claim.eq(actual,expect);
+
+            }
+        }
+
+        protected void vsrl_check<T>(N256 w, T t = default)
+            where T : unmanaged
+        {
+            var maxshift = (byte)bitsize<T>();
+            for(var i=0; i < SampleSize; i++)
+            {
+                var x = Random.CpuVector<T>(w);
+                var shift = Random.Next<byte>(1, maxshift);
+                var actual = ginx.vsrl(x, shift);
+                var expect = mathspan.srl(x.ToSpan(), shift).LoadVector(w);
+                Claim.eq(actual,expect);
+
+            }
+        }
+
+        protected void and_blocks_check<T>(N128 w)
+            where T : unmanaged
+        {
+            var blocks = SampleSize;
+            var stats = BlockStats.Calc(blocks,w, default(T));
+            var step = stats.BlockLength;
+            var cells = stats.CellCount;
+
+            var lhs = Random.Blocks<T>(w, blocks);
+            var rhs = Random.Blocks<T>(w, blocks);
+            var dst = DataBlocks.alloc<T>(w, blocks);
+            vblock.and(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
+            for(var i=0; i<cells; i++)
+                Claim.eq(gmath.and(lhs[i],rhs[i]), dst[i]);
+        }
+
+        protected void and_blocks_check<T>(N256 w)
+            where T : unmanaged
+        {
+            var blocks = SampleSize;
+            var stats = BlockStats.Calc(blocks,w, default(T));
+            var step = stats.BlockLength;
+            var cells = stats.CellCount;
+
+            var lhs = Random.Blocks<T>(w, blocks);
+            var rhs = Random.Blocks<T>(w, blocks);
+            var dst = DataBlocks.alloc<T>(w, blocks);
+            vblock.and(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
+            for(var i=0; i<cells; i++)
+                Claim.eq(gmath.and(lhs[i],rhs[i]), dst[i]);
+        }
+     
+        protected void vand_check<T>(N128 w)
+            where T : unmanaged
+        {
+            for(var block = 0; block < SampleSize; block++)
+            {
+                var srcX = Random.Blocks<T>(w);
+                var srcY = Random.Blocks<T>(w);
+                var vX = ginx.vload(w, in head(srcX));
+                var vY = ginx.vload(w, in head(srcY));
+                
+                var dstExpect = DataBlocks.single<T>(w);
+                for(var i=0; i< dstExpect.CellCount; i++)
+                    dstExpect[i] = gmath.and(srcX[i], srcY[i]);
+                var expect = ginx.vload(w, in head(dstExpect));
+                var actual = ginx.vand(vX,vY);
+                Claim.eq(expect,actual);                
+            }
+        }
+
+        protected void vand_check<T>(N256 w)
+            where T : unmanaged
+        {
+            for(var block = 0; block < SampleSize; block++)
+            {
+                var srcX = Random.Blocks<T>(w);
+                var srcY = Random.Blocks<T>(w);
+                var vX = ginx.vload(w, in head(srcX));
+                var vY = ginx.vload(w, in head(srcY));
+                var dstExpect = DataBlocks.single<T>(w);
+                for(var i=0; i< dstExpect.CellCount; i++)
+                    dstExpect[i] = gmath.and(srcX[i], srcY[i]);
+                var expect = ginx.vload(w, in head(dstExpect));
+                var actual = ginx.vand(vX,vY);
+                Claim.eq(expect,actual);
+                
+            }
+        }
+
+        protected void vsll_bench<T>(N128 n, SystemCounter sw = default)
             where T : unmanaged
         {
             var opcount = RoundCount * CycleCount;
             var last = vzero<T>(n);
-            var sw = stopwatch(false);
             var bitlen = bitsize<T>();
             var opname = $"sll_{n}x{bitlen}u";
 
@@ -1336,15 +1322,14 @@ namespace Z0
                 sw.Stop();
             
             }
-            Collect((opcount, sw, opname));
+            Benchmark(opname, sw, opcount);
         }
 
-        protected void vsll_bench<T>(N256 n)
+        protected void vsll_bench<T>(N256 n, SystemCounter sw = default)
             where T : unmanaged
         {
             var opcount = RoundCount * CycleCount;
             var last = vzero<T>(n);
-            var sw = stopwatch(false);
             var bitlen = bitsize<T>();
             var opname = $"sll_{n}x{bitlen}u";
 
@@ -1357,7 +1342,96 @@ namespace Z0
                 sw.Stop();
             
             }
-            Collect((opcount, sw, opname));
+            Benchmark(opname, sw, opcount);
+        }
+
+        protected void vsrl_bench<T>(N128 n, SystemCounter sw = default)
+            where T : unmanaged
+        {
+            var opcount = RoundCount * CycleCount;
+            var last = vzero<T>(n);
+            var bitlen = bitsize<T>();
+            var opname = $"srl_{n}x{bitlen}u";
+
+            for(var i=0; i<opcount; i++)
+            {
+                var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
+                var x = Random.CpuVector<T>(n);
+                sw.Start();
+                last = ginx.vsrl(x,offset);
+                sw.Stop();
+            
+            }
+            Benchmark(opname, sw, opcount);
+        }
+
+        protected void vsrl_bench<T>(N256 n, SystemCounter sw = default)
+            where T : unmanaged
+        {
+            var opcount = RoundCount * CycleCount;
+            var last = vzero<T>(n);
+            var bitlen = bitsize<T>();
+            var opname = $"srl_{n}x{bitlen}u";
+
+            for(var i=0; i<opcount; i++)
+            {
+                var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
+                var x = Random.CpuVector<T>(n);
+                sw.Start();
+                last = ginx.vsrl(x,offset);
+                sw.Stop();            
+            }
+
+            Benchmark(opname, sw, opcount);
+        }        
+
+        protected void xor_gmath_bench<T>(N256 n, SystemCounter counter = default)
+            where T : unmanaged
+        {
+            var opname = $"xor_gmath_{moniker<T>()}";
+            var blocks = 8;
+            var blocklen = DataBlocks.blocklen<T>(n);
+            var xb = Random.Blocks<T>(n,blocks);
+            var yb = Random.Blocks<T>(n,blocks);
+            var zb = DataBlocks.alloc<T>(n,blocks);
+            var opcount = 0;
+            var cellcount = xb.CellCount;
+
+            counter.Start();
+            for(var i=0; i<CycleCount; i++, opcount += cellcount)
+            {                
+                for(var block = 0; block< blocks; block++)
+                for(var cell = 0; cell < blocklen; cell++)
+                    zb[block,cell] = gmath.xor(xb[block,cell], yb[block,cell]);                                    
+            }
+            counter.Stop();
+            Benchmark(opname, counter,opcount);
+        }
+
+        protected void xor_intrinsic_bench<T>(N256 n, SystemCounter counter = default)
+            where T : unmanaged
+        {
+            var opname = $"xor_ginx_{moniker<T>()}";
+            var blocks = 8;
+            var blocklen = DataBlocks.blocklen<T>(n);
+            var xb = Random.Blocks<T>(n,blocks);
+            var yb = Random.Blocks<T>(n,blocks);
+            var zb = DataBlocks.alloc<T>(n,blocks);
+            var opcount = 0;
+            var cellcount = xb.CellCount;
+
+            counter.Start();
+            for(var i=0; i<CycleCount; i++, opcount += cellcount)
+                vblock.xor(xb, yb, zb);
+            counter.Stop();
+            Benchmark(opname, counter,opcount);
+        }
+
+        protected void vxor_bench<T>(N256 n)
+            where T : unmanaged
+        {
+            xor_gmath_bench<T>(n);
+            xor_intrinsic_bench<T>(n);
         }
     }
 }

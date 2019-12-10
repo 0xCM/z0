@@ -39,22 +39,7 @@ namespace Z0
                 src[i] = gmath.sub(src[i],scalar);
             return src;
         }
-
-        /// <summary>
-        /// Subtracts a scalar value from each element of the source span in-place
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="scalar">The scalar value</param>
-        /// <typeparam name="T">The span element type</typeparam>
-        public static NatBlock<N,T> sub<N,T>(in NatBlock<N,T> src, T scalar)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-        {
-            for(var i=0; i< src.Length; i++)
-                src[i] = gmath.sub(src[i],scalar);
-            return src;
-        }
-
+        
         public static Span<T> sub<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {
