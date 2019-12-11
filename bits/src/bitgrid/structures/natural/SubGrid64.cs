@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// A grid of natural dimensions M and N such that M*N <= 64
+    /// A grid of natural dimensions M and N such that M*N <= W := 64
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     public readonly ref struct SubGrid64<M,N,T>
@@ -28,10 +28,14 @@ namespace Z0
         public const int ByteCount = 8;
 
         /// <summary>
+        /// The maximum grid width
+        /// </summary>
+        public static N64 W => default;
+
+        /// <summary>
         /// The grid dimension
         /// </summary>
-        public static GridDim<M,N,T> Dim => default;
-        
+        public static GridDim<M,N,T> Dim => default;        
 
         [MethodImpl(Inline)]
         public static implicit operator SubGrid64<M,N,T>(in Block64<T> src)
@@ -125,11 +129,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public SubGrid64<P,Q,U> As<P,Q,U>()
-            where P : unmanaged, ITypeNat
-            where Q : unmanaged, ITypeNat
+        public SubGrid64<M,N,U> As<U>()
             where U : unmanaged
-                => new SubGrid64<P,Q,U>(data);
+                => new SubGrid64<M, N, U>(data);
         
         [MethodImpl(Inline)]
         public bool Equals(SubGrid64<M,N,T> rhs)

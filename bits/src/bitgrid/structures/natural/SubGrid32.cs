@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// A grid of natural dimensions M and N such that M*N <= 32
+    /// A grid of natural dimensions M and N such that M*N <= W := 32
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     public readonly ref struct SubGrid32<M,N,T>
@@ -26,6 +26,11 @@ namespace Z0
         /// The number of bytes covered by the grid
         /// </summary>
         public const int ByteCount = 4;
+
+        /// <summary>
+        /// The maximum grid width
+        /// </summary>
+        public static N32 W => default;
 
         /// <summary>
         /// The grid dimension
@@ -128,11 +133,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public SubGrid32<P,Q,U> As<P,Q,U>()
-            where P : unmanaged, ITypeNat
-            where Q : unmanaged, ITypeNat
+        public SubGrid32<M,N,U> As<U>()
             where U : unmanaged
-                => new SubGrid32<P, Q, U>(data);
+                => new SubGrid32<M, N, U>(data);
         
         [MethodImpl(Inline)]
         public bool Equals(SubGrid32<M,N,T> rhs)

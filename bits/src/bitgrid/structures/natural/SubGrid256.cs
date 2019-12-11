@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// A grid of natural dimensions M and N such that M*N <= 256
+    /// A grid of natural dimensions M and N such that M*N <= W := 256
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     public readonly ref struct SubGrid256<M,N,T>
@@ -26,6 +26,11 @@ namespace Z0
         /// The maximum number of bytes covered by the grid
         /// </summary>
         public const int ByteCount = 32;
+
+        /// <summary>
+        /// The maximum grid width
+        /// </summary>
+        public static N256 W => default;
 
         /// <summary>
         /// The grid dimension
@@ -44,16 +49,13 @@ namespace Z0
         public static implicit operator SubGrid256<M,N,T>(in Block256<T> src)
             => new SubGrid256<M, N, T>(src);
 
-
         [MethodImpl(Inline)]
         public static implicit operator SubGrid256<M,N,T>(Vector256<T> src)
             => new SubGrid256<M,N,T>(src);
 
-
         [MethodImpl(Inline)]
         public static implicit operator SubGrid256<M,N,T>(Vector256<byte> src)
             => new SubGrid256<M,N,T>(src.As<byte,T>());
-
         
         [MethodImpl(Inline)]
         internal SubGrid256(Vector256<T> data)
@@ -107,11 +109,8 @@ namespace Z0
         public T Cell(int cell)
             => data.GetElement(cell);
 
-
         [MethodImpl(Inline)]
-        public SubGrid256<P,Q,U> As<P,Q,U>()
-            where P : unmanaged, ITypeNat
-            where Q : unmanaged, ITypeNat
+        public SubGrid256<M,N,U> As<U>()
             where U : unmanaged
                 => data.As<T,U>();
 

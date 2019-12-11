@@ -11,52 +11,11 @@ namespace Z0
     using static zfunc;
 
     public static partial class BitMasks
-    {        
-    
+    {            
         /// <summary>
         /// [00000001]
         /// </summary>
         public const byte Lsb8 = 1;
-
-        /// <summary>
-        /// [01010101]
-        /// </summary>
-        public const byte Lsb8x2 = 0b01010101;
-
-        /// <summary>
-        /// [00010001]
-        /// </summary>
-        public const byte Lsb8x4 = 0b00010001;
-
-        /// <summary>
-        /// [00000011]
-        /// </summary>
-        public const byte Lsb8x8x2 = 0b00000011;
-
-        /// <summary>
-        /// [00000111]
-        /// </summary>
-        public const byte Lsb8x8x3 = 0b00000111;
-
-        /// <summary>
-        /// [00001111]
-        /// </summary>
-        public const byte Lsb8x8x4 = 0b00001111;
-
-        /// <summary>
-        /// [00011111]
-        /// </summary>
-        public const byte Lsb8x8x5 = 0b00011111;
-
-        /// <summary>
-        /// [00111111]
-        /// </summary>
-        public const byte Lsb8x8x6 = 0b00111111;
-
-        /// <summary>
-        /// [01111111]
-        /// </summary>
-        public const byte Lsb8x8x7 = 0b01111111;
 
         /// <summary>
         /// [00000000 00000001]
@@ -74,19 +33,139 @@ namespace Z0
         public const ulong Lsb64 = 1;
 
         /// <summary>
-        /// [01010101 01010101]
+        /// [01 01]
+        /// </summary>
+        public const byte Lsb4x2 = 0b0101;
+
+        /// <summary>
+        /// [01 01 01]
+        /// </summary>
+        public const byte Lsb6x2 = Lsb4x2 | 1 << 4;
+
+        /// <summary>
+        /// [001 001]
+        /// </summary>
+        public const byte Lsb6x3 = 1 | 1 << 3;
+
+        /// <summary>
+        /// [01 01 01 01]
+        /// </summary>
+        public const byte Lsb8x2 = Lsb6x2 | 1 << 6;
+
+        /// <summary>
+        /// [00010001]
+        /// </summary>
+        public const byte Lsb8x4 = 1 | 1 << 4;
+
+        /// <summary>
+        /// [00000011]
+        /// </summary>
+        public const byte Lsb8x8x2 = 1 | 1 << 1;
+        
+        /// <summary>
+        /// [00000111]
+        /// </summary>
+        public const byte Lsb8x8x3 = Lsb8x8x2 << 1 | 1;
+
+        /// <summary>
+        /// [00001111]
+        /// </summary>
+        public const byte Lsb8x8x4 = Lsb8x8x3 << 1 | 1;
+
+        /// <summary>
+        /// [00011111]
+        /// </summary>
+        public const byte Lsb8x8x5 = Lsb8x8x4 << 1 | 1;
+
+        /// <summary>
+        /// [00111111]
+        /// </summary>
+        public const byte Lsb8x8x6 = Lsb8x8x5 << 1 | 1;
+
+        /// <summary>
+        /// [01111111]
+        /// </summary>
+        public const byte Lsb8x8x7 = Lsb8x8x6 << 1 | 1;
+
+        /// <summary>
+        /// [01 01 01 01 01]
+        /// </summary>
+        public const ushort Lsb10x2 = (ushort)Lsb8x2 | 1 << 8;
+
+        /// <summary>
+        /// [00001 00001]
+        /// </summary>
+        public const ushort Lsb10x5 = 1 | 1 << 5;
+        
+        /// <summary>
+        /// [01 01 01 01 01 01]
+        /// </summary>
+        public const ushort Lsb12x2 = Lsb10x2 | 1 << 10;
+
+        /// <summary>
+        /// [001 001 001 001]
+        /// </summary>
+        public const ushort Lsb12x3 = Lsb6x3 | Lsb6x3 << 6;
+
+        /// <summary>
+        /// [0001 0001 0001]
+        /// </summary>
+        public const ushort Lsb12x4 = (ushort)Lsb8x4 | 1 << 8;
+
+        /// <summary>
+        /// [000001 000001]
+        /// </summary>
+        public const ushort Lsb12x6 = 1 | 1 << 6;
+
+        /// <summary>
+        /// [01 01 01 01 01 01 01]
+        /// </summary>
+        public const ushort Lsb14x2 = Lsb12x2 | 1 << 12;
+
+        /// <summary>
+        /// [0000001 0000001]
+        /// </summary>
+        public const ushort Lsb14x7 = 1 | 1 << 7;
+
+        /// <summary>
+        /// [001 001 001 001 001]
+        /// </summary>
+        public const ushort Lsb15x3 = Lsb12x3 | 1 << 12;
+
+        /// <summary>
+        /// [01 01 01 01 01 01 01 01]
         /// </summary>
         public const ushort Lsb16x2 = (ushort)Lsb8x2 | (ushort)Lsb8x2 << 8;
 
         /// <summary>
-        /// [00010001 00010001]
+        /// [0001 0001 0001 0001]
         /// </summary>
         public const ushort Lsb16x4 = (ushort)Lsb8x4  | (ushort)Lsb8x4 << 8;
 
         /// <summary>
         /// [00000001 00000001]
         /// </summary>
-        public const ushort Lsb16x8 = (ushort)Lsb8 | (ushort) Lsb8 << 8;
+        public const ushort Lsb16x8 = 1 | 1 << 8;
+
+        /// <summary>
+        /// [01 01 01 01 01 01 01 01 01]
+        /// </summary>
+        public const uint Lsb18x2 = (uint)Lsb16x2 | 1u << 16;
+
+        /// <summary>
+        /// [001 001 001 001 001 001]
+        /// </summary>
+        public const uint Lsb18x3 = (uint)Lsb15x3 | 1u << 15;
+
+        /// <summary>
+        /// [000001 000001 000001]
+        /// </summary>
+        public const uint Lsb18x6 = (uint)Lsb12x6 | 1u << 12;        
+
+        /// <summary>
+        /// [001 001 001 001 001 001 001 001]
+        /// </summary>        
+        public const uint Lsb24x3 = (uint)Lsb12x3 | (uint)Lsb12x3 << 16;
 
         /// <summary>
         /// [01010101 01010101 01010101 01010101]
@@ -101,12 +180,17 @@ namespace Z0
         /// <summary>
         /// [00000001 00000001 00000001 00000001]
         /// </summary>
-        public const uint Lsb32x8 = (uint) Lsb16x8 | (uint) Lsb16x8 << 16;
+        public const uint Lsb32x8 = (uint)Lsb16x8 | (uint) Lsb16x8 << 16;
 
         /// <summary>
         /// [00000000 00000001 00000000 00000001]
         /// </summary>
-        public const uint Lsb32x16 = (uint)Lsb16 | (uint)Lsb16 << 16;
+        public const uint Lsb32x16 = 1u | 1u << 16;
+
+        /// <summary>
+        /// [001 001 001 001 001 001 001 001 001 001 001 001 001 001 001 001]
+        /// </summary>        
+        public const ulong Lsb48x3 = (ulong)Lsb24x3 | (ulong)Lsb24x3 << 32;
 
         /// <summary>
         /// [01010101 01010101 01010101 01010101 01010101 01010101 01010101 01010101]
@@ -131,8 +215,7 @@ namespace Z0
         /// <summary>
         /// [00000000 00000000 00000000 0000001 00000000 00000000 00000000 0000001]
         /// </summary>
-        public const ulong Lsb64x32 = (ulong)Lsb32 | (ulong) Lsb32 << 32;
-
+        public const ulong Lsb64x32 = 1ul | 1ul << 32;
 
         /// <summary>
         /// [00000011 00000011]

@@ -28,6 +28,11 @@ namespace Z0
         public const int ByteCount = 2;
 
         /// <summary>
+        /// The maximum grid width
+        /// </summary>
+        public static N16 W => default;
+
+        /// <summary>
         /// The grid dimension
         /// </summary>
         public static GridDim<M,N,T> Dim => default;
@@ -124,11 +129,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public SubGrid16<P,Q,U> As<P,Q,U>()
-            where P : unmanaged, ITypeNat
-            where Q : unmanaged, ITypeNat
+        public SubGrid16<M,N,U> As<U>()
             where U : unmanaged
-               => new SubGrid16<P, Q, U>(data);
+                => new SubGrid16<M,N,U>(data);
+
         
         [MethodImpl(Inline)]
         public bool Equals(SubGrid16<M,N,T> rhs)

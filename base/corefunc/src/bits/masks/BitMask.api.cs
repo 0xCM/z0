@@ -18,9 +18,11 @@ namespace Z0
         /// [00000000 00000000 00000000 00000001]    
         /// Selects a mask where the least significant bit is enabled
         /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>()
+        public static T lsb<T>(N1 f = default, N1 d = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -36,13 +38,14 @@ namespace Z0
         }
 
         /// <summary>
-        /// [01010101 01010101 01010101 01010101]    
+        /// [01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01]    
         /// Selects a mask where the least significant bit out of every two bits is enabled
         /// </summary>
-        /// <param name="n1">The characteristic selector</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N2 n)
+        public static T lsb<T>(N2 f, N1 d = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -55,17 +58,17 @@ namespace Z0
                 return convert<ulong,T>(Lsb64x2);
             else 
                 throw unsupported<T>();
-
         }
 
         /// <summary>
-        /// [00010001 00010001 00010001 00010001]
+        /// [0001 0001 0001 0001 0001 0001 0001 0001]
         /// Selects a mask where the least significant bit out of every four bits is enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N4 n)
+        public static T lsb<T>(N4 f, N1 d = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -78,18 +81,17 @@ namespace Z0
                 return convert<ulong,T>(Lsb64x4);
             else 
                 throw unsupported<T>();
-
-
         }
 
         /// <summary>
         /// [00000001 00000001 00000001 00000001]
         /// Selects a mask where the least significant bit out of every eight bits is enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N8 n)
+        public static T lsb<T>(N8 f, N1 d = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -109,10 +111,11 @@ namespace Z0
         /// [00000000 00000001 00000000 00000001]
         /// Selects a mask where the least significant bit out of every 16 bits is enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N16 n)
+        public static T lsb<T>(N16 f, N1 d = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -132,11 +135,11 @@ namespace Z0
         /// [00000011 00000011 00000011 00000011]
         /// Creates a mask where the least significant 2 bits of every 8-bit segment are enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N8 n, N2 f)
+        public static T lsb<T>(N8 f, N2 d)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -155,11 +158,11 @@ namespace Z0
         /// [00000111 00000111 00000111 00000111]
         /// Creates a mask where the least significant 3 bits of every 8-bit segment are enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N8 n, N3 f)
+        public static T lsb<T>(N8 f, N3 d)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -178,11 +181,11 @@ namespace Z0
         /// [00001111 00001111 00001111 00001111]
         /// Creates a mask where the least significant 4 bits of every 8-bit segment are enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N8 n, N4 f)
+        public static T lsb<T>(N8 f, N4 d)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -201,11 +204,11 @@ namespace Z0
         /// [00011111 00011111 00011111 00011111]
         /// Creates a mask where the least significant 5 bits of every 8-bit segment are enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N8 n, N5 f)
+        public static T lsb<T>(N8 f, N5 d)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -224,11 +227,11 @@ namespace Z0
         /// [00111111 00111111 00111111 00111111]
         /// Creates a mask where the least significant 6 bits of every 8-bit segment are enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N8 n, N6 f)
+        public static T lsb<T>(N8 f, N6 d)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -247,11 +250,11 @@ namespace Z0
         /// [00111111 00111111 00111111 00111111]
         /// Creates a mask where the least significant 7 bits of every 8-bit segment are enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N8 n, N7 f)
+        public static T lsb<T>(N8 f, N7 d)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -270,10 +273,11 @@ namespace Z0
         /// [10000000 00000000 00000000 00000000]    
         /// Selects a mask where the most significant bit is enabled
         /// </summary>
-        /// <param name="n1">The characteristic selector</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>()
+        public static T msb<T>(N1 f = default, N1 d = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -289,13 +293,14 @@ namespace Z0
         }
 
         /// <summary>
-        /// [01010101 01010101 01010101 01010101]    
+        /// [10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10]
         /// Selects a mask where the most significant bit out of every two bits is enabled
         /// </summary>
-        /// <param name="n1">The characteristic selector</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N2 n)
+        public static T msb<T>(N2 f, N1 d = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -315,10 +320,11 @@ namespace Z0
         /// [10001000 10001000 10001000 10001000]
         /// Selects a mask where the most significant bit out of every four bits is enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N4 n)
+        public static T msb<T>(N4 f, N1 d = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -338,10 +344,11 @@ namespace Z0
         /// [10000000 10000000 10000000 10000000]
         /// Selects a mask where the most significant bit out of every eight bits is enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N8 n)
+        public static T msb<T>(N8 f, N1 d = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -354,17 +361,17 @@ namespace Z0
                 return convert<ulong,T>(Msb64x8);
             else 
                 throw unsupported<T>();
-
         }
 
         /// <summary>
         /// [10000000 00000000 10000000 00000000]
         /// Selects a mask where the most significant bit out of every eight bits is enabled
         /// </summary>
-        /// <param name="n1">The characteristic selector</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N16 n)
+        public static T msb<T>(N16 f, N1 d = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -384,11 +391,11 @@ namespace Z0
         /// [11000000 11000000 11000000 11000000]
         /// Creates a mask where the 2 most significant bits of every 8-bit segment are enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N8 n, N2 f)
+        public static T msb<T>(N8 f, N2 d)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -407,11 +414,11 @@ namespace Z0
         /// [11100000 11100000 11100000 11100000]
         /// Creates a mask where the 3 most significant bits of every 8-bit segment are enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N8 n, N3 f)
+        public static T msb<T>(N8 f, N3 d)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -430,11 +437,11 @@ namespace Z0
         /// [11110000 11110000 11110000 11110000]
         /// Creates a mask where the 4 most significant bits of every 8-bit segment are enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N8 n, N4 f)
+        public static T msb<T>(N8 f, N4 d)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -453,11 +460,11 @@ namespace Z0
         /// [11111000 11111000 11111000 11111000]
         /// Creates a mask where the 5 most significant bits of every 8-bit segment are enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N8 n, N5 f)
+        public static T msb<T>(N8 f, N5 d)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -476,11 +483,11 @@ namespace Z0
         /// [11111100 11111100 11111100 11111100]
         /// Creates a mask where the 6 most significant bits of every 8-bit segment are enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N8 n, N6 f)
+        public static T msb<T>(N8 f, N6 d)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -499,11 +506,11 @@ namespace Z0
         /// [11111110 11111110 11111110 11111110]
         /// Creates a mask where the 7 most significant bits of every 8-bit segment are enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N8 n, N7 f)
+        public static T msb<T>(N8 f, N7 d)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -519,12 +526,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static byte lsb8f(byte factor)
-            => (byte)(byte.MaxValue >> (8 - factor));
+        public static byte lsb8f(byte density)
+            => (byte)(byte.MaxValue >> (8 - density));
 
         [MethodImpl(Inline)]
-        public static byte msb8f(byte factor)
-            => (byte)(byte.MaxValue << (8 - factor));
+        public static byte msb8f(byte density)
+            => (byte)(byte.MaxValue << (8 - density));
 
     }   
 }

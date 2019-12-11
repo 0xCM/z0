@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// A grid of natural dimensions M and N such that M*N = 64
+    /// A grid of natural dimensions M and N such that M*N = W := 64
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     public readonly ref struct BitGrid64<M,N,T>
@@ -26,6 +26,11 @@ namespace Z0
         /// The number of bytes covered by the grid
         /// </summary>
         public const int ByteCount = 8;
+
+        /// <summary>
+        /// The grid width
+        /// </summary>
+        public static N64 W => default;
 
         /// <summary>
         /// The grid dimension

@@ -16,24 +16,42 @@ namespace Z0
     partial class ginx
     {
         /// <summary>
-        /// Distributes each bit of the source to the hi bit of each 8-bit segment in the target
+        /// Distributes each bit of the source to the hi bit of each byte in a 128-bit target vector
         /// </summary>
         /// <param name="src">The source bits</param>
-        /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public static Vector128<T> vmakemask<T>(ushort src)
             where T : unmanaged
                 => vgeneric<T>(v8u(dinx.vmakemask(src)));
 
         /// <summary>
-        /// Distributes each bit of the source to the hi bit of each 8-bit segment in the target
+        /// Distributes each bit of the source to a specified bit of each byte in a 128-bit target vector
         /// </summary>
         /// <param name="src">The source bits</param>
-        /// <param name="dst">The target vector</param>
+        /// <param name="index">The byte-relative bit position index in the range [0,7]</param>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vmakemask<T>(ushort src, byte index)
+            where T : unmanaged
+                => vgeneric<T>(v8u(dinx.vmakemask(src, index)));
+
+        /// <summary>
+        /// Distributes each bit of the source to the hi bit of each byte a 256-bit target vector
+        /// </summary>
+        /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static Vector256<T> vmakemask<T>(uint src)
             where T : unmanaged
                 => vgeneric<T>(v8u(dinx.vmakemask(src)));
+
+        /// <summary>
+        /// Distributes each bit of the source to a specified bit of each byte in a 256-bit target vector
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="index">The byte-relative bit position index in the range [0,7]</param>
+        [MethodImpl(Inline)]
+        public static Vector256<T> vmakemask<T>(uint src, byte index)
+            where T : unmanaged
+                => vgeneric<T>(v8u(dinx.vmakemask(src,index)));
 
     }
 }

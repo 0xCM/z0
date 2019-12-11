@@ -149,7 +149,6 @@ namespace Z0
             where T : unmanaged            
                 => new SubGrid128<M, N, T>(data);
 
-
         /// <summary>
         /// Allocates a 0-filled 256-bit subgrid
         /// </summary>

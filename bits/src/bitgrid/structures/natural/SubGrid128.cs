@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// A grid of natural dimensions M and N such that M*N <= 128
+    /// A grid of natural dimensions M and N such that M*N <= W := 128
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     public readonly ref struct SubGrid128<M,N,T>
@@ -27,6 +27,10 @@ namespace Z0
         /// </summary>
         public const int ByteCount = 16;
 
+        /// <summary>
+        /// The maximum grid width
+        /// </summary>
+        public static N128 W => default;
 
         /// <summary>
         /// The grid dimension
@@ -109,9 +113,7 @@ namespace Z0
             => data.GetElement(cell);
 
         [MethodImpl(Inline)]
-        public SubGrid128<P,Q,U> As<P,Q,U>()
-            where P : unmanaged, ITypeNat
-            where Q : unmanaged, ITypeNat
+        public SubGrid128<M,N,U> As<U>()
             where U : unmanaged
                 => data.As<T,U>();
 

@@ -72,7 +72,7 @@ partial class zfunc
     /// </summary>
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]   
-    public static string moniker<T>()
+    public static string moniker<T>(T t = default)
         where T : unmanaged
     {
         var size = bitsize<T>();

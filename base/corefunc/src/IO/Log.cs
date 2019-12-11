@@ -7,28 +7,19 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Collections;
     using System.IO;
 
     using static zfunc;
 
-
     public static class Log
     {
-        static ILogger BenchmarkLogger        
-            => Log.Get(LogTarget.AreaRoot(LogArea.Bench));
-        
-        static LogTarget<LogArea> BenchmarkTarget
-            => LogTarget.AreaRoot(LogArea.Bench);
-
         public static void LogBenchmarks<R>(string name, bool newFile, bool writeHeader, char delimiter, params R[] records)
             where R : IRecord
         {
             if(records.Length == 0)
                 return;
             
-            BenchmarkLogger.Log(records, name, delimiter, writeHeader, newFile,FileExtension.Define("csv"));
-
+            Log.Get(LogTarget.AreaRoot(LogArea.Bench)).Log(records, name, delimiter, writeHeader, newFile,FileExtension.Define("csv"));
         }
 
         /// <summary>
@@ -38,28 +29,47 @@ namespace Z0
         public static FolderPath AreaFolder(this LogTarget<LogArea> target)
             => LogSettings.Get().RootLogDir + FolderName.Define(target.Area.ToString().ToLower());
 
-        public static FilePath TargetPath(this LogArea area, FileName file)
-        {
-            var target = LogTarget.AreaRoot(area);
-            var folder = target.AreaFolder();
-            return folder + file;
-        }
+        /// <summary>
+        /// Gets the log folder for a specific area and subfolder
+        /// </summary>
+        /// <param name="target">The area target</param>
+        /// <param name="subfolder">The target subfolder</param>
+        public static FolderPath AreaFolder(this LogTarget<LogArea> target, FolderName subfolder)
+            => LogSettings.Get().RootLogDir + (FolderName.Define(target.Area.ToString().ToLower()) + subfolder);
 
         /// <summary>
-        /// Creates a writer for a specified area and filename
+        /// Creates a fully-qualified log file path
+        /// </summary>
+        /// <param name="area">The area</param>
+        /// <param name="file">The filename</param>
+        public static FilePath TargetPath(this LogArea area, FileName file)
+            => LogTarget.AreaRoot(area).AreaFolder().CreateIfMissing() + file;
+
+        /// <summary>
+        /// Creates a fully-qualified log file path
+        /// </summary>
+        /// <param name="area">The area</param>
+        /// <param name="subfolder">The area subfolder</param>
+        /// <param name="file">The filename</param>
+        public static FilePath TargetPath(this LogArea area, FolderName subfolder, FileName file)
+            => LogTarget.AreaRoot(area).AreaFolder(subfolder).CreateIfMissing() + file;
+
+        /// <summary>
+        /// Creates a log writer that must be disposed by the caller
         /// </summary>
         /// <param name="area">The target area</param>
         /// <param name="file">The name of the log file</param>
         public static StreamWriter LogWriter(this LogArea area, FileName file)
-        {
-            // var target = LogTarget.AreaRoot(area);
-            // var folder = target.AreaFolder();
-            // var path = folder + file;
-            var path = area.TargetPath(file);
-            return new StreamWriter(path.ToString());
-        }
+            => new StreamWriter(area.TargetPath(file).ToString());
 
-
+        /// <summary>
+        /// Creates a log writer that must be disposed by the caller
+        /// </summary>
+        /// <param name="area">The target area</param>
+        /// <param name="subfolder">The area subfolder</param>
+        /// <param name="file">The name of the log file</param>
+        public static StreamWriter LogWriter(this LogArea area, FolderName subfolder, FileName file)
+            => new StreamWriter(area.TargetPath(subfolder,file).ToString());
 
         public static ILogger Get(ILogTarget dst)
             => dst.Area switch{
@@ -87,7 +97,6 @@ namespace Z0
             FilePath LogPath<T>(LogTarget<T> target)
                 where T : Enum
                     => LogSettings.Get().LogPath(target);
-
 
             FilePath LogPath(string topic, FileExtension ext = null)
                 => LogSettings.Get().LogPath(Area, topic, ext);

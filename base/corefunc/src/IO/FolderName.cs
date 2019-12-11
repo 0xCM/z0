@@ -5,14 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Collections;
     using System.IO;
 
     using static zfunc;
-
-
 
     /// <summary>
     /// Defines a folder name in isolation without ascribing additional path content
@@ -21,6 +16,10 @@ namespace Z0
     {
         public static FolderName Define(string Name)
             => new FolderName(Name);
+
+        public static FolderName operator + (FolderName lhs, FolderName rhs)
+            => Define(Path.Join(lhs.Name, "/", rhs.Name));
+
         public FolderName(string Name)
             : base(Name)
         {
