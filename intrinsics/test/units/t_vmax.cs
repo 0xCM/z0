@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     
     using static zfunc;
 
@@ -132,5 +131,4 @@ namespace Z0
         public void max_block_256x64f()
             => max_block_check<double>(n256);
     }
-
 }

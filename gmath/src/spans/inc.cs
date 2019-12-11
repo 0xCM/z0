@@ -11,12 +11,12 @@ namespace Z0
 
     partial class mathspan
     {
-
+        [MethodImpl(Inline)]
         public static Span<T> inc<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
         {
-            var len = length(src,dst);
-            for(var i = 0; i< len; i++)
+            var count = length(src,dst);
+            for(var i = 0; i< count; i++)
                 dst[i] = gmath.inc(src[i]);
             return dst;
         }        
@@ -30,5 +30,4 @@ namespace Z0
             where T : unmanaged
                 => inc(src.ReadOnly(), src);
     }
-
 }

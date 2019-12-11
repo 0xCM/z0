@@ -5,98 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static nfunc;
     using static zfunc;
 
     partial class Linear
     {
-
-        [MethodImpl(Inline)]
-        public static VBlock256<N,T> xor<N,T>(VBlock256<N,T> x, VBlock256<N,T> y)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged    
-        {
-            var dst = x.Replicate();
-            vblock.xor(x.Data,y.Data,dst.Data);
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static VBlock256<N,T> sll<N,T>(VBlock256<N,T> src, byte offset, VBlock256<N,T> dst)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged    
-        {
-            vblock.sll(src.Data, offset, dst.Data);
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static VBlock256<N,T> sll<N,T>(VBlock256<N,T> src, byte offset)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged    
-        {
-            var dst = src.Replicate();
-            sll(src, offset, dst);
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref VBlock256<N,T> srl<N,T>(VBlock256<N,T> src, byte offset, ref VBlock256<N,T> dst)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged    
-        {
-            vblock.srl(src.Data,offset,dst.Data);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static VBlock256<N,T> srl<N,T>(VBlock256<N,T> src, byte offset)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged    
-        {
-            var dst = src.Replicate();
-            return srl(src,offset,ref dst);
-        }
-
-
-
-
-        [MethodImpl(Inline)]
-        public static ref Covector<N,T> ipow<N,T>(ref Covector<N,T> x, in Covector<N,uint> exp)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged    
-
-        {
-            mathspan.pow(x.Span, exp.Span);
-            return ref x;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref Covector<N,T> ipow<N,T>(ref Covector<N,T> x, in uint exp)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged    
-
-        {
-            mathspan.pow(x.Span, exp);
-            return ref x;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref Covector<N,T> flip<N,T>(ref Covector<N,T> src)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged    
-
-        {
-            mathspan.not(src.Span);
-            return ref src;
-        }
-
-
         [MethodImpl(Inline)]
         public static ref Covector<N,T> negate<N,T>(ref Covector<N,T> src)
             where N : unmanaged, ITypeNat
@@ -136,43 +50,6 @@ namespace Z0
             return ref x;
         }
 
-
-
-
-        /// <summary>
-        /// Computes x[i] := x[i] ^ rhs[i] for i = 0...N-1
-        /// </summary>
-        /// <param name="x">The left operand which will be updated in-place</param>
-        /// <param name="rhs">The right operand</param>
-        /// <typeparam name="N">The length type</typeparam>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref VBlock256<N,T> xor<N,T>(ref VBlock256<N,T> x, in VBlock256<N,T> rhs)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-
-        {
-            mathspan.xor(x.Unsized, rhs.Unsized);
-            return ref x;
-        }
-
-        /// <summary>
-        /// Computes x[i] := x[i] ^ rhs for i = 0...N-1
-        /// </summary>
-        /// <param name="x">The left operand which will be updated in-place</param>
-        /// <param name="rhs">The right operand</param>
-        /// <typeparam name="N">The length type</typeparam>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref VBlock256<N,T> xor<N,T>(ref VBlock256<N,T> x, in T rhs)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-
-        {
-            mathspan.xor(x.Unsized, rhs);
-            return ref x;
-        }
-
         /// <summary>
         /// Computes x[i] := pow(x[i],rhs)  for i = 0...N-1
         /// </summary>
@@ -188,22 +65,6 @@ namespace Z0
         {
             mathspan.pow(x.Unsized, rhs);
             return ref x;
-        }
-
-        /// <summary>
-        /// Peforms a bitwise complement on each component in-place: io[i] := ~io[i]  for i = 0...N-1
-        /// </summary>
-        /// <param name="x">The source/target operand will be updated in-place</param>
-        /// <typeparam name="N">The length type</typeparam>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref VBlock256<N,T> flip<N,T>(ref VBlock256<N,T> src)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged    
-
-        {
-            mathspan.not(src.Unsized);
-            return ref src;
         }
 
         /// <summary>
@@ -250,8 +111,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref VBlock256<N,T> dec<N,T>(ref VBlock256<N,T> src)
             where N : unmanaged, ITypeNat
-            where T : unmanaged    
-
+            where T : unmanaged
         {
             mathspan.dec(src.Unsized);
             return ref src;

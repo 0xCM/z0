@@ -99,27 +99,6 @@ namespace Z0
                 bitchars_f(src,dst,offset);
         }        
 
-        /// <summary>
-        /// Computes the population count of an unsigned primal value
-        /// </summary>
-        /// <param name="src">The primal value</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static int pop<T>(T src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return popd(uint8(src));
-            else if(typeof(T) == typeof(ushort))
-                return popd(uint16(src));
-            else if(typeof(T) == typeof(uint))
-                return popd(uint32(src));
-            else if(typeof(T) == typeof(ulong))
-                return popd(uint64(src));
-            else
-                throw unsupported<T>();
-        }
-
         [MethodImpl(Inline)]
         static int popd(in byte a)
             => skip(in head(PopCounts), a);

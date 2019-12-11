@@ -24,7 +24,7 @@ namespace Z0
         {
             var len = length(lhs,rhs);
             for(var i = 0; i< len; i++)
-                gfp.div(ref lhs[i], rhs[i]);
+                lhs[i] = gfp.div(lhs[i], rhs[i]);
             return lhs;
         }
 
@@ -47,10 +47,9 @@ namespace Z0
             where T : unmanaged
         {
             for(var i = 0; i< src.Length; i++)
-                gfp.div(ref src[i], rhs);
+                src[i] = gfp.div(src[i], rhs);
             return src;
         }
-
 
         /// <summary>
         /// Computes integer division between cells in the left and right operands,

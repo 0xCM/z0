@@ -56,27 +56,5 @@ namespace Z0
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
                 inc(n, in skip(in a, offset), ref seek(ref z, offset));
         }
-
-        [MethodImpl(Inline)]
-        public static void inc<T>(in ConstBlock128<T> xb, in Block128<T> zb)
-            where T : unmanaged
-        {
-            var count = zb.BlockCount;
-            for(var block = 0; block < count; block++)
-                vstore(ginx.vinc(xb.LoadVector(block)), ref zb.BlockRef(block));
-        } 
-
-        [MethodImpl(Inline)]
-        public static void inc<T>(in ConstBlock256<T> xb, in Block256<T> zb)
-            where T : unmanaged
-        {
-            var count = zb.BlockCount;
-            for(var block = 0; block < count; block++)
-                vstore(ginx.vinc(xb.LoadVector(block)), ref zb.BlockRef(block));
-        } 
-
-
-
     }
-
 }

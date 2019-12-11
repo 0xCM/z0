@@ -14,22 +14,22 @@ namespace Z0
         public static Span<T> floor<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
         {
-            var len = length(src,dst);
-            for(var i =0; i<len; i++)
+            var count = length(src,dst);
+            for(var i =0; i<count; i++)
                 dst[i] = gfp.floor(src[i]);
             return dst;
         }
 
         public static Span<T> floor<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-            => floor(src, src.Replicate(true));
+                => floor(src, span<T>(src.Length));
 
-        public static Span<T> floor<T>(Span<T> io)
+        public static Span<T> floor<T>(Span<T> src)
             where T : unmanaged
         {
-            for(var i =0; i<io.Length; i++)
-                io[i] = gfp.floor(io[i]);
-            return  io;
+            for(var i =0; i<src.Length; i++)
+                src[i] = gfp.floor(src[i]);
+            return src;
         } 
     }
 }

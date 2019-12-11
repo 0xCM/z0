@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     
     using static zfunc;
     using static HexConst;
@@ -48,7 +47,5 @@ namespace Z0
                 Claim.eq(v4,v5);
             }
         }
-
     }
-
 }

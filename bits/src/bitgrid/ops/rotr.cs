@@ -16,17 +16,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid16<T> rotr<T>(BitGrid16<T> g, int shift)
             where T : unmanaged
-                => bg16<T>(g.RowCount, g.ColCount, Bits.rotr(g, shift));
+                => init16<T>(g.RowCount, g.ColCount, Bits.rotr(g, shift));
 
         [MethodImpl(Inline)]
         public static BitGrid32<T> rotr<T>(BitGrid32<T> g, int shift)
             where T : unmanaged
-                => bg32<T>(g.RowCount, g.ColCount, Bits.rotr(g, shift));
+                => init32<T>(g.RowCount, g.ColCount, Bits.rotr(g, shift));
         
         [MethodImpl(Inline)]
         public static BitGrid64<T> rotr<T>(BitGrid64<T> g, int shift)
             where T : unmanaged
-                => bg64<T>(g.RowCount, g.ColCount, Bits.rotr(g, shift));
+                => init64<T>(g.RowCount, g.ColCount, Bits.rotr(g, shift));
 
         [MethodImpl(Inline)]
         public static BitGrid16<M,N,T> rotr<M,N,T>(BitGrid16<M,N,T> g, int shift)

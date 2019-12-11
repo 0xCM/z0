@@ -11,10 +11,12 @@ namespace Z0
 
     partial class mathspan
     {
+        [MethodImpl(Inline)]
         public static Span<T> negate<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
         {
-            for(var i = 0; i< src.Length; i++)
+            var count = length(src,dst);
+            for(var i = 0; i< count; i++)
                 dst[i] = gmath.negate(src[i]);
             return dst;
         }
@@ -30,11 +32,8 @@ namespace Z0
             where T : unmanaged
                 => negate(src,src);
 
-
-        [MethodImpl(Inline)]
         public static Span<T> negate<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => negate(src,src.Replicate(true));
-
+                => negate(src, span<T>(src.Length));
     }
 }

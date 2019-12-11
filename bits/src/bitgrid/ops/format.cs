@@ -25,7 +25,6 @@ namespace Z0
             where T : unmanaged
                 => src.Cells.FormatMatrixBits(cols ?? bitsize<T>(), maxbits, showrow);
 
-
         public static string format<M,N,T>(in BitGrid<M,N,T> src, int? maxbits = null, bool showrow = false)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat

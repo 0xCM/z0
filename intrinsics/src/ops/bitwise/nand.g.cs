@@ -60,6 +60,7 @@ namespace Z0
                 return vnand_f(x,y);
         }
 
+
         [MethodImpl(Inline)]
         static Vector128<T> vnand_u<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged

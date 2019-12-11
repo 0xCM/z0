@@ -111,9 +111,8 @@ namespace Z0
 
         public void vxor_bench_256x8u()
             => vxor_bench<byte>(n256);
-
+            
         public void vxor_bench_256x64u()
             => vxor_bench<ulong>(n256);
-
     }
 }

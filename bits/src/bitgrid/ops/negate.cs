@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid16<T> negate<T>(BitGrid16<T> gx)
             where T : unmanaged
-                => bg16<T>(gx.RowCount, gx.ColCount, math.negate(gx));
+                => init16<T>(gx.RowCount, gx.ColCount, math.negate(gx));
 
         /// <summary>
         /// Computes the two's complement negation of source grid
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid32<T> negate<T>(BitGrid32<T> gx)
             where T : unmanaged
-                => bg32<T>(gx.RowCount, gx.ColCount, math.negate(gx));
+                => init32<T>(gx.RowCount, gx.ColCount, math.negate(gx));
 
         /// <summary>
         /// Computes the two's complement negation of source grid
@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid64<T> negate<T>(BitGrid64<T> gx)
             where T : unmanaged
-                => bg64<T>(gx.RowCount, gx.ColCount, math.negate(gx));
+                => init64<T>(gx.RowCount, gx.ColCount, math.negate(gx));
 
         /// <summary>
         /// Computes the two's complement negation of the source grid

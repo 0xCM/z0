@@ -14,7 +14,6 @@ namespace Z0
     
     partial class vblock
     {     
-
         [MethodImpl(Inline)]
         public static Vector128<T> vimpl<T>(N128 n, in T a, in T b)
             where T : unmanaged
@@ -58,7 +57,5 @@ namespace Z0
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
                 impl(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
-
     }
-
 }

@@ -11,7 +11,6 @@ namespace Z0
     
     using static zfunc;    
     using static As;
-    using static AsIn;
     
     partial class ginx
     {
@@ -58,6 +57,5 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
     }
 }

@@ -11,10 +11,12 @@ namespace Z0
 
     partial class mathspan
     {
+        [MethodImpl(Inline)]
         public static Span<T> not<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
         {
-            for(var i=0; i< src.Length; i++)
+            var count = src.Length;
+            for(var i=0; i< count; i++)
                 dst[i] = gmath.not(src[i]);
             return dst;            
         }
@@ -25,6 +27,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
         public static Span<T> not<T>(Span<T> src)
             where T : unmanaged
                 => not(src,src);
@@ -35,9 +38,8 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
         public static Span<T> not<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => not(src, src.Replicate(true));    
+                => not(src, span<T>(src.Length));
     }
 }

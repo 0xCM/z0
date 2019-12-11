@@ -31,8 +31,6 @@ namespace Z0
 
         public static Span<T> srl<T>(ReadOnlySpan<T> src, int shift)
             where T : unmanaged
-                => srl(src, shift, new T[src.Length]);
-
+                => srl(src, shift, span<T>(src.Length));
     }
-
 }

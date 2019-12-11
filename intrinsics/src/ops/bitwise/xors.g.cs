@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="offset">The shift offset</param>
-        /// <typeparam name="T">The primal component type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<T> vxors<T>(Vector128<T> x, byte offset)
             where T : unmanaged
@@ -30,86 +30,42 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="offset">The shift offset</param>
-        /// <typeparam name="T">The primal component type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> vxors<T>(Vector256<T> x, byte offset)
             where T : unmanaged
                 => vxor(x,vxor(vsll(x, offset),vsrl(x,offset)));
 
         /// <summary>
-        /// Computes x^(x >> offset)
+        /// Computes z[i] := x[i]^((x[i] >> offset)^(x[i] >> offset)) where i = 0,..., blocks - 1
         /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="shift">The amount by which to shift each component</param>
+        /// <param name="x">The source blocks</param>
+        /// <param name="offset">The shift offset</param>
+        /// <param name="dst">The blocked computation target</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> vxorsr<T>(Vector128<T> x, byte shift)
+        public static void vxors<T>(in ConstBlock128<T> x, byte offset, in Block128<T> dst)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vxorsr(vcast8u(x), shift));
-            else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vxorsr(vcast16u(x), shift));
-            else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dinx.vxorsr(vcast32u(x), shift));
-            else 
-                return vgeneric<T>(dinx.vxorsr(vcast64u(x), shift));
-        }
+            var count = dst.BlockCount;
+            for(var block = 0; block < count; block++)
+                vstore(ginx.vxors(x.LoadVector(block), offset), ref dst.BlockRef(block));
+        } 
 
         /// <summary>
-        /// Computes x^(x >> offset)
+        /// Computes z[i] := x[i]^((x[i] >> offset)^(x[i] >> offset)) where i = 0,..., blocks - 1
         /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="shift">The amount by which to shift each component</param>
+        /// <param name="x">The source blocks</param>
+        /// <param name="offset">The shift offset</param>
+        /// <param name="dst">The blocked computation target</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vxorsr<T>(Vector256<T> x, byte shift)
+        public static void vxors<T>(in ConstBlock256<T> x, byte shift, in Block256<T> dst)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vxorsr(vcast8u(x), shift));
-            else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vxorsr(vcast16u(x), shift));
-            else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dinx.vxorsr(vcast32u(x), shift));
-            else 
-                return vgeneric<T>(dinx.vxorsr(vcast64u(x), shift));
-        }
-
-        /// <summary>
-        /// Computes x^(x << offset)
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="shift">The amount by which to shift each component</param>
-        [MethodImpl(Inline)]
-        public static Vector128<T> vxorsl<T>(Vector128<T> x, byte shift)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vxorsl(vcast8u(x), shift));
-            else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vxorsl(vcast16u(x), shift));
-            else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dinx.vxorsl(vcast32u(x), shift));
-            else 
-                return vgeneric<T>(dinx.vxorsl(vcast64u(x), shift));
-        }
-
-        /// <summary>
-        /// Computes x^(x << offset)
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="shift">The amount by which to shift each component</param>
-        [MethodImpl(Inline)]
-        public static Vector256<T> vxorsl<T>(Vector256<T> x, byte shift)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vxorsl(vcast8u(x), shift));
-            else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vxorsl(vcast16u(x), shift));
-            else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dinx.vxorsl(vcast32u(x), shift));
-            else 
-                return vgeneric<T>(dinx.vxorsl(vcast64u(x), shift));
-        }
+            var count = dst.BlockCount;
+            for(var block = 0; block < count; block++)
+                vstore(ginx.vxors(x.LoadVector(block), shift), ref dst.BlockRef(block));
+        } 
     }
 }

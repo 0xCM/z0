@@ -1,164 +1,137 @@
-// 2019-12-10 01:42:50:378
-bool vtestz_d128x64u(Vector128<ulong> src, Vector128<ulong> mask)
+// 2019-12-10 22:52:53:421
+void vblock_xor_128x16u_blocks(ConstBlock128<ushort> xb, ConstBlock128<ushort> yb, in Block128<ushort> zb)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0000: ldarga.s xb
+    IL_0002: ldarga.s yb
+    IL_0004: ldarg.2
+    IL_0005: call System.Void Z0.ginx::vxor<System.UInt16>(Z0.ConstBlock128`1<System.UInt16>&,Z0.ConstBlock128`1<System.UInt16>&,Z0.Block128`1<System.UInt16>&)
+    IL_000A: ret
 
 }
-bool vtestz_g128x64u(Vector128<ulong> src, Vector128<ulong> mask)
+void vblock_xor_128x32u_refs(int partcount, int partwidth, in uint a, in uint b, ref uint z)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.ginx::vtestz<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0000: call Z0.N128 zfunc::get_n128()
+    IL_0005: ldarg.0
+    IL_0006: ldarg.1
+    IL_0007: ldarg.2
+    IL_0008: ldarg.3
+    IL_0009: ldarg.s z
+    IL_000B: call System.Void Z0.vblock::xor<System.UInt32>(Z0.N128,System.Int32,System.Int32,System.UInt32&,System.UInt32&,System.UInt32&)
+    IL_0010: ret
 
 }
-bool vtestz_d256x8i(Vector256<sbyte> src, Vector256<sbyte> mask)
+void vblock_xor_128x32u_blocks(ConstBlock128<uint> xb, ConstBlock128<uint> yb, in Block128<uint> zb)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector256`1<System.SByte>,System.Runtime.Intrinsics.Vector256`1<System.SByte>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0000: ldarga.s xb
+    IL_0002: ldarga.s yb
+    IL_0004: ldarg.2
+    IL_0005: call System.Void Z0.ginx::vxor<System.UInt32>(Z0.ConstBlock128`1<System.UInt32>&,Z0.ConstBlock128`1<System.UInt32>&,Z0.Block128`1<System.UInt32>&)
+    IL_000A: ret
 
 }
-bool vtestz_g256x8i(Vector256<sbyte> src, Vector256<sbyte> mask)
+void vblock_xor_128x64u_refs(int partcount, int partwidth, in ulong a, in ulong b, ref ulong z)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.ginx::vtestz<System.SByte>(System.Runtime.Intrinsics.Vector256`1<System.SByte>,System.Runtime.Intrinsics.Vector256`1<System.SByte>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0000: call Z0.N128 zfunc::get_n128()
+    IL_0005: ldarg.0
+    IL_0006: ldarg.1
+    IL_0007: ldarg.2
+    IL_0008: ldarg.3
+    IL_0009: ldarg.s z
+    IL_000B: call System.Void Z0.vblock::xor<System.UInt64>(Z0.N128,System.Int32,System.Int32,System.UInt64&,System.UInt64&,System.UInt64&)
+    IL_0010: ret
 
 }
-bool vtestz_d256x8u(Vector256<byte> src, Vector256<byte> mask)
+void vblock_xor_128x64u_blocks(ConstBlock128<ulong> xb, ConstBlock128<ulong> yb, in Block128<ulong> zb)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Runtime.Intrinsics.Vector256`1<System.Byte>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0000: ldarga.s xb
+    IL_0002: ldarga.s yb
+    IL_0004: ldarg.2
+    IL_0005: call System.Void Z0.ginx::vxor<System.UInt64>(Z0.ConstBlock128`1<System.UInt64>&,Z0.ConstBlock128`1<System.UInt64>&,Z0.Block128`1<System.UInt64>&)
+    IL_000A: ret
 
 }
-bool vtestz_g256x8u(Vector256<byte> src, Vector256<byte> mask)
+void vblock_xor_256x8u_refs(int partcount, int partwidth, in byte a, in byte b, ref byte z)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.ginx::vtestz<System.Byte>(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Runtime.Intrinsics.Vector256`1<System.Byte>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0000: call Z0.N256 zfunc::get_n256()
+    IL_0005: ldarg.0
+    IL_0006: ldarg.1
+    IL_0007: ldarg.2
+    IL_0008: ldarg.3
+    IL_0009: ldarg.s z
+    IL_000B: call System.Void Z0.vblock::xor<System.Byte>(Z0.N256,System.Int32,System.Int32,System.Byte&,System.Byte&,System.Byte&)
+    IL_0010: ret
 
 }
-bool vtestz_d256x16i(Vector256<short> src, Vector256<short> mask)
+void vblock_xor_256x8u_blocks(ConstBlock256<byte> xb, ConstBlock256<byte> yb, in Block256<byte> zb)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0000: ldarga.s xb
+    IL_0002: ldarga.s yb
+    IL_0004: ldarg.2
+    IL_0005: call System.Void Z0.ginx::vxor<System.Byte>(Z0.ConstBlock256`1<System.Byte>&,Z0.ConstBlock256`1<System.Byte>&,Z0.Block256`1<System.Byte>&)
+    IL_000A: ret
 
 }
-bool vtestz_g256x16i(Vector256<short> src, Vector256<short> mask)
+void vblock_xor_256x16u_refs(int partcount, int partwidth, in ushort a, in ushort b, ref ushort z)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.ginx::vtestz<System.Int16>(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0000: call Z0.N256 zfunc::get_n256()
+    IL_0005: ldarg.0
+    IL_0006: ldarg.1
+    IL_0007: ldarg.2
+    IL_0008: ldarg.3
+    IL_0009: ldarg.s z
+    IL_000B: call System.Void Z0.vblock::xor<System.UInt16>(Z0.N256,System.Int32,System.Int32,System.UInt16&,System.UInt16&,System.UInt16&)
+    IL_0010: ret
 
 }
-bool vtestz_d256x16u(Vector256<ushort> src, Vector256<ushort> mask)
+void vblock_xor_256x16u_blocks(ConstBlock256<ushort> xb, ConstBlock256<ushort> yb, in Block256<ushort> zb)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector256`1<System.UInt16>,System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0000: ldarga.s xb
+    IL_0002: ldarga.s yb
+    IL_0004: ldarg.2
+    IL_0005: call System.Void Z0.ginx::vxor<System.UInt16>(Z0.ConstBlock256`1<System.UInt16>&,Z0.ConstBlock256`1<System.UInt16>&,Z0.Block256`1<System.UInt16>&)
+    IL_000A: ret
 
 }
-bool vtestz_g256x16u(Vector256<ushort> src, Vector256<ushort> mask)
+void vblock_xor_256x32u_refs(int partcount, int partwidth, in uint a, in uint b, ref uint z)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.ginx::vtestz<System.UInt16>(System.Runtime.Intrinsics.Vector256`1<System.UInt16>,System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0000: call Z0.N256 zfunc::get_n256()
+    IL_0005: ldarg.0
+    IL_0006: ldarg.1
+    IL_0007: ldarg.2
+    IL_0008: ldarg.3
+    IL_0009: ldarg.s z
+    IL_000B: call System.Void Z0.vblock::xor<System.UInt32>(Z0.N256,System.Int32,System.Int32,System.UInt32&,System.UInt32&,System.UInt32&)
+    IL_0010: ret
 
 }
-bool vtestz_d256x32i(Vector256<int> src, Vector256<int> mask)
+void vblock_xor_256x32u_blocks(ConstBlock256<uint> xb, ConstBlock256<uint> yb, in Block256<uint> zb)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector256`1<System.Int32>,System.Runtime.Intrinsics.Vector256`1<System.Int32>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0000: ldarga.s xb
+    IL_0002: ldarga.s yb
+    IL_0004: ldarg.2
+    IL_0005: call System.Void Z0.ginx::vxor<System.UInt32>(Z0.ConstBlock256`1<System.UInt32>&,Z0.ConstBlock256`1<System.UInt32>&,Z0.Block256`1<System.UInt32>&)
+    IL_000A: ret
 
 }
-bool vtestz_g256x32i(Vector256<int> src, Vector256<int> mask)
+void vblock_xor_256x64u_refs(int partcount, int partwidth, in ulong a, in ulong b, ref ulong z)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.ginx::vtestz<System.Int32>(System.Runtime.Intrinsics.Vector256`1<System.Int32>,System.Runtime.Intrinsics.Vector256`1<System.Int32>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0000: call Z0.N256 zfunc::get_n256()
+    IL_0005: ldarg.0
+    IL_0006: ldarg.1
+    IL_0007: ldarg.2
+    IL_0008: ldarg.3
+    IL_0009: ldarg.s z
+    IL_000B: call System.Void Z0.vblock::xor<System.UInt64>(Z0.N256,System.Int32,System.Int32,System.UInt64&,System.UInt64&,System.UInt64&)
+    IL_0010: ret
 
 }
-bool vtestz_d256x32u(Vector256<uint> src, Vector256<uint> mask)
+void vblock_xor_256x64u_blocks(ConstBlock256<ulong> xb, ConstBlock256<ulong> yb, in Block256<ulong> zb)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
-bool vtestz_g256x32u(Vector256<uint> src, Vector256<uint> mask)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.ginx::vtestz<System.UInt32>(System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
-bool vtestz_d256x64i(Vector256<long> src, Vector256<long> mask)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector256`1<System.Int64>,System.Runtime.Intrinsics.Vector256`1<System.Int64>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
-bool vtestz_g256x64i(Vector256<long> src, Vector256<long> mask)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.ginx::vtestz<System.Int64>(System.Runtime.Intrinsics.Vector256`1<System.Int64>,System.Runtime.Intrinsics.Vector256`1<System.Int64>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
-bool vtestz_d256x64u(Vector256<ulong> src, Vector256<ulong> mask)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
-bool vtestz_g256x64u(Vector256<ulong> src, Vector256<ulong> mask)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.ginx::vtestz<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0000: ldarga.s xb
+    IL_0002: ldarga.s yb
+    IL_0004: ldarg.2
+    IL_0005: call System.Void Z0.ginx::vxor<System.UInt64>(Z0.ConstBlock256`1<System.UInt64>&,Z0.ConstBlock256`1<System.UInt64>&,Z0.Block256`1<System.UInt64>&)
+    IL_000A: ret
 
 }
 UInt128 clmul(ulong x, ulong y)
@@ -292,15 +265,6 @@ Vector128<short> vblend_128x16u_RLRLRLRL(Vector128<short> x, Vector128<short> y)
     IL_0009: ret
 
 }
-void xor_block256(ConstBlock256<uint> xs, ConstBlock256<uint> ys, Block256<uint> zs)
-{
-    IL_0000: ldarga.s xs
-    IL_0002: ldarga.s ys
-    IL_0004: ldarga.s zs
-    IL_0006: call System.Void Z0.vblock::xor<System.UInt32>(Z0.ConstBlock256`1<System.UInt32>&,Z0.ConstBlock256`1<System.UInt32>&,Z0.Block256`1<System.UInt32>&)
-    IL_000B: ret
-
-}
 Vector128<int> vcmplt_128x32i(Vector128<int> x, Vector128<int> y)
 {
     IL_0000: ldarg.0
@@ -417,7 +381,7 @@ Vector128<byte> vsll8_128(Vector128<byte> src, byte shift)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.dinx::vsll8(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Byte)
+    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Byte)
     IL_0007: ret
 
 }
@@ -425,7 +389,7 @@ Vector256<byte> vsll8_256(Vector256<byte> src, byte shift)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.dinx::vsll8(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Byte)
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.dinx::vsll(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Byte)
     IL_0007: ret
 
 }
@@ -436,19 +400,6 @@ Vector128<byte> msb_mask_v128()
     IL_000A: ldc.i4.4
     IL_000B: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.vmask::msb<System.Byte>(Z0.N128,Z0.N8,System.Byte)
     IL_0010: ret
-
-}
-Vector128<byte> msb_mask_v128_2(int n)
-{
-    IL_0000: call Z0.N128 zfunc::get_n128()
-    IL_0005: ldc.i4 255
-    IL_000A: conv.i8
-    IL_000B: ldarg.0
-    IL_000C: call System.UInt64 Z0.Bits::lomask(System.Int32)
-    IL_0011: xor
-    IL_0012: conv.u1
-    IL_0013: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.ginx::vbroadcast<System.Byte>(Z0.N128,System.Byte)
-    IL_0018: ret
 
 }
 ulong sum_256x64u(Vector256<ulong> src)
@@ -687,54 +638,6 @@ Vector256<sbyte> vshuffle_256x8i(Vector256<sbyte> src, Vector256<sbyte> spec)
     IL_0001: ldarg.1
     IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.SByte> Z0.dinx::vshuf16x8(System.Runtime.Intrinsics.Vector256`1<System.SByte>,System.Runtime.Intrinsics.Vector256`1<System.SByte>)
     IL_0007: ret
-
-}
-void gparts_xor_8u(int partcount, int partwidth, in byte a, in byte b, ref byte z)
-{
-    IL_0000: call Z0.N256 zfunc::get_n256()
-    IL_0005: ldarg.0
-    IL_0006: ldarg.1
-    IL_0007: ldarg.2
-    IL_0008: ldarg.3
-    IL_0009: ldarg.s z
-    IL_000B: call System.Void Z0.vblock::xor<System.Byte>(Z0.N256,System.Int32,System.Int32,System.Byte&,System.Byte&,System.Byte&)
-    IL_0010: ret
-
-}
-void gparts_xor_16u(int partcount, int partwidth, in ushort a, in ushort b, ref ushort z)
-{
-    IL_0000: call Z0.N256 zfunc::get_n256()
-    IL_0005: ldarg.0
-    IL_0006: ldarg.1
-    IL_0007: ldarg.2
-    IL_0008: ldarg.3
-    IL_0009: ldarg.s z
-    IL_000B: call System.Void Z0.vblock::xor<System.UInt16>(Z0.N256,System.Int32,System.Int32,System.UInt16&,System.UInt16&,System.UInt16&)
-    IL_0010: ret
-
-}
-void gparts_xor_32u(int partcount, int partwidth, in uint a, in uint b, ref uint z)
-{
-    IL_0000: call Z0.N256 zfunc::get_n256()
-    IL_0005: ldarg.0
-    IL_0006: ldarg.1
-    IL_0007: ldarg.2
-    IL_0008: ldarg.3
-    IL_0009: ldarg.s z
-    IL_000B: call System.Void Z0.vblock::xor<System.UInt32>(Z0.N256,System.Int32,System.Int32,System.UInt32&,System.UInt32&,System.UInt32&)
-    IL_0010: ret
-
-}
-void gparts_xor_64u(int partcount, int partwidth, in ulong a, in ulong b, ref ulong z)
-{
-    IL_0000: call Z0.N256 zfunc::get_n256()
-    IL_0005: ldarg.0
-    IL_0006: ldarg.1
-    IL_0007: ldarg.2
-    IL_0008: ldarg.3
-    IL_0009: ldarg.s z
-    IL_000B: call System.Void Z0.vblock::xor<System.UInt64>(Z0.N256,System.Int32,System.Int32,System.UInt64&,System.UInt64&,System.UInt64&)
-    IL_0010: ret
 
 }
 Vector128<byte> vmov_idx3_128x8u(byte src, Vector128<byte> dst)
@@ -997,126 +900,6 @@ Vector256<byte> vpermvar32x8_256x8u(Vector256<byte> a, Vector256<byte> spec)
     IL_0007: ret
 
 }
-Vector128<byte> vsllx_128x8u(Vector128<byte> x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.s 15
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.ginx::vsllx<System.Byte>(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Byte)
-    IL_0008: ret
-
-}
-Vector128<ushort> vsllx_128x16u(Vector128<ushort> x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.s 15
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.ginx::vsllx<System.UInt16>(System.Runtime.Intrinsics.Vector128`1<System.UInt16>,System.Byte)
-    IL_0008: ret
-
-}
-Vector128<uint> vsllx_128x32u(Vector128<uint> x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.s 15
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ginx::vsllx<System.UInt32>(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Byte)
-    IL_0008: ret
-
-}
-Vector128<ulong> vsllx_128x64u(Vector128<ulong> x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.8
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.ginx::vsllx<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
-    IL_0007: ret
-
-}
-Vector256<byte> vsllx_256x8u(Vector256<byte> x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.s 13
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.ginx::vsllx<System.Byte>(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Byte)
-    IL_0008: ret
-
-}
-Vector256<ulong> vsllx_256x64u(Vector256<ulong> x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.s 13
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.ginx::vsllx<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Byte)
-    IL_0008: ret
-
-}
-Vector128<byte> vsrlx_128x8u(Vector128<byte> x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.8
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.dinx::vsrlx(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Byte)
-    IL_0007: ret
-
-}
-Vector128<ulong> vsrlx_128x64u(Vector128<ulong> x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.8
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.ginx::vsrlx<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
-    IL_0007: ret
-
-}
-Vector256<ulong> vsrlx_256(Vector256<ulong> x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.s 13
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.ginx::vsrlx<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Byte)
-    IL_0008: ret
-
-}
-Vector128<ulong> vrotlx_128x64u(Vector128<ulong> x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.s 14
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.ginx::vrotlx<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
-    IL_0008: ret
-
-}
-Vector256<ulong> vrotlx_256x64u(Vector256<ulong> x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.s 14
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.ginx::vrotlx<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Byte)
-    IL_0008: ret
-
-}
-Vector128<byte> rotl_g128x8u(Vector128<byte> src, byte offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.ginx::vrotl<System.Byte>(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Byte)
-    IL_0007: ret
-
-}
-Vector128<ulong> rotl_g128x64u(Vector128<ulong> src, byte offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.ginx::vrotl<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
-    IL_0007: ret
-
-}
-Vector256<byte> rotl_g256x8u(Vector256<byte> src, byte offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.ginx::vrotl<System.Byte>(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Byte)
-    IL_0007: ret
-
-}
-Vector256<ulong> rotl_g256x64u(Vector256<ulong> src, byte offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.ginx::vrotl<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Byte)
-    IL_0007: ret
-
-}
 bool vtestz_d128x8i(Vector128<sbyte> src, Vector128<sbyte> mask)
 {
     IL_0000: ldarg.0
@@ -1241,5 +1024,200 @@ bool vtestz_g128x64i(Vector128<long> src, Vector128<long> mask)
     IL_0002: call Z0.bit Z0.ginx::vtestz<System.Int64>(System.Runtime.Intrinsics.Vector128`1<System.Int64>,System.Runtime.Intrinsics.Vector128`1<System.Int64>)
     IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
     IL_000C: ret
+
+}
+bool vtestz_d128x64u(Vector128<ulong> src, Vector128<ulong> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_g128x64u(Vector128<ulong> src, Vector128<ulong> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.ginx::vtestz<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_d256x8i(Vector256<sbyte> src, Vector256<sbyte> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector256`1<System.SByte>,System.Runtime.Intrinsics.Vector256`1<System.SByte>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_g256x8i(Vector256<sbyte> src, Vector256<sbyte> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.ginx::vtestz<System.SByte>(System.Runtime.Intrinsics.Vector256`1<System.SByte>,System.Runtime.Intrinsics.Vector256`1<System.SByte>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_d256x8u(Vector256<byte> src, Vector256<byte> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Runtime.Intrinsics.Vector256`1<System.Byte>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_g256x8u(Vector256<byte> src, Vector256<byte> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.ginx::vtestz<System.Byte>(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Runtime.Intrinsics.Vector256`1<System.Byte>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_d256x16i(Vector256<short> src, Vector256<short> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_g256x16i(Vector256<short> src, Vector256<short> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.ginx::vtestz<System.Int16>(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_d256x16u(Vector256<ushort> src, Vector256<ushort> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector256`1<System.UInt16>,System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_g256x16u(Vector256<ushort> src, Vector256<ushort> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.ginx::vtestz<System.UInt16>(System.Runtime.Intrinsics.Vector256`1<System.UInt16>,System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_d256x32i(Vector256<int> src, Vector256<int> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector256`1<System.Int32>,System.Runtime.Intrinsics.Vector256`1<System.Int32>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_g256x32i(Vector256<int> src, Vector256<int> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.ginx::vtestz<System.Int32>(System.Runtime.Intrinsics.Vector256`1<System.Int32>,System.Runtime.Intrinsics.Vector256`1<System.Int32>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_d256x32u(Vector256<uint> src, Vector256<uint> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_g256x32u(Vector256<uint> src, Vector256<uint> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.ginx::vtestz<System.UInt32>(System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_d256x64i(Vector256<long> src, Vector256<long> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector256`1<System.Int64>,System.Runtime.Intrinsics.Vector256`1<System.Int64>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_g256x64i(Vector256<long> src, Vector256<long> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.ginx::vtestz<System.Int64>(System.Runtime.Intrinsics.Vector256`1<System.Int64>,System.Runtime.Intrinsics.Vector256`1<System.Int64>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_d256x64u(Vector256<ulong> src, Vector256<ulong> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_g256x64u(Vector256<ulong> src, Vector256<ulong> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.ginx::vtestz<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+void vblock_xor_128x8u_refs(int partcount, int partwidth, in byte a, in byte b, ref byte z)
+{
+    IL_0000: call Z0.N128 zfunc::get_n128()
+    IL_0005: ldarg.0
+    IL_0006: ldarg.1
+    IL_0007: ldarg.2
+    IL_0008: ldarg.3
+    IL_0009: ldarg.s z
+    IL_000B: call System.Void Z0.vblock::xor<System.Byte>(Z0.N128,System.Int32,System.Int32,System.Byte&,System.Byte&,System.Byte&)
+    IL_0010: ret
+
+}
+void vblock_xor_128x8u_blocks(ConstBlock128<byte> xb, ConstBlock128<byte> yb, in Block128<byte> zb)
+{
+    IL_0000: ldarga.s xb
+    IL_0002: ldarga.s yb
+    IL_0004: ldarg.2
+    IL_0005: call System.Void Z0.ginx::vxor<System.Byte>(Z0.ConstBlock128`1<System.Byte>&,Z0.ConstBlock128`1<System.Byte>&,Z0.Block128`1<System.Byte>&)
+    IL_000A: ret
+
+}
+void vblock_xor_128x16u_refs(int partcount, int partwidth, in ushort a, in ushort b, ref ushort z)
+{
+    IL_0000: call Z0.N128 zfunc::get_n128()
+    IL_0005: ldarg.0
+    IL_0006: ldarg.1
+    IL_0007: ldarg.2
+    IL_0008: ldarg.3
+    IL_0009: ldarg.s z
+    IL_000B: call System.Void Z0.vblock::xor<System.UInt16>(Z0.N128,System.Int32,System.Int32,System.UInt16&,System.UInt16&,System.UInt16&)
+    IL_0010: ret
 
 }

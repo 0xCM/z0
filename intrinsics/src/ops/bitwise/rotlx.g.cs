@@ -35,5 +35,4 @@ namespace Z0
             where T : unmanaged
                 => vgeneric<T>(dinx.vrotlx(v64u(src), shift));
     }
-
 }

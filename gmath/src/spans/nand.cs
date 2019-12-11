@@ -11,20 +11,12 @@ namespace Z0
 
     partial class mathspan
     {
-
-       public static Span<T> nand<T>(Span<T> lhs, in T rhs)
-            where T : unmanaged
-        {
-            for(var i=0; i<lhs.Length; i++)
-                lhs[i] = gmath.nand(lhs[i],rhs);
-            return lhs;
-        }
-
+        [MethodImpl(Inline)]
         public static Span<T> nand<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {
-            var len = length(lhs,rhs);
-            for(var i=0; i<len; i++)
+            var count = length(lhs,rhs);
+            for(var i=0; i<count; i++)
                 dst[i] = gmath.nand(lhs[i], rhs[i]);
             return dst;
         }
@@ -34,11 +26,8 @@ namespace Z0
             where T : unmanaged
                 => nand(lhs,rhs,lhs);
 
-        [MethodImpl(Inline)]
         public static Span<T> nand<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
-                => nand(lhs,rhs,lhs.Replicate(true));
-
+                => nand(lhs,rhs, span<T>(length(lhs,rhs)));
     }
-
 }

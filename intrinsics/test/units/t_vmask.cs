@@ -5,15 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
-    using static zfunc;
-    
+    using static zfunc;    
 
     public class t_vmask : t_vinx<t_vmask>
     {
-
         public void vsll8_128()
         {
             var w = n128;
@@ -23,7 +20,7 @@ namespace Z0
                 for(byte shift = 1; shift < 8; shift++)                
                 {
                     var actual = dinx.vsll(x, shift);
-                    var expect = mathspan.sll(x.ToSpan(), shift).LoadVector(w);
+                    var expect = mathspan.sll(x.ToSpan().ReadOnly(), shift).LoadVector(w);
                     Claim.eq(actual,expect);
                 }
             }
@@ -38,7 +35,7 @@ namespace Z0
                 for(byte shift = 1; shift < 8; shift++)                
                 {
                     var actual = dinx.vsll(x, shift);
-                    var expect = mathspan.sll(x.ToSpan(), shift).LoadVector(w);
+                    var expect = mathspan.sll(x.ToSpan().ReadOnly(), shift).LoadVector(w);
                     Claim.eq(actual,expect);
                 }
             }
@@ -108,11 +105,6 @@ namespace Z0
             
             var expect = es.LoadVector();            
             Claim.eq(expect,actual);
-
-
-
         }
-
-
     }
 }

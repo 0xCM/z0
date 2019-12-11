@@ -11,6 +11,7 @@ namespace Z0
 
     partial class mathspan
     {
+        [MethodImpl(Inline)]
         public static Span<T> dec<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
         {

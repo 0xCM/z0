@@ -19,6 +19,7 @@ namespace Z0
     {
         static N256 n => n256;
 
+
         [MethodImpl(Inline)]
         public static void not<T>(in T A, ref T Z)
             where T : unmanaged
@@ -34,7 +35,8 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
- 
+
+
         [MethodImpl(Inline)]
         public static void select<T>(in T A, in T B, in T C, ref T Z)
             where T : unmanaged

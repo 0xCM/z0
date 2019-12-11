@@ -36,26 +36,6 @@ namespace Z0
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
                 perm8x32(n, in skip(in a, offset), in skip(in spec, offset), ref seek(ref z, offset));
         }
-
-
-        [MethodImpl(Inline)]
-        public static void perm8x32<T>(in ConstBlock256<T> xb, ConstBlock256<uint> yb, in Block256<T> zb)
-            where T : unmanaged
-        {
-            var count = zb.BlockCount;
-            for(var i=0; i< count; i++)
-                vstore(ginx.vperm8x32(xb.LoadVector(i), yb.LoadVector(i)), ref zb.BlockRef(i));                             
-        } 
-
-        [MethodImpl(Inline)]
-        public static void perm2x128<T>(in ConstBlock256<T> xb, ConstBlock256<T> yb, Perm2x4 spec, in Block256<T> zb)
-            where T : unmanaged
-        {
-            var count = zb.BlockCount;
-            for(var i=0; i< count; i++)
-                vstore(ginx.vperm2x128(xb.LoadVector(i), yb.LoadVector(i), spec), ref zb.BlockRef(i));                             
-        } 
-
     }
 }
 

@@ -56,8 +56,5 @@ namespace Z0
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
                 rotrx(n, in skip(in a, offset), shift, ref seek(ref z, offset));
         }
-
-
     }
-
 }

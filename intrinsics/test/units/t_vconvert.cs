@@ -6,15 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    using System.Runtime.CompilerServices;
     
     using static zfunc;
     using static HexConst;
 
     public class t_vconvert : t_vinx<t_vconvert>
     {   
-
-
         public void block_32x8u_to_128x32u()
         {
             var blockA = DataBlocks.parts<byte>(n32,1,2,3,4);

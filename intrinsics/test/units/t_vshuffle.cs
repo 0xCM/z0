@@ -218,8 +218,7 @@ namespace Z0
                     Trace("v1",v1.FormatHex());                
                     Trace("p", p.Format());
                     Trace("perm(v1,p)", v2.FormatHex());
-                }
-                                
+                }                                
             }
         }
 

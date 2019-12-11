@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid16<T> parse<T>(BitString bs, N16 n, int rows, int cols, T t = default)
             where T : unmanaged
-                => bg16<T>(rows, cols, bs.TakeUInt16());
+                => init16<T>(rows, cols, bs.TakeUInt16());
 
         /// <summary>
         /// Hydrates a fixed-width 32-bit dimensionless grid from a bitstring
@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid32<T> parse<T>(BitString bs, N32 n, int rows, int cols, T t = default)
             where T : unmanaged
-                => bg32<T>(rows, cols, bs.TakeUInt32());
+                => init32<T>(rows, cols, bs.TakeUInt32());
 
         /// <summary>
         /// Hydrates a fixed-width 64-bit dimensionless grid from a bitstring
@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid64<T> parse<T>(BitString bs, N64 n, int rows, int cols, T t = default)
             where T : unmanaged
-                => bg64<T>(rows, cols, bs.TakeUInt64());
+                => init64<T>(rows, cols, bs.TakeUInt64());
 
         /// <summary>
         /// Hydrates a fixed-width natural bitgrid from a bitstring

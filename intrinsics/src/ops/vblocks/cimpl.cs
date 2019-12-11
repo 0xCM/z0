@@ -57,8 +57,5 @@ namespace Z0
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
                 cimpl(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
-
-
     }
-
 }

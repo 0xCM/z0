@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid16<T> not<T>(BitGrid16<T> gx)
             where T : unmanaged
-                => bg16<T>(gx.RowCount, gx.ColCount, math.not(gx));
+                => init16<T>(gx.RowCount, gx.ColCount, math.not(gx));
 
         /// <summary>
         /// Computes the bitwise complement of the source grid
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid32<T> not<T>(BitGrid32<T> gx)
             where T : unmanaged
-                => bg32<T>(gx.RowCount, gx.ColCount, math.not(gx));
+                => init32<T>(gx.RowCount, gx.ColCount, math.not(gx));
 
         /// <summary>
         /// Computes the bitwise complement of the source grid
@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid64<T> not<T>(BitGrid64<T> gx)
             where T : unmanaged
-                => bg64<T>(gx.RowCount, gx.ColCount, math.not(gx));
+                => init64<T>(gx.RowCount, gx.ColCount, math.not(gx));
                          
         /// <summary>
         /// Computes the bitwise complement of the source grid

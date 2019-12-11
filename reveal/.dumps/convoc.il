@@ -1,4 +1,4 @@
-// 2019-12-10 01:42:51:268
+// 2019-12-10 22:52:54:563
 int convert_g32f_to_g32i(float src)
 {
     IL_0000: ldarg.0
@@ -401,6 +401,27 @@ double convert_g8i_to_g64f(sbyte src)
     IL_0006: ret
 
 }
+Char convert_8i_to_ch16(sbyte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.u2
+    IL_0002: ret
+
+}
+Char convert_g8i_to_gch16(sbyte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Char Z0.Converter::convert<System.SByte,System.Char>(System.SByte)
+    IL_0006: ret
+
+}
+sbyte convert_8u_to_8i(byte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.i1
+    IL_0002: ret
+
+}
 sbyte convert_g8u_to_g8i(byte src)
 {
     IL_0000: ldarg.0
@@ -432,27 +453,6 @@ ushort convert_8u_to_16u(byte src)
 {
     IL_0000: ldarg.0
     IL_0001: ret
-
-}
-ushort convert_g8u_to_g16u(byte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt16 Z0.Converter::convert<System.Byte,System.UInt16>(System.Byte)
-    IL_0006: ret
-
-}
-int convert_g8u_to_g32i(byte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Int32 Z0.Converter::convert<System.Byte,System.Int32>(System.Byte)
-    IL_0006: ret
-
-}
-uint convert_g8u_to_g32u(byte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt32 Z0.Converter::convert<System.Byte,System.UInt32>(System.Byte)
-    IL_0006: ret
 
 }
 long convert_8u_to_g64i(byte src)

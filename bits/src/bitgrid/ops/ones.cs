@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid16<T> ones<T>(N16 n, int rows, int cols, T t = default)
             where T : unmanaged
-                => bg16<T>(rows,cols, ushort.MaxValue);
+                => init16<T>(rows,cols, ushort.MaxValue);
 
         /// <summary>
         /// Retuns a one-filled bitgrid
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid32<T> ones<T>(N32 n, int rows, int cols, T t = default)
             where T : unmanaged
-                => bg32<T>(rows,cols, uint.MaxValue);
+                => init32<T>(rows,cols, uint.MaxValue);
 
         /// <summary>
         /// Retuns a one-filled bitgrid
@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid64<T> ones<T>(N64 n, int rows, int cols, T t = default)
             where T : unmanaged
-                => bg64<T>(rows,cols, ulong.MaxValue);
+                => init64<T>(rows,cols, ulong.MaxValue);
 
         /// <summary>
         /// Returns a 1-filled natural bitgrid 

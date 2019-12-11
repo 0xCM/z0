@@ -60,7 +60,8 @@ namespace Z0
                 return vnor_f(x,y);
         }
 
-       [MethodImpl(Inline)]
+
+        [MethodImpl(Inline)]
         static Vector128<T> vnor_u<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {

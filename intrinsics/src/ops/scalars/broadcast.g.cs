@@ -10,8 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static zfunc;    
-    using static As;
-    using static AsIn;
     
     partial class ginxs
     {
@@ -42,7 +40,6 @@ namespace Z0
         public static T broadcast<S,T>(S src)
             where S : unmanaged
             where T : unmanaged
-                => vhead<S,T>(ginx.vbroadcast(n128, src));
-       
+                => vhead<S,T>(ginx.vbroadcast(n128, src));       
     }
 }

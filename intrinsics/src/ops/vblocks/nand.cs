@@ -58,24 +58,5 @@ namespace Z0
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
                 nand(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
-
-        [MethodImpl(Inline)]
-        public static void nand<T>(in ConstBlock128<T> xb, in ConstBlock128<T> yb, in Block128<T> zb)
-            where T : unmanaged
-        {
-            var count = zb.BlockCount;
-            for(var block = 0; block < count; block++)
-                vstore(ginx.vnand(xb.LoadVector(block), yb.LoadVector(block)), ref zb.BlockRef(block));
-        } 
-
-        [MethodImpl(Inline)]
-        public static void nand<T>(in ConstBlock256<T> xb, in ConstBlock256<T> yb, in Block256<T> zb)
-            where T : unmanaged
-        {
-            var count = zb.BlockCount;
-            for(var block = 0; block < count; block++)
-                vstore(ginx.vnand(xb.LoadVector(block), yb.LoadVector(block)), ref zb.BlockRef(block));
-        } 
     }
-
 }

@@ -5,18 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
-    using System.Text;
 
     using static zfunc;
-    using static nfunc;
 
     partial class Linear
-    {
-        
+    {        
         /// <summary>
         /// Computes the sum of two matrices and stores the result in a caller-supplied target matrix
         /// </summary>
@@ -32,7 +26,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            vblock.add(A.Unsized, B.Unsized, C.Unsized);
+            ginx.vadd(A.Unsized, B.Unsized, C.Unsized);
             return ref C;
         }
 
@@ -51,7 +45,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            vblock.sub(A.Unsized, B.Unsized, C.Unsized);
+            ginx.vsub(A.Unsized, B.Unsized, C.Unsized);
             return ref C;
         }
 
@@ -73,8 +67,5 @@ namespace Z0
             and(A.Unsized,B.Unsized, C.Unsized);
             return ref C;
         }
-
     }
-
-
 }

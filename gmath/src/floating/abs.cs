@@ -27,26 +27,5 @@ namespace Z0
         public static double abs(double a)
             => Math.Abs(a);
 
-        /// <summary>
-        /// Computes the absolute value of the source in-place
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static ref float abs(ref float src)
-        {
-            src = abs(src);
-            return ref src;
-        }
-
-        /// <summary>
-        /// Computes the absolute value of the source in-place
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static ref double abs(ref double src)
-        {
-            src = abs(src);
-            return ref src;
-        }
     }
 }

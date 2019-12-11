@@ -12,15 +12,6 @@ namespace Z0
     partial class mathspan
     {
         [MethodImpl(Inline)]
-        public static Span<T> sll<T>(Span<T> src, int shift)
-            where T : unmanaged
-        {
-            for(var i=0; i<src.Length; i++)
-                src[i] = gmath.sll(src[i], shift);
-            return src;
-        }
-
-        [MethodImpl(Inline)]
         public static Span<T> sll<T>(ReadOnlySpan<T> src, int shift, Span<T> dst)
             where T : unmanaged
         {            
@@ -31,8 +22,6 @@ namespace Z0
 
         public static Span<T> sll<T>(ReadOnlySpan<T> src, int shift)
             where T : unmanaged
-                => sll(src, shift, new T[src.Length]);
-
+                => sll(src, shift, span<T>(src.Length));
     }
-
 }

@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid16<T> and<T>(BitGrid16<T> gx, BitGrid16<T> gy)
             where T : unmanaged
-                => bg16<T>(gx.RowCount, gx.ColCount, math.and(gx,gy));
+                => init16<T>(gx.RowCount, gx.ColCount, math.and(gx,gy));
 
         /// <summary>
         /// Computes the bitwise AND between fixed-width 32-bit generic bitgrids
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid32<T> and<T>(BitGrid32<T> gx, BitGrid32<T> gy)
             where T : unmanaged
-                => bg32<T>(gx.RowCount, gx.ColCount, math.and(gx,gy));
+                => init32<T>(gx.RowCount, gx.ColCount, math.and(gx,gy));
 
         /// <summary>
         /// Computes the bitwise AND between fixed-width 64-bit grids
@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid64<T> and<T>(BitGrid64<T> gx, BitGrid64<T> gy)
             where T : unmanaged
-                => bg64<T>(gx.RowCount, gx.ColCount, math.and(gx,gy));
+                => init64<T>(gx.RowCount, gx.ColCount, math.and(gx,gy));
          
         /// <summary>
         /// Computes the bitwise AND between fixed-width natural bitgrids

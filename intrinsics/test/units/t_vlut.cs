@@ -6,7 +6,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
     using static zfunc;
@@ -57,8 +56,5 @@ namespace Z0
             Claim.eq(items,selected);
 
         }
-
     }
 }
-
-

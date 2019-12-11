@@ -11,14 +11,7 @@ namespace Z0
 
     partial class mathspan
     {
-        /// <summary>
-        /// Multiplies corresponding elements in left/right primal source spans and writes
-        /// the result to a caller-supplied target span
-        /// </summary>
-        /// <param name="lhs">The left primal span</param>
-        /// <param name="rhs">The right primal span</param>
-        /// <param name="dst">The target span</param>
-        /// <typeparam name="T">The span element type</typeparam>
+        [MethodImpl(Inline)]
         public static Span<T> mul<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {
@@ -33,12 +26,8 @@ namespace Z0
             where T : unmanaged
                 => mul(lhs,rhs,lhs);
 
-        [MethodImpl(Inline)]
         public static Span<T> mul<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
-                => mul(lhs,rhs,lhs.Replicate(true));
-
-
+                => mul(lhs,rhs, span<T>(length(lhs,rhs)));
     }
-
 }

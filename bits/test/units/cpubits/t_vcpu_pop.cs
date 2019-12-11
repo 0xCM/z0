@@ -64,7 +64,6 @@ namespace Z0
         public void vcpu_pop_bench()
         {
             scalar_pop_1x64_popcnt_bench();
-            scalar_pop_1x64_lookup_bench();
             vcpu_pop_3x128_bench();
             vcpu_pop_3x256_bench();
         }
@@ -122,26 +121,6 @@ namespace Z0
                 opcount += 8*1*SampleSize;
             }
             Benchmark($"pop_1x64_popcnt", counter, opcount);
-        }
-
-        void scalar_pop_1x64_lookup_bench(SystemCounter counter = default)
-        {
-            
-            var total = 0;
-            var opcount = 0;
-            Span<ulong> samples = stackalloc ulong[SampleSize];
-            ref readonly var src = ref head(samples);
-            for(var cycle = 0; cycle < CycleCount; cycle++)
-            {
-                Random.Fill(SampleSize, ref head(samples));
-                counter.Start();
-                for(var i=0; i< SampleSize; i++)
-                    total += BitStore.pop(skip(in head(samples), i));
-                counter.Stop();
-                opcount += 8*1*SampleSize;
-
-            }
-            Benchmark($"pop_1x64_lookup", counter, opcount);
         }
     }
 }

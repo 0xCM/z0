@@ -15,73 +15,73 @@ namespace Z0
     partial class ginx
     {        
         [MethodImpl(Inline)]
-        public static Vector128<T> vsrlr<T>(Vector128<T> x, Vector128<T> shift)
+        public static Vector128<T> vsrlr<T>(Vector128<T> x, Vector128<T> offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vsrlr_u(x,shift);
+                return vsrlr_u(x,offset);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vsrlr_i(x,shift);
+                return vsrlr_i(x,offset);
             else
                 throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vsrlr<T>(Vector256<T> x, Vector128<T> shift)
+        public static Vector256<T> vsrlr<T>(Vector256<T> x, Vector128<T> offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vsrlr_u(x,shift);
+                return vsrlr_u(x,offset);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vsrlr_i(x,shift);
+                return vsrlr_i(x,offset);
             else
                 throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vsrlr<T>(Vector128<T> x, T shift)
+        public static Vector128<T> vsrlr<T>(Vector128<T> x, T offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vsrlr_u(x,shift);
+                return vsrlr_u(x,offset);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vsrlr_i(x,shift);
+                return vsrlr_i(x,offset);
             else
                 throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vsrlr<T>(Vector256<T> x, T shift)
+        public static Vector256<T> vsrlr<T>(Vector256<T> x, T offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vsrlr_u(x,shift);
+                return vsrlr_u(x,offset);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vsrlr_i(x,shift);
+                return vsrlr_i(x,offset);
             else
                 throw unsupported<T>();
         }

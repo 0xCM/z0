@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
     using static zfunc;
@@ -38,7 +37,5 @@ namespace Z0
 
             Claim.eq(dinx.vpermlo4x16(dinx.vparts(n128, 0,1,2,3,6,7,8,9), Perm4.ADCB), dinx.vparts(n128, 0,3,2,1,6,7,8,9));           
         }
-
     }
-
 }

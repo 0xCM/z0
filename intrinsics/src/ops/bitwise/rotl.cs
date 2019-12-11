@@ -84,46 +84,6 @@ namespace Z0
         public static Vector256<ulong> vrotl(Vector256<ulong> src, byte shift)
             => dinx.vor(dinx.vsll(src, shift),dinx.vsrl(src, (byte)(64 - shift)));             
 
-        /// <summary>
-        /// Rotates each component the source vector leftwards by the amount specified
-        /// int the corresponding shift vector component
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="shift">The shift vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<ulong> vrotl(Vector128<ulong> src, Vector128<ulong> shift)
-            => dinx.vor(dinx.vsllv(src,shift),dinx.vsrlv(src, dinx.vsub(Vector128u64,shift)));
-
-        /// <summary>
-        /// Rotates each component the source vector leftwards by the amount specified
-        /// int the corresponding shift vector component
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="shift">The shift vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<uint> vrotl(Vector128<uint> src, Vector128<uint> shift)
-            => dinx.vor(dinx.vsllv(src, shift),dinx.vsrlv(src, dinx.vsub(Vector128u32, shift)));
-
-        /// <summary>
-        /// Rotates each component the source vector leftwards by the 
-        /// corresponding component the shifts vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="shift">The shift vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<uint> vrotl(Vector256<uint> src, Vector256<uint> shift)
-            => dinx.vor(dinx.vsllv(src,shift), dinx.vsrlv(src, dinx.vsub(Vector256u32,shift)));
-
-        /// <summary>
-        /// Rotates each component the source vector leftwards by the 
-        /// corresponding component the shifts vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="shift">The shift vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<ulong> vrotl(Vector256<ulong> src, Vector256<ulong> shift)
-            => dinx.vor(dinx.vsllv(src,shift),dinx.vsrlv(src, dinx.vsub(Vector256u64,shift)));
-
 
 
     }

@@ -5,28 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
     using static zfunc;
 
     public class t_vswaps : t_vinx<t_vswaps>
     {        
-        public void transpose_check()
-        {
-            var a = dinx.vparts(n128, 0u,1,2,3);
-            var b = dinx.vparts(n128, 4u,5,6,7);
-            var c = dinx.vparts(n128, 8u,9,10,11);
-            var d = dinx.vparts(n128, 12u,13,14,15);
-            var x0 = dinx.vmergelo(v8u(a), v8u(b));
-            var y0 = dinx.vmergelo(v8u(c), v8u(d));
-            var z0 = v8u(dinx.vmergelo(v16u(x0),v16u(y0)));
-            var z1 = v8u(dinx.vmergehi(v16u(x0),v16u(y0)));
-            var x1 = dinx.vmergehi(v8u(a), v8u(b));
-            var y1 = dinx.vmergehi(v8u(c), v8u(d));
-            var z2 = v8u(dinx.vmergelo(v16u(x1),v16u(y1)));
-            var z3 = v8u(dinx.vmergehi(v16u(x1),v16u(y1)));                            
-        }
 
         public void transpose_4x4_check()
         {

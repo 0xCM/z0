@@ -11,11 +11,12 @@ namespace Z0
 
     partial class mathspan
     {
+        [MethodImpl(Inline)]
         public static Span<T> nor<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {
-            var len = length(lhs,rhs);
-            for(var i=0; i<len; i++)
+            var count = length(lhs,rhs);
+            for(var i=0; i<count; i++)
                 dst[i] = gmath.nor(lhs[i], rhs[i]);
             return dst;
         }
@@ -25,11 +26,8 @@ namespace Z0
             where T : unmanaged
                 => nor(lhs,rhs,lhs);
 
-        [MethodImpl(Inline)]
         public static Span<T> nor<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
-                => nor(lhs,rhs,lhs.Replicate(true));
-
+                => nor(lhs,rhs, span<T>(length(lhs,rhs)));
     }
-
 }

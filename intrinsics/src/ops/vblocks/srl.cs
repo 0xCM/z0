@@ -55,23 +55,5 @@ namespace Z0
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
                 srl(n, in skip(in a, offset), shift, ref seek(ref z, offset));
         }
-
-        [MethodImpl(Inline)]
-        public static void srl<T>(in ConstBlock128<T> xb, byte shift, in Block128<T> zb)
-            where T : unmanaged
-        {
-            var count = zb.BlockCount;
-            for(var i=0; i< count; i++)
-                vstore(ginx.vsrl(xb.LoadVector(i), shift), ref zb.BlockRef(i));                             
-        } 
-
-        [MethodImpl(Inline)]
-        public static void srl<T>(in ConstBlock256<T> xb, byte shift, in Block256<T> zb)
-            where T : unmanaged
-        {
-            var count = zb.BlockCount;
-            for(var i=0; i< count; i++)
-                vstore(ginx.vsrl(xb.LoadVector(i), shift), ref zb.BlockRef(i));                             
-        } 
     }
 }

@@ -19,8 +19,7 @@ namespace Z0
 
         /// <summary>
         /// (8x16w,8x16w) -> 16x8w
-        /// Compacts 16 16-bit integers to 16 8-bit integers
-        /// 16:16 -> 8
+        /// Compacts 16 16-bit unsigned integers to 16 8-bit unsigned integers
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -30,8 +29,17 @@ namespace Z0
 
         /// <summary>
         /// (8x16w,8x16w) -> 16x8w
-        /// Compacts 16 16-bit integers to 16 8-bit integers
-        /// 16:16 -> 8
+        /// Compacts 16 16-bit signed integers to 16 8-bit signed integers
+        /// </summary>
+        /// <param name="x">The first source vector</param>
+        /// <param name="y">The second source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<sbyte> vcompact(Vector128<short> x, Vector128<short> y)
+            => vpackss(x,y);
+
+        /// <summary>
+        /// (8x16w,8x16w) -> 16x8w
+        /// Compacts 16 16-bit unsigned integers to 16 8-bit unsigned integers
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -41,14 +49,39 @@ namespace Z0
             => dst = vcompact(x,y);
 
         /// <summary>
+        /// (8x16w,8x16w) -> 16x8w
+        /// Compacts 16 16-bit unsigned integers to 16 8-bit unsigned integers
+        /// </summary>
+        /// <param name="x">The first source vector</param>
+        /// <param name="y">The second source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<sbyte> vcompact(Vector128<short> x, Vector128<short> y, out Vector128<sbyte> dst)
+            => dst = vcompact(x,y);
+
+        /// <summary>
         /// 16x8w -> (8x16w, 8x16w)
-        /// 16:8 -> 16
+        /// Expands 16 8-bit unsigned integers to 16 16-bit unsigned integers
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="lo">The target for the lower source elements</param>
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline)]
         public static void vinflate(Vector128<byte> x, out Vector128<ushort> lo, out Vector128<ushort> hi)
+        {            
+            vconvert(x, out lo);
+            vconvert(vhi(x), out hi);
+        }
+
+        /// <summary>
+        /// 16x8w -> (8x16w, 8x16w)
+        /// Expands 16 8-bit signed integers to 16 16-bit signed integers
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="lo">The target for the lower source elements</param>
+        /// <param name="hi">The target for the upper source elements</param>
+        [MethodImpl(Inline)]
+        public static void vinflate(Vector128<sbyte> x, out Vector128<short> lo, out Vector128<short> hi)
         {            
             vconvert(x, out lo);
             vconvert(vhi(x), out hi);
@@ -101,6 +134,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vinflate(Vector256<byte> src, out Vector256<ushort> x0, out Vector256<ushort> x1)
             => vconvert(src, out x0, out x1);
+
 
         // ~ 16x16w <-> 16x8w
         // ~ 16:8 <-> 16

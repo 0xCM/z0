@@ -53,7 +53,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            vblock.add(x.Data, y.Data, dst.Data);
+            ginx.vadd(x.Data, y.Data, dst.Data);
             return ref dst;
         }
 
@@ -108,7 +108,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            vblock.add<T>(x,y,x);
+            ginx.vadd<T>(x,y,x);
             return ref x;
         }
 

@@ -20,6 +20,28 @@ namespace Z0
             var expect = dinx.vparts(n,25,50,75,10);
             Claim.eq(expect,dst);
         }
+
+        public void vinflate_128x8u()
+        {
+            var src = ginx.vincrements<byte>(n128);
+            dinx.vinflate(src, out Vector128<ushort> lo, out Vector128<ushort> hi);
+            var loExpect = ginx.vincrements<ushort>(n128);
+            var hiExpect = ginx.vincrements<ushort>(n128,8);
+            Claim.eq(loExpect, lo);
+            Claim.eq(hiExpect, hi);
+
+            var dst = dinx.vcompact(lo,hi);
+            Claim.eq(src,dst);
+        }
+
+        public void vinflate_128x8u_128x16u()
+        {
+            var src = ginx.vincrements<byte>(n128);            
+            dinx.vinflate(src, out Vector128<ushort> lo, out Vector128<ushort> hi);
+            for(var i=0; i<8; i++)
+                Claim.eq(src.Item(i), lo.Item(i));            
+        }
+
         public void vcompact_basecase_128()
         {
             var n = n128;

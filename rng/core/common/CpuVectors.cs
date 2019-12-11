@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="filter">If specified, component values for which the predicate returns false are excluded</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 n, Interval<T>? domain = null, Func<T,bool> filter = null)        
+        public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w, Interval<T>? domain = null, Func<T,bool> filter = null)        
             where T : unmanaged
                 => CpuVecX.LoadVector(random.Blocks(n128,1, domain, filter));
 
@@ -33,9 +33,9 @@ namespace Z0
         /// <param name="filter">If specified, component values for which the predicate returns false are excluded</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 n, Interval<T> domain, Func<T,bool> filter = null)        
+        public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w, Interval<T> domain, Func<T,bool> filter = null)        
             where T : unmanaged
-                => CpuVecX.LoadVector(random.Blocks(n, 1, domain, filter));
+                => CpuVecX.LoadVector(random.Blocks(w, 1, domain, filter));
 
         /// <summary>
         /// Produces a random 128-bit cpu vector

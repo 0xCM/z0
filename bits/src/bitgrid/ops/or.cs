@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid16<T> or<T>(BitGrid16<T> gx, BitGrid16<T> gy)
             where T : unmanaged
-                => bg16<T>(gx.RowCount, gx.ColCount, math.or(gx,gy));
+                => init16<T>(gx.RowCount, gx.ColCount, math.or(gx,gy));
 
         /// <summary>
         /// Computes the bitwise OR between fixed-width bitgrids
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid32<T> or<T>(BitGrid32<T> gx, BitGrid32<T> gy)
             where T : unmanaged
-                => bg32<T>(gx.RowCount, gx.ColCount, math.or(gx,gy));
+                => init32<T>(gx.RowCount, gx.ColCount, math.or(gx,gy));
 
         /// <summary>
         /// Computes the bitwise OR between fixed-width bitgrids
@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid64<T> or<T>(BitGrid64<T> gx, BitGrid64<T> gy)
             where T : unmanaged
-                => bg64<T>(gx.RowCount, gx.ColCount, math.or(gx,gy));
+                => init64<T>(gx.RowCount, gx.ColCount, math.or(gx,gy));
          
         /// <summary>
         /// Computes the bitwise OR between fixed-width bitgrids of natural dimensions

@@ -9,21 +9,22 @@ namespace Z0
     using System.Runtime.InteropServices;    
         
     using static zfunc;
+    using static nfunc;
 
     partial class DataBlocks
     {
         /// <summary>
         /// Creates 16-bit blocked container from a parameter array and raises an error if the data source is not block-aligned
         /// </summary>
-        /// <param name="n">The bitness selector</param>
+        /// <param name="w">The block width selector</param>
         /// <param name="src">The source data</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block16<T> parts<T>(N16 n, params T[] src)
+        public static Block16<T> parts<T>(N16 w, params T[] src)
             where T : unmanaged        
         {
-            if(!aligned<T>(n,src.Length))
-                badsize(n, src.Length);      
+            if(!aligned<T>(w,src.Length))
+                badsize(w, src.Length);      
             
             return new Block16<T>(src);
         }
@@ -31,15 +32,15 @@ namespace Z0
         /// <summary>
         /// Creates 32-bit blocked span from a parameter array and raises an error if the data source is not block-aligned
         /// </summary>
-        /// <param name="n">The bitness selector</param>
+        /// <param name="w">The block width selector</param>
         /// <param name="src">The source data</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block32<T> parts<T>(N32 n, params T[] src)
+        public static Block32<T> parts<T>(N32 w, params T[] src)
             where T : unmanaged        
         {
-            if(!aligned<T>(n,src.Length))
-                badsize(n, src.Length);      
+            if(!aligned<T>(w,src.Length))
+                badsize(w, src.Length);      
             
             return new Block32<T>(src);
         }
@@ -47,15 +48,15 @@ namespace Z0
         /// <summary>
         /// Creates 64-bit blocked span from a parameter array and raises an error if the data source is not block-aligned
         /// </summary>
-        /// <param name="n">The bitness selector</param>
+        /// <param name="w">The block width selector</param>
         /// <param name="src">The source data</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block64<T> parts<T>(N64 n, params T[] src)
+        public static Block64<T> parts<T>(N64 w, params T[] src)
             where T : unmanaged        
         {
-            if(!aligned<T>(n,src.Length))
-                badsize(n, src.Length);      
+            if(!aligned<T>(w,src.Length))
+                badsize(w, src.Length);      
             
             return new Block64<T>(src);
         }
@@ -63,34 +64,42 @@ namespace Z0
         /// <summary>
         /// Creates 128-bit blocked span from a parameter array and raises an error if the data source is improperly blocked
         /// </summary>
-        /// <param name="n">The bitness selector</param>
+        /// <param name="w">The block width selector</param>
         /// <param name="src">The source data</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block128<T> parts<T>(N128 n, params T[] src)
+        public static Block128<T> parts<T>(N128 w, params T[] src)
             where T : unmanaged        
         {
-            if(!aligned<T>(n,src.Length))
-                badsize(n, src.Length);      
+            if(!aligned<T>(w,src.Length))
+                badsize(w, src.Length);      
             
-            Span<T> dst = src;
-            return new Block128<T>(dst);
+            return new Block128<T>(src);
         }
 
         /// <summary>
         /// Creates 256-bit blocked span from a parameter array and raises an error if the data source is improperly blocked
         /// </summary>
-        /// <param name="n">The bitness selector</param>
+        /// <param name="w">The block width selector</param>
         /// <param name="src">The source data</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block256<T> parts<T>(N256 n, params T[] src)
+        public static Block256<T> parts<T>(N256 w, params T[] src)
             where T : unmanaged        
         {
-            if(!aligned<T>(n,src.Length))
-                badsize(n, src.Length);    
+            if(!aligned<T>(w,src.Length))
+                badsize(w, src.Length);    
 
             return new Block256<T>(src);
+        }
+
+        [MethodImpl(Inline)]   
+        public static NatBlock<N,T> natparts<N,T>(N n, params T[] cells) 
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            Span<T> src = cells;
+            return checkedload(src,n);
         }
     }
 }

@@ -98,6 +98,7 @@ namespace Z0
             Disassemble(new ExperimentalScenarios());
             Disassemble(typeof(inxoc));    
             Disassemble(typeof(inxsoc));    
+            Disassemble(typeof(vshiftoc));  
             Disassemble(typeof(bvoc));    
             Disassemble(typeof(bgoc));   
             Disassemble(typeof(natoc));    

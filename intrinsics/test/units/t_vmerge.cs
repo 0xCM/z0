@@ -29,7 +29,22 @@ namespace Z0
             var merged3 = dinx.vmerge(x0, x1, m1, m2);
             Claim.eq(dinx.vconcat(x,y), merged3);
 
+        }
 
+        public void vmerge_example()
+        {
+            var a = dinx.vparts(n128, 0u,1,2,3);
+            var b = dinx.vparts(n128, 4u,5,6,7);
+            var c = dinx.vparts(n128, 8u,9,10,11);
+            var d = dinx.vparts(n128, 12u,13,14,15);
+            var x0 = dinx.vmergelo(v8u(a), v8u(b));
+            var y0 = dinx.vmergelo(v8u(c), v8u(d));
+            var z0 = v8u(dinx.vmergelo(v16u(x0),v16u(y0)));
+            var z1 = v8u(dinx.vmergehi(v16u(x0),v16u(y0)));
+            var x1 = dinx.vmergehi(v8u(a), v8u(b));
+            var y1 = dinx.vmergehi(v8u(c), v8u(d));
+            var z2 = v8u(dinx.vmergelo(v16u(x1),v16u(y1)));
+            var z3 = v8u(dinx.vmergehi(v16u(x1),v16u(y1)));                            
         }
 
         public void vunpack_lo_8()
@@ -57,10 +72,5 @@ namespace Z0
             Trace(lo.Format(pad:2));
             Trace(hi.Format(pad:2));
         }
-
-
-
-
     }
-
 }

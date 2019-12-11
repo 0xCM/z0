@@ -7,11 +7,9 @@ namespace Z0
     using System;
 
     using static zfunc;
-    using D = GDel;
 
     public class t_vor : t_vinx<t_vor>
     {
-
         public void vor_128x8i()
             => vor_check<sbyte>(n128);
 

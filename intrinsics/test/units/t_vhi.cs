@@ -5,16 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
     using static zfunc;
 
     public class t_vhi : t_vinx<t_vhi>
     {   
-
         public void vhi_128x8u()
             => vhi_check<byte>(n128);
 
@@ -74,8 +70,6 @@ namespace Z0
 
         public void vhi_256x64f()
             => vhi_check<double>(n256);
-
-
     }
 
 }

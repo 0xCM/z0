@@ -49,10 +49,8 @@ namespace Z0
             {
                 var bs = Random.BitString(count);
                 var bitseq = bs.BitSeq.Blocked(block);
-                uint packed = Bits.pack8x1(bitseq);
-                for(var i=0; i< count; i++)
-                    Claim.eq(bs[i], BitMask.test(packed, i));
-
+                var packed = Bits.pack8x1(bitseq);
+                Claim.eq(bs.TakeScalar<byte>(), packed);
             }
         }
 
@@ -64,10 +62,8 @@ namespace Z0
             {
                 var bs = Random.BitString(count);
                 var bitseq = bs.BitSeq.Blocked(block);
-                uint packed = Bits.pack8x1(bitseq);
-                for(var i=0; i< count; i++)
-                    Claim.eq(bs[i], BitMask.test(packed, i));
-
+                var packed = Bits.pack8x1(bitseq);
+                Claim.eq(bs.TakeScalar<byte>(), packed);
             }
         }
 

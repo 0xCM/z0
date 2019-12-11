@@ -1,4 +1,4 @@
-// 2019-12-10 01:42:50:496
+// 2019-12-10 22:52:53:592
 uint max_val_nbv_4()
 {
     IL_0000: call System.UInt32 Z0.BitVector`2<Z0.N4,System.UInt32>::get_MaxValue()
@@ -52,27 +52,6 @@ BitVector32 bitrange_32_a(BitVector32 src, int i, int j)
     IL_0003: ldarg.2
     IL_0004: call Z0.BitVector32 Z0.BitVector32::get_Item(System.Int32,System.Int32)
     IL_0009: ret
-
-}
-int pop_bitstore_8(byte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Int32 Z0.BitStore::pop<System.Byte>(System.Byte)
-    IL_0006: ret
-
-}
-int pop_bitstore_32(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Int32 Z0.BitStore::pop<System.UInt32>(System.UInt32)
-    IL_0006: ret
-
-}
-int pop_bitstore_64(ulong src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Int32 Z0.BitStore::pop<System.UInt64>(System.UInt64)
-    IL_0006: ret
 
 }
 uint pop_3x64(ulong x, ulong y, ulong z)

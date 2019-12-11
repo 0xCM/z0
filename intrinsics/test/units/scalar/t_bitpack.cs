@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     
     using static zfunc;
 
@@ -50,6 +49,5 @@ namespace Z0
 
             Claim.eq(BitString.load(y).TakeScalar<T>(), src);
         }
-
     }
 }

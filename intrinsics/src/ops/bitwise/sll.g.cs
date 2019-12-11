@@ -51,8 +51,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-
-
         [MethodImpl(Inline)]
         static Vector128<T> vsll_i<T>(Vector128<T> x, byte shift)
             where T : unmanaged

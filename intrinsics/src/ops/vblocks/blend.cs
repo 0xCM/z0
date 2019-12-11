@@ -14,7 +14,6 @@ namespace Z0
     
     partial class vblock
     {     
-
         [MethodImpl(Inline)]
         public static Vector256<T> vblend32x8<T>(N256 n, in T a, in T b, in byte spec)
             where T : unmanaged
@@ -38,13 +37,5 @@ namespace Z0
                 blend32x8(n, in skip(in a, offset), in skip(in b, offset), in skip(in spec, offset), ref seek(ref z, offset));
         }
 
-        [MethodImpl(Inline)]
-        public static void blend32x8<T>(in ConstBlock256<T> xb, in ConstBlock256<T> yb, in ConstBlock256<byte> zb, in Block256<T> dst)
-            where T : unmanaged
-        {
-            var count = zb.BlockCount;
-            for(var block=0; block< count; block++)
-                vstore(ginx.vblend(xb.LoadVector(block), yb.LoadVector(block), zb.LoadVector(block)), ref dst.BlockRef(block));                             
-        } 
     }
 }

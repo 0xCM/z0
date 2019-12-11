@@ -494,7 +494,7 @@ namespace Z0
                 Claim.eq(gmath.xor(xb[i],yb[i]), zb[i]);
 
             zb.Clear();
-            vblock.xor(xb, yb, zb);
+            ginx.vxor(xb, yb, zb);
 
             for(var i=0; i<stats.CellCount; i++)
                 Claim.eq(gmath.xor(xb[i],yb[i]), zb[i]);
@@ -555,7 +555,7 @@ namespace Z0
                 Claim.eq(gmath.xor(xb[i],yb[i]), zb[i]);
             
             zb.Clear();
-            vblock.xor(xb, yb, zb);
+            ginx.vxor(xb, yb, zb);
             for(var i=0; i<stats.CellCount; i++)
                 Claim.eq(gmath.xor(xb[i],yb[i]), zb[i]);
         }
@@ -895,7 +895,7 @@ namespace Z0
             for(var i=0; i<CycleCount; i++)
             {
                 var xb = Random.Blocks<T>(n,blocks);
-                vblock.inc(xb, zb);
+                ginx.vinc(xb, zb);
 
                 for(var block = 0; block < blocks; block++)
                 for(var cell = 0; cell < blocklen; cell++)
@@ -919,7 +919,7 @@ namespace Z0
             for(var i=0; i<CycleCount; i++)
             {
                 var xb = Random.Blocks<T>(n,blocks);                
-                vblock.inc(xb, zb);
+                ginx.vinc(xb, zb);
 
                 for(var block = 0; block < blocks; block++)
                 for(var cell = 0; cell < blocklen; cell++)
@@ -1119,7 +1119,7 @@ namespace Z0
             var lhs = Random.Blocks<T>(n256,SampleSize).ReadOnly();
             var rhs = Random.Blocks<T>(n256,SampleSize).ReadOnly();
             var dstA = lhs.Replicate();
-            vblock.sub(lhs, rhs, dstA);
+            ginx.vsub(lhs, rhs, dstA);
             var dstB = DataBlocks.alloc<T>(n256,lhs.BlockCount);
             for(var i = 0; i < dstA.CellCount; i++)
                 dstB[i] = gmath.sub(lhs[i], rhs[i]);
@@ -1185,7 +1185,7 @@ namespace Z0
                 var x = Random.CpuVector<T>(w);
                 var shift = Random.Next<byte>(1, maxshift);
                 var actual = ginx.vsll(x, shift);
-                var expect = mathspan.sll(x.ToSpan(), shift).LoadVector(w);
+                var expect = mathspan.sll(x.ToSpan().ReadOnly(), shift).LoadVector(w);
                 Claim.eq(actual,expect);
             }
         }
@@ -1199,7 +1199,7 @@ namespace Z0
                 var x = Random.CpuVector<T>(w);
                 var shift = Random.Next<byte>(1, maxshift);
                 var actual = ginx.vsll(x, shift);
-                var expect = mathspan.sll(x.ToSpan(), shift).LoadVector(w);
+                var expect = mathspan.sll(x.ToSpan().ReadOnly(), shift).LoadVector(w);
                 Claim.eq(actual,expect);
 
             }
@@ -1302,6 +1302,66 @@ namespace Z0
                 var actual = ginx.vand(vX,vY);
                 Claim.eq(expect,actual);
                 
+            }
+        }
+
+        protected void vsrlv_check<T>(N128 w, T t = default)
+            where T : unmanaged
+        {
+            var shiftrange = (default(T),convert<int,T>(bitsize(t) - 1));
+            var buffer = DataBlocks.alloc<T>(w);
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var x = Random.CpuVector<T>(w);
+                var offsets = Random.CpuVector<T>(w, shiftrange);
+                var actual = ginx.vsrlv(x,offsets);
+                var expect = ginx.vload(w,mathspan.srlv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
+                Claim.eq(expect, actual);
+            }
+        }
+
+        protected void vsrlv_check<T>(N256 w, T t = default)
+            where T : unmanaged
+        {
+            var shiftrange = (default(T),convert<int,T>(bitsize(t) - 1));
+            var buffer = DataBlocks.alloc<T>(w);
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var x = Random.CpuVector<T>(w);
+                var offsets = Random.CpuVector<T>(w, shiftrange);
+                var actual = ginx.vsrlv(x,offsets);
+                var expect = ginx.vload(w,mathspan.srlv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
+                Claim.eq(expect, actual);
+            }
+        }
+
+        protected void vsllv_check<T>(N128 w, T t = default)
+            where T : unmanaged
+        {
+            var shiftrange = (default(T),convert<int,T>(bitsize(t) - 1));
+            var buffer = DataBlocks.alloc<T>(w);
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var x = Random.CpuVector<T>(w);
+                var offsets = Random.CpuVector<T>(w, shiftrange);
+                var actual = ginx.vsllv(x,offsets);
+                var expect = ginx.vload(w,mathspan.sllv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
+                Claim.eq(expect, actual);
+            }
+        }
+
+        protected void vsllv_check<T>(N256 w, T t = default)
+            where T : unmanaged
+        {
+            var shiftrange = (default(T),convert<int,T>(bitsize(t) - 1));
+            var buffer = DataBlocks.alloc<T>(w);
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var x = Random.CpuVector<T>(w);
+                var offsets = Random.CpuVector<T>(w, shiftrange);
+                var actual = ginx.vsllv(x,offsets);
+                var expect = ginx.vload(w,mathspan.sllv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
+                Claim.eq(expect, actual);
             }
         }
 
@@ -1422,7 +1482,7 @@ namespace Z0
 
             counter.Start();
             for(var i=0; i<CycleCount; i++, opcount += cellcount)
-                vblock.xor(xb, yb, zb);
+                ginx.vxor(xb, yb, zb);
             counter.Stop();
             Benchmark(opname, counter,opcount);
         }

@@ -10,16 +10,6 @@ namespace Z0
 
     public class t_sb_pop : t_sb<t_sb_pop>
     {                
-        public void sb_pop_bitstore()
-        {
-            for(var i=0; i< SampleSize; i++)
-            {
-                var src = Random.Next<ulong>();
-                var pc1 = BitStore.pop(src);
-                var pc2 = Bits.pop(src);
-                Claim.eq(pc1,pc2);
-            }
-        }
 
         public void sb_pop_popcnt()
         {

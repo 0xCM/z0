@@ -49,8 +49,5 @@ namespace Z0
                 result &= vnonz(n, in skip(in a, offset));
             return result;
         }
-
-
-
     }
 }

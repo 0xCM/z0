@@ -11,14 +11,17 @@ namespace Z0
 
     partial class mathspan
     {
+        [MethodImpl(Inline)]
         public static Span<T> add<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {
-            for(var i=0; i< length(lhs,rhs); i++)
+            var count = length(lhs,rhs);
+            for(var i=0; i < count; i++)
                 dst[i] = gmath.add(lhs[i],rhs[i]);
             return dst;
         }
 
+        [MethodImpl(Inline)]
         public static Span<T> add<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged        
         {
@@ -30,30 +33,17 @@ namespace Z0
         /// <summary>
         /// Adds a scalar value to each element of the source span in-place
         /// </summary>
-        /// <param name="xs">The source span</param>
+        /// <param name="src">The source span</param>
         /// <param name="scalar">The scalar value</param>
         /// <typeparam name="T">The span element type</typeparam>
-        public static Span<T> add<T>(Span<T> xs, T scalar)
+        [MethodImpl(Inline)]
+        public static Span<T> add<T>(Span<T> src, T scalar)
             where T : unmanaged
         {
-            for(var i=0; i< xs.Length; i++)
-                xs[i] = gmath.add(xs[i],scalar);
-            return xs;
+            for(var i=0; i< src.Length; i++)
+                src[i] = gmath.add(src[i],scalar);
+            return src;
         }
 
-        /// <summary>
-        /// Adds a scalar value to each element of the source span in-place
-        /// </summary>
-        /// <param name="xs">The source span</param>
-        /// <param name="scalar">The scalar value</param>
-        /// <typeparam name="T">The span element type</typeparam>
-        public static NatBlock<N,T> add<N,T>(in NatBlock<N,T> xs, T scalar)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-        {
-            for(var i=0; i< xs.Length; i++)
-                xs[i] = gmath.add(xs[i],scalar);
-            return xs;
-        }
     }
 }

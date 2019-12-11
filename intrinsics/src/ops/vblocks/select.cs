@@ -59,24 +59,5 @@ namespace Z0
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
                 select(n, in skip(in a, offset), in skip(in b, offset), in skip(in c, offset), ref seek(ref z, offset));
         }
-
-        [MethodImpl(Inline)]
-        public static void select<T>(in ConstBlock128<T> xb, in ConstBlock128<T> yb, in ConstBlock128<T> zb, in Block128<T> dst)
-            where T : unmanaged
-        {
-            var count = zb.BlockCount;
-            for(var block=0; block< count; block++)
-                vstore(ginx.vselect(xb.LoadVector(block), yb.LoadVector(block), zb.LoadVector(block)), ref dst.BlockRef(block));                             
-        } 
-
-        [MethodImpl(Inline)]
-        public static void select<T>(in ConstBlock256<T> xb, in ConstBlock256<T> yb, in ConstBlock256<T> zb, in Block256<T> dst)
-            where T : unmanaged
-        {
-            var count = zb.BlockCount;
-            for(var block=0; block< count; block++)
-                vstore(ginx.vselect(xb.LoadVector(block), yb.LoadVector(block), zb.LoadVector(block)), ref dst.BlockRef(block));                             
-        } 
     }
-
 }
