@@ -47,21 +47,21 @@ namespace Z0
             => Data.CellWidth;
 
         [MethodImpl(Inline)]
-        public ref readonly BitIndex Index(BitPos pos)
+        public ref readonly BitIndex Index(uint pos)
             => ref Data.Index(pos);
 
-        public ref readonly BitIndex this[BitPos pos]
+        public ref readonly BitIndex this[uint pos]
         {
             [MethodImpl(Inline)]
             get => ref Data.Index(pos);
         }
 
         [MethodImpl(Inline)]
-        public ref readonly uint Cell(BitPos pos)
+        public ref readonly uint Cell(uint pos)
             => ref Data.Cell(pos);
 
         [MethodImpl(Inline)]
-        public ref readonly byte Offset(BitPos pos)
+        public ref readonly byte Offset(uint pos)
             => ref Data.Offset(pos);
     }
 }

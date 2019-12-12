@@ -41,7 +41,7 @@ namespace Z0
                     }
                    
                    var offset = (byte)(spec.CellWidth - segbits);
-                   var pos = BitCellIndex<T>.Define((ushort)seg,offset);
+                   var pos = BitPos<T>.Define((ushort)seg,offset);
                    yield return  new BitCellMap(pos.Segment, pos.Offset, pos.LinearIndex, row, col);
                 }
 

@@ -117,18 +117,18 @@ namespace Z0
             => Indices.Length;
 
         [MethodImpl(Inline)]
-        public ref readonly BitIndex Index(BitPos pos)
+        public ref readonly BitIndex Index(uint pos)
             => ref Indices[pos];
 
         [MethodImpl(Inline)]
-        public ref readonly uint Cell(BitPos pos)
+        public ref readonly uint Cell(uint pos)
             => ref Index(pos).CellIndex;
 
         [MethodImpl(Inline)]
-        public ref readonly byte Offset(BitPos pos)
+        public ref readonly byte Offset(uint pos)
             => ref Index(pos).CellOffset;
 
-        public ref readonly BitIndex this[BitPos pos]
+        public ref readonly BitIndex this[uint pos]
         {
             [MethodImpl(Inline)]
             get => ref Index(pos);

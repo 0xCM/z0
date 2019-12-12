@@ -7,11 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+    using System.Collections.Generic;
 
     using static zfunc;
-    using BG = Z0.BitGrid;
 
-    public static class BitGridRandX
+    using BG = Z0.BitGrid;
+    using BC = Z0.BitCells;
+    using BM = Z0.BitMatrix;
+    using BV = Z0.BitVector;
+
+    partial class BitRng
     {   
         /// <summary>
         /// Creates a 16-bit generic bitgrid
@@ -524,5 +529,399 @@ namespace Z0
             random.Fill(dst.CellCount, ref dst.Head);
             return ref dst;            
         }
+
+        /// <summary>
+        /// Produces a stream of bit positions
+        /// </summary>
+        /// <param name="mincells">The minimum number of cells</param>
+        /// <param name="maxcells">The maximum number of cells</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        public static IEnumerable<BitPos> BitPositions<T>(this IPolyrand random, ushort mincells, ushort maxcells)
+            where T : unmanaged
+        {
+            var s2 = random.Stream(closed(mincells,maxcells)).GetEnumerator();            
+            var s3 = random.Stream<byte>(closed((byte)0, (byte)bitsize<T>())).GetEnumerator();
+            while(true && s2.MoveNext() && s3.MoveNext())
+                yield return BitPos.FromCellIndex((byte)bitsize<T>(), s2.Current, s3.Current);
+        }
+
+        /// <summary>
+        /// Produces a stream of bit positions
+        /// </summary>
+        /// <param name="capacity">The cell bit width</param>
+        /// <param name="mincells">The minimum number of cells</param>
+        /// <param name="maxcells">The maximum number of cells</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        public static IEnumerable<BitPos> BitPositions(this IPolyrand random, byte capacity, ushort mincells, ushort maxcells)
+        {
+            var s2 = random.Stream(closed(mincells,maxcells)).GetEnumerator();            
+            var s3 = random.Stream<byte>(closed((byte)0, capacity)).GetEnumerator();
+            while(true && s2.MoveNext() && s3.MoveNext())
+                yield return BitPos.FromCellIndex(capacity, s2.Current, s3.Current);
+        }
+
+        /// <summary>
+        /// Produces a natural bitcell container
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The number of bits to cover</param>
+        /// <typeparam name="N">The length type</typeparam>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitCells<N,T> BitCells<N,T>(this IPolyrand random)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => Z0.BitCells.load<N,T>(random.Stream<T>().ToSpan(BitCalcs.gridcells<N,N1,T>()));
+
+        /// <summary>
+        /// Produces a generic bitcell container over a specified number of bits
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="bitcount">The number of bits to cover</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitCells<T> BitCells<T>(this IPolyrand random, int bitcount)
+            where T : unmanaged
+                => BC.load<T>(random.Stream<T>().ToSpan(BC.cellcount<T>(bitcount)), bitcount);
+
+        /// <summary>
+        /// Produces a generic bitcell container over a random number of bits
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="minbits">The minimum bit count</param>
+        /// <param name="maxbits">The maximum bit count</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitCells<T> BitCells<T>(this IPolyrand random, int minbits, int maxbits)
+            where T : unmanaged
+        {
+            var len = random.Next<int>(minbits,++maxbits);
+            return BC.literals<T>(random.Stream<T>().TakeArray(BC.cellcount<T>(len),len));
+        }
+
+        /// <summary>
+        /// Produces a generic bitcell container over a random number of bits
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="range">The range of potential bitvector lengths</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitCells<T> BitCells<T>(this IPolyrand random, Interval<int> range)
+            where T : unmanaged
+                => random.BitCells<T>(range.Left, range.Right);                    
+
+         /// <summary>
+        /// Produces a generic bitmatrix predicated on a primal type
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <typeparam name="T">The defining primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitMatrix<T> BitMatrix<T>(this IPolyrand random)
+            where T : unmanaged
+        {                        
+            var bytes = math.square(Z0.BitMatrix<T>.N) >> 3;
+            var data = random.Span<byte>((int)bytes);
+            return BM.load(data.As<byte,T>());
+        }
+
+        [MethodImpl(Inline)]
+        public static ref BitMatrix<T> BitMatrix<T>(this IPolyrand random, ref BitMatrix<T> dst)
+            where T : unmanaged
+        {                        
+            random.Fill((int)Z0.BitMatrix<T>.N, ref dst.Head);
+            return ref dst;            
+        }
+
+        /// <summary>
+        /// Produces a 4x4 bitmatrix from a random source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix4 BitMatrix4(this IPolyrand random)
+            => BM.primal(n4,random.Next<ushort>());
+
+        /// <summary>
+        /// Produces a 4x4 bitmatrix from a random source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix4 BitMatrix(this IPolyrand random, N4 n)
+            => BM.primal(n,random.Next<ushort>());
+
+        /// <summary>
+        /// Produces a 8x8 bitmatrix from a random source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix8 BitMatrix8(this IPolyrand random)
+            => BM.primal(n8,random.Next<ulong>());
+
+        /// <summary>
+        /// Produces a 8x8 bitmatrix from a random source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix8 BitMatrix(this IPolyrand random, N8 n)
+            => BM.primal(n,random.Next<ulong>());
+
+        /// <summary>
+        /// Produces a 16x16 bitmatrix from a random source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix16 BitMatrix16(this IPolyrand random)
+            => BM.primal(n16,random.Array<ushort>(16));
+
+        /// <summary>
+        /// Produces a 16x16 bitmatrix from a random source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix16 BitMatrix(this IPolyrand random, N16 n)
+            => BM.primal(n,random.Array<ushort>(16));
+
+        /// <summary>
+        /// Produces a 32x32 bitmatrix from a random source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix32 BitMatrix32(this IPolyrand random)
+            => BM.primal(n32,random.Array<uint>(32));
+
+        /// <summary>
+        /// Produces a 32x32 bitmatrix from a random source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix32 BitMatrix(this IPolyrand random, N32 n)
+            => BM.primal(n,random.Array<uint>(32));
+
+        /// <summary>
+        /// Produces a 64x64 bitmatrix from a random source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix64 BitMatrix64(this IPolyrand random)
+            => BM.primal(n64,random.Array<ulong>(64));        
+
+        /// <summary>
+        /// Produces a 64x64 bitmatrix from a random source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix64 BitMatrix(this IPolyrand random, N64 n)
+            => BM.primal(n,random.Array<ulong>(64));        
+    
+        /// <summary>
+        /// Produces a generic bitmatrix of natural dimensions
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The matrix order</param>
+        /// <param name="rep">A scalar representative</param>
+        /// <typeparam name="N">The order type</typeparam>
+        /// <typeparam name="T">The scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitMatrix<M,N,T> BitMatrix<M,N,T>(this IPolyrand random, M m = default, N n = default, T zero = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BM.load(m, n, random.Span<T>(BitGridSpec.define(m,n,default(T)).TotalCells));
+
+        /// <summary>
+        /// Produces an generic bitmatrix of natural order
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The matrix order</param>
+        /// <typeparam name="N">The order type</typeparam>
+        /// <typeparam name="T">The scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitMatrix<N,T> BitMatrix<N,T>(this IPolyrand random, N n = default, T zero = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BM.load(n,random.Span<T>(Z0.BitMatrix<N,T>.TotalCellCount));        
+
+        
+        /// <summary>
+        /// Produces a 4-bit primal bitvector predicated on a random source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The primal bitvector selector</param>
+        [MethodImpl(Inline)]
+        public static BitVector4 BitVector(this IPolyrand random, N4 n)
+            => random.Next<byte>(0,17);
+
+        /// <summary>
+        /// Produces an 8-bit primal bitvector predicated on a random source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The primal bitvector selector</param>
+        [MethodImpl(Inline)]
+        public static BitVector8 BitVector(this IPolyrand random, N8 n)
+            => random.Next<byte>();
+
+        /// <summary>
+        /// Produces an 8-bit primal bitvector of a specified maximial effective width
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The primal bitvector selector</param>
+        /// <param name="wmax">The effecive width</param>
+        [MethodImpl(Inline)]
+        public static BitVector8 BitVector(this IPolyrand random, N8 n, int wmax)
+        {
+            var v = random.Next<byte>();
+            var clamp = natval(n) - (int)math.min(natval(n), (uint)wmax);
+            return (v >>= clamp);
+        }
+
+        /// <summary>
+        /// Produces a 16-bit primal bitvector
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The primal bitvector selector</param>
+        [MethodImpl(Inline)]
+        public static BitVector16 BitVector(this IPolyrand random, N16 n)
+            => random.Next<ushort>();
+
+        /// <summary>
+        /// Produces a 16-bit primal bitvector of a specified maximial effective width
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The primal bitvector selector</param>
+        /// <param name="wmax">The effected width</param>
+        [MethodImpl(Inline)]
+        public static BitVector16 BitVector(this IPolyrand random, N16 n, int wmax)
+        {
+            var v = random.Next<ushort>();
+            var clamp = natval(n) - (int)math.min(natval(n), (uint)wmax);
+            return (v >>= clamp);
+        }
+
+        /// <summary>
+        /// Produces a 32-bit primal bitvector
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The primal bitvector selector</param>
+        [MethodImpl(Inline)]
+        public static BitVector32 BitVector(this IPolyrand random, N32 n)
+            => random.Next<uint>();
+
+        /// <summary>
+        /// Produces a 32-bit primal bitvector of a specified maximial effective width
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The primal bitvector selector</param>
+        /// <param name="wmax">The maximum effected width</param>
+        [MethodImpl(Inline)]
+        public static BitVector32 BitVector(this IPolyrand random, N32 n, int wmax)
+        {
+            var v = random.Next<uint>();
+            var clamp = natval(n) - (int)math.min(natval(n), (uint)wmax);
+            return (v >>= clamp);
+        }
+
+        /// <summary>
+        /// Produces a 64-bit primal bitvector
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The primal bitvector selector</param>
+        [MethodImpl(Inline)]
+        public static BitVector64 BitVector(this IPolyrand random, N64 n)
+            => random.Next<ulong>();
+
+        /// <summary>
+        /// Produces a 64-bit primal bitvector of maximal effective width
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The primal bitvector selector</param>
+        /// <param name="wmax">The maximum effected width</param>
+        [MethodImpl(Inline)]
+        public static BitVector64 BitVector(this IPolyrand random, N64 n, int wmax)
+        {
+            var v = random.Next<ulong>();
+            var clamp = natval(n) - (int)math.min(natval(n), (uint)wmax);
+            return (v >>= clamp);
+        }
+
+        /// <summary>
+        /// Produces a 128-bit primal bitvector
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The primal bitvector selector</param>
+        [MethodImpl(Inline)]
+        public static BitVector128<N128,ulong> BitVector(this IPolyrand random, N128 n)
+            => random.CpuVector<ulong>(n);
+
+        /// <summary>
+        /// Produces a stream of random 4-bit bitvectors
+        /// </summary>
+        /// <param name="random">The random source</param>
+        public static IRandomStream<BitVector4> BitVectors(this IPolyrand random, N4 n)
+        {
+            IEnumerable<BitVector4> produce()
+            {            
+                while(true)
+                    yield return random.BitVector(n4);
+            }
+
+            return stream(produce(), random.RngKind);            
+        }
+
+        /// <summary>
+        /// Produces a generic bitvector
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <typeparam name="T">The underlying primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<T> BitVector<T>(this IPolyrand random)        
+            where T : unmanaged
+                => random.Next<T>();
+
+        /// <summary>
+        /// Produces a generic bitvector of a specified maximum effective width
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <typeparam name="T">The underlying primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<T> BitVector<T>(this IPolyrand random, int wmax)        
+            where T : unmanaged
+        {
+            var v = random.Next<T>();
+            var clamp = bitsize<T>() - math.min(bitsize<T>(), wmax);
+            return gmath.srl(v,clamp);
+        }    
+
+        /// <summary>
+        /// Produces a natural bitvector
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The bit width selector</param>
+        /// <typeparam name="N">The bit width type</typeparam>
+        /// <typeparam name="T">The underlying primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> BitVector<N,T>(this IPolyrand random, N n = default, T t = default)        
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            var v = random.Next<T>();
+            int clamp = bitsize<T>() - math.min(bitsize<T>(), natval(n));
+            return gmath.srl(v,clamp);
+        }    
+
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> BitVector<N,T>(this IPolyrand random, N128 block, N n = default, T t = default)        
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            var w = Z0.BitVector128<N,T>.MaxWidth;
+            var v = random.CpuVector<T>(w);
+            var clamp = w - math.min(w, natval(n));
+            return ginx.vsrlx(v,(byte)clamp);
+        }
+
+
+        [MethodImpl(Inline)]
+        static IRandomStream<T> stream<T>(IEnumerable<T> src, RngKind rng)
+            where T : unmanaged
+                =>  RandomStream.From(src,rng);
     }
 }

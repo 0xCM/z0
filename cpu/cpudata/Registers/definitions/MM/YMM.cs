@@ -266,7 +266,7 @@ namespace Z0
         /// <summary>
         /// Manipulates a position-identified bit
         /// </summary>
-        public Bit this[BitPos bitpos]
+        public Bit this[uint bitpos]
         {
             [MethodImpl(Inline)]
             get => GetBit(bitpos);   
@@ -279,7 +279,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl]
-        public Bit GetBit(BitPos pos)
+        public Bit GetBit(uint pos)
         {
             ref readonly var index = ref BitMap<ulong>()[pos];
             ref var cell  = ref Cell<ulong>(index.CellIndex);
@@ -292,7 +292,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         /// <param name="value">The bit value</param>
         [MethodImpl]
-        public void SetBit(BitPos pos, Bit value)
+        public void SetBit(uint pos, Bit value)
         {
             ref readonly var index = ref BitMap<ulong>()[pos];
             ref var cell  = ref Cell<ulong>(index.CellIndex);

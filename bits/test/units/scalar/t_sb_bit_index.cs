@@ -16,8 +16,8 @@ namespace Z0
     {
         public void bit_index_inc()
         {
-            var pos = BitCellIndex<byte>.Zero;
-            BitCellIndex<byte> max = (1024, 35);
+            var pos = BitPos<byte>.Zero;
+            BitPos<byte> max = (1024, 35);
             while(pos < max)
                 pos++;
 
@@ -27,8 +27,8 @@ namespace Z0
 
         public void bit_index_dec()
         {
-            var min = BitCellIndex<byte>.Zero;
-            BitCellIndex<byte> pos = (1024, 35);
+            var min = BitPos<byte>.Zero;
+            BitPos<byte> pos = (1024, 35);
             while(pos > min)
                 pos--;
 
@@ -51,7 +51,7 @@ namespace Z0
                 for(var j=0; j< add; j++)
                     pos++;
                 
-                Claim.eq(pos.LinearIndex, posY.LinearIndex);
+                Claim.eq(pos.BitIndex, posY.BitIndex);
             }            
         }
 
@@ -61,14 +61,14 @@ namespace Z0
         /// <param name="segMin">The minimum segment length</param>
         /// <param name="segMax">The maximum segment length</param>
         /// <typeparam name="T">The position's type</typeparam>
-        IEnumerable<BitCellIndex<T>> BitPositions<T>(ushort segMin, ushort segMax)
+        IEnumerable<BitPos> BitPositions<T>(ushort segMin, ushort segMax)
             where T : unmanaged
         {
-            var tBits = Unsafe.SizeOf<T>()*8;
+            var tBits = bitsize<T>();
             var s2 = Random.Stream(closed(segMin,segMax)).GetEnumerator();            
             var s3 = Random.Stream<byte>(closed((byte)0, (byte)tBits)).GetEnumerator();
             while(true && s2.MoveNext() && s3.MoveNext())
-                yield return BitCellIndex<T>.Define(s2.Current, s3.Current);
+                yield return BitPos.FromCellIndex((byte)bitsize<T>(),s2.Current, s3.Current);
         }
     }
 }

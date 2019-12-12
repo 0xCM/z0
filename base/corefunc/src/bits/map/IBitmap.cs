@@ -36,25 +36,25 @@ namespace Z0
         /// Gets the 0-based index of the cell containing an identified bit
         /// </summary>
         /// <param name="pos">The 0-based linear index of the bit</param>
-        ref readonly uint Cell(BitPos pos);
+        ref readonly uint Cell(uint pos);
 
         /// <summary>
         /// Gets the cell-relative offset of the cell containing an identified bit
         /// </summary>
         /// <param name="pos">The 0-based linear index of the bit</param>
-        ref readonly byte Offset(BitPos pos);
+        ref readonly byte Offset(uint pos);
 
         /// <summary>
         /// Get the index for a bit at a specified position
         /// </summary>
         /// <param name="pos">The 0-based linear index of the bit</param>
-        ref readonly BitIndex this[BitPos pos] {get;}
+        ref readonly BitIndex this[uint pos] {get;}
 
         /// <summary>
         /// Gets the index for a bit at a specified position
         /// </summary>
         /// <param name="pos">The 0-based linear index of the bit</param>
-        ref readonly BitIndex Index(BitPos pos);
+        ref readonly BitIndex Index(uint pos);
 
     }
 

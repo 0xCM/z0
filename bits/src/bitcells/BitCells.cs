@@ -21,7 +21,7 @@ namespace Z0
         /// <summary>
         /// Correlates linear bit positions and storage segments
         /// </summary>
-        readonly BitCellIndex<T>[] BitMap;
+        readonly BitPos<T>[] BitMap;
 
         /// <summary>
         /// The maximum number of bits that can be represented by the vector
@@ -260,7 +260,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        readonly ref readonly BitCellIndex<T> Location(int pos)
+        readonly ref readonly BitPos<T> Location(int pos)
             => ref BitMap[pos];
 
         /// <summary>
@@ -268,7 +268,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The segmented bit position</param>
         [MethodImpl(Inline)]
-        public ref T Segment(in BitCellIndex<T> pos)
+        public ref T Segment(in BitPos<T> pos)
             => ref data[pos.Segment];
 
         /// <summary>
@@ -279,7 +279,7 @@ namespace Z0
         readonly Span<T> Segments(int pos)
             => data.Slice(0, Location(pos).Segment - 1);
 
-        T Extract(in BitCellIndex<T> first, in BitCellIndex<T> last, bool describe = false)
+        T Extract(in BitPos<T> first, in BitPos<T> last, bool describe = false)
         {
 
             var sameSeg = first.Segment == last.Segment;
