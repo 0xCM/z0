@@ -28,7 +28,7 @@ namespace Z0
         {
             var dst = BitMatrix16.Alloc();
             for(var row = 0; row<perm.Length; row++)
-                dst[row,perm[row]] = Bit.On;
+                dst[row,perm[row]] = bit.On;
             return dst;
         }
 

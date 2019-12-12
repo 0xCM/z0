@@ -8,7 +8,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_perm : t_sb<t_perm>
+    public class t_sb_perm : t_sb<t_sb_perm>
     {
         public void perm_create()
         {

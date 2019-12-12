@@ -272,7 +272,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The 0-based absolute bit position</param>
         [MethodImpl(Inline)]
-        void SetBit(int pos, Bit bit)
+        void SetBit(int pos, bit bit)
         {
             if(pos < BitWidth)
                 data = BitMask.set(data, (byte)pos, bit);

@@ -262,7 +262,7 @@ namespace Z0
             => b;
 
         /// <summary>
-        /// Computes the bitwise AND between the operands
+        /// Computes c = a & b
         /// </summary>
         /// <param name="a">The left bit</param>
         /// <param name="b">The right bit</param>
@@ -271,7 +271,7 @@ namespace Z0
             => Wrap(a.state & b.state);
 
         /// <summary>
-        /// Computes the bitwise OR between the operands
+        /// Computes c = a | b
         /// </summary>
         /// <param name="a">The left bit</param>
         /// <param name="b">The right bit</param>
@@ -280,7 +280,7 @@ namespace Z0
             => Wrap(a.state | b.state);
 
         /// <summary>
-        /// Computes the bitwise XOR between the operands
+        /// Computes c = a ^ b
         /// </summary>
         /// <param name="a">The left bit</param>
         /// <param name="b">The right bit</param>
@@ -289,7 +289,7 @@ namespace Z0
             => Wrap(a.state ^ b.state);
 
         /// <summary>
-        /// Inverts the state of the source bit
+        /// Computes c := ~a = !a
         /// </summary>
         /// <param name="a">The source bit</param>
         [MethodImpl(Inline)]
@@ -297,7 +297,7 @@ namespace Z0
             => SafeWrap(~a.state);
 
         /// <summary>
-        /// Evaluates the logical NAND of two bits, which is true iff one or both bits are off
+        /// Computes c := ~ (a & b)
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
@@ -306,8 +306,7 @@ namespace Z0
             => SafeWrap(~(a.state & b.state));
 
         /// <summary>
-        /// Evaluates the logical XNOR of two bits, also known as the logical biconditional and which 
-        /// in practice is equivalent to value-based equality
+        /// Computes c := ~ (a | b)
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
@@ -317,8 +316,7 @@ namespace Z0
             => SafeWrap(~(a.state | b.state));
 
         /// <summary>
-        /// Evaluates the logical XNOR of two bits, also known as the logical biconditional and which 
-        /// in practice is equivalent to value-based equality
+        /// Computes c := ~ (a ^ b)
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
@@ -328,44 +326,44 @@ namespace Z0
             => SafeWrap(~(a.state ^ b.state));
 
         /// <summary>
-        /// Computes and(a,not(b))
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        [MethodImpl(Inline)]
-        public static bit andnot(bit a, bit b)
-            => SafeWrap(a.state & ~b.state);
-
-        /// <summary>
-        /// Evaluates the implication a -> b := a | ~b
+        /// Computes c := a -> b := a | ~b
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Material_conditional</remarks>
         [MethodImpl(Inline)]
-        public static bit imply(bit a, bit b)
+        public static bit impl(bit a, bit b)
             => or(a,  not(b));
 
         /// <summary>
-        /// Evaluates the nonimplication a <- b := ~(a | ~b) = ~a & b
+        /// Computes the nonimplication c := a < -- b := ~(a | ~b) = ~a & b
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static bit notimply(bit a, bit b)
+        public static bit nonimpl(bit a, bit b)
             => and(not(a),  b);
 
+        /// <summary>
+        /// Computes the converse implication c := ~a | b
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static bit cimply(bit a, bit b)
+        public static bit cimpl(bit a, bit b)
             => or(not(a),  b);
 
+        /// <summary>
+        /// Computes the converse nonimplication c := a & ~b
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static bit cnotimply(bit a, bit b)
+        public static bit cnonimpl(bit a, bit b)
             => and(a, not(b));
 
         /// <summary>
-        /// Evaluates the ternary select where the second operand is returned if the first 
-        /// operand is true and otherwise the third operand is returned: a ? b : c
+        /// Computes the ternary select s := a ? b : c = (a & b) | (~a & c)
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
@@ -373,13 +371,6 @@ namespace Z0
         public static bit select(bit a, bit b, bit c)
             => SafeWrap((a.state & b.state) | (~a.state & c.state));
 
-        /// <summary>
-        /// Computes xor(a,1)
-        /// </summary>
-        /// <param name="a">The operand</param>
-        [MethodImpl(Inline)]
-        public static bit xor1(bit a)
-            => !(a ^ On);
 
         [MethodImpl(Inline)]
         public bool Equals(bit b)

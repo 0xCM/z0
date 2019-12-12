@@ -166,7 +166,7 @@ namespace Z0
             where T : unmanaged;        
 
 
-        Bit this[uint r] {get;}            
+        bit this[uint r] {get;}            
     }
 
    

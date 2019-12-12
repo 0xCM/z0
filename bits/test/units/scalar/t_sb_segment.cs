@@ -8,7 +8,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_sb_bitseg : t_sb<t_sb_bitseg>
+    public class t_sb_segment : t_sb<t_sb_segment>
     {
         public void sb_range_basecase()
         {

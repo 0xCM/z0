@@ -97,7 +97,7 @@ namespace Z0
         public void nbm_create_7x9x8()
         {
             var m1 = BitMatrix.alloc<N7,N9,byte>();
-            m1.Fill(Bit.On);
+            m1.Fill(bit.On);
             var fmt = m1.Format().RemoveWhitespace();
             Claim.eq(BitMatrix<N7,N9,byte>.TotalBitCount, fmt.Length);    
 

@@ -18,7 +18,7 @@ namespace Z0
         static readonly XOrGate xorg = Gates.xor();
 
         [MethodImpl(Inline)]
-        public (Bit s, Bit c) Send(Bit a, Bit b)        
+        public (bit s, bit c) Send(bit a, bit b)        
             => (xorg.Send(a, b), andg.Send(a, b));
     }
 

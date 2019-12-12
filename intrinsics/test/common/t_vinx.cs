@@ -575,7 +575,7 @@ namespace Z0
                 var ybs = BitString.alloc(xbs.Length);
                 for(var j = 0; j<xbs.Length; j++)
                     if(!xbs[j])
-                        ybs[j] = Bit.On;
+                        ybs[j] = bit.On;
 
                 var y = ybs.ToCpuVector<T>(n128);
 
@@ -598,7 +598,7 @@ namespace Z0
                 var ybs = BitString.alloc(xbs.Length);
                 for(var j = 0; j<xbs.Length; j++)
                     if(!xbs[j])
-                        ybs[j] = Bit.On;
+                        ybs[j] = bit.On;
 
                 var y = ybs.ToCpuVector<T>(n256);
 

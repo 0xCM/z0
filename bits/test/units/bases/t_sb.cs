@@ -432,7 +432,7 @@ namespace Z0
                 var src = Random.Next<T>();
                 var unpacked = gbits.unpack(src, _dst);
                 for(var j = 0; j<unpacked.Length; j++)
-                    Claim.eq((Bit)gbits.test(src, j), (Bit)unpacked[j]);
+                    Claim.eq(gbits.test(src, j), (bit)unpacked[j]);
                 
                 var dst = default(T);
                 gbits.pack(unpacked, ref dst);

@@ -6,17 +6,24 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;
-
-    /// <summary>
-    /// Defines primary api for negotiating bitfields predicated on enumerations
-    /// </summary>
-    public static class BitField
+    using static BitFieldKey;
+    
+    enum BitFieldKey : byte
     {
-        public static BitField<T> Define<T>(ulong data)
-            where T : unmanaged, Enum
-                => BitField<T>.Define(data);
+        Part0, Part1, Part2, Part3,
+        Part4, Part5, Part6, Part7
+    }
+
+    public class t_vcpu_bitfield : t_vcpu<t_vcpu_bitfield>
+    {
+        public void vcpu_bitfield_basecases()
+        {
+            
+        }
+
     }
 
 }

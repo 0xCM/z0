@@ -46,7 +46,7 @@ namespace Z0
         /// <summary>
         /// Returns a bit indicating whether the coefficient for x^i is 1 or 0
         /// </summary>
-        public Bit this[int i]
+        public bit this[int i]
         {
             [MethodImpl(Inline)]
             get => gbits.test(data,i);

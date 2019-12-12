@@ -193,7 +193,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The source value</param>
         [MethodImpl(Inline)]
-        public void Fill(Bit value)
+        public void Fill(bit value)
         {
             if(value)
                 Data.Fill(maxval<T>());

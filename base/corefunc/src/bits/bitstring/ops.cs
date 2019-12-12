@@ -34,7 +34,7 @@ namespace Z0
             var lastix = len - 1;
             Span<byte> dst = new byte[len];
             for(var i=0; i<= lastix; i++)
-                dst[lastix - i] = src[i] == Bit.Zero ? (byte)0 : (byte)1;
+                dst[lastix - i] = src[i] == bit.Zero ? (byte)0 : (byte)1;
             return new BitString(dst);                        
         }
 

@@ -77,7 +77,7 @@ namespace Z0
         /// <summary>
         /// Queries/Manipulates the source at the bit-level
         /// </summary>
-        public Bit this[ByteSize offset, byte pos]        
+        public bit this[ByteSize offset, byte pos]        
         {
             [MethodImpl(Inline)]
             get => BitMask.test(Bytes[offset], pos);

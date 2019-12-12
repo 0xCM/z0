@@ -40,7 +40,7 @@ namespace Z0
             return default;
         }
 
-        public Bit this[uint r]
+        public bit this[uint r]
         {
             [MethodImpl(Inline)]
             get

@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-
     using static zfunc;
 
     /// <summary>
@@ -15,7 +14,6 @@ namespace Z0
     /// </summary>    
     public readonly struct Imm8 : IImm<Imm8,byte>
     {            
-
         /// <summary>
         /// Defines an 8-bit immediate from an 8-bit source value
         /// </summary>
@@ -30,17 +28,17 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static Imm8 From(
-            Bit b0 = default(Bit), Bit b1 = default(Bit), Bit b2 = default(Bit), Bit b3 = default(Bit), 
-            Bit b4 = default(Bit), Bit b5 = default(Bit), Bit b6 = default(Bit), Bit b7 = default(Bit))
+            bit b0 = default(bit), bit b1 = default(bit), bit b2 = default(bit), bit b3 = default(bit), 
+            bit b4 = default(bit), bit b5 = default(bit), bit b6 = default(bit), bit b7 = default(bit))
         {
-            byte dst = b0;
-            dst |= (byte)(b1 << 1);
-            dst |= (byte)(b2 << 2);
-            dst |= (byte)(b3 << 3);
-            dst |= (byte)(b4 << 4);
-            dst |= (byte)(b5 << 5);
-            dst |= (byte)(b6 << 6);
-            dst |= (byte)(b7 << 7);
+            byte dst = (byte)b0;
+            dst |= (byte)((byte)b1 << 1);
+            dst |= (byte)((byte)b2 << 2);
+            dst |= (byte)((byte)b3 << 3);
+            dst |= (byte)((byte)b4 << 4);
+            dst |= (byte)((byte)b5 << 5);
+            dst |= (byte)((byte)b6 << 6);
+            dst |= (byte)((byte)b7 << 7);
             return new Imm8(dst);
         }
 
@@ -80,7 +78,7 @@ namespace Z0
         /// Formats the immediate value as a bitstring
         /// </summary>
         [MethodImpl(Inline)]
-        public string FormatBits()
+        public string Formatbits()
             => Value.ToBitString().Format();
         
         /// <summary>
@@ -115,5 +113,4 @@ namespace Z0
         Imm8 IImm<Imm8,byte>.Redefine(byte src)
             => new Imm8(src);
     }
-
 }

@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_bitstring : t_sb<t_bitstring>
+    public class t_sb_bitstring : t_sb<t_sb_bitstring>
     {                
         public void bs_seq_8u()
             => bs_seq_check<byte>();
@@ -110,9 +110,9 @@ namespace Z0
                 for(var j=0; j<bs.Length; j++)
                 {
                     if(j != bs.Length - 1)
-                        Claim.eq(bs[j], Bit.Off);
+                        Claim.eq(bs[j], bit.Off);
                     else
-                        Claim.eq(bs[j], Bit.On);
+                        Claim.eq(bs[j], bit.On);
                 }
                 
                 if(i <= 63)

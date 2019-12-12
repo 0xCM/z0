@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_mul_128 : t_sb<t_mul_128>
+    public class t_sb_mul128 : t_sb<t_sb_mul128>
     {
 
         public void mul_no_overflow()

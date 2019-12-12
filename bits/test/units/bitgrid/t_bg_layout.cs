@@ -150,7 +150,7 @@ namespace Z0
             for(var i=0; i< m.RowCount; i++)
             {
                 for(var j=0; j<m.ColCount; j++)
-                    Claim.eq(m[i,j], Bit.On);
+                    Claim.eq(m[i,j], bit.On);
             }            
         }
 

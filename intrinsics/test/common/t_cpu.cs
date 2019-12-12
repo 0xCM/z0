@@ -37,7 +37,7 @@ namespace Z0
             => ref cpu.ymm(slot);
 
         [MethodImpl(Inline)]
-        protected Imm8 imm8(Bit? b0 = null, Bit? b1 = null, Bit? b2 = null, Bit? b3 = null,Bit? b4 = null, Bit? b5 = null, Bit? b6 = null, Bit? b7 = null)
+        protected Imm8 imm8(bit? b0 = null, bit? b1 = null, bit? b2 = null, bit? b3 = null,bit? b4 = null, bit? b5 = null, bit? b6 = null, bit? b7 = null)
             => Imm8.From(b0 ?? false, b1 ?? false, b2 ?? false, b3 ?? false, b4 ?? false, b5 ?? false, b6 ?? false, b7 ?? false);
 
         /// <summary>

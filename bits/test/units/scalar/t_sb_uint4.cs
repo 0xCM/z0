@@ -11,7 +11,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class UInt4Test : t_sb<UInt4Test>
+    public class t_sb_uint4 : t_sb<t_sb_uint4>
     {
 
         public void add_4u_check()
