@@ -237,14 +237,14 @@ namespace Z0
             }
         }
 
-        protected void sb_blsi_check<T>()
+        protected void sb_lsbx_check<T>()
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
             {
                 var src = Random.Next<T>();
-                var x = gbits.blsi(src);
-                var y = gmath.and(src,gmath.negate(src));
+                var x = gbits.lsbx(src);
+                var y = gmath.and(src, gmath.negate(src));
                 Claim.eq(x,y);
             }
         }
@@ -331,7 +331,7 @@ namespace Z0
             }
         }
 
-        protected void sb_blsr_check<T>()
+        protected void sb_lsboff_check<T>()
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)

@@ -81,7 +81,7 @@ namespace Z0
             var b1E = (byte)(xF + xF);
             var b1F = (byte)(xF + xF + 1);
 
-            return dinx.vparts(n256,
+            return vbuild.parts(n256,
                 b0,b1, b2,b3, b4,b5, b6,b7, b8,b9, bA,bB, bC,bD, bE,bF, b10,b11, b12,b13, b14,b15, b16,b17, b18,b19, b1A,b1B, b1C,b1D, b1E,b1F);
         }
 
@@ -136,24 +136,24 @@ namespace Z0
         public void vperm_4x32_128x32u_basecase()
         {
             var n = n128;
-            var src = dinx.vparts(n128,1,2,3,4);
+            var src = vbuild.parts(n128,1,2,3,4);
             var spec = Perm4.ABCD;
-            var y = dinx.vparts(n128,4,3,2,1);
+            var y = vbuild.parts(n128,4,3,2,1);
             var x = dinx.vperm4x32(src, Perm4.ABCD);
             Claim.eq(x, src);
 
-            y = dinx.vparts(n128,4,3,2,1);
+            y = vbuild.parts(n128,4,3,2,1);
             spec = Perm4.DCBA;
             x = dinx.vperm4x32(src,spec);
             Claim.eq(x, y); 
 
-            y = dinx.vparts(4u,3u,2u,1u);
+            y = vbuild.parts(4u,3u,2u,1u);
             spec = Perm4.DCBA;
             x = dinx.vperm4x32(src,spec);
             Claim.eq(x, y); 
 
-            Claim.eq(dinx.vperm4x32(dinx.vparts(0,1,2,3), Perm4.ADCB), dinx.vparts(0,3,2,1));
-            Claim.eq(dinx.vperm4x32(dinx.vparts(0,1,2,3), Perm4.DBCA), dinx.vparts(3,1,2,0));
+            Claim.eq(dinx.vperm4x32(vbuild.parts(0,1,2,3), Perm4.ADCB), vbuild.parts(0,3,2,1));
+            Claim.eq(dinx.vperm4x32(vbuild.parts(0,1,2,3), Perm4.DBCA), vbuild.parts(3,1,2,0));
 
         }
 
@@ -177,8 +177,8 @@ namespace Z0
 
         public void vperm_4x16_basecase()
         {
-            var id = dinx.vparts(n128,0,1,2,3,6,7,8,9);
-            Claim.eq(dinx.vperm4x16(dinx.vparts(n128,0,1,2,3,6,7,8,9), Perm4.ADCB, Perm4.ADCB), dinx.vparts(n128,0,3,2,1,6,9,8,7));
+            var id = vbuild.parts(n128,0,1,2,3,6,7,8,9);
+            Claim.eq(dinx.vperm4x16(vbuild.parts(n128,0,1,2,3,6,7,8,9), Perm4.ADCB, Perm4.ADCB), vbuild.parts(n128,0,3,2,1,6,9,8,7));
         }
 
         public void vperm_4x32_128x32u()
@@ -208,7 +208,7 @@ namespace Z0
                 var v2 = dinx.vperm4x32(v1,p);
 
                 // Permute vector manually
-                var v3 = dinx.vparts(v1s[p0],v1s[p1],v1s[p2],v1s[p3]);
+                var v3 = vbuild.parts(v1s[p0],v1s[p1],v1s[p2],v1s[p3]);
 
                 // Same?
                 Claim.eq(v3,v2);

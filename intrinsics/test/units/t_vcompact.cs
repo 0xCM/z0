@@ -11,13 +11,24 @@ namespace Z0
 
     public class t_vcompact : t_vinx<t_vcompact>
     {
+
+        public void vcompact_2x128x32u_128x16u()
+        {   
+            var w = n128;
+            var x = vbuild.vincrements(w, 5000u);
+            var y = vbuild.vincrements(w, 10000u);
+            var m1 = vbuild.parts(w,0, 1, 4, 5, 8, 9, 12, 13, 255, 255, 255, 255, 255, 255, 255, 255);
+            var m2 = vbuild.parts(w,255, 255, 255, 255, 255, 255, 255, 255, 0, 1, 4, 5, 8, 9, 12, 13);
+
+
+        }
         public void vcompact_2x128x64u_128x32u()
         {
             var n = n128;
-            var x0 = dinx.vparts(n, 25, 50);
-            var x1 = dinx.vparts(n, 75, 10);
+            var x0 = vbuild.parts(n, 25, 50);
+            var x1 = vbuild.parts(n, 75, 10);
             dinx.vcompact(x0,x1, out var dst);
-            var expect = dinx.vparts(n,25,50,75,10);
+            var expect = vbuild.parts(n,25,50,75,10);
             Claim.eq(expect,dst);
         }
 

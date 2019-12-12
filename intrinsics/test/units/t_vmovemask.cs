@@ -40,10 +40,10 @@ namespace Z0
 
         public void pack_test()
         {
-            var x = dinx.vparts(n128,0,1,2,4,4,5,6,7);
-            var y = dinx.vparts(n128,8,9,10,11,12,13,14,15);
+            var x = vbuild.parts(n128,0,1,2,4,4,5,6,7);
+            var y = vbuild.parts(n128,8,9,10,11,12,13,14,15);
             var z = dinx.vpackus(x,y);
-            var e = dinx.vparts(n128,0,1,2,4,4,5,6,7,8,9,10,11,12,13,14,15);
+            var e = vbuild.parts(n128,0,1,2,4,4,5,6,7,8,9,10,11,12,13,14,15);
             Claim.eq(e,z);
             
         }

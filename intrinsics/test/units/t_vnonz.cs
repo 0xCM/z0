@@ -12,13 +12,13 @@ namespace Z0
     {
         public void vnonz_basecase()
         {
-            Claim.yea(ginx.vnonz(dinx.vparts(n256, 1, 2, 3, 4)));
-            Claim.yea(ginx.vnonz(dinx.vparts(n256, 1, 0, 0, 0)));
-            Claim.nea(ginx.vnonz(dinx.vparts(n256, 0, 0, 0, 0)));
+            Claim.yea(ginx.vnonz(vbuild.parts(n256, 1, 2, 3, 4)));
+            Claim.yea(ginx.vnonz(vbuild.parts(n256, 1, 0, 0, 0)));
+            Claim.nea(ginx.vnonz(vbuild.parts(n256, 0, 0, 0, 0)));
 
-            Claim.yea(ginx.vnonz(dinx.vparts(n128, 1, 2, 3, 4)));
-            Claim.yea(ginx.vnonz(dinx.vparts(n128, 1, 0, 0, 0)));
-            Claim.nea(ginx.vnonz(dinx.vparts(n128, 0, 0, 0, 0)));
+            Claim.yea(ginx.vnonz(vbuild.parts(n128, 1, 2, 3, 4)));
+            Claim.yea(ginx.vnonz(vbuild.parts(n128, 1, 0, 0, 0)));
+            Claim.nea(ginx.vnonz(vbuild.parts(n128, 0, 0, 0, 0)));
         }
 
         public void vnonz_128()

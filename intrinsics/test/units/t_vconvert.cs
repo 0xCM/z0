@@ -15,7 +15,7 @@ namespace Z0
         public void block_32x8u_to_128x32u()
         {
             var blockA = DataBlocks.parts<byte>(n32,1,2,3,4);
-            var x = dinx.vparts(n128,1,2,3,4);
+            var x = vbuild.parts(n128,1,2,3,4);
             var blockB = x.ToBlock();            
             dinx.vloadblock(blockA, out Vector128<uint> y);
             var blockC = y.ToBlock();            
@@ -27,8 +27,8 @@ namespace Z0
         public void block_64x8u_to_2x128x32u()
         {
             var block = DataBlocks.parts<byte>(n64,1,2,3,4,5,6,7,8);
-            var xE = dinx.vparts(n128,1,2,3,4);
-            var yE = dinx.vparts(n128,5,6,7,8);
+            var xE = vbuild.parts(n128,1,2,3,4);
+            var yE = vbuild.parts(n128,5,6,7,8);
             dinx.vloadblock(block, out Vector128<uint> xA, out Vector128<uint> yA);
             Claim.eq(xE, xA);
             Claim.eq(yE, yA);
@@ -37,8 +37,8 @@ namespace Z0
         public void block_32x8u_to_2x128x64u()
         {
             var block = DataBlocks.parts<byte>(n32,1,2,3,4);
-            var xE = dinx.vparts(n128,1,2);
-            var yE = dinx.vparts(n128,3,4);
+            var xE = vbuild.parts(n128,1,2);
+            var yE = vbuild.parts(n128,3,4);
             dinx.vloadblock(block, out Vector128<ulong> xA, out Vector128<ulong> yA);
             Claim.eq(xE, xA);
             Claim.eq(yE, yA);
@@ -47,8 +47,8 @@ namespace Z0
         public void block_128x8u_to_2x128x16u()
         {
             var block = DataBlocks.parts<byte>(n128,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
-            var xE = dinx.vparts(n128,1,2,3,4,5,6,7,8);
-            var yE = dinx.vparts(n128,9,10,11,12,13,14,15,16);
+            var xE = vbuild.parts(n128,1,2,3,4,5,6,7,8);
+            var yE = vbuild.parts(n128,9,10,11,12,13,14,15,16);
             dinx.vloadblock(block, out Vector128<ushort> xA, out Vector128<ushort> yA);
             Claim.eq(xE, xA);
             Claim.eq(yE, yA);
@@ -56,9 +56,9 @@ namespace Z0
 
         public void v128x8u_v128x16u()
         {
-            var x = dinx.vparts(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
+            var x = vbuild.parts(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
             var y = dinx.vconvert(x, out Vector128<ushort> _);
-            var z = dinx.vparts(n128,0,1,2,3,4,5,6,7);
+            var z = vbuild.parts(n128,0,1,2,3,4,5,6,7);
             Claim.eq(y,z);
         }
 
@@ -66,7 +66,7 @@ namespace Z0
         {
             var x = DataBlocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
             var y = dinx.vloadblock(x, out Vector128<ushort> _);
-            var z = dinx.vparts(n128,0,1,2,3,4,5,6,7);            
+            var z = vbuild.parts(n128,0,1,2,3,4,5,6,7);            
 
             Claim.eq(y,z);            
         }

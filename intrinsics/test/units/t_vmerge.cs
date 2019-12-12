@@ -17,8 +17,8 @@ namespace Z0
             const byte m2 = m1 ^ byte.MaxValue; 
                     
             var n = n128;
-            var x = dinx.vparts(n, 0,1,2,3,4,5,6,7); 
-            var y = dinx.vparts(n, 8,9,A,B,C,D,E,F); 
+            var x = vbuild.parts(n, 0,1,2,3,4,5,6,7); 
+            var y = vbuild.parts(n, 8,9,A,B,C,D,E,F); 
             var x0 = dinx.vblend(x,y, m1);
             var x1 = dinx.vblend(x,y, m2);
 
@@ -33,10 +33,10 @@ namespace Z0
 
         public void vmerge_example()
         {
-            var a = dinx.vparts(n128, 0u,1,2,3);
-            var b = dinx.vparts(n128, 4u,5,6,7);
-            var c = dinx.vparts(n128, 8u,9,10,11);
-            var d = dinx.vparts(n128, 12u,13,14,15);
+            var a = vbuild.parts(n128, 0u,1,2,3);
+            var b = vbuild.parts(n128, 4u,5,6,7);
+            var c = vbuild.parts(n128, 8u,9,10,11);
+            var d = vbuild.parts(n128, 12u,13,14,15);
             var x0 = dinx.vmergelo(v8u(a), v8u(b));
             var y0 = dinx.vmergelo(v8u(c), v8u(d));
             var z0 = v8u(dinx.vmergelo(v16u(x0),v16u(y0)));

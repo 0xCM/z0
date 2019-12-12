@@ -16,31 +16,31 @@ namespace Z0
         public void vperm_4x16()
         {
             var n = n128;
-            var x = dinx.vparts(n,0,1,2,3,4,5,6,7);
+            var x = vbuild.parts(n,0,1,2,3,4,5,6,7);
             
             
             var a0 = dinx.vpermlo4x16(x, Perm4.DCBA);
-            var a1 = dinx.vparts(n,3,2,1,0,4,5,6,7);
+            var a1 = vbuild.parts(n,3,2,1,0,4,5,6,7);
             Claim.eq(a0,a1);
 
             var b0 = dinx.vpermhi4x16(x, Perm4.DCBA);
-            var b1 = dinx.vparts(n,0,1,2,3,7,6,5,4);
+            var b1 = vbuild.parts(n,0,1,2,3,7,6,5,4);
             Claim.eq(b0,b1);
 
             var c0 = dinx.vperm4x16(x,Perm4.DCBA,Perm4.DCBA);
-            var c1 = dinx.vparts(n,3,2,1,0,7,6,5,4);
+            var c1 = vbuild.parts(n,3,2,1,0,7,6,5,4);
             Claim.eq(c0,c1);
 
             var d0 = dinx.vpermlo4x16(x, Perm4.BADC);
-            var d1 = dinx.vparts(n,1,0,3,2,4,5,6,7);            
+            var d1 = vbuild.parts(n,1,0,3,2,4,5,6,7);            
             Claim.eq(d0,d1);
 
             var e0 = dinx.vpermhi4x16(x, Perm4.BADC);
-            var e1 = dinx.vparts(n,0,1,2,3,5,4,7,6);
+            var e1 = vbuild.parts(n,0,1,2,3,5,4,7,6);
             Claim.eq(e0,e1);
 
             var f0 = dinx.vperm4x16(x, Perm4.BADC, Perm4.BADC);
-            var f1 = dinx.vparts(n,1,0,3,2,5,4,7,6);
+            var f1 = vbuild.parts(n,1,0,3,2,5,4,7,6);
             Claim.eq(f0,f1);
         }
 
@@ -48,21 +48,21 @@ namespace Z0
         {
          
             var n = n256;
-            var x = dinx.vparts(n,0,1,2,3);
+            var x = vbuild.parts(n,0,1,2,3);
             
-            Claim.eq(dinx.vparts(n,0,1,2,3), dinx.vperm4x64(x, Perm4.ABCD));
-            Claim.eq(dinx.vparts(n,0,1,3,2), dinx.vperm4x64(x, Perm4.ABDC));
-            Claim.eq(dinx.vparts(n,0,2,1,3), dinx.vperm4x64(x, Perm4.ACBD));
-            Claim.eq(dinx.vparts(n,0,2,3,1), dinx.vperm4x64(x, Perm4.ACDB));
-            Claim.eq(dinx.vparts(n,0,3,1,2), dinx.vperm4x64(x, Perm4.ADBC));
-            Claim.eq(dinx.vparts(n,0,3,2,1), dinx.vperm4x64(x, Perm4.ADCB));
+            Claim.eq(vbuild.parts(n,0,1,2,3), dinx.vperm4x64(x, Perm4.ABCD));
+            Claim.eq(vbuild.parts(n,0,1,3,2), dinx.vperm4x64(x, Perm4.ABDC));
+            Claim.eq(vbuild.parts(n,0,2,1,3), dinx.vperm4x64(x, Perm4.ACBD));
+            Claim.eq(vbuild.parts(n,0,2,3,1), dinx.vperm4x64(x, Perm4.ACDB));
+            Claim.eq(vbuild.parts(n,0,3,1,2), dinx.vperm4x64(x, Perm4.ADBC));
+            Claim.eq(vbuild.parts(n,0,3,2,1), dinx.vperm4x64(x, Perm4.ADCB));
             
-            Claim.eq(dinx.vparts(n,1,0,2,3), dinx.vperm4x64(x, Perm4.BACD));
-            Claim.eq(dinx.vparts(n,1,0,3,2), dinx.vperm4x64(x, Perm4.BADC));
-            Claim.eq(dinx.vparts(n,1,2,0,3), dinx.vperm4x64(x, Perm4.BCAD));
-            Claim.eq(dinx.vparts(n,1,2,3,0), dinx.vperm4x64(x, Perm4.BCDA));
-            Claim.eq(dinx.vparts(n,1,3,0,2), dinx.vperm4x64(x, Perm4.BDAC));
-            Claim.eq(dinx.vparts(n,1,3,2,0), dinx.vperm4x64(x, Perm4.BDCA));
+            Claim.eq(vbuild.parts(n,1,0,2,3), dinx.vperm4x64(x, Perm4.BACD));
+            Claim.eq(vbuild.parts(n,1,0,3,2), dinx.vperm4x64(x, Perm4.BADC));
+            Claim.eq(vbuild.parts(n,1,2,0,3), dinx.vperm4x64(x, Perm4.BCAD));
+            Claim.eq(vbuild.parts(n,1,2,3,0), dinx.vperm4x64(x, Perm4.BCDA));
+            Claim.eq(vbuild.parts(n,1,3,0,2), dinx.vperm4x64(x, Perm4.BDAC));
+            Claim.eq(vbuild.parts(n,1,3,2,0), dinx.vperm4x64(x, Perm4.BDCA));
         }
 
         public void perm4_symbols()
@@ -105,20 +105,20 @@ namespace Z0
         public void vperm_2x128()
         {
             var n = n256;
-            var x = dinx.vparts(n, 0, 1, 2, 3);
-            var y = dinx.vparts(n, 4, 5, 6, 7);
+            var x = vbuild.parts(n, 0, 1, 2, 3);
+            var y = vbuild.parts(n, 4, 5, 6, 7);
 
-            Claim.eq(dinx.vparts(n, 0, 1, 4, 5), ginx.vperm2x128(x,y, Perm2x4.AC));
-            Claim.eq(dinx.vparts(n, 4, 5, 0, 1), ginx.vperm2x128(x,y, Perm2x4.CA));
+            Claim.eq(vbuild.parts(n, 0, 1, 4, 5), ginx.vperm2x128(x,y, Perm2x4.AC));
+            Claim.eq(vbuild.parts(n, 4, 5, 0, 1), ginx.vperm2x128(x,y, Perm2x4.CA));
 
-            Claim.eq(dinx.vparts(n, 0, 1, 6, 7), ginx.vperm2x128(x,y, Perm2x4.AD));
-            Claim.eq(dinx.vparts(n, 6, 7, 0, 1), ginx.vperm2x128(x,y, Perm2x4.DA));
+            Claim.eq(vbuild.parts(n, 0, 1, 6, 7), ginx.vperm2x128(x,y, Perm2x4.AD));
+            Claim.eq(vbuild.parts(n, 6, 7, 0, 1), ginx.vperm2x128(x,y, Perm2x4.DA));
 
-            Claim.eq(dinx.vparts(n, 2, 3, 4, 5), ginx.vperm2x128(x,y, Perm2x4.BC));
-            Claim.eq(dinx.vparts(n, 4, 5, 2, 3), ginx.vperm2x128(x,y, Perm2x4.CB));
+            Claim.eq(vbuild.parts(n, 2, 3, 4, 5), ginx.vperm2x128(x,y, Perm2x4.BC));
+            Claim.eq(vbuild.parts(n, 4, 5, 2, 3), ginx.vperm2x128(x,y, Perm2x4.CB));
 
-            Claim.eq(dinx.vparts(n, 2, 3, 6, 7), ginx.vperm2x128(x,y, Perm2x4.BD));
-            Claim.eq(dinx.vparts(n, 6, 7, 2, 3), ginx.vperm2x128(x,y, Perm2x4.DB));
+            Claim.eq(vbuild.parts(n, 2, 3, 6, 7), ginx.vperm2x128(x,y, Perm2x4.BD));
+            Claim.eq(vbuild.parts(n, 6, 7, 2, 3), ginx.vperm2x128(x,y, Perm2x4.DB));
         }
 
         /// <summary>
@@ -180,8 +180,8 @@ namespace Z0
             var pformat_actual = p.FormatMap();
             Claim.eq(pformat_epect, pformat_actual);
 
-            var vIn = dinx.vparts(0,1,2,3);
-            var vExpect = dinx.vparts(3,2,1,0);
+            var vIn = vbuild.parts(0,1,2,3);
+            var vExpect = vbuild.parts(3,2,1,0);
             var vActual = dinx.vperm4x32(vIn,p);
             Claim.eq(vExpect, vActual);                                
         }        

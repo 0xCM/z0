@@ -18,19 +18,19 @@ namespace Z0
             var n = n256;
             var width = n32;
 
-            var x0 = dinx.vparts(n, 0,1,2,3,4,5,6,(uint)7);
+            var x0 = vbuild.parts(n, 0,1,2,3,4,5,6,(uint)7);
             var y0 = dinx.vduplicate(n0,width,x0);
             var z0 = dinx.vduplicate(n1,width,x0);
-            Claim.eq(y0, dinx.vparts(n, 0,0,2,2,4,4,6,(uint)6));
-            Claim.eq(z0, dinx.vparts(n, 1,1,3,3,5,5,7,(uint)7));            
+            Claim.eq(y0, vbuild.parts(n, 0,0,2,2,4,4,6,(uint)6));
+            Claim.eq(z0, vbuild.parts(n, 1,1,3,3,5,5,7,(uint)7));            
 
-            var x1 = dinx.vparts(n,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
+            var x1 = vbuild.parts(n,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
             var y1 = dinx.vduplicate(n0,width,x1);
             var z1 = dinx.vduplicate(n1,width,x1);
-            Claim.eq(y1, dinx.vparts(n,0,1, 0,1, 4,5, 4,5, 8,9, 8,9, C,D, C,D));
-            Claim.eq(z1, dinx.vparts(n,2,3, 2,3, 6,7, 6,7, A,B, A,B, E,F, E,F));
+            Claim.eq(y1, vbuild.parts(n,0,1, 0,1, 4,5, 4,5, 8,9, 8,9, C,D, C,D));
+            Claim.eq(z1, vbuild.parts(n,2,3, 2,3, 6,7, 6,7, A,B, A,B, E,F, E,F));
             
-            var x2 = dinx.vparts(n,
+            var x2 = vbuild.parts(n,
                 ulong.MaxValue & 0x55555555AAAAAAAA, 
                 ulong.MaxValue & 0xCCCCCCCC88888888, 
                 ulong.MaxValue & 0x3333333377777777,
@@ -88,10 +88,10 @@ namespace Z0
             var n = n128;
 
             var u = PatternData.increments<uint>(n);
-            Claim.eq(dinx.vparts(n,0,1,2,3), u);
+            Claim.eq(vbuild.parts(n,0,1,2,3), u);
 
             var v = PatternData.decrements<uint>(n);
-            Claim.eq(dinx.vparts(n,3,2,1,0),v);
+            Claim.eq(vbuild.parts(n,3,2,1,0),v);
 
             Claim.eq(v, dinx.vperm4x32(u, Perm4.DCBA));
             Claim.eq(u, dinx.vperm4x32(v, Perm4.DCBA));
@@ -101,9 +101,9 @@ namespace Z0
         public void vunpackhi_256x64u_basecase()
         {            
             var n = n256;
-            var x = dinx.vparts(n,1,2,3,4);
-            var y = dinx.vparts(n,5,6,7,8);
-            var expect = dinx.vparts(n,2,6,4,8);
+            var x = vbuild.parts(n,1,2,3,4);
+            var y = vbuild.parts(n,5,6,7,8);
+            var expect = vbuild.parts(n,2,6,4,8);
             var actual = dinx.vmergehi(x,y);
             Claim.eq(expect, actual);
         }
@@ -111,10 +111,10 @@ namespace Z0
         public void vunpackhi_256x32u_basecase()
         {
             var n = n256;
-            var x = dinx.vparts(n,1u,2,3,4,5,6,7,8);
-            var y = dinx.vparts(n,10u,12,13,14,15,16,17,18);
+            var x = vbuild.parts(n,1u,2,3,4,5,6,7,8);
+            var y = vbuild.parts(n,10u,12,13,14,15,16,17,18);
             var actual = dinx.vmergehi(x,y);
-            var expect = dinx.vparts(n, 3u,13,4,14,7,17,8,18);
+            var expect = vbuild.parts(n, 3u,13,4,14,7,17,8,18);
             Claim.eq(expect, actual);
         }
 

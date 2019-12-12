@@ -6,15 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using static zfunc;
+    
     using static As;
-    using static AsIn;
 
     partial class gbits
     {
         /// <summary>
-        /// Computes the position of the highest enabled source bit, a number in the inclusive range [0 ,bitsize[T] - 1]
+        /// Computes the position of the highest enabled source bit, a number in the inclusive range [0 , bitsize[T] - 1]
         /// </summary>
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline)]

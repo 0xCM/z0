@@ -140,6 +140,6 @@ namespace Z0
             => vperm4x64(src,Perm4.DCBA);
 
         static Vector256<uint> MRev256u32 
-            => vparts(n256, 7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);       
+            => vbuild.parts(n256, 7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);       
     }
 }

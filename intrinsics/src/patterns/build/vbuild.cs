@@ -10,12 +10,12 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static zfunc;    
+    using static ginx;
     using static As;
-    
-    partial class ginx
-    {
 
-         
+    public static partial class vbuild
+    {
+ 
 
     }
 

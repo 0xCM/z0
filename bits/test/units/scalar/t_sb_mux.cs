@@ -59,7 +59,6 @@ namespace Z0
                 var expect = input[control.Scalar];
                 Claim.eq(expect, output);                                
             }
-
         }
 
         public void mux_32()

@@ -95,6 +95,6 @@ namespace Z0
             => fpinx.vperm8x32(src,MRev256f32);    
 
         static Vector256<int> MRev256f32 
-            => dinx.vpartsi(n256, 7, 6, 5, 4, 3, 2, 1, 0);    
+            => vbuild.partsi(n256, 7, 6, 5, 4, 3, 2, 1, 0);    
     }
 }

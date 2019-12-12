@@ -16,7 +16,7 @@ namespace Z0
     partial class gbits
     {
         /// <summary>
-        /// Extracts the least enabled bit
+        /// Extracts the least set source bit and is logically equivalent to the composite operation (-src) & src
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]

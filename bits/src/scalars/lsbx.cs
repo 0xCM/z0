@@ -17,7 +17,7 @@ namespace Z0
     {                
         /// <summary>
         /// unsigned int _blsi_u32 (unsigned int a)BLSI reg, reg/m32
-        /// Extracts the least enabled bit
+        /// Extracts the least set bit and is logically equivalent to the composite operation (-src) & src
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
@@ -26,7 +26,7 @@ namespace Z0
  
         /// <summary>
         /// unsigned int _blsi_u32 (unsigned int a)BLSI reg, reg/m32
-        /// Extracts the least enabled bit
+        /// Extracts the least set bit and is logically equivalent to the composite operation (-src) & src
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
@@ -35,7 +35,7 @@ namespace Z0
  
         /// <summary>
         /// unsigned int _blsi_u32 (unsigned int a)BLSI reg, reg/m32
-        /// Extracts the least enabled bit
+        /// Extracts the least set bit and is logically equivalent to the composite operation (-src) & src
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
@@ -44,7 +44,7 @@ namespace Z0
 
         /// <summary>
         /// unsigned __int64 _blsi_u64 (unsigned __int64 a)BLSI reg, reg/m64
-        /// Extracts the least enabled bit
+        /// Extracts the least set bit and is logically equivalent to the composite operation (-src) & src
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]

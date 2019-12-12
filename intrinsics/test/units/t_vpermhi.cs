@@ -49,7 +49,7 @@ namespace Z0
             var xACBD = dinx.vpermhi4x16(x, Perm4.ACBD);
             Claim.eq(xACBD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[C + 4], xs[B + 4], xs[D + 4]));            
 
-            Claim.eq(dinx.vpermhi4x16(dinx.vparts(n128, 0,1,2,3,6,7,8,9), Perm4.ADCB), dinx.vparts(n128,0,1,2,3,6,9,8,7));
+            Claim.eq(dinx.vpermhi4x16(vbuild.parts(n128, 0,1,2,3,6,7,8,9), Perm4.ADCB), vbuild.parts(n128,0,1,2,3,6,9,8,7));
 
         }
 

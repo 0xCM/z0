@@ -10,10 +10,11 @@ namespace Z0
 
     public class t_sb_replicate : t_sb<t_sb_replicate>
     {                
-        public void sb_replicate_32uMod64()
+
+        public void sb_replicate_32u()
         {
             var src = 0b111000u;
-            var actual = gbits.replicate(n64,src);
+            var actual = gbits.replicate(src);
             var width = gbits.width(src);
             Claim.eq(6,width);
 
@@ -25,11 +26,11 @@ namespace Z0
             Claim.eq(expect,actual);
         }
 
-        public void sb_replicate_64uMod64()
+        public void sb_replicate_64u()
         {
 
             var src = 0b111000ul;
-            var actual = gbits.replicate(n64,src);
+            var actual = gbits.replicate(src);
 
             var width = gbits.width(src);
             Claim.eq(6,width);
