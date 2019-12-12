@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="n">The vector bit-width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> vdecrements<T>(N128 n)
+        public static Vector128<T> decrements<T>(N128 n)
             where T : unmanaged
                 => PatternData.decrements<T>(n);
 
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="n">The vector bit-width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vdecrements<T>(N256 n)
+        public static Vector256<T> decrements<T>(N256 n)
             where T : unmanaged
                 => PatternData.decrements<T>(n);
 
@@ -40,9 +40,9 @@ namespace Z0
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> vdecrements<T>(N128 n, T first)
+        public static Vector128<T> decrements<T>(N128 n, T first)
             where T : unmanaged
-                => ginx.vsub(vdecrements<T>(n), first);
+                => ginx.vsub(decrements<T>(n), first);
 
         /// <summary>
         /// Creates a 256-bit vector with components that decrease by unit step from an initial value
@@ -51,8 +51,8 @@ namespace Z0
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vdecrements<T>(N256 n, T first)
+        public static Vector256<T> decrements<T>(N256 n, T first)
             where T : unmanaged
-                => ginx.vsub(vdecrements<T>(n), first);
+                => ginx.vsub(decrements<T>(n), first);
     }
 }

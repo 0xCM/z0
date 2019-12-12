@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="n">The bitness selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> vpunits<T>(N128 n)
+        public static Vector128<T> units<T>(N128 n)
             where T : unmanaged
                 => PatternData.uints<T>(n);
 
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="n">The bitness selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vpunits<T>(N256 n)
+        public static Vector256<T> units<T>(N256 n)
             where T : unmanaged
                 => PatternData.uints<T>(n);
     }

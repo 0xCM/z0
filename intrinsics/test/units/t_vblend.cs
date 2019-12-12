@@ -19,8 +19,8 @@ namespace Z0
             void example1()
             {
                 var n = n128;
-                var x = ginx.vbroadcast(n, (byte)1);
-                var y = ginx.vbroadcast(n, (byte)2);
+                var x = vbuild.vbroadcast(n, (byte)1);
+                var y = vbuild.vbroadcast(n, (byte)2);
                 Trace($"x{n}", x.Format());
                 Trace($"y{n}", y.Format());                
                 Trace("valignr/3",ginx.valignr(x,y, 3).Format());
@@ -34,8 +34,8 @@ namespace Z0
             void example2()
             {
                 var n = n256;
-                var x = ginx.vbroadcast(n, (byte)1);
-                var y = ginx.vbroadcast(n, (byte)2);
+                var x = vbuild.vbroadcast(n, (byte)1);
+                var y = vbuild.vbroadcast(n, (byte)2);
                 Trace($"x{n}", x.Format(seplanes:true));
                 Trace($"y{n}", y.Format(seplanes:true));                
                 Trace("valignr/3",ginx.valignr(x,y, 3).Format(seplanes:true));
@@ -181,12 +181,12 @@ namespace Z0
             Claim.eq(vbuild.parts(n,8,9,2,3,C,D,6,7),dinx.vblend(left,right, Blend8x32.RRLLRRLL));
 
             
-            var lrpattern = v32u(ginx.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
+            var lrpattern = v32u(vbuild.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
             for(var i=0; i < 8; i++)
                 Claim.eq(vcell(lrpattern,i), even(i) ? 0u : uint.MaxValue);
             
-            var zero = ginx.vzero<uint>(n);            
-            var ones = ginx.vones<uint>(n);
+            var zero = vbuild.zero<uint>(n);            
+            var ones = vbuild.ones<uint>(n);
             Claim.eq(lrpattern, dinx.vblend(zero, ones, Blend8x32.LRLRLRLR));
             
         }

@@ -28,7 +28,7 @@ namespace Z0
         public static Vector128<T> Ones
         {
             [MethodImpl(Inline)]
-            get => ginx.vones<T>(MaxWidth);
+            get => vbuild.ones<T>(MaxWidth);
         }
 
         public static T Zero => default;

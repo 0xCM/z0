@@ -61,7 +61,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = vmakemask<T>(BitMask.lsb<uint>(n2),0);
-            var offsets = vincrements<T>(w);
+            var offsets = vbuild.increments<T>(w);
             var pattern = vsllv(x,offsets);
             return pattern;
         }
@@ -80,7 +80,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = vmakemask<T>(BitMask.msb<uint>(n2));
-            var offsets = vincrements<T>(w);
+            var offsets = vbuild.increments<T>(w);
             var pattern = vsrlv(x,offsets);
             return pattern;
         }
@@ -90,7 +90,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => ginx.vbroadcast(w, BitMask.lsb(n64,n2,n1,t));            
+                => vbuild.vbroadcast(w, BitMask.lsb(n64,n2,n1,t));            
 
         public static SubGrid256<M,N,T> bars<M,N,T>(N256 w, M m, N n, T t = default)
             where M : unmanaged, ITypeNat

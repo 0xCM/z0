@@ -90,46 +90,46 @@ namespace Z0
 
         public void vshuf_16x16()
         {
-            var x = ginx.vincrements<ushort>(n256).AsByte();            
+            var x = vbuild.increments<ushort>(n256).AsByte();            
             var spec = perm16x16_spec(15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0);
             var y = dinx.vshuf32x8(x,spec);                    
-            var z = broadcast(ginx.vincrements<ushort>(n256), out Vector256<byte> _);
+            var z = broadcast(vbuild.increments<ushort>(n256), out Vector256<byte> _);
         }
     
         public void shuffle_16x8_128x8u_basecase()
         {
             var n = n128;
             //var x0 = ginx.vload(n, in head(Inc8u));
-            var x0 = ginx.vincrements<byte>(n);
+            var x0 = vbuild.increments<byte>(n);
             var x0Spec = ginx.vload(n, in head(Pattern1));
             var x0Dst = dinx.vshuf16x8(x0,x0Spec);
             Claim.eq(x0Spec,x0Dst);
 
-            var x1 = ginx.vincrements<byte>(n);
+            var x1 = vbuild.increments<byte>(n);
             var x1Spec = ginx.vload(n, in head(Pattern2));
             var x1Dst = dinx.vshuf16x8(x1,x1Spec);
             Claim.eq(x1Spec,x1Dst);
 
-            var x2 = ginx.vincrements<byte>(n);
+            var x2 = vbuild.increments<byte>(n);
             var x2Spec = PatternData.rotl(n128, n8);
             var x2Dst = dinx.vshuf16x8(x2,x2Spec);
             Claim.eq(x2Spec,x2Dst);
 
-            var x3 = ginx.vincrements<byte>(n);
+            var x3 = vbuild.increments<byte>(n);
             var x3Spec = PatternData.rotr(n128, n8);
             var x3Dst = dinx.vshuf16x8(x3,x3Spec);
             Claim.eq(x3Spec,x3Dst);
 
-            var x4 = ginx.vincrements<byte>(n);
+            var x4 = vbuild.increments<byte>(n);
             var x4Spec1 = PatternData.rotl(n128, n8);
             var x4Spec2 = PatternData.rotr(n128, n8);
             var x4Dst = dinx.vshuf16x8(dinx.vshuf16x8(x4,x4Spec1), x4Spec2);
             Claim.eq(x4,x4Dst);
 
             var x5 = Random.CpuVector<byte>(n);
-            var x5Spec = ginx.vbroadcast(n,(byte)0b10000000);
+            var x5Spec = vbuild.vbroadcast(n,(byte)0b10000000);
             var x5Dst = dinx.vshuf16x8(x5, x5Spec);
-            Claim.eq(x5Dst,ginx.vbroadcast(n,(byte)0));                        
+            Claim.eq(x5Dst,vbuild.vbroadcast(n,(byte)0));                        
 
         }
 
@@ -159,7 +159,7 @@ namespace Z0
 
         public void vshuf_16x8()
         {
-            var src = ginx.vincrements<byte>(n128);
+            var src = vbuild.increments<byte>(n128);
             var perm = Perm.natural(Perm.reversed(n16));
             for(int i=0,j=15; i<perm.Length; i++, j--)
                 Claim.eq(perm[i],j);

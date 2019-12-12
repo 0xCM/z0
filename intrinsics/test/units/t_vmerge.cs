@@ -50,7 +50,7 @@ namespace Z0
         public void vunpack_lo_8()
         {
 
-            var x = ginx.vincrements<byte>(n128);
+            var x = vbuild.increments<byte>(n128);
             var y = dinx.vadd(x, dinx.vbroadcast(n128, (byte)16));
 
             var lo = ginx.vmergelo(x,y);

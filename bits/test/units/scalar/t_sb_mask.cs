@@ -91,7 +91,7 @@ namespace Z0
 
             // [1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000]
             // [1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000]
-            var x = ginx.vbroadcast(n256, (byte)Pow2.T07);
+            var x = vbuild.vbroadcast(n256, (byte)Pow2.T07);
             var m = ginx.vtakemask(x);
             Claim.eq(uint.MaxValue,m);
 

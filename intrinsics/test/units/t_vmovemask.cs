@@ -73,7 +73,7 @@ namespace Z0
             var n = n256;
             var w = n1024;
             var ix = n256;
-            var pattern = ginx.vbroadcast(n, 0b00010001_00010001_00010001_00010001u);
+            var pattern = vbuild.vbroadcast(n, 0b00010001_00010001_00010001_00010001u);
 
             var data = span(range<uint>(0,(uint)(w-1)));
             Claim.eq(data.Length, w);

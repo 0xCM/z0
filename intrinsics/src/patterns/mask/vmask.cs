@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static zfunc;    
-    using static ginx;
+    using static vbuild;
     using static As;
 
     public static class vmask

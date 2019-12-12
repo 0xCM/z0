@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="n">The vector bit-width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> vincrements<T>(N128 n)
+        public static Vector128<T> increments<T>(N128 n)
             where T : unmanaged
                 => PatternData.increments<T>(n);
 
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="n">The vector bit-width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vincrements<T>(N256 n)
+        public static Vector256<T> increments<T>(N256 n)
             where T : unmanaged
                 => PatternData.increments<T>(n);
 
@@ -42,9 +42,9 @@ namespace Z0
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> vincrements<T>(N128 n, T first)
+        public static Vector128<T> increments<T>(N128 n, T first)
             where T : unmanaged
-                => vadd(vincrements<T>(n), first);
+                => vadd(increments<T>(n), first);
 
         /// <summary>
         /// Creates a 256-bit vector with components that increase by unit step from an initial value
@@ -53,9 +53,9 @@ namespace Z0
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vincrements<T>(N256 n, T first)
+        public static Vector256<T> increments<T>(N256 n, T first)
             where T : unmanaged
-                => vadd(vincrements<T>(n), first);
+                => vadd(increments<T>(n), first);
  
 
     }

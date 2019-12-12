@@ -17,7 +17,7 @@ namespace Z0
         static Vector128<T> swapspec<T>(N128 n, params Swap[] swaps)
             where T : unmanaged  
         {
-            var src = ginx.vincrements<T>(n).ToSpan();
+            var src = vbuild.increments<T>(n).ToSpan();
             var dst = src.Swap(swaps);
             return ginx.vload(n, in head(src));
         }

@@ -21,13 +21,13 @@ namespace Z0
         /// Creates the identity permutation
         /// </summary>
         public static Perm16Spec identity()
-            => new Perm16Spec(ginx.vincrements<byte>(w));
+            => new Perm16Spec(vbuild.increments<byte>(w));
 
         /// <summary>
         /// Creates the reversal of the identity permutation
         /// </summary>
         public static Perm16Spec reverse()
-            => new Perm16Spec(ginx.vdecrements<byte>(w));
+            => new Perm16Spec(vbuild.decrements<byte>(w));
 
         Perm16Spec(Vector128<byte> data)
             => this.data = data;
@@ -48,13 +48,13 @@ namespace Z0
         /// Creates the identity permutation
         /// </summary>
         public static Perm32Spec identity()
-            => new Perm32Spec(ginx.vincrements<byte>(w));
+            => new Perm32Spec(vbuild.increments<byte>(w));
 
         /// <summary>
         /// Creates the reversal of the identity permutation
         /// </summary>
         public static Perm32Spec reverse()
-            => new Perm32Spec(ginx.vdecrements<byte>(w));
+            => new Perm32Spec(vbuild.decrements<byte>(w));
 
         Perm32Spec(Vector256<byte> data)
             => this.data = data;

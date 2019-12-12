@@ -18,8 +18,8 @@ namespace Z0
             var n = n256;
             var pattern = BitVector.natural(n8,(byte)0b10101010);
             var mask =  dinx.vbroadcast(n, pattern);
-            var zero = ginx.vzero<byte>(n);
-            var ones =  ginx.vones<byte>(n);
+            var zero = vbuild.zero<byte>(n);
+            var ones =  vbuild.ones<byte>(n);
             var blend = dinx.vblendbits(zero,ones,mask);
             Claim.eq(blend,mask);
 

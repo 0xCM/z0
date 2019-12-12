@@ -141,7 +141,7 @@ namespace Z0.Logix
         {
             expr.SetVars(a,b);
             var result = eval(expr);
-            return ginx.vtestc(result.Value, ginx.vones<T>(n128));
+            return ginx.vtestc(result.Value, vbuild.ones<T>(n128));
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace Z0.Logix
         {
             expr.SetVars(a,b);
             var result = eval(expr);
-            return ginx.vtestc(result.Value, ginx.vones<T>(n256));
+            return ginx.vtestc(result.Value, vbuild.ones<T>(n256));
         }
 
         /// <summary>

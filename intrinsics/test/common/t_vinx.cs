@@ -171,7 +171,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = Random.Next<T>();
-            var vX = ginx.vbroadcast(w,x);
+            var vX = vbuild.vbroadcast(w,x);
             var data = vX.ToSpan();
             for(var i=0; i<data.Length; i++)
                 Claim.eq(x,data[i]);            
@@ -181,7 +181,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = Random.Next<T>();
-            var vX = ginx.vbroadcast(w,x);
+            var vX = vbuild.vbroadcast(w,x);
             var data = vX.ToSpan();
             for(var i=0; i<data.Length; i++)
                 Claim.eq(x,data[i]);
@@ -190,7 +190,7 @@ namespace Z0
         protected void cmp_gt_check<T>(N128 n, T t = default)
             where T : unmanaged
         {
-            var ones = ginx.vones<T>(n);
+            var ones = vbuild.ones<T>(n);
             var one = vcell(ones,0);
             
             for(var i=0; i< SampleSize; i++)
@@ -215,7 +215,7 @@ namespace Z0
         protected void cmp_gt_check<T>(N256 n, T t = default)
             where T : unmanaged
         {
-            var ones = ginx.vones<T>(n);
+            var ones = vbuild.ones<T>(n);
             var one = vcell(ginx.vlo(ones),0);
             
             for(var i=0; i< SampleSize; i++)
@@ -281,7 +281,7 @@ namespace Z0
         protected void vlt_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var ones = ginx.vones<T>(w);
+            var ones = vbuild.ones<T>(w);
             var one = vcell(ones,0);
             
             for(var i=0; i< SampleSize; i++)
@@ -306,7 +306,7 @@ namespace Z0
         protected void vlt_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var ones = ginx.vones<T>(w);
+            var ones = vbuild.ones<T>(w);
             var one = vcell(ginx.vlo(ones),0);
             
             for(var i=0; i< SampleSize; i++)
@@ -455,8 +455,8 @@ namespace Z0
         {
             for(var i=0; i< SampleSize; i++)
             {
-                var inc = ginx.vincrements<T>(n);
-                var dec = ginx.vdecrements<T>(n);
+                var inc = vbuild.increments<T>(n);
+                var dec = vbuild.decrements<T>(n);
                 var y = ginx.vreverse(inc);
                 Claim.eq(dec, y);
                 Claim.eq(inc, ginx.vreverse(y));
@@ -468,8 +468,8 @@ namespace Z0
         {
             for(var i=0; i< SampleSize; i++)
             {
-                var inc = ginx.vincrements<T>(n);
-                var dec = ginx.vdecrements<T>(n);
+                var inc = vbuild.increments<T>(n);
+                var dec = vbuild.decrements<T>(n);
                 var y = ginx.vreverse(inc);
                 Claim.eq(dec, y);
                 Claim.eq(inc, ginx.vreverse(y));
@@ -1090,7 +1090,7 @@ namespace Z0
         protected void vones_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var ones = ginx.vones<T>(w);
+            var ones = vbuild.ones<T>(w);
             var bs = ones.ToBitString();
             Claim.eq(w,bs.Length);
             Claim.eq(w,bs.PopCount());
@@ -1099,7 +1099,7 @@ namespace Z0
         protected void vones_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var ones = ginx.vones<T>(w);
+            var ones = vbuild.ones<T>(w);
             var bs = ones.ToBitString();
             Claim.eq(w,bs.Length);
             Claim.eq(w,bs.PopCount());
@@ -1138,7 +1138,7 @@ namespace Z0
                 var xp = x.Prior();
                 var xps = xp.ToSpan();
 
-                var uints = ginx.vpunits<T>(w);
+                var uints = vbuild.units<T>(w);
                 
                 Claim.yea(ginx.vadd<T>(xp, uints).Equals(x));
                 Claim.yea(ginx.vsub<T>(xn, uints).Equals(x));
@@ -1163,7 +1163,7 @@ namespace Z0
                 var xp = x.Prior();
                 var xps = xp.ToSpan();
 
-                var uints = ginx.vpunits<T>(w);
+                var uints = vbuild.units<T>(w);
                 
                 Claim.yea(ginx.vadd<T>(xp, uints).Equals(x));
                 Claim.yea(ginx.vsub<T>(xn, uints).Equals(x));

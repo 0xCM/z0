@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vprior<T>(Vector128<T> src)
             where T : unmanaged
-                => vsub<T>(src, vpunits<T>(n128));
+                => vsub<T>(src, vbuild.units<T>(n128));
 
         /// <summary>
         /// Decrements each source vector component by a unit
@@ -32,6 +32,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vprior<T>(Vector256<T> src)
             where T : unmanaged
-                => vsub<T>(src, vpunits<T>(n256));
+                => vsub<T>(src, vbuild.units<T>(n256));
     }
 }

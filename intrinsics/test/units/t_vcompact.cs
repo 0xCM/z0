@@ -15,8 +15,8 @@ namespace Z0
         public void vcompact_2x128x32u_128x16u()
         {   
             var w = n128;
-            var x = vbuild.vincrements(w, 5000u);
-            var y = vbuild.vincrements(w, 10000u);
+            var x = vbuild.increments(w, 5000u);
+            var y = vbuild.increments(w, 10000u);
             var m1 = vbuild.parts(w,0, 1, 4, 5, 8, 9, 12, 13, 255, 255, 255, 255, 255, 255, 255, 255);
             var m2 = vbuild.parts(w,255, 255, 255, 255, 255, 255, 255, 255, 0, 1, 4, 5, 8, 9, 12, 13);
 
@@ -34,10 +34,10 @@ namespace Z0
 
         public void vinflate_128x8u()
         {
-            var src = ginx.vincrements<byte>(n128);
+            var src = vbuild.increments<byte>(n128);
             dinx.vinflate(src, out Vector128<ushort> lo, out Vector128<ushort> hi);
-            var loExpect = ginx.vincrements<ushort>(n128);
-            var hiExpect = ginx.vincrements<ushort>(n128,8);
+            var loExpect = vbuild.increments<ushort>(n128);
+            var hiExpect = vbuild.increments<ushort>(n128,8);
             Claim.eq(loExpect, lo);
             Claim.eq(hiExpect, hi);
 
@@ -47,7 +47,7 @@ namespace Z0
 
         public void vinflate_128x8u_128x16u()
         {
-            var src = ginx.vincrements<byte>(n128);            
+            var src = vbuild.increments<byte>(n128);            
             dinx.vinflate(src, out Vector128<ushort> lo, out Vector128<ushort> hi);
             for(var i=0; i<8; i++)
                 Claim.eq(src.Item(i), lo.Item(i));            
@@ -56,16 +56,16 @@ namespace Z0
         public void vcompact_basecase_128()
         {
             var n = n128;
-            var a = ginx.vincrements<uint>(n,0);
-            var b = ginx.vincrements<uint>(n,4);
-            var c = ginx.vincrements<uint>(n,8);
-            var d = ginx.vincrements<uint>(n,12);
+            var a = vbuild.increments<uint>(n,0);
+            var b = vbuild.increments<uint>(n,4);
+            var c = vbuild.increments<uint>(n,8);
+            var d = vbuild.increments<uint>(n,12);
             var abActual = dinx.vcompact(a,b);
-            var abExpect = ginx.vincrements<ushort>(n);
+            var abExpect = vbuild.increments<ushort>(n);
             Claim.eq(abExpect, abActual);
 
             dinx.vcompact(a,b,c,d, out var abcdActual);
-            var abcdExpect = ginx.vincrements<byte>(n);
+            var abcdExpect = vbuild.increments<byte>(n);
             Claim.eq(abcdExpect, abcdActual);
             
         }
@@ -73,20 +73,20 @@ namespace Z0
         public void vcompact_basecase_256()
         {
             var n = n256;
-            var a = ginx.vincrements<uint>(n,0);
-            var b = ginx.vincrements<uint>(n,8);
-            var c = ginx.vincrements<uint>(n,16);
-            var d = ginx.vincrements<uint>(n,24);
+            var a = vbuild.increments<uint>(n,0);
+            var b = vbuild.increments<uint>(n,8);
+            var c = vbuild.increments<uint>(n,16);
+            var d = vbuild.increments<uint>(n,24);
             var abActual = dinx.vcompact(a,b);
-            var abExpect = ginx.vincrements<ushort>(n);
+            var abExpect = vbuild.increments<ushort>(n);
             Claim.eq(abExpect, abActual);
 
 
             dinx.vcompact(a,b,c,d, out var abcdActual);
-            var abcdExpect = ginx.vincrements<byte>(n);
+            var abcdExpect = vbuild.increments<byte>(n);
             Claim.eq(abcdExpect, abcdActual);
 
-            Claim.eq(dinx.vcompact(ginx.vincrements<ushort>(n), out Vector128<byte> dst), ginx.vincrements<byte>(n128));
+            Claim.eq(dinx.vcompact(vbuild.increments<ushort>(n), out Vector128<byte> dst), vbuild.increments<byte>(n128));
 
             //inversion
             dinx.vinflate(abcdActual, out var a0, out var b0, out var c0, out var d0);

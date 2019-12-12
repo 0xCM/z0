@@ -22,7 +22,7 @@ namespace Z0
 
         public void vpermlo_4x16_basecase()
         {
-            var x = ginx.vincrements<ushort>(n128);
+            var x = vbuild.increments<ushort>(n128);
             var xs = x.ToSpan();
             Claim.eq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]), x);
 

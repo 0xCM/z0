@@ -72,7 +72,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vsub<T>(Vector128<T> x, T a)
             where T : unmanaged
-                => vsub(x, vbroadcast(n128,a));
+                => vsub(x, vbuild.vbroadcast(n128,a));
 
         /// <summary>
         /// Subtracts a constant value from each vector component
@@ -83,7 +83,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vsub<T>(Vector256<T> x, T a)
             where T : unmanaged
-                => vsub(x, vbroadcast(n256,a));
+                => vsub(x, vbuild.vbroadcast(n256,a));
     
              
         [MethodImpl(Inline)]

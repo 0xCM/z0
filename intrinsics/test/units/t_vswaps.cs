@@ -46,7 +46,7 @@ namespace Z0
         public void perm_swaps()
         {            
             
-            var src = ginx.vincrements<byte>(n128);
+            var src = vbuild.increments<byte>(n128);
 
             Swap s = (0,1);
             var x1 = dinx.vswap(src, s);

@@ -149,7 +149,7 @@ namespace Z0
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var src = ginx.vincrements<ulong>(n256);
+                var src = vbuild.increments<ulong>(n256);
                 var x = dinx.vperm4x64(src, Perm4.BADC);
                 var srcs = src.ToSpan();
                 var y = Vector256.Create(srcs[1], srcs[0], srcs[3], srcs[2]);
@@ -159,8 +159,8 @@ namespace Z0
 
         public void perm256u8()
         {
-            var x = ginx.vincrements<byte>(n256);
-            var y = ginx.vdecrements<byte>(n256);
+            var x = vbuild.increments<byte>(n256);
+            var y = vbuild.decrements<byte>(n256);
             var z = dinx.vreverse(dinx.vshuf32x8(x,y));
             Claim.eq(x,z);
         }

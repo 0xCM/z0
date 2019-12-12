@@ -16,25 +16,25 @@ namespace Z0.OpCodes
     public static class vpattern
     {
         public static Vector128<byte> ones_128x8u()
-            => ginx.vones<byte>(n128);
+            => vbuild.ones<byte>(n128);
 
         public static Vector128<ulong> ones_128x64u()
-            => ginx.vones<ulong>(n128);
+            => vbuild.ones<ulong>(n128);
 
         public static Vector256<byte> ones_256x8u()
-            => ginx.vones<byte>(n256);
+            => vbuild.ones<byte>(n256);
 
         public static Vector256<ulong> ones_256x64u()
-            => ginx.vones<ulong>(n256);
+            => vbuild.ones<ulong>(n256);
 
         public static Vector256<double> ones_256x64f()
-            => ginx.vones<double>(n256);
+            => vbuild.ones<double>(n256);
 
         public static Vector256<byte> pattern_lanemerge_256x8u()            
-            => ginx.vplanemerge<byte>();
+            => vbuild.lanemerge<byte>();
 
         public static Vector256<ushort> pattern_lanemerge_256x16u()            
-            => ginx.vplanemerge<ushort>();
+            => vbuild.lanemerge<ushort>();
 
         public static Vector128<byte> makemask_128x8u(BitVector16 src)
             => dinx.vmakemask(src);

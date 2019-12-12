@@ -51,8 +51,8 @@ namespace Z0
         public void reverse_256x8u_basecase()
         {
             var n = n256;
-            var v1 = ginx.vincrements<byte>(n);
-            var v2 = ginx.vdecrements<byte>(n);            
+            var v1 = vbuild.increments<byte>(n);
+            var v2 = vbuild.decrements<byte>(n);            
             var v3 = dinx.vreverse(v1);
             Claim.eq(v2,v3);
 
@@ -61,7 +61,7 @@ namespace Z0
         public void alt_256x8u_basecase()
         {
             var n = n256;
-            var x = ginx.vpalt(n, 0xAA, 0x55);
+            var x = vbuild.alt(n, 0xAA, 0x55);
             var xs = x.ToSpan();
             for(var i=0; i<xs.Length; i++)
                 Claim.eq(even(i) ? 0xAA : 0x55,  xs[i]);

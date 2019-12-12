@@ -6,12 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;    
+    using System.Runtime.Intrinsics;
+    using System.Runtime.Intrinsics.X86;
     
     using static zfunc;    
+    using static ginx;
     using static As;
 
-    partial class ginx
+    public static partial class vbuild
     {
         /// <summary>
         /// Projects a scalar value onto each component of a 128-bit vector
@@ -143,6 +145,7 @@ namespace Z0
         }
  
 
-    }
+ 
 
+    }
 }

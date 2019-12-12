@@ -107,31 +107,31 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bit vtestc(Vector128<sbyte> src)
-            => TestC(src, ginx.vones<sbyte>(n128));
+            => TestC(src, vbuild.ones<sbyte>(n128));
 
         [MethodImpl(Inline)]
         public static bit vtestc(Vector128<byte> src)
-            => TestC(src, ginx.vones<byte>(n128));
+            => TestC(src, vbuild.ones<byte>(n128));
 
         [MethodImpl(Inline)]
         public static bit vtestc(Vector128<ushort> src)
-            => TestC(src, ginx.vones<ushort>(n128));
+            => TestC(src, vbuild.ones<ushort>(n128));
         
         [MethodImpl(Inline)]
         public static bit vtestc(Vector128<int> src)
-            => TestC(src, ginx.vones<int>(n128));
+            => TestC(src, vbuild.ones<int>(n128));
 
         [MethodImpl(Inline)]
         public static bit vtestc(Vector128<uint> src)
-            => TestC(src, ginx.vones<uint>(n128));
+            => TestC(src, vbuild.ones<uint>(n128));
 
         [MethodImpl(Inline)]
         public static bit vtestc(Vector128<long> src)
-            => TestC(src, ginx.vones<long>(n128));
+            => TestC(src, vbuild.ones<long>(n128));
 
         [MethodImpl(Inline)]
         public static bit vtestc(Vector128<ulong> src)
-            => TestC(src, ginx.vones<ulong>(n128));
+            => TestC(src, vbuild.ones<ulong>(n128));
 
         /// <summary>
         /// int _mm256_testc_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256
