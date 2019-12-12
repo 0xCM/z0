@@ -50,7 +50,7 @@ namespace Z0
             for(var i=0; i < len; i++)
             {
                 seek(ref mem, i) = current;
-                gmath.dec(ref current);
+                current = gmath.dec(current);
             }
                         
             return ginx.vload(n, in mem);
@@ -73,7 +73,7 @@ namespace Z0
             for(var i=0; i < len; i++)
             {
                 seek(ref mem, i) = current;
-                gmath.dec(ref current);
+                current = gmath.dec(current);
             }
                         
             return ginx.vload(n, in mem);
@@ -96,7 +96,7 @@ namespace Z0
             for(var i=0; i < len; i++)
             {
                 seek(ref mem, i) = current;
-                gmath.sub(ref current, step);
+                current = gmath.sub(current, step);
             }
             return ginx.vload(n, in mem);
         }
@@ -118,7 +118,7 @@ namespace Z0
             for(var i=0; i < len; i++)
             {
                 seek(ref mem, i) = current;
-                gmath.sub(ref current, step);
+                current = gmath.sub(current, step);
             }
             return ginx.vload(n, in mem);
         }
@@ -133,7 +133,7 @@ namespace Z0
             for(var i=0; i < len; i++)
             {
                 seek(ref mem, i) = current;
-                gmath.dec(ref current);
+                current = gmath.dec(current);
             }
 
             return ginx.vload(n, in head(data.Swap(swaps)));
@@ -149,7 +149,7 @@ namespace Z0
             for(var i=0; i < len; i++)
             {
                 seek(ref mem, i) = current;
-                gmath.dec(ref current);
+                current = gmath.dec(current);
             }
 
             return ginx.vload(n, in head(data.Swap(swaps)));
@@ -207,7 +207,7 @@ namespace Z0
             for(var i=0; i<len; i++)
             {
                 seek(ref mem, i) = current;
-                gmath.inc(ref current);
+                current = gmath.inc(current);
             }
 
             return ginx.vload(n, in head(data.Swap(swaps)));
@@ -223,7 +223,7 @@ namespace Z0
             for(var i=0; i<len; i++)
             {
                 seek(ref mem, i) = current;
-                gmath.inc(ref current);
+                current = gmath.inc(current);
             }
 
             return ginx.vload(n, in head(data.Swap(swaps)));

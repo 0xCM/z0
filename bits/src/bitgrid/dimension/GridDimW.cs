@@ -61,7 +61,7 @@ namespace Z0
         public int BitCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.bitcount<M,N>();
+            get => BitCalcs.gridbits<M,N>();
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.cellcount<M,N,T>();
+            get => BitCalcs.gridcells<M,N,T>();
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Z0
         public int ByteCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.bytecount<M,N>();
+            get => BitCalcs.gridbytes<M,N>();
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Z0
         public int BlockCount
         {
             [MethodImpl(Inline)]
-            get => DataBlocks.blockalign<W,M,N,T>();
+            get => DataBlocks.minblocks<W,M,N,T>();
         }
 
         /// <summary>

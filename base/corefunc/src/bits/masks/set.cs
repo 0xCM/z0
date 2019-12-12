@@ -69,8 +69,6 @@ namespace Z0
         }
 
         /// <summary>
-
-        /// <summary>
         /// Aligns an index-identified source bit with with a suplied state
         /// </summary>
         /// <param name="src">The source</param>
@@ -111,7 +109,6 @@ namespace Z0
             src ^= (c ^ src) & (1L << pos);
             return src;
         }
-
 
         /// <summary>
         /// Aligns an index-identified source bit with with a suplied state

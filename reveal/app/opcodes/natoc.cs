@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.OpCodes
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,6 +10,7 @@ namespace Z0
     using static Digital;
     using static zfunc;
 
+    [OpCodeHost]
     public static class natoc
     {
         // xor(eax,eax) -> eax

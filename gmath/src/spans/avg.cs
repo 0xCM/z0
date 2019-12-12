@@ -42,7 +42,7 @@ namespace Z0
             ref readonly var reader = ref head(src);
             T result = reader;
             for(var i=1; i<src.Length; i++)
-                gmath.avgz(ref result, skip(in reader, i));
+                result = gmath.avgz(result, skip(in reader, i));
             return result;
         }
 

@@ -63,7 +63,7 @@ namespace Z0
             where T : unmanaged
         {
             var grid = BG.alloc(m,n,t);
-            var segments = BitCalcs.cellcount(m,n,t);
+            var segments = BitCalcs.gridcells(m,n,t);
             random.Fill(segments, ref grid.Head);
             return grid;
         }

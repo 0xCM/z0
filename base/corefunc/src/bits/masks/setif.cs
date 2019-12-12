@@ -37,7 +37,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static sbyte setif(sbyte src, int srcpos, sbyte dst, int dstpos)        
         {
-            if(test(src, srcpos))
+            if(testbit(src, srcpos))
                 return enable(dst, srcpos);
             return dst;
         }

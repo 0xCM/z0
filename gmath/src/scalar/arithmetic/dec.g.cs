@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
         
     using static zfunc;    
@@ -31,24 +28,6 @@ namespace Z0
                 return dec_i(a);
             else 
                 return gfp.dec(a);
-        }           
-
-        [MethodImpl(Inline)]
-        public static ref T dec<T>(ref T a)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return ref dec_u(ref a);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return ref dec_i(ref a);
-            else 
-                return ref gfp.dec(ref a);
         }           
 
         [MethodImpl(Inline)]
@@ -78,37 +57,5 @@ namespace Z0
             else 
                 return generic<T>(math.dec(uint64(a)));
         }
-
-        [MethodImpl(Inline)]
-        static ref T dec_i<T>(ref T a)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                 math.dec(ref int8(ref a));
-            else if(typeof(T) == typeof(short))
-                 math.dec(ref int16(ref a));
-            else if(typeof(T) == typeof(int))
-                 math.dec(ref int32(ref a));
-            else
-                 math.dec(ref int64(ref a));
-            return ref a;
-        }
-
-        [MethodImpl(Inline)]
-        static ref T dec_u<T>(ref T a)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                 math.dec(ref uint8(ref a));
-            else if(typeof(T) == typeof(ushort))
-                 math.dec(ref uint16(ref a));
-            else if(typeof(T) == typeof(uint))
-                 math.dec(ref uint32(ref a));
-            else
-                 math.dec(ref uint64(ref a));
-            return ref a;
-        }
-
-
     }
 }

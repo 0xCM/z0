@@ -7,17 +7,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Diagnostics;
 
 using Z0;
 
 partial class zfunc
 {
-    [MethodImpl(Inline)]
-    public static Pair<T> pair<T>(in T a, in T b)
-        where T : unmanaged
-            => Pair.define(a,b);
-
     /// <summary>
     /// Reduces a stream to a single value via an additive monoid
     /// </summary>
@@ -65,5 +59,4 @@ partial class zfunc
             cumulant = monoid.Compose(cumulant, item);            
         return cumulant;
     }
-
 }

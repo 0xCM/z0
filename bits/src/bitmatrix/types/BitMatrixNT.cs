@@ -21,7 +21,7 @@ namespace Z0
     {        
         readonly Span<T> data;
 
-        static readonly BitGridLayout<T> GridLayout = BitMatrix.layout<N,T>();
+        static readonly BitGridLayout GridLayout = BitMatrix.layout<N,T>();
 
         /// <summary>
         /// The bit width of each row/column 

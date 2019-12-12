@@ -5,96 +5,90 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
     
     using static zfunc;    
     
     partial class math
     {
         /// <summary>
-        /// Returns true if the the test value lies in the closed interval formed by lower and upper bounds
+        /// Returns true if the the test value lies in the closed interval formed by supplied lower and upper bounds
         /// </summary>
-        /// <param name="x">The test value</param>
-        /// <param name="a">The lower bound</param>
-        /// <param name="b">The uppper bound</param>
+        /// <param name="t">The test value</param>
+        /// <param name="min">The lower bound</param>
+        /// <param name="max">The uppper bound</param>
         [MethodImpl(Inline)]
-        public static bit between(byte x, byte a, byte b)    
-            => x >= a && x <= b;
+        public static bit between(byte t, byte min, byte max)    
+            => t >= min && t <= max;
 
         /// <summary>
-        /// Returns true if the the test value lies in the closed interval formed by lower and upper bounds
+        /// Returns true if the the test value lies in the closed interval formed by supplied lower and upper bounds
         /// </summary>
-        /// <param name="x">The test value</param>
-        /// <param name="a">The lower bound</param>
-        /// <param name="b">The uppper bound</param>
+        /// <param name="t">The test value</param>
+        /// <param name="min">The lower bound</param>
+        /// <param name="max">The uppper bound</param>
         [MethodImpl(Inline)]
-        public static bit between(sbyte x, sbyte a, sbyte b)    
-            => x >= a && x <= b;
+        public static bit between(sbyte t, sbyte min, sbyte max)    
+            => t >= min && t <= max;
 
         /// <summary>
-        /// Returns true if the the test value lies in the closed interval formed by lower and upper bounds
+        /// Returns true if the the test value lies in the closed interval formed by supplied lower and upper bounds
         /// </summary>
-        /// <param name="x">The test value</param>
-        /// <param name="a">The lower bound</param>
-        /// <param name="b">The uppper bound</param>
+        /// <param name="t">The test value</param>
+        /// <param name="min">The lower bound</param>
+        /// <param name="max">The uppper bound</param>
         [MethodImpl(Inline)]
-        public static bit between(short x, short a, short b)    
-            => x >= a && x <= b;
+        public static bit between(short t, short min, short max)    
+            => t >= min && t <= max;
 
         /// <summary>
-        /// Returns true if the the test value lies in the closed interval formed by lower and upper bounds
+        /// Returns true if the the test value lies in the closed interval formed by supplied lower and upper bounds
         /// </summary>
-        /// <param name="x">The test value</param>
-        /// <param name="a">The lower bound</param>
-        /// <param name="b">The uppper bound</param>
+        /// <param name="t">The test value</param>
+        /// <param name="min">The lower bound</param>
+        /// <param name="max">The uppper bound</param>
         [MethodImpl(Inline)]
-        public static bit between(ushort x, ushort a, ushort b)    
-            => x >= a && x <= b;
+        public static bit between(ushort t, ushort min, ushort max)    
+            => t >= min && t <= max;
 
         /// <summary>
-        /// Returns true if the the test value lies in the closed interval formed by lower and upper bounds
+        /// Returns true if the the test value lies in the closed interval formed by supplied lower and upper bounds
         /// </summary>
-        /// <param name="x">The test value</param>
-        /// <param name="a">The lower bound</param>
-        /// <param name="b">The uppper bound</param>
+        /// <param name="t">The test value</param>
+        /// <param name="min">The lower bound</param>
+        /// <param name="max">The uppper bound</param>
         [MethodImpl(Inline)]
-        public static bit between(int x, int a, int b)    
-            => x >= a && x <= b;
+        public static bit between(int t, int min, int max)    
+            => t >= min && t <= max;
 
         /// <summary>
-        /// Returns true if the the test value lies in the closed interval formed by lower and upper bounds
+        /// Returns true if the the test value lies in the closed interval formed by supplied lower and upper bounds
         /// </summary>
-        /// <param name="x">The test value</param>
-        /// <param name="a">The lower bound</param>
-        /// <param name="b">The uppper bound</param>
+        /// <param name="t">The test value</param>
+        /// <param name="min">The lower bound</param>
+        /// <param name="max">The uppper bound</param>
         [MethodImpl(Inline)]
-        public static bit between(uint x, uint a, uint b)    
-            => x >= a && x <= b;
+        public static bit between(uint t, uint min, uint max)    
+            => t >= min && t <= max;
 
         /// <summary>
-        /// Returns true if the the test value lies in the closed interval formed by lower and upper bounds
+        /// Returns true if the the test value lies in the closed interval formed by supplied lower and upper bounds
         /// </summary>
-        /// <param name="x">The test value</param>
-        /// <param name="a">The lower bound</param>
-        /// <param name="b">The uppper bound</param>
+        /// <param name="t">The test value</param>
+        /// <param name="min">The lower bound</param>
+        /// <param name="max">The uppper bound</param>
         [MethodImpl(Inline)]
-        public static bit between(long x, long a, long b)    
-            => x >= a && x <= b;
+        public static bit between(long t, long min, long max)    
+            => t >= min && t <= max;
 
         /// <summary>
-        /// Returns true if the the test value lies in the closed interval formed by lower and upper bounds
-        /// </summary>
-        /// <param name="x">The test value</param>
-        /// <param name="a">The lower bound</param>
-        /// <param name="b">The uppper bound</param>
+         /// Returns true if the the test value lies in the closed interval formed by supplied lower and upper bounds
+       /// </summary>
+        /// <param name="t">The test value</param>
+        /// <param name="min">The lower bound</param>
+        /// <param name="max">The uppper bound</param>
         [MethodImpl(Inline)]
-        public static bit between(ulong x, ulong a, ulong b)    
-            => x >= a && x <= b;
-
+        public static bit between(ulong t, ulong min, ulong max)    
+            => t >= min && t <= max;
     }
-
 }

@@ -22,9 +22,9 @@ namespace Z0
             where T : unmanaged
         {
             if(value)
-                return enable(src, pos);
+                return BitMask.enable(src, pos);
             else
-                return disable(src, pos);
+                return BitMask.disable(src, pos);
         }
 
         /// <summary>

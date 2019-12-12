@@ -70,7 +70,6 @@ namespace Z0
         public static ref Pair<ulong> vhi_256x64u_pair(Vector256<ulong> src, ref Pair<ulong> dst)
             => ref ginx.vhi(src, ref dst);
 
-
         public static Vector128<byte> vshuffle_128x8u(Vector128<byte> src, Vector128<byte> spec)
             => dinx.vshuf16x8(src,spec);
 

@@ -59,7 +59,7 @@ namespace Z0
             {
                 for(byte i = 0; i< srcSize; i++)
                     if(test(src[srcIx], i))
-                       enable(ref dst[dstIx], dstOffset + i);
+                       dst[dstIx] = BitMask.enable(dst[dstIx], dstOffset + i);
 
                 srcIx++;
                 if((dstOffset + srcSize) >= dstSize)

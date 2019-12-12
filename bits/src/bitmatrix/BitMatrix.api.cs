@@ -17,10 +17,10 @@ namespace Z0
     {        
 
         [MethodImpl(Inline)]
-        public static BitGridLayout<T> layout<N,T>(N n = default)
+        public static BitGridLayout layout<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new BitGridSpec<T>(bitsize<T>(), (int)n.NatValue,(int)n.NatValue).CalcLayout();
+                => new BitGridSpec(bitsize<T>(), (int)n.NatValue,(int)n.NatValue).CalcLayout<T>();
 
     }
 

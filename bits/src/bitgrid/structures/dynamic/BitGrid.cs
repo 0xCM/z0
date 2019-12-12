@@ -64,7 +64,7 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.cellcount<T>(RowCount, ColCount);
+            get => BitCalcs.gridcells<T>(RowCount, ColCount);
         }
 
         /// <summary>

@@ -11,7 +11,6 @@ namespace Z0
 
     public class t_bm_mul : t_bm<t_bm_mul>
     {
-
         public void pbm_mul_8x8()
         {
             for(var i=0; i< SampleSize; i++)

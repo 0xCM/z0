@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
         
     using static zfunc;    
@@ -18,52 +15,52 @@ namespace Z0
         /// <summary>
         /// Determines whether a value is strictly greater than zero
         /// </summary>
-        /// <param name="src">The source value</param>
+        /// <param name="a">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static bit positive<T>(T src)
+        public static bit positive<T>(T a)
             where T : unmanaged 
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return positive_u(src);
+                return positive_u(a);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return positive_i(src);
+                return positive_i(a);
             else 
-                return positive_f(src);
+                return positive_f(a);
         }
 
         [MethodImpl(Inline)]
-        static bit positive_i<T>(T src)
+        static bit positive_i<T>(T a)
             where T : unmanaged
         {                        
             if(typeof(T) == typeof(sbyte))
-                return math.positive(int8(src));
+                return math.positive(int8(a));
             else if(typeof(T) == typeof(short))
-                return math.positive(int16(src));
+                return math.positive(int16(a));
             else if(typeof(T) == typeof(int))
-                return math.positive(int32(src));
+                return math.positive(int32(a));
             else
-                return math.positive(int64(src));
+                return math.positive(int64(a));
        }           
 
         [MethodImpl(Inline)]
-        static bit positive_u<T>(T src)
+        static bit positive_u<T>(T a)
             where T : unmanaged
         {                        
             if(typeof(T) == typeof(byte))
-                return math.positive(uint8(src));
+                return math.positive(uint8(a));
             else if(typeof(T) == typeof(ushort))
-                return math.positive(uint16(src));
+                return math.positive(uint16(a));
             else if(typeof(T) == typeof(uint))
-                return math.positive(uint32(src));
+                return math.positive(uint32(a));
             else
-                return math.positive(uint64(src));
+                return math.positive(uint64(a));
        }           
 
         [MethodImpl(Inline)]

@@ -36,7 +36,6 @@ namespace Z0
                 return gfp.min(a,b);
         }
 
-
         [MethodImpl(Inline)]
         static T min_i<T>(T a, T b)
             where T : unmanaged

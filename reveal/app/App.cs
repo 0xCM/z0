@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Linq;
-    using Z0.Logix;
+
+    using OC = Z0.OpCodes;
 
     using static zfunc;
 
@@ -81,7 +82,7 @@ namespace Z0
         }
 
         void Disassemble(Type t)
-            => Disassemble(true, true, t);
+            => Disassemble(true, false, t);
 
         /// <summary>
         /// Emits assembly for an entire assembly. Heh.
@@ -98,19 +99,24 @@ namespace Z0
             Disassemble(new ExperimentalScenarios());
             Disassemble(typeof(inxoc));    
             Disassemble(typeof(inxsoc));    
-            Disassemble(typeof(vshiftoc));  
+            Disassemble(typeof(OC.vshift));  
             Disassemble(typeof(bvoc));    
             Disassemble(typeof(bgoc));   
-            Disassemble(typeof(natoc));    
-            Disassemble(typeof(bitmaskoc));
-            Disassemble(typeof(cpubitsoc));    
-            Disassemble(typeof(memoc));    
+            Disassemble(typeof(OC.natoc));    
+            Disassemble(typeof(OC.bitmask));
+            Disassemble(typeof(OC.bitstore));
+            Disassemble(typeof(OC.butterfly));    
+            Disassemble(typeof(OC.memory));    
             Disassemble(typeof(gmoc));    
-            Disassemble(typeof(convoc));   
-            Disassemble(typeof(sbitsoc));    
-            Disassemble(typeof(SimdPack));
-            Disassemble(typeof(logixoc));
+            Disassemble(typeof(OC.convert));   
+            Disassemble(typeof(OC.pop));   
+            Disassemble(typeof(OC.sbits));    
+            Disassemble(typeof(OC.logix));
+            Disassemble(typeof(OC.blend));
             Disassemble(typeof(zfoc));    
+            Disassemble(typeof(OC.bitconvert));    
+            Disassemble(typeof(OC.vpattern));    
+            Disassemble(typeof(SimdPack));
 
         }
 
@@ -149,9 +155,17 @@ namespace Z0
             => new App().Run();
     }
 
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+    public class OpCodeHostAttribute : Attribute
+    {
+
+
+    }
+
     /// <summary>
     /// Opcodes for scalar bit-level operations
     /// </summary>
+    [OpCodeHost]
     public static partial class bvoc
     {
 
@@ -160,11 +174,13 @@ namespace Z0
     /// <summary>
     /// Primal math op codes
     /// </summary>
+    [OpCodeHost]
     public static partial class gmoc
     {
 
     }
 
+    [OpCodeHost]
     public static partial class bgoc
     {
         
@@ -173,6 +189,7 @@ namespace Z0
     /// <summary>
     /// Floating-point op codes
     /// </summary>
+    [OpCodeHost]
     public static partial class fpoc
     {
 
@@ -186,9 +203,9 @@ namespace Z0
     /// <summary>
     /// Opcodes for intrinsic vectorized operations
     /// </summary>
+    [OpCodeHost]
     public static partial class inxoc
     {
 
     }
-
 }

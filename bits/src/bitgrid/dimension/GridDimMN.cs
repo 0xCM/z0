@@ -22,7 +22,7 @@ namespace Z0
         public int BitCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.bitcount<M,N>();
+            get => BitCalcs.gridbits<M,N>();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.cellcount<M,N,T>();
+            get => BitCalcs.gridcells<M,N,T>();
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Z0
         public int ByteCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.bytecount<M,N>();
+            get => BitCalcs.gridbytes<M,N>();
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="col">The 0-based col index</param>
         [MethodImpl(Inline)]
         public int Pos(int row, int col)
-            => BitCalcs.bitpos<N>(row, col);
+            => BitCalcs.bitindex<N>(row, col);
 
         /// <summary>
         /// Returns a dimension expression of the form RxCxWw where 

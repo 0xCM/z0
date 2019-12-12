@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// Specifies the set of unsigned primal integer types
         /// </summary>
-        static ReadOnlySpan<Type> Types =>
+        public static Type[] All =>
             new Type[]{
                 typeof(byte), typeof(ushort), typeof(uint), typeof(ulong),
                 typeof(sbyte), typeof(short), typeof(int), typeof(long),
@@ -25,11 +25,11 @@ namespace Z0
         /// <summary>
         /// Specifies the set of all primal numeric types
         /// </summary>
-        public static readonly HashSet<Type> All = 
-            new HashSet<Type>(Types.ToArray());
+        static readonly HashSet<Type> Cache = 
+            new HashSet<Type>(All);
 
         [MethodImpl(Inline)]
         public static bool IsPrimalNumeric(this Type src)
-            => All.Contains(src) || All.Contains(src.GetUnderlyingType());
+            =>   Cache.Contains(src) || Cache.Contains(src.GetUnderlyingType());
     }
 }

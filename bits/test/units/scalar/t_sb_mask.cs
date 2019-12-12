@@ -17,7 +17,7 @@ namespace Z0
         {
             void case1()
             {
-                var m = Bits.mask(3, 9, 11);
+                var m = BitMask.pow2(3, 9, 11);
                 var bs = m.ToBitString();
                 var seq = bs.BitSeq;
                 Claim.yea(seq[3] == 1);
@@ -34,29 +34,29 @@ namespace Z0
             void case2()
             {
                 
-                Claim.eq((Pow2.pow(3) - 1)^Pow2.pow(3), Bits.lomask(3));
-                Claim.eq((Pow2.pow(7) - 1)^Pow2.pow(7), Bits.lomask(7));
-                Claim.eq((Pow2.pow(13) - 1)^Pow2.pow(13), Bits.lomask(13));
-                Claim.eq((Pow2.pow(25) - 1)^Pow2.pow(25), Bits.lomask(25));
-                Claim.eq((Pow2.pow(59) - 1)^Pow2.pow(59), Bits.lomask(59));
+                Claim.eq((Pow2.pow(3) - 1)^Pow2.pow(3), BitMask.lomask64(3));
+                Claim.eq((Pow2.pow(7) - 1)^Pow2.pow(7), BitMask.lomask64(7));
+                Claim.eq((Pow2.pow(13) - 1)^Pow2.pow(13), BitMask.lomask64(13));
+                Claim.eq((Pow2.pow(25) - 1)^Pow2.pow(25), BitMask.lomask64(25));
+                Claim.eq((Pow2.pow(59) - 1)^Pow2.pow(59), BitMask.lomask64(59));
 
             }
 
             void case3()
             {
                 
-                Claim.eq(4, Bits.pop(Bits.lomask(3)));
-                Claim.eq(7, Bits.pop(Bits.lomask(6)));
-                Claim.eq(13, Bits.pop(Bits.lomask(12)));
-                Claim.eq(25, Bits.pop(Bits.lomask(24)));
-                Claim.eq(59, Bits.pop(Bits.lomask(58)));
+                Claim.eq(4, Bits.pop(BitMask.lomask64(3)));
+                Claim.eq(7, Bits.pop(BitMask.lomask64(6)));
+                Claim.eq(13, Bits.pop(BitMask.lomask64(12)));
+                Claim.eq(25, Bits.pop(BitMask.lomask64(24)));
+                Claim.eq(59, Bits.pop(BitMask.lomask64(58)));
 
             }
 
             void case4()
             {
-                var lomask = gbits.lomask<uint>(6);
-                var himask = gbits.himask<uint>(8);
+                var lomask = BitMask.lomask<uint>(6);
+                var himask = BitMask.himask<uint>(8);
                 var src = uint.MaxValue;
                 var dst = gmath.xor(gmath.xor(src,lomask), himask);
                 Claim.eq(7, gbits.ntz(dst));

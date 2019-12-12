@@ -8,12 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
 
+    using static System.Runtime.Intrinsics.X86.Bmi1;
+    using static System.Runtime.Intrinsics.X86.Bmi1.X64;
+
     using static zfunc;
 
     using static BitMasks;
 
     public static partial class BitMask
-    {            
+    {                                     
         /// <summary>
         /// [00000000 00000000 00000000 00000001]    
         /// Selects a mask where the least significant bit is enabled
@@ -22,7 +25,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N1 f = default, N1 d = default)
+        public static T lsb<T>(N1 f = default, N1 d = default, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -37,6 +40,40 @@ namespace Z0
                 throw unsupported<T>();
         }
 
+        [MethodImpl(Inline)]
+        public static T lsb<W,T>(W w = default, N2 f = default, N1 d = default, T t = default)
+            where W : unmanaged, ITypeNat
+            where T : unmanaged
+                => convert<ulong,T>(lsb64(w,f,d));
+
+        [MethodImpl(Inline)]
+        static ulong lsb64<W>(W w, N2 f, N1 d)
+            where W : unmanaged, ITypeNat
+        {
+            if(typeof(W) == typeof(N4))
+                return BitMasks.Lsb4x2;
+            else if(typeof(W) == typeof(N6))
+                return BitMasks.Lsb6x2;
+            else if(typeof(W) == typeof(N8))
+                return BitMasks.Lsb8x2;
+            else if(typeof(W) == typeof(N10))
+                return BitMasks.Lsb10x2;
+            else if(typeof(W) == typeof(N12))
+                return BitMasks.Lsb12x2;
+            else if(typeof(W) == typeof(N14))
+                return BitMasks.Lsb14x2;
+            else if(typeof(W) == typeof(N16))
+                return BitMasks.Lsb16x2;
+            else if(typeof(W) == typeof(N18))
+                return BitMasks.Lsb18x2;
+            else if(typeof(W) == typeof(N32))
+                return BitMasks.Lsb32x2;
+            else if(typeof(W) == typeof(N64))
+                return BitMasks.Lsb64x2;
+            else 
+                throw unsupported<W>();                
+        }
+
         /// <summary>
         /// [01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01]    
         /// Selects a mask where the least significant bit out of every two bits is enabled
@@ -45,7 +82,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N2 f, N1 d = default)
+        public static T lsb<T>(N2 f, N1 d = default, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -68,7 +105,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N4 f, N1 d = default)
+        public static T lsb<T>(N4 f, N1 d = default, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -91,7 +128,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N8 f, N1 d = default)
+        public static T lsb<T>(N8 f, N1 d = default, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -115,7 +152,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N16 f, N1 d = default)
+        public static T lsb<T>(N16 f, N1 d = default, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -139,7 +176,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N8 f, N2 d)
+        public static T lsb<T>(N8 f, N2 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -162,7 +199,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N8 f, N3 d)
+        public static T lsb<T>(N8 f, N3 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -185,7 +222,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N8 f, N4 d)
+        public static T lsb<T>(N8 f, N4 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -208,7 +245,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N8 f, N5 d)
+        public static T lsb<T>(N8 f, N5 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -231,7 +268,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N8 f, N6 d)
+        public static T lsb<T>(N8 f, N6 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -254,7 +291,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N8 f, N7 d)
+        public static T lsb<T>(N8 f, N7 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -277,7 +314,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N1 f = default, N1 d = default)
+        public static T msb<T>(N1 f = default, N1 d = default, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -300,7 +337,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N2 f, N1 d = default)
+        public static T msb<T>(N2 f, N1 d = default, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -324,7 +361,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N4 f, N1 d = default)
+        public static T msb<T>(N4 f, N1 d = default, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -348,7 +385,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N8 f, N1 d = default)
+        public static T msb<T>(N8 f, N1 d = default, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -371,7 +408,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N16 f, N1 d = default)
+        public static T msb<T>(N16 f, N1 d = default, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -395,7 +432,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N8 f, N2 d)
+        public static T msb<T>(N8 f, N2 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -418,7 +455,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N8 f, N3 d)
+        public static T msb<T>(N8 f, N3 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -441,7 +478,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N8 f, N4 d)
+        public static T msb<T>(N8 f, N4 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -464,7 +501,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N8 f, N5 d)
+        public static T msb<T>(N8 f, N5 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -487,7 +524,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N8 f, N6 d)
+        public static T msb<T>(N8 f, N6 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -510,7 +547,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N8 f, N7 d)
+        public static T msb<T>(N8 f, N7 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

@@ -36,7 +36,7 @@ namespace Z0
         public static int SegCount 
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.cellcount((int)natval<N>(), (int)natval<N1>(), (int)bitsize<T>());
+            get => BitCalcs.gridcells((int)natval<N>(), (int)natval<N1>(), (int)bitsize<T>());
         }
         
         /// <summary>

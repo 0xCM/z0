@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void setbit<T>(int width, int row, int col, bit state, ref T dst)    
             where T : unmanaged
-                => setbit(BitCalcs.bitpos(width,row,col), state, ref dst);
+                => setbit(BitCalcs.bitindex(width,row,col), state, ref dst);
 
         /// <summary>
         /// Sets the state of an a coordinate-identified bit
@@ -50,7 +50,7 @@ namespace Z0
         public static void setbit<N,T>(N width, int row, int col, bit state, ref T dst)    
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => setbit(BitCalcs.bitpos(natval(width),row,col), state, ref dst);
+                => setbit(BitCalcs.bitindex(natval(width),row,col), state, ref dst);
     }
 
 }

@@ -671,7 +671,7 @@ namespace Z0
         protected void add_check<T>(N128 n)
             where T : unmanaged
         {
-            var length = BitCalcs.cellcount<T>(n);
+            var length = BitCalcs.mincells<T>(n);
             Span<T> xbuffer = stackalloc T[length];
             Span<T> ybuffer = stackalloc T[length];
             Span<T> zbuffer = stackalloc T[length];
@@ -694,7 +694,7 @@ namespace Z0
         protected void add_check<T>(N256 n)
             where T : unmanaged
         {
-            var length = BitCalcs.cellcount<T>(n);
+            var length = BitCalcs.mincells<T>(n);
             Span<T> xbuffer = stackalloc T[length];
             Span<T> ybuffer = stackalloc T[length];
             Span<T> zbuffer = stackalloc T[length];

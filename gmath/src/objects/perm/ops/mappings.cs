@@ -19,10 +19,10 @@ namespace Z0
         /// Enumerates all permutation map format strings on 4 symbols
         /// </summary>
         public static IEnumerable<(Perm4 perm, string format)> mappings(N4 n)
-            => from perm in EnumValues.Enumerate<Perm4>()
-                        where !perm.IsSymbol()
-                        let maps = (perm, format:perm.FormatMap())
-                        orderby maps.perm descending
-                        select maps;
+            => from perm in evalues<Perm4>()
+                    where !perm.IsSymbol()
+                    let maps = (perm, format:perm.FormatMap())
+                    orderby maps.perm descending
+                    select maps;
     }
 }

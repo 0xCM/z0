@@ -20,8 +20,6 @@ namespace Z0
 
         public static Vector256<byte> bitgrid_vector256(BitGrid<byte> src, int block)        
             => BitGrid.vector(src, block,n256);
-
-
             
         public static BitGrid256<N16,N16,ushort> transpose(BitGrid256<N16,N16,ushort> g)                
             => BitGrid.transpose(g);
@@ -33,7 +31,7 @@ namespace Z0
             => BitCells<N23,byte>.SegCount;
 
         public static int count_segs()
-            => BitCalcs.cellcount<N20,N30,uint>();
+            => BitCalcs.gridcells<N20,N30,uint>();
 
         public static bit readbit_row_col_2(int n, ulong src, int row, int col)    
             => BitGrid.readbit(n, in src, row, col);

@@ -17,14 +17,9 @@ namespace Z0
             where T : unmanaged
         {
             if(!parse(src, out T dst))
-            {
                 return dst;
-            }
             else
-            {
-                Errors.Throw(src);
-                return default;
-            }                
+                return Errors.Throw<T>(src);
         }
         
         [MethodImpl(Inline)]

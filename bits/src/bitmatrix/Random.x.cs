@@ -127,7 +127,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BM.load(m, n, random.Span<T>(BitGridSpec.define(m,n,default(T)).TotalCellCount));
+                => BM.load(m, n, random.Span<T>(BitGridSpec.define(m,n,default(T)).TotalCells));
 
 
         /// <summary>

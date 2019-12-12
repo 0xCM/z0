@@ -479,8 +479,5 @@ partial class zfunc
         var m = method<T>(name);
         ptr = m.MethodHandle.GetFunctionPointer();
         return m;
-    }
-        
-
-
+    }        
 }

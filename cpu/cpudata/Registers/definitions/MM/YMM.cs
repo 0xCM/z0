@@ -283,7 +283,7 @@ namespace Z0
         {
             ref readonly var index = ref BitMap<ulong>()[pos];
             ref var cell  = ref Cell<ulong>(index.CellIndex);
-            return BitMask.test(cell, index.CellOffset);
+            return BitMask.testbit(cell, index.CellOffset);
         }
 
         /// <summary>

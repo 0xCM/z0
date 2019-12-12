@@ -76,8 +76,8 @@ namespace Z0
         public static Swap<T> operator ++(in Swap<T> src)
         {
             ref var dst = ref mutable(in src);
-            gmath.inc(ref dst.i);
-            gmath.inc(ref dst.j);
+            dst.i = gmath.inc(dst.i);
+            dst.j = gmath.inc(dst.j);
             return dst;
         }
 
@@ -86,10 +86,10 @@ namespace Z0
         {
             ref var dst = ref mutable(in src);
             if(gmath.nonzero(src.i))
-                gmath.dec(ref dst.i);
+                dst.i = gmath.dec(dst.i);
             
             if(gmath.nonzero(src.j))
-                gmath.dec(ref dst.j);
+                dst.j = gmath.dec(dst.j);
             return dst;
         }
 
@@ -158,5 +158,4 @@ namespace Z0
         public override bool Equals(object o)
             => o is Swap<T> x ? Equals(x) : false;
     }
-
 }

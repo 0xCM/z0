@@ -11,29 +11,28 @@ namespace Z0
 
     using static zfunc;
 
-    public class BitGridLayout<T>
-        where T : unmanaged
+    public class BitGridLayout
     {        
-        public BitGridLayout(BitGridSpec<T> spec, IEnumerable<BitCellMap<T>> Cells)
+        public BitGridLayout(BitGridSpec spec, IEnumerable<BitCellMap> Cells)
         {
             this.GridSpec = spec;
             this.RowCount = spec.RowCount;
             this.ColCount = spec.ColCount;
-            this.BitCount = spec.BitCount;
-            this.RowCellCount = spec.RowCellCount;
-            this.TotalCellCount = spec.TotalCellCount;
+            this.BitCount = spec.TotalBits;
+            this.RowCellCount = spec.RowCells;
+            this.TotalCellCount = spec.TotalCells;
             this.RowLayout = CreateLayoutIndex(Cells);
-            this.CellSize = spec.CellSize;
+            this.CellSize = spec.CellWidth;
             require(spec.RowCount == RowLayout.Count);
             require(spec.ColCount == RowLayout.First().Value.Length);                         
         }
 
-        readonly IReadOnlyDictionary<int, BitCellMap<T>[]> RowLayout;
+        readonly IReadOnlyDictionary<int, BitCellMap[]> RowLayout;
        
         /// <summary>
         /// The specification from which the layout was calculated
         /// </summary>
-        public readonly BitGridSpec<T> GridSpec;
+        public readonly BitGridSpec GridSpec;
 
         /// <summary>
         /// The number of rows in the layout
@@ -67,20 +66,20 @@ namespace Z0
 
         
         [MethodImpl(Inline)]
-        public Span<BitCellMap<T>> Row(int row)
+        public Span<BitCellMap> Row(int row)
             => RowLayout[row];            
 
         [MethodImpl(Inline)]
-        public BitCellMap<T> Cell(int row, int col)
+        public BitCellMap Cell(int row, int col)
             => RowLayout[row][col];            
 
-        public Span<BitCellMap<T>> this[int row]
+        public Span<BitCellMap> this[int row]
         {
             [MethodImpl(Inline)]
             get => Row(row);
         }
 
-        public BitCellMap<T> this[int row, int col]
+        public BitCellMap this[int row, int col]
         {
             [MethodImpl(Inline)]
             get => Cell(row, col);
@@ -106,7 +105,7 @@ namespace Z0
         public override string ToString()
             => Format();    
  
-         static IReadOnlyDictionary<int, BitCellMap<T>[]> CreateLayoutIndex(IEnumerable<BitCellMap<T>> Cells)
+        static IReadOnlyDictionary<int, BitCellMap[]> CreateLayoutIndex(IEnumerable<BitCellMap> Cells)
                 => Cells.GroupBy(x => x.Row).Select(x => (x.Key, x.OrderBy(u => u.Position).ToArray())).ToDictionary();
 
     }

@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;    
@@ -59,49 +58,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static double abs(double a)
             => Math.Abs(a);
- 
-        /// <summary>
-        /// Computes the absolute value of the source in-place
-        /// </summary>
-        /// <param name="a">The source value</param>
-        [MethodImpl(Inline)]
-        public static ref sbyte abs(ref sbyte a)
-        {
-            a = abs(a);
-            return ref a;
-        }
-
-        /// <summary>
-        /// Computes the absolute value of the source in-place
-        /// </summary>
-        /// <param name="a">The source value</param>
-        [MethodImpl(Inline)]
-        public static ref short abs(ref short a)
-        {
-            a = abs(a);
-            return ref a;
-        }
-
-        /// <summary>
-        /// Computes the absolute value of the source in-place
-        /// </summary>
-        /// <param name="a">The source value</param>
-        [MethodImpl(Inline)]
-        public static ref int abs(ref int a)
-        {
-            a = abs(a);
-            return ref a;
-        }
-
-        /// <summary>
-        /// Computes the absolute value of the source in-place
-        /// </summary>
-        /// <param name="a">The source value</param>
-        [MethodImpl(Inline)]
-        public static ref long abs(ref long a)
-        {
-            a = abs(a);
-            return ref a;
-        }
-    }
+   }
 }

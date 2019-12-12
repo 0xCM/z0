@@ -336,7 +336,7 @@ namespace Z0
         public bit this[int pos]
         {
             [MethodImpl(Inline)]
-            get => BitMask.test(data, pos);
+            get => BitMask.testbit(data, pos);
             
             [MethodImpl(Inline)]
             set => data = BitMask.set(data, (byte)pos, value);

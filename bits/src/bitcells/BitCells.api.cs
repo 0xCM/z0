@@ -13,6 +13,32 @@ namespace Z0
     public static class BitCells
     {
         /// <summary>
+        /// Calculates a canonical bijection from a contiguous sequence of bits onto a contiguous sequence of segments
+        /// </summary>
+        /// <param name="bc">The total number of bits to distribute over one or more segments</param>        
+        public static BitCellIndex<T>[] index<T>(int bc)
+            where T : unmanaged
+        {
+            var dst =  new BitCellIndex<T>[bc];
+            var capacity = bitsize<T>();            
+            ushort seg = 0;
+            byte offset = 0;
+            for(var i = 0; i < bc; i++)          
+            {
+                if(i != 0)
+                {
+                    if((i % capacity) == 0)
+                    {
+                        seg++;
+                        offset = 0;
+                    }
+                }
+                dst[i] = (seg, offset++);
+            }
+            return dst;
+        }
+
+        /// <summary>
         /// Allocates a natural bitcell container filled with a specified value
         /// </summary>
         /// <param name="n">The natural length of the vector in bits</param>
@@ -265,6 +291,5 @@ namespace Z0
                 result ^= x[i] & y[i];
             return result;
         } 
-
    }
 }

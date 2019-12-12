@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
         public static bit enabled(BitVector4 x, int pos)
-            => BitMask.test(x.data, pos);
+            => BitMask.testbit(x.data, pos);
 
         /// <summary>
         /// Determines whether a bit is enabled
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
         public static bit enabled(BitVector8 x, int pos)
-            => BitMask.test(x.data, pos);
+            => BitMask.testbit(x.data, pos);
 
         /// <summary>
         /// Determines whether a bit is enabled
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
         public static bit enabled(BitVector16 x, int pos)
-            => BitMask.test(x.data, pos);
+            => BitMask.testbit(x.data, pos);
 
         /// <summary>
         /// Determines whether a bit is enabled
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
         public static bit enabled(BitVector32 x, int pos)
-            => BitMask.test(x.data, pos);
+            => BitMask.testbit(x.data, pos);
 
         /// <summary>
         /// Determines whether a bit is enabled
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
         public static bit enabled(BitVector64 x, int pos)
-            => BitMask.test(x.data, pos);
+            => BitMask.testbit(x.data, pos);
 
         /// <summary>
         /// Determines whether an index-identified bit is enabled
@@ -60,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit enabled<T>(BitVector<T> x, int index)
             where T : unmanaged
-                => gbits.test(x.data, index);
+                => BitMask.testbit(x.data, index);
 
         /// <summary>
         /// Determines whether an index-identified bit is enabled

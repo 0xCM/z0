@@ -13,8 +13,8 @@ namespace Z0
     {            
         public void sb_bitmap_basecase()
         {
-            Claim.eq(7, Bits.pop(gbits.lomask<uint>(6)));
-            Claim.eq(12, Bits.pop(gbits.lomask<uint>(11)));
+            Claim.eq(7, Bits.pop(BitMask.lomask<uint>(6)));
+            Claim.eq(12, Bits.pop(BitMask.lomask<uint>(11)));
 
         }
 

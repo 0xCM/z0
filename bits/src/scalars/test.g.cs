@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit test<T>(T src, int pos)
             where T : unmanaged
-                => BitMaskG.testbit(src, (byte)pos);
+                => BitMask.testbit(src, (byte)pos);
 
         /// <summary>
         /// Determines whether a position-identified bit in value is enabled
@@ -34,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit test<T>(T src, uint pos)
             where T : unmanaged
-                => BitMaskG.testbit(src, (byte)pos);
+                => BitMask.testbit(src, (byte)pos);
 
         /// <summary>
         /// Determines whether a bit in a specified position is enabled
@@ -44,6 +44,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit test<T>(T src, byte pos)
             where T : unmanaged
-                => BitMaskG.testbit(src, pos);
+                => BitMask.testbit(src, pos);
     }
 }

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.OpCodes
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,7 +10,7 @@ namespace Z0
     using static zfunc;
     
 
-    public static class sbitsoc
+    public static class sbits
     {
 
         public static uint pack32x1(ConstBlock256<byte> src)
@@ -84,22 +84,7 @@ namespace Z0
         public static ulong gather_g64u(ulong src, ulong mask)
             => ginx.gather(src,mask);
 
-        public static ulong mask_1x64u(int exp0)
-            => Bits.mask(exp0);        
 
-        public static ulong mask_2x64u(int exp0, int exp1)
-            => Bits.mask(exp0, exp1);        
-
-        public static ulong mask_3x64u(int exp0, int exp1, int exp2)
-            => Bits.mask(exp0, exp1, exp2);        
-        public static ulong mask_5x64u(int exp0, int exp1, int exp2, int exp3, int exp4)
-            => Bits.mask(exp0, exp1, exp2, exp3, exp4);        
-
-        public static ulong mask_6x64u(int exp0, int exp1, int exp2, int exp3, int exp4, int exp5)
-            => Bits.mask(exp0, exp1, exp2, exp3, exp4, exp5);        
-
-        public static ulong mask_7x64u(int exp0, int exp1, int exp2, int exp3, int exp4, int exp5, int exp6)
-            => Bits.mask(exp0, exp1, exp2, exp3, exp4, exp5, exp6);        
 
 
         public static uint set_bit(uint src, byte pos, bit state)

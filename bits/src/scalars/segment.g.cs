@@ -47,6 +47,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void segment<T>(T a, int first, int last, Span<byte> dst, int offset)
             where T : unmanaged
-                => bytes(gbits.segment(a,first,last)).Slice(0, BitCalcs.bytecount(last - first + 1)).CopyTo(dst,offset);
+                => bytes(gbits.segment(a,first,last)).Slice(0, BitCalcs.minbytes(last - first + 1)).CopyTo(dst,offset);
     }
 }

@@ -85,5 +85,21 @@ namespace Z0
             return pattern;
         }
 
+        [MethodImpl(Inline)]
+        public static SubGrid256<M,N,T> stripes<M,N,T>(N256 w, M m, N n, T t = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => ginx.vbroadcast(w, BitMask.lsb(n64,n2,n1,t));            
+
+        public static SubGrid256<M,N,T> bars<M,N,T>(N256 w, M m, N n, T t = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var pattern = gmath.sll(BitMask.lomask<T>(natval(n)), natval(n));
+            return default;       
+        }
+
     }
 }

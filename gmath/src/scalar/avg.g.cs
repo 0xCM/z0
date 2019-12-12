@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
         
     using static zfunc;    
@@ -38,30 +35,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the average unsigned integral operands, rounding toward zero, and overwrites the left operand with the result
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T avgz<T>(ref T a, T b)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                math.avgz(ref uint8(ref a), uint8(b));
-            else if(typeof(T) == typeof(ushort))
-                math.avgz(ref uint16(ref a), uint16(b));
-            else if(typeof(T) == typeof(uint))
-                math.avgz(ref uint32(ref a), uint32(b));
-            else if(typeof(T) == typeof(ulong))
-                math.avgz(ref uint64(ref a), uint64(b));
-            else 
-                throw unsupported<T>();
-            return ref a;
-        }
-
-
-        /// <summary>
         /// Computes the average of unsigned integral operands, rounding toward infinity
         /// </summary>
         /// <param name="a">The left operand</param>
@@ -82,29 +55,5 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
-        /// <summary>
-        /// Computes the average unsigned integral operands, rounding toward infinity, and overwrites the left operand with the result
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T avgi<T>(ref T a, T b)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                math.avgi(ref uint8(ref a), uint8(b));
-            else if(typeof(T) == typeof(ushort))
-                math.avgi(ref uint16(ref a), uint16(b));
-            else if(typeof(T) == typeof(uint))
-                math.avgi(ref uint32(ref a), uint32(b));
-            else if(typeof(T) == typeof(ulong))
-                math.avgi(ref uint64(ref a), uint64(b));
-            else 
-                throw unsupported<T>();
-            return ref a;
-        }
-
     }
 }

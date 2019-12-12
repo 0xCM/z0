@@ -5,48 +5,43 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
     
     using static zfunc;    
     
-
     partial class math
     {
         [MethodImpl(Inline)]
-        public static bit within(sbyte a, sbyte b, sbyte epsilon)
-            => dist(a,b) <= (uint)epsilon;
+        public static bit within(sbyte a, sbyte b, sbyte tolerance)
+            => dist(a,b) <= (uint)tolerance;
 
         [MethodImpl(Inline)]
-        public static bit within(byte a, byte b, byte epsilon)
-            => dist(a,b) <= epsilon;
+        public static bit within(byte a, byte b, byte tolerance)
+            => dist(a,b) <= tolerance;
 
         [MethodImpl(Inline)]
-        public static bit within(short a, short b, short epsilon)
-            => dist(a,b) <= (uint)epsilon;
+        public static bit within(short a, short b, short tolerance)
+            => dist(a,b) <= (uint)tolerance;
 
         [MethodImpl(Inline)]
-        public static bit within(ushort a, ushort b, ushort epsilon)
-            => dist(a,b) <= epsilon;
+        public static bit within(ushort a, ushort b, ushort tolerance)
+            => dist(a,b) <= tolerance;
 
         [MethodImpl(Inline)]
-        public static bit within(int a, int b, int epsilon)
-            => dist(a,b) <= (uint)epsilon;
+        public static bit within(int a, int b, int tolerance)
+            => dist(a,b) <= (uint)tolerance;
 
         [MethodImpl(Inline)]
-        public static bit within(uint a, uint b, uint epsilon)
-            => dist(a,b) <= epsilon;
+        public static bit within(uint a, uint b, uint tolerance)
+            => dist(a,b) <= tolerance;
 
         [MethodImpl(Inline)]
-        public static bit within(long a, long b, long epsilon)
-            => dist(a,b) <= (ulong)epsilon;
+        public static bit within(long a, long b, long tolerance)
+            => dist(a,b) <= (ulong)tolerance;
 
         [MethodImpl(Inline)]
-        public static bit within(ulong a, ulong b, ulong epsilon)
-            => dist(a,b) <= epsilon;
+        public static bit within(ulong a, ulong b, ulong tolerance)
+            => dist(a,b) <= tolerance;
     }
 
 }

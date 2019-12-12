@@ -37,12 +37,10 @@ namespace Z0
         /// The number of bits apprehended by the matrix
         /// </summary>
         public static int TotalBitCount => NatMath.mul<M,N>();
-
-        readonly GridMoniker moniker;                
         
-        static readonly BitGridSpec<T> GridSpec = (Unsafe.SizeOf<T>()*8, RowBitCount, ColBitCount);
+        static readonly BitGridSpec GridSpec = new BitGridSpec(Unsafe.SizeOf<T>()*8, RowBitCount, ColBitCount);
         
-        public static readonly BitGridLayout<T> Layout = GridSpec.CalcLayout();
+        public static readonly BitGridLayout Layout = GridSpec.CalcLayout<T>();
 
         /// <summary>
         /// Allocates a Zero-filled mxn matrix
@@ -65,14 +63,12 @@ namespace Z0
         internal BitMatrix(params T[] src)
         {
             this.data = src;
-            this.moniker = GridMoniker.FromTypes<M,N,T>();
         }
 
         [MethodImpl(Inline)]
         internal BitMatrix(Span<T> src)
         {
             this.data = src;
-            this.moniker = GridMoniker.FromTypes<M,N,T>();
         }
         /// <summary>
         /// Presents matrix storage as a span of generic cells
@@ -128,7 +124,7 @@ namespace Z0
             get 
             {
                 var cell = Layout.Row(row)[col];
-                return gbits.test(Data[cell.Segment], cell.Offset);                    
+                return BitMask.testbit(Data[cell.Segment], cell.Offset);                    
             }
 
             [MethodImpl(Inline)]

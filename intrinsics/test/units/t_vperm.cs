@@ -86,7 +86,7 @@ namespace Z0
         public void perm4_symbols_random()
         {
             var perms = Random.EnumValues(A, B, C, D);
-            var all = EnumG<Perm4,byte>.Values.ToSet();
+            var all = evalues<Perm4>().ToSet();
             for(var i=0; i<SampleSize; i++)
             {
                 var perm = perms.First();

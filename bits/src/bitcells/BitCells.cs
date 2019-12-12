@@ -124,7 +124,7 @@ namespace Z0
             this.MaxBitCount = CellCapacity;
             this.SegLength = MaxBitCount;
             this.BitCount = bitcount;
-            this.BitMap = BitSize.BitMap<T>(MaxBitCount);
+            this.BitMap = BitCells.index<T>(MaxBitCount);
         }
 
         [MethodImpl(Inline)]
@@ -133,8 +133,8 @@ namespace Z0
             this.data = DataBlocks.safeload(n256,src);
             this.MaxBitCount = src.Length * CellCapacity;
             this.BitCount = n;
-            this.SegLength = BitSize.CellCount<T>(MaxBitCount);            
-            this.BitMap = BitSize.BitMap<T>(MaxBitCount);
+            this.SegLength = BitCalcs.mincells<T>(MaxBitCount);            
+            this.BitMap = BitCells.index<T>(MaxBitCount);
         }
 
         [MethodImpl(Inline)]
@@ -143,8 +143,8 @@ namespace Z0
             this.data = src;
             this.MaxBitCount = src.CellCount * CellCapacity;
             this.BitCount = src.BlockCount * 256;
-            this.SegLength = BitSize.CellCount<T>(MaxBitCount);            
-            this.BitMap = BitSize.BitMap<T>(MaxBitCount);
+            this.SegLength = BitCalcs.mincells<T>(MaxBitCount);            
+            this.BitMap = BitCells.index<T>(MaxBitCount);
         }
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace Z0
             get 
             {
                 ref readonly var loc = ref Location(index);
-                return gbits.test(data[loc.Segment], loc.Offset);
+                return BitMask.testbit(data[loc.Segment], loc.Offset);
             }
             
             [MethodImpl(Inline)]

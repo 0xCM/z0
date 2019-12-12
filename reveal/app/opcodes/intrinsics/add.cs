@@ -14,6 +14,9 @@ namespace Z0
 
     partial class inxoc
     {
+        public static Vector128<uint> vcompact(Vector128<ulong> x0, Vector128<ulong> x1, out Vector128<uint> dst)
+            => dinx.vcompact(x0,x1, out dst);
+
         public static UInt128 clmul(ulong x, ulong y)
             => Cl.clmul(x,y);
 

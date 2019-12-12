@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using static AsIn;
-    using static As;
 
     using static zfunc;
 
@@ -19,57 +15,6 @@ namespace Z0
     public readonly struct BitSize
     {
         /// <summary>
-        /// Calculates the (minimum) number of cells required to hold a contiguous sequence of bits
-        /// </summary>
-        /// <param name="cellwidth">The number of bits that comprise each segment</param>
-        /// <param name="totalbits">The number of bits</param>
-        public static int CellCount(BitSize cellwidth, BitSize totalbits)
-        {
-            if(cellwidth >= totalbits)
-                return 1;
-            else
-            {
-                var q = Math.DivRem(totalbits, cellwidth, out int r);
-                return r == 0 ? q : q + 1;
-            }
-        }
-
-        /// <summary>
-        /// Calculates the minimum number of cells required to hold a contiguous sequence of bits
-        /// </summary>
-        /// <param name="totalbits">The number of bits</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        public static int CellCount<T>(int totalbits)
-            where T : unmanaged
-                => CellCount(bitsize<T>(), totalbits);
-
-        /// <summary>
-        /// Calculates a canonical bijection from a contiguous sequence of bits onto a contiguous sequence of segments
-        /// </summary>
-        /// <param name="bitcount">The total number of bits to distribute over one or more segments</param>        
-        public static BitCellIndex<T>[] BitMap<T>(BitSize bitcount)
-            where T : unmanaged
-        {
-            var dst =  new BitCellIndex<T>[bitcount];
-            var capacity = bitsize<T>();            
-            ushort seg = 0;
-            byte offset = 0;
-            for(var i = 0; i < bitcount; i++)          
-            {
-                if(i != 0)
-                {
-                    if((i % capacity) == 0)
-                    {
-                        seg++;
-                        offset = 0;
-                    }
-                }
-                dst[i] = (seg, offset++);
-            }
-            return dst;
-        }
-
-        /// <summary>
         /// Specifies a bit count
         /// </summary>
         public readonly ulong Bits;
@@ -77,19 +22,15 @@ namespace Z0
         /// <summary>
         /// The canonical zero size
         /// </summary>
-        public static readonly BitSize Zero = default;
+        public static BitSize Zero => default;
          
-        public static readonly BitSize x8 = 8;
+        public static BitSize x8 => 8;
 
-        public static readonly BitSize x16 = 16;
+        public static BitSize x16 => 16;
 
-        public static readonly BitSize x32 = 32;
+        public static BitSize x32 => 32;
 
-        public static readonly BitSize x64 = 64;
-
-        public static readonly BitSize x128 = 128;
-
-        public static readonly BitSize x256 = 256;
+        public static BitSize x64 => 64;
 
         /// <summary>
         /// Returns the minimum number of bytes required to apprehend 
@@ -159,7 +100,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitSize Size<T>()
             where T : unmanaged
-                => Unsafe.SizeOf<T>()*8;
+                => bitsize<T>();
         
         [MethodImpl(Inline)]
         public static bool operator ==(BitSize lhs, BitSize rhs)
@@ -205,18 +146,6 @@ namespace Z0
         public BitSize(ulong Bits)
             => this.Bits = Bits;
 
-        public override string ToString()
-            => Bits.ToString();
-
-        [MethodImpl(Inline)]
-        public bool Equals(BitSize rhs)
-            => Bits == rhs.Bits;
-
-        public override int GetHashCode()
-            => Bits.GetHashCode();
-
-        public override bool Equals(object obj)
-            => obj is BitSize x ? Equals(x) : false;
 
         public ByteSize MaxByteCount
         {
@@ -228,16 +157,17 @@ namespace Z0
             }
         }
 
-        public ByteSize MinByteCount
-        {
-            [MethodImpl(Inline)]
-            get => Bits/8ul;
-        }
+        [MethodImpl(Inline)]
+        public bool Equals(BitSize rhs)
+            => Bits == rhs.Bits;
 
-        public bool IsNonZero
-        {
-            [MethodImpl(Inline)]
-            get => Bits != 0;
-        }
+        public override string ToString()
+            => Bits.ToString();
+
+        public override int GetHashCode()
+            => Bits.GetHashCode();
+
+        public override bool Equals(object obj)
+            => obj is BitSize x && Equals(x);
     }
 }

@@ -32,6 +32,10 @@ namespace Z0
         /// </summary>
         public const ulong Lsb64 = 1;
 
+
+        // ~ Nx2x1
+        // ~ ------------------------------------------------------------------
+
         /// <summary>
         /// [01 01]
         /// </summary>
@@ -43,14 +47,49 @@ namespace Z0
         public const byte Lsb6x2 = Lsb4x2 | 1 << 4;
 
         /// <summary>
-        /// [001 001]
-        /// </summary>
-        public const byte Lsb6x3 = 1 | 1 << 3;
-
-        /// <summary>
         /// [01 01 01 01]
         /// </summary>
         public const byte Lsb8x2 = Lsb6x2 | 1 << 6;
+
+        /// <summary>
+        /// [01 01 01 01 01]
+        /// </summary>
+        public const ushort Lsb10x2 = (ushort)Lsb8x2 | 1 << 8;
+
+        /// <summary>
+        /// [01 01 01 01 01 01]
+        /// </summary>
+        public const ushort Lsb12x2 = Lsb10x2 | 1 << 10;
+
+        /// <summary>
+        /// [01 01 01 01 01 01 01]
+        /// </summary>
+        public const ushort Lsb14x2 = Lsb12x2 | 1 << 12;
+
+        /// <summary>
+        /// [01 01 01 01 01 01 01 01]
+        /// </summary>
+        public const ushort Lsb16x2 = (ushort)Lsb8x2 | (ushort)Lsb8x2 << 8;
+
+        /// <summary>
+        /// [01 01 01 01 01 01 01 01 01]
+        /// </summary>
+        public const uint Lsb18x2 = (uint)Lsb16x2 | 1u << 16;
+
+        /// <summary>
+        /// [01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01]
+        /// </summary>
+        public const uint Lsb32x2 = (uint)Lsb16x2 | (uint)Lsb16x2 << 16;
+
+        /// <summary>
+        /// [01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01 01]
+        /// </summary>
+        public const ulong Lsb64x2 = (ulong)Lsb32x2 | (ulong)Lsb32x2 << 32;
+
+        /// <summary>
+        /// [001 001]
+        /// </summary>
+        public const byte Lsb6x3 = 1 | 1 << 3;
 
         /// <summary>
         /// [00010001]
@@ -88,19 +127,9 @@ namespace Z0
         public const byte Lsb8x8x7 = Lsb8x8x6 << 1 | 1;
 
         /// <summary>
-        /// [01 01 01 01 01]
-        /// </summary>
-        public const ushort Lsb10x2 = (ushort)Lsb8x2 | 1 << 8;
-
-        /// <summary>
         /// [00001 00001]
         /// </summary>
         public const ushort Lsb10x5 = 1 | 1 << 5;
-        
-        /// <summary>
-        /// [01 01 01 01 01 01]
-        /// </summary>
-        public const ushort Lsb12x2 = Lsb10x2 | 1 << 10;
 
         /// <summary>
         /// [001 001 001 001]
@@ -117,10 +146,6 @@ namespace Z0
         /// </summary>
         public const ushort Lsb12x6 = 1 | 1 << 6;
 
-        /// <summary>
-        /// [01 01 01 01 01 01 01]
-        /// </summary>
-        public const ushort Lsb14x2 = Lsb12x2 | 1 << 12;
 
         /// <summary>
         /// [0000001 0000001]
@@ -132,10 +157,6 @@ namespace Z0
         /// </summary>
         public const ushort Lsb15x3 = Lsb12x3 | 1 << 12;
 
-        /// <summary>
-        /// [01 01 01 01 01 01 01 01]
-        /// </summary>
-        public const ushort Lsb16x2 = (ushort)Lsb8x2 | (ushort)Lsb8x2 << 8;
 
         /// <summary>
         /// [0001 0001 0001 0001]
@@ -147,10 +168,6 @@ namespace Z0
         /// </summary>
         public const ushort Lsb16x8 = 1 | 1 << 8;
 
-        /// <summary>
-        /// [01 01 01 01 01 01 01 01 01]
-        /// </summary>
-        public const uint Lsb18x2 = (uint)Lsb16x2 | 1u << 16;
 
         /// <summary>
         /// [001 001 001 001 001 001]
@@ -167,10 +184,6 @@ namespace Z0
         /// </summary>        
         public const uint Lsb24x3 = (uint)Lsb12x3 | (uint)Lsb12x3 << 16;
 
-        /// <summary>
-        /// [01010101 01010101 01010101 01010101]
-        /// </summary>
-        public const uint Lsb32x2 = (uint)Lsb16x2 | (uint)Lsb16x2 << 16;
 
         /// <summary>
         /// [00010001 00010001 00010001 00010001]
@@ -192,10 +205,6 @@ namespace Z0
         /// </summary>        
         public const ulong Lsb48x3 = (ulong)Lsb24x3 | (ulong)Lsb24x3 << 32;
 
-        /// <summary>
-        /// [01010101 01010101 01010101 01010101 01010101 01010101 01010101 01010101]
-        /// </summary>
-        public const ulong Lsb64x2 = (ulong)Lsb32x2 | (ulong)Lsb32x2 << 32;
 
         /// <summary>
         /// [00010001 00010001 00010001 00010001 00010001 00010001 00010001 00010001]

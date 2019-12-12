@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.OpCodes
 {
     using System;
     using System.Runtime.CompilerServices;    
@@ -16,7 +16,7 @@ namespace Z0
     using static zfunc;
     using static As;
 
-    partial class inxoc
+    public static class blend
     {
         public static Vector256<ushort> vmerge16(Vector128<ushort> x, Vector128<ushort> y)                
             => dinx.vmerge(x,y, Blend8x16.LLRRLLRR, Blend8x16.RRLLRRLL);

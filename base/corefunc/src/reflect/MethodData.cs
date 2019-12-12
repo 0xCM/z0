@@ -57,11 +57,11 @@ namespace Z0
         public string Format()
         {
             var format = text();
-            var title = Method.Name;
+            var title = Method.MethodSig().Format();
             format.Append(StartAddress.FormatHex(false,true));
             format.Append(AsciSym.Colon);
             format.Append(AsciSym.Space);
-            format.AppendLine($"{title} Begin, {Length} bytes");
+            format.AppendLine($"{title}[{Length}]");
             for(ushort i=0; i< Length; i++)
             {
                 if(i % 2 == 0)

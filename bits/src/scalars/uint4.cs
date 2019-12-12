@@ -203,7 +203,7 @@ namespace Z0
         public bit this[int pos]
         {
             [MethodImpl(Inline)]
-            get => pos < BitWidth ? BitMask.test(data, pos) : bit.Off;
+            get => pos < BitWidth ? BitMask.testbit(data, pos) : bit.Off;
             
             [MethodImpl(Inline)]
             set => SetBit(pos, value);

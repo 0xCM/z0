@@ -2,20 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Logix
+namespace Z0.OpCodes
 {
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+    using Z0.Logix;
 
     using static zfunc;
-    using static LogicOps;
-    using static ScalarOps;
-    using static CpuOps;
-    using static BitMatrixOps;
-    using static BitVectorOps;
+    using static Logix.LogicOps;
+    using static Logix.ScalarOps;
+    using static Logix.CpuOps;
+    using static Logix.BitMatrixOps;
+    using static Logix.BitVectorOps;
 
-    public static partial class logixoc
+    public static class logix
     {
         public static int work_ring_buffer()
         {

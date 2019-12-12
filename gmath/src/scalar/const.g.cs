@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
         
     using static zfunc;    
@@ -15,21 +12,37 @@ namespace Z0
     
     partial class gmath
     {
+        /// <summary>
+        /// Returns the additive identity for a primal type
+        /// </summary>
+        /// <typeparam name="T">The type</typeparam>
         [MethodImpl(Inline)]
         public static T zero<T>()
             where T : unmanaged
                 => default;
 
+        /// <summary>
+        /// Returns the multiplicative identity for a primal type
+        /// </summary>
+        /// <typeparam name="T">The type</typeparam>
         [MethodImpl(Inline)]
         public static T one<T>()
             where T : unmanaged
                 => zfunc.one<T>();
 
+        /// <summary>
+        /// Returns the minimum value that can be represented by a primal type
+        /// </summary>
+        /// <typeparam name="T">The type</typeparam>
         [MethodImpl(Inline)]
         public static T minval<T>()
             where T : unmanaged
                 => zfunc.minval<T>();
 
+        /// <summary>
+        /// Returns the maximum value that can be represented by a primal type
+        /// </summary>
+        /// <typeparam name="T">The type</typeparam>
         [MethodImpl(Inline)]
         public static T maxval<T>()
             where T : unmanaged

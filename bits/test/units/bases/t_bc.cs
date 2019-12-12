@@ -118,7 +118,7 @@ namespace Z0
         {
             int n = natval<N>();
             var rep = default(N);
-            var segcount = BitSize.CellCount<T>(n);
+            var segcount = BitCalcs.mincells<T>(n);
             Claim.eq(BitCells<N,T>.SegCount, segcount);
             var totalcap = BitCells<N,T>.TotalCapacity;
             var unusedcap = BitCells<N,T>.UnusedCapacity;
@@ -144,7 +144,7 @@ namespace Z0
         protected void gbc_span_check<T>(int bitcount)
             where T : unmanaged
         {
-            var segcount = BitSize.CellCount<T>(bitcount);
+            var segcount = BitCalcs.mincells<T>(bitcount);
             var src = Random.Span<T>(SampleSize);
             for(var i=0; i<SampleSize; i += segcount)
             {

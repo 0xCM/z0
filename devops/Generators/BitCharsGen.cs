@@ -33,7 +33,7 @@ namespace Z0
             for(var i=0; i<dst.Length; i+=16, value++)
             {
                 for(var j=0; j<8; j++)
-                    dst[i + j*2] = BitMask.test(value,j) ? On : Off;
+                    dst[i + j*2] = BitMask.testbit(value,j) ? On : Off;
                 
             }
             return dst;

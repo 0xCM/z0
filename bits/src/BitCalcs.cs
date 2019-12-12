@@ -13,12 +13,39 @@ namespace Z0
     public static class BitCalcs
     {
         /// <summary>
-        /// Calculates the (minimum) number of cells required to hold a contiguous sequence of bits
+        /// Computes the number of bytes covered by a specified number of cells of a given width
+        /// </summary>
+        /// <param name="cells">The number of allocated cells</param>
+        /// <param name="cw">The bit-width of a cell</param>
+        [MethodImpl(Inline)]
+        public static int bytecount(int cells, int cw)
+            => cells * (cw/8);
+
+        /// <summary>
+        /// Computes the number of bytes that can be covered by a specified number of cells of parametric type
+        /// </summary>
+        /// <param name="cells">The number of cells</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int bytecount<T>(int cells)
+            where T : unmanaged
+                => cells * size<T>();
+
+        /// <summary>
+        /// Computes the minimum numbet of bytes required to hold a specified number of bits
+        /// </summary>
+        /// <param name="bc">The number of bits for which storage is required</param>
+        [MethodImpl(Inline)]
+        public static int minbytes(int bc)
+            => bc / 8 + (bc % 8 == 0 ? 0 : 1);  
+
+        /// <summary>
+        /// Computes the minimum number of cells of a given width required to hold a specified number of bits
         /// </summary>
         /// <param name="cw">The bit-width of a cell</param>
-        /// <param name="bc">The total number of bits</param>
+        /// <param name="bc">The number of bits for which storage is required</param>
         [MethodImpl(Inline)]
-        public static int cellcount(int cw, int bc)
+        public static int mincells(int cw, int bc)
         {
             if(cw >= bc)
                 return 1;
@@ -28,14 +55,41 @@ namespace Z0
         }
 
         /// <summary>
-        /// Calculates the minimum number of cells required to hold a contiguous sequence of bits
+        /// Computes the minimum number of cells required to store data of a given bit width
         /// </summary>
-        /// <param name="bc">The total number of bits</param>
-        /// <typeparam name="T">The cell type</typeparam>
+        /// <param name="bc">The number of bits for which storage is required</param>
+        /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int cellcount<T>(int bc)
+        public static int mincells<T>(int bc)
             where T : unmanaged
-                => cellcount(bitsize<T>(), bc);
+        {
+            if(bitsize<T>() >= bc)
+                return 1;
+
+            var q = bc / bitsize<T>();
+            var r = bc % bitsize<T>();
+            return q + (r != 0 ? 1 : 0);
+        }
+
+        /// <summary>
+        /// Computes the minimum number of cels required to store data of a given bit width
+        /// </summary>
+        /// <param name="w">The bit width representative</param>
+        /// <param name="t">The storage cell type representative</param>        
+        /// <typeparam name="T">The width type</typeparam>
+        /// <typeparam name="T">The storage cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int mincells<N,T>(N w = default, T t = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            if(bitsize<T>() >= natval(w))
+                return 1;
+
+            var q = natval(w) / bitsize<T>();
+            var r = natval(w) % bitsize<T>();
+            return q + (r != 0 ? 1 : 0);
+        }
 
         /// <summary>
         /// Computes the 0-based linear index determined by column width and a row/col coordinate
@@ -44,8 +98,8 @@ namespace Z0
         /// <param name="row">The 0-based row index</param>
         /// <param name="col">The 0-based col index</param>
         [MethodImpl(Inline)]
-        public static int bitpos(int colwidth, int row, int col)
-            => row*colwidth+ col;
+        public static int bitindex(int colwidth, int row, int col)
+            => row*colwidth + col;
 
         /// <summary>
         /// Computes the 0-based linear index determined by a row/col coordinate and natural column width
@@ -53,7 +107,7 @@ namespace Z0
         /// <param name="row">The grid row</param>
         /// <param name="col">The grid columns</param>
         /// <typeparam name="N">The grid column type</typeparam>
-        public static int bitpos<N>(int row, int col, N n = default)
+        public static int bitindex<N>(int row, int col, N n = default)
             where N : unmanaged, ITypeNat
                 => row * natval<N>() + col;
 
@@ -63,15 +117,11 @@ namespace Z0
         /// <param name="rows">The number of grid rows</param>
         /// <param name="cols">The number of grid columns</param>
         [MethodImpl(Inline)]
-        public static int bytecount(int rows, int cols)
+        public static int gridbytes(int rows, int cols)
         {
             var points = rows*cols;
             return (points >> 3) + (points % 8 != 0 ? 1 : 0);
         }
-
-        [MethodImpl(Inline)]
-        public static int bytecount(int bitcount)
-            => bitcount / 8 + (bitcount % 8 == 0 ? 0 : 1);  
 
         /// <summary>
         /// Computes the number of bytes required to cover a grid, predicated on natural row/col counts
@@ -81,7 +131,7 @@ namespace Z0
         /// <typeparam name="M">The row type</typeparam>
         /// <typeparam name="N">The col type</typeparam>
         [MethodImpl(Inline)]
-        public static int bytecount<M,N>(M m = default, N n = default)
+        public static int gridbytes<M,N>(M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
@@ -95,7 +145,7 @@ namespace Z0
         /// <param name="rows">The grid row count</param>
         /// <param name="cols">The grid col count</param>
         [MethodImpl(Inline)]
-        public static int bitcount<M,N>(M m = default, N n = default)
+        public static int gridbits<M,N>(M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
                 => NatMath.mul(m,n);         
@@ -106,7 +156,7 @@ namespace Z0
         /// <param name="rows">The grid row count</param>
         /// <param name="cols">The grid col count</param>
         [MethodImpl(Inline)]
-        public static int bitcount(int rows, int cols)
+        public static int gridbits(int rows, int cols)
             => rows * cols;
 
         /// <summary>
@@ -114,12 +164,12 @@ namespace Z0
         /// </summary>
         /// <param name="rows">The grid row count</param>
         /// <param name="cols">The grid col count</param>
-        /// <param name="cellwidth">The storage cell width</param>
+        /// <param name="cw">The storage cell width</param>
         [MethodImpl(Inline)]
-        public static int cellcount(int rows, int cols, int cellwidth)
+        public static int gridcells(int rows, int cols, int cw)
         {
-            var bytes = bytecount(rows, cols);
-            var segbytes = cellwidth / 8;
+            var bytes = gridbytes(rows, cols);
+            var segbytes = cw / 8;
             var segs = bytes/segbytes + (bytes % segbytes != 0 ? 1 : 0);            
             return segs;
         }
@@ -131,9 +181,9 @@ namespace Z0
         /// <param name="cols">The number of columns in the grid</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int cellcount<T>(int rows, int cols)
+        public static int gridcells<T>(int rows, int cols)
             where T : unmanaged
-                => cellcount(rows,  cols, bitsize<T>());
+                => gridcells(rows,  cols, bitsize<T>());
 
         /// <summary>
         /// Computes the number of segments required cover a grid as characterized by parametric type information
@@ -145,11 +195,11 @@ namespace Z0
         /// <typeparam name="N">The col type</typeparam>
         /// <typeparam name="T">The storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static int cellcount<M,N,T>(M m = default, N n = default, T t = default)
+        public static int gridcells<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => cellcount(natval(m), natval(n), bitsize<T>());
+                => gridcells(natval(m), natval(n), bitsize<T>());
 
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with a specified number of rows/cols
@@ -159,9 +209,9 @@ namespace Z0
         /// <param name="n">The col count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blockcount<T>(N256 block, int m, int n, T t = default)
+        public static int gridblocks<T>(N256 block, int m, int n, T t = default)
             where T : unmanaged
-                => DataBlocks.blockalign<T>(block, cellcount<T>(m,n));
+                => DataBlocks.minblocks<T>(block, gridcells<T>(m,n));
 
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with natural dimensions
@@ -174,10 +224,10 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blockcount<M,N,T>(N256 block, M m = default, N n = default, T t = default)
+        public static int gridblocks<M,N,T>(N256 block, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => DataBlocks.blockalign<T>(block, cellcount<T>(natval(m), natval(n)));        
+                => DataBlocks.minblocks<T>(block, gridcells<T>(natval(m), natval(n)));        
     }
 }

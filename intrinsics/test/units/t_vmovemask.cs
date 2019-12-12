@@ -106,7 +106,7 @@ namespace Z0
                                                 
                 var mask = 0u;
                 for(var r=0; r<srcCpuVec.Length(); r++)
-                    if(BitMask.test(src[i,r], hibit))
+                    if(BitMask.testbit(src[i,r], hibit))
                         mask = BitMask.enable(mask, r);
                 
                 var expect = mask.ToBitVector().ToBitString();
@@ -133,7 +133,7 @@ namespace Z0
                                                 
                 var mask = 0u;
                 for(var r=0; r<srcCpuVec.Length(); r++)
-                    if(BitMask.test(src[i,r], hibit))
+                    if(BitMask.testbit(src[i,r], hibit))
                         mask = BitMask.enable(mask, r);
                 
                 var expect = mask.ToBitVector(bytes).ToBitString();
@@ -153,7 +153,7 @@ namespace Z0
 
                 var mmExpect = BitVector.alloc(n32);
                 for(byte r=0; r<srcVector.Length(); r++)
-                    if(BitMask.test(srcSpan[r], 31))
+                    if(BitMask.testbit(srcSpan[r], 31))
                         BitVector.enable(mmExpect,r);
                 
                 var mmActual = fpinx.vmovemask(srcVector).ToBitVector();
@@ -172,7 +172,7 @@ namespace Z0
 
                 var mmExpect = BitVector.alloc(n32);
                 for(byte r=0; r<srcVector.Length(); r++)
-                    if(BitMask.test(srcSpan[r], 63))
+                    if(BitMask.testbit(srcSpan[r], 63))
                         BitVector.enable(mmExpect,r);
                 
                 var mmActual = fpinx.vmovemask(srcVector).ToBitVector();

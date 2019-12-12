@@ -20,7 +20,7 @@ namespace Z0
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
         [MethodImpl(Inline)]
-        public static int blockalign<T>(N8 n, int cellcount)
+        public static int minblocks<T>(N8 n, int cellcount)
             where T : unmanaged        
         {
             var blockcount = cellcount / blocklen<T>(n);
@@ -35,7 +35,7 @@ namespace Z0
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
         [MethodImpl(Inline)]
-        public static int blockalign<T>(N16 n, int cellcount)
+        public static int minblocks<T>(N16 n, int cellcount)
             where T : unmanaged        
         {
             var blockcount = cellcount / blocklen<T>(n);
@@ -50,7 +50,7 @@ namespace Z0
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
         [MethodImpl(Inline)]
-        public static int blockalign<T>(N32 n, int cellcount)
+        public static int minblocks<T>(N32 n, int cellcount)
             where T : unmanaged        
         {
             var blockcount = cellcount / blocklen<T>(n);
@@ -65,7 +65,7 @@ namespace Z0
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
         [MethodImpl(Inline)]
-        public static int blockalign<T>(N64 n, int cellcount)
+        public static int minblocks<T>(N64 n, int cellcount)
             where T : unmanaged        
         {
             var blockcount = cellcount / blocklen<T>(n);
@@ -80,7 +80,7 @@ namespace Z0
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
         [MethodImpl(Inline)]
-        public static int blockalign<T>(N128 n, int cellcount)
+        public static int minblocks<T>(N128 n, int cellcount)
             where T : unmanaged        
         {
             var blockcount = cellcount / blocklen<T>(n);
@@ -95,7 +95,7 @@ namespace Z0
         /// <remarks>If a constant/literal value is supplied for the cellcount parameter, the jitter will 
         /// resolve the computation to a constant an no runtime computations will occur</remarks>
         [MethodImpl(Inline)]
-        public static int blockalign<T>(N256 n, int cellcount)
+        public static int minblocks<T>(N256 n, int cellcount)
             where T : unmanaged        
         {
             var blockcount = cellcount / blocklen<T>(n);
@@ -114,7 +114,7 @@ namespace Z0
         /// <typeparam name="N">The col type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blockalign<W,M,N,T>(W w = default, M m = default, N n = default, T t = default)
+        public static int minblocks<W,M,N,T>(W w = default, M m = default, N n = default, T t = default)
             where W : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat

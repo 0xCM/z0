@@ -176,8 +176,8 @@ namespace Z0
             var gy = Random.BitGrid(m,n,t);
             var gz = BitGrid.alloc(m,n,t);
 
-            Claim.eq(gz.BlockCount, BitCalcs.blockcount(n256,m,n,t));            
-            Claim.eq(gz.CellCount, BitCalcs.cellcount(m,n,t));
+            Claim.eq(gz.BlockCount, BitCalcs.gridblocks(n256,m,n,t));            
+            Claim.eq(gz.CellCount, BitCalcs.gridcells(m,n,t));
             
             BitGrid.and(gx,gy,gz);
             
@@ -195,8 +195,8 @@ namespace Z0
             var gy = Random.BitGrid(m,n,t);
             var gz = BitGrid.alloc(m,n,t);
 
-            Claim.eq(gz.BlockCount, BitCalcs.blockcount(n256,m,n,t));            
-            Claim.eq(gz.CellCount, BitCalcs.cellcount(m,n,t));
+            Claim.eq(gz.BlockCount, BitCalcs.gridblocks(n256,m,n,t));            
+            Claim.eq(gz.CellCount, BitCalcs.gridcells(m,n,t));
             
             BitGrid.xor(gx,gy,gz);
             
@@ -211,8 +211,8 @@ namespace Z0
             var gy = Random.BitGrid(m,n,t);
             var gz = BitGrid.alloc(m,n,t);
 
-            Claim.eq(gz.BlockCount, BitCalcs.blockcount(n256,m,n,t));            
-            Claim.eq(gz.CellCount, BitCalcs.cellcount<T>(m,n));
+            Claim.eq(gz.BlockCount, BitCalcs.gridblocks(n256,m,n,t));            
+            Claim.eq(gz.CellCount, BitCalcs.gridcells<T>(m,n));
             
             BitGrid.and(gx,gy,gz);
             
@@ -228,8 +228,8 @@ namespace Z0
             var gy = Random.BitGrid(m,n,t);
             var gz = BitGrid.alloc(m,n,t);
 
-            Claim.eq(gz.BlockCount, BitCalcs.blockcount(n256,m,n,t));            
-            Claim.eq(gz.CellCount, BitCalcs.cellcount<T>(m,n));
+            Claim.eq(gz.BlockCount, BitCalcs.gridblocks(n256,m,n,t));            
+            Claim.eq(gz.CellCount, BitCalcs.gridcells<T>(m,n));
             
             BitGrid.xor(gx,gy,gz);
             

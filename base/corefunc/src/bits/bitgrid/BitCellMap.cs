@@ -5,19 +5,16 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
 
-
     /// <summary>
     /// Correlates a bit position with a grid row and column
     /// </summary>
-    public readonly struct BitCellMap<T>
-        where T : unmanaged
+    public readonly struct BitCellMap
     {           
+        [MethodImpl(Inline)]
         public BitCellMap(ushort Segment, ushort Offset, int Position, int Row, int Col)
         {
             this.Segment = Segment;

@@ -66,7 +66,7 @@ namespace Z0
             dst = default;
             for(int i=offset, pos = 0; i<= last; i++, pos++)
                 if(src[i] == bit.One)
-                    dst = gbits.enable(dst, pos);                        
+                    dst = BitMask.enable(dst, pos);                        
             return ref dst;
         }
     }

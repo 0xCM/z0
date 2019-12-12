@@ -223,7 +223,7 @@ namespace Z0
                 increments.Add(current);
                 
                 if(gmath.lt(current, max))
-                    gmath.inc(ref current);
+                    current = gmath.inc(current);
                 else
                     break;
 

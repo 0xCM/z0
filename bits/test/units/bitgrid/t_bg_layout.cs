@@ -127,7 +127,7 @@ namespace Z0
             Claim.eq(9, grid.RowCount);
             Claim.eq(4, grid.ColCount);
 
-            var layout = grid.CalcLayout();
+            var layout = grid.CalcLayout<byte>();
             Claim.eq(36, layout.BitCount);
             Claim.eq(9, layout.RowCount);
             Claim.eq(4, layout.ColCount);
@@ -160,7 +160,7 @@ namespace Z0
             Claim.eq(16, spec.RowCount);
             Claim.eq(16, spec.ColCount);
 
-            var layout = spec.CalcLayout();
+            var layout = spec.CalcLayout<byte>();
 
             int rowCount = 0, bitpos = 0;
             for(var row=0; row < layout.RowCount; row++)

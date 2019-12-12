@@ -393,7 +393,7 @@ namespace Z0
 
             var lo = (u2 << 32) | (t0 & 0xffffffffu);
             var hi = t3 + (u2 >> 32) + (u1 >> 32);  
-            return Pair.define(lo,hi);          
+            return pair(lo,hi);          
         }
 
         /// <summary>

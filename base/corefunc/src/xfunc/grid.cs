@@ -19,16 +19,16 @@ namespace Z0
         /// <param name="spec">The grid specification that characterizes the layout</param>
         /// <typeparam name="T">The storage type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGridLayout<T> CalcLayout<T>(this BitGridSpec<T> spec)
+        public static BitGridLayout CalcLayout<T>(this BitGridSpec spec)
             where T : unmanaged
-                => new BitGridLayout<T>(spec, spec.GridCells());
+                => new BitGridLayout(spec, spec.GridCells<T>());
 
-        static IEnumerable<BitCellMap<T>> GridCells<T>(this BitGridSpec<T> spec)
+        static IEnumerable<BitCellMap> GridCells<T>(this BitGridSpec spec)
             where T : unmanaged
         {                                                        
             var bit = 0;
             var seg = 0;
-            var segbits = spec.CellSize;
+            var segbits = spec.CellWidth;
 
             for(int row = 0, rowbit = 0; row < spec.RowCount; row++)
             {
@@ -37,16 +37,16 @@ namespace Z0
                     if(segbits == 0)
                     {
                         seg++;
-                        segbits = spec.CellSize;
+                        segbits = spec.CellWidth;
                     }
                    
-                   var offset = (byte)(spec.CellSize - segbits);
+                   var offset = (byte)(spec.CellWidth - segbits);
                    var pos = BitCellIndex<T>.Define((ushort)seg,offset);
-                   yield return  new BitCellMap<T>(pos.Segment, pos.Offset, pos.LinearIndex, row, col);
+                   yield return  new BitCellMap(pos.Segment, pos.Offset, pos.LinearIndex, row, col);
                 }
 
                 seg++;
-                segbits = spec.CellSize;
+                segbits = spec.CellWidth;
             }                    
         }   
     }

@@ -5,80 +5,74 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
 
     using static zfunc;        
 
     partial class math
     {
         [MethodImpl(Inline)]
-        public static bit eq(sbyte lhs, sbyte rhs)
-            => lhs == rhs;
+        public static bit eq(sbyte a, sbyte b)
+            => a == b;
 
         [MethodImpl(Inline)]
-        public static bit eq(byte lhs, byte rhs)
-            => lhs == rhs;
+        public static bit eq(byte a, byte b)
+            => a == b;
 
         [MethodImpl(Inline)]
-        public static bit eq(short lhs, short rhs)
-            => lhs == rhs;
+        public static bit eq(short a, short b)
+            => a == b;
 
         [MethodImpl(Inline)]
-        public static bit eq(ushort lhs, ushort rhs)
-            => lhs == rhs;
+        public static bit eq(ushort a, ushort b)
+            => a == b;
 
         [MethodImpl(Inline)]
-        public static bit eq(int lhs, int rhs)
-            => lhs == rhs;
+        public static bit eq(int a, int b)
+            => a == b;
 
         [MethodImpl(Inline)]
-        public static bit eq(uint lhs, uint rhs)
-            => lhs == rhs;
+        public static bit eq(uint a, uint b)
+            => a == b;
 
         [MethodImpl(Inline)]
-        public static bit eq(long lhs, long rhs)
-            => lhs == rhs;
+        public static bit eq(long a, long b)
+            => a == b;
 
         [MethodImpl(Inline)]
-        public static bit eq(ulong lhs, ulong rhs)
-            => lhs == rhs;
+        public static bit eq(ulong a, ulong b)
+            => a == b;
   
         [MethodImpl(Inline)]
-        public static bit neq(sbyte lhs, sbyte rhs)
-            => lhs != rhs;
+        public static bit neq(sbyte a, sbyte b)
+            => a != b;
 
         [MethodImpl(Inline)]
-        public static bit neq(byte lhs, byte rhs)
-            => lhs != rhs;
+        public static bit neq(byte a, byte b)
+            => a != b;
 
         [MethodImpl(Inline)]
-        public static bit neq(short lhs, short rhs)
-            => lhs != rhs;
+        public static bit neq(short a, short b)
+            => a != b;
 
         [MethodImpl(Inline)]
-        public static bit neq(ushort lhs, ushort rhs)
-            => lhs != rhs;
+        public static bit neq(ushort a, ushort b)
+            => a != b;
 
         [MethodImpl(Inline)]
-        public static bit neq(int lhs, int rhs)
-            => lhs != rhs;
+        public static bit neq(int a, int b)
+            => a != b;
 
         [MethodImpl(Inline)]
-        public static bit neq(uint lhs, uint rhs)
-            => lhs != rhs;
+        public static bit neq(uint a, uint b)
+            => a != b;
 
         [MethodImpl(Inline)]
-        public static bit neq(long lhs, long rhs)
-            => lhs != rhs;
+        public static bit neq(long a, long b)
+            => a != b;
 
         [MethodImpl(Inline)]
-        public static bit neq(ulong lhs, ulong rhs)
-            => lhs != rhs;
-
- 
+        public static bit neq(ulong a, ulong b)
+            => a != b;
     }
 }

@@ -166,7 +166,7 @@ namespace Z0
         /// <param name="col">The 0-based col index</param>
         [MethodImpl(Inline)]
         public int Pos(int row, int col)
-            => BitCalcs.bitpos(ColCount, row,col);
+            => BitCalcs.bitindex(ColCount, row,col);
 
         /// <summary>
         /// Computes the storage segment offset for a row/col coordinate

@@ -5,79 +5,74 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
 
     using static zfunc;    
     
-
     partial class math
     {
         [MethodImpl(Inline)]
-        public static bit lt(sbyte lhs, sbyte rhs)
-            => lhs < rhs;
+        public static bit lt(sbyte a, sbyte b)
+            => a < b;
 
         [MethodImpl(Inline)]
-        public static bit lt(byte lhs, byte rhs)
-            => lhs < rhs;
+        public static bit lt(byte a, byte b)
+            => a < b;
 
         [MethodImpl(Inline)]
-        public static bit lt(short lhs, short rhs)
-            => lhs < rhs;
+        public static bit lt(short a, short b)
+            => a < b;
 
         [MethodImpl(Inline)]
-        public static bit lt(ushort lhs, ushort rhs)
-            => lhs < rhs;
+        public static bit lt(ushort a, ushort b)
+            => a < b;
 
         [MethodImpl(Inline)]
-        public static bit lt(int lhs, int rhs)
-            => lhs < rhs;
+        public static bit lt(int a, int b)
+            => a < b;
 
         [MethodImpl(Inline)]
-        public static bit lt(uint lhs, uint rhs)
-            => lhs < rhs;
+        public static bit lt(uint a, uint b)
+            => a < b;
 
         [MethodImpl(Inline)]
-        public static bit lt(long lhs, long rhs)
-            => lhs < rhs;
+        public static bit lt(long a, long b)
+            => a < b;
 
         [MethodImpl(Inline)]
-        public static bit lt(ulong lhs, ulong rhs)
-            => lhs < rhs;
+        public static bit lt(ulong a, ulong b)
+            => a < b;
         
         [MethodImpl(Inline)]
-        public static bit lteq(sbyte lhs, sbyte rhs)
-            => lhs <= rhs;
+        public static bit lteq(sbyte a, sbyte b)
+            => a <= b;
 
         [MethodImpl(Inline)]
-        public static bit lteq(byte lhs, byte rhs)
-            => lhs <= rhs;
+        public static bit lteq(byte a, byte b)
+            => a <= b;
 
         [MethodImpl(Inline)]
-        public static bit lteq(short lhs, short rhs)
-            => lhs <= rhs;
+        public static bit lteq(short a, short b)
+            => a <= b;
 
         [MethodImpl(Inline)]
-        public static bit lteq(ushort lhs, ushort rhs)
-            => lhs <= rhs;
+        public static bit lteq(ushort a, ushort b)
+            => a <= b;
 
         [MethodImpl(Inline)]
-        public static bit lteq(int lhs, int rhs)
-            => lhs <= rhs;
+        public static bit lteq(int a, int b)
+            => a <= b;
 
         [MethodImpl(Inline)]
-        public static bit lteq(uint lhs, uint rhs)
-            => lhs <= rhs;
+        public static bit lteq(uint a, uint b)
+            => a <= b;
 
         [MethodImpl(Inline)]
-        public static bit lteq(long lhs, long rhs)
-            => lhs <= rhs;
+        public static bit lteq(long a, long b)
+            => a <= b;
 
         [MethodImpl(Inline)]
-        public static bit lteq(ulong lhs, ulong rhs)
-            => lhs <= rhs; 
+        public static bit lteq(ulong a, ulong b)
+            => a <= b; 
     }
 }

@@ -77,7 +77,7 @@ namespace Z0
                 var bitseq = bs.BitSeq.Blocked(block);
                 uint packed = Bits.pack8x1(bitseq);
                 for(var i=0; i< count; i++)
-                    Claim.eq(bs[i], BitMask.test(packed, i));
+                    Claim.eq(bs[i], BitMask.testbit(packed, i));
 
             }
         }
@@ -92,7 +92,7 @@ namespace Z0
                 var bitseq = bs.BitSeq.Blocked(block);
                 uint packed = Bits.pack8x1(bitseq);
                 for(var i=0; i< count; i++)
-                    Claim.eq(bs[i], BitMask.test(packed, i));
+                    Claim.eq(bs[i], BitMask.testbit(packed, i));
 
             }
         }
@@ -227,21 +227,21 @@ namespace Z0
 
         public static ref byte pack(byte x0, byte x1, byte x2, byte x3, byte x4, byte x5, byte x6, byte x7, byte pos, ref byte dst)
         {
-          if(BitMask.test(x0, pos)) 
+          if(BitMask.testbit(x0, pos)) 
             dst = BitMask.enable(dst, 0);
-          if(BitMask.test(x1, pos)) 
+          if(BitMask.testbit(x1, pos)) 
             dst = BitMask.enable(dst, 1);
-          if(BitMask.test(x2, pos)) 
+          if(BitMask.testbit(x2, pos)) 
             dst = BitMask.enable(dst, 2);
-          if(BitMask.test(x3, pos)) 
+          if(BitMask.testbit(x3, pos)) 
             dst = BitMask.enable(dst, 3);
-          if(BitMask.test(x4, pos)) 
+          if(BitMask.testbit(x4, pos)) 
             dst = BitMask.enable(dst, 4);
-          if(BitMask.test(x5, pos)) 
+          if(BitMask.testbit(x5, pos)) 
             dst = BitMask.enable(dst, 5);
-          if(BitMask.test(x6, pos)) 
+          if(BitMask.testbit(x6, pos)) 
             dst = BitMask.enable(dst, 6);
-          if(BitMask.test(x7, pos)) 
+          if(BitMask.testbit(x7, pos)) 
             dst = BitMask.enable(dst, 7);
           return ref dst;
         }

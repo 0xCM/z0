@@ -355,10 +355,10 @@ namespace Z0
                 for(byte j =0; j< tLen; j++)
                 {
                     var before = gbits.test(x, j);
-                    BitMaskG.toggle(ref x, j);
+                    x = BitMask.toggle(x, j);
                     var after = gbits.test(x, j);
                     Claim.neq(before, after);
-                    BitMaskG.toggle(ref x, j);
+                    x = BitMask.toggle(x, j);
                     Claim.eq(x, src[i]);
                 }
             }
@@ -466,5 +466,21 @@ namespace Z0
                 Claim.eq(bc1,bc3);
             }
         }
+        
+        protected void sb_width_check<T>()
+            where T : unmanaged
+        {
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var x = Random.Next<T>();
+                var actual = gbits.width(x);
+                var expect = bitsize<T>() - gbits.nlz(x);
+                Claim.eq(expect, actual);
+
+            }
+
+        }
+
+
     }
 }

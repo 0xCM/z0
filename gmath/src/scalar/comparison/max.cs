@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;    
@@ -43,63 +42,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong max(ulong a, ulong b)
             => a > b ? a : b;
-
-
-        [MethodImpl(Inline)]
-        public static ref sbyte max(ref sbyte a, sbyte b)
-        {
-            a = a > b ? a : b;
-            return ref a;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref byte max(ref byte a, byte b)
-        {
-            a = a > b ? a : b;
-            return ref a;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref short max(ref short a, short b)
-        {
-            a = a > b ? a : b;
-            return ref a;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref ushort max(ref ushort a, ushort b)
-        {
-            a = a > b ? a : b;
-            return ref a;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref int max(ref int a, int b)
-        {
-            a = a > b ? a : b;
-            return ref a;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref uint max(ref uint a, uint b)
-        {
-            a = a > b ? a : b;
-            return ref a;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref long max(ref long a, long b)
-        {
-            a = a > b ? a : b;
-            return ref a;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref ulong max(ref ulong a, ulong b)
-        {
-            a = a > b ? a : b;
-            return ref a;
-        }
-
     }
 }

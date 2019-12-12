@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
         
     using static zfunc;    
@@ -16,94 +13,94 @@ namespace Z0
     partial class gmath
     {
         [MethodImpl(Inline)]
-        public static bit eq<T>(T lhs, T rhs)
+        public static bit eq<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return equ(lhs,rhs);
+                return equ(a,b);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return eqi(lhs,rhs);
+                return eqi(a,b);
             else 
-                return gfp.eq(lhs,rhs);
+                return gfp.eq(a,b);
         }
 
         [MethodImpl(Inline)]
-        public static bit neq<T>(T lhs, T rhs)
+        public static bit neq<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return nequ(lhs,rhs);
+                return nequ(a,b);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return neqi(lhs,rhs);
-            else return gfp.neq(lhs,rhs);
+                return neqi(a,b);
+            else return gfp.neq(a,b);
         }
 
         [MethodImpl(Inline)]
-        static bit neqi<T>(T lhs, T rhs)
+        static bit neqi<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return math.neq(int8(lhs), int8(rhs));
+                 return math.neq(int8(a), int8(b));
             else if(typeof(T) == typeof(short))
-                 return math.neq(int16(lhs), int16(rhs));
+                 return math.neq(int16(a), int16(b));
             else if(typeof(T) == typeof(int))
-                 return math.neq(int32(lhs), int32(rhs));
+                 return math.neq(int32(a), int32(b));
             else
-                 return math.neq(int64(lhs), int64(rhs));
+                 return math.neq(int64(a), int64(b));
         }
 
         [MethodImpl(Inline)]
-        static bit nequ<T>(T lhs, T rhs)
+        static bit nequ<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return math.neq(uint8(lhs), uint8(rhs));
+                return math.neq(uint8(a), uint8(b));
             else if(typeof(T) == typeof(ushort))
-                return math.neq(uint16(lhs), uint16(rhs));
+                return math.neq(uint16(a), uint16(b));
             else if(typeof(T) == typeof(uint))
-                return math.neq(uint32(lhs), uint32(rhs));
+                return math.neq(uint32(a), uint32(b));
             else 
-                return math.neq(uint64(lhs), uint64(rhs));
+                return math.neq(uint64(a), uint64(b));
         }
 
         [MethodImpl(Inline)]
-        static bit eqi<T>(T lhs, T rhs)
+        static bit eqi<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return math.eq(int8(lhs), int8(rhs));
+                 return math.eq(int8(a), int8(b));
             else if(typeof(T) == typeof(short))
-                 return math.eq(int16(lhs), int16(rhs));
+                 return math.eq(int16(a), int16(b));
             else if(typeof(T) == typeof(int))
-                 return math.eq(int32(lhs), int32(rhs));
+                 return math.eq(int32(a), int32(b));
             else
-                 return math.eq(int64(lhs), int64(rhs));
+                 return math.eq(int64(a), int64(b));
         }
 
         [MethodImpl(Inline)]
-        static bit equ<T>(T lhs, T rhs)
+        static bit equ<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return math.eq(uint8(lhs), uint8(rhs));
+                return math.eq(uint8(a), uint8(b));
             else if(typeof(T) == typeof(ushort))
-                return math.eq(uint16(lhs), uint16(rhs));
+                return math.eq(uint16(a), uint16(b));
             else if(typeof(T) == typeof(uint))
-                return math.eq(uint32(lhs), uint32(rhs));
+                return math.eq(uint32(a), uint32(b));
             else 
-                return math.eq(uint64(lhs), uint64(rhs));
+                return math.eq(uint64(a), uint64(b));
         }
 
     }

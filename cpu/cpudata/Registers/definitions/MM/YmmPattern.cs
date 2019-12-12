@@ -56,7 +56,7 @@ namespace Z0
             for(var i=0; i < dst.CellCount; i++)
             {
                 dst[i] = val;
-                gmath.inc(ref val);
+                val = gmath.inc(val);
             }
             return YMM.From(dst.Swap(swaps));
         }
@@ -75,7 +75,7 @@ namespace Z0
             for(var i=0; i<dst.CellCount; i++)
             {
                 dst[i] = val;
-                gmath.dec(ref val);
+                val = gmath.dec(val);
             }
 
             return YMM.From(dst.Swap(swaps));

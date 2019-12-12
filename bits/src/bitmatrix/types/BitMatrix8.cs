@@ -127,7 +127,7 @@ namespace Z0
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => BitMask.test(skip(in Head,row), col);
+            get => BitMask.testbit(skip(in Head,row), col);
 
             [MethodImpl(Inline)]
             set => seek(ref Head, row) = BitMask.set(seek(ref Head, row), (byte)col, value);

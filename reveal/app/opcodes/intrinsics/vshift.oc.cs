@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.OpCodes
 {
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    public static class vshiftoc
+    public static class vshift
     {
         public static Vector128<byte> vsllv_128x8u(Vector128<byte> x, Vector128<byte> offsets)
             => ginx.vsllv(x,offsets);

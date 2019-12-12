@@ -310,8 +310,8 @@ namespace Z0
         long IPointSource<long>.Next()
         {
             var next = (long)Points.Next(Int64.MaxValue);
-            var negative = BitMask.test(next, 7);
-            var result = BitMask.test(next, 7) ? BitMask.enable(next, 63) : next;
+            var negative = BitMask.testbit(next, 7);
+            var result = BitMask.testbit(next, 7) ? BitMask.enable(next, 63) : next;
             return result;
         }
 

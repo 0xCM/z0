@@ -26,6 +26,10 @@ namespace Z0
 
         public void exchange_16x16()
             => BitGrid.export(GridPattern.exchange(n256,n16,n16,z16));
+
+        
+        public void stripes_12x12()
+            => BitGrid.export(GridPattern.stripes(n256,n12,n12,z16));
                    
 
                    

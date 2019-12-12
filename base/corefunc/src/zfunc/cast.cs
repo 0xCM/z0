@@ -11,6 +11,15 @@ using Z0;
 partial class zfunc
 {
     /// <summary>
+    /// Explicitly casts a source value to value of the indicated type, raising an exception if operation fails
+    /// </summary>
+    /// <param name="src">The source value</param>
+    /// <typeparam name="T">The target type</typeparam>
+    [MethodImpl(Inline)]   
+    public static T cast<T>(object src) 
+        => (T) src;
+
+    /// <summary>
     /// Reimagines a span of one element type as a span of another element type
     /// </summary>
     /// <param name="src">The source span</param>

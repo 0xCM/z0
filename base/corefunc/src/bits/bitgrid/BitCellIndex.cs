@@ -7,6 +7,233 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using static zfunc;
+		 
+	public struct BitCellIndex
+	{
+		/// <summary>
+		/// Constructs a bit cell index from a cell and bit offset
+		/// </summary>
+		/// <param name="index">The linear index</param>
+		[MethodImpl(Inline)]
+		public static BitCellIndex FromCellIndex(byte capacity, uint cell, byte offset)
+			=> new BitCellIndex(capacity, cell, offset);
+
+		/// <summary>
+		/// Constructs a bit cell index from a linear/absolute bit index
+		/// </summary>
+		/// <param name="index">The linear index</param>
+		[MethodImpl(Inline)]
+		public static BitCellIndex FromBitIndex(byte capacity, uint bitpos)
+			=> new BitCellIndex(capacity, CalcCellIndex(capacity, bitpos), CalcBitOffset(capacity, bitpos));
+
+        /// <summary>
+        /// Computes the cell index of a linear bit index
+        /// </summary>
+        /// <param name="bitpos">The source index</param>
+		[MethodImpl(Inline)]
+        public static uint CalcCellIndex(byte capacity, uint bitpos) 
+			=> bitpos/capacity;
+
+        /// <summary>
+        /// Computes the offset of a linear index
+        /// </summary>
+        /// <param name="bitpos">The source index</param>
+		[MethodImpl(Inline)]
+        public static byte CalcBitOffset(byte capacity, uint bitpos) 
+			=> (byte)(bitpos % capacity);
+
+		/// <summary>
+		/// Computes a linear bit index from a cell index and cell-relative offset
+		/// </summary>
+		/// <param name="capacity">The cell capacity</param>
+		/// <param name="cell">The cell index</param>
+		/// <param name="offset">The cell offset</param>
+		[MethodImpl(Inline)]
+		public static uint CalcBitIndex(byte capacity, uint cell, byte offset)
+			=> cell*capacity + offset;
+
+		/// <summary>
+		/// The container-relative 0-based offset of the cell
+		/// </summary>
+		public uint CellIndex;
+
+		/// <summary>
+		/// The cell-relative offset of the bit
+		/// </summary>
+		public byte BitOffset;
+
+		/// <summary>
+		/// The bit-width of a cell
+		/// </summary>
+		public byte Capacity;			 
+
+		[MethodImpl(Inline)]
+		public static BitCellIndex operator +(BitCellIndex index, uint bitcount)
+		{
+			index.Add(bitcount);
+            return index;
+		}
+
+		[MethodImpl(Inline)]
+		public static BitCellIndex operator -(BitCellIndex index, uint bitcount)
+		{
+            index.Sub(bitcount);
+            return index;
+		}
+
+		[MethodImpl(Inline)]
+		public static uint operator -(BitCellIndex lhs, BitCellIndex rhs)
+			=> lhs.CountTo(rhs);
+
+		[MethodImpl(Inline)]
+		public static BitCellIndex operator --(BitCellIndex index)
+		{
+            index.Dec();
+            return index;
+		}
+
+		[MethodImpl(Inline)]
+		public static BitCellIndex operator ++(BitCellIndex index)
+		{
+			index.Inc();
+            return index;
+		}
+
+		[MethodImpl(Inline)]
+		public static bool operator ==(BitCellIndex lhs, BitCellIndex rhs)
+			=> lhs.Equals(rhs);
+
+		[MethodImpl(Inline)]
+		public static bool operator !=(BitCellIndex lhs, BitCellIndex rhs)
+			=> !lhs.Equals(rhs);
+
+
+		[MethodImpl(Inline)]
+		public BitCellIndex(byte capacity, uint cell, byte offset)
+		{
+			this.CellIndex = cell;
+			this.BitOffset = offset;
+			this.Capacity = capacity;
+		}
+
+		/// <summary>
+		/// The linear/absolute position of the bit
+		/// </summary>
+		public uint BitIndex
+		{
+			[MethodImpl(Inline)]
+			get => this.CellIndex * Capacity + BitOffset;
+		}
+
+		[MethodImpl(Inline)]
+		public uint CountTo(BitCellIndex other)
+			=> (uint)Math.Abs((long)BitIndex - (long)other.BitIndex) + 1;
+
+		[MethodImpl(Inline)]
+        public void Add(uint rhs)
+        {
+            var bitpos = (uint)(BitIndex + rhs);
+            this.CellIndex = CalcCellIndex(bitpos);
+            this.BitOffset = CalcBitOffset(bitpos);
+        }
+
+        [MethodImpl(Inline)]
+        void UpdateFrom(uint index)
+        {
+            this.CellIndex = CalcCellIndex(index);
+            this.BitOffset = CalcBitOffset(index);
+        }
+
+        [MethodImpl(Inline)]
+        void Reset()
+        {
+            this.CellIndex = 0;
+            this.BitOffset = 0;
+        }
+
+		[MethodImpl(Inline)]
+        public void Sub(uint rhs)
+        {
+            var newIndex = BitIndex - rhs;
+            if(newIndex > 0)
+                UpdateFrom((uint)newIndex);
+            else
+                Reset();
+        }
+
+		[MethodImpl(Inline)]
+        public void Dec()
+        {
+            if(BitOffset > 0)
+                --BitOffset;
+            else
+            {
+                if(CellIndex != 0)
+                {
+                    BitOffset = (byte)(Capacity - 1);
+                    --CellIndex;
+                }            
+            }
+        }
+
+		[MethodImpl(Inline)]
+        public void Inc()
+        {
+            if(BitOffset < Capacity - 1)
+                BitOffset++;
+            else
+            {
+                CellIndex++;
+                BitOffset = 0;
+            }
+        }
+
+        /// <summary>
+        /// Computes the cell index of a linear bit index
+        /// </summary>
+        /// <param name="bitpos">The source index</param>
+		[MethodImpl(Inline)]
+        uint CalcCellIndex(uint bitpos) 
+			=> bitpos/Capacity;
+
+        /// <summary>
+        /// Computes the offset of a linear index
+        /// </summary>
+        /// <param name="bitpos">The source index</param>
+		[MethodImpl(Inline)]
+        byte CalcBitOffset(uint bitpos) 
+			=> (byte)(bitpos % Capacity);
+
+		/// <summary>
+		/// Computes a linear bit index from a cell index and cell-relative offset
+		/// </summary>
+		/// <param name="capacity">The cell capacity</param>
+		/// <param name="cell">The cell index</param>
+		/// <param name="offset">The cell offset</param>
+		[MethodImpl(Inline)]
+		uint CalcBitIndex(uint cell, byte offset)
+			=> cell*Capacity + offset;
+
+
+		[MethodImpl(Inline)]
+		public bool Equals(BitCellIndex rhs)
+			=> CellIndex == rhs.CellIndex
+            && BitOffset == rhs.BitOffset
+			&& Capacity == rhs.Capacity;
+
+		public string Format()
+			=> string.Format("({0},{1}/{2})", BitIndex, CellIndex, BitOffset);
+
+		public override string ToString()
+			=> Format();
+
+		public override int GetHashCode()
+			=> HashCode.Combine(Capacity, CellIndex, BitOffset);
+
+		public override bool Equals(object rhs)
+            => rhs is BitCellIndex x && Equals(x);
+
+	}		 
 
 	/// <summary>
 	/// Identifies a bit position within a contiguous sequence of T-element values
@@ -27,33 +254,26 @@ namespace Z0
         /// <summary>
         /// The zero position
         /// </summary>
-		public static readonly BitCellIndex<T> Zero = default(BitCellIndex<T>);
+		public static BitCellIndex<T> Zero => default(BitCellIndex<T>);
 
 		/// <summary>
 		/// Specifies the number of bits that can be placed in one segment
 		/// </summary>
-		public static readonly BitSize SegCapacity = bitsize<T>();
-
-		/// <summary>
-		/// Modulus for number of potential bits in T
-		/// </summary>
-		static readonly Mod TMod = Mod.Define((uint)BitCellIndex<T>.SegCapacity.Bits, 0u);
+		public static ushort SegCapacity => (ushort)bitsize<T>();
 
         /// <summary>
         /// Computes the segment of a linear index
         /// </summary>
         /// <param name="index">The source index</param>
 		[MethodImpl(Inline)]
-        static ushort IndexSegment(uint index)
-            => (ushort)BitCellIndex<T>.TMod.div(index);
+        static ushort IndexSegment(uint index) => (ushort)(index/SegCapacity);
 
         /// <summary>
         /// Computes the offset of a linear index
         /// </summary>
         /// <param name="index">The source index</param>
 		[MethodImpl(Inline)]
-        static byte IndexOffset(uint index)
-            => (byte)BitCellIndex<T>.TMod.mod(index);
+        static ushort IndexOffset(uint index) => (ushort)(index % SegCapacity);
 
 		/// <summary>
 		/// Constructs a bit position from a linear/absolute index
@@ -62,15 +282,6 @@ namespace Z0
 		[MethodImpl(Inline)]
 		public static BitCellIndex<T> FromIndex(uint index)
 			=> new BitCellIndex<T>(IndexSegment(index), IndexOffset(index));
-
-		/// <summary>
-		/// Constructs a bit position from a linear/absolute index
-		/// </summary>
-		/// <param name="index">The linear index</param>
-		[MethodImpl(Inline)]
-		public static BitCellIndex<T> FromIndex(int index)
-			=> new BitCellIndex<T>((ushort)BitCellIndex<T>.TMod.div((uint)index), 
-                (byte)BitCellIndex<T>.TMod.mod((uint)index));
 
 		[MethodImpl(Inline)]
 		public static BitCellIndex<T>operator +(BitCellIndex<T> pos, uint bitcount)
@@ -139,6 +350,13 @@ namespace Z0
 			=> new BitCellIndex<T>(SegIdx, BitOffset);
 
 		[MethodImpl(Inline)]
+		BitCellIndex(uint Segment, uint Offset)
+		{
+			this.Segment = (ushort)Segment;
+			this.Offset = (ushort)Offset;
+		}
+
+		[MethodImpl(Inline)]
 		public BitCellIndex(ushort Segment, byte Offset)
 		{
 			this.Segment = Segment;
@@ -148,7 +366,7 @@ namespace Z0
 		public int LinearIndex
 		{
 			[MethodImpl(Inline)]
-			get => this.Segment * BitCellIndex<T>.SegCapacity + this.Offset;
+			get => this.Segment * SegCapacity + this.Offset;
 		}
 
 		[MethodImpl(Inline)]
@@ -171,7 +389,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void ClampLower()
+        void Reset()
         {
             this.Segment = 0;
             this.Offset = 0;
@@ -184,7 +402,7 @@ namespace Z0
             if(newIndex > 0)
                 UpdateFrom((uint)newIndex);
             else
-                ClampLower();
+                Reset();
         }
 
 		[MethodImpl(Inline)]
@@ -220,7 +438,7 @@ namespace Z0
             && this.Offset == rhs.Offset;
 
 		public string Format()
-			=> string.Format("({0},{1}/{2})", this.LinearIndex, this.Segment, this.Offset);
+			=> string.Format("({0},{1}/{2})", LinearIndex, Segment, Offset);
 
 		public override string ToString()
 			=> Format();
@@ -229,8 +447,6 @@ namespace Z0
 			=> LinearIndex.GetHashCode();
 
 		public override bool Equals(object rhs)
-            => rhs is BitCellIndex<T> x ? Equals(x) : false;
-
+            => rhs is BitCellIndex<T> x && Equals(x);
 	}
-
 }

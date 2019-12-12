@@ -29,7 +29,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int bytecount<T>(int cellcount)
             => cellcount * Unsafe.SizeOf<T>();
-
     }
-
 }
