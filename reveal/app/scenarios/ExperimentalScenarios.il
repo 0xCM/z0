@@ -1,4 +1,4 @@
-// 2019-12-12 14:55:21:125
+// 2019-12-13 11:54:23:764
 Span<byte> GetBytes(in int src)
 {
     IL_0000: ldarg.1
@@ -244,6 +244,114 @@ byte rotr8u_3()
     IL_0012: ldc.i4.0
     IL_0013: call System.Byte Z0.NatMath::rotr<System.Byte,Z0.N128,Z0.N3>(Z0.N128,Z0.N3,System.Byte)
     IL_0018: ret
+
+}
+Vector256<uint> ShuffleWithDelegate(Vector256<uint> x)
+{
+    IL_0000: ldnull
+    IL_0001: ldftn System.Runtime.Intrinsics.Vector256`1<System.UInt32> System.Runtime.Intrinsics.X86.Avx2::Shuffle(System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Byte)
+    IL_0007: newobj System.Void System.Func`3<System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Byte,System.Runtime.Intrinsics.Vector256`1<System.UInt32>>::.ctor(System.Object,System.IntPtr)
+    IL_000C: stloc.0
+    IL_000D: ldloc.0
+    IL_000E: call System.Byte* Z0.Reflections::Jit(System.Delegate)
+    IL_0013: pop
+    IL_0014: ldloc.0
+    IL_0015: ldarg.1
+    IL_0016: ldc.i4.1
+    IL_0017: callvirt System.Runtime.Intrinsics.Vector256`1<System.UInt32> System.Func`3<System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Byte,System.Runtime.Intrinsics.Vector256`1<System.UInt32>>::Invoke(System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Byte)
+    IL_001C: ret
+
+}
+Vector256<uint> ShuffleWithReflection()
+{
+    IL_0000: ldc.i4.s 32
+    IL_0002: conv.u
+    IL_0003: localloc
+    IL_0005: ldc.i4.8
+    IL_0006: newobj System.Void System.Span`1<System.UInt32>::.ctor(System.Void*,System.Int32)
+    IL_000B: stloc.3
+    IL_000C: ldloc.3
+    IL_000D: stloc.0
+    IL_000E: ldloc.0
+    IL_000F: ldc.i4.0
+    IL_0010: call System.UInt32& zfunc::seek<System.UInt32>(System.Span`1<System.UInt32>,System.Int32)
+    IL_0015: ldc.i4.0
+    IL_0016: stind.i4
+    IL_0017: ldloc.0
+    IL_0018: ldc.i4.1
+    IL_0019: call System.UInt32& zfunc::seek<System.UInt32>(System.Span`1<System.UInt32>,System.Int32)
+    IL_001E: ldc.i4.1
+    IL_001F: stind.i4
+    IL_0020: ldloc.0
+    IL_0021: ldc.i4.2
+    IL_0022: call System.UInt32& zfunc::seek<System.UInt32>(System.Span`1<System.UInt32>,System.Int32)
+    IL_0027: ldc.i4.2
+    IL_0028: stind.i4
+    IL_0029: ldloc.0
+    IL_002A: ldc.i4.3
+    IL_002B: call System.UInt32& zfunc::seek<System.UInt32>(System.Span`1<System.UInt32>,System.Int32)
+    IL_0030: ldc.i4.3
+    IL_0031: stind.i4
+    IL_0032: ldloc.0
+    IL_0033: ldc.i4.4
+    IL_0034: call System.UInt32& zfunc::seek<System.UInt32>(System.Span`1<System.UInt32>,System.Int32)
+    IL_0039: ldc.i4.4
+    IL_003A: stind.i4
+    IL_003B: ldloc.0
+    IL_003C: ldc.i4.5
+    IL_003D: call System.UInt32& zfunc::seek<System.UInt32>(System.Span`1<System.UInt32>,System.Int32)
+    IL_0042: ldc.i4.5
+    IL_0043: stind.i4
+    IL_0044: ldloc.0
+    IL_0045: ldc.i4.6
+    IL_0046: call System.UInt32& zfunc::seek<System.UInt32>(System.Span`1<System.UInt32>,System.Int32)
+    IL_004B: ldc.i4.6
+    IL_004C: stind.i4
+    IL_004D: ldloc.0
+    IL_004E: ldc.i4.7
+    IL_004F: call System.UInt32& zfunc::seek<System.UInt32>(System.Span`1<System.UInt32>,System.Int32)
+    IL_0054: ldc.i4.7
+    IL_0055: stind.i4
+    IL_0056: ldloca.s V_0
+    IL_0058: ldc.i4.0
+    IL_0059: call System.UInt32& System.Span`1<System.UInt32>::get_Item(System.Int32)
+    IL_005E: call System.UInt32* zfunc::ptr<System.UInt32>(System.UInt32&)
+    IL_0063: stloc.1
+    IL_0064: ldtoken System.Runtime.Intrinsics.X86.Avx2
+    IL_0069: call System.Type System.Type::GetTypeFromHandle(System.RuntimeTypeHandle)
+    IL_006E: ldstr "Shuffle"
+    IL_0073: ldc.i4.2
+    IL_0074: newarr System.Type
+    IL_0079: dup
+    IL_007A: ldc.i4.0
+    IL_007B: ldtoken System.Runtime.Intrinsics.Vector256`1<System.UInt32>
+    IL_0080: call System.Type System.Type::GetTypeFromHandle(System.RuntimeTypeHandle)
+    IL_0085: stelem.ref
+    IL_0086: dup
+    IL_0087: ldc.i4.1
+    IL_0088: ldtoken System.Byte
+    IL_008D: call System.Type System.Type::GetTypeFromHandle(System.RuntimeTypeHandle)
+    IL_0092: stelem.ref
+    IL_0093: call System.Reflection.MethodInfo System.Type::GetMethod(System.String,System.Type[])
+    IL_0098: ldnull
+    IL_0099: ldc.i4.2
+    IL_009A: newarr System.Object
+    IL_009F: dup
+    IL_00A0: ldc.i4.0
+    IL_00A1: ldloc.1
+    IL_00A2: call System.Runtime.Intrinsics.Vector256`1<System.UInt32> System.Runtime.Intrinsics.X86.Avx::LoadVector256(System.UInt32*)
+    IL_00A7: box System.Runtime.Intrinsics.Vector256`1<System.UInt32>
+    IL_00AC: stelem.ref
+    IL_00AD: dup
+    IL_00AE: ldc.i4.1
+    IL_00AF: ldc.i4.1
+    IL_00B0: box System.Byte
+    IL_00B5: stelem.ref
+    IL_00B6: callvirt System.Object System.Reflection.MethodBase::Invoke(System.Object,System.Object[])
+    IL_00BB: unbox.any System.Runtime.Intrinsics.Vector256`1<System.UInt32>
+    IL_00C0: stloc.2
+    IL_00C1: ldloc.2
+    IL_00C2: ret
 
 }
 Vec256<ulong> perm4x64_256x64(Vec256<ulong> src)

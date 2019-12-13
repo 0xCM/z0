@@ -57,6 +57,16 @@ namespace Z0
             return new MethodData(m, startAddress, endAddress, dst.Slice(0, bytesRead).ToArray());         
         }
 
+        public static unsafe DelegateData read(Delegate d, Span<byte> dst)
+        {
+            var pSrc = d.Jit();
+            var pSrcCurrent = pSrc;            
+            var endAddress = Capture(pSrc, dst);            
+            var startAddress = (ulong)pSrc;
+            var bytesRead = (int)(endAddress - startAddress);
+            return new DelegateData(d, startAddress, endAddress, dst.Slice(0, bytesRead).ToArray());                        
+        }
+
         /// <summary>
         /// Closes a generic method definition over a supplied type and captures the binary assembly data emitted 
         /// by the jitter for the reified method
@@ -176,7 +186,7 @@ namespace Z0
         static ReadOnlySpan<byte> Footer
             => new byte[8]{0x19, 0x0, 0x0, 0x0, 0x40, 0x0, 0x0, 0x0};
 
-        static unsafe ulong Capture(byte* pSrc, Span<byte> dst)
+        internal static unsafe ulong Capture(byte* pSrc, Span<byte> dst)
         {
             var maxcount = dst.Length;
             var offset = 0;

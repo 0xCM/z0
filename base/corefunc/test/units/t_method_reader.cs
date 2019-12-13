@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.Intrinsics;
+    using System.Runtime.Intrinsics.X86;
     using System.Runtime.CompilerServices;
     using static zfunc;
 
@@ -91,7 +93,7 @@ namespace Z0
 
         public void read_generic_methods()
         {
-            foreach(var m in typeof(GenericMethodHost).ReifyGeneric<uint>())
+            foreach(var m in typeof(GenericMethodHost).CaptureX86<uint>())
                 Trace(m.Format());
         }
 
@@ -117,6 +119,45 @@ namespace Z0
                 Trace(m.Format());
                 buffer.Clear();
             }
+        }
+
+        static Func<Vector256<uint>, Vector256<uint>> shuffler(byte imm)
+            => v => Avx2.Shuffle(v,imm);
+
+        static Func<Vector256<uint>, Vector256<uint>> shifter(byte imm)
+            => v => Avx2.ShiftLeftLogical(v,imm);
+
+        public void read_delegate()
+        {
+
+            Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> dAnd = Avx2.And;
+            var dAndData = dAnd.CaptureX86();
+            Trace("And:delegate");
+            Trace(dAndData.Format());
+
+            var mAnd = typeof(Avx2).GetMethod(nameof(Avx2.And), new Type[] { typeof(Vector256<uint>), typeof(Vector256<uint>) });
+            var mAndData = mAnd.CaptureX86();
+            Trace("And:Method");
+            Trace(mAndData.Format());
+
+            var dShuffle = shuffler(4);
+            var dShuffleData = dShuffle.CaptureX86(100);
+            Trace("Shuffle:Delegate");
+            Trace(dShuffleData.Format());
+
+            var dShift = shifter(4);
+            var dShiftData = dShift.CaptureX86(100);
+            Trace("Shift:Delegate");
+            Trace(dShiftData.Format());
+
+            var mgAnds = typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName(nameof(ginx.vand));
+            foreach(var mgAnd in mgAnds)
+            {
+                var mgAndData = mgAnd.CaptureX86<uint>();
+                Trace($"{mgAnd.MethodSig()}");                
+                Trace(mgAndData.Format());
+            }
+
         }
 
         public void read_library()

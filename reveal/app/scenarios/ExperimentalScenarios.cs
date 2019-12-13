@@ -8,6 +8,8 @@ namespace Z0
     using System.Linq;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+    using System.Runtime.Intrinsics.X86;
     using System.Runtime.InteropServices;
     using System.Security;
 
@@ -86,6 +88,36 @@ namespace Z0
             => rotr<byte,N128,N3>();
 
 
+        public unsafe Vector256<uint> ShuffleWithDelegate(Vector256<uint> x)
+        {
+            Func<Vector256<uint>,byte,Vector256<uint>> f = Avx2.Shuffle;
+            f.Jit();
+            return f(x,1);
+
+        }
+
+        public unsafe Vector256<uint> ShuffleWithReflection()
+        {
+            Span<uint> data = stackalloc uint[8];
+            seek(data,0) = 0;
+            seek(data,1) = 1;
+            seek(data,2) = 2;
+            seek(data,3) = 3;
+            seek(data,4) = 4;
+            seek(data,5) = 5;
+            seek(data,6) = 6;
+            seek(data,7) = 7;
+            uint* pData = ptr(ref data[0]);
+
+            var result = (Vector256<uint>)typeof(Avx2).GetMethod(nameof(Avx2.Shuffle), new Type[] { typeof(Vector256<uint>), typeof(byte) })
+                                     .Invoke(null, new object[] {
+                                        Avx.LoadVector256(pData),
+                                        (byte)1
+                                     });
+            return result;
+
+        }
+
         public Vec256<ulong> perm4x64_256x64(Vec256<ulong> src)
         {            
             var y = dinx.vperm4x64(src, Perm4.ABCD);            
@@ -110,6 +142,8 @@ namespace Z0
             return y;
 
         }
+
+        
 
         public int Switch14(int x)
         {

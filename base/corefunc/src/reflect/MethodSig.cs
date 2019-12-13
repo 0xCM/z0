@@ -19,19 +19,27 @@ namespace Z0
     {
         public static MethodSig Define(MethodInfo method)
         {            
+            var asmname = method.Module.Assembly.GetSimpleName();
+            var nsname = method.DeclaringType.Namespace;
+            var returnType = TypeRep.FromType(method.ReturnType);
+            var valparams = method.GetParameters().Select(p => new MethodParamRep(TypeRep.FromParameter(p), p.Direction(), p.Name, p.Position)).ToArray();
+            var typeparams = method.GenericSlots().Mapi((i,t) => new TypeParamRep(t.DisplayName(), i, t.IsGenericType));
+            var delclarer = TypeRep.FromType(method.DeclaringType);
+            
             return new MethodSig(
-                method.MetadataToken,
-                method.Module.Assembly.GetSimpleName(),
-                method.Module.Name,
-                method.DeclaringType.Namespace,
-                method.DeclaringType.Name,
-                method.DisplayName(),
-                TypeRep.FromType(method.ReturnType),
-                method.GetParameters().Select(p => new MethodParamRep(TypeRep.FromParameter(p), p.Direction(), p.Name, p.Position)).ToArray(),
-                method.GenericSlots().Mapi((i,t) => new TypeParamRep(t.DisplayName(), i, t.IsGenericType)));
+                MethodId: method.MetadataToken,
+                DefiningAssembly: asmname,
+                DefiningModule: method.Module.Name,
+                DeclaringNamespace: nsname,
+                DeclaringType: delclarer,
+                MethodName: method.DisplayName(),
+                ReturnType: returnType,
+                ValueParams: valparams,
+                TypeParams: typeparams);
         }
 
-        public MethodSig(int MethodId, string DefiningAssembly, string DefiningModule, string DeclaringNamespace, string DeclaringType, string MethodName, TypeRep ReturnType, MethodParamReps ValueParams, TypeParamReps TypeParams)
+        public MethodSig(int MethodId, string DefiningAssembly, string DefiningModule, string DeclaringNamespace, 
+            TypeRep DeclaringType, string MethodName, TypeRep ReturnType, MethodParamReps ValueParams, TypeParamReps TypeParams)
         {
             this.MethodId = MethodId;
             this.DefiningAssembly = DefiningAssembly;
@@ -53,7 +61,7 @@ namespace Z0
 
         public string DeclaringNamespace {get;}
 
-        public string DeclaringType {get;}
+        public TypeRep DeclaringType {get;}
 
         public TypeRep ReturnType {get; }
 

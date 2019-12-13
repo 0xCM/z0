@@ -431,6 +431,12 @@ namespace Z0
         public static IEnumerable<MethodInfo> WithParameterCount(this IEnumerable<MethodInfo> src, int count)
             => src.Where(m => m.GetParameters().Length == count);
 
+        public static IEnumerable<MethodInfo> WithParameterType(this IEnumerable<MethodInfo> src, Type paramtype)
+            => src.Where(m => m.GetParameters().Length != 0 && m.GetParameters().Any(p => p.ParameterType == paramtype));
+
+        public static IEnumerable<MethodInfo> WithGenericParameterType(this IEnumerable<MethodInfo> src, Type typedef)
+            => src.Where(m => m.GetParameters().Length != 0 && m.GetParameters().Any(p => p.ParameterType.IsGenericTypeDefinition && p.ParameterType == typedef));
+
         /// <summary>
         /// Selects the properties with set methods from the stream
         /// </summary>
@@ -491,14 +497,24 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to JIT</param>
         public static IntPtr Prepare(this MethodInfo m)
-        {            
+        {   
             RuntimeHelpers.PrepareMethod(m.MethodHandle);
             var ptr = m.MethodHandle.GetFunctionPointer();
             return ptr;
         }    
- 
+
+        /// <summary>
+        /// JIT's the delegate and returns a pointer to the native body
+        /// </summary>
+        /// <param name="d">The delegate to JIT</param>
+        public static unsafe byte* Jit(this Delegate d)
+        {   
+            RuntimeHelpers.PrepareDelegate(d);
+            return (byte*)d.Method.MethodHandle.GetFunctionPointer();
+        }    
+
         [MethodImpl(Inline)]
-        public static IntPtr JitMethod(this MethodBase method)
+        public static IntPtr Jit(this MethodBase method)
         {
             RuntimeHelpers.PrepareMethod(method.MethodHandle);
             return method.MethodHandle.GetFunctionPointer();
@@ -508,7 +524,7 @@ namespace Z0
         {
             foreach(var m in methods)
             {
-                m.JitMethod();                
+                m.Jit();                
             }
         }
     }

@@ -123,7 +123,7 @@ namespace Z0
         public unsafe void ListMethods(Type t)
         {
             var methods = (from m in t.DeclaredMethods()
-                          let loc = (long)m.JitMethod()
+                          let loc = (long)m.Jit()
                           select (m, loc)).OrderBy(x => x.loc).ToArray();
             if(methods.Length == 0)
                 return;

@@ -52,7 +52,7 @@ namespace Z0
         public static Option<MethodDisassembly> Deconstruct(MethodInfo method, bool jit)
         {
             if(jit)
-                method.JitMethod();
+                method.Jit();
             using var dtor = new Deconstructor(new Module[]{method.Module});
             return dtor.Disassemble(method, x => error(x));            
         }
