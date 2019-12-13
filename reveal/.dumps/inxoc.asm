@@ -1,6 +1,6 @@
-; 2019-12-13 11:54:23:882
+; 2019-12-13 15:23:28:586
 ; function: Vector128<int> vcmplt_128x32i(Vector128<int> x, Vector128<int> y)
-; location: [7FFDD8D86B00h, 7FFDD8D86B19h]
+; location: [7FF7C5BB63D0h, 7FF7C5BB63E9h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
@@ -12,7 +12,7 @@
 ; static ReadOnlySpan<byte> vcmplt_128x32iBytes => new byte[26]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC5,0xF1,0x66,0xC0,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<int> vcmplt_g128x32i(Vector128<int> x, Vector128<int> y)
-; location: [7FFDD8D87DB0h, 7FFDD8D87DC9h]
+; location: [7FF7C5BB7680h, 7FF7C5BB7699h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
@@ -24,7 +24,7 @@
 ; static ReadOnlySpan<byte> vcmplt_g128x32iBytes => new byte[26]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC5,0xF1,0x66,0xC0,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<uint> vcmplt_128x32u(Vector128<uint> x, Vector128<uint> y)
-; location: [7FFDD8D87DE0h, 7FFDD8D87E19h]
+; location: [7FF7C5BB76B0h, 7FF7C5BB76E9h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -43,7 +43,7 @@
 ; static ReadOnlySpan<byte> vcmplt_128x32uBytes => new byte[58]{0x50,0xC5,0xF8,0x77,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC7,0x44,0x24,0x04,0x00,0x00,0x00,0x80,0x48,0x8D,0x44,0x24,0x04,0xC4,0xE2,0x79,0x58,0x54,0x24,0x04,0xC5,0xF9,0xEF,0xC2,0xC5,0xF1,0xEF,0xCA,0xC5,0xF1,0x66,0xC0,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<uint> vcmplt_g128x32u(Vector128<uint> x, Vector128<uint> y)
-; location: [7FFDD8D87E40h, 7FFDD8D87E79h]
+; location: [7FF7C5BB7B10h, 7FF7C5BB7B49h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -62,7 +62,7 @@
 ; static ReadOnlySpan<byte> vcmplt_g128x32uBytes => new byte[58]{0x50,0xC5,0xF8,0x77,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC7,0x44,0x24,0x04,0x00,0x00,0x00,0x80,0x48,0x8D,0x44,0x24,0x04,0xC4,0xE2,0x79,0x58,0x54,0x24,0x04,0xC5,0xF9,0xEF,0xC2,0xC5,0xF1,0xEF,0xCA,0xC5,0xF1,0x66,0xC0,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<long> vcmplt_128x64i(Vector128<long> x, Vector128<long> y)
-; location: [7FFDD8D87EA0h, 7FFDD8D87ED9h]
+; location: [7FF7C5BB7B70h, 7FF7C5BB7BA9h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
@@ -80,7 +80,7 @@
 ; static ReadOnlySpan<byte> vcmplt_128x64iBytes => new byte[58]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC5,0xEC,0x57,0xD2,0xC4,0xE3,0x6D,0x38,0xC0,0x00,0xC4,0xE3,0x7D,0x38,0xC1,0x01,0xC4,0xE3,0x7D,0x46,0xC8,0x03,0xC4,0xE2,0x75,0x37,0xC0,0xC4,0xE3,0x7D,0x19,0xC0,0x00,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<long> vcmplt_g128x64i(Vector128<long> x, Vector128<long> y)
-; location: [7FFDD8D88300h, 7FFDD8D88339h]
+; location: [7FF7C5BB7BC0h, 7FF7C5BB7BF9h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
@@ -98,7 +98,7 @@
 ; static ReadOnlySpan<byte> vcmplt_g128x64iBytes => new byte[58]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC5,0xEC,0x57,0xD2,0xC4,0xE3,0x6D,0x38,0xC0,0x00,0xC4,0xE3,0x7D,0x38,0xC1,0x01,0xC4,0xE3,0x7D,0x46,0xC8,0x03,0xC4,0xE2,0x75,0x37,0xC0,0xC4,0xE3,0x7D,0x19,0xC0,0x00,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<ulong> vcmplt_128x64u(Vector128<ulong> x, Vector128<ulong> y)
-; location: [7FFDD8D88350h, 7FFDD8D883ADh]
+; location: [7FF7C5BB7C10h, 7FF7C5BB7C6Dh]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -124,7 +124,7 @@
 ; static ReadOnlySpan<byte> vcmplt_128x64uBytes => new byte[94]{0x50,0xC5,0xF8,0x77,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC5,0xEC,0x57,0xD2,0xC4,0xE3,0x6D,0x38,0xC0,0x00,0xC4,0xE3,0x7D,0x38,0xC1,0x01,0xC4,0xE3,0x7D,0x46,0xC8,0x03,0x48,0xB8,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0x48,0x89,0x04,0x24,0x48,0x8D,0x04,0x24,0xC4,0xE2,0x7D,0x59,0x14,0x24,0xC5,0xFD,0xEF,0xC2,0xC5,0xF5,0xEF,0xCA,0xC4,0xE2,0x75,0x37,0xC0,0xC4,0xE3,0x7D,0x19,0xC0,0x00,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<ulong> vcmplt_g128x64u(Vector128<ulong> x, Vector128<ulong> y)
-; location: [7FFDD8D883D0h, 7FFDD8D8842Dh]
+; location: [7FF7C5BB8090h, 7FF7C5BB80EDh]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -150,7 +150,7 @@
 ; static ReadOnlySpan<byte> vcmplt_g128x64uBytes => new byte[94]{0x50,0xC5,0xF8,0x77,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC5,0xEC,0x57,0xD2,0xC4,0xE3,0x6D,0x38,0xC0,0x00,0xC4,0xE3,0x7D,0x38,0xC1,0x01,0xC4,0xE3,0x7D,0x46,0xC8,0x03,0x48,0xB8,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0x48,0x89,0x04,0x24,0x48,0x8D,0x04,0x24,0xC4,0xE2,0x7D,0x59,0x14,0x24,0xC5,0xFD,0xEF,0xC2,0xC5,0xF5,0xEF,0xCA,0xC4,0xE2,0x75,0x37,0xC0,0xC4,0xE3,0x7D,0x19,0xC0,0x00,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<byte> vcmplt_256x8u(Vector256<byte> x, Vector256<byte> y)
-; location: [7FFDD8D88850h, 7FFDD8D8888Ch]
+; location: [7FF7C5BB8110h, 7FF7C5BB814Ch]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -170,7 +170,7 @@
 ; static ReadOnlySpan<byte> vcmplt_256x8uBytes => new byte[61]{0x50,0xC5,0xF8,0x77,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0x10,0x08,0xC7,0x44,0x24,0x04,0x80,0x00,0x00,0x00,0x48,0x8D,0x44,0x24,0x04,0xC4,0xE2,0x7D,0x78,0x54,0x24,0x04,0xC5,0xFD,0xEF,0xC2,0xC5,0xF5,0xEF,0xCA,0xC5,0xF5,0x64,0xC0,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<byte> vcmplt_g256x8u(Vector256<byte> x, Vector256<byte> y)
-; location: [7FFDD8D888B0h, 7FFDD8D888ECh]
+; location: [7FF7C5BB8170h, 7FF7C5BB81ACh]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -190,7 +190,7 @@
 ; static ReadOnlySpan<byte> vcmplt_g256x8uBytes => new byte[61]{0x50,0xC5,0xF8,0x77,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0x10,0x08,0xC7,0x44,0x24,0x04,0x80,0x00,0x00,0x00,0x48,0x8D,0x44,0x24,0x04,0xC4,0xE2,0x7D,0x78,0x54,0x24,0x04,0xC5,0xFD,0xEF,0xC2,0xC5,0xF5,0xEF,0xCA,0xC5,0xF5,0x64,0xC0,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<long> vcmplt_256x64i(Vector256<long> x, Vector256<long> y)
-; location: [7FFDD8D88910h, 7FFDD8D8892Dh]
+; location: [7FF7C5BB81D0h, 7FF7C5BB81EDh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 02
@@ -203,7 +203,7 @@
 ; static ReadOnlySpan<byte> vcmplt_256x64iBytes => new byte[30]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0x10,0x08,0xC4,0xE2,0x75,0x37,0xC0,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<long> vcmplt_g256x64i(Vector256<long> x, Vector256<long> y)
-; location: [7FFDD8D88D50h, 7FFDD8D88D6Dh]
+; location: [7FF7C5BB8610h, 7FF7C5BB862Dh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 02
@@ -216,7 +216,7 @@
 ; static ReadOnlySpan<byte> vcmplt_g256x64iBytes => new byte[30]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0x10,0x08,0xC4,0xE2,0x75,0x37,0xC0,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<ulong> vcmplt_256x64u(Vector256<ulong> x, Vector256<ulong> y)
-; location: [7FFDD8D88D80h, 7FFDD8D88DC1h]
+; location: [7FF7C5BB8640h, 7FF7C5BB8681h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -237,7 +237,7 @@
 ; static ReadOnlySpan<byte> vcmplt_256x64uBytes => new byte[66]{0x50,0xC5,0xF8,0x77,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0x10,0x08,0x48,0xB8,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0x48,0x89,0x04,0x24,0x48,0x8D,0x04,0x24,0xC4,0xE2,0x7D,0x59,0x14,0x24,0xC5,0xFD,0xEF,0xC2,0xC5,0xF5,0xEF,0xCA,0xC4,0xE2,0x75,0x37,0xC0,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<ulong> vcmplt_g256x64u(Vector256<ulong> x, Vector256<ulong> y)
-; location: [7FFDD8D88DE0h, 7FFDD8D88E21h]
+; location: [7FF7C5BB86A0h, 7FF7C5BB86E1h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -258,7 +258,7 @@
 ; static ReadOnlySpan<byte> vcmplt_g256x64uBytes => new byte[66]{0x50,0xC5,0xF8,0x77,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0x10,0x08,0x48,0xB8,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0x48,0x89,0x04,0x24,0x48,0x8D,0x04,0x24,0xC4,0xE2,0x7D,0x59,0x14,0x24,0xC5,0xFD,0xEF,0xC2,0xC5,0xF5,0xEF,0xCA,0xC4,0xE2,0x75,0x37,0xC0,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<byte> vcompact_128x16x2_128x8_v1(Vector128<ushort> x0, Vector128<ushort> x1)
-; location: [7FFDD8D89250h, 7FFDD8D8928Dh]
+; location: [7FF7C5BB8B10h, 7FF7C5BB8B4Dh]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -278,7 +278,7 @@
 ; static ReadOnlySpan<byte> vcompact_128x16x2_128x8_v1Bytes => new byte[62]{0x50,0xC5,0xF8,0x77,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC7,0x44,0x24,0x04,0xFF,0x00,0x00,0x00,0x48,0x8D,0x44,0x24,0x04,0xC4,0xE2,0x79,0x79,0x54,0x24,0x04,0xC5,0xF8,0x28,0xDA,0xC5,0xF9,0xDB,0xC3,0xC5,0xF1,0xDB,0xCA,0xC5,0xF9,0x67,0xC1,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<byte> vcompact_256x16x2_256x8_v1(Vector256<ushort> x0, Vector256<ushort> x1)
-; location: [7FFDD8D892B0h, 7FFDD8D892F2h]
+; location: [7FF7C5BB8B70h, 7FF7C5BB8BB2h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -299,7 +299,7 @@
 ; static ReadOnlySpan<byte> vcompact_256x16x2_256x8_v1Bytes => new byte[67]{0x50,0xC5,0xF8,0x77,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0x10,0x08,0xC7,0x44,0x24,0x04,0xFF,0x00,0x00,0x00,0x48,0x8D,0x44,0x24,0x04,0xC4,0xE2,0x7D,0x79,0x54,0x24,0x04,0xC5,0xFD,0xDB,0xC2,0xC5,0xF5,0xDB,0xCA,0xC5,0xFD,0x67,0xC1,0xC4,0xE3,0xFD,0x00,0xC0,0xD8,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<ushort> vcompact_128x32x2_128x16_v1(Vector128<uint> x, Vector128<uint> y)
-; location: [7FFDD8D89310h, 7FFDD8D8934Ah]
+; location: [7FF7C5BB8BD0h, 7FF7C5BB8C0Ah]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -318,25 +318,25 @@
 ; static ReadOnlySpan<byte> vcompact_128x32x2_128x16_v1Bytes => new byte[59]{0x50,0xC5,0xF8,0x77,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC7,0x44,0x24,0x04,0xFF,0xFF,0x00,0x00,0x48,0x8D,0x44,0x24,0x04,0xC4,0xE2,0x79,0x58,0x54,0x24,0x04,0xC5,0xF9,0xDB,0xC2,0xC5,0xF1,0xDB,0xCA,0xC4,0xE2,0x79,0x2B,0xC1,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<ushort> vcompact_128x32x2_128x16_v2(Vector128<uint> x, Vector128<uint> y)
-; location: [7FFDD8D89AC0h, 7FFDD8D89AFFh]
+; location: [7FF7C5BB9380h, 7FF7C5BB93BFh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
 0009h vmovupd xmm1,[r8]             ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM1,mem(Packed128_Float64,R8:br,:sr)] encoding(VEX, 5 bytes) = c4 c1 79 10 08
-000eh mov rax,2AAB4D2EC1Dh          ; MOV(Mov_r64_imm64) [RAX,2aab4d2ec1dh:imm64]          encoding(10 bytes) = 48 b8 1d ec d2 b4 aa 02 00 00
+000eh mov rax,2E16C0EF045h          ; MOV(Mov_r64_imm64) [RAX,2e16c0ef045h:imm64]          encoding(10 bytes) = 48 b8 45 f0 0e 6c e1 02 00 00
 0018h vlddqu xmm2,xmmword ptr [rax] ; VLDDQU(VEX_Vlddqu_xmm_m128) [XMM2,mem(UInt128,RAX:br,:sr)] encoding(VEX, 4 bytes) = c5 fb f0 10
 001ch vpshufb xmm0,xmm0,xmm2        ; VPSHUFB(VEX_Vpshufb_xmm_xmm_xmmm128) [XMM0,XMM0,XMM2] encoding(VEX, 5 bytes) = c4 e2 79 00 c2
-0021h mov rax,2AAB4D2EE5Dh          ; MOV(Mov_r64_imm64) [RAX,2aab4d2ee5dh:imm64]          encoding(10 bytes) = 48 b8 5d ee d2 b4 aa 02 00 00
+0021h mov rax,2E16C0EF2B5h          ; MOV(Mov_r64_imm64) [RAX,2e16c0ef2b5h:imm64]          encoding(10 bytes) = 48 b8 b5 f2 0e 6c e1 02 00 00
 002bh vlddqu xmm2,xmmword ptr [rax] ; VLDDQU(VEX_Vlddqu_xmm_m128) [XMM2,mem(UInt128,RAX:br,:sr)] encoding(VEX, 4 bytes) = c5 fb f0 10
 002fh vpshufb xmm1,xmm1,xmm2        ; VPSHUFB(VEX_Vpshufb_xmm_xmm_xmmm128) [XMM1,XMM1,XMM2] encoding(VEX, 5 bytes) = c4 e2 71 00 ca
 0034h vpor xmm0,xmm0,xmm1           ; VPOR(VEX_Vpor_xmm_xmm_xmmm128) [XMM0,XMM0,XMM1]      encoding(VEX, 4 bytes) = c5 f9 eb c1
 0038h vmovupd [rcx],xmm0            ; VMOVUPD(VEX_Vmovupd_xmmm128_xmm) [mem(Packed128_Float64,RCX:br,:sr),XMM0] encoding(VEX, 4 bytes) = c5 f9 11 01
 003ch mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 003fh ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-; static ReadOnlySpan<byte> vcompact_128x32x2_128x16_v2Bytes => new byte[64]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0x48,0xB8,0x1D,0xEC,0xD2,0xB4,0xAA,0x02,0x00,0x00,0xC5,0xFB,0xF0,0x10,0xC4,0xE2,0x79,0x00,0xC2,0x48,0xB8,0x5D,0xEE,0xD2,0xB4,0xAA,0x02,0x00,0x00,0xC5,0xFB,0xF0,0x10,0xC4,0xE2,0x71,0x00,0xCA,0xC5,0xF9,0xEB,0xC1,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+; static ReadOnlySpan<byte> vcompact_128x32x2_128x16_v2Bytes => new byte[64]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0x48,0xB8,0x45,0xF0,0x0E,0x6C,0xE1,0x02,0x00,0x00,0xC5,0xFB,0xF0,0x10,0xC4,0xE2,0x79,0x00,0xC2,0x48,0xB8,0xB5,0xF2,0x0E,0x6C,0xE1,0x02,0x00,0x00,0xC5,0xFB,0xF0,0x10,0xC4,0xE2,0x71,0x00,0xCA,0xC5,0xF9,0xEB,0xC1,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<ushort> vcompact_256x32x2_128x16_v1(Vector256<uint> x, Vector256<uint> y)
-; location: [7FFDD8D89B20h, 7FFDD8D89B63h]
+; location: [7FF7C5BB93E0h, 7FF7C5BB9423h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -357,15 +357,15 @@
 ; static ReadOnlySpan<byte> vcompact_256x32x2_128x16_v1Bytes => new byte[68]{0x50,0xC5,0xF8,0x77,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0x10,0x08,0xC7,0x44,0x24,0x04,0xFF,0xFF,0x00,0x00,0x48,0x8D,0x44,0x24,0x04,0xC4,0xE2,0x7D,0x58,0x54,0x24,0x04,0xC5,0xFD,0xDB,0xC2,0xC5,0xF5,0xDB,0xCA,0xC4,0xE2,0x7D,0x2B,0xC1,0xC4,0xE3,0xFD,0x00,0xC0,0xD8,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<ushort> vcompact_256x32x2_128x16_v2(Vector256<uint> x, Vector256<uint> y)
-; location: [7FFDD8D89B80h, 7FFDD8D89BC8h]
+; location: [7FF7C5BB9440h, 7FF7C5BB9488h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 02
 0009h vmovupd ymm1,[r8]             ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM1,mem(Packed256_Float64,R8:br,:sr)] encoding(VEX, 5 bytes) = c4 c1 7d 10 08
-000eh mov rax,2AAB4D2E94Dh          ; MOV(Mov_r64_imm64) [RAX,2aab4d2e94dh:imm64]          encoding(10 bytes) = 48 b8 4d e9 d2 b4 aa 02 00 00
+000eh mov rax,2E16C0EF2C5h          ; MOV(Mov_r64_imm64) [RAX,2e16c0ef2c5h:imm64]          encoding(10 bytes) = 48 b8 c5 f2 0e 6c e1 02 00 00
 0018h vlddqu ymm2,ymmword ptr [rax] ; VLDDQU(VEX_Vlddqu_ymm_m256) [YMM2,mem(UInt256,RAX:br,:sr)] encoding(VEX, 4 bytes) = c5 ff f0 10
 001ch vpshufb ymm0,ymm0,ymm2        ; VPSHUFB(VEX_Vpshufb_ymm_ymm_ymmm256) [YMM0,YMM0,YMM2] encoding(VEX, 5 bytes) = c4 e2 7d 00 c2
-0021h mov rax,2AAB4D2E9CDh          ; MOV(Mov_r64_imm64) [RAX,2aab4d2e9cdh:imm64]          encoding(10 bytes) = 48 b8 cd e9 d2 b4 aa 02 00 00
+0021h mov rax,2E16C0EF325h          ; MOV(Mov_r64_imm64) [RAX,2e16c0ef325h:imm64]          encoding(10 bytes) = 48 b8 25 f3 0e 6c e1 02 00 00
 002bh vlddqu ymm2,ymmword ptr [rax] ; VLDDQU(VEX_Vlddqu_ymm_m256) [YMM2,mem(UInt256,RAX:br,:sr)] encoding(VEX, 4 bytes) = c5 ff f0 10
 002fh vpshufb ymm1,ymm1,ymm2        ; VPSHUFB(VEX_Vpshufb_ymm_ymm_ymmm256) [YMM1,YMM1,YMM2] encoding(VEX, 5 bytes) = c4 e2 75 00 ca
 0034h vpor ymm0,ymm0,ymm1           ; VPOR(VEX_Vpor_ymm_ymm_ymmm256) [YMM0,YMM0,YMM1]      encoding(VEX, 4 bytes) = c5 fd eb c1
@@ -374,10 +374,10 @@
 0042h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0045h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0048h ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-; static ReadOnlySpan<byte> vcompact_256x32x2_128x16_v2Bytes => new byte[73]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0x10,0x08,0x48,0xB8,0x4D,0xE9,0xD2,0xB4,0xAA,0x02,0x00,0x00,0xC5,0xFF,0xF0,0x10,0xC4,0xE2,0x7D,0x00,0xC2,0x48,0xB8,0xCD,0xE9,0xD2,0xB4,0xAA,0x02,0x00,0x00,0xC5,0xFF,0xF0,0x10,0xC4,0xE2,0x75,0x00,0xCA,0xC5,0xFD,0xEB,0xC1,0xC4,0xE3,0xFD,0x00,0xC0,0xD8,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
+; static ReadOnlySpan<byte> vcompact_256x32x2_128x16_v2Bytes => new byte[73]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0x10,0x08,0x48,0xB8,0xC5,0xF2,0x0E,0x6C,0xE1,0x02,0x00,0x00,0xC5,0xFF,0xF0,0x10,0xC4,0xE2,0x7D,0x00,0xC2,0x48,0xB8,0x25,0xF3,0x0E,0x6C,0xE1,0x02,0x00,0x00,0xC5,0xFF,0xF0,0x10,0xC4,0xE2,0x75,0x00,0xCA,0xC5,0xFD,0xEB,0xC1,0xC4,0xE3,0xFD,0x00,0xC0,0xD8,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<byte> msb_mask_v128()
-; location: [7FFDD8D8A4B0h, 7FFDD8D8A4D4h]
+; location: [7FF7C5BB9B00h, 7FF7C5BB9B24h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -391,7 +391,7 @@
 ; static ReadOnlySpan<byte> msb_mask_v128Bytes => new byte[37]{0x50,0xC5,0xF8,0x77,0x90,0xC7,0x44,0x24,0x04,0xF0,0x00,0x00,0x00,0x48,0x8D,0x44,0x24,0x04,0xC4,0xE2,0x79,0x78,0x44,0x24,0x04,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ulong sum_256x64u(Vector256<ulong> src)
-; location: [7FFDD8D8A4F0h, 7FFDD8D8A529h]
+; location: [7FF7C5BB9B40h, 7FF7C5BB9B79h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -410,7 +410,7 @@
 ; static ReadOnlySpan<byte> sum_256x64uBytes => new byte[58]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFC,0x28,0xC8,0xC4,0xE1,0xF9,0x7E,0xC8,0xC5,0xFC,0x28,0xC8,0xC4,0xE3,0xF9,0x16,0xCA,0x01,0x48,0x03,0xD0,0xC4,0xE3,0x7D,0x19,0xC0,0x01,0xC4,0xE1,0xF9,0x7E,0xC0,0xC4,0xE3,0xF9,0x16,0xC1,0x01,0x48,0x03,0xC2,0x48,0x03,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ulong sum_256x64u(Vector128<ulong> src)
-; location: [7FFDD8D8A540h, 7FFDD8D8A557h]
+; location: [7FF7C5BB9B90h, 7FF7C5BB9BA7h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -421,7 +421,7 @@
 ; static ReadOnlySpan<byte> sum_256x64uBytes => new byte[24]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC4,0xE1,0xF9,0x7E,0xC0,0xC4,0xE3,0xF9,0x16,0xC2,0x01,0x48,0x03,0xC2,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ulong pop64_scalar(ulong a, ulong b, ulong c, ulong d)
-; location: [7FFDD8D8A570h, 7FFDD8D8A598h]
+; location: [7FF7C5BB9FD0h, 7FF7C5BB9FF8h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]                  encoding(5 bytes) = 0f 1f 44 00 00
 0005h xor eax,eax                   ; XOR(Xor_r32_rm32) [EAX,EAX]                          encoding(2 bytes) = 33 c0
 0007h popcnt rax,rcx                ; POPCNT(Popcnt_r64_rm64) [RAX,RCX]                    encoding(5 bytes) = f3 48 0f b8 c1
@@ -437,7 +437,7 @@
 ; static ReadOnlySpan<byte> pop64_scalarBytes => new byte[41]{0x0F,0x1F,0x44,0x00,0x00,0x33,0xC0,0xF3,0x48,0x0F,0xB8,0xC1,0xF3,0x48,0x0F,0xB8,0xD2,0x48,0x03,0xC2,0x33,0xD2,0xF3,0x49,0x0F,0xB8,0xD0,0x48,0x03,0xC2,0x33,0xD2,0xF3,0x49,0x0F,0xB8,0xD1,0x48,0x03,0xC2,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ulong pop64_vector(Vector256<ulong> x)
-; location: [7FFDD8D8A5B0h, 7FFDD8D8A602h]
+; location: [7FF7C5BBA010h, 7FF7C5BBA062h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -462,7 +462,7 @@
 ; static ReadOnlySpan<byte> pop64_vectorBytes => new byte[83]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFC,0x28,0xC8,0xC4,0xE1,0xF9,0x7E,0xC8,0xC5,0xFC,0x28,0xC8,0xC4,0xE3,0xF9,0x16,0xCA,0x01,0x33,0xC9,0xF3,0x48,0x0F,0xB8,0xC8,0x45,0x33,0xC0,0xF3,0x4C,0x0F,0xB8,0xC2,0x49,0x03,0xC8,0xC4,0xE3,0x7D,0x19,0xC0,0x01,0xC4,0xE1,0xF9,0x7E,0xC0,0xC4,0xE3,0xF9,0x16,0xC2,0x01,0xF3,0x48,0x0F,0xB8,0xC0,0x48,0x03,0xC1,0xF3,0x48,0x0F,0xB8,0xD2,0x48,0x03,0xC2,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vcsa_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c, out Vector256<ulong> lo, out Vector256<ulong> hi)
-; location: [7FFDD8D8A620h, 7FFDD8D8A667h]
+; location: [7FF7C5BBA080h, 7FF7C5BBA0C7h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -485,7 +485,7 @@
 ; static ReadOnlySpan<byte> vcsa_256x64uBytes => new byte[72]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFD,0x10,0x0A,0xC4,0xC1,0x7D,0x10,0x10,0xC5,0xFC,0x28,0xD8,0xC5,0xFC,0x28,0xE1,0xC5,0xE5,0xEF,0xDC,0xC5,0xFD,0xDB,0xC1,0xC5,0xFC,0x28,0xCB,0xC5,0xFC,0x28,0xE2,0xC5,0xF5,0xDB,0xCC,0xC5,0xFD,0xEB,0xC1,0x48,0x8B,0x44,0x24,0x28,0xC5,0xFD,0x11,0x00,0xC5,0xE5,0xEF,0xC2,0xC4,0xC1,0x7D,0x11,0x01,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void csa_64u(ulong a, ulong b, ulong c, out ulong lo, out ulong hi)
-; location: [7FFDD8D8AA90h, 7FFDD8D8AAB5h]
+; location: [7FF7C5BBA0F0h, 7FF7C5BBA115h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]                  encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h xor rax,rdx                   ; XOR(Xor_r64_rm64) [RAX,RDX]                          encoding(3 bytes) = 48 33 c2
@@ -501,7 +501,7 @@
 ; static ReadOnlySpan<byte> csa_64uBytes => new byte[38]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x48,0x33,0xC2,0x48,0x23,0xD1,0x48,0x8B,0xC8,0x49,0x23,0xC8,0x48,0x0B,0xD1,0x48,0x8B,0x4C,0x24,0x28,0x48,0x89,0x11,0x49,0x33,0xC0,0x49,0x89,0x01,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vtranspose(ref Vector128<uint> row0, ref Vector128<uint> row1, ref Vector128<uint> row2, ref Vector128<uint> row3)
-; location: [7FFDD8D8AAD0h, 7FFDD8D8AB31h]
+; location: [7FF7C5BBA530h, 7FF7C5BBA591h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -528,7 +528,7 @@
 ; static ReadOnlySpan<byte> vtransposeBytes => new byte[98]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF8,0x28,0xC8,0xC5,0xF9,0x10,0x12,0xC5,0xF8,0x28,0xDA,0xC5,0xF0,0xC6,0xCB,0x44,0xC5,0xF8,0xC6,0xC2,0xEE,0xC4,0xC1,0x79,0x10,0x10,0xC5,0xF8,0x28,0xDA,0xC4,0xC1,0x79,0x10,0x21,0xC5,0xF8,0x28,0xEC,0xC5,0xE0,0xC6,0xDD,0x44,0xC5,0xE8,0xC6,0xD4,0xEE,0xC5,0xF0,0xC6,0xE3,0x88,0xC5,0xF9,0x11,0x21,0xC5,0xF0,0xC6,0xCB,0xDD,0xC5,0xF9,0x11,0x0A,0xC5,0xF8,0xC6,0xCA,0x88,0xC4,0xC1,0x79,0x11,0x08,0xC5,0xF8,0xC6,0xC2,0xDD,0xC4,0xC1,0x79,0x11,0x01,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ulong vcell_0_256x64u(Vector256<ulong> src)
-; location: [7FFDD8D8AB60h, 7FFDD8D8AB71h]
+; location: [7FF7C5BBA5C0h, 7FF7C5BBA5D1h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -538,7 +538,7 @@
 ; static ReadOnlySpan<byte> vcell_0_256x64uBytes => new byte[18]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC4,0xE1,0xF9,0x7E,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ulong vcell_1_256x64u(Vector256<ulong> src)
-; location: [7FFDD8D8AB90h, 7FFDD8D8ABA2h]
+; location: [7FF7C5BBA5F0h, 7FF7C5BBA602h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -548,7 +548,7 @@
 ; static ReadOnlySpan<byte> vcell_1_256x64uBytes => new byte[19]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC4,0xE3,0xF9,0x16,0xC0,0x01,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ulong vcell_1_128x8u(Vector128<byte> src)
-; location: [7FFDD8D8ABC0h, 7FFDD8D8ABD1h]
+; location: [7FF7C5BBA620h, 7FF7C5BBA631h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -558,7 +558,7 @@
 ; static ReadOnlySpan<byte> vcell_1_128x8uBytes => new byte[18]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC4,0xE3,0x79,0x14,0xC0,0x01,0x8B,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ulong vcell_2_256x64u(Vector256<ulong> src)
-; location: [7FFDD8D8ABF0h, 7FFDD8D8AC07h]
+; location: [7FF7C5BBA650h, 7FF7C5BBA667h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -569,7 +569,7 @@
 ; static ReadOnlySpan<byte> vcell_2_256x64uBytes => new byte[24]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC4,0xE3,0x7D,0x19,0xC0,0x01,0xC4,0xE1,0xF9,0x7E,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: byte vcell_3_256x64u(Vector256<byte> src)
-; location: [7FFDD8D8AC20h, 7FFDD8D8AC32h]
+; location: [7FF7C5BBA680h, 7FF7C5BBA692h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -579,7 +579,7 @@
 ; static ReadOnlySpan<byte> vcell_3_256x64uBytes => new byte[19]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC4,0xE3,0x79,0x14,0xC0,0x03,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: uint vcell_256x32u_1(Vector256<uint> src)
-; location: [7FFDD8D8AC50h, 7FFDD8D8AC62h]
+; location: [7FF7C5BBA6B0h, 7FF7C5BBA6C2h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -589,7 +589,7 @@
 ; static ReadOnlySpan<byte> vcell_256x32u_1Bytes => new byte[19]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC4,0xE3,0x79,0x16,0xC0,0x01,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: uint vcell_256x32u_2(Vector256<uint> src)
-; location: [7FFDD8D8AC80h, 7FFDD8D8AC92h]
+; location: [7FF7C5BBA6E0h, 7FF7C5BBA6F2h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -599,7 +599,7 @@
 ; static ReadOnlySpan<byte> vcell_256x32u_2Bytes => new byte[19]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC4,0xE3,0x79,0x16,0xC0,0x02,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<byte> swap_hl(Vector128<byte> src)
-; location: [7FFDD8D8ACB0h, 7FFDD8D8ACC5h]
+; location: [7FF7C5BBA710h, 7FF7C5BBA725h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
@@ -610,7 +610,7 @@
 ; static ReadOnlySpan<byte> swap_hlBytes => new byte[22]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC5,0xF9,0x70,0xC0,0x4E,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<ulong> hi_128x64u(Vector128<ulong> src)
-; location: [7FFDD8D8ACE0h, 7FFDD8D8ACFBh]
+; location: [7FF7C5BBA740h, 7FF7C5BBA75Bh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
@@ -622,7 +622,7 @@
 ; static ReadOnlySpan<byte> hi_128x64uBytes => new byte[28]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xE3,0xF9,0x16,0xC0,0x01,0xC4,0xE1,0xF9,0x6E,0xC0,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<byte> hi_128x8u(Vector128<byte> src)
-; location: [7FFDD8D8AD10h, 7FFDD8D8AD2Bh]
+; location: [7FF7C5BBA770h, 7FF7C5BBA78Bh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
@@ -634,7 +634,7 @@
 ; static ReadOnlySpan<byte> hi_128x8uBytes => new byte[28]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xE3,0xF9,0x16,0xC0,0x01,0xC4,0xE1,0xF9,0x6E,0xC0,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<ulong> lo_128x64u(Vector128<ulong> src)
-; location: [7FFDD8D8AD40h, 7FFDD8D8AD54h]
+; location: [7FF7C5BBA7A0h, 7FF7C5BBA7B4h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
@@ -645,7 +645,7 @@
 ; static ReadOnlySpan<byte> lo_128x64uBytes => new byte[21]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC5,0xFA,0x7E,0xC0,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<byte> lo_128x8u(Vector128<byte> src)
-; location: [7FFDD8D8AD70h, 7FFDD8D8AD84h]
+; location: [7FF7C5BBA7D0h, 7FF7C5BBA7E4h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
@@ -656,7 +656,7 @@
 ; static ReadOnlySpan<byte> lo_128x8uBytes => new byte[21]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC5,0xFA,0x7E,0xC0,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vlo_256x8u_out(Vector256<byte> src, out ulong x0, out ulong x1)
-; location: [7FFDD8D8ADA0h, 7FFDD8D8ADC1h]
+; location: [7FF7C5BBA800h, 7FF7C5BBA821h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -670,7 +670,7 @@
 ; static ReadOnlySpan<byte> vlo_256x8u_outBytes => new byte[34]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFC,0x28,0xC8,0xC4,0xE1,0xF9,0x7E,0xC8,0x48,0x89,0x02,0xC4,0xE3,0xF9,0x16,0xC0,0x01,0x49,0x89,0x00,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref Pair<ulong> vlo_256x8u_pair(Vector256<byte> src, ref Pair<ulong> dst)
-; location: [7FFDD8D8B1E0h, 7FFDD8D8B205h]
+; location: [7FF7C5BBAC40h, 7FF7C5BBAC65h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -685,7 +685,7 @@
 ; static ReadOnlySpan<byte> vlo_256x8u_pairBytes => new byte[38]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFC,0x28,0xC8,0xC4,0xE1,0xF9,0x7E,0xC8,0x48,0x89,0x02,0xC4,0xE3,0xF9,0x16,0xC0,0x01,0x48,0x89,0x42,0x08,0x48,0x8B,0xC2,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vlo_256x64u_out(Vector256<ulong> src, out ulong x0, out ulong x1)
-; location: [7FFDD8D8B220h, 7FFDD8D8B241h]
+; location: [7FF7C5BBAC80h, 7FF7C5BBACA1h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -699,7 +699,7 @@
 ; static ReadOnlySpan<byte> vlo_256x64u_outBytes => new byte[34]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFC,0x28,0xC8,0xC4,0xE1,0xF9,0x7E,0xC8,0x48,0x89,0x02,0xC4,0xE3,0xF9,0x16,0xC0,0x01,0x49,0x89,0x00,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref Pair<ulong> vlo_256x64u_pair(Vector256<ulong> src, ref Pair<ulong> dst)
-; location: [7FFDD8D8B260h, 7FFDD8D8B285h]
+; location: [7FF7C5BBACC0h, 7FF7C5BBACE5h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -714,7 +714,7 @@
 ; static ReadOnlySpan<byte> vlo_256x64u_pairBytes => new byte[38]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFC,0x28,0xC8,0xC4,0xE1,0xF9,0x7E,0xC8,0x48,0x89,0x02,0xC4,0xE3,0xF9,0x16,0xC0,0x01,0x48,0x89,0x42,0x08,0x48,0x8B,0xC2,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vhi_256x64u_out(Vector256<ulong> src, out ulong x0, out ulong x1)
-; location: [7FFDD8D8B2A0h, 7FFDD8D8B2C3h]
+; location: [7FF7C5BBAD00h, 7FF7C5BBAD23h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -728,7 +728,7 @@
 ; static ReadOnlySpan<byte> vhi_256x64u_outBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC4,0xE3,0x7D,0x19,0xC0,0x01,0xC4,0xE1,0xF9,0x7E,0xC0,0x48,0x89,0x02,0xC4,0xE3,0xF9,0x16,0xC0,0x01,0x49,0x89,0x00,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref Pair<ulong> vhi_256x64u_pair(Vector256<ulong> src, ref Pair<ulong> dst)
-; location: [7FFDD8D8B2E0h, 7FFDD8D8B307h]
+; location: [7FF7C5BBAD40h, 7FF7C5BBAD67h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -743,7 +743,7 @@
 ; static ReadOnlySpan<byte> vhi_256x64u_pairBytes => new byte[40]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC4,0xE3,0x7D,0x19,0xC0,0x01,0xC4,0xE1,0xF9,0x7E,0xC0,0x48,0x89,0x02,0xC4,0xE3,0xF9,0x16,0xC0,0x01,0x48,0x89,0x42,0x08,0x48,0x8B,0xC2,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<byte> vshuffle_128x8u(Vector128<byte> src, Vector128<byte> spec)
-; location: [7FFDD8D8B320h, 7FFDD8D8B33Ah]
+; location: [7FF7C5BBAD80h, 7FF7C5BBAD9Ah]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
@@ -755,7 +755,7 @@
 ; static ReadOnlySpan<byte> vshuffle_128x8uBytes => new byte[27]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC4,0xE2,0x79,0x00,0xC1,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<sbyte> vshuffle_128x8i(Vector128<sbyte> src, Vector128<sbyte> spec)
-; location: [7FFDD8D8B350h, 7FFDD8D8B36Ah]
+; location: [7FF7C5BBADB0h, 7FF7C5BBADCAh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
@@ -767,7 +767,7 @@
 ; static ReadOnlySpan<byte> vshuffle_128x8iBytes => new byte[27]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC4,0xE2,0x79,0x00,0xC1,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<byte> vshuffle_256x8u(Vector256<byte> src, Vector256<byte> spec)
-; location: [7FFDD8D8B380h, 7FFDD8D8B39Dh]
+; location: [7FF7C5BBADE0h, 7FF7C5BBADFDh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 02
@@ -780,7 +780,7 @@
 ; static ReadOnlySpan<byte> vshuffle_256x8uBytes => new byte[30]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0x10,0x08,0xC4,0xE2,0x7D,0x00,0xC1,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<sbyte> vshuffle_256x8i(Vector256<sbyte> src, Vector256<sbyte> spec)
-; location: [7FFDD8D8B3B0h, 7FFDD8D8B3CDh]
+; location: [7FF7C5BBAE10h, 7FF7C5BBAE2Dh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 02
@@ -793,7 +793,7 @@
 ; static ReadOnlySpan<byte> vshuffle_256x8iBytes => new byte[30]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0x10,0x08,0xC4,0xE2,0x7D,0x00,0xC1,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<byte> vmov_idx3_128x8u(byte src, Vector128<byte> dst)
-; location: [7FFDD8D8B3E0h, 7FFDD8D8B3FAh]
+; location: [7FF7C5BBAE40h, 7FF7C5BBAE5Ah]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[r8]             ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,R8:br,:sr)] encoding(VEX, 5 bytes) = c4 c1 79 10 00
@@ -805,7 +805,7 @@
 ; static ReadOnlySpan<byte> vmov_idx3_128x8uBytes => new byte[27]{0xC5,0xF8,0x77,0x66,0x90,0xC4,0xC1,0x79,0x10,0x00,0x0F,0xB6,0xC2,0xC4,0xE3,0x79,0x20,0xC0,0x03,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<ushort> vmov_idx4_128x16u(ushort src, Vector128<ushort> dst)
-; location: [7FFDD8D8B410h, 7FFDD8D8B429h]
+; location: [7FF7C5BBAE70h, 7FF7C5BBAE89h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[r8]             ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,R8:br,:sr)] encoding(VEX, 5 bytes) = c4 c1 79 10 00
@@ -817,7 +817,7 @@
 ; static ReadOnlySpan<byte> vmov_idx4_128x16uBytes => new byte[26]{0xC5,0xF8,0x77,0x66,0x90,0xC4,0xC1,0x79,0x10,0x00,0x0F,0xB7,0xC2,0xC5,0xF9,0xC4,0xC0,0x04,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<uint> vmov_idx2_128x32u(uint src, Vector128<uint> dst)
-; location: [7FFDD8D8B440h, 7FFDD8D8B457h]
+; location: [7FF7C5BBAEA0h, 7FF7C5BBAEB7h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[r8]             ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,R8:br,:sr)] encoding(VEX, 5 bytes) = c4 c1 79 10 00
@@ -828,7 +828,7 @@
 ; static ReadOnlySpan<byte> vmov_idx2_128x32uBytes => new byte[24]{0xC5,0xF8,0x77,0x66,0x90,0xC4,0xC1,0x79,0x10,0x00,0xC4,0xE3,0x79,0x22,0xC2,0x02,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<byte> vmov_idx3_256x8u(byte src, Vector256<byte> dst)
-; location: [7FFDD8D8B470h, 7FFDD8D8B497h]
+; location: [7FF7C5BBAED0h, 7FF7C5BBAEF7h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[r8]             ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,R8:br,:sr)] encoding(VEX, 5 bytes) = c4 c1 7d 10 00
@@ -843,7 +843,7 @@
 ; static ReadOnlySpan<byte> vmov_idx3_256x8uBytes => new byte[40]{0xC5,0xF8,0x77,0x66,0x90,0xC4,0xC1,0x7D,0x10,0x00,0xC5,0xFC,0x28,0xC8,0x0F,0xB6,0xC2,0xC4,0xE3,0x71,0x20,0xC8,0x03,0xC4,0xE3,0x7D,0x18,0xC1,0x00,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<ushort> vmov_idx4_256x16u(ushort src, Vector256<ushort> dst)
-; location: [7FFDD8D8B4B0h, 7FFDD8D8B4D6h]
+; location: [7FF7C5BBAF10h, 7FF7C5BBAF36h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[r8]             ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,R8:br,:sr)] encoding(VEX, 5 bytes) = c4 c1 7d 10 00
@@ -858,7 +858,7 @@
 ; static ReadOnlySpan<byte> vmov_idx4_256x16uBytes => new byte[39]{0xC5,0xF8,0x77,0x66,0x90,0xC4,0xC1,0x7D,0x10,0x00,0xC5,0xFC,0x28,0xC8,0x0F,0xB7,0xC2,0xC5,0xF1,0xC4,0xC8,0x04,0xC4,0xE3,0x7D,0x18,0xC1,0x00,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<uint> vmov_idx2_256x32u(uint src, Vector256<uint> dst)
-; location: [7FFDD8D8B4F0h, 7FFDD8D8B514h]
+; location: [7FF7C5BBAF50h, 7FF7C5BBAF74h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[r8]             ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,R8:br,:sr)] encoding(VEX, 5 bytes) = c4 c1 7d 10 00
@@ -872,7 +872,7 @@
 ; static ReadOnlySpan<byte> vmov_idx2_256x32uBytes => new byte[37]{0xC5,0xF8,0x77,0x66,0x90,0xC4,0xC1,0x7D,0x10,0x00,0xC5,0xFC,0x28,0xC8,0xC4,0xE3,0x71,0x22,0xCA,0x02,0xC4,0xE3,0x7D,0x18,0xC1,0x00,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<uint> vmov_idx4x2_256x32u(uint a, uint b, Vector256<uint> dst)
-; location: [7FFDD8D8B530h, 7FFDD8D8B566h]
+; location: [7FF7C5BBAF90h, 7FF7C5BBAFC6h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[r9]             ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,R9:br,:sr)] encoding(VEX, 5 bytes) = c4 c1 7d 10 01
@@ -889,7 +889,7 @@
 ; static ReadOnlySpan<byte> vmov_idx4x2_256x32uBytes => new byte[55]{0xC5,0xF8,0x77,0x66,0x90,0xC4,0xC1,0x7D,0x10,0x01,0xC5,0xFC,0x28,0xC8,0xC4,0xE3,0x71,0x22,0xCA,0x02,0xC4,0xE3,0x7D,0x18,0xC1,0x00,0xC4,0xE3,0x7D,0x19,0xC1,0x01,0xC4,0xC3,0x71,0x22,0xC8,0x00,0xC4,0xE3,0x7D,0x18,0xC1,0x01,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<byte> vmov128x8u(byte src)
-; location: [7FFDD8D8B580h, 7FFDD8D8B593h]
+; location: [7FF7C5BBAFE0h, 7FF7C5BBAFF3h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h movzx eax,dl                  ; MOVZX(Movzx_r32_rm8) [EAX,DL]                        encoding(3 bytes) = 0f b6 c2
@@ -900,7 +900,7 @@
 ; static ReadOnlySpan<byte> vmov128x8uBytes => new byte[20]{0xC5,0xF8,0x77,0x66,0x90,0x0F,0xB6,0xC2,0xC5,0xF9,0x6E,0xC0,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<ushort> vmov128x16u(ushort src)
-; location: [7FFDD8D8B5B0h, 7FFDD8D8B5C3h]
+; location: [7FF7C5BBB010h, 7FF7C5BBB023h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h movzx eax,dx                  ; MOVZX(Movzx_r32_rm16) [EAX,DX]                       encoding(3 bytes) = 0f b7 c2
@@ -911,7 +911,7 @@
 ; static ReadOnlySpan<byte> vmov128x16uBytes => new byte[20]{0xC5,0xF8,0x77,0x66,0x90,0x0F,0xB7,0xC2,0xC5,0xF9,0x6E,0xC0,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<uint> vmov128x32u(uint src)
-; location: [7FFDD8D8B5E0h, 7FFDD8D8B5F0h]
+; location: [7FF7C5BBB040h, 7FF7C5BBB050h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovd xmm0,edx                ; VMOVD(VEX_Vmovd_xmm_rm32) [XMM0,EDX]                 encoding(VEX, 4 bytes) = c5 f9 6e c2
@@ -921,7 +921,7 @@
 ; static ReadOnlySpan<byte> vmov128x32uBytes => new byte[17]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x6E,0xC2,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<ulong> vmov128x64u(ulong src)
-; location: [7FFDD8D8B610h, 7FFDD8D8B621h]
+; location: [7FF7C5BBB070h, 7FF7C5BBB081h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovq xmm0,rdx                ; VMOVQ(VEX_Vmovq_xmm_rm64) [XMM0,RDX]                 encoding(VEX, 5 bytes) = c4 e1 f9 6e c2
@@ -931,7 +931,7 @@
 ; static ReadOnlySpan<byte> vmov128x64uBytes => new byte[18]{0xC5,0xF8,0x77,0x66,0x90,0xC4,0xE1,0xF9,0x6E,0xC2,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<double> vmov128x64u(double src)
-; location: [7FFDD8D8BA40h, 7FFDD8D8BA4Ch]
+; location: [7FF7C5BBB4A0h, 7FF7C5BBB4ACh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd [rcx],xmm1            ; VMOVUPD(VEX_Vmovupd_xmmm128_xmm) [mem(Packed128_Float64,RCX:br,:sr),XMM1] encoding(VEX, 4 bytes) = c5 f9 11 09
@@ -940,7 +940,7 @@
 ; static ReadOnlySpan<byte> vmov128x64uBytes => new byte[13]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x11,0x09,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<byte> vmov256x8u(byte src)
-; location: [7FFDD8D8BA60h, 7FFDD8D8BA76h]
+; location: [7FF7C5BBB4C0h, 7FF7C5BBB4D6h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h movzx eax,dl                  ; MOVZX(Movzx_r32_rm8) [EAX,DL]                        encoding(3 bytes) = 0f b6 c2
@@ -952,7 +952,7 @@
 ; static ReadOnlySpan<byte> vmov256x8uBytes => new byte[23]{0xC5,0xF8,0x77,0x66,0x90,0x0F,0xB6,0xC2,0xC5,0xF9,0x6E,0xC0,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<ushort> vmov256x16u(ushort src)
-; location: [7FFDD8D8BA90h, 7FFDD8D8BAA6h]
+; location: [7FF7C5BBB4F0h, 7FF7C5BBB506h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h movzx eax,dx                  ; MOVZX(Movzx_r32_rm16) [EAX,DX]                       encoding(3 bytes) = 0f b7 c2
@@ -964,7 +964,7 @@
 ; static ReadOnlySpan<byte> vmov256x16uBytes => new byte[23]{0xC5,0xF8,0x77,0x66,0x90,0x0F,0xB7,0xC2,0xC5,0xF9,0x6E,0xC0,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<uint> vmov256x32u(uint src)
-; location: [7FFDD8D8BAC0h, 7FFDD8D8BAD3h]
+; location: [7FF7C5BBB520h, 7FF7C5BBB533h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovd xmm0,edx                ; VMOVD(VEX_Vmovd_xmm_rm32) [XMM0,EDX]                 encoding(VEX, 4 bytes) = c5 f9 6e c2
@@ -975,7 +975,7 @@
 ; static ReadOnlySpan<byte> vmov256x32uBytes => new byte[20]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x6E,0xC2,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<ulong> vmov256x64u(ulong src)
-; location: [7FFDD8D8BAF0h, 7FFDD8D8BB04h]
+; location: [7FF7C5BBB550h, 7FF7C5BBB564h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovq xmm0,rdx                ; VMOVQ(VEX_Vmovq_xmm_rm64) [XMM0,RDX]                 encoding(VEX, 5 bytes) = c4 e1 f9 6e c2
@@ -986,7 +986,7 @@
 ; static ReadOnlySpan<byte> vmov256x64uBytes => new byte[21]{0xC5,0xF8,0x77,0x66,0x90,0xC4,0xE1,0xF9,0x6E,0xC2,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<double> vmov256x64u(double src)
-; location: [7FFDD8D8BF20h, 7FFDD8D8BF2Fh]
+; location: [7FF7C5BBB980h, 7FF7C5BBB98Fh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd [rcx],ymm1            ; VMOVUPD(VEX_Vmovupd_ymmm256_ymm) [mem(Packed256_Float64,RCX:br,:sr),YMM1] encoding(VEX, 4 bytes) = c5 fd 11 09
@@ -996,7 +996,7 @@
 ; static ReadOnlySpan<byte> vmov256x64uBytes => new byte[16]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x11,0x09,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vconvert_v256x16u_v2x256x64u(Vector256<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
-; location: [7FFDD8D8BF50h, 7FFDD8D8BF7Bh]
+; location: [7FF7C5BBB9B0h, 7FF7C5BBB9DBh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1011,7 +1011,7 @@
 ; static ReadOnlySpan<byte> vconvert_v256x16u_v2x256x64uBytes => new byte[44]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC4,0xE3,0x7D,0x19,0xC1,0x00,0xC4,0xE2,0x7D,0x34,0xC9,0xC5,0xFD,0x11,0x0A,0xC4,0xE3,0x7D,0x19,0xC0,0x01,0xC4,0xE2,0x7D,0x34,0xC0,0xC4,0xC1,0x7D,0x11,0x00,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<ulong> vconvert_xspan32u_v256x64u(Block128<uint> src, out Vector256<ulong> dst)
-; location: [7FFDD8D8C3A0h, 7FFDD8D8C40Eh]
+; location: [7FF7C5BBBE00h, 7FF7C5BBBE6Eh]
 0000h sub rsp,28h                   ; SUB(Sub_rm64_imm8) [RSP,28h:imm64]                   encoding(4 bytes) = 48 83 ec 28
 0004h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0007h xor eax,eax                   ; XOR(Xor_r32_rm32) [EAX,EAX]                          encoding(2 bytes) = 33 c0
@@ -1042,7 +1042,7 @@
 ; static ReadOnlySpan<byte> vconvert_xspan32u_v256x64uBytes => new byte[111]{0x48,0x83,0xEC,0x28,0xC5,0xF8,0x77,0x33,0xC0,0x48,0x89,0x44,0x24,0x18,0x48,0x89,0x44,0x24,0x20,0x48,0x89,0x44,0x24,0x08,0x48,0x89,0x44,0x24,0x10,0x48,0x8B,0x02,0x8B,0x52,0x08,0x4C,0x8D,0x4C,0x24,0x08,0xC5,0xF8,0x57,0xC0,0xC4,0xC1,0x7A,0x7F,0x01,0x4C,0x8D,0x4C,0x24,0x08,0x49,0x89,0x01,0x41,0x89,0x51,0x08,0xC5,0xFA,0x6F,0x44,0x24,0x08,0xC5,0xFA,0x7F,0x44,0x24,0x18,0x48,0x8D,0x44,0x24,0x18,0x48,0x8B,0x00,0xC4,0xE2,0x7D,0x25,0x00,0xC4,0xC1,0x7D,0x11,0x00,0xC4,0xC1,0x7D,0x10,0x00,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0x48,0x83,0xC4,0x28,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<byte> packus(Vector128<ushort> x, Vector128<ushort> y)
-; location: [7FFDD8D8C430h, 7FFDD8D8C46Dh]
+; location: [7FF7C5BBBE90h, 7FF7C5BBBECDh]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -1062,7 +1062,7 @@
 ; static ReadOnlySpan<byte> packusBytes => new byte[62]{0x50,0xC5,0xF8,0x77,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC7,0x44,0x24,0x04,0xFF,0x00,0x00,0x00,0x48,0x8D,0x44,0x24,0x04,0xC4,0xE2,0x79,0x79,0x54,0x24,0x04,0xC5,0xF8,0x28,0xDA,0xC5,0xF9,0xDB,0xC3,0xC5,0xF1,0xDB,0xCA,0xC5,0xF9,0x67,0xC1,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<byte> packus(Vector256<ushort> x, Vector256<ushort> y)
-; location: [7FFDD8D8C490h, 7FFDD8D8C4CCh]
+; location: [7FF7C5BBBEF0h, 7FF7C5BBBF2Ch]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -1082,20 +1082,20 @@
 ; static ReadOnlySpan<byte> packusBytes => new byte[61]{0x50,0xC5,0xF8,0x77,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0x10,0x08,0xC7,0x44,0x24,0x04,0xFF,0x00,0x00,0x00,0x48,0x8D,0x44,0x24,0x04,0xC4,0xE2,0x7D,0x79,0x54,0x24,0x04,0xC5,0xFD,0xDB,0xC2,0xC5,0xF5,0xDB,0xCA,0xC5,0xFD,0x67,0xC1,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector128<ushort> vbswap_128x16u(Vector128<ushort> x)
-; location: [7FFDD8D8C4F0h, 7FFDD8D8C513h]
+; location: [7FF7C5BBBF50h, 7FF7C5BBBF73h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
-0009h mov rax,2AAB4D2EE2Dh          ; MOV(Mov_r64_imm64) [RAX,2aab4d2ee2dh:imm64]          encoding(10 bytes) = 48 b8 2d ee d2 b4 aa 02 00 00
+0009h mov rax,2E16C0EEE65h          ; MOV(Mov_r64_imm64) [RAX,2e16c0eee65h:imm64]          encoding(10 bytes) = 48 b8 65 ee 0e 6c e1 02 00 00
 0013h vlddqu xmm1,xmmword ptr [rax] ; VLDDQU(VEX_Vlddqu_xmm_m128) [XMM1,mem(UInt128,RAX:br,:sr)] encoding(VEX, 4 bytes) = c5 fb f0 08
 0017h vpshufb xmm0,xmm0,xmm1        ; VPSHUFB(VEX_Vpshufb_xmm_xmm_xmmm128) [XMM0,XMM0,XMM1] encoding(VEX, 5 bytes) = c4 e2 79 00 c1
 001ch vmovupd [rcx],xmm0            ; VMOVUPD(VEX_Vmovupd_xmmm128_xmm) [mem(Packed128_Float64,RCX:br,:sr),XMM0] encoding(VEX, 4 bytes) = c5 f9 11 01
 0020h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0023h ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-; static ReadOnlySpan<byte> vbswap_128x16uBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0x48,0xB8,0x2D,0xEE,0xD2,0xB4,0xAA,0x02,0x00,0x00,0xC5,0xFB,0xF0,0x08,0xC4,0xE2,0x79,0x00,0xC1,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+; static ReadOnlySpan<byte> vbswap_128x16uBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0x48,0xB8,0x65,0xEE,0x0E,0x6C,0xE1,0x02,0x00,0x00,0xC5,0xFB,0xF0,0x08,0xC4,0xE2,0x79,0x00,0xC1,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<int> vpermvar8x32_256x32i(Vector256<int> src, Vector256<uint> spec)
-; location: [7FFDD8D8C530h, 7FFDD8D8C54Dh]
+; location: [7FF7C5BBBF90h, 7FF7C5BBBFADh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 02
@@ -1108,7 +1108,7 @@
 ; static ReadOnlySpan<byte> vpermvar8x32_256x32iBytes => new byte[30]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0x10,0x08,0xC4,0xE2,0x75,0x36,0xC0,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<uint> vpermvar8x32_256x32u(Vector256<uint> src, Vector256<uint> spec)
-; location: [7FFDD8D8C560h, 7FFDD8D8C57Dh]
+; location: [7FF7C5BBBFC0h, 7FF7C5BBBFDDh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 02
@@ -1121,17 +1121,17 @@
 ; static ReadOnlySpan<byte> vpermvar8x32_256x32uBytes => new byte[30]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0x10,0x08,0xC4,0xE2,0x75,0x36,0xC0,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<byte> vpermvar32x8_256x8u(Vector256<byte> a, Vector256<byte> spec)
-; location: [7FFDD8D8C590h, 7FFDD8D8C5E0h]
+; location: [7FF7C5BBBFF0h, 7FF7C5BBC040h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 02
 0009h vmovupd ymm1,[r8]             ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM1,mem(Packed256_Float64,R8:br,:sr)] encoding(VEX, 5 bytes) = c4 c1 7d 10 08
-000eh mov rax,2AAB4D2EA6Dh          ; MOV(Mov_r64_imm64) [RAX,2aab4d2ea6dh:imm64]          encoding(10 bytes) = 48 b8 6d ea d2 b4 aa 02 00 00
+000eh mov rax,2E16C0EF295h          ; MOV(Mov_r64_imm64) [RAX,2e16c0ef295h:imm64]          encoding(10 bytes) = 48 b8 95 f2 0e 6c e1 02 00 00
 0018h vlddqu ymm2,ymmword ptr [rax] ; VLDDQU(VEX_Vlddqu_ymm_m256) [YMM2,mem(UInt256,RAX:br,:sr)] encoding(VEX, 4 bytes) = c5 ff f0 10
 001ch vpaddb ymm2,ymm1,ymm2         ; VPADDB(VEX_Vpaddb_ymm_ymm_ymmm256) [YMM2,YMM1,YMM2]  encoding(VEX, 4 bytes) = c5 f5 fc d2
 0020h vpshufb ymm2,ymm0,ymm2        ; VPSHUFB(VEX_Vpshufb_ymm_ymm_ymmm256) [YMM2,YMM0,YMM2] encoding(VEX, 5 bytes) = c4 e2 7d 00 d2
 0025h vperm2i128 ymm0,ymm0,ymm0,3   ; VPERM2I128(VEX_Vperm2i128_ymm_ymm_ymmm256_imm8) [YMM0,YMM0,YMM0,3h:imm8] encoding(VEX, 6 bytes) = c4 e3 7d 46 c0 03
-002bh mov rax,2AAB4D2ED0Dh          ; MOV(Mov_r64_imm64) [RAX,2aab4d2ed0dh:imm64]          encoding(10 bytes) = 48 b8 0d ed d2 b4 aa 02 00 00
+002bh mov rax,2E16C0EEE45h          ; MOV(Mov_r64_imm64) [RAX,2e16c0eee45h:imm64]          encoding(10 bytes) = 48 b8 45 ee 0e 6c e1 02 00 00
 0035h vlddqu ymm3,ymmword ptr [rax] ; VLDDQU(VEX_Vlddqu_ymm_m256) [YMM3,mem(UInt256,RAX:br,:sr)] encoding(VEX, 4 bytes) = c5 ff f0 18
 0039h vpaddb ymm1,ymm1,ymm3         ; VPADDB(VEX_Vpaddb_ymm_ymm_ymmm256) [YMM1,YMM1,YMM3]  encoding(VEX, 4 bytes) = c5 f5 fc cb
 003dh vpshufb ymm0,ymm0,ymm1        ; VPSHUFB(VEX_Vpshufb_ymm_ymm_ymmm256) [YMM0,YMM0,YMM1] encoding(VEX, 5 bytes) = c4 e2 7d 00 c1
@@ -1140,10 +1140,10 @@
 004ah mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 004dh vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0050h ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-; static ReadOnlySpan<byte> vpermvar32x8_256x8uBytes => new byte[81]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0x10,0x08,0x48,0xB8,0x6D,0xEA,0xD2,0xB4,0xAA,0x02,0x00,0x00,0xC5,0xFF,0xF0,0x10,0xC5,0xF5,0xFC,0xD2,0xC4,0xE2,0x7D,0x00,0xD2,0xC4,0xE3,0x7D,0x46,0xC0,0x03,0x48,0xB8,0x0D,0xED,0xD2,0xB4,0xAA,0x02,0x00,0x00,0xC5,0xFF,0xF0,0x18,0xC5,0xF5,0xFC,0xCB,0xC4,0xE2,0x7D,0x00,0xC1,0xC5,0xED,0xEB,0xC0,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
+; static ReadOnlySpan<byte> vpermvar32x8_256x8uBytes => new byte[81]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0x10,0x08,0x48,0xB8,0x95,0xF2,0x0E,0x6C,0xE1,0x02,0x00,0x00,0xC5,0xFF,0xF0,0x10,0xC5,0xF5,0xFC,0xD2,0xC4,0xE2,0x7D,0x00,0xD2,0xC4,0xE3,0x7D,0x46,0xC0,0x03,0x48,0xB8,0x45,0xEE,0x0E,0x6C,0xE1,0x02,0x00,0x00,0xC5,0xFF,0xF0,0x18,0xC5,0xF5,0xFC,0xCB,0xC4,0xE2,0x7D,0x00,0xC1,0xC5,0xED,0xEB,0xC0,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_d128x8i(Vector128<sbyte> src, Vector128<sbyte> mask)
-; location: [7FFDD8D8C7D0h, 7FFDD8D8C7F0h]
+; location: [7FF7C5BBC230h, 7FF7C5BBC250h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1158,7 +1158,7 @@
 ; static ReadOnlySpan<byte> vtestz_d128x8iBytes => new byte[33]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x10,0x0A,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_g128x8i(Vector128<sbyte> src, Vector128<sbyte> mask)
-; location: [7FFDD8D8CC10h, 7FFDD8D8CC30h]
+; location: [7FF7C5BBC670h, 7FF7C5BBC690h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1173,7 +1173,7 @@
 ; static ReadOnlySpan<byte> vtestz_g128x8iBytes => new byte[33]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x10,0x0A,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_d128x8u(Vector128<byte> src, Vector128<byte> mask)
-; location: [7FFDD8D8CC50h, 7FFDD8D8CC70h]
+; location: [7FF7C5BBC6B0h, 7FF7C5BBC6D0h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1188,7 +1188,7 @@
 ; static ReadOnlySpan<byte> vtestz_d128x8uBytes => new byte[33]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x10,0x0A,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_g128x8u(Vector128<byte> src, Vector128<byte> mask)
-; location: [7FFDD8D8CC90h, 7FFDD8D8CCB0h]
+; location: [7FF7C5BBC6F0h, 7FF7C5BBC710h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1203,7 +1203,7 @@
 ; static ReadOnlySpan<byte> vtestz_g128x8uBytes => new byte[33]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x10,0x0A,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_d128x16i(Vector128<short> src, Vector128<short> mask)
-; location: [7FFDD8D8CCD0h, 7FFDD8D8CCF0h]
+; location: [7FF7C5BBC730h, 7FF7C5BBC750h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1218,7 +1218,7 @@
 ; static ReadOnlySpan<byte> vtestz_d128x16iBytes => new byte[33]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x10,0x0A,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_g128x16i(Vector128<short> src, Vector128<short> mask)
-; location: [7FFDD8D8CD10h, 7FFDD8D8CD30h]
+; location: [7FF7C5BBC770h, 7FF7C5BBC790h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1233,7 +1233,7 @@
 ; static ReadOnlySpan<byte> vtestz_g128x16iBytes => new byte[33]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x10,0x0A,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_d128x16u(Vector128<ushort> src, Vector128<ushort> mask)
-; location: [7FFDD8D8CD50h, 7FFDD8D8CD70h]
+; location: [7FF7C5BBC7B0h, 7FF7C5BBC7D0h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1248,7 +1248,7 @@
 ; static ReadOnlySpan<byte> vtestz_d128x16uBytes => new byte[33]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x10,0x0A,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_g128x16u(Vector128<ushort> src, Vector128<ushort> mask)
-; location: [7FFDD8D8CD90h, 7FFDD8D8CDB0h]
+; location: [7FF7C5BBC7F0h, 7FF7C5BBC810h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1263,7 +1263,7 @@
 ; static ReadOnlySpan<byte> vtestz_g128x16uBytes => new byte[33]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x10,0x0A,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_d128x32i(Vector128<int> src, Vector128<int> mask)
-; location: [7FFDD8D8CDD0h, 7FFDD8D8CDF0h]
+; location: [7FF7C5BBC830h, 7FF7C5BBC850h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1278,7 +1278,7 @@
 ; static ReadOnlySpan<byte> vtestz_d128x32iBytes => new byte[33]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x10,0x0A,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_g128x32i(Vector128<int> src, Vector128<int> mask)
-; location: [7FFDD8D8CE10h, 7FFDD8D8CE30h]
+; location: [7FF7C5BBC870h, 7FF7C5BBC890h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1293,7 +1293,7 @@
 ; static ReadOnlySpan<byte> vtestz_g128x32iBytes => new byte[33]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x10,0x0A,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_d128x32u(Vector128<uint> src, Vector128<uint> mask)
-; location: [7FFDD8D8CE50h, 7FFDD8D8CE70h]
+; location: [7FF7C5BBC8B0h, 7FF7C5BBC8D0h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1308,7 +1308,7 @@
 ; static ReadOnlySpan<byte> vtestz_d128x32uBytes => new byte[33]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x10,0x0A,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_g128x32u(Vector128<uint> src, Vector128<uint> mask)
-; location: [7FFDD8D8CE90h, 7FFDD8D8CEB0h]
+; location: [7FF7C5BBC8F0h, 7FF7C5BBC910h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1323,7 +1323,7 @@
 ; static ReadOnlySpan<byte> vtestz_g128x32uBytes => new byte[33]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x10,0x0A,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_d128x64i(Vector128<long> src, Vector128<long> mask)
-; location: [7FFDD8D8CED0h, 7FFDD8D8CEF0h]
+; location: [7FF7C5BBC930h, 7FF7C5BBC950h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1338,7 +1338,7 @@
 ; static ReadOnlySpan<byte> vtestz_d128x64iBytes => new byte[33]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x10,0x0A,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_g128x64i(Vector128<long> src, Vector128<long> mask)
-; location: [7FFDD8D8CF10h, 7FFDD8D8CF30h]
+; location: [7FF7C5BBC970h, 7FF7C5BBC990h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1353,7 +1353,7 @@
 ; static ReadOnlySpan<byte> vtestz_g128x64iBytes => new byte[33]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x10,0x0A,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_d128x64u(Vector128<ulong> src, Vector128<ulong> mask)
-; location: [7FFDD8D8CF50h, 7FFDD8D8CF70h]
+; location: [7FF7C5BBC9B0h, 7FF7C5BBC9D0h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1368,7 +1368,7 @@
 ; static ReadOnlySpan<byte> vtestz_d128x64uBytes => new byte[33]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x10,0x0A,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_g128x64u(Vector128<ulong> src, Vector128<ulong> mask)
-; location: [7FFDD8D8CF90h, 7FFDD8D8CFB0h]
+; location: [7FF7C5BBC9F0h, 7FF7C5BBCA10h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1383,7 +1383,7 @@
 ; static ReadOnlySpan<byte> vtestz_g128x64uBytes => new byte[33]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x10,0x0A,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_d256x8i(Vector256<sbyte> src, Vector256<sbyte> mask)
-; location: [7FFDD8D8CFD0h, 7FFDD8D8CFF3h]
+; location: [7FF7C5BBCA30h, 7FF7C5BBCA53h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1399,7 +1399,7 @@
 ; static ReadOnlySpan<byte> vtestz_d256x8iBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFD,0x10,0x0A,0xC4,0xE2,0x7D,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_g256x8i(Vector256<sbyte> src, Vector256<sbyte> mask)
-; location: [7FFDD8D8D410h, 7FFDD8D8D433h]
+; location: [7FF7C5BBCE70h, 7FF7C5BBCE93h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1415,7 +1415,7 @@
 ; static ReadOnlySpan<byte> vtestz_g256x8iBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFD,0x10,0x0A,0xC4,0xE2,0x7D,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_d256x8u(Vector256<byte> src, Vector256<byte> mask)
-; location: [7FFDD8D8D450h, 7FFDD8D8D473h]
+; location: [7FF7C5BBCEB0h, 7FF7C5BBCED3h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1431,7 +1431,7 @@
 ; static ReadOnlySpan<byte> vtestz_d256x8uBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFD,0x10,0x0A,0xC4,0xE2,0x7D,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_g256x8u(Vector256<byte> src, Vector256<byte> mask)
-; location: [7FFDD8D8D490h, 7FFDD8D8D4B3h]
+; location: [7FF7C5BBCEF0h, 7FF7C5BBCF13h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1447,7 +1447,7 @@
 ; static ReadOnlySpan<byte> vtestz_g256x8uBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFD,0x10,0x0A,0xC4,0xE2,0x7D,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_d256x16i(Vector256<short> src, Vector256<short> mask)
-; location: [7FFDD8D8D4D0h, 7FFDD8D8D4F3h]
+; location: [7FF7C5BBCF30h, 7FF7C5BBCF53h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1463,7 +1463,7 @@
 ; static ReadOnlySpan<byte> vtestz_d256x16iBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFD,0x10,0x0A,0xC4,0xE2,0x7D,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_g256x16i(Vector256<short> src, Vector256<short> mask)
-; location: [7FFDD8D8D510h, 7FFDD8D8D533h]
+; location: [7FF7C5BBCF70h, 7FF7C5BBCF93h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1479,7 +1479,7 @@
 ; static ReadOnlySpan<byte> vtestz_g256x16iBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFD,0x10,0x0A,0xC4,0xE2,0x7D,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_d256x16u(Vector256<ushort> src, Vector256<ushort> mask)
-; location: [7FFDD8D8D550h, 7FFDD8D8D573h]
+; location: [7FF7C5BBCFB0h, 7FF7C5BBCFD3h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1495,7 +1495,7 @@
 ; static ReadOnlySpan<byte> vtestz_d256x16uBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFD,0x10,0x0A,0xC4,0xE2,0x7D,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_g256x16u(Vector256<ushort> src, Vector256<ushort> mask)
-; location: [7FFDD8D8D590h, 7FFDD8D8D5B3h]
+; location: [7FF7C5BBCFF0h, 7FF7C5BBD013h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1511,7 +1511,7 @@
 ; static ReadOnlySpan<byte> vtestz_g256x16uBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFD,0x10,0x0A,0xC4,0xE2,0x7D,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_d256x32i(Vector256<int> src, Vector256<int> mask)
-; location: [7FFDD8D8D5D0h, 7FFDD8D8D5F3h]
+; location: [7FF7C5BBD030h, 7FF7C5BBD053h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1527,7 +1527,7 @@
 ; static ReadOnlySpan<byte> vtestz_d256x32iBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFD,0x10,0x0A,0xC4,0xE2,0x7D,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_g256x32i(Vector256<int> src, Vector256<int> mask)
-; location: [7FFDD8D8DA10h, 7FFDD8D8DA33h]
+; location: [7FF7C5BBD070h, 7FF7C5BBD093h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1543,7 +1543,7 @@
 ; static ReadOnlySpan<byte> vtestz_g256x32iBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFD,0x10,0x0A,0xC4,0xE2,0x7D,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_d256x32u(Vector256<uint> src, Vector256<uint> mask)
-; location: [7FFDD8D8DA50h, 7FFDD8D8DA73h]
+; location: [7FF7C5BBD0B0h, 7FF7C5BBD0D3h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1559,7 +1559,7 @@
 ; static ReadOnlySpan<byte> vtestz_d256x32uBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFD,0x10,0x0A,0xC4,0xE2,0x7D,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_g256x32u(Vector256<uint> src, Vector256<uint> mask)
-; location: [7FFDD8D8DA90h, 7FFDD8D8DAB3h]
+; location: [7FF7C5BBD4F0h, 7FF7C5BBD513h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1575,7 +1575,7 @@
 ; static ReadOnlySpan<byte> vtestz_g256x32uBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFD,0x10,0x0A,0xC4,0xE2,0x7D,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_d256x64i(Vector256<long> src, Vector256<long> mask)
-; location: [7FFDD8D8DAD0h, 7FFDD8D8DAF3h]
+; location: [7FF7C5BBD530h, 7FF7C5BBD553h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1591,7 +1591,7 @@
 ; static ReadOnlySpan<byte> vtestz_d256x64iBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFD,0x10,0x0A,0xC4,0xE2,0x7D,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_g256x64i(Vector256<long> src, Vector256<long> mask)
-; location: [7FFDD8D8DB10h, 7FFDD8D8DB33h]
+; location: [7FF7C5BBD570h, 7FF7C5BBD593h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1607,7 +1607,7 @@
 ; static ReadOnlySpan<byte> vtestz_g256x64iBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFD,0x10,0x0A,0xC4,0xE2,0x7D,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_d256x64u(Vector256<ulong> src, Vector256<ulong> mask)
-; location: [7FFDD8D8DB50h, 7FFDD8D8DB73h]
+; location: [7FF7C5BBD5B0h, 7FF7C5BBD5D3h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1623,7 +1623,7 @@
 ; static ReadOnlySpan<byte> vtestz_d256x64uBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFD,0x10,0x0A,0xC4,0xE2,0x7D,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool vtestz_g256x64u(Vector256<ulong> src, Vector256<ulong> mask)
-; location: [7FFDD8D8DB90h, 7FFDD8D8DBB3h]
+; location: [7FF7C5BBD5F0h, 7FF7C5BBD613h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1639,7 +1639,7 @@
 ; static ReadOnlySpan<byte> vtestz_g256x64uBytes => new byte[36]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFD,0x10,0x0A,0xC4,0xE2,0x7D,0x17,0xC1,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x85,0xC0,0x0F,0x95,0xC0,0x0F,0xB6,0xC0,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vblock_xor_128x8u_refs(int partcount, int partwidth, in byte a, in byte b, ref byte z)
-; location: [7FFDD8D8E600h, 7FFDD8D8E672h]
+; location: [7FF7C5BBE060h, 7FF7C5BBE0D2h]
 0000h push rdi                      ; PUSH(Push_r64) [RDI]                                 encoding(1 byte ) = 57
 0001h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0002h push rbx                      ; PUSH(Push_r64) [RBX]                                 encoding(1 byte ) = 53
@@ -1678,7 +1678,7 @@
 ; static ReadOnlySpan<byte> vblock_xor_128x8u_refsBytes => new byte[115]{0x57,0x56,0x53,0x48,0x83,0xEC,0x20,0xC5,0xF8,0x77,0x48,0x8B,0x44,0x24,0x60,0x45,0x33,0xD2,0x45,0x33,0xDB,0x85,0xC9,0x7E,0x52,0x49,0x63,0xF3,0x49,0x8D,0x3C,0x30,0x49,0x8D,0x1C,0x31,0xC5,0xF8,0x57,0xC0,0xC5,0xF9,0x29,0x44,0x24,0x10,0xC5,0xF8,0x57,0xC0,0xC5,0xF9,0x29,0x04,0x24,0xC5,0xFB,0xF0,0x07,0xC5,0xF9,0x29,0x44,0x24,0x10,0xC5,0xFB,0xF0,0x03,0xC5,0xF9,0x29,0x04,0x24,0xC5,0xF9,0x28,0x44,0x24,0x10,0xC5,0xF9,0x28,0x0C,0x24,0xC5,0xF9,0xEF,0xC1,0x48,0x03,0xF0,0xC5,0xFA,0x7F,0x06,0x41,0xFF,0xC2,0x44,0x03,0xDA,0x44,0x3B,0xD1,0x7C,0xAE,0x48,0x83,0xC4,0x20,0x5B,0x5E,0x5F,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vblock_xor_128x8u_blocks(ConstBlock128<byte> xb, ConstBlock128<byte> yb, in Block128<byte> zb)
-; location: [7FFDD8E210D0h, 7FFDD8E2113Ch]
+; location: [7FF7C5C50AA0h, 7FF7C5C50B0Ch]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h mov eax,[r8+8]                ; MOV(Mov_r32_rm32) [EAX,mem(32u,R8:br,:sr)]           encoding(4 bytes) = 41 8b 40 08
@@ -1716,7 +1716,7 @@
 ; static ReadOnlySpan<byte> vblock_xor_128x8u_blocksBytes => new byte[109]{0xC5,0xF8,0x77,0x66,0x90,0x41,0x8B,0x40,0x08,0x44,0x8B,0xC8,0x41,0xC1,0xF9,0x1F,0x41,0x83,0xE1,0x0F,0x41,0x03,0xC1,0xC1,0xF8,0x04,0x45,0x33,0xC9,0x85,0xC0,0x7E,0x4B,0x4C,0x8B,0x11,0x45,0x8B,0xD9,0x41,0xC1,0xE3,0x04,0x4D,0x63,0xDB,0x4D,0x03,0xD3,0xC4,0xC1,0x7B,0xF0,0x02,0x4C,0x8B,0x12,0x45,0x8B,0xD9,0x41,0xC1,0xE3,0x04,0x4D,0x63,0xDB,0x4D,0x03,0xD3,0xC4,0xC1,0x7B,0xF0,0x0A,0xC5,0xF9,0xEF,0xC1,0x4D,0x8B,0x10,0x45,0x8B,0xD9,0x41,0xC1,0xE3,0x04,0x4D,0x63,0xDB,0x4D,0x03,0xD3,0xC4,0xC1,0x7A,0x7F,0x02,0x41,0xFF,0xC1,0x44,0x3B,0xC8,0x7C,0xB5,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vblock_xor_128x16u_refs(int partcount, int partwidth, in ushort a, in ushort b, ref ushort z)
-; location: [7FFDD8E21560h, 7FFDD8E215D5h]
+; location: [7FF7C5C50F30h, 7FF7C5C50FA5h]
 0000h push rdi                      ; PUSH(Push_r64) [RDI]                                 encoding(1 byte ) = 57
 0001h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0002h push rbx                      ; PUSH(Push_r64) [RBX]                                 encoding(1 byte ) = 53
@@ -1756,7 +1756,7 @@
 ; static ReadOnlySpan<byte> vblock_xor_128x16u_refsBytes => new byte[118]{0x57,0x56,0x53,0x48,0x83,0xEC,0x20,0xC5,0xF8,0x77,0x48,0x8B,0x44,0x24,0x60,0x45,0x33,0xD2,0x45,0x33,0xDB,0x85,0xC9,0x7E,0x55,0x49,0x63,0xF3,0x48,0xD1,0xE6,0x49,0x8D,0x3C,0x30,0x49,0x8D,0x1C,0x31,0xC5,0xF8,0x57,0xC0,0xC5,0xF9,0x29,0x44,0x24,0x10,0xC5,0xF8,0x57,0xC0,0xC5,0xF9,0x29,0x04,0x24,0xC5,0xFB,0xF0,0x07,0xC5,0xF9,0x29,0x44,0x24,0x10,0xC5,0xFB,0xF0,0x03,0xC5,0xF9,0x29,0x04,0x24,0xC5,0xF9,0x28,0x44,0x24,0x10,0xC5,0xF9,0x28,0x0C,0x24,0xC5,0xF9,0xEF,0xC1,0x48,0x03,0xF0,0xC5,0xFA,0x7F,0x06,0x41,0xFF,0xC2,0x44,0x03,0xDA,0x44,0x3B,0xD1,0x7C,0xAB,0x48,0x83,0xC4,0x20,0x5B,0x5E,0x5F,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vblock_xor_128x16u_blocks(ConstBlock128<ushort> xb, ConstBlock128<ushort> yb, in Block128<ushort> zb)
-; location: [7FFDD8E21A10h, 7FFDD8E21A6Bh]
+; location: [7FF7C5C513E0h, 7FF7C5C5143Bh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h mov eax,[r8+8]                ; MOV(Mov_r32_rm32) [EAX,mem(32u,R8:br,:sr)]           encoding(4 bytes) = 41 8b 40 08
@@ -1789,7 +1789,7 @@
 ; static ReadOnlySpan<byte> vblock_xor_128x16u_blocksBytes => new byte[92]{0xC5,0xF8,0x77,0x66,0x90,0x41,0x8B,0x40,0x08,0x44,0x8B,0xC8,0x41,0xC1,0xF9,0x1F,0x41,0x83,0xE1,0x07,0x41,0x03,0xC1,0xC1,0xF8,0x03,0x45,0x33,0xC9,0x85,0xC0,0x7E,0x3A,0x4C,0x8B,0x11,0x45,0x8B,0xD9,0x41,0xC1,0xE3,0x03,0x4D,0x63,0xDB,0x49,0xD1,0xE3,0x4D,0x03,0xD3,0xC4,0xC1,0x7B,0xF0,0x02,0x4C,0x8B,0x12,0x4D,0x03,0xD3,0xC4,0xC1,0x7B,0xF0,0x0A,0xC5,0xF9,0xEF,0xC1,0x4D,0x8B,0x10,0x4D,0x03,0xD3,0xC4,0xC1,0x7A,0x7F,0x02,0x41,0xFF,0xC1,0x44,0x3B,0xC8,0x7C,0xC6,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vblock_xor_128x32u_refs(int partcount, int partwidth, in uint a, in uint b, ref uint z)
-; location: [7FFDD8E21A80h, 7FFDD8E21AF6h]
+; location: [7FF7C5C51450h, 7FF7C5C514C6h]
 0000h push rdi                      ; PUSH(Push_r64) [RDI]                                 encoding(1 byte ) = 57
 0001h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0002h push rbx                      ; PUSH(Push_r64) [RBX]                                 encoding(1 byte ) = 53
@@ -1829,7 +1829,7 @@
 ; static ReadOnlySpan<byte> vblock_xor_128x32u_refsBytes => new byte[119]{0x57,0x56,0x53,0x48,0x83,0xEC,0x20,0xC5,0xF8,0x77,0x48,0x8B,0x44,0x24,0x60,0x45,0x33,0xD2,0x45,0x33,0xDB,0x85,0xC9,0x7E,0x56,0x49,0x63,0xF3,0x48,0xC1,0xE6,0x02,0x49,0x8D,0x3C,0x30,0x49,0x8D,0x1C,0x31,0xC5,0xF8,0x57,0xC0,0xC5,0xF9,0x29,0x44,0x24,0x10,0xC5,0xF8,0x57,0xC0,0xC5,0xF9,0x29,0x04,0x24,0xC5,0xFB,0xF0,0x07,0xC5,0xF9,0x29,0x44,0x24,0x10,0xC5,0xFB,0xF0,0x03,0xC5,0xF9,0x29,0x04,0x24,0xC5,0xF9,0x28,0x44,0x24,0x10,0xC5,0xF9,0x28,0x0C,0x24,0xC5,0xF9,0xEF,0xC1,0x48,0x03,0xF0,0xC5,0xFA,0x7F,0x06,0x41,0xFF,0xC2,0x44,0x03,0xDA,0x44,0x3B,0xD1,0x7C,0xAA,0x48,0x83,0xC4,0x20,0x5B,0x5E,0x5F,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vblock_xor_128x32u_blocks(ConstBlock128<uint> xb, ConstBlock128<uint> yb, in Block128<uint> zb)
-; location: [7FFDD8E21B20h, 7FFDD8E21B7Ch]
+; location: [7FF7C5C514F0h, 7FF7C5C5154Ch]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h mov eax,[r8+8]                ; MOV(Mov_r32_rm32) [EAX,mem(32u,R8:br,:sr)]           encoding(4 bytes) = 41 8b 40 08
@@ -1862,7 +1862,7 @@
 ; static ReadOnlySpan<byte> vblock_xor_128x32u_blocksBytes => new byte[93]{0xC5,0xF8,0x77,0x66,0x90,0x41,0x8B,0x40,0x08,0x44,0x8B,0xC8,0x41,0xC1,0xF9,0x1F,0x41,0x83,0xE1,0x03,0x41,0x03,0xC1,0xC1,0xF8,0x02,0x45,0x33,0xC9,0x85,0xC0,0x7E,0x3B,0x4C,0x8B,0x11,0x45,0x8B,0xD9,0x41,0xC1,0xE3,0x02,0x4D,0x63,0xDB,0x49,0xC1,0xE3,0x02,0x4D,0x03,0xD3,0xC4,0xC1,0x7B,0xF0,0x02,0x4C,0x8B,0x12,0x4D,0x03,0xD3,0xC4,0xC1,0x7B,0xF0,0x0A,0xC5,0xF9,0xEF,0xC1,0x4D,0x8B,0x10,0x4D,0x03,0xD3,0xC4,0xC1,0x7A,0x7F,0x02,0x41,0xFF,0xC1,0x44,0x3B,0xC8,0x7C,0xC5,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vblock_xor_128x64u_refs(int partcount, int partwidth, in ulong a, in ulong b, ref ulong z)
-; location: [7FFDD8E21FA0h, 7FFDD8E22016h]
+; location: [7FF7C5C51970h, 7FF7C5C519E6h]
 0000h push rdi                      ; PUSH(Push_r64) [RDI]                                 encoding(1 byte ) = 57
 0001h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0002h push rbx                      ; PUSH(Push_r64) [RBX]                                 encoding(1 byte ) = 53
@@ -1902,7 +1902,7 @@
 ; static ReadOnlySpan<byte> vblock_xor_128x64u_refsBytes => new byte[119]{0x57,0x56,0x53,0x48,0x83,0xEC,0x20,0xC5,0xF8,0x77,0x48,0x8B,0x44,0x24,0x60,0x45,0x33,0xD2,0x45,0x33,0xDB,0x85,0xC9,0x7E,0x56,0x49,0x63,0xF3,0x48,0xC1,0xE6,0x03,0x49,0x8D,0x3C,0x30,0x49,0x8D,0x1C,0x31,0xC5,0xF8,0x57,0xC0,0xC5,0xF9,0x29,0x44,0x24,0x10,0xC5,0xF8,0x57,0xC0,0xC5,0xF9,0x29,0x04,0x24,0xC5,0xFB,0xF0,0x07,0xC5,0xF9,0x29,0x44,0x24,0x10,0xC5,0xFB,0xF0,0x03,0xC5,0xF9,0x29,0x04,0x24,0xC5,0xF9,0x28,0x44,0x24,0x10,0xC5,0xF9,0x28,0x0C,0x24,0xC5,0xF9,0xEF,0xC1,0x48,0x03,0xF0,0xC5,0xFA,0x7F,0x06,0x41,0xFF,0xC2,0x44,0x03,0xDA,0x44,0x3B,0xD1,0x7C,0xAA,0x48,0x83,0xC4,0x20,0x5B,0x5E,0x5F,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vblock_xor_128x64u_blocks(ConstBlock128<ulong> xb, ConstBlock128<ulong> yb, in Block128<ulong> zb)
-; location: [7FFDD8E22450h, 7FFDD8E224A6h]
+; location: [7FF7C5C51E20h, 7FF7C5C51E76h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h mov eax,[r8+8]                ; MOV(Mov_r32_rm32) [EAX,mem(32u,R8:br,:sr)]           encoding(4 bytes) = 41 8b 40 08
@@ -1934,7 +1934,7 @@
 ; static ReadOnlySpan<byte> vblock_xor_128x64u_blocksBytes => new byte[87]{0xC5,0xF8,0x77,0x66,0x90,0x41,0x8B,0x40,0x08,0x44,0x8B,0xC8,0x41,0xC1,0xE9,0x1F,0x41,0x03,0xC1,0xD1,0xF8,0x45,0x33,0xC9,0x85,0xC0,0x7E,0x3A,0x4C,0x8B,0x11,0x45,0x8B,0xD9,0x41,0xD1,0xE3,0x4D,0x63,0xDB,0x49,0xC1,0xE3,0x03,0x4D,0x03,0xD3,0xC4,0xC1,0x7B,0xF0,0x02,0x4C,0x8B,0x12,0x4D,0x03,0xD3,0xC4,0xC1,0x7B,0xF0,0x0A,0xC5,0xF9,0xEF,0xC1,0x4D,0x8B,0x10,0x4D,0x03,0xD3,0xC4,0xC1,0x7A,0x7F,0x02,0x41,0xFF,0xC1,0x44,0x3B,0xC8,0x7C,0xC6,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vblock_xor_256x8u_refs(int partcount, int partwidth, in byte a, in byte b, ref byte z)
-; location: [7FFDD8E224C0h, 7FFDD8E22538h]
+; location: [7FF7C5C51E90h, 7FF7C5C51F08h]
 0000h push rdi                      ; PUSH(Push_r64) [RDI]                                 encoding(1 byte ) = 57
 0001h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0002h push rbx                      ; PUSH(Push_r64) [RBX]                                 encoding(1 byte ) = 53
@@ -1974,7 +1974,7 @@
 ; static ReadOnlySpan<byte> vblock_xor_256x8u_refsBytes => new byte[121]{0x57,0x56,0x53,0x48,0x83,0xEC,0x40,0xC5,0xF8,0x77,0x48,0x8B,0x84,0x24,0x80,0x00,0x00,0x00,0x45,0x33,0xD2,0x45,0x33,0xDB,0x85,0xC9,0x7E,0x52,0x49,0x63,0xF3,0x49,0x8D,0x3C,0x30,0x49,0x8D,0x1C,0x31,0xC5,0xFC,0x57,0xC0,0xC5,0xFD,0x11,0x44,0x24,0x20,0xC5,0xFC,0x57,0xC0,0xC5,0xFD,0x11,0x04,0x24,0xC5,0xFF,0xF0,0x07,0xC5,0xFD,0x11,0x44,0x24,0x20,0xC5,0xFF,0xF0,0x03,0xC5,0xFD,0x11,0x04,0x24,0xC5,0xFD,0x10,0x44,0x24,0x20,0xC5,0xFD,0x10,0x0C,0x24,0xC5,0xFD,0xEF,0xC1,0x48,0x03,0xF0,0xC5,0xFE,0x7F,0x06,0x41,0xFF,0xC2,0x44,0x03,0xDA,0x44,0x3B,0xD1,0x7C,0xAE,0xC5,0xF8,0x77,0x48,0x83,0xC4,0x40,0x5B,0x5E,0x5F,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vblock_xor_256x8u_blocks(ConstBlock256<byte> xb, ConstBlock256<byte> yb, in Block256<byte> zb)
-; location: [7FFDD8E23180h, 7FFDD8E231EFh]
+; location: [7FF7C5C52B50h, 7FF7C5C52BBFh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h mov eax,[r8+8]                ; MOV(Mov_r32_rm32) [EAX,mem(32u,R8:br,:sr)]           encoding(4 bytes) = 41 8b 40 08
@@ -2013,7 +2013,7 @@
 ; static ReadOnlySpan<byte> vblock_xor_256x8u_blocksBytes => new byte[112]{0xC5,0xF8,0x77,0x66,0x90,0x41,0x8B,0x40,0x08,0x44,0x8B,0xC8,0x41,0xC1,0xF9,0x1F,0x41,0x83,0xE1,0x1F,0x41,0x03,0xC1,0xC1,0xF8,0x05,0x45,0x33,0xC9,0x85,0xC0,0x7E,0x4B,0x4C,0x8B,0x11,0x45,0x8B,0xD9,0x41,0xC1,0xE3,0x05,0x4D,0x63,0xDB,0x4D,0x03,0xD3,0xC4,0xC1,0x7F,0xF0,0x02,0x4C,0x8B,0x12,0x45,0x8B,0xD9,0x41,0xC1,0xE3,0x05,0x4D,0x63,0xDB,0x4D,0x03,0xD3,0xC4,0xC1,0x7F,0xF0,0x0A,0xC5,0xFD,0xEF,0xC1,0x4D,0x8B,0x10,0x45,0x8B,0xD9,0x41,0xC1,0xE3,0x05,0x4D,0x63,0xDB,0x4D,0x03,0xD3,0xC4,0xC1,0x7E,0x7F,0x02,0x41,0xFF,0xC1,0x44,0x3B,0xC8,0x7C,0xB5,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vblock_xor_256x16u_refs(int partcount, int partwidth, in ushort a, in ushort b, ref ushort z)
-; location: [7FFDD8E23210h, 7FFDD8E2328Bh]
+; location: [7FF7C5C52BE0h, 7FF7C5C52C5Bh]
 0000h push rdi                      ; PUSH(Push_r64) [RDI]                                 encoding(1 byte ) = 57
 0001h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0002h push rbx                      ; PUSH(Push_r64) [RBX]                                 encoding(1 byte ) = 53
@@ -2054,7 +2054,7 @@
 ; static ReadOnlySpan<byte> vblock_xor_256x16u_refsBytes => new byte[124]{0x57,0x56,0x53,0x48,0x83,0xEC,0x40,0xC5,0xF8,0x77,0x48,0x8B,0x84,0x24,0x80,0x00,0x00,0x00,0x45,0x33,0xD2,0x45,0x33,0xDB,0x85,0xC9,0x7E,0x55,0x49,0x63,0xF3,0x48,0xD1,0xE6,0x49,0x8D,0x3C,0x30,0x49,0x8D,0x1C,0x31,0xC5,0xFC,0x57,0xC0,0xC5,0xFD,0x11,0x44,0x24,0x20,0xC5,0xFC,0x57,0xC0,0xC5,0xFD,0x11,0x04,0x24,0xC5,0xFF,0xF0,0x07,0xC5,0xFD,0x11,0x44,0x24,0x20,0xC5,0xFF,0xF0,0x03,0xC5,0xFD,0x11,0x04,0x24,0xC5,0xFD,0x10,0x44,0x24,0x20,0xC5,0xFD,0x10,0x0C,0x24,0xC5,0xFD,0xEF,0xC1,0x48,0x03,0xF0,0xC5,0xFE,0x7F,0x06,0x41,0xFF,0xC2,0x44,0x03,0xDA,0x44,0x3B,0xD1,0x7C,0xAB,0xC5,0xF8,0x77,0x48,0x83,0xC4,0x40,0x5B,0x5E,0x5F,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vblock_xor_256x16u_blocks(ConstBlock256<ushort> xb, ConstBlock256<ushort> yb, in Block256<ushort> zb)
-; location: [7FFDD8E232B0h, 7FFDD8E2330Eh]
+; location: [7FF7C5C52C80h, 7FF7C5C52CDEh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h mov eax,[r8+8]                ; MOV(Mov_r32_rm32) [EAX,mem(32u,R8:br,:sr)]           encoding(4 bytes) = 41 8b 40 08
@@ -2088,7 +2088,7 @@
 ; static ReadOnlySpan<byte> vblock_xor_256x16u_blocksBytes => new byte[95]{0xC5,0xF8,0x77,0x66,0x90,0x41,0x8B,0x40,0x08,0x44,0x8B,0xC8,0x41,0xC1,0xF9,0x1F,0x41,0x83,0xE1,0x0F,0x41,0x03,0xC1,0xC1,0xF8,0x04,0x45,0x33,0xC9,0x85,0xC0,0x7E,0x3A,0x4C,0x8B,0x11,0x45,0x8B,0xD9,0x41,0xC1,0xE3,0x04,0x4D,0x63,0xDB,0x49,0xD1,0xE3,0x4D,0x03,0xD3,0xC4,0xC1,0x7F,0xF0,0x02,0x4C,0x8B,0x12,0x4D,0x03,0xD3,0xC4,0xC1,0x7F,0xF0,0x0A,0xC5,0xFD,0xEF,0xC1,0x4D,0x8B,0x10,0x4D,0x03,0xD3,0xC4,0xC1,0x7E,0x7F,0x02,0x41,0xFF,0xC1,0x44,0x3B,0xC8,0x7C,0xC6,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vblock_xor_256x32u_refs(int partcount, int partwidth, in uint a, in uint b, ref uint z)
-; location: [7FFDD8E23730h, 7FFDD8E237ACh]
+; location: [7FF7C5C53100h, 7FF7C5C5317Ch]
 0000h push rdi                      ; PUSH(Push_r64) [RDI]                                 encoding(1 byte ) = 57
 0001h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0002h push rbx                      ; PUSH(Push_r64) [RBX]                                 encoding(1 byte ) = 53
@@ -2129,7 +2129,7 @@
 ; static ReadOnlySpan<byte> vblock_xor_256x32u_refsBytes => new byte[125]{0x57,0x56,0x53,0x48,0x83,0xEC,0x40,0xC5,0xF8,0x77,0x48,0x8B,0x84,0x24,0x80,0x00,0x00,0x00,0x45,0x33,0xD2,0x45,0x33,0xDB,0x85,0xC9,0x7E,0x56,0x49,0x63,0xF3,0x48,0xC1,0xE6,0x02,0x49,0x8D,0x3C,0x30,0x49,0x8D,0x1C,0x31,0xC5,0xFC,0x57,0xC0,0xC5,0xFD,0x11,0x44,0x24,0x20,0xC5,0xFC,0x57,0xC0,0xC5,0xFD,0x11,0x04,0x24,0xC5,0xFF,0xF0,0x07,0xC5,0xFD,0x11,0x44,0x24,0x20,0xC5,0xFF,0xF0,0x03,0xC5,0xFD,0x11,0x04,0x24,0xC5,0xFD,0x10,0x44,0x24,0x20,0xC5,0xFD,0x10,0x0C,0x24,0xC5,0xFD,0xEF,0xC1,0x48,0x03,0xF0,0xC5,0xFE,0x7F,0x06,0x41,0xFF,0xC2,0x44,0x03,0xDA,0x44,0x3B,0xD1,0x7C,0xAA,0xC5,0xF8,0x77,0x48,0x83,0xC4,0x40,0x5B,0x5E,0x5F,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vblock_xor_256x32u_blocks(ConstBlock256<uint> xb, ConstBlock256<uint> yb, in Block256<uint> zb)
-; location: [7FFDD8E237E0h, 7FFDD8E2383Fh]
+; location: [7FF7C5C531B0h, 7FF7C5C5320Fh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h mov eax,[r8+8]                ; MOV(Mov_r32_rm32) [EAX,mem(32u,R8:br,:sr)]           encoding(4 bytes) = 41 8b 40 08
@@ -2163,7 +2163,7 @@
 ; static ReadOnlySpan<byte> vblock_xor_256x32u_blocksBytes => new byte[96]{0xC5,0xF8,0x77,0x66,0x90,0x41,0x8B,0x40,0x08,0x44,0x8B,0xC8,0x41,0xC1,0xF9,0x1F,0x41,0x83,0xE1,0x07,0x41,0x03,0xC1,0xC1,0xF8,0x03,0x45,0x33,0xC9,0x85,0xC0,0x7E,0x3B,0x4C,0x8B,0x11,0x45,0x8B,0xD9,0x41,0xC1,0xE3,0x03,0x4D,0x63,0xDB,0x49,0xC1,0xE3,0x02,0x4D,0x03,0xD3,0xC4,0xC1,0x7F,0xF0,0x02,0x4C,0x8B,0x12,0x4D,0x03,0xD3,0xC4,0xC1,0x7F,0xF0,0x0A,0xC5,0xFD,0xEF,0xC1,0x4D,0x8B,0x10,0x4D,0x03,0xD3,0xC4,0xC1,0x7E,0x7F,0x02,0x41,0xFF,0xC1,0x44,0x3B,0xC8,0x7C,0xC5,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vblock_xor_256x64u_refs(int partcount, int partwidth, in ulong a, in ulong b, ref ulong z)
-; location: [7FFDD8E23860h, 7FFDD8E238DCh]
+; location: [7FF7C5C53230h, 7FF7C5C532ACh]
 0000h push rdi                      ; PUSH(Push_r64) [RDI]                                 encoding(1 byte ) = 57
 0001h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0002h push rbx                      ; PUSH(Push_r64) [RBX]                                 encoding(1 byte ) = 53
@@ -2204,7 +2204,7 @@
 ; static ReadOnlySpan<byte> vblock_xor_256x64u_refsBytes => new byte[125]{0x57,0x56,0x53,0x48,0x83,0xEC,0x40,0xC5,0xF8,0x77,0x48,0x8B,0x84,0x24,0x80,0x00,0x00,0x00,0x45,0x33,0xD2,0x45,0x33,0xDB,0x85,0xC9,0x7E,0x56,0x49,0x63,0xF3,0x48,0xC1,0xE6,0x03,0x49,0x8D,0x3C,0x30,0x49,0x8D,0x1C,0x31,0xC5,0xFC,0x57,0xC0,0xC5,0xFD,0x11,0x44,0x24,0x20,0xC5,0xFC,0x57,0xC0,0xC5,0xFD,0x11,0x04,0x24,0xC5,0xFF,0xF0,0x07,0xC5,0xFD,0x11,0x44,0x24,0x20,0xC5,0xFF,0xF0,0x03,0xC5,0xFD,0x11,0x04,0x24,0xC5,0xFD,0x10,0x44,0x24,0x20,0xC5,0xFD,0x10,0x0C,0x24,0xC5,0xFD,0xEF,0xC1,0x48,0x03,0xF0,0xC5,0xFE,0x7F,0x06,0x41,0xFF,0xC2,0x44,0x03,0xDA,0x44,0x3B,0xD1,0x7C,0xAA,0xC5,0xF8,0x77,0x48,0x83,0xC4,0x40,0x5B,0x5E,0x5F,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vblock_xor_256x64u_blocks(ConstBlock256<ulong> xb, ConstBlock256<ulong> yb, in Block256<ulong> zb)
-; location: [7FFDD8E23D10h, 7FFDD8E23D6Fh]
+; location: [7FF7C5C536E0h, 7FF7C5C5373Fh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h mov eax,[r8+8]                ; MOV(Mov_r32_rm32) [EAX,mem(32u,R8:br,:sr)]           encoding(4 bytes) = 41 8b 40 08

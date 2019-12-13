@@ -1,4 +1,4 @@
-// 2019-12-13 11:54:23:764
+// 2019-12-13 15:23:28:479
 Span<byte> GetBytes(in int src)
 {
     IL_0000: ldarg.1
@@ -535,7 +535,7 @@ int IfElse10(int x)
 }
 ReadOnlySpan<byte> get_U8Data()
 {
-    IL_0000: ldsflda <PrivateImplementationDetails>/__StaticArrayInitTypeSize=64 <PrivateImplementationDetails>::4C95376F0126070C5E113DDFB17BBF8C2071FC7B
+    IL_0000: ldsflda <PrivateImplementationDetails>/__StaticArrayInitTypeSize=64 <PrivateImplementationDetails>::2200B7EF12949ECB22F56D4DF64AB0E703A54F6FD54AAF957AA00481B278B097
     IL_0005: ldc.i4.s 64
     IL_0007: newobj System.Void System.ReadOnlySpan`1<System.Byte>::.ctor(System.Void*,System.Int32)
     IL_000C: ret
@@ -546,7 +546,7 @@ ReadOnlySpan<uint> get_U32Data()
     IL_0000: ldc.i4.s 16
     IL_0002: newarr System.UInt32
     IL_0007: dup
-    IL_0008: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=64 <PrivateImplementationDetails>::2609FDA7513B2554C91B1C8B04A5DE75A8ED6688
+    IL_0008: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=64 <PrivateImplementationDetails>::F07C764B5810DE9E742AEE3E47E28F8A7AA453D2B90055C49ABB405761497C17
     IL_000D: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
     IL_0012: call System.ReadOnlySpan`1<System.UInt32> System.ReadOnlySpan`1<System.UInt32>::op_Implicit(System.UInt32[])
     IL_0017: ret
