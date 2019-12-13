@@ -14,7 +14,6 @@ namespace Z0
     
     partial class ginx
     {
-
         /// <summary>
         /// Creates a 256-bit vector from two 128-bit vectors    
         /// This mimics the _mm256_set_m128i intrinsic which does not appear to be available
@@ -36,7 +35,6 @@ namespace Z0
                 return vgeneric<T>(dinx.vconcat(v64u(lo), v64u(hi)));
             else 
                 return vconcat_i(lo,hi);
-
         }
 
         [MethodImpl(Inline)]
@@ -65,10 +63,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return vgeneric<T>(dinx.vconcat(v64f(lo), v64f(hi)));
             else
-                throw unsupported<T>();
-                
+                throw unsupported<T>();                
         }
-
     }
-
 }

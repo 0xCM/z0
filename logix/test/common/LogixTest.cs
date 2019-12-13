@@ -444,8 +444,8 @@ namespace Z0.Logix
                 var result1 = ScalarOpApi.eval(kind,a,b);    
                 var result2 = BitVectorOpApi.eval(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
                 var result3 = BitVectorOpApi.evalspec(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
-                var result4 = CpuOpApi.eval(kind, vbuild.vbroadcast(n128,a), vbuild.vbroadcast(n128,b)).ToScalar();
-                var result5 = CpuOpApi.eval(kind, vbuild.vbroadcast(n256,a), vbuild.vbroadcast(n256,b)).ToScalar();
+                var result4 = CpuOpApi.eval(kind, vbuild.broadcast(n128,a), vbuild.broadcast(n128,b)).ToScalar();
+                var result5 = CpuOpApi.eval(kind, vbuild.broadcast(n256,a), vbuild.broadcast(n256,b)).ToScalar();
                 Claim.eq(result1, result2);
                 Claim.eq(result2, result3);
                 Claim.eq(result3, result4);

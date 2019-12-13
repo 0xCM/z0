@@ -90,7 +90,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => vbuild.vbroadcast(w, BitMask.lsb(n64,n2,n1,t));            
+                => vbuild.broadcast(w, BitMask.lsb(n64,n2,n1,t));            
 
         public static SubGrid256<M,N,T> bars<M,N,T>(N256 w, M m, N n, T t = default)
             where M : unmanaged, ITypeNat

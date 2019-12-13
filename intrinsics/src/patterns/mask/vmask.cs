@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> lsb<T>(N128 w)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>());
+                => broadcast(w,BitMask.lsb<T>());
 
         /// <summary>
         /// [01010101 01010101 01010101 01010101]    
@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> lsb<T>(N128 w, N2 n)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n));
+                => broadcast(w,BitMask.lsb<T>(n));
 
         /// <summary>
         /// [00010001 00010001 00010001 00010001]
@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> lsb<T>(N128 w, N4 n)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n));
+                => broadcast(w,BitMask.lsb<T>(n));
 
         /// <summary>
         /// [00000001 00000001 00000001 00000001]
@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> lsb<T>(N128 w, N8 n)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n));
+                => broadcast(w,BitMask.lsb<T>(n));
 
         /// <summary>
         /// [00000000 00000001 00000000 00000001]
@@ -69,7 +69,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> lsb<T>(N128 w, N16 n)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n));
+                => broadcast(w,BitMask.lsb<T>(n));
 
         /// <summary>
         /// [00000011 00000011 00000011 00000011]
@@ -82,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> lsb<T>(N128 w, N8 n, N2 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
         /// [00000111 00000111 00000111 00000111]
@@ -95,7 +95,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> lsb<T>(N128 w, N8 n, N3 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
         /// [00001111 00001111 00001111 00001111]
@@ -108,7 +108,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> lsb<T>(N128 w, N8 n, N4 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
         /// [00011111 00011111 00011111 00011111]
@@ -121,7 +121,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> lsb<T>(N128 w, N8 n, N5 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
         /// [00111111 00111111 00111111 00111111]
@@ -134,7 +134,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> lsb<T>(N128 w, N8 n, N6 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
         /// [01111111 01111111 01111111 01111111]
@@ -147,7 +147,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> lsb<T>(N128 w, N8 n, N7 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
         /// [10000000 00000000 00000000 00000000]    
@@ -157,7 +157,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>());
+                => broadcast(w,BitMask.msb<T>());
 
         /// <summary>
         /// [01010101 01010101 01010101 01010101]    
@@ -168,7 +168,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N2 n)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n));
+                => broadcast(w,BitMask.msb<T>(n));
 
         /// <summary>
         /// [10001000 10001000 10001000 10001000]
@@ -179,7 +179,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N4 n)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n));
+                => broadcast(w,BitMask.msb<T>(n));
 
         /// <summary>
         /// [10001000 10001000 10001000 10001000]
@@ -190,7 +190,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N8 n)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n));
+                => broadcast(w,BitMask.msb<T>(n));
 
         /// <summary>
         /// [10000000 00000000 10000000 00000000]
@@ -201,7 +201,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N16 n)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n));
+                => broadcast(w,BitMask.msb<T>(n));
 
         /// <summary>
         /// [11000000 11000000 11000000 11000000]
@@ -214,7 +214,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N8 n, N2 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(n,f));
 
         /// <summary>
         /// [11100000 11100000 11100000 11100000]
@@ -227,7 +227,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N8 n, N3 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(n,f));
 
         /// <summary>
         /// [11110000 11110000 11110000 11110000]
@@ -240,7 +240,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N8 n, N4 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(n,f));
 
         /// <summary>
         /// [11111000 11111000 11111000 11111000]
@@ -253,7 +253,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N8 n, N5 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(n,f));
 
         /// <summary>
         /// [11111100 11111100 11111100 11111100]
@@ -266,7 +266,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N8 n, N6 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(n,f));
 
         /// <summary>
         /// [11111110 11111110 11111110 11111110]
@@ -279,7 +279,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N8 n, N7 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(n,f));
 
         /// <summary>
         /// Creates a mask where f most significant bits of every 8 bits are enabled
@@ -291,7 +291,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N8 n, byte f)
             where T : unmanaged
-                => vgeneric<T>(vbroadcast(w,BitMask.msb8f(f)));
+                => vgeneric<T>(broadcast(w,BitMask.msb8f(f)));
 
         /// <summary>
         /// [00000000 00000000 00000000 00000001]    
@@ -302,7 +302,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> lsb<T>(N256 w)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>());
+                => broadcast(w,BitMask.lsb<T>());
 
         /// <summary>
         /// [01010101 01010101 01010101 01010101]    
@@ -314,7 +314,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> lsb<T>(N256 w, N2 n)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n));
+                => broadcast(w,BitMask.lsb<T>(n));
 
         /// <summary>
         /// [00010001 00010001 00010001 00010001]
@@ -325,7 +325,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> lsb<T>(N256 w, N4 n)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n));
+                => broadcast(w,BitMask.lsb<T>(n));
 
         /// <summary>
         /// [00000001 00000001 00000001 00000001]
@@ -336,7 +336,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> lsb<T>(N256 w, N8 n)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n));
+                => broadcast(w,BitMask.lsb<T>(n));
 
         /// <summary>
         /// [00000000 00000001 00000000 00000001]
@@ -347,7 +347,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> lsb<T>(N256 w, N16 n)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n));
+                => broadcast(w,BitMask.lsb<T>(n));
 
         /// <summary>
         /// [00000011 00000011 00000011 00000011]
@@ -360,7 +360,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> lsb<T>(N256 w, N8 n, N2 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
         /// [00000111 00000111 00000111 00000111]
@@ -373,7 +373,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> lsb<T>(N256 w, N8 n, N3 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
         /// [00001111 00001111 00001111 00001111]
@@ -386,7 +386,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> lsb<T>(N256 w, N8 n, N4 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
         /// [00011111 00011111 00011111 00011111]
@@ -399,7 +399,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> lsb<T>(N256 w, N8 n, N5 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
         /// [00111111 00111111 00111111 00111111]
@@ -412,7 +412,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> lsb<T>(N256 w, N8 n, N6 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
         /// [01111111 01111111 01111111 01111111]
@@ -425,7 +425,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> lsb<T>(N256 w, N8 n, N7 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
         /// Creates a mask where the f least significant bits of every 8 bits are enabled
@@ -437,7 +437,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> lsb<T>(N128 w, N8 n, byte f)
             where T : unmanaged
-                => vgeneric<T>(vbroadcast(w,BitMask.lsb8f(f)));
+                => vgeneric<T>(broadcast(w,BitMask.lsb8f(f)));
 
         /// <summary>
         /// Creates a mask where the f least significant bits of every 8 bits are enabled
@@ -449,7 +449,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> lsb<T>(N256 w, N8 n, byte f)
             where T : unmanaged
-                => vgeneric<T>(vbroadcast(w,BitMask.lsb8f(f)));
+                => vgeneric<T>(broadcast(w,BitMask.lsb8f(f)));
 
         /// <summary>
         /// [10000000 00000000 00000000 00000000]    
@@ -459,7 +459,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> msb<T>(N256 w)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>());
+                => broadcast(w,BitMask.msb<T>());
 
         /// <summary>
         /// [01010101 01010101 01010101 01010101]    
@@ -470,7 +470,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> msb<T>(N256 w, N2 n)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n));
+                => broadcast(w,BitMask.msb<T>(n));
 
         /// <summary>
         /// [10001000 10001000 10001000 10001000]
@@ -481,7 +481,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> msb<T>(N256 w, N4 n)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n));
+                => broadcast(w,BitMask.msb<T>(n));
 
         /// <summary>
         /// [10001000 10001000 10001000 10001000]
@@ -492,7 +492,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> msb<T>(N256 w, N8 n)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n));
+                => broadcast(w,BitMask.msb<T>(n));
 
         /// <summary>
         /// [10000000 00000000 10000000 00000000]
@@ -503,7 +503,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> msb<T>(N256 w, N16 n)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n));
+                => broadcast(w,BitMask.msb<T>(n));
 
         /// <summary>
         /// [11000000 11000000 11000000 11000000]
@@ -516,7 +516,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> msb<T>(N256 w, N8 n, N2 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(n,f));
 
         /// <summary>
         /// [11100000 11100000 11100000 11100000]
@@ -529,7 +529,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> msb<T>(N256 w, N8 n, N3 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(n,f));
 
         /// <summary>
         /// [11110000 11110000 11110000 11110000]
@@ -542,7 +542,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> msb<T>(N256 w, N8 n, N4 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(n,f));
 
         /// <summary>
         /// [11111000 11111000 11111000 11111000]
@@ -555,7 +555,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> msb<T>(N256 w, N8 n, N5 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(n,f));
 
         /// <summary>
         /// [11111100 11111100 11111100 11111100]
@@ -568,7 +568,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> msb<T>(N256 w, N8 n, N6 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(n,f));
 
         /// <summary>
         /// [11111110 11111110 11111110 11111110]
@@ -581,7 +581,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> msb<T>(N256 w, N8 n, N7 f)
             where T : unmanaged
-                => vbroadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(n,f));
 
         /// <summary>
         /// Creates a mask where f most significant bits of every 8 bits are enabled
@@ -593,7 +593,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> msb<T>(N256 w, N8 n, byte f)
             where T : unmanaged
-                => vgeneric<T>(vbroadcast(w,BitMask.msb8f(f)));
+                => vgeneric<T>(broadcast(w,BitMask.msb8f(f)));
 
 
 

@@ -15,31 +15,13 @@ namespace Z0
     partial class dinx
     {                
         /// <summary>
-        /// Multiplies two two 256-bit/u64 vectors to yield a 256-bit/u64 vector; only provides reasonable
-        /// results if there's no 64-bit overflow
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
-        static Vector256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)    
-        {
-            var loMask = vbroadcast(n256, 0x00000000fffffffful);                
-            var xh = v32u(vsrl(x, 32));
-            var yl = v32u(vand(y, loMask));
-            return vadd(
-                vmul(v32u(vand(x, loMask)), yl), 
-                vadd(vsll(vmul(xh, yl), 32), 
-                    vsll(vmul(xh, v32u(vsrl(y, 32))), 32)));
-        }
-
-        /// <summary>
         /// Computes the carryless product of the operands reduced by a specified polynomial
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="poly">The reducing polynomial</param>
         [MethodImpl(Inline)]
-        public static byte clmulr(byte a, byte b, ushort poly)
+        public static byte clmulr(N8 r, byte a, byte b, ushort poly)
         {
             var prod = dinx.clmul(a,b);
             prod ^= (ushort)dinx.clmul((ushort)(prod >> 8), poly);
@@ -47,6 +29,15 @@ namespace Z0
             return (byte)prod;
         }
 
+        [MethodImpl(Inline)]
+        public static ulong clmulr(N8 r, ulong a, ulong b, ulong poly)
+        {
+            var product = clmul64(a,b);            
+            product ^= clmul64(product >> 8, poly);
+            product ^= clmul64(product >> 8, poly);
+            return product;
+        }
+
         /// <summary>
         /// Computes the carryless product of the operands reduced by a specified polynomial
         /// </summary>
@@ -54,7 +45,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <param name="poly">The reducing polynomial</param>
         [MethodImpl(Inline)]
-        public static ushort clmulr(ushort a, ushort b, uint poly)
+        public static ushort clmulr(N16 r, ushort a, ushort b, uint poly)
         {
             var prod = dinx.clmul(a,b);
             prod ^= (uint)dinx.clmul(prod >> 16, poly);
@@ -69,7 +60,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <param name="poly">The reducing polynomial</param>
         [MethodImpl(Inline)]
-        public static uint clmulr(uint a, uint b, ulong poly)
+        public static uint clmulr(N32 r, uint a, uint b, ulong poly)
         {
             var prod = clmul(a,b);
             prod ^= clmul(prod >> 32, poly).lo;
@@ -91,25 +82,15 @@ namespace Z0
             return CarrylessMultiply(a,b,0x00);
         }
 
-        /// <summary>
-        /// __m128i _mm_clmulepi64_si128 (__m128i a, __m128i b, const int imm8) PCLMULQDQ xmm, xmm/m128, imm8
-        /// Computes the caryless 128-bit product of two 64-bit operands
-        /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> clmul(Vector128<ulong> a, Vector128<ulong> b)
-            => CarrylessMultiply(a,b,0x00);
+        public static ulong clmul64(ulong x, ulong y)
+        {
+            var u = ginx.vscalar(n128, x);
+            var v = ginx.vscalar(n128, y);
+            var z = CarrylessMultiply(u, v, 0);
+            return vcell(z,0);
+        }
 
-        /// __m128i _mm_clmulepi64_si128 (__m128i a, __m128i b, const int imm8) PCLMULQDQ xmm, xmm/m128, imm8
-        /// Computes the caryless 128-bit product of two 64-bit operands
-        /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        /// <param name="mask">Specifies the components of the source vectors to multiply</param>
-        [MethodImpl(Inline)]
-        public static Vector128<ulong> clmul(Vector128<ulong> lhs, Vector128<ulong> rhs, ClMulMask mask)
-            =>  CarrylessMultiply(lhs, rhs, (byte)mask);
 
         /// <summary>
         /// Computes the caryless 16-bit product of two 8-bit operands
@@ -138,45 +119,5 @@ namespace Z0
         public static ulong clmul(uint lhs, uint rhs)
             => clmul((ulong)lhs, (ulong)rhs).lo;
 
-        /// <summary>
-        /// Computes the carryless product of two 64-bit operands reduced by a specified polynomial
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        /// <param name="poly">The reducing polynomial</param>
-        [MethodImpl(Inline)]
-        public static Vector128<ulong> clmulr(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> poly)
-        {
-            var prod = clmul(a,b);
-            prod = vxor(prod, clmul(vsrl(prod, 64), poly, ClMulMask.X00));
-            prod = vxor(prod, clmul(vsrl(prod, 64), poly, ClMulMask.X00));
-            return prod;
-        }
-    }
-
-    /// <summary>
-    /// Defines a mask that specifies the left/right vector components from which a carry-less product will be formed
-    /// </summary>
-    public enum ClMulMask : byte
-    {
-        /// <summary>
-        /// For a product P = XY, multiply the lo(X) and lo(Y)
-        /// </summary>
-        X00 = 0x00,
-
-        /// <summary>
-        /// For a product P = XY, multiply the lo(X) and hi(Y)
-        /// </summary>
-        X01 = 0x01,
-
-        /// <summary>
-        /// For a product P = XY, multiply the hi(X) and lo(Y)
-        /// </summary>
-        X10 = 0x10,
-
-        /// <summary>
-        /// For a product P = XY, multiply the hi(X) and hi(Y)
-        /// </summary>
-        X11 = 0x11,
     }
 }

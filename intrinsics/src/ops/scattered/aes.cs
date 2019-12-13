@@ -24,15 +24,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data to be encrypted</param>
         /// <param name="key">The round key</param>
-        /// <algorithm>
-        /// state := a
-        /// a[127:0] := ShiftRows(a[127:0])
-        /// a[127:0] := SubBytes(a[127:0])
-        /// a[127:0] := MixColumns(a[127:0])
-        /// dst[127:0] := a[127:0] XOR RoundKey[127:0]        
-        /// </algorithm>        
         [MethodImpl(Inline)]
-        public static Vector128<byte> enc(Vector128<byte> src, Vector128<byte> key)
+        public static Vector128<byte> aesencode(Vector128<byte> src, Vector128<byte> key)
             => AES.Encrypt(src,key);
 
         /// <summary>
@@ -42,7 +35,7 @@ namespace Z0
         /// <param name="src">The last block of data to be encrypted</param>
         /// <param name="key">The round key</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> encl(Vector128<byte> src, Vector128<byte> key)
+        public static Vector128<byte> aesencodel(Vector128<byte> src, Vector128<byte> key)
             => AES.EncryptLast(src,key);
 
         /// <summary>
@@ -51,15 +44,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data to be decrypted</param>
         /// <param name="key">The round key</param>
-        /// <algorithm>
-        /// state := a
-        /// a[127:0] := InvShiftRows(a[127:0])
-        /// a[127:0] := InvSubBytes(a[127:0])
-        /// a[127:0] := InvMixColumns(a[127:0])
-        /// dst[127:0] := a[127:0] XOR RoundKey[127:0]
-        /// </algorithm>
         [MethodImpl(Inline)]
-        public static Vector128<byte> dec(Vector128<byte> src, Vector128<byte> key)
+        public static Vector128<byte> aesdecode(Vector128<byte> src, Vector128<byte> key)
             => AES.Decrypt(src,key);
 
         /// <summary>
@@ -69,7 +55,7 @@ namespace Z0
         /// <param name="src">The data to be decrypted</param>
         /// <param name="key">The round key</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> decl(Vector128<byte> src, Vector128<byte> key)
+        public static Vector128<byte> aesdecodel(Vector128<byte> src, Vector128<byte> key)
             => AES.DecryptLast(src,key);
 
         /// <summary>
@@ -78,7 +64,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> invmix(Vector128<byte> src)
+        public static Vector128<byte> aesinvmix(Vector128<byte> src)
             => AES.InverseMixColumns(src);
 
         /// <summary>
@@ -88,33 +74,21 @@ namespace Z0
         /// </summary>
         /// <param name="src"></param>
         /// <param name="imm8"></param>
-        /// <algorithm>
-        /// X3[31:0] := a[127:96]
-        /// X2[31:0] := a[95:64]
-        /// X1[31:0] := a[63:32]
-        /// X0[31:0] := a[31:0]
-        /// RCON[31:0] := ZeroExtend(imm8[7:0])
-        /// dst[31:0] := SubWord(X1)
-        /// dst[63:32] := RotWord(SubWord(X1)) XOR RCON
-        /// dst[95:64] := SubWord(X3)
-        /// dst[127:96] := RotWord(SubWord(X3)) XOR RCON
-        /// </algorithm>
         [MethodImpl(Inline)]
-        public static Vector128<byte> kgassist(Vector128<byte> src,byte imm8)
+        public static Vector128<byte> aeskg(Vector128<byte> src,byte imm8)
             => AES.KeygenAssist(src,imm8);
 
-        public static void enc(Block128<byte> src, Vector128<byte> key, Block128<byte> dst)            
+        public static void aesenc(Block128<byte> src, Vector128<byte> key, Block128<byte> dst)            
         {
             for(var block = 0; block < src.BlockCount; block++)
-                 vstore(enc(src.LoadVector(block),key), ref dst.BlockRef(block));
+                 vstore(aesencode(src.LoadVector(block),key), ref dst.BlockRef(block));
         }
 
-        public static void dec(Block128<byte> src, Vector128<byte> key, Block128<byte> dst)            
+        public static void aesdec(Block128<byte> src, Vector128<byte> key, Block128<byte> dst)            
         {
             for(var block = 0; block < src.BlockCount; block++)
-                 vstore(dec(src.LoadVector(block),key), ref dst.BlockRef(block));
+                 vstore(aesdecode(src.LoadVector(block),key), ref dst.BlockRef(block));
         }
-
     }
 
 }

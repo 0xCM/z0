@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
+    
     using static System.Runtime.Intrinsics.X86.Sse3;
     using static System.Runtime.Intrinsics.X86.Ssse3;
     using static System.Runtime.Intrinsics.X86.Avx;
@@ -53,6 +54,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<int> vhadd(Vector256<int> x, Vector256<int> y)
             => HorizontalAdd(x, y);
-
    }
 }

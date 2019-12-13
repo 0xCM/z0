@@ -15,7 +15,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41;
 
     using static zfunc;
-    using static As;
 
     partial class dinx
     {
@@ -40,10 +39,25 @@ namespace Z0
         public static Vector128<byte> vpackus(Vector128<ushort> x, Vector128<ushort> y)
         {
             var w = n128;
-            var mask = vbuild.vbroadcast(w, (ushort)(byte.MaxValue));
+            var mask = vbuild.broadcast(w, (ushort)(byte.MaxValue));
             var z0 = v16i(ginx.vand(x,mask));
             var z1 = v16i(ginx.vand(y,mask));
             return PackUnsignedSaturate(z0,z1);         
+        }
+
+        /// <summary>
+        /// (4x32w,4x32w) -> 8x16w
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vpackus2(Vector128<ushort> x, Vector128<ushort> y)
+        {
+            var w = n128;
+            var v1 = dinx.vshuf16x8(x,VData.packusLo(w,n16,n8));
+            var v2 = dinx.vshuf16x8(y,VData.packusHi(w,n16,n8));
+            return v8u(dinx.vor(v1,v2));
         }
 
         /// <summary>
@@ -74,6 +88,21 @@ namespace Z0
         }
 
         /// <summary>
+        /// (4x32w,4x32w) -> 8x16w
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> vpackus2(Vector128<uint> x, Vector128<uint> y)
+        {
+            var w = n128;
+            var v1 = dinx.vshuf16x8(x,VData.packusLo(w,n32,n16));
+            var v2 = dinx.vshuf16x8(y,VData.packusHi(w,n32,n16));
+            return v16u(dinx.vor(v1,v2));
+        }
+
+        /// <summary>
         /// __m256i _mm256_packus_epi16 (__m256i a, __m256i b)VPACKUSWB ymm, ymm, ymm/m256
         /// (16x8w,16x8w) -> 32x8w
         /// </summary>
@@ -97,6 +126,21 @@ namespace Z0
             var z0 = v16i(dinx.vand(x,mask));
             var z1 = v16i(dinx.vand(y,mask));
             return PackUnsignedSaturate(z0,z1);         
+        }
+
+        /// <summary>
+        /// (4x32w,4x32w) -> 8x16w
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vpackus2(Vector256<ushort> x, Vector256<ushort> y)
+        {
+            var w = n256;
+            var v1 = dinx.vshuf16x8(x,VData.packusLo(w,n16,n8));
+            var v2 = dinx.vshuf16x8(y,VData.packusHi(w,n16,n8));
+            return v8u(dinx.vor(v1,v2));
         }
 
         /// <summary>
@@ -125,5 +169,21 @@ namespace Z0
             var z1 = v32i(dinx.vand(y,mask));
             return PackUnsignedSaturate(z0, z1);
         }
+
+        /// <summary>
+        /// (4x32w,4x32w) -> 8x16w
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
+        [MethodImpl(Inline)]
+        public static Vector256<ushort> vpackus2(Vector256<uint> x, Vector256<uint> y)
+        {
+            var w = n256;
+            var v1 = dinx.vshuf16x8(x,VData.packusLo(w,n32,n16));
+            var v2 = dinx.vshuf16x8(y,VData.packusHi(w,n32,n16));
+            return v16u(dinx.vor(v1,v2));
+        }
+
    }
 }

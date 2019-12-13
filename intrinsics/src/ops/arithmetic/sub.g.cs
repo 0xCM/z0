@@ -72,7 +72,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vsub<T>(Vector128<T> x, T a)
             where T : unmanaged
-                => vsub(x, vbuild.vbroadcast(n128,a));
+                => vsub(x, vbuild.broadcast(n128,a));
+
+        /// <summary>
+        /// Subtracts each vector component from a constant value
+        /// </summary>
+        /// <param name="a">The constant</param>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vsub<T>(T a, Vector128<T> x)
+            where T : unmanaged
+                => vsub(vbuild.broadcast(n128,a), x);
 
         /// <summary>
         /// Subtracts a constant value from each vector component
@@ -83,9 +94,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vsub<T>(Vector256<T> x, T a)
             where T : unmanaged
-                => vsub(x, vbuild.vbroadcast(n256,a));
+                => vsub(x, vbuild.broadcast(n256,a));
     
-             
+        /// <summary>
+        /// Subtracts each vector component from a constant value
+        /// </summary>
+        /// <param name="a">The constant</param>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> vsub<T>(T a, Vector256<T> x)
+            where T : unmanaged
+                => vsub(vbuild.broadcast(n256,a), x);
+
         [MethodImpl(Inline)]
         static Vector128<T> vsub_i<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
@@ -114,7 +135,6 @@ namespace Z0
                 return vgeneric<T>(dinx.vsub(vcast64u(x), vcast64u(y)));
         }
 
-
         [MethodImpl(Inline)]
         static Vector256<T> vsub_i<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
@@ -128,7 +148,6 @@ namespace Z0
             else
                  return vgeneric<T>(dinx.vsub(vcast64i(x), vcast64i(y)));
         }    
-
 
         [MethodImpl(Inline)]
         static Vector256<T> vsub_u<T>(Vector256<T> x, Vector256<T> y)

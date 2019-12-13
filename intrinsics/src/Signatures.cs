@@ -5,10 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-
 
     /// <summary>
     /// Characterizes the signature of a 128-bit cpu vector unary operator

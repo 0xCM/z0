@@ -86,5 +86,30 @@ namespace Z0
         public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 n, T min, T max, Func<T,bool> filter = null)        
             where T : unmanaged
                 => CpuVecX.LoadVector(random.Blocks(n,1, (min, max), filter));
+
+        /// <summary>
+        /// Produces a random 128-bit cpu vector
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="w">The vector width selector value</param>
+        /// <param name="t">The component type representative</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 w, T t)        
+            where T : unmanaged
+                => CpuVecX.LoadVector(random.Blocks<T>(w,1));
+
+        /// <summary>
+        /// Produces a random 256-bit cpu vector
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="w">The vector width selector value</param>
+        /// <param name="t">The component type representative</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 w, T t)        
+            where T : unmanaged
+                => CpuVecX.LoadVector(random.Blocks<T>(w,1));
+
     }
 }

@@ -14,7 +14,7 @@ namespace Z0
     using static HexConst;
     using static As;
 
-    public static class PatternData
+    public static partial class VData
     {        
         /// <summary>
         /// Loads a 128-bit pattern described by a readonly bytespan
@@ -158,126 +158,8 @@ namespace Z0
         }
 
 
-        [MethodImpl(Inline)]
-        public static Vector128<T> uints<T>(N128 n)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return load<T>(n,Units128x8u);
-            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return load<T>(n,Units128x16u);
-            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
-                return load<T>(n,Units128x32u);
-            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return load<T>(n,Units128x64u);
-            else
-                throw unsupported<T>();
-        }
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> uints<T>(N256 n)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return load<T>(n,Units256x8u);
-            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return load<T>(n,Units256x16u);
-            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
-                return load<T>(n,Units256x32u);
-            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return load<T>(n,Units256x64u);
-            else
-                throw unsupported<T>();
-        }
 
 
-        [MethodImpl(Inline)]
-        public static Vector128<byte> byteswap<W>(N128 n, W w = default)
-            where W : unmanaged, ITypeNat
-        {
-            if(typeof(W) == typeof(N16))
-                return load<byte>(n, ByteSwap128x16u);
-            else if(typeof(W) == typeof(N32))
-                return load<byte>(n, ByteSwap128x32u);
-            else if(typeof(W) == typeof(N64))
-                return load<byte>(n, ByteSwap128x64u);
-            else
-                throw unsupported<W>();            
-        }
-
-        [MethodImpl(Inline)]
-        public static Vector256<byte> byteswap<W>(N256 n, W w = default)
-            where W : unmanaged, ITypeNat
-        {
-            if(typeof(W) == typeof(N16))
-                return load<byte>(n, BSwap256x16u);
-            else if(typeof(W) == typeof(N32))
-                return load<byte>(n, BSwap256x32u);
-            else if(typeof(W) == typeof(N64))
-                return load<byte>(n, BSwap256x64u);
-            else
-                throw unsupported<W>();            
-        }
-
-        /// <summary>
-        /// Defines a blend specification for 2 256-bit vectors that selects either the odd or even components from each vector
-        /// </summary>
-        /// <param name="n">The vector width selector</param>
-        /// <param name="odd">Whether to select odd or even components</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<byte> blendspec<T>(N256 n, bit odd)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))   
-                return blendspec(n, n8, odd);
-            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return blendspec(n, n16, odd);
-            else if(typeof(T) == typeof(uint) ||typeof(T) == typeof(int))
-                return blendspec(n, n32, odd);
-            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return blendspec(n, n64, odd);
-            else
-                throw unsupported<T>();            
-        }
-
-        /// <summary>
-        /// Defines a blend specification for 2 256-bit vectors that selects either the odd or even components from each vector
-        /// </summary>
-        /// <param name="n">The vector width selector</param>
-        /// <param name="odd">Whether to select odd or even components</param>
-        /// <typeparam name="N">The component width type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<byte> blendspec<N>(N256 n, bit odd, N w = default)
-            where N : unmanaged, ITypeNat
-        {
-            if(typeof(N) == typeof(N8))   
-                return blendspec(n, n8, odd);
-            else if(typeof(N) == typeof(N16))   
-                return blendspec(n, n16, odd);
-            else if(typeof(N) == typeof(N32))   
-                return blendspec(n, n32, odd);
-            else if(typeof(N) == typeof(N64))   
-                return blendspec(n, n64, odd);
-            else
-                throw unsupported<N>();            
-        }
-
-        [MethodImpl(Inline)]
-        static Vector256<byte> blendspec(N256 n, N8 width, bit odd)
-            => load<byte>(n,odd ? BlendSpec_Odd_256x8 : BlendSpec_Even_256x8);
-
-        [MethodImpl(Inline)]
-        static Vector256<byte> blendspec(N256 n, N16 width, bit odd)
-            => load<byte>(n,odd ? BlendSpec_Odd_256x16 : BlendSpec_Even_256x16);
-
-        [MethodImpl(Inline)]
-        static Vector256<byte> blendspec(N256 n, N32 width, bit odd)
-            => load<byte>(n,odd ? BlendSpec_Odd_256x32 : BlendSpec_Even_256x32);
-
-        [MethodImpl(Inline)]
-        static Vector256<byte> blendspec(N256 n, N64 width, bit odd)
-            => load<byte>(n,odd ? BlendSpec_Odd_256x64 : BlendSpec_Even_256x64);
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotl(N128 n, N8 offset)
@@ -411,6 +293,12 @@ namespace Z0
             };
 
         /// <summary>
+        /// Shuffle pattern that, when applied, rotates 128 bits of content rightward by 48 bits
+        /// </summary>
+        static ReadOnlySpan<byte> RotR48_128x8u 
+            => new byte[16]{6,7,8,9,A,B,C,E,E,F,0,1,2,4,5,6};
+
+        /// <summary>
         /// Shuffle pattern that, when applied, rotates 128 bits of content leftward by 8 bits
         /// </summary>
         static ReadOnlySpan<byte> RotL8_128x8u  
@@ -494,184 +382,8 @@ namespace Z0
         static ReadOnlySpan<byte> RotR40_128x8u 
             => new byte[16]{5,6,7,8,9,A,B,C,D,E,F,0,1,2,4,5};
 
-        /// <summary>
-        /// Shuffle pattern that, when applied, rotates 128 bits of content rightward by 48 bits
-        /// </summary>
-        static ReadOnlySpan<byte> RotR48_128x8u 
-            => new byte[16]{6,7,8,9,A,B,C,E,E,F,0,1,2,4,5,6};
-
-        /// <summary>
-        /// Shuffle pattern that, when applied, swaps the byte-level representation of 16-bit unsigned integers
-        /// </summary>
-        static ReadOnlySpan<byte> ByteSwap128x16u
-            => new byte[16]{1,0,3,2,5,4,7,6,9,8,B,A,D,C,F,E};
-
-        /// <summary>
-        /// Shuffle pattern that, when applied, swaps the byte-level representation of 32-bit unsigned integers
-        /// </summary>
-        static ReadOnlySpan<byte> ByteSwap128x32u
-            => new byte[16]{3,2,1,0,7,6,5,4,B,A,9,8,F,E,D,C};
-
-        /// <summary>
-        /// Shuffle pattern that, when applied, swaps the byte-level representation of 64-bit unsigned integers
-        /// </summary>
-        static ReadOnlySpan<byte> ByteSwap128x64u
-            => new byte[16]{7,6,5,4,3,2,1,0,F,E,D,C,B,A,9,8};
-
-
-        /// <summary>
-        /// Shuffle pattern that, when applied, swaps the byte-level representation of 16-bit unsigned integers
-        /// </summary>
-        static ReadOnlySpan<byte> BSwap256x16u
-            => new byte[32]{
-                1,0,3,2,5,4,7,6,9,8,B,A,D,C,F,E,
-                1,0,3,2,5,4,7,6,9,8,B,A,D,C,F,E
-                };
-
-        /// <summary>
-        /// Shuffle pattern that, when applied, swaps the byte-level representation of 32-bit unsigned integers
-        /// </summary>
-        static ReadOnlySpan<byte> BSwap256x32u
-            => new byte[32]{
-                3,2,1,0,7,6,5,4,B,A,9,8,F,E,D,C,
-                3,2,1,0,7,6,5,4,B,A,9,8,F,E,D,C
-                };
-
-
-        /// <summary>
-        /// Shuffle pattern that, when applied, swaps the byte-level representation of 64-bit unsigned integers
-        /// </summary>
-        static ReadOnlySpan<byte> BSwap256x64u
-            => new byte[32]{
-                7,6,5,4,3,2,1,0,F,E,D,C,B,A,9,8,
-                7,6,5,4,3,2,1,0,F,E,D,C,B,A,9,8
-                };
-
-        /// <summary>
-        /// Defines a mask for an even 256x8-bit blend
-        /// </summary>
-        static ReadOnlySpan<byte> BlendSpec_Even_256x8
-            => new byte[32]{
-                0, FF, 0, FF, 0, FF, 0, FF,
-                0, FF, 0, FF, 0, FF, 0, FF,
-                0, FF, 0, FF, 0, FF, 0, FF,
-                0, FF, 0, FF, 0, FF, 0, FF,
-            };
-
-        /// <summary>
-        /// Defines a mask for an even 256x8-bit blend
-        /// </summary>
-        static ReadOnlySpan<byte> BlendSpec_Odd_256x8
-            => new byte[32]{
-                FF, 0, FF, 0, FF, 0, FF, 0,
-                FF, 0, FF, 0, FF, 0, FF, 0,
-                FF, 0, FF, 0, FF, 0, FF, 0,
-                FF, 0, FF, 0, FF, 0, FF, 0,
-            };
-
-        /// <summary>
-        /// Defines a mask for an even 256x8-bit blend
-        /// </summary>
-        static ReadOnlySpan<byte> BlendSpec_Even_256x16
-            => new byte[32]{
-                0,0, FF,FF, 0,0, FF,FF,
-                0,0, FF,FF, 0,0, FF,FF,
-                0,0, FF,FF, 0,0, FF,FF,
-                0,0, FF,FF, 0,0, FF,FF,
-            };
-
-        /// <summary>
-        /// Defines a mask for an odd 256x32-bit blend
-        /// </summary>
-        static ReadOnlySpan<byte> BlendSpec_Odd_256x16
-            => new byte[32]{
-                FF,FF, 0,0, FF,FF, 0,0,
-                FF,FF, 0,0, FF,FF, 0,0,
-                FF,FF, 0,0, FF,FF, 0,0,
-                FF,FF, 0,0, FF,FF, 0,0,
-            };
-
-        /// <summary>
-        /// Defines a mask for an even 256x32-bit blend
-        /// </summary>
-        static ReadOnlySpan<byte> BlendSpec_Even_256x32
-            => new byte[32]{
-                0,0,0,0, FF,FF,FF,FF,
-                0,0,0,0, FF,FF,FF,FF,
-                0,0,0,0, FF,FF,FF,FF,
-                0,0,0,0, FF,FF,FF,FF,
-            };
-
-        /// <summary>
-        /// Defines a mask for an odd 256x32-bit blend
-        /// </summary>
-        static ReadOnlySpan<byte> BlendSpec_Odd_256x32
-            => new byte[32]{
-                FF,FF,FF,FF, 0,0,0,0, 
-                FF,FF,FF,FF, 0,0,0,0, 
-                FF,FF,FF,FF, 0,0,0,0, 
-                FF,FF,FF,FF, 0,0,0,0, 
-            };
-
-        /// <summary>
-        /// Defines a mask for an even 256x64-bit blend
-        /// </summary>
-        static ReadOnlySpan<byte> BlendSpec_Even_256x64
-            => new byte[32]{
-                0,0,0,0,0,0,0,0,
-                FF,FF,FF,FF,FF,FF,FF,FF,
-                0,0,0,0,0,0,0,0,
-                FF,FF,FF,FF,FF,FF,FF,FF,
-            };
-
-        /// <summary>
-        /// Defines a mask for an odd 256x64-bit blend
-        /// </summary>
-        static ReadOnlySpan<byte> BlendSpec_Odd_256x64
-            =>new byte[32]{
-                FF,FF,FF,FF,FF,FF,FF,FF,
-                0,0,0,0,0,0,0,0,
-                FF,FF,FF,FF,FF,FF,FF,FF,
-                0,0,0,0,0,0,0,0,  
-            };
-
-        static ReadOnlySpan<byte> Units128x8u
-            => new byte[16]{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
-
-        static ReadOnlySpan<byte> Units128x16u
-            => new byte[16]{1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0};
-
-        static ReadOnlySpan<byte> Units128x32u
-            => new byte[16]{1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0};
-
-        static ReadOnlySpan<byte> Units128x64u
-            => new byte[16]{1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0};
-
-       static ReadOnlySpan<byte> Units256x8u
-            => new byte[32]{
-                1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-                1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-                };
-
-        static ReadOnlySpan<byte> Units256x16u
-            => new byte[32]{
-                1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,
-                1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0
-                };
-
-
-        static ReadOnlySpan<byte> Units256x32u
-            => new byte[32]{
-                1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,
-                1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0
-                };
-
-        static ReadOnlySpan<byte> Units256x64u
-            => new byte[32]{
-                1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
-                1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
-                };
-
+ 
+ 
         static ReadOnlySpan<byte> LaneMerge256x8u 
             => new byte[32]{0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31};
         

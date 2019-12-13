@@ -5,13 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     
     using static zfunc;
-    using static As;
 
     public static class LUT
     {        
@@ -31,6 +28,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Lut32 define(ConstBlock256<byte> src)
             => new Lut32(src);
-
     }
 }

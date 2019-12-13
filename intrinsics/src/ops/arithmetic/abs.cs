@@ -54,5 +54,4 @@ namespace Z0
             return vsub(vxor(mask, src), mask);
         }
     }
-
 }

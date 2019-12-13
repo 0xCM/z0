@@ -118,7 +118,6 @@ namespace Z0
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="q">The queue to manipulate</param>
         /// <param name="items">The items to place on the qeeue</param>
-        /// <returns></returns>
         public static int Enqueue<T>(this ConcurrentQueue<T> q, IEnumerable<T> items)
         {
             int count = 0;

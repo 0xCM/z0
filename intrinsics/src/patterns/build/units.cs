@@ -10,8 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static zfunc;    
-    using static ginx;
-    using static As;
 
     partial class vbuild
     {
@@ -23,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> units<T>(N128 n)
             where T : unmanaged
-                => PatternData.uints<T>(n);
+                => VData.uints<T>(n);
 
         /// <summary>
         /// Returns a 256-bit vector where each component is assigned the value 1
@@ -33,6 +31,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> units<T>(N256 n)
             where T : unmanaged
-                => PatternData.uints<T>(n);
+                => VData.uints<T>(n);
     }
 }

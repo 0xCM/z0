@@ -14,6 +14,7 @@ namespace Z0
     
     using static zfunc;
 
+
     public abstract class Context : IContext
     {        
         protected Context(IPolyrand rng)
@@ -50,17 +51,26 @@ namespace Z0
         ConcurrentQueue<AppMsg> _MsgQueue {get;} 
             = new ConcurrentQueue<AppMsg>();
 
-        void _Enqueue(AppMsg msg)
-            => _MsgQueue.Enqueue(msg);
 
-        void _Enqueue(params AppMsg[] messages)
-            => messages.Iterate(m => _MsgQueue.Enqueue(m));
+        ConcurrentQueue<TestCaseResult> TestResults {get;}
+            = new ConcurrentQueue<TestCaseResult>();
+
+
+        protected void Enqueue(IEnumerable<TestCaseResult> results)
+            => TestResults.Enqueue(results);
 
         protected OpTime[] DequeueTimings()
         {
             var timings = OpTimes.OrderBy(x => x.OpName).ToArray();
             OpTimes.Clear();
             return timings;
+        }
+
+        protected TestCaseResult[] DequeueResults()
+        {
+            var results = TestResults.OrderBy(x => x.Operation).ToArray();
+            TestResults.Clear();
+            return results;
         }
 
         public IReadOnlyList<AppMsg> DequeueMessages(params AppMsg[] addenda)

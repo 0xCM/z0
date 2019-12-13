@@ -10,12 +10,9 @@ namespace Z0
     using System.Collections.Generic;
 
     using static zfunc;    
-    using static nfunc;
 
     partial class BitVector
     {
-
-
         [MethodImpl(Inline)]
         public static BitVector16 broadcast(N16 n, byte a)
         {
@@ -62,8 +59,6 @@ namespace Z0
         public static BitVector128<N,T> broadcast<N,T>(N128 w, T a, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => vbuild.vbroadcast(w,a);
-
+                => vbuild.broadcast(w,a);
     }
-
 }

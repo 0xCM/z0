@@ -12,51 +12,51 @@ namespace Z0
     public class t_vinc : t_vinx<t_vinc>
     {
         public void vinc_128x8u()
-            => inc_check<byte>(n128);
+            => vinc_check<byte>(n128);
 
         public void vinc_128x8i()
-            => inc_check<sbyte>(n128);
+            => vinc_check<sbyte>(n128);
 
         public void vinc_128x16i()
-            => inc_check<short>(n128);
+            => vinc_check<short>(n128);
 
         public void vinc_128x16u()
-            => inc_check<ushort>(n128);
+            => vinc_check<ushort>(n128);
 
         public void vinc_128x32i()
-            => inc_check<int>(n128);
+            => vinc_check<int>(n128);
 
         public void vinc_128x32u()
-            => inc_check<uint>(n128);
+            => vinc_check<uint>(n128);
 
         public void vinc_128x64i()
-            => inc_check<long>(n128);
+            => vinc_check<long>(n128);
 
         public void vinc_128x64u()
-            => inc_check<ulong>(n128);
+            => vinc_check(n128,z64);
 
         public void vinc_256x8u()
-            => inc_check<byte>(n256);
+            => vinc_check(n256,z8);
 
         public void vinc_256x8i()
-            => inc_check<sbyte>(n256);
+            => vinc_check(n256,z8i);
 
         public void vinc_256x16i()
-            => inc_check<short>(n256);
+            => vinc_check(n256,z16i);
 
         public void vinc_256x16u()
-            => inc_check<ushort>(n256);
+            => vinc_check(n256,z16);
 
         public void vinc_256x32i()
-            => inc_check<int>(n256);
+            => vinc_check(n256,z32i);
 
         public void vinc_256x32u()
-            => inc_check<uint>(n256);
+            => vinc_check(n256,z32);
 
         public void vinc_256x64i()
-            => inc_check<long>(n256);
+            => vinc_check(n256,z64i);
 
         public void vinc_256x64u()
-            => inc_check<ulong>(n256);
+            => vinc_check(n256,z64);
     }
 }

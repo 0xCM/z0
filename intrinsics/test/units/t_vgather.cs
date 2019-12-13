@@ -52,47 +52,47 @@ namespace Z0
 
             var i2x2 = vbuild.partsi(n256, 2, 4, 8, 16);
             var v2x2 = dinx.vgather(n128, ref src32, i2x2);
-            Claim.eq(dinx.vcontract(i2x2, out var _), v32i(v2x2));            
+            Claim.eq(dinx.vcompact(i2x2, out var _), v32i(v2x2));            
 
             var i3x3 = vbuild.partsi(n256, 3, 6, 12, 24);
             var v3x3 = dinx.vgather(n128, ref src32, i3x3); 
-            Claim.eq(dinx.vcontract(i3x3, out var _), v32i(v3x3));
+            Claim.eq(dinx.vcompact(i3x3, out var _), v32i(v3x3));
 
             var i3_3 = vbuild.partsi(n256, 3, 6, 9, 12);
             var v3_3 = dinx.vgather(n128, ref src32, i3_3); 
-            Claim.eq(dinx.vcontract(i3_3, out var _), v32i(v3_3));
+            Claim.eq(dinx.vcompact(i3_3, out var _), v32i(v3_3));
 
             var i4x2 = vbuild.partsi(n256, 4, 8, 16, 32);
             var v4x2 = dinx.vgather(n128, ref src32, i4x2);
-            Claim.eq(dinx.vcontract(i4x2, out var _), v32i(v4x2));
+            Claim.eq(dinx.vcompact(i4x2, out var _), v32i(v4x2));
 
             var i5_5 = vbuild.partsi(n256, 5, 10, 15, 20);
             var v5_5 = dinx.vgather(n128, ref src32, i5_5);
-            Claim.eq(dinx.vcontract(i5_5, out var _), v32i(v5_5));
+            Claim.eq(dinx.vcompact(i5_5, out var _), v32i(v5_5));
 
             var i9_9 = vbuild.partsi(n256, 9, 18, 27, 36);
             var v9_9 = dinx.vgather(n128, ref src32, i9_9);
-            Claim.eq(dinx.vcontract(i9_9, out var _), v32i(v9_9));
+            Claim.eq(dinx.vcompact(i9_9, out var _), v32i(v9_9));
 
             var i10_10 = vbuild.partsi(n256, 10, 20, 30, 40);
             var v10_10 = dinx.vgather(n128, ref src32, i10_10);
-            Claim.eq(dinx.vcontract(i10_10, out var _), v32i(v10_10));
+            Claim.eq(dinx.vcompact(i10_10, out var _), v32i(v10_10));
 
             var i16x2 = vbuild.partsi(n256, 16, 32, 64, 128);
             var v16x2 = dinx.vgather(n128, ref src32, i16x2);
-            Claim.eq(dinx.vcontract(i16x2, out var _), v32i(v16x2));
+            Claim.eq(dinx.vcompact(i16x2, out var _), v32i(v16x2));
 
             var i20_5 = vbuild.partsi(n256, 20, 25, 30, 35);
             var v20_5 = dinx.vgather(n128, ref src32, i20_5);
-            Claim.eq(dinx.vcontract(i20_5, out var _), v32i(v20_5));
+            Claim.eq(dinx.vcompact(i20_5, out var _), v32i(v20_5));
 
             var i40_3 = vbuild.partsi(n256, 40, 43, 46, 49);
             var v40_3 = dinx.vgather(n128, ref src32, i40_3);
-            Claim.eq(dinx.vcontract(i40_3, out var _), v32i(v40_3));
+            Claim.eq(dinx.vcompact(i40_3, out var _), v32i(v40_3));
 
             var i4x128 = vbuild.partsi(n256, 0, 128 - 1, 128*2 - 1, 128*4 - 1);
             var v4x128 = dinx.vgather512(n128, ref src32);
-            Claim.eq(dinx.vcontract(i4x128, out var _), v32i(v4x128));
+            Claim.eq(dinx.vcompact(i4x128, out var _), v32i(v4x128));
 
             
         }

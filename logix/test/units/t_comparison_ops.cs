@@ -5,8 +5,6 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
@@ -146,7 +144,7 @@ namespace Z0.Logix
                 actual = lt(x,y);
                 Claim.yea(same(expect,actual));
 
-                var a =vbuild.vbroadcast(n,Random.Next<T>());
+                var a =vbuild.broadcast(n,Random.Next<T>());
                 x = ginx.vxor(x,a);
                 y = ginx.vxor(y,a);                
             }
@@ -165,7 +163,7 @@ namespace Z0.Logix
                 actual = lt(x,y);
                 Claim.yea(same(expect,actual));
 
-                var a =vbuild.vbroadcast(n,Random.Next<T>());
+                var a =vbuild.broadcast(n,Random.Next<T>());
                 x = ginx.vxor(x,a);
                 y = ginx.vxor(y,a);                
             }
@@ -185,7 +183,7 @@ namespace Z0.Logix
                 actual = gt(x,y);
                 Claim.yea(same(expect,actual));
 
-                var a =vbuild.vbroadcast(n,Random.Next<T>());
+                var a =vbuild.broadcast(n,Random.Next<T>());
                 x = ginx.vxor(x,a);
                 y = ginx.vxor(y,a);                
             }
@@ -205,7 +203,7 @@ namespace Z0.Logix
                 actual = gt(x,y);
                 Claim.yea(same(expect,actual));
 
-                var a =vbuild.vbroadcast(n,Random.Next<T>());
+                var a =vbuild.broadcast(n,Random.Next<T>());
                 x = ginx.vxor(x,a);
                 y = ginx.vxor(y,a);                
             }

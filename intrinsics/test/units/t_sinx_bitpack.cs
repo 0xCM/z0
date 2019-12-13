@@ -8,7 +8,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_bitpack : t_sinx<t_bitpack>
+    public class t_sinx_bitpack : t_sinx<t_sinx_bitpack>
     {
         public void unpack_16()
         {

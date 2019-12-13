@@ -1,4 +1,4 @@
-// 2019-12-11 14:36:57:155
+// 2019-12-12 14:55:21:125
 Span<byte> GetBytes(in int src)
 {
     IL_0000: ldarg.1
@@ -285,7 +285,7 @@ Vec256<ulong> perm4x64_256x64(ulong a, ulong b, ulong c, ulong d)
     IL_0006: ldarg.2
     IL_0007: ldarg.3
     IL_0008: ldarg.s d
-    IL_000A: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vparts(Z0.N256,System.UInt64,System.UInt64,System.UInt64,System.UInt64)
+    IL_000A: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.vbuild::parts(Z0.N256,System.UInt64,System.UInt64,System.UInt64,System.UInt64)
     IL_000F: stloc.0
     IL_0010: ldloc.0
     IL_0011: ldc.i4 228

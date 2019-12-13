@@ -15,7 +15,6 @@ namespace Z0
 
     partial class dinx
     {
-
         /// <summary>
         /// 8x16w -> 16x8w
         /// </summary>
@@ -27,6 +26,7 @@ namespace Z0
 
         /// <summary>
         /// 16x16w -> 32x8w
+        /// [0, 1, ... 14, 15] -> [0, 0, 1, 1, ... 14, 15, 15, 15]
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -36,6 +36,7 @@ namespace Z0
 
         /// <summary>
         /// 4x8w -> 8x16w
+        /// [0, 1, 2, 3] -> [0, 0, 1, 1, 2, 2, 3, 3]
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -45,6 +46,7 @@ namespace Z0
 
         /// <summary>
         /// 8x32w -> 16x16w
+        /// [0, 1, 2, 3, 4, 5, 6, 7] -> [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7]
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -54,6 +56,7 @@ namespace Z0
         
         /// <summary>
         /// 2x64w -> 4x32w
+        /// [0, 1] -> [0, 0, 1, 1]
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -63,6 +66,7 @@ namespace Z0
 
         /// <summary>
         /// 4x64w -> 8x32w
+        /// [0, 1, 2, 3] -> [0, 0, 1, 1, 2, 2, 3, 3]
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -72,6 +76,7 @@ namespace Z0
 
         /// <summary>
         /// 4x32w -> 16x8w
+        /// [0, 1, 2, 3] -> [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3]
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -81,7 +86,7 @@ namespace Z0
 
         /// <summary>
         /// 8x32w -> 32x8w
-        /// [0 1 2 3 4 5 6 7] -> [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7]
+        /// [0, 1, 2, 3, 4, 5, 6, 7] -> [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7]
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -108,7 +113,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<byte> vcover(Vector256<ulong> src, out Vector256<byte> dst)
             => dst = vcover(v32u(vxor(vsll(src,32), src)), out dst);
- 
     }
-
 }

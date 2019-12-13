@@ -10,28 +10,26 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static zfunc;    
-    using static ginx;
-    using static As;
 
     partial class vbuild
     {
        /// <summary>
         /// Creates a 128-bit zero-filled vector
         /// </summary>
-        /// <param name="n">The vector width selector</param>
+        /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> zero<T>(N128 n)
+        public static Vector128<T> zero<T>(N128 w, T t = default)
             where T : unmanaged
             => default;
 
         /// <summary>
         /// Creates a 128-bit zero-filled vector
         /// </summary>
-        /// <param name="n">The vector width selector</param>
+        /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> zero<T>(N256 n)
+        public static Vector256<T> zero<T>(N256 w, T t = default)
             where T : unmanaged
             => default;
 

@@ -21,7 +21,6 @@ namespace Z0
                 var z = dinx.vtakemask(dinx.vmakemask(x));
                 Claim.eq(z,x);
             }
-
         }
 
         public void makemask_256()
@@ -34,18 +33,6 @@ namespace Z0
                 Claim.eq(z,x);
 
             }
-
-        }
-
-
-        public void pack_test()
-        {
-            var x = vbuild.parts(n128,0,1,2,4,4,5,6,7);
-            var y = vbuild.parts(n128,8,9,10,11,12,13,14,15);
-            var z = dinx.vpackus(x,y);
-            var e = vbuild.parts(n128,0,1,2,4,4,5,6,7,8,9,10,11,12,13,14,15);
-            Claim.eq(e,z);
-            
         }
 
         public void movemask_256x64u_examples()
@@ -73,7 +60,7 @@ namespace Z0
             var n = n256;
             var w = n1024;
             var ix = n256;
-            var pattern = vbuild.vbroadcast(n, 0b00010001_00010001_00010001_00010001u);
+            var pattern = vbuild.broadcast(n, 0b00010001_00010001_00010001_00010001u);
 
             var data = span(range<uint>(0,(uint)(w-1)));
             Claim.eq(data.Length, w);
@@ -93,7 +80,7 @@ namespace Z0
         {
             var bits = n256;
             var bytes = n32;
-            var src = Random.Blocks<byte>(n256, blocks:SampleSize);
+            var src = Random.Blocks<byte>(n256, count:SampleSize);
             const int hibit = 7;
 
             for(var i=0; i<SampleSize; i++)
@@ -120,7 +107,7 @@ namespace Z0
             const int hibit = 7;
             var bits = n128;
             var bytes = n16;
-            var src = Random.Blocks<byte>(bits, blocks:SampleSize);
+            var src = Random.Blocks<byte>(bits, count:SampleSize);
 
             for(var i=0; i<SampleSize; i++)
             {

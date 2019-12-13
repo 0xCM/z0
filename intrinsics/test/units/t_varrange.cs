@@ -42,8 +42,8 @@ namespace Z0
         public void reverse_128x8u_basecase()
         {
             var n = n128;
-            var v1 = PatternData.increments<byte>(n);
-            var v2 = PatternData.decrements<byte>(n);
+            var v1 = VData.increments<byte>(n);
+            var v2 = VData.decrements<byte>(n);
             var v3 = dinx.vreverse(v1);
             Claim.eq(v2,v3);
         }
@@ -87,10 +87,10 @@ namespace Z0
         {
             var n = n128;
 
-            var u = PatternData.increments<uint>(n);
+            var u = VData.increments<uint>(n);
             Claim.eq(vbuild.parts(n,0,1,2,3), u);
 
-            var v = PatternData.decrements<uint>(n);
+            var v = VData.decrements<uint>(n);
             Claim.eq(vbuild.parts(n,3,2,1,0),v);
 
             Claim.eq(v, dinx.vperm4x32(u, Perm4.DCBA));

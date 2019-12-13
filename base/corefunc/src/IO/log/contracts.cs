@@ -9,6 +9,23 @@ namespace Z0
 
     using static zfunc;
 
+    public enum LogArea
+    {
+        Test,
+
+        Bench,
+
+        App,
+
+    }
+
+    public interface ILogTarget
+    {
+        LogArea Area {get;}
+
+        string Name {get;}
+    }
+    
     /// <summary>
     /// Defines minimal contract for a log message sink
     /// </summary>
@@ -18,16 +35,13 @@ namespace Z0
         
         void Log(AppMsg src);
 
-        void Log<R,T>(IEnumerable<R> records, LogTarget<T> target, char delimiter, bool writeHeader, bool newFile, FileExtension ext = null)
-            where T : Enum
-            where R : IRecord;
+        void Log<R>(IEnumerable<R> records, LogTarget target, char delimiter, bool header = true, bool create = true, FileExtension ext = null)
+                where R : IRecord;
 
-        void Log<R>(IEnumerable<R> records, string topic, char delimiter, bool writeHeader = true, bool newFile = true, FileExtension ext = null)
+        void Log<R>(IEnumerable<R> records, string topic, char delimiter, bool header = true, bool create = true, FileExtension ext = null)
             where R : IRecord;            
-        
-        void LogRecords<R>(IReadOnlyList<R> records, FilePath dstFile, char? delimiter = null, bool? writeHeader = null, bool append = true)
-            where R : IRecord;            
-
-        void Log(string text);
+                
     }
+
+
 }

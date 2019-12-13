@@ -11,8 +11,6 @@ namespace Z0
     
     using static zfunc;
 
-    using static As;
-
     partial class ginx
     {
         [MethodImpl(Inline)]

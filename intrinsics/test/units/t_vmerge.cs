@@ -11,7 +11,7 @@ namespace Z0
 
     public class t_vmerge : t_vinx<t_vmerge>
     {
-        public void vmerge_basecase()
+        public void vmerge_outline()
         {
             const byte m1 = (byte)Blend8x16.LLRRLLRR;            
             const byte m2 = m1 ^ byte.MaxValue; 
@@ -67,10 +67,15 @@ namespace Z0
             [ 8, 24,  9, 25, 10, 26, 11, 27, 12, 28, 13, 29, 14, 30, 15, 31]
 
             */
-            Trace(x.Format(pad:2));
-            Trace(y.Format(pad:2));
-            Trace(lo.Format(pad:2));
-            Trace(hi.Format(pad:2));
+
+            void report()
+            {
+                Trace(x.Format(pad:2));
+                Trace(y.Format(pad:2));
+                Trace(lo.Format(pad:2));
+                Trace(hi.Format(pad:2));
+
+            }
         }
     }
 }

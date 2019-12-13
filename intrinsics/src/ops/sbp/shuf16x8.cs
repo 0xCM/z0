@@ -31,6 +31,10 @@ namespace Z0
 
         /// <summary>
         /// __m128i _mm_shuffle_epi8 (__m128i a, __m128i b) PSHUFB xmm, xmm/m128
+        /// For each component of the shuffle spec: 
+        /// testbit(spec[i],7) == 1 => dst[i] = 0
+        /// testbit(spec[i],7) == 0 => dst[i] = src[i]
+        /// spec[i] = j := 0 | 1 | ... | 15 => dst[j] = src[i]
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>

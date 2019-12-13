@@ -10,7 +10,7 @@ namespace Z0
 
     public class t_vnonz : t_vinx<t_vnonz>
     {
-        public void vnonz_basecase()
+        public void vnonz_outline()
         {
             Claim.yea(ginx.vnonz(vbuild.parts(n256, 1, 2, 3, 4)));
             Claim.yea(ginx.vnonz(vbuild.parts(n256, 1, 0, 0, 0)));
@@ -35,14 +35,14 @@ namespace Z0
 
         public void vnonz_256()
         {
-            nonzero256_check<sbyte>(n256);
-            nonzero256_check<byte>(n256);
-            nonzero256_check<short>(n256);
-            nonzero256_check<ushort>(n256);
-            nonzero256_check<int>(n256);
-            nonzero256_check<uint>(n256);
-            nonzero256_check<long>(n256);
-            nonzero256_check<ulong>(n256);
+            vnonz_check<sbyte>(n256);
+            vnonz_check<byte>(n256);
+            vnonz_check<short>(n256);
+            vnonz_check<ushort>(n256);
+            vnonz_check<int>(n256);
+            vnonz_check<uint>(n256);
+            vnonz_check<long>(n256);
+            vnonz_check<ulong>(n256);
         }
     }
 }

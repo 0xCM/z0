@@ -35,11 +35,5 @@ namespace Z0
         public static Vector256<T> valignr<T>(Vector256<T> x, Vector256<T> y, byte offset)        
             where T : unmanaged
                 => vgeneric<T>(dinx.valignr(v64u(x), v64u(y),offset));
-
-
-
     }
-
 }
-
-        

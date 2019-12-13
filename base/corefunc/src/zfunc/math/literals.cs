@@ -20,12 +20,12 @@ partial class zfunc
     public const byte z8 = 0;
 
     /// <summary>
-    /// The 0-value for a 16-bit signed integer
+    /// The zero-value for a 16-bit signed integer
     /// </summary>
     public const short z16i = 0;
 
     /// <summary>
-    /// The 0-value for a 16-bit unsigned integer
+    /// The zero-value for a 16-bit unsigned integer
     /// </summary>
     public const ushort z16 = 0;
 
@@ -60,54 +60,69 @@ partial class zfunc
     public const double z64f = 0;
 
     /// <summary>
-    /// The zero-value for an 8-bit signed integer
+    /// The maximum value for an 8-bit signed integer
     /// </summary>
-    public const sbyte m8i = sbyte.MaxValue;
+    public const sbyte i8max = sbyte.MaxValue;
 
     /// <summary>
-    /// The zero-value for an 8-bit usigned integer
+    /// The maximum value for an 8-bit usigned integer
     /// </summary>
-    public const byte m8 = byte.MaxValue;
+    public const byte u8max = byte.MaxValue;
 
     /// <summary>
-    /// The 0-value for a 16-bit signed integer
+    /// The maximum value for a 16-bit signed integer
     /// </summary>
-    public const short m16i = short.MaxValue;
+    public const short i16max = short.MaxValue;
 
     /// <summary>
-    /// The 0-value for a 16-bit unsigned integer
+    /// The maximum value for a 16-bit unsigned integer
     /// </summary>
-    public const ushort m16 = ushort.MaxValue;
+    public const ushort u16max = ushort.MaxValue;
 
     /// <summary>
-    /// The zero-value for a 32-bit signed integer
+    /// The maximum value for a 32-bit signed integer
     /// </summary>
-    public const int m32i = int.MaxValue;
+    public const int i32max = int.MaxValue;
 
     /// <summary>
-    /// The max-value for a 32-bit usigned integer
+    /// The maximum value for a 32-bit usigned integer
     /// </summary>
-    public const uint m32 = uint.MaxValue;
+    public const uint u32max = uint.MaxValue;
 
     /// <summary>
-    /// The max-value for a 64-bit signed integer
+    /// The maximum value for a 64-bit signed integer
     /// </summary>
-    public const long m64i = long.MaxValue;
+    public const long i64max = long.MaxValue;
 
     /// <summary>
-    /// The max-value for a 64-bit usigned integer
+    /// The maximum value for a 64-bit usigned integer
     /// </summary>
-    public const ulong m64 = ulong.MaxValue;
+    public const ulong u64max = ulong.MaxValue;
 
     /// <summary>
-    /// The max-value for a 32-bit float
+    /// The maximum value for a 32-bit float
     /// </summary>
-    public const float m32f = float.MaxValue;
+    public const float f32max = float.MaxValue;
 
     /// <summary>
-    /// The max-value for a 64-bit float
+    /// The maximum value for a 64-bit float
     /// </summary>
-    public const double m64f = double.MaxValue;
+    public const double f64max = double.MaxValue;
+
+    /// <summary>
+    /// The minimum value for an 8-bit signed integer
+    /// </summary>
+    public const sbyte i8min = sbyte.MinValue;
+
+    /// <summary>
+    /// The minimum value for a 16-bit signed integer
+    /// </summary>
+    public const short i16min = short.MinValue;
+
+    /// <summary>
+    /// The minimum value for a 16-bit signed integer
+    /// </summary>
+    public const int i32min = int.MinValue;
 
     /// <summary>
     /// Returns generic 0 for a primal source type
@@ -217,13 +232,13 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(sbyte))
-            return convert<T>(m8i);
+            return convert<T>(i8max);
         else if(typeof(T) == typeof(short))
-            return convert<T>(m16i);
+            return convert<T>(i16max);
         else if(typeof(T) == typeof(int))
-            return convert<T>(m32i);
+            return convert<T>(i32max);
         else
-            return convert<T>(m64i);
+            return convert<T>(i64max);
     }
 
     [MethodImpl(Inline)]
@@ -231,13 +246,13 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(byte))
-            return convert<T>(m8);
+            return convert<T>(u8max);
         else if(typeof(T) == typeof(ushort))
-            return convert<T>(m16);
+            return convert<T>(u16max);
         else if(typeof(T) == typeof(uint))
-            return convert<T>(m32);
+            return convert<T>(u32max);
         else
-            return convert<T>(m64);
+            return convert<T>(u64max);
     }
 
     [MethodImpl(Inline)]
@@ -245,9 +260,9 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(float))
-            return convert<T>(m32f);
+            return convert<T>(f32max);
         else if(typeof(T) == typeof(double))
-            return convert<T>(m64f);
+            return convert<T>(f64max);
         else
             throw unsupported<T>();
     }

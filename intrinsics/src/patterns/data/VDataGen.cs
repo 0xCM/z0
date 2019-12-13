@@ -13,7 +13,10 @@ namespace Z0
     
     using static zfunc;
 
-    public static class VecPatternGen
+    /// <summary>
+    /// Generates the data presented by VData
+    /// </summary>
+    public static class VDataGen
     {
         /// <summary>
         /// Creates a vector populated with component values that alternate between the first operand and the second

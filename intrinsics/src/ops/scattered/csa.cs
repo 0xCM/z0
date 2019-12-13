@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     using static System.Runtime.Intrinsics.X86.Popcnt.X64;
-    using Z0;
  
     using static zfunc;
     using static dinx;

@@ -72,7 +72,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vadd<T>(Vector128<T> x, T a)
             where T : unmanaged
-                => vadd(x, vbuild.vbroadcast(n128,a));
+                => vadd(x, vbuild.broadcast(n128,a));
 
         /// <summary>
         /// Adds a constant value to each vector component
@@ -83,7 +83,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vadd<T>(Vector256<T> x, T a)
             where T : unmanaged
-                => vadd(x, vbuild.vbroadcast(n256,a));
+                => vadd(x, vbuild.broadcast(n256,a));
     
         [MethodImpl(Inline)]
         static Vector128<T> vadd_i<T>(Vector128<T> x, Vector128<T> y)

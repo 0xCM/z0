@@ -10,12 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static zfunc;    
-    using static ginx;
-    using static As;
 
     partial class vbuild
     {
-
         /// <summary>
         /// Creates a 128-bit vector with all bits enabled
         /// </summary>
@@ -36,5 +33,4 @@ namespace Z0
             where T : unmanaged
                 => ginx.veq(default(Vector256<T>), default(Vector256<T>));
     }
-
 }

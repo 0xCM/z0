@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> vbroadcast<T>(N128 n, T src)
+        public static Vector128<T> broadcast<T>(N128 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vbroadcast<T>(N256 n, T src)
+        public static Vector256<T> broadcast<T>(N256 n, T src)
             where T : unmanaged
         {
              if(typeof(T) == typeof(byte) 

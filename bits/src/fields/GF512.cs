@@ -14,13 +14,14 @@ namespace Z0
 
     public static class Gf512
     {
+
         public const int MemberCount = 512;
 
         static readonly BitVector32 Redux =  GfPoly.Lookup<N9,uint>().Scalar;
 
         [MethodImpl(Inline)]
         public static BitVector16 mul(BitVector16 a, BitVector16 b)
-            => dinx.clmulr(a.Scalar,b.Scalar,Redux.Scalar);
+            => dinx.clmulr(n16, a.Scalar,b.Scalar,Redux.Scalar);
 
         /// <summary>
         /// Computes the full multiplication table for GF512

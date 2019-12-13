@@ -8,9 +8,8 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_sbroadcast : t_vinx<t_sbroadcast>
+    public class t_sinx_broadcast : t_vinx<t_sinx_broadcast>
     {
-
         public void s_broadcast_basecase()
         {
             void case1()
@@ -47,9 +46,7 @@ namespace Z0
                 Claim.eq(expect,actual);
             }
 
-
             RunLocals();
         }
     }
-
 }

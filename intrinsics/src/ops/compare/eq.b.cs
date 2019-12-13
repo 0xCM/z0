@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static zfunc;    
-    using static As;
     
     partial class ginx
     {
@@ -31,7 +30,5 @@ namespace Z0
             for(var block = 0; block < count; block++)
                 vstore(ginx.veq(x.LoadVector(block), y.LoadVector(block)), ref dst.BlockRef(block));
         } 
-
     }
-
 }

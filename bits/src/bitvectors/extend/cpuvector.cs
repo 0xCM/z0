@@ -14,23 +14,27 @@ namespace Z0
     public static partial class BitVectorX
     {
         /// <summary>
-        /// Extracts a 128-bit cpu vector from a bitsring of length 128 or greater
+        /// Extracts a 128-bit cpu vector from a bitsring of sufficient length
         /// </summary>
         /// <param name="src">The source bits</param>
-        /// <typeparam name="T">The primal component type of the target vector</typeparam>
+        /// <param name="w">The bit width selector</param>
+        /// <param name="t">The component type representative</param>
+        /// <typeparam name="T">The target vectror component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> ToCpuVector<T>(this BitString src, N128 n)
+        public static Vector128<T> ToCpuVector<T>(this BitString src, N128 w, T t = default)
             where T : unmanaged   
-                => src.Pack().As<byte, T>().Blocked(n).LoadVector();
+                => src.Pack().As<byte, T>().Blocked(w).LoadVector();
 
         /// <summary>
-        /// Extracts a 128-bit cpu vector from a bitsring of length 128 or greater
+        /// Extracts a 256-bit cpu vector from a bitsring of sufficient length
         /// </summary>
         /// <param name="src">The source bits</param>
-        /// <typeparam name="T">The primal component type of the target vector</typeparam>
+        /// <param name="w">The bit width selector</param>
+        /// <param name="t">The component type representative</param>
+        /// <typeparam name="T">The target vectror component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> ToCpuVector<T>(this BitString src, N256 n)
+        public static Vector256<T> ToCpuVector<T>(this BitString src, N256 w, T t = default)
             where T : unmanaged
-                => src.Pack().As<byte, T>().Blocked(n).LoadVector();
+                => src.Pack().As<byte, T>().Blocked(w).LoadVector();
     }
 }

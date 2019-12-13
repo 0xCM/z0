@@ -6,10 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Diagnostics;
-using System.IO;
 using Z0;
-
 
 partial class zfunc
 {
@@ -19,26 +16,5 @@ partial class zfunc
     /// <param name="messages">The messages to emit</param>
     /// <param name="dst">The destination log</param>
     public static void log(IEnumerable<AppMsg> messages, LogArea dst)
-        => Log.Get(LogTarget.AreaRoot(dst)).Log(messages);
-
-    /// <summary>
-    /// Writes a message to a log
-    /// </summary>
-    /// <param name="messages">The message to emit</param>
-    /// <param name="dst">The destination log</param>
-    public static void log(AppMsg message, LogArea dst)
-        => Log.Get(LogTarget.AreaRoot(dst)).Log(message);
-
-    public static void log<R,T>(IEnumerable<R> records, LogTarget<T> dst, char delimiter = ',', 
-        bool writeHeader = true, bool newfile = true, FileExtension ext = null)
-            where R : IRecord
-            where T : Enum
-                => Log.Get(dst).Log(records, dst, delimiter, true, newfile, ext);
-
-    public static void log(string text, LogArea dst)
-        => Log.Get(LogTarget.AreaRoot(dst)).Log(text);
-
-
-
+        => Log.Get(LogTarget.Define(dst)).Log(messages);
 }
-

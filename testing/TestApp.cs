@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Collections.Concurrent;
     using System.Reflection;
     using System.Runtime.CompilerServices;
     
@@ -37,6 +38,7 @@ namespace Z0
             return true;
         }
 
+
         /// <summary>
         /// Executes the tests defined by a host type
         /// </summary>
@@ -48,6 +50,7 @@ namespace Z0
             if(!HasAny(host,filters))
                 return;
 
+            var results = new List<TestCaseResult>();
             try
             {
                 var execTime = Duration.Zero;
@@ -59,7 +62,7 @@ namespace Z0
 
                 var hostpath = host.DisplayName();
                 if(instance.Enabled)
-                    iter(Tests(host), t =>  execTime += Run(instance, hostpath, t));                
+                    iter(Tests(host), t =>  execTime += Run(instance, hostpath, t, results));                
                 Mark(instance.Benchmarks);
                 
                 print(AppMsg.Define($"{host.Name} exectime {execTime.Ms} ms, runtime = {snapshot(runtimer).Ms} ms", SeverityLevel.Info));
@@ -69,6 +72,9 @@ namespace Z0
             {
                 error($"Host execution failed: {e}", this);
             }  
+
+            Enqueue(results);
+            
         }
 
         void Run(bool concurrent, params string[] filters)
@@ -80,22 +86,25 @@ namespace Z0
         IEnumerable<MethodInfo> Tests(Type host)
             =>  host.DeclaredMethods().Public().NonGeneric().WithParameterCount(0);
 
-        Duration Run(IUnitTest unit, string hostpath, MethodInfo test)
+        Duration Run(IUnitTest unit, string hostpath, MethodInfo test, IList<TestCaseResult> results)
         {
             var exectime = Duration.Zero;
             var messages = new List<AppMsg>();
             var testName = $"{hostpath}/{test.DisplayName()}";
+            var sw = stopwatch(false);
             try
             {
                 messages.Add(AppMsg.Define($"{testName} executing", SeverityLevel.HiliteBL));                
-                var sw = stopwatch();
+                sw.Start();
                 test.Invoke(unit,null);                    
                 exectime = snapshot(sw);
                 messages.AddRange(unit.DequeueMessages());
                 messages.Add(AppMsg.Define($"{testName} executed. {exectime.Ms}ms", SeverityLevel.Info));
+                results.Add(TestCaseResult.Define(testName,true,exectime));
             }
             catch(Exception e)
             {                
+                exectime = snapshot(sw);
                 messages.AddRange(unit.DequeueMessages());                
                 
                 if(e.InnerException is ClaimException claim)
@@ -105,7 +114,9 @@ namespace Z0
                 else
                     messages.Add(ErrorMessages.Unanticipated(e ?? e.InnerException));
 
-                messages.Add(AppMsg.Define($"{testName} failed", SeverityLevel.Error));                
+                messages.Add(AppMsg.Define($"{testName} failed. {exectime.Ms}ms", SeverityLevel.Error));  
+                results.Add(TestCaseResult.Define(testName,false,exectime));
+                              
             }
             finally
             {            
@@ -131,7 +142,11 @@ namespace Z0
                 Run(false,filters);
                 var timings = DequeueTimings();
                 if(timings.Any())
-                    Log.LogBenchmarks(AppName,true,true,'|', timings);
+                    Log.LogBenchmarks(AppName,timings);
+                
+                var results = DequeueResults();
+                if(results.Any())
+                    Log.LogTestResults(AppName, results);
             }
             catch (Exception e)
             {

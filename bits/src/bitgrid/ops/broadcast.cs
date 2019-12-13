@@ -70,7 +70,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => vbuild.vbroadcast(n128,cell);
+                => vbuild.broadcast(n128,cell);
     
         /// <summary>
         /// Transmits the content of a single cell to all cells in a grid
@@ -85,7 +85,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => vbuild.vbroadcast(n256,cell);
+                => vbuild.broadcast(n256,cell);
 
         /// <summary>
         /// Fills a caller-allocated natural grid
