@@ -24,11 +24,11 @@ namespace Z0
         /// <param name="v">The vector to be transformed</param>
         /// <param name="u">The transformed vector</param>
         /// <param name="m">The modulus</param>
-        public static ref Vector<N,uint> mvmul<N>(in Matrix<N,uint> A, in Vector<N,uint> v, uint m, ref Vector<N,uint> u) 
+        public static ref RowVector<N,uint> mvmul<N>(in Matrix<N,uint> A, in RowVector<N,uint> v, uint m, ref RowVector<N,uint> u) 
             where N : unmanaged, ITypeNat
         {
             //var x = new uint[v.Length];
-            var x = Vector.alloc<N,uint>();
+            var x = RowVector.alloc<N,uint>();
 
             for(var i = 0; i < u.Length; ++i) 
             for(int j = 0; j < v.Length; j++)
@@ -46,13 +46,13 @@ namespace Z0
         /// <param name="v">The vector to be transformed</param>
         /// <param name="u">The transformed vector</param>
         /// <param name="m">The modulus</param>
-        public static ref Vector<N,ulong> mvmul<N>(in Matrix<N,ulong> A, in Vector<N,ulong> v, ulong m, ref Vector<N,ulong> u) 
+        public static ref RowVector<N,ulong> mvmul<N>(in Matrix<N,ulong> A, in RowVector<N,ulong> v, ulong m, ref RowVector<N,ulong> u) 
             where N : unmanaged, ITypeNat
         {
             //var x = new ulong[v.Length];
             var rc = A.RowCount;
             var cc = A.ColCount;
-            var temp = Vector.alloc<N,ulong>();
+            var temp = RowVector.alloc<N,ulong>();
             for(var i = 0; i < rc;  ++i) 
             for(var j = 0; j < cc; j++)
                 temp[i] = Mod.fma(A[i,j], v[j], temp[i], m);
@@ -70,7 +70,7 @@ namespace Z0
         /// <param name="v">The vector to be transformed</param>
         /// <param name="u">The transformed vector</param>
         /// <param name="m">The modulus</param>
-        public static ref Vector<N,double> mvmul<N>(in Matrix<N,double> A, in Vector<N,double> v, double m, ref Vector<N,double> u) 
+        public static ref RowVector<N,double> mvmul<N>(in Matrix<N,double> A, in RowVector<N,double> v, double m, ref RowVector<N,double> u) 
             where N : unmanaged, ITypeNat
         {
             var x = new double[u.Length];
@@ -98,7 +98,7 @@ namespace Z0
             var rc = C.RowCount;
             var cc = C.ColCount;
             var W = Matrix.alloc<N,uint>();
-            var v = Vector.alloc<N,uint>();
+            var v = RowVector.alloc<N,uint>();
 
             for (var i = 0; i < cc;  ++i) 
             {
@@ -132,7 +132,7 @@ namespace Z0
             var cc = C.ColCount;
             
             var W = Matrix.alloc<N,ulong>();
-            var v = Vector.alloc<N,ulong>();
+            var v = RowVector.alloc<N,ulong>();
 
             for (var i = 0; i < cc;  ++i) 
             {
@@ -163,7 +163,7 @@ namespace Z0
         {
             int r = C.RowCount;
             int c = B.ColCount;
-            var V = Vector.alloc<N,double>();
+            var V = RowVector.alloc<N,double>();
             var W = Matrix.alloc<N,double>();
             for (var i = 0; i < c;  ++i) 
             {

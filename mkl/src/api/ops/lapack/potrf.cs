@@ -16,7 +16,7 @@ namespace Z0.Mkl
 
     partial class mkl
     {
-       public static bool potrf<N>(MBlock256<N,float> A, TriangularKind tk = TriangularKind.Lower)
+       public static bool potrf<N>(Matrix256<N,float> A, TriangularKind tk = TriangularKind.Lower)
             where N : unmanaged, ITypeNat
         {
             var n = nati<N>();
@@ -41,7 +41,7 @@ namespace Z0.Mkl
         /// <param name="A">The matrix to factor and the matrix that receives the results</param>
         /// <param name="tk">The triangular classification</param>
         /// <typeparam name="N">The matrix order type</typeparam>
-        public static bool potrf<N>(MBlock256<N,double> A, TriangularKind tk = TriangularKind.Lower)
+        public static bool potrf<N>(Matrix256<N,double> A, TriangularKind tk = TriangularKind.Lower)
             where N : unmanaged, ITypeNat
         {
             var n = nati<N>();
@@ -63,7 +63,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="A"></param>
         /// <typeparam name="N">The square dimenion type</typeparam>
-        public static bool posdef<N>(MBlock256<N,float> A)
+        public static bool posdef<N>(Matrix256<N,float> A)
             where N : unmanaged, ITypeNat
                 => potrf<N>(A.Replicate());        
 
@@ -72,7 +72,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="A"></param>
         /// <typeparam name="N">The square dimenion type</typeparam>
-        public static bool posdef<N>(MBlock256<N,double> A)
+        public static bool posdef<N>(Matrix256<N,double> A)
             where N : unmanaged, ITypeNat
                 => potrf<N>(A.Replicate());        
  

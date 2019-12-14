@@ -56,7 +56,7 @@ namespace Z0
             signum_bench<double>();
         }
 
-        protected void signum_check<T>()
+        protected void signum_check<T>(T t = default)
             where T : unmanaged
         {
             var zero = gmath.zero<T>();

@@ -35,6 +35,7 @@ namespace Z0
                 return signum_f<T>(src);
         }           
 
+
         [MethodImpl(Inline)]
         static Sign signum_i<T>(T src)
             where T : unmanaged
@@ -43,8 +44,8 @@ namespace Z0
                 return math.signum(int8(src));
             else if(typeof(T) == typeof(short))
                 return math.signum(int16(src));
-            else if(typeof(T) == typeof(uint))
-                return math.signum(uint32(src));
+            else if(typeof(T) == typeof(int))
+                return math.signum(int32(src));
             else 
                 return math.signum(int64(src));
         }        

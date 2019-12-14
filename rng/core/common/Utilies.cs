@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="max">The upper bound</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The unsigned primal type</typeparam>
-         public static VBlock256<N,T> Contract<N,T>(this VBlock256<N,T> src, VBlock256<N,T> max)
+         public static RowVector256<N,T> Contract<N,T>(this RowVector256<N,T> src, RowVector256<N,T> max)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
@@ -53,12 +53,12 @@ namespace Z0
         /// <param name="max">The upper bound</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The unsigned primal type</typeparam>
-         public static VBlock256<T> Contract<T>(this VBlock256<T> src, VBlock256<T> max)
+         public static RowVector256<T> Contract<T>(this RowVector256<T> src, RowVector256<T> max)
             where T : unmanaged
         {
             var len = src.Length;
             require(len == max.Length);
-            var dst = Z0.Vector.blockalloc<T>(len);
+            var dst = Z0.RowVector.blockalloc<T>(len);
             for(var i=0; i<dst.Length; i++)
                 dst[i] = Contractors.Contract(src[i],max[i]);
             return dst;

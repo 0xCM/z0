@@ -27,7 +27,7 @@ namespace Z0
         /// Computes the full multiplication table for GF512
         /// </summary>
         /// <param name="dst">The target matrix</param>
-        public static ref MBlock256<N512,ushort> products(out MBlock256<N512,ushort> dst)
+        public static ref Matrix256<N512,ushort> products(out Matrix256<N512,ushort> dst)
         {
             dst = Matrix.blockalloc<N512,ushort>();
             for(ushort i=1; i < MemberCount; i++)

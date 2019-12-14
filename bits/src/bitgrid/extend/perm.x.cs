@@ -52,7 +52,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Perm16 ToPerm16(this BitGrid64<N16,N4,ulong> src)
             => BitGrid.perm(src);
-
-
     }
 }

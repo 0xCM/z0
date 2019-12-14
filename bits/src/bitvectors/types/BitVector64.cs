@@ -26,8 +26,8 @@ namespace Z0
         public static N64 N => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator BitCells<N64,ulong>(BitVector64 src)
-            => BitCells.literal(src.data, N);
+        public static implicit operator BitSpan<N64,ulong>(BitVector64 src)
+            => BitSpan.literal(src.data, N);
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<ulong>(BitVector64 src)

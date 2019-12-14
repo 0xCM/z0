@@ -19,8 +19,9 @@ namespace Z0.Test
         {
             VerifyWriter<N12,N14,long>(Pow2.T03);        
             VerifyWriter<N19,N32,byte>(Pow2.T03);        
-            VerifyWriter<N5,N5,float>(Pow2.T03);    
             VerifyWriter(Pow2.T03, n31, n31, 0u);                    
+
+            VerifyWriter<N5,N5,float>(Pow2.T03);    
             VerifyWriter<N7,N7,double>(Pow2.T03);    
             
         }

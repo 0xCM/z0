@@ -13,13 +13,13 @@ namespace Z0
 
     public static class MatrixFormat
     {
-        public static Matrix<M,N,T> ToMatrix<M,N,T>(this MBlock256<M,N,T> src)
+        public static Matrix<M,N,T> ToMatrix<M,N,T>(this Matrix256<M,N,T> src)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T : unmanaged    
                 => Matrix.load<M,N,T>(src.Unblocked);
 
-        public static string Format<M,N,T>(this MBlock256<M,N,T> src, int? cellwidth = null, char? cellsep = null, Func<T,string> render = null)
+        public static string Format<M,N,T>(this Matrix256<M,N,T> src, int? cellwidth = null, char? cellsep = null, Func<T,string> render = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged    
@@ -69,7 +69,7 @@ namespace Z0
             return sb.ToString();            
         }
 
-        public static string Format<N,T>(this MBlock256<N,T> src, int? cellwidth = null, char? cellsep = null, Func<T,string> render = null)
+        public static string Format<N,T>(this Matrix256<N,T> src, int? cellwidth = null, char? cellsep = null, Func<T,string> render = null)
             where N: unmanaged, ITypeNat
             where T : unmanaged    
                 => src.ToRectangular().Format(cellwidth, cellsep,render);
@@ -79,18 +79,13 @@ namespace Z0
             where T : unmanaged    
                 => src.ToRectangular().Format(cellwidth, cellsep,render);
 
-        public static string Format<N,T>(this Covector<N,T> src)
-            where T : unmanaged    
-            where N: unmanaged, ITypeNat
-                => src.Span.FormatList();
-
         /// <summary>
         /// Renders the source vector as text
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="N">The natural type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
-        public static string Fomat<N,T>(this VBlock256<N,T> src)
+        public static string Fomat<N,T>(this RowVector256<N,T> src)
             where T : unmanaged    
             where N: unmanaged, ITypeNat
                 => src.Unsized.FormatList();

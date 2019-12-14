@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static zfunc;
 
@@ -28,8 +26,6 @@ namespace Z0
             var dstPrep = clear(dst,start,length);
             var srcPrep = gmath.sll(gmath.and(BitMask.lomask<T>(length), src), start);
             return gmath.or(dstPrep, srcPrep);
-
-        }
-                
+        }                
     }
 }

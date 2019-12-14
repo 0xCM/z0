@@ -16,8 +16,8 @@ namespace Z0
         /// Converts the matrix to a bitvector
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitCells<N256,ushort> ToCells(this BitMatrix16 A)
-            => BitCells.load(A.Data, n256);
+        public static BitSpan<N256,ushort> ToCells(this BitMatrix16 A)
+            => BitSpan.load(A.Data, n256);
 
         /// <summary>
         /// Creates the matrix determined by a permutation
@@ -31,7 +31,6 @@ namespace Z0
                 dst[row,perm[row]] = bit.On;
             return dst;
         }
-
 
         /// <summary>
         /// Creates a generic matrix from the primal source data
@@ -60,13 +59,6 @@ namespace Z0
         [MethodImpl(Inline)] 
         public static bit IsZero(this BitMatrix16 A)
             => BitMatrix.empty(A);
-
-        /// <summary>
-        /// Constructs an 8-node graph via the adjacency matrix interpretation
-        /// </summary>
-        [MethodImpl(Inline)] 
-        public static Graph<byte> ToGraph(this BitMatrix16 A)
-            => BitMatrix.graph(A);
 
         /// <summary>
         /// Transposes a copy of the source matrix

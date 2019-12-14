@@ -12,6 +12,17 @@ namespace Z0
     public static class Bytes
     {
         /// <summary>
+        /// Reads/writes a byte from/to a reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="offset">The 0-based/byte-relative offset</param>
+        /// <typeparam name="T">The data type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref byte single<T>(ref T src, int offset)
+            where T : unmanaged
+                => ref Unsafe.Add(ref Unsafe.As<T,byte>(ref src), offset);
+
+        /// <summary>
         /// Allocates and reads a byte array from an unmanaged source value
         /// </summary>
         /// <param name="src">The source value</param>

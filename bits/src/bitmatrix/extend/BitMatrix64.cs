@@ -16,8 +16,8 @@ namespace Z0
         /// Converts the matrix to a bitvector
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitCells<N4096,ulong> ToBitVector(this BitMatrix64 A)
-            => BitCells.load(A.Data, n4096);
+        public static BitSpan<N4096,ulong> ToBitVector(this BitMatrix64 A)
+            => BitSpan.load(A.Data, n4096);
 
         /// <summary>
         /// Creates the matrix determined by a permutation
@@ -64,11 +64,6 @@ namespace Z0
         public static bit IsZero(this BitMatrix64 A)
             => BitMatrix.empty(A);
 
-        /// <summary>
-        /// Constructs an 8-node graph via the adjacency matrix interpretation
-        /// </summary>
-        public static Graph<byte> ToGraph(this BitMatrix64 A)
-            => BitMatrix.graph(A);
 
         [MethodImpl(Inline)]
         public static BitMatrix64 AndNot(this BitMatrix64 A, in BitMatrix64 B)

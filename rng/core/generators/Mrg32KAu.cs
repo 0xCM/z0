@@ -12,8 +12,8 @@ namespace Z0
     using static zfunc;
     using static Mrg32K;
 
-    using Vec6u32 = Vector<N6,uint>;
-    using Vec6i64 = Vector<N6,long>;
+    using Vec6u32 = RowVector<N6,uint>;
+    using Vec6i64 = RowVector<N6,long>;
     using Mat3u32 = Matrix<N3,uint>;
 
     /// <summary>
@@ -74,7 +74,7 @@ namespace Z0
 
         static void MVMul(in Vec6u32 v, in Mat3u32 A, uint m1, in Mat3u32 B, uint m2) 
         {
-            Vector<N3,uint> vv = new uint[3];
+            RowVector<N3,uint> vv = new uint[3];
             for(int i = 0; i < 3; i++)
                 vv[i] = v[i];
 
@@ -103,7 +103,7 @@ namespace Z0
         {
             Ig = seed;
             Bg = Ig.Replicate();
-            Cg = Vector.alloc<N6,long>();
+            Cg = RowVector.alloc<N6,long>();
             Cg[0] = Bg[0];
             Cg[1] = Bg[1];
             Cg[2] = Bg[2];

@@ -167,7 +167,6 @@ namespace Z0
         public static string Format(this BitMatrix16x4 src)
             => src.data.AsBytes().FormatMatrixBits(4);
 
-
         [MethodImpl(Inline)]
         public static BitMatrix16x4 ToPrimalBits(this ulong src, N16 m, N4 n)
             => BitMatrix.define(m,n,src);

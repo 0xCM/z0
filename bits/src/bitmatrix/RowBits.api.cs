@@ -15,21 +15,7 @@ namespace Z0
     /// </summary>
     public static class RowBits
     {
-        public static Graph<V> graph<V,T>(in RowBits<T> src)
-            where V : unmanaged
-            where T : unmanaged
-        {
-            var m = src.RowCount;
-            var n = src.RowWidth;
-            
-            var nodes = Graph.vertices<V>(m);
-            var edges = new List<Edge<V>>();
-            for(var row = 0; row < m; row++)
-            for(var col = 0; col < n; col++)
-                if(src[row,col])
-                    edges.Add(Graph.connect(nodes[row], nodes[col]));
-            return Graph.define(nodes, edges);
-        }
+
 
         /// <summary>
         /// Allocates a specified number of rows

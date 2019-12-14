@@ -878,7 +878,6 @@ namespace Z0
         protected void vinc_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-
             var blocks = SampleSize;
             var zb = DataBlocks.alloc<T>(w, blocks);
             var eb = DataBlocks.alloc<T>(w, blocks);            
@@ -1355,7 +1354,7 @@ namespace Z0
             }
         }
 
-        protected void vsll_bench<T>(N128 w, SystemCounter counter = default)
+        protected void vsll_bench<T>(N128 w, T t = default, SystemCounter counter = default)
             where T : unmanaged
         {
             var opcount = RoundCount * CycleCount;
@@ -1375,7 +1374,7 @@ namespace Z0
             Benchmark(opname, counter, opcount);
         }
 
-        protected void vsll_bench<T>(N256 w, SystemCounter counter = default)
+        protected void vsll_bench<T>(N256 w, T t = default, SystemCounter counter = default)
             where T : unmanaged
         {
             var opcount = RoundCount * CycleCount;
@@ -1395,18 +1394,18 @@ namespace Z0
             Benchmark(opname, counter, opcount);
         }
 
-        protected void vsrl_bench<T>(N128 n, SystemCounter counter = default)
+        protected void vsrl_bench<T>(N128 w, T t = default, SystemCounter counter = default)
             where T : unmanaged
         {
             var opcount = RoundCount * CycleCount;
-            var last = vzero<T>(n);
+            var last = vzero<T>(w);
             var bitlen = bitsize<T>();
-            var opname = $"srl_{n}x{bitlen}u";
+            var opname = $"srl_{w}x{bitlen}u";
 
             for(var i=0; i<opcount; i++)
             {
                 var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVector<T>(n);
+                var x = Random.CpuVector<T>(w);
                 counter.Start();
                 last = ginx.vsrl(x,offset);
                 counter.Stop();
@@ -1415,7 +1414,7 @@ namespace Z0
             Benchmark(opname, counter, opcount);
         }
 
-        protected void vsrl_bench<T>(N256 w, SystemCounter counter = default)
+        protected void vsrl_bench<T>(N256 w, T t = default, SystemCounter counter = default)
             where T : unmanaged
         {
             var opcount = RoundCount * CycleCount;
@@ -1435,7 +1434,7 @@ namespace Z0
             Benchmark(opname, counter, opcount);
         }        
 
-        protected void xor_gmath_bench<T>(N256 w, SystemCounter counter = default)
+        void xor_gmath_bench<T>(N256 w, T t = default, SystemCounter counter = default)
             where T : unmanaged
         {
             var opname = $"xor_gmath_{moniker<T>()}";
@@ -1444,6 +1443,7 @@ namespace Z0
             var xb = Random.Blocks<T>(w,blocks);
             var yb = Random.Blocks<T>(w,blocks);
             var zb = DataBlocks.alloc<T>(w,blocks);
+
             var opcount = 0;
             var cellcount = xb.CellCount;
 
@@ -1458,7 +1458,7 @@ namespace Z0
             Benchmark(opname, counter,opcount);
         }
 
-        protected void vxor_bench<T>(N256 w, SystemCounter counter = default)
+        void xor_ginx_bench<T>(N256 w, T t = default,  SystemCounter counter = default)
             where T : unmanaged
         {
             var opname = $"xor_ginx_{moniker<T>()}";
@@ -1474,14 +1474,15 @@ namespace Z0
             for(var i=0; i<CycleCount; i++, opcount += cellcount)
                 ginx.vxor(xb, yb, zb);
             counter.Stop();
-            Benchmark(opname, counter,opcount);
+
+            Benchmark(opname, counter, opcount);
         }
 
-        protected void vxor_bench<T>(N256 n)
+        protected void vxor_bench<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            xor_gmath_bench<T>(n);
-            vxor_bench<T>(n);
+            xor_gmath_bench(w,t);
+            xor_ginx_bench(w,t);
         }
     }
 }

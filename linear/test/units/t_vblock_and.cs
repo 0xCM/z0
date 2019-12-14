@@ -13,35 +13,42 @@ namespace Z0
 
     public class t_vblock_and : UnitTest<t_vblock_and>
     {
-        public void vblock_and()
-        {
-            vblock_and_check<VecLen,byte>();
-            vblock_and_check<VecLen,sbyte>();
-            vblock_and_check<VecLen,short>();
-            vblock_and_check<VecLen,ushort>();
-            vblock_and_check<VecLen,int>();
-            vblock_and_check<VecLen,uint>();
-            vblock_and_check<VecLen,long>();
-            vblock_and_check<VecLen,ulong>();
-            
-        }
 
-        void vblock_and_check<N,T>()
+        public void vblock_and_n64x8u()
+            => vblock_and_check(n64, z8);
+
+        public void vblock_and_n64x8i()
+            => vblock_and_check(n64, z8i);
+
+        public void vblock_and_n64x16i()
+            => vblock_and_check(n64, z16i);
+
+        public void vblock_and_n64x16u()
+            => vblock_and_check(n64, z16);
+
+        public void vblock_and_n64x32i()
+            => vblock_and_check(n64, z32i);
+
+        public void vblock_and_n64x32u()
+            => vblock_and_check(n64, z32);
+
+        public void vblock_and_n64x64i()
+            => vblock_and_check(n64, z64i);
+
+        public void vblock_and_n64x64u()
+            => vblock_and_check(n64, z64);
+
+        protected void vblock_and_check<N,T>(N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var rep = new N();
-            var len = (int)rep.NatValue;
-            var u = Random.VectorBlock<N,T>();
-            var v = Random.VectorBlock<N,T>();
-            var vResult = Linear.and(u, v);
+            var length = natval(n);
+            var u = Random.VectorBlock(n,t);
+            var v = Random.VectorBlock(n,t);
+            var result = Linear.and(u, v);            
+            var expect = mathspan.and(u.Data, v.Data);
             
-            var calcs = span<T>(len);
-            for(var i = 0; i< calcs.Length; i++)
-                calcs[i] = gmath.and(u[i], v[i]);
-            var vExpect = Vector.blockload(calcs, rep);            
-            
-            Claim.eq(vExpect.Data, vResult.Data);
+            Claim.eq(expect.Data, result.Data);
         }
 
     }

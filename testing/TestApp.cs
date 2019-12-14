@@ -135,18 +135,38 @@ namespace Z0
         protected virtual string AppName
             => GetType().Assembly.GetSimpleName();
 
+        static IEnumerable<TestCaseResult> Sort(IEnumerable<TestCaseResult> src)
+            => src.OrderBy(x => x.Operation).Where(x => !x.Succeeded).Concat(src.Where(x => x.Succeeded));
+
+        static IEnumerable<OpTime> Sort(IEnumerable<OpTime> src)
+            => src.OrderBy(x => x.OpName);
+
+        void EmitLogs()
+        {
+            var basename = AppName;
+            
+            var timings = DequeueTimings(Sort);
+            if(timings.Any())
+                Log.LogBenchmarks(basename,timings);
+            
+            var results = DequeueResults(Sort);
+            if(results.Any())
+            {
+                // Emit a unique file
+                Log.LogTestResults(FolderName.Define("history"), basename, results, LogWriteMode.Create);
+                
+                // Overwrite the current test log file for the app
+                Log.LogTestResults(basename, results, LogWriteMode.Overwrite);
+            }
+        }
+
         protected virtual void RunTests(params string[] filters)
         {
             try
             {            
                 Run(false,filters);
-                var timings = DequeueTimings();
-                if(timings.Any())
-                    Log.LogBenchmarks(AppName,timings);
-                
-                var results = DequeueResults();
-                if(results.Any())
-                    Log.LogTestResults(AppName, results);
+                EmitLogs();
+
             }
             catch (Exception e)
             {

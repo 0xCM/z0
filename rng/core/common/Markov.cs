@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="len">The result vector length</param>
         [MethodImpl(Inline)]
-        public static VBlock256<T> MarkovBlock<T>(this IPolyrand random, int length)
+        public static RowVector256<T> MarkovBlock<T>(this IPolyrand random, int length)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))                
@@ -55,17 +55,17 @@ namespace Z0
         /// <param name="len">The result vector length</param>
         /// <typeparam name="N">The length type</typeparam>
         [MethodImpl(Inline)]
-        public static VBlock256<N,T> MarkovBlock<N,T>(this IPolyrand random)
+        public static RowVector256<N,T> MarkovBlock<N,T>(this IPolyrand random)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var dst = Z0.Vector.blockalloc<N, T>();
+            var dst = Z0.RowVector.blockalloc<N, T>();
             random.MarkovSpan(dst.Unsized);
             return dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref VBlock256<N,T> MarkovBlock<N,T>(this IPolyrand random, ref VBlock256<N,T> dst)
+        public static ref RowVector256<N,T> MarkovBlock<N,T>(this IPolyrand random, ref RowVector256<N,T> dst)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="dim"></param>
         /// <typeparam name="N">The order type</typeparam>
         /// <typeparam name="T"></typeparam>
-        public static MBlock256<N,T> MarkovSquare<N,T>(this IPolyrand random, T rep = default, N dim = default)
+        public static Matrix256<N,T> MarkovSquare<N,T>(this IPolyrand random, T rep = default, N dim = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
@@ -93,7 +93,7 @@ namespace Z0
             return Z0.Matrix.blockload<N,T>(data);
         }
 
-        public static ref MBlock256<N,T> MarkovSquare<N,T>(this IPolyrand random, ref MBlock256<N,T> dst)
+        public static ref Matrix256<N,T> MarkovSquare<N,T>(this IPolyrand random, ref Matrix256<N,T> dst)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="n">The natural dimension value</param>
         /// <typeparam name="N">The natural dimension type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-         public static bool IsRightStochastic<N,T>(this MBlock256<N,T> src, N n = default)
+         public static bool IsRightStochastic<N,T>(this Matrix256<N,T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
@@ -145,7 +145,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static VBlock256<float> MarkovBlock(this IPolyrand random, int length, float min, float max)
+        static RowVector256<float> MarkovBlock(this IPolyrand random, int length, float min, float max)
         {            
             var dst = DataBlocks.alloc<float>(n256, DataBlocks.blockcount<float>(n256,length));
             random.Fill(closed(min,max), length, ref dst[0]);
@@ -154,7 +154,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static VBlock256<double> MarkovBlock(this IPolyrand random, int length, double min, double max)
+        static RowVector256<double> MarkovBlock(this IPolyrand random, int length, double min, double max)
         {                        
             var dst = DataBlocks.alloc<double>(n256, DataBlocks.blockcount<double>(n256,length));
             random.Fill(closed(min,max), length, ref dst[0]);

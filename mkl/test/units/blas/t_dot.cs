@@ -15,12 +15,12 @@ namespace Z0.Mkl
     public class t_dot : t_mkl<t_dot>
     {
         [MethodImpl(Inline)]
-        internal static T dot<T>(in VBlock256<T> lhs, in VBlock256<T> rhs)
+        internal static T dot<T>(in RowVector256<T> lhs, in RowVector256<T> rhs)
             where T : unmanaged
                 => mathspan.dot<T>(lhs.Unblocked, rhs.Unblocked);
 
         [MethodImpl(Inline)]
-        internal static T dot<N,T>(in VBlock256<N,T> lhs, in VBlock256<N,T> rhs)
+        internal static T dot<N,T>(in RowVector256<N,T> lhs, in RowVector256<N,T> rhs)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
                 => mathspan.dot<T>(lhs.Unsized,rhs.Unsized);

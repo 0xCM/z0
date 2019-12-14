@@ -13,7 +13,7 @@ namespace Z0.Mkl.Test
     
     public class t_gemm : UnitTest<t_gemm>
     {        
-        internal static void refmul<M,N,T>(MBlock256<M,N,T> A, VBlock256<N,T> B, VBlock256<M,T> X)
+        internal static void refmul<M,N,T>(Matrix256<M,N,T> A, RowVector256<N,T> B, RowVector256<M,T> X)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -253,9 +253,9 @@ namespace Z0.Mkl.Test
             where N : unmanaged, ITypeNat
         {
             var A = Matrix.blockalloc<M,N,double>();
-            var x = Vector.blockalloc<N,double>();
-            var y = Vector.blockalloc<M,double>();
-            var z = Vector.blockalloc<M,double>();
+            var x = RowVector.blockalloc<N,double>();
+            var y = RowVector.blockalloc<M,double>();
+            var z = RowVector.blockalloc<M,double>();
             var sw = stopwatch(false);
 
             for(var i=0; i<cycles; i++)
@@ -275,7 +275,7 @@ namespace Z0.Mkl.Test
             return optime(cycles, sw, label);
         }
 
-        static double Dot<N>(VBlock256<N,double> x, VBlock256<N,double> y)
+        static double Dot<N>(RowVector256<N,double> x, RowVector256<N,double> y)
             where N : unmanaged, ITypeNat
         {
             var result = 0d;
@@ -286,7 +286,7 @@ namespace Z0.Mkl.Test
             return result;
         }
 
-        static float Dot<N>(VBlock256<N,float> x, VBlock256<N,float> y)
+        static float Dot<N>(RowVector256<N,float> x, RowVector256<N,float> y)
             where N : unmanaged, ITypeNat
         {
             var result = 0f;
@@ -317,7 +317,7 @@ namespace Z0.Mkl.Test
             return result;
         }
 
-        static ref MBlock256<M,N,float> Mul<M,K,N>(MBlock256<M,K,float> A, MBlock256<K,N,float> B, ref MBlock256<M,N,float> X)
+        static ref Matrix256<M,N,float> Mul<M,K,N>(Matrix256<M,K,float> A, Matrix256<K,N,float> B, ref Matrix256<M,N,float> X)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -336,7 +336,7 @@ namespace Z0.Mkl.Test
             return ref X;
         }
 
-        static ref MBlock256<M,N,double> Mul<M,K,N>(MBlock256<M,K,double> A, MBlock256<K,N,double> B, ref MBlock256<M,N,double> X)
+        static ref Matrix256<M,N,double> Mul<M,K,N>(Matrix256<M,K,double> A, Matrix256<K,N,double> B, ref Matrix256<M,N,double> X)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat

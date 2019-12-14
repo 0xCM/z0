@@ -39,5 +39,13 @@ namespace Z0
         public static Span<T> and<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
                 => and(lhs,rhs, span<T>(length(lhs,rhs)));
+
+        public static Block256<T> and<T>(Block256<T> lhs, Block256<T> rhs)
+            where T : unmanaged
+        {
+            var dst = DataBlocks.alloc<T>(n256,lhs.BlockCount);
+            and(lhs,rhs, dst.Data);
+            return dst;
+        }            
     }
 }

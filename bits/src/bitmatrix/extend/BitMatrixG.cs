@@ -27,11 +27,9 @@ namespace Z0
             where T : unmanaged
             => src.Data.CopyTo(dst.Data);
 
-        [MethodImpl(NotInline)]
         public static BitMatrix<T> Replicate<T>(this BitMatrix<T> A)
             where T : unmanaged
                 => new BitMatrix<T>(A.Data.Replicate());
-
 
         [MethodImpl(Inline)]
         public static void Fill<T>(this RowBits<T> src, T value)

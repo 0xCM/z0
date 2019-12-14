@@ -15,22 +15,27 @@ namespace Z0
         static DataPaths Paths 
             => DataPaths.The;
             
-        public static void LogBenchmarks<R>(string name, R[] records, bool create = true, bool header = true, char delimiter = AsciSym.Pipe)
+        public static FilePath LogBenchmarks<R>(string basename, R[] records, LogWriteMode mode = LogWriteMode.Create, bool header = true, char delimiter = AsciSym.Pipe)
             where R : IRecord
         {
             if(records.Length == 0)
-                return;
-            
-            Log.Get(LogTarget.Define(LogArea.Bench)).Log(records, name, delimiter, header, create,FileExtension.Define("csv"));
+                return FilePath.Empty;
+                        
+
+            return Log.Get(LogTarget.Define(LogArea.Bench)).Log(records,FolderName.Empty, basename, mode, delimiter, header, FileExtension.Define("csv"));
         }
 
-        public static void LogTestResults<R>(string name, R[] records, bool create = true, bool header = true, char delimiter = AsciSym.Pipe)
+        public static FilePath LogTestResults<R>(string basename, R[] records, LogWriteMode mode, bool header = true, char delimiter = AsciSym.Pipe)
+            where R : IRecord
+                => LogTestResults(FolderName.Empty, basename, records, mode, header, delimiter);
+
+        public static FilePath LogTestResults<R>(FolderName subdir, string basename,  R[] records, LogWriteMode mode, bool header = true, char delimiter = AsciSym.Pipe)
             where R : IRecord
         {
             if(records.Length == 0)
-                return;
+                return FilePath.Empty;
             
-            Log.Get(LogTarget.Define(LogArea.Test)).Log(records, name, delimiter, header, create,FileExtension.Define("csv"));
+            return Log.Get(LogTarget.Define(LogArea.Test)).Log(records, subdir, basename, mode, delimiter, header, FileExtension.Define("csv"));
         }
 
         public static ILogger Get(ILogTarget dst)
@@ -52,7 +57,7 @@ namespace Z0
                 => this.Area = Area;
 
             FilePath LogPath
-                => Paths.LogPath(Area);
+                => Paths.DatedLogPath(Area,Area.ToString().ToLower());
 
             public void Log(AppMsg src)
             {
@@ -66,44 +71,43 @@ namespace Z0
                     LogPath.Append(src.Select(x => x.ToString()));
             }
 
-            void Emit<R>(IReadOnlyList<R> records, char delimiter, bool writeHeader, FilePath dst)
+            void Emit<R>(IReadOnlyList<R> records, char delimiter, bool header, FilePath dst)
                 where R : IRecord
             {                
                 if(records.Count == 0)
                     return;
 
-                if(writeHeader)
+                if(header)
                     dst.Append(string.Join(delimiter, records[0].GetHeaders()));
                 
                 iter(records, r => dst.Append(r.DelimitedText(delimiter)));
             }
 
-            public void Log<R>(IEnumerable<R> src, string topic, char delimiter, bool writeHeader = true, bool newFile = true, FileExtension ext = null)
+            FilePath ComputePath(FolderName subdir, string basename, bool create, FileExtension ext)
+                => create 
+                    ? (subdir.IsEmpty ? Paths.UniqueLogPath(Area,basename,ext) : Paths.UniqueLogPath(Area, subdir, basename,ext)) 
+                    : (subdir.IsEmpty ?  Paths.LogPath(Area, basename, ext) : Paths.LogPath(Area, subdir, basename, ext)) ;
+
+            public FilePath Log<R>(IEnumerable<R> src, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header = true, FileExtension ext = null)
                 where R : IRecord
             {
                 var records = src.ToArray();
                 if(records.Length == 0)
-                    return;                
+                    return FilePath.Empty;                
 
-                if(newFile)
-                     Emit(records, delimiter, writeHeader, Paths.UniqueLogPath(Area,topic,ext));
-                else
+                var path = ComputePath(subdir,basename, mode == LogWriteMode.Create, ext);
+
+                if(mode == LogWriteMode.Create)
+                     Emit(records, delimiter, header, path);
+                else if(mode == LogWriteMode.Append)
                     lock(locker)
-                        Emit(records, delimiter, writeHeader, Paths.LogPath(Area,topic, ext));
-            }
-
-            public void Log<R>(IEnumerable<R> src, LogTarget target, char delimiter, bool writeHeader = true, bool newFile = true, FileExtension ext = null)
-                where R : IRecord
-            {
-                var records = src.ToArray();
-                if(records.Length == 0)
-                    return;                
-
-                if(newFile)
-                     Emit(records, delimiter, writeHeader, Paths.UniqueLogPath(target,ext));
+                        Emit(records, delimiter, header, path);
                 else
-                    lock(locker)
-                        Emit(records, delimiter, writeHeader, Paths.LogPath(target));
+                {
+                    path.DeleteIfExists();
+                    Emit(records, delimiter, header, path);
+                }
+                return path;
             }
 
             public void Log(string text)

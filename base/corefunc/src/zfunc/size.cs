@@ -53,4 +53,17 @@ partial class zfunc
         where T : struct
             => Unsafe.SizeOf<T>()*8;
 
+    /// <summary>
+    /// Presents the second value through the lens of the type of the first value
+    /// </summary>
+    /// <param name="a">The first value</param>
+    /// <param name="b">The second value</param>
+    /// <typeparam name="A">The first type</typeparam>
+    /// <typeparam name="B">The second type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly A matchtype<A,B>(in A a, in B b)
+        where A : unmanaged
+        where B : unmanaged
+            => ref Unsafe.As<B,A>(ref mutable(b));
+
 }

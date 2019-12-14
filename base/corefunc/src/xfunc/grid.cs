@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
+    using static As;
 
     public static class GridLayoutX
     {
@@ -27,26 +28,26 @@ namespace Z0
             where T : unmanaged
         {                                                        
             var bit = 0;
-            var seg = 0;
-            var segbits = spec.CellWidth;
+            var cellindex = 0;
+            var cellbits = spec.CellWidth;
 
             for(int row = 0, rowbit = 0; row < spec.RowCount; row++)
             {
-                for(var col = 0; col < spec.ColCount; col++, bit++, rowbit++, segbits--)
+                for(var col = 0; col < spec.ColCount; col++, bit++, rowbit++, cellbits--)
                 {
-                    if(segbits == 0)
+                    if(cellbits == 0)
                     {
-                        seg++;
-                        segbits = spec.CellWidth;
+                        cellindex++;
+                        cellbits = spec.CellWidth;
                     }
                    
-                   var offset = (byte)(spec.CellWidth - segbits);
-                   var pos = BitPos<T>.Define((ushort)seg,offset);
-                   yield return  new BitCellMap(pos.Segment, pos.Offset, pos.LinearIndex, row, col);
+                   var bitoffset = uint8(spec.CellWidth - cellbits);
+                   var bitindex = uint8(cellindex * spec.CellWidth + bitoffset);
+                   yield return  new BitCellMap(uint16(cellindex), bitoffset, bitindex, row, col);
                 }
 
-                seg++;
-                segbits = spec.CellWidth;
+                cellindex++;
+                cellbits = spec.CellWidth;
             }                    
         }   
     }

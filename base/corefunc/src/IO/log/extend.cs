@@ -42,21 +42,6 @@ namespace Z0
             => new StreamWriter(Paths.TargetPath(area, subfolder, file).ToString());
 
         /// <summary>
-        /// Logs records to a log target
-        /// </summary>
-        /// <param name="dst">The log target</param>
-        /// <param name="data">The records to emity</param>
-        /// <param name="delimiter">The field delimiter</param>
-        /// <param name="header">If true, a headers is prepended when creating a new file</param>
-        /// <param name="create">If true, a new file is created for the records</param>
-        /// <param name="ext">The file extension</param>
-        /// <typeparam name="R">The record type</typeparam>
-        public static void LogRecords<R>(this LogTarget dst, IEnumerable<R> data, char delimiter = AsciSym.Pipe, 
-            bool header = true, bool create = true, FileExtension ext = null)
-                where R : IRecord
-                    => Log.Get(dst).Log(data, dst, delimiter, true, create, ext);
-
-        /// <summary>
         /// Logs records to a file
         /// </summary>
         /// <param name="dst">The data receiver</param>
@@ -65,12 +50,12 @@ namespace Z0
         /// <param name="header">Whether to emit a header row</param>
         /// <param name="append">Whether to append to an existing file</param>
         /// <typeparam name="R">The record type</typeparam>
-        public static void LogRecords<R>(this FilePath dst, IEnumerable<R> data, char delimiter = AsciSym.Pipe, bool? header = null, bool append = true)
+        public static FilePath LogRecords<R>(this FilePath dst, IEnumerable<R> data, char delimiter = AsciSym.Pipe, bool? header = null, bool append = true)
             where R : IRecord
         {            
             var records = data.ToArray();
             if(records.Length == 0)
-                return;
+                return FilePath.Empty;
             
             if(!append)
                 dst.DeleteIfExists();
@@ -81,6 +66,8 @@ namespace Z0
                 dst.Append(string.Join(delimiter, records[0].GetHeaders()));
             
             iter(data, r => dst.Append(r.DelimitedText(delimiter)));
+            
+            return dst;
         }
 
     }

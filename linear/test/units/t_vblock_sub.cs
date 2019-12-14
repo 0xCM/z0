@@ -116,12 +116,12 @@ namespace Z0
             where T : unmanaged
         {
             var n = new N();
-            var dst = Vector.blockalloc<N,T>();
+            var dst = RowVector.blockalloc<N,T>();
             for(var i=0; i< SampleSize; i++)            
             {
                 var v1 = Random.VectorBlock<N,T>();
                 var v2 = Random.VectorBlock<N,T>();
-                var v3 = Vector.blockload(mathspan.sub(v1.Unsized,v2.Unsized), n);                
+                var v3 = RowVector.blockload(mathspan.sub(v1.Unsized,v2.Unsized), n);                
                 Linear.sub(v1, v2, ref v1);
                 Claim.yea(v3 == v1);
             } 
@@ -134,7 +134,7 @@ namespace Z0
             var opcount = CycleCount*RoundCount;
             var sw = stopwatch(false);
             var opname = $"vblock_sub_{n}x{bitsize<T>()}";
-            var dst = Vector.blockalloc<N,T>();
+            var dst = RowVector.blockalloc<N,T>();
             for(var i=0; i<opcount; i++)
             {
                 var v1 = Random.VectorBlock<N,T>();

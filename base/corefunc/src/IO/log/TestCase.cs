@@ -22,6 +22,7 @@ namespace Z0
             this.Operation = Operation;
             this.Succeeded = Succeeded;
             this.Duration = Duration;
+            this.Executed = now();
         }
 
         public string Operation {get;set;}
@@ -29,6 +30,8 @@ namespace Z0
         public bool Succeeded {get;set;}
 
         public Duration Duration {get;set;}
+
+        public DateTime Executed {get;}
 
         const string YEA = "verified";
         
@@ -38,6 +41,8 @@ namespace Z0
 
         const int OutcomePad = 10;
 
+        const int DurationPad = 10;
+
         string Outcome
             => Succeeded ? YEA : BOO;
 
@@ -45,14 +50,16 @@ namespace Z0
             => concat(
                 $"{Operation.PadRight(OperationPad)}{delimiter}" + AsciSym.Space, 
                 $"{Outcome.PadRight(OutcomePad)}{delimiter}" + AsciSym.Space, 
-                $"{Duration.Ms}"
+                $"{Duration.Ms.ToString().PadRight(DurationPad)}{delimiter}" + AsciSym.Space,
+                $"{Executed.ToLexicalString()}"
                 );
 
         public IReadOnlyList<string> GetHeaders()
             => new string[]{
-                nameof(Operation).PadRight(OperationPad), 
+                                nameof(Operation).PadRight(OperationPad), 
                 AsciSym.Space + nameof(Outcome).PadRight(OutcomePad), 
-                AsciSym.Space + nameof(Duration)
+                AsciSym.Space + nameof(Duration).PadRight(DurationPad),
+                AsciSym.Space + nameof(Executed)
                 };
 
     }

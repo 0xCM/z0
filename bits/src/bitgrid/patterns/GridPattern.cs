@@ -13,6 +13,7 @@ namespace Z0
     
     using static BitGrid;
     using static ginx;
+    using static As;
 
     public static partial class GridPattern
     {
@@ -86,19 +87,21 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static SubGrid256<M,N,T> stripes<M,N,T>(N256 w, M m, N n, T t = default)
+        public static SubGrid256<M,N,T> stripes<M,N,T>(N256 w, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => vbuild.broadcast(w, BitMask.lsb(n64,n2,n1,t));            
 
-        public static SubGrid256<M,N,T> bars<M,N,T>(N256 w, M m, N n, T t = default)
+        [MethodImpl(Inline)]
+        public static SubGrid256<M,N,T> bars<M,N,T>(N256 w, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var pattern = gmath.sll(BitMask.lomask<T>(natval(n)), natval(n));
-            return default;       
+            var sep = natval(n);
+            var pattern = BitMask.lomask(sep, z64) << sep;                        
+            return vgeneric<T>(vbuild.broadcast(w,gbits.replicate(pattern)));
         }
 
     }

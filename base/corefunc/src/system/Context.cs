@@ -59,16 +59,16 @@ namespace Z0
         protected void Enqueue(IEnumerable<TestCaseResult> results)
             => TestResults.Enqueue(results);
 
-        protected OpTime[] DequeueTimings()
+        protected OpTime[] DequeueTimings(Func<IEnumerable<OpTime>, IEnumerable<OpTime>> sorter)
         {
-            var timings = OpTimes.OrderBy(x => x.OpName).ToArray();
+            var timings = sorter(OpTimes).ToArray();
             OpTimes.Clear();
             return timings;
         }
 
-        protected TestCaseResult[] DequeueResults()
+        protected TestCaseResult[] DequeueResults(Func<IEnumerable<TestCaseResult>, IEnumerable<TestCaseResult>> sorter)
         {
-            var results = TestResults.OrderBy(x => x.Operation).ToArray();
+            var results = sorter(TestResults).ToArray();
             TestResults.Clear();
             return results;
         }

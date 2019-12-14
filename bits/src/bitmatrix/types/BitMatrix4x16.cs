@@ -36,10 +36,6 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static BitMatrix4x16 alloc(N4 m, N16 n)        
-            => default;
-
-        [MethodImpl(Inline)]
         public static BitMatrix4x16 define(N4 m, N16 n, ulong data)
             => data;
     }
@@ -49,12 +45,6 @@ namespace Z0
         public static BitString ToBitString(this BitMatrix4x16 src)
             => src.data.ToBitString();
 
-        public static string Format(this BitMatrix4x16 src)
-            => src.data.AsBytes().FormatMatrixBits(4);
 
-
-        [MethodImpl(Inline)]
-        public static BitMatrix4x16 ToPrimalBits(this ulong src, N4 m, N16 n)
-            => BitMatrix.define(m,n,src);
     }
 }

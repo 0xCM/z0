@@ -23,7 +23,7 @@ namespace Z0
         public void sb_mix_64()
             => sb_mix_check<ulong>();
 
-        public void sb_mix_basecase()
+        public void sb_mix_outline()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -74,7 +74,7 @@ namespace Z0
             return t.ToString();
         }
 
-        void mix32_even_example()
+        void mix32_even_outline()
         {            
             var n = n32;
             var parity = n0;

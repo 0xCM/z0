@@ -11,7 +11,6 @@ namespace Z0
 
     public class t_sb_bitchars : t_sb<t_sb_bitchars>
     {
-
         public void bitchars_8u()
             => sb_bitchars_check<byte>();
 

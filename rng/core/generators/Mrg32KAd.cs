@@ -11,8 +11,8 @@ namespace Z0
     
     using static zfunc;
     using static Mrg32K;
-    using Vec6u32 = Vector<N6,uint>;
-    using Vec6f64 = Vector<N6,double>;
+    using Vec6u32 = RowVector<N6,uint>;
+    using Vec6f64 = RowVector<N6,double>;
     using Mat3f64 = Matrix<N3,double>;
 
     /// <summary>

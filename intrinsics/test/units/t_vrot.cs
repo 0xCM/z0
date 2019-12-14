@@ -11,31 +11,6 @@ namespace Z0
 
     public class t_vrot : t_vinx<t_vrot>
     {
-        public void vrotrx_128x8u()
-        {
-            for(var i=0; i<SampleSize; i++)
-            {
-                var x = vbuild.units<byte>(n128);            
-                Claim.eq(ginx.vrotrx(x,8), dinx.vrotrx(x,n8));
-                Claim.eq(ginx.vrotrx(x,16), dinx.vrotrx(x,n16));
-                Claim.eq(ginx.vrotrx(x,24), dinx.vrotrx(x,n24));
-                Claim.eq(ginx.vrotrx(x,32), dinx.vrotrx(x,n32));
-            }
-
-        }
-
-        public void vrotlx_128x8u()
-        {
-            for(var i=0; i<SampleSize; i++)
-            {
-                var x = vbuild.units<byte>(n128);            
-                Claim.eq(ginx.vrotlx(x,8), dinx.vrotlx(x,n8));
-                Claim.eq(ginx.vrotlx(x,16), dinx.vrotlx(x,n16));
-                Claim.eq(ginx.vrotlx(x,24), dinx.vrotlx(x,n24));
-                Claim.eq(ginx.vrotlx(x,32), dinx.vrotlx(x,n32));
-            }
-        }
-
         public void vrotl_128x8()
             => vrotl_check<byte>(n128);
 
@@ -236,5 +211,4 @@ namespace Z0
             Collect((opcount,sw,opname));
         }
     }
-
 }

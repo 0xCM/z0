@@ -25,8 +25,8 @@ namespace Z0.Logix
     {
         protected void logic_op_check(BL kind, Func<bit,bit,bit> rule)
         {
-            var lhsBits = Random.BitSpan(SampleSize);
-            var rhsBits = Random.BitSpan(SampleSize);
+            var lhsBits = Random.TakeBits(SampleSize);
+            var rhsBits = Random.TakeBits(SampleSize);
             for(var i=0; i<SampleSize; i++)
             {
                 var a = lhsBits[i];

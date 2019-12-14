@@ -16,8 +16,8 @@ namespace Z0
         /// Converts the matrix to a bitvector
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitCells<N1024,uint> ToBitCells(this BitMatrix32 A)
-            => BitCells.load(A.Data, n1024);
+        public static BitSpan<N1024,uint> ToBitCells(this BitMatrix32 A)
+            => BitSpan.load(A.Data, n1024);
 
         /// <summary>
         /// Creates the matrix determined by a permutation
@@ -64,13 +64,6 @@ namespace Z0
         public static bit IsZero(this BitMatrix32 A)
             => BitMatrix.empty(A);
 
-        /// <summary>
-        /// Constructs a 32-node graph via the adjacency matrix interpretation
-        /// </summary>
-        [MethodImpl(Inline)] 
-        public static Graph<byte> ToGraph(this BitMatrix32 A)
-            => BitMatrix.graph(A);
-
         public static BitMatrix32 Replicate(this BitMatrix32 A)
             => new BitMatrix32(A.Data.Replicate());
 
@@ -80,7 +73,5 @@ namespace Z0
 
         public static BitMatrix32 Transpose(this BitMatrix32 A)
             => BitMatrix.transpose(A);
-    
-
     }
 }

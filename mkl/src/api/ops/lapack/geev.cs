@@ -15,7 +15,7 @@ namespace Z0.Mkl
 
     partial class mkl
     {
-        public static EigenResult<N,double> geev<N>(MBlock256<N,double> A)
+        public static EigenResult<N,double> geev<N>(Matrix256<N,double> A)
             where N : unmanaged, ITypeNat
         {
             var n = nati<N>();

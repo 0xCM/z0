@@ -21,8 +21,11 @@ namespace Z0
         public override string ToString()
             => Name;
         
-        public bool Nonempty
+        public bool IsNonEmpty
             => nonempty(Name);
+
+        public bool IsEmpty
+            => ! nonempty(Name);            
 
     }
 

@@ -15,7 +15,7 @@ namespace Z0
             const uint pattern = 0xFFFFFFFF;
 
             // 128 input values of type bit = 128x32 bytes, each of which are on
-            var input = pattern.ToBitString().Replicate(4).ToBitSpan<N128>();
+            var input = pattern.ToBitString().Replicate(4).ToBits<N128>();
             
             // 128 bits of output which represents the packing of 128 source bits, each of shich should be on
             var output = SimdPack.pack(input);
@@ -35,7 +35,7 @@ namespace Z0
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var input = Random.BitSpan(n128);            
+                var input = Random.BitBlock(n128);            
                 var popin = pop(input);            
                 var output = SimdPack.pack(input);
                 var popout = output.ToBitString().PopCount();

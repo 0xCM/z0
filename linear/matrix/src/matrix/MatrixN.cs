@@ -166,16 +166,16 @@ namespace Z0
         /// <summary>
         /// Returns a row data copy
         /// </summary>
-        public Vector<N,T> this[int r]
+        public RowVector<N,T> this[int r]
         {
             [MethodImpl(Inline)]        
             get => Row(r);
         }
 
         [MethodImpl(Inline)]
-        public Vector<N,T> Row(int row)
+        public RowVector<N,T> Row(int row)
         {            
-            var alloc = Vector.alloc<N,T>();
+            var alloc = RowVector.alloc<N,T>();
             return GetRow(row, ref alloc);
         }
 
@@ -198,7 +198,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void SetRow(int row, Vector<N,T> src)
+        public void SetRow(int row, RowVector<N,T> src)
         {
             CheckRowIndex(row);
             var offset = row * _RowLenth; 
@@ -206,7 +206,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ref Vector<N,T> GetRow(int row, ref Vector<N,T> dst)
+        public ref RowVector<N,T> GetRow(int row, ref RowVector<N,T> dst)
         {
              CheckRowIndex(row);
              var offset = row * _RowLenth;
@@ -214,7 +214,7 @@ namespace Z0
              return ref dst;
         }
 
-        public ref Vector<N,T> GetCol(int col, ref Vector<N,T> dst)
+        public ref RowVector<N,T> GetCol(int col, ref RowVector<N,T> dst)
         {
             if(col < 0 || col >= _ColCount)
                 throw Errors.OutOfRange(col, 0, _ColCount - 1);
@@ -225,9 +225,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Vector<N,T> Col(int col)
+        public RowVector<N,T> Col(int col)
         {
-            var alloc = Vector.alloc<N,T>();
+            var alloc = RowVector.alloc<N,T>();
             return GetCol(col, ref alloc);
         }
 

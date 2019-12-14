@@ -14,6 +14,9 @@ namespace Z0
     /// </summary>
     public class FolderName : PathComponent<FolderName>
     {
+        
+        public static FolderName Empty => Define(string.Empty);
+
         public static FolderName Define(string Name)
             => new FolderName(Name);
 

@@ -9,27 +9,13 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static zfunc;
+    using static As;
 
     public class t_sb_mask : t_sb<t_sb_mask>
-    {
-                    
-        public void sb_mask_basecase()
-        {
-            void case1()
-            {
-                var m = BitMask.pow2(3, 9, 11);
-                var bs = m.ToBitString();
-                var seq = bs.BitSeq;
-                Claim.yea(seq[3] == 1);
-                Claim.yea(seq[9] == 1);
-                Claim.yea(seq[11] == 1);
+    {                    
 
-                
-                seq[3] = 0;
-                seq[9] = 0;
-                seq[11] = 0;
-                Claim.yea(bs.Format(true) == string.Empty);
-            }
+        public void sb_lomask_outline()
+        {
 
             void case2()
             {
@@ -62,44 +48,26 @@ namespace Z0
                 Claim.eq(7, gbits.ntz(dst));
                 Claim.eq(8, gbits.nlz(dst));
 
+                Claim.eq(7, Bits.pop(BitMask.lomask<uint>(6)));
+                Claim.eq(12, Bits.pop(BitMask.lomask<uint>(11)));
+
             }
 
-
-            case1();
             case2();
             case3();
             case4();
         }
 
+        public void sb_himask_8u()
+            => sb_himask_check(z8);
 
-        public void sb_mask_hilo()
-        {
+        public void sb_himask_16u()
+            => sb_himask_check(z16);
 
-        }
+        public void sb_himask_32u()
+            => sb_himask_check(z32);
 
-
-        public void takemask_basecases()
-        {
-            void example()
-            {
-                var x1 = 0b10000000_10000000_10000000_10000000u;            
-                var e1 = 0b11000000_11000000_11000000_00000000u;
-                var a1 = gbits.clearbyte(x1,0) | (x1 << 7);
-                Claim.eq(e1,a1);
-
-            }
-
-            // [1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000]
-            // [1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000 1000_1000]
-            var x = vbuild.broadcast(n256, (byte)Pow2.T07);
-            var m = ginx.vtakemask(x);
-            Claim.eq(uint.MaxValue,m);
-
-
-            
-
-        }
-
+        public void sb_himask_64u()
+            => sb_himask_check(z64);
     }
-
 }

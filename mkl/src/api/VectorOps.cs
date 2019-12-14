@@ -26,7 +26,7 @@ namespace Z0
         /// <typeparam name="N">The vector length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref VBlock256<N,T> Add<N,T>(in VBlock256<N,T> x, in VBlock256<N,T> y, ref VBlock256<N,T> z)
+        public static ref RowVector256<N,T> Add<N,T>(in RowVector256<N,T> x, in RowVector256<N,T> y, ref RowVector256<N,T> z)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
@@ -48,7 +48,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static T Dot<N,T>(VBlock256<N,T> x, VBlock256<N,T> y)
+        public static T Dot<N,T>(RowVector256<N,T> x, RowVector256<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {

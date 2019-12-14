@@ -13,6 +13,12 @@ namespace Z0
 
     public class BitGridLayout
     {        
+        [MethodImpl(Inline)]
+        public static BitGridLayout Define<N,T>(N n = default, T t = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => new BitGridSpec(bitsize<T>(), (int)n.NatValue,(int)n.NatValue).CalcLayout<T>();
+
         public BitGridLayout(BitGridSpec spec, IEnumerable<BitCellMap> Cells)
         {
             this.GridSpec = spec;

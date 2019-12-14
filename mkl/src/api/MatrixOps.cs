@@ -27,7 +27,7 @@ namespace Z0
         /// <typeparam name="K">The A colum count / B row count type</typeparam>
         /// <typeparam name="N">The B column count type</typeparam>
         [MethodImpl(Inline)]
-        public static MBlock256<M,N,float> Mul<M,K,N>(this MBlock256<M,K,float> A, MBlock256<K,N,float> B)
+        public static Matrix256<M,N,float> Mul<M,K,N>(this Matrix256<M,K,float> A, Matrix256<K,N,float> B)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -42,7 +42,7 @@ namespace Z0
         /// <typeparam name="K">The A colum count / B row count type</typeparam>
         /// <typeparam name="N">The B column count type</typeparam>
         [MethodImpl(Inline)]
-        public static MBlock256<M,N,double> Mul<M,K,N>(this MBlock256<M,K,double> A, MBlock256<K,N,double> B)
+        public static Matrix256<M,N,double> Mul<M,K,N>(this Matrix256<M,K,double> A, Matrix256<K,N,double> B)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -58,7 +58,7 @@ namespace Z0
         /// <typeparam name="K">The A colum count / B row count type</typeparam>
         /// <typeparam name="N">The B column count type</typeparam>
         [MethodImpl(Inline)]
-        public static ref MBlock256<M,N,float> Mul<M,K,N>(this MBlock256<M,K,float> A, MBlock256<K,N,float> B, ref MBlock256<M,N, float> X)
+        public static ref Matrix256<M,N,float> Mul<M,K,N>(this Matrix256<M,K,float> A, Matrix256<K,N,float> B, ref Matrix256<M,N, float> X)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -77,7 +77,7 @@ namespace Z0
         /// <typeparam name="K">The A colum count / B row count type</typeparam>
         /// <typeparam name="N">The B column count type</typeparam>
         [MethodImpl(Inline)]
-        public static ref MBlock256<M,N,double> Mul<M,K,N>(this MBlock256<M,K,double> A, MBlock256<K,N,double> B, ref MBlock256<M,N,double> X)
+        public static ref Matrix256<M,N,double> Mul<M,K,N>(this Matrix256<M,K,double> A, Matrix256<K,N,double> B, ref Matrix256<M,N,double> X)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="X">Tht target matrix</param>
         /// <typeparam name="N">The common order of all matrices</typeparam>
         [MethodImpl(Inline)]
-        public static ref MBlock256<N,float> Mul<N>(this MBlock256<N,float> A, MBlock256<N,float> B, ref MBlock256<N, float> X)
+        public static ref Matrix256<N,float> Mul<N>(this Matrix256<N,float> A, Matrix256<N,float> B, ref Matrix256<N, float> X)
             where N : unmanaged, ITypeNat
         {
             mkl.gemm(A, B, ref X);
@@ -110,7 +110,7 @@ namespace Z0
         /// <param name="X">Tht target matrix</param>
         /// <typeparam name="N">The common order of all matrices</typeparam>
         [MethodImpl(Inline)]
-        public static ref MBlock256<N,double> Mul<N>(this MBlock256<N,double> A, MBlock256<N,double> B, ref MBlock256<N, double> X)
+        public static ref Matrix256<N,double> Mul<N>(this Matrix256<N,double> A, Matrix256<N,double> B, ref Matrix256<N, double> X)
             where N : unmanaged, ITypeNat
         {
             mkl.gemm(A, B, ref X);
@@ -118,7 +118,7 @@ namespace Z0
         }
         
         [MethodImpl(Inline)]
-        public static MBlock256<N,T> Map<N,S,T>(this MBlock256<N,S> A, Func<S,T> f)
+        public static Matrix256<N,T> Map<N,S,T>(this Matrix256<N,S> A, Func<S,T> f)
             where N : unmanaged, ITypeNat
             where T : unmanaged
             where S : unmanaged
@@ -131,7 +131,7 @@ namespace Z0
             return dstM;
         }
 
-        public static MBlock256<N,double> Pow<N>(this MBlock256<N,double> A, int exp)
+        public static Matrix256<N,double> Pow<N>(this Matrix256<N,double> A, int exp)
             where N : unmanaged, ITypeNat
         {
             if(exp == 1)

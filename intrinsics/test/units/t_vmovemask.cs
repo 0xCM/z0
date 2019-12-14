@@ -9,74 +9,34 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vmovemask : t_vinx<t_vmovemask>
+    public class t_vtakemask : t_vinx<t_vtakemask>
     {
-
-        public void makemask_128()
+        public void vtakemask_outline()
         {
-
-            for(var i=0; i< SampleSize; i++)
+            void case1()
             {
-                var x = Random.BitVector(n16);
-                var z = dinx.vtakemask(dinx.vmakemask(x));
-                Claim.eq(z,x);
-            }
-        }
-
-        public void makemask_256()
-        {
-
-            for(var i=0; i< SampleSize; i++)
-            {
-                var x = Random.BitVector(n32);
-                var z = dinx.vtakemask(dinx.vmakemask(x));
-                Claim.eq(z,x);
-
-            }
-        }
-
-        public void movemask_256x64u_examples()
-        {
-            var x = Random.CpuVector<uint>(n256);
-            var y = x;
-            Span<uint> m = new uint[8];
-            for(var i=0; i<8; i++)
-            {
-                m[i] = ginx.vtakemask(x);
-                x = ginx.vsll(x,1);
+                var x = vbuild.broadcast(n256, (byte)Pow2.T07);
+                var m = ginx.vtakemask(x);
+                Claim.eq(uint.MaxValue,m);
             }
 
-            Trace(v8u(y).FormatBits());
-            Trace(m.FormatBits());            
+            void case2()
+            {
+                var x = Random.CpuVector<uint>(n256);
+                var y = x;
+                Span<uint> m = new uint[8];
+                for(var i=0; i<8; i++)
+                {
+                    m[i] = ginx.vtakemask(x);
+                    x = ginx.vsll(x,1);
+                }
+            }
 
-        }
-        // 4x64
-        // [A0 A1 A2 A3 A4 A5 A6 A7]
-        // [B0 B1 B2 B3 B4 B5 B6 B7]
-        // [C0 C1 C2 C3 C4 C5 C6 C7]
-        // [D0 D1 D2 D3 D4 D5 D6 D7]
-        public void vgather_movemask()
-        {
-            var n = n256;
-            var w = n1024;
-            var ix = n256;
-            var pattern = vbuild.broadcast(n, 0b00010001_00010001_00010001_00010001u);
-
-            var data = span(range<uint>(0,(uint)(w-1)));
-            Claim.eq(data.Length, w);
-
-            ref var src = ref head(data);
-
-            // for(var i=0; i< w; i+=8)
-            //     ginx.vstore(pattern, ref src, i);
-
-            // for(var i=0; i < w; i+= 8)
-            //     Claim.eq(pattern,ginx.vload(n, in src, i));                
-
-
+            case1();
+            case2();
         }
 
-        public void movemask_256x8u()
+        public void vtakemask_256x8u()
         {
             var bits = n256;
             var bytes = n32;
@@ -89,7 +49,7 @@ namespace Z0
                 var srcBitVec = srcCpuVec.ToSpan().ToBitCells(bits);
                 
                 Claim.eq(bits, srcBitVec.BitCount);
-                Claim.eq(srcCpuVec.ToBitString().ToBitSpan().ToBitString(), srcBitVec.ToBitString());
+                Claim.eq(srcCpuVec.ToBitString().ToBits().ToBitString(), srcBitVec.ToBitString());
                                                 
                 var mask = 0u;
                 for(var r=0; r<srcCpuVec.Length(); r++)
@@ -102,7 +62,7 @@ namespace Z0
             }
         }
 
-        public void movemask_128x8u()
+        public void vtakemask_128x8u()
         {
             const int hibit = 7;
             var bits = n128;
@@ -116,7 +76,7 @@ namespace Z0
                 var srcBitVec = srcCpuVec.ToSpan().ToBitCells(bits);
                 
                 Claim.eq(bits, srcBitVec.BitCount);
-                Claim.eq(srcCpuVec.ToBitString().ToBitSpan().ToBitString(), srcBitVec.ToBitString());
+                Claim.eq(srcCpuVec.ToBitString().ToBits().ToBitString(), srcBitVec.ToBitString());
                                                 
                 var mask = 0u;
                 for(var r=0; r<srcCpuVec.Length(); r++)
@@ -129,7 +89,7 @@ namespace Z0
             }
         }
 
-        public void movemask_256x32f()
+        public void vtakemask_256x32f()
         {
             var samples = Pow2.T12;
             var src = Random.Blocks<float>(n256,samples);
@@ -148,7 +108,7 @@ namespace Z0
             }
         }
 
-        public void movemask_256x64f()
+        public void vtakemask_256x64f()
         {
             var samples = Pow2.T12;
             var src = Random.Blocks<double>(n256, samples);

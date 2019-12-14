@@ -42,7 +42,7 @@ namespace Z0.Mkl
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T head<T>(VBlock256<T> src)
+        public static ref T head<T>(RowVector256<T> src)
             where T : unmanaged
             =>  ref MemoryMarshal.GetReference<T>(src.Unblocked);
 
@@ -52,7 +52,7 @@ namespace Z0.Mkl
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        static ref T head<N,T>(VBlock256<N,T> src)
+        static ref T head<N,T>(RowVector256<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 =>  ref MemoryMarshal.GetReference<T>(src.Unsized);
@@ -63,7 +63,7 @@ namespace Z0.Mkl
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        static ref T head<N,T>(MBlock256<N,T> src)
+        static ref T head<N,T>(Matrix256<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 =>  ref MemoryMarshal.GetReference<T>(src.Unsized);
@@ -74,7 +74,7 @@ namespace Z0.Mkl
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        static ref T head<M,N,T>(MBlock256<M,N,T> src)
+        static ref T head<M,N,T>(Matrix256<M,N,T> src)
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged
@@ -109,7 +109,7 @@ namespace Z0.Mkl
                 => zfunc.length(lhs,rhs);
 
         [MethodImpl(Inline)]   
-        static int length<S,T>(VBlock256<S> lhs, VBlock256<T> rhs, [CallerMemberName] string caller = null, 
+        static int length<S,T>(RowVector256<S> lhs, RowVector256<T> rhs, [CallerMemberName] string caller = null, 
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where T : unmanaged
             where S : unmanaged

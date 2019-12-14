@@ -13,12 +13,5 @@ namespace Z0
     public class t_weld : UnitTest<t_weld>
     {        
 
-        public void rotl()
-        {
-            (var x0, var y0) = Random.NextPair<ulong>();
-
-            
-
-        }
     }
 }

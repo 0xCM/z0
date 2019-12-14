@@ -12,7 +12,7 @@ namespace Z0
     
     public class t_add : t_gmath<t_add>
     {
-        protected override int CycleCount => Pow2.T16;
+        protected override int CycleCount => Pow2.T09;
 
         public void add_8i()
             => opcheck((x,y) => (sbyte)(x + y), D.add<sbyte>());

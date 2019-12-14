@@ -19,7 +19,7 @@ namespace Z0
         /// Generic scalar bit scatter check
         /// </summary>
         /// <typeparam name="T">The scalar type</typeparam>
-        protected void sb_scatter_check<T>()
+        protected void sb_scatter_check<T>(T t = default)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
@@ -32,7 +32,7 @@ namespace Z0
             }
         }
 
-       protected void sb_gather_check<T>()
+       protected void sb_gather_check<T>(T t = default)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
@@ -49,7 +49,7 @@ namespace Z0
         /// Generic scalar bit left rotation check
         /// </summary>
         /// <typeparam name="T">The scalar type</typeparam>
-        protected void sb_rotl_check<T>()
+        protected void sb_rotl_check<T>(T t = default)
             where T : unmanaged
         {
             var offset = Random.Next(1, bitsize<T>());
@@ -67,7 +67,7 @@ namespace Z0
             }
         }
 
-        protected void sb_bitview_check<T>()
+        protected void sb_bitview_check<T>(T t = default)
             where T : unmanaged
         {
             var src = gmath.maxval<T>();
@@ -113,30 +113,7 @@ namespace Z0
             }
         }
 
-        protected void sb_unpack_bench<S,T>()
-            where S : unmanaged
-            where T : unmanaged
-        {
-            var opcount = RoundCount * CycleCount;
-            var srcSign = signed<S>() ? "i" : string.Empty;
-            var dstSign = signed<T>() ? "i" : string.Empty;            
-            var opname = $"unpack_{bitsize<S>()}{srcSign}x{bitsize<T>()}{dstSign}";
-            var sw = stopwatch(false);
-
-            Span<T> dst = new T[bitsize<S>()];   
-
-            for(var i=0; i<opcount; i++)
-            {
-                var src = Random.Next<S>();
-                sw.Start();
-                gbits.unpack(src,dst);
-                sw.Stop();
-            }
-
-            Collect((opcount,sw,opname));
-        }
-
-        protected void sb_bitrev_check<T>()
+        protected void sb_bitrev_check<T>(T t = default)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)            
@@ -152,7 +129,7 @@ namespace Z0
         /// Verifies even/odd bit-level interspersal
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
-        protected void sb_mix_check<T>()
+        protected void sb_mix_check<T>(T t = default)
             where T : unmanaged
         {
             var len = bitsize<T>();
@@ -184,7 +161,7 @@ namespace Z0
             }
         }
 
-        protected void sb_cnonimpl_check<T>()
+        protected void sb_cnonimpl_check<T>(T t = default)
             where T : unmanaged
         {
             var vZero = vzero<T>(n128);
@@ -198,7 +175,7 @@ namespace Z0
             }
         }
 
-        protected void sb_msbpos_check<T>()
+        protected void sb_msbpos_check<T>(T t = default)
             where T : unmanaged
         {
             for(var i=0; i< SampleSize; i++)
@@ -217,7 +194,7 @@ namespace Z0
             }
         }
 
-        protected void sb_ntz_check<T>()
+        protected void sb_ntz_check<T>(T t = default)
             where T : unmanaged
         {
             for(var i=0; i< SampleSize; i++)
@@ -237,7 +214,7 @@ namespace Z0
             }
         }
 
-        protected void sb_lsbx_check<T>()
+        protected void sb_lsbx_check<T>(T t = default)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
@@ -249,7 +226,7 @@ namespace Z0
             }
         }
 
-        protected void sb_bitchars_check<T>()
+        protected void sb_bitchars_check<T>(T t = default)
             where T : unmanaged
         {
             Span<char> s0 = stackalloc char[bitsize<T>()];
@@ -268,7 +245,7 @@ namespace Z0
             }
         }
 
-        protected void sb_bitseq_check<T>()
+        protected void sb_bitseq_check<T>(T t = default)
             where T : unmanaged
         {
             Span<byte> s0 = stackalloc byte[bitsize<T>()];
@@ -285,7 +262,7 @@ namespace Z0
             }
         }
 
-        protected void sb_zerohi_check<T>()
+        protected void sb_zerohi_check<T>(T t = default)
             where T : unmanaged
         {
             var width = bitsize<T>();
@@ -293,7 +270,7 @@ namespace Z0
                 sb_zerohi_check<T>(i);            
         }
 
-        protected void sb_zerohi_check<T>(int maxlen)
+        protected void sb_zerohi_check<T>(int maxlen, T t = default)
             where T : unmanaged
         {
             var width = bitsize<T>();
@@ -331,7 +308,7 @@ namespace Z0
             }
         }
 
-        protected void sb_lsboff_check<T>()
+        protected void sb_lsboff_check<T>(T t = default)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
@@ -343,7 +320,7 @@ namespace Z0
             }
         }
 
-       protected void sb_toggle_check<T>()
+       protected void sb_toggle_check<T>(T t = default)
             where T : unmanaged
         {
             var src = Random.Span<T>(SampleSize);
@@ -389,13 +366,13 @@ namespace Z0
             return pack(src, new byte[dstLen]);            
         }
 
-        protected void gsb_pack_check<T>(int bitcount)
+        protected void gsb_pack_check<T>(int bitcount, T t = default)
             where T : unmanaged
         {
             var src = Random.BitString(bitcount);
             Claim.eq(bitcount, src.Length);
 
-            var x = src.ToBitSpan();
+            var x = src.ToBits();
             Claim.eq(bitcount, x.Length);
             
             var y = pack(x);
@@ -422,7 +399,7 @@ namespace Z0
         /// </summary>
         /// <param name="cycles">The number of times the test is repeated</param>
         /// <typeparam name="T">The primal type</typeparam>
-        protected void sb_pack_1xN_check<T>()
+        protected void sb_pack_1xN_check<T>(T t = default)
             where T : unmanaged
         {
             Span<byte> _dst = new byte[bitsize<T>()];
@@ -440,7 +417,6 @@ namespace Z0
             }
         }
 
-
         protected void bs_rep_check<T>()
             where T : unmanaged
         {
@@ -455,7 +431,7 @@ namespace Z0
             }
         }
 
-        protected void bs_fromscalar_check<T>()
+        protected void bs_fromscalar_check<T>(T t = default)
             where T : unmanaged
         {
             var src = Random.Span<T>(SampleSize);
@@ -467,7 +443,7 @@ namespace Z0
             }
         }
         
-        protected void sb_width_check<T>()
+        protected void sb_width_check<T>(T t = default)
             where T : unmanaged
         {
             for(var sample = 0; sample < SampleSize; sample++)
@@ -478,9 +454,59 @@ namespace Z0
                 Claim.eq(expect, actual);
 
             }
-
         }
 
 
+        protected void sb_himask_check<T>(T t = default)
+            where T : unmanaged
+        {
+            var mincount = 1;
+            var maxcount = bitsize<T>();
+            for(var i=0; i< SampleSize; i++)
+            {
+                var count = Random.Single(mincount,maxcount);
+                var mask = BitMask.himask(count,t);                
+                var pop = gbits.pop(mask);
+                if(pop != count)
+                {
+                    Trace("count", count.ToString());
+                    Trace("popcount", pop.ToString());
+                    Trace("mask", BitString.scalar(mask).Format());
+                }
+                
+                Claim.eq(count, gbits.pop(mask));
+
+                var lowered = gmath.srl(mask, bitsize(t) -  count);
+                var width = gbits.width(lowered);
+                if(count != width)
+                {
+                    Trace("mask", BitString.scalar(mask).Format());
+                    Trace("lowered", BitString.scalar(lowered).Format());
+                }
+                Claim.eq(count, width);
+            }
+        }
+
+        protected void sb_unpack_bench<S,T>(SystemCounter counter = default)
+            where S : unmanaged
+            where T : unmanaged
+        {
+            var opcount = RoundCount * CycleCount;
+            var srcSign = signed<S>() ? "i" : string.Empty;
+            var dstSign = signed<T>() ? "i" : string.Empty;            
+            var opname = $"unpack_{bitsize<S>()}{srcSign}x{bitsize<T>()}{dstSign}";
+
+            Span<T> dst = new T[bitsize<S>()];   
+
+            for(var i=0; i<opcount; i++)
+            {
+                var src = Random.Next<S>();
+                counter.Start();
+                gbits.unpack(src,dst);
+                counter.Stop();
+            }
+
+            Benchmark(opname,counter,opcount);
+        }
     }
 }

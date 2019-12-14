@@ -21,7 +21,7 @@ namespace Z0
     {        
         readonly Span<T> data;
 
-        static readonly BitGridLayout GridLayout = BitMatrix.layout<N,T>();
+        static readonly BitGridLayout GridLayout = BitGridLayout.Define<N,T>();
 
         /// <summary>
         /// The bit width of each row/column 
@@ -142,10 +142,10 @@ namespace Z0
         /// <summary>
         /// Queries/Specifies a row
         /// </summary>
-        public BitCells<N,T> this[int row]
+        public BitSpan<N,T> this[int row]
         {
             [MethodImpl(Inline)]
-            get => new BitCells<N,T>(RowCells(row), true);
+            get => new BitSpan<N,T>(RowCells(row), true);
             
             [MethodImpl(Inline)]
             set => value.Data.CopyTo(RowCells(row));     
@@ -169,13 +169,12 @@ namespace Z0
             get => data;
         }
 
-
         /// <summary>
         /// Replaces an index-identied column of data with the content of a column vector
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public void SetCol(int col, BitCells<N,T> src)
+        public void SetCol(int col, BitSpan<N,T> src)
         {
             for(var row=0; row < Order; row++)
                 this[row,col] = src[row];
@@ -186,9 +185,9 @@ namespace Z0
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public BitCells<N,T> GetCol(int col)
+        public BitSpan<N,T> GetCol(int col)
         {
-            var cv = default(BitCells<N,T>);
+            var cv = default(BitSpan<N,T>);
             for(var row=0; row < Order; row++)
                 cv[row] = this[row, col];
             return cv;
@@ -237,7 +236,6 @@ namespace Z0
             => 0;
 
         public override bool Equals(object rhs)
-            => throw new NotSupportedException();
-        
+            => throw new NotSupportedException();        
     }
 }

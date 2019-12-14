@@ -13,7 +13,6 @@ namespace Z0
 
     partial class BitGrid
     {        
-
         [MethodImpl(Inline)]
         public static SubGrid32<N8,N3,uint> perm(Perm8 p)
             => (uint)p;
@@ -22,11 +21,9 @@ namespace Z0
         public static SubGrid32<N8,N3,uint> perm(NatPerm<N8> p)
             => (uint)p.ToLiteral();
 
-
         [MethodImpl(Inline)]
         public static BitGrid64<N16,N4,ulong> perm(Perm16 p)
             => (ulong)p;
-
 
         [MethodImpl(Inline)]
         public static BitGrid64<N16,N4,ulong> perm(NatPerm<N16> p)
@@ -55,9 +52,6 @@ namespace Z0
             for(int i=0, j=0 ; i< p.Length; i++, j+=5)
                 bs.BitMap(p[i].ToBitString(),j, 5);
             return BitGrid.subgrid(bs.ToCpuVector<ulong>(w), m,n);
-        }
-
-        
+        }        
     }
-
 }

@@ -12,14 +12,23 @@ namespace Z0
 
     partial class gmath
     {
+        static T ParseError<T>(string src)
+            where T : unmanaged
+        {
+            var msg = $"Attempted to parse '{src}':{typename<T>()} but failed";
+            Errors.Throw(msg);
+
+            return default;
+        }
+
         [MethodImpl(Inline)]
         public static T parse<T>(string src)
             where T : unmanaged
         {
-            if(!parse(src, out T dst))
+            if(parse(src, out T dst))
                 return dst;
             else
-                return Errors.Throw<T>(src);
+                return ParseError<T>(src);
         }
         
         [MethodImpl(Inline)]
@@ -31,7 +40,7 @@ namespace Z0
             {
                 if(math.parse(src, out byte x))
                 {
-                    dst = generic<T>(x);
+                    dst = convert<T>(x);
                     return true;
                 }
                 else
@@ -41,7 +50,7 @@ namespace Z0
             {
                 if(math.parse(src, out ushort x))
                 {
-                    dst = generic<T>(x);
+                    dst = convert<T>(x);
                     return true;
                 }
                 else
@@ -52,7 +61,7 @@ namespace Z0
             {
                 if(math.parse(src, out uint x))
                 {
-                    dst = generic<T>(x);
+                    dst = convert<T>(x);
                     return true;
                 }
                 else
@@ -63,7 +72,7 @@ namespace Z0
             {
                 if(math.parse(src, out ulong x))
                 {
-                    dst = generic<T>(x);
+                    dst = convert<T>(x);
                     return true;
                 }
                 else
@@ -84,7 +93,7 @@ namespace Z0
             {
                 if(math.parse(src, out sbyte x))
                 {
-                    dst = generic<T>(x);
+                    dst = convert<T>(x);
                     return true;
                 }
                 else
@@ -94,7 +103,7 @@ namespace Z0
             {
                 if(math.parse(src, out short x))
                 {
-                    dst = generic<T>(x);
+                    dst = convert<T>(x);
                     return true;
                 }
                 else
@@ -105,7 +114,7 @@ namespace Z0
             {
                 if(math.parse(src, out int x))
                 {
-                    dst = generic<T>(x);
+                    dst = convert<T>(x);
                     return true;
                 }
                 else
@@ -116,7 +125,7 @@ namespace Z0
             {
                 if(math.parse(src, out long x))
                 {
-                    dst = generic<T>(x);
+                    dst = convert<T>(x);
                     return true;
                 }
                 else
@@ -137,7 +146,7 @@ namespace Z0
             {
                 if(math.parse(src, out float x))
                 {
-                    dst = generic<T>(x);
+                    dst = convert<T>(x);
                     return true;
                 }
                 else
@@ -147,7 +156,7 @@ namespace Z0
             {
                 if(math.parse(src, out double x))
                 {
-                    dst = generic<T>(x);
+                    dst = convert<T>(x);
                     return true;
                 }
                 else

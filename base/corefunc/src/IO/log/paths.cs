@@ -5,16 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.IO;
 
     using static zfunc;
 
-
     public readonly struct DataPaths
     {
-
         public static DataPaths The => default;
     
         static LogSettings Settings
@@ -64,44 +59,56 @@ namespace Z0
         public FolderPath LogDir(LogArea target, FolderName subdir)        
             => Settings.LogDir(target, subdir);
 
-        public FilePath TestLogPath(FileName filename)
-            => LogDir(LogArea.Test) + filename;
+        public FilePath LogPath(LogArea area, string basename, FileExtension ext = null)
+            => LogDir(area) + FileName.Define($"{basename}.{ext ?? DefaultExtension}");
 
-        public FilePath TestLogPath(FolderName subfolder, FileName filename)
-            => LogDir(LogArea.Test, subfolder) + filename;
+        public FilePath LogPath(LogArea area, FolderName subdir, string basename, FileExtension ext = null)
+            => LogDir(area, subdir) + FileName.Define($"{basename}.{ext ?? DefaultExtension}");
 
-        public FilePath LogPath(LogArea area, FileExtension ext = null, long? timestamp = null)
-            => LogDir(area) + FileName.Define($"{area}.{timestamp ?? LogDate}.{ext ?? DefaultExtension}");
+        public FilePath LogPath(ILogTarget target, FileExtension ext = null)
+            => LogDir(target.Area) + FileName.Define($"{target.Name}.{ext ?? DefaultExtension}");
 
-        public FilePath LogPath(LogArea area, FolderName subdir, FileExtension ext = null, long? timestamp = null)
-            => LogDir(area, subdir) + FileName.Define($"{area}.{timestamp ?? LogDate}.{ext ?? DefaultExtension}");
+        public FilePath LogPath(ILogTarget target, FolderName subdir, FileExtension ext = null)
+            => LogDir(target.Area,subdir) + FileName.Define($"{target.Name}.{ext ?? DefaultExtension}");
 
-        public FilePath LogPath(LogArea area, string topic, FileExtension ext = null, long? timestamp = null)
-            => LogDir(area) + FileName.Define($"{area}.{topic}.{timestamp ?? LogDate}.{ext ?? DefaultExtension}");
+        public FilePath DatedLogPath(LogArea area, string basename, FileExtension ext = null)
+            => LogDir(area) + FileName.Define($"{basename}.{LogDate}.{ext ?? DefaultExtension}");
 
-        public FilePath LogPath(LogArea area, FolderName subdir, string topic, FileExtension ext = null, long? timestamp = null)
-            => LogDir(area, subdir) + FileName.Define($"{area}.{topic}.{timestamp ?? LogDate}.{ext ?? DefaultExtension}");
+        public FilePath DatedLogPath(LogArea area, FolderName subdir, string basename,  FileExtension ext = null)
+            => LogDir(area,subdir) + FileName.Define($"{basename}.{LogDate}.{ext ?? DefaultExtension}");
 
-        public FilePath LogPath(ILogTarget target, FileExtension ext = null, long? timestamp = null)
-            => LogDir(target.Area) + FileName.Define($"{target.Area}.{target.Name}.{timestamp ?? LogDate}.{ext ?? DefaultExtension}");
+        FilePath LogPath(LogArea area, FileExtension ext, long timestamp)
+            => LogDir(area) + FileName.Define($"{area}.{timestamp}.{ext ?? DefaultExtension}");
 
-        public FilePath LogPath(ILogTarget target, FolderName subdir,  FileExtension ext = null, long? timestamp = null)
-            => LogDir(target.Area, subdir) + FileName.Define($"{target.Area}.{target.Name}.{timestamp ?? LogDate}.{ext ?? DefaultExtension}");
+        FilePath LogPath(LogArea area, FolderName subdir, FileExtension ext, long timestamp)
+            => LogDir(area, subdir) + FileName.Define($"{timestamp}.{ext ?? DefaultExtension}");
 
-        public FilePath UniqueLogPath(LogArea area, string topic,  FileExtension ext = null)
+        FilePath LogPath(LogArea area, string basename, FileExtension ext, long timestamp)
+            => LogDir(area) + FileName.Define($"{basename}.{timestamp}.{ext ?? DefaultExtension}");
+
+        FilePath LogPath(LogArea area, FolderName subdir, string basename, FileExtension ext, long timestamp)
+            => LogDir(area, subdir) + FileName.Define($"{basename}.{timestamp}.{ext ?? DefaultExtension}");
+
+        FilePath LogPath(ILogTarget target, FileExtension ext, long timestamp)
+            => LogDir(target.Area) + FileName.Define($"{target.Name}.{timestamp}.{ext ?? DefaultExtension}");
+
+        FilePath LogPath(ILogTarget target, FolderName subdir,  FileExtension ext, long timestamp)
+            => LogDir(target.Area, subdir) + FileName.Define($"{target.Area}.{target.Name}.{timestamp}.{ext ?? DefaultExtension}");
+
+        public FilePath UniqueLogPath(LogArea area, string basename,  FileExtension ext = null)
         {
             var first = new DateTime(2019,1,1);
             var current = now();
             var elapsed = (long) (current - first).TotalMilliseconds;
-            return LogPath(area, topic, ext, elapsed);
+            return LogPath(area, basename, ext, elapsed);
         }
 
-        public FilePath UniqueLogPath(LogArea area, FolderName subdir, string topic,  FileExtension ext = null)
+        public FilePath UniqueLogPath(LogArea area, FolderName subdir, string basename,  FileExtension ext = null)
         {
             var first = new DateTime(2019,1,1);
             var current = now();
             var elapsed = (long) (current - first).TotalMilliseconds;
-            return LogPath(area, subdir, topic, ext, elapsed);
+            return LogPath(area, subdir, basename, ext, elapsed);
         }
 
         public FilePath UniqueLogPath(LogArea area, FileExtension ext = null)

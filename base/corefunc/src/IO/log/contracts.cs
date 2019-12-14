@@ -16,7 +16,15 @@ namespace Z0
         Bench,
 
         App,
+    }
 
+    public enum LogWriteMode
+    {
+        Create,
+        
+        Overwrite,
+        
+        Append
     }
 
     public interface ILogTarget
@@ -35,10 +43,7 @@ namespace Z0
         
         void Log(AppMsg src);
 
-        void Log<R>(IEnumerable<R> records, LogTarget target, char delimiter, bool header = true, bool create = true, FileExtension ext = null)
-                where R : IRecord;
-
-        void Log<R>(IEnumerable<R> records, string topic, char delimiter, bool header = true, bool create = true, FileExtension ext = null)
+        FilePath Log<R>(IEnumerable<R> records, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header, FileExtension ext)
             where R : IRecord;            
                 
     }

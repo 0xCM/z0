@@ -138,7 +138,7 @@ namespace Z0
         /// <summary>
         /// Queries mainpulates a row
         /// </summary>
-        public BitCells<N,T> this[int row]
+        public BitSpan<N,T> this[int row]
         {
             [MethodImpl(Inline)]
             get => GetRow(row);
@@ -156,19 +156,19 @@ namespace Z0
         /// </summary>
         /// <param name="index">The 0-based row index</param>
         [MethodImpl(Inline)]
-        public BitCells<N,T> GetRow(int index)                    
-            => new BitCells<N,T>(data.Slice(RowOffset(index), Layout.RowCellCount));                
+        public BitSpan<N,T> GetRow(int index)                    
+            => new BitSpan<N,T>(data.Slice(RowOffset(index), Layout.RowCellCount));                
 
         [MethodImpl(Inline)]
-        public readonly BitCells<N,T> CopyRow(int index)                    
-            => new BitCells<N,T>(data.Slice(RowOffset(index), Layout.RowCellCount).Replicate());
+        public readonly BitSpan<N,T> CopyRow(int index)                    
+            => new BitSpan<N,T>(data.Slice(RowOffset(index), Layout.RowCellCount).Replicate());
 
         /// <summary>
         /// Replaces an index-identied column of data with the content of a column vector
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public void SetCol(int col, BitCells<M,T> src)
+        public void SetCol(int col, BitSpan<M,T> src)
         {
             for(var row=0; row < RowCount; row++)
                 this[row,col] = src[row];
@@ -179,10 +179,10 @@ namespace Z0
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public BitCells<M,T> GetCol(int col)
+        public BitSpan<M,T> GetCol(int col)
         {
             var cidx = ColCount - col - 1;
-            var cv = BitCells.alloc<M,T>();
+            var cv = BitSpan.alloc<M,T>();
             for(var row = 0; row < RowCount; row++)            
                 cv[row] = this[row, cidx];                        
             return cv;

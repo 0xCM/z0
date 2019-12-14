@@ -12,11 +12,11 @@ namespace Z0
     using static zfunc;
 
     using BG = Z0.BitGrid;
-    using BC = Z0.BitCells;
+    using BS = Z0.BitSpan;
     using BM = Z0.BitMatrix;
     using BV = Z0.BitVector;
 
-    partial class BitRng
+    public static class BitRng
     {   
         /// <summary>
         /// Creates a 16-bit generic bitgrid
@@ -536,13 +536,13 @@ namespace Z0
         /// <param name="mincells">The minimum number of cells</param>
         /// <param name="maxcells">The maximum number of cells</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static IEnumerable<BitPos> BitPositions<T>(this IPolyrand random, ushort mincells, ushort maxcells)
+        public static IEnumerable<BitPos<T>> BitPositions<T>(this IPolyrand random, ushort mincells, ushort maxcells)
             where T : unmanaged
         {
             var s2 = random.Stream(closed(mincells,maxcells)).GetEnumerator();            
             var s3 = random.Stream<byte>(closed((byte)0, (byte)bitsize<T>())).GetEnumerator();
             while(true && s2.MoveNext() && s3.MoveNext())
-                yield return BitPos.FromCellIndex((byte)bitsize<T>(), s2.Current, s3.Current);
+                yield return BitPos.FromCellIndex<T>(s2.Current, s3.Current);
         }
 
         /// <summary>
@@ -561,56 +561,56 @@ namespace Z0
         }
 
         /// <summary>
-        /// Produces a natural bitcell container
+        /// Produces a natural bitspan
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="n">The number of bits to cover</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<N,T> BitCells<N,T>(this IPolyrand random)
+        public static BitSpan<N,T> BitSpan<N,T>(this IPolyrand random)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => Z0.BitCells.load<N,T>(random.Stream<T>().ToSpan(BitCalcs.gridcells<N,N1,T>()));
+                => BS.load<N,T>(random.Stream<T>().ToSpan(BitCalcs.gridcells<N,N1,T>()));
 
         /// <summary>
-        /// Produces a generic bitcell container over a specified number of bits
+        /// Produces a bitspan over a specified number of bits
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="bitcount">The number of bits to cover</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<T> BitCells<T>(this IPolyrand random, int bitcount)
+        public static BitSpan<T> BitSpan<T>(this IPolyrand random, int bitcount)
             where T : unmanaged
-                => BC.load<T>(random.Stream<T>().ToSpan(BC.cellcount<T>(bitcount)), bitcount);
+                => BS.load<T>(random.Stream<T>().ToSpan(BS.cellcount<T>(bitcount)), bitcount);
 
         /// <summary>
-        /// Produces a generic bitcell container over a random number of bits
+        /// Produces a bitspan over a random number of bits
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="minbits">The minimum bit count</param>
         /// <param name="maxbits">The maximum bit count</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<T> BitCells<T>(this IPolyrand random, int minbits, int maxbits)
+        public static BitSpan<T> BitSpan<T>(this IPolyrand random, int minbits, int maxbits)
             where T : unmanaged
         {
             var len = random.Next<int>(minbits,++maxbits);
-            return BC.literals<T>(random.Stream<T>().TakeArray(BC.cellcount<T>(len),len));
+            return BS.literals<T>(random.Stream<T>().TakeArray(BS.cellcount<T>(len),len));
         }
 
         /// <summary>
-        /// Produces a generic bitcell container over a random number of bits
+        /// Produces a bitspan over a random number of bits
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="range">The range of potential bitvector lengths</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<T> BitCells<T>(this IPolyrand random, Interval<int> range)
+        public static BitSpan<T> BitSpan<T>(this IPolyrand random, Interval<int> range)
             where T : unmanaged
-                => random.BitCells<T>(range.Left, range.Right);                    
+                => random.BitSpan<T>(range.Left, range.Right);                    
 
-         /// <summary>
+        /// <summary>
         /// Produces a generic bitmatrix predicated on a primal type
         /// </summary>
         /// <param name="random">The random source</param>
@@ -918,6 +918,33 @@ namespace Z0
             return ginx.vsrlx(v,(byte)clamp);
         }
 
+        /// <summary>
+        /// Populates a caller-supplied target with random bits
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="dst">The target span</param>
+        public static void Fill(this IPolyrand random, Span<bit> dst)
+        {
+            const int segwidth = 64;
+            var count = dst.Length;
+            var segcount = count / segwidth;
+            var remcount = count % segwidth;
+            var part = 0;
+            
+            for(var i=0; i < segcount; i++)
+            {
+                ref var dsthead = ref head(dst.Slice(part));
+                ref readonly var seq = ref head(BitStore.bitseq(random.Next<ulong>())); 
+                for(var j=0; j<segwidth; j++)           
+                    seek(ref dsthead, j) = (bit)skip(in seq, j);
+                part += segwidth;
+            }
+
+            ref var remdst = ref head(dst.Slice(part));
+            ref readonly var remsrc = ref head(BitStore.bitseq(random.Next<ulong>())); 
+            for(var i=0; i< remcount; i++)
+                seek(ref remdst, i) = (bit)skip(in remsrc, i);            
+        }
 
         [MethodImpl(Inline)]
         static IRandomStream<T> stream<T>(IEnumerable<T> src, RngKind rng)

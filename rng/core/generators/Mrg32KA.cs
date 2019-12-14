@@ -27,7 +27,7 @@ namespace Z0
 
         public const uint A23n = 1370589;
 
-        public static ref readonly Vector<N6,uint> CheckSeed(in Vector<N6,uint> seed) 
+        public static ref readonly RowVector<N6,uint> CheckSeed(in RowVector<N6,uint> seed) 
         {        
             if (seed[0] == 0 && seed[1] == 0 && seed[2] == 0)
                 throw new ArgumentException("The first 3 values must not be 0");

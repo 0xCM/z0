@@ -34,8 +34,8 @@ namespace Z0
         public static N32 N => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator BitCells<N32,uint>(BitVector32 src)
-            => BitCells.literal(src.data,N);
+        public static implicit operator BitSpan<N32,uint>(BitVector32 src)
+            => BitSpan.literal(src.data,N);
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<uint>(BitVector32 src)

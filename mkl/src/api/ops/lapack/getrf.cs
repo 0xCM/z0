@@ -24,7 +24,7 @@ namespace Z0.Mkl
         /// <param name="P"></param>
         /// <typeparam name="M"></typeparam>
         /// <typeparam name="N"></typeparam>
-        public static ref MBlock256<M,N,double> getrf<M,N>(MBlock256<M,N,double> A, Span<int> P, ref MBlock256<M,N,double> X)
+        public static ref Matrix256<M,N,double> getrf<M,N>(Matrix256<M,N,double> A, Span<int> P, ref Matrix256<M,N,double> X)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
@@ -46,7 +46,7 @@ namespace Z0.Mkl
         /// <param name="P"></param>
         /// <typeparam name="M"></typeparam>
         /// <typeparam name="N"></typeparam>
-        public static ref MBlock256<N,double> getrf<N>(MBlock256<N,double> A, Span<int> P, ref MBlock256<N,double> X)
+        public static ref Matrix256<N,double> getrf<N>(Matrix256<N,double> A, Span<int> P, ref Matrix256<N,double> X)
             where N : unmanaged, ITypeNat
         {
             var n = nati<N>();

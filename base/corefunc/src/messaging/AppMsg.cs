@@ -108,7 +108,7 @@ namespace Z0
             if(nonempty(Caller))
                 source += $"{Caller}(";
 
-            if(CallerFile.Nonempty)
+            if(CallerFile.IsNonEmpty)
                 source += SupressFullPath ? $"File: {CallerFile.FileName.Name}" : $"File: {CallerFile.Name}";                        
 
             if(FileLine != null)

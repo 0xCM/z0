@@ -362,7 +362,7 @@ namespace Z0
         /// <summary>
         /// Renders the content as a span of bits
         /// </summary>
-        public Span<bit> ToBitSpan()
+        public Span<bit> ToBits()
         {
             Span<bit> dst = new bit[data.Length];
             for(var i=0; i< data.Length; i++)
@@ -385,7 +385,7 @@ namespace Z0
         /// <summary>
         /// Renders the content as a natural bitspan
         /// </summary>
-        public NatBlock<N,bit> ToBitSpan<N>(N n = default)
+        public NatBlock<N,bit> ToBits<N>(N n = default)
             where N : unmanaged, ITypeNat
         {
             var dst = DataBlocks.natalloc<N,bit>();

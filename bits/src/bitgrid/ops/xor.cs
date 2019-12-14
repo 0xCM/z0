@@ -121,6 +121,22 @@ namespace Z0
             where M : unmanaged, ITypeNat
                 => ginx.vxor<T>(gx,gy);    
 
+ 
+        /// <summary>
+        /// Computes the bitwise xor between subgrids
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The col count type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static SubGrid256<M,N,T> xor<M,N,T>(in SubGrid256<M,N,T> gx, in SubGrid256<M,N,T> gy)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
+                => ginx.vxor<T>(gx,gy);    
+
         /// <summary>
         /// Computes the bitwise XOR between generic bitgrids and stores the result to a caller-supplied target
         /// </summary>

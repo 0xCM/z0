@@ -20,11 +20,9 @@ namespace Z0
     public delegate void Partitioner<S,T>(S src, Span<T> dst)
         where T : unmanaged;
 
-
     public abstract class t_bitpart<X> : t_bits<X>
         where X : t_bitpart<X>, new()
     {        
-
         protected void bitpart_check<A,B>(Partitioner<A,B> part, int count, int width)
             where A : unmanaged
             where B : unmanaged

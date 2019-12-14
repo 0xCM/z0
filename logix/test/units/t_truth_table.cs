@@ -31,7 +31,7 @@ namespace Z0.Logix
             foreach(var op in LogicOpApi.UnaryOpKinds)
             {
                 var table = TruthTables.build(op);
-                var result = table.GetCol(table.ColCount - 1).ToPrimal(n8).Lo;
+                var result = table.GetCol(table.ColCount - 1).ToBitVector(n8).Lo;
                 var sig = TruthTables.sig(op);
                 Claim.eq(result,sig);
             }
@@ -39,7 +39,7 @@ namespace Z0.Logix
             foreach(var op in LogicOpApi.BinaryOpKinds)
             {
                 var table = TruthTables.build(op);
-                var result = table.GetCol(table.ColCount - 1).ToPrimal(n8).Lo;
+                var result = table.GetCol(table.ColCount - 1).ToBitVector(n8).Lo;
                 var sig = TruthTables.sig(op);
                 Claim.eq(result,sig);
             }
@@ -47,7 +47,7 @@ namespace Z0.Logix
             foreach(var op in LogicOpApi.TernaryOpKinds)
             {
                 var table = TruthTables.build(op);
-                var result = table.GetCol(table.ColCount - 1).ToPrimal(n8);
+                var result = table.GetCol(table.ColCount - 1).ToBitVector(n8);
                 var sig = TruthTables.sig(op);
                 Claim.eq(result,sig);
             }

@@ -57,30 +57,24 @@ namespace Z0
         /// </summary>
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
-        public static Span<bit> BitSpan(this IPolyrand random, int length)
-            => random.Bits(length).ToArray();
+        public static Span<bit> TakeBits(this IPolyrand random, int count)
+            => random.Bits().Take(count).ToArray();
 
         /// <summary>
         /// Produces a span populated with a specified number of random bits
         /// </summary>
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
-        public static NatBlock<N,bit> BitSpan<N>(this IPolyrand random, N len = default)
+        public static NatBlock<N,bit> BitBlock<N>(this IPolyrand random, N len = default)
             where N : unmanaged, ITypeNat
-                => random.BitSpan((int)len.NatValue);
+                => random.TakeBits((int)len.NatValue);
 
         /// <summary>
-        /// Produces a span populated with a specified number of random bits
+        /// Fills a caller-supplied target with random bits
         /// </summary>
         /// <param name="random">The random source</param>
-        public static void BitSpan(this IPolyrand random, Span<bit> dst)
-        {
-            var src = random.Bits(dst.Length);
-            var it = src.GetEnumerator();
-            var index = 0;
-            while(it.MoveNext())
-                dst[index++] = it.Current;            
-        }
+        public static void BitFill(this IPolyrand random, Span<bit> dst)
+            => random.TakeBits(dst.Length).CopyTo(dst);
 
         /// <summary>
         /// Produces a bitstring with a specified length

@@ -13,7 +13,6 @@ namespace Z0
 
     partial class BitVectorX
     {
-
         /// <summary>
         /// Formats the bitvector as a bitstring
         /// </summary>
@@ -91,5 +90,4 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => BitVector.format(src, fmt);
     }
-
 }

@@ -35,37 +35,37 @@ namespace Z0
             require(this.members.Length == n);
         }
 
-        public VBlock256<N, T> Next<T>() 
+        public RowVector256<N, T> Next<T>() 
             where T : unmanaged
         {
-            var dst = Vector.blockalloc<N,T>();
+            var dst = RowVector.blockalloc<N,T>();
             for(var i=0; i<n; i++)
                 dst[i] = members[i].Next<T>();
             return dst;
         }
 
-        public VBlock256<N, T> Next<T>(T min) 
+        public RowVector256<N, T> Next<T>(T min) 
             where T : unmanaged
         {
-            var dst = Vector.blockalloc<N,T>();
+            var dst = RowVector.blockalloc<N,T>();
             for(var i=0; i<n; i++)
                 dst[i] = members[i].Next<T>(min);
             return dst;
         }
 
-        public VBlock256<N, T> Next<T>(T min, T max) 
+        public RowVector256<N, T> Next<T>(T min, T max) 
             where T : unmanaged
         {
-            var dst = Vector.blockalloc<N,T>();
+            var dst = RowVector.blockalloc<N,T>();
             for(var i=0; i<n; i++)
                 dst[i] = members[i].Next<T>(min,max);
             return dst;
         }
 
-        public VBlock256<N, T> Next<T>(Interval<T> domain)
+        public RowVector256<N, T> Next<T>(Interval<T> domain)
              where T : unmanaged
         {
-            var dst = Vector.blockalloc<N,T>();
+            var dst = RowVector.blockalloc<N,T>();
             for(var i=0; i<n; i++)
                 dst[i] = members[i].Next<T>(domain);
             return dst;

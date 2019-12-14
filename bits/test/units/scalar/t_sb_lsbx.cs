@@ -5,16 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
 
     using static zfunc;
 
     public class t_sb_lsbx : t_sb<t_sb_lsbx>
     {
-        public void xlsb_basecases()
+        public void xlsb_outline()
         {
-            //xlsb is an identity function over a domain consisting of powers of 2
+            //lsbx is an identity function over a domain consisting of powers of 2
             for(byte i = 0; i< 64; i++)
                 Claim.eq(Pow2.pow(i), gbits.lsbx(Pow2.pow(i)));
         }
@@ -30,6 +28,5 @@ namespace Z0
 
         public void sb_lsbx_64()
             => sb_lsbx_check<ulong>();
-
     }
 }

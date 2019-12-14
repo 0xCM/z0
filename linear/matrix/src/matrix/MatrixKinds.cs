@@ -5,14 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
-    using static nfunc;
-    using static zfunc;
-
     public enum TriangularKind : byte
     {
         

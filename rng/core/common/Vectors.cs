@@ -20,10 +20,10 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="domain">The domain of the random variable</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        public static Vector<T> Vector<T>(this IPolyrand random, int len, Interval<T>? domain = null)
+        public static RowVector<T> Vector<T>(this IPolyrand random, int len, Interval<T>? domain = null)
             where T : unmanaged
         {
-            var dst = Z0.Vector.alloc<T>(len);
+            var dst = Z0.RowVector.alloc<T>(len);
             if(domain != null)
                 random.Fill(domain.Value, len, ref dst[0]);
             else
@@ -39,11 +39,11 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector<N,T> Vector<N,T>(this IPolyrand random, Interval<T> domain, N n = default)
+        public static RowVector<N,T> Vector<N,T>(this IPolyrand random, Interval<T> domain, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var dst = Z0.Vector.alloc<N,T>();
+            var dst = Z0.RowVector.alloc<N,T>();
             random.Fill(domain, ref dst);
             return dst;
         }
@@ -55,11 +55,11 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector<N,T> Vector<N,T>(this IPolyrand random, T min, T max,  N n = default)
+        public static RowVector<N,T> Vector<N,T>(this IPolyrand random, T min, T max,  N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var dst = Z0.Vector.alloc<N,T>();
+            var dst = Z0.RowVector.alloc<N,T>();
             random.Fill(closed(min,max), ref dst);
             return dst;
         }
@@ -71,11 +71,11 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector<N,T> Vector<N,T>(this IPolyrand random, N n = default)
+        public static RowVector<N,T> Vector<N,T>(this IPolyrand random, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var dst = Z0.Vector.alloc<N,T>();
+            var dst = Z0.RowVector.alloc<N,T>();
             random.Fill(ref dst);
             return dst;
         }
@@ -90,7 +90,7 @@ namespace Z0
         /// <typeparam name="S">The sample domain type</typeparam>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector<N,T> Vector<N,S,T>(this IPolyrand random, Interval<S> domain, N n = default)
+        public static RowVector<N,T> Vector<N,S,T>(this IPolyrand random, Interval<S> domain, N n = default)
             where T : unmanaged
             where S : unmanaged
             where N : unmanaged, ITypeNat
@@ -106,7 +106,7 @@ namespace Z0
         /// <typeparam name="S">The source domain type</typeparam>
         /// <typeparam name="T">The target domain type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector<T> Vector<S,T>(this IPolyrand random, int len, Interval<S>? domain = null)        
+        public static RowVector<T> Vector<S,T>(this IPolyrand random, int len, Interval<S>? domain = null)        
             where S: unmanaged
             where T : unmanaged
                 => random.Vector<S>(len,domain).Convert<T>();
@@ -120,7 +120,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static void Fill<N,T>(this IPolyrand random, Interval<T> domain, ref Vector<N,T> vector, N n = default)
+        public static void Fill<N,T>(this IPolyrand random, Interval<T> domain, ref RowVector<N,T> vector, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => random.Fill<T>(domain, nati<N>(), ref vector.Data[0]);
@@ -134,7 +134,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static void Fill<N,T>(this IPolyrand random, ref Vector<N,T> vector, N n = default)
+        public static void Fill<N,T>(this IPolyrand random, ref RowVector<N,T> vector, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => random.Fill<T>(nati<N>(), ref vector.Data[0]);

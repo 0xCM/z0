@@ -101,14 +101,14 @@ namespace Z0
         public static IPolyrand XOrShift1024(ulong[] seed = null)
             => new XOrShift1024(seed ?? Seed1024.Default).ToPolyrand();
 
-        static Vector<N6,uint> Seed6x32 = new uint[]{0xFA243, 0xAD941, 0xBC883, 0xDB193, 0xAA137, 0xB1B39};
+        static RowVector<N6,uint> Seed6x32 = new uint[]{0xFA243, 0xAD941, 0xBC883, 0xDB193, 0xAA137, 0xB1B39};
 
         [MethodImpl(Inline)]
         public static IPointSource<uint> Mrg32k3a()
             => new Mrg32K3A(Seed6x32);
 
         [MethodImpl(Inline)]
-        public static IPointSource<uint> Mrg32k3a(Vector<N6,uint> seed)
+        public static IPointSource<uint> Mrg32k3a(RowVector<N6,uint> seed)
             => new Mrg32K3A(seed);
 
         /// <summary>

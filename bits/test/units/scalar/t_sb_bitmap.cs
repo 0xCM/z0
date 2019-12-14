@@ -11,13 +11,6 @@ namespace Z0
 
     public class t_sb_bitmap : t_sb<t_sb_bitmap>
     {            
-        public void sb_bitmap_basecase()
-        {
-            Claim.eq(7, Bits.pop(BitMask.lomask<uint>(6)));
-            Claim.eq(12, Bits.pop(BitMask.lomask<uint>(11)));
-
-        }
-
         void sb_bitmap_64()
         {
             byte start = 16;
@@ -64,11 +57,8 @@ namespace Z0
                 Claim.eq(bsActual, bsExpect);
 
                 var actual = gbits.bitmap(src, dst, start, count);
-                Claim.eq(bsExpect,actual.ToBitString());
-
-                
+                Claim.eq(bsExpect,actual.ToBitString());                
             }
         }
     }
-
 }

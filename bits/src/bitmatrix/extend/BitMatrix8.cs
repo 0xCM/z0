@@ -69,7 +69,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static Graph<byte> ToGraph(this BitMatrix8 A)
-            => BitMatrix.graph(A);
+            => BitGraph.define(A);
 
         /// <summary>
         /// Packs the matrix into an unsigned 64-bit integer
@@ -114,8 +114,7 @@ namespace Z0
         /// </summary>
         /// <param name="structureOnly">Specifies whether the replication reproduces only structure and is thus equivalent to an allocation</param>
         [MethodImpl(Inline)] 
-        public static BitMatrix8 Replicate(this BitMatrix8 A, bool structureOnly = false)
-            => structureOnly ? BitMatrix.alloc(n8) : BitMatrix.primal(n8, A.Bytes.Replicate());
-
+        public static BitMatrix8 Replicate(this BitMatrix8 A)
+            => BitMatrix.primal(n8, A.Bytes.Replicate());
     }
 }

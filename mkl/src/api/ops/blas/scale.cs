@@ -21,7 +21,7 @@ namespace Z0.Mkl
         /// <param name="a">The value by which to scale the source vector</param>
         /// <param name="X">The source vector</param>
         [MethodImpl(Inline)]
-        public static void scale(float a, VBlock256<float> X)        
+        public static void scale(float a, RowVector256<float> X)        
             => CBLAS.cblas_sscal(X.Length, a, ref head(X), 1);
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0.Mkl
         /// <param name="y">The target vector</param>
         /// <remarks>This adds the overhead of a copy operation on the vector</remarks>
         [MethodImpl(Inline)]
-        public static ref VBlock256<float> scale(float a, in VBlock256<float> x, ref VBlock256<float> y)        
+        public static ref RowVector256<float> scale(float a, in RowVector256<float> x, ref RowVector256<float> y)        
         {
             CBLAS.cblas_sscal(x.Length, a, ref head(x.CopyTo(ref y)), 1);
             return ref y;
@@ -44,7 +44,7 @@ namespace Z0.Mkl
         /// <param name="a">The value by which to scale the source vector</param>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static void scale(double a, VBlock256<double> x)        
+        public static void scale(double a, RowVector256<double> x)        
             => CBLAS.cblas_dscal(x.Length, a, ref head(x), 1);
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0.Mkl
         /// <param name="y">The target vector</param>
         /// <remarks>This adds the overhead of a copy operation on the vector</remarks>
         [MethodImpl(Inline)]
-        public static ref VBlock256<double> scale(double a, in VBlock256<double> x, ref VBlock256<double> y)        
+        public static ref RowVector256<double> scale(double a, in RowVector256<double> x, ref RowVector256<double> y)        
         {
             CBLAS.cblas_dscal(x.Length, a, ref head(x.CopyTo(ref y)), 1);
             return ref y;

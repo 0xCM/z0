@@ -131,7 +131,7 @@ namespace Z0
                 var sum = default(ulong);
                 
                 for(var i=0; i<src.Length; i++)
-                    checked{ sum += src[i];}
+                    sum += src[i];
                 
                 return (uint)(sum/(ulong)src.Length);
             }

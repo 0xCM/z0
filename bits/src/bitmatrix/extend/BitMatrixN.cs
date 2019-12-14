@@ -20,12 +20,12 @@ namespace Z0
                 => new BitMatrix<N, T>(A.Data.Replicate());
 
         [MethodImpl(NotInline)] 
-        public static BitCells<N,T> Diagonal<N,T>(this BitMatrix<N,T> A)
+        public static BitSpan<N,T> Diagonal<N,T>(this BitMatrix<N,T> A)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var order = natval<N>();
-            var dst = BitCells.alloc<N,T>();
+            var dst = BitSpan.alloc<N,T>();
             for(var i=0; i < order; i++)
                 dst[i] = A[i,i];
             return dst;

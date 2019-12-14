@@ -46,7 +46,7 @@ namespace Z0
         /// Creates an N^2 multiplication table for the values [1...N]
         /// </summary>
         /// <typeparam name="N">The table order</typeparam>
-        public static MBlock256<N,byte> products<N>(N n = default)
+        public static Matrix256<N,byte> products<N>(N n = default)
             where N : unmanaged, ITypeNat
         {
             var dst = Matrix.blockalloc<N,byte>();
@@ -58,7 +58,7 @@ namespace Z0
         /// Computes the full multiplication table for GF(256) modulo the canonical polynomial
         /// </summary>
         /// <param name="dst">The target matrix</param>
-        public static ref MBlock256<N256,byte> products(out MBlock256<N256,byte> dst)
+        public static ref Matrix256<N256,byte> products(out Matrix256<N256,byte> dst)
         {
             dst = Matrix.blockalloc<N256,byte>();
             for(uint i=1; i < MemberCount; i++)

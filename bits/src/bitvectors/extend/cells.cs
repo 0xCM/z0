@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="n">The target width selector</param>
         /// <typeparam name="T">The primal cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector16 ToBitVector<T>(this BitCells<T> src, N16 n)
+        public static BitVector16 ToBitVector<T>(this BitSpan<T> src, N16 n)
             where T : unmanaged
                 => src.Data.TakeUInt16();
 
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="n">The target width selector</param>
         /// <typeparam name="T">The primal cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector32 ToBitVector<T>(this BitCells<T> src, N32 n)
+        public static BitVector32 ToBitVector<T>(this BitSpan<T> src, N32 n)
             where T : unmanaged
                 => src.Data.TakeUInt32();
 
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="n">The target width selector</param>
         /// <typeparam name="T">The primal cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector64 ToBitVector<T>(this BitCells<T> src, N64 n)
+        public static BitVector64 ToBitVector<T>(this BitSpan<T> src, N64 n)
             where T : unmanaged
                 => src.Data.TakeUInt64();
  
@@ -51,7 +51,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitCells<N8,byte> ToBitCells(this BitVector8 src)
+        public static BitSpan<N8,byte> ToBitCells(this BitVector8 src)
             => src;
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitCells<N16,ushort> ToBitCells(this BitVector16 src)
+        public static BitSpan<N16,ushort> ToBitCells(this BitVector16 src)
             => src;
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitCells<N64,ulong> ToBitCells(this BitVector64 src)
+        public static BitSpan<N64,ulong> ToBitCells(this BitVector64 src)
             => src;
 
         /// <summary>
@@ -77,9 +77,9 @@ namespace Z0
         /// <param name="len">The bitvector length, if specified</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<T> ToBitCells<T>(this Span<T> src, int len)
+        public static BitSpan<T> ToBitCells<T>(this Span<T> src, int len)
             where T : unmanaged
-                => BitCells.load(src,len);
+                => BitSpan.load(src,len);
 
         /// <summary>
         /// Extracts the bitcells from a source vector
@@ -87,14 +87,14 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<T> ToBitCells<T>(this BitVector<T> src)
+        public static BitSpan<T> ToBitCells<T>(this BitVector<T> src)
             where T : unmanaged
-                => BitCells.literals(src.Scalar);
+                => BitSpan.literals(src.Scalar);
 
         [MethodImpl(Inline)]
-        public static BitCells<N,T> ToBitCells<N,T>(this BitVector128<N,T> src, N n = default)
+        public static BitSpan<N,T> ToBitCells<N,T>(this BitVector128<N,T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitCells.load(src.data.ToSpan(),n);
+                => BitSpan.load(src.data.ToSpan(),n);
     }
 }

@@ -18,7 +18,7 @@ namespace Z0
             while(pos < max)
                 pos++;
 
-            Claim.eq(pos.LinearIndex, max.LinearIndex);
+            Claim.eq(pos.BitIndex, max.BitIndex);
 
         }
 
@@ -29,7 +29,7 @@ namespace Z0
             while(pos > min)
                 pos--;
 
-            Claim.eq(pos.LinearIndex, min.LinearIndex);
+            Claim.eq(pos.BitIndex, min.BitIndex);
         }
 
         public void bit_index_add()

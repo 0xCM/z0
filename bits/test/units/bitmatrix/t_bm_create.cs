@@ -106,7 +106,7 @@ namespace Z0
         public void nbm_broadcast_7x9x8()
         {
             const byte pattern = 0b01010101;
-            var fill = BitCells.alloc(n9, pattern);
+            var fill = BitSpan.alloc(n9, pattern);
             var matrix = BitMatrix.broadcast(fill, n7);
             for(var i=0; i<matrix.RowCount; i++)
                 Claim.yea(fill == matrix[i]);

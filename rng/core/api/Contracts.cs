@@ -22,7 +22,7 @@ namespace Z0
         /// Retrieves the next vector from the suite, where the components 
         /// are bound only by the domain of the type
         /// </summary>
-        VBlock256<N,T> Next<T>()
+        RowVector256<N,T> Next<T>()
             where T : unmanaged;
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The point type</typeparam>
-        VBlock256<N,T> Next<T>(T max)
+        RowVector256<N,T> Next<T>(T max)
             where T : unmanaged;
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The point type</typeparam>
-        VBlock256<N,T> Next<T>(T min, T max)
+        RowVector256<N,T> Next<T>(T min, T max)
             where T : unmanaged;
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="domain">The range</param>
         /// <typeparam name="T">The point type</typeparam>
-        VBlock256<N,T> Next<T>(Interval<T> domain)
+        RowVector256<N,T> Next<T>(Interval<T> domain)
             where T : unmanaged;
         
         /// <summary>
