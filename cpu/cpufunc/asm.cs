@@ -11,7 +11,7 @@ namespace Z0
 
     public static partial class asm
     {                        
-        public static AsmInstrExpr expr(MnemonicKind kind, params AsmExpr[] args)
+        public static AsmInstrExpr expr(MnemonicKind kind, params IAsmExpr[] args)
             => AsmExpr.Define(kind,args);
 
     }

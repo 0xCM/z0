@@ -9,18 +9,31 @@ namespace Z0
 
     using static zfunc;
 
+    public interface IRegExpr : IAsmExpr
+    {
+
+    }
+
     /// <summary>
     /// Identifies a register
     /// </summary>
-    public class RegExpr : AsmExpr
+    public class RegExpr : AsmExpr, IRegExpr
     {
 
 
 
     }
 
-    public abstract class RegExpr<T> : RegExpr
-        where T : Enum
+    public interface IRegExpr<T> : IRegExpr
+        where T : unmanaged, Enum
+    {
+        
+        T Kind {get;}
+
+    }   
+
+    public abstract class RegExpr<T> :  RegExpr, IRegExpr<T>
+        where T : unmanaged, Enum
     {
         public T Kind {get;}
 

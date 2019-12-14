@@ -23,10 +23,7 @@ namespace Z0
                 vpaddwBytes.Liberate();
                 vpadddBytes.Liberate();
             }
-
         }
-
-
 
         [MethodImpl(Inline)]
         public static AsmCode<T> Add128Code<T>()

@@ -9,7 +9,6 @@ namespace Z0
 
     using static zfunc;
 
-
     /// <summary>
     /// Represents a function call with an argument count of natural type
     /// </summary>
@@ -26,9 +25,8 @@ namespace Z0
     public abstract class AsmCallExpr<N> : AsmInstrExpr
         where N : unmanaged, ITypeNat
     {
-        public readonly int ArgCount
-            = (int)new N().NatValue;
-
+        public int ArgCount => natval<N>();
+            
         /// <summary>
         /// Specfies the function identifier
         /// </summary>

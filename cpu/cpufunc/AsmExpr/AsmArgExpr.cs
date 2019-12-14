@@ -11,7 +11,7 @@ namespace Z0
 
     public class AsmArgExpr : AsmExpr
     {
-        public AsmArgExpr(int index, AsmExpr val)
+        public AsmArgExpr(int index, IAsmExpr val)
         {
             this.ArgIdx = index;
             this.ArgVal = val;
@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// The argment value
         /// </summary>
-        public AsmExpr ArgVal {get;}
+        public IAsmExpr ArgVal {get;}
     }
 
 

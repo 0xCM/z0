@@ -13,8 +13,7 @@ namespace Z0
     using static zfunc;
 
     partial class dinx    
-    {        
-        
+    {                
         /// <summary>
         /// __m256i _mm256_permute2x128_si256 (__m256i a, __m256i b, const int imm8) VPERM2I128 ymm, ymm, ymm/m256, imm8
         /// </summary>

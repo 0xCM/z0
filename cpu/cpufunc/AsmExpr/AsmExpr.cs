@@ -8,12 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-
-    public abstract class AsmExpr
+    
+    public interface IAsmExpr
     {
 
-        public static AsmInstrExpr Define(MnemonicKind mnemonic, params AsmExpr[] args)
-            => new AsmInstrExpr(mnemonic, args);
+
     }
 
+    public abstract class AsmExpr : IAsmExpr
+    {
+
+        public static AsmInstrExpr Define(MnemonicKind mnemonic, params IAsmExpr[] args)
+            => new AsmInstrExpr(mnemonic, args);
+    }
 }

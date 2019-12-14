@@ -10,16 +10,18 @@ namespace Z0
     using static zfunc;
 
 
-   public static partial class AsmSymTypes
+    public static partial class AsmSymTypes
     {
+
         //~ rax
-        public sealed class RAX : Reg64{ internal RAX() : base(GpRegId64.rax) {} }
 
-        public sealed class EAX : Reg32{ internal EAX() : base(GpRegId32.eax) {} }
+        public readonly struct RAX : IReg64 { public GpRegId64 Kind => GpRegId64.rax;}
 
-        public sealed class AX : Reg16{ internal AX() : base(GpRegId16.ax) {} }
+        public readonly struct EAX : IReg32 { public GpRegId32 Kind => GpRegId32.eax;}
 
-        public sealed class AL : Reg8{ internal AL() : base(GpRegId8.al) {} }
+        public readonly struct AX : IReg16 { public GpRegId16 Kind => GpRegId16.ax;}
+
+        public readonly struct AL : IReg8 { public GpRegId8 Kind => GpRegId8.al;}
 
         //~ ecx
         public sealed class RCX : Reg64{ internal RCX() : base(GpRegId64.rcx) {} }
@@ -171,39 +173,38 @@ namespace Z0
 
         //~XMM
 
-        public sealed class XMM0 : Reg128{ internal XMM0() : base(XmmRegId.xmm0) {} }
+        public readonly struct XMM0 : IReg128 {public XmmRegId Kind => XmmRegId.xmm0; }
 
-        public sealed class XMM1 : Reg128{ internal XMM1() : base(XmmRegId.xmm1) {} }
-
-        public sealed class XMM2 : Reg128{ internal XMM2() : base(XmmRegId.xmm2) {} }
-
-        public sealed class XMM3 : Reg128{ internal XMM3() : base(XmmRegId.xmm3) {} }
-
-        public sealed class XMM4 : Reg128{ internal XMM4() : base(XmmRegId.xmm4) {} }
-
-        public sealed class XMM5 : Reg128{ internal XMM5() : base(XmmRegId.xmm5) {} }
-
-        public sealed class XMM6 : Reg128{ internal XMM6() : base(XmmRegId.xmm6) {} }
-
-        public sealed class XMM7 : Reg128{ internal XMM7() : base(XmmRegId.xmm7) {} }
-
-        public sealed class XMM8 : Reg128{ internal XMM8() : base(XmmRegId.xmm8) {} }
-
-        public sealed class XMM9 : Reg128{ internal XMM9() : base(XmmRegId.xmm9) {} }
-
-        public sealed class XMM10 : Reg128{ internal XMM10() : base(XmmRegId.xmm10) {} }
-
-        public sealed class XMM11 : Reg128{ internal XMM11() : base(XmmRegId.xmm11) {} }
-
-        public sealed class XMM12 : Reg128{ internal XMM12() : base(XmmRegId.xmm12) {} }
-
-
-        public sealed class XMM13 : Reg128{ internal XMM13() : base(XmmRegId.xmm13) {} }
-
-
-        public sealed class XMM14 : Reg128{ internal XMM14() : base(XmmRegId.xmm14) {} }
-
-        public sealed class XMM15 : Reg128{ internal XMM15() : base(XmmRegId.xmm15) {} }
+        public readonly struct XMM1 : IReg128 {public XmmRegId Kind => XmmRegId.xmm1; }
+        
+        public readonly struct XMM2 : IReg128 {public XmmRegId Kind => XmmRegId.xmm2; }
+        
+        public readonly struct XMM3 : IReg128 {public XmmRegId Kind => XmmRegId.xmm3; }
+        
+        public readonly struct XMM4 : IReg128 {public XmmRegId Kind => XmmRegId.xmm4; }
+        
+        public readonly struct XMM5 : IReg128 {public XmmRegId Kind => XmmRegId.xmm5; }
+        
+        public readonly struct XMM6 : IReg128 {public XmmRegId Kind => XmmRegId.xmm6; }
+        
+        public readonly struct XMM7 : IReg128 {public XmmRegId Kind => XmmRegId.xmm7; }
+        
+        public readonly struct XMM8 : IReg128 {public XmmRegId Kind => XmmRegId.xmm8; }
+        
+        public readonly struct XMM9 : IReg128 {public XmmRegId Kind => XmmRegId.xmm9; }
+        
+        public readonly struct XMM10 : IReg128 {public XmmRegId Kind => XmmRegId.xmm10; }
+        
+        public readonly struct XMM11 : IReg128 {public XmmRegId Kind => XmmRegId.xmm11; }
+        
+        public readonly struct XMM12 : IReg128 {public XmmRegId Kind => XmmRegId.xmm12; }
+        
+        public readonly struct XMM13 : IReg128 {public XmmRegId Kind => XmmRegId.xmm13; }
+        
+        public readonly struct XMM14 : IReg128 {public XmmRegId Kind => XmmRegId.xmm14; }
+        
+        public readonly struct XMM15 : IReg128 {public XmmRegId Kind => XmmRegId.xmm15; }
+        
 
         //~XMM
 
@@ -213,11 +214,9 @@ namespace Z0
 
         public sealed class YMM2 : Reg256{ internal YMM2() : base(YmmRegId.ymm2) {} }
 
-
         public sealed class YMM3 : Reg256{ internal YMM3() : base(YmmRegId.ymm3) {} }
 
         public sealed class YMM4 : Reg256{ internal YMM4() : base(YmmRegId.ymm4) {} }
-
 
         public sealed class YMM5 : Reg256{ internal YMM5() : base(YmmRegId.ymm5) {} }
 

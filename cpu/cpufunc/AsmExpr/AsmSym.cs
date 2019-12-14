@@ -13,13 +13,14 @@ namespace Z0
     public static partial class AsmSym
     {
          //~ rax
-        public static readonly RAX rax = new RAX();
+        public static RAX rax => default;
 
-        public static readonly EAX eax = new EAX();
+        public static EAX eax => default;
 
-        public static readonly AX ax = new AX();
+        public static AX ax => default;
 
-        public static readonly AL al = new AL();
+        public static AL al => default;
+
 
         //~ ecx
         public static readonly RCX rcx = new RCX();
@@ -171,37 +172,37 @@ namespace Z0
 
         //~XMM
 
-        public static readonly XMM0 xmm0 = new XMM0();
+        public static XMM0 xmm0 => default;
 
-        public static readonly XMM1 xmm1 = new XMM1();
+        public static XMM1 xmm1 => default;
 
-        public static readonly XMM2 xmm2 = new XMM2();
+        public static XMM2 xmm2 => default;
 
-        public static readonly XMM3 xmm3 = new XMM3();
+        public static XMM3 xmm3 => default;
 
-        public static readonly XMM4 xmm4 = new XMM4();
+        public static XMM4 xmm4 => default;
 
-        public static readonly XMM5 xmm5 = new XMM5();
+        public static XMM5 xmm5 => default;
 
-        public static readonly XMM6 xmm6 = new XMM6();
+        public static XMM6 xmm6 => default;
 
-        public static readonly XMM7 xmm7 = new XMM7();
+        public static XMM7 xmm7 => default;
 
-        public static readonly XMM8 xmm8 = new XMM8();
+        public static XMM8 xmm8 => default;
 
-        public static readonly XMM9 xmm9 = new XMM9();
+        public static XMM9 xmm9 => default;
 
-        public static readonly XMM10 xmm10 = new XMM10();
+        public static XMM10 xmm10 => default;
 
-        public static readonly XMM11 xmm11 = new XMM11();
+        public static XMM11 xmm11 => default;
 
-        public static readonly XMM12 xmm12 = new XMM12();
+        public static XMM12 xmm12 => default;
 
-        public static readonly XMM13 xmm13 = new XMM13();
+        public static XMM13 xmm13 => default;
 
-        public static readonly XMM14 xmm14 = new XMM14();
+        public static XMM14 xmm14 => default;
 
-        public static readonly XMM15 xmm15 = new XMM15();
+        public static XMM15 xmm15 => default;
 
         //~YMM
 

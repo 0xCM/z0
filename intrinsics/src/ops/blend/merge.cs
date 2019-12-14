@@ -39,8 +39,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ulong> vmerge(Vector128<ulong> x, Vector128<ulong> y, Blend2x64 lo, Blend2x64 hi)        
             => vmerge(x,y, (byte)lo, (byte)hi);
-
-
     }
 
 }

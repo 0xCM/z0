@@ -5,15 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.IO;
-    using System.IO.Pipes;
-    using System.Buffers;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-
 
     public readonly struct InPair<T>
         where T : unmanaged
@@ -47,8 +41,5 @@ namespace Z0
             x = this.x;
             y = this.y;
         }
-
     }
-
-
 }

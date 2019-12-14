@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public class AsmInstrExpr : AsmExpr
     {
-        public AsmInstrExpr(MnemonicKind mnemonic, params AsmExpr[] args)
+        public AsmInstrExpr(MnemonicKind mnemonic, params IAsmExpr[] args)
         {
             this.Mnemonic = mnemonic;
             this.Args = new AsmArgList(args.Mapi((i,a) => new AsmArgExpr(i,a)));
