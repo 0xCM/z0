@@ -33,24 +33,28 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static SubGrid32<N8,N3,uint> ToBitGrid(this Perm8 src)
-            => BitGrid.perm(src);
+        public static SubGrid32<N8,N3,uint> ToSubGrid(this NatPerm<N8> src)
+            => BitGrid.from(src);            
 
         [MethodImpl(Inline)]
-        public static BitGrid32<uint> ToBitGrid(this NatPerm<N8> perm)
-            => BitGrid.perm(perm);
+        public static SubGrid32<N8,N3,uint> ToSubGrid(this Perm8 src)
+            => (uint)src;
 
         [MethodImpl(Inline)]
-        public static BitGrid64<N16,N4,ulong> ToBitGrid(this Perm16 src)
-            => BitGrid.perm(src);
+        public static Perm8 ToPerm(this SubGrid32<N8,N3,uint> src)
+            => (Perm8)src.Data;
+
 
         [MethodImpl(Inline)]
         public static BitGrid64<N16,N4,ulong> ToBitGrid(this NatPerm<N16> src)
-            => BitGrid.perm(src);
-
+            => BitGrid.from(src);
 
         [MethodImpl(Inline)]
-        public static Perm16 ToPerm16(this BitGrid64<N16,N4,ulong> src)
-            => BitGrid.perm(src);
+        public static BitGrid64<N16,N4,ulong> ToBitGrid(this Perm16 src)
+            => (ulong)src;
+
+        [MethodImpl(Inline)]
+        public static Perm16 ToPerm(this BitGrid64<N16,N4,ulong> src)
+            => (Perm16)src.Data;
     }
 }

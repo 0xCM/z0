@@ -10,6 +10,7 @@ namespace Z0.OpCodes
     using static zfunc;
     
 
+    [OpCodeProvider]
     public static class sbits
     {
 
@@ -83,10 +84,7 @@ namespace Z0.OpCodes
 
         public static ulong gather_g64u(ulong src, ulong mask)
             => ginx.gather(src,mask);
-
-
-
-
+            
         public static uint set_bit(uint src, byte pos, bit state)
             => gbits.set(src, pos, state);
 

@@ -257,6 +257,11 @@ namespace Z0
         public const ushort Lsb16x8x7 = (ushort)Lsb8x8x7 | (ushort)Lsb8x8x7 << 8;
 
         /// <summary>
+        /// [01111111 11111111]
+        /// </summary>
+        public const ushort Lsb16x16x15 = ushort.MaxValue >> 1; 
+
+        /// <summary>
         /// [00000011 00000011 00000011 00000011]
         /// </summary>
         public const uint Lsb32x8x2 = (uint)Lsb16x8x2 | (uint)Lsb16x8x2 << 16;

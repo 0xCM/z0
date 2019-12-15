@@ -62,6 +62,46 @@ namespace Z0
         public static BitVector64 ToBitVector(this ulong src)
             => src;
 
- 
+        /// <summary>
+        /// Creates a 24-bit bitvector from an 8-bit scalar
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector24 ToBitVector(this byte src, N24 n)
+            => src;
+
+        /// <summary>
+        /// Creates a 24-bit bitvector from a 16-bit scalar
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector24 ToBitVector(this ushort src, N24 n)
+            => src;
+
+        /// <summary>
+        /// Creates a 24-bit bitvector from a 32-bit scalar
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector24 ToBitVector(this uint src, N24 n)
+            => src;
+
+        /// <summary>
+        /// Creates a 24-bit bitvector from a 64-bit scalar
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector24 ToBitVector(this ulong src, N24 n)
+            => (uint)src;
+
+        /// <summary>
+        /// Converts an enumeration value to a bitstring
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The enumeration type</typeparam>
+        [MethodImpl(Inline)]   
+        public static BitVector24 ToBitVector<T>(this T src, N24 n)
+            where T : unmanaged, Enum
+                => evalue<T,uint>(src);
    }
 }

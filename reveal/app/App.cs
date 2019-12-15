@@ -97,26 +97,29 @@ namespace Z0
         void Disassemble(bool asm, bool cil)
         {
             Disassemble(new ExperimentalScenarios());
-            Disassemble(typeof(inxoc));    
-            Disassemble(typeof(inxsoc));    
             Disassemble(typeof(OC.vshift));  
-            Disassemble(typeof(bvoc));    
-            Disassemble(typeof(bgoc));   
             Disassemble(typeof(OC.natoc));    
             Disassemble(typeof(OC.bitmask));
             Disassemble(typeof(OC.bitstore));
             Disassemble(typeof(OC.butterfly));    
             Disassemble(typeof(OC.memory));    
-            Disassemble(typeof(gmoc));    
             Disassemble(typeof(OC.convert));   
             Disassemble(typeof(OC.pop));   
             Disassemble(typeof(OC.sbits));    
             Disassemble(typeof(OC.logix));
+            Disassemble(typeof(OC.logixmat));
             Disassemble(typeof(OC.blend));
-            Disassemble(typeof(zfoc));    
+            Disassemble(typeof(OC.rowbits));
             Disassemble(typeof(OC.bitconvert));    
             Disassemble(typeof(OC.vpattern));    
+            Disassemble(typeof(OC.bitmat));    
             Disassemble(typeof(SimdPack));
+            Disassemble(typeof(zfoc));    
+            Disassemble(typeof(gmathops));    
+            Disassemble(typeof(bvoc));    
+            Disassemble(typeof(bgoc));   
+            Disassemble(typeof(inxoc));    
+            Disassemble(typeof(inxsoc));    
 
         }
 
@@ -156,56 +159,11 @@ namespace Z0
     }
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public class OpCodeHostAttribute : Attribute
+    public class OpCodeProvider : Attribute
     {
 
 
     }
 
-    /// <summary>
-    /// Opcodes for scalar bit-level operations
-    /// </summary>
-    [OpCodeHost]
-    public static partial class bvoc
-    {
-
-    }
-
-    /// <summary>
-    /// Primal math op codes
-    /// </summary>
-    [OpCodeHost]
-    public static partial class gmoc
-    {
-
-    }
-
-    [OpCodeHost]
-    public static partial class bgoc
-    {
-        
-    }
-
-    /// <summary>
-    /// Floating-point op codes
-    /// </summary>
-    [OpCodeHost]
-    public static partial class fpoc
-    {
-
-    }
-
-    public static partial class zfoc
-    {
-        
-    }
-
-    /// <summary>
-    /// Opcodes for intrinsic vectorized operations
-    /// </summary>
-    [OpCodeHost]
-    public static partial class inxoc
-    {
-
-    }
+ 
 }

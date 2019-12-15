@@ -126,7 +126,10 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ref BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => ref BitMatrix.and(A,B, ref Z);
+        {
+            BitMatrix.and(A, B, Z);
+            return ref Z;
+        }
 
         [MethodImpl(Inline)]
         public static BitMatrix<T> nand<T>(in BitMatrix<T> A, in BitMatrix<T> B)

@@ -13,39 +13,15 @@ namespace Z0
     partial class BitMatrix
     {        
         /// <summary>
-        /// Allocates a square, zero-filled generic bitmatrix
+        /// Allocates a square generic bitmatrix filled with a specified row
         /// </summary>
         /// <typeparam name="T">The primal type over which the bitmatrix is constructed</typeparam>
         [MethodImpl(NotInline)]
-        public static BitMatrix<T> alloc<T>()
+        public static BitMatrix<T> init<T>(BitVector<T> src)
             where T : unmanaged
         {
             Span<T> content = new T[BitMatrix<T>.N];
-            return new BitMatrix<T>(content);
-        }
-
-        /// <summary>
-        /// Allocates a generic bitmatrix
-        /// </summary>
-        /// <typeparam name="T">The primal type over which the bitmatrix is constructed</typeparam>
-        [MethodImpl(NotInline)]
-        public static BitMatrix<T> alloc<T>(int rows)
-            where T : unmanaged
-        {
-            Span<T> content = new T[rows];
-            return new BitMatrix<T>(content);
-        }
-
-        /// <summary>
-        /// Allocates a square, generic bitmatrix filled with a specified row
-        /// </summary>
-        /// <typeparam name="T">The primal type over which the bitmatrix is constructed</typeparam>
-        [MethodImpl(NotInline)]
-        public static BitMatrix<T> alloc<T>(BitVector<T> fill)
-            where T : unmanaged
-        {
-            Span<T> content = new T[BitMatrix<T>.N];
-            content.Fill(fill);
+            content.Fill(src);
             return new BitMatrix<T>(content);
         }
 
@@ -54,48 +30,87 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal type over which the bitmatrix is constructed</typeparam>
         [MethodImpl(NotInline)]
-        public static BitMatrix<T> alloc<T>(BitVector<T> fill, int rows)
+        public static BitMatrix<T> init<T>(BitVector<T> src, int rows)
             where T : unmanaged
         {
             Span<T> content = new T[rows];
-            content.Fill(fill);
+            content.Fill(src);
             return new BitMatrix<T>(content);
         }
 
         /// <summary>
-        /// Allocates a square bitmatrix of natural order, optionally filled with a nonzero bitpattern
+        /// Allocates a square bitmatrix of natural order filled with a specified row
         /// </summary>
         /// <typeparam name="N">The square dimension</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(NotInline)]
-        public static BitMatrix<N,T> alloc<N,T>(N n = default, T fill = default)
+        public static BitMatrix<N,T> init<N,T>(T src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             Span<T> data = new T[BitMatrix<N,T>.TotalCellCount];
-            if(gmath.nonzero(fill))
-                data.Fill(fill);
+            data.Fill(src);
             return new BitMatrix<N, T>(data);
         }
 
         /// <summary>
-        /// Allocates a bitmatrix of natural dimensions, optionally filled with a nonzero bitpattern
+        /// Allocates a bitmatrix of natural dimensions filled with a specified cell
         /// </summary>
         /// <typeparam name="M">The row dimension</typeparam>
         /// <typeparam name="N">The column dimension</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(NotInline)]
-        public static BitMatrix<M,N,T> alloc<M,N,T>(M m = default, N n = default, T fill = default)
+        public static BitMatrix<M,N,T> init<M,N,T>(T src, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-
             var dst = BitMatrix<M,N,T>.Alloc();
-            if(gmath.nonzero(fill))
-                dst.Data.Fill(fill);
+            dst.Data.Fill(src);
             return dst;
         }
+
+        /// <summary>
+        /// Allocates a zero-filled square generic bitmatrix
+        /// </summary>
+        /// <typeparam name="T">The primal type over which the bitmatrix is constructed</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitMatrix<T> alloc<T>()
+            where T : unmanaged
+                => new BitMatrix<T>(new T[BitMatrix<T>.N]);
+
+        /// <summary>
+        /// Allocates a zero-filled generic bitmatrix with a specified number of rows
+        /// </summary>
+        /// <typeparam name="T">The primal type over which the bitmatrix is constructed</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitMatrix<T> alloc<T>(int rows)
+            where T : unmanaged
+                => new BitMatrix<T>(new T[rows]);
+
+        /// <summary>
+        /// Allocates a zero-filled square bitmatrix of natural order
+        /// </summary>
+        /// <typeparam name="N">The square dimension</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitMatrix<N,T> alloc<N,T>(N n = default, T t = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => new BitMatrix<N, T>(new T[BitMatrix<N,T>.TotalCellCount]);
+
+        /// <summary>
+        /// Allocates a zero-filed bitmatrix of natural dimensions
+        /// </summary>
+        /// <typeparam name="M">The row dimension</typeparam>
+        /// <typeparam name="N">The column dimension</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitMatrix<M,N,T> alloc<M,N,T>(M m = default, N n = default, T t = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BitMatrix<M,N,T>.Alloc();
 
         /// <summary>
         /// Allocates a primal bitmatrix 

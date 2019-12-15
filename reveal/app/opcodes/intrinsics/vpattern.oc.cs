@@ -12,7 +12,7 @@ namespace Z0.OpCodes
 
     using static zfunc;
 
-    [OpCodeHost]
+    [OpCodeProvider]
     public static class vpattern
     {
         public static Vector128<byte> ones_128x8u()

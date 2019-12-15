@@ -10,7 +10,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static zfunc;
-    
+    using static As;
+
     partial class dinx
     {    
         /// <summary>

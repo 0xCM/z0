@@ -11,15 +11,6 @@ namespace Z0
 
     partial class BitMatrix
     {        
-        /// <summary>
-        /// Creates a new generic bitmatrix where each row is initialized to a common source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
-        [MethodImpl(NotInline)]
-        public static BitMatrix<T> broadcast<T>(BitVector<T> src)
-            where T : unmanaged
-                => new BitMatrix<T>(src);
 
         /// <summary>
         /// Overwrites each row of a generic bitmatrix with a specified source vector
@@ -28,65 +19,11 @@ namespace Z0
         /// <param name="A">The target matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
         [MethodImpl(Inline)]
-        public static ref BitMatrix<T> broadcast<T>(BitVector<T> x, ref BitMatrix<T> A)
+        public static ref readonly BitMatrix<T> broadcast<T>(BitVector<T> x, in BitMatrix<T> A)
             where T : unmanaged
         {
             A.Data.Fill(x);
             return ref A;
-        }
-
-        /// <summary>
-        /// Creates a new generic bitmatrix where each row is initialized to a common source vector
-        /// </summary>
-        /// <param name="row">The source vector used to fill each row</param>
-        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
-        [MethodImpl(NotInline)]
-        public static BitMatrix<N,T> broadcast<N,T>(in BitSpan<N,T> row)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-        {
-            var matrix = alloc<N,T>();
-            var count = BitSpan<N,T>.SegCount;
-            var n= natval<N>();
-            ref readonly var src = ref row.Head;
-            ref var dst = ref matrix.Head;
-            for(var i=0; i< n; i++)
-                memcpy(in src, ref seek(ref dst, i*count), (uint)count);
-            return matrix;
-        }
-
-        /// <summary>
-        /// Creates a new generic bitmatrix where each row is initialized to a common source vector
-        /// </summary>
-        /// <param name="row">The source vector used to fill each row</param>
-        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
-        [MethodImpl(NotInline)]
-        public static BitMatrix<M,N,T> broadcast<M,N,T>(in BitSpan<N,T> row, M m = default)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-            where M : unmanaged, ITypeNat
-        {
-            var matrix = alloc<M,N,T>();
-            var count = BitSpan<N,T>.SegCount;
-            var n= natval<N>();
-            ref readonly var src = ref row.Head;
-            ref var dst = ref matrix.Head;
-            for(var i=0; i< n; i++)
-                memcpy(in src, ref seek(ref dst, i*count), (uint)count);
-            return matrix;
-        }
-
-
-        /// <summary>
-        /// Creates a new primal bitmatrix where each row is initialized to a common source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix8 broadcast(BitVector8 x)
-        {
-            var A = alloc(n8);
-            A.data.Fill(x);
-            return A;
         }
 
         /// <summary>
@@ -95,79 +32,43 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="A">The target matrix</param>
         [MethodImpl(Inline)]
-        public static ref BitMatrix8 broadcast(BitVector8 x, ref BitMatrix8 A)
+        public static ref readonly BitMatrix8 broadcast(BitVector8 x, in BitMatrix8 A)
         {
             A.data.Fill(x);
             return ref A;
         }
 
         /// <summary>
-        /// Creates a new primal bitmatrix where each row is initialized to a common source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix16 broadcast(BitVector16 x)
-        {
-            var A = alloc(n16);
-            A.Data.Fill(x);
-            return A;
-        }
-
-        /// <summary>
         /// Overwrites each row of a primal bitmatrix with a specified source vector
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="A">The target matrix</param>
         [MethodImpl(Inline)]
-        public static ref BitMatrix16 broadcast(BitVector16 x, ref BitMatrix16 A)
+        public static ref readonly BitMatrix16 broadcast(BitVector16 x, in BitMatrix16 A)
         {
             A.Data.Fill(x);
             return ref A;
         }
 
         /// <summary>
-        /// Creates a new primal bitmatrix where each row is initialized to a common source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix32 broadcast(BitVector32 x)
-        {
-            var A = alloc(n32);
-            A.Data.Fill(x);
-            return A;
-        }
-
-        /// <summary>
         /// Overwrites each row of a primal bitmatrix with a specified source vector
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="A">The target matrix</param>
         [MethodImpl(Inline)]
-        public static ref BitMatrix32 broadcast(BitVector32 x, ref BitMatrix32 A)
+        public static ref readonly BitMatrix32 broadcast(BitVector32 x, in BitMatrix32 A)
         {
             A.Data.Fill(x);
             return ref A;
         }
 
         /// <summary>
-        /// Creates a new primal bitmatrix where each row is initialized to a common source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix64 broadcast(BitVector64 x)
-        {
-            var A = alloc(n64);
-            A.Bytes.AsUInt64().Fill(x);
-            return A;
-        }
-
-        /// <summary>
         /// Overwrites each row of a primal bitmatrix with a specified source vector
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="A">The target matrix</param>
         [MethodImpl(Inline)]
-        public static ref BitMatrix64 broadcast(BitVector64 x, ref BitMatrix64 A)
+        public static ref readonly BitMatrix64 broadcast(BitVector64 x, in BitMatrix64 A)
         {
             A.Data.Fill(x);
             return ref A;

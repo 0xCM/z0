@@ -14,7 +14,7 @@ namespace Z0
 
     partial class BitMatrix
     {
-        /// <summary>
+       /// <summary>
         /// Computes the logical And between two generic bitmatrices, returning the allocated result
         /// </summary>
         /// <param name="A">The left matrix</param>
@@ -34,16 +34,17 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        /// <param name="Z">The target matrix</param>
+        /// <param name="dst">The target matrix</param>
         /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>        
         [MethodImpl(Inline)]
-        public static ref BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref readonly BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> dst)
             where T : unmanaged
         {
-            BitSquare.and(in A.Head, in B.Head, ref Z.Head);
-            return ref Z;
+            BitSquare.and(in A.Head, in B.Head, ref dst.Head);
+            return ref dst;
         }
 
+ 
         /// <summary>
         /// Computes the logical And between two source bitmatrices and returns the allocated result to the caller
         /// </summary>
@@ -71,12 +72,12 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        /// <param name="Z">The target matrix</param>
+        /// <param name="dst">The target matrix</param>
         [MethodImpl(Inline)]
-        public static ref BitMatrix8 and(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
+        public static ref readonly BitMatrix8 and(in BitMatrix8 A, in BitMatrix8 B, in BitMatrix8 dst)
         {
-            BitSquare.and(in A.Head, in B.Head, ref Z.Head);
-            return ref Z;
+            BitSquare.and(in A.Head, in B.Head, ref dst.Head);
+            return ref dst;
         }
 
         /// <summary>
@@ -97,12 +98,12 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        /// <param name="Z">The target matrix</param>
+        /// <param name="dst">The target matrix</param>
         [MethodImpl(Inline)]
-        public static ref BitMatrix16 and(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 Z)
+        public static ref readonly BitMatrix16 and(in BitMatrix16 A, in BitMatrix16 B, in BitMatrix16 dst)
         {
-            BitSquare.and(in A.Head, in B.Head, ref Z.Head);
-            return ref Z;
+            BitSquare.and(in A.Head, in B.Head, ref dst.Head);
+            return ref dst;
         }
 
         /// <summary>
@@ -125,7 +126,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         /// <param name="Z">The target matrix</param>
         [MethodImpl(Inline)]
-        public static ref BitMatrix32 and(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 Z)
+        public static ref readonly BitMatrix32 and(in BitMatrix32 A, in BitMatrix32 B, in BitMatrix32 Z)
         {
             BitSquare.and(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
@@ -149,42 +150,13 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        /// <param name="Z">The target matrix</param>
+        /// <param name="dst">The target matrix</param>
         [MethodImpl(Inline)]
-        public static ref BitMatrix64 and(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 Z)
+        public static ref readonly BitMatrix64 and(in BitMatrix64 A, in BitMatrix64 B, in BitMatrix64 dst)
         {
-            BitSquare.and(in A.Head, in B.Head, ref Z.Head);
-            return ref Z;
+            BitSquare.and(in A.Head, in B.Head, ref dst.Head);
+            return ref dst;
         }
 
-        /// <summary>
-        /// Computes the bitwise AND between two square bitmatrices of common natural order and stores the
-        /// result a caller-supplied target matrix
-        /// </summary>
-        /// <param name="A">The first source operand</param>
-        /// <param name="B">The second source operand</param>
-        /// <param name="C">The target</param>
-        /// <typeparam name="N">The matrix order</typeparam>
-        /// <typeparam name="T">The matrix storage type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref BitMatrix<N,T> and<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B, ref BitMatrix<N,T> C)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            mathspan.and(A.Data, B.Data, C.Data);
-            return ref C;
-        }
-
-        /// <summary>
-        /// Computes the bitwise AND between two square bitmatrices of common order
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitMatrix<N,T> and<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            var C = alloc<N,T>();
-            return and(in A, in B, ref C);
-        }
     }
 }

@@ -86,7 +86,6 @@ namespace Z0.Logix
                 case BinaryBitwiseOpKind.ConverseNonimplication: return cnotimply(A,B);
                 default: return dne(kind,A,B);
             }
-
         }
 
         public static BitMatrix<T> eval<T>(BinaryBitwiseOpKind kind, BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)

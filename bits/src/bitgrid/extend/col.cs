@@ -23,7 +23,5 @@ namespace Z0
         public static BitVector<N4,byte> Col<T>(this BitGrid64<N4,N16,T> g, int index)
             where T : unmanaged
                 => BitGrid.col(g,index);
-
     }
-
 }

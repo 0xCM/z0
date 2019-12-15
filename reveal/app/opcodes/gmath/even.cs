@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class gmoc
+    partial class gmathops
     {
         public static bit even_d8i(sbyte x)
             => zfunc.even(x);

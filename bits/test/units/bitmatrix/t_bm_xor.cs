@@ -11,38 +11,35 @@ namespace Z0
 
     public class t_bm_xor : t_bm<t_bm_xor>
     {        
-        public void gbm_xor_8()
-            => gbm_xor_check<byte>();
+        public void bm_xor_g8x8x8()
+            => bm_xor_check<byte>();
 
-        public void gbm_xor_16()
-            => gbm_xor_check<ushort>();
+        public void bm_xor_g16x16x16()
+            => bm_xor_check<ushort>();
 
-        public void gbm_xor_32()
-            => gbm_xor_check<uint>();
+        public void bm_xor_g32x32x32()
+            => bm_xor_check<uint>();
 
-        public void gbm_xor_64()
-            => gbm_xor_check<ulong>();
+        public void bm_xor_g64x64x64()
+            => bm_xor_check<ulong>();
 
-        public void nbm_xor_50x8()
-            => nbm_xor_check<N64,byte>();
+        public void bm_xor_n64x64x8()
+            => bm_xor_check<N64,byte>();
 
-        public void nbm_xor_50x16()
-            => nbm_xor_check<N50,ushort>();
+        public void bm_xor_n50x50x16()
+            => bm_xor_check<N50,ushort>();
 
-        public void nbm_xor_60x64()
-            => nbm_xor_check<N64,ulong>();
+        public void bm_xor_n64x64x64()
+            => bm_xor_check<N64,ulong>();
 
-        public void nbm_xor_331x8()
-            => nbm_xor_check(natseq(n3,n3,n1), z8);
+        public void bm_xor_n64x64x16()
+            => bm_xor_check<N64,ushort>();
 
-        public void nbm_xor_64x64()
-            => nbm_xor_check<N64,ulong>();
+        public void bm_xor_n256x256x32()
+            => bm_xor_check<N256,uint>();
 
-        public void nbm_xor_64x16()
-            => nbm_xor_check<N64,ushort>();
-
-        public void nbm_xor_256x32()
-            => nbm_xor_check<N256,uint>();
+        public void bm_xor_n331x331x8()
+            => bm_xor_check(natseq(n3,n3,n1), z8);
     }
 
 }

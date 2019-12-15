@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class gmoc
+    partial class gmathops
     {
         public static sbyte mod_n8i(sbyte lhs, sbyte rhs)
             => (sbyte)(lhs % rhs);

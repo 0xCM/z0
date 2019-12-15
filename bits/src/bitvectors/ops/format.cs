@@ -46,6 +46,15 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="fmt">Optional formatting style</param>
         [MethodImpl(Inline)]
+        public static string format(BitVector24 x, BitFormat? fmt = null)
+            => bitstring(x).Format(fmt);
+
+        /// <summary>
+        /// Formats the bitvector as a bitstring
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="fmt">Optional formatting style</param>
+        [MethodImpl(Inline)]
         public static string format(BitVector32 x, BitFormat? fmt = null)
             => bitstring(x).Format(fmt);
 

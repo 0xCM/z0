@@ -13,7 +13,7 @@ namespace Z0.OpCodes
     using static FixedContainers;
     using static StackContainers;
     
-    [OpCodeHost]
+    [OpCodeProvider]
     public static class bitconvert
     {
         public static void deposit(in ulong src, ref Fixed128 dst)

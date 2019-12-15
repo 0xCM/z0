@@ -8,7 +8,7 @@ namespace Z0.OpCodes
 
     using static zfunc;
 
-    [OpCodeHost]
+    [OpCodeProvider]
     public static class bitmask
     {            
         public static ushort lsb12x2x1()

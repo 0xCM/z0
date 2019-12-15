@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class gmoc
+    partial class gmathops
     {
         public static bool divides_d8i(sbyte lhs, sbyte rhs)
             => math.divides(lhs,rhs);

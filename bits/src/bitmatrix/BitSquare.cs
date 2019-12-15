@@ -19,7 +19,6 @@ namespace Z0
     {
         static N256 n => n256;
 
-
         [MethodImpl(Inline)]
         public static void not<T>(in T A, ref T Z)
             where T : unmanaged

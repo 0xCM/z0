@@ -11,41 +11,40 @@ namespace Z0
     
     public class t_bm_and : t_bm<t_bm_and>
     {
-        public void nbm_and_64x64()
-            => nbm_and_check<N64,ulong>();
+        public void bm_and_n64x64x64()
+            => bm_and_check<N64,ulong>();
 
-        public void nbm_and_64x16()
-            => nbm_and_check<N64,ushort>();
+        public void bm_and_n64x64x16()
+            => bm_and_check<N64,ushort>();
 
-        public void nbm_and_256x256()
-            => nbm_and_check<N256,uint>();
+        public void bm_and_n256x256x32()
+            => bm_and_check<N256,uint>();
 
-        public void gbm_and_8x8()
-            => gbm_and_check<byte>();
+        public void bm_and_g8x8x8()
+            => bm_and_check<byte>();
 
-        public void gbm_and_16x16()
-            => gbm_and_check<ushort>();
+        public void bm_and_g16x16x16()
+            => bm_and_check<ushort>();
 
-        public void gbm_and_32x32()
-            => gbm_and_check<uint>();
+        public void bm_and_g32x32x16()
+            => bm_and_check<uint>();
 
-        public void gbm_and_64x64()
-            => gbm_and_check<ulong>();        
+        public void bm_and_g64x64x64()
+            => bm_and_check<ulong>();        
 
         void gbm_and_8x8g_bench()
-            => gbm_and_bench<byte>();
+            => bm_and_bench<byte>();
 
         void gbm_and_16x16g_bench()
-            => gbm_and_bench<ushort>();
+            => bm_and_bench<ushort>();
 
         void gbm_and_32x32g_bench()
-            => gbm_and_bench<uint>();
+            => bm_and_bench<uint>();
 
         void gbm_and_64x64g_bench()
-            => gbm_and_bench<ulong>();
+            => bm_and_bench<ulong>();
 
-
-        public void pbm_and_4x4()
+        public void bm_and_4x4x4()
         {
             var n = n4;
             for(var i=0; i<SampleSize; i++)
@@ -61,7 +60,7 @@ namespace Z0
             }
         }
 
-        public void pbm_and_8x8()
+        public void bm_and_8x8x8()
         {
             var n = n8;
             Span<byte> dst = stackalloc byte[8];
@@ -79,7 +78,7 @@ namespace Z0
             }
         }
 
-        public void pbm_and_32x32()
+        public void bm_and_32x32x32()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -92,7 +91,7 @@ namespace Z0
             }
         }
 
-        public void pbm_and_64x64()
+        public void bm_and_64x64x64()
         {
             for(var i=0; i<SampleSize; i++)
             {

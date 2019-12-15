@@ -21,7 +21,7 @@ namespace Z0
     {        
         readonly Span<T> data;
 
-        static readonly BitGridLayout GridLayout = BitGridLayout.Define<N,T>();
+        static N NatRep => default;
 
         /// <summary>
         /// The bit width of each row/column 
@@ -47,7 +47,7 @@ namespace Z0
         public static int RowCellCount
         {
             [MethodImpl(Inline)]
-            get => CellWidth >= RowWidth ? 1 : PaddingRequired ? WholeRowCells + 1 : WholeRowCells;
+            get =>  BitCalcs.mincells(bitsize<T>(),natval<N>()); 
         }
 
         public static int TotalCellCount
@@ -55,29 +55,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => RowCellCount * RowWidth;
         }
-
-        /// <summary>
-        /// The whole number of cells required to store a row of bits
-        /// </summary>
-        static int WholeRowCells
-        {
-            [MethodImpl(Inline)]
-            get => RowWidth / CellWidth;
-        }
-
-        static bit PaddingRequired 
-        {
-            [MethodImpl(Inline)]
-            get => RowWidth % CellWidth != 0;
-        }
-
-        [MethodImpl(Inline)]
-        static int RowOffset(int row)
-            => row*RowCellCount;
-
-        [MethodImpl(Inline)]
-        static int ColOffset(int row, int col)
-            => row*RowCellCount + col/RowWidth;
 
         /// <summary>
         /// Multiplies the left matrix by the right
@@ -117,25 +94,17 @@ namespace Z0
             get => ref head(data);
         }
 
-        [MethodImpl(Inline)]
-        Span<T> RowCells(int row)
-            => Data.Slice(RowOffset(row), RowCellCount);
-
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get
-            {
-                return this[row][col];
-            }
+            get => this[row][col];
             
 
             [MethodImpl(Inline)]
             set
             {
-                var cell = GridLayout.Row(row)[col];                                
-                Data[cell.Segment] = gbits.set(Data[cell.Segment], (byte)cell.Offset, value);
-
+                var index = BitMatrix.tableindex(row, col, NatRep, NatRep, default(T));
+                data[index.CellIndex] = gbits.set(data[index.CellIndex], index.BitOffset, value);                
             }
         }            
 
@@ -145,10 +114,10 @@ namespace Z0
         public BitSpan<N,T> this[int row]
         {
             [MethodImpl(Inline)]
-            get => new BitSpan<N,T>(RowCells(row), true);
+            get => new BitSpan<N,T>(GetRowData(row), true);
             
             [MethodImpl(Inline)]
-            set => value.Data.CopyTo(RowCells(row));     
+            set => value.Data.CopyTo(GetRowData(row));     
         }
 
         /// <summary>
@@ -193,6 +162,7 @@ namespace Z0
             return cv;
         }
 
+
         /// <summary>
         /// Sets all the bits to align with the source value
         /// </summary>
@@ -231,7 +201,11 @@ namespace Z0
                     return false;
             return true;
         }
-        
+
+        [MethodImpl(Inline)]
+        Span<T> GetRowData(int row)
+            => Data.Slice(row*RowCellCount, RowCellCount);
+
         public override int GetHashCode()
             => 0;
 

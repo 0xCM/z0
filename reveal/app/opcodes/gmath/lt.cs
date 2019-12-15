@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class gmoc
+    partial class gmathops
     {
         public static bit lt_d8i(sbyte lhs, sbyte rhs)
             => math.lt(lhs,rhs);

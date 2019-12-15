@@ -26,37 +26,6 @@ namespace Z0
             return load(src.data);                
         }
 
-        /// <summary>
-        /// Constructs a bitmatrix formed from the ordered bitvector representation of the permutation symbols
-        /// </summary>
-        /// <param name="n"></param>
-        /// <param name="perm"></param>
-        /// <remarks>
-        /// Example:
-        /// Permutation: [11 10 00 01] (ABCD -> BACD)
-        /// Bitmatrix: [1000 | 0000 | 0100 | 1100]
-        /// </remarks>
-        public static BitMatrix4 from(N4 n, Perm4 perm)
-        {
-            var digits = perm.Digits();
-            var rows = new BitVector4[4];
-            for(var i=0; i<digits.Length; i++)
-                rows[i] = BitVector.from(n4, digits[i]);
-            return primal(n4, rows);
-        }
-        
-        /// <summary>
-        /// Creates a canonical permutation matrix by swapping matrix rows of the identity matrix as specified by a permutation
-        /// </summary>
-        /// <param name="spec">The permutation spec</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix64 from(NatPerm<N64> spec)
-        {
-            var id = BitMatrix64.Identity;
-            permute(spec, ref id);
-            return id;
-        }
-
         [MethodImpl(Inline)]
         public static BitMatrix32 from(N32 n, Span<byte> src)        
             => new BitMatrix32(src.AsUInt32());

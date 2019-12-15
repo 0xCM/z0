@@ -13,6 +13,8 @@ namespace Z0
     /// <summary>
     /// Defines a sequence of generic bitvectors, interpreted as rows, for which the width is determined by the bitvector primal type 
     /// </summary>
+    /// <remarks>The primary use case for this data structure is to faciltate efficient bitwise 
+    /// operations over generic scalar sequences where the length of the sequence varies</remarks>
     public readonly ref struct RowBits<T>
         where T : unmanaged
     {
@@ -96,7 +98,7 @@ namespace Z0
         /// <summary>
         /// Specifies whether the matrix is square; if so, it can be represented by one of the primal matrices
         /// </summary>
-        public bool IsSquare
+        public bit IsSquare
         {
             [MethodImpl(Inline)]
             get => Width == RowCount;

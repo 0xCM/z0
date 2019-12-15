@@ -17,11 +17,9 @@ namespace Z0
                 => src.Bytes.FormatMatrixBits(src.RowWidth);
 
         [MethodImpl(Inline)]
-        public static RowBits<T> Replicate<T>(this RowBits<T> src, bool structureOnly = false)
+        public static RowBits<T> Replicate<T>(this RowBits<T> src)
             where T : unmanaged
-                => new RowBits<T>(src.data.Replicate(structureOnly));
-
-
+                => new RowBits<T>(src.data.Replicate());
     }
 
 }

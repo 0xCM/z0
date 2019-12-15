@@ -10,7 +10,7 @@ namespace Z0.OpCodes
     using static Digital;
     using static zfunc;
 
-    [OpCodeHost]
+    [OpCodeProvider]
     public static class natoc
     {
         // xor(eax,eax) -> eax

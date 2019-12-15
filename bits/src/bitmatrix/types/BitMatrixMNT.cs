@@ -22,32 +22,17 @@ namespace Z0
         where T : unmanaged
     {        
         readonly Span<T> data;
-
-        /// <summary>
-        /// The number of bits per row
-        /// </summary>
-        public static int RowBitCount  => natval<M>();
-
-        /// <summary>
-        /// The number of bits per column
-        /// </summary>
-        public static int ColBitCount => natval<N>();
-
-        /// <summary>
-        /// The number of bits apprehended by the matrix
-        /// </summary>
-        public static int TotalBitCount => NatMath.mul<M,N>();
         
-        static readonly BitGridSpec GridSpec = new BitGridSpec(Unsafe.SizeOf<T>()*8, RowBitCount, ColBitCount);
-        
-        public static readonly BitGridLayout Layout = GridSpec.CalcLayout<T>();
+        public static M RowDim => default;
+
+        public static N ColDim => default;
 
         /// <summary>
         /// Allocates a Zero-filled mxn matrix
         /// </summary>
         [MethodImpl(NotInline)]
         public static BitMatrix<M,N,T> Alloc()
-            => new BitMatrix<M, N, T>(new T[Layout.TotalCellCount]);
+            => new BitMatrix<M, N, T>(new T[BitMatrix.totalcells<M,N,T>()]);
 
         /// <summary>
         /// Loads a matrix from an array of appopriate length
@@ -55,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix<M,N,T> Load(Span<T> src)
         {
-            require(src.Length == Layout.TotalCellCount);
+            require(src.Length == BitMatrix.totalcells<M,N,T>());
             return new BitMatrix<M, N, T>(src);
         }
 
@@ -70,6 +55,7 @@ namespace Z0
         {
             this.data = src;
         }
+        
         /// <summary>
         /// Presents matrix storage as a span of generic cells
         /// </summary>
@@ -103,7 +89,7 @@ namespace Z0
         public readonly int RowCount
         {
             [MethodImpl(Inline)]
-            get => RowBitCount;
+            get => natval<M>();
         }
 
         /// <summary>
@@ -112,8 +98,9 @@ namespace Z0
         public readonly int ColCount
         {
             [MethodImpl(Inline)]
-            get => ColBitCount;
+            get => natval<N>();
         }
+
 
         /// <summary>
         /// Queries/manipulates a bit at a specified row/col
@@ -123,16 +110,16 @@ namespace Z0
             [MethodImpl(Inline)]
             get 
             {
-                var cell = Layout.Row(row)[col];
-                return BitMask.testbit(Data[cell.Segment], cell.Offset);                    
+                var index = BitMatrix.tableindex(row, col, RowDim, ColDim, default(T));
+                return BitMask.testbit(data[index.CellIndex], index.BitOffset);
             }
 
             [MethodImpl(Inline)]
             set 
             {
-                var cell = Layout.Row(row)[col];
-                data[cell.Segment] = gbits.set(data[cell.Segment], (byte)cell.Offset, value);
-            }
+                var index = BitMatrix.tableindex(row, col, RowDim, ColDim, default(T));
+                data[index.CellIndex] = gbits.set(data[index.CellIndex], index.BitOffset, value);                
+           }
         }            
 
         /// <summary>
@@ -141,27 +128,29 @@ namespace Z0
         public BitSpan<N,T> this[int row]
         {
             [MethodImpl(Inline)]
-            get => GetRow(row);
+            get => ReadRow(row);
             
             [MethodImpl(Inline)]
-            set => value.Data.CopyTo(Data.Slice(RowOffset(row), Layout.RowCellCount));     
+            set 
+            {
+                var index = BitMatrix.tableindex(row, 0, RowDim, ColDim, default(T));                
+                value.Data.CopyTo(Data.Slice(index.RowIndex), index.RowCellCount);
+            }
+        }
+                
+        [MethodImpl(Inline)]
+        public BitSpan<N,T> ReadRow(int row)  
+        {                              
+            var index = BitMatrix.tableindex(row, 0, RowDim, ColDim, default(T)); 
+            return new BitSpan<N,T>(data.Slice(index.RowIndex, index.RowCellCount),true);
         }
 
         [MethodImpl(Inline)]
-        readonly int RowOffset(int row)        
-            => Layout.Row(row)[0].Segment;
-                
-        /// <summary>
-        /// Retrives an identified row of bits
-        /// </summary>
-        /// <param name="index">The 0-based row index</param>
-        [MethodImpl(Inline)]
-        public BitSpan<N,T> GetRow(int index)                    
-            => new BitSpan<N,T>(data.Slice(RowOffset(index), Layout.RowCellCount));                
-
-        [MethodImpl(Inline)]
-        public readonly BitSpan<N,T> CopyRow(int index)                    
-            => new BitSpan<N,T>(data.Slice(RowOffset(index), Layout.RowCellCount).Replicate());
+        public readonly BitSpan<N,T> CopyRow(int row)                    
+        {
+            var index = BitMatrix.tableindex(row, 0, RowDim, ColDim, default(T));                
+            return new BitSpan<N,T>(data.Slice(index.RowIndex, index.RowCellCount).Replicate(),true);
+        }
 
         /// <summary>
         /// Replaces an index-identied column of data with the content of a column vector
@@ -217,7 +206,7 @@ namespace Z0
         {
             var sb = text();
             for(var i=0; i< RowCount; i++)
-                 sb.AppendLine(GetRow(i).Format(blockWidth:1));
+                 sb.AppendLine(ReadRow(i).Format(blockWidth:1));
             return sb.ToString();
         }
 

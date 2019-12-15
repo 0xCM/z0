@@ -20,7 +20,7 @@ namespace Z0
             var mask =  dinx.vbroadcast(n, pattern);
             var zero = vbuild.zero<byte>(n);
             var ones =  vbuild.ones<byte>(n);
-            var blend = dinx.vblendbits(zero,ones,mask);
+            var blend = dinx.vbitblend(zero,ones,mask);
             Claim.eq(blend,mask);
 
         }
@@ -59,7 +59,7 @@ namespace Z0
                 var x = Random.CpuVector<T>(w);
                 var y = Random.CpuVector<T>(w);
                 var m = Random.CpuVector<T>(w);
-                var r = ginx.vblendbits(x,y,m);
+                var r = ginx.vbitblend(x,y,m);
 
                 for(var i = 0; i<count; i++)
                     Claim.eq(vcell(r,i),gmath.blend(vcell(x,i),vcell(y,i), vcell(m,i)));
@@ -96,7 +96,7 @@ namespace Z0
                 var x = Random.CpuVector<T>(w);
                 var y = Random.CpuVector<T>(w);
                 var m = Random.CpuVector<T>(w);
-                var r = ginx.vblendbits(x,y,m);
+                var r = ginx.vbitblend(x,y,m);
 
                 for(var i = 0; i<count; i++)
                     Claim.eq(vcell(r,i),gmath.blend(vcell(x,i),vcell(y,i), vcell(m,i)));

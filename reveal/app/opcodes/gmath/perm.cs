@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class gmoc
+    partial class gmathops
     {
         public static Perm4 perm4_assemble_id()
             => Perm.assemble(Perm4.A, Perm4.B, Perm4.C, Perm4.D);

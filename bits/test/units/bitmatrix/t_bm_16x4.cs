@@ -11,22 +11,22 @@ namespace Z0
     
     public class t_bm_16x4 : t_bm<t_bm_16x4>
     {
-        public void pbm_and_16x4()
-            => pbm_16x4_binary_check(BitMatrix.and, math.and);
+        public void bm_and_16x4()
+            => bm_16x4_binary_check(BitMatrix.and, math.and);
 
-        public void pbm_or_16x4()
-            => pbm_16x4_binary_check(BitMatrix.or, math.or);
+        public void bm_or_16x4()
+            => bm_16x4_binary_check(BitMatrix.or, math.or);
 
-        public void pbm_xor_16x4()
-            => pbm_16x4_binary_check(BitMatrix.xor, math.xor);
+        public void bm_xor_16x4()
+            => bm_16x4_binary_check(BitMatrix.xor, math.xor);
 
-        public void pbm_not_16x4()
-            => pbm_16x4_unary_check(BitMatrix.not, math.not);
+        public void bm_not_16x4()
+            => bm_16x4_unary_check(BitMatrix.not, math.not);
 
-        public void pbm_negate_16x4()
-            => pbm_16x4_unary_check(BitMatrix.negate, math.negate);
+        public void bm_negate_16x4()
+            => bm_16x4_unary_check(BitMatrix.negate, math.negate);
 
-        public void pbm_16x4_rows()
+        public void bm_16x4_rows()
         {
             var m = n16;
             var n = n4;
@@ -44,7 +44,7 @@ namespace Z0
             }
         }
 
-        public void pbm_16x4_transpose()
+        public void bm_16x4_transpose()
         {
             var m = n16;
             var n = n4;
@@ -57,7 +57,7 @@ namespace Z0
             }
         }
 
-        public void pbm_16x4_cols()
+        public void bm_16x4_cols()
         {
 
             var m = n16;
@@ -140,7 +140,7 @@ namespace Z0
             }
         }
 
-        protected void pbm_16x4_binary_check(Func<BitMatrix16x4,BitMatrix16x4,BitMatrix16x4> f, Func<ulong,ulong,ulong> g)
+        protected void bm_16x4_binary_check(Func<BitMatrix16x4,BitMatrix16x4,BitMatrix16x4> f, Func<ulong,ulong,ulong> g)
         {
             var m = n16;
             var n = n4;
@@ -156,7 +156,7 @@ namespace Z0
             }
         }
 
-        protected void pbm_16x4_unary_check(Func<BitMatrix16x4,BitMatrix16x4> f, Func<ulong,ulong> g)
+        protected void bm_16x4_unary_check(Func<BitMatrix16x4,BitMatrix16x4> f, Func<ulong,ulong> g)
         {
             var m = n16;
             var n = n4;

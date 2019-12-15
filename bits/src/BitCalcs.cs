@@ -39,19 +39,22 @@ namespace Z0
         public static int minbytes(int bc)
             => bc / 8 + (bc % 8 == 0 ? 0 : 1);  
 
+
         /// <summary>
-        /// Computes the minimum number of cells of a given width required to hold a specified number of bits
+        /// Computes the minimum number of cells required to store a specified number of bits
         /// </summary>
-        /// <param name="cw">The bit-width of a cell</param>
-        /// <param name="bc">The number of bits for which storage is required</param>
+        /// <param name="w">The cell width</param>
+        /// <param name="n">The bit count/number of matrix columns</param>
         [MethodImpl(Inline)]
-        public static int mincells(int cw, int bc)
+        public static int mincells(int w, int n)
         {
-            if(cw >= bc)
+            // if a single cell covers a column then there's no need for computation
+            if(w >= n)
                 return 1;
 
-            var cells = bc / cw;
-            return cells + (bc % cw == 0 ? 0 : 1);
+            var q = n / w;
+            var r = n % w;
+            return r == 0 ? q : q + 1;
         }
 
         /// <summary>
@@ -72,24 +75,17 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the minimum number of cels required to store data of a given bit width
+        /// Computes the minimum number of T-cells required to store N bits
         /// </summary>
-        /// <param name="w">The bit width representative</param>
-        /// <param name="t">The storage cell type representative</param>        
-        /// <typeparam name="T">The width type</typeparam>
-        /// <typeparam name="T">The storage cell type</typeparam>
+        /// <param name="n">The bit count representative</param>
+        /// <param name="t">A cell type representative</param>
+        /// <typeparam name="N">The bit count type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int mincells<N,T>(N w = default, T t = default)
-            where T : unmanaged
+        public static int mincells<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
-        {
-            if(bitsize<T>() >= natval(w))
-                return 1;
-
-            var q = natval(w) / bitsize<T>();
-            var r = natval(w) % bitsize<T>();
-            return q + (r != 0 ? 1 : 0);
-        }
+            where T : unmanaged
+                => TypeMath.lteq(n,t) ? 1 : TypeMath.divceil(n,t); 
 
         /// <summary>
         /// Computes the 0-based linear index determined by column width and a row/col coordinate
@@ -160,7 +156,7 @@ namespace Z0
             => rows * cols;
 
         /// <summary>
-        /// Computes the number of cells required to cover a grid
+        /// Computes the number of packed cells required to cover a grid
         /// </summary>
         /// <param name="rows">The grid row count</param>
         /// <param name="cols">The grid col count</param>

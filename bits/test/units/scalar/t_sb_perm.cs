@@ -10,17 +10,10 @@ namespace Z0
 
     public class t_sb_perm : t_sb<t_sb_perm>
     {
-        public void perm_create()
-        {
+        public void perm_create_8u()
+             => perm_create((byte)5, (byte)100);
 
-            perm_create(5,20);
-            perm_create((byte)5,(byte)100);
-            perm_create((sbyte)5, (sbyte)100);
-            perm_create((short)5, (short)100);
-            perm_create((ulong)5, (ulong)100);
-        }
-
-        public void perm_swap()
+        public void perm_swap_8u()
         {
             var id = Perm.identity((byte)32);
             var p = id.Replicate();

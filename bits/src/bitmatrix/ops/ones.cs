@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix<T> ones<T>()
             where T : unmanaged
-                => BitMatrix.broadcast<T>(BitVector.ones<T>());
+                => BitMatrix.init<T>(BitVector.ones<T>());
 
         /// <summary>
         /// Allocates a 0-filled generic bitmatrix
@@ -49,12 +49,12 @@ namespace Z0
         /// </summary>
         /// <typeparam name="N">The column/row dimension</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static BitMatrix<N,T> identity<N,T>(N n = default, T zero = default)
+        public static BitMatrix<N,T> identity<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
        {            
-            var dst = alloc(n,zero);
-            var order  = (int)n.NatValue;
+            var dst = alloc(n, t);
+            var order  = natval(n);
             for(var i = 0; i< order; i++)
                 dst[i,i] = true;            
             return dst;
@@ -71,7 +71,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => alloc(m,n, gmath.maxval<T>());
+                => init(gmath.maxval<T>(),m,n);
 
         /// <summary>
         /// Allocates a 1-filled bitmatrix of natural order
@@ -83,6 +83,6 @@ namespace Z0
         public static BitMatrix<N,T> ones<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => alloc(n, gmath.maxval<T>());
+                => init(gmath.maxval<T>(),n);
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class gmoc
+    partial class gmathops
     {
         public static sbyte or_d8i(sbyte lhs, sbyte rhs)
             => math.or(lhs,rhs);

@@ -9,6 +9,8 @@ namespace Z0
 
     using static zfunc;
 
+    using static As;
+
     partial class BitMatrix
     {        
         /// <summary>
@@ -100,6 +102,70 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new BitMatrix<M, N, T>(data);
+
+        /// <summary>
+        /// Computes the minimum number of cells required to store a bitmatrix of natural dimensions where each row is data-type aligned
+        /// </summary>
+        /// <param name="m">The row count representative</param>
+        /// <param name="n">The col count representative</param>
+        /// <param name="t">A cell type representative</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The col count type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int totalcells<M,N,T>(M m = default, N n = default, T t =default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BitCalcs.mincells<N,T>() * natval<M>();
+
+        [MethodImpl(Inline)]
+        public static TableIndex tableindex<M,N,T>(int row, int col, M m = default, N n = default, T t =default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var rowCellCount = uint16(BitCalcs.mincells<N,T>());
+            var rowOffset = uint32(rowCellCount*row);
+            return TableIndex.Define(
+                CellIndex: uint16(rowOffset + BitSize.div(col,t)), 
+                RowCellCount: rowCellCount,
+                BitOffset: uint8(BitSize.mod(col,t)), 
+                BitIndex: uint32(rowOffset + col), 
+                RowIndex: row, 
+                ColIndex: col);                    
+        }
+
+        /// <summary>
+        /// Computes the bitwise AND between two square bitmatrices of common natural order and stores the
+        /// result a caller-supplied target matrix
+        /// </summary>
+        /// <param name="A">The first source operand</param>
+        /// <param name="B">The second source operand</param>
+        /// <param name="C">The target</param>
+        /// <typeparam name="N">The matrix order</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly BitMatrix<N,T> and<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B, in BitMatrix<N,T> C)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            mathspan.and(A.Data, B.Data, C.Data);
+            return ref C;
+        }
+
+        /// <summary>
+        /// Computes the bitwise AND between two square bitmatrices of common order
+        /// </summary>
+        /// <param name="A">The first source operand</param>
+        /// <param name="B">The second source operand</param>
+        /// <typeparam name="N">The matrix order</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitMatrix<N,T> and<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => and(A, B, alloc<N,T>());
 
     }
 }

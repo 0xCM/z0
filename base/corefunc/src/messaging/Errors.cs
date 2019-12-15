@@ -17,6 +17,7 @@ namespace Z0
 
     public static class Errors
     {
+        
         public static AppException NotEqual(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(ErrorMessages.NotEqual(lhs,rhs,caller,file,line));
 

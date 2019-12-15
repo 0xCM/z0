@@ -11,7 +11,67 @@ namespace Z0
 
     public class t_bm_permute : t_bm<t_bm_permute>
     {
-        public void bm_permrev_8x8()
+        public void bm_fromperm_8x8x8()
+        {
+            var n = n8;
+
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var p = Random.Perm(n);
+                var m = p.ToBitMatrix();
+
+                for(var i=0; i<n; i++)
+                for(var j=0; j<n; j++)
+                {
+                    if(p[i] == j)
+                        Claim.eq(m[i,j], on);
+                    else
+                        Claim.eq(m[i,j], off);
+                }
+            }
+        }
+
+        public void bm_fromperm_16x16x16()
+        {
+            var n = n16;
+
+            for(var sample=0; sample<SampleSize; sample++)
+            {
+                var p = Random.Perm(n);
+                var m = p.ToBitMatrix();
+
+                for(var i=0; i<n; i++)
+                for(var j=0; j<n; j++)
+                {
+                    if(p[i] == j)
+                        Claim.eq(m[i,j], on);
+                    else
+                        Claim.eq(m[i,j], off);
+                }
+            }
+        }
+
+        public void bm_fromperm_64x64x64()
+        {
+            var n = n64;
+
+            for(var sample=0; sample<SampleSize; sample++)
+            {
+                var p = Random.Perm(n);
+                var m = p.ToBitMatrix();
+
+                for(var i=0; i<n; i++)
+                for(var j=0; j<n; j++)
+                {
+                    if(p[i] == j)
+                        Claim.eq(m[i,j], on);
+                    else
+                        Claim.eq(m[i,j], off);
+                }
+            }
+        }
+
+        public void bm_perm_exchange_8x8x8()
         {
             for(var i= 0; i<SampleSize; i++)
             {
@@ -26,7 +86,7 @@ namespace Z0
                 Claim.eq(v3,v2);
             }
         }
-        public void bm_permrev_32x32()
+        public void bm_perm_exchange_32x32x32()
         {
             for(var i= 0; i<SampleSize; i++)
             {
@@ -41,7 +101,7 @@ namespace Z0
             }
         }
 
-        public void bm_permrev_64x64()
+        public void bm_perm_exchange_64x64x64()
         {
             for(var i= 0; i<SampleSize; i++)
             {
@@ -55,20 +115,7 @@ namespace Z0
                 v3 = BitVector.reverse(v3);
                 Claim.eq(v3,v2);
             }
-        }
-        
-        void permute_check<T>()
-            where T : unmanaged
-        {
-            
-            var A = BitMatrix.identity<T>();
-            var N = BitMatrix<T>.N;
-            for(var i=0; i< SampleSize; i++)
-            {
-                var perm = Random.Perm(N);
-                BitMatrix.permute(perm, ref A);
-            }
-        }
+        }        
     }
 
 }

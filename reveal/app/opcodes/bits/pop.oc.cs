@@ -12,6 +12,7 @@ namespace Z0.OpCodes
 
     using static zfunc;
 
+    [OpCodeProvider]
     public static class pop
     {
         public static uint pop_3x64(ulong x, ulong y, ulong z)

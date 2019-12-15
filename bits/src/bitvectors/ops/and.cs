@@ -57,7 +57,6 @@ namespace Z0
         public static BitVector64 and(BitVector64 x, BitVector64 y)
             => gmath.and(x.data, y.data);
  
-
         /// <summary>
         /// Computes the bitvector z := x & y from bitvectors x and y
         /// </summary>

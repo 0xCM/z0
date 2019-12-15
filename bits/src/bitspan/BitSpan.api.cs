@@ -39,39 +39,55 @@ namespace Z0
         }
 
         /// <summary>
-        /// Allocates a natural bitcell container filled with a specified value
+        /// Allocates a bitspan filled with a specified value
         /// </summary>
         /// <param name="n">The natural length of the vector in bits</param>
-        /// <param name="fill">The fill value</param>
-        /// <typeparam name="N">The natural type upon which the vector is predicated</typeparam>
-        /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
+        /// <param name="cell">The fill value</param>
+        /// <typeparam name="N">The bitwidth type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitSpan<N,T> alloc<N,T>(N n, T fill)
+        public static BitSpan<N,T> init<N,T>(N n, T cell)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var cells = alloc<N,T>();
-            cells.Data.Fill(fill);
+            cells.Data.Fill(cell);
             return cells;
         }
 
         /// <summary>
-        /// Allocates a zero-filled natural bitcell container
+        /// Transfers span content to a bitspan without checks
         /// </summary>
-        /// <param name="n">The natural length of the vector in bits</param>
-        /// <param name="fill">The fill value</param>
-        /// <typeparam name="N">The natural type upon which the vector is predicated</typeparam>
-        /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
+        /// <param name="src">The source span</param>
+        /// <param name="n">The bitspan length representative</param>
+        /// <typeparam name="N">The bitwidth type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitSpan<N,T> alloc<N,T>(N n = default)
+        public static BitSpan<N,T> transfer<N,T>(Span<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-        {                        
-            Span<T> cells = new T[BitSpan<N,T>.SegCount];
-            return new BitSpan<N,T>(cells, true);
-        }
+                => new BitSpan<N, T>(src,true);
 
+        /// <summary>
+        /// Allocates a zero-filled bitspan
+        /// </summary>
+        /// <param name="n">The bitspan width representative</param>
+        /// <param name="fill">The fill value</param>
+        /// <typeparam name="N">The bitwidth type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitSpan<N,T> alloc<N,T>(N n = default, T t = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => new BitSpan<N,T>(new T[BitSpan<N,T>.SegCount], true);
 
+        /// <summary>
+        /// Loads a bitspan from an array
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="n">The bitspan width representative</param>
+        /// <typeparam name="N">The bitwidth type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitSpan<N,T> load<N,T>(T[] src, N n = default)
             where N : unmanaged, ITypeNat
@@ -79,11 +95,11 @@ namespace Z0
                 => new BitSpan<N,T>(src);    
 
         /// <summary>
-        /// Creates a natural cell container over an arbitrary number of segments
+        /// Creates a bitspan from a parameter array
         /// </summary>
         /// <param name="src">The source bits</param>
-        /// <typeparam name="N">The natural type upon which the vector is predicated</typeparam>
-        /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
+        /// <typeparam name="N">The bitwidth type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitSpan<N,T> literals<N,T>(params T[] src)
             where N : unmanaged, ITypeNat
@@ -94,8 +110,9 @@ namespace Z0
         /// Creates a natural cell container over a single cell
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="n">The bitvector length</param>
-        /// <typeparam name="T">The source type</typeparam>
+        /// <param name="n">The bitspan width representative</param>
+        /// <typeparam name="N">The bitwidth type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitSpan<N,T> literal<N,T>(T src, N n = default)        
             where N : unmanaged, ITypeNat
@@ -106,8 +123,9 @@ namespace Z0
         /// Loads a natural bitcell container from a span
         /// </summary>
         /// <param name="src">The source bits</param>
-        /// <typeparam name="N">The natural type upon which the vector is predicated</typeparam>
-        /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
+        /// <param name="n">The bitspan width representative</param>
+        /// <typeparam name="N">The bitwidth type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitSpan<N,T> load<N,T>(Span<T> src, N n = default)
             where N : unmanaged, ITypeNat
@@ -115,11 +133,11 @@ namespace Z0
                 => new BitSpan<N,T>(src);    
 
         /// <summary>
-        /// Loads a natural bitcell container from a readonly span
+        /// Loads a natural bitspan from a readonly span; allocation required
         /// </summary>
         /// <param name="src">The source bits</param>
-        /// <typeparam name="N">The natural type upon which the vector is predicated</typeparam>
-        /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
+        /// <typeparam name="N">The bitwidth type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitSpan<N,T> load<N,T>(ReadOnlySpan<T> src, N n = default)
             where N : unmanaged, ITypeNat
@@ -127,34 +145,7 @@ namespace Z0
                 => new BitSpan<N,T>(src.ToSpan());
 
         /// <summary>
-        /// Computes the Euclidean scalar product between two natural bitvectors using modular arithmetic
-        /// </summary>
-        /// <param name="x">The first vector</param>
-        /// <param name="y">The second vector</param>
-        /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
-        [MethodImpl(Inline)]
-        public static bit modprod<N,T>(in BitSpan<N,T> x, in BitSpan<N,T> y)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => modprod(x.Unsize(),y.Unsize());
-
-        /// <summary>
-        /// Computes the scalar product between this vector and another
-        /// </summary>
-        /// <param name="rhs">The other vector</param>
-        [MethodImpl(Inline)]
-        public static bit dot<N,T>(in BitSpan<N,T> x, in BitSpan<N,T> y)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-        {             
-            var result = bit.Off;
-            for(var i=0; i<x.Width; i++)
-                result ^= x[i] & y[i];
-            return result;
-        }
-
-        /// <summary>
-        /// Allocates a generic bitcell container over a specified number of 256-bit blocks
+        /// Allocates a bitspan over a specified number of 256-bit blocks
         /// </summary>
         /// <param name="blocks">The block count</param>
         /// <typeparam name="T">The cell type</typeparam>
@@ -164,7 +155,7 @@ namespace Z0
                 => new BitSpan<T>(DataBlocks.alloc<T>(n256,blocks));
 
         /// <summary>
-        /// Creates a generic bitcell container over a single cell
+        /// Creates a bitspan over a single cell
         /// </summary>
         /// <param name="src">The source segment</param>
         [MethodImpl(Inline)]
@@ -173,7 +164,7 @@ namespace Z0
                 => new BitSpan<T>(src, bitsize ?? bitsize<T>());
 
         /// <summary>
-        /// Creates a generic bitcell container over an arbitrary number of segments
+        /// Creates a bitspan over an arbitrary number of segments
         /// </summary>
         /// <param name="src">The source segment</param>
         [MethodImpl(Inline)]
@@ -182,7 +173,7 @@ namespace Z0
                 => new BitSpan<T>(src, bitsize<T>()*src.Length);
 
         /// <summary>
-        /// Loads a generic bitcell container from a span
+        /// Loads a bitspan from a span
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="n">The cell count</param>
@@ -245,6 +236,52 @@ namespace Z0
         }
 
         /// <summary>
+        /// Computes the Euclidean scalar product between two natural bitvectors using modular arithmetic
+        /// </summary>
+        /// <param name="x">The first vector</param>
+        /// <param name="y">The second vector</param>
+        /// <typeparam name="N">The bitwidth type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
+        [MethodImpl(Inline)]
+        public static bit modprod<N,T>(in BitSpan<N,T> x, in BitSpan<N,T> y)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => modprod(x.Unsize(),y.Unsize());
+
+        /// <summary>
+        /// Computes the scalar product between this vector and another
+        /// </summary>
+        /// <param name="rhs">The other vector</param>
+        /// <typeparam name="N">The bitwidth type</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static bit dot<N,T>(in BitSpan<N,T> x, in BitSpan<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {             
+            var result = bit.Off;
+            for(var i=0; i<x.Width; i++)
+                result ^= x[i] & y[i];
+            return result;
+        }
+
+        /// <summary>
+        /// Computes the scalar product between two bitspans
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit dot<T>(in BitSpan<T> x, in BitSpan<T> y)
+            where T : unmanaged
+        {
+            var result = bit.Off;
+            for(var i=0; i<x.BitCount; i++)
+                result ^= x[i] & y[i];
+            return result;
+        } 
+
+        /// <summary>
         /// Computes the number of primal cells required to cover a specified number of bits
         /// </summary>
         /// <param name="bitcount">The number of bits to cover</param>
@@ -276,19 +313,5 @@ namespace Z0
             return z;
         }
 
-        /// <summary>
-        /// Computes the scalar product between this vector and another of identical length
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
-        public static bit dot<T>(in BitSpan<T> x, in BitSpan<T> y)
-            where T : unmanaged
-        {
-            var result = bit.Off;
-            for(var i=0; i<x.BitCount; i++)
-                result ^= x[i] & y[i];
-            return result;
-        } 
    }
 }

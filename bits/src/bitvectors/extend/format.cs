@@ -55,6 +55,15 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="fmt">Bitstring formatting specifications</param>
         [MethodImpl(Inline)]
+        public static string Format(this BitVector24 src, BitFormat? fmt = null)
+            => BitVector.format(src, fmt);
+
+        /// <summary>
+        /// Formats the bitvector as a bitstring
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="fmt">Bitstring formatting specifications</param>
+        [MethodImpl(Inline)]
         public static string Format(this BitVector64 src, BitFormat? fmt = null)
             => BitVector.format(src, fmt);
 

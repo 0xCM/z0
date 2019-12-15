@@ -11,7 +11,7 @@ namespace Z0
 
     public class t_bm_unpack : t_bm<t_bm_unpack>
     {
-        public void pbm_unpack_8()
+        public void bm_unpack_8x8x8()
         {
             var dst = Matrix.alloc<N8,byte>();
             var m = dst.ColCount;
@@ -27,7 +27,7 @@ namespace Z0
             }
         }
 
-        public void pbm_unpack_64()
+        public void bm_unpack_64x64x64()
         {
             var dst = Matrix.alloc<N64,ulong>();
             var m = dst.ColCount;

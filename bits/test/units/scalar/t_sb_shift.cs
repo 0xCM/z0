@@ -86,7 +86,7 @@ namespace Z0
         {
 
             var signed = signedint<T>();
-            var bitsize = BitSize.Size<T>();
+            BitSize bitsize = bitsize<T>();
             var bs10 = BitString.parse("1" + repeat('0', bitsize - 1).Concat());
             var x10 = bs10.TakeScalar<T>();
             var bs11 = BitString.parse("11" + repeat('0', bitsize - 2).Concat());

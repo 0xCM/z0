@@ -15,6 +15,26 @@ namespace Z0
     public readonly struct BitSize
     {
         /// <summary>
+        /// Computes the quotient q :=  a / bitsize[T]
+        /// </summary>
+        /// <param name="a"></param>
+        /// <typeparam name="T"></typeparam>
+        [MethodImpl(Inline)]
+        public static int div<T>(int a, T t = default)
+            where T : unmanaged
+                => a / bitsize<T>();
+
+        /// <summary>
+        /// Computes the remainder r :=  a % bitsize[T]
+        /// </summary>
+        /// <param name="a"></param>
+        /// <typeparam name="T"></typeparam>
+        [MethodImpl(Inline)]
+        public static int mod<T>(int a, T t = default)
+            where T : unmanaged
+                => a % bitsize<T>();
+
+        /// <summary>
         /// Specifies a bit count
         /// </summary>
         public readonly ulong Bits;
@@ -92,15 +112,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator BitSize(ByteSize src)
             => src.Bytes * 8;
-
-        /// <summary>
-        /// Returns the bit size of a type
-        /// </summary>
-        /// <typeparam name="T">The type to evaluate</typeparam>
-        [MethodImpl(Inline)]
-        public static BitSize Size<T>()
-            where T : unmanaged
-                => bitsize<T>();
         
         [MethodImpl(Inline)]
         public static bool operator ==(BitSize lhs, BitSize rhs)

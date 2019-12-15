@@ -370,12 +370,14 @@ namespace Z0
             return dst;
         }
 
+        [MethodImpl(Inline)]
         public BitString Slice(int offset)
         {
             Span<byte> bits = data;
             return new BitString(bits.Slice(offset));
         }
 
+        [MethodImpl(Inline)]
         public BitString Slice(int offset, int length)
         {
             Span<byte> bits = data;

@@ -10,28 +10,27 @@ namespace Z0
 
     public class t_sb_pop : t_sb<t_sb_pop>
     {                
-
         public void sb_pop_popcnt()
         {
-            Span<byte> bits16 = stackalloc byte[16];
+            var buffer16x8 = DataBlocks.alloc<byte>(n128);
             var src = (ushort)0b11001111;
-            Bits.unpack16x1(src,bits16);
-            var bitsPC = bits16.PopCount();
-            Claim.eq(6,bitsPC);
+
+            var srcPop = Bits.pop(src);
+            Claim.eq(6,srcPop);
+
+            Bits.unpack16x1(src,buffer16x8);
 
             var bytes = BitConvert.GetBytes(src);
             Claim.eq(2, bytes.Length);
             
-            var bytesPC = bytes.PopCount();
-            Claim.eq(bitsPC, bytesPC);
-
-            Span<byte> bits64 = stackalloc byte[64];
+            Claim.eq(srcPop, bytes.PopCount());
+            var buffer64x8 = DataBlocks.alloc<byte>(n256,2);
     
             for(var i=0; i< SampleSize; i++)
             {
                 var y = BitConverter.GetBytes(Random.Next<ulong>()).ToSpan();
-                y.Unpack(bits64);
-                Claim.eq(bits64.PopCount(), y.PopCount());
+                y.Unpack(buffer64x8);
+                Claim.eq(buffer64x8.Data.PopCount(), y.PopCount());
             }
 
             var bits5 = Random.Span<byte>(5);

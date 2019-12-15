@@ -21,16 +21,16 @@ namespace Z0
 
         public void perm4_digits_basecase()
         {
-            var dABCD = Perm4.ABCD.Digits();
+            var dABCD = Perm4.ABCD.ToDigits();
             Claim.eq(DataBlocks.natparts(n4, A, B, C, D), dABCD);
 
-            var dDCBA = Perm4.DCBA.Digits();
+            var dDCBA = Perm4.DCBA.ToDigits();
             Claim.eq(DataBlocks.natparts(n4, D, C, B, A), dDCBA);
 
-            var dACBD = Perm4.ACBD.Digits();
+            var dACBD = Perm4.ACBD.ToDigits();
             Claim.eq(DataBlocks.natparts(n4, A, C, B, D), dACBD);
 
-            var dCBDA = Perm4.CBDA.Digits();
+            var dCBDA = Perm4.CBDA.ToDigits();
             Claim.eq(DataBlocks.natparts(n4, C, B, D, A), dCBDA);
         }
 

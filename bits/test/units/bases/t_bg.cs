@@ -99,11 +99,11 @@ namespace Z0
             }
         }
 
-        protected void gbg_bitread_bench<T>(int M, int N, int cycles, SystemCounter counter = default)
+        protected void bg_bitread_bench<T>(int M, int N, SystemCounter counter = default)
             where T : unmanaged
         {
             var last = bit.Off;
-            for(var i = 0; i<cycles; i++)
+            for(var i = 0; i<CycleCount; i++)
             {
                 var src = Random.BitGrid<T>(M,N);
 
@@ -114,16 +114,16 @@ namespace Z0
                 counter.Stop();
             }
 
-            Benchmark($"gbg_read_{moniker<T>()}", counter, cycles*M*N);
+            Benchmark($"gbg_read_{moniker<T>()}", counter, CycleCount*M*N);
         }
 
-        protected void gbm_bitread_bench<T>(int cycles, SystemCounter counter = default)
+        protected void bm_bitread_bench<T>(SystemCounter counter = default)
             where T : unmanaged
         {
             var last = bit.Off;
             int M = bitsize<T>();
             int N = bitsize<T>();
-            for(var i = 0; i<cycles; i++)
+            for(var i = 0; i<CycleCount; i++)
             {
                 var src = Random.BitMatrix<T>();
 
@@ -134,14 +134,14 @@ namespace Z0
                 counter.Stop();
             }
 
-            Benchmark($"gbm_bitread_{moniker<T>()}", counter, cycles*M*N);
+            Benchmark($"gbm_bitread_{moniker<T>()}", counter, CycleCount*M*N);
         }
 
-        protected void gbg_bitwrite_bench<T>(ushort M, ushort N, int cycles, SystemCounter counter = default)
+        protected void bg_bitwrite_bench<T>(ushort M, ushort N, SystemCounter counter = default)
             where T : unmanaged
         {
             var dst = BitGrid.alloc<T>(M,N);
-            for(var i = 0; i<cycles; i++)
+            for(var i = 0; i<CycleCount; i++)
             {
                 var src = Random.BitString(M*N);
                 var pos = 0;
@@ -153,7 +153,7 @@ namespace Z0
                 counter.Stop();
             }
 
-            Benchmark($"gbg_bitwrite_{moniker<T>()}", counter, cycles*M*N);
+            Benchmark($"gbg_bitwrite_{moniker<T>()}", counter, CycleCount*M*N);
         }
 
         void emit_factors()
@@ -167,7 +167,7 @@ namespace Z0
         void emit_grid_maps()
             => GridWriter.EmitGridMaps();
 
-        protected void nbg_and_check<M,N,T>(M m = default, N n = default, T t = default)
+        protected void bg_and_check<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged,ITypeNat
             where N : unmanaged,ITypeNat
             where T : unmanaged
@@ -186,7 +186,7 @@ namespace Z0
 
         }
 
-        protected void nbg_xor_check<M,N,T>(M m = default, N n = default, T t = default)
+        protected void bg_xor_check<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged,ITypeNat
             where N : unmanaged,ITypeNat
             where T : unmanaged
@@ -204,7 +204,7 @@ namespace Z0
                 Claim.eq(ginx.vxor(gx[block], gy[block]), gz[block]);   
         }
 
-        protected void gbg_and_check<T>(int m, int n, T t = default)
+        protected void bg_and_check<T>(int m, int n, T t = default)
             where T : unmanaged
         {
             var gx = Random.BitGrid(m,n,t);
@@ -221,7 +221,7 @@ namespace Z0
 
         }
 
-        protected void gbg_xor_check<T>(int m, int n, T t = default)
+        protected void bg_xor_check<T>(int m, int n, T t = default)
             where T : unmanaged
         {
             var gx = Random.BitGrid(m,n,t);

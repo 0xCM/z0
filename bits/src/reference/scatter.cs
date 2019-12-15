@@ -56,7 +56,6 @@ namespace Z0
             return dst;
         }
 
-
         /// <summary>
         /// Scatters contiguous low bits from the source across a target according to a mask
         /// </summary>

@@ -57,7 +57,7 @@ namespace Z0
         {
             int rowcells = (natval<N>() / 8)/size<T>();
             int rowoffset = ((row*natval<N>())/8)/size<T>();
-            return RowBits.transfer(g.Data.Slice(rowoffset, rowcells));
+            return RowBits.load(g.Data.Slice(rowoffset, rowcells));
         }
  
     }

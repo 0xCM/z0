@@ -12,7 +12,7 @@ namespace Z0
     using static HexDigit;
 
     /// <summary>
-    /// Defines the literals that constitute the base-16 digits
+    /// Defines literals corresponding to base-16 digits
     /// </summary>
     public enum HexDigit : byte
     {
@@ -92,29 +92,10 @@ namespace Z0
         XE = 0xE,
 
         /// <summary>
-        /// Specifies 14 base 16
+        /// Specifies 15 base 16
         /// </summary>
         XF = 0xF,
 
-        /// <summary>
-        /// Identifies the zero digit
-        /// </summary>
-        Zero = X0,
-
-        /// <summary>
-        /// Identifies the one digit
-        /// </summary>
-        One = X1,
-        
-        /// <summary>
-        /// Identifies the last digit
-        /// </summary>
-        Last = XF,
-        
-        /// <summary>
-        /// Specifies the base to which the digits are relative (10)
-        /// </summary>
-        Base = Last + X1
     }
 
  

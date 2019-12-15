@@ -9,13 +9,13 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class PermX
+    public static class PermX
     {
         /// <summary>
         /// Computes the digigs corresponding to each 2-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
-        public static NatBlock<N4, byte> Digits(this Perm4 src)
+        public static NatBlock<N4, byte> ToDigits(this Perm4 src)
         {
             var scalar = (byte)src;
             var dst = DataBlocks.natalloc<N4,byte>();
@@ -26,7 +26,23 @@ namespace Z0
             return dst;
         }
 
-        public static NatBlock<N16, HexDigit> Digits(this Perm16 src)
+        public static NatBlock<N8, OctalDigit> ToDigits(this Perm8 src)
+        {
+            //[0 1 2 | 3 4 5 | 6 7 8 | ... | 21 22 23] -> 256x32
+            var scalar = (uint)src;
+            var dst = DataBlocks.natalloc<N8,OctalDigit>();
+            dst[0] = (OctalDigit)BitMask.between(scalar, 0, 2);
+            dst[1] = (OctalDigit)BitMask.between(scalar, 3, 5);
+            dst[2] = (OctalDigit)BitMask.between(scalar, 6, 8);
+            dst[3] = (OctalDigit)BitMask.between(scalar, 9, 11);
+            dst[4] = (OctalDigit)BitMask.between(scalar, 12, 14);
+            dst[5] = (OctalDigit)BitMask.between(scalar, 15, 17);
+            dst[6] = (OctalDigit)BitMask.between(scalar, 18, 20);
+            dst[7] = (OctalDigit)BitMask.between(scalar, 21, 23);
+            return dst;
+        }
+
+        public static NatBlock<N16, HexDigit> ToDigits(this Perm16 src)
         {
             var scalar = (ulong)src;
             var dst = DataBlocks.natalloc<N16,HexDigit>();

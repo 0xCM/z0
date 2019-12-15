@@ -181,7 +181,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged            
                 => new SubGrid256<M, N, T>(data);
-
     }
-
 }

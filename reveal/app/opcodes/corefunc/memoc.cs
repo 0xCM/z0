@@ -11,6 +11,7 @@ namespace Z0.OpCodes
     /// <summary>
     /// Opcodes for memory-related operations
     /// </summary>
+    [OpCodeProvider]
     public static class memory
     {
         static N64 n64 => default;

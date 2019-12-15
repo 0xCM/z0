@@ -226,7 +226,7 @@ namespace Z0
         /// <param name="src">The span to replicate</param>
         /// <typeparam name="T">The element type</typeparam>
         /// <returns>Returns the replicated span</returns>
-        [MethodImpl(Inline)]
+        [MethodImpl(NotInline)]
         public static Span<T> Replicate<T>(this ReadOnlySpan<T> src, bool structureOnly = false)
         {
             Span<T> dst = new T[src.Length];
@@ -242,8 +242,18 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         /// <returns>Returns the replicated span</returns>
         [MethodImpl(Inline)]
-        public static Span<T> Replicate<T>(this Span<T> src, bool structureOnly = false)
+        public static Span<T> Replicate<T>(this Span<T> src, bool structureOnly)
             => src.ReadOnly().Replicate(structureOnly);
+
+        /// <summary>
+        /// Clones the source span into a new span
+        /// </summary>
+        /// <param name="src">The span to replicate</param>
+        /// <typeparam name="T">The element type</typeparam>
+        /// <returns>Returns the replicated span</returns>
+        [MethodImpl(Inline)]
+        public static Span<T> Replicate<T>(this Span<T> src)
+            => src.ReadOnly().Replicate();
 
         /// <summary>
         /// Projects a source span to target span via a supplied transformation

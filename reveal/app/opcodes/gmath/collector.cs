@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class gmoc
+    partial class gmathops
     {
 
         public static ulong avgz_64u_g(ReadOnlySpan<ulong> src)

@@ -12,7 +12,7 @@ namespace Z0
     public class t_bm_diagonal : t_bm<t_bm_diagonal>
     {
 
-        public void pbm_diagonal_4x4()
+        public void bm_diagonal_4x4x4()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -25,7 +25,7 @@ namespace Z0
             }
         }
 
-        public void pbm_diagonal_8x8()
+        public void bm_diagonal_8x8x8()
         {
             for(var i=0; i<SampleSize; i++)
             {

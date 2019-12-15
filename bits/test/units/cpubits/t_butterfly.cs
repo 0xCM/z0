@@ -8,7 +8,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_butterfly : t_sb<t_butterfly>
+    public class t_butterfly : t_vcpu<t_butterfly>
     {
         //[0 1 2 3] -> [0 2 1 3]
         public void butterfly_16x64u()
@@ -121,41 +121,38 @@ namespace Z0
         }
 
         public void vbutterfly_256x64x1()
+            => vbutterfly_check(n256, n1, z64);
+        // {
+        //     var w = n256;
+        //     var b = n1;
+        //     for(var i=0; i< SampleSize; i++)
+        //     {
+        //         var x = Random.CpuVector<ulong>(w);
+        //         var y = gbits.vbutterfly(b, x);
+        //         var xs = x.ToSpan();
+        //         var zs = DataBlocks.single<ulong>(w);
+        //         for(var j=0; j<zs.CellCount; j++)
+        //             zs[j] = gbits.butterfly(b,xs[j]);
+        //         var z = zs.LoadVector();
+        //         Claim.eq(z,y);
+
+        //     }
+        // }
+
+        protected void vbutterfly_check<T>(N256 w, N1 b, T t = default)
+            where T : unmanaged
         {
-            var n = n256;
-            var w = n1;
             for(var i=0; i< SampleSize; i++)
             {
-                var x = Random.CpuVector<ulong>(n);
-                var y = gbits.vbutterfly(w, x);
+                var x = Random.CpuVector<T>(w);
+                var y = gbits.vbutterfly(b, x);
                 var xs = x.ToSpan();
-                var zs = DataBlocks.single<ulong>(n);
+                var zs = DataBlocks.single<T>(w);
                 for(var j=0; j<zs.CellCount; j++)
-                    zs[j] = gbits.butterfly(w,xs[j]);
+                    zs[j] = gbits.butterfly(b,xs[j]);
                 var z = zs.LoadVector();
                 Claim.eq(z,y);
-
             }
-        }
-
-        static Pair<bit> add(Triple<bit> x)
-        {
-            // 1 + 0 + 0 = 0 1
-            // 1 + 1 + 0 = 1 0
-            // 1 + 1 + 1 = 1 1
-            // 0 + 1 + 1 = 1 0
-            // 0 + 0 + 1 = 0 1
-            // 1 + 0 + 1 = 1 0            
-
-            return default;
-        }
-
-
-        void add_2()
-        {
-            var input = Triple.define(bit.On, bit.Off, bit.On);
-            var output = add(input);
-            
         }
     }
 }

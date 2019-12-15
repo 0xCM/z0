@@ -11,7 +11,7 @@ namespace Z0
 
     public class t_bm_cnonimpl : t_bm<t_bm_cnonimpl>
     {                
-        public void not_32x32()
+        public void bm_not_32x32x32()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -23,28 +23,28 @@ namespace Z0
             }
         }
 
-        public void pbm_cnonimpl_8x8()
+        public void bm_cnonimpl_8x8x8()
         {
             var lhs = Random.BitMatrix8();
             var rhs = lhs.Replicate();
             Claim.yea(lhs.AndNot(rhs).IsZero());
         }
 
-        public void pbm_cnonimpl_16x16()
+        public void bm_cnonimpl_16x16x16()
         {
             var lhs = Random.BitMatrix16();
             var rhs = lhs.Replicate();
             Claim.yea(lhs.AndNot(rhs).IsZero());
         }
 
-        public void pbm_cnonimpl_32x32()
+        public void bm_cnonimpl_32x32x32()
         {
             var lhs = Random.BitMatrix32();
             var rhs = lhs.Replicate();
             Claim.yea(lhs.AndNot(rhs).IsZero());
         }
 
-        public void pbm_cnonimpl_64x64()
+        public void bm_cnonimpl_64x64x64()
         {
             var lhs = Random.BitMatrix64();
             var rhs = lhs.Replicate();

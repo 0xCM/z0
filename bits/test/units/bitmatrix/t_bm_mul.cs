@@ -11,7 +11,7 @@ namespace Z0
 
     public class t_bm_mul : t_bm<t_bm_mul>
     {
-        public void pbm_mul_8x8()
+        public void bm_mul_8x8x8()
         {
             for(var i=0; i< SampleSize; i++)
             {
@@ -24,7 +24,7 @@ namespace Z0
             }            
         }
 
-        public void pmm_mul_32x32()
+        public void bm_mul_32x32x32()
         {
             for(var i=0; i< SampleSize; i++)
             {
@@ -36,27 +36,8 @@ namespace Z0
                 Claim.yea(m4 == m5);
             }            
         }
-
-        public void pbm_mul_32x32_bench()
-        {
-            var last = BitMatrix32.Zero;            
-            var sw = stopwatch(false);
-
-            var dst = BitMatrix.alloc(n32);
-            for(var i=0; i< OpCount; i++)
-            {
-                var m1 = Random.BitMatrix(n32);
-                var m3 = Random.BitMatrix(n32);
-                sw.Start();
-                last = m1 * m3;
-                sw.Stop();                    
-            }
-
-            Collect((OpCount, snapshot(sw), "bmm_32x32_op"));
-        }
-
-        
-        public void bmv_64x64x64u_64u()
+    
+        public void bm_vmul_64x64x64()
         {
             for(var sample = 0; sample < SampleSize; sample++)            
             {
@@ -74,7 +55,76 @@ namespace Z0
             }
         }
 
-        public void pbm_4x4_bench()
+        public void bm_vmul_8x8x8()
+        {
+            for(var sample = 0; sample < SampleSize; sample++)            
+            {
+                var m = Random.BitMatrix8();
+                var c = Random.BitVector(n8);
+                var z1 = m * c;            
+                var z2 = BitVector.alloc(n8);
+                for(var i = 0; i<m.Order; i++)           
+                    z2[i] = m[i] % c;
+                
+                Claim.yea(z1 == z2);
+            }
+        }
+
+        public void bm_vmul_16x16x16()
+        {
+            for(var sample = 0; sample < SampleSize; sample++)            
+            {
+                var m = Random.BitMatrix16();
+                var c = Random.BitVector(n16);
+                var z1 = m * c;            
+                var z2 = BitVector.alloc(n16);
+                for(var i = 0; i<m.Order; i++)           
+                {
+                    var r = m[i];
+                    z2[i] = r % c;
+                }
+                
+                Claim.yea(z1 == z2);
+            }
+        }
+
+        public void bm_vmul_32x32x32()
+        {
+            for(var sample = 0; sample < SampleSize; sample++)            
+            {
+                var m = Random.BitMatrix32();
+                var c = Random.BitVector(n32);
+                var z1 = m * c;            
+                var z2 = BitVector.alloc(n32);
+                for(var i = 0; i<m.Order; i++)           
+                {
+                    var r = m[i];
+                    z2[i] = r % c;
+                }
+                
+                Claim.yea(z1 == z2);
+            }
+        }
+ 
+        void bm_mul_32x32x32_bench()
+        {
+            var last = BitMatrix32.Zero;            
+            var sw = stopwatch(false);
+
+            var dst = BitMatrix.alloc(n32);
+            for(var i=0; i< OpCount; i++)
+            {
+                var m1 = Random.BitMatrix(n32);
+                var m3 = Random.BitMatrix(n32);
+                sw.Start();
+                last = m1 * m3;
+                sw.Stop();                    
+            }
+
+            Collect((OpCount, snapshot(sw), "bmm_32x32_op"));
+        }
+
+        void bm_4x4x4_bench()
         {
             var sw = stopwatch(false);
             var last = BitMatrix4.Zero;
@@ -90,7 +140,7 @@ namespace Z0
             Collect((OpCount, snapshot(sw), "bmm_4x4"));
         }
 
-        public void pbm_8x8_bench()
+        void bm_8x8x8_bench()
         {
             var count = counter();
             var last = BitMatrix8.Zero;
@@ -107,7 +157,7 @@ namespace Z0
             Benchmark("bmm_8x8", count);
         }
 
-        public void pbm_16x16_bench()
+        void bm_16x16x16_bench()
         {
             
             var last = BitMatrix16.Zero;
@@ -126,7 +176,7 @@ namespace Z0
         }
 
 
-        public void pbm_64x64_bench()
+        void bm_64x64_bench()
         {
             var last = BitMatrix64.Zero;  
             var count = counter();
@@ -142,57 +192,5 @@ namespace Z0
 
             Benchmark($"bmm_64x64x64u_new",count);
         }
-
-
-        public void bmv_8x8()
-        {
-            for(var sample = 0; sample < SampleSize; sample++)            
-            {
-                var m = Random.BitMatrix8();
-                var c = Random.BitVector(n8);
-                var z1 = m * c;            
-                var z2 = BitVector.alloc(n8);
-                for(var i = 0; i<m.Order; i++)           
-                    z2[i] = m[i] % c;
-                
-                Claim.yea(z1 == z2);
-            }
-        }
-
-        public void bmv_16x16()
-        {
-            for(var sample = 0; sample < SampleSize; sample++)            
-            {
-                var m = Random.BitMatrix16();
-                var c = Random.BitVector(n16);
-                var z1 = m * c;            
-                var z2 = BitVector.alloc(n16);
-                for(var i = 0; i<m.Order; i++)           
-                {
-                    var r = m[i];
-                    z2[i] = r % c;
-                }
-                
-                Claim.yea(z1 == z2);
-            }
-        }
-
-        public void bmv_32x32()
-        {
-            for(var sample = 0; sample < SampleSize; sample++)            
-            {
-                var m = Random.BitMatrix32();
-                var c = Random.BitVector(n32);
-                var z1 = m * c;            
-                var z2 = BitVector.alloc(n32);
-                for(var i = 0; i<m.Order; i++)           
-                {
-                    var r = m[i];
-                    z2[i] = r % c;
-                }
-                
-                Claim.yea(z1 == z2);
-            }
-        }
-    }
+   }
 }

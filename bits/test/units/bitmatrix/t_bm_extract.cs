@@ -10,18 +10,35 @@ namespace Z0
     using static zfunc;
 
     public class t_bm_extract : t_bm<t_bm_extract>
-    {
-        public void VectorExtract()
-        {
-            nbm_check_extract(Random.BitMatrix<N9,N9,byte>());
-            nbm_check_extract(Random.BitMatrix<N9,N9,ushort>());
-            nbm_check_extract(Random.BitMatrix<N128,N128,uint>());
-            nbm_check_extract(Random.BitMatrix<N16,N128,uint>());
-            nbm_check_extract(Random.BitMatrix<N5,N7,uint>());            
-        }
+    {    
+        public void bm_extract_n9x9x16()
+            => bm_extract_check(Random.BitMatrix<N9,N9,ushort>());
 
-        
-        public void pbm_eq_32()
+        public void bm_extract_n5x7x32()
+            => bm_extract_check(Random.BitMatrix<N5,N7,uint>());
+
+        public void bm_extract_n5x7x64()
+            => bm_extract_check(Random.BitMatrix<N5,N7,ulong>());
+
+        public void bm_extract_n9x8x16()
+            => bm_extract_check(Random.BitMatrix<N9,N8,ushort>());
+
+        public void bm_extract_n33x11x64()
+            => bm_extract_check(Random.BitMatrix<N33,N11,ulong>());
+
+        void bm_extract_n128x128x64()
+            => bm_extract_check(Random.BitMatrix<N128,N128,ulong>());
+
+        void bm_extract_n9x9x8()
+            => bm_extract_check(Random.BitMatrix<N9,N9,byte>());
+
+        void bm_extract_n128x128x32()
+            => bm_extract_check(Random.BitMatrix<N128,N128,ushort>());
+
+        void bm_extract_n16x128x32()
+            => bm_extract_check(Random.BitMatrix<N16,N128,ushort>());
+
+        public void bm_eq_32x32x32()
         {
             var x = Random.BitMatrix(n32);
             var y = Random.BitMatrix(n32);
@@ -30,7 +47,7 @@ namespace Z0
             Claim.yea(y.Equals(y));
         }
 
-        public void pbm_eq_64()
+        public void bm_eq_64x64x64()
         {
             var x = Random.BitMatrix(n64);
             var y = Random.BitMatrix(n64);
@@ -41,7 +58,7 @@ namespace Z0
             Claim.yea(y.Equals(y));
         }
 
-        public void pbm_not_64()
+        public void bm_not_64x64x64()
         {            
             var x = Random.BitMatrix(n64);
             var y = x.Replicate();
@@ -56,7 +73,7 @@ namespace Z0
             Claim.yea(b == ~c);        
         }
 
-        public void pbm_col_8()
+        public void bm_getcol_8x8x8()
         {
             for(var j = 0; j< SampleSize; j++)
             {
@@ -70,7 +87,7 @@ namespace Z0
             }
         }
 
-        public void pbm_col_16()
+        public void bm_getcol_16x16x16()
         {
             for(var j = 0; j< SampleSize; j++)
             {
@@ -84,7 +101,7 @@ namespace Z0
             }
         }
 
-        public void pbm_col_32()
+        public void bm_getcol_32x32x32()
         {
             for(var j = 0; j< SampleSize; j++)
             {
@@ -98,7 +115,7 @@ namespace Z0
             }
         }
 
-        public void pbm_col_64()
+        public void bm_getcol_64x64x64()
         {
             for(var j = 0; j< SampleSize; j++)
             {

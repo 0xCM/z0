@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class gmoc
+    partial class gmathops
     {
         public static sbyte sub_d8i(sbyte lhs, sbyte rhs)
             => math.sub(lhs,rhs);

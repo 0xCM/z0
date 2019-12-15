@@ -721,11 +721,11 @@ namespace Z0
         /// <typeparam name="N">The order type</typeparam>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static BitMatrix<M,N,T> BitMatrix<M,N,T>(this IPolyrand random, M m = default, N n = default, T zero = default)
+        public static BitMatrix<M,N,T> BitMatrix<M,N,T>(this IPolyrand random, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BM.load(m, n, random.Span<T>(BitGridSpec.define(m,n,default(T)).TotalCells));
+                => BM.load(m,n, random.Span<T>(BM.totalcells(m,n,t)));
 
         /// <summary>
         /// Produces an generic bitmatrix of natural order
@@ -735,11 +735,10 @@ namespace Z0
         /// <typeparam name="N">The order type</typeparam>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static BitMatrix<N,T> BitMatrix<N,T>(this IPolyrand random, N n = default, T zero = default)
+        public static BitMatrix<N,T> BitMatrix<N,T>(this IPolyrand random, N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BM.load(n,random.Span<T>(Z0.BitMatrix<N,T>.TotalCellCount));        
-
+                => BM.load(n,random.Span<T>(BM.totalcells(n,n,t)));         //BM.load(n,random.Span<T>(Z0.BitMatrix<N,T>.TotalCellCount));        
         
         /// <summary>
         /// Produces a 4-bit primal bitvector predicated on a random source

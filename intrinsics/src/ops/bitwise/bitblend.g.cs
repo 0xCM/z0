@@ -22,7 +22,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         /// <remarks>Equivalent to select</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<T> vblendbits<T>(Vector128<T> x, Vector128<T> y, Vector128<T> mask)
+        public static Vector128<T> vbitblend<T>(Vector128<T> x, Vector128<T> y, Vector128<T> mask)
             where T : unmanaged
                 => vxor(x, vand(vxor(x,y), mask));
 
@@ -35,7 +35,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         /// <remarks>Equivalent to select</remarks>
         [MethodImpl(Inline)]
-        public static Vector256<T> vblendbits<T>(Vector256<T> x, Vector256<T> y, Vector256<T> mask)
+        public static Vector256<T> vbitblend<T>(Vector256<T> x, Vector256<T> y, Vector256<T> mask)
             where T : unmanaged
                 => vxor(x, vand(vxor(x,y), mask));
     }

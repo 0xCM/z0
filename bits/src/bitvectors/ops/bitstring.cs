@@ -41,6 +41,14 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
+        public static BitString bitstring(BitVector24 x)
+            => BitString.scalar(x.Scalar,24);
+
+        /// <summary>
+        /// Converts the vector to a bistring representation
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
         public static BitString bitstring(BitVector32 x)
             => BitString.scalar(x.Scalar);
 

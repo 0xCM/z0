@@ -61,6 +61,6 @@ namespace Z0
         /// <summary>
         /// Represents the reversed 8 symbol identity permutation
         /// </summary>
-        Reverse =  H | G << 3 | F << 6 | E << 9 | D << 12 | C << 15 | B << 18 | A << 21,
+        Reversed =  H | G << 3 | F << 6 | E << 9 | D << 12 | C << 15 | B << 18 | A << 21,
     }
 }

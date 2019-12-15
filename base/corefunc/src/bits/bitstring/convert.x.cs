@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this sbyte src, int? maxbits = null)
-            => BitString.scalar(src);
+            => BitString.scalar(src, maxbits);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this byte src, int? maxbits = null)
-            => BitString.scalar(src);
+            => BitString.scalar(src, maxbits);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this short src, int? maxbits = null)
-            => BitString.scalar(src);
+            => BitString.scalar(src, maxbits);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this ushort src, int? maxbits = null)
-            => BitString.scalar(src);
+            => BitString.scalar(src, maxbits);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this int src, int? maxbits = null)
-            => BitString.scalar(src);
+            => BitString.scalar(src, maxbits);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this uint src, int? maxbits = null)
-            => BitString.scalar(src);
+            => BitString.scalar(src, maxbits);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this long src, int? maxbits = null)
-            => BitString.scalar(src);
+            => BitString.scalar(src, maxbits);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this ulong src, int? maxbits = null)
-            => BitString.scalar(src);
+            => BitString.scalar(src, maxbits);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this float src, int? maxbits = null)
-            => BitString.scalar(src);
+            => BitString.scalar(src, maxbits);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this double src, int? maxbits = null)
-            => BitString.scalar(src);
+            => BitString.scalar(src, maxbits);
 
         /// <summary>
         /// Converts a bitspan to a to a bitstring
@@ -177,9 +177,9 @@ namespace Z0
         /// <param name="src">The view source</param>
         /// <typeparam name="T">The data type on which the view is predicated</typeparam>
         [MethodImpl(Inline)]   
-        public static BitString ToBitString<T>(this BitView<T> src)
+        public static BitString ToBitString<T>(this BitView<T> src, int? maxbits = null)
             where T : unmanaged
-                => src.Bytes.ToBitString();
+                => src.Bytes.ToBitString(maxbits);
     
         /// <summary>
         /// Converts a 128-bit unsigned integer to a bitstring
@@ -215,9 +215,9 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The enumeration type</typeparam>
         [MethodImpl(Inline)]   
-        public static BitString ToBitString<T>(this T src)
+        public static BitString ToBitString<T>(this T src, int? maxbits = null)
             where T : unmanaged, Enum
-                => BitString.@enum(src);
+                => BitString.@enum(src, maxbits);
 
     }
 }

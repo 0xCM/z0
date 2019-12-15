@@ -10,38 +10,48 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static zfunc;
+    using static As;
 
     partial class BitGrid
     {        
+        /// <summary>
+        /// Derives a 4x4 bitgrid from a permutation of length 4
+        /// </summary>
+        /// <param name="spec">The permutaton spec</param>
+        /// <example>
+        /// Permutation: [11 10 00 01] (ABCD -> BACD)
+        /// Grid: [1000 | 0000 | 0100 | 1100]
+        /// </example>
         [MethodImpl(Inline)]
-        public static SubGrid32<N8,N3,uint> perm(Perm8 p)
+        public static BitGrid16<N4,N4,ushort> from(Perm4 spec)
+            => (ushort)spec;
+
+        [MethodImpl(Inline)]
+        public static BitGrid16<N4,N4,ushort> from(NatPerm<N4> spec)
+            => from(spec.ToLiteral());
+
+        [MethodImpl(Inline)]
+        public static SubGrid32<N8,N3,uint> from(Perm8 p)
             => (uint)p;
 
         [MethodImpl(Inline)]
-        public static SubGrid32<N8,N3,uint> perm(NatPerm<N8> p)
-            => (uint)p.ToLiteral();
+        public static SubGrid32<N8,N3,uint> from(NatPerm<N8> p)
+            => from(p.ToLiteral());
 
         [MethodImpl(Inline)]
-        public static BitGrid64<N16,N4,ulong> perm(Perm16 p)
+        public static BitGrid64<N16,N4,ulong> from(Perm16 p)
             => (ulong)p;
 
         [MethodImpl(Inline)]
-        public static BitGrid64<N16,N4,ulong> perm(NatPerm<N16> p)
-        {
-            var dst = 0ul;
-            int length = n16;
-            int m = n16;
-            int n = n4;
-            for(var i=0; i<length; i++)
-                dst |= ((ulong)p[i] << i*n);
-            return dst;
-        }
+        public static BitGrid64<N16,N4,ulong> from(NatPerm<N16> p)
+            => from(p.ToLiteral());
+
 
         [MethodImpl(Inline)]
-        public static Perm16 perm(BitGrid64<N16,N4,ulong> g)
+        public static Perm16 from(BitGrid64<N16,N4,ulong> g)
             => (Perm16)g.Data;
 
-        public static SubGrid256<N32,N5,ulong> perm(NatPerm<N32> p)
+        public static SubGrid256<N32,N5,ulong> from(NatPerm<N32> p)
         {
             var m = n32;
             var n = n5;

@@ -13,7 +13,7 @@ namespace Z0
     partial class BitGridX
     {
         /// <summary>
-        /// Formats a bytespan as a bitmatrix
+        /// Formats a span as a bitmatrix
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="rowlen">The number of bits in each row</param>
@@ -31,7 +31,7 @@ namespace Z0
                 var segment = math.min(remaining, rowlen);
                 var rowbits = dst.Slice(i, segment);
                 var rowprefix = showrow ? $"{rowidx.ToString().PadRight(3)} | " : string.Empty;
-                var rowformat = rowprefix +  new string(rowbits.Intersperse(AsciSym.Space));
+                var rowformat = rowprefix + new string(rowbits.Intersperse(AsciSym.Space));
                 sb.AppendLine(rowformat);
             }
             return sb.ToString();

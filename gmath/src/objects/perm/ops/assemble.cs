@@ -13,14 +13,9 @@ namespace Z0
 
     partial class Perm
     {
-
         /// <summary>
         /// Constructs a permutation of length four from four ordered symbols
         /// </summary>
-        /// <param name="x0">The symbol in the first position</param>
-        /// <param name="x1">The symbol in the second position</param>
-        /// <param name="x2">The symbol in the third position</param>
-        /// <param name="x3">The symbol in the fourth position</param>
         [MethodImpl(Inline)]
         public static Perm4 assemble(Perm4 x0, Perm4 x1, Perm4 x2, Perm4 x3)
         {               
@@ -30,6 +25,19 @@ namespace Z0
             dst |= (uint)x2 << 4;
             dst |= (uint)x3 << 6;
             return (Perm4)dst;
+        }
+
+        /// <summary>
+        /// Constructs a permutation of length 8 from 8 ordered symbols
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static Perm8 assemble(
+            Perm8 x0, Perm8 x1, Perm8 x2, Perm8 x3, 
+            Perm8 x4, Perm8 x5, Perm8 x6, Perm8 x7)
+        {               
+            var dst = (uint)x0       | (uint)x1 << 3  | (uint)x2 << 6  | (uint)x3 << 9 
+                    | (uint)x4 << 12 | (uint)x5 << 15 | (uint)x6 << 18 | (uint)x7 << 21; 
+            return (Perm8)dst;
         }
 
         /// <summary>
@@ -50,8 +58,5 @@ namespace Z0
 
             return (Perm16)dst;
         }
-
-
     }
-
 }

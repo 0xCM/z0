@@ -44,7 +44,9 @@ namespace Z0
         /// <param name="n">The symbol count selector</param>
         [MethodImpl(Inline)]
         public static Perm8 identity(N8 n)
-            => Perm8.Identity;
+            => assemble(
+                Perm8.A, Perm8.B, Perm8.C, Perm8.D,
+                Perm8.E, Perm8.F, Perm8.G, Perm8.H);
 
         /// <summary>
         /// Defines the identity permutation on 16 symbols

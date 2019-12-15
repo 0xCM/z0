@@ -98,9 +98,9 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The enumeration type</typeparam>
         [MethodImpl(Inline)]
-        public static BitString @enum<T>(T src)
+        public static BitString @enum<T>(T src, int? maxbits = null)
             where T : unmanaged, Enum
-                => BitString.scalar((ulong)Convert.ChangeType(src, typeof(ulong)), bitsize<T>());        
+                => BitString.scalar((ulong)Convert.ChangeType(src, typeof(ulong)), maxbits ?? bitsize<T>());        
 
         /// <summary>
         /// Constructs a bitstring from span of scalar values

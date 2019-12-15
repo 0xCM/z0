@@ -226,9 +226,9 @@ namespace Z0
             var n = (int)new N().NatValue;
             for(var i=0; i<n; i++)
             {
-                var row = x.GetRow(i);
+                var row = x.ReadRow(i);
                 for(var j=0; j<n; j++)
-                    Z[i,j] = row % y.GetRow(j);
+                    Z[i,j] = row % y.ReadRow(j);
             }
 
             return ref Z;

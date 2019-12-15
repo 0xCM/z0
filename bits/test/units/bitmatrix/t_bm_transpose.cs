@@ -11,7 +11,7 @@ namespace Z0
 
     public class t_bm_transpose : t_bm<t_bm_transpose>
     {
-        public void pbm_transpose_8x8()
+        public void bm_transpose_8x8x8()
         {
             var n = n8;
             var m1 = Random.BitMatrix(n);
@@ -24,7 +24,7 @@ namespace Z0
             Claim.yea(m3 == m1);
         }
 
-        public void pbm_transpose_16x16x16()
+        public void bm_transpose_16x16x16()
         {
             var m1 = Random.BitMatrix(n16);
             var m2 = m1.Transpose();
@@ -32,7 +32,7 @@ namespace Z0
             Claim.yea(m3 == m1);
         }
 
-        public void pbm_transpose_32x32()
+        public void bm_transpose_32x32x32()
         {
             var m1 = Random.BitMatrix(n32);
             var m2 = m1.Transpose();
@@ -40,7 +40,7 @@ namespace Z0
             Claim.yea(m3 == m1);
         }
 
-        public void pbm_transpose_64x64()
+        public void bm_transpose_64x64x64()
         {
             var m1 = Random.BitMatrix(n64);
             var m2 = m1.Transpose();
@@ -48,16 +48,19 @@ namespace Z0
             Claim.yea(m3 == m1);    
         }
 
-        public void nbm_transpose_12x14x16()
-            => nbm_transpose_check<N12,N14,short>();
+        public void bm_transpose_n12x14x16()
+            => bm_transpose_check<N12,N14,short>();
 
-        public void nbm_transpose_13x64x32()
-            => nbm_transpose_check<N13,N64,uint>();
+        void bm_transpose_n13x64x64()
+            => bm_transpose_check<N13,N64,ulong>();
 
-        public void nbm_transpose_32x32x8()
-            => nbm_transpose_check<N32,N32,byte>();
+        void bm_transpose_n13x64x32()
+            => bm_transpose_check<N13,N64,uint>();
 
-        public void nbm_transpose_8x8x8()
-            => nbm_transpose_check<N8,N8,byte>();
+        public void bm_transpose_n32x32x64()
+            => bm_transpose_check<N32,N32,ulong>();
+
+        public void bm_transpose_n8x8x8()
+            => bm_transpose_check<N8,N8,byte>();
     }
 }

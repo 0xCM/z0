@@ -27,7 +27,9 @@ namespace Z0
         /// <param name="n">The symbol count selector</param>
         [MethodImpl(Inline)]
         public static Perm8 reversed(N8 n)
-            => Perm8.Reverse;
+            => assemble(
+                Perm8.H, Perm8.G, Perm8.F, Perm8.E,
+                Perm8.D, Perm8.C, Perm8.B, Perm8.A);
 
         /// <summary>
         /// Returns the canonical literal representation of the reversal of the identity permutation on 16 symbols

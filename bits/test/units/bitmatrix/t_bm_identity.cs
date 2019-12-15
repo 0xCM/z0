@@ -11,22 +11,22 @@ namespace Z0
 
     public class t_bm_identity : t_bm<t_bm_identity>
     {
-        public void bm_identity_ng8x8u_check()
+        public void bm_identity_n8x8u_check()
             => bm_identity_check<N8,byte>();
 
-        public void bm_identity_ng8x16u_check()
+        public void bm_identity_n8x16u_check()
             => bm_identity_check<N8,short>();
 
-        public void bm_identity_ng16x8u_check()
+        public void bm_identity_n16x8u_check()
             => bm_identity_check<N16,byte>();
 
-        public void bm_identity_ng18x8u_check()
+        public void bm_identity_n18x8u_check()
             => bm_identity_check<N18,byte>();
 
-        public void bm_identity_ng19x8u_check()
-            => bm_identity_check<N18,byte>();
+        public void bm_identity_n19x8u_check()
+            => bm_identity_check<N19,byte>();
 
-        public void bm_indentity_ng12x16u_check()
+        public void bm_indentity_n12x16u_check()
             => bm_identity_check<N12,ushort>();
 
         public void bm_identity_4x8u_check()
@@ -111,7 +111,7 @@ namespace Z0
             Claim.nea(Random.BitMatrix(n64).IsZero());
         }
         
-        void bm_identity_check<N,T>()
+        protected void bm_identity_check<N,T>()
             where N : unmanaged, ITypeNat
             where T : unmanaged
        {

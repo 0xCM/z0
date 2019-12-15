@@ -12,7 +12,7 @@ namespace Z0.OpCodes
     using static As;
     using static StackContainers;
 
-    [OpCodeHost]
+    [OpCodeProvider]
     public static class bitstore
     {
         public static ReadOnlySpan<char> hexdigits(ushort a)

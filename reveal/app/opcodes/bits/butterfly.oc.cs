@@ -10,9 +10,9 @@ namespace Z0.OpCodes
 
     using static zfunc;
 
+    [OpCodeProvider]
     public static class butterfly
     {
-
         public static byte butterfly_8x1(byte x)
             => gbits.butterfly(n1,x);
 
@@ -106,6 +106,7 @@ namespace Z0.OpCodes
         public static ulong butterfly_64x4(ulong x)
             => Bits.butterfly(n4,x);
 
+
         public static Vector128<ulong> vbutterfly_128x64x4(Vector128<ulong> x)
             => gbits.vbutterfly(n4,x);
 
@@ -139,7 +140,6 @@ namespace Z0.OpCodes
         public static Vector256<ulong> vbutterfly_256x64x16(Vector256<ulong> x)
             => gbits.vbutterfly(n16,x);
 
- 
     }
 
 }

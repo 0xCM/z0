@@ -14,77 +14,52 @@ namespace Z0
     partial class BitVectorX
     {
         /// <summary>
-        /// Converts the vector to a bitstring
+        /// Creates the vector's bitstring representation
         /// </summary>
+        /// <param name="src">The source bitvector</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this BitVector4 src)
             => BitVector.bitstring(src);
 
         /// <summary>
-        /// Returns the vector's bitstring representation
+        /// Creates the vector's bitstring representation
         /// </summary>
+        /// <param name="src">The source bitvector</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this BitVector8 src)
             => BitVector.bitstring(src);
 
         /// <summary>
-        /// Constructs the vector's bitstring representation
+        /// Creates the vector's bitstring representation
         /// </summary>
+        /// <param name="src">The source bitvector</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this BitVector16 src)
             => BitVector.bitstring(src);
 
+        /// <summary>
+        /// Creates the vector's bitstring representation
+        /// </summary>
+        /// <param name="src">The source bitvector</param>
+        [MethodImpl(Inline)]
+        public static BitString ToBitString(this BitVector24 src)
+             => BitVector.bitstring(src);
+
+        /// <summary>
+        /// Creates the vector's bitstring representation
+        /// </summary>
+        /// <param name="src">The source bitvector</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this BitVector32 src)
              => BitVector.bitstring(src);
 
         /// <summary>
-        /// Converts the vector to a bitstring
+        /// Creates the vector's bitstring representation
         /// </summary>
+        /// <param name="src">The source bitvector</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this BitVector64 x)
             => BitVector.bitstring(x);
-
-
-        /// <summary>
-        /// Constructs a 4-bit bitvector from bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector4 ToBitVector(this BitString src, N4 n)
-            => BitVector.from(n,src);
-
-        /// <summary>
-        /// Constructs a 8-bit bitvector from bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector8 ToBitVector(this BitString src, N8 n)
-            => BitVector.from(n,src);
-
-        /// <summary>
-        /// Constructs a 16-bit bitvector from bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector16 ToBitVector(this BitString src, N16 n)
-            => src.TakeUInt16();
-
-        /// <summary>
-        /// Constructs a 32-bit bitvector from bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector32 ToBitVector(this BitString src, N32 n)
-            => BitVector.from(n, src); 
-
-        /// <summary>
-        /// Constructs a 64-bit bitvector from bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector64 ToBitVector(this BitString src, N64 n)
-            => BitVector.from(n,src);
 
         /// <summary>
         /// Converts the vector to a bitstring
@@ -128,6 +103,58 @@ namespace Z0
         public static BitString ToBitString<T>(this BitVector<T> src, int width)
             where T : unmanaged
                 => BitVector.bitstring(src,width);
+
+        /// <summary>
+        /// Constructs a 4-bit bitvector from bitstring
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector4 ToBitVector(this BitString src, N4 n)
+            => BitVector.from(n,src);
+
+        /// <summary>
+        /// Creates an 8-bit bitvector from bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]
+        public static BitVector8 ToBitVector(this BitString src, N8 n)
+            => BitVector.from(n,src);
+
+        /// <summary>
+        /// Creates a 16-bit bitvector from bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]
+        public static BitVector16 ToBitVector(this BitString src, N16 n)
+            => src.TakeUInt16();
+
+        /// <summary>
+        /// Creates a 24-bit bitvector from bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]
+        public static BitVector24 ToBitVector(this BitString src, N24 n)
+        {
+            var lo = src.Slice(0,16).TakeUInt16();
+            var hi = src.Slice(16,8).TakeUInt8();
+            return new BitVector24(lo,hi);
+        }
+
+        /// <summary>
+        /// Creates a 32-bit bitvector from bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]
+        public static BitVector32 ToBitVector(this BitString src, N32 n)
+            => BitVector.from(n, src); 
+
+        /// <summary>
+        /// Creates a 64-bit bitvector from bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]
+        public static BitVector64 ToBitVector(this BitString src, N64 n)
+            => BitVector.from(n,src);
 
         /// <summary>
         /// Constructs a generic bitvector from bitstring

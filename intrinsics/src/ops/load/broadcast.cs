@@ -10,11 +10,55 @@ namespace Z0
     
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
-    
+    using static As;
     using static zfunc;
 
     partial class dinx
     {
+
+        /// <summary>
+        /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
+        /// and the upper 128-bit lane is filled with replicas of the hi value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="lo">The value to replicate in the lower lane</param>
+        /// <param name="hi">The value to replicate in the upper lane</param>
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vbroadcast(N256 w, byte lo, byte hi)
+            => vconcat(vbroadcast(n128, lo),vbroadcast(n128, hi));            
+
+        /// <summary>
+        /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
+        /// and the upper 128-bit lane is filled with replicas of the hi value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="lo">The value to replicate in the lower lane</param>
+        /// <param name="hi">The value to replicate in the upper lane</param>
+        [MethodImpl(Inline)]
+        public static Vector256<ushort> vbroadcast(N256 w, ushort lo, ushort hi)
+            => vconcat(vbroadcast(n128, lo),vbroadcast(n128, hi));            
+
+        /// <summary>
+        /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
+        /// and the upper 128-bit lane is filled with replicas of the hi value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="lo">The value to replicate in the lower lane</param>
+        /// <param name="hi">The value to replicate in the upper lane</param>
+        [MethodImpl(Inline)]
+        public static Vector256<uint> vbroadcast(N256 w, uint lo, uint hi)
+            => vconcat(vbroadcast(n128, lo),vbroadcast(n128, hi));            
+
+        /// <summary>
+        /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
+        /// and the upper 128-bit lane is filled with replicas of the hi value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="lo">The value to replicate in the lower lane</param>
+        /// <param name="hi">The value to replicate in the upper lane</param>
+        [MethodImpl(Inline)]
+        public static Vector256<ulong> vbroadcast(N256 w, ulong lo, ulong hi)
+            => vconcat(vbroadcast(n128, lo),vbroadcast(n128, hi));            
 
         /// <summary>
         /// Creates a target vector where each component is initialized with the same value

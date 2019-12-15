@@ -14,6 +14,22 @@ namespace Z0
     partial class gbits
     {
         /// <summary>
+        /// Rotates source cells rightward and deposits the result in a caller-supplied target
+        /// </summary>
+        /// <param name="src">The leading source cell</param>
+        /// <param name="shift">The amount to rotate</param>
+        /// <param name="dst">The leading target cell</param>
+        /// <param name="count">The cell count</param>
+        /// <typeparam name="T">The primal cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static void rotr<T>(in T src, int shift, ref T dst, int count)
+            where T : unmanaged
+        {
+            for(var i=0; i<count; i++)   
+               seek(ref dst, i) =  gbits.rotr(skip(in src, i),shift);
+        }
+
+        /// <summary>
         /// Rotates bits in the source rightwards by a specified shift amount
         /// </summary>
         /// <param name="src">The source value</param>

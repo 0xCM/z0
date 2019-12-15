@@ -11,7 +11,7 @@ namespace Z0
     
     public class t_bm_rowswap : t_bm<t_bm_rowswap>
     {        
-        public void pbm_rowswap_16()
+        public void bm_rowswap_16x16x16()
         {
             var n = n16;
             var A = Random.BitMatrix(n);
@@ -34,7 +34,7 @@ namespace Z0
         }
 
 
-        public void pbm_rowswap_64()
+        public void bm_rowswap_64x64x64()
         {
             var n = n64;
             var A = Random.BitMatrix(n);
@@ -57,7 +57,7 @@ namespace Z0
                 
         }
 
-        public void pbm_rowswap_32()
+        public void bm_rowswap_32x32x32()
         {
             var n = n32;
             var A = Random.BitMatrix(n);
