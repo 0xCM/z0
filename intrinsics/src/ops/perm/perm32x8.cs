@@ -16,21 +16,9 @@ namespace Z0
     partial class dinx    
     {        
 
-        /// <summary>
-        /// __m128i _mm_shuffle_epi8 (__m128i a, __m128i b) PSHUFB xmm, xmm/m128
-        /// </summary>
-        /// <param name="src">The content vector</param>
-        /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
-        public static Vector128<byte> vperm16x8(Vector128<byte> src, Perm16Spec spec)
-            => Shuffle(src, spec.data);
-
-
         [MethodImpl(Inline)]
         public static Vector256<byte> vperm32x8(Vector256<byte> src, Perm32Spec spec)
             => vshuf32x8(src,spec.data);
-
-
     }
 
 }

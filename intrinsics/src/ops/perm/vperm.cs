@@ -5,17 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Runtime.CompilerServices;    
+    using System.Runtime.Intrinsics;
 
-    using static zfunc;    
+    using static zfunc;
 
-    public static class PermX
-    {
+    public static partial class vperm
+    {    
         /// <summary>
         /// Computes the digigs corresponding to each 2-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
-        public static NatBlock<N4, byte> ToDigits(this Perm4 src)
+        public static NatBlock<N4, byte> digits(Perm4 src)
         {
             var scalar = (byte)src;
             var dst = DataBlocks.natalloc<N4,byte>();
@@ -26,7 +27,11 @@ namespace Z0
             return dst;
         }
 
-        public static NatBlock<N8, OctalDigit> ToDigits(this Perm8 src)
+        /// <summary>
+        /// Computes the digits corresponding to each 3-bit segment of the permutation spec
+        /// </summary>
+        /// <param name="src">The perm spec</param>
+        public static NatBlock<N8, OctalDigit> digits(Perm8 src)
         {
             //[0 1 2 | 3 4 5 | 6 7 8 | ... | 21 22 23] -> 256x32
             var scalar = (uint)src;
@@ -42,7 +47,11 @@ namespace Z0
             return dst;
         }
 
-        public static NatBlock<N16, HexDigit> ToDigits(this Perm16 src)
+        /// <summary>
+        /// Computes the digits corresponding to each 4-bit segment of the permutation spec
+        /// </summary>
+        /// <param name="src">The perm spec</param>
+        public static NatBlock<N16, HexDigit> digits(Perm16 src)
         {
             var scalar = (ulong)src;
             var dst = DataBlocks.natalloc<N16,HexDigit>();
@@ -64,6 +73,22 @@ namespace Z0
             dst[15] = (HexDigit)BitMask.between(scalar, 60, 63);
             return dst;
         }
-    }
 
+        /// <summary>
+        /// Computes the digits corresponding to each 4-bit segment of the permutation spec as
+        /// </summary>
+        /// <param name="src">The perm spec</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vdigits(Perm16Spec spec)
+            => dinx.vshuf16x8(vbuild.increments<byte>(n128), spec.data);
+
+        /// <summary>
+        /// Computes the digits corresponding to each 5-bit segment of the permutation spec
+        /// </summary>
+        /// <param name="src">The perm spec</param>
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vdigits(Perm32Spec spec)
+            => dinx.vshuf32x8(vbuild.increments<byte>(n256),spec.data);
+
+    }
 }

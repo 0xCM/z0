@@ -19,5 +19,16 @@ namespace Z0
                 dst[i] = src[i];
             return dst;
         }
+
+        public static Swap<T>[] Unsized<N,T>(this NatSwap<N,T>[] src)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var dst = new Swap<T>[src.Length];
+            for(var i=0; i<src.Length; i++)
+                dst[i] = src[i];
+            return dst;
+        }
+
     }
 }

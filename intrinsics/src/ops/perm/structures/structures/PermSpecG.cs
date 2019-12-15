@@ -124,6 +124,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public PermSpec(IEnumerable<int> src)
+        {
+            terms = src.Select(x => convert<T>(x)).ToArray();
+        }
+
+        [MethodImpl(Inline)]
         public PermSpec(T n, T[] src)
         {
             var count = iVal(n);
@@ -142,7 +148,7 @@ namespace Z0
         /// <summary>
         /// Term accessor where the term index is in the inclusive range [0, N-1]
         /// </summary>
-        ref T this[int i]
+        public ref T this[int i]
         {
             [MethodImpl(Inline)]
             get => ref terms[i];
@@ -165,6 +171,18 @@ namespace Z0
             return this;
         }
 
+        [MethodImpl(Inline)]
+        public PermSpec<T> Swap((T i, T j) spec)
+            => Swap(spec.i,spec.j);
+
+        [MethodImpl(Inline)]
+        public PermSpec<T> Swap(int i, int j)
+        {
+            
+            swap(ref terms[i], ref terms[j]);
+            return this;
+        }
+
         /// <summary>
         /// Effects a sequence of in-place transpositions
         /// </summary>
@@ -173,6 +191,17 @@ namespace Z0
             
             for(var k=0; k<specs.Length; k++)
                 swap(ref terms[iVal(specs[k].i)], ref terms[iVal(specs[k].j)]);
+            return this;
+        }
+
+        /// <summary>
+        /// Effects a sequence of in-place transpositions
+        /// </summary>
+        public PermSpec<T> Swap(params (int i, int j)[] specs)
+        {
+            
+            for(var k=0; k<specs.Length; k++)
+                swap(ref terms[specs[k].i], ref terms[specs[k].j]);
             return this;
         }
 
@@ -266,6 +295,16 @@ namespace Z0
         }
 
         /// <summary>
+        /// Reverses the permutation in-place
+        /// </summary>
+        [MethodImpl(Inline)]
+        public PermSpec<T> Reverse()
+        {
+            terms.Reverse();
+            return this;
+        }
+
+        /// <summary>
         /// Computes the inverse permutation t of the current permutation p such that p*t = t*p = I where I denotes the identity permutation
         /// </summary>
         public readonly PermSpec<T> Invert()
@@ -324,6 +363,9 @@ namespace Z0
         [MethodImpl(Inline)]
         static int iVal(T src)
             => convert<T,int>(src);
+
+        public string Format(int? colwidth = null)
+            => Terms.FormatAsPerm(colwidth);
 
         public readonly override bool Equals(object o)
             => (o is PermSpec<T> p) ? p == this : false;

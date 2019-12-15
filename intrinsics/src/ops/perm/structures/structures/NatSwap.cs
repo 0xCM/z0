@@ -146,6 +146,22 @@ namespace Z0
             j = this.j;
         }
 
+        [MethodImpl(Inline)]
+        public void Deconstruct<T>(out T i, out T j)
+            where T : unmanaged
+        {
+            (i,j) = ToTuple<T>();
+        }
+
+        [MethodImpl(Inline)]
+        public (int i, int j) ToTuple()
+            => (i, j);
+
+        [MethodImpl(Inline)]
+        public (T i, T j) ToTuple<T>()
+            where T : unmanaged
+                => (convert<T>(i), convert<T>(j));
+
         /// <summary>
         /// Creates a copy
         /// </summary>

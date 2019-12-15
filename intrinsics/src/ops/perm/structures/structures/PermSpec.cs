@@ -240,7 +240,19 @@ namespace Z0
             return this;
         }
 
-        
+        /// <summary>
+        /// Converts the permutation to a generic permutation over the specified target type
+        /// </summary>
+        /// <typeparam name="T">The target type</typeparam>
+        public PermSpec<T> Convert<T>()
+            where T : unmanaged
+        {
+            var dst = new T[terms.Length];
+            for(var i=0; i<terms.Length; i++)
+                dst[i] = convert<T>(terms[i]);
+            return new PermSpec<T>(dst);
+        }
+
         public Span<Swap> CalcSwaps()
         {
             var max = terms.Length/2;
@@ -257,11 +269,11 @@ namespace Z0
                     if(image == b)
                         swaps[count++] = (a,image);
                 }
-
             }
 
             return swaps.Slice(0,count);
         }
+
 
         /// <summary>
         /// Computes a permutation cycle originating at a specified point
