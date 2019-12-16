@@ -10,11 +10,14 @@ namespace Z0
 
     using static zfunc;    
 
+    /// <summary>
+    /// A data structure that covers and arbitrary number of 256-bit blocks of packed bits
+    /// </summary>
     public readonly ref struct BitSpan<T>
         where T : unmanaged
     {
         /// <summary>
-        /// The bitvector content, indexed via a bitmap
+        /// The bitvector content
         /// </summary>
         readonly Block256<T> data;
 
@@ -131,7 +134,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Is true if the vector has at least one enabled bit; false otherwise
+        /// Is true if at least one enabled bit; false otherwise
         /// </summary>
         public readonly bit NonEmpty
         {
@@ -139,10 +142,22 @@ namespace Z0
             get => Pop() != 0;
         }
 
+        /// <summary>
+        /// The number of allocated blocks
+        /// </summary>
         public int BlockCount
         {
             [MethodImpl(Inline)]
             get => data.BlockCount;
+        }
+
+        /// <summary>
+        /// The number of allocated cells
+        /// </summary>
+        public int CellCount
+        {
+            [MethodImpl(Inline)]
+            get => data.CellCount;
         }
 
         /// <summary>

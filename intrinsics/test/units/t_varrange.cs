@@ -13,7 +13,7 @@ namespace Z0
     public class t_varrange : t_vinx<t_varrange>
     {     
 
-        public void duplicate32x0_256x32u_basecase()
+        public void vduplicate32x0_256x32u_outline()
         {
             var n = n256;
             var width = n32;
@@ -39,7 +39,7 @@ namespace Z0
             var z2 = dinx.vduplicate(n1,n64, x2);
         }
         
-        public void reverse_128x8u_basecase()
+        public void vreverse_128x8u_outline()
         {
             var n = n128;
             var v1 = VData.increments<byte>(n);
@@ -48,17 +48,16 @@ namespace Z0
             Claim.eq(v2,v3);
         }
 
-        public void reverse_256x8u_basecase()
+        public void vreverse_256x8u_outline()
         {
             var n = n256;
             var v1 = vbuild.increments<byte>(n);
             var v2 = vbuild.decrements<byte>(n);            
             var v3 = dinx.vreverse(v1);
             Claim.eq(v2,v3);
-
         }
 
-        public void alt_256x8u_basecase()
+        public void alt_256x8u_outline()
         {
             var n = n256;
             var x = vbuild.alt(n, 0xAA, 0x55);
@@ -67,7 +66,7 @@ namespace Z0
                 Claim.eq(even(i) ? 0xAA : 0x55,  xs[i]);
         }
 
-        public void reverse_256x32u()
+        public void vreverse_256x32u()
         {
             var n = n256;
             for(var i = 0; i< SampleSize; i++)
@@ -83,22 +82,7 @@ namespace Z0
         }
 
 
-        public void vperm4x32_128x32u_basecase()
-        {
-            var n = n128;
-
-            var u = VData.increments<uint>(n);
-            Claim.eq(vbuild.parts(n,0,1,2,3), u);
-
-            var v = VData.decrements<uint>(n);
-            Claim.eq(vbuild.parts(n,3,2,1,0),v);
-
-            Claim.eq(v, dinx.vperm4x32(u, Perm4L.DCBA));
-            Claim.eq(u, dinx.vperm4x32(v, Perm4L.DCBA));
-        }
-
-
-        public void vunpackhi_256x64u_basecase()
+        public void vunpackhi_256x64u_outline()
         {            
             var n = n256;
             var x = vbuild.parts(n,1,2,3,4);
@@ -108,7 +92,7 @@ namespace Z0
             Claim.eq(expect, actual);
         }
 
-        public void vunpackhi_256x32u_basecase()
+        public void vunpackhi_256x32u_outline()
         {
             var n = n256;
             var x = vbuild.parts(n,1u,2,3,4,5,6,7,8);

@@ -2,16 +2,61 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.OpCodes
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
-    partial class inxoc
-    {
+    using static zfunc;    
+    
+    [OpCodeProvider]
+    public static class vcompare
+    {                
+
+        public static Vector128<int> vcmplt_128x32i(Vector128<int> x, Vector128<int> y)
+            => dinx.vlt(x,y);
+
+        public static Vector128<int> vcmplt_g128x32i(Vector128<int> x, Vector128<int> y)
+            => ginx.vlt(x,y);
+
+        public static Vector128<uint> vcmplt_128x32u(Vector128<uint> x, Vector128<uint> y)
+            => dinx.vlt(x,y);
+
+        public static Vector128<uint> vcmplt_g128x32u(Vector128<uint> x, Vector128<uint> y)
+            => ginx.vlt(x,y);
+
+        public static Vector128<long> vcmplt_128x64i(Vector128<long> x, Vector128<long> y)
+            => dinx.vlt(x,y);
+
+        public static Vector128<long> vcmplt_g128x64i(Vector128<long> x, Vector128<long> y)
+            => ginx.vlt(x,y);
+
+        public static Vector128<ulong> vcmplt_128x64u(Vector128<ulong> x, Vector128<ulong> y)
+            => dinx.vlt(x,y);
+
+        public static Vector128<ulong> vcmplt_g128x64u(Vector128<ulong> x, Vector128<ulong> y)
+            => ginx.vlt(x,y);
+
+
+        public static Vector256<byte> vcmplt_256x8u(Vector256<byte> x, Vector256<byte> y)
+            => dinx.vlt(x,y);
+
+        public static Vector256<byte> vcmplt_g256x8u(Vector256<byte> x, Vector256<byte> y)
+            => ginx.vlt(x,y);
+
+        public static Vector256<long> vcmplt_256x64i(Vector256<long> x, Vector256<long> y)
+            => dinx.vlt(x,y);
+
+        public static Vector256<long> vcmplt_g256x64i(Vector256<long> x, Vector256<long> y)
+            => ginx.vlt(x,y);
+
+        public static Vector256<ulong> vcmplt_256x64u(Vector256<ulong> x, Vector256<ulong> y)
+            => dinx.vlt(x,y);
+
+        public static Vector256<ulong> vcmplt_g256x64u(Vector256<ulong> x, Vector256<ulong> y)
+            => ginx.vlt(x,y);
+
         public static bool vtestz_d128x8i(Vector128<sbyte> src, Vector128<sbyte> mask)
             => dinx.vtestz(src,mask);
 
@@ -107,6 +152,6 @@ namespace Z0
 
         public static bool vtestz_g256x64u(Vector256<ulong> src, Vector256<ulong> mask)
             => ginx.vtestz(src,mask);         
-    }
 
+    }
 }

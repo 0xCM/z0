@@ -19,304 +19,9 @@ namespace Z0
 
     partial class dinx
     {                
-        #region  unsigned
 
-        /// <summary>
-        /// PMOVZXBQ xmm, m16
-        /// Evenly distributes cells from the leading source block across the target
-        /// 16x8[0 1] -> 128x64:[0 1]
-        /// 2:8 -> 64
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<ulong> vloadblock(in ConstBlock16<byte> src, out Vector128<ulong> dst)
-        {
-            dst = v64u(ConvertToVector128Int64(constptr(in src.Head)));
-            return dst;
-        }
-
-        /// <summary>
-        /// PMOVZXBD xmm, m32
-        /// Evenly distributes cells from the leading source block across the target
-        /// 32x8:[0 1 2 3] -> 128x4:[0 1 2 3]
-        /// 4:8 -> 32
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<uint> vloadblock(in ConstBlock32<byte> src, out Vector128<uint> dst)
-        {
-            dst = v32u(ConvertToVector128Int32(constptr(in src.Head)));
-            return dst;
-        }
-
-        /// <summary>
-        /// VPMOVZXBQ ymm, m32
-        /// Evenly distributes cells from the leading source block across the target
-        /// 32x8:[0 1 2 3] -> 256x64:[0 1 2 3]
-        /// 4:8 -> 64
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> vloadblock(in ConstBlock32<byte> src, out Vector256<ulong> dst)
-        {
-            dst = v64u(ConvertToVector256Int64(constptr(in src.Head)));
-            return dst;
-        }
-
-        /// <summary>
-        /// PMOVZXBW xmm, m64
-        /// Evenly distributes cells from the leading source block across the target
-        /// 64x8:[0 1 2 3 4 5 6 7] -> 128x16:[0 1 2 3 4 5 6 7]
-        /// 8:8 -> 16
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<ushort> vloadblock(in ConstBlock64<byte> src, out Vector128<ushort> dst)
-        {
-            dst = v16u(ConvertToVector128Int16(constptr(in src.Head)));
-            return dst;
-        }
-
-        /// <summary>
-        /// VPMOVZXBD ymm, m64
-        /// Evenly distributes cells from the leading source block across the target
-        /// 64x8:[0 1 2 3 4 5 6 7] -> 256x32:[0 1 2 3 4 5 6 7]
-        /// 8:8 -> 32
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<uint> vloadblock(in ConstBlock64<byte> src, out Vector256<uint> dst)
-        {
-            dst = v32u(ConvertToVector256Int32(constptr(in src.Head)));
-            return dst;
-        }
-
-        /// <summary>
-        /// VPMOVZXBW ymm, m128
-        /// Evenly distributes cells from the leading source block across the target
-        /// 128x8:[0 1 2 3 4 5 6 7 8 9 A B C D E F] -> 256x16:[0 1 2 3 4 5 6 7 8 9 A B C D E F]
-        /// 16:8 -> 16
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<ushort> vloadblock(in ConstBlock128<byte> src, out Vector256<ushort> dst)
-        {
-            dst = v16u(ConvertToVector256Int16(constptr(in src.Head)));
-            return dst;
-        }
-
-        /// <summary>
-        /// VPMOVZXWQ ymm, m64
-        /// Evenly distributes cells from the leading source block across the target
-        /// 64x16:[0 1 2 3] -> 256x64:[0 1 2 3]
-        /// 4:16 -> 64
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> vloadblock(in ConstBlock64<ushort> src, out Vector256<ulong> dst)
-        {
-            dst = v64u(ConvertToVector256Int64(constptr(in src.Head)));
-            return dst;
-        }
-
-        /// <summary>
-        /// PMOVZXWQ xmm, m32
-        /// Evenly distributes cells from the leading source block across the target
-        /// 32x16:[0 1] -> 128x64[0 1]
-        /// 2:16 -> 64
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<ulong> vloadblock(in ConstBlock32<ushort> src, out Vector128<ulong> dst)
-        {
-            dst = v64u(ConvertToVector128Int64(constptr(in src.Head)));
-            return dst;
-        }
-
-        /// <summary>
-        /// PMOVSXWD xmm, m64
-        /// Evenly distributes cells from the leading source block across the target
-        /// 64x16:[0 1 2 3] -> 128x32:[0 1 2 3]
-        /// 4:16 -> 32
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<uint> vloadblock(in ConstBlock64<ushort> src, out Vector128<uint> dst)
-        {
-            dst = v32u(ConvertToVector128Int32(constptr(in src.Head)));
-            return dst;
-        }
-
-        /// <summary>
-        /// PMOVZXDQ xmm, m64
-        /// Evenly distributes cells from the leading source block across the target
-        /// 64x32:[0 1] -> 128x64:[0 1]
-        /// 2:32 -> 64
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<ulong> vloadblock(in ConstBlock64<uint> src, out Vector128<ulong> dst)
-        {
-           dst = v64u(ConvertToVector128Int64(constptr(in src.Head)));
-           return dst;
-        }
-
-
-        /// <summary>
-        /// VPMOVZXWD ymm, m128
-        /// Evenly distributes cells from the leading source block across the target
-        /// 128x16[0 1 2 3 4 5 6 7] -> 256x32:[0 1 2 3 4 5 6 7]
-        /// 8:16 -> 32
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<uint> vloadblock(in ConstBlock128<ushort> src, out Vector256<uint> dst)
-        {
-            dst = v32u(ConvertToVector256Int32(constptr(in src.Head)));
-            return dst;
-        }
-
-        /// <summary>
-        /// VPMOVZXDQ ymm, m128
-        /// Evenly distributes cells from the leading source block across the target
-        /// 128x32:[0 1 2 3] -> 256x4:[0 1 2 3]
-        /// 4:32 -> 64
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> vloadblock(in ConstBlock128<uint> src, out Vector256<ulong> dst)
-        {
-            dst = v64u(ConvertToVector256Int64(constptr(in src.Head)));
-            return dst;
-        }
-
-        /// <summary>
-        /// Evenly distributes cells from the leading source block across the targets
-        /// 32x8[0 1 2 3] -> (128x64:[0 1],128x64:[2 3])
-        /// 4:32 -> 64
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="lo">The lower taret</param>
-        /// <param name="hi">The upper taret</param>
-        [MethodImpl(Inline)]
-        public static unsafe void vloadblock(in ConstBlock32<byte> src, out Vector128<ulong> lo, out Vector128<ulong> hi)
-        {
-            lo = v64u(ConvertToVector128Int64(constptr(in src.Head)));
-            hi = v64u(ConvertToVector128Int64(constptr(in src.Head,2)));
-        }
-
-        /// <summary>
-        /// Evenly distributes cells from the leading source block across the targets
-        /// 64x8[0 1 2 3 4 5 6 7] -> (128x4:[0 1 2 3], 128x4:[4 5 6 7])
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="lo">The lower taret</param>
-        /// <param name="hi">The upper taret</param>
-        [MethodImpl(Inline)]
-        public static unsafe void vloadblock(in ConstBlock64<byte> src, out Vector128<uint> lo, out Vector128<uint> hi)
-        {
-            lo = v32u(ConvertToVector128Int32(constptr(in src.Head)));
-            hi = v32u(ConvertToVector128Int32(constptr(in src.Head,4)));            
-        }            
-
-        /// <summary>
-        /// Evenly distributes cells from the leading source block across the targets
-        /// 128x8:[0 1 2 3 4 5 6 7 8 9 A B C D E F] -> (128x16:[0 1 2 3 4 5 6 7], 128x16:[8 9 A B C D E F])
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="lo">The lower taret</param>
-        /// <param name="hi">The upper taret</param>
-        [MethodImpl(Inline)]
-        public static unsafe void vloadblock(in Block128<byte> src, out Vector128<ushort> lo, out Vector128<ushort> hi)
-        {
-            lo = v16u(ConvertToVector128Int16(constptr(in src.Head)));
-            hi = v16u(ConvertToVector128Int16(constptr(in src.Head,8)));
-        }            
-
-        /// <summary>
-        /// Evenly distributes cells from the leading source block across the targets
-        /// 256x8:[0 1 ... E F 10 11 .. 1E 1F] -> (256x16:[0 1 ... E F], 256x16:[0 1 ... E F])
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="lo">The lo target</param>
-        /// <param name="hi">The hi target</param>
-        [MethodImpl(Inline)]
-        public static unsafe void vloadblock(in ConstBlock256<byte> src, out Vector256<ushort> lo, out Vector256<ushort> hi)
-        {
-            lo = v16u(ConvertToVector256Int16(constptr(in src.Head)));
-            hi = v16u(ConvertToVector256Int16(constptr(in src.Head,16)));
-        }
-
-        /// <summary>
-        /// VPMOVZXWQ ymm, m64
-        /// Evenly distributes cells from the leading source block across the targets
-        /// 128x16:[0 1 2 3 4 5 6 7] -> (256x64:[0 1 2 3], 256x64:[4 5 6 7])
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="lo">The lower taret</param>
-        /// <param name="hi">The upper taret</param>
-        [MethodImpl(Inline)]
-        public static unsafe void vloadblock(in ConstBlock128<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
-        {
-            lo = v64u(ConvertToVector256Int64(constptr(in src.Head)));
-            hi = v64u(ConvertToVector256Int64(constptr(in src.Head,4)));
-        }
-
-        /// <summary>
-        /// Evenly distributes cells from the leading source block across the targets
-        /// 256x32:[0 1 2 3 4 5 6 7] -> (256x64:[0 1 2 3], 256x64:[4 5 6 7])
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="lo">The lower taret</param>
-        /// <param name="hi">The upper taret</param>
-        [MethodImpl(Inline)]
-        public static unsafe void vloadblock(in ConstBlock256<uint> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
-        {
-            lo = v64u(ConvertToVector256Int64(constptr(in src.Head)));
-            hi = v64u(ConvertToVector256Int64(constptr(in src.Head,4)));
-        }
-
-        /// <summary>
-        /// Evenly distributes cells from the leading source block across the targets
-        /// 256x16[0 1 2 3 4 5 6 7 8 9 A B C D E F] -> (256x32:[0 1 2 3 4 5 6 7], 256x32:[8 9 A B C D E F])
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="lo">The lower taret</param>
-        /// <param name="hi">The upper taret</param>
-        [MethodImpl(Inline)]
-        public static unsafe void vloadblock(in ConstBlock256<ushort> src, out Vector256<uint> lo, out Vector256<uint> hi)
-        {
-            lo = v32u(ConvertToVector256Int32(constptr(in src.Head)));
-            hi = v32u(ConvertToVector256Int32(constptr(in src.Head, 8)));
-        }
-
-        #endregion
-
-        #region signed
-
-        /// <summary>
-        /// PMOVZXBQ xmm, m16
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<long> vmovblock(in ConstBlock16<byte> src, out Vector128<long> dst)
-        {
-            dst = ConvertToVector128Int64(constptr(in src.Head));
-            return dst;
-        }
+        // ~ 8i -> X
+        // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// PMOVSXBQ xmm, m16
@@ -324,7 +29,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> vmovblock(in ConstBlock16<sbyte> src, out Vector128<long> dst)
+        public static unsafe Vector128<long> vloadblock(in ConstBlock16<sbyte> src, N128 w, out Vector128<long> dst)
         {
             dst = ConvertToVector128Int64(constptr(in src.Head));
             return dst;
@@ -336,7 +41,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<int> vmovblock(in ConstBlock32<sbyte> src, out Vector128<int> dst)
+        public static unsafe Vector128<int> vloadblock(in ConstBlock32<sbyte> src, N128 w, out Vector128<int> dst)
         {
             dst = ConvertToVector128Int32(constptr(in src.Head));
             return dst;
@@ -348,67 +53,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> vmovblock(in ConstBlock32<sbyte> src, out Vector256<long> dst)
-        {
-            dst = ConvertToVector256Int64(constptr(in src.Head));
-            return dst;
-        }
-
-        /// <summary>
-        /// PMOVZXBD xmm, m32
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<int> vmovblock(in ConstBlock32<byte> src, out Vector128<int> dst)
-        {
-            dst = ConvertToVector128Int32(constptr(in src.Head));
-            return dst;
-        }
-
-        /// <summary>
-        /// PMOVSXWQ xmm, m32
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<long> vmovblock(in ConstBlock32<short> src, out Vector128<long> dst)
-        {
-            dst = ConvertToVector128Int64(constptr(in src.Head));
-            return dst;
-        }
-
-        /// <summary>
-        /// PMOVZXWQ xmm, m32
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<long> vmovblock(in ConstBlock32<ushort> src, out Vector128<long> dst)
-        {
-            dst = ConvertToVector128Int64(constptr(in src.Head));
-            return dst;
-        }
-
-        /// <summary>
-        /// VPMOVZXBQ ymm, m32
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<long> vmovblock(in ConstBlock32<byte> src, out Vector256<long> dst)
-        {
-            dst = ConvertToVector256Int64(constptr(in src.Head));
-            return dst;
-        }
-
-        /// <summary>
-        /// VPMOVZXWQ ymm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<long> vmovblock(in ConstBlock64<ushort> src, out Vector256<long> dst)
+        public static unsafe Vector256<long> vloadblock(in ConstBlock32<sbyte> src, N256 w, out Vector256<long> dst)
         {
             dst = ConvertToVector256Int64(constptr(in src.Head));
             return dst;
@@ -420,46 +65,10 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<short> vmovblock(in ConstBlock64<sbyte> src, out Vector128<short> dst)
+        public static unsafe Vector128<short> vloadblock(in ConstBlock64<sbyte> src, N128 w, out Vector128<short> dst)
         {
             dst = ConvertToVector128Int16(constptr(in src.Head));
             return dst;
-        }
-
-        /// <summary>
-        /// PMOVZXBW xmm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<short> vmovblock(in ConstBlock64<byte> src, out Vector128<short> dst)
-        {
-            dst = ConvertToVector128Int16(constptr(in src.Head));
-            return dst;
-        }
-
-        /// <summary>
-        /// PMOVSXWD xmm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<int> vmovblock(in ConstBlock64<short> src, out Vector128<int> dst)
-        {
-            dst = ConvertToVector128Int32(constptr(in src.Head));
-            return dst;
-        }
-
-        /// <summary>
-        /// PMOVSXDQ xmm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<long> vmovblock(in ConstBlock64<int> src, out Vector128<long> dst)
-        {
-           dst = ConvertToVector128Int64(constptr(in src.Head));
-           return dst;
         }
 
         /// <summary>
@@ -468,22 +77,10 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<int> vmovblock(in ConstBlock64<sbyte> src, out Vector256<int> dst)
+        public static unsafe Vector256<int> vloadblock(in ConstBlock64<sbyte> src, N256 w, out Vector256<int> dst)
         {
             dst = ConvertToVector256Int32(constptr(in src.Head));
             return dst;
-        }
-
-        /// <summary>
-        /// PMOVZXDQ xmm, m64
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<long> vmovblock(in ConstBlock64<uint> src, out Vector128<long> dst)
-        {
-           dst = ConvertToVector128Int64(constptr(in src.Head));
-           return dst;
         }
 
         /// <summary>
@@ -492,58 +89,258 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<short> vmovblock(in ConstBlock128<sbyte> src, out Vector256<short> dst)
+        public static unsafe Vector256<short> vloadblock(in ConstBlock128<sbyte> src, N256 w, out Vector256<short> dst)
         {
             dst = ConvertToVector256Int16(constptr(in src.Head));
             return dst;
         }
 
+        // ~ 8u -> X
+        // ~ ------------------------------------------------------------------
+        
         /// <summary>
-        /// VPMOVSXDQ ymm, m128
+        /// PMOVZXBQ xmm, m16
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> vmovblock(in ConstBlock128<int> src, out Vector256<long> dst)
+        public static unsafe Vector128<long> vloadblock(in ConstBlock16<byte> src, N128 w, out Vector128<long> dst)
+        {
+            dst = ConvertToVector128Int64(constptr(in src.Head));
+            return dst;
+        }
+
+        /// <summary>
+        /// PMOVZXBD xmm, m32
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<int> vloadblock(in ConstBlock32<byte> src, N128 w, out Vector128<int> dst)
+        {
+            dst = ConvertToVector128Int32(constptr(in src.Head));
+            return dst;
+        }
+
+        /// <summary>
+        /// PMOVZXBQ xmm, m16
+        /// 2:8 -> 64
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<ulong> vloadblock(in ConstBlock16<byte> src, N128 w, out Vector128<ulong> dst)
+        {
+            dst = v64u(ConvertToVector128Int64(constptr(in src.Head)));
+            return dst;
+        }
+
+        /// <summary>
+        /// PMOVZXBD xmm, m32
+        /// 4x8u -> 4x32u
+        /// [0 1 2 3] -> [0 1 2 3]
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<uint> vloadblock(in ConstBlock32<byte> src, out Vector128<uint> dst)
+        {
+            dst = v32u(ConvertToVector128Int32(constptr(in src.Head)));
+            return dst;
+        }
+
+        /// <summary>
+        /// PMOVZXBQ xmm, m16
+        /// 4x8u -> (2x64u, 2x64u)
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="lo">The lower taret</param>
+        /// <param name="hi">The upper taret</param>
+        [MethodImpl(Inline)]
+        public static unsafe void vloadblock(in ConstBlock32<byte> src, out Vector128<long> lo, out Vector128<long> hi)
+        {
+            lo = ConvertToVector128Int64(constptr(in src.Head));
+            hi = ConvertToVector128Int64(constptr(in skip(in src.Head, 2)));            
+        }
+
+        /// <summary>
+        /// VPMOVZXBQ ymm, m32
+        /// 4x8u -> 4x64u
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<ulong> vloadblock(in ConstBlock32<byte> src, N256 w,  out Vector256<ulong> dst)
+        {
+            dst = v64u(ConvertToVector256Int64(constptr(in src.Head)));
+            return dst;
+        }
+
+        /// <summary>
+        /// VPMOVZXBQ ymm, m32
+        /// 4x8u -> 4x64i
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<long> vloadblock(in ConstBlock32<byte> src, N256 w,  out Vector256<long> dst)
         {
             dst = ConvertToVector256Int64(constptr(in src.Head));
             return dst;
         }
 
         /// <summary>
+        /// PMOVZXBQ xmm, m16
+        /// 4x8u -> (2x64u, 2x64u)
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="lo">The lower taret</param>
+        /// <param name="hi">The upper taret</param>
+        [MethodImpl(Inline)]
+        public static unsafe ConstPair<Vector128<ulong>> vloadblock(in ConstBlock32<byte> src, N128 w, ulong t = default)
+            => Tuples.constant(
+                    v64u(ConvertToVector128Int64(constptr(in src.Head))),
+                    v64u(ConvertToVector128Int64(constptr(in src.Head,2))));
+
+        /// <summary>
+        /// PMOVZXBW xmm, m64
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<short> vloadblock(in ConstBlock64<byte> src, out Vector128<short> dst)
+        {
+            dst = ConvertToVector128Int16(constptr(in src.Head));
+            return dst;
+        }
+
+        /// <summary>
+        /// PMOVZXBD xmm, m32
+        /// 8x8u -> (4x32u, 4x32u)
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        [MethodImpl(Inline)]
+        public static unsafe ConstPair<Vector128<uint>> vloadblock(in ConstBlock64<byte> src, N128 w, uint t = default)
+            => Tuples.constant(
+                    v32u(ConvertToVector128Int32(constptr(in src.Head))),
+                    v32u(ConvertToVector128Int32(constptr(in src.Head,4))));
+
+        /// <summary>
+        /// PMOVZXBW xmm, m64
+        /// 8x8u -> 8x16u
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<ushort> vloadblock(in ConstBlock64<byte> src, N128 w,  ushort t = default)
+            => v16u(ConvertToVector128Int16(constptr(in src.Head)));
+
+        /// <summary>
+        /// VPMOVZXBD ymm, m64
+        /// 8x8u -> 8x32u
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<uint> vloadblock(in ConstBlock64<byte> src, N256 w, uint t = default)
+            => v32u(ConvertToVector256Int32(constptr(in src.Head)));
+
+        /// <summary>
         /// VPMOVZXBW ymm, m128
+        /// 16x8u -> 16x16i
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]        
-        public static unsafe Vector256<short> vmovblock(in ConstBlock128<byte> src, out Vector256<short> dst)
-        {
-            dst = ConvertToVector256Int16(constptr(in src.Head));
-            return dst;
-        }
+        public static unsafe Vector256<short> vloadblock(in ConstBlock128<byte> src, N256 w, short t = default)
+            => ConvertToVector256Int16(constptr(in src.Head));
 
         /// <summary>
-        /// VPMOVZXDQ ymm, m128
+        /// VPMOVZXBW ymm, m128
+        /// 16x8u -> 16x16u
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="w">The target width</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<ushort> vloadblock(in ConstBlock128<byte> src, N256 w, ushort t = default)
+            => v16u(ConvertToVector256Int16(constptr(in src.Head)));
+
+        // ~ 16i -> X
+        // ~ ------------------------------------------------------------------
+
+        /// <summary>
+        /// PMOVSXWQ xmm, m32
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> vmovblock(in ConstBlock128<uint> src, out Vector256<long> dst)
+        public static unsafe Vector128<long> vloadblock(in ConstBlock32<short> src, N128 w, out Vector128<long> dst)
         {
-            dst = ConvertToVector256Int64(constptr(in src.Head));
+            dst = ConvertToVector128Int64(constptr(in src.Head));
             return dst;
         }
 
+        // ~ 16u -> X
+        // ~ ------------------------------------------------------------------
 
         /// <summary>
-        /// VPMOVSXWD ymm, m128
+        /// PMOVZXWQ xmm, m32
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<int> vmovblock(in ConstBlock128<short> src, out Vector256<int> dst)
+        public static unsafe Vector128<long> vloadblock(in ConstBlock32<ushort> src, N128 w, out Vector128<long> dst)
         {
-            dst = ConvertToVector256Int32(constptr(in src.Head));
+            dst = ConvertToVector128Int64(constptr(in src.Head));
+            return dst;
+        }
+
+        /// <summary>
+        /// PMOVZXWQ xmm, m32
+        /// 2x16 -> 2x64
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<ulong> vloadblock(in ConstBlock32<ushort> src, N128 w, ulong t = default)
+            => v64u(ConvertToVector128Int64(constptr(in src.Head)));
+
+        /// <summary>
+        /// VPMOVZXWQ ymm, m64
+        /// 4x16u -> 4x64u
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<ulong> vloadblock(in ConstBlock64<ushort> src, N256 w, out Vector256<ulong> dst)
+        {
+            dst = v64u(ConvertToVector256Int64(constptr(in src.Head)));
+            return dst;
+        }
+
+        /// <summary>
+        /// PMOVSXWD xmm, m64
+        /// 4x16u -> 4x32u
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<uint> vloadblock(in ConstBlock64<ushort> src, N128 w, out Vector128<uint> dst)
+        {
+            dst = v32u(ConvertToVector128Int32(constptr(in src.Head)));
+            return dst;
+        }
+
+        /// <summary>
+        /// VPMOVZXWD ymm, m128
+        /// 8x16u -> 8x32u
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<uint> vloadblock(in ConstBlock128<ushort> src, out Vector256<uint> dst)
+        {
+            dst = v32u(ConvertToVector256Int32(constptr(in src.Head)));
             return dst;
         }
 
@@ -560,20 +357,166 @@ namespace Z0
         }
 
         /// <summary>
-        /// 
+        /// VPMOVZXWD ymm, m128
+        /// 16x16u ->(8x32u, 8x32u)
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        [MethodImpl(Inline)]
+        public static unsafe ConstPair<Vector256<uint>> vloadblock(in ConstBlock256<ushort> src, N256 w, uint t = default)
+            => Tuples.constant(
+                v32u(ConvertToVector256Int32(constptr(in src.Head))),
+                v32u(ConvertToVector256Int32(constptr(in src.Head, 8))));
+        
+        // ~ 32u -> X
+        // ~ ------------------------------------------------------------------
+
+        /// <summary>
+        /// PMOVZXDQ xmm, m64
+        /// 2x32u -> 2x64u
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<ulong> vloadblock(in ConstBlock64<uint> src, N128 w, out Vector128<ulong> dst)
+        {
+           dst = v64u(ConvertToVector128Int64(constptr(in src.Head)));
+           return dst;
+        }
+
+        /// <summary>
+        /// VPMOVZXDQ ymm, m128
+        /// 4x32u -> 4x64u
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<ulong> vloadblock(in ConstBlock128<uint> src, out Vector256<ulong> dst)
+        {
+            dst = v64u(ConvertToVector256Int64(constptr(in src.Head)));
+            return dst;
+        }
+
+        /// <summary>
+        /// PMOVZXBW xmm, m64
+        /// 16x8u -> (8x16u, 8x16u)
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         /// <param name="lo">The lower taret</param>
         /// <param name="hi">The upper taret</param>
         [MethodImpl(Inline)]
-        public static unsafe void vloadblock(in ConstBlock32<byte> src, out Vector128<long> lo, out Vector128<long> hi)
+        public static unsafe ConstPair<Vector128<ushort>> vloadblock(in ConstBlock128<byte> src,  N128 w, ushort t = default)        
+            => Tuples.constant(
+                v16u(ConvertToVector128Int16(constptr(in src.Head))),
+                v16u(ConvertToVector128Int16(constptr(in src.Head,8))));                    
+
+        /// <summary>
+        /// VPMOVZXBW ymm, m128
+        /// 32x8u -> (16x16u, 16x16u)
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="lo">The lo target</param>
+        /// <param name="hi">The hi target</param>
+        [MethodImpl(Inline)]
+        public static unsafe ConstPair<Vector256<ushort>> vloadblock(in ConstBlock256<byte> src, N256 w, ushort t = default)
+            => Tuples.constant(
+                v16u(ConvertToVector256Int16(constptr(in src.Head))),
+                v16u(ConvertToVector256Int16(constptr(in src.Head,16))));
+
+        /// <summary>
+        /// VPMOVZXWQ ymm, m64
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="lo">The lower taret</param>
+        /// <param name="hi">The upper taret</param>
+        [MethodImpl(Inline)]
+        public static unsafe ConstPair<Vector256<ulong>> vloadblock(in ConstBlock128<ushort> src, N256 w, ulong t = default)
+            => Tuples.constant(
+                v64u(ConvertToVector256Int64(constptr(in src.Head))),
+                v64u(ConvertToVector256Int64(constptr(in src.Head,4))));
+       
+        /// <summary>
+        /// VPMOVZXDQ ymm, m128
+        /// 8x32u -> (4x64u, 4x64u)
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="lo">The lower taret</param>
+        /// <param name="hi">The upper taret</param>
+        [MethodImpl(Inline)]
+        public static unsafe ConstPair<Vector256<ulong>> vloadblock(in ConstBlock256<uint> src, N256 w, ulong t = default)
+            => Tuples.constant(
+                v64u(ConvertToVector256Int64(constptr(in src.Head))),
+                v64u(ConvertToVector256Int64(constptr(in src.Head,4))));
+
+        /// <summary>
+        /// PMOVZXDQ xmm, m64
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<long> vloadblock(in ConstBlock64<uint> src, N128 w, ulong t = default)
+            => ConvertToVector128Int64(constptr(in src.Head));
+
+        // ~ 32i -> X
+        // ~ ------------------------------------------------------------------
+
+        /// <summary>
+        /// PMOVSXDQ xmm, m64
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<long> vloadblock(in ConstBlock64<int> src, N128 w, long t = default)
+            => ConvertToVector128Int64(constptr(in src.Head));
+
+        /// <summary>
+        /// VPMOVSXDQ ymm, m128
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<long> vloadblock(in ConstBlock128<int> src, N256 w, out Vector256<long> dst)
         {
-            lo = ConvertToVector128Int64(constptr(in src.Head));
-            hi = ConvertToVector128Int64(constptr(in skip(in src.Head, 2)));            
+            dst = ConvertToVector256Int64(constptr(in src.Head));
+            return dst;
         }
 
+        /// <summary>
+        /// VPMOVZXWQ ymm, m64
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<long> vloadblock(in ConstBlock64<ushort> src, N256 w, out Vector256<long> dst)
+        {
+            dst = ConvertToVector256Int64(constptr(in src.Head));
+            return dst;
+        }
 
-        #endregion
+        /// <summary>
+        /// PMOVSXWD xmm, m64
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<int> vloadblock(in ConstBlock64<short> src, N128 w, int t = default)
+            => ConvertToVector128Int32(constptr(in src.Head));
+ 
+        /// <summary>
+        /// VPMOVZXDQ ymm, m128
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<long> vloadblock(in ConstBlock128<uint> src, N256 w, long t = default)
+            => ConvertToVector256Int64(constptr(in src.Head));
 
+        /// <summary>
+        /// VPMOVSXWD ymm, m128
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<int> vloadblock(in ConstBlock128<short> src, N256 w, int t = default)
+            => ConvertToVector256Int32(constptr(in src.Head));
     }
 }

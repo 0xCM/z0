@@ -12,16 +12,16 @@ namespace Z0
     public class t_vrot : t_vinx<t_vrot>
     {
         public void vrotl_128x8()
-            => vrotl_check<byte>(n128);
+            => vrotl_check(n128,z8);
 
         public void vrotl_128x16()
-            => vrotl_check<ushort>(n128);
+            => vrotl_check(n128,z16);
 
         public void vrotl_128x32()
-            => vrotl_check<uint>(n128);
+            => vrotl_check(n128,z32);
 
         public void vrotl_128x64()
-            => vrotl_check<ulong>(n128);
+            => vrotl_check(n128,z64);
 
         public void vrotr_128x8()
             => vrotr_check<byte>(n128);
@@ -103,9 +103,7 @@ namespace Z0
             => vrotr_bench<byte>(n256);
 
         public void vrotr_256x16_bench()
-        {
-            vrotr_bench<ushort>(n256);
-        }
+            => vrotr_bench<ushort>(n256);
 
 
         public void vrotr_256x32_bench()

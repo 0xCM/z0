@@ -12,16 +12,16 @@ namespace Z0
     public class t_vhi : t_vinx<t_vhi>
     {   
         public void vhi_128x8u()
-            => vhi_check<byte>(n128);
+            => vhi_check<byte>(n128,z8);
 
         public void vhi_128x8i()
-            => vhi_check<sbyte>(n128);
+            => vhi_check<sbyte>(n128,z8i);
 
         public void vhi_128x16i()
-            => vhi_check<short>(n128);
+            => vhi_check<short>(n128,z16i);
 
         public void vhi_128x16u()
-            => vhi_check<ushort>(n128);
+            => vhi_check<ushort>(n128,z16);
 
         public void vhi_128x32i()
             => vhi_check<int>(n128);

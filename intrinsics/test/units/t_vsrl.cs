@@ -67,7 +67,7 @@ namespace Z0
             var actual = dinx.vsrl(x,shift);
             
             var xs = x.ToSpan();
-            var es = DataBlocks.alloc<byte>(w);
+            var es = DataBlocks.single<byte>(w);
             for(var i =0; i<xs.Length; i++)
                 es[i] = gmath.srl(xs[i], shift);
             

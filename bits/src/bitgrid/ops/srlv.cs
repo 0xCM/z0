@@ -36,8 +36,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
                 => dinx.vsrlv(g.data, offsets);
-
-
     }
-
 }

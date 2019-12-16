@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_reverse : t_vinx<t_reverse>
+    public class t_vreverse : t_vinx<t_vreverse>
     {
         public void vreverse_128x8u()
             => vreverse_check(n128,z8);

@@ -34,8 +34,5 @@ namespace Z0
 
         public void vsrlv_256x64u()
             => vsrlv_check(n256,z64);
-
-
     }
-
 }

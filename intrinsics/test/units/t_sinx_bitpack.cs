@@ -15,7 +15,7 @@ namespace Z0
             for(var sample = 0; sample < SampleSize; sample ++)
             {
                 var src = Random.Next<ushort>();
-                var dst = DataBlocks.alloc<byte>(n128);
+                var dst = DataBlocks.single<byte>(n128);
 
                 ginxs.unpackbits(src, dst);            
                 check_unpacking(src,dst);
@@ -30,7 +30,7 @@ namespace Z0
             for(var sample=0; sample< SampleSize; sample++)
             {
                 var src = Random.Next<uint>();
-                var dst = DataBlocks.alloc<byte>(n256);
+                var dst = DataBlocks.single<byte>(n256);
                 ginxs.unpackbits(src, dst);
 
                 check_unpacking(src,dst);

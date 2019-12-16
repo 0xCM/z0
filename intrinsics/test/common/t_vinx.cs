@@ -1298,7 +1298,7 @@ namespace Z0
             where T : unmanaged
         {
             var shiftrange = (default(T),convert<int,T>(bitsize(t) - 1));
-            var buffer = DataBlocks.alloc<T>(w);
+            var buffer = DataBlocks.single<T>(w);
             for(var sample = 0; sample < SampleSize; sample++)
             {
                 var x = Random.CpuVector<T>(w);
@@ -1313,7 +1313,7 @@ namespace Z0
             where T : unmanaged
         {
             var shiftrange = (default(T),convert<int,T>(bitsize(t) - 1));
-            var buffer = DataBlocks.alloc<T>(w);
+            var buffer = DataBlocks.single<T>(w);
             for(var sample = 0; sample < SampleSize; sample++)
             {
                 var x = Random.CpuVector<T>(w);
@@ -1328,7 +1328,7 @@ namespace Z0
             where T : unmanaged
         {
             var shiftrange = (default(T),convert<int,T>(bitsize(t) - 1));
-            var buffer = DataBlocks.alloc<T>(w);
+            var buffer = DataBlocks.single<T>(w);
             for(var sample = 0; sample < SampleSize; sample++)
             {
                 var x = Random.CpuVector<T>(w);
@@ -1343,7 +1343,7 @@ namespace Z0
             where T : unmanaged
         {
             var shiftrange = (default(T),convert<int,T>(bitsize(t) - 1));
-            var buffer = DataBlocks.alloc<T>(w);
+            var buffer = DataBlocks.single<T>(w);
             for(var sample = 0; sample < SampleSize; sample++)
             {
                 var x = Random.CpuVector<T>(w);

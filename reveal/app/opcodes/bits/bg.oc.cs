@@ -28,7 +28,7 @@ namespace Z0
             => BitGrid.readbit(in src.Head, 3);
 
         public static int segments()
-            => BitSpan<N23,byte>.SegCount;
+            => BitSpan<N23,byte>.CellCount;
 
         public static int count_segs()
             => BitCalcs.gridcells<N20,N30,uint>();

@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="delimiter">The delimiter</param>
         /// <param name="offset">The position at which formatting should begin</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static string FormatPairs<T>(this Span<Pair<T>> src, PairFormat style = PairFormat.Tuple,  char delimiter = ',', int offset = 0, int pad = 0)
+        public static string FormatPairs<T>(this Span<Pair<T>> src, TupleFormat style = TupleFormat.Coordinate,  char delimiter = ',', int offset = 0, int pad = 0)
             where T : unmanaged
         {
             var count = src.Length;

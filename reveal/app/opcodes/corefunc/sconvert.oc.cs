@@ -14,7 +14,7 @@ namespace Z0.OpCodes
     using static zfunc;
 
     [OpCodeProvider]
-    public static class convert
+    public static class sconvert
     {
         //~ 8i -> x
 

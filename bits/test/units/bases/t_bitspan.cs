@@ -119,11 +119,10 @@ namespace Z0
             int n = natval<N>();
             var rep = default(N);
             var segcount = BitCalcs.mincells<T>(n);
-            Claim.eq(BitSpan<N,T>.SegCount, segcount);
-            var totalcap = BitSpan<N,T>.TotalCapacity;
-            var unusedcap = BitSpan<N,T>.UnusedCapacity;
+            Claim.eq(BitSpan<N,T>.CellCount, segcount);
+            var totalcap = BitSpan<N,T>.BitCapacity;
             var segcap = bitsize<T>();
-            Claim.eq(BitSpan<N,T>.SegWidth, segcap);
+            Claim.eq(BitSpan<N,T>.CellWidth, segcap);
 
             var src = Random.Span<T>(SampleSize);
             for(var i=0; i<SampleSize; i+= segcount)
@@ -132,8 +131,7 @@ namespace Z0
                 var bc = bcSrc.ToBitSpan(rep);
                 ClaimEqual(bc,bc.ToBitString());
                 Claim.eq(n, bc.Width);
-                Claim.eq(segcap * segcount, totalcap);
-                Claim.eq(totalcap - n, unusedcap);
+                Claim.eq(segcap * segcount, totalcap);                
 
                 var x = src[i];
                 for(byte j = 0; j < n; j++)

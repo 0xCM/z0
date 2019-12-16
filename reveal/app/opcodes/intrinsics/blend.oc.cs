@@ -16,7 +16,7 @@ namespace Z0.OpCodes
     using static zfunc;
     using static As;
 
-    public static class blend
+    public static class vblend
     {
         public static Vector256<ushort> vmerge16(Vector128<ushort> x, Vector128<ushort> y)                
             => dinx.vmerge(x,y, Blend8x16.LLRRLLRR, Blend8x16.RRLLRRLL);
@@ -36,7 +36,6 @@ namespace Z0.OpCodes
         public static Vector256<byte> vreverse_256x8u(Vector256<byte> x)
             => dinx.vreverse(x);
 
-
         public static Vector128<short> vblend_128x16u_LLLLLLLL(Vector128<short> x, Vector128<short> y)        
             => dinx.vblend(x,y,Blend8x16.LLLLLLLL);
 
@@ -54,8 +53,6 @@ namespace Z0.OpCodes
 
         public static Vector128<short> vblend_128x16u_RLRLRLRL(Vector128<short> x, Vector128<short> y)        
             => dinx.vblend(x,y,Blend8x16.RLRLRLRL);
-
-
 
     }
 

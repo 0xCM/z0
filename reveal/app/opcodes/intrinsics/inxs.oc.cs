@@ -25,17 +25,17 @@ namespace Z0
         public static uint pack128x8u(ConstBlock128<byte> src)
             => ginxs.bitpack(src);
 
-        public static uint pack256x8u(ConstBlock256<byte> src)
+        public static uint pack_32u(ConstBlock256<byte> src)
             => ginxs.bitpack(src);
 
-        public static ulong pack512x64u(ConstBlock256<byte> lo, ConstBlock256<byte> hi)
-            => ginxs.bitpack(lo,hi);
-
-        public static void unpack(uint src, in Block256<byte> dst)
+        public static void unpack_32u(uint src, Block256<byte> dst)
             => ginxs.unpackbits(src,dst);
 
-        public static void unpack(ulong src, in Block256<byte> lo,in Block256<byte> hi)
-            => ginxs.unpackbits(src,lo,hi);
+        public static ulong pack_64u(ConstBlock256<byte> lo, ConstBlock256<byte> hi)
+            => ginxs.bitpack(lo,hi);
+        
+        public static void unpack_64u(ulong src, Block256<byte> dst)
+            => ginxs.unpackbits(src,dst);
 
         public static ulong broadcast_8x64(byte pattern)
             => ginxs.broadcast(pattern, out ulong _);

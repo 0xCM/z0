@@ -43,8 +43,6 @@ namespace Z0
         Perm32Spec(Vector256<byte> data)
             => this.data = data;
 
-        static N256 w => n256;        
-
+        static N256 w => n256;
     }
-
 }

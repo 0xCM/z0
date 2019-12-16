@@ -12,7 +12,6 @@ namespace Z0
 
     partial class BitMatrix
     {        
-
         /// <summary>
         /// Interchanges the i'th and j'th rows where  0 <= i,j < 32
         /// </summary>
@@ -39,7 +38,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void rowswap(in BitMatrix64 A, int i, int j)
             => A.Data.Swap(i,j);        
-
     }
-
 }

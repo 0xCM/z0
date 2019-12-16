@@ -23,7 +23,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var matrix = alloc<N,T>();
-            var count = BitSpan<N,T>.SegCount;
+            var count = BitSpan<N,T>.CellCount;
             var n= natval<N>();
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
@@ -44,7 +44,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
         {
             var matrix = alloc<M,N,T>();
-            var count = BitSpan<N,T>.SegCount;
+            var count = BitSpan<N,T>.CellCount;
             var n= natval<N>();
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;

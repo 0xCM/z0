@@ -29,9 +29,9 @@ namespace Z0
             var block = DataBlocks.parts<byte>(n64,1,2,3,4,5,6,7,8);
             var xE = vbuild.parts(n128,1,2,3,4);
             var yE = vbuild.parts(n128,5,6,7,8);
-            dinx.vloadblock(block, out Vector128<uint> xA, out Vector128<uint> yA);
-            Claim.eq(xE, xA);
-            Claim.eq(yE, yA);
+            var z = dinx.vloadblock(block, n128,z32);
+            Claim.eq(xE, z.A);
+            Claim.eq(yE, z.B);
         }
 
         public void block_32x8u_to_2x128x64u()
@@ -39,9 +39,10 @@ namespace Z0
             var block = DataBlocks.parts<byte>(n32,1,2,3,4);
             var xE = vbuild.parts(n128,1,2);
             var yE = vbuild.parts(n128,3,4);
-            dinx.vloadblock(block, out Vector128<ulong> xA, out Vector128<ulong> yA);
-            Claim.eq(xE, xA);
-            Claim.eq(yE, yA);
+
+            var z = dinx.vloadblock(block,n128,z64);
+            Claim.eq(xE, z.A);
+            Claim.eq(yE, z.B);
         }
 
         public void block_128x8u_to_2x128x16u()
@@ -49,9 +50,10 @@ namespace Z0
             var block = DataBlocks.parts<byte>(n128,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
             var xE = vbuild.parts(n128,1,2,3,4,5,6,7,8);
             var yE = vbuild.parts(n128,9,10,11,12,13,14,15,16);
-            dinx.vloadblock(block, out Vector128<ushort> xA, out Vector128<ushort> yA);
-            Claim.eq(xE, xA);
-            Claim.eq(yE, yA);
+            var z = dinx.vloadblock(block,n128,z16);
+            
+            Claim.eq(xE, z.A);
+            Claim.eq(yE, z.B);
         }
 
         public void v128x8u_v128x16u()
@@ -65,7 +67,7 @@ namespace Z0
         public void m64x8u_v128x16u()
         {
             var x = DataBlocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
-            var y = dinx.vloadblock(x, out Vector128<ushort> _);
+            var y = dinx.vloadblock(x, n128, z16);
             var z = vbuild.parts(n128,0,1,2,3,4,5,6,7);            
 
             Claim.eq(y,z);            
@@ -74,11 +76,11 @@ namespace Z0
         public void blockspan_128x8u_v128x16u()
         {
             var x = DataBlocks.parts<byte>(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
-            dinx.vloadblock(x, out Vector128<ushort> y0, out Vector128<ushort> y1);
+            var q = dinx.vloadblock(x, n128, z16);
             var z0 = x.LoBlock(0);
             var z1 = x.HiBlock(0);
-            var y0s = y0.ToSpan();
-            var y1s = y1.ToSpan();
+            var y0s = q.A.ToSpan();
+            var y1s = q.B.ToSpan();
 
             for(var i=0; i <8; i++)
             {
@@ -90,17 +92,75 @@ namespace Z0
         public void blockspan_64x8u_v2x128x32u()
         {
             var x = DataBlocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
-            dinx.vloadblock(x, out Vector128<uint> y0, out Vector128<uint> y1);
+            var y = dinx.vloadblock(x,n128,z32);
             var z0 = x.Slice(0,4);
             var z1 = x.Slice(4,4);
-            var y0s = y0.ToSpan();
-            var y1s = y1.ToSpan();
+            var y0s = y.A.ToSpan();
+            var y1s = y.B.ToSpan();
 
             for(var i=0; i <4; i++)
             {
                 Claim.eq(z0[i], (byte)y0s[i]);
                 Claim.eq(z1[i], (byte)y1s[i]);
             }                                 
+        }
+
+        public void vconvert_128x8u_1x256x16u()
+        {
+            var sw = n128;
+            var st = z8;
+
+            var tw = n256;
+            var tt = z16;
+
+            var tbc = 1;
+
+            var sb = DataBlocks.single(sw,st);
+            var tb = DataBlocks.alloc(tw,tbc,tt);
+
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var sv = Random.CpuVector(sw,st);
+                var tv = dinx.vconvert(sv,tw,tt);
+                
+                sv.StoreTo(sb);
+                tv.StoreTo(tb);
+                
+                var i = 0;
+                for(var block = 0; block < tb.BlockCount; block++)
+                for(var j = 0; j < tb.BlockLength; j++, i++)
+                    Claim.eq(sb[i],convert(tb[block,j],st));
+            }
+
+        }
+
+        public void vconvert_128x8u_2x128x16u()
+        {
+            var sw = n128;
+            var st = z8;
+
+            var tw = n128;
+            var tt = z16;
+
+            var tbc = 2;
+
+            var sb = DataBlocks.single(sw,st);
+            var tb = DataBlocks.alloc(tw,tbc,tt);
+
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var sv = Random.CpuVector(sw,st);
+                var tv = dinx.vconvert(sv,tw,tt);
+                
+                sv.StoreTo(sb);
+                tv.A.StoreTo(tb,0);
+                tv.B.StoreTo(tb,1);
+                
+                var i = 0;
+                for(var block = 0; block < tbc; block++)
+                for(var j = 0; j < tb.BlockLength; j++, i++)
+                    Claim.eq(sb[i],convert(tb[block,j],st));
+            }
         }
     }
 }

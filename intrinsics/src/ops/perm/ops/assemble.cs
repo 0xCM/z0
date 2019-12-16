@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static zfunc;    
+    using static As;
 
     partial class Perm
     {
@@ -18,14 +19,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static Perm4L assemble(Perm4L x0, Perm4L x1, Perm4L x2, Perm4L x3)
-        {               
-            var dst = 0u;
-            dst |= (uint)x0;
-            dst |= (uint)x1 << 2;
-            dst |= (uint)x2 << 4;
-            dst |= (uint)x3 << 6;
-            return (Perm4L)dst;
-        }
+            => (Perm4L)assemble4((uint)x0, (uint)x1, (uint)x2, (uint)x3);
 
         /// <summary>
         /// Constructs a permutation of length 8 from 8 ordered symbols
@@ -49,14 +43,26 @@ namespace Z0
             Perm16L x4, Perm16L x5, Perm16L x6, Perm16L x7, 
             Perm16L x8, Perm16L x9, Perm16L xA, Perm16L xB, 
             Perm16L xC, Perm16L xD, Perm16L xE, Perm16L xF) 
-        {               
-            var dst = 
-                  (ulong)x0       | (ulong)x1 << 4  | (ulong)x2 << 8  | (ulong)x3 << 12 
-                | (ulong)x4 << 16 | (ulong)x5 << 20 | (ulong)x6 << 24 | (ulong)x7 << 28 
-                | (ulong)x8 << 32 | (ulong)x9 << 36 | (ulong)xA << 40 | (ulong)xB << 44 
-                | (ulong)xC << 48 | (ulong)xD << 52 | (ulong)xE << 56 | (ulong)xF << 60;
+                => (Perm16L)assemble16(
+                        (ulong)x0,(ulong)x1,(ulong)x2,(ulong)x3,
+                        (ulong)x4,(ulong)x5,(ulong)x6,(ulong)x7,
+                        (ulong)x8,(ulong)x9,(ulong)xA,(ulong)xB,
+                        (ulong)xC,(ulong)xD,(ulong)xE,(ulong)xF
+                        );
 
-            return (Perm16L)dst;
-        }
+        [MethodImpl(Inline)]
+        static uint assemble4(uint x0, uint x1, uint x2, uint x3)
+            => x0 | x1 << 2 | x2 << 4 | x3 << 6;
+
+        [MethodImpl(Inline)]
+        static ulong assemble16(
+            ulong x0, ulong x1, ulong x2, ulong x3, 
+            ulong x4, ulong x5, ulong x6, ulong x7, 
+            ulong x8, ulong x9, ulong xA, ulong xB, 
+            ulong xC, ulong xD, ulong xE, ulong xF) 
+              => x0 | x1 << 4  | x2 << 8  | x3 << 12 
+                    | x4 << 16 | x5 << 20 | x6 << 24 | x7 << 28 
+                    | x8 << 32 | x9 << 36 | xA << 40 | xB << 44 
+                    | xC << 48 | xD << 52 | xE << 56 | xF << 60;                   
     }
 }

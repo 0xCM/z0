@@ -12,22 +12,22 @@ namespace Z0
     public class t_vlt : t_vinx<t_vlt>
     {        
         public void vlt_128x8i()
-            => vlt_check<sbyte>(n128);
+            => vlt_check<sbyte>(n128,z8i);
 
         public void vlt_128x8u()
-            => vlt_check<byte>(n128);
+            => vlt_check<byte>(n128,z8);
 
         public void vlt_128x16i()
-            => vlt_check<short>(n128);
+            => vlt_check<short>(n128,z16i);
 
         public void vlt_128x16u()
-            => vlt_check<ushort>(n128);
+            => vlt_check<ushort>(n128,z16);
 
         public void vlt_128x32i()
-            => vlt_check<int>(n128);
+            => vlt_check<int>(n128,z32i);
 
         public void vlt_128x32u()
-            => vlt_check<uint>(n128); 
+            => vlt_check<uint>(n128,z32); 
 
         public void vlt_128x64i()
             => vlt_check<long>(n128); 

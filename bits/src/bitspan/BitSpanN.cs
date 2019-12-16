@@ -10,10 +10,10 @@ namespace Z0
     using static zfunc;    
 
     /// <summary>
-    /// Defines a natural bitvector parametrized by a primal component type
+    /// A data structure that covers a natural count of packed bits
     /// </summary>
-    /// <typeparam name="N">The vector length type</typeparam>
-    /// <typeparam name="T">The vector component type</typeparam>
+    /// <typeparam name="N">The number of contained bits</typeparam>
+    /// <typeparam name="T">The storage cell type</typeparam>
     public readonly ref struct BitSpan<N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
@@ -23,7 +23,7 @@ namespace Z0
         /// <summary>
         /// The maximum number of bits contained in an N[T] vector component
         /// </summary>
-        public static int SegWidth => bitsize<T>();
+        public static int CellWidth => bitsize<T>();
 
         /// <summary>
         /// The number of bits represented by an N[T] vector
@@ -33,7 +33,7 @@ namespace Z0
         /// <summary>
         /// The number of segments required to allocate an N[T] vector
         /// </summary>
-        public static int SegCount 
+        public static int CellCount 
         {
             [MethodImpl(Inline)]
             get => BitCalcs.gridcells((int)natval<N>(), (int)natval<N1>(), (int)bitsize<T>());
@@ -42,12 +42,7 @@ namespace Z0
         /// <summary>
         /// The maximum number of bits that can be represented by an N[T] vector
         /// </summary>
-        public static int TotalCapacity => SegCount * SegWidth;
-
-        /// <summary>
-        /// Tne number of bits allocated but which are not in use, i.e. the delta between the capacity and length
-        /// </summary>
-        public static int UnusedCapacity => TotalCapacity - BitCount;
+        public static int BitCapacity => CellCount * CellWidth;
         
         [MethodImpl(Inline)]
         public static implicit operator BitSpan<T>(in BitSpan<N,T> x)
@@ -117,7 +112,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitSpan(Span<T> src)
         {
-            require(src.Length * SegWidth >= BitCount);
+            require(src.Length * CellWidth >= BitCount);
             this.data = src;
         }
 

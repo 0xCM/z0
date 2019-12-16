@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.OpCodes
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -12,9 +12,9 @@ namespace Z0
 
     using static zfunc;
 
-    partial class inxoc
+    [OpCodeProvider]
+    public static class vblocks
     {
-
         public static void vblock_xor_128x8u_refs(int partcount, int partwidth, in byte a, in byte b, ref byte z)
             => vblock.xor(n128, partcount, partwidth,in a, in b, ref z);
 

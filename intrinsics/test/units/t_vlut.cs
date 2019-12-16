@@ -17,7 +17,7 @@ namespace Z0
         {
             var n = n128;
 
-            var src = DataBlocks.alloc<byte>(n);
+            var src = DataBlocks.single<byte>(n);
             for(var i=0; i<src.BlockLength; i++)
                 src[i] = (byte)i;
                         
@@ -39,7 +39,7 @@ namespace Z0
         {
             var n = n256;
 
-            var src = DataBlocks.alloc<byte>(n);
+            var src = DataBlocks.single<byte>(n);
             for(var i=0; i<src.BlockLength; i++)
                 src[i] = (byte)i;
                         

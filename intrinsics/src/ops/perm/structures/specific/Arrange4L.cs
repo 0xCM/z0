@@ -5,10 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static zfunc;    
 
@@ -52,24 +49,5 @@ namespace Z0
         AABB = A | (A<< 2) | (B << 4) | (B << 6),
 
         BBAA = B | (B<< 2) | (A << 4) | (A << 6),
-
-
-   }
-
-   public enum Arrange2 : byte
-   {
-        A = 0b0,
-
-        B = 0b01,
-
-        C = 0b10,
-
-        D = 0b11,
-
-        AB = 0b1110_0100,    
-
-        BA = 0b0100_1110,
-
-
    }
 }

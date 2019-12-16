@@ -13,12 +13,92 @@ namespace Z0
 
     public class t_vperm : t_vinx<t_vperm>
     {
-        public void vperm_4x16()
+        public void perm4_digits()
+        {
+            const byte A = 0b00;
+            const byte B = 0b01;
+            const byte C = 0b10;
+            const byte D = 0b11;
+
+            var dABCD = Perm4L.ABCD.ToDigits();
+            Claim.eq(DataBlocks.natparts(n4, A, B, C, D), dABCD);
+
+            var dDCBA = Perm4L.DCBA.ToDigits();
+            Claim.eq(DataBlocks.natparts(n4, D, C, B, A), dDCBA);
+
+            var dACBD = Perm4L.ACBD.ToDigits();
+            Claim.eq(DataBlocks.natparts(n4, A, C, B, D), dACBD);
+
+            var dCBDA = Perm4L.CBDA.ToDigits();
+            Claim.eq(DataBlocks.natparts(n4, C, B, D, A), dCBDA);
+        }
+
+        public void vpermlo_4x16_outline()
+        {
+            const byte A = 0b00;        
+            const byte B = 0b01;
+            const byte C = 0b10;
+            const byte D = 0b11;
+
+            var x = vbuild.increments<ushort>(n128);
+            var xs = x.ToSpan();
+            Claim.eq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]), x);
+
+            var xABCD = dinx.vpermlo4x16(x, Perm4L.ABCD);
+            Claim.eq(xABCD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
+
+            var xDCBA = dinx.vpermlo4x16(x, Perm4L.DCBA);
+            Claim.eq(xDCBA, Vector128.Create(xs[D], xs[C], xs[B], xs[A], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
+
+            var xACBD = dinx.vpermlo4x16(x, Perm4L.ACBD);
+            Claim.eq(xACBD, Vector128.Create(xs[A], xs[C], xs[B], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
+
+            Claim.eq(dinx.vpermlo4x16(vbuild.parts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), vbuild.parts(n128, 0,3,2,1,6,7,8,9));           
+        }
+
+        public void vpermhi_4x16_outline()
+        {
+            const byte A = 0b00;            
+            const byte B = 0b01;
+            const byte C = 0b10;
+            const byte D = 0b11;
+
+            var x = vbuild.increments<ushort>(n128);
+            var xs = x.ToSpan();
+            Claim.eq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A+4], xs[B+ 4], xs[C + 4], xs[D + 4]), x);
+
+            var xABCD = dinx.vpermhi4x16(x, Perm4L.ABCD);
+            Claim.eq(xABCD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
+
+            var xDCBA = dinx.vpermhi4x16(x, Perm4L.DCBA);
+            Claim.eq(xDCBA, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[D + 4], xs[C + 4], xs[B + 4], xs[A + 4]));
+
+            var xACBD = dinx.vpermhi4x16(x, Perm4L.ACBD);
+            Claim.eq(xACBD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[C + 4], xs[B + 4], xs[D + 4]));            
+
+            Claim.eq(dinx.vpermhi4x16(vbuild.parts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), vbuild.parts(n128,0,1,2,3,6,9,8,7));
+
+        }
+
+        public void vperm4x32_128x32u_outline()
+        {
+            var n = n128;
+
+            var u = VData.increments<uint>(n);
+            Claim.eq(vbuild.parts(n,0,1,2,3), u);
+
+            var v = VData.decrements<uint>(n);
+            Claim.eq(vbuild.parts(n,3,2,1,0),v);
+
+            Claim.eq(v, dinx.vperm4x32(u, Perm4L.DCBA));
+            Claim.eq(u, dinx.vperm4x32(v, Perm4L.DCBA));
+        }
+
+        public void vperm_4x16_outline()
         {
             var n = n128;
             var x = vbuild.parts(n,0,1,2,3,4,5,6,7);
-            
-            
+                        
             var a0 = dinx.vpermlo4x16(x, Perm4L.DCBA);
             var a1 = vbuild.parts(n,3,2,1,0,4,5,6,7);
             Claim.eq(a0,a1);
@@ -44,7 +124,7 @@ namespace Z0
             Claim.eq(f0,f1);
         }
 
-        public void vperm_4x64()
+        public void vperm_4x64_outline()
         {
          
             var n = n256;
@@ -83,6 +163,22 @@ namespace Z0
 
         }
 
+        public void perm_swaps()
+        {            
+            
+            var src = vbuild.increments<byte>(n128);
+
+            Swap s = (0,1);
+            var x1 = dinx.vswap(src, s);
+            var x2 = dinx.vswap(x1, s);
+            Claim.eq(x2, src);
+
+            //Shuffle the first element all the way through to the last element
+            var chain = Swap.Chain((0,1), 15);
+            var x3 = dinx.vswap(src, chain).ToSpan();
+            Claim.eq(x3[15],(byte)0);            
+        }
+
         public void perm4_symbols_random()
         {
             var perms = Random.EnumValues(A, B, C, D);
@@ -102,7 +198,7 @@ namespace Z0
             iter(pmaps, m => Trace(m.perm.ToString(), m.format));
         }
 
-        public void vperm_2x128()
+        public void vperm_2x128_outline()
         {
             var n = n256;
             var x = vbuild.parts(n, 0, 1, 2, 3);
@@ -145,7 +241,7 @@ namespace Z0
             }
         }
 
-        public void perm4x64_256x64u_randomized()
+        public void vperm4x64_256x64u_randomized()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -157,7 +253,7 @@ namespace Z0
             }
         }
 
-        public void perm256u8()
+        public void vperm_256u8_outline()
         {
             var x = vbuild.increments<byte>(n256);
             var y = vbuild.decrements<byte>(n256);
@@ -165,7 +261,7 @@ namespace Z0
             Claim.eq(x,z);
         }
 
-        public void perm4_reverse_check()
+        public void vperm4_reverse()
         {
             const Perm4L  p = Perm4L.DCBA;            
             const string pbs_expect = "00011011";

@@ -20,39 +20,39 @@ namespace Z0
     partial class dinx
     {
         [MethodImpl(Inline)]
-        public static Vector128<sbyte> vshuf2x64(Vector128<sbyte> src, Arrange2 spec)            
+        public static Vector128<sbyte> vshuf2x64(Vector128<sbyte> src, Arrange2L spec)            
             => v8i(Shuffle(v32u(src), (byte)spec));
 
         [MethodImpl(Inline)]
-        public static Vector128<byte> vshuf2x64(Vector128<byte> src, Arrange2 spec)            
+        public static Vector128<byte> vshuf2x64(Vector128<byte> src, Arrange2L spec)            
             => v8u(Shuffle(v32u(src), (byte)spec));
 
         [MethodImpl(Inline)]
-        public static Vector128<short> vshuf2x64(Vector128<short> src, Arrange2 spec)            
+        public static Vector128<short> vshuf2x64(Vector128<short> src, Arrange2L spec)            
             => v16i(Shuffle(v32u(src), (byte)spec));
 
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vshuf2x64(Vector128<ushort> src, Arrange2 spec)            
+        public static Vector128<ushort> vshuf2x64(Vector128<ushort> src, Arrange2L spec)            
             => v16u(Shuffle(v32u(src), (byte)spec));
 
         [MethodImpl(Inline)]
-        public static Vector128<int> vshuf2x64(Vector128<int> src, Arrange2 spec)            
+        public static Vector128<int> vshuf2x64(Vector128<int> src, Arrange2L spec)            
             => Shuffle(src, (byte)spec);
 
         [MethodImpl(Inline)]
-        public static Vector128<uint> vshuf2x64(Vector128<uint> src, Arrange2 spec)            
+        public static Vector128<uint> vshuf2x64(Vector128<uint> src, Arrange2L spec)            
             => Shuffle(src, (byte)spec);
 
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vshuf2x64(Vector128<ulong> src, Arrange2 spec)            
+        public static Vector128<ulong> vshuf2x64(Vector128<ulong> src, Arrange2L spec)            
             => v64u(Shuffle(v32u(src), (byte)spec));
 
         [MethodImpl(Inline)]
-        public static Vector128<long> vshuf2x64(Vector128<long> src, Arrange2 spec)            
+        public static Vector128<long> vshuf2x64(Vector128<long> src, Arrange2L spec)            
             => v64i(Shuffle(v32i(src), (byte)spec));
 
         [MethodImpl(Inline)]
-        public static Vector128<double> vshuf2x64(Vector128<double> src, Arrange2 spec)            
+        public static Vector128<double> vshuf2x64(Vector128<double> src, Arrange2L spec)            
             => v64f(Shuffle(v32u(src), (byte)spec));
 
     }

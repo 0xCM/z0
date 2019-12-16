@@ -63,16 +63,5 @@ namespace Z0
 
         public static Vector256<double> vmov256x64u(double src)
             => ginx.vscalar(n256,src);
-
-
-        public static Vector256<ulong> vconvert_xspan32u_v256x64u(Block128<uint> src, out Vector256<ulong> dst)        
-            => dinx.vloadblock(src, out dst);
-
-        public static Vector128<byte> packus(Vector128<ushort> x,Vector128<ushort> y)
-            => dinx.vpackus(x,y);
-
-        public static Vector256<byte> packus(Vector256<ushort> x,Vector256<ushort> y)
-            => dinx.vpackus(x,y);
-
     }
 }

@@ -76,24 +76,6 @@ namespace Z0
                     A.RowSwap(row, perm[row]);
             return ref A;
         }
-
-        /// <summary>
-        /// Derives a 4x4 bitmatrix from a permutation of length 4
-        /// </summary>
-        /// <param name="spec">The permutaton spec</param>
-        /// <remarks>
-        /// Example:
-        /// Permutation: [11 10 00 01] (ABCD -> BACD)
-        /// Bitmatrix: [1000 | 0000 | 0100 | 1100]
-        /// </remarks>
-        public static BitMatrix4 permencode(Perm4L spec)
-        {
-            var digits = spec.ToDigits();
-            var rows = new BitVector4[4];
-            for(var i=0; i<digits.Length; i++)
-                rows[i] = BitVector.from(n4, digits[i]);
-            return primal(n4, rows);
-        }
         
         /// <summary>
         /// Creates a canonical permutation matrix by swapping matrix rows of the identity matrix as specified by a permutation
@@ -102,7 +84,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix64 permute(NatPerm<N64> spec)
             => permute(spec, identity(n64));
-
-
     }
 }

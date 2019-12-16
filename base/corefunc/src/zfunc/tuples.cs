@@ -18,7 +18,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Pair<T> pair<T>(T a, T b)
         where T : unmanaged
-            => Pair.define<T>(a, b);
+            => Tuples.init<T>(a, b);
 
     /// <summary>
     /// Defines an homogenous triple
@@ -30,7 +30,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Triple<T> triple<T>(T a, T b, T c)
         where T : unmanaged
-            => Triple.define<T>(a, b, c);
+            => Tuples.init<T>(a, b, c);
 
     /// <summary>
     /// Defines a non-homogenous pair
@@ -43,7 +43,7 @@ partial class zfunc
     public static Pair<L,R> paired<L,R>(L a, R b)
         where L : unmanaged
         where R : unmanaged
-            => Pair.paired(a,b);
+            => Tuples.init(a,b);
 
     /// <summary>
     /// Defines a non-homogenous triple
@@ -59,7 +59,7 @@ partial class zfunc
         where X: unmanaged
         where Y : unmanaged
         where Z : unmanaged
-            => Triple.tripled(a,b,c);
+            => Tuples.init(a,b,c);
 
     /// <summary>
     /// Maps a function over a 2-tuple

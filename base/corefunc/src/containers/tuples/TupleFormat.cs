@@ -5,12 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
     using System.Runtime.CompilerServices;
 
     /// <summary>
-    /// Defines the available tuple format styles that may
-    /// be applied when representing a tuple as text
+    /// Defines the available tuple format styles that may be applied when representing a tuple as text
     /// </summary>
     public enum TupleFormat
     {
@@ -20,6 +18,11 @@ namespace Z0
         Coordinate,
 
         /// <summary>
+        /// Indicates a tuple text representation of the form "A1xA2x ... xAn"
+        /// </summary>
+        Dimension,
+
+        /// <summary>
         /// Indicates a tuple text representation of the form "[x1,...xn]"
         /// </summary>
         List,
@@ -27,8 +30,7 @@ namespace Z0
         /// <summary>
         /// Indicates a tuple text representation of the form "{x1,...xn}"
         /// </summary>
-        Record
+        Record,
+
     }
-
-
 }

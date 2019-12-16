@@ -13,45 +13,19 @@ namespace Z0
     public static class BitSpan
     {
         /// <summary>
-        /// Calculates a canonical bijection from a contiguous sequence of bits onto a contiguous sequence of segments
-        /// </summary>
-        /// <param name="bc">The total number of bits to distribute over one or more segments</param>        
-        public static BitPos<T>[] positions<T>(int bc)
-            where T : unmanaged
-        {
-            var dst =  new BitPos<T>[bc];
-            var capacity = bitsize<T>();            
-            ushort seg = 0;
-            byte offset = 0;
-            for(var i = 0; i < bc; i++)          
-            {
-                if(i != 0)
-                {
-                    if((i % capacity) == 0)
-                    {
-                        seg++;
-                        offset = 0;
-                    }
-                }
-                dst[i] = (seg, offset++);
-            }
-            return dst;
-        }
-
-        /// <summary>
         /// Allocates a bitspan filled with a specified value
         /// </summary>
         /// <param name="n">The natural length of the vector in bits</param>
-        /// <param name="cell">The fill value</param>
+        /// <param name="src">The fill value</param>
         /// <typeparam name="N">The bitwidth type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitSpan<N,T> init<N,T>(N n, T cell)
+        public static BitSpan<N,T> init<N,T>(N n, T src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var cells = alloc<N,T>();
-            cells.Data.Fill(cell);
+            cells.Data.Fill(src);
             return cells;
         }
 
@@ -79,7 +53,7 @@ namespace Z0
         public static BitSpan<N,T> alloc<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new BitSpan<N,T>(new T[BitSpan<N,T>.SegCount], true);
+                => new BitSpan<N,T>(new T[BitSpan<N,T>.CellCount], true);
 
         /// <summary>
         /// Loads a bitspan from an array

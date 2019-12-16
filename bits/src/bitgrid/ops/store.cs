@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="N">THe grid column count</typeparam>
         /// <typeparam name="T">The storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static void store<M,N,T>(BitGrid128<M,N,T> src, Block128<T> dst)
+        public static void store<M,N,T>(in BitGrid128<M,N,T> src, in Block128<T> dst)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -36,12 +36,12 @@ namespace Z0
         /// <typeparam name="N">THe grid column count</typeparam>
         /// <typeparam name="T">The storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static Block128<T> store<M,N,T>(BitGrid128<M,N,T> src)
+        public static Block128<T> store<M,N,T>(in BitGrid128<M,N,T> src)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var dst = DataBlocks.alloc<T>(n128);
+            var dst = DataBlocks.single<T>(n128);
             ginx.vstore(src.data, dst);
             return dst;
         }
@@ -55,7 +55,7 @@ namespace Z0
         /// <typeparam name="N">THe grid column count</typeparam>
         /// <typeparam name="T">The storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static void store<M,N,T>(BitGrid256<M,N,T> src, Block256<T> dst)
+        public static void store<M,N,T>(in BitGrid256<M,N,T> src, in Block256<T> dst)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -70,12 +70,12 @@ namespace Z0
         /// <typeparam name="N">THe grid column count</typeparam>
         /// <typeparam name="T">The storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static Block256<T> store<M,N,T>(BitGrid256<M,N,T> src)
+        public static Block256<T> store<M,N,T>(in BitGrid256<M,N,T> src)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var dst = DataBlocks.alloc<T>(n256);
+            var dst = DataBlocks.single<T>(n256);
             ginx.vstore(src.data, dst);
             return dst;
         }
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static void store<T>(Vector256<T> src, BitGrid<T> dst, int block)
+        public static void store<T>(Vector256<T> src, in BitGrid<T> dst, int block)
             where T : unmanaged
                 => ginx.vstore(src, ref dst.data.BlockRef(block));
 
@@ -100,11 +100,10 @@ namespace Z0
         /// <typeparam name="N">THe grid column count</typeparam>
         /// <typeparam name="T">The storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static void store<M,N,T>(Vector256<T> src, BitGrid<M,N,T> dst, int block)
+        public static void store<M,N,T>(Vector256<T> src, in BitGrid<M,N,T> dst, int block)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
                 => ginx.vstore(src, ref dst.data.BlockRef(block));
-
     }
 }

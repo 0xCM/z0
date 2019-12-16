@@ -11,16 +11,16 @@ namespace Z0
     public class t_vnegate : t_vinx<t_vnegate>
     {
         public void vnegate_128x8i()
-            => vnegate_check<sbyte>(n128);
+            => vnegate_check<sbyte>(n128,z8i);
 
         public void vnegate_128x16i()
-            => vnegate_check<short>(n128);
+            => vnegate_check<short>(n128,z16i);
 
         public void vnegate_128x16u()
-            => vnegate_check<ushort>(n128);
+            => vnegate_check<ushort>(n128,z16);
 
         public void vnegate_128x32i()
-            => vnegate_check<int>(n128);
+            => vnegate_check<int>(n128,z32i);
 
         public void vnegate_128x32u()
             => vnegate_check<uint>(n128);

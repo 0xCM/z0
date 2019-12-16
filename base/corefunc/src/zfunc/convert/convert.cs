@@ -57,7 +57,7 @@ partial class zfunc
     /// <typeparam name="S">The source type</typeparam>
     /// <typeparam name="T">The target type</typeparam>
     [MethodImpl(Inline)]   
-    public static Span<T> convert<S,T>(Span<S> src)
+    public static Span<T> convert<S,T>(Span<S> src, T t = default)
         where T : unmanaged
         where S : unmanaged
     {
@@ -125,7 +125,7 @@ partial class zfunc
     /// <param name="src">The source bit</param>
     /// <typeparam name="T">The target primal type</typeparam>
     [MethodImpl(Inline)]   
-    public static T convert<T>(bit src)
+    public static T convert<T>(bit src, T t = default)
         where T : unmanaged
     {
         if(typeof(T) == typeof(byte))
@@ -147,7 +147,7 @@ partial class zfunc
     /// <param name="src">The source value</param>
     /// <typeparam name="T">The target type</typeparam>
     [MethodImpl(Inline)]   
-    public static T convert<T>(sbyte src)
+    public static T convert<T>(sbyte src, T t = default)
         where T : unmanaged
             => Converter.convert<T>(src);
 
@@ -157,7 +157,7 @@ partial class zfunc
     /// <param name="src">The source value</param>
     /// <typeparam name="T">The target type</typeparam>
     [MethodImpl(Inline)]   
-    public static T convert<T>(byte src)
+    public static T convert<T>(byte src, T t = default)
         where T : unmanaged
             => Converter.convert<T>(src);
 
@@ -167,7 +167,7 @@ partial class zfunc
     /// <param name="src">The source value</param>
     /// <typeparam name="T">The target type</typeparam>
     [MethodImpl(Inline)]   
-    public static T convert<T>(short src)
+    public static T convert<T>(short src, T t = default)
         where T : unmanaged
             => Converter.convert<T>(src);
     
@@ -177,7 +177,7 @@ partial class zfunc
     /// <param name="src">The source value</param>
     /// <typeparam name="T">The target type</typeparam>
     [MethodImpl(Inline)]   
-    public static T convert<T>(ushort src)
+    public static T convert<T>(ushort src, T t = default)
         where T : unmanaged
             => Converter.convert<T>(src);
 
@@ -187,7 +187,7 @@ partial class zfunc
     /// <param name="src">The source value</param>
     /// <typeparam name="T">The target type</typeparam>
     [MethodImpl(Inline)]   
-    public static T convert<T>(int src)
+    public static T convert<T>(int src, T t = default)
         where T : unmanaged
             => Converter.convert<T>(src);
 
@@ -197,7 +197,7 @@ partial class zfunc
     /// <param name="src">The source value</param>
     /// <typeparam name="T">The target type</typeparam>
     [MethodImpl(Inline)]   
-    public static T convert<T>(uint src)
+    public static T convert<T>(uint src, T t = default)
         where T : unmanaged
             => Converter.convert<T>(src);
 
@@ -207,7 +207,7 @@ partial class zfunc
     /// <param name="src">The source value</param>
     /// <typeparam name="T">The target type</typeparam>
     [MethodImpl(Inline)]   
-    public static T convert<T>(long src)
+    public static T convert<T>(long src, T t = default)
         where T : unmanaged
             => Converter.convert<T>(src);
 
@@ -217,7 +217,7 @@ partial class zfunc
     /// <param name="src">The source value</param>
     /// <typeparam name="T">The target type</typeparam>
     [MethodImpl(Inline)]   
-    public static T convert<T>(ulong src)
+    public static T convert<T>(ulong src, T t = default)
         where T : unmanaged
             => Converter.convert<T>(src);
 
@@ -227,7 +227,7 @@ partial class zfunc
     /// <param name="src">The source value</param>
     /// <typeparam name="T">The target type</typeparam>
     [MethodImpl(Inline)]   
-    public static T convert<T>(float src)
+    public static T convert<T>(float src, T t = default)
         where T : unmanaged
             => Converter.convert<T>(src);
 
@@ -237,7 +237,7 @@ partial class zfunc
     /// <param name="src">The source value</param>
     /// <typeparam name="T">The target type</typeparam>
     [MethodImpl(Inline)]   
-    public static T convert<T>(double src)
+    public static T convert<T>(double src, T t = default)
         where T : unmanaged
             => Converter.convert<T>(src);
 
@@ -247,10 +247,7 @@ partial class zfunc
     /// <param name="src">The source value</param>
     /// <typeparam name="T">The target type</typeparam>
     [MethodImpl(Inline)]   
-    public static T convert<T>(char src)
+    public static T convert<T>(char src, T t = default)
         where T : unmanaged
             => Converter.convert<T>(src);            
-
-
-
 }

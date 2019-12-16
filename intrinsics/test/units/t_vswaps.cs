@@ -43,20 +43,5 @@ namespace Z0
                 Claim.eq(A[i,j], B[j,i]);
         }
 
-        public void perm_swaps()
-        {            
-            
-            var src = vbuild.increments<byte>(n128);
-
-            Swap s = (0,1);
-            var x1 = dinx.vswap(src, s);
-            var x2 = dinx.vswap(x1, s);
-            Claim.eq(x2, src);
-
-            //Shuffle the first element all the way through to the last element
-            var chain = Swap.Chain((0,1), 15);
-            var x3 = dinx.vswap(src, chain).ToSpan();
-            Claim.eq(x3[15],(byte)0);            
-        }
     }
 }

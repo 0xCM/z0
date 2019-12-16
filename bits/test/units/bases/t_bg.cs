@@ -156,14 +156,6 @@ namespace Z0
             Benchmark($"gbg_bitwrite_{moniker<T>()}", counter, CycleCount*M*N);
         }
 
-        void emit_factors()
-        {
-            var k = 8u;
-            
-            for(var j = 1u; j<= 32u; j*=2)
-                Trace($"{j*k}", gmath.factor(j*k).FormatPairs(PairFormat.Dim));
-
-        }
         void emit_grid_maps()
             => GridWriter.EmitGridMaps();
 

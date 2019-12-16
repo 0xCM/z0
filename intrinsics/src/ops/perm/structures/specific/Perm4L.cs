@@ -153,6 +153,5 @@ namespace Z0
         /// [00 01 10 11]: ABCD -> DCBA
         /// </summary>
         DCBA = D | C << 2 | B << 4 | A << 6, 
-
     }
 }

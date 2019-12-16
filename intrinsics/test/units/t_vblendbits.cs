@@ -72,7 +72,7 @@ namespace Z0
         protected void vblendbits_drill<T>(Vector256<T> left, Vector256<T> right, Vector256<T> mask, Vector256<T> result)
             where T : unmanaged
         {
-            var ld = DataBlocks.alloc<byte>(n256);
+            var ld = DataBlocks.single<byte>(n256);
 
             var lbs = left.ToBitString();
             var rbs = right.ToBitString();

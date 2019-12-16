@@ -133,14 +133,14 @@ namespace Z0
             var d0 = vbuild.increments<uint>(n,24);        
 
             dinx.vcompact(a0,b0,c0,d0, out var compacted);        
-            dinx.vinflate(compacted, out var a1, out var b1, out var c1, out var d1);
+            var inflated = dinx.vinflate(compacted, n, z32);
 
             Claim.eq(vbuild.increments<ushort>(n), dinx.vcompact(a0,b0));
             Claim.eq(vbuild.increments<byte>(n), compacted);
-            Claim.eq(a0,a1);
-            Claim.eq(b0,b1);
-            Claim.eq(c0,c1);
-            Claim.eq(d0,d1);
+            Claim.eq(a0,inflated.A);
+            Claim.eq(b0,inflated.B);
+            Claim.eq(c0,inflated.C);
+            Claim.eq(d0,inflated.D);
         }
 
         public void vpackus_128x16x2_128x8_outline()

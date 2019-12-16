@@ -52,19 +52,19 @@ namespace Z0
             => vunits_check<int>(n128);
 
         public void vunits_128x32u()
-            => vunits_check<uint>(n128);
+            => vunits_check<uint>(n128,z32);
 
         public void vunits_128x64u()
             => vunits_check<ulong>(n128);
 
         public void vunits_256x8i()
-            => vunits_check<sbyte>(n256);
+            => vunits_check<sbyte>(n256,z8i);
 
         public void vunits_256x8u()
-            => vunits_check<byte>(n256);
+            => vunits_check<byte>(n256,z8);
 
         public void vunits_256x16u()
-            => vunits_check<ushort>(n256);
+            => vunits_check<ushort>(n256,z16);
 
         public void vunits_256x16i()
             => vunits_check<short>(n256);

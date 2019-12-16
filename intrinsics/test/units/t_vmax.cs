@@ -11,19 +11,19 @@ namespace Z0
     public class t_vmax : t_vinx<t_vmax>
     {
         public void max_128x8i()
-            => vmax_check<sbyte>(n128);
+            => vmax_check<sbyte>(n128,z8i);
 
         public void max_128x8u()
-            => vmax_check<byte>(n128);
+            => vmax_check<byte>(n128,z8);
 
         public void max_128x16i()
-            => vmax_check<short>(n128);
+            => vmax_check<short>(n128,z16i);
 
         public void max_128x16u()
-            => vmax_check<ushort>(n128);
+            => vmax_check<ushort>(n128,z16);
 
         public void max_128x32i()
-            => vmax_check<int>(n128);
+            => vmax_check<int>(n128,z32i);
 
         public void max_128x32u()
             => vmax_check<uint>(n128);
