@@ -64,8 +64,6 @@ namespace Z0
         public static Vector256<double> vmov256x64u(double src)
             => ginx.vscalar(n256,src);
 
-        public static void vconvert_v256x16u_v2x256x64u(Vector256<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
-            => dinx.vconvert(src, out lo, out hi);
 
         public static Vector256<ulong> vconvert_xspan32u_v256x64u(Block128<uint> src, out Vector256<ulong> dst)        
             => dinx.vloadblock(src, out dst);

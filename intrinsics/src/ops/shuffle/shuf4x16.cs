@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
         [MethodImpl(Inline)]
-        public static Vector128<short> vshufhi4x16(Vector128<short> src, Arrange4 spec)
+        public static Vector128<short> vshufhi4x16(Vector128<short> src, Arrange4L spec)
             => ShuffleHigh(src, (byte)spec);
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vshufhi4x16(Vector128<ushort> src, Arrange4 spec)
+        public static Vector128<ushort> vshufhi4x16(Vector128<ushort> src, Arrange4L spec)
             => ShuffleHigh(src, (byte)spec);
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
         [MethodImpl(Inline)]
-        public static Vector128<short> vshuflo4x16(Vector128<short> src, Arrange4 spec)
+        public static Vector128<short> vshuflo4x16(Vector128<short> src, Arrange4L spec)
             => ShuffleLow(src, (byte)spec);
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vshuflo4x16(Vector128<ushort> src, Arrange4 spec)
+        public static Vector128<ushort> vshuflo4x16(Vector128<ushort> src, Arrange4L spec)
             => ShuffleLow(src, (byte)spec);
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="lo">The lo mask</param>
         /// <param name="hi">The hi mask</param>
         [MethodImpl(Inline)]
-        public static Vector128<short> vshuf4x16(Vector128<short> src, Arrange4 lo, Arrange4 hi)        
+        public static Vector128<short> vshuf4x16(Vector128<short> src, Arrange4L lo, Arrange4L hi)        
             => vshufhi4x16(vshuflo4x16(src,lo),hi);                   
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="lo">The lo mask</param>
         /// <param name="hi">The hi mask</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vshuf4x16(Vector128<ushort> src, Arrange4 lo, Arrange4 hi)        
+        public static Vector128<ushort> vshuf4x16(Vector128<ushort> src, Arrange4L lo, Arrange4L hi)        
             => vshufhi4x16(vshuflo4x16(src,lo),hi);                   
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vshufhi4x16(Vector256<ushort> src, Arrange4 spec)
+        public static Vector256<ushort> vshufhi4x16(Vector256<ushort> src, Arrange4L spec)
             => ShuffleHigh(src,(byte)spec);
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
         [MethodImpl(Inline)]
-        public static Vector256<short> vshufhi4x16(Vector256<short> src, Arrange4 spec)
+        public static Vector256<short> vshufhi4x16(Vector256<short> src, Arrange4L spec)
             => ShuffleHigh(src,(byte)spec);
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
         [MethodImpl(Inline)]
-        public static Vector256<short> vshuflo4x16(Vector256<short> src, Arrange4 spec)
+        public static Vector256<short> vshuflo4x16(Vector256<short> src, Arrange4L spec)
             => ShuffleLow(src,(byte)spec);    
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace Z0
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vshuflo4x16(Vector256<ushort> src, Arrange4 spec)
+        public static Vector256<ushort> vshuflo4x16(Vector256<ushort> src, Arrange4L spec)
             => ShuffleLow(src,(byte)spec);    
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace Z0
         /// <param name="lo">The lo mask</param>
         /// <param name="hi">The hi mask</param>
         [MethodImpl(Inline)]
-        public static Vector256<short> vshuf4x16(Vector256<short> src, Arrange4 lo, Arrange4 hi)        
+        public static Vector256<short> vshuf4x16(Vector256<short> src, Arrange4L lo, Arrange4L hi)        
             => vshufhi4x16(vshuflo4x16(src,lo),hi);                   
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Z0
         /// <param name="lo">The lo mask</param>
         /// <param name="hi">The hi mask</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vshuf4x16(Vector256<ushort> src, Arrange4 lo, Arrange4 hi)        
+        public static Vector256<ushort> vshuf4x16(Vector256<ushort> src, Arrange4L lo, Arrange4L hi)        
             => vshufhi4x16(vshuflo4x16(src,lo),hi);                   
 
         /// <summary>

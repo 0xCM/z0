@@ -1,0 +1,59 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2019
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+
+    using static zfunc;    
+
+    public static partial class PermX
+    {
+        /// <summary>
+        /// Computes the digits corresponding to each 2-bit segment of the permutation spec
+        /// </summary>
+        /// <param name="src">The perm spec</param>
+        [MethodImpl(Inline)]
+        public static NatBlock<N4, byte> ToDigits(this Perm4L src)
+            => Perm.digits(src);
+
+        /// <summary>
+        /// Computes the digits corresponding to each 3-bit segment of the permutation spec
+        /// </summary>
+        /// <param name="src">The perm spec</param>
+        [MethodImpl(Inline)]
+        public static NatBlock<N8, OctalDigit> ToDigits(this Perm8L src)
+            => Perm.digits(src);
+
+        /// <summary>
+        /// Computes the digits corresponding to each 4-bit segment of the permutation spec
+        /// </summary>
+        /// <param name="src">The perm spec</param>
+        [MethodImpl(Inline)]
+        public static NatBlock<N16, HexDigit> ToDigits(this Perm16L src)
+            => Perm.digits(src);
+
+        [MethodImpl(Inline)]
+        public static Perm16Spec ToPermSpec(this Vector128<byte> src)
+            => Perm16Spec.from(src);
+
+        [MethodImpl(Inline)]
+        public static Perm32Spec ToPermSpec(this Vector256<byte> src)
+            => Perm32Spec.from(src);
+
+        /// <summary>
+        /// Defines a shuffle spec from a permutation
+        /// </summary>
+        /// <param name="src">The defining permutation</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> ToShuffleSpec(this NatPerm<N16> src)
+        {
+            var data = src.Terms.Convert<byte>();
+            return ginx.vload(n128,in head(data));
+        }
+
+    }
+}

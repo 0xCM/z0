@@ -26,16 +26,16 @@ namespace Z0
             var xs = x.ToSpan();
             Claim.eq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]), x);
 
-            var xABCD = dinx.vpermlo4x16(x, Perm4.ABCD);
+            var xABCD = dinx.vpermlo4x16(x, Perm4L.ABCD);
             Claim.eq(xABCD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
-            var xDCBA = dinx.vpermlo4x16(x, Perm4.DCBA);
+            var xDCBA = dinx.vpermlo4x16(x, Perm4L.DCBA);
             Claim.eq(xDCBA, Vector128.Create(xs[D], xs[C], xs[B], xs[A], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
-            var xACBD = dinx.vpermlo4x16(x, Perm4.ACBD);
+            var xACBD = dinx.vpermlo4x16(x, Perm4L.ACBD);
             Claim.eq(xACBD, Vector128.Create(xs[A], xs[C], xs[B], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
-            Claim.eq(dinx.vpermlo4x16(vbuild.parts(n128, 0,1,2,3,6,7,8,9), Perm4.ADCB), vbuild.parts(n128, 0,3,2,1,6,7,8,9));           
+            Claim.eq(dinx.vpermlo4x16(vbuild.parts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), vbuild.parts(n128, 0,3,2,1,6,7,8,9));           
         }
     }
 }

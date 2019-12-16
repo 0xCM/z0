@@ -169,23 +169,23 @@ namespace Z0
         {
             var n = n128;
             var src = vbuild.parts(n128,1,2,3,4);
-            var spec = Perm4.ABCD;
+            var spec = Perm4L.ABCD;
             var y = vbuild.parts(n128,4,3,2,1);
-            var x = dinx.vperm4x32(src, Perm4.ABCD);
+            var x = dinx.vperm4x32(src, Perm4L.ABCD);
             Claim.eq(x, src);
 
             y = vbuild.parts(n128,4,3,2,1);
-            spec = Perm4.DCBA;
+            spec = Perm4L.DCBA;
             x = dinx.vperm4x32(src,spec);
             Claim.eq(x, y); 
 
             y = vbuild.parts(4u,3u,2u,1u);
-            spec = Perm4.DCBA;
+            spec = Perm4L.DCBA;
             x = dinx.vperm4x32(src,spec);
             Claim.eq(x, y); 
 
-            Claim.eq(dinx.vperm4x32(vbuild.parts(0,1,2,3), Perm4.ADCB), vbuild.parts(0,3,2,1));
-            Claim.eq(dinx.vperm4x32(vbuild.parts(0,1,2,3), Perm4.DBCA), vbuild.parts(3,1,2,0));
+            Claim.eq(dinx.vperm4x32(vbuild.parts(0,1,2,3), Perm4L.ADCB), vbuild.parts(0,3,2,1));
+            Claim.eq(dinx.vperm4x32(vbuild.parts(0,1,2,3), Perm4L.DBCA), vbuild.parts(3,1,2,0));
         }
 
         public void vshuf_16x8()
@@ -200,10 +200,6 @@ namespace Z0
             var expect = VData.decrements<byte>(n128);
             Claim.eq(expect, dst);
 
-            var dstPerm = dst.ToPerm();
-            var expectPerm = expect.ToPerm();
-            Claim.eq(dstPerm, expectPerm);
-
             var identity = ShuffleIdentityMask();
             for(var i=0; i<DefaltCycleCount; i++)
             {
@@ -216,13 +212,13 @@ namespace Z0
         public void vperm_4x16_basecase()
         {
             var id = vbuild.parts(n128,0,1,2,3,6,7,8,9);
-            Claim.eq(dinx.vperm4x16(vbuild.parts(n128,0,1,2,3,6,7,8,9), Perm4.ADCB, Perm4.ADCB), vbuild.parts(n128,0,3,2,1,6,9,8,7));
+            Claim.eq(dinx.vperm4x16(vbuild.parts(n128,0,1,2,3,6,7,8,9), Perm4L.ADCB, Perm4L.ADCB), vbuild.parts(n128,0,3,2,1,6,9,8,7));
         }
 
         public void vperm_4x32_128x32u()
         {
             var trace = false;
-            var pSrc = Random.EnumValues<Perm4>(x => (byte)x > 5);
+            var pSrc = Random.EnumValues<Perm4L>(x => (byte)x > 5);
             
             for(var i=0; i<CycleCount; i++)
             {
@@ -237,7 +233,7 @@ namespace Z0
                 var p3 = dinx.gather((byte)p, (byte)0b11000000);
                 
                 // Reassemble the spec
-                Perm4 q = (Perm4)(p0 | p1 << 2 | p2 << 4 | p3 << 6);
+                Perm4L q = (Perm4L)(p0 | p1 << 2 | p2 << 4 | p3 << 6);
                 
                 // Same?
                 Claim.eq(p,q);

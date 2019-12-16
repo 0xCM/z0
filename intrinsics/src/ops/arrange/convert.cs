@@ -23,276 +23,161 @@ namespace Z0
         // ~ ------------------------------------------------------------------
 
         /// <summary>
-        /// __m128i _mm_cvtepi8_epi32 (__m128i a) PMOVSXBD xmm, xmm/m32
+        /// 16x8i -> (8x16i, 8x16i)
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<int> vconvert(Vector128<sbyte> src, out Vector128<int> dst)
-        {
-            dst = ConvertToVector128Int32(src);
-            return dst;
-        }
-
-        /// <summary>
-        /// __m128i _mm_cvtepi8_epi16 (__m128i a) PMOVSXBW xmm, xmm/m64
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<short> vconvert(Vector128<sbyte> src, out Vector128<short> dst)
-        {
-            dst = ConvertToVector128Int16(src);
-            return dst;
-        }
-
-        /// <summary>
-        /// __m128i _mm_cvtepi8_epi64 (__m128i a) PMOVSXBQ xmm, xmm/m16
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<long> vconvert(Vector128<sbyte> src, out Vector128<long> dst)
-        {
-            dst = ConvertToVector128Int64(src);
-            return dst;
-        }
-
+        /// <param name="lo">The first target vector</param>
+        /// <param name="hi">The second target vector</param>
         [MethodImpl(Inline)]
         public static void vconvert(Vector128<sbyte> src, out Vector128<short> lo, out Vector128<short> hi)
+        {            
+            vmaplo(src, out lo);
+            vmaphi(src, out hi);            
+        }
+
+        /// <summary>
+        /// 16x8i -> (8x16u, 8x16u)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The first target vector</param>
+        /// <param name="hi">The second target vector</param>
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector128<sbyte> src, out Vector128<ushort> lo, out Vector128<ushort> hi)
         {
-            vconvert(src, out lo);
-            vconvert(src, out hi);            
+            vmaplo(src, out lo);
+            vmaphi(src, out hi);            
         }
 
         /// <summary>
         /// __m256i _mm256_cvtepi8_epi16 (__m128i a) VPMOVSXBW ymm, xmm/m128
+        /// 16x8i -> 16x16u
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public static Vector256<short> vconvert(Vector128<sbyte> src, out Vector256<short> dst)
+            => dst = ConvertToVector256Int16(src);
+
+        /// <summary>
+        /// 16x8i -> (8x32i, 8x32i)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The first target vector</param>
+        /// <param name="hi">The second target vector</param>
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector128<sbyte> src, out Vector256<int> lo, out Vector256<int> hi)
         {
-            dst = ConvertToVector256Int16(src);
-            return dst;
+            vmaplo(src, out lo);
+            vmaphi(src, out hi);            
         }
 
         /// <summary>
-        /// __m256i _mm256_cvtepi8_epi32 (__m128i a) VPMOVSXBD ymm, xmm/m128
+        /// 16x8i -> (4x32i, 4x32i, 4x32i, 4x32i)
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
+        /// <param name="x0">The first target vector</param>
+        /// <param name="x1">The second target vector</param>
+        /// <param name="x2">The third target vector</param>
+        /// <param name="x3">The fourth target vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<int> vconvert(Vector128<sbyte> src, out Vector256<int> dst)
+        public static void vconvert(Vector128<sbyte> src, out Vector128<int> x0, out Vector128<int> x1, out Vector128<int> x2, out Vector128<int> x3)
         {
-            dst = ConvertToVector256Int32(src);
-            return dst;
-        }
-
-        /// <summary>
-        /// __m256i _mm256_cvtepi8_epi64 (__m128i a) VPMOVSXBQ ymm, xmm/m128
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<long> vconvert(Vector128<sbyte> src, out Vector256<long> dst)
-        {
-            dst = ConvertToVector256Int64(src);
-            return dst;
+            vmaplo(src, out Vector256<int> lo);
+            vmaphi(src, out Vector256<int> hi);
+            x0 = vlo(lo);
+            x1 = vhi(lo);
+            x2 = vlo(hi);
+            x3 = vhi(lo);
         }
 
         // ~ 128x8u -> X
         // ~ ------------------------------------------------------------------        
 
         /// <summary>
-        /// __m128i _mm_cvtepu8_epi16 (__m128i a) PMOVZXBW xmm, xmm/m64
-        /// Zero extends 8 packed 8-bit integers the low 8 bytes of xmm2/m64 to 8 packed 16-bit integers xmm1.
+        /// 16x8u -> (8x16u, 8x16u)
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<short> vconvert(Vector128<byte> src, out Vector128<short> dst)
-        {
-            dst = ConvertToVector128Int16(src);
-            return dst;
-        }
-
-        /// <summary>
-        /// __m128i _mm_cvtepu8_epi16 (__m128i a) PMOVZXBW xmm, xmm/m64
-        /// src[i] -> dst[i], i = 0,.., 7
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <remarks>
-        /// https://www.felixcloutier.com/x86/pmovzx
-        /// </remarks>
-        [MethodImpl(Inline)]
-        public static Vector128<ushort> vconvert(Vector128<byte> src, out Vector128<ushort> dst)
-        {
-            dst = v16u(ConvertToVector128Int16(src));
-            return dst;
-        }
-
+        /// <param name="lo">The first target vector</param>
+        /// <param name="hi">The second target vector</param>
         [MethodImpl(Inline)]
         public static void vconvert(Vector128<byte> src, out Vector128<ushort> lo, out Vector128<ushort> hi)
         {
-            vconvert(src, out lo);
-            vconvert(src, out hi);            
+            vmaplo(src, out lo);
+            vmaphi(src, out hi);            
         }
 
         /// <summary>
-        /// __m128i _mm_cvtepu8_epi32 (__m128i a) PMOVZXBD xmm, xmm/m32
+        /// 16x8u -> (8x16i, 8x16i)
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
+        /// <param name="lo">The first target vector</param>
+        /// <param name="hi">The second target vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<int> vconvert(Vector128<byte> src, out Vector128<int> dst)
+        public static void vconvert(Vector128<byte> src, out Vector128<short> lo, out Vector128<short> hi)
         {
-            dst = ConvertToVector128Int32(src);
-            return dst;
+            vmaplo(src, out lo);
+            vmaphi(src, out hi);            
         }
 
         /// <summary>
-        /// __m128i _mm_cvtepu8_epi32 (__m128i a) PMOVZXBD xmm, xmm/m32
+        /// 16x8u -> (4x32u, 4x32u, 4x32u, 4x32u)
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
+        /// <param name="x0">The first target vector</param>
+        /// <param name="x1">The second target vector</param>
+        /// <param name="x2">The third target vector</param>
+        /// <param name="x3">The fourth target vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vconvert(Vector128<byte> src, out Vector128<uint> dst)
+        public static void vconvert(Vector128<byte> src, out Vector128<uint> x0, out Vector128<uint> x1, out Vector128<uint> x2, out Vector128<uint> x3)
         {
-            dst = v32u(ConvertToVector128Int32(src));
-            return dst;
-        }
-
-        /// <summary>
-        /// __m128i _mm_cvtepi32_epi64 (__m128i a) PMOVSXDQ xmm, xmm/m64
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<long> vconvert(Vector128<byte> src, out Vector128<long> dst)
-        {
-            dst = ConvertToVector128Int64(src);
-            return dst;
-        }
-
-        /// <summary>
-        /// __m128i _mm_cvtepu8_epi64 (__m128i a) PMOVZXBQ xmm, xmm/m16
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<ulong> vconvert(Vector128<byte> src, out Vector128<ulong> dst)
-        {
-            dst = v64u(ConvertToVector128Int64(src));
-            return  dst;
+            vconvert(src, out Vector128<ushort> lo, out Vector128<ushort> hi);
+            vmaplo(lo, out x0);
+            vmaphi(lo, out x1);
+            vmaplo(hi, out x2);
+            vmaphi(hi, out x3);
         }
 
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi16 (__m128i a) vpmovzxbw ymm, xmm
-        /// Zero extends 16 packed 8-bit integers xmm2/m128 to 16 packed 16-bit integers ymm1
+        /// 16x8u -> 16x16i
+        /// src[i] -> dst[i], i = 0,...,15
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public static Vector256<short> vconvert(Vector128<byte> src, out Vector256<short> dst)
-        {
-            dst = ConvertToVector256Int16(src);
-            return dst;
-        }
+            => dst = ConvertToVector256Int16(src);
 
         /// <summary>
         ///  __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
+        /// 16x8u -> 16x16u
         /// src[i] -> dst[i], i = 0,...,15
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public static Vector256<ushort> vconvert(Vector128<byte> src, out Vector256<ushort> dst)
-        {
-            dst = v16u(ConvertToVector256Int16(src));
-            return dst;
-        }
+            => dst = v16u(ConvertToVector256Int16(src));
 
         /// <summary>
-        /// __m256i _mm256_cvtepu8_epi64 (__m128i a) VPMOVZXBQ ymm, xmm
+        /// 16x8u -> (8x32u, 8x32u)
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
+        /// <param name="lo">The first target vector</param>
+        /// <param name="hi">The second target vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<long> vconvert(Vector128<byte> src, out Vector256<long> dst)
-        {
-            dst = ConvertToVector256Int64(src);
-            return dst;
+        public static void vconvert(Vector128<byte> src, out Vector256<uint> lo, out Vector256<uint> hi)
+        {            
+            vmaplo(src, out lo);
+            vmaphi(src, out hi);
         }
-
-        /// <summary>
-        /// __m256i _mm256_cvtepu8_epi64 (__m128i a) VPMOVZXBQ ymm, xmm
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<ulong> vconvert(Vector128<byte> src, out Vector256<ulong> dst)
-        {
-            dst = v64u(ConvertToVector256Int64(src));
-            return dst;
-        }
-
-        /// <summary>
-        ///  __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
-        /// Zero extend 8 packed 8-bit integers the low 8 bytes of xmm2/m64 to 8 packed 32-bit integers ymm1
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<int> vconvert(Vector128<byte> src, out Vector256<int> dst)
-        {
-            dst = ConvertToVector256Int32(src);
-            return dst;
-        }
-
-        /// <summary>
-        ///  __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
-        /// Zero extend 8 packed 8-bit integers the low 8 bytes of xmm2/m64 to 8 packed 32-bit integers ymm1
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<uint> vconvert(Vector128<byte> src, out Vector256<uint> dst)
-        {
-            dst = v32u(ConvertToVector256Int32(src));
-            return dst;
-        }        
 
         // ~ 128x16i -> X
         // ~ ------------------------------------------------------------------        
 
         /// <summary>
-        /// __m128i _mm_cvtepi16_epi32 (__m128i a) PMOVSXWD xmm, xmm/m64
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<int> vconvert(Vector128<short> src, out Vector128<int> dst)
-        {
-            dst = ConvertToVector128Int32(src);
-            return dst;
-        }
-
-        /// <summary>
-        /// __m128i _mm_cvtepi16_epi64 (__m128i a) PMOVSXWQ xmm, xmm/m32
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<long> vconvert(Vector128<short> src, out Vector128<long> dst)
-        {
-            dst = ConvertToVector128Int64(src);
-            return dst;
-        }
-
-        /// <summary>
         /// __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
+        /// 8x16i -> 8x32i
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -303,179 +188,82 @@ namespace Z0
             return dst;
         }
 
+        /// <summary>
+        /// 8x16i -> (4x32i, 4x32i)
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="x0"></param>
+        /// <param name="x1"></param>
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector128<short> src, out Vector128<int> x0, out Vector128<int> x1)
+        {
+            vconvert(src, out Vector256<int> dst);
+            x0 = vlo(dst);
+            x1 = vhi(dst);
+        }
+
+        /// <summary>
+        /// __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
+        /// 8x16i -> 8x32u
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public static Vector256<uint> vconvert(Vector128<short> src, out Vector256<uint> dst)
-        {
-            dst = v32u(ConvertToVector256Int32(src));
-            return dst;
-        }
+            => dst = v32u(ConvertToVector256Int32(src));
 
         // ~ 128x16u -> X
         // ~ ------------------------------------------------------------------        
 
         /// <summary>
-        /// __m128i _mm_cvtepu16_epi32 (__m128i a) PMOVZXWD xmm, xmm/m64
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<int> vconvert(Vector128<ushort> src, out Vector128<int> dst)
-        {
-            dst = ConvertToVector128Int32(src);
-            return dst;
-        }
-
-        /// <summary>
-        /// __m128i _mm_cvtepu16_epi32 (__m128i a)PMOVZXWD xmm, xmm/m64
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<uint> vconvert(Vector128<ushort> src, out Vector128<uint> dst)
-        {
-            dst = v32u(ConvertToVector128Int32(src));
-            return dst;
-        }
-
-        /// <summary>
-        ///  __m128i _mm_cvtepu16_epi64 (__m128i a) PMOVZXWQ xmm, xmm/m32
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<long> vconvert(Vector128<ushort> src, out Vector128<long> dst)
-        {
-           dst = ConvertToVector128Int64(src);
-           return dst;
-        }
-
-        /// <summary>
-        ///  __m128i _mm_cvtepu16_epi64 (__m128i a) PMOVZXWQ xmm, xmm/m32
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<ulong> vconvert(Vector128<ushort> src, out Vector128<ulong> dst)
-        {
-           dst = v64u(ConvertToVector128Int64(src));
-           return dst;
-        }
-
-        /// <summary>
-        /// __m256i _mm256_cvtepu16_epi64 (__m128i a) VPMOVZXWQ ymm, xmm
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<long> vconvert(Vector128<ushort> src, out Vector256<long> dst)
-        {
-            dst = ConvertToVector256Int64(src);
-            return dst;
-        }
-
-        /// <summary>
-        /// __m256i _mm256_cvtepu16_epi64 (__m128i a)VPMOVZXWQ ymm, xmm
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<ulong> vconvert(Vector128<ushort> src, out Vector256<ulong> dst)
-        {
-            dst = v64u(ConvertToVector256Int64(src));
-            return dst;
-        }
-
-        /// <summary>
-        /// __m256i _mm256_cvtepi16_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<long> vconvert(Vector128<short> src, out Vector256<long> dst)
-        {
-            dst = ConvertToVector256Int64(src);
-            return dst;
-        }
-
-        /// <summary>
         /// __m256i _mm256_cvtepu16_epi32 (__m128i a) VPMOVZXWD ymm, xmm
+        /// 8x16u -> 8x32i
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public static Vector256<int> vconvert(Vector128<ushort> src, out Vector256<int> dst)
-        {
-            dst = ConvertToVector256Int32(src);
-            return dst;
-        }
+            => dst = ConvertToVector256Int32(src);
 
         /// <summary>
         /// __m256i _mm256_cvtepu16_epi32 (__m128i a) VPMOVZXWD ymm, xmm
+        /// 8x16u -> 8x32u
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public static Vector256<uint> vconvert(Vector128<ushort> src, out Vector256<uint> dst)
+            => dst = v32u(ConvertToVector256Int32(src));
+
+        /// <summary>
+        /// 8x16u -> (4x32u, 4x32u)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The first target vector</param>
+        /// <param name="hi">The second target vector</param>
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector128<ushort> src, out Vector128<uint> lo, out Vector128<uint> hi)
         {
-            dst = v32u(ConvertToVector256Int32(src));
-            return dst;
+            vconvert(src, out Vector256<uint> dst);
+            lo = vlo(dst);
+            hi = vhi(dst);
         }
 
         // ~ 128x32i -> X
         // ~ ------------------------------------------------------------------        
 
         /// <summary>
-        /// __m128i _mm_cvtepi32_epi64 (__m128i a) PMOVSXDQ xmm, xmm/m64
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<long> vconvert(Vector128<int> src, out Vector128<long> dst)
-        {
-           dst = ConvertToVector128Int64(src);
-           return dst;
-        }
-
-        /// <summary>
         /// __m256i _mm256_cvtepi32_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
+        /// 4x32i -> 4x64i
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public static Vector256<long> vconvert(Vector128<int> src, out Vector256<long> dst)
-        {
-            dst = ConvertToVector256Int64(src);
-            return dst;
-        }
+            => dst = ConvertToVector256Int64(src);
 
         // ~ 128x32u -> X
         // ~ ------------------------------------------------------------------        
-
-        /// <summary>
-        /// __m128i _mm_cvtepu32_epi64 (__m128i a) PMOVZXDQ xmm, xmm/m64
-        /// src[i] -> dst[i], i = 0, 2
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<long> vconvert(Vector128<uint> src, out Vector128<long> dst)
-        {
-           dst = ConvertToVector128Int64(src);
-           return dst;
-        }
-
-        /// <summary>
-        /// __m128i _mm_cvtepu32_epi64 (__m128i a) PMOVZXDQ xmm, xmm/m64
-        /// src[i] -> dst[i], i = 0, 2
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<ulong> vconvert(Vector128<uint> src, out Vector128<ulong> dst)
-        {
-           dst = v64u(ConvertToVector128Int64(src));
-           return dst;
-        }
 
         /// <summary>
         ///  __m256i _mm256_cvtepu32_epi64 (__m128i a) VPMOVZXDQ ymm, xmm
@@ -484,10 +272,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public static Vector256<long> vconvert(Vector128<uint> src, out Vector256<long> dst)
-        {
-            dst = ConvertToVector256Int64(src);
-            return dst;
-        }
+            => dst = ConvertToVector256Int64(src);
 
         /// <summary>
         /// _m256i _mm256_cvtepu32_epi64 (__m128i a) VPMOVZXDQ ymm, xmm
@@ -496,13 +281,38 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vconvert(Vector128<uint> src, out Vector256<ulong> dst)
+            => dst = v64u(ConvertToVector256Int64(src));
+
+        /// <summary>
+        /// 4x32u -> (2x64u, 2x64u)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="x0">The first target vector</param>
+        /// <param name="x1">The second target vector</param>
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector128<uint> src, out Vector128<ulong> x0, out Vector128<ulong> x1)
         {
-            dst = v64u(ConvertToVector256Int64(src));
-            return dst;
+            vconvert(src, out Vector256<ulong> dst);
+            x0 = vlo(dst);
+            x1 = vhi(dst);
+        }
+
+        /// <summary>
+        /// 4x32i -> (2x64i, 2x64i)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="x0">The first target vector</param>
+        /// <param name="x1">The second target vector</param>
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector128<int> src, out Vector128<long> x0, out Vector128<long> x1)
+        {
+            vconvert(src, out Vector256<long> dst);
+            x0 = vlo(dst);
+            x1 = vhi(dst);
         }
 
         // ~ 256
-        // ~ ------------------------------------------------------------------        
+        // ~ ------------------------------------------------------------------     
 
         /// <summary>
         /// src[i] -> lo[i], i = 1,..,15
@@ -514,25 +324,115 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vconvert(Vector256<sbyte> src, out Vector256<short> lo, out Vector256<short> hi)
         {
-            lo = ConvertToVector256Int16(vlo(src));
-            hi = ConvertToVector256Int16(vhi(src));
+            vmaplo(src, out lo);
+            vmaphi(src, out hi);
         }
 
         /// <summary>
+        /// 32x8i -> (8x32i, 8x32i, 8x32i, 8x32i)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="x0">The first target vector</param>
+        /// <param name="x1">The second target vector</param>
+        /// <param name="x2">The third target vector</param>
+        /// <param name="x3">The fourth target vector</param>
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector256<sbyte> src, out Vector256<int> x0, out Vector256<int> x1, out Vector256<int> x2, out Vector256<int> x3)
+        {
+            vconvert(src, out Vector256<short> lo, out Vector256<short> hi);
+            vconvert(lo, out x0, out x1);
+            vconvert(hi, out x2, out x3);
+        }
+
+        /// <summary>
+        /// 32x8u -> (16x16u, 16x16u)
         /// src[i] -> lo[i], i = 1,..,15
         /// src[i] -> hi[i], i = 16,..,31
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The first target vector</param>
+        /// <param name="hi">The second target vector</param>
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector256<byte> src, out Vector256<ushort> lo, out Vector256<ushort> hi)
+        {
+            vmaplo(src, out lo);
+            vmaphi(src, out hi);
+        }
+
+        /// <summary>
+        /// 32x8u -> (16x16i, 16x16i)
+        /// src[i] -> lo[i], i = 1,..,15
+        /// src[i] -> hi[i], i = 16,..,31
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The first target vector</param>
+        /// <param name="hi">The second target vector</param>
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector256<byte> src, out Vector256<short> lo, out Vector256<short> hi)
+        {
+            vmaplo(src, out lo);
+            vmaphi(src, out hi);
+        }
+
+        /// <summary>
+        /// 32x8u -> (8x32u, 8x32u, 8x32u, 8x32u)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="x0">The first target vector</param>
+        /// <param name="x1">The second target vector</param>
+        /// <param name="x2">The third target vector</param>
+        /// <param name="x3">The fourth target vector</param>
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector256<byte> src, out Vector256<uint> x0, out Vector256<uint> x1, out Vector256<uint> x2, out Vector256<uint> x3)
+        {
+            vconvert(src, out Vector256<ushort> lo, out Vector256<ushort> hi);
+            vconvert(lo, out x0, out x1);
+            vconvert(hi, out x2, out x3);
+        }
+
+        /// <summary>
+        /// 8x16x -> (4x64u,4x64u)
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="lo">The lo target</param>
         /// <param name="hi">The hi target</param>
         [MethodImpl(Inline)]
-        public static void vconvert(Vector256<byte> src, out Vector256<ushort> lo, out Vector256<ushort> hi)
+        public static void vconvert(Vector128<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
         {
-            lo = v16u(ConvertToVector256Int16(vlo(src)));
-            hi = v16u(ConvertToVector256Int16(vhi(src)));
+            vmaplo(src, out lo);
+            vmaphi(src, out hi);
         }
 
         /// <summary>
+        /// 8x16x -> (4x64u,4x64u)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The lo target</param>
+        /// <param name="hi">The hi target</param>
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector128<short> src, out Vector256<long> lo, out Vector256<long> hi)
+        {
+            vmaplo(src, out lo);
+            vmaphi(src, out hi);
+        }
+
+        /// <summary>
+        /// 16x16u -> (4x64u, 4x64u, 4x64u, 4x64u)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="x0">The first target vector</param>
+        /// <param name="x1">The second target vector</param>
+        /// <param name="x2">The third target vector</param>
+        /// <param name="x3">The fourth target vector</param>
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector256<ushort> src, out Vector256<ulong> x0, out Vector256<ulong> x1, out Vector256<ulong> x2, out Vector256<ulong> x3)
+        {
+            vconvert(vlo(src), out x0, out x1);
+            vconvert(vhi(src), out x2, out x3);            
+        }
+
+        /// <summary>
+        /// 16x16i -> (8x32i, 8x32i)
         /// src[i] -> lo[i], i = 1,..,7
         /// src[i] -> hi[i], i = 8,..,15
         /// </summary>
@@ -542,19 +442,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vconvert(Vector256<short> src, out Vector256<int> lo, out Vector256<int> hi)
         {
-            lo = ConvertToVector256Int32(vlo(src));
-            hi = ConvertToVector256Int32(vhi(src));            
-        }
-
-        [MethodImpl(Inline)]
-        public static void vconvert(Vector256<short> src, out Vector256<long> lo, out Vector256<long> hi)
-        {
-            lo = ConvertToVector256Int64(vlo(src));
-            hi = ConvertToVector256Int64(vhi(src));
+            vmaplo(src, out lo);
+            vmaphi(src, out hi);
         }
 
         /// <summary>
-        /// src[i] -> lo[i], i = 1,..,7
+        /// 16x16u -> (8x32u, 8x32u)
+        /// src[i] -> lo[i], i = 0,..,7
         /// src[i] -> hi[i], i = 8,..,15
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -563,30 +457,213 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vconvert(Vector256<ushort> src, out Vector256<uint> lo, out Vector256<uint> hi)
         {
-            lo = v32u(ConvertToVector256Int32(vlo(src)));
-            hi = v32u(ConvertToVector256Int32(vhi(src)));            
+            vmaplo(src, out lo);
+            vmaphi(src, out hi);
         }
 
-        [MethodImpl(Inline)]
-        public static void vconvert(Vector256<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
-        {
-            lo = v64u(ConvertToVector256Int64(vlo(src)));
-            hi = v64u(ConvertToVector256Int64(vhi(src)));
-        }
-
+        /// <summary>
+        /// 8x32i -> (4x64i, 4x64i)
+        /// src[i] -> lo[i], i = 0,..,3
+        /// src[i] -> hi[i], i = 4,..,7
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The lo target</param>
+        /// <param name="hi">The hi target</param>
         [MethodImpl(Inline)]
         public static void vconvert(Vector256<int> src, out Vector256<long> lo, out Vector256<long> hi)
+        {
+            vmaplo(src, out lo);
+            vmaphi(src, out hi);
+        }
+
+        /// <summary>
+        /// 8x32u -> (4x64u, 4x64u)
+        /// src[i] -> lo[i], i = 0,..,3
+        /// src[i] -> hi[i], i = 4,..,7
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The lo target</param>
+        /// <param name="hi">The hi target</param>
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector256<uint> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
+        {
+            vmaplo(src, out lo);
+            vmaphi(src, out hi);
+        }
+
+        [MethodImpl(Inline)]
+        static void vconvert8(Vector256<short> src, out Vector256<long> lo, out Vector256<long> hi)
         {
             lo = ConvertToVector256Int64(vlo(src));
             hi = ConvertToVector256Int64(vhi(src));
         }
 
+        /// <summary>
+        /// __m128i _mm_cvtepi8_epi32 (__m128i a) PMOVSXBD xmm, xmm/m32
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static void vconvert(Vector256<uint> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
+        static Vector128<int> vconvert4(Vector128<sbyte> src, out Vector128<int> dst)
         {
-            lo = v64u(ConvertToVector256Int64(vlo(src)));
-            hi = v64u(ConvertToVector256Int64(vhi(src)));
+            dst = ConvertToVector128Int32(src);
+            return dst;
         }
 
+        /// <summary>
+        /// __m128i _mm_cvtepi8_epi32 (__m128i a) PMOVSXBD xmm, xmm/m32
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        static Vector128<uint> vconvert4(Vector128<sbyte> src, out Vector128<uint> dst)
+        {
+            dst = v32u(ConvertToVector128Int32(src));
+            return dst;
+        }
+
+        /// <summary>
+        /// __m128i _mm_cvtepi8_epi64 (__m128i a) PMOVSXBQ xmm, xmm/m16
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        static Vector128<long> vconvert2(Vector128<sbyte> src, out Vector128<long> dst)
+        {
+            dst = ConvertToVector128Int64(src);
+            return dst;
+        }
+
+        /// <summary>
+        /// __m128i _mm_cvtepi8_epi64 (__m128i a) PMOVSXBQ xmm, xmm/m16
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        static Vector128<ulong> vconvert2(Vector128<sbyte> src, out Vector128<ulong> dst)
+        {
+            dst = v64u(ConvertToVector128Int64(src));
+            return dst;
+        }
+
+        /// <summary>
+        /// __m256i _mm256_cvtepi8_epi64 (__m128i a) VPMOVSXBQ ymm, xmm/m128
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        static Vector256<long> vconvert4(Vector128<sbyte> src, out Vector256<long> dst)
+        {
+            dst = ConvertToVector256Int64(src);
+            return dst;
+        }
+
+        /// <summary>
+        /// __m128i _mm_cvtepu8_epi32 (__m128i a) PMOVZXBD xmm, xmm/m32
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        static Vector128<int> vconvert4(Vector128<byte> src, out Vector128<int> dst)
+        {
+            dst = ConvertToVector128Int32(src);
+            return dst;
+        }
+
+        /// <summary>
+        /// __m128i _mm_cvtepu8_epi32 (__m128i a) PMOVZXBD xmm, xmm/m32
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        static Vector128<uint> vconvert4(Vector128<byte> src, out Vector128<uint> dst)
+        {
+            dst = v32u(ConvertToVector128Int32(src));
+            return dst;
+        }
+
+        /// <summary>
+        /// __m128i _mm_cvtepi32_epi64 (__m128i a) PMOVSXDQ xmm, xmm/m64
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        static Vector128<long> vconvert2(Vector128<byte> src, out Vector128<long> dst)
+        {
+            dst = ConvertToVector128Int64(src);
+            return dst;
+        }
+
+        /// <summary>
+        /// __m128i _mm_cvtepu8_epi64 (__m128i a) PMOVZXBQ xmm, xmm/m16
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        static Vector128<ulong> vconvert2(Vector128<byte> src, out Vector128<ulong> dst)
+        {
+            dst = v64u(ConvertToVector128Int64(src));
+            return  dst;
+        }
+
+        /// <summary>
+        ///  __m128i _mm_cvtepu16_epi64 (__m128i a) PMOVZXWQ xmm, xmm/m32
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        static Vector128<long> vconvert2(Vector128<ushort> src, out Vector128<long> dst)
+        {
+           dst = ConvertToVector128Int64(src);
+           return dst;
+        }
+
+        /// <summary>
+        ///  __m128i _mm_cvtepu16_epi64 (__m128i a) PMOVZXWQ xmm, xmm/m32
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        static Vector128<ulong> vconvert2(Vector128<ushort> src, out Vector128<ulong> dst)
+        {
+           dst = v64u(ConvertToVector128Int64(src));
+           return dst;
+        }
+
+        /// <summary>
+        /// __m256i _mm256_cvtepu8_epi64 (__m128i a) VPMOVZXBQ ymm, xmm
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        static Vector256<long> vconvert4(Vector128<byte> src, out Vector256<long> dst)
+        {
+            dst = ConvertToVector256Int64(src);
+            return dst;
+        }
+
+        /// <summary>
+        /// __m256i _mm256_cvtepu8_epi64 (__m128i a) VPMOVZXBQ ymm, xmm
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        static Vector256<ulong> vconvert4(Vector128<byte> src, out Vector256<ulong> dst)
+        {
+            dst = v64u(ConvertToVector256Int64(src));
+            return dst;
+        }
+
+        /// <summary>
+        /// __m128i _mm_cvtepi16_epi64 (__m128i a) PMOVSXWQ xmm, xmm/m32
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        static Vector128<long> vconvert2(Vector128<short> src, out Vector128<long> dst)
+        {
+            dst = ConvertToVector128Int64(src);
+            return dst;
+        }
     }
 }

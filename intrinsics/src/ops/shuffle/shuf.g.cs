@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="spec">The shuffle spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> vshuf4x32<T>(Vector128<T> src, Arrange4 spec)
+        public static Vector128<T> vshuf4x32<T>(Vector128<T> src, Arrange4L spec)
             where T : unmanaged
                 => As.vgeneric<T>(dinx.vshuf4x32(v32u(src), spec));
 
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="spec">The shuffle spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vshuf4x32<T>(Vector256<T> src, Arrange4 spec)
+        public static Vector256<T> vshuf4x32<T>(Vector256<T> src, Arrange4L spec)
             where T : unmanaged
                 => As.vgeneric<T>(dinx.vshuf4x32(v32u(src), spec));
 

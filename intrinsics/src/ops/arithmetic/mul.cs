@@ -112,8 +112,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vmul(Vector256<byte> x, Vector256<byte> y, out Vector256<ushort> lo, out Vector256<ushort> hi)
         {
-            vinflate(x, out var x1, out var x2);
-            vinflate(y, out var y1, out var y2);
+            vinflate(x, out Vector256<ushort> x1, out var x2);
+            vinflate(y, out Vector256<ushort> y1, out var y2);
             lo = vmullo(x1,y1);
             hi = vmullo(x2,y2);
         }

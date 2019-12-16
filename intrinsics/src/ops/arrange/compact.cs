@@ -65,6 +65,16 @@ namespace Z0
             => dst = vcompact(x,y);
 
         /// <summary>
+        /// (8x16w,8x16w) -> 16x8w
+        /// </summary>
+        /// <param name="x">The first source vector</param>
+        /// <param name="y">The second source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vcompact(Vector128<short> x, Vector128<short> y, out Vector128<byte> dst)
+            => dst = vpackus(x,y);
+
+        /// <summary>
         /// 16x8w -> (8x16w, 8x16w)
         /// </summary>
         /// <param name="x">The source vector</param>
@@ -72,10 +82,17 @@ namespace Z0
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline)]
         public static void vinflate(Vector128<byte> x, out Vector128<ushort> lo, out Vector128<ushort> hi)
-        {            
-            vconvert(x, out lo);
-            vconvert(vhi(x), out hi);
-        }
+            => vconvert(x, out lo, out hi);
+
+        /// <summary>
+        /// 16x8w -> (8x16w, 8x16w)
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="lo">The target for the lower source elements</param>
+        /// <param name="hi">The target for the upper source elements</param>
+        [MethodImpl(Inline)]
+        public static void vinflate(Vector128<byte> x, out Vector128<short> lo, out Vector128<short> hi)
+            => vconvert(x, out lo, out hi);
 
         /// <summary>
         /// 16x8w -> (8x16w, 8x16w)
@@ -85,21 +102,18 @@ namespace Z0
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline)]
         public static void vinflate(Vector128<sbyte> x, out Vector128<short> lo, out Vector128<short> hi)
-        {            
-            vconvert(x, out lo);
-            vconvert(vhi(x), out hi);
-        }
+            => vconvert(x, out lo, out hi);
 
         // ~ 32x16w <-> 32x8w
         // ~ 32:8 <-> 16
         // ~ ------------------------------------------------------------------
 
         [MethodImpl(Inline)]
-        static Vector256<byte> vperm4x64(Vector256<byte> x, Perm4 spec)
+        static Vector256<byte> vperm4x64(Vector256<byte> x, Perm4L spec)
             => Permute4x64(x.AsUInt64(), (byte)spec).AsByte(); 
 
         [MethodImpl(Inline)]
-        static Vector256<sbyte> vperm4x64(Vector256<sbyte> x, Perm4 spec)
+        static Vector256<sbyte> vperm4x64(Vector256<sbyte> x, Perm4L spec)
             => Permute4x64(x.AsUInt64(), (byte)spec).AsSByte(); 
 
         /// <summary>
@@ -109,7 +123,7 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<byte> vcompact(Vector256<ushort> x, Vector256<ushort> y)            
-            => vperm4x64(vpackus(x,y), Perm4.ACBD);
+            => vperm4x64(vpackus(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (16x16w,16x16w) -> 32x8w
@@ -118,7 +132,7 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<sbyte> vcompact(Vector256<short> x, Vector256<short> y)            
-            => vperm4x64(vpackss(x,y), Perm4.ACBD);
+            => vperm4x64(vpackss(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (16x16w,16x16w) -> 32x8w
@@ -127,7 +141,7 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<byte> vcompact2(Vector256<ushort> x, Vector256<ushort> y)            
-            => vperm4x64(vpackus2(x,y), Perm4.ACBD);
+            => vperm4x64(vpackus2(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (16x16w,16x16w) -> 32x8w
@@ -143,11 +157,21 @@ namespace Z0
         /// 32x8w -> (16x16w,16x16w)
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="x0">The first target vector</param>
-        /// <param name="x1">The second target vector</param>
+        /// <param name="lo">The first target vector</param>
+        /// <param name="hi">The second target vector</param>
         [MethodImpl(Inline)]
-        public static void vinflate(Vector256<byte> src, out Vector256<ushort> x0, out Vector256<ushort> x1)
-            => vconvert(src, out x0, out x1);
+        public static void vinflate(Vector256<byte> src, out Vector256<ushort> lo, out Vector256<ushort> hi)
+            => vconvert(src, out lo, out hi);
+
+        /// <summary>
+        /// 32x8w -> (16x16w,16x16w)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The first target vector</param>
+        /// <param name="hi">The second target vector</param>
+        [MethodImpl(Inline)]
+        public static void vinflate(Vector256<byte> src, out Vector256<short> lo, out Vector256<short> hi)
+            => vconvert(src, out lo, out hi);
 
         /// <summary>
         /// 32x8w -> (16x16w,16x16w)
@@ -220,11 +244,7 @@ namespace Z0
         /// <param name="x1">The second target vector</param>
         [MethodImpl(Inline)]
         public static void vinflate(Vector128<ushort> src, out Vector128<uint> x0, out Vector128<uint> x1)
-        {
-            vconvert(src, out Vector256<uint> dst);
-            x0 = vlo(dst);
-            x1 = vhi(dst);
-        }
+            => vconvert(src, out x0, out x1);
 
         /// <summary>
         /// 8x16w -> (4x32w,4x32w)
@@ -234,11 +254,7 @@ namespace Z0
         /// <param name="x1">The second target vector</param>
         [MethodImpl(Inline)]
         public static void vinflate(Vector128<short> src, out Vector128<int> x0, out Vector128<int> x1)
-        {
-            vconvert(src, out Vector256<int> dst);
-            x0 = vlo(dst);
-            x1 = vhi(dst);
-        }
+            => vconvert(src, out x0, out x1);
 
         // ~ 8x32w <-> 8x16w
         // ~ 8:16 <-> 32
@@ -286,11 +302,11 @@ namespace Z0
         // ~ ------------------------------------------------------------------
 
         [MethodImpl(Inline)]
-        static Vector256<ushort> vperm4x64(Vector256<ushort> x, Perm4 spec)
+        static Vector256<ushort> vperm4x64(Vector256<ushort> x, Perm4L spec)
             => Permute4x64(x.AsUInt64(), (byte)spec).AsUInt16(); 
 
         [MethodImpl(Inline)]
-        static Vector256<short> vperm4x64(Vector256<short> x, Perm4 spec)
+        static Vector256<short> vperm4x64(Vector256<short> x, Perm4L spec)
             => Permute4x64(x.AsUInt64(), (byte)spec).AsInt16();
 
         /// <summary>
@@ -306,7 +322,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline)]
         public static Vector256<ushort> vcompact(Vector256<uint> x, Vector256<uint> y)            
-            => vperm4x64(vpackus(x,y), Perm4.ACBD);
+            => vperm4x64(vpackus(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (8x32w,8x32w) -> 16x16w
@@ -314,7 +330,7 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<short> vcompact(Vector256<int> x, Vector256<int> y)            
-            => vperm4x64(vpackss(x,y), Perm4.ACBD);
+            => vperm4x64(vpackss(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (8x32w,8x32w) -> 16x16w
@@ -322,7 +338,7 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<ushort> vcompact2(Vector256<uint> x, Vector256<uint> y)
-            => vperm4x64(vpackus2(x,y), Perm4.ACBD);
+            => vperm4x64(vpackus2(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (8x32w,8x32w) -> 16x16w
@@ -341,10 +357,7 @@ namespace Z0
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline)]
         public static void vinflate(Vector256<ushort> src, out Vector256<uint> lo, out Vector256<uint> hi)
-        {
-            vconvert(vlo(src), out lo);
-            vconvert(vhi(src), out hi);
-        }
+            => vconvert(src, out lo, out hi);
 
         /// <summary>
         /// 16x16w -> (8x32w, 8x32w)
@@ -354,10 +367,7 @@ namespace Z0
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline)]
         public static void vinflate(Vector256<short> src, out Vector256<int> lo, out Vector256<int> hi)
-        {
-            vconvert(vlo(src), out lo);
-            vconvert(vhi(src), out hi);
-        }
+            => vconvert(src, out lo, out hi);
 
         // ~ 16x32w <-> 16x8w
         // ~ 16:8 <-> 32
@@ -385,12 +395,7 @@ namespace Z0
         /// <param name="x3">The fourth target vector</param>
         [MethodImpl(Inline)]
         public static void vinflate(Vector128<byte> src, out Vector128<uint> x0, out Vector128<uint> x1, out Vector128<uint> x2, out Vector128<uint> x3)            
-        {
-            vconvert(src, out x0);
-            vconvert(vsrlx(src,32*1), out x1);
-            vconvert(vsrlx(src,32*2), out x2);
-            vconvert(vsrlx(src,32*3), out x3);
-        }
+            => vconvert(src, out x0, out x1, out x2, out x3);        
 
         /// <summary>
         /// (8x32w, 8x32w) -> 16x8w
@@ -410,10 +415,7 @@ namespace Z0
         /// <param name="x1">The second target vector</param>
         [MethodImpl(Inline)]
         public static void vinflate(Vector128<byte> src, out Vector256<uint> x0, out Vector256<uint> x1)
-        {            
-            vconvert(src, out x0);
-            vconvert(vsrlx(src,64), out x1);
-        }
+            => vconvert(src, out x0, out x1);
 
         // ~ 32x32w <-> 32x8w
         // ~ 32:8 <-> 32
@@ -441,11 +443,7 @@ namespace Z0
         /// <param name="x3">The fourth target vector that receives the fourth 64-bit segment from the source vector</param>
         [MethodImpl(Inline)]
         public static void vinflate(Vector256<byte> src, out Vector256<uint> x0, out Vector256<uint> x1, out Vector256<uint> x2, out Vector256<uint> x3)
-        {
-            vconvert(src, out Vector256<ushort> lo, out Vector256<ushort> hi);
-            vconvert(lo, out x0, out x1);
-            vconvert(hi, out x2, out x3);
-        }
+            => vconvert(src, out x0, out x1, out x2, out x3);
 
         /// <summary>
         /// 32x8w -> (8x32w, 8x32w, 8x32w, 8x32w)
@@ -457,11 +455,7 @@ namespace Z0
         /// <param name="x3">The fourth target vector that receives the fourth 64-bit segment from the source vector</param>
         [MethodImpl(Inline)]
         public static void vinflate(Vector256<sbyte> src, out Vector256<int> x0, out Vector256<int> x1, out Vector256<int> x2, out Vector256<int> x3)
-        {
-            vconvert(src, out Vector256<short> lo, out Vector256<short> hi);
-            vconvert(lo, out x0, out x1);
-            vconvert(hi, out x2, out x3);
-        }
+            => vconvert(src, out x0, out x1, out x2, out x3);
 
         // ~ 4x64w <-> 4x32w
         // ~ 4:32 <-> 64
@@ -478,32 +472,24 @@ namespace Z0
             => dst = vbuild.parts(n128, (uint)vcell(x0, 0),(uint)vcell(x0, 1),(uint)vcell(x1, 0),(uint)vcell(x1, 1));
 
         /// <summary>
-        /// 4x32w -> (2x64w, 2x64w)
+        /// 4x32u -> (2x64u, 2x64u)
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="x0">The first target vector</param>
         /// <param name="x1">The second target vector</param>
         [MethodImpl(Inline)]
-        public static void vinflate(Vector128<uint> src, out Vector128<ulong> x0, out Vector128<ulong> x1)
-        {
-            vinflate(src, out var dst);
-            x0 = vlo(dst);
-            x1 = vhi(dst);
-        }
+        public static void vinflate(Vector128<uint> src, out Vector128<ulong> lo, out Vector128<ulong> hi)
+            => vconvert(src, out lo, out hi);
 
         /// <summary>
-        /// 4x32w -> (2x64w, 2x64w)
+        /// 4x32i -> (2x64i, 2x64i)
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="x0">The first target vector</param>
-        /// <param name="x1">The second target vector</param>
+        /// <param name="lo">The first target vector</param>
+        /// <param name="hi">The second target vector</param>
         [MethodImpl(Inline)]
-        public static void vinflate(Vector128<int> src, out Vector128<long> x0, out Vector128<long> x1)
-        {
-            vinflate(src, out var dst);
-            x0 = vlo(dst);
-            x1 = vhi(dst);
-        }
+        public static void vinflate(Vector128<int> src, out Vector128<long> lo, out Vector128<long> hi)
+            => vconvert(src, out lo, out hi);
 
         /// <summary>
         /// 4x64w -> 4x32w
@@ -563,10 +549,7 @@ namespace Z0
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline)]
         public static void vinflate(Vector256<uint> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
-        {
-            vconvert(vlo(src), out lo);
-            vconvert(vhi(src), out hi);
-        }
+            => vconvert(src, out lo, out hi);
 
         /// <summary>
         /// 8x32w -> (4x64w,4x64w)
@@ -576,10 +559,7 @@ namespace Z0
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline)]
         public static void vinflate(Vector256<int> src, out Vector256<long> lo, out Vector256<long> hi)
-        {
-            vconvert(vlo(src), out lo);
-            vconvert(vhi(src), out hi);
-        }
+            => vconvert(src, out lo, out hi);
 
 
     }

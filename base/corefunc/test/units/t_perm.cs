@@ -66,14 +66,14 @@ namespace Z0
 
         public void perm_format()
         {
-            const Perm4  p = Perm4.DCBA;            
+            const Perm4L  p = Perm4L.DCBA;            
             const string pbs_expect = "00011011";
             const string pformat_epect = "[00 01 10 11]: ABCD -> DCBA";
 
             var pbs_actual = BitString.scalar((byte)p);            
             Claim.eq(pbs_expect, pbs_actual);
             
-            var p_assembled = Perm.assemble(Perm4.D, Perm4.C, Perm4.B, Perm4.A);            
+            var p_assembled = Perm.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);            
             Claim.eq(p, p_assembled);            
             
             var pformat_actual = p.FormatMap();

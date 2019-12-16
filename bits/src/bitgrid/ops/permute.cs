@@ -23,7 +23,7 @@ namespace Z0
         /// Grid: [1000 | 0000 | 0100 | 1100]
         /// </example>
         [MethodImpl(Inline)]
-        public static BitGrid16<N4,N4,ushort> from(Perm4 spec)
+        public static BitGrid16<N4,N4,ushort> from(Perm4L spec)
             => (ushort)spec;
 
         [MethodImpl(Inline)]
@@ -31,7 +31,7 @@ namespace Z0
             => from(spec.ToLiteral());
 
         [MethodImpl(Inline)]
-        public static SubGrid32<N8,N3,uint> from(Perm8 p)
+        public static SubGrid32<N8,N3,uint> from(Perm8L p)
             => (uint)p;
 
         [MethodImpl(Inline)]
@@ -39,7 +39,7 @@ namespace Z0
             => from(p.ToLiteral());
 
         [MethodImpl(Inline)]
-        public static BitGrid64<N16,N4,ulong> from(Perm16 p)
+        public static BitGrid64<N16,N4,ulong> from(Perm16L p)
             => (ulong)p;
 
         [MethodImpl(Inline)]
@@ -48,8 +48,8 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static Perm16 from(BitGrid64<N16,N4,ulong> g)
-            => (Perm16)g.Data;
+        public static Perm16L from(BitGrid64<N16,N4,ulong> g)
+            => (Perm16L)g.Data;
 
         public static SubGrid256<N32,N5,ulong> from(NatPerm<N32> p)
         {

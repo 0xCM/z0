@@ -21,16 +21,16 @@ namespace Z0
 
         public void perm4_digits_basecase()
         {
-            var dABCD = Perm4.ABCD.ToDigits();
+            var dABCD = Perm4L.ABCD.ToDigits();
             Claim.eq(DataBlocks.natparts(n4, A, B, C, D), dABCD);
 
-            var dDCBA = Perm4.DCBA.ToDigits();
+            var dDCBA = Perm4L.DCBA.ToDigits();
             Claim.eq(DataBlocks.natparts(n4, D, C, B, A), dDCBA);
 
-            var dACBD = Perm4.ACBD.ToDigits();
+            var dACBD = Perm4L.ACBD.ToDigits();
             Claim.eq(DataBlocks.natparts(n4, A, C, B, D), dACBD);
 
-            var dCBDA = Perm4.CBDA.ToDigits();
+            var dCBDA = Perm4L.CBDA.ToDigits();
             Claim.eq(DataBlocks.natparts(n4, C, B, D, A), dCBDA);
         }
 
@@ -40,16 +40,16 @@ namespace Z0
             var xs = x.ToSpan();
             Claim.eq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A+4], xs[B+ 4], xs[C + 4], xs[D + 4]), x);
 
-            var xABCD = dinx.vpermhi4x16(x, Perm4.ABCD);
+            var xABCD = dinx.vpermhi4x16(x, Perm4L.ABCD);
             Claim.eq(xABCD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
-            var xDCBA = dinx.vpermhi4x16(x, Perm4.DCBA);
+            var xDCBA = dinx.vpermhi4x16(x, Perm4L.DCBA);
             Claim.eq(xDCBA, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[D + 4], xs[C + 4], xs[B + 4], xs[A + 4]));
 
-            var xACBD = dinx.vpermhi4x16(x, Perm4.ACBD);
+            var xACBD = dinx.vpermhi4x16(x, Perm4L.ACBD);
             Claim.eq(xACBD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[C + 4], xs[B + 4], xs[D + 4]));            
 
-            Claim.eq(dinx.vpermhi4x16(vbuild.parts(n128, 0,1,2,3,6,7,8,9), Perm4.ADCB), vbuild.parts(n128,0,1,2,3,6,9,8,7));
+            Claim.eq(dinx.vpermhi4x16(vbuild.parts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), vbuild.parts(n128,0,1,2,3,6,9,8,7));
 
         }
 

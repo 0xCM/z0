@@ -57,7 +57,7 @@ namespace Z0
         public void v128x8u_v128x16u()
         {
             var x = vbuild.parts(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
-            var y = dinx.vconvert(x, out Vector128<ushort> _);
+            var y = dinx.vmaplo(x, out Vector128<ushort> _);
             var z = vbuild.parts(n128,0,1,2,3,4,5,6,7);
             Claim.eq(y,z);
         }

@@ -86,7 +86,7 @@ namespace Z0
         /// Permutation: [11 10 00 01] (ABCD -> BACD)
         /// Bitmatrix: [1000 | 0000 | 0100 | 1100]
         /// </remarks>
-        public static BitMatrix4 permencode(Perm4 spec)
+        public static BitMatrix4 permencode(Perm4L spec)
         {
             var digits = spec.ToDigits();
             var rows = new BitVector4[4];

@@ -93,8 +93,8 @@ namespace Z0
             var v = VData.decrements<uint>(n);
             Claim.eq(vbuild.parts(n,3,2,1,0),v);
 
-            Claim.eq(v, dinx.vperm4x32(u, Perm4.DCBA));
-            Claim.eq(u, dinx.vperm4x32(v, Perm4.DCBA));
+            Claim.eq(v, dinx.vperm4x32(u, Perm4L.DCBA));
+            Claim.eq(u, dinx.vperm4x32(v, Perm4L.DCBA));
         }
 
 

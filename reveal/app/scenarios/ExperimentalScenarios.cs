@@ -120,12 +120,12 @@ namespace Z0
 
         public Vec256<ulong> perm4x64_256x64(Vec256<ulong> src)
         {            
-            var y = dinx.vperm4x64(src, Perm4.ABCD);            
-            y = dinx.vperm4x64(y, Perm4.ABDC);
-            y = dinx.vperm4x64(y, Perm4.ACBD);
-            y = dinx.vperm4x64(y, Perm4.ACDB);
-            y = dinx.vperm4x64(y, Perm4.ADBC);
-            y = dinx.vperm4x64(y, Perm4.ADCB);
+            var y = dinx.vperm4x64(src, Perm4L.ABCD);            
+            y = dinx.vperm4x64(y, Perm4L.ABDC);
+            y = dinx.vperm4x64(y, Perm4L.ACBD);
+            y = dinx.vperm4x64(y, Perm4L.ACDB);
+            y = dinx.vperm4x64(y, Perm4L.ADBC);
+            y = dinx.vperm4x64(y, Perm4L.ADCB);
             return y;
 
         }
@@ -133,12 +133,12 @@ namespace Z0
         public Vec256<ulong> perm4x64_256x64(ulong a, ulong b, ulong c, ulong d)
         {            
             var x = vbuild.parts(n256,a,b,c,d);
-            var y = dinx.vperm4x64(x, Perm4.ABCD);            
-            y = dinx.vperm4x64(y, Perm4.ABDC);
-            y = dinx.vperm4x64(y, Perm4.ACBD);
-            y = dinx.vperm4x64(y, Perm4.ACDB);
-            y = dinx.vperm4x64(y, Perm4.ADBC);
-            y = dinx.vperm4x64(y, Perm4.ADCB);
+            var y = dinx.vperm4x64(x, Perm4L.ABCD);            
+            y = dinx.vperm4x64(y, Perm4L.ABDC);
+            y = dinx.vperm4x64(y, Perm4L.ACBD);
+            y = dinx.vperm4x64(y, Perm4L.ACDB);
+            y = dinx.vperm4x64(y, Perm4L.ADBC);
+            y = dinx.vperm4x64(y, Perm4L.ADCB);
             return y;
 
         }

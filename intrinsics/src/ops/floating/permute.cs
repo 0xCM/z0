@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="spec">The permutation spec</param>
         [MethodImpl(Inline)]
-        public static Vector256<double> vperm4x64(Vector256<double> x, Perm4 spec)
+        public static Vector256<double> vperm4x64(Vector256<double> x, Perm4L spec)
             => Permute4x64(x, (byte)spec); 
 
         /// <summary>

@@ -6,17 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+    using System.Runtime.Intrinsics;
+
     using static zfunc;    
 
-    partial class gmathops
+    public static partial class Perm
     {
-        public static Perm4L perm4_assemble_id()
-            => Perm.assemble(Perm4L.A, Perm4L.B, Perm4L.C, Perm4L.D);
-
-        public static Perm4L perm4_assemble_rid()
-            => Perm.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);
 
     }
-
 }
