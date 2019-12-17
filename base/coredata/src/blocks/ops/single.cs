@@ -66,5 +66,16 @@ namespace Z0
         public static Block256<T> single<T>(N256 w, T t = default)
             where T : unmanaged        
                 => alloc<T>(w,1);
+
+        /// <summary>
+        /// Allocates a single 512-bit block
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <param name="t">The cell type representative</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Block512<T> single<T>(N512 w, T t = default)
+            where T : unmanaged        
+                => alloc<T>(w,1);  
     }
 }

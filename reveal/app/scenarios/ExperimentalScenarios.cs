@@ -117,32 +117,6 @@ namespace Z0
             return result;
 
         }
-
-        public Vec256<ulong> perm4x64_256x64(Vec256<ulong> src)
-        {            
-            var y = dinx.vperm4x64(src, Perm4L.ABCD);            
-            y = dinx.vperm4x64(y, Perm4L.ABDC);
-            y = dinx.vperm4x64(y, Perm4L.ACBD);
-            y = dinx.vperm4x64(y, Perm4L.ACDB);
-            y = dinx.vperm4x64(y, Perm4L.ADBC);
-            y = dinx.vperm4x64(y, Perm4L.ADCB);
-            return y;
-
-        }
-
-        public Vec256<ulong> perm4x64_256x64(ulong a, ulong b, ulong c, ulong d)
-        {            
-            var x = vbuild.parts(n256,a,b,c,d);
-            var y = dinx.vperm4x64(x, Perm4L.ABCD);            
-            y = dinx.vperm4x64(y, Perm4L.ABDC);
-            y = dinx.vperm4x64(y, Perm4L.ACBD);
-            y = dinx.vperm4x64(y, Perm4L.ACDB);
-            y = dinx.vperm4x64(y, Perm4L.ADBC);
-            y = dinx.vperm4x64(y, Perm4L.ADCB);
-            return y;
-
-        }
-
         
 
         public int Switch14(int x)

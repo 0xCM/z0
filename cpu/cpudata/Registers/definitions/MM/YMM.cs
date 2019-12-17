@@ -223,7 +223,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public void Assign<T>(Vec256<T> src)
+        public void Assign<T>(Vector256<T> src)
             where T : unmanaged
         {
             bytes(src).CopyTo(this.AsSpan<byte>());

@@ -62,15 +62,15 @@ namespace Z0
             var xEy = xE | yE;
             var xOy = xO | yO;
             var t = text();
-            t.WithLabeled("x", x.FormatBits(blockWidth:1));
-            t.WithLabeled("x", x.FormatBits(blockWidth:1));
-            t.WithLabeled("y", y.FormatBits(blockWidth:1));
-            t.WithLabeled("xE", xE.FormatBits(blockWidth:1));
-            t.WithLabeled("xO", xO.FormatBits(blockWidth:1));
-            t.WithLabeled("yE", yE.FormatBits(blockWidth:1));
-            t.WithLabeled("yO", yO.FormatBits(blockWidth:1));
-            t.WithLabeled("xEy", xEy.FormatBits(blockWidth:1));
-            t.WithLabeled("xOy", xOy.FormatBits(blockWidth:1));
+            t.WithLabeled("x", x.FormatBits(blockwidth:1));
+            t.WithLabeled("x", x.FormatBits(blockwidth:1));
+            t.WithLabeled("y", y.FormatBits(blockwidth:1));
+            t.WithLabeled("xE", xE.FormatBits(blockwidth:1));
+            t.WithLabeled("xO", xO.FormatBits(blockwidth:1));
+            t.WithLabeled("yE", yE.FormatBits(blockwidth:1));
+            t.WithLabeled("yO", yO.FormatBits(blockwidth:1));
+            t.WithLabeled("xEy", xEy.FormatBits(blockwidth:1));
+            t.WithLabeled("xOy", xOy.FormatBits(blockwidth:1));
             return t.ToString();
         }
 

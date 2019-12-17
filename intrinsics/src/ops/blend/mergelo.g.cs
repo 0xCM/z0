@@ -14,7 +14,6 @@ namespace Z0
 
     partial class ginx
     {
-
         /// <summary>
         /// 
         /// </summary>
@@ -62,7 +61,6 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
 
         [MethodImpl(Inline)]
         static Vector128<T> vmergelo_i<T>(Vector128<T> x, Vector128<T> y)

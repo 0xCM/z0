@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Linq;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
@@ -13,6 +14,36 @@ namespace Z0
 
     public class t_vperm : t_vinx<t_vperm>
     {
+
+
+        // [0 1 2 3 | 4 5 6 7 | 8 9 A B | C D E F] 
+        //
+
+        public void bitfield_outline()
+        {
+            var spec = BitField.specify((0,3),(4,6),(7,8),(9,9),(10,14),(15,17),(18,20));  
+            var data = 0b100_101_11010_1_11_110_0111ul;          
+            var bf = BitField.init(data,spec);
+
+            Claim.eq(7,spec.FieldCount);
+
+            var expect = new long[]{0b0111,0b110,0b11,0b1,0b11010,0b101,0b100};
+            for(var i=0; i < spec.FieldCount; i++)
+                Claim.eq(bf[i], expect[i]);
+        }
+
+
+
+        public void perm_symbols()
+        {            
+            Claim.eq($"{Perm4L.ABDC}", Perm4L.ABDC.Format());
+            Claim.eq($"{Perm4L.DCBA}", Perm4L.DCBA.Format());           
+            Claim.eq($"ABCDEFGH", Perm8L.Identity.Format());   
+            Claim.eq($"HGFEDCBA", Perm8L.Reversed.Format());  
+            Claim.eq($"0123456789ABCDEF", Perm16L.Identity.Format());
+                    
+        }
+
         public void perm4_digits()
         {
             const byte A = 0b00;
@@ -163,26 +194,39 @@ namespace Z0
 
         }
 
+        [MethodImpl(NotInline)]
+        static Vector128<T> vswapspec<T>(N128 n, params Swap[] swaps)
+            where T : unmanaged  
+        {
+            var src = vbuild.increments<T>(n).ToSpan();
+            var dst = src.Swap(swaps);
+            return ginx.vload(n, in head(src));
+        }
+
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vswap(Vector128<byte> src, params Swap[] swaps)
+            => dinx.vshuf16x8(src, vswapspec<byte>(n128, swaps));
+
         public void perm_swaps()
         {            
             
             var src = vbuild.increments<byte>(n128);
 
             Swap s = (0,1);
-            var x1 = dinx.vswap(src, s);
-            var x2 = dinx.vswap(x1, s);
+            var x1 = vswap(src, s);
+            var x2 = vswap(x1, s);
             Claim.eq(x2, src);
 
             //Shuffle the first element all the way through to the last element
             var chain = Swap.Chain((0,1), 15);
-            var x3 = dinx.vswap(src, chain).ToSpan();
+            var x3 = vswap(src, chain).ToSpan();
             Claim.eq(x3[15],(byte)0);            
         }
 
         public void perm4_symbols_random()
         {
             var perms = Random.EnumValues(A, B, C, D);
-            var all = evalues<Perm4L>().ToSet();
+            var all = emembers<Perm4L>().ToSet();
             for(var i=0; i<SampleSize; i++)
             {
                 var perm = perms.First();

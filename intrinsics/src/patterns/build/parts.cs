@@ -70,14 +70,14 @@ namespace Z0
         /// Defines a 128-bit cpu vector componentwise, from least -> most significant
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vector128<float> parts(N128 n, float x0, float x1, float x2, float x3)
+        public static Vector128<float> partsf(N128 n, float x0, float x1, float x2, float x3)
             => Vector128.Create(x0,x1,x2,x3);
 
         /// <summary>
         /// Defines a 128-bit cpu vector componentwise, from least -> most significant
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vector128<double> parts(N128 n,double x0, double x1)
+        public static Vector128<double> partsf(N128 n,double x0, double x1)
             => Vector128.Create(x0,x1);
 
         /// <summary>
@@ -115,7 +115,8 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static Vector256<int> partsi(N256 n, int x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7)
-                => Vector256.Create(x0,x1,x2,x3,x4,x5,x6,x7);
+            => Vector256.Create(x0,x1,x2,x3,x4,x5,x6,x7);
+
 
         /// <summary>
         /// Defines a 256-bit cpu vector componentwise, from least -> most significant
@@ -132,14 +133,27 @@ namespace Z0
         public static Vector256<long> partsi(N256 n, long x0, long x1, long x2, long x3)
             => Vector256.Create(x0,x1,x2,x3);
 
-
         /// <summary>
         /// Defines a cpu vector by its constituent parts, from least -> most significant
         /// </summary>
         [MethodImpl(Inline)]
         public static Vector256<ulong> parts(N256 n, ulong x0, ulong x1, ulong x2, ulong x3)
             => Vector256.Create(x0,x1,x2,x3);
-  
+
+        /// <summary>
+        /// Defines a cpu vector by its constituent parts, from least -> most significant
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static Vector256<float> partsf(N256 n, float x0, float x1, float x2, float x3, float x4, float x5, float x6, float x7)
+            => Vector256.Create(x0,x1,x2,x3,x4,x5,x6,x7);
+
+        /// <summary>
+        /// Defines a cpu vector by its constituent parts, from least -> most significant
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static Vector256<double> partsf(N256 n, double x0, double x1, double x2, double x3)
+            => Vector256.Create(x0,x1,x2,x3);
+
 
     }
 

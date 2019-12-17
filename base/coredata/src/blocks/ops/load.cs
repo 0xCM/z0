@@ -75,6 +75,17 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
+        internal static Block512<T> load<T>(N512 w, Span<T> src)
+            where T : unmanaged
+                => new Block512<T>(src);
+
+        /// <summary>
+        /// Loads a span into a blocked container without checks
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
         internal static ConstBlock16<T> load<T>(N16 w, ReadOnlySpan<T> src)
             where T : unmanaged
                 => new ConstBlock16<T>(src);
@@ -122,6 +133,17 @@ namespace Z0
         internal static ConstBlock256<T> load<T>(N256 w, ReadOnlySpan<T> src)
             where T : unmanaged
                 => new ConstBlock256<T>(src);
+
+        /// <summary>
+        /// Loads a span into a blocked container without checks
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        internal static ConstBlock512<T> load<T>(N512 w, ReadOnlySpan<T> src)
+            where T : unmanaged
+                => new ConstBlock512<T>(src);
 
         /// <summary>
         /// Loads a natural block from blocked storage

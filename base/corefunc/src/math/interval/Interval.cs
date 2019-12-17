@@ -277,6 +277,4 @@ namespace Z0
         static void Degenerate(T left, T right)
             => throw new Exception($"Interval with left = {left} and right = {right} collapses to a point and is considered invalid");
    }
-
- 
 }

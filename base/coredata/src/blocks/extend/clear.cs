@@ -61,6 +61,17 @@ namespace Z0
         public static void Clear<T>(this in Block256<T> src)
             where T : unmanaged
                 => src.Data.Clear();
+
+        /// <summary>
+        /// Zero-fills the block
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static void Clear<T>(this in Block512<T> src)
+            where T : unmanaged
+                => src.Data.Clear();
+
     }
 
 }

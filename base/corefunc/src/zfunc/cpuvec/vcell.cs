@@ -79,6 +79,7 @@ partial class zfunc
         where T : unmanaged
             => src.GetElement(index);
 
+
     /// <summary>
     /// Sets an index-identified component to a specified value
     /// </summary>

@@ -37,6 +37,15 @@ namespace Z0
                 => ref dinx.vhi(src.AsUInt64(), ref dst);
 
         /// <summary>
+        /// Extracts the upper 256-bits from the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<T> vhi<T>(Vector512<T> src)
+            where T : unmanaged
+                => src.Hi;       
+
+        /// <summary>
         /// Extracts hi 128-bit lane of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>

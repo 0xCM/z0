@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The type</typeparam>
         [MethodImpl(Inline)]
-        public static T zero<T>()
+        public static T zero<T>(T t = default)
             where T : unmanaged
                 => default;
 
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The type</typeparam>
         [MethodImpl(Inline)]
-        public static T one<T>()
+        public static T one<T>(T t = default)
             where T : unmanaged
                 => zfunc.one<T>();
 
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The type</typeparam>
         [MethodImpl(Inline)]
-        public static T minval<T>()
+        public static T minval<T>(T t = default)
             where T : unmanaged
                 => zfunc.minval<T>();
 
@@ -44,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The type</typeparam>
         [MethodImpl(Inline)]
-        public static T maxval<T>()
+        public static T maxval<T>(T t = default)
             where T : unmanaged
                 => zfunc.maxval<T>();
 

@@ -53,17 +53,11 @@ namespace Z0
         public static implicit operator Vector128<ulong>(in UInt128 src)
             => Vector128.Create(src.lo, src.hi);
 
-        [MethodImpl(Inline)]
-        public static implicit operator Vec128<ulong>(in UInt128 src)
-            => Vector128.Create(src.lo, src.hi);
 
         [MethodImpl(Inline)]
         public static implicit operator UInt128(in Vector128<ulong> src)
             => Unsafe.As<Vector128<ulong>,UInt128>(ref Unsafe.AsRef(in src));
 
-        [MethodImpl(Inline)]
-        public static implicit operator UInt128(in Vec128<ulong> src)
-            => Unsafe.As<Vec128<ulong>, UInt128>(ref Unsafe.AsRef(in src));
 
         [MethodImpl(Inline)]
         public static explicit operator ulong(in UInt128 src)

@@ -106,6 +106,23 @@ namespace Z0
         public static NatPerm<N> natural<N>(N n, params int[] terms)
             where N : unmanaged, ITypeNat
                 => new NatPerm<N>(terms);
+
+        public static NatPerm<N,T> natural<N,T>(N n, ReadOnlySpan<T> terms)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            if(terms.Length != natval(n))
+                Errors.ThrowInvariantFailure($"{n} != {terms.Length}");
+            return new NatPerm<N,T>(specify(terms));
+        }
+
+        public static NatPerm<N,T> natural<N,T>(N n, Span<T> terms)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => natural(n, terms.ReadOnly());
+
+
+
     }
 
 }

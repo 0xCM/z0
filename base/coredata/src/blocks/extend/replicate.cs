@@ -86,6 +86,20 @@ namespace Z0
         }
 
         /// <summary>
+        /// Clones a 512-bit data block
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Block512<T> Replicate<T>(this in Block512<T> src)
+            where T : unmanaged
+        {
+            Span<T> dst = new T[src.CellCount];
+            src.CopyTo(dst);
+            return new Block512<T>(dst);
+        }
+
+        /// <summary>
         /// Clones a 16-bit data block
         /// </summary>
         /// <param name="src">The source span</param>
@@ -153,6 +167,20 @@ namespace Z0
             Span<T> dst = new T[src.CellCount];
             src.CopyTo(dst);
             return new Block256<T>(dst);
+        }
+
+        /// <summary>
+        /// Clones a 256-bit data block
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Block512<T> Replicate<T>(this in ConstBlock512<T> src)
+            where T : unmanaged
+        {
+            Span<T> dst = new T[src.CellCount];
+            src.CopyTo(dst);
+            return new Block512<T>(dst);
         }
 
         /// <summary>

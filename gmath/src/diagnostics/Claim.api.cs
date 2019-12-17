@@ -281,7 +281,7 @@ namespace Z0
         public static void eq<T>(ConstBlock128<T> lhs, ConstBlock128<T> rhs,  [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
         {
-            for(var i = 0; i< DataBlocks.length(lhs,rhs); i++)
+            for(var i = 0; i< lhs.CellCount; i++)
                 if(!gmath.eq(lhs[i],rhs[i]))
                     throw Errors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
         }

@@ -4,7 +4,8 @@
 //-----------------------------------------------------------------------------
 using System;
 using System.Runtime.CompilerServices;
-
+using System.Collections.Generic;
+using System.Linq;
 using Z0;
 
 partial class zfunc
@@ -19,7 +20,7 @@ partial class zfunc
     public static unsafe T evalue<E,T>(E e)
         where E : unmanaged, Enum
         where T : unmanaged
-            => Unsafe.Read<T>((E*)(&e));
+            => Enums.value<E,T>(e);
 
     /// <summary>
     /// Reads a generic enum member from a generic value
@@ -31,16 +32,16 @@ partial class zfunc
     public static unsafe E emember<E,T>(T v)
         where E : unmanaged, Enum
         where T : unmanaged
-            => Unsafe.Read<E>((E*)&v);
+            => Enums.member<E,T>(v);
 
     /// <summary>
     /// Gets the literals defined by an enumeration
     /// </summary>
     /// <typeparam name="E">The enum type</typeparam>
     [MethodImpl(Inline)]
-    public static E[] evalues<E>()
+    public static E[] emembers<E>()
         where E : unmanaged, Enum
-            => (E[])Enum.GetValues(typeof(E));
+            => Enums.members<E>();
 
     /// <summary>
     /// Gets the literals defined by an enumeration together with their integral values
@@ -49,13 +50,7 @@ partial class zfunc
     public static Pair<E,T>[] epairs<E,T>()
         where E : unmanaged, Enum
         where T : unmanaged
-    {
-        var values = evalues<E>();
-        var pairs = new Pair<E,T>[values.Length];
-        for(var i=0; i<values.Length; i++)
-            pairs[i] = paired(values[i], evalue<E,T>(values[i]));
-        return pairs;        
-    }
+            => Enums.pairs<E,T>();
 
     /// <summary>
     /// Parses an enumeration literal
@@ -66,7 +61,9 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static E eparse<E>(string name, bool cased = false)
         where E : unmanaged, Enum
-            => Enum.Parse<E>(name, !cased);
+            => Enums.parse<E>(name, cased);
+
+    // -------------------------
 
     /// <summary>
     /// Interprets an enum value as a signed byte
@@ -76,7 +73,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe sbyte esbyte<E>(E e)
         where E : unmanaged, Enum
-            => Unsafe.Read<sbyte>((E*)(&e));
+            => evalue<E,sbyte>(e);
 
     /// <summary>
     /// Interprets an enum value as a byte
@@ -86,7 +83,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe byte ebyte<E>(E e)
         where E : unmanaged, Enum
-            => Unsafe.Read<byte>((E*)(&e));
+            => evalue<E,byte>(e);
 
     /// <summary>
     /// Interprets an enum value as an unsigned 16-bit integer
@@ -96,7 +93,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe ushort eushort<E>(E e)
         where E : unmanaged, Enum
-            => Unsafe.Read<ushort>((E*)(&e));
+            => evalue<E,ushort>(e);
 
     /// <summary>
     /// Interprets an enum value as a signed 16-bit integer
@@ -106,7 +103,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe short eshort<E>(E e)
         where E : unmanaged, Enum
-            => Unsafe.Read<short>((E*)(&e));
+            => evalue<E,short>(e);
 
     /// <summary>
     /// Interprets an enum value as a signed 32-bit integer
@@ -116,7 +113,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe int eint<E>(E e)
         where E : unmanaged, Enum
-            => Unsafe.Read<int>((E*)(&e));
+            => evalue<E,int>(e);
 
     /// <summary>
     /// Interprets an enum value as an unsigned 32-bit integer
@@ -126,7 +123,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe uint euint<E>(E e)
         where E : unmanaged, Enum
-            => Unsafe.Read<uint>((E*)(&e));
+            => evalue<E,uint>(e);
 
     /// <summary>
     /// Interprets an enum value as a signed 64-bit integer
@@ -136,7 +133,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe long elong<E>(E e)
         where E : unmanaged, Enum
-            => Unsafe.Read<long>((E*)(&e));
+            => evalue<E,long>(e);
 
     /// <summary>
     /// Interprets an enum value as an unsigned 64-bit integer
@@ -146,5 +143,5 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe ulong eulong<E>(E e)
         where E : unmanaged, Enum
-            => Unsafe.Read<ulong>((E*)(&e));
+            => evalue<E,ulong>(e);
 }

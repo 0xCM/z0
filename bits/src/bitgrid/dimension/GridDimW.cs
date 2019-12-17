@@ -61,7 +61,7 @@ namespace Z0
         public int BitCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.gridbits<M,N>();
+            get => BitCalcs.tablebits<M,N>();
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.gridcells<M,N,T>();
+            get => BitCalcs.tablecells<M,N,T>();
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Z0
         public int ByteCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.gridbytes<M,N>();
+            get => BitCalcs.tablesize<M,N>();
         }
 
         /// <summary>

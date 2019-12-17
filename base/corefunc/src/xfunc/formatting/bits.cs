@@ -20,9 +20,9 @@ namespace Z0
         /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
         /// <param name="blockWidth">The number of binary digits per block, if specified</param>
         [MethodImpl(Inline)]
-        public static string FormatBits(this byte src, bool tlz = false, bool specifier = false, int? blockWidth = null,         
+        public static string FormatBits(this byte src, int? maxbits = null, bool tlz = false, bool specifier = false, int? blockWidth = null,         
             char? blocksep = null, int? rowWidth = null)
-                => src.ToBitString().Format(tlz, specifier, blockWidth, blocksep, rowWidth);
+                => src.ToBitString(maxbits).Format(tlz, specifier, blockWidth, blocksep, rowWidth);
 
         /// <summary>
         /// Formats the source value as a bitstring
@@ -32,9 +32,69 @@ namespace Z0
         /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
         /// <param name="blockWidth">The number of binary digits per block, if specified</param>
         [MethodImpl(Inline)]
-        public static string FormatBits(this sbyte src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
+        public static string FormatBits(this sbyte src, int? maxbits = null, bool tlz = false, bool specifier = false, int? blockWidth = null, 
             char? blocksep = null, int? rowWidth = null)
-                => src.ToBitString().Format(tlz, specifier, blockWidth, blocksep, rowWidth);
+                => src.ToBitString(maxbits).Format(tlz, specifier, blockWidth, blocksep, rowWidth);
+
+        /// <summary>
+        /// Formats the source value as a bitstring
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
+        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
+        /// <param name="blockwidth">The number of binary digits per block, if specified</param>
+        [MethodImpl(Inline)]
+        public static string FormatBits(this short src, int? maxbits = null, bool tlz = false, bool specifier = false, int? blockwidth = null, 
+            char? blocksep = null, int? rowWidth = null)
+                => src.ToBitString(maxbits).Format(tlz, specifier, blockwidth, blocksep, rowWidth);
+
+        /// <summary>
+        /// Formats the source value as a bitstring
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
+        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
+        /// <param name="blockwidth">The number of binary digits per block, if specified</param>
+        [MethodImpl(Inline)]
+        public static string FormatBits(this ushort src, int? maxbits = null, bool tlz = false, bool specifier = false, int? blockwidth = null, 
+            char? blocksep = null, int? rowWidth = null)
+                => src.ToBitString(maxbits).Format(tlz, specifier,blockwidth, blocksep, rowWidth);
+
+        /// <summary>
+        /// Formats the source value as a bitstring
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
+        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
+        /// <param name="blockwidth">The number of binary digits per block, if specified</param>
+        [MethodImpl(Inline)]
+        public static string FormatBits(this uint src, int? maxbits = null, bool tlz = false, bool specifier = false, int? blockwidth = null, 
+            char? blocksep = null, int? rowWidth = null)
+                => src.ToBitString(maxbits).Format(tlz, specifier,blockwidth, blocksep, rowWidth);
+
+        /// <summary>
+        /// Formats the source value as a bitstring
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
+        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
+        /// <param name="blockwidth">The number of binary digits per block, if specified</param>
+        [MethodImpl(Inline)]
+        public static string FormatBits(this int src, int? maxbits = null,  bool tlz = false, bool specifier = false, int? blockwidth = null, 
+            char? blocksep = null, int? rowWidth = null)
+                => src.ToBitString(maxbits).Format(tlz, specifier, blockwidth, blocksep, rowWidth);
+
+        /// <summary>
+        /// Formats the source value as a bitstring
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
+        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
+        /// <param name="blockwidth">The number of binary digits per block, if specified</param>
+        [MethodImpl(Inline)]
+        public static string FormatBits(this ulong src, int? maxbits = null, bool tlz = false, bool specifier = false, int? blockwidth = null, 
+            char? blocksep = null, int? rowWidth = null)
+                => src.ToBitString(maxbits).Format(tlz, specifier,blockwidth, blocksep, rowWidth);
 
         /// <summary>
         /// Formats the source value as a bitstring
@@ -44,69 +104,9 @@ namespace Z0
         /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
         /// <param name="blockWidth">The number of binary digits per block, if specified</param>
         [MethodImpl(Inline)]
-        public static string FormatBits(this short src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
+        public static string FormatBits(this long src, int? maxbits = null, bool tlz = false, bool specifier = false, int? blockWidth = null, 
             char? blocksep = null, int? rowWidth = null)
-                => src.ToBitString().Format(tlz, specifier, blockWidth, blocksep, rowWidth);
-
-        /// <summary>
-        /// Formats the source value as a bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
-        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
-        /// <param name="blockWidth">The number of binary digits per block, if specified</param>
-        [MethodImpl(Inline)]
-        public static string FormatBits(this ushort src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
-            char? blocksep = null, int? rowWidth = null)
-                => src.ToBitString().Format(tlz, specifier,blockWidth, blocksep, rowWidth);
-
-        /// <summary>
-        /// Formats the source value as a bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
-        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
-        /// <param name="blockWidth">The number of binary digits per block, if specified</param>
-        [MethodImpl(Inline)]
-        public static string FormatBits(this uint src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
-            char? blocksep = null, int? rowWidth = null)
-                => src.ToBitString().Format(tlz, specifier,blockWidth, blocksep, rowWidth);
-
-        /// <summary>
-        /// Formats the source value as a bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
-        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
-        /// <param name="blockWidth">The number of binary digits per block, if specified</param>
-        [MethodImpl(Inline)]
-        public static string FormatBits(this int src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
-            char? blocksep = null, int? rowWidth = null)
-                => src.ToBitString().Format(tlz, specifier, blockWidth, blocksep, rowWidth);
-
-        /// <summary>
-        /// Formats the source value as a bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
-        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
-        /// <param name="blockWidth">The number of binary digits per block, if specified</param>
-        [MethodImpl(Inline)]
-        public static string FormatBits(this ulong src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
-            char? blocksep = null, int? rowWidth = null)
-                => src.ToBitString().Format(tlz, specifier,blockWidth, blocksep, rowWidth);
-
-        /// <summary>
-        /// Formats the source value as a bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
-        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
-        /// <param name="blockWidth">The number of binary digits per block, if specified</param>
-        [MethodImpl(Inline)]
-        public static string FormatBits(this long src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
-            char? blocksep = null, int? rowWidth = null)
-                => src.ToBitString().Format(tlz, specifier, blockWidth, blocksep, rowWidth);
+                => src.ToBitString(maxbits).Format(tlz, specifier, blockWidth, blocksep, rowWidth);
 
         /// <summary>
         /// Formats span cells as bitstrings
@@ -116,14 +116,14 @@ namespace Z0
         /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
         /// <param name="blockWidth">The number of binary digits per block, if specified</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        public static string FormatBits<T>(this ReadOnlySpan<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
+        public static string FormatBits<T>(this ReadOnlySpan<T> src, int? maxbits = null,  bool tlz = false, bool specifier = false, int? blockWidth = null, 
             char? blocksep = null, int? rowWidth = null)
                 where T : unmanaged
         {
             var sb = text();
             for(var i=0; i<src.Length; i++)
             {
-                var bs = BitString.scalar(src[i]).Format(tlz,specifier,blockWidth, blocksep, rowWidth);
+                var bs = BitString.scalar(src[i],maxbits).Format(tlz,specifier,blockWidth, blocksep, rowWidth);
                 sb.Append(bs);
                 if(i != src.Length - 1)
                     sb.Append(AsciSym.Space);                    
@@ -140,10 +140,10 @@ namespace Z0
         /// <param name="blockWidth">The number of binary digits per block, if specified</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatBits<T>(this Span<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
+        public static string FormatBits<T>(this Span<T> src, int? maxbits = null,  bool tlz = false, bool specifier = false, int? blockWidth = null, 
             char? blocksep = null, int? rowWidth = null)
                 where T : unmanaged
-                    => src.ReadOnly().FormatBits(tlz, specifier, blockWidth, blocksep, rowWidth);
+                    => src.ReadOnly().FormatBits(maxbits,tlz, specifier, blockWidth, blocksep, rowWidth);
 
         /// <summary>
         /// Formats span cells as bitstrings
@@ -154,11 +154,11 @@ namespace Z0
         /// <param name="blockWidth">The number of binary digits per block, if specified</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatBits<N,T>(this NatBlock<N,T> src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
+        public static string FormatBits<N,T>(this NatBlock<N,T> src, int? maxbits = null,   bool tlz = false, bool specifier = false, int? blockWidth = null, 
             char? blocksep = null, int? rowWidth = null)
                 where T : unmanaged
                 where N : unmanaged, ITypeNat
-                    => src.Data.FormatBits(tlz,specifier,blockWidth, blocksep, rowWidth);
+                    => src.Data.FormatBits(maxbits, tlz,specifier,blockWidth, blocksep, rowWidth);
 
         /// <summary>
         /// Formats span cells as bitstrings
@@ -182,7 +182,7 @@ namespace Z0
         /// <param name="blockWidth">The number of binary digits per block, if specified</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatBits(this Span<bit> src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
+        public static string FormatBits(this Span<bit> src,  bool tlz = false, bool specifier = false, int? blockWidth = null, 
             char? blocksep = null, int? rowWidth = null)
                 => src.ReadOnly().FormatBits(tlz, specifier, blockWidth, blocksep, rowWidth);
 
@@ -206,10 +206,10 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]   
-        public static string FormatBits<T>(this Vector128<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
+        public static string FormatBits<T>(this Vector128<T> src, int? maxbits = null,  bool tlz = false, bool specifier = false, int? blockWidth = null, 
             char? blocksep = null, int? rowWidth = null)
                 where T : unmanaged        
-                    => src.ToBitString().Format(tlz, specifier, blockWidth ?? bitsize<T>(), blocksep ,rowWidth);
+                    => src.ToBitString(maxbits).Format(tlz, specifier, blockWidth ?? bitsize<T>(), blocksep ,rowWidth);
         
         /// <summary>
         /// Formats vector bits
@@ -217,10 +217,10 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]   
-        public static string FormatBits<T>(this Vector256<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
+        public static string FormatBits<T>(this Vector256<T> src, int? maxbits = null, bool tlz = false, bool specifier = false, int? blockWidth = null, 
             char? blocksep = null, int? rowWidth = null)
                 where T : unmanaged        
-                    => src.ToBitString().Format(tlz, specifier, blockWidth ?? bitsize<T>(), blocksep ,rowWidth);        
+                    => src.ToBitString(maxbits).Format(tlz, specifier, blockWidth ?? bitsize<T>(), blocksep ,rowWidth);        
 
         /// <summary>
         /// Block-formats the source value
@@ -230,9 +230,9 @@ namespace Z0
         /// <param name="specifier">If true, output will begin with the '0b' binary specifier</param>
         /// <param name="underscores">If true, the underscore character '_' will be used to delimit blocks, otherwise, spaces will be used</param>
         [MethodImpl(Inline)]
-        static string BitBlocks<T>(T src, int? blocksize = null, bool specifier = false, bool underscores = false)
+        static string BitBlocks<T>(T src, int? blocksize = null, int? maxbits = null, bool specifier = false, bool underscores = false)
             where T : unmanaged
-            => bracket(BitString.scalar(src).Format(false, specifier, blocksize ?? 8, underscores ? AsciSym.Underscore : AsciSym.Space, null));
+            => bracket(BitString.scalar(src,maxbits).Format(false, specifier, blocksize ?? 8, underscores ? AsciSym.Underscore : AsciSym.Space, null));
 
         /// <summary>
         /// Block-formats the source value
@@ -242,8 +242,8 @@ namespace Z0
         /// <param name="specifier">If true, output will begin with the '0b' binary specifier</param>
         /// <param name="underscores">If true, the underscore character '_' will be used to delimit blocks, otherwise, spaces will be used</param>
         [MethodImpl(Inline)]
-        public static string FormatBitBlocks(this byte src, int? blocksize = null, bool specifier = false, bool underscores = false)
-            =>  BitBlocks(src, blocksize, specifier, underscores);
+        public static string FormatBitBlocks(this byte src, int? blocksize = null, int? maxbits = null, bool specifier = false, bool underscores = false)
+            =>  BitBlocks(src, blocksize, maxbits, specifier, underscores);
 
         /// <summary>
         /// Block-formats the source value
@@ -253,8 +253,8 @@ namespace Z0
         /// <param name="specifier">If true, output will begin with the '0b' binary specifier</param>
         /// <param name="underscores">If true, the underscore character '_' will be used to delimit blocks, otherwise, spaces will be used</param>
         [MethodImpl(Inline)]
-        public static string FormatBitBlocks(this ushort src, int? blocksize = null, bool specifier = false, bool underscores = false)
-            =>  BitBlocks(src, blocksize, specifier, underscores);
+        public static string FormatBitBlocks(this ushort src, int? blocksize = null, int? maxbits = null, bool specifier = false, bool underscores = false)
+            =>  BitBlocks(src, blocksize, maxbits, specifier, underscores);
 
         /// <summary>
         /// Block-formats the source value
@@ -264,8 +264,8 @@ namespace Z0
         /// <param name="specifier">If true, output will begin with the '0b' binary specifier</param>
         /// <param name="underscores">If true, the underscore character '_' will be used to delimit blocks, otherwise, spaces will be used</param>
         [MethodImpl(Inline)]
-        public static string FormatBitBlocks(this uint src, int? blocksize = null, bool specifier = false, bool underscores = false)
-            =>  BitBlocks(src, blocksize, specifier, underscores);
+        public static string FormatBitBlocks(this uint src, int? blocksize = null, int? maxbits = null,  bool specifier = false, bool underscores = false)
+            =>  BitBlocks(src, blocksize, maxbits, specifier, underscores);
 
         /// <summary>
         /// Block-formats the source value
@@ -275,8 +275,8 @@ namespace Z0
         /// <param name="specifier">If true, output will begin with the '0b' binary specifier</param>
         /// <param name="underscores">If true, the underscore character '_' will be used to delimit blocks, otherwise, spaces will be used</param>
         [MethodImpl(Inline)]
-        public static string FormatBitBlocks(this ulong src, int? blocksize = null, bool specifier = false, bool underscores = false)
-            =>  BitBlocks(src, blocksize, specifier, underscores);
+        public static string FormatBitBlocks(this ulong src, int? blocksize = null, int? maxbits = null,  bool specifier = false, bool underscores = false)
+            =>  BitBlocks(src, blocksize, maxbits, specifier, underscores);
 
         /// <summary>
         /// Block-formats the vector, e.g. [01010101 01010101 ... 01010101] where by default the size of each block is the bit-width of a component
@@ -284,9 +284,9 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]   
-        public static string FormatBitBlocks<T>(this Vector128<T> src, int? blocksize = null)
+        public static string FormatBitBlocks<T>(this Vector128<T> src, int? blocksize = null, int? maxbits = null)
             where T : unmanaged        
-                => bracket(src.ToBitString().Format(false, false, blocksize ?? bitsize<T>(), AsciSym.Space,null));
+                => bracket(src.ToBitString(maxbits).Format(false, false, blocksize ?? bitsize<T>(), AsciSym.Space,null));
 
         /// <summary>
         /// Block-formats the vector, e.g. [01010101 01010101 ... 01010101] where default the size of each block is the bit-width of a component
@@ -294,9 +294,9 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]   
-        public static string FormatBitBlocks<T>(this Vector256<T> src, int? blocksize = null)
+        public static string FormatBitBlocks<T>(this Vector256<T> src, int? blocksize = null, int? maxbits = null)
             where T : unmanaged        
-                => bracket(src.ToBitString().Format(false, false, blocksize ?? bitsize<T>(), AsciSym.Space,null));
+                => bracket(src.ToBitString(maxbits).Format(false, false, blocksize ?? bitsize<T>(), AsciSym.Space,null));
 
     }
 }

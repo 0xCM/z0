@@ -16,6 +16,11 @@ namespace Z0
         public const char NewLine = '\n';
 
         public const char LineFeed = '\r';
+
+        /// <summary>
+        /// The end-of-line escape sequence
+        /// </summary>
+        public const string Eol = "\r\n";
     }
 
 }

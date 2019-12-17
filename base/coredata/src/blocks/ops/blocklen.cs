@@ -76,6 +76,16 @@ namespace Z0
                 => 32/Unsafe.SizeOf<T>();
 
         /// <summary>
+        /// Computes the number of elements that comprise a 512-bit block
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int blocklen<T>(N512 w)
+            where T : unmanaged
+                => 64/Unsafe.SizeOf<T>();
+
+        /// <summary>
         /// Computes the number of T-cells that comprise an N-block
         /// </summary>
         /// <param name="w">The block width representative</param>

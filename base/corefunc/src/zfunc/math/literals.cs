@@ -62,27 +62,27 @@ partial class zfunc
     /// <summary>
     /// The maximum value for an 8-bit signed integer
     /// </summary>
-    public const sbyte i8max = sbyte.MaxValue;
+    public const sbyte z8imax = sbyte.MaxValue;
 
     /// <summary>
     /// The maximum value for an 8-bit usigned integer
     /// </summary>
-    public const byte u8max = byte.MaxValue;
+    public const byte z8max = byte.MaxValue;
 
     /// <summary>
     /// The maximum value for a 16-bit signed integer
     /// </summary>
-    public const short i16max = short.MaxValue;
+    public const short z16imax = short.MaxValue;
 
     /// <summary>
     /// The maximum value for a 16-bit unsigned integer
     /// </summary>
-    public const ushort u16max = ushort.MaxValue;
+    public const ushort z16max = ushort.MaxValue;
 
     /// <summary>
     /// The maximum value for a 32-bit signed integer
     /// </summary>
-    public const int i32max = int.MaxValue;
+    public const int z32imax = int.MaxValue;
 
     /// <summary>
     /// The maximum value for a 32-bit usigned integer
@@ -92,12 +92,12 @@ partial class zfunc
     /// <summary>
     /// The maximum value for a 64-bit signed integer
     /// </summary>
-    public const long i64max = long.MaxValue;
+    public const long z64imax = long.MaxValue;
 
     /// <summary>
     /// The maximum value for a 64-bit usigned integer
     /// </summary>
-    public const ulong u64max = ulong.MaxValue;
+    public const ulong z64max = ulong.MaxValue;
 
     /// <summary>
     /// The maximum value for a 32-bit float
@@ -112,17 +112,24 @@ partial class zfunc
     /// <summary>
     /// The minimum value for an 8-bit signed integer
     /// </summary>
-    public const sbyte i8min = sbyte.MinValue;
+    public const sbyte z8imin = sbyte.MinValue;
 
     /// <summary>
     /// The minimum value for a 16-bit signed integer
     /// </summary>
-    public const short i16min = short.MinValue;
+    public const short z16imin = short.MinValue;
 
     /// <summary>
-    /// The minimum value for a 16-bit signed integer
+    /// The minimum value for a 32-bit signed integer
     /// </summary>
-    public const int i32min = int.MinValue;
+    public const int z32imin = int.MinValue;
+
+
+    /// <summary>
+    /// The minimum value for a 64-bit signed integer
+    /// </summary>
+    public const long z64imin = long.MinValue;
+
 
     /// <summary>
     /// Returns generic 0 for a primal source type
@@ -232,13 +239,13 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(sbyte))
-            return convert<T>(i8max);
+            return convert<T>(z8imax);
         else if(typeof(T) == typeof(short))
-            return convert<T>(i16max);
+            return convert<T>(z16imax);
         else if(typeof(T) == typeof(int))
-            return convert<T>(i32max);
+            return convert<T>(z32imax);
         else
-            return convert<T>(i64max);
+            return convert<T>(z64imax);
     }
 
     [MethodImpl(Inline)]
@@ -246,13 +253,13 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(byte))
-            return convert<T>(u8max);
+            return convert<T>(z8max);
         else if(typeof(T) == typeof(ushort))
-            return convert<T>(u16max);
+            return convert<T>(z16max);
         else if(typeof(T) == typeof(uint))
             return convert<T>(u32max);
         else
-            return convert<T>(u64max);
+            return convert<T>(z64max);
     }
 
     [MethodImpl(Inline)]

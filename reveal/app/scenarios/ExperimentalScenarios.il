@@ -1,4 +1,4 @@
-// 2019-12-16 03:16:40:264
+// 2019-12-17 03:26:33:823
 Span<byte> GetBytes(in int src)
 {
     IL_0000: ldarg.1
@@ -352,76 +352,6 @@ Vector256<uint> ShuffleWithReflection()
     IL_00C0: stloc.2
     IL_00C1: ldloc.2
     IL_00C2: ret
-
-}
-Vec256<ulong> perm4x64_256x64(Vec256<ulong> src)
-{
-    IL_0000: ldarg.1
-    IL_0001: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Vec256`1<System.UInt64>::op_Implicit(Z0.Vec256`1<System.UInt64>)
-    IL_0006: ldc.i4 228
-    IL_000B: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vperm4x64(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.Perm4L)
-    IL_0010: stloc.0
-    IL_0011: ldloc.0
-    IL_0012: ldc.i4 180
-    IL_0017: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vperm4x64(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.Perm4L)
-    IL_001C: stloc.0
-    IL_001D: ldloc.0
-    IL_001E: ldc.i4 216
-    IL_0023: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vperm4x64(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.Perm4L)
-    IL_0028: stloc.0
-    IL_0029: ldloc.0
-    IL_002A: ldc.i4.s 120
-    IL_002C: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vperm4x64(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.Perm4L)
-    IL_0031: stloc.0
-    IL_0032: ldloc.0
-    IL_0033: ldc.i4 156
-    IL_0038: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vperm4x64(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.Perm4L)
-    IL_003D: stloc.0
-    IL_003E: ldloc.0
-    IL_003F: ldc.i4.s 108
-    IL_0041: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vperm4x64(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.Perm4L)
-    IL_0046: stloc.0
-    IL_0047: ldloc.0
-    IL_0048: call Z0.Vec256`1<System.UInt64> Z0.Vec256`1<System.UInt64>::op_Implicit(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
-    IL_004D: ret
-
-}
-Vec256<ulong> perm4x64_256x64(ulong a, ulong b, ulong c, ulong d)
-{
-    IL_0000: call Z0.N256 zfunc::get_n256()
-    IL_0005: ldarg.1
-    IL_0006: ldarg.2
-    IL_0007: ldarg.3
-    IL_0008: ldarg.s d
-    IL_000A: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.vbuild::parts(Z0.N256,System.UInt64,System.UInt64,System.UInt64,System.UInt64)
-    IL_000F: stloc.0
-    IL_0010: ldloc.0
-    IL_0011: ldc.i4 228
-    IL_0016: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vperm4x64(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.Perm4L)
-    IL_001B: stloc.1
-    IL_001C: ldloc.1
-    IL_001D: ldc.i4 180
-    IL_0022: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vperm4x64(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.Perm4L)
-    IL_0027: stloc.1
-    IL_0028: ldloc.1
-    IL_0029: ldc.i4 216
-    IL_002E: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vperm4x64(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.Perm4L)
-    IL_0033: stloc.1
-    IL_0034: ldloc.1
-    IL_0035: ldc.i4.s 120
-    IL_0037: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vperm4x64(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.Perm4L)
-    IL_003C: stloc.1
-    IL_003D: ldloc.1
-    IL_003E: ldc.i4 156
-    IL_0043: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vperm4x64(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.Perm4L)
-    IL_0048: stloc.1
-    IL_0049: ldloc.1
-    IL_004A: ldc.i4.s 108
-    IL_004C: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vperm4x64(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.Perm4L)
-    IL_0051: stloc.1
-    IL_0052: ldloc.1
-    IL_0053: call Z0.Vec256`1<System.UInt64> Z0.Vec256`1<System.UInt64>::op_Implicit(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
-    IL_0058: ret
 
 }
 int Switch14(int x)

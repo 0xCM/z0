@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The index of the lane to extract</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vextract(Vector256<float> src, byte pos)
+        public static Vector128<float> vextract(Vector256<float> src, byte pos)
             => ExtractVector128(src, pos);
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The index of the lane to extract</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vextract(Vector256<double> src, byte pos)
+        public static Vector128<double> vextract(Vector256<double> src, byte pos)
             => ExtractVector128(src, pos);
 
         /// <summary>

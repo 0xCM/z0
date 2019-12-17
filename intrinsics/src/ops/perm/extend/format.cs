@@ -12,6 +12,27 @@ namespace Z0
     partial class PermX
     {
         /// <summary>
+        /// Formats a permutation literal as one would hope
+        /// </summary>
+        /// <param name="src">The literal definition</param>
+        public static string Format(this Perm4L src)
+            => src.Symbols().ToString();
+
+        /// <summary>
+        /// Formats a permutation literal as one would hope
+        /// </summary>
+        /// <param name="src">The literal definition</param>
+        public static string Format(this Perm8L src)
+            => src.Symbols().ToString();
+
+        /// <summary>
+        /// Formats a permutation literal as one would hope
+        /// </summary>
+        /// <param name="src">The literal definition</param>
+        public static string Format(this Perm16L src)
+            => src.Symbols().ToString();
+
+        /// <summary>
         /// Formats the terms of a permutation
         /// </summary>
         /// <param name="terms">The permutation terms</param>
@@ -31,15 +52,15 @@ namespace Z0
             var line1 = text();
             var line2 = text();
             var pad = colwidth ?? 3;
-            var leftBoundary = $"{AsciSym.Pipe}".PadRight(2);
-            var rightBoundary = $"{AsciSym.Pipe}";
+            var leftBoundary = $"{AsciSym.Pipe}";
+            var rightBoundary = $"{AsciSym.Pipe}".PadLeft(2);
             
             line1.Append(leftBoundary);
             line2.Append(leftBoundary);
             for(var i=0; i < terms.Length; i++)
             {
-                line1.Append($"{i}".PadRight(pad));
-                line2.Append($"{terms[i]}".PadRight(pad));
+                line1.Append($"{i}".PadLeft(pad));
+                line2.Append($"{terms[i]}".PadLeft(pad));
             }
             line1.Append(rightBoundary);
             line2.Append(rightBoundary);
@@ -62,14 +83,6 @@ namespace Z0
             return bracketed ? bracket(data) : data;
         }
 
-        /// <summary>
-        /// Usefully formats the permutation spec
-        /// </summary>
-        /// <param name="src">The permutation spec</param>
-        [MethodImpl(Inline)]
-        public static string Format(this Perm4L src)
-            => $"{src} = {((byte)src).ToBitString()} = {((byte)src).FormatHex()}"; 
-        
         /// <summary>
         /// Formats the value as a permutation map, i.e., [00 01 10 11]: ABCD -> ABDC
         /// </summary>

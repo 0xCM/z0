@@ -11,6 +11,25 @@ namespace Z0
 
     public class t_vswaps : t_vinx<t_vswaps>
     {        
+        public void vswap_128x8u()
+        {
+            var src = vbuild.increments(n128, z8);
+            var dst = dinx.vswap(src,2,3);
+            Claim.eq(src.Cell(2), dst.Cell(3));
+            Claim.eq(src.Cell(3), dst.Cell(2));            
+
+        }
+
+        public void vswap_128x16u()
+        {
+            var src = vbuild.increments(n128, z16);
+            var dst = dinx.vswap(src,2,3);
+            Claim.eq(src.Cell(2), dst.Cell(3));
+            Claim.eq(src.Cell(3), dst.Cell(2));            
+
+            // Trace(src.Format());
+            // Trace(dst.Format());
+        }
 
         public void transpose_4x4_check()
         {
@@ -36,7 +55,7 @@ namespace Z0
             ginx.vstore(c, ref head(dst), step*2);
             ginx.vstore(d, ref head(dst), step*3);
 
-            var A = Matrix.load(order, src.ToArray());
+            var A = Matrix.load(order, src.Data.ToArray());
             var B = Matrix.load(order, dst);
             for(var i=0; i < order; i++)
             for(var j=0; j < order; j++)

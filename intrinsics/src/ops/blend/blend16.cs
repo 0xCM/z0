@@ -16,8 +16,6 @@ namespace Z0
     
     partial class dinx
     {
-
-
         /// <summary>
         /// __m128i _mm_blend_epi16 (__m128i a, __m128i b, const int imm8)PBLENDW xmm, xmm/m128, imm8
         /// Combines components from left/right vectors per the blend spec

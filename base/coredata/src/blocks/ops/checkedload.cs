@@ -82,7 +82,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Loads 128-bit segments from a span, raising an error if said source does not evenly partition
+        /// Loads 256-bit segments from a span, raising an error if said source does not evenly partition
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <param name="src">The data source</param>
@@ -90,6 +90,23 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static Block256<T> checkedload<T>(N256 w, Span<T> src, int offset = 0)
+            where T : unmanaged
+        {
+            if(!aligned<T>(w,src.Length - offset))
+                badsize(w, src.Length - offset);      
+
+            return load(w,offset == 0 ? src : src.Slice(offset));
+        }
+
+        /// <summary>
+        /// Loads 256-bit segments from a span, raising an error if said source does not evenly partition
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The source offset</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Block512<T> checkedload<T>(N512 w, Span<T> src, int offset = 0)
             where T : unmanaged
         {
             if(!aligned<T>(w,src.Length - offset))
@@ -182,6 +199,24 @@ namespace Z0
 
             return load(w, offset == 0 ? src : src.Slice(offset));
         }         
+
+        /// <summary>
+        /// Loads a 256-bit const block from a readonly span
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <param name="src">The source span</param>
+        /// <param name="offset">The span index at which to begin the load</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ConstBlock512<T> checkedload<T>(N512 w, ReadOnlySpan<T> src, int offset = 0)
+            where T : unmanaged
+        {
+            if(!aligned<T>(w,src.Length - offset))
+                badsize(w, src.Length - offset);      
+
+            return load(w, offset == 0 ? src : src.Slice(offset));
+        }         
+
 
         /// <summary>
         /// Verifies correct source span length prior to backing store assignment

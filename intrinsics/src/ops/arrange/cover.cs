@@ -26,7 +26,7 @@ namespace Z0
 
         /// <summary>
         /// 16x16w -> 32x8w
-        /// [0, 1, ... 14, 15] -> [0, 0, 1, 1, ... 14, 15, 15, 15]
+        /// [0, 1, ... 14, 15] -> [0, 0, 1, 1, ... 14, 14, 15, 15]
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>

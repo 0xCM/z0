@@ -93,6 +93,22 @@ namespace Z0
             return new Block256<T>(src);
         }
 
+        /// <summary>
+        /// Creates 512-bit blocked span from a parameter array and raises an error if the data source is improperly blocked
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <param name="src">The source data</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Block512<T> parts<T>(N512 w, params T[] src)
+            where T : unmanaged        
+        {
+            if(!aligned<T>(w,src.Length))
+                badsize(w, src.Length);    
+
+            return new Block512<T>(src);
+        }
+
         [MethodImpl(Inline)]   
         public static NatBlock<N,T> natparts<N,T>(N n, params T[] cells) 
             where N : unmanaged, ITypeNat

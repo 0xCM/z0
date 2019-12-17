@@ -66,7 +66,7 @@ namespace Z0
                 return load<T>(n,Inc128x8u);
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
                 return load<T>(n,Inc128x16u);
-            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
+            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float))
                 return load<T>(n,Inc128x32u);
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
                 return load<T>(n,Inc128x64u);
@@ -82,7 +82,7 @@ namespace Z0
                 return load<T>(n,Inc256x8u);
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
                 return load<T>(n,Inc256x16u);
-            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
+            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int)  || typeof(T) == typeof(float))
                 return load<T>(n,Inc256x32u);
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
                 return load<T>(n,Inc256x64u);

@@ -156,7 +156,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var blocks = BitCalcs.gridblocks<M,N,T>(n256);
+            var blocks = BitCalcs.tableblocks<M,N,T>(n256);
             for(var i=0; i<blocks; i++)
                 gz[i] = ginx.vnand(x[i],y[i]);
             return ref gz;

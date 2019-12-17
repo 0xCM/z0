@@ -72,5 +72,15 @@ namespace Z0
             where T : unmanaged        
                 => count % blocklen<T>(n) == 0;
 
+        /// <summary>
+        /// Determines whether a specified number of elements can be evenly covered by 512-bit blocks
+        /// </summary>
+        /// <param name="count">The element count</param>
+        /// <typeparam name="T">The block element type</typeparam>
+        [MethodImpl(Inline)]
+        public static bool aligned<T>(N512 n, int count)
+            where T : unmanaged        
+                => count % blocklen<T>(n) == 0;
+
     }
 }

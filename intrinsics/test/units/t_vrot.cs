@@ -124,7 +124,7 @@ namespace Z0
             var opname = $"rotl_{n}x{bz}";
             var sw = stopwatch();
             var opcount = RoundCount*CycleCount;
-            var last = default(Vec256<T>);
+            var last = default(Vector256<T>);
 
             byte offMin = 2;
             byte offMax = (byte)(bz - 2);
@@ -193,7 +193,7 @@ namespace Z0
             var opname = $"rotl_{n}x{bz}";
             var sw = stopwatch();
             var opcount = RoundCount*CycleCount;
-            var last = default(Vec128<T>);
+            var last = default(Vector128<T>);
 
             byte offMin = 2;
             byte offMax = (byte)(bz - 2);

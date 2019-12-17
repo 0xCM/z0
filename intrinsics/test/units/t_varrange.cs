@@ -73,7 +73,7 @@ namespace Z0
             {
                 var x = Random.Blocks<uint>(n);
                 var y = x.Replicate();
-                y.Reverse();
+                y.Data.Reverse();
             
                 var expect = ginx.vload(y);
                 var actual = dinx.vreverse(x.LoadVector());

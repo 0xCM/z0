@@ -14,16 +14,32 @@ namespace Z0
 
     public static class BitField
     {
-        public static BitField<E> define<E>(params Pair<E,byte>[] parts)
+        public static BitFieldSpec specify(params (ushort first, ushort last)[] positions)
+        {
+            var fields = new SegmentSpec[positions.Length];
+            for(var i=0; i<fields.Length; i++)
+                fields[i] = positions[i];
+            return new BitFieldSpec(fields);
+        }       
+
+        [MethodImpl(Inline)]
+        public static BitField64 init(ulong data, BitFieldSpec spec)
+            => new BitField64(data, spec);
+
+        [MethodImpl(Inline)]
+        public static BitField64 init(ulong data, params SegmentSpec[] fields)
+            => new BitField64(data, fields);
+
+        static BitField256<E> define<E>(params Pair<E,byte>[] parts)
             where E : unmanaged, Enum
         {
             var widths = default(Vector256<byte>);
             for(var i=0; i<parts.Length; i++)
                 setwidth(widths, parts[i]);
-            return new BitField<E>(widths);
+            return new BitField256<E>(widths);
         }
 
-        public static Span<Pair<E,byte>> parts<E>(BitField<E> bf)
+        static Span<Pair<E,byte>> parts<E>(BitField256<E> bf)
             where E : unmanaged, Enum
         {
             Span<Pair<E,byte>> parts = new Pair<E,byte>[32];
@@ -39,7 +55,7 @@ namespace Z0
             return parts.Slice(0,count);
         }
 
-        public static string format<E>(BitField<E> bf)
+        static string format<E>(BitField256<E> bf)
             where E : unmanaged, Enum
         {
             var pairs = parts(bf);
@@ -59,13 +75,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<T> filter<E,T>(BitField<E> bf, Vector128<T> src)
+        static Vector128<T> filter<E,T>(BitField256<E> bf, Vector128<T> src)
             where E : unmanaged, Enum
             where T : unmanaged
                 => vgeneric<T>(dinx.vand(v8u(src), dinx.vlo(bf.widths)));
 
         [MethodImpl(Inline)]
-        public static Vector256<T> filter<E,T>(BitField<E> bf, Vector256<T> src)
+        static Vector256<T> filter<E,T>(BitField256<E> bf, Vector256<T> src)
             where E : unmanaged, Enum
             where T : unmanaged
                 => vgeneric<T>(dinx.vand(v8u(src), bf.widths));
@@ -83,6 +99,4 @@ namespace Z0
                 => (byte)Bits.width(widths.GetElement(eint(field)));
 
     }
-
-
 }

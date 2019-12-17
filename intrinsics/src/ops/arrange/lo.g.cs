@@ -41,6 +41,15 @@ namespace Z0
                 => ref dinx.vlo(v64u(src), ref dst);
 
         /// <summary>
+        /// Extracts the lower 256-bits from the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<T> vlo<T>(Vector512<T> src)
+            where T : unmanaged
+                => src.Lo;       
+
+        /// <summary>
         /// Extracts the lo 128-bit lane of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>

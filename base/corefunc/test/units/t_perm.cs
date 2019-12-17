@@ -63,7 +63,6 @@ namespace Z0
             perm_comp_check(n257);
         }
 
-
         public void perm_format()
         {
             const Perm4L  p = Perm4L.DCBA;            
@@ -89,18 +88,18 @@ namespace Z0
             Claim.yea(p1 == p2);
         }
 
-       void perm_identity_check<N>(N rep = default)
+       void perm_identity_check<N>(N n = default)
             where N : unmanaged, ITypeNat
         {
             var permA = NatPerm<N>.Identity;
-            var n = nati<N>();
-            Claim.eq(n, permA.Length);
-            Claim.eq(n, permA.Terms.Length);
+            var length = nati<N>();
+            Claim.eq(length, permA.Length);
+            Claim.eq(length, permA.Terms.Length);
 
-            var terms = range(0, n-1).ToArray();
-            Claim.eq(n, terms.Length);
+            var terms = range(0, length-1).ToArray();
+            Claim.eq(length, terms.Length);
 
-            var permB = Perm.natural(new N(), terms);
+            var permB = Perm.natural(n, terms);
             Claim.yea(permA == permB);
         }
 

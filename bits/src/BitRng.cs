@@ -68,7 +68,7 @@ namespace Z0
             where T : unmanaged
         {
             var grid = BG.alloc(m,n,t);
-            var segments = BitCalcs.gridcells(m,n,t);
+            var segments = BitCalcs.tablecells(m,n,t);
             random.Fill(segments, ref grid.Head);
             return grid;
         }
@@ -571,7 +571,7 @@ namespace Z0
         public static BitSpan<N,T> BitSpan<N,T>(this IPolyrand random)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BS.load<N,T>(random.Stream<T>().ToSpan(BitCalcs.gridcells<N,N1,T>()));
+                => BS.load<N,T>(random.Stream<T>().ToSpan(BitCalcs.tablecells<N,N1,T>()));
 
         /// <summary>
         /// Produces a bitspan over a specified number of bits

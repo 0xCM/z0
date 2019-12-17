@@ -198,6 +198,17 @@ namespace Z0
             => Extract(Pos(first), Pos(last));
 
         /// <summary>
+        /// Retrieves, at most, one cell's worth of bits defined by an inclusive bit index range
+        /// </summary>
+        /// <param name="first">The linear index of the first bit</param>
+        /// <param name="last">The linear index of the last bit</param>
+        public T this[int first, int last]
+        {
+            [MethodImpl(Inline)]
+            get => Slice(first,last);
+        }
+
+        /// <summary>
         /// Extracts the represented data as a bitstring
         /// </summary>
         [MethodImpl(Inline)]

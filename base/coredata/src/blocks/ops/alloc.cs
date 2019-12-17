@@ -64,6 +64,16 @@ namespace Z0
                 => new Block256<T>(new T[blocks * blocklen<T>(w)]);
 
         /// <summary>
+        /// Allocates a specified number of 512-bit blocks
+        /// </summary>
+        /// <param name="w">The block width selector</param>
+        /// <param name="blocks">The block allocation count</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        public static Block512<T> alloc<T>(N512 w, int blocks, T t = default)
+            where T : unmanaged        
+                => new Block512<T>(new T[blocks * blocklen<T>(w)]);
+
+        /// <summary>
         /// Allocates a block of natural cell count
         /// </summary>
         /// <param name="n">The total number of cells in the block</param>

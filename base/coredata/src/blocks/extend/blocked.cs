@@ -63,6 +63,16 @@ namespace Z0
              where T : unmanaged
                 => DataBlocks.safeload(n,src);
 
+        /// <summary>
+        /// Constructs a 128-bit blocked span from an unblocked span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Block512<T> Blocked<T>(this Span<T> src, N512 n)
+             where T : unmanaged
+                => DataBlocks.safeload(n,src);
+
 
     }
 

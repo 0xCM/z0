@@ -21,6 +21,7 @@ namespace Z0
         public static PermSpec specify(ReadOnlySpan<int> src)
             => new PermSpec(src.ToArray());
 
+
         /// <summary>
         /// Creates a generic permutation by application of a sequence of transpositions to the identity permutation
         /// </summary>

@@ -31,7 +31,7 @@ namespace Z0
             => BitSpan<N23,byte>.CellCount;
 
         public static int count_segs()
-            => BitCalcs.gridcells<N20,N30,uint>();
+            => BitCalcs.tablecells<N20,N30,uint>();
 
         public static bit readbit_row_col_2(int n, ulong src, int row, int col)    
             => BitGrid.readbit(n, in src, row, col);

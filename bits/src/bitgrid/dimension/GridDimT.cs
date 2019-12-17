@@ -45,7 +45,7 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.gridcells<T>(RowCount,ColCount);
+            get => BitCalcs.tablecells<T>(RowCount,ColCount);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
         public int ByteCount
         {
             [MethodImpl(Inline)]
-            get => BitCalcs.gridbytes(RowCount, ColCount);
+            get => BitCalcs.tablesize(RowCount, ColCount);
         }
 
         /// <summary>

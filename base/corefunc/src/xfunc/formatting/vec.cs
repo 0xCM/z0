@@ -15,14 +15,6 @@ namespace Z0
 
     partial class xfunc
     {
-        /// <summary>
-        /// Formats a stream as a vector
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        /// <param name="sep">The item separator</param>
-        /// <typeparam name="T">The item type</typeparam>
-        public static string FormatAsVector<T>(this IEnumerable<T> src, string sep = ", ")
-            => AsciSym.Lt + string.Join(sep, src.Select(x => x.ToString())).TrimEnd() + AsciSym.Gt;
 
         /// <summary>
         /// Formats a readonly span as a vector
@@ -47,5 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatAsVector<T>(this Span<T> src, string sep = ",")
             => src.ReadOnly().FormatAsVector(sep);
+
+        
     }
 }

@@ -13,7 +13,58 @@ namespace Z0
 
     public class t_vblend : t_vinx<t_vblend>
     {
-        
+            
+        // |  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 |
+        // |  0 33  2 35  4 37  6 39  8 41 10 43 12 45 14 47 16 49 18 51 20 53 22 55 24 57 26 59 28 61 30 63 32  1 34  3 36  5 38  7 40  9 42 11 44 13 46 15 48 17 50 19 52 21 54 23 56 25 58 27 60 29 62 31 |
+        // i = 0 ... 63
+        // j = 0 ... 63            
+        // p(i) = i, for i % 2 == 0
+        // p(i) = j => p(j) = i for i%2 != 0
+
+
+        public void vblend_256x32f_outline()
+        {
+            var w = n256;
+            var x = vbuild.partsf(w, 0f, 1f, 2f, 3f, 4f, 5f, 6f, 7f);
+            var y = vbuild.partsf(w, 8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f);
+            var spec = vbuild.partsf(w, 0f,-1,0f,-1,0f,-1,0f,-1);
+            var z = dinx.vblendv(x,y,spec);
+        }
+
+        public void vblend_256x8u_outline()
+        {
+            var w = n256;
+            var x = vbuild.increments(w, z8);
+            var y = vbuild.decrements(w, z8max);
+            var spec = v8u(vbuild.broadcast(w, (ushort)((ushort)Pow2.T07 << 8)));
+            var z = ginx.vblend(x,y,spec);
+            
+        }        
+
+        public void vblend_128x16u_outline()
+        {
+            var w = n128;
+            var alt = (uint)BitMasks.Msb16x8 << 16; 
+            dinx.vcover(v16u(vbuild.broadcast(w,alt)), out Vector128<byte> spec);
+            var x = vbuild.increments(w,z16);
+            var y = vbuild.decrements(w,z16max);
+            var z = ginx.vblend(x,y,spec);
+
+
+        }
+
+        public void vblend_256x16u_outline()
+        {
+            var w = n256;
+            var altOdd = (uint)BitMasks.Msb16x8 << 16; 
+            var altEven = (uint)BitMasks.Msb16x8; 
+            dinx.vcover(v16u(vbuild.broadcast(w,altOdd)), out Vector256<byte> spec);
+            var x = vbuild.increments(w,z16);
+            var y = vbuild.decrements(w,z16max);
+            var z = ginx.vblend(x,y,spec);
+
+        }
+
         public void valignr_examples()
         {
             void example1()

@@ -39,7 +39,6 @@ namespace Z0
         public static int minbytes(int bc)
             => bc / 8 + (bc % 8 == 0 ? 0 : 1);  
 
-
         /// <summary>
         /// Computes the minimum number of cells required to store a specified number of bits
         /// </summary>
@@ -88,6 +87,21 @@ namespace Z0
                 => TypeMath.lteq(n,t) ? 1 : TypeMath.divceil(n,t); 
 
         /// <summary>
+        /// Computes the number of packed cells required to cover a rectangular area
+        /// </summary>
+        /// <param name="rows">The grid row count</param>
+        /// <param name="cols">The grid col count</param>
+        /// <param name="cw">The storage cell width</param>
+        [MethodImpl(Inline)]
+        public static int tablecells(int rows, int cols, int cw)
+        {
+            var bytes = tablesize(rows, cols);
+            var segbytes = cw / 8;
+            var segs = bytes/segbytes + (bytes % segbytes != 0 ? 1 : 0);            
+            return segs;
+        }
+
+        /// <summary>
         /// Computes the 0-based linear index determined by column width and a row/col coordinate
         /// </summary>
         /// <param name="colwidth">The bit-width of a grid column</param>
@@ -113,21 +127,21 @@ namespace Z0
         /// <param name="rows">The number of grid rows</param>
         /// <param name="cols">The number of grid columns</param>
         [MethodImpl(Inline)]
-        public static int gridbytes(int rows, int cols)
+        public static int tablesize(int rows, int cols)
         {
             var points = rows*cols;
             return (points >> 3) + (points % 8 != 0 ? 1 : 0);
         }
 
         /// <summary>
-        /// Computes the number of bytes required to cover a grid, predicated on natural row/col counts
+        /// Computes the number of bytes required to cover a rectangular area, predicated on natural row/col counts
         /// </summary>
         /// <param name="m">The row count representative</param>
         /// <param name="n">The col count representative</param>
         /// <typeparam name="M">The row type</typeparam>
         /// <typeparam name="N">The col type</typeparam>
         [MethodImpl(Inline)]
-        public static int gridbytes<M,N>(M m = default, N n = default)
+        public static int tablesize<M,N>(M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
@@ -136,50 +150,28 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the number of points in a grid, predicated on natural dimensions
+        /// Computes the number of bits covered by a rectangular region and predicated on natural dimensions
         /// </summary>
         /// <param name="rows">The grid row count</param>
         /// <param name="cols">The grid col count</param>
         [MethodImpl(Inline)]
-        public static int gridbits<M,N>(M m = default, N n = default)
+        public static int tablebits<M,N>(M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
                 => NatMath.mul(m,n);         
 
-        /// <summary>
-        /// Computes the number of points in a grid, predicated on row and column counts
-        /// </summary>
-        /// <param name="rows">The grid row count</param>
-        /// <param name="cols">The grid col count</param>
-        [MethodImpl(Inline)]
-        public static int gridbits(int rows, int cols)
-            => rows * cols;
 
         /// <summary>
-        /// Computes the number of packed cells required to cover a grid
-        /// </summary>
-        /// <param name="rows">The grid row count</param>
-        /// <param name="cols">The grid col count</param>
-        /// <param name="cw">The storage cell width</param>
-        [MethodImpl(Inline)]
-        public static int gridcells(int rows, int cols, int cw)
-        {
-            var bytes = gridbytes(rows, cols);
-            var segbytes = cw / 8;
-            var segs = bytes/segbytes + (bytes % segbytes != 0 ? 1 : 0);            
-            return segs;
-        }
-
-        /// <summary>
-        /// Computes the number of segments required to cover a grid with specifed storage cell type and dimension
+        /// Computes the number of cells required to cover a rectangular region predicated on the 
+        /// parametric cell type and supplied row/col dimensions
         /// </summary>
         /// <param name="rows">The number of rows in the grid</param>
         /// <param name="cols">The number of columns in the grid</param>
         /// <typeparam name="T">The storage cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int gridcells<T>(int rows, int cols)
+        public static int tablecells<T>(int rows, int cols)
             where T : unmanaged
-                => gridcells(rows,  cols, bitsize<T>());
+                => tablecells(rows,  cols, bitsize<T>());
 
         /// <summary>
         /// Computes the number of segments required cover a grid as characterized by parametric type information
@@ -191,28 +183,28 @@ namespace Z0
         /// <typeparam name="N">The col type</typeparam>
         /// <typeparam name="T">The storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static int gridcells<M,N,T>(M m = default, N n = default, T t = default)
+        public static int tablecells<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => gridcells(natval(m), natval(n), bitsize<T>());
+                => tablecells(natval(m), natval(n), bitsize<T>());
 
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with a specified number of rows/cols
         /// </summary>
-        /// <param name="block">The block size selctor</param>
-        /// <param name="m">The row count</param>
-        /// <param name="n">The col count</param>
+        /// <param name="w">The block width selctor</param>
+        /// <param name="rows">The row count</param>
+        /// <param name="cols">The col count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int gridblocks<T>(N256 block, int m, int n, T t = default)
+        public static int tableblocks<T>(N256 w, int rows, int cols, T t = default)
             where T : unmanaged
-                => DataBlocks.minblocks<T>(block, gridcells<T>(m,n));
+                => DataBlocks.minblocks<T>(w, tablecells<T>(rows,cols));
 
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with natural dimensions
         /// </summary>
-        /// <param name="block">The block size selctor</param>
+        /// <param name="w">The block width selctor</param>
         /// <param name="m">The row count representative</param>
         /// <param name="n">The col count representative</param>
         /// <param name="t">The cell type representative</param>
@@ -220,10 +212,10 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int gridblocks<M,N,T>(N256 block, M m = default, N n = default, T t = default)
+        public static int tableblocks<M,N,T>(N256 w, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => DataBlocks.minblocks<T>(block, gridcells<T>(natval(m), natval(n)));        
+                => DataBlocks.minblocks<T>(w, tablecells<T>(natval(m), natval(n)));        
     }
 }

@@ -66,6 +66,16 @@ namespace Z0
             where T : unmanaged        
                 => blocks * blocklen<T>(n);
 
+        /// <summary>
+        /// Calculates the number of cells that comprise a specified number of blocks
+        /// </summary>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int blockedcells<T>(N512 n, int blocks)
+            where T : unmanaged        
+                => blocks * blocklen<T>(n);
+
+
     }
 
 }

@@ -99,7 +99,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        NatPerm(PermSpec<T> src)
+        internal NatPerm(PermSpec<T> src)
         {
             this.perm = src;
         }

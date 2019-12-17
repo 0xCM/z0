@@ -23,13 +23,13 @@ namespace Z0
     /// create an enum where the first literal has the value 0, the second literal has the value 1 and so
     /// on as needed up to the maximum of 32 literals/values
     /// </remarks>
-    public struct BitField<E>
+    public struct BitField256<E>
         where E : unmanaged, Enum
     {        
         internal Vector256<byte> widths;
             
         [MethodImpl(Inline)]
-        internal BitField(Vector256<byte> widths)
+        internal BitField256(Vector256<byte> widths)
             => this.widths = widths;
 
         /// <summary>

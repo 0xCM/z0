@@ -329,8 +329,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static void vmaplo(Vector256<byte> src, out Vector256<ushort> dst)
-            => dst = v16u(ConvertToVector256Int16(vlo(src)));
+        public static Vector256<ushort> vmaplo(Vector256<byte> src, N256 w, ushort t = default)
+            => v16u(ConvertToVector256Int16(vlo(src)));
 
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
@@ -339,8 +339,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static void vmaphi(Vector256<byte> src, out Vector256<ushort> dst)
-            => dst = v16u(ConvertToVector256Int16(vhi(src)));
+        public static Vector256<ushort> vmaphi(Vector256<byte> src, N256 w, ushort t = default)
+            => v16u(ConvertToVector256Int16(vhi(src)));
 
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
@@ -349,8 +349,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static void vmaplo(Vector256<byte> src, out Vector256<short> dst)
-            => dst = ConvertToVector256Int16(vlo(src));
+        public static Vector256<short> vmaplo(Vector256<byte> src, N256 w, short t = default)
+            => ConvertToVector256Int16(vlo(src));
 
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
@@ -359,8 +359,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static void vmaphi(Vector256<byte> src, out Vector256<short> dst)
-            => dst = ConvertToVector256Int16(vhi(src));
+        public static Vector256<short> vmaphi(Vector256<byte> src, N256 w, short t = default)
+            => ConvertToVector256Int16(vhi(src));
 
         // ~ 256x16i -> X
         // ~ ------------------------------------------------------------------

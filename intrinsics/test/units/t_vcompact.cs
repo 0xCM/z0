@@ -15,7 +15,7 @@ namespace Z0
         public void vcompact2_128x16x2_128x8_outline()
         {
             var w = n128;
-            var cellmax = u8max;
+            var cellmax = z8max;
             
             var vsmax = vbuild.broadcast(w, (ushort)cellmax);
             var vtmax = vbuild.broadcast(w,cellmax);
@@ -31,7 +31,7 @@ namespace Z0
         public void vcompact2_256x16x2_256x8_outline()
         {
             var w = n256;
-            var cellmax = u8max;
+            var cellmax = z8max;
             
             var vsmax = vbuild.broadcast(w, (ushort)cellmax);
             var vtmax = vbuild.broadcast(w,cellmax);
@@ -47,7 +47,7 @@ namespace Z0
         public void vcompact2_2x128x32u_128x16u_outline()
         {   
             var w = n128;
-            var cellmax = u16max;
+            var cellmax = z16max;
             
             var vsmax = vbuild.broadcast(w, (uint)cellmax);
             var vtmax = vbuild.broadcast(w,cellmax);
@@ -63,7 +63,7 @@ namespace Z0
         public void vcompact2_2x256x32u_256x16u_outline()
         {   
             var w = n256;
-            var cellmax = u16max;
+            var cellmax = z16max;
 
             var vsmax = vbuild.broadcast(w,(uint)cellmax);
             var vtmax = vbuild.broadcast(w,cellmax);

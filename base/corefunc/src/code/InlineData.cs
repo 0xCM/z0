@@ -12,6 +12,9 @@ namespace Z0
 
     public class InlineData : CodeGenerator
     {
+        
+         
+
         public static string GenRandomData(ByteSize size)
         {
             var random = new Random();
@@ -30,7 +33,16 @@ namespace Z0
         public static string GenAccessor(Span<byte> data, string propName, int offset = 4, int seglen = 8)
             => new InlineData(data,propName).GenAccessor(offset,seglen);
 
+        public static string GenAccessor(ReadOnlySpan<byte> data, string propName, int offset = 4, int seglen = 8)
+            => new InlineData(data,propName).GenAccessor(offset,seglen);
+
         public InlineData(Span<byte> data, string propName)
+        {
+            this.Data = data.ToArray();
+            this.PropName = propName;
+        }
+
+        public InlineData(ReadOnlySpan<byte> data, string propName)
         {
             this.Data = data.ToArray();
             this.PropName = propName;
@@ -48,32 +60,12 @@ namespace Z0
 
         public string GenLookups(Type valueType, string rootName)
         {
-            //public static ulong Seed00 => Lookup(0)
             var sb = text();
             for(var i=0; i<Data.Length; i++)
                 sb.AppendLine($"public static {valueType.Name} {rootName}{i} => Lookup({i})");
             return sb.ToString();
         }
-
-        public static string FormatBytes(byte[] src, int seglen, int lpad = 0, char? sep = null)
-        {
-            var dst = text();
-            var delimiter = sep ?? AsciSym.Comma;
-            var margin = AsciSym.Space.Replicate(lpad);
-            for(var i=0; i<src.Length; i++)
-            {   
-                dst.Append($"{src[i].FormatHex()}{delimiter}");
-                if((i + 1) % seglen == 0)
-                {
-                    dst.AppendLine();
-                    dst.Append(margin);
-                }
-                else
-                    dst.Append(AsciSym.Space);
-            }
-            return dst.ToString();
-
-        }
+        
         public string GenAccessor(int offset = 0, int seglen = 8)
         {
             var src = Data;
@@ -87,7 +79,7 @@ namespace Z0
             {
                 var h = $"{src[i].FormatHex()}{AsciSym.Comma}";
                 dst.Append($" {h}");
-                if((i + 1) % seglen == 0)
+                if((i + 1) % seglen == 0 && i != src.Length - 1)
                 {
                     dst.AppendLine();
                     dst.Append(linepad);

@@ -41,15 +41,6 @@ namespace Z0
         /// </summary>
         public static readonly XMM Zero = FromCells(0ul, 0ul);
 
-        /// <summary>
-        /// Presents a generic cpu vector as a register
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static XMM From<T>(Vec128<T> src)
-            where T : unmanaged
-                => Unsafe.As<Vec128<T>,XMM>(ref src);
 
         /// <summary>
         /// Presents a generic cpu vector as a register
@@ -93,85 +84,7 @@ namespace Z0
             return target;
         }
 
-        /// <summary>
-        /// Implicitly converts a source vector to a 256-bit memory block
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vec128<sbyte> src)
-            => From(src);
 
-        /// <summary>
-        /// Implicitly converts a source vector to a 256-bit memory block
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vec128<byte> src)
-            => From(src);
-
-        /// <summary>
-        /// Implicitly converts a source vector to a 256-bit memory block
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vec128<short> src)
-            => From(src);
-
-        /// <summary>
-        /// Implicitly converts a source vector to a 256-bit memory block
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vec128<ushort> src)
-            => From(src);
-
-        /// <summary>
-        /// Implicitly converts a source vector to a 256-bit memory block
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vec128<int> src)
-            => From(src);
-
-        /// <summary>
-        /// Implicitly converts a source vector to a 256-bit memory block
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vec128<uint> src)
-            => From(src);
-
-        /// <summary>
-        /// Implicitly converts a source vector to a 256-bit memory block
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vec128<long> src)
-            => From(src);
-
-        /// <summary>
-        /// Implicitly converts a source vector to a 256-bit memory block
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vec128<ulong> src)
-            => From(src);
-        
-        /// <summary>
-        /// Implicitly converts a source vector to a 256-bit memory block
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vec128<float> src)
-            => From(src);
-
-        /// <summary>
-        /// Implicitly converts a source vector to a 256-bit memory block
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vec128<double> src)
-            => From(src);
 
         /// <summary>
         /// Implicitly converts a source vector to a 256-bit memory block
@@ -321,17 +234,6 @@ namespace Z0
         public Volatility Volatility(int index)
             => index <= 5 ? Z0.Volatility.Volatile : Z0.Volatility.NonVolatile;
 
-        /// <summary>
-        /// Replaces the content of the target register with source vector content
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public void Assign<T>(Vec128<T> src)
-            where T : unmanaged
-        {
-            bytes(src.xmm).CopyTo(this.AsSpan<byte>());
-        }
 
         public bit this[uint bitpos]
         {

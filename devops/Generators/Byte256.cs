@@ -8,7 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Text;
 
     using static zfunc;
@@ -169,9 +168,6 @@ namespace Z0
             sb.AppendLine(indent8 + "}");
             
             return new CSharpSource(sb.ToString());
-        }
-        
+        }        
     }
-
-
 }

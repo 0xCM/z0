@@ -8,134 +8,48 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-        
+    
+    using static As;
     using static zfunc;
 
     partial class dinx
-    {        
-        [MethodImpl(NotInline)]
-        static Vector128<T> vswapspec<T>(N128 n, params Swap[] swaps)
-            where T : unmanaged  
+    {
+        // [7      6     5    4     3     2     1     0    ]
+        // [15_14 13_12 11_10 09_08 07_06 05_04 03_02 01_00]
+        // [2*k + 1 2*k | k=0,..,7]
+        // 2 <-> 3
+        // [15_14 13_12 11_10 09_08 05_04 07_06 03_02 01_00 ]
+
+
+        public static Vector128<byte> vswap(Vector128<byte> src, int i, int j)
         {
-            var src = vbuild.increments<T>(n).ToSpan();
-            var dst = src.Swap(swaps);
-            return ginx.vload(n, in head(src));
+            var perm = vbuild.increments<byte>(n128);
+            perm = perm.Cell(j,(byte)i);
+            perm = perm.Cell(i,(byte)j);
+            return vshuf16x8(src,perm);            
+        }
+        
+        public static Vector128<ushort> vswap(Vector128<ushort> src, int i, int j)
+        {
+            var perm = vbuild.increments<byte>(n128);
+
+            static byte index8x16(int i, bit parity)
+                => uint8(i*2 + (int)parity);
+
+            var i0 = index8x16(i,bit.Off);
+            var i1 = index8x16(i,bit.On);
+
+            var j0 = index8x16(j,bit.Off);
+            var j1 = index8x16(j,bit.On);
+
+            perm = vcell(perm, j0, i0);
+            perm = vcell(perm, j1, i1);
+            perm = vcell(perm, i0, j0);
+            perm = vcell(perm, i1, j1);
+
+            return vshuf16x8(src,perm);            
         }
 
-        [MethodImpl(Inline)]
-        public static Vector128<byte> vswap(Vector128<byte> src, params Swap[] swaps)
-            => vshuf16x8(src, vswapspec<byte>(n128, swaps));
-
-        /// <summary>
-        /// Swaps 64-bit hi/lo segments of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<sbyte> vswaphl(Vector128<sbyte> x)
-            => vshuf2x64(x, Arrange2L.BA);  
-
-        /// <summary>
-        /// Swaps 64-bit hi/lo segments of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<byte> vswaphl(Vector128<byte> x)
-            => vshuf2x64(x, Arrange2L.BA);  
-
-        /// <summary>
-        /// Swaps 64-bit hi/lo segments of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<short> vswaphl(Vector128<short> x)
-            => vshuf2x64(x, Arrange2L.BA);  
-
-        /// <summary>
-        /// Swaps 64-bit hi/lo segments of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<ushort> vswaphl(Vector128<ushort> x)
-            => vshuf2x64(x, Arrange2L.BA);  
-
-        /// <summary>
-        /// Swaps 64-bit hi/lo segments of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<int> vswaphl(Vector128<int> x)
-            => vshuf2x64(x, Arrange2L.BA);  
-
-        /// <summary>
-        /// Swaps 64-bit hi/lo segments of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<uint> vswaphl(Vector128<uint> x)
-            => vshuf2x64(x, Arrange2L.BA);  
-
-        /// <summary>
-        /// Swaps 64-bit hi/lo segments of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<ulong> vswaphl(Vector128<ulong> x)            
-            => vshuf2x64(x, Arrange2L.BA);  
-
-        /// <summary>
-        /// Swaps 64-bit hi/lo segments of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<long> vswaphl(Vector128<long> x)
-            => vshuf2x64(x, Arrange2L.BA);  
-
-        /// <summary>
-        /// Swaps the source vectors' hi/lo 128-bit lanes
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<byte> vswaphl(Vector256<byte> x)
-            => vperm2x128(x,x, Perm2x4.DA);
-
-        /// <summary>
-        /// Swaps hi/lo 128-bit lanes
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<sbyte> vswaphl(Vector256<sbyte> x)
-            => vperm2x128(x,x, Perm2x4.DA);
-
-        /// <summary>
-        /// Swaps hi/lo 128-bit lanes
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<short> vswaphl(Vector256<short> x)
-            => vperm2x128(x,x, Perm2x4.DA);
-
-        /// <summary>
-        /// Swaps hi/lo 128-bit lanes
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<ushort> vswaphl(Vector256<ushort> x)
-            => vperm2x128(x,x, Perm2x4.DA);
-
-        /// <summary>
-        /// Swaps hi/lo 128-bit lanes
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<long> vswaphl(Vector256<long> x)
-            => vperm2x128(x,x, Perm2x4.DA);
-
-        /// <summary>
-        /// Swaps hi/lo 128-bit lanes
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<ulong> vswaphl(Vector256<ulong> x)
-            => vperm2x128(x,x, Perm2x4.DA);
     }
+
 }

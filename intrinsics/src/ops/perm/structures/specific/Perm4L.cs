@@ -9,11 +9,8 @@ namespace Z0
 
     using static zfunc;    
 
-    /// <summary>
-    /// Identifies 4-element permutations
-    /// </summary>
-    public enum Perm4L : byte
-    {                
+    public enum Perm4Sym : byte
+    {
         /// <summary>
         /// Identifies the first of four permutation symbols
         /// </summary>
@@ -33,6 +30,33 @@ namespace Z0
         /// Identifies the fourth of four permutation symbols
         /// </summary>
         D = 0b11,
+
+    }
+
+    /// <summary>
+    /// Identifies 4-element permutations
+    /// </summary>
+    public enum Perm4L : byte
+    {                
+        /// <summary>
+        /// Identifies the first of four permutation symbols
+        /// </summary>
+        A = Perm4Sym.A,
+
+        /// <summary>
+        /// Identifies the second of four permutation symbols
+        /// </summary>
+        B = Perm4Sym.B,
+
+        /// <summary>
+        /// Identifies the third of four permutation symbols
+        /// </summary>
+        C = Perm4Sym.C,
+
+        /// <summary>
+        /// Identifies the fourth of four permutation symbols
+        /// </summary>
+        D = Perm4Sym.D,
         
         /// <summary>
         /// [11 10 01 00]: ABCD -> ABCD

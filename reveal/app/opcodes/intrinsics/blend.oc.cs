@@ -18,6 +18,10 @@ namespace Z0.OpCodes
 
     public static class vblend
     {
+        
+        public static Vector512<ushort> vblendp_256x16u(Vector256<ushort> x, Vector256<ushort> y, Vector256<ushort> spec)
+            => ginx.vblendp(x,y,spec);
+            
         public static Vector256<ushort> vmerge16(Vector128<ushort> x, Vector128<ushort> y)                
             => dinx.vmerge(x,y, Blend8x16.LLRRLLRR, Blend8x16.RRLLRRLL);
 

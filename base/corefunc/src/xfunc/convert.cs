@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Runtime.Intrinsics;
     using System.Linq;
     using System.Runtime.CompilerServices;
     
@@ -14,6 +15,7 @@ namespace Z0
 
     partial class xfunc
     {
+
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsBytes(this in ulong src)
             => new Span<byte>(constptr(in src), 8);

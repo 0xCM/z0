@@ -131,7 +131,7 @@ namespace Z0
             return dst;
         }
 
-        static Vec128<byte> Tr8x16Mask
+        static Vector128<byte> Tr8x16Mask
         {
             [MethodImpl(Inline)]
             get => ginx.vload(n128,in head(Tr8x16MaskBytes));

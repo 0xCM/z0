@@ -101,8 +101,8 @@ namespace Z0
         /// <param name="lo">The target for the lower source elements</param>
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline)]
-        public static void vinflate(Vector128<sbyte> x, out Vector128<short> lo, out Vector128<short> hi)
-            => vconvert(x, out lo, out hi);
+        public static ConstPair<Vector128<short>> vinflate(Vector128<sbyte> x, N128 w, short t = default)
+            => vconvert(x, w, t);
 
         // ~ 32x16w <-> 32x8w
         // ~ 32:8 <-> 16
@@ -379,6 +379,10 @@ namespace Z0
         public static void vinflate(Vector256<ushort> src, out Vector256<uint> lo, out Vector256<uint> hi)
             => vconvert(src, out lo, out hi);
 
+        [MethodImpl(Inline)]
+        public static ConstPair<Vector256<uint>> vinflate(Vector256<ushort> src, N256 w, uint t = default)
+            => vconvert(src, w, t);
+
         /// <summary>
         /// 16x16w -> (8x32w, 8x32w)
         /// </summary>
@@ -547,8 +551,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<long> vinflate(Vector128<int> src, out Vector256<long> dst)
-            => vconvert(src, out dst);
+        public static Vector256<long> vinflate(Vector128<int> src)
+            => vconvert(src, n256, z64i);
 
         // ~ 8x64w <-> 8x32w
         // ~ 8:32 <-> 64

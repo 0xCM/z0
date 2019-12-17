@@ -17,15 +17,25 @@ namespace Z0
     partial class dinx
     {
         /// <summary>
-        /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask)PBLENDVB xmm, xmm/m128,xmm
+        /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask) PBLENDVB xmm, xmm/m128, xmm
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vblendv(Vector128<ushort> x, Vector128<ushort> y, Vector128<ushort> spec)
-            => BlendVariable(x,y,spec);
-        
+        public static Vector128<byte> vblendv(Vector128<byte> x, Vector128<byte> y, Vector128<byte> spec)        
+            =>  BlendVariable(x, y, spec);
+
+        /// <summary>
+        /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask)PBLENDVB xmm, xmm/m128, xmm
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector128<sbyte> vblendv(Vector128<sbyte> x, Vector128<sbyte> y, Vector128<sbyte> spec)        
+            => BlendVariable(x, y, spec);
+
         /// <summary>
         /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask)PBLENDVB xmm, xmm/m128,xmm
         /// </summary>
@@ -36,6 +46,16 @@ namespace Z0
         public static Vector128<short> vblendv(Vector128<short> x, Vector128<short> y, Vector128<short> spec)
             => BlendVariable(x,y,spec);
 
+        /// <summary>
+        /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask)PBLENDVB xmm, xmm/m128,xmm
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> vblendv(Vector128<ushort> x, Vector128<ushort> y, Vector128<ushort> spec)
+            => BlendVariable(x,y,spec);
+        
         /// <summary>
         /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask)PBLENDVB xmm, xmm/m128,xmm
         /// </summary>
@@ -95,7 +115,47 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<double> vblendv(Vector128<double> x, Vector128<double> y, Vector128<double> spec)
             => BlendVariable(x,y,spec);
-        
+
+        /// <summary>
+        /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask) PBLENDVB xmm, xmm/m128, xmm
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vblendv(Vector256<byte> x, Vector256<byte> y, Vector256<byte> spec)        
+            =>  BlendVariable(x, y, spec);
+
+        /// <summary>
+        /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask)PBLENDVB xmm, xmm/m128, xmm
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector256<sbyte> vblendv(Vector256<sbyte> x, Vector256<sbyte> y, Vector256<sbyte> spec)        
+            => BlendVariable(x, y, spec);
+
+        /// <summary>
+        /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask)VPBLENDVB ymm, ymm, ymm/m256, ymm
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector256<short> vblendv(Vector256<short> x, Vector256<short> y, Vector256<short> spec)
+            => BlendVariable(x,y,spec);
+
+        /// <summary>
+        /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask)VPBLENDVB ymm, ymm, ymm/m256, ymm
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector256<ushort> vblendv(Vector256<ushort> x, Vector256<ushort> y, Vector256<ushort> spec)
+            => BlendVariable(x,y,spec);
+
         /// <summary>
         /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask)VPBLENDVB ymm, ymm, ymm/m256, ymm
         /// </summary>
@@ -105,7 +165,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<int> vblendv(Vector256<int> x, Vector256<int> y, Vector256<int> spec)
             => BlendVariable(x,y,spec);
-        
+
         /// <summary>
         /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask)VPBLENDVB ymm, ymm, ymm/m256, ymm
         /// </summary>
@@ -133,31 +193,11 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vblendv(Vector256<ushort> x, Vector256<ushort> y, Vector256<ushort> spec)
-            => BlendVariable(x,y,spec);
-
-        /// <summary>
-        /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask)VPBLENDVB ymm, ymm, ymm/m256, ymm
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
-        public static Vector256<short> vblendv(Vector256<short> x, Vector256<short> y, Vector256<short> spec)
-            => BlendVariable(x,y,spec);
-
-        /// <summary>
-        /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask)VPBLENDVB ymm, ymm, ymm/m256, ymm
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
         public static Vector256<ulong> vblendv(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> spec)
             => BlendVariable(x,y,spec);
 
         /// <summary>
-        /// __m256 _mm256_blendv_ps (__m256 a, __m256 b, __m256 mask)VBLENDVPS ymm, ymm, ymm/m256, ymm
+        /// __m256 _mm256_blendv_ps (__m256 a, __m256 b, __m256 mask) VBLENDVPS ymm, ymm, ymm/m256, ymm
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -167,7 +207,7 @@ namespace Z0
             => BlendVariable(x,y,spec);
 
         /// <summary>
-        /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask)VPBLENDVB ymm, ymm, ymm/m256, ymm
+        /// __m256d _mm256_blendv_pd (__m256d a, __m256d b, __m256d mask)VBLENDVPD ymm, ymm,ymm/m256, ymm
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>

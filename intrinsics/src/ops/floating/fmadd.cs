@@ -38,26 +38,6 @@ namespace Z0
             => MultiplyAdd(x, y, z);
 
         /// <summary>
-        /// __m128 _mm_fmadd_ss (__m128 a, __m128 b, __m128 c) VFMADDSS xmm, xmm, xmm/m32
-        /// </summary>
-        /// <param name="x">The first operand</param>
-        /// <param name="y">The second operand</param>
-        /// <param name="z">The third operand</param>
-        [MethodImpl(Inline)]
-        public static Scalar128<float> fmadd(Scalar128<float> x, Scalar128<float> y, Scalar128<float> z)
-            => MultiplyAddScalar(x.mm, y.mm, z.mm);
-
-        /// <summary>
-        /// __m128d _mm_fmadd_sd (__m128d a, __m128d b, __m128d c) VFMADDSS xmm, xmm, xmm/m64
-        /// </summary>
-        /// <param name="x">The first operand</param>
-        /// <param name="y">The second operand</param>
-        /// <param name="z">The third operand</param>
-        [MethodImpl(Inline)]
-        public static Scalar128<double> fmadd(Scalar128<double> x, Scalar128<double> y, Scalar128<double> z)
-            => MultiplyAddScalar(x.mm, y.mm, z.mm);
-
-        /// <summary>
         /// __m256 _mm256_fmadd_ps (__m256 a, __m256 b, __m256 c) VFMADDPS ymm, ymm, ymm/m256
         /// dst = a*b + c
         /// </summary>
