@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_bsp_bitstring : t_bitspan<t_bsp_bitstring>
+    public class t_bb_bitstring : t_bitblock<t_bb_bitstring>
     {
 
         public void bsp_16u_from_bs()

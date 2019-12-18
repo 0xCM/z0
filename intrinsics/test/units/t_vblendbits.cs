@@ -58,18 +58,17 @@ namespace Z0
 
                 var x = Random.CpuVector(w,t);
                 var y = Random.CpuVector(w,t);
-                var m = Random.CpuVector(w,t);
-                var r = ginx.vbitblend(x,y,m);
+                var mask = Random.CpuVector(w,t);
+                var blended = ginx.vbitblend(x,y,mask);
 
                 for(var i = 0; i<count; i++)
-                    Claim.eq(vcell(r,i),gmath.blend(vcell(x,i),vcell(y,i), vcell(m,i)));
+                    Claim.eq(vcell(blended,i),gmath.blend(vcell(x,i),vcell(y,i), vcell(mask,i)));
 
-                vblendbits_drill(x,y,m,r);                    
+                vcheckmask(x,y,mask,blended);                    
             }
-
         }
 
-        protected void vblendbits_drill<T>(Vector256<T> left, Vector256<T> right, Vector256<T> mask, Vector256<T> result)
+        protected void vcheckmask<T>(Vector256<T> left, Vector256<T> right, Vector256<T> mask, Vector256<T> result)
             where T : unmanaged
         {
             var ld = DataBlocks.single<byte>(n256);

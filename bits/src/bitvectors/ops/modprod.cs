@@ -113,7 +113,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit modprod<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => BitSpan.modprod(x.ToBitCells(), y.ToBitCells());
+                => BitBlocks.modprod(x.ToBitCells(), y.ToBitCells());
         
         /// <summary>
         /// Computes the Euclidean scalar product between two bitvectors using modular arithmetic

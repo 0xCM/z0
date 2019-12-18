@@ -49,7 +49,7 @@ namespace Z0
         public void bm_init_n7x9x8()
         {
             const byte pattern = 0b01010101;
-            var fill = BitSpan.init(n9, pattern);
+            var fill = BitBlocks.init(n9, pattern);
             var matrix = BitMatrix.init(fill, n7);
             for(var i=0; i<matrix.RowCount; i++)
                 Claim.yea(fill == matrix[i]);

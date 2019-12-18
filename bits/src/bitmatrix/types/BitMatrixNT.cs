@@ -111,10 +111,10 @@ namespace Z0
         /// <summary>
         /// Queries/Specifies a row
         /// </summary>
-        public BitSpan<N,T> this[int row]
+        public BitBlock<N,T> this[int row]
         {
             [MethodImpl(Inline)]
-            get => new BitSpan<N,T>(GetRowData(row), true);
+            get => new BitBlock<N,T>(GetRowData(row), true);
             
             [MethodImpl(Inline)]
             set => value.Data.CopyTo(GetRowData(row));     
@@ -143,7 +143,7 @@ namespace Z0
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public void SetCol(int col, BitSpan<N,T> src)
+        public void SetCol(int col, BitBlock<N,T> src)
         {
             for(var row=0; row < Order; row++)
                 this[row,col] = src[row];
@@ -154,9 +154,9 @@ namespace Z0
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public BitSpan<N,T> GetCol(int col)
+        public BitBlock<N,T> GetCol(int col)
         {
-            var cv = default(BitSpan<N,T>);
+            var cv = default(BitBlock<N,T>);
             for(var row=0; row < Order; row++)
                 cv[row] = this[row, col];
             return cv;

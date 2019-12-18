@@ -69,6 +69,10 @@ namespace Z0
         public void vreverse_256x32u()
         {
             var n = n256;
+
+            var spec = vbuild.parts(n256, 7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);       
+            //Trace(spec.FormatDataProp("MRev256u32"));
+
             for(var i = 0; i< SampleSize; i++)
             {
                 var x = Random.Blocks<uint>(n);

@@ -14,7 +14,6 @@ namespace Z0
         public void vpart_30x3()
         {
             // var x =  dinx.vpart30x8x3(uint.MaxValue);            
-            // Trace(x.FormatBitBlocks());
             var count = 0b111_110_101_100_011_010_001_000u;
 
             var actual =  dinx.vpart30x8x3(count);            

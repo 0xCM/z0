@@ -16,8 +16,8 @@ namespace Z0
         /// Converts the matrix to a bitvector
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitSpan<N4096,ulong> ToBitVector(this BitMatrix64 A)
-            => BitSpan.load(A.Data, n4096);
+        public static BitBlock<N4096,ulong> ToBitVector(this BitMatrix64 A)
+            => BitBlocks.load(A.Data, n4096);
 
         /// <summary>
         /// Creates the matrix determined by a permutation

@@ -80,8 +80,6 @@ namespace Z0
         public static Vector256<byte> vreverse(Vector256<byte> src)
             => vshuf32x8(src, VData.decrements<byte>(n256));
 
-            //=> vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
-
         /// <summary>
         /// Reverses the source vector components
         /// </summary>
@@ -89,7 +87,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<sbyte> vreverse(Vector256<sbyte> src)
             => vconcat(vreverse(vhi(src)), vreverse(vlo(src)));
-
 
         /// <summary>
         /// Reverses the source vector components
@@ -140,6 +137,17 @@ namespace Z0
             => vperm4x64(src,Perm4L.DCBA);
 
         static Vector256<uint> MRev256u32 
-            => vbuild.parts(n256, 7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);       
+            => v32u(VData.load(n256,MRev256u32Data));
+            
+            //=> vbuild.parts(n256, 7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);       
+
+        static ReadOnlySpan<byte> MRev256u32Data => new byte[]
+        {
+            0x07, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00,
+            0x05, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00,
+            0x03, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00,
+            0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        };
+
     }
 }

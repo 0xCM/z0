@@ -33,8 +33,8 @@ namespace Z0
 
         public void nbc_xor_13x8()
         {
-            var x0 = Random.BitSpan<N13,byte>();
-            var y0 = Random.BitSpan<N13,byte>();
+            var x0 = Random.BitBlock<N13,byte>();
+            var y0 = Random.BitBlock<N13,byte>();
             var z0 = x0 ^ y0;
             var x1 = x0.ToBitVector(n16);
             var y1 = y0.ToBitVector(n16);

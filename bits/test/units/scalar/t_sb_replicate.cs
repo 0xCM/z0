@@ -46,7 +46,7 @@ namespace Z0
             void report()
             {
                 Trace("expect", bracket(expect.Format(6)));
-                Trace("actual", actual.FormatBitBlocks(6));
+                Trace("actual", actual.FormatBlockedBits(6));
             }
         }
     }

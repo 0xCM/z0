@@ -24,11 +24,11 @@ namespace Z0
         public static BitGrid256<N16,N16,ushort> transpose(BitGrid256<N16,N16,ushort> g)                
             => BitGrid.transpose(g);
 
-        public static bit read_bit_from_vector(in BitSpan<N23,byte> src)
+        public static bit read_bit_from_vector(in BitBlock<N23,byte> src)
             => BitGrid.readbit(in src.Head, 3);
 
         public static int segments()
-            => BitSpan<N23,byte>.CellCount;
+            => BitBlock<N23,byte>.CellCount;
 
         public static int count_segs()
             => BitCalcs.tablecells<N20,N30,uint>();

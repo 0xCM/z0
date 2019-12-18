@@ -91,8 +91,8 @@ namespace Z0.Logix
         {
             var f = Api.lookup(kind);
             var table = BitMatrix.alloc<N2,N2,byte>();
-            table[0] = BitSpan.literal<N2,byte>((byte)Bits.bitpack(f(off), off));
-            table[1] = BitSpan.literal<N2,byte>((byte)Bits.bitpack(f(on), on));
+            table[0] = BitBlocks.literal<N2,byte>((byte)Bits.bitpack(f(off), off));
+            table[1] = BitBlocks.literal<N2,byte>((byte)Bits.bitpack(f(on), on));
             return table;            
         }
 
@@ -100,10 +100,10 @@ namespace Z0.Logix
         {
             var tt = BitMatrix.alloc<N4,N3,byte>();
             var f = Api.lookup(kind);
-            tt[0] = BitSpan.literal<N3,byte>((byte)Bits.bitpack(f(off, off), off, off));
-            tt[1] = BitSpan.literal<N3,byte>((byte)Bits.bitpack(f(on, off), off, on));
-            tt[2] = BitSpan.literal<N3,byte>((byte)Bits.bitpack(f(off, on), on, off));
-            tt[3] = BitSpan.literal<N3,byte>((byte)Bits.bitpack(f(on, on),  on, on));
+            tt[0] = BitBlocks.literal<N3,byte>((byte)Bits.bitpack(f(off, off), off, off));
+            tt[1] = BitBlocks.literal<N3,byte>((byte)Bits.bitpack(f(on, off), off, on));
+            tt[2] = BitBlocks.literal<N3,byte>((byte)Bits.bitpack(f(off, on), on, off));
+            tt[3] = BitBlocks.literal<N3,byte>((byte)Bits.bitpack(f(on, on),  on, on));
             return tt;
         }
 
@@ -111,14 +111,14 @@ namespace Z0.Logix
         {
             var tt = BitMatrix.alloc<N8,N4,byte>();
             var f = Api.lookup(kind);
-            tt[0] = BitSpan.literal<N4,byte>((byte)Bits.bitpack(f(off, off, off), off, off, off));
-            tt[1] = BitSpan.literal<N4,byte>((byte)Bits.bitpack(f(off, off, on), off, off, on));
-            tt[2] = BitSpan.literal<N4,byte>((byte)Bits.bitpack(f(off, on, off), off, on, off));
-            tt[3] = BitSpan.literal<N4,byte>((byte)Bits.bitpack(f(off, on, on), off, on, on));
-            tt[4] = BitSpan.literal<N4,byte>((byte)Bits.bitpack(f(on, off, off), on, off, off));
-            tt[5] = BitSpan.literal<N4,byte>((byte)Bits.bitpack(f(on, off, on), on, off, on));
-            tt[6] = BitSpan.literal<N4,byte>((byte)Bits.bitpack(f(on, on, off), off, on, on));
-            tt[7] = BitSpan.literal<N4,byte>((byte)Bits.bitpack(f(on, on, on), on, on, on));
+            tt[0] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(f(off, off, off), off, off, off));
+            tt[1] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(f(off, off, on), off, off, on));
+            tt[2] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(f(off, on, off), off, on, off));
+            tt[3] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(f(off, on, on), off, on, on));
+            tt[4] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(f(on, off, off), on, off, off));
+            tt[5] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(f(on, off, on), on, off, on));
+            tt[6] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(f(on, on, off), off, on, on));
+            tt[7] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(f(on, on, on), on, on, on));
             return tt;
         }
 
@@ -175,8 +175,8 @@ namespace Z0.Logix
             {
                 BitVector4 result = (byte)i;
                 var table = BitMatrix.alloc<N2,N2,byte>();
-                table[0] = BitSpan.literal<N2,byte>((byte)Bits.bitpack(result[0], off));
-                table[1] = BitSpan.literal<N2,byte>((byte)Bits.bitpack(result[1], on));
+                table[0] = BitBlocks.literal<N2,byte>((byte)Bits.bitpack(result[0], off));
+                table[1] = BitBlocks.literal<N2,byte>((byte)Bits.bitpack(result[1], on));
                 table.emit(dst);                
             }
         }
@@ -189,10 +189,10 @@ namespace Z0.Logix
 
 
                 var table = BitMatrix.alloc<N4,N3,byte>();
-                table[0] = BitSpan.literal<N3,byte>((byte)Bits.bitpack(result[0], off, off));
-                table[1] = BitSpan.literal<N3,byte>((byte)Bits.bitpack(result[1], off, on));
-                table[2] = BitSpan.literal<N3,byte>((byte)Bits.bitpack(result[2], on, off));
-                table[3] = BitSpan.literal<N3,byte>((byte)Bits.bitpack(result[3], on, on));
+                table[0] = BitBlocks.literal<N3,byte>((byte)Bits.bitpack(result[0], off, off));
+                table[1] = BitBlocks.literal<N3,byte>((byte)Bits.bitpack(result[1], off, on));
+                table[2] = BitBlocks.literal<N3,byte>((byte)Bits.bitpack(result[2], on, off));
+                table[3] = BitBlocks.literal<N3,byte>((byte)Bits.bitpack(result[3], on, on));
                 require(table.GetCol(2) == result);                
                 table.emit(dst);
             }
@@ -204,14 +204,14 @@ namespace Z0.Logix
             {
                 BitVector8 result = (byte)i;
                 var table = BitMatrix.alloc<N8,N4,byte>();
-                table[0] = BitSpan.literal<N4,byte>((byte)Bits.bitpack(result[0], off, off, off));
-                table[1] = BitSpan.literal<N4,byte>((byte)Bits.bitpack(result[1], off, off, on));
-                table[2] = BitSpan.literal<N4,byte>((byte)Bits.bitpack(result[2], off, on, off));
-                table[3] = BitSpan.literal<N4,byte>((byte)Bits.bitpack(result[3], off, on, on));
-                table[4] = BitSpan.literal<N4,byte>((byte)Bits.bitpack(result[4], on, off, off));
-                table[5] = BitSpan.literal<N4,byte>((byte)Bits.bitpack(result[5], on, off, on));
-                table[6] = BitSpan.literal<N4,byte>((byte)Bits.bitpack(result[6], on, on, off));
-                table[7] = BitSpan.literal<N4,byte>((byte)Bits.bitpack(result[7], on, on, on));
+                table[0] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(result[0], off, off, off));
+                table[1] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(result[1], off, off, on));
+                table[2] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(result[2], off, on, off));
+                table[3] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(result[3], off, on, on));
+                table[4] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(result[4], on, off, off));
+                table[5] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(result[5], on, off, on));
+                table[6] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(result[6], on, on, off));
+                table[7] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(result[7], on, on, on));
                 require(table.GetCol(3) == result);                
                 table.emit(dst);
 

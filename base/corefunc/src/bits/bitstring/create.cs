@@ -60,7 +60,7 @@ namespace Z0
                 => BitString.scalars(src.ToSpan(), maxbits);
 
         /// <summary>
-        /// Constructs a bitstring from bitspan
+        /// Constructs a bitstring from a span of bits
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]

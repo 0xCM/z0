@@ -9,15 +9,15 @@ namespace Z0
 
     using static zfunc;
 
-    public abstract class t_bitspan<X> : t_bits<X>
-        where X : t_bitspan<X>, new()
+    public abstract class t_bitblock<X> : t_bits<X>
+        where X : t_bitblock<X>, new()
     {
-        protected void bitspan_disable_check<T>(BitSize n)
+        protected void bitblock_disable_check<T>(BitSize n)
             where T : unmanaged
         {
             for(var k=0; k<SampleSize; k++)
             {
-                var bv = Random.BitSpan<T>(n);
+                var bv = Random.BitBlock<T>(n);
                 var bs = bv.ToBitString();
                 Claim.eq(bv.BitCount, n);
                 Claim.eq(bv.BitCount, bs.Length);
@@ -31,13 +31,13 @@ namespace Z0
             }
         }
 
-        protected void bitspan_disable_check<N,T>(N n = default, T rep = default)
+        protected void bitblock_disable_check<N,T>(N n = default, T rep = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
             for(var k=0; k<SampleSize; k++)
             {
-                var bc = Random.BitSpan<N,T>();
+                var bc = Random.BitBlock<N,T>();
                 var bs = bc.ToBitString();
                 Claim.eq(bc.Width, n.NatValue);
                 Claim.eq(bc.Width, bs.Length);
@@ -56,15 +56,15 @@ namespace Z0
         /// </summary>
         /// <param name="n">The maximum effective width of a cell</param>
         /// <typeparam name="T">The cell type</typeparam>
-        protected void bitspan_dot_check<T>(int n)
+        protected void bitblock_dot_check<T>(int n)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.BitSpan<T>(n);
-                var y = Random.BitSpan<T>(n);
+                var x = Random.BitBlock<T>(n);
+                var y = Random.BitBlock<T>(n);
                 var a = x % y;
-                var b = BitSpan.modprod(x,y);
+                var b = BitBlocks.modprod(x,y);
                 Claim.yea(a == b);            
             }
         }
@@ -76,16 +76,16 @@ namespace Z0
         /// <param name="zero">A scalar representative</param>
         /// <typeparam name="N">The bitvector width type</typeparam>
         /// <typeparam name="T">The scalar type</typeparam>
-        protected void bitspan_dot_check<N,T>(N n = default, T zero = default)
+        protected void bitblock_dot_check<N,T>(N n = default, T zero = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.BitSpan<N,T>();
-                var y = Random.BitSpan<N,T>();
+                var x = Random.BitBlock<N,T>();
+                var y = Random.BitBlock<N,T>();
                 bit a = x % y;
-                var b = BitSpan.modprod(x,y);
+                var b = BitBlocks.modprod(x,y);
                 if(a != b)
                     Trace($"nbc {n}x{moniker<T>()} is a problem");
                 Claim.yea(a == b);            
@@ -98,7 +98,7 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)            
             {
                 var bs = Random.BitString(5,233);
-                var bc = BitSpan.from<T>(bs);
+                var bc = BitBlocks.from<T>(bs);
                 Claim.eq(bs.Length, bc.BitCount);
                 for(var j=0; j<bs.Length; j++)
                 {                
@@ -119,16 +119,16 @@ namespace Z0
             int n = natval<N>();
             var rep = default(N);
             var segcount = BitCalcs.mincells<T>(n);
-            Claim.eq(BitSpan<N,T>.CellCount, segcount);
-            var totalcap = BitSpan<N,T>.BitCapacity;
+            Claim.eq(BitBlock<N,T>.CellCount, segcount);
+            var totalcap = BitBlock<N,T>.BitCapacity;
             var segcap = bitsize<T>();
-            Claim.eq(BitSpan<N,T>.CellWidth, segcap);
+            Claim.eq(BitBlock<N,T>.CellWidth, segcap);
 
             var src = Random.Span<T>(SampleSize);
             for(var i=0; i<SampleSize; i+= segcount)
             {
                 var bcSrc = src.Slice(i,segcount);
-                var bc = bcSrc.ToBitSpan(rep);
+                var bc = bcSrc.ToBitBlock(rep);
                 ClaimEqual(bc,bc.ToBitString());
                 Claim.eq(n, bc.Width);
                 Claim.eq(segcap * segcount, totalcap);                
@@ -139,7 +139,7 @@ namespace Z0
             }
         }
 
-        protected void bitspan_create_check<T>(int bitcount)
+        protected void bb_create_check<T>(int bitcount)
             where T : unmanaged
         {
             var segcount = BitCalcs.mincells<T>(bitcount);
@@ -157,14 +157,14 @@ namespace Z0
             }
         }
 
-        protected void bitspan_pop_check<N,T>(N n = default)
+        protected void bitblock_pop_check<N,T>(N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {            
             var len = (int)(Mod8.div((uint)n.NatValue) + (Mod8.mod((uint)n.NatValue) != 0 ? 1 : 0));            
             var src = Random.Span<byte>(len);
 
-            var bc = BitSpan.load<N,T>(src);
+            var bc = BitBlocks.load<N,T>(src);
             var pc1 = bc.Pop();
 
             var bs = BitString.scalars(src);

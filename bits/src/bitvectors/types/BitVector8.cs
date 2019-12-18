@@ -22,8 +22,8 @@ namespace Z0
                     
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSpan<N8,byte>(in BitVector8 src)
-            => new BitSpan<N8,byte>(src.data);
+        public static implicit operator BitBlock<N8,byte>(in BitVector8 src)
+            => new BitBlock<N8,byte>(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<byte>(BitVector8 src)

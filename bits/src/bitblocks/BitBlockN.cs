@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="N">The number of contained bits</typeparam>
     /// <typeparam name="T">The storage cell type</typeparam>
-    public readonly ref struct BitSpan<N,T>
+    public readonly ref struct BitBlock<N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {        
@@ -45,28 +45,28 @@ namespace Z0
         public static int BitCapacity => CellCount * CellWidth;
         
         [MethodImpl(Inline)]
-        public static implicit operator BitSpan<T>(in BitSpan<N,T> x)
-            => new BitSpan<T>(x.data, (int)new N().NatValue);
+        public static implicit operator BitBlock<T>(in BitBlock<N,T> x)
+            => new BitBlock<T>(x.data, (int)new N().NatValue);
 
         [MethodImpl(Inline)]
-        public static BitSpan<N,T> operator &(in BitSpan<N,T> x, in BitSpan<N,T> y)
-            => new BitSpan<N,T>(mathspan.and(x.data, y.data, x.data.Replicate(true)));
+        public static BitBlock<N,T> operator &(in BitBlock<N,T> x, in BitBlock<N,T> y)
+            => new BitBlock<N,T>(mathspan.and(x.data, y.data, x.data.Replicate(true)));
 
         [MethodImpl(Inline)]
-        public static BitSpan<N,T> operator |(in BitSpan<N,T> x, in BitSpan<N,T> y)
-            => new BitSpan<N,T>(mathspan.or(x.data, y.data, x.data.Replicate(true)));
+        public static BitBlock<N,T> operator |(in BitBlock<N,T> x, in BitBlock<N,T> y)
+            => new BitBlock<N,T>(mathspan.or(x.data, y.data, x.data.Replicate(true)));
 
         [MethodImpl(Inline)]
-        public static BitSpan<N,T> operator ^(in BitSpan<N,T> lhs, in BitSpan<N,T> rhs)
-            => new BitSpan<N,T>(mathspan.xor(lhs.data, rhs.data, lhs.data.Replicate(true)));
+        public static BitBlock<N,T> operator ^(in BitBlock<N,T> lhs, in BitBlock<N,T> rhs)
+            => new BitBlock<N,T>(mathspan.xor(lhs.data, rhs.data, lhs.data.Replicate(true)));
 
         /// <summary>
         /// Computes the bitwise complement of the operand
         /// </summary>
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitSpan<N,T> operator ~(in BitSpan<N,T> x)
-            => new BitSpan<N,T>(mathspan.not(x.data, x.data.Replicate(true)));                        
+        public static BitBlock<N,T> operator ~(in BitBlock<N,T> x)
+            => new BitBlock<N,T>(mathspan.not(x.data, x.data.Replicate(true)));                        
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -74,23 +74,23 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static bit operator %(in BitSpan<N,T> x, in BitSpan<N,T> y)
-            => BitSpan.dot(x,y);
+        public static bit operator %(in BitBlock<N,T> x, in BitBlock<N,T> y)
+            => BitBlocks.dot(x,y);
 
         /// <summary>
         /// Computes the bitwise complement of the operand
         /// </summary>
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitSpan<N,T> operator -(in BitSpan<N,T> x)
-            => new BitSpan<N,T>(mathspan.negate(x.data, x.data.Replicate(true)));                        
+        public static BitBlock<N,T> operator -(in BitBlock<N,T> x)
+            => new BitBlock<N,T>(mathspan.negate(x.data, x.data.Replicate(true)));                        
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator true(in BitSpan<N,T> x)
+        public static bool operator true(in BitBlock<N,T> x)
             => x.Nonempty;
 
         /// <summary>
@@ -98,33 +98,33 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator false(in BitSpan<N,T> x)
+        public static bool operator false(in BitBlock<N,T> x)
             => !x.Nonempty;
 
         [MethodImpl(Inline)]
-        public static bit operator ==(in BitSpan<N,T> x, in BitSpan<N,T> y)
+        public static bit operator ==(in BitBlock<N,T> x, in BitBlock<N,T> y)
             => x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static bit operator !=(in BitSpan<N,T> x, in BitSpan<N,T> y)
+        public static bit operator !=(in BitBlock<N,T> x, in BitBlock<N,T> y)
             => !x.Equals(y);
 
         [MethodImpl(Inline)]
-        internal BitSpan(Span<T> src)
+        internal BitBlock(Span<T> src)
         {
             require(src.Length * CellWidth >= BitCount);
             this.data = src;
         }
 
         [MethodImpl(Inline)]
-        internal BitSpan(params T[] src)
+        internal BitBlock(params T[] src)
             : this(src.AsSpan())
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal BitSpan(Span<T> src, bool skipChecks)
+        internal BitBlock(Span<T> src, bool skipChecks)
             => this.data = src;
 
         /// <summary>
@@ -218,7 +218,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(in BitSpan<N,T> rhs)
+        public bool Equals(in BitBlock<N,T> rhs)
             => data.Identical(rhs.data);           
         
         public override bool Equals(object obj)

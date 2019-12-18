@@ -125,7 +125,7 @@ namespace Z0
         /// <summary>
         /// Queries mainpulates a row
         /// </summary>
-        public BitSpan<N,T> this[int row]
+        public BitBlock<N,T> this[int row]
         {
             [MethodImpl(Inline)]
             get => ReadRow(row);
@@ -139,17 +139,17 @@ namespace Z0
         }
                 
         [MethodImpl(Inline)]
-        public BitSpan<N,T> ReadRow(int row)  
+        public BitBlock<N,T> ReadRow(int row)  
         {                              
             var index = BitMatrix.tableindex(row, 0, RowDim, ColDim, default(T)); 
-            return new BitSpan<N,T>(data.Slice(index.RowIndex, index.RowCellCount),true);
+            return new BitBlock<N,T>(data.Slice(index.RowIndex, index.RowCellCount),true);
         }
 
         [MethodImpl(Inline)]
-        public readonly BitSpan<N,T> CopyRow(int row)                    
+        public readonly BitBlock<N,T> CopyRow(int row)                    
         {
             var index = BitMatrix.tableindex(row, 0, RowDim, ColDim, default(T));                
-            return new BitSpan<N,T>(data.Slice(index.RowIndex, index.RowCellCount).Replicate(),true);
+            return new BitBlock<N,T>(data.Slice(index.RowIndex, index.RowCellCount).Replicate(),true);
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace Z0
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public void SetCol(int col, BitSpan<M,T> src)
+        public void SetCol(int col, BitBlock<M,T> src)
         {
             for(var row=0; row < RowCount; row++)
                 this[row,col] = src[row];
@@ -168,10 +168,10 @@ namespace Z0
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public BitSpan<M,T> GetCol(int col)
+        public BitBlock<M,T> GetCol(int col)
         {
             var cidx = ColCount - col - 1;
-            var cv = BitSpan.alloc<M,T>();
+            var cv = BitBlocks.alloc<M,T>();
             for(var row = 0; row < RowCount; row++)            
                 cv[row] = this[row, cidx];                        
             return cv;

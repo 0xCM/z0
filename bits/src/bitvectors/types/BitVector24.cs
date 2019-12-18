@@ -37,8 +37,8 @@ namespace Z0
         
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSpan<N24,uint>(BitVector24 src)
-            => BitSpan.literal(src.data,N);
+        public static implicit operator BitBlock<N24,uint>(BitVector24 src)
+            => BitBlocks.literal(src.data,N);
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector64(BitVector24 src)

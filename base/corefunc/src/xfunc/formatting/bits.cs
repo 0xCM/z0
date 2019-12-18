@@ -230,7 +230,7 @@ namespace Z0
         /// <param name="specifier">If true, output will begin with the '0b' binary specifier</param>
         /// <param name="underscores">If true, the underscore character '_' will be used to delimit blocks, otherwise, spaces will be used</param>
         [MethodImpl(Inline)]
-        static string BitBlocks<T>(T src, int? blocksize = null, int? maxbits = null, bool specifier = false, bool underscores = false)
+        static string BlockedBits<T>(T src, int? blocksize = null, int? maxbits = null, bool specifier = false, bool underscores = false)
             where T : unmanaged
             => bracket(BitString.scalar(src,maxbits).Format(false, specifier, blocksize ?? 8, underscores ? AsciSym.Underscore : AsciSym.Space, null));
 
@@ -242,8 +242,8 @@ namespace Z0
         /// <param name="specifier">If true, output will begin with the '0b' binary specifier</param>
         /// <param name="underscores">If true, the underscore character '_' will be used to delimit blocks, otherwise, spaces will be used</param>
         [MethodImpl(Inline)]
-        public static string FormatBitBlocks(this byte src, int? blocksize = null, int? maxbits = null, bool specifier = false, bool underscores = false)
-            =>  BitBlocks(src, blocksize, maxbits, specifier, underscores);
+        public static string FormatBlockedBits(this byte src, int? blocksize = null, int? maxbits = null, bool specifier = false, bool underscores = false)
+            =>  BlockedBits(src, blocksize, maxbits, specifier, underscores);
 
         /// <summary>
         /// Block-formats the source value
@@ -253,8 +253,8 @@ namespace Z0
         /// <param name="specifier">If true, output will begin with the '0b' binary specifier</param>
         /// <param name="underscores">If true, the underscore character '_' will be used to delimit blocks, otherwise, spaces will be used</param>
         [MethodImpl(Inline)]
-        public static string FormatBitBlocks(this ushort src, int? blocksize = null, int? maxbits = null, bool specifier = false, bool underscores = false)
-            =>  BitBlocks(src, blocksize, maxbits, specifier, underscores);
+        public static string FormatBlockedBits(this ushort src, int? blocksize = null, int? maxbits = null, bool specifier = false, bool underscores = false)
+            =>  BlockedBits(src, blocksize, maxbits, specifier, underscores);
 
         /// <summary>
         /// Block-formats the source value
@@ -264,8 +264,8 @@ namespace Z0
         /// <param name="specifier">If true, output will begin with the '0b' binary specifier</param>
         /// <param name="underscores">If true, the underscore character '_' will be used to delimit blocks, otherwise, spaces will be used</param>
         [MethodImpl(Inline)]
-        public static string FormatBitBlocks(this uint src, int? blocksize = null, int? maxbits = null,  bool specifier = false, bool underscores = false)
-            =>  BitBlocks(src, blocksize, maxbits, specifier, underscores);
+        public static string FormatBlockedBits(this uint src, int? blocksize = null, int? maxbits = null,  bool specifier = false, bool underscores = false)
+            =>  BlockedBits(src, blocksize, maxbits, specifier, underscores);
 
         /// <summary>
         /// Block-formats the source value
@@ -275,8 +275,8 @@ namespace Z0
         /// <param name="specifier">If true, output will begin with the '0b' binary specifier</param>
         /// <param name="underscores">If true, the underscore character '_' will be used to delimit blocks, otherwise, spaces will be used</param>
         [MethodImpl(Inline)]
-        public static string FormatBitBlocks(this ulong src, int? blocksize = null, int? maxbits = null,  bool specifier = false, bool underscores = false)
-            =>  BitBlocks(src, blocksize, maxbits, specifier, underscores);
+        public static string FormatBlockedBits(this ulong src, int? blocksize = null, int? maxbits = null,  bool specifier = false, bool underscores = false)
+            =>  BlockedBits(src, blocksize, maxbits, specifier, underscores);
 
         /// <summary>
         /// Block-formats the vector, e.g. [01010101 01010101 ... 01010101] where by default the size of each block is the bit-width of a component
@@ -284,7 +284,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]   
-        public static string FormatBitBlocks<T>(this Vector128<T> src, int? blocksize = null, int? maxbits = null)
+        public static string FormatBlockedBits<T>(this Vector128<T> src, int? blocksize = null, int? maxbits = null)
             where T : unmanaged        
                 => bracket(src.ToBitString(maxbits).Format(false, false, blocksize ?? bitsize<T>(), AsciSym.Space,null));
 
@@ -294,7 +294,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]   
-        public static string FormatBitBlocks<T>(this Vector256<T> src, int? blocksize = null, int? maxbits = null)
+        public static string FormatBlockedBits<T>(this Vector256<T> src, int? blocksize = null, int? maxbits = null)
             where T : unmanaged        
                 => bracket(src.ToBitString(maxbits).Format(false, false, blocksize ?? bitsize<T>(), AsciSym.Space,null));
 

@@ -25,8 +25,8 @@ namespace Z0
         public static N16 N => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSpan<N16,ushort>(BitVector16 src)
-            => BitSpan.literal(src.data, N);
+        public static implicit operator BitBlock<N16,ushort>(BitVector16 src)
+            => BitBlocks.literal(src.data, N);
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<ushort>(BitVector16 src)

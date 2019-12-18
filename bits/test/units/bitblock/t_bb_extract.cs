@@ -10,16 +10,16 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_bsp_extract : t_bitspan<t_bsp_extract>
+    public class t_bb_extract : t_bitblock<t_bb_extract>
     {
-        public void bc_extract_64()
+        public void bb_extract_64()
         {
             var src = Random.Stream<ulong>().Take(SampleSize).ToArray();
             var lower = Random.Stream(leftclosed<byte>(0,32)).Take(SampleSize).ToArray();
             var upper = Random.Stream(leftclosed<byte>(32,64)).Take(SampleSize).ToArray();
             for(var i=0; i< SampleSize; i++)
             {
-                var v1 = BitSpan.literals(src[i]);
+                var v1 = BitBlocks.literals(src[i]);
                 var v2 = BitVector.from(n64,src[i]);
                 Claim.eq(v1.ToBitVector(n64), v2);
 
@@ -38,14 +38,14 @@ namespace Z0
             }
         }
 
-        public void bc_extract_32()
+        public void bb_extract_32()
         {
             var src = Random.Stream<uint>().Take(SampleSize).ToArray();
             var lower = Random.Stream(leftclosed<byte>(0,16)).Take(SampleSize).ToArray();
             var upper = Random.Stream(leftclosed<byte>(16,32)).Take(SampleSize).ToArray();
             for(var i=0; i< SampleSize; i++)
             {
-                var v1 = BitSpan.literals(src[i]);
+                var v1 = BitBlocks.literals(src[i]);
                 var v2 = BitVector.from(n32,src[i]);
                 Claim.eq(v1.ToBitVector(n32),v2);
 
@@ -55,14 +55,14 @@ namespace Z0
             }
         }
 
-        public void bc_extract_16()
+        public void bb_extract_16()
         {
             var src = Random.Stream<ushort>().Take(SampleSize).ToArray();
             var lower = Random.Stream(leftclosed<byte>(0,8)).Take(SampleSize).ToArray();
             var upper = Random.Stream(leftclosed<byte>(8,16)).Take(SampleSize).ToArray();
             for(var i=0; i< SampleSize; i++)
             {
-                var v1 = BitSpan.literals(src[i]);
+                var v1 = BitBlocks.literals(src[i]);
                 var v2 = BitVector.from(n16,src[i]);
                 Claim.eq(v1.ToBitVector(n16),v2);
 
@@ -72,14 +72,14 @@ namespace Z0
             }
         }
 
-        public void bc_extract_aligned()
+        public void bb_extract_aligned()
         {
             byte x0 = 0b11010110;
             byte x1 = 0b10010101;
             byte x2 = 0b10100011;
             byte x3 = 0b10011101;
             byte x4 = 0b01011000;
-            var bcx = BitSpan.literals(x0,x1,x2,x3,x4);
+            var bcx = BitBlocks.literals(x0,x1,x2,x3,x4);
             Claim.eq(40, bcx.BitCount);
 
             byte y0 = 0b0110;
@@ -97,11 +97,11 @@ namespace Z0
             byte y8 = 0b1000;
             byte y9 = 0b0101;
             var y89 = gmath.or(y8, gmath.sal(y9, 4));
-            var bcy = BitSpan.literals(y01,y23,y45,y67,y89);            
+            var bcy = BitBlocks.literals(y01,y23,y45,y67,y89);            
             Claim.eq(40, bcy.BitCount);
 
             ulong z = 0b0101100010011101101000111001010111010110;           
-            var bvz = BitSpan.literal(z,40);
+            var bvz = BitBlocks.literal(z,40);
             Claim.eq(40, bvz.BitCount);
 
             var bsy = bcy.ToBitString().Format(true);
@@ -134,17 +134,17 @@ namespace Z0
             Claim.eq(y9, bvz.Slice(36,39));    
         }
 
-        public void bc_extract_arb()
+        public void bb_extract_arb()
         {
 
             ulong z = 0b01011_00010_01110_11010_00111_00101_01110_10110;           
-            var bvz = BitSpan.literal(z,40);
+            var bvz = BitBlocks.literal(z,40);
             var xSrc =  BitConvert.GetBytes(z);
             Span<ushort> ySrc = xSrc.AsUInt16();
             Claim.eq(ySrc.Length*2, xSrc.Length);
 
-            var bvx = BitSpan.literals(xSrc.Slice(0,5).ToArray());
-            var bvy = BitSpan.literals(ySrc.Slice(0,2).ToArray());            
+            var bvx = BitBlocks.literals(xSrc.Slice(0,5).ToArray());
+            var bvy = BitBlocks.literals(ySrc.Slice(0,2).ToArray());            
             var bsx = bvx.ToBitString().Format(true);
             var bsz = bvz.ToBitString().Format(true);
             Claim.eq(bsx, bsz);

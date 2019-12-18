@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// A data structure that covers and arbitrary number of 256-bit blocks of packed bits
     /// </summary>
-    public readonly ref struct BitSpan<T>
+    public readonly ref struct BitBlock<T>
         where T : unmanaged
     {
         /// <summary>
@@ -32,23 +32,23 @@ namespace Z0
         public static int CellWidth => bitsize<T>();
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSpan<T>(Span<T> src)
-            => new BitSpan<T>(src, bitsize<T>());
+        public static implicit operator BitBlock<T>(Span<T> src)
+            => new BitBlock<T>(src, bitsize<T>());
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSpan<T>(T src)
-            => new BitSpan<T>(src, bitsize<T>());
+        public static implicit operator BitBlock<T>(T src)
+            => new BitBlock<T>(src, bitsize<T>());
 
         [MethodImpl(Inline)]
-        public static bit operator %(in BitSpan<T> x, in BitSpan<T> y)
-            => BitSpan.dot(x,y);
+        public static bit operator %(in BitBlock<T> x, in BitBlock<T> y)
+            => BitBlocks.dot(x,y);
 
         /// <summary>
         /// Computes the bitwise complement of the operand
         /// </summary>
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitSpan<T> operator ~(in BitSpan<T> src)
+        public static BitBlock<T> operator ~(in BitBlock<T> src)
             => default;
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator true(in BitSpan<T> src)
+        public static bool operator true(in BitBlock<T> src)
             => src.NonEmpty;
 
         /// <summary>
@@ -64,19 +64,19 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator false(in BitSpan<T> src)
+        public static bool operator false(in BitBlock<T> src)
             => !src.NonEmpty;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(in BitSpan<T> x, in BitSpan<T> y)
+        public static bool operator ==(in BitBlock<T> x, in BitBlock<T> y)
             => x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(in BitSpan<T> x, in BitSpan<T> y)
+        public static bool operator !=(in BitBlock<T> x, in BitBlock<T> y)
             => !x.Equals(y);
 
         [MethodImpl(Inline)]
-        internal BitSpan(T src, int bitcount)
+        internal BitBlock(T src, int bitcount)
         {            
             this.data = DataBlocks.single<T>(n256);
             head(data) = src;
@@ -84,14 +84,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal BitSpan(Span<T> src, int n)
+        internal BitBlock(Span<T> src, int n)
         {            
             this.data = DataBlocks.safeload(n256,src);
             this.BitCount = n;
         }
 
         [MethodImpl(Inline)]
-        internal BitSpan(Block256<T> src)
+        internal BitBlock(Block256<T> src)
         {            
             this.data = src;
             this.BitCount = src.BlockCount * 256;
@@ -276,11 +276,11 @@ namespace Z0
             return gmath.or(part1, part2);              
         }
 
-        public BitSpan<T> Replicate()
-            => new BitSpan<T>(data.Replicate());
+        public BitBlock<T> Replicate()
+            => new BitBlock<T>(data.Replicate());
                     
         [MethodImpl(Inline)]
-        public bool Equals(in BitSpan<T> y)
+        public bool Equals(in BitBlock<T> y)
             => data.Identical(y.data);
 
         [MethodImpl(Inline)]

@@ -16,8 +16,8 @@ namespace Z0
         /// Converts the matrix to a bitvector
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitSpan<N1024,uint> ToBitCells(this BitMatrix32 A)
-            => BitSpan.load(A.Data, n1024);
+        public static BitBlock<N1024,uint> ToBitCells(this BitMatrix32 A)
+            => BitBlocks.load(A.Data, n1024);
 
         /// <summary>
         /// Creates the matrix determined by a permutation

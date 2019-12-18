@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     using BG = Z0.BitGrid;
-    using BS = Z0.BitSpan;
+    using BS = Z0.BitBlocks;
     using BM = Z0.BitMatrix;
     using BV = Z0.BitVector;
 
@@ -561,38 +561,38 @@ namespace Z0
         }
 
         /// <summary>
-        /// Produces a natural bitspan
+        /// Produces a natural bitblock
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="n">The number of bits to cover</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitSpan<N,T> BitSpan<N,T>(this IPolyrand random)
+        public static BitBlock<N,T> BitBlock<N,T>(this IPolyrand random)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => BS.load<N,T>(random.Stream<T>().ToSpan(BitCalcs.tablecells<N,N1,T>()));
 
         /// <summary>
-        /// Produces a bitspan over a specified number of bits
+        /// Produces a bitblock over a specified number of bits
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="bitcount">The number of bits to cover</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitSpan<T> BitSpan<T>(this IPolyrand random, int bitcount)
+        public static BitBlock<T> BitBlock<T>(this IPolyrand random, int bitcount)
             where T : unmanaged
                 => BS.load<T>(random.Stream<T>().ToSpan(BS.cellcount<T>(bitcount)), bitcount);
 
         /// <summary>
-        /// Produces a bitspan over a random number of bits
+        /// Produces a bitblock over a random number of bits
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="minbits">The minimum bit count</param>
         /// <param name="maxbits">The maximum bit count</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitSpan<T> BitSpan<T>(this IPolyrand random, int minbits, int maxbits)
+        public static BitBlock<T> BitBlock<T>(this IPolyrand random, int minbits, int maxbits)
             where T : unmanaged
         {
             var len = random.Next<int>(minbits,++maxbits);
@@ -600,15 +600,15 @@ namespace Z0
         }
 
         /// <summary>
-        /// Produces a bitspan over a random number of bits
+        /// Produces a bitblock over a random number of bits
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="range">The range of potential bitvector lengths</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitSpan<T> BitSpan<T>(this IPolyrand random, Interval<int> range)
+        public static BitBlock<T> BitBlock<T>(this IPolyrand random, Interval<int> range)
             where T : unmanaged
-                => random.BitSpan<T>(range.Left, range.Right);                    
+                => random.BitBlock<T>(range.Left, range.Right);                    
 
         /// <summary>
         /// Produces a generic bitmatrix predicated on a primal type

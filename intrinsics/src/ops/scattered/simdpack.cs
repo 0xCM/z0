@@ -20,7 +20,7 @@ namespace Z0
     public static class SimdPack
     {
         /// <summary>
-        /// Packs 128 isolated bits into a 128-bitspan
+        /// Packs 128 isolated bits into a 128 natural block of bits
         /// </summary>
         /// <param name="src">The source bits to condense</param>
         [MethodImpl(Inline)]

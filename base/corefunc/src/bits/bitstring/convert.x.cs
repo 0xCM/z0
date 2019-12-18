@@ -93,7 +93,7 @@ namespace Z0
             => BitString.scalar(src, maxbits);
 
         /// <summary>
-        /// Converts a bitspan to a to a bitstring
+        /// Converts a span of bits to a to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
@@ -101,7 +101,7 @@ namespace Z0
             => BitString.load((ReadOnlySpan<bit>)src); 
 
         /// <summary>
-        /// Converts a readonly bitspan to a bitstring
+        /// Converts a readonly span of bits to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
