@@ -7,15 +7,11 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Diagnostics;
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
 
-    /// <summary>
-    /// Defines extensions to <see cref="Assembly"/> type 
-    /// </summary>
     public static partial class Reflections
     {
         /// <summary>

@@ -11,22 +11,21 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class Perm
+    partial class Perms
     {
-
         /// <summary>
         /// Allocates an empty permutation of specified length
         /// </summary>
         [MethodImpl(Inline)]
-        public static PermSpec<T> alloc<T>(int n)
+        public static Perm<T> alloc<T>(int n)
             where T : unmanaged
-                => new PermSpec<T>(new T[n]);
+                => new Perm<T>(new T[n]);
 
         /// <summary>
         /// Allocates an empty permutation
         /// </summary>
         [MethodImpl(Inline)]
-        public static PermSpec alloc(int n)
-            => new PermSpec(new int[n]);
+        public static Perm alloc(int n)
+            => new Perm(new int[n]);
     }
 }

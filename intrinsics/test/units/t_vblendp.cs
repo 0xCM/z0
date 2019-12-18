@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.Intrinsics;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     using static zfunc;
-    using static HexConst;
 
     public class t_vblendp : t_vinx<t_vblendp>
     {
@@ -36,19 +36,14 @@ namespace Z0
             var w = n256;
             var t = z8;
             var n = n64;
-            var pick = BitMasks.Msb8;
+            var tf = 4;
+            var pick = BitMask.msb(n1,n1,t);
 
             var pattern = DataBlocks.single(w,t);
             for(var i=0; i< pattern.CellCount; i++)
-                pattern[i] = (i % 4 == 0) ? pick : t;
+                pattern[i] = (i % tf == 0) ? pick : t;
             
             
-            /*
-                |  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 |
-                | 32  1  2  3 36  5  6  7 40  9 10 11 44 13 14 15 48 17 18 19 52 21 22 23 56 25 26 27 60 29 30 31  0 33 34 35  4 37 38 39  8 41 42 43 12 45 46 47 16 49 50 51 20 53 54 55 24 57 58 59 28 61 62 63 |
-
-            */
-
             var spec = pattern.LoadVector();
             var x = vbuild.increments(w, t);
             var y = ginx.vadd(x, gmath.add(x.LastCell(), gmath.one(t)));            
@@ -59,9 +54,7 @@ namespace Z0
             ginx.vlo(z).StoreTo(dst,0);
             ginx.vhi(z).StoreTo(dst,1);
 
-            var perm = Perm.natural(n,dst.Data);
-            Trace(perm.Format());  
-            
+            var perm = Perms.define(dst.Data);            
             for(var i=0; i< perm.Length; i++)
             {
                 var identity = i == perm[i];
@@ -72,6 +65,143 @@ namespace Z0
                     Claim.eq(i,k);
                 }
             }
+        }
+
+        static Block128<T> swaps_pattern<T>(N128 w, int tf, T t = default)
+            where T : unmanaged
+        {
+            var pick = BitMask.msb(n1,n1,t);
+            var pattern = DataBlocks.single(w,t);
+            for(var i=0; i< pattern.CellCount; i++)
+                pattern[i] = (i % tf == 0) ? pick : t;
+            return pattern;
+        }
+
+        static T enabled<T>(T t = default)
+            where T : unmanaged
+                => BitMask.msb(n1,n1,t);
+
+        static Block128<T> rrll_pattern<T>(N128 w, T t = default)
+            where T : unmanaged
+                => ginxs.broadcast(BitMask.even(n2,n2,z64), enabled(t), DataBlocks.single(w,t));
+
+        static Block128<T> llrr_pattern<T>(N128 w, T t = default)
+            where T : unmanaged
+                => ginxs.broadcast(BitMask.odd(n2,n2,z64), enabled(t), DataBlocks.single(w,t));
+
+        static Block128<T> rl_pattern<T>(N128 w, T t = default)
+            where T : unmanaged
+                => ginxs.broadcast(BitMask.lsb(n2,n1,z64), enabled(t), DataBlocks.single(w,t));
+
+        static Block128<T> lr_pattern<T>(N128 w, T t = default)
+            where T : unmanaged
+                => ginxs.broadcast(BitMask.msb(n2,n1,z64), enabled(t), DataBlocks.single(w,t));
+
+        void vblendp_128x8u<T>(Block128<T> pattern, [Caller] string title = null)
+            where T : unmanaged
+        {
+            var w = n128;
+            var t = default(T);
+            var pn = n32;
+
+            Claim.eq(natval(pn),TypeMath.div(w,t) * 2);
+
+            var spec = pattern.LoadVector();
+            var left = vbuild.increments(w, t);
+            var right = ginx.vadd(left, gmath.add(left.LastCell(), gmath.one(t)));            
+            var blend = ginx.vblendp(left,right,spec);       
+
+
+            var dst = DataBlocks.alloc(w,2,t);
+            ginx.vlo(blend).StoreTo(dst,0);
+            ginx.vhi(blend).StoreTo(dst,1);
+
+            var perm = Perms.define(dst.Data);            
+            var tc = 0;
+            for(var i=0; i< perm.Length; i++)
+            {
+                var ti = convert<T>(i);
+                var identity = gmath.eq(ti ,perm[i]);
+                if(!identity)
+                {
+                    var j = perm[i];
+                    var k = perm[j];
+                    Claim.eq(ti,k);
+                    tc++;
+                    
+                }
+            }
+
+            Trace($"* {title}: vector width = {w}, swap count = {tc}, cell type = {typename(t)}, perm length = {pn}");
+            Trace($"left:  {left.Format(pad:2)}");
+            Trace($"right: {right.Format(pad:2)}");
+            Trace(perm.Format());  
+            Trace(string.Empty);  
+        }
+
+
+        public void vblendp_perm32_128x8u()
+        {
+            var w = n128;
+            var t = z8;
+
+            void swaps()
+            {
+                var title = nameof(swaps);
+                vblendp_128x8u(swaps_pattern(w, 1,t), title);
+                vblendp_128x8u(swaps_pattern(w, 2,t), title);
+                vblendp_128x8u(swaps_pattern(w, 3,t), title);
+                vblendp_128x8u(swaps_pattern(w, 4,t), title);
+                vblendp_128x8u(swaps_pattern(w, 5,t), title);
+                vblendp_128x8u(swaps_pattern(w, 6,t), title);
+                vblendp_128x8u(swaps_pattern(w, 7,t), title);
+            }
+
+            void lr()
+                => vblendp_128x8u(lr_pattern(n128,z8), nameof(lr));
+
+            void rl()
+                => vblendp_128x8u(rl_pattern(n128,z8), nameof(rl));
+
+            void llrr()
+                => vblendp_128x8u(llrr_pattern(n128,z8), nameof(llrr));
+
+            void rrll()
+                => vblendp_128x8u(rrll_pattern(n128,z8), nameof(rrll));
+
+            lr();
+            rl();
+            llrr();
+            rrll();
+
+            /*
+
+            * lr: vector width = 128, swap count = 16, cell type = byte, perm length = 32
+            left:  [ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15]
+            right: [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+            |  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 |
+            |  0 17  2 19  4 21  6 23  8 25 10 27 12 29 14 31 16  1 18  3 20  5 22  7 24  9 26 11 28 13 30 15 |
+
+            * rl: vector width = 128, swap count = 16, cell type = byte, perm length = 32
+            left:  [ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15]
+            right: [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+            |  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 |
+            | 16  1 18  3 20  5 22  7 24  9 26 11 28 13 30 15  0 17  2 19  4 21  6 23  8 25 10 27 12 29 14 31 |
+
+            * llrr: vector width = 128, swap count = 16, cell type = byte, perm length = 32
+            left:  [ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15]
+            right: [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+            |  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 |
+            |  0  1 18 19  4  5 22 23  8  9 26 27 12 13 30 31 16 17  2  3 20 21  6  7 24 25 10 11 28 29 14 15 |
+
+            * rrll: vector width = 128, swap count = 16, cell type = byte, perm length = 32
+            left:  [ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15]
+            right: [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+            |  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 |
+            | 16 17  2  3 20 21  6  7 24 25 10 11 28 29 14 15  0  1 18 19  4  5 22 23  8  9 26 27 12 13 30 31 |
+
+            */
+
         }
 
         protected void vblendp_check<P,S,T>(N128 w, P np, S pattern, T t = default)
@@ -88,7 +218,7 @@ namespace Z0
             ginx.vlo(z).StoreTo(dst,0);            
             ginx.vhi(z).StoreTo(dst,1);            
 
-            var perm = Perm.natural(np,dst.Data);
+            var perm = Perms.define(dst.Data);
             for(var i=0; i< perm.Length; i++)
             {
                 var identity = gmath.eq(convert<T>(i), perm[i]);
@@ -116,7 +246,7 @@ namespace Z0
             z.Lo.StoreTo(dst,0);
             z.Hi.StoreTo(dst,1);
 
-            var perm = Perm.natural(np,dst.Data);
+            var perm = Perms.define(dst.Data);
             for(var i=0; i< perm.Length; i++)
             {
                 var identity = gmath.eq(convert<T>(i), perm[i]);

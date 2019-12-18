@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vbutterfly(N1 n, Vector128<byte> x)
+        public static Vector128<byte> vbfly(N1 n, Vector128<byte> x)
             => vbutterfly(x,v66(n128),1);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vbutterfly(N1 n, Vector128<ushort> x)
+        public static Vector128<ushort> vbfly(N1 n, Vector128<ushort> x)
             => vbutterfly(x,v6666(n128),1);
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vbutterfly(N1 n, Vector128<uint> x)
+        public static Vector128<uint> vbfly(N1 n, Vector128<uint> x)
             => vbutterfly(x,v66666666(n128),1);
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vbutterfly(N1 n, Vector128<ulong> x)
+        public static Vector128<ulong> vbfly(N1 n, Vector128<ulong> x)
             => vbutterfly(x,v6666666666666666(n128),1);
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vbutterfly(N2 n, Vector128<byte> x)
+        public static Vector128<byte> vbfly(N2 n, Vector128<byte> x)
             => vbutterfly(x,v3C(n128),2);
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vbutterfly(N2 n, Vector128<ushort> x)
+        public static Vector128<ushort> vbfly(N2 n, Vector128<ushort> x)
             => vbutterfly(x,v3C3C(n128),2);
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vbutterfly(N2 n, Vector128<uint> x)
+        public static Vector128<uint> vbfly(N2 n, Vector128<uint> x)
             => vbutterfly(x,v3C3C3C3C(n128),2);
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vbutterfly(N2 n, Vector128<ulong> x)
+        public static Vector128<ulong> vbfly(N2 n, Vector128<ulong> x)
             => vbutterfly(x,v3C3C3C3C3C3C3C3C(n128),2);
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         /// <remarks> [0 1 2 3 ] -> [0 2 1 3] </remarks>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vbutterfly(N4 n, Vector128<ushort> x)
+        public static Vector128<ushort> vbfly(N4 n, Vector128<ushort> x)
             => vbutterfly(x,v0FF0(n128),4);
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Z0
         /// [0 | 2 1 | 3 || 4 | 6 5 | 7]
         /// </remarks>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vbutterfly(N4 n, Vector128<uint> x)
+        public static Vector128<uint> vbfly(N4 n, Vector128<uint> x)
             => vbutterfly(x,v0FF00FF0(n128),4);
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace Z0
         /// [0 | 2 1 | 3 || 4 | 6 5 | 7 || 8 | A 9 | B || C | E D | F]
         /// </remarks>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vbutterfly(N4 n, Vector128<ulong> x)
+        public static Vector128<ulong> vbfly(N4 n, Vector128<ulong> x)
             => vbutterfly(x,v0FF00FF00FF00FF0(n128),4);
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         /// <remarks>[0 1 2 3] -> [0 2 1 3]</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vbutterfly(N8 n, Vector128<uint> x)
+        public static Vector128<uint> vbfly(N8 n, Vector128<uint> x)
             => vbutterfly(x,v00FFFF00(n128),8);
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         /// <remarks> [0 1 2 3 | 4 5 6 7] -> [0 2 1 3 | 4 6 5 7]</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vbutterfly(N8 n, Vector128<ulong> x)
+        public static Vector128<ulong> vbfly(N8 n, Vector128<ulong> x)
             => vbutterfly(x,v00FFFF0000FFFF00(n128),8);
  
         /// <summary>
@@ -153,7 +153,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         /// <remarks>[0 1 2 3] -> [0 2 1 3]</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vbutterfly(N16 n, Vector128<ulong> x)
+        public static Vector128<ulong> vbfly(N16 n, Vector128<ulong> x)
             => vbutterfly(x,v0000FFFFFFFF0000(n128),16);
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> vbutterfly(N1 n, Vector256<byte> x)
+        public static Vector256<byte> vbfly(N1 n, Vector256<byte> x)
             => vbutterfly(x,v66(n256),1);
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vbutterfly(N1 n, Vector256<ushort> x)
+        public static Vector256<ushort> vbfly(N1 n, Vector256<ushort> x)
             => vbutterfly(x,v6666(n256),1);
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vbutterfly(N1 n, Vector256<uint> x)
+        public static Vector256<uint> vbfly(N1 n, Vector256<uint> x)
             => vbutterfly(x,v66666666(n256),1);
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vbutterfly(N1 n, Vector256<ulong> x)
+        public static Vector256<ulong> vbfly(N1 n, Vector256<ulong> x)
             => vbutterfly(x,v6666666666666666(n256),1);
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> vbutterfly(N2 n, Vector256<byte> x)
+        public static Vector256<byte> vbfly(N2 n, Vector256<byte> x)
             => vbutterfly(x,v3C(n256),2);
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vbutterfly(N2 n, Vector256<ushort> x)
+        public static Vector256<ushort> vbfly(N2 n, Vector256<ushort> x)
             => vbutterfly(x,v3C3C(n256),2);
 
         /// <summary>
@@ -216,7 +216,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vbutterfly(N2 n, Vector256<uint> x)
+        public static Vector256<uint> vbfly(N2 n, Vector256<uint> x)
             => vbutterfly(x,v3C3C3C3C(n256),2);
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vbutterfly(N2 n, Vector256<ulong> x)
+        public static Vector256<ulong> vbfly(N2 n, Vector256<ulong> x)
             => vbutterfly(x,v3C3C3C3C3C3C3C3C(n256),2);
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         /// <remarks> [0 1 2 3 ] -> [0 2 1 3] </remarks>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vbutterfly(N4 n, Vector256<ushort> x)
+        public static Vector256<ushort> vbfly(N4 n, Vector256<ushort> x)
             => vbutterfly(x,v0FF0(n256),4);
 
         /// <summary>
@@ -248,7 +248,7 @@ namespace Z0
         /// [0 | 2 1 | 3 || 4 | 6 5 | 7]
         /// </remarks>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vbutterfly(N4 n, Vector256<uint> x)
+        public static Vector256<uint> vbfly(N4 n, Vector256<uint> x)
             => vbutterfly(x,v0FF00FF0(n256),4);
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace Z0
         /// [0 | 2 1 | 3 || 4 | 6 5 | 7 || 8 | A 9 | B || C | E D | F]
         /// </remarks>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vbutterfly(N4 n, Vector256<ulong> x)
+        public static Vector256<ulong> vbfly(N4 n, Vector256<ulong> x)
             => vbutterfly(x,v0FF00FF00FF00FF0(n256),4);
 
         /// <summary>
@@ -271,7 +271,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         /// <remarks>[0 1 2 3] -> [0 2 1 3]</remarks>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vbutterfly(N8 n, Vector256<uint> x)
+        public static Vector256<uint> vbfly(N8 n, Vector256<uint> x)
             => vbutterfly(x,v00FFFF00(n256),8);
 
         /// <summary>
@@ -281,7 +281,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         /// <remarks> [0 1 2 3 | 4 5 6 7] -> [0 2 1 3 | 4 6 5 7]</remarks>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vbutterfly(N8 n, Vector256<ulong> x)
+        public static Vector256<ulong> vbfly(N8 n, Vector256<ulong> x)
             => vbutterfly(x,v00FFFF0000FFFF00(n256),8);
  
         /// <summary>
@@ -291,7 +291,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         /// <remarks>[0 1 2 3] -> [0 2 1 3]</remarks>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vbutterfly(N16 n, Vector256<ulong> x)
+        public static Vector256<ulong> vbfly(N16 n, Vector256<ulong> x)
             => vbutterfly(x,v0000FFFFFFFF0000(n256),16);
 
         /// <summary>

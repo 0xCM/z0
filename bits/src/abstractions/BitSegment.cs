@@ -12,18 +12,18 @@ namespace Z0
 
     using static As;
 
-    public readonly struct SegmentSpec 
+    public readonly struct BitSegment 
     {
         public readonly ushort FirstPos;
 
         public readonly ushort LastPos;
 
         [MethodImpl(Inline)]
-        public static implicit operator SegmentSpec((ushort first, ushort last) src)
-            => new SegmentSpec(src.first, src.last);
+        public static implicit operator BitSegment((ushort first, ushort last) src)
+            => new BitSegment(src.first, src.last);
 
         [MethodImpl(Inline)]
-        public SegmentSpec(ushort first, ushort last)
+        public BitSegment(ushort first, ushort last)
         {
             this.FirstPos = first;
             this.LastPos = last;

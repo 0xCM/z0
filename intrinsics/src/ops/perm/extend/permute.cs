@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="p">The permutation to apply</param>
-        public static BitString Permute(this BitString src, PermSpec p)
+        public static BitString Permute(this BitString src, Perm p)
         {
             var dst = BitString.alloc(p.Length);
             for(var i = 0; i < p.Length; i++)
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="p">The permutation to apply</param>
-        public static Span<T> Permute<T>(this ReadOnlySpan<T> src, PermSpec p)
+        public static Span<T> Permute<T>(this ReadOnlySpan<T> src, Perm p)
         {
             Span<T> dst = new T[src.Length];
             for(var i=0; i<p.Length; i++)
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="p">The permutation to apply</param>
         [MethodImpl(Inline)]
-        public static Span<T> Permute<T>(this Span<T> src, PermSpec p)
+        public static Span<T> Permute<T>(this Span<T> src, Perm p)
             => src.ReadOnly().Permute(p);
     }
 

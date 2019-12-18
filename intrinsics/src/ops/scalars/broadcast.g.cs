@@ -14,6 +14,44 @@ namespace Z0
     partial class ginxs
     {
         /// <summary>
+        /// Expands a bit-level S-pattern to a block-level T-pattern
+        /// </summary>
+        /// <param name="src">The source pattern</param>
+        /// <param name="enabled">The value to assign to a block when the corresponding index-identified bit is enabled</param>
+        /// <param name="dst">The target pattern receiver</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly Block128<T> broadcast<S,T>(S src, T enabled, in Block128<T> dst)
+            where S : unmanaged
+            where T : unmanaged
+        {
+            var length = math.min(dst.CellCount, bitsize<S>());
+            for(var i=0; i< length; i++)
+                dst[i] = BitMask.testbit(src,i) ? enabled : default;
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Expands a bit-level S-pattern to a block-level T-pattern
+        /// </summary>
+        /// <param name="src">The source pattern</param>
+        /// <param name="enabled">The value to assign to a block when the corresponding index-identified bit is enabled</param>
+        /// <param name="dst">The target pattern receiver</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly Block256<T> broadcast<S,T>(S src, T enabled, in Block256<T> dst)
+            where S : unmanaged
+            where T : unmanaged
+        {
+            var length = math.min(dst.CellCount, bitsize<S>());
+            for(var i=0; i< length; i++)
+                dst[i] = BitMask.testbit(src,i) ? enabled : default;
+            return ref dst;
+        }
+
+        /// <summary>
         /// Broadcasts an S-cell over a T-cell
         /// </summary>
         /// <param name="src">The source cell value</param>

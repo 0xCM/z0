@@ -13,6 +13,20 @@ namespace Z0
 
     partial class ginxs
     {
+        public static Span<T> bitpack<S,T>(ReadOnlySpan<S> src, T t = default)
+            where S : unmanaged
+            where T : unmanaged
+        {
+            
+            var inbits = src.Length * bitsize<S>();
+            var outcells = inbits / bitsize<S>() + (inbits % bitsize<S>() == 0 ? 0 : 1);
+            Span<T> dstcells = new T[outcells];
+            
+
+            return default;
+            
+        }
+
         /// <summary>
         /// Packs 8 1-bit values taken from the least significant bit of each source byte
         /// </summary>
@@ -57,6 +71,14 @@ namespace Z0
                 => pack32(in src.BlockRef(block));
 
         /// <summary>
+        /// Packs 64 1-bit values taken from the least significant bit of each source byte from both hi and lo sources
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static ulong bitpack<T>(in Block512<T> src, int block = 0)
+            where T : unmanaged
+                => pack64(in src.BlockRef(block));
+
+        /// <summary>
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         [MethodImpl(Inline)]
@@ -68,13 +90,9 @@ namespace Z0
         /// Packs 64 1-bit values taken from the least significant bit of each source byte from both hi and lo sources
         /// </summary>
         [MethodImpl(Inline)]
-        public static ulong bitpack<T>(in ConstBlock256<T> lo, in ConstBlock256<T> hi, int block = 0)
+        public static ulong bitpack<T>(in ConstBlock512<T> src, int block = 0)
             where T : unmanaged
-        {
-            var dst = (ulong)bitpack(lo,block);
-            dst |= ((ulong)bitpack(hi,block) << 32);
-            return dst;
-        }
+                => pack64(in src.BlockRef(block));
 
         /// <summary>
         /// Packs 8 1-bit values taken from the least significant bit of each source byte
@@ -82,10 +100,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static byte pack8<T>(in T src)
             where T : unmanaged
-        {
-            var x = ginx.vscalar(n128, const64(src));
-            return (byte)ginx.vtakemask(ginx.vsll(x,7));
-        }
+                => (byte)ginx.vtakemask(ginx.vsll(ginx.vscalar(n128, const64(src)),7));
 
         /// <summary>
         /// Packs 16 1-bit values taken from the least significant bit of each source byte
@@ -93,10 +108,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ushort pack16<T>(in T src)
             where T : unmanaged
-        {
-            var x = ginx.vload(n128, const64(src));
-            return ginx.vtakemask(ginx.vsll(x,7));
-        }
+            => ginx.vtakemask(ginx.vsll(ginx.vload(n128, const64(src)),7));
 
         /// <summary>
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
@@ -104,9 +116,16 @@ namespace Z0
         [MethodImpl(Inline)]
         static uint pack32<T>(in T src)
             where T : unmanaged
+                => ginx.vtakemask(ginx.vsll(ginx.vload(n256, const64(src)),7));
+
+        [MethodImpl(Inline)]
+        static ulong pack64<T>(in T src, int block = 0)
+            where T : unmanaged
         {
-            var x = ginx.vload(n256, const64(src));
-            return ginx.vtakemask(ginx.vsll(x,7));
+            var dst = 0ul;
+            dst = (ulong)pack32(in src);
+            dst |=(ulong)pack32(in skip(in src, 32)) << 32;
+            return dst;
         }
     }
 }

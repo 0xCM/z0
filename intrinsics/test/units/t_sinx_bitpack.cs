@@ -18,7 +18,7 @@ namespace Z0
                 var dst = DataBlocks.single<byte>(n128);
 
                 ginxs.unpackbits(src, dst);            
-                check_unpacking(src,dst);
+                unpack_check(src,dst);
 
                 var rebound = ginxs.bitpack(dst);
                 Claim.eq(src,rebound);
@@ -33,14 +33,31 @@ namespace Z0
                 var dst = DataBlocks.single<byte>(n256);
                 ginxs.unpackbits(src, dst);
 
-                check_unpacking(src,dst);
+                unpack_check(src,dst);
                 
                 var rebound = ginxs.bitpack(dst);
                 Claim.eq(src,rebound);
             }
         }
 
-        void check_unpacking<T>(T src, in ReadOnlySpan<byte> y)
+        public void unpack_64()
+        {
+            for(var sample=0; sample< SampleSize; sample++)
+            {
+                var src = Random.Next<ulong>();
+                var dst = DataBlocks.single<byte>(n512);
+                ginxs.unpackbits(src, dst);
+
+                unpack_check(src,dst);
+                
+                var rebound = ginxs.bitpack(dst);
+                Claim.eq(src,rebound);
+            }
+
+        }
+
+
+        void unpack_check<T>(T src, in ReadOnlySpan<byte> y)
             where T : unmanaged
         {
             var count = math.min(bitsize<T>(), y.Length);

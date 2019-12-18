@@ -96,7 +96,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => NatMath.div(w,N8.Rep)/Unsafe.SizeOf<T>();
-
     }
-
 }

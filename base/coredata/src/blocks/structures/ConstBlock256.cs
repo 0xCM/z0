@@ -112,12 +112,12 @@ namespace Z0
             => ref Unsafe.Add(ref Unsafe.AsRef(in Head), BlockLength*block + segment);
 
         /// <summary>
-        /// Non-allocating operation that wraps a span around the content of an index-identified block
+        /// Retrieves an index-identified data block
         /// </summary>
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
-        public ReadOnlySpan<T> SpanBlock(int block)    
-            => data.Slice(block * blocklen<T>(N), blocklen<T>(N));
+        public ReadOnlySpan<T> Block(int block)    
+            => data.Slice(block * BlockLength, BlockLength);
 
         /// <summary>
         /// Reinterprets the storage cell type

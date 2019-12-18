@@ -22,8 +22,8 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static byte butterfly(N1 n, byte x)
-            => butterfly(x,x66,1);
+        public static byte bfly(N1 n, byte x)
+            => bfly(x,x66,1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -31,8 +31,8 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static ushort butterfly(N1 n, ushort x)
-            => butterfly(x,x6666,1);
+        public static ushort bfly(N1 n, ushort x)
+            => bfly(x,x6666,1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -40,8 +40,8 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static uint butterfly(N1 n, uint x)
-            => butterfly(x,x66666666,1);
+        public static uint bfly(N1 n, uint x)
+            => bfly(x,x66666666,1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -49,8 +49,8 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static ulong butterfly(N1 n, ulong x)
-            => butterfly(x,x6666666666666666,1);
+        public static ulong bfly(N1 n, ulong x)
+            => bfly(x,x6666666666666666,1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior 2-bit segments
@@ -58,8 +58,8 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static byte butterfly(N2 n, byte x)
-            => butterfly(x,x3C,2);
+        public static byte bfly(N2 n, byte x)
+            => bfly(x,x3C,2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
@@ -67,8 +67,8 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static ushort butterfly(N2 n, ushort x)
-            => butterfly(x,x3C3C,2);
+        public static ushort bfly(N2 n, ushort x)
+            => bfly(x,x3C3C,2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
@@ -76,8 +76,8 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static uint butterfly(N2 n, uint x)
-            => butterfly(x,x3C3C3C3C,2);
+        public static uint bfly(N2 n, uint x)
+            => bfly(x,x3C3C3C3C,2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
@@ -85,8 +85,8 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static ulong butterfly(N2 n, ulong x)
-            => butterfly(x,x3C3C3C3C3C3C3C3C,2);
+        public static ulong bfly(N2 n, ulong x)
+            => bfly(x,x3C3C3C3C3C3C3C3C,2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments
@@ -95,8 +95,8 @@ namespace Z0
         /// <param name="x">The bit source</param>
         /// <remarks> [0 1 2 3 ] -> [0 2 1 3] </remarks>
         [MethodImpl(Inline)]
-        public static ushort butterfly(N4 n, ushort x)
-            => butterfly(x,x0FF0,4);
+        public static ushort bfly(N4 n, ushort x)
+            => bfly(x,x0FF0,4);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
@@ -108,8 +108,8 @@ namespace Z0
         /// [0 | 2 1 | 3 || 4 | 6 5 | 7]
         /// </remarks>
         [MethodImpl(Inline)]
-        public static uint butterfly(N4 n, uint x)
-            => butterfly(x,x0FF00FF0,4);
+        public static uint bfly(N4 n, uint x)
+            => bfly(x,x0FF00FF0,4);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
@@ -121,8 +121,8 @@ namespace Z0
         /// [0 | 2 1 | 3 || 4 | 6 5 | 7 || 8 | A 9 | B || C | E D | F]
         /// </remarks>
         [MethodImpl(Inline)]
-        public static ulong butterfly(N4 n, ulong x)
-            => butterfly(x,x0FF00FF00FF00FF0,4);
+        public static ulong bfly(N4 n, ulong x)
+            => bfly(x,x0FF00FF00FF00FF0,4);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments
@@ -131,8 +131,8 @@ namespace Z0
         /// <param name="x">The bit source</param>
         /// <remarks>[0 1 2 3] -> [0 2 1 3]</remarks>
         [MethodImpl(Inline)]
-        public static uint butterfly(N8 n, uint x)
-            => butterfly(x,x00FFFF00,8);
+        public static uint bfly(N8 n, uint x)
+            => bfly(x,x00FFFF00,8);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments of each 32-bit segment.
@@ -141,8 +141,8 @@ namespace Z0
         /// <param name="x">The bit source</param>
         /// <remarks> [0 1 2 3 | 4 5 6 7] -> [0 2 1 3 | 4 6 5 7]</remarks>
         [MethodImpl(Inline)]
-        public static ulong butterfly(N8 n, ulong x)
-            => butterfly(x,x00FFFF0000FFFF00,8);
+        public static ulong bfly(N8 n, ulong x)
+            => bfly(x,x00FFFF0000FFFF00,8);
  
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior 16-bit segments
@@ -151,8 +151,8 @@ namespace Z0
         /// <param name="x">The bit source</param>
         /// <remarks>[0 1 2 3] -> [0 2 1 3]</remarks>
         [MethodImpl(Inline)]
-        public static ulong butterfly(N16 n, ulong x)
-            => butterfly(x,x0000FFFFFFFF0000,16);
+        public static ulong bfly(N16 n, ulong x)
+            => bfly(x,x0000FFFFFFFF0000,16);
 
         /// <summary>
         /// Effects a butterfly permutation on the source value, predicated on a supplied mask and shift amount
@@ -161,7 +161,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         /// <remarks>The algorithm follows that of Arndt's Matters Computational, bitbutterfly.h.</remarks>
         [MethodImpl(Inline)]
-        static T butterfly<T>(T x, T mask, int shift)
+        static T bfly<T>(T x, T mask, int shift)
             where T : unmanaged
         {
             var y = gmath.and(x, mask);

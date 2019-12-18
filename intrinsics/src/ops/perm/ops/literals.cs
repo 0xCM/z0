@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class Perm
+    partial class Perms
     {
         /// <summary>
         /// Extracts the ordered sequence of symbolic literals that define a 4-symbol permutation

@@ -10,13 +10,19 @@ namespace Z0
 
     public class t_butterfly : t_vcpu<t_butterfly>
     {
+        public void bfly_4x2()
+        {
+
+
+        }
+
         //[0 1 2 3] -> [0 2 1 3]
         public void butterfly_16x64u()
         {
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.Next<ulong>();
-                var y = gbits.butterfly(n16, x);
+                var y = gbits.bfly(n16, x);
                 Bits.split(x, out var x0, out var x1, out var x2, out var x3);
                 Bits.split(y, out var y0, out var y1, out var y2, out var y3);
                 Claim.eq(x0,y0);
@@ -32,7 +38,7 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.Next<uint>();
-                var y = gbits.butterfly(n8, x);
+                var y = gbits.bfly(n8, x);
                 Bits.split(x, out var x0, out var x1, out var x2, out var x3);
                 Bits.split(y, out var y0, out var y1, out var y2, out var y3);
                 Claim.eq(x0,y0);
@@ -53,7 +59,7 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)
             {
                 var a = Random.Next<uint>();
-                var b = bitstring(Bits.butterfly(n4, a));
+                var b = bitstring(Bits.bfly(n4, a));
                 var c = bitstring(a);
 
                 Claim.eq(BitString.scalar<byte>(c[0..3]), BitString.scalar<byte>(b[0..3]));
@@ -75,11 +81,11 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.CpuVector<uint>(n);
-                var y = gbits.vbutterfly(w, x);
+                var y = gbits.vbfly(w, x);
                 var xs = x.ToSpan();
                 var zs = DataBlocks.single<uint>(n);
                 for(var j=0; j<zs.CellCount; j++)
-                    zs[j] = gbits.butterfly(w,xs[j]);
+                    zs[j] = gbits.bfly(w,xs[j]);
                 var z = zs.LoadVector();
                 Claim.eq(z,y);
             }
@@ -92,11 +98,11 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.CpuVector<uint>(n);
-                var y = gbits.vbutterfly(w, x);
+                var y = gbits.vbfly(w, x);
                 var xs = x.ToSpan();
                 var zs = DataBlocks.single<uint>(n);
                 for(var j=0; j<zs.CellCount; j++)
-                    zs[j] = gbits.butterfly(w,xs[j]);
+                    zs[j] = gbits.bfly(w,xs[j]);
                 var z = zs.LoadVector();
                 Claim.eq(z,y);
 
@@ -110,11 +116,11 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.CpuVector<ulong>(n);
-                var y = gbits.vbutterfly(w, x);
+                var y = gbits.vbfly(w, x);
                 var xs = x.ToSpan();
                 var zs = DataBlocks.single<ulong>(n);
                 for(var j=0; j<zs.CellCount; j++)
-                    zs[j] = gbits.butterfly(w,xs[j]);
+                    zs[j] = gbits.bfly(w,xs[j]);
                 var z = zs.LoadVector();
                 Claim.eq(z,y);
             }
@@ -122,22 +128,6 @@ namespace Z0
 
         public void vbutterfly_256x64x1()
             => vbutterfly_check(n256, n1, z64);
-        // {
-        //     var w = n256;
-        //     var b = n1;
-        //     for(var i=0; i< SampleSize; i++)
-        //     {
-        //         var x = Random.CpuVector<ulong>(w);
-        //         var y = gbits.vbutterfly(b, x);
-        //         var xs = x.ToSpan();
-        //         var zs = DataBlocks.single<ulong>(w);
-        //         for(var j=0; j<zs.CellCount; j++)
-        //             zs[j] = gbits.butterfly(b,xs[j]);
-        //         var z = zs.LoadVector();
-        //         Claim.eq(z,y);
-
-        //     }
-        // }
 
         protected void vbutterfly_check<T>(N256 w, N1 b, T t = default)
             where T : unmanaged
@@ -145,11 +135,11 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.CpuVector<T>(w);
-                var y = gbits.vbutterfly(b, x);
+                var y = gbits.vbfly(b, x);
                 var xs = x.ToSpan();
                 var zs = DataBlocks.single<T>(w);
                 for(var j=0; j<zs.CellCount; j++)
-                    zs[j] = gbits.butterfly(b,xs[j]);
+                    zs[j] = gbits.bfly(b,xs[j]);
                 var z = zs.LoadVector();
                 Claim.eq(z,y);
             }

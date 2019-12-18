@@ -16,141 +16,142 @@ namespace Z0
     public static class vmask
     {
         /// <summary>
-        /// [00000000 00000000 00000000 00000001]    
-        /// Selects a mask where the least significant of each component is enabled
+        /// [000...001]    
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="n">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks>Creates a mask where the least significant of each component is enabled</remarks>
         [MethodImpl(Inline)]
         public static Vector128<T> lsb<T>(N128 w)
             where T : unmanaged
                 => broadcast(w,BitMask.lsb<T>());
 
         /// <summary>
-        /// [01010101 01010101 01010101 01010101]    
-        /// Selects a mask where the least significant bit out of every two bits is enabled on a per-component basis
+        /// [01]    
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks>Creates a mask where the least significant bit out of every two bits is enabled</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsb<T>(N128 w, N2 n)
+        public static Vector128<T> lsb<T>(N128 w, N2 f)
             where T : unmanaged
-                => broadcast(w,BitMask.lsb<T>(n));
+                => broadcast(w,BitMask.lsb<T>(f));
 
         /// <summary>
-        /// [00010001 00010001 00010001 00010001]
-        /// Selects a mask where the least significant bit out of every four bits is enabled on a per-component basis
+        /// [00010001]
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks>Creates a mask where the least significant bit out of every four bits is enabled</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsb<T>(N128 w, N4 n)
+        public static Vector128<T> lsb<T>(N128 w, N4 f)
             where T : unmanaged
-                => broadcast(w,BitMask.lsb<T>(n));
+                => broadcast(w,BitMask.lsb<T>(f));
 
         /// <summary>
-        /// [00000001 00000001 00000001 00000001]
-        /// Selects a mask where the least significant bit out of every eight bits is enabled on a per-component basis
+        /// [00000001]
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks>Creates a mask where the least significant bit out of every eight bits is enabled</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsb<T>(N128 w, N8 n)
+        public static Vector128<T> lsb<T>(N128 w, N8 f)
             where T : unmanaged
-                => broadcast(w,BitMask.lsb<T>(n));
+                => broadcast(w,BitMask.lsb<T>(f));
 
         /// <summary>
-        /// [00000000 00000001 00000000 00000001]
-        /// Selects a mask where the least significant bit out of every 16 bits is enabled on a per-component basis
+        /// [00000000 00000001]
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks>Selects a mask where the least significant bit out of every 16 bits is enabled (componentwise)</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsb<T>(N128 w, N16 n)
+        public static Vector128<T> lsb<T>(N128 w, N16 f)
             where T : unmanaged
-                => broadcast(w,BitMask.lsb<T>(n));
+                => broadcast(w,BitMask.lsb<T>(f));
 
         /// <summary>
-        /// [00000011 00000011 00000011 00000011]
-        /// Creates a mask where the least significant 2 bits of every 8-bit segment are enabled on a per-component basis
+        /// [00000011]
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks>Creates a mask where the least significant 2 bits of every 8-bit segment are enabled</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsb<T>(N128 w, N8 n, N2 f)
+        public static Vector128<T> lsb<T>(N128 w, N8 f, N2 d)
             where T : unmanaged
-                => broadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(f,d));
 
         /// <summary>
-        /// [00000111 00000111 00000111 00000111]
-        /// Creates a mask where the least significant 3 bits of every 8-bit segment are enabled on a per-component basis
+        /// [00000111]
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks>Creates a mask where the least significant 3 bits of every 8-bit segment are enabled</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsb<T>(N128 w, N8 n, N3 f)
+        public static Vector128<T> lsb<T>(N128 w, N8 f, N3 d)
             where T : unmanaged
-                => broadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(f,d));
 
         /// <summary>
-        /// [00001111 00001111 00001111 00001111]
-        /// Creates a mask where the least significant 4 bits of every 8-bit segment are enabled on a per-component basis
+        /// [00001111]
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks>Creates a mask where the least significant 4 bits of every 8-bit segment are enabled</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsb<T>(N128 w, N8 n, N4 f)
+        public static Vector128<T> lsb<T>(N128 w, N8 f, N4 d)
             where T : unmanaged
-                => broadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(f,d));
 
         /// <summary>
-        /// [00011111 00011111 00011111 00011111]
+        /// [00011111]
         /// Creates a mask where the least significant 5 bits of every 8-bits are enabled
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsb<T>(N128 w, N8 n, N5 f)
+        public static Vector128<T> lsb<T>(N128 w, N8 f, N5 d)
             where T : unmanaged
-                => broadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(f,d));
 
         /// <summary>
-        /// [00111111 00111111 00111111 00111111]
+        /// [00111111]
         /// Creates a mask where the least significant 6 bits of every 8-bits are enabled
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsb<T>(N128 w, N8 n, N6 f)
+        public static Vector128<T> lsb<T>(N128 w, N8 f, N6 d)
             where T : unmanaged
-                => broadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(f,d));
 
         /// <summary>
-        /// [01111111 01111111 01111111 01111111]
-        /// Creates a mask where the least significant 7 bits of every 8-bits are enabled
+        /// [01111111]
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks>Creates a mask where the least significant 7 bits of every 8-bits are enabled</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsb<T>(N128 w, N8 n, N7 f)
+        public static Vector128<T> lsb<T>(N128 w, N8 f, N7 d)
             where T : unmanaged
-                => broadcast(w,BitMask.lsb<T>(n,f));
+                => broadcast(w,BitMask.lsb<T>(f,d));
 
         /// <summary>
-        /// [10000000 00000000 00000000 00000000]    
+        /// [100...000 ... 100...000]    
         /// Selects a mask where the most significant bit of each component is enabled
         /// </summary>
         /// <typeparam name="T">The mask data type</typeparam>
@@ -160,44 +161,45 @@ namespace Z0
                 => broadcast(w,BitMask.msb<T>());
 
         /// <summary>
-        /// [01010101 01010101 01010101 01010101]    
-        /// Selects a mask where the most significant bit out of every two bits is enabled
+        /// [01]    
         /// </summary>
-        /// <param name="n1">The characteristic selector</param>
+        /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks>Creates a mask where the most significant bit out of every two bits is enabled</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<T> msb<T>(N128 w, N2 n)
+        public static Vector128<T> msb<T>(N128 w, N2 f)
             where T : unmanaged
-                => broadcast(w,BitMask.msb<T>(n));
+                => broadcast(w,BitMask.msb<T>(f));
 
         /// <summary>
         /// [10001000 10001000 10001000 10001000]
         /// Selects a mask where the most significant bit out of every four bits is enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> msb<T>(N128 w, N4 n)
+        public static Vector128<T> msb<T>(N128 w, N4 f)
             where T : unmanaged
-                => broadcast(w,BitMask.msb<T>(n));
+                => broadcast(w,BitMask.msb<T>(f));
 
         /// <summary>
-        /// [10001000 10001000 10001000 10001000]
-        /// Selects a mask where the most significant bit out of every eight bits is enabled
+        /// [10001000]
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks>Creates a mask where the most significant bit out of every eight bits is enabled</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<T> msb<T>(N128 w, N8 n)
+        public static Vector128<T> msb<T>(N128 w, N8 f)
             where T : unmanaged
-                => broadcast(w,BitMask.msb<T>(n));
+                => broadcast(w,BitMask.msb<T>(f));
 
         /// <summary>
         /// [10000000 00000000 10000000 00000000]
         /// Selects a mask where the most significant bit out of every 16 bits is enabled
         /// </summary>
-        /// <param name="n1">The characteristic selector</param>
+        /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N16 n)
             where T : unmanaged
@@ -207,9 +209,9 @@ namespace Z0
         /// [11000000 11000000 11000000 11000000]
         /// Creates a mask where the 2 most significant bits of every 8 bits are enabled
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="n">The repetition frequency</param>
+        /// <param name="f">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N8 n, N2 f)
@@ -220,9 +222,9 @@ namespace Z0
         /// [11100000 11100000 11100000 11100000]
         /// Creates a mask where the 3 most significant bits of every 8 bits are enabled
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="n">The repetition frequency</param>
+        /// <param name="f">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N8 n, N3 f)
@@ -233,9 +235,9 @@ namespace Z0
         /// [11110000 11110000 11110000 11110000]
         /// Creates a mask where the 4 most significant bits of every 8-bits are enabled
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="n">The repetition frequency</param>
+        /// <param name="f">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N8 n, N4 f)
@@ -246,23 +248,25 @@ namespace Z0
         /// [11111000 11111000 11111000 11111000]
         /// Creates a mask where the 5 most significant bits of every 8-bits are enabled
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="n">The repetition frequency</param>
+        /// <param name="f">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N8 n, N5 f)
             where T : unmanaged
                 => broadcast(w,BitMask.msb<T>(n,f));
 
         /// <summary>
-        /// [11111100 11111100 11111100 11111100]
+        /// [11111100]
         /// Creates a mask where the 6 most significant bits of every 8-bits are enabled
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="n">The repetition frequency</param>
+        /// <param name="f">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N8 n, N6 f)
             where T : unmanaged
@@ -272,9 +276,9 @@ namespace Z0
         /// [11111110 11111110 11111110 11111110]
         /// Creates a mask where the 7 most significant bits of every 8-bits are enabled
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="n">The repetition frequency</param>
+        /// <param name="f">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<T> msb<T>(N128 w, N8 n, N7 f)
@@ -284,8 +288,8 @@ namespace Z0
         /// <summary>
         /// Creates a mask where f most significant bits of every 8 bits are enabled
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="n">The repetition frequency</param>
         /// <param name="f">A value in the range [2,7] that defines the msb duplication factor</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
@@ -297,7 +301,7 @@ namespace Z0
         /// [00000000 00000000 00000000 00000001]    
         /// Selects a mask where the least significant of each component is enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="n">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> lsb<T>(N256 w)
@@ -305,23 +309,25 @@ namespace Z0
                 => broadcast(w,BitMask.lsb<T>());
 
         /// <summary>
-        /// [01010101 01010101 01010101 01010101]    
+        /// [01]    
         /// Selects a mask where the least significant bit out of every two bits is enabled on a per-component basis
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="n">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
         public static Vector256<T> lsb<T>(N256 w, N2 n)
             where T : unmanaged
                 => broadcast(w,BitMask.lsb<T>(n));
 
         /// <summary>
-        /// [00010001 00010001 00010001 00010001]
+        /// [00010001]
         /// Selects a mask where the least significant bit out of every four bits is enabled on a per-component basis
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="n">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
         public static Vector256<T> lsb<T>(N256 w, N4 n)
             where T : unmanaged
@@ -331,133 +337,143 @@ namespace Z0
         /// [00000001 00000001 00000001 00000001]
         /// Selects a mask where the least significant bit out of every eight bits is enabled on a per-component basis
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="n">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
         public static Vector256<T> lsb<T>(N256 w, N8 n)
             where T : unmanaged
                 => broadcast(w,BitMask.lsb<T>(n));
 
         /// <summary>
-        /// [00000000 00000001 00000000 00000001]
+        /// [00000000 00000001]
         /// Selects a mask where the least significant bit out of every 16 bits is enabled on a per-component basis
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="n">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
         public static Vector256<T> lsb<T>(N256 w, N16 n)
             where T : unmanaged
                 => broadcast(w,BitMask.lsb<T>(n));
 
         /// <summary>
-        /// [00000011 00000011 00000011 00000011]
+        /// [00000011]
         /// Creates a mask where the least significant 2 bits of every 8-bit segment are enabled on a per-component basis
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="n">The repetition frequency</param>
+        /// <param name="f">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsb<T>(N256 w, N8 n, N2 f)
+        public static Vector256<T> lsb<T>(N256 w, N8 n, N2 f, T t = default)
             where T : unmanaged
                 => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
-        /// [00000111 00000111 00000111 00000111]
-        /// Creates a mask where the least significant 3 bits of every 8-bit segment are enabled on a per-component basis
+        /// [00000111]
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="n">The repetition frequency</param>
+        /// <param name="f">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks>Creates a mask where the least significant 3 bits of every 8-bit segment are enabled on a per-component basis</remarks>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsb<T>(N256 w, N8 n, N3 f)
+        public static Vector256<T> lsb<T>(N256 w, N8 n, N3 f, T t = default)
             where T : unmanaged
                 => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
-        /// [00001111 00001111 00001111 00001111]
+        /// [00001111]
         /// Creates a mask where the least significant 4 bits of every 8-bit segment are enabled on a per-component basis
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="n">The repetition frequency</param>
+        /// <param name="f">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsb<T>(N256 w, N8 n, N4 f)
+        public static Vector256<T> lsb<T>(N256 w, N8 n, N4 f, T t = default)
             where T : unmanaged
                 => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
-        /// [00011111 00011111 00011111 00011111]
+        /// [00011111]
         /// Creates a mask where the least significant 5 bits of every 8-bits are enabled
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="n">The repetition frequency</param>
+        /// <param name="f">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsb<T>(N256 w, N8 n, N5 f)
+        public static Vector256<T> lsb<T>(N256 w, N8 n, N5 f, T t = default)
             where T : unmanaged
                 => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
-        /// [00111111 00111111 00111111 00111111]
+        /// [00111111]
         /// Creates a mask where the least significant 6 bits of every 8-bits are enabled
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="n">The repetition frequency</param>
+        /// <param name="f">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsb<T>(N256 w, N8 n, N6 f)
+        public static Vector256<T> lsb<T>(N256 w, N8 n, N6 f, T t = default)
             where T : unmanaged
                 => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
-        /// [01111111 01111111 01111111 01111111]
+        /// [01111111]
         /// Creates a mask where the least significant 7 bits of every 8-bits are enabled
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="n">The repetition frequency</param>
+        /// <param name="f">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsb<T>(N256 w, N8 n, N7 f)
+        public static Vector256<T> lsb<T>(N256 w, N8 n, N7 f, T t = default)
             where T : unmanaged
                 => broadcast(w,BitMask.lsb<T>(n,f));
 
         /// <summary>
         /// Creates a mask where the f least significant bits of every 8 bits are enabled
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">A value in the range [2,7] that defines the msb duplication factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">A value in the range [2,7] that defines the msb duplication factor</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsb<T>(N128 w, N8 n, byte f)
+        public static Vector128<T> lsb<T>(N128 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => vgeneric<T>(broadcast(w,BitMask.lsb8f(f)));
+                => vgeneric<T>(broadcast(w,BitMask.lsb8f(d)));
 
         /// <summary>
         /// Creates a mask where the f least significant bits of every 8 bits are enabled
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">A value in the range [2,7] that defines the msb duplication factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">A value in the range [2,7] that defines the msb duplication factor</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsb<T>(N256 w, N8 n, byte f)
+        public static Vector256<T> lsb<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => vgeneric<T>(broadcast(w,BitMask.lsb8f(f)));
+                => vgeneric<T>(broadcast(w,BitMask.lsb8f(d)));
 
         /// <summary>
         /// [10000000 00000000 00000000 00000000]    
         /// Selects a mask where the most significant bit of each component is enabled
         /// </summary>
+        /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> msb<T>(N256 w)
+        public static Vector256<T> msb<T>(N256 w, T t = default)
             where T : unmanaged
                 => broadcast(w,BitMask.msb<T>());
 
@@ -465,7 +481,7 @@ namespace Z0
         /// [01010101 01010101 01010101 01010101]    
         /// Selects a mask where the most significant bit out of every two bits is enabled
         /// </summary>
-        /// <param name="n1">The characteristic selector</param>
+        /// <param name="n1">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> msb<T>(N256 w, N2 n)
@@ -476,7 +492,7 @@ namespace Z0
         /// [10001000 10001000 10001000 10001000]
         /// Selects a mask where the most significant bit out of every four bits is enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="n">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> msb<T>(N256 w, N4 n)
@@ -487,8 +503,9 @@ namespace Z0
         /// [10001000 10001000 10001000 10001000]
         /// Selects a mask where the most significant bit out of every eight bits is enabled
         /// </summary>
-        /// <param name="n">The characteristic selector</param>
+        /// <param name="n">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
         public static Vector256<T> msb<T>(N256 w, N8 n)
             where T : unmanaged
@@ -498,104 +515,103 @@ namespace Z0
         /// [10000000 00000000 10000000 00000000]
         /// Selects a mask where the most significant bit out of every 16 bits is enabled
         /// </summary>
-        /// <param name="n1">The characteristic selector</param>
+        /// <param name="n1">The repetition frequency</param>
         /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
         public static Vector256<T> msb<T>(N256 w, N16 n)
             where T : unmanaged
                 => broadcast(w,BitMask.msb<T>(n));
 
         /// <summary>
-        /// [11000000 11000000 11000000 11000000]
-        /// Creates a mask where the 2 most significant bits of every 8 bits are enabled
+        /// [11000000]
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks>Creates a mask where the 2 most significant bits of every 8 bits are enabled</remarks>
         [MethodImpl(Inline)]
-        public static Vector256<T> msb<T>(N256 w, N8 n, N2 f)
+        public static Vector256<T> msb<T>(N256 w, N8 f, N2 d)
             where T : unmanaged
-                => broadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(f,d));
 
         /// <summary>
-        /// [11100000 11100000 11100000 11100000]
-        /// Creates a mask where the 3 most significant bits of every 8 bits are enabled
+        /// [11100000]
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks>Creates a mask where the 3 most significant bits of every 8 bits are enabled</remarks>
         [MethodImpl(Inline)]
-        public static Vector256<T> msb<T>(N256 w, N8 n, N3 f)
+        public static Vector256<T> msb<T>(N256 w, N8 f, N3 d)
             where T : unmanaged
-                => broadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(f,d));
 
         /// <summary>
-        /// [11110000 11110000 11110000 11110000]
-        /// Creates a mask where the 4 most significant bits of every 8-bits are enabled
+        /// [11110000]
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks>Creates a mask where the 4 most significant bits of every 8-bits are enabled</remarks>
         [MethodImpl(Inline)]
-        public static Vector256<T> msb<T>(N256 w, N8 n, N4 f)
+        public static Vector256<T> msb<T>(N256 w, N8 f, N4 d)
             where T : unmanaged
-                => broadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(f,d));
 
         /// <summary>
-        /// [11111000 11111000 11111000 11111000]
-        /// Creates a mask where the 5 most significant bits of every 8-bits are enabled
+        /// [11111000]
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks>Creates a mask where the 5 most significant bits of every 8-bits are enabled</remarks>
         [MethodImpl(Inline)]
-        public static Vector256<T> msb<T>(N256 w, N8 n, N5 f)
+        public static Vector256<T> msb<T>(N256 w, N8 f, N5 d)
             where T : unmanaged
-                => broadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(f,d));
 
         /// <summary>
-        /// [11111100 11111100 11111100 11111100]
-        /// Creates a mask where the 6 most significant bits of every 8-bits are enabled
+        /// [11111100]
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks>Creates a mask where the 6 most significant bits of every 8-bits are enabled</remarks>
         [MethodImpl(Inline)]
-        public static Vector256<T> msb<T>(N256 w, N8 n, N6 f)
+        public static Vector256<T> msb<T>(N256 w, N8 f, N6 d)
             where T : unmanaged
-                => broadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(f,d));
 
         /// <summary>
-        /// [11111110 11111110 11111110 11111110]
-        /// Creates a mask where the 7 most significant bits of every 8-bits are enabled
+        /// [11111110]
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">The characteristic factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks>Creates a mask where the 6 most significant bits of every 8-bits are enabled</remarks>
         [MethodImpl(Inline)]
-        public static Vector256<T> msb<T>(N256 w, N8 n, N7 f)
+        public static Vector256<T> msb<T>(N256 w, N8 f, N7 d)
             where T : unmanaged
-                => broadcast(w,BitMask.msb<T>(n,f));
+                => broadcast(w,BitMask.msb<T>(f,d));
 
         /// <summary>
         /// Creates a mask where f most significant bits of every 8 bits are enabled
         /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="n">The characteristic selector</param>
-        /// <param name="f">A value in the range [2,7] that defines the msb duplication factor</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">A value in the range [2,7] that defines the msb duplication factor</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        /// <remarks></remarks>
         [MethodImpl(Inline)]
-        public static Vector256<T> msb<T>(N256 w, N8 n, byte f)
+        public static Vector256<T> msb<T>(N256 w, N8 f, byte d)
             where T : unmanaged
-                => vgeneric<T>(broadcast(w,BitMask.msb8f(f)));
-
-
-
+                => vgeneric<T>(broadcast(w,BitMask.msb8f(d)));
     }
 }

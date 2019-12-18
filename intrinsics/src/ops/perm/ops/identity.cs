@@ -11,24 +11,24 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class Perm
+    partial class Perms
     {
         /// <summary>
         /// Defines an untyped identity permutation
         /// </summary>
         /// <param name="n">The permutation length</param>
         [MethodImpl(Inline)]
-        public static PermSpec identity(int n)
-            => new PermSpec(range(0, n-1));
+        public static Perm identity(int n)
+            => new Perm(range(0, n-1));
 
         /// <summary>
         /// Defines an identity permutation on n symbols
         /// </summary>
         /// <param name="n">The permutation length</param>
         [MethodImpl(Inline)]
-        public static PermSpec<T> identity<T>(T n)
+        public static Perm<T> identity<T>(T n)
             where T : unmanaged
-                => PermSpec<T>.identity(n);
+                => new Perm<T>(range(default, gmath.dec(n)));
 
         /// <summary>
         /// Defines the identity permutation on 4 symbols

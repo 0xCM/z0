@@ -13,28 +13,29 @@ namespace Z0
 
     public static class inxsoc
     {
-        public static void unpack(byte src, in Block64<byte> dst)
-            => ginxs.unpackbits(src,dst);
 
-        public static void unpack(ushort src, in Block128<byte> dst)
-            => ginxs.unpackbits(src,dst);
-
-        public static uint pack64x8u(ConstBlock64<byte> src)
+        public static byte pack_8(ConstBlock64<byte> src)
             => ginxs.bitpack(src);
 
-        public static uint pack128x8u(ConstBlock128<byte> src)
+        public static ushort pack_16(ConstBlock128<byte> src)
             => ginxs.bitpack(src);
 
-        public static uint pack_32u(ConstBlock256<byte> src)
+        public static uint pack_32(ConstBlock256<byte> src)
             => ginxs.bitpack(src);
 
-        public static void unpack_32u(uint src, Block256<byte> dst)
+        public static ulong pack_64(ConstBlock512<byte> src)
+            => ginxs.bitpack(src);
+
+        public static void unpack_8(byte src, Block64<byte> dst)
             => ginxs.unpackbits(src,dst);
 
-        public static ulong pack_64u(ConstBlock256<byte> lo, ConstBlock256<byte> hi)
-            => ginxs.bitpack(lo,hi);
+        public static void unpack_16(ushort src, Block128<byte> dst)
+            => ginxs.unpackbits(src,dst);
+
+        public static void unpack_32(uint src, Block256<byte> dst)
+            => ginxs.unpackbits(src,dst);
         
-        public static void unpack_64u(ulong src, Block256<byte> dst)
+        public static void unpack_64(ulong src, Block512<byte> dst)
             => ginxs.unpackbits(src,dst);
 
         public static ulong broadcast_8x64(byte pattern)

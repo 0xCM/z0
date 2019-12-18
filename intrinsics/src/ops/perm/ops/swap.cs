@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class Perm
+    partial class Perms
     {
         /// <summary>
         /// Defines a transposition for a permutation of natural length

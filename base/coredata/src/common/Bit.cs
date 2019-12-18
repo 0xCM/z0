@@ -53,6 +53,196 @@ namespace Z0
             return new bit(state);
         }
 
+        /// <summary>
+        /// Tests the state of an index-identified source bit
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="pos">The 0-based index of the bit to test</param>
+        [MethodImpl(Inline)]
+        public static bit test(sbyte src, int pos)
+            => new bit((src & (1 << pos)) != 0);
+
+        /// <summary>
+        /// Tests the state of an index-identified source bit
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="pos">The 0-based index of the bit to test</param>
+        [MethodImpl(Inline)]
+        public static bit test(byte src, int pos)
+            => Wrap(((uint)src >> pos) & 1);
+
+        /// <summary>
+        /// Tests the state of an index-identified source bit
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="pos">The 0-based index of the bit to test</param>
+        [MethodImpl(Inline)]
+        public static bit test(short src, int pos)
+            => new bit((src & (1 << pos)) != 0);
+
+        /// <summary>
+        /// Tests the state of an index-identified source bit
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="pos">The 0-based index of the bit to test</param>
+        [MethodImpl(Inline)]
+        public static bit test(ushort src, int pos)
+            => Wrap(((uint)src >> pos) & 1);
+
+        /// <summary>
+        /// Tests the state of an index-identified source bit
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="pos">The 0-based index of the bit to test</param>
+        [MethodImpl(Inline)]
+        public static bit test(int src, int pos)
+            => new bit((src & (1 << pos)) != 0);
+
+        /// <summary>
+        /// Tests the state of an index-identified source bit
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="pos">The 0-based index of the bit to test</param>
+        [MethodImpl(Inline)]
+        public static bit test(long src, int pos)
+            => new bit((src & (1L << pos)) != 0);
+
+        /// <summary>
+        /// Tests the state of an index-identified source bit
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="pos">The 0-based index of the bit to test</param>
+        [MethodImpl(Inline)]
+        public static bit test(uint src, int pos)
+            => Wrap((src >> pos) & 1);
+
+        /// <summary>
+        /// Tests the state of an index-identified source bit
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="pos">The 0-based index of the bit to test</param>
+        [MethodImpl(Inline)]
+        public static bit test(ulong src, int pos)
+            => Wrap((uint)((src >> pos) & 1));
+
+        /// <summary>
+        /// The identity function
+        /// </summary>
+        /// <param name="b">The source bit</param>
+        [MethodImpl(Inline)]
+        public static bit identity(bit b)
+            => b;
+
+        /// <summary>
+        /// Computes c = a & b
+        /// </summary>
+        /// <param name="a">The left bit</param>
+        /// <param name="b">The right bit</param>
+        [MethodImpl(Inline)]
+        public static bit and(bit a, bit b) 
+            => Wrap(a.state & b.state);
+
+        /// <summary>
+        /// Computes c = a | b
+        /// </summary>
+        /// <param name="a">The left bit</param>
+        /// <param name="b">The right bit</param>
+        [MethodImpl(Inline)]
+        public static bit or(bit a, bit b) 
+            => Wrap(a.state | b.state);
+
+        /// <summary>
+        /// Computes c = a ^ b
+        /// </summary>
+        /// <param name="a">The left bit</param>
+        /// <param name="b">The right bit</param>
+        [MethodImpl(Inline)]
+        public static bit xor(bit a, bit b)
+            => Wrap(a.state ^ b.state);
+
+        /// <summary>
+        /// Computes c := ~a = !a
+        /// </summary>
+        /// <param name="a">The source bit</param>
+        [MethodImpl(Inline)]
+        public static bit not(bit a)
+            => SafeWrap(~a.state);
+
+        /// <summary>
+        /// Computes c := ~ (a & b)
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static bit nand(bit a, bit b)
+            => SafeWrap(~(a.state & b.state));
+
+        /// <summary>
+        /// Computes c := ~ (a | b)
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        /// <remarks>See https://en.wikipedia.org/wiki/Logical_biconditional</remarks>
+        [MethodImpl(Inline)]
+        public static bit nor(bit a, bit b)
+            => SafeWrap(~(a.state | b.state));
+
+        /// <summary>
+        /// Computes c := ~ (a ^ b)
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        /// <remarks>See https://en.wikipedia.org/wiki/Logical_biconditional</remarks>
+        [MethodImpl(Inline)]
+        public static bit xnor(bit a, bit b)
+            => SafeWrap(~(a.state ^ b.state));
+
+        /// <summary>
+        /// Computes c := a -> b := a | ~b
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        /// <remarks>See https://en.wikipedia.org/wiki/Material_conditional</remarks>
+        [MethodImpl(Inline)]
+        public static bit impl(bit a, bit b)
+            => or(a,  not(b));
+
+        /// <summary>
+        /// Computes the nonimplication c := a < -- b := ~(a | ~b) = ~a & b
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static bit nonimpl(bit a, bit b)
+            => and(not(a),  b);
+
+        /// <summary>
+        /// Computes the converse implication c := ~a | b
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static bit cimpl(bit a, bit b)
+            => or(not(a),  b);
+
+        /// <summary>
+        /// Computes the converse nonimplication c := a & ~b
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static bit cnonimpl(bit a, bit b)
+            => and(a, not(b));
+
+        /// <summary>
+        /// Computes the ternary select s := a ? b : c = (a & b) | (~a & c)
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static bit select(bit a, bit b, bit c)
+            => SafeWrap((a.state & b.state) | (~a.state & c.state));
+
         [MethodImpl(Inline)]
         public static bit Parse(char c)
             => c == '1';
@@ -252,124 +442,6 @@ namespace Z0
         [MethodImpl(Inline)]
         bit(uint state)
             => this.state = state;
-
-        /// <summary>
-        /// The identity function
-        /// </summary>
-        /// <param name="b">The source bit</param>
-        [MethodImpl(Inline)]
-        public static bit identity(bit b)
-            => b;
-
-        /// <summary>
-        /// Computes c = a & b
-        /// </summary>
-        /// <param name="a">The left bit</param>
-        /// <param name="b">The right bit</param>
-        [MethodImpl(Inline)]
-        public static bit and(bit a, bit b) 
-            => Wrap(a.state & b.state);
-
-        /// <summary>
-        /// Computes c = a | b
-        /// </summary>
-        /// <param name="a">The left bit</param>
-        /// <param name="b">The right bit</param>
-        [MethodImpl(Inline)]
-        public static bit or(bit a, bit b) 
-            => Wrap(a.state | b.state);
-
-        /// <summary>
-        /// Computes c = a ^ b
-        /// </summary>
-        /// <param name="a">The left bit</param>
-        /// <param name="b">The right bit</param>
-        [MethodImpl(Inline)]
-        public static bit xor(bit a, bit b)
-            => Wrap(a.state ^ b.state);
-
-        /// <summary>
-        /// Computes c := ~a = !a
-        /// </summary>
-        /// <param name="a">The source bit</param>
-        [MethodImpl(Inline)]
-        public static bit not(bit a)
-            => SafeWrap(~a.state);
-
-        /// <summary>
-        /// Computes c := ~ (a & b)
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        [MethodImpl(Inline)]
-        public static bit nand(bit a, bit b)
-            => SafeWrap(~(a.state & b.state));
-
-        /// <summary>
-        /// Computes c := ~ (a | b)
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        /// <remarks>See https://en.wikipedia.org/wiki/Logical_biconditional</remarks>
-        [MethodImpl(Inline)]
-        public static bit nor(bit a, bit b)
-            => SafeWrap(~(a.state | b.state));
-
-        /// <summary>
-        /// Computes c := ~ (a ^ b)
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        /// <remarks>See https://en.wikipedia.org/wiki/Logical_biconditional</remarks>
-        [MethodImpl(Inline)]
-        public static bit xnor(bit a, bit b)
-            => SafeWrap(~(a.state ^ b.state));
-
-        /// <summary>
-        /// Computes c := a -> b := a | ~b
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        /// <remarks>See https://en.wikipedia.org/wiki/Material_conditional</remarks>
-        [MethodImpl(Inline)]
-        public static bit impl(bit a, bit b)
-            => or(a,  not(b));
-
-        /// <summary>
-        /// Computes the nonimplication c := a < -- b := ~(a | ~b) = ~a & b
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        [MethodImpl(Inline)]
-        public static bit nonimpl(bit a, bit b)
-            => and(not(a),  b);
-
-        /// <summary>
-        /// Computes the converse implication c := ~a | b
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        [MethodImpl(Inline)]
-        public static bit cimpl(bit a, bit b)
-            => or(not(a),  b);
-
-        /// <summary>
-        /// Computes the converse nonimplication c := a & ~b
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        [MethodImpl(Inline)]
-        public static bit cnonimpl(bit a, bit b)
-            => and(a, not(b));
-
-        /// <summary>
-        /// Computes the ternary select s := a ? b : c = (a & b) | (~a & c)
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        [MethodImpl(Inline)]
-        public static bit select(bit a, bit b, bit c)
-            => SafeWrap((a.state & b.state) | (~a.state & c.state));
 
 
         [MethodImpl(Inline)]

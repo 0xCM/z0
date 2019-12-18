@@ -41,10 +41,6 @@ namespace Z0
                 return generic<T>(Bits.stitch(uint64(left), ldx, uint64(right), rdx));
             else            
                 throw unsupported<T>();
-
         }
-
-
     }
-
 }

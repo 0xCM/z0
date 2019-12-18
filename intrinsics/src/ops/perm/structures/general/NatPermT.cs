@@ -14,11 +14,11 @@ namespace Z0
     /// <summary>
     /// Defines a permutation of natural length N over the natural numbers 0,1,...,N-1
     /// </summary>
-    public readonly struct NatPerm<N,T>
+    public readonly ref struct NatPerm<N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-        readonly PermSpec<T> perm;
+        readonly Perm<T> perm;
 
         static T nT => convert<T>(natval<N>());
 
@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The permutation to convert</param>
         [MethodImpl(Inline)]
-        public static implicit operator PermSpec<T>(NatPerm<N,T> f)
+        public static implicit operator Perm<T>(NatPerm<N,T> f)
             => f.perm;
 
         /// <summary>
@@ -95,11 +95,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatPerm(NatSwap<N,T>[] swaps)
         {
-            this.perm = new PermSpec<T>(nT, swaps.Unsized());
+            this.perm = new Perm<T>(nT, swaps.Unsized());
         }
 
         [MethodImpl(Inline)]
-        internal NatPerm(PermSpec<T> src)
+        internal NatPerm(Perm<T> src)
         {
             this.perm = src;
         }
@@ -111,7 +111,7 @@ namespace Z0
         public NatPerm(T[] src)
         {
             if(src.Length == n)
-                perm = new PermSpec<T>(src);
+                perm = new Perm<T>(src);
             else
             {
                 var tmp = new T[n];
@@ -122,7 +122,7 @@ namespace Z0
 
                 for(var i=m; i< n; i++)
                     tmp[i] = Identity[i - m];
-                perm = new PermSpec<T>(tmp);
+                perm = new Perm<T>(tmp);
             }
         }
 
@@ -251,6 +251,7 @@ namespace Z0
         /// Computes the inverse permutation t of the current permutation p 
         /// such that p*t = t*p = I where I denotes the identity permutation
         /// </summary>
+        [MethodImpl(Inline)]
         public NatPerm<N,T> Invert()
             => new NatPerm<N,T>(perm.Invert());
 
@@ -260,6 +261,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The left permutation</param>
         /// <param name="g">The right permutation</param>
+        [MethodImpl(Inline)]
         public NatPerm<N,T> Compose(NatPerm<N,T> g)
             => new NatPerm<N,T>(perm.Compose(g.perm));
  
@@ -287,6 +289,7 @@ namespace Z0
         /// Computes a permutation cycle originating at a specified point
         /// </summary>
         /// <param name="start">The domain point at which evaluation will begin</param>
+        [MethodImpl(Inline)]
         public PermCycle<T> Cycle(int start)
             => perm.Cycle(convert<T>(start));
 
@@ -294,6 +297,7 @@ namespace Z0
         /// Computes a permutation cycle originating at a specified point
         /// </summary>
         /// <param name="start">The domain point at which evaluation will begin</param>
+        [MethodImpl(Inline)]
         public PermCycle<T> Cycle(T start)
             => perm.Cycle(start);
 
@@ -306,17 +310,17 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source permutation</param>
         /// <param name="colwidth">The width of the matrix columns, if specified</param>
-        [MethodImpl(Inline)]
+         [MethodImpl(Inline)]
          public string Format(int? colwidth = null)
             => perm.Format(colwidth);
 
          public override string ToString() 
-            => this.Format();
+            =>throw new NotSupportedException();
 
          public override int GetHashCode()
-            => perm.GetHashCode();
+            =>throw new NotSupportedException();
 
          public override bool Equals(object o)
-            => o is NatPerm<N,T> p  && p.perm.Equals(perm);
+            =>throw new NotSupportedException();
     }
 }

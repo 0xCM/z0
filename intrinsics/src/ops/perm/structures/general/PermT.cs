@@ -15,43 +15,28 @@ namespace Z0
     /// Defines a permutation over an integral type based at 0, [0, 1, ..., n - 1] where n is the permutation length
     /// </summary>
     /// <typeparam name="T">The integral type</typeparam>
-    public struct PermSpec<T>
+    public readonly ref struct Perm<T>
         where T : unmanaged
     {
         /// <summary>
         /// Defines the permutation (0 -> terms[0], 1 -> terms[1], ..., n - 1 -> terms[n-1]) where n is the length of the array
         /// </summary>
-        T[] terms;
-
-        /// <summary>
-        /// Defines an untyped identity permutation
-        /// </summary>
-        /// <param name="n">The permutation length</param>
-        [MethodImpl(Inline)]
-        public static PermSpec<T> identity(T n)
-            => new PermSpec<T>(range(default, gmath.dec(n)));
-
-        /// <summary>
-        /// Allocates an empty permutation
-        /// </summary>
-        [MethodImpl(Inline)]
-        static PermSpec<T> Alloc(int n)
-            => new PermSpec<T>(new T[n]);
+        readonly Span<T> terms;
 
         /// <summary>
         /// Defines an untyped permutation determined by values in a source span
         /// </summary>
         /// <param name="src">The source span</param>
         [MethodImpl(Inline)]
-        public static PermSpec<T> From(ReadOnlySpan<T> src)
-            => new PermSpec<T>(src.ToArray());
+        public static Perm<T> From(ReadOnlySpan<T> src)
+            => new Perm<T>(src.ToArray());
         
         [MethodImpl(Inline)]
-        public static implicit operator PermSpec<T>(Span<T> src)
+        public static implicit operator Perm<T>(Span<T> src)
             => From(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator PermSpec<T>(ReadOnlySpan<T> src)
+        public static implicit operator Perm<T>(ReadOnlySpan<T> src)
             => From(src);
 
         /// <summary>
@@ -59,8 +44,8 @@ namespace Z0
         /// </summary>
         /// <param name="n">The permutation length</param>
         [MethodImpl(Inline)]
-        public static implicit operator PermSpec<T>(T n)
-            => identity(n);
+        public static implicit operator Perm<T>(T n)
+            => Perms.identity(n);
 
         /// <summary>
         /// Computes the composition h of f and g where f and g have common length n and h(i) = g(f(i)) for i = 0, ... n-1
@@ -68,23 +53,23 @@ namespace Z0
         /// <param name="f">The left permutation</param>
         /// <param name="g">The right permutation</param>
         [MethodImpl(Inline)]
-        public static PermSpec<T> operator *(PermSpec<T> f, PermSpec<T> g)
+        public static Perm<T> operator *(in Perm<T> f, in Perm<T> g)
             => f.Compose(g);
 
         [MethodImpl(Inline)]
-        public static PermSpec<T> operator ++(in PermSpec<T> lhs)
+        public static Perm<T> operator ++(in Perm<T> lhs)
             => lhs.Inc();
 
         [MethodImpl(Inline)]
-        public static PermSpec<T> operator --(in PermSpec<T> lhs)
+        public static Perm<T> operator --(in Perm<T> lhs)
             => lhs.Dec();
 
         [MethodImpl(Inline)]
-        public static bool operator ==(PermSpec<T> lhs, PermSpec<T> rhs)
+        public static bool operator ==(in Perm<T> lhs, in Perm<T> rhs)
             => lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(PermSpec<T> lhs, PermSpec<T> rhs)
+        public static bool operator !=(in Perm<T> lhs, in Perm<T> rhs)
             => !(lhs == rhs);
 
         /// <summary>
@@ -93,9 +78,9 @@ namespace Z0
         /// <param name="n">The length of the permutation</param>
         /// <param name="swaps">The transpositions applied to the identity</param>
         [MethodImpl(Inline)]
-        public PermSpec(T n, (T i, T j)[] swaps)
+        internal Perm(T n, (T i, T j)[] swaps)
         {
-            terms = identity(n).terms;
+            terms = Perms.identity(n).terms;
             Swap(swaps);
         }
 
@@ -105,32 +90,32 @@ namespace Z0
         /// <param name="n">The length of the permutation</param>
         /// <param name="swaps">The transpositions applied to the identity</param>
         [MethodImpl(Inline)]
-        public PermSpec(T n, Swap<T>[] swaps)
+        internal Perm(T n, Swap<T>[] swaps)
         {
-            terms = identity(n).terms;
+            terms = Perms.identity(n).terms;
             Swap(swaps);            
         }
 
         [MethodImpl(Inline)]
-        public PermSpec(T[] src)
+        internal Perm(T[] src)
         {
             terms = src;
         }
 
         [MethodImpl(Inline)]
-        public PermSpec(IEnumerable<T> src)
+        internal Perm(Span<T> src)
+        {
+            terms = src;
+        }
+
+        [MethodImpl(Inline)]
+        internal Perm(IEnumerable<T> src)
         {
             terms = src.ToArray();
         }
 
         [MethodImpl(Inline)]
-        public PermSpec(IEnumerable<int> src)
-        {
-            terms = src.Select(x => convert<T>(x)).ToArray();
-        }
-
-        [MethodImpl(Inline)]
-        public PermSpec(T n, T[] src)
+        internal Perm(T n, T[] src)
         {
             var count = iVal(n);
             terms = new T[count];
@@ -140,9 +125,15 @@ namespace Z0
             for(var i=0; i< m; i++)
                 terms[i] = src[i];
 
-            var identity = PermSpec<T>.identity(n);
+            var identity = Perms.identity(n);
             for(var i=m; i< count; i++)
                 terms[i] = identity[i - m];
+        }
+
+        ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref head(terms);
         }
                         
         /// <summary>
@@ -151,7 +142,7 @@ namespace Z0
         public ref T this[int i]
         {
             [MethodImpl(Inline)]
-            get => ref terms[i];
+            get => ref seek(ref Head, i);
         }
 
         /// <summary>
@@ -160,35 +151,32 @@ namespace Z0
         public ref T this[T i]
         {
             [MethodImpl(Inline)]
-            get => ref terms[iVal(i)];
+            get => ref seek(ref Head, iVal(i));
         }
 
         [MethodImpl(Inline)]
-        public PermSpec<T> Swap(T i, T j)
-        {
-            
+        public Perm<T> Swap(T i, T j)
+        {            
             swap(ref terms[iVal(i)], ref terms[iVal(j)]);
             return this;
         }
 
         [MethodImpl(Inline)]
-        public PermSpec<T> Swap((T i, T j) spec)
+        public Perm<T> Swap((T i, T j) spec)
             => Swap(spec.i,spec.j);
 
         [MethodImpl(Inline)]
-        public PermSpec<T> Swap(int i, int j)
-        {
-            
-            swap(ref terms[i], ref terms[j]);
+        public Perm<T> Swap(int i, int j)
+        {            
+            swap(ref seek(ref Head, i), ref seek(ref Head,j));
             return this;
         }
 
         /// <summary>
         /// Effects a sequence of in-place transpositions
         /// </summary>
-        public PermSpec<T> Swap(params (T i, T j)[] specs)
-        {
-            
+        public Perm<T> Swap(params (T i, T j)[] specs)
+        {            
             for(var k=0; k<specs.Length; k++)
                 swap(ref terms[iVal(specs[k].i)], ref terms[iVal(specs[k].j)]);
             return this;
@@ -197,9 +185,8 @@ namespace Z0
         /// <summary>
         /// Effects a sequence of in-place transpositions
         /// </summary>
-        public PermSpec<T> Swap(params (int i, int j)[] specs)
-        {
-            
+        public Perm<T> Swap(params (int i, int j)[] specs)
+        {            
             for(var k=0; k<specs.Length; k++)
                 swap(ref terms[specs[k].i], ref terms[specs[k].j]);
             return this;
@@ -208,7 +195,7 @@ namespace Z0
         /// <summary>
         /// Effects a sequence of in-place transpositions
         /// </summary>
-        public PermSpec<T> Swap(params Swap[] specs)
+        public Perm<T> Swap(params Swap[] specs)
         {
             for(var k=0; k<specs.Length; k++)
                 swap(ref terms[specs[k].i], ref terms[specs[k].j]);
@@ -218,7 +205,7 @@ namespace Z0
         /// <summary>
         /// Effects a sequence of in-place transpositions
         /// </summary>
-        public PermSpec<T> Swap(params Swap<T>[] specs)
+        public Perm<T> Swap(params Swap<T>[] specs)
         {
             for(var k=0; k<specs.Length; k++)
                 Swap(specs[k]);
@@ -240,7 +227,7 @@ namespace Z0
         /// <summary>
         /// Applies a modular increment to the permutation in-place
         /// </summary>
-        public PermSpec<T> Inc()
+        public Perm<T> Inc()
         {
             Span<T> src = Replicate().terms;
             var lastix = Length - 1;
@@ -253,7 +240,7 @@ namespace Z0
         /// <summary>
         /// Applies a modular decrement to the permutation in-place
         /// </summary>
-        public PermSpec<T> Dec()
+        public Perm<T> Dec()
         {
             Span<T> src = Replicate().terms;
             terms[0] = src[Length - 1];
@@ -267,7 +254,7 @@ namespace Z0
         /// </summary>
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
-        public PermSpec<T> Shuffle(IPolyrand random)
+        public Perm<T> Shuffle(IPolyrand random)
         {
             random.Shuffle(terms);
             return this;
@@ -276,18 +263,18 @@ namespace Z0
         /// <summary>
         /// Clones the permutation
         /// </summary>
-        public readonly PermSpec<T> Replicate()
-            => new PermSpec<T>(terms.Replicate());
+        public readonly Perm<T> Replicate()
+            => new Perm<T>(terms.Replicate());
 
         /// <summary>
         /// Creates a new permutation p via composition, p[i] = g(f(i)) for i = 0, ... n where f denotes the current permutation
         /// </summary>
         /// <param name="f">The left permutation</param>
         /// <param name="g">The right permutation</param>
-        public readonly PermSpec<T> Compose(PermSpec<T> g)
+        public readonly Perm<T> Compose(in Perm<T> g)
         {
             var n = length(terms, g.terms);
-            var dst = Alloc(n);
+            var dst = new Perm<T>(new T[n]);
             var f = this;
             for(var i=0; i< n; i++)
                 dst[i] = g[f[i]];
@@ -298,7 +285,7 @@ namespace Z0
         /// Reverses the permutation in-place
         /// </summary>
         [MethodImpl(Inline)]
-        public PermSpec<T> Reverse()
+        public Perm<T> Reverse()
         {
             terms.Reverse();
             return this;
@@ -307,9 +294,9 @@ namespace Z0
         /// <summary>
         /// Computes the inverse permutation t of the current permutation p such that p*t = t*p = I where I denotes the identity permutation
         /// </summary>
-        public readonly PermSpec<T> Invert()
+        public readonly Perm<T> Invert()
         {
-            var dst = Alloc(Length);
+            var dst = new Perm<T>(new T[Length]);
             for(var i=0; i< Length; i++)
                 dst[terms[i]] = convert<T>(i);
             return dst;
@@ -343,12 +330,8 @@ namespace Z0
 
             return new PermCycle<T>(cterms.Slice(0, ctix).ToArray());
         }
-
-
-        public readonly override int GetHashCode()
-            => terms.GetHashCode();
         
-        public readonly bool Equals(PermSpec<T> rhs)
+        public readonly bool Equals(in Perm<T> rhs)
         {   
             var len = rhs.Length;
             if(len != terms.Length)
@@ -367,10 +350,10 @@ namespace Z0
         public string Format(int? colwidth = null)
             => Terms.FormatAsPerm(colwidth);
 
+        public readonly override int GetHashCode()
+            => throw new NotSupportedException();
+
         public readonly override bool Equals(object o)
-            => (o is PermSpec<T> p) ? p == this : false;
+            => throw new NotSupportedException();
     }
-
-
-
 }

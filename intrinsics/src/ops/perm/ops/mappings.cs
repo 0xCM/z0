@@ -13,13 +13,13 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class Perm
+    partial class Perms
     {
         /// <summary>
         /// Enumerates all permutation map format strings on 4 symbols
         /// </summary>
         public static IEnumerable<(Perm4L perm, string format)> mappings(N4 n)
-            => from perm in emembers<Perm4L>()
+            => from perm in literals<Perm4L>()
                     where !perm.IsSymbol()
                     let maps = (perm, format:perm.FormatMap())
                     orderby maps.perm descending

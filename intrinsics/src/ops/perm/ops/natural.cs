@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class Perm
+    partial class Perms
     {
         /// <summary>
         /// Reifies a permutation of length 8 from its canonical scalar specification
@@ -113,7 +113,7 @@ namespace Z0
         {
             if(terms.Length != natval(n))
                 Errors.ThrowInvariantFailure($"{n} != {terms.Length}");
-            return new NatPerm<N,T>(specify(terms));
+            return new NatPerm<N,T>(define(terms));
         }
 
         public static NatPerm<N,T> natural<N,T>(N n, Span<T> terms)

@@ -13,7 +13,6 @@ namespace Z0
 
     partial class BlockExtend    
     {
-
         /// <summary>
         /// Extracts the lower half of an index-identified block
         /// </summary>
@@ -21,9 +20,9 @@ namespace Z0
         /// <param name="block">The 64-bit block-relative index</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block64<T> LoBlock<T>(this in Block128<T> src, int block)
+        public static Span<T> LoBlock<T>(this in Block128<T> src, int block)
             where T : unmanaged
-                => new Block64<T>(src.Slice(block * src.BlockLength, blocklen<T>(n64)));
+                => src.Slice(block * src.BlockLength, blocklen<T>(n64));
 
         /// <summary>
         /// Extracts the upper half of an index-identified block
@@ -32,10 +31,9 @@ namespace Z0
         /// <param name="block">The 64-bit block-relative index</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block64<T> HiBlock<T>(this in Block128<T> src, int block)
+        public static Span<T> HiBlock<T>(this in Block128<T> src, int block)
             where T : unmanaged
-                => new Block64<T>(src.Slice(block * src.BlockLength + blocklen<T>(n64), blocklen<T>(n64)));
-
+                => src.Slice(block * src.BlockLength + blocklen<T>(n64), blocklen<T>(n64));
     }
 
 }

@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="E">The enum source type</typeparam>
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe T value<E,T>(E e)
+        public static unsafe T value<E,T>(E e, T t = default)
             where E : unmanaged, Enum
             where T : unmanaged
                 => Unsafe.Read<T>((T*)(&e));
@@ -31,7 +31,7 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe E member<E,T>(T v)
+        public static unsafe E member<E,T>(T v, E e = default)
             where E : unmanaged, Enum
             where T : unmanaged
                 => Unsafe.Read<E>((E*)&v);
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static E[] members<E>()
+        public static E[] members<E>(E e = default)
             where E : unmanaged, Enum
                 => (E[])Enum.GetValues(typeof(E));
 
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The value type</typeparam>
-        public static Pair<E,T>[] pairs<E,T>()
+        public static Pair<E,T>[] pairs<E,T>(E e = default, T t = default)
             where E : unmanaged, Enum
             where T : unmanaged
         {
@@ -66,7 +66,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The value type</typeparam>
-        public static IDictionary<T,E> values<E,T>()
+        public static IDictionary<T,E> values<E,T>(E e = default, T t = default)
             where E : unmanaged, Enum
             where T : unmanaged
         {
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="cased">True if casing should be respected, false to ignore case</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static E parse<E>(string name, bool cased = false)
+        public static E parse<E>(string name, bool cased = false, E e = default)
             where E : unmanaged, Enum
                 => Enum.Parse<E>(name, !cased);
     }

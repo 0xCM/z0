@@ -13,58 +13,39 @@ namespace Z0
     {
         readonly ulong data;
 
-        readonly BitFieldSpec Spec;
+        readonly BitFieldSpec spec;
 
         [MethodImpl(Inline)]
-        public BitField64(ulong data, Span<SegmentSpec> fields)
+        public BitField64(ulong data, Span<BitSegment> segments)
         {
             this.data = data;
-            this.Spec = new BitFieldSpec(fields);
+            this.spec = new BitFieldSpec(segments);
         }
 
         [MethodImpl(Inline)]
-        public BitField64(ulong data, BitFieldSpec fields)
+        public BitField64(ulong data, BitFieldSpec spec)
         {
             this.data = data;
-            this.Spec = fields;
+            this.spec = spec;
         }
 
-        public ulong this[int field]
+        public ulong this[int index]
         {
             [MethodImpl(Inline)]
-            get => Extract(field);
+            get => Extract(index);
         }
 
         [MethodImpl(Inline)]
-        public ulong Extract(int field)
+        public ulong Extract(int index)
         {
-            var spec = Field(field);
-            return Bits.extract(data, spec.FirstPos, spec.Width);            
+            var field = spec[index];
+            return Bits.extract(data, field.FirstPos, field.Width);            
         }
         
-        public string Format()
-        {
-            var fmt = text();
-            for(var i = FieldCount - 1; i>= 0; i--)
-            {
-                var spec = Field(i);
-                fmt.Append(this[i].FormatBits(spec.Width));
-                if(i != 0)
-                    fmt.Append(AsciSym.Underscore);
-            }
-            return fmt.ToString();
-        }
-
-        int FieldCount
+        public BitFieldSpec Spec
         {
             [MethodImpl(Inline)]
-            get => Spec.FieldCount;
+            get => spec;
         }
-
-
-        [MethodImpl(Inline)]
-        SegmentSpec Field(int index)
-            => Spec[index];
-
     }
 }

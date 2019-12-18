@@ -12,7 +12,6 @@ namespace Z0
 
     partial class DataBlocks
     {
-
         /// <summary>
         /// Loads 32-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked
         /// </summary>
@@ -22,8 +21,7 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static Block16<T> safeload<T>(N16 n, Span<T> src)
             where T : unmanaged
-        {        
-            
+        {                    
             var bz = blockcount<T>(n, src.Length, out int remainder);
             if(remainder == 0)
                 return new Block16<T>(src);

@@ -40,7 +40,6 @@ namespace Z0
             set => bits[0,System.Convert.ToByte(id)] = value;
         }
 
-
         /// <summary>
         /// Retrieves the enabled fields
         /// </summary>

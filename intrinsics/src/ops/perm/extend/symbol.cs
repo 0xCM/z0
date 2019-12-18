@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The perm literal</param>
         [MethodImpl(Inline)]
         public static ReadOnlySpan<char> Symbols(this Perm4L src)
-            => Perm.symbols(src);
+            => Perms.symbols(src);
 
         /// <summary>
         /// Deconstructs a permutation literal into an odered sequence of symbols that define the permutation
@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="src">The perm literal</param>
         [MethodImpl(Inline)]
         public static ReadOnlySpan<char> Symbols(this Perm8L src)
-            => Perm.symbols(src);
+            => Perms.symbols(src);
 
         /// <summary>
         /// Deconstructs a permutation literal into an odered sequence of symbols that define the permutation
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="src">The perm literal</param>
         [MethodImpl(Inline)]
         public static ReadOnlySpan<char> Symbols(this Perm16L src)
-            => Perm.symbols(src);
+            => Perms.symbols(src);
 
         /// <summary>
         /// Determines whether a permutation literal is a symbol

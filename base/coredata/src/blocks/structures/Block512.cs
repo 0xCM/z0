@@ -129,12 +129,34 @@ namespace Z0
             => ref Unsafe.Add(ref Head, BlockLength*block + segment);
             
         /// <summary>
-        /// Non-allocating operation that wraps a span around the content of an index-identified block
+        /// Retrieves an index-identified data block
         /// </summary>
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
-        public Span<T> SpanBlock(int block)    
-            => data.Slice(block * blocklen<T>(N), blocklen<T>(N));
+        public Span<T> Block(int block)    
+            => data.Slice(block * BlockLength, BlockLength);
+
+        /// <summary>
+        /// Retrieves the lower 256 bits of an index-identified block
+        /// </summary>
+        /// <param name="block">The block-relative index</param>
+        [MethodImpl(Inline)]
+        public Span<T> LoBlock(int block)
+        {
+            var count = BlockLength / 2;            
+            return data.Slice(block*BlockLength, count);
+        }
+
+        /// <summary>
+        /// Retrieves the upper 256 bits of an index-identified block
+        /// </summary>
+        /// <param name="block">The block-relative index</param>
+        [MethodImpl(Inline)]
+        public Span<T> HiBlock(int block)
+        {
+            var count = BlockLength / 2;
+            return data.Slice(block * BlockLength + count, count);
+        }
 
         /// <summary>
         /// Reinterprets the storage cell type

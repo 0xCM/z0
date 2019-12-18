@@ -9,11 +9,9 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static zfunc;
-    using static DataBlocks;
 
     partial class BlockExtend    
     {
-
         [MethodImpl(Inline)]
         public static void CopyTo<T>(this in Block16<T> src, Span<T> dst)
             where T : unmanaged

@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;    
     using static As;
 
-    partial class Perm
+    partial class Perms
     {
         /// <summary>
         /// Constructs a permutation of length four from four ordered symbols

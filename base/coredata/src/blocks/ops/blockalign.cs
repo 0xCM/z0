@@ -139,6 +139,5 @@ namespace Z0
             var blockcount = cellblocks/cellsize<T>();
             return blockcount + cellblocks % cellsize<T>() == 0 ? 0 : 1;
         }
-
     }
 }

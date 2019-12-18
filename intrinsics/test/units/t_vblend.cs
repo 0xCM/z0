@@ -129,7 +129,7 @@ namespace Z0
             Claim.eq(a,c);
             Claim.eq(b,d);
 
-            var perm = Perm.natural(n16, (1,9), (3,B), (5,D), (7,F));
+            var perm = Perms.natural(n16, (1,9), (3,B), (5,D), (7,F));
             var bg = perm.ToBitGrid();
             for(var i=0; i< bg.RowCount; i++)
                 Claim.eq(bg.Row(i).As<byte>(), perm[i]);

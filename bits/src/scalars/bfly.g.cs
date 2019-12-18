@@ -20,17 +20,17 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static T butterfly<T>(N1 n, T x)
+        public static T bfly<T>(N1 n, T x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.butterfly(n,uint8(x)));
+                return generic<T>(Bits.bfly(n,uint8(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.butterfly(n,uint16(x)));
+                return generic<T>(Bits.bfly(n,uint16(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.butterfly(n,uint32(x)));
+                return generic<T>(Bits.bfly(n,uint32(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.butterfly(n,uint64(x)));
+                return generic<T>(Bits.bfly(n,uint64(x)));
             else            
                 throw unsupported<T>();
         }
@@ -41,17 +41,17 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static T butterfly<T>(N2 n, T x)
+        public static T bfly<T>(N2 n, T x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.butterfly(n,uint8(x)));
+                return generic<T>(Bits.bfly(n,uint8(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.butterfly(n,uint16(x)));
+                return generic<T>(Bits.bfly(n,uint16(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.butterfly(n,uint32(x)));
+                return generic<T>(Bits.bfly(n,uint32(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.butterfly(n,uint64(x)));
+                return generic<T>(Bits.bfly(n,uint64(x)));
             else            
                 throw unsupported<T>();
         }
@@ -63,17 +63,17 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static T butterfly<T>(N4 n, T x)
+        public static T bfly<T>(N4 n, T x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return x;
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.butterfly(n,uint16(x)));
+                return generic<T>(Bits.bfly(n,uint16(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.butterfly(n,uint32(x)));
+                return generic<T>(Bits.bfly(n,uint32(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.butterfly(n,uint64(x)));
+                return generic<T>(Bits.bfly(n,uint64(x)));
             else            
                 throw unsupported<T>();
         }
@@ -85,15 +85,15 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static T butterfly<T>(N8 n, T x)
+        public static T bfly<T>(N8 n, T x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort))
                 return x;
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.butterfly(n,uint32(x)));
+                return generic<T>(Bits.bfly(n,uint32(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.butterfly(n,uint64(x)));
+                return generic<T>(Bits.bfly(n,uint64(x)));
             else            
                 throw unsupported<T>();
         }
@@ -104,13 +104,13 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
-        public static T butterfly<T>(N16 n, T x)
+        public static T bfly<T>(N16 n, T x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort) || typeof(T) == typeof(uint))
                 return x;
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.butterfly(n,uint64(x)));
+                return generic<T>(Bits.bfly(n,uint64(x)));
             else            
                 throw unsupported<T>();
         }

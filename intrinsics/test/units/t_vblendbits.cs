@@ -49,16 +49,16 @@ namespace Z0
         public void vblendbits_256x64u()
             => vblendbits_check<ulong>(n256);
 
-        protected void vblendbits_check<T>(N256 w)
+        protected void vblendbits_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
             var count = w/bitsize<T>();
             for(var sample=0; sample<SampleSize; sample++)
             {
 
-                var x = Random.CpuVector<T>(w);
-                var y = Random.CpuVector<T>(w);
-                var m = Random.CpuVector<T>(w);
+                var x = Random.CpuVector(w,t);
+                var y = Random.CpuVector(w,t);
+                var m = Random.CpuVector(w,t);
                 var r = ginx.vbitblend(x,y,m);
 
                 for(var i = 0; i<count; i++)
@@ -82,20 +82,18 @@ namespace Z0
             {
                 var a = bsm[i] ? rbs[i] : lbs[i];
                 Claim.eq(a, bsr[i]);
-
-            }
-            
+            }            
         }
 
-        protected void vblendbits_check<T>(N128 w)
+        protected void vblendbits_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
             var count = w/bitsize<T>();            
             for(var sample=0; sample<SampleSize; sample++)
             {
-                var x = Random.CpuVector<T>(w);
-                var y = Random.CpuVector<T>(w);
-                var m = Random.CpuVector<T>(w);
+                var x = Random.CpuVector(w,t);
+                var y = Random.CpuVector(w,t);
+                var m = Random.CpuVector(w,t);
                 var r = ginx.vbitblend(x,y,m);
 
                 for(var i = 0; i<count; i++)

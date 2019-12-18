@@ -226,19 +226,19 @@ namespace Z0
         public void perm4_symbols_random()
         {
             var perms = Random.EnumValues(A, B, C, D);
-            var all = emembers<Perm4L>().ToSet();
+            var all = literals<Perm4L>().ToSet();
             for(var i=0; i<SampleSize; i++)
             {
                 var perm = perms.First();
                 Claim.contains(all,perm);
-                var symbols = Perm.literals(perm);
+                var symbols = Perms.literals(perm);
                 Claim.eq(4, symbols.Length);
             }
         }
 
         void perm4x64_mapformat()
         {
-            var pmaps = Perm.mappings(n4);
+            var pmaps = Perms.mappings(n4);
             iter(pmaps, m => Trace(m.perm.ToString(), m.format));
         }
 
@@ -314,7 +314,7 @@ namespace Z0
             var pbs_actual = BitString.scalar((byte)p);            
             Claim.eq(pbs_expect, pbs_actual);
             
-            var p_assembled = Perm.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);            
+            var p_assembled = Perms.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);            
             Claim.eq(p, p_assembled);            
             
             var pformat_actual = p.FormatMap();
@@ -332,7 +332,7 @@ namespace Z0
             var symbol = default(Perm4L);
             for(var i=0; i<expect.Length; i++)
             {
-                Claim.yea(Perm.literal(perm, i, out symbol));
+                Claim.yea(Perms.literal(perm, i, out symbol));
                 Claim.eq(expect[i], symbol);
             }
 

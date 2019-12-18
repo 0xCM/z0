@@ -71,7 +71,5 @@ namespace Z0
         public static void Clear<T>(this in Block512<T> src)
             where T : unmanaged
                 => src.Data.Clear();
-
     }
-
 }

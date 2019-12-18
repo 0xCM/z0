@@ -18,18 +18,10 @@ using static Z0.ReflectionFlags;
 partial class zfunc
 {
     /// <summary>
-    /// Gets the literal values for an enum type
-    /// </summary>
-    /// <typeparam name="T">The enum type</typeparam>
-    public static IEnumerable<T> literals<T>()
-        where T : Enum
-            => type<T>().GetEnumValues().AsQueryable().Cast<T>();
-
-    /// <summary>
     /// Gets the assembly in which the parametrized type is defined
     /// </summary>
     [MethodImpl(Inline)]
-    public static Assembly assembly<T>()
+    public static Assembly assembly<T>(T t = default)
         => typeof(T).Assembly;
 
     /// <summary>
@@ -38,14 +30,13 @@ partial class zfunc
     /// <typeparam name="S">The first type</typeparam>
     /// <typeparam name="T">The second type</typeparam>
     [MethodImpl(Inline)]
-    public static bool typematch<S,T>()
+    public static bool typematch<S,T>(S s = default, T t = default)
         => typeof(S) == typeof(T);
 
     /// <summary>
     /// Specifies the generic type definition for a specified generic type
     /// </summary>
     /// <typeparam name="T">The generic type</typeparam>
-    /// <returns></returns>
     [MethodImpl(Inline)]   
     public static Type typedef(Type t)
         => t.GetGenericTypeDefinition();
@@ -56,7 +47,7 @@ partial class zfunc
     /// <param name="full">Whether the full name should be returned</param>
     /// <typeparam name="T">The type to examine</typeparam>
     [MethodImpl(Inline)]   
-    public static string typename<T>()
+    public static string typename<T>(T t = default)
         => typeof(T).DisplayName();
 
     /// <summary>
@@ -64,7 +55,7 @@ partial class zfunc
     /// </summary>
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]   
-    public static string label<T>()
+    public static string label<T>(T t = default)
         => typeof(T).DisplayName();
     
     /// <summary>
@@ -85,7 +76,7 @@ partial class zfunc
     /// </summary>
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
-    public static Type type<T>() 
+    public static Type type<T>(T t = default) 
         => typeof(T);
 
     /// <summary>
@@ -93,18 +84,18 @@ partial class zfunc
     /// </summary>
     /// <typeparam name="T">The type to test</typeparam>
     [MethodImpl(Inline)]
-    public static bool isFloat<T>()
+    public static bool isFloat<T>(T t = default)
         where T : unmanaged
             => typeof(T) == typeof(float) 
             || typeof(T) == typeof(double);
 
     [MethodImpl(Inline)]
-    public static bool isFloat32<T>()
+    public static bool isFloat32<T>(T t = default)
         where T : unmanaged
             => isFloat<T>() && bitsize<T>() == 32;
 
     [MethodImpl(Inline)]
-    public static bool isFloat64<T>()
+    public static bool isFloat64<T>(T t = default)
         where T : unmanaged
             => isFloat<T>() && bitsize<T>() == 64;
 
@@ -113,7 +104,7 @@ partial class zfunc
     /// </summary>
     /// <typeparam name="T">The type to test</typeparam>
     [MethodImpl(Inline)]
-    public static bool isIntegral<T>()
+    public static bool isIntegral<T>(T t = default)
         where T : unmanaged
             => typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(byte)
@@ -129,7 +120,7 @@ partial class zfunc
     /// </summary>
     /// <typeparam name="T">The type to test</typeparam>
     [MethodImpl(Inline)]
-    public static bool isSigned<T>()
+    public static bool isSigned<T>(T t = default)
         where T : unmanaged
             => typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short)
@@ -143,7 +134,7 @@ partial class zfunc
     /// </summary>
     /// <typeparam name="T">The type to test</typeparam>
     [MethodImpl(Inline)]
-    public static bool isUnsigned<T>()
+    public static bool isUnsigned<T>(T t = default)
         where T : unmanaged
             => typeof(T) == typeof(byte)
             || typeof(T) == typeof(ushort)
@@ -164,26 +155,8 @@ partial class zfunc
     /// <typeparam name="T0">The first source type</typeparam>
     /// <typeparam name="T1">The second source type</typeparam>
     [MethodImpl(Inline)]
-    public static (Type t0,Type t1) types<T0,T1>() 
+    public static (Type t0,Type t1) types<T0,T1>(T0 t0 = default, T1 t1 = default) 
         => (typeof(T0),typeof(T1));
-
-    /// <summary>
-    /// Returns a triple of System.Type 
-    /// </summary>
-    /// <typeparam name="T0">The first source type</typeparam>
-    /// <typeparam name="T1">The second source type</typeparam>
-    [MethodImpl(Inline)]
-    public static (Type t0,Type t1, Type t2) types<T0,T1,T2>() 
-        => (typeof(T0),typeof(T1),typeof(T2));
-
-    /// <summary>
-    /// Returns the literals defined by an enumeration
-    /// </summary>
-    /// <typeparam name="T">The enum type</typeparam>
-    [MethodImpl(Inline)]
-    public static T[] kinds<T>()
-        where T : Enum
-        => type<T>().GetEnumValues().AsQueryable().Cast<T>().ToArray();
 
 
     /// <summary>
@@ -199,7 +172,7 @@ partial class zfunc
     /// </summary>
     /// <typeparam name="T">The type to examine</typeparam>
     [MethodImpl(Inline)]
-    public static IReadOnlyList<ConstructorInfo> constructors<T>()
+    public static IReadOnlyList<ConstructorInfo> constructors<T>(T t = default)
         => _constructorCache.GetOrAdd(typeof(T), t => t.GetConstructors());
 
     /// <summary>
@@ -207,7 +180,7 @@ partial class zfunc
     /// If nullable or non-nullable enumeration type, returns the underlying type of the enumeration
     /// If non-nullable non-enumeration type, returns the incoming type
     /// </summary>
-    /// <param name="t"></param>
+    /// <param name="t">The type to query</param>
     [MethodImpl(Inline)]
     public static Type underlying(Type t)
         => _ulTypeCache.GetOrAdd(t, _t => _t.GetUnderlyingType());
@@ -217,10 +190,10 @@ partial class zfunc
     /// If nullable or non-nullable enumeration type, returns the underlying type of the enumeration
     /// If non-nullable non-enumeration type, returns the incoming type
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
+    /// <param name="t">A type representative</param>
+    /// <typeparam name="T">The type to examine</typeparam>
     [MethodImpl(Inline)]
-    public static Type underlying<T>()
+    public static Type underlying<T>(T t = default)
         => _ulTypeCache.GetOrAdd(typeof(T), _t => _t.GetUnderlyingType());
 
     /// <summary>
@@ -234,8 +207,10 @@ partial class zfunc
     /// <summary>
     /// Gets the type's classification code
     /// </summary>
+    /// <param name="t">A type representative</param>
+    /// <typeparam name="T">The type to examine</typeparam>
     [MethodImpl(Inline)]
-    public static TypeCode typecode<T>()
+    public static TypeCode typecode<T>(T t = default)
         => Type.GetTypeCode(typeof(T));
 
     /// <summary>
@@ -303,7 +278,6 @@ partial class zfunc
     /// Retrieves the public properties declared on an object's type
     /// </summary>
     /// <param name="o">The object</param>
-    /// <returns></returns>
     [MethodImpl(Inline)]
     public static PropertyInfo[] props(object o)
         => o == null
@@ -314,7 +288,6 @@ partial class zfunc
     /// <summary>
     /// Retrieves the public properties declared on a type
     /// </summary>
-    /// <returns></returns>
     [MethodImpl(Inline)]
     public static PropertyInfo[] props(Type type)
         => _propsCache.GetOrAdd(type, t => t.GetProperties(BF_AllPublicInstance));
@@ -323,7 +296,6 @@ partial class zfunc
     /// Gets the public properties defined on, or inherited by, the supplied type
     /// </summary>
     /// <typeparam name="T">The type to examine</typeparam>
-    /// <returns></returns>
     [MethodImpl(Inline)]
     public static PropertyInfo[] props<T>()
         => _propsCache.GetOrAdd(typeof(T),
@@ -334,7 +306,6 @@ partial class zfunc
     /// </summary>
     /// <param name="t">The type to examine</param>
     /// <param name="name">The name of the property</param>
-    /// <returns></returns>
     public static Option<PropertyInfo> prop(Type t, string name)
         => props(t).FirstOrDefault(p => p.Name == name);
 
@@ -343,7 +314,6 @@ partial class zfunc
     /// </summary>
     /// <param name="o">The object on which the property is defined</param>
     /// <param name="propname">The name of the property</param>
-    /// <returns></returns>
     [MethodImpl(Inline)]
     public static object propval(object o, string propname)
         => GetProperty(o,propname)?.GetValue(o);
@@ -378,21 +348,15 @@ partial class zfunc
     public static Type proptype(object o, string propname)
         => o.GetType().GetProperty(propname).PropertyType;
 
-    static Func<T,T,T> EmitBinOp<T>(this MethodInfo target)
-    {
-        var operand = typeof(T);                        
-        var method = new DynamicMethod($"{target.Name}", operand, new Type[] { operand, operand }, operand.Module);            
-        var gen = method.GetILGenerator();
-        gen.Emit(OpCodes.Ldarg_0);
-        gen.Emit(OpCodes.Ldarg_1);
-        gen.EmitCall(OpCodes.Call, target, null);
-        gen.Emit(OpCodes.Ret);
-        return (Func<T,T,T>) method.CreateDelegate(typeof(Func<T,T,T>));
-    }
-
+    /// <summary>
+    /// Creates a delegate via dynamic method emit via that is invoked via the Call opcode
+    /// </summary>
+    /// <param name="target">The method for which a binary operator delegate will be created</param>
+    /// <param name="t">A declaring type representative</param>
+    /// <typeparam name="T">The declaring type</typeparam>
     [MethodImpl(Inline)]
-    public static Func<T,T,T> binop<T>(MethodInfo target)
-        => (Func<T,T,T>) Delegates.GetOrAdd(target, m => m.EmitBinOp<T>());
+    public static Func<T,T,T> binop<T>(MethodInfo target, T t = default)
+        => (Func<T,T,T>) Delegates.GetOrAdd(target, m => m.UncachedBinOpCall<T>());
 
     /// <summary>
     /// Searches a type for an instance constructor that matches a specified signature
@@ -408,7 +372,6 @@ partial class zfunc
     /// </summary>
     /// <param name="argTypes">The method parameter types in ordinal position</param>
     /// <typeparam name="T">The type to search</typeparam>
-    /// <returns></returns>
     [MethodImpl(Inline)]
     public static Option<ConstructorInfo> constructor<T>(params Type[] argTypes)
         => constructor(typeof(T), argTypes);
@@ -429,13 +392,12 @@ partial class zfunc
     /// If non-nullable, returns the supplied type. If nullable, returns the underlying type
     /// </summary>
     /// <param name="t">The type to examine</param>
-    /// <returns></returns>
     [MethodImpl(Inline)]
     public static Type nonNullable(Type t)
         => _nnTypeCache.GetOrAdd(t, x => x.IsNullableType() ? Nullable.GetUnderlyingType(x) : x);
 
     /// <summary>
-    /// Retrieves the identified <see cref="MethodInfo"/>
+    /// Retrieves metadata for a name-identifed method on an object instance
     /// </summary>
     /// <param name="o">The object on which the method is defined</param>
     /// <param name="name"></param>
@@ -456,11 +418,11 @@ partial class zfunc
     /// Finds the first method declared by a type that matches a specified name
     /// </summary>
     /// <param name="name">The method name</param>
+    /// <param name="t">A type representative</param>
     /// <typeparam name="T">The declaring type</typeparam>
     [MethodImpl(Inline)]
-    public static MethodInfo method<T>(string name)
+    public static MethodInfo method<T>(string name, T t = default)
         => typeof(T).Methods().First(m => m.Name == name);
-
 
     /// <summary>
     /// Finds the first method declared by a type that matches a specified name
@@ -469,9 +431,8 @@ partial class zfunc
     /// <param name="name">The method name</param>
     /// <typeparam name="T">The declaring type</typeparam>
     [MethodImpl(Inline)]
-    public static IntPtr methodPtr<T>(string name)
+    public static IntPtr methodPtr<T>(string name, T t = default)
         => method<T>(name).MethodHandle.GetFunctionPointer();
-
 
     [MethodImpl(Inline)]
     public static MethodInfo method<T>(string name, out IntPtr ptr)

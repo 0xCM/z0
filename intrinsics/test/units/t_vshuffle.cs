@@ -191,7 +191,7 @@ namespace Z0
         public void vshuf_16x8()
         {
             var src = vbuild.increments<byte>(n128);
-            var perm = Perm.natural(Perm.reversed(n16));
+            var perm = Perms.natural(Perms.reversed(n16));
             for(int i=0,j=15; i<perm.Length; i++, j--)
                 Claim.eq(perm[i],j);
 

@@ -11,25 +11,25 @@ namespace Z0
 
     public readonly ref struct BitFieldSpec
     {
-        readonly Span<SegmentSpec> Fields;
+        readonly Span<BitSegment> Fields;
 
 
         [MethodImpl(Inline)]
-        public BitFieldSpec(SegmentSpec[] fields)
+        public BitFieldSpec(BitSegment[] fields)
         {
             this.Fields = fields;
         }
 
         [MethodImpl(Inline)]
-        public BitFieldSpec(Span<SegmentSpec> fields)
+        public BitFieldSpec(Span<BitSegment> fields)
         {
             this.Fields = fields;
         }
 
-        public SegmentSpec this[int i]
+        public BitSegment this[int i]
         {
             [MethodImpl(Inline)]
-            get => skip<SegmentSpec>(Fields,i);
+            get => skip<BitSegment>(Fields,i);
         }
 
         public int FieldCount

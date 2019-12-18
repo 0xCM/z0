@@ -12,10 +12,10 @@ namespace Z0
     partial class gmathops
     {
         public static Perm4L perm4_assemble_id()
-            => Perm.assemble(Perm4L.A, Perm4L.B, Perm4L.C, Perm4L.D);
+            => Perms.assemble(Perm4L.A, Perm4L.B, Perm4L.C, Perm4L.D);
 
         public static Perm4L perm4_assemble_rid()
-            => Perm.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);
+            => Perms.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);
 
     }
 

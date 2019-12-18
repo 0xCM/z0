@@ -26,8 +26,8 @@ namespace Z0
         /// </summary>
         /// <typeparam name="D">The type of the constructed delegate</typeparam>
         /// <param name="m">The method that will be invoked when delegate is activated</param>
-        /// <returns></returns>
         public static D CreateDelegate<D>(this MethodInfo m)
+            where D : Delegate
         {
             var argTypes = m.ParameterTypes().ToArray();
             var dType
@@ -42,7 +42,6 @@ namespace Z0
         /// Tests whether an expression is a conversion
         /// </summary>
         /// <param name="x">The expression to examine</param>
-        /// <returns></returns>
         public static bool IsConversion(this Expression x)
             => x.NodeType == ExpressionType.Convert;
 
@@ -194,10 +193,9 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T1">The first function argument</typeparam>
         /// <typeparam name="T2">The second function argument</typeparam>
-        /// <typeparam name="TResult">The function return type</typeparam>
+        /// <typeparam name="R">The function return type</typeparam>
         /// <param name="selector">The call expression</param>
-        /// <returns></returns>
-        public static MethodInfo GetMethod<T1, T2, TResult>(this Expression<Func<T1, T2, TResult>> selector)
+        public static MethodInfo GetMethod<T1, T2, R>(this Expression<Func<T1, T2, R>> selector)
             => cast<MethodCallExpression>(selector.Body).Method;
 
         /// <summary>
@@ -206,9 +204,9 @@ namespace Z0
         /// <typeparam name="T1">The first function argument</typeparam>
         /// <typeparam name="T2">The second function argument</typeparam>
         /// <typeparam name="T3">The third function argument</typeparam>
-        /// <typeparam name="TResult">The function return type</typeparam>
+        /// <typeparam name="R">The function return type</typeparam>
         /// <param name="selector">Specifies the call expression</param>
-        public static MethodInfo GetMethod<T1, T2, T3, TResult>(this Expression<Func<T1, T2, T3, TResult>> selector)
+        public static MethodInfo GetMethod<T1, T2, T3, R>(this Expression<Func<T1, T2, T3, R>> selector)
             => cast<MethodCallExpression>(selector.Body).Method;
 
         /// <summary>
@@ -303,7 +301,6 @@ namespace Z0
                     var args = N.Arguments.Map(A => A.TryGetConstant().ValueOrDefault()).ToArray();
                     value = Activator.CreateInstance(N.Type, args);
                 }
-
             }
             return value;
         }

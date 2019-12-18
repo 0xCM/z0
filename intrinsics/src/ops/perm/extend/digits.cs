@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
         public static NatBlock<N4, byte> ToDigits(this Perm4L src)
-            => Perm.digits(src);
+            => Perms.digits(src);
 
         /// <summary>
         /// Computes the digits corresponding to each 3-bit segment of the permutation spec
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
         public static NatBlock<N8, OctalDigit> ToDigits(this Perm8L src)
-            => Perm.digits(src);
+            => Perms.digits(src);
 
         /// <summary>
         /// Computes the digits corresponding to each 4-bit segment of the permutation spec
@@ -34,15 +34,15 @@ namespace Z0
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
         public static NatBlock<N16, HexDigit> ToDigits(this Perm16L src)
-            => Perm.digits(src);
+            => Perms.digits(src);
 
         [MethodImpl(Inline)]
-        public static Perm16Spec ToPermSpec(this Vector128<byte> src)
-            => Perm16Spec.from(src);
+        public static Perm16 ToPermSpec(this Vector128<byte> src)
+            => Perm16.from(src);
 
         [MethodImpl(Inline)]
-        public static Perm32Spec ToPermSpec(this Vector256<byte> src)
-            => Perm32Spec.from(src);
+        public static Perm32 ToPermSpec(this Vector256<byte> src)
+            => Perm32.from(src);
 
         /// <summary>
         /// Defines a shuffle spec from a permutation

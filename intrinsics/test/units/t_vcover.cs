@@ -11,6 +11,7 @@ namespace Z0
 
     public class t_vcover : t_vinx<t_vcover>
     {
+
         public void vcover_basecase()
         {            
             var x1 = vbuild.parts(n128,4,8);

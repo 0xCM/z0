@@ -32,13 +32,5 @@ namespace Z0
         internal BitField256(Vector256<byte> widths)
             => this.widths = widths;
 
-        /// <summary>
-        /// Gets the width of an identified field
-        /// </summary>
-        public byte this [E field]
-        {
-            [MethodImpl(Inline)]
-            get => BitField.getwidth(widths,field);
-        }    
     }
 }

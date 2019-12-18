@@ -19,7 +19,7 @@ namespace Z0
         /// Extracts a contiguous range of bits from the source
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="start">The bit posiion within the source where extraction should benin</param>
+        /// <param name="start">The bit posiion within the source where extraction should begin</param>
         /// <param name="length">The number of bits that should be extracted</param>
         [MethodImpl(Inline)]
         public static T extract<T>(T a, int start, int length)

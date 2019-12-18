@@ -125,7 +125,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
         public Span<T> Block(int block)
-            => data.SpanBlock(block);
+            => data.Block(block);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid<T> rhs)

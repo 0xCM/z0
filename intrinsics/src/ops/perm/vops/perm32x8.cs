@@ -17,7 +17,7 @@ namespace Z0
     {        
 
         [MethodImpl(Inline)]
-        public static Vector256<byte> vperm32x8(Vector256<byte> src, Perm32Spec spec)
+        public static Vector256<byte> vperm32x8(Vector256<byte> src, Perm32 spec)
             => vshuf32x8(src,spec.data);
 
 

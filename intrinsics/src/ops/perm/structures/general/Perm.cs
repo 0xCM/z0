@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a permutation over the integers [0, 1, ..., n - 1] where n is the permutation length
     /// </summary>
-    public readonly struct PermSpec
+    public readonly struct Perm
     {
         /// <summary>
         /// Defines the permutation (0 -> terms[0], 1 -> terms[1], ..., n - 1 -> terms[n-1])
@@ -24,12 +24,12 @@ namespace Z0
         readonly int[] terms;
 
         [MethodImpl(Inline)]
-        public static implicit operator PermSpec(Span<int> src)
-            => Perm.specify(src);
+        public static implicit operator Perm(Span<int> src)
+            => new Perm(src.ToArray());
 
         [MethodImpl(Inline)]
-        public static implicit operator PermSpec(ReadOnlySpan<int> src)
-            => Perm.specify(src);
+        public static implicit operator Perm(ReadOnlySpan<int> src)
+            => Perms.define(src);
 
         /// <summary>
         /// Computes the composition h of f and g where f and g have common length n and
@@ -38,23 +38,23 @@ namespace Z0
         /// <param name="f">The left permutation</param>
         /// <param name="g">The right permutation</param>
         [MethodImpl(Inline)]
-        public static PermSpec operator *(PermSpec f, PermSpec g)
+        public static Perm operator *(Perm f, Perm g)
             => f.Compose(g);
 
         [MethodImpl(Inline)]
-        public static PermSpec operator ++(in PermSpec lhs)
+        public static Perm operator ++(in Perm lhs)
             => lhs.Inc();
 
         [MethodImpl(Inline)]
-        public static PermSpec operator --(in PermSpec lhs)
+        public static Perm operator --(in Perm lhs)
             => lhs.Dec();
 
         [MethodImpl(Inline)]
-        public static bool operator ==(PermSpec lhs, PermSpec rhs)
+        public static bool operator ==(Perm lhs, Perm rhs)
             => lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(PermSpec lhs, PermSpec rhs)
+        public static bool operator !=(Perm lhs, Perm rhs)
             => !(lhs == rhs);
 
         /// <summary>
@@ -64,27 +64,27 @@ namespace Z0
         /// <param name="i">The source value</param>
         /// <param name="j">The target value/param>
         [MethodImpl(Inline)]
-        public PermSpec(int n, (int i, int j)[] src)
+        public Perm(int n, (int i, int j)[] src)
         {
-            terms = Perm.identity(n).terms;
+            terms = Perms.identity(n).terms;
             Swap(src);
         }
 
         [MethodImpl(Inline)]
-        public PermSpec(int n, Swap[] src)
+        public Perm(int n, Swap[] src)
         {
-            terms = Perm.identity(n).terms;
+            terms = Perms.identity(n).terms;
             Apply(src);            
         }
 
         [MethodImpl(Inline)]
-        public PermSpec(int[] src)
+        public Perm(int[] src)
         {
             terms = src;
         }
 
         [MethodImpl(Inline)]
-        public PermSpec(int n, int[] src)
+        public Perm(int n, int[] src)
         {
             terms = new int[n];
 
@@ -93,13 +93,13 @@ namespace Z0
             for(var i=0; i< m; i++)
                 terms[i] = src[i];
 
-            var identity = Perm.identity(n);
+            var identity = Perms.identity(n);
             for(var i=m; i< n; i++)
                 terms[i] = identity[i - m];
         }
         
         [MethodImpl(Inline)]
-        public PermSpec(IEnumerable<int> src)
+        public Perm(IEnumerable<int> src)
         {
             terms = src.ToArray();
         }
@@ -125,7 +125,7 @@ namespace Z0
         /// the transposition t is the function t(l) = g(f(l)) == l. 
         /// </remarks>
         [MethodImpl(Inline)]
-        public PermSpec Swap(int i, int j)
+        public Perm Swap(int i, int j)
         {
             swap(ref terms[i], ref terms[j]);
             return this;
@@ -134,7 +134,7 @@ namespace Z0
         /// <summary>
         /// Effects a sequence of in-place transpositions
         /// </summary>
-        public PermSpec Swap(params (int i, int j)[] specs)
+        public Perm Swap(params (int i, int j)[] specs)
         {
             for(var k=0; k<specs.Length; k++)
                 swap(ref terms[specs[k].i], ref terms[specs[k].j]);
@@ -144,7 +144,7 @@ namespace Z0
         /// <summary>
         /// Effects a sequence of in-place transpositions
         /// </summary>
-        public PermSpec Apply(params Swap[] specs)
+        public Perm Apply(params Swap[] specs)
         {
             for(var k=0; k<specs.Length; k++)
                 swap(ref terms[specs[k].i], ref terms[specs[k].j]);
@@ -163,15 +163,15 @@ namespace Z0
         /// <summary>
         /// Clones the permutation
         /// </summary>
-        public PermSpec Replicate()
-            => new PermSpec(terms.Replicate());
+        public Perm Replicate()
+            => new Perm(terms.Replicate());
 
         /// <summary>
         /// Shuffles the permutation in-place using a provided random source.
         /// </summary>
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
-        public PermSpec Shuffle(IPolyrand random)
+        public Perm Shuffle(IPolyrand random)
         {
             random.Shuffle(terms);
             return this;
@@ -183,10 +183,10 @@ namespace Z0
         /// </summary>
         /// <param name="f">The left permutation</param>
         /// <param name="g">The right permutation</param>
-        public PermSpec Compose(PermSpec g)
+        public Perm Compose(Perm g)
         {
             var n = length(terms, g.terms);
-            var dst = Perm.alloc(n);
+            var dst = Perms.alloc(n);
             var f = this;
             for(var i=0; i< n; i++)
                 dst[i] = g[f[i]];
@@ -197,7 +197,7 @@ namespace Z0
         /// Reverses the permutation in-place
         /// </summary>
         [MethodImpl(Inline)]
-        public PermSpec Reverse()
+        public Perm Reverse()
         {
             terms.Reverse();
             return this;
@@ -207,9 +207,9 @@ namespace Z0
         /// Computes the inverse permutation t of the current permutation p 
         /// such that p*t = t*p = I where I denotes the identity permutation
         /// </summary>
-        public PermSpec Invert()
+        public Perm Invert()
         {
-            var dst = Perm.alloc(Length);
+            var dst = Perms.alloc(Length);
             for(var i=0; i< Length; i++)
                 dst[terms[i]] = i;
             return dst;
@@ -218,7 +218,7 @@ namespace Z0
         /// <summary>
         /// Applies a modular increment to the permutation in-place
         /// </summary>
-        public PermSpec Inc()
+        public Perm Inc()
         {
             Span<int> src = Replicate().terms;
             var k = 1;
@@ -231,7 +231,7 @@ namespace Z0
         /// <summary>
         /// Applies a modular decrement to the permutation in-place
         /// </summary>
-        public PermSpec Dec()
+        public Perm Dec()
         {
             Span<int> src = Replicate().terms;
             terms[0] = src[Length - 1];
@@ -244,13 +244,13 @@ namespace Z0
         /// Converts the permutation to a generic permutation over the specified target type
         /// </summary>
         /// <typeparam name="T">The target type</typeparam>
-        public PermSpec<T> Convert<T>()
+        public Perm<T> Convert<T>()
             where T : unmanaged
         {
             var dst = new T[terms.Length];
             for(var i=0; i<terms.Length; i++)
                 dst[i] = convert<T>(terms[i]);
-            return new PermSpec<T>(dst);
+            return new Perm<T>(dst);
         }
 
         public Span<Swap> CalcSwaps()
@@ -315,7 +315,7 @@ namespace Z0
         public override int GetHashCode()
             => terms.GetHashCode();
         
-        public bool Equals(PermSpec rhs)
+        public bool Equals(Perm rhs)
         {   
             var len = rhs.Length;
             if(len != terms.Length)
@@ -329,6 +329,6 @@ namespace Z0
         }
 
         public override bool Equals(object o)
-            => o is PermSpec p  && Equals(p);
+            => o is Perm p  && Equals(p);
     }
 }

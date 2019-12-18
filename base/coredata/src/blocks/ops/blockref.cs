@@ -142,8 +142,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly T blockref<T>(in ConstBlock512<T> src, int index)
             where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.AsRef(in src.Head), index*src.BlockLength);  
-
+                => ref Unsafe.Add(ref Unsafe.AsRef(in src.Head), index*src.BlockLength);
     }
-
 }

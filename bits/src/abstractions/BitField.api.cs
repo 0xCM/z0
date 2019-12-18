@@ -16,7 +16,7 @@ namespace Z0
     {
         public static BitFieldSpec specify(params (ushort first, ushort last)[] positions)
         {
-            var fields = new SegmentSpec[positions.Length];
+            var fields = new BitSegment[positions.Length];
             for(var i=0; i<fields.Length; i++)
                 fields[i] = positions[i];
             return new BitFieldSpec(fields);
@@ -27,17 +27,9 @@ namespace Z0
             => new BitField64(data, spec);
 
         [MethodImpl(Inline)]
-        public static BitField64 init(ulong data, params SegmentSpec[] fields)
+        public static BitField64 init(ulong data, params BitSegment[] fields)
             => new BitField64(data, fields);
 
-        static BitField256<E> define<E>(params Pair<E,byte>[] parts)
-            where E : unmanaged, Enum
-        {
-            var widths = default(Vector256<byte>);
-            for(var i=0; i<parts.Length; i++)
-                setwidth(widths, parts[i]);
-            return new BitField256<E>(widths);
-        }
 
         static Span<Pair<E,byte>> parts<E>(BitField256<E> bf)
             where E : unmanaged, Enum
@@ -50,7 +42,7 @@ namespace Z0
             {
                 var mask = data[i];
                 if(mask != 0)
-                    parts[count++] = paired<E,byte>(emember<E,byte>((byte)i), (byte)Bits.width(mask));
+                    parts[count++] = paired<E,byte>(literal<E,byte>((byte)i), (byte)Bits.width(mask));
             }
             return parts.Slice(0,count);
         }

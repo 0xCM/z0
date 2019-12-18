@@ -160,40 +160,5 @@ namespace Z0
             return remainder == 0 ? bz : bz + 1;
         }
 
-        /// <summary>
-        /// Returns the block count of spans of equal length; otherwise raises an error
-        /// </summary>
-        /// <param name="lhs">The left source</param>
-        /// <param name="rhs">The right source</param>
-        /// <typeparam name="T">The span element type</typeparam>
-        [MethodImpl(Inline)]   
-        public static int blockcount<S,T>(in Block64<S> lhs, in Block64<T> rhs)
-            where T : unmanaged
-            where S : unmanaged
-                => lhs.BlockCount == rhs.BlockCount ? lhs.BlockCount : badsize<int>(lhs.BlockCount,rhs.BlockCount);
-
-        /// <summary>
-        /// Returns the block count of spans of equal length; otherwise raises an error
-        /// </summary>
-        /// <param name="lhs">The left source</param>
-        /// <param name="rhs">The right source</param>
-        /// <typeparam name="T">The span element type</typeparam>
-        [MethodImpl(Inline)]   
-        public static int blockcount<S,T>(in Block128<S> lhs, in Block128<T> rhs)
-            where T : unmanaged
-            where S : unmanaged
-                => lhs.BlockCount == rhs.BlockCount ? lhs.BlockCount : badsize<int>(lhs.BlockCount,rhs.BlockCount);
-
-        /// <summary>
-        /// Returns the block count of spans of equal length; otherwise raises an error
-        /// </summary>
-        /// <param name="lhs">The left source</param>
-        /// <param name="rhs">The right source</param>
-        /// <typeparam name="T">The span element type</typeparam>
-        [MethodImpl(Inline)]   
-        public static int blockcount<S,T>(in Block256<S> lhs, in Block256<T> rhs)
-            where T : unmanaged
-            where S : unmanaged
-                => lhs.BlockCount == rhs.BlockCount ? lhs.BlockCount : badsize<int>(lhs.BlockCount,rhs.BlockCount);
     }
 }

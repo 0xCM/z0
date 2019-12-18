@@ -74,8 +74,5 @@ namespace Z0
         public static int blockedcells<T>(N512 n, int blocks)
             where T : unmanaged        
                 => blocks * blocklen<T>(n);
-
-
     }
-
 }

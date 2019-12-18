@@ -28,6 +28,11 @@ namespace Z0
         /// </summary>
         public readonly Vector256<T> Hi;
 
+        /// <summary>
+        /// The number of cells covered by the vector
+        /// </summary>
+        public static int Count => 2*Vector256<T>.Count;
+
         [MethodImpl(Inline)]
         public static implicit operator Vector512<T>((Vector256<T> a, Vector256<T> b) src)
             => new Vector512<T>(src.a, src.b);
