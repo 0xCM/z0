@@ -115,6 +115,22 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
+        public static Vector256<int> vswaphl(Vector256<int> x)
+            => vperm2x128(x,x, Perm2x4.DA);
+
+        /// <summary>
+        /// Swaps hi/lo 128-bit lanes
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<uint> vswaphl(Vector256<uint> x)
+            => vperm2x128(x,x, Perm2x4.DA);
+
+        /// <summary>
+        /// Swaps hi/lo 128-bit lanes
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
         public static Vector256<long> vswaphl(Vector256<long> x)
             => vperm2x128(x,x, Perm2x4.DA);
 

@@ -41,9 +41,7 @@ namespace Z0
         {
             vinflate(x, out Vector128<short>  x0, out Vector128<short> x1);
             vinflate(x, out Vector128<short>  y0, out Vector128<short> y1);
-            var z0 = vhadd(x0,y0);
-            var z1 = vhadd(x1,y1);
-            return vcompact(z0,z1, out Vector128<byte> _);
+            return vcompact(vhadd(x0,y0),vhadd(x1,y1), out Vector128<byte> _);
         }
 
         /// <summary>
@@ -74,20 +72,8 @@ namespace Z0
         {
             vinflate(x, out var x0, out var x1);
             vinflate(x, out var y0, out var y1);
-            var z0 = vhadd(x0,y0);
-            var z1 = vhadd(x1,y1);
-            return vcompact(z0,z1);
+            return vcompact(vhadd(x0,y0),vhadd(x1,y1));
         }
-
-        // [MethodImpl(Inline)]
-        // public static Vector256<byte> vhadd(Vector256<byte> x, Vector256<byte> y)
-        // {
-        //     vinflate(x, out Vector256<short>  x0, out Vector256<short> x1);
-        //     vinflate(x, out Vector256<short>  y0, out Vector256<short> y1);
-        //     var z0 = vhadd(x0,y0);
-        //     var z1 = vhadd(x1,y1);
-        //     return vcompact(z0,z1, out Vector256<byte> _);
-        // }
 
 
         /// <summary>

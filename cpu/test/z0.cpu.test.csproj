@@ -7,12 +7,9 @@
 
   <ItemGroup>
     <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />
-    <ProjectReference Include="$(TopDir)cpu/cpudata/z0.cpudata.csproj" />
     <ProjectReference Include="$(TopDir)cpu/cpufunc/z0.cpufunc.csproj" />
-        <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
-
+    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
-
   </ItemGroup>
 
 </Project>

@@ -82,5 +82,38 @@ namespace Z0
         public static Vector256<ulong> vadd(Vector256<ulong> x, Vector256<ulong> y)
             => Add(x, y);
 
+        
+        [MethodImpl(Inline)]
+        public static Vector512<byte> vadd(in Vector512<byte> x, in Vector512<byte> y)
+            => (Add(x.Lo, y.Lo), Add(x.Hi, y.Hi));
+
+        [MethodImpl(Inline)]
+        public static Vector512<sbyte> vadd(in Vector512<sbyte> x, in Vector512<sbyte> y)
+            => (Add(x.Lo, y.Lo), Add(x.Hi, y.Hi));
+
+        [MethodImpl(Inline)]
+        public static Vector512<short> vadd(Vector512<short> x, in Vector512<short> y)
+            => (Add(x.Lo, y.Lo), Add(x.Hi, y.Hi));
+
+        [MethodImpl(Inline)]
+        public static Vector512<ushort> vadd(in Vector512<ushort> x, in Vector512<ushort> y)
+            => (Add(x.Lo, y.Lo), Add(x.Hi, y.Hi));
+
+        [MethodImpl(Inline)]
+        public static Vector512<int> vadd(in Vector512<int> x, in Vector512<int> y)
+            => (Add(x.Lo, y.Lo), Add(x.Hi, y.Hi));
+
+        [MethodImpl(Inline)]
+        public static Vector512<uint> vadd(in Vector512<uint> x, in Vector512<uint> y)
+            => (Add(x.Lo, y.Lo), Add(x.Hi, y.Hi));
+
+        [MethodImpl(Inline)]
+        public static Vector512<long> vadd(in Vector512<long> x, in Vector512<long> y)
+            => (Add(x.Lo, y.Lo), Add(x.Hi, y.Hi));
+
+        [MethodImpl(Inline)]
+        public static Vector512<ulong> vadd(in Vector512<ulong> x, in Vector512<ulong> y)
+            => (Add(x.Lo, y.Lo), Add(x.Hi, y.Hi));
+
    }
 }

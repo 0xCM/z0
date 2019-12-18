@@ -56,49 +56,49 @@ namespace Z0
         ADDPS,
 
         /// <summary>
-        ///
+        /// Add Scalar Double-Precision Floating-Point Values
         /// </summary>     
-        ADDSD, // Add Scalar Double-Precision Floating-Point Values
+        ADDSD, 
 
         /// <summary>
-        ///
+        /// Add Scalar Single-Precision Floating-Point Values
         /// </summary>     
-        ADDSS, // Add Scalar Single-Precision Floating-Point Values
+        ADDSS, 
 
         /// <summary>
-        ///
+        ///  Packed Double-FP Add/Subtract
         /// </summary>     
-        ADDSUBPD, // Packed Double-FP Add/Subtract
+        ADDSUBPD,
 
         /// <summary>
-        ///
+        /// Packed Single-FP Add/Subtract
         /// </summary>     
-        ADDSUBPS, // Packed Single-FP Add/Subtract
+        ADDSUBPS,  
 
         /// <summary>
-        ///
+        /// Unsigned Integer Addition of Two Operands with Overflow Flag
         /// </summary>     
-        ADOX, // Unsigned Integer Addition of Two Operands with Overflow Flag
+        ADOX, 
 
         /// <summary>
-        ///
+        /// Perform One Round of an AES Decryption Flow
         /// </summary>     
-        AESDEC, // Perform One Round of an AES Decryption Flow
+        AESDEC, 
 
         /// <summary>
-        ///
+        ///  Perform Last Round of an AES Decryption Flow
         /// </summary>     
-        AESDECLAST, // Perform Last Round of an AES Decryption Flow
+        AESDECLAST,
 
         /// <summary>
-        ///
+        /// Perform One Round of an AES Encryption Flow
         /// </summary>     
-        AESENC, // Perform One Round of an AES Encryption Flow
+        AESENC,
 
         /// <summary>
-        ///
+        /// Perform Last Round of an AES Encryption Flow
         /// </summary>     
-        AESENCLAST, // Perform Last Round of an AES Encryption Flow
+        AESENCLAST,
 
         /// <summary>
         ///
@@ -731,9 +731,9 @@ namespace Z0
         FICOM, // Compare Integer
 
         /// <summary>
-        ///
+        /// Compare Integer
         /// </summary>     
-        FICOMP, // Compare Integer
+        FICOMP,
 
         /// <summary>
         ///
@@ -766,9 +766,9 @@ namespace Z0
         FINIT, // Initialize Floating-Point Unit
 
         /// <summary>
-        ///
+        /// Store Integer
         /// </summary>     
-        FIST, // Store Integer
+        FIST,
         
         /// <summary>
         ///
@@ -801,9 +801,9 @@ namespace Z0
         FLD1, // Load Constant
 
         /// <summary>
-        ///
+        /// Load x87 FPU Control Word
         /// </summary>     
-        FLDCW, // Load x87 FPU Control Word
+        FLDCW,
 
         /// <summary>
         ///
@@ -876,9 +876,9 @@ namespace Z0
         FNSTCW, // Store x87 FPU Control Word
 
         /// <summary>
-        ///
+        /// Store x87 FPU Environment
         /// </summary>     
-        FNSTENV, // Store x87 FPU Environment
+        FNSTENV,
 
         /// <summary>
         ///
@@ -956,9 +956,9 @@ namespace Z0
         FSTENV, // Store x87 FPU Environment
 
         /// <summary>
-        ///
+        /// Store Floating Point Value
         /// </summary>     
-        FSTP, // Store Floating Point Value
+        FSTP,
 
         /// <summary>
         ///
@@ -1114,197 +1114,965 @@ namespace Z0
         ///
         /// </summary>     
         INC, // Increment by 1
+
+        /// <summary>
+        ///
+        /// </summary>     
         INS, // Input from Port to String
+
+        /// <summary>
+        ///
+        /// </summary>     
         INSB, // Input from Port to String
+
+        /// <summary>
+        ///
+        /// </summary>     
         INSD, // Input from Port to String
+        
+        /// <summary>
+        ///
+        /// </summary>     
         INSERTPS, // Insert Scalar Single-Precision Floating-Point Value
+        
+        /// <summary>
+        ///
+        /// </summary>     
         INSW, // Input from Port to String
+
+        /// <summary>
+        ///
+        /// </summary>     
         INT_n, // Call to Interrupt Procedure
+
+        /// <summary>
+        ///
+        /// </summary>     
         INT1, // Call to Interrupt Procedure
+
+        /// <summary>
+        ///
+        /// </summary>     
         INT3, // Call to Interrupt Procedure
+
+        /// <summary>
+        ///
+        /// </summary>     
         INTO, // Call to Interrupt Procedure
+
+        /// <summary>
+        ///
+        /// </summary>     
         INVD, // Invalidate Internal Caches
+
+        /// <summary>
+        ///
+        /// </summary>     
         INVLPG, // Invalidate TLB Entries
+
+        /// <summary>
+        ///
+        /// </summary>     
         INVPCID, // Invalidate Process-Context Identifier
+
+        /// <summary>
+        ///
+        /// </summary>     
         IRET, // Interrupt Return
+
+        /// <summary>
+        ///
+        /// </summary>     
         IRETD, // Interrupt Return
+
+        /// <summary>
+        ///
+        /// </summary>     
         JMP, // Jump
+
+        /// <summary>
+        ///
+        /// </summary>     
         Jcc, // Jump if Condition Is Met
+
+        /// <summary>
+        ///
+        /// </summary>     
         KADDB, // ADD Two Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KADDD, // ADD Two Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KADDQ, // ADD Two Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KADDW, // ADD Two Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KANDB, // Bitwise Logical AND Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KANDD, // Bitwise Logical AND Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KANDNB, // Bitwise Logical AND NOT Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KANDND, // Bitwise Logical AND NOT Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KANDNQ, // Bitwise Logical AND NOT Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KANDNW, // Bitwise Logical AND NOT Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KANDQ, // Bitwise Logical AND Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KANDW, // Bitwise Logical AND Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KMOVB, // Move from and to Mask Registers
+
+        /// <summary>
+        ///
+        /// </summary>     
         KMOVD, // Move from and to Mask Registers
+
+        /// <summary>
+        ///
+        /// </summary>     
         KMOVQ, // Move from and to Mask Registers
+
+        /// <summary>
+        ///
+        /// </summary>     
         KMOVW, // Move from and to Mask Registers
+
+        /// <summary>
+        ///
+        /// </summary>     
         KNOTB, // NOT Mask Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         KNOTD, // NOT Mask Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         KNOTQ, // NOT Mask Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         KNOTW, // NOT Mask Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         KORB, // Bitwise Logical OR Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KORD, // Bitwise Logical OR Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KORQ, // Bitwise Logical OR Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KORTESTB, // OR Masks And Set Flags
+
+        /// <summary>
+        ///
+        /// </summary>     
         KORTESTD, // OR Masks And Set Flags
+
+        /// <summary>
+        ///
+        /// </summary>     
         KORTESTQ, // OR Masks And Set Flags
+
+        /// <summary>
+        ///
+        /// </summary>     
         KORTESTW, // OR Masks And Set Flags
+
+        /// <summary>
+        ///
+        /// </summary>     
         KORW, // Bitwise Logical OR Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KSHIFTLB, // Shift Left Mask Registers
+
+        /// <summary>
+        ///
+        /// </summary>     
         KSHIFTLD, // Shift Left Mask Registers
+
+        /// <summary>
+        ///
+        /// </summary>     
         KSHIFTLQ, // Shift Left Mask Registers
+
+        /// <summary>
+        ///
+        /// </summary>     
         KSHIFTLW, // Shift Left Mask Registers
+
+        /// <summary>
+        ///
+        /// </summary>     
         KSHIFTRB, // Shift Right Mask Registers
+
+        /// <summary>
+        ///
+        /// </summary>     
         KSHIFTRD, // Shift Right Mask Registers
+
+        /// <summary>
+        ///
+        /// </summary>     
         KSHIFTRQ, // Shift Right Mask Registers
+
+        /// <summary>
+        ///
+        /// </summary>     
         KSHIFTRW, // Shift Right Mask Registers
+
+        /// <summary>
+        ///
+        /// </summary>     
         KTESTB, // Packed Bit Test Masks and Set Flags
+
+        /// <summary>
+        ///
+        /// </summary>     
         KTESTD, // Packed Bit Test Masks and Set Flags
+
+        /// <summary>
+        ///
+        /// </summary>     
         KTESTQ, // Packed Bit Test Masks and Set Flags
+
+        /// <summary>
+        ///
+        /// </summary>     
         KTESTW, // Packed Bit Test Masks and Set Flags
+
+        /// <summary>
+        ///
+        /// </summary>     
         KUNPCKBW, // Unpack for Mask Registers
+
+        /// <summary>
+        ///
+        /// </summary>     
         KUNPCKDQ, // Unpack for Mask Registers
+
+        /// <summary>
+        ///
+        /// </summary>     
         KUNPCKWD, // Unpack for Mask Registers
+
+        /// <summary>
+        ///
+        /// </summary>     
         KXNORB, // Bitwise Logical XNOR Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KXNORD, // Bitwise Logical XNOR Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KXNORQ, // Bitwise Logical XNOR Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KXNORW, // Bitwise Logical XNOR Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KXORB, // Bitwise Logical XOR Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KXORD, // Bitwise Logical XOR Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KXORQ, // Bitwise Logical XOR Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         KXORW, // Bitwise Logical XOR Masks
+
+        /// <summary>
+        ///
+        /// </summary>     
         LAHF, // Load Status Flags into AH Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         LAR, // Load Access Rights Byte
+
+        /// <summary>
+        ///
+        /// </summary>     
         LDDQU, // Load Unaligned Integer 128 Bits
+
+        /// <summary>
+        ///
+        /// </summary>     
         LDMXCSR, // Load MXCSR Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         LDS, // Load Far Pointer
+
+        /// <summary>
+        ///
+        /// </summary>     
         LEA, // Load Effective Address
+
+        /// <summary>
+        ///
+        /// </summary>     
         LEAVE, // High Level Procedure Exit
+
+        /// <summary>
+        ///
+        /// </summary>     
         LES, // Load Far Pointer
+
+        /// <summary>
+        ///
+        /// </summary>     
         LFENCE, // Load Fence
+
+        /// <summary>
+        ///
+        /// </summary>     
         LFS, // Load Far Pointer
+
+        /// <summary>
+        ///
+        /// </summary>     
         LGDT, // Load Global/Interrupt Descriptor Table Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         LGS, // Load Far Pointer
+
+        /// <summary>
+        ///
+        /// </summary>     
         LIDT, // Load Global/Interrupt Descriptor Table Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         LLDT, // Load Local Descriptor Table Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         LMSW, // Load Machine Status Word
+
+        /// <summary>
+        ///
+        /// </summary>     
         LOCK, // Assert LOCK# Signal Prefix
+
+        /// <summary>
+        ///
+        /// </summary>     
         LODS, // Load String
+
+        /// <summary>
+        ///
+        /// </summary>     
         LODSB, // Load String
+
+        /// <summary>
+        ///
+        /// </summary>     
         LODSD, // Load String
+
+        /// <summary>
+        ///
+        /// </summary>     
         LODSQ, // Load String
+
+        /// <summary>
+        ///
+        /// </summary>     
         LODSW, // Load String
+
+        /// <summary>
+        ///
+        /// </summary>     
         LOOP, // Loop According to ECX Counter
+
+        /// <summary>
+        ///
+        /// </summary>     
         LOOPcc, // Loop According to ECX Counter
+
+        /// <summary>
+        ///
+        /// </summary>     
         LSL, // Load Segment Limit
+
+        /// <summary>
+        ///
+        /// </summary>     
         LSS, // Load Far Pointer
+
+        /// <summary>
+        ///
+        /// </summary>     
         LTR, // Load Task Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         LZCNT, // Count the Number of Leading Zero Bits
+
+        /// <summary>
+        ///
+        /// </summary>     
         MASKMOVDQU, // Store Selected Bytes of Double Quadword
+
+        /// <summary>
+        ///
+        /// </summary>     
         MASKMOVQ, // Store Selected Bytes of Quadword
+
+        /// <summary>
+        ///
+        /// </summary>     
         MAXPD, // Maximum of Packed Double-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MAXPS, // Maximum of Packed Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MAXSD, // Return Maximum Scalar Double-Precision Floating-Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         MAXSS, // Return Maximum Scalar Single-Precision Floating-Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         MFENCE, // Memory Fence
+
+        /// <summary>
+        ///
+        /// </summary>     
         MINPD, // Minimum of Packed Double-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MINPS, // Minimum of Packed Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MINSD, // Return Minimum Scalar Double-Precision Floating-Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         MINSS, // Return Minimum Scalar Single-Precision Floating-Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         MONITOR, // Set Up Monitor Address
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOV, // Move
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOV_1, // Move to/from Control Registers
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOV_2, // Move to/from Debug Registers
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVAPD, // Move Aligned Packed Double-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVAPS, // Move Aligned Packed Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVBE, // Move Data After Swapping Bytes
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVD, // Move Doubleword/Move Quadword
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVDDUP, // Replicate Double FP Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVDIR64B, // Move 64 Bytes as Direct Store
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVDIRI, // Move Doubleword as Direct Store
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVDQ2Q, // Move Quadword from XMM to MMX Technology Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVDQA, // Move Aligned Packed Integer Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVDQU, // Move Unaligned Packed Integer Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVHLPS, // Move Packed Single-Precision Floating-Point Values High to Low
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVHPD, // Move High Packed Double-Precision Floating-Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVHPS, // Move High Packed Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVLHPS, // Move Packed Single-Precision Floating-Point Values Low to High
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVLPD, // Move Low Packed Double-Precision Floating-Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVLPS, // Move Low Packed Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVMSKPD, // Extract Packed Double-Precision Floating-Point Sign Mask
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVMSKPS, // Extract Packed Single-Precision Floating-Point Sign Mask
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVNTDQ, // Store Packed Integers Using Non-Temporal Hint
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVNTDQA, // Load Double Quadword Non-Temporal Aligned Hint
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVNTI, // Store Doubleword Using Non-Temporal Hint
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVNTPD, // Store Packed Double-Precision Floating-Point Values Using Non-Temporal Hint
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVNTPS, // Store Packed Single-Precision Floating-Point Values Using Non-Temporal Hint
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVNTQ, // Store of Quadword Using Non-Temporal Hint
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVQ, // Move Doubleword/Move Quadword
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVQ_1, // Move Quadword
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVQ2DQ, // Move Quadword from MMX Technology to XMM Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVS, // Move Data from String to String
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVSB, // Move Data from String to String
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVSD, // Move Data from String to String
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVSD_1, // Move or Merge Scalar Double-Precision Floating-Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVSHDUP, // Replicate Single FP Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVSLDUP, // Replicate Single FP Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVSQ, // Move Data from String to String
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVSS, // Move or Merge Scalar Single-Precision Floating-Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVSW, // Move Data from String to String
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVSX, // Move with Sign-Extension
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVSXD, // Move with Sign-Extension
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVUPD, // Move Unaligned Packed Double-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVUPS, // Move Unaligned Packed Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MOVZX, // Move with Zero-Extend
+
+        /// <summary>
+        ///
+        /// </summary>     
         MPSADBW, // Compute Multiple Packed Sums of Absolute Difference
+
+        /// <summary>
+        ///
+        /// </summary>     
         MUL, // Unsigned Multiply
+
+        /// <summary>
+        ///
+        /// </summary>     
         MULPD, // Multiply Packed Double-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MULPS, // Multiply Packed Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MULSD, // Multiply Scalar Double-Precision Floating-Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         MULSS, // Multiply Scalar Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         MULX, // Unsigned Multiply Without Affecting Flags
+
+        /// <summary>
+        ///
+        /// </summary>     
         MWAIT, // Monitor Wait
+
+        /// <summary>
+        ///
+        /// </summary>     
         NEG, // Two's Complement Negation
+
+        /// <summary>
+        ///
+        /// </summary>     
         NOP, // No Operation
-        NOT, // One's Complement Negation
-        OR, // Logical Inclusive OR
-        ORPD, // Bitwise Logical OR of Packed Double Precision Floating-Point Values
+
+        /// <summary>
+        /// One's Complement Negation
+        /// </summary>     
+        NOT,
+
+        /// <summary>
+        /// Logical Inclusive OR
+        /// </summary>     
+        OR, //
+
+        /// <summary>
+        /// Bitwise Logical OR of Packed Double Precision Floating-Point Values
+        /// </summary>     
+        ORPD, //
+
+        /// <summary>
+        ///
+        /// </summary>     
         ORPS, // Bitwise Logical OR of Packed Single Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         OUT, // Output to Port
+
+        /// <summary>
+        ///
+        /// </summary>     
         OUTS, // Output String to Port
+
+        /// <summary>
+        ///
+        /// </summary>     
         OUTSB, // Output String to Port
+
+        /// <summary>
+        ///
+        /// </summary>     
         OUTSD, // Output String to Port
+
+        /// <summary>
+        ///
+        /// </summary>     
         OUTSW, // Output String to Port
+
+        /// <summary>
+        ///
+        /// </summary>     
         PABSB, // Packed Absolute Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         PABSD, // Packed Absolute Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         PABSQ, // Packed Absolute Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         PABSW, // Packed Absolute Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         PACKSSDW, // Pack with Signed Saturation
+
+        /// <summary>
+        ///
+        /// </summary>     
         PACKSSWB, // Pack with Signed Saturation
+
+        /// <summary>
+        ///
+        /// </summary>     
         PACKUSDW, // Pack with Unsigned Saturation
+
+        /// <summary>
+        ///
+        /// </summary>     
         PACKUSWB, // Pack with Unsigned Saturation
+
+        /// <summary>
+        ///
+        /// </summary>     
         PADDB, // Add Packed Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PADDD, // Add Packed Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PADDQ, // Add Packed Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PADDSB, // Add Packed Signed Integers with Signed Saturation
+
+        /// <summary>
+        ///
+        /// </summary>     
         PADDSW, // Add Packed Signed Integers with Signed Saturation
+
+        /// <summary>
+        ///
+        /// </summary>     
         PADDUSB, // Add Packed Unsigned Integers with Unsigned Saturation
+
+        /// <summary>
+        ///
+        /// </summary>     
         PADDUSW, // Add Packed Unsigned Integers with Unsigned Saturation
+
+        /// <summary>
+        ///
+        /// </summary>     
         PADDW, // Add Packed Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PALIGNR, // Packed Align Right
+
+        /// <summary>
+        ///
+        /// </summary>     
         PAND, // Logical AND
+
+        /// <summary>
+        ///
+        /// </summary>     
         PANDN, // Logical AND NOT
+
+        /// <summary>
+        ///
+        /// </summary>     
         PAUSE, // Spin Loop Hint
+
+        /// <summary>
+        ///
+        /// </summary>     
         PAVGB, // Average Packed Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PAVGW, // Average Packed Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PBLENDVB, // Variable Blend Packed Bytes
         PBLENDW, // Blend Packed Words
         PCLMULQDQ, // Carry-Less Multiplication Quadword
@@ -1835,19 +2603,73 @@ namespace Z0
         XEND, // Transactional End
         XGETBV, // Get Value of Extended Control Register
         XLAT, // Table Look-up Translation
+
+        /// <summary>
+        ///
+        /// </summary>     
         XLATB, // Table Look-up Translation
+
+        /// <summary>
+        ///
+        /// </summary>     
         XOR, // Logical Exclusive OR
+
+        /// <summary>
+        ///
+        /// </summary>     
         XORPD, // Bitwise Logical XOR of Packed Double Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         XORPS, // Bitwise Logical XOR of Packed Single Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         XRELEASE, // Hardware Lock Elision Prefix Hints
+
+        /// <summary>
+        ///
+        /// </summary>     
         XRSTOR, // Restore Processor Extended States
+
+        /// <summary>
+        ///
+        /// </summary>     
         XRSTORS, // Restore Processor Extended States Supervisor
+
+        /// <summary>
+        ///
+        /// </summary>     
         XSAVE, // Save Processor Extended States
+
+        /// <summary>
+        ///
+        /// </summary>     
         XSAVEC, // Save Processor Extended States with Compaction
+
+        /// <summary>
+        ///
+        /// </summary>     
         XSAVEOPT, // Save Processor Extended States Optimized
+
+
+        /// <summary>
+        ///
+        /// </summary>     
         XSAVES, // Save Processor Extended States Supervisor
+ 
+
+        /// <summary>
+        ///
+        /// </summary>     
         XSETBV, // Set Extended Control Register
-        XTEST, // Test If In Transactional Execution
+ 
+        /// <summary>
+        /// Test If In Transactional Execution
+        /// </summary>     
+        XTEST,
 
     }
 

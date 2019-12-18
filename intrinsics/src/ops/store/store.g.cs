@@ -38,6 +38,18 @@ namespace Z0
                 => vstore(src, ref head(dst), offset);
 
         /// <summary>
+        /// Stores vector content to a span
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target block</param>
+        /// <param name="offset">The target offset at which storage should begin</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static void vstore<T>(Vector512<T> src, Span<T> dst, int offset = 0)
+            where T : unmanaged
+                => vstore(src, ref head(dst), offset);
+
+        /// <summary>
         /// Stores the source vector to the head of a blocked container
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -80,6 +92,18 @@ namespace Z0
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
         public static void vstore<T>(Vector256<T> src, in Block256<T> dst, int block)
+            where T : unmanaged
+                => vstore(src, ref dst.BlockRef(block));
+
+        /// <summary>
+        /// Stores the source vector to a specified block in a blocked container
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target block</param>
+        /// <param name="block">The 0-based block index at which storage should begin</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static void vstore<T>(Vector512<T> src, in Block512<T> dst, int block)
             where T : unmanaged
                 => vstore(src, ref dst.BlockRef(block));
 
@@ -131,6 +155,14 @@ namespace Z0
                 vstore256_i(src, ref dst, offset);
             else 
                 vstore256_f(src, ref dst, offset);
+        }
+
+        [MethodImpl(Inline)]
+        public static void vstore<T>(Vector512<T> src, ref T dst, int offset = 0)
+            where T : unmanaged
+        {
+            vstore(src.Lo, ref dst, offset);
+            vstore(src.Hi, ref dst, offset + vcount<T>(n256));
         }
 
         [MethodImpl(Inline)]

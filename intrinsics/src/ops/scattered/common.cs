@@ -31,7 +31,7 @@ namespace Z0
             else if(typeof(W) == typeof(N256))
                 return Vector256<T>.Count;
             else if(typeof(W) == typeof(N512))
-                return Vector256<T>.Count*2;
+                return Vector512<T>.Count;
             else
                 return natval(w)/bitsize<T>();
         }            
@@ -57,6 +57,17 @@ namespace Z0
         public static int vcount<T>(N256 w = default, T t = default)
             where T : unmanaged
                 => Vector256<T>.Count;
+
+        /// <summary>
+        /// Returns the number of T-components covered by a 256-bit vector
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="t">The component type representative</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static int vcount<T>(N512 w = default, T t = default)
+            where T : unmanaged
+                => Vector512<T>.Count;
 
     }
 

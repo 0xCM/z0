@@ -13,7 +13,6 @@
     <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
     
-    <ProjectReference Include="$(TopDir)cpu/cpudata/z0.cpudata.csproj" />
     <ProjectReference Include="$(TopDir)cpu/cpufunc/z0.cpufunc.csproj" />
     <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />    
     <ProjectReference Include="$(TopDir)bits/src/z0.bits.csproj" />

@@ -11,25 +11,25 @@ namespace Z0
     public class t_vnegate : t_vinx<t_vnegate>
     {
         public void vnegate_128x8i()
-            => vnegate_check<sbyte>(n128,z8i);
+            => vnegate_check(n128,z8i);
 
         public void vnegate_128x16i()
-            => vnegate_check<short>(n128,z16i);
+            => vnegate_check(n128,z16i);
 
         public void vnegate_128x16u()
-            => vnegate_check<ushort>(n128,z16);
+            => vnegate_check(n128,z16);
 
         public void vnegate_128x32i()
-            => vnegate_check<int>(n128,z32i);
+            => vnegate_check(n128,z32i);
 
         public void vnegate_128x32u()
-            => vnegate_check<uint>(n128);
+            => vnegate_check(n128,z32);
 
         public void vnegate_128x64i()
-            => vnegate_check<long>(n128);
+            => vnegate_check(n128,z64i);
 
         public void vnegate_128x64u()
-            => vnegate_check<ulong>(n128);
+            => vnegate_check(n128,z64);
 
         public void vnegate_128x32f()
             => vnegate_check<float>(n128);
@@ -62,10 +62,10 @@ namespace Z0
             => vnegate_check<ulong>(n256);
 
         public void vnegate_256x32f()
-            => vnegate_check<float>(n256);
+            => vnegate_check(n256,z32f);
 
         public void vnegate_256x64f()
-            => vnegate_check<double>(n256);
+            => vnegate_check(n256,z64f);
 
         public void vnegate_blocks_128x8i()
             => vnegate_blocks_check<sbyte>(n128);

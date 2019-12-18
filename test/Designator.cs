@@ -28,7 +28,6 @@ namespace Z0.Designators
             D.CoreFunc.Assembly, 
             D.CoreFuncTest.Assembly, 
             
-            D.CpuData.Assembly,
             D.CpuFunc.Assembly,
             D.CpuTest.Assembly,
 

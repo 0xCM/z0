@@ -119,6 +119,7 @@ namespace Z0
             Disassemble(typeof(OC.vshift));  
             Disassemble(typeof(OC.vpattern));    
             Disassemble(typeof(OC.vperm));    
+            Disassemble(typeof(OC.v512));    
             
             Disassemble(typeof(SimdPack));
             Disassemble(typeof(zfoc));    
