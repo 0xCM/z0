@@ -71,7 +71,6 @@ namespace Z0
                 return vlo_f(src);
         }
 
-
         [MethodImpl(Inline)]
         public static Vector128<T> vlo_i<T>(Vector256<T> src)
             where T : unmanaged
@@ -111,7 +110,5 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
- 
-
     }
 }

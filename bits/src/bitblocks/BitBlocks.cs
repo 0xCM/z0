@@ -267,25 +267,5 @@ namespace Z0
             var q = Math.DivRem(bitcount, bitsize<T>(), out int r);            
             return r == 0 ? q : q + 1;
         }
-
-        [MethodImpl(Inline)]
-        static int stepsize<T>()
-            where T : unmanaged
-                => 256 / bitsize<T>();
-
-        [MethodImpl(Inline)]
-        public static void and<T>(in BitBlock<T> x, in BitBlock<T> y, ref BitBlock<T> z)        
-            where T : unmanaged
-                => vblock.and(n256, x.BlockCount, stepsize<T>(), in x.Head, y.Head, ref z.Head);
-
-        [MethodImpl(Inline)]
-        public static BitBlock<T> and<T>(in BitBlock<T> x,in BitBlock<T> y)
-            where T : unmanaged
-        {
-            var z = blockalloc<T>(x.BlockCount);
-            and(x,y,ref z);
-            return z;
-        }
-
    }
 }

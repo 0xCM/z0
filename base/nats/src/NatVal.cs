@@ -18,10 +18,6 @@ namespace Z0
     {        
         public readonly ulong Value;
 
-        [MethodImpl(Inline)]
-        public static NatVal From<N>(N n = default)
-            where N : unmanaged, ITypeNat
-                => NatMath.natval<N>();
 
         [MethodImpl(Inline)]
         internal static NatVal From(ulong src)

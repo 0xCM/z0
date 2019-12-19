@@ -18,7 +18,19 @@ namespace Z0.OpCodes
 
     public static class vblend
     {
-        
+
+        [MethodImpl(Inline)]
+        static byte makespec<A,B,C,D>(A a = default, B b = default, C c = default, D d = default)
+            where A : unmanaged, ITypeNat
+            where B : unmanaged, ITypeNat
+            where C : unmanaged, ITypeNat
+            where D : unmanaged, ITypeNat
+                =>(byte)(Nat.value(a) | Nat.value(b) << 2 | Nat.value(c) << 4 | Nat.value(d) << 6);
+
+        public static byte natcompute()
+        {
+            return makespec(n2,n1,n0,n3);
+        }
         public static Vector512<ushort> vblendp_256x16u(Vector256<ushort> x, Vector256<ushort> y, Vector256<ushort> spec)
             => ginx.vblendp(x,y,spec);
             

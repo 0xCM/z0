@@ -66,10 +66,6 @@ namespace Z0
 
     }
 
-    public static partial class vblock
-    {
-        
-    }
 
     /// <summary>
     /// Direct scalar intrinsics

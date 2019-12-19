@@ -12,6 +12,11 @@ namespace Z0
     using static As;
     using static AsIn;
 
+    static partial class vblock
+    {
+        
+    }
+
     /// <summary>
     /// Defines operators over square bit domains
     /// </summary>

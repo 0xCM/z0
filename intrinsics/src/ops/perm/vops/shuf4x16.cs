@@ -28,6 +28,7 @@ namespace Z0
         public static Vector128<short> vshufhi4x16(Vector128<short> src, Arrange4L spec)
             => ShuffleHigh(src, (byte)spec);
 
+
         /// <summary>
         /// __m128i _mm_shufflehi_epi16 (__m128i a, int control) PSHUFHW xmm, xmm/m128, imm8
         /// </summary>

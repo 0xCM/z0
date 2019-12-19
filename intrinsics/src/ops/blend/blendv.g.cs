@@ -15,34 +15,6 @@ namespace Z0
     partial class ginx
     {
         /// <summary>
-        /// Efects a "paired" or "permutation" blend that computes the vectors
-        /// lo := vblendv(x,y,spec)
-        /// hi := vblendv(x,y,vnot(spec))
-        /// </summary>
-        /// <param name="x">The first vector</param>
-        /// <param name="y">The second vector</param>
-        /// <param name="spec">The blend spec</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector512<T> vblendp<T>(Vector256<T> x, Vector256<T> y, Vector256<T> spec)        
-            where T : unmanaged
-                => (vblendv(x,y,spec),vblendv(x,y,vnot(spec)));
-
-        /// <summary>
-        /// Efects a "paired" or "permutation" blend that computes the vectors
-        /// lo := vblendv(x,y,spec)
-        /// hi := vblendv(x,y,vnot(spec))
-        /// </summary>
-        /// <param name="x">The first vector</param>
-        /// <param name="y">The second vector</param>
-        /// <param name="spec">The blend spec</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<T> vblendp<T>(Vector128<T> x, Vector128<T> y, Vector128<T> spec)        
-            where T : unmanaged
-                => vconcat(vblendv(x,y,spec),vblendv(x,y,vnot(spec)));
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="x">The left vector</param>

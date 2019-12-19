@@ -334,13 +334,14 @@ namespace Z0
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
-            var lhs = Random.Blocks<T>(w, blocks);
-            var rhs = Random.Blocks<T>(w, blocks);
-            var dst = DataBlocks.alloc<T>(w, blocks);
+            var xb = Random.Blocks<T>(w, blocks);
+            var yb = Random.Blocks<T>(w, blocks);
+            var zb = DataBlocks.alloc<T>(w, blocks);
+            ginx.vor(xb,yb,zb);
             
-            vblock.or(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
+            //vblock.or(w, blocks, step, in xb.Head, in yb.Head, ref zb.Head);
             for(var i=0; i<cells; i++)
-                Claim.eq(gmath.or(lhs[i],rhs[i]), dst[i]);
+                Claim.eq(gmath.or(xb[i],yb[i]), zb[i]);
         }
 
         protected void vor_blocks_check<T>(N256 w, T t = default)
@@ -351,13 +352,14 @@ namespace Z0
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
-            var lhs = Random.Blocks<T>(w, blocks);
-            var rhs = Random.Blocks<T>(w, blocks);
-            var dst = DataBlocks.alloc<T>(w, blocks);
+            var xb = Random.Blocks<T>(w, blocks);
+            var yb = Random.Blocks<T>(w, blocks);
+            var zb = DataBlocks.alloc<T>(w, blocks);
+            ginx.vor(xb,yb,zb);
             
-            vblock.or(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
+            //vblock.or(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
-                Claim.eq(gmath.or(lhs[i],rhs[i]), dst[i]);
+                Claim.eq(gmath.or(xb[i],yb[i]), zb[i]);
         }
      
         protected void vor_check<T>(N128 w, T t = default)
@@ -485,8 +487,9 @@ namespace Z0
             var xb = Random.Blocks<T>(w, blocks);
             var yb = Random.Blocks<T>(w, blocks);
             var zb = DataBlocks.alloc<T>(w, blocks);
+            ginx.vxor(xb,yb,zb);
             
-            vblock.xor(w, blocks, stats.BlockLength, in xb.Head, in yb.Head, ref zb.Head);
+            //vblock.xor(w, blocks, stats.BlockLength, in xb.Head, in yb.Head, ref zb.Head);
             
             for(var i=0; i<stats.CellCount; i++)
                 Claim.eq(gmath.xor(xb[i],yb[i]), zb[i]);
@@ -547,7 +550,9 @@ namespace Z0
             var xb = Random.Blocks(w, count, t);
             var yb = Random.Blocks(w, count, t);
             var zb = DataBlocks.alloc<T>(w, count);
-            vblock.xor(w, count, stats.BlockLength, in xb.Head, in yb.Head, ref zb.Head);
+            //vblock.xor(w, count, stats.BlockLength, in xb.Head, in yb.Head, ref zb.Head);
+            ginx.vxor(xb,yb,zb);
+
 
             for(var i=0; i < stats.CellCount; i++)
                 Claim.eq(gmath.xor(xb[i],yb[i]), zb[i]);
@@ -643,7 +648,9 @@ namespace Z0
             var lhs = Random.Blocks(w, count, t);
             var rhs = Random.Blocks(w, count, t);
             var dst = DataBlocks.alloc<T>(w, count);
-            vblock.add(w, count, step, in lhs.Head, in rhs.Head, ref dst.Head);
+            ginx.vadd(lhs,rhs,dst);
+
+            //vblock.add(w, count, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.add(lhs[i],rhs[i]), dst[i]);
         }
@@ -659,7 +666,8 @@ namespace Z0
             var lhs = Random.Blocks<T>(w, blocks);
             var rhs = Random.Blocks<T>(w, blocks);
             var dst = DataBlocks.alloc<T>(w, blocks);
-            vblock.add(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
+            ginx.vadd(lhs,rhs,dst);
+
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.add(lhs[i],rhs[i]), dst[i]);
         }
@@ -831,7 +839,8 @@ namespace Z0
 
             var src = Random.Blocks<T>(n, blocks);
             var dst = DataBlocks.alloc<T>(n, blocks);
-            vblock.negate(n, blocks, step, in src.Head, ref dst.Head);
+            ginx.vnegate(src,dst);
+
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.negate(src[i]), dst[i]);
         }
@@ -843,10 +852,11 @@ namespace Z0
             var stats = BlockStats.Calc<N256,T>(blocks);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
-
             var src = Random.Blocks<T>(n, blocks);
             var dst = DataBlocks.alloc<T>(n, blocks);
-            vblock.negate(n, blocks, step, in src.Head, ref dst.Head);
+            ginx.vnegate(src,dst);
+
+            //vblock.negate(n, blocks, step, in src.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.negate(src[i]), dst[i]);
         }
@@ -975,7 +985,9 @@ namespace Z0
             var lhs = Random.Blocks<T>(w, blocks);
             var rhs = Random.Blocks<T>(w, blocks);
             var dst = DataBlocks.alloc<T>(w, blocks);
-            vblock.max(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
+            ginx.vmax(lhs,rhs,dst);
+
+            //vblock.max(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.max(lhs[i],rhs[i]), dst[i]);
         }
@@ -991,7 +1003,9 @@ namespace Z0
             var lhs = Random.Blocks<T>(w, blocks);
             var rhs = Random.Blocks<T>(w, blocks);
             var dst = DataBlocks.alloc<T>(w, blocks);
-            vblock.max(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
+            ginx.vmax(lhs,rhs,dst);
+
+            //vblock.max(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.max(lhs[i],rhs[i]), dst[i]);
         }
@@ -1045,7 +1059,9 @@ namespace Z0
             var lhs = Random.Blocks<T>(w, blocks);
             var rhs = Random.Blocks<T>(w, blocks);
             var dst = DataBlocks.alloc<T>(w, blocks);
-            vblock.min(w, blocks, stats.BlockLength, in lhs.Head, in rhs.Head, ref dst.Head);
+            ginx.vmin(lhs,rhs,dst);
+
+            //vblock.min(w, blocks, stats.BlockLength, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<stats.CellCount; i++)
                 Claim.eq(gmath.min(lhs[i],rhs[i]), dst[i]);
         }
@@ -1059,7 +1075,9 @@ namespace Z0
             var lhs = Random.Blocks<T>(w, blocks);
             var rhs = Random.Blocks<T>(w, blocks);
             var dst = DataBlocks.alloc<T>(w, blocks);
-            vblock.min(w, blocks, stats.BlockLength, in lhs.Head, in rhs.Head, ref dst.Head);
+            ginx.vmin(lhs,rhs,dst);
+
+            //vblock.min(w, blocks, stats.BlockLength, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<stats.CellCount; i++)
                 Claim.eq(gmath.min(lhs[i],rhs[i]), dst[i]);
         }
@@ -1236,7 +1254,10 @@ namespace Z0
             var lhs = Random.Blocks<T>(w, blocks);
             var rhs = Random.Blocks<T>(w, blocks);
             var dst = DataBlocks.alloc<T>(w, blocks);
-            vblock.and(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
+            ginx.vand(lhs,rhs,dst);
+
+            //vblock.and(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
+            
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.and(lhs[i],rhs[i]), dst[i]);
         }
@@ -1252,7 +1273,9 @@ namespace Z0
             var lhs = Random.Blocks<T>(w, blocks);
             var rhs = Random.Blocks<T>(w, blocks);
             var dst = DataBlocks.alloc<T>(w, blocks);
-            vblock.and(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
+            ginx.vand(lhs,rhs,dst);
+
+            //vblock.and(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.and(lhs[i],rhs[i]), dst[i]);
         }
