@@ -53,5 +53,4 @@ namespace Z0
             where T : unmanaged
                 => random.Stream(domain, x => gmath.nonzero(x)).TakeArray(length);        
     }
-
 }

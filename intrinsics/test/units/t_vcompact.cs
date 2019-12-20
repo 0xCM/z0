@@ -123,17 +123,18 @@ namespace Z0
             
         }
         
-        public void vinflate_256x8_256x32x4_outline()
+        public void vinflate_256x8_1024x32_outline()
         {
             var n = n256;
 
             var a0 = vbuild.increments<uint>(n,0);
             var b0 = vbuild.increments<uint>(n,8);
             var c0 = vbuild.increments<uint>(n,16);
-            var d0 = vbuild.increments<uint>(n,24);        
+            var d0 = vbuild.increments<uint>(n,24);      
+
 
             dinx.vcompact(a0,b0,c0,d0, out var compacted);        
-            var inflated = dinx.vinflate(compacted, n, z32);
+            var inflated = dinx.vinflate(compacted, n1024, z32);
 
             Claim.eq(vbuild.increments<ushort>(n), dinx.vcompact(a0,b0));
             Claim.eq(vbuild.increments<byte>(n), compacted);

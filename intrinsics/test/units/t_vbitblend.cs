@@ -10,10 +10,10 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vblendbits : t_vinx<t_vblendbits>
+    public class t_vbitblend : t_vinx<t_vbitblend>
     {
 
-        public void vblendbits_basecases()
+        public void vbitblend_basecases()
         {
             var n = n256;
             var pattern = BitVector.natural(n8,(byte)0b10101010);
@@ -25,31 +25,31 @@ namespace Z0
 
         }
 
-        public void vblendbits_128x8u()
-            => vblendbits_check<byte>(n128);
+        public void vbitblend_128x8u()
+            => vbitblend_check<byte>(n128);
 
-        public void vblendbits_128x16u()
-            => vblendbits_check<ushort>(n128);
+        public void vbitblend_128x16u()
+            => vbitblend_check<ushort>(n128);
 
-        public void vblendbits_128x32u()
-            => vblendbits_check<uint>(n128);
+        public void vbitblend_128x32u()
+            => vbitblend_check<uint>(n128);
 
-        public void vblendbits_128x64u()
-            => vblendbits_check<ulong>(n128);
+        public void vbitblend_128x64u()
+            => vbitblend_check<ulong>(n128);
 
-        public void vblendbits_256x8u()
-            => vblendbits_check<byte>(n256);
+        public void vbitblend_256x8u()
+            => vbitblend_check<byte>(n256);
 
-        public void vblendbits_256x16u()
-            => vblendbits_check<ushort>(n256);
+        public void vbitblend_256x16u()
+            => vbitblend_check<ushort>(n256);
 
-        public void vblendbits_256x32u()
-            => vblendbits_check<uint>(n256);
+        public void vbitblend_256x32u()
+            => vbitblend_check<uint>(n256);
 
-        public void vblendbits_256x64u()
-            => vblendbits_check<ulong>(n256);
+        public void vbitblend_256x64u()
+            => vbitblend_check<ulong>(n256);
 
-        protected void vblendbits_check<T>(N256 w, T t = default)
+        protected void vbitblend_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
             var count = w/bitsize<T>();
@@ -84,7 +84,7 @@ namespace Z0
             }            
         }
 
-        protected void vblendbits_check<T>(N128 w, T t = default)
+        protected void vbitblend_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
             var count = w/bitsize<T>();            

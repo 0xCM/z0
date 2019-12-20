@@ -161,7 +161,7 @@ namespace Z0
             {
                 var x = Random.Next<T>();
                 var y = Random.Next<T>();
-                var a = op.apply(x,y);
+                var a = op.Invoke(x,y);
                 var b = gmath.add(x,y);
                 Claim.eq(a,b);
             }
@@ -210,7 +210,7 @@ namespace Z0
                 var y = Random.Next<T>();
 
                 counter.Start();
-                last = op.apply(x,y);
+                last = op.Invoke(x,y);
                 counter.Stop();
             }
 

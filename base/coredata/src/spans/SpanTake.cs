@@ -113,8 +113,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Converts the leading elements of a primal source span to a 32-bit usigned integer,
-        /// 0-filling the high bits if the source is too short
+        /// Converts the leading elements of a primal source span to a 32-bit usigned integer, 0-filling the high bits if the source is too short
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The primal source type</typeparam>
@@ -125,6 +124,32 @@ namespace Z0
             Span<byte> dst = stackalloc byte[4];       
             return BitConverter.ToUInt32(src.AsBytes().TakeBytes(dst));
         }
+
+        /// <summary>
+        /// Converts the leading elements of a primal source span to a 24-bit usigned integer
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline)]
+        public static uint TakeUInt24<T>(this ReadOnlySpan<T> src)
+            where T : unmanaged
+        {
+            Span<byte> dst = stackalloc byte[4];  
+            var bytes = src.AsBytes();
+            var len = Math.Min(bytes.Length, 3);
+            bytes.Slice(len).CopyTo(dst);
+            return MemoryMarshal.GetReference(dst.AsUInt32());
+        }
+        
+        /// <summary>
+        /// Converts the leading elements of a primal source span to a 24-bit usigned integer
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline)]
+        public static uint TakeUInt24<T>(this Span<T> src)
+            where T : unmanaged        
+                => src.ReadOnly().TakeUInt24();
 
         /// <summary>
         /// Converts the leading elements of a primal source span to a 32-bit usigned integer,

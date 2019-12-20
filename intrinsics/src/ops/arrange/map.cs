@@ -44,6 +44,26 @@ namespace Z0
 
         /// <summary>
         /// __m128i _mm_cvtepi8_epi16 (__m128i a) PMOVSXBW xmm, xmm/m64
+        /// 8x8i -> 8x16i
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<short> vmaplo(Vector128<sbyte> src, N128 w, short t = default)
+            => ConvertToVector128Int16(src);
+
+        /// <summary>
+        /// __m128i _mm_cvtepi8_epi16 (__m128i a) PMOVSXBW xmm, xmm/m64
+        /// 8x8i -> 8x16i
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<short> vmaphi(Vector128<sbyte> src, N128 w, short t = default)
+            => ConvertToVector128Int16(vhi(src));
+
+        /// <summary>
+        /// __m128i _mm_cvtepi8_epi16 (__m128i a) PMOVSXBW xmm, xmm/m64
         /// dst[i] = src[i], i = 1, ..., 7
         /// 8x8i -> 8x16u
         /// </summary>
@@ -301,23 +321,23 @@ namespace Z0
 
         /// <summary>
         /// __m256i _mm256_cvtepi8_epi16 (__m128i a) VPMOVSXBW ymm, xmm/m128
-        /// 16x8i -> 16x16i
+        /// 16x8u -> 16x16i
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static void vmaplo(Vector256<sbyte> src, out Vector256<short> dst)
-            => dst = ConvertToVector256Int16(vlo(src));
+        public static Vector256<short> vmaplo(Vector256<sbyte> src, N256 w, short t = default)
+            => ConvertToVector256Int16(vlo(src));
 
         /// <summary>
-        ///  __m256i _mm256_cvtepi8_epi16 (__m128i a) VPMOVSXBW ymm, xmm/m128
-        /// 16x8i -> 16x16i
+        /// __m256i _mm256_cvtepi8_epi16 (__m128i a) VPMOVSXBW ymm, xmm/m128
+        /// 16x8u -> 16x16i
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static void vmaphi(Vector256<sbyte> src, out Vector256<short> dst)
-            => dst = ConvertToVector256Int16(vhi(src));
+        public static Vector256<short> vmaphi(Vector256<sbyte> src, N256 w, short t = default)
+            => ConvertToVector256Int16(vhi(src));
 
         // ~ 256x8u -> X
         // ~ ------------------------------------------------------------------
@@ -364,6 +384,16 @@ namespace Z0
 
         // ~ 256x16i -> X
         // ~ ------------------------------------------------------------------
+        
+        /// <summary>
+        /// __m256i _mm256_cvtepi16_epi32 (__m128i a) VPMOVSXWD ymm, xmm/m128
+        /// 8x16i -> 8x32i
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<int> vmaplo(Vector256<short> src, N256 w, int t = default)
+            => ConvertToVector256Int32(vlo(src));
 
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi32 (__m128i a) VPMOVSXWD ymm, xmm/m128
@@ -372,18 +402,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<int> vmaplo(Vector256<short> src, out Vector256<int> dst)
-            => dst = ConvertToVector256Int32(vlo(src));
-
-        /// <summary>
-        /// __m256i _mm256_cvtepi16_epi32 (__m128i a) VPMOVSXWD ymm, xmm/m128
-        /// 8x16i -> 8x32i
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<int> vmaphi(Vector256<short> src, out Vector256<int> dst)
-            => dst = ConvertToVector256Int32(vhi(src));
+        public static Vector256<int> vmaphi(Vector256<short> src, N256 w, int t = default)
+            => ConvertToVector256Int32(vhi(src));
 
         // ~ 256x16u -> X
         // ~ ------------------------------------------------------------------
@@ -395,8 +415,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vmaplo(Vector256<ushort> src, out Vector256<uint> dst)
-            => dst = v32u(ConvertToVector256Int32(vlo(src)));
+        public static Vector256<uint> vmaplo(Vector256<ushort> src, N256 w, uint t = default)
+            => v32u(ConvertToVector256Int32(vlo(src)));
 
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi32 (__m128i a) VPMOVSXWD ymm, xmm/m128
@@ -405,8 +425,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vmaphi(Vector256<ushort> src, out Vector256<uint> dst)
-            => dst = v32u(ConvertToVector256Int32(vhi(src)));
+        public static Vector256<uint> vmaphi(Vector256<ushort> src, N256 w, uint t = default)
+            => v32u(ConvertToVector256Int32(vhi(src)));
 
         // ~ 256x32i -> X
         // ~ ------------------------------------------------------------------

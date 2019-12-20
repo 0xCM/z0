@@ -12,8 +12,8 @@ namespace Z0
 
     public static class Log
     {
-        static DataPaths Paths 
-            => DataPaths.The;
+        static LogPaths Paths 
+            => LogPaths.The;
             
         public static FilePath LogBenchmarks<R>(string basename, R[] records, LogWriteMode mode = LogWriteMode.Create, bool header = true, char delimiter = AsciSym.Pipe)
             where R : IRecord
@@ -22,7 +22,7 @@ namespace Z0
                 return FilePath.Empty;
                         
 
-            return Log.Get(LogTarget.Define(LogArea.Bench)).Log(records,FolderName.Empty, basename, mode, delimiter, header, FileExtension.Define("csv"));
+            return Log.Get(LogTarget.Define(LogArea.Bench)).Write(records,FolderName.Empty, basename, mode, delimiter, header, FileExtension.Define("csv"));
         }
 
         public static FilePath LogTestResults<R>(string basename, R[] records, LogWriteMode mode, bool header = true, char delimiter = AsciSym.Pipe)
@@ -35,7 +35,7 @@ namespace Z0
             if(records.Length == 0)
                 return FilePath.Empty;
             
-            return Log.Get(LogTarget.Define(LogArea.Test)).Log(records, subdir, basename, mode, delimiter, header, FileExtension.Define("csv"));
+            return Log.Get(LogTarget.Define(LogArea.Test)).Write(records, subdir, basename, mode, delimiter, header, FileExtension.Define("csv"));
         }
 
         public static ILogger Get(ILogTarget dst)
@@ -51,21 +51,26 @@ namespace Z0
         {
             public static ILogger TheOnly = new A();
             
+            public LogArea Area {get;}
+
+
             protected object locker = new object();
             
             protected Logger(LogArea Area)
-                => this.Area = Area;
+            {
+                this.Area = Area;
+            }
 
             FilePath LogPath
                 => Paths.DatedLogPath(Area,Area.ToString().ToLower());
 
-            public void Log(AppMsg src)
+            public void Write(AppMsg src)
             {
                 lock(locker)
                     LogPath.Append(src.ToString());
             }
 
-            public void Log(IEnumerable<AppMsg> src)
+            public void Write(IEnumerable<AppMsg> src)
             {
                 lock(locker)
                     LogPath.Append(src.Select(x => x.ToString()));
@@ -88,7 +93,7 @@ namespace Z0
                     ? (subdir.IsEmpty ? Paths.UniqueLogPath(Area,basename,ext) : Paths.UniqueLogPath(Area, subdir, basename,ext)) 
                     : (subdir.IsEmpty ?  Paths.LogPath(Area, basename, ext) : Paths.LogPath(Area, subdir, basename, ext)) ;
 
-            public FilePath Log<R>(IEnumerable<R> src, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header = true, FileExtension ext = null)
+            public FilePath Write<R>(IEnumerable<R> src, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header = true, FileExtension ext = null)
                 where R : IRecord
             {
                 var records = src.ToArray();
@@ -110,13 +115,12 @@ namespace Z0
                 return path;
             }
 
-            public void Log(string text)
+            public void Write(string text)
             {
                 lock(locker)
                     LogPath.Append(text);
             }
 
-            public LogArea Area {get;}
             
         }
 

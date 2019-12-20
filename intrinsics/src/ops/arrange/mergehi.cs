@@ -96,34 +96,18 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
-        /// <remarks>
-        /// x := [ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
-        /// y := [32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63]
-        /// z := [ 8, 40,  9, 41, 10, 42, 11, 43, 12, 44, 13, 45, 14, 46, 15, 47, 24, 56, 25, 57, 26, 58, 27, 59, 28, 60, 29, 61, 30, 62, 31, 63]
-        /// </remarks>
         [MethodImpl(Inline)]
-        public static Vector256<byte> vmergehi(Vector256<byte> x, Vector256<byte> y)
-            => UnpackHigh(x, y);
+        public static Vector256<sbyte> vmergehi(Vector256<sbyte> x, Vector256<sbyte> y)
+            => UnpackHigh(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
-
-        /// <summary>
-        /// __m256i _mm256_unpackhi_epi64 (__m256i a, __m256i b) VPUNPCKHQDQ ymm, ymm, ymm/m256
-        /// [0, 1, 2, 3] [4, 5, 6, 7] -> [1, 5, 3, 7]
-        /// </summary>
-        /// <param name="x">The left source vector</param>
-        /// <param name="y">The right source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<ulong> vmergehi(Vector256<ulong> x, Vector256<ulong> y)
-            => UnpackHigh(x, y);
- 
         /// <summary>
         /// __m256i _mm256_unpackhi_epi8 (__m256i a, __m256i b) VPUNPCKHBW ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<sbyte> vmergehi(Vector256<sbyte> x, Vector256<sbyte> y)
-            => UnpackHigh(x, y);
+        public static Vector256<byte> vmergehi(Vector256<byte> x, Vector256<byte> y)
+            => UnpackHigh(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// __m256i _mm256_unpackhi_epi16 (__m256i a, __m256i b) VPUNPCKHWD ymm, ymm, ymm/m256
@@ -132,7 +116,7 @@ namespace Z0
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<short> vmergehi(Vector256<short> x, Vector256<short> y)
-            => UnpackHigh(x, y);
+            => UnpackHigh(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// __m256i _mm256_unpackhi_epi16 (__m256i a, __m256i b) VPUNPCKHWD ymm, ymm, ymm/m256
@@ -141,7 +125,7 @@ namespace Z0
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<ushort> vmergehi(Vector256<ushort> x, Vector256<ushort> y)
-            => UnpackHigh(x, y);
+            => UnpackHigh(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// __m256i _mm256_unpackhi_epi32 (__m256i a, __m256i b) VPUNPCKHDQ ymm, ymm, ymm/m256
@@ -150,7 +134,7 @@ namespace Z0
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<int> vmergehi(Vector256<int> x, Vector256<int> y)
-            => UnpackHigh(x, y);
+            => UnpackHigh(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// __m256i _mm256_unpackhi_epi32 (__m256i a, __m256i b) VPUNPCKHDQ ymm, ymm, ymm/m256
@@ -159,7 +143,16 @@ namespace Z0
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<uint> vmergehi(Vector256<uint> x, Vector256<uint> y)
-            => UnpackHigh(x, y);
+            => UnpackHigh(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
+
+        /// <summary>
+        /// __m256i _mm256_unpackhi_epi64 (__m256i a, __m256i b) VPUNPCKHQDQ ymm, ymm, ymm/m256
+        /// </summary>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<ulong> vmergehi(Vector256<ulong> x, Vector256<ulong> y)
+             => UnpackHigh(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// __m256i _mm256_unpackhi_epi64 (__m256i a, __m256i b) VPUNPCKHQDQ ymm, ymm, ymm/m256
@@ -168,7 +161,7 @@ namespace Z0
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<long> vmergehi(Vector256<long> x, Vector256<long> y)
-            => UnpackHigh(x, y);
+            => UnpackHigh(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
  
    }
 }

@@ -11,7 +11,7 @@ namespace Z0
 
    public enum Arrange2L : byte
    {
-        A = 0b0,
+        A = 0b00,
 
         B = 0b01,
 

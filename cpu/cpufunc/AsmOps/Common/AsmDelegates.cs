@@ -13,19 +13,7 @@ namespace Z0
     using System.Reflection.Emit;
 
     using static zfunc;
-
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate T AsmBinOp<T>(T x, T y)
-        where T : unmanaged;
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Vector128<T> Asm128BinOp<T>(Vector128<T> x, Vector128<T> y)
-        where T : unmanaged;
-
-    [SuppressUnmanagedCodeSecurity]
-    public delegate T AsmUnaryOp<T>(T x)
-        where T : unmanaged;
+    
 
     [SuppressUnmanagedCodeSecurity]
     public delegate T AsmEmitter<T>()
@@ -62,7 +50,7 @@ namespace Z0
         /// <param name="code">The code to execute</param>
         /// <param name="name">The operator name</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public static AsmUnaryOp<T> CreateUnaryOp<T>(this AsmCode<T> code, string name = null)
+        public static UnaryOp<T> CreateUnaryOp<T>(this AsmCode<T> code, string name = null)
             where T : unmanaged
         {
             var t = typeof(T);
@@ -74,7 +62,7 @@ namespace Z0
             g.Emit(OpCodes.Ldc_I8, (long)code.Pointer);
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, returnType, argTypes);
             g.Emit(OpCodes.Ret);
-            return (AsmUnaryOp<T>)method.CreateDelegate(typeof(AsmUnaryOp<T>));
+            return (UnaryOp<T>)method.CreateDelegate(typeof(UnaryOp<T>));
         }
 
         /// <summary>
@@ -83,7 +71,7 @@ namespace Z0
         /// <param name="code">The code to execute</param>
         /// <param name="name">The operator name</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public static AsmBinOp<T> CreateBinOp<T>(this AsmCode<T> code, string name = null)
+        public static BinaryOp<T> CreateBinOp<T>(this AsmCode<T> code, string name = null)
             where T : unmanaged
         {
             var t = typeof(T);
@@ -96,10 +84,10 @@ namespace Z0
             g.Emit(OpCodes.Ldc_I8, (long)code.Pointer);
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, returnType, argTypes);
             g.Emit(OpCodes.Ret);
-            return (AsmBinOp<T>)method.CreateDelegate(typeof(AsmBinOp<T>));                
+            return (BinaryOp<T>)method.CreateDelegate(typeof(BinaryOp<T>));                
         }
 
-        public static AsmBinOp<T> CreateBinOp<T>(long pCode, string name = null)
+        public static BinaryOp<T> CreateBinOp<T>(long pCode, string name = null)
             where T : unmanaged
         {
             var t = typeof(T);
@@ -112,7 +100,7 @@ namespace Z0
             g.Emit(OpCodes.Ldc_I8, pCode);
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, returnType, argTypes);
             g.Emit(OpCodes.Ret);
-            return (AsmBinOp<T>)method.CreateDelegate(typeof(AsmBinOp<T>));
+            return (BinaryOp<T>)method.CreateDelegate(typeof(BinaryOp<T>));
         }
 
 
@@ -122,7 +110,7 @@ namespace Z0
         /// <param name="code">The code to execute</param>
         /// <param name="name">The operator name</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public static AsmBinOp<T> CreateBinOp<T>(byte* pCode, string name = null)
+        public static BinaryOp<T> CreateBinOp<T>(byte* pCode, string name = null)
             where T : unmanaged
         {
             var t = typeof(T);
@@ -135,7 +123,7 @@ namespace Z0
             g.Emit(OpCodes.Ldc_I8, (long)pCode);
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, returnType, argTypes);
             g.Emit(OpCodes.Ret);
-            return (AsmBinOp<T>)method.CreateDelegate(typeof(AsmBinOp<T>));
+            return (BinaryOp<T>)method.CreateDelegate(typeof(BinaryOp<T>));
                 
         }
 

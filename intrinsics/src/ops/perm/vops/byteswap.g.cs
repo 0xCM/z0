@@ -14,6 +14,10 @@ namespace Z0
 
     partial class ginx
     {
+        /// <summary>
+        /// Effects the reversal of the byte-level representation of each component in the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<T> vbyteswap<T>(Vector128<T> x)
             where T : unmanaged
@@ -30,6 +34,10 @@ namespace Z0
                 throw unsupported<T>();
         }
 
+        /// <summary>
+        /// Effects the reversal of the byte-level representation of each component in the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<T> vbyteswap<T>(Vector256<T> x)
             where T : unmanaged
@@ -45,7 +53,5 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
-
     }
-
 }

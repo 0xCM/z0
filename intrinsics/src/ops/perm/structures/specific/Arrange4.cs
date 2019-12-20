@@ -8,32 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;    
+    using static Perm4Sym;
 
     /// <summary>
-    /// Defines lierals that define arangments of for symbols that do not include permutations
+    /// Defines lierals that define arangments of symbols that may or may not be permutations
     /// </summary>
     public enum Arrange4L : byte
     {
-        /// <summary>
-        /// Identifies the first of four symbols
-        /// </summary>
-        A = Perm4L.A,
-
-        /// <summary>
-        /// Identifies the second of four symbols
-        /// </summary>
-        B = Perm4L.B,
-
-        /// <summary>
-        /// Identifies the third of four ssymbols
-        /// </summary>
-        C = Perm4L.C,
-
-        /// <summary>
-        /// Identifies the fourth of four symbols
-        /// </summary>
-        D = Perm4L.D,
-
         ABCD = A | (B << 2) | (C << 4) | (D << 6),
 
         DCBA = D | (C << 2) | (B << 4) | (A << 6),

@@ -23,6 +23,7 @@ namespace Z0
         }
 
         public readonly LogArea Area {get;}
+
         
         /// <summary>
         /// The classifier name

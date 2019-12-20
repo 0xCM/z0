@@ -13,46 +13,52 @@ namespace Z0
 
     partial class dinx
     {        
+        /// <summary>
+        /// Effects the reversal of the byte-level representation of each component in the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<ushort> vbyteswap(Vector128<ushort> x)
-        {
-            var spec = VData.byteswap(n128,n16);
-            return v16u(vshuf16x8(v8u(x), spec));
-        }
+            => vshuf16x8(x,VData.byteswap(n128,n16));
 
+        /// <summary>
+        /// Effects the reversal of the byte-level representation of each component in the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<uint> vbyteswap(Vector128<uint> x)
-        {
-            var spec = VData.byteswap(n128,n32);
-            return v32u(vshuf16x8(v8u(x), spec));
-        }
+            => vshuf16x8(x,VData.byteswap(n128,n32));
 
+        /// <summary>
+        /// Effects the reversal of the byte-level representation of each component in the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<ulong> vbyteswap(Vector128<ulong> x)
-        {
-            var spec = VData.byteswap(n128,n64);
-            return v64u(vshuf16x8(v8u(x), spec));
-        }
+            => vshuf16x8(x,VData.byteswap(n128,n64));
 
+        /// <summary>
+        /// Effects the reversal of the byte-level representation of each component in the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<ushort> vbyteswap(Vector256<ushort> x)
-        {
-            var spec = VData.byteswap(n256,n16);
-            return v16u(vshuf16x8(v8u(x), spec));
-        }
+            => vshuf16x8(x,VData.byteswap(n256,n16));
 
+        /// <summary>
+        /// Effects the reversal of the byte-level representation of each component in the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<uint> vbyteswap(Vector256<uint> x)
-        {
-            var spec = VData.byteswap(n256,n32);
-            return v32u(vshuf16x8(v8u(x), spec));
-        }
+            => vshuf16x8(x,VData.byteswap(n256,n32));
 
+        /// <summary>
+        /// Effects the reversal of the byte-level representation of each component in the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vbyteswap(Vector256<ulong> x)
-        {
-            var spec = VData.byteswap(n256,n64);
-            return v64u(vshuf16x8(v8u(x), spec));
-        }
+            => vshuf16x8(x,VData.byteswap(n256,n64));
     }
 }

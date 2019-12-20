@@ -13,8 +13,8 @@ namespace Z0
 
     public static class LogX
     {
-        static DataPaths Paths
-            => DataPaths.The;
+        static LogPaths Paths
+            => LogPaths.The;
 
         /// <summary>
         /// Creates a fully-qualified log file path

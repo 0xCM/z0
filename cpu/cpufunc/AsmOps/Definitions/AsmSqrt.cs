@@ -21,14 +21,14 @@ namespace Z0
             
             public static readonly SqrtHost<T> TheOnly = default;
 
-            static readonly AsmUnaryOp<T> Reified = SqrtCode<T>().CreateUnaryOp();
+            static readonly UnaryOp<T> Reified = SqrtCode<T>().CreateUnaryOp();
             
-            public AsmUnaryOp<T> Operator
+            public UnaryOp<T> Operator
                 => Reified;
         }
 
          [MethodImpl(Inline)]
-         public static AsmUnaryOp<T> Sqrt<T>()
+         public static UnaryOp<T> Sqrt<T>()
             where T : unmanaged
                 => SqrtHost<T>.TheOnly.Operator;
 

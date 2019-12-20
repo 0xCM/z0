@@ -66,6 +66,11 @@ namespace Z0
 
         public string Format()
             => buffer.FormatList();
+        
+        [MethodImpl(Inline)]
+        public S PeekValue<S>()
+            where S : unmanaged
+                => head(buffer.As<T,S>());
     }
 
 }

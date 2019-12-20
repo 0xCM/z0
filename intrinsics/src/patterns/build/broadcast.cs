@@ -63,6 +63,16 @@ namespace Z0
                 return vbc_f(n, src);
        }
 
+        /// <summary>
+        /// Projects a scalar value onto each component of a 512-bit vector
+        /// </summary>
+        /// <param name="n">The bitness selector</param>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector512<T> broadcast<T>(N512 n, T src)
+            where T : unmanaged
+                => (broadcast(n256,src), broadcast(n256,src));
 
         [MethodImpl(Inline)]
         public static Vector128<T> vbc_i<T>(N128 n, T src)

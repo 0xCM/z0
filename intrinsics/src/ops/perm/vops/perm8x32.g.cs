@@ -15,24 +15,44 @@ namespace Z0
     partial class ginx
     {
         /// <summary>
-        /// Applies a cross-lane permutation over 8 32-bit segments in the source vector as indicated by the perm spec
+        /// Applies a cross-lane permutation over 8 32-bit source vector segments
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The perm spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        public static Vector256<T> vperm8x32<T>(Vector256<T> x, Vector256<uint> spec)        
+        public static Vector256<T> vperm8x32<T>(Vector256<T> src, Vector256<uint> spec)        
+            where T : unmanaged
+                => vperm8x32_u(src,spec);
+
+        static Vector256<T> vperm8x32_u<T>(Vector256<T> src, Vector256<uint> spec)        
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(v8u(dinx.vperm8x32(v32u(x), spec)));
+                return vgeneric<T>(dinx.vperm8x32(v8u(src), spec));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(v16u(dinx.vperm8x32(v32u(x), spec)));
+                return vgeneric<T>(dinx.vperm8x32(v16u(src), spec));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vperm8x32(vcast32u(x), spec));
+                return vgeneric<T>(dinx.vperm8x32(v32u(src), spec));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(v64u(dinx.vperm8x32(v32u(x), spec)));
+                return vgeneric<T>(dinx.vperm8x32(v64u(src), spec));
+            else
+                return vperm8x32_i(src,spec);
+        }
+
+        static Vector256<T> vperm8x32_i<T>(Vector256<T> src, Vector256<uint> spec)        
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return vgeneric<T>(dinx.vperm8x32(v8i(src), spec));
+            else if(typeof(T) == typeof(short))
+                return vgeneric<T>(dinx.vperm8x32(v16i(src), spec));
+            else if(typeof(T) == typeof(int))
+                return vgeneric<T>(dinx.vperm8x32(v32i(src), spec));
+            else if(typeof(T) == typeof(long))
+                return vgeneric<T>(dinx.vperm8x32(v64i(src), spec));
             else
                 throw unsupported<T>();
         }
+
     }
 }

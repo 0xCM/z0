@@ -11,16 +11,16 @@ namespace Z0
     public class t_vadd : t_vinx<t_vadd>
     {
         public void add_128x8i()
-            => add_check<sbyte>(n128);
+            => add_check(n128,z8i);
 
         public void add_128x8u()
-            => add_check<byte>(n128);
+            => add_check(n128,z8);
 
         public void add_128x16u()
-            => add_check<ushort>(n128);
+            => add_check(n128,z16);
 
         public void add_128x16i()
-            => add_check<short>(n128);
+            => add_check(n128,z16i);
 
         public void add_128x32i()
             => add_check<int>(n128);

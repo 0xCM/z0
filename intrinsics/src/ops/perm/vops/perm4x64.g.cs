@@ -15,11 +15,11 @@ namespace Z0
     partial class ginx
     {
         /// <summary>
-        /// Permutes 4 64-bit source vector segments as described by the perm spec
+        /// Permutes 4 64-bit source vector segments
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="spec">The perm spec</param>
-        /// <typeparam name="T">The primal component type</typeparam>
+        /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> vperm4x64<T>(Vector256<T> x, Perm4L spec)
             where T : unmanaged

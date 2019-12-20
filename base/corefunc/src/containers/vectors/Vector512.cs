@@ -11,6 +11,37 @@ namespace Z0
 
     using static zfunc;
 
+    public static class Vector512
+    {
+        [MethodImpl(Inline)]
+        public static Vector512<int> Create(int x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7,
+            int x8, int x9, int x10, int x11, int x12, int x13, int x14, int x15)        
+                => (Vector256.Create(x0,x1, x2, x3,x4,x5,x6,x7), Vector256.Create(x8,x9,x10,x11,x12,x13,x14,x15));
+
+        [MethodImpl(Inline)]
+        public static Vector512<uint> Create(uint x0, uint x1, uint x2, uint x3, uint x4, uint x5, uint x6, uint x7,
+            uint x8, uint x9, uint x10, uint x11, uint x12, uint x13, uint x14, uint x15)        
+                => (Vector256.Create(x0,x1, x2, x3,x4,x5,x6,x7), Vector256.Create(x8,x9,x10,x11,x12,x13,x14,x15));
+
+        [MethodImpl(Inline)]
+        public static Vector512<long> Create(long x0, long  x1, long  x2, long  x3, long x4, long  x5, long  x6, long  x7)        
+            => (Vector256.Create(x0,x1, x2, x3), Vector256.Create(x4, x5, x6, x7));
+
+        [MethodImpl(Inline)]
+        public static Vector512<ulong> Create(ulong x0, ulong  x1, ulong  x2, ulong  x3, ulong x4, ulong  x5, ulong  x6, ulong  x7)        
+            => (Vector256.Create(x0,x1, x2, x3), Vector256.Create(x4, x5, x6, x7));
+
+        [MethodImpl(Inline)]
+        public static Vector512<float> Create(float x0, float x1, float x2, float x3, float x4, float x5, float x6, float x7,
+            float x8, float x9, float x10, float x11, float x12, float x13, float x14, float x15)        
+                => (Vector256.Create(x0,x1, x2, x3,x4,x5,x6,x7), Vector256.Create(x8,x9,x10,x11,x12,x13,x14,x15));
+
+        [MethodImpl(Inline)]
+        public static Vector512<double> Create(double x0, double  x1, double  x2, double  x3, double x4, double  x5, double  x6, double  x7)        
+            => (Vector256.Create(x0,x1, x2, x3), Vector256.Create(x4, x5, x6, x7));
+
+    }
+
     /// <summary>
     /// 2x256
     /// </summary>
@@ -38,7 +69,7 @@ namespace Z0
             => new Vector512<T>(src.a, src.b);
 
         [MethodImpl(Inline)]
-        public static implicit operator Vector512<T>(ConstPair<Vector256<T>> src)
+        public static implicit operator Vector512<T>(in ConstPair<Vector256<T>> src)
             => new Vector512<T>(src.A, src.B);
          
         [MethodImpl(Inline)]
@@ -86,11 +117,11 @@ namespace Z0
         public bool Equals(in Vector512<T> rhs)
             => Lo.Equals(rhs.Lo) && Hi.Equals(rhs.Hi);
 
-        public string Format()
+        public string Format(char sep = ',', int pad = 0)
             => bracket(concat(
-                    Lo.Format(sep:AsciSym.Comma, bracketed:false), 
-                    AsciSym.Comma, AsciSym.Space, 
-                    Hi.Format(sep:AsciSym.Comma,bracketed:false)));
+                    Lo.Format(sep:sep, pad:pad, bracketed:false), 
+                    $"{sep} ",
+                    Hi.Format(sep:sep, pad:pad, bracketed:false)));
 
         public override int GetHashCode()
             => HashCode.Combine(Lo,Hi);

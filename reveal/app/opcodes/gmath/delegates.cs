@@ -14,7 +14,7 @@ namespace Z0
     {
 
         public static uint add_sdel_u32(uint a, uint b)
-            => SDel.add<uint>().apply(a,b);
+            => SDel.add<uint>().Invoke(a,b);
     
         public static uint add_gdel_u32(uint a, uint b)
         {

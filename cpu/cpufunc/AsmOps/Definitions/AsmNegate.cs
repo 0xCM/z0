@@ -19,14 +19,14 @@ namespace Z0
         {
             public static readonly NegateHost<T> TheOnly = default;
 
-            static readonly AsmUnaryOp<T> Reified = NegateCode<T>().CreateUnaryOp();
+            static readonly UnaryOp<T> Reified = NegateCode<T>().CreateUnaryOp();
 
-            public AsmUnaryOp<T> Operator
+            public UnaryOp<T> Operator
                 => Reified;
         }
 
         [MethodImpl(Inline)]
-        public static AsmUnaryOp<T> Negate<T>()
+        public static UnaryOp<T> Negate<T>()
             where T : unmanaged
                 => NegateHost<T>.TheOnly.Operator;
 

@@ -21,15 +21,15 @@ namespace Z0
             
             public static readonly AddHost<T> TheOnly = default;
 
-            static readonly AsmBinOp<T> Reified = AddCode<T>().CreateBinOp();
+            static readonly BinaryOp<T> Reified = AddCode<T>().CreateBinOp();
             
-            public AsmBinOp<T> Operator
+            public BinaryOp<T> Operator
                 => Reified;
         }
     
         
         [MethodImpl(Inline)]
-        public static AsmBinOp<T> Add<T>()
+        public static BinaryOp<T> Add<T>()
             where T : unmanaged
             => AddHost<T>.TheOnly.Operator;
 

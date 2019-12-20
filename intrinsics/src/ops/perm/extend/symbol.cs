@@ -36,6 +36,14 @@ namespace Z0
             => Perms.symbols(src);
 
         /// <summary>
+        /// Deconstructs a permutation literal into an odered sequence of symbols that define the permutation
+        /// </summary>
+        /// <param name="src">The perm literal</param>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<char> Symbols(this Perm2x4 src)
+            => Perms.symbols(src);
+
+        /// <summary>
         /// Determines whether a permutation literal is a symbol
         /// </summary>
         /// <param name="src">The value to inspect</param>

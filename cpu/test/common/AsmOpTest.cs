@@ -14,7 +14,7 @@ namespace Z0
     public abstract class AsmOpTest<U> : UnitTest<U>
         where U : AsmOpTest<U>
     {
-        protected void VerifyOp<T>(AsmBinOp<T> asmop, Func<T,T,T> refop, int? n = null)
+        protected void VerifyOp<T>(BinaryOp<T> asmop, Func<T,T,T> refop, int? n = null)
             where T : unmanaged
         {
             var lhs = Random.Array<T>(n ?? SampleSize);
@@ -29,7 +29,7 @@ namespace Z0
             Claim.eq(0, execute.Count());            
         }
 
-        protected void VerifyOp<T>(AsmUnaryOp<T> asmop, Func<T,T> refop, int? n = null)
+        protected void VerifyOp<T>(UnaryOp<T> asmop, Func<T,T> refop, int? n = null)
             where T : unmanaged
         {
             var src = Random.Array<T>(n ?? SampleSize);

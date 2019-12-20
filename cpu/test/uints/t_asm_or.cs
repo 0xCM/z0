@@ -71,7 +71,7 @@ namespace Z0
             Benchmark("or_cs_64u",counter);
         }
 
-        void asm_binop_bench<T>(AsmBinOp<T> op, SystemCounter counter = default)
+        void asm_binop_bench<T>(BinaryOp<T> op, SystemCounter counter = default)
             where T :unmanaged
         {
             var last = default(T);

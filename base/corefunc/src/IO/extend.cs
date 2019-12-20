@@ -26,7 +26,10 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The file path</param>
         public static StreamWriter Writer(this FilePath dst, bool append = false)
-            => new StreamWriter(dst.FullPath,append);
+        {
+            dst.FolderPath.CreateIfMissing();
+            return new StreamWriter(dst.FullPath,append);
+        }
 
         /// <summary>
         /// Determines whether a file exists

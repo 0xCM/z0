@@ -21,7 +21,7 @@ namespace Z0
             where T : unmanaged
         {
             var last = default(Vector128<T>);
-            var del = new Asm128BinOp<T>(ginx.vadd);
+            var del = new BinaryOp128<T>(ginx.vadd);
             
             for(var i=0; i<OpCount; i++)
             {

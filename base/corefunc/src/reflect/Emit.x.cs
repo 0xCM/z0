@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="t">A declaring type representative</param>
         /// <typeparam name="T">The declaring type</typeparam>
         [MethodImpl(Inline)]
-        public static Func<T,T,T> BinOpCall<T>(MethodInfo target, T t = default)
+        public static Func<T,T,T> BinOpCall<T>(this MethodInfo target, T t = default)
             where T : unmanaged
                 => target.UncachedBinOpCall(t);
 
@@ -32,11 +32,11 @@ namespace Z0
         /// <param name="t">A declaring type representative</param>
         /// <typeparam name="T">The declaring type</typeparam>
         [MethodImpl(Inline)]
-        public static Func<T,T,T> BinOpCalli<T>(MethodInfo target, T t = default)
+        public static Func<T,T,T> BinOpCalli<T>(this MethodInfo target, T t = default)
             where T : unmanaged
                 => target.UncachedBinOpCalli(t);
 
-        internal static Func<T,T,T> UncachedBinOpCalli<T>(this MethodInfo target, T t = default)
+        public static MethodInfo BinOpCalliMethod<T>(this MethodInfo target, T t = default)
             where T : unmanaged
         {
             var operand = typeof(T);
@@ -48,8 +48,12 @@ namespace Z0
             g.Emit(OpCodes.Ldarg_1);
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, returnType, args);
             g.Emit(OpCodes.Ret);
-            return (Func<T,T,T>) method.CreateDelegate(typeof(Func<T,T,T>));
+            return method;
         }
+
+        internal static Func<T,T,T> UncachedBinOpCalli<T>(this MethodInfo target, T t = default)
+            where T : unmanaged
+                => (Func<T,T,T>) target.BinOpCalliMethod(t).CreateDelegate(typeof(Func<T,T,T>));
 
         internal static Func<T,T,T> UncachedBinOpCall<T>(this MethodInfo target, T t = default)
         {

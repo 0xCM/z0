@@ -16,5 +16,5 @@ partial class zfunc
     /// <param name="messages">The messages to emit</param>
     /// <param name="dst">The destination log</param>
     public static void log(IEnumerable<AppMsg> messages, LogArea dst)
-        => Log.Get(LogTarget.Define(dst)).Log(messages);
+        => Log.Get(LogTarget.Define(dst)).Write(messages);
 }

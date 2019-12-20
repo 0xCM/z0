@@ -24,8 +24,7 @@ namespace Z0
         {
             var product = Multiply(lhs,rhs);
             var sum = vadd(vlo(product),vhi(product));
-            var span = sum.ToBlock();
-            return span[0] + span[1];            
+            return sum.Cell(0) + sum.Cell(1);
         }
 
         [MethodImpl(Inline)]
@@ -33,8 +32,7 @@ namespace Z0
         {
             var product = Multiply(lhs,rhs);
             var sum = vadd(vlo(product),vhi(product));
-            var span = sum.ToBlock();
-            return span[0] + span[1];            
+            return sum.Cell(0) + sum.Cell(1);
         }
     }
 }

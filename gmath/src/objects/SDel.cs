@@ -9,25 +9,6 @@ namespace Z0
         
     using static zfunc;
 
-    public interface IBinaryOp<T>
-        where T : unmanaged
-    {
-        T apply(T x, T y);        
-    }
-
-    public interface IBinaryPred<T>
-        where T : unmanaged
-    {
-        bit apply(T x, T y);        
-    }
-
-
-    public interface IUnaryOp<T>
-        where T : unmanaged
-    {
-        T apply(T x);        
-    }
-
     public static class SDel
     {
         [MethodImpl(Inline)]
@@ -83,59 +64,59 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T apply<T>(AddOp<T> op, T x, T y)
             where T : unmanaged        
-                => op.apply(x,y);
+                => op.Invoke(x,y);
 
         [MethodImpl(Inline)]
         public static T apply<T>(SubOp<T> op, T x, T y)
             where T : unmanaged        
-                => op.apply(x,y);
+                => op.Invoke(x,y);
 
         [MethodImpl(Inline)]
         public static T apply<T>(MulOp<T> op, T x, T y)
             where T : unmanaged        
-                => op.apply(x,y);
+                => op.Invoke(x,y);
 
         [MethodImpl(Inline)]
         public static T apply<T>(DivOp<T> op, T x, T y)
             where T : unmanaged        
-                => op.apply(x,y);
+                => op.Invoke(x,y);
 
         [MethodImpl(Inline)]
         public static T apply<T>(ModOp<T> op, T x, T y)
             where T : unmanaged        
-                => op.apply(x,y);
+                => op.Invoke(x,y);
 
         [MethodImpl(Inline)]
         public static T apply<T>(AbsOp<T> op, T x)
             where T : unmanaged        
-                => op.apply(x);
+                => op.Invoke(x);
 
         [MethodImpl(Inline)]
         public static T apply<T>(IncOp<T> op, T x)
             where T : unmanaged        
-                => op.apply(x);
+                => op.Invoke(x);
 
         [MethodImpl(Inline)]
         public static T apply<T>(DecOp<T> op, T x)
             where T : unmanaged        
-                => op.apply(x);
+                => op.Invoke(x);
 
         [MethodImpl(Inline)]
         public static T apply<T>(NegateOp<T> op, T x)
             where T : unmanaged        
-                => op.apply(x);
+                => op.Invoke(x);
 
         [MethodImpl(Inline)]
         public static T apply<T>(NotOp<T> op, T x)
             where T : unmanaged        
-                => op.apply(x);
+                => op.Invoke(x);
     }
 
     public readonly struct AddOp<T> : IBinaryOp<T>
         where T : unmanaged        
     {
         [MethodImpl(Inline)]
-        public readonly T apply(T x, T y)
+        public readonly T Invoke(T x, T y)
             => gmath.add(x,y);
     }
 
@@ -143,15 +124,15 @@ namespace Z0
         where T : unmanaged        
     {
         [MethodImpl(Inline)]
-        public readonly T apply(T x, T y)
+        public readonly T Invoke(T x, T y)
             => gmath.sub(x,y);
     }
 
-    public readonly struct MulOp<T>
+    public readonly struct MulOp<T> : IBinaryOp<T>
         where T : unmanaged        
     {    
         [MethodImpl(Inline)]
-        public readonly T apply(T x, T y)
+        public readonly T Invoke(T x, T y)
             => gmath.mul(x,y);
     }
 
@@ -159,7 +140,7 @@ namespace Z0
         where T : unmanaged        
     {
         [MethodImpl(Inline)]
-        public readonly T apply(T x, T y)
+        public readonly T Invoke(T x, T y)
             => gmath.div(x,y);
     }
 
@@ -167,7 +148,7 @@ namespace Z0
         where T : unmanaged        
     {
         [MethodImpl(Inline)]
-        public readonly T apply(T x, T y)
+        public readonly T Invoke(T x, T y)
             => gmath.mod(x,y);
     }
 
@@ -175,7 +156,7 @@ namespace Z0
         where T : unmanaged        
     {
         [MethodImpl(Inline)]
-        public readonly T apply(T x)
+        public readonly T Invoke(T x)
             => gmath.abs(x);
     }
 
@@ -183,7 +164,7 @@ namespace Z0
         where T : unmanaged        
     {
         [MethodImpl(Inline)]
-        public readonly T apply(T x)
+        public readonly T Invoke(T x)
             => gmath.inc(x);
     }
 
@@ -191,7 +172,7 @@ namespace Z0
         where T : unmanaged        
     {
         [MethodImpl(Inline)]
-        public readonly T apply(T x)
+        public readonly T Invoke(T x)
             => gmath.dec(x);
     }
 
@@ -199,7 +180,7 @@ namespace Z0
         where T : unmanaged        
     {
         [MethodImpl(Inline)]
-        public readonly T apply(T x)
+        public readonly T Invoke(T x)
             => gmath.negate(x);
     }
 
@@ -207,7 +188,7 @@ namespace Z0
         where T : unmanaged        
     {
         [MethodImpl(Inline)]
-        public readonly T apply(T x)
+        public readonly T Invoke(T x)
             => gmath.not(x);
     }    
 }

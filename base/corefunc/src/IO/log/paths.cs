@@ -8,9 +8,9 @@ namespace Z0
 
     using static zfunc;
 
-    public readonly struct DataPaths
+    public readonly struct LogPaths
     {
-        public static DataPaths The => default;
+        public static LogPaths The => default;
     
         static LogSettings Settings
             => LogSettings.Get();

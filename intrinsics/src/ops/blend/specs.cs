@@ -149,8 +149,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Defines control mask values for constucting a 128-bit target by blending 
-    /// 2 64-bit segments from two source vectors
+    /// Defines control mask values for constucting a 128-bit target by blending 2 64-bit segments from two source vectors
     /// </summary>
     [Flags]
     public enum Blend2x64 : byte
@@ -166,8 +165,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Defines control mask values for constucting a 256-bit target by blending 
-    /// 4 64-bit segments from two source vectors
+    /// Defines control mask values for constucting a 256-bit target by blending 4 64-bit segments from two source vectors
     /// </summary>
     [Flags]
     public enum Blend4x64 : byte

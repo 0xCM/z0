@@ -37,7 +37,7 @@ namespace Z0
             code.Dispose();
         }
 
-        public AsmBinOp<T> BinOp<T>()
+        public BinaryOp<T> BinOp<T>()
             where T : unmanaged
                 => AsmDelegate.CreateBinOp<T>(pCode, name);
     }

@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.IO;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     using System.Runtime.CompilerServices;
@@ -78,12 +79,54 @@ namespace Z0
         public static T xor_gm<T>(T a, T b)
             where T : unmanaged
                 => gmath.xor(a,b);
+    }
+
+    static class InstrinsicHost
+    {
+        [MethodImpl(Inline)]
+        public static Vector128<T> vhi<T>(Vector128<T> x)
+            where T : unmanaged
+                => ginx.vhi(x);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> vlo<T>(Vector128<T> x)
+            where T : unmanaged
+                => ginx.vlo(x);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> vadd<T>(Vector128<T> x, Vector128<T> y)
+            where T : unmanaged
+                => ginx.vadd(x,y);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vadd<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+                => ginx.vadd(x,y);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> vand<T>(Vector128<T> x, Vector128<T> y)
+            where T : unmanaged
+                => ginx.vand(x,y);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vand<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+                => ginx.vand(x,y);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> vxor<T>(Vector128<T> x, Vector128<T> y)
+            where T : unmanaged
+                => ginx.vxor(x,y);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vxor<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+                => ginx.vxor(x,y);
 
     }
 
     public sealed class t_method_reader : UnitTest<t_method_reader>
     {
-
         public void read_generic_type()
         {
 
@@ -91,10 +134,35 @@ namespace Z0
             MethodReader.generic(def, typeof(uint), (m,data) => Trace(data.Format()));
         }
 
-        public void read_generic_methods()
+
+        public void write_generic_methods_1()
         {
-            foreach(var m in typeof(GenericMethodHost).CaptureX86<uint>())
-                Trace(m.Format());
+            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define("intrinsics"), "test_1", FileExtension.Define("asm"));
+            using var writer = path.Writer();
+            var types = new Type[]{
+                typeof(byte), typeof(ushort), typeof(uint), typeof(ulong),
+                typeof(sbyte), typeof(short), typeof(int), typeof(long), 
+                typeof(float), typeof(double)
+                };
+            typeof(InstrinsicHost).CaptureX86Generics(writer,types);        
+
+        }
+
+        public void write_generic_methods_2()
+        {
+            var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define("intrinsics"), "test_2", FileExtension.Define("asm"));
+            using var writer = dst.Writer();
+            typeof(InstrinsicHost).StaticMethods().OpenGeneric().CaptureX86Generics(writer, typeof(int));
+
+        }
+        public void read_generic_methods()
+        {                        
+
+            foreach(var m in typeof(GenericMethodHost).CaptureX86Generic<uint>())
+                Trace(m.Format(8));
+            
+            foreach(var m in typeof(InstrinsicHost).CaptureX86Generic(typeof(uint)))
+                Trace(m.Format(8));
         }
 
         public void read_by_name()
@@ -121,17 +189,27 @@ namespace Z0
             }
         }
 
+        public void write_non_generic()
+        {
+            var methods = typeof(math).StaticMethods().NonGeneric();
+            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define("math"), "test_1", FileExtension.Define("asm"));
+            using var dst = path.Writer();
+            methods.CaptureX86(dst);
+            dst.Flush();
+            
+        }
         static Func<Vector256<uint>, Vector256<uint>> shuffler(byte imm)
             => v => Avx2.Shuffle(v,imm);
 
         static Func<Vector256<uint>, Vector256<uint>> shifter(byte imm)
             => v => Avx2.ShiftLeftLogical(v,imm);
 
+
         public void read_delegate()
         {
 
             Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> dAnd = Avx2.And;
-            var dAndData = dAnd.CaptureX86();
+            var dAndData = dAnd.CaptureX86Delegate();
             Trace("And:delegate");
             Trace(dAndData.Format());
 
@@ -141,19 +219,19 @@ namespace Z0
             Trace(mAndData.Format());
 
             var dShuffle = shuffler(4);
-            var dShuffleData = dShuffle.CaptureX86(100);
+            var dShuffleData = dShuffle.CaptureX86Delegate(100);
             Trace("Shuffle:Delegate");
             Trace(dShuffleData.Format());
 
             var dShift = shifter(4);
-            var dShiftData = dShift.CaptureX86(100);
+            var dShiftData = dShift.CaptureX86Delegate(100);
             Trace("Shift:Delegate");
             Trace(dShiftData.Format());
 
             var mgAnds = typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName(nameof(ginx.vand));
             foreach(var mgAnd in mgAnds)
             {
-                var mgAndData = mgAnd.CaptureX86<uint>();
+                var mgAndData = mgAnd.CaptureX86Generic<uint>();
                 Trace($"{mgAnd.MethodSig()}");                
                 Trace(mgAndData.Format());
             }

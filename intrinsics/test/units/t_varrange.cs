@@ -85,27 +85,6 @@ namespace Z0
             }
         }
 
-
-        public void vunpackhi_256x64u_outline()
-        {            
-            var n = n256;
-            var x = vbuild.parts(n,1,2,3,4);
-            var y = vbuild.parts(n,5,6,7,8);
-            var expect = vbuild.parts(n,2,6,4,8);
-            var actual = dinx.vmergehi(x,y);
-            Claim.eq(expect, actual);
-        }
-
-        public void vunpackhi_256x32u_outline()
-        {
-            var n = n256;
-            var x = vbuild.parts(n,1u,2,3,4,5,6,7,8);
-            var y = vbuild.parts(n,10u,12,13,14,15,16,17,18);
-            var actual = dinx.vmergehi(x,y);
-            var expect = vbuild.parts(n, 3u,13,4,14,7,17,8,18);
-            Claim.eq(expect, actual);
-        }
-
         public static Vector256<int> vswap_ref(Vector256<int> src, byte i, byte j)
         {
             Span<uint> spec = stackalloc uint[Vector256<uint>.Count];

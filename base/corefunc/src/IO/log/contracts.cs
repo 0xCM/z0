@@ -39,11 +39,17 @@ namespace Z0
     /// </summary>
     public interface ILogger
     {
-        void Log(IEnumerable<AppMsg> src);
+        void Write(IEnumerable<AppMsg> src);
         
-        void Log(AppMsg src);
+        void Write(AppMsg src);
 
-        FilePath Log<R>(IEnumerable<R> records, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header, FileExtension ext)
+        /// <summary>
+        /// Appends unstructured text content to the log
+        /// </summary>
+        /// <param name="text">The text to append</param>
+        void Write(string text);
+
+        FilePath Write<R>(IEnumerable<R> records, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header, FileExtension ext)
             where R : IRecord;            
                 
     }

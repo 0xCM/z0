@@ -49,7 +49,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         unsafe IntPtr GetPointer()        
-            => (IntPtr)Unsafe.AsPointer(ref mutable( in Bytes[0]));
+            => (IntPtr)Unsafe.AsPointer(ref mutable(in Bytes[0]));
         
         /// <summary>
         /// Creates a delegate to execute the encapsulated code
@@ -103,6 +103,8 @@ namespace Z0
         public S CreateDelegate<S>()
             where S : Delegate        
                 => Marshal.GetDelegateForFunctionPointer<S>(Pointer);
+
+
 
         [MethodImpl(Inline)]
         public AsmCode<S> As<S>()

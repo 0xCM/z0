@@ -34,15 +34,6 @@ namespace Z0.OpCodes
         public static Vector512<ushort> vblendp_256x16u(Vector256<ushort> x, Vector256<ushort> y, Vector256<ushort> spec)
             => ginx.vblendp(x,y,spec);
             
-        public static Vector256<ushort> vmerge16(Vector128<ushort> x, Vector128<ushort> y)                
-            => dinx.vmerge(x,y, Blend8x16.LLRRLLRR, Blend8x16.RRLLRRLL);
-
-        public static Vector256<uint> vmerge32(Vector128<uint> x, Vector128<uint> y)                
-            => dinx.vmerge(x,y, Blend4x32.LLRR, Blend4x32.LLRR);
-
-        public static Vector256<ulong> vmerge64(Vector128<ulong> x, Vector128<ulong> y)                
-            => dinx.vmerge(x,y, Blend2x64.LR, Blend2x64.RL);
-
         public static Vector128<ulong> vreverse_128x64u(Vector128<ulong> x)
             => dinx.vreverse(x);
 

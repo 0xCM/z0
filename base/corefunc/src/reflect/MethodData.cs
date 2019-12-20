@@ -35,38 +35,44 @@ namespace Z0
 
         ulong Length 
             => EndAddress -StartAddress;        
+
+        bool IsEmpty {get;}
     }
 
     public static class MethodDataX
     {
-        public static string Format<T>(this T data)
+        static string MethodSep => new string('_',80);
+
+        public static string Format<T>(this T data, int linebytes = 8, bool linelabels = true)
             where T : IMethodData
         {
+            if(data.IsEmpty)
+                return "<no_data>";
+
             var format = text();
-            var title = data.Method.MethodSig().Format();
-            format.Append(data.StartAddress.FormatHex(false,true));
-            format.Append(AsciSym.Colon);
-            format.Append(AsciSym.Space);
-            format.AppendLine($"{title}[{data.Length}]");
+            var range = bracket(concat(data.StartAddress.FormatHex(false,true), AsciSym.Comma, data.EndAddress.FormatHex(false,true)));
+            format.AppendLine($"; function: {data.Method.MethodSig().Format()}");
+            format.AppendLine($"; location: {range}, code length: {data.Length} bytes");
+
             for(ushort i=0; i< data.Length; i++)
             {
-                if(i % 2 == 0)
+                if(i % linebytes == 0)
                 {
                     if(i != 0)
                         format.AppendLine();
 
-                    format.Append(i.FormatHex(true,false));
-                    format.Append(AsciLower.h);
-                    format.Append(AsciSym.Space);
+                    if(linelabels)
+                    {
+                        format.Append(i.FormatHex(true,false));
+                        format.Append(AsciLower.h);
+                        format.Append(AsciSym.Space);
+                    }
                 }
                 format.Append(data.Body[i].FormatHex(true, true));
                 format.Append(AsciSym.Space);
             }
             format.AppendLine();   
-            format.Append(data.EndAddress.FormatHex(false,true));
-            format.Append(AsciSym.Colon);
-            format.Append(AsciSym.Space);
-            format.Append($"{title} End");
+            format.AppendLine(MethodSep);
             return format.ToString();
         }
 
@@ -77,6 +83,8 @@ namespace Z0
     /// </summary>
     public readonly struct DelegateData : IMethodData
     {        
+
+        public static DelegateData Empty => default;
 
         [MethodImpl(Inline)]
         public DelegateData(Delegate Delegate, ulong StartAddress, ulong EndAddress, byte[] body)
@@ -122,6 +130,9 @@ namespace Z0
         public MethodInfo Method    
             => Delegate.Method;
 
+       public bool IsEmpty
+            => Method == null || Body == null;
+
     }
 
     /// <summary>
@@ -129,6 +140,7 @@ namespace Z0
     /// </summary>
     public readonly struct MethodData : IMethodData
     {        
+        public static MethodData Empty => default;
 
         [MethodImpl(Inline)]
         public MethodData(MethodInfo method, ulong StartAddress, ulong EndAddress, byte[] body)
@@ -162,34 +174,9 @@ namespace Z0
         public ulong Length 
             => EndAddress -StartAddress;
 
-        public string Format()
-        {
-            var format = text();
-            var title = Method.MethodSig().Format();
-            format.Append(StartAddress.FormatHex(false,true));
-            format.Append(AsciSym.Colon);
-            format.Append(AsciSym.Space);
-            format.AppendLine($"{title}[{Length}]");
-            for(ushort i=0; i< Length; i++)
-            {
-                if(i % 2 == 0)
-                {
-                    if(i != 0)
-                        format.AppendLine();
+        public bool IsEmpty
+            => Method == null || Body == null;
 
-                    format.Append(i.FormatHex(true,false));
-                    format.Append(AsciLower.h);
-                    format.Append(AsciSym.Space);
-                }
-                format.Append(Body[i].FormatHex(true, true));
-                format.Append(AsciSym.Space);
-            }
-            format.AppendLine();   
-            format.Append(EndAddress.FormatHex(false,true));
-            format.Append(AsciSym.Colon);
-            format.Append(AsciSym.Space);
-            format.Append($"{title} End");
-            return format.ToString();
-        }
+
     }
 }

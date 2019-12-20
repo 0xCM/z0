@@ -38,15 +38,15 @@ namespace Z0
     }
 
     public ref struct CpuFeatureSet<T>
-        where T : Enum
+        where T : unmanaged, Enum
     {
-        static readonly BitSize DataSize = 32;
+        const int DataSize = 32;
 
-        static readonly string[] SlotNames
-            = Enum.GetNames(typeof(T));
+        static string[] SlotNames
+            => Enums.names<T>();
 
-        static readonly T[] SlotValues
-            = (T[])Enum.GetValues(typeof(T));
+        static T[] SlotValues
+            => Enums.members<T>();
 
         uint data;
 
@@ -63,29 +63,23 @@ namespace Z0
         }
 
         public bit this[T id]
-        {
-            
-            get => bits[0,System.Convert.ToByte(id)];
-            set => bits[0,System.Convert.ToByte(id)] = value;
+        {            
+            get => bits[0, ebyte(id)];
+            set => bits[0, ebyte(id)] = value;
         }
-            
-        public ReadOnlySpan<T> Available
+                    
+        public ReadOnlySpan<T> GetAvailable()
         {
-            get
+            var max = Math.Min(DataSize, SlotNames.Length);
+            var count =0;
+            Span<T> dst = new T[max];
+            for(var i=0; i< max; i++)
             {
-                var maxix = Math.Min(DataSize, SlotNames.Length);
-                var count =0;
-                Span<T> dst = new T[maxix];
-                for(var i=0; i< maxix; i++)
-                {
-                    var sv = SlotValues[i];
-                    if (this[SlotValues[i]])
-                        dst[count++] = sv;
-                }
-                return dst.Slice(0, count);
-
+                var sv = SlotValues[i];
+                if (this[SlotValues[i]])
+                    dst[count++] = sv;
             }
-
+            return dst.Slice(0, count);
         }
     }
 
@@ -113,31 +107,33 @@ namespace Z0
         public bit this[T id]
         {            
             [MethodImpl(Inline)]
-            get => bits[0, System.Convert.ToByte(id)];
+            get => Test(id);
 
             [MethodImpl(Inline)]
-            set => bits[0,System.Convert.ToByte(id)] = value;
+            set => bits[0, ebyte(id)] = value;
         }
 
+        [MethodImpl(Inline)]
+        public bit Test(T id)
+            => bits[0, ebyte(id)];
 
         /// <summary>
         /// Retrieves the enabled fields
         /// </summary>
-        public ReadOnlySpan<T> Enabled
+        public ReadOnlySpan<T> GetEnabled()
         {
-            get
-            {   var identifiers = (T[])Enum.GetValues(typeof(T));
-                var len = Math.Min(BitCount, identifiers.Length);
-                var count =0;
-                Span<T> dst = new T[len];
-                for(var i=0; i< len; i++)
-                {
-                    var sv = identifiers[i];
-                    if (this[identifiers[i]])
-                        dst[count++] = sv;
-                }
-                return dst.Slice(0, count);
+            var identifiers = Enums.members<T>();
+            var len = Math.Min(BitCount, identifiers.Length);
+            var count =0;
+            Span<T> dst = new T[len];
+            for(var i=0; i< len; i++)
+            {
+                var sv = identifiers[i];
+                if (this[identifiers[i]])
+                    dst[count++] = sv;
             }
+            return dst.Slice(0, count);
+        
         }
     }
 

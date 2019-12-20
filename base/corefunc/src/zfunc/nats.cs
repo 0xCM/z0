@@ -21,6 +21,15 @@ partial class zfunc
         where N : unmanaged, ITypeNat
             => NatMath.natval<N>(); 
 
+    /// <summary>
+    /// Returns the value represented by a natural type
+    /// </summary>
+    /// <typeparam name="N">The natural type</typeparam>
+    [MethodImpl(Inline)]   
+    public static ulong nateval<N>(N n = default) 
+        where N : unmanaged, ITypeNat
+            => NatMath2.natval<N>(); 
+
     [MethodImpl(Inline)]   
     public static NatSeq<T0,T1> natseq<T0,T1>(T0 t0 = default, T1 t1 = default)
         where T0 : unmanaged, INatPrimitive<T0>

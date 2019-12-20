@@ -14,6 +14,16 @@ namespace Z0
 
     partial class ginx
     {
+        [MethodImpl(Inline)]
+        public static Vector512<T> vperm2x128<T>(in Vector512<T> src, Perm2x4 lo, Perm2x4 hi)
+            where T : unmanaged
+        {
+            var x = vperm2x128(src.Lo, src.Hi, lo);
+            var y = vperm2x128(src.Lo, src.Hi, hi);
+            return (x,y);
+        }
+
+
         /// <summary>
         /// Permutes 4 128-bit source lanes from 2 256-bit vectors as described by the perm spec
         /// </summary>

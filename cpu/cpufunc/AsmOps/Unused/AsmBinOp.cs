@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="T">The operand type</typeparam>
         /// <remarks>Obviously, this only works if the assembly code expects two T-operands and returns a T-result!</remarks>
         [MethodImpl(Inline)]
-        public static AsmBinOp<T> CreateBinOpPI<T>(this AsmCode code)
+        public static BinaryOp<T> CreateBinOpPI<T>(this AsmCode code)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -49,10 +49,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static AsmBinOp<T> ToGeneric<S,T>(this S specific)            
+        static BinaryOp<T> ToGeneric<S,T>(this S specific)            
             where S : Delegate
             where T : unmanaged
-                => Unsafe.As<S, AsmBinOp<T>>(ref specific);
+                => Unsafe.As<S, BinaryOp<T>>(ref specific);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)] 
         delegate sbyte BinOpI8(sbyte x, sbyte y);

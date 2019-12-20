@@ -7,12 +7,30 @@ namespace Z0.OpCodes
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+    using System.Runtime.Intrinsics.X86;
 
     using static zfunc;    
 
     [OpCodeProvider]
     public static class vperm
     {
+
+        [MethodImpl(NotInline)]
+        static Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> vand_delgate()
+        {
+            var mAnd = typeof(Avx2).GetMethod(nameof(Avx2.And), new Type[] { typeof(Vector256<uint>), typeof(Vector256<uint>) });
+            var mDel = mAnd.BinOpCalli<Vector256<uint>>();
+            return mDel;
+
+        }
+        public static Vector256<uint> vand_dynamic(Vector256<uint> a, Vector256<uint> b)
+        {
+            return vand_delgate()(a,b);
+        }
+
+        public static Vector512<ulong> vperm2x128(Vector512<ulong> src)     
+            => ginx.vperm2x128(src,Perm2x4.AD,Perm2x4.BC);
+
         public static Vector128<ushort> vbswap_128x16u(Vector128<ushort> x)
             => dinx.vbyteswap(x);
             

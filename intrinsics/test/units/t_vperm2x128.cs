@@ -1,0 +1,69 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2019
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Linq;
+    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+    
+    using static zfunc;
+    using static VOps;
+
+
+
+    public class t_vperm2x128 : t_vinx<t_vperm2x128>
+    {
+        static string describe<T>(Vector512<T> src, Perm2x4 p0, Perm2x4 p1)
+            where T : unmanaged
+        {
+            var dst = ginx.vperm2x128(src, p0, p1);
+            var sym0 = p0.Symbols().ToString();
+            var sym1 = p1.Symbols().ToString();
+            var description = $"{src.Format()} |> {sym0}{sym1} = {dst.Format()}";
+            return description; 
+            
+        }
+
+        public void vperm2x128_outline()
+        {
+            void case1()
+            {
+                // [0, 1, 2, 3, 4, 5, 6, 7] |> DABC = [6, 7, 0, 1, 2, 3, 4, 5] - rotate right
+                var p0 = Perm2x4.DA;
+                var p1 = Perm2x4.BC;
+                var src = vbuild.increments<ulong>(n512);
+                var expect = vbuild.parts(n512,6, 7, 0, 1, 2, 3, 4, 5);
+                var actual = ginx.vperm2x128(src, p0, p1);
+                Claim.eq(actual,expect);
+                Trace(describe(src,p0,p1));
+
+            }
+
+            void case2()
+            {
+                // [0, 1, 2, 3, 4, 5, 6, 7] |> BCDA = [2, 3, 4, 5, 6, 7, 0, 1] - rotate left
+                var p0 = Perm2x4.BC;
+                var p1 = Perm2x4.DA;
+                var src = vbuild.increments<ulong>(n512);
+                //var actual = ginx.vperm2x128(src, p0, p1);
+                var actual = VPerm2x128.Invoke(src,p0,p1);
+
+                var expect = vbuild.parts(n512,2, 3, 4, 5, 6, 7, 0, 1);
+                Claim.eq(actual,expect);
+                Trace(describe(src,p0,p1));
+
+            }
+            
+            case1();
+            case2();
+
+        }
+
+
+
+    }
+}

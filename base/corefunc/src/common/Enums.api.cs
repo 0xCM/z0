@@ -78,6 +78,15 @@ namespace Z0
         }
 
         /// <summary>
+        /// Gets the names of the (unique) enumeration literals
+        /// </summary>
+        /// <param name="e">An enum type representative</param>
+        /// <typeparam name="E">The enum type</typeparam>
+        [MethodImpl(Inline)]
+        public static string[] names<E>(E e = default)
+            => Enum.GetNames(typeof(E));
+
+        /// <summary>
         /// Parses an enumeration literal
         /// </summary>
         /// <param name="name">The literal name</param>

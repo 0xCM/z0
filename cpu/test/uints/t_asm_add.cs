@@ -65,22 +65,6 @@ namespace Z0
         public void add_asm64f_bench()
             => add_bench<double>();
 
-        void add_check<T>()
-            where T : unmanaged
-        {
-            var asmop = AsmOps.Add<T>();
-            
-            for(var i=0; i<SampleSize; i++)
-            {
-                var a = Random.Next<T>();
-                var b = Random.Next<T>();
-                var expect = gmath.add(a,b);
-                var actual = asmop(a,b);
-                Claim.eq(expect,actual);
-            }
-
-        }
-
         void add_bench<T>(SystemCounter subject = default, SystemCounter compare = default)
             where T : unmanaged
         {
