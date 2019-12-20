@@ -63,7 +63,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            dst = vhead<S,T>(vbuild.broadcast(n128, src));
+            dst = vhead<S,T>(CpuVector.broadcast(n128, src));
             return ref dst;
         }
 
@@ -78,6 +78,6 @@ namespace Z0
         public static T broadcast<S,T>(S src)
             where S : unmanaged
             where T : unmanaged
-                => vhead<S,T>(vbuild.broadcast(n128, src));       
+                => vhead<S,T>(CpuVector.broadcast(n128, src));       
     }
 }

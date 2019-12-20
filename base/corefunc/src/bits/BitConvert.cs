@@ -13,20 +13,73 @@ namespace Z0
 
     public static class BitConvert
     {
-        [MethodImpl(Inline)]
-        public static T Convert<T>(ReadOnlySpan<T> src, int offset = 0)
-            where T : unmanaged
-                => Bytes.read<T>(src.AsBytes(), offset*size<T>());
-
+        /// <summary>
+        /// Allocates and fills a buffer with source bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
         public static Span<byte> GetBytes<T>(in T src)
             where T : unmanaged
                 => Bytes.read(in src);
 
+        /// <summary>
+        /// Converts a specified number of source elements to bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The source offset</param>
+        /// <param name="count">The number of source elements to convert</param>
+        /// <typeparam name="T">The source element type</typeparam>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<byte> GetBytes<T>(ReadOnlySpan<T> src, int offset, int count)
+            where T : unmanaged
+                => src.Slice(offset,count).AsBytes();
+
+        /// <summary>
+        /// Fills a caller-supplied buffer with source bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline)]
         public static void GetBytes<T>(in T src, Span<byte> dst)
             where T : unmanaged
                 => Bytes.read(in src, dst);
+
+        /// <summary>
+        /// Fills a caller-supplied buffer with source bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="dst">The target buffer</param>
+        [MethodImpl(Inline)]
+        public static ref readonly Block64<byte> GetBytes(ulong src, in Block64<byte> dst)
+        {         
+            Bytes.read(in src, dst);
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Fills a caller-supplied buffer with source bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="dst">The target buffer</param>
+        [MethodImpl(Inline)]
+        public static ref readonly Block32<byte> GetBytes(uint src, in Block32<byte> dst)
+        {         
+            Bytes.read(in src, dst);
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Fills a caller-supplied buffer with source bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="dst">The target buffer</param>
+        [MethodImpl(Inline)]
+        public static ref readonly Block16<byte> GetBytes(ushort src, in Block16<byte> dst)
+        {
+            Bytes.read(in src, dst);
+            return ref dst;
+        }
 
         [MethodImpl(Inline)]
         public static short ToInt16(ReadOnlySpan<byte> src, int offset = 0)

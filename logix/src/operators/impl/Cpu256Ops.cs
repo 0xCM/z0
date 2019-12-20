@@ -21,7 +21,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static Vector256<T> @true<T>(N256 n)
             where T:unmanaged
-                => vbuild.ones<T>(n256);
+                => CpuVector.ones<T>(n256);
 
         [MethodImpl(Inline)]
         public static Vector256<T> @false<T>(Vector256<T> x)
@@ -31,7 +31,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static Vector256<T> @true<T>(Vector256<T> x)
             where T:unmanaged
-                => vbuild.ones<T>(n256);
+                => CpuVector.ones<T>(n256);
 
         [MethodImpl(Inline)]
         public static Vector256<T> @false<T>(Vector256<T> x, Vector256<T> y)
@@ -41,7 +41,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static Vector256<T> @true<T>(Vector256<T> x, Vector256<T> y)
             where T:unmanaged
-                => vbuild.ones<T>(n256);
+                => CpuVector.ones<T>(n256);
 
         [MethodImpl(Inline)]
         public static Vector256<T> @false<T>(Vector256<T> x, Vector256<T> y, Vector256<T> z)
@@ -51,7 +51,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static Vector256<T> @true<T>(Vector256<T> x, Vector256<T> y, Vector256<T> z)
             where T:unmanaged
-                => vbuild.ones<T>(n256);
+                => CpuVector.ones<T>(n256);
 
         [MethodImpl(Inline)]
         public static Vector256<T> identity<T>(Vector256<T> a)

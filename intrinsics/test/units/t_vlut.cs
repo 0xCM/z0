@@ -26,10 +26,10 @@ namespace Z0
                 Claim.eq(table[i], (byte)i);
 
 
-            var x = vbuild.increments<byte>(n);
+            var x = CpuVector.increments<byte>(n);
             Claim.eq(x,table.Data);   
 
-            var items = vbuild.increments<byte>(n, 64);
+            var items = CpuVector.increments<byte>(n, 64);
             var selected = dinx.vshuf16x8(items, table);
             Claim.eq(items,selected);
 
@@ -48,10 +48,10 @@ namespace Z0
                 Claim.eq(table[i], (byte)i);
 
 
-            var x = vbuild.increments<byte>(n);
+            var x = CpuVector.increments<byte>(n);
             Claim.eq(x,table.Data);   
 
-            var items = vbuild.increments<byte>(n, 64);
+            var items = CpuVector.increments<byte>(n, 64);
             var selected = dinx.vshuf32x8(items, table);
             Claim.eq(items,selected);
 

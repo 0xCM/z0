@@ -13,7 +13,7 @@ namespace Z0
     {        
         public void vswap_128x8u()
         {
-            var src = vbuild.increments(n128, z8);
+            var src = CpuVector.increments(n128, z8);
             var dst = dinx.vswap(src,2,3);
             Claim.eq(src.Cell(2), dst.Cell(3));
             Claim.eq(src.Cell(3), dst.Cell(2));            
@@ -22,7 +22,7 @@ namespace Z0
 
         public void vswap_128x16u()
         {
-            var src = vbuild.increments(n128, z16);
+            var src = CpuVector.increments(n128, z16);
             var dst = dinx.vswap(src,2,3);
             Claim.eq(src.Cell(2), dst.Cell(3));
             Claim.eq(src.Cell(3), dst.Cell(2));            

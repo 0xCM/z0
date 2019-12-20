@@ -13,7 +13,7 @@ namespace Z0
     using static ginx;
     using static As;
 
-    partial class vbuild
+    partial class CpuVector
     {
         /// <summary>
         /// Creates a vector populated with component values that alternate between the first operand and the second

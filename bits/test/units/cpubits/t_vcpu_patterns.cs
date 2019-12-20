@@ -13,7 +13,7 @@ namespace Z0
     {
         public void clearalt_256x8()
         {
-            var tr = vbuild.clearalt<byte>(n256);
+            var tr = CpuVector.clearalt<byte>(n256);
             for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.CpuVector<byte>(n256);

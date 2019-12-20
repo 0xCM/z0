@@ -11,13 +11,11 @@ namespace Z0
     
     using static zfunc;    
     using static ginx;
-    
-    public static class CpuVector
-    {     
+    using static As;
 
-        
-
-
+    public static partial class CpuVector
+    {
+ 
     }
 
 }

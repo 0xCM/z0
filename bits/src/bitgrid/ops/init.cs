@@ -637,7 +637,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged            
-                => new BitGrid128<M, N, T>(vbuild.broadcast(n128, d));
+                => new BitGrid128<M, N, T>(CpuVector.broadcast(n128, d));
 
         /// <summary>
         /// Initializes a 256-bit grid of natural dimensions
@@ -653,7 +653,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged            
-                => new BitGrid256<M, N, T>(vbuild.broadcast(n256, d)); 
+                => new BitGrid256<M, N, T>(CpuVector.broadcast(n256, d)); 
 
     }
 }

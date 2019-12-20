@@ -24,8 +24,8 @@ namespace Z0
             var t = z32;
             var count = ginx.vcount(w,t);
 
-            var x = vbuild.increments(w,t);
-            var y = vbuild.increments(w, (x.LastCell() + 1));
+            var x = CpuVector.increments(w,t);
+            var y = CpuVector.increments(w, (x.LastCell() + 1));
             var z = dinx.vmergelo(x,y);
             var fmt = $"({x.Format()},{y.Format()}) -> {z.Format()}";
             Trace(fmt);
@@ -36,10 +36,10 @@ namespace Z0
 
         public void vmerge_example()
         {
-            var a = vbuild.parts(n128, 0u,1,2,3);
-            var b = vbuild.parts(n128, 4u,5,6,7);
-            var c = vbuild.parts(n128, 8u,9,10,11);
-            var d = vbuild.parts(n128, 12u,13,14,15);
+            var a = CpuVector.parts(n128, 0u,1,2,3);
+            var b = CpuVector.parts(n128, 4u,5,6,7);
+            var c = CpuVector.parts(n128, 8u,9,10,11);
+            var d = CpuVector.parts(n128, 12u,13,14,15);
             var x0 = dinx.vmergelo(v8u(a), v8u(b));
             var y0 = dinx.vmergelo(v8u(c), v8u(d));
             var z0 = v8u(dinx.vmergelo(v16u(x0),v16u(y0)));
@@ -65,7 +65,7 @@ namespace Z0
 
             void report()
             {
-                var x = vbuild.increments<byte>(n128);
+                var x = CpuVector.increments<byte>(n128);
                 var y = dinx.vadd(x, dinx.vbroadcast(n128, (byte)16));
 
                 var lo = ginx.vmergelo(x,y);
@@ -81,8 +81,8 @@ namespace Z0
             {
                 var w = n256;
                 var t = z8;
-                var x = vbuild.increments(w,t);
-                var y = vbuild.increments(w, (byte)(x.LastCell() + 1));
+                var x = CpuVector.increments(w,t);
+                var y = CpuVector.increments(w, (byte)(x.LastCell() + 1));
                 var z = dinx.vmergehi(x,y);
                 Trace($"mergehi");
                 Trace(x.Format(pad:2));
@@ -94,8 +94,8 @@ namespace Z0
             {
                 var w = n256;
                 var t = z8;
-                var x = vbuild.increments(w,t);
-                var y = vbuild.increments(w, (byte)(x.LastCell() + 1));
+                var x = CpuVector.increments(w,t);
+                var y = CpuVector.increments(w, (byte)(x.LastCell() + 1));
                 var z = dinx.vmerge(x,y);
                 Trace(x.Format(pad:2));
                 Trace(y.Format(pad:2));

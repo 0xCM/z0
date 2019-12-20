@@ -39,7 +39,7 @@ namespace Z0
         public static Vector128<byte> vpackus(Vector128<ushort> x, Vector128<ushort> y)
         {
             var w = n128;
-            var mask = vbuild.broadcast(w, (ushort)(byte.MaxValue));
+            var mask = CpuVector.broadcast(w, (ushort)(byte.MaxValue));
             var z0 = v16i(ginx.vand(x,mask));
             var z1 = v16i(ginx.vand(y,mask));
             return PackUnsignedSaturate(z0,z1);         

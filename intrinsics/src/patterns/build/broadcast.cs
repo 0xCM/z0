@@ -13,7 +13,7 @@ namespace Z0
     using static ginx;
     using static As;
 
-    public static partial class vbuild
+    public static partial class CpuVector
     {
         /// <summary>
         /// Projects a scalar value onto each component of a 128-bit vector

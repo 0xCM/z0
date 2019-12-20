@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> digits(Perm16 spec)
-            => dinx.vshuf16x8(vbuild.increments<byte>(n128), spec.data);
+            => dinx.vshuf16x8(CpuVector.increments<byte>(n128), spec.data);
 
         /// <summary>
         /// Computes the digits corresponding to each 5-bit segment of the permutation spec
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
         public static Vector256<byte> digits(Perm32 spec)
-            => dinx.vshuf32x8(vbuild.increments<byte>(n256),spec.data);
+            => dinx.vshuf32x8(CpuVector.increments<byte>(n256),spec.data);
 
     }
 }

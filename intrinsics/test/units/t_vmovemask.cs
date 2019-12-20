@@ -15,7 +15,7 @@ namespace Z0
         {
             void case1()
             {
-                var x = vbuild.broadcast(n256, (byte)Pow2.T07);
+                var x = CpuVector.broadcast(n256, (byte)Pow2.T07);
                 var m = ginx.vtakemask(x);
                 Claim.eq(uint.MaxValue,m);
             }

@@ -17,10 +17,10 @@ namespace Z0
                 var src = Random.Next<ushort>();
                 var dst = DataBlocks.single<byte>(n128);
 
-                ginxs.unpackbits(src, dst);            
+                BitPack.unpackbits(src, dst);            
                 unpack_check(src,dst);
 
-                var rebound = ginxs.bitpack(dst);
+                var rebound = BitPack.pack(dst);
                 Claim.eq(src,rebound);
             }
         }
@@ -31,11 +31,11 @@ namespace Z0
             {
                 var src = Random.Next<uint>();
                 var dst = DataBlocks.single<byte>(n256);
-                ginxs.unpackbits(src, dst);
+                BitPack.unpackbits(src, dst);
 
                 unpack_check(src,dst);
                 
-                var rebound = ginxs.bitpack(dst);
+                var rebound = BitPack.pack(dst);
                 Claim.eq(src,rebound);
             }
         }
@@ -46,16 +46,95 @@ namespace Z0
             {
                 var src = Random.Next<ulong>();
                 var dst = DataBlocks.single<byte>(n512);
-                ginxs.unpackbits(src, dst);
+                BitPack.unpackbits(src, dst);
 
                 unpack_check(src,dst);
                 
-                var rebound = ginxs.bitpack(dst);
+                var rebound = BitPack.pack(dst);
                 Claim.eq(src,rebound);
             }
 
         }
 
+        public void bitspan_format_direction()
+        {
+            byte src = 1;
+            var bitspan = BitPack.bitspan(src);
+            var fmt = bitspan.Format();
+            Claim.eq(8,fmt.Length);
+            Claim.eq(bit.One, fmt[7]);
+
+        }
+
+        public void bitspan_16()
+        {
+            const int length = 16;
+            var src = BitMask.even(n2, n1, z16);
+            var bitspan = BitPack.bitspan(src);
+            var format = bitspan.Format();
+
+            Claim.eq(length, bitspan.Length);
+            for(int i=0, j= length - 1; i< length; i++, j--)
+            {
+                if(even(i))
+                {
+                    Claim.yea(bitspan[i]);
+                    Claim.eq(bit.One, format[j]);
+                }
+                else
+                {
+                    Claim.nea(bitspan[i]);
+                    Claim.eq(bit.Zero, format[j]);
+                }
+            }            
+        }
+
+        public void bitspan_32()
+        {
+            const int length = 32;
+            var src = BitMask.even(n2, n1, z32);
+            var bitspan = BitPack.bitspan(src);
+            var format = bitspan.Format();
+
+            Claim.eq(length, bitspan.Length);
+            for(int i=0, j= length - 1; i< length; i++, j--)
+            {
+                if(even(i))
+                {
+                    Claim.yea(bitspan[i]);
+                    Claim.eq(bit.One, format[j]);
+                }
+                else
+                {
+                    Claim.nea(bitspan[i]);
+                    Claim.eq(bit.Zero, format[j]);
+                }
+            }            
+        }
+
+        public void bitspan_64()
+        {
+            const int length = 64;
+            var src = BitMask.even(n2, n1, z64);
+            var bitspan = BitPack.bitspan(src);
+            var format = bitspan.Format();
+
+            Claim.eq(length, bitspan.Length);
+            for(int i=0, j= length - 1; i< length; i++, j--)
+            {
+                if(even(i))
+                {
+                    Claim.yea(bitspan[i]);
+                    Claim.eq(bit.One, format[j]);
+                }
+                else
+                {
+                    Claim.nea(bitspan[i]);
+                    Claim.eq(bit.Zero, format[j]);
+                }
+            }
+            
+        }
 
         void unpack_check<T>(T src, in ReadOnlySpan<byte> y)
             where T : unmanaged

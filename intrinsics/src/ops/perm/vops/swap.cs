@@ -23,7 +23,7 @@ namespace Z0
 
         public static Vector128<byte> vswap(Vector128<byte> src, int i, int j)
         {
-            var perm = vbuild.increments<byte>(n128);
+            var perm = CpuVector.increments<byte>(n128);
             perm = perm.Cell(j,(byte)i);
             perm = perm.Cell(i,(byte)j);
             return vshuf16x8(src,perm);            
@@ -31,7 +31,7 @@ namespace Z0
         
         public static Vector128<ushort> vswap(Vector128<ushort> src, int i, int j)
         {
-            var perm = vbuild.increments<byte>(n128);
+            var perm = CpuVector.increments<byte>(n128);
 
             static byte index8x16(int i, bit parity)
                 => uint8(i*2 + (int)parity);

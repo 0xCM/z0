@@ -59,6 +59,6 @@ namespace Z0
         public static BitVector128<N,T> broadcast<N,T>(N128 w, T a, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => vbuild.broadcast(w,a);
+                => CpuVector.broadcast(w,a);
     }
 }

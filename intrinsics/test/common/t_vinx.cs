@@ -171,7 +171,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = Random.Next<T>();
-            var vX = vbuild.broadcast(w,x);
+            var vX = CpuVector.broadcast(w,x);
             var data = vX.ToSpan();
             for(var i=0; i<data.Length; i++)
                 Claim.eq(x,data[i]);            
@@ -181,7 +181,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = Random.Next<T>();
-            var vX = vbuild.broadcast(w,x);
+            var vX = CpuVector.broadcast(w,x);
             var data = vX.ToSpan();
             for(var i=0; i<data.Length; i++)
                 Claim.eq(x,data[i]);
@@ -190,7 +190,7 @@ namespace Z0
         protected void cmp_gt_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var ones = vbuild.ones<T>(w);
+            var ones = CpuVector.ones<T>(w);
             var one = vcell(ones,0);
             
             for(var i=0; i< SampleSize; i++)
@@ -215,7 +215,7 @@ namespace Z0
         protected void cmp_gt_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var ones = vbuild.ones<T>(w);
+            var ones = CpuVector.ones<T>(w);
             var one = vcell(ginx.vlo(ones),0);
             
             for(var i=0; i< SampleSize; i++)
@@ -280,7 +280,7 @@ namespace Z0
         protected void vlt_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var ones = vbuild.ones<T>(w);
+            var ones = CpuVector.ones<T>(w);
             var one = vcell(ones,0);
             
             for(var i=0; i< SampleSize; i++)
@@ -305,7 +305,7 @@ namespace Z0
         protected void vlt_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var ones = vbuild.ones<T>(w);
+            var ones = CpuVector.ones<T>(w);
             var one = vcell(ginx.vlo(ones),0);
             
             for(var i=0; i< SampleSize; i++)
@@ -455,8 +455,8 @@ namespace Z0
         {
             for(var i=0; i< SampleSize; i++)
             {
-                var inc = vbuild.increments<T>(w);
-                var dec = vbuild.decrements<T>(w);
+                var inc = CpuVector.increments<T>(w);
+                var dec = CpuVector.decrements<T>(w);
                 var y = ginx.vreverse(inc);
                 Claim.eq(dec, y);
                 Claim.eq(inc, ginx.vreverse(y));
@@ -468,8 +468,8 @@ namespace Z0
         {
             for(var i=0; i< SampleSize; i++)
             {
-                var inc = vbuild.increments<T>(w);
-                var dec = vbuild.decrements<T>(w);
+                var inc = CpuVector.increments<T>(w);
+                var dec = CpuVector.decrements<T>(w);
                 var y = ginx.vreverse(inc);
                 Claim.eq(dec, y);
                 Claim.eq(inc, ginx.vreverse(y));
@@ -726,7 +726,7 @@ namespace Z0
                 var v128Src = Random.CpuVector<T>(w);
                 var srcSpan = v128Src.ToSpan();
 
-                var dst = vbuild.zero(n256,t);
+                var dst = CpuVector.zero(n256,t);
                 
                 var vLo = ginx.vinsert(v128Src, dst,0);
                 var vLoSpan = vLo.ToSpan().Slice(0, vLo.Length()/2);
@@ -1101,7 +1101,7 @@ namespace Z0
         protected void vones_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var ones = vbuild.ones<T>(w);
+            var ones = CpuVector.ones<T>(w);
             var bs = ones.ToBitString();
             Claim.eq(w,bs.Length);
             Claim.eq(w,bs.PopCount());
@@ -1110,7 +1110,7 @@ namespace Z0
         protected void vones_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var ones = vbuild.ones<T>(w);
+            var ones = CpuVector.ones<T>(w);
             var bs = ones.ToBitString();
             Claim.eq(w,bs.Length);
             Claim.eq(w,bs.PopCount());
@@ -1149,7 +1149,7 @@ namespace Z0
                 var xp = x.Prior();
                 var xps = xp.ToSpan();
 
-                var uints = vbuild.units<T>(w);
+                var uints = CpuVector.units<T>(w);
                 
                 Claim.yea(ginx.vadd<T>(xp, uints).Equals(x));
                 Claim.yea(ginx.vsub<T>(xn, uints).Equals(x));
@@ -1174,7 +1174,7 @@ namespace Z0
                 var xp = x.Prior();
                 var xps = xp.ToSpan();
 
-                var uints = vbuild.units<T>(w);
+                var uints = CpuVector.units<T>(w);
                 
                 Claim.yea(ginx.vadd<T>(xp, uints).Equals(x));
                 Claim.yea(ginx.vsub<T>(xn, uints).Equals(x));

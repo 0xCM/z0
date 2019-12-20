@@ -13,7 +13,7 @@ namespace Z0
     using static ginx;
     using static As;
 
-    partial class vbuild
+    partial class CpuVector
     {
         /// <summary>
         /// Defines a 128-bit vector by explicit component specification, from least -> most significant

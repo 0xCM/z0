@@ -35,8 +35,8 @@ namespace Z0
                 // [0, 1, 2, 3, 4, 5, 6, 7] |> DABC = [6, 7, 0, 1, 2, 3, 4, 5] - rotate right
                 var p0 = Perm2x4.DA;
                 var p1 = Perm2x4.BC;
-                var src = vbuild.increments<ulong>(n512);
-                var expect = vbuild.parts(n512,6, 7, 0, 1, 2, 3, 4, 5);
+                var src = CpuVector.increments<ulong>(n512);
+                var expect = CpuVector.parts(n512,6, 7, 0, 1, 2, 3, 4, 5);
                 var actual = ginx.vperm2x128(src, p0, p1);
                 Claim.eq(actual,expect);
                 Trace(describe(src,p0,p1));
@@ -48,11 +48,11 @@ namespace Z0
                 // [0, 1, 2, 3, 4, 5, 6, 7] |> BCDA = [2, 3, 4, 5, 6, 7, 0, 1] - rotate left
                 var p0 = Perm2x4.BC;
                 var p1 = Perm2x4.DA;
-                var src = vbuild.increments<ulong>(n512);
+                var src = CpuVector.increments<ulong>(n512);
                 //var actual = ginx.vperm2x128(src, p0, p1);
                 var actual = VPerm2x128.Invoke(src,p0,p1);
 
-                var expect = vbuild.parts(n512,2, 3, 4, 5, 6, 7, 0, 1);
+                var expect = CpuVector.parts(n512,2, 3, 4, 5, 6, 7, 0, 1);
                 Claim.eq(actual,expect);
                 Trace(describe(src,p0,p1));
 

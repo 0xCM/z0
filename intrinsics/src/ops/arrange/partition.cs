@@ -43,8 +43,8 @@ namespace Z0
             const uint m2 = BitMasks.Lsb32x16x3 << 6;
             const uint m3 = BitMasks.Lsb32x16x3 << 9;
             const uint m4 = BitMasks.Lsb32x16x3 << 12;
-            var m = vbuild.parts(n256, m0,m1,m2,m3,m4,0,0,0);
-            var shifts =vbuild.parts(n256,0, 3, 6, 9, 12,0,0,0); 
+            var m = CpuVector.parts(n256, m0,m1,m2,m3,m4,0,0,0);
+            var shifts =CpuVector.parts(n256,0, 3, 6, 9, 12,0,0,0); 
 
             var y = v16u(dinx.vsrlv(dinx.vand(x,m), shifts));
 
@@ -52,7 +52,7 @@ namespace Z0
             // 0, 5, 1, 6, 2, 7, 3, 8, 4, 9
             // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
             // So, they need to be permuted; fake it for now
-            var z = vbuild.parts(n256, 
+            var z = CpuVector.parts(n256, 
                 vcell(y,0), // 0
                 vcell(y,2), // 1
                 vcell(y,4), // 2

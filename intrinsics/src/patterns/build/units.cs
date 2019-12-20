@@ -11,7 +11,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class vbuild
+    partial class CpuVector
     {
         /// <summary>
         /// Returns a 128-bit vector where each component is assigned the value 1

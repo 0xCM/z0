@@ -26,6 +26,28 @@ namespace Z0
             [MethodImpl(Inline)]
             get => bits;
         }
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => bits.Length;
+        }
+
+        ref bit Head
+        {
+            [MethodImpl(Inline)]
+            get => ref head(bits);
+        }
+
+        /// <summary>
+        /// Queries/Manipulates an index-identified bit
+        /// </summary>
+        public ref bit this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(ref Head, index);
+        }
+        
     }
 
 }

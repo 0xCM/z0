@@ -443,6 +443,9 @@ namespace Z0
         bit(uint state)
             => this.state = state;
 
+        [MethodImpl(Inline)]
+        public char ToChar()
+            => (char)(state + 48);
 
         [MethodImpl(Inline)]
         public bool Equals(bit b)

@@ -13,13 +13,13 @@ namespace Z0
     {   
         public void vbyteswap_basecase()
         {
-            var x16 = vbuild.parts(n128, 
+            var x16 = CpuVector.parts(n128, 
                 0b0000000011111111, 0b1111111100000000, 
                 0b1100110000110011, 0b0011001111001100,
                 0b1000000000000000, 0b0000000010000000,                
                 0b0000011100000111, 0b0000011100000111
                 );
-            var y16 = vbuild.parts(n128, 
+            var y16 = CpuVector.parts(n128, 
                 0b1111111100000000, 0b0000000011111111, 
                 0b0011001111001100, 0b1100110000110011, 
                 0b0000000010000000, 0b1000000000000000,                 
@@ -33,11 +33,11 @@ namespace Z0
             for(var i=0; i<z16s.Length; i+= 2)
                 Claim.eq(bswap(z16s[i]), z16s[i+1]);
 
-            var x32 = vbuild.parts(n128, 
+            var x32 = CpuVector.parts(n128, 
                 0xFFFF0000, 0x0000FFFF,
                 0xFF000000, 0x000000FF
                 );
-            var y32 = vbuild.parts(n128, 
+            var y32 = CpuVector.parts(n128, 
                 0x0000FFFF, 0xFFFF0000,
                 0x000000FF, 0xFF000000
                 );

@@ -20,7 +20,7 @@ namespace Z0
             // 128 bits of output which represents the packing of 128 source bits, each of shich should be on
             var output = SimdPack.pack(input);
             
-            Claim.eq(vbuild.ones<uint>(n128), output);            
+            Claim.eq(CpuVector.ones<uint>(n128), output);            
         }
 
         static int pop(ReadOnlySpan<bit> src)

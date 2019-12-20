@@ -24,21 +24,21 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Perm32 from(Vector256<byte> data)
-            => new Perm32(dinx.vand(data, vbuild.broadcast(w, BitMasks.Msb8x8x3)));
+            => new Perm32(dinx.vand(data, CpuVector.broadcast(w, BitMasks.Msb8x8x3)));
 
         /// <summary>
         /// Creates the identity permutation
         /// </summary>
         [MethodImpl(Inline)]
         public static Perm32 identity()
-            => new Perm32(vbuild.increments<byte>(w));
+            => new Perm32(CpuVector.increments<byte>(w));
 
         /// <summary>
         /// Creates the reversal of the identity permutation
         /// </summary>
         [MethodImpl(Inline)]
         public static Perm32 reverse()
-            => new Perm32(vbuild.decrements<byte>(w));
+            => new Perm32(CpuVector.decrements<byte>(w));
 
         Perm32(Vector256<byte> data)
             => this.data = data;

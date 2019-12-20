@@ -23,19 +23,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Perm16 from(Vector128<byte> data)
-            => new Perm16(dinx.vand(data, vbuild.broadcast(w, BitMasks.Msb8x8x3)));
+            => new Perm16(dinx.vand(data, CpuVector.broadcast(w, BitMasks.Msb8x8x3)));
 
         /// <summary>
         /// Creates the identity permutation
         /// </summary>
         public static Perm16 identity()
-            => new Perm16(vbuild.increments<byte>(w));
+            => new Perm16(CpuVector.increments<byte>(w));
 
         /// <summary>
         /// Creates the reversal of the identity permutation
         /// </summary>
         public static Perm16 reverse()
-            => new Perm16(vbuild.decrements<byte>(w));
+            => new Perm16(CpuVector.decrements<byte>(w));
 
         Perm16(Vector128<byte> data)
             => this.data = data;

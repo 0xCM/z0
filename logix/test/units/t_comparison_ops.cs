@@ -144,7 +144,7 @@ namespace Z0.Logix
                 actual = lt(x,y);
                 Claim.yea(same(expect,actual));
 
-                var a =vbuild.broadcast(n,Random.Next<T>());
+                var a =CpuVector.broadcast(n,Random.Next<T>());
                 x = ginx.vxor(x,a);
                 y = ginx.vxor(y,a);                
             }
@@ -163,7 +163,7 @@ namespace Z0.Logix
                 actual = lt(x,y);
                 Claim.yea(same(expect,actual));
 
-                var a =vbuild.broadcast(n,Random.Next<T>());
+                var a =CpuVector.broadcast(n,Random.Next<T>());
                 x = ginx.vxor(x,a);
                 y = ginx.vxor(y,a);                
             }
@@ -183,7 +183,7 @@ namespace Z0.Logix
                 actual = gt(x,y);
                 Claim.yea(same(expect,actual));
 
-                var a =vbuild.broadcast(n,Random.Next<T>());
+                var a =CpuVector.broadcast(n,Random.Next<T>());
                 x = ginx.vxor(x,a);
                 y = ginx.vxor(y,a);                
             }
@@ -203,7 +203,7 @@ namespace Z0.Logix
                 actual = gt(x,y);
                 Claim.yea(same(expect,actual));
 
-                var a =vbuild.broadcast(n,Random.Next<T>());
+                var a =CpuVector.broadcast(n,Random.Next<T>());
                 x = ginx.vxor(x,a);
                 y = ginx.vxor(y,a);                
             }

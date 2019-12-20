@@ -24,7 +24,7 @@ namespace Z0
             void case1()
             {
                 var src = DataBlocks.single<byte>(n256);
-                vbuild.ones<byte>(n256).StoreTo(src);
+                CpuVector.ones<byte>(n256).StoreTo(src);
                 var dst = Bits.pack8x1(src);
                 Claim.eq(dst,uint.MaxValue);
 
@@ -33,7 +33,7 @@ namespace Z0
             void case2()
             {
                 var src = DataBlocks.single<byte>(n128);
-                vbuild.ones<byte>(n128).StoreTo(src);
+                CpuVector.ones<byte>(n128).StoreTo(src);
                 var dst = Bits.pack8x1(src);
                 Claim.eq(dst,ushort.MaxValue);
             }

@@ -63,10 +63,10 @@ namespace Z0
             var t = z64;
             var maskspec = BitMask.msbspec(n2,n1,t);
 
-            var source = vbuild.increments(w,t);
-            var blendspec = vbuild.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var source = CpuVector.increments(w,t);
+            var blendspec = CpuVector.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
             var target = ginx.vblendp(source, blendspec);
-            var expect = vbuild.parts(w,0,5,2,7,4,1,6,3);
+            var expect = CpuVector.parts(w,0,5,2,7,4,1,6,3);
             Claim.yea(ginx.vsame(expect,target));
 
             var descrition = describe(maskspec, maskspec.As(z8).Mask(), source,target);
@@ -86,10 +86,10 @@ namespace Z0
             var t = z64;
             var maskspec = BitMask.msbspec(n4,n1,t);
 
-            var source = vbuild.increments(w,t);
-            var blendspec = vbuild.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var source = CpuVector.increments(w,t);
+            var blendspec = CpuVector.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
             var target = ginx.vblendp(source, blendspec);
-            var expect = vbuild.parts(w,0,1,2,7,4,5,6,3);
+            var expect = CpuVector.parts(w,0,1,2,7,4,5,6,3);
             Claim.yea(ginx.vsame(expect,target));
 
             var descrition = describe(maskspec, maskspec.As(z8).Mask(), source,target);
@@ -109,10 +109,10 @@ namespace Z0
             var t = z64;
             var maskspec = BitMask.lsbspec(n2,n1,t);
 
-            var source = vbuild.increments(w,t);
-            var blendspec = vbuild.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var source = CpuVector.increments(w,t);
+            var blendspec = CpuVector.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
             var target = ginx.vblendp(source, blendspec);
-            var expect = vbuild.parts(w,4,1,6,3,0,5,2,7);
+            var expect = CpuVector.parts(w,4,1,6,3,0,5,2,7);
             Claim.yea(ginx.vsame(expect,target));
 
             var descrition = describe(maskspec, maskspec.As(z8).Mask(), source,target);
@@ -131,10 +131,10 @@ namespace Z0
             var t = z64;
             var maskspec = BitMask.jsbspec(n8,n2,t);
 
-            var source = vbuild.increments(w,t);
-            var blendspec = vbuild.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var source = CpuVector.increments(w,t);
+            var blendspec = CpuVector.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
             var target = ginx.vblendp(source, blendspec);
-            var expect = vbuild.parts(w,4,5,2,3,0,1,6,7);
+            var expect = CpuVector.parts(w,4,5,2,3,0,1,6,7);
             Claim.yea(ginx.vsame(expect,target));
 
             var descrition = describe(maskspec, maskspec.As(z8).Mask(), source,target);
@@ -153,10 +153,10 @@ namespace Z0
             var t = z32;
             var maskspec = BitMask.jsbspec(n8,n2,t);
 
-            var source = vbuild.increments(w,t);
-            var blendspec = vbuild.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var source = CpuVector.increments(w,t);
+            var blendspec = CpuVector.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
             var target = ginx.vblendp(source, blendspec);
-            var expect = vbuild.parts(w,8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7);
+            var expect = CpuVector.parts(w,8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7);
             
             Claim.yea(ginx.vsame(expect,target));
 
@@ -176,10 +176,10 @@ namespace Z0
             var t = z16;
             var maskspec = BitMask.jsbspec(n8,n2,t);
 
-            var source = vbuild.increments(w,t);
-            var blendspec = vbuild.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var source = CpuVector.increments(w,t);
+            var blendspec = CpuVector.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
             var target = ginx.vblendp(source, blendspec);
-            var expect = vbuild.parts(w,16, 17,  2,  3,  4,  5, 22, 23, 24, 25, 10, 11, 12, 13, 30, 31,  0,  1, 18, 19, 20, 21,  6,  7,  8,  9, 26, 27, 28, 29, 14, 15);
+            var expect = CpuVector.parts(w,16, 17,  2,  3,  4,  5, 22, 23, 24, 25, 10, 11, 12, 13, 30, 31,  0,  1, 18, 19, 20, 21,  6,  7,  8,  9, 26, 27, 28, 29, 14, 15);
             Claim.eq(expect,target);
 
             var descrition = describe(maskspec, maskspec.As(z32).Mask(), source,target);
@@ -198,8 +198,8 @@ namespace Z0
             var t = z8;
             var maskspec = BitMask.jsbspec(n8,n2,t);
 
-            var source = vbuild.increments(w,t);
-            var blendspec = vbuild.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var source = CpuVector.increments(w,t);
+            var blendspec = CpuVector.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
             var target = ginx.vblendp(source, blendspec);
 
             var descrition = describe(maskspec, maskspec.As(z64).Mask(), source,target);
@@ -212,7 +212,7 @@ namespace Z0
             var w = n512;
             var t = z8;
             var maskspec = BitMask.jsbspec(n8,n2,t);
-            var blendspec = vbuild.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var blendspec = CpuVector.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
 
             var maskbits = maskspec.As(z64).Mask();
 
@@ -239,7 +239,7 @@ namespace Z0
             
             
             var spec = pattern.LoadVector();
-            var x = vbuild.increments(w, t);
+            var x = CpuVector.increments(w, t);
             var y = ginx.vadd(x, gmath.add(x.LastCell(), gmath.one(t)));            
             var z = ginx.vblendp(x,y,spec);       
 
@@ -305,7 +305,7 @@ namespace Z0
 
             Claim.eq(natval(pn),TypeMath.div(w,t) * 2);
 
-            var left = vbuild.increments(w, t);
+            var left = CpuVector.increments(w, t);
             var right = ginx.vadd(left, gmath.add(left.LastCell(), gmath.one(t)));            
             var blend = ginx.vblendp(left,right,spec);       
 
@@ -409,8 +409,8 @@ namespace Z0
             where S : unmanaged
             where P : unmanaged, ITypeNat             
         {
-            var spec = vconvert(vbuild.broadcast(w, pattern),t);
-            var x = vbuild.increments(w, t);
+            var spec = vconvert(CpuVector.broadcast(w, pattern),t);
+            var x = CpuVector.increments(w, t);
             var y = ginx.vadd(x, gmath.add(x.LastCell(), gmath.one(t)));            
             var z = ginx.vblendp(x,y,spec);         
 
@@ -437,8 +437,8 @@ namespace Z0
             where S : unmanaged
             where P : unmanaged, ITypeNat             
         {
-            var spec = vconvert(vbuild.broadcast(w, pattern),t);
-            var x = vbuild.increments(w, t);
+            var spec = vconvert(CpuVector.broadcast(w, pattern),t);
+            var x = CpuVector.increments(w, t);
             var y = ginx.vadd(x, gmath.add(x.LastCell(), gmath.one(t)));            
             var z = ginx.vblendp(x,y,spec);         
 

@@ -500,7 +500,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public static Vector128<uint> vcompact(Vector128<ulong> x0, Vector128<ulong> x1, out Vector128<uint> dst)
-            => dst = vbuild.parts(n128, (uint)vcell(x0, 0),(uint)vcell(x0, 1),(uint)vcell(x1, 0),(uint)vcell(x1, 1));
+            => dst = CpuVector.parts(n128, (uint)vcell(x0, 0),(uint)vcell(x0, 1),(uint)vcell(x1, 0),(uint)vcell(x1, 1));
 
         /// <summary>
         /// 4x32u -> (2x64u, 2x64u)
@@ -529,7 +529,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public static Vector128<uint> vcompact(Vector256<ulong> src, out Vector128<uint> dst)
-            => dst = vbuild.parts(n128, (uint)vcell(src, 0),(uint)vcell(src, 1),(uint)vcell(src, 2),(uint)vcell(src, 3));
+            => dst = CpuVector.parts(n128, (uint)vcell(src, 0),(uint)vcell(src, 1),(uint)vcell(src, 2),(uint)vcell(src, 3));
 
         /// <summary>
         /// 4x32w -> 4x64w
@@ -547,7 +547,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public static Vector128<int> vcompact(Vector256<long> src, out Vector128<int> dst)            
-            => dst = vbuild.partsi(n128, (int)vcell(src, 0),(int)vcell(src, 1),(int)vcell(src, 2),(int)vcell(src, 3));
+            => dst = CpuVector.partsi(n128, (int)vcell(src, 0),(int)vcell(src, 1),(int)vcell(src, 2),(int)vcell(src, 3));
 
         /// <summary>
         /// 4x32w -> 4x64w
