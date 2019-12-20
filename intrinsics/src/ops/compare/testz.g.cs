@@ -15,7 +15,7 @@ namespace Z0
     partial class ginx
     {
         /// <summary>
-        /// Determines whether all mask-identified source bits are off
+        /// Returns 1 if all mask-identified source bits are disabled, 0 otherwise
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -38,7 +38,7 @@ namespace Z0
          }
 
         /// <summary>
-        /// Determines whether all mask-identified source bits are off
+        /// Returns 1 if all mask-identified source bits are disabled, 0 otherwise
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -60,6 +60,16 @@ namespace Z0
                 return vtestz_f<T>(src,mask);
        }
 
+        /// <summary>
+        /// Returns 1 if all mask-identified source bits are disabled, 0 otherwise
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="mask">The mask</param>
+        [MethodImpl(Inline)]
+        public static bit vtestz<T>(in Vector512<T> src, in Vector512<T> mask)
+            where T : unmanaged
+                => vtestz(src.Lo,mask.Lo) && vtestz(src.Hi,mask.Hi);
+        
         [MethodImpl(Inline)]
         static bit vtestz_u<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged

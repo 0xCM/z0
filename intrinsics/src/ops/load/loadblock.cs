@@ -246,6 +246,26 @@ namespace Z0
             => v32u(ConvertToVector256Int32(constptr(in src.Head)));
 
         /// <summary>
+        /// VPMOVZXBD ymm, m64
+        /// 8x8u -> 8x32u
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<uint> vloadblock(in Block64<byte> src, N256 w, uint t = default)
+            => v32u(ConvertToVector256Int32(constptr(in src.Head)));
+
+        /// <summary>
+        /// VPMOVZXBD ymm, m64
+        /// 8x8u -> 8x32u
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<uint> vloadblock(in Block64<byte> src, int index,  N256 w, uint t = default)
+            => v32u(ConvertToVector256Int32(constptr(in src.BlockRef(index))));
+
+        /// <summary>
         /// VPMOVZXBW ymm, m128
         /// 16x8u -> 16x16i
         /// </summary>

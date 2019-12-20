@@ -14,7 +14,7 @@ namespace Z0
     partial class CpuVecX
     {
         /// <summary>
-        /// Loads a 128-bit vector from a span beginning at a specified cell offset
+        /// Loads a 128-bit vector from a span
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="offset">The position of the fist source element </param>
@@ -24,17 +24,7 @@ namespace Z0
                 => ginx.vload(n, src, offset);
 
         /// <summary>
-        /// Loads a 128-bit vector from a span beginning at a specified cell offset
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The position of the fist source element </param>
-        [MethodImpl(Inline)]
-        public static Vector128<T> LoadVector<T>(this ReadOnlySpan<T> src, N128 n, int offset = 0)
-            where T : unmanaged            
-                => ginx.vload(n, src, offset);
-
-        /// <summary>
-        /// Loads a 256-bit vector from a span beginning at a specified cell offset
+        /// Loads a 256-bit vector from a span
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="offset">The position of the fist source element </param>
@@ -44,12 +34,42 @@ namespace Z0
                 => ginx.vload(n, src, offset);
 
         /// <summary>
-        /// Loads a 256-bit vector from a span beginning at a specified cell offset
+        /// Loads a 512-bit vector from a span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="offset">The position of the fist source element </param>
+        [MethodImpl(Inline)]
+        public static Vector512<T> LoadVector<T>(this Span<T> src, N512 n, int offset = 0)
+            where T : unmanaged            
+                => ginx.vload(n, src, offset);
+
+        /// <summary>
+        /// Loads a 128-bit vector from a readonly span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="offset">The position of the fist source element </param>
+        [MethodImpl(Inline)]
+        public static Vector128<T> LoadVector<T>(this ReadOnlySpan<T> src, N128 n, int offset = 0)
+            where T : unmanaged            
+                => ginx.vload(n, src, offset);
+
+        /// <summary>
+        /// Loads a 256-bit vector from a readonly span
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="offset">The position of the fist source element </param>
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this ReadOnlySpan<T> src, N256 n, int offset = 0)
+            where T : unmanaged            
+                => ginx.vload(n, src, offset);
+
+        /// <summary>
+        /// Loads a 512-bit vector from a readonly span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="offset">The position of the fist source element </param>
+        [MethodImpl(Inline)]
+        public static Vector512<T> LoadVector<T>(this ReadOnlySpan<T> src, N512 n, int offset = 0)
             where T : unmanaged            
                 => ginx.vload(n, src, offset);
 
@@ -63,6 +83,7 @@ namespace Z0
         public static Vector128<T> LoadVector<T>(this in Block128<T> src)            
             where T : unmanaged            
                 => ginx.vload(src.ReadOnly());
+
 
         /// <summary>
         /// Loads a 128-bit vector from the first 128-bit block
@@ -86,16 +107,7 @@ namespace Z0
             where T : unmanaged            
                 => ginx.vload(src, block);
 
-        /// <summary>
-        /// Loads a block-identified 128-bit vector
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<T> LoadVector<T>(this in ConstBlock128<T> src, int block)            
-            where T : unmanaged      
-                => ginx.vload(src,block);
+
 
         /// <summary>
         /// Loads a 256-bit vector from the first 256-bit block
@@ -105,6 +117,17 @@ namespace Z0
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this in Block256<T> src)            
+            where T : unmanaged            
+                => ginx.vload(src);
+
+        /// <summary>
+        /// Loads a 512-bit vector from the first 512-bit block
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector512<T> LoadVector<T>(this in Block512<T> src)            
             where T : unmanaged            
                 => ginx.vload(src);
 
@@ -120,7 +143,18 @@ namespace Z0
                 => ginx.vload(src);
 
         /// <summary>
-        /// Loads a block-identified 256-bit vector
+        /// Loads a 512-bit vector from the first 512-bit block
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector512<T> LoadVector<T>(this in ConstBlock512<T> src)            
+            where T : unmanaged      
+                => ginx.vload(src);
+
+        /// <summary>
+        /// Loads a 256-bit vector from an index-identified block
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="block">The block index</param>
@@ -131,13 +165,46 @@ namespace Z0
                 => ginx.vload(src,block);
 
         /// <summary>
-        /// Loads a block-identified 256-bit vector
+        /// Loads 512-bit vector from an index-identified block
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector512<T> LoadVector<T>(this in Block512<T> src, int block)            
+            where T : unmanaged            
+                => ginx.vload(src,block);
+
+        /// <summary>
+        /// Loads a 128-bit vector from an index-identified block
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector128<T> LoadVector<T>(this in ConstBlock128<T> src, int block)            
+            where T : unmanaged      
+                => ginx.vload(src,block);
+
+        /// <summary>
+        /// Loads a 256-bit vector from an index-identified block
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this in ConstBlock256<T> src, int block)            
+            where T : unmanaged      
+                => ginx.vload(src,block);
+
+        /// <summary>
+        /// Loads a 512-bit vector from an index-identified block
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector512<T> LoadVector<T>(this in ConstBlock512<T> src, int block)            
             where T : unmanaged      
                 => ginx.vload(src,block);
     }

@@ -13,20 +13,9 @@ namespace Z0
     using static As;
 
     partial class ginx
-    {
+    {        
         /// <summary>
-        /// Determines whether all source bits are all on
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <param name="mask">Specifies the bits in the source to test</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static bit vtestc<T>(Vector128<T> src)
-            where T : unmanaged
-                => vtestc(src, vbuild.ones<T>(n128));
-        
-        /// <summary>
-        /// Determines whether mask-specified source bits are all on
+        /// Returns 1 if all mask-identified source bits are all enabled and 0 otherwise
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits in the source to test</param>
@@ -50,17 +39,7 @@ namespace Z0
         }
         
         /// <summary>
-        /// Returns true if all bits in the source vector are enabled, false otherwise
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static bit vtestc<T>(Vector256<T> src)
-            where T : unmanaged
-                => vtestc(src, vbuild.ones<T>(n256));        
-
-        /// <summary>
-        /// Determines whether mask-specified source bits are all on
+        /// Returns 1 if all mask-identified source bits are all enabled and 0 otherwise
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
@@ -84,11 +63,47 @@ namespace Z0
         }
 
         /// <summary>
-        /// Determines whether mask-specified source bits are all on
+        /// Returns 1 if all mask-identified source bits are all enabled and 0 otherwise
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="mask">Specifies the bits the source to test</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static bit vtestc<T>(in Vector512<T> src, in Vector512<T> mask)
+            where T : unmanaged
+                => vtestc(src.Lo, mask.Lo) && vtestc(src.Hi, mask.Lo);
+
+        /// <summary>
+        /// Returns 1 if all source bits are enabled and 0 otherwise
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits in the source to test</param>
         /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static bit vtestc<T>(Vector128<T> src)
+            where T : unmanaged
+                => vtestc(src, vbuild.ones<T>(n128));
+
+        /// <summary>
+        /// Returns 1 if all source bits are enabled and 0 otherwise
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static bit vtestc<T>(Vector256<T> src)
+            where T : unmanaged
+                => vtestc(src, vbuild.ones<T>(n256));        
+
+        /// <summary>
+        /// Returns 1 if all source bits are enabled and 0 otherwise
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static bit vtestc<T>(Vector512<T> src)
+            where T : unmanaged
+                => vtestc(src, vbuild.ones<T>(n512));        
+
         [MethodImpl(Inline)]
         static bit vtestc_i<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
@@ -103,12 +118,6 @@ namespace Z0
                 return dinx.vtestc(vcast64i(src), vcast64i(mask));
         }
 
-        /// <summary>
-        /// Determines whether mask-specified source bits are all on
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <param name="mask">Specifies the bits in the source to test</param>
-        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         static bit vtestc_u<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
@@ -123,13 +132,6 @@ namespace Z0
                 return dinx.vtestc(vcast64u(src), vcast64u(mask));
         }
 
-
-        /// <summary>
-        /// Determines whether mask-specified source bits are all on
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <param name="mask">Specifies the bits in the source to test</param>
-        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         static bit vtestc_f<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged

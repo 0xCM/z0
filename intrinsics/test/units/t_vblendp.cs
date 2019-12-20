@@ -7,12 +7,16 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.Intrinsics;
+    using static BitMask;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     using static zfunc;
 
     public class t_vblendp : t_vinx<t_vblendp>
     {
+        bool EmitInfo
+            => false;
+
         public void vblendp_perm32_g128x8u()
             => vblendp_check(n128, n32, BitMasks.Msb16, z8);
 
@@ -31,6 +35,197 @@ namespace Z0
         public void vblendp_perm16_g256x32u()
             => vblendp_check(n256, n16, BitMasks.Msb64, z32);
 
+
+        static string describe<F,D,T,S>(IMaskSpec<F,D,T> maskspec, S sample, Vector512<T> source, Vector512<T> target)
+            where F : unmanaged, ITypeNat
+            where D : unmanaged, ITypeNat
+            where T : unmanaged
+            where S : unmanaged
+        {
+            var description = text();
+            var indent = "/// ";
+            var bits = BitString.scalar(sample).Format(specifier:true);
+            var header = $"{indent}512x{bitsize(default(T))}, {maskspec}, {bits}";            
+            description.AppendLine(header);
+            description.AppendLine($"{indent}source: {source.Format(pad:2)}");
+            description.AppendLine($"{indent}target: {target.Format(pad:2)}");            
+            return description.ToString();
+        }
+
+        /// <summary>
+        /// 512x64, msb, f:2, d:1, t:64u, 0b10101010
+        /// source: [ 0,  1,  2,  3,  4,  5,  6,  7]
+        /// target: [ 0,  5,  2,  7,  4,  1,  6,  3]
+        /// </summary>
+        public void vblendp_512x64_Msb2x1()
+        {
+            var w = n512;
+            var t = z64;
+            var maskspec = BitMask.msbspec(n2,n1,t);
+
+            var source = vbuild.increments(w,t);
+            var blendspec = vbuild.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var target = ginx.vblendp(source, blendspec);
+            var expect = vbuild.parts(w,0,5,2,7,4,1,6,3);
+            Claim.yea(ginx.vsame(expect,target));
+
+            var descrition = describe(maskspec, maskspec.As(z8).Mask(), source,target);
+            if(EmitInfo)
+                Trace(descrition);
+            
+        }
+
+        /// <summary>
+        /// 512x64, msb, f:4, d:1, t:64u, 0b10001000
+        /// source: [ 0,  1,  2,  3,  4,  5,  6,  7]
+        /// target: [ 0,  1,  2,  7,  4,  5,  6,  3]
+        /// </summary>
+        public void vblendp_512x64_Msb4x1()
+        {
+            var w = n512;
+            var t = z64;
+            var maskspec = BitMask.msbspec(n4,n1,t);
+
+            var source = vbuild.increments(w,t);
+            var blendspec = vbuild.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var target = ginx.vblendp(source, blendspec);
+            var expect = vbuild.parts(w,0,1,2,7,4,5,6,3);
+            Claim.yea(ginx.vsame(expect,target));
+
+            var descrition = describe(maskspec, maskspec.As(z8).Mask(), source,target);
+            if(EmitInfo)
+                Trace(descrition);
+            
+        }
+
+        /// <summary>
+        /// 512x64, lsb, f:2, d:1, t:64u, 0b01010101
+        /// source: [ 0,  1,  2,  3,  4,  5,  6,  7]
+        /// target: [ 4,  1,  6,  3,  0,  5,  2,  7]
+        /// </summary>
+        public void vblendp_512x64_Lsb2x1()
+        {
+            var w = n512;
+            var t = z64;
+            var maskspec = BitMask.lsbspec(n2,n1,t);
+
+            var source = vbuild.increments(w,t);
+            var blendspec = vbuild.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var target = ginx.vblendp(source, blendspec);
+            var expect = vbuild.parts(w,4,1,6,3,0,5,2,7);
+            Claim.yea(ginx.vsame(expect,target));
+
+            var descrition = describe(maskspec, maskspec.As(z8).Mask(), source,target);
+            if(EmitInfo)
+                Trace(descrition);            
+        }
+
+        /// <summary>
+        /// 512x64, jsb, f:8, d:2, t:64u, 0b11000011
+        /// source: [ 0,  1,  2,  3,  4,  5,  6,  7]
+        /// target: [ 4,  5,  2,  3,  0,  1,  6,  7]
+        /// </summary>
+        public void vblendp_512x64_Jsb8x2()
+        {
+            var w = n512;
+            var t = z64;
+            var maskspec = BitMask.jsbspec(n8,n2,t);
+
+            var source = vbuild.increments(w,t);
+            var blendspec = vbuild.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var target = ginx.vblendp(source, blendspec);
+            var expect = vbuild.parts(w,4,5,2,3,0,1,6,7);
+            Claim.yea(ginx.vsame(expect,target));
+
+            var descrition = describe(maskspec, maskspec.As(z8).Mask(), source,target);
+            if(EmitInfo)
+                Trace(descrition);            
+        }
+
+        /// <summary>
+        /// 512x32, jsb, f:8, d:2, t:32u, 0b1100001111000011
+        /// source: [ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15]
+        /// target: [ 8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7]
+        /// </summary>
+        public void vblendp_512x32_Jsb8x2()
+        {
+            var w = n512;
+            var t = z32;
+            var maskspec = BitMask.jsbspec(n8,n2,t);
+
+            var source = vbuild.increments(w,t);
+            var blendspec = vbuild.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var target = ginx.vblendp(source, blendspec);
+            var expect = vbuild.parts(w,8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7);
+            
+            Claim.yea(ginx.vsame(expect,target));
+
+            var descrition = describe(maskspec, maskspec.As(z16).Mask(), source,target);
+            if(EmitInfo)
+                Trace(descrition);            
+        }
+
+        /// <summary>
+        /// 512x16, jsb, f:8, d:2, t:16u, 0b11000011110000111100001111000011
+        /// source: [ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+        /// target: [16, 17,  2,  3,  4,  5, 22, 23, 24, 25, 10, 11, 12, 13, 30, 31,  0,  1, 18, 19, 20, 21,  6,  7,  8,  9, 26, 27, 28, 29, 14, 15]
+        /// </summary>
+        public void vblendp_512x16_Jsb8x2()
+        {
+            var w = n512;
+            var t = z16;
+            var maskspec = BitMask.jsbspec(n8,n2,t);
+
+            var source = vbuild.increments(w,t);
+            var blendspec = vbuild.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var target = ginx.vblendp(source, blendspec);
+            var expect = vbuild.parts(w,16, 17,  2,  3,  4,  5, 22, 23, 24, 25, 10, 11, 12, 13, 30, 31,  0,  1, 18, 19, 20, 21,  6,  7,  8,  9, 26, 27, 28, 29, 14, 15);
+            Claim.eq(expect,target);
+
+            var descrition = describe(maskspec, maskspec.As(z32).Mask(), source,target);
+            if(EmitInfo)
+                Trace(descrition);            
+        }
+
+        /// <summary>
+        /// 512x8, jsb, f:8, d:2, t:8u, 0b1100001111000011110000111100001111000011110000111100001111000011
+        /// source: [ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63]
+        /// target: [32, 33,  2,  3,  4,  5, 38, 39,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,  0,  1, 34, 35, 36, 37,  6,  7, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63]
+        /// </summary>
+        public void vblendp_512x8_Jsb8x2_outline()
+        {
+            var w = n512;
+            var t = z8;
+            var maskspec = BitMask.jsbspec(n8,n2,t);
+
+            var source = vbuild.increments(w,t);
+            var blendspec = vbuild.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var target = ginx.vblendp(source, blendspec);
+
+            var descrition = describe(maskspec, maskspec.As(z64).Mask(), source,target);
+            if(EmitInfo)
+                Trace(descrition);            
+        }
+
+        public void vblendp_512x8_Jsb8x2()
+        {
+            var w = n512;
+            var t = z8;
+            var maskspec = BitMask.jsbspec(n8,n2,t);
+            var blendspec = vbuild.broadcast(n256, maskspec.Mask(), gmath.maxval(t));
+
+            var maskbits = maskspec.As(z64).Mask();
+
+            for(var samples=0; samples< SampleSize; samples++)
+            {
+                var source = Random.CpuVector(w,t);                
+                var target = ginx.vblendp(source,blendspec);
+                
+
+            }
+
+        }
+
         public void vblendp_perm64_256x8u()
         {
             var w = n256;
@@ -38,7 +233,6 @@ namespace Z0
             var n = n64;
             var tf = 4;
             var pick = BitMask.msb(n1,n1,t);
-
             var pattern = DataBlocks.single(w,t);
             for(var i=0; i< pattern.CellCount; i++)
                 pattern[i] = (i % tf == 0) ? pick : t;
@@ -67,37 +261,42 @@ namespace Z0
             }
         }
 
-        static Block128<T> swaps_pattern<T>(N128 w, int tf, T t = default)
+        static Vector128<T> swaps_pattern<T>(N128 w, int tf, T t = default)
             where T : unmanaged
         {
             var pick = BitMask.msb(n1,n1,t);
             var pattern = DataBlocks.single(w,t);
             for(var i=0; i< pattern.CellCount; i++)
                 pattern[i] = (i % tf == 0) ? pick : t;
-            return pattern;
+            return pattern.LoadVector();
         }
 
         static T enabled<T>(T t = default)
             where T : unmanaged
                 => BitMask.msb(n1,n1,t);
 
-        static Block128<T> rrll_pattern<T>(N128 w, T t = default)
+        static Vector128<T> rrll_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => ginxs.broadcast(BitMask.even(n2,n2,z64), enabled(t), DataBlocks.single(w,t));
+                => ginxs.broadcast(BitMask.even(n2,n2,z64), enabled(t), DataBlocks.single(w,t)).LoadVector();
 
-        static Block128<T> llrr_pattern<T>(N128 w, T t = default)
+        static Vector128<T> llrr_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => ginxs.broadcast(BitMask.odd(n2,n2,z64), enabled(t), DataBlocks.single(w,t));
+                => ginxs.broadcast(BitMask.odd(n2,n2,z64), enabled(t), DataBlocks.single(w,t)).LoadVector();
 
-        static Block128<T> rl_pattern<T>(N128 w, T t = default)
+        static Vector128<T> rl_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => ginxs.broadcast(BitMask.lsb(n2,n1,z64), enabled(t), DataBlocks.single(w,t));
+                => ginxs.broadcast(BitMask.lsb(n2,n1,z64), enabled(t), DataBlocks.single(w,t)).LoadVector();
 
-        static Block128<T> lr_pattern<T>(N128 w, T t = default)
+        static Vector128<T> lr_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => ginxs.broadcast(BitMask.msb(n2,n1,z64), enabled(t), DataBlocks.single(w,t));
+                => ginxs.broadcast(BitMask.msb(n2,n1,z64), enabled(t), DataBlocks.single(w,t)).LoadVector();
 
-        void vblendp_128x8u<T>(Block128<T> pattern, [Caller] string title = null)
+        static Vector256<T> rl_pattern<T>(N256 w, T t = default)
+            where T : unmanaged
+                => ginxs.broadcast(BitMask.lsb(n2,n1,t), enabled(t), DataBlocks.single(w,t)).LoadVector();
+
+
+        void vblendp_check<T>(Vector128<T> spec, [Caller] string title = null)
             where T : unmanaged
         {
             var w = n128;
@@ -106,7 +305,6 @@ namespace Z0
 
             Claim.eq(natval(pn),TypeMath.div(w,t) * 2);
 
-            var spec = pattern.LoadVector();
             var left = vbuild.increments(w, t);
             var right = ginx.vadd(left, gmath.add(left.LastCell(), gmath.one(t)));            
             var blend = ginx.vblendp(left,right,spec);       
@@ -127,16 +325,18 @@ namespace Z0
                     var j = perm[i];
                     var k = perm[j];
                     Claim.eq(ti,k);
-                    tc++;
-                    
+                    tc++;                    
                 }
             }
 
-            Trace($"* {title}: vector width = {w}, swap count = {tc}, cell type = {typename(t)}, perm length = {pn}");
-            Trace($"left:  {left.Format(pad:2)}");
-            Trace($"right: {right.Format(pad:2)}");
-            Trace(perm.Format());  
-            Trace(string.Empty);  
+            if(EmitInfo)
+            {
+                Trace($"* {title}: vector width = {w}, swap count = {tc}, cell type = {typename(t)}, perm length = {pn}");
+                Trace($"left:  {left.Format(pad:2)}");
+                Trace($"right: {right.Format(pad:2)}");
+                Trace(perm.Format());  
+                Trace(string.Empty);  
+            }
         }
 
 
@@ -148,26 +348,26 @@ namespace Z0
             void swaps()
             {
                 var title = nameof(swaps);
-                vblendp_128x8u(swaps_pattern(w, 1,t), title);
-                vblendp_128x8u(swaps_pattern(w, 2,t), title);
-                vblendp_128x8u(swaps_pattern(w, 3,t), title);
-                vblendp_128x8u(swaps_pattern(w, 4,t), title);
-                vblendp_128x8u(swaps_pattern(w, 5,t), title);
-                vblendp_128x8u(swaps_pattern(w, 6,t), title);
-                vblendp_128x8u(swaps_pattern(w, 7,t), title);
+                vblendp_check(swaps_pattern(w, 1,t), title);
+                vblendp_check(swaps_pattern(w, 2,t), title);
+                vblendp_check(swaps_pattern(w, 3,t), title);
+                vblendp_check(swaps_pattern(w, 4,t), title);
+                vblendp_check(swaps_pattern(w, 5,t), title);
+                vblendp_check(swaps_pattern(w, 6,t), title);
+                vblendp_check(swaps_pattern(w, 7,t), title);
             }
 
             void lr()
-                => vblendp_128x8u(lr_pattern(n128,z8), nameof(lr));
+                => vblendp_check(lr_pattern(n128,z8), nameof(lr));
 
             void rl()
-                => vblendp_128x8u(rl_pattern(n128,z8), nameof(rl));
+                => vblendp_check(rl_pattern(n128,z8), nameof(rl));
 
             void llrr()
-                => vblendp_128x8u(llrr_pattern(n128,z8), nameof(llrr));
+                => vblendp_check(llrr_pattern(n128,z8), nameof(llrr));
 
             void rrll()
-                => vblendp_128x8u(rrll_pattern(n128,z8), nameof(rrll));
+                => vblendp_check(rrll_pattern(n128,z8), nameof(rrll));
 
             lr();
             rl();

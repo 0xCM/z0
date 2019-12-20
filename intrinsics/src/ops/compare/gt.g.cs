@@ -51,6 +51,10 @@ namespace Z0
                 throw unsupported<T>();
         }
 
+        [MethodImpl(Inline)]
+        public static Vector512<T> vgt<T>(in Vector512<T> x, in Vector512<T> y)
+            where T : unmanaged
+                => (vgt(x.Lo, y.Lo), vgt(x.Hi, y.Hi));
  
         [MethodImpl(Inline)]
         static Vector128<T> vgt_i<T>(Vector128<T> x, Vector128<T> y)

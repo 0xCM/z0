@@ -52,6 +52,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static Vector512<T> vlt<T>(in Vector512<T> x, in Vector512<T> y)
+            where T : unmanaged
+                => (vlt(x.Lo, y.Lo), vlt(x.Hi, y.Hi));
+
+        [MethodImpl(Inline)]
         static Vector128<T> vlt_i<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {

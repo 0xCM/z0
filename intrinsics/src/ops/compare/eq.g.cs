@@ -15,7 +15,7 @@ namespace Z0
     partial class ginx
     {
         /// <summary>
-        /// Compares corresponding components each vector for equality. For equal
+        /// Compares corresponding components in each vector for equality. For equal
         /// components, the corresponding component the result vector has all bits 
         /// enabled; otherwise, all bits the component are disabled
         /// </summary>
@@ -40,7 +40,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Compares corresponding components each vector for equality. For equal
+        /// Compares corresponding components in each vector for equality. For equal
         /// components, the corresponding component the result vector has all bits 
         /// enabled; otherwise, all bits the component are disabled
         /// </summary>
@@ -64,6 +64,18 @@ namespace Z0
                 return veq_f<T>(x,y);
         }
 
+        /// <summary>
+        /// Compares corresponding components in each vector for equality. For equal
+        /// components, the corresponding component the result vector has all bits 
+        /// enabled; otherwise, all bits the component are disabled
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static Vector512<T> veq<T>(in Vector512<T> x, in Vector512<T> y)
+            where T : unmanaged
+                => (veq(x.Lo, y.Lo), veq(x.Hi, y.Hi));
+        
         [MethodImpl(Inline)]
         static Vector128<T> veq_i<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged

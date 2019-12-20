@@ -177,6 +177,34 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width selector</param>
         [MethodImpl(Inline)]
+        public static Vector512<short> partsi(N512 w,
+            short x0, short x1, short x2, short x3, short x4, short x5, short x6, short x7,
+            short x8, short x9, short x10, short x11, short x12, short x13, short x14, short x15,
+            short x16, short x17, short x18, short x19, short x20, short x21, short x22, short x23,
+            short x24, short x25, short x26, short x27, short x28, short x29, short x30, short x31)   
+                => Vector512.Create(
+                    x0,x1, x2, x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,
+                    x16,x17,x18,x19,x20,x21,x22,x23,x24,x25,x26,x27,x28,x29,x30,x31);
+
+        /// <summary>
+        /// Defines a 512-bit vector by explicit component specification, from least -> most significant
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        [MethodImpl(Inline)]
+        public static Vector512<ushort> parts(N512 w,
+            ushort x0, ushort x1, ushort x2, ushort x3, ushort x4, ushort x5, ushort x6, ushort x7,
+            ushort x8, ushort x9, ushort x10, ushort x11, ushort x12, ushort x13, ushort x14, ushort x15,
+            ushort x16, ushort x17, ushort x18, ushort x19, ushort x20, ushort x21, ushort x22, ushort x23,
+            ushort x24, ushort x25, ushort x26, ushort x27, ushort x28, ushort x29, ushort x30, ushort x31)   
+                => Vector512.Create(
+                    x0,x1, x2, x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,
+                    x16,x17,x18,x19,x20,x21,x22,x23,x24,x25,x26,x27,x28,x29,x30,x31);
+
+        /// <summary>
+        /// Defines a 512-bit vector by explicit component specification, from least -> most significant
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        [MethodImpl(Inline)]
         public static Vector512<int> partsi(N512 w, int x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7,
             int x8, int x9, int x10, int x11, int x12, int x13, int x14, int x15)        
                 => Vector512.Create(x0,x1, x2, x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15); 

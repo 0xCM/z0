@@ -26,17 +26,6 @@ namespace Z0
         public static ulong pack_64(ConstBlock512<byte> src)
             => ginxs.bitpack(src);
 
-        public static void unpack_8(byte src, Block64<byte> dst)
-            => ginxs.unpackbits(src,dst);
-
-        public static void unpack_16(ushort src, Block128<byte> dst)
-            => ginxs.unpackbits(src,dst);
-
-        public static void unpack_32(uint src, Block256<byte> dst)
-            => ginxs.unpackbits(src,dst);
-        
-        public static void unpack_64(ulong src, Block512<byte> dst)
-            => ginxs.unpackbits(src,dst);
 
         public static ulong broadcast_8x64(byte pattern)
             => ginxs.broadcast(pattern, out ulong _);

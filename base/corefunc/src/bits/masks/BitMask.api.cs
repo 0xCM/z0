@@ -17,12 +17,12 @@ namespace Z0
 
     public static partial class BitMask
     {                
-
         /// <summary>
         /// [00110011]    
         /// </summary>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks></remarks>
         [MethodImpl(Inline)]
@@ -46,6 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks></remarks>
         [MethodImpl(Inline)]
@@ -69,6 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>Creates a mask where the least significant bit, relative to the data type, is enabled</remarks>
         [MethodImpl(Inline)]
@@ -93,7 +95,7 @@ namespace Z0
         /// <param name="w">The pattern width</param>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
-        /// <param name="t"></param>
+        /// <param name="t">A mask type representative</param>
         /// <typeparam name="W">The width type</typeparam>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>Creates a width-variant LSB pattern that repeats every 2 bits with density 1</remarks>
@@ -108,6 +110,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>Creates a mask where the least significant bit out of every two bits is enabled</remarks>
         [MethodImpl(Inline)]
@@ -131,6 +134,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>Creates a mask where the least significant bit out of every four bits is enabled</remarks>
         [MethodImpl(Inline)]
@@ -154,6 +158,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>Creates a mask where the least significant bit out of every eight bits is enabled</remarks>
         [MethodImpl(Inline)]
@@ -177,6 +182,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>Creates a mask where the least significant bit out of every 16 bits is enabled</remarks>
         [MethodImpl(Inline)]
@@ -312,7 +318,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// [00111111]
+        /// [01111111]
         /// </summary>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
@@ -450,6 +456,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
+
         /// <summary>
         /// [11000000]
         /// </summary>
@@ -570,6 +577,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>Creates a mask where the 7 most significant bits of every 8-bit segment are enabled</remarks>
         [MethodImpl(Inline)]
@@ -593,6 +601,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The frequency selector</param>
         /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>JSB := msb | lsb (8x1)</remarks>
         [MethodImpl(Inline)]
@@ -616,6 +625,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>JSB := msb | lsb (8x2)</remarks>
         [MethodImpl(Inline)]
@@ -639,6 +649,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>JSB := msb | lsb (8x3)</remarks>
         [MethodImpl(Inline)]
@@ -658,6 +669,75 @@ namespace Z0
         }
 
         /// <summary>
+        /// [00011000]
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T central<T>(N8 f, N2 d, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<byte,T>(Central8x8x2);
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Central16x8x2);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Central32x8x2);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Central64x8x2);
+            else 
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// [00111100]
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T central<T>(N8 f, N4 d, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<byte,T>(Central8x8x4);
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Central16x8x4);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Central32x8x4);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Central64x8x4);
+            else 
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// [01111110]
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T central<T>(N8 f, N6 d, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<byte,T>(Central8x8x6);
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Central16x8x6);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Central32x8x6);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Central64x8x6);
+            else 
+                throw unsupported<T>();
+        }
+
+        /// <summary>
         /// [10011001]
         /// </summary>
         /// <param name="f">The repetition frequency</param>
@@ -666,7 +746,7 @@ namespace Z0
         /// <param name="t">The mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>CJSB := jsb | csb (8x2x1)</remarks>
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static T cjsb<T>(N8 f, N2 cd, N1 jsbd, T t = default)
             where T : unmanaged
         {

@@ -39,11 +39,11 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the bitwise AND between the operands
+        /// Computes the bitwise and
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
+        /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> vand<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
@@ -61,6 +61,17 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
+
+        /// <summary>
+        /// Computes the bitwise and
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector512<T> vand<T>(in Vector512<T> x, in Vector512<T> y)
+            where T : unmanaged
+                => (vand(x.Lo,y.Lo), (vand(x.Hi, y.Hi)));
 
         [MethodImpl(Inline)]
         static Vector128<T> vand_u<T>(Vector128<T> x, Vector128<T> y)

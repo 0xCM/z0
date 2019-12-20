@@ -32,5 +32,16 @@ namespace Z0
         public static Vector256<T> ones<T>(N256 n)
             where T : unmanaged
                 => ginx.veq(default(Vector256<T>), default(Vector256<T>));
+
+        /// <summary>
+        /// Creates a 512-bit vector with all bits enabled
+        /// </summary>
+        /// <param name="n">The vector width selector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector512<T> ones<T>(N512 n)
+            where T : unmanaged
+                => ginx.veq(default(Vector512<T>), default(Vector512<T>));
+
     }
 }

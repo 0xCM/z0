@@ -30,5 +30,14 @@ namespace Z0
             for(var block = 0; block < count; block++)
                 vstore(ginx.vlt(x.LoadVector(block), y.LoadVector(block)), ref dst.BlockRef(block));
         } 
+
+        [MethodImpl(Inline)]
+        public static void vlt<T>(in ConstBlock512<T> x, in ConstBlock512<T> y, in Block512<T> dst)
+            where T : unmanaged
+        {
+            var count = dst.BlockCount;
+            for(var block = 0; block < count; block++)
+                vstore(ginx.vlt(x.LoadVector(block), y.LoadVector(block)), ref dst.BlockRef(block));
+        } 
     }
 }

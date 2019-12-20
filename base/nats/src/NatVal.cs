@@ -62,6 +62,9 @@ namespace Z0
         [MethodImpl(Inline)]
         NatVal(ulong src)
             => this.Value = src;
+
+        public override string ToString() 
+            => Value.ToString();
     }
 
 }

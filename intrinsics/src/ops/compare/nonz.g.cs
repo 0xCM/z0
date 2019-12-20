@@ -17,8 +17,7 @@ namespace Z0
     partial class ginx
     {
         /// <summary>
-        /// Returns true if at least one of the components of the source
-        /// vector is nonzero, false otherwise
+        /// Returns true if at least one of the components of the source vector is nonzero, false otherwise
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
@@ -40,6 +39,38 @@ namespace Z0
                 return vnonz_f(src);
         }
 
+        /// <summary>
+        /// Returns true if at least one of the components of the source vector is nonzero, false otherwise
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static bit vnonz<T>(Vector256<T> src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return vnonz_u(src);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return vnonz_i(src);
+            else 
+                return vnonz_f(src);
+        }
+
+        /// <summary>
+        /// Returns true if at least one of the components of the source vector is nonzero, false otherwise
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static bit vnonz<T>(in Vector512<T> src)
+            where T : unmanaged
+                => vnonz(src.Lo) || vnonz(src.Hi);       
 
         [MethodImpl(Inline)]
         static bit vnonz_i<T>(Vector128<T> src)
@@ -81,29 +112,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        /// <summary>
-        /// Returns true if at least one of the components of the source
-        /// vector is nonzero, false otherwise
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static bit vnonz<T>(Vector256<T> src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vnonz_u(src);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vnonz_i(src);
-            else 
-                return vnonz_f(src);
-        }
 
         [MethodImpl(Inline)]
         static bit vnonz_i<T>(Vector256<T> src)
