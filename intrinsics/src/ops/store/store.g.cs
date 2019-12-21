@@ -162,7 +162,7 @@ namespace Z0
             where T : unmanaged
         {
             vstore(src.Lo, ref dst, offset);
-            vstore(src.Hi, ref dst, offset + vcount<T>(n256));
+            vstore(src.Hi, ref dst, offset + CpuVector.count<T>(n256));
         }
 
         [MethodImpl(Inline)]

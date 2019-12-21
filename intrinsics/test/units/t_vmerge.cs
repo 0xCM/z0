@@ -22,7 +22,7 @@ namespace Z0
             
             var w = n256;
             var t = z32;
-            var count = ginx.vcount(w,t);
+            var count = CpuVector.count(w,t);
 
             var x = CpuVector.increments(w,t);
             var y = CpuVector.increments(w, (x.LastCell() + 1));

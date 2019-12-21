@@ -128,7 +128,7 @@ namespace Z0
             
             var zb = DataBlocks.single(w,t);
             var eb = DataBlocks.single(w,t);            
-            var count = ginx.vcount(w,s);
+            var count = CpuVector.count(w,s);
 
             for(var i=0; i< SampleSize; i ++)
             {

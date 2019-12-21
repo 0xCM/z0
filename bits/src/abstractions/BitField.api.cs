@@ -83,7 +83,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static Vector256<byte> setwidth<E>(Vector256<byte> widths, Pair<E,byte> spec)
             where E : unmanaged, Enum
-            => widths = widths.WithElement(eint(spec.A), BitMask.lomask<byte>(math.clamp(spec.B,MaxFieldWidth)));
+            => widths = widths.WithElement(eint(spec.A), BitMask.lo<byte>(math.clamp(spec.B,MaxFieldWidth)));
 
         [MethodImpl(Inline)]
         internal static byte getwidth<E>(Vector256<byte> widths, E field)

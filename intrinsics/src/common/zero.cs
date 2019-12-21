@@ -13,7 +13,7 @@ namespace Z0
 
     partial class CpuVector
     {
-       /// <summary>
+        /// <summary>
         /// Creates a 128-bit zero-filled vector
         /// </summary>
         /// <param name="w">The vector width selector</param>
@@ -21,18 +21,27 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> zero<T>(N128 w, T t = default)
             where T : unmanaged
-            => default;
+                => default;
 
         /// <summary>
-        /// Creates a 128-bit zero-filled vector
+        /// Creates a 256-bit zero-filled vector
         /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> zero<T>(N256 w, T t = default)
             where T : unmanaged
-            => default;
+                => default;
 
+        /// <summary>
+        /// Creates a 512-bit zero-filled vector
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector512<T> zero<T>(N512 w, T t = default)
+            where T : unmanaged
+                => default;
     }
 
 }

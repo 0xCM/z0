@@ -58,7 +58,7 @@ namespace Z0
           [MethodImpl(Inline)]
           public static byte clear(byte src, int index, int count)
           {
-               var mask = (uint)ushort.MaxValue ^ ((uint)BitMask.lomask64(count - 1) << index);
+               var mask = (uint)ushort.MaxValue ^ ((uint)BitMask.lo64(count - 1) << index);
                return (byte)(mask & src);
           }
 
@@ -71,7 +71,7 @@ namespace Z0
           [MethodImpl(Inline)]
           public static ushort clear(ushort src, int index, int count)
           {
-               var mask = (uint)ushort.MaxValue ^ ((uint)BitMask.lomask64(count - 1) << index);
+               var mask = (uint)ushort.MaxValue ^ ((uint)BitMask.lo64(count - 1) << index);
                return (ushort)(mask & src);
           }
 
@@ -84,7 +84,7 @@ namespace Z0
           [MethodImpl(Inline)]
           public static uint clear(uint src, int index, int count)
           {
-               var mask = uint.MaxValue ^ ((uint)BitMask.lomask64(count - 1) << index);
+               var mask = uint.MaxValue ^ ((uint)BitMask.lo64(count - 1) << index);
                return mask & src;
           }
 
@@ -97,7 +97,7 @@ namespace Z0
           [MethodImpl(Inline)]
           public static ulong clear(ulong src, int index, int count)
           {
-               var mask = ulong.MaxValue ^ (BitMask.lomask64(count - 1) << index);
+               var mask = ulong.MaxValue ^ (BitMask.lo64(count - 1) << index);
                return mask & src;
           }
      }

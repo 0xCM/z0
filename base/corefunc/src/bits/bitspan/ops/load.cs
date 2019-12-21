@@ -9,7 +9,6 @@ namespace Z0
 
     using static zfunc;
 
-
     partial struct BitSpan
     {
         /// <summary>
@@ -27,5 +26,17 @@ namespace Z0
         public static BitSpan load(bit[] src)
             => new BitSpan(src);
 
+        /// <summary>
+        /// Clears a contiguous sequence of bits between two indices
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="i0">The index of the first bit to clear</param>
+        /// <param name="i1">The index of the last bit to clear</param>
+        [MethodImpl(Inline)]
+        public static ref readonly BitSpan clear(in BitSpan src, int i0, int i1)
+        {
+            src.bits.Slice(i0, i0 - i1 + 1).Clear();
+            return ref src;
+        }
     }
 }

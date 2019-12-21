@@ -245,7 +245,7 @@ namespace Z0
         /// <param name="data">The scalar source value</param>
         [MethodImpl(Inline)]
         internal BitVector(T data)
-            => this.data = gmath.and(BitMask.lomask<N,T>(), data);
+            => this.data = gmath.and(BitMask.lo<N,T>(), data);
 
         [MethodImpl(Inline)]
         BitVector(T data, bit inject)

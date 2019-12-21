@@ -16,13 +16,8 @@ namespace Z0
         /// Allocates a bitspan with a specified length
         /// </summary>
         /// <param name="len">The length of the bitstring</param>
-        [MethodImpl(Inline)]
         public static BitSpan alloc(int len)
             => new BitSpan(new bit[len]);
-
-
-
-
     }
 
 }

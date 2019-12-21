@@ -18,7 +18,7 @@ namespace Z0
             var input = pattern.ToBitString().Replicate(4).ToNatBits<N128>();
             
             // 128 bits of output which represents the packing of 128 source bits, each of shich should be on
-            var output = SimdPack.pack(input);
+            var output = BitPack.pack(input);
             
             Claim.eq(CpuVector.ones<uint>(n128), output);            
         }
@@ -37,7 +37,7 @@ namespace Z0
             {
                 var input = Random.NatBits(n128);            
                 var popin = pop(input);            
-                var output = SimdPack.pack(input);
+                var output = BitPack.pack(input);
                 var popout = output.ToBitString().PopCount();
                 Claim.eq(popout,popin);
             }            

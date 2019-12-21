@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T eraser<T>(int start, int count)
             where T : unmanaged
-                => gmath.xor(gmath.maxval<T>(), gmath.sll(BitMask.lomask<T>(count - 1), start));
+                => gmath.xor(gmath.maxval<T>(), gmath.sll(BitMask.lo<T>(count - 1), start));
 
     }
 

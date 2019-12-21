@@ -24,7 +24,7 @@ namespace Z0
             where T : unmanaged
         {
             var dstPrep = clear(dst,start,length);
-            var srcPrep = gmath.sll(gmath.and(BitMask.lomask<T>(length), src), start);
+            var srcPrep = gmath.sll(gmath.and(BitMask.lo<T>(length), src), start);
             return gmath.or(dstPrep, srcPrep);
         }                
     }

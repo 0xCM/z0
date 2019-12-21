@@ -9,13 +9,32 @@ namespace Z0
 
     using static zfunc;
 
-
     /// <summary>
     /// Defines an anti-succinct data structure for bit representation
     /// </summary>
     public readonly ref partial struct BitSpan
     {
         readonly Span<bit> bits;
+
+        [MethodImpl(Inline)]
+        public static BitSpan operator +(in BitSpan head, in BitSpan tail)
+            => concat(head,tail);
+
+        [MethodImpl(Inline)]
+        public static BitSpan operator &(in BitSpan x, in BitSpan y)
+            => and(x,y);
+
+        [MethodImpl(Inline)]
+        public static BitSpan operator |(in BitSpan x, in BitSpan y)
+            => or(x,y);
+
+        [MethodImpl(Inline)]
+        public static BitSpan operator ^(in BitSpan x, in BitSpan y)
+            => xor(x,y);
+
+        [MethodImpl(Inline)]
+        public static BitSpan operator ~(in BitSpan x)
+            => not(x);
 
         [MethodImpl(Inline)]
         public BitSpan(Span<bit> bits)
@@ -46,8 +65,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref seek(ref Head, index);
-        }
-        
+        }        
     }
-
 }

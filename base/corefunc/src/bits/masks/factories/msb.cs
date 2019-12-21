@@ -1,0 +1,436 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2019
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics.X86;
+
+    using static zfunc;
+    using static BitMasks;
+
+    partial class BitMask
+    {                
+        [MethodImpl(Inline)]
+        public static MsbMask<F,D,T> msbspec<F,D,T>(F f = default, D d = default, T t = default) 
+            where F : unmanaged, ITypeNat
+            where D : unmanaged, ITypeNat
+            where T : unmanaged
+                => default;
+
+        /// <summary>
+        /// [1000...0000]
+        /// The greatest bit, relative to the data type, is enabled   
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <param name="t">A mask data type representative</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(N1 f = default, N1 d = default, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<byte,T>(Msb8);
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Msb16);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Msb32);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Msb64);
+            else 
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// [10]
+        /// The greatest bit of each 2-bit segment is enabled
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(N2 f, N1 d = default, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<byte,T>(Msb8x2);
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Msb16x2);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Msb32x2);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Msb64x2);
+            else 
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// [1000]
+        /// The greatest bit of each 4-bit segment is enabled
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(N4 f, N1 d = default, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<byte,T>(Msb8x4);
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Msb16x4);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Msb32x4);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Msb64x4);
+            else 
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// [10000000]
+        /// The greatest bit of each 8-bit segment is enabled
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(N8 f, N1 d = default, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<byte,T>(Msb8);
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Msb16x8);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Msb32x8);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Msb64x8);
+            else 
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// [10000000 00000000]
+        /// The greatest bit of each 16-bit segment is enabled
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(N16 f, N1 d = default, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return default;
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Msb16);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Msb32x16);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Msb64x16);
+            else 
+                throw unsupported<T>();
+        }
+
+
+        /// <summary>
+        /// [11000000]
+        /// The greatest 2 bits of each 8-bit segment are enabled
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(N8 f, N2 d, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<byte,T>(Msb8x8x2);
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Msb16x8x2);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Msb32x8x2);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Msb64x8x2);
+            else 
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// [11100000]
+        /// The greatest 3 bits of each 8-bit segment are enabled
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(N8 f, N3 d, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<byte,T>(Msb8x8x3);
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Msb16x8x3);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Msb32x8x3);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Msb64x8x3);
+            else 
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// [11110000]
+        /// The greatest 4 bits of each 8-bit segment are enabled
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(N8 f, N4 d, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<byte,T>(Msb8x8x4);
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Msb16x8x4);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Msb32x8x4);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Msb64x8x4);
+            else 
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// [11111000]
+        /// The greatest 5 bits of each 8-bit segment are enabled
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(N8 f, N5 d, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<byte,T>(Msb8x8x5);
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Msb16x8x5);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Msb32x8x5);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Msb64x8x5);
+            else 
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// [11111100]
+        /// The greatest 6 bits of each 8-bit segment are enabled
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(N8 f, N6 d, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<byte,T>(Msb8x8x6);
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Msb16x8x6);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Msb32x8x6);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Msb64x8x6);
+            else 
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// [11111110]
+        /// The greatest 7 bits of each 8-bit segment are enabled
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(N8 f, N7 d, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<byte,T>(Msb8x8x7);
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Msb16x8x7);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Msb32x8x7);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Msb64x8x7);
+            else 
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// [10]
+        /// </summary>
+        /// <param name="spec">The mask spec</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(MsbMask<N2,N1,T> spec)
+            where T : unmanaged
+                => msb(spec.f,spec.d,spec.t);
+
+        /// <summary>
+        /// [10001000]
+        /// </summary>
+        /// <param name="spec">The mask spec</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(MsbMask<N4,N1,T> spec)
+            where T : unmanaged
+                => msb(spec.f,spec.d,spec.t);
+
+        /// <summary>
+        /// [10000000]
+        /// </summary>
+        /// <param name="spec">The mask spec</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(MsbMask<N8,N1,T> spec)
+            where T : unmanaged
+                => msb(spec.f,spec.d,spec.t);
+
+        /// <summary>
+        /// [10000000 00000000]
+        /// </summary>
+        /// <param name="spec">The mask spec</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(MsbMask<N16,N1,T> spec)
+            where T : unmanaged
+                => msb(spec.f,spec.d,spec.t);
+
+         /// <summary>
+        /// [11000000]
+        /// </summary>
+        /// <param name="spec">The mask spec</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(MsbMask<N8,N2,T> spec)
+            where T : unmanaged
+                => msb(spec.f,spec.d,spec.t);
+
+        /// <summary>
+        /// [11100000]
+        /// </summary>
+        /// <param name="spec">The mask spec</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(MsbMask<N8,N3,T> spec)
+            where T : unmanaged
+                => msb(spec.f,spec.d,spec.t);
+
+        /// <summary>
+        /// [11110000]
+        /// </summary>
+        /// <param name="spec">The mask spec</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(MsbMask<N8,N4,T> spec)
+            where T : unmanaged
+                => msb(spec.f,spec.d,spec.t);
+
+        /// <summary>
+        /// [11111000]
+        /// </summary>
+        /// <param name="spec">The mask spec</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(MsbMask<N8,N5,T> spec)
+            where T : unmanaged
+                => msb(spec.f,spec.d,spec.t);
+
+        /// <summary>
+        /// [11111100]
+        /// </summary>
+        /// <param name="spec">The mask spec</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(MsbMask<N8,N6,T> spec)
+            where T : unmanaged
+                => msb(spec.f,spec.d,spec.t);
+
+        /// <summary>
+        /// [11111110]
+        /// </summary>
+        /// <param name="spec">The mask spec</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T msb<T>(MsbMask<N8,N7,T> spec)
+            where T : unmanaged
+                => msb(spec.f,spec.d,spec.t);
+
+
+        [MethodImpl(Inline)]
+        public static byte msb8f(byte density)
+            => (byte)(byte.MaxValue << (8 - density));
+
+        /// <summary>
+        /// [10000000 00000000]
+        /// The greatest bit of each 16-bit segment is enabled
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static ulong msb64(N16 f, N1 d)
+            => Msb64x16;
+
+        /// <summary>
+        /// [10000000 00000000 00000000 0000000]
+        /// The greatest bit of each 32-bit segment is enabled
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static ulong msb64(N32 f, N1 d)
+            => Msb64x32;
+        
+        [MethodImpl(Inline)]
+        static ulong msb<W>(W w, N2 f, N1 d)
+            where W : unmanaged, ITypeNat
+        {
+            if(typeof(W) == typeof(N4))
+                return BitMasks.Msb4x2;
+            else if(typeof(W) == typeof(N6))
+                return BitMasks.Msb6x2;
+            else if(typeof(W) == typeof(N8))
+                return BitMasks.Msb8x2;
+            else if(typeof(W) == typeof(N10))
+                return BitMasks.Msb10x2;
+            else if(typeof(W) == typeof(N12))
+                return BitMasks.Msb12x2;
+            else if(typeof(W) == typeof(N14))
+                return BitMasks.Msb14x2;
+            else if(typeof(W) == typeof(N16))
+                return BitMasks.Msb16x2;
+            else if(typeof(W) == typeof(N18))
+                return BitMasks.Msb18x2;
+            else if(typeof(W) == typeof(N32))
+                return BitMasks.Msb32x2;
+            else if(typeof(W) == typeof(N64))
+                return BitMasks.Msb64x2;
+            else 
+                throw unsupported<W>();                
+        }
+
+    }
+
+}

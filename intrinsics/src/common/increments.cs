@@ -77,7 +77,5 @@ namespace Z0
         public static Vector512<T> increments<T>(N512 n, T x0)
             where T : unmanaged
                 => vadd(increments<T>(n), x0);
-
     }
-
 }

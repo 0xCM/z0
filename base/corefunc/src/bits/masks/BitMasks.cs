@@ -543,7 +543,7 @@ namespace Z0
         /// <summary>
         /// [10000000 00000000 10000000 00000000 10000000 00000000 10000000 00000000]
         /// </summary>
-        public const ulong Msb64x16 = (ulong)Msb32x16 | (ulong)Msb32x16 << 16;
+        public const ulong Msb64x16 = (ulong)Msb32x16 | (ulong)Msb32x16 << 32;
 
         /// <summary>
         /// [10000000 00000000 00000000 0000000 10000000 00000000 00000000 0000000]

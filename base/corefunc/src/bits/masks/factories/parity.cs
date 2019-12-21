@@ -1,0 +1,114 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2019
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics.X86;
+
+    using static zfunc;
+
+    using static BitMasks;
+
+    public static partial class BitMask
+    {                
+
+        /// <summary>
+        /// [01010101]    
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks></remarks>
+        [MethodImpl(Inline)]
+        public static T even<T>(N2 f, N1 d, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<byte,T>(Even8);
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Even16);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Even32);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Even64);
+            else 
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// [00110011]    
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks></remarks>
+        [MethodImpl(Inline)]
+        public static T even<T>(N2 f, N2 d, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<byte,T>(Even8x2);
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Even16x2);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Even32x2);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Even64x2);
+            else 
+                throw unsupported<T>();
+        }
+        
+        /// <summary>
+        /// [10101010]    
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks></remarks>
+        [MethodImpl(Inline)]
+        public static T odd<T>(N2 f, N1 d, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<byte,T>(Odd8);
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Odd16);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Odd32);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Odd64);
+            else 
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// [11001100]    
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        /// <remarks></remarks>
+        [MethodImpl(Inline)]
+        public static T odd<T>(N2 f, N2 d, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<byte,T>(Odd8x2);
+            else if(typeof(T) == typeof(ushort))
+                return convert<ushort,T>(Odd16x2);
+            else if(typeof(T) == typeof(uint))
+                return convert<uint,T>(Odd32x2);
+            else if(typeof(T) == typeof(ulong))
+                return convert<ulong,T>(Odd64x2);
+            else 
+                throw unsupported<T>();
+        }
+    }
+}

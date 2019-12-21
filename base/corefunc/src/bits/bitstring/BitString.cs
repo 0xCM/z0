@@ -348,16 +348,6 @@ namespace Z0
             return new BitString(dst);            
         }
 
-        /// <summary>
-        /// Converts the bistring to a binary digit representation
-        /// </summary>
-        public Span<BinaryDigit> ToDigits()
-        {
-            Span<BinaryDigit> dst = new BinaryDigit[data.Length];
-            for(var i=0; i< data.Length; i++)
-                dst[i] = (BinaryDigit)data[i];
-            return dst;
-        }
 
         /// <summary>
         /// Renders the content as a span of bits

@@ -10,19 +10,19 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static zfunc;    
-    using static As;
     
-    partial class ginx
+    partial class CpuVector
     {
+
         /// <summary>
-        /// Returns the number of T-components covered by a vector of a natural parametric width
+        /// Computes the number of T-components covered by a vector of a natural parametric width
         /// </summary>
         /// <param name="w">The vector width representative</param>
         /// <param name="t">The component type representative</param>
         /// <typeparam name="W">The vector bit width</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static int vcount<W,T>(W w = default, T t = default)
+        public static int count<W,T>(W w = default, T t = default)
             where W : unmanaged, ITypeNat
             where T : unmanaged
         {
@@ -37,37 +37,38 @@ namespace Z0
         }            
 
         /// <summary>
-        /// Returns the number of T-components covered by a 128-bit vector
+        /// Computes the number of T-components covered by a 128-bit vector
         /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <param name="t">The component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static int vcount<T>(N128 w = default, T t = default)
+        public static int count<T>(N128 w = default, T t = default)
             where T : unmanaged
                 => Vector128<T>.Count;
 
         /// <summary>
-        /// Returns the number of T-components covered by a 256-bit vector
+        /// Computes the number of T-components covered by a 256-bit vector
         /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <param name="t">The component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static int vcount<T>(N256 w = default, T t = default)
+        public static int count<T>(N256 w = default, T t = default)
             where T : unmanaged
                 => Vector256<T>.Count;
 
         /// <summary>
-        /// Returns the number of T-components covered by a 256-bit vector
+        /// Computes the number of T-components covered by a 256-bit vector
         /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <param name="t">The component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static int vcount<T>(N512 w = default, T t = default)
+        public static int count<T>(N512 w = default, T t = default)
             where T : unmanaged
                 => Vector512<T>.Count;
+
 
     }
 

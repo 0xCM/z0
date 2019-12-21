@@ -23,16 +23,16 @@ namespace Z0
         /// </summary>
         /// <typeparam name="N">The enabled bit count type</typeparam>
         [MethodImpl(Inline)]
-        public static ulong lomask64(int n)
+        public static ulong lo64(int n)
             => blsmsk(Pow2.pow(n));
 
         /// <summary>
         /// Produces a sequence of N enabled bits, starting from index 0 and extending to index n - 1
         /// </summary>
         [MethodImpl(Inline)]
-        public static T lomask<T>(int n, T t = default)
+        public static T lo<T>(int n, T t = default)
             where T : unmanaged
-                => convert<ulong,T>(lomask64(n));
+                => convert<ulong,T>(lo64(n));
 
         /// <summary>
         /// Produces a sequence of N enabled bits, starting from index 0 and extending to index n - 1
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="n">The bit count type representative</param>
         /// <typeparam name="N">The enabled bit count type</typeparam>
         [MethodImpl(Inline)]
-        public static ulong lomask<N>(N n = default)
+        public static ulong lo<N>(N n = default)
             where N : unmanaged, ITypeNat
                 => NatMath.pow2m1<N>();
 
@@ -52,10 +52,10 @@ namespace Z0
         /// <typeparam name="N">The enabled bit count type</typeparam>
         /// <typeparam name="T">The mask type</typeparam>
         [MethodImpl(Inline)]
-        public static T lomask<N,T>(N n = default, T t = default)
+        public static T lo<N,T>(N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => convert<ulong,T>(lomask(n));
+                => convert<ulong,T>(lo(n));
 
         /// <summary>
         /// Logically equivalent to the composite operation (src-1) ^ src that enables the 

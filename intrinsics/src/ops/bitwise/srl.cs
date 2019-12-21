@@ -28,7 +28,7 @@ namespace Z0
         public static Vector128<byte> vsrl(Vector128<byte> src, byte shift)
         {
             var y = v8u(dinx.vsrl(v64u(src), shift));
-            var m = VMask.lsb<byte>(n128, n8, (byte)(8 - shift));
+            var m = CpuVector.lsbmask(n128, n8, (byte)(8 - shift),z8);
             return dinx.vand(y,m);
         }
 
@@ -71,7 +71,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<int> vsrl(Vector128<int> src, byte shift)
             => ShiftRightLogical(src, shift);
-
 
         /// <summary>
         /// __m128i _mm_srli_epi32 (__m128i a, int immediate) PSRLD xmm, imm8
@@ -122,7 +121,7 @@ namespace Z0
         public static Vector256<byte> vsrl(Vector256<byte> src, byte shift)
         {
             var y = v8u(dinx.vsrl(v64u(src), shift));
-            var m = VMask.lsb<byte>(n256, n8, (byte)(8 - shift));
+            var m = CpuVector.lsbmask(n256, n8, (byte)(8 - shift),z8);
             return dinx.vand(y,m);
         } 
 

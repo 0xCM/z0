@@ -465,7 +465,7 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)
             {
                 var count = Random.Single(mincount,maxcount);
-                var mask = BitMask.himask(count,t);                
+                var mask = BitMask.hi(count,t);                
                 var pop = gbits.pop(mask);
                 if(pop != count)
                 {

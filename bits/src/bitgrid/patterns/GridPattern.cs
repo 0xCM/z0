@@ -61,7 +61,7 @@ namespace Z0
         public static BitGrid256<N16,N16,T> identity<T>(N256 w, N16 m, N16 n, T t = default)
             where T : unmanaged
         {
-            var x = vmakemask<T>(BitMask.lsb<uint>(n2),0);
+            var x = vmakemask<T>(BitMask.lsb(n2,n1,z32),0);
             var offsets = CpuVector.increments<T>(w);
             var pattern = vsllv(x,offsets);
             return pattern;
@@ -100,7 +100,7 @@ namespace Z0
             where T : unmanaged
         {
             var sep = natval(n);
-            var pattern = BitMask.lomask(sep, z64) << sep;                        
+            var pattern = BitMask.lo(sep, z64) << sep;                        
             return vgeneric<T>(CpuVector.broadcast(w,gbits.replicate(pattern)));
         }
 
