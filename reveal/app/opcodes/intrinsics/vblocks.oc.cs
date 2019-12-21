@@ -15,6 +15,10 @@ namespace Z0.OpCodes
     [OpCodeProvider]
     public static class vblocks
     {
+     
+        public static ReadOnlySpan<short> spanconvert(Span<short> src)
+            => src;
+
         public static void vblock_xor_128x8u_blocks(ConstBlock128<byte> xb, ConstBlock128<byte> yb, in Block128<byte> zb)
             => ginx.vxor(xb,yb,zb);
 

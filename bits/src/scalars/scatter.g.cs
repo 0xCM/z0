@@ -6,15 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    
+    using System.Runtime.Intrinsics.X86;
+ 
     using static zfunc;
-    
     using static As;
     using static AsIn;
+    
+    partial class gbits
+    {                       
 
-    partial class ginx
-    {
         /// <summary>
         /// Scatters contiguous low bits from the source across a target according to a mask
         /// </summary>
@@ -26,16 +26,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.scatter(uint8(src), uint8(mask)));
+                return generic<T>(Bits.scatter(uint8(src), uint8(mask)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.scatter(uint16(src), uint16(mask)));
+                return generic<T>(Bits.scatter(uint16(src), uint16(mask)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.scatter(uint32(src), uint32(mask)));
+                return generic<T>(Bits.scatter(uint32(src), uint32(mask)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.scatter(uint64(src), uint64(mask)));
+                return generic<T>(Bits.scatter(uint64(src), uint64(mask)));
             else            
                 throw unsupported<T>();
         }           
-
     }
 }

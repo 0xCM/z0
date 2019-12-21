@@ -9,10 +9,10 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     using static System.Runtime.Intrinsics.X86.Bmi2;
     using static System.Runtime.Intrinsics.X86.Bmi2.X64;
- 
+
     using static zfunc;
-    
-    partial class dinx
+
+    partial class Bits
     {                
         /// <summary>
         /// Deposits contiguous low bits from the source across a target according to a mask
@@ -51,5 +51,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong scatter(ulong src, ulong mask)        
             => X64.ParallelBitDeposit(src,mask);
+
     }
+
 }

@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="dst">The target</param>
         [MethodImpl(Inline)]
         public static byte pack8x1(in ConstBlock32<byte> src)
-            => (byte) dinx.gather(uint32(in src.Head), BitMasks.Lsb32x8);
+            => (byte) Bits.gather(uint32(in src.Head), BitMasks.Lsb32x8);
 
         /// <summary>
         /// Consecutively packs the first bit of each source byte into an 8-bit target
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="dst">The target</param>
         [MethodImpl(Inline)]
         public static byte pack8x1(in ConstBlock64<byte> src)
-            => (byte) dinx.gather(uint64(in src.Head), BitMasks.Lsb64x8);
+            => (byte) Bits.gather(uint64(in src.Head), BitMasks.Lsb64x8);
 
         /// <summary>
         /// Consecutively packs the first bit of each source byte into a 16-bit target

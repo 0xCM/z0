@@ -227,10 +227,10 @@ namespace Z0
                 var p = pSrc.First();
                 
                 // Disassemble the spec
-                var p0 = dinx.gather((byte)p, (byte)0b11);                
-                var p1 = dinx.gather((byte)p, (byte)0b1100);
-                var p2 = dinx.gather((byte)p, (byte)0b110000);
-                var p3 = dinx.gather((byte)p, (byte)0b11000000);
+                var p0 = Bits.gather((byte)p, (byte)0b11);                
+                var p1 = Bits.gather((byte)p, (byte)0b1100);
+                var p2 = Bits.gather((byte)p, (byte)0b110000);
+                var p3 = Bits.gather((byte)p, (byte)0b11000000);
                 
                 // Reassemble the spec
                 Perm4L q = (Perm4L)(p0 | p1 << 2 | p2 << 4 | p3 << 6);

@@ -46,8 +46,6 @@ namespace Z0.OpCodes
             => dinx.vcompact2(x,y);
 
 
-        public static Vector256<ulong> vconvert_xspan32u_v256x64u(Block128<uint> src, out Vector256<ulong> dst)        
-            => dinx.vloadblock(src, out dst);
 
         public static Vector128<byte> packus(Vector128<ushort> x,Vector128<ushort> y)
             => dinx.vpackus(x,y);

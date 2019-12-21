@@ -111,6 +111,7 @@ namespace Z0
             Disassemble(typeof(OC.logixmat));
             Disassemble(typeof(OC.rowbits));
             Disassemble(typeof(OC.bitconvert));    
+            Disassemble(typeof(OC.bitpack));    
 
             Disassemble(typeof(OC.vblend));
             Disassemble(typeof(OC.vblocks));    

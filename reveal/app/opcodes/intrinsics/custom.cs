@@ -13,7 +13,7 @@ namespace Z0
     partial class inxoc
     {                
         public static Vector128<byte> msb_mask_v128()
-            => vmask.msb<byte>(n128,n8, 4);
+            => VMask.msb<byte>(n128,n8, 4);
             
         public static ulong sum_256x64u(Vector256<ulong> src)
             => dinx.vsum(src);

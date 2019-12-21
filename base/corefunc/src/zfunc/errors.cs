@@ -53,6 +53,7 @@ partial class zfunc
     public static bool require(bool value, string info = null, [Caller] string caller = null, [File] string file = null,  [Line] int? line = null)
             =>  value ? true : throw new AppException(AppMsg.Define($"Invariant failure: {info}", SeverityLevel.Error, caller, file, line));    
     
-    public static bool demand(bool value, string reason = null)
-        => value ? true : Errors.ThrowInvariantFailure(reason ?? string.Empty);
+    [MethodImpl(Inline)]
+    public static bool demand(bool value, ReadOnlySpan<char> reason = default)
+        => value ? true : Errors.ThrowInvariantFailure(reason.IsEmpty ? string.Empty : reason.ToString());
 }

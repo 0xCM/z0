@@ -9,10 +9,10 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     using static System.Runtime.Intrinsics.X86.Bmi2;
     using static System.Runtime.Intrinsics.X86.Bmi2.X64;
- 
+
     using static zfunc;
-    
-    partial class dinx
+        
+    partial class Bits
     {                
         /// <summary>
         /// unsigned int _pext_u32 (unsigned int a, unsigned int mask) PEXT r32a, r32b, reg/m32
@@ -53,8 +53,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong gather(ulong src, ulong mask)        
             => ParallelBitExtract(src,mask);
-
-
     }
-
 }

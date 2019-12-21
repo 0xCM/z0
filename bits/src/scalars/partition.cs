@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static T lsb8x1<T>(T src)
             where T : unmanaged
-                => convert<ulong,T>(dinx.scatter(convert<T,ulong>(src), BitMasks.Lsb64x8));
+                => convert<ulong,T>(Bits.scatter(convert<T,ulong>(src), BitMasks.Lsb64x8));
 
         /// <summary>
         /// [00000000 00000000 00000000 0000001 00000000 00000000 00000000 0000001]
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static T lsb32x1<T>(T src)
             where T : unmanaged
-                => convert<ulong,T>(dinx.scatter(convert<T,ulong>(src), BitMasks.Lsb64x32));
+                => convert<ulong,T>(Bits.scatter(convert<T,ulong>(src), BitMasks.Lsb64x32));
 
         // ~ Nx1
         // ~ ------------------------------------------------------------------
@@ -388,7 +388,7 @@ namespace Z0
         public static void part24x3(uint src, ref byte dst)
         {
             const ulong M = BitMasks.Lsb64x8x3;
-            seek64(ref dst, 0) = dinx.scatter((ulong)src, M);        
+            seek64(ref dst, 0) = Bits.scatter((ulong)src, M);        
         }
 
         /// <summary>
@@ -409,8 +409,8 @@ namespace Z0
         public static void part27x3(uint src, ref byte dst)
         {
             const ulong M = BitMasks.Lsb64x8x3;
-            seek64(ref dst, 0) = dinx.scatter((ulong)src, M);
-            seek16(ref dst, 4) = (byte)dinx.scatter((ulong)(src >> 24), M);
+            seek64(ref dst, 0) = Bits.scatter((ulong)src, M);
+            seek16(ref dst, 4) = (byte)Bits.scatter((ulong)(src >> 24), M);
         }
 
         /// <summary>
@@ -431,8 +431,8 @@ namespace Z0
         public static void part30x3(uint src, ref byte dst)
         {
             const ulong M = BitMasks.Lsb64x8x3;
-            seek64(ref dst, 0) = dinx.scatter((ulong)src, M);
-            seek16(ref dst, 4) = (ushort)dinx.scatter((ulong)(src >> 24), M);
+            seek64(ref dst, 0) = Bits.scatter((ulong)src, M);
+            seek16(ref dst, 4) = (ushort)Bits.scatter((ulong)(src >> 24), M);
         }
 
         /// <summary>
@@ -539,21 +539,21 @@ namespace Z0
         public static void Part15x5(ushort src, Block32<byte> dst)
         {
             const ushort M = BitMasks.Lsb16x8x5;
-            ref32(ref dst.Head) = dinx.scatter(src, M);            
+            ref32(ref dst.Head) = Bits.scatter(src, M);            
         }
 
         [MethodImpl(Inline)]
         public static void Part30x5(uint src, Block32<byte> dst)
         {
             const uint M = BitMasks.Lsb32x8x5;
-            ref32(ref dst.Head) = dinx.scatter(src, M);            
+            ref32(ref dst.Head) = Bits.scatter(src, M);            
         }
 
         [MethodImpl(Inline)]
         public static void Part60x5(ulong src, Block64<byte> dst)
         {
             const ulong M = BitMasks.Lsb64x8x5;
-            ref64(ref dst.Head) = dinx.scatter(src, M);            
+            ref64(ref dst.Head) = Bits.scatter(src, M);            
         }
 
         // ~ Nx8

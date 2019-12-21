@@ -13,7 +13,7 @@ namespace Z0
     using static AsIn;
     
     partial class gbits
-    {                        
+    {                       
 
         [MethodImpl(Inline)]
         public static T replicate<T>(T src, int? from = null, int? to = null, int? reps = null)

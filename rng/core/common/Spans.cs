@@ -56,6 +56,18 @@ namespace Z0
                 => random.Span<T>(length,(min,max),filter);
 
         /// <summary>
+        /// Produces a span of random values
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="length">The span length</param>
+        /// <param name="t">A cell type representative</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<T> Span<T>(this IPolyrand random, int length, T t)
+            where T : unmanaged
+                => random.Span<T>(length);
+                
+        /// <summary>
         /// Allocates and produces a readonly span populated with random values
         /// </summary>
         /// <param name="random">The random source</param>
@@ -81,5 +93,4 @@ namespace Z0
             where T : unmanaged
                 => random.Span<T>(samples, domain, x => gmath.nonzero(x));
     }
-
 }

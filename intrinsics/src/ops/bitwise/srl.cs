@@ -28,7 +28,7 @@ namespace Z0
         public static Vector128<byte> vsrl(Vector128<byte> src, byte shift)
         {
             var y = v8u(dinx.vsrl(v64u(src), shift));
-            var m = vmask.lsb<byte>(n128, n8, (byte)(8 - shift));
+            var m = VMask.lsb<byte>(n128, n8, (byte)(8 - shift));
             return dinx.vand(y,m);
         }
 
@@ -122,7 +122,7 @@ namespace Z0
         public static Vector256<byte> vsrl(Vector256<byte> src, byte shift)
         {
             var y = v8u(dinx.vsrl(v64u(src), shift));
-            var m = vmask.lsb<byte>(n256, n8, (byte)(8 - shift));
+            var m = VMask.lsb<byte>(n256, n8, (byte)(8 - shift));
             return dinx.vand(y,m);
         } 
 

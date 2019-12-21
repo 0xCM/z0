@@ -13,7 +13,7 @@ namespace Z0
     using static CpuVector;
     using static As;
 
-    public static class vmask
+    public static class VMask
     {
         /// <summary>
         /// [000...001]    

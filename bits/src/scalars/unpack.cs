@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="dst">The bit target</param>
         [MethodImpl(Inline)]
         public static void unpack8x1(byte src, ref ulong dst)
-            => dst = dinx.scatter(src, (ulong)BitMasks.Lsb64x8);
+            => dst = Bits.scatter(src, (ulong)BitMasks.Lsb64x8);
 
         /// <summary>
         /// Sends each source bit to a corresponding target cell
@@ -79,8 +79,8 @@ namespace Z0
         {
             const ulong M = (ulong)BitMasks.Lsb64x8;
 
-            seek(ref dst, 0) = dinx.scatter(src, M);
-            seek(ref dst, 1) = dinx.scatter(uint16(src >> 8), M);
+            seek(ref dst, 0) = Bits.scatter(src, M);
+            seek(ref dst, 1) = Bits.scatter(uint16(src >> 8), M);
         }
 
         [MethodImpl(Inline)]

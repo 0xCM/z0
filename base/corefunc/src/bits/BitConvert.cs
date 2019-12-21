@@ -127,7 +127,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static uint ToUInt32(float src)
-            => (uint) BitConverter.SingleToInt32Bits(src);
+            => (uint)BitConverter.SingleToInt32Bits(src);
 
         [MethodImpl(Inline)]
         public static long ToInt64(double src)

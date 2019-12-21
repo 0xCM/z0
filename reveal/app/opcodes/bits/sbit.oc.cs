@@ -79,12 +79,7 @@ namespace Z0.OpCodes
 
         public static ulong pow2m1_8() => NatMath.pow2m1(n8);
 
-        public static ulong gather_d64u(ulong src, ulong mask)
-            => dinx.gather(src,mask);
 
-        public static ulong gather_g64u(ulong src, ulong mask)
-            => ginx.gather(src,mask);
-            
         public static uint set_bit(uint src, byte pos, bit state)
             => gbits.set(src, pos, state);
 

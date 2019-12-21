@@ -45,15 +45,15 @@ namespace Z0
             var c = A.ColCount;
             var R = math.pow2m1(r);
                     
-            var c0 = dinx.gather(A.Data, C << 0);
-            var c1 = dinx.gather(A.Data, C << 1);
-            var c2 = dinx.gather(A.Data, C << 2);
-            var c3 = dinx.gather(A.Data, C << 3);
+            var c0 = Bits.gather(A.Data, C << 0);
+            var c1 = Bits.gather(A.Data, C << 1);
+            var c2 = Bits.gather(A.Data, C << 2);
+            var c3 = Bits.gather(A.Data, C << 3);
             
-            var r0 = dinx.scatter(c0, R << 0*r);
-            var r1 = dinx.scatter(c1, R << 1*r);
-            var r2 = dinx.scatter(c2, R << 2*r);
-            var r3 = dinx.scatter(c3, R << 3*r);
+            var r0 = Bits.scatter(c0, R << 0*r);
+            var r1 = Bits.scatter(c1, R << 1*r);
+            var r2 = Bits.scatter(c2, R << 2*r);
+            var r3 = Bits.scatter(c3, R << 3*r);
             return r0 | r1 | r2 | r3;
             
         }

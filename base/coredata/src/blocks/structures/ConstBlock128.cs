@@ -29,7 +29,7 @@ namespace Z0
             => src.data;
 
         [MethodImpl(Inline)]
-        internal ConstBlock128(ReadOnlySpan<T> src)
+        internal ConstBlock128(in ReadOnlySpan<T> src)
             => this.data = src;
         
         /// <summary>

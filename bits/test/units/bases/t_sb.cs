@@ -27,7 +27,7 @@ namespace Z0
                 var src = Random.Next<T>();
                 var mask = Random.Next<T>();
                 var s1 = BitRef.scatter(src,mask);
-                var s2 = ginx.scatter(src,mask);
+                var s2 = gbits.scatter(src,mask);
                 Claim.eq(s1,s2);
             }
         }
@@ -40,7 +40,7 @@ namespace Z0
                 var src = Random.Next<T>();
                 var mask = Random.Next<T>();
                 var s1 = BitRef.gather(src,mask);
-                var s2 = ginx.gather(src,mask);
+                var s2 = gbits.gather(src,mask);
                 Claim.eq(s1,s2);
             }
         }
