@@ -10,7 +10,8 @@
     <ProjectReference Include="$(TopDir)base/nats/src/z0.nats.csproj" />
     <ProjectReference Include="$(TopDir)base/coredata/src/z0.coredata.csproj" />    
     <ProjectReference Include="$(TopDir)base/corefunc/src/z0.corefunc.csproj" />
-        <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
+    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
+    <ProjectReference Include="$(TopDir)bitcore/src/z0.bitcore.csproj" />
 
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
     <ProjectReference Include="$(TopDir)bits/src/z0.bits.csproj" />

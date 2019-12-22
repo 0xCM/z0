@@ -8,7 +8,7 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class BitTest : AssemblyDesignator<BitTest>
+    public sealed class BitCoreTest : AssemblyDesignator<BitCoreTest>
     {
 
     }
