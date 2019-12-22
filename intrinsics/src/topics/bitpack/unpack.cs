@@ -143,7 +143,7 @@ namespace Z0
         static void unpack(byte src, in Block64<byte> buffer, Span<uint> target)
         {
             unpack(src, buffer);             
-            CpuVector.loadblock(buffer,n256).StoreTo(ref head(target));
+            dinx.vconvert(buffer,n256).StoreTo(ref head(target));
         }
 
         [MethodImpl(Inline)]
@@ -160,7 +160,7 @@ namespace Z0
         static void unpackblock(int block, in byte src, in Block64<byte> buffer, in Block256<uint> target)
         {
             unpack(skip(in src, block), buffer); 
-            CpuVector.loadblock(buffer,n256).StoreTo(ref target.BlockRef(block));
+            dinx.vconvert(buffer,n256).StoreTo(ref target.BlockRef(block));
         }
 
         [MethodImpl(Inline)]
@@ -169,7 +169,7 @@ namespace Z0
             for(var block=0; block < count; block++)
             {
                 unpack(skip(in src, block), buffer); 
-                CpuVector.loadblock(buffer,n256).StoreTo(ref target.BlockRef(block));
+                dinx.vconvert(buffer,n256).StoreTo(ref target.BlockRef(block));
             }
         }
     }

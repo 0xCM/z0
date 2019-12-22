@@ -26,12 +26,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<sbyte> vhadd(Vector128<sbyte> x, Vector128<sbyte> y)
         {
-            var a = vinflate(x, n128, z16i);
-            var b = vinflate(y, n128, z16i);
-            return vcompact(vhadd(a,b), out Vector128<sbyte> _);
-            // (var x0, var x1) = vinflate(x, n128, z16i);
-            // (var y0, var y1) = vinflate(y, n128, z16i);
-            //return vcompact(vhadd(x0,y0),vhadd(x1,y1));
+            var a = vinflate(x, n256, z16i);
+            var b = vinflate(y, n256, z16i);            
+            return vcompact(vhadd(a,b), n128, z8i);
         }
 
         /// <summary>
@@ -42,10 +39,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<byte> vhadd(Vector128<byte> x, Vector128<byte> y)
         {
-
-            vinflate(x, out Vector128<short>  x0, out Vector128<short> x1);
-            vinflate(x, out Vector128<short>  y0, out Vector128<short> y1);
-            return vcompact(vhadd(x0,y0),vhadd(x1,y1), out Vector128<byte> _);
+            var z0 = vinflate(x, n256, z16i);
+            var z1 = vinflate(y, n256, z16i);
+            return vcompact(vhadd(z0,z1), n128, z8);
         }
 
         /// <summary>
@@ -74,11 +70,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<sbyte> vhadd(Vector256<sbyte> x, Vector256<sbyte> y)
         {
-            vinflate(x, out var x0, out var x1);
-            vinflate(x, out var y0, out var y1);
-            return vcompact(vhadd(x0,y0),vhadd(x1,y1));
+            (var x0, var x1) = vinflate(x,n512, z16i);
+            (var y0, var y1) = vinflate(x,n512, z16i);
+            return vcompact(vhadd(x0,y0),vhadd(x1,y1),n256,z8i);
         }
-
 
         /// <summary>
         /// __m256i _mm256_hadd_epi16 (__m256i a, __m256i b) VPHADDW ymm, ymm, ymm/m256
@@ -88,6 +83,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<short> vhadd(Vector256<short> x, Vector256<short> y)
             => HorizontalAdd(x, y);
+
 
         /// <summary>
         /// m256i _mm256_hadd_epi32 (__m256i a, __m256i b) VPHADDD ymm, ymm, ymm/m256

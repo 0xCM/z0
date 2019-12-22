@@ -17,7 +17,7 @@ namespace Z0
             var blockA = DataBlocks.parts<byte>(n32,1,2,3,4);
             var x = CpuVector.parts(n128,1,2,3,4);
             var blockB = x.ToBlock();            
-            var y = CpuVector.loadblock(blockA, n128, z32);
+            var y = dinx.vconvert(blockA, n128, z32);
             var blockC = y.ToBlock();            
             Claim.eq(x,y);
             Claim.eq(blockB,blockC);            
@@ -29,7 +29,7 @@ namespace Z0
             var block = DataBlocks.parts<byte>(n64,1,2,3,4,5,6,7,8);
             var xE = CpuVector.parts(n128,1,2,3,4);
             var yE = CpuVector.parts(n128,5,6,7,8);
-            var z = CpuVector.loadblock(block, n256,z32);
+            var z = dinx.vconvert(block, n256,z32);
             Claim.eq(xE, dinx.vlo(z));
             Claim.eq(yE, dinx.vhi(z));
         }
@@ -40,7 +40,7 @@ namespace Z0
             var xE = CpuVector.parts(n128,1,2);
             var yE = CpuVector.parts(n128,3,4);
 
-            var z = CpuVector.loadblock(block,n256,z64);
+            var z = dinx.vconvert(block,n256,z64);
             Claim.eq(xE, dinx.vlo(z));
             Claim.eq(yE, dinx.vhi(z));
         }
@@ -50,7 +50,7 @@ namespace Z0
             var block = DataBlocks.parts<byte>(n128,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
             var xE = CpuVector.parts(n128,1,2,3,4,5,6,7,8);
             var yE = CpuVector.parts(n128,9,10,11,12,13,14,15,16);
-            var z = CpuVector.loadblock(block,n256,z16);
+            var z = dinx.vconvert(block,n256,z16);
             
             Claim.eq(xE, dinx.vlo(z));
             Claim.eq(yE, dinx.vhi(z));
@@ -67,7 +67,7 @@ namespace Z0
         public void m64x8u_v128x16u()
         {
             var x = DataBlocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
-            var y = CpuVector.loadblock(x, n128, z16);
+            var y = dinx.vconvert(x, n128, z16);
             var z = CpuVector.parts(n128,0,1,2,3,4,5,6,7);            
 
             Claim.eq(y,z);            
@@ -76,7 +76,7 @@ namespace Z0
         public void blockspan_128x8u_v128x16u()
         {
             var x = DataBlocks.parts<byte>(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
-            var q = CpuVector.loadblock(x, n256, z16);
+            var q = dinx.vconvert(x, n256, z16);
             var z0 = x.LoBlock(0);
             var z1 = x.HiBlock(0);
             var y0s = dinx.vlo(q).ToSpan();
@@ -92,7 +92,7 @@ namespace Z0
         public void blockspan_64x8u_v2x128x32u()
         {
             var x = DataBlocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
-            var y = CpuVector.loadblock(x,n256,z32);
+            var y = dinx.vconvert(x,n256,z32);
             var z0 = x.Slice(0,4);
             var z1 = x.Slice(4,4);
             var y0s = dinx.vlo(y).ToSpan();
@@ -150,11 +150,13 @@ namespace Z0
             for(var sample = 0; sample < SampleSize; sample++)
             {
                 var sv = Random.CpuVector(sw,st);
-                var tv = dinx.vconvert(sv,tw,tt);
+                var tv = dinx.vconvert(sv,n256,tt);
+                var tvLo = dinx.vlo(tv);
+                var tvHi = dinx.vhi(tv);
                 
                 sv.StoreTo(sb);
-                tv.A.StoreTo(tb,0);
-                tv.B.StoreTo(tb,1);
+                tvLo.StoreTo(tb,0);
+                tvHi.StoreTo(tb,1);
                 
                 var i = 0;
                 for(var block = 0; block < tbc; block++)

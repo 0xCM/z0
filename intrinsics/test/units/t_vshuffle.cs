@@ -106,7 +106,7 @@ namespace Z0
                 );
 
         static Vector256<byte> ToShuffleSpec2(Vector256<ushort> src)
-            => dinx.vcompact2(src,CpuVector.increments(n256, uint16(16)));
+            => dinx.vcompact(src,CpuVector.increments(n256, uint16(16)),n256,z8);
 
         public static Vector256<ushort> vshuf16x16(Vector256<ushort> a, Vector256<ushort> spec)
             => v16u(dinx.vshuf32x8(v8u(a), ToShuffleSpec(spec)));

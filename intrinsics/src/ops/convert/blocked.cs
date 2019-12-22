@@ -9,17 +9,15 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
-    using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;    
     using static System.Runtime.Intrinsics.X86.Avx2;    
      
-    using static As;
     using static zfunc;   
-    using static ginx;
 
-    partial class CpuVector
-    {
+    partial class dinx
+    {                
+
         // ~ 8i -> X
         // ~ ------------------------------------------------------------------
 
@@ -30,7 +28,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> loadblock(in ConstBlock16<sbyte> src, N128 w, long t = default)
+        public static unsafe Vector128<long> vconvert(in ConstBlock16<sbyte> src, N128 w, long t = default)
             => ConvertToVector128Int64(constptr(in src.Head));
 
         /// <summary>
@@ -40,7 +38,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<int> loadblock(in ConstBlock32<sbyte> src, N128 w, int t  = default)
+        public static unsafe Vector128<int> vconvert(in ConstBlock32<sbyte> src, N128 w, int t  = default)
             => ConvertToVector128Int32(constptr(in src.Head));
 
         /// <summary>
@@ -50,7 +48,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> loadblock(in ConstBlock32<sbyte> src, N256 w, long t = default)
+        public static unsafe Vector256<long> vconvert(in ConstBlock32<sbyte> src, N256 w, long t = default)
             => ConvertToVector256Int64(constptr(in src.Head));
 
         /// <summary>
@@ -60,7 +58,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<short> loadblock(in ConstBlock64<sbyte> src, N128 w, short t = default)
+        public static unsafe Vector128<short> vconvert(in ConstBlock64<sbyte> src, N128 w, short t = default)
             => ConvertToVector128Int16(constptr(in src.Head));
 
         /// <summary>
@@ -70,7 +68,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<int> loadblock(in ConstBlock64<sbyte> src, N256 w, int t = default)
+        public static unsafe Vector256<int> vconvert(in ConstBlock64<sbyte> src, N256 w, int t = default)
             => ConvertToVector256Int32(constptr(in src.Head));
 
         /// <summary>
@@ -80,7 +78,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<short> loadblock(in ConstBlock128<sbyte> src, N256 w, short t = default)
+        public static unsafe Vector256<short> vconvert(in ConstBlock128<sbyte> src, N256 w, short t = default)
             => ConvertToVector256Int16(constptr(in src.Head));
 
         // ~ 8u -> X
@@ -93,7 +91,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> loadblock(in ConstBlock16<byte> src, N128 w, long t = default)
+        public static unsafe Vector128<long> vconvert(in ConstBlock16<byte> src, N128 w, long t = default)
             => ConvertToVector128Int64(constptr(in src.Head));
 
         /// <summary>
@@ -103,7 +101,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> loadblock(in Block16<byte> src, N128 w, long t = default)
+        public static unsafe Vector128<long> vconvert(in Block16<byte> src, N128 w, long t = default)
             => ConvertToVector128Int64(constptr(in src.Head));
 
         /// <summary>
@@ -114,7 +112,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> loadblock(in ConstBlock16<byte> src, int block, N128 w, long t = default)
+        public static unsafe Vector128<long> vconvert(in ConstBlock16<byte> src, int block, N128 w, long t = default)
             => ConvertToVector128Int64(constptr(in src.BlockRef(block)));
 
         /// <summary>
@@ -125,7 +123,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> loadblock(in Block16<byte> src, int block, N128 w, long t = default)
+        public static unsafe Vector128<long> vconvert(in Block16<byte> src, int block, N128 w, long t = default)
             => ConvertToVector128Int64(constptr(in src.BlockRef(block)));
 
         /// <summary>
@@ -135,7 +133,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<ulong> loadblock(in ConstBlock16<byte> src, N128 w, ulong t = default)
+        public static unsafe Vector128<ulong> vconvert(in ConstBlock16<byte> src, N128 w, ulong t = default)
             => v64u(ConvertToVector128Int64(constptr(in src.Head)));
 
         /// <summary>
@@ -145,7 +143,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<ulong> loadblock(in Block16<byte> src, N128 w, ulong t = default)
+        public static unsafe Vector128<ulong> vconvert(in Block16<byte> src, N128 w, ulong t = default)
             => v64u(ConvertToVector128Int64(constptr(in src.Head)));
 
         /// <summary>
@@ -155,7 +153,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<int> loadblock(in ConstBlock32<byte> src, N128 w, int t = default)
+        public static unsafe Vector128<int> vconvert(in ConstBlock32<byte> src, N128 w, int t = default)
             => ConvertToVector128Int32(constptr(in src.Head));
 
         /// <summary>
@@ -165,7 +163,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<int> loadblock(in Block32<byte> src, N128 w, int t = default)
+        public static unsafe Vector128<int> vconvert(in Block32<byte> src, N128 w, int t = default)
             => ConvertToVector128Int32(constptr(in src.Head));
 
         /// <summary>
@@ -175,7 +173,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<uint> loadblock(in ConstBlock32<byte> src, N128 w, uint t = default)
+        public static unsafe Vector128<uint> vconvert(in ConstBlock32<byte> src, N128 w, uint t = default)
             => v32u(ConvertToVector128Int32(constptr(in src.Head)));
 
         /// <summary>
@@ -185,7 +183,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<uint> loadblock(in Block32<byte> src, N128 w, uint t = default)
+        public static unsafe Vector128<uint> vconvert(in Block32<byte> src, N128 w, uint t = default)
             => v32u(ConvertToVector128Int32(constptr(in src.Head)));
 
         /// <summary>
@@ -195,7 +193,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> loadblock(in ConstBlock32<byte> src, N256 w, ulong t = default)
+        public static unsafe Vector256<ulong> vconvert(in ConstBlock32<byte> src, N256 w, ulong t = default)
             => v64u(ConvertToVector256Int64(constptr(in src.Head)));
 
         /// <summary>
@@ -205,7 +203,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> loadblock(in Block32<byte> src, N256 w, ulong t = default)
+        public static unsafe Vector256<ulong> vconvert(in Block32<byte> src, N256 w, ulong t = default)
             => v64u(ConvertToVector256Int64(constptr(in src.Head)));
 
         /// <summary>
@@ -215,7 +213,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> loadblock(in ConstBlock32<byte> src, N256 w, long t = default)
+        public static unsafe Vector256<long> vconvert(in ConstBlock32<byte> src, N256 w, long t = default)
             => ConvertToVector256Int64(constptr(in src.Head));
 
         /// <summary>
@@ -225,7 +223,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> loadblock(in Block32<byte> src, N256 w, long t = default)
+        public static unsafe Vector256<long> vconvert(in Block32<byte> src, N256 w, long t = default)
             => ConvertToVector256Int64(constptr(in src.Head));
 
         /// <summary>
@@ -235,7 +233,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<short> loadblock(in ConstBlock64<byte> src, N128 w, short t = default)
+        public static unsafe Vector128<short> vconvert(in ConstBlock64<byte> src, N128 w, short t = default)
             => ConvertToVector128Int16(constptr(in src.Head));
 
         /// <summary>
@@ -245,7 +243,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<short> loadblock(in Block64<byte> src, N128 w, short t = default)
+        public static unsafe Vector128<short> vconvert(in Block64<byte> src, N128 w, short t = default)
             => ConvertToVector128Int16(constptr(in src.Head));
 
         /// <summary>
@@ -255,7 +253,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<ushort> loadblock(in ConstBlock64<byte> src, N128 w, ushort t = default)
+        public static unsafe Vector128<ushort> vconvert(in ConstBlock64<byte> src, N128 w, ushort t = default)
             => v16u(ConvertToVector128Int16(constptr(in src.Head)));
 
         /// <summary>
@@ -265,7 +263,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<ushort> loadblock(in Block64<byte> src, N128 w, ushort t = default)
+        public static unsafe Vector128<ushort> vconvert(in Block64<byte> src, N128 w, ushort t = default)
             => v16u(ConvertToVector128Int16(constptr(in src.Head)));
 
         /// <summary>
@@ -275,7 +273,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<uint> loadblock(in ConstBlock64<byte> src, N256 w, uint t = default)
+        public static unsafe Vector256<uint> vconvert(in ConstBlock64<byte> src, N256 w, uint t = default)
             => v32u(ConvertToVector256Int32(constptr(in src.Head)));
 
         /// <summary>
@@ -285,7 +283,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<uint> loadblock(in Block64<byte> src, N256 w, uint t = default)
+        public static unsafe Vector256<uint> vconvert(in Block64<byte> src, N256 w, uint t = default)
             => v32u(ConvertToVector256Int32(constptr(in src.Head)));
 
         /// <summary>
@@ -295,7 +293,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]        
-        public static unsafe Vector256<short> loadblock(in ConstBlock128<byte> src, N256 w, short t = default)
+        public static unsafe Vector256<short> vconvert(in ConstBlock128<byte> src, N256 w, short t = default)
             => ConvertToVector256Int16(constptr(in src.Head));
 
         /// <summary>
@@ -305,7 +303,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]        
-        public static unsafe Vector256<short> loadblock(in Block128<byte> src, N256 w, short t = default)
+        public static unsafe Vector256<short> vconvert(in Block128<byte> src, N256 w, short t = default)
             => ConvertToVector256Int16(constptr(in src.Head));
 
         /// <summary>
@@ -315,7 +313,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="w">The target width</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<ushort> loadblock(in ConstBlock128<byte> src, N256 w, ushort t = default)
+        public static unsafe Vector256<ushort> vconvert(in ConstBlock128<byte> src, N256 w, ushort t = default)
             => v16u(ConvertToVector256Int16(constptr(in src.Head)));
 
         /// <summary>
@@ -325,7 +323,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="w">The target width</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<ushort> loadblock(in Block128<byte> src, N256 w, ushort t = default)
+        public static unsafe Vector256<ushort> vconvert(in Block128<byte> src, N256 w, ushort t = default)
             => v16u(ConvertToVector256Int16(constptr(in src.Head)));
 
         // ~ 16i -> X
@@ -337,7 +335,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> loadblock(in ConstBlock32<short> src, N128 w, long t = default)
+        public static unsafe Vector128<long> vconvert(in ConstBlock32<short> src, N128 w, long t = default)
             => ConvertToVector128Int64(constptr(in src.Head));
 
         /// <summary>
@@ -346,7 +344,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> loadblock(in Block32<short> src, N128 w, long t = default)
+        public static unsafe Vector128<long> vconvert(in Block32<short> src, N128 w, long t = default)
             => ConvertToVector128Int64(constptr(in src.Head));
 
         /// <summary>
@@ -356,7 +354,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<int> loadblock(in ConstBlock64<short> src, N128 w, int t = default)
+        public static unsafe Vector128<int> vconvert(in ConstBlock64<short> src, N128 w, int t = default)
             => ConvertToVector128Int32(constptr(in src.Head));
 
         /// <summary>
@@ -366,7 +364,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<int> loadblock(in Block64<short> src, N128 w, int t = default)
+        public static unsafe Vector128<int> vconvert(in Block64<short> src, N128 w, int t = default)
             => ConvertToVector128Int32(constptr(in src.Head));
 
         // ~ 16u -> X
@@ -378,7 +376,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> loadblock(in ConstBlock32<ushort> src, N128 w, long t = default)
+        public static unsafe Vector128<long> vconvert(in ConstBlock32<ushort> src, N128 w, long t = default)
             => ConvertToVector128Int64(constptr(in src.Head));
 
         /// <summary>
@@ -387,7 +385,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> loadblock(in Block32<ushort> src, N128 w, long t = default)
+        public static unsafe Vector128<long> vconvert(in Block32<ushort> src, N128 w, long t = default)
             => ConvertToVector128Int64(constptr(in src.Head));
 
         /// <summary>
@@ -397,7 +395,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<ulong> loadblock(in ConstBlock32<ushort> src, N128 w, ulong t = default)
+        public static unsafe Vector128<ulong> vconvert(in ConstBlock32<ushort> src, N128 w, ulong t = default)
             => v64u(ConvertToVector128Int64(constptr(in src.Head)));
 
         /// <summary>
@@ -407,7 +405,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<ulong> loadblock(in Block32<ushort> src, N128 w, ulong t = default)
+        public static unsafe Vector128<ulong> vconvert(in Block32<ushort> src, N128 w, ulong t = default)
             => v64u(ConvertToVector128Int64(constptr(in src.Head)));
 
         /// <summary>
@@ -417,7 +415,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> loadblock(in ConstBlock64<ushort> src, N256 w, ulong t = default)
+        public static unsafe Vector256<ulong> vconvert(in ConstBlock64<ushort> src, N256 w, ulong t = default)
             => v64u(ConvertToVector256Int64(constptr(in src.Head)));
 
         /// <summary>
@@ -427,7 +425,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> loadblock(in Block64<ushort> src, N256 w, ulong t = default)
+        public static unsafe Vector256<ulong> vconvert(in Block64<ushort> src, N256 w, ulong t = default)
             => v64u(ConvertToVector256Int64(constptr(in src.Head)));
 
         /// <summary>
@@ -437,7 +435,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<uint> loadblock(in ConstBlock64<ushort> src, N128 w, uint t = default)
+        public static unsafe Vector128<uint> vconvert(in ConstBlock64<ushort> src, N128 w, uint t = default)
             => v32u(ConvertToVector128Int32(constptr(in src.Head)));
 
         /// <summary>
@@ -447,7 +445,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<uint> loadblock(in Block64<ushort> src, N128 w, uint t = default)
+        public static unsafe Vector128<uint> vconvert(in Block64<ushort> src, N128 w, uint t = default)
             => v32u(ConvertToVector128Int32(constptr(in src.Head)));
 
         /// <summary>
@@ -457,7 +455,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<uint> loadblock(in ConstBlock128<ushort> src, uint t = default)
+        public static unsafe Vector256<uint> vconvert(in ConstBlock128<ushort> src, uint t = default)
             => v32u(ConvertToVector256Int32(constptr(in src.Head)));
 
         /// <summary>
@@ -467,7 +465,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<uint> loadblock(in Block128<ushort> src, uint t = default)
+        public static unsafe Vector256<uint> vconvert(in Block128<ushort> src, uint t = default)
             => v32u(ConvertToVector256Int32(constptr(in src.Head)));
 
         /// <summary>
@@ -476,7 +474,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<int> loadblock(in ConstBlock128<ushort> src, int t = default)
+        public static unsafe Vector256<int> vconvert(in ConstBlock128<ushort> src, int t = default)
             => ConvertToVector256Int32(constptr(in src.Head));
 
         /// <summary>
@@ -486,7 +484,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<int> loadblock(in Block128<ushort> src, int t = default)
+        public static unsafe Vector256<int> vconvert(in Block128<ushort> src, int t = default)
             => ConvertToVector256Int32(constptr(in src.Head));
 
         /// <summary>
@@ -496,7 +494,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> loadblock(in ConstBlock64<ushort> src, N256 w, long t = default)
+        public static unsafe Vector256<long> vconvert(in ConstBlock64<ushort> src, N256 w, long t = default)
             => ConvertToVector256Int64(constptr(in src.Head));
 
         /// <summary>
@@ -506,7 +504,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> loadblock(in Block64<ushort> src, N256 w, long t = default)
+        public static unsafe Vector256<long> vconvert(in Block64<ushort> src, N256 w, long t = default)
             => ConvertToVector256Int64(constptr(in src.Head));
 
         // ~ 32u -> X
@@ -519,7 +517,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> loadblock(in ConstBlock128<uint> src, N256 w, long t = default)
+        public static unsafe Vector256<long> vconvert(in ConstBlock128<uint> src, N256 w, long t = default)
             => ConvertToVector256Int64(constptr(in src.Head));
 
         /// <summary>
@@ -529,7 +527,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> loadblock(in Block128<uint> src, N256 w, long t = default)
+        public static unsafe Vector256<long> vconvert(in Block128<uint> src, N256 w, long t = default)
             => ConvertToVector256Int64(constptr(in src.Head));
 
         /// <summary>
@@ -539,7 +537,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> loadblock(in ConstBlock128<uint> src, ulong t = default)
+        public static unsafe Vector256<ulong> vconvert(in ConstBlock128<uint> src, ulong t = default)
             => v64u(ConvertToVector256Int64(constptr(in src.Head)));
 
         /// <summary>
@@ -549,7 +547,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> loadblock(in Block128<uint> src, ulong t = default)
+        public static unsafe Vector256<ulong> vconvert(in Block128<uint> src, ulong t = default)
             => v64u(ConvertToVector256Int64(constptr(in src.Head)));
 
         /// <summary>
@@ -559,7 +557,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> loadblock(in ConstBlock64<uint> src, N128 w, ulong t = default)
+        public static unsafe Vector128<long> vconvert(in ConstBlock64<uint> src, N128 w, ulong t = default)
             => ConvertToVector128Int64(constptr(in src.Head));
 
         /// <summary>
@@ -569,7 +567,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> loadblock(in Block64<uint> src, N128 w, ulong t = default)
+        public static unsafe Vector128<long> vconvert(in Block64<uint> src, N128 w, ulong t = default)
             => ConvertToVector128Int64(constptr(in src.Head));
 
         // ~ 32i -> X
@@ -582,7 +580,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> loadblock(in ConstBlock64<int> src, N128 w, long t = default)
+        public static unsafe Vector128<long> vconvert(in ConstBlock64<int> src, N128 w, long t = default)
             => ConvertToVector128Int64(constptr(in src.Head));
 
         /// <summary>
@@ -592,7 +590,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> loadblock(in Block64<int> src, N128 w, long t = default)
+        public static unsafe Vector128<long> vconvert(in Block64<int> src, N128 w, long t = default)
             => ConvertToVector128Int64(constptr(in src.Head));
 
         /// <summary>
@@ -602,8 +600,8 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> loadblock(in ConstBlock128<int> src, N256 w, long t = default)
-            =>  ConvertToVector256Int64(constptr(in src.Head));
+        public static unsafe Vector256<long> vconvert(in ConstBlock128<int> src, N256 w, long t = default)
+            => ConvertToVector256Int64(constptr(in src.Head));
 
         /// <summary>
         /// VPMOVSXDQ ymm, m128
@@ -612,8 +610,8 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> loadblock(in Block128<int> src, N256 w, long t = default)
-            =>  ConvertToVector256Int64(constptr(in src.Head));
+        public static unsafe Vector256<long> vconvert(in Block128<int> src, N256 w, long t = default)
+            => ConvertToVector256Int64(constptr(in src.Head));
 
         // ~ X -> 512
         // ~ ------------------------------------------------------------------
@@ -624,7 +622,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector512<uint> loadblock(in ConstBlock256<ushort> src, N512 w, uint t = default)
+        public static unsafe Vector512<uint> vconvert(in ConstBlock256<ushort> src, N512 w, uint t = default)
             => (v32u(ConvertToVector256Int32(constptr(in src.Head))),
                 v32u(ConvertToVector256Int32(constptr(in src.Head, 8))));
 
@@ -635,7 +633,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector512<int> loadblock(in ConstBlock128<short> src, N512 w, int t = default)
+        public static unsafe Vector512<int> vconvert(in ConstBlock128<short> src, N512 w, int t = default)
             => (ConvertToVector256Int32(constptr(in src.Head)),
                 ConvertToVector256Int32(constptr(in src.Head, 8)));
 
@@ -646,7 +644,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector512<int> loadblock(in Block128<short> src, N512 w, int t = default)
+        public static unsafe Vector512<int> vconvert(in Block128<short> src, N512 w, int t = default)
             => (ConvertToVector256Int32(constptr(in src.Head)),
                 ConvertToVector256Int32(constptr(in src.Head, 8)));
 
@@ -656,7 +654,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector512<uint> loadblock(in Block256<ushort> src, N512 w, uint t = default)
+        public static unsafe Vector512<uint> vconvert(in Block256<ushort> src, N512 w, uint t = default)
             => (v32u(ConvertToVector256Int32(constptr(in src.Head))),
                 v32u(ConvertToVector256Int32(constptr(in src.Head, 8))));
 
@@ -668,7 +666,7 @@ namespace Z0
         /// <param name="lo">The lo target</param>
         /// <param name="hi">The hi target</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector512<ushort> loadblock(in ConstBlock256<byte> src, N512 w, ushort t = default)
+        public static unsafe Vector512<ushort> vconvert(in ConstBlock256<byte> src, N512 w, ushort t = default)
             => (v16u(ConvertToVector256Int16(constptr(in src.Head))),
                 v16u(ConvertToVector256Int16(constptr(in src.Head,16))));
 
@@ -680,7 +678,7 @@ namespace Z0
         /// <param name="lo">The lo target</param>
         /// <param name="hi">The hi target</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector512<ushort> loadblock(in Block256<byte> src, N512 w, ushort t = default)
+        public static unsafe Vector512<ushort> vconvert(in Block256<byte> src, N512 w, ushort t = default)
             => (v16u(ConvertToVector256Int16(constptr(in src.Head))),
                 v16u(ConvertToVector256Int16(constptr(in src.Head,16))));
 
@@ -692,7 +690,7 @@ namespace Z0
         /// <param name="lo">The lower taret</param>
         /// <param name="hi">The upper taret</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector512<ulong> loadblock(in ConstBlock128<ushort> src, N512 w, ulong t = default)
+        public static unsafe Vector512<ulong> vconvert(in ConstBlock128<ushort> src, N512 w, ulong t = default)
             => (v64u(ConvertToVector256Int64(constptr(in src.Head))),
                 v64u(ConvertToVector256Int64(constptr(in src.Head,4))));
 
@@ -704,7 +702,7 @@ namespace Z0
         /// <param name="lo">The lower taret</param>
         /// <param name="hi">The upper taret</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector512<ulong> loadblock(in Block128<ushort> src, N512 w, ulong t = default)
+        public static unsafe Vector512<ulong> vconvert(in Block128<ushort> src, N512 w, ulong t = default)
             => (v64u(ConvertToVector256Int64(constptr(in src.Head))),
                 v64u(ConvertToVector256Int64(constptr(in src.Head,4))));
 
@@ -716,7 +714,7 @@ namespace Z0
         /// <param name="lo">The lower taret</param>
         /// <param name="hi">The upper taret</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector512<ulong> loadblock(in ConstBlock256<uint> src, N512 w, ulong t = default)
+        public static unsafe Vector512<ulong> vconvert(in ConstBlock256<uint> src, N512 w, ulong t = default)
             => (v64u(ConvertToVector256Int64(constptr(in src.Head))),
                 v64u(ConvertToVector256Int64(constptr(in src.Head,4))));
 
@@ -728,9 +726,11 @@ namespace Z0
         /// <param name="lo">The lower taret</param>
         /// <param name="hi">The upper taret</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector512<ulong> loadblock(in Block256<uint> src, N512 w, ulong t = default)
+        public static unsafe Vector512<ulong> vconvert(in Block256<uint> src, N512 w, ulong t = default)
             => (v64u(ConvertToVector256Int64(constptr(in src.Head))),
                 v64u(ConvertToVector256Int64(constptr(in src.Head,4))));
+ 
+
     }
 
 }

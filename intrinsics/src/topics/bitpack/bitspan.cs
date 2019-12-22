@@ -75,7 +75,7 @@ namespace Z0
         public static BitSpan bitspan(byte packed, in Block64<byte> buffer, in Block256<uint> unpacked, int block = 0)
         {
             unpack(packed,buffer,block); 
-            CpuVector.loadblock(buffer,n256).StoreTo(unpacked);
+            dinx.vconvert(buffer,n256).StoreTo(unpacked);
             return BitSpan.load(unpacked.As<bit>());
         }
 
