@@ -16,6 +16,18 @@ namespace Z0
 
     partial class dinx
     {
+        [MethodImpl(Inline)]
+        public static bit testz(ulong a, ulong b)
+            => dinx.vtestz(CpuVector.broadcast(n128,a), CpuVector.broadcast(n128,b));
+
+        [MethodImpl(Inline)]
+        public static bit testc(ulong a, ulong b)
+            => dinx.vtestc(CpuVector.broadcast(n128,a), CpuVector.broadcast(n128,b));
+
+        [MethodImpl(Inline)]
+        public static bit testc(ulong a)
+            => dinx.vtestc(CpuVector.broadcast(n128,a));
+
         /// <summary>
         /// int _mm_testz_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
         /// Returns true if all mask-identified source bits are off

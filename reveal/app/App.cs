@@ -102,7 +102,6 @@ namespace Z0
             Disassemble(typeof(OC.bitmat));    
             Disassemble(typeof(OC.bitstore));
 
-            Disassemble(typeof(OC.butterfly));    
             Disassemble(typeof(OC.memory));    
             Disassemble(typeof(OC.sconvert));   
             Disassemble(typeof(OC.sbits));    

@@ -17,3 +17,23 @@ namespace Z0.Designators
     }
 
 }
+
+namespace Z0
+{
+
+    public static partial class Bits
+    {
+        
+    }
+
+    public static partial class gbits
+    {
+
+    }
+
+    public static partial class BitsX
+    {
+
+
+    }    
+}

@@ -13,7 +13,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class Bits
+    partial class dinx
     {
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.

@@ -16,7 +16,7 @@ namespace Z0
     partial class gbits
     {    
         [MethodImpl(Inline)]
-        public static BitVector<T> bitpack<T>(Span<bit> src)
+        public static T bitpack<T>(Span<bit> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

@@ -13,8 +13,7 @@ namespace Z0
     public class t_vbitblend : t_vinx<t_vbitblend>
     {
 
-        
-            
+                
         public void vbitblend_basecases()
         {
             var n = n256;

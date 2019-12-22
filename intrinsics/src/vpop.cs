@@ -12,15 +12,15 @@ namespace Z0
     using static zfunc;
     using static dinx;
 
-    partial class Bits
+    public static class BitPop
     {
-        // const ulong k1 = 0x5555555555555555;
+        const ulong k1 = 0x5555555555555555;
         
-        // const ulong k2 = 0x3333333333333333;
+        const ulong k2 = 0x3333333333333333;
         
-        // const ulong k4 = 0x0f0f0f0f0f0f0f0f;
+        const ulong k4 = 0x0f0f0f0f0f0f0f0f;
         
-        // const ulong kf = 0x0101010101010101; 
+        const ulong kf = 0x0101010101010101; 
 
         static Vector256<ulong> K1 => CpuVector.broadcast(n256, k1);
 

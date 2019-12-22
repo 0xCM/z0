@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_vcpu_pop : t_vcpu<t_vcpu_pop>
+    public class t_vcpu_pop : t_vinx<t_vcpu_pop>
     {
 
         public void vcpu_pop_3x256()
@@ -32,7 +32,7 @@ namespace Z0
                 pop3 += Bits.pop(src[i],0,0);
             }
 
-            var pop1 = Bits.vpop(x0,x1,x2);
+            var pop1 = BitPop.vpop(x0,x1,x2);
             Claim.eq(pop2,pop3);
             Claim.eq(pop1,pop3);
         }
@@ -56,7 +56,7 @@ namespace Z0
                 pop3 += Bits.pop(src[i],0,0);
             }
 
-            var pop1 = Bits.vpop(x0,x1,x2);
+            var pop1 = BitPop.vpop(x0,x1,x2);
             Claim.eq(pop2,pop3);
             Claim.eq(pop1,pop3);
         }
@@ -80,7 +80,7 @@ namespace Z0
                 var z = Random.CpuVector<ulong>(n);
                 counter.Start();
                 for(var i=0; i<SampleSize; i++)
-                    total += Bits.vpop(x,y,z);
+                    total += BitPop.vpop(x,y,z);
                 counter.Stop();
                 opcount += (32 * 3 * SampleSize);
             }
@@ -98,7 +98,7 @@ namespace Z0
                 var z = Random.CpuVector<ulong>(n);
                 counter.Start();
                 for(var i=0; i<SampleSize; i++)
-                    total += Bits.vpop(x,y,z);
+                    total += BitPop.vpop(x,y,z);
                 counter.Stop();
                 opcount += (16 * 3 * SampleSize);
             }

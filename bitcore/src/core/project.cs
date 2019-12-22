@@ -8,28 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
  
     using static zfunc;
-    using static dinx;
-
+    
     partial class Bits
-    {        
+    {       
         [MethodImpl(Inline)]
-        public static uint project(uint src, uint spec)
-            => scatter(src, spec);
-
-        [MethodImpl(Inline)]
-        public static uint select(uint src, uint spec)
-            => gather(src, spec);
+        public static byte project(byte src, byte spec)
+            => (byte)scatter(src, (uint)spec);
 
         [MethodImpl(Inline)]
-        public static ulong project(ulong src, ulong spec)
-            => scatter(src, spec);
+        public static byte select(byte src, byte spec)
+            => (byte)gather(src, (uint)spec);
 
         [MethodImpl(Inline)]
-        public static ulong select(ulong src, ulong spec)
-            => gather(src, spec);
+        public static ushort project(ushort src, ushort spec)
+            => (ushort)scatter(src, (uint)spec);
 
-
-
+        [MethodImpl(Inline)]
+        public static ushort select(ushort src, ushort spec)
+            => (ushort)gather(src, (uint)spec);
     }
-
 }

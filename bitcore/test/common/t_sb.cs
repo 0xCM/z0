@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    public abstract class t_sb<X> : t_bits<X>
+    public abstract class t_sb<X> : UnitTest<X>
         where X : t_sb<X>, new()
     {
         protected override int SampleSize => Pow2.T04;

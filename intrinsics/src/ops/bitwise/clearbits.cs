@@ -5,15 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
+    using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
-
-    using static zfunc;
-
-    partial class gbits
+    using System.Runtime.Intrinsics.X86;
+    
+    using static zfunc;    
+    using static As;
+    
+    partial class ginx
     {
-        /// <summary>
+
+       /// <summary>
         /// Clears a sequence of bits from each component
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -21,7 +23,7 @@ namespace Z0
         /// <param name="count">The number of bits to disable</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> vclear<T>(Vector128<T> src, byte start, int count)
+        public static Vector128<T> vclearbits<T>(Vector128<T> src, byte start, int count)
             where T : unmanaged
         {
             var n = n128;
@@ -38,7 +40,7 @@ namespace Z0
         /// <param name="count">The number of bits to disable</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vclear<T>(Vector256<T> src, byte start, int count)
+        public static Vector256<T> vclearbits<T>(Vector256<T> src, byte start, int count)
             where T : unmanaged
         {
             var n = n256;
@@ -47,4 +49,5 @@ namespace Z0
             return ginx.vand(vmask,src);
         }
     }
+
 }
