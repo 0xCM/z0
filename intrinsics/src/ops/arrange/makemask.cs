@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<byte> vmakemask(ushort src)
         {
-            const ulong m = BitMasks.Msb64x8;
+            const ulong m = BitMasks.Msb64x8x1;
             var m0 = dinx.scatter((ulong)(byte)src, m);
             var m1 = dinx.scatter((ulong)((byte)(src >> 8)), m);
             return v8u(CpuVector.parts(n128,m0,m1));
@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<byte> vmakemask(ushort src, byte index)
         {
-            var m = BitMasks.Lsb64x8 << index;
+            var m = BitMasks.Lsb64x8x1 << index;
             var m0 = dinx.scatter((ulong)(byte)src, m);
             var m1 = dinx.scatter((ulong)((byte)(src >> 8)), m);
             return v8u(CpuVector.parts(n128,m0,m1));

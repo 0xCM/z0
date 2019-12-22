@@ -24,4 +24,13 @@ partial class zfunc
     public static ReadOnlySpan<char> Replicate(this char src, uint count)
         => new string(src,(int)count);
 
+    public static string Format(this Utf8AsciPoint src)
+    {
+        var bits = src.Code.FormatBits();
+        var num = src.Code.FormatHex();
+        var str = src.IsControl ? "___"  : $"'{src.ToChar()}'";
+        return $"{num} {bits} {str}";
+    }
+
+ 
 }

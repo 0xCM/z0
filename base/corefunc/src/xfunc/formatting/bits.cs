@@ -154,7 +154,7 @@ namespace Z0
         /// <param name="blockWidth">The number of binary digits per block, if specified</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatBits<N,T>(this NatBlock<N,T> src, int? maxbits = null,   bool tlz = false, bool specifier = false, int? blockWidth = null, 
+        public static string FormatBits<N,T>(this NatSpan<N,T> src, int? maxbits = null,   bool tlz = false, bool specifier = false, int? blockWidth = null, 
             char? blocksep = null, int? rowWidth = null)
                 where T : unmanaged
                 where N : unmanaged, ITypeNat
@@ -195,7 +195,7 @@ namespace Z0
         /// <param name="blockWidth">The number of binary digits per block, if specified</param>
         /// <typeparam name="N">The natural length type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatBits<N>(this NatBlock<N,bit> src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
+        public static string FormatBits<N>(this NatSpan<N,bit> src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
             char? blocksep = null, int? rowWidth = null)
                 where N : unmanaged, ITypeNat
                     => src.Data.FormatBits(tlz, specifier, blockWidth, blocksep, rowWidth);

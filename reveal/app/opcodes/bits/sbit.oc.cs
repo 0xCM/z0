@@ -14,8 +14,6 @@ namespace Z0.OpCodes
     public static class sbits
     {
 
-        public static uint pack32x1(ConstBlock256<byte> src)
-            => Bits.pack8x1(src);
 
         public static void split_g64(ulong src, int index, out ulong x0, out ulong x1)
             => gbits.split(src, index, out x0, out x1);

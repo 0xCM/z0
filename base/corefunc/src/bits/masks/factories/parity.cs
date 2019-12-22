@@ -22,7 +22,6 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        /// <remarks></remarks>
         [MethodImpl(Inline)]
         public static T even<T>(N2 f, N1 d, T t = default)
             where T : unmanaged
@@ -46,7 +45,6 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        /// <remarks></remarks>
         [MethodImpl(Inline)]
         public static T even<T>(N2 f, N2 d, T t = default)
             where T : unmanaged
@@ -70,7 +68,6 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        /// <remarks></remarks>
         [MethodImpl(Inline)]
         public static T odd<T>(N2 f, N1 d, T t = default)
             where T : unmanaged
@@ -94,7 +91,6 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
-        /// <remarks></remarks>
         [MethodImpl(Inline)]
         public static T odd<T>(N2 f, N2 d, T t = default)
             where T : unmanaged

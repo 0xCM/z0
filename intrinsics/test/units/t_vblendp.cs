@@ -18,22 +18,22 @@ namespace Z0
             => false;
 
         public void vblendp_perm32_g128x8u()
-            => vblendp_check(n128, n32, BitMasks.Msb16, z8);
+            => vblendp_check(n128, n32, BitMasks.Msb16x16x1, z8);
 
         public void vblendp_perm16_g128x16u()
-            => vblendp_check(n128, n16, BitMasks.Msb32, z16);
+            => vblendp_check(n128, n16, BitMasks.Msb32x32x1, z16);
 
         public void vblendp_perm8_g128x32u()
-            => vblendp_check(n128, n8, BitMasks.Msb64, z32);
+            => vblendp_check(n128, n8, BitMasks.Msb64x64x1, z32);
 
         public void vblendp_perm64_g256x8u()
-            => vblendp_check(n256, n64, BitMasks.Msb16, z8);
+            => vblendp_check(n256, n64, BitMasks.Msb16x16x1, z8);
 
         public void vblendp_perm32_g256x16u()
-            => vblendp_check(n256, n32, BitMasks.Msb32, z16);
+            => vblendp_check(n256, n32, BitMasks.Msb32x32x1, z16);
 
         public void vblendp_perm16_g256x32u()
-            => vblendp_check(n256, n16, BitMasks.Msb64, z32);
+            => vblendp_check(n256, n16, BitMasks.Msb64x64x1, z32);
 
 
         static string describe<F,D,T,S>(IMaskSpec<F,D,T> maskspec, S sample, Vector512<T> source, Vector512<T> target)

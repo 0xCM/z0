@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
-        public static NatBlock<N4, byte> ToDigits(this Perm4L src)
+        public static NatSpan<N4, byte> ToDigits(this Perm4L src)
             => Perms.digits(src);
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
-        public static NatBlock<N8, OctalDigit> ToDigits(this Perm8L src)
+        public static NatSpan<N8, OctalDigit> ToDigits(this Perm8L src)
             => Perms.digits(src);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
-        public static NatBlock<N16, HexDigit> ToDigits(this Perm16L src)
+        public static NatSpan<N16, HexDigit> ToDigits(this Perm16L src)
             => Perms.digits(src);
 
         [MethodImpl(Inline)]

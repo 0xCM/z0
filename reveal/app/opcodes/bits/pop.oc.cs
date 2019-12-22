@@ -19,10 +19,10 @@ namespace Z0.OpCodes
             => Bits.pop(x,y,z);
 
         public static uint pop_3x128(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
-            => CpuBits.vpop(x,y,z);
+            => Bits.vpop(x,y,z);
 
         public static uint pop_3x256(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
-            => CpuBits.vpop(x,y,z);
+            => Bits.vpop(x,y,z);
 
         public static void part64x1_byte(ulong src, Span<byte> dst)
             => Bits.part64x1(src, dst);

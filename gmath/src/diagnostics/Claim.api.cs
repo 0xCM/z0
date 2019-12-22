@@ -247,7 +247,7 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static void eq<N,T>(NatBlock<N,T> lhs, NatBlock<N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void eq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
             where N : unmanaged, ITypeNat             
                 => eq(lhs.Data,rhs.Data, caller,file,line);

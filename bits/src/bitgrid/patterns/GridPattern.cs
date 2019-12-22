@@ -80,7 +80,7 @@ namespace Z0
         public static BitGrid256<N16,N16,T> exchange<T>(N256 w, N16 m, N16 n, T t = default)
             where T : unmanaged
         {
-            var x = vmakemask<T>(BitMask.msb<uint>(n2));
+            var x = vmakemask<T>(BitMask.msb<uint>(n2,n1));
             var offsets = CpuVector.increments<T>(w);
             var pattern = vsrlv(x,offsets);
             return pattern;

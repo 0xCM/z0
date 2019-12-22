@@ -72,10 +72,5 @@ namespace Z0
             where T : unmanaged
                 => src.Data.CopyTo(dst);
 
-        [MethodImpl(Inline)]
-        public static void CopyTo<N,T>(this in NatBlock<N,T> src,Span<T> dst)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => src.Data.CopyTo(dst);
     }
 }

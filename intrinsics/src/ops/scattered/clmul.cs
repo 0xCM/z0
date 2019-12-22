@@ -63,8 +63,8 @@ namespace Z0
         public static uint clmulr(N32 r, uint a, uint b, ulong poly)
         {
             var prod = clmul(a,b);
-            prod ^= clmul(prod >> 32, poly).lo;
-            prod ^= clmul(prod >> 32, poly).lo;
+            prod ^= clmul(prod >> 32, poly).A;
+            prod ^= clmul(prod >> 32, poly).A;
             return (uint)prod;
         }
 
@@ -75,11 +75,12 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
-        public static UInt128 clmul(ulong lhs, ulong rhs)
+        public static ConstPair<ulong> clmul(ulong lhs, ulong rhs)
         {
             var a = ginx.vscalar(n128, lhs);
             var b = ginx.vscalar(n128, rhs);
-            return CarrylessMultiply(a,b,0x00);
+            var result = CarrylessMultiply(a,b,0x00);
+            return (vcell(result,0), vcell(result,1));
         }
 
         [MethodImpl(Inline)]
@@ -90,7 +91,6 @@ namespace Z0
             var z = CarrylessMultiply(u, v, 0);
             return vcell(z,0);
         }
-
 
         /// <summary>
         /// Computes the caryless 16-bit product of two 8-bit operands
@@ -117,7 +117,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static ulong clmul(uint lhs, uint rhs)
-            => clmul((ulong)lhs, (ulong)rhs).lo;
+            => clmul((ulong)lhs, (ulong)rhs).A;
 
         /// <summary>
         /// __m128i _mm_clmulepi64_si128 (__m128i a, __m128i b, const int imm8) PCLMULQDQ xmm, xmm/m128, imm8

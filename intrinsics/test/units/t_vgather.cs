@@ -217,6 +217,50 @@ namespace Z0
 
         }
 
+        const int MaxCells128 = 512;
+                
+        const int BlockLen128 = 4;
+        
+        // 128
+        const int MaxBlocks128 = MaxCells128 / BlockLen128;
+
+
+        public void vgather_128x32u_blocks_outline()
+        {                
+            var blocks = MaxBlocks128;
+            var blocklen = BlockLen128;
+            var w = n128;
+            var t = z32;
+            var A = DataBlocks.alloc(w,blocks, t);                
+            var B = DataBlocks.alloc(w,blocks, t);
+
+            var pattern0 = CpuVector.lsbmask(w,n2,n1,t);
+            var pattern1 = CpuVector.msbmask(w,n2,n1,t);
+
+            for(var block = 0; block < blocks; block++)
+            {
+                var target = A.Block(block);
+                var source = even(block) ? pattern0 : pattern1;
+                source.StoreTo(target);
+            }
+
+            var a0 = dinx.vgather(w, ref A.Head, CpuVector.partsi(w,4*12, 4*24, 4*48, 4*64));
+            Claim.eq(a0,pattern0);
+
+            for(var block = 0; block < blocks; block++)
+            {
+                var i0 = block*blocklen;
+                var i1 = i0 + 1;
+                var i2 = i1 + 1;
+                var i3 = i2 + 1;
+                
+                var indices = CpuVector.partsi(w,i0,i1,i2,i3);
+                var result = dinx.vgather(w, ref A.Head, indices);
+                var expect = even(block) ? pattern0 : pattern1;
+                Claim.eq(result,expect);                
+            }
+        }
+
         public void vgather_256x64u_1024x256x64i()
         {
             var n = n256;

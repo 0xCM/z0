@@ -217,25 +217,6 @@ namespace Z0
             return load(w, offset == 0 ? src : src.Slice(offset));
         }         
 
-
-        /// <summary>
-        /// Verifies correct source span length prior to backing store assignment
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        /// <typeparam name="N">The length type</typeparam>
-        [MethodImpl(Inline)]
-        public static NatBlock<N,T> checkedload<N,T>(Span<T> src, N n = default)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-        {
-            if(src.Length < nati<N>())
-                badsize(nati<N>(), src.Length);      
-
-            return new NatBlock<N, T>(src);
-        }
-
-
     }
 
 }

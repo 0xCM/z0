@@ -77,7 +77,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void unpack(byte packed, Span<byte> unpacked)
         {
-            var m = BitMask.lsb<ulong>(n8);
+            var m = BitMask.lsb<ulong>(n8,n1);
             ref var dst = ref head(unpacked);
             seek64(ref dst, 0) = dinx.scatter((ulong)(byte)packed, m);
         }
@@ -90,7 +90,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void unpack(ushort packed, Span<byte> unpacked)
         {
-            var m = BitMask.lsb<ulong>(n8);
+            var m = BitMask.lsb<ulong>(n8,n1);
             ref var dst = ref head(unpacked);
             seek64(ref dst, 0) = dinx.scatter((ulong)(byte)packed, m);
             seek64(ref dst, 1) = dinx.scatter((ulong)((byte)(packed >> 8)), m);
@@ -104,7 +104,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void unpack(uint packed, Span<byte> unpacked)
         {
-            var m = BitMask.lsb<ulong>(n8);
+            var m = BitMask.lsb<ulong>(n8,n1);
             ref var dst = ref head(unpacked);
             seek64(ref dst, 0) = dinx.scatter((ulong)(byte)packed, m);
             seek64(ref dst, 1) = dinx.scatter((ulong)((byte)(packed >> 8)), m);

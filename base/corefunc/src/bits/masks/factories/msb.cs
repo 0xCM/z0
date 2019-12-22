@@ -29,17 +29,17 @@ namespace Z0
         /// <param name="t">A mask data type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N1 f = default, N1 d = default, T t = default)
+        public static T msb<T>(N1 f, N1 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Msb8);
+                return convert<byte,T>(Msb8x8x1);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Msb16);
+                return convert<ushort,T>(Msb16x16x1);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Msb32);
+                return convert<uint,T>(Msb32x32x1);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Msb64);
+                return convert<ulong,T>(Msb64x64x1);
             else 
                 throw unsupported<T>();
         }
@@ -52,17 +52,17 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N2 f, N1 d = default, T t = default)
+        public static T msb<T>(N2 f, N1 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Msb8x2);
+                return convert<byte,T>(Msb8x2x1);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Msb16x2);
+                return convert<ushort,T>(Msb16x2x1);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Msb32x2);
+                return convert<uint,T>(Msb32x2x1);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Msb64x2);
+                return convert<ulong,T>(Msb64x2x1);
             else 
                 throw unsupported<T>();
         }
@@ -75,17 +75,17 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N4 f, N1 d = default, T t = default)
+        public static T msb<T>(N4 f, N1 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Msb8x4);
+                return convert<byte,T>(Msb8x4x1);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Msb16x4);
+                return convert<ushort,T>(Msb16x4x1);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Msb32x4);
+                return convert<uint,T>(Msb32x4x1);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Msb64x4);
+                return convert<ulong,T>(Msb64x4x1);
             else 
                 throw unsupported<T>();
         }
@@ -98,17 +98,17 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N8 f, N1 d = default, T t = default)
+        public static T msb<T>(N8 f, N1 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Msb8);
+                return convert<byte,T>(Msb8x8x1);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Msb16x8);
+                return convert<ushort,T>(Msb16x8x1);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Msb32x8);
+                return convert<uint,T>(Msb32x8x1);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Msb64x8);
+                return convert<ulong,T>(Msb64x8x1);
             else 
                 throw unsupported<T>();
         }
@@ -121,17 +121,17 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(N16 f, N1 d = default, T t = default)
+        public static T msb<T>(N16 f, N1 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return default;
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Msb16);
+                return convert<ushort,T>(Msb16x16x1);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Msb32x16);
+                return convert<uint,T>(Msb32x16x1);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Msb64x16);
+                return convert<ulong,T>(Msb64x16x1);
             else 
                 throw unsupported<T>();
         }
@@ -376,57 +376,55 @@ namespace Z0
             where T : unmanaged
                 => msb(spec.f,spec.d,spec.t);
 
-
         [MethodImpl(Inline)]
         public static byte msb8f(byte density)
             => (byte)(byte.MaxValue << (8 - density));
 
         /// <summary>
         /// [10000000 00000000]
-        /// The greatest bit of each 16-bit segment is enabled
+        /// The greatest bit of each 16-bit segment over 64 bits of data is enabled
         /// </summary>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
-        /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static ulong msb64(N16 f, N1 d)
-            => Msb64x16;
+        public static ulong msb(N64 w, N16 f, N1 d)
+            => Msb64x16x1;
 
         /// <summary>
         /// [10000000 00000000 00000000 0000000]
-        /// The greatest bit of each 32-bit segment is enabled
+        /// The greatest bit of each 32-bit segment over 64 bits of data is enabled
         /// </summary>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static ulong msb64(N32 f, N1 d)
-            => Msb64x32;
+        public static ulong msb64(N64 w, N32 f, N1 d)
+            => Msb64x32x1;
         
         [MethodImpl(Inline)]
         static ulong msb<W>(W w, N2 f, N1 d)
             where W : unmanaged, ITypeNat
         {
             if(typeof(W) == typeof(N4))
-                return BitMasks.Msb4x2;
+                return BitMasks.Msb4x2x1;
             else if(typeof(W) == typeof(N6))
-                return BitMasks.Msb6x2;
+                return BitMasks.Msb6x2x1;
             else if(typeof(W) == typeof(N8))
-                return BitMasks.Msb8x2;
+                return BitMasks.Msb8x2x1;
             else if(typeof(W) == typeof(N10))
-                return BitMasks.Msb10x2;
+                return BitMasks.Msb10x2x1;
             else if(typeof(W) == typeof(N12))
-                return BitMasks.Msb12x2;
+                return BitMasks.Msb12x2x1;
             else if(typeof(W) == typeof(N14))
-                return BitMasks.Msb14x2;
+                return BitMasks.Msb14x2x1;
             else if(typeof(W) == typeof(N16))
-                return BitMasks.Msb16x2;
+                return BitMasks.Msb16x2x1;
             else if(typeof(W) == typeof(N18))
-                return BitMasks.Msb18x2;
+                return BitMasks.Msb18x2x1;
             else if(typeof(W) == typeof(N32))
-                return BitMasks.Msb32x2;
+                return BitMasks.Msb32x2x1;
             else if(typeof(W) == typeof(N64))
-                return BitMasks.Msb64x2;
+                return BitMasks.Msb64x2x1;
             else 
                 throw unsupported<W>();                
         }

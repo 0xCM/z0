@@ -24,8 +24,6 @@ namespace Z0
         public static ulong byteswap64(ulong src)
             => bswap(src);
             
-        public static UInt8 mul_8u(UInt8 a, UInt8 b)
-            => a * b;
 
         public static void mul_128u(Pair<ulong> src, ref Pair<ulong> dst)
             => Math128.mul(in src, ref dst);
@@ -63,9 +61,6 @@ namespace Z0
 
         public static void mul_32u(Pair<uint> src, ref Pair<uint> dst)
             => Math128.mul(src, ref dst);
-
-        public static UInt8 or_8u(UInt8 a, UInt8 b)
-            => a | b;
 
         public static uint mod_const_16(uint a)
             => Mod16.mod(a);

@@ -56,6 +56,74 @@ namespace Z0
 
         }
 
+        public void bitpack_32x4()
+        {
+            var count = n4;
+            var block = n32;
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var bs = Random.BitString(count);
+                var bitseq = bs.BitSeq.Blocked(block);
+                var packed = BitPack.pack(bitseq);
+                Claim.eq(bs.TakeScalar<byte>(), packed);
+            }
+        }
+
+
+        public void sb_pack_8x1_128()
+        {
+            var count = n16;
+            var block = n128;
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var bs = Random.BitString(count);
+                var bitseq = bs.BitSeq.Blocked(block);
+                uint packed = BitPack.pack(bitseq);
+                for(var i=0; i< count; i++)
+                    Claim.eq(bs[i], BitMask.testbit(packed, i));
+
+            }
+        }
+
+        public void sb_pack_8x1_256()
+        {
+            var count = n32;
+            var block = n256;
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var bs = Random.BitString(count);
+                var bitseq = bs.BitSeq.Blocked(block);
+                uint packed = BitPack.pack(bitseq);
+                for(var i=0; i< count; i++)
+                    Claim.eq(bs[i], BitMask.testbit(packed, i));
+
+            }
+        }
+
+        public void sb_pack_8x1_basecase()
+        {
+            void case1()
+            {
+                var src = DataBlocks.single<byte>(n256);
+                CpuVector.ones<byte>(n256).StoreTo(src);
+                var dst = BitPack.pack(src);
+                Claim.eq(dst,uint.MaxValue);
+
+            }
+
+            void case2()
+            {
+                var src = DataBlocks.single<byte>(n128);
+                CpuVector.ones<byte>(n128).StoreTo(src);
+                var dst = BitPack.pack(src);
+                Claim.eq(dst,ushort.MaxValue);
+            }
+
+            case1();
+            case2();
+        }
+
+
         public void bitspan_format_direction()
         {
             byte src = 1;

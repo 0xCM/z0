@@ -124,17 +124,6 @@ namespace Z0
             where T : unmanaged
                 => src.Data.Slice(offset,length);             
 
-        [MethodImpl(Inline)]
-        public static Span<T> Slice<N,T>(this in NatBlock<N,T> src, int offset)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => src.Data.Slice(offset);
-
-        [MethodImpl(Inline)]
-        public static Span<T> Slice<N,T>(this in NatBlock<N,T> src, int offset, int length)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => src.Data.Slice(offset, length);
 
     }
 

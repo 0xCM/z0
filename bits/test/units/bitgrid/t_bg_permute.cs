@@ -43,7 +43,7 @@ namespace Z0
 
         public void perm_8x32_digits()
         {
-            var symbols = DataBlocks.natparts(n8, Perm8L.B, Perm8L.A, Perm8L.D, Perm8L.C, Perm8L.F, Perm8L.E, Perm8L.H, Perm8L.G);
+            var symbols = NatSpan.parts(n8, Perm8L.B, Perm8L.A, Perm8L.D, Perm8L.C, Perm8L.F, Perm8L.E, Perm8L.H, Perm8L.G);
             var spec = Perms.assemble(symbols[0], symbols[1], symbols[2], symbols[3], symbols[4], symbols[5], symbols[6], symbols[7]);
             
             //[o1, o0, o3, o2, o5, o4, o7, o6]

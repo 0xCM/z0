@@ -13,12 +13,15 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Avx;
+    using static System.Runtime.Intrinsics.X86.Bmi2;
+    using static System.Runtime.Intrinsics.X86.Bmi2.X64;
     
     using static As;
     using static zfunc;
 
     partial class dinx
     {
+
         /// <summary>
         /// __m128i _mm_and_si128 (__m128i a, __m128i b) PAND xmm, xmm/m128
         /// Computes the logical and of the operands

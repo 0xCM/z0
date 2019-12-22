@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static zfunc;    
+    using static AsIn;
 
     partial class BitPack
     {
@@ -24,21 +25,41 @@ namespace Z0
         }
 
         /// <summary>
+        /// Packs 4 1-bit values taken from the least significant bit of each source byte
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="dst">The target</param>
+        [MethodImpl(Inline)]
+        public static byte pack<T>(in ConstBlock32<T> src)
+            where T : unmanaged
+                => (byte) dinx.gather(uint32(in src.Head), BitMasks.Lsb32x8x1);
+
+        /// <summary>
+        /// Packs 4 1-bit values taken from the least significant bit of each source byte
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="dst">The target</param>
+        [MethodImpl(Inline)]
+        public static byte pack<T>(in Block32<T> src)
+            where T : unmanaged
+                => (byte) dinx.gather(uint32(in src.Head), BitMasks.Lsb32x8x1);
+
+        /// <summary>
         /// Packs 8 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         /// <param name="src">The source bytes</param>
         [MethodImpl(Inline)]
         public static byte pack<T>(in ConstBlock64<T> src, int block = 0)
             where T : unmanaged
-                => pack8(in src.BlockRef(block));
+                => pack8(convert<T,ulong>(src.BlockRef(block)));
 
         /// <summary>
-        /// Packs 16 1-bit values taken from the least significant bit of each source byte
+        /// Packs 8 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         [MethodImpl(Inline)]
         public static byte pack<T>(in Block64<T> src, int block = 0)
             where T : unmanaged
-                => pack8(in src.BlockRef(block));
+                => pack8(convert<T,ulong>(src.BlockRef(block)));
 
         /// <summary>
         /// Pack 16 1-bit values taken from the least significant bit of each source byte
@@ -95,15 +116,8 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         static byte pack8(ulong src)
-            => (byte)ginx.vtakemask(ginx.vsll(ginx.vscalar(n128, const64(src)),7));
+            => (byte)dinx.gather(src, BitMasks.Lsb64x8x1);
 
-        /// <summary>
-        /// Packs 8 1-bit values taken from the least significant bit of each source byte
-        /// </summary>
-        [MethodImpl(Inline)]
-        static byte pack8<T>(in T src)
-            where T : unmanaged
-                => (byte)ginx.vtakemask(ginx.vsll(ginx.vscalar(n128, const64(src)),7));
 
         /// <summary>
         /// Packs 16 1-bit values taken from the least significant bit of each source byte
@@ -136,12 +150,42 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits to condense</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> pack(NatBlock<N128,bit> src)
-            => pack(n1, n32, in head(src.As<uint>()));
+        public static Vector128<uint> pack(NatSpan<N128,bit> src)
+            => pack128(n1, n32, in head(src.As<uint>()));
 
         [MethodImpl(Inline)]
-        public static Vector128<uint> pack(N1 width, NatBlock<N128,uint> src)
-            => pack(width, n32, in head(src));
+        public static Vector128<uint> pack(N1 width, NatSpan<N128,uint> src)
+            => pack128(width, n32, in head(src));
+
+        
+        /// <summary>
+        /// Packs 128 32-bit values into 128 1-bit values captured by a 128-bit vector, adapted
+        /// from https://github.com/lemire/FastPFOR 
+        /// </summary>
+        /// <param name="src">The unpacked data</param>
+        [MethodImpl(Inline)]
+        static Vector128<uint> pack128(ReadOnlySpan<uint> unpacked)
+        {   
+            const byte step = 4;
+            
+            var w = n128;
+            var current = 0;                        
+
+            ref readonly var src = ref head(unpacked);
+
+            var xmm1 = ginx.vload(w, in src);            
+            var xmm0 = xmm1; 
+            xmm1 = ginx.vload(w, in skip(in src, current += step));
+
+            byte offset = 0;
+            while(offset++ < 32)
+            {
+                xmm0 = dinx.vor(xmm0, dinx.vsll(xmm1, offset));
+                xmm1 = ginx.vload(w, in skip(in src, current += step));
+            }
+            return xmm0;
+
+        }
 
         [MethodImpl(Inline)]
         static void pack1(ref Vector128<uint> xmm0, ref Vector128<uint> xmm1, in uint src, byte step, int offset)
@@ -157,7 +201,8 @@ namespace Z0
         /// <param name="width">The target compression width</param>
         /// <param name="n">The source element width</param>
         /// <param name="src">A reference to the source values</param>
-        static Vector128<uint> pack(N1 width, N32 n, in uint src)
+        [MethodImpl(Inline)]
+        static Vector128<uint> pack128(N1 width, N32 n, in uint src)
         {
             const int step = 4;
             var nv = n128;
@@ -200,8 +245,6 @@ namespace Z0
             pack1(ref xmm0, ref xmm1, in src, 31, current += step);
             return xmm0;
         }
-
- 
 
     }
 

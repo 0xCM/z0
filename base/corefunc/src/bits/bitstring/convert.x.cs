@@ -181,13 +181,6 @@ namespace Z0
             where T : unmanaged
                 => src.Bytes.ToBitString(maxbits);
     
-        /// <summary>
-        /// Converts a 128-bit unsigned integer to a bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitString ToBitString(this UInt128 src)
-            => BitString.scalar(src.hi) + BitString.scalar(src.lo);
  
         /// <summary>
         /// Converts an 128-bit intrinsic vector representation to a bistring

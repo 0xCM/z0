@@ -70,6 +70,7 @@ namespace Z0
         public static unsafe void vmaskstore8(Vector128<ushort> src, Vector128<byte> mask, in Block128<byte> dst)
             => MaskMove(v8u(src), mask, ptr(dst));
 
+
         /// <summary>
         /// void _mm_maskmoveu_si128 (__m128i a, __m128i mask, char* mem_address) MASKMOVDQU xmm, xmm
         /// Conditionally stores 8-bit segments from the source vector to memory according to a vectorized mask

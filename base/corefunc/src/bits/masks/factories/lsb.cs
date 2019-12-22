@@ -29,17 +29,17 @@ namespace Z0
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N1 f = default, N1 d = default, T t = default)
+        public static T lsb<T>(N1 f, N1 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Lsb8);
+                return convert<byte,T>(Lsb8x1x1);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Lsb16);
+                return convert<ushort,T>(Lsb16x16x1);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Lsb32);
+                return convert<uint,T>(Lsb32x32x1);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Lsb64);
+                return convert<ulong,T>(Lsb64x64x1);
             else 
                 throw unsupported<T>();
         }
@@ -70,17 +70,17 @@ namespace Z0
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>Creates a mask where the least significant bit out of each two bits is enabled</remarks>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N2 f, N1 d = default, T t = default)
+        public static T lsb<T>(N2 f, N1 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Lsb8x2);
+                return convert<byte,T>(Lsb8x2x1);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Lsb16x2);
+                return convert<ushort,T>(Lsb16x2x1);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Lsb32x2);
+                return convert<uint,T>(Lsb32x2x1);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Lsb64x2);
+                return convert<ulong,T>(Lsb64x2x1);
             else 
                 throw unsupported<T>();
         }
@@ -95,17 +95,17 @@ namespace Z0
         /// <typeparam name="T">The mask data type</typeparam>
         /// <remarks>Creates a mask where the least significant bit out of each four bits is enabled</remarks>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N4 f, N1 d = default, T t = default)
+        public static T lsb<T>(N4 f, N1 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Lsb8x4);
+                return convert<byte,T>(Lsb8x4x1);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Lsb16x4);
+                return convert<ushort,T>(Lsb16x4x1);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Lsb32x4);
+                return convert<uint,T>(Lsb32x4x1);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Lsb64x4);
+                return convert<ulong,T>(Lsb64x4x1);
             else 
                 throw unsupported<T>();
         }
@@ -119,17 +119,17 @@ namespace Z0
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N8 f, N1 d = default, T t = default)
+        public static T lsb<T>(N8 f, N1 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Lsb8);
+                return convert<byte,T>(Lsb8x1x1);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Lsb16x8);
+                return convert<ushort,T>(Lsb16x8x1);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Lsb32x8);
+                return convert<uint,T>(Lsb32x8x1);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Lsb64x8);
+                return convert<ulong,T>(Lsb64x8x1);
             else 
                 throw unsupported<T>();
         }
@@ -143,20 +143,19 @@ namespace Z0
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(N16 f, N1 d = default, T t = default)
+        public static T lsb<T>(N16 f, N1 d, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return default;
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Lsb16);
+                return convert<ushort,T>(Lsb16x16x1);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Lsb32x16);
+                return convert<uint,T>(Lsb32x16x1);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Lsb64x16);
+                return convert<ulong,T>(Lsb64x16x1);
             else 
                 throw unsupported<T>();
-
         }
 
         /// <summary>
@@ -306,18 +305,29 @@ namespace Z0
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
         public static ulong lsb64(N16 f, N1 d)
-                => Lsb64x16;
+                => Lsb64x16x1;
 
+        /// <summary>
+        /// [00000000 00000000 00000000 0000001]
+        /// The least bit is enabled
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <param name="t">A mask data type representative</param>
+        [MethodImpl(Inline)]
+        public static uint lsb(N32 f, N1 d, uint t)
+            => Lsb32x32x1;
+        
         /// <summary>
         /// [00000000 00000000 00000000 0000001]
         /// The least bit of each 32-bit segment is enabled
         /// </summary>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
-        /// <typeparam name="T">The mask data type</typeparam>
+        /// <param name="t">A mask data type representative</param>
         [MethodImpl(Inline)]
-        public static ulong lsb64(N32 f, N1 d)
-            => Lsb64x32;
+        public static ulong lsb64(N32 f, N1 d, ulong t)
+            => Lsb64x32x1;
 
         /// <summary>
         /// [00000001]    
@@ -441,25 +451,25 @@ namespace Z0
             where W : unmanaged, ITypeNat
         {
             if(typeof(W) == typeof(N4))
-                return BitMasks.Lsb4x2;
+                return BitMasks.Lsb4x2x1;
             else if(typeof(W) == typeof(N6))
-                return BitMasks.Lsb6x2;
+                return BitMasks.Lsb6x2x1;
             else if(typeof(W) == typeof(N8))
-                return BitMasks.Lsb8x2;
+                return BitMasks.Lsb8x2x1;
             else if(typeof(W) == typeof(N10))
-                return BitMasks.Lsb10x2;
+                return BitMasks.Lsb10x2x1;
             else if(typeof(W) == typeof(N12))
-                return BitMasks.Lsb12x2;
+                return BitMasks.Lsb12x2x1;
             else if(typeof(W) == typeof(N14))
-                return BitMasks.Lsb14x2;
+                return BitMasks.Lsb14x2x1;
             else if(typeof(W) == typeof(N16))
-                return BitMasks.Lsb16x2;
+                return BitMasks.Lsb16x2x1;
             else if(typeof(W) == typeof(N18))
-                return BitMasks.Lsb18x2;
+                return BitMasks.Lsb18x2x1;
             else if(typeof(W) == typeof(N32))
-                return BitMasks.Lsb32x2;
+                return BitMasks.Lsb32x2x1;
             else if(typeof(W) == typeof(N64))
-                return BitMasks.Lsb64x2;
+                return BitMasks.Lsb64x2x1;
             else 
                 throw unsupported<W>();                
         }
@@ -469,23 +479,23 @@ namespace Z0
             where W : unmanaged, ITypeNat
         {
             if(typeof(W) == typeof(N6))
-                return BitMasks.Lsb6x3;
+                return BitMasks.Lsb6x3x1;
             else if(typeof(W) == typeof(N9))
-                return BitMasks.Lsb9x3;
+                return BitMasks.Lsb9x3x1;
             else if(typeof(W) == typeof(N12))
-                return BitMasks.Lsb12x3;
+                return BitMasks.Lsb12x3x1;
             else if(typeof(W) == typeof(N15))
-                return BitMasks.Lsb15x3;
+                return BitMasks.Lsb15x3x1;
             else if(typeof(W) == typeof(N18))
-                return BitMasks.Lsb18x3;
+                return BitMasks.Lsb18x3x1;
             else if(typeof(W) == typeof(N21))
-                return BitMasks.Lsb21x3;
+                return BitMasks.Lsb21x3x1;
             else if(typeof(W) == typeof(N24))
-                return BitMasks.Lsb24x3;
+                return BitMasks.Lsb24x3x1;
             else if(typeof(W) == typeof(N27))
-                return BitMasks.Lsb27x3;
+                return BitMasks.Lsb27x3x1;
             else if(typeof(W) == typeof(N30))
-                return BitMasks.Lsb30x3;
+                return BitMasks.Lsb30x3x1;
             else 
                 return lsb_2(w,f,d);
         }
@@ -495,19 +505,19 @@ namespace Z0
             where W : unmanaged, ITypeNat
         {
             if(typeof(W) == typeof(N33))
-                return BitMasks.Lsb33x3;
+                return BitMasks.Lsb33x3x1;
             else if(typeof(W) == typeof(N36))
-                return BitMasks.Lsb36x3;
+                return BitMasks.Lsb36x3x1;
             else if(typeof(W) == typeof(N39))
-                return BitMasks.Lsb39x3;
+                return BitMasks.Lsb39x3x1;
             else if(typeof(W) == typeof(N41))
-                return BitMasks.Lsb41x3;
+                return BitMasks.Lsb41x3x1;
             else if(typeof(W) == typeof(N44))
-                return BitMasks.Lsb44x3;
+                return BitMasks.Lsb44x3x1;
             else if(typeof(W) == typeof(N48))
-                return BitMasks.Lsb48x3;
+                return BitMasks.Lsb48x3x1;
             else if(typeof(W) == typeof(N51))
-                return BitMasks.Lsb51x3;
+                return BitMasks.Lsb51x3x1;
             else 
                 throw unsupported<W>();                
         }

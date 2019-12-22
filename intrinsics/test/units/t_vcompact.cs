@@ -15,7 +15,7 @@ namespace Z0
         public void vcompact2_128x16x2_128x8_outline()
         {
             var w = n128;
-            var cellmax = z8max;
+            var cellmax = u8max;
             
             var vsmax = CpuVector.broadcast(w, (ushort)cellmax);
             var vtmax = CpuVector.broadcast(w,cellmax);
@@ -31,7 +31,7 @@ namespace Z0
         public void vcompact2_256x16x2_256x8_outline()
         {
             var w = n256;
-            var cellmax = z8max;
+            var cellmax = u8max;
             
             var vsmax = CpuVector.broadcast(w, (ushort)cellmax);
             var vtmax = CpuVector.broadcast(w,cellmax);
@@ -47,7 +47,7 @@ namespace Z0
         public void vcompact2_2x128x32u_128x16u_outline()
         {   
             var w = n128;
-            var cellmax = z16max;
+            var cellmax = u16max;
             
             var vsmax = CpuVector.broadcast(w, (uint)cellmax);
             var vtmax = CpuVector.broadcast(w,cellmax);
@@ -63,7 +63,7 @@ namespace Z0
         public void vcompact2_2x256x32u_256x16u_outline()
         {   
             var w = n256;
-            var cellmax = z16max;
+            var cellmax = u16max;
 
             var vsmax = CpuVector.broadcast(w,(uint)cellmax);
             var vtmax = CpuVector.broadcast(w,cellmax);
@@ -146,14 +146,27 @@ namespace Z0
 
         public void vpackus_128x16x2_128x8_outline()
         {
-            var x = CpuVector.parts(n128,0,1,2,4,4,5,6,7);
-            var y = CpuVector.parts(n128,8,9,10,11,12,13,14,15);
-            var z = dinx.vpackus(x,y);
-            var e = CpuVector.parts(n128,0,1,2,4,4,5,6,7,8,9,10,11,12,13,14,15);
-            Claim.eq(e,z);
+            void case1()
+            {
+                var x = CpuVector.parts(n128,0,1,2,4,4,5,6,7);
+                var y = CpuVector.parts(n128,8,9,10,11,12,13,14,15);
+                var z = dinx.vpackus(x,y);
+                var e = CpuVector.parts(n128,0,1,2,4,4,5,6,7,8,9,10,11,12,13,14,15);
+                Claim.eq(e,z);
+            }
+
+            void case2()
+            {
+                var x = CpuVector.parts(n128,127,0,127,0,127,0,127,0);
+                var y = dinx.vpackus2(x,x);
+                Trace(y.Format());
+            }        
+            case1();
+            case2();
             
         }
 
+        
 
 
     }

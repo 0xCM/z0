@@ -11,7 +11,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using static zfunc;
-    using static nfunc;
 
     partial class BlockExtend    
     {
@@ -183,20 +182,6 @@ namespace Z0
             return new Block512<T>(dst);
         }
 
-        /// <summary>
-        /// Clones a natural data block
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static NatBlock<N,T> Replicate<N,T>(this in NatBlock<N,T> src)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            Span<T> dst = new T[natval<N>()];
-            src.CopyTo(dst);
-            return new NatBlock<N,T>(dst);
-        }
 
     }
 }

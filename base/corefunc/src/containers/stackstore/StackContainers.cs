@@ -21,6 +21,29 @@ namespace Z0
             
         }
 
+        /// <summary>
+        /// Stack-allocated storage that covers 128 bits with 8 16-bit segments
+        /// </summary>
+        public ref struct Stack128x16
+        {
+            internal ushort X0;
+
+            ushort X1;        
+
+            ushort X2;        
+
+            ushort X3;
+
+            ushort X4;        
+
+            ushort X5;
+
+            ushort X6;        
+
+            ushort X7;        
+
+        }
+
         public ref struct Stack256
         {
             internal Stack128 X0;

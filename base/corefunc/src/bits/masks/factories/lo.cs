@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong lo<N>(N n = default)
             where N : unmanaged, ITypeNat
-                => NatMath.pow2m1<N>();
+                => NatMath2.pow2m1<N>();
 
         /// <summary>
         /// Produces a sequence of N enabled bits, starting from index 0 and extending to index n - 1

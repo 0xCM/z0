@@ -25,10 +25,10 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static NatBlock<N,T> NatSpan<N,T>(this IPolyrand random, N n = default, Interval<T>? domain = null, Func<T,bool> filter = null)
+        public static NatSpan<N,T> NatSpan<N,T>(this IPolyrand random, N n = default, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged  
             where N : unmanaged, ITypeNat
-                => DataBlocks.checkedload(random.Span<T>((int)n.NatValue, domain, filter),n);                                    
+                => Z0.NatSpan.checkedload(random.Span<T>((int)n.NatValue, domain, filter),n);                                    
 
         /// <summary>
         /// Allocates a table span of natural dimensions and populates the cells with random values

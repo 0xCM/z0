@@ -72,17 +72,5 @@ namespace Z0
         public static Block512<T> alloc<T>(N512 w, int blocks, T t = default)
             where T : unmanaged        
                 => new Block512<T>(new T[blocks * blocklen<T>(w)]);
-
-        /// <summary>
-        /// Allocates a block of natural cell count
-        /// </summary>
-        /// <param name="n">The total number of cells in the block</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="N"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        public static NatBlock<N,T> natalloc<N,T>(N n = default, T t = default) 
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => new NatBlock<N,T>(new T[natval<N>()]);
     }
 }

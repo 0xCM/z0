@@ -109,13 +109,5 @@ namespace Z0
             return new Block512<T>(src);
         }
 
-        [MethodImpl(Inline)]   
-        public static NatBlock<N,T> natparts<N,T>(N n, params T[] cells) 
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            Span<T> src = cells;
-            return checkedload(src,n);
-        }
     }
 }

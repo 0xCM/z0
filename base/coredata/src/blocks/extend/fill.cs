@@ -43,11 +43,6 @@ namespace Z0
             where T : unmanaged
                 => broadcast(data, dst);
 
-        [MethodImpl(Inline)]
-        public static void Fill<N,T>(this in NatBlock<N,T> dst, T data)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => broadcast(data, dst);
 
     }
 

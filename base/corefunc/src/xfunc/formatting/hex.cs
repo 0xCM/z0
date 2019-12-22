@@ -513,7 +513,7 @@ namespace Z0
         /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatHex<N,T>(this NatBlock<N,T> src, bool bracket = false, char? sep = null, bool specifier = false)
+        public static string FormatHex<N,T>(this NatSpan<N,T> src, bool bracket = false, char? sep = null, bool specifier = false)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.Data.FormatHex(bracket, sep, specifier);

@@ -377,10 +377,10 @@ namespace Z0
         /// <summary>
         /// Renders the content as a natural block of bits
         /// </summary>
-        public NatBlock<N,bit> ToNatBits<N>(N n = default)
+        public NatSpan<N,bit> ToNatBits<N>(N n = default)
             where N : unmanaged, ITypeNat
         {
-            var dst = DataBlocks.natalloc<N,bit>();
+            var dst = NatSpan.alloc<N,bit>();
             for(var i=0; i< data.Length; i++)
                 dst[i] = (bit)data[i];
             return dst;

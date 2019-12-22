@@ -124,7 +124,7 @@ namespace Z0
                 => RowVector256<N, T>.Load(src);
 
         [MethodImpl(Inline)]
-        public static RowVector256<N,T> blockload<N,T>(NatBlock<N,T> src)
+        public static RowVector256<N,T> blockload<N,T>(NatSpan<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src;

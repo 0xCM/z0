@@ -7,10 +7,7 @@ namespace Z0
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Collections.Concurrent;
     using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
@@ -25,27 +22,6 @@ namespace Z0
     {
         public static ILookup<K,V> ToLookup<K,V>(this IEnumerable<(K key,V value)> kvp)
             => Lookup.Define(kvp.ToArray());
-
-    }
-    public interface IReadOnlyLookup<K,V>
-    {
-        V Find(K key);
-
-        bool Find(K key, out V value);
-
-        V this[K key] {get;}
-
-        Option<V> TryFind(K key);
-        
-    }
-    
-    public interface ILookup<K,V> : IReadOnlyLookup<K,V>
-    {
-        void Add(K key, V value);
-        
-        bool TryAdd(K key, V value);
-        
-        void AddOrReplace(K key, V value);
     }
 
     class Lookup<K, V> : ILookup<K, V>

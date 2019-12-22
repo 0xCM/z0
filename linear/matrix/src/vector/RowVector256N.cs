@@ -39,8 +39,8 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">THe component type</typeparam>
         [MethodImpl(Inline)]   
-        public static implicit operator NatBlock<N,T>(RowVector256<N,T> src)
-            => DataBlocks.natload<N,T>(src.data);
+        public static implicit operator NatSpan<N,T>(RowVector256<N,T> src)
+            => NatSpan.load<N,T>(src.data);
 
         /// <summary>
         /// Slice => Vec
@@ -49,7 +49,7 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">THe component type</typeparam>
         [MethodImpl(Inline)]   
-        public static implicit operator RowVector256<N,T>(NatBlock<N,T> src)
+        public static implicit operator RowVector256<N,T>(NatSpan<N,T> src)
             => new RowVector256<N,T>(src);
 
         [MethodImpl(Inline)]   
@@ -94,7 +94,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal RowVector256(NatBlock<N,T> src)
+        internal RowVector256(NatSpan<N,T> src)
         {
             data = DataBlocks.safeload(n256,src);
         }

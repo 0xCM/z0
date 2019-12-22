@@ -18,6 +18,15 @@ namespace Z0
     partial class bgoc
     {        
 
+        public static Vector256<byte> part63x3(ulong src)        
+            => Bits.part63x3(src);
+
+        public static void part63x3(ulong src, NatSpan<N21,byte> dst)            
+            => Bits.part63x3(src, dst);
+
+        public static void part63x3(ulong src, Span<byte> dst)            
+            => Bits.part63x3(src, dst);
+
         public static Vector256<byte> bitgrid_vector256(BitGrid<byte> src, int block)        
             => BitGrid.vector(src, block,n256);
             

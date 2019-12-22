@@ -29,17 +29,17 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var dst = DataBlocks.natalloc<N, T>();
+            var dst = Z0.NatSpan.alloc<N, T>();
             for(var i=0; i<dst.Length; i++)
                 dst[i] = Contractors.Contract(src[i],max[i]);
             return dst;
         }
 
-         public static NatBlock<N,T> Contract<N,T>(this NatBlock<N,T> src, NatBlock<N,T> max)
+         public static NatSpan<N,T> Contract<N,T>(this NatSpan<N,T> src, NatSpan<N,T> max)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var dst = DataBlocks.natalloc<N, T>();
+            var dst = Z0.NatSpan.alloc<N, T>();
             for(var i=0; i<dst.Length; i++)
                 dst[i] = Contractors.Contract(src[i],max[i]);
             return dst;

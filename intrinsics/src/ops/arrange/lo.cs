@@ -132,6 +132,14 @@ namespace Z0
             return ref dst;
         }
 
+        /// <summary>
+        /// Creates a scalar vector from the upper 64 bits of the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<ulong> vlo(Vector128<ulong> src)
+            =>  vscalar(n128,src.GetElement(0));
+
     }
 
 }

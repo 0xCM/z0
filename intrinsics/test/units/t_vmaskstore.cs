@@ -56,20 +56,22 @@ namespace Z0
             var x = Random.CpuVector(n256,z8);
             var storage = DataBlocks.single(n256,z8);
             var stored = CpuVector.zero(n256,z8);
+            var mask = CpuVector.zero(n256,z8);
 
             // Store every component
             storage.Clear();
-            var mask1 = CpuVector.msbmask(n256, n8, n1, z8);
-            ginx.vmaskstore8(x,mask1,storage);
+            mask = CpuVector.msbmask(n256, n8, n1, z8);
+            ginx.vmaskstore8(x,mask,storage);
             stored = storage.LoadVector();
             Claim.eq(x,stored);
 
             // Store odd components
             storage.Clear();
-            var oddMask = CpuVector.msbmask(n256, n16, n1, z8);
-            ginx.vmaskstore8(x,oddMask,storage);
+            mask = CpuVector.msbmask(n256, n16, n1, z8);
+            ginx.vmaskstore8(x,mask,storage);
             stored = storage.LoadVector();
-                        
+
+
             for(var i=0; i< count; i++)
                 if(odd(i)) 
                     Claim.eq(vcell(x,i), storage[i]);
@@ -78,8 +80,8 @@ namespace Z0
 
             // Store even components
             storage.Clear();
-            var evenMask = ginx.vbsrl(CpuVector.msbmask(n256,n16,n1,z8),1);
-            ginx.vmaskstore8(x, evenMask, storage);
+            mask = ginx.vbsrl(CpuVector.msbmask(n256,n16,n1,z8),1);
+            ginx.vmaskstore8(x, mask, storage);
             stored = storage.LoadVector();
 
 
@@ -90,18 +92,12 @@ namespace Z0
                     Claim.eq(z8, storage[i]);
 
 
-            //Overlay even/odd components = store every component           
-            storage.Clear();
-            ginx.vmaskstore8(x, oddMask, storage);
-            ginx.vmaskstore8(x, evenMask, storage);
-            stored = storage.LoadVector();
-            Claim.eq(x,stored);
 
 
             void report()
             {
                 Trace("input", x.Format());            
-                Trace("mask", evenMask.FormatBits());
+                Trace("mask", mask.FormatBits());
                 Trace("stored", stored.Format());
             }
 

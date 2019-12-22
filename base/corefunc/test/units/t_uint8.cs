@@ -21,8 +21,8 @@ namespace Z0
                 var a = Random.Next<byte>();
                 var b = Random.Next<byte>();
 
-                UInt8 va = a;
-                UInt8 vb = b;
+                uint8_t va = a;
+                uint8_t vb = b;
 
                 Claim.eq(math.add(a,b), va + vb);
                 Claim.eq(math.sub(a,b), va - vb);
@@ -42,7 +42,7 @@ namespace Z0
             }
 
             var c = byte.MinValue;
-            var d = UInt8.Zero;
+            var d = uint8_t.zero;
             
             for(var i=0; i<300; i++)
             {

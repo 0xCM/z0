@@ -65,7 +65,7 @@ namespace Z0
         /// </summary>
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
-        public static NatBlock<N,bit> NatBits<N>(this IPolyrand random, N len = default)
+        public static NatSpan<N,bit> NatBits<N>(this IPolyrand random, N len = default)
             where N : unmanaged, ITypeNat
                 => random.TakeBits((int)len.NatValue);
 

@@ -27,7 +27,7 @@ namespace Z0
         {
             var w = n256;
             var x = CpuVector.increments(w, z8);
-            var y = CpuVector.decrements(w, z8max);
+            var y = CpuVector.decrements(w, u8max);
             var spec = v8u(CpuVector.broadcast(w, (ushort)((ushort)Pow2.T07 << 8)));
             var z = ginx.vblend(x,y,spec);            
         }        
@@ -35,21 +35,21 @@ namespace Z0
         public void vblend_128x16u_outline()
         {
             var w = n128;
-            var alt = (uint)BitMasks.Msb16x8 << 16; 
+            var alt = (uint)BitMasks.Msb16x8x1 << 16; 
             dinx.vcover(v16u(CpuVector.broadcast(w,alt)), out Vector128<byte> spec);
             var x = CpuVector.increments(w,z16);
-            var y = CpuVector.decrements(w,z16max);
+            var y = CpuVector.decrements(w,u16max);
             var z = ginx.vblend(x,y,spec);
         }
 
         public void vblend_256x16u_outline()
         {
             var w = n256;
-            var altOdd = (uint)BitMasks.Msb16x8 << 16; 
-            var altEven = (uint)BitMasks.Msb16x8; 
+            var altOdd = (uint)BitMasks.Msb16x8x1 << 16; 
+            var altEven = (uint)BitMasks.Msb16x8x1; 
             dinx.vcover(v16u(CpuVector.broadcast(w,altOdd)), out Vector256<byte> spec);
             var x = CpuVector.increments(w,z16);
-            var y = CpuVector.decrements(w,z16max);
+            var y = CpuVector.decrements(w,u16max);
             var z = ginx.vblend(x,y,spec);
 
         }

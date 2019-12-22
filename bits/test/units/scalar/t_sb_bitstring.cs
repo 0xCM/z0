@@ -312,17 +312,6 @@ namespace Z0
         protected void bs_seq_check<T>()
             where T : unmanaged
         {
-            void case1()
-            {
-                var src = Random.Span<T>(SampleSize);
-                for(var i=0; i<src.Length; i++)
-                {
-                    var x0 = src[i];
-                    var x1 = gbits.bitseq(x0);                
-                    gbits.packseq(x1, out T x2);
-                    Claim.eq(x0, x2);
-                }
-            }
 
             void case2()
             {
@@ -339,8 +328,6 @@ namespace Z0
                 }
 
             }
-            
-            case1();
             
             case2();
 

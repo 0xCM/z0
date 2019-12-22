@@ -32,10 +32,10 @@ namespace Z0
         /// <typeparam name="N">The target type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]        
-        public static NatBlock<N,T> NatLoad<N,T>(this Span<T> src, N n = default)
+        public static NatSpan<N,T> NatLoad<N,T>(this Span<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => DataBlocks.checkedload(src,n);
+                => NatSpan.checkedload(src,n);
 
     }
 }

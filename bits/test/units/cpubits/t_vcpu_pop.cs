@@ -32,7 +32,7 @@ namespace Z0
                 pop3 += Bits.pop(src[i],0,0);
             }
 
-            var pop1 = CpuBits.vpop(x0,x1,x2);
+            var pop1 = Bits.vpop(x0,x1,x2);
             Claim.eq(pop2,pop3);
             Claim.eq(pop1,pop3);
         }
@@ -56,7 +56,7 @@ namespace Z0
                 pop3 += Bits.pop(src[i],0,0);
             }
 
-            var pop1 = CpuBits.vpop(x0,x1,x2);
+            var pop1 = Bits.vpop(x0,x1,x2);
             Claim.eq(pop2,pop3);
             Claim.eq(pop1,pop3);
         }
@@ -80,7 +80,7 @@ namespace Z0
                 var z = Random.CpuVector<ulong>(n);
                 counter.Start();
                 for(var i=0; i<SampleSize; i++)
-                    total += CpuBits.vpop(x,y,z);
+                    total += Bits.vpop(x,y,z);
                 counter.Stop();
                 opcount += (32 * 3 * SampleSize);
             }
@@ -98,7 +98,7 @@ namespace Z0
                 var z = Random.CpuVector<ulong>(n);
                 counter.Start();
                 for(var i=0; i<SampleSize; i++)
-                    total += CpuBits.vpop(x,y,z);
+                    total += Bits.vpop(x,y,z);
                 counter.Stop();
                 opcount += (16 * 3 * SampleSize);
             }

@@ -52,16 +52,16 @@ namespace Z0
             const byte D = 0b11;
 
             var dABCD = Perm4L.ABCD.ToDigits();
-            Claim.eq(DataBlocks.natparts(n4, A, B, C, D), dABCD);
+            Claim.eq(NatSpan.parts(n4, A, B, C, D), dABCD);
 
             var dDCBA = Perm4L.DCBA.ToDigits();
-            Claim.eq(DataBlocks.natparts(n4, D, C, B, A), dDCBA);
+            Claim.eq(NatSpan.parts(n4, D, C, B, A), dDCBA);
 
             var dACBD = Perm4L.ACBD.ToDigits();
-            Claim.eq(DataBlocks.natparts(n4, A, C, B, D), dACBD);
+            Claim.eq(NatSpan.parts(n4, A, C, B, D), dACBD);
 
             var dCBDA = Perm4L.CBDA.ToDigits();
-            Claim.eq(DataBlocks.natparts(n4, C, B, D, A), dCBDA);
+            Claim.eq(NatSpan.parts(n4, C, B, D, A), dCBDA);
         }
 
         public void vpermlo_4x16_outline()

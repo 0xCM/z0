@@ -5,11 +5,28 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     
     using static zfunc;
 
     public class t_sb_pop : t_sb<t_sb_pop>
     {                
+        static Span<byte> unpack8x1(ReadOnlySpan<byte> src, Span<byte> dst)
+        {            
+            var offset = 0;
+            for(var i = 0; i<src.Length; i++, offset += 8)
+                BitStore.select(src[i]).CopyTo(dst.Slice(offset));
+            return dst;
+        }
+
+        [MethodImpl(Inline)]        
+        public static Span<byte> Unpack(Span<byte> src)
+            => unpack8x1(src, new byte[src.Length*8]);
+
+        [MethodImpl(Inline)]        
+        public static void Unpack(Span<byte> src, Span<byte> dst)
+            => unpack8x1(src, dst);
+
         public void sb_pop_popcnt()
         {
             var buffer16x8 = DataBlocks.single<byte>(n128);
@@ -29,14 +46,14 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)
             {
                 var y = BitConverter.GetBytes(Random.Next<ulong>()).ToSpan();
-                y.Unpack(buffer64x8);
+                Unpack(y,buffer64x8);
                 Claim.eq(buffer64x8.Data.PopCount(), y.PopCount());
             }
 
             var bits5 = Random.Span<byte>(5);
             var bits5x64 = Bytes.read<ulong>(bits5);
             var bc5x64PC = Bits.pop(bits5x64);
-            var bits5up = bits5.Unpack();
+            var bits5up = Unpack(bits5);
             var bits5upPC = bits5up.PopCount();
             var bits5PC = bits5.PopCount();
 
@@ -45,7 +62,7 @@ namespace Z0
 
             var bits279 = Random.Span<byte>(279);
             var bits279PC = bits279.PopCount();
-            var bits279upPC = bits279.Unpack().PopCount();
+            var bits279upPC = Unpack(bits279).PopCount();
             Claim.eq(bits279upPC, bits279PC);
         }
     }

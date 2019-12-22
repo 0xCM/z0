@@ -23,9 +23,9 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsbmask<T>(N128 w, T t = default)
+        public static Vector128<T> lsbmask<T>(N128 w, N1 f, N1 d, T t = default)
             where T : unmanaged
-                => broadcast(w,BitMask.lsb<T>());
+                => broadcast(w,BitMask.lsb<T>(f,d,t));
 
         /// <summary>
         /// [01]    
@@ -173,7 +173,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> msbmask<T>(N128 w, T t = default)
             where T : unmanaged
-                => broadcast(w,BitMask.msb<T>());
+                => broadcast(w,BitMask.msb(n1,n1,t));
+
 
         /// <summary>
         /// [01]    
@@ -217,7 +218,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> msbmask<T>(N128 w, N16 f, N1 d, T t = default)
             where T : unmanaged
-                => vgeneric<T>(broadcast(w,BitMask.msb64(f,d)));
+                => vgeneric<T>(broadcast(w,BitMask.msb(n64,f,d)));
 
         /// <summary>
         /// [11000000]
@@ -230,7 +231,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> msbmask<T>(N128 w, N8 f, N2 d, T t = default)
             where T : unmanaged
-                => broadcast(w,BitMask.msb<T>(f,d));
+                => broadcast(w,BitMask.msb(f,d,t));
 
         /// <summary>
         /// [11100000]
@@ -316,9 +317,9 @@ namespace Z0
         /// <param name="n">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsbmask<T>(N256 w, T t = default)
+        public static Vector256<T> lsbmask<T>(N256 w, N1 f, N1 d, T t = default)
             where T : unmanaged
-                => broadcast(w,BitMask.lsb<T>());
+                => broadcast(w,BitMask.lsb(f,d,t));
 
         /// <summary>
         /// [01]    
@@ -341,7 +342,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> lsbmask<T>(N256 w, N4 f, N1 d,T t = default)
             where T : unmanaged
-                => broadcast(w,BitMask.lsb<T>(f));
+                => broadcast(w,BitMask.lsb<T>(f,d,t));
 
         /// <summary>
         /// [00000001]
@@ -352,7 +353,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> lsbmask<T>(N256 w, N8 f, N1 d,T t = default)
             where T : unmanaged
-                => broadcast(w,BitMask.lsb<T>(f));
+                => broadcast(w,BitMask.lsb<T>(f,d,t));
 
         /// <summary>
         /// [00000000 00000001]
@@ -471,7 +472,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> msbmask<T>(N256 w, T t = default)
             where T : unmanaged
-                => broadcast(w,BitMask.msb<T>());
+                => broadcast(w,BitMask.msb(n1,n1,t));
 
         /// <summary>
         /// [01    
@@ -523,7 +524,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> msbmask<T>(N256 w, N16 f, N1 d, T t = default)
             where T : unmanaged
-                => vgeneric<T>(broadcast(w,BitMask.msb64(f,d)));
+                => vgeneric<T>(broadcast(w,BitMask.msb(n64,f,d)));
 
         /// <summary>
         /// [11000000]
