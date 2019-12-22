@@ -10,6 +10,18 @@ namespace Z0
 
     public class t_bitspan : t_sinx<t_bitspan>
     {
+
+        public void bitspan_format_direction()
+        {
+            byte src = 1;
+            var bitspan = BitPack.bitspan(src);
+            var fmt = bitspan.Format();
+            Claim.eq(8,fmt.Length);
+            Claim.eq(bit.One, fmt[7]);
+
+        }
+
+
         public void bitspan_buffered_8()
         {            
             var bytecount = SampleSize;
@@ -33,6 +45,7 @@ namespace Z0
             var src = BitMask.even(n2, n1, z16);
             var bitspan = BitPack.bitspan(src);
             var format = bitspan.Format();
+            Trace(format);
 
             Claim.eq(length, bitspan.Length);
             for(int i=0, j= length - 1; i< length; i++, j--)

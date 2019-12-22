@@ -92,9 +92,6 @@ namespace Z0
             Span<T> src = cells;
             return checkedload(src,n);
         }
-
-
-
     }
 
 }

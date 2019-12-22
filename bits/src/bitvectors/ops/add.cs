@@ -83,7 +83,7 @@ namespace Z0
         {
             var sum = dinx.vadd(v64u(x.data), v64u(y.data));            
             bit carry = x.Lo > vcell(sum,0);
-            return  As.vgeneric<T>(dinx.vadd(sum, dinx.vbroadcast(n128, (ulong)carry)));
+            return  As.vgeneric<T>(dinx.vadd(sum, CpuVector.broadcast(n128, (ulong)carry)));
         }
 
     }

@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static zfunc;    
+    using static dinx;
 
     partial class BitPack
     {
@@ -79,7 +80,7 @@ namespace Z0
         {
             var m = BitMask.lsb<ulong>(n8,n1);
             ref var dst = ref head(unpacked);
-            seek64(ref dst, 0) = dinx.scatter((ulong)(byte)packed, m);
+            seek64(ref dst, 0) = scatter((ulong)(byte)packed, m);
         }
 
         /// <summary>
@@ -92,8 +93,8 @@ namespace Z0
         {
             var m = BitMask.lsb<ulong>(n8,n1);
             ref var dst = ref head(unpacked);
-            seek64(ref dst, 0) = dinx.scatter((ulong)(byte)packed, m);
-            seek64(ref dst, 1) = dinx.scatter((ulong)((byte)(packed >> 8)), m);
+            seek64(ref dst, 0) = scatter((ulong)(byte)packed, m);
+            seek64(ref dst, 1) = scatter((ulong)((byte)(packed >> 8)), m);
         }
 
         /// <summary>
@@ -106,10 +107,10 @@ namespace Z0
         {
             var m = BitMask.lsb<ulong>(n8,n1);
             ref var dst = ref head(unpacked);
-            seek64(ref dst, 0) = dinx.scatter((ulong)(byte)packed, m);
-            seek64(ref dst, 1) = dinx.scatter((ulong)((byte)(packed >> 8)), m);
-            seek64(ref dst, 2) = dinx.scatter((ulong)((byte)(packed >> 16)), m);
-            seek64(ref dst, 3) = dinx.scatter((ulong)((byte)(packed >> 24)), m);
+            seek64(ref dst, 0) = scatter((ulong)(byte)packed, m);
+            seek64(ref dst, 1) = scatter((ulong)((byte)(packed >> 8)), m);
+            seek64(ref dst, 2) = scatter((ulong)((byte)(packed >> 16)), m);
+            seek64(ref dst, 3) = scatter((ulong)((byte)(packed >> 24)), m);
         }
 
         /// <summary>
@@ -142,7 +143,7 @@ namespace Z0
         static void unpack(byte src, in Block64<byte> buffer, Span<uint> target)
         {
             unpack(src, buffer);             
-            dinx.vloadblock(buffer,n256).StoreTo(ref head(target));
+            CpuVector.loadblock(buffer,n256).StoreTo(ref head(target));
         }
 
         [MethodImpl(Inline)]
@@ -159,7 +160,7 @@ namespace Z0
         static void unpackblock(int block, in byte src, in Block64<byte> buffer, in Block256<uint> target)
         {
             unpack(skip(in src, block), buffer); 
-            dinx.vloadblock(buffer,n256).StoreTo(ref target.BlockRef(block));
+            CpuVector.loadblock(buffer,n256).StoreTo(ref target.BlockRef(block));
         }
 
         [MethodImpl(Inline)]
@@ -168,7 +169,7 @@ namespace Z0
             for(var block=0; block < count; block++)
             {
                 unpack(skip(in src, block), buffer); 
-                dinx.vloadblock(buffer,n256).StoreTo(ref target.BlockRef(block));
+                CpuVector.loadblock(buffer,n256).StoreTo(ref target.BlockRef(block));
             }
         }
     }

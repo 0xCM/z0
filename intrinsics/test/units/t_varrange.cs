@@ -42,8 +42,8 @@ namespace Z0
         public void vreverse_128x8u_outline()
         {
             var n = n128;
-            var v1 = VData.increments<byte>(n);
-            var v2 = VData.decrements<byte>(n);
+            var v1 = CpuVector.increments<byte>(n);
+            var v2 = CpuVector.decrements<byte>(n);
             var v3 = dinx.vreverse(v1);
             Claim.eq(v2,v3);
         }

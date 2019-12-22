@@ -132,7 +132,6 @@ partial class zfunc
         dst = Unsafe.As<S,T>(ref src);
         return ref dst;
     }
-
     
     [MethodImpl(Inline)]
     public static ReadOnlySpan<T> cast<S,T>(ReadOnlySpan<S> src)                

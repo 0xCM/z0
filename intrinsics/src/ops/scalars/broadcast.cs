@@ -16,35 +16,35 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref ushort broadcast(byte src, out ushort dst)
         {
-            dst = vhead<byte,ushort>(dinx.vbroadcast(n128, src));
+            dst = vhead<byte,ushort>(CpuVector.broadcast(n128, src));
             return ref dst;
         }
 
         [MethodImpl(Inline)]
         public static ref uint broadcast(byte src, out uint dst)
         {
-            dst = vhead<byte,uint>(dinx.vbroadcast(n128, src));
+            dst = vhead<byte,uint>(CpuVector.broadcast(n128, src));
             return ref dst;
         }
 
         [MethodImpl(Inline)]
         public static ref ulong broadcast(byte src, out ulong dst)
         {
-            dst = vhead<byte,ulong>(dinx.vbroadcast(n128, src));
+            dst = vhead<byte,ulong>(CpuVector.broadcast(n128, src));
             return ref dst;
         }
 
         [MethodImpl(Inline)]
         public static ref uint broadcast(ushort src, out uint dst)
         {
-            dst = vhead<ushort,uint>(dinx.vbroadcast(n128, src));
+            dst = vhead<ushort,uint>(CpuVector.broadcast(n128, src));
             return ref dst;
         }
 
         [MethodImpl(Inline)]
         public static ref ulong broadcast(ushort src, out ulong dst)
         {
-            dst = vhead<ushort,ulong>(dinx.vbroadcast(n128, src));
+            dst = vhead<ushort,ulong>(CpuVector.broadcast(n128, src));
             return ref dst;
         }
 
@@ -52,7 +52,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref ulong broadcast(uint src, out ulong dst)
         {
-            dst = vhead<uint,ulong>(dinx.vbroadcast(n128, src));
+            dst = vhead<uint,ulong>(CpuVector.broadcast(n128, src));
             return ref dst;
         }
 

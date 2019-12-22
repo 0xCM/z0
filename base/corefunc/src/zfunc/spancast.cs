@@ -21,6 +21,17 @@ partial class zfunc
         where T : unmanaged
             => MemoryMarshal.AsBytes(src);
 
+    /// <summary>
+    /// Loads a bytespan of natural length from a generic source span
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The source value type</typeparam>
+    [MethodImpl(Inline)]
+    public static NatSpan<N,byte> bytes<N,T>(Span<T> src, N n = default)
+        where T : unmanaged
+        where N : unmanaged, ITypeNat
+            => NatSpan.checkedload(MemoryMarshal.AsBytes(src),n);
+
     [MethodImpl(Inline)]
     public static ReadOnlySpan<sbyte> int8<T>(ReadOnlySpan<T> src)
         where T : unmanaged

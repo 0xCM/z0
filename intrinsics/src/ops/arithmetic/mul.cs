@@ -133,8 +133,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<ushort> vmul(Vector256<byte> x, Vector256<byte> y)
         {
-            (var x1, var x2) = vinflate(x,n256,z16);
-            (var y1, var y2) = vinflate(y,n256,z16);
+            (var x1, var x2) = vinflate(x,n512,z16);
+            (var y1, var y2) = vinflate(y,n512,z16);
             
             return (vmullo(x1,y1), vmullo(x2,y2));
         }
@@ -147,9 +147,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<uint> vmul(Vector256<ushort> x, Vector256<ushort> y)
         {
-            vinflate(x, out var x1, out var x2);
-            vinflate(y, out var y1, out var y2);
+            (var x1, var x2) = vinflate(x, n512, z32);
+            (var y1, var y2) = vinflate(y, n512, z32);
             return(vmullo(x1,y1), vmullo(x2,y2));
+
+            // vinflate(x, out var x1, out var x2);
+            // vinflate(y, out var y1, out var y2);
+            // return(vmullo(x1,y1), vmullo(x2,y2));
         }
 
         /// <summary>
@@ -160,9 +164,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<int> vmul(Vector256<short> x, Vector256<short> y)
         {
-            vinflate(x, out var x1, out var x2);
-            vinflate(y, out var y1, out var y2);
+            (var x1, var x2) = vinflate(x, n512, z32i);
+            (var y1, var y2) = vinflate(y, n512, z32i);
             return(vmullo(x1,y1), vmullo(x2,y2));
+
+            // vinflate(x, out var x1, out var x2);
+            // vinflate(y, out var y1, out var y2);
+            //return(vmullo(x1,y1), vmullo(x2,y2));
         }
 
         /// <summary>
@@ -191,8 +199,6 @@ namespace Z0
             return (lo,hi);
         }
 
-
-
         /// <summary>
         /// Multiplies two two 256-bit/u64 vectors to yield a 256-bit/u64 vector; only provides reasonable
         /// results if there's no 64-bit overflow
@@ -202,7 +208,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)    
         {
-            var loMask = vbroadcast(n256, 0x00000000fffffffful);                
+            var loMask = CpuVector.broadcast(n256, 0x00000000fffffffful);                
             var xh = v32u(vsrl(x, 32));
             var yl = v32u(vand(y, loMask));
             return vadd(

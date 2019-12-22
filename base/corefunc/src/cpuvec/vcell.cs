@@ -78,8 +78,7 @@ partial class zfunc
     public static T vcell<T>(Vector256<T> src, int index)
         where T : unmanaged
             => src.GetElement(index);
-
-
+            
     /// <summary>
     /// Sets an index-identified component to a specified value
     /// </summary>

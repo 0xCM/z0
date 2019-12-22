@@ -64,6 +64,7 @@ partial class zfunc
     {
         vstore(src, ref head(dst));
         return dst;
+        
     }
 
     [MethodImpl(Inline)]

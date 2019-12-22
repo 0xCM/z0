@@ -18,7 +18,7 @@ namespace Z0
     {
         /// <summary>
         /// int _mm_testz_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
-        /// Returns true if all source bits identified by a mask are off
+        /// Returns true if all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -28,7 +28,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm_testz_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
-        /// Returns true if all source bits identified by a mask are off
+        /// Returns true if all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -38,7 +38,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm_testz_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
-        /// Returns true if all source bits identified by a mask are off
+        /// Returns true if all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -48,7 +48,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm_testz_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
-        /// Returns true if all source bits identified by a mask are off
+        /// Returns true if all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -58,7 +58,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm_testz_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
-        /// Returns true if all source bits identified by a mask are off
+        /// Returns true if all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -68,7 +68,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm_testz_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
-        /// Returns true if all source bits identified by a mask are off
+        /// Returns true if all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -78,7 +78,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm_testz_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
-        /// Returns true if all source bits identified by a mask are off
+        /// Returns true if all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -88,7 +88,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm_testz_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
-        /// Returns true if all source bits identified by a mask are off
+        /// Returns true if all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -98,7 +98,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm256_testz_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256
-        /// Returns true if all source bits identified by a mask are off
+        /// Returns true if all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -108,7 +108,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm256_testz_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256
-        /// Returns true if all source bits identified by a mask are off
+        /// Returns true if all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -118,7 +118,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm256_testz_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256
-        /// Returns true if all source bits identified by a mask are off
+        /// Returns true if all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -128,7 +128,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm256_testz_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256
-        /// Returns true if all source bits identified by a mask are off
+        /// Returns true if all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -138,7 +138,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm256_testz_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256
-        /// Returns true if all source bits identified by a mask are off
+        /// Returns true if all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -148,7 +148,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm256_testz_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256
-        /// Returns true if all source bits identified by a mask are off
+        /// Returns true if all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -158,7 +158,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm256_testz_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256
-        /// Returns true if all source bits identified by a mask are off
+        /// Returns true if all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -168,7 +168,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm256_testz_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256
-        /// Returns true if all source bits identified by a mask are off
+        /// Returns true if all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>

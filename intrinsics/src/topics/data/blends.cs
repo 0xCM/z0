@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="odd">Whether to select odd or even components</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<byte> blend<T>(N256 n, bit odd)
+        public static Vector256<byte> blendspec<T>(N256 n, bit odd)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))   
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="odd">Whether to select odd or even components</param>
         /// <typeparam name="N">The component width type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<byte> blend<N>(N256 n, bit odd, N w = default)
+        public static Vector256<byte> blendspec<N>(N256 n, bit odd, N w = default)
             where N : unmanaged, ITypeNat
         {
             if(typeof(N) == typeof(N8))   

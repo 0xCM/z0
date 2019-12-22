@@ -91,5 +91,16 @@ namespace Z0
                 z[i] = bit.Off;
             return ref z;
         }
+
+        [MethodImpl(Inline)]
+        public static bit same(in BitSpan a, in BitSpan b)
+        {
+            if(a.Length != b.Length)
+                return false;
+            for(var i=0; i<a.Length; i++)
+                if(a[i] != b[i])
+                    return false;
+            return true;
+        }
     }
 }

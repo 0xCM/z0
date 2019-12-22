@@ -5,6 +5,8 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using static As;
 
     using static zfunc;
 
@@ -14,6 +16,214 @@ namespace Z0
         protected override int SampleSize => Pow2.T04;
 
         protected override int CycleCount => Pow2.T03;
+
+        /// <summary>
+        /// Scatters contiguous low bits from the source across a target according to a mask
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="mask">The scatter spec</param>
+        /// <typeparam name="T">The identifiying mask</typeparam>
+        [MethodImpl(Inline)]
+        static T scatter<T>(T src, T mask)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(scatter(uint8(src), uint8(mask)));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(scatter(uint16(src), uint16(mask)));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(scatter(uint32(src), uint32(mask)));
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>(scatter(uint64(src), uint64(mask)));
+            else            
+                throw unsupported<T>();
+        }           
+
+        /// <summary>
+        /// Scatters contiguous low bits from the source across a target according to a mask
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="mask"></param>
+        /// <remark>Algorithm adapted from Arndt, Matters Computational </remark>
+        static byte scatter(byte src, byte mask)
+        {
+            var dst = (byte)0;
+            var x = (byte)1;
+            while (mask != 0)
+            {
+                byte i =  (byte)(mask & math.negate(mask));
+                mask ^= i;
+                dst += (byte)(((x & src) != 0 ? i : 0));
+                x <<= 1;
+            }
+            return dst;
+        }
+
+        /// <summary>
+        /// Scatters contiguous low bits from the source across a target according to a mask
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="mask"></param>
+        /// <remark>Algorithm adapted from Arndt, Matters Computational </remark>
+        static uint scatter(uint src, uint mask)
+        {
+            var dst = 0u;
+            var x = 1u;
+            while (mask != 0)
+            {
+                var i = mask & math.negate(mask);
+                mask ^= i;
+                dst += ((x & src) != 0 ? i : 0);
+                x <<= 1;
+            }
+            return dst;
+        }
+
+        /// <summary>
+        /// Scatters contiguous low bits from the source across a target according to a mask
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="mask"></param>
+        /// <remark>Algorithm adapted from Arndt, Matters Computational </remark>
+        static ushort scatter(ushort src, ushort mask)
+        {
+            var dst = (ushort)0;
+            var x = (ushort)1;
+            while (mask != 0)
+            {
+                ushort i =  (ushort)(mask & math.negate(mask));
+                mask ^= i;
+                dst += (ushort)(((x & src) != 0 ? i : 0));
+                x <<= 1;
+            }
+            return dst;
+        }
+
+        /// <summary>
+        /// Scatters contiguous low bits from the source across a target according to a mask
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="mask"></param>
+        /// <remark>Algorithm adapted from Arndt, Matters Computational </remark>
+        static ulong scatter(ulong src, ulong mask)
+        {
+            var dst = 0ul;
+            var x = 1ul;
+            while (mask != 0)
+            {
+                var i = mask & math.negate(mask);
+                mask ^= i;
+                dst += ((x & src) != 0 ? i : 0);
+                x <<= 1;
+            }
+            return dst;
+        }
+ 
+        /// <summary>
+        /// Collects mask-identified source bits that are deposited to contiguous low bits in a target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="mask">The scatter spec</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        static T gather<T>(T src, T mask)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(gather(uint8(src), uint8(mask)));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(gather(uint16(src), uint16(mask)));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(gather(uint32(src), uint32(mask)));
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>(gather(uint64(src), uint64(mask)));
+            else            
+                throw unsupported<T>();
+        }           
+
+        /// <summary>
+        /// Collects mask-identified source bits that are deposited to
+        /// contiguous low bits in the target
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="mask">The mask that identifies the bits to gather</param>
+        /// <remark>Algorithm adapted from Arndt, Matters Computational </remark>
+        static byte gather(byte src, byte mask)
+        {
+            var dst = (byte)0;
+            var x = (byte)1;
+            while (mask != 0)
+            {
+                byte i = (byte)(mask & math.negate(mask));
+                mask ^= i;
+                dst += (byte)((i & src) != 0 ? x : 0);
+                x <<= 1;
+            }
+            return dst;
+        }
+
+        /// <summary>
+        /// Collects mask-identified source bits that are deposited to
+        /// contiguous low bits in the target
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="mask">The mask that identifies the bits to gather</param>
+        /// <remark>Algorithm adapted from Arndt, Matters Computational </remark>
+        static ushort gather(ushort src, ushort mask)
+        {
+            var dst = (ushort)0;
+            var x = (ushort)1;
+            while (mask != 0)
+            {
+                ushort i = (ushort)(mask & math.negate(mask));
+                mask ^= i;
+                dst += (ushort)((i & src) != 0 ? x : 0);
+                x <<= 1;
+            }
+            return dst;
+        }
+
+        /// <summary>
+        /// Collects mask-identified source bits that are deposited to
+        /// contiguous low bits in the target
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="mask">The mask that identifies the bits to gather</param>
+        /// <remark>Algorithm adapted from Arndt, Matters Computational </remark>
+        static uint gather(uint src, uint mask)
+        {
+            var dst = 0u;
+            var x = 1u;
+            while (mask != 0)
+            {
+                var i = mask & math.negate(mask);
+                mask ^= i;
+                dst += ((i & src) != 0 ? x : 0);
+                x <<= 1;
+            }
+            return dst;
+        }
+
+        /// <summary>
+        /// Collects mask-identified source bits that are deposited to
+        /// contiguous low bits in the target
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="mask">The mask that identifies the bits to gather</param>
+        /// <remark>Algorithm adapted from Arndt, Matters Computational </remark>
+        static ulong gather(ulong src, ulong mask)
+        {
+            var dst = 0ul;
+            var x = 1ul;
+            while (mask != 0)
+            {
+                var i = mask & math.negate(mask);
+                mask ^= i;
+                dst += ((i & src) != 0 ? x : 0);
+                x <<= 1;
+            }
+            return dst;
+        }
 
         /// <summary>
         /// Generic scalar bit scatter check
@@ -26,11 +236,12 @@ namespace Z0
             {
                 var src = Random.Next<T>();
                 var mask = Random.Next<T>();
-                var s1 = BitRef.scatter(src,mask);
+                var s1 = scatter(src,mask);
                 var s2 = gbits.scatter(src,mask);
                 Claim.eq(s1,s2);
             }
         }
+
 
        protected void sb_gather_check<T>(T t = default)
             where T : unmanaged
@@ -39,7 +250,7 @@ namespace Z0
             {
                 var src = Random.Next<T>();
                 var mask = Random.Next<T>();
-                var s1 = BitRef.gather(src,mask);
+                var s1 = gather(src,mask);
                 var s2 = gbits.gather(src,mask);
                 Claim.eq(s1,s2);
             }

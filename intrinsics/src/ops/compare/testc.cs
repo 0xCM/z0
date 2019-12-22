@@ -20,7 +20,7 @@ namespace Z0
     {
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
-        /// Returns true if all source bits identified by a mask are on
+        /// Returns true if all mask-identified source bits are on
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
@@ -36,7 +36,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
-        /// Returns true if all source bits identified by a mask are on
+        /// Returns true if all mask-identified source bits are on
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
@@ -46,7 +46,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
-        /// Returns true if all source bits identified by a mask are on
+        /// Returns true if all mask-identified source bits are on
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
@@ -56,7 +56,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
-        /// Returns true if all source bits identified by a mask are on
+        /// Returns true if all mask-identified source bits are on
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
@@ -66,7 +66,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
-        /// Returns true if all source bits identified by a mask are on
+        /// Returns true if all mask-identified source bits are on
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
@@ -76,7 +76,7 @@ namespace Z0
         
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
-        /// Returns true if all source bits identified by a mask are on
+        /// Returns true if all mask-identified source bits are on
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
@@ -86,7 +86,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
-        /// Returns true if all source bits identified by a mask are on
+        /// Returns true if all mask-identified source bits are on
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
@@ -97,7 +97,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
-        /// Returns true if all source bits identified by a mask are on
+        /// Returns true if all mask-identified source bits are on
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
@@ -135,7 +135,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm256_testc_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256
-        /// Returns true if all source bits identified by a mask are on
+        /// Returns true if all mask-identified source bits are on
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
@@ -145,7 +145,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm256_testc_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256
-        /// Returns true if all source bits identified by a mask are on
+        /// Returns true if all mask-identified source bits are on
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
@@ -155,7 +155,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm256_testc_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256
-        /// Returns true if all source bits identified by a mask are on
+        /// Returns true if all mask-identified source bits are on
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
@@ -165,7 +165,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm256_testc_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256
-        /// Returns true if all source bits identified by a mask are on
+        /// Returns true if all mask-identified source bits are on
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
@@ -175,7 +175,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm256_testc_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256
-        /// Returns true if all source bits identified by a mask are on
+        /// Returns true if all mask-identified source bits are on
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
@@ -185,7 +185,7 @@ namespace Z0
         
         /// <summary>
         /// int _mm256_testc_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256
-        /// Returns true if all source bits identified by a mask are on
+        /// Returns true if all mask-identified source bits are on
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
@@ -195,7 +195,7 @@ namespace Z0
 
         /// <summary>
         /// int _mm256_testc_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256
-        /// Returns true if all source bits identified by a mask are on
+        /// Returns true if all mask-identified source bits are on
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
@@ -205,7 +205,7 @@ namespace Z0
 
         /// <summary>
         /// _mm256_testc_si256
-        /// Returns true if all source bits identified by a mask are on
+        /// Returns true if all mask-identified source bits are on
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
@@ -213,5 +213,4 @@ namespace Z0
         public static bit vtestc(Vector256<ulong> src, Vector256<ulong> mask)
             => TestC(src, mask);                             
     }
-
 }

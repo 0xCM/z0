@@ -64,8 +64,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit mux(ulong src, byte control)
             => BitMask.testbit(src, control);
-
     }
-
-
 }

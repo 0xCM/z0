@@ -11,6 +11,78 @@ namespace Z0
 
     public class t_bm_mul : t_bm<t_bm_mul>
     {
+        static BitMatrix8 bmm(BitMatrix8 lhs, BitMatrix8 rhs)
+        {
+            const uint n = BitMatrix8.N;
+
+            var dst = BitMatrix.alloc(n8);
+            rhs = rhs.Transpose();
+            for(var i=0; i< n; i++)
+            {
+                var row = lhs[i];
+                for(var j =0; j< n; j++)
+                {
+                    var col = rhs[j];
+                    dst[i,j] = BitVector.modprod(row,col);
+                }
+            }
+            return dst;
+        }
+        
+        public static BitMatrix16 bmm(BitMatrix16 lhs, BitMatrix16 rhs)
+        {
+            const uint n = BitMatrix16.N;
+            
+            var dst = BitMatrix16.Alloc();            
+            rhs = rhs.Transpose();
+            for(var i=0; i< n; i++)
+            {
+                var row = lhs[i];
+                for(var j =0; j< n; j++)
+                {
+                    var col = rhs[j];
+                    dst[i,j] = BitVector.modprod(row,col);
+                }
+            }
+            return dst;
+        }
+
+        static BitMatrix32 bmm(BitMatrix32 lhs, BitMatrix32 rhs)
+        {
+            const uint n = BitMatrix32.N;
+            
+            var dst = BitMatrix.alloc(n32);
+            rhs = rhs.Transpose();
+            for(var i=0; i< n; i++)
+            {
+                var row = lhs[i];
+                for(var j =0; j< n; j++)
+                {
+                    var col = rhs[j];
+                    dst[i,j] = BitVector.modprod(row,col);
+                }
+            }
+            return dst;
+        }
+
+        static BitMatrix64 bmm(BitMatrix64 lhs, BitMatrix64 rhs)
+        {
+            const uint n = BitMatrix64.N;
+
+            var dst = BitMatrix.alloc(n64);
+            rhs = rhs.Transpose();
+            for(var i=0; i< n; i++)
+            {
+                var row = lhs[i];
+                for(var j =0; j< n; j++)
+                {
+                    var col = rhs[j];
+                    dst[i,j] = BitVector.modprod(row,col);
+                }
+            }
+            return dst;
+        }
+         
         public void bm_mul_8x8x8()
         {
             for(var i=0; i< SampleSize; i++)
@@ -19,7 +91,7 @@ namespace Z0
                 var m2 = m1.Replicate();
                 var m3 = Random.BitMatrix8();
                 var m4 = m2 * m3;
-                var m5 = BitRef.bmm(m1,m3);
+                var m5 = bmm(m1,m3);                
                 Claim.yea(m4 == m5);
             }            
         }
@@ -32,7 +104,7 @@ namespace Z0
                 var m2 = m1.Replicate();
                 var m3 = Random.BitMatrix(n32);
                 var m4 = m2 * m3;
-                var m5 = BitRef.bmm(m1,m3);
+                var m5 = bmm(m1,m3);
                 Claim.yea(m4 == m5);
             }            
         }

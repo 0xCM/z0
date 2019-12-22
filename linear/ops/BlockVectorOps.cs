@@ -31,7 +31,7 @@ namespace Z0
         public static Block256<T> and<T>(ConstBlock256<T> lhs, ConstBlock256<T> rhs, Block256<T> dst)
             where T : unmanaged
         {
-            for(var i=0; i< blocks(lhs,rhs); i++)
+            for(var i=0; i< lhs.BlockCount; i++)
                 vstore(ginx.vand<T>(lhs.LoadVector(i), rhs.LoadVector(i)), ref dst.BlockRef(i));                             
             return dst;        
         } 

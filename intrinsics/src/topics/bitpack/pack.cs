@@ -11,17 +11,59 @@ namespace Z0
     
     using static zfunc;    
     using static AsIn;
+    using static dinx;
 
     partial class BitPack
     {
-        public static Span<T> pack<S,T>(ReadOnlySpan<S> src, T t = default)
-            where S : unmanaged
+
+        public static T pack<T>(BitSpan src, T t = default)
             where T : unmanaged
-        {            
-            var inbits = src.Length * bitsize<S>();
-            var outcells = inbits / bitsize<S>() + (inbits % bitsize<S>() == 0 ? 0 : 1);
-            Span<T> dstcells = new T[outcells];            
-            return default;            
+        {           
+            if(typeof(T) == typeof(byte))
+                return generic<T>(pack8(src));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(pack16(src));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(pack32(src));
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>(pack64(src));
+            else 
+                throw unsupported<T>();
+        }
+
+
+        [MethodImpl(Inline)]
+        static Span<uint> extract<T>(BitSpan src)
+            where T :unmanaged
+                => src.Bits.Slice(0, math.min(src.Length, bitsize<T>())).As<bit,uint>();
+
+
+        [MethodImpl(Inline)]
+        static byte pack8(BitSpan src)
+        {
+            var bits = extract<byte>(src);
+            return default;
+        }
+
+        [MethodImpl(Inline)]
+        static ushort pack16(BitSpan src)
+        {
+            var bits = extract<ushort>(src);
+            return default;
+        }
+
+        [MethodImpl(Inline)]
+        static uint pack32(BitSpan src)
+        {
+            var bits = extract<uint>(src);
+            return default;
+        }
+
+        [MethodImpl(Inline)]
+        static ulong pack64(BitSpan src)
+        {
+            var bits = extract<ulong>(src);
+            return default;
         }
 
         /// <summary>
@@ -32,7 +74,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static byte pack<T>(in ConstBlock32<T> src)
             where T : unmanaged
-                => (byte) dinx.gather(uint32(in src.Head), BitMasks.Lsb32x8x1);
+                => (byte) gather(uint32(in src.Head), BitMasks.Lsb32x8x1);
 
         /// <summary>
         /// Packs 4 1-bit values taken from the least significant bit of each source byte
@@ -42,7 +84,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static byte pack<T>(in Block32<T> src)
             where T : unmanaged
-                => (byte) dinx.gather(uint32(in src.Head), BitMasks.Lsb32x8x1);
+                => (byte) gather(uint32(in src.Head), BitMasks.Lsb32x8x1);
 
         /// <summary>
         /// Packs 8 1-bit values taken from the least significant bit of each source byte
@@ -85,10 +127,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint pack<T>(in Block256<T> src, int block = 0)
             where T : unmanaged
-                => pack32(in src.BlockRef(block));
+                =>  pack32(in src.BlockRef(block));
 
         /// <summary>
-        /// Packs 64 1-bit values taken from the least significant bit of each source byte from both hi and lo sources
+        /// Packs 64 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         [MethodImpl(Inline)]
         public static ulong pack<T>(in Block512<T> src, int block = 0)
@@ -104,7 +146,7 @@ namespace Z0
                 => pack32(in src.BlockRef(block));
 
         /// <summary>
-        /// Packs 64 1-bit values taken from the least significant bit of each source byte from both hi and lo sources
+        /// Packs 64 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         [MethodImpl(Inline)]
         public static ulong pack<T>(in ConstBlock512<T> src, int block = 0)
@@ -116,8 +158,15 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         static byte pack8(ulong src)
-            => (byte)dinx.gather(src, BitMasks.Lsb64x8x1);
+            => (byte)gather(src, BitMasks.Lsb64x8x1);
 
+        /// <summary>
+        /// Packs 8 1-bit values taken from the least significant bit of each source byte
+        /// </summary>
+        [MethodImpl(Inline)]
+        static byte pack8<T>(in T src)
+            where T : unmanaged
+                => (byte)gather(convert<T,ulong>(src), BitMasks.Lsb64x8x1);
 
         /// <summary>
         /// Packs 16 1-bit values taken from the least significant bit of each source byte
@@ -125,7 +174,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ushort pack16<T>(in T src)
             where T : unmanaged
-                => ginx.vtakemask(ginx.vsll(ginx.vload(n128, const64(src)),7));
+                => vtakemask(ginx.vsll(ginx.vload(n128, const64(src)),7));
 
         /// <summary>
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
@@ -133,7 +182,8 @@ namespace Z0
         [MethodImpl(Inline)]
         static uint pack32<T>(in T src)
             where T : unmanaged
-                => ginx.vtakemask(ginx.vsll(ginx.vload(n256, const64(src)),7));
+                => vtakemask(ginx.vsll(ginx.vload(n256, const64(src)),7));
+
 
         [MethodImpl(Inline)]
         static ulong pack64<T>(in T src, int block = 0)
@@ -156,7 +206,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<uint> pack(N1 width, NatSpan<N128,uint> src)
             => pack128(width, n32, in head(src));
-
         
         /// <summary>
         /// Packs 128 32-bit values into 128 1-bit values captured by a 128-bit vector, adapted
@@ -245,7 +294,5 @@ namespace Z0
             pack1(ref xmm0, ref xmm1, in src, 31, current += step);
             return xmm0;
         }
-
     }
-
 }

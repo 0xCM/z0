@@ -66,5 +66,14 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref seek(ref Head, index);
         }        
+
+        [MethodImpl(Inline)]
+        public string Format(BitFormat? fmt = null)
+            => format(this, fmt);
+
+        [MethodImpl(Inline)]
+        public bool Equals(in BitSpan rhs)
+            => same(this,rhs);
+
     }
 }

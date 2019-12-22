@@ -17,9 +17,9 @@ namespace Z0
     using static zfunc;
     using static As;
 
-    partial class dinx
+    partial class CpuVector
     {    
-        public static string vgather_opcode<N,T>(N n, int srclen, T t = default)
+        public static string gather_opcode<N,T>(N n, int srclen, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => $"vgather_{n}x{bitsize<T>()}x{srclen}";
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="n">The target vector width</param>
         /// <param name="src">The memory source</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<uint> vgather256(N128 n, ref uint src)
+        public static unsafe Vector128<uint> gather256(N128 n, ref uint src)
             => GatherVector128(ptr(ref src), VGather256x64x256Index, 4);
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="n">The target vector width</param>
         /// <param name="src">The memory source</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<uint> vgather512(N128 n, ref uint src)
+        public static unsafe Vector128<uint> gather512(N128 n, ref uint src)
             => GatherVector128(ptr(ref src), 
                 Vector256.Create(Pow2.T00 - 1, Pow2.T07 - 1, Pow2.T08 - 1, Pow2.T09 - 1), 4);         
 
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="n">The target vector width</param>
         /// <param name="src">The memory source</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<uint> vgather256(N256 n, ref uint src)
+        public static unsafe Vector256<uint> gather256(N256 n, ref uint src)
             => GatherVector256(ptr(ref src), 
                 Vector256.Create(Pow2.T00 - 1, Pow2.T02 - 1, Pow2.T03 - 1, Pow2.T04 - 1, Pow2.T05 - 1, Pow2.T06 - 1, Pow2.T07 - 1, Pow2.T08 - 1), 4);
 
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="n">The target vector width</param>
         /// <param name="src">The memory source</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<uint> vgather512(N256 n, ref uint src)
+        public static unsafe Vector256<uint> gather512(N256 n, ref uint src)
             => GatherVector256(ptr(ref src), VGather256x32x512Index, 4);
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         /// <param name="src">The memory source, covering up to 4*512 contiguous bytes </param>
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<int> vgather(N128 n, ref int src, Vector128<int> index)
+        public static unsafe Vector128<int> gather(N128 n, ref int src, Vector128<int> index)
             => GatherVector128(ptr(ref src), index, 4);         
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="src">The memory source, covering up to 4*512 contiguous bytes </param>
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<uint> vgather(N128 n, ref uint src, Vector128<int> vidx)
+        public static unsafe Vector128<uint> gather(N128 n, ref uint src, Vector128<int> vidx)
             => GatherVector128(ptr(ref src), vidx, 4);         
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="src">The memory source, covering up to 4*512 contiguous bytes </param>
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<uint> vgather(N128 n, ref uint src, Vector256<long> vidx)
+        public static unsafe Vector128<uint> gather(N128 n, ref uint src, Vector256<long> vidx)
             => GatherVector128(ptr(ref src), vidx, 4);         
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="src">The memory source, covering up to 4*512 contiguous bytes </param>
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> vgather(N128 n, ref long src, Vector128<long> vidx)
+        public static unsafe Vector128<long> gather(N128 n, ref long src, Vector128<long> vidx)
             => GatherVector128(ptr(ref src), vidx, 8);         
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="src">The memory source, covering up to 4*512 contiguous bytes </param>
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<ulong> vgather(N128 n, ref ulong src, Vector128<long> vidx)
+        public static unsafe Vector128<ulong> gather(N128 n, ref ulong src, Vector128<long> vidx)
             => GatherVector128(ptr(ref src), vidx, 8);         
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace Z0
         /// <param name="src">The memory source, covering up to 4*1024 contiguous bytes </param>
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<int> vgather(N256 n, ref int src, Vector256<int> index)
+        public static unsafe Vector256<int> gather(N256 n, ref int src, Vector256<int> index)
             => GatherVector256(ptr(ref src), index, 4);         
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace Z0
         /// <param name="src">The memory source, covering up to 4*1024 contiguous bytes </param>
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<uint> vgather(N256 n, ref uint src, Vector256<int> vidx)
+        public static unsafe Vector256<uint> gather(N256 n, ref uint src, Vector256<int> vidx)
             => GatherVector256(ptr(ref src), vidx, 4);         
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Z0
         /// <param name="src">The memory source, covering up to 4*1024 contiguous bytes </param>
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> vgather(N256 n, ref long src, Vector256<long> index)
+        public static unsafe Vector256<long> gather(N256 n, ref long src, Vector256<long> index)
             => GatherVector256(ptr(ref src), index, 8);         
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace Z0
         /// <param name="src">The memory source, covering up to 4*1024 contiguous bytes </param>
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> vgather(N256 n, ref ulong src, Vector256<long> vidx)
+        public static unsafe Vector256<ulong> gather(N256 n, ref ulong src, Vector256<long> vidx)
             => GatherVector256(ptr(ref src), vidx, 8);         
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace Z0
         /// <param name="src">The memory source, covering up to 4*1024 contiguous bytes </param>
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> vgather(N256 n, ref ulong src, Vector128<int> vidx)
+        public static unsafe Vector256<ulong> gather(N256 n, ref ulong src, Vector128<int> vidx)
             => GatherVector256(ptr(ref src), vidx, 8);         
 
 
@@ -211,5 +211,7 @@ namespace Z0
             0xff,0x00,0x00,0x00,
             0xff,0x01,0x00,0x00
         };
+ 
     }
+
 }

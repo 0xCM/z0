@@ -124,16 +124,6 @@ namespace Z0
         }
 
 
-        public void bitspan_format_direction()
-        {
-            byte src = 1;
-            var bitspan = BitPack.bitspan(src);
-            var fmt = bitspan.Format();
-            Claim.eq(8,fmt.Length);
-            Claim.eq(bit.One, fmt[7]);
-
-        }
-
         void unpack_check<T>(T src, in ReadOnlySpan<byte> y)
             where T : unmanaged
         {

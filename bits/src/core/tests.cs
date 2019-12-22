@@ -16,15 +16,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bit testz(ulong a, ulong b)
-            => dinx.vtestz(dinx.vbroadcast(n128,a), dinx.vbroadcast(n128,b));
+            => dinx.vtestz(CpuVector.broadcast(n128,a), CpuVector.broadcast(n128,b));
 
         [MethodImpl(Inline)]
         public static bit testc(ulong a, ulong b)
-            => dinx.vtestc(dinx.vbroadcast(n128,a), dinx.vbroadcast(n128,b));
+            => dinx.vtestc(CpuVector.broadcast(n128,a), CpuVector.broadcast(n128,b));
 
         [MethodImpl(Inline)]
         public static bit testc(ulong a)
-            => dinx.vtestc(dinx.vbroadcast(n128,a));
+            => dinx.vtestc(CpuVector.broadcast(n128,a));
 
     }
 

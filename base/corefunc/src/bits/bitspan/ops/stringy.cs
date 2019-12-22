@@ -12,24 +12,6 @@ namespace Z0
 
     partial struct BitSpan
     {
-        public static string format(in BitSpan src)
-        {
-            var bitcount = src.Length;      
-            Span<char> buffer = stackalloc char[bitcount];
-            ref var dst = ref head(buffer);
-            
-            for(int i = 0, j=bitcount-1; i < bitcount; i++, j--)
-            {
-                seek(ref dst, j) = src[i].ToChar();                
-            }
-            
-            return new string(buffer);
-        }
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => format(this);
-
         /// <summary>
         /// Forms the bitspan z := [head,tail] via concatentation
         /// </summary>
@@ -52,6 +34,19 @@ namespace Z0
             return load(src.bits.Slice(0, maxlen));            
         }
 
+        /// <summary>
+        /// Creates a bitspan from text encoding of a binary number
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        public static BitSpan parse(string src)                
+        {            
+            var data = src.RemoveWhitespace().Replace("0b",string.Empty);
+            var len = data.Length;
+            var lastix = len - 1;
+            Span<bit> bits = new bit[len];
+            for(var i=0; i<= lastix; i++)
+               bits[lastix - i] = data[i] == bit.Zero ? bit.Off : bit.On;
+            return load(bits);
+        }
     }
-
 }

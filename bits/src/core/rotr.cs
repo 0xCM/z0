@@ -21,7 +21,6 @@ namespace Z0
         public static byte rotr(byte src, int shift)
             => (byte)((src >> shift) | (src << (8 - shift)));
 
-
         /// <summary>
         /// Rotates the source bits rightward by a specified offset
         /// </summary>
@@ -30,7 +29,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ushort rotr(ushort src, int shift)
             => (ushort)((src  >> shift) | (src << (16 - shift)));
-
 
         /// <summary>
         /// Rotates the source bits rightward by a specified offset

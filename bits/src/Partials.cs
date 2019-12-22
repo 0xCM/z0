@@ -27,17 +27,4 @@ namespace Z0
     {
 
     }
-
-
-    /// <summary>
-    /// Defines bitwise reference operations
-    /// </summary>
-    public static partial class BitRef
-    {
-
-
-
-    }
-
-
 }

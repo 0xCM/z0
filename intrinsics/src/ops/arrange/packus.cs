@@ -81,7 +81,7 @@ namespace Z0
         public static Vector128<ushort> vpackus(Vector128<uint> x, Vector128<uint> y)
         {
             var w = n128;
-            var mask = dinx.vbroadcast(w, (uint)(ushort.MaxValue));
+            var mask = CpuVector.broadcast(w, (uint)(ushort.MaxValue));
             var z0 = v32i(dinx.vand(x,mask));
             var z1 = v32i(dinx.vand(y,mask));
             return PackUnsignedSaturate(z0, z1);
@@ -122,7 +122,7 @@ namespace Z0
         public static Vector256<byte> vpackus(Vector256<ushort> x, Vector256<ushort> y)
         {
             var w = n256;
-            var mask = dinx.vbroadcast(w, (ushort)(byte.MaxValue));
+            var mask = CpuVector.broadcast(w, (ushort)(byte.MaxValue));
             var z0 = v16i(dinx.vand(x,mask));
             var z1 = v16i(dinx.vand(y,mask));
             return PackUnsignedSaturate(z0,z1);         
@@ -164,7 +164,7 @@ namespace Z0
         public static Vector256<ushort> vpackus(Vector256<uint> x, Vector256<uint> y)
         {
             var w = n256;
-            var mask = dinx.vbroadcast(w, (uint)(ushort.MaxValue));
+            var mask = CpuVector.broadcast(w, (uint)(ushort.MaxValue));
             var z0 = v32i(dinx.vand(x,mask));
             var z1 = v32i(dinx.vand(y,mask));
             return PackUnsignedSaturate(z0, z1);

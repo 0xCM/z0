@@ -115,10 +115,10 @@ namespace Z0
         {
             var n = n128;
 
-            var u = VData.increments<uint>(n);
+            var u = CpuVector.increments<uint>(n);
             Claim.eq(CpuVector.parts(n,0,1,2,3), u);
 
-            var v = VData.decrements<uint>(n);
+            var v = CpuVector.decrements<uint>(n);
             Claim.eq(CpuVector.parts(n,3,2,1,0),v);
 
             Claim.eq(v, dinx.vperm4x32(u, Perm4L.DCBA));

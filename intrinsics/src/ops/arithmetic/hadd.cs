@@ -26,9 +26,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<sbyte> vhadd(Vector128<sbyte> x, Vector128<sbyte> y)
         {
-            (var x0, var x1) = vinflate(x, n128, z16i);
-            (var y0, var y1) = vinflate(y, n128, z16i);
-            return vcompact(vhadd(x0,y0),vhadd(x1,y1));
+            var a = vinflate(x, n128, z16i);
+            var b = vinflate(y, n128, z16i);
+            return vcompact(vhadd(a,b), out Vector128<sbyte> _);
+            // (var x0, var x1) = vinflate(x, n128, z16i);
+            // (var y0, var y1) = vinflate(y, n128, z16i);
+            //return vcompact(vhadd(x0,y0),vhadd(x1,y1));
         }
 
         /// <summary>
@@ -39,6 +42,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<byte> vhadd(Vector128<byte> x, Vector128<byte> y)
         {
+
             vinflate(x, out Vector128<short>  x0, out Vector128<short> x1);
             vinflate(x, out Vector128<short>  y0, out Vector128<short> y1);
             return vcompact(vhadd(x0,y0),vhadd(x1,y1), out Vector128<byte> _);

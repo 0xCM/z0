@@ -1085,7 +1085,7 @@ namespace Z0
         protected void vunits_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var units = VData.uints<T>(w).ToSpan();
+            var units = CpuVector.units(w,t).ToSpan();
             for(var i=0; i<units.Length; i++)
                 Claim.eq(gmath.one<T>(), units[i]);
         }
@@ -1093,7 +1093,7 @@ namespace Z0
         protected void vunits_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var units = VData.uints<T>(w).ToSpan();
+            var units = CpuVector.units(w,t).ToSpan();
             for(var i=0; i<units.Length; i++)
                 Claim.eq(gmath.one<T>(), units[i]);
         }

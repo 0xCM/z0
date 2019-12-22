@@ -140,14 +140,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ConstQuad<Vector128<uint>> vconvert(Vector128<byte> src, N128 w, uint t = default)        
+        public static Vector512<uint> vconvert(Vector128<byte> src, N512 w, uint t = default)        
         {
             vconvert(src, out Vector128<ushort> lo, out Vector128<ushort> hi);
             vmaplo(lo, out Vector128<uint> x0);
             vmaphi(lo, out Vector128<uint> x1);
             vmaplo(hi, out Vector128<uint> x2);
             vmaphi(hi, out Vector128<uint> x3);
-            return Tuples.constant(x0,x0,x2,x3);
+            return (x0,x0,x2,x3);
         }
 
         /// <summary>
@@ -323,6 +323,15 @@ namespace Z0
             => dst = v64u(ConvertToVector256Int64(src));
 
         /// <summary>
+        /// _m256i _mm256_cvtepu32_epi64 (__m128i a) VPMOVZXDQ ymm, xmm
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<long> vconvert(Vector128<int> src, out Vector256<long> dst)
+            => dst = ConvertToVector256Int64(src);
+
+        /// <summary>
         /// 4x32u -> (2x64u, 2x64u)
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -398,16 +407,16 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static ConstPair<Vector256<ushort>> vconvert(Vector256<byte> src, N256 w, ushort t = default)
-             => Tuples.constant(vmaplo(src, n256, z16), vmaphi(src, n256, z16));
+        public static Vector512<ushort> vconvert(Vector256<byte> src, N512 w, ushort t = default)
+             => (vmaplo(src, n256, z16), vmaphi(src, n256, z16));
 
         /// <summary>
         /// 32x8u -> (16x16i, 16x16i)
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static ConstPair<Vector256<short>> vconvert(Vector256<byte> src, N256 w, short t = default)
-            => Tuples.constant(vmaplo(src, w, z16i),vmaphi(src, w, z16i));
+        public static Vector512<short> vconvert(Vector256<byte> src, N512 w, short t = default)
+            => (vmaplo(src, n256, z16i),vmaphi(src, n256, z16i));
 
         /// <summary>
         /// 32x8u -> (8x32u, 8x32u, 8x32u, 8x32u)
@@ -416,12 +425,12 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="x1">A target cell type representative</param>
         [MethodImpl(Inline)]
-        public static ConstQuad<Vector256<uint>> vconvert(Vector256<byte> src, N256 w, uint t = default)
+        public static Vector1024<uint> vconvert(Vector256<byte> src, N1024 w, uint t = default)
         {
-            (var lo, var hi) = vconvert(src, w, z16);            
+            (var lo, var hi) = vconvert(src, n512, z16);            
             (var x0, var x1) = vconvert(lo, n512, t);
             (var x2, var x3) = vconvert(hi, n512, t);
-            return Tuples.constant(x0,x1,x2,x3);
+            return (x0,x1,x2,x3);
         }
 
         /// <summary>

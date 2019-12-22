@@ -66,7 +66,7 @@ namespace Z0
             void report()
             {
                 var x = CpuVector.increments<byte>(n128);
-                var y = dinx.vadd(x, dinx.vbroadcast(n128, (byte)16));
+                var y = dinx.vadd(x, CpuVector.broadcast(n128, (byte)16));
 
                 var lo = ginx.vmergelo(x,y);
                 var hi = ginx.vmergehi(x,y);

@@ -17,7 +17,7 @@ namespace Z0
     using XPR = System.Linq.Expressions.Expression;
     using PX = System.Linq.Expressions.ParameterExpression;
 
-    public static class express
+    public static class Express
     {
         static ConcurrentDictionary<MethodInfo, Delegate> _cache { get; }
             = new ConcurrentDictionary<MethodInfo, Delegate>();
@@ -515,6 +515,5 @@ namespace Z0
                 let right = invoke(func(p2), args.x2)
                 let body = or(left, right)
                 select lambda<Func<X1, X2, bool>>(args, body).Compile();
-
     }
 }

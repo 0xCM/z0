@@ -145,22 +145,6 @@ namespace Z0
         public static void part10x1(uint src, Span<byte> dst)
             => part10x1(src, ref head(dst));
         
-
-        /// <summary>
-        /// Partitions a 32-bit source into 32 8-bit targets of effective width 1
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
-        public static void part32x1(uint src, Span<byte> dst)
-        {
-            ref var target = ref head64(dst);
-            seek(ref target, 0) = lsb8x1((ulong)src);
-            seek(ref target, 1) = lsb8x1((ulong)src >> 8);
-            seek(ref target, 2) = lsb8x1((ulong)src >> 16);
-            seek(ref target, 3) = lsb8x1((ulong)src >> 24);
-        }
-
         /// <summary>
         /// Partitions a 64-bit source into 64 8-bit targets of effective width 1
         /// </summary>
@@ -304,14 +288,6 @@ namespace Z0
             seek(ref dst, 3) = (byte)(src >> 9 & M3);
         }
 
-        /// <summary>
-        /// Partitions the first 12 bits of a 32-bit source into 4 target segments each with an effective width of 3
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target span</param>
-        [MethodImpl(Inline)]
-        public static void part12x3(uint src, Span<byte> dst)
-            => part12x3(src, ref head(dst));
 
         /// <summary>
         /// Partitions the first 15 bits of a 16-bit source into 6 target segments each with an effective width of 3
@@ -319,147 +295,49 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline)]
-        public static void part15x3(uint src, ref byte dst)
+        public static void part15x3(ushort src, in NatSpan<N5,byte> dst)
         {
-            const uint M3 = 0b111;
-            part12x3(src, ref dst);
-            seek(ref dst, 4) = (byte)(src >> 12 & M3);
-       }
-
-        /// <summary>
-        /// Partitions the first 15 bits of a 32-bit source into 6 target segments each with an effective width of 3
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
-        public static void part15x3(uint src, Span<byte> dst)
-            => part15x3(src, ref head(dst));
-
-
-        /// <summary>
-        /// Partitions the first 18 bits of a 32-bit source into 7 target segments each with an effective width of 3
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
-        public static void part18x3(uint src, ref byte dst)
-        {
-            const uint M3 = 0b111;
-            part15x3(src, ref dst);
-            seek(ref dst, 5) = (byte)(src >> 15 & M3);
+            const uint M = BitMasks.Lsb32x8x3;
+            dst.Cell<uint>(0) = Bits.scatter(src, BitMasks.Lsb32x8x3); 
+            dst.Cell<byte>(4) = (byte)Bits.scatter((byte)(src >> 12), BitMasks.Lsb8x8x3);
         }
 
         /// <summary>
-        /// Partitions the first 18 bits of a 32-bit source into 7 target segments each with an effective width of 3
+        /// Partitions the first 24 bits of a 32-bit source value into 9 8-bit target segments
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline)]
-        public static void part18x3(uint src, Span<byte> dst)
-            => part18x3(src, ref head(dst));
-
-        /// <summary>
-        /// Partitions the first 21 bits of a 32-bit source value into 7 target segments each with an effective width of 3
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
-        public static void part21x3(uint src, ref byte dst)
-        {
-            const uint M3 = 0b111;
-            part18x3(src, ref dst);
-            seek(ref dst, 6) = (byte)(src >> 18 & M3);
-        }
-
-        /// <summary>
-        /// Partitions the first 21 bits of a 32-bit source value into 7 target segments each with an effective width of 3
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
-        public static void part21x3(uint src, Span<byte> dst)
-            => part21x3(src, ref head(dst));
-
-        /// <summary>
-        /// Partitions the first 24 bits of a 32-bit source value into 8 target segments each with an effective width of 3
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
-        public static void part24x3(uint src, ref byte dst)
+        public static void part24x3(uint src, in NatSpan<N8,byte> dst)
         {
             const ulong M = BitMasks.Lsb64x8x3;
-            seek64(ref dst, 0) = Bits.scatter((ulong)src, M);        
+            dst.Cell<ulong>(0) = Bits.scatter(src, M); 
         }
 
         /// <summary>
-        /// Partitions the first 24 bits of a 32-bit source value into 8 target segments each with an effective width of 3
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target span</param>
-        [MethodImpl(Inline)]
-        public static void part24x3(uint src, Span<byte> dst)
-            => part24x3(src, ref head(dst));
-
-        /// <summary>
-        /// Partitions the first 27 bits of a 32-bit source value into 9 target segments each with an effective width of 3
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target memory location</param>
-        [MethodImpl(Inline)]
-        public static void part27x3(uint src, ref byte dst)
-        {
-            const ulong M = BitMasks.Lsb64x8x3;
-            seek64(ref dst, 0) = Bits.scatter((ulong)src, M);
-            seek16(ref dst, 4) = (byte)Bits.scatter((ulong)(src >> 24), M);
-        }
-
-        /// <summary>
-        /// Partitions the first 27 bits of a 32-bit source value into 9 target segments each with an effective width of 3
+        /// Partitions the first 27 bits of a 32-bit source value into 9 8-bit target segments
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline)]
-        public static void part27x3(uint src, Span<byte> dst)
-            => part27x3(src, ref head(dst));
+        public static void part27x3(uint src, in NatSpan<N9,byte> dst)
+        {
+            const ulong M = BitMasks.Lsb64x8x3;
+            dst.Cell<ulong>(0) = Bits.scatter(src, M); 
+            dst.Cell<ushort>(4) = (byte)Bits.scatter(src >> 24, M); 
+        }
  
         /// <summary>
-        /// Partitions the first 30 bits of a 32-bit source value into 10 target segments each with an effective width of 3
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
-        public static void part30x3(uint src, ref byte dst)
-        {
-            const ulong M = BitMasks.Lsb64x8x3;
-            seek64(ref dst, 0) = Bits.scatter((ulong)src, M);
-            seek16(ref dst, 4) = (ushort)Bits.scatter((ulong)(src >> 24), M);
-        }
-
-        /// <summary>
-        /// Partitions the first 30 bits of a 32-bit source value into 10 8-bit target segments
+        /// Partitions the first 30 bits of a 32-bit source value into 10 8-bitt target segments
         /// </summary>
         /// <param name="src">The source bits</param>
-        /// <param name="dst">The target span</param>
+        /// <param name="dst">The receiving buffer</param>
         [MethodImpl(Inline)]
-        public static void part30x3(uint src, Span<byte> dst)
-            => part30x3(src, ref head(dst));
-
-        /// <summary>
-        /// Partitions the first 63 bits of a 64 bit source value into 21 8-bit target segments
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
-        public static Vector256<byte> part63x3(ulong src)
+        public static void part30x3(uint src, in NatSpan<N10,byte> dst)
         {
             const ulong M = BitMasks.Lsb64x8x3;
-            var x = BitMask.lo(n63) & src;
-            var storage = StackStore.alloc(n256);
-            ref var target = ref StackStore.head(ref storage);
-            seek(ref target, 0) = Bits.scatter(x, M); 
-            seek(ref target, 1) = Bits.scatter(x >> 24, M);
-            seek(ref target, 2) = Bits.scatter(x >> 48, M);
-            return v8u(ginx.vload(n256, in target));
+            dst.Cell<ulong>(0) = Bits.scatter(src, M); 
+            dst.Cell<ushort>(4) = (ushort)Bits.scatter(src >> 24, M); 
         }
 
         /// <summary>
@@ -475,22 +353,6 @@ namespace Z0
             dst.Cell<ulong>(0) = Bits.scatter(x, M); 
             dst.Cell<ulong>(1) = Bits.scatter(x >> 24, M); 
             dst.Cell<ulong>(2) = Bits.scatter(x >> 48, M); 
-        }
-
-        /// <summary>
-        /// Partitions the first 63 bits of a 64 bit source value into 21 8-bit target segments
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <param name="dst">The receiving buffer</param>
-        [MethodImpl(Inline)]
-        public static void part63x3(ulong src, Span<byte> dst)
-        {
-            const ulong M = BitMasks.Lsb64x8x3;
-            var x = BitMask.lo(n63) & src;
-            ref var target = ref head64(dst);
-            seek(ref target, 0) = Bits.scatter(x, M); 
-            seek(ref target, 1) = Bits.scatter(x >> 24, M); 
-            seek(ref target, 2) = Bits.scatter(x >> 48, M); 
         }
 
         // ~ Nx4
@@ -541,99 +403,59 @@ namespace Z0
         public static void part12x4(uint src, Span<byte> dst)
             => part12x4(src, ref head(dst));
 
+
         /// <summary>
-        /// Partitions a 32-bit source value into 4 target segments each with an effective width of 4
+        /// Partitions a 16-bit source value into 4 8-bit target segments
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline)]
-        public static void part16x4(uint src, ref byte dst)
+        public static void part16x4(ushort src, NatSpan<N4,byte> dst)
         {
-            const uint M4 = 0b1111;
-            seek(ref dst, 0) = (byte)((src >> 0) & M4);
-            seek(ref dst, 1) = (byte)((src >> 4) & M4);
-            seek(ref dst, 2) = (byte)((src >> 8) & M4);
-            seek(ref dst, 3) = (byte)((src >> 12) & M4);
+            const uint M = BitMasks.Lsb32x8x4;
+            dst.Cell<uint>(0) = Bits.scatter(src, M); 
         }
 
         /// <summary>
-        /// Partitions a 16-bit source value into 4 target segments each with an effective width of 4
+        /// Partitions a 32-bit source value into 8 4-bit segments distributed across 8 bytes
         /// </summary>
-        /// <param name="src">The source value</param>
+        /// <param name="src">The bit source</param>
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline)]
-        public static void part16x4(uint src, Span<byte> dst)
-            => part16x4(src, ref head(dst));
-
-        [MethodImpl(Inline)]
-        public static void part32x4(uint src, ref byte dst)
+        public static void part32x4(uint src, NatSpan<N8,byte> dst)
         {
-            part16x4(src, ref dst);
-            part16x4(src >> 16, ref seek(ref dst, 4));
+            const ulong M = BitMasks.Lsb64x8x4;
+            dst.Cell<ulong>(0) = Bits.scatter(src, M); 
         }
-
-        /// <summary>
-        /// Partitions a 32-bit source value into 8 segments with an effective bit width of 4
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
-        public static void part32x4(uint src, Span<byte> dst)
-            => part32x4(src, ref head(dst));
 
         // ~ Nx5
         // ~ ------------------------------------------------------------------
 
-        [MethodImpl(Inline)]
-        public static void Part15x5(ushort src, Block32<byte> dst)
-        {
-            const ushort M = BitMasks.Lsb16x8x5;
-            ref32(ref dst.Head) = Bits.scatter(src, M);            
-        }
 
+        /// <summary>
+        /// Partitions the first 20 bits of a 32-bit source value into 4 8-bit segments of width 5
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="dst">The partition target</param>
         [MethodImpl(Inline)]
-        public static void Part30x5(uint src, Block32<byte> dst)
+        public static void Part20x5(uint src, NatSpan<N4,byte> dst)
         {
             const uint M = BitMasks.Lsb32x8x5;
-            ref32(ref dst.Head) = Bits.scatter(src, M);            
+            dst.Cell<uint>(0) = Bits.scatter(src, M);            
         }
 
-        [MethodImpl(Inline)]
-        public static void Part60x5(ulong src, Block64<byte> dst)
-        {
-            const ulong M = BitMasks.Lsb64x8x5;
-            ref64(ref dst.Head) = Bits.scatter(src, M);            
-        }
 
         // ~ Nx8
         // ~ ------------------------------------------------------------------
-
-        /// <summary>
-        /// Partitions the source value into 2 segments of width 8
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
-        public static void part16x8(ushort src, ref byte dst)
-            => uint16(ref dst) = src;
-
-        /// <summary>
-        /// Partitions the source value into 2 segments of width 8
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
-        public static void part16x8(ushort src, Span<byte> dst)
-            => head16(dst) = src;
  
         /// <summary>
-        /// Partitions a 32-bit source value into 4 segments of bit width 8
+        /// Partitions a 16-bit source value into 2 segments of width 8
         /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">A target span of sufficient length</param>
+        /// <param name="src">The bit source</param>
+        /// <param name="dst">The partition target</param>
         [MethodImpl(Inline)]
-        public static void part32x8(uint src, ref byte dst)
-            => uint32(ref dst) = src;
+        public static void part16x8(ushort src, NatSpan<N2,byte> dst)
+            => dst.Cell<ushort>(0) = src; 
 
         /// <summary>
         /// Partitions a 32-bit source value into 4 segments of width 8
@@ -641,8 +463,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The partition target</param>
         [MethodImpl(Inline)]
-        public static void part32x8(uint src, Span<byte> dst)
-            => head32(dst) = src;
+        public static void part32x8(uint src, NatSpan<N4,byte> dst)
+            => dst.Cell<uint>(0) = src; 
 
         /// <summary>
         /// Partitions a 64-bit source value into 8 segments of width 8
@@ -650,38 +472,29 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The partition target</param>
         [MethodImpl(Inline)]
-        public static void part64x8(ulong src, ref byte dst)
-            => uint64(ref dst) = src;
-
-        /// <summary>
-        /// Partitions a 64-bit source value into 8 segments of width 8
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The partition target</param>
-        [MethodImpl(Inline)]
-        public static void part64x8(ulong src, Span<byte> dst)
-            => head64(dst) = src;
+        public static void part64x8(ulong src, NatSpan<N8,byte> dst)
+            => dst.Cell<ulong>(0) = src; 
 
         // ~ Nx16
         // ~ ------------------------------------------------------------------
 
-        /// <summary>
-        /// Partitions a 32-bit source value into 2 segments of width 16
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
-        public static void part32x16(uint src, Span<ushort> dst)
-            => head32(dst) = src;
-        
         /// <summary>
         /// Partitions a 64-bit source value into 4 segments of width 16
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline)]
-        public static void part64x16(ulong src, Block64<ushort> dst)
-            => head64(dst) = src; 
+        public static void part32x16(uint src, NatSpan<N2,ushort> dst)
+            => dst.Cell<uint>(0) = src; 
+
+        /// <summary>
+        /// Partitions a 64-bit source value into 4 segments of width 16
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="dst">A target span of sufficient length</param>
+        [MethodImpl(Inline)]
+        public static void part64x16(ulong src, NatSpan<N4,ushort> dst)
+            => dst.Cell<ulong>(0) = src; 
  
         // ~ Nx32
         // ~ ------------------------------------------------------------------
@@ -692,16 +505,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline)]
-        public static void part64x32(ulong src, Span<uint> dst)
-            => head64(dst) = src;
+        public static void part64x32(ulong src, NatSpan<N2,uint> dst)
+            => dst.Cell<ulong>(0) = src;
 
-        /// <summary>
-        /// Partitions a 64-bit source value into 2 segments of width 32
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
-        public static void part64x32(ulong src, ref uint dst)
-            => uint64(ref dst) = src;
     }
 }

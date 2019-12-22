@@ -84,6 +84,11 @@ namespace Z0
          [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this ReadOnlySpan<ulong> src)
             => BitPack.bitspan(src);
+         
+         // public static T TakeScalar<T>(this BitSpan src)
+         // {
+             
+         // }
 
     }
 }

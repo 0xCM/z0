@@ -169,8 +169,8 @@ namespace Z0
             var y = CpuVector.parts(n,8,9,A,B,C,D,E,F);
             var e = CpuVector.parts(n,0,9,2,B,4,D,6,F);
             var o = CpuVector.parts(n,8,1,A,3,C,5,E,7);
-            var mEven = VData.blend(n,false,w);
-            var mOdd = VData.blend(n,true,w);
+            var mEven = VData.blendspec(n,false,w);
+            var mOdd = VData.blendspec(n,true,w);
             Claim.eq(e,ginx.vblend(x,y,mEven));
             Claim.eq(o,ginx.vblend(x,y,mOdd));
         }
@@ -183,8 +183,8 @@ namespace Z0
             var y = CpuVector.parts(n,4,5,6,7);
             var e = CpuVector.parts(n,0,5,2,7);
             var o = CpuVector.parts(n,4,1,6,3);
-            var mEven = VData.blend(n,false,w);
-            var mOdd = VData.blend(n,true,w);
+            var mEven = VData.blendspec(n,false,w);
+            var mOdd = VData.blendspec(n,true,w);
             Claim.eq(e,ginx.vblend(x,y,mEven));
             Claim.eq(o,ginx.vblend(x,y,mOdd));
 
@@ -206,7 +206,7 @@ namespace Z0
                 var y = ys.LoadVector();
                 Claim.eq(y,CpuVector.parts(n, ys[0], ys[1], ys[2], ys[3]));
 
-                var m = VData.blend(n256,false,n64);
+                var m = VData.blendspec(n256,false,n64);
 
                 var es = DataBlocks.single<ulong>(n);
                 for(var i=0; i<es.CellCount; i++)

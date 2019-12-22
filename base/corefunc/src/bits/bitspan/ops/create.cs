@@ -12,6 +12,13 @@ namespace Z0
     partial struct BitSpan
     {
         /// <summary>
+        /// Allocates a bitspan with a specified length
+        /// </summary>
+        /// <param name="len">The length of the bitstring</param>
+        public static BitSpan alloc(int len)
+            => new BitSpan(new bit[len]);
+
+        /// <summary>
         /// Wraps a bitspan over a span of extant bits
         /// </summary>
         /// <param name="src">The source bits</param>
@@ -26,6 +33,18 @@ namespace Z0
         public static BitSpan load(bit[] src)
             => new BitSpan(src);
 
+
+        /// <summary>
+        /// Obliterates all bitspan content
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]
+        public static ref readonly BitSpan clear(in BitSpan src)
+        {
+            src.bits.Clear();
+            return ref src;
+        }
+
         /// <summary>
         /// Clears a contiguous sequence of bits between two indices
         /// </summary>
@@ -38,5 +57,13 @@ namespace Z0
             src.bits.Slice(i0, i0 - i1 + 1).Clear();
             return ref src;
         }
+
+        /// <summary>
+        /// Creates a bitspan from a parameter array
+        /// </summary>
+        /// <param name="src">The sorce bits</param>
+        [MethodImpl(Inline)]
+        public static BitSpan parts(params bit[] src)
+            => new BitSpan(src);
     }
 }

@@ -24,7 +24,7 @@ namespace Z0
         {
             vinflate(src, out Vector128<ushort> x0, out Vector128<ushort> x1);
             vinflate(shift, out Vector128<ushort> s0, out Vector128<ushort> s1);   
-            return vcompact(vsllv(x0,s0),vsllv(x1,s1));            
+            return vcompact2(vsllv(x0,s0),vsllv(x1,s1));            
         }
 
         /// <summary>
@@ -88,9 +88,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<byte> vsllv(Vector256<byte> src, Vector256<byte> offsets)
         {
-            vinflate(src, out Vector256<ushort> x0, out Vector256<ushort> x1);
-            vinflate(offsets, out Vector256<ushort> s0, out Vector256<ushort> s1);   
-            return vcompact(vsllv(x0,s0),vsllv(x1,s1));            
+            // vinflate(src, out Vector256<ushort> x0, out Vector256<ushort> x1);
+            // vinflate(offsets, out Vector256<ushort> s0, out Vector256<ushort> s1);   
+            (var x0, var x1) = vinflate(src, n512, z16); 
+            (var s0, var s1) = vinflate(offsets, n512, z16);
+            return vcompact2(vsllv(x0,s0),vsllv(x1,s1));            
         }
 
         /// <summary>
@@ -101,9 +103,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ushort> vsllv(Vector256<ushort> src, Vector256<ushort> offsets)
         {
-            vinflate(src, out Vector256<uint> x0, out Vector256<uint> x1);
-            vinflate(offsets, out Vector256<uint> s0, out Vector256<uint> s1);   
-            return vcompact(vsllv(x0,s0),vsllv(x1,s1));            
+            // vinflate(src, out Vector256<uint> x0, out Vector256<uint> x1);
+            // vinflate(offsets, out Vector256<uint> s0, out Vector256<uint> s1);   
+            (var x0, var x1) = vinflate(src, n512, z32); 
+            (var s0, var s1) = vinflate(offsets, n512, z32);
+            return vcompact2(vsllv(x0,s0),vsllv(x1,s1));            
         }
 
         /// <summary>

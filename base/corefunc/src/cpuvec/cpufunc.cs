@@ -201,5 +201,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void vstore(Vector256<double> src, ref double dst)
             => Store(ptr(ref dst),src);            
-    }
+ 
+   }
 }

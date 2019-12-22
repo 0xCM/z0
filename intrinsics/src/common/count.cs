@@ -13,7 +13,6 @@ namespace Z0
     
     partial class CpuVector
     {
-
         /// <summary>
         /// Computes the number of T-components covered by a vector of a natural parametric width
         /// </summary>

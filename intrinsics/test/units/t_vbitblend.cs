@@ -13,11 +13,12 @@ namespace Z0
     public class t_vbitblend : t_vinx<t_vbitblend>
     {
 
+        
+            
         public void vbitblend_basecases()
         {
             var n = n256;
-            var pattern = BitVector.natural(n8,(byte)0b10101010);
-            var mask =  dinx.vbroadcast(n, pattern);
+            var mask =  CpuVector.broadcast(n, BitMask.msb(n2,n1,z8));
             var zero = CpuVector.zero<byte>(n);
             var ones =  CpuVector.ones<byte>(n);
             var blend = dinx.vbitblend(zero,ones,mask);

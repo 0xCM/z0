@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.InteropServices;
+    using System.Runtime.Intrinsics.X86;
 
     using static zfunc;
 
@@ -87,6 +88,10 @@ namespace Z0
             => new Vector512<T>(src.a, src.b);
 
         [MethodImpl(Inline)]
+        public static implicit operator Vector512<T>((Vector128<T> a, Vector128<T> b, Vector128<T> c, Vector128<T> d) src)
+            => new Vector512<T>(src.a, src.b,src.c, src.d);
+
+        [MethodImpl(Inline)]
         public static implicit operator Vector512<T>(in ConstPair<Vector256<T>> src)
             => new Vector512<T>(src.A, src.B);
          
@@ -107,6 +112,13 @@ namespace Z0
         {
             this.Lo = a;
             this.Hi = b;
+        }                
+
+        [MethodImpl(Inline)]
+        public Vector512(Vector128<T> a, Vector128<T> b, Vector128<T> c, Vector128<T> d)
+        {
+            this.Lo = Vector256.WithUpper(Vector256.WithLower(default, a), b);
+            this.Hi = Vector256.WithUpper(Vector256.WithLower(default, c), d);
         }                
 
         public T this[int i]

@@ -23,6 +23,7 @@ namespace Z0
             where T : unmanaged 
                 => src.Scalar<T>(offset);
 
+
         /// <summary>
         /// Constructs a bitstring from text
         /// </summary>

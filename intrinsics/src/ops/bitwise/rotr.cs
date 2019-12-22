@@ -12,30 +12,6 @@ namespace Z0
     
     partial class dinx
     {                
-        static Vector256<ulong> Vector256u64 
-        {
-            [MethodImpl(Inline)]
-            get => dinx.vbroadcast(n256,64ul);
-        }
-
-        static Vector256<uint> Vector256u32 
-        {
-            [MethodImpl(Inline)]
-            get => dinx.vbroadcast(n256,32u);
-        }
-
-        static Vector128<ulong> Vector128u64 
-        {
-            [MethodImpl(Inline)]
-            get => dinx.vbroadcast(n128, 64ul);
-        }
-
-        static Vector128<uint> Vector128u32 
-        {
-            [MethodImpl(Inline)]
-            get => dinx.vbroadcast(n128,32u);
-        }
-
         /// <summary>
         /// Rotates each component the source vector rightwards by a constant shift
         /// </summary>
@@ -107,6 +83,31 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ulong> vrotr(Vector256<ulong> src, byte shift)
             => dinx.vor(dinx.vsrl(src, shift),dinx.vsll(src, (byte)(64 - shift)));             
+
+        static Vector256<ulong> Vector256u64 
+        {
+            [MethodImpl(Inline)]
+            get => CpuVector.broadcast(n256,64ul);
+        }
+
+        static Vector256<uint> Vector256u32 
+        {
+            [MethodImpl(Inline)]
+            get => CpuVector.broadcast(n256,32u);
+        }
+
+        static Vector128<ulong> Vector128u64 
+        {
+            [MethodImpl(Inline)]
+            get => CpuVector.broadcast(n128, 64ul);
+        }
+
+        static Vector128<uint> Vector128u32 
+        {
+            [MethodImpl(Inline)]
+            get => CpuVector.broadcast(n128,32u);
+        }
+
 
     }
 
