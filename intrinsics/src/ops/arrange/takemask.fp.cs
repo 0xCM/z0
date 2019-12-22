@@ -25,7 +25,7 @@ namespace Z0
         /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
         [MethodImpl(Inline)]
-        public static int vmovemask(Vector128<float> src)
+        public static int takemask(Vector128<float> src)
             => MoveMask(src);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
         [MethodImpl(Inline)]
-        public static int vmovemask(Vector128<double> src)
+        public static int takemask(Vector128<double> src)
             => MoveMask(src);
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static int vmovemask(Vector256<float> src)
+        public static int takemask(Vector256<float> src)
             => MoveMask(src);
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static int vmovemask(Vector256<double> src)
+        public static int takemask(Vector256<double> src)
             => MoveMask(src);
     }
 

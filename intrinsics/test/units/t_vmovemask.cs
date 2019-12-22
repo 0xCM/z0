@@ -103,7 +103,7 @@ namespace Z0
                     if(BitMask.testbit(srcSpan[r], 31))
                         BitVector.enable(mmExpect,r);
                 
-                var mmActual = fpinx.vmovemask(srcVector).ToBitVector();
+                var mmActual = fpinx.takemask(srcVector).ToBitVector();
                 Claim.yea(mmExpect == mmActual);
             }
         }
@@ -122,7 +122,7 @@ namespace Z0
                     if(BitMask.testbit(srcSpan[r], 63))
                         BitVector.enable(mmExpect,r);
                 
-                var mmActual = fpinx.vmovemask(srcVector).ToBitVector();
+                var mmActual = fpinx.takemask(srcVector).ToBitVector();
                 Claim.yea(mmExpect == mmActual);
             }
         }

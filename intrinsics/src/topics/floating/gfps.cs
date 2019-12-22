@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Generic scalar floating-point intrinsics
     /// </summary>
-    public static class ginxsfp
+    public static class gfps
     {
 
         [MethodImpl(Inline)]
