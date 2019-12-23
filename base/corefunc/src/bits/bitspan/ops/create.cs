@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static zfunc;
 
@@ -30,10 +31,19 @@ namespace Z0
         /// Loads a bitspan from an array
         /// </summary>
         /// <param name="src">The source array</param>
+        [MethodImpl(Inline)]
         public static BitSpan load(bit[] src)
             => new BitSpan(src);
-
-
+        
+        /// <summary>
+        /// Loads a bitspan from a reference
+        /// </summary>
+        /// <param name="bits">The bit source</param>
+        /// <param name="count">The number of bits to load</param>
+        [MethodImpl(Inline)]
+        public static BitSpan load(ref bit bits, int count)        
+            => new BitSpan(MemoryMarshal.CreateSpan(ref bits,count));
+        
         /// <summary>
         /// Obliterates all bitspan content
         /// </summary>

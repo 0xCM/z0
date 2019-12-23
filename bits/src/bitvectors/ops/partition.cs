@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<BitVector16> partition(BitVector32 src, Span<BitVector16> dst)
         {
-            Bits.part32x16(src, NatSpan.checkedload(dst.AsUInt16(), n2));
+            Bits.part32x16(src, NatSpan.load(dst.AsUInt16(), n2));
             return dst;
         }
 
@@ -73,7 +73,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<BitVector<ushort>> partition(BitVector<uint> src, Span<BitVector<ushort>> dst)
         {
-            Bits.part32x16(src, NatSpan.checkedload(dst.AsUInt16(), n2));
+            Bits.part32x16(src, NatSpan.load(dst.AsUInt16(), n2));
             return dst;
         }
 

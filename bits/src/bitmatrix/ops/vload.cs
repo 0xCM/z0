@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vload(in BitMatrix8 A) 
-            => ginx.vscalar(n128,(ulong)A).AsByte();
+            => CpuVector.vscalar(n128,(ulong)A).AsByte();
 
         /// <summary>
         /// Loads a 256-bit cpu vector from matrix data
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
         public static Vector256<ushort> vload(in BitMatrix16 A) 
-            => ginx.vload(n256,A.Data);
+            => CpuVector.vload(n256,A.Data);
 
         /// <summary>
         /// Loads a 256-bit cpu vector from matrix data beginning at a specified offset
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="offset">The offset into the source, relative to the primal type, at which to begin reading data</param>
         [MethodImpl(Inline)]
         public static Vector256<uint> vload(in BitMatrix32 A, int offset) 
-            => ginx.vload(n256,A.Data.Slice(offset));
+            => CpuVector.vload(n256,A.Data.Slice(offset));
 
         /// <summary>
         /// Loads a 256-bit cpu vector from matrix data beginning at a specified offset
@@ -45,6 +45,6 @@ namespace Z0
         /// <param name="offset">The offset into the source, relative to the primal type, at which to begin reading data</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vload(in BitMatrix64 A, int offset) 
-            => ginx.vload(n256,A.Data.Slice(offset));
+            => CpuVector.vload(n256,A.Data.Slice(offset));
     }
 }

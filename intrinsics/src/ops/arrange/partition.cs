@@ -27,7 +27,7 @@ namespace Z0
             var lo = uint16(BitMasks.Lsb16x16x15 & a);
             var hi = uint16(BitMasks.Lsb16x16x15 & (a >> 15));
             
-            var x = CpuVector.broadcast(n256,uint32(lo | hi << 16));
+            var x = CpuVector.vbroadcast(n256,uint32(lo | hi << 16));
             
             // The pattern repeats every 32 bits
             // Each 32-bit segment can be cut into 2 16-bit parts where both parts 
@@ -72,8 +72,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<byte> vpart32x8x1(uint src)
         {
-            var x = CpuVector.broadcast(n256, src);
-            var y = CpuVector.broadcast(n256,BitMasks.Msb32x8x7);
+            var x = CpuVector.vbroadcast(n256, src);
+            var y = CpuVector.vbroadcast(n256,BitMasks.Msb32x8x7);
             return v8u(dinx.vand(x,y));
         }
 

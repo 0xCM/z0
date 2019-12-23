@@ -16,33 +16,17 @@ namespace Z0
     partial class VData
     {        
         /// <summary>
-        /// Retrieves the lo shuffle spec for packing 128x32x2 -> 128x16
+        /// Produces the lo shuffle spec for packing (128x32, 128x32) -> 128x16
         /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <param name="src">The source cell width selector</param>
         /// <param name="dst">The target cell width selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> packusLo(N128 w, N32 src, N16 dst)
-            => load(w,PackUS_32Lo_128x16);
-
-        [MethodImpl(Inline)]
-        public static Vector128<byte> packusLo(N128 w, N16 src, N8 dst)
-            => load(w,PackUS_16Lo_128x8);
-
-        [MethodImpl(Inline)]
-        public static Vector128<byte> packusHi(N128 w, N16 src, N8 dst)
-            => load(w,PackUS_16Hi_128x8);
-
-        [MethodImpl(Inline)]
-        public static Vector256<byte> packusLo(N256 w, N16 src, N8 dst)
-            => load(w,PackUS_16Lo_256x8);
-
-        [MethodImpl(Inline)]
-        public static Vector256<byte> packusHi(N256 w, N16 src, N8 dst)
-            => load(w,PackUS_16Hi_256x8);
+            => load(w, PackUS_32Lo_128x16);
 
         /// <summary>
-        /// Retrieves the hi shuffle spec for packing 128x32x2 -> 128x16
+        /// Produces the hi shuffle spec for packing (128x32, 128x32) -> 128x16
         /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <param name="src">The source cell width selector</param>
@@ -50,6 +34,34 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<byte> packusHi(N128 w, N32 src, N16 dst)
             => load(w,PackUS_32Hi_128x16);
+
+        /// <summary>
+        /// Produces the lo shuffle spec for packing (128x16,128x16) -> 128x8
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="src">The source cell width selector</param>
+        /// <param name="dst">The target cell width selector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> packusLo(N128 w, N16 src, N8 dst)
+            => load(w, PackUS_16Lo_128x8);
+
+        /// <summary>
+        /// Produces the hi shuffle spec for packing (128x16,128x16) -> 128x8
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="src">The source cell width selector</param>
+        /// <param name="dst">The target cell width selector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> packusHi(N128 w, N16 src, N8 dst)
+            => load(w, PackUS_16Hi_128x8);
+
+        [MethodImpl(Inline)]
+        public static Vector256<byte> packusLo(N256 w, N16 src, N8 dst)
+            => load(w, PackUS_16Lo_256x8);
+
+        [MethodImpl(Inline)]
+        public static Vector256<byte> packusHi(N256 w, N16 src, N8 dst)
+            => load(w, PackUS_16Hi_256x8);
 
         /// <summary>
         /// Retrieves the lo shuffle spec for packing 256x32x2 -> 256x16

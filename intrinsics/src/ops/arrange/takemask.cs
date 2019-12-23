@@ -162,35 +162,35 @@ namespace Z0
             => vtakemask(vsll(src, (byte)(7 - index)));
 
         [MethodImpl(Inline)]
-        public static ushort takemask(Vector128<byte> src, byte offset, byte index)
+        public static ushort vtakemask(Vector128<byte> src, byte offset, byte index)
             => vtakemask(vsllx(src, offset), index);   
 
         [MethodImpl(Inline)]
-        public static ushort takemask(Vector128<ushort> src, byte offset, byte index)
+        public static ushort vtakemask(Vector128<ushort> src, byte offset, byte index)
             => vtakemask(vsllx(src, offset), index);   
 
         [MethodImpl(Inline)]
-        public static ushort takemask(Vector128<uint> src, Vector128<uint> offsets, byte index)
+        public static ushort vtakemask(Vector128<uint> src, Vector128<uint> offsets, byte index)
             => vtakemask(vsllv(src, offsets), index);   
 
         [MethodImpl(Inline)]
-        public static ushort takemask(Vector128<ulong> src, Vector128<ulong> offsets, byte index)
+        public static ushort vtakemask(Vector128<ulong> src, Vector128<ulong> offsets, byte index)
             => vtakemask(vsllv(src, offsets), index);   
 
         [MethodImpl(Inline)]
-        public static uint takemask(Vector256<byte> src, byte offset, byte index)
+        public static uint vtakemask(Vector256<byte> src, byte offset, byte index)
             => vtakemask(vsllx(src, offset), index);   
 
         [MethodImpl(Inline)]
-        public static uint takemask(Vector256<ushort> src, byte offset, byte index)
+        public static uint vtakemask(Vector256<ushort> src, byte offset, byte index)
             => vtakemask(vsllx(src, offset), index);   
 
         [MethodImpl(Inline)]
-        public static uint takemask(Vector256<uint> src, Vector256<uint> offsets, byte index)
+        public static uint vtakemask(Vector256<uint> src, Vector256<uint> offsets, byte index)
             => vtakemask(vsllv(src, offsets), index);   
 
         [MethodImpl(Inline)]
-        public static uint takemask(Vector256<ulong> src, Vector256<ulong> offsets, byte index)
+        public static uint vtakemask(Vector256<ulong> src, Vector256<ulong> offsets, byte index)
             => vtakemask(vsllv(src, offsets), index);   
 
     }

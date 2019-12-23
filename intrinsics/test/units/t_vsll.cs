@@ -36,29 +36,6 @@ namespace Z0
         public void vsll_256x64u()
             => vsll_check(n256,z64);
 
-        public void vsll_128x8u_bench()
-            => vsll_bench<byte>(n128);
-
-        public void vsll_128x16u_bench()
-            => vsll_bench<ushort>(n128);
-
-        public void vsll_128x32u_bench()
-            => vsll_bench<uint>(n128);
-
-        public void vsll_128x64u_bench()
-            => vsll_bench<ulong>(n128);
-
-        public void vsll_256x8u_bench()
-            => vsll_bench<byte>(n256);
-
-        public void vsll_256x16u_bench()
-            => vsll_bench<ushort>(n256);
-
-        public void vsll_256x32u_bench()
-            => vsll_bench<uint>(n256);
-
-        public void vsll_256x64u_bench()
-            => vsll_bench<ulong>(n256);
 
         public void t_vsll_128x8u_outline()
         {

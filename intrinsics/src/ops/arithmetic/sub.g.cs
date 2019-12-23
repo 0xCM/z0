@@ -72,7 +72,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vsub<T>(Vector128<T> x, T a)
             where T : unmanaged
-                => vsub(x, CpuVector.broadcast(n128,a));
+                => vsub(x, CpuVector.vbroadcast(n128,a));
 
         /// <summary>
         /// Subtracts each vector component from a constant value
@@ -83,7 +83,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vsub<T>(T a, Vector128<T> x)
             where T : unmanaged
-                => vsub(CpuVector.broadcast(n128,a), x);
+                => vsub(CpuVector.vbroadcast(n128,a), x);
 
         /// <summary>
         /// Subtracts a constant value from each vector component
@@ -94,7 +94,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vsub<T>(Vector256<T> x, T a)
             where T : unmanaged
-                => vsub(x, CpuVector.broadcast(n256,a));
+                => vsub(x, CpuVector.vbroadcast(n256,a));
     
         /// <summary>
         /// Subtracts each vector component from a constant value
@@ -105,7 +105,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vsub<T>(T a, Vector256<T> x)
             where T : unmanaged
-                => vsub(CpuVector.broadcast(n256,a), x);
+                => vsub(CpuVector.vbroadcast(n256,a), x);
 
         [MethodImpl(Inline)]
         static Vector128<T> vsub_i<T>(Vector128<T> x, Vector128<T> y)

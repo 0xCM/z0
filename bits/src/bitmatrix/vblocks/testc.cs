@@ -11,42 +11,29 @@ namespace Z0
     
     using static zfunc;    
     using static ginx;
+    using static CpuVector;
     
     partial class vblock
     {     
         [MethodImpl(Inline)]
-        public static bit vtestc<T>(N128 n, in T a)
+        public static bit vtestc<T>(N128 w, in T a)
             where T : unmanaged
-        {                    
-            vload(a, out Vector128<T> vA);
-            return ginx.vtestc(vA);
-        }
+                => ginx.vtestc(vload(w, in a));
 
         [MethodImpl(Inline)]
-        public static bit vtestc<T>(N128 n, in T a, in T b)
+        public static bit vtestc<T>(N128 w, in T a, in T b)
             where T : unmanaged
-        {                    
-            vload(a, out Vector128<T> vA);
-            vload(b, out Vector128<T> vB);
-            return ginx.vtestc(vA,vB);
-        }
+                => ginx.vtestc(vload(w, in a), vload(w, in b));
 
         [MethodImpl(Inline)]
-        public static bit vtestc<T>(N256 n, in T a)
+        public static bit vtestc<T>(N256 w, in T a)
             where T : unmanaged
-        {                    
-            vload(a, out Vector256<T> vA);
-            return ginx.vtestc(vA);
-        }
+                => ginx.vtestc(vload(w, in a));
 
         [MethodImpl(Inline)]
-        public static bit vtestc<T>(N256 n, in T a, in T b)
+        public static bit vtestc<T>(N256 w, in T a, in T b)
             where T : unmanaged
-        {                    
-            vload(a, out Vector256<T> vA);
-            vload(b, out Vector256<T> vB);
-            return ginx.vtestc(vA,vB);
-        }
+                => ginx.vtestc(vload(w, in a), vload(w, in b));
 
         [MethodImpl(Inline)]
         public static bit testc<T>(N128 n, int vcount, int blocklen, in T a)

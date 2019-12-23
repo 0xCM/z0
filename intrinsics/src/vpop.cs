@@ -22,17 +22,17 @@ namespace Z0
         
         const ulong kf = 0x0101010101010101; 
 
-        static Vector256<ulong> K1 => CpuVector.broadcast(n256, k1);
+        static Vector256<ulong> K1 => CpuVector.vbroadcast(n256, k1);
 
-        static Vector256<ulong> K2 => CpuVector.broadcast(n256, k2);
+        static Vector256<ulong> K2 => CpuVector.vbroadcast(n256, k2);
 
-        static Vector256<ulong> K4 => CpuVector.broadcast(n256, k4);        
+        static Vector256<ulong> K4 => CpuVector.vbroadcast(n256, k4);        
 
-        static Vector128<ulong> v128K1 => CpuVector.broadcast(n128, k1);
+        static Vector128<ulong> v128K1 => CpuVector.vbroadcast(n128, k1);
 
-        static Vector128<ulong> v128K2 => CpuVector.broadcast(n128, k2);
+        static Vector128<ulong> v128K2 => CpuVector.vbroadcast(n128, k2);
 
-        static Vector128<ulong> v128K4 => CpuVector.broadcast(n128, k4);
+        static Vector128<ulong> v128K4 => CpuVector.vbroadcast(n128, k4);
 
         /// <summary>
         /// Computes the population count of the content of 3 128-bit vectors

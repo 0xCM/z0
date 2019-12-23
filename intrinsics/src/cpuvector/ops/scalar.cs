@@ -11,8 +11,8 @@ namespace Z0
     
     using static zfunc;    
     using static As;
-    
-    partial class ginx
+
+    partial class CpuVector
     {
         /// <summary>
         /// Loads a scalar into the first component of a 128-bit vector
@@ -138,5 +138,8 @@ namespace Z0
                 throw unsupported<T>();
         }
 
+
+
     }
+
 }

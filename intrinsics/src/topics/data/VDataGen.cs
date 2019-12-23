@@ -33,7 +33,7 @@ namespace Z0
             ref var mem = ref head(data);
             for(var i=0; i<len; i++)
                 seek(ref mem, i) = even(i) ? a : b;
-            return ginx.vload(n, in head(data));
+            return CpuVector.vload(n, in head(data));
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
                 current = gmath.dec(current);
             }
                         
-            return ginx.vload(n, in mem);
+            return CpuVector.vload(n, in mem);
         }    
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Z0
                 current = gmath.dec(current);
             }
                         
-            return ginx.vload(n, in mem);
+            return CpuVector.vload(n, in mem);
         }    
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Z0
                 seek(ref mem, i) = current;
                 current = gmath.sub(current, step);
             }
-            return ginx.vload(n, in mem);
+            return CpuVector.vload(n, in mem);
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace Z0
                 seek(ref mem, i) = current;
                 current = gmath.sub(current, step);
             }
-            return ginx.vload(n, in mem);
+            return CpuVector.vload(n, in mem);
         }
 
         public static Vector256<T> vdecrements<T>(N256 n, T first, params Swap[] swaps)
@@ -139,7 +139,7 @@ namespace Z0
                 current = gmath.dec(current);
             }
 
-            return ginx.vload(n, in head(data.Swap(swaps)));
+            return CpuVector.vload(n, in head(data.Swap(swaps)));
         }            
 
         public static Vector128<T> vdecrements<T>(N128 n, T first, params Swap[] swaps)
@@ -155,7 +155,7 @@ namespace Z0
                 current = gmath.dec(current);
             }
 
-            return ginx.vload(n, in head(data.Swap(swaps)));
+            return CpuVector.vload(n, in head(data.Swap(swaps)));
         }    
      
              /// <summary>
@@ -176,7 +176,7 @@ namespace Z0
                 seek(ref mem, i) = current;
                 current = gmath.add(current, step);
             }
-            return ginx.vload(n, in mem);
+            return CpuVector.vload(n, in mem);
         }
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace Z0
                 seek(ref mem, i) = current;
                 current = gmath.add(current, step);
             }
-            return ginx.vload(n, in mem);
+            return CpuVector.vload(n, in mem);
         }
     
         public static Vector128<T> vincrements<T>(N128 n, T first, params Swap[] swaps)
@@ -213,7 +213,7 @@ namespace Z0
                 current = gmath.inc(current);
             }
 
-            return ginx.vload(n, in head(data.Swap(swaps)));
+            return CpuVector.vload(n, in head(data.Swap(swaps)));
         }
 
         public static Vector256<T> vincrements<T>(N256 n, T first, params Swap[] swaps)
@@ -229,7 +229,7 @@ namespace Z0
                 current = gmath.inc(current);
             }
 
-            return ginx.vload(n, in head(data.Swap(swaps)));
+            return CpuVector.vload(n, in head(data.Swap(swaps)));
         }            
 
 

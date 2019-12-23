@@ -38,7 +38,7 @@ namespace Z0
                 dinx.vmaskstore(v2, m2, dst);
                 dinx.vmaskstore(v3, m3, dst);
 
-                var v4 = ginx.vload(dst);
+                var v4 = CpuVector.vload(dst);
                 var v5 = CpuVector.parts(n128, 
                     vcell(v0,0), vcell(v0,1), vcell(v0,2), vcell(v0,3),
                     vcell(v1,4), vcell(v1,5), vcell(v1,6), vcell(v1,7),

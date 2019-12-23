@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static zfunc;    
-    using static ginx;
     
     partial class vblock
     {     
@@ -18,8 +17,8 @@ namespace Z0
         public static bit vtestz<T>(N128 n, in T a, in T b)
             where T : unmanaged
         {                    
-            vload(a, out Vector128<T> vA);
-            vload(b, out Vector128<T> vB);
+            CpuVector.vload(a, out Vector128<T> vA);
+            CpuVector.vload(b, out Vector128<T> vB);
             return ginx.vtestz(vA,vB);
         }
 
@@ -27,8 +26,8 @@ namespace Z0
         public static bit vtestz<T>(N256 n, in T a, in T b)
             where T : unmanaged
         {                    
-            vload(a, out Vector256<T> vA);
-            vload(b, out Vector256<T> vB);
+            CpuVector.vload(a, out Vector256<T> vA);
+            CpuVector.vload(b, out Vector256<T> vB);
             return ginx.vtestz(vA,vB);
         }
 

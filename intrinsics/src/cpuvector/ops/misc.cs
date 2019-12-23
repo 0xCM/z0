@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> alt<T>(N256 n, T a, T b)
             where T : unmanaged
-                => vblend(broadcast(n,a), broadcast(n,b), VData.blendspec<T>(n,false));
+                => vblend(vbroadcast(n,a), vbroadcast(n,b), VData.blendspec<T>(n,false));
 
         /// <summary>
         /// Creates a shuffle mask that clears ever-other vector component
@@ -71,7 +71,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector128<T> load<T>(N128 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => vgeneric<T>(ginx.vload(n, in head(src)));
+                => vgeneric<T>(CpuVector.vload(n, in head(src)));
 
         /// <summary>
         /// Loads a 256-bit pattern described by a readonly bytespan
@@ -82,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector256<T> load<T>(N256 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => vgeneric<T>(ginx.vload(n, in head(src)));
+                => vgeneric<T>(CpuVector.vload(n, in head(src)));
 
         /// <summary>
         /// Loads a 512-bit pattern described by a readonly bytespan
@@ -93,7 +93,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector512<T> load<T>(N512 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => vgeneric<T>(ginx.vload(n, in head(src)));
+                => vgeneric<T>(CpuVector.vload(n, in head(src)));
 
 
     }

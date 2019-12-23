@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> decrements<T>(N128 w)
+        public static Vector128<T> vdecrements<T>(N128 w)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> decrements<T>(N256 w)
+        public static Vector256<T> vdecrements<T>(N256 w)
             where T : unmanaged
         {            
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
@@ -63,9 +63,9 @@ namespace Z0
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> decrements<T>(N128 n, T first)
+        public static Vector128<T> vdecrements<T>(N128 n, T first)
             where T : unmanaged
-                => ginx.vsub(first, decrements<T>(n));
+                => ginx.vsub(first, vdecrements<T>(n));
 
         /// <summary>
         /// Creates a 256-bit vector with components that decrease by unit step from an initial value
@@ -74,9 +74,9 @@ namespace Z0
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> decrements<T>(N256 n, T first)
+        public static Vector256<T> vdecrements<T>(N256 n, T first)
             where T : unmanaged
-                => ginx.vsub(first, decrements<T>(n));
+                => ginx.vsub(first, vdecrements<T>(n));
 
 
         static ReadOnlySpan<byte> Dec128x8u 
@@ -114,7 +114,6 @@ namespace Z0
                 3,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,
                 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
                 };
-
 
     }
 }

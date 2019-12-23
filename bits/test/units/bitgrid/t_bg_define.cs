@@ -110,12 +110,12 @@ namespace Z0
 
             ref var g32src = ref g32.Head;
             
-            var row124 = ginx.vload(n, g32.BlockRef(124*cpr));
-            var row125 = ginx.vload(n, g32.BlockRef(125*cpr));
-            var row126 = ginx.vload(n, g32.BlockRef(126*cpr));
-            var row127 = ginx.vload(n, g32.BlockRef(127*cpr));
+            var row124 = CpuVector.vload(n, g32.BlockRef(124*cpr));
+            var row125 = CpuVector.vload(n, g32.BlockRef(125*cpr));
+            var row126 = CpuVector.vload(n, g32.BlockRef(126*cpr));
+            var row127 = CpuVector.vload(n, g32.BlockRef(127*cpr));
             
-            var diagA = CpuVector.gather(n, ref g32src, CpuVector.partsi(n, 496, 501, 506, 511));
+            var diagA = CpuVector.vgather(n, ref g32src, CpuVector.partsi(n, 496, 501, 506, 511));
             var diagB = CpuVector.parts(n, g32[496], g32[501], g32[506], g32[511]);
             Claim.eq(diagA,diagB);
         }

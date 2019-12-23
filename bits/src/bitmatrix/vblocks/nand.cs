@@ -10,28 +10,21 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static zfunc;    
+    
     using static ginx;
+    using static CpuVector;
     
     partial class vblock
     {     
+        [MethodImpl(Inline)]
+        public static Vector128<T> vnand<T>(N128 w, in T a, in T b)
+            where T : unmanaged
+                => ginx.vnand(vload(w, in a),vload(w, in b));
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vnand<T>(N128 n, in T a, in T b)
+        public static Vector256<T> vnand<T>(N256 w, in T a, in T b)
             where T : unmanaged
-        {                    
-            vload(in a, out Vector128<T> vA);
-            vload(in b, out Vector128<T> vB);
-            return ginx.vnand(vA,vB);
-        }
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> vnand<T>(N256 n, in T a, in T b)
-            where T : unmanaged
-        {                    
-            vload(in a, out Vector256<T> vA);
-            vload(in b, out Vector256<T> vB);
-            return ginx.vnand(vA,vB);
-        }
+                => ginx.vnand(vload(w, in a),vload(w, in b));
 
         [MethodImpl(Inline)]
         public static void nand<T>(N128 n, in T a, in T b, ref T z)

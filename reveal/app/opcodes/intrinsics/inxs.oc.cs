@@ -15,11 +15,6 @@ namespace Z0
     {
 
 
-        public static ulong broadcast_8x64(byte pattern)
-            => ginxs.broadcast(pattern, out ulong _);
-
-        public static ulong broadcast_8x64_const()
-            => ginxs.broadcast((byte)0b11001100, out ulong _);
 
     }
 

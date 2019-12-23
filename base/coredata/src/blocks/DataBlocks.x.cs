@@ -35,7 +35,7 @@ namespace Z0
         public static NatSpan<N,T> NatLoad<N,T>(this Span<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => NatSpan.checkedload(src,n);
+                => NatSpan.load(src,n);
 
     }
 }

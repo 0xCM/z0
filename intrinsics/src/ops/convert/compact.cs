@@ -13,21 +13,11 @@ namespace Z0
 
     partial class dinx
     {   
-        // ~ 16x16w <-> 16x8w
+        // ~ 16i -> X
         // ~ ------------------------------------------------------------------
 
-
         /// <summary>
-        /// (8x16w,8x16w) -> 16x8w
-        /// </summary>
-        /// <param name="x">The first source vector</param>
-        /// <param name="y">The second source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<byte> vcompact(Vector128<ushort> x, Vector128<ushort> y, N128 w, byte t = default)
-            => vpackus2(x,y);
-
-        /// <summary>
-        /// (8x16w,8x16w) -> 16x8w
+        /// (8x16i,8x16i) -> 16x8i
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -36,7 +26,7 @@ namespace Z0
             => vpackss(x,y);
 
         /// <summary>
-        /// (8x16w,8x16w) -> 16x8w
+        /// (8x16i,8x16i) -> 16x8u
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -44,9 +34,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<byte> vcompact(Vector128<short> x, Vector128<short> y, N128 w, byte t = default)
             => vpackus(x,y);
-            
+
         /// <summary>
-        /// (16x16w,16x16w) -> 32x8w
+        /// (16x16i,16x16i) -> 32x8i
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
@@ -55,14 +45,20 @@ namespace Z0
             => vperm4x64(vpackss(x,y), Perm4L.ACBD);
 
         /// <summary>
-        /// (16x16w,16x16w) -> 32x8w
+        /// 16x16i -> 16x8i
         /// </summary>
-        /// <param name="x">The first source vector</param>
-        /// <param name="y">The second source vector</param>
-        /// <param name="dst">The target vector</param>
+        /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> vcompact(Vector256<ushort> x, Vector256<ushort> y, N256 w, byte t = default)            
-            => vperm4x64(vpackus2(x,y), Perm4L.ACBD);
+        public static Vector128<sbyte> vcompact(Vector256<short> src, N128 w, sbyte t = default)            
+            => vpackss(vlo(src), vhi(src));
+
+        /// <summary>
+        /// 16x16i -> 16x8u
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vcompact(Vector256<short> src, N128 w, byte t = default)            
+            => v8u(vpackss(vlo(src), vhi(src)));
 
         /// <summary>
         /// 16x8u -> 16x16u
@@ -71,9 +67,8 @@ namespace Z0
         /// <param name="w">The target width selector</param>
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vinflate(Vector128<byte> src, N256 w, ushort t = default)
+        public static Vector256<short> vinflate(Vector128<byte> src, N256 w, short t = default)
             => vconvert(src, w, t);
-
 
         /// <summary>
         /// 16x8i -> 16x16i
@@ -85,23 +80,8 @@ namespace Z0
         public static Vector256<short> vinflate(Vector128<sbyte> src, N256 w, short t = default)
             => vconcat(vmaplo(src,n128,t), vmaphi(src,n128,t));
 
-
-        // ~ 32x16w <-> 32x8w
-        // ~ 32:8 <-> 16
-        // ~ ------------------------------------------------------------------
-
         /// <summary>
-        /// 32x8w -> (16x16w,16x16w)
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="lo">The first target vector</param>
-        /// <param name="hi">The second target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector512<ushort> vinflate(Vector256<byte> src, N512 w, ushort t = default)
-            => vconvert(src, n512,t);
-
-        /// <summary>
-        /// 32x8w -> (16x16w,16x16w)
+        /// 32x8w -> 32x16i
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="lo">The first target vector</param>
@@ -120,12 +100,58 @@ namespace Z0
         public static Vector512<short> vinflate(Vector256<sbyte> src, N512 w, short t = default)
             => vconvert(src, w, t);
 
-        // ~ 16x16w <-> 16x8w
-        // ~ 16:8 <-> 16
+        // ~ 16u -> X
         // ~ ------------------------------------------------------------------
 
         /// <summary>
-        /// 16x16w -> 16x8w
+        /// (8x16u,8x16u) -> 16x8u
+        /// </summary>
+        /// <param name="x">The first source vector</param>
+        /// <param name="y">The second source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vcompact2(Vector128<ushort> x, Vector128<ushort> y, N128 w, byte t = default)
+            => vpackus2(x,y);
+
+        /// <summary>
+        /// (8x16u,8x16u) -> 16x8u
+        /// </summary>
+        /// <param name="x">The first source vector</param>
+        /// <param name="y">The second source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vcompact(Vector128<ushort> x, Vector128<ushort> y, N128 w, byte t = default)
+            => vpackus(x,y);
+
+        /// <summary>
+        /// 8x16u -> 8x8u
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="t">A target component type representative</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vcompact2(Vector128<ushort> x, N128 w, byte t = default)            
+            => vcompact2(x, default, w, t);
+
+        /// <summary>
+        /// 8x16u -> 8x8u
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="t">A target component type representative</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vcompact(Vector128<ushort> x, N128 w, byte t = default)            
+            => vcompact(x, default, w, t);
+
+        /// <summary>
+        /// 16x16u -> 16x8u
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vcompact2(Vector256<ushort> src, N128 w, byte t = default)            
+            => vcompact2(vlo(src),vhi(src),w,t);
+
+        /// <summary>
+        /// 16x16u -> 16x8u
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -134,21 +160,44 @@ namespace Z0
             => vcompact(vlo(src),vhi(src),w,t);
 
         /// <summary>
-        /// 16x16i -> 16x8i
+        /// (16x16u,16x16u) -> 32x8u
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The first source vector</param>
+        /// <param name="y">The second source vector</param>
+        /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<sbyte> vcompact(Vector256<short> src, N128 w, sbyte t = default)            
-            => vpackss(vlo(src), vhi(src));
+        public static Vector256<byte> vcompact2(Vector256<ushort> x, Vector256<ushort> y, N256 w, byte t = default)            
+            => vperm4x64(vpackus2(x,y), Perm4L.ACBD);
 
         /// <summary>
-        /// 16x16i -> 16x8u
+        /// (16x16u,16x16u) -> 32x8u
+        /// </summary>
+        /// <param name="x">The first source vector</param>
+        /// <param name="y">The second source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vcompact(Vector256<ushort> x, Vector256<ushort> y, N256 w, byte t = default)            
+            => vperm4x64(vpackus(x,y), Perm4L.ACBD);
+
+        /// <summary>
+        /// 8x16u -> 64u (a scalar)
         /// </summary>
         /// <param name="src">The source vector</param>
+        /// <param name="w">The target width</param>
+        /// <param name="t">A target type representative</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vcompact(Vector256<short> src, N128 w, byte t = default)            
-            => v8u(vpackss(vlo(src), vhi(src)));
+        public static ulong vcompact2(Vector128<ushort> src, N64 w, ulong t = default)            
+            => vcell64(vcompact2(src, default, n128, z8),0);
 
+        /// <summary>
+        /// 8x16u -> 64u (a scalar)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target width</param>
+        /// <param name="t">A target type representative</param>
+        [MethodImpl(Inline)]
+        public static ulong vcompact(Vector128<ushort> src, N64 w, ulong t = default)            
+            => vcell64(vcompact(src, default, n128, z8),0);
 
         /// <summary>
         /// 16x8u -> 16x16u
@@ -157,62 +206,134 @@ namespace Z0
         /// <param name="w">The target width selector</param>
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline)]
-        public static Vector256<short> vinflate(Vector128<byte> src, N256 w, short t = default)
-            => vconvert(src, w, t);
-
-        // ~ 8x16w <-> 8x32w
-        // ~ 8:16 <-> 32
-        // ~ ------------------------------------------------------------------
-
-        /// <summary>
-        /// (4x32w,4x32w) -> 8x16w
-        /// </summary>
-        /// <param name="x">The first source vector</param>
-        /// <param name="y">The second source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<ushort> vcompact(Vector128<uint> x, Vector128<uint> y, N128 w, ushort t = default)
-            => vpackus2(x,y);
-
-        /// <summary>
-        /// 8x16u -> 8x32u
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<uint> vinflate(Vector128<ushort> src, N256 w, uint t = default)
+        public static Vector256<ushort> vinflate(Vector128<byte> src, N256 w, ushort t = default)
             => vconvert(src, w, t);
 
         /// <summary>
-        /// 8x16w -> 8x32w
+        /// 32x8u -> 32x16u
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
+        /// <param name="lo">The first target vector</param>
+        /// <param name="hi">The second target vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<int> vinflate(Vector128<short> src, N256 w, int t = default)
-            =>  vconvert(src, w,t);
+        public static Vector512<ushort> vinflate(Vector256<byte> src, N512 w, ushort t = default)
+            => vconvert(src, n512,t);
 
-        /// <summary>
-        /// 8x32w -> 8x16w
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<ushort> vcompact(Vector256<uint> x, N128 w, ushort t = default)            
-            => vcompact(vlo(x),vhi(x),w,t);
-
-
-        // ~ 16x32w <-> 16x16w
-        // ~ 16x16 <-> 32
+        // ~ 32i -> X
         // ~ ------------------------------------------------------------------
 
         /// <summary>
-        /// (8x32w,8x32w) -> 16x16w
+        /// (8x32i,8x32i) -> 16x16i
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<short> vcompact(Vector256<int> x, Vector256<int> y, N256 w, short t = default)            
             => vperm4x64(vpackss(x,y), Perm4L.ACBD);
+
+        /// <summary>
+        /// 8x16i -> 8x32i
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="t">A target component type representative</param>
+        [MethodImpl(Inline)]
+        public static Vector256<int> vinflate(Vector128<short> src, N256 w, int t = default)
+            =>  vconvert(src, w,t);
+
+        /// <summary>
+        /// 16x16i -> 16x32i
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="t">A target type representative</param>
+        [MethodImpl(Inline)]
+        public static Vector512<int> vinflate(Vector256<short> src, N512 w, int t = default)
+            => vconvert(src, w, t);
+
+        // ~ 32u -> X
+        // ~ ------------------------------------------------------------------
+
+        /// <summary>
+        /// (4x32u,4x32u) -> 8x16u
+        /// </summary>
+        /// <param name="x">The first source vector</param>
+        /// <param name="y">The second source vector</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="t">A target component type representative</param>
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> vcompact2(Vector128<uint> x, Vector128<uint> y, N128 w, ushort t = default)
+            => vpackus2(x,y);
+
+        /// <summary>
+        /// (4x32u,4x32u) -> 8x16u
+        /// </summary>
+        /// <param name="x">The first source vector</param>
+        /// <param name="y">The second source vector</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="t">A target component type representative</param>
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> vcompact(Vector128<uint> x, Vector128<uint> y, N128 w, ushort t = default)
+            => vpackus(x,y);
+
+        /// <summary>
+        /// 8x32w -> 8x16w
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="t">A target component type representative</param>
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> vcompact2(Vector256<uint> src, N128 w, ushort t = default)            
+            => vcompact2(vlo(src),vhi(src),w,t);
+
+        /// <summary>
+        /// 8x32w -> 8x16w
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="t">A target component type representative</param>
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> vcompact(Vector256<uint> src, N128 w, ushort t = default)            
+            => vcompact(vlo(src),vhi(src),w,t);
+
+        /// <summary>
+        /// 8x32u -> 64u (a scalar)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target width</param>
+        /// <param name="t">A target type representative</param>
+        [MethodImpl(Inline)]
+        public static ulong vcompact2(Vector256<uint> src, N64 w, ulong t = default)            
+            => vcompact2(vcompact2(src, n128,z16),w,t);
+
+        /// <summary>
+        /// 8x32u -> 64u (a scalar)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target width</param>
+        /// <param name="t">A target type representative</param>
+        [MethodImpl(Inline)]
+        public static ulong vcompact(Vector256<uint> src, N64 w, ulong t = default)            
+            => vcompact(vcompact(src, n128,z16),w,t);
+
+        /// <summary>
+        /// 8x32u -> 8x8u (a scalar vector)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target width</param>
+        /// <param name="t">A target component type representative</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vcompact2(Vector256<uint> src, N128 w, byte t = default)            
+            => vcompact2(vcompact2(src, n128,z16),w,t);
+
+        /// <summary>
+        /// 8x32u -> 8x8u (a scalar vector)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target width</param>
+        /// <param name="t">A target component type representative</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vcompact(Vector256<uint> src, N128 w, byte t = default)            
+            => vcompact(vcompact(src, n128,z16),w,t);
 
         /// <summary>
         /// (8x32w,8x32w) -> 16x16w
@@ -221,12 +342,38 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         /// <remarks>The vpackus intrinsic emits a vector in the following form: 
         /// [0, 1, 2, 3, 8, 9, 10, 11, 4, 5, 6, 7, 12, 13, 14, 15]
-        /// To make use of the result, int must be permuted to a more reasonable order that follows
+        /// To make use of the result, it must be permuted to a more reasonable order, 
+        /// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        /// </remarks>
+        [MethodImpl(Inline)]
+        public static Vector256<ushort> vcompact2(Vector256<uint> x, Vector256<uint> y, N256 w, ushort t = default)            
+            => vperm4x64(vpackus2(x,y), Perm4L.ACBD);
+
+        /// <summary>
+        /// (8x32w,8x32w) -> 16x16w
+        /// </summary>
+        /// <param name="x">The first source vector</param>
+        /// <param name="y">The second source vector</param>
+        /// <remarks>The vpackus intrinsic emits a vector in the following form: 
+        /// [0, 1, 2, 3, 8, 9, 10, 11, 4, 5, 6, 7, 12, 13, 14, 15]
+        /// To make use of the result, it must be permuted to a more reasonable order, 
         /// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
         /// </remarks>
         [MethodImpl(Inline)]
         public static Vector256<ushort> vcompact(Vector256<uint> x, Vector256<uint> y, N256 w, ushort t = default)            
-            => vperm4x64(vpackus2(x,y), Perm4L.ACBD);
+            => vperm4x64(vpackus(x,y), Perm4L.ACBD);
+
+
+        /// <summary>
+        /// 8x16u -> 8x32u
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        /// <param name="w">The target vector width</param>
+        /// <param name="t">A target component type representative</param>
+        [MethodImpl(Inline)]
+        public static Vector256<uint> vinflate(Vector128<ushort> src, N256 w, uint t = default)
+            => vconvert(src, w, t);
 
         /// <summary>
         /// 16x16u -> 16x32u
@@ -239,21 +386,19 @@ namespace Z0
             => vconvert(src, w, t);
 
         /// <summary>
-        /// 16x16i -> 16x32i
+        /// (4x32u,4x32u,4x32u,4x32u) -> 16x8u
         /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="w">The target vector width</param>
-        /// <param name="t">A target type representative</param>
+        /// <param name="x0">The first source vector</param>
+        /// <param name="x1">The second source vector</param>
+        /// <param name="x2">The third source vector</param>
+        /// <param name="x3">The fourth source vector</param>
+        /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static Vector512<int> vinflate(Vector256<short> src, N512 w, int t = default)
-            => vconvert(src, w, t);
-
-
-        // ~ 16x32u <-> 16x8u
-        // ~ ------------------------------------------------------------------
+        public static Vector128<byte> vcompact2(Vector128<uint> x0, Vector128<uint> x1, Vector128<uint> x2, Vector128<uint> x3, N128 w, byte t = default)            
+            => vcompact2(vcompact2(x0,x1,n128,z8), vcompact2(x2,x3,n128,z8),w,t);
 
         /// <summary>
-        /// (4x32w,4x32w,4x32w,4x32w) -> 16x8w
+        /// (4x32u,4x32u,4x32u,4x32u) -> 16x8u
         /// </summary>
         /// <param name="x0">The first source vector</param>
         /// <param name="x1">The second source vector</param>
@@ -265,17 +410,36 @@ namespace Z0
             => vcompact(vcompact(x0,x1,n128,z8), vcompact(x2,x3,n128,z8),w,t);
 
         /// <summary>
-        /// (8x32w, 8x32w) -> 16x8w
+        /// (8x32u, 8x32u) -> 16x8u
         /// </summary>
         /// <param name="x0">The first source vector</param>
         /// <param name="x1">The second source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vcompact(Vector256<uint> x0, Vector256<uint> x1, N128 w, byte t = default)            
-            => vcompact(vcompact(x0,x1,n256,z16), w, t);
+        public static Vector128<byte> vcompact2(Vector256<uint> x0, Vector256<uint> x1, N128 w, byte t = default)  
+            => vcompact2(vcompact2(x0, x1,n256,z16), w, t);
 
         /// <summary>
-        /// 16x32w -> 16x8w
+        /// (8x32u, 8x32u) -> 16x8u
+        /// </summary>
+        /// <param name="x0">The first source vector</param>
+        /// <param name="x1">The second source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vcompact(Vector256<uint> x0, Vector256<uint> x1, N128 w, byte t = default)  
+            => vcompact(vcompact(x0, x1,n256,z16), w, t);
+
+        /// <summary>
+        /// 16x32u -> 16x8u
+        /// </summary>
+        /// <param name="src">The source vector tuple</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vcompact2(in Vector512<uint> src, N128 w, byte t = default)            
+            => vcompact2(src.Lo, src.Hi, w, t);
+
+        /// <summary>
+        /// 16x32u -> 16x8u
         /// </summary>
         /// <param name="src">The source vector tuple</param>
         /// <param name="dst">The target vector</param>
@@ -293,13 +457,20 @@ namespace Z0
         public static Vector512<uint> vinflate(Vector128<byte> src, N512 w, uint t = default)
             => vconvert(src, w, t);        
 
-
-        // ~ 32x32w <-> 32x8w
-        // ~ 32:8 <-> 32
-        // ~ ------------------------------------------------------------------
+        /// <summary>
+        /// (8x32u,8x32u,8x32u,8x32u) -> 32x8w
+        /// </summary>
+        /// <param name="x0">The first source vector</param>
+        /// <param name="x1">The second source vector</param>
+        /// <param name="x2">The third source vector</param>
+        /// <param name="x3">The fourth source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vcompact2(Vector256<uint> x0, Vector256<uint> x1, Vector256<uint> x2, Vector256<uint> x3, N256 w, byte t = default) 
+            => vcompact2(vcompact2(x0,x1,n256,z16), vcompact2(x2,x3,n256,z16),w,t);
 
         /// <summary>
-        /// (8x32w,8x32w,8x32w,8x32w) -> 32x8w
+        /// (8x32u,8x32u,8x32u,8x32u) -> 32x8w
         /// </summary>
         /// <param name="x0">The first source vector</param>
         /// <param name="x1">The second source vector</param>
@@ -330,9 +501,6 @@ namespace Z0
         public static Vector1024<int> vinflate(Vector256<sbyte> src, N1024 w, int t = default)
             => vconvert(src,w,t);
 
-        // ~ 4x64w <-> 4x32w
-        // ~ 4:32 <-> 64
-        // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// (2x64w,2x64w) -> 4x32w

@@ -11,26 +11,19 @@ namespace Z0
     
     using static zfunc;    
     using static ginx;
+    using static CpuVector;
     
     partial class vblock
     {     
         [MethodImpl(Inline)]
-        public static Vector128<T> vimpl<T>(N128 n, in T a, in T b)
+        public static Vector128<T> vimpl<T>(N128 w, in T a, in T b)
             where T : unmanaged
-        {                    
-            vload(in a, out Vector128<T> vA);
-            vload(in b, out Vector128<T> vB);
-            return ginx.vimpl(vA,vB);
-        }
+                => ginx.vimpl(vload(w, in a),vload(w, in b));
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vimpl<T>(N256 n, in T a, in T b)
+        public static Vector256<T> vimpl<T>(N256 w, in T a, in T b)
             where T : unmanaged
-        {                    
-            vload(in a, out Vector256<T> vA);
-            vload(in b, out Vector256<T> vB);
-            return ginx.vimpl(vA,vB);
-        }
+                => ginx.vimpl(vload(w, in a),vload(w, in b));
 
         [MethodImpl(Inline)]
         public static void impl<T>(N128 n, in T a, in T b, ref T z)

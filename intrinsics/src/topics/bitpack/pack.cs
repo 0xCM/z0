@@ -15,56 +15,168 @@ namespace Z0
 
     partial class BitPack
     {
-
-        public static T pack<T>(BitSpan src, T t = default)
+        [MethodImpl(Inline)]
+        public static T pack<T>(in BitSpan src, int offset = 0)
             where T : unmanaged
-        {           
+        {
             if(typeof(T) == typeof(byte))
-                return generic<T>(pack8(src));
+                return generic<T>(pack(src, n8, offset));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(pack16(src));
+                return generic<T>(pack(src, n16, offset));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(pack32(src));
+                return generic<T>(pack(src, n32, offset));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(pack64(src));
-            else 
-                throw unsupported<T>();
+                return generic<T>(pack(src, n64, offset));
+            else
+                throw unsupported<T>();            
         }
 
-
+        /// <summary>
+        /// Packs the leading 8 source bits
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="n">The number of bits to pack</param>
         [MethodImpl(Inline)]
-        static Span<uint> extract<T>(BitSpan src)
-            where T :unmanaged
-                => src.Bits.Slice(0, math.min(src.Length, bitsize<T>())).As<bit,uint>();
-
-
-        [MethodImpl(Inline)]
-        static byte pack8(BitSpan src)
+        public static byte pack(in BitSpan src, N8 n, int offset = 0)
         {
-            var bits = extract<byte>(src);
-            return default;
+            var v0 = CpuVector.vload(n256, head(extract(src,offset,bitsize<byte>())));
+            return (byte)lsbpack(dinx.vcompact(v0,n128,z8));
         }
 
+        /// <summary>
+        /// Packs the 16 leading source bits
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="n">The number of bits to pack</param>
         [MethodImpl(Inline)]
-        static ushort pack16(BitSpan src)
+        public static ushort pack(in BitSpan src, N16 n, int offset = 0)
         {
-            var bits = extract<ushort>(src);
-            return default;
+            ref readonly var unpacked = ref head(extract(src, offset, bitsize<ushort>())); 
+            var v0 = CpuVector.vload(n256, skip(unpacked,0*8));
+            var v1 = CpuVector.vload(n256, skip(unpacked,1*8));
+            return lsbpack(dinx.vcompact(v0, v1, n128, z8));
         }
 
+        /// <summary>
+        /// Packs the 32 source bits that follow a specified offset
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="n">The number of bits to pack</param>
         [MethodImpl(Inline)]
-        static uint pack32(BitSpan src)
+        public static uint pack(in BitSpan src, N32 n, int offset = 0)
         {
-            var bits = extract<uint>(src);
-            return default;
+            ref readonly var unpacked = ref head(extract(src, offset, bitsize<uint>()));
+            
+            var v0 = CpuVector.vload(n256, skip(unpacked,0*8));
+            var v1 = CpuVector.vload(n256, skip(unpacked,1*8));
+            var x = dinx.vcompact(v0,v1,n256,z16);
+
+            v0 = CpuVector.vload(n256, skip(unpacked,2*8));
+            v1 = CpuVector.vload(n256, skip(unpacked,3*8));
+            var y = dinx.vcompact(v0,v1,n256,z16);
+
+            return lsbpack(dinx.vcompact(x,y,n256,z8));
         }
 
+        /// <summary>
+        /// Packs the 64 leading source bits
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="n">The number of bits to pack</param>
+        /// <remarks>The silly loop is required to prvent an order of magnitude increase in the size of the generated assembly (3mb + !)</remarks>
         [MethodImpl(Inline)]
-        static ulong pack64(BitSpan src)
+        public static ulong pack_alt(in BitSpan src, N64 n, int offset = 0)
         {
-            var bits = extract<ulong>(src);
-            return default;
+            ref readonly var unpacked = ref head(extract(src, offset, bitsize<ulong>()));
+            var x = 0ul;
+            for(var i=0; i<2; i++)
+               x |= (ulong)pack(src,n32,i*32) << i*32;
+            return x;
         }
+
+        /// <summary>
+        /// Packs the 64 leading source bits
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="n">The number of bits to pack</param>
+        /// <remarks>The silly loop is required to prvent an order of magnitude increase in the size of the generated assembly (3mb + !)</remarks>
+        [MethodImpl(Inline)]
+        public static ulong pack(in BitSpan src, N64 n, int offset = 0)
+        {
+            ref readonly var unpacked = ref head(extract(src, offset, bitsize<ulong>()));
+
+            var v0 = CpuVector.vload(n256, skip(unpacked,0*8));
+            var v1 = CpuVector.vload(n256, skip(unpacked,1*8));
+            var x = dinx.vcompact(v0,v1,n256,z16);
+
+            v0 = CpuVector.vload(n256, skip(unpacked,2*8));
+            v1 = CpuVector.vload(n256, skip(unpacked,3*8));
+            var y = dinx.vcompact(v0,v1,n256,z16);
+
+            var packed = (ulong)lsbpack(dinx.vcompact(x,y,n256,z8));
+
+            v0 = CpuVector.vload(n256, skip(unpacked,4*8));
+            v1 = CpuVector.vload(n256, skip(unpacked,5*8));
+            x = dinx.vcompact(v0,v1,n256,z16);
+
+            v0 = CpuVector.vload(n256, skip(unpacked,6*8));
+            v1 = CpuVector.vload(n256, skip(unpacked,7*8));
+            y = dinx.vcompact(v0,v1,n256,z16);
+
+            packed |= (ulong)lsbpack(dinx.vcompact(x,y,n256,z8)) << 32;
+
+            return packed;
+        }
+
+        /// <summary>
+        /// Packs 16 1-bit values taken from the least significant bit of each source byte
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static ushort lsbpack(Vector128<byte> src)
+            => pack(src,0);
+
+        /// <summary>
+        /// Packs 32 1-bit values taken from the least significant bit of each source byte
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static uint lsbpack(Vector256<byte> src)
+            => pack(src,0);
+
+        /// <summary>
+        /// Packs 16 1-bit values taken from the most significant bit of each source byte
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static ushort msbpack(Vector128<byte> src)
+            => dinx.vtakemask(src);
+
+        /// <summary>
+        /// Packs 32 1-bit values taken from the most significant bit of each source byte
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static ulong msbpack(Vector256<byte> src)
+            => dinx.vtakemask(src);
+
+        /// <summary>
+        /// Packs 16 1-bit values taken from each source byte at a specified index
+        /// </summary>
+        /// <param name="src">The bit soure</param>
+        /// <param name="index">The byte-relative index from which the bit will be extracted, an integer in the range [0,7][</param>
+        [MethodImpl(Inline)]
+        public static ushort pack(Vector128<byte> src, byte index)
+            => dinx.vtakemask(src,index);
+
+        /// <summary>
+        /// Packs 32 1-bit values taken from each source byte at a specified index
+        /// </summary>
+        /// <param name="src">The bit soure</param>
+        /// <param name="index">The byte-relative index from which the bit will be extracted, an integer in the range [0,7][</param>
+        [MethodImpl(Inline)]
+        public static uint pack(Vector256<byte> src, byte index)
+            => dinx.vtakemask(src,index);
 
         /// <summary>
         /// Packs 4 1-bit values taken from the least significant bit of each source byte
@@ -91,7 +203,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bytes</param>
         [MethodImpl(Inline)]
-        public static byte pack<T>(in ConstBlock64<T> src, int block = 0)
+        static byte pack<T>(in ConstBlock64<T> src, int block = 0)
             where T : unmanaged
                 => pack8(convert<T,ulong>(src.BlockRef(block)));
 
@@ -99,7 +211,7 @@ namespace Z0
         /// Packs 8 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         [MethodImpl(Inline)]
-        public static byte pack<T>(in Block64<T> src, int block = 0)
+        static byte pack<T>(in Block64<T> src, int block = 0)
             where T : unmanaged
                 => pack8(convert<T,ulong>(src.BlockRef(block)));
 
@@ -117,7 +229,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The pack source</param>
         [MethodImpl(Inline)]
-        public static ushort pack<T>(in ConstBlock128<T> src, int block = 0)
+        static ushort pack<T>(in ConstBlock128<T> src, int block = 0)
             where T : unmanaged
                 => pack16(in src.BlockRef(block));
 
@@ -141,7 +253,7 @@ namespace Z0
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         [MethodImpl(Inline)]
-        public static uint pack<T>(in ConstBlock256<T> src, int block = 0)
+        static uint pack<T>(in ConstBlock256<T> src, int block = 0)
             where T : unmanaged
                 => pack32(in src.BlockRef(block));
 
@@ -149,7 +261,7 @@ namespace Z0
         /// Packs 64 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         [MethodImpl(Inline)]
-        public static ulong pack<T>(in ConstBlock512<T> src, int block = 0)
+        static ulong pack<T>(in ConstBlock512<T> src, int block = 0)
             where T : unmanaged
                 => pack64(in src.BlockRef(block));
 
@@ -174,7 +286,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ushort pack16<T>(in T src)
             where T : unmanaged
-                => vtakemask(ginx.vsll(ginx.vload(n128, const64(src)),7));
+                => vtakemask(ginx.vsll(CpuVector.vload(n128, const64(src)),7));
 
         /// <summary>
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
@@ -182,8 +294,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static uint pack32<T>(in T src)
             where T : unmanaged
-                => vtakemask(ginx.vsll(ginx.vload(n256, const64(src)),7));
-
+                => vtakemask(ginx.vsll(CpuVector.vload(n256, const64(src)),7));
 
         [MethodImpl(Inline)]
         static ulong pack64<T>(in T src, int block = 0)
@@ -194,105 +305,20 @@ namespace Z0
             dst |=(ulong)pack32(in skip(in src, 32)) << 32;
             return dst;
         }
-
-        /// <summary>
-        /// Packs 128 isolated bits into a 128 natural block of bits
-        /// </summary>
-        /// <param name="src">The source bits to condense</param>
-        [MethodImpl(Inline)]
-        public static Vector128<uint> pack(NatSpan<N128,bit> src)
-            => pack128(n1, n32, in head(src.As<uint>()));
-
-        [MethodImpl(Inline)]
-        public static Vector128<uint> pack(N1 width, NatSpan<N128,uint> src)
-            => pack128(width, n32, in head(src));
         
-        /// <summary>
-        /// Packs 128 32-bit values into 128 1-bit values captured by a 128-bit vector, adapted
-        /// from https://github.com/lemire/FastPFOR 
-        /// </summary>
-        /// <param name="src">The unpacked data</param>
-        [MethodImpl(Inline)]
-        static Vector128<uint> pack128(ReadOnlySpan<uint> unpacked)
-        {   
-            const byte step = 4;
-            
-            var w = n128;
-            var current = 0;                        
-
-            ref readonly var src = ref head(unpacked);
-
-            var xmm1 = ginx.vload(w, in src);            
-            var xmm0 = xmm1; 
-            xmm1 = ginx.vload(w, in skip(in src, current += step));
-
-            byte offset = 0;
-            while(offset++ < 32)
-            {
-                xmm0 = dinx.vor(xmm0, dinx.vsll(xmm1, offset));
-                xmm1 = ginx.vload(w, in skip(in src, current += step));
-            }
-            return xmm0;
-
-        }
 
         [MethodImpl(Inline)]
-        static void pack1(ref Vector128<uint> xmm0, ref Vector128<uint> xmm1, in uint src, byte step, int offset)
-        {
-            xmm0 = dinx.vor(xmm0, dinx.vsll(xmm1, step));
-            xmm1 = ginx.vload(n128, in skip(in src, offset));
-        }
+        static Span<uint> extract(in BitSpan src, int count)
+            => src.Bits.Slice(0, count).As<bit,uint>();
 
-        /// <summary>
-        /// Packs 128 32-bit values into 128 1-bit values captured by a 128-bit vector, adapted
-        /// from https://github.com/lemire/FastPFOR 
-        /// </summary>
-        /// <param name="width">The target compression width</param>
-        /// <param name="n">The source element width</param>
-        /// <param name="src">A reference to the source values</param>
         [MethodImpl(Inline)]
-        static Vector128<uint> pack128(N1 width, N32 n, in uint src)
-        {
-            const int step = 4;
-            var nv = n128;
-            var current = 0;
-                        
-            var xmm1 = ginx.vload(nv, in src);            
-            var xmm0 = xmm1;            
-            xmm1 = ginx.vload(nv, in skip(in src, current += step));
+        static Span<uint> extract(in BitSpan src, int offset, int count)
+            => src.Bits.Slice(offset, count).As<bit,uint>();
 
-            pack1(ref xmm0, ref xmm1, in src, 1, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 2, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 3, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 4, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 5, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 6, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 7, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 8, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 9, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 10, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 11, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 12, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 13, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 14, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 15, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 16, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 17, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 18, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 19, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 20, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 21, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 22, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 23, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 24, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 25, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 26, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 27, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 28, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 29, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 30, current += step);
-            pack1(ref xmm0, ref xmm1, in src, 31, current += step);
-            return xmm0;
-        }
+        [MethodImpl(Inline)]
+        static Span<uint> extract(in BitSpan src, int count, bool safe)
+            => src.Bits.Slice(0, math.min(src.Length, count)).As<bit,uint>().Extend(count);
+
+
     }
 }

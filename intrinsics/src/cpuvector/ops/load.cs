@@ -19,74 +19,75 @@ namespace Z0
     using static zfunc;
     using static As;
     
-    partial class ginx
-    {        
+
+    partial class CpuVector
+    {
         /// <summary>
         /// Loads a 128-bit vector from a readonly memory reference
         /// </summary>
-        /// <param name="n">The vector width selector</param>
+        /// <param name="w">The target vector width</param>
         /// <param name="src">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<T> vload<T>(N128 n, in T src)
+        public static unsafe Vector128<T> vload<T>(N128 w, in T src)
             where T : unmanaged                    
                 => vload(constptr(in src), out Vector128<T> _);
 
         /// <summary>
         /// Loads a 256-bit vector from a readonly memory reference
         /// </summary>
-        /// <param name="n">The vector width selector</param>
+        /// <param name="w">The target vector width</param>
         /// <param name="src">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<T> vload<T>(N256 n, in T src)
+        public static unsafe Vector256<T> vload<T>(N256 w, in T src)
             where T : unmanaged
                 => vload(constptr(in src), out Vector256<T> _);
 
         /// <summary>
         /// Loads a 512-bit vector from a readonly memory reference
         /// </summary>
-        /// <param name="n">The vector width selector</param>
+        /// <param name="w">The target vector width</param>
         /// <param name="src">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe Vector512<T> vload<T>(N512 n, in T src)
+        public static unsafe Vector512<T> vload<T>(N512 w, in T src)
             where T : unmanaged
                 => vload(constptr(in src), out Vector512<T> _);
 
         /// <summary>
         /// Loads a 128-bit vector from a readonly memory reference offset by a cell-relative offset
         /// </summary>
-        /// <param name="n">The vector width selector</param>
+        /// <param name="w">The target vector width</param>
         /// <param name="src">The memory reference</param>
         /// <param name="offset">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<T> vload<T>(N128 n, in T src, int offset)
+        public static unsafe Vector128<T> vload<T>(N128 w, in T src, int offset)
             where T : unmanaged                    
                 => vload(constptr(in src, offset), out Vector128<T> _);
         
         /// <summary>
         /// Loads a 256-bit vector from a readonly memory reference offset by a cell-relative offset
         /// </summary>
-        /// <param name="n">The vector width selector</param>
+        /// <param name="w">The target vector width</param>
         /// <param name="src">The memory reference</param>
         /// <param name="offset">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<T> vload<T>(N256 n, in T src, int offset)
+        public static unsafe Vector256<T> vload<T>(N256 w, in T src, int offset)
             where T : unmanaged
                 => vload(constptr(in src, offset), out Vector256<T> _);
 
         /// <summary>
         /// Loads a 256-bit vector from a readonly memory reference offset by a cell-relative offset
         /// </summary>
-        /// <param name="n">The vector width selector</param>
+        /// <param name="w">The target vector width</param>
         /// <param name="src">The memory reference</param>
         /// <param name="offset">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe Vector512<T> vload<T>(N512 n, in T src, int offset)
+        public static unsafe Vector512<T> vload<T>(N512 w, in T src, int offset)
             where T : unmanaged
                 => vload(constptr(in src, offset), out Vector512<T> _);
 
@@ -375,7 +376,40 @@ namespace Z0
         public static Vector512<T> vload<T>(in Block512<T> src, int block)            
             where T : unmanaged      
                 => vload(in src.BlockRef(block), out Vector512<T> x);
- 
+
+        /// <summary>
+        /// Loads a 128-bit vector from a pointer-identified memory location
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="pSrc">The source memory location</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<T> vload<T>(N128 w, T* pSrc)
+            where T : unmanaged
+                => vload(pSrc, out Vector128<T> _);
+        
+        /// <summary>
+        /// Loads a 256-bit vector from a pointer-identified memory location
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="pSrc">The source memory location</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<T> vload<T>(N256 w, T* pSrc)
+            where T : unmanaged
+                => vload(pSrc, out Vector256<T> _);
+
+        /// <summary>
+        /// Loads a 512-bit vector from a pointer-identified memory location
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="pSrc">The source memory location</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static unsafe Vector512<T> vload<T>(N512 w, T* pSrc)
+            where T : unmanaged
+                => vload(pSrc, out Vector512<T> _);        
+
         /// <summary>
         /// Loads a 128-bit vector from a pointer-identified memory location
         /// </summary>
@@ -521,5 +555,10 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }         
+
+
     }
+
+
+
 }

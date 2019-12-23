@@ -11,13 +11,11 @@ namespace Z0
     using static zfunc;
 
     public class t_vbitblend : t_vinx<t_vbitblend>
-    {
-
-                
+    {                
         public void vbitblend_basecases()
         {
             var n = n256;
-            var mask =  CpuVector.broadcast(n, BitMask.msb(n2,n1,z8));
+            var mask =  CpuVector.vbroadcast(n, BitMask.msb(n2,n1,z8));
             var zero = CpuVector.zero<byte>(n);
             var ones =  CpuVector.ones<byte>(n);
             var blend = dinx.vbitblend(zero,ones,mask);

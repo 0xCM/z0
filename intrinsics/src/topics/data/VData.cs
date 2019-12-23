@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> load<T>(N128 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => vgeneric<T>(ginx.vload(n, in head(src)));
+                => vgeneric<T>(CpuVector.vload(n, in head(src)));
 
         /// <summary>
         /// Loads a 128-bit pattern described by a readonly bytespan
@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> load<T>(N256 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => vgeneric<T>(ginx.vload(n, in head(src)));
+                => vgeneric<T>(CpuVector.vload(n, in head(src)));
 
         /// <summary>
         /// Loads a 256-bit pattern described by a readonly bytespan
@@ -67,7 +67,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> load<T>(N512 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => vgeneric<T>(ginx.vload(n, in head(src)));
+                => vgeneric<T>(CpuVector.vload(n, in head(src)));
 
         /// <summary>
         /// Creates a vector that decribes a lo/hi lane merge permutation
@@ -138,19 +138,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotr(N128 n, N24 offset)
-            => ginx.vload(n,RotR24_128x8u);
+            => CpuVector.vload(n,RotR24_128x8u);
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotr(N128 n, N32 offset)
-            => ginx.vload(n, RotR32_128x8u);
+            => CpuVector.vload(n, RotR32_128x8u);
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotr(N128 n, N40 offset)
-            => ginx.vload(n,RotR40_128x8u);
+            => CpuVector.vload(n,RotR40_128x8u);
 
         [MethodImpl(Inline)]
         public static Vector128<byte> rotr(N128 n, N48 offset)
-            => ginx.vload(n,RotR48_128x8u);
+            => CpuVector.vload(n,RotR48_128x8u);
 
         static ReadOnlySpan<byte> RotL_128x8u
             => new byte[16*7]

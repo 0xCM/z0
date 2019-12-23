@@ -77,8 +77,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ConstPair<ulong> clmul(ulong lhs, ulong rhs)
         {
-            var a = ginx.vscalar(n128, lhs);
-            var b = ginx.vscalar(n128, rhs);
+            var a = CpuVector.vscalar(n128, lhs);
+            var b = CpuVector.vscalar(n128, rhs);
             var result = CarrylessMultiply(a,b,0x00);
             return (vcell(result,0), vcell(result,1));
         }
@@ -86,8 +86,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong clmul64(ulong x, ulong y)
         {
-            var u = ginx.vscalar(n128, x);
-            var v = ginx.vscalar(n128, y);
+            var u = CpuVector.vscalar(n128, x);
+            var v = CpuVector.vscalar(n128, y);
             var z = CarrylessMultiply(u, v, 0);
             return vcell(z,0);
         }

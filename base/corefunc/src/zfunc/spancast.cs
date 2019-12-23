@@ -30,7 +30,7 @@ partial class zfunc
     public static NatSpan<N,byte> bytes<N,T>(Span<T> src, N n = default)
         where T : unmanaged
         where N : unmanaged, ITypeNat
-            => NatSpan.checkedload(MemoryMarshal.AsBytes(src),n);
+            => NatSpan.load(MemoryMarshal.AsBytes(src),n);
 
     [MethodImpl(Inline)]
     public static ReadOnlySpan<sbyte> int8<T>(ReadOnlySpan<T> src)

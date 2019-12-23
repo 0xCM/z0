@@ -58,6 +58,17 @@ namespace Z0
             where T : unmanaged 
                 => src.GetElement(index);
 
+
+        [MethodImpl(Inline)]
+        public static T FirstCell<T>(this Vector128<T> src)
+            where T : unmanaged 
+                => src.Cell(0);
+        
+        [MethodImpl(Inline)]
+        public static T FirstCell<T>(this Vector256<T> src)
+            where T : unmanaged 
+                => src.Cell(0);
+
         [MethodImpl(Inline)]
         public static T LastCell<T>(this Vector128<T> src)
             where T : unmanaged 
@@ -71,6 +82,8 @@ namespace Z0
             else
                 return src.Cell(1);
         }
+
+
 
         [MethodImpl(Inline)]
         public static T LastCell<T>(this Vector256<T> src)

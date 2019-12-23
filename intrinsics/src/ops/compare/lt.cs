@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<byte> vlt(Vector128<byte> x, Vector128<byte> y)
         {
-            var mask = CpuVector.broadcast(n128,CmpMask8u);
+            var mask = CpuVector.vbroadcast(n128,CmpMask8u);
             var mx = vxor(x,mask).AsSByte();
             var my = vxor(y,mask).AsSByte();
             return CompareLessThan(mx,my).AsByte();
@@ -40,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<ushort> vlt(Vector128<ushort> x, Vector128<ushort> y)
         {
-            var mask = CpuVector.broadcast(n128,CmpMask16u);
+            var mask = CpuVector.vbroadcast(n128,CmpMask16u);
             var mx = vxor(x,mask).AsInt16();
             var my = vxor(y,mask).AsInt16();
             return CompareLessThan(mx,my).AsUInt16();
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<uint> vlt(Vector128<uint> x, Vector128<uint> y)
         {
-            var mask = CpuVector.broadcast(n128,CmpMask32u);
+            var mask = CpuVector.vbroadcast(n128,CmpMask32u);
             var mx = vxor(x,mask).AsInt32();
             var my = vxor(y,mask).AsInt32();
             return CompareLessThan(mx,my).AsUInt32();
@@ -92,7 +92,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<byte> vlt(Vector256<byte> x, Vector256<byte> y)
         {
-            var mask = CpuVector.broadcast(n256,CmpMask8u);
+            var mask = CpuVector.vbroadcast(n256,CmpMask8u);
             var mx = vxor(x,mask).AsSByte();
             var my = vxor(y,mask).AsSByte();
             return CompareLessThan(mx,my).AsByte();
@@ -105,7 +105,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ushort> vlt(Vector256<ushort> x, Vector256<ushort> y)
         {
-            var mask = CpuVector.broadcast(n256,CmpMask16u);
+            var mask = CpuVector.vbroadcast(n256,CmpMask16u);
             var mx = vxor(x,mask).AsInt16();
             var my = vxor(y,mask).AsInt16();
             return CompareLessThan(mx,my).AsUInt16();
@@ -118,7 +118,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<uint> vlt(Vector256<uint> x, Vector256<uint> y)
         {
-            var mask = CpuVector.broadcast(n256,CmpMask32u);
+            var mask = CpuVector.vbroadcast(n256,CmpMask32u);
             var mx = vxor(x,mask).AsInt32();
             var my = vxor(y,mask).AsInt32();
             return CompareLessThan(mx,my).AsUInt32();
@@ -132,7 +132,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ulong> vlt(Vector256<ulong> x, Vector256<ulong> y)
         {
-            var mask = CpuVector.broadcast(n256,CmpMask64u);
+            var mask = CpuVector.vbroadcast(n256,CmpMask64u);
             var mx = vxor(x,mask).AsInt64();
             var my = vxor(y,mask).AsInt64();
             return CompareLessThan(mx,my).AsUInt64();

@@ -42,8 +42,8 @@ namespace Z0
         public void vreverse_128x8u_outline()
         {
             var n = n128;
-            var v1 = CpuVector.increments<byte>(n);
-            var v2 = CpuVector.decrements<byte>(n);
+            var v1 = CpuVector.vincrements<byte>(n);
+            var v2 = CpuVector.vdecrements<byte>(n);
             var v3 = dinx.vreverse(v1);
             Claim.eq(v2,v3);
         }
@@ -51,8 +51,8 @@ namespace Z0
         public void vreverse_256x8u_outline()
         {
             var n = n256;
-            var v1 = CpuVector.increments<byte>(n);
-            var v2 = CpuVector.decrements<byte>(n);            
+            var v1 = CpuVector.vincrements<byte>(n);
+            var v2 = CpuVector.vdecrements<byte>(n);            
             var v3 = dinx.vreverse(v1);
             Claim.eq(v2,v3);
         }
@@ -79,7 +79,7 @@ namespace Z0
                 var y = x.Replicate();
                 y.Data.Reverse();
             
-                var expect = ginx.vload(y);
+                var expect = CpuVector.vload(y);
                 var actual = dinx.vreverse(x.LoadVector());
                 Claim.eq(expect, actual);
             }
@@ -97,7 +97,7 @@ namespace Z0
                 else
                     spec[k] = k;
             }
-            return dinx.vperm8x32(src,ginx.vload(n256, head(spec)));
+            return dinx.vperm8x32(src,CpuVector.vload(n256, head(spec)));
         }
 
         public void swap_256_i32()

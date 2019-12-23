@@ -71,7 +71,7 @@ namespace Z0
             const byte C = 0b10;
             const byte D = 0b11;
 
-            var x = CpuVector.increments<ushort>(n128);
+            var x = CpuVector.vincrements<ushort>(n128);
             var xs = x.ToSpan();
             Claim.eq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]), x);
 
@@ -94,7 +94,7 @@ namespace Z0
             const byte C = 0b10;
             const byte D = 0b11;
 
-            var x = CpuVector.increments<ushort>(n128);
+            var x = CpuVector.vincrements<ushort>(n128);
             var xs = x.ToSpan();
             Claim.eq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A+4], xs[B+ 4], xs[C + 4], xs[D + 4]), x);
 
@@ -115,10 +115,10 @@ namespace Z0
         {
             var n = n128;
 
-            var u = CpuVector.increments<uint>(n);
+            var u = CpuVector.vincrements<uint>(n);
             Claim.eq(CpuVector.parts(n,0,1,2,3), u);
 
-            var v = CpuVector.decrements<uint>(n);
+            var v = CpuVector.vdecrements<uint>(n);
             Claim.eq(CpuVector.parts(n,3,2,1,0),v);
 
             Claim.eq(v, dinx.vperm4x32(u, Perm4L.DCBA));
@@ -198,9 +198,9 @@ namespace Z0
         static Vector128<T> vswapspec<T>(N128 n, params Swap[] swaps)
             where T : unmanaged  
         {
-            var src = CpuVector.increments<T>(n).ToSpan();
+            var src = CpuVector.vincrements<T>(n).ToSpan();
             var dst = src.Swap(swaps);
-            return ginx.vload(n, in head(src));
+            return CpuVector.vload(n, in head(src));
         }
 
         [MethodImpl(Inline)]
@@ -210,7 +210,7 @@ namespace Z0
         public void perm_swaps()
         {            
             
-            var src = CpuVector.increments<byte>(n128);
+            var src = CpuVector.vincrements<byte>(n128);
 
             Swap s = (0,1);
             var x1 = vswap(src, s);
@@ -289,7 +289,7 @@ namespace Z0
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var src = CpuVector.increments<ulong>(n256);
+                var src = CpuVector.vincrements<ulong>(n256);
                 var x = dinx.vperm4x64(src, Perm4L.BADC);
                 var srcs = src.ToSpan();
                 var y = Vector256.Create(srcs[1], srcs[0], srcs[3], srcs[2]);
@@ -299,8 +299,8 @@ namespace Z0
 
         public void vperm_256u8_outline()
         {
-            var x = CpuVector.increments<byte>(n256);
-            var y = CpuVector.decrements<byte>(n256);
+            var x = CpuVector.vincrements<byte>(n256);
+            var y = CpuVector.vdecrements<byte>(n256);
             var z = dinx.vreverse(dinx.vshuf32x8(x,y));
             Claim.eq(x,z);
         }

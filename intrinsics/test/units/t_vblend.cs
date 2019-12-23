@@ -26,9 +26,9 @@ namespace Z0
         public void vblend_256x8u_outline()
         {
             var w = n256;
-            var x = CpuVector.increments(w, z8);
-            var y = CpuVector.decrements(w, u8max);
-            var spec = v8u(CpuVector.broadcast(w, (ushort)((ushort)Pow2.T07 << 8)));
+            var x = CpuVector.vincrements(w, z8);
+            var y = CpuVector.vdecrements(w, u8max);
+            var spec = v8u(CpuVector.vbroadcast(w, (ushort)((ushort)Pow2.T07 << 8)));
             var z = ginx.vblend(x,y,spec);            
         }        
 
@@ -36,9 +36,9 @@ namespace Z0
         {
             var w = n128;
             var alt = (uint)BitMasks.Msb16x8x1 << 16; 
-            dinx.vcover(v16u(CpuVector.broadcast(w,alt)), out Vector128<byte> spec);
-            var x = CpuVector.increments(w,z16);
-            var y = CpuVector.decrements(w,u16max);
+            dinx.vcover(v16u(CpuVector.vbroadcast(w,alt)), out Vector128<byte> spec);
+            var x = CpuVector.vincrements(w,z16);
+            var y = CpuVector.vdecrements(w,u16max);
             var z = ginx.vblend(x,y,spec);
         }
 
@@ -47,9 +47,9 @@ namespace Z0
             var w = n256;
             var altOdd = (uint)BitMasks.Msb16x8x1 << 16; 
             var altEven = (uint)BitMasks.Msb16x8x1; 
-            dinx.vcover(v16u(CpuVector.broadcast(w,altOdd)), out Vector256<byte> spec);
-            var x = CpuVector.increments(w,z16);
-            var y = CpuVector.decrements(w,u16max);
+            dinx.vcover(v16u(CpuVector.vbroadcast(w,altOdd)), out Vector256<byte> spec);
+            var x = CpuVector.vincrements(w,z16);
+            var y = CpuVector.vdecrements(w,u16max);
             var z = ginx.vblend(x,y,spec);
 
         }
@@ -59,8 +59,8 @@ namespace Z0
             void example1()
             {
                 var n = n128;
-                var x = CpuVector.broadcast(n, (byte)1);
-                var y = CpuVector.broadcast(n, (byte)2);
+                var x = CpuVector.vbroadcast(n, (byte)1);
+                var y = CpuVector.vbroadcast(n, (byte)2);
                 Trace($"x{n}", x.Format());
                 Trace($"y{n}", y.Format());                
                 Trace("valignr/3",ginx.valignr(x,y, 3).Format());
@@ -74,8 +74,8 @@ namespace Z0
             void example2()
             {
                 var n = n256;
-                var x = CpuVector.broadcast(n, (byte)1);
-                var y = CpuVector.broadcast(n, (byte)2);
+                var x = CpuVector.vbroadcast(n, (byte)1);
+                var y = CpuVector.vbroadcast(n, (byte)2);
                 Trace($"x{n}", x.Format(seplanes:true));
                 Trace($"y{n}", y.Format(seplanes:true));                
                 Trace("valignr/3",ginx.valignr(x,y, 3).Format(seplanes:true));
@@ -151,7 +151,7 @@ namespace Z0
             Claim.eq(CpuVector.parts(n,8,9,2,3,C,D,6,7),dinx.vblend(left,right, Blend8x32.RRLLRRLL));
 
             
-            var lrpattern = v32u(CpuVector.broadcast(n,((ulong)(uint.MaxValue) << 32)));
+            var lrpattern = v32u(CpuVector.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
             for(var i=0; i < 8; i++)
                 Claim.eq(vcell(lrpattern,i), even(i) ? 0u : uint.MaxValue);
             

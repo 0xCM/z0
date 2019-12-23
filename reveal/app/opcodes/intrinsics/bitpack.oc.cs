@@ -17,10 +17,17 @@ namespace Z0.OpCodes
     public static class bitpack
     {                
 
-        // public static void unpack(ReadOnlySpan<byte> packed, in Block64<byte> buffer, in Block256<uint> unpacked)
-        //     => BitPack.unpack(packed, buffer, unpacked);
+        public static byte pack_8(BitSpan src)
+            => BitPack.pack<byte>(src);
 
+        public static ushort pack_16(BitSpan src)
+            => BitPack.pack<ushort>(src);
 
+        public static uint pack_32(BitSpan src)
+            => BitPack.pack<uint>(src);
+
+        public static ulong pack_64(BitSpan src)
+            => BitPack.pack<ulong>(src);
 
     }
 

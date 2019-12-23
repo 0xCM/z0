@@ -12,7 +12,6 @@ namespace Z0
 
     public static class BitSpanX
     {
-
         /// <summary>
         /// Wraps a bitspan over a span of extant bits
         /// </summary>
@@ -20,6 +19,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitSpan ToBitSpan(this Span<bit> src)
             => load(src);
+
+        /// <summary>
+        /// Loads a natspan from a bitspan (nonallocating)
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="n">The length representative</param>
+        /// <typeparam name="N">The length type</typeparam>
+        [MethodImpl(Inline)]
+        public static NatSpan<N,bit> ToNatSpan<N>(this in BitSpan src, N n = default)
+            where N : unmanaged, ITypeNat
+                => NatSpan.load(src.Bits,n);
 
         /// <summary>
         /// Loads a bitspan from an array

@@ -59,11 +59,7 @@ namespace Z0
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline)]
         public static Vector512<int> vconvert(Vector128<sbyte> src, N512 w, int t = default)
-        {
-            vmaplo(src, out Vector256<int> lo);
-            vmaphi(src, out Vector256<int> hi);
-            return (lo,hi);
-        }
+            => (vmaplo(src,n256,t),vmaphi(src,n256,t));
 
         // ~ 128x8u -> X
         // ~ ------------------------------------------------------------------        
@@ -296,11 +292,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector512<long> vconvert(Vector256<int> src, N512 w, long t = default)
-        {
-            vmaplo(src, out Vector256<long> lo);
-            vmaphi(src, out Vector256<long> hi);
-            return Tuples.constant(lo,hi);
-        }
+            => (vmaplo(src, n256, t),vmaphi(src, n256, t));
 
         /// <summary>
         /// 8x32u -> (4x64u, 4x64u)
@@ -308,11 +300,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector512<ulong> vconvert(Vector256<uint> src, N512 w, ulong t = default)
-        {
-            vmaplo(src, out Vector256<ulong> lo);
-            vmaphi(src, out Vector256<ulong> hi);
-            return Tuples.constant(lo,hi);
-        }
+            => (vmaplo(src, n256, t),vmaphi(src, n256, t));
 
         [MethodImpl(Inline)]
         public static Vector512<long> vconvert(Vector256<short> src, N512 w, long t = default)

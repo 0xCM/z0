@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(this Span<T> src, N128 n, int offset = 0)
             where T : unmanaged            
-                => ginx.vload(n, src, offset);
+                => CpuVector.vload(n, src, offset);
 
         /// <summary>
         /// Loads a 256-bit vector from a span
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this Span<T> src, N256 n, int offset = 0)
             where T : unmanaged            
-                => ginx.vload(n, src, offset);
+                => CpuVector.vload(n, src, offset);
 
         /// <summary>
         /// Loads a 512-bit vector from a span
@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> LoadVector<T>(this Span<T> src, N512 n, int offset = 0)
             where T : unmanaged            
-                => ginx.vload(n, src, offset);
+                => CpuVector.vload(n, src, offset);
 
         /// <summary>
         /// Loads a 128-bit vector from a readonly span
@@ -51,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(this ReadOnlySpan<T> src, N128 n, int offset = 0)
             where T : unmanaged            
-                => ginx.vload(n, src, offset);
+                => CpuVector.vload(n, src, offset);
 
         /// <summary>
         /// Loads a 256-bit vector from a readonly span
@@ -61,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this ReadOnlySpan<T> src, N256 n, int offset = 0)
             where T : unmanaged            
-                => ginx.vload(n, src, offset);
+                => CpuVector.vload(n, src, offset);
 
         /// <summary>
         /// Loads a 512-bit vector from a readonly span
@@ -71,7 +71,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> LoadVector<T>(this ReadOnlySpan<T> src, N512 n, int offset = 0)
             where T : unmanaged            
-                => ginx.vload(n, src, offset);
+                => CpuVector.vload(n, src, offset);
 
         /// <summary>
         /// Loads a 128-bit vector from the first 128-bit block
@@ -82,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(this in Block128<T> src)            
             where T : unmanaged            
-                => ginx.vload(src.ReadOnly());
+                => CpuVector.vload(src.ReadOnly());
 
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(this in ConstBlock128<T> src)            
             where T : unmanaged      
-                => ginx.vload(src);
+                => CpuVector.vload(src);
 
         /// <summary>
         /// Loads a block-identified 128-bit vector
@@ -105,7 +105,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(this in Block128<T> src, int block)            
             where T : unmanaged            
-                => ginx.vload(src, block);
+                => CpuVector.vload(src, block);
 
 
 
@@ -118,7 +118,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this in Block256<T> src)            
             where T : unmanaged            
-                => ginx.vload(src);
+                => CpuVector.vload(src);
 
         /// <summary>
         /// Loads a 512-bit vector from the first 512-bit block
@@ -129,7 +129,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> LoadVector<T>(this in Block512<T> src)            
             where T : unmanaged            
-                => ginx.vload(src);
+                => CpuVector.vload(src);
 
         /// <summary>
         /// Loads a 256-bit vector from the first 256-bit block
@@ -140,7 +140,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this in ConstBlock256<T> src)            
             where T : unmanaged      
-                => ginx.vload(src);
+                => CpuVector.vload(src);
 
         /// <summary>
         /// Loads a 512-bit vector from the first 512-bit block
@@ -151,7 +151,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> LoadVector<T>(this in ConstBlock512<T> src)            
             where T : unmanaged      
-                => ginx.vload(src);
+                => CpuVector.vload(src);
 
         /// <summary>
         /// Loads a 256-bit vector from an index-identified block
@@ -162,7 +162,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this in Block256<T> src, int block)            
             where T : unmanaged            
-                => ginx.vload(src,block);
+                => CpuVector.vload(src,block);
 
         /// <summary>
         /// Loads 512-bit vector from an index-identified block
@@ -173,7 +173,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> LoadVector<T>(this in Block512<T> src, int block)            
             where T : unmanaged            
-                => ginx.vload(src,block);
+                => CpuVector.vload(src,block);
 
         /// <summary>
         /// Loads a 128-bit vector from an index-identified block
@@ -184,7 +184,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(this in ConstBlock128<T> src, int block)            
             where T : unmanaged      
-                => ginx.vload(src,block);
+                => CpuVector.vload(src,block);
 
         /// <summary>
         /// Loads a 256-bit vector from an index-identified block
@@ -195,7 +195,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this in ConstBlock256<T> src, int block)            
             where T : unmanaged      
-                => ginx.vload(src,block);
+                => CpuVector.vload(src,block);
 
         /// <summary>
         /// Loads a 512-bit vector from an index-identified block
@@ -206,6 +206,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> LoadVector<T>(this in ConstBlock512<T> src, int block)            
             where T : unmanaged      
-                => ginx.vload(src,block);
+                => CpuVector.vload(src,block);
     }
 }

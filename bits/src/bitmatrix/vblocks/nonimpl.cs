@@ -11,26 +11,19 @@ namespace Z0
     
     using static zfunc;    
     using static ginx;
+    using static CpuVector;
     
     partial class vblock
     {     
         [MethodImpl(Inline)]
-        public static Vector128<T> vnonimpl<T>(N128 n, in T a, in T b)
+        public static Vector128<T> vnonimpl<T>(N128 w, in T a, in T b)
             where T : unmanaged
-        {                    
-            vload(in a, out Vector128<T> vA);
-            vload(in b, out Vector128<T> vB);
-            return ginx.vnonimpl(vA,vB);
-        }
+                => ginx.vnonimpl(vload(w, in a),vload(w, in b));
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vnotimply<T>(N256 n, in T a, in T b)
+        public static Vector256<T> vnotimpl<T>(N256 w, in T a, in T b)
             where T : unmanaged
-        {                    
-            vload(in a, out Vector256<T> vA);
-            vload(in b, out Vector256<T> vB);
-            return ginx.vnonimpl(vA,vB);
-        }
+                => ginx.vnonimpl(vload(w, in a),vload(w, in b));
 
         [MethodImpl(Inline)]
         public static void nonimpl<T>(N128 n, in T a, in T b, ref T z)
@@ -40,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void nonimpl<T>(N256 n, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vnotimply(n, in a, in b), ref z);
+                => vstore(vnotimpl(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
         public static void nonimpl<T>(N128 n, int vcount, int blocklen, in T a, in T b, ref T z)

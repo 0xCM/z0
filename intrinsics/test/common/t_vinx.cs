@@ -39,7 +39,7 @@ namespace Z0
                 for(var i =0; i<blocklen; i++)
                     tmp[i] = primalOp(src[offset + i]);
 
-                var vExpect = ginx.vload<T>(n128, in head(tmp));
+                var vExpect = CpuVector.vload<T>(n128, in head(tmp));
              
                 var vX = src.LoadVector(block);
                 var vActual = inXOp(vX);
@@ -75,7 +75,7 @@ namespace Z0
                 for(var i =0; i<blocklen; i++)
                     tmp[i] = primalOp(src[offset + i]);
 
-                var vExpect = ginx.vload<T>(n256, in head(tmp));
+                var vExpect = CpuVector.vload<T>(n256, in head(tmp));
              
                 var vX = src.LoadVector(block);
                 var vActual = inXOp(vX);
@@ -114,7 +114,7 @@ namespace Z0
                 for(var i =0; i<blocklen; i++)
                     tmp[i] = primalOp(lhs[offset + i], rhs[offset + i]);
 
-                ginx.vload(in head(tmp), out Vector128<T> vExpect);
+                CpuVector.vload(in head(tmp), out Vector128<T> vExpect);
              
                 var vX = lhs.LoadVector(block);
                 var vY = rhs.LoadVector(block);
@@ -153,7 +153,7 @@ namespace Z0
                 for(var i =0; i<blocklen; i++)
                     tmp[i] = primalOp(lhs[offset + i], rhs[offset + i]);
 
-                ginx.vload(in head(tmp), out Vector256<T> vExpect);
+                CpuVector.vload(in head(tmp), out Vector256<T> vExpect);
              
                 var vX = lhs.LoadVector(block);
                 var vY = rhs.LoadVector(block);
@@ -171,7 +171,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = Random.Next<T>();
-            var vX = CpuVector.broadcast(w,x);
+            var vX = CpuVector.vbroadcast(w,x);
             var data = vX.ToSpan();
             for(var i=0; i<data.Length; i++)
                 Claim.eq(x,data[i]);            
@@ -181,7 +181,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = Random.Next<T>();
-            var vX = CpuVector.broadcast(w,x);
+            var vX = CpuVector.vbroadcast(w,x);
             var data = vX.ToSpan();
             for(var i=0; i<data.Length; i++)
                 Claim.eq(x,data[i]);
@@ -203,7 +203,7 @@ namespace Z0
                     if(gmath.gt(x[j],y[j]))
                         z[j] = one;
 
-                var expect = ginx.vload(w, in head(z));
+                var expect = CpuVector.vload(w, in head(z));
                 var actual = ginx.vgt(x.LoadVector(),y.LoadVector());
                 var result = ginx.veq(expect,actual);
                 var equal = ginx.vtestc(result,ones);
@@ -228,7 +228,7 @@ namespace Z0
                     if(gmath.gt(x[j],y[j]))
                         z[j] = one;
                 
-                var expect = ginx.vload(w, in head(z));
+                var expect = CpuVector.vload(w, in head(z));
                 var actual = ginx.vgt(x.LoadVector(),y.LoadVector());
                 var result = ginx.veq(expect,actual);
                 var equal = ginx.vtestc(result,ones);
@@ -252,7 +252,7 @@ namespace Z0
                     Claim.neq(bsX[j],bsY[j]);
 
                 var xData = x.ToSpan();
-                var expect  = ginx.vload(w, in head(mathspan.not(xData)));
+                var expect  = CpuVector.vload(w, in head(mathspan.not(xData)));
                 Claim.eq(expect,actual);
             }
         }
@@ -272,7 +272,7 @@ namespace Z0
                     Claim.neq(bsX[j],bsY[j]);
 
                 var xData = x.ToSpan();                
-                var expect  = ginx.vload(w, in head(mathspan.not(xData)));
+                var expect  = CpuVector.vload(w, in head(mathspan.not(xData)));
                 Claim.eq(expect,actual);
             }
         }
@@ -293,7 +293,7 @@ namespace Z0
                     if(gmath.lt(x[j],y[j]))
                         z[j] = one;
 
-                var expect = ginx.vload(w, in head(z));
+                var expect = CpuVector.vload(w, in head(z));
                 var actual = ginx.vlt(x.LoadVector(),y.LoadVector());
                 var result = ginx.veq(expect,actual);
                 var equal = ginx.vtestc(result,ones);
@@ -318,7 +318,7 @@ namespace Z0
                     if(gmath.lt(x[j],y[j]))
                         z[j] = one;
                 
-                var expect = ginx.vload(w, in head(z));
+                var expect = CpuVector.vload(w, in head(z));
                 var actual = ginx.vlt(x.LoadVector(),y.LoadVector());
                 var result = ginx.veq(expect,actual);
                 var equal = ginx.vtestc(result,ones);
@@ -455,8 +455,8 @@ namespace Z0
         {
             for(var i=0; i< SampleSize; i++)
             {
-                var inc = CpuVector.increments<T>(w);
-                var dec = CpuVector.decrements<T>(w);
+                var inc = CpuVector.vincrements<T>(w);
+                var dec = CpuVector.vdecrements<T>(w);
                 var y = ginx.vreverse(inc);
                 Claim.eq(dec, y);
                 Claim.eq(inc, ginx.vreverse(y));
@@ -468,8 +468,8 @@ namespace Z0
         {
             for(var i=0; i< SampleSize; i++)
             {
-                var inc = CpuVector.increments<T>(w);
-                var dec = CpuVector.decrements<T>(w);
+                var inc = CpuVector.vincrements<T>(w);
+                var dec = CpuVector.vdecrements<T>(w);
                 var y = ginx.vreverse(inc);
                 Claim.eq(dec, y);
                 Claim.eq(inc, ginx.vreverse(y));
@@ -809,7 +809,7 @@ namespace Z0
             var  src = Random.Blocks<T>(n, count: SampleSize);
             for(var i = 0; i< src.BlockCount; i++)
             {
-                var v = ginx.vload(n, in src.BlockRef(i));
+                var v = CpuVector.vload(n, in src.BlockRef(i));
                 Claim.yea(ginx.vnonz(v));
             }
             
@@ -822,7 +822,7 @@ namespace Z0
             var  src = Random.Blocks<T>(n, count: SampleSize);
             for(var i = 0; i< src.BlockCount; i++)
             {
-                var v = ginx.vload(n, in src.BlockRef(i));
+                var v = CpuVector.vload(n, in src.BlockRef(i));
                 Claim.yea(ginx.vnonz(v));
             }
             
@@ -1287,13 +1287,13 @@ namespace Z0
             {
                 var srcX = Random.Blocks<T>(w);
                 var srcY = Random.Blocks<T>(w);
-                var vX = ginx.vload(w, in head(srcX));
-                var vY = ginx.vload(w, in head(srcY));
+                var vX = CpuVector.vload(w, in head(srcX));
+                var vY = CpuVector.vload(w, in head(srcY));
                 
                 var dstExpect = DataBlocks.single<T>(w);
                 for(var i=0; i< dstExpect.CellCount; i++)
                     dstExpect[i] = gmath.and(srcX[i], srcY[i]);
-                var expect = ginx.vload(w, in head(dstExpect));
+                var expect = CpuVector.vload(w, in head(dstExpect));
                 var actual = ginx.vand(vX,vY);
                 Claim.eq(expect,actual);                
             }
@@ -1306,12 +1306,12 @@ namespace Z0
             {
                 var srcX = Random.Blocks<T>(w);
                 var srcY = Random.Blocks<T>(w);
-                var vX = ginx.vload(w, in head(srcX));
-                var vY = ginx.vload(w, in head(srcY));
+                var vX = CpuVector.vload(w, in head(srcX));
+                var vY = CpuVector.vload(w, in head(srcY));
                 var dstExpect = DataBlocks.single<T>(w);
                 for(var i=0; i< dstExpect.CellCount; i++)
                     dstExpect[i] = gmath.and(srcX[i], srcY[i]);
-                var expect = ginx.vload(w, in head(dstExpect));
+                var expect = CpuVector.vload(w, in head(dstExpect));
                 var actual = ginx.vand(vX,vY);
                 Claim.eq(expect,actual);                
             }
@@ -1327,7 +1327,7 @@ namespace Z0
                 var x = Random.CpuVector<T>(w);
                 var offsets = Random.CpuVector<T>(w, shiftrange);
                 var actual = ginx.vsrlv(x,offsets);
-                var expect = ginx.vload(w,mathspan.srlv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
+                var expect = CpuVector.vload(w,mathspan.srlv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
                 Claim.eq(expect, actual);
             }
         }
@@ -1342,7 +1342,7 @@ namespace Z0
                 var x = Random.CpuVector<T>(w);
                 var offsets = Random.CpuVector<T>(w, shiftrange);
                 var actual = ginx.vsrlv(x,offsets);
-                var expect = ginx.vload(w,mathspan.srlv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
+                var expect = CpuVector.vload(w,mathspan.srlv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
                 Claim.eq(expect, actual);
             }
         }
@@ -1357,7 +1357,7 @@ namespace Z0
                 var x = Random.CpuVector<T>(w);
                 var offsets = Random.CpuVector<T>(w, shiftrange);
                 var actual = ginx.vsllv(x,offsets);
-                var expect = ginx.vload(w,mathspan.sllv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
+                var expect = CpuVector.vload(w,mathspan.sllv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
                 Claim.eq(expect, actual);
             }
         }
@@ -1372,90 +1372,11 @@ namespace Z0
                 var x = Random.CpuVector<T>(w);
                 var offsets = Random.CpuVector<T>(w, shiftrange);
                 var actual = ginx.vsllv(x,offsets);
-                var expect = ginx.vload(w,mathspan.sllv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
+                var expect = CpuVector.vload(w,mathspan.sllv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
                 Claim.eq(expect, actual);
             }
         }
 
-        protected void vsll_bench<T>(N128 w, T t = default, SystemCounter counter = default)
-            where T : unmanaged
-        {
-            var opcount = RoundCount * CycleCount;
-            var last = vzero<T>(w);
-            var bitlen = bitsize<T>();
-            var opname = $"sll_{w}x{bitlen}u";
-
-            for(var i=0; i<opcount; i++)
-            {
-                var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVector<T>(w);
-                counter.Start();
-                last = ginx.vsll(x,offset);
-                counter.Stop();
-            
-            }
-            Benchmark(opname, counter, opcount);
-        }
-
-        protected void vsll_bench<T>(N256 w, T t = default, SystemCounter counter = default)
-            where T : unmanaged
-        {
-            var opcount = RoundCount * CycleCount;
-            var last = vzero<T>(w);
-            var bitlen = bitsize<T>();
-            var opname = $"sll_{w}x{bitlen}u";
-
-            for(var i=0; i<opcount; i++)
-            {
-                var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVector<T>(n256);
-                counter.Start();
-                last = ginx.vsll(x,offset);
-                counter.Stop();
-            
-            }
-            Benchmark(opname, counter, opcount);
-        }
-
-        protected void vsrl_bench<T>(N128 w, T t = default, SystemCounter counter = default)
-            where T : unmanaged
-        {
-            var opcount = RoundCount * CycleCount;
-            var last = vzero<T>(w);
-            var bitlen = bitsize<T>();
-            var opname = $"srl_{w}x{bitlen}u";
-
-            for(var i=0; i<opcount; i++)
-            {
-                var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVector<T>(w);
-                counter.Start();
-                last = ginx.vsrl(x,offset);
-                counter.Stop();
-            
-            }
-            Benchmark(opname, counter, opcount);
-        }
-
-        protected void vsrl_bench<T>(N256 w, T t = default, SystemCounter counter = default)
-            where T : unmanaged
-        {
-            var opcount = RoundCount * CycleCount;
-            var last = vzero<T>(w);
-            var bitlen = bitsize<T>();
-            var opname = $"srl_{w}x{bitlen}u";
-
-            for(var i=0; i<opcount; i++)
-            {
-                var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVector<T>(w);
-                counter.Start();
-                last = ginx.vsrl(x,offset);
-                counter.Stop();            
-            }
-
-            Benchmark(opname, counter, opcount);
-        }        
 
         void xor_gmath_bench<T>(N256 w, T t = default, SystemCounter counter = default)
             where T : unmanaged

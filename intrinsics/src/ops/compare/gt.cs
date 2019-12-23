@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
 
@@ -18,7 +17,6 @@ namespace Z0
     
     partial class dinx
     {   
-
         /// <summary>
         /// __m128i _mm_cmpgt_epi8 (__m128i a, __m128i b) PCMPGTB xmm, xmm/m128
         /// Determines whether component values the left vector are larger than the
@@ -44,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<byte> vgt(Vector128<byte> x, Vector128<byte> y)
         {
-            var mask = CpuVector.broadcast(n128,CmpMask8u);
+            var mask = CpuVector.vbroadcast(n128,CmpMask8u);
             var mx = vxor(x,mask).AsSByte();
             var my = vxor(y,mask).AsSByte();
             return CompareGreaterThan(mx,my).AsByte();
@@ -73,7 +71,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<ushort> vgt(Vector128<ushort> x, Vector128<ushort> y)
         {
-            var mask = CpuVector.broadcast(n128,CmpMask16u);
+            var mask = CpuVector.vbroadcast(n128,CmpMask16u);
             var mx = vxor(x,mask).AsInt16();
             var my = vxor(y,mask).AsInt16();
             return CompareGreaterThan(mx,my).AsUInt16();
@@ -103,7 +101,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<uint> vgt(Vector128<uint> x, Vector128<uint> y)
         {
-            var mask = CpuVector.broadcast(n128,CmpMask32u);
+            var mask = CpuVector.vbroadcast(n128,CmpMask32u);
             var mx = vxor(x,mask).AsInt32();
             var my = vxor(y,mask).AsInt32();
             return CompareGreaterThan(mx,my).AsUInt32();
@@ -166,7 +164,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<byte> vgt(Vector256<byte> x, Vector256<byte> y)
         {
-            var mask = CpuVector.broadcast(n256,CmpMask8u);
+            var mask = CpuVector.vbroadcast(n256,CmpMask8u);
             var mx = vxor(x,mask).AsSByte();
             var my = vxor(y,mask).AsSByte();
             return CompareGreaterThan(mx,my).AsByte();
@@ -195,7 +193,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ushort> vgt(Vector256<ushort> x, Vector256<ushort> y)
         {
-            var mask = CpuVector.broadcast(n256,CmpMask16u);
+            var mask = CpuVector.vbroadcast(n256,CmpMask16u);
             var mx = vxor(x,mask).AsInt16();
             var my = vxor(y,mask).AsInt16();
             return CompareGreaterThan(mx,my).AsUInt16();
@@ -226,7 +224,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<uint> vgt(Vector256<uint> x, Vector256<uint> y)
         {
-            var mask = CpuVector.broadcast(n256,CmpMask32u);
+            var mask = CpuVector.vbroadcast(n256,CmpMask32u);
             var mx = vxor(x,mask).AsInt32();
             var my = vxor(y,mask).AsInt32();
             return CompareGreaterThan(mx,my).AsUInt32();
@@ -257,7 +255,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ulong> vgt(Vector256<ulong> x, Vector256<ulong> y)
         {
-            var mask = CpuVector.broadcast(n256,CmpMask64u);
+            var mask = CpuVector.vbroadcast(n256,CmpMask64u);
             var mx = vxor(x,mask).AsInt64();
             var my = vxor(y,mask).AsInt64();
             return CompareGreaterThan(mx,my).AsUInt64();
@@ -270,7 +268,6 @@ namespace Z0
         const uint CmpMask32u = 0x80000000u;
 
         const ulong CmpMask64u = 0x8000000000000000ul;
-
 
     }
 }

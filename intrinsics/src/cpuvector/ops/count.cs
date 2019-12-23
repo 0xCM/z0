@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="W">The vector bit width</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static int count<W,T>(W w = default, T t = default)
+        public static int vcount<W,T>(W w = default, T t = default)
             where W : unmanaged, ITypeNat
             where T : unmanaged
         {
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="t">The component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static int count<T>(N128 w = default, T t = default)
+        public static int vcount<T>(N128 w = default, T t = default)
             where T : unmanaged
                 => Vector128<T>.Count;
 
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="t">The component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static int count<T>(N256 w = default, T t = default)
+        public static int vcount<T>(N256 w = default, T t = default)
             where T : unmanaged
                 => Vector256<T>.Count;
 
@@ -64,11 +64,9 @@ namespace Z0
         /// <param name="t">The component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static int count<T>(N512 w = default, T t = default)
+        public static int vcount<T>(N512 w = default, T t = default)
             where T : unmanaged
                 => Vector512<T>.Count;
-
-
     }
 
 }

@@ -325,115 +325,115 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector128<byte> v66(N128 n)
-            => CpuVector.broadcast(n,x66);
+            => CpuVector.vbroadcast(n,x66);
 
         [MethodImpl(Inline)]
         static Vector128<ushort> v6666(N128 n)
-            => CpuVector.broadcast(n,x6666);
+            => CpuVector.vbroadcast(n,x6666);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v66666666(N128 n)
-            => CpuVector.broadcast(n,x66666666);
+            => CpuVector.vbroadcast(n,x66666666);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v6666666666666666(N128 n)
-            => CpuVector.broadcast(n,x6666666666666666);
+            => CpuVector.vbroadcast(n,x6666666666666666);
 
         [MethodImpl(Inline)]
         static Vector128<byte> v3C(N128 n)
-            => CpuVector.broadcast(n,x3C);
+            => CpuVector.vbroadcast(n,x3C);
 
         [MethodImpl(Inline)]
         static Vector128<ushort> v3C3C(N128 n)
-            => CpuVector.broadcast(n,x3C3C);
+            => CpuVector.vbroadcast(n,x3C3C);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v3C3C3C3C(N128 n)
-            => CpuVector.broadcast(n,x3C3C3C3C);
+            => CpuVector.vbroadcast(n,x3C3C3C3C);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v3C3C3C3C3C3C3C3C(N128 n)
-            => CpuVector.broadcast(n,x3C3C3C3C3C3C3C3C);
+            => CpuVector.vbroadcast(n,x3C3C3C3C3C3C3C3C);
 
         [MethodImpl(Inline)]
         static Vector128<ushort> v0FF0(N128 n)
-            => CpuVector.broadcast(n,x0FF0);
+            => CpuVector.vbroadcast(n,x0FF0);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v0FF00FF0(N128 n)
-            => CpuVector.broadcast(n,x0FF00FF0);
+            => CpuVector.vbroadcast(n,x0FF00FF0);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v0FF00FF00FF00FF0(N128 n)
-            => CpuVector.broadcast(n,x0FF00FF00FF00FF0);
+            => CpuVector.vbroadcast(n,x0FF00FF00FF00FF0);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v00FFFF00(N128 n)
-            => CpuVector.broadcast(n,x00FFFF00);
+            => CpuVector.vbroadcast(n,x00FFFF00);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v00FFFF0000FFFF00(N128 n)
-            => CpuVector.broadcast(n,x00FFFF0000FFFF00);
+            => CpuVector.vbroadcast(n,x00FFFF0000FFFF00);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v0000FFFFFFFF0000(N128 n)
-            => CpuVector.broadcast(n,x0000FFFFFFFF0000);
+            => CpuVector.vbroadcast(n,x0000FFFFFFFF0000);
 
         [MethodImpl(Inline)]
         static Vector256<byte> v66(N256 n)
-            => CpuVector.broadcast(n,x66);
+            => CpuVector.vbroadcast(n,x66);
 
         [MethodImpl(Inline)]
         static Vector256<ushort> v6666(N256 n)
-            => CpuVector.broadcast(n,x6666);
+            => CpuVector.vbroadcast(n,x6666);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v66666666(N256 n)
-            => CpuVector.broadcast(n,x66666666);
+            => CpuVector.vbroadcast(n,x66666666);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v6666666666666666(N256 n)
-            => CpuVector.broadcast(n,x6666666666666666);
+            => CpuVector.vbroadcast(n,x6666666666666666);
 
         [MethodImpl(Inline)]
         static Vector256<byte> v3C(N256 n)
-            => CpuVector.broadcast(n,x3C);
+            => CpuVector.vbroadcast(n,x3C);
 
         [MethodImpl(Inline)]
         static Vector256<ushort> v3C3C(N256 n)
-            => CpuVector.broadcast(n,x3C3C);
+            => CpuVector.vbroadcast(n,x3C3C);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v3C3C3C3C(N256 n)
-            => CpuVector.broadcast(n,x3C3C3C3C);
+            => CpuVector.vbroadcast(n,x3C3C3C3C);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v3C3C3C3C3C3C3C3C(N256 n)
-            => CpuVector.broadcast(n,x3C3C3C3C3C3C3C3C);
+            => CpuVector.vbroadcast(n,x3C3C3C3C3C3C3C3C);
 
         [MethodImpl(Inline)]
         static Vector256<ushort> v0FF0(N256 n)
-            => CpuVector.broadcast(n,x0FF0);
+            => CpuVector.vbroadcast(n,x0FF0);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v0FF00FF0(N256 n)
-            => CpuVector.broadcast(n,x0FF00FF0);
+            => CpuVector.vbroadcast(n,x0FF00FF0);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v0FF00FF00FF00FF0(N256 n)
-            => CpuVector.broadcast(n,x0FF00FF00FF00FF0);
+            => CpuVector.vbroadcast(n,x0FF00FF00FF00FF0);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v00FFFF00(N256 n)
-            => CpuVector.broadcast(n,x00FFFF00);
+            => CpuVector.vbroadcast(n,x00FFFF00);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v00FFFF0000FFFF00(N256 n)
-            => CpuVector.broadcast(n,x00FFFF0000FFFF00);
+            => CpuVector.vbroadcast(n,x00FFFF0000FFFF00);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v0000FFFFFFFF0000(N256 n)
-            => CpuVector.broadcast(n,x0000FFFFFFFF0000);
+            => CpuVector.vbroadcast(n,x0000FFFFFFFF0000);
 
     }
 

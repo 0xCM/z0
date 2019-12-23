@@ -14,136 +14,209 @@ namespace Z0
     partial class DataBlocks
     {
         /// <summary>
-        /// Loads a span into a blocked container without checks
+        /// Loads 16-bit segments from a span, raising an error if said source does not evenly partition
         /// </summary>
         /// <param name="w">The block width selector</param>
-        /// <param name="src">The source span</param>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        internal static Block16<T> load<T>(N16 w, Span<T> src)
+        public static Block16<T> load<T>(N16 w, Span<T> src, int offset = 0)
             where T : unmanaged
-                => new Block16<T>(src);
+        {
+            if(!aligned<T>(w,src.Length - offset))
+                badsize(w, src.Length - offset);      
+
+            return unsafeload(w, offset == 0 ? src : src.Slice(offset));
+        }
 
         /// <summary>
-        /// Loads a span into a blocked container without checks
+        /// Loads 32-bit segments from a span, raising an error if said source does not evenly partition
         /// </summary>
         /// <param name="w">The block width selector</param>
-        /// <param name="src">The source span</param>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        internal static Block32<T> load<T>(N32 w, Span<T> src)
+        public static Block32<T> load<T>(N32 w, Span<T> src, int offset = 0)
             where T : unmanaged
-                => new Block32<T>(src);
+        {
+            if(!aligned<T>(w,src.Length - offset))
+                badsize(w, src.Length - offset);      
+
+            return unsafeload(w, offset == 0 ? src : src.Slice(offset));
+        }
 
         /// <summary>
-        /// Loads a span into a blocked container without checks
+        /// Loads 64-bit segments from a span, raising an error if said source does not evenly partition
         /// </summary>
         /// <param name="w">The block width selector</param>
-        /// <param name="src">The source span</param>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        internal static Block64<T> load<T>(N64 w, Span<T> src)
+        public static Block64<T> load<T>(N64 w, Span<T> src, int offset = 0)
             where T : unmanaged
-                => new Block64<T>(src);
+        {
+            if(!aligned<T>(w,src.Length - offset))
+                badsize(w, src.Length - offset);      
+
+            return unsafeload(w, offset == 0 ? src : src.Slice(offset));
+        }
 
         /// <summary>
-        /// Loads a span into a blocked container without checks
+        /// Loads 128-bit segments from a span, raising an error if said source does not evenly partition
         /// </summary>
         /// <param name="w">The block width selector</param>
-        /// <param name="src">The source span</param>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        internal static Block128<T> load<T>(N128 w, Span<T> src)
+        public static Block128<T> load<T>(N128 w, Span<T> src, int offset = 0)
             where T : unmanaged
-                => new Block128<T>(src);
+        {
+            if(!aligned<T>(w, src.Length - offset))
+                badsize(w, src.Length - offset);      
+
+            return unsafeload(w, offset == 0 ? src : src.Slice(offset));
+        }
 
         /// <summary>
-        /// Loads a span into a blocked container without checks
+        /// Loads 256-bit segments from a span, raising an error if said source does not evenly partition
         /// </summary>
         /// <param name="w">The block width selector</param>
-        /// <param name="src">The source span</param>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        internal static Block256<T> load<T>(N256 w, Span<T> src)
+        public static Block256<T> load<T>(N256 w, Span<T> src, int offset = 0)
             where T : unmanaged
-                => new Block256<T>(src);
+        {
+            if(!aligned<T>(w,src.Length - offset))
+                badsize(w, src.Length - offset);      
+
+            return unsafeload(w,offset == 0 ? src : src.Slice(offset));
+        }
 
         /// <summary>
-        /// Loads a span into a blocked container without checks
+        /// Loads 256-bit segments from a span, raising an error if said source does not evenly partition
         /// </summary>
         /// <param name="w">The block width selector</param>
-        /// <param name="src">The source span</param>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        internal static Block512<T> load<T>(N512 w, Span<T> src)
+        public static Block512<T> load<T>(N512 w, Span<T> src, int offset = 0)
             where T : unmanaged
-                => new Block512<T>(src);
+        {
+            if(!aligned<T>(w,src.Length - offset))
+                badsize(w, src.Length - offset);      
+
+            return unsafeload(w,offset == 0 ? src : src.Slice(offset));
+        }
 
         /// <summary>
-        /// Loads a span into a blocked container without checks
+        /// Loads a 16-bit const block from a readonly span
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source span</param>
-        /// <typeparam name="T">The cell type</typeparam>
+        /// <param name="offset">The span index at which to begin the load</param>
+        /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        internal static ConstBlock16<T> load<T>(N16 w, ReadOnlySpan<T> src)
+        public static ConstBlock16<T> load<T>(N16 w,  ReadOnlySpan<T> src, int offset = 0)
             where T : unmanaged
-                => new ConstBlock16<T>(src);
+        {
+            if(!aligned<T>(w,src.Length - offset))
+                badsize(w, src.Length - offset);
+
+            return unsafeload(w, offset == 0 ? src : src.Slice(offset));
+        }
 
         /// <summary>
-        /// Loads a span into a blocked container without checks
+        /// Loads a 32-bit const block from a readonly span
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source span</param>
-        /// <typeparam name="T">The cell type</typeparam>
+        /// <param name="offset">The span index at which to begin the load</param>
+        /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        internal static ConstBlock32<T> load<T>(N32 w,  ReadOnlySpan<T> src)
+        public static ConstBlock32<T> load<T>(N32 w,  ReadOnlySpan<T> src, int offset = 0)
             where T : unmanaged
-                => new ConstBlock32<T>(src);
+        {
+            if(!aligned<T>(w,src.Length - offset))
+                badsize(w, src.Length - offset);
+
+            return unsafeload(w, offset == 0 ? src : src.Slice(offset));
+        }
 
         /// <summary>
-        /// Loads a span into a blocked container without checks
+        /// Loads a 64-bit const block from a readonly span
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source span</param>
+        /// <param name="offset">The span index at which to begin the load</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        internal static ConstBlock64<T> load<T>(N64 w, ReadOnlySpan<T> src)
+        public static ConstBlock64<T> load<T>(N64 w,  ReadOnlySpan<T> src, int offset = 0)
             where T : unmanaged
-                => new ConstBlock64<T>(src);
+        {
+            if(!aligned<T>(w,src.Length - offset))
+                badsize(w, src.Length - offset);
+
+            return unsafeload(w, offset == 0 ? src : src.Slice(offset));
+        }
 
         /// <summary>
-        /// Loads a span into a blocked container without checks
+        /// Loads a 128-bit const block from a readonly span
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source span</param>
+        /// <param name="offset">The span index at which to begin the load</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        internal static ConstBlock128<T> load<T>(N128 w, ReadOnlySpan<T> src)
+        public static ConstBlock128<T> load<T>(N128 w, ReadOnlySpan<T> src, int offset = 0)
             where T : unmanaged
-                => new ConstBlock128<T>(src);
+        {
+            if(!aligned<T>(w,src.Length - offset))
+                badsize(w, src.Length - offset);      
+
+            return unsafeload(w, offset == 0 ? src : src.Slice(offset));
+        }
 
         /// <summary>
-        /// Loads a span into a blocked container without checks
+        /// Loads a 256-bit const block from a readonly span
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source span</param>
+        /// <param name="offset">The span index at which to begin the load</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        internal static ConstBlock256<T> load<T>(N256 w, ReadOnlySpan<T> src)
+        public static ConstBlock256<T> load<T>(N256 w, ReadOnlySpan<T> src, int offset = 0)
             where T : unmanaged
-                => new ConstBlock256<T>(src);
+        {
+            if(!aligned<T>(w,src.Length - offset))
+                badsize(w, src.Length - offset);      
+
+            return unsafeload(w, offset == 0 ? src : src.Slice(offset));
+        }         
 
         /// <summary>
-        /// Loads a span into a blocked container without checks
+        /// Loads a 256-bit const block from a readonly span
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <param name="src">The source span</param>
+        /// <param name="offset">The span index at which to begin the load</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        internal static ConstBlock512<T> load<T>(N512 w, ReadOnlySpan<T> src)
+        public static ConstBlock512<T> load<T>(N512 w, ReadOnlySpan<T> src, int offset = 0)
             where T : unmanaged
-                => new ConstBlock512<T>(src);
+        {
+            if(!aligned<T>(w,src.Length - offset))
+                badsize(w, src.Length - offset);      
+
+            return unsafeload(w, offset == 0 ? src : src.Slice(offset));
+        }         
+
     }
 
 }

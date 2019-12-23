@@ -35,33 +35,33 @@ namespace Z0
             => ginx.vputcell(b,4,ginx.vputcell(a,2, dst));
 
         public static Vector128<byte> vmov128x8u(byte src)
-            => ginx.vscalar(n128,src);
+            => CpuVector.vscalar(n128,src);
 
         public static Vector128<ushort> vmov128x16u(ushort src)
-            => ginx.vscalar(n128, src);
+            => CpuVector.vscalar(n128, src);
 
         public static Vector128<uint> vmov128x32u(uint src)
-            => ginx.vscalar(n128,src);
+            => CpuVector.vscalar(n128,src);
 
         public static Vector128<ulong> vmov128x64u(ulong src)
-            => ginx.vscalar(n128,src);
+            => CpuVector.vscalar(n128,src);
 
         public static Vector128<double> vmov128x64u(double src)
-            => ginx.vscalar(n128,src);
+            => CpuVector.vscalar(n128,src);
 
         public static Vector256<byte> vmov256x8u(byte src)
-            => ginx.vscalar(n256,src);
+            => CpuVector.vscalar(n256,src);
 
         public static Vector256<ushort> vmov256x16u(ushort src)
-            => ginx.vscalar(n256, src);
+            => CpuVector.vscalar(n256, src);
 
         public static Vector256<uint> vmov256x32u(uint src)
-            => ginx.vscalar(n256,src);
+            => CpuVector.vscalar(n256,src);
 
         public static Vector256<ulong> vmov256x64u(ulong src)
-            => ginx.vscalar(n256,src);
+            => CpuVector.vscalar(n256,src);
 
         public static Vector256<double> vmov256x64u(double src)
-            => ginx.vscalar(n256,src);
+            => CpuVector.vscalar(n256,src);
     }
 }

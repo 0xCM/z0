@@ -147,7 +147,7 @@ namespace Z0
             
             var timings = DequeueTimings(Sort);
             if(timings.Any())
-                Log.LogBenchmarks(basename,timings);
+                Log.LogBenchmarks(basename.Replace(".test",".bench"),timings, LogWriteMode.Overwrite);
             
             var results = DequeueResults(Sort);
             if(results.Any())

@@ -58,6 +58,7 @@ namespace Z0
         public static BitSpan bitspan(ulong packed)
         {
             const int blocks = 8;
+            ref var _bytes = ref ref8(ref packed);
             var bytes = BitConvert.GetBytes(packed, DataBlocks.single(n64,z8));
             var buffer = DataBlocks.single(n64,z8);
             var target = DataBlocks.alloc(n256,blocks,z32);
@@ -172,30 +173,38 @@ namespace Z0
                 unpacksingle(packed, buffer, unpacked,block);
             return BitSpan.load(unpacked.As<bit>());
         }
-                
+
+        [MethodImpl(Inline)]
+        public static BitSpan bitspan(ulong packed, ref byte unpacked)
+        {
+            unpack(packed, ref unpacked);
+            return BitSpan.load(ref Unsafe.As<byte,bit>(ref unpacked), 64);
+        }
+
+        /// <summary>
+        /// Creates a bitspan from an arbitrary number of packed bytes
+        /// </summary>
+        /// <param name="packed">The packed data source</param>
+        public static BitSpan bitspan(Span<byte> packed)
+            => bitspan(packed.ReadOnly());
+                    
         /// <summary>
         /// Creates a bitspan from an arbitrary number of packed values
         /// </summary>
         /// <param name="packed">The packed data source</param>
         [MethodImpl(Inline)]
-        public static BitSpan bitspan(ReadOnlySpan<ushort> packed)
-            => bitspan(packed.AsBytes());
+        public static BitSpan bitspan<T>(Span<T> packed)
+            where T : unmanaged
+                => bitspan(packed.AsBytes());
 
         /// <summary>
         /// Creates a bitspan from an arbitrary number of packed values
         /// </summary>
         /// <param name="packed">The packed data source</param>
         [MethodImpl(Inline)]
-        public static BitSpan bitspan(ReadOnlySpan<uint> packed)
-            => bitspan(packed.AsBytes());
-
-        /// <summary>
-        /// Creates a bitspan from an arbitrary number of packed values
-        /// </summary>
-        /// <param name="packed">The packed data source</param>
-        [MethodImpl(Inline)]
-        public static BitSpan bitspan(ReadOnlySpan<ulong> packed)
-            => bitspan(packed.AsBytes());
+        public static BitSpan bitspan<T>(ReadOnlySpan<T> packed)
+            where T : unmanaged
+                => bitspan(packed.AsBytes());
 
    }
 }

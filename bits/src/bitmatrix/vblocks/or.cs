@@ -19,8 +19,8 @@ namespace Z0
         public static Vector128<T> vor<T>(N128 n, in T a, in T b)
             where T : unmanaged
         {                    
-            vload(in a, out Vector128<T> vA);
-            vload(in b, out Vector128<T> vB);
+            CpuVector.vload(in a, out Vector128<T> vA);
+            CpuVector.vload(in b, out Vector128<T> vB);
             return ginx.vor(vA,vB);
         }
 
@@ -28,8 +28,8 @@ namespace Z0
         public static Vector256<T> vor<T>(N256 n, in T a, in T b)
             where T : unmanaged
         {                    
-            vload(in a, out Vector256<T> vA);
-            vload(in b, out Vector256<T> vB);
+            CpuVector.vload(in a, out Vector256<T> vA);
+            CpuVector.vload(in b, out Vector256<T> vB);
             return ginx.vor(vA,vB);
         }
 

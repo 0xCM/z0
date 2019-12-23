@@ -45,7 +45,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         /// <typeparam name="N">The length type</typeparam>
         [MethodImpl(Inline)]
-        public static NatSpan<N,T> checkedload<N,T>(Span<T> src, N n = default)
+        public static NatSpan<N,T> load<N,T>(Span<T> src, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
@@ -66,7 +66,7 @@ namespace Z0
         public static NatSpan<N,T> load<N,T>(in Block256<T> src, N n = default)    
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new NatSpan<N, T>(src.data);
+                => load(src.data,n);
 
         /// <summary>
         /// Loads a natural block from a reference
@@ -90,7 +90,7 @@ namespace Z0
             where T : unmanaged
         {
             Span<T> src = cells;
-            return checkedload(src,n);
+            return load(src,n);
         }
     }
 

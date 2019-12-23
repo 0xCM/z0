@@ -51,7 +51,7 @@ partial class zfunc
     /// <param name="index">The index of the component to extract</param>
     /// <typeparam name="T">The primal component type</typeparam>
     [MethodImpl(Inline)]
-    public static T vhead<S,T>(Vector128<S> src)
+    public static T vfirst<S,T>(Vector128<S> src)
         where S : unmanaged
         where T : unmanaged
             => vcell<S,T>(src,0);
@@ -107,7 +107,7 @@ partial class zfunc
     /// <param name="x">The source vector</param>
     /// <typeparam name="T">The source vector primal component type</typeparam>
     [MethodImpl(Inline)]
-    public static byte vcell8u<T>(Vector128<T> x, int index)
+    public static byte vcell8<T>(Vector128<T> x, int index)
         where T : unmanaged
             => v8u(x).GetElement(index);
 
@@ -127,7 +127,7 @@ partial class zfunc
     /// <param name="x">The source vector</param>
     /// <typeparam name="T">The source vector primal component type</typeparam>
     [MethodImpl(Inline)]
-    public static ushort vcell16u<T>(Vector128<T> x, int index)
+    public static ushort vcell16<T>(Vector128<T> x, int index)
         where T : unmanaged
             => v16u(x).GetElement(index);
 
@@ -147,7 +147,7 @@ partial class zfunc
     /// <param name="x">The source vector</param>
     /// <typeparam name="T">The source vector primal component type</typeparam>
     [MethodImpl(Inline)]
-    public static uint vcell32u<T>(Vector128<T> x, int index)
+    public static uint vcell32<T>(Vector128<T> x, int index)
         where T : unmanaged
             => v32u(x).GetElement(index);
 
@@ -167,7 +167,7 @@ partial class zfunc
     /// <param name="x">The source vector</param>
     /// <typeparam name="T">The source vector primal component type</typeparam>
     [MethodImpl(Inline)]
-    public static ulong vcell64u<T>(Vector128<T> x, int index)
+    public static ulong vcell64<T>(Vector128<T> x, int index)
         where T : unmanaged
             => v64u(x).GetElement(index);
 
@@ -207,7 +207,7 @@ partial class zfunc
     /// <param name="x">The source vector</param>
     /// <typeparam name="T">The source vector primal component type</typeparam>
     [MethodImpl(Inline)]
-    public static byte vcell8u<T>(Vector256<T> x, int index)
+    public static byte vcell8<T>(Vector256<T> x, int index)
         where T : unmanaged
             => v8u(x).GetElement(index);
 
@@ -227,7 +227,7 @@ partial class zfunc
     /// <param name="x">The source vector</param>
     /// <typeparam name="T">The source vector primal component type</typeparam>
     [MethodImpl(Inline)]
-    public static ushort vcell16u<T>(Vector256<T> x, int index)
+    public static ushort vcell16<T>(Vector256<T> x, int index)
         where T : unmanaged
             => v16u(x).GetElement(index);
 
@@ -247,7 +247,7 @@ partial class zfunc
     /// <param name="x">The source vector</param>
     /// <typeparam name="T">The source vector primal component type</typeparam>
     [MethodImpl(Inline)]
-    public static uint vcell32u<T>(Vector256<T> x, int index)
+    public static uint vcell32<T>(Vector256<T> x, int index)
         where T : unmanaged
             => v32u(x).GetElement(index);
 
@@ -257,9 +257,20 @@ partial class zfunc
     /// <param name="x">The source vector</param>
     /// <typeparam name="T">The source vector primal component type</typeparam>
     [MethodImpl(Inline)]
-    public static ulong vcell64u<T>(Vector256<T> x, int index)
+    public static ulong vcell64<T>(Vector256<T> x, int index)
         where T : unmanaged
             => v64u(x).GetElement(index);
+
+    /// <summary>
+    /// Extract an index-identified component of a reinterpreted vector
+    /// </summary>
+    /// <param name="x">The source vector</param>
+    /// <typeparam name="T">The source vector primal component type</typeparam>
+    [MethodImpl(Inline)]
+    public static long vcell64i<T>(Vector256<T> x, int index)
+        where T : unmanaged
+            => v64i(x).GetElement(index);
+
 
     /// <summary>
     /// Extract an index-identified component of a reinterpreted vector

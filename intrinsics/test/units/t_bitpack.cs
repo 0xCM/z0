@@ -70,21 +70,6 @@ namespace Z0
         }
 
 
-        public void sb_pack_8x1_128()
-        {
-            var count = n16;
-            var block = n128;
-            for(var sample = 0; sample < SampleSize; sample++)
-            {
-                var bs = Random.BitString(count);
-                var bitseq = bs.BitSeq.Blocked(block);
-                uint packed = BitPack.pack(bitseq);
-                for(var i=0; i< count; i++)
-                    Claim.eq(bs[i], BitMask.testbit(packed, i));
-
-            }
-        }
-
         public void sb_pack_8x1_256()
         {
             var count = n32;

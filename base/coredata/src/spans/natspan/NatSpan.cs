@@ -28,7 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator NatSpan<N,T>(Span<T> src)
-            => NatSpan.checkedload(src,n);
+            => NatSpan.load(src,n);
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T> (in NatSpan<N,T> src)

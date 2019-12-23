@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> increments<T>(N128 w)
+        public static Vector128<T> vincrements<T>(N128 w)
             where T : unmanaged
        {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> increments<T>(N256 w)
+        public static Vector256<T> vincrements<T>(N256 w)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector512<T> increments<T>(N512 w)
+        public static Vector512<T> vincrements<T>(N512 w)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
@@ -86,9 +86,9 @@ namespace Z0
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> increments<T>(N128 n, T x0)
+        public static Vector128<T> vincrements<T>(N128 n, T x0)
             where T : unmanaged
-                => vadd(increments<T>(n), x0);
+                => vadd(vincrements<T>(n), x0);
 
         /// <summary>
         /// Creates a 256-bit vector with components that increase by unit step from an initial value
@@ -97,9 +97,9 @@ namespace Z0
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> increments<T>(N256 n, T x0)
+        public static Vector256<T> vincrements<T>(N256 n, T x0)
             where T : unmanaged
-                => vadd(increments<T>(n), x0);
+                => vadd(vincrements<T>(n), x0);
 
         /// <summary>
         /// Creates a 256-bit vector with components that increase by unit step from an initial value
@@ -108,9 +108,9 @@ namespace Z0
         /// <param name="step">The distance between adjacent components</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector512<T> increments<T>(N512 n, T x0)
+        public static Vector512<T> vincrements<T>(N512 n, T x0)
             where T : unmanaged
-                => vadd(increments<T>(n), x0);
+                => vadd(vincrements<T>(n), x0);
 
         static ReadOnlySpan<byte> Inc128x8  
             => new byte[16]{0,1,2,3,4,5,6,7,8,9,10,B,12,13,14,F};

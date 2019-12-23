@@ -98,12 +98,12 @@ namespace Z0
         }
 
 
-        public void vmul_256x8i()
+        public void vmul_256x8u()
         {
             var ws = n256;
             var wt = n512;
-            var s = z8i;
-            var t = z16i;
+            var s = z8;
+            var t = z16;
         
             for(var i=0; i< SampleSize; i++)
             {
@@ -119,8 +119,8 @@ namespace Z0
             }
         }
 
-
-        public void vmul_256x16u()
+        //problem?
+        void vmul_256x16u()
         {
             var w = n256;
             var t = z32;
@@ -128,7 +128,7 @@ namespace Z0
             
             var zb = DataBlocks.single(w,t);
             var eb = DataBlocks.single(w,t);            
-            var count = CpuVector.count(w,s);
+            var count = CpuVector.vcount(w,s);
 
             for(var i=0; i< SampleSize; i ++)
             {

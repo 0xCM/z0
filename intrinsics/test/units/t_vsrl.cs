@@ -35,30 +35,6 @@ namespace Z0
         public void vsrl_256x64u()
             => vsrl_check<ulong>(n256);
 
-        public void vsrl_128x8u_bench()
-            => vsrl_bench<byte>(n128);
-
-        public void vsrl_128x16u_bench()
-            => vsrl_bench<ushort>(n128);
-
-        public void vsrl_128x32u_bench()
-            => vsrl_bench<uint>(n128);
-
-        public void vsrl_128x64u_bench()
-            => vsrl_bench<ulong>(n128);
-
-        public void vsrl_256x8u_bench()
-            => vsrl_bench<byte>(n256);
-
-        public void vsrl_256x16u_bench()
-            => vsrl_bench<ushort>(n256);
-
-        public void vsrl_256x32u_bench()
-            => vsrl_bench<uint>(n256);
-
-        public void vsrl_256x64u_bench()
-            => vsrl_bench<ulong>(n256);
- 
         public void t_vsrl_128x8u_outline()
         {
             var w = n128;

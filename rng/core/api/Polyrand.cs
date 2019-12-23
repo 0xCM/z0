@@ -37,23 +37,38 @@ namespace Z0
         public T Next<T>()
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(Int8Source.Next());                
-            else if(typeof(T) == typeof(byte))
+            if(typeof(T) == typeof(byte))
                 return generic<T>(UInt8Source.Next());                
-            else if(typeof(T) == typeof(short))
-                return generic<T>(Int16Source.Next());                
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(UInt16Source.Next());                
-            else if(typeof(T) == typeof(int))
-                return generic<T>(Int32Source.Next());                
             else if(typeof(T) == typeof(uint))
                 return generic<T>(UInt32Source.Next());                
-            else if(typeof(T) == typeof(long))
-                return generic<T>(Int64Source.Next());                
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(UInt64Source.Next());                
-            else if(typeof(T) == typeof(float))
+            else 
+                return Next_i<T>();
+        }
+
+        T Next_i<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(Int8Source.Next());                
+            else if(typeof(T) == typeof(short))
+                return generic<T>(Int16Source.Next());                
+            else if(typeof(T) == typeof(int))
+                return generic<T>(Int32Source.Next());                
+            else if(typeof(T) == typeof(long))
+                return generic<T>(Int64Source.Next());                
+            else 
+                return Next_f<T>();                
+
+        }
+
+        T Next_f<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
                 return generic<T>(Float32Source.Next());                
             else if(typeof(T) == typeof(double))
                 return generic<T>(Float64Source.Next());                
@@ -65,23 +80,39 @@ namespace Z0
         public T Next<T>(T max)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(Int8Source.Next(int8(max)));                
-            else if(typeof(T) == typeof(byte))
+            if(typeof(T) == typeof(byte))
                 return generic<T>(UInt8Source.Next(uint8(max)));                
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Int16Source.Next(int16(max)));                
-            else if(typeof(T) == typeof(ushort))
                 return generic<T>(UInt16Source.Next(uint16(max)));                
-            else if(typeof(T) == typeof(int))
-                return generic<T>(Int32Source.Next(int32(max)));                
             else if(typeof(T) == typeof(uint))
                 return generic<T>(UInt32Source.Next(uint32(max)));                
-            else if(typeof(T) == typeof(long))
-                return generic<T>(Int64Source.Next(int64(max)));                
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(UInt64Source.Next(uint64(max)));                
-            else if(typeof(T) == typeof(float))
+            else 
+                return Next_i(max);
+        }
+
+        [MethodImpl(Inline)]
+        T Next_i<T>(T max)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(Int8Source.Next(int8(max)));                
+            else if(typeof(T) == typeof(short))
+                return generic<T>(Int16Source.Next(int16(max)));                
+            else if(typeof(T) == typeof(int))
+                return generic<T>(Int32Source.Next(int32(max)));                
+            else if(typeof(T) == typeof(long))
+                return generic<T>(Int64Source.Next(int64(max)));                
+            else 
+                return Next_f(max);
+        }
+
+        [MethodImpl(Inline)]
+        T Next_f<T>(T max)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
                 return generic<T>(Float32Source.Next(float32(max)));                
             else if(typeof(T) == typeof(double))
                 return generic<T>(Float64Source.Next(float64(max)));                
@@ -93,23 +124,39 @@ namespace Z0
         public T Next<T>(T min, T max)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(Int8Source.Next(int8(min), int8(max)));                
-            else if(typeof(T) == typeof(byte))
+            if(typeof(T) == typeof(byte))
                 return generic<T>(UInt8Source.Next(uint8(min), uint8(max)));                
-            else if(typeof(T) == typeof(short))
-                return generic<T>(Int16Source.Next(int16(min), int16(max)));                
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(UInt16Source.Next(uint16(min), uint16(max)));                
-            else if(typeof(T) == typeof(int))
-                return generic<T>(Int32Source.Next(int32(min),int32(max)));                
             else if(typeof(T) == typeof(uint))
                 return generic<T>(UInt32Source.Next(uint32(min), uint32(max)));                
-            else if(typeof(T) == typeof(long))
-                return generic<T>(Int64Source.Next(int64(min), int64(max)));                
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(UInt64Source.Next(uint64(min), uint64(max)));                
-            else if(typeof(T) == typeof(float))
+            else 
+                return Next_i(min,max);
+        }
+
+        [MethodImpl(Inline)]
+        T Next_i<T>(T min, T max)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(Int8Source.Next(int8(min), int8(max)));                
+            else if(typeof(T) == typeof(short))
+                return generic<T>(UInt16Source.Next(uint16(min), uint16(max)));                
+            else if(typeof(T) == typeof(int))
+                return generic<T>(UInt32Source.Next(uint32(min), uint32(max)));                
+            else if(typeof(T) == typeof(long))
+                return generic<T>(UInt64Source.Next(uint64(min), uint64(max)));                
+            else 
+                return Next_f(min,max);
+        }
+
+        [MethodImpl(Inline)]
+        T Next_f<T>(T min, T max)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
                 return generic<T>(Float32Source.Next(float32(min), float32(max)));                
             else if(typeof(T) == typeof(double))
                 return generic<T>(Float64Source.Next(float64(min), float64(max)));                

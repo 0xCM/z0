@@ -62,7 +62,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = vmakemask<T>(BitMask.lsb(n2,n1,z32),0);
-            var offsets = CpuVector.increments<T>(w);
+            var offsets = CpuVector.vincrements<T>(w);
             var pattern = vsllv(x,offsets);
             return pattern;
         }
@@ -81,7 +81,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = vmakemask<T>(BitMask.msb<uint>(n2,n1));
-            var offsets = CpuVector.increments<T>(w);
+            var offsets = CpuVector.vincrements<T>(w);
             var pattern = vsrlv(x,offsets);
             return pattern;
         }
@@ -91,7 +91,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => CpuVector.broadcast(w, BitMask.lsb(n64,n2,n1,t));            
+                => CpuVector.vbroadcast(w, BitMask.lsb(n64,n2,n1,t));            
 
         [MethodImpl(Inline)]
         public static SubGrid256<M,N,T> bars<M,N,T>(N256 w, M m = default, N n = default, T t = default)
@@ -101,7 +101,7 @@ namespace Z0
         {
             var sep = natval(n);
             var pattern = BitMask.lo(sep, z64) << sep;                        
-            return vgeneric<T>(CpuVector.broadcast(w,gbits.replicate(pattern)));
+            return vgeneric<T>(CpuVector.vbroadcast(w,gbits.replicate(pattern)));
         }
 
     }

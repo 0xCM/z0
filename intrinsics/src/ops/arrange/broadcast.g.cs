@@ -51,21 +51,6 @@ namespace Z0
             return ref dst;
         }
 
-        /// <summary>
-        /// Broadcasts an S-cell over a T-cell
-        /// </summary>
-        /// <param name="src">The source cell value</param>
-        /// <param name="dst">The target cell</param>
-        /// <typeparam name="S">The source cell type</typeparam>
-        /// <typeparam name="T">The target cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T broadcast<S,T>(S src, out T dst)
-            where S : unmanaged
-            where T : unmanaged
-        {
-            dst = vhead<S,T>(CpuVector.broadcast(n128, src));
-            return ref dst;
-        }
 
         /// <summary>
         /// Broadcasts an S-cell over a T-cell
@@ -75,9 +60,9 @@ namespace Z0
         /// <typeparam name="S">The source cell type</typeparam>
         /// <typeparam name="T">The target cell type</typeparam>
         [MethodImpl(Inline)]
-        public static T broadcast<S,T>(S src)
+        public static T broadcast<S,T>(S src, T t = default)
             where S : unmanaged
             where T : unmanaged
-                => vhead<S,T>(CpuVector.broadcast(n128, src));       
+                => vfirst<S,T>(CpuVector.vbroadcast(n128, src));       
     }
 }
