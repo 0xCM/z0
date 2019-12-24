@@ -7,7 +7,6 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 	using static zfunc;
     using static As;
 
@@ -29,9 +28,9 @@ namespace Z0.Mkl
         protected override int FillBuffer(Span<T> buffer)
         {
             if(typeof(T) == typeof(float))
-                sample.gamma(Source, float32(DistSpec.Alpha), float32(DistSpec.Dx), float32(DistSpec.Beta), float32(buffer));
+                sample.gamma(Source, float32(DistSpec.Alpha), float32(DistSpec.Dx), float32(DistSpec.Beta), span32f(buffer));
             else if(typeof(T) == typeof(double))
-                sample.gamma(Source, float64(DistSpec.Alpha), float64(DistSpec.Dx), float64(DistSpec.Beta), float64(buffer));
+                sample.gamma(Source, float64(DistSpec.Alpha), float64(DistSpec.Dx), float64(DistSpec.Beta), span64f(buffer));
             else 
                 throw unsupported<T>();
 

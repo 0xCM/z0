@@ -8,7 +8,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_partition : UnitTest<t_partition>
+    public class t_partition : t_gmath<t_partition>
     {        
 
         public void part_points_32i()

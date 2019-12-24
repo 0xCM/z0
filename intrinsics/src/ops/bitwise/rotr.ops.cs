@@ -18,11 +18,16 @@ namespace Z0
     {
         public static VrotrOp128<T> Op => default;
 
+        public string Moniker => moniker<N128,T>("vrotr");
+
         [MethodImpl(Inline)]
         public Vector128<T> Invoke(Vector128<T> x, byte offset)
             => ginx.vrotr(x,offset);
-        
-        public string Moniker => moniker<N128,T>("vrotr");
+
+        [MethodImpl(Inline)]
+        public T InvokeScalar(T a, byte offset)
+            => gbits.rotr(a,offset);
+
     }
 
     public readonly struct VrotrOp256<T> : IVShiftOp256<T>
@@ -30,13 +35,15 @@ namespace Z0
     {
         public static VrotrOp256<T> Op => default;
 
+        public string Moniker => moniker<N256,T>("vrotr");
 
         [MethodImpl(Inline)]
         public Vector256<T> Invoke(Vector256<T> x, byte offset)
             => ginx.vrotr(x,offset);
 
-        public string Moniker => moniker<N256,T>("vrotr");
-
+        [MethodImpl(Inline)]
+        public T InvokeScalar(T a, byte offset)
+            => gbits.rotr(a,offset);
     }
 
     partial class VOps

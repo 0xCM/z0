@@ -103,7 +103,7 @@ namespace Z0
                 Linear.add(ref v1, v2);
                 sw.Stop();
             }
-            Collect((opcount,sw,opname));
+            ReportBenchmark(opname, opcount, sw.Elapsed);
         }
     }
 

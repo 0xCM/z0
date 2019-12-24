@@ -19,10 +19,20 @@ namespace Z0
         long started;
 
         public static implicit operator long(SystemCounter counter)
-            => counter.Count;
+        {
+            counter.Stop();
+            var counted = counter.Count;
+            counter.Start();
+            return counted;
+        }
 
         public static implicit operator TimeSpan(SystemCounter counter)
-            => TimeSpan.FromTicks(counter.Count);
+        {
+            counter.Stop();
+            var time =  TimeSpan.FromTicks(counter.Count);
+            counter.Start();
+            return time;
+        }
 
         [MethodImpl(Inline)]
         public static SystemCounter New(bool start = false)
@@ -64,9 +74,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => TimeSpan.FromTicks(Count);
-        }
-         
+        }         
     }
-
-
 }

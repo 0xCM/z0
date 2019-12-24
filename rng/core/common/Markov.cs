@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
@@ -24,9 +22,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))                
-                random.MarkovSpan(As.float32(dst));
+                random.MarkovSpan(span32f(dst));
             else if(typeof(T) == typeof(double))
-                random.MarkovSpan(As.float64(dst));
+                random.MarkovSpan(span64f(dst));
             else
                 throw unsupported<T>();
         }

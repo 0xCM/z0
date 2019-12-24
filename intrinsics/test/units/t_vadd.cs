@@ -10,100 +10,46 @@ namespace Z0
 
     public class t_vadd : t_vinx<t_vadd>
     {
-        public void add_128x8i()
-            => add_check(n128,z8i);
+        public void vadd_check()
+        {
+            
+            void check_128(N128 w = default)
+            {
+                vadd_check(VOps.vadd(w,z8));                
+                vadd_check(VOps.vadd(w,z8i));
+                vadd_check(VOps.vadd(w,z16));
+                vadd_check(VOps.vadd(w,z16i));
+                vadd_check(VOps.vadd(w,z32));
+                vadd_check(VOps.vadd(w,z32i));
+                vadd_check(VOps.vadd(w,z64));
+                vadd_check(VOps.vadd(w,z64i));
 
-        public void add_128x8u()
-            => add_check(n128,z8);
+            }
 
-        public void add_128x16u()
-            => add_check(n128,z16);
+            void check_256(N256 w = default)
+            {
+                vadd_check(VOps.vadd(w,z8));                
+                vadd_check(VOps.vadd(w,z8i));
+                vadd_check(VOps.vadd(w,z16));
+                vadd_check(VOps.vadd(w,z16i));
+                vadd_check(VOps.vadd(w,z32));
+                vadd_check(VOps.vadd(w,z32i));
+                vadd_check(VOps.vadd(w,z64));
+                vadd_check(VOps.vadd(w,z64i));
+            }            
 
-        public void add_128x16i()
-            => add_check(n128,z16i);
+            check_128();
+            check_256();
+        }
 
-        public void add_128x32i()
-            => add_check<int>(n128);
+        void vadd_check<T>(IVBinOp128<T> op)
+            where T : unmanaged
+                => verify_random(op);
+            
 
-        public void add_128x32u()
-            => add_check<int>(n128);
+        void vadd_check<T>(IVBinOp256<T> op)
+            where T : unmanaged
+                => verify_random(op);
 
-        public void add_128x64u()
-            => add_check<ulong>(n128);
-
-        public void and_128x64i()
-            => add_check<long>(n128);
-
-        public void add_256x8i()
-            => add_check<sbyte>(n256);
-
-        public void add_256x8u()
-            => add_check<byte>(n256);
-
-        public void add_256x16u()
-            => add_check<ushort>(n256);
-
-        public void add_256x16i()
-            => add_check<short>(n256);
-
-        public void add_256x32i()
-            => add_check<int>(n256);
-
-        public void add_256x32u()
-            => add_check<int>(n256);
-
-        public void add_256x64u()
-            => add_check<ulong>(n256);
-
-        public void and_256x64i()
-            => add_check<long>(n256);
-
-        public void add_blocks_128x8i()
-            => add_blocks_check<sbyte>(n128);
-
-        public void add_blocks_128x8u()
-            => add_blocks_check<byte>(n128);
-
-        public void add_blocks_128x16i()
-            => add_blocks_check<short>(n128);
-
-        public void add_blocks_128x16u()
-            => add_blocks_check<ushort>(n128);
-
-        public void add_blocks_128x32i()
-            => add_blocks_check<int>(n128);
-
-        public void add_blocks_128x32u()
-            => add_blocks_check<uint>(n128);
-
-        public void add_blocks_128x64i()
-            => add_blocks_check<long>(n128);
-
-        public void add_blocks_128x64u()
-            => add_blocks_check<ulong>(n128);
-
-        public void add_blocks_256x8i()
-            => add_blocks_check<sbyte>(n256);
-
-        public void add_blocks_256x8u()
-            => add_blocks_check<byte>(n256);
-
-        public void add_blocks_256x16i()
-            => add_blocks_check<short>(n256);
-
-        public void add_blocks_256x16u()
-            => add_blocks_check<ushort>(n256);
-
-        public void add_blocks_256x32i()
-            => add_blocks_check<int>(n256);
-
-        public void add_blocks_256x32u()
-            => add_blocks_check<uint>(n256);
-
-        public void add_blocks_256x64i()
-            => add_blocks_check<long>(n256);
-
-        public void add_blocks_256x64u()
-            => add_blocks_check<ulong>(n256);
     }
 }

@@ -27,21 +27,6 @@ namespace Z0
             }
         }
 
-        public void pbv_gfmul_8_bench()
-        {
-            var lhsSrc = Random.Stream<byte>().Take(SampleCount).Select(x => BitVector.from(n8,x)).ToArray();
-            var rhsSrc = Random.Stream<byte>().Take(SampleCount).Select(x => BitVector.from(n8,x)).ToArray();
-            var result = BitVector.alloc(n8);
-            int Bench()
-            {                
-                for(var i=0; i< CycleCount; i++)
-                for(var j=0; j< SampleCount; j++)
-                    result &= lhsSrc[j] * rhsSrc[j];
-                return SampleCount * CycleCount;
-            }   
-
-            Measure(Bench);
-        }
 
         public void gfpoly_format()
         {

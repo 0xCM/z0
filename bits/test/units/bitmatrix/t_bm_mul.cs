@@ -193,7 +193,7 @@ namespace Z0
                 sw.Stop();                    
             }
 
-            Collect((OpCount, snapshot(sw), "bmm_32x32_op"));
+            ReportBenchmark("bmm_32x32", OpCount, sw.Elapsed);
         }
 
         void bm_4x4x4_bench()
@@ -209,7 +209,7 @@ namespace Z0
                 last = m1 * m2;
                 sw.Stop();
             }
-            Collect((OpCount, snapshot(sw), "bmm_4x4"));
+            ReportBenchmark("bmm_4x4", OpCount, sw.Elapsed);
         }
 
         void bm_8x8x8_bench()
@@ -226,7 +226,7 @@ namespace Z0
                 count.Stop();
             }
 
-            Benchmark("bmm_8x8", count);
+            ReportBenchmark("bmm_8x8", OpCount, count);
         }
 
         void bm_16x16x16_bench()
@@ -244,25 +244,8 @@ namespace Z0
                 sw.Stop();
             }
 
-            Collect((OpCount, snapshot(sw), "bmm_16x16"));
+            ReportBenchmark("bmm_16x16", OpCount, sw.Elapsed);
         }
 
-
-        void bm_64x64_bench()
-        {
-            var last = BitMatrix64.Zero;  
-            var count = counter();
-                        
-            for(var i=0; i < OpCount; i++)
-            {
-                var m1 = Random.BitMatrix64();
-                var m2 = Random.BitMatrix64();
-                count.Start();
-                last = BitMatrix.mul(m1, m2);
-                count.Stop();                
-            }
-
-            Benchmark($"bmm_64x64x64u_new",count);
-        }
    }
 }

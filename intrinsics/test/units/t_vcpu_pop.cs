@@ -83,7 +83,7 @@ namespace Z0
                 counter.Stop();
                 opcount += (32 * 3 * SampleCount);
             }
-            Benchmark($"pop_3x256", counter, opcount);
+            ReportBenchmark($"pop_3x256", opcount,counter);
         }
 
         void vcpu_pop_3x128_bench(SystemCounter counter = default, N128 n = default)
@@ -101,7 +101,7 @@ namespace Z0
                 counter.Stop();
                 opcount += (16 * 3 * SampleCount);
             }
-            Benchmark($"pop_3x128", counter, opcount);
+            ReportBenchmark($"pop_3x128", opcount,counter);
         }
 
         void scalar_pop_1x64_popcnt_bench(SystemCounter counter = default)
@@ -119,7 +119,7 @@ namespace Z0
                 counter.Stop();
                 opcount += 8*1*SampleCount;
             }
-            Benchmark($"pop_1x64_popcnt", counter, opcount);
+            ReportBenchmark($"pop_1x64_popcnt", opcount, counter);
         }
     }
 }

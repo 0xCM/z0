@@ -6,6 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     using static zfunc;
 
@@ -97,5 +100,18 @@ namespace Z0
             VerifyOp((x,y) => (x <= y), D.lteq<float>());
             VerifyOp((x,y) => (x <= y), D.lteq<double>());     
         }
+
+        protected void VerifyOp<K>(UnaryOp<K> subject, UnaryOp<K> baseline, bool nonzero = false, 
+            [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+                where K : unmanaged
+        {
+            var src = RandArray<K>(nonzero);
+            var timing = stopwatch();                        
+
+            for(var i = 0; i<src.Length; i++)
+                Claim.eq(baseline(src[i]), subject(src[i]), caller, file, line);            
+        }
+
+
     }
 }

@@ -31,6 +31,16 @@ namespace Z0
                 => zfunc.one<T>();
 
         /// <summary>
+        /// Ones all bits each and every ... one
+        /// </summary>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline)]
+        public static T ones<T>(T t = default)
+            where T : unmanaged
+                => zfunc.ones<T>();
+
+        /// <summary>
         /// Returns the minimum value that can be represented by a primal type
         /// </summary>
         /// <typeparam name="T">The type</typeparam>

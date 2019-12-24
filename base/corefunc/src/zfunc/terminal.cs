@@ -52,7 +52,7 @@ partial class zfunc
     /// </summary>
     /// <param name="time">The operation timing</param>
     /// <param name="labelPad">Option label pad width</param>
-    public static void print(OpTime time, int? labelPad = null)
+    public static void print(BenchmarkRecord time, int? labelPad = null)
         => print(AppMsg.Define(time.Format(labelPad), SeverityLevel.Benchmark));
 
     /// <summary>
@@ -184,6 +184,14 @@ partial class zfunc
         => terminal.WriteError(AppMsg.Define(msg?.ToString() ?? string.Empty, SeverityLevel.Error, caller, file, line));
 
     /// <summary>
+    /// Emits an error-level message reporting a raised exception
+    /// </summary>
+    /// <param name="e">The raised exception</param>
+    /// <param name="title">The name/context of the error</param>
+    public static void error(Exception e, string title, [CallerName] string caller = null, [CallerFile] string file = null, [CallerLine] int? line = null)
+        => terminal.WriteMessage(AppMsg.Define($"{title} | {e}", SeverityLevel.Error, caller, file, line));        
+
+    /// <summary>
     /// Emits an error-level message
     /// </summary>
     /// <param name="msg">The message to emit</param>
@@ -213,12 +221,6 @@ partial class zfunc
         return msg;            
     }
 
-    public static AppMsg TracePerf(OpTime timing, int? labelPad = null)
-    {
-        var msg = appMsg(timing.Format(labelPad), SeverityLevel.Benchmark);
-        print(msg);
-        return msg;
-    }
 
     /// <summary>
     /// Evaluates the expression and writes the result to standard output

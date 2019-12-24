@@ -9,10 +9,10 @@ namespace Z0
         
     using static zfunc;
 
-    public readonly struct DivOp<T> : IBinaryOp<T>
+    public readonly struct KdivOp<T> : IBinaryOp<T>
         where T : unmanaged        
     {
-        public static DivOp<T> Op => default;
+        public static KdivOp<T> Op => default;
 
         public string Moniker => moniker<T>("div");
 
@@ -21,5 +21,13 @@ namespace Z0
             => gmath.div(x,y);
     }
 
+    partial class KOps
+    {
+
+        [MethodImpl(Inline)]
+        public static KdivOp<T> div<T>()
+            where T : unmanaged        
+                => KdivOp<T>.Op;
+    }
 
 }

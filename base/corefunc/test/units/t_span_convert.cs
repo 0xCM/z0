@@ -26,7 +26,6 @@ namespace Z0
         void VerifyBytesToValues<T>()
             where T : unmanaged
         {
-            TypeCaseStart<T>();
             var x = Random.Next<T>();
             var y = BitConvert.GetBytes(x);
             VerifySpanBytesToValue(y,x);
@@ -42,7 +41,6 @@ namespace Z0
             }
             
             VerifySpanBytesToValues(bytes,values);
-            TypeCaseEnd<T>();
         }
 
 

@@ -5,12 +5,15 @@
 namespace Z0
 {
     using System;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     using static zfunc;
 
     using D = GDel;
 
-    public class t_negate : UnitTest<t_add>
+    public class t_negate : t_gmath<t_add>
     {
         public void negate_basecase()
         {
@@ -46,7 +49,7 @@ namespace Z0
             => opcheck(x => (short)-x, D.negate<short>());
 
         public void negate_16u()
-            => VerifyOp(math.negate, D.negate<ushort>());
+            => opcheck(math.negate, D.negate<ushort>());
 
         public void negate_32i()
             => opcheck(x => -x, D.negate<int>());
@@ -65,5 +68,18 @@ namespace Z0
      
         public void negate_64f()
             => opcheck(x => -x, D.negate<double>());              
+ 
+         protected void opcheck<K>(UnaryOp<K> baseline, UnaryOp<K> subject) 
+            where K : unmanaged
+        {
+            for(var i=0; i< SampleCount; i++)
+            {
+                var a = Random.Next<K>();
+                var x = baseline(a);
+                var y = subject(a);
+                Claim.eq(x,y);
+            }
+        }
+
     }
 }

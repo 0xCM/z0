@@ -79,8 +79,8 @@ namespace Z0
 
             }
 
-            Benchmark($"negate{moniker<T>()}_asm", subject);
-            Benchmark($"negate{moniker<T>()}", compare);
+            ReportBenchmark($"negate{moniker<T>()}_asm", OpCount, subject);
+            ReportBenchmark($"negate{moniker<T>()}", OpCount,compare);
 
         }
 

@@ -81,9 +81,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return As.vgeneric<T>(dinx.veq(vcast8i(x), vcast8i(y)));
+                return vgeneric<T>(dinx.veq(vcast8i(x), vcast8i(y)));
             else if(typeof(T) == typeof(short))
-                return As.vgeneric<T>(dinx.veq(vcast16i(x), vcast16i(y)));
+                return vgeneric<T>(dinx.veq(vcast16i(x), vcast16i(y)));
             else if(typeof(T) == typeof(int))
                 return vgeneric<T>(dinx.veq(vcast32i(x), vcast32i(y)));
             else 

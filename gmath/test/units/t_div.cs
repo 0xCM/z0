@@ -10,7 +10,7 @@ namespace Z0
 
     using D = GDel;
 
-    public class t_div : UnitTest<t_div>
+    public class t_div : t_gmath<t_div>
     {
         public void div()
         {

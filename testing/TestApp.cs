@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Collections.Concurrent;
     using System.Reflection;
+    using System.Collections.Concurrent;
     using System.Runtime.CompilerServices;
     
     using static zfunc;    
@@ -20,6 +20,20 @@ namespace Z0
     public abstract class TestApp<A> : TestContext<A>
         where A : TestApp<A>, new()
     {
+
+        ConcurrentQueue<TestCaseRecord> TestResultQueue {get;}
+            = new ConcurrentQueue<TestCaseRecord>();
+
+        protected void Enqueue(IEnumerable<TestCaseRecord> outcomes)
+            => TestResultQueue.Enqueue(outcomes);
+
+        protected TestCaseRecord[] DequeueResults(Func<IEnumerable<TestCaseRecord>, IEnumerable<TestCaseRecord>> sorter)
+        {
+            var results = sorter(TestResultQueue).ToArray();
+            TestResultQueue.Clear();
+            return results;
+        }
+
         IEnumerable<Type> CandidateTypes()
             => typeof(A).Assembly.Types().Realize<IUnitTest>().Where(t => t.ContainsGenericParameters == false);        
         
@@ -38,7 +52,6 @@ namespace Z0
             return true;
         }
 
-
         /// <summary>
         /// Executes the tests defined by a host type
         /// </summary>
@@ -50,7 +63,7 @@ namespace Z0
             if(!HasAny(host,filters))
                 return;
 
-            var results = new List<TestCaseResult>();
+            var results = new List<TestCaseRecord>();
             try
             {
                 var execTime = Duration.Zero;
@@ -86,7 +99,7 @@ namespace Z0
         IEnumerable<MethodInfo> Tests(Type host)
             =>  host.DeclaredMethods().Public().NonGeneric().WithParameterCount(0);
 
-        Duration Run(IUnitTest unit, string hostpath, MethodInfo test, IList<TestCaseResult> results)
+        Duration Run(IUnitTest unit, string hostpath, MethodInfo test, IList<TestCaseRecord> results)
         {
             var exectime = Duration.Zero;
             var messages = new List<AppMsg>();
@@ -100,7 +113,12 @@ namespace Z0
                 exectime = snapshot(sw);
                 messages.AddRange(unit.DequeueMessages());
                 messages.Add(AppMsg.Define($"{testName} executed. {exectime.Ms}ms", SeverityLevel.Info));
-                results.Add(TestCaseResult.Define(testName,true,exectime));
+                
+                var reported = unit.PopOutcomes().ToArray();
+                if(reported.Length != 0)
+                    results.AddRange(reported);
+                else
+                    results.Add(TestCaseRecord.Define(testName,true,exectime));
             }
             catch(Exception e)
             {                
@@ -115,7 +133,7 @@ namespace Z0
                     messages.Add(ErrorMessages.Unanticipated(e ?? e.InnerException));
 
                 messages.Add(AppMsg.Define($"{testName} failed. {exectime.Ms}ms", SeverityLevel.Error));  
-                results.Add(TestCaseResult.Define(testName,false,exectime));
+                results.Add(TestCaseRecord.Define(testName,false,exectime));
                               
             }
             finally
@@ -135,11 +153,11 @@ namespace Z0
         protected virtual string AppName
             => GetType().Assembly.GetSimpleName();
 
-        static IEnumerable<TestCaseResult> Sort(IEnumerable<TestCaseResult> src)
+        static IEnumerable<TestCaseRecord> Sort(IEnumerable<TestCaseRecord> src)
             => src.OrderBy(x => x.Operation).Where(x => !x.Succeeded).Concat(src.Where(x => x.Succeeded));
 
-        static IEnumerable<OpTime> Sort(IEnumerable<OpTime> src)
-            => src.OrderBy(x => x.OpName);
+        static IEnumerable<BenchmarkRecord> Sort(IEnumerable<BenchmarkRecord> src)
+            => src.OrderBy(x => x.Operation);
 
         void EmitLogs()
         {
@@ -181,5 +199,5 @@ namespace Z0
 
 namespace Z0.Test
 {
-    public static class X {}
+    //public static class X {}
 }

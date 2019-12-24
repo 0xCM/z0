@@ -143,7 +143,7 @@ namespace Z0
                 Linear.sub(v1, v2, ref v1);
                 sw.Stop();
             }
-            Collect((opcount,sw,opname));
+            ReportBenchmark(opname,opcount,sw.Elapsed);
         }
 
     }

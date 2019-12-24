@@ -102,5 +102,20 @@ namespace Z0
                     return false;
             return true;
         }
+
+        /// <summary>
+        /// Computes the number of enabled bits covered by source
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static int pop(in BitSpan src)
+        {
+            var enabled = 0;
+            var bitcount = src.Length;
+            for(var i=0; i< bitcount; i++)
+                enabled += (int)src[i];
+            return enabled;                            
+        }
+
     }
 }

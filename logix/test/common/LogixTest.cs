@@ -84,7 +84,7 @@ namespace Z0.Logix
 
             clock.Stop();
 
-            Benchmark(opname, clock, opcount);
+            ReportBenchmark(opname, opcount,clock);
         }
 
          protected void bm_and_check<N,T>(BinaryBitwiseOpKind op = And)
@@ -341,7 +341,7 @@ namespace Z0.Logix
 
             clock.Stop();
 
-            Benchmark(opname, clock, opcount);
+            ReportBenchmark(opname, opcount, clock);
         }
 
         protected void bm_api_bench<T>(BinaryBitwiseOpKind op, SystemCounter clock = default)
@@ -371,7 +371,7 @@ namespace Z0.Logix
 
             clock.Stop();
 
-            Benchmark(opname, clock, opcount);
+            ReportBenchmark(opname, opcount, clock);
         }
 
         protected void bm_and_bench<T>(SystemCounter clock = default)
@@ -401,7 +401,7 @@ namespace Z0.Logix
 
             clock.Stop();
 
-            Benchmark(opname, clock, opcount);
+            ReportBenchmark(opname, opcount, clock);
         }
 
         protected void bm_xor_bench<T>(SystemCounter clock = default)
@@ -431,7 +431,7 @@ namespace Z0.Logix
 
             clock.Stop();
 
-            Benchmark(opname, clock, opcount);
+            ReportBenchmark(opname, opcount, clock);
         }
 
        protected void bitwise_logic_check<T>(BinaryBitwiseOpKind kind)

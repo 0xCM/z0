@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_log : UnitTest<t_log>
+    public class t_log : t_gmath<t_log>
     {
 
         public void ilog2()

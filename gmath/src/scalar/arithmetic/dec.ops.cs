@@ -9,16 +9,10 @@ namespace Z0
         
     using static zfunc;
 
-    partial class MathOps
-    {
-
-
-    }
-
-    public readonly struct DecOp<T> : IUnaryOp<T>
+    public readonly struct KdecOp<T> : IUnaryOp<T>
         where T : unmanaged        
     {
-        public static DecOp<T> Op => default;
+        public static KdecOp<T> Op => default;
 
         public string Moniker => moniker<T>("dec");
 
@@ -28,4 +22,12 @@ namespace Z0
     }
 
 
+    partial class KOps
+    {
+        [MethodImpl(Inline)]
+        public static KdecOp<T> dec<T>()
+            where T : unmanaged        
+                => KdecOp<T>.Op;
+
+    }
 }

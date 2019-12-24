@@ -126,7 +126,7 @@ namespace Z0.Mkl.Test
             gemm_check(src,epsilon, n32, n32, n32);
         }
     
-        OpTime gemm_check<M,K,N,T>(IEnumerable<T> src, T epsilon = default, M m = default, K k = default, N n = default, bool trace = false)
+        BenchmarkRecord gemm_check<M,K,N,T>(IEnumerable<T> src, T epsilon = default, M m = default, K k = default, N n = default, bool trace = false)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -172,14 +172,14 @@ namespace Z0.Mkl.Test
                 Claim.close(E.Unblocked, X.Unblocked, epsilon);
             }
 
-            OpTime timing = optime(CycleCount, runtime, label);
+            BenchmarkRecord timing = optime(CycleCount, runtime, label);
             
             if(collect)
-                Collect(timing, 30);
+                ReportBenchmark(label,CycleCount, TimeSpan.FromMilliseconds(runtime.Ms));
             return timing;
         }
 
-        OpTime gemm_direct_check<M,K,N>(IEnumerable<float> src, M m = default, K k = default, N n = default)
+        BenchmarkRecord gemm_direct_check<M,K,N>(IEnumerable<float> src, M m = default, K k = default, N n = default)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -206,14 +206,14 @@ namespace Z0.Mkl.Test
             }
 
             var label = $"gemm<{nati<M>()},{nati<K>()},{nati<N>()}>";
-            OpTime timing = optime(CycleCount, runtime, label);
+            BenchmarkRecord timing = optime(CycleCount, runtime, label);
 
             if(collect)
-                Collect(timing, 30);
+                ReportBenchmark(label,CycleCount, TimeSpan.FromMilliseconds(runtime.Ms));
             return timing;
         }
 
-        OpTime gemm_direct_check<M,K,N>(IEnumerable<double> src, M m = default, K k = default, N n = default)
+        BenchmarkRecord gemm_direct_check<M,K,N>(IEnumerable<double> src, M m = default, K k = default, N n = default)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -243,12 +243,12 @@ namespace Z0.Mkl.Test
             var timing = optime(CycleCount, runtime, label);
 
             if(collect)
-                Collect(timing, 30);
+                ReportBenchmark(label,CycleCount, TimeSpan.FromMilliseconds(runtime.Ms));
             return timing;
 
         }
 
-        OpTime Gemv64<M,N>(IEnumerable<double> src, int cycles, M m = default, N n = default)
+        BenchmarkRecord Gemv64<M,N>(IEnumerable<double> src, int cycles, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {

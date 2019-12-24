@@ -5,14 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
-    using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    using static As;
     
     using static zfunc;        
 

@@ -5,13 +5,9 @@
 namespace Z0.Test
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.IO;
     
     using static zfunc;
-    using static nfunc;
 
     public class t_mb_write : UnitTest<t_mb_write>
     {
@@ -38,7 +34,6 @@ namespace Z0.Test
             where T : unmanaged    
         {
             var isFp = isFloat<T>();
-            TypeCaseStart<M,N,T>();
             for(var i=0; i< count; i++)
             {
                 var filename = Matrix.filename<M,N,T>();
@@ -54,13 +49,7 @@ namespace Z0.Test
                     B.Apply(round);
 
                 Claim.yea(A == B);
-
             }
-
-            TypeCaseEnd<M,N,T>();
         }
-
-
     }
-
 }

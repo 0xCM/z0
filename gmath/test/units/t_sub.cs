@@ -9,7 +9,7 @@ namespace Z0
     using static zfunc;
     using D = GDel;
     
-    public class t_sub : UnitTest<t_sub>
+    public class t_sub : t_gmath<t_sub>
     {
         public void sub_8i()        
             => VerifyOp((x,y) => (sbyte)(x - y), D.sub<sbyte>());

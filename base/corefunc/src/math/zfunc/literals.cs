@@ -132,20 +132,32 @@ partial class zfunc
     /// <summary>
     /// Returns generic 0 for a primal source type
     /// </summary>
+    /// <param name="t">A primal type representative</param>
     /// <typeparam name="T">The primal source type</typeparam>
     [MethodImpl(Inline)]
-    public static T zero<T>()
+    public static T zero<T>(T t = default)
         where T : unmanaged
             => default;
 
     /// <summary>
     /// Returns generic 1 for a primal source type
     /// </summary>
+    /// <param name="t">A primal type representative</param>
     /// <typeparam name="T">The primal source type</typeparam>
     [MethodImpl(Inline)]
-    public static T one<T>()
+    public static T one<T>(T t = default)
         where T : unmanaged
             => convert<T>(1);
+
+    /// <summary>
+    /// Ones all bits each and every ... one
+    /// </summary>
+    /// <param name="t">A primal type representative</param>
+    /// <typeparam name="T">The primal source type</typeparam>
+    [MethodImpl(Inline)]
+    public static T ones<T>(T t = default)
+        where T : unmanaged
+            => ones_u<T>();
 
     /// <summary>
     /// Returns the minimum value for a primal source type
@@ -270,6 +282,39 @@ partial class zfunc
             return convert<T>(f64max);
         else
             throw unsupported<T>();
+    }
+
+
+    [MethodImpl(Inline)]
+    static T ones_u<T>()
+        where T : unmanaged
+    {
+        if(typeof(T) == typeof(byte))
+            return convert<T>(BitMasks.Ones8u);
+        else if(typeof(T) == typeof(ushort))
+            return convert<T>(BitMasks.Ones16u);
+        else if(typeof(T) == typeof(uint))
+            return convert<T>(BitMasks.Ones32u);
+        else if(typeof(T) == typeof(ulong))
+            return convert<T>(BitMasks.Ones64u);
+        else 
+            return ones_i<T>();
+    }
+
+    [MethodImpl(Inline)]
+    static T ones_i<T>()
+        where T : unmanaged
+    {
+        if(typeof(T) == typeof(sbyte))
+            return convert<T>(BitMasks.Ones8i);
+        else if(typeof(T) == typeof(short))
+            return convert<T>(BitMasks.Ones16i);
+        else if(typeof(T) == typeof(int))
+            return convert<T>(BitMasks.Ones32i);
+        else if(typeof(T) == typeof(long))
+            return convert<T>(BitMasks.Ones64i);
+        else
+          throw unsupported<T>();
     }
 
 }

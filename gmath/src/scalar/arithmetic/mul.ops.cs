@@ -9,17 +9,10 @@ namespace Z0
         
     using static zfunc;
 
-
-    partial class MathOps
-    {
-
-
-    }
-
-    public readonly struct MulOp<T> : IBinaryOp<T>
+    public readonly struct KmulOp<T> : IBinaryOp<T>
         where T : unmanaged        
     {    
-        public static MulOp<T> Op => default;
+        public static KmulOp<T> Op => default;
 
         public string Moniker => moniker<T>("mul");
 
@@ -29,5 +22,13 @@ namespace Z0
             => gmath.mul(x,y);
     }
 
+    partial class KOps
+    {
+
+        [MethodImpl(Inline)]
+        public static KmulOp<T> mul<T>()
+            where T : unmanaged        
+                => KmulOp<T>.Op;
+    }
 
 }

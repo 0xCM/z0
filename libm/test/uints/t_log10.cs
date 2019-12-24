@@ -8,7 +8,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_log10 : MathTest<t_log10>
+    public class t_log10 : t_libm<t_log10>
     {
         public void log10_libm_validate()
         {
@@ -22,29 +22,6 @@ namespace Z0
             }
         }
 
-        public void log10_libm_bench()
-        {
-            void worker(double[] src)
-            {
-                var last = 0.0;
-                for(var i=0; i<src.Length; i++)
-                    last = libm.log10(src[i]);
-            }
-
-            Benchmark<double>(worker, "log10/libm");
-        }
-
-        public void log10_fmath_bench()
-        {
-            void worker(double[] src)
-            {
-                var last = 0.0;
-                for(var i=0; i<src.Length; i++)
-                    last = fmath.log(src[i]);
-            }
-
-            Benchmark<double>(worker,"log10/fmath");
-        }
 
     }
 

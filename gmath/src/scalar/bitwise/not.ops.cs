@@ -9,16 +9,10 @@ namespace Z0
         
     using static zfunc;
 
-    partial class MathOps
-    {
-
-
-    }
-
-    public readonly struct NotOp<T> : IUnaryOp<T>
+    public readonly struct KnotOp<T> : IPUnaryOp<T>
         where T : unmanaged        
     {
-        public static NotOp<T> Op => default;
+        public static KnotOp<T> Op => default;
 
         public string Moniker => moniker<T>("not");
 
@@ -27,4 +21,11 @@ namespace Z0
             => gmath.not(x);
     }    
 
+    partial class KOps
+    {
+        [MethodImpl(Inline)]
+        public static KnotOp<T> not<T>()
+            where T : unmanaged        
+                => KnotOp<T>.Op;
+    }
 }

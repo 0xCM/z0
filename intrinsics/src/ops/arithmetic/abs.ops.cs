@@ -18,11 +18,15 @@ namespace Z0
     {
         public static VabsOp128<T> Op => default;
 
+        public string Moniker => moniker<N128,T>("vabs");
+
         [MethodImpl(Inline)]
         public Vector128<T> Invoke(Vector128<T> x)
             => ginx.vabs(x);
         
-        public string Moniker => moniker<N128,T>("vabs");
+        [MethodImpl(Inline)]
+        public T InvokeScalar(T a)
+            => gmath.abs(a);
     }
 
     public readonly struct VabsOp256<T> : IVUnaryOp256<T>
@@ -30,13 +34,15 @@ namespace Z0
     {
         public static VabsOp256<T> Op => default;
 
+        public string Moniker => moniker<N256,T>("vabs");
 
         [MethodImpl(Inline)]
         public Vector256<T> Invoke(Vector256<T> x)
             => ginx.vabs(x);
 
-        public string Moniker => moniker<N256,T>("vabs");
-
+        [MethodImpl(Inline)]
+        public T InvokeScalar(T a)
+            => gmath.abs(a);
     }
 
     partial class VOps

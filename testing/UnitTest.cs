@@ -5,12 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-
-    public interface IUnitTest : ITestContext
-    {
-        bool Enabled {get;}
-    }
 
     public abstract class UnitTest<T> : TestContext<T>, IUnitTest
         where T : UnitTest<T>
@@ -20,13 +14,6 @@ namespace Z0
             : base(config)
             {
 
-            }
-        
-        public virtual bool Enabled 
-            => true;
-        
-
+            }        
     }
-
-
 }

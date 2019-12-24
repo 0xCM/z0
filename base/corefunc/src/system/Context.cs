@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
     using System.Linq;
@@ -25,8 +24,8 @@ namespace Z0
         /// <summary>
         /// The timings accrued by performance collection operations
         /// </summary>
-        public IEnumerable<OpTime> Benchmarks
-            => OpTimes;
+        public IEnumerable<BenchmarkRecord> Benchmarks
+            => BenchMarkQueue;
 
         /// <summary>
         /// The context random source
@@ -42,36 +41,34 @@ namespace Z0
         /// <summary>
         /// Collects operation timings
         /// </summary>
-        ConcurrentBag<OpTime> OpTimes {get;}
-            = new ConcurrentBag<OpTime>();
+        ConcurrentBag<BenchmarkRecord> BenchMarkQueue {get;}
+            = new ConcurrentBag<BenchmarkRecord>();
 
         List<AppMsg> MsgQueue {get;} 
             = new List<AppMsg>();
 
-        ConcurrentQueue<AppMsg> _MsgQueue {get;} 
-            = new ConcurrentQueue<AppMsg>();
 
+        /// <summary>
+        /// Enqueues operation timing
+        /// </summary>
+        /// <param name="timing">The timing to enqueue</param>
+        protected void Enqueue(BenchmarkRecord timing)
+            => BenchMarkQueue.Add(timing);
 
-        ConcurrentQueue<TestCaseResult> TestResults {get;}
-            = new ConcurrentQueue<TestCaseResult>();
+        /// <summary>
+        /// Enqueues operation timings
+        /// </summary>
+        /// <param name="benchmarks">The timings to enqueue</param>
+        protected void Enqueue(params BenchmarkRecord[] benchmarks)
+            => BenchMarkQueue.AddRange(benchmarks);
 
-
-        protected void Enqueue(IEnumerable<TestCaseResult> results)
-            => TestResults.Enqueue(results);
-
-        protected OpTime[] DequeueTimings(Func<IEnumerable<OpTime>, IEnumerable<OpTime>> sorter)
+        protected BenchmarkRecord[] DequeueTimings(Func<IEnumerable<BenchmarkRecord>, IEnumerable<BenchmarkRecord>> sorter)
         {
-            var timings = sorter(OpTimes).ToArray();
-            OpTimes.Clear();
+            var timings = sorter(BenchMarkQueue).ToArray();
+            BenchMarkQueue.Clear();
             return timings;
         }
 
-        protected TestCaseResult[] DequeueResults(Func<IEnumerable<TestCaseResult>, IEnumerable<TestCaseResult>> sorter)
-        {
-            var results = sorter(TestResults).ToArray();
-            TestResults.Clear();
-            return results;
-        }
 
         public IReadOnlyList<AppMsg> DequeueMessages(params AppMsg[] addenda)
         {
@@ -102,25 +99,11 @@ namespace Z0
         }
 
         /// <summary>
-        /// Enqueues operation timing
-        /// </summary>
-        /// <param name="timing">The timing to enqueue</param>
-        protected void Mark(OpTime timing)
-            => OpTimes.Add(timing);
-
-        /// <summary>
         /// Enqueues operation timings
         /// </summary>
         /// <param name="timings">The timings to enqueue</param>
-        protected void Mark(params OpTime[] timings)
-            => OpTimes.AddRange(timings);
-
-        /// <summary>
-        /// Enqueues operation timings
-        /// </summary>
-        /// <param name="timings">The timings to enqueue</param>
-        protected void Mark(IEnumerable<OpTime> timings)
-            => OpTimes.AddRange(timings);
+        protected void Mark(IEnumerable<BenchmarkRecord> timings)
+            => BenchMarkQueue.AddRange(timings);
 
         protected void HiLite(string msg, [CallerMemberName] string caller = null, [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
                 => Notify(AppMsg.Define(msg, SeverityLevel.HiliteCL, caller, file, line));
@@ -174,48 +157,7 @@ namespace Z0
                 Notify(AppMsg.Define($"{msg}", SeverityLevel.Benchmark));
         }
 
-        /// <summary>
-        /// Collects operation pair timing
-        /// </summary>
-        /// <param name="time">The time to collect</param>
-        /// <param name="labelPad">For tracing, the width of the timing label</param>
-        protected void Collect(OpTimePair time, int? labelPad = null)
-        {
-            Mark(time.Left,time.Right);
 
-            if(TraceEnabled)
-                TracePerf(time.Format(labelPad));
-        }
-
-        /// <summary>
-        /// Collects operation timing
-        /// </summary>
-        /// <param name="time">The time to collect</param>
-        /// <param name="labelPad">For tracing, the width of the timing label</param>
-        protected void Collect(OpTime time, int? labelPad = null)
-        {
-            Mark(time);
-
-            if(TraceEnabled)
-                TracePerf(time.Format(labelPad));
-        }
-
-        /// <summary>
-        /// Collects function evaluation timing
-        /// </summary>
-        /// <param name="f">The function to evaluate</param>
-        /// <param name="label">The measurement label</param>
-        /// <param name="labelPad">For tracing, the width of the measurement label</param>
-        public void Measure(Func<int> f, [CallerMemberName] string label = null, int? labelPad = null)
-        {
-            var sw = stopwatch();
-            var ops = f();
-            var time = OpTime.Define(ops, snapshot(sw), label);
-            Mark(time);
-
-            if(TraceEnabled)
-                TracePerf(time.Format(labelPad));
-        }
     }
 
     public abstract class Context<T> : Context

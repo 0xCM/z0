@@ -9,16 +9,10 @@ namespace Z0
         
     using static zfunc;
 
-    partial class MathOps
-    {
-
-
-    }
-
-    public readonly struct IncOp<T> : IUnaryOp<T>
+    public readonly struct KincOp<T> : IUnaryOp<T>
         where T : unmanaged        
     {        
-        public static IncOp<T> Op => default;
+        public static KincOp<T> Op => default;
 
         public string Moniker => moniker<T>("inc");
 
@@ -27,6 +21,13 @@ namespace Z0
             => gmath.inc(x);
     }
 
+    partial class KOps
+    {
 
+        [MethodImpl(Inline)]
+        public static KincOp<T> inc<T>()
+            where T : unmanaged        
+                => KincOp<T>.Op;
+    }
 
 }

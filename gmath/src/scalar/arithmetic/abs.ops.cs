@@ -9,16 +9,10 @@ namespace Z0
         
     using static zfunc;
 
-    partial class MathOps
-    {
-
-
-    }
-
-    public readonly struct AbsOp<T>  : IUnaryOp<T>
+    public readonly struct KabsOp<T>  : IUnaryOp<T>
         where T : unmanaged        
     {
-        public static AbsOp<T> Op => default;
+        public static KabsOp<T> Op => default;
 
         public string Moniker => moniker<T>("abs");
 
@@ -26,5 +20,15 @@ namespace Z0
         public readonly T Invoke(T x)
             => gmath.abs(x);
     }
+
+    partial class KOps
+    {
+
+        [MethodImpl(Inline)]
+        public static KabsOp<T> abs<T>()
+            where T : unmanaged        
+                => KabsOp<T>.Op;
+    }
+
 
 }

@@ -39,8 +39,8 @@ namespace Z0
 
             }
 
-            Benchmark($"add{moniker<T>()}_del", subject);
-            Benchmark($"add{moniker<T>()}", compare);
+            ReportBenchmark($"add{moniker<T>()}_del", OpCount, subject);
+            ReportBenchmark($"add{moniker<T>()}", OpCount, compare);
         }
 
     }

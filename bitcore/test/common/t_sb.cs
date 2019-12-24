@@ -641,7 +641,7 @@ namespace Z0
                 counter.Stop();
             }
 
-            Benchmark(opname,counter,opcount);
+            ReportBenchmark(opname,opcount,counter);
         }
     }
 }

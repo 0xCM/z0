@@ -190,13 +190,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(avg(int8(src)));
+                return generic<T>(avg(span8i(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(avg(int16(src)));
+                return generic<T>(avg(span16i(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(avg(int32(src)));
+                return generic<T>(avg(span32i(src)));
             else 
-                return generic<T>(avg(int64(src)));
+                return generic<T>(avg(span64i(src)));
         }           
 
         public static T avg_u<T>(ReadOnlySpan<T> src)
@@ -216,9 +216,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(avg(float32(src)));
+                return generic<T>(avg(span32f(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(avg(float64(src)));
+                return generic<T>(avg(span64f(src)));
             else            
                 throw unsupported<T>();
         }           

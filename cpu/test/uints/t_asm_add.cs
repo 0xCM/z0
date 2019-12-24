@@ -85,8 +85,8 @@ namespace Z0
 
             }
 
-            Benchmark($"add{moniker<T>()}_asm", subject);
-            Benchmark($"add{moniker<T>()}", compare);
+            ReportBenchmark($"add{moniker<T>()}_asm", OpCount,subject);
+            ReportBenchmark($"add{moniker<T>()}", OpCount,compare);
         }
 
 

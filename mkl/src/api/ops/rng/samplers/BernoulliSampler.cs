@@ -7,9 +7,8 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
+
 	using static zfunc;
-    using static As;
 
     sealed class BernoulliSampler<T> : Sampler<T, BernoulliSpec<double>>
         where T : unmanaged
@@ -24,7 +23,7 @@ namespace Z0.Mkl
         {
             
             if(typeof(T) == typeof(int))
-                sample.bernoulli(Source,  DistSpec, int32(buffer));
+                sample.bernoulli(Source,  DistSpec, span32i(buffer));
             else 
                 throw unsupported<T>();
             

@@ -46,51 +46,51 @@ namespace Z0
 
 
         public void add_g8i_bench()
-            => gadd_bench<sbyte>();
+            => add_bench<sbyte>();
 
 
         public void add_g8u_bench()
-            => gadd_bench<byte>();
+            => add_bench<byte>();
 
 
         public void add_g16i_bench()
         {
-            gadd_bench<short>();
+            add_bench<short>();
         }
 
         public void add_g16u_bench()
         {
-            gadd_bench<ushort>();
+            add_bench<ushort>();
         }
 
         public void add_g32i_bench()
         {
-            gadd_bench<int>();
+            add_bench<int>();
         }
 
         public void add_g32u_bench()
         {
-            gadd_bench<uint>();
+            add_bench<uint>();
         }
 
         public void add_g64i_bench()
         {
-            gadd_bench<long>();
+            add_bench<long>();
         }
 
         public void add_g64u_bench()
         {
-            gadd_bench<ulong>();
+            add_bench<ulong>();
         }
 
         public void add_g32f_bench()
         {
-            gadd_bench<float>();
+            add_bench<float>();
         }
 
         public void add_g64f_bench()
         {
-            gadd_bench<double>();
+            add_bench<double>();
         }
 
         public void add_d32_baseline()
@@ -128,30 +128,30 @@ namespace Z0
 
         public void polyadd()
         {
-            polyadd_check(MathOps.add<sbyte>());
-            polyadd_check(MathOps.add<byte>());
-            polyadd_check(MathOps.add<short>());
-            polyadd_check(MathOps.add<ushort>());
-            polyadd_check(MathOps.add<int>());
-            polyadd_check(MathOps.add<uint>());
-            polyadd_check(MathOps.add<long>());
-            polyadd_check(MathOps.add<ulong>());
-            polyadd_check(MathOps.add<float>());
-            polyadd_check(MathOps.add<double>());            
+            polyadd_check(KOps.add<sbyte>());
+            polyadd_check(KOps.add<byte>());
+            polyadd_check(KOps.add<short>());
+            polyadd_check(KOps.add<ushort>());
+            polyadd_check(KOps.add<int>());
+            polyadd_check(KOps.add<uint>());
+            polyadd_check(KOps.add<long>());
+            polyadd_check(KOps.add<ulong>());
+            polyadd_check(KOps.add<float>());
+            polyadd_check(KOps.add<double>());            
         }
         
         public void polyadd_bench()
         {
-            polyadd_bench(MathOps.add<sbyte>());
-            polyadd_bench(MathOps.add<byte>());
-            polyadd_bench(MathOps.add<short>());
-            polyadd_bench(MathOps.add<ushort>());
-            polyadd_bench(MathOps.add<int>());
-            polyadd_bench(MathOps.add<uint>());
-            polyadd_bench(MathOps.add<long>());
-            polyadd_bench(MathOps.add<ulong>());
-            polyadd_bench(MathOps.add<float>());
-            polyadd_bench(MathOps.add<double>());
+            polyadd_bench(KOps.add<sbyte>());
+            polyadd_bench(KOps.add<byte>());
+            polyadd_bench(KOps.add<short>());
+            polyadd_bench(KOps.add<ushort>());
+            polyadd_bench(KOps.add<int>());
+            polyadd_bench(KOps.add<uint>());
+            polyadd_bench(KOps.add<long>());
+            polyadd_bench(KOps.add<ulong>());
+            polyadd_bench(KOps.add<float>());
+            polyadd_bench(KOps.add<double>());
         }
 
         void polyadd_check<T>(IBinaryOp<T> op)
@@ -167,7 +167,7 @@ namespace Z0
             }
         }
 
-        void gadd_bench<T>(SystemCounter counter = default)
+        void add_bench<T>(SystemCounter counter = default)
             where T : unmanaged
         {
             var last = gmath.zero<T>();
@@ -180,7 +180,7 @@ namespace Z0
                 last = gmath.add(a,b);
                 counter.Stop();
             }
-            Benchmark($"add_g{moniker<T>()}", counter);
+            ReportBenchmark($"add_g{moniker<T>()}", OpCount, counter);
 
         }
 
@@ -196,7 +196,7 @@ namespace Z0
                 last = a + b;
                 counter.Stop();
             }
-            Benchmark($"add_d{moniker<int>()}", counter);
+            ReportBenchmark($"add_d{moniker<int>()}", OpCount, counter);
         }
 
         void polyadd_bench<T>(IBinaryOp<T> op, SystemCounter counter = default)
@@ -214,8 +214,24 @@ namespace Z0
                 counter.Stop();
             }
 
-            Benchmark($"polyadd_g{moniker<T>()}", counter);
+            ReportBenchmark($"polyadd_g{moniker<T>()}", OpCount,counter);
         }
+
+        protected void opcheck<K>(BinaryOp<K> baseline, BinaryOp<K> subject) 
+            where K : unmanaged
+        {
+            for(var i=0; i< SampleCount; i++)
+            {
+                var a = Random.Next<K>();
+                var b = Random.Next<K>();
+                var x = baseline(a,b);
+                var y = subject(a,b);
+                Claim.eq(x,y);
+
+            }
+        }
+
+
     }
 }
 

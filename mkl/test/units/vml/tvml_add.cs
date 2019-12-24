@@ -54,13 +54,13 @@ namespace Z0.Mkl.Test
             var sw1 = stopwatch();
             for(var i=0; i<cycles; i++)
                 mathspan.add(lhs1,rhs1, dst1.Unblocked);
-            var time1 = OpTime.Define(cycles, snapshot(sw1), "gmath");
+            var time1 = BenchmarkRecord.Define(cycles, snapshot(sw1), "gmath");
 
 
             var sw2 = stopwatch();
             for(var i=0; i<cycles; i++)
                 mkl.add(lhs2, rhs2, ref dst2);
-            var time2 = OpTime.Define(cycles, snapshot(sw2), "mkl");
+            var time2 = BenchmarkRecord.Define(cycles, snapshot(sw2), "mkl");
             
             return (time1,time2);
             
@@ -76,7 +76,7 @@ namespace Z0.Mkl.Test
             var sw1 = stopwatch();
             for(var i=0; i<cycles; i++)
                 mathspan.add(lhs1,rhs1,dst1.Unblocked);
-            var time1 = OpTime.Define(cycles, snapshot(sw1), "gmath");
+            var time1 = BenchmarkRecord.Define(cycles, snapshot(sw1), "gmath");
 
 
             var lhs2 = lhs1.Replicate();
@@ -86,7 +86,7 @@ namespace Z0.Mkl.Test
             var sw2 = stopwatch();
             for(var i=0; i<cycles; i++)
                 mkl.add(lhs2, rhs2,ref dst2);
-            var time2 = OpTime.Define(cycles, snapshot(sw2), "mkl");
+            var time2 = BenchmarkRecord.Define(cycles, snapshot(sw2), "mkl");
             
             return (time1,time2);
         }

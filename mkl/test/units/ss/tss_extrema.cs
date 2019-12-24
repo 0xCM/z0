@@ -52,15 +52,15 @@ namespace Z0.Mkl
             var sw1 = stopwatch();
             for(var i=0; i<cycles; i++)
                 last = ds.Mean(ref dst);
-            
-            var t1 = OpTime.Define(cycles*samples, snapshot(sw1),"mkl-ssmean");
+            sw1.Stop();
 
             var sw2 = stopwatch();
             for(var i=0; i<cycles; i++)
                 last = src.Avg();     
+            sw2.Stop();
 
-            var t2 = OpTime.Define(cycles*samples, snapshot(sw2),"direct");
-            Collect((t1,t2));
+            ReportBenchmark("mkl-ssmean", cycles*samples, sw1.Elapsed);
+            ReportBenchmark("direct", cycles*samples, sw2.Elapsed);
 
         }
         

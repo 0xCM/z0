@@ -5,37 +5,34 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Runtime.CompilerServices;
-    using System.Linq;
     using static zfunc;
 
     public readonly struct OpTimePair
     {
-        public static readonly OpTimePair Zero = Define(OpTime.Zero, OpTime.Zero);
+        public static readonly OpTimePair Zero = Define(BenchmarkRecord.Zero, BenchmarkRecord.Zero);
         
-        public static implicit operator OpTimePair((OpTime left, OpTime right) src)
+        public static implicit operator OpTimePair((BenchmarkRecord left, BenchmarkRecord right) src)
             => Define(src.left, src.right);
 
-        public static OpTimePair Define(OpTime Left, OpTime Right)
+        public static OpTimePair Define(BenchmarkRecord Left, BenchmarkRecord Right)
             => new OpTimePair(Left,Right);
 
-        public OpTimePair(OpTime Left, OpTime Right)
+        public OpTimePair(BenchmarkRecord Left, BenchmarkRecord Right)
         {
             if(Left.OpCount != Right.OpCount)
                 throw new ArgumentException($"Operation counts not equal");
             this.Left = Left;
-            this.LeftLabel = Left.OpName;
+            this.LeftLabel = Left.Operation;
             this.Right = Right;
-            this.RightLabel = Right.OpName;
+            this.RightLabel = Right.Operation;
         }
         
-        public readonly OpTime Left;
+        public readonly BenchmarkRecord Left;
 
         public readonly string LeftLabel;
          
-        public readonly OpTime Right;
+        public readonly BenchmarkRecord Right;
 
         public readonly string RightLabel;
         public long OpCount
@@ -45,9 +42,6 @@ namespace Z0
             => Format();
 
         public string Format(int? labelPad = null)
-            => concat(Left.Format(labelPad), eol(), Right.Format(labelPad));
-            
+            => concat(Left.Format(labelPad), eol(), Right.Format(labelPad));            
     }
-
-
 }

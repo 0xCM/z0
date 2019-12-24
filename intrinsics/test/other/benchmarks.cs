@@ -190,7 +190,7 @@ namespace Z0
                     last = f.Invoke(lData.LoadVector(block), rData.LoadVector(block));  
                 optime.Stop();
             }
-            Benchmark(f.Moniker, optime, CycleCount*SampleCount*TypeMath.div(w,t));
+            ReportBenchmark(f.Moniker,  CycleCount*SampleCount*TypeMath.div(w,t), optime);
 
         }
 
@@ -213,7 +213,7 @@ namespace Z0
                     last = f.Invoke(lData.LoadVector(block), rData.LoadVector(block));  
                 optime.Stop();
             }
-            Benchmark(f.Moniker, optime, CycleCount*SampleCount*TypeMath.div(w,t));
+            ReportBenchmark(f.Moniker,  CycleCount*SampleCount*TypeMath.div(w,t), optime);
 
         }
 
@@ -236,7 +236,7 @@ namespace Z0
                     last = f.Invoke(data.LoadVector(block),offset);  
                 optime.Stop();
             }
-            Benchmark(f.Moniker, optime, CycleCount*SampleCount*TypeMath.div(w,t));
+            ReportBenchmark(f.Moniker,  CycleCount*SampleCount*TypeMath.div(w,t), optime);
 
         }
 
@@ -259,32 +259,10 @@ namespace Z0
                     last = f.Invoke(data.LoadVector(block),offset);  
                 optime.Stop();
             }
-            Benchmark(f.Moniker, optime, CycleCount*SampleCount*TypeMath.div(w,t));
+            ReportBenchmark(f.Moniker,  CycleCount*SampleCount*TypeMath.div(w,t), optime);
 
         }
 
-        void xor_bench<T>(N256 w, T t = default, SystemCounter counter = default)
-            where T : unmanaged
-        {
-            var blocks = 8;
-            var blocklen = DataBlocks.blocklen<T>(w);
-            var xb = Random.Blocks<T>(w,blocks);
-            var yb = Random.Blocks<T>(w,blocks);
-            var zb = DataBlocks.alloc<T>(w,blocks);
-
-            var opcount = 0;
-            var cellcount = xb.CellCount;
-
-            counter.Start();
-            for(var i=0; i<CycleCount; i++, opcount += cellcount)
-            {                
-                for(var block = 0; block< blocks; block++)
-                for(var cell = 0; cell < blocklen; cell++)
-                    zb[block,cell] = gmath.xor(xb[block,cell], yb[block,cell]);                                    
-            }
-            counter.Stop();
-            Benchmark(moniker("xor",t), counter,CycleCount*SampleCount*TypeMath.div(w,t));
-        }
 
         void vxor_ginx_bench<T>(N256 w, T t = default,  SystemCounter counter = default)
             where T : unmanaged
@@ -300,7 +278,7 @@ namespace Z0
                 ginx.vxor(xb, yb, zb);
             counter.Stop();
 
-            Benchmark(moniker("vxor_blocked",w,t), counter, CycleCount*SampleCount*TypeMath.div(w,t));
+            ReportBenchmark(moniker("vxor_blocked",w,t), CycleCount*SampleCount*TypeMath.div(w,t), counter);
         }
 
 
@@ -321,7 +299,7 @@ namespace Z0
                 
                 Random.Fill(packed);
             }
-            Benchmark($"bitspan_pack/{n}", count, packed.Length * n * CycleCount);
+            ReportBenchmark($"bitspan_pack/{n}", packed.Length * n * CycleCount, count);
 
         }
 

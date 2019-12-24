@@ -46,7 +46,10 @@ namespace Z0
                 Claim.eq(expect,actual);
             }
 
-            RunLocals();
+            case1();
+            case2();
+            case3();
+            case4();
         }
     }
 }

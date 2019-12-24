@@ -7,7 +7,6 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 	using static zfunc;
     using static As;
 
@@ -29,9 +28,9 @@ namespace Z0.Mkl
         protected override int FillBuffer(Span<T> buffer)
         {
             if(typeof(T) == typeof(float))
-                sample.gaussian(Source, float32(DistSpec.Mean), float32(DistSpec.StdDev), float32(buffer));
+                sample.gaussian(Source, float32(DistSpec.Mean), float32(DistSpec.StdDev), span32f(buffer));
             else if(typeof(T) == typeof(double))
-                sample.gaussian(Source, float64(DistSpec.Mean), float64(DistSpec.StdDev), float64(buffer));
+                sample.gaussian(Source, float64(DistSpec.Mean), float64(DistSpec.StdDev), span64f(buffer));
             else 
                 throw unsupported<T>();
 

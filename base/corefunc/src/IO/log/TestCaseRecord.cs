@@ -12,12 +12,12 @@ namespace Z0
     /// <summary>
     /// Describes the outcome of a test case
     /// </summary>
-    public class TestCaseResult : IRecord<TestCaseResult>
+    public class TestCaseRecord : IRecord<TestCaseRecord>
     {
-        public static TestCaseResult Define(string Operation, bool Succeeded, Duration Duration)
-            => new TestCaseResult(Operation, Succeeded, Duration);
+        public static TestCaseRecord Define(string Operation, bool Succeeded, Duration Duration)
+            => new TestCaseRecord(Operation, Succeeded, Duration);
         
-        public TestCaseResult(string Operation, bool Succeeded, Duration Duration)
+        public TestCaseRecord(string Operation, bool Succeeded, Duration Duration)
         {
             this.Operation = Operation;
             this.Succeeded = Succeeded;

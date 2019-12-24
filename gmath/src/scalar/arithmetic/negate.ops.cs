@@ -9,16 +9,11 @@ namespace Z0
         
     using static zfunc;
     
-    partial class MathOps
-    {
 
-
-    }
-
-    public readonly struct NegateOp<T> : IUnaryOp<T>
+    public readonly struct KnegateOp<T> : IUnaryOp<T>
         where T : unmanaged        
     {
-        public static NegateOp<T> Op => default;
+        public static KnegateOp<T> Op => default;
 
         public string Moniker => moniker<T>("negate");        
 
@@ -28,5 +23,12 @@ namespace Z0
     }
 
 
+    partial class KOps
+    {
 
+        [MethodImpl(Inline)]
+        public static KnegateOp<T> negate<T>()
+            where T : unmanaged        
+                => KnegateOp<T>.Op;
+    }
 }

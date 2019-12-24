@@ -5,31 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using static zfunc;
-
-    public interface ITestConfig : ISampleDefaults
-    {
-        ITestConfig<T> Get<T>()
-            where T : unmanaged;
-        ITestConfig WithSampleSize(int SampleSize);
-
-        ITestConfig WithTrace();
-
-        ITestConfig WithoutTrace();
-
-        ITestConfig Replicate();
-
-        bool TraceEnabled {get;}
-    }
-    
-    public interface ITestConfig<T> : ITestConfig, ISampleDefaults<T>
-        where T : unmanaged
-    {
-        
-    }
     
     public class TestConfig : ITestConfig
     {
@@ -80,8 +58,7 @@ namespace Z0
         public override string ToString()
         {
             return $"{nameof(SampleSize)}={SampleSize} | {nameof(TraceEnabled)} = {TraceEnabled}";
-        }
-            
+        }            
     }
 
     public class TestConfig<T> : TestConfig, ITestConfig<T>
@@ -147,7 +124,6 @@ namespace Z0
         bool ITestConfig.TraceEnabled 
             => true;
 
-        // ! Int8
         const sbyte Int8Min = sbyte.MinValue;
 
         const sbyte Int8Max = sbyte.MaxValue;
@@ -157,7 +133,6 @@ namespace Z0
         Interval<sbyte> ISampleDefaults<sbyte>.SampleDomain 
             => Int8Domain;
 
-        // ! UInt8
         const byte UInt8Min = byte.MinValue;
 
         const byte UInt8Max = byte.MaxValue;
@@ -166,8 +141,6 @@ namespace Z0
 
         Interval<byte> ISampleDefaults<byte>.SampleDomain 
             => UInt8Domain;
-
-        // ! Int16
 
         const short Int16Min = short.MinValue;
         
@@ -178,8 +151,6 @@ namespace Z0
         Interval<short> ISampleDefaults<short>.SampleDomain 
             => Int16Domain;
 
-        // ! Int16
-
         const ushort UInt16Min = 0;
         
         const ushort UInt16Max = 30000;
@@ -188,8 +159,6 @@ namespace Z0
 
         Interval<ushort> ISampleDefaults<ushort>.SampleDomain 
             => UInt16Range;
-
-        // ! Int32
 
         const int Int32Min = -250000;
         
@@ -200,8 +169,6 @@ namespace Z0
         Interval<int> ISampleDefaults<int>.SampleDomain 
             => Int32Domain;
 
-        // ! UInt32
-
         const uint UInt32Min = 0;
         
         const uint UInt32Max = 500000;
@@ -211,8 +178,6 @@ namespace Z0
         Interval<uint> ISampleDefaults<uint>.SampleDomain 
             => UInt32Domain;
  
-        // ! Int64
-
         const long Int64Min = -250000;
         
         const long Int64Max = 250000;
@@ -221,8 +186,6 @@ namespace Z0
 
         Interval<long> ISampleDefaults<long>.SampleDomain 
             => Int64Domain;
-
-        // ! UInt64
 
         const ulong UInt64Min = 0;
         
@@ -233,7 +196,6 @@ namespace Z0
         Interval<ulong> ISampleDefaults<ulong>.SampleDomain 
             => UInt64Domaim;
 
-       // ! Float32
 
         const float Float32Min = -250000.00f;
         
@@ -244,7 +206,6 @@ namespace Z0
         Interval<float> ISampleDefaults<float>.SampleDomain 
             => Float32Domain;
 
-        // ! Float64
 
         const double Float64Min = -250000.00;
         
@@ -254,7 +215,5 @@ namespace Z0
 
         Interval<double> ISampleDefaults<double>.SampleDomain 
             => Float64Domain;
-
     }
-
 }

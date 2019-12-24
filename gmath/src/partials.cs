@@ -52,6 +52,12 @@ namespace Z0
 
     }
     
+    public static partial class KOps
+    {
+
+
+    }
+
     static class App
     {
         public static void Main(params string[] args) { }

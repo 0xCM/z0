@@ -290,6 +290,29 @@ namespace Z0
 
         }
 
+        static void ones_check<T>(T t = default)
+            where T : unmanaged
+        {
+            var length = bitsize(t);
+            var ones = gmath.ones(t);
+            var bs = BitPack.bitspan(ones);
+            Claim.eq(length, bs.Length);
+            Claim.eq(length, bs.Pop());
+
+        }
+
+        public void ones_check()
+        {
+            ones_check(z8);   
+            ones_check(z8i);   
+            ones_check(z16);   
+            ones_check(z16i);   
+            ones_check(z32);   
+            ones_check(z32i);   
+            ones_check(z64);   
+            ones_check(z64i);   
+        }
+
         protected static void bitspan_check(Span<byte> packed, BitSpan bitspan)
         {
             var bitcount = bitspan.Length;

@@ -18,11 +18,16 @@ namespace Z0
     {
         public static VxorOp128<T> Op => default;
 
+        public string Moniker => moniker<N128,T>("vxor");
+
         [MethodImpl(Inline)]
         public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
             => ginx.vxor(x,y);
-        
-        public string Moniker => moniker<N128,T>("vxor");
+
+        [MethodImpl(Inline)]
+        public T InvokeScalar(T a, T b)
+            => gmath.xor(a,b);
+
     }
 
     public readonly struct VxorOp256<T> : IVBinOp256<T>
@@ -30,12 +35,16 @@ namespace Z0
     {
         public static VxorOp256<T> Op => default;
 
+        public string Moniker => moniker<N256,T>("vxor");
+
 
         [MethodImpl(Inline)]
         public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)
             => ginx.vxor(x,y);
 
-        public string Moniker => moniker<N256,T>("vxor");
+        [MethodImpl(Inline)]
+        public T InvokeScalar(T a, T b)
+            => gmath.xor(a,b);
 
     }
 
@@ -63,5 +72,4 @@ namespace Z0
             where T : unmanaged
                 => VxorOp256<T>.Op;
     }
-
 }

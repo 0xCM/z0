@@ -5,12 +5,13 @@
 namespace Z0
 {
     using System;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     using static zfunc;
 
     using D = GDel;
 
-    public class t_mod : UnitTest<t_mod>
+    public class t_mod : t_gmath<t_mod>
     {                
         public void mod()
         {
@@ -232,5 +233,12 @@ namespace Z0
 
             TypeCaseEnd<N>();
         }
+
+        protected void TypeCaseStart<C>([Caller] string caller = null)
+            => Notify(AppMsg.Define($"{GetType().DisplayName()}/{caller}<{typename<C>()}> executing", SeverityLevel.HiliteCL));
+
+        protected void TypeCaseEnd<C>([Caller] string caller = null)
+            => Notify(AppMsg.Define($"{GetType().DisplayName()}/{caller}<{typename<C>()}> succeeded", SeverityLevel.HiliteCL));
+
     }
 }

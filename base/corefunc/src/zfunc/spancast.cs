@@ -32,10 +32,6 @@ partial class zfunc
         where N : unmanaged, ITypeNat
             => NatSpan.load(MemoryMarshal.AsBytes(src),n);
 
-    [MethodImpl(Inline)]
-    public static ReadOnlySpan<sbyte> int8<T>(ReadOnlySpan<T> src)
-        where T : unmanaged
-            => cast<T,sbyte>(src);
 
     /// <summary>
     /// Presents a span of generic values as a span of bytes
@@ -138,14 +134,14 @@ partial class zfunc
             => cast<T,double>(src);
 
     /// <summary>
-    /// Presents a span of generic values as a span of chars
+    /// Presents a readonly span ofgeneric values as a readonly span of signed bytes
     /// </summary>
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The source value type</typeparam>
     [MethodImpl(Inline)]
-    public static Span<char> charspan<T>(Span<T> src)
-        where T : unmanaged        
-            => cast<T,char>(src);
+    public static ReadOnlySpan<sbyte> span8i<T>(ReadOnlySpan<T> src)
+        where T : unmanaged
+            => cast<T,sbyte>(src);
 
     /// <summary>
     /// Presents a readonly span ofgeneric values as a readonly span of bytes
@@ -156,26 +152,6 @@ partial class zfunc
     public static ReadOnlySpan<byte> span8u<T>(ReadOnlySpan<T> src)
         where T : unmanaged
             => MemoryMarshal.AsBytes(src);
-
-    /// <summary>
-    /// Presents a readonly span of generic values as a readonly span of bytes
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The source value type</typeparam>
-    [MethodImpl(Inline)]
-    public static ReadOnlySpan<byte> bytespan<T>(ReadOnlySpan<T> src)
-        where T : unmanaged
-            => MemoryMarshal.AsBytes(src);
-
-    /// <summary>
-    /// Presents a readonly readonly span of generic values as a readonly span of signed bytes
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The source value type</typeparam>
-    [MethodImpl(Inline)]
-    public static ReadOnlySpan<sbyte> span8i<T>(ReadOnlySpan<T> src)
-        where T : unmanaged
-            => cast<T,sbyte>(src);
 
     /// <summary>
     /// Presents a readonly span of generic values as a readonly span of signed 16-bit integers
@@ -256,14 +232,4 @@ partial class zfunc
     public static ReadOnlySpan<double> span64f<T>(ReadOnlySpan<T> src)
         where T : unmanaged        
             => cast<T,double>(src);
-
-    /// <summary>
-    /// Presents a readnly readonly span of generic values as a readonly readonly span of chars
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The source value type</typeparam>
-    [MethodImpl(Inline)]
-    public static ReadOnlySpan<char> charspan<T>(ReadOnlySpan<T> src)
-        where T : unmanaged        
-            => cast<T,char>(src);
 }

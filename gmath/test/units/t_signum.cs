@@ -87,8 +87,8 @@ namespace Z0
                 compare.Stop();
             }
 
-            Benchmark($"signum_{moniker<T>()}", subject);
-            Benchmark($"signum_{moniker<T>()}_cf", compare);
+            ReportBenchmark($"signum_{moniker<T>()}", OpCount, subject);
+            ReportBenchmark($"signum_{moniker<T>()}_cf", OpCount,compare);
         }
     }
 }

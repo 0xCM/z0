@@ -40,8 +40,8 @@ partial class zfunc
     /// <param name="opcount">The operation count</param>
     /// <param name="label">The label associated with the measure, if specified</param>
     [MethodImpl(Inline)]   
-    public static OpTime optime(long opcount, Stopwatch sw, [CallerMemberName] string label = null)
-        => OpTime.Define(opcount, snapshot(sw), label);
+    public static BenchmarkRecord optime(long opcount, Stopwatch sw, [CallerMemberName] string label = null)
+        => BenchmarkRecord.Define(opcount, snapshot(sw), label);
 
     /// <summary>
     /// Captures a duration and the number of operations executed within the period
@@ -50,8 +50,8 @@ partial class zfunc
     /// <param name="opcount">The operation count</param>
     /// <param name="label">The label associated with the measure, if specified</param>
     [MethodImpl(Inline)]   
-    public static OpTime optime(long opcount, Duration time, [CallerMemberName] string label = null)
-        => OpTime.Define(opcount, time, label);
+    public static BenchmarkRecord optime(long opcount, Duration time, [CallerMemberName] string label = null)
+        => BenchmarkRecord.Define(opcount, time, label);
 
     static readonly long TicksPerMs 
         = Stopwatch.Frequency/1000L;
@@ -77,10 +77,10 @@ partial class zfunc
     {
         var lTimer = stopwatch();
         left(n);
-        var lTime = OpTime.Define(n, snapshot(lTimer),leftLabel);
+        var lTime = BenchmarkRecord.Define(n, snapshot(lTimer),leftLabel);
         var rTimer = stopwatch();
         right(n);
-        var rTime = OpTime.Define(n, snapshot(rTimer),rightLabel);
+        var rTime = BenchmarkRecord.Define(n, snapshot(rTimer),rightLabel);
         OpTimePair result = (lTime, rTime);
         return result;
     }

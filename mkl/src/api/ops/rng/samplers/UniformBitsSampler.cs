@@ -7,9 +7,7 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 	using static zfunc;
-    using static As;
 
     sealed class UniformBitsSampler<T> : Sampler<T, UniformBitsSpec<T>>
         where T : unmanaged
@@ -24,15 +22,13 @@ namespace Z0.Mkl
         protected override int FillBuffer(Span<T> buffer)
         {
             if(typeof(T) == typeof(uint))
-                sample.bits(Source,  uint32(buffer));
+                sample.bits(Source,  span32u(buffer));
             else if(typeof(T) == typeof(ulong))
-                sample.bits(Source,  uint64(buffer));
+                sample.bits(Source,  span64u(buffer));
             else 
                 throw unsupported<T>();
             
             return buffer.Length;
         }
-
     }
-
 }

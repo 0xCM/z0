@@ -12,7 +12,7 @@ namespace Z0
     partial class gmathops
     {
         public static uint add_sdel_u32(uint a, uint b)
-            => MathOps.add<uint>().Invoke(a,b);
+            => KOps.add<uint>().Invoke(a,b);
     
         public static uint add_gdel_u32(uint a, uint b)
         {
@@ -34,6 +34,5 @@ namespace Z0
 
         public static uint sub_gdel_u32(uint a, uint b)
             => GDel.sub<uint>()(a,b);
-
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_poly : MathTest<t_poly>
+    public class t_poly : t_libm<t_poly>
     {
 
         static unsafe double polevl(double[] coef)

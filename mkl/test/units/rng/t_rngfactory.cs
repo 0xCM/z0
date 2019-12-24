@@ -131,7 +131,7 @@ namespace Z0
             rng_bench(samplers.uniform(src, (RangeF64)));
         }
 
-        OpTime rng_bench<T>(IRandomStream<T> stream)
+        BenchmarkRecord rng_bench<T>(IRandomStream<T> stream)
             where T : unmanaged
         {
             var segment = Pow2.T08;
@@ -147,7 +147,7 @@ namespace Z0
                     stats.Collect(convert<T,double>(sample[j]));
             }
             var time = (total, sw, $"{stream.RngKind}<{typeof(T).DisplayName()}>");
-            Collect(time);
+            ReportBenchmark($"{stream.RngKind}<{typeof(T).DisplayName()}>",CycleCount, TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds));
             
             return time;
         }

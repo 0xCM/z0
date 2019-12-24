@@ -68,7 +68,7 @@ namespace Z0
                 counter.Stop();
             }
 
-            Benchmark("or_cs_64u",counter);
+            ReportBenchmark("or_cs_64u",OpCount,counter);
         }
 
         void asm_binop_bench<T>(BinaryOp<T> op, SystemCounter counter = default)
@@ -84,7 +84,7 @@ namespace Z0
                 counter.Stop();
             }
 
-            Benchmark("or_asm_64u",counter);
+            ReportBenchmark("or_asm_64u",OpCount,counter);
         }
     }
 }

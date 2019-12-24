@@ -7,9 +7,8 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
+
 	using static zfunc;
-    using static As;
 
     sealed class GeometricSampler<T> : Sampler<T, GeometricSpec<T>>
         where T : unmanaged
@@ -23,7 +22,7 @@ namespace Z0.Mkl
         protected override int FillBuffer(Span<T> buffer)
         {            
             if(typeof(T) == typeof(int))
-                sample.geometric(Source,  DistSpec, int32(buffer));
+                sample.geometric(Source,  DistSpec, span32i(buffer));
             else 
                 throw unsupported<T>();
             

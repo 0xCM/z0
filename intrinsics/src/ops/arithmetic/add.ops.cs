@@ -18,11 +18,16 @@ namespace Z0
     {
         public static VaddOp128<T> Op => default;
 
+        public string Moniker => moniker<N128,T>("vadd");
+
         [MethodImpl(Inline)]
         public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
             => ginx.vadd(x,y);
         
-        public string Moniker => moniker<N128,T>("vadd");
+        [MethodImpl(Inline)]
+        public T InvokeScalar(T a, T b)
+            => gmath.add(a,b);
+
     }
 
     public readonly struct VaddOp256<T> : IVBinOp256<T>
@@ -30,12 +35,15 @@ namespace Z0
     {
         public static VaddOp256<T> Op => default;
 
+        public string Moniker => moniker<N256,T>("vadd");
 
         [MethodImpl(Inline)]
         public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)
             => ginx.vadd(x,y);
 
-        public string Moniker => moniker<N256,T>("vadd");
+        [MethodImpl(Inline)]
+        public T InvokeScalar(T a, T b)
+            => gmath.add(a,b);
 
     }
 
@@ -63,5 +71,4 @@ namespace Z0
             where T : unmanaged
                 => VaddOp256<T>.Op;
     }
-
 }

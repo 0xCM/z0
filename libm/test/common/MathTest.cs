@@ -9,8 +9,8 @@ namespace Z0
     using static zfunc;
 
 
-    public class MathTest<T> : UnitTest<T>
-        where T : MathTest<T>, new()
+    public class t_libm<T> : UnitTest<T>
+        where T : t_libm<T>, new()
     {
         protected override int RoundCount => 1;
 

@@ -7,18 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
         
-    using static zfunc;
-    
-    partial class MathOps
-    {
+    using static zfunc;    
 
-
-    }
-
-    public readonly struct SubOp<T> : IBinaryOp<T>
+    public readonly struct KsubOp<T> : IBinaryOp<T>
         where T : unmanaged        
     {
-        public static SubOp<T> Op => default;
+        public static KsubOp<T> Op => default;
 
         public string Moniker => moniker<T>("sub");
 
@@ -27,5 +21,11 @@ namespace Z0
             => gmath.sub(x,y);
     }
 
-
+    partial class KOps
+    {
+        [MethodImpl(Inline)]
+        public static KsubOp<T> sub<T>()
+            where T : unmanaged        
+                => KsubOp<T>.Op;
+    }
 }

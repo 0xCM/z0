@@ -14,6 +14,20 @@ namespace Z0
 
     public static partial class BitPack
     {
+        [MethodImpl(Inline)]
+        public static BitSpan bitspan<T>(T packed)        
+            where T : unmanaged
+        {
+            if(bitsize<T>() == 8)
+                return bitspan(convert<T,byte>(packed));
+            else if(bitsize<T>() == 16)
+                return bitspan(convert<T,ushort>(packed));
+            else if(bitsize<T>() == 32)
+                return bitspan(convert<T,uint>(packed));
+            else    
+                return bitspan(convert<T,ulong>(packed));
+        }
+
         /// <summary>
         /// Creates a bitspan from 8 packed source bits
         /// </summary>

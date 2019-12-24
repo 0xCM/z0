@@ -174,35 +174,34 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryOp<V> : IVectorOp<V>
+    public interface IVTernaryOp<V> : IVectorOp<V>, ITernaryOp<V>
         where V : struct
     {
-        V Invoke(V x, V y, V z);
+        
     }
 
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryPred<V> : IVectorOp<V>
+    public interface IVUnaryPred<V> : IVectorOp<V>, IUnaryPred<V>
         where V : struct
     {
-        bit Invoke(V x);
+        
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryPred<V> : IVectorOp<V>
+    public interface IVBinaryPred<V> : IVectorOp<V>, IBinaryPred<V>
         where V : struct
     {
-        bit Invoke(V x,V  y);
+        
     }
 
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOp<V> : IVectorOp<V>
+    public interface IVShiftOp<V> : IVectorOp<V>, IShiftOp<V>
         where V : struct
     {
-        V Invoke(V x, byte offset);
+        
     }
-
 
     [SuppressUnmanagedCodeSecurity]
     public interface IVShiftOp<W,V> : IVShiftOp<V>, IVectorOp<W,V>
@@ -218,7 +217,7 @@ namespace Z0
         where V : struct
         where T : unmanaged
     {
-        
+        T InvokeScalar(T a, byte offset);           
     }
 
     [SuppressUnmanagedCodeSecurity]
@@ -243,13 +242,22 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryOp128<T> : IVUnaryOp<N128,Vector128<T>>
+    public interface IVUnaryOp<W,V,T> : IVUnaryOp<W,V>
+        where W : unmanaged, ITypeNat
+        where V : struct
+        where T : unmanaged
+    {
+        T InvokeScalar(T a);
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVUnaryOp128<T> : IVUnaryOp<N128,Vector128<T>,T>
         where T : unmanaged
     {
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryOp256<T> : IVUnaryOp<N256,Vector256<T>>
+    public interface IVUnaryOp256<T> : IVUnaryOp<N256,Vector256<T>,T>
         where T : unmanaged
     {
         
@@ -264,13 +272,23 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinOp128<T> : IVBinOp<N128,Vector128<T>>
+    public interface IVBinOp<W,V,T> : IVBinOp<W,V>
+        where W : unmanaged, ITypeNat
+        where V : struct
         where T : unmanaged
     {
+        T InvokeScalar(T a, T b);
+    }
+    
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVBinOp128<T> : IVBinOp<N128,Vector128<T>,T>
+        where T : unmanaged
+    {
+    
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinOp256<T> : IVBinOp<N256,Vector256<T>>
+    public interface IVBinOp256<T> : IVBinOp<N256,Vector256<T>,T>
         where T : unmanaged
     {
         
@@ -285,13 +303,22 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryOp128<T> : IVTernaryOp<N128,Vector128<T>>
+    public interface IVTernaryOp<W,V,T> : IVTernaryOp<W,V>
+        where W : unmanaged, ITypeNat
+        where V : struct
+        where T : unmanaged
+    {
+        T InvokeScalar(T a, T b, T c);
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVTernaryOp128<T> : IVTernaryOp<N128,Vector128<T>,T>
         where T : unmanaged
     {
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryOp256<T> : IVTernaryOp<N256,Vector256<T>>
+    public interface IVTernaryOp256<T> : IVTernaryOp<N256,Vector256<T>,T>
         where T : unmanaged
     {
         

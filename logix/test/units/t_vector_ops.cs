@@ -63,7 +63,7 @@ namespace Z0.Logix
 
             clock.Stop();
 
-            Benchmark(opname, clock, opcount);
+            ReportBenchmark(opname, opcount,clock);
         }
 
         protected void vector_op256_bench<T>(bool lookup, N256 n = default, SystemCounter clock = default)
@@ -106,7 +106,7 @@ namespace Z0.Logix
 
             clock.Stop();
 
-            Benchmark(opname, clock, opcount);
+            ReportBenchmark(opname, opcount,clock);
         }
     }
 

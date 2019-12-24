@@ -31,14 +31,14 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vbc_u(n, src);
+                return vbroadcast_u(n, src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vbc_i(n, src);
+                return vbroadcast_i(n, src);
             else
-                return vbc_f(n, src);
+                return vbroadcast_f(n, src);
         }
 
         /// <summary>
@@ -55,14 +55,14 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vbc_u(n, src);
+                return vbroadcast_u(n, src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vbc_i(n, src);
+                return vbroadcast_i(n, src);
             else
-                return vbc_f(n, src);
+                return vbroadcast_f(n, src);
        }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vbc_i<T>(N128 n, T src)
+        static Vector128<T> vbroadcast_i<T>(N128 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -137,7 +137,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vbc_u<T>(N128 n, T src)
+        static Vector128<T> vbroadcast_u<T>(N128 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -151,7 +151,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vbc_f<T>(N128 n, T src)
+        static Vector128<T> vbroadcast_f<T>(N128 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -163,7 +163,7 @@ namespace Z0
         }
  
         [MethodImpl(Inline)]
-        public static Vector256<T> vbc_i<T>(N256 n, T src)
+        static Vector256<T> vbroadcast_i<T>(N256 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -177,7 +177,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vbc_u<T>(N256 n, T src)
+        static Vector256<T> vbroadcast_u<T>(N256 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -191,7 +191,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vbc_f<T>(N256 n, T src)
+        static Vector256<T> vbroadcast_f<T>(N256 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

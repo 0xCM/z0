@@ -74,8 +74,8 @@ namespace Z0
                 compare.Stop();
             }
 
-            Benchmark($"gcdbin{moniker<T>()}", subject);
-            Benchmark($"gcd{moniker<T>()}", compare);
+            ReportBenchmark($"gcdbin{moniker<T>()}", OpCount,subject);
+            ReportBenchmark($"gcd{moniker<T>()}", OpCount,compare);
         }
 
         /// <summary>

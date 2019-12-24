@@ -14,6 +14,13 @@ namespace Z0
     public static class vops
     {
 
+        public static uint vxor_128x32u(Vector128<uint> x, Vector128<uint> y)
+        {
+            var ops = VOps.vxor(n128,z32);
+            var z = ops.Invoke(x,y);
+            var a = ops.InvokeScalar(x.FirstCell(),y.LastCell());
+            return a;
+        }
         public static void add_blocks_zip(Block128<uint> left, Block128<uint> right, Block128<uint> dst)
             => CpuVector.zip(left,right,dst, VOps.vadd(n128,z32));
 

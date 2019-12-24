@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_ldexp : MathTest<t_ldexp>
+    public class t_ldexp : t_libm<t_ldexp>
     {    
         [MethodImpl(Inline)]
         static double ldexp(double x, int i)

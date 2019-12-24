@@ -118,7 +118,7 @@ namespace Z0
          protected void bm_and_bench<T>(T t = default)
             where T : unmanaged
         {
-            var count = counter();
+            var clock = counter();
             var A = BitMatrix.alloc<T>();
             var B = BitMatrix.alloc<T>();
             var C = BitMatrix.alloc<T>();
@@ -127,13 +127,13 @@ namespace Z0
             {
                 Random.BitMatrix<T>(ref A);
                 Random.BitMatrix<T>(ref B);
-                count.Start();
+                clock.Start();
                 BitMatrix.and(A,B,C);
-                count.Stop();
+                clock.Stop();
             }
 
             var n = BitMatrix<T>.N;
-            Benchmark($"bmand_{n}x{n}g", count);
+            ReportBenchmark($"bmand_{n}x{n}g", OpCount, clock);
         }
 
 

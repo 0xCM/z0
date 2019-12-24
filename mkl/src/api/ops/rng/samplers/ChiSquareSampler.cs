@@ -7,9 +7,7 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 	using static zfunc;
-    using static As;
 
     sealed class ChiSquareSampler<T> : Sampler<T, ChiSquareSpec<int>>
         where T : unmanaged
@@ -23,9 +21,9 @@ namespace Z0.Mkl
         protected override int FillBuffer(Span<T> buffer)
         {            
             if(typeof(T) == typeof(float))
-                sample.chi2(Source,  DistSpec, float32(buffer));
+                sample.chi2(Source, DistSpec, span32f(buffer));
             else if (typeof(T) == typeof(double))
-                sample.chi2(Source,  DistSpec, float64(buffer));
+                sample.chi2(Source, DistSpec, span64f(buffer));
             else 
                 throw unsupported<T>();            
             return buffer.Length;

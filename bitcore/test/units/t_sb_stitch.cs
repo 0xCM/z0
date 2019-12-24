@@ -32,7 +32,8 @@ namespace Z0
                 Claim.eq(z, s);
             }
             
-            RunLocals();
+            case1();
+            case2();
             
         }
 

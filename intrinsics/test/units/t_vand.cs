@@ -10,101 +10,48 @@ namespace Z0
 
     public class t_vand : t_vinx<t_vand>
     {
-        public void vand_128x8i()
-            => vand_check<sbyte>(n128);
 
-        public void vand_128x8u()
-            => vand_check<byte>(n128);            
+        public void vand_check()
+        {
+            
+            void check_128(N128 w = default)
+            {
+                vand_check(VOps.vand(w,z8));                
+                vand_check(VOps.vand(w,z8i));
+                vand_check(VOps.vand(w,z16));
+                vand_check(VOps.vand(w,z16i));
+                vand_check(VOps.vand(w,z32));
+                vand_check(VOps.vand(w,z32i));
+                vand_check(VOps.vand(w,z64));
+                vand_check(VOps.vand(w,z64i));
 
-        public void vand_128x16i()
-            => vand_check<short>(n128);
+            }
 
-        public void vand_128x16u()
-            => vand_check<ushort>(n128);
+            void check_256(N256 w = default)
+            {
+                vand_check(VOps.vand(w,z8));                
+                vand_check(VOps.vand(w,z8i));
+                vand_check(VOps.vand(w,z16));
+                vand_check(VOps.vand(w,z16i));
+                vand_check(VOps.vand(w,z32));
+                vand_check(VOps.vand(w,z32i));
+                vand_check(VOps.vand(w,z64));
+                vand_check(VOps.vand(w,z64i));
+            }            
 
-        public void vand_128x32i()
-            => vand_check<int>(n128);
+            check_128();
+            check_256();
+        }
 
-        public void vand_128x32u()
-            => vand_check<uint>(n128);            
+        void vand_check<T>(IVBinOp128<T> op)
+            where T : unmanaged
+                => verify_random(op);
+            
 
-        public void vand_128x64i()
-            => vand_check<long>(n128);            
+        void vand_check<T>(IVBinOp256<T> op)
+            where T : unmanaged
+                => verify_random(op);
 
-        public void vand_128x64u()
-            => vand_check<ulong>(n128);            
-
-        public void vand_256x8i()
-            => vand_check<sbyte>(n256);
-
-        public void vand_256x8u()
-            => vand_check<byte>(n256);            
-
-        public void vand_256x16i()
-            => vand_check<short>(n256);
-
-        public void vand_256x16u()
-            => vand_check<ushort>(n256);
-
-        public void vand_256x32i()
-            => vand_check<int>(n256);
-
-        public void vand_256x32u()
-            => vand_check<uint>(n256);            
-
-        public void vand_256x64i()
-            => vand_check<long>(n256);            
-
-        public void vand_256x64u()
-            => vand_check<ulong>(n256);            
-
-        public void and_blocks_128x8i()
-            => vand_blocks_check<sbyte>(n128);
-
-        public void and_blocks_128x8u()
-            => vand_blocks_check<byte>(n128);
-
-        public void and_blocks_128x16i()
-            => vand_blocks_check<short>(n128);
-
-        public void and_blocks_128x16u()
-            => vand_blocks_check<ushort>(n128);
-
-        public void and_blocks_128x32i()
-            => vand_blocks_check<int>(n128);
-
-        public void and_blocks_128x32u()
-            => vand_blocks_check<uint>(n128);
-
-        public void and_blocks_128x64i()
-            => vand_blocks_check<long>(n128);
-
-        public void and_blocks_128x64u()
-            => vand_blocks_check<ulong>(n128);
-
-        public void and_blocks_256x8i()
-            => vand_blocks_check<sbyte>(n256);
-
-        public void and_blocks_256x8u()
-            => vand_blocks_check<byte>(n256);
-
-        public void and_blocks_256x16i()
-            => vand_blocks_check<short>(n256);
-
-        public void and_blocks_256x16u()
-            => vand_blocks_check<ushort>(n256);
-
-        public void and_blocks_256x32i()
-            => vand_blocks_check<int>(n256);
-
-        public void and_blocks_256x32u()
-            => vand_blocks_check<uint>(n256);
-
-        public void and_blocks_256x64i()
-            => vand_blocks_check<long>(n256);
-
-        public void and_blocks_256x64u()
-            => vand_blocks_check<ulong>(n256);
     }
 
 }

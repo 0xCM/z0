@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_nist : MathTest<t_nist>
+    public class t_nist : t_libm<t_nist>
     {
         void add_check()
         {
