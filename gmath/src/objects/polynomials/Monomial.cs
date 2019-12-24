@@ -61,7 +61,7 @@ namespace Z0
         public bool Nonzero
         {
             [MethodImpl(Inline)]
-            get => gmath.nonzero(Scalar);
+            get => gmath.nonz(Scalar);
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Z0
         /// Specifies whether the coeifficient, and thus the monomial, is nonzero
         /// </summary>
         public bool Nonzero
-            => gmath.nonzero(Scalar);
+            => gmath.nonz(Scalar);
 
         public (T scalar, uint exp) ToPair()
             => (Scalar, Exp);

@@ -248,7 +248,7 @@ namespace Z0
             get
             {
                 for(var i = 0; i < data.Length; i++)
-                    if(gmath.nonzero(data[i]))
+                    if(gmath.nonz(data[i]))
                         return false;
                 return true;
             }

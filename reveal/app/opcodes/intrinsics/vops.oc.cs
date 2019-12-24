@@ -21,11 +21,6 @@ namespace Z0
             var a = ops.InvokeScalar(x.FirstCell(),y.LastCell());
             return a;
         }
-        public static void add_blocks_zip(Block128<uint> left, Block128<uint> right, Block128<uint> dst)
-            => CpuVector.zip(left,right,dst, VOps.vadd(n128,z32));
-
-        public static void add_blocksp(ConstBlock128<uint> left, ConstBlock128<uint> right, Block128<uint> dst)
-            => ginx.vadd(left,right,dst);
 
         public static Vector256<uint> op_shift_specific(Vector256<uint> src)
             => apply(VOps.vsll<uint>(n256),src,3);

@@ -202,7 +202,7 @@ namespace Z0
         public bit Empty
         {
             [MethodImpl(Inline)]
-            get => !gmath.nonzero(data);
+            get => !gmath.nonz(data);
         }
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace Z0
         public bit NonEmpty
         {
             [MethodImpl(Inline)]
-            get => gmath.nonzero(data);
+            get => gmath.nonz(data);
         }
  
         [MethodImpl(Inline)]

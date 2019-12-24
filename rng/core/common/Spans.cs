@@ -91,6 +91,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> NonZeroSpan<T>(this IPolyrand random, int samples, Interval<T>? domain = null)
             where T : unmanaged
-                => random.Span<T>(samples, domain, x => gmath.nonzero(x));
+                => random.Span<T>(samples, domain, x => gmath.nonz(x));
     }
 }

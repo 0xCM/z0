@@ -93,7 +93,7 @@ namespace Z0
         public bool Nonzero
         {
             [MethodImpl(Inline)]
-            get => !gmath.nonzero(data);
+            get => !gmath.nonz(data);
         }
 
         /// <summary>

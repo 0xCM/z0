@@ -13,25 +13,30 @@ namespace Z0
 
     partial class gmath
     {
+        /// <summary>
+        /// Returns 1 if the source operand is non-zero and 0 otherwise
+        /// </summary>
+        /// <param name="a">The source operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static bit nonzero<T>(T a)
+        public static bit nonz<T>(T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return nonzerou(a);
+                return nonz_u(a);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return nonzeroi(a);
+                return nonz_i(a);
             else return gfp.nonzero(a);
         }
 
         [MethodImpl(Inline)]
-        static bit nonzerou<T>(T a)
+        static bit nonz_u<T>(T a)
         {
             if(typeof(T) == typeof(byte))
                  return math.nonzero(uint8(a));
@@ -44,7 +49,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit nonzeroi<T>(T a)
+        static bit nonz_i<T>(T a)
         {
             if(typeof(T) == typeof(sbyte))
                  return math.nonzero(int8(a));

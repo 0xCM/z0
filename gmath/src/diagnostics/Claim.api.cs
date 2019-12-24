@@ -447,7 +447,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         public static bool nonzero<T>(T x, [Member] string caller = null, [File] string file = null, [Line] int? line = null)        
             where T : unmanaged 
-                => gmath.nonzero(x) ? true : throw Errors.NotNonzero(caller,file,line);
+                => gmath.nonz(x) ? true : throw Errors.NotNonzero(caller,file,line);
 
         /// <summary>
         /// Asserts that the source value is zero
@@ -459,7 +459,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         public static bool zero<T>(T x, [Member] string caller = null, [File] string file = null, [Line] int? line = null)        
             where T : unmanaged 
-                => !gmath.nonzero(x) ? true : throw Errors.NotNonzero(caller,file,line);
+                => !gmath.nonz(x) ? true : throw Errors.NotNonzero(caller,file,line);
 
         /// <summary>
         /// Asserts the operand is true

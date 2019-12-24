@@ -54,7 +54,7 @@ namespace Z0
         /// Specifies whether the term is empty
         /// </summary>
         public bool IsEmpty
-            => Index == 0 && !gmath.nonzero(Value);
+            => Index == 0 && !gmath.nonz(Value);
 
         /// <summary>
         /// Renders the term by default as 'a_i = Value' where i denotes the term index

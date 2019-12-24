@@ -10,60 +10,60 @@ namespace Z0
 
     using static zfunc;
 
-    public readonly struct VsllxOp128<T> : IVShiftOp128<T>
+    public readonly struct VmaxOp128<T> : IVBinOp128<T>
         where T : unmanaged
     {
-        public static VsllxOp128<T> Op => default;
+        public static VmaxOp128<T> Op => default;
 
-        public string Moniker => moniker<N128,T>("vsllx");
+        public string Moniker => moniker<N128,T>("vmax");
 
         [MethodImpl(Inline)]
-        public Vector128<T> Invoke(Vector128<T> x, byte offset)
-            => ginx.vsllx(x,offset);
-        
+        public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
+            => ginx.vmax(x,y);
+
         [MethodImpl(Inline)]
-        public T InvokeScalar(T a, byte offset)
-            => default;
+        public T InvokeScalar(T a, T b)
+            => gmath.max(a,b);
     }
 
-    public readonly struct VsllxOp256<T> : IVShiftOp256<T>
+    public readonly struct VmaxOp256<T> : IVBinOp256<T>
         where T : unmanaged
     {
-        public static VsllxOp256<T> Op => default;
+        public static VmaxOp256<T> Op => default;
 
-        public string Moniker => moniker<N256,T>("vsllx");
-
-        [MethodImpl(Inline)]
-        public Vector256<T> Invoke(Vector256<T> x, byte offset)
-            => ginx.vsllx(x,offset);
+        public string Moniker => moniker<N256,T>("vmax");
 
         [MethodImpl(Inline)]
-        public T InvokeScalar(T a, byte offset)
-            => default;
+        public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)
+            => ginx.vmax(x,y);
+
+        [MethodImpl(Inline)]
+        public T InvokeScalar(T a, T b)
+            => gmath.max(a,b);
     }
 
     partial class VOps
     {
         /// <summary>
-        /// Operator factory for vsllx_128xT
+        /// Operator factory for vmax_128xT
         /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static VsllxOp128<T> vsllx<T>(N128 w, T t = default)
+        public static VmaxOp128<T> vmax<T>(N128 w, T t = default)
             where T : unmanaged
-                => VsllxOp128<T>.Op;
+                => VmaxOp128<T>.Op;
 
         /// <summary>
-        /// Operator factory for vsllx_256xT
+        /// Operator factory for vmax_256xT
         /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static VsllxOp256<T> vsllx<T>(N256 w, T t = default)
+        public static VmaxOp256<T> vmax<T>(N256 w, T t = default)
             where T : unmanaged
-                => VsllxOp256<T>.Op;
+                => VmaxOp256<T>.Op;
     }
 }

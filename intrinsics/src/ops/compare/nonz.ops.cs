@@ -10,60 +10,60 @@ namespace Z0
 
     using static zfunc;
 
-    public readonly struct VsllxOp128<T> : IVShiftOp128<T>
+    public readonly struct VnonzOp128<T> : IVUnaryPred128<T>
         where T : unmanaged
     {
-        public static VsllxOp128<T> Op => default;
+        public static VnonzOp128<T> Op => default;
 
-        public string Moniker => moniker<N128,T>("vsllx");
+        public string Moniker => moniker<N128,T>("vnonz");
 
         [MethodImpl(Inline)]
-        public Vector128<T> Invoke(Vector128<T> x, byte offset)
-            => ginx.vsllx(x,offset);
-        
+        public bit Invoke(Vector128<T> x)
+            => ginx.vnonz(x);
+
         [MethodImpl(Inline)]
-        public T InvokeScalar(T a, byte offset)
-            => default;
+        public bit InvokeScalar(T a)
+            => gmath.nonz(a);
     }
 
-    public readonly struct VsllxOp256<T> : IVShiftOp256<T>
+    public readonly struct VnonzOp256<T> : IVUnaryPred256<T>
         where T : unmanaged
     {
-        public static VsllxOp256<T> Op => default;
+        public static VnonzOp256<T> Op => default;
 
-        public string Moniker => moniker<N256,T>("vsllx");
-
-        [MethodImpl(Inline)]
-        public Vector256<T> Invoke(Vector256<T> x, byte offset)
-            => ginx.vsllx(x,offset);
+        public string Moniker => moniker<N256,T>("vnonz");
 
         [MethodImpl(Inline)]
-        public T InvokeScalar(T a, byte offset)
-            => default;
+        public bit Invoke(Vector256<T> x)
+            => ginx.vnonz(x);
+
+        [MethodImpl(Inline)]
+        public bit InvokeScalar(T a)
+            => gmath.nonz(a);
     }
 
     partial class VOps
     {
         /// <summary>
-        /// Operator factory for vsllx_128xT
+        /// Operator factory for vnonz_128xT
         /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static VsllxOp128<T> vsllx<T>(N128 w, T t = default)
+        public static VnonzOp128<T> vnonz<T>(N128 w, T t = default)
             where T : unmanaged
-                => VsllxOp128<T>.Op;
+                => VnonzOp128<T>.Op;
 
         /// <summary>
-        /// Operator factory for vsllx_256xT
+        /// Operator factory for vnonz_256xT
         /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static VsllxOp256<T> vsllx<T>(N256 w, T t = default)
+        public static VnonzOp256<T> vnonz<T>(N256 w, T t = default)
             where T : unmanaged
-                => VsllxOp256<T>.Op;
+                => VnonzOp256<T>.Op;
     }
 }

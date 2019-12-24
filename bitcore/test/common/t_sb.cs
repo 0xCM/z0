@@ -515,7 +515,7 @@ namespace Z0
                 var y0 = gbits.segment(y,0,j - 1);
                 var y1 = gbits.segment(y,j, width - 1);
                 Claim.eq(x0,y0);
-                Claim.nea(gmath.nonzero(y1));                        
+                Claim.nea(gmath.nonz(y1));                        
             }
         }
 

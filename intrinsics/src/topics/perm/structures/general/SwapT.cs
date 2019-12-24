@@ -85,10 +85,10 @@ namespace Z0
         public static Swap<T> operator --(in Swap<T> src)
         {
             ref var dst = ref mutable(in src);
-            if(gmath.nonzero(src.i))
+            if(gmath.nonz(src.i))
                 dst.i = gmath.dec(dst.i);
             
-            if(gmath.nonzero(src.j))
+            if(gmath.nonz(src.j))
                 dst.j = gmath.dec(dst.j);
             return dst;
         }
@@ -122,7 +122,7 @@ namespace Z0
             => $"({i} {j})";
         
         public bool IsEmpy
-            => !gmath.nonzero(i) && !gmath.nonzero(j);
+            => !gmath.nonz(i) && !gmath.nonz(j);
             
         /// <summary>
         /// Determines whether this transposition is identical to another.

@@ -24,7 +24,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public T InvokeScalar(T a, byte offset)
             => default;
-
     }
 
     public readonly struct VbsllOp256<T> : IVShiftOp256<T>

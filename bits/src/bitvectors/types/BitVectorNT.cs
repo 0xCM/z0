@@ -125,7 +125,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector<N,T> operator --(BitVector<N,T> src)
-            => gmath.nonzero(src.data) ? gmath.dec(src.data) : MaxValue;
+            => gmath.nonz(src.data) ? gmath.dec(src.data) : MaxValue;
 
         /// <summary>
         /// Computes the N-modular arithmetic sum between the operands
@@ -275,7 +275,7 @@ namespace Z0
         public bit Empty
         {
             [MethodImpl(Inline)]
-            get => !gmath.nonzero(data);
+            get => !gmath.nonz(data);
         }
 
         /// <summary>
@@ -284,7 +284,7 @@ namespace Z0
         public readonly bit NonEmpty
         {
             [MethodImpl(Inline)]
-            get => gmath.nonzero(data);
+            get => gmath.nonz(data);
         }
 
         /// <summary>

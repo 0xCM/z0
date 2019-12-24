@@ -23,9 +23,6 @@ namespace Z0.OpCodes
         public static Vector256<byte> vsllv_256x8u(Vector256<byte> x, Vector256<byte> offsets)
             => ginx.vsllv(x,offsets);
 
-        public static void vsllv_256x8u_blocked(ConstBlock256<byte> x, ConstBlock256<byte> offsets, Block256<byte> dst)
-            => ginx.vsllv(x, offsets, dst);
-
         public static Vector256<ushort> vsllv_256x16u(Vector256<ushort> x, Vector256<ushort> offsets)
             => ginx.vsllv(x,offsets);
 
@@ -76,9 +73,6 @@ namespace Z0.OpCodes
 
         public static Vector256<ulong> vsrlx_256x64u(Vector256<ulong> x)
             => ginx.vsrlx(x, 13);
-
-        public static void vsrlx_256x64u_blocked(ConstBlock256<ulong> x, Block256<ulong> dst)
-            => ginx.vsrlx(x, 13, dst);
 
         public static Vector128<ulong> vrotlx_128x64u(Vector128<ulong> x)
             => ginx.vrotlx(x, 14);
