@@ -21,7 +21,7 @@ namespace Z0
     /// <summary>
     /// Floating-point scalar intrinsics
     /// </summary>
-    public static class inxsfp
+    partial class dinxsfp
     {
 
         [MethodImpl(Inline)]
@@ -96,41 +96,6 @@ namespace Z0
             return ref dst;
         }
 
-        /// <summary>
-        /// __int64 _mm_cvttss_si64 (__m128 a)CVTTSS2SI r64, xmm/m32
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="dst"></param>
-        [MethodImpl(Inline)]
-        public static long convert(Vector128<float> src, out long dst)
-        {
-            dst = ConvertToInt64WithTruncation(src);
-            return dst;
-        }
-
-        /// <summary>
-        /// int _mm_cvttss_si32 (__m128 a)CVTTSS2SI r32, xmm/m32
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="dst"></param>
-        [MethodImpl(Inline)]
-        public static long convert(Vector128<float> src, out int dst)
-        {
-            dst = ConvertToInt32WithTruncation(src);
-            return dst;
-        }
-
-        /// <summary>
-        /// int _mm_cvttsd_si32 (__m128d a)CVTTSD2SI reg, xmm/m64
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="dst"></param>
-        [MethodImpl(Inline)]
-        public static int convert(Vector128<double> src, out int dst)
-        {
-            dst = ConvertToInt32WithTruncation(src);
-            return dst;
-        }
 
         [MethodImpl(Inline)]
         public static float to32f(int x)        

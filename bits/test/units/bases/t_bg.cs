@@ -11,7 +11,7 @@ namespace Z0
     public abstract class t_bg<X> : t_bits<X>
         where X : t_bg<X>, new()
     {
-        protected override int SampleSize => Pow2.T04;
+        protected override int SampleCount => Pow2.T04;
 
         protected override int CycleCount => Pow2.T03;
 
@@ -30,7 +30,7 @@ namespace Z0
 
             var grid = BitGrid.alloc(m,n,zero);
             
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var input = Random.BitString(grid.BitCount);
                 for(var index=0; index<input.Length; index++)
@@ -55,7 +55,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            for(var sample = 0; sample < SampleSize; sample++)
+            for(var sample = 0; sample < SampleCount; sample++)
             {
                 var bg = BitGrid.alloc(m,n,zero);
                 var bs = Random.BitString((int)NatMath.mul(m,n));
@@ -76,7 +76,7 @@ namespace Z0
         protected void gbg_bitread_check<T>(int rows, int cols)
             where T : unmanaged
         {
-            for(var i = 0; i < SampleSize; i++)
+            for(var i = 0; i < SampleCount; i++)
             {
                 var src = Random.BitGrid<T>(rows,cols);
                 var dstA = BitGrid.alloc<T>(rows,cols);

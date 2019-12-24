@@ -128,36 +128,36 @@ namespace Z0
 
         public void polyadd()
         {
-            polyadd_check(SDel.add<sbyte>());
-            polyadd_check(SDel.add<byte>());
-            polyadd_check(SDel.add<short>());
-            polyadd_check(SDel.add<ushort>());
-            polyadd_check(SDel.add<int>());
-            polyadd_check(SDel.add<uint>());
-            polyadd_check(SDel.add<long>());
-            polyadd_check(SDel.add<ulong>());
-            polyadd_check(SDel.add<float>());
-            polyadd_check(SDel.add<double>());            
+            polyadd_check(MathOps.add<sbyte>());
+            polyadd_check(MathOps.add<byte>());
+            polyadd_check(MathOps.add<short>());
+            polyadd_check(MathOps.add<ushort>());
+            polyadd_check(MathOps.add<int>());
+            polyadd_check(MathOps.add<uint>());
+            polyadd_check(MathOps.add<long>());
+            polyadd_check(MathOps.add<ulong>());
+            polyadd_check(MathOps.add<float>());
+            polyadd_check(MathOps.add<double>());            
         }
         
         public void polyadd_bench()
         {
-            polyadd_bench(SDel.add<sbyte>());
-            polyadd_bench(SDel.add<byte>());
-            polyadd_bench(SDel.add<short>());
-            polyadd_bench(SDel.add<ushort>());
-            polyadd_bench(SDel.add<int>());
-            polyadd_bench(SDel.add<uint>());
-            polyadd_bench(SDel.add<long>());
-            polyadd_bench(SDel.add<ulong>());
-            polyadd_bench(SDel.add<float>());
-            polyadd_bench(SDel.add<double>());
+            polyadd_bench(MathOps.add<sbyte>());
+            polyadd_bench(MathOps.add<byte>());
+            polyadd_bench(MathOps.add<short>());
+            polyadd_bench(MathOps.add<ushort>());
+            polyadd_bench(MathOps.add<int>());
+            polyadd_bench(MathOps.add<uint>());
+            polyadd_bench(MathOps.add<long>());
+            polyadd_bench(MathOps.add<ulong>());
+            polyadd_bench(MathOps.add<float>());
+            polyadd_bench(MathOps.add<double>());
         }
 
         void polyadd_check<T>(IBinaryOp<T> op)
             where T : unmanaged
         {
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var x = Random.Next<T>();
                 var y = Random.Next<T>();

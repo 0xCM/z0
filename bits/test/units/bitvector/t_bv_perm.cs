@@ -59,7 +59,7 @@ namespace Z0
             var bv = BitVector.perm(BitVector64.One,p);
             Claim.eq(bv[6], bit.On);
 
-            for(var j=0; j<SampleSize; j++)
+            for(var j=0; j<SampleCount; j++)
             {
                 var p1 = Random.Perm(n64);
                 var v1 = Random.BitVector(n64);

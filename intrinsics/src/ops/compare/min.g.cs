@@ -30,7 +30,7 @@ namespace Z0
             || typeof(T) == typeof(long))
                 return vmin_i(x,y);
             else 
-                return gfpv.vmin(x,y);
+                return ginxfp.vmin(x,y);
         }
          
        [MethodImpl(Inline)]
@@ -48,7 +48,7 @@ namespace Z0
             || typeof(T) == typeof(long))
                 return vmin_i(x,y);
             else 
-                return gfpv.vmin(x,y);
+                return ginxfp.vmin(x,y);
         }        
 
         [MethodImpl(Inline)]

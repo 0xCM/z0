@@ -5,8 +5,8 @@
 namespace Z0
 {
     using System;
-
     using System.Runtime.CompilerServices;
+
     using static zfunc;
 
     public sealed class t_microbuffers : UnitTest<t_microbuffers>
@@ -41,7 +41,7 @@ namespace Z0
 
         public void bitstack()
         {
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var bits = Random.BitString(Random.Next<int>(2,50));
                 var stack = MicroBuffers.bitstack();

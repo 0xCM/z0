@@ -40,10 +40,10 @@ namespace Z0
         {
             var bits = n256;
             var bytes = n32;
-            var src = Random.Blocks<byte>(n256, count:SampleSize);
+            var src = Random.Blocks<byte>(n256, count:SampleCount);
             const int hibit = 7;
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {                
                 var srcCpuVec = src.LoadVector(i);
                 var srcBitVec = srcCpuVec.ToSpan().ToBitCells(bits);
@@ -67,9 +67,9 @@ namespace Z0
             const int hibit = 7;
             var bits = n128;
             var bytes = n16;
-            var src = Random.Blocks<byte>(bits, count:SampleSize);
+            var src = Random.Blocks<byte>(bits, count:SampleCount);
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 
                 var srcCpuVec = src.LoadVector(i);
@@ -103,7 +103,7 @@ namespace Z0
                     if(BitMask.testbit(srcSpan[r], 31))
                         BitVector.enable(mmExpect,r);
                 
-                var mmActual = fpinx.takemask(srcVector).ToBitVector();
+                var mmActual = dinxfp.takemask(srcVector).ToBitVector();
                 Claim.yea(mmExpect == mmActual);
             }
         }
@@ -122,7 +122,7 @@ namespace Z0
                     if(BitMask.testbit(srcSpan[r], 63))
                         BitVector.enable(mmExpect,r);
                 
-                var mmActual = fpinx.takemask(srcVector).ToBitVector();
+                var mmActual = dinxfp.takemask(srcVector).ToBitVector();
                 Claim.yea(mmExpect == mmActual);
             }
         }

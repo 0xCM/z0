@@ -15,7 +15,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class fpinx
+    partial class dinxfp
     {
         /// <summary>
         /// __m128 _mm_andnot_ps (__m128 a, __m128 b) ANDNPS xmm, xmm/m128
@@ -101,7 +101,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static Vector128<float> vxnor(Vector128<float> x, Vector128<float> y)
-            => fpinx.vnot(Xor(x, y));
+            => dinxfp.vnot(Xor(x, y));
         
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -110,7 +110,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static Vector128<double> vxnor(Vector128<double> x, Vector128<double> y)
-            => fpinx.vnot(Xor(x, y));
+            => dinxfp.vnot(Xor(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -119,7 +119,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static Vector256<float> vxnor(Vector256<float> x, Vector256<float> y)
-            => fpinx.vnot(Xor(x, y));
+            => dinxfp.vnot(Xor(x, y));
         
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -128,7 +128,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static Vector256<double> vxnor(Vector256<double> x, Vector256<double> y)
-            => fpinx.vnot(Xor(x, y));
+            => dinxfp.vnot(Xor(x, y));
 
         [MethodImpl(Inline)]
         public static Vector128<float> vnot(Vector128<float> src)

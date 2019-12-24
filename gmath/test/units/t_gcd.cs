@@ -45,7 +45,7 @@ namespace Z0
         void gcdbin_check<T>(T min, T max)
             where T : unmanaged
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var a = Random.Next(min, max);
                 var b = Random.Next(min, max);

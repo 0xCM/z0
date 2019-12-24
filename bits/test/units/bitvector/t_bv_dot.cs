@@ -381,7 +381,7 @@ namespace Z0
 
         public void pbv_dot_4()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.BitVector(n4);
                 var y = Random.BitVector(n4);
@@ -393,7 +393,7 @@ namespace Z0
 
         public void pbv_dot_8()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.BitVector(n8);
                 var y = Random.BitVector(n8);
@@ -410,7 +410,7 @@ namespace Z0
 
         public void pbv_dot_16()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.BitVector(n16);
                 var y = Random.BitVector(n16);
@@ -428,7 +428,7 @@ namespace Z0
 
         public void pbv_dot_32()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.BitVector(n32);
                 var y = Random.BitVector(n32);
@@ -446,7 +446,7 @@ namespace Z0
 
         public void pbv_dot_64()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.BitVector(n64);
                 var y = Random.BitVector(n64);
@@ -460,7 +460,7 @@ namespace Z0
                 Claim.yea(a == c);            
             }
 
-            for(var i=0; i< SampleSize; i++)          
+            for(var i=0; i< SampleCount; i++)          
             {
                 var x32 = Random.BitVector(n32);
                 var y32 = Random.BitVector(n32);

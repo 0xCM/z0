@@ -30,7 +30,7 @@ namespace Z0
             || typeof(T) == typeof(long))
                 return vmax_i(x,y);
             else 
-                return gfpv.vmax(x,y);
+                return ginxfp.vmax(x,y);
         }
          
        [MethodImpl(Inline)]
@@ -48,7 +48,7 @@ namespace Z0
             || typeof(T) == typeof(long))
                 return vmax_i(x,y);
             else 
-                return gfpv.vmax(x,y);
+                return ginxfp.vmax(x,y);
         }        
 
         [MethodImpl(Inline)]

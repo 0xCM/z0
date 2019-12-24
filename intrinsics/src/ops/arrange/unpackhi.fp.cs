@@ -7,18 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
+
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Sse41;
     
-    using static As;
     using static zfunc;    
 
-    partial class fpinx
+    partial class dinxfp
     {
-
         /// <summary>
         /// __m128 _mm_unpackhi_ps (__m128 a, __m128 b) UNPCKHPS xmm, xmm/m128
         /// Creates a 128-bit vector where the lower 64 bits are taken from the
@@ -66,9 +65,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<double> vunpackhi(Vector256<double> x, Vector256<double> y)
             => UnpackHigh(x,y);
-
-
-
     }
-
 }

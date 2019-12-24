@@ -16,7 +16,7 @@ namespace Z0
         {
             var n = n256;
             var mask =  CpuVector.vbroadcast(n, BitMask.msb(n2,n1,z8));
-            var zero = CpuVector.zero<byte>(n);
+            var zero = CpuVector.vzero<byte>(n);
             var ones =  CpuVector.ones<byte>(n);
             var blend = dinx.vbitblend(zero,ones,mask);
             Claim.eq(blend,mask);
@@ -51,7 +51,7 @@ namespace Z0
             where T : unmanaged
         {
             var count = w/bitsize<T>();
-            for(var sample=0; sample<SampleSize; sample++)
+            for(var sample=0; sample<SampleCount; sample++)
             {
 
                 var x = Random.CpuVector(w,t);
@@ -86,7 +86,7 @@ namespace Z0
             where T : unmanaged
         {
             var count = w/bitsize<T>();            
-            for(var sample=0; sample<SampleSize; sample++)
+            for(var sample=0; sample<SampleCount; sample++)
             {
                 var x = Random.CpuVector(w,t);
                 var y = Random.CpuVector(w,t);

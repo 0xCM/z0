@@ -16,7 +16,7 @@ namespace Z0
 
         public void bv8_ops_check()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var a = Random.Next<byte>();
                 var b = Random.Next<byte>();

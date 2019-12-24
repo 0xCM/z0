@@ -15,7 +15,7 @@ namespace Z0
         {
             var n = n8;
 
-            for(var sample = 0; sample < SampleSize; sample++)
+            for(var sample = 0; sample < SampleCount; sample++)
             {
                 var p = Random.Perm(n);
                 var m = p.ToBitMatrix();
@@ -35,7 +35,7 @@ namespace Z0
         {
             var n = n16;
 
-            for(var sample=0; sample<SampleSize; sample++)
+            for(var sample=0; sample<SampleCount; sample++)
             {
                 var p = Random.Perm(n);
                 var m = p.ToBitMatrix();
@@ -55,7 +55,7 @@ namespace Z0
         {
             var n = n64;
 
-            for(var sample=0; sample<SampleSize; sample++)
+            for(var sample=0; sample<SampleCount; sample++)
             {
                 var p = Random.Perm(n);
                 var m = p.ToBitMatrix();
@@ -73,7 +73,7 @@ namespace Z0
 
         public void bm_perm_exchange_8x8x8()
         {
-            for(var i= 0; i<SampleSize; i++)
+            for(var i= 0; i<SampleCount; i++)
             {
                 //Creates an "exchange" matrix
                 var perm = Perms.natural(n8).Reverse();
@@ -88,7 +88,7 @@ namespace Z0
         }
         public void bm_perm_exchange_32x32x32()
         {
-            for(var i= 0; i<SampleSize; i++)
+            for(var i= 0; i<SampleCount; i++)
             {
                 //Creates an "exchange" matrix            
                 var perm = Perms.natural(n32).Reverse();
@@ -103,7 +103,7 @@ namespace Z0
 
         public void bm_perm_exchange_64x64x64()
         {
-            for(var i= 0; i<SampleSize; i++)
+            for(var i= 0; i<SampleCount; i++)
             {
                 //Creates an "exchange" matrix            
                 var perm = Perms.natural(n64).Reverse();

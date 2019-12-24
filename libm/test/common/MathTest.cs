@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
 
     using static zfunc;
 
@@ -17,10 +16,7 @@ namespace Z0
 
         protected override int CycleCount => Pow2.T03;
 
-        protected override int SampleSize => Pow2.T08;
+        protected override int SampleCount => Pow2.T08;
 
     }
-
-
-
 }

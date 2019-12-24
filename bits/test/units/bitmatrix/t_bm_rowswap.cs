@@ -19,7 +19,7 @@ namespace Z0
             var a = A.Data.Replicate();
             Claim.eq(a.Length, n);
 
-            for(var sample=0; sample < SampleSize; sample++)
+            for(var sample=0; sample < SampleCount; sample++)
             {
                 (var i, var j) = Random.NextPair(0,n);
                 A.RowSwap(i,j);
@@ -42,7 +42,7 @@ namespace Z0
             var a = A.Data.Replicate();
             Claim.eq(a.Length, n);
 
-            for(var sample=0; sample < SampleSize; sample++)
+            for(var sample=0; sample < SampleCount; sample++)
             {
                 (var i, var j) = Random.NextPair(0,n);
                 A.RowSwap(i,j);
@@ -65,7 +65,7 @@ namespace Z0
             var a = A.Data.Replicate();
             Claim.eq(a.Length, n);
 
-            for(var sample=0; sample < SampleSize; sample++)
+            for(var sample=0; sample < SampleCount; sample++)
             {
                 (var i, var j) = Random.NextPair(0,n);
                 BitMatrix.rowswap(A,i,j);

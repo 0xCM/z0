@@ -17,7 +17,7 @@ namespace Z0
 
         public void exp_libm_valid()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.Next<double>(MinExp, MaxExp);
                 var y = libm.exp(x);

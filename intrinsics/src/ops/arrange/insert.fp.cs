@@ -7,16 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
+
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     
-    using static As;
     using static zfunc;    
 
-    partial class fpinx
-    {
-
-       /// <summary>
+    partial class dinxfp
+    { 
+        /// <summary>
         /// _mm256_insertf128_ps: Overwrites a 128-bit lane in the target with the content of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>

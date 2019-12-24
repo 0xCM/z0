@@ -85,7 +85,7 @@ namespace Z0
          
         public void bm_mul_8x8x8()
         {
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var m1 = Random.BitMatrix8();
                 var m2 = m1.Replicate();
@@ -98,7 +98,7 @@ namespace Z0
 
         public void bm_mul_32x32x32()
         {
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var m1 = Random.BitMatrix(n32);
                 var m2 = m1.Replicate();
@@ -111,7 +111,7 @@ namespace Z0
     
         public void bm_vmul_64x64x64()
         {
-            for(var sample = 0; sample < SampleSize; sample++)            
+            for(var sample = 0; sample < SampleCount; sample++)            
             {
                 var A = Random.BitMatrix64();
                 var x = Random.BitVector(n64);
@@ -129,7 +129,7 @@ namespace Z0
 
         public void bm_vmul_8x8x8()
         {
-            for(var sample = 0; sample < SampleSize; sample++)            
+            for(var sample = 0; sample < SampleCount; sample++)            
             {
                 var m = Random.BitMatrix8();
                 var c = Random.BitVector(n8);
@@ -144,7 +144,7 @@ namespace Z0
 
         public void bm_vmul_16x16x16()
         {
-            for(var sample = 0; sample < SampleSize; sample++)            
+            for(var sample = 0; sample < SampleCount; sample++)            
             {
                 var m = Random.BitMatrix16();
                 var c = Random.BitVector(n16);
@@ -162,7 +162,7 @@ namespace Z0
 
         public void bm_vmul_32x32x32()
         {
-            for(var sample = 0; sample < SampleSize; sample++)            
+            for(var sample = 0; sample < SampleCount; sample++)            
             {
                 var m = Random.BitMatrix32();
                 var c = Random.BitVector(n32);

@@ -26,7 +26,7 @@ namespace Z0
         {
             using var asm = AsmBuffer.Create(Or64uCode);         
             var or = asm.BinOp<ulong>();
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var x = Random.Next<ulong>();
                 var y = Random.Next<ulong>();
@@ -40,7 +40,7 @@ namespace Z0
         {
             using var asm = AsmBuffer.Create(Or32uCode);         
             var or = asm.BinOp<uint>();
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var x = Random.Next<uint>();
                 var y = Random.Next<uint>();

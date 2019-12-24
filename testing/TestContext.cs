@@ -87,7 +87,7 @@ namespace Z0
         /// <summary>
         /// The number of elements to be selected from some sort of stream
         /// </summary>
-        protected virtual int SampleSize
+        protected virtual int SampleCount
             => DefaultSampleSize;
         
         /// <summary>
@@ -135,7 +135,7 @@ namespace Z0
         protected OpTime Benchmark<K>(Action<K[]> worker, string oplabel,  K min, K max)
             where K : unmanaged
         {
-            var buffer = new K[SampleSize];
+            var buffer = new K[SampleCount];
             var sw = stopwatch(false);
             for(var round = 0; round < RoundCount; round++)
             {
@@ -150,7 +150,7 @@ namespace Z0
             }
             
             var opname = oplabel + angled(type<K>().DisplayName());  
-            OpTime timing = (SampleSize*CycleCount*RoundCount, sw, opname);          
+            OpTime timing = (SampleCount*CycleCount*RoundCount, sw, opname);          
             Collect(timing);
             return timing;
         }
@@ -172,7 +172,7 @@ namespace Z0
         protected void opcheck<K>(UnaryOp<K> baseline, UnaryOp<K> subject) 
             where K : unmanaged
         {
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.Next<K>();
                 var x = baseline(a);
@@ -213,7 +213,7 @@ namespace Z0
         protected void opcheck<K>(BinaryOp<K> baseline, BinaryOp<K> subject) 
             where K : unmanaged
         {
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.Next<K>();
                 var b = Random.Next<K>();

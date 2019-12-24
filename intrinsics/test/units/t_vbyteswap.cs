@@ -31,7 +31,7 @@ namespace Z0
 
             Claim.eq(y16,z16);            
             for(var i=0; i<z16s.Length; i+= 2)
-                Claim.eq(bswap(z16s[i]), z16s[i+1]);
+                Claim.eq(Bits.bytswap(z16s[i]), z16s[i+1]);
 
             var x32 = CpuVector.parts(n128, 
                 0xFFFF0000, 0x0000FFFF,
@@ -46,38 +46,13 @@ namespace Z0
             Claim.eq(y32,z32);
         }
 
-        public void vbyteswap_128x16()
-        {
-            for(var i=0; i< SampleSize; i++)
-            {
-                var a = Random.CpuVector<ushort>(n128);
-                var b = dinx.vbyteswap(a);
-                var sa = a.ToSpan();
-                var sb = b.ToSpan();
-                for(var j = 0; j<sa.Length; j++)
-                    Claim.eq(bswap(sa[j]), sb[j]);
-            }
-        }
-
-        public void vbyteswap_256x16()
-        {
-            for(var i=0; i< SampleSize; i++)
-            {
-                var a = Random.CpuVector<ushort>(n256);
-                var b = dinx.vbyteswap(a);
-                var sa = a.ToSpan();
-                var sb = b.ToSpan();
-                for(var j = 0; j<sa.Length; j++)
-                    Claim.eq(bswap(sa[j]), sb[j]);
-            }
-        }
 
         public void sbyteswap_16()
         {
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.Next<ushort>();
-                var b = bswap(bswap(a));
+                var b = Bits.bytswap(Bits.bytswap(a));
                 Claim.eq(a,b);
             }
         }
@@ -85,37 +60,11 @@ namespace Z0
         public void sbyteswap_32()
         {
             
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.Next<uint>();
-                var b = bswap(bswap(a));
+                var b = Bits.byteswap(Bits.byteswap(a));
                 Claim.eq(a,b);
-            }
-        }
-
-        public void vbyteswap_128x32()
-        {
-            for(var i=0; i< SampleSize; i++)
-            {
-                var a = Random.CpuVector<uint>(n128);
-                var b = dinx.vbyteswap(a);
-                var sa = a.ToSpan();
-                var sb = b.ToSpan();
-                for(var j = 0; j<sa.Length; j++)
-                    Claim.eq(bswap(sa[j]), sb[j]);
-            }
-        }
-
-        public void vbyteswap_256x32()
-        {
-            for(var i=0; i< SampleSize; i++)
-            {
-                var a = Random.CpuVector<uint>(n256);
-                var b = dinx.vbyteswap(a);
-                var sa = a.ToSpan();
-                var sb = b.ToSpan();
-                for(var j = 0; j<sa.Length; j++)
-                    Claim.eq(bswap(sa[j]), sb[j]);
             }
         }
 
@@ -123,42 +72,36 @@ namespace Z0
         {
             var a = (ulong)uint.MaxValue << 32;
             var b = (ulong)uint.MaxValue;
-            Claim.eq(bswap(a),b);
-            Claim.eq(bswap(b),a);
+            Claim.eq(Bits.byteswap(a),b);
+            Claim.eq(Bits.byteswap(b),a);
             
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var x = Random.Next<ulong>();
-                var y = bswap(bswap(x));
+                var y = Bits.byteswap(Bits.byteswap(x));
                 Claim.eq(x,y);
             }
         }
 
+        public void vbyteswap_128x32()
+            => vbyteswap_check_256(n128,z32);
+
         public void vbyteswap_128x64()
-        {
-            for(var i=0; i< SampleSize; i++)
-            {
-                var x = Random.CpuVector<ulong>(n128);
-                var y = dinx.vbyteswap(x);
-                var xs = x.ToSpan();
-                var ys = y.ToSpan();
-                for(var j = 0; j<xs.Length; j++)
-                    Claim.eq(bswap(xs[j]), ys[j]);
-            }
-        }
+            => vbyteswap_check_256(n128,z64);
+
+        public void vbyteswap_128x16()
+            => vbyteswap_check_256(n128,z16);
+
+        public void vbyteswap_256x32()
+            => vbyteswap_check_256(n256,z32);
+
+        public void vbyteswap_256x16()
+            => vbyteswap_check_256(n256,z16);
 
         public void vbyteswap_256x64()
-        {
+            => vbyteswap_check_256(n256,z64);
 
-            for(var i=0; i< SampleSize; i++)
-            {
-                var x = Random.CpuVector<ulong>(n256);
-                var y = dinx.vbyteswap(x);
-                var xs = x.ToSpan();
-                var ys = y.ToSpan();
-                for(var j = 0; j<xs.Length; j++)
-                    Claim.eq(bswap(xs[j]), ys[j]);
-            }
-        }
+
+
     }
 }

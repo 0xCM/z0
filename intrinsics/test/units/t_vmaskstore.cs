@@ -12,8 +12,6 @@ namespace Z0
 
     public class t_vmaskstore : t_vinx<t_vmaskstore>
     {   
-
-
         public void vmstore_128x8()
         {
             const byte Y = Pow2.T07;
@@ -26,7 +24,7 @@ namespace Z0
             var m2 = dinx.vsllx(m1,32);
             var m3 = dinx.vsllx(m2,32);
 
-            for(var i = 0; i<SampleSize; i++)
+            for(var i = 0; i<SampleCount; i++)
             {
                 var v0 = Random.CpuVector<byte>(n);
                 var v1 = Random.CpuVector<byte>(n);
@@ -55,8 +53,8 @@ namespace Z0
             var count = 32;
             var x = Random.CpuVector(n256,z8);
             var storage = DataBlocks.single(n256,z8);
-            var stored = CpuVector.zero(n256,z8);
-            var mask = CpuVector.zero(n256,z8);
+            var stored = CpuVector.vzero(n256,z8);
+            var mask = CpuVector.vzero(n256,z8);
 
             // Store every component
             storage.Clear();

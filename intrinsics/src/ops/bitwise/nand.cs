@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
@@ -14,7 +15,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Avx;
     
-    using static As;
     using static zfunc;
 
     partial class dinx
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static Vector128<float> vnand(Vector128<float> x, Vector128<float> y)
-            => fpinx.vnot(And(x, y));
+            => dinxfp.vnot(And(x, y));
         
         /// <summary>
         /// Computes ~(x & y) for vectors x and y
@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static Vector128<double> vnand(Vector128<double> x, Vector128<double> y)
-            => fpinx.vnot(And(x, y));
+            => dinxfp.vnot(And(x, y));
 
         /// <summary>
         /// Computes ~(x & y) for vectors x and y
@@ -188,7 +188,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static Vector256<float> vnand(Vector256<float> x, Vector256<float> y)
-            => fpinx.vnot(And(x, y));
+            => dinxfp.vnot(And(x, y));
         
         /// <summary>
         /// Computes ~(x & y) for vectors x and y
@@ -197,7 +197,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static Vector256<double> vnand(Vector256<double> x, Vector256<double> y)
-            => fpinx.vnot(And(x, y));
+            => dinxfp.vnot(And(x, y));
 
    }
 

@@ -19,7 +19,7 @@ namespace Z0
         //[0 1 2 3] -> [0 2 1 3]
         public void butterfly_16x64u()
         {
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var x = Random.Next<ulong>();
                 var y = gbits.bfly(n16, x);
@@ -35,7 +35,7 @@ namespace Z0
         // [0 1 2 3] -> [0 2 1 3]
         public void butterfly_32x8()
         {
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var x = Random.Next<uint>();
                 var y = gbits.bfly(n8, x);
@@ -56,7 +56,7 @@ namespace Z0
 
         public void butterfly_32x4()
         {
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.Next<uint>();
                 var b = bitstring(Bits.bfly(n4, a));

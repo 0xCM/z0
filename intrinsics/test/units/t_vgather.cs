@@ -126,7 +126,7 @@ namespace Z0
 
             ref var src = ref head(data);
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var vIdx = Random.CpuVector<int>(ix, 0, w);
                 var vExpect = CpuVector.parts(n, (uint)vcell(vIdx,0), (uint)vcell(vIdx,1), (uint)vcell(vIdx,2), (uint)vcell(vIdx,3));
@@ -147,7 +147,7 @@ namespace Z0
 
             ref var src = ref head(data);
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var vIdx = Random.CpuVector<long>(ix, 0, w);
                 var vExpect = CpuVector.parts(n, (ulong)vcell(vIdx,0), (ulong)vcell(vIdx,1));
@@ -167,7 +167,7 @@ namespace Z0
 
             ref var src = ref head(data);
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var vIdx = Random.CpuVector<long>(ix, 0, w);
                 var vExpect = CpuVector.parts(n, (uint)vcell(vIdx,0), (uint)vcell(vIdx,1), (uint)vcell(vIdx,2), (uint)vcell(vIdx,3));
@@ -187,7 +187,7 @@ namespace Z0
             
             ref var src = ref head(data);
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var vIdx = Random.CpuVector<int>(ix, 0, w);
                 var vExpect = vIdx;
@@ -207,7 +207,7 @@ namespace Z0
 
             ref var src = ref head(data);
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var vIdx = Random.CpuVector<int>(ix, 0, w);
                 var vExpect = v32u(vIdx);
@@ -272,7 +272,7 @@ namespace Z0
 
             ref var src = ref head(data);
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var vIdx = Random.CpuVector<long>(ix, 0, w);
                 var vExpect = v64u(vIdx);            
@@ -293,7 +293,7 @@ namespace Z0
 
             ref var src = ref head(data);
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var vIdx = Random.CpuVector<int>(ix, 0, w);
                 var vExpect = CpuVector.parts(n, (ulong)vcell(vIdx,0), (ulong)vcell(vIdx,1), (ulong)vcell(vIdx,2), (ulong)vcell(vIdx,3));

@@ -17,8 +17,8 @@ namespace Z0
         protected void VerifyOp<T>(BinaryOp<T> asmop, Func<T,T,T> refop, int? n = null)
             where T : unmanaged
         {
-            var lhs = Random.Array<T>(n ?? SampleSize);
-            var rhs = Random.Array<T>(n ?? SampleSize);
+            var lhs = Random.Array<T>(n ?? SampleCount);
+            var rhs = Random.Array<T>(n ?? SampleCount);
             var setup = from args in lhs.Zip(rhs)
                           let expect = refop(args.First, args.Second)
                           let actual = asmop(args.First, args.Second) 
@@ -32,7 +32,7 @@ namespace Z0
         protected void VerifyOp<T>(UnaryOp<T> asmop, Func<T,T> refop, int? n = null)
             where T : unmanaged
         {
-            var src = Random.Array<T>(n ?? SampleSize);
+            var src = Random.Array<T>(n ?? SampleCount);
             var setup = from arg in src
                           let expect = refop(arg)
                           let actual = asmop(arg) 
@@ -45,7 +45,7 @@ namespace Z0
 
         protected void VerifyOp<T>(AsmCode<T> code, Func<T,T,T> refop)
             where T : unmanaged
-                => VerifyOp(code.CreateBinOp<T>(), refop, SampleSize);
+                => VerifyOp(code.CreateBinOp<T>(), refop, SampleCount);
 
         protected void VerifyOp<T>(AsmCode<T> code, Func<T,T> refop, int n)
             where T : unmanaged

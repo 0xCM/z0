@@ -12,7 +12,7 @@ namespace Z0
     {
         public void unpack_16()
         {
-            for(var sample = 0; sample < SampleSize; sample ++)
+            for(var sample = 0; sample < SampleCount; sample ++)
             {
                 var src = Random.Next<ushort>();
                 var dst = DataBlocks.single<byte>(n128);
@@ -27,7 +27,7 @@ namespace Z0
 
         public void unpack_32()
         {
-            for(var sample=0; sample< SampleSize; sample++)
+            for(var sample=0; sample< SampleCount; sample++)
             {
                 var src = Random.Next<uint>();
                 var dst = DataBlocks.single<byte>(n256);
@@ -42,7 +42,7 @@ namespace Z0
 
         public void unpack_64()
         {
-            for(var sample=0; sample< SampleSize; sample++)
+            for(var sample=0; sample< SampleCount; sample++)
             {
                 var src = Random.Next<ulong>();
                 var dst = DataBlocks.single<byte>(n512);
@@ -60,7 +60,7 @@ namespace Z0
         {
             var count = n4;
             var block = n32;
-            for(var sample = 0; sample < SampleSize; sample++)
+            for(var sample = 0; sample < SampleCount; sample++)
             {
                 var bs = Random.BitString(count);
                 var bitseq = bs.BitSeq.Blocked(block);
@@ -74,7 +74,7 @@ namespace Z0
         {
             var count = n32;
             var block = n256;
-            for(var sample = 0; sample < SampleSize; sample++)
+            for(var sample = 0; sample < SampleCount; sample++)
             {
                 var bs = Random.BitString(count);
                 var bitseq = bs.BitSeq.Blocked(block);

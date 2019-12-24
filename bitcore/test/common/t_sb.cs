@@ -13,7 +13,7 @@ namespace Z0
     public abstract class t_sb<X> : UnitTest<X>
         where X : t_sb<X>, new()
     {
-        protected override int SampleSize => Pow2.T04;
+        protected override int SampleCount => Pow2.T04;
 
         protected override int CycleCount => Pow2.T03;
 
@@ -232,7 +232,7 @@ namespace Z0
         protected void sb_scatter_check<T>(T t = default)
             where T : unmanaged
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var src = Random.Next<T>();
                 var mask = Random.Next<T>();
@@ -246,7 +246,7 @@ namespace Z0
        protected void sb_gather_check<T>(T t = default)
             where T : unmanaged
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var src = Random.Next<T>();
                 var mask = Random.Next<T>();
@@ -264,7 +264,7 @@ namespace Z0
             where T : unmanaged
         {
             var offset = Random.Next(1, bitsize<T>());
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.Next<T>();                
                 var y = BitString.scalar(x);
@@ -298,7 +298,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            for(var j=0; j< SampleSize; j++)
+            for(var j=0; j< SampleCount; j++)
             {
                 var src = Random.Next<S>();
                 Span<T> dst = new T[bitsize<S>()];   
@@ -312,7 +312,7 @@ namespace Z0
                 }
             }
 
-            var x = Random.Span<S>(SampleSize);
+            var x = Random.Span<S>(SampleCount);
             Span<T> y1 = new T[x.Length * bitsize<S>()];
             gbits.unpack(x,y1);
             var y2 = BitString.scalars(x);
@@ -327,7 +327,7 @@ namespace Z0
         protected void sb_bitrev_check<T>(T t = default)
             where T : unmanaged
         {
-            for(var i=0; i<SampleSize; i++)            
+            for(var i=0; i<SampleCount; i++)            
             {
                 var src = Random.Next<T>();
                 var r1 = gbits.rev(src);
@@ -345,7 +345,7 @@ namespace Z0
         {
             var len = bitsize<T>();
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var a = Random.Next<T>();
                 var b = Random.Next<T>();
@@ -376,7 +376,7 @@ namespace Z0
             where T : unmanaged
         {
             var vZero = vzero<T>(n128);
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.Next<T>();                    
                 var y = Random.Next<T>();                    
@@ -389,7 +389,7 @@ namespace Z0
         protected void sb_msbpos_check<T>(T t = default)
             where T : unmanaged
         {
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var x = Random.Next<T>();
                 var xpos = gbits.msbpos(x);
@@ -408,7 +408,7 @@ namespace Z0
         protected void sb_ntz_check<T>(T t = default)
             where T : unmanaged
         {
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var x = Random.Next<T>();
                 var ntzX = gbits.ntz(x);
@@ -428,7 +428,7 @@ namespace Z0
         protected void sb_lsbx_check<T>(T t = default)
             where T : unmanaged
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var src = Random.Next<T>();
                 var x = gbits.lsbx(src);
@@ -442,7 +442,7 @@ namespace Z0
         {
             Span<char> s0 = stackalloc char[bitsize<T>()];
             ReadOnlySpan<char> s1 = default;
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var a = Random.Next<T>();
                 gbits.bitchars(a,s0);
@@ -462,7 +462,7 @@ namespace Z0
             Span<byte> s0 = stackalloc byte[bitsize<T>()];
             Span<byte> s1 = stackalloc byte[bitsize<T>()];
             ReadOnlySpan<byte> s2 = default;
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var a = Random.Next<T>();
                 gbits.bitseq(a,s0);
@@ -505,7 +505,7 @@ namespace Z0
             Claim.eq(width, bs2.Length);
             Claim.eq(maxlen, bs2.PopCount());
 
-            for(var i= 0; i< SampleSize; i++)
+            for(var i= 0; i< SampleCount; i++)
             {
                 var x = Random.Next<T>();
                 var j = Random.Next(2, width - width/2);
@@ -522,7 +522,7 @@ namespace Z0
         protected void sb_lsboff_check<T>(T t = default)
             where T : unmanaged
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.Next<T>();
                 var y0 = gbits.lsboff(x);
@@ -534,7 +534,7 @@ namespace Z0
        protected void sb_toggle_check<T>(T t = default)
             where T : unmanaged
         {
-            var src = Random.Span<T>(SampleSize);
+            var src = Random.Span<T>(SampleCount);
             var tLen = bitsize<T>();
             var srcLen = src.Length;
             for(var i = 0; i< srcLen; i++)
@@ -555,7 +555,7 @@ namespace Z0
         protected void bs_rep_check<T>()
             where T : unmanaged
         {
-            var src = Random.Span<T>(SampleSize);
+            var src = Random.Span<T>(SampleCount);
             for(var i=0; i<src.Length; i++)
             {
                 var x = src[i];
@@ -569,7 +569,7 @@ namespace Z0
         protected void bs_fromscalar_check<T>(T t = default)
             where T : unmanaged
         {
-            var src = Random.Span<T>(SampleSize);
+            var src = Random.Span<T>(SampleCount);
             for(var i=0; i<src.Length; i++)
             {
                 var bc1 =  BitString.scalar(src[i]).Format();
@@ -581,7 +581,7 @@ namespace Z0
         protected void sb_width_check<T>(T t = default)
             where T : unmanaged
         {
-            for(var sample = 0; sample < SampleSize; sample++)
+            for(var sample = 0; sample < SampleCount; sample++)
             {
                 var x = Random.Next<T>();
                 var actual = gbits.width(x);
@@ -597,7 +597,7 @@ namespace Z0
         {
             var mincount = 1;
             var maxcount = bitsize<T>();
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var count = Random.Single(mincount,maxcount);
                 var mask = BitMask.hi(count,t);                

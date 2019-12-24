@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
+
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
     
     using static zfunc;    
-    using static As;
     
     partial class ginx
     {
@@ -105,9 +105,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return fpinx.vnonz(vcast32f(src));
+                return dinxfp.vnonz(vcast32f(src));
             else if(typeof(T) == typeof(double))
-                return fpinx.vnonz(vcast64f(src));
+                return dinxfp.vnonz(vcast64f(src));
             else 
                 throw unsupported<T>();
         }
@@ -146,9 +146,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return fpinx.vnonz(vcast32f(src));
+                return dinxfp.vnonz(vcast32f(src));
             else if(typeof(T) == typeof(double))
-                return fpinx.vnonz(vcast64f(src));
+                return dinxfp.vnonz(vcast64f(src));
             else 
                 throw unsupported<T>();
         }

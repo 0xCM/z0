@@ -7,12 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
+
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     
     using static zfunc;    
 
-    partial class fpinx
+    partial class dinxfp
     {
         /// <summary>
         /// __m256 _mm256_broadcast_ss (float const * mem_addr) VBROADCASTSS ymm, m32

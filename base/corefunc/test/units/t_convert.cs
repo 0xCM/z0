@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
 
     using System.Runtime.CompilerServices;
     using static zfunc;
@@ -16,7 +14,7 @@ namespace Z0
 
         public void convert_32u_to_bytes_check()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.Next<uint>();
                 var y = x.AsBytes();
@@ -27,7 +25,7 @@ namespace Z0
 
         public void convert_64u_to_bytes_check()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.Next<ulong>();
                 var y = x.AsBytes();
@@ -38,7 +36,7 @@ namespace Z0
 
         public void convert_64f_to_bytes_check()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.Next<double>();
                 var y = x.AsBytes();

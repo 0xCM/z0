@@ -14,7 +14,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class fpinx
+    partial class dinxfp
     {
         /// <summary>
         /// __m128 _mm_rcp_ps (__m128 a) RCPPS xmm, xmm/m128
@@ -32,5 +32,4 @@ namespace Z0
         public static Vector256<float> rcp(Vector256<float> x)
             => Reciprocal(x);
     }
-
 }

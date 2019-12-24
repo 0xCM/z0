@@ -160,7 +160,7 @@ namespace Z0.Logix
 
         public void t_bitseq_check()
         {
-            for(var sample=0; sample<SampleSize; sample++)          
+            for(var sample=0; sample<SampleCount; sample++)          
             {
                 var bs = Random.BitString(2,7);
                 var x = bs.ToLogicSeq();

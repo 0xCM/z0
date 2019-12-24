@@ -13,12 +13,12 @@ namespace Z0
 
     public sealed class t_mul : UnitTest<t_mul>
     {
-        protected override int SampleSize => Pow2.T12;
+        protected override int SampleCount => Pow2.T12;
         
         public void mul_32()
         {
             const uint MAX = uint.MaxValue;
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var x = Random.Next<uint>(2, Pow2.T08);
                 var y = Random.Next<uint>(2, Pow2.T08);
@@ -46,7 +46,7 @@ namespace Z0
 
         public void mod_32()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var a = Random.Next<uint>();
                 var actual = Mod32.mod(a);
@@ -57,7 +57,7 @@ namespace Z0
 
         public void div_32()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var a = Random.Next<uint>();                
                 var actual = Mod32.div(a);
@@ -69,7 +69,7 @@ namespace Z0
         public void mul_64()
         {
             const ulong MAX = ulong.MaxValue;
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var x = Random.Next<ulong>(2, Pow2.T08);
                 var y = Random.Next<ulong>(2, Pow2.T08);
@@ -96,7 +96,7 @@ namespace Z0
         public void mul_64_lo()
         {
 
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.Next<ulong>(uint.MaxValue, ulong.MaxValue);
                 var b = Random.Next<ulong>(uint.MaxValue, ulong.MaxValue);

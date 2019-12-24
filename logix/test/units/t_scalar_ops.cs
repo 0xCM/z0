@@ -5,15 +5,11 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Reflection;
     
     using static zfunc;
     
-
     public class t_scalar_ops : UnitTest<t_scalar_ops>
     {
         protected override int CycleCount => Pow2.T08;
@@ -30,8 +26,8 @@ namespace Z0.Logix
         {
             var opname = $"ops/scalar[{typename<T>()}]/lookup[{lookup}]";
 
-            var lhsSamples = Random.Array<T>(SampleSize);
-            var rhsSamples = Random.Array<T>(SampleSize);
+            var lhsSamples = Random.Array<T>(SampleCount);
+            var rhsSamples = Random.Array<T>(SampleCount);
             var result = default(T);
             var kinds = ScalarOpApi.BinaryBitwiseKinds.ToArray();
             var opcount = 0;
@@ -41,14 +37,14 @@ namespace Z0.Logix
             if(lookup)
             {
                 for(var i=0; i<CycleCount; i++)
-                for(var sample=0; sample< SampleSize; sample++)
+                for(var sample=0; sample< SampleCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                     result = ScalarOpApi.lookup<T>(kinds[k])(lhsSamples[sample], rhsSamples[sample]);
             }
             else
             {
                 for(var i=0; i<CycleCount; i++)
-                for(var sample=0; sample< SampleSize; sample++)
+                for(var sample=0; sample< SampleCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                     result = ScalarOpApi.eval(kinds[k],lhsSamples[sample], rhsSamples[sample]);
             }

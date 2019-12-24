@@ -16,7 +16,7 @@ namespace Z0.Logix
     public class t_ternary_logic : UnitTest<t_ternary_logic>
     {
 
-        protected override int SampleSize => Pow2.T08;
+        protected override int SampleCount => Pow2.T08;
         
         IEnumerable<TernaryOpKind> TernaryKinds
             => ScalarOpApi.TernaryBitwiseKinds;
@@ -63,7 +63,7 @@ namespace Z0.Logix
         void check_select<T>()
             where T : unmanaged
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var width = bitsize<T>();
                 var a = Random.BitVector<T>();
@@ -79,7 +79,7 @@ namespace Z0.Logix
         void check_select<T>(N128 n = default)
             where T : unmanaged
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var a = Random.CpuVector<T>(n);
                 var b = Random.CpuVector<T>(n);
@@ -101,7 +101,7 @@ namespace Z0.Logix
         void check_select<T>(N256 n = default)
             where T : unmanaged
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var a = Random.CpuVector<T>(n);
                 var b = Random.CpuVector<T>(n);
@@ -137,7 +137,7 @@ namespace Z0.Logix
             where T: unmanaged
         {
             var width = bitsize<T>();
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var a = Random.BitVector<T>();
                 var b = Random.BitVector<T>();

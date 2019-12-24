@@ -227,7 +227,7 @@ namespace Z0
         {
             var perms = Random.EnumValues(A, B, C, D);
             var all = literals<Perm4L>().ToSet();
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var perm = perms.First();
                 Claim.contains(all,perm);
@@ -276,7 +276,7 @@ namespace Z0
 
         public void swaphl_2x128()
         {
-            for(var i=0; i < SampleSize; i++)
+            for(var i=0; i < SampleCount; i++)
             {
                 var x = Random.CpuVector<byte>(n256);
                 var y = vswaphl(x);
@@ -287,7 +287,7 @@ namespace Z0
 
         public void vperm4x64_256x64u_randomized()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var src = CpuVector.vincrements<ulong>(n256);
                 var x = dinx.vperm4x64(src, Perm4L.BADC);

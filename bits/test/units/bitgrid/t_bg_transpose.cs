@@ -32,7 +32,7 @@ namespace Z0
             var n = n8;
             var t = z8;
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var g = Random.BitGrid(m,n,t);
                 var gt = BitGrid.transpose(g);
@@ -56,7 +56,7 @@ namespace Z0
             var n = n4;
             var t = z64;
 
-            for(var i=0; i<SampleSize;i++)
+            for(var i=0; i<SampleCount;i++)
             {
                 var g = Random.BitGrid(m,n,t);
                 var tr1 = BitGrid.transpose(g);

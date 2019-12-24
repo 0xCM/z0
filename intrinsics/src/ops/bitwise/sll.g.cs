@@ -12,9 +12,10 @@ namespace Z0
     using static zfunc;
 
     using static As;
-    
+
     partial class ginx
     {
+
         [MethodImpl(Inline)]
         public static Vector128<T> vsll<T>(Vector128<T> x, byte shift)
             where T : unmanaged

@@ -125,7 +125,7 @@ namespace Z0.Logix
             var op0 = ScalarOpApi.lookup<T>(k0);
             var op1 = ScalarOpApi.lookup<T>(k1);
 
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.SetNext(v0);
                 var b = Random.SetNext(v1);
@@ -154,7 +154,7 @@ namespace Z0.Logix
 
             var op = ScalarOpApi.lookup<T>(kind);
             var expr = binary(kind,v0,v1);
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.SetNext(v0);
                 var b = Random.SetNext(v1);

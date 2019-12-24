@@ -75,7 +75,7 @@ namespace Z0
 
         public void bm_getcol_8x8x8()
         {
-            for(var j = 0; j< SampleSize; j++)
+            for(var j = 0; j< SampleCount; j++)
             {
                 var src = Random.BitMatrix8();
                 for(var c = 0; c < src.Order; c ++)
@@ -89,7 +89,7 @@ namespace Z0
 
         public void bm_getcol_16x16x16()
         {
-            for(var j = 0; j< SampleSize; j++)
+            for(var j = 0; j< SampleCount; j++)
             {
                 var src = Random.BitMatrix16();
                 for(var c = 0; c < src.Order; c ++)
@@ -103,7 +103,7 @@ namespace Z0
 
         public void bm_getcol_32x32x32()
         {
-            for(var j = 0; j< SampleSize; j++)
+            for(var j = 0; j< SampleCount; j++)
             {
                 var src = Random.BitMatrix(n32);
                 for(var c = 0; c < src.Order; c ++)
@@ -117,7 +117,7 @@ namespace Z0
 
         public void bm_getcol_64x64x64()
         {
-            for(var j = 0; j< SampleSize; j++)
+            for(var j = 0; j< SampleCount; j++)
             {
                 var src = Random.BitMatrix(n64);
                 for(var c = 0; c < src.Order; c ++)

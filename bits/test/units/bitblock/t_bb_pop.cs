@@ -16,7 +16,7 @@ namespace Z0
             const int bitlen = 128;
             const int bytelen = 128/8;
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var bc = Random.BitBlock<ulong>(bitlen);
                 var bcpop = bc.Pop();
@@ -27,7 +27,7 @@ namespace Z0
                 Claim.eq(expect, bcpop);                
             }
 
-            var srcSpan = Random.Span<ulong>(SampleSize);
+            var srcSpan = Random.Span<ulong>(SampleCount);
             var spPop = Bits.pop(srcSpan);            
             var spPopExpect = 0u;
             for(var i=0; i<srcSpan.Length; i++)

@@ -11,9 +11,10 @@ namespace Z0
     
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
+
     using static zfunc;    
 
-    partial class fpinx
+    partial class dinxfp
     {
         /// <summary>
         /// int _mm_testc_ps (__m128 a, __m128 b) VTESTPS xmm, xmm/m128

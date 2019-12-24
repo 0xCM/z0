@@ -45,7 +45,7 @@ partial class zfunc
     /// Returns the display name of the supplied type
     /// </summary>
     /// <param name="full">Whether the full name should be returned</param>
-    /// <typeparam name="T">The type to examine</typeparam>
+    /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]   
     public static string typename<T>(T t = default)
         => typeof(T).DisplayName();
@@ -59,17 +59,62 @@ partial class zfunc
         => typeof(T).DisplayName();
     
     /// <summary>
-    /// Returns the canonical designator for a primal type
+    /// Produces a charactr {i | u | f} indicating whether the source type is signed, unsigned or float
     /// </summary>
+    /// <param name="t"></param>
     /// <typeparam name="T">The source type</typeparam>
+    [MethodImpl(Inline)]   
+    static char indicator<T>(T t = default)
+        where T : unmanaged
+        => isFloat(t) ? AsciLower.f : (isSigned(t) ? AsciLower.i : AsciLower.u);
+
+    /// <summary>
+    /// Produces a canonical designator of the form {bitsize[T]}{u | i | f} for a primal type
+    /// </summary>
+    /// <param name="t">A primal type representative</param>
+    /// <typeparam name="T">The primal type</typeparam>
     [MethodImpl(Inline)]   
     public static string moniker<T>(T t = default)
         where T : unmanaged
-    {
-        var size = bitsize<T>();
-        var indicator = isFloat<T>() ? 'f' : (isSigned<T>() ? 'i' : 'u');
-        return $"{size}{indicator}";
-    }
+            => $"{bitsize(t)}{indicator(t)}";
+
+    /// <summary>
+    /// Produces a canonical designator of the form {op}_{bitsize[T]}{u | i | f} for an operation over a primal type
+    /// </summary>
+    /// <param name="op">The base operator name</param>
+    /// <param name="t">A primal type representative</param>
+    /// <typeparam name="T">The primal type</typeparam>
+    [MethodImpl(Inline)]   
+    public static string moniker<T>(string op, T t = default)
+        where T : unmanaged
+            => $"{op}_{bitsize(t)}{indicator(t)}";
+
+    /// <summary>
+    /// Produces a canonical designator of the form {W}X{bitsize[T]}{u | i | f} for a segmented WxT type
+    /// </summary>
+    /// <param name="w">The covering bit width representative</param>
+    /// <param name="t">A primal cell type representative</param>
+    /// <typeparam name="W">The bit width type</typeparam>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]   
+    public static string moniker<W,T>(W w = default, T t = default)
+        where T : unmanaged
+        where W : unmanaged, ITypeNat
+            => $"{w}x{moniker(t)}";
+
+    /// <summary>
+    /// Produces a canonical designator of the form {op}_{W}X{bitsize[T]}{u | i | f} for an operation over a segmented WxT type
+    /// </summary>
+    /// <param name="op">The base operator name</param>
+    /// <param name="w">The covering bit width representative</param>
+    /// <param name="t">A primal cell type representative</param>
+    /// <typeparam name="W">The bit width type</typeparam>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]   
+    public static string moniker<W,T>(string op, W w = default, T t = default)
+        where T : unmanaged
+        where W : unmanaged, ITypeNat
+            => $"{op}_{w}x{moniker(t)}";
 
     /// <summary>
     /// Returns the System.Type of the supplied parametric type
@@ -80,7 +125,7 @@ partial class zfunc
         => typeof(T);
 
     /// <summary>
-    /// Determines whether a type is either a float or double
+    /// Returns true if the operand is a primal floating-point type and 0 otherwise
     /// </summary>
     /// <typeparam name="T">The type to test</typeparam>
     [MethodImpl(Inline)]
@@ -92,12 +137,12 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static bool isFloat32<T>(T t = default)
         where T : unmanaged
-            => isFloat<T>() && bitsize<T>() == 32;
+            => typeof(T) == typeof(float);
 
     [MethodImpl(Inline)]
     public static bool isFloat64<T>(T t = default)
         where T : unmanaged
-            => isFloat<T>() && bitsize<T>() == 64;
+            => typeof(T) == typeof(double);
 
     /// <summary>
     /// Determines whether a type is a native integral type
@@ -157,7 +202,6 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static (Type t0,Type t1) types<T0,T1>(T0 t0 = default, T1 t1 = default) 
         => (typeof(T0),typeof(T1));
-
 
     /// <summary>
     /// Constructs an object

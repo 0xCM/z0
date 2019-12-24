@@ -13,7 +13,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class fpinx
+    partial class dinxfp
     {
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -47,5 +47,4 @@ namespace Z0
         public static bool vnonz(Vector256<double> src) 
             => ! TestZ(src,src);
     }
-
 }

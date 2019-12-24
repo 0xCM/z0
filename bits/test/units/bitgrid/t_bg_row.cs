@@ -18,7 +18,7 @@ namespace Z0
             var m = n8;
             var n = n4;
             
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var bg = Random.BitGrid(m,n,t);
                 var bs = BitGrid.bitstring(bg); 
@@ -39,7 +39,7 @@ namespace Z0
             var m = n4;
             var n = n8;
             
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var bg = Random.BitGrid(m,n,t);
                 var bs = BitGrid.bitstring(bg); 
@@ -62,7 +62,7 @@ namespace Z0
             var n = n64;
             var t = z64;
             
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var bg = Random.BitGrid(m,n,t);
                 var bs = BitGrid.bitstring(bg); 
@@ -83,7 +83,7 @@ namespace Z0
             var m = n16;
             var n = n16;
             
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var bg = Random.BitGrid(m,n,t);
                 var bs = BitGrid.bitstring(bg); 
@@ -104,7 +104,7 @@ namespace Z0
             var m = n32;
             var n = n4;
 
-            for(var sample = 0; sample < SampleSize; sample++)
+            for(var sample = 0; sample < SampleCount; sample++)
             {
                 var bg = Random.BitGrid(m,n,t);
                 var bs = BitGrid.bitstring(bg);

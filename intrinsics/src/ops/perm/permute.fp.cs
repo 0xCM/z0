@@ -14,7 +14,7 @@ namespace Z0
     using static As;
     using static zfunc;    
 
-    partial class fpinx
+    partial class dinxfp
     {
         /// <summary>
         /// __m256d _mm256_permute4x64_pd (__m256d a, const int imm8)VPERMPD ymm, ymm/m256, imm8
@@ -92,7 +92,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vector256<float> vreverse(Vector256<float> src)
-            => fpinx.vperm8x32(src,MRev256f32);    
+            => dinxfp.vperm8x32(src,MRev256f32);    
 
         static Vector256<int> MRev256f32 
             => CpuVector.partsi(n256, 7, 6, 5, 4, 3, 2, 1, 0);    

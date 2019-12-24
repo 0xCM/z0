@@ -5,16 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;    
 
     partial class gmathops
     {
-
         public static uint add_sdel_u32(uint a, uint b)
-            => SDel.add<uint>().Invoke(a,b);
+            => MathOps.add<uint>().Invoke(a,b);
     
         public static uint add_gdel_u32(uint a, uint b)
         {
@@ -38,5 +36,4 @@ namespace Z0
             => GDel.sub<uint>()(a,b);
 
     }
-
 }

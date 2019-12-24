@@ -13,7 +13,7 @@ namespace Z0
     {     
         public void vavg_256x8u_check()
         {            
-            for(var j=0; j < SampleSize; j++)
+            for(var j=0; j < SampleCount; j++)
             {
                 var x = Random.CpuVector<byte>(n256);
                 var y = Random.CpuVector<byte>(n256);
@@ -26,7 +26,7 @@ namespace Z0
 
         public void vavg_256x16u_check()
         {            
-            for(var j=0; j < SampleSize; j++)
+            for(var j=0; j < SampleCount; j++)
             {
                 var x = Random.CpuVector<ushort>(n256);
                 var y = Random.CpuVector<ushort>(n256);
@@ -49,7 +49,7 @@ namespace Z0
             OpTime refbench()        
             {
                 var sw = stopwatch(false);
-                for(var i=0; i<SampleSize; i++)
+                for(var i=0; i<SampleCount; i++)
                 {
                     var x = Random.Blocks<byte>(n256);
                     var y = Random.Blocks<byte>(n256);
@@ -57,13 +57,13 @@ namespace Z0
                     var b = mathspan.avgi(x.ReadOnly(), y.ReadOnly());
                     sw.Stop();
                 }
-                return OpTime.Define<byte>(SampleSize, sw, $"vavg-ref");
+                return OpTime.Define<byte>(SampleCount, sw, $"vavg-ref");
             }
 
             OpTime opbench()
             {
                 var sw = stopwatch(false);
-                for(var i=0; i<SampleSize; i++)
+                for(var i=0; i<SampleCount; i++)
                 {
                     var x = Random.CpuVector<byte>(n256);
                     var y = Random.CpuVector<byte>(n256);
@@ -71,7 +71,7 @@ namespace Z0
                     var a = dinx.vavg(x,y);
                     sw.Stop();
                 }
-                return OpTime.Define<byte>(SampleSize, sw, $"vavg");        
+                return OpTime.Define<byte>(SampleCount, sw, $"vavg");        
 
             }
 

@@ -73,7 +73,7 @@ namespace Z0
             var spec = CpuVector.parts(n256, 7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);       
             //Trace(spec.FormatDataProp("MRev256u32"));
 
-            for(var i = 0; i< SampleSize; i++)
+            for(var i = 0; i< SampleCount; i++)
             {
                 var x = Random.Blocks<uint>(n);
                 var y = x.Replicate();

@@ -12,7 +12,6 @@ namespace Z0
 
     public class t_vcpu_pop : t_vinx<t_vcpu_pop>
     {
-
         public void vcpu_pop_3x256()
         {
             var n = n256;
@@ -79,10 +78,10 @@ namespace Z0
                 var y = Random.CpuVector<ulong>(n);
                 var z = Random.CpuVector<ulong>(n);
                 counter.Start();
-                for(var i=0; i<SampleSize; i++)
+                for(var i=0; i<SampleCount; i++)
                     total += BitPop.vpop(x,y,z);
                 counter.Stop();
-                opcount += (32 * 3 * SampleSize);
+                opcount += (32 * 3 * SampleCount);
             }
             Benchmark($"pop_3x256", counter, opcount);
         }
@@ -97,10 +96,10 @@ namespace Z0
                 var y = Random.CpuVector<ulong>(n);
                 var z = Random.CpuVector<ulong>(n);
                 counter.Start();
-                for(var i=0; i<SampleSize; i++)
+                for(var i=0; i<SampleCount; i++)
                     total += BitPop.vpop(x,y,z);
                 counter.Stop();
-                opcount += (16 * 3 * SampleSize);
+                opcount += (16 * 3 * SampleCount);
             }
             Benchmark($"pop_3x128", counter, opcount);
         }
@@ -109,16 +108,16 @@ namespace Z0
         {            
             var total = 0u;
             var opcount = 0;
-            Span<ulong> samples = stackalloc ulong[SampleSize];
+            Span<ulong> samples = stackalloc ulong[SampleCount];
             ref readonly var src = ref head(samples);
             for(var cycle = 0; cycle < CycleCount; cycle++)
             {
-                Random.Fill(SampleSize, ref head(samples));
+                Random.Fill(SampleCount, ref head(samples));
                 counter.Start();
-                for(var i=0; i< SampleSize; i++)
+                for(var i=0; i< SampleCount; i++)
                     total += Bits.pop(skip(in head(samples), i));
                 counter.Stop();
-                opcount += 8*1*SampleSize;
+                opcount += 8*1*SampleCount;
             }
             Benchmark($"pop_1x64_popcnt", counter, opcount);
         }

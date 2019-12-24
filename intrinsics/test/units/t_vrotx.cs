@@ -13,7 +13,7 @@ namespace Z0
     {
         public void vrotrx_128x8u()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = CpuVector.units<byte>(n128);            
                 Claim.eq(ginx.vrotrx(x,8), dinx.vrotrx(x,n8));
@@ -26,7 +26,7 @@ namespace Z0
 
         public void vrotlx_128x8u()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = CpuVector.units<byte>(n128);            
                 Claim.eq(ginx.vrotlx(x,8), dinx.vrotlx(x,n8));

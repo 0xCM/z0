@@ -25,7 +25,7 @@ namespace Z0
 
         public void pbv_rank_8()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.BitVector(n8);
                 var pos = Random.Next(1,6);
@@ -40,7 +40,7 @@ namespace Z0
 
         public void pbv_rank_32()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {            
                 var x = Random.BitVector(n32);
                 var pos = Random.Next(1,28);
@@ -55,7 +55,7 @@ namespace Z0
 
         public void pbv_rank_64()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
             
                 var x = Random.BitVector(n64);

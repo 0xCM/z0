@@ -13,7 +13,7 @@ namespace Z0
     {
         void bv_xor_4()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.BitVector(n4);
                 var y = Random.BitVector(n4);
@@ -44,7 +44,7 @@ namespace Z0
 
         void bv_xor_128()
         {
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var x = Random.BitVector(n128);
                 var y = Random.BitVector(n128);

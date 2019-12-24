@@ -137,9 +137,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return fpinx.vtestc(vcast32f(src), vcast32f(mask));
+                return dinxfp.vtestc(vcast32f(src), vcast32f(mask));
             else if(typeof(T) == typeof(double))
-                return fpinx.vtestc(vcast64f(src), vcast64f(mask));
+                return dinxfp.vtestc(vcast64f(src), vcast64f(mask));
             else 
                 throw unsupported<T>();
         }
@@ -177,9 +177,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return fpinx.vtestc(vcast32f(src), vcast32f(mask));
+                return dinxfp.vtestc(vcast32f(src), vcast32f(mask));
             else if(typeof(T) == typeof(double))
-                return fpinx.vtestc(vcast64f(src), vcast64f(mask));
+                return dinxfp.vtestc(vcast64f(src), vcast64f(mask));
             else 
                 throw unsupported<T>();
         }

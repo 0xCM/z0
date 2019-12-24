@@ -106,13 +106,5 @@ namespace Z0
         public void vxor_blocks_256x64u()
             => vxor_blocks_check<ulong>(n256);
 
-        public void vxor_bench_256x32u()
-            => vxor_bench<uint>(n256);
-
-        public void vxor_bench_256x8u()
-            => vxor_bench<byte>(n256);
-            
-        public void vxor_bench_256x64u()
-            => vxor_bench<ulong>(n256);
     }
 }

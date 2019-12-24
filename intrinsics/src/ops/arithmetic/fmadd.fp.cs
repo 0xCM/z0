@@ -13,7 +13,7 @@ namespace Z0
     using static As;
     using static zfunc;    
 
-    partial class fpinx
+    partial class dinxfp
     {
         /// <summary>
         /// dst = x*y + z
@@ -59,5 +59,4 @@ namespace Z0
         public static Vector256<double> fmadd(Vector256<double> x, Vector256<double> y, Vector256<double> z)
             => MultiplyAdd(x,y,z);
     }
-
 }

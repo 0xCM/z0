@@ -8,16 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
+
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
-    using static System.Runtime.Intrinsics.X86.Sse;
-    using static System.Runtime.Intrinsics.X86.Sse2;
     
     using static zfunc;    
-    using static As;
-    using static AsIn;
 
-    partial class fpinx
+    partial class dinxfp
     {
         /// <summary>
         /// __m128 _mm_floor_ps (__m128 a) ROUNDPS xmm, xmm/m128, imm8(9)

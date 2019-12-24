@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
 
     using static zfunc;
 
@@ -14,7 +13,7 @@ namespace Z0
 
         public void fabs64_libm_validate()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var src = Random.Next<double>();
                 Claim.eq(src < 0 ? -src : src, fmath.abs(src));

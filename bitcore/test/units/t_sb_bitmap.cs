@@ -16,7 +16,7 @@ namespace Z0
             byte start = 16;
             byte len = 12;
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var src = 0b111111111111ul;                
                 var bvSrc = src.ToBitVector();
@@ -37,7 +37,7 @@ namespace Z0
 
         void sb_bitmap_32()
         {
-            for(var sample = 0; sample < SampleSize; sample++)
+            for(var sample = 0; sample < SampleCount; sample++)
             {
                 var src = Random.Next<uint>();
                 var dst = Random.Next<uint>();

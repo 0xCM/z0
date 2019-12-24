@@ -15,20 +15,20 @@ partial class zfunc
     /// <summary>
     /// Returns a 128-bit vector with all bits disabled
     /// </summary>
-    /// <param name="n">The bitness selector</param>
+    /// <param name="w">The bitness selector</param>
     /// <typeparam name="T">The primal component type</typeparam>
     [MethodImpl(Inline)]
-    public static Vector128<T> vzero<T>(N128 n)
+    public static Vector128<T> vzero<T>(N128 w, T t = default)
         where T : unmanaged
             => default;
 
     /// <summary>
     /// Returns a 256-bit vector with all bits disabled
     /// </summary>
-    /// <param name="n">The bitness selector</param>
+    /// <param name="w">The bitness selector</param>
     /// <typeparam name="T">The primal component type</typeparam>
     [MethodImpl(Inline)]
-    public static Vector256<T> vzero<T>(N256 n)
+    public static Vector256<T> vzero<T>(N256 w, T t = default)
         where T : unmanaged
             => default;
 

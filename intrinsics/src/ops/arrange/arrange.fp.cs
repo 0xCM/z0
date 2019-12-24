@@ -7,21 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
+
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx.X64;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse.X64;
     using static System.Runtime.Intrinsics.X86.Sse2;
-    using static System.Runtime.Intrinsics.X86.Sse2.X64;
-    using static System.Runtime.Intrinsics.X86.Sse41;
-    using static System.Runtime.Intrinsics.X86.Sse41.X64;
-    using static System.Runtime.Intrinsics.X86.Sse42;
-    
-    using static As;
+
     using static zfunc;    
 
-    partial class fpinx
+    partial class dinxfp
     {
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector
@@ -147,7 +143,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<double> vshuffle(Vector128<double> x, Vector128<double> y, byte control)
             => Shuffle(x, y, control);
- 
-
     }
 }

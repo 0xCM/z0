@@ -14,9 +14,8 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class fpinx
+    partial class dinxfp
     {
-
         /// <summary>
         /// Negates each source vector component
         /// </summary>

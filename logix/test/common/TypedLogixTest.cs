@@ -72,7 +72,7 @@ namespace Z0.Logix
             var offset = 6;
             var expr = shift(op,v1,offset);
             
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.Next<T>();
                 v1.Set(a);   
@@ -89,7 +89,7 @@ namespace Z0.Logix
             byte offset = 6;
             var expr = shift(op,v1,offset);
             
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.CpuVector<T>(n128);
                 v1.Set(a);   
@@ -106,7 +106,7 @@ namespace Z0.Logix
             byte offset = 6;
             var expr = shift(op,v1,offset);
             
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.CpuVector<T>(n256);
                 v1.Set(a);   
@@ -122,7 +122,7 @@ namespace Z0.Logix
             var va = var_a<T>();
             var vb = var_b<T>();
             var x = CS.lt(va,vb);
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var a = va.Set(Random);
                 var b = vb.Set(Random);
@@ -138,7 +138,7 @@ namespace Z0.Logix
             var va = var_a<T>();
             var vb = var_b<T>();
             var x = CS.lteq(va,vb);
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var a = va.Set(Random);
                 var b = vb.Set(Random);
@@ -154,7 +154,7 @@ namespace Z0.Logix
             var va = var_a<T>();
             var vb = var_b<T>();
             var x = CS.gt(va,vb);
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var a = va.Set(Random);
                 var b = vb.Set(Random);
@@ -173,7 +173,7 @@ namespace Z0.Logix
             var va = var_a<T>();
             var vb = var_b<T>();
             var x = CS.gteq(va,vb);
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var a = va.Set(Random);
                 var b = vb.Set(Random);

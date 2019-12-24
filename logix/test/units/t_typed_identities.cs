@@ -5,8 +5,6 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
@@ -43,7 +41,7 @@ namespace Z0.Logix
             where T :unmanaged
         {
             var @true = ScalarOps.@true<T>();
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.Next<T>();
                 var y = Random.Next<T>();
@@ -58,7 +56,7 @@ namespace Z0.Logix
             where T :unmanaged
         {
             var @true = CpuOps.@true<T>(n128);
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.CpuVector<T>(n);
                 var y = Random.CpuVector<T>(n);
@@ -73,7 +71,7 @@ namespace Z0.Logix
             where T :unmanaged
         {
             var @true = CpuOps.@true<T>(n);
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.CpuVector<T>(n);
                 var y = Random.CpuVector<T>(n);

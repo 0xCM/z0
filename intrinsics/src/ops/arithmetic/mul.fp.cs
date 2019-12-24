@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
+
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
@@ -14,8 +15,7 @@ namespace Z0
     using static As;
     using static zfunc;    
 
-
-    partial class fpinx
+    partial class dinxfp
     {
         /// <summary>
         /// __m128 _mm_mul_ps (__m128 a, __m128 b) MULPS xmm, xmm/m128

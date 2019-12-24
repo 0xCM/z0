@@ -14,7 +14,7 @@ namespace Z0
 
         public void bm_diagonal_4x4x4()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var A = Random.BitMatrix(n4);
                 var x = BitMatrix.diagonal(A);
@@ -27,7 +27,7 @@ namespace Z0
 
         public void bm_diagonal_8x8x8()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var A = Random.BitMatrix(n8);
                 var x = BitMatrix.diagonal(A);

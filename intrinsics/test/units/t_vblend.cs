@@ -155,7 +155,7 @@ namespace Z0
             for(var i=0; i < 8; i++)
                 Claim.eq(vcell(lrpattern,i), even(i) ? 0u : uint.MaxValue);
             
-            var zero = CpuVector.zero<uint>(n);            
+            var zero = CpuVector.vzero<uint>(n);            
             var ones = CpuVector.ones<uint>(n);
             Claim.eq(lrpattern, dinx.vblend(zero, ones, Blend8x32.LRLRLRLR));
             
@@ -194,9 +194,9 @@ namespace Z0
         {
             var n = n256;
 
-            var selectors = Random.Bits(SampleSize).ToArray();
+            var selectors = Random.Bits(SampleCount).ToArray();
 
-            for(var sample=0; sample<SampleSize; sample++)
+            for(var sample=0; sample<SampleCount; sample++)
             {
                 var xs = Random.Blocks<ulong>(n);
                 var x = xs.LoadVector();

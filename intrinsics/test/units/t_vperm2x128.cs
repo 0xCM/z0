@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static zfunc;
-    using static VOps;
 
     public class t_vperm2x128 : t_vinx<t_vperm2x128>
     {
@@ -39,23 +38,7 @@ namespace Z0
 
             }
 
-            void case2()
-            {
-                // [0, 1, 2, 3, 4, 5, 6, 7] |> BCDA = [2, 3, 4, 5, 6, 7, 0, 1] - rotate left
-                var p0 = Perm2x4.BC;
-                var p1 = Perm2x4.DA;
-                var src = CpuVector.vincrements<ulong>(n512);
-                //var actual = ginx.vperm2x128(src, p0, p1);
-                var actual = VPerm2x128.Invoke(src,p0,p1);
-
-                var expect = CpuVector.parts(n512,2, 3, 4, 5, 6, 7, 0, 1);
-                Claim.eq(actual,expect);
-                Trace(describe(src,p0,p1));
-
-            }
-            
             case1();
-            case2();
 
         }
 

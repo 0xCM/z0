@@ -5,10 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-
     using System.Runtime.CompilerServices;
+    
     using static zfunc;
 
     public sealed class t_modn : UnitTest<t_modn>
@@ -17,7 +15,7 @@ namespace Z0
         public void mod16()
         {
             var ops = ModN.Ops(16);
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.Next<uint>();
                 var m0 = a % ops.N;
@@ -30,7 +28,7 @@ namespace Z0
         public void mod18()
         {
             var ops = ModN.Ops(18);
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.Next<uint>();
                 var m0 = a % ops.N;

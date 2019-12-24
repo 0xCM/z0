@@ -15,11 +15,11 @@ namespace Z0
 
         public void mul_no_overflow()
         {
-            var x = Random.Span<ulong>(SampleSize, z32, uint.MaxValue);
-            var y = Random.Span<ulong>(SampleSize, z32, uint.MaxValue);                                
-            Span<Pair<ulong>> z = new Pair<ulong>[SampleSize];
+            var x = Random.Span<ulong>(SampleCount, z32, uint.MaxValue);
+            var y = Random.Span<ulong>(SampleCount, z32, uint.MaxValue);                                
+            Span<Pair<ulong>> z = new Pair<ulong>[SampleCount];
             math.mul64x128(x,y,z);
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
                 Claim.eq(x[i] * y[i], z[i].A);
         }
     }

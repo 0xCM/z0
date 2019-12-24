@@ -16,7 +16,7 @@ namespace Z0
             var n = n4;
             var t = z32;
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var xg = Random.BitGrid(m,n,t);
                 var xs = xg.ToBitString().Transpose(m,n);
@@ -36,7 +36,7 @@ namespace Z0
             var n = n8;
             var t = z32;
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var xg = Random.BitGrid(m,n,t);
                 var xs = BitGrid.bitstring(xg).Transpose(m,n);
@@ -56,7 +56,7 @@ namespace Z0
             var m = n16;
             var n = n4;
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var xg = Random.BitGrid(m,n,t);
                 var xs = BitGrid.bitstring(xg).Transpose(m,n);
@@ -76,7 +76,7 @@ namespace Z0
             var n = n2;
             var t = z64;
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var xg = Random.BitGrid(m,n,t);
                 var xs = BitGrid.bitstring(xg).Transpose(m,n);
@@ -96,7 +96,7 @@ namespace Z0
             var n = n8;
             var t = z64;
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var xg = Random.BitGrid(m,n,t);
                 var xs = BitGrid.bitstring(xg).Transpose(m,n);
@@ -116,7 +116,7 @@ namespace Z0
             var n = n8;
             var t = z64;
 
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var xg = Random.BitGrid(m,n,t);
                 var xs = BitGrid.bitstring(xg).Transpose(m,n);
@@ -136,7 +136,7 @@ namespace Z0
             var n = n8;
             var t = z64;
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var xg = Random.BitGrid(m,n,t);
                 var xs = BitGrid.bitstring(xg).Transpose(m,n);

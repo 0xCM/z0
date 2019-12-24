@@ -14,7 +14,7 @@ namespace Z0
     {
         public void pbv_gfmul_8()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var v1 = Random.BitVector(n8);
                 var v2 = Random.BitVector(n8);
@@ -29,15 +29,15 @@ namespace Z0
 
         public void pbv_gfmul_8_bench()
         {
-            var lhsSrc = Random.Stream<byte>().Take(SampleSize).Select(x => BitVector.from(n8,x)).ToArray();
-            var rhsSrc = Random.Stream<byte>().Take(SampleSize).Select(x => BitVector.from(n8,x)).ToArray();
+            var lhsSrc = Random.Stream<byte>().Take(SampleCount).Select(x => BitVector.from(n8,x)).ToArray();
+            var rhsSrc = Random.Stream<byte>().Take(SampleCount).Select(x => BitVector.from(n8,x)).ToArray();
             var result = BitVector.alloc(n8);
             int Bench()
             {                
                 for(var i=0; i< CycleCount; i++)
-                for(var j=0; j< SampleSize; j++)
+                for(var j=0; j< SampleCount; j++)
                     result &= lhsSrc[j] * rhsSrc[j];
-                return SampleSize * CycleCount;
+                return SampleCount * CycleCount;
             }   
 
             Measure(Bench);

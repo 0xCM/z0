@@ -21,7 +21,7 @@ namespace Z0
 
         public void sb_split_16x8()
         {
-            var src = Random.Span<ushort>(SampleSize);
+            var src = Random.Span<ushort>(SampleCount);
             foreach(var x in src)
             {
                 Bits.split(x,out var x0, out var x1);
@@ -33,7 +33,7 @@ namespace Z0
 
         public void sb_split_32x8()
         {
-            var src = Random.Span<uint>(SampleSize);
+            var src = Random.Span<uint>(SampleCount);
             foreach(var x in src)
             {
                 Bits.split(x, out var x0, out var x1, out var x2, out var x3);
@@ -163,7 +163,7 @@ namespace Z0
         {
             Span<byte> dst = stackalloc byte[64];
 
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var src = Random.Next<ulong>();
                 Bits.unpack64x1(src, dst);
@@ -178,7 +178,7 @@ namespace Z0
         {
             Span<byte> y1 = stackalloc byte[32];
             Span<byte> y2 = stackalloc byte[32];
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var x = Random.Next<uint>();
                 Bits.unpack32x1(x, y1);

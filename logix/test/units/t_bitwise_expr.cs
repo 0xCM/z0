@@ -263,7 +263,7 @@ namespace Z0.Logix
             var V256 = CpuOpApi.lookup<T>(n256,id);
             check_op_identity<T>(id);
 
-            for(var sample = 0; sample< SampleSize; sample++)
+            for(var sample = 0; sample< SampleCount; sample++)
             {
                 var sa = Random.Next<T>();
                 var sb = Random.Next<T>();
@@ -301,7 +301,7 @@ namespace Z0.Logix
             var v1 = variable<T>(1);
             var expr = unary(kind,v1);
             
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.Next<T>();
                 v1.Set(a);
@@ -319,7 +319,7 @@ namespace Z0.Logix
             var v2 = variable<T>(2);
             var expr = binary(op,v1,v2);
             
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.Next<T>();
                 var b = Random.Next<T>();
@@ -339,7 +339,7 @@ namespace Z0.Logix
             var v1 = variable(1, default(Vector128<T>));
             var expr = unary(op,v1);
             
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.CpuVector<T>(n128);
                 v1.Set(a);   
@@ -355,7 +355,7 @@ namespace Z0.Logix
             var v1 = variable(1, default(Vector256<T>));
             var expr = unary(op,v1);
             
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.CpuVector<T>(n256);
                 v1.Set(a);   
@@ -372,7 +372,7 @@ namespace Z0.Logix
             var v2 = variable(2, default(Vector128<T>));
             var expr = binary(op,v1,v2);
             
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.CpuVector<T>(n128);
                 var b = Random.CpuVector<T>(n128);
@@ -392,7 +392,7 @@ namespace Z0.Logix
             var v2 = variable(2, default(Vector256<T>));
             var expr = binary(op,v1,v2);
             
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.CpuVector<T>(n256);
                 var b = Random.CpuVector<T>(n256);

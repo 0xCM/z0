@@ -13,7 +13,7 @@ namespace Z0
     {                
         public void abs_8i()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var src = Random.Next<sbyte>();
                 Claim.eq(gmath.abs(src),Math.Abs(src));
@@ -22,7 +22,7 @@ namespace Z0
 
         public void abs_16i()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var src = Random.Next<short>();
                 Claim.eq(gmath.abs(src),Math.Abs(src));
@@ -32,7 +32,7 @@ namespace Z0
         public void abs_32i()
         {
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var src = Random.Next<int>();
                 Claim.eq(gmath.abs(src),Math.Abs(src));
@@ -42,7 +42,7 @@ namespace Z0
 
         public void abs_64i()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var src = Random.Next<long>();
                 Claim.eq(gmath.abs(src),Math.Abs(src));

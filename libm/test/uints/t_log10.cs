@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
 
     using static zfunc;
 
@@ -13,7 +12,7 @@ namespace Z0
     {
         public void log10_libm_validate()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.Next<double>();
                 var y = libm.log10(x);

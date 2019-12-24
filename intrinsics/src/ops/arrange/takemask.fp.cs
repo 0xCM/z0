@@ -18,7 +18,7 @@ namespace Z0
     using static zfunc;
     using static As;
 
-    partial class fpinx
+    partial class dinxfp
     {        
         /// <summary>
         /// int _mm_movemask_ps (__m128 a) MOVMSKPS reg, xmm<

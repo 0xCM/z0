@@ -11,7 +11,7 @@ namespace Z0
     public abstract class t_bm<X> : t_bits<X>
         where X : t_bm<X>, new()
     {
-        protected override int SampleSize => Pow2.T04;
+        protected override int SampleCount => Pow2.T04;
 
         protected override int CycleCount => Pow2.T03;
 
@@ -19,7 +19,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var A = Random.BitMatrix(n,t);
                 var B = Random.BitMatrix(n,t);
@@ -34,7 +34,7 @@ namespace Z0
         protected void bm_and_check<T>(T t = default)
             where T : unmanaged
         {
-            for(var i = 0; i< SampleSize; i++)
+            for(var i = 0; i< SampleCount; i++)
             {
                 var A = Random.BitMatrix<T>();
                 var B = Random.BitMatrix<T>();
@@ -53,7 +53,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var A = Random.BitMatrix(n,t);
                 var B = Random.BitMatrix(n,t);
@@ -69,7 +69,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var A = Random.BitMatrix<T>();
                 var B = Random.BitMatrix<T>();
@@ -105,7 +105,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            for(var sample = 0; sample <SampleSize; sample++)
+            for(var sample = 0; sample <SampleCount; sample++)
             {
                 var A = Random.BitMatrix(m,n,t);
                 var B = A.Transpose();

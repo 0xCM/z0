@@ -73,9 +73,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(fpinx.vinsert(vcast32f(src), vcast32f(dst), index));
+                return vgeneric<T>(dinxfp.vinsert(vcast32f(src), vcast32f(dst), index));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(fpinx.vinsert(vcast64f(src), vcast64f(dst), index));
+                return vgeneric<T>(dinxfp.vinsert(vcast64f(src), vcast64f(dst), index));
             else
                 throw unsupported<T>();
         } 

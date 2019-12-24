@@ -25,7 +25,7 @@ namespace Z0
 
         public void sb_mix_outline()
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 BitVector64 x = Random.BitVector(n64);
                 BitVector32 y = (uint)Bits.select(x, BitMasks.Even64);
@@ -37,7 +37,7 @@ namespace Z0
                 Claim.eq(z, y);
             }            
 
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 BitVector64 x = Random.BitVector(n64);
                 BitVector32 y = (uint)Bits.select(x, BitMasks.Odd64);
@@ -78,7 +78,7 @@ namespace Z0
         {            
             var n = n32;
             var parity = n0;
-            for(var sample = 0; sample < SampleSize; sample ++)
+            for(var sample = 0; sample < SampleCount; sample ++)
             {
                 var x = Random.BitVector(n);
                 var y = Random.BitVector(n);

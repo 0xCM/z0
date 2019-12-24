@@ -14,7 +14,7 @@ namespace Z0
         public void pbv_partition_32x16()
         {
             Span<BitVector16> dst = stackalloc BitVector16[2];
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.BitVector(n32);
                 BitVector.partition(x, dst);
@@ -26,7 +26,7 @@ namespace Z0
         public void pbv_partition_32x4()
         {
             Span<BitVector4> dst = stackalloc BitVector4[8];
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.BitVector(n32);
                 BitVector.partition(x,dst);

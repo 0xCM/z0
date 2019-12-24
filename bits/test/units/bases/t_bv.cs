@@ -13,7 +13,7 @@ namespace Z0
     public abstract class t_bv<X> : t_bits<X>
         where X : t_bv<X>, new()
     {
-        protected override int SampleSize => Pow2.T08;
+        protected override int SampleCount => Pow2.T08;
 
         protected override int CycleCount => Pow2.T03;
 
@@ -24,7 +24,7 @@ namespace Z0
         protected void gbv_dot_check<T>()
             where T : unmanaged
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.BitVector<T>();
                 var y = Random.BitVector<T>();
@@ -46,7 +46,7 @@ namespace Z0
             where T : unmanaged
         {
             var opname = $"nbv_dot_{n}x{moniker<T>()}";
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.BitVector<N,T>();
                 var y = Random.BitVector<N,T>();
@@ -64,7 +64,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var x = Random.BitVector(n128, n, t);
                 var y = Random.BitVector(n128,n, t);
@@ -83,7 +83,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var x = Random.BitVector<N,T>();
                 var y = BitVector.reverse(x);
@@ -97,7 +97,7 @@ namespace Z0
             where T : unmanaged
         {
             var storage = new byte[natval<N>()];
-            for(var i=0; i< SampleSize; i++)
+            for(var i=0; i< SampleCount; i++)
             {
                 var x = Random.BitVector<N,T>();
                 var y = x.ToBitString(storage);
@@ -112,7 +112,7 @@ namespace Z0
         protected void gbv_xorw_check<T>(int width)
             where T : unmanaged
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i=0; i<SampleCount; i++)
             {
                 var x = Random.BitVector<T>(width);
                 Claim.lteq(BitVector.effwidth(x),width);

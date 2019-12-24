@@ -103,7 +103,7 @@ namespace Z0
 
         protected void cmp_128x64_check(FpCmpMode mode)
         {
-            for(var i = 0; i<SampleSize; i++)
+            for(var i = 0; i<SampleCount; i++)
             {
                 var lhs = Random.CpuVector<double>(n128);
                 var rhs = Random.CpuVector<double>(n128);
@@ -115,7 +115,7 @@ namespace Z0
                 rhs.StoreTo(ref head(rDst));
 
                 var expect = fmath.fcmp(lDst, rDst, mode);
-                var actual = fpinx.vcmpf(lhs, rhs, mode);
+                var actual = dinxfp.vcmpf(lhs, rhs, mode);
                 Claim.eq(expect,actual);
             }
 
@@ -123,7 +123,7 @@ namespace Z0
 
         protected void cmp_256xf32_check(FpCmpMode mode)
         {
-            for(var i = 0; i<SampleSize; i++)
+            for(var i = 0; i<SampleCount; i++)
             {
                 var x = Random.CpuVector<float>(n256);
                 var y = Random.CpuVector<float>(n256);
@@ -135,14 +135,14 @@ namespace Z0
                 y.StoreTo(ref head(yDst));
 
                 var expect = fmath.fcmp(xDst, yDst, mode);
-                var actual = fpinx.cmpf(x, y, mode);
+                var actual = dinxfp.cmpf(x, y, mode);
                 Claim.eq(expect,actual);
             }
         }
 
         protected void cmp_256x64_check(FpCmpMode mode)
         {
-            for(var i = 0; i<SampleSize; i++)
+            for(var i = 0; i<SampleCount; i++)
             {
                 var x = Random.CpuVector<double>(n256);
                 var y = Random.CpuVector<double>(n256);
@@ -154,7 +154,7 @@ namespace Z0
                 y.StoreTo(ref head(yDst));
 
                 var expect = fmath.fcmp(xDst, yDst, mode);
-                var actual = fpinx.cmpf(x, y, mode);
+                var actual = dinxfp.cmpf(x, y, mode);
                 Claim.eq(expect,actual);
             }
         }

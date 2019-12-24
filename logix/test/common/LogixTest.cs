@@ -25,9 +25,9 @@ namespace Z0.Logix
     {
         protected void logic_op_check(BL kind, Func<bit,bit,bit> rule)
         {
-            var lhsBits = Random.TakeBits(SampleSize);
-            var rhsBits = Random.TakeBits(SampleSize);
-            for(var i=0; i<SampleSize; i++)
+            var lhsBits = Random.TakeBits(SampleCount);
+            var rhsBits = Random.TakeBits(SampleCount);
+            for(var i=0; i<SampleCount; i++)
             {
                 var a = lhsBits[i];
                 var b = rhsBits[i];
@@ -59,8 +59,8 @@ namespace Z0.Logix
         {
             var opname = $"ops/logical/lookup[{lookup}]";
 
-            var lhsSamples = Random.Bits().Take(SampleSize).ToArray();
-            var rhsSamples = Random.Bits().Take(SampleSize).ToArray();
+            var lhsSamples = Random.Bits().Take(SampleCount).ToArray();
+            var rhsSamples = Random.Bits().Take(SampleCount).ToArray();
             var result = bit.Off;
             var kinds = LogicOpApi.BinaryOpKinds;
             var opcount = 0;
@@ -70,14 +70,14 @@ namespace Z0.Logix
             if(lookup)
             {
                 for(var i=0; i<CycleCount; i++)
-                for(var sample=0; sample< SampleSize; sample++)
+                for(var sample=0; sample< SampleCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                     result = LogicOpApi.lookup(kinds[k])(lhsSamples[sample], rhsSamples[sample]);
             }
             else
             {
                 for(var i=0; i<CycleCount; i++)
-                for(var sample=0; sample< SampleSize; sample++)
+                for(var sample=0; sample< SampleCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                     result = LogicOpApi.eval(kinds[k],lhsSamples[sample], rhsSamples[sample]);
             }
@@ -97,7 +97,7 @@ namespace Z0.Logix
             var C = BitMatrix.alloc<T>();
             var n = natval<N>();
 
-            for(var sample=0; sample< SampleSize; sample++)
+            for(var sample=0; sample< SampleCount; sample++)
             {
                 BitMatrixOpApi.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
@@ -122,7 +122,7 @@ namespace Z0.Logix
             var C = BitMatrix.alloc<T>();
             var n = natval<N>();
 
-            for(var sample=0; sample< SampleSize; sample++)
+            for(var sample=0; sample< SampleCount; sample++)
             {
                 BitMatrixOpApi.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
@@ -147,7 +147,7 @@ namespace Z0.Logix
             var C = BitMatrix.alloc<T>();
             var n = natval<N>();
 
-            for(var sample=0; sample< SampleSize; sample++)
+            for(var sample=0; sample< SampleCount; sample++)
             {
                 BitMatrixOpApi.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
@@ -172,7 +172,7 @@ namespace Z0.Logix
             var C = BitMatrix.alloc<T>();
             var n = natval<N>();
 
-            for(var sample=0; sample< SampleSize; sample++)
+            for(var sample=0; sample< SampleCount; sample++)
             {
                 BitMatrixOpApi.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
@@ -197,7 +197,7 @@ namespace Z0.Logix
             var C = BitMatrix.alloc<T>();
             var n = natval<N>();
 
-            for(var sample=0; sample < SampleSize; sample++)
+            for(var sample=0; sample < SampleCount; sample++)
             {
                 BitMatrixOpApi.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
@@ -222,7 +222,7 @@ namespace Z0.Logix
             var C = BitMatrix.alloc<T>();
             var n = natval<N>();
 
-            for(var sample=0; sample < SampleSize; sample++)
+            for(var sample=0; sample < SampleCount; sample++)
             {
                 BitMatrixOpApi.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
@@ -248,7 +248,7 @@ namespace Z0.Logix
             var C = BitMatrix.alloc<T>();
             var n = natval<N>();
 
-            for(var sample=0; sample < SampleSize; sample++)
+            for(var sample=0; sample < SampleCount; sample++)
             {
                 BitMatrixOpApi.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
@@ -273,7 +273,7 @@ namespace Z0.Logix
             var C = BitMatrix.alloc<T>();
             var n = natval<N>();
 
-            for(var sample=0; sample < SampleSize; sample++)
+            for(var sample=0; sample < SampleCount; sample++)
             {
                 BitMatrixOpApi.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
@@ -298,7 +298,7 @@ namespace Z0.Logix
             var C = BitMatrix.alloc<T>();
             var n = natval<N>();
 
-            for(var sample=0; sample < SampleSize; sample++)
+            for(var sample=0; sample < SampleCount; sample++)
             {
                 BitMatrixOpApi.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
@@ -331,7 +331,7 @@ namespace Z0.Logix
             {            
                 Op(A, B, ref Z);
                 opcount++;
-                for(var sample=0; sample< SampleSize; sample++)
+                for(var sample=0; sample< SampleCount; sample++)
                 {
                     Op(Z, A, ref Z);                    
                     Op(B, Z, ref Z); 
@@ -361,7 +361,7 @@ namespace Z0.Logix
             {            
                 BitMatrixOpApi.eval(op, A, B, ref Z);
                 opcount++;
-                for(var sample=0; sample< SampleSize; sample++)
+                for(var sample=0; sample< SampleCount; sample++)
                 {
                     BitMatrixOpApi.eval(op, Z, A, ref Z);                    
                     BitMatrixOpApi.eval(op, B, Z, ref Z); 
@@ -391,7 +391,7 @@ namespace Z0.Logix
             {            
                 BitMatrixOps.and(A, B, ref Z);
                 opcount++;
-                for(var sample=0; sample< SampleSize; sample++)
+                for(var sample=0; sample< SampleCount; sample++)
                 {
                     BitMatrixOps.and(Z, A, ref Z);                    
                     BitMatrixOps.and(B, Z, ref Z); 
@@ -421,7 +421,7 @@ namespace Z0.Logix
             {            
                 BitMatrixOps.xor(A, B, ref Z);
                 opcount++;
-                for(var sample=0; sample< SampleSize; sample++)
+                for(var sample=0; sample< SampleCount; sample++)
                 {
                     BitMatrixOps.xor(Z, A, ref Z);                    
                     BitMatrixOps.xor(B, Z, ref Z); 
@@ -437,7 +437,7 @@ namespace Z0.Logix
        protected void bitwise_logic_check<T>(BinaryBitwiseOpKind kind)
             where T : unmanaged
         {
-            for(var i=0; i< SampleSize; i++)   
+            for(var i=0; i< SampleCount; i++)   
             {   
                 var a = Random.Next<T>();
                 var b = Random.Next<T>();

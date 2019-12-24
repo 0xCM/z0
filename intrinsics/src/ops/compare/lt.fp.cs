@@ -16,7 +16,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class fpinx
+    partial class dinxfp
     {
         /// <summary>
         ///  __m128 _mm_cmplt_ps (__m128 a, __m128 b) CMPPS xmm, xmm/m128, imm8(1)
@@ -71,7 +71,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<double> vlteq(Vector128<double> x, Vector128<double> y)
             => CompareLessThanOrEqual(x, y);
-
-
     }
 }

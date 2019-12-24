@@ -21,8 +21,6 @@ namespace Z0
         public static void sub_128u_b(in ulong a, in ulong b, ref ulong c)
             => Math128.sub(a,b, ref c);
 
-        public static ulong byteswap64(ulong src)
-            => bswap(src);
             
 
         public static void mul_128u(Pair<ulong> src, ref Pair<ulong> dst)

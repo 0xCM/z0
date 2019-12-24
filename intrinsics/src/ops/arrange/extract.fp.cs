@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
+
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse2;
@@ -15,7 +16,7 @@ namespace Z0
     using static As;
     using static zfunc;    
 
-    partial class fpinx
+    partial class dinxfp
     {
         /// <summary>
         /// int _mm_extract_ps (__m128 a, const int imm8)EXTRACTPS xmm, xmm/m32, imm8
@@ -64,6 +65,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static double vxscalar(Vector128<double> src, byte pos)
             => src.GetElement(pos);
-
     }
 }

@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
+
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
     
-    using static As;
     using static zfunc;    
 
-    partial class fpinx
+    partial class dinxfp
     {
         ///  __m128 _mm_max_ps (__m128 a, __m128 b) MAXPS xmm, xmm/m128
         /// </summary>

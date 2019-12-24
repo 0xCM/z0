@@ -14,24 +14,35 @@ namespace Z0
 
 
     /// <summary>
-    /// Namescope for custom intrinsic operators
+    /// Direct vectorized intrinsics
     /// </summary>
-    public static partial class dinxc
+    public static partial class dinx
     {
-
-    }
-
-
-    public static partial class dfpx
-    {
-
 
     }
 
     /// <summary>
-    /// Direct vectorized intrinsics
+    /// Direct vectorized intrinsics over floating-point domains
     /// </summary>
-    public static partial class dinx
+    public static partial class dinxfp
+    {
+        [MethodImpl(Inline)]
+        static FloatComparisonMode fpmode(FpCmpMode m)
+            => (FloatComparisonMode)m;
+    }
+
+    /// <summary>
+    /// Direct scalar intrinsics
+    /// </summary>
+    public static partial class dinxs
+    {
+
+    }
+
+    /// <summary>
+    /// Direct floating-point scalar intrinsics
+    /// </summary>
+    public static partial class dinxsfp
     {
 
     }
@@ -48,30 +59,21 @@ namespace Z0
 
     }
 
+
     /// <summary>
-    /// Direct vectorized floating-point intrinsics
+    /// Generic vectorized intrinsics over floating-point domains
     /// </summary>
-    public static partial class fpinx
+    public static partial class ginxfp
     {
-        [MethodImpl(Inline)]
-        static FloatComparisonMode fpmode(FpCmpMode m)
-            => (FloatComparisonMode)m;
+        
     }
 
     /// <summary>
-    /// Generic floating-point intrinsics
+    /// Generic scalar intrinsics over floating-point domains
     /// </summary>
-    public static partial class gfpinx
+    public static partial class ginxsfp
     {
 
-    }
-
-
-    /// <summary>
-    /// Direct scalar intrinsics
-    /// </summary>
-    public static partial class inxs
-    {
 
     }
 
@@ -83,12 +85,8 @@ namespace Z0
 
     }
 
-    /// <summary>
-    /// Internal helpers
-    /// </summary>
-    internal static partial class aux
+    public static partial class VOps
     {
 
     }
-
 }

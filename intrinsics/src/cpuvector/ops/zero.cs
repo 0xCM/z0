@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> zero<T>(N128 w, T t = default)
+        public static Vector128<T> vzero<T>(N128 w, T t = default)
             where T : unmanaged
                 => default;
 
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> zero<T>(N256 w, T t = default)
+        public static Vector256<T> vzero<T>(N256 w, T t = default)
             where T : unmanaged
                 => default;
 
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector512<T> zero<T>(N512 w, T t = default)
+        public static Vector512<T> vzero<T>(N512 w, T t = default)
             where T : unmanaged
                 => default;
     }

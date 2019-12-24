@@ -54,7 +54,7 @@ namespace Z0
         public void t_vrll_128x8_alt()
         {
             var w = n128;
-            for(var i=0; i < SampleSize; i++)
+            for(var i=0; i < SampleCount; i++)
             {
                 var x = Random.CpuVector<byte>(w);
                 for(byte shift = 1; shift < 8; shift++)                
@@ -69,7 +69,7 @@ namespace Z0
         public void t_vsrl_256x8_alt()
         {
             var w = n256;
-            for(var i=0; i < SampleSize; i++)
+            for(var i=0; i < SampleCount; i++)
             {
                 var x = Random.CpuVector<byte>(w);
                 for(byte shift = 1; shift < 8; shift++)                

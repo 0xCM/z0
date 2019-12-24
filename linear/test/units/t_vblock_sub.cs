@@ -117,7 +117,7 @@ namespace Z0
         {
             var n = new N();
             var dst = RowVector.blockalloc<N,T>();
-            for(var i=0; i< SampleSize; i++)            
+            for(var i=0; i< SampleCount; i++)            
             {
                 var v1 = Random.VectorBlock<N,T>();
                 var v2 = Random.VectorBlock<N,T>();

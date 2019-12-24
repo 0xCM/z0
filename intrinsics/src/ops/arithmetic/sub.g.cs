@@ -36,7 +36,7 @@ namespace Z0
             || typeof(T) == typeof(long))
                 return vsub_i(x,y);
             else 
-                return gfpv.vadd(x,y);
+                return ginxfp.vadd(x,y);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
             || typeof(T) == typeof(long))
                 return vsub_i(x,y);
             else 
-                return gfpv.vadd(x,y);
+                return ginxfp.vadd(x,y);
        }
 
         /// <summary>

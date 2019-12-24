@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blocklen<T>(N8 w)
+        public static int blocklen<T>(N8 w, T t = default)
             where T : unmanaged
                 => Unsafe.SizeOf<T>();
 
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blocklen<T>(N16 w)
+        public static int blocklen<T>(N16 w, T t = default)
             where T : unmanaged
                 => 2/Unsafe.SizeOf<T>();
 
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blocklen<T>(N32 w)
+        public static int blocklen<T>(N32 w, T t = default)
             where T : unmanaged
                 => 4/Unsafe.SizeOf<T>();
 
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blocklen<T>(N64 w)
+        public static int blocklen<T>(N64 w, T t = default)
             where T : unmanaged
                 => 8/Unsafe.SizeOf<T>();
 
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blocklen<T>(N128 w)
+        public static int blocklen<T>(N128 w, T t = default)
             where T : unmanaged
                 => 16/Unsafe.SizeOf<T>();
 
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blocklen<T>(N256 w)
+        public static int blocklen<T>(N256 w, T t = default)
             where T : unmanaged
                 => 32/Unsafe.SizeOf<T>();
 
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int blocklen<T>(N512 w)
+        public static int blocklen<T>(N512 w, T t = default)
             where T : unmanaged
                 => 64/Unsafe.SizeOf<T>();
 
