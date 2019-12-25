@@ -1,6 +1,6 @@
-; 2019-12-24 12:34:02:563
+; 2019-12-24 18:05:52:804
 ; function: uint vxor_128x32u(Vector128<uint> x, Vector128<uint> y)
-; location: [7FF7C7E637B0h, 7FF7C7E637CFh]
+; location: [7FF7C7E635D0h, 7FF7C7E635EFh]
 0000h sub rsp,28h                   ; SUB(Sub_rm64_imm8) [RSP,28h:imm64]                   encoding(4 bytes) = 48 83 ec 28
 0004h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0007h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -13,7 +13,7 @@
 ; static ReadOnlySpan<byte> vxor_128x32uBytes => new byte[32]{0x48,0x83,0xEC,0x28,0xC5,0xF8,0x77,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x7E,0xC0,0xC5,0xF9,0x10,0x02,0xC4,0xE3,0x79,0x16,0xC2,0x03,0x33,0xC2,0x48,0x83,0xC4,0x28,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<uint> op_shift_specific(Vector256<uint> src)
-; location: [7FF7C7E63BF0h, 7FF7C7E63C16h]
+; location: [7FF7C7E63A10h, 7FF7C7E63A36h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 02
@@ -30,7 +30,7 @@
 ; static ReadOnlySpan<byte> op_shift_specificBytes => new byte[39]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x02,0x33,0xC0,0xC5,0xFD,0x72,0xF0,0x03,0xC5,0xFD,0x72,0xD0,0x03,0xFF,0xC0,0x83,0xF8,0x14,0x7C,0xEF,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<uint> op_shift(Vector256<uint> src, byte amount)
-; location: [7FF7C7E63C30h, 7FF7C7E63C60h]
+; location: [7FF7C7E63A50h, 7FF7C7E63A80h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 02

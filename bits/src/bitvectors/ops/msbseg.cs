@@ -17,7 +17,16 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="n">The count of most significant bits</param>
         [MethodImpl(Inline)]
-        public static BitVector4 msbseg(BitVector4 x, int n)                
+        public static BitVector4 msbseg(BitVector4 x, byte n)                
+            => between(x, (byte)(x.Width - n), (byte)(x.Width - 1));                
+
+        /// <summary>
+        /// Constructs a bitvector formed from the n most significant bits of the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="n">The count of most significant bits</param>
+        [MethodImpl(Inline)]
+        public static BitVector8 msbseg(BitVector8 x, byte n)                
             => between(x, x.Width - n, x.Width - 1);                
 
         /// <summary>
@@ -26,16 +35,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="n">The count of most significant bits</param>
         [MethodImpl(Inline)]
-        public static BitVector8 msbseg(BitVector8 x, int n)                
-            => between(x, x.Width - n, x.Width - 1);                
-
-        /// <summary>
-        /// Constructs a bitvector formed from the n most significant bits of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <param name="n">The count of most significant bits</param>
-        [MethodImpl(Inline)]
-        public static BitVector16 msbseg(BitVector16 x, int n)                
+        public static BitVector16 msbseg(BitVector16 x, byte n)                
             => BitVector.between(x.data, x.Width - n, x.Width - 1);                
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="n">The count of most significant bits</param>
         [MethodImpl(Inline)]
-        public static BitVector32 msbseg(BitVector32 x, int n)                
+        public static BitVector32 msbseg(BitVector32 x, byte n)                
             => BitVector.between(x.data, x.Width - n, x.Width - 1);                
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="n">The count of most significant bits</param>
         [MethodImpl(Inline)]
-        public static BitVector64 msbseg(BitVector64 x, int n)                
+        public static BitVector64 msbseg(BitVector64 x, byte n)                
             => BitVector.between(x.data, x.Width - n, x.Width - 1);
  
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="n">The count of least significant bits</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> msbseg<T>(BitVector<T> x, int n)                
+        public static BitVector<T> msbseg<T>(BitVector<T> x, byte n)                
             where T : unmanaged
                 => between(x, x.Width - n, x.Width - 1);                
 

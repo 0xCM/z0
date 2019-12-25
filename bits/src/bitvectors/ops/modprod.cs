@@ -21,7 +21,7 @@ namespace Z0
         public static bit modprod(BitVector4 x, BitVector4 y)
         {
             var result = 0;
-            for(var i=0; i<x.Width; i++)
+            for(byte i=0; i<x.Width; i++)
             {
                 var a = x[i] ? 1 : 0;
                 var b = y[i] ? 1 : 0;

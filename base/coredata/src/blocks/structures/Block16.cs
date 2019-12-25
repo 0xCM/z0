@@ -124,6 +124,14 @@ namespace Z0
             => data.Slice(block * BlockLength, BlockLength);
 
         /// <summary>
+        /// Extracts an index-identified block (non-allocating, but not free due to the price of creating a new wrapper)
+        /// </summary>
+        /// <param name="block">The block index</param>
+        [MethodImpl(Inline)]
+        public Block16<T> Extract(int block)
+            => new Block16<T>(Block(block));
+
+        /// <summary>
         /// Reinterprets the storage cell type
         /// </summary>
         /// <typeparam name="S">The target cell type</typeparam>

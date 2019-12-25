@@ -304,7 +304,7 @@ namespace Z0
         /// </summary>
         /// <param name="first">The first bit position</param>
         /// <param name="last">The last bit position</param>
-        public BitVector<N,T> this[int first, int last]
+        public BitVector<N,T> this[byte first, byte last]
         {
             [MethodImpl(Inline)]
             get => gbits.between(data, first, last);

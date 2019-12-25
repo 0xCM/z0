@@ -17,7 +17,7 @@ namespace Z0
             for(var i=0; i< SampleCount; i++)            
             {
                 var bv = Random.BitVector(width);
-                var n = Random.Next(1, bv.Width);
+                var n = Random.Next((byte)1, (byte)bv.Width);
                 var result = BitVector.lsbseg(bv,n).ToBitString();
                 var expect = bv.ToBitString()[0, n - 1];
                 Claim.eq(expect, result);
@@ -30,7 +30,7 @@ namespace Z0
             for(var i=0; i< SampleCount; i++)            
             {
                 var bv = Random.BitVector(width);
-                var n = Random.Next(1, bv.Width);
+                var n = Random.Next((byte)1, (byte)bv.Width);
                 var result = BitVector.lsbseg(bv,n).ToBitString();
                 var expect = bv.ToBitString()[0, n - 1];
                 Claim.eq(expect, result);
@@ -43,7 +43,7 @@ namespace Z0
             for(var i=0; i< SampleCount; i++)            
             {
                 var bv = Random.BitVector(width);
-                var n = Random.Next(1, bv.Width);
+                var n = Random.Next((byte)1, (byte)bv.Width);
                 var result = BitVector.lsbseg(bv,n).ToBitString();
                 var expect = bv.ToBitString()[0, n - 1];
                 Claim.eq(expect, result);
@@ -56,7 +56,7 @@ namespace Z0
             for(var i=0; i< SampleCount; i++)            
             {
                 var bv = Random.BitVector(width);
-                var n = Random.Next(1, bv.Width);
+                var n = Random.Next((byte)1, (byte)bv.Width);
                 var result = BitVector.lsbseg(bv,n).ToBitString();
                 var expect = bv.ToBitString()[0, n - 1];
                 Claim.eq(expect, result);
@@ -69,7 +69,7 @@ namespace Z0
             for(var i=0; i< SampleCount; i++)            
             {
                 var bv = Random.BitVector(width);
-                var n = Random.Next(1, bv.Width);
+                var n = Random.Next((byte)1, (byte)bv.Width);
                 var result = BitVector.msbseg(bv,n).ToBitString();
                 var expect = bv.ToBitString().Reverse()[0, n - 1].Reverse();
                 Claim.eq(expect, result);
@@ -82,7 +82,7 @@ namespace Z0
             for(var i=0; i< SampleCount; i++)            
             {
                 var bv = Random.BitVector(width);
-                var n = Random.Next(1, bv.Width);
+                var n = Random.Next((byte)1, (byte)bv.Width);
                 var result = BitVector.msbseg(bv,n).ToBitString();
                 var expect = bv.ToBitString().Reverse()[0, n - 1].Reverse();
                 Claim.eq(expect, result);
@@ -96,7 +96,7 @@ namespace Z0
             for(var i=0; i< SampleCount; i++)            
             {
                 var bv = Random.BitVector(width);
-                var n = Random.Next(1, bv.Width);
+                var n = Random.Next((byte)1, (byte)bv.Width);
                 var result = BitVector.msbseg(bv,n).ToBitString();
                 var expect = bv.ToBitString().Reverse()[0, n - 1].Reverse();
                 Claim.eq(expect, result);
@@ -109,7 +109,7 @@ namespace Z0
             for(var i=0; i< SampleCount; i++)            
             {
                 var bv = Random.BitVector(width);
-                var n = Random.Next(1, bv.Width);
+                var n = Random.Next((byte)1, (byte)bv.Width);
                 var result = BitVector.msbseg(bv,n).ToBitString();
                 var expect = bv.ToBitString().Reverse()[0, n - 1].Reverse();
                 Claim.eq(expect, result);

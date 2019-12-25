@@ -40,86 +40,6 @@ namespace Z0
             where T : unmanaged
                 => CpuVector.vcount(w,t);
 
-
-
-        public static void VerifyBinOp<T>(IPolyrand random, int blocks, Vector128BinOp<T> inXOp, Func<T,T,T> primalOp)
-            where T : unmanaged
-        {
-            
-            var lhs = random.Blocks<T>(n128,blocks).ReadOnly();
-            var blocklen = lhs.BlockLength;
-            Claim.eq(blocks*blocklen,lhs.CellCount);
-            
-            var rhs = random.Blocks<T>(n128,blocks).ReadOnly();
-            Claim.eq(blocks*blocklen,rhs.CellCount);
-            
-            var expect = DataBlocks.alloc<T>(n128,blocks);
-            Claim.eq(blocks, expect.BlockCount);
-
-            var actual = DataBlocks.alloc<T>(n128,blocks);
-            Claim.eq(blocks, actual.BlockCount);
-
-            Span<T> tmp = stackalloc T[blocklen];
-            
-            for(var block = 0; block < blocks; block++)
-            {
-                var offset = block*blocklen;
-                for(var i =0; i<blocklen; i++)
-                    tmp[i] = primalOp(lhs[offset + i], rhs[offset + i]);
-
-                CpuVector.vload(in head(tmp), out Vector128<T> vExpect);
-             
-                var vX = lhs.LoadVector(block);
-                var vY = rhs.LoadVector(block);
-                var vActual = inXOp(vX,vY);
-
-                Claim.eq(vExpect, vActual);
-            
-                vstore(vExpect, ref expect.BlockRef(block));
-                vstore(vActual, ref actual.BlockRef(block));
-            }
-            Claim.eq(expect, actual);
-        }
-
-
-        public static void VerifyBinOp<T>(IPolyrand random, int blocks, Vector256BinOp<T> inXOp, Func<T,T,T> primalOp)
-            where T : unmanaged
-        {                    
-            var lhs = random.Blocks<T>(n256, blocks).ReadOnly();
-            var blocklen = lhs.BlockLength;                     
-            Claim.eq(blocks*blocklen,lhs.CellCount);
-            
-            var rhs = random.Blocks<T>(n256,blocks).ReadOnly();
-            Claim.eq(blocks*blocklen,rhs.CellCount);
-            
-            var expect = DataBlocks.alloc<T>(n256,blocks);
-            Claim.eq(blocks, expect.BlockCount);
-
-            var actual = DataBlocks.alloc<T>(n256,blocks);
-            Claim.eq(blocks, actual.BlockCount);
-
-            Span<T> tmp = stackalloc T[blocklen];
-            
-            for(var block = 0; block < blocks; block++)
-            {
-                var offset = block*blocklen;
-                for(var i =0; i<blocklen; i++)
-                    tmp[i] = primalOp(lhs[offset + i], rhs[offset + i]);
-
-                CpuVector.vload(in head(tmp), out Vector256<T> vExpect);
-             
-                var vX = lhs.LoadVector(block);
-                var vY = rhs.LoadVector(block);
-                var vActual = inXOp(vX,vY);
-
-                Claim.eq(vExpect, vActual);
-            
-                vstore(vExpect, ref expect.BlockRef(block));
-                vstore(vActual, ref actual.BlockRef(block));
-            }
-            Claim.eq(expect, actual);
-        }
-
         protected void vbroadcast_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
@@ -982,13 +902,6 @@ namespace Z0
             Claim.eq(w,bs.PopCount());
         }
 
-        protected void vsub_check<T>(N128 w, T t = default)
-            where T : unmanaged
-            => VerifyBinOp(Random, SampleCount, new Vector128BinOp<T>(ginx.vsub), gmath.sub<T>);
-
-        protected void vsub_check<T>(N256 w, T t = default)
-            where T : unmanaged
-                => VerifyBinOp(Random, SampleCount, new Vector256BinOp<T>(ginx.vsub), gmath.sub<T>);
 
         protected void vsub_block_check<T>(N256 w, T t = default)
             where T : unmanaged
@@ -1332,8 +1245,5 @@ namespace Z0
                 ReportOutcome(TestCaseName(op),succeeded,count);
             }
         }
-
-
-
     }
 }

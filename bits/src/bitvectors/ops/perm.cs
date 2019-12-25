@@ -21,8 +21,8 @@ namespace Z0
         {
             var dst = src.Replicate();
             var width = src.Width;
-            for(var i=0; i<width; i++)
-                dst[i] = src[spec[i]];
+            for(byte i=0; i<width; i++)
+                dst[i] = src[(byte)spec[i]];
             return dst;
         }
 

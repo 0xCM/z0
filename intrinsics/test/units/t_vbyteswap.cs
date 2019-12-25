@@ -31,7 +31,7 @@ namespace Z0
 
             Claim.eq(y16,z16);            
             for(var i=0; i<z16s.Length; i+= 2)
-                Claim.eq(Bits.bytswap(z16s[i]), z16s[i+1]);
+                Claim.eq(Bits.byteswap(z16s[i]), z16s[i+1]);
 
             var x32 = CpuVector.parts(n128, 
                 0xFFFF0000, 0x0000FFFF,
@@ -52,7 +52,7 @@ namespace Z0
             for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.Next<ushort>();
-                var b = Bits.bytswap(Bits.bytswap(a));
+                var b = Bits.byteswap(Bits.byteswap(a));
                 Claim.eq(a,b);
             }
         }

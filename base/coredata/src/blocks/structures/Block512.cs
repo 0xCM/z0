@@ -137,6 +137,14 @@ namespace Z0
             => data.Slice(block * BlockLength, BlockLength);
 
         /// <summary>
+        /// Extracts an index-identified block (non-allocating, but not free due to the price of creating a new wrapper)
+        /// </summary>
+        /// <param name="block">The block index</param>
+        [MethodImpl(Inline)]
+        public Block512<T> Extract(int block)
+            => new Block512<T>(Block(block));
+
+        /// <summary>
         /// Retrieves the lower 256 bits of an index-identified block
         /// </summary>
         /// <param name="block">The block-relative index</param>

@@ -97,10 +97,14 @@ namespace Z0
         void Disassemble(bool asm, bool cil)
         {
             Disassemble(new ExperimentalScenarios());
-            Disassemble(typeof(OC.natoc));    
+            Disassemble(typeof(OC.butterfly));    
             Disassemble(typeof(OC.bitmask));
             Disassemble(typeof(OC.bitmat));    
             Disassemble(typeof(OC.bitstore));
+            Disassemble(typeof(OC.bitpack));    
+            Disassemble(typeof(OC.bitconvert));    
+
+            Disassemble(typeof(OC.natoc));    
 
             Disassemble(typeof(OC.memory));    
             Disassemble(typeof(OC.sconvert));   
@@ -109,9 +113,8 @@ namespace Z0
             Disassemble(typeof(OC.logix));
             Disassemble(typeof(OC.logixmat));
             Disassemble(typeof(OC.rowbits));
-            Disassemble(typeof(OC.bitconvert));    
-            Disassemble(typeof(OC.bitpack));    
 
+            Disassemble(typeof(OC.v512));    
             Disassemble(typeof(OC.vblend));
             Disassemble(typeof(OC.vblocks));    
             Disassemble(typeof(OC.vconvert));    
@@ -120,7 +123,9 @@ namespace Z0
             Disassemble(typeof(OC.vpattern));    
             Disassemble(typeof(OC.vperm));    
             Disassemble(typeof(OC.v512));    
-            
+
+            Disassemble(typeof(OC.kops));    
+
             Disassemble(typeof(zfoc));    
             Disassemble(typeof(gmathops));    
             Disassemble(typeof(bvoc));    

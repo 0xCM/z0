@@ -24,10 +24,10 @@ namespace Z0
         public static bit literal(Perm4L src, int index, out Perm4L dst)
         {
             const int segwidth = 2;             
-            var first = index * segwidth;
-            var last = first + segwidth - 1;
+            var first = (byte)(index * segwidth);
+            var last = (byte)(first + segwidth - 1);
 
-            dst = (Perm4L)BitMask.between((byte)src, first, last);
+            dst = (Perm4L)gbits.between((byte)src, first, last);
             return dst.IsSymbol();
         }
 
@@ -42,10 +42,10 @@ namespace Z0
         public static bit literal(Perm8L src, int index, out Perm8L dst)
         {
             const int segwidth = 3; 
-            var first = index * segwidth;
-            var last = first + segwidth - 1;
+            var first = (byte)(index * segwidth);
+            var last = (byte)(first + segwidth - 1);
 
-            dst = (Perm8L)BitMask.between((uint)src, first, last);
+            dst = (Perm8L)gbits.between((uint)src, first, last);
             return dst.IsSymbol();
         }
 
@@ -60,10 +60,10 @@ namespace Z0
         public static bit literal(Perm16L src, int index, out Perm16L dst)
         {
             const int segwidth = 4;     
-            var first = index * segwidth;
-            var last = first + segwidth - 1;
+            var first = (byte)(index * segwidth);
+            var last = (byte)(first + segwidth - 1);
 
-            dst = (Perm16L)BitMask.between((ulong)src, first, last);
+            dst = (Perm16L)gbits.between((ulong)src, first, last);
             return dst.IsSymbol();
         }
 

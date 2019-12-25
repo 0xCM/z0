@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Intrinsics.X86;
 
     using static zfunc;
     using static As;
@@ -22,7 +23,7 @@ namespace Z0
         /// <param name="dst">The right bit position</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T between<T>(T src, int p0, int p1)
+        public static T between<T>(T src, byte p0, byte p1)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -41,7 +42,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        static T between_i<T>(T src, int p0, int p1)
+        static T between_i<T>(T src, byte p0, byte p1)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -55,7 +56,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T between_u<T>(T src, int p0, int p1)
+        static T between_u<T>(T src, byte p0, byte p1)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -69,7 +70,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T between_f<T>(T src, int p0, int p1)
+        static T between_f<T>(T src, byte p0, byte p1)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

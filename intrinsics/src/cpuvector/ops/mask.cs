@@ -175,7 +175,6 @@ namespace Z0
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb(n1,n1,t));
 
-
         /// <summary>
         /// [01]    
         /// The greatest bit of each 2-bit segment is enabled

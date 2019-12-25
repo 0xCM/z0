@@ -224,16 +224,16 @@ namespace Z0
             get => (0xF & data) == 0xF;
         }
 
-        public bit this[int pos]
+        public bit this[byte pos]
         {
             [MethodImpl(Inline)]
             get => (data & (1 << pos)) != 0;
             
             [MethodImpl(Inline)]
-            set => data = BitMask.set(data, (byte)pos, value);
+            set => data = BitMask.set(data, pos, value);
         }
 
-        public BitVector4 this[int first, int last]
+        public BitVector4 this[byte first, byte last]
         {
             [MethodImpl(Inline)]
             get => BitVector.between(this,first,last);

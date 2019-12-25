@@ -186,7 +186,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static byte pack<T>(in ConstBlock32<T> src)
             where T : unmanaged
-                => (byte) gather(uint32(in src.Head), BitMasks.Lsb32x8x1);
+                => (byte) Bits.gather(uint32(in src.Head), BitMasks.Lsb32x8x1);
 
         /// <summary>
         /// Packs 4 1-bit values taken from the least significant bit of each source byte
@@ -196,7 +196,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static byte pack<T>(in Block32<T> src)
             where T : unmanaged
-                => (byte) gather(uint32(in src.Head), BitMasks.Lsb32x8x1);
+                => (byte) Bits.gather(uint32(in src.Head), BitMasks.Lsb32x8x1);
 
         /// <summary>
         /// Packs 8 1-bit values taken from the least significant bit of each source byte
@@ -270,7 +270,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         static byte pack8(ulong src)
-            => (byte)gather(src, BitMasks.Lsb64x8x1);
+            => (byte)Bits.gather(src, BitMasks.Lsb64x8x1);
 
         /// <summary>
         /// Packs 8 1-bit values taken from the least significant bit of each source byte
@@ -278,7 +278,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static byte pack8<T>(in T src)
             where T : unmanaged
-                => (byte)gather(convert<T,ulong>(src), BitMasks.Lsb64x8x1);
+                => (byte)Bits.gather(convert<T,ulong>(src), BitMasks.Lsb64x8x1);
 
         /// <summary>
         /// Packs 16 1-bit values taken from the least significant bit of each source byte

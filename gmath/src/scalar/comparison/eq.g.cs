@@ -30,50 +30,6 @@ namespace Z0
                 return gfp.eq(a,b);
         }
 
-        [MethodImpl(Inline)]
-        public static bit neq<T>(T a, T b)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return nequ(a,b);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return neqi(a,b);
-            else return gfp.neq(a,b);
-        }
-
-        [MethodImpl(Inline)]
-        static bit neqi<T>(T a, T b)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                 return math.neq(int8(a), int8(b));
-            else if(typeof(T) == typeof(short))
-                 return math.neq(int16(a), int16(b));
-            else if(typeof(T) == typeof(int))
-                 return math.neq(int32(a), int32(b));
-            else
-                 return math.neq(int64(a), int64(b));
-        }
-
-        [MethodImpl(Inline)]
-        static bit nequ<T>(T a, T b)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return math.neq(uint8(a), uint8(b));
-            else if(typeof(T) == typeof(ushort))
-                return math.neq(uint16(a), uint16(b));
-            else if(typeof(T) == typeof(uint))
-                return math.neq(uint32(a), uint32(b));
-            else 
-                return math.neq(uint64(a), uint64(b));
-        }
 
         [MethodImpl(Inline)]
         static bit eqi<T>(T a, T b)

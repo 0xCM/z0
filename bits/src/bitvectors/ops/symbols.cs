@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="maxbits">The maximum number bits to use if less than the bit width of the vector</param>
         /// <typeparam name="E">The enumeration type that defines the symbols</typeparam>
         /// <typeparam name="T">The primal bitvector cell type</typeparam>
-        public static ReadOnlySpan<char> symbols<E,T>(BitVector<T> src, int segwidth, int? maxbits = null)
+        public static ReadOnlySpan<char> symbols<E,T>(BitVector<T> src, byte segwidth, int? maxbits = null)
             where E : unmanaged, Enum
             where T : unmanaged
         {
@@ -33,7 +33,7 @@ namespace Z0
             Span<char> symbols = new char[count];
             for(int i=0, bitpos = 0; i<count; i++, bitpos += segwidth)
             {
-                var value = index[src[bitpos, bitpos + segwidth - 1]];
+                var value = index[src[(byte)bitpos, (byte)(bitpos + segwidth - 1)]];
                 symbols[i] = value.ToString().Last();
             }
             return symbols;

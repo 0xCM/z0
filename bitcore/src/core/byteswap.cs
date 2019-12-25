@@ -18,7 +18,7 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static ushort bytswap(ushort src)
+        public static ushort byteswap(ushort src)
         {
             var dst = src >> 8;
             dst |= ((0xFF & src) << 8);

@@ -90,7 +90,7 @@ partial class zfunc
             => $"{op}_{bitsize(t)}{indicator(t)}";
 
     /// <summary>
-    /// Produces a canonical designator of the form {W}X{bitsize[T]}{u | i | f} for a segmented WxT type
+    /// Produces a canonical designator of the form {W}X{bitsize[T]}{u | i | f} for a segmented WxT type or classification
     /// </summary>
     /// <param name="w">The covering bit width representative</param>
     /// <param name="t">A primal cell type representative</param>
@@ -103,7 +103,7 @@ partial class zfunc
             => $"{w}x{moniker(t)}";
 
     /// <summary>
-    /// Produces a canonical designator of the form {op}_{W}X{bitsize[T]}{u | i | f} for an operation over a segmented WxT type
+    /// Produces a canonical designator of the form {op}_{W}X{bitsize[T]}{u | i | f} for an operation over a segmented WxT type or classification
     /// </summary>
     /// <param name="op">The base operator name</param>
     /// <param name="w">The covering bit width representative</param>

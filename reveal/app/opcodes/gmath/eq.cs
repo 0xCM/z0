@@ -29,11 +29,6 @@ namespace Z0
         public static bit eq_g16i(short lhs, short rhs)
             => gmath.eq(lhs,rhs);
 
-        public static bit eq_d16u(ushort lhs, ushort rhs)
-            => math.eq(lhs,rhs);
-
-        public static bit eq_g16u(ushort lhs, ushort rhs)
-            => gmath.eq(lhs,rhs);
 
         public static bit eq_d32i(int lhs, int rhs)
             => math.eq(lhs,rhs);

@@ -36,7 +36,7 @@ namespace Z0
         {
             var n = n4;
             var z = BitVector.alloc(n);
-            for(var i=0; i< n; i++)
+            for(byte i=0; i< n; i++)
                 z[i] = A[i] % x;
             return z;        
         }

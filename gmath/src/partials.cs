@@ -52,10 +52,9 @@ namespace Z0
 
     }
     
-    public static partial class KOps
+    public static partial class KOpStructs
     {
-
-
+        
     }
 
     static class App

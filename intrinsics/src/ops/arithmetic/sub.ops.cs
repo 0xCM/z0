@@ -49,27 +49,7 @@ namespace Z0
 
     partial class VOps
     {
-        /// <summary>
-        /// Operator factory for vsub_128xT
-        /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="t">A component type representative</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static VsubOp128<T> vsub<T>(N128 w, T t = default)
-            where T : unmanaged
-                => VsubOp128<T>.Op;
 
-        /// <summary>
-        /// Operator factory for vsub_256xT
-        /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="t">A component type representative</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static VsubOp256<T> vsub<T>(N256 w, T t = default)
-            where T : unmanaged
-                => VsubOp256<T>.Op;
     }
 
 }

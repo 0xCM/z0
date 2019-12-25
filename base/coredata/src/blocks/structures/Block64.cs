@@ -117,12 +117,20 @@ namespace Z0
             => ref Unsafe.Add(ref Head, BlockLength*block + segment);
 
         /// <summary>
-        /// Retrieves an index-identified data block
+        /// Produces a span that covers the cells of an index-identified block
         /// </summary>
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
         public Span<T> Block(int block)    
             => data.Slice(block * BlockLength, BlockLength);
+
+        /// <summary>
+        /// Extracts an index-identified block (non-allocating, but not free due to the price of creating a new wrapper)
+        /// </summary>
+        /// <param name="block">The block index</param>
+        [MethodImpl(Inline)]
+        public Block64<T> Extract(int block)
+            => new Block64<T>(Block(block));
 
         /// <summary>
         /// Reinterprets the storage cell type

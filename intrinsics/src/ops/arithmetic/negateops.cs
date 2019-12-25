@@ -44,27 +44,6 @@ namespace Z0
 
     partial class VOps
     {
-        /// <summary>
-        /// Operator factory for vnegate_128xT
-        /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="t">A component type representative</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static VnegateOp128<T> vnegate<T>(N128 w, T t = default)
-            where T : unmanaged
-                => VnegateOp128<T>.Op;
-
-        /// <summary>
-        /// Operator factory for vnegate_256xT
-        /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="t">A component type representative</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static VnegateOp256<T> vnegate<T>(N256 w, T t = default)
-            where T : unmanaged
-                => VnegateOp256<T>.Op;
     }
 
 }

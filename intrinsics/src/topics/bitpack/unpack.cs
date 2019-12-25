@@ -79,7 +79,7 @@ namespace Z0
         public static void unpack(byte packed, ref byte unpacked)
         {
             var m = BitMask.lsb<ulong>(n8,n1);
-            seek64(ref unpacked, 0) = scatter((ulong)(byte)packed, m);
+            seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
         }
 
         /// <summary>
@@ -91,8 +91,8 @@ namespace Z0
         public static void unpack(ushort packed, ref byte unpacked)
         {
             var m = BitMask.lsb<ulong>(n8,n1);
-            seek64(ref unpacked, 0) = scatter((ulong)(byte)packed, m);
-            seek64(ref unpacked, 1) = scatter((ulong)((byte)(packed >> 8)), m);
+            seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
+            seek64(ref unpacked, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
         }
 
         /// <summary>
@@ -104,10 +104,10 @@ namespace Z0
         public static void unpack(uint packed, ref byte unpacked)
         {
             var m = BitMask.lsb<ulong>(n8,n1);
-            seek64(ref unpacked, 0) = scatter((ulong)(byte)packed, m);
-            seek64(ref unpacked, 1) = scatter((ulong)((byte)(packed >> 8)), m);
-            seek64(ref unpacked, 2) = scatter((ulong)((byte)(packed >> 16)), m);
-            seek64(ref unpacked, 3) = scatter((ulong)((byte)(packed >> 24)), m);
+            seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
+            seek64(ref unpacked, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
+            seek64(ref unpacked, 2) = Bits.scatter((ulong)((byte)(packed >> 16)), m);
+            seek64(ref unpacked, 3) = Bits.scatter((ulong)((byte)(packed >> 24)), m);
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Z0
         {
             var m = BitMask.lsb<ulong>(n8,n1);
             ref var dst = ref head(unpacked);
-            seek64(ref dst, 0) = scatter((ulong)(byte)packed, m);
+            seek64(ref dst, 0) = Bits.scatter((ulong)(byte)packed, m);
         }
 
         /// <summary>
@@ -145,8 +145,8 @@ namespace Z0
         {
             var m = BitMask.lsb<ulong>(n8,n1);
             ref var dst = ref head(unpacked);
-            seek64(ref dst, 0) = scatter((ulong)(byte)packed, m);
-            seek64(ref dst, 1) = scatter((ulong)((byte)(packed >> 8)), m);
+            seek64(ref dst, 0) = Bits.scatter((ulong)(byte)packed, m);
+            seek64(ref dst, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
         }
 
         /// <summary>
@@ -159,10 +159,10 @@ namespace Z0
         {
             var m = BitMask.lsb<ulong>(n8,n1);
             ref var dst = ref head(unpacked);
-            seek64(ref dst, 0) = scatter((ulong)(byte)packed, m);
-            seek64(ref dst, 1) = scatter((ulong)((byte)(packed >> 8)), m);
-            seek64(ref dst, 2) = scatter((ulong)((byte)(packed >> 16)), m);
-            seek64(ref dst, 3) = scatter((ulong)((byte)(packed >> 24)), m);
+            seek64(ref dst, 0) = Bits.scatter((ulong)(byte)packed, m);
+            seek64(ref dst, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
+            seek64(ref dst, 2) = Bits.scatter((ulong)((byte)(packed >> 16)), m);
+            seek64(ref dst, 3) = Bits.scatter((ulong)((byte)(packed >> 24)), m);
         }
 
         /// <summary>
@@ -208,7 +208,6 @@ namespace Z0
             unpack(src, buffer, unpacked.Block(block));
             return ref unpacked;
         }
-
 
         [MethodImpl(Inline)]
         static void unpackblock(int block, in byte src, in Block64<byte> buffer, in Block256<uint> target)
