@@ -14,28 +14,28 @@ namespace Z0
     {
 
        [MethodImpl(Inline)]
-       public static T and<T>(T lhs, T rhs)
+       public static T and<T>(T a, T b)
             where T :unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(fmath.and(float32(lhs), float32(rhs)));
+                return generic<T>(fmath.and(float32(a), float32(b)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(fmath.and(float64(lhs), float64(rhs)));
+                return generic<T>(fmath.and(float64(a), float64(b)));
             else
                 throw unsupported<T>();
         }
 
        [MethodImpl(Inline)]
-       public static ref T and<T>(ref T lhs, T rhs)
+       public static ref T and<T>(ref T a, T b)
             where T :unmanaged
         {
             if(typeof(T) == typeof(float))
-                fmath.and(ref float32(ref lhs), float32(rhs));
+                fmath.and(ref float32(ref a), float32(b));
             else if(typeof(T) == typeof(double))
-                fmath.and(ref float64(ref lhs), float64(rhs));
+                fmath.and(ref float64(ref a), float64(b));
             else
                 throw unsupported<T>();
-            return ref lhs;
+            return ref a;
         }   
     }
 

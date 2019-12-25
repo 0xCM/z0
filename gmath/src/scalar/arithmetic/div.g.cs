@@ -13,7 +13,7 @@ namespace Z0
     partial class gmath
     {        
         /// <summary>
-        /// Divides the first primal value by the second
+        /// Divides the first value by the second
         /// </summary>
         /// <param name="a">The left value</param>
         /// <param name="b">The right value</param>
@@ -21,10 +21,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T div<T>(T a, T b)
             where T : unmanaged
-                => div_1(a,b);
+                => div_u(a,b);
 
         [MethodImpl(Inline)]
-        static T div_1<T>(T a, T b)
+        static T div_u<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -36,11 +36,11 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.div(uint64(a), uint64(b)));
             else
-                return div_2(a,b);
+                return div_i(a,b);
         }
 
         [MethodImpl(Inline)]
-        static T div_2<T>(T a, T b)
+        static T div_i<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

@@ -18,8 +18,28 @@ namespace Z0
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal operand type</typeparam>
         [MethodImpl(Inline)]
+        public static sbyte nand(sbyte a, sbyte b)
+            => not(and(a,b));
+
+        /// <summary>
+        /// Computes the bitwise nand c := ~(a & b) for operands a and b
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        /// <typeparam name="T">The primal operand type</typeparam>
+        [MethodImpl(Inline)]
         public static byte nand(byte a, byte b)
-            => (byte)(nand((uint)a,(uint)b));
+            => not(and(a,b));
+
+        /// <summary>
+        /// Computes the bitwise nand c := ~(a & b) for operands a and b
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        /// <typeparam name="T">The primal operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static short nand(short a, short b)
+            => not(and(a,b));
 
         /// <summary>
         /// Computes the bitwise nand c := ~(a & b) for operands a and b
@@ -29,7 +49,17 @@ namespace Z0
         /// <typeparam name="T">The primal operand type</typeparam>
         [MethodImpl(Inline)]
         public static ushort nand(ushort a, ushort b)
-            => (ushort)(nand((uint)a,(uint)b));
+            => not(and(a,b));
+
+        /// <summary>
+        /// Computes the bitwise nand c := ~(a & b) for operands a and b
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        /// <typeparam name="T">The primal operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static int nand(int a, int b)
+            => ~ (a & b);
 
         /// <summary>
         /// Computes the bitwise nand c := ~(a & b) for operands a and b
@@ -39,6 +69,16 @@ namespace Z0
         /// <typeparam name="T">The primal operand type</typeparam>
         [MethodImpl(Inline)]
         public static uint nand(uint a, uint b)
+            => ~ (a & b);
+
+        /// <summary>
+        /// Computes the bitwise nand c := ~(a & b) for operands a and b
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        /// <typeparam name="T">The primal operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static long nand(long a, long b)
             => ~ (a & b);
 
         /// <summary>

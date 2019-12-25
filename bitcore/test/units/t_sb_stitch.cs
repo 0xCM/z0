@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_sb_stitch : t_sb<t_sb_stitch>
+    public class t_sb_stitch : t_bitcore<t_sb_stitch>
     {
 
         public void stitch_basecases()

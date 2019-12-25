@@ -83,22 +83,5 @@ namespace Z0
         public static ulong clamp(ulong src, ulong max)
             => src > max ? max : src;
 
-        /// <summary>
-        /// Clamps the source value to an inclusive maximum
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="max">The maximum value</param>
-        [MethodImpl(Inline)]
-        public static float clamp(float src, float max)
-            => src > max ? max : src;
-
-        /// <summary>
-        /// Clamps the source value to an inclusive maximum
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="max">The maximum value</param>
-        [MethodImpl(Inline)]
-        public static double clamp(double src, double max)
-            => src > max ? max : src;
     }
 }

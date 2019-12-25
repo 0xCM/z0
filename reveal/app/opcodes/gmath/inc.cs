@@ -42,11 +42,17 @@ namespace Z0
         public static int inc_g32i(int x)
             => gmath.inc(x);
 
+        public static int inc_op32i(int x)
+            => KOps.inc(x).Invoke(x);
+
         public static uint inc_d32u(uint x)
             => math.inc(x);
 
         public static uint inc_g32u(uint x)
             => gmath.inc(x);
+
+        public static uint inc_op32u(uint x)
+            => KOps.inc(x).Invoke(x);
 
         public static long inc_d64i(long x)
             => math.inc(x);

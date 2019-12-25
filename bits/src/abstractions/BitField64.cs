@@ -29,17 +29,17 @@ namespace Z0
             this.spec = spec;
         }
 
-        public ulong this[int index]
+        public ulong this[byte index]
         {
             [MethodImpl(Inline)]
             get => Extract(index);
         }
 
         [MethodImpl(Inline)]
-        public ulong Extract(int index)
+        public ulong Extract(byte index)
         {
             var field = spec[index];
-            return Bits.extract(data, field.FirstPos, field.Width);            
+            return Bits.bitslice(data, (byte)field.FirstPos, (byte)field.Width);            
         }
         
         public BitFieldSpec Spec

@@ -14,26 +14,26 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static bool eq<T>(T lhs, T rhs)
+        public static bit eq<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                 return fmath.eq(float32(lhs), float32(rhs));
+                 return fmath.eq(float32(a), float32(b));
             else if(typeof(T) == typeof(double))
-                 return fmath.eq(float64(lhs), float64(rhs));
+                 return fmath.eq(float64(a), float64(b));
             else            
                 throw unsupported<T>();
         }
 
 
         [MethodImpl(Inline)]
-        public static bool neq<T>(T lhs, T rhs)
+        public static bit neq<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                 return fmath.neq(float32(lhs), float32(rhs));
+                 return fmath.neq(float32(a), float32(b));
             else if(typeof(T) == typeof(double))
-                 return fmath.neq(float64(lhs), float64(rhs));
+                 return fmath.neq(float64(a), float64(b));
             else            
                 throw unsupported<T>();
         }
@@ -43,19 +43,19 @@ namespace Z0
     partial class fmath
     {
         [MethodImpl(Inline)]
-        public static bool eq(float lhs, float rhs)
-            => lhs == rhs;
+        public static bit eq(float a, float b)
+            => a == b;
 
         [MethodImpl(Inline)]
-        public static bool eq(double lhs, double rhs)
-            => lhs == rhs;
+        public static bit eq(double a, double b)
+            => a == b;
 
         [MethodImpl(Inline)]
-        public static bool neq(float lhs, float rhs)
-            => lhs != rhs;
+        public static bit neq(float a, float b)
+            => a != b;
 
         [MethodImpl(Inline)]
-        public static bool neq(double lhs, double rhs)
-            => lhs != rhs;
+        public static bit neq(double a, double b)
+            => a != b;
     }
 }

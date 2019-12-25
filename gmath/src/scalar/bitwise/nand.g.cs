@@ -14,13 +14,18 @@ namespace Z0
     partial class gmath
     {
         /// <summary>
-        /// Computes the bitwise nand c := ~(a & b) for unsigned integers a and b
+        /// Computes the bitwise nand c := ~(a & b) for integers a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal operand type</typeparam>
         [MethodImpl(Inline)]
         public static T nand<T>(T a, T b)
+            where T : unmanaged
+                => nand_u(a,b);
+
+        [MethodImpl(Inline)]
+        public static T nand_u<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -32,7 +37,24 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.nand(uint64(a), uint64(b)));
             else
+                return nand_i(a,b);
+        }
+
+        [MethodImpl(Inline)]
+        public static T nand_i<T>(T a, T b)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(math.nand(int8(a), int8(b)));
+            else if(typeof(T) == typeof(short))
+                return generic<T>(math.nand(int16(a), int16(b)));
+            else if(typeof(T) == typeof(int))
+                return generic<T>(math.nand(int32(a), int32(b)));
+            else if(typeof(T) == typeof(long))
+                return generic<T>(math.nand(int64(a), int64(b)));
+            else
                 throw unsupported<T>();
         }
+
     }
 }

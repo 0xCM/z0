@@ -81,10 +81,6 @@ namespace Z0
             where T : unmanaged
                 => gmath.and<T>;
 
-        [MethodImpl(Inline)]
-        public static BinaryOp<T> or<T>()
-            where T : unmanaged
-                => gmath.or<T>;
  
         [MethodImpl(Inline)]
         public static BinaryOp<T> xor<T>()
@@ -96,15 +92,6 @@ namespace Z0
             where T : unmanaged
                 => gmath.not<T>;
 
-        [MethodImpl(Inline)]
-        public static Shifter<T> sal<T>()
-            where T : unmanaged
-                => gmath.sal<T>;
-
-        [MethodImpl(Inline)]
-        public static Shifter<T> sar<T>()
-            where T : unmanaged
-                => gmath.sar<T>;
    }
 
 }

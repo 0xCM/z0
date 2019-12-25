@@ -23,9 +23,9 @@ namespace Z0
         /// <param name="index">The bit count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> slice<T>(BitGrid32<T> g, int index, int length)
+        public static BitVector<T> slice<T>(BitGrid32<T> g, byte index, byte length)
             where T : unmanaged
-                => generic<T>(gbits.extract(g.Data, index*length, length));
+                => generic<T>(gbits.bitslice(g.Data, uint8(index*length), length));
 
         /// <summary>
         /// Extracts a sequence of bits
@@ -35,9 +35,9 @@ namespace Z0
         /// <param name="index">The bit count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> slice<T>(BitGrid64<T> g, int index, int length)
+        public static BitVector<T> slice<T>(BitGrid64<T> g, byte index, byte length)
             where T : unmanaged
-                => generic<T>(gbits.extract(g.Data, index*length, length));
+                => generic<T>(gbits.bitslice(g.Data, uint8(index*length), length));
 
     }
 }

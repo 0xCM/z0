@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_sb_mux : t_sb<t_sb_mux>
+    public class t_sb_mux : t_bitcore<t_sb_mux>
     {
         public void mux_4()
         {            

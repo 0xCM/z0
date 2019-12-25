@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_sb_shift : t_sb<t_sb_shift>
+    public class t_sb_shift : t_bitcore<t_sb_shift>
     {
         public void bs_sar_8i_check()
             => bs_sar_check<sbyte>();

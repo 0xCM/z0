@@ -8,7 +8,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_sb_segment : t_sb<t_sb_segment>
+    public class t_between : t_bitcore<t_between>
     {
         public void sb_range_basecase()
         {
@@ -18,22 +18,22 @@ namespace Z0
 
             Span<byte> dst = stackalloc byte[8];
                         
-            var r1 = gbits.segment(U64_00, 0, 7);
+            var r1 = gbits.between(U64_00, 0, 7);
             Claim.eq((byte)0b11110000, r1);
 
-            gbits.segment(U64_00, 0, 7, dst, 0);
+            gbits.between(U64_00, 0, 7, dst, 0);
             Claim.eq((byte)0b11110000, dst[0]);
 
-            gbits.segment(U64_00, 8, 15, dst, 0);
+            gbits.between(U64_00, 8, 15, dst, 0);
             Claim.eq((byte)0b00111000, dst[0]);
 
-            gbits.segment(U64_00, 4, 7, dst, 0);
+            gbits.between(U64_00, 4, 7, dst, 0);
             Claim.eq((byte)0b1111, dst[0]);
 
-            gbits.segment(U64_00, 4, 6, dst, 1);
+            gbits.between(U64_00, 4, 6, dst, 1);
             Claim.eq((byte)0b111, dst[1]);
 
-            gbits.segment(U32_01, 7, 8, dst, 2);
+            gbits.between(U32_01, 7, 8, dst, 2);
             Claim.eq((byte)0b11, dst[2]);                    
         }
 
@@ -44,8 +44,8 @@ namespace Z0
                 var x = Random.Next<uint>();
                 Bits.split(x,out var x0, out var x1);
 
-                var y0 = gbits.segment(x, 0, 15);
-                var y1 = gbits.segment(x, 16, 31);
+                var y0 = gbits.between(x, 0, 15);
+                var y1 = gbits.between(x, 16, 31);
 
                 Claim.eq(y0,x0);
                 Claim.eq(y1,x1);
@@ -58,8 +58,8 @@ namespace Z0
             {
                 var x = Random.Next<ulong>();
                 Bits.split(x, out var x0, out var x1);
-                var y0 = gbits.segment(x, 0, 31);
-                var y1 = gbits.segment(x, 32, 63);
+                var y0 = gbits.between(x, 0, 31);
+                var y1 = gbits.between(x, 32, 63);
 
                 Claim.eq(y0,x0);
                 Claim.eq(y1,x1);
@@ -72,12 +72,12 @@ namespace Z0
             {
                 var x = Random.Next<ushort>();
                 
-                var x0 = gbits.segment(x,0, 2);                
-                var x1 = gmath.sll(gbits.segment(x,3, 5),3);
-                var x2 = gmath.sll(gbits.segment(x,6, 8),6);
-                var x3 = gmath.sll(gbits.segment(x,9, 11),9);
-                var x4 = gmath.sll(gbits.segment(x,12, 14),12);
-                var x5 = gmath.sll(gbits.segment(x,15, 15),15);
+                var x0 = gbits.between(x,0, 2);                
+                var x1 = gmath.sll(gbits.between(x,3, 5),3);
+                var x2 = gmath.sll(gbits.between(x,6, 8),6);
+                var x3 = gmath.sll(gbits.between(x,9, 11),9);
+                var x4 = gmath.sll(gbits.between(x,12, 14),12);
+                var x5 = gmath.sll(gbits.between(x,15, 15),15);
                 var y = x0;
                 y |= x1;
                 y |= x2;

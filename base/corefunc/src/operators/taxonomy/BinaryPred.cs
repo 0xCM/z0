@@ -25,7 +25,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IPBinaryPred<T> : IPrimalOp<T>, IBinaryPred<T>
+    public interface IPrimalBinaryPred<T> : IPrimalOp<T>, IBinaryPred<T>
         where T : unmanaged
     {
         

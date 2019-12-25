@@ -22,8 +22,26 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
+        public static sbyte cimpl(sbyte a, sbyte b)
+            => or(not(a),b);
+
+        /// <summary>
+        /// Computes the converse implication c := ~a | b for operands a and b
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline)]
         public static byte cimpl(byte a, byte b)
             => (byte)(~a | b);
+
+        /// <summary>
+        /// Computes the converse implication c := ~a | b for operands a and b
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline)]
+        public static short cimpl(short a, short b)
+            => or(not(a),b);
 
         /// <summary>
         /// Computes the converse implication c := ~a | b for operands a and b
@@ -40,7 +58,25 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
+        public static int cimpl(int a, int b)
+            => ~a | b;
+
+        /// <summary>
+        /// Computes the converse implication c := ~a | b for operands a and b
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline)]
         public static uint cimpl(uint a, uint b)
+            => ~a | b;
+            
+        /// <summary>
+        /// Computes the converse implication c := ~a | b for operands a and b
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline)]
+        public static long cimpl(long a, long b)
             => ~a | b;
 
         /// <summary>

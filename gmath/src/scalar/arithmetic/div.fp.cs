@@ -15,64 +15,43 @@ namespace Z0
         /// <summary>
         /// Computes the quotient of floating-point operands
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal floating-point type</typeparam>
         [MethodImpl(Inline)]
-        public static T div<T>(T lhs, T rhs)
+        public static T div<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                 return generic<T>(fmath.div(float32(lhs), float32(rhs)));
+                 return generic<T>(fmath.div(float32(a), float32(b)));
             else if(typeof(T) == typeof(double))
-                 return generic<T>(fmath.div(float64(lhs), float64(rhs)));
+                 return generic<T>(fmath.div(float64(a), float64(b)));
             else            
                 throw unsupported<T>();
         }
 
-        /// <summary>
-        /// Computes the quotient of the left and right operand and overwrites the left operand with the result
-        /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        /// <typeparam name="T">The primal floating-point type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T div<T>(ref T lhs, T rhs)
+        public static bool divides<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                 fmath.div(ref float32(ref lhs), float32(rhs));
+                 return fmath.divides(float32(a), float32(b));
             else if(typeof(T) == typeof(double))
-                 fmath.div(ref float64(ref lhs), float64(rhs));
+                 return fmath.divides(float64(a), float64(b));
             else            
                 throw unsupported<T>();
-            return ref lhs;
         }
     }
 
     partial class fmath
     {
         [MethodImpl(Inline)]
-        public static float div(float lhs, float rhs)
-            => lhs / rhs;
+        public static float div(float a, float b)
+            => a / b;
 
         [MethodImpl(Inline)]
-        public static double div(double lhs, double rhs)
-            => lhs / rhs;
-
-        [MethodImpl(Inline)]
-        public static ref float div(ref float lhs, in float rhs)
-        {
-            lhs = lhs / rhs;
-            return ref lhs;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref double div(ref double lhs, in double rhs)
-        {
-            lhs = lhs / rhs;
-            return ref lhs;
-        }
+        public static double div(double a, double b)
+            => a / b;
 
         [MethodImpl(Inline)]
         public static bit divides(float a, float b)

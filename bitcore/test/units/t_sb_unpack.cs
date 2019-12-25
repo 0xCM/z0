@@ -8,7 +8,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_sb_unpack : t_sb<t_sb_unpack>
+    public class t_sb_unpack : t_bitcore<t_sb_unpack>
     {
         public void sb_unpack_8x8()
             => sb_unpack_check<byte,byte>();

@@ -32,7 +32,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The primal operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IPTernaryOp<T> : IPrimalOp<T>, ITernaryOp<T>
+    public interface IPrimalTernaryOp<T> : IPrimalOp<T>, ITernaryOp<T>
         where T : unmanaged
     {
         

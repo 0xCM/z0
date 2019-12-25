@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_sb_scatter : t_sb<t_sb_scatter>
+    public class t_sb_scatter : t_bitcore<t_sb_scatter>
     {        
         public void sb_scatter_basecase()
         {

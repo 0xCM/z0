@@ -11,7 +11,7 @@ namespace Z0
 
     partial class KOpStructs
     {
-        public readonly struct Eq<T> : IPBinaryPred<T>
+        public readonly struct Eq<T> : IPrimalBinaryPred<T>
             where T : unmanaged        
         {
             public static Eq<T> Op => default;
@@ -24,7 +24,7 @@ namespace Z0
             public readonly bit Invoke(T x, T y) => gmath.eq(x,y);
         }
 
-        public readonly struct Neq<T> : IPBinaryPred<T>
+        public readonly struct Neq<T> : IPrimalBinaryPred<T>
             where T : unmanaged        
         {
             public static Neq<T> Op => default;
@@ -37,7 +37,7 @@ namespace Z0
             public readonly bit Invoke(T x, T y) => gmath.neq(x,y);
         }
 
-        public readonly struct Lt<T> : IPBinaryPred<T>
+        public readonly struct Lt<T> : IPrimalBinaryPred<T>
             where T : unmanaged        
         {
             public static Lt<T> Op => default;
@@ -50,7 +50,7 @@ namespace Z0
             public readonly bit Invoke(T x, T y) => gmath.lt(x,y);
         }
 
-        public readonly struct LtEq<T> : IPBinaryPred<T>
+        public readonly struct LtEq<T> : IPrimalBinaryPred<T>
             where T : unmanaged        
         {
             public static LtEq<T> Op => default;
@@ -63,7 +63,7 @@ namespace Z0
             public readonly bit Invoke(T x, T y) => gmath.lteq(x,y);
         }
 
-        public readonly struct Gt<T> : IPBinaryPred<T>
+        public readonly struct Gt<T> : IPrimalBinaryPred<T>
             where T : unmanaged        
         {
             public static Gt<T> Op => default;
@@ -76,7 +76,7 @@ namespace Z0
             public readonly bit Invoke(T a, T b) => gmath.gt(a,b);
         }
 
-        public readonly struct GtEq<T> : IPBinaryPred<T>
+        public readonly struct GtEq<T> : IPrimalBinaryPred<T>
             where T : unmanaged        
         {
             public static GtEq<T> Op => default;
@@ -90,7 +90,7 @@ namespace Z0
         }
 
 
-        public readonly struct Between<T> : IPTernaryPred<T>
+        public readonly struct Between<T> : IPrimalTernaryPred<T>
             where T : unmanaged        
         {
             public static Between<T> Op => default;
@@ -103,7 +103,7 @@ namespace Z0
             public readonly bit Invoke(T x, T a, T b) => gmath.between(x,a,b);
         }
 
-        public readonly struct Nonz<T> : IPUnaryPred<T>
+        public readonly struct Nonz<T> : IPrimalUnaryPred<T>
             where T : unmanaged        
         {
             public static Nonz<T> Op => default;
@@ -116,7 +116,7 @@ namespace Z0
             public readonly bit Invoke(T a) => gmath.nonz(a);
         }
 
-        public readonly struct NegativeOp<T> : IPUnaryPred<T>
+        public readonly struct NegativeOp<T> : IPrimalUnaryPred<T>
             where T : unmanaged        
         {
             public static NegativeOp<T> Op => default;
@@ -129,7 +129,7 @@ namespace Z0
             public readonly bit Invoke(T a) => gmath.negative(a);
         }
 
-        public readonly struct PositiveOp<T> : IPUnaryPred<T>
+        public readonly struct PositiveOp<T> : IPrimalUnaryPred<T>
             where T : unmanaged        
         {
             public static PositiveOp<T> Op => default;

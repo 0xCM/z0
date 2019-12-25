@@ -11,7 +11,7 @@ namespace Z0
 
     public static class BitCoreS
     {
-        public readonly struct ByteSwap<T> : IPUnaryOp<T>
+        public readonly struct ByteSwap<T> : IPrimalUnaryOp<T>
             where T : unmanaged        
         {
             public static ByteSwap<T> Op => default;
@@ -24,7 +24,7 @@ namespace Z0
             public T Invoke(T a) => gbits.byteswap(a);
         }
     
-        public readonly struct Bfly<N,T> : IPUnaryOp<N,T>
+        public readonly struct Bfly<N,T> : IPrimalUnaryOp<N,T>
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
@@ -52,7 +52,7 @@ namespace Z0
             }            
         }
 
-        public readonly struct Between<T> : IPUnaryRange8Op<T>
+        public readonly struct Between<T> : IPrimalUnaryRange8Op<T>
             where T : unmanaged        
         {
             public static Between<T> Op => default;

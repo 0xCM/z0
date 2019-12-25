@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;
     using static As;
 
-    public class t_sb_mask : t_sb<t_sb_mask>
+    public class t_sb_mask : t_bitcore<t_sb_mask>
     {                    
 
         public void sb_lomask_outline()

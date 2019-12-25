@@ -26,7 +26,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The primal operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IPTernaryPred<T> : IPrimalOp<T>, ITernaryPred<T>
+    public interface IPrimalTernaryPred<T> : IPrimalOp<T>, ITernaryPred<T>
         where T : unmanaged
     {
         

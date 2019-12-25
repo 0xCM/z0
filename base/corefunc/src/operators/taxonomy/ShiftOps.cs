@@ -30,7 +30,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IPShiftOp<T> : IPrimalOp<T>, IShiftOp<T>
+    public interface IPrimalShiftOp<T> : IPrimalOp<T>, IShiftOp<T>
         where T : unmanaged
     {
         

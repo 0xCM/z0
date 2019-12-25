@@ -25,6 +25,7 @@ namespace Z0
         A Invoke(A a);        
     }
 
+
     /// <summary>
     /// Characterizes a unary operator that accepts two integral values that define a range
     /// </summary>
@@ -48,7 +49,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The primal operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IPUnaryOp<T> : IPrimalOp<T>, IUnaryOp<T>
+    public interface IPrimalUnaryOp<T> : IPrimalOp<T>, IUnaryOp<T>
         where T : unmanaged
     {
         
@@ -60,7 +61,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The primal operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IPUnaryOp<N,T> : IPrimalOp<T>, IUnaryOp<T>
+    public interface IPrimalUnaryOp<N,T> : IPrimalOp<T>, IUnaryOp<T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
@@ -73,7 +74,7 @@ namespace Z0
     /// <typeparam name="T">The operand type</typeparam>
     /// <typeparam name="K">The integral value type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IPUnaryRangeOp<T,K> : IPrimalOp<T>, IUnaryRangeOp<T,K>
+    public interface IPrimalUnaryRangeOp<T,K> : IPrimalOp<T>, IUnaryRangeOp<T,K>
         where K : unmanaged, ITypeNat
         where T : unmanaged
     {
@@ -85,7 +86,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IPUnaryRange8Op<T> : IPrimalOp<T>, IUnaryRangeOp<T,byte>
+    public interface IPrimalUnaryRange8Op<T> : IPrimalOp<T>, IUnaryRangeOp<T,byte>
         where T : unmanaged
     {
 
@@ -96,7 +97,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IPUnaryRange32Op<T> : IPrimalOp<T>, IUnaryRangeOp<T,int>
+    public interface IPrimalUnaryRange32Op<T> : IPrimalOp<T>, IUnaryRangeOp<T,int>
         where T : unmanaged
     {
 

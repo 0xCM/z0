@@ -11,7 +11,52 @@ namespace Z0
     using static zfunc;
     
     partial class Bits
-    {                        
+    {                
+        /// <summary>
+        /// Splits a 16-bit integer into lo/hi parts
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="n">The target partition count</param>
+        [MethodImpl(Inline)]
+        public static ConstPair<byte> split(ushort src, N2 n)
+            => ((byte)src, ((byte)(src >> 8)));
+
+        /// <summary>
+        /// Splits a 32-bit integer into lo/hi parts
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="n">The target partition count</param>
+        [MethodImpl(Inline)]
+        public static ConstPair<ushort> split(uint src, N2 n)
+            => ((ushort)src, ((ushort)(src >> 16)));
+
+        /// <summary>
+        /// Splits a 32-bit integer into four parts of equal width, from lo to hi
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="n">The target partition count</param>
+        [MethodImpl(Inline)]
+        public static ConstQuad<byte> split(uint src, N4 n)
+            => ((byte)src,(byte)(src >> 8),(byte)(src >> 16), (byte)(src >> 24));
+
+        /// <summary>
+        /// Splits a 64-bit integer into hi/lo parts
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="n">The target partition count</param>
+        [MethodImpl(Inline)]
+        public static ConstPair<uint> split(ulong src, N2 n)
+            => ((uint)src, (uint)(src >> 32));
+
+        /// <summary>
+        /// Splits a 64-bit integer into four parts of equal width, from lo to hi
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="n">The target partition count</param>
+        [MethodImpl(Inline)]
+        public static ConstQuad<ushort> split(ulong src, N4 n)
+            => ((ushort)src,(ushort)(src >> 16),(ushort)(src >> 32), (ushort)(src >> 48));
+
         /// <summary>
         /// Partitions the source value into two parts predicated on an index
         /// [1010 11111 0011] |> split 4 = [1010 1111] [0011]

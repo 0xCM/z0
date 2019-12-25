@@ -47,7 +47,7 @@ namespace Z0
                 => NatMath.mul<M,N>() * bitsize<T>();
 
         /// <summary>
-        /// Computes the quotient q := natval[N] % bitsize[T]
+        /// Computes the quotient q := natval[N] / bitsize[T]
         /// </summary>
         /// <param name="n">The natural representative</param>
         /// <param name="t">A type representative</param>

@@ -65,7 +65,6 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]   
     static char indicator<T>(T t = default)
-        where T : unmanaged
         => isFloat(t) ? AsciLower.f : (isSigned(t) ? AsciLower.i : AsciLower.u);
 
     /// <summary>
@@ -75,8 +74,7 @@ partial class zfunc
     /// <typeparam name="T">The primal type</typeparam>
     [MethodImpl(Inline)]   
     public static string moniker<T>(T t = default)
-        where T : unmanaged
-            => $"{bitsize(t)}{indicator(t)}";
+        => $"{bitsize(t)}{indicator(t)}";
 
     /// <summary>
     /// Produces a canonical designator of the form {op}_{bitsize[T]}{u | i | f} for an operation over a primal type
@@ -86,8 +84,7 @@ partial class zfunc
     /// <typeparam name="T">The primal type</typeparam>
     [MethodImpl(Inline)]   
     public static string moniker<T>(string op, T t = default)
-        where T : unmanaged
-            => $"{op}_{bitsize(t)}{indicator(t)}";
+        => $"{op}_{bitsize(t)}{indicator(t)}";
 
     /// <summary>
     /// Produces a canonical designator of the form {W}X{bitsize[T]}{u | i | f} for a segmented WxT type or classification
@@ -98,7 +95,6 @@ partial class zfunc
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(Inline)]   
     public static string moniker<W,T>(W w = default, T t = default)
-        where T : unmanaged
         where W : unmanaged, ITypeNat
             => $"{w}x{moniker(t)}";
 
@@ -112,7 +108,6 @@ partial class zfunc
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(Inline)]   
     public static string moniker<W,T>(string op, W w = default, T t = default)
-        where T : unmanaged
         where W : unmanaged, ITypeNat
             => $"{op}_{w}x{moniker(t)}";
 
@@ -130,19 +125,16 @@ partial class zfunc
     /// <typeparam name="T">The type to test</typeparam>
     [MethodImpl(Inline)]
     public static bool isFloat<T>(T t = default)
-        where T : unmanaged
-            => typeof(T) == typeof(float) 
+        => typeof(T) == typeof(float) 
             || typeof(T) == typeof(double);
 
     [MethodImpl(Inline)]
     public static bool isFloat32<T>(T t = default)
-        where T : unmanaged
-            => typeof(T) == typeof(float);
+        => typeof(T) == typeof(float);
 
     [MethodImpl(Inline)]
     public static bool isFloat64<T>(T t = default)
-        where T : unmanaged
-            => typeof(T) == typeof(double);
+        => typeof(T) == typeof(double);
 
     /// <summary>
     /// Determines whether a type is a native integral type
@@ -150,15 +142,14 @@ partial class zfunc
     /// <typeparam name="T">The type to test</typeparam>
     [MethodImpl(Inline)]
     public static bool isIntegral<T>(T t = default)
-        where T : unmanaged
-            => typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(byte)
-            || typeof(T) == typeof(short)
-            || typeof(T) == typeof(ushort)
-            || typeof(T) == typeof(int)
-            || typeof(T) == typeof(uint)
-            || typeof(T) == typeof(long)
-            || typeof(T) == typeof(ulong);
+        => typeof(T) == typeof(sbyte) 
+        || typeof(T) == typeof(byte)
+        || typeof(T) == typeof(short)
+        || typeof(T) == typeof(ushort)
+        || typeof(T) == typeof(int)
+        || typeof(T) == typeof(uint)
+        || typeof(T) == typeof(long)
+        || typeof(T) == typeof(ulong);
 
     /// <summary>
     /// Determines whether a type is a native signed type
@@ -166,13 +157,12 @@ partial class zfunc
     /// <typeparam name="T">The type to test</typeparam>
     [MethodImpl(Inline)]
     public static bool isSigned<T>(T t = default)
-        where T : unmanaged
-            => typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short)
-            || typeof(T) == typeof(int)
-            || typeof(T) == typeof(long)
-            || typeof(T) == typeof(float) 
-            || typeof(T) == typeof(double);            
+        => typeof(T) == typeof(sbyte) 
+        || typeof(T) == typeof(short)
+        || typeof(T) == typeof(int)
+        || typeof(T) == typeof(long)
+        || typeof(T) == typeof(float) 
+        || typeof(T) == typeof(double);            
 
     /// <summary>
     /// Determines whether a type is a native unsigned type
@@ -180,11 +170,10 @@ partial class zfunc
     /// <typeparam name="T">The type to test</typeparam>
     [MethodImpl(Inline)]
     public static bool isUnsigned<T>(T t = default)
-        where T : unmanaged
-            => typeof(T) == typeof(byte)
-            || typeof(T) == typeof(ushort)
-            || typeof(T) == typeof(uint)
-            || typeof(T) == typeof(ulong);
+        => typeof(T) == typeof(byte)
+        || typeof(T) == typeof(ushort)
+        || typeof(T) == typeof(uint)
+        || typeof(T) == typeof(ulong);
 
     /// <summary>
     /// Creates an instance of a specified type

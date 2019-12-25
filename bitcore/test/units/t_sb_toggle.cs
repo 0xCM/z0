@@ -8,7 +8,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_sb_toggle : t_sb<t_sb_toggle>
+    public class t_sb_toggle : t_bitcore<t_sb_toggle>
     {
         public void sb_toggle_8i()
             => sb_toggle_check<sbyte>();

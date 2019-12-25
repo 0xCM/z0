@@ -24,6 +24,15 @@ namespace Z0
     }
 
 
+    public static partial class ZOpR
+    {
+
+    }
+
+    public static partial class ZOps
+    {
+
+    }
     
 
 }

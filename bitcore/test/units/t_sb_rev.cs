@@ -8,7 +8,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_sb_bitrev : t_sb<t_sb_bitrev>
+    public class t_sb_bitrev : t_bitcore<t_sb_bitrev>
     {
         public void sb_bitrev_8()
             => sb_bitrev_check<byte>();

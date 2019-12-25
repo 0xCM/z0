@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_sb_rot : t_sb<t_sb_rot>
+    public class t_sb_rot : t_bitcore<t_sb_rot>
     {
 
         public void sb_rotl_8()

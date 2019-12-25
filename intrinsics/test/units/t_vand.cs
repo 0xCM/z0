@@ -45,12 +45,12 @@ namespace Z0
 
         void vand_check<T>(IVBinOp128<T> op)
             where T : unmanaged
-                => verify_random(op);
+                => check_scalar_match(op);
             
 
         void vand_check<T>(IVBinOp256<T> op)
             where T : unmanaged
-                => verify_random(op);
+                => check_scalar_match(op);
 
     }
 

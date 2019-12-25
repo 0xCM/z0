@@ -17,8 +17,26 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
+        public static sbyte nor(sbyte a, sbyte b)
+            => not(or(a,b));
+
+        /// <summary>
+        /// Computes the bitwise nor c := ~(a | b) for operands a and b
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline)]
         public static byte nor(byte a, byte b)
-            => (byte)(nor((uint)a,(uint)b));
+            => not(or(a,b));
+
+        /// <summary>
+        /// Computes the bitwise nor c := ~(a | b) for operands a and b
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline)]
+        public static short nor(short a, short b)
+            => not(or(a,b));
 
         /// <summary>
         /// Computes the bitwise nor c := ~(a | b) for operands a and b
@@ -27,7 +45,16 @@ namespace Z0
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
         public static ushort nor(ushort a, ushort b)
-            => (ushort)(nor((uint)a,(uint)b));
+            => not(or(a,b));
+
+        /// <summary>
+        /// Computes the bitwise nor c := ~(a | b) for operands a and b
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline)]
+        public static int nor(int a, int b)
+            => ~ (a | b);
 
         /// <summary>
         /// Computes the bitwise nor c := ~(a | b) for operands a and b
@@ -36,6 +63,15 @@ namespace Z0
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
         public static uint nor(uint a, uint b)
+            => ~ (a | b);
+
+        /// <summary>
+        /// Computes the bitwise nor c := ~(a | b) for operands a and b
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline)]
+        public static long nor(long a, long b)
             => ~ (a | b);
 
         /// <summary>

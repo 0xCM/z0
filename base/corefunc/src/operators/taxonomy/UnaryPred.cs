@@ -10,6 +10,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Security;
 
+    using static zfunc;
+
     /// <summary>
     /// Characterizes a unary predicate
     /// </summary>
@@ -20,13 +22,12 @@ namespace Z0
         bit Invoke(A a);        
     }
 
-
     /// <summary>
     /// Characterizes a unary predicate over a primal operand
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IPUnaryPred<T> : IPrimalOp<T>, IUnaryPred<T>
+    public interface IPrimalUnaryPred<T> : IPrimalOp<T>, IUnaryPred<T>
         where T : unmanaged
     {
         
@@ -91,6 +92,5 @@ namespace Z0
     {
         
     }
-
 
 }

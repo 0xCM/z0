@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static zfunc;    
+    using static As;
 
     /// <summary>
     /// A data structure that covers and arbitrary number of 256-bit blocks of packed bits
@@ -265,14 +266,14 @@ namespace Z0
                 return gmath.maxval<T>();
 
             var sameSeg = first.CellIndex == last.CellIndex;
-            var firstCount = sameSeg ? wantedCount : CellWidth - first.BitOffset;
-            var lastCount = wantedCount - firstCount;            
-            var part1 = gbits.extract(Cell(first), first.BitOffset, firstCount);
+            var firstCount = uint8(sameSeg ? wantedCount : CellWidth - first.BitOffset);
+            var lastCount = uint8(wantedCount - firstCount);
+            var part1 = gbits.bitslice(Cell(first), (byte)first.BitOffset, firstCount);
             
             if(sameSeg)
                 return part1;
 
-            var part2 = gmath.sal(gbits.extract(Cell(last), 0, lastCount), firstCount);
+            var part2 = gmath.sal(gbits.bitslice(Cell(last), 0, lastCount), firstCount);
             return gmath.or(part1, part2);              
         }
 

@@ -28,7 +28,7 @@ namespace Z0
             Claim.eq(7,spec.FieldCount);
 
             var expect = new long[]{0b0111,0b110,0b11,0b1,0b11010,0b101,0b100};
-            for(var i=0; i < spec.FieldCount; i++)
+            for(byte i=0; i < spec.FieldCount; i++)
                 Claim.eq(bf[i], expect[i]);
         }
 

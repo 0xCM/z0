@@ -5,10 +5,11 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static zfunc;
 
-    public class t_sb_lsbx : t_sb<t_sb_lsbx>
+    public class t_lsbx : t_bitcore<t_lsbx>
     {
         public void xlsb_outline()
         {
@@ -28,5 +29,23 @@ namespace Z0
 
         public void sb_lsbx_64()
             => sb_lsbx_check<ulong>();
+ 
+
+        protected void sb_lsbx_check<T>(T t = default)
+            where T : unmanaged
+        {
+            var negate = KOps.negate<T>();
+            var and = KOps.and<T>();
+
+            for(var i=0; i<SampleCount; i++)
+            {
+                var src = Random.Next<T>();
+                var x = gbits.lsbx(src);
+                //var y = gmath.and(src, gmath.negate(src));
+                var y = compose(src, and, negate);
+                Claim.eq(x,y);
+            }
+        }
+ 
     }
 }

@@ -82,5 +82,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong mod(ulong a, ulong m)
             => a % m;
+
     }
 }

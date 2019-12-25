@@ -8,7 +8,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_sb_split : t_sb<t_sb_split>
+    public class t_sb_split : t_bitcore<t_sb_split>
     {
         public void sb_part_64x1()
         {

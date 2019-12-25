@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_sb_pop : t_sb<t_sb_pop>
+    public class t_sb_pop : t_bitcore<t_sb_pop>
     {                
         static Span<byte> unpack8x1(ReadOnlySpan<byte> src, Span<byte> dst)
         {            

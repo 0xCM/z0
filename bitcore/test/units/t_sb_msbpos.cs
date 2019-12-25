@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_sb_msbpos : t_sb<t_sb_msbpos>
+    public class t_sb_msbpos : t_bitcore<t_sb_msbpos>
     {
         public void sb_msbpos_8()
             => sb_msbpos_check<byte>();

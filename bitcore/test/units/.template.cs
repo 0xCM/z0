@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_sb_template : t_sb<t_sb_template>
+    public class t_sb_template : t_bitcore<t_sb_template>
     {            
 
 

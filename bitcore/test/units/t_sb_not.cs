@@ -14,7 +14,7 @@ namespace Z0
     using static zfunc;
     using D = GDel;
 
-    public class t_sb_not : t_sb<t_sb_not>
+    public class t_sb_not : t_bitcore<t_sb_not>
     {
         public void sb_not_8i()
             => VerifyOp(OpKind.Not, x => (sbyte) ~x, D.not<sbyte>());

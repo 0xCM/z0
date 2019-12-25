@@ -21,8 +21,7 @@ partial class zfunc
     /// <typeparam name="T">The type</typeparam>
     [MethodImpl(Inline)]
     public static ByteSize size<T>()
-        where T : struct
-            => Unsafe.SizeOf<T>();
+        => Unsafe.SizeOf<T>();
 
     /// <summary>
     /// Computes the byte-size of a type
@@ -31,8 +30,7 @@ partial class zfunc
     /// <typeparam name="T">The type</typeparam>
     [MethodImpl(Inline)]
     public static ByteSize size<T>(T t)
-        where T : struct
-            => Unsafe.SizeOf<T>();
+        => Unsafe.SizeOf<T>();
 
     /// <summary>
     /// Computes the bit-width of a type
@@ -40,8 +38,7 @@ partial class zfunc
     /// <typeparam name="T">The type</typeparam>
     [MethodImpl(Inline)]
     public static int bitsize<T>()
-        where T : struct
-            => Unsafe.SizeOf<T>()*8;
+        => Unsafe.SizeOf<T>()*8;
 
     /// <summary>
     /// Computes the bit-width of a type
@@ -50,8 +47,7 @@ partial class zfunc
     /// <typeparam name="T">The type</typeparam>    
     [MethodImpl(Inline)]
     public static int bitsize<T>(T t)
-        where T : struct
-            => Unsafe.SizeOf<T>()*8;
+        => Unsafe.SizeOf<T>()*8;
 
     /// <summary>
     /// Presents the second value through the lens of the type of the first value
@@ -62,8 +58,6 @@ partial class zfunc
     /// <typeparam name="B">The second type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly A matchtype<A,B>(in A a, in B b)
-        where A : unmanaged
-        where B : unmanaged
-            => ref Unsafe.As<B,A>(ref mutable(b));
+        => ref Unsafe.As<B,A>(ref mutable(b));
 
 }

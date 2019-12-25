@@ -24,19 +24,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
-        public static ref T ceil<T>(ref T src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                fmath.ceil(ref float32(ref src));
-            else if(typeof(T) == typeof(double))
-                fmath.ceil(ref float64(ref src));
-            else
-                throw unsupported<T>();
-            return ref src;
-        }        
-
     }
 
     partial class fmath
@@ -50,17 +37,6 @@ namespace Z0
             => MathF.Ceiling(src);
 
         /// <summary>
-        /// Computes in-place the smallest integral value greater than or equal to the source value
-        /// </summary>
-        /// <param name="src">The source value to be overwritten with the computation</param>
-        [MethodImpl(Inline)]
-        public static ref float ceil(ref float src)
-        {
-            src = MathF.Ceiling(src);
-            return ref src;
-        }
-
-        /// <summary>
         /// Computes the smallest integral value greater than or equal to the source value
         /// </summary>
         /// <param name="src">The source value</param>
@@ -69,14 +45,22 @@ namespace Z0
             => Math.Ceiling(src);
 
         /// <summary>
-        /// Computes in-place the smallest integral value greater than or equal to the source value
+        /// Clamps the source value to an inclusive maximum
         /// </summary>
-        /// <param name="src">The source value to be overwritten with the computation</param>
+        /// <param name="src">The source value</param>
+        /// <param name="max">The maximum value</param>
         [MethodImpl(Inline)]
-        public static ref double ceil(ref double src)
-        {
-            src = Math.Ceiling(src);
-            return ref src;
-        }
+        public static float clamp(float src, float max)
+            => src > max ? max : src;
+
+        /// <summary>
+        /// Clamps the source value to an inclusive maximum
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="max">The maximum value</param>
+        [MethodImpl(Inline)]
+        public static double clamp(double src, double max)
+            => src > max ? max : src;
+
     }    
 }

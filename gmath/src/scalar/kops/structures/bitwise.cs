@@ -11,7 +11,7 @@ namespace Z0
 
     partial class KOpStructs
     {
-        public readonly struct And<T> : IPBinOp<T>
+        public readonly struct And<T> : IPrimalBinOp<T>
             where T : unmanaged        
         {    
             public static And<T> Op => default;
@@ -25,7 +25,7 @@ namespace Z0
             public readonly T Invoke(T a, T b) => gmath.and(a,b);
         }
 
-        public readonly struct Or<T> : IPBinOp<T>
+        public readonly struct Or<T> : IPrimalBinOp<T>
             where T : unmanaged        
         {    
             public static Or<T> Op => default;
@@ -38,7 +38,7 @@ namespace Z0
             public readonly T Invoke(T a, T b) => gmath.or(a,b);
         }
 
-        public readonly struct Xor<T> : IPBinOp<T>
+        public readonly struct Xor<T> : IPrimalBinOp<T>
             where T : unmanaged        
         {    
             public static Xor<T> Op => default;
@@ -52,7 +52,7 @@ namespace Z0
             public readonly T Invoke(T a, T b) => gmath.xor(a,b);
         }
 
-        public readonly struct Nand<T> : IPBinOp<T>
+        public readonly struct Nand<T> : IPrimalBinOp<T>
             where T : unmanaged        
         {    
             public static Nand<T> Op => default;
@@ -65,7 +65,7 @@ namespace Z0
             public readonly T Invoke(T a, T b) => gmath.nand(a,b);
         }
 
-        public readonly struct Nor<T> : IPBinOp<T>
+        public readonly struct Nor<T> : IPrimalBinOp<T>
             where T : unmanaged        
         {    
             public static Nor<T> Op => default;
@@ -78,7 +78,7 @@ namespace Z0
             public readonly T Invoke(T a, T b) => gmath.nor(a,b);
         }
 
-        public readonly struct Xnor<T> : IPBinOp<T>
+        public readonly struct Xnor<T> : IPrimalBinOp<T>
             where T : unmanaged        
         {    
             public static Xnor<T> Op => default;
@@ -91,7 +91,7 @@ namespace Z0
             public readonly T Invoke(T a, T b) => gmath.xnor(a, b);
         }
 
-        public readonly struct Select<T> : IPTernaryOp<T>
+        public readonly struct Select<T> : IPrimalTernaryOp<T>
             where T : unmanaged        
         {    
             public static Select<T> Op => default;
@@ -104,7 +104,7 @@ namespace Z0
             public readonly T Invoke(T a, T b, T c) => gmath.select(a, b, c);
         }
 
-        public readonly struct NotOp<T> : IPUnaryOp<T>
+        public readonly struct NotOp<T> : IPrimalUnaryOp<T>
             where T : unmanaged        
         {
             public static NotOp<T> Op => default;
@@ -117,7 +117,7 @@ namespace Z0
             public readonly T Invoke(T a) => gmath.not(a);
         }    
 
-        public readonly struct Srl<T> : IPShiftOp<T>
+        public readonly struct Srl<T> : IPrimalShiftOp<T>
             where T : unmanaged        
         {
             public static Srl<T> Op => default;
@@ -130,7 +130,7 @@ namespace Z0
             public readonly T Invoke(T a, byte offset) => gmath.srl(a, offset);
         }
 
-        public readonly struct Sll<T> : IPShiftOp<T>
+        public readonly struct Sll<T> : IPrimalShiftOp<T>
             where T : unmanaged        
         {
             public static Sll<T> Op => default;

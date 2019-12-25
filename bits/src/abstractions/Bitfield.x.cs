@@ -17,9 +17,10 @@ namespace Z0
             var fmt = text();
             var count = src.Spec.FieldCount;
             var spec = src.Spec;
-            for(var i = count - 1; i>= 0; i--)
+            var last = count - 1;
+            for(var i = last; i>= 0; i--)
             {
-                fmt.Append(src[i].FormatBits(spec[i].Width));
+                fmt.Append(src[(byte)i].FormatBits(spec[i].Width));
                 if(i != 0)
                     fmt.Append(AsciSym.Underscore);
             }

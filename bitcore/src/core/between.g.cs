@@ -40,6 +40,20 @@ namespace Z0
                 return between_f(src,p0,p1);
         }
 
+        /// <summary>
+        /// Extracts a contiguous sequence of bits from a source and deposits the result to a caller-supplied target
+        /// </summary>
+        /// <param name="a">The bit source</param>
+        /// <param name="first">The 0-based index of the first selected bit</param>
+        /// <param name="last">The 0-based index of the last selected bit</param>
+        /// <param name="dst">The target that receives the sequence</param>
+        /// <param name="offset">The target offset</param>
+        /// <typeparam name="T">The primal bit source type</typeparam>
+        [MethodImpl(Inline)]
+        public static void between<T>(T a, byte first, byte last, Span<byte> dst, int offset)
+            where T : unmanaged
+                => bytes(gbits.between(a,first,last)).Slice(0, BitCalcs.minbytes(last - first + 1)).CopyTo(dst,offset);
+
 
         [MethodImpl(Inline)]
         static T between_i<T>(T src, byte p0, byte p1)

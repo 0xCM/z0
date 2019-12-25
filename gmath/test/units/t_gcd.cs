@@ -8,20 +8,16 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_gcd : t_gmath<t_add>
+    public class t_gcd : t_gmath<t_arithmetic>
     {
-        protected override int CycleCount => Pow2.T13;
-
         public void gcdbin_8u()
             => gcdbin_check((byte)2, (byte)225);
 
+        public void gcdbin_16u()
+            => gcdbin_check((ushort)2, (ushort)22000);
+
         public void gcdbin_8u_bench()
             => gcdbin_bench((byte)2, (byte)225);
-
-        public void gcdbin_16u()
-        {
-            gcdbin_check((ushort)2, (ushort)22000);
-        }   
 
         public void gcdbin_16u_bench()
             => gcdbin_bench((ushort)2, (ushort)22000);
@@ -29,15 +25,11 @@ namespace Z0
         public void gcdbin_32u()
             => gcdbin_check(2u, 500000u);
 
-        public void gcdbin_32u_bench()
-        {
-            gcdbin_bench(2u, 500000u);
-        }   
-
         public void gcdbin_64u_check()
-        {
-            gcdbin_check(2ul, 500000ul);
-        }   
+            => gcdbin_check(2ul, 500000ul);
+
+        public void gcdbin_32u_bench()
+            => gcdbin_bench(2u, 500000u);
 
         public void gcdbin_64u_bench()
             => gcdbin_bench(2ul, 500000ul);
@@ -53,7 +45,6 @@ namespace Z0
                 var d = gmath.gcd(a,b);
                 Claim.eq(c,d);
             }
-
         }
 
         void gcdbin_bench<T>(T min, T max, SystemCounter subject = default, SystemCounter compare = default)
@@ -155,7 +146,5 @@ namespace Z0
             }
             return x; // Quotient is y.
         } 
-
     }
-
 }

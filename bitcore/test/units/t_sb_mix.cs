@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
         
-    public class t_sb_mix : t_sb<t_sb_mix>
+    public class t_sb_mix : t_bitcore<t_sb_mix>
     {
         public void sb_mix_8()
             => sb_mix_check<byte>();

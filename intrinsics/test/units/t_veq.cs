@@ -50,12 +50,12 @@ namespace Z0
         {
             var w = n128;
             var t = default(T);
-            verify_random(op);
+            check_scalar_match(op);
             
             var x = Random.Blocks<T>(w, SampleCount/vcount(w,t));
             var result = DataBlocks.alloc<T>(w, x.BlockCount);
             result.Fill(gmath.ones<T>());
-            verify_blocks(op,x,x,result);
+            check_explicit(op,x,x,result);
 
         }
 
@@ -64,12 +64,12 @@ namespace Z0
         {
             var w = n256;
             var t = default(T);
-            verify_random(op);
+            check_scalar_match(op);
             
             var x = Random.Blocks<T>(w, SampleCount/vcount(w,t));
             var result = DataBlocks.alloc<T>(w, x.BlockCount);
             result.Fill(gmath.ones<T>());
-            verify_blocks(op,x,x,result);
+            check_explicit(op,x,x,result);
 
         }    
     }

@@ -8,7 +8,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_sb_zerohi : t_sb<t_sb_zerohi>
+    public class t_sb_zerohi : t_bitcore<t_sb_zerohi>
     {    
         public void sb_zerohi_8u()
             => sb_zerohi_check<byte>();
