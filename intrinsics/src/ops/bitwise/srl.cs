@@ -19,172 +19,176 @@ namespace Z0
     partial class dinx
     {         
         /// <summary>
-        /// Defines the unfortunately missing _mm_slri_epi8 that shifts each vector component
-        /// leftward by a common number of bits
+        /// Shifts each each component rightward by a specified bitcount
         /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <param name="shift">The number of bits to shift left</param>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The bitcount</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vsrl(Vector128<byte> src, byte shift)
+        public static Vector128<byte> vsrl(Vector128<byte> src, byte count)
         {
-            var y = v8u(dinx.vsrl(v64u(src), shift));
-            var m = CpuVector.lsbmask(n128, n8, (byte)(8 - shift),z8);
+            var y = v8u(ShiftRightLogical(v64u(src), count));
+            var m = CpuVector.lsbmask(n128, n8, (byte)(8 - count),z8);
             return dinx.vand(y,m);
         }
 
         /// <summary>
-        /// Shifts each component of the source vector rightwards by a common number of bits
+        /// Shifts each each component rightward by a specified bitcount
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to shift</param>
+        /// <param name="count">The bitcount</param>
         [MethodImpl(Inline)]
-        public static Vector128<sbyte> vsrl(Vector128<sbyte> src, byte shift)
-            => vsrl(src.AsByte(), shift).AsSByte();
+        public static Vector128<sbyte> vsrl(Vector128<sbyte> src, byte count)
+        {
+            var x = v16u(ShiftRightLogical(vinflate(src, n256, z16i),count));
+            var y = vand(x,v16u(CpuVector.vbroadcast(n256, byte.MaxValue)));
+            return v8i(vcompact(y,n128,z8));
+        } 
 
         /// <summary>
         /// __m128i _mm_srli_epi16 (__m128i a, int immediate) PSRLW xmm, imm8
-        /// Shifts each component of the source vector rightwards by a common number of bits
+        /// Shifts each each component rightward by a specified bitcount
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to shift</param>
+        /// <param name="count">The bitcount</param>
         [MethodImpl(Inline)]
-        public static Vector128<short> vsrl(Vector128<short> src, byte shift)
-            => ShiftRightLogical(src, shift);
-
-
-        /// <summary>
-        /// __m128i _mm_srli_epi16 (__m128i a, int immediate) PSRLW xmm, imm8
-        /// Shifts each component of the source vector rightwards by a common number of bits
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to shift</param>
-        [MethodImpl(Inline)]
-        public static Vector128<ushort> vsrl(Vector128<ushort> src, byte shift)
-            => ShiftRightLogical(src, shift);
+        public static Vector128<short> vsrl(Vector128<short> src, byte count)
+            => ShiftRightLogical(src, count);
 
         /// <summary>
-        /// __m128i _mm_srli_epi32 (__m128i a, int immediate) PSRLD xmm, imm8
-        /// Shifts each component of the source vector rightwards by a common number of bits
+        ///  __m128i _mm_srli_epi16 (__m128i a, int immediate) PSRLW xmm, imm8
+        /// Shifts each each component rightward by a specified bitcount
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to shift</param>
+        /// <param name="count">The bitcount</param>
         [MethodImpl(Inline)]
-        public static Vector128<int> vsrl(Vector128<int> src, byte shift)
-            => ShiftRightLogical(src, shift);
+        public static Vector128<ushort> vsrl(Vector128<ushort> src, byte count)
+            => ShiftRightLogical(src, count);
 
         /// <summary>
         /// __m128i _mm_srli_epi32 (__m128i a, int immediate) PSRLD xmm, imm8
-        /// Shifts each component of the source vector rightwards by a common number of bits
+        /// Shifts each each component rightward by a specified bitcount
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to shift</param>
+        /// <param name="count">The bitcount</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vsrl(Vector128<uint> src, byte shift)
-            => ShiftRightLogical(src, shift);
+        public static Vector128<int> vsrl(Vector128<int> src, byte count)
+            => ShiftRightLogical(src, count);
+
+        /// <summary>
+        /// __m128i _mm_srli_epi32 (__m128i a, int immediate) PSRLD xmm, imm8
+        /// Shifts each each component rightward by a specified bitcount
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="count">The bitcount</param>
+        [MethodImpl(Inline)]
+        public static Vector128<uint> vsrl(Vector128<uint> src, byte count)
+            => ShiftRightLogical(src, count);
 
         /// <summary>
         /// __m128i _mm_srli_epi64 (__m128i a, int immediate) PSRLQ xmm, imm8
-        /// Shifts each component of the source vector right by a common number of bits
+        /// Shifts each each component rightward by a specified bitcount
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to shift</param>
+        /// <param name="count">The bitcount</param>
         [MethodImpl(Inline)]
-        public static Vector128<long> vsrl(Vector128<long> src, byte shift)
-            => ShiftRightLogical(src, shift);
+        public static Vector128<long> vsrl(Vector128<long> src, byte count)
+            => ShiftRightLogical(src, count);
 
         /// <summary>
         /// __m128i _mm_srli_epi64 (__m128i a, int immediate) PSRLQ xmm, imm8
-        /// Shifts each component of the source vector right by a common number of bits
+        /// Shifts each each component rightward by a specified bitcount
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to shift</param>
+        /// <param name="count">The bitcount</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vsrl(Vector128<ulong> src, byte shift)
-            => ShiftRightLogical(src, shift);
+        public static Vector128<ulong> vsrl(Vector128<ulong> src, byte count)
+            => ShiftRightLogical(src, count);
 
         /// <summary>
-        /// Shifts each componet in the source vector leftwards by a specified number of bits
+        /// Shifts each each component rightward by a specified bitcount
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to shift each component</param>
+        /// <param name="count">The bitcount</param>
         [MethodImpl(Inline)]
-        public static Vector256<sbyte> vsrl(Vector256<sbyte> src, byte shift)
-            => vsrl(src.AsByte(), shift).AsSByte();
+        public static Vector256<sbyte> vsrl(Vector256<sbyte> src, byte count)
+        {
+            var x = v16u(ShiftRightLogical(vinflate(vlo(src), n256, z16i),count));
+            var y = v16u(ShiftRightLogical(vinflate(vhi(src), n256, z16i),count));
+            var m = v16u(CpuVector.vbroadcast(n256, byte.MaxValue));
+            return v8i(vcompact(vand(x,m),vand(y,m),n256,z8));
+        } 
 
         /// <summary>
-        /// Defines the unfortunately missing _mm256_slri_epi16 that shifts each vector component
-        /// rightward by a common number of bits
+        /// Shifts each each component rightward by a specified bitcount
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="shift">The number of bits to shift left</param>
+        /// <param name="count">The bitcount</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> vsrl(Vector256<byte> src, byte shift)
+        public static Vector256<byte> vsrl(Vector256<byte> src, byte count)
         {
-            var y = v8u(dinx.vsrl(v64u(src), shift));
-            var m = CpuVector.lsbmask(n256, n8, (byte)(8 - shift),z8);
+            var y = v8u(ShiftRightLogical(v64u(src), count));
+            var m = CpuVector.lsbmask(n256, n8, (byte)(8 - count),z8);
             return dinx.vand(y,m);
         } 
 
         /// <summary>
         /// __m256i _mm256_srli_epi16 (__m256i a, int imm8) VPSRLW ymm, ymm, imm8
-        /// Shifts each component of the source vector right by a common number of bits
+        /// Shifts each each component rightward by a specified bitcount
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to shift</param>
+        /// <param name="count">The bitcount</param>
         [MethodImpl(Inline)]
-        public static Vector256<short> vsrl(Vector256<short> src, byte shift)
-            => ShiftRightLogical(src, shift);
+        public static Vector256<short> vsrl(Vector256<short> src, byte count)
+            => ShiftRightLogical(src, count);
 
         /// <summary>
         /// __m256i _mm256_srli_epi16 (__m256i a, int imm8) VPSRLW ymm, ymm, imm8
-        /// Shifts each component of the source vector right by a common number of bits
+        /// Shifts each each component rightward by a specified bitcount
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to shift</param>
+        /// <param name="count">The bitcount</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vsrl(Vector256<ushort> src, byte shift)
-            => ShiftRightLogical(src, shift);
+        public static Vector256<ushort> vsrl(Vector256<ushort> src, byte count)
+            => ShiftRightLogical(src, count);
 
         /// <summary>
         /// __m256i _mm256_srli_epi32 (__m256i a, int imm8) VPSRLD ymm, ymm, imm8
-        /// Shifts each component of the source vector right by a common number of bits
+        /// Shifts each each component rightward by a specified bitcount
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to shift</param>
+        /// <param name="count">The bitcount</param>
         [MethodImpl(Inline)]
-        public static Vector256<int> vsrl(Vector256<int> src, byte shift)
-            => ShiftRightLogical(src, shift);
+        public static Vector256<int> vsrl(Vector256<int> src, byte count)
+            => ShiftRightLogical(src, count);
 
         /// <summary>
         /// __m256i _mm256_srli_epi32 (__m256i a, int imm8) VPSRLD ymm, ymm, imm8
-        /// Shifts each component of the source vector right by a common number of bits
+        /// Shifts each each component rightward by a specified bitcount
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to shift</param>
+        /// <param name="count">The bitcount</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vsrl(Vector256<uint> src, byte shift)
-            => ShiftRightLogical(src, shift);
+        public static Vector256<uint> vsrl(Vector256<uint> src, byte count)
+            => ShiftRightLogical(src, count);
 
         /// <summary>
         /// __m256i _mm256_srli_epi64 (__m256i a, int imm8) VPSRLQ ymm, ymm, imm8
-        /// Shifts each component of the source vector right by a common number of bits
+        /// Shifts each each component rightward by a specified bitcount
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to shift</param>
+        /// <param name="count">The bitcount</param>
         [MethodImpl(Inline)]
-        public static Vector256<long> vsrl(Vector256<long> src, byte shift)
-            => ShiftRightLogical(src, shift);
+        public static Vector256<long> vsrl(Vector256<long> src, byte count)
+            => ShiftRightLogical(src, count);
 
         /// <summary>
         /// __m256i _mm256_srli_epi64 (__m256i a, int imm8) VPSRLQ ymm, ymm, imm8
-        /// Shifts each component of the source vector right by a common number of bits
+        /// Shifts each each component rightward by a specified bitcount
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to shift</param>
+        /// <param name="count">The bitcount</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vsrl(Vector256<ulong> src, byte shift)
-            => ShiftRightLogical(src, shift); 
-
+        public static Vector256<ulong> vsrl(Vector256<ulong> src, byte count)
+            => ShiftRightLogical(src, count); 
     }
-
 }

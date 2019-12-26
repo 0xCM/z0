@@ -6,16 +6,9 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Reflection;
     using System.Collections.Generic;
     
     using static zfunc;
-    using static nfunc;
-
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
 
     public abstract class TestContext<T> : Context<T>, ITestContext
         where T : TestContext<T>
@@ -42,11 +35,6 @@ namespace Z0
         /// The default number times to repeat a cycle
         /// </summary>
         protected const int DefaultRoundCount = Pow2.T01;
-
-        /// <summary>
-        /// The default rouding precision
-        /// </summary>
-        protected const int DefaultScale = 6;
 
         public ITestConfig Config {get; private set;}
 
@@ -86,27 +74,28 @@ namespace Z0
         /// </summary>
         protected virtual int OpCount
             => RoundCount*CycleCount;
-
-        /// <summary>
-        /// Specifies the number of decimal places that relevant for some purpose
-        /// </summary>
-        protected virtual int Scale
-            => DefaultScale;
         
         public virtual bool Enabled 
             => true;
 
-        public IEnumerable<TestCaseRecord> PopOutcomes()
+        public IEnumerable<TestCaseRecord> TakeOutcomes()
         {
             while(TestOutcomes.Any())
                 yield return TestOutcomes.Dequeue();
         }
 
-        public void ReportOutcome(string opname, bool succeeded, TimeSpan duration)
-            => TestOutcomes.Enqueue(TestCaseRecord.Define(opname,succeeded,duration));
+        public TestCaseRecord ReportOutcome(string opname, bool succeeded, TimeSpan duration)
+        {
+            var record = TestCaseRecord.Define(opname,succeeded,duration);
+            TestOutcomes.Enqueue(record);
+            return record;
+        }
 
-        public void ReportBenchmark(string opname, long opcount, TimeSpan duration)
-             => Enqueue(BenchmarkRecord.Define(opname, opcount, duration));
-
+        public BenchmarkRecord ReportBenchmark(string opname, long opcount, TimeSpan duration)
+        {
+            var record = BenchmarkRecord.Define(opname, opcount, duration);
+            Enqueue(record);
+            return record;
+        }
     }
 }

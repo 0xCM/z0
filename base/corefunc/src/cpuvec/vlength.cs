@@ -12,22 +12,22 @@ using Z0;
 partial class zfunc
 {
     /// <summary>
-    /// Returns the number of components that comprise a 128-bit vector
+    /// Computes the vector component count for a given bit-width and component type
     /// </summary>
-    /// <param name="n">The bitness selector</param>
-    /// <typeparam name="T">The primal component type</typeparam>
+    /// <param name="w">The width selector</param>
+    /// <typeparam name="T">The vector component type</typeparam>
     [MethodImpl(Inline)]
-    public static int vlength<T>(N128 n)
+    public static int vcount<T>(N128 w, T t = default)
         where T : unmanaged
             => Vector128<T>.Count;
 
     /// <summary>
-    /// Returns the number of components that comprise a 256-bit vector
+    /// Computes the vector component count for a given bit-width and component type
     /// </summary>
-    /// <param name="n">The bitness selector</param>
-    /// <typeparam name="T">The primal component type</typeparam>
+    /// <param name="w">The width selector</param>
+    /// <typeparam name="T">The vector component type</typeparam>
     [MethodImpl(Inline)]
-    public static int vlength<T>(N256 n)
+    public static int vcount<T>(N256 w, T t = default)
         where T : unmanaged
             => Vector256<T>.Count;
 }

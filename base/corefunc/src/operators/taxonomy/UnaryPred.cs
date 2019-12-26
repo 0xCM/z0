@@ -34,7 +34,18 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a unary predicate over a non-primal operand
+    /// Defines trait for a vecorized unary predicate that supports componentwise decomposition/evaluation
+    /// </summary>
+    /// <typeparam name="T">The component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVUnaryPredD<T>
+        where T : unmanaged
+    {
+        bit InvokeScalar(T x);
+    }
+
+    /// <summary>
+    /// Characterizes a vectorized unary predicate
     /// </summary>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
@@ -45,10 +56,10 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a unary predicate over a naturally-sized non-primal operand 
+    /// Characterizes a unary predicate parameterized by operand bit width
     /// </summary>
-    /// <typeparam name="W">The natural width type</typeparam>
-    /// <typeparam name="V">The non-primal operand type</typeparam>
+    /// <typeparam name="W">The bit-width type</typeparam>
+    /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryPred<W,V> : IUnaryPred<V>, IVectorOp<W,V>
         where W : unmanaged, ITypeNat
@@ -58,22 +69,22 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a unary predicate over naturally-sized non-primal operands with attendant scalar computation
+    /// Characterizes a vectorized unary predicate parameterized by operand bit width and component type
     /// </summary>
-    /// <typeparam name="W">The natural width type</typeparam>
-    /// <typeparam name="V">The non-primal type</typeparam>
-    /// <typeparam name="T">The scalar type</typeparam>
+    /// <typeparam name="W">The bit-width type</typeparam>
+    /// <typeparam name="V">The operand type</typeparam>
+    /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryPred<W,V,T> : IVUnaryPred<W,V>, IVectorOp<W,V,T>    
         where W : unmanaged, ITypeNat
         where V : struct
         where T : unmanaged
     {
-        bit InvokeScalar(T a);           
+           
     }
 
     /// <summary>
-    /// Characterizes a unary predicate over 128-bit intrinsic vectors
+    /// Characterizes a vectorized unary predicate over 128-bit operands
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
@@ -83,7 +94,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a unary predicate over 256-bit intrinsic vectors
+    /// Characterizes a vectorized unary predicate over 256-bit operands
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
@@ -93,4 +104,25 @@ namespace Z0
         
     }
 
+   /// <summary>
+    /// Characterizes a vectorized unary predicate over 128-bit operands that also supports componentwise decomposition/evaluation
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVUnaryPred128D<T> : IVUnaryPred128<T>, IVUnaryPredD<T>
+        where T : unmanaged
+    {
+    
+    }
+
+    /// <summary>
+    /// Characterizes a vectorized unary predicate over 128-bit operands that also supports componentwise decomposition/evaluation
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVUnaryPred256D<T> : IVUnaryPred256<T>, IVUnaryPredD<T>
+        where T : unmanaged
+    {
+    
+    }
 }

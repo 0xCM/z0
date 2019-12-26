@@ -11,53 +11,54 @@ namespace Z0
 
     public class t_vlt : t_vinx<t_vlt>
     {        
-        public void vlt_128x8i()
-            => vlt_check<sbyte>(n128,z8i);
+        public void vlt_check()
+        {
+            
+            void check128(N128 w = default)
+            {
+                v_check(VOps.vlt(w,z8), w, z8);                
+                v_check(VOps.vlt(w,z8i), w, z8i);
+                v_check(VOps.vlt(w,z16),  w, z16);
+                v_check(VOps.vlt(w,z16i), w, z16i);
+                v_check(VOps.vlt(w,z32), w, z32);
+                v_check(VOps.vlt(w,z32i), w, z32i);
+                v_check(VOps.vlt(w,z64), w, z64);
+                v_check(VOps.vlt(w,z64i), w, z64i);
 
-        public void vlt_128x8u()
-            => vlt_check<byte>(n128,z8);
+            }
 
-        public void vlt_128x16i()
-            => vlt_check<short>(n128,z16i);
+            void check256(N256 w = default)
+            {
+                v_check(VOps.vlt(w,z8), w, z8);                
+                v_check(VOps.vlt(w,z8i), w, z8i);
+                v_check(VOps.vlt(w,z16),w, z16);
+                v_check(VOps.vlt(w,z16i),w, z16i);
+                v_check(VOps.vlt(w,z32),w, z32);
+                v_check(VOps.vlt(w,z32i),w, z32i);
+                v_check(VOps.vlt(w,z64),w, z64);
+                v_check(VOps.vlt(w,z64i),w, z64i);
+            }            
 
-        public void vlt_128x16u()
-            => vlt_check<ushort>(n128,z16);
+            check128();
+            check256();
+        }
 
-        public void vlt_128x32i()
-            => vlt_check<int>(n128,z32i);
+        void v_check<F,T>(F f, N128 w, T t = default)
+            where T : unmanaged
+            where F : IVBinOp128D<T>
+        {
+            check_binary_scalar_match(f,w,t);
 
-        public void vlt_128x32u()
-            => vlt_check<uint>(n128,z32); 
+        }
 
-        public void vlt_128x64i()
-            => vlt_check<long>(n128); 
-
-        public void vlt_128x64u()
-            => vlt_check<ulong>(n128); 
-
-        public void vlt_256x8i()
-            => vlt_check<sbyte>(n256);
-
-        public void vlt_256x8u()
-            => vlt_check<byte>(n256);
-
-        public void vlt_256x16i()
-            => vlt_check<short>(n256);
-
-        public void vlt_256x16u()
-            => vlt_check<ushort>(n256);
-
-        public void vlt_256x32i()
-            => vlt_check<int>(n256);
-
-        public void vlt_256x32u()
-            => vlt_check<uint>(n256);
-
-        public void vlt_256x64i()
-            => vlt_check<long>(n256);
-
-        public void vlt_256x64u()
-            => vlt_check<ulong>(n256);
-
+        void v_check<F,T>(F f, N256 w, T t = default)
+            where T : unmanaged
+            where F : IVBinOp256D<T>
+        {
+            check_binary_scalar_match(f,w,t);
+            
+        }    
+ 
+ 
     }
 }

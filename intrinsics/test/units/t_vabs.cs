@@ -11,30 +11,37 @@ namespace Z0
     public class t_vabs : t_vinx<t_vabs>
     {
 
-        public void vabs_256x64()
+        public void check()
         {
-            abs64_check();
+            check(n128);
+            check(n256);
+        }
+        
+        void check(N128 w)
+        {
+            check(VOps.vabs(w,z8i), w, z8i);
+            check(VOps.vabs(w,z16i), w, z16i);
+            check(VOps.vabs(w,z32i), w, z32i);
+            check(VOps.vabs(w,z64i), w, z64i);
         }
 
-        void abs64_check(int cycles = DefaltCycleCount)
+        void check(N256 w)
         {
-            for(var cycle = 0; cycle < cycles; cycle++)
-            {
-                var x = Random.CpuVector<long>(n256);            
-                var actual = dinx.vabs(x);
-                var expect = x.Map(Math.Abs);
-                Claim.eq(expect, actual);
-            }
-
-            for(var cycle = 0; cycle < cycles; cycle++)
-            {
-                var x = Random.CpuVector<long>(n128);            
-                var actual = dinx.vabs(x);
-                var expect = x.Map(Math.Abs);
-                Claim.eq(expect, actual);
-            }
-
+            check(VOps.vabs(w,z8i), w, z8i);
+            check(VOps.vabs(w,z16i), w, z16i);
+            check(VOps.vabs(w,z32i), w, z32i);
+            check(VOps.vabs(w,z64i), w, z64i);
         }
+
+        void check<F,T>(F f, N128 w, T t = default)
+            where T : unmanaged
+            where F : IVUnaryOp128D<T>
+                => check_unary_scalar_match(f,w,t);
+            
+        void check<F,T>(F f, N256 w, T t = default)
+            where T : unmanaged
+            where F : IVUnaryOp256D<T>
+                => check_unary_scalar_match(f,w,t);
 
     }
 

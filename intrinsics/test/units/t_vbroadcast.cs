@@ -70,5 +70,26 @@ namespace Z0
 
         public void vbc_256x64f()
             => vbroadcast_check<double>(n256);
+
+        protected void vbroadcast_check<T>(N128 w, T t = default)
+            where T : unmanaged
+        {
+            var x = Random.Next<T>();
+            var vX = CpuVector.vbroadcast(w,x);
+            var data = vX.ToSpan();
+            for(var i=0; i<data.Length; i++)
+                Claim.eq(x,data[i]);            
+        }
+
+        protected void vbroadcast_check<T>(N256 w, T t = default)
+            where T : unmanaged
+        {
+            var x = Random.Next<T>();
+            var vX = CpuVector.vbroadcast(w,x);
+            var data = vX.ToSpan();
+            for(var i=0; i<data.Length; i++)
+                Claim.eq(x,data[i]);
+        }
+
     }
 }

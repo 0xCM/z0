@@ -12,37 +12,33 @@ namespace Z0
 
     partial class VOpTypes
     {
-        public readonly struct VsllOp128<T> : IVShiftOp128<T>
+        public readonly struct Sll128<T> : IVShiftOp128D<T>
             where T : unmanaged
         {
-            public static VsllOp128<T> Op => default;
+            public static Sll128<T> Op => default;
 
             public string Moniker => moniker<N128,T>("vsll");
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, byte offset)
-                => ginx.vsll(x,offset);
+            public Vector128<T> Invoke(Vector128<T> x, byte offset) => ginx.vsll(x,offset);
             
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, byte offset)
-                => gmath.sll(a,offset);
+            public T InvokeScalar(T a, byte offset) => gmath.sll(a,offset);
 
         }
 
-        public readonly struct VsllOp256<T> : IVShiftOp256<T>
+        public readonly struct Sll256<T> : IVShiftOp256D<T>
             where T : unmanaged
         {
-            public static VsllOp256<T> Op => default;
+            public static Sll256<T> Op => default;
 
             public string Moniker => moniker<N256,T>("vsll");
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, byte offset)
-                => ginx.vsll(x,offset);
+            public Vector256<T> Invoke(Vector256<T> x, byte offset) => ginx.vsll(x,offset);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, byte offset)
-                => gmath.sll(a,offset);
+            public T InvokeScalar(T a, byte offset) => gmath.sll(a,offset);
         }
 
     }

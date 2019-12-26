@@ -10,45 +10,46 @@ namespace Z0
 
     public class t_vxor : t_vinx<t_vxor>
     {
-        public void vxor_check()
-        {
-            
-            void check_128(N128 w = default)
-            {
-                vxor_check(VOps.vxor(w,z8));                
-                vxor_check(VOps.vxor(w,z8i));
-                vxor_check(VOps.vxor(w,z16));
-                vxor_check(VOps.vxor(w,z16i));
-                vxor_check(VOps.vxor(w,z32));
-                vxor_check(VOps.vxor(w,z32i));
-                vxor_check(VOps.vxor(w,z64));
-                vxor_check(VOps.vxor(w,z64i));
-
-            }
-
-            void check_256(N256 w = default)
-            {
-                vxor_check(VOps.vxor(w,z8));                
-                vxor_check(VOps.vxor(w,z8i));
-                vxor_check(VOps.vxor(w,z16));
-                vxor_check(VOps.vxor(w,z16i));
-                vxor_check(VOps.vxor(w,z32));
-                vxor_check(VOps.vxor(w,z32i));
-                vxor_check(VOps.vxor(w,z64));
-                vxor_check(VOps.vxor(w,z64i));
-            }            
-
-            check_128();
-            check_256();
+        public void check()
+        {    
+            check(n128);
+            check(n256);
         }
 
-        void vxor_check<T>(IVBinOp128<T> op)
-            where T : unmanaged
-                => check_scalar_match(op);
-            
+        void check(N128 w)
+        {
+            check(VOps.vxor(w,z8), w, z8);                
+            check(VOps.vxor(w,z8i), w, z8i);
+            check(VOps.vxor(w,z16),  w, z16);
+            check(VOps.vxor(w,z16i), w, z16i);
+            check(VOps.vxor(w,z32), w, z32);
+            check(VOps.vxor(w,z32i), w, z32i);
+            check(VOps.vxor(w,z64), w, z64);
+            check(VOps.vxor(w,z64i), w, z64i);
 
-        void vxor_check<T>(IVBinOp256<T> op)
+        }
+
+        void check(N256 w)
+        {
+            check(VOps.vxor(w,z8), w, z8);                
+            check(VOps.vxor(w,z8i), w, z8i);
+            check(VOps.vxor(w,z16),  w, z16);
+            check(VOps.vxor(w,z16i), w, z16i);
+            check(VOps.vxor(w,z32), w, z32);
+            check(VOps.vxor(w,z32i), w, z32i);
+            check(VOps.vxor(w,z64), w, z64);
+            check(VOps.vxor(w,z64i), w, z64i);
+        }            
+
+        void check<F,T>(F f, N128 w, T t = default)
             where T : unmanaged
-                => check_scalar_match(op);
+            where F : IVBinOp128D<T>
+                => check_binary_scalar_match(f,w,t);
+            
+        void check<F,T>(F f, N256 w, T t = default)
+            where T : unmanaged
+            where F : IVBinOp256D<T>
+                => check_binary_scalar_match(f,w,t);
+
     }
 }

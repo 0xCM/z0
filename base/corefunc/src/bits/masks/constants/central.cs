@@ -131,6 +131,7 @@ namespace Z0
         /// </summary>
         public const ushort Central16x12 = (ushort) Msb8x8x6 | (ushort)Lsb8x8x6 << 8; 
 
+
         /// <summary>
         /// [01111111 11111110]
         /// </summary>

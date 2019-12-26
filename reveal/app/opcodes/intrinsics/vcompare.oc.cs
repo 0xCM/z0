@@ -14,48 +14,41 @@ namespace Z0.OpCodes
     public static class vcompare
     {                
 
-        public static Vector128<int> vcmplt_128x32i(Vector128<int> x, Vector128<int> y)
+        public static Vector128<int> vlt_128x32i(Vector128<int> x, Vector128<int> y)
             => dinx.vlt(x,y);
 
-        public static Vector128<int> vcmplt_g128x32i(Vector128<int> x, Vector128<int> y)
+        public static Vector128<int> vlt_g128x32i(Vector128<int> x, Vector128<int> y)
             => ginx.vlt(x,y);
 
-        public static Vector128<uint> vcmplt_128x32u(Vector128<uint> x, Vector128<uint> y)
+        public static Vector128<int> vlt_o128x32i(Vector128<int> x, Vector128<int> y)
+            => Pipes.apply(x,y, VOps.vlt(n128,z32i));
+
+        public static Vector128<uint> vlt_128x32u(Vector128<uint> x, Vector128<uint> y)
             => dinx.vlt(x,y);
 
-        public static Vector128<uint> vcmplt_g128x32u(Vector128<uint> x, Vector128<uint> y)
+        public static Vector128<uint> vlt_g128x32u(Vector128<uint> x, Vector128<uint> y)
             => ginx.vlt(x,y);
 
-        public static Vector128<long> vcmplt_128x64i(Vector128<long> x, Vector128<long> y)
+        public static Vector128<uint> vlt_o128x32u(Vector128<uint> x, Vector128<uint> y)
+            => Pipes.apply(x,y, VOps.vlt(n128,z32));
+
+        public static Vector128<long> vlt_128x64i(Vector128<long> x, Vector128<long> y)
             => dinx.vlt(x,y);
 
-        public static Vector128<long> vcmplt_g128x64i(Vector128<long> x, Vector128<long> y)
+        public static Vector128<long> vlt_g128x64i(Vector128<long> x, Vector128<long> y)
             => ginx.vlt(x,y);
 
-        public static Vector128<ulong> vcmplt_128x64u(Vector128<ulong> x, Vector128<ulong> y)
+        public static Vector128<long> vlt_o128x64i(Vector128<long> x, Vector128<long> y)
+            => Pipes.apply(x,y, VOps.vlt(n128,z64i));
+
+        public static Vector256<byte> vlt_256x8u(Vector256<byte> x, Vector256<byte> y)
             => dinx.vlt(x,y);
 
-        public static Vector128<ulong> vcmplt_g128x64u(Vector128<ulong> x, Vector128<ulong> y)
+        public static Vector256<byte> vlt_g256x8u(Vector256<byte> x, Vector256<byte> y)
             => ginx.vlt(x,y);
 
-
-        public static Vector256<byte> vcmplt_256x8u(Vector256<byte> x, Vector256<byte> y)
-            => dinx.vlt(x,y);
-
-        public static Vector256<byte> vcmplt_g256x8u(Vector256<byte> x, Vector256<byte> y)
-            => ginx.vlt(x,y);
-
-        public static Vector256<long> vcmplt_256x64i(Vector256<long> x, Vector256<long> y)
-            => dinx.vlt(x,y);
-
-        public static Vector256<long> vcmplt_g256x64i(Vector256<long> x, Vector256<long> y)
-            => ginx.vlt(x,y);
-
-        public static Vector256<ulong> vcmplt_256x64u(Vector256<ulong> x, Vector256<ulong> y)
-            => dinx.vlt(x,y);
-
-        public static Vector256<ulong> vcmplt_g256x64u(Vector256<ulong> x, Vector256<ulong> y)
-            => ginx.vlt(x,y);
+        public static Vector256<byte> vlt_o256x8u(Vector256<byte> x, Vector256<byte> y)
+            => Pipes.apply(x,y, VOps.vlt(n256,z8));
 
         public static bool vtestz_d128x8i(Vector128<sbyte> src, Vector128<sbyte> mask)
             => dinx.vtestz(src,mask);

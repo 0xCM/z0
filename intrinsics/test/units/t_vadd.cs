@@ -10,46 +10,45 @@ namespace Z0
 
     public class t_vadd : t_vinx<t_vadd>
     {
-        public void vadd_check()
-        {
-            
-            void check_128(N128 w = default)
-            {
-                vadd_check(VOps.vadd(w,z8));                
-                vadd_check(VOps.vadd(w,z8i));
-                vadd_check(VOps.vadd(w,z16));
-                vadd_check(VOps.vadd(w,z16i));
-                vadd_check(VOps.vadd(w,z32));
-                vadd_check(VOps.vadd(w,z32i));
-                vadd_check(VOps.vadd(w,z64));
-                vadd_check(VOps.vadd(w,z64i));
-
-            }
-
-            void check_256(N256 w = default)
-            {
-                vadd_check(VOps.vadd(w,z8));                
-                vadd_check(VOps.vadd(w,z8i));
-                vadd_check(VOps.vadd(w,z16));
-                vadd_check(VOps.vadd(w,z16i));
-                vadd_check(VOps.vadd(w,z32));
-                vadd_check(VOps.vadd(w,z32i));
-                vadd_check(VOps.vadd(w,z64));
-                vadd_check(VOps.vadd(w,z64i));
-            }            
-
-            check_128();
-            check_256();
+        public void check()
+        {            
+            check(n128);
+            check(n256);
         }
 
-        void vadd_check<T>(IVBinOp128<T> op)
+        void check(N128 w)
+        {
+            check(VOps.vadd(w,z8), w, z8);                
+            check(VOps.vadd(w,z8i), w, z8i);
+            check(VOps.vadd(w,z16),  w, z16);
+            check(VOps.vadd(w,z16i), w, z16i);
+            check(VOps.vadd(w,z32), w, z32);
+            check(VOps.vadd(w,z32i), w, z32i);
+            check(VOps.vadd(w,z64), w, z64);
+            check(VOps.vadd(w,z64i), w, z64i);
+
+        }
+
+        void check(N256 w)
+        {
+            check(VOps.vadd(w,z8), w, z8);                
+            check(VOps.vadd(w,z8i), w, z8i);
+            check(VOps.vadd(w,z16),  w, z16);
+            check(VOps.vadd(w,z16i), w, z16i);
+            check(VOps.vadd(w,z32), w, z32);
+            check(VOps.vadd(w,z32i), w, z32i);
+            check(VOps.vadd(w,z64), w, z64);
+            check(VOps.vadd(w,z64i), w, z64i);
+        }            
+
+        void check<F,T>(F f, N128 w, T t = default)
             where T : unmanaged
-                => check_scalar_match(op);
+            where F : IVBinOp128D<T>
+                => check_binary_scalar_match(f,w,t);
             
-
-        void vadd_check<T>(IVBinOp256<T> op)
+        void check<F,T>(F f, N256 w, T t = default)
             where T : unmanaged
-                => check_scalar_match(op);
-
+            where F : IVBinOp256D<T>
+                => check_binary_scalar_match(f,w,t);
     }
 }

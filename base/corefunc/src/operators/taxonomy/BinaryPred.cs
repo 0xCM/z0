@@ -56,6 +56,17 @@ namespace Z0
     }
 
     /// <summary>
+    /// Defines trait for a vecorized binary predicate that supports componentwise decomposition/evaluation
+    /// </summary>
+    /// <typeparam name="T">The component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVBinaryPredD<T>
+        where T : unmanaged
+    {
+        bit InvokeScalar(T x, T y);
+    }
+
+    /// <summary>
     /// Characterizes a natural binary predicate over non-primal operands that support scalar application
     /// </summary>
     /// <typeparam name="W">The natural type</typeparam>
@@ -67,28 +78,49 @@ namespace Z0
         where V : struct
         where T : unmanaged
     {
-        bit InvokeScalar(T a, T b);           
+        
     }
 
     /// <summary>
-    /// Characterizes a binary predicate over 128-bit intrinsic vectors
+    /// Characterizes a vectorized binary predicate over 128-bit operands
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryPred128<T> : IVBinaryPred<N128,Vector128<T>,T>
+    public interface IVBinPred128<T> : IVBinaryPred<N128,Vector128<T>,T>
         where T : unmanaged
     {
     }
 
     /// <summary>
-    /// Characterizes a binary predicate over 256-bit intrinsic vectors
+    /// Characterizes a vectorized binary predicate over 256-bit operands
     /// </summary>
-    /// <typeparam name="T">The vector component type</typeparam>
+    /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryPred256<T> : IVBinaryPred<N256,Vector256<T>,T>
+    public interface IVBinPred256<T> : IVBinaryPred<N256,Vector256<T>,T>
         where T : unmanaged
     {
         
     }
 
+    /// <summary>
+    /// Characterizes a vectorized binary predicate over 128-bit operands that also supports componentwise decomposition/evaluation
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVBinPred128D<T> : IVBinPred128<T>, IVBinaryPredD<T>
+        where T : unmanaged
+    {
+    
+    }
+
+    /// <summary>
+    /// Characterizes a vectorized binary predicate over 128-bit operands that also supports componentwise decomposition/evaluation
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVBinPred256D<T> : IVBinPred256<T>, IVBinaryPredD<T>
+        where T : unmanaged
+    {
+    
+    }
 }

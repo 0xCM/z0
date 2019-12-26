@@ -20,13 +20,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vabs(vcast8i(x)));
+                return vgeneric<T>(dinx.vabs(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vabs(vcast16i(x)));
+                return vgeneric<T>(dinx.vabs(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vabs(vcast32i(x)));
+                return vgeneric<T>(dinx.vabs(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dinx.vabs(vcast64i(x)));
+                return vgeneric<T>(dinx.vabs(v64i(x)));
             else
                 throw unsupported<T>();
         }
@@ -36,13 +36,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vabs(vcast8i(x)));
+                return vgeneric<T>(dinx.vabs(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vabs(vcast16i(x)));
+                return vgeneric<T>(dinx.vabs(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vabs(vcast32i(x)));
+                return vgeneric<T>(dinx.vabs(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dinx.vabs(vcast64i(x)));
+                return vgeneric<T>(dinx.vabs(v64i(x)));
             else
                 throw unsupported<T>();
         }

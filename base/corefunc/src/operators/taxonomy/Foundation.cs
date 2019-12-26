@@ -25,27 +25,43 @@ namespace Z0
 
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVectorOp<T> : IOp
-        where T : struct
-    {
-
-    }
-
-    [SuppressUnmanagedCodeSecurity]
     public interface IPrimalOp<T> : IOp
         where T : unmanaged
     {
 
     }
 
+
+    /// <summary>
+    /// Characterizes a vectorized operator
+    /// </summary>
+    /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVectorOp<W,V> : IOp
+    public interface IVectorOp<V> : IOp
         where V : struct
-        where W : unmanaged, ITypeNat
     {
 
     }
 
+    /// <summary>
+    /// Characterizes a vectorized operator parameterized by operand bit width
+    /// </summary>
+    /// <typeparam name="W">The bit-width type</typeparam>
+    /// <typeparam name="V">The operand type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVectorOp<W,V> : IOp
+        where W : unmanaged, ITypeNat
+        where V : struct
+    {
+
+    }
+
+    /// <summary>
+    /// Characterizes a vectorized operator parameterized by operand bit width and component type
+    /// </summary>
+    /// <typeparam name="W">The bit-width type</typeparam>
+    /// <typeparam name="V">The operand type</typeparam>
+    /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVectorOp<W,V,T> : IVectorOp<W,V>
         where W : unmanaged, ITypeNat

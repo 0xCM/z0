@@ -40,26 +40,6 @@ namespace Z0
             where T : unmanaged
                 => CpuVector.vcount(w,t);
 
-        protected void vbroadcast_check<T>(N128 w, T t = default)
-            where T : unmanaged
-        {
-            var x = Random.Next<T>();
-            var vX = CpuVector.vbroadcast(w,x);
-            var data = vX.ToSpan();
-            for(var i=0; i<data.Length; i++)
-                Claim.eq(x,data[i]);            
-        }
-
-        protected void vbroadcast_check<T>(N256 w, T t = default)
-            where T : unmanaged
-        {
-            var x = Random.Next<T>();
-            var vX = CpuVector.vbroadcast(w,x);
-            var data = vX.ToSpan();
-            for(var i=0; i<data.Length; i++)
-                Claim.eq(x,data[i]);
-        }
-
         protected void cmp_gt_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
@@ -279,7 +259,7 @@ namespace Z0
             where T : unmanaged
         {
 
-            var len = vlength<T>(w);
+            var len = zfunc.vcount<T>(w);
             var src = Random.CpuVector<T>(w);
             var actual = src.ToSpan();
             var expect = span<T>(len);
@@ -291,7 +271,7 @@ namespace Z0
         protected void vextract_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var len = vlength<T>(w);
+            var len = zfunc.vcount<T>(w);
             var half = len >> 1;
             var src = Random.CpuVector<T>(w);
             var srcData = span<T>(len);
@@ -310,45 +290,6 @@ namespace Z0
             Claim.eq(y1,z1);
 
         }
-
-        protected void vreverse_check<N,T>(N w = default, T t = default)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-        {
-            if(typeof(N) == typeof(N128))
-                vreverse_check<T>(n128);
-            else if(typeof(N) == typeof(N256))
-                vreverse_check<T>(n256);
-            else
-                throw unsupported<N>();        
-        }
-
-        protected void vreverse_check<T>(N128 w, T t = default)
-            where T : unmanaged
-        {
-            for(var i=0; i< SampleCount; i++)
-            {
-                var inc = CpuVector.vincrements<T>(w);
-                var dec = CpuVector.vdecrements<T>(w);
-                var y = ginx.vreverse(inc);
-                Claim.eq(dec, y);
-                Claim.eq(inc, ginx.vreverse(y));
-            }
-        }
-
-        protected void vreverse_check<T>(N256 w, T t = default)
-            where T : unmanaged
-        {
-            for(var i=0; i< SampleCount; i++)
-            {
-                var inc = CpuVector.vincrements<T>(w);
-                var dec = CpuVector.vdecrements<T>(w);
-                var y = ginx.vreverse(inc);
-                Claim.eq(dec, y);
-                Claim.eq(inc, ginx.vreverse(y));
-            }
-        }
-
 
         protected void vtestz_check<T>(N128 n = default, T t = default)
             where T : unmanaged
@@ -398,7 +339,7 @@ namespace Z0
         protected void vhi_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var count = vlength<T>(w);
+            var count = zfunc.vcount<T>(w);
             for(var sample=0; sample< SampleCount; sample++)
             {                
                 var x = Random.CpuVector<T>(w,t);
@@ -412,7 +353,7 @@ namespace Z0
         protected void vhi_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var count = vlength<T>(w);
+            var count = zfunc.vcount<T>(w);
             for(var sample=0; sample< SampleCount; sample++)
             {                
                 var x = Random.CpuVector<T>(w,t);
@@ -641,8 +582,6 @@ namespace Z0
             var src = Random.Blocks<T>(n, blocks);
             var dst = DataBlocks.alloc<T>(n, blocks);
             ginx.vnegate(src,dst);
-
-            //vblock.negate(n, blocks, step, in src.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.negate(src[i]), dst[i]);
         }
@@ -1052,35 +991,6 @@ namespace Z0
             }
         }
 
-        protected void vsllv_check<T>(N128 w, T t = default)
-            where T : unmanaged
-        {
-            var shiftrange = (default(T),convert<int,T>(bitsize(t) - 1));
-            var buffer = DataBlocks.single<T>(w);
-            for(var sample = 0; sample < SampleCount; sample++)
-            {
-                var x = Random.CpuVector<T>(w);
-                var offsets = Random.CpuVector<T>(w, shiftrange);
-                var actual = ginx.vsllv(x,offsets);
-                var expect = CpuVector.vload(w,mathspan.sllv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
-                Claim.eq(expect, actual);
-            }
-        }
-
-        protected void vsllv_check<T>(N256 w, T t = default)
-            where T : unmanaged
-        {
-            var shiftrange = (default(T),convert<int,T>(bitsize(t) - 1));
-            var buffer = DataBlocks.single<T>(w);
-            for(var sample = 0; sample < SampleCount; sample++)
-            {
-                var x = Random.CpuVector<T>(w);
-                var offsets = Random.CpuVector<T>(w, shiftrange);
-                var actual = ginx.vsllv(x,offsets);
-                var expect = CpuVector.vload(w,mathspan.sllv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
-                Claim.eq(expect, actual);
-            }
-        }
 
 
         public void vbyteswap_check_256<T>(N128 w, T t = default)
@@ -1109,6 +1019,5 @@ namespace Z0
                     
             }
         }
-
     }
 }

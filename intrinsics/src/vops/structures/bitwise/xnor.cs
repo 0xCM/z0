@@ -12,10 +12,10 @@ namespace Z0
 
     partial class VOpTypes
     {
-        public readonly struct VxnorOp128<T> : IVBinOp128<T>
+        public readonly struct Xnor128<T> : IVBinOp128D<T>
             where T : unmanaged
         {
-            public static VxnorOp128<T> Op => default;
+            public static Xnor128<T> Op => default;
 
             public string Moniker => moniker<N128,T>("vxnor");
 
@@ -24,25 +24,22 @@ namespace Z0
                 => ginx.vxnor(x,y);
             
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b)
-                => gmath.xnor(a,b);
+            public T InvokeScalar(T a, T b) => gmath.xnor(a,b);
         }
 
-        public readonly struct VxnorOp256<T> : IVBinOp256<T>
+        public readonly struct Xnor256<T> : IVBinOp256D<T>
             where T : unmanaged
         {
-            public static VxnorOp256<T> Op => default;
+            public static Xnor256<T> Op => default;
 
             public string Moniker => moniker<N256,T>("vxnor");
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)
-                => ginx.vxnor(x,y);
+            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vxnor(x,y);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b)
-                => gmath.xnor(a,b);
+            public T InvokeScalar(T a, T b) => gmath.xnor(a,b);
         }
 
-        }
+    }
 }

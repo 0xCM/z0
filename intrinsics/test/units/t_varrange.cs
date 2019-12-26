@@ -39,24 +39,6 @@ namespace Z0
             var z2 = dinx.vduplicate(n1,n64, x2);
         }
         
-        public void vreverse_128x8u_outline()
-        {
-            var n = n128;
-            var v1 = CpuVector.vincrements<byte>(n);
-            var v2 = CpuVector.vdecrements<byte>(n);
-            var v3 = dinx.vreverse(v1);
-            Claim.eq(v2,v3);
-        }
-
-        public void vreverse_256x8u_outline()
-        {
-            var n = n256;
-            var v1 = CpuVector.vincrements<byte>(n);
-            var v2 = CpuVector.vdecrements<byte>(n);            
-            var v3 = dinx.vreverse(v1);
-            Claim.eq(v2,v3);
-        }
-
         public void alt_256x8u_outline()
         {
             var n = n256;
@@ -64,25 +46,6 @@ namespace Z0
             var xs = x.ToSpan();
             for(var i=0; i<xs.Length; i++)
                 Claim.eq(even(i) ? 0xAA : 0x55,  xs[i]);
-        }
-
-        public void vreverse_256x32u()
-        {
-            var n = n256;
-
-            var spec = CpuVector.parts(n256, 7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);       
-            //Trace(spec.FormatDataProp("MRev256u32"));
-
-            for(var i = 0; i< SampleCount; i++)
-            {
-                var x = Random.Blocks<uint>(n);
-                var y = x.Replicate();
-                y.Data.Reverse();
-            
-                var expect = CpuVector.vload(y);
-                var actual = dinx.vreverse(x.LoadVector());
-                Claim.eq(expect, actual);
-            }
         }
 
         public static Vector256<int> vswap_ref(Vector256<int> src, byte i, byte j)

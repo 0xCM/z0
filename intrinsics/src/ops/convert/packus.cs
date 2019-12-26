@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vpackus2(Vector128<ushort> x, Vector128<ushort> y)
+        public static Vector128<byte> vpackus_alt(Vector128<ushort> x, Vector128<ushort> y)
             => v8u(vor(
                     vshuf16x8(x, VData.packusLo(n128,n16,n8)),
                     vshuf16x8(y, VData.packusHi(n128,n16,n8))));
@@ -86,7 +86,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vpackus2(Vector128<uint> x, Vector128<uint> y)
+        public static Vector128<ushort> vpackus_alt(Vector128<uint> x, Vector128<uint> y)
         {
             var v1 = dinx.vshuf16x8(x, VData.packusLo(n128,n32,n16));
             var v2 = dinx.vshuf16x8(y, VData.packusHi(n128,n32,n16));
@@ -125,7 +125,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
         [MethodImpl(Inline)]
-        public static Vector256<byte> vpackus2(Vector256<ushort> x, Vector256<ushort> y)
+        static Vector256<byte> vpackus_alt(Vector256<ushort> x, Vector256<ushort> y)
         {
             var v1 = dinx.vshuf16x8(x,VData.packusLo(n256,n16,n8));
             var v2 = dinx.vshuf16x8(y,VData.packusHi(n256,n16,n8));
@@ -165,12 +165,11 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vpackus2(Vector256<uint> x, Vector256<uint> y)
+        public static Vector256<ushort> vpackus_alt(Vector256<uint> x, Vector256<uint> y)
         {
             var v1 = vshuf16x8(x, VData.packusLo(n256,n32,n16));
             var v2 = vshuf16x8(y, VData.packusHi(n256,n32,n16));
             return v16u(vor(v1,v2));
         }
-
    }
 }

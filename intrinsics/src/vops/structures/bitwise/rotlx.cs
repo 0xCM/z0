@@ -12,10 +12,10 @@ namespace Z0
 
     partial class VOpTypes
     {
-        public readonly struct VrotlxOp128<T> : IVShiftOp128<T>
+        public readonly struct Rotlx128<T> : IVShiftOp128<T>
             where T : unmanaged
         {
-            public static VrotlxOp128<T> Op => default;
+            public static Rotlx128<T> Op => default;
 
             public string Moniker => moniker<N128,T>("vrotlx");
 
@@ -23,28 +23,20 @@ namespace Z0
             public Vector128<T> Invoke(Vector128<T> x, byte offset)
                 => ginx.vrotlx(x,offset);
             
-            [MethodImpl(Inline)]
-            public T InvokeScalar(T a, byte offset)
-                => default;
-
         }
 
-        public readonly struct VrotlxOp256<T> : IVShiftOp256<T>
+        public readonly struct Rotlx256<T> : IVShiftOp256<T>
             where T : unmanaged
         {
-            public static VrotlxOp256<T> Op => default;
+            public static Rotlx256<T> Op => default;
 
             public string Moniker => moniker<N256,T>("vrotlx");
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, byte offset)
-                => ginx.vrotlx(x,offset);
-
-            [MethodImpl(Inline)]
-            public T InvokeScalar(T a, byte offset)
-                => default;
-        }
+            public Vector256<T> Invoke(Vector256<T> x, byte offset) => ginx.vrotlx(x,offset);
 
         }
+
+     }
 
 }

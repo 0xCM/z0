@@ -14,44 +14,44 @@ namespace Z0
     public static class vfunc
     {
         [MethodImpl(Inline)]
-        public static Vector128<T> vpipe<F,G,T>(in Vector128<T> src, F f, G g)
+        public static Vector128<T> vpipe<F,G,T>(Vector128<T> x, F f, G g)
             where T : unmanaged
             where F : IVUnaryOp128<T>
             where G : IVUnaryOp128<T>
-                => g.Invoke(f.Invoke(src));
+                => Pipes.pipe(x,f,g);
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vpipe<F,G,T>(in Vector256<T> src, F f, G g)
+        public static Vector256<T> vpipe<F,G,T>(Vector256<T> x, F f, G g)
             where T : unmanaged
             where F : IVUnaryOp256<T>
             where G : IVUnaryOp256<T>
-                => g.Invoke(f.Invoke(src));
+                => Pipes.pipe(x,f,g);
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vpipe<F,G,T>(in Vector128<T> lhs, in Vector128<T> rhs, F f, G g)
+        public static Vector128<T> vcompose<F,G,T>(Vector128<T> x, Vector128<T> y, F f, G g)
             where T : unmanaged
             where F : IVBinOp128<T>
             where G : IVUnaryOp128<T>
-                => g.Invoke(f.Invoke(lhs,rhs));
+                => Pipes.compose(x,y,f,g);
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vpipe<F,G,T>(in Vector256<T> lhs, in Vector256<T> rhs, F f, G g)
+        public static Vector256<T> vpipe<F,G,T>(Vector256<T> x, Vector256<T> y, F f, G g)
             where T : unmanaged
             where F : IVBinOp256<T>
             where G : IVUnaryOp256<T>
-                => g.Invoke(f.Invoke(lhs,rhs));
+                => Pipes.compose(x,y,f,g);
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vapply<F,T>(in Vector128<T> lhs, in Vector128<T> rhs, F f)
+        public static Vector128<T> vapply<F,T>(Vector128<T> x, Vector128<T> y, F f)
             where T : unmanaged
             where F : IVBinOp128<T>
-                => f.Invoke(lhs,rhs);
+                => Pipes.apply(x,y,f);
         
         [MethodImpl(Inline)]
-        public static Vector256<T> vapply<F,T>(in Vector256<T> lhs, in Vector256<T> rhs, F f)
+        public static Vector256<T> vapply<F,T>(Vector256<T> x, Vector256<T> y, F f)
             where T : unmanaged
             where F : IVBinOp256<T>
-                => f.Invoke(lhs,rhs);
+                => Pipes.apply(x,y,f);
 
         [MethodImpl(Inline)]
         public static ref readonly Block128<T> vzip<F,T>(in Block128<T> lhs, in Block128<T> rhs, in Block128<T> dst, F f)
@@ -124,7 +124,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit vall<F,T>(in Block128<T> lhs, in Block128<T> rhs, F f)
             where T : unmanaged
-            where F : IVBinaryPred128<T>
+            where F : IVBinPred128<T>
         {
             var blocks = lhs.BlockCount;
             var result = bit.On;
@@ -136,7 +136,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit vall<F,T>(in Block256<T> lhs, in Block256<T> rhs, F f)
             where T : unmanaged
-            where F : IVBinaryPred256<T>
+            where F : IVBinPred256<T>
         {
             var blocks = lhs.BlockCount;
             var result = bit.On;

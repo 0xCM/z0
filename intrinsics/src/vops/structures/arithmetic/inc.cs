@@ -12,26 +12,24 @@ namespace Z0
 
     partial class VOpTypes
     {
-        public readonly struct VincOp128<T> : IVUnaryOp128<T>
+        public readonly struct Inc128<T> : IVUnaryOp128D<T>
             where T : unmanaged
         {
-            public static VincOp128<T> Op => default;
+            public static Inc128<T> Op => default;
 
             public string Moniker => moniker<N128,T>("vinc");
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x)
-                => ginx.vinc(x);
+            public Vector128<T> Invoke(Vector128<T> x) => ginx.vinc(x);
             
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a)
-                => gmath.inc(a);
+            public T InvokeScalar(T a) => gmath.inc(a);
         }
 
-        public readonly struct VincOp256<T> : IVUnaryOp256<T>
+        public readonly struct Inc256<T> : IVUnaryOp256D<T>
             where T : unmanaged
         {
-            public static VincOp256<T> Op => default;
+            public static Inc256<T> Op => default;
 
             public string Moniker => moniker<N256,T>("vinc");
 
@@ -40,8 +38,7 @@ namespace Z0
                 => ginx.vinc(x);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a)
-                => gmath.inc(a);
+            public T InvokeScalar(T a) => gmath.inc(a);
         }
 
             

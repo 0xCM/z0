@@ -38,6 +38,5 @@ namespace Z0
         public static void run<F,T>(F f, ArrayExchange<T> src, ArrayExchange<T> dst)
             where F : IUnaryOp<T>
                 => run(f, in src.Head, ref dst.Head, dst.Count);
-
     }
 }

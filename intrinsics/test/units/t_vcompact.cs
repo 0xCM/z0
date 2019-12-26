@@ -23,7 +23,7 @@ namespace Z0
 
             var x = dinx.vsub(vsmax, CpuVector.vincrements(w, z16));
             var y = dinx.vsub(vsmax, CpuVector.vincrements(w, (ushort)8));
-            var actual = dinx.vcompact2(x,y,n128,z8);
+            var actual = dinx.vcompact(x,y,n128,z8);
             
             Claim.eq(expect,actual);            
         }
@@ -39,7 +39,7 @@ namespace Z0
 
             var x = dinx.vsub(vsmax, CpuVector.vincrements(w, z16));
             var y = dinx.vsub(vsmax, CpuVector.vincrements(w, (ushort)16));
-            var actual = dinx.vcompact2(x,y,n256,z8);
+            var actual = dinx.vcompact(x,y,n256,z8);
             
             Claim.eq(expect,actual);            
         }
@@ -55,7 +55,7 @@ namespace Z0
 
             var x = dinx.vsub(vsmax, CpuVector.vincrements(w, 0u));
             var y = dinx.vsub(vsmax, CpuVector.vincrements(w, 4u));
-            var actual = dinx.vcompact2(x,y,n128,z16);
+            var actual = dinx.vcompact(x,y,n128,z16);
             
             Claim.eq(expect,actual);            
         }
@@ -70,7 +70,7 @@ namespace Z0
             
             var x = dinx.vsub(vsmax, CpuVector.vincrements(w, 0u));
             var y = dinx.vsub(vsmax, CpuVector.vincrements(w, 8u));
-            var v = dinx.vcompact2(x,y,n256,z16);
+            var v = dinx.vcompact(x,y,n256,z16);
             var expect = dinx.vsub(vtmax, CpuVector.vincrements(w,z16));
             Claim.eq(expect,v);            
         }
@@ -96,7 +96,7 @@ namespace Z0
             Claim.eq(loExpect, lo);
             Claim.eq(hiExpect, hi);
 
-            var dst = dinx.vcompact2(lo,hi,n128,z8);
+            var dst = dinx.vcompact(lo,hi,n128,z8);
             Claim.eq(src,dst);
         }
 
@@ -118,11 +118,11 @@ namespace Z0
             var c = CpuVector.vincrements<uint>(n,8);
             var d = CpuVector.vincrements<uint>(n,12);
             Vector512<uint> v512 = (a,b,c,d);
-            var abActual = dinx.vcompact2(a,b,n128,z16);
+            var abActual = dinx.vcompact(a,b,n128,z16);
             var abExpect = CpuVector.vincrements<ushort>(n);
             Claim.eq(abExpect, abActual);
 
-            var abcdActual = dinx.vcompact2(a,b,c,d, n128, z8);
+            var abcdActual = dinx.vcompact(a,b,c,d, n128, z8);
             var abcdExpect = CpuVector.vincrements<byte>(n);
             Claim.eq(abcdExpect, abcdActual);
             
@@ -138,10 +138,10 @@ namespace Z0
             var d0 = CpuVector.vincrements<uint>(n,24);      
 
 
-            var compacted = dinx.vcompact2(a0,b0,c0,d0, n256, z8);        
+            var compacted = dinx.vcompact(a0,b0,c0,d0, n256, z8);        
             var inflated = dinx.vinflate(compacted, n1024, z32);
 
-            Claim.eq(CpuVector.vincrements<ushort>(n), dinx.vcompact2(a0,b0,n256,z16));
+            Claim.eq(CpuVector.vincrements<ushort>(n), dinx.vcompact(a0,b0,n256,z16));
             Claim.eq(CpuVector.vincrements<byte>(n), compacted);
             Claim.eq(a0,inflated.A);
             Claim.eq(b0,inflated.B);
@@ -163,7 +163,7 @@ namespace Z0
             void case2()
             {
                 var x = CpuVector.parts(n128,127,0,127,0,127,0,127,0);
-                var y = dinx.vpackus2(x,x);
+                var y = dinx.vpackus_alt(x,x);
                 Trace(y.Format());
             }        
             case1();

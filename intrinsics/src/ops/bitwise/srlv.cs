@@ -22,12 +22,40 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offsets">The offset vector</param>
         [MethodImpl(Inline)]
+        public static Vector128<sbyte> vsrlv(Vector128<sbyte> src, Vector128<sbyte> offsets)
+        {
+            var x = vinflate(src, n256, z16i);
+            var y = vinflate(offsets, n256, z16i);
+            var z = vsrlv(x,y);            
+            return vcompact(z,n128,z8i);
+        }
+
+        /// <summary>
+        /// Computes z[i] := x[i] >> s[i] for i = 0..15
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offsets">The offset vector</param>
+        [MethodImpl(Inline)]
         public static Vector128<byte> vsrlv(Vector128<byte> src, Vector128<byte> offsets)
         {
             var x = vinflate(src, n256, z16);
             var y = vinflate(offsets, n256, z16);
-            var z = vsrlv(x,y);            
-            return vcompact2(z,n128,z8);
+            var z = vsrlv(x,y);
+            return vcompact(z,n128,z8);
+        }
+
+        /// <summary>
+        /// Computes z[i] := x[i] >> s[i] for i = 0..7
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offsets">The offset vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<short> vsrlv(Vector128<short> src, Vector128<short> offsets)
+        {
+            var x = vinflate(src, n256, z32i);
+            var y = v32u(vinflate(offsets,n256,z32i));
+            var z = ShiftRightLogicalVariable(x,y);
+            return vcompact(z,n128,z16i);
         }
 
         /// <summary>
@@ -40,7 +68,8 @@ namespace Z0
         {
             var x = vinflate(src, n256, z32);
             var y = vinflate(offsets, n256, z32);
-            return vcompact2(vsrlv(x,y), n128, z16);
+            var z = ShiftRightLogicalVariable(x,y);
+            return vcompact(z, n128, z16);
         }
 
         /// <summary>
@@ -50,8 +79,8 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="offsets">The offset vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<int> vsrlv(Vector128<int> x, Vector128<uint> offsets)
-            => ShiftRightLogicalVariable(x, offsets);
+        public static Vector128<int> vsrlv(Vector128<int> x, Vector128<int> offsets)
+            => ShiftRightLogicalVariable(x, v32u(offsets));
 
         /// <summary>
         /// __m128i _mm_srlv_epi32 (__m128i a, __m128i count) VPSRLVD xmm, xmm, xmm/m128
@@ -70,8 +99,8 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="offsets">The offset vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<long> vsrlv(Vector128<long> x, Vector128<ulong> offsets)
-            => ShiftRightLogicalVariable(x, offsets);
+        public static Vector128<long> vsrlv(Vector128<long> x, Vector128<long> offsets)
+            => ShiftRightLogicalVariable(x, v64u(offsets));
 
         /// <summary>
         /// __m128i _mm_srlv_epi64 (__m128i a, __m128i count) VPSRLVQ xmm, xmm, xmm/m128
@@ -82,7 +111,20 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<ulong> vsrlv(Vector128<ulong> x, Vector128<ulong> offsets)
             => ShiftRightLogicalVariable(x, offsets);       
- 
+
+        /// <summary>
+        /// Computes z[i] := x[i] >> s[i] for i = 0..31
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offsets">The offset vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<sbyte> vsrlv(Vector256<sbyte> src, Vector256<sbyte> offsets)
+        {
+            (var x0, var x1) = vinflate(src, n512, z16i); 
+            (var s0, var s1) = vinflate(offsets, n512, z16i);
+            return vcompact(vsrlv(x0,s0),vsrlv(x1,s1),n256,z8i);            
+        }
+
         /// <summary>
         /// Computes z[i] := x[i] >> s[i] for i = 0..31
         /// </summary>
@@ -93,7 +135,20 @@ namespace Z0
         {
             (var x0, var x1) = vinflate(src, n512, z16); 
             (var s0, var s1) = vinflate(offsets, n512, z16);
-            return vcompact2(vsrlv(x0,s0),vsrlv(x1,s1),n256,z8);            
+            return vcompact(vsrlv(x0,s0),vsrlv(x1,s1),n256,z8);            
+        }
+
+        /// <summary>
+        /// Computes z[i] := x[i] >> s[i] for i = 0..15
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offsets">The offset vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<short> vsrlv(Vector256<short> src, Vector256<short> offsets)
+        {
+            (var x0, var x1) = vinflate(src, n512, z32i); 
+            (var s0, var s1) = vinflate(offsets, n512, z32i);
+            return vcompact(vsrlv(x0,s0),vsrlv(x1,s1),n256,z16i);            
         }
 
         /// <summary>
@@ -106,7 +161,7 @@ namespace Z0
         {
             (var x0, var x1) = vinflate(src, n512, z32); 
             (var s0, var s1) = vinflate(offsets, n512, z32);
-            return vcompact2(vsrlv(x0,s0),vsrlv(x1,s1),n256,z16);            
+            return vcompact(vsrlv(x0,s0),vsrlv(x1,s1),n256,z16);            
         }
 
         /// <summary>
@@ -147,7 +202,6 @@ namespace Z0
         /// <param name="offsets">The offset vector</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vsrlv(Vector256<ulong> x, Vector256<ulong> offsets)
-            => ShiftRightLogicalVariable(x, offsets); 
-    
+            => ShiftRightLogicalVariable(x, offsets);     
     }
 }

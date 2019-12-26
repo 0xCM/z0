@@ -25,6 +25,12 @@ namespace Z0
         A Invoke(A a);        
     }
 
+    [SuppressUnmanagedCodeSecurity]
+    public interface IUnaryOp<F,A> : IUnaryOp<A>
+        where F : IUnaryOp<A>
+    {
+
+    }
 
     /// <summary>
     /// Characterizes a unary operator that accepts two integral values that define a range
@@ -104,9 +110,9 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a unary operator over a non-primal operand
+    /// Characterizes a vectorized unary operator
     /// </summary>
-    /// <typeparam name="V">The non-primal type</typeparam>
+    /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOp<V> : IVectorOp<V>, IUnaryOp<V>
         where V : struct
@@ -115,10 +121,10 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a unary operator over a naturally-sized non-primal operand
+    /// Characterizes a vectorized unary operator parameterized by operand bit width
     /// </summary>
-    /// <typeparam name="W">The natural width type</typeparam>
-    /// <typeparam name="V">The non-primal type</typeparam>
+    /// <typeparam name="W">The bit-width type</typeparam>
+    /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOp<W,V> : IVUnaryOp<V>, IVectorOp<W,V>
         where W : unmanaged, ITypeNat
@@ -128,26 +134,46 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a unary operator over a naturally-sized non-primal operand with attendant scalar computation
+    /// Characterizes a vectorized binary operator parameterized by operand bit width and component type
     /// </summary>
-    /// <typeparam name="W">The natural width type</typeparam>
-    /// <typeparam name="V">The non-primal type</typeparam>
-    /// <typeparam name="T">The scalar type</typeparam>
+    /// <typeparam name="W">The bit-width type</typeparam>
+    /// <typeparam name="V">The operand type</typeparam>
+    /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOp<W,V,T> : IVUnaryOp<W,V>
         where W : unmanaged, ITypeNat
         where V : struct
         where T : unmanaged
     {
+
+    }
+
+    /// <summary>
+    /// Defines trait for a vecorized unuary operator that supports componentwise decomposition/evaluation
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVUnaryOpD<T>
+        where T : unmanaged
+    {
         T InvokeScalar(T a);
     }
 
+    /// <summary>
+    /// Characterizes a vectorized unary operator over 128-bit operands
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOp128<T> : IVUnaryOp<N128,Vector128<T>,T>
         where T : unmanaged
     {
     }
 
+
+    /// <summary>
+    /// Characterizes a vectorized unary operator over 256-bit operands
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOp256<T> : IVUnaryOp<N256,Vector256<T>,T>
         where T : unmanaged
@@ -155,4 +181,24 @@ namespace Z0
         
     }
 
+    /// <summary>
+    /// Characterizes a vectorized unary operator over 128-bit operands that also supports componentwise decomposition/evaluation
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVUnaryOp128D<T> : IVUnaryOp128<T>, IVUnaryOpD<T>
+        where T : unmanaged
+    {
+    }
+
+    /// <summary>
+    /// Characterizes a vectorized unary operator over 256-bit operands also supports componentwise decomposition/evaluation
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVUnaryOp256D<T> : IVUnaryOp256<T>, IVUnaryOpD<T>
+        where T : unmanaged
+    {
+        
+    }
 }

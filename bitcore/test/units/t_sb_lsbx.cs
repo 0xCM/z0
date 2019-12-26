@@ -34,15 +34,12 @@ namespace Z0
         protected void sb_lsbx_check<T>(T t = default)
             where T : unmanaged
         {
-            var negate = KOps.negate<T>();
-            var and = KOps.and<T>();
 
             for(var i=0; i<SampleCount; i++)
             {
                 var src = Random.Next<T>();
                 var x = gbits.lsbx(src);
-                //var y = gmath.and(src, gmath.negate(src));
-                var y = compose(src, and, negate);
+                var y = gmath.and(src, gmath.negate(src));
                 Claim.eq(x,y);
             }
         }

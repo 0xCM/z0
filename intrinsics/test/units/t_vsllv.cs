@@ -6,39 +6,66 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    using static System.Runtime.Intrinsics.X86.Sse2;
-    using static System.Runtime.Intrinsics.X86.Avx;
-    using static System.Runtime.Intrinsics.X86.Avx2;
-    using static System.Runtime.Intrinsics.X86.Sse41;
+    using System.Runtime.CompilerServices;
     
     using static zfunc;
 
     public class t_vsllv : t_vinx<t_vsllv>
     {
+        void vsllv_check(N128 w = default)
+        {
+            //check_scalar_match(VOps.vsllv<sbyte>(w), TestCase128<sbyte>);
+            //check_scalar_match(VOps.vsllv<short>(w), TestCase128<short>);
 
-        public void vsllv_128x8u()
-            => vsllv_check(n128,z8);
+            check_scalar_match(VOps.vsllv<byte>(w), TestCase128<byte>);
+            check_scalar_match(VOps.vsllv<ushort>(w), TestCase128<ushort>);
+            check_scalar_match(VOps.vsllv<int>(w), TestCase128<int>);
+            check_scalar_match(VOps.vsllv<uint>(w), TestCase128<uint>);
+            check_scalar_match(VOps.vsllv<long>(w), TestCase128<long>);
+            check_scalar_match(VOps.vsllv<ulong>(w), TestCase128<ulong>);
+        }
 
-        public void vsllv_128x16u()
-            => vsllv_check(n128,z16);
+        void vsllv_check(N256 w = default)
+        {
+            //check_scalar_match(VOps.vsllv<sbyte>(w), TestCase256<sbyte>);
+            //check_scalar_match(VOps.vsllv<short>(w), TestCase256<short>);
 
-        public void vsllv_128x32u()
-            => vsllv_check(n128,z32);
+            check_scalar_match(VOps.vsllv<byte>(w), TestCase256<byte>);
+            check_scalar_match(VOps.vsllv<ushort>(w), TestCase256<ushort>);
+            check_scalar_match(VOps.vsllv<int>(w), TestCase256<int>);
+            check_scalar_match(VOps.vsllv<uint>(w), TestCase256<uint>);
+            check_scalar_match(VOps.vsllv<long>(w), TestCase256<long>);
+            check_scalar_match(VOps.vsllv<ulong>(w), TestCase256<ulong>);
+        }
 
-        public void vsllv_128x64u()
-            => vsllv_check(n128,z64);
+        public void vsllv_check()
+        {
+            vsllv_check(n128);
+            vsllv_check(n256);
+        }
 
-        public void vsllv_256x8u()
-            => vsllv_check(n256,z8);
+        [MethodImpl(Inline)]
+        Pair<Vector128<T>> TestCase128<T>(int i)
+            where T : unmanaged        
+        {
+            var t = default(T);
+            var w = n128;
+            var x = Random.CpuVector<T>(w);
+            var bounds = (gmath.zero(t), convert<int,T>(bitsize(t) - 1));
+            var offsets = Random.CpuVector<T>(w, bounds);
+            return (x,offsets);            
+        }
 
-        public void vsllv_256x16u()
-            => vsllv_check(n256,z16);
-
-        public void vsllv_256x32u()
-            => vsllv_check(n256,z32);
-
-        public void vsllv_256x64u()
-            => vsllv_check(n256,z64);
+        [MethodImpl(Inline)]
+        Pair<Vector256<T>> TestCase256<T>(int i)
+            where T : unmanaged        
+        {
+            var t = default(T);
+            var w = n256;
+            var x = Random.CpuVector<T>(w);
+            var bounds = (gmath.zero(t), convert<int,T>(bitsize(t) - 1));
+            var offsets = Random.CpuVector<T>(w, bounds);
+            return (x,offsets);            
+        }
     }
-
 }

@@ -22,9 +22,9 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static VaddOp128<T> vadd<T>(N128 w, T t = default)
+        public static Add128<T> vadd<T>(N128 w, T t = default)
             where T : unmanaged
-                => VaddOp128<T>.Op;
+                => Add128<T>.Op;
 
         /// <summary>
         /// Operator factory for vadd_256xT
@@ -33,9 +33,9 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static VaddOp256<T> vadd<T>(N256 w, T t = default)
+        public static Add256<T> vadd<T>(N256 w, T t = default)
             where T : unmanaged
-                => VaddOp256<T>.Op;
+                => Add256<T>.Op;
 
         /// <summary>
         /// Operator factory for vsub_128xT
@@ -44,9 +44,9 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static VsubOp128<T> vsub<T>(N128 w, T t = default)
+        public static Sub128<T> vsub<T>(N128 w, T t = default)
             where T : unmanaged
-                => VsubOp128<T>.Op;
+                => Sub128<T>.Op;
 
         /// <summary>
         /// Operator factory for vsub_256xT
@@ -55,9 +55,9 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static VsubOp256<T> vsub<T>(N256 w, T t = default)
+        public static Sub256<T> vsub<T>(N256 w, T t = default)
             where T : unmanaged            
-                => VsubOp256<T>.Op;
+                => Sub256<T>.Op;
 
         /// <summary>
         /// Operator factory for vnegate_128xT
@@ -66,9 +66,9 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static VnegateOp128<T> vnegate<T>(N128 w, T t = default)
+        public static Negate128<T> vnegate<T>(N128 w, T t = default)
             where T : unmanaged
-                => VnegateOp128<T>.Op;
+                => Negate128<T>.Op;
 
         /// <summary>
         /// Operator factory for vnegate_256xT
@@ -77,9 +77,9 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static VnegateOp256<T> vnegate<T>(N256 w, T t = default)
+        public static Negate256<T> vnegate<T>(N256 w, T t = default)
             where T : unmanaged
-                => VnegateOp256<T>.Op;
+                => Negate256<T>.Op;
 
         /// <summary>
         /// Operator factory for vinc_128xT
@@ -88,9 +88,9 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static VincOp128<T> vinc<T>(N128 w, T t = default)
+        public static Inc128<T> vinc<T>(N128 w, T t = default)
             where T : unmanaged
-                => VincOp128<T>.Op;
+                => Inc128<T>.Op;
 
         /// <summary>
         /// Operator factory for vinc_256xT
@@ -99,9 +99,9 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static VincOp256<T> vinc<T>(N256 w, T t = default)
+        public static Inc256<T> vinc<T>(N256 w, T t = default)
             where T : unmanaged
-                => VincOp256<T>.Op;
+                => Inc256<T>.Op;
 
         /// <summary>
         /// Operator factory for vdec_128xT
@@ -110,9 +110,9 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static VdecOp128<T> vdec<T>(N128 w, T t = default)
+        public static Dec128<T> vdec<T>(N128 w, T t = default)
             where T : unmanaged
-                => VdecOp128<T>.Op;
+                => Dec128<T>.Op;
 
         /// <summary>
         /// Operator factory for vdec_256xT
@@ -121,9 +121,9 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static VdecOp256<T> vdec<T>(N256 w, T t = default)
+        public static Dec256<T> vdec<T>(N256 w, T t = default)
             where T : unmanaged
-                => VdecOp256<T>.Op;
+                => Dec256<T>.Op;
 
         /// <summary>
         /// Operator factory for vabs_128xT
@@ -132,9 +132,9 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static VabsOp128<T> vabs<T>(N128 w, T t = default)
+        public static Abs128<T> vabs<T>(N128 w, T t = default)
             where T : unmanaged
-                => VabsOp128<T>.Op;
+                => Abs128<T>.Op;
 
         /// <summary>
         /// Operator factory for vabs_256xT
@@ -143,11 +143,8 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static VabsOp256<T> vabs<T>(N256 w, T t = default)
+        public static Abs256<T> vabs<T>(N256 w, T t = default)
             where T : unmanaged
-                => VabsOp256<T>.Op;
-
-
+                => Abs256<T>.Op;
     }
-
 }

@@ -114,7 +114,7 @@ namespace Z0
                 messages.AddRange(unit.DequeueMessages());
                 messages.Add(AppMsg.Define($"{testName} executed. {exectime.Ms}ms", SeverityLevel.Info));
                 
-                var reported = unit.PopOutcomes().ToArray();
+                var reported = unit.TakeOutcomes().ToArray();
                 if(reported.Length != 0)
                     results.AddRange(reported);
                 else

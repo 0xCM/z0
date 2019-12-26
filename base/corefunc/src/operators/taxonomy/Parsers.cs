@@ -46,7 +46,7 @@ namespace Z0
     /// <summary>
     /// Characterizes an operator that materializes a primal value from a string with a supporting context
     /// </summary>
-    /// <typeparam name="T">The primal value type</typeparam>
+    /// <typeparam name="T">The primal type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IPrimalParser<C,T> : IParser<C,T>, IPrimalOp<T>
         where T : unmanaged

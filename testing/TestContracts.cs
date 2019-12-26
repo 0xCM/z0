@@ -7,15 +7,14 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    public interface IResultReceiver
+    public interface ITestResultSink
     {
-        void ReportOutcome(string opname, bool succeeded, TimeSpan duration);
+        TestCaseRecord ReportOutcome(string opname, bool succeeded, TimeSpan duration);
     }
 
-    public interface IResultProvider
+    public interface ITestResultSource
     {
-        IEnumerable<TestCaseRecord> PopOutcomes();
-
+        IEnumerable<TestCaseRecord> TakeOutcomes();
     }
 
     public interface ITestConfig<T> : ITestConfig, ISampleDefaults<T>
@@ -24,7 +23,7 @@ namespace Z0
         
     }
 
-    public interface ITestContext : IContext, IResultReceiver, IResultProvider
+    public interface ITestContext : IContext, ITestResultSink, ITestResultSource
     {
         ITestConfig Config {get;}
 
@@ -33,9 +32,7 @@ namespace Z0
         IEnumerable<BenchmarkRecord> Benchmarks {get;}        
 
         bool Enabled {get;}
-
     }
-
 
     public interface IUnitTest : ITestContext
     {

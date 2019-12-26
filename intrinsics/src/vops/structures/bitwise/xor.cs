@@ -12,40 +12,35 @@ namespace Z0
 
     partial class VOpTypes
     {
-        public readonly struct VxorOp128<T> : IVBinOp128<T>
+        public readonly struct Xor128<T> : IVBinOp128D<T>
             where T : unmanaged
         {
-            public static VxorOp128<T> Op => default;
+            public static Xor128<T> Op => default;
 
             public string Moniker => moniker<N128,T>("vxor");
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
-                => ginx.vxor(x,y);
+            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vxor(x,y);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b)
-                => gmath.xor(a,b);
+            public T InvokeScalar(T a, T b) => gmath.xor(a,b);
 
         }
 
-        public readonly struct VxorOp256<T> : IVBinOp256<T>
+        public readonly struct Xor256<T> : IVBinOp256D<T>
             where T : unmanaged
         {
-            public static VxorOp256<T> Op => default;
+            public static Xor256<T> Op => default;
 
             public string Moniker => moniker<N256,T>("vxor");
 
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)
-                => ginx.vxor(x,y);
+            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vxor(x,y);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b)
-                => gmath.xor(a,b);
+            public T InvokeScalar(T a, T b) => gmath.xor(a,b);
 
         }
-
    }
 }

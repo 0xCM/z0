@@ -13,8 +13,6 @@ namespace Z0.OpCodes
     [OpCodeProvider]
     public static class vconvert
     {                
-
-
         [MethodImpl(Inline)]
         public static Vector128<uint> convert(Vector256<ulong> src, N128 w, uint t = default)
             => dinx.convert(src,w,t);

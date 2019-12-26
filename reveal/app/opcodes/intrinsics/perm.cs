@@ -12,9 +12,8 @@ namespace Z0.OpCodes
     using static zfunc;    
 
     [OpCodeProvider]
-    public static class vperm
+    public static class vpermoc
     {
-
         [MethodImpl(NotInline)]
         static Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> vand_delgate()
         {
@@ -55,5 +54,7 @@ namespace Z0.OpCodes
         public static Vector256<sbyte> vshuffle_256x8i(Vector256<sbyte> src, Vector256<sbyte> spec)
             => dinx.vshuf16x8(src,spec);
 
+        public static void vtranspose(ref Vector128<uint> row0, ref Vector128<uint> row1, ref Vector128<uint> row2, ref Vector128<uint> row3)        
+            => dinx.vtranspose(ref row0, ref row1, ref row2, ref row3);
     }
 }

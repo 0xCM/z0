@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     using static zfunc;
 
     public abstract class UnitTest<U> : TestContext<U>, IUnitTest
@@ -62,7 +63,6 @@ namespace Z0
             {
                 ReportOutcome(TestCaseName(op),succeeded,count);
             }
-
         }
 
         protected void check_explicit<T>(IVBinOp256<T> op, Block256<T> left, Block256<T> right, Block256<T> dst, SystemCounter count = default) 
@@ -252,11 +252,130 @@ namespace Z0
             }
         }
 
-        protected void check_scalar_match<T>(IVBinOp128<T> op, SystemCounter count = default)
+        protected void check_unary_scalar_match<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
             where T : unmanaged
+            where F : IVUnaryOp128D<T>
         {
-            var w = n128;
-            var t = default(T);
+            var cells = vcount(w,t);
+            var succeeded = true;
+            
+            count.Start();
+            try
+            {
+                for(var i=0; i<SampleCount; i++)
+                {
+                    var x = Random.CpuVector(w,t);
+                    var z = f.Invoke(x);
+                    for(var j=0; j< cells; j++)
+                        Claim.eq(f.InvokeScalar(vcell(x,j)), vcell(z,j));
+                }
+            }
+            catch(Exception e)
+            {
+                error(e, TestCaseName(f));
+                succeeded = false;
+            }
+            finally
+            {
+                ReportOutcome(TestCaseName(f),succeeded,count);
+            }
+        }
+
+        protected void check_unary_scalar_match<F,T>(F f, N256 w, T t = default, SystemCounter count = default)
+            where T : unmanaged
+            where F : IVUnaryOp256D<T>
+        {
+            var cells = vcount(w,t);
+            var succeeded = true;
+            
+            count.Start();
+            try
+            {
+                for(var i=0; i<SampleCount; i++)
+                {
+                    var x = Random.CpuVector(w,t);
+                    var z = f.Invoke(x);
+                    for(var j=0; j< cells; j++)
+                        Claim.eq(f.InvokeScalar(vcell(x,j)), vcell(z,j));
+                }
+            }
+            catch(Exception e)
+            {
+                error(e, TestCaseName(f));
+                succeeded = false;
+            }
+            finally
+            {
+                ReportOutcome(TestCaseName(f),succeeded,count);
+            }
+        }
+
+        protected void check_shift_scalar_match<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
+            where T : unmanaged
+            where F : IVShiftOp128D<T>
+        {
+            var cells = vcount(w,t);
+            var succeeded = true;
+            var bounds = ((byte)0, (byte)(bitsize(t) - 1));
+            
+            count.Start();
+            try
+            {
+                for(var i=0; i<SampleCount; i++)
+                {
+                    var x = Random.CpuVector(w,t);
+                    var offset = Random.Next<byte>(bounds);
+                    var z = f.Invoke(x,offset);
+                    for(var j=0; j< cells; j++)
+                        Claim.eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
+                }
+            }
+            catch(Exception e)
+            {
+                error(e, TestCaseName(f));
+                succeeded = false;
+            }
+            finally
+            {
+                ReportOutcome(TestCaseName(f),succeeded,count);
+            }
+        }
+
+        protected void check_shift_scalar_match<F,T>(F f, N256 w, T t = default, SystemCounter count = default)
+            where T : unmanaged
+            where F : IVShiftOp256D<T>
+        {
+            var cells = vcount(w,t);
+            var succeeded = true;
+            var bounds = ((byte)0, (byte)(bitsize(t) - 1));
+            
+            count.Start();
+            try
+            {
+                for(var i=0; i<SampleCount; i++)
+                {
+                    var x = Random.CpuVector(w,t);
+                    var offset = Random.Next<byte>(bounds);
+                    var z = f.Invoke(x,offset);
+                    for(var j=0; j< cells; j++)
+                        Claim.eq(f.InvokeScalar(vcell(x,j), offset), vcell(z,j));
+                }
+            }
+            catch(Exception e)
+            {
+                error(e, TestCaseName(f));
+                succeeded = false;
+            }
+            finally
+            {
+                ReportOutcome(TestCaseName(f),succeeded,count);
+            }
+        }
+
+        protected void check_binary_scalar_match<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
+            where T : unmanaged
+            where F : IVBinOp128D<T>
+        {
             var cells = vcount(w,t);
             var succeeded = true;
             
@@ -267,27 +386,26 @@ namespace Z0
                 {
                     var x = Random.CpuVector(w,t);
                     var y = Random.CpuVector(w,t);
-                    var z = op.Invoke(x,y);
+                    var z = f.Invoke(x,y);
                     for(var j=0; j< cells; j++)
-                        Claim.eq(op.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
+                        Claim.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
             catch(Exception e)
             {
-                error(e,TestCaseName(op));
+                error(e, TestCaseName(f));
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(op),succeeded,count);
+                ReportOutcome(TestCaseName(f),succeeded,count);
             }
         }
 
-        protected void check_scalar_match<T>(IVBinOp256<T> op, SystemCounter count = default)
+        protected void check_binary_scalar_match<F,T>(F op, N256 w, T t = default, SystemCounter count = default)
             where T : unmanaged
+            where F : IVBinOp256D<T>
         {
-            var w = n256;
-            var t = default(T);
             var len = vcount(w,t);
             var succeeded = true;
 
@@ -304,8 +422,7 @@ namespace Z0
                 }
             }
             catch(Exception e)
-            {
-                
+            {                
                 error(e,TestCaseName(op));
                 succeeded = false;
             }
@@ -315,5 +432,62 @@ namespace Z0
             }
         }
 
+        protected void check_scalar_match<F,T>(F f, Func<int,Pair<Vector128<T>>> src, SystemCounter count = default)
+            where T : unmanaged
+            where F : IVBinOp128D<T>
+        {
+            var cells = vcount<T>(n128);
+            var succeeded = true;
+            
+            count.Start();
+            try
+            {
+                for(var i=0; i < SampleCount; i++)
+                {
+                    (var x, var y) = src(i);
+                    var z = f.Invoke(x,y);
+                    for(var j=0; j< cells; j++)
+                        Claim.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
+                }
+            }
+            catch(Exception e)
+            {
+                error(e, TestCaseName(f));
+                succeeded = false;
+            }
+            finally
+            {
+                ReportOutcome(TestCaseName(f),succeeded,count);
+            }
+        }
+
+        protected void check_scalar_match<F,T>(F f, Func<int,Pair<Vector256<T>>> src, SystemCounter count = default)
+            where T : unmanaged
+            where F : IVBinOp256D<T>
+        {
+            var cells = vcount<T>(n256);
+            var succeeded = true;
+            
+            count.Start();
+            try
+            {
+                for(var i=0; i < SampleCount; i++)
+                {
+                    (var x, var y) = src(i);
+                    var z = f.Invoke(x,y);
+                    for(var j=0; j< cells; j++)
+                        Claim.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
+                }
+            }
+            catch(Exception e)
+            {
+                error(e, TestCaseName(f));
+                succeeded = false;
+            }
+            finally
+            {
+                ReportOutcome(TestCaseName(f),succeeded,count);
+            }
+        }
     }
 }

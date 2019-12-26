@@ -13,7 +13,7 @@ namespace Z0
     partial class gmath
     {
         /// <summary>
-        /// Applies an arithmetic left-shift to an integer
+        /// Applies an arithmetic right-shift to an integer
         /// </summary>
         /// <param name="src">The value to shift</param>
         /// <param name="offset">The number of bits to shift</param>

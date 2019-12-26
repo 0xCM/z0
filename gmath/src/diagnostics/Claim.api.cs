@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
         
     using static zfunc;
     using static ErrorMessages;
@@ -114,6 +115,30 @@ namespace Z0
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static bool eq<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs.Equals(rhs) ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs,rhs, caller, file, line));
+
+        /// <summary>
+        /// Asserts the equality of two vectors
+        /// </summary>
+        /// <param name="lhs">The left vector</param>
+        /// <param name="rhs">The right vector</param>
+        /// <param name="caller">The caller member name</param>
+        /// <param name="file">The source file of the calling function</param>
+        /// <param name="line">The source file line number where invocation ocurred</param>
+        public static bool eq<T>(Vector128<T> lhs, Vector128<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+            where T : unmanaged
+                => lhs.Equals(rhs) ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs,rhs, caller, file, line));
+
+        /// <summary>
+        /// Asserts the equality of two vectors
+        /// </summary>
+        /// <param name="lhs">The left vector</param>
+        /// <param name="rhs">The right vector</param>
+        /// <param name="caller">The caller member name</param>
+        /// <param name="file">The source file of the calling function</param>
+        /// <param name="line">The source file line number where invocation ocurred</param>
+        public static bool eq<T>(Vector256<T> lhs, Vector256<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+            where T : unmanaged
+                => lhs.Equals(rhs) ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs,rhs, caller, file, line));
 
         /// <summary>
         /// Asserts the equality of the content of two arrays

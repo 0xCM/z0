@@ -72,7 +72,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int Length<T>(this Vector128<T> src)
             where T : unmanaged            
-                => vlength<T>(n128);
+                => vcount<T>(n128);
 
         /// <summary>
         /// Returns the number of source vector components
@@ -82,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int Length<T>(this Vector256<T> src)
             where T : unmanaged            
-                => vlength<T>(n256);
+                => vcount<T>(n256);
 
         /// <summary>
         /// Combines two 128-bit source vectors into a 128-bit target vector via a mapping function
@@ -96,8 +96,8 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(vlength<S>(n128), vlength<T>(n128));
-            var dstLen = vlength<T>(n128);
+            var xLen = Math.Min(vcount<S>(n128), vcount<T>(n128));
+            var dstLen = vcount<T>(n128);
             var lhsData = lhs.ToSpan();
             var rhsData = rhs.ToSpan();
             Span<T> dst = new T[dstLen];
@@ -117,8 +117,8 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(vlength<S>(n128), vlength<T>(n128));
-            var dstLen = vlength<T>(n128);
+            var xLen = Math.Min(vcount<S>(n128), vcount<T>(n128));
+            var dstLen = vcount<T>(n128);
             var data = src.ToSpan();            
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
@@ -139,7 +139,7 @@ namespace Z0
         public static Vector256<T> Merge<T>(this Vector128<T> x, Vector128<T> y, Func<T,T> f)
             where T : unmanaged
         {
-            var srcLen = vlength<T>(n128);
+            var srcLen = vcount<T>(n128);
             var dstLen = 2*srcLen;
             var lhsData = x.ToSpan();
             var rhsData = y.ToSpan();
@@ -165,8 +165,8 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(vlength<S>(n256), vlength<T>(n256));
-            var dstLen = vlength<T>(n256);
+            var xLen = Math.Min(vcount<S>(n256), vcount<T>(n256));
+            var dstLen = vcount<T>(n256);
             var data = src.ToSpan();            
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
@@ -187,8 +187,8 @@ namespace Z0
             where S : unmanaged
         {
             var n = n256;
-            var xLen = Math.Min(vlength<S>(n), vlength<T>(n));
-            var dstLen = vlength<T>(n);
+            var xLen = Math.Min(vcount<S>(n), vcount<T>(n));
+            var dstLen = vcount<T>(n);
             var lhsData = x.ToSpan();
             var rhsData = y.ToSpan();
             Span<T> dst = new T[dstLen];

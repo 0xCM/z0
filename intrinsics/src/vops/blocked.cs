@@ -252,7 +252,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly Block256<T> vnegate<T>(in Block256<T> xb, in Block256<T> zb)
             where T : unmanaged
-                => ref vmap(xb, zb,VOps.vnegate<T>(n256));
+                => ref vmap(xb, zb, VOps.vnegate<T>(n256));
 
     }
 }

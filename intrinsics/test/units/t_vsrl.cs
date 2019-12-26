@@ -11,74 +11,47 @@ namespace Z0
 
     public class t_vsrl : t_vinx<t_vsrl>
     {
-        public void vsrl_128x8u()
-            => vsrl_check<byte>(n128);
-
-        public void vsrl_128x16u()
-            => vsrl_check<ushort>(n128);
-
-        public void vsrl_128x32u()
-            => vsrl_check<uint>(n128);
-
-        public void vsrl_128x64u()
-            => vsrl_check<ulong>(n128);
-
-        public void vsrl_256x8u()
-            => vsrl_check<byte>(n256);
-
-        public void vsrl_256x16u()
-            => vsrl_check<ushort>(n256);
-
-        public void vsrl_256x32u()
-            => vsrl_check<uint>(n256);
-
-        public void vsrl_256x64u()
-            => vsrl_check<ulong>(n256);
-
-        public void t_vsrl_128x8u_outline()
+        public void check()
         {
-            var w = n128;
-            byte shift = 3;
-            var x = Random.CpuVector<byte>(w);
-            var actual = dinx.vsrl(x,shift);
-            
-            var xs = x.ToSpan();
-            var es = DataBlocks.single<byte>(w);
-            for(var i =0; i<xs.Length; i++)
-                es[i] = gmath.srl(xs[i], shift);
-            
-            var expect = es.LoadVector();            
-            Claim.eq(expect,actual);
+            check(n128);
+            check(n256);
+        }
+        void check(N128 w)
+        {
+
+            //check(VOps.vsrl(w,z16i), w, z16i);
+
+            check(VOps.vsrl(w,z8), w, z8);                
+            check(VOps.vsrl(w,z8i), w, z8i);
+            check(VOps.vsrl(w,z16),  w, z16);
+            check(VOps.vsrl(w,z32), w, z32);
+            check(VOps.vsrl(w,z32i), w, z32i);
+            check(VOps.vsrl(w,z64), w, z64);
+            check(VOps.vsrl(w,z64i), w, z64i);
         }
 
-        public void t_vrll_128x8_alt()
+        void check(N256 w)
         {
-            var w = n128;
-            for(var i=0; i < SampleCount; i++)
-            {
-                var x = Random.CpuVector<byte>(w);
-                for(byte shift = 1; shift < 8; shift++)                
-                {
-                    var actual = dinx.vsrl(x, shift);
-                    var expect = mathspan.srl(x.ToSpan(), shift).LoadVector(w);
-                    Claim.eq(actual,expect);
-                }
-            }
+            //check(VOps.vsrl(w,z16i), w, z16i);
+
+            check(VOps.vsrl(w,z8), w, z8);                
+            check(VOps.vsrl(w,z8i), w, z8i);
+            check(VOps.vsrl(w,z16),  w, z16);
+            check(VOps.vsrl(w,z32), w, z32);
+            check(VOps.vsrl(w,z32i), w, z32i);
+            check(VOps.vsrl(w,z64), w, z64);
+            check(VOps.vsrl(w,z64i), w, z64i);            
         }
 
-        public void t_vsrl_256x8_alt()
-        {
-            var w = n256;
-            for(var i=0; i < SampleCount; i++)
-            {
-                var x = Random.CpuVector<byte>(w);
-                for(byte shift = 1; shift < 8; shift++)                
-                {
-                    var actual = dinx.vsrl(x, shift);
-                    var expect = mathspan.srl(x.ToSpan(), shift).LoadVector(w);
-                    Claim.eq(actual,expect);
-                }
-            }
-        }     
+        void check<F,T>(F f, N128 w, T t = default)
+            where T : unmanaged
+            where F : IVShiftOp128D<T>
+                => check_shift_scalar_match(f,w,t);
+            
+        void check<F,T>(F f, N256 w, T t = default)
+            where T : unmanaged
+            where F : IVShiftOp256D<T>
+                => check_shift_scalar_match(f,w,t);
+
     }
 }

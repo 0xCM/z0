@@ -9,8 +9,6 @@ namespace Z0
 
     using static zfunc;
 
-    using D = GDel;
-
     public class t_natmod : t_gmath<t_natmod>
     {                
 

@@ -12,32 +12,29 @@ namespace Z0
 
     partial class VOpTypes
     {
-        public readonly struct VaddOp128<T> : IVBinOp128<T>
+        public readonly struct Add128<T> : IVBinOp128D<T>
             where T : unmanaged
         {
-            public static VaddOp128<T> Op => default;
+            public static Add128<T> Op => default;
 
             public string Moniker => moniker<N128,T>("vadd");
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
-                => ginx.vadd(x,y);
+            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vadd(x,y);
             
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b)
-                => gmath.add(a,b);
+            public T InvokeScalar(T a, T b) => gmath.add(a,b);
         }
 
-        public readonly struct VaddOp256<T> : IVBinOp256<T>
+        public readonly struct Add256<T> : IVBinOp256D<T>
             where T : unmanaged
         {
-            public static VaddOp256<T> Op => default;
+            public static Add256<T> Op => default;
 
             public string Moniker => moniker<N256,T>("vadd");
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)
-                => ginx.vadd(x,y);
+            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vadd(x,y);
 
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b)

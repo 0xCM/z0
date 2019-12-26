@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="offset">The number of bits to shift leftwards</param>
         [MethodImpl(Inline)]
         public static sbyte sll(sbyte src, int offset)
-            => (sbyte)(math.abs(src) << offset);
+            => (sbyte)(src << offset);
 
         /// <summary>
         /// Applies a logical left shift to the source value
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="offset">The number of bits to shift leftwards</param>
         [MethodImpl(Inline)]
         public static short sll(short src, int offset)
-            => (short)(math.abs(src) << offset);
+            => (short)(src << offset);
 
         /// <summary>
         /// Applies a logical left shift to the source value
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="offset">The number of bits to shift leftwards</param>
         [MethodImpl(Inline)]
         public static int sll(int src, int offset)
-            => math.abs(src) << offset;
+            => src << offset;
 
         /// <summary>
         /// Applies a logical left shift to the source value
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="offset">The number of bits to shift leftwards</param>
         [MethodImpl(Inline)]
         public static long sll(long src, int offset)
-            => math.abs(src) << offset;
+            => src << offset;
 
         /// <summary>
         /// Applies a logical left shift to the source value
@@ -84,7 +84,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong sll(ulong src, int offset)
             => src << offset;
-
    }
-
 }
