@@ -62,5 +62,29 @@ namespace Z0
                 Claim.eq(A[i,j], B[j,i]);
         }
 
+        public static Vector256<int> vswap_ref(Vector256<int> src, byte i, byte j)
+        {
+            Span<uint> spec = stackalloc uint[Vector256<uint>.Count];
+            for(byte k=0; k<spec.Length; k++)
+            {
+                if(k == i)        
+                    spec[k] = j;
+                else if(k == j)
+                    spec[k] = i;
+                else
+                    spec[k] = k;
+            }
+            return dinx.vperm8x32(src,CpuVector.vload(n256, head(spec)));
+        }
+
+        public void swap_256_i32()
+        {
+            var subject = Vector256.Create(2, 4, 6, 8, 10, 12, 14, 16);
+            var swapped = vswap_ref(subject, 2, 3);
+            var expect = Vector256.Create(2, 4, 8, 6, 10, 12, 14, 16);
+            Claim.eq(expect, swapped);
+        }
+
+
     }
 }

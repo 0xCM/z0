@@ -11,9 +11,14 @@ namespace Z0
 
     using static zfunc;
 
+    /// <summary>
+    /// Clasifies primitive types
+    /// </summary>
     [Flags]
     public enum PrimalKind : uint
     {    
+        None = 0,
+
         U8 = 8,
 
         I8 = U8 << 8,
@@ -44,7 +49,8 @@ namespace Z0
 
         Signed = SignedIntegral | Float,
 
-        Unsigned = UnsignedIntegral
-    }
+        Unsigned = UnsignedIntegral,
 
+        All = Integral | Float
+    }
 }

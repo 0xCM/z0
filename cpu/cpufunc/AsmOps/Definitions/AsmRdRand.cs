@@ -8,6 +8,16 @@ namespace Z0
     public class AsmRdRand
     {
         
+        /// <summary>
+        /// Finds the first method declared by a type that matches a specified name
+        /// and returns a pointer to the method definition
+        /// </summary>
+        /// <param name="name">The method name</param>
+        /// <typeparam name="T">The declaring type</typeparam>
+        [MethodImpl(Inline)]
+        public static IntPtr methodPtr<T>(string name, T t = default)
+            => method<T>(name).MethodHandle.GetFunctionPointer();
+
         static AsmRdRand()
         {
             var rdrand = new byte[] 

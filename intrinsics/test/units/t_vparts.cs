@@ -17,7 +17,7 @@ namespace Z0
             var count = 0b111_110_101_100_011_010_001_000u;
 
             var actual =  dinx.vpart30x8x3(count);            
-            var expect = CpuVector.parts(n256,0,1,2,3,4,5,6,7,0,0,0,0,0,0,0,0);
+            var expect = CpuVector.vparts(n256,0,1,2,3,4,5,6,7,0,0,0,0,0,0,0,0);
             Claim.eq(actual,expect);
 
 

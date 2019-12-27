@@ -27,14 +27,66 @@ namespace Z0
         protected string TestCaseName(IOp op)
             => $"{GetType().Name}/{op.Moniker}";
 
+        /// <summary>
+        /// Produces the name of the test case predicated on a root name and parametric type
+        /// </summary>
+        /// <param name="root">The root name</param>
+        [MethodImpl(Inline)]
+        protected string TestCaseName<T>(string root, T t = default)
+            => $"{GetType().Name}/{root}_{moniker(t)}";
+
         [MethodImpl(Inline)]
         static int vcount<W,T>(W w = default, T t = default)
             where W : unmanaged, ITypeNat
             where T : unmanaged
                 => TypeMath.div(w,t);
 
-        protected void check_explicit<T>(IVBinOp128<T> op, Block128<T> left, Block128<T> right, Block128<T> dst, SystemCounter count = default) 
+        protected void check(Action f, string name, SystemCounter count = default)
+        {
+            var succeeded = true;
+            
+            count.Start();
+            try
+            {
+                f();
+            }
+            catch(Exception e)
+            {
+                error(e, name);
+                succeeded = false;
+            }
+            finally
+            {
+                ReportOutcome(name,succeeded,count);
+            }
+
+        }
+
+        protected void check<T>(Action f, string name, T t = default, SystemCounter count = default)
+        {
+            var succeeded = true;
+            var casename = TestCaseName(name,t);
+            
+            count.Start();
+            try
+            {
+                f();
+            }
+            catch(Exception e)
+            {
+                error(e, casename);
+                succeeded = false;
+            }
+            finally
+            {
+                ReportOutcome(casename,succeeded,count);
+            }
+
+        }
+
+        protected void check_explicit<F,T>(F f, Block128<T> left, Block128<T> right, Block128<T> dst, SystemCounter count = default) 
             where T : unmanaged
+            where F : IVBinOp128<T>
         {
             var w = n128;
             var t = default(T);
@@ -49,24 +101,25 @@ namespace Z0
                 {
                     var x = left.LoadVector(block);
                     var y = right.LoadVector(block);
-                    var actual = op.Invoke(x,y);
+                    var actual = f.Invoke(x,y);
                     var expect = dst.LoadVector(block);
                     Claim.yea(ginx.vsame(actual,expect));
                 }
             }
             catch(Exception e)
             {
-                error(e,TestCaseName(op));
+                error(e,TestCaseName(f));
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(op),succeeded,count);
+                ReportOutcome(TestCaseName(f),succeeded,count);
             }
         }
 
-        protected void check_explicit<T>(IVBinOp256<T> op, Block256<T> left, Block256<T> right, Block256<T> dst, SystemCounter count = default) 
+        protected void check_explicit<F,T>(F f, Block256<T> left, Block256<T> right, Block256<T> dst, SystemCounter count = default) 
             where T : unmanaged
+            where F : IVBinOp256<T>
         {
             var w = n256;
             var t = default(T);
@@ -81,19 +134,19 @@ namespace Z0
                 {
                     var x = left.LoadVector(block);
                     var y = right.LoadVector(block);
-                    var actual = op.Invoke(x,y);
+                    var actual = f.Invoke(x,y);
                     var expect = dst.LoadVector(block);
                     Claim.yea(ginx.vsame(actual,expect));
                 }
             }
             catch(Exception e)
             {
-                error(e,TestCaseName(op));
+                error(e,TestCaseName(f));
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(op),succeeded,count);
+                ReportOutcome(TestCaseName(f),succeeded,count);
             }
         }
 
@@ -402,7 +455,7 @@ namespace Z0
             }
         }
 
-        protected void check_binary_scalar_match<F,T>(F op, N256 w, T t = default, SystemCounter count = default)
+        protected void check_binary_scalar_match<F,T>(F f, N256 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : IVBinOp256D<T>
         {
@@ -416,19 +469,19 @@ namespace Z0
                 {
                     var x = Random.CpuVector(w,t);
                     var y = Random.CpuVector(w,t);
-                    var z = op.Invoke(x,y);
+                    var z = f.Invoke(x,y);
                     for(var j=0; j< len; j++)
-                        Claim.eq(op.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
+                        Claim.eq(f.InvokeScalar(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
             catch(Exception e)
             {                
-                error(e,TestCaseName(op));
+                error(e,TestCaseName(f));
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(op),succeeded,count);
+                ReportOutcome(TestCaseName(f),succeeded,count);
             }
         }
 

@@ -9,16 +9,16 @@ namespace Z0
 
     using static zfunc;
     
-    partial class ZOpR
+    partial class OpDelegates
     {
-        public readonly struct BinaryPred<T> : IBinaryPred<T>
+        public readonly struct UnaryPred<T> : IUnaryPred<T>
         {
             public readonly string Name;
 
-            readonly Func<T,T,bit> F;
+            readonly Func<T,bit> F;
 
             [MethodImpl(Inline)]
-            internal BinaryPred(Func<T,T,bit> f, string name)            
+            internal UnaryPred(Func<T,bit> f, string name)            
             {
                 this.F = f;
                 this.Name = name;
@@ -27,7 +27,7 @@ namespace Z0
             public string Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
-            public bit Invoke(T a, T b) => F(a, b);
+            public bit Invoke(T a) => F(a);
         }
     }
 }

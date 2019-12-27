@@ -17,23 +17,24 @@ namespace Z0
         /// <summary>
         /// Loads a scalar into the first component of a 128-bit vector
         /// </summary>
+        /// <param name="w">The width of the target vector</param>
         /// <param name="a">The scalar to load</param>
         [MethodImpl(Inline)]
-        public static Vector128<T> vscalar<T>(N128 n, T src)
+        public static Vector128<T> vscalar<T>(N128 w, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vscalar_u(n, src);
+                return vscalar_u(w, src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vscalar_i(n, src);
+                return vscalar_i(w, src);
             else 
-                return vscalar_f(n, src);
+                return vscalar_f(w, src);
         }
 
         /// <summary>
@@ -137,9 +138,5 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
-
-
     }
-
 }

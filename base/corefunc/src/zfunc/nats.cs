@@ -228,9 +228,25 @@ partial class zfunc
 
     public static N55 n55 => default;
 
+    public static N56 n56 => default;
+
+    public static N57 n57 => default;
+
+    public static N58 n58 => default;
+
+    public static N59 n59 => default;
+
+    public static N60 n60 => default;
+
+    public static N61 n61 => default;
+
+    public static N62 n62 => default;
+
     public static N63 n63 => default;
 
     public static N64 n64 => default;
+
+    public static N70 n70 => default;
 
     public static N87 n87 => default;
 
@@ -257,6 +273,5 @@ partial class zfunc
     public static N16384 n16384 => default; 
 
     public static N32768 n32768 => default; 
-
 
 }

@@ -77,5 +77,15 @@ namespace Z0
 
         public void vunits_256x64u()
             => vunits_check<ulong>(n256);
+
+        public void valt_256x8u()
+        {
+            var n = n256;
+            var x = CpuVector.valt(n, 0xAA, 0x55);
+            var xs = x.ToSpan();
+            for(var i=0; i<xs.Length; i++)
+                Claim.eq(even(i) ? 0xAA : 0x55,  xs[i]);
+        }
+
    }
 }

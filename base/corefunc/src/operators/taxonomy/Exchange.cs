@@ -65,8 +65,7 @@ namespace Z0
         /// Emits a point from an index-identified slot
         /// </summary>
         /// <param name="index">The point index</param>
-        A Point(int index);
-        
+        A Point(int index);        
     }
 
     /// <summary>
@@ -76,14 +75,12 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IIndexedSink<A> : IExchangeSink<A>, ICountedExchange<A>
     {
-
         /// <summary>
         /// Receives a point in an index-identified slot
         /// </summary>
         /// <param name="index">The point index</param>
         /// <param name="point">The point value</param>
-        void Point(int index, A point);
-        
+        void Point(int index, A point);        
     }
 
     /// <summary>
@@ -93,7 +90,6 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IIndexedExchange<A> : IIndexedSource<A>, IIndexedSink<A>
     {
-
         /// <summary>
         /// Queries/manipulates a point in an index-identified slot
         /// </summary>

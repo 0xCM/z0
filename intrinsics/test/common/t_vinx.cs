@@ -43,7 +43,7 @@ namespace Z0
         protected void cmp_gt_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var ones = CpuVector.ones<T>(w);
+            var ones = CpuVector.vones<T>(w);
             var one = vcell(ones,0);
             
             for(var i=0; i< SampleCount; i++)
@@ -68,7 +68,7 @@ namespace Z0
         protected void cmp_gt_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var ones = CpuVector.ones<T>(w);
+            var ones = CpuVector.vones<T>(w);
             var one = vcell(ginx.vlo(ones),0);
             
             for(var i=0; i< SampleCount; i++)
@@ -133,7 +133,7 @@ namespace Z0
         protected void vlt_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var ones = CpuVector.ones<T>(w);
+            var ones = CpuVector.vones<T>(w);
             var one = vcell(ones,0);
             
             for(var i=0; i< SampleCount; i++)
@@ -158,7 +158,7 @@ namespace Z0
         protected void vlt_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var ones = CpuVector.ones<T>(w);
+            var ones = CpuVector.vones<T>(w);
             var one = vcell(ginx.vlo(ones),0);
             
             for(var i=0; i< SampleCount; i++)
@@ -610,53 +610,6 @@ namespace Z0
             }
         }
 
-        protected void vinc_check<T>(N128 w, T t = default)
-            where T : unmanaged
-        {
-            var blocks = SampleCount;
-            var zb = DataBlocks.alloc<T>(w, blocks);
-            var eb = DataBlocks.alloc<T>(w, blocks);            
-            Claim.eq(zb.BlockCount, blocks);
-
-            var blocklen = DataBlocks.blocklen<T>(w);
-            
-            for(var i=0; i<CycleCount; i++)
-            {
-                var xb = Random.Blocks<T>(w,blocks);
-                ginx.vinc(xb, zb);
-
-                for(var block = 0; block < blocks; block++)
-                for(var cell = 0; cell < blocklen; cell++)
-                    eb[block,cell] = gmath.inc(xb[block,cell]);
-
-                Claim.eq(eb,zb);
-            }
-        }
-
-        protected void vinc_check<T>(N256 w, T t = default)
-            where T : unmanaged
-        {
-
-            var blocks = SampleCount;
-            var zb = DataBlocks.alloc<T>(w, blocks);
-            var eb = DataBlocks.alloc<T>(w, blocks);
-            Claim.eq(zb.BlockCount, blocks);
-
-            var blocklen = DataBlocks.blocklen<T>(w);
-
-            for(var i=0; i<CycleCount; i++)
-            {
-                var xb = Random.Blocks<T>(w,blocks);                
-                ginx.vinc(xb, zb);
-
-                for(var block = 0; block < blocks; block++)
-                for(var cell = 0; cell < blocklen; cell++)
-                    eb[block,cell] = gmath.inc(xb[block,cell]);
-
-                Claim.eq(eb,zb);
-            }
-        }
-
         protected void vmax_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
@@ -712,7 +665,6 @@ namespace Z0
             var dst = DataBlocks.alloc<T>(w, blocks);
             ginx.vmax(lhs,rhs,dst);
 
-            //vblock.max(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.max(lhs[i],rhs[i]), dst[i]);
         }
@@ -730,7 +682,6 @@ namespace Z0
             var dst = DataBlocks.alloc<T>(w, blocks);
             ginx.vmax(lhs,rhs,dst);
 
-            //vblock.max(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.max(lhs[i],rhs[i]), dst[i]);
         }
@@ -810,7 +761,7 @@ namespace Z0
         protected void vunits_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var units = CpuVector.units(w,t).ToSpan();
+            var units = CpuVector.vunits(w,t).ToSpan();
             for(var i=0; i<units.Length; i++)
                 Claim.eq(gmath.one<T>(), units[i]);
         }
@@ -818,7 +769,7 @@ namespace Z0
         protected void vunits_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var units = CpuVector.units(w,t).ToSpan();
+            var units = CpuVector.vunits(w,t).ToSpan();
             for(var i=0; i<units.Length; i++)
                 Claim.eq(gmath.one<T>(), units[i]);
         }
@@ -826,7 +777,7 @@ namespace Z0
         protected void vones_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var ones = CpuVector.ones<T>(w);
+            var ones = CpuVector.vones<T>(w);
             var bs = ones.ToBitString();
             Claim.eq(w,bs.Length);
             Claim.eq(w,bs.PopCount());
@@ -835,12 +786,11 @@ namespace Z0
         protected void vones_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var ones = CpuVector.ones<T>(w);
+            var ones = CpuVector.vones<T>(w);
             var bs = ones.ToBitString();
             Claim.eq(w,bs.Length);
             Claim.eq(w,bs.PopCount());
         }
-
 
         protected void vsub_block_check<T>(N256 w, T t = default)
             where T : unmanaged
@@ -867,7 +817,7 @@ namespace Z0
                 var xp = x.Prior();
                 var xps = xp.ToSpan();
 
-                var uints = CpuVector.units<T>(w);
+                var uints = CpuVector.vunits<T>(w);
                 
                 Claim.yea(ginx.vadd<T>(xp, uints).Equals(x));
                 Claim.yea(ginx.vsub<T>(xn, uints).Equals(x));
@@ -892,7 +842,7 @@ namespace Z0
                 var xp = x.Prior();
                 var xps = xp.ToSpan();
 
-                var uints = CpuVector.units<T>(w);
+                var uints = CpuVector.vunits<T>(w);
                 
                 Claim.yea(ginx.vadd<T>(xp, uints).Equals(x));
                 Claim.yea(ginx.vsub<T>(xn, uints).Equals(x));
@@ -905,61 +855,6 @@ namespace Z0
             }
         }
 
-        protected void vsll_check<T>(N128 w, T t = default)
-            where T : unmanaged
-        {
-            var maxshift = (byte)bitsize<T>();
-            for(var i=0; i < SampleCount; i++)
-            {
-                var x = Random.CpuVector<T>(w);
-                var shift = Random.Next<byte>(1, maxshift);
-                var actual = ginx.vsll(x, shift);
-                var expect = mathspan.sll(x.ToSpan().ReadOnly(), shift).LoadVector(w);
-                Claim.eq(actual,expect);
-            }
-        }
-
-        protected void vsll_check<T>(N256 w, T t = default)
-            where T : unmanaged
-        {
-            var maxshift = (byte)bitsize<T>();
-            for(var i=0; i < SampleCount; i++)
-            {
-                var x = Random.CpuVector<T>(w);
-                var shift = Random.Next<byte>(1, maxshift);
-                var actual = ginx.vsll(x, shift);
-                var expect = mathspan.sll(x.ToSpan().ReadOnly(), shift).LoadVector(w);
-                Claim.eq(actual,expect);
-            }
-        }
-
-        protected void vsrl_check<T>(N128 w, T t = default)
-            where T : unmanaged
-        {
-            var maxshift = (byte)bitsize<T>();
-            for(var i=0; i < SampleCount; i++)
-            {
-                var x = Random.CpuVector<T>(w);
-                var shift = Random.Next<byte>(1, maxshift);
-                var actual = ginx.vsrl(x, shift);
-                var expect = mathspan.srl(x.ToSpan(), shift).LoadVector(w);
-                Claim.eq(actual,expect);
-            }
-        }
-
-        protected void vsrl_check<T>(N256 w, T t = default)
-            where T : unmanaged
-        {
-            var maxshift = (byte)bitsize<T>();
-            for(var i=0; i < SampleCount; i++)
-            {
-                var x = Random.CpuVector<T>(w);
-                var shift = Random.Next<byte>(1, maxshift);
-                var actual = ginx.vsrl(x, shift);
-                var expect = mathspan.srl(x.ToSpan(), shift).LoadVector(w);
-                Claim.eq(actual,expect);
-            }
-        }
 
         protected void vsrlv_check<T>(N128 w, T t = default)
             where T : unmanaged
@@ -990,8 +885,6 @@ namespace Z0
                 Claim.eq(expect, actual);
             }
         }
-
-
 
         public void vbyteswap_check_256<T>(N128 w, T t = default)
             where T : unmanaged

@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vnegate(Vector128<byte> src)
-            =>  vsub(vnot(src), CpuVector.ones<byte>(n128));
+            =>  vsub(vnot(src), CpuVector.vones<byte>(n128));
 
         /// <summary>
         /// Negates the source vector
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<ushort> vnegate(Vector128<ushort> src)
-            =>  vsub(vnot(src), CpuVector.ones<ushort>(n128));
+            =>  vsub(vnot(src), CpuVector.vones<ushort>(n128));
 
         /// <summary>
         /// Negates the source vector
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<uint> vnegate(Vector128<uint> src)
-            =>  vsub(vnot(src), CpuVector.ones<uint>(n128));
+            =>  vsub(vnot(src), CpuVector.vones<uint>(n128));
 
         /// <summary>
         /// Negates the source vector
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<ulong> vnegate(Vector128<ulong> src)
-            =>  vsub(vnot(src), CpuVector.ones<ulong>(n128));
+            =>  vsub(vnot(src), CpuVector.vones<ulong>(n128));
 
         /// <summary>
         /// Negates the source vector
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<byte> vnegate(Vector256<byte> src)
-            =>  vsub(vnot(src), CpuVector.ones<byte>(n256));
+            =>  vsub(vnot(src), CpuVector.vones<byte>(n256));
 
         /// <summary>
         /// Negates the source vector
@@ -106,7 +106,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<ushort> vnegate(Vector256<ushort> src)
-            =>  vsub(vnot(src), CpuVector.ones<ushort>(n256));
+            =>  vsub(vnot(src), CpuVector.vones<ushort>(n256));
 
         /// <summary>
         /// Negates the source vector
@@ -122,7 +122,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<uint> vnegate(Vector256<uint> src)
-            =>  vsub(vnot(src), CpuVector.ones<uint>(n256));
+            =>  vsub(vnot(src), CpuVector.vones<uint>(n256));
 
         /// <summary>
         /// Negates the source vector
@@ -138,7 +138,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vnegate(Vector256<ulong> src)
-            =>  vsub(vnot(src), CpuVector.ones<ulong>(n256));
+            =>  vsub(vnot(src), CpuVector.vones<ulong>(n256));
 
 
     }

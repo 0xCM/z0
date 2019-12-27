@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Security;
 
-
     /// <summary>
     /// Characterizes a ternary operator
     /// </summary>
@@ -130,5 +129,4 @@ namespace Z0
     {
         
     }
-
 }

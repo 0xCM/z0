@@ -12,6 +12,8 @@ namespace Z0
 
     partial class gmath
     {
+
+
         [MethodImpl(Inline)]
         public static T inc<T>(T a)
             where T : unmanaged

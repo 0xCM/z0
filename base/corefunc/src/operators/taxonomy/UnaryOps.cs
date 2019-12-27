@@ -169,7 +169,6 @@ namespace Z0
     {
     }
 
-
     /// <summary>
     /// Characterizes a vectorized unary operator over 256-bit operands
     /// </summary>

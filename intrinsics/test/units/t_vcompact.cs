@@ -81,7 +81,7 @@ namespace Z0
             var x0 = CpuVector.parts(n, 25, 50);
             var x1 = CpuVector.parts(n, 75, 10);
             var dst = dinx.vcompact(x0,x1,n128,z32);
-            var expect = CpuVector.parts(n,25,50,75,10);
+            var expect = CpuVector.vparts(n,25,50,75,10);
             Claim.eq(expect,dst);
         }
 
@@ -153,16 +153,16 @@ namespace Z0
         {
             void case1()
             {
-                var x = CpuVector.parts(n128,0,1,2,4,4,5,6,7);
-                var y = CpuVector.parts(n128,8,9,10,11,12,13,14,15);
+                var x = CpuVector.vparts(n128,0,1,2,4,4,5,6,7);
+                var y = CpuVector.vparts(n128,8,9,10,11,12,13,14,15);
                 var z = dinx.vpackus(x,y);
-                var e = CpuVector.parts(n128,0,1,2,4,4,5,6,7,8,9,10,11,12,13,14,15);
+                var e = CpuVector.vparts(n128,0,1,2,4,4,5,6,7,8,9,10,11,12,13,14,15);
                 Claim.eq(e,z);
             }
 
             void case2()
             {
-                var x = CpuVector.parts(n128,127,0,127,0,127,0,127,0);
+                var x = CpuVector.vparts(n128,127,0,127,0,127,0,127,0);
                 var y = dinx.vpackus_alt(x,x);
                 Trace(y.Format());
             }        

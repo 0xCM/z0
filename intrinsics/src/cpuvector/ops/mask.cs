@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsbmask<T>(N128 w, N1 f, N1 d, T t = default)
+        public static Vector128<T> vlsbmask<T>(N128 w, N1 f, N1 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb<T>(f,d,t));
 
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsbmask<T>(N128 w, N2 f, N1 d, T t = default)
+        public static Vector128<T> vlsbmask<T>(N128 w, N2 f, N1 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb<T>(f,d,t));
 
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsbmask<T>(N128 w, N4 f, N1 d, T t = default)
+        public static Vector128<T> vlsbmask<T>(N128 w, N4 f, N1 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb(f,d,t));
 
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsbmask<T>(N128 w, N8 f, N1 d, T t = default)
+        public static Vector128<T> vlsbmask<T>(N128 w, N8 f, N1 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb(f,d,t));
 
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsbmask<T>(N128 w, N16 f, N1 d, T t = default)
+        public static Vector128<T> vlsbmask<T>(N128 w, N16 f, N1 d, T t = default)
             where T : unmanaged
                 => vgeneric<T>(vbroadcast<ulong>(w, BitMask.lsb64(f, d)));
 
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsbmask<T>(N128 w, N8 f, N2 d, T t = default)
+        public static Vector128<T> vlsbmask<T>(N128 w, N8 f, N2 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb(f,d,t));
 
@@ -106,7 +106,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsbmask<T>(N128 w, N8 f, N3 d, T t = default)
+        public static Vector128<T> vlsbmask<T>(N128 w, N8 f, N3 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb(f,d,t));
 
@@ -120,7 +120,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsbmask<T>(N128 w, N8 f, N4 d, T t = default)
+        public static Vector128<T> vlsbmask<T>(N128 w, N8 f, N4 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb(f,d,t));
 
@@ -134,7 +134,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsbmask<T>(N128 w, N8 f, N5 d, T t = default)
+        public static Vector128<T> vlsbmask<T>(N128 w, N8 f, N5 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w, BitMask.lsb(f,d,t));
 
@@ -148,7 +148,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsbmask<T>(N128 w, N8 f, N6 d, T t = default)
+        public static Vector128<T> vlsbmask<T>(N128 w, N8 f, N6 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w, BitMask.lsb(f,d,t));
 
@@ -161,7 +161,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsbmask<T>(N128 w, N8 f, N7 d, T t = default)
+        public static Vector128<T> vlsbmask<T>(N128 w, N8 f, N7 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb(f,d,t));
 
@@ -171,7 +171,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> msbmask<T>(N128 w, T t = default)
+        public static Vector128<T> vmsbmask<T>(N128 w, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb(n1,n1,t));
 
@@ -182,7 +182,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> msbmask<T>(N128 w, N2 f, N1 d, T t = default)
+        public static Vector128<T> vmsbmask<T>(N128 w, N2 f, N1 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb(f,d,t));
 
@@ -193,7 +193,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> msbmask<T>(N128 w, N4 f, N1 d, T t = default)
+        public static Vector128<T> vmsbmask<T>(N128 w, N4 f, N1 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb(f,d,t));
 
@@ -204,7 +204,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> msbmask<T>(N128 w, N8 f, N1 d, T t = default)
+        public static Vector128<T> vmsbmask<T>(N128 w, N8 f, N1 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb(f,d,t));
 
@@ -215,7 +215,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> msbmask<T>(N128 w, N16 f, N1 d, T t = default)
+        public static Vector128<T> vmsbmask<T>(N128 w, N16 f, N1 d, T t = default)
             where T : unmanaged
                 => vgeneric<T>(vbroadcast<ulong>(w, BitMask.msb(n64, f, d)));
 
@@ -228,7 +228,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> msbmask<T>(N128 w, N8 f, N2 d, T t = default)
+        public static Vector128<T> vmsbmask<T>(N128 w, N8 f, N2 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb(f,d,t));
 
@@ -241,7 +241,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> msbmask<T>(N128 w, N8 f, N3 d, T t = default)
+        public static Vector128<T> vmsbmask<T>(N128 w, N8 f, N3 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb<T>(f,d));
 
@@ -254,7 +254,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> msbmask<T>(N128 w, N8 f, N4 d, T t = default)
+        public static Vector128<T> vmsbmask<T>(N128 w, N8 f, N4 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb<T>(f,d));
 
@@ -267,7 +267,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> msbmask<T>(N128 w, N8 f, N5 d, T t = default)
+        public static Vector128<T> vmsbmask<T>(N128 w, N8 f, N5 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb<T>(f,d));
 
@@ -280,7 +280,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> msbmask<T>(N128 w, N8 f, N6 d, T t = default)
+        public static Vector128<T> vmsbmask<T>(N128 w, N8 f, N6 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb(f,d,t));
 
@@ -293,7 +293,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> msbmask<T>(N128 w, N8 f, N7 d, T t = default)
+        public static Vector128<T> vmsbmask<T>(N128 w, N8 f, N7 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb(f,d,t));
 
@@ -305,7 +305,7 @@ namespace Z0
         /// <param name="d">A value in the range [2,7] that defines the bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> msbmask<T>(N128 w, N8 f, byte d, T t = default)
+        public static Vector128<T> vmsbmask<T>(N128 w, N8 f, byte d, T t = default)
             where T : unmanaged
                 => vgeneric<T>(vbroadcast<byte>(w, BitMask.msb8f(d)));
 
@@ -316,7 +316,7 @@ namespace Z0
         /// <param name="n">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsbmask<T>(N256 w, N1 f, N1 d, T t = default)
+        public static Vector256<T> vlsbmask<T>(N256 w, N1 f, N1 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb(f,d,t));
 
@@ -328,7 +328,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsbmask<T>(N256 w, N2 f, N1 d, T t = default)
+        public static Vector256<T> vlsbmask<T>(N256 w, N2 f, N1 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb(f,d,t));
 
@@ -339,7 +339,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsbmask<T>(N256 w, N4 f, N1 d,T t = default)
+        public static Vector256<T> vlsbmask<T>(N256 w, N4 f, N1 d,T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb<T>(f,d,t));
 
@@ -350,7 +350,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsbmask<T>(N256 w, N8 f, N1 d,T t = default)
+        public static Vector256<T> vlsbmask<T>(N256 w, N8 f, N1 d,T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb<T>(f,d,t));
 
@@ -361,7 +361,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsbmask<T>(N256 w, N16 f, N1 d,T t = default)
+        public static Vector256<T> vlsbmask<T>(N256 w, N16 f, N1 d,T t = default)
             where T : unmanaged
                 => vgeneric<T>(vbroadcast<ulong>(w, BitMask.lsb64(f, d)));
 
@@ -374,7 +374,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsbmask<T>(N256 w, N8 f, N2 d, T t = default)
+        public static Vector256<T> vlsbmask<T>(N256 w, N8 f, N2 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb<T>(f,d));
 
@@ -386,7 +386,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsbmask<T>(N256 w, N8 f, N3 d, T t = default)
+        public static Vector256<T> vlsbmask<T>(N256 w, N8 f, N3 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb<T>(f,d));
 
@@ -398,7 +398,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsbmask<T>(N256 w, N8 f, N4 d, T t = default)
+        public static Vector256<T> vlsbmask<T>(N256 w, N8 f, N4 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb<T>(f,d));
 
@@ -410,7 +410,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsbmask<T>(N256 w, N8 f, N5 d, T t = default)
+        public static Vector256<T> vlsbmask<T>(N256 w, N8 f, N5 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb<T>(f,d));
 
@@ -422,7 +422,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsbmask<T>(N256 w, N8 f, N6 d, T t = default)
+        public static Vector256<T> vlsbmask<T>(N256 w, N8 f, N6 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb<T>(f,d));
 
@@ -434,7 +434,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsbmask<T>(N256 w, N8 f, N7 d, T t = default)
+        public static Vector256<T> vlsbmask<T>(N256 w, N8 f, N7 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.lsb<T>(f,d));
 
@@ -446,7 +446,7 @@ namespace Z0
         /// <param name="d">A value in the range [2,7] that defines the bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> lsbmask<T>(N128 w, N8 f, byte d, T t = default)
+        public static Vector128<T> vlsbmask<T>(N128 w, N8 f, byte d, T t = default)
             where T : unmanaged
                 => vgeneric<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
 
@@ -458,7 +458,7 @@ namespace Z0
         /// <param name="d">A value in the range [2,7] that defines the bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> lsbmask<T>(N256 w, N8 f, byte d, T t = default)
+        public static Vector256<T> vlsbmask<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
                 => vgeneric<T>(vbroadcast<byte>(w, BitMask.lsb8f(d)));
 
@@ -469,7 +469,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> msbmask<T>(N256 w, T t = default)
+        public static Vector256<T> vmsbmask<T>(N256 w, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb(n1,n1,t));
 
@@ -482,7 +482,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> msbmask<T>(N256 w, N2 f, N1 d, T t = default)
+        public static Vector256<T> vmsbmask<T>(N256 w, N2 f, N1 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb(f,d,t));
 
@@ -495,7 +495,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> msbmask<T>(N256 w, N4 f, N1 d, T t = default)
+        public static Vector256<T> vmsbmask<T>(N256 w, N4 f, N1 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb(f, d, t));
 
@@ -508,7 +508,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> msbmask<T>(N256 w, N8 f, N1 d, T t = default)
+        public static Vector256<T> vmsbmask<T>(N256 w, N8 f, N1 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb(f,d,t));
 
@@ -521,7 +521,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> msbmask<T>(N256 w, N16 f, N1 d, T t = default)
+        public static Vector256<T> vmsbmask<T>(N256 w, N16 f, N1 d, T t = default)
             where T : unmanaged
                 => vgeneric<T>(vbroadcast<ulong>(w, BitMask.msb(n64, f, d)));
 
@@ -534,7 +534,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> msbmask<T>(N256 w, N8 f, N2 d, T t = default)
+        public static Vector256<T> vmsbmask<T>(N256 w, N8 f, N2 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb(f,d,t));
 
@@ -547,7 +547,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> msbmask<T>(N256 w, N8 f, N3 d, T t = default)
+        public static Vector256<T> vmsbmask<T>(N256 w, N8 f, N3 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb(f,d,t));
 
@@ -559,7 +559,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> msbmask<T>(N256 w, N8 f, N4 d, T t = default)
+        public static Vector256<T> vmsbmask<T>(N256 w, N8 f, N4 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb<T>(f,d));
 
@@ -571,7 +571,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> msbmask<T>(N256 w, N8 f, N5 d, T t = default)
+        public static Vector256<T> vmsbmask<T>(N256 w, N8 f, N5 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb<T>(f,d));
 
@@ -583,7 +583,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> msbmask<T>(N256 w, N8 f, N6 d, T t = default)
+        public static Vector256<T> vmsbmask<T>(N256 w, N8 f, N6 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb<T>(f,d));
 
@@ -595,7 +595,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> msbmask<T>(N256 w, N8 f, N7 d, T t = default)
+        public static Vector256<T> vmsbmask<T>(N256 w, N8 f, N7 d, T t = default)
             where T : unmanaged
                 => vbroadcast(w,BitMask.msb<T>(f,d));
 
@@ -607,7 +607,7 @@ namespace Z0
         /// <param name="d">A value in the range [2,7] that defines the bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> msbmask<T>(N256 w, N8 f, byte d, T t = default)
+        public static Vector256<T> vmsbmask<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
                 => vgeneric<T>(vbroadcast<byte>(w, BitMask.msb8f(d)));
     }

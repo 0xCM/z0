@@ -6,10 +6,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
 using System.Reflection;
 
 using Z0;
@@ -18,25 +16,25 @@ using static Z0.ReflectionFlags;
 partial class zfunc
 {
     /// <summary>
-    /// Gets the assembly in which the parametrized type is defined
+    /// Gets the assembly in which a parametric type is defined
     /// </summary>
+    /// <typeparam name="T">The type to be examined</typeparam>
     [MethodImpl(Inline)]
     public static Assembly assembly<T>(T t = default)
         => typeof(T).Assembly;
 
     /// <summary>
-    /// Returns true if the two parameteric types are the same, false otherwise
+    /// Returns 1 if the two parameteric types are the same, 0 otherwise
     /// </summary>
     /// <typeparam name="S">The first type</typeparam>
     /// <typeparam name="T">The second type</typeparam>
     [MethodImpl(Inline)]
-    public static bool typematch<S,T>(S s = default, T t = default)
+    public static bit typematch<S,T>(S s = default, T t = default)
         => typeof(S) == typeof(T);
 
     /// <summary>
     /// Specifies the generic type definition for a specified generic type
     /// </summary>
-    /// <typeparam name="T">The generic type</typeparam>
     [MethodImpl(Inline)]   
     public static Type typedef(Type t)
         => t.GetGenericTypeDefinition();
@@ -59,44 +57,23 @@ partial class zfunc
         => typeof(T).DisplayName();
     
     /// <summary>
-    /// Produces a charactr {i | u | f} indicating whether the source type is signed, unsigned or float
-    /// </summary>
-    /// <param name="t"></param>
-    /// <typeparam name="T">The source type</typeparam>
-    [MethodImpl(Inline)]   
-    static char indicator<T>(T t = default)
-        => isFloat(t) ? AsciLower.f : (isSigned(t) ? AsciLower.i : AsciLower.u);
-
-    /// <summary>
     /// Produces a canonical designator of the form {bitsize[T]}{u | i | f} for a primal type
     /// </summary>
     /// <param name="t">A primal type representative</param>
     /// <typeparam name="T">The primal type</typeparam>
     [MethodImpl(Inline)]   
     public static string moniker<T>(T t = default)
-        => $"{bitsize(t)}{indicator(t)}";
+        => Moniker.define(t);
 
     /// <summary>
     /// Produces a canonical designator of the form {op}_{bitsize[T]}{u | i | f} for an operation over a primal type
     /// </summary>
-    /// <param name="op">The base operator name</param>
+    /// <param name="name">The base operator name</param>
     /// <param name="t">A primal type representative</param>
     /// <typeparam name="T">The primal type</typeparam>
     [MethodImpl(Inline)]   
-    public static string moniker<T>(string op, T t = default)
-        => $"{op}_{bitsize(t)}{indicator(t)}";
-
-    /// <summary>
-    /// Produces a canonical designator of the form {W}X{bitsize[T]}{u | i | f} for a segmented WxT type or classification
-    /// </summary>
-    /// <param name="w">The covering bit width representative</param>
-    /// <param name="t">A primal cell type representative</param>
-    /// <typeparam name="W">The bit width type</typeparam>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]   
-    public static string moniker<W,T>(W w = default, T t = default)
-        where W : unmanaged, ITypeNat
-            => $"{w}x{moniker(t)}";
+    public static string moniker<T>(string name, T t = default)
+        => Moniker.define(name,t);
 
     /// <summary>
     /// Produces a canonical designator of the form {op}_{W}X{bitsize[T]}{u | i | f} for an operation over a segmented WxT type or classification
@@ -109,7 +86,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static string moniker<W,T>(string op, W w = default, T t = default)
         where W : unmanaged, ITypeNat
-            => $"{op}_{w}x{moniker(t)}";
+            => Moniker.define(op,w,t);
 
     /// <summary>
     /// Returns the System.Type of the supplied parametric type
@@ -118,62 +95,6 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Type type<T>(T t = default) 
         => typeof(T);
-
-    /// <summary>
-    /// Returns true if the operand is a primal floating-point type and 0 otherwise
-    /// </summary>
-    /// <typeparam name="T">The type to test</typeparam>
-    [MethodImpl(Inline)]
-    public static bool isFloat<T>(T t = default)
-        => typeof(T) == typeof(float) 
-            || typeof(T) == typeof(double);
-
-    [MethodImpl(Inline)]
-    public static bool isFloat32<T>(T t = default)
-        => typeof(T) == typeof(float);
-
-    [MethodImpl(Inline)]
-    public static bool isFloat64<T>(T t = default)
-        => typeof(T) == typeof(double);
-
-    /// <summary>
-    /// Determines whether a type is a native integral type
-    /// </summary>
-    /// <typeparam name="T">The type to test</typeparam>
-    [MethodImpl(Inline)]
-    public static bool isIntegral<T>(T t = default)
-        => typeof(T) == typeof(sbyte) 
-        || typeof(T) == typeof(byte)
-        || typeof(T) == typeof(short)
-        || typeof(T) == typeof(ushort)
-        || typeof(T) == typeof(int)
-        || typeof(T) == typeof(uint)
-        || typeof(T) == typeof(long)
-        || typeof(T) == typeof(ulong);
-
-    /// <summary>
-    /// Determines whether a type is a native signed type
-    /// </summary>
-    /// <typeparam name="T">The type to test</typeparam>
-    [MethodImpl(Inline)]
-    public static bool isSigned<T>(T t = default)
-        => typeof(T) == typeof(sbyte) 
-        || typeof(T) == typeof(short)
-        || typeof(T) == typeof(int)
-        || typeof(T) == typeof(long)
-        || typeof(T) == typeof(float) 
-        || typeof(T) == typeof(double);            
-
-    /// <summary>
-    /// Determines whether a type is a native unsigned type
-    /// </summary>
-    /// <typeparam name="T">The type to test</typeparam>
-    [MethodImpl(Inline)]
-    public static bool isUnsigned<T>(T t = default)
-        => typeof(T) == typeof(byte)
-        || typeof(T) == typeof(ushort)
-        || typeof(T) == typeof(uint)
-        || typeof(T) == typeof(ulong);
 
     /// <summary>
     /// Creates an instance of a specified type
@@ -251,7 +172,6 @@ partial class zfunc
     /// </summary>
     /// <typeparam name="T">The type that defines the property</typeparam>
     /// <param name="name">The name of the property</param>
-    /// <returns></returns>
     /// <remarks>
     /// This operation does not use the property cache, which only maintains lookups for public/instance properties
     /// </remarks>
@@ -278,22 +198,20 @@ partial class zfunc
            select v;
 
     /// <summary>
-    /// Attempts to retrieves the value of a static or instance field
+    /// Attempts to retrieves the value of a field
     /// </summary>
     /// <typeparam name="V">The value type</typeparam>
     /// <param name="member">The field</param>
     /// <param name="instance">The object instance, if applicable</param>
-    /// <returns></returns>
     public static Option<V> value<V>(FieldInfo member, object instance = null)
         => from o in member.TryGetValue(instance)
            from v in tryCast<V>(o)
            select v;
 
     /// <summary>
-    /// Gets the public constructors defined on the supplied type
+    /// Gets the public constructors defined on an object instance
     /// </summary>
-    /// <param name="o">The type to examine</param>
-    /// <returns></returns>
+    /// <param name="o">The instance to examine</param>
     [MethodImpl(Inline)]
     public static IReadOnlyList<ConstructorInfo> constructors(object o)
         => _constructorCache.GetOrAdd(o.GetType(), t => t.GetConstructors());
@@ -352,7 +270,7 @@ partial class zfunc
         => GetProperty(o,propname)?.GetValue(o);
 
     /// <summary>
-    /// Gets the value of the identified property
+    /// Gets the value of a name-identified property on an object instance
     /// </summary>
     /// <typeparam name="T">The property value type</typeparam>
     /// <param name="o">The object on which the property is defined</param>
@@ -361,9 +279,8 @@ partial class zfunc
     public static T propval<T>(object o, string propname)
         => (T)propval(o, propname);
 
-
     /// <summary>
-    /// Sets the identified property on the object to the supplied value
+    /// Gets the value of a name-identified property on an object instance
     /// </summary>
     /// <param name="o">The object whose property will be set</param>
     /// <param name="propname">The property that will be set</param>
@@ -433,7 +350,7 @@ partial class zfunc
     /// Retrieves metadata for a name-identifed method on an object instance
     /// </summary>
     /// <param name="o">The object on which the method is defined</param>
-    /// <param name="name"></param>
+    /// <param name="name">The method name</param>
     static MethodInfo GetDelaredMethod(this object o, string name)
         => o.GetType().GetMethod(name, BF_DeclaredInstance);
 
@@ -456,22 +373,4 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static MethodInfo method<T>(string name, T t = default)
         => typeof(T).Methods().First(m => m.Name == name);
-
-    /// <summary>
-    /// Finds the first method declared by a type that matches a specified name
-    /// and returns a pointer to the method definition
-    /// </summary>
-    /// <param name="name">The method name</param>
-    /// <typeparam name="T">The declaring type</typeparam>
-    [MethodImpl(Inline)]
-    public static IntPtr methodPtr<T>(string name, T t = default)
-        => method<T>(name).MethodHandle.GetFunctionPointer();
-
-    [MethodImpl(Inline)]
-    public static MethodInfo method<T>(string name, out IntPtr ptr)
-    {
-        var m = method<T>(name);
-        ptr = m.MethodHandle.GetFunctionPointer();
-        return m;
-    }        
 }

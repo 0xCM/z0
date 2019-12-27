@@ -26,7 +26,7 @@ namespace Z0
         public static Vector128<byte> vsll(Vector128<byte> src, byte shift)
         {
             var y = v8u(dinx.vsll(v64u(src), shift));
-            var m = CpuVector.msbmask(n128, n8, (byte)(8 - shift),z8);
+            var m = CpuVector.vmsbmask(n128, n8, (byte)(8 - shift),z8);
             return dinx.vand(y,m);
         }
 
@@ -108,7 +108,7 @@ namespace Z0
         public static Vector256<byte> vsll(Vector256<byte> src, byte shift)
         {
             var y = v8u(dinx.vsll(v64u(src), shift));
-            var m = CpuVector.msbmask(n256, n8, (byte)(8 - shift),z8);
+            var m = CpuVector.vmsbmask(n256, n8, (byte)(8 - shift),z8);
             return dinx.vand(y,m);
         }
 

@@ -8,26 +8,31 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    
-    partial class ZOpR
-    {
-        public readonly struct UnaryPred<T> : IUnaryPred<T>
+
+    partial class OpDelegates
+    {                
+        /// <summary>
+        /// Captures a delegate that is exposed as a unary operator
+        /// </summary>
+        public readonly struct UnaryDelegate<T> : IUnaryOp<T>
         {
             public readonly string Name;
 
-            readonly Func<T,bit> F;
+            readonly Func<T,T> f;
 
             [MethodImpl(Inline)]
-            internal UnaryPred(Func<T,bit> f, string name)            
+            internal UnaryDelegate(Func<T,T> f, string name)            
             {
-                this.F = f;
+                this.f = f;
                 this.Name = name;
             }
             
             public string Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
-            public bit Invoke(T a) => F(a);
+            public T Invoke(T a) => f(a);
         }
+
     }
+
 }

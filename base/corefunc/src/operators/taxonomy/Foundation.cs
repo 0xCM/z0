@@ -24,6 +24,7 @@ namespace Z0
     }
 
 
+
     [SuppressUnmanagedCodeSecurity]
     public interface IPrimalOp<T> : IOp
         where T : unmanaged
@@ -31,13 +32,21 @@ namespace Z0
 
     }
 
+    /// <summary>
+    /// Defines base interface for vectorized operators
+    /// </summary>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVectorOp : IOp
+    {
+
+    }
 
     /// <summary>
-    /// Characterizes a vectorized operator
+    /// Characterizes an operator parameterized by a vectorized operand
     /// </summary>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVectorOp<V> : IOp
+    public interface IVectorOp<V> : IVectorOp
         where V : struct
     {
 
@@ -65,8 +74,8 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IVectorOp<W,V,T> : IVectorOp<W,V>
         where W : unmanaged, ITypeNat
-        where T : unmanaged
         where V : struct
+        where T : unmanaged
     {
 
     }

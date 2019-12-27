@@ -82,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit vtestc<T>(Vector128<T> src)
             where T : unmanaged
-                => vtestc(src, CpuVector.ones<T>(n128));
+                => vtestc(src, CpuVector.vones<T>(n128));
 
         /// <summary>
         /// Returns 1 if all source bits are enabled and 0 otherwise
@@ -92,7 +92,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit vtestc<T>(Vector256<T> src)
             where T : unmanaged
-                => vtestc(src, CpuVector.ones<T>(n256));        
+                => vtestc(src, CpuVector.vones<T>(n256));        
 
         /// <summary>
         /// Returns 1 if all source bits are enabled and 0 otherwise
@@ -102,7 +102,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit vtestc<T>(Vector512<T> src)
             where T : unmanaged
-                => vtestc(src, CpuVector.ones<T>(n512));        
+                => vtestc(src, CpuVector.vones<T>(n512));        
 
         [MethodImpl(Inline)]
         static bit vtestc_i<T>(Vector128<T> src, Vector128<T> mask)

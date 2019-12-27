@@ -104,7 +104,6 @@ namespace Z0
 
     }
 
-
     /// <summary>
     /// Characterizes a vectorized transformation parameterized by operand source/target bit widths and source/target component types
     /// </summary>

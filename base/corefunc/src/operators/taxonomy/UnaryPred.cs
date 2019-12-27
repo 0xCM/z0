@@ -104,7 +104,7 @@ namespace Z0
         
     }
 
-   /// <summary>
+    /// <summary>
     /// Characterizes a vectorized unary predicate over 128-bit operands that also supports componentwise decomposition/evaluation
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>

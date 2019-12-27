@@ -33,7 +33,7 @@ namespace Z0.Test
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            var isFp = isFloat<T>();
+            var isFp = Primitive.floating<T>();
             for(var i=0; i< count; i++)
             {
                 var filename = Matrix.filename<M,N,T>();

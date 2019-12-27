@@ -34,7 +34,7 @@ namespace Z0
                 var n = n32;
                 var t = z32;
                 var pattern = 0b00000000_00000111_00000000_00000000u;
-                var shifts = CpuVector.parts(w,1,1,4,4,0,0,1,1);
+                var shifts = CpuVector.vparts(w,1,1,4,4,0,0,1,1);
                 var g0 = BitGrid.broadcast(pattern, BitGrid.alloc(w,m,n,t));
                 
                 Trace("g0");

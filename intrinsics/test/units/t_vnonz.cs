@@ -12,13 +12,13 @@ namespace Z0
     {
         public void vnonz_outline()
         {
-            Claim.yea(ginx.vnonz(CpuVector.parts(n256, 1, 2, 3, 4)));
-            Claim.yea(ginx.vnonz(CpuVector.parts(n256, 1, 0, 0, 0)));
-            Claim.nea(ginx.vnonz(CpuVector.parts(n256, 0, 0, 0, 0)));
+            Claim.yea(ginx.vnonz(CpuVector.vparts(n256, 1, 2, 3, 4)));
+            Claim.yea(ginx.vnonz(CpuVector.vparts(n256, 1, 0, 0, 0)));
+            Claim.nea(ginx.vnonz(CpuVector.vparts(n256, 0, 0, 0, 0)));
 
-            Claim.yea(ginx.vnonz(CpuVector.parts(n128, 1, 2, 3, 4)));
-            Claim.yea(ginx.vnonz(CpuVector.parts(n128, 1, 0, 0, 0)));
-            Claim.nea(ginx.vnonz(CpuVector.parts(n128, 0, 0, 0, 0)));
+            Claim.yea(ginx.vnonz(CpuVector.vparts(n128, 1, 2, 3, 4)));
+            Claim.yea(ginx.vnonz(CpuVector.vparts(n128, 1, 0, 0, 0)));
+            Claim.nea(ginx.vnonz(CpuVector.vparts(n128, 0, 0, 0, 0)));
         }
 
         public void vnonz_128()

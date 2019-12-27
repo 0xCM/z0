@@ -17,7 +17,9 @@ namespace Z0
         {
             public static Nand128<T> Op => default;
 
-            public string Moniker => moniker<N128,T>("vnand");
+            public const string Name = "vnand";
+
+            public string Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
@@ -32,7 +34,9 @@ namespace Z0
         {
             public static Nand256<T> Op => default;
 
-            public string Moniker => moniker<N256,T>("vnand");
+            public const string Name = "vnand";
+
+            public string Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)

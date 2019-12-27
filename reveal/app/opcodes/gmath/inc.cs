@@ -12,6 +12,24 @@ namespace Z0
 
     partial class gmathops
     {
+        public static void increments_8u(int count, ref byte dst)
+            => gmath.increments(count, ref dst);
+
+        public static void increments_32u(int count, ref uint dst)
+            => gmath.increments(count, ref dst);
+
+        public static void decrements_8u(int count, ref byte dst)
+            => gmath.decrements(count, ref dst);
+
+        public static void decrements_32u(int count, ref uint dst)
+            => gmath.decrements(count, ref dst);
+
+        public static void steps_8u(byte first, byte step, int count, ref byte dst)
+            => gmath.steps(first, step, count, ref dst);
+
+        public static void steps_32u(uint first, uint step, int count, ref uint dst)
+            => gmath.steps(first,step, count, ref dst);
+
         public static sbyte inc_d8i(sbyte x)
             => math.inc(x);
 

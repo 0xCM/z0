@@ -17,9 +17,9 @@ namespace Z0
         public void vblend_256x32f_outline()
         {
             var w = n256;
-            var x = CpuVector.partsf(w, 0f, 1f, 2f, 3f, 4f, 5f, 6f, 7f);
-            var y = CpuVector.partsf(w, 8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f);
-            var spec = CpuVector.partsf(w, 0f,-1,0f,-1,0f,-1,0f,-1);
+            var x = CpuVector.vpartsf(w, 0f, 1f, 2f, 3f, 4f, 5f, 6f, 7f);
+            var y = CpuVector.vpartsf(w, 8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f);
+            var spec = CpuVector.vpartsf(w, 0f,-1,0f,-1,0f,-1,0f,-1);
             var z = dinx.vblendv(x,y,spec);
         }
 
@@ -92,13 +92,13 @@ namespace Z0
         public void vblend_8x16_basecases()
         {
             var n = n128;
-            var x = CpuVector.parts(n, 0,2,4,6,8,A,C,E); 
-            var y = CpuVector.parts(n, 1,3,5,7,9,B,D,F); 
+            var x = CpuVector.vparts(n, 0,2,4,6,8,A,C,E); 
+            var y = CpuVector.vparts(n, 1,3,5,7,9,B,D,F); 
             
             Claim.eq(x, dinx.vblend(x,y, Blend8x16.LLLLLLLL));          
             Claim.eq(y, dinx.vblend(x,y, Blend8x16.RRRRRRRR));
-            Claim.eq(CpuVector.parts(n, 0,2,4,6,9,B,D,F), dinx.vblend(x,y, Blend8x16.LLLLRRRR));
-            Claim.eq(CpuVector.parts(n, 1,3,5,7,8,A,C,E), dinx.vblend(x,y, Blend8x16.RRRRLLLL));
+            Claim.eq(CpuVector.vparts(n, 0,2,4,6,9,B,D,F), dinx.vblend(x,y, Blend8x16.LLLLRRRR));
+            Claim.eq(CpuVector.vparts(n, 1,3,5,7,8,A,C,E), dinx.vblend(x,y, Blend8x16.RRRRLLLL));
 
         }
 
@@ -106,13 +106,13 @@ namespace Z0
         {            
             var n = n256;
             var w = n64;
-            var left = CpuVector.parts(n,0,1,2,3);
-            var right = CpuVector.parts(n,4,5,6,7);
+            var left = CpuVector.vparts(n,0,1,2,3);
+            var right = CpuVector.vparts(n,4,5,6,7);
 
-            Claim.eq(CpuVector.parts(n,0,5,2,7),dinx.vblend(left, right, Blend4x64.LRLR));    
-            Claim.eq(CpuVector.parts(n,4,1,6,3),dinx.vblend(left, right, Blend4x64.RLRL));    
-            Claim.eq(CpuVector.parts(n,0,1,2,3),dinx.vblend(left, right, Blend4x64.LLLL));    
-            Claim.eq(CpuVector.parts(n,4,5,6,7),dinx.vblend(left, right, Blend4x64.RRRR));    
+            Claim.eq(CpuVector.vparts(n,0,5,2,7),dinx.vblend(left, right, Blend4x64.LRLR));    
+            Claim.eq(CpuVector.vparts(n,4,1,6,3),dinx.vblend(left, right, Blend4x64.RLRL));    
+            Claim.eq(CpuVector.vparts(n,0,1,2,3),dinx.vblend(left, right, Blend4x64.LLLL));    
+            Claim.eq(CpuVector.vparts(n,4,5,6,7),dinx.vblend(left, right, Blend4x64.RRRR));    
         }
 
         public void vblend_2x64_basecases()
@@ -131,24 +131,24 @@ namespace Z0
         {
             var n = n128;
             var w = n32;
-            var left =  CpuVector.parts(n,0,1,2,3);
-            var right = CpuVector.parts(n,4,5,6,7);
-            Claim.eq(CpuVector.parts(n,0,5,2,7), dinx.vblend(left,right,Blend4x32.LRLR));
-            Claim.eq(CpuVector.parts(n,4,1,6,3), dinx.vblend(left,right,Blend4x32.RLRL));
-            Claim.eq(CpuVector.parts(n,0,1,6,7), dinx.vblend(left,right,Blend4x32.LLRR));
-            Claim.eq(CpuVector.parts(n,4,5,2,3), dinx.vblend(left,right,Blend4x32.RRLL));
+            var left =  CpuVector.vparts(n,0,1,2,3);
+            var right = CpuVector.vparts(n,4,5,6,7);
+            Claim.eq(CpuVector.vparts(n,0,5,2,7), dinx.vblend(left,right,Blend4x32.LRLR));
+            Claim.eq(CpuVector.vparts(n,4,1,6,3), dinx.vblend(left,right,Blend4x32.RLRL));
+            Claim.eq(CpuVector.vparts(n,0,1,6,7), dinx.vblend(left,right,Blend4x32.LLRR));
+            Claim.eq(CpuVector.vparts(n,4,5,2,3), dinx.vblend(left,right,Blend4x32.RRLL));
         }
 
         public void vblend_8x32_basecases()
         {
             var n = n256;
             var w = n32;    
-            var left =  CpuVector.parts(n,0,1,2,3,4,5,6,7);
-            var right = CpuVector.parts(n,8,9,A,B,C,D,E,F);            
-            Claim.eq(CpuVector.parts(n,0,9,2,B,4,D,6,F),dinx.vblend(left,right, Blend8x32.LRLRLRLR));
-            Claim.eq(CpuVector.parts(n,8,1,A,3,C,5,E,7),dinx.vblend(left,right, Blend8x32.RLRLRLRL));
-            Claim.eq(CpuVector.parts(n,0,1,A,B,4,5,E,F),dinx.vblend(left,right, Blend8x32.LLRRLLRR));
-            Claim.eq(CpuVector.parts(n,8,9,2,3,C,D,6,7),dinx.vblend(left,right, Blend8x32.RRLLRRLL));
+            var left =  CpuVector.vparts(n,0,1,2,3,4,5,6,7);
+            var right = CpuVector.vparts(n,8,9,A,B,C,D,E,F);            
+            Claim.eq(CpuVector.vparts(n,0,9,2,B,4,D,6,F),dinx.vblend(left,right, Blend8x32.LRLRLRLR));
+            Claim.eq(CpuVector.vparts(n,8,1,A,3,C,5,E,7),dinx.vblend(left,right, Blend8x32.RLRLRLRL));
+            Claim.eq(CpuVector.vparts(n,0,1,A,B,4,5,E,F),dinx.vblend(left,right, Blend8x32.LLRRLLRR));
+            Claim.eq(CpuVector.vparts(n,8,9,2,3,C,D,6,7),dinx.vblend(left,right, Blend8x32.RRLLRRLL));
 
             
             var lrpattern = v32u(CpuVector.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
@@ -156,7 +156,7 @@ namespace Z0
                 Claim.eq(vcell(lrpattern,i), even(i) ? 0u : uint.MaxValue);
             
             var zero = CpuVector.vzero<uint>(n);            
-            var ones = CpuVector.ones<uint>(n);
+            var ones = CpuVector.vones<uint>(n);
             Claim.eq(lrpattern, dinx.vblend(zero, ones, Blend8x32.LRLRLRLR));
             
         }
@@ -165,10 +165,10 @@ namespace Z0
         {
             var n = n256;
             var w = n32;
-            var x = CpuVector.parts(n,0,1,2,3,4,5,6,7);
-            var y = CpuVector.parts(n,8,9,A,B,C,D,E,F);
-            var e = CpuVector.parts(n,0,9,2,B,4,D,6,F);
-            var o = CpuVector.parts(n,8,1,A,3,C,5,E,7);
+            var x = CpuVector.vparts(n,0,1,2,3,4,5,6,7);
+            var y = CpuVector.vparts(n,8,9,A,B,C,D,E,F);
+            var e = CpuVector.vparts(n,0,9,2,B,4,D,6,F);
+            var o = CpuVector.vparts(n,8,1,A,3,C,5,E,7);
             var mEven = VData.blendspec(n,false,w);
             var mOdd = VData.blendspec(n,true,w);
             Claim.eq(e,ginx.vblend(x,y,mEven));
@@ -179,10 +179,10 @@ namespace Z0
         {
             var n = n256;
             var w = n64;
-            var x = CpuVector.parts(n,0,1,2,3);
-            var y = CpuVector.parts(n,4,5,6,7);
-            var e = CpuVector.parts(n,0,5,2,7);
-            var o = CpuVector.parts(n,4,1,6,3);
+            var x = CpuVector.vparts(n,0,1,2,3);
+            var y = CpuVector.vparts(n,4,5,6,7);
+            var e = CpuVector.vparts(n,0,5,2,7);
+            var o = CpuVector.vparts(n,4,1,6,3);
             var mEven = VData.blendspec(n,false,w);
             var mOdd = VData.blendspec(n,true,w);
             Claim.eq(e,ginx.vblend(x,y,mEven));
@@ -200,11 +200,11 @@ namespace Z0
             {
                 var xs = Random.Blocks<ulong>(n);
                 var x = xs.LoadVector();
-                Claim.eq(x,CpuVector.parts(n, xs[0], xs[1], xs[2], xs[3]));
+                Claim.eq(x,CpuVector.vparts(n, xs[0], xs[1], xs[2], xs[3]));
 
                 var ys = Random.Blocks<ulong>(n);
                 var y = ys.LoadVector();
-                Claim.eq(y,CpuVector.parts(n, ys[0], ys[1], ys[2], ys[3]));
+                Claim.eq(y,CpuVector.vparts(n, ys[0], ys[1], ys[2], ys[3]));
 
                 var m = VData.blendspec(n256,false,n64);
 

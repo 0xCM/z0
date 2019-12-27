@@ -90,7 +90,7 @@ namespace Z0
             void case1()
             {
                 var src = DataBlocks.single<byte>(n256);
-                CpuVector.ones<byte>(n256).StoreTo(src);
+                CpuVector.vones<byte>(n256).StoreTo(src);
                 var dst = BitPack.pack(src);
                 Claim.eq(dst,uint.MaxValue);
 
@@ -99,7 +99,7 @@ namespace Z0
             void case2()
             {
                 var src = DataBlocks.single<byte>(n128);
-                CpuVector.ones<byte>(n128).StoreTo(src);
+                CpuVector.vones<byte>(n128).StoreTo(src);
                 var dst = BitPack.pack(src);
                 Claim.eq(dst,ushort.MaxValue);
             }

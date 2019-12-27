@@ -38,8 +38,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<byte> vpackus(Vector128<ushort> x, Vector128<ushort> y)
             => PackUnsignedSaturate(
-                    v16i(vand(x, CpuVector.ones(n128,z16))), 
-                    v16i(vand(y, CpuVector.ones(n128,z16))));         
+                    v16i(vand(x, CpuVector.vones(n128,z16))), 
+                    v16i(vand(y, CpuVector.vones(n128,z16))));         
 
         /// <summary>
         /// (4x32w,4x32w) -> 8x16w

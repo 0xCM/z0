@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> units<T>(N128 w, T t = default)
+        public static Vector128<T> vunits<T>(N128 w, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> units<T>(N256 w, T t = default)
+        public static Vector256<T> vunits<T>(N256 w, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
@@ -81,7 +81,6 @@ namespace Z0
                 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
                 };
 
-
         static ReadOnlySpan<byte> Units256x16u
             => new byte[32]{
                 1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,
@@ -98,7 +97,6 @@ namespace Z0
             => new byte[32]{
                 1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
                 1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
-                };
- 
+                }; 
     }
 }

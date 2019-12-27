@@ -27,7 +27,7 @@ namespace Z0
         public static Vector128<byte> vsrl(Vector128<byte> src, byte count)
         {
             var y = v8u(ShiftRightLogical(v64u(src), count));
-            var m = CpuVector.lsbmask(n128, n8, (byte)(8 - count),z8);
+            var m = CpuVector.vlsbmask(n128, n8, (byte)(8 - count),z8);
             return dinx.vand(y,m);
         }
 
@@ -127,7 +127,7 @@ namespace Z0
         public static Vector256<byte> vsrl(Vector256<byte> src, byte count)
         {
             var y = v8u(ShiftRightLogical(v64u(src), count));
-            var m = CpuVector.lsbmask(n256, n8, (byte)(8 - count),z8);
+            var m = CpuVector.vlsbmask(n256, n8, (byte)(8 - count),z8);
             return dinx.vand(y,m);
         } 
 
