@@ -75,7 +75,7 @@ namespace Z0
                 => (vadd(x.Lo,y.Lo),vadd(x.Hi, y.Hi));
         
         /// <summary>
-        /// Adds a constant value to each vector component
+        /// Adds a constant value to each source vector component
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="a">The value to add to each component</param>
@@ -96,6 +96,12 @@ namespace Z0
             where T : unmanaged
                 => vadd(x, CpuVector.vbroadcast(n256,a));
 
+        /// <summary>
+        /// Adds a constant value to each source vector component
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="a">The value to add to each component</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static Vector512<T> vadd<T>(Vector512<T> x, T a)
             where T : unmanaged
@@ -129,7 +135,6 @@ namespace Z0
                 return vgeneric<T>(dinx.vadd(vcast64u(x), vcast64u(y)));
         }
 
-
         [MethodImpl(Inline)]
         static Vector256<T> vadd_i<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
@@ -144,7 +149,6 @@ namespace Z0
                  return vgeneric<T>(dinx.vadd(vcast64i(x), vcast64i(y)));
         }    
 
-
         [MethodImpl(Inline)]
         static Vector256<T> vadd_u<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
@@ -158,6 +162,5 @@ namespace Z0
             else 
                 return vgeneric<T>(dinx.vadd(vcast64u(x), vcast64u(y)));
         }    
-
     }
 }

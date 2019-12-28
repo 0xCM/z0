@@ -17,7 +17,9 @@ namespace Z0
         {
             public static Negate128<T> Op => default;
 
-            public string Moniker => moniker<N128,T>("vnegate");
+            public const string Name = "vnegate";
+
+            public string Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x)
@@ -32,7 +34,9 @@ namespace Z0
         {
             public static Negate256<T> Op => default;
 
-            public string Moniker => moniker<N256,T>("vnegate");
+            public const string Name = "vnegate";
+
+            public string Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) => ginx.vnegate(x);
