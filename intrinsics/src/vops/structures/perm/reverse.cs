@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class VOpTypes
+    partial class VXTypes
     {
         public readonly struct Reverse128<T> : IVUnaryOp128<T>
             where T : unmanaged

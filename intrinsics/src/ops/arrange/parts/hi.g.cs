@@ -13,6 +13,11 @@ namespace Z0
 
     partial class ginx
     {        
+        /// <summary>
+        /// Moves the hi 64 bits of the source vector the the lo 64 bits of a target vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<T> vhi<T>(Vector128<T> src)
             where T : unmanaged

@@ -9,11 +9,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static VOpTypes;
+    using static VXTypes;
 
     public class t_vconcat : t_vinx<t_vconcat>
     {     
-        public void Check()
+        public void check()
         {
             var w = n128;
             CheckExec(w,z8);
@@ -28,13 +28,13 @@ namespace Z0
 
         protected void CheckExec<T>(N128 w, T t = default)
             where T : unmanaged
-                => check(() => Checker(w,t), TestCaseName(@op(w,t)));
+                => CheckAction(() => Checker(w,t), TestCaseName(@op(w,t)));
 
         protected Action<N128,T> Checker<T>(N128 w, T t = default)
             where T : unmanaged
-                => Check<T>;
+                => check<T>;
 
-        void Check<T>(N128 w, T t = default)
+        void check<T>(N128 w, T t = default)
             where T : unmanaged
         {
             for(var i=0; i< SampleCount; i++)
@@ -54,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline)]
         Concat2x128<T> @op<T>(N128 w, T t = default)
             where T : unmanaged
-                => VOps.vconcat(w,t);
+                => VX.vconcat(w,t);
 
     }
 }

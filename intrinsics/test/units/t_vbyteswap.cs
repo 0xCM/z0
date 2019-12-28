@@ -19,6 +19,7 @@ namespace Z0
                 0b1000000000000000, 0b0000000010000000,                
                 0b0000011100000111, 0b0000011100000111
                 );
+
             var y16 = CpuVector.vparts(n128, 
                 0b1111111100000000, 0b0000000011111111, 
                 0b0011001111001100, 0b1100110000110011, 
@@ -58,8 +59,7 @@ namespace Z0
         }
 
         public void sbyteswap_32()
-        {
-            
+        {            
             for(var i=0; i< SampleCount; i++)
             {
                 var a = Random.Next<uint>();
@@ -100,8 +100,5 @@ namespace Z0
 
         public void vbyteswap_256x64()
             => vbyteswap_check_256(n256,z64);
-
-
-
     }
 }

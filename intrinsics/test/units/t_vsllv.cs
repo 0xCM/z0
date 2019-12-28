@@ -17,12 +17,12 @@ namespace Z0
             //check_scalar_match(VOps.vsllv<sbyte>(w), TestCase128<sbyte>);
             //check_scalar_match(VOps.vsllv<short>(w), TestCase128<short>);
 
-            check_scalar_match(VOps.vsllv<byte>(w), TestCase128<byte>);
-            check_scalar_match(VOps.vsllv<ushort>(w), TestCase128<ushort>);
-            check_scalar_match(VOps.vsllv<int>(w), TestCase128<int>);
-            check_scalar_match(VOps.vsllv<uint>(w), TestCase128<uint>);
-            check_scalar_match(VOps.vsllv<long>(w), TestCase128<long>);
-            check_scalar_match(VOps.vsllv<ulong>(w), TestCase128<ulong>);
+            CheckScalarMatch(VX.vsllv<byte>(w), TestCase128<byte>);
+            CheckScalarMatch(VX.vsllv<ushort>(w), TestCase128<ushort>);
+            CheckScalarMatch(VX.vsllv<int>(w), TestCase128<int>);
+            CheckScalarMatch(VX.vsllv<uint>(w), TestCase128<uint>);
+            CheckScalarMatch(VX.vsllv<long>(w), TestCase128<long>);
+            CheckScalarMatch(VX.vsllv<ulong>(w), TestCase128<ulong>);
         }
 
         void vsllv_check(N256 w = default)
@@ -30,12 +30,12 @@ namespace Z0
             //check_scalar_match(VOps.vsllv<sbyte>(w), TestCase256<sbyte>);
             //check_scalar_match(VOps.vsllv<short>(w), TestCase256<short>);
 
-            check_scalar_match(VOps.vsllv<byte>(w), TestCase256<byte>);
-            check_scalar_match(VOps.vsllv<ushort>(w), TestCase256<ushort>);
-            check_scalar_match(VOps.vsllv<int>(w), TestCase256<int>);
-            check_scalar_match(VOps.vsllv<uint>(w), TestCase256<uint>);
-            check_scalar_match(VOps.vsllv<long>(w), TestCase256<long>);
-            check_scalar_match(VOps.vsllv<ulong>(w), TestCase256<ulong>);
+            CheckScalarMatch(VX.vsllv<byte>(w), TestCase256<byte>);
+            CheckScalarMatch(VX.vsllv<ushort>(w), TestCase256<ushort>);
+            CheckScalarMatch(VX.vsllv<int>(w), TestCase256<int>);
+            CheckScalarMatch(VX.vsllv<uint>(w), TestCase256<uint>);
+            CheckScalarMatch(VX.vsllv<long>(w), TestCase256<long>);
+            CheckScalarMatch(VX.vsllv<ulong>(w), TestCase256<ulong>);
         }
 
         public void vsllv_check()

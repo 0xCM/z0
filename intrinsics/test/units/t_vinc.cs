@@ -20,37 +20,37 @@ namespace Z0
         
         void check(N128 w)
         {
-            check(VOps.vinc(w,z8), w, z8);                
-            check(VOps.vinc(w,z8i), w, z8i);
-            check(VOps.vinc(w,z16),  w, z16);
-            check(VOps.vinc(w,z16i), w, z16i);
-            check(VOps.vinc(w,z32), w, z32);
-            check(VOps.vinc(w,z32i), w, z32i);
-            check(VOps.vinc(w,z64), w, z64);
-            check(VOps.vinc(w,z64i), w, z64i);
+            check(VX.vinc(w,z8), w, z8);                
+            check(VX.vinc(w,z8i), w, z8i);
+            check(VX.vinc(w,z16),  w, z16);
+            check(VX.vinc(w,z16i), w, z16i);
+            check(VX.vinc(w,z32), w, z32);
+            check(VX.vinc(w,z32i), w, z32i);
+            check(VX.vinc(w,z64), w, z64);
+            check(VX.vinc(w,z64i), w, z64i);
         }
 
         void check(N256 w)
         {
-            check(VOps.vinc(w,z8), w, z8);                
-            check(VOps.vinc(w,z8i), w, z8i);
-            check(VOps.vinc(w,z16),  w, z16);
-            check(VOps.vinc(w,z16i), w, z16i);
-            check(VOps.vinc(w,z32), w, z32);
-            check(VOps.vinc(w,z32i), w, z32i);
-            check(VOps.vinc(w,z64), w, z64);
-            check(VOps.vinc(w,z64i), w, z64i);
+            check(VX.vinc(w,z8), w, z8);                
+            check(VX.vinc(w,z8i), w, z8i);
+            check(VX.vinc(w,z16),  w, z16);
+            check(VX.vinc(w,z16i), w, z16i);
+            check(VX.vinc(w,z32), w, z32);
+            check(VX.vinc(w,z32i), w, z32i);
+            check(VX.vinc(w,z64), w, z64);
+            check(VX.vinc(w,z64i), w, z64i);
         }
 
         void check<F,T>(F f, N128 w, T t = default)
             where T : unmanaged
             where F : IVUnaryOp128D<T>
-                => check_unary_scalar_match(f,w,t);
+                => CheckUnaryScalarMatch(f,w,t);
             
         void check<F,T>(F f, N256 w, T t = default)
             where T : unmanaged
             where F : IVUnaryOp256D<T>
-                => check_unary_scalar_match(f,w,t);
+                => CheckUnaryScalarMatch(f,w,t);
 
     }
 }

@@ -18,7 +18,6 @@ namespace Z0
 
     partial class dinx
     {
-
         /// <summary>
         ///  __m128i _mm_unpackhi_epi8 (__m128i a, __m128i b)PUNPCKHBW xmm, xmm/m128
         /// </summary>

@@ -21,7 +21,7 @@ namespace Z0.OpCodes
             => ginx.vlt(x,y);
 
         public static Vector128<int> vlt_o128x32i(Vector128<int> x, Vector128<int> y)
-            => Pipes.apply(x,y, VOps.vlt(n128,z32i));
+            => Pipes.apply(x,y, VX.vlt(n128,z32i));
 
         public static Vector128<uint> vlt_128x32u(Vector128<uint> x, Vector128<uint> y)
             => dinx.vlt(x,y);
@@ -30,7 +30,7 @@ namespace Z0.OpCodes
             => ginx.vlt(x,y);
 
         public static Vector128<uint> vlt_o128x32u(Vector128<uint> x, Vector128<uint> y)
-            => Pipes.apply(x,y, VOps.vlt(n128,z32));
+            => Pipes.apply(x,y, VX.vlt(n128,z32));
 
         public static Vector128<long> vlt_128x64i(Vector128<long> x, Vector128<long> y)
             => dinx.vlt(x,y);
@@ -39,7 +39,7 @@ namespace Z0.OpCodes
             => ginx.vlt(x,y);
 
         public static Vector128<long> vlt_o128x64i(Vector128<long> x, Vector128<long> y)
-            => Pipes.apply(x,y, VOps.vlt(n128,z64i));
+            => Pipes.apply(x,y, VX.vlt(n128,z64i));
 
         public static Vector256<byte> vlt_256x8u(Vector256<byte> x, Vector256<byte> y)
             => dinx.vlt(x,y);
@@ -48,7 +48,7 @@ namespace Z0.OpCodes
             => ginx.vlt(x,y);
 
         public static Vector256<byte> vlt_o256x8u(Vector256<byte> x, Vector256<byte> y)
-            => Pipes.apply(x,y, VOps.vlt(n256,z8));
+            => Pipes.apply(x,y, VX.vlt(n256,z8));
 
         public static bool vtestz_d128x8i(Vector128<sbyte> src, Vector128<sbyte> mask)
             => dinx.vtestz(src,mask);

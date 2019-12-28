@@ -10,14 +10,16 @@ namespace Z0
 
     using static zfunc;
 
-    partial class VOpTypes
+    partial class VXTypes
     {
         public readonly struct Rotl128<T> : IVShiftOp128D<T>
             where T : unmanaged
         {
             public static Rotl128<T> Op => default;
 
-            public string Moniker => moniker<N128,T>("vrotl");
+            public const string Name = "vrotl";
+
+            public string Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte offset) => ginx.vrotl(x,offset);
@@ -32,7 +34,9 @@ namespace Z0
         {
             public static Rotl256<T> Op => default;
 
-            public string Moniker => moniker<N256,T>("vrotl");
+            public const string Name = "vrotl";
+
+            public string Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte offset) => ginx.vrotl(x,offset);

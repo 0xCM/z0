@@ -18,27 +18,79 @@ namespace Z0
     public abstract class t_vinx<X> : t_inx<X>
         where X : t_vinx<X>
     {
+
+        protected t_vinx()
+        {
+            Check = new CheckExec(Config);
+        }
+        
+        protected CheckExec Check {get;}
+
+        static void CheckFailed()
+            => throw new Exception();
+                
         /// <summary>
-        /// Computes the componentwise-length of a 128-bit vector
+        /// Verifies the correct function of a vectorized factory operator
         /// </summary>
         /// <param name="w">The vector width selector</param>
-        /// <param name="t">A component type representative</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        protected static int vcount<T>(N128 w, T t = default)
+        /// <param name="f">The factory operator to verify</param>
+        /// <param name="check">The adjudication operator</param>
+        /// <param name="s">A factory input type representative</param>
+        /// <param name="t">A target vector component type representative</param>
+        /// <typeparam name="F">The factory type</typeparam>
+        /// <typeparam name="C">The check operator type</typeparam>
+        /// <typeparam name="S">The factory input type</typeparam>
+        /// <typeparam name="T">The target vector component type</typeparam>
+        protected void CheckFactory<F,C,S,T>(N128 w, F f, C check, S s = default, T t = default)
+            where S : unmanaged
             where T : unmanaged
-                => CpuVector.vcount(w,t);
+            where F : IVFactoryOp128<S,T>
+            where C : IVChecker128<S,T>
+        {
+            void exec()
+            {
+                for(var i=0; i < SampleCount; i++)
+                {
+                    var a = Random.Next<S>();
+                    var v = f.Invoke(a);
+                    if(!check.Invoke(a,v))
+                        CheckFailed();
+                }
+            }
+            CheckAction(exec, TestCaseName(f));
+        }
 
         /// <summary>
-        /// Computes the componentwise-length of a 256-bit vector
+        /// Verifies the correct function of a vectorized factory operator
         /// </summary>
         /// <param name="w">The vector width selector</param>
-        /// <param name="t">A component type representative</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        protected static int vcount<T>(N256 w, T t = default)
+        /// <param name="f">The factory operator to verify</param>
+        /// <param name="check">The adjudication operator</param>
+        /// <param name="s">A factory input type representative</param>
+        /// <param name="t">A target vector component type representative</param>
+        /// <typeparam name="F">The factory type</typeparam>
+        /// <typeparam name="C">The check operator type</typeparam>
+        /// <typeparam name="S">The factory input type</typeparam>
+        /// <typeparam name="T">The target vector component type</typeparam>
+        protected void CheckFactory<F,C,S,T>(N256 w, F f, C check, S s = default, T t = default)
+            where S : unmanaged
             where T : unmanaged
-                => CpuVector.vcount(w,t);
+            where F : IVFactoryOp256<S,T>
+            where C : IVChecker256<S,T>
+        {
+            void exec()
+            {
+                for(var i=0; i< SampleCount; i++)
+                {
+                    var a = Random.Next<S>();
+                    var v = f.Invoke(a);
+                    if(!check.Invoke(a,v))
+                        CheckFailed();
+                }
+            }
+
+            CheckAction(exec, TestCaseName(f));
+        }
 
         protected void cmp_gt_check<T>(N128 w, T t = default)
             where T : unmanaged
@@ -89,46 +141,6 @@ namespace Z0
             }
         }
 
-        protected void vnot_check<T>(N128 w = default, T t = default)
-            where T : unmanaged
-        {
-            for(var i=0; i<SampleCount; i++)
-            {
-                var x = Random.CpuVector<T>(w);
-
-                var actual = ginx.vnot(x);
-                var bsX = x.ToBitString();
-                var bsY = actual.ToBitString();
-                
-                Claim.eq(bsX.Length, bsY.Length);
-                for(var j=0; j< bsX.Length; j++)
-                    Claim.neq(bsX[j],bsY[j]);
-
-                var xData = x.ToSpan();
-                var expect  = CpuVector.vload(w, in head(mathspan.not(xData)));
-                Claim.eq(expect,actual);
-            }
-        }
-
-        protected void vnot_check<T>(N256 w = default, T t = default)
-            where T : unmanaged
-        {
-            for(var i=0; i<SampleCount; i++)
-            {
-                var x = Random.CpuVector<T>(w);
-                var actual = ginx.vnot(x);
-                
-                var bsX = x.ToBitString();
-                var bsY = actual.ToBitString();
-                Claim.eq(bsX.Length, bsY.Length);
-                for(var j=0; j< bsX.Length; j++)
-                    Claim.neq(bsX[j],bsY[j]);
-
-                var xData = x.ToSpan();                
-                var expect  = CpuVector.vload(w, in head(mathspan.not(xData)));
-                Claim.eq(expect,actual);
-            }
-        }
          
         protected void vlt_check<T>(N128 w, T t = default)
             where T : unmanaged
@@ -268,28 +280,6 @@ namespace Z0
                 Claim.eq(expect[i], actual[i]);
         }
             
-        protected void vextract_check<T>(N256 w, T t = default)
-            where T : unmanaged
-        {
-            var len = zfunc.vcount<T>(w);
-            var half = len >> 1;
-            var src = Random.CpuVector<T>(w);
-            var srcData = span<T>(len);
-            src.StoreTo(srcData);
-            
-            var x0 = ginx.vlo(src);
-            var y0 = span<T>(half);
-            x0.StoreTo(y0);
-            var z0 = srcData.Slice(0, half);
-            Claim.eq(y0,z0);
-
-            var x1 = ginx.vhi(src);
-            var y1 = span<T>(half);
-            x1.StoreTo(y1);
-            var z1 = srcData.Slice(half);
-            Claim.eq(y1,z1);
-
-        }
 
         protected void vtestz_check<T>(N128 n = default, T t = default)
             where T : unmanaged

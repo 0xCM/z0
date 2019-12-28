@@ -98,7 +98,6 @@ namespace Z0
                  return vgeneric<T>(dinx.vlt(vcast64i(x), vcast64i(y)));
         }    
 
-
         [MethodImpl(Inline)]
         static Vector256<T> vlt_u<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged

@@ -51,7 +51,6 @@ namespace Z0
             return ref dst;
         }
 
-
         /// <summary>
         /// Broadcasts an S-cell over a T-cell
         /// </summary>

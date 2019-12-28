@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class VOpTypes
+    partial class VXTypes
     {
         public readonly struct Concat2x128<T> : IVMergeOp2x128x256<T>
             where T : unmanaged

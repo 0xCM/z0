@@ -85,12 +85,18 @@ namespace Z0
 
     }
 
-    public static partial class VOps
+    /// <summary>
+    /// Vectorized operators
+    /// </summary>
+    public static partial class VX
     {
 
     }
 
-    public static partial class VOpTypes
+    /// <summary>
+    /// Vectorized operator types
+    /// </summary>
+    public static partial class VXTypes
     {
 
     }

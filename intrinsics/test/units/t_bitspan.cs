@@ -16,9 +16,7 @@ namespace Z0
             var src = uint.MaxValue;
             Span<uint> buffer = new uint[32];
             BitPack.unpack(src, buffer.AsBytes());
-            Trace(buffer.AsBytes().FormatList());
-            
-
+            Trace(buffer.AsBytes().FormatList());        
         }
 
         public void bitspan_format_direction()

@@ -55,5 +55,29 @@ namespace Z0
         public void vextract_256x64u()
             => vextract_check<ulong>(n256);
 
+        protected void vextract_check<T>(N256 w, T t = default)
+            where T : unmanaged
+        {
+            var len = zfunc.vcount<T>(w);
+            var half = len >> 1;
+            var src = Random.CpuVector<T>(w);
+            var srcData = span<T>(len);
+            src.StoreTo(srcData);
+            
+            var x0 = ginx.vlo(src);
+            var y0 = span<T>(half);
+            x0.StoreTo(y0);
+            var z0 = srcData.Slice(0, half);
+            Claim.eq(y0,z0);
+
+            var x1 = ginx.vhi(src);
+            var y1 = span<T>(half);
+            x1.StoreTo(y1);
+            var z1 = srcData.Slice(half);
+            Claim.eq(y1,z1);
+
+        }
+
+
     }
 }

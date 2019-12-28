@@ -21,7 +21,7 @@ namespace Z0
             => ginx.vadd(x,y);
 
         public static Vector256<short> add_o256x16i(Vector256<short> x, Vector256<short> y)
-            => Pipes.apply(x,y,VOps.vadd(n256,z16i));
+            => Pipes.apply(x,y,VX.vadd(n256,z16i));
             
         public static Vector256<short> abs_d256x16i(Vector256<short> src)
             => dinx.vabs(src);
@@ -30,7 +30,7 @@ namespace Z0
             => ginx.vabs(src);
 
         public static Vector256<short> abs_o256x16i(Vector256<short> src)
-            => Pipes.apply(src, VOps.vabs(n256,z16i));
+            => Pipes.apply(src, VX.vabs(n256,z16i));
 
         public static Vector256<short> sub_d256x16i(Vector256<short> x, Vector256<short> y)
             => dinx.vsub(x,y);
@@ -39,7 +39,7 @@ namespace Z0
             => ginx.vsub(x,y);
 
         public static Vector256<short> sub_o256x16i(Vector256<short> x, Vector256<short> y)
-            => OpCapture.vbinary(n256,VOps.vsub(n256,z16i),z16i).Invoke(x,y);
+            => OpCapture.vbinary(n256,VX.vsub(n256,z16i),z16i).Invoke(x,y);
     }
 
 }

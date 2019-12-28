@@ -15,9 +15,9 @@ namespace Z0
         public void vbitblend_basecases()
         {
             var n = n256;
-            var mask =  CpuVector.vbroadcast(n, BitMask.msb(n2,n1,z8));
+            var mask = CpuVector.vbroadcast(n, BitMask.msb(n2,n1,z8));
             var zero = CpuVector.vzero<byte>(n);
-            var ones =  CpuVector.vones<byte>(n);
+            var ones = CpuVector.vones<byte>(n);
             var blend = dinx.vbitblend(zero,ones,mask);
             Claim.eq(blend,mask);
 

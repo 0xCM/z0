@@ -54,9 +54,6 @@ namespace Z0
         /// <param name="mask">Specifies the bits in the source to test</param>
         [MethodImpl(Inline)]
         public static bool vtestc(Vector256<double> src, Vector256<double> mask)
-            => TestC(src, mask);                             
-
-
+            => TestC(src, mask);
     }
-
 }

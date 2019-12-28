@@ -57,17 +57,17 @@ namespace Z0
         }
         public static uint vxor_128x32u(Vector128<uint> x, Vector128<uint> y)
         {
-            var ops = VOps.vxor(n128,z32);
+            var ops = VX.vxor(n128,z32);
             var z = ops.Invoke(x,y);
             var a = ops.InvokeScalar(x.FirstCell(),y.LastCell());
             return a;
         }
 
         public static Vector256<uint> op_shift_specific(Vector256<uint> src)
-            => apply(VOps.vsll<uint>(n256),src,3);
+            => apply(VX.vsll<uint>(n256),src,3);
         
         public static Vector256<uint> op_shift(Vector256<uint> src, byte amount)
-            => apply(VOps.vsll<uint>(n256),src,amount);
+            => apply(VX.vsll<uint>(n256),src,amount);
         
         [MethodImpl(Inline)]
         public static Vector256<T> apply<F,T>(F op, Vector256<T> src, byte amount)

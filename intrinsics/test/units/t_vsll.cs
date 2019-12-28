@@ -19,37 +19,37 @@ namespace Z0
         void check(N128 w)
         {
 
-            check(VOps.vsll(w,z8), w, z8);                
-            check(VOps.vsll(w,z8i), w, z8i);
-            check(VOps.vsll(w,z16),  w, z16);
-            check(VOps.vsll(w,z16i), w, z16i);
-            check(VOps.vsll(w,z32), w, z32);
-            check(VOps.vsll(w,z32i), w, z32i);
-            check(VOps.vsll(w,z64), w, z64);
-            check(VOps.vsll(w,z64i), w, z64i);
+            check(VX.vsll(w,z8), w, z8);                
+            check(VX.vsll(w,z8i), w, z8i);
+            check(VX.vsll(w,z16),  w, z16);
+            check(VX.vsll(w,z16i), w, z16i);
+            check(VX.vsll(w,z32), w, z32);
+            check(VX.vsll(w,z32i), w, z32i);
+            check(VX.vsll(w,z64), w, z64);
+            check(VX.vsll(w,z64i), w, z64i);
         }
 
         void check(N256 w)
         {
-            check(VOps.vsll(w,z8), w, z8);                
-            check(VOps.vsll(w,z8i), w, z8i);
-            check(VOps.vsll(w,z16),  w, z16);
-            check(VOps.vsll(w,z16i), w, z16i);
-            check(VOps.vsll(w,z32), w, z32);
-            check(VOps.vsll(w,z32i), w, z32i);
-            check(VOps.vsll(w,z64), w, z64);
-            check(VOps.vsll(w,z64i), w, z64i);            
+            check(VX.vsll(w,z8), w, z8);                
+            check(VX.vsll(w,z8i), w, z8i);
+            check(VX.vsll(w,z16),  w, z16);
+            check(VX.vsll(w,z16i), w, z16i);
+            check(VX.vsll(w,z32), w, z32);
+            check(VX.vsll(w,z32i), w, z32i);
+            check(VX.vsll(w,z64), w, z64);
+            check(VX.vsll(w,z64i), w, z64i);            
         }
 
         void check<F,T>(F f, N128 w, T t = default)
             where T : unmanaged
             where F : IVShiftOp128D<T>
-                => check_shift_scalar_match(f,w,t);
+                => CheckShiftScalarMatch(f,w,t);
             
         void check<F,T>(F f, N256 w, T t = default)
             where T : unmanaged
             where F : IVShiftOp256D<T>
-                => check_shift_scalar_match(f,w,t);
+                => CheckShiftScalarMatch(f,w,t);
 
     }
 }

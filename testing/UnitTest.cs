@@ -35,13 +35,13 @@ namespace Z0
         protected string TestCaseName<T>(string root, T t = default)
             => $"{GetType().Name}/{root}_{moniker(t)}";
 
-        [MethodImpl(Inline)]
-        static int vcount<W,T>(W w = default, T t = default)
-            where W : unmanaged, ITypeNat
-            where T : unmanaged
-                => TypeMath.div(w,t);
-
-        protected void check(Action f, string name, SystemCounter count = default)
+        /// <summary>
+        /// Manages the execution of an action test case
+        /// </summary>
+        /// <param name="f">The action under test</param>
+        /// <param name="name">The action name</param>
+        /// <param name="clock">Accumulates the test case execution time</param>
+        protected void CheckAction(Action f, string name, SystemCounter count = default)
         {
             var succeeded = true;
             
@@ -62,12 +62,20 @@ namespace Z0
 
         }
 
-        protected void check<T>(Action f, string name, T t = default, SystemCounter count = default)
+        /// <summary>
+        /// Manages the execution of an action test case
+        /// </summary>
+        /// <param name="f">The action under test</param>
+        /// <param name="name">The action name</param>
+        /// <param name="t">A discrinator representative</param>
+        /// <param name="clock">Accumulates the test case execution time</param>
+        /// <typeparam name="T">The discriminator type</typeparam>
+        protected void CheckAction<T>(Action f, string name, T t = default, SystemCounter clock = default)
         {
             var succeeded = true;
             var casename = TestCaseName(name,t);
             
-            count.Start();
+            clock.Start();
             try
             {
                 f();
@@ -79,12 +87,12 @@ namespace Z0
             }
             finally
             {
-                ReportOutcome(casename,succeeded,count);
+                ReportOutcome(casename,succeeded,clock);
             }
 
         }
 
-        protected void check_explicit<F,T>(F f, Block128<T> left, Block128<T> right, Block128<T> dst, SystemCounter count = default) 
+        protected void CheckExplicit<F,T>(F f, Block128<T> left, Block128<T> right, Block128<T> dst, SystemCounter count = default) 
             where T : unmanaged
             where F : IVBinOp128<T>
         {
@@ -117,7 +125,7 @@ namespace Z0
             }
         }
 
-        protected void check_explicit<F,T>(F f, Block256<T> left, Block256<T> right, Block256<T> dst, SystemCounter count = default) 
+        protected void CheckExplicit<F,T>(F f, Block256<T> left, Block256<T> right, Block256<T> dst, SystemCounter count = default) 
             where T : unmanaged
             where F : IVBinOp256<T>
         {
@@ -160,7 +168,7 @@ namespace Z0
         /// <typeparam name="F">The reference operator type</typeparam>
         /// <typeparam name="G">The test operator type</typeparam>
         /// <typeparam name="T">The domain over which the operators are defined</typeparam>
-        protected void check_unary_match<F,G,T>(F expect, G actual, T t = default, bool nozero = false,  SystemCounter clock = default)
+        protected void CheckUnaryMatch<F,G,T>(F expect, G actual, T t = default, bool nozero = false,  SystemCounter clock = default)
             where T : unmanaged
             where F : IUnaryOp<T>
             where G : IUnaryOp<T>
@@ -199,7 +207,7 @@ namespace Z0
         /// <typeparam name="F">The reference operator type</typeparam>
         /// <typeparam name="G">The test operator type</typeparam>
         /// <typeparam name="T">The domain over which the operators are defined</typeparam>
-        protected void check_binarypred_match<F,G,T>(F expect, G actual, T t = default, SystemCounter clock = default)
+        protected void CheckBinaryPredMatch<F,G,T>(F expect, G actual, T t = default, SystemCounter clock = default)
             where T : unmanaged
             where F : IBinaryPred<T>
             where G : IBinaryPred<T>
@@ -236,7 +244,7 @@ namespace Z0
         /// <typeparam name="F">The reference operator type</typeparam>
         /// <typeparam name="G">The test operator type</typeparam>
         /// <typeparam name="T">The domain over which the operators are defined</typeparam>
-        protected void check_binary_match<F,G,T>(F expect, G actual, T t = default, bool nozero = false,  SystemCounter clock = default)
+        protected void CheckBinaryPredMatch<F,G,T>(F expect, G actual, T t = default, bool nozero = false,  SystemCounter clock = default)
             where T : unmanaged
             where F : IBinaryOp<T>
             where G : IBinaryOp<T>
@@ -275,7 +283,7 @@ namespace Z0
         /// <typeparam name="F">The reference operator type</typeparam>
         /// <typeparam name="G">The test operator type</typeparam>
         /// <typeparam name="T">The domain over which the operators are defined</typeparam>
-        protected void check_ternary_match<F,G,T>(F expect, G actual, T t = default, bool nozero = false,  SystemCounter clock = default)
+        protected void CheckTernaryMatch<F,G,T>(F expect, G actual, T t = default, bool nozero = false,  SystemCounter clock = default)
             where T : unmanaged
             where F : ITernaryOp<T>
             where G : ITernaryOp<T>
@@ -305,7 +313,7 @@ namespace Z0
             }
         }
 
-        protected void check_unary_scalar_match<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
+        protected void CheckUnaryScalarMatch<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : IVUnaryOp128D<T>
         {
@@ -334,7 +342,7 @@ namespace Z0
             }
         }
 
-        protected void check_unary_scalar_match<F,T>(F f, N256 w, T t = default, SystemCounter count = default)
+        protected void CheckUnaryScalarMatch<F,T>(F f, N256 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : IVUnaryOp256D<T>
         {
@@ -363,7 +371,7 @@ namespace Z0
             }
         }
 
-        protected void check_shift_scalar_match<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
+        protected void CheckShiftScalarMatch<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : IVShiftOp128D<T>
         {
@@ -394,7 +402,7 @@ namespace Z0
             }
         }
 
-        protected void check_shift_scalar_match<F,T>(F f, N256 w, T t = default, SystemCounter count = default)
+        protected void CheckShiftScalarMatch<F,T>(F f, N256 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : IVShiftOp256D<T>
         {
@@ -425,7 +433,7 @@ namespace Z0
             }
         }
 
-        protected void check_binary_scalar_match<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
+        protected void CheckBinaryScalarMatch<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : IVBinOp128D<T>
         {
@@ -455,7 +463,7 @@ namespace Z0
             }
         }
 
-        protected void check_binary_scalar_match<F,T>(F f, N256 w, T t = default, SystemCounter count = default)
+        protected void CheckBinaryScalarMatch<F,T>(F f, N256 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : IVBinOp256D<T>
         {
@@ -485,7 +493,7 @@ namespace Z0
             }
         }
 
-        protected void check_scalar_match<F,T>(F f, Func<int,Pair<Vector128<T>>> src, SystemCounter count = default)
+        protected void CheckScalarMatch<F,T>(F f, Func<int,Pair<Vector128<T>>> src, SystemCounter count = default)
             where T : unmanaged
             where F : IVBinOp128D<T>
         {
@@ -514,7 +522,7 @@ namespace Z0
             }
         }
 
-        protected void check_scalar_match<F,T>(F f, Func<int,Pair<Vector256<T>>> src, SystemCounter count = default)
+        protected void CheckScalarMatch<F,T>(F f, Func<int,Pair<Vector256<T>>> src, SystemCounter count = default)
             where T : unmanaged
             where F : IVBinOp256D<T>
         {
@@ -541,6 +549,6 @@ namespace Z0
             {
                 ReportOutcome(TestCaseName(f),succeeded,count);
             }
-        }
+        }       
     }
 }

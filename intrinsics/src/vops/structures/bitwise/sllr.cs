@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class VOpTypes
+    partial class VXTypes
     {
 
         public readonly struct Sllr128<T> : IVBinOp128D<T>

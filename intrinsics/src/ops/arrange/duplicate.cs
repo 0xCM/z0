@@ -15,8 +15,7 @@ namespace Z0
     using static As;
 
     partial class dinx
-    {
-        
+    {        
         [MethodImpl(Inline)]
         public static Vector256<byte> vduplicate(N0 parity, N32 w, Vector256<byte> src)
             => v8u(dinxfp.vdup32(parity, v32f(src)));

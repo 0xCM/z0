@@ -10,14 +10,20 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Security;
 
+    [SuppressUnmanagedCodeSecurity]
+    public interface IBinaryPred<A,B> : IOp
+    {
+        bit Invoke(A a, B b);        
+    }
+
     /// <summary>
     /// Characterizes a binary predicate
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IBinaryPred<A> : IOp
+    public interface IBinaryPred<A> : IBinaryPred<A,A>
     {
-        bit Invoke(A a, A b);        
+        
     }
 
     /// <summary>

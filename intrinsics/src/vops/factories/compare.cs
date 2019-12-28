@@ -10,9 +10,9 @@ namespace Z0
 
     using static zfunc;
 
-    using static VOpTypes;
+    using static VXTypes;
 
-    partial class VOps
+    partial class VX
     {
         /// <summary>
         /// Operator factory for veq_128xT

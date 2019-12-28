@@ -23,8 +23,6 @@ namespace Z0
         string Moniker {get;}        
     }
 
-
-
     [SuppressUnmanagedCodeSecurity]
     public interface IPrimalOp<T> : IOp
         where T : unmanaged

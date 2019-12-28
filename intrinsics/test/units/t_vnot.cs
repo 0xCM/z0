@@ -57,6 +57,47 @@ namespace Z0
 
         public void vnot_256x64u()
             => vnot_check<ulong>(n256);
+ 
+        protected void vnot_check<T>(N128 w = default, T t = default)
+            where T : unmanaged
+        {
+            for(var i=0; i<SampleCount; i++)
+            {
+                var x = Random.CpuVector<T>(w);
+
+                var actual = ginx.vnot(x);
+                var bsX = x.ToBitString();
+                var bsY = actual.ToBitString();
+                
+                Claim.eq(bsX.Length, bsY.Length);
+                for(var j=0; j< bsX.Length; j++)
+                    Claim.neq(bsX[j],bsY[j]);
+
+                var xData = x.ToSpan();
+                var expect  = CpuVector.vload(w, in head(mathspan.not(xData)));
+                Claim.eq(expect,actual);
+            }
+        }
+
+        protected void vnot_check<T>(N256 w = default, T t = default)
+            where T : unmanaged
+        {
+            for(var i=0; i<SampleCount; i++)
+            {
+                var x = Random.CpuVector<T>(w);
+                var actual = ginx.vnot(x);
+                
+                var bsX = x.ToBitString();
+                var bsY = actual.ToBitString();
+                Claim.eq(bsX.Length, bsY.Length);
+                for(var j=0; j< bsX.Length; j++)
+                    Claim.neq(bsX[j],bsY[j]);
+
+                var xData = x.ToSpan();                
+                var expect  = CpuVector.vload(w, in head(mathspan.not(xData)));
+                Claim.eq(expect,actual);
+            }
+        }
    }
 
 }

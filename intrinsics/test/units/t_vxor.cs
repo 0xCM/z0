@@ -18,38 +18,38 @@ namespace Z0
 
         void check(N128 w)
         {
-            check(VOps.vxor(w,z8), w, z8);                
-            check(VOps.vxor(w,z8i), w, z8i);
-            check(VOps.vxor(w,z16),  w, z16);
-            check(VOps.vxor(w,z16i), w, z16i);
-            check(VOps.vxor(w,z32), w, z32);
-            check(VOps.vxor(w,z32i), w, z32i);
-            check(VOps.vxor(w,z64), w, z64);
-            check(VOps.vxor(w,z64i), w, z64i);
+            check(VX.vxor(w,z8), w, z8);                
+            check(VX.vxor(w,z8i), w, z8i);
+            check(VX.vxor(w,z16),  w, z16);
+            check(VX.vxor(w,z16i), w, z16i);
+            check(VX.vxor(w,z32), w, z32);
+            check(VX.vxor(w,z32i), w, z32i);
+            check(VX.vxor(w,z64), w, z64);
+            check(VX.vxor(w,z64i), w, z64i);
 
         }
 
         void check(N256 w)
         {
-            check(VOps.vxor(w,z8), w, z8);                
-            check(VOps.vxor(w,z8i), w, z8i);
-            check(VOps.vxor(w,z16),  w, z16);
-            check(VOps.vxor(w,z16i), w, z16i);
-            check(VOps.vxor(w,z32), w, z32);
-            check(VOps.vxor(w,z32i), w, z32i);
-            check(VOps.vxor(w,z64), w, z64);
-            check(VOps.vxor(w,z64i), w, z64i);
+            check(VX.vxor(w,z8), w, z8);                
+            check(VX.vxor(w,z8i), w, z8i);
+            check(VX.vxor(w,z16),  w, z16);
+            check(VX.vxor(w,z16i), w, z16i);
+            check(VX.vxor(w,z32), w, z32);
+            check(VX.vxor(w,z32i), w, z32i);
+            check(VX.vxor(w,z64), w, z64);
+            check(VX.vxor(w,z64i), w, z64i);
         }            
 
         void check<F,T>(F f, N128 w, T t = default)
             where T : unmanaged
             where F : IVBinOp128D<T>
-                => check_binary_scalar_match(f,w,t);
+                => CheckBinaryScalarMatch(f,w,t);
             
         void check<F,T>(F f, N256 w, T t = default)
             where T : unmanaged
             where F : IVBinOp256D<T>
-                => check_binary_scalar_match(f,w,t);
+                => CheckBinaryScalarMatch(f,w,t);
 
     }
 }

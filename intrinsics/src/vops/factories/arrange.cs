@@ -10,9 +10,9 @@ namespace Z0
 
     using static zfunc;
 
-    using static VOpTypes;
+    using static VXTypes;
 
-    partial class VOps
+    partial class VX
     {
         /// <summary>
         /// Operator factory for vconcat_2x128xT
@@ -24,5 +24,52 @@ namespace Z0
         public static Concat2x128<T> vconcat<T>(N128 w, T t = default)
             where T : unmanaged
                 => Concat2x128<T>.Op;
+
+        /// <summary>
+        /// Operator factory for vconcat_2x128xT
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="t">A component type representative</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Broadcast128<T> vbroadcast<T>(N128 w, T t = default)
+            where T : unmanaged
+                => Broadcast128<T>.Op;
+
+        /// <summary>
+        /// Operator factory for vconcat_2x128xT
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="t">A component type representative</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Broadcast128<S,T> vbroadcast<S,T>(N128 w, S s = default, T t = default)
+            where T : unmanaged        
+            where S : unmanaged
+                => Broadcast128<S,T>.Op;
+
+        /// <summary>
+        /// Operator factory for vconcat_2x128xT
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="t">A component type representative</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Broadcast256<T> vbroadcast<T>(N256 w, T t = default)
+            where T : unmanaged
+                => Broadcast256<T>.Op;
+
+        /// <summary>
+        /// Operator factory for vconcat_2x128xT
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="t">A component type representative</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Broadcast256<S,T> vbroadcast<S,T>(N256 w, S s = default, T t = default)
+            where T : unmanaged        
+            where S : unmanaged
+                => Broadcast256<S,T>.Op;
+
     }
 }
