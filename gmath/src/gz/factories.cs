@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static zfunc;
-    using static KOpStructs;
+    using static GZTypes;
 
-    public static class KOps
+    public static class GZ
     {
        // ~ arithmetic
        // ~ ------------------------------------------------------------------

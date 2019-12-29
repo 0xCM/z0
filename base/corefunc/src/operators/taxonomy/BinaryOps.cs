@@ -6,6 +6,8 @@ namespace Z0
 {
     using System.Runtime.Intrinsics;
     using System.Security;
+    
+    using static zfunc;
 
     /// <summary>
     /// Common non-parametric interface for binary operators
@@ -135,4 +137,6 @@ namespace Z0
     {
         
     }
+
+ 
 }

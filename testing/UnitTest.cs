@@ -13,8 +13,8 @@ namespace Z0
         where U : UnitTest<U>
     {
 
-        protected UnitTest(ITestConfig config = null)
-            : base(config)
+        protected UnitTest(ITestConfig config = null, IPolyrand random = null)
+            : base(config, random)
             {
 
             }        

@@ -131,7 +131,7 @@ namespace Z0
             Disassemble(typeof(bvoc));    
             Disassemble(typeof(bgoc));   
             Disassemble(typeof(inxoc));    
-            Disassemble(typeof(vops));    
+            Disassemble(typeof(vxops));    
 
         }
 

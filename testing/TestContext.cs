@@ -14,7 +14,8 @@ namespace Z0
         where T : TestContext<T>
     {
         public TestContext(ITestConfig config = null, IPolyrand random = null)
-            : base(random ?? Rng.XOrShift1024(Seed1024.TestSeed).ToPolyrand())
+            //: base(random ?? Rng.XOrShift1024(Seed1024.TestSeed).ToPolyrand())
+            : base(random ?? Rng.WyHash64(Seed64.Seed00))
         {
             this.Config = config ?? TestConfigDefaults.Default();
         }
@@ -22,7 +23,7 @@ namespace Z0
         /// <summary>
         /// The default number of times a randomized test case should be repeated
         /// </summary>
-        protected const int DefaultRepCount = Pow2.T08;
+        protected const int DefaultRepCount = Pow2.T06;
 
         /// <summary>
         /// The default number times to repeat an activity

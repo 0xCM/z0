@@ -16,197 +16,197 @@ namespace Z0
         {
             const string name = "add";
 
-            CheckBinaryPredMatch(binary(math.add, name, z8), KOps.add(z8), z8);
-            CheckBinaryPredMatch(binary(math.add, name, z8i), KOps.add(z8i), z8i);
+            CheckBinaryPredMatch(binary(math.add, name, z8), GZ.add(z8), z8);
+            CheckBinaryPredMatch(binary(math.add, name, z8i), GZ.add(z8i), z8i);
             
-            CheckBinaryPredMatch(binary(math.add, name, z16), KOps.add(z16),z16);
-            CheckBinaryPredMatch(binary(math.add, name,z16i), KOps.add(z16i),z16i);
+            CheckBinaryPredMatch(binary(math.add, name, z16), GZ.add(z16),z16);
+            CheckBinaryPredMatch(binary(math.add, name,z16i), GZ.add(z16i),z16i);
             
-            CheckBinaryPredMatch(binary(math.add, name,z32), KOps.add(z32),z32);
-            CheckBinaryPredMatch(binary(math.add, name,z32i), KOps.add(z32i),z32i);
+            CheckBinaryPredMatch(binary(math.add, name,z32), GZ.add(z32),z32);
+            CheckBinaryPredMatch(binary(math.add, name,z32i), GZ.add(z32i),z32i);
                         
-            CheckBinaryPredMatch(binary(math.add, name,z64), KOps.add(z64),z64);
-            CheckBinaryPredMatch(binary(math.add, name,z64i), KOps.add(z64i),z64i);
+            CheckBinaryPredMatch(binary(math.add, name,z64), GZ.add(z64),z64);
+            CheckBinaryPredMatch(binary(math.add, name,z64i), GZ.add(z64i),z64i);
 
-            CheckBinaryPredMatch(binary(fmath.add, name,z32f), KOps.add(z32f),z32f);
-            CheckBinaryPredMatch(binary(fmath.add, name,z64f), KOps.add(z64f),z64f);
+            CheckBinaryPredMatch(binary(fmath.add, name,z32f), GZ.add(z32f),z32f);
+            CheckBinaryPredMatch(binary(fmath.add, name,z64f), GZ.add(z64f),z64f);
         }        
 
         public void check_sub()
         {
             const string name = "sub";
 
-            CheckBinaryPredMatch(binary(math.sub, name, z8), KOps.sub(z8), z8);
-            CheckBinaryPredMatch(binary(math.sub, name, z8i), KOps.sub(z8i), z8i);
+            CheckBinaryPredMatch(binary(math.sub, name, z8), GZ.sub(z8), z8);
+            CheckBinaryPredMatch(binary(math.sub, name, z8i), GZ.sub(z8i), z8i);
             
-            CheckBinaryPredMatch(binary(math.sub, name, z16), KOps.sub(z16),z16);
-            CheckBinaryPredMatch(binary(math.sub, name,z16i), KOps.sub(z16i),z16i);
+            CheckBinaryPredMatch(binary(math.sub, name, z16), GZ.sub(z16),z16);
+            CheckBinaryPredMatch(binary(math.sub, name,z16i), GZ.sub(z16i),z16i);
             
-            CheckBinaryPredMatch(binary(math.sub, name,z32), KOps.sub(z32),z32);
-            CheckBinaryPredMatch(binary(math.sub, name,z32i), KOps.sub(z32i),z32i);
+            CheckBinaryPredMatch(binary(math.sub, name,z32), GZ.sub(z32),z32);
+            CheckBinaryPredMatch(binary(math.sub, name,z32i), GZ.sub(z32i),z32i);
                         
-            CheckBinaryPredMatch(binary(math.sub, name,z64), KOps.sub(z64),z64);
-            CheckBinaryPredMatch(binary(math.sub, name,z64i), KOps.sub(z64i),z64i);
+            CheckBinaryPredMatch(binary(math.sub, name,z64), GZ.sub(z64),z64);
+            CheckBinaryPredMatch(binary(math.sub, name,z64i), GZ.sub(z64i),z64i);
 
-            CheckBinaryPredMatch(binary(fmath.sub, name,z32f), KOps.sub(z32f),z32f);
-            CheckBinaryPredMatch(binary(fmath.sub, name,z64f), KOps.sub(z64f),z64f);
+            CheckBinaryPredMatch(binary(fmath.sub, name,z32f), GZ.sub(z32f),z32f);
+            CheckBinaryPredMatch(binary(fmath.sub, name,z64f), GZ.sub(z64f),z64f);
         }
 
         public void check_mul()
         {
             const string name = "mul";
 
-            CheckBinaryPredMatch(binary(math.mul, name, z8), KOps.mul(z8), z8);
-            CheckBinaryPredMatch(binary(math.mul, name, z8i), KOps.mul(z8i), z8i);
+            CheckBinaryPredMatch(binary(math.mul, name, z8), GZ.mul(z8), z8);
+            CheckBinaryPredMatch(binary(math.mul, name, z8i), GZ.mul(z8i), z8i);
             
-            CheckBinaryPredMatch(binary(math.mul, name, z16), KOps.mul(z16),z16);
-            CheckBinaryPredMatch(binary(math.mul, name,z16i), KOps.mul(z16i),z16i);
+            CheckBinaryPredMatch(binary(math.mul, name, z16), GZ.mul(z16),z16);
+            CheckBinaryPredMatch(binary(math.mul, name,z16i), GZ.mul(z16i),z16i);
             
-            CheckBinaryPredMatch(binary(math.mul, name,z32), KOps.mul(z32),z32);
-            CheckBinaryPredMatch(binary(math.mul, name,z32i), KOps.mul(z32i),z32i);
+            CheckBinaryPredMatch(binary(math.mul, name,z32), GZ.mul(z32),z32);
+            CheckBinaryPredMatch(binary(math.mul, name,z32i), GZ.mul(z32i),z32i);
                         
-            CheckBinaryPredMatch(binary(math.mul, name,z64), KOps.mul(z64),z64);
-            CheckBinaryPredMatch(binary(math.mul, name,z64i), KOps.mul(z64i),z64i);
+            CheckBinaryPredMatch(binary(math.mul, name,z64), GZ.mul(z64),z64);
+            CheckBinaryPredMatch(binary(math.mul, name,z64i), GZ.mul(z64i),z64i);
 
-            CheckBinaryPredMatch(binary(fmath.mul, name,z32f), KOps.mul(z32f),z32f);
-            CheckBinaryPredMatch(binary(fmath.mul, name,z64f), KOps.mul(z64f),z64f);
+            CheckBinaryPredMatch(binary(fmath.mul, name,z32f), GZ.mul(z32f),z32f);
+            CheckBinaryPredMatch(binary(fmath.mul, name,z64f), GZ.mul(z64f),z64f);
         }
 
         public void check_div()
         {
             const string name = "div";
 
-            CheckBinaryPredMatch(binary(math.div, name, z8), KOps.div(z8), z8,true);
-            CheckBinaryPredMatch(binary(math.div, name, z8i), KOps.div(z8i), z8i,true);
+            CheckBinaryPredMatch(binary(math.div, name, z8), GZ.div(z8), z8,true);
+            CheckBinaryPredMatch(binary(math.div, name, z8i), GZ.div(z8i), z8i,true);
             
-            CheckBinaryPredMatch(binary(math.div, name, z16), KOps.div(z16),z16,true);
-            CheckBinaryPredMatch(binary(math.div, name,z16i), KOps.div(z16i),z16i,true);
+            CheckBinaryPredMatch(binary(math.div, name, z16), GZ.div(z16),z16,true);
+            CheckBinaryPredMatch(binary(math.div, name,z16i), GZ.div(z16i),z16i,true);
             
-            CheckBinaryPredMatch(binary(math.div, name,z32), KOps.div(z32),z32,true);
-            CheckBinaryPredMatch(binary(math.div, name,z32i), KOps.div(z32i),z32i,true);
+            CheckBinaryPredMatch(binary(math.div, name,z32), GZ.div(z32),z32,true);
+            CheckBinaryPredMatch(binary(math.div, name,z32i), GZ.div(z32i),z32i,true);
                         
-            CheckBinaryPredMatch(binary(math.div, name,z64), KOps.div(z64),z64,true);
-            CheckBinaryPredMatch(binary(math.div, name,z64i), KOps.div(z64i),z64i,true);
+            CheckBinaryPredMatch(binary(math.div, name,z64), GZ.div(z64),z64,true);
+            CheckBinaryPredMatch(binary(math.div, name,z64i), GZ.div(z64i),z64i,true);
 
-            CheckBinaryPredMatch(binary(fmath.div, name, z32f), KOps.div(z32f),z32f,true);
-            CheckBinaryPredMatch(binary(fmath.div, name,z64f), KOps.div(z64f),z64f,true);
+            CheckBinaryPredMatch(binary(fmath.div, name, z32f), GZ.div(z32f),z32f,true);
+            CheckBinaryPredMatch(binary(fmath.div, name,z64f), GZ.div(z64f),z64f,true);
         }
 
         public void check_mod()
         {
             const string name = "mod";
 
-            CheckBinaryPredMatch(binary(math.mod, name, z8), KOps.mod(z8), z8,true);
-            CheckBinaryPredMatch(binary(math.mod, name, z8i), KOps.mod(z8i), z8i,true);
+            CheckBinaryPredMatch(binary(math.mod, name, z8), GZ.mod(z8), z8,true);
+            CheckBinaryPredMatch(binary(math.mod, name, z8i), GZ.mod(z8i), z8i,true);
             
-            CheckBinaryPredMatch(binary(math.mod, name, z16), KOps.mod(z16),z16,true);
-            CheckBinaryPredMatch(binary(math.mod, name,z16i), KOps.mod(z16i),z16i,true);
+            CheckBinaryPredMatch(binary(math.mod, name, z16), GZ.mod(z16),z16,true);
+            CheckBinaryPredMatch(binary(math.mod, name,z16i), GZ.mod(z16i),z16i,true);
             
-            CheckBinaryPredMatch(binary(math.mod, name,z32), KOps.mod(z32),z32,true);
-            CheckBinaryPredMatch(binary(math.mod, name,z32i), KOps.mod(z32i),z32i,true);
+            CheckBinaryPredMatch(binary(math.mod, name,z32), GZ.mod(z32),z32,true);
+            CheckBinaryPredMatch(binary(math.mod, name,z32i), GZ.mod(z32i),z32i,true);
                         
-            CheckBinaryPredMatch(binary(math.mod, name,z64), KOps.mod(z64),z64,true);
-            CheckBinaryPredMatch(binary(math.mod, name,z64i), KOps.mod(z64i),z64i,true);
+            CheckBinaryPredMatch(binary(math.mod, name,z64), GZ.mod(z64),z64,true);
+            CheckBinaryPredMatch(binary(math.mod, name,z64i), GZ.mod(z64i),z64i,true);
 
-            CheckBinaryPredMatch(binary(fmath.mod, name, z32f), KOps.mod(z32f),z32f,true);
-            CheckBinaryPredMatch(binary(fmath.mod, name,z64f), KOps.mod(z64f),z64f,true);
+            CheckBinaryPredMatch(binary(fmath.mod, name, z32f), GZ.mod(z32f),z32f,true);
+            CheckBinaryPredMatch(binary(fmath.mod, name,z64f), GZ.mod(z64f),z64f,true);
         }
 
         public void check_modmul()
         {
             const string name = "modmul";
 
-            CheckTernaryMatch(ternary(math.modmul, name, z8), KOps.modmul(z8), z8,true);
-            CheckTernaryMatch(ternary(math.modmul, name, z8i), KOps.modmul(z8i), z8i,true);
+            CheckTernaryMatch(ternary(math.modmul, name, z8), GZ.modmul(z8), z8,true);
+            CheckTernaryMatch(ternary(math.modmul, name, z8i), GZ.modmul(z8i), z8i,true);
             
-            CheckTernaryMatch(ternary(math.modmul, name, z16), KOps.modmul(z16),z16,true);
-            CheckTernaryMatch(ternary(math.modmul, name,z16i), KOps.modmul(z16i),z16i,true);
+            CheckTernaryMatch(ternary(math.modmul, name, z16), GZ.modmul(z16),z16,true);
+            CheckTernaryMatch(ternary(math.modmul, name,z16i), GZ.modmul(z16i),z16i,true);
             
-            CheckTernaryMatch(ternary(math.modmul, name,z32), KOps.modmul(z32),z32,true);
-            CheckTernaryMatch(ternary(math.modmul, name,z32i), KOps.modmul(z32i),z32i,true);
+            CheckTernaryMatch(ternary(math.modmul, name,z32), GZ.modmul(z32),z32,true);
+            CheckTernaryMatch(ternary(math.modmul, name,z32i), GZ.modmul(z32i),z32i,true);
                         
-            CheckTernaryMatch(ternary(math.modmul, name,z64), KOps.modmul(z64),z64,true);
-            CheckTernaryMatch(ternary(math.modmul, name,z64i), KOps.modmul(z64i),z64i,true);
+            CheckTernaryMatch(ternary(math.modmul, name,z64), GZ.modmul(z64),z64,true);
+            CheckTernaryMatch(ternary(math.modmul, name,z64i), GZ.modmul(z64i),z64i,true);
         }
 
         public void check_clamp()
         {
             const string name = "clamp";
 
-            CheckBinaryPredMatch(binary(math.clamp, name, z8), KOps.clamp(z8), z8);
-            CheckBinaryPredMatch(binary(math.clamp, name, z8i), KOps.clamp(z8i), z8i);
+            CheckBinaryPredMatch(binary(math.clamp, name, z8), GZ.clamp(z8), z8);
+            CheckBinaryPredMatch(binary(math.clamp, name, z8i), GZ.clamp(z8i), z8i);
             
-            CheckBinaryPredMatch(binary(math.clamp, name, z16), KOps.clamp(z16),z16);
-            CheckBinaryPredMatch(binary(math.clamp, name,z16i), KOps.clamp(z16i),z16i);
+            CheckBinaryPredMatch(binary(math.clamp, name, z16), GZ.clamp(z16),z16);
+            CheckBinaryPredMatch(binary(math.clamp, name,z16i), GZ.clamp(z16i),z16i);
             
-            CheckBinaryPredMatch(binary(math.clamp, name,z32), KOps.clamp(z32),z32);
-            CheckBinaryPredMatch(binary(math.clamp, name,z32i), KOps.clamp(z32i),z32i);
+            CheckBinaryPredMatch(binary(math.clamp, name,z32), GZ.clamp(z32),z32);
+            CheckBinaryPredMatch(binary(math.clamp, name,z32i), GZ.clamp(z32i),z32i);
                         
-            CheckBinaryPredMatch(binary(math.clamp, name,z64), KOps.clamp(z64),z64);
-            CheckBinaryPredMatch(binary(math.clamp, name,z64i), KOps.clamp(z64i),z64i);
+            CheckBinaryPredMatch(binary(math.clamp, name,z64), GZ.clamp(z64),z64);
+            CheckBinaryPredMatch(binary(math.clamp, name,z64i), GZ.clamp(z64i),z64i);
 
-            CheckBinaryPredMatch(binary(fmath.clamp, name,z32f), KOps.clamp(z32f),z32f);
-            CheckBinaryPredMatch(binary(fmath.clamp, name,z64f), KOps.clamp(z64f),z64f);
+            CheckBinaryPredMatch(binary(fmath.clamp, name,z32f), GZ.clamp(z32f),z32f);
+            CheckBinaryPredMatch(binary(fmath.clamp, name,z64f), GZ.clamp(z64f),z64f);
         }
 
         public void check_inc()
         {
             const string name = "inc";
 
-            CheckUnaryMatch(unary(math.inc, name, z8), KOps.inc(z8), z8);
-            CheckUnaryMatch(unary(math.inc, name, z8i), KOps.inc(z8i), z8i);
+            CheckUnaryMatch(unary(math.inc, name, z8), GZ.inc(z8), z8);
+            CheckUnaryMatch(unary(math.inc, name, z8i), GZ.inc(z8i), z8i);
             
-            CheckUnaryMatch(unary(math.inc, name, z16), KOps.inc(z16),z16);
-            CheckUnaryMatch(unary(math.inc, name,z16i), KOps.inc(z16i),z16i);
+            CheckUnaryMatch(unary(math.inc, name, z16), GZ.inc(z16),z16);
+            CheckUnaryMatch(unary(math.inc, name,z16i), GZ.inc(z16i),z16i);
             
-            CheckUnaryMatch(unary(math.inc, name,z32), KOps.inc(z32),z32);
-            CheckUnaryMatch(unary(math.inc, name,z32i), KOps.inc(z32i),z32i);
+            CheckUnaryMatch(unary(math.inc, name,z32), GZ.inc(z32),z32);
+            CheckUnaryMatch(unary(math.inc, name,z32i), GZ.inc(z32i),z32i);
                         
-            CheckUnaryMatch(unary(math.inc, name,z64), KOps.inc(z64),z64);
-            CheckUnaryMatch(unary(math.inc, name,z64i), KOps.inc(z64i),z64i);
+            CheckUnaryMatch(unary(math.inc, name,z64), GZ.inc(z64),z64);
+            CheckUnaryMatch(unary(math.inc, name,z64i), GZ.inc(z64i),z64i);
 
-            CheckUnaryMatch(unary(fmath.inc, name, z32f), KOps.inc(z32f),z32f);
-            CheckUnaryMatch(unary(fmath.inc, name,z64f), KOps.inc(z64f),z64f);
+            CheckUnaryMatch(unary(fmath.inc, name, z32f), GZ.inc(z32f),z32f);
+            CheckUnaryMatch(unary(fmath.inc, name,z64f), GZ.inc(z64f),z64f);
         }
 
         public void check_dec()
         {
             const string name = "dec";
 
-            CheckUnaryMatch(unary(math.dec, name, z8), KOps.dec(z8), z8);
-            CheckUnaryMatch(unary(math.dec, name, z8i), KOps.dec(z8i), z8i);
+            CheckUnaryMatch(unary(math.dec, name, z8), GZ.dec(z8), z8);
+            CheckUnaryMatch(unary(math.dec, name, z8i), GZ.dec(z8i), z8i);
             
-            CheckUnaryMatch(unary(math.dec, name, z16), KOps.dec(z16),z16);
-            CheckUnaryMatch(unary(math.dec, name,z16i), KOps.dec(z16i),z16i);
+            CheckUnaryMatch(unary(math.dec, name, z16), GZ.dec(z16),z16);
+            CheckUnaryMatch(unary(math.dec, name,z16i), GZ.dec(z16i),z16i);
             
-            CheckUnaryMatch(unary(math.dec, name,z32), KOps.dec(z32),z32);
-            CheckUnaryMatch(unary(math.dec, name,z32i), KOps.dec(z32i),z32i);
+            CheckUnaryMatch(unary(math.dec, name,z32), GZ.dec(z32),z32);
+            CheckUnaryMatch(unary(math.dec, name,z32i), GZ.dec(z32i),z32i);
                         
-            CheckUnaryMatch(unary(math.dec, name,z64), KOps.dec(z64),z64);
-            CheckUnaryMatch(unary(math.dec, name,z64i), KOps.dec(z64i),z64i);
+            CheckUnaryMatch(unary(math.dec, name,z64), GZ.dec(z64),z64);
+            CheckUnaryMatch(unary(math.dec, name,z64i), GZ.dec(z64i),z64i);
 
-            CheckUnaryMatch(unary(fmath.dec, name, z32f), KOps.dec(z32f),z32f);
-            CheckUnaryMatch(unary(fmath.dec, name,z64f), KOps.dec(z64f),z64f);
+            CheckUnaryMatch(unary(fmath.dec, name, z32f), GZ.dec(z32f),z32f);
+            CheckUnaryMatch(unary(fmath.dec, name,z64f), GZ.dec(z64f),z64f);
         }
 
         public void check_negate()
         {
             const string name = "negate";
 
-            CheckUnaryMatch(unary(math.negate, name, z8), KOps.negate(z8), z8);
-            CheckUnaryMatch(unary(math.negate, name, z8i), KOps.negate(z8i), z8i);
+            CheckUnaryMatch(unary(math.negate, name, z8), GZ.negate(z8), z8);
+            CheckUnaryMatch(unary(math.negate, name, z8i), GZ.negate(z8i), z8i);
             
-            CheckUnaryMatch(unary(math.negate, name, z16), KOps.negate(z16),z16);
-            CheckUnaryMatch(unary(math.negate, name,z16i), KOps.negate(z16i),z16i);
+            CheckUnaryMatch(unary(math.negate, name, z16), GZ.negate(z16),z16);
+            CheckUnaryMatch(unary(math.negate, name,z16i), GZ.negate(z16i),z16i);
             
-            CheckUnaryMatch(unary(math.negate, name,z32), KOps.negate(z32),z32);
-            CheckUnaryMatch(unary(math.negate, name,z32i), KOps.negate(z32i),z32i);
+            CheckUnaryMatch(unary(math.negate, name,z32), GZ.negate(z32),z32);
+            CheckUnaryMatch(unary(math.negate, name,z32i), GZ.negate(z32i),z32i);
                         
-            CheckUnaryMatch(unary(math.negate, name,z64), KOps.negate(z64),z64);
-            CheckUnaryMatch(unary(math.negate, name,z64i), KOps.negate(z64i),z64i);
+            CheckUnaryMatch(unary(math.negate, name,z64), GZ.negate(z64),z64);
+            CheckUnaryMatch(unary(math.negate, name,z64i), GZ.negate(z64i),z64i);
 
-            CheckUnaryMatch(unary(fmath.negate, name, z32f), KOps.negate(z32f),z32f);
-            CheckUnaryMatch(unary(fmath.negate, name,z64f), KOps.negate(z64f),z64f);
+            CheckUnaryMatch(unary(fmath.negate, name, z32f), GZ.negate(z32f),z32f);
+            CheckUnaryMatch(unary(fmath.negate, name,z64f), GZ.negate(z64f),z64f);
         }
 
         public void negate_exemplars()
@@ -237,12 +237,12 @@ namespace Z0
         {
             const string name = "abs";
 
-            CheckUnaryMatch(unary(math.abs, name, z8i), KOps.abs(z8i), z8i);            
-            CheckUnaryMatch(unary(math.abs, name,z16i), KOps.abs(z16i),z16i);            
-            CheckUnaryMatch(unary(math.abs, name,z32i), KOps.abs(z32i),z32i);                        
-            CheckUnaryMatch(unary(math.abs, name,z64i), KOps.abs(z64i),z64i);
-            CheckUnaryMatch(unary(fmath.abs, name, z32f), KOps.abs(z32f),z32f);
-            CheckUnaryMatch(unary(fmath.abs, name,z64f), KOps.abs(z64f),z64f);
+            CheckUnaryMatch(unary(math.abs, name, z8i), GZ.abs(z8i), z8i);            
+            CheckUnaryMatch(unary(math.abs, name,z16i), GZ.abs(z16i),z16i);            
+            CheckUnaryMatch(unary(math.abs, name,z32i), GZ.abs(z32i),z32i);                        
+            CheckUnaryMatch(unary(math.abs, name,z64i), GZ.abs(z64i),z64i);
+            CheckUnaryMatch(unary(fmath.abs, name, z32f), GZ.abs(z32f),z32f);
+            CheckUnaryMatch(unary(fmath.abs, name,z64f), GZ.abs(z64f),z64f);
         }
 
         public void check_increments()

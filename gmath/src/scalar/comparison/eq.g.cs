@@ -30,6 +30,10 @@ namespace Z0
                 return gfp.eq(a,b);
         }
 
+        [MethodImpl(Inline)]
+        public static T eqz<T>(T a, T b)
+            where T : unmanaged
+                => gmath.mul(convert<T>((uint)gmath.eq(a,b)),gmath.ones<T>());
 
         [MethodImpl(Inline)]
         static bit eqi<T>(T a, T b)

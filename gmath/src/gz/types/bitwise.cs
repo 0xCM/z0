@@ -9,7 +9,7 @@ namespace Z0
         
     using static zfunc;
 
-    partial class KOpStructs
+    partial class GZTypes
     {
         public readonly struct And<T> : IPrimalBinOp<T>
             where T : unmanaged        

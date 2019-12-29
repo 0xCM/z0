@@ -12,25 +12,39 @@ namespace Z0
 
 
 
-    public static class vops
+    public static class vxops
     {
 
-        
+        public static Vector128<uint> and_class(Vector128<uint> x, Vector128<uint> y)
+            =>  VXTypes.CAnd128<uint>.Op.Invoke(x,y);
+
+        public static uint and_class_scalar(uint x, uint y)
+            =>  VXTypes.CAnd128<uint>.Op.InvokeScalar(x,y);
+
+        public static uint and_class_scalar(VXTypes.CAnd128<uint> f, uint x, uint y)
+            =>  f.InvokeScalar(x,y);
+
+        public static Vector128<uint> and_struct(Vector128<uint> x, Vector128<uint> y)
+            =>  VXTypes.And128<uint>.Op.Invoke(x,y);
+
+        public static uint and_struct_scalar(uint x, uint y)
+            =>  VXTypes.And128<uint>.Op.InvokeScalar(x,y);
+
         public static void loop_1(ReadOnlySpan<uint> src, Span<uint> dst)
         {
-            Loop.run(KOps.negate(z32), src, dst);
+            Loop.run(GZ.negate(z32), src, dst);
         }
 
 
         public static void loop_2(ArrayExchange<uint> src, ArrayExchange<uint> dst)
         {
-            Loop.run(KOps.negate(z32), src, dst);   
+            Loop.run(GZ.negate(z32), src, dst);   
         }
 
         public static void pipeline_1(ReadOnlySpan<uint> src, Span<uint> dst)
         {
-            var f = KOps.negate<uint>();
-            var g = KOps.not<uint>();
+            var f = GZ.negate<uint>();
+            var g = GZ.not<uint>();
             var count = dst.Length;
             for(var i=0; i< count; i++)
                 seek(dst,i) = Pipes.pipe(skip(src,i),f,g);
@@ -39,8 +53,8 @@ namespace Z0
 
         public static void pipeline_2(ReadOnlySpan<uint> src, Span<uint> dst)
         {
-            var g = KOps.negate(z32);
-            var f = KOps.and(z32);
+            var g = GZ.negate(z32);
+            var f = GZ.and(z32);
             var count = dst.Length;
             for(var i=0; i< count; i++)
                 seek(dst,i) = Pipes.compose(skip(src,i),f,g);
@@ -51,8 +65,8 @@ namespace Z0
 
         public static uint and_negate_ops(uint x)
         {
-            var g = KOps.negate(x);
-            var f = KOps.and(x);
+            var g = GZ.negate(x);
+            var f = GZ.and(x);
             return Pipes.compose(x,f,g);
         }
         public static uint vxor_128x32u(Vector128<uint> x, Vector128<uint> y)

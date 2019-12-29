@@ -75,9 +75,40 @@ namespace Z0
 
         public void vneq_128x32u()
         {
+            var w = n128;
+            var t = z32;
+            var ones = CpuVector.vones(w,t);
             for(var i=0; i<RepCount; i++)
             {
+                var x = Random.CpuVector(w,t);
+                var y = Random.CpuVector(w,t);
+                Claim.eq(ones,dinx.vneq(x,y));                                            
+            }
+        }
 
+        public void vneq_128x32i()
+        {
+            var w = n128;
+            var t = z32i;
+            var ones = CpuVector.vones(w,t);
+            for(var i=0; i<RepCount; i++)
+            {
+                var x = Random.CpuVector(w,t);
+                var y = Random.CpuVector(w,t);
+                Claim.eq(ones,dinx.vneq(x,y));                                            
+            }
+        }
+
+        public void vneq_128x16u()
+        {
+            var w = n128;
+            var t = z16;
+            var ones = CpuVector.vones(w,t);
+            for(var i=0; i<RepCount; i++)
+            {
+                var x = Random.CpuVector(w,t);
+                var y = Random.CpuVector(w,t);
+                Claim.eq(ones,dinx.vneq(x,y));                                            
             }
         }
 
@@ -107,22 +138,11 @@ namespace Z0
 
         void veq_check<T>(N128 w, T t = default)
             where T : unmanaged
-        {
-            var f = VX.veq(w,t);
-            CheckBinaryScalarMatch(f,w,t);
-
-        }
+                => CheckBinaryScalarMatch(VX.veq(w,t),w,t);
 
         void veq_check<T>(N256 w, T t = default)
             where T : unmanaged
-        {
-            var f = VX.veq(w,t);
-            CheckBinaryScalarMatch(f,w,t);
+                => CheckBinaryScalarMatch(VX.veq(w,t),w,t);
             
-            var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
-            var result = DataBlocks.alloc<T>(w, x.BlockCount);
-            result.Fill(gmath.ones<T>());
-            CheckExplicit(f,x,x,result);
-        }    
     }
 }

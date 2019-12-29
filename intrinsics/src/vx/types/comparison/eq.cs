@@ -17,15 +17,16 @@ namespace Z0
         {
             public static Eq128<T> Op => default;
 
-            public string Moniker => moniker<N128,T>("veq");
+            public const string Name = "veq";
+
+
+            public string Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
-                => ginx.veq(x,y);
+            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.veq(x,y);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b)
-                => gmath.mul(convert<T>((uint)gmath.eq(a,b)),gmath.ones<T>());
+            public T InvokeScalar(T a, T b) => gmath.eqz(a,b);
         }
 
         public readonly struct Eq256<T> : IVBinOp256D<T>
@@ -33,15 +34,15 @@ namespace Z0
         {
             public static Eq256<T> Op => default;
 
-            public string Moniker => moniker<N256,T>("veq");
+            public const string Name = "veq";
+
+            public string Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)
-                => ginx.veq(x,y);
+            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.veq(x,y);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b)
-                => gmath.mul(convert<T>((uint)gmath.eq(a,b)), gmath.ones<T>());
+            public T InvokeScalar(T a, T b) => gmath.eqz(a,b);
         }
 
     }

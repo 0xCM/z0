@@ -175,7 +175,9 @@ namespace Z0
             
             var benchmarks = TakeSortedBenchmarks();
             if(benchmarks.Any())
+            {
                 Log.LogBenchmarks(basename.Replace(".test",".bench"),benchmarks, LogWriteMode.Overwrite);
+            }
             
             var results = TakeSortedResults();
             if(results.Any())
