@@ -31,12 +31,12 @@ namespace Z0
 
         public void bitspan_buffered_8()
         {            
-            var bytecount = SampleCount;
+            var bytecount = RepCount;
             Block256<uint> unpacked = DataBlocks.alloc(n256,bytecount,z32);
             Block64<byte> buffer = DataBlocks.single(n64,z8);
             Span<byte> packed = stackalloc byte[bytecount];
             
-            for(var i=0; i<SampleCount; i++)            
+            for(var i=0; i<RepCount; i++)            
             {
                 Random.Fill(packed);
                 BitPack.unpack(packed, buffer, unpacked);
@@ -122,7 +122,7 @@ namespace Z0
             var length = 64;
             Span<byte> packed = stackalloc byte[length];
 
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 Random.Fill(packed);
                 var bitspan = packed.ToBitSpan();                
@@ -136,7 +136,7 @@ namespace Z0
             var length = 64;
             Span<ushort> packed = stackalloc ushort[length];
 
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 Random.Fill(packed);
                 var bitspan = packed.ToBitSpan();                
@@ -149,7 +149,7 @@ namespace Z0
             var length = 64;
             Span<uint> packed = stackalloc uint[length];
 
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 Random.Fill(packed);
                 var bitspan = packed.ToBitSpan();                
@@ -162,7 +162,7 @@ namespace Z0
             var length = 64;
             Span<ulong> packed = stackalloc ulong[length];
 
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 Random.Fill(packed);
                 var bitspan = packed.ToBitSpan();                
@@ -176,14 +176,14 @@ namespace Z0
             var length = 8;
             var t = z8;
 
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var src = Random.Bytes(length).ToSpan();
                 var bitspan = src.ToBitSpan();                
                 bitspan_check(src,bitspan);
             }
 
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var src = Random.Next(t);                
                 var bitspan = src.ToBitSpan();                
@@ -195,7 +195,7 @@ namespace Z0
         public void bitspan_from_scalar16()
         {        
             var t = z16;
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var src = Random.Next(t);                
                 var bitspan = src.ToBitSpan();                
@@ -206,7 +206,7 @@ namespace Z0
         public void bitspan_from_scalar32()
         {        
             var t = z32;
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var src = Random.Next(t);                
                 var bitspan = src.ToBitSpan();                
@@ -217,7 +217,7 @@ namespace Z0
         public void bitspan_from_scalar64()
         {        
             var t = z64;
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var src = Random.Next(t);                
                 var bitspan = src.ToBitSpan();                
@@ -228,7 +228,7 @@ namespace Z0
         public void bitspan_to_scalar8()
         {
             var n = n8;
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var src = Random.Single(n);
 
@@ -243,7 +243,7 @@ namespace Z0
         public void bitspan_to_scalar16()
         {
             var n = n16;            
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var src = Random.Single(n);
                 
@@ -258,7 +258,7 @@ namespace Z0
         public void bitspan_to_scalar32()
         {
             var n = n32;            
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var src = Random.Single(n);
 
@@ -276,7 +276,7 @@ namespace Z0
         {
             var n = n64;            
 
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var src = Random.Single(n);            
                 

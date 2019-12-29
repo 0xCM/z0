@@ -108,7 +108,7 @@ namespace Z0
             var n = vcount(w,t);
             check_invariant(w,t);
 
-            for(var i=0; i < SampleCount; i++)
+            for(var i=0; i < RepCount; i++)
             {
                 var input = Random.CpuVector(w,t);                
                 var output = f.Invoke(input);
@@ -127,7 +127,7 @@ namespace Z0
             var n = vcount(w,t);
             check_invariant(w,t);
 
-            for(var i=0; i < SampleCount; i++)
+            for(var i=0; i < RepCount; i++)
             {
                 var input = Random.CpuVector(w,t);                
                 var output = f.Invoke(input);

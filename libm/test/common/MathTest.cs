@@ -16,7 +16,7 @@ namespace Z0
 
         protected override int CycleCount => Pow2.T03;
 
-        protected override int SampleCount => Pow2.T08;
+        protected override int RepCount => Pow2.T08;
 
     }
 }

@@ -26,7 +26,7 @@ namespace Z0
             where T : unmanaged
         {
             var vZero = vzero<T>(n128);
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<T>();                    
                 var y = Random.Next<T>();                    

@@ -111,7 +111,7 @@ namespace Z0.Logix
        void scalar_eq_op_check<T>()
             where T : unmanaged
         {
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.Next<T>();
                 var y = gmath.inc(x);
@@ -138,7 +138,7 @@ namespace Z0.Logix
             var y = Random.CpuVector<T>(n);
             var expect = vzero<T>(n);
             var actual = vzero<T>(n);
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {                
                 expect = ginx.vlt(x,y);
                 actual = lt(x,y);
@@ -157,7 +157,7 @@ namespace Z0.Logix
             var y = Random.CpuVector<T>(n);
             var expect = vzero<T>(n);
             var actual = vzero<T>(n);
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {                
                 expect = ginx.vlt(x,y);
                 actual = lt(x,y);
@@ -177,7 +177,7 @@ namespace Z0.Logix
             var y = Random.CpuVector<T>(n);
             var expect = vzero<T>(n);
             var actual = vzero<T>(n);
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {                
                 expect = ginx.vgt(x,y);
                 actual = gt(x,y);
@@ -197,7 +197,7 @@ namespace Z0.Logix
             var y = Random.CpuVector<T>(n);
             var expect = vzero<T>(n);
             var actual = vzero<T>(n);
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {                
                 expect = ginx.vgt(x,y);
                 actual = gt(x,y);
@@ -213,7 +213,7 @@ namespace Z0.Logix
         void scalar_lt_op_check<T>()
             where T : unmanaged
         {
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.Next<T>();
                 var y = Random.Next<T>();
@@ -226,7 +226,7 @@ namespace Z0.Logix
         void scalar_lteq_op_check<T>()
             where T : unmanaged
         {
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.Next<T>();
                 var y = Random.Next<T>();
@@ -239,7 +239,7 @@ namespace Z0.Logix
         void scalar_gt_op_check<T>()
             where T : unmanaged
         {
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.Next<T>();
                 var y = Random.Next<T>();
@@ -252,7 +252,7 @@ namespace Z0.Logix
         void scalar_gteq_op_check<T>()
             where T : unmanaged
         {
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.Next<T>();
                 var y = Random.Next<T>();

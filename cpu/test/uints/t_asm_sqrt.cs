@@ -12,8 +12,8 @@ namespace Z0.Asm
     {        
         public void Verify()
         {
-            VerifyOp(AsmOps.Sqrt<float>(), fmath.sqrt, SampleCount);
-            VerifyOp(AsmOps.Add<double>(), fmath.add, SampleCount);
+            VerifyOp(AsmOps.Sqrt<float>(), fmath.sqrt, RepCount);
+            VerifyOp(AsmOps.Add<double>(), fmath.add, RepCount);
         }
 
          

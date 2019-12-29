@@ -10,6 +10,45 @@ namespace Z0
 
     public class t_vor : t_vinx<t_vor>
     {
+        public void vor_check()
+        {            
+            vor_check(n128);
+            vor_check(n256);
+        }
+
+        void vor_check(N128 w)
+        {
+            vor_check(w, z8);                
+            vor_check(w, z8i);
+            vor_check(w, z16);
+            vor_check(w, z16i);
+            vor_check(w, z32);
+            vor_check(w, z32i);
+            vor_check(w, z64);
+            vor_check(w, z64i);
+
+        }
+
+        void vor_check(N256 w)
+        {
+            vor_check(w, z8);                
+            vor_check(w, z8i);
+            vor_check(w, z16);
+            vor_check(w, z16i);
+            vor_check(w, z32);
+            vor_check(w, z32i);
+            vor_check(w, z64);
+            vor_check(w, z64i);
+        }            
+
+        void vor_check<T>(N128 w, T t = default)
+            where T : unmanaged
+                => CheckBinaryScalarMatch(VX.vor(w,t),w,t);
+            
+        void vor_check<T>(N256 w, T t = default)
+            where T : unmanaged
+                => CheckBinaryScalarMatch(VX.vor(w,t),w,t);
+
         public void vor_128x8i()
             => vor_check<sbyte>(n128);
 
@@ -106,5 +145,38 @@ namespace Z0
         public void vor_blocks_256x64u()
             => vor_blocks_check<ulong>(n256);
 
+        protected void vor_blocks_check<T>(N128 w, T t = default)
+            where T : unmanaged
+        {
+            var blocks = RepCount;
+            var stats = BlockStats.Calc<N128,T>(blocks);
+            var step = stats.BlockLength;
+            var cells = stats.CellCount;
+
+            var xb = Random.Blocks<T>(w, blocks);
+            var yb = Random.Blocks<T>(w, blocks);
+            var zb = DataBlocks.alloc<T>(w, blocks);
+            ginx.vor(xb,yb,zb);
+            
+            for(var i=0; i<cells; i++)
+                Claim.eq(gmath.or(xb[i],yb[i]), zb[i]);
+        }
+
+        protected void vor_blocks_check<T>(N256 w, T t = default)
+            where T : unmanaged
+        {
+            var blocks = RepCount;
+            var stats = BlockStats.Calc<N256,T>(blocks);
+            var step = stats.BlockLength;
+            var cells = stats.CellCount;
+
+            var xb = Random.Blocks<T>(w, blocks);
+            var yb = Random.Blocks<T>(w, blocks);
+            var zb = DataBlocks.alloc<T>(w, blocks);
+            ginx.vor(xb,yb,zb);
+            
+            for(var i=0; i<cells; i++)
+                Claim.eq(gmath.or(xb[i],yb[i]), zb[i]);
+        }    
     }
 }

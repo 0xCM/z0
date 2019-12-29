@@ -14,10 +14,10 @@ namespace Z0
     {
         public void bb_extract_64()
         {
-            var src = Random.Stream<ulong>().Take(SampleCount).ToArray();
-            var lower = Random.Stream(leftclosed<byte>(0,32)).Take(SampleCount).ToArray();
-            var upper = Random.Stream(leftclosed<byte>(32,64)).Take(SampleCount).ToArray();
-            for(var i=0; i< SampleCount; i++)
+            var src = Random.Stream<ulong>().Take(RepCount).ToArray();
+            var lower = Random.Stream(leftclosed<byte>(0,32)).Take(RepCount).ToArray();
+            var upper = Random.Stream(leftclosed<byte>(32,64)).Take(RepCount).ToArray();
+            for(var i=0; i< RepCount; i++)
             {
                 var v1 = BitBlocks.literals(src[i]);
                 var v2 = BitVector.from(n64,src[i]);
@@ -40,10 +40,10 @@ namespace Z0
 
         public void bb_extract_32()
         {
-            var src = Random.Stream<uint>().Take(SampleCount).ToArray();
-            var lower = Random.Stream(leftclosed<byte>(0,16)).Take(SampleCount).ToArray();
-            var upper = Random.Stream(leftclosed<byte>(16,32)).Take(SampleCount).ToArray();
-            for(var i=0; i< SampleCount; i++)
+            var src = Random.Stream<uint>().Take(RepCount).ToArray();
+            var lower = Random.Stream(leftclosed<byte>(0,16)).Take(RepCount).ToArray();
+            var upper = Random.Stream(leftclosed<byte>(16,32)).Take(RepCount).ToArray();
+            for(var i=0; i< RepCount; i++)
             {
                 var v1 = BitBlocks.literals(src[i]);
                 var v2 = BitVector.from(n32,src[i]);
@@ -57,10 +57,10 @@ namespace Z0
 
         public void bb_extract_16()
         {
-            var src = Random.Stream<ushort>().Take(SampleCount).ToArray();
-            var lower = Random.Stream(leftclosed<byte>(0,8)).Take(SampleCount).ToArray();
-            var upper = Random.Stream(leftclosed<byte>(8,16)).Take(SampleCount).ToArray();
-            for(var i=0; i< SampleCount; i++)
+            var src = Random.Stream<ushort>().Take(RepCount).ToArray();
+            var lower = Random.Stream(leftclosed<byte>(0,8)).Take(RepCount).ToArray();
+            var upper = Random.Stream(leftclosed<byte>(8,16)).Take(RepCount).ToArray();
+            for(var i=0; i< RepCount; i++)
             {
                 var v1 = BitBlocks.literals(src[i]);
                 var v2 = BitVector.from(n16,src[i]);

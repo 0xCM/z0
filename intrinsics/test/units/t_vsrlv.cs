@@ -34,5 +34,36 @@ namespace Z0
 
         public void vsrlv_256x64u()
             => vsrlv_check(n256,z64);
+
+        protected void vsrlv_check<T>(N128 w, T t = default)
+            where T : unmanaged
+        {
+            var shiftrange = (default(T),convert<int,T>(bitsize(t) - 1));
+            var buffer = DataBlocks.single<T>(w);
+            for(var sample = 0; sample < RepCount; sample++)
+            {
+                var x = Random.CpuVector<T>(w);
+                var offsets = Random.CpuVector<T>(w, shiftrange);
+                var actual = ginx.vsrlv(x,offsets);
+                var expect = CpuVector.vload(w,mathspan.srlv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
+                Claim.eq(expect, actual);
+            }
+        }
+
+        protected void vsrlv_check<T>(N256 w, T t = default)
+            where T : unmanaged
+        {
+            var shiftrange = (default(T),convert<int,T>(bitsize(t) - 1));
+            var buffer = DataBlocks.single<T>(w);
+            for(var sample = 0; sample < RepCount; sample++)
+            {
+                var x = Random.CpuVector<T>(w);
+                var offsets = Random.CpuVector<T>(w, shiftrange);
+                var actual = ginx.vsrlv(x,offsets);
+                var expect = CpuVector.vload(w,mathspan.srlv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
+                Claim.eq(expect, actual);
+            }
+        }
+
     }
 }

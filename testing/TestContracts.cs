@@ -9,12 +9,22 @@ namespace Z0
 
     public interface ITestResultSink
     {
-        TestCaseRecord ReportOutcome(string opname, bool succeeded, TimeSpan duration);
+        TestCaseRecord ReportOutcome(string casename, bool succeeded, TimeSpan duration);
+    }
+
+    public interface IBenchResultSink
+    {
+        BenchmarkRecord ReportBenchmark(string name, long opcount, TimeSpan duration);        
     }
 
     public interface ITestResultSource
     {
         IEnumerable<TestCaseRecord> TakeOutcomes();
+    }
+
+    public interface IBenchResultSource
+    {
+        IEnumerable<BenchmarkRecord> TakeBenchmarks();
     }
 
     public interface ITestConfig<T> : ITestConfig, ISampleDefaults<T>
@@ -23,13 +33,11 @@ namespace Z0
         
     }
 
-    public interface ITestContext : IContext, ITestResultSink, ITestResultSource
+    public interface ITestContext : IContext, ITestResultSink, ITestResultSource, IBenchResultSink, IBenchResultSource
     {
         ITestConfig Config {get;}
 
         void Configure(ITestConfig config);
-
-        IEnumerable<BenchmarkRecord> Benchmarks {get;}        
 
         bool Enabled {get;}
     }

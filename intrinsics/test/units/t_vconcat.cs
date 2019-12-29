@@ -37,7 +37,7 @@ namespace Z0
         void check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector(w,t);
                 var y = Random.CpuVector(w,t);

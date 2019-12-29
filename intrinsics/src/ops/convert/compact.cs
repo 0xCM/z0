@@ -129,7 +129,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vcompact(Vector256<ushort> src, N128 w, byte t = default)            
-            => vpackus_alt(vlo(src), vhi(src));
+            => vpackus(vlo(src), vhi(src));
 
         /// <summary>
         /// (16x16u,16x16u) -> 32x8u

@@ -15,7 +15,7 @@ namespace Z0
         protected void bitblock_disable_check<T>(BitSize n)
             where T : unmanaged
         {
-            for(var k=0; k<SampleCount; k++)
+            for(var k=0; k<RepCount; k++)
             {
                 var bv = Random.BitBlock<T>(n);
                 var bs = bv.ToBitString();
@@ -35,7 +35,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            for(var k=0; k<SampleCount; k++)
+            for(var k=0; k<RepCount; k++)
             {
                 var bc = Random.BitBlock<N,T>();
                 var bs = bc.ToBitString();
@@ -59,7 +59,7 @@ namespace Z0
         protected void bitblock_dot_check<T>(int n)
             where T : unmanaged
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var x = Random.BitBlock<T>(n);
                 var y = Random.BitBlock<T>(n);
@@ -80,7 +80,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var x = Random.BitBlock<N,T>();
                 var y = Random.BitBlock<N,T>();
@@ -95,7 +95,7 @@ namespace Z0
         protected void bitspan_from_bitstring_check<T>()
             where T : unmanaged
         {
-            for(var i=0; i< SampleCount; i++)            
+            for(var i=0; i< RepCount; i++)            
             {
                 var bs = Random.BitString(5,233);
                 var bc = BitBlocks.from<T>(bs);
@@ -124,8 +124,8 @@ namespace Z0
             var segcap = bitsize<T>();
             Claim.eq(BitBlock<N,T>.CellWidth, segcap);
 
-            var src = Random.Span<T>(SampleCount);
-            for(var i=0; i<SampleCount; i+= segcount)
+            var src = Random.Span<T>(RepCount);
+            for(var i=0; i<RepCount; i+= segcount)
             {
                 var bcSrc = src.Slice(i,segcount);
                 var bc = bcSrc.ToBitBlock(rep);
@@ -143,8 +143,8 @@ namespace Z0
             where T : unmanaged
         {
             var segcount = BitCalcs.mincells<T>(bitcount);
-            var src = Random.Span<T>(SampleCount);
-            for(var i=0; i<SampleCount; i += segcount)
+            var src = Random.Span<T>(RepCount);
+            for(var i=0; i<RepCount; i += segcount)
             {
                 var data = src.Slice(i, segcount);
                 var bc = data.ToBitCells(bitcount);

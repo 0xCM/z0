@@ -40,10 +40,10 @@ namespace Z0
         {
             var bits = n256;
             var bytes = n32;
-            var src = Random.Blocks<byte>(n256, count:SampleCount);
+            var src = Random.Blocks<byte>(n256, count:RepCount);
             const int hibit = 7;
 
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {                
                 var srcCpuVec = src.LoadVector(i);
                 var srcBitVec = srcCpuVec.ToSpan().ToBitCells(bits);
@@ -67,9 +67,9 @@ namespace Z0
             const int hibit = 7;
             var bits = n128;
             var bytes = n16;
-            var src = Random.Blocks<byte>(bits, count:SampleCount);
+            var src = Random.Blocks<byte>(bits, count:RepCount);
 
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 
                 var srcCpuVec = src.LoadVector(i);

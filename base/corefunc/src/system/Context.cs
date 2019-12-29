@@ -22,12 +22,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// The timings accrued by performance collection operations
-        /// </summary>
-        public IEnumerable<BenchmarkRecord> Benchmarks
-            => BenchMarkQueue;
-
-        /// <summary>
         /// The context random source
         /// </summary>
         public virtual IPolyrand Random {get;}
@@ -35,39 +29,9 @@ namespace Z0
         protected virtual bool TraceEnabled {get;}
             = true;
 
-        protected virtual bool BenchEnabled
-            => true;
-
-        /// <summary>
-        /// Collects operation timings
-        /// </summary>
-        ConcurrentBag<BenchmarkRecord> BenchMarkQueue {get;}
-            = new ConcurrentBag<BenchmarkRecord>();
 
         List<AppMsg> MsgQueue {get;} 
             = new List<AppMsg>();
-
-
-        /// <summary>
-        /// Enqueues operation timing
-        /// </summary>
-        /// <param name="timing">The timing to enqueue</param>
-        protected void Enqueue(BenchmarkRecord timing)
-            => BenchMarkQueue.Add(timing);
-
-        /// <summary>
-        /// Enqueues operation timings
-        /// </summary>
-        /// <param name="benchmarks">The timings to enqueue</param>
-        protected void Enqueue(params BenchmarkRecord[] benchmarks)
-            => BenchMarkQueue.AddRange(benchmarks);
-
-        protected BenchmarkRecord[] DequeueTimings(Func<IEnumerable<BenchmarkRecord>, IEnumerable<BenchmarkRecord>> sorter)
-        {
-            var timings = sorter(BenchMarkQueue).ToArray();
-            BenchMarkQueue.Clear();
-            return timings;
-        }
 
 
         public IReadOnlyList<AppMsg> DequeueMessages(params AppMsg[] addenda)
@@ -77,6 +41,7 @@ namespace Z0
             MsgQueue.Clear();
             return messages;
         }
+
 
         /// <summary>
         /// Enqueues an application message
@@ -98,12 +63,6 @@ namespace Z0
             (this as IContext).EmitMessages(msg);
         }
 
-        /// <summary>
-        /// Enqueues operation timings
-        /// </summary>
-        /// <param name="timings">The timings to enqueue</param>
-        protected void Mark(IEnumerable<BenchmarkRecord> timings)
-            => BenchMarkQueue.AddRange(timings);
 
         protected void HiLite(string msg, [CallerMemberName] string caller = null, [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
                 => Notify(AppMsg.Define(msg, SeverityLevel.HiliteCL, caller, file, line));

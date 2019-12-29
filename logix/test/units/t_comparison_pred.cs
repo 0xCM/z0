@@ -112,7 +112,7 @@ namespace Z0.Logix
             var x = compare(ComparisonKind.Lt,va,vb);
             var y = compare(ComparisonKind.Lt,vb,vc);
             var z = compare(ComparisonKind.Lt,vc,va);
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var a = va.Set(Random);
                 var b = vb.Set(Random);
@@ -139,7 +139,7 @@ namespace Z0.Logix
             var va = var_a<T>();
             var vb = var_b<T>();
             var x = compare(kind,va,vb);
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var a = va.Set(Random);
                 var b = vb.Set(Random);

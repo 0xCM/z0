@@ -18,7 +18,9 @@ namespace Z0
         {
             public static Sllr128<T> Op => default;
 
-            public string Moniker => moniker<N128,T>("vsllr");
+            public const string Name = "vsllr";
+
+            public string Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> offsets) => ginx.vsllr(x,offsets);
@@ -32,7 +34,9 @@ namespace Z0
         {
             public static Sllr256<T> Op => default;
 
-            public string Moniker => moniker<N256,T>("vsllr");
+            public const string Name = "vsllr";
+             
+            public string Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> offset) => ginx.vsllr(x,offset);

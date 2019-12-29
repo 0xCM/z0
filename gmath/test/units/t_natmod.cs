@@ -15,7 +15,7 @@ namespace Z0
         public void mod_mul32()
         {
             var m = Mod.Define(Random.Single(z32),z32);            
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var a = Random.Single(z32);
                 var b = Random.Single(z32);

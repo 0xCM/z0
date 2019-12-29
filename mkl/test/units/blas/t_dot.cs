@@ -29,8 +29,8 @@ namespace Z0.Mkl
         {
             for(var i=0; i< DefaltCycleCount; i++)
             {
-                var x = RVecF32(DefaultSampleSize);
-                var y = RVecF32(DefaultSampleSize);
+                var x = RVecF32(DefaultRepCount);
+                var y = RVecF32(DefaultRepCount);
                 Claim.eq(mkl.dot(x,y),dot(x,y));
             }
         }
@@ -39,8 +39,8 @@ namespace Z0.Mkl
         {
             for(var i=0; i< DefaltCycleCount; i++)
             {
-                var x = RVecF32(DefaultSampleNat);
-                var y = RVecF32(DefaultSampleNat);
+                var x = RVecF32(n256);
+                var y = RVecF32(n256);
                 Claim.eq(mkl.dot(x,y),dot(x,y));
             }
         }
@@ -49,8 +49,8 @@ namespace Z0.Mkl
         {
             for(var i=0; i< DefaltCycleCount; i++)
             {
-                var x = RVecF64(DefaultSampleSize);
-                var y = RVecF64(DefaultSampleSize);
+                var x = RVecF64(DefaultRepCount);
+                var y = RVecF64(DefaultRepCount);
                 Claim.eq(mkl.dot(x,y),dot(x,y));
             }
         }
@@ -59,8 +59,8 @@ namespace Z0.Mkl
         {
             for(var i=0; i< DefaltCycleCount; i++)
             {
-                var x = RVecF64(DefaultSampleNat);
-                var y = RVecF64(DefaultSampleNat);                
+                var x = RVecF64(n256);
+                var y = RVecF64(n256);                
                 Claim.eq(mkl.dot(x,y),dot(x,y));
             }
         }

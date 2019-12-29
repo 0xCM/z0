@@ -40,7 +40,7 @@ namespace Z0
         void sb_gather_check<T>(T t = default)
             where T : unmanaged
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var src = Random.Next<T>();
                 var mask = Random.Next<T>();

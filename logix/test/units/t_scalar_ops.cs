@@ -26,8 +26,8 @@ namespace Z0.Logix
         {
             var opname = $"ops/scalar[{typename<T>()}]/lookup[{lookup}]";
 
-            var lhsSamples = Random.Array<T>(SampleCount);
-            var rhsSamples = Random.Array<T>(SampleCount);
+            var lhsSamples = Random.Array<T>(RepCount);
+            var rhsSamples = Random.Array<T>(RepCount);
             var result = default(T);
             var kinds = ScalarOpApi.BinaryBitwiseKinds.ToArray();
             var opcount = 0;
@@ -37,14 +37,14 @@ namespace Z0.Logix
             if(lookup)
             {
                 for(var i=0; i<CycleCount; i++)
-                for(var sample=0; sample< SampleCount; sample++)
+                for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                     result = ScalarOpApi.lookup<T>(kinds[k])(lhsSamples[sample], rhsSamples[sample]);
             }
             else
             {
                 for(var i=0; i<CycleCount; i++)
-                for(var sample=0; sample< SampleCount; sample++)
+                for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                     result = ScalarOpApi.eval(kinds[k],lhsSamples[sample], rhsSamples[sample]);
             }

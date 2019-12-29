@@ -29,7 +29,7 @@ namespace Z0
         {
             Span<B> dst = stackalloc B[count];
 
-            for(var sample = 0; sample < SampleCount; sample++)
+            for(var sample = 0; sample < RepCount; sample++)
             {
                 var x = Random.Next<A>();
                 

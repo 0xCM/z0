@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
 
@@ -13,56 +14,112 @@ namespace Z0
 
     public class t_veq : t_vinx<t_veq>
     {     
-        public void check()
+
+        public void veq_check()
         {            
-            check(n128);
-            check(n256);
+            veq_basecase(n128);
+            veq_basecase(n256);
+            veq_check(n128);
+            veq_check(n256);
         }
 
-        void check(N128 w)
+        void veq_check(N128 w)
         {
-            v_check(VX.veq(w,z8), w, z8);                
-            v_check(VX.veq(w,z8i), w, z8i);
-            v_check(VX.veq(w,z16),  w, z16);
-            v_check(VX.veq(w,z16i), w, z16i);
-            v_check(VX.veq(w,z32), w, z32);
-            v_check(VX.veq(w,z32i), w, z32i);
-            v_check(VX.veq(w,z64), w, z64);
-            v_check(VX.veq(w,z64i), w, z64i);
+            veq_check(w, z8);                
+            veq_check(w, z8i);
+            veq_check(w, z16);
+            veq_check(w, z16i);
+            veq_check(w, z32);
+            veq_check(w, z32i);
+            veq_check(w, z64);
+            veq_check(w, z64i);
 
         }
 
-        void check(N256 w)
+        void veq_check(N256 w)
         {
-            v_check(VX.veq(w,z8), w, z8);                
-            v_check(VX.veq(w,z8i), w, z8i);
-            v_check(VX.veq(w,z16),w, z16);
-            v_check(VX.veq(w,z16i),w, z16i);
-            v_check(VX.veq(w,z32),w, z32);
-            v_check(VX.veq(w,z32i),w, z32i);
-            v_check(VX.veq(w,z64),w, z64);
-            v_check(VX.veq(w,z64i),w, z64i);
+            veq_check(w, z8);                
+            veq_check(w, z8i);
+            veq_check(w, z16);
+            veq_check(w, z16i);
+            veq_check(w, z32);
+            veq_check(w, z32i);
+            veq_check(w, z64);
+            veq_check(w, z64i);
         }            
 
-        void v_check<F,T>(F f, N128 w, T t = default)
-            where T : unmanaged
-            where F : IVBinOp128D<T>
-        {
-            CheckBinaryScalarMatch(f,w,t);
 
-            var x = Random.Blocks<T>(w, SampleCount/vcount(w,t));
-            var result = DataBlocks.alloc<T>(w, x.BlockCount);
-            result.Fill(gmath.ones<T>());
-            CheckExplicit(f,x,x,result);
+        void veq_basecase(N128 w)
+        {
+            veq_basecase(w, z8);                
+            veq_basecase(w, z8i);
+            veq_basecase(w, z16);
+            veq_basecase(w, z16i);
+            veq_basecase(w, z32);
+            veq_basecase(w, z32i);
+            veq_basecase(w, z64);
+            veq_basecase(w, z64i);
         }
 
-        void v_check<F,T>(F f, N256 w, T t = default)
-            where T : unmanaged
-            where F : IVBinOp256D<T>
+        void veq_basecase(N256 w)
         {
+            veq_basecase(w, z8);                
+            veq_basecase(w, z8i);
+            veq_basecase(w, z16);
+            veq_basecase(w, z16i);
+            veq_basecase(w, z32);
+            veq_basecase(w, z32i);
+            veq_basecase(w, z64);
+            veq_basecase(w, z64i);
+        }
+
+        public void vneq_128x32u()
+        {
+            for(var i=0; i<RepCount; i++)
+            {
+
+            }
+        }
+
+        void veq_basecase<T>(N128 w, T t = default)
+            where T : unmanaged
+        {
+            var name = TestCaseName(moniker(MethodInfo.GetCurrentMethod().Name,w,t));
+            var f = VX.veq(w,t);
+            var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
+            var result = DataBlocks.alloc<T>(w, x.BlockCount);
+            result.Fill(gmath.ones<T>());
+            CheckExplicit(f,x,x,result, name);
+
+        }
+
+        void veq_basecase<T>(N256 w, T t = default)
+            where T : unmanaged
+        {
+            var name = TestCaseName(moniker(MethodInfo.GetCurrentMethod().Name,w,t));
+            var f = VX.veq(w,t);
+            var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
+            var result = DataBlocks.alloc<T>(w, x.BlockCount);
+            result.Fill(gmath.ones<T>());
+            CheckExplicit(f,x,x,result,name);
+
+        }
+
+        void veq_check<T>(N128 w, T t = default)
+            where T : unmanaged
+        {
+            var f = VX.veq(w,t);
+            CheckBinaryScalarMatch(f,w,t);
+
+        }
+
+        void veq_check<T>(N256 w, T t = default)
+            where T : unmanaged
+        {
+            var f = VX.veq(w,t);
             CheckBinaryScalarMatch(f,w,t);
             
-            var x = Random.Blocks<T>(w, SampleCount/vcount(w,t));
+            var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
             var result = DataBlocks.alloc<T>(w, x.BlockCount);
             result.Fill(gmath.ones<T>());
             CheckExplicit(f,x,x,result);

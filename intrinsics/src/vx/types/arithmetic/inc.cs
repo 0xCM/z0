@@ -17,7 +17,9 @@ namespace Z0
         {
             public static Inc128<T> Op => default;
 
-            public string Moniker => moniker<N128,T>("vinc");
+            public const string Name = "vinc";
+
+            public string Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => ginx.vinc(x);
@@ -31,7 +33,9 @@ namespace Z0
         {
             public static Inc256<T> Op => default;
 
-            public string Moniker => moniker<N256,T>("vinc");
+            public const string Name = "vinc";
+
+            public string Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x)

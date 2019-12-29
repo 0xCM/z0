@@ -20,16 +20,34 @@ namespace Z0
     public abstract class TestApp<A> : TestContext<A>
         where A : TestApp<A>, new()
     {
-
         ConcurrentQueue<TestCaseRecord> TestResultQueue {get;}
             = new ConcurrentQueue<TestCaseRecord>();
 
         protected void Enqueue(IEnumerable<TestCaseRecord> outcomes)
             => TestResultQueue.Enqueue(outcomes);
 
-        protected TestCaseRecord[] DequeueResults(Func<IEnumerable<TestCaseRecord>, IEnumerable<TestCaseRecord>> sorter)
+        ConcurrentQueue<BenchmarkRecord> BenchmarkQueue {get;}
+            = new ConcurrentQueue<BenchmarkRecord>();
+
+        protected void Enqueue(IEnumerable<BenchmarkRecord> outcomes)
+            => BenchmarkQueue.Enqueue(outcomes);
+
+        protected BenchmarkRecord[] TakeSortedBenchmarks()
         {
-            var results = sorter(TestResultQueue).ToArray();
+            static IEnumerable<BenchmarkRecord> Sort(IEnumerable<BenchmarkRecord> src)
+                => src.OrderBy(x => x.Operation);
+            
+            var benchmarks = Sort(BenchmarkQueue).ToArray();
+            BenchmarkQueue.Clear();
+            return benchmarks;
+        }
+
+        protected TestCaseRecord[] TakeSortedResults()
+        {
+            static IEnumerable<TestCaseRecord> Sort(IEnumerable<TestCaseRecord> src)
+                => src.OrderBy(x => x.Operation).Where(x => !x.Succeeded).Concat(src.Where(x => x.Succeeded));
+
+            var results = Sort(TestResultQueue).ToArray();
             TestResultQueue.Clear();
             return results;
         }
@@ -76,7 +94,7 @@ namespace Z0
                 var hostpath = host.DisplayName();
                 if(instance.Enabled)
                     iter(Tests(host), t =>  execTime += Run(instance, hostpath, t, results));                
-                Mark(instance.Benchmarks);
+                Enqueue(instance.TakeBenchmarks().ToArray());
                 
                 print(AppMsg.Define($"{host.Name} exectime {execTime.Ms} ms, runtime = {snapshot(runtimer).Ms} ms", SeverityLevel.Info));
 
@@ -114,9 +132,9 @@ namespace Z0
                 messages.AddRange(unit.DequeueMessages());
                 messages.Add(AppMsg.Define($"{testName} executed. {exectime.Ms}ms", SeverityLevel.Info));
                 
-                var reported = unit.TakeOutcomes().ToArray();
-                if(reported.Length != 0)
-                    results.AddRange(reported);
+                var outcomes = unit.TakeOutcomes().ToArray();
+                if(outcomes.Length != 0)
+                    results.AddRange(outcomes);
                 else
                     results.Add(TestCaseRecord.Define(testName,true,exectime));
             }
@@ -139,8 +157,6 @@ namespace Z0
             finally
             {            
                 print(messages);
-                if(PersistResults)
-                    log(messages, LogArea.Test);
             }
             return exectime;
         }            
@@ -153,21 +169,15 @@ namespace Z0
         protected virtual string AppName
             => GetType().Assembly.GetSimpleName();
 
-        static IEnumerable<TestCaseRecord> Sort(IEnumerable<TestCaseRecord> src)
-            => src.OrderBy(x => x.Operation).Where(x => !x.Succeeded).Concat(src.Where(x => x.Succeeded));
-
-        static IEnumerable<BenchmarkRecord> Sort(IEnumerable<BenchmarkRecord> src)
-            => src.OrderBy(x => x.Operation);
-
         void EmitLogs()
         {
             var basename = AppName;
             
-            var timings = DequeueTimings(Sort);
-            if(timings.Any())
-                Log.LogBenchmarks(basename.Replace(".test",".bench"),timings, LogWriteMode.Overwrite);
+            var benchmarks = TakeSortedBenchmarks();
+            if(benchmarks.Any())
+                Log.LogBenchmarks(basename.Replace(".test",".bench"),benchmarks, LogWriteMode.Overwrite);
             
-            var results = DequeueResults(Sort);
+            var results = TakeSortedResults();
             if(results.Any())
             {
                 // Emit a unique file

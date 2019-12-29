@@ -10,45 +10,43 @@ namespace Z0
 
     public class t_vsub : t_vinx<t_vsub>
     {
-        public void check()
+        public void vsub_check()
         {            
-            check(n128);
-            check(n256);
+            vsub_check(n128);
+            vsub_check(n256);
         }
 
-        void check(N128 w)
+        void vsub_check(N128 w)
         {
-            check(VX.vsub(w,z8), w, z8);                
-            check(VX.vsub(w,z8i), w, z8i);
-            check(VX.vsub(w,z16),  w, z16);
-            check(VX.vsub(w,z16i), w, z16i);
-            check(VX.vsub(w,z32), w, z32);
-            check(VX.vsub(w,z32i), w, z32i);
-            check(VX.vsub(w,z64), w, z64);
-            check(VX.vsub(w,z64i), w, z64i);
+            vsub_check(w, z8);                
+            vsub_check(w, z8i);
+            vsub_check(w, z16);
+            vsub_check(w, z16i);
+            vsub_check(w, z32);
+            vsub_check(w, z32i);
+            vsub_check(w, z64);
+            vsub_check(w, z64i);
 
         }
 
-        void check(N256 w)
+        void vsub_check(N256 w)
         {
-            check(VX.vsub(w,z8), w, z8);                
-            check(VX.vsub(w,z8i), w, z8i);
-            check(VX.vsub(w,z16),  w, z16);
-            check(VX.vsub(w,z16i), w, z16i);
-            check(VX.vsub(w,z32), w, z32);
-            check(VX.vsub(w,z32i), w, z32i);
-            check(VX.vsub(w,z64), w, z64);
-            check(VX.vsub(w,z64i), w, z64i);
+            vsub_check(w, z8);                
+            vsub_check(w, z8i);
+            vsub_check(w, z16);
+            vsub_check(w, z16i);
+            vsub_check(w, z32);
+            vsub_check(w, z32i);
+            vsub_check(w, z64);
+            vsub_check(w, z64i);
         }            
 
-        void check<F,T>(F f, N128 w, T t = default)
+        void vsub_check<T>(N128 w, T t = default)
             where T : unmanaged
-            where F : IVBinOp128D<T>
-                => CheckBinaryScalarMatch(f,w,t);
+                => CheckBinaryScalarMatch(VX.vsub(w,t),w,t);
             
-        void check<F,T>(F f, N256 w, T t = default)
+        void vsub_check<T>(N256 w, T t = default)
             where T : unmanaged
-            where F : IVBinOp256D<T>
-                => CheckBinaryScalarMatch(f,w,t);
+                => CheckBinaryScalarMatch(VX.vsub(w,t),w,t);
     }
 }

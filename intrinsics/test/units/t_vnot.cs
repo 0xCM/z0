@@ -10,94 +10,44 @@ namespace Z0
 
     public class t_vnot : t_vinx<t_vnot>
     {
-        public void vnot_128x8i()
-            => vnot_check<sbyte>(n128);
-
-        public void vnot_128x8u()
-            => vnot_check<byte>(n128);
-
-        public void vnot_128x16i()
-            => vnot_check<short>(n128);
-
-        public void vnot_128x16u()
-            => vnot_check<ushort>(n128);
-
-        public void vnot_128x32i()
-            => vnot_check<int>(n128);
-
-        public void vnot_128x32u()
-            => vnot_check<uint>(n128);
-
-        public void vnot_128x64i()
-            => vnot_check<long>(n128);
-
-        public void vnot_128x64u()
-            => vnot_check<ulong>(n128);
-
-        public void vnot_256x8i()
-            => vnot_check<sbyte>(n256);
-
-        public void vnot_256x8u()
-            => vnot_check<byte>(n256);
-
-        public void vnot_256x16i()
-            => vnot_check<short>(n256);
-
-        public void vnot_256x16u()
-            => vnot_check<ushort>(n256);
-
-        public void vnot_256x32i()
-            => vnot_check<int>(n256);
-
-        public void vnot_256x32u()
-            => vnot_check<uint>(n256);
-
-        public void vnot_256x64i()
-            => vnot_check<long>(n256);
-
-        public void vnot_256x64u()
-            => vnot_check<ulong>(n256);
- 
-        protected void vnot_check<T>(N128 w = default, T t = default)
-            where T : unmanaged
-        {
-            for(var i=0; i<SampleCount; i++)
-            {
-                var x = Random.CpuVector<T>(w);
-
-                var actual = ginx.vnot(x);
-                var bsX = x.ToBitString();
-                var bsY = actual.ToBitString();
-                
-                Claim.eq(bsX.Length, bsY.Length);
-                for(var j=0; j< bsX.Length; j++)
-                    Claim.neq(bsX[j],bsY[j]);
-
-                var xData = x.ToSpan();
-                var expect  = CpuVector.vload(w, in head(mathspan.not(xData)));
-                Claim.eq(expect,actual);
-            }
+        public void vnot_check()
+        {            
+            vnot_check(n128);
+            vnot_check(n256);
         }
 
-        protected void vnot_check<T>(N256 w = default, T t = default)
-            where T : unmanaged
+        void vnot_check(N128 w)
         {
-            for(var i=0; i<SampleCount; i++)
-            {
-                var x = Random.CpuVector<T>(w);
-                var actual = ginx.vnot(x);
-                
-                var bsX = x.ToBitString();
-                var bsY = actual.ToBitString();
-                Claim.eq(bsX.Length, bsY.Length);
-                for(var j=0; j< bsX.Length; j++)
-                    Claim.neq(bsX[j],bsY[j]);
+            vnot_check(w, z8);                
+            vnot_check(w, z8i);
+            vnot_check(w, z16);
+            vnot_check(w, z16i);
+            vnot_check(w, z32);
+            vnot_check(w, z32i);
+            vnot_check(w, z64);
+            vnot_check(w, z64i);
 
-                var xData = x.ToSpan();                
-                var expect  = CpuVector.vload(w, in head(mathspan.not(xData)));
-                Claim.eq(expect,actual);
-            }
         }
-   }
+
+        void vnot_check(N256 w)
+        {
+            vnot_check(w, z8);                
+            vnot_check(w, z8i);
+            vnot_check(w, z16);
+            vnot_check(w, z16i);
+            vnot_check(w, z32);
+            vnot_check(w, z32i);
+            vnot_check(w, z64);
+            vnot_check(w, z64i);
+        }            
+
+        void vnot_check<T>(N128 w, T t = default)
+            where T : unmanaged
+                => CheckUnaryScalarMatch(VX.vnot(w,t),w,t);
+            
+        void vnot_check<T>(N256 w, T t = default)
+            where T : unmanaged
+                => CheckUnaryScalarMatch(VX.vnot(w,t),w,t);
+  }
 
 }

@@ -41,7 +41,7 @@ namespace Z0.Logix
             if(lookup)
             {
                 for(var i=0; i<CycleCount; i++)
-                for(var sample=0; sample< SampleCount; sample++)
+                for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                 {
                     result = CpuOpApi.lookup<T>(n128,kinds[k])(x, y);
@@ -52,7 +52,7 @@ namespace Z0.Logix
             else
             {                
                 for(var i=0; i<CycleCount; i++)
-                for(var sample=0; sample< SampleCount; sample++)
+                for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                 {
                     result = CpuOpApi.eval(kinds[k],x, y);
@@ -82,7 +82,7 @@ namespace Z0.Logix
             if(lookup)
             {
                 for(var i=0; i<CycleCount; i++)
-                for(var sample=0; sample< SampleCount; sample++)
+                for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                 {
                     result = CpuOpApi.lookup<T>(n256,kinds[k])(x, y);
@@ -94,7 +94,7 @@ namespace Z0.Logix
             {
                 
                 for(var i=0; i<CycleCount; i++)
-                for(var sample=0; sample< SampleCount; sample++)
+                for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                 {
                     result = CpuOpApi.eval(kinds[k],x, y);

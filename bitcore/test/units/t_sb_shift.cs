@@ -38,47 +38,47 @@ namespace Z0
 
         public void sb_sal_8i()
         {
-            var src = Random.Array<sbyte>(SampleCount);            
-            var offset = Random.Array<int>(SampleCount, closed(0, (int)bitsize<sbyte>()));            
+            var src = Random.Array<sbyte>(RepCount);            
+            var offset = Random.Array<int>(RepCount, closed(0, (int)bitsize<sbyte>()));            
 
-            iter(SampleCount, i => Claim.eq((sbyte)(src[i] << offset[i]), gmath.sal(src[i], offset[i])));    
+            iter(RepCount, i => Claim.eq((sbyte)(src[i] << offset[i]), gmath.sal(src[i], offset[i])));    
         }
 
         public void sb_sar_8i()
         {
-            var src = Random.Array<sbyte>(SampleCount);            
-            var offset = Random.Array<int>(SampleCount, closed(0, (int)bitsize<sbyte>()));                
-            iter(SampleCount, i => Claim.eq((sbyte)(src[i] >> offset[i]), gmath.sar(src[i], offset[i])));    
+            var src = Random.Array<sbyte>(RepCount);            
+            var offset = Random.Array<int>(RepCount, closed(0, (int)bitsize<sbyte>()));                
+            iter(RepCount, i => Claim.eq((sbyte)(src[i] >> offset[i]), gmath.sar(src[i], offset[i])));    
         }
 
         public void sb_sal_32i()
         {
-            var src = Random.Array<int>(SampleCount);            
-            var offset = Random.Array<int>(SampleCount, closed(0, (int)bitsize<int>()));            
-            iter(SampleCount, i => Claim.eq(src[i] << offset[i], gmath.sal(src[i], offset[i])));    
+            var src = Random.Array<int>(RepCount);            
+            var offset = Random.Array<int>(RepCount, closed(0, (int)bitsize<int>()));            
+            iter(RepCount, i => Claim.eq(src[i] << offset[i], gmath.sal(src[i], offset[i])));    
         }
 
         public void sb_sar_32i()
         {
-            var src = Random.Array<int>(SampleCount);            
-            var offset = Random.Array<int>(SampleCount, closed(0, (int)bitsize<int>()));            
-            iter(SampleCount, i => Claim.eq(src[i] >> offset[i], gmath.sar(src[i], offset[i])));
+            var src = Random.Array<int>(RepCount);            
+            var offset = Random.Array<int>(RepCount, closed(0, (int)bitsize<int>()));            
+            iter(RepCount, i => Claim.eq(src[i] >> offset[i], gmath.sar(src[i], offset[i])));
         }
 
         public void sb_sal_64i()
         {
-            var src = Random.Array<long>(SampleCount);            
-            var offset = Random.Array<int>(SampleCount, closed(0, (int)bitsize<ulong>()));            
+            var src = Random.Array<long>(RepCount);            
+            var offset = Random.Array<int>(RepCount, closed(0, (int)bitsize<ulong>()));            
 
-            iter(SampleCount, i => Claim.eq(src[i] << offset[i], gmath.sal(src[i], offset[i])));    
+            iter(RepCount, i => Claim.eq(src[i] << offset[i], gmath.sal(src[i], offset[i])));    
         }
 
         public void sb_sar_64i()
         {
-            var src = Random.Array<long>(SampleCount);            
-            var offset = Random.Array<int>(SampleCount, closed(0, (int)bitsize<long>()));            
+            var src = Random.Array<long>(RepCount);            
+            var offset = Random.Array<int>(RepCount, closed(0, (int)bitsize<long>()));            
 
-            iter(SampleCount, i => Claim.eq(src[i] >> offset[i], gmath.sar(src[i], offset[i])));
+            iter(RepCount, i => Claim.eq(src[i] >> offset[i], gmath.sar(src[i], offset[i])));
         }
 
         protected void bs_sar_check<T>()

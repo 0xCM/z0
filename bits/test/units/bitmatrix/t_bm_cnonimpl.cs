@@ -13,7 +13,7 @@ namespace Z0
     {                
         public void bm_not_32x32x32()
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var A = Random.BitMatrix(n32);
                 var B = BitMatrix.not(A);

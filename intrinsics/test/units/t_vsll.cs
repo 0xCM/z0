@@ -11,45 +11,43 @@ namespace Z0
 
     public class t_vsll : t_vinx<t_vsll>
     {
-        public void check()
+        public void vsll_check()
         {
-            check(n128);
-            check(n256);
-        }
-        void check(N128 w)
-        {
-
-            check(VX.vsll(w,z8), w, z8);                
-            check(VX.vsll(w,z8i), w, z8i);
-            check(VX.vsll(w,z16),  w, z16);
-            check(VX.vsll(w,z16i), w, z16i);
-            check(VX.vsll(w,z32), w, z32);
-            check(VX.vsll(w,z32i), w, z32i);
-            check(VX.vsll(w,z64), w, z64);
-            check(VX.vsll(w,z64i), w, z64i);
+            vsll_check(n128);
+            vsll_check(n256);
         }
 
-        void check(N256 w)
+        void vsll_check(N128 w)
         {
-            check(VX.vsll(w,z8), w, z8);                
-            check(VX.vsll(w,z8i), w, z8i);
-            check(VX.vsll(w,z16),  w, z16);
-            check(VX.vsll(w,z16i), w, z16i);
-            check(VX.vsll(w,z32), w, z32);
-            check(VX.vsll(w,z32i), w, z32i);
-            check(VX.vsll(w,z64), w, z64);
-            check(VX.vsll(w,z64i), w, z64i);            
+            vsll_check(w, z8);                
+            vsll_check(w, z8i);
+            vsll_check(w, z16);
+            vsll_check(w, z16i);
+            vsll_check(w, z32);
+            vsll_check(w, z32i);
+            vsll_check(w, z64);
+            vsll_check(w, z64i);
         }
 
-        void check<F,T>(F f, N128 w, T t = default)
+        void vsll_check(N256 w)
+        {
+            vsll_check(w, z8);                
+            vsll_check(w, z8i);
+            vsll_check(w, z16);
+            vsll_check(w, z16i);
+            vsll_check(w, z32);
+            vsll_check(w, z32i);
+            vsll_check(w, z64);
+            vsll_check(w, z64i);
+        }
+
+        void vsll_check<T>(N128 w, T t = default)
             where T : unmanaged
-            where F : IVShiftOp128D<T>
-                => CheckShiftScalarMatch(f,w,t);
+                => CheckShiftScalarMatch(VX.vsll(w,t),w,t);
             
-        void check<F,T>(F f, N256 w, T t = default)
+        void vsll_check<T>(N256 w, T t = default)
             where T : unmanaged
-            where F : IVShiftOp256D<T>
-                => CheckShiftScalarMatch(f,w,t);
+                => CheckShiftScalarMatch(VX.vsll(w,t),w,t);
 
     }
 }

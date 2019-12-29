@@ -12,7 +12,7 @@ namespace Z0
     {                
         public void replicate_8x32()
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var pattern = Random.Next(z8);
                 (var x0, var x1, var x2, var x3) = Bits.split(gbits.replicate<uint>(pattern),n4);

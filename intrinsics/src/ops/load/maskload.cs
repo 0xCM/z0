@@ -24,8 +24,8 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<int> vmaskload(in ConstBlock128<int> src, Vector128<int> mask)
-            => MaskLoad(constptr(src), mask); 
+        public static unsafe Vector128<int> vmaskload(in Block128<int> src, Vector128<int> mask)
+            => MaskLoad(ptr(src), mask); 
 
         /// <summary>
         /// __m128i _mm_maskload_epi32 (int const* mem_addr, __m128i mask) VPMASKMOVD xmm, xmm, m128
@@ -33,8 +33,8 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<uint> vmaskload(in ConstBlock128<uint> src, Vector128<uint> mask)
-            => MaskLoad(constptr(src), mask); 
+        public static unsafe Vector128<uint> vmaskload(in Block128<uint> src, Vector128<uint> mask)
+            => MaskLoad(ptr(src), mask); 
 
         /// <summary>
         /// __m256i _mm256_maskload_epi32 (int const* mem_addr, __m256i mask) VPMASKMOVD ymm, ymm, m256
@@ -42,8 +42,8 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<int> vmaskload(in ConstBlock256<int> src, Vector256<int> mask)
-            => MaskLoad(constptr(src), mask); 
+        public static unsafe Vector256<int> vmaskload(in Block256<int> src, Vector256<int> mask)
+            => MaskLoad(ptr(src), mask); 
 
         /// <summary>
         /// __m256i _mm256_maskload_epi32 (int const* mem_addr, __m256i mask) VPMASKMOVD ymm, ymm, m256
@@ -51,8 +51,8 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<uint> vmaskload(in ConstBlock256<uint> src, Vector256<uint> mask)
-            => MaskLoad(constptr(src), mask); 
+        public static unsafe Vector256<uint> vmaskload(in Block256<uint> src, Vector256<uint> mask)
+            => MaskLoad(ptr(src), mask); 
 
         /// <summary>
         /// __m256i _mm256_maskload_epi64 (__int64 const* mem_addr, __m256i mask) VPMASKMOVQ ymm, ymm, m256
@@ -60,8 +60,8 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> vmaskload(in ConstBlock256<long> src, Vector256<long> mask)
-            => MaskLoad(constptr(src), mask); 
+        public static unsafe Vector256<long> vmaskload(in Block256<long> src, Vector256<long> mask)
+            => MaskLoad(ptr(src), mask); 
 
         /// <summary>
         /// __m256i _mm256_maskload_epi64 (__int64 const* mem_addr, __m256i mask) VPMASKMOVQ ymm, ymm, m256
@@ -69,8 +69,8 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> vmaskload(in ConstBlock256<ulong> src, Vector256<ulong> mask)
-            => MaskLoad(constptr(src), mask); 
+        public static unsafe Vector256<ulong> vmaskload(in Block256<ulong> src, Vector256<ulong> mask)
+            => MaskLoad(ptr(src), mask); 
     }
 
 }

@@ -211,5 +211,28 @@ namespace Z0
         public static Select256<T> vselect<T>(N256 w, T t = default)
             where T : unmanaged
                 => Select256<T>.Op;
+
+        /// <summary>
+        /// Operator factory for vselect_256xT
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="t">A component type representative</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static CNonImpl128<T> vcnonimpl<T>(N128 w, T t = default)
+            where T : unmanaged
+                => CNonImpl128<T>.Op;
+
+        /// <summary>
+        /// Operator factory for vselect_256xT
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="t">A component type representative</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static CNonImpl256<T> vcnonimpl<T>(N256 w, T t = default)
+            where T : unmanaged
+                => CNonImpl256<T>.Op;
+
    }
 }

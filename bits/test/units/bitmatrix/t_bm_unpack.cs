@@ -16,7 +16,7 @@ namespace Z0
             var dst = Matrix.alloc<N8,byte>();
             var m = dst.ColCount;
             var n = dst.RowCount;
-            for(var sample=0; sample<SampleCount; sample++)
+            for(var sample=0; sample<RepCount; sample++)
             {
                 var src = Random.BitMatrix8();
                 BitMatrix.unpack(src, ref dst);
@@ -32,7 +32,7 @@ namespace Z0
             var dst = Matrix.alloc<N64,ulong>();
             var m = dst.ColCount;
             var n = dst.RowCount;
-            for(var sample=0; sample<SampleCount; sample++)
+            for(var sample=0; sample<RepCount; sample++)
             {
                 var src = Random.BitMatrix64();
                 BitMatrix.unpack(src, ref dst);

@@ -47,7 +47,7 @@ namespace Z0
         public void bm_and_4x4x4()
         {
             var n = n4;
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var A = Random.BitMatrix(n);
                 var B = Random.BitMatrix(n);
@@ -64,7 +64,7 @@ namespace Z0
         {
             var n = n8;
             Span<byte> dst = stackalloc byte[8];
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var A = Random.BitMatrix(n8);
                 var B = Random.BitMatrix(n8);
@@ -80,7 +80,7 @@ namespace Z0
 
         public void bm_and_32x32x32()
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var A = Random.BitMatrix32();
                 var B = Random.BitMatrix32();
@@ -93,7 +93,7 @@ namespace Z0
 
         public void bm_and_64x64x64()
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var A = Random.BitMatrix64();
                 var B = Random.BitMatrix64();

@@ -51,7 +51,7 @@ namespace Z0
             where T : unmanaged
         {
             var count = w/bitsize<T>();
-            for(var sample=0; sample<SampleCount; sample++)
+            for(var sample=0; sample<RepCount; sample++)
             {
 
                 var x = Random.CpuVector(w,t);
@@ -86,7 +86,7 @@ namespace Z0
             where T : unmanaged
         {
             var count = w/bitsize<T>();            
-            for(var sample=0; sample<SampleCount; sample++)
+            for(var sample=0; sample<RepCount; sample++)
             {
                 var x = Random.CpuVector(w,t);
                 var y = Random.CpuVector(w,t);

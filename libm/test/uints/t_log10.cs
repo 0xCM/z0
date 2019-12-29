@@ -12,7 +12,7 @@ namespace Z0
     {
         public void log10_libm_validate()
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<double>();
                 var y = libm.log10(x);

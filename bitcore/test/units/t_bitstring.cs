@@ -171,8 +171,8 @@ namespace Z0
 
         public void bs_seq()
         {
-            var srcA = Random.Stream<uint>().Take(SampleCount);
-            var srcB = Random.Stream<uint>().Take(SampleCount);
+            var srcA = Random.Stream<uint>().Take(RepCount);
+            var srcB = Random.Stream<uint>().Take(RepCount);
             var pairs = srcA.Zip(srcB);
 
             foreach(var aVal in srcA)
@@ -184,12 +184,12 @@ namespace Z0
 
         public void bs_truncate()
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
-                var src = Random.BitString(SampleCount);
-                Claim.eq(src.Length, SampleCount);
+                var src = Random.BitString(RepCount);
+                Claim.eq(src.Length, RepCount);
 
-                var len = Random.Next<int>(2, SampleCount - 2);
+                var len = Random.Next<int>(2, RepCount - 2);
                 var dst = src.Truncate(len);
                 Claim.eq(len, dst.Length);
                 for(var j=0; j<len; j++)
@@ -315,7 +315,7 @@ namespace Z0
 
             void case2()
             {
-                var src = Random.Span<T>(SampleCount);
+                var src = Random.Span<T>(RepCount);
                 for(var i=0; i<src.Length; i++)
                 {
                     var x0 = src[i];
@@ -336,7 +336,7 @@ namespace Z0
         protected void bs_convert_check<T>()
             where T : unmanaged
         {
-            var src = Random.Span<T>(SampleCount);
+            var src = Random.Span<T>(RepCount);
             foreach(var x in src)
             {
                 var y = BitString.scalar(x);
@@ -348,7 +348,7 @@ namespace Z0
         void bs_parse_check<T>()
             where T : unmanaged
         {
-            var src = Random.Span<T>(SampleCount);
+            var src = Random.Span<T>(RepCount);
             for(var i=0; i<src.Length; i++)
             {
                 var x = gbits.bitchars(src[i]);

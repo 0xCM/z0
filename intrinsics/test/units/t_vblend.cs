@@ -194,9 +194,9 @@ namespace Z0
         {
             var n = n256;
 
-            var selectors = Random.Bits(SampleCount).ToArray();
+            var selectors = Random.Bits(RepCount).ToArray();
 
-            for(var sample=0; sample<SampleCount; sample++)
+            for(var sample=0; sample<RepCount; sample++)
             {
                 var xs = Random.Blocks<ulong>(n);
                 var x = xs.LoadVector();

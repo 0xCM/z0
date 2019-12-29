@@ -35,7 +35,7 @@ namespace Z0
             where T : unmanaged
         {
 
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var src = Random.Next<T>();
                 var x = gbits.lsbx(src);

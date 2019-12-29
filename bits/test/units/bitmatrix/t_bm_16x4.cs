@@ -31,7 +31,7 @@ namespace Z0
             var m = n16;
             var n = n4;
 
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var A = Random.Next<ulong>().ToPrimalBits(m,n);
                 var bs = A.ToBitString();
@@ -49,7 +49,7 @@ namespace Z0
             var m = n16;
             var n = n4;
 
-            for(var i=0; i<SampleCount;i++)
+            for(var i=0; i<RepCount;i++)
             {
                 var A = Random.Next<ulong>().ToPrimalBits(m,n);
                 var B = BitMatrix.transpose(A);
@@ -66,7 +66,7 @@ namespace Z0
             int rowcount = m;
             int colcount = n;
 
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var A = Random.Next<ulong>().ToPrimalBits(m,n);
                 var bs = A.ToBitString();
@@ -144,7 +144,7 @@ namespace Z0
         {
             var m = n16;
             var n = n4;
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var A = Random.Next<ulong>().ToPrimalBits(m,n);
                 var B = Random.Next<ulong>().ToPrimalBits(m,n);
@@ -160,7 +160,7 @@ namespace Z0
         {
             var m = n16;
             var n = n4;
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var A = Random.Next<ulong>().ToPrimalBits(m,n);
                 var C = f(A);

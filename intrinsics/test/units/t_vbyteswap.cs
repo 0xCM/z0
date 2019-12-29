@@ -50,7 +50,7 @@ namespace Z0
 
         public void sbyteswap_16()
         {
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var a = Random.Next<ushort>();
                 var b = Bits.byteswap(Bits.byteswap(a));
@@ -60,7 +60,7 @@ namespace Z0
 
         public void sbyteswap_32()
         {            
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var a = Random.Next<uint>();
                 var b = Bits.byteswap(Bits.byteswap(a));
@@ -75,7 +75,7 @@ namespace Z0
             Claim.eq(Bits.byteswap(a),b);
             Claim.eq(Bits.byteswap(b),a);
             
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.Next<ulong>();
                 var y = Bits.byteswap(Bits.byteswap(x));

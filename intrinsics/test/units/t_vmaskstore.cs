@@ -24,7 +24,7 @@ namespace Z0
             var m2 = dinx.vsllx(m1,32);
             var m3 = dinx.vsllx(m2,32);
 
-            for(var i = 0; i<SampleCount; i++)
+            for(var i = 0; i<RepCount; i++)
             {
                 var v0 = Random.CpuVector<byte>(n);
                 var v1 = Random.CpuVector<byte>(n);

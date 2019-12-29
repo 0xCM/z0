@@ -12,45 +12,43 @@ namespace Z0
     public class t_vinc : t_vinx<t_vinc>
     {
 
-        public void check()
+        public void vinc_check()
         {
-            check(n128);
-            check(n256);
+            vinc_check(n128);
+            vinc_check(n256);
         }
         
-        void check(N128 w)
+        void vinc_check(N128 w)
         {
-            check(VX.vinc(w,z8), w, z8);                
-            check(VX.vinc(w,z8i), w, z8i);
-            check(VX.vinc(w,z16),  w, z16);
-            check(VX.vinc(w,z16i), w, z16i);
-            check(VX.vinc(w,z32), w, z32);
-            check(VX.vinc(w,z32i), w, z32i);
-            check(VX.vinc(w,z64), w, z64);
-            check(VX.vinc(w,z64i), w, z64i);
+            vinc_check(w, z8);                
+            vinc_check(w, z8i);
+            vinc_check(w, z16);
+            vinc_check(w, z16i);
+            vinc_check(w, z32);
+            vinc_check(w, z32i);
+            vinc_check(w, z64);
+            vinc_check(w, z64i);
         }
 
-        void check(N256 w)
+        void vinc_check(N256 w)
         {
-            check(VX.vinc(w,z8), w, z8);                
-            check(VX.vinc(w,z8i), w, z8i);
-            check(VX.vinc(w,z16),  w, z16);
-            check(VX.vinc(w,z16i), w, z16i);
-            check(VX.vinc(w,z32), w, z32);
-            check(VX.vinc(w,z32i), w, z32i);
-            check(VX.vinc(w,z64), w, z64);
-            check(VX.vinc(w,z64i), w, z64i);
+            vinc_check(w, z8);                
+            vinc_check(w, z8i);
+            vinc_check(w, z16);
+            vinc_check(w, z16i);
+            vinc_check(w, z32);
+            vinc_check(w, z32i);
+            vinc_check(w, z64);
+            vinc_check(w, z64i);
         }
 
-        void check<F,T>(F f, N128 w, T t = default)
+        void vinc_check<T>(N128 w, T t = default)
             where T : unmanaged
-            where F : IVUnaryOp128D<T>
-                => CheckUnaryScalarMatch(f,w,t);
+                => CheckUnaryScalarMatch(VX.vinc(w,t),w,t);
             
-        void check<F,T>(F f, N256 w, T t = default)
+        void vinc_check<T>(N256 w, T t = default)
             where T : unmanaged
-            where F : IVUnaryOp256D<T>
-                => CheckUnaryScalarMatch(f,w,t);
+                => CheckUnaryScalarMatch(VX.vinc(w,t),w,t);
 
     }
 }

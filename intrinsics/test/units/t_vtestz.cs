@@ -34,12 +34,6 @@ namespace Z0
         public void vtestz_128x64u()
             => vtestz_check<ulong>(n128);
 
-        public void vtestz_128x32f()
-            => vtestz_check<float>(n128);
-
-        public void vtestz_128x64f()
-            => vtestz_check<double>(n128);
-
         public void vtestz_256x8i()
             => vtestz_check<sbyte>(n256);
 
@@ -64,10 +58,40 @@ namespace Z0
         public void vtestz_256x64u()
             => vtestz_check<ulong>(n256);
 
-        public void vtestz_256x32f()
-            => vtestz_check<float>(n256);
+        protected void vtestz_check<T>(N128 w = default, T t = default)
+            where T : unmanaged
+        {
 
-        public void vtestz_256x64f()
-            => vtestz_check<double>(n256);
+            for(var i=0; i< RepCount; i++)
+            {
+                var x = Random.CpuVector(w,t);
+                
+                // Creates a mask corresponding to each off bit in the source vector
+                // thereby establishing the the context where testz will return true
+                // since all mask-identified source bits are disabled
+                var mask = ginx.vcnonimpl(CpuVector.vones(w,t), x);                
+                
+                Claim.yea(ginx.vtestz(x,mask));
+            }
+        }
+
+        protected void vtestz_check<T>(N256 w = default, T t = default)
+            where T : unmanaged
+        {
+
+            for(var i=0; i< RepCount; i++)
+            {
+                var x = Random.CpuVector(w,t);
+
+                // Creates a mask corresponding to each off bit in the source vector
+                // thereby establishing the the context where testz will return true
+                // since all mask-identified source bits are disabled
+                var mask = ginx.vcnonimpl(CpuVector.vones(w,t), x);                
+                
+                Claim.yea(ginx.vtestz(x,mask));
+            }
+        }
+            
+
     }
 }

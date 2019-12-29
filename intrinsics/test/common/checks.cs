@@ -64,7 +64,7 @@ namespace Z0
             where F : IVFactoryOp128<S,T>
             where C : IVChecker128<S,T>
         {
-            for(var i=0; i < SampleCount; i++)
+            for(var i=0; i < RepCount; i++)
             {
                 var a = Random.Next<S>();
                 var v = f.Invoke(a);
@@ -79,7 +79,7 @@ namespace Z0
             where F : IVFactoryOp256<S,T>
             where C : IVChecker256<S,T>
         {
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var a = Random.Next<S>();
                 var v = f.Invoke(a);

@@ -5,6 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;    
+    using System.Runtime.Intrinsics;
+    using System.Runtime.Intrinsics.X86;
+    
+    using static System.Runtime.Intrinsics.X86.Sse;
+    using static System.Runtime.Intrinsics.X86.Sse2;
+    using static System.Runtime.Intrinsics.X86.Avx;
+    using static System.Runtime.Intrinsics.X86.Avx2;
     
     using static zfunc;
 
@@ -103,7 +111,7 @@ namespace Z0
 
         protected void cmp_128x64_check(FpCmpMode mode)
         {
-            for(var i = 0; i<SampleCount; i++)
+            for(var i = 0; i<RepCount; i++)
             {
                 var lhs = Random.CpuVector<double>(n128);
                 var rhs = Random.CpuVector<double>(n128);
@@ -115,7 +123,7 @@ namespace Z0
                 rhs.StoreTo(ref head(rDst));
 
                 var expect = fmath.fcmp(lDst, rDst, mode);
-                var actual = dinxfp.vcmpf(lhs, rhs, mode);
+                var actual = vcmpf(lhs, rhs, mode);
                 Claim.eq(expect,actual);
             }
 
@@ -123,7 +131,7 @@ namespace Z0
 
         protected void cmp_256xf32_check(FpCmpMode mode)
         {
-            for(var i = 0; i<SampleCount; i++)
+            for(var i = 0; i<RepCount; i++)
             {
                 var x = Random.CpuVector<float>(n256);
                 var y = Random.CpuVector<float>(n256);
@@ -135,14 +143,14 @@ namespace Z0
                 y.StoreTo(ref head(yDst));
 
                 var expect = fmath.fcmp(xDst, yDst, mode);
-                var actual = dinxfp.cmpf(x, y, mode);
+                var actual = cmpf(x, y, mode);
                 Claim.eq(expect,actual);
             }
         }
 
         protected void cmp_256x64_check(FpCmpMode mode)
         {
-            for(var i = 0; i<SampleCount; i++)
+            for(var i = 0; i<RepCount; i++)
             {
                 var x = Random.CpuVector<double>(n256);
                 var y = Random.CpuVector<double>(n256);
@@ -154,10 +162,65 @@ namespace Z0
                 y.StoreTo(ref head(yDst));
 
                 var expect = fmath.fcmp(xDst, yDst, mode);
-                var actual = dinxfp.cmpf(x, y, mode);
+                var actual = cmpf(x, y, mode);
                 Claim.eq(expect,actual);
             }
         }
 
+        [MethodImpl(Inline)]
+        static FloatComparisonMode fpmode(FpCmpMode m)
+            => (FloatComparisonMode)m;
+
+        /// <summary>
+        /// Determines whether the componenents are assigned the NaN value and
+        /// returns the result as an array of bools
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        static bool[] TestNaN(Vector128<double> src)
+            => array(src.GetElement(0).IsNaN(), src.GetElement(1).IsNaN());
+
+        /// <summary>
+        /// __m128d _mm_cmp_pd (__m128d a, __m128d b, const int imm8)VCMPPD xmm, xmm, xmm/m128, imm8
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="mode"></param>
+        [MethodImpl(Inline)]
+        static bool[] vcmpf(Vector128<double> x, Vector128<double> y, FpCmpMode mode)
+            => TestNaN(Compare(x, y, fpmode(mode)));
+
+
+        [MethodImpl(Inline)]
+        static bool[] cmpf(Vector256<float> x, Vector256<float> y, FpCmpMode mode)
+        {
+            Span<float> vresult = stackalloc float[8];
+            Compare(x,y, fpmode(mode)).StoreTo(ref head(vresult));
+            var bits = new bool[8];
+            bits[0] = double.IsNaN(vresult[0]);
+            bits[1] = double.IsNaN(vresult[1]);
+            bits[2] = double.IsNaN(vresult[2]);
+            bits[3] = double.IsNaN(vresult[3]);
+            bits[4] = double.IsNaN(vresult[4]);
+            bits[5] = double.IsNaN(vresult[5]);
+            bits[6] = double.IsNaN(vresult[6]);
+            bits[7] = double.IsNaN(vresult[7]);
+            return bits;
+
+        }
+
+        [MethodImpl(Inline)]
+        static bool[] cmpf(Vector256<double> x, Vector256<double> y, FpCmpMode mode)
+        {
+            Span<double> vresult = stackalloc double[4];
+            Compare(x,y, fpmode(mode)).StoreTo(ref head(vresult));
+            var bits = new bool[4];
+            bits[0] = double.IsNaN(vresult[0]);
+            bits[1] = double.IsNaN(vresult[1]);
+            bits[2] = double.IsNaN(vresult[2]);
+            bits[3] = double.IsNaN(vresult[3]);
+            return bits;
+        }
+ 
     }
 }

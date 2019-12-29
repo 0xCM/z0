@@ -15,7 +15,7 @@ namespace Z0
     partial class ginx
     {
         /// <summary>
-        /// Computes the converse nonimplication, x & (~y)
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -23,21 +23,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vcnonimpl<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vcnonimpl(vcast8u(x), vcast8u(y)));
-            else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vcnonimpl(vcast16u(x),vcast16u(y)));
-            else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vcnonimpl(vcast32u(x), vcast32u(y)));
-            else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vcnonimpl(vcast64u(x), vcast64u(y)));
-            else 
-                throw unsupported<T>();
-        }
+                => vcnonimpl_u(x,y);
 
         /// <summary>
-        /// Computes the converse nonimplication, x & (~y)
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -45,15 +34,68 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vcnonimpl<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
+                => vcnonimpl_u(x,y);
+
+        [MethodImpl(Inline)]
+        static Vector128<T> vcnonimpl_u<T>(Vector128<T> x, Vector128<T> y)
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vcnonimpl(vcast8u(x), vcast8u(y)));
+                return vgeneric<T>(dinx.vcnonimpl(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vcnonimpl(vcast16u(x),vcast16u(y)));
+                return vgeneric<T>(dinx.vcnonimpl(v16u(x),v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vcnonimpl(vcast32u(x), vcast32u(y)));
+                return vgeneric<T>(dinx.vcnonimpl(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vcnonimpl(vcast64u(x), vcast64u(y)));
+                return vgeneric<T>(dinx.vcnonimpl(v64u(x), v64u(y)));
+            else 
+                return vcnonimpl_i(x,y);
+        }
+
+        [MethodImpl(Inline)]
+        static Vector128<T> vcnonimpl_i<T>(Vector128<T> x, Vector128<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return vgeneric<T>(dinx.vcnonimpl(v8i(x), v8i(y)));
+            else if(typeof(T) == typeof(short))
+                return vgeneric<T>(dinx.vcnonimpl(v16i(x),v16i(y)));
+            else if(typeof(T) == typeof(int))
+                return vgeneric<T>(dinx.vcnonimpl(v32i(x), v32i(y)));
+            else if(typeof(T) == typeof(long))
+                return vgeneric<T>(dinx.vcnonimpl(v64i(x), v64i(y)));
+            else 
+                throw unsupported<T>();
+        }
+
+        [MethodImpl(Inline)]
+        static Vector256<T> vcnonimpl_u<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return vgeneric<T>(dinx.vcnonimpl(v8u(x), v8u(y)));
+            else if(typeof(T) == typeof(ushort))
+                return vgeneric<T>(dinx.vcnonimpl(v16u(x),v16u(y)));
+            else if(typeof(T) == typeof(uint))
+                return vgeneric<T>(dinx.vcnonimpl(v32u(x), v32u(y)));
+            else if(typeof(T) == typeof(ulong))
+                return vgeneric<T>(dinx.vcnonimpl(v64u(x), v64u(y)));
+            else 
+                return vcnonimpl_i(x,y);
+        }
+
+        [MethodImpl(Inline)]
+        static Vector256<T> vcnonimpl_i<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return vgeneric<T>(dinx.vcnonimpl(v8i(x), v8i(y)));
+            else if(typeof(T) == typeof(short))
+                return vgeneric<T>(dinx.vcnonimpl(v16i(x),v16i(y)));
+            else if(typeof(T) == typeof(int))
+                return vgeneric<T>(dinx.vcnonimpl(v32i(x), v32i(y)));
+            else if(typeof(T) == typeof(long))
+                return vgeneric<T>(dinx.vcnonimpl(v64i(x), v64i(y)));
             else 
                 throw unsupported<T>();
         }

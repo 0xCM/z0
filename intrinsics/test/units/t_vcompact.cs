@@ -163,7 +163,7 @@ namespace Z0
             void case2()
             {
                 var x = CpuVector.vparts(n128,127,0,127,0,127,0,127,0);
-                var y = dinx.vpackus_alt(x,x);
+                var y = dinx.vpackus(x,x);
                 Trace(y.Format());
             }        
             case1();

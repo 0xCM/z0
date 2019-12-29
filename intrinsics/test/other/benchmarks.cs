@@ -13,7 +13,7 @@ namespace Z0
     {
         protected override int CycleCount => Pow2.T08;
 
-        protected override int SampleCount => Pow2.T10;
+        protected override int RepCount => Pow2.T10;
 
 
         public void benchmarks()
@@ -176,7 +176,7 @@ namespace Z0
         {
             var last = vzero(w,t);
             var blocklen = TypeMath.div(w,t);
-            var blockcount = SampleCount/blocklen;
+            var blockcount = RepCount/blocklen;
             var bitlen = bitsize(t);
             var opcount = 0;
 
@@ -190,7 +190,7 @@ namespace Z0
                     last = f.Invoke(lData.LoadVector(block), rData.LoadVector(block));  
                 optime.Stop();
             }
-            ReportBenchmark(f.Moniker,  CycleCount*SampleCount*TypeMath.div(w,t), optime);
+            ReportBenchmark(f.Moniker,  CycleCount*RepCount*TypeMath.div(w,t), optime);
 
         }
 
@@ -200,7 +200,7 @@ namespace Z0
         {
             var last = vzero(w,t);
             var blocklen = TypeMath.div(w,t);
-            var blockcount = SampleCount/blocklen;
+            var blockcount = RepCount/blocklen;
             var bitlen = bitsize(t);
 
             for(var cycle = 0; cycle < CycleCount; cycle++)  
@@ -213,7 +213,7 @@ namespace Z0
                     last = f.Invoke(lData.LoadVector(block), rData.LoadVector(block));  
                 optime.Stop();
             }
-            ReportBenchmark(f.Moniker,  CycleCount*SampleCount*TypeMath.div(w,t), optime);
+            ReportBenchmark(f.Moniker,  CycleCount*RepCount*TypeMath.div(w,t), optime);
 
         }
 
@@ -223,7 +223,7 @@ namespace Z0
         {
             var last = vzero(w,t);
             var blocklen = TypeMath.div(w,t);
-            var blockcount = SampleCount/blocklen;
+            var blockcount = RepCount/blocklen;
             var bitlen = bitsize(t);
 
             for(var cycle = 0; cycle < CycleCount; cycle++)  
@@ -236,7 +236,7 @@ namespace Z0
                     last = f.Invoke(data.LoadVector(block),offset);  
                 optime.Stop();
             }
-            ReportBenchmark(f.Moniker,  CycleCount*SampleCount*TypeMath.div(w,t), optime);
+            ReportBenchmark(f.Moniker,  CycleCount*RepCount*TypeMath.div(w,t), optime);
 
         }
 
@@ -246,7 +246,7 @@ namespace Z0
         {
             var last = vzero(w,t);
             var blocklen = TypeMath.div(w,t);
-            var blockcount = SampleCount/blocklen;
+            var blockcount = RepCount/blocklen;
             var bitlen = bitsize(t);
 
             for(var cycle = 0; cycle < CycleCount; cycle++)  
@@ -259,7 +259,7 @@ namespace Z0
                     last = f.Invoke(data.LoadVector(block),offset);  
                 optime.Stop();
             }
-            ReportBenchmark(f.Moniker,  CycleCount*SampleCount*TypeMath.div(w,t), optime);
+            ReportBenchmark(f.Moniker,  CycleCount*RepCount*TypeMath.div(w,t), optime);
 
         }
 
@@ -267,7 +267,7 @@ namespace Z0
         void vxor_ginx_bench<T>(N256 w, T t = default,  SystemCounter counter = default)
             where T : unmanaged
         {
-            var blocks = SampleCount/size<T>();
+            var blocks = RepCount/size<T>();
             var blocklen = DataBlocks.blocklen(w,t);
             var xb = Random.Blocks<T>(w,blocks);
             var yb = Random.Blocks<T>(w,blocks);
@@ -278,7 +278,7 @@ namespace Z0
                 ginx.vxor(xb, yb, zb);
             counter.Stop();
 
-            ReportBenchmark(moniker("vxor_blocked",w,t), CycleCount*SampleCount*TypeMath.div(w,t), counter);
+            ReportBenchmark(moniker("vxor_blocked",w,t), CycleCount*RepCount*TypeMath.div(w,t), counter);
         }
 
 
@@ -288,7 +288,7 @@ namespace Z0
             var n = bitsize(t);
             var composite = default(T);
             var count = counter();
-            var packed = Random.Span(SampleCount,t);
+            var packed = Random.Span(RepCount,t);
             for(var cycle = 0; cycle < CycleCount; cycle++)
             {
                 count.Start();

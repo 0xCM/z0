@@ -16,7 +16,7 @@ namespace Z0
         {
             var n = n128;
             var w = n4;
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector<uint>(n);
                 var y = ginx.vbfly(w, x);
@@ -33,7 +33,7 @@ namespace Z0
         {
             var n = n256;
             var w = n4;
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector<uint>(n);
                 var y = ginx.vbfly(w, x);
@@ -51,7 +51,7 @@ namespace Z0
         {
             var n = n128;
             var w = n1;
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector<ulong>(n);
                 var y = ginx.vbfly(w, x);
@@ -70,7 +70,7 @@ namespace Z0
         protected void vbutterfly_check<T>(N256 w, N1 b, T t = default)
             where T : unmanaged
         {
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector<T>(w);
                 var y = ginx.vbfly(b, x);

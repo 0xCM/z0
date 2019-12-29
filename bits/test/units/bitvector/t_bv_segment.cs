@@ -14,7 +14,7 @@ namespace Z0
         public void pbv_lsbseg_8()
         {
             var width = n8;
-            for(var i=0; i< SampleCount; i++)            
+            for(var i=0; i< RepCount; i++)            
             {
                 var bv = Random.BitVector(width);
                 var n = Random.Next((byte)1, (byte)bv.Width);
@@ -27,7 +27,7 @@ namespace Z0
         public void pbv_lsbseg_16()
         {
             var width = n16;
-            for(var i=0; i< SampleCount; i++)            
+            for(var i=0; i< RepCount; i++)            
             {
                 var bv = Random.BitVector(width);
                 var n = Random.Next((byte)1, (byte)bv.Width);
@@ -40,7 +40,7 @@ namespace Z0
         public void pbv_lsbseg_32()
         {
             var width = n32;
-            for(var i=0; i< SampleCount; i++)            
+            for(var i=0; i< RepCount; i++)            
             {
                 var bv = Random.BitVector(width);
                 var n = Random.Next((byte)1, (byte)bv.Width);
@@ -53,7 +53,7 @@ namespace Z0
         public void pbv_lsbseg_64()
         {
             var width = n64;
-            for(var i=0; i< SampleCount; i++)            
+            for(var i=0; i< RepCount; i++)            
             {
                 var bv = Random.BitVector(width);
                 var n = Random.Next((byte)1, (byte)bv.Width);
@@ -66,7 +66,7 @@ namespace Z0
         public void pbv_msbseg_8()
         {
             var width = n8;
-            for(var i=0; i< SampleCount; i++)            
+            for(var i=0; i< RepCount; i++)            
             {
                 var bv = Random.BitVector(width);
                 var n = Random.Next((byte)1, (byte)bv.Width);
@@ -79,7 +79,7 @@ namespace Z0
         public void pbv_msbseg_16()
         {
             var width = n16;
-            for(var i=0; i< SampleCount; i++)            
+            for(var i=0; i< RepCount; i++)            
             {
                 var bv = Random.BitVector(width);
                 var n = Random.Next((byte)1, (byte)bv.Width);
@@ -93,7 +93,7 @@ namespace Z0
         public void pbv_msbseg_32()
         {
             var width = n32;
-            for(var i=0; i< SampleCount; i++)            
+            for(var i=0; i< RepCount; i++)            
             {
                 var bv = Random.BitVector(width);
                 var n = Random.Next((byte)1, (byte)bv.Width);
@@ -106,7 +106,7 @@ namespace Z0
         public void pbv_msbseg_64()
         {
             var width = n64;
-            for(var i=0; i< SampleCount; i++)            
+            for(var i=0; i< RepCount; i++)            
             {
                 var bv = Random.BitVector(width);
                 var n = Random.Next((byte)1, (byte)bv.Width);

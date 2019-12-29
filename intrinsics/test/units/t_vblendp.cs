@@ -215,7 +215,7 @@ namespace Z0
 
             var maskbits = maskspec.As(z64).Mask();
 
-            for(var samples=0; samples< SampleCount; samples++)
+            for(var samples=0; samples< RepCount; samples++)
             {
                 var source = Random.CpuVector(w,t);                
                 var target = ginx.vblendp(source,blendspec);

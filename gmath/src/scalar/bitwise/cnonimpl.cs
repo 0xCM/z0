@@ -22,8 +22,26 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
+        public static sbyte cnonimpl(sbyte a, sbyte b)
+            => (sbyte)AndNot((uint)b,(uint)a);
+
+        /// <summary>
+        /// Computes the converse nonimplication c := a & ~b for operands a and b
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline)]
         public static byte cnonimpl(byte a, byte b)
             => (byte)AndNot((uint)b,(uint)a);
+
+        /// <summary>
+        /// Computes the converse nonimplication c := a & ~b for operands a and b
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline)]
+        public static short cnonimpl(short a, short b)
+            => (short)AndNot((uint)b,(uint)a);
 
         /// <summary>
         /// Computes the converse nonimplication c := a & ~b for operands a and b
@@ -40,8 +58,26 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
+        public static int cnonimpl(int a, int b)
+            => (int)AndNot((uint)b,(uint)a);
+
+        /// <summary>
+        /// Computes the converse nonimplication c := a & ~b for operands a and b
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline)]
         public static uint cnonimpl(uint a, uint b)
             => AndNot(b,a);
+
+        /// <summary>
+        /// Computes the converse nonimplication c := a & ~b for operands a and b
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline)]
+        public static long cnonimpl(long a, long b)
+            => (long)AndNot((ulong)b,(ulong)a);
 
         /// <summary>
         /// Computes the converse nonimplication c := a & ~b for operands a and b

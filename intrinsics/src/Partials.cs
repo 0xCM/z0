@@ -26,9 +26,6 @@ namespace Z0
     /// </summary>
     public static partial class dinxfp
     {
-        [MethodImpl(Inline)]
-        static FloatComparisonMode fpmode(FpCmpMode m)
-            => (FloatComparisonMode)m;
     }
 
     /// <summary>

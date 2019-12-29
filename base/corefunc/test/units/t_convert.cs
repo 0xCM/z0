@@ -14,7 +14,7 @@ namespace Z0
 
         public void convert_32u_to_bytes_check()
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<uint>();
                 var y = x.AsBytes();
@@ -25,7 +25,7 @@ namespace Z0
 
         public void convert_64u_to_bytes_check()
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<ulong>();
                 var y = x.AsBytes();
@@ -36,7 +36,7 @@ namespace Z0
 
         public void convert_64f_to_bytes_check()
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<double>();
                 var y = x.AsBytes();

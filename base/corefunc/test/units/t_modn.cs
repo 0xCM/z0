@@ -15,7 +15,7 @@ namespace Z0
         public void mod16()
         {
             var ops = ModN.Ops(16);
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var a = Random.Next<uint>();
                 var m0 = a % ops.N;
@@ -28,7 +28,7 @@ namespace Z0
         public void mod18()
         {
             var ops = ModN.Ops(18);
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var a = Random.Next<uint>();
                 var m0 = a % ops.N;

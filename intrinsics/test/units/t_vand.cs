@@ -10,45 +10,43 @@ namespace Z0
 
     public class t_vand : t_vinx<t_vand>
     {
-        public void check()
+        public void vand_check()
         {            
-            check(n128);
-            check(n256);
+            vand_check(n128);
+            vand_check(n256);
         }
 
-        void check(N128 w)
+        void vand_check(N128 w)
         {
-            v_check(VX.vand(w,z8), w, z8);                
-            v_check(VX.vand(w,z8i), w, z8i);
-            v_check(VX.vand(w,z16),  w, z16);
-            v_check(VX.vand(w,z16i), w, z16i);
-            v_check(VX.vand(w,z32), w, z32);
-            v_check(VX.vand(w,z32i), w, z32i);
-            v_check(VX.vand(w,z64), w, z64);
-            v_check(VX.vand(w,z64i), w, z64i);
+            vand_check(w, z8);                
+            vand_check(w, z8i);
+            vand_check(w, z16);
+            vand_check(w, z16i);
+            vand_check(w, z32);
+            vand_check(w, z32i);
+            vand_check(w, z64);
+            vand_check(w, z64i);
 
         }
 
-        void check(N256 w = default)
+        void vand_check(N256 w)
         {
-            v_check(VX.vand(w,z8), w, z8);                
-            v_check(VX.vand(w,z8i), w, z8i);
-            v_check(VX.vand(w,z16),  w, z16);
-            v_check(VX.vand(w,z16i), w, z16i);
-            v_check(VX.vand(w,z32), w, z32);
-            v_check(VX.vand(w,z32i), w, z32i);
-            v_check(VX.vand(w,z64), w, z64);
-            v_check(VX.vand(w,z64i), w, z64i);
+            vand_check(w, z8);                
+            vand_check(w, z8i);
+            vand_check(w, z16);
+            vand_check(w, z16i);
+            vand_check(w, z32);
+            vand_check(w, z32i);
+            vand_check(w, z64);
+            vand_check(w, z64i);
         }            
 
-        void v_check<F,T>(F f, N128 w, T t = default)
+        void vand_check<T>(N128 w, T t = default)
             where T : unmanaged
-            where F : IVBinOp128D<T>
-                => CheckBinaryScalarMatch(f,w,t);
+                => CheckBinaryScalarMatch(VX.vand(w,t), w, t);
             
-        void v_check<F,T>(F f, N256 w, T t = default)
+        void vand_check<T>(N256 w, T t = default)
             where T : unmanaged
-            where F : IVBinOp256D<T>
-                => CheckBinaryScalarMatch(f,w,t);
-    }
+                => CheckBinaryScalarMatch(VX.vand(w,t), w, t);
+     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     {     
         public void vavg_256x8u_check()
         {            
-            for(var j=0; j < SampleCount; j++)
+            for(var j=0; j < RepCount; j++)
             {
                 var x = Random.CpuVector<byte>(n256);
                 var y = Random.CpuVector<byte>(n256);
@@ -26,7 +26,7 @@ namespace Z0
 
         public void vavg_256x16u_check()
         {            
-            for(var j=0; j < SampleCount; j++)
+            for(var j=0; j < RepCount; j++)
             {
                 var x = Random.CpuVector<ushort>(n256);
                 var y = Random.CpuVector<ushort>(n256);

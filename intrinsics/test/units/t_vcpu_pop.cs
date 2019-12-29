@@ -78,10 +78,10 @@ namespace Z0
                 var y = Random.CpuVector<ulong>(n);
                 var z = Random.CpuVector<ulong>(n);
                 counter.Start();
-                for(var i=0; i<SampleCount; i++)
+                for(var i=0; i<RepCount; i++)
                     total += BitPop.vpop(x,y,z);
                 counter.Stop();
-                opcount += (32 * 3 * SampleCount);
+                opcount += (32 * 3 * RepCount);
             }
             ReportBenchmark($"pop_3x256", opcount,counter);
         }
@@ -96,10 +96,10 @@ namespace Z0
                 var y = Random.CpuVector<ulong>(n);
                 var z = Random.CpuVector<ulong>(n);
                 counter.Start();
-                for(var i=0; i<SampleCount; i++)
+                for(var i=0; i<RepCount; i++)
                     total += BitPop.vpop(x,y,z);
                 counter.Stop();
-                opcount += (16 * 3 * SampleCount);
+                opcount += (16 * 3 * RepCount);
             }
             ReportBenchmark($"pop_3x128", opcount,counter);
         }
@@ -108,16 +108,16 @@ namespace Z0
         {            
             var total = 0u;
             var opcount = 0;
-            Span<ulong> samples = stackalloc ulong[SampleCount];
+            Span<ulong> samples = stackalloc ulong[RepCount];
             ref readonly var src = ref head(samples);
             for(var cycle = 0; cycle < CycleCount; cycle++)
             {
-                Random.Fill(SampleCount, ref head(samples));
+                Random.Fill(RepCount, ref head(samples));
                 counter.Start();
-                for(var i=0; i< SampleCount; i++)
+                for(var i=0; i< RepCount; i++)
                     total += Bits.pop(skip(in head(samples), i));
                 counter.Stop();
-                opcount += 8*1*SampleCount;
+                opcount += 8*1*RepCount;
             }
             ReportBenchmark($"pop_1x64_popcnt", opcount, counter);
         }

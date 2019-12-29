@@ -292,7 +292,7 @@ namespace Z0
             where T : unmanaged
         {
             var zero = gmath.zero<T>();
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<T>();
                 var expect = gmath.lt(x, zero) ? Sign.Neg : (gmath.gt(x, zero) ? Sign.Pos : Sign.None);

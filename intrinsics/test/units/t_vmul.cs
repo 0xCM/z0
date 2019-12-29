@@ -20,7 +20,7 @@ namespace Z0
             var s = z8i;
             var t = z16i;
         
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector(ws,s);
                 var y = Random.CpuVector(ws,s);
@@ -41,7 +41,7 @@ namespace Z0
             var s = z8;
             var t = z16;
         
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector(ws,s);
                 var y = Random.CpuVector(ws,s);
@@ -62,7 +62,7 @@ namespace Z0
             var s = z16i;
             var t = z32i;
         
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector(ws,s);
                 var y = Random.CpuVector(ws,s);
@@ -83,7 +83,7 @@ namespace Z0
             var s = z16;
             var t = z32;
         
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector(ws,s);
                 var y = Random.CpuVector(ws,s);
@@ -105,7 +105,7 @@ namespace Z0
             var s = z8;
             var t = z16;
         
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector(ws,s);
                 var y = Random.CpuVector(ws,s);
@@ -130,7 +130,7 @@ namespace Z0
             var eb = DataBlocks.single(w,t);            
             var count = CpuVector.vcount(w,s);
 
-            for(var i=0; i< SampleCount; i ++)
+            for(var i=0; i< RepCount; i ++)
             {
                 var x = Random.CpuVector(w,s);
                 var xs = x.ToSpan();
@@ -150,7 +150,7 @@ namespace Z0
 
         public void mul_64u()
         {
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var xi = Random.Next<uint>();
                 var yi = Random.Next<uint>();

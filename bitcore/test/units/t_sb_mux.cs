@@ -13,7 +13,7 @@ namespace Z0
     {
         public void mux_4()
         {            
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var input = Random.TakeBits(4);
                 bit i0 = input[0], i1 = input[1], i2 = input[2], i3 = input[3];
@@ -32,7 +32,7 @@ namespace Z0
 
         public void mux_8()
         {
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var iv = Random.BitVector(n8);
                 var ov = BitVector8.Zero;
@@ -51,7 +51,7 @@ namespace Z0
 
         public void mux_16()
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var input = Random.BitVector(n16);
                 var control = Random.BitVector(n4);
@@ -63,7 +63,7 @@ namespace Z0
 
         public void mux_32()
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var input = Random.BitVector(n32);
                 var control = Random.BitVector(n8) & 0b11111;
@@ -75,7 +75,7 @@ namespace Z0
 
         public void mux_64()
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var input = Random.BitVector(n64);
                 var control = Random.BitVector(n8) & 0b111111;

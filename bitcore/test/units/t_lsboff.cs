@@ -25,7 +25,7 @@ namespace Z0
         protected void sb_lsboff_check<T>(T t = default)
             where T : unmanaged
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<T>();
                 var y0 = gbits.lsboff(x);

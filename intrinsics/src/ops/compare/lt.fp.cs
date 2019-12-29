@@ -71,5 +71,24 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<double> vlteq(Vector128<double> x, Vector128<double> y)
             => CompareLessThanOrEqual(x, y);
+ 
+        /// <summary>
+        /// __m256 _mm256_cmp_ps (__m256 a, __m256 b, const int imm8) VCMPPS ymm, ymm, ymm/m256, imm8
+        /// </summary>
+        /// <param name="lhs">The left vector</param>
+        /// <param name="rhs">The right vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<float> vlteq(Vector256<float> lhs, Vector256<float> rhs)
+            => Compare(lhs, rhs, FloatComparisonMode.OrderedLessThanOrEqualNonSignaling);
+
+        /// <summary>
+        /// __m256d _mm256_cmp_pd (__m256d a, __m256d b, const int imm8) VCMPPD ymm, ymm, ymm/m256, imm8 
+        /// </summary>
+        /// <param name="lhs">The left vector</param>
+        /// <param name="rhs">The right vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<double> vlteq(Vector256<double> lhs, Vector256<double> rhs)
+            => Compare(lhs, rhs,FloatComparisonMode.OrderedLessThanOrEqualNonSignaling);
+ 
     }
 }

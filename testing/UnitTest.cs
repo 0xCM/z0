@@ -28,6 +28,14 @@ namespace Z0
             => $"{GetType().Name}/{op.Moniker}";
 
         /// <summary>
+        /// Produces the name of the test case predicated on fully-specified name, exluding the host name
+        /// </summary>
+        /// <param name="fullname">The full name of the test</param>
+        [MethodImpl(Inline)]
+        protected string TestCaseName(string fullname)
+            => $"{GetType().Name}/{fullname}";
+
+        /// <summary>
         /// Produces the name of the test case predicated on a root name and parametric type
         /// </summary>
         /// <param name="root">The root name</param>
@@ -72,8 +80,8 @@ namespace Z0
         /// <typeparam name="T">The discriminator type</typeparam>
         protected void CheckAction<T>(Action f, string name, T t = default, SystemCounter clock = default)
         {
-            var succeeded = true;
             var casename = TestCaseName(name,t);
+            var succeeded = true;
             
             clock.Start();
             try
@@ -92,16 +100,17 @@ namespace Z0
 
         }
 
-        protected void CheckExplicit<F,T>(F f, Block128<T> left, Block128<T> right, Block128<T> dst, SystemCounter count = default) 
+        protected void CheckExplicit<F,T>(F f, Block128<T> left, Block128<T> right, Block128<T> dst, string name = null, SystemCounter count = default) 
             where T : unmanaged
             where F : IVBinOp128<T>
         {
+            var casename = name ?? TestCaseName(f);
             var w = n128;
             var t = default(T);
             var cells = vcount(w,t);
             var succeeded = true;
             var blocks = left.BlockCount;
-            
+
             count.Start();
             try
             {
@@ -116,19 +125,20 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e,TestCaseName(f));
+                error(e, casename);
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(f),succeeded,count);
+                ReportOutcome(casename, succeeded,count);
             }
         }
 
-        protected void CheckExplicit<F,T>(F f, Block256<T> left, Block256<T> right, Block256<T> dst, SystemCounter count = default) 
+        protected void CheckExplicit<F,T>(F f, Block256<T> left, Block256<T> right, Block256<T> dst, string name = null, SystemCounter count = default) 
             where T : unmanaged
             where F : IVBinOp256<T>
         {
+            var casename = name ?? TestCaseName(f);
             var w = n256;
             var t = default(T);
             var cells = vcount(w,t);
@@ -149,12 +159,12 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e,TestCaseName(f));
+                error(e,casename);
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(f),succeeded,count);
+                ReportOutcome(casename,succeeded,count);
             }
         }
 
@@ -173,13 +183,14 @@ namespace Z0
             where F : IUnaryOp<T>
             where G : IUnaryOp<T>
         {
+            var casename = TestCaseName(actual);
             var succeeded = true;
             var next = nozero ? new Func<T>(Random.NonZero<T>) : new Func<T>(Random.Next<T>);
             
             clock.Start();
             try
             {
-                for(var i=0; i<SampleCount; i++)
+                for(var i=0; i<RepCount; i++)
                 {
                     var x = next();
                     var y = next();
@@ -188,12 +199,12 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, TestCaseName(actual));
+                error(e, casename);
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(expect),succeeded,clock);
+                ReportOutcome(casename,succeeded,clock);
             }
         }
 
@@ -212,12 +223,13 @@ namespace Z0
             where F : IBinaryPred<T>
             where G : IBinaryPred<T>
         {
+            var casename = TestCaseName(actual);
             var succeeded = true;
             
             clock.Start();
             try
             {
-                for(var i=0; i<SampleCount; i++)
+                for(var i=0; i<RepCount; i++)
                 {
                     (var x, var y) = Random.NextPair<T>();                    
                     Claim.eq(expect.Invoke(x,y), actual.Invoke(x,y));
@@ -225,12 +237,12 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, TestCaseName(actual));
+                error(e, casename);
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(expect),succeeded,clock);
+                ReportOutcome(casename,succeeded,clock);
             }
         }
 
@@ -249,13 +261,14 @@ namespace Z0
             where F : IBinaryOp<T>
             where G : IBinaryOp<T>
         {
+            var casename = TestCaseName(actual);
             var succeeded = true;
             var next = nozero ? new Func<T>(Random.NonZero<T>) : new Func<T>(Random.Next<T>);
             
             clock.Start();
             try
             {
-                for(var i=0; i<SampleCount; i++)
+                for(var i=0; i<RepCount; i++)
                 {
                     var x = next();
                     var y = next();
@@ -264,12 +277,12 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, TestCaseName(actual));
+                error(e, casename);
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(expect),succeeded,clock);
+                ReportOutcome(casename,succeeded,clock);
             }
         }
 
@@ -288,13 +301,14 @@ namespace Z0
             where F : ITernaryOp<T>
             where G : ITernaryOp<T>
         {
+            var casename = TestCaseName(actual);
             var succeeded = true;
             var next = nozero ? new Func<T>(Random.NonZero<T>) : new Func<T>(Random.Next<T>);
             
             clock.Start();
             try
             {
-                for(var i=0; i<SampleCount; i++)
+                for(var i=0; i<RepCount; i++)
                 {
                     var x = next();
                     var y = next();
@@ -304,77 +318,21 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, TestCaseName(actual));
+                error(e, casename);
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(expect),succeeded,clock);
+                ReportOutcome(casename,succeeded,clock);
             }
         }
 
-        protected void CheckUnaryScalarMatch<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
-            where T : unmanaged
-            where F : IVUnaryOp128D<T>
-        {
-            var cells = vcount(w,t);
-            var succeeded = true;
-            
-            count.Start();
-            try
-            {
-                for(var i=0; i<SampleCount; i++)
-                {
-                    var x = Random.CpuVector(w,t);
-                    var z = f.Invoke(x);
-                    for(var j=0; j< cells; j++)
-                        Claim.eq(f.InvokeScalar(vcell(x,j)), vcell(z,j));
-                }
-            }
-            catch(Exception e)
-            {
-                error(e, TestCaseName(f));
-                succeeded = false;
-            }
-            finally
-            {
-                ReportOutcome(TestCaseName(f),succeeded,count);
-            }
-        }
-
-        protected void CheckUnaryScalarMatch<F,T>(F f, N256 w, T t = default, SystemCounter count = default)
-            where T : unmanaged
-            where F : IVUnaryOp256D<T>
-        {
-            var cells = vcount(w,t);
-            var succeeded = true;
-            
-            count.Start();
-            try
-            {
-                for(var i=0; i<SampleCount; i++)
-                {
-                    var x = Random.CpuVector(w,t);
-                    var z = f.Invoke(x);
-                    for(var j=0; j< cells; j++)
-                        Claim.eq(f.InvokeScalar(vcell(x,j)), vcell(z,j));
-                }
-            }
-            catch(Exception e)
-            {
-                error(e, TestCaseName(f));
-                succeeded = false;
-            }
-            finally
-            {
-                ReportOutcome(TestCaseName(f),succeeded,count);
-            }
-        }
 
         protected void CheckShiftScalarMatch<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
             where T : unmanaged
             where F : IVShiftOp128D<T>
         {
+            var casename = TestCaseName(f);
             var cells = vcount(w,t);
             var succeeded = true;
             var bounds = ((byte)0, (byte)(bitsize(t) - 1));
@@ -382,7 +340,7 @@ namespace Z0
             count.Start();
             try
             {
-                for(var i=0; i<SampleCount; i++)
+                for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
                     var offset = Random.Next<byte>(bounds);
@@ -393,12 +351,12 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, TestCaseName(f));
+                error(e, casename);
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(f),succeeded,count);
+                ReportOutcome(casename,succeeded,count);
             }
         }
 
@@ -406,6 +364,7 @@ namespace Z0
             where T : unmanaged
             where F : IVShiftOp256D<T>
         {
+            var casename = TestCaseName(f);
             var cells = vcount(w,t);
             var succeeded = true;
             var bounds = ((byte)0, (byte)(bitsize(t) - 1));
@@ -413,7 +372,7 @@ namespace Z0
             count.Start();
             try
             {
-                for(var i=0; i<SampleCount; i++)
+                for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
                     var offset = Random.Next<byte>(bounds);
@@ -424,12 +383,12 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, TestCaseName(f));
+                error(e, casename);
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(f),succeeded,count);
+                ReportOutcome(casename,succeeded,count);
             }
         }
 
@@ -443,7 +402,7 @@ namespace Z0
             count.Start();
             try
             {
-                for(var i=0; i<SampleCount; i++)
+                for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
                     var y = Random.CpuVector(w,t);
@@ -473,7 +432,7 @@ namespace Z0
             count.Start();
             try
             {
-                for(var i=0; i<SampleCount; i++)
+                for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.CpuVector(w,t);
                     var y = Random.CpuVector(w,t);
@@ -503,7 +462,7 @@ namespace Z0
             count.Start();
             try
             {
-                for(var i=0; i < SampleCount; i++)
+                for(var i=0; i < RepCount; i++)
                 {
                     (var x, var y) = src(i);
                     var z = f.Invoke(x,y);
@@ -532,7 +491,7 @@ namespace Z0
             count.Start();
             try
             {
-                for(var i=0; i < SampleCount; i++)
+                for(var i=0; i < RepCount; i++)
                 {
                     (var x, var y) = src(i);
                     var z = f.Invoke(x,y);

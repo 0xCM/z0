@@ -15,12 +15,17 @@ namespace Z0
     partial class gmath
     {
         /// <summary>
-        /// Computes the converse nonimplication c := a & ~b for unsigned integers a and b
+        /// Computes the converse nonimplication c := a & ~b for integral values a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
         public static T cnonimpl<T>(T a, T b)
+            where T : unmanaged
+                => cnonimpl_u(a,b);
+
+        [MethodImpl(Inline)]
+        static T cnonimpl_u<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -32,8 +37,25 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.cnonimpl(uint64(a), uint64(b)));
             else
+                return cnonimpl_i(a,b);
+        }
+
+        [MethodImpl(Inline)]
+        static T cnonimpl_i<T>(T a, T b)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(math.cnonimpl(int8(a), int8(b)));
+            else if(typeof(T) == typeof(short))
+                return generic<T>(math.cnonimpl(int16(a), int16(b)));
+            else if(typeof(T) == typeof(int))
+                return generic<T>(math.cnonimpl(int32(a), int32(b)));
+            else if(typeof(T) == typeof(long))
+                return generic<T>(math.cnonimpl(int64(a), int64(b)));
+            else
                 throw unsupported<T>();
         }
+
     }
 
 }

@@ -43,7 +43,7 @@ namespace Z0
             Claim.eq(srcPop, bytes.PopCount());
             var buffer64x8 = DataBlocks.alloc<byte>(n256,2);
     
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var y = BitConverter.GetBytes(Random.Next<ulong>()).ToSpan();
                 Unpack(y,buffer64x8);

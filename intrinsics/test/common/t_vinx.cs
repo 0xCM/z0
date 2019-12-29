@@ -49,7 +49,7 @@ namespace Z0
         {
             void exec()
             {
-                for(var i=0; i < SampleCount; i++)
+                for(var i=0; i < RepCount; i++)
                 {
                     var a = Random.Next<S>();
                     var v = f.Invoke(a);
@@ -80,7 +80,7 @@ namespace Z0
         {
             void exec()
             {
-                for(var i=0; i< SampleCount; i++)
+                for(var i=0; i< RepCount; i++)
                 {
                     var a = Random.Next<S>();
                     var v = f.Invoke(a);
@@ -92,180 +92,65 @@ namespace Z0
             CheckAction(exec, TestCaseName(f));
         }
 
-        protected void cmp_gt_check<T>(N128 w, T t = default)
+        protected void CheckUnaryScalarMatch<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
             where T : unmanaged
+            where F : IVUnaryOp128D<T>
         {
-            var ones = CpuVector.vones<T>(w);
-            var one = vcell(ones,0);
+            var cells = vcount(w,t);
+            var succeeded = true;
             
-            for(var i=0; i< SampleCount; i++)
+            count.Start();
+            try
             {
-                var x = Random.Blocks<T>(w);
-                var y = Random.Blocks<T>(w);
-                var z = DataBlocks.single<T>(w);
-                
-                for(var j=0; j<z.CellCount; j++)
-                    if(gmath.gt(x[j],y[j]))
-                        z[j] = one;
-
-                var expect = CpuVector.vload(w, in head(z));
-                var actual = ginx.vgt(x.LoadVector(),y.LoadVector());
-                var result = ginx.veq(expect,actual);
-                var equal = ginx.vtestc(result,ones);
-                Claim.yea(equal);       
-
+                for(var i=0; i<RepCount; i++)
+                {
+                    var x = Random.CpuVector(w,t);
+                    var z = f.Invoke(x);
+                    for(var j=0; j< cells; j++)
+                        Claim.eq(f.InvokeScalar(vcell(x,j)), vcell(z,j));
+                }
+            }
+            catch(Exception e)
+            {
+                error(e, TestCaseName(f));
+                succeeded = false;
+            }
+            finally
+            {
+                ReportOutcome(TestCaseName(f),succeeded,count);
             }
         }
 
-        protected void cmp_gt_check<T>(N256 w, T t = default)
+        protected void CheckUnaryScalarMatch<F,T>(F f, N256 w, T t = default, SystemCounter count = default)
             where T : unmanaged
+            where F : IVUnaryOp256D<T>
         {
-            var ones = CpuVector.vones<T>(w);
-            var one = vcell(ginx.vlo(ones),0);
+            var cells = vcount(w,t);
+            var succeeded = true;
             
-            for(var i=0; i< SampleCount; i++)
+            count.Start();
+            try
             {
-                var x = Random.Blocks<T>(w);
-                var y = Random.Blocks<T>(w);
-                var z = DataBlocks.single<T>(w);
-                
-                for(var j=0; j<z.CellCount; j++)
-                    if(gmath.gt(x[j],y[j]))
-                        z[j] = one;
-                
-                var expect = CpuVector.vload(w, in head(z));
-                var actual = ginx.vgt(x.LoadVector(),y.LoadVector());
-                var result = ginx.veq(expect,actual);
-                var equal = ginx.vtestc(result,ones);
-                Claim.yea(equal);       
+                for(var i=0; i<RepCount; i++)
+                {
+                    var x = Random.CpuVector(w,t);
+                    var z = f.Invoke(x);
+                    for(var j=0; j< cells; j++)
+                        Claim.eq(f.InvokeScalar(vcell(x,j)), vcell(z,j));
+                }
+            }
+            catch(Exception e)
+            {
+                error(e, TestCaseName(f));
+                succeeded = false;
+            }
+            finally
+            {
+                ReportOutcome(TestCaseName(f),succeeded,count);
             }
         }
 
          
-        protected void vlt_check<T>(N128 w, T t = default)
-            where T : unmanaged
-        {
-            var ones = CpuVector.vones<T>(w);
-            var one = vcell(ones,0);
-            
-            for(var i=0; i< SampleCount; i++)
-            {
-                var x = Random.Blocks<T>(w);
-                var y = Random.Blocks<T>(w);
-                var z = DataBlocks.single<T>(w);
-                
-                for(var j=0; j<z.CellCount; j++)
-                    if(gmath.lt(x[j],y[j]))
-                        z[j] = one;
-
-                var expect = CpuVector.vload(w, in head(z));
-                var actual = ginx.vlt(x.LoadVector(),y.LoadVector());
-                var result = ginx.veq(expect,actual);
-                var equal = ginx.vtestc(result,ones);
-                Claim.yea(equal);       
-
-            }
-        }
-
-        protected void vlt_check<T>(N256 w, T t = default)
-            where T : unmanaged
-        {
-            var ones = CpuVector.vones<T>(w);
-            var one = vcell(ginx.vlo(ones),0);
-            
-            for(var i=0; i< SampleCount; i++)
-            {
-                var x = Random.Blocks<T>(w);
-                var y = Random.Blocks<T>(w);
-                var z = DataBlocks.single<T>(w);
-                
-                for(var j=0; j<z.CellCount; j++)
-                    if(gmath.lt(x[j],y[j]))
-                        z[j] = one;
-                
-                var expect = CpuVector.vload(w, in head(z));
-                var actual = ginx.vlt(x.LoadVector(),y.LoadVector());
-                var result = ginx.veq(expect,actual);
-                var equal = ginx.vtestc(result,ones);
-                Claim.yea(equal);       
-            }
-        }
-
-        protected void vor_blocks_check<T>(N128 w, T t = default)
-            where T : unmanaged
-        {
-            var blocks = SampleCount;
-            var stats = BlockStats.Calc<N128,T>(blocks);
-            var step = stats.BlockLength;
-            var cells = stats.CellCount;
-
-            var xb = Random.Blocks<T>(w, blocks);
-            var yb = Random.Blocks<T>(w, blocks);
-            var zb = DataBlocks.alloc<T>(w, blocks);
-            ginx.vor(xb,yb,zb);
-            
-            //vblock.or(w, blocks, step, in xb.Head, in yb.Head, ref zb.Head);
-            for(var i=0; i<cells; i++)
-                Claim.eq(gmath.or(xb[i],yb[i]), zb[i]);
-        }
-
-        protected void vor_blocks_check<T>(N256 w, T t = default)
-            where T : unmanaged
-        {
-            var blocks = SampleCount;
-            var stats = BlockStats.Calc<N256,T>(blocks);
-            var step = stats.BlockLength;
-            var cells = stats.CellCount;
-
-            var xb = Random.Blocks<T>(w, blocks);
-            var yb = Random.Blocks<T>(w, blocks);
-            var zb = DataBlocks.alloc<T>(w, blocks);
-            ginx.vor(xb,yb,zb);
-            
-            //vblock.or(w, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
-            for(var i=0; i<cells; i++)
-                Claim.eq(gmath.or(xb[i],yb[i]), zb[i]);
-        }
-     
-        protected void vor_check<T>(N128 w, T t = default)
-            where T : unmanaged
-        {
-            for(var block = 0; block < SampleCount; block++)
-            {
-                var srcX = Random.Blocks<T>(w);
-                var srcY = Random.Blocks<T>(w);
-                var vX = srcX.LoadVector();
-                var vY = srcY.LoadVector();
-                
-                var dstExpect = DataBlocks.single<T>(w);
-                for(var i=0; i< dstExpect.CellCount; i++)
-                    dstExpect[i] = gmath.or(srcX[i], srcY[i]);
-                
-                var expect = dstExpect.LoadVector();
-                var actual = ginx.vor(vX,vY);
-                Claim.eq(expect,actual);                
-            }
-        }
-
-        protected void vor_check<T>(N256 w, T t = default)
-            where T : unmanaged
-        {            
-            for(var block = 0; block < SampleCount; block++)
-            {
-                var srcX = Random.Blocks<T>(w);
-                var srcY = Random.Blocks<T>(w);
-                var vX = srcX.LoadVector();
-                var vY = srcY.LoadVector();
-
-                var dstExpect = DataBlocks.single<T>(w);
-                for(var i=0; i< dstExpect.CellCount; i++)
-                    dstExpect[i] = gmath.or(srcX[i], srcY[i]);
-                
-                var expect = dstExpect.LoadVector();
-                var actual = ginx.vor(vX,vY);
-                Claim.eq(expect,actual);               
-            }
-        } 
 
         protected void vextract_check<T>(N128 w, T t = default)
             where T : unmanaged
@@ -281,56 +166,12 @@ namespace Z0
         }
             
 
-        protected void vtestz_check<T>(N128 n = default, T t = default)
-            where T : unmanaged
-        {
-            // Creates a mask corresponding to each off bit in the source vector
-            // thereby establishing the the context where testz will return true
-            // since all mask-identified source bits are disabled
-
-            for(var i=0; i< SampleCount; i++)
-            {
-                var x = Random.CpuVector(n,t);
-                var xbs = x.ToBitString();
-                var ybs = BitString.alloc(xbs.Length);
-                for(var j = 0; j<xbs.Length; j++)
-                    if(!xbs[j])
-                        ybs[j] = bit.On;
-
-                var y = ybs.ToCpuVector(n,t);
-
-                var z = ginx.vtestz(x,y);
-                Claim.yea(z);
-            }
-        }
-
-        protected void vtestz_check<T>(N256 w = default, T t = default)
-            where T : unmanaged
-        {
-            // Creates a mask corresponding to each off bit in the source vector
-            // thereby establishing the the context where testz will return true
-            // since all mask-identified source bits are disabled
-
-            for(var i=0; i< SampleCount; i++)
-            {
-                var x = Random.CpuVector(w,t);
-                var xbs = x.ToBitString();
-                var ybs = BitString.alloc(xbs.Length);
-                for(var j = 0; j<xbs.Length; j++)
-                    if(!xbs[j])
-                        ybs[j] = bit.On;
-
-                var y = ybs.ToCpuVector(w,t);
-                var z = ginx.vtestz(x,y);
-                Claim.yea(z);
-            }
-        }
 
         protected void vhi_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
             var count = zfunc.vcount<T>(w);
-            for(var sample=0; sample< SampleCount; sample++)
+            for(var sample=0; sample< RepCount; sample++)
             {                
                 var x = Random.CpuVector<T>(w,t);
                 var h = ginx.vhi(x);
@@ -344,7 +185,7 @@ namespace Z0
             where T : unmanaged
         {
             var count = zfunc.vcount<T>(w);
-            for(var sample=0; sample< SampleCount; sample++)
+            for(var sample=0; sample< RepCount; sample++)
             {                
                 var x = Random.CpuVector<T>(w,t);
                 var h = ginx.vhi(x);
@@ -357,7 +198,7 @@ namespace Z0
        protected void add_blocks_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var count = SampleCount;
+            var count = RepCount;
             var stats = BlockStats.Calc(count,w,t);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
@@ -375,7 +216,7 @@ namespace Z0
         protected void add_blocks_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var blocks = SampleCount;
+            var blocks = RepCount;
             var stats = BlockStats.Calc<N256,T>(blocks);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
@@ -396,7 +237,7 @@ namespace Z0
             Span<T> xbuffer = stackalloc T[length];
             Span<T> ybuffer = stackalloc T[length];
             Span<T> zbuffer = stackalloc T[length];
-            for(var sample=0; sample<SampleCount; sample++)
+            for(var sample=0; sample<RepCount; sample++)
             {
                 var x = Random.CpuVector<T>(w);
                 x.StoreTo(xbuffer);
@@ -419,7 +260,7 @@ namespace Z0
             Span<T> xbuffer = stackalloc T[length];
             Span<T> ybuffer = stackalloc T[length];
             Span<T> zbuffer = stackalloc T[length];
-            for(var sample=0; sample<SampleCount; sample++)
+            for(var sample=0; sample<RepCount; sample++)
             {
                 var x = Random.CpuVector<T>(w);
                 x.StoreTo(xbuffer);
@@ -438,7 +279,7 @@ namespace Z0
         protected void vinsert_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            for(var i=0; i < SampleCount; i++)
+            for(var i=0; i < RepCount; i++)
             {
                 var v128Src = Random.CpuVector<T>(w);
                 var srcSpan = v128Src.ToSpan();
@@ -456,100 +297,11 @@ namespace Z0
             }
         }
 
-        protected void vrotl_check<T>(N128 w, T t = default)
-            where T : unmanaged
-        {
-            var minshift = 2;
-            var maxshift = bitsize<T>() - 2;
-            for(var sample=0; sample<SampleCount; sample++)
-            {
-                var x = Random.CpuVector<T>(n128);
-                var offset = Random.Next(minshift,maxshift);
-                var result = ginx.vrotl(x,(byte)offset).ToSpan();
-                var expect = x.ToSpan().Map(src => gbits.rotl(src, offset));
-                for(var i=0; i<expect.Length; i++)
-                    Claim.eq(expect[i],result[i]);
-            }
-        }
-
-        protected void vrotl_check<T>(N256 w, T t = default)
-            where T : unmanaged
-        {
-            byte minshift = 2;
-            byte maxshift = (byte)(bitsize<T>() - 2);
-            for(var sample=0; sample<SampleCount; sample++)
-            {
-                var x = Random.CpuVector<T>(n256);
-                var offset = Random.Next(minshift,maxshift);
-                var result = ginx.vrotl(x,offset).ToSpan();
-                var expect = x.ToSpan().Map(src => gbits.rotl(src, (int)offset));
-                for(var i=0; i<expect.Length; i++)
-                    Claim.eq(expect[i],result[i]);
-            }
-        }
-
-        protected void vrotr_check<T>(N256 n, T t = default)
-            where T : unmanaged
-        {
-            byte minshift = 2;
-            byte maxshift = (byte)(bitsize<T>() - 2);
-            for(var sample=0; sample<SampleCount; sample++)
-            {
-                var x = Random.CpuVector<T>(n256);
-                var offset = Random.Next(minshift,maxshift);
-                var result = ginx.vrotr(x,offset).ToSpan();
-                var expect = x.ToSpan().Map(src => gbits.rotr(src, offset));
-                for(var i=0; i<expect.Length; i++)
-                    Claim.eq(expect[i],result[i]);
-            }
-        }
-
-        protected void vrotr_check<T>(N128 n, T t = default)
-            where T : unmanaged
-        {
-            byte minshift = 2;
-            byte maxshift = (byte)(bitsize<T>() - 2);
-            for(var sample=0; sample<SampleCount; sample++)
-            {
-                var x = Random.CpuVector<T>(n128);
-                var offset = Random.Next(minshift,maxshift);
-                var result = ginx.vrotr(x,offset).ToSpan();
-                var expect = x.ToSpan().Map(src => gbits.rotr(src, offset));
-                for(var i=0; i<expect.Length; i++)
-                    Claim.eq(expect[i],result[i]);
-            }
-        }
-
-        protected void vnonz_check<T>(N128 n, T t = default)
-            where T : unmanaged
-        {            
-            var  src = Random.Blocks<T>(n, count: SampleCount);
-            for(var i = 0; i< src.BlockCount; i++)
-            {
-                var v = CpuVector.vload(n, in src.BlockRef(i));
-                Claim.yea(ginx.vnonz(v));
-            }
-            
-            Claim.nea(ginx.vnonz(vzero<T>(n)));
-        }
-
-        protected void vnonz_check<T>(N256 n, T t = default)
-            where T : unmanaged
-        {
-            var  src = Random.Blocks<T>(n, count: SampleCount);
-            for(var i = 0; i< src.BlockCount; i++)
-            {
-                var v = CpuVector.vload(n, in src.BlockRef(i));
-                Claim.yea(ginx.vnonz(v));
-            }
-            
-            Claim.nea(ginx.vnonz(vzero<T>(n)));
-        }
 
         protected void vnegate_blocks_check<T>(N128 n, T t = default)
             where T : unmanaged
         {
-            var blocks = SampleCount;
+            var blocks = RepCount;
             var stats = BlockStats.Calc<N128,T>(blocks);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
@@ -565,7 +317,7 @@ namespace Z0
         protected void vnegate_blocks_check<T>(N256 n, T t = default)
             where T : unmanaged
         {
-            var blocks = SampleCount;
+            var blocks = RepCount;
             var stats = BlockStats.Calc<N256,T>(blocks);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
@@ -579,7 +331,7 @@ namespace Z0
         protected void vnegate_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var x = Random.CpuVector(w,t);
                 var y = ginx.vnegate(x);
@@ -591,7 +343,7 @@ namespace Z0
         protected void vnegate_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var x = Random.CpuVector<T>(w);
                 var y = ginx.vnegate(x);
@@ -604,7 +356,7 @@ namespace Z0
             where T : unmanaged
         {
 
-            for(var sample=0; sample<SampleCount; sample++)
+            for(var sample=0; sample<RepCount; sample++)
             {
                 var x = Random.CpuVector<T>(w);
                 var y = Random.CpuVector<T>(w);
@@ -625,7 +377,7 @@ namespace Z0
             where T : unmanaged
         {
 
-            for(var sample=0; sample<SampleCount; sample++)
+            for(var sample=0; sample<RepCount; sample++)
             {
                 var x = Random.CpuVector<T>(w);
                 var y = Random.CpuVector<T>(w);
@@ -645,7 +397,7 @@ namespace Z0
         protected void vmax_block_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var blocks = SampleCount;
+            var blocks = RepCount;
             var stats = BlockStats.Calc(blocks,w, default(T));
             var step = stats.BlockLength;
             var cells = stats.CellCount;
@@ -662,7 +414,7 @@ namespace Z0
         protected void vmax_block_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var blocks = SampleCount;
+            var blocks = RepCount;
             var stats = BlockStats.Calc(blocks,w, default(T));
             var step = stats.BlockLength;
             var cells = stats.CellCount;
@@ -679,7 +431,7 @@ namespace Z0
         protected void vmin_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            for(var sample=0; sample<SampleCount; sample++)
+            for(var sample=0; sample<RepCount; sample++)
             {
                 var x = Random.CpuVector<T>(w);
                 var y = Random.CpuVector<T>(w);
@@ -699,7 +451,7 @@ namespace Z0
         protected void vmin_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            for(var sample=0; sample<SampleCount; sample++)
+            for(var sample=0; sample<RepCount; sample++)
             {
                 var x = Random.CpuVector<T>(w);
                 var y = Random.CpuVector<T>(w);
@@ -719,7 +471,7 @@ namespace Z0
         protected void vmin_block_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var blocks = SampleCount;
+            var blocks = RepCount;
             var stats = BlockStats.Calc(blocks,w, default(T));
 
             var lhs = Random.Blocks<T>(w, blocks);
@@ -735,7 +487,7 @@ namespace Z0
         protected void vmin_block_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var blocks = SampleCount;
+            var blocks = RepCount;
             var stats = BlockStats.Calc(blocks,w, default(T));
 
             var lhs = Random.Blocks<T>(w, blocks);
@@ -785,8 +537,8 @@ namespace Z0
         protected void vsub_block_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var lhs = Random.Blocks<T>(n256,SampleCount);
-            var rhs = Random.Blocks<T>(n256,SampleCount);
+            var lhs = Random.Blocks<T>(n256,RepCount);
+            var rhs = Random.Blocks<T>(n256,RepCount);
             var dstA = lhs.Replicate();
             ginx.vsub(lhs, rhs, dstA);
             var dstB = DataBlocks.alloc<T>(n256,lhs.BlockCount);
@@ -798,7 +550,7 @@ namespace Z0
         protected void vnext_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var x = Random.CpuVector<T>(w);
                 var xs = x.ToSpan();
@@ -823,7 +575,7 @@ namespace Z0
         protected void vnext_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var x = Random.CpuVector<T>(w);
                 var xs = x.ToSpan();
@@ -846,41 +598,12 @@ namespace Z0
         }
 
 
-        protected void vsrlv_check<T>(N128 w, T t = default)
-            where T : unmanaged
-        {
-            var shiftrange = (default(T),convert<int,T>(bitsize(t) - 1));
-            var buffer = DataBlocks.single<T>(w);
-            for(var sample = 0; sample < SampleCount; sample++)
-            {
-                var x = Random.CpuVector<T>(w);
-                var offsets = Random.CpuVector<T>(w, shiftrange);
-                var actual = ginx.vsrlv(x,offsets);
-                var expect = CpuVector.vload(w,mathspan.srlv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
-                Claim.eq(expect, actual);
-            }
-        }
-
-        protected void vsrlv_check<T>(N256 w, T t = default)
-            where T : unmanaged
-        {
-            var shiftrange = (default(T),convert<int,T>(bitsize(t) - 1));
-            var buffer = DataBlocks.single<T>(w);
-            for(var sample = 0; sample < SampleCount; sample++)
-            {
-                var x = Random.CpuVector<T>(w);
-                var offsets = Random.CpuVector<T>(w, shiftrange);
-                var actual = ginx.vsrlv(x,offsets);
-                var expect = CpuVector.vload(w,mathspan.srlv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
-                Claim.eq(expect, actual);
-            }
-        }
 
         public void vbyteswap_check_256<T>(N128 w, T t = default)
             where T : unmanaged
         {
             var n = CpuVector.vcount(w,t);
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector(w,t);
                 var y = ginx.vbyteswap(x);
@@ -893,7 +616,7 @@ namespace Z0
             where T : unmanaged
         {
             var n = CpuVector.vcount(w,t);
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector(w,t);
                 var y = ginx.vbyteswap(x);

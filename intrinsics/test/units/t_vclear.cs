@@ -34,7 +34,7 @@ namespace Z0
         public void vclear_check<T>(N256 n, T t = default)
             where T : unmanaged
         {            
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 byte start = Random.Next<byte>(0, (byte)bitsize<T>());
                 byte length = (byte)(bitsize<T>() - start);
@@ -49,7 +49,7 @@ namespace Z0
         protected void vclear_check<T>(N128 n, T t = default)
             where T : unmanaged
         {            
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 byte start = Random.Next<byte>(0, (byte)bitsize<T>());
                 byte length = (byte)(bitsize<T>() - start);
@@ -64,7 +64,7 @@ namespace Z0
         public void clearalt_256x8()
         {
             var tr = CpuVector.vclearalt<byte>(n256);
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var x = Random.CpuVector<byte>(n256);
                 var y = dinx.vshuf16x8(x, tr);

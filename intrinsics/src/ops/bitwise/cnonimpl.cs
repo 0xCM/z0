@@ -19,7 +19,16 @@ namespace Z0
     public static partial class dinx
     {                
         /// <summary>
-        /// Computes the converse nonimplication, logically equivalent to the bitwise expression x & (~y) for operands x and y
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
+        public static Vector128<sbyte> vcnonimpl(Vector128<sbyte> x, Vector128<sbyte> y)
+            => AndNot(y, x);
+
+        /// <summary>
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -28,7 +37,16 @@ namespace Z0
             => AndNot(y, x);
 
         /// <summary>
-        /// Computes the converse nonimplication, logically equivalent to the bitwise expression x & (~y) for operands x and y
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
+        public static Vector128<short> vcnonimpl(Vector128<short> x, Vector128<short> y)
+            => AndNot(y, x);
+
+        /// <summary>
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -37,7 +55,16 @@ namespace Z0
             => AndNot(y, x);
 
         /// <summary>
-        /// Computes the converse nonimplication, logically equivalent to the bitwise expression x & (~y) for operands x and y
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
+        public static Vector128<int> vcnonimpl(Vector128<int> x, Vector128<int> y)
+            => AndNot(y, x);
+
+        /// <summary>
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -46,16 +73,34 @@ namespace Z0
             => AndNot(y, x);
 
         /// <summary>
-        /// Computes the converse nonimplication, logically equivalent to the bitwise expression x & (~y) for operands x and y
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
+        public static Vector128<long> vcnonimpl(Vector128<long> x, Vector128<long> y)
+            => AndNot(y, x);
+
+        /// <summary>
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static Vector128<ulong> vcnonimpl(Vector128<ulong> x, Vector128<ulong> y)
             => AndNot(y, x);
- 
+
         /// <summary>
-        /// Computes the converse nonimplication, logically equivalent to the bitwise expression x & (~y) for operands x and y
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
+        public static Vector256<sbyte> vcnonimpl(Vector256<sbyte> x, Vector256<sbyte> y)
+            => AndNot(y, x);
+
+        /// <summary>
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -64,7 +109,16 @@ namespace Z0
             => AndNot(y, x);
 
         /// <summary>
-        /// Computes the converse nonimplication, logically equivalent to the bitwise expression x & (~y) for operands x and y
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
+        public static Vector256<short> vcnonimpl(Vector256<short> x, Vector256<short> y)
+            => AndNot(y, x);
+
+        /// <summary>
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -73,7 +127,16 @@ namespace Z0
             => AndNot(y, x);
 
         /// <summary>
-        /// Computes the converse nonimplication, logically equivalent to the bitwise expression x & (~y) for operands x and y
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
+        public static Vector256<int> vcnonimpl(Vector256<int> x, Vector256<int> y)
+            => AndNot(y, x);
+
+        /// <summary>
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -82,7 +145,16 @@ namespace Z0
             => AndNot(y, x);
 
         /// <summary>
-        /// Computes the converse nonimplication, logically equivalent to the bitwise expression x & (~y) for operands x and y
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
+        public static Vector256<long> vcnonimpl(Vector256<long> x, Vector256<long> y)
+            => AndNot(y, x);
+
+        /// <summary>
+        /// Computes the converse nonimplication z := x & (~y) for operands x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>

@@ -39,7 +39,7 @@ namespace Z0
 
         public void sb_range_32u()
         {
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.Next<uint>();
                 Bits.split(x,out var x0, out var x1);
@@ -54,7 +54,7 @@ namespace Z0
 
         public void sb_range_64u()
         {
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.Next<ulong>();
                 Bits.split(x, out var x0, out var x1);
@@ -68,7 +68,7 @@ namespace Z0
 
         public void sb_range_16u()
         {
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.Next<ushort>();
                 

@@ -118,7 +118,7 @@ namespace Z0
             var sb = DataBlocks.single(sw,st);
             var tb = DataBlocks.alloc(tw,tbc,tt);
 
-            for(var sample = 0; sample < SampleCount; sample++)
+            for(var sample = 0; sample < RepCount; sample++)
             {
                 var sv = Random.CpuVector(sw,st);
                 var tv = dinx.vconvert(sv,tw,tt);
@@ -147,7 +147,7 @@ namespace Z0
             var sb = DataBlocks.single(sw,st);
             var tb = DataBlocks.alloc(tw,tbc,tt);
 
-            for(var sample = 0; sample < SampleCount; sample++)
+            for(var sample = 0; sample < RepCount; sample++)
             {
                 var sv = Random.CpuVector(sw,st);
                 var tv = dinx.vconvert(sv,n256,tt);

@@ -41,7 +41,7 @@ namespace Z0
 
         public void bitstack()
         {
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var bits = Random.BitString(Random.Next<int>(2,50));
                 var stack = MicroBuffers.bitstack();

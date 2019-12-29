@@ -13,7 +13,7 @@ namespace Z0
     {
         public void vmakemask_128()
         {
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.BitVector(n16);
                 var z = dinx.vtakemask(dinx.vmakemask(x));
@@ -23,7 +23,7 @@ namespace Z0
 
         public void vmakemask_256()
         {
-            for(var i=0; i< SampleCount; i++)
+            for(var i=0; i< RepCount; i++)
             {
                 var x = Random.BitVector(n32);
                 var z = dinx.vtakemask(dinx.vmakemask(x));

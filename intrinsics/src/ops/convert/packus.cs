@@ -37,9 +37,12 @@ namespace Z0
         /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
         [MethodImpl(Inline)]
         public static Vector128<byte> vpackus(Vector128<ushort> x, Vector128<ushort> y)
-            => PackUnsignedSaturate(
-                    v16i(vand(x, CpuVector.vones(n128,z16))), 
-                    v16i(vand(y, CpuVector.vones(n128,z16))));         
+        {
+            var mask = CpuVector.vbroadcast(n128, (ushort)(byte.MaxValue));
+            var v1 = v16i(dinx.vand(x,mask));
+            var v2 = v16i(dinx.vand(y,mask));
+            return PackUnsignedSaturate(v1,v2);         
+        }
 
         /// <summary>
         /// (4x32w,4x32w) -> 8x16w
@@ -48,7 +51,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vpackus_alt(Vector128<ushort> x, Vector128<ushort> y)
+        static Vector128<byte> vpackus_alt(Vector128<ushort> x, Vector128<ushort> y)
             => v8u(vor(
                     vshuf16x8(x, VData.packusLo(n128,n16,n8)),
                     vshuf16x8(y, VData.packusHi(n128,n16,n8))));
@@ -86,7 +89,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vpackus_alt(Vector128<uint> x, Vector128<uint> y)
+        static Vector128<ushort> vpackus_alt(Vector128<uint> x, Vector128<uint> y)
         {
             var v1 = dinx.vshuf16x8(x, VData.packusLo(n128,n32,n16));
             var v2 = dinx.vshuf16x8(y, VData.packusHi(n128,n32,n16));
@@ -165,7 +168,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vpackus_alt(Vector256<uint> x, Vector256<uint> y)
+        static Vector256<ushort> vpackus_alt(Vector256<uint> x, Vector256<uint> y)
         {
             var v1 = vshuf16x8(x, VData.packusLo(n256,n32,n16));
             var v2 = vshuf16x8(y, VData.packusHi(n256,n32,n16));

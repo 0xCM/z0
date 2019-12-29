@@ -14,7 +14,7 @@ namespace Z0
     {
         public void pbv_gfmul_8()
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var v1 = Random.BitVector(n8);
                 var v2 = Random.BitVector(n8);

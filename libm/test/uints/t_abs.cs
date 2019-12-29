@@ -13,7 +13,7 @@ namespace Z0
 
         public void fabs64_libm_validate()
         {
-            for(var i=0; i<SampleCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var src = Random.Next<double>();
                 Claim.eq(src < 0 ? -src : src, fmath.abs(src));

@@ -19,12 +19,10 @@ namespace Z0
             this.Config = config ?? TestConfigDefaults.Default();
         }
 
-        protected static readonly N256 DefaultSampleNat = default;
-
         /// <summary>
-        /// The default number of elements to be selected from some sort of stream
+        /// The default number of times a randomized test case should be repeated
         /// </summary>
-        protected const int DefaultSampleSize = Pow2.T08;
+        protected const int DefaultRepCount = Pow2.T08;
 
         /// <summary>
         /// The default number times to repeat an activity
@@ -41,21 +39,20 @@ namespace Z0
         Queue<TestCaseRecord> TestOutcomes {get;}
             = new Queue<TestCaseRecord>();
 
+        Queue<BenchmarkRecord> Benchmarks {get;}
+            = new Queue<BenchmarkRecord>();
+
         public void Configure(ITestConfig config)
             => Config = config;
 
         protected override bool TraceEnabled
             => Config.TraceEnabled;
-
-        protected virtual Interval<K> SampleDomain<K>()
-            where K : unmanaged
-                => RngDefaults.get<K>().SampleDomain;
                 
         /// <summary>
         /// The number of elements to be selected from some sort of stream
         /// </summary>
-        protected virtual int SampleCount
-            => DefaultSampleSize;
+        protected virtual int RepCount
+            => DefaultRepCount;
         
         /// <summary>
         /// The number times to repeat an action
@@ -84,17 +81,23 @@ namespace Z0
                 yield return TestOutcomes.Dequeue();
         }
 
-        public TestCaseRecord ReportOutcome(string opname, bool succeeded, TimeSpan duration)
+        public IEnumerable<BenchmarkRecord> TakeBenchmarks()
         {
-            var record = TestCaseRecord.Define(opname,succeeded,duration);
+            while(Benchmarks.Any())
+                yield return Benchmarks.Dequeue();
+        }
+
+        public TestCaseRecord ReportOutcome(string casename, bool succeeded, TimeSpan duration)
+        {
+            var record = TestCaseRecord.Define(casename,succeeded,duration);
             TestOutcomes.Enqueue(record);
             return record;
         }
 
-        public BenchmarkRecord ReportBenchmark(string opname, long opcount, TimeSpan duration)
+        public BenchmarkRecord ReportBenchmark(string name, long opcount, TimeSpan duration)
         {
-            var record = BenchmarkRecord.Define(opname, opcount, duration);
-            Enqueue(record);
+            var record = BenchmarkRecord.Define(name, opcount, duration);
+            Benchmarks.Enqueue(record);
             return record;
         }
     }
