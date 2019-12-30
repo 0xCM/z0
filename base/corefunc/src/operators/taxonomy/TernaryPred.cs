@@ -14,19 +14,9 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ITernaryPred<A> : IOp
-    {
-        bit Invoke(A a, A b, A c);        
-    }
-
-    /// <summary>
-    /// Characterizes a ternary predicate over primal operands
-    /// </summary>
-    /// <typeparam name="T">The primal operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IPrimalTernaryPred<T> : IPrimalOp<T>, ITernaryPred<T>
-        where T : unmanaged
+    public interface ITernaryPred<A> : IFunc<A,A,A,bit>
     {
         
     }
+
 }

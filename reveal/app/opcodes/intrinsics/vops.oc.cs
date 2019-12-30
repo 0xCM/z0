@@ -32,19 +32,19 @@ namespace Z0
 
         public static void loop_1(ReadOnlySpan<uint> src, Span<uint> dst)
         {
-            Loop.run(GZ.negate(z32), src, dst);
+            Loop.run(GX.negate(z32), src, dst);
         }
 
 
         public static void loop_2(ArrayExchange<uint> src, ArrayExchange<uint> dst)
         {
-            Loop.run(GZ.negate(z32), src, dst);   
+            Loop.run(GX.negate(z32), src, dst);   
         }
 
         public static void pipeline_1(ReadOnlySpan<uint> src, Span<uint> dst)
         {
-            var f = GZ.negate<uint>();
-            var g = GZ.not<uint>();
+            var f = GX.negate<uint>();
+            var g = GX.not<uint>();
             var count = dst.Length;
             for(var i=0; i< count; i++)
                 seek(dst,i) = Pipes.pipe(skip(src,i),f,g);
@@ -53,8 +53,8 @@ namespace Z0
 
         public static void pipeline_2(ReadOnlySpan<uint> src, Span<uint> dst)
         {
-            var g = GZ.negate(z32);
-            var f = GZ.and(z32);
+            var g = GX.negate(z32);
+            var f = GX.and(z32);
             var count = dst.Length;
             for(var i=0; i< count; i++)
                 seek(dst,i) = Pipes.compose(skip(src,i),f,g);
@@ -65,8 +65,8 @@ namespace Z0
 
         public static uint and_negate_ops(uint x)
         {
-            var g = GZ.negate(x);
-            var f = GZ.and(x);
+            var g = GX.negate(x);
+            var f = GX.and(x);
             return Pipes.compose(x,f,g);
         }
         public static uint vxor_128x32u(Vector128<uint> x, Vector128<uint> y)

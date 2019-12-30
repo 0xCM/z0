@@ -17,18 +17,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IUnaryPred<A> : IOp
-    {
-        bit Invoke(A a);        
-    }
-
-    /// <summary>
-    /// Characterizes a unary predicate over a primal operand
-    /// </summary>
-    /// <typeparam name="T">The operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IPrimalUnaryPred<T> : IPrimalOp<T>, IUnaryPred<T>
-        where T : unmanaged
+    public interface IUnaryPred<A> : IFunc<A,bit>
     {
         
     }
@@ -45,23 +34,12 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a vectorized unary predicate
-    /// </summary>
-    /// <typeparam name="V">The operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryPred<V> : IVectorOp<V>, IUnaryPred<V>
-        where V : struct
-    {
-        
-    }
-
-    /// <summary>
     /// Characterizes a unary predicate parameterized by operand bit width
     /// </summary>
     /// <typeparam name="W">The bit-width type</typeparam>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryPred<W,V> : IUnaryPred<V>, IVectorOp<W,V>
+    public interface IVUnaryPred<W,V> : IUnaryPred<V>
         where W : unmanaged, ITypeNat
         where V : struct
     {
@@ -75,7 +53,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryPred<W,V,T> : IVUnaryPred<W,V>, IVectorOp<W,V,T>    
+    public interface IVUnaryPred<W,V,T> : IVUnaryPred<W,V>
         where W : unmanaged, ITypeNat
         where V : struct
         where T : unmanaged

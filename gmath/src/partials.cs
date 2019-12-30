@@ -52,7 +52,7 @@ namespace Z0
 
     }
     
-    public static partial class GZTypes
+    public static partial class GXTypes
     {
         
     }

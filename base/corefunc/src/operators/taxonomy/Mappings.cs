@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     using System.Security;
-    using static zfunc;
 
+    using static zfunc;
 
     /// <summary>
     /// Characterizes a transformation
@@ -18,24 +18,7 @@ namespace Z0
     /// <typeparam name="A">The source domain type</typeparam>
     /// <typeparam name="B">The target domain type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IMap<A,B>
-    {
-        /// <summary>
-        /// Projects a point in the source domain to a point in the target domain
-        /// </summary>
-        /// <param name="src">The source domain point</param>
-        B Map(A src);
-    }
-
-    /// <summary>
-    /// Characterizes a transformation between primal types
-    /// </summary>
-    /// <typeparam name="S">The primal source domain type</typeparam>
-    /// <typeparam name="T">The primal target domain type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IPrimalMap<S,T> : IMap<S,T>
-        where S : unmanaged
-        where T : unmanaged
+    public interface IMap<A,B> : IFunc<A,B>
     {
 
     }
@@ -54,73 +37,22 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a vectorized transformation parameterized by operand bit width
-    /// </summary>
-    /// <typeparam name="W">The bit-width type</typeparam>
-    /// <typeparam name="U">The source operand type</typeparam>
-    /// <typeparam name="T">The target operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVMap<W,U,V> : IVectorMap<U,V>
-        where W : unmanaged, ITypeNat
-        where U : struct
-        where V : struct
-    {
-
-    }
-
-    /// <summary>
-    /// Characterizes a vectorized transformation parameterized by common operand bit width and component type
-    /// </summary>
-    /// <typeparam name="W">The bit-width type</typeparam>
-    /// <typeparam name="U">The source operand type</typeparam>
-    /// <typeparam name="T">The target operand type</typeparam>
-    /// <typeparam name="T">The vector component type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVMap<W,U,V,T> : IVMap<W,U,V>
-        where W : unmanaged, ITypeNat
-        where U : struct
-        where V : struct
-        where T : unmanaged
-    {
-
-    }
-
-    /// <summary>
-    /// Characterizes a vectorized transformation parameterized by operand source and target bit widths and common component type
-    /// </summary>
-    /// <typeparam name="WU">The bit-width type of the source operand</typeparam>
-    /// <typeparam name="WV">The bit-width type of the target operand</typeparam>
-    /// <typeparam name="U">The source operand type</typeparam>
-    /// <typeparam name="V">The target operand type</typeparam>
-    /// <typeparam name="T">The common component type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVMap<WU,W2,U,V,T> : IVectorMap<U,V>
-        where WU : unmanaged, ITypeNat
-        where W2 : unmanaged, ITypeNat
-        where U : struct
-        where V : struct
-        where T : unmanaged
-    {
-
-    }
-
-    /// <summary>
     /// Characterizes a vectorized transformation parameterized by operand source/target bit widths and source/target component types
     /// </summary>
-    /// <typeparam name="WU">The bit-width type of the source operand</typeparam>
-    /// <typeparam name="WV">The bit-width type of the target operand</typeparam>
-    /// <typeparam name="U">The source operand type</typeparam>
-    /// <typeparam name="V">The target operand type</typeparam>
-    /// <typeparam name="S">The source component type</typeparam>
-    /// <typeparam name="T">The target component type</typeparam>
+    /// <typeparam name="W1">The bit-width type of the source operand</typeparam>
+    /// <typeparam name="W2">The bit-width type of the target operand</typeparam>
+    /// <typeparam name="V1">The source operand type</typeparam>
+    /// <typeparam name="V2">The target operand type</typeparam>
+    /// <typeparam name="T1">The source component type</typeparam>
+    /// <typeparam name="T2">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVMap<WU,WV,U,V,S,T> : IVectorMap<U,V>
-        where WU : unmanaged, ITypeNat
-        where WV : unmanaged, ITypeNat
-        where U : struct
-        where V : struct
-        where S : unmanaged
-        where T : unmanaged
+    public interface IVMap<W1,W2,V1,V2,T1,T2> : IVectorMap<V1,V2>
+        where W1 : unmanaged, ITypeNat
+        where W2 : unmanaged, ITypeNat
+        where V1 : struct
+        where V2 : struct
+        where T1 : unmanaged
+        where T2 : unmanaged
     {
 
     }
@@ -147,7 +79,6 @@ namespace Z0
     public interface IVMap128<T> : IVMap128<T,T>
         where T : unmanaged
     {
-
 
     }
 
@@ -176,5 +107,4 @@ namespace Z0
 
 
     }
-
 }

@@ -61,7 +61,7 @@ namespace Z0
             => gmath.inc(x);
 
         public static int inc_op32i(int x)
-            => GZ.inc(x).Invoke(x);
+            => GX.inc(x).Invoke(x);
 
         public static uint inc_d32u(uint x)
             => math.inc(x);
@@ -70,7 +70,7 @@ namespace Z0
             => gmath.inc(x);
 
         public static uint inc_op32u(uint x)
-            => GZ.inc(x).Invoke(x);
+            => GX.inc(x).Invoke(x);
 
         public static long inc_d64i(long x)
             => math.inc(x);

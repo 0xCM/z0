@@ -51,7 +51,6 @@ namespace Z0
             var x = CpuVector.vincrements(w,z16);
             var y = CpuVector.vdecrements(w,u16max);
             var z = ginx.vblend(x,y,spec);
-
         }
 
         public void valignr_examples()

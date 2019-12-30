@@ -112,7 +112,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
-        /// <param name="line">The source file line number where invocation ocurred</param>
+        /// <param name="line">The source file line number where invocation ocurred</param>        
         public static bool eq<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs.Equals(rhs) ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs,rhs, caller, file, line));
 
@@ -231,6 +231,8 @@ namespace Z0
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         public static bool eq(double lhs, double rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+            => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
+        public static bool eq(char lhs, char rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
         public static bool numeq<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)

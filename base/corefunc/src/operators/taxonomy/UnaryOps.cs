@@ -10,24 +10,12 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Security;
 
-
     /// <summary>
     /// Characterizes a unary operator
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IUnaryOp<A> : IOp
-    {
-        /// <summary>
-        /// Invokes the reified unary operator
-        /// </summary>
-        /// <param name="a">The operand</param>
-        A Invoke(A a);        
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface IUnaryOp<F,A> : IUnaryOp<A>
-        where F : IUnaryOp<A>
+    public interface IUnaryOp<A> : IFunc<A,A>
     {
 
     }
@@ -38,27 +26,10 @@ namespace Z0
     /// <typeparam name="A">The operand type</typeparam>
     /// <typeparam name="K">The integral value type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IUnaryRangeOp<A,K> : IOp
+    public interface IUnaryRangeOp<A,K> : IFunc<A,K,K,A>
         where K : unmanaged
     {
-        /// <summary>
-        /// Invokes the reified unary operator
-        /// </summary>
-        /// <param name="a">The source value</param>
-        /// <param name="k1">The first integral value</param>
-        /// <param name="k2">The second integral value</param>
-        A Invoke(A a, K k1, K k2);
-    }
 
-    /// <summary>
-    /// Characterizes a unary operator over a primal operand
-    /// </summary>
-    /// <typeparam name="T">The primal operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IPrimalUnaryOp<T> : IPrimalOp<T>, IUnaryOp<T>
-        where T : unmanaged
-    {
-        
     }
 
     /// <summary>
@@ -67,7 +38,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The primal operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IPrimalUnaryOp<N,T> : IPrimalOp<T>, IUnaryOp<T>
+    public interface INaturalUnaryOp<N,T> : IUnaryOp<T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
@@ -75,35 +46,11 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a primal unary operator that accepts two integral values that define a range
-    /// </summary>
-    /// <typeparam name="T">The operand type</typeparam>
-    /// <typeparam name="K">The integral value type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IPrimalUnaryRangeOp<T,K> : IPrimalOp<T>, IUnaryRangeOp<T,K>
-        where K : unmanaged, ITypeNat
-        where T : unmanaged
-    {
-
-    }
-
-    /// <summary>
     /// Characterizes a primal unary operator that accepts two unsigned 8-bit values that define a range
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IPrimalUnaryRange8Op<T> : IPrimalOp<T>, IUnaryRangeOp<T,byte>
-        where T : unmanaged
-    {
-
-    }
-
-    /// <summary>
-    /// Characterizes a primal unary operator that accepts two signed 32-bit values that define a range
-    /// </summary>
-    /// <typeparam name="T">The operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IPrimalUnaryRange32Op<T> : IPrimalOp<T>, IUnaryRangeOp<T,int>
+    public interface IPrimalUnaryRange8Op<T> : IUnaryRangeOp<T,byte>
         where T : unmanaged
     {
 
@@ -114,7 +61,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryOp<V> : IVectorOp<V>, IUnaryOp<V>
+    public interface IVUnaryOp<V> : IUnaryOp<V>
         where V : struct
     {
         
@@ -126,7 +73,7 @@ namespace Z0
     /// <typeparam name="W">The bit-width type</typeparam>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryOp<W,V> : IVUnaryOp<V>, IVectorOp<W,V>
+    public interface IVUnaryOp<W,V> : IVUnaryOp<V>
         where W : unmanaged, ITypeNat
         where V : struct
     {

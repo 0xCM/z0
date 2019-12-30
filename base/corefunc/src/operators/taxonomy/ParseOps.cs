@@ -7,25 +7,14 @@ namespace Z0
     using System.Security;
 
     /// <summary>
-    /// Characterizes an operator that materializes a value from a string without further context
+    /// Characterizes an operator that materializes a value from a string given a supporting context
     /// </summary>
     /// <typeparam name="V">The value type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IParser<V> : IOp
+    public interface IParser<C,V> : IFunc<string,C,V>
         where V : struct
     {
-        V Invoke(string src);
-    }
-
-    /// <summary>
-    /// Characterizes an operator that materializes a value from a string with a supporting context
-    /// </summary>
-    /// <typeparam name="V">The value type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IParser<C,V> : IOp
-        where V : struct
-    {
-         V Invoke(string src, C context);
+         
     }
 
     /// <summary>
@@ -33,20 +22,10 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The primal value type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IPrimalParser<T> : IParser<T>, IPrimalOp<T>
+    public interface IParser<T> : IFunc<string,T>
         where T : unmanaged
     {
         
     }
 
-    /// <summary>
-    /// Characterizes an operator that materializes a primal value from a string with a supporting context
-    /// </summary>
-    /// <typeparam name="T">The primal type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IPrimalParser<C,T> : IParser<C,T>, IPrimalOp<T>
-        where T : unmanaged
-    {
-        
-    }
 }

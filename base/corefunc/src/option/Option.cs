@@ -18,6 +18,23 @@ namespace Z0
     public readonly struct Option<T> :  IOption<T>
     {
         /// <summary>
+        /// The encapsulated value, iff Exists is true
+        /// </summary>
+        readonly T value;
+
+
+        /// <summary>
+        /// Specifies whether the option has a value
+        /// </summary>
+        public bool Exists { get; }
+
+        public T Value
+        {
+            [MethodImpl(Inline)]
+            get => value;
+        }
+
+        /// <summary>
         /// Defines a non-valued option
         /// </summary>
         [MethodImpl(Inline)]
@@ -81,18 +98,6 @@ namespace Z0
             => !x.Exists;
 
         /// <summary>
-        /// The encapsulated value, iff Exists is true
-        /// </summary>
-        readonly T value;
-
-        [MethodImpl(Inline)]
-        Option(bool isSome, T value)
-        {
-            this.Exists = isSome;
-            this.value = value;
-        }
-
-        /// <summary>
         /// Initializes a valued option
         /// </summary>
         /// <param name="value">The encapsulated value</param>
@@ -100,26 +105,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public Option(T value)
         {
-            if (value is IOption)
-            {
-                var o = value as IOption;
-                this.Exists = o.IsSome;
-                this.value = this.Exists ?
-                    (o.Value is T ? (T)o.Value : value)                
-                    : default;
-            }
-            else
-            {
-                this.Exists = (value != null);
-                this.value = value;
-            }
-            
+            this.Exists = (value != null);
+            this.value = value;
         }
-
-        /// <summary>
-        /// Specifies whether the option has a value
-        /// </summary>
-        public bool Exists { get; }
 
         /// <summary>
         /// Returns true if the value exists
@@ -174,17 +162,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public T Require([CallerMemberName] string caller = null, [CallerFilePath] string file = null, [CallerLineNumber] int linenumber = 0)
             =>  Exists ? value : throw new Exception<T>("Value doesn't exist", caller, file, linenumber);
-        
-        static readonly T _Default = default;
-            
+                    
         public T Default 
-            => _Default;
-
-        T IOption<T>.Value 
-            => value;
-
-        object IOption.Value 
-            => value;
+            => default;
 
         bool IOption.IsSome 
             => Exists;
@@ -282,7 +262,6 @@ namespace Z0
         public  Option<S> ToNone<S>()
             => Option.none<S>();
 
-
         /// <summary>
         /// LINQ integration function
         /// </summary>
@@ -332,33 +311,7 @@ namespace Z0
         }
 
         public override bool Equals(object obj)
-        {
-            if (obj == null)
-                return false;
-
-            if (Exists)
-            {
-                if (obj is IOption)
-                {
-                    var other = obj as IOption;
-                    if (other.IsSome)
-                        return object.Equals(value, other.Value);
-                    else
-                        return false;
-                }
-                else if (obj is T)
-                    return object.Equals(this.value, obj);
-                else
-                    return false;
-            }
-            else
-            {
-                if (obj is Option<T>)
-                    return (obj as IOption).IsNone;
-                else
-                    return false;
-            }
-        }
+            => obj is Option<T> x && Equals(x);
 
         public override int GetHashCode()
             => Exists ? value.GetHashCode() : typeof(T).Name.GetHashCode();
@@ -375,10 +328,6 @@ namespace Z0
     /// </summary>
     public interface IOption
     {
-        /// <summary>
-        /// The encapsualted value, if any
-        /// </summary>
-        object Value { get; }
 
         /// <summary>
         /// True if a value does exists, false otherwise
@@ -390,10 +339,6 @@ namespace Z0
         /// </summary>
         bool IsNone { get; }
 
-        /// <summary>
-        /// The type of the encapsulated value, if present
-        /// </summary>
-        Type ValueType { get; }
     }
 
     /// <summary>
@@ -404,6 +349,6 @@ namespace Z0
         /// <summary>
         /// The encapsualted value, if any
         /// </summary>
-        new T Value { get; }
+        T Value { get; }
     }
 }

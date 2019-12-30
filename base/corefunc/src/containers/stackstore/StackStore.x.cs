@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static zfunc;
     using static StackContainers;
@@ -39,35 +35,35 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<char> AsChars(this ref CharStack2 src)
-            => StackStore.chars(ref src);
+            => StackStore.charspan(ref src);
 
         [MethodImpl(Inline)]
         public static Span<char> AsChars(this ref CharStack4 src)
-            => StackStore.chars(ref src);
+            => StackStore.charspan(ref src);
 
         [MethodImpl(Inline)]
         public static Span<char> AsChars(this ref CharStack8 src)
-            => StackStore.chars(ref src);
+            => StackStore.charspan(ref src);
 
         [MethodImpl(Inline)]
         public static Span<char> AsChars(this ref CharStack16 src)
-            => StackStore.chars(ref src);
+            => StackStore.charspan(ref src);
 
         [MethodImpl(Inline)]
         public static string ToString(this CharStack2 src)
-            => StackStore.chars(ref src).ToString();
+            => StackStore.charspan(ref src).ToString();
 
         [MethodImpl(Inline)]
         public static string ToString(this CharStack4 src)
-            => StackStore.chars(ref src).ToString();
+            => StackStore.charspan(ref src).ToString();
 
         [MethodImpl(Inline)]
         public static string ToString(this CharStack8 src)
-            => StackStore.chars(ref src).ToString();
+            => StackStore.charspan(ref src).ToString();
 
         [MethodImpl(Inline)]
         public static string ToString(this CharStack16 src)
-            => StackStore.chars(ref src).ToString();
+            => StackStore.charspan(ref src).ToString();
     }
 
 }

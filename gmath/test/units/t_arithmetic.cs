@@ -9,241 +9,240 @@ namespace Z0
 
     using static zfunc;
     using static OpDelegate;
+    using static OpDelegates;
     
     public class t_arithmetic : t_gmath<t_arithmetic>
     {
-        public void check_add()
+        public void add_check()
         {
             const string name = "add";
 
-            CheckBinaryPredMatch(binary(math.add, name, z8), GZ.add(z8), z8);
-            CheckBinaryPredMatch(binary(math.add, name, z8i), GZ.add(z8i), z8i);
-            
-            CheckBinaryPredMatch(binary(math.add, name, z16), GZ.add(z16),z16);
-            CheckBinaryPredMatch(binary(math.add, name,z16i), GZ.add(z16i),z16i);
-            
-            CheckBinaryPredMatch(binary(math.add, name,z32), GZ.add(z32),z32);
-            CheckBinaryPredMatch(binary(math.add, name,z32i), GZ.add(z32i),z32i);
-                        
-            CheckBinaryPredMatch(binary(math.add, name,z64), GZ.add(z64),z64);
-            CheckBinaryPredMatch(binary(math.add, name,z64i), GZ.add(z64i),z64i);
-
-            CheckBinaryPredMatch(binary(fmath.add, name,z32f), GZ.add(z32f),z32f);
-            CheckBinaryPredMatch(binary(fmath.add, name,z64f), GZ.add(z64f),z64f);
+            add_check(binary(math.add, name, z8));
+            add_check(binary(math.add, name, z8i));
+            add_check(binary(math.add, name, z16));
+            add_check(binary(math.add, name, z16i));
+            add_check(binary(math.add, name, z32));
+            add_check(binary(math.add, name, z32i));
+            add_check(binary(math.add, name, z64));
+            add_check(binary(math.add, name, z64i));
+            add_check(binary(fmath.add, name, z32f));
+            add_check(binary(fmath.add, name, z64f));
         }        
 
-        public void check_sub()
+        [MethodImpl(Inline)]
+        void add_check<T>(BinaryDelegate<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckBinaryPredMatch(expect, GX.add(t), t);
+        
+
+        public void sub_check()
         {
             const string name = "sub";
 
-            CheckBinaryPredMatch(binary(math.sub, name, z8), GZ.sub(z8), z8);
-            CheckBinaryPredMatch(binary(math.sub, name, z8i), GZ.sub(z8i), z8i);
-            
-            CheckBinaryPredMatch(binary(math.sub, name, z16), GZ.sub(z16),z16);
-            CheckBinaryPredMatch(binary(math.sub, name,z16i), GZ.sub(z16i),z16i);
-            
-            CheckBinaryPredMatch(binary(math.sub, name,z32), GZ.sub(z32),z32);
-            CheckBinaryPredMatch(binary(math.sub, name,z32i), GZ.sub(z32i),z32i);
-                        
-            CheckBinaryPredMatch(binary(math.sub, name,z64), GZ.sub(z64),z64);
-            CheckBinaryPredMatch(binary(math.sub, name,z64i), GZ.sub(z64i),z64i);
-
-            CheckBinaryPredMatch(binary(fmath.sub, name,z32f), GZ.sub(z32f),z32f);
-            CheckBinaryPredMatch(binary(fmath.sub, name,z64f), GZ.sub(z64f),z64f);
+            sub_check(binary(math.sub, name, z8));
+            sub_check(binary(math.sub, name, z8i));
+            sub_check(binary(math.sub, name, z16));
+            sub_check(binary(math.sub, name, z16i));
+            sub_check(binary(math.sub, name, z32));
+            sub_check(binary(math.sub, name, z32i));
+            sub_check(binary(math.sub, name, z64));
+            sub_check(binary(math.sub, name, z64i));
+            sub_check(binary(fmath.sub, name, z32f));
+            sub_check(binary(fmath.sub, name, z64f));
         }
 
-        public void check_mul()
+
+        [MethodImpl(Inline)]
+        void sub_check<T>(BinaryDelegate<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckBinaryPredMatch(expect, GX.sub(t), t);
+
+        public void mul_check()
         {
             const string name = "mul";
 
-            CheckBinaryPredMatch(binary(math.mul, name, z8), GZ.mul(z8), z8);
-            CheckBinaryPredMatch(binary(math.mul, name, z8i), GZ.mul(z8i), z8i);
-            
-            CheckBinaryPredMatch(binary(math.mul, name, z16), GZ.mul(z16),z16);
-            CheckBinaryPredMatch(binary(math.mul, name,z16i), GZ.mul(z16i),z16i);
-            
-            CheckBinaryPredMatch(binary(math.mul, name,z32), GZ.mul(z32),z32);
-            CheckBinaryPredMatch(binary(math.mul, name,z32i), GZ.mul(z32i),z32i);
-                        
-            CheckBinaryPredMatch(binary(math.mul, name,z64), GZ.mul(z64),z64);
-            CheckBinaryPredMatch(binary(math.mul, name,z64i), GZ.mul(z64i),z64i);
-
-            CheckBinaryPredMatch(binary(fmath.mul, name,z32f), GZ.mul(z32f),z32f);
-            CheckBinaryPredMatch(binary(fmath.mul, name,z64f), GZ.mul(z64f),z64f);
+            mul_check(binary(math.mul, name, z8));
+            mul_check(binary(math.mul, name, z8i));
+            mul_check(binary(math.mul, name, z16));
+            mul_check(binary(math.mul, name, z16i));
+            mul_check(binary(math.mul, name, z32));
+            mul_check(binary(math.mul, name, z32i));
+            mul_check(binary(math.mul, name, z64));
+            mul_check(binary(math.mul, name, z64i));
+            mul_check(binary(fmath.mul, name, z32f));
+            mul_check(binary(fmath.mul, name, z64f));
         }
 
-        public void check_div()
+        [MethodImpl(Inline)]
+        void mul_check<T>(BinaryDelegate<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckBinaryPredMatch(expect, GX.mul(t), t);
+
+        public void div_check()
         {
             const string name = "div";
 
-            CheckBinaryPredMatch(binary(math.div, name, z8), GZ.div(z8), z8,true);
-            CheckBinaryPredMatch(binary(math.div, name, z8i), GZ.div(z8i), z8i,true);
-            
-            CheckBinaryPredMatch(binary(math.div, name, z16), GZ.div(z16),z16,true);
-            CheckBinaryPredMatch(binary(math.div, name,z16i), GZ.div(z16i),z16i,true);
-            
-            CheckBinaryPredMatch(binary(math.div, name,z32), GZ.div(z32),z32,true);
-            CheckBinaryPredMatch(binary(math.div, name,z32i), GZ.div(z32i),z32i,true);
-                        
-            CheckBinaryPredMatch(binary(math.div, name,z64), GZ.div(z64),z64,true);
-            CheckBinaryPredMatch(binary(math.div, name,z64i), GZ.div(z64i),z64i,true);
-
-            CheckBinaryPredMatch(binary(fmath.div, name, z32f), GZ.div(z32f),z32f,true);
-            CheckBinaryPredMatch(binary(fmath.div, name,z64f), GZ.div(z64f),z64f,true);
+            div_check(binary(math.div, name, z8));
+            div_check(binary(math.div, name, z8i));
+            div_check(binary(math.div, name, z16));
+            div_check(binary(math.div, name, z16i));
+            div_check(binary(math.div, name, z32));
+            div_check(binary(math.div, name, z32i));
+            div_check(binary(math.div, name, z64));
+            div_check(binary(math.div, name, z64i));
+            div_check(binary(fmath.div, name, z32f));
+            div_check(binary(fmath.div, name, z64f));
         }
 
-        public void check_mod()
+        [MethodImpl(Inline)]
+        void div_check<T>(BinaryDelegate<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckBinaryPredMatch(expect, GX.div(t), t,true);
+
+        public void mod_check()
         {
             const string name = "mod";
 
-            CheckBinaryPredMatch(binary(math.mod, name, z8), GZ.mod(z8), z8,true);
-            CheckBinaryPredMatch(binary(math.mod, name, z8i), GZ.mod(z8i), z8i,true);
-            
-            CheckBinaryPredMatch(binary(math.mod, name, z16), GZ.mod(z16),z16,true);
-            CheckBinaryPredMatch(binary(math.mod, name,z16i), GZ.mod(z16i),z16i,true);
-            
-            CheckBinaryPredMatch(binary(math.mod, name,z32), GZ.mod(z32),z32,true);
-            CheckBinaryPredMatch(binary(math.mod, name,z32i), GZ.mod(z32i),z32i,true);
-                        
-            CheckBinaryPredMatch(binary(math.mod, name,z64), GZ.mod(z64),z64,true);
-            CheckBinaryPredMatch(binary(math.mod, name,z64i), GZ.mod(z64i),z64i,true);
-
-            CheckBinaryPredMatch(binary(fmath.mod, name, z32f), GZ.mod(z32f),z32f,true);
-            CheckBinaryPredMatch(binary(fmath.mod, name,z64f), GZ.mod(z64f),z64f,true);
+            mod_check(binary(math.mod, name, z8));
+            mod_check(binary(math.mod, name, z8i));
+            mod_check(binary(math.mod, name, z16));
+            mod_check(binary(math.mod, name, z16i));
+            mod_check(binary(math.mod, name, z32));
+            mod_check(binary(math.mod, name, z32i));
+            mod_check(binary(math.mod, name, z64));
+            mod_check(binary(math.mod, name, z64i));
+            mod_check(binary(fmath.mod, name, z32f));
+            mod_check(binary(fmath.mod, name, z64f));
         }
 
-        public void check_modmul()
+        [MethodImpl(Inline)]
+        void mod_check<T>(BinaryDelegate<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckBinaryPredMatch(expect, GX.mod(t), t,true);
+
+        public void modmul_check()
         {
             const string name = "modmul";
 
-            CheckTernaryMatch(ternary(math.modmul, name, z8), GZ.modmul(z8), z8,true);
-            CheckTernaryMatch(ternary(math.modmul, name, z8i), GZ.modmul(z8i), z8i,true);
-            
-            CheckTernaryMatch(ternary(math.modmul, name, z16), GZ.modmul(z16),z16,true);
-            CheckTernaryMatch(ternary(math.modmul, name,z16i), GZ.modmul(z16i),z16i,true);
-            
-            CheckTernaryMatch(ternary(math.modmul, name,z32), GZ.modmul(z32),z32,true);
-            CheckTernaryMatch(ternary(math.modmul, name,z32i), GZ.modmul(z32i),z32i,true);
-                        
-            CheckTernaryMatch(ternary(math.modmul, name,z64), GZ.modmul(z64),z64,true);
-            CheckTernaryMatch(ternary(math.modmul, name,z64i), GZ.modmul(z64i),z64i,true);
+            modmul_check(ternary(math.modmul, name, z8));
+            modmul_check(ternary(math.modmul, name, z8i));
+            modmul_check(ternary(math.modmul, name, z16));
+            modmul_check(ternary(math.modmul, name, z16i));
+            modmul_check(ternary(math.modmul, name, z32));
+            modmul_check(ternary(math.modmul, name, z32i));
+            modmul_check(ternary(math.modmul, name, z64));
+            modmul_check(ternary(math.modmul, name, z64i));
+            modmul_check(ternary(math.modmul, name, z64f));
+            modmul_check(ternary(math.modmul, name, z32f));
         }
 
-        public void check_clamp()
+        [MethodImpl(Inline)]
+        void modmul_check<T>(TernaryDelegate<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckTernaryMatch(expect, GX.modmul(t), t, true);
+
+
+        public void clamp_check()
         {
             const string name = "clamp";
 
-            CheckBinaryPredMatch(binary(math.clamp, name, z8), GZ.clamp(z8), z8);
-            CheckBinaryPredMatch(binary(math.clamp, name, z8i), GZ.clamp(z8i), z8i);
-            
-            CheckBinaryPredMatch(binary(math.clamp, name, z16), GZ.clamp(z16),z16);
-            CheckBinaryPredMatch(binary(math.clamp, name,z16i), GZ.clamp(z16i),z16i);
-            
-            CheckBinaryPredMatch(binary(math.clamp, name,z32), GZ.clamp(z32),z32);
-            CheckBinaryPredMatch(binary(math.clamp, name,z32i), GZ.clamp(z32i),z32i);
-                        
-            CheckBinaryPredMatch(binary(math.clamp, name,z64), GZ.clamp(z64),z64);
-            CheckBinaryPredMatch(binary(math.clamp, name,z64i), GZ.clamp(z64i),z64i);
-
-            CheckBinaryPredMatch(binary(fmath.clamp, name,z32f), GZ.clamp(z32f),z32f);
-            CheckBinaryPredMatch(binary(fmath.clamp, name,z64f), GZ.clamp(z64f),z64f);
+            clamp_check(binary(math.clamp, name, z8));
+            clamp_check(binary(math.clamp, name, z8i));
+            clamp_check(binary(math.clamp, name, z16));
+            clamp_check(binary(math.clamp, name, z16i));
+            clamp_check(binary(math.clamp, name, z32));
+            clamp_check(binary(math.clamp, name, z32i));
+            clamp_check(binary(math.clamp, name, z64));
+            clamp_check(binary(math.clamp, name, z64i));
+            clamp_check(binary(fmath.clamp, name, z32f));
+            clamp_check(binary(fmath.clamp, name, z64f));
         }
 
-        public void check_inc()
+        [MethodImpl(Inline)]
+        void clamp_check<T>(BinaryDelegate<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckBinaryPredMatch(expect, GX.clamp(t), t);
+
+        public void inc_check()
         {
             const string name = "inc";
 
-            CheckUnaryMatch(unary(math.inc, name, z8), GZ.inc(z8), z8);
-            CheckUnaryMatch(unary(math.inc, name, z8i), GZ.inc(z8i), z8i);
-            
-            CheckUnaryMatch(unary(math.inc, name, z16), GZ.inc(z16),z16);
-            CheckUnaryMatch(unary(math.inc, name,z16i), GZ.inc(z16i),z16i);
-            
-            CheckUnaryMatch(unary(math.inc, name,z32), GZ.inc(z32),z32);
-            CheckUnaryMatch(unary(math.inc, name,z32i), GZ.inc(z32i),z32i);
-                        
-            CheckUnaryMatch(unary(math.inc, name,z64), GZ.inc(z64),z64);
-            CheckUnaryMatch(unary(math.inc, name,z64i), GZ.inc(z64i),z64i);
-
-            CheckUnaryMatch(unary(fmath.inc, name, z32f), GZ.inc(z32f),z32f);
-            CheckUnaryMatch(unary(fmath.inc, name,z64f), GZ.inc(z64f),z64f);
+            inc_check(unary(math.inc, name, z8));
+            inc_check(unary(math.inc, name, z8i));
+            inc_check(unary(math.inc, name, z16));
+            inc_check(unary(math.inc, name, z16i));
+            inc_check(unary(math.inc, name, z32));
+            inc_check(unary(math.inc, name, z32i));
+            inc_check(unary(math.inc, name, z64));
+            inc_check(unary(math.inc, name, z64i));
+            inc_check(unary(fmath.inc, name, z32f));
+            inc_check(unary(fmath.inc, name, z64f));
         }
 
-        public void check_dec()
+        [MethodImpl(Inline)]
+        void inc_check<T>(UnaryDelegate<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckUnaryMatch(expect, GX.inc(t), t);
+
+        public void dec_check()
         {
-            const string name = "dec";
+            const string name = "dec";            
 
-            CheckUnaryMatch(unary(math.dec, name, z8), GZ.dec(z8), z8);
-            CheckUnaryMatch(unary(math.dec, name, z8i), GZ.dec(z8i), z8i);
-            
-            CheckUnaryMatch(unary(math.dec, name, z16), GZ.dec(z16),z16);
-            CheckUnaryMatch(unary(math.dec, name,z16i), GZ.dec(z16i),z16i);
-            
-            CheckUnaryMatch(unary(math.dec, name,z32), GZ.dec(z32),z32);
-            CheckUnaryMatch(unary(math.dec, name,z32i), GZ.dec(z32i),z32i);
-                        
-            CheckUnaryMatch(unary(math.dec, name,z64), GZ.dec(z64),z64);
-            CheckUnaryMatch(unary(math.dec, name,z64i), GZ.dec(z64i),z64i);
-
-            CheckUnaryMatch(unary(fmath.dec, name, z32f), GZ.dec(z32f),z32f);
-            CheckUnaryMatch(unary(fmath.dec, name,z64f), GZ.dec(z64f),z64f);
+            dec_check(unary(math.dec, name, z8));
+            dec_check(unary(math.dec, name, z8i));
+            dec_check(unary(math.dec, name, z16));
+            dec_check(unary(math.dec, name, z16i));
+            dec_check(unary(math.dec, name, z32));
+            dec_check(unary(math.dec, name, z32i));
+            dec_check(unary(math.dec, name, z64));
+            dec_check(unary(math.dec, name, z64i));
+            dec_check(unary(fmath.dec, name, z32f));
+            dec_check(unary(fmath.dec, name, z64f));
         }
 
-        public void check_negate()
+        [MethodImpl(Inline)]
+        void dec_check<T>(UnaryDelegate<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckUnaryMatch(expect, GX.dec(t), t);
+
+        public void negate_check()
         {
             const string name = "negate";
 
-            CheckUnaryMatch(unary(math.negate, name, z8), GZ.negate(z8), z8);
-            CheckUnaryMatch(unary(math.negate, name, z8i), GZ.negate(z8i), z8i);
-            
-            CheckUnaryMatch(unary(math.negate, name, z16), GZ.negate(z16),z16);
-            CheckUnaryMatch(unary(math.negate, name,z16i), GZ.negate(z16i),z16i);
-            
-            CheckUnaryMatch(unary(math.negate, name,z32), GZ.negate(z32),z32);
-            CheckUnaryMatch(unary(math.negate, name,z32i), GZ.negate(z32i),z32i);
-                        
-            CheckUnaryMatch(unary(math.negate, name,z64), GZ.negate(z64),z64);
-            CheckUnaryMatch(unary(math.negate, name,z64i), GZ.negate(z64i),z64i);
-
-            CheckUnaryMatch(unary(fmath.negate, name, z32f), GZ.negate(z32f),z32f);
-            CheckUnaryMatch(unary(fmath.negate, name,z64f), GZ.negate(z64f),z64f);
+            negate_check(unary(math.negate, name, z8));
+            negate_check(unary(math.negate, name, z8i));
+            negate_check(unary(math.negate, name, z16));
+            negate_check(unary(math.negate, name, z16i));
+            negate_check(unary(math.negate, name, z32));
+            negate_check(unary(math.negate, name, z32i));
+            negate_check(unary(math.negate, name, z64));
+            negate_check(unary(math.negate, name, z64i));
+            negate_check(unary(fmath.negate, name, z32f));
+            negate_check(unary(fmath.negate, name, z64f));
         }
 
-        public void negate_exemplars()
-        {
-            var x1 = 128ul;
-            var y1 = 18446744073709551488;
-            var z1 = gmath.negate(x1);
-            Claim.eq(y1,z1);            
+        [MethodImpl(Inline)]
+        void negate_check<T>(UnaryDelegate<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckUnaryMatch(expect, GX.negate(t), t);
 
-            var x2 = 128u;
-            var y2 = 4294967168u;
-            var z2 = gmath.negate(x2);
-            Claim.eq(y2,z2);            
-
-            var x3 = (ushort)128;
-            var y3 = (ushort)65408;
-            var z3 = gmath.negate(x3);
-            Claim.eq(y3,z3);            
-
-            var x4 = (byte)128;
-            var y4 = (byte)128;
-            var z4 = gmath.negate(x4);
-            Claim.eq(y4,z4);            
-
-        }
-
-        public void check_abs()
+        public void abs_check()
         {
             const string name = "abs";
 
-            CheckUnaryMatch(unary(math.abs, name, z8i), GZ.abs(z8i), z8i);            
-            CheckUnaryMatch(unary(math.abs, name,z16i), GZ.abs(z16i),z16i);            
-            CheckUnaryMatch(unary(math.abs, name,z32i), GZ.abs(z32i),z32i);                        
-            CheckUnaryMatch(unary(math.abs, name,z64i), GZ.abs(z64i),z64i);
-            CheckUnaryMatch(unary(fmath.abs, name, z32f), GZ.abs(z32f),z32f);
-            CheckUnaryMatch(unary(fmath.abs, name,z64f), GZ.abs(z64f),z64f);
+            abs_check(unary(math.abs, name, z8i));
+            abs_check(unary(math.abs, name, z16i));
+            abs_check(unary(math.abs, name, z32i));
+            abs_check(unary(math.abs, name, z64i));
+            abs_check(unary(math.abs, name, z32f));
+            abs_check(unary(math.abs, name, z64f));
+
         }
+
+        [MethodImpl(Inline)]
+        void abs_check<T>(UnaryDelegate<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckUnaryMatch(expect, GX.abs(t), t);
 
         public void check_increments()
         {

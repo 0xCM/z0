@@ -15,25 +15,9 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IShiftOp<A> : IOp
+    public interface IShiftOp<A> : IFunc<A,byte,A>
     {
-        /// <summary>
-        /// Invokes the reified shift operator over supplied operands
-        /// </summary>
-        /// <param name="a">The source operand</param>
-        /// <param name="offset">The shift amount</param>
-        A Invoke(A a, byte offset);        
-    }
 
-    /// <summary>
-    /// Characterizes a non-variable bitwise shift operator over a primal operand
-    /// </summary>
-    /// <typeparam name="T">The operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IPrimalShiftOp<T> : IPrimalOp<T>, IShiftOp<T>
-        where T : unmanaged
-    {
-        
     }
 
     /// <summary>
@@ -41,7 +25,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOp<V> : IVectorOp<V>, IShiftOp<V>
+    public interface IVShiftOp<V> :  IShiftOp<V>
         where V : struct
     {
         
@@ -53,7 +37,7 @@ namespace Z0
     /// <typeparam name="W">The bit-width type</typeparam>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOp<W,V> : IVShiftOp<V>, IVectorOp<W,V>
+    public interface IVShiftOp<W,V> : IVShiftOp<V>
         where W : unmanaged, ITypeNat
         where V : struct
     {
@@ -67,7 +51,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOp<W,V,T> : IVShiftOp<W,V>, IVectorOp<W,V,T>    
+    public interface IVShiftOp<W,V,T> : IVShiftOp<W,V>
         where W : unmanaged, ITypeNat
         where V : struct
         where T : unmanaged

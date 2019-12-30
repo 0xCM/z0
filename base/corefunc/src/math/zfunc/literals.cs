@@ -129,6 +129,22 @@ partial class zfunc
     /// </summary>
     public const long i64min = long.MinValue;
 
+    const byte Ones8u = byte.MaxValue;
+
+    const sbyte Ones8i = -1;
+
+    const ushort Ones16u = ushort.MaxValue;
+
+    const short Ones16i = -1;
+
+    const uint Ones32u = uint.MaxValue;
+
+    const int Ones32i = -1;
+
+    const ulong Ones64u = ulong.MaxValue;
+
+    const long Ones64i = -1;
+
     /// <summary>
     /// Returns generic 0 for a primal source type
     /// </summary>
@@ -290,13 +306,13 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(byte))
-            return convert<T>(BitMasks.Ones8u);
+            return convert<T>(Ones8u);
         else if(typeof(T) == typeof(ushort))
-            return convert<T>(BitMasks.Ones16u);
+            return convert<T>(Ones16u);
         else if(typeof(T) == typeof(uint))
-            return convert<T>(BitMasks.Ones32u);
+            return convert<T>(Ones32u);
         else if(typeof(T) == typeof(ulong))
-            return convert<T>(BitMasks.Ones64u);
+            return convert<T>(Ones64u);
         else 
             return ones_i<T>();
     }
@@ -306,13 +322,13 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(sbyte))
-            return convert<T>(BitMasks.Ones8i);
+            return convert<T>(Ones8i);
         else if(typeof(T) == typeof(short))
-            return convert<T>(BitMasks.Ones16i);
+            return convert<T>(Ones16i);
         else if(typeof(T) == typeof(int))
-            return convert<T>(BitMasks.Ones32i);
+            return convert<T>(Ones32i);
         else if(typeof(T) == typeof(long))
-            return convert<T>(BitMasks.Ones64i);
+            return convert<T>(Ones64i);
         else
           throw unsupported<T>();
     }

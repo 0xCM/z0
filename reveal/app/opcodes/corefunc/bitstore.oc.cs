@@ -15,15 +15,6 @@ namespace Z0.OpCodes
     [OpCodeProvider]
     public static class bitstore
     {
-        public static ReadOnlySpan<char> hexdigits(ushort a)
-            => Hex.digits(a);
-
-        public static char hexdigit(byte a)
-            => Hex.digit(a);
-
-        public static void hexdigits(byte a, out char d0, out char d1)
-            => Hex.digits(a, out d0, out d1);
-
         public static void datablock_store(in byte src, uint count, ref Stack128 dst)
             => StackStore.store(in src, count, ref dst);
 

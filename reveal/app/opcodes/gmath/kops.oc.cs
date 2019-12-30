@@ -20,10 +20,10 @@ namespace Z0.OpCodes
             => gmath.eq(a,b);
 
         public static bit eq_o16u(ushort a, ushort b)
-            => GZ.eq<ushort>().Invoke(a,b);
+            => GX.eq<ushort>().Invoke(a,b);
 
         public static string eq_moniker()
-            => GZ.eq<ushort>().Moniker;
+            => GX.eq<ushort>().Moniker;
                      
         const string name = "thename";
 

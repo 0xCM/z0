@@ -85,10 +85,15 @@ namespace Z0
          public static BitSpan ToBitSpan(this ReadOnlySpan<ulong> src)
             => BitPack.bitspan(src);
          
-         // public static T TakeScalar<T>(this BitSpan src)
-         // {
-             
-         // }
+        [MethodImpl(Inline)]
+        static int length<T>(in BitSpan src, int offset, int? count = null)
+            where T : unmanaged
+                => math.min(count ?? bitsize<T>(), src.Length - offset - bitsize<T>());            
+
+         [MethodImpl(Inline)]
+         public static T Scalar<T>(this in BitSpan src, int offset = 0, int? count = null)
+            where T : unmanaged
+               => BitPack.scalar<T>(src,offset,count);
 
     }
 }

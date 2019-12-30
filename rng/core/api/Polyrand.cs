@@ -167,20 +167,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public T Next<T>(Interval<T> domain)
             where T : unmanaged
-            => Next(domain.Left, domain.Right);
+                => domain.Empty ? Next<T>() :  Next(domain.Left, domain.Right);
 
-        public IEnumerable<T> Take<T>(int? count = null)
+        public IEnumerable<T> Take<T>(int count)
             where T : unmanaged
         {
-            if(count != null)
-            {
-                var counter = 0;
-                while(counter++ < count)
-                    yield return Next<T>();
-            }
-            else
-                while(true)
-                    yield return Next<T>();
+            var counter = 0;
+            while(counter++ < count)
+                yield return Next<T>();
         } 
 
         IBoundPointSource<sbyte> Int8Source
@@ -426,18 +420,14 @@ namespace Z0
             return whole + NextF64();
         }
 
-        // For the logic of this, see http://mumble.net/~campbell/tmp/random_real.c
         [MethodImpl(Inline)]
         float NextF32()
             => ((float)Points.Next())/float.MaxValue; 
-            //(float)fmath.ldexp((double)Points.Next(), -32);                
 
-        // For the logic of this, see http://mumble.net/~campbell/tmp/random_real.c
         [MethodImpl(Inline)]
         double NextF64()
             => ((double)Points.Next())/double.MaxValue; 
 
-            //=> fmath.ldexp((double)Points.Next(), -64);    
     
     }
 }

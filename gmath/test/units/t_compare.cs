@@ -9,133 +9,185 @@ namespace Z0
 
     using static zfunc;
     using static OpDelegate;
+    using static OpDelegates;
 
     public class t_compare : t_gmath<t_compare>
     {     
-        public void eq()
+        public void eq_check()
         {
             const string name = "eq";
 
-            CheckBinaryPredMatch(predicate(math.eq, name, z8), GZ.eq(z8), z8);
-            CheckBinaryPredMatch(predicate(math.eq, name, z8i), GZ.eq(z8i), z8i);
-            
-            CheckBinaryPredMatch(predicate(math.eq, name, z16), GZ.eq(z16),z16);
-            CheckBinaryPredMatch(predicate(math.eq, name,z16i), GZ.eq(z16i),z16i);
-            
-            CheckBinaryPredMatch(predicate(math.eq, name,z32), GZ.eq(z32),z32);
-            CheckBinaryPredMatch(predicate(math.eq, name,z32i), GZ.eq(z32i),z32i);
-                        
-            CheckBinaryPredMatch(predicate(math.eq, name,z64), GZ.eq(z64),z64);
-            CheckBinaryPredMatch(predicate(math.eq, name,z64i), GZ.eq(z64i),z64i);
-
-            CheckBinaryPredMatch(predicate(fmath.eq, name, z32f), GZ.eq(z32f),z32f);
-            CheckBinaryPredMatch(predicate(fmath.eq, name,z64f), GZ.eq(z64f),z64f);
+            eq_check(predicate(math.eq, name, z8));
+            eq_check(predicate(math.eq, name, z8i));
+            eq_check(predicate(math.eq, name, z16));
+            eq_check(predicate(math.eq, name, z16i));
+            eq_check(predicate(math.eq, name, z32));
+            eq_check(predicate(math.eq, name, z32i));
+            eq_check(predicate(math.eq, name, z64));
+            eq_check(predicate(math.eq, name, z64i));
+            eq_check(predicate(fmath.eq, name, z32f));
+            eq_check(predicate(fmath.eq, name, z64f));
 
         }
+
+        [MethodImpl(Inline)]
+        void eq_check<T>(BinaryPred<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckBinaryPredMatch(expect, GX.eq(t), t);
 
         public void neq()
         {
             const string name = "neq";
 
-            CheckBinaryPredMatch(predicate(math.neq, name, z8), GZ.neq(z8), z8);
-            CheckBinaryPredMatch(predicate(math.neq, name, z8i), GZ.neq(z8i), z8i);
-            
-            CheckBinaryPredMatch(predicate(math.neq, name, z16), GZ.neq(z16),z16);
-            CheckBinaryPredMatch(predicate(math.neq, name,z16i), GZ.neq(z16i),z16i);
-            
-            CheckBinaryPredMatch(predicate(math.neq, name,z32), GZ.neq(z32),z32);
-            CheckBinaryPredMatch(predicate(math.neq, name,z32i), GZ.neq(z32i),z32i);
-                        
-            CheckBinaryPredMatch(predicate(math.neq, name,z64), GZ.neq(z64),z64);
-            CheckBinaryPredMatch(predicate(math.neq, name,z64i), GZ.neq(z64i),z64i);
-
-            CheckBinaryPredMatch(predicate(fmath.neq, name, z32f), GZ.neq(z32f),z32f);
-            CheckBinaryPredMatch(predicate(fmath.neq, name,z64f), GZ.neq(z64f),z64f);
+            neq_check(predicate(math.neq, name, z8));
+            neq_check(predicate(math.neq, name, z8i));
+            neq_check(predicate(math.neq, name, z16));
+            neq_check(predicate(math.neq, name, z16i));
+            neq_check(predicate(math.neq, name, z32));
+            neq_check(predicate(math.neq, name, z32i));
+            neq_check(predicate(math.neq, name, z64));
+            neq_check(predicate(math.neq, name, z64i));
+            neq_check(predicate(fmath.neq, name, z32f));
+            neq_check(predicate(fmath.neq, name, z64f));
 
         }
+
+        [MethodImpl(Inline)]
+        void neq_check<T>(BinaryPred<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckBinaryPredMatch(expect, GX.neq(t), t);
 
         public void gt()
         {
             const string name = "gt";
 
-            CheckBinaryPredMatch(predicate(math.gt, name, z8), GZ.gt(z8), z8);
-            CheckBinaryPredMatch(predicate(math.gt, name, z8i), GZ.gt(z8i), z8i);
-            
-            CheckBinaryPredMatch(predicate(math.gt, name, z16), GZ.gt(z16),z16);
-            CheckBinaryPredMatch(predicate(math.gt, name,z16i), GZ.gt(z16i),z16i);
-            
-            CheckBinaryPredMatch(predicate(math.gt, name,z32), GZ.gt(z32),z32);
-            CheckBinaryPredMatch(predicate(math.gt, name,z32i), GZ.gt(z32i),z32i);
-                        
-            CheckBinaryPredMatch(predicate(math.gt, name,z64), GZ.gt(z64),z64);
-            CheckBinaryPredMatch(predicate(math.gt, name,z64i), GZ.gt(z64i),z64i);
-
-            CheckBinaryPredMatch(predicate(fmath.gt, name, z32f), GZ.gt(z32f),z32f);
-            CheckBinaryPredMatch(predicate(fmath.gt, name,z64f), GZ.gt(z64f),z64f);
+            gt_check(predicate(math.gt, name, z8));
+            gt_check(predicate(math.gt, name, z8i));
+            gt_check(predicate(math.gt, name, z16));
+            gt_check(predicate(math.gt, name, z16i));
+            gt_check(predicate(math.gt, name, z32));
+            gt_check(predicate(math.gt, name, z32i));
+            gt_check(predicate(math.gt, name, z64));
+            gt_check(predicate(math.gt, name, z64i));
+            gt_check(predicate(fmath.gt, name, z32f));
+            gt_check(predicate(fmath.gt, name, z64f));
 
         }
+
+        [MethodImpl(Inline)]
+        void gt_check<T>(BinaryPred<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckBinaryPredMatch(expect, GX.gt(t), t);
 
         public void gteq()
         {
             const string name = "gteq";
 
-            CheckBinaryPredMatch(predicate(math.gteq, name, z8), GZ.gteq(z8), z8);
-            CheckBinaryPredMatch(predicate(math.gteq, name, z8i), GZ.gteq(z8i), z8i);
-            
-            CheckBinaryPredMatch(predicate(math.gteq, name, z16), GZ.gteq(z16),z16);
-            CheckBinaryPredMatch(predicate(math.gteq, name,z16i), GZ.gteq(z16i),z16i);
-            
-            CheckBinaryPredMatch(predicate(math.gteq, name,z32), GZ.gteq(z32),z32);
-            CheckBinaryPredMatch(predicate(math.gteq, name,z32i), GZ.gteq(z32i),z32i);
-                        
-            CheckBinaryPredMatch(predicate(math.gteq, name,z64), GZ.gteq(z64),z64);
-            CheckBinaryPredMatch(predicate(math.gteq, name,z64i), GZ.gteq(z64i),z64i);
+            gteq_check(predicate(math.gteq, name, z8));
+            gteq_check(predicate(math.gteq, name, z8i));
+            gteq_check(predicate(math.gteq, name, z16));
+            gteq_check(predicate(math.gteq, name, z16i));
+            gteq_check(predicate(math.gteq, name, z32));
+            gteq_check(predicate(math.gteq, name, z32i));
+            gteq_check(predicate(math.gteq, name, z64));
+            gteq_check(predicate(math.gteq, name, z64i));
+            gteq_check(predicate(fmath.gteq, name, z32f));
+            gteq_check(predicate(fmath.gteq, name, z64f));
 
-            CheckBinaryPredMatch(predicate(fmath.gteq, name, z32f), GZ.gteq(z32f),z32f);
-            CheckBinaryPredMatch(predicate(fmath.gteq, name,z64f), GZ.gteq(z64f),z64f);
         }
+
+
+        [MethodImpl(Inline)]
+        void gteq_check<T>(BinaryPred<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckBinaryPredMatch(expect, GX.gteq(t), t);
 
         public void lt()
         {
             const string name = "lt";
 
-            CheckBinaryPredMatch(predicate(math.lt, name, z8), GZ.lt(z8), z8);
-            CheckBinaryPredMatch(predicate(math.lt, name, z8i), GZ.lt(z8i), z8i);
-            
-            CheckBinaryPredMatch(predicate(math.lt, name, z16), GZ.lt(z16),z16);
-            CheckBinaryPredMatch(predicate(math.lt, name,z16i), GZ.lt(z16i),z16i);
-            
-            CheckBinaryPredMatch(predicate(math.lt, name,z32), GZ.lt(z32),z32);
-            CheckBinaryPredMatch(predicate(math.lt, name,z32i), GZ.lt(z32i),z32i);
-                        
-            CheckBinaryPredMatch(predicate(math.lt, name,z64), GZ.lt(z64),z64);
-            CheckBinaryPredMatch(predicate(math.lt, name,z64i), GZ.lt(z64i),z64i);
-
-            CheckBinaryPredMatch(predicate(fmath.lt, name, z32f), GZ.lt(z32f),z32f);
-            CheckBinaryPredMatch(predicate(fmath.lt, name,z64f), GZ.lt(z64f),z64f);
+            lt_check(predicate(math.lt, name, z8));
+            lt_check(predicate(math.lt, name, z8i));
+            lt_check(predicate(math.lt, name, z16));
+            lt_check(predicate(math.lt, name, z16i));
+            lt_check(predicate(math.lt, name, z32));
+            lt_check(predicate(math.lt, name, z32i));
+            lt_check(predicate(math.lt, name, z64));
+            lt_check(predicate(math.lt, name, z64i));
+            lt_check(predicate(fmath.lt, name, z32f));
+            lt_check(predicate(fmath.lt, name, z64f));
 
         }
+
+        [MethodImpl(Inline)]
+        void lt_check<T>(BinaryPred<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckBinaryPredMatch(expect, GX.lt(t), t);
 
         public void lteq()
         {
             const string name = "lteq";
 
-            CheckBinaryPredMatch(predicate(math.lteq, name, z8), GZ.lteq(z8), z8);
-            CheckBinaryPredMatch(predicate(math.lteq, name, z8i), GZ.lteq(z8i), z8i);
-            
-            CheckBinaryPredMatch(predicate(math.lteq, name, z16), GZ.lteq(z16),z16);
-            CheckBinaryPredMatch(predicate(math.lteq, name,z16i), GZ.lteq(z16i),z16i);
-            
-            CheckBinaryPredMatch(predicate(math.lteq, name,z32), GZ.lteq(z32),z32);
-            CheckBinaryPredMatch(predicate(math.lteq, name,z32i), GZ.lteq(z32i),z32i);
-                        
-            CheckBinaryPredMatch(predicate(math.lteq, name,z64), GZ.lteq(z64),z64);
-            CheckBinaryPredMatch(predicate(math.lteq, name,z64i), GZ.lteq(z64i),z64i);
-
-            CheckBinaryPredMatch(predicate(fmath.lteq, name, z32f), GZ.lteq(z32f),z32f);
-            CheckBinaryPredMatch(predicate(fmath.lteq, name,z64f), GZ.lteq(z64f),z64f);
+            lteq_check(predicate(math.lteq, name, z8));
+            lteq_check(predicate(math.lteq, name, z8i));
+            lteq_check(predicate(math.lteq, name, z16));
+            lteq_check(predicate(math.lteq, name, z16i));
+            lteq_check(predicate(math.lteq, name, z32));
+            lteq_check(predicate(math.lteq, name, z32i));
+            lteq_check(predicate(math.lteq, name, z64));
+            lteq_check(predicate(math.lteq, name, z64i));
+            lteq_check(predicate(fmath.lteq, name, z32f));
+            lteq_check(predicate(fmath.lteq, name, z64f));
 
         }
+
+        [MethodImpl(Inline)]
+        void lteq_check<T>(BinaryPred<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckBinaryPredMatch(expect, GX.lteq(t), t);
+
+        public void max_check()
+        {
+            const string name = "max";
+
+            max_check(binary(math.max, name, z8));
+            max_check(binary(math.max, name, z8i));
+            max_check(binary(math.max, name, z16));
+            max_check(binary(math.max, name, z16i));
+            max_check(binary(math.max, name, z32));
+            max_check(binary(math.max, name, z32i));
+            max_check(binary(math.max, name, z64));
+            max_check(binary(math.max, name, z64i));
+            max_check(binary(fmath.max, name, z32f));
+            max_check(binary(fmath.max, name, z64f));
+        }
+
+        [MethodImpl(Inline)]
+        void max_check<T>(BinaryDelegate<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckBinaryPredMatch(expect, GX.max(t), t);
+
+
+        public void min_check()
+        {
+            const string name = "min";
+
+            min_check(binary(math.min, name, z8));
+            min_check(binary(math.min, name, z8i));
+            min_check(binary(math.min, name, z16));
+            min_check(binary(math.min, name, z16i));
+            min_check(binary(math.min, name, z32));
+            min_check(binary(math.min, name, z32i));
+            min_check(binary(math.min, name, z64));
+            min_check(binary(math.min, name, z64i));
+            min_check(binary(fmath.min, name, z32f));
+            min_check(binary(fmath.min, name, z64f));
+        }
+
+        [MethodImpl(Inline)]
+        void min_check<T>(BinaryDelegate<T> expect, T t = default)
+            where  T : unmanaged
+                => CheckBinaryPredMatch(expect, GX.min(t), t);
 
     }
 }

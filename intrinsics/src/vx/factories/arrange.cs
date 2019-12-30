@@ -71,5 +71,27 @@ namespace Z0
             where S : unmanaged
                 => Broadcast256<S,T>.Op;
 
+        /// <summary>
+        /// Operator factory for vbyteswap_128xT
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="t">A component type representative</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static ByteSwap128<T> vbyteswap<T>(N128 w, T t = default)
+            where T : unmanaged
+                => ByteSwap128<T>.Op;
+
+        /// <summary>
+        /// Operator factory for vbyteswap_256xT
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="t">A component type representative</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static ByteSwap256<T> vbyteswap<T>(N256 w, T t = default)
+            where T : unmanaged
+                => ByteSwap256<T>.Op;
+
     }
 }

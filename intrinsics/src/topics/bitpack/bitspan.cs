@@ -14,6 +14,21 @@ namespace Z0
 
     public static partial class BitPack
     {
+         [MethodImpl(Inline)]
+         public static T scalar<T>(in BitSpan src, int offset = 0, int? count = null)
+            where T : unmanaged
+         {
+             var n = bitsize<T>();
+             Span<bit> bits = stackalloc bit[n];
+             src.Bits.Slice(offset, count ?? n).CopyTo(bits);
+             return BitPack.pack<T>(bits);             
+         }
+
+         [MethodImpl(Inline)]
+         public static T scalar<T>(in BitSpan src)
+            where T : unmanaged
+                => BitPack.pack<T>(src.Bits.Slice(0, bitsize<T>()));             
+
         [MethodImpl(Inline)]
         public static BitSpan bitspan<T>(T packed)        
             where T : unmanaged
@@ -101,19 +116,6 @@ namespace Z0
         /// <param name="buffer">The staging buffer</param>
         /// <param name="unpacked">The bitspan content buffer which must cover at least 2 blocks</param>
         [MethodImpl(Inline)]
-        public static BitSpan bitspan(in ConstBlock16<byte> packed, in Block64<byte> buffer, in Block256<uint> unpacked)
-        {
-            unpackblocks(2, in packed.Head, buffer, unpacked);            
-            return BitSpan.load(unpacked.As<bit>());            
-        }
-
-        /// <summary>
-        /// Creates a bitspan from 16 packed source bits
-        /// </summary>
-        /// <param name="packed">The packed source bits</param>
-        /// <param name="buffer">The staging buffer</param>
-        /// <param name="unpacked">The bitspan content buffer which must cover at least 2 blocks</param>
-        [MethodImpl(Inline)]
         public static BitSpan bitspan(in Block16<byte> packed, in Block64<byte> buffer, in Block256<uint> unpacked)
         {
             unpackblocks(2, in packed.Head, buffer, unpacked);            
@@ -127,35 +129,9 @@ namespace Z0
         /// <param name="buffer">The staging buffer</param>
         /// <param name="unpacked">The bitspan content buffer which must cover at least 4 blocks</param>
         [MethodImpl(Inline)]
-        public static BitSpan bitspan(in ConstBlock32<byte> packed, in Block64<byte> buffer, in Block256<uint> unpacked)
-        {
-            unpackblocks(4, in packed.Head, buffer, unpacked);            
-            return BitSpan.load(unpacked.As<bit>());            
-        }
-
-        /// <summary>
-        /// Creates a bitspan from 32 packed source bits
-        /// </summary>
-        /// <param name="packed">The packed source bits</param>
-        /// <param name="buffer">The staging buffer</param>
-        /// <param name="unpacked">The bitspan content buffer which must cover at least 4 blocks</param>
-        [MethodImpl(Inline)]
         public static BitSpan bitspan(in Block32<byte> packed, in Block64<byte> buffer, in Block256<uint> unpacked)
         {
             unpackblocks(4, in packed.Head, buffer, unpacked);            
-            return BitSpan.load(unpacked.As<bit>());            
-        }
-
-        /// <summary>
-        /// Creates a bitspan from 64 packed source bits
-        /// </summary>
-        /// <param name="packed">The packed source bits</param>
-        /// <param name="buffer">The staging buffer</param>
-        /// <param name="unpacked">The bitspan content buffer which must cover at least 8 blocks</param>
-        [MethodImpl(Inline)]
-        public static BitSpan bitspan(in ConstBlock64<byte> packed, in Block64<byte> buffer, in Block256<uint> unpacked)
-        {
-            unpackblocks(8, in packed.Head, buffer, unpacked);                        
             return BitSpan.load(unpacked.As<bit>());            
         }
 

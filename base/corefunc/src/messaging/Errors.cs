@@ -81,6 +81,10 @@ namespace Z0
             => throw AppException.Define(reason, caller,file,line);
 
         [MethodImpl(NotInline)]
+        public static T ThrowArgException<A,T>(A arg)
+            => throw new ArgumentNullException(arg?.ToString() ?? string.Empty);
+
+        [MethodImpl(NotInline)]
         public static void Throw(string reason, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw AppException.Define(reason, caller,file,line);
 

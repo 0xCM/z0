@@ -19,13 +19,14 @@ namespace Z0
 
             }        
 
+
         /// <summary>
-        /// Produces the name of the test case for the specified operator
+        /// Produces the name of the test case for the specified function
         /// </summary>
-        /// <param name="op">The operator</param>
+        /// <param name="f">The function</param>
         [MethodImpl(Inline)]
-        protected string TestCaseName(IOp op)
-            => $"{GetType().Name}/{op.Moniker}";
+        protected string TestCaseName(IFunc f)
+            => $"{GetType().Name}/{f.Moniker}";
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name
@@ -444,6 +445,68 @@ namespace Z0
             catch(Exception e)
             {                
                 error(e,TestCaseName(f));
+                succeeded = false;
+            }
+            finally
+            {
+                ReportOutcome(TestCaseName(f),succeeded,count);
+            }
+        }
+
+        protected void CheckTernaryScalarMatch<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
+            where T : unmanaged
+            where F : IVTernaryOp128D<T>
+        {
+            var cells = vcount(w,t);
+            var succeeded = true;
+            
+            count.Start();
+            try
+            {
+                for(var i=0; i<RepCount; i++)
+                {
+                    var a = Random.CpuVector(w,t);
+                    var b = Random.CpuVector(w,t);
+                    var c = Random.CpuVector(w,t);
+                    var z = f.Invoke(a,b,c);
+                    for(var j=0; j< cells; j++)
+                        Claim.eq(f.InvokeScalar(vcell(a,j),vcell(b,j), vcell(c,j)), vcell(z,j));
+                }
+            }
+            catch(Exception e)
+            {
+                error(e, TestCaseName(f));
+                succeeded = false;
+            }
+            finally
+            {
+                ReportOutcome(TestCaseName(f),succeeded,count);
+            }
+        }
+
+        protected void CheckTernaryScalarMatch<F,T>(F f, N256 w, T t = default, SystemCounter count = default)
+            where T : unmanaged
+            where F : IVTernaryOp256D<T>
+        {
+            var cells = vcount(w,t);
+            var succeeded = true;
+            
+            count.Start();
+            try
+            {
+                for(var i=0; i<RepCount; i++)
+                {
+                    var a = Random.CpuVector(w,t);
+                    var b = Random.CpuVector(w,t);
+                    var c = Random.CpuVector(w,t);
+                    var z = f.Invoke(a,b,c);
+                    for(var j=0; j< cells; j++)
+                        Claim.eq(f.InvokeScalar(vcell(a,j),vcell(b,j), vcell(c,j)), vcell(z,j));
+                }
+            }
+            catch(Exception e)
+            {
+                error(e, TestCaseName(f));
                 succeeded = false;
             }
             finally

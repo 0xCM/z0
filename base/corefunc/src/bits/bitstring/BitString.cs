@@ -584,6 +584,15 @@ namespace Z0
             return packed.Length != 0 ? packed.AsSingle<byte,T>() : default;
         }
 
+        /// <summary>
+        /// Enables a specified source bit
+        /// </summary>
+        /// <param name="src">The source value to manipulate</param>
+        /// <param name="pos">The position of the bit to enable</param>
+        [MethodImpl(Inline)]
+        static byte enable(byte src, int pos)
+            =>  src |= (byte)(1 << pos);
+
         static Span<byte> PackedBits(ReadOnlySpan<byte> src, int offset = 0, int? minlen = null)
         {            
             if(src.Length <= offset)
@@ -602,7 +611,7 @@ namespace Z0
                 {
                     var srcIx = i + k + offset;
                     if(srcIx < srcLen && src[srcIx] != 0)
-                        x = BitMask.enable(x, k);
+                        x = enable(x, k);
                 }
             }
             return dst;

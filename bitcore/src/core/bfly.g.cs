@@ -14,6 +14,25 @@ namespace Z0
 
     partial class gbits
     {
+        [MethodImpl(Inline)]
+        public static T bfly<N,T>(T a)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            if(typeof(N) == typeof(N1))
+                return bfly(n1,a);
+            else if(typeof(N) == typeof(N2))
+                return bfly(n2,a);
+            else if(typeof(N) == typeof(N4))
+                return bfly(n4,a);
+            else if(typeof(N) == typeof(N8))
+                return bfly(n8,a);
+            else if(typeof(N) == typeof(N16))
+                return bfly(n16,a);
+            else
+                throw unsupported<N>();
+        }            
+
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
         /// </summary>

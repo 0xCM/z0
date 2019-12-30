@@ -11,7 +11,7 @@ namespace Z0
 
     public class t_vbyteswap : t_vinx<t_vbyteswap>
     {   
-        public void vbyteswap_basecase()
+        public void vbyteswap_outline()
         {
             var x16 = CpuVector.vparts(n128, 
                 0b0000000011111111, 0b1111111100000000, 
@@ -47,58 +47,33 @@ namespace Z0
             Claim.eq(y32,z32);
         }
 
-
-        public void sbyteswap_16()
+        public void vbyteswap_check()
         {
-            for(var i=0; i< RepCount; i++)
-            {
-                var a = Random.Next<ushort>();
-                var b = Bits.byteswap(Bits.byteswap(a));
-                Claim.eq(a,b);
-            }
+            vbyteswap_check(n128);
+            vbyteswap_check(n256);
         }
-
-        public void sbyteswap_32()
-        {            
-            for(var i=0; i< RepCount; i++)
-            {
-                var a = Random.Next<uint>();
-                var b = Bits.byteswap(Bits.byteswap(a));
-                Claim.eq(a,b);
-            }
-        }
-
-        public void sbyteswap_64()
+        
+        void vbyteswap_check(N128 w)
         {
-            var a = (ulong)uint.MaxValue << 32;
-            var b = (ulong)uint.MaxValue;
-            Claim.eq(Bits.byteswap(a),b);
-            Claim.eq(Bits.byteswap(b),a);
-            
-            for(var i=0; i< RepCount; i++)
-            {
-                var x = Random.Next<ulong>();
-                var y = Bits.byteswap(Bits.byteswap(x));
-                Claim.eq(x,y);
-            }
+            vbyteswap_check(w,z16);    
+            vbyteswap_check(w,z32);
+            vbyteswap_check(w,z64);
         }
 
-        public void vbyteswap_128x32()
-            => vbyteswap_check_256(n128,z32);
+        void vbyteswap_check(N256 w)
+        {
+            vbyteswap_check(w,z16);    
+            vbyteswap_check(w,z32);
+            vbyteswap_check(w,z64);
+        }
 
-        public void vbyteswap_128x64()
-            => vbyteswap_check_256(n128,z64);
+        void vbyteswap_check<T>(N128 w, T t = default)
+            where T : unmanaged
+                => CheckUnaryScalarMatch(VX.vbyteswap(w,t),w,t);
 
-        public void vbyteswap_128x16()
-            => vbyteswap_check_256(n128,z16);
+        void vbyteswap_check<T>(N256 w, T t = default)
+            where T : unmanaged
+                => CheckUnaryScalarMatch(VX.vbyteswap(w,t),w,t);
 
-        public void vbyteswap_256x32()
-            => vbyteswap_check_256(n256,z32);
-
-        public void vbyteswap_256x16()
-            => vbyteswap_check_256(n256,z16);
-
-        public void vbyteswap_256x64()
-            => vbyteswap_check_256(n256,z64);
     }
 }

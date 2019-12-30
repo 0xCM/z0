@@ -20,9 +20,9 @@ namespace Z0
         /// <param name="t">A member type representative</param>
         /// <typeparam name="T">The member type</typeparam>
         [MethodImpl(Inline)]
-        public static Pair<T> alloc<T>(T t = default)
+        public static Pair<T> pair<T>(T a = default, T b = default)
             where T : unmanaged
-                => default;
+                => (a,b);
 
         /// <summary>
         /// Creates a non-homogenous, empty, mutable 2-tuple

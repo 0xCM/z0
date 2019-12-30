@@ -148,67 +148,61 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static unsafe Span<char> chars(ref CharStack2 src)
+        public static CharStack2 chars(N2 n)
+            => default;
+
+        [MethodImpl(Inline)]
+        public static CharStack4 chars(N4 n)
+            => default;
+
+        [MethodImpl(Inline)]
+        public static CharStack8 chars(N8 n)
+            => default;
+
+        [MethodImpl(Inline)]
+        public static CharStack16 chars(N16 n)
+            => default;
+
+        [MethodImpl(Inline)]
+        public static unsafe Span<char> charspan(ref CharStack2 src)
             => new Span<char>(ptr(ref src.C0), 2).AsChar();
 
         [MethodImpl(Inline)]
-        public static unsafe Span<char> chars(ref CharStack4 src)
+        public static unsafe Span<char> charspan(ref CharStack4 src)
             => new Span<char>(ptr(ref src.C0), 4).AsChar();
 
         [MethodImpl(Inline)]
-        public static unsafe Span<char> chars(ref CharStack8 src)
+        public static unsafe Span<char> charspan(ref CharStack8 src)
             => new Span<char>(ptr(ref src.C0), 8).AsChar();            
 
         [MethodImpl(Inline)]
-        public static unsafe Span<char> chars(ref CharStack16 src)
-            => new Span<char>(ptr(ref src.C0), 8).AsChar();
+        public static unsafe Span<char> charspan(ref CharStack16 src)
+            => new Span<char>(ptr(ref src.C0), 16).AsChar();
 
         [MethodImpl(Inline)]
-        public static CharStack4 concat(in CharStack2 head, in CharStack2 tail)
+        public static unsafe CharStack4 concat(in CharStack2 head, in CharStack2 tail)
         {
-            CharStack4 dst = default;
-            dst.C3 = head.C1;
-            dst.C2 = head.C0;
-            dst.C1 = tail.C1;
-            dst.C0 = tail.C0;
+            var dst = chars(n4);
+            PolyData.copy(in head.C0, ref dst.C0, 2);
+            PolyData.copy(in tail.C0, ref seek(ref dst.C0,2), 2);            
             return dst;
         }
 
         [MethodImpl(Inline)]
         public static CharStack8 concat(in CharStack4 head, in CharStack4 tail)
         {
-            CharStack8 dst = default;
-            dst.C7 = head.C3;
-            dst.C6 = head.C2;
-            dst.C5 = head.C1;
-            dst.C4 = head.C0;
-            dst.C3 = tail.C3;
-            dst.C2 = tail.C2;
-            dst.C1 = tail.C1;
-            dst.C0 = tail.C0;
+            var dst = chars(n8);
+            PolyData.copy(in head.C0, ref dst.C0, 4);
+            PolyData.copy(in tail.C0, ref seek(ref dst.C0,4), 4);            
             return dst;
         }
 
         [MethodImpl(Inline)]
         public static CharStack16 concat(in CharStack8 head, in CharStack8 tail)
         {
-            CharStack16 dst = default;
-            dst.CF = head.C7;
-            dst.CE = head.C6;
-            dst.CD = head.C5;
-            dst.CC = head.C4;
-            dst.CB = head.C3;
-            dst.CA = head.C2;
-            dst.C9 = head.C1;
-            dst.C8 = head.C0;
-            dst.C7 = tail.C7;
-            dst.C6 = tail.C6;
-            dst.C5 = tail.C5;
-            dst.C4 = tail.C4;
-            dst.C3 = tail.C3;
-            dst.C2 = tail.C2;
-            dst.C1 = tail.C1;
-            dst.C0 = tail.C0;
+            var dst = chars(n16);
+            PolyData.copy(in head.C0, ref dst.C0, 8);
+            PolyData.copy(in tail.C0, ref seek(ref dst.C0,8), 8);            
             return dst;
         }
     }

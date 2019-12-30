@@ -14,11 +14,11 @@ namespace Z0
         public void vgt_check()
         {
             
-            check(n128);
-            check(n256);
+            vgt_check(n128);
+            vgt_check(n256);
         }
 
-        void check(N128 w)
+        void vgt_check(N128 w)
         {
             v_check(w, z8);                
             v_check(w, z8i);
@@ -30,7 +30,7 @@ namespace Z0
             v_check(w, z64i);
         }
 
-        void check(N256 w)
+        void vgt_check(N256 w)
         {
             v_check(w, z8);                
             v_check(w, z8i);
@@ -49,6 +49,5 @@ namespace Z0
         void v_check<T>(N256 w, T t = default)
             where T : unmanaged
                 => CheckBinaryScalarMatch(VX.vgt(w,t), w, t);            
- 
     }
 }

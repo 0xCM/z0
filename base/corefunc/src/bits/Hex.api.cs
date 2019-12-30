@@ -13,24 +13,20 @@ namespace Z0
     public static class Hex
     {
         /// <summary>
-        /// Defines the asci character codes for uppercase hex digits 1,2, ..., 9, A, ..., F
+        /// Determines whether a character is a hex digit
         /// </summary>
-        static ReadOnlySpan<byte> HexCodes 
-            => new byte[]{48,49,50,51,52,53,54,55,56,57,65,66,67,68,69,70};
-
+        /// <param name="c">The character to test</param>
+        [MethodImpl(Inline)]
+        public static bit isdigit(char c)
+            => islo(c) || ishi(c);
+        
+        /// <summary>
+        /// Returns the hex character code for a number in the interval [0,15]
+        /// </summary>
+        /// <param name="value">The value to be hex-encoded</param>
         [MethodImpl(Inline)]
         public static byte code(byte value)
             => skip(in head(HexCodes), value & 0xf);
-
-        public static ReadOnlySpan<char> digits(byte value)
-        {
-            Span<char> digits = new char[2];
-            ref var dst = ref head(digits);
-            ref readonly var codes = ref head(HexCodes);
-            seek(ref dst, 1) = (char)skip(in codes, 0xF & value);
-            seek(ref dst, 0) = (char)skip(in codes, (value >> 4) & 0xF);
-            return digits;            
-        }
 
         [MethodImpl(Inline)]
         public static void digits(byte value, out char d0, out char d1)
@@ -40,19 +36,113 @@ namespace Z0
             d1 = (char)skip(in codes, (value >> 4) & 0xF);
         }
 
+        /// <summary>
+        /// Presuming a source value int the range [0,15], returns the corresponding hex 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         [MethodImpl(Inline)]
         public static char digit(byte value)
             => (char)skip(in head(HexCodes), 0xF & value);
 
+        [MethodImpl(Inline)]
+        public static char digit(byte value, int pos)
+            => (char)skip(in head(HexCodes), 0xF & (byte)(value >> pos*4));
+
+        [MethodImpl(Inline)]
+        public static char digit(ushort value, int pos)
+            => (char)skip(in head(HexCodes), 0xF & (byte)(value >> pos*4));
+
+        [MethodImpl(Inline)]
+        public static char digit(uint value, int pos)
+            => (char)skip(in head(HexCodes), 0xF & (byte)(value >> pos*4));
+
+        [MethodImpl(Inline)]
+        public static char digit(ulong value, int pos)
+            => (char)skip(in head(HexCodes), 0xF & (byte)(value >> pos*4));
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<char> digits<T>(T value)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return digits(uint8(value));
+            else if(typeof(T) == typeof(ushort))
+                return digits(uint16(value));
+            else if(typeof(T) == typeof(uint))
+                return digits(uint32(value));
+            else if(typeof(T) == typeof(ulong))
+                return digits(uint64(value));
+            else
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// Returns the 2-character hex representation of a byte
+        /// </summary>
+        /// <param name="value">The byte value</param>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<char> digits(byte value)
+        {
+            ref readonly var codes = ref head(HexCodes);
+            var storage = StackStore.chars(n2);
+            ref var dst = ref storage.C0;
+            
+            seek(ref dst,0) = (char)skip(in codes, 0xF & value);
+            seek(ref dst,1) = (char)skip(in codes, (value >> 4) & 0xF);
+            return StackStore.charspan(ref storage);
+        }
+
+
+        /// <summary>
+        /// Returns the 4-character hex representation of an unsigned 16-bit integer
+        /// </summary>
+        /// <param name="value">The byte value</param>
+        [MethodImpl(Inline)]
         public static ReadOnlySpan<char> digits(ushort value)
         {
-            var len = size<ushort>()*2;
-            Span<char> digits = new char[len];
-            ref var dst = ref head(digits);
+            const int count = 4;
             ref readonly var codes = ref head(HexCodes);
-            for(var i=0; i < len; i++)
-                seek(ref dst, len - i - 1) = (char)skip(in codes, (value >> i*4) & 0xF);
-            return digits;            
+            var storage = StackStore.chars(n4);
+            ref var dst = ref storage.C0;
+
+            for(var i=0; i < count; i++)
+                seek(ref dst, i) = (char)skip(in codes, (value >> i*4) & 0xF);
+            return StackStore.charspan(ref storage);
+        }
+
+        /// <summary>
+        /// Returns the 8-character hex representation of an unsigned 32-bit integer
+        /// </summary>
+        /// <param name="value">The byte value</param>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<char> digits(uint value)
+        {
+            const int count = 8;
+            ref readonly var codes = ref head(HexCodes);
+            var storage = StackStore.chars(n8);
+            ref var dst = ref storage.C0;
+
+            for(var i=0; i < count; i++)
+                seek(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
+            return StackStore.charspan(ref storage);
+        }
+
+        /// <summary>
+        /// Returns the 16-character hex representation of an unsigned 64-bit integer
+        /// </summary>
+        /// <param name="value">The byte value</param>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<char> digits(ulong value)
+        {
+            const int count = 16;
+            ref readonly var codes = ref head(HexCodes);
+            var storage = StackStore.chars(n16);
+            ref var dst = ref storage.C0;
+
+            for(var i=0; i < count; i++)
+                seek(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
+            return StackStore.charspan(ref storage);
         }
 
         [MethodImpl(Inline)]
@@ -71,7 +161,6 @@ namespace Z0
                 return hexdigits_i(src,uppercase);
             else 
                 return hexdigits_f(src,uppercase);
-
         }
 
         [MethodImpl(Inline)]
@@ -83,28 +172,15 @@ namespace Z0
         /// Parses the Hex digit if possible; otherwise raises an error
         /// </summary>
         /// <param name="c">The source character</param>
-        [MethodImpl(Inline)]    
         public static byte parse(char c)
         {
-            if(byte.TryParse(c.ToString(), out var result))
-                return result;
+            var u = Char.ToUpperInvariant(c);
+            if(islo(u))
+                return (byte)((byte)u - MinCode);
+            else if(ishi(u))
+                return (byte)((byte)u - MinHiCode + 0xA);
             else
-                return Errors.Throw<byte>($"The character {c} is not a valid hex digit");
-        }
-
-        /// <summary>
-        /// Parses valid hex digits from the source string, ignoring characters
-        /// that aren't digits
-        /// </summary>
-        /// <param name="src">The source string</param>
-        public static Span<byte> parse(string src)
-        {            
-            var offset = src.StartsWithAny(items("0x","0X"))  ? 2 : 0;
-            var len = src.Length - offset;
-            Span<byte> dst = new byte[len];
-            for(var i = offset; i< len; i++)
-                dst[i] = parse(src[i]);
-            return dst;            
+                return Errors.ThrowArgException<char,byte>(c);
         }
 
         [MethodImpl(Inline)]
@@ -155,5 +231,29 @@ namespace Z0
             else
                 throw unsupported<T>();
         } 
+
+        const byte MinCode = 48;
+        
+        const byte MaxLoCode = 57;
+
+        const byte MinHiCode = 65;
+
+        const byte MaxCode = 70;
+
+        /// <summary>
+        /// Defines the asci character codes for uppercase hex digits 1,2, ..., 9, A, ..., F
+        /// </summary>
+        static ReadOnlySpan<byte> HexCodes 
+            => new byte[]{48,49,50,51,52,53,54,55,56,57,65,66,67,68,69,70};
+
+        [MethodImpl(Inline)]
+        static bit islo(char c)
+            => (byte)c >= MinCode && (byte)c <= MaxLoCode;
+
+        [MethodImpl(Inline)]
+        static bit ishi(char c)
+            => (byte)c >= MinHiCode && (byte)c <= MaxCode;
+
+
     }
 }

@@ -10,62 +10,13 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Common non-parametric interface for binary operators
-    /// </summary>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IBinaryOp : IOp
-    {
-        
-    }
-
-    /// <summary>
     /// Characterizes a binary operator
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IBinaryOp<A> : IBinaryOp
+    public interface IBinaryOp<A> : IFunc<A,A,A>
     {
-        /// <summary>
-        /// Invokes the reified binary operator over supplied operands
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        A Invoke(A a, A b);        
-    }
-
-    /// <summary>
-    /// Characterizes a binary operator over primal operands
-    /// </summary>
-    /// <typeparam name="T">The primal operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IPrimalBinOp<T> : IPrimalOp<T>, IBinaryOp<T>
-        where T : unmanaged
-    {
-        
-    }
-
-    /// <summary>
-    /// Characterizes a vectorized binary operator
-    /// </summary>
-    /// <typeparam name="V">The operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVBinOp<V> : IVectorOp<V>, IBinaryOp<V>
-        where V : struct
-    {
-        
-    }
-
-    /// <summary>
-    /// Characterizes a vectorized binary operator parameterized by operand bit width
-    /// </summary>
-    /// <typeparam name="W">The bit-width type</typeparam>
-    /// <typeparam name="V">The operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVBinOp<W,V> : IVBinOp<V>, IVectorOp<W,V>
-        where W : unmanaged, ITypeNat
-        where V : struct
-    {
-
+    
     }
 
     /// <summary>
@@ -75,7 +26,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinOp<W,V,T> : IVBinOp<W,V>
+    public interface IVBinOp<W,V,T> : IBinaryOp<V>
         where W : unmanaged, ITypeNat
         where V : struct
         where T : unmanaged
@@ -137,6 +88,4 @@ namespace Z0
     {
         
     }
-
- 
 }

@@ -10,15 +10,13 @@ namespace Z0
 
     using static zfunc;
 
-
     public static class StackContainers
     {
         public ref struct Stack128
         {
             public ulong X0;
 
-            public ulong X1;        
-            
+            public ulong X1;                    
         }
 
         /// <summary>
@@ -83,103 +81,102 @@ namespace Z0
 
             ulong X4;
 
-            public ulong X5;
+            ulong X5;
             
-            public ulong X6;
+            ulong X6;
 
-            public ulong X7;
+            ulong X7;
 
-            public ulong X8;
+            ulong X8;
 
-            public ulong X9;
+            ulong X9;
             
-            public ulong XA;
+            ulong XA;
 
-            public ulong XB;
+            ulong XB;
 
-            public ulong XC;
+            ulong XC;
 
-            public ulong XD;
+            ulong XD;
             
-            public ulong XE;
+            ulong XE;
 
-            public ulong XF;
+            ulong XF;
         }
 
         public ref struct CharStack2
         {
-            public char C0;
+            internal char C0;
 
-            public char C1;
+            char C1;
 
         }
 
         public ref struct CharStack4
         {
-            public char C0;
+            internal char C0;
 
-            public char C1;
+            char C1;
 
-            public char C2;
+            char C2;
 
-            public char C3;
+            char C3;
         }
 
         public ref struct CharStack8
         {
-            public char C0;
+            internal char C0;
 
-            public char C1;
+            char C1;
 
-            public char C2;
+            char C2;
 
-            public char C3;
+            char C3;
 
-            public char C4;
+            char C4;
 
-            public char C5;
+            char C5;
 
-            public char C6;
+            char C6;
 
-            public char C7;
+            char C7;
 
         }
 
         public ref struct CharStack16
         {
-            public char C0;
+            internal char C0;
 
-            public char C1;
+            char C1;
 
-            public char C2;
+            char C2;
 
-            public char C3;
+            char C3;
 
-            public char C4;
+            char C4;
 
-            public char C5;
+            char C5;
 
-            public char C6;
+            char C6;
 
-            public char C7;
+            char C7;
 
-            public char C8;
+            char C8;
 
-            public char C9;
+            char C9;
 
-            public char CA;
+            char CA;
 
-            public char CB;
+            char CB;
 
-            public char CC;
+            char CC;
 
-            public char CD;
+            char CD;
 
-            public char CE;
+            char CE;
 
-            public char CF;
+            char CF;
         
         }
     }
-
 }

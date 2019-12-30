@@ -18,6 +18,8 @@ namespace Z0
     public readonly struct Interval<T> : IInterval<T>
         where T : unmanaged
     {
+        public static Interval<T> Zero => default;
+
         /// <summary>
         /// The left endpoint
         /// </summary>
@@ -86,9 +88,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public Interval(T left, bool leftclosed, T right, bool rightclosed)
         {
-            if(left.Equals(right))
-                Degenerate(left,right);
-
             this.Left = left;
             this.Right = right;
             this.Kind = DetermineKind(leftclosed,rightclosed);
@@ -97,14 +96,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public Interval(T left, T right, IntervalKind kind)
         {
-            if(left.Equals(right))
-                Degenerate(left,right);
-
             this.Left = left;
             this.Right = right;
             this.Kind = kind;
         }
-
 
         /// <summary>
         /// Specifies whether the interval is left-closed, or equivalently right-open, denoted by [Left,Right),
@@ -188,6 +183,23 @@ namespace Z0
             get => Kind == IntervalKind.Open &&  Left.Equals(minval<T>()) && Right.Equals(maxval<T>());
         }
 
+        /// <summary>
+        /// Specifies whether the left and right enpoints are the same
+        /// </summary>
+        public bool Degenerate
+        {
+            [MethodImpl(Inline)]
+            get => Left.Equals(Right);
+        }
+
+        /// <summary>
+        /// Specifies whether the interval is the zero interval
+        /// </summary>
+        public bool Empty
+        {
+            [MethodImpl(Inline)]
+            get => Left.Equals(default) && Right.Equals(default) && Closed;
+        }
 
         T IInterval<T>.Left 
             => Left;
@@ -273,8 +285,5 @@ namespace Z0
         
         char Separator => AsciSym.Comma;        
 
-        [MethodImpl(NotInline)]
-        static void Degenerate(T left, T right)
-            => throw new Exception($"Interval with left = {left} and right = {right} collapses to a point and is considered invalid");
    }
 }

@@ -15,26 +15,9 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ITernaryOp<A> : IOp
+    public interface ITernaryOp<A> : IFunc<A,A,A,A>
     {
-        /// <summary>
-        /// Invokes the reified ternary operator over supplied operands
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        /// <param name="c">The third operand</param>
-        A Invoke(A a, A b, A c);        
-    }
 
-    /// <summary>
-    /// Characterizes a ternary operator over primal operands
-    /// </summary>
-    /// <typeparam name="T">The primal operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IPrimalTernaryOp<T> : IPrimalOp<T>, ITernaryOp<T>
-        where T : unmanaged
-    {
-        
     }
 
     /// <summary>
@@ -42,7 +25,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryOp<V> : IVectorOp<V>, ITernaryOp<V>
+    public interface IVTernaryOp<V> : ITernaryOp<V>
         where V : struct
     {
         
@@ -54,7 +37,7 @@ namespace Z0
     /// <typeparam name="W">The bit-width type</typeparam>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryOp<W,V> : IVTernaryOp<V>, IVectorOp<W,V>
+    public interface IVTernaryOp<W,V> : IVTernaryOp<V>
         where W : unmanaged, ITypeNat
         where V : struct
     {

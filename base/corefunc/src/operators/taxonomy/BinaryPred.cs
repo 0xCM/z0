@@ -10,10 +10,15 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Security;
 
+    /// <summary>
+    /// Chracterizes a heterogenous binary predicate
+    /// </summary>
+    /// <typeparam name="A">The first operand type</typeparam>
+    /// <typeparam name="B">The second operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IBinaryPred<A,B> : IOp
+    public interface IBinaryPred<A,B> : IFunc<A,B,bit>
     {
-        bit Invoke(A a, B b);        
+        
     }
 
     /// <summary>
@@ -27,34 +32,12 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a binary predicate over primal operands
-    /// </summary>
-    /// <typeparam name="T">The operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IPrimalBinaryPred<T> : IPrimalOp<T>, IBinaryPred<T>
-        where T : unmanaged
-    {
-        
-    }
-
-    /// <summary>
-    /// Characterizes a binary predicate over non-primal operands
-    /// </summary>
-    /// <typeparam name="V">The non-primal operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryPred<V> : IVectorOp<V>, IBinaryPred<V>
-        where V : struct
-    {
-        
-    }
-
-    /// <summary>
     /// Characterizes a natural binary predicate over non-primal operands
     /// </summary>
     /// <typeparam name="W">The natural type</typeparam>
     /// <typeparam name="V">The non-primal operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryPred<W,V> : IBinaryPred<V>, IVectorOp<W,V>
+    public interface IVBinaryPred<W,V> : IBinaryPred<V>
         where W : unmanaged, ITypeNat
         where V : struct
     {
@@ -79,7 +62,7 @@ namespace Z0
     /// <typeparam name="V">The non-primal type</typeparam>
     /// <typeparam name="T">The scalar type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryPred<W,V,T> : IVBinaryPred<W,V>, IVectorOp<W,V,T>    
+    public interface IVBinaryPred<W,V,T> : IVBinaryPred<W,V>
         where W : unmanaged, ITypeNat
         where V : struct
         where T : unmanaged

@@ -94,14 +94,5 @@ namespace Z0
         /// <param name="x">The potential value</param>
         public static string format<X>(in Option<X> x)
             => x.MapValueOrElse(value => value?.ToString() ?? string.Empty, () => string.Empty);
-
-        /// <summary>
-        /// Returns the first option with a value, if possible; otherwise, raises an exception
-        /// </summary>
-        /// <typeparam name="K">A constraint to which all supplied options conform</typeparam>
-        /// <param name="options">To options to search</param>
-        /// <returns></returns>
-        public static K first<K>(params IOption[] options)
-            => (K)options.First(o => o.IsSome).Value;
     }
 }

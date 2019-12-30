@@ -15,7 +15,7 @@ namespace Z0
         [StructLayout(LayoutKind.Sequential)]
         public struct Fixed128
         {
-            public ulong X0;
+            internal ulong X0;
 
             public ulong X1;        
         }

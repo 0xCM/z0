@@ -15,14 +15,15 @@ namespace Z0
     partial class zfoc
     {
 
+        public static byte hexcode_parse(char c)
+            => Hex.parse(c);
+
         public static Pair<ulong> sub_128u_a(Pair<ulong> a, Pair<ulong> b)
             => Math128.sub(a,b);
 
         public static void sub_128u_b(in ulong a, in ulong b, ref ulong c)
             => Math128.sub(a,b, ref c);
-
-            
-
+        
         public static void mul_128u(Pair<ulong> src, ref Pair<ulong> dst)
             => Math128.mul(in src, ref dst);
 

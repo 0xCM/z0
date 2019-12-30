@@ -13,24 +13,24 @@ namespace Z0
 
     public class t_vconcat : t_vinx<t_vconcat>
     {     
-        public void check()
+        public void vconcat_check()
         {
             var w = n128;
-            CheckExec(w,z8);
-            CheckExec(w,z8i);
-            CheckExec(w,z16);
-            CheckExec(w,z16i);
-            CheckExec(w,z32);
-            CheckExec(w,z32i);
-            CheckExec(w,z64);
-            CheckExec(w,z64i);
+            vconcat_check(w,z8);
+            vconcat_check(w,z8i);
+            vconcat_check(w,z16);
+            vconcat_check(w,z16i);
+            vconcat_check(w,z32);
+            vconcat_check(w,z32i);
+            vconcat_check(w,z64);
+            vconcat_check(w,z64i);
         }
 
-        protected void CheckExec<T>(N128 w, T t = default)
+        void vconcat_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckAction(() => Checker(w,t), TestCaseName(@op(w,t)));
+                => CheckAction(() => vconcat_checker(w,t), TestCaseName(VX.vconcat(w,t)));
 
-        protected Action<N128,T> Checker<T>(N128 w, T t = default)
+        Action<N128,T> vconcat_checker<T>(N128 w, T t = default)
             where T : unmanaged
                 => check<T>;
 
@@ -41,7 +41,7 @@ namespace Z0
             {
                 var x = Random.CpuVector(w,t);
                 var y = Random.CpuVector(w,t);
-                var z = @op(w,t).Invoke(x,y);
+                var z = VX.vconcat(w,t).Invoke(x,y);
 
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
@@ -49,12 +49,6 @@ namespace Z0
                 Claim.eq(expect,z);
             }
         }
-
-
-        [MethodImpl(Inline)]
-        Concat2x128<T> @op<T>(N128 w, T t = default)
-            where T : unmanaged
-                => VX.vconcat(w,t);
 
     }
 }

@@ -9,9 +9,9 @@ namespace Z0
         
     using static zfunc;    
 
-    partial class GZTypes
+    partial class GXTypes
     {
-        public readonly struct Parse<T>  : IPrimalParser<T>
+        public readonly struct Parse<T>  : IParser<T>
             where T : unmanaged        
         {
             public static Parse<T> Op => default;

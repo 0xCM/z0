@@ -6,11 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Collections.Generic;
-    using static zfunc;
 
-    using static t_enums.Choices8u;
+    using static zfunc;
 
     public sealed class t_enums : UnitTest<t_enums>
     {

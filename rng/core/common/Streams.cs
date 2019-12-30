@@ -130,18 +130,7 @@ namespace Z0
         public static IRandomStream<T> Stream<T>(this IPolyrand random, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
                 => stream(random.UniformStream(domain,filter), random.RngKind);
-
         
-        /// <summary>
-        /// Produces a stream of nonzero uniformly random values
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="domain">If specified, the domain of the random variable</param>
-        /// <typeparam name="T">The element type</typeparam>
-        public static IRandomStream<T> NonZeroStream<T>(this IPolyrand random, Interval<T>? domain = null)
-                where T : unmanaged
-                    => stream(random.UniformStream(domain, x => gmath.nonz(x)), random.RngKind);
-
         /// <summary>
         /// Produces a stream of nonzero uniformly random values
         /// </summary>
@@ -175,8 +164,16 @@ namespace Z0
         static IEnumerable<T> UnfilteredStream<T>(this IPolyrand src, Interval<T> domain)
             where T : unmanaged
         {
-            while(true)
-                yield return src.Next<T>(domain.Left, domain.Right);
+            if(domain.Empty)
+            {
+                while(true)
+                    yield return src.Next<T>();    
+            }
+            else
+            {
+                while(true)
+                    yield return src.Next<T>(domain.Left, domain.Right);
+            }
         }
 
         static IEnumerable<T> FilteredStream<T>(this IPolyrand src, Interval<T> domain, Func<T,bool> filter)
@@ -201,7 +198,5 @@ namespace Z0
                 }
             }
         }
-
     }
-
 }

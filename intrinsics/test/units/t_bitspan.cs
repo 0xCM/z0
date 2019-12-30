@@ -225,67 +225,29 @@ namespace Z0
             }
         }
 
-        public void bitspan_to_scalar8()
-        {
-            var n = n8;
-            for(var i=0; i< RepCount; i++)
-            {
-                var src = Random.Single(n);
 
-                var bs = src.ToBitSpan();            
-                Claim.eq(n,bs.Length);        
-                
-                var dst = BitPack.pack(bs,n);
-                Claim.eq(src,dst);
-            }            
-        }
+        public void bitspan_to_scalar8()
+            => bitspan_to_scalar(z8);
 
         public void bitspan_to_scalar16()
-        {
-            var n = n16;            
-            for(var i=0; i< RepCount; i++)
-            {
-                var src = Random.Single(n);
-                
-                var bs = src.ToBitSpan();            
-                Claim.eq(n,bs.Length);        
-
-                var dst = BitPack.pack(bs,n);
-                Claim.eq(src,dst);
-            }            
-        }
+            => bitspan_to_scalar(z16);
 
         public void bitspan_to_scalar32()
-        {
-            var n = n32;            
-            for(var i=0; i< RepCount; i++)
-            {
-                var src = Random.Single(n);
-
-                var bs = src.ToBitSpan();            
-                Claim.eq(n,bs.Length);        
-
-                var dst = BitPack.pack(bs,n);
-                Claim.eq(src,dst);
-
-            }
-            
-        }
+            => bitspan_to_scalar(z32);
 
         public void bitspan_to_scalar64()
+            => bitspan_to_scalar(z64);
+
+        public void ones_check()
         {
-            var n = n64;            
-
-            for(var i=0; i<RepCount; i++)
-            {
-                var src = Random.Single(n);            
-                
-                var bs = src.ToBitSpan();    
-                Claim.eq(n, bs.Length);    
-
-                Claim.eq(src,BitPack.pack(bs,n));
-            }
-
+            ones_check(z8);   
+            ones_check(z8i);   
+            ones_check(z16);   
+            ones_check(z16i);   
+            ones_check(z32);   
+            ones_check(z32i);   
+            ones_check(z64);   
+            ones_check(z64i);   
         }
 
         static void ones_check<T>(T t = default)
@@ -299,16 +261,16 @@ namespace Z0
 
         }
 
-        public void ones_check()
+        void bitspan_to_scalar<T>(T t = default)
+            where T : unmanaged
         {
-            ones_check(z8);   
-            ones_check(z8i);   
-            ones_check(z16);   
-            ones_check(z16i);   
-            ones_check(z32);   
-            ones_check(z32i);   
-            ones_check(z64);   
-            ones_check(z64i);   
+            for(var i=0; i< RepCount; i++)
+            {
+                var x = Random.Next<T>();
+                var y = BitPack.bitspan(x);
+                var z = BitPack.scalar<T>(y);
+                Claim.eq(x,z);
+            }            
         }
 
         protected static void bitspan_check(Span<byte> packed, BitSpan bitspan)

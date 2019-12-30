@@ -45,7 +45,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T NonZero<T>(this IPolyrand src)
             where T : unmanaged
-                => src.NonZeroStream<T>().First();
+                => src.NonZeroStream<T>((TypeMin<T>(), TypeMax<T>())).First();
 
         /// <summary>
         /// Queries the source for the next nonzero value within a range
@@ -77,16 +77,6 @@ namespace Z0
          [MethodImpl(Inline)]
          public static double Next(this IPolyrand src, double min, double max, bool truncate = false)
             => truncate ?  Math.Floor(src.Next(min,max)) :  src.Next(min,max);
-
-        /// <summary>
-        /// Queries the source for the next value in the interval [0, max) if max >= 0
-        /// </summary>
-        /// <param name="random">The stateful source on which the generation is predicated</param>
-        /// <param name="max">The exclusive maximum</param>
-        [MethodImpl(Inline)]
-        internal static int Next(this IBoundPointSource<ulong> random, int max)
-            => max >= 0 ? (int)random.Next((ulong)max) 
-                : - (int)random.Next((ulong) (Int32.MaxValue + max));        
 
         /// <summary>
         /// Produces a random stream predicated on a point source

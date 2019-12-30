@@ -171,15 +171,6 @@ namespace Z0
             where T : unmanaged
                 => BitString.scalars(src.Data, maxbits ?? ConstBlock256<T>.N);
 
-        /// <summary>
-        /// Converts a bitview to a bitstring
-        /// </summary>
-        /// <param name="src">The view source</param>
-        /// <typeparam name="T">The data type on which the view is predicated</typeparam>
-        [MethodImpl(Inline)]   
-        public static BitString ToBitString<T>(this BitView<T> src, int? maxbits = null)
-            where T : unmanaged
-                => src.Bytes.ToBitString(maxbits);
     
  
         /// <summary>
