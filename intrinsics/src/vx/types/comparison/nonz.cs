@@ -12,10 +12,10 @@ namespace Z0
 
     partial class VXTypes
     {
-        public readonly struct Nonz128<T> : IVUnaryPred128D<T>
+        public readonly struct NonZ128<T> : IVUnaryPred128D<T>
             where T : unmanaged
         {
-            public static Nonz128<T> Op => default;
+            public static NonZ128<T> Op => default;
 
             public string Moniker => moniker<N128,T>("vnonz");
 
@@ -26,10 +26,10 @@ namespace Z0
             public bit InvokeScalar(T a) => gmath.nonz(a);
         }
 
-        public readonly struct Nonz256<T> : IVUnaryPred256D<T>
+        public readonly struct NonZ256<T> : IVUnaryPred256D<T>
             where T : unmanaged
         {
-            public static Nonz256<T> Op => default;
+            public static NonZ256<T> Op => default;
 
             public string Moniker => moniker<N256,T>("vnonz");
 

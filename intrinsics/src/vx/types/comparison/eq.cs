@@ -19,7 +19,6 @@ namespace Z0
 
             public const string Name = "veq";
 
-
             public string Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]

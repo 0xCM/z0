@@ -12,36 +12,31 @@ namespace Z0
 
     partial class VXTypes
     {
-        public readonly struct Negate128<T> : IVUnaryOp128D<T>
+        public readonly struct Ones128<T> : IVPatternSource128<T>
             where T : unmanaged
         {
-            public static Negate128<T> Op => default;
+            public static Ones128<T> Op => default;
 
-            public const string Name = "vnegate";
+            public const string Name = "vones";
 
             public string Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x) => ginx.vnegate(x);
-            
-            [MethodImpl(Inline)]
-            public T InvokeScalar(T a) => gmath.negate(a);
+            public Vector128<T> Invoke() => CpuVector.vones<T>(n128);            
         }
 
-        public readonly struct Negate256<T> : IVUnaryOp256D<T>
+        public readonly struct Ones256<T> : IVPatternSource256<T>
             where T : unmanaged
         {
-            public static Negate256<T> Op => default;
+            public static Ones256<T> Op => default;
 
-            public const string Name = "vnegate";
+            public const string Name = "vones";
 
             public string Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x) => ginx.vnegate(x);
+            public Vector256<T> Invoke() => CpuVector.vones<T>(n256);
 
-            [MethodImpl(Inline)]
-            public T InvokeScalar(T a) => gmath.negate(a);
         }
     }
 }

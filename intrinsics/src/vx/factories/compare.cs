@@ -131,9 +131,9 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static Nonz128<T> vnonz<T>(N128 w, T t = default)
+        public static NonZ128<T> vnonz<T>(N128 w, T t = default)
             where T : unmanaged
-                => Nonz128<T>.Op;
+                => NonZ128<T>.Op;
 
         /// <summary>
         /// Operator factory for vnonz_256xT
@@ -142,9 +142,9 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static Nonz256<T> vnonz<T>(N256 w, T t = default)
+        public static NonZ256<T> vnonz<T>(N256 w, T t = default)
             where T : unmanaged
-                => Nonz256<T>.Op;
+                => NonZ256<T>.Op;
 
         /// <summary>
         /// Operator factory for vtestc_128xT
@@ -153,9 +153,9 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static Testc128<T> vtestc<T>(N128 w, T t = default)
+        public static TestC128<T> vtestc<T>(N128 w, T t = default)
             where T : unmanaged
-                => Testc128<T>.Op;
+                => TestC128<T>.Op;
 
         /// <summary>
         /// Operator factory for vtestc_256xT
@@ -164,9 +164,9 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static Testc256<T> vtestc<T>(N256 w, T t = default)
+        public static TestC256<T> vtestc<T>(N256 w, T t = default)
             where T : unmanaged
-                => Testc256<T>.Op;
+                => TestC256<T>.Op;
 
         /// <summary>
         /// Operator factory for vtestz_128xT
@@ -175,9 +175,9 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static Testz128<T> vtestz<T>(N128 w, T t = default)
+        public static TestZ128<T> vtestz<T>(N128 w, T t = default)
             where T : unmanaged
-                => Testz128<T>.Op;
+                => TestZ128<T>.Op;
 
         /// <summary>
         /// Operator factory for vtestz_256xT
@@ -186,8 +186,8 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static Testz256<T> vtestz<T>(N256 w, T t = default)
+        public static TestZ256<T> vtestz<T>(N256 w, T t = default)
             where T : unmanaged
-                => Testz256<T>.Op;
+                => TestZ256<T>.Op;
     }
 }

@@ -92,6 +92,5 @@ namespace Z0
         public static ByteSwap256<T> vbyteswap<T>(N256 w, T t = default)
             where T : unmanaged
                 => ByteSwap256<T>.Op;
-
     }
 }

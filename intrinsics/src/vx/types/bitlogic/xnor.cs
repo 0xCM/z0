@@ -17,11 +17,12 @@ namespace Z0
         {
             public static Xnor128<T> Op => default;
 
-            public string Moniker => moniker<N128,T>("vxnor");
+            public const string Name = "vxnor";
+
+            public string Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
-                => ginx.vxnor(x,y);
+            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vxnor(x,y);
             
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b) => gmath.xnor(a,b);
@@ -30,9 +31,10 @@ namespace Z0
         public readonly struct Xnor256<T> : IVBinOp256D<T>
             where T : unmanaged
         {
-            public static Xnor256<T> Op => default;
+            public static Xnor256<T> Op => default;        
+            public const string Name = "vxnor";
 
-            public string Moniker => moniker<N256,T>("vxnor");
+            public string Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vxnor(x,y);

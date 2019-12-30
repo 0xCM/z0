@@ -20,8 +20,7 @@ namespace Z0
             public string Moniker => moniker<N128,T>("vnot");
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x)
-                => ginx.vnot(x);
+            public Vector128<T> Invoke(Vector128<T> x) => ginx.vnot(x);
             
             [MethodImpl(Inline)]
             public T InvokeScalar(T a) => gmath.not(a);
@@ -35,8 +34,7 @@ namespace Z0
             public string Moniker => moniker<N256,T>("vnot");
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x)
-                => ginx.vnot(x);
+            public Vector256<T> Invoke(Vector256<T> x) => ginx.vnot(x);
 
             [MethodImpl(Inline)]
             public T InvokeScalar(T a) => gmath.not(a);

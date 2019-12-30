@@ -17,7 +17,9 @@ namespace Z0
         {
             public static XorNot128<T> Op => default;
 
-            public string Moniker => moniker<N128,T>("vxornot");
+            public const string Name = "vxornot";
+
+            public string Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vxornot(x,y);
@@ -31,7 +33,9 @@ namespace Z0
         {
             public static XorNot256<T> Op => default;
 
-            public string Moniker => moniker<N256,T>("vxornot");
+            public const string Name = "vxornot";
+
+            public string Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vxornot(x,y);

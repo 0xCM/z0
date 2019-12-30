@@ -17,11 +17,12 @@ namespace Z0
         {
             public static Or128<T> Op => default;
 
-            public string Moniker => moniker<N128,T>("vor");
+            public const string Name = "vor";
+
+            public string Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
-                => ginx.vor(x,y);
+            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vor(x,y);
             
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b) => gmath.or(a,b);
@@ -32,11 +33,12 @@ namespace Z0
         {
             public static Or256<T> Op => default;
 
-            public string Moniker => moniker<N256,T>("vor");
+            public const string Name = "vor";
+
+            public string Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)
-                => ginx.vor(x,y);
+            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vor(x,y);
 
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b) => gmath.or(a,b);

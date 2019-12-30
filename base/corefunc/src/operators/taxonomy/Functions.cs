@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Security;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;
 
@@ -17,7 +18,17 @@ namespace Z0
         /// </summary>
         string Moniker {get;}        
     }
-    
+
+    /// <summary>
+    /// Characterizes an emitter
+    /// </summary>
+    /// <typeparam name="A">The emission type</typeparam>    
+    [SuppressUnmanagedCodeSecurity]
+    public interface IFunc<A> : IFunc
+    {
+        A Invoke();
+    }
+
     /// <summary>
     /// Characterizes a unary function
     /// </summary>
@@ -167,4 +178,14 @@ namespace Z0
 
     }
 
+    /// <summary>
+    /// Characterizes a function that produces a 128-bit vector from a 256-bit vector
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    public interface IVReducer256<T> : IVFunc<N256,N128,Vector256<T>,Vector128<T>,T,T>
+        where T : unmanaged
+    {
+
+
+    }
 }

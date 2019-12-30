@@ -24,6 +24,29 @@ namespace Z0
                 => vgeneric<T>(CpuVector.vscalar(n128, vcell(v64u(src),1)));
 
         /// <summary>
+        /// Extracts hi 128-bit lane of the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="pos">The index of the lane to extract</param>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vhi<T>(Vector256<T> src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return vhi_u(src);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return vhi_i(src);
+            else 
+                return vhi_f(src);
+        }
+
+        /// <summary>
         /// Extracts the hi 128-bit lane of the source vector to scalar targets
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -59,28 +82,6 @@ namespace Z0
             where T : unmanaged
                 => src.Hi;       
 
-        /// <summary>
-        /// Extracts hi 128-bit lane of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="pos">The index of the lane to extract</param>
-        [MethodImpl(Inline)]
-        public static Vector128<T> vhi<T>(Vector256<T> src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vhi_u(src);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vhi_i(src);
-            else 
-                return vhi_f(src);
-        }
         [MethodImpl(Inline)]
         static Vector128<T> vhi_i<T>(Vector256<T> src)
             where T : unmanaged

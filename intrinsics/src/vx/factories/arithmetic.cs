@@ -14,7 +14,6 @@ namespace Z0
 
     partial class VX
     {
-
         /// <summary>
         /// Operator factory for vadd_128xT
         /// </summary>

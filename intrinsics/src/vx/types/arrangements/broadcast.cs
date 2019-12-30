@@ -67,7 +67,5 @@ namespace Z0
             public Vector256<T> Invoke(S a) => CpuVector.vbroadcast(n256, convert<S,T>(a));
             
         }
-
-  
     }
 }

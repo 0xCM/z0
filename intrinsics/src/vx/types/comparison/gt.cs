@@ -17,14 +17,15 @@ namespace Z0
         {
             public static Gt128<T> Op => default;
 
-            public string Moniker => moniker<N128,T>("vgt");
+            public const string Name = "vgt";
+
+            public string Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vgt(x,y);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b)
-                => gmath.mul(convert<T>((uint)gmath.gt(a,b)),gmath.ones<T>());
+            public T InvokeScalar(T a, T b) => gmath.gtz(a,b);
 
         }
 
@@ -33,14 +34,15 @@ namespace Z0
         {
             public static Gt256<T> Op => default;
 
-            public string Moniker => moniker<N256,T>("vgt");
+            public const string Name = "vgt";
+
+            public string Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vgt(x,y);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b)
-                => gmath.mul(convert<T>((uint)gmath.gt(a,b)), gmath.ones<T>());
+            public T InvokeScalar(T a, T b) => gmath.gtz(a,b);
         } 
     }
 }

@@ -10,109 +10,48 @@ namespace Z0
 
     public class t_vnegate : t_vinx<t_vnegate>
     {
-        public void vnegate_128x8i()
-            => vnegate_check(n128,z8i);
 
-        public void vnegate_128x16i()
-            => vnegate_check(n128,z16i);
+        public void vnegate_check()
+        {
+            vnegate_check(n128);
+            vnegate_check(n256);
+        }
+        
+        void vnegate_check(N128 w)
+        {
+            vnegate_check(w,z8);
+            vnegate_check(w,z8i);
+            vnegate_check(w,z16);
+            vnegate_check(w,z16i);
+            vnegate_check(w,z32);
+            vnegate_check(w,z32i);
+            vnegate_check(w,z64);
+            vnegate_check(w,z64i);
+            vnegate_check(w,z32f);
+            vnegate_check(w,z64f);
+        }
 
-        public void vnegate_128x16u()
-            => vnegate_check(n128,z16);
+        void vnegate_check(N256 w)
+        {
+            vnegate_check(w,z8);
+            vnegate_check(w,z8i);
+            vnegate_check(w,z16);
+            vnegate_check(w,z16i);
+            vnegate_check(w,z32);
+            vnegate_check(w,z32i);
+            vnegate_check(w,z64);
+            vnegate_check(w,z64i);
+            vnegate_check(w,z32f);
+            vnegate_check(w,z64f);
+        }
 
-        public void vnegate_128x32i()
-            => vnegate_check(n128,z32i);
+        void vnegate_check<T>(N128 w, T t = default)
+            where T : unmanaged
+                => CheckUnaryScalarMatch(VX.vnegate(w,t), w, t);
+            
+        void vnegate_check<T>(N256 w, T t = default)
+            where T : unmanaged
+                => CheckUnaryScalarMatch(VX.vnegate(w,t), w, t);
 
-        public void vnegate_128x32u()
-            => vnegate_check(n128,z32);
-
-        public void vnegate_128x64i()
-            => vnegate_check(n128,z64i);
-
-        public void vnegate_128x64u()
-            => vnegate_check(n128,z64);
-
-        public void vnegate_128x32f()
-            => vnegate_check<float>(n128);
-
-        public void vnegate_128x64f()
-            => vnegate_check<double>(n128);
-
-        public void vnegate_256x8i()
-            => vnegate_check<sbyte>(n256);
-
-        public void vnegate_256x8u()
-            => vnegate_check<byte>(n256);
-
-        public void vnegate_256x16i()
-            => vnegate_check<short>(n256);
-
-        public void vnegate_256x16u()
-            => vnegate_check<ushort>(n256);
-
-        public void vnegate_256x32i()
-            => vnegate_check<int>(n256);
-
-        public void vnegate_256x32u()
-            => vnegate_check<uint>(n256);
-
-        public void vnegate_256x64i()
-            => vnegate_check<long>(n256);
-
-        public void vnegate_256x64u()
-            => vnegate_check<ulong>(n256);
-
-        public void vnegate_256x32f()
-            => vnegate_check(n256,z32f);
-
-        public void vnegate_256x64f()
-            => vnegate_check(n256,z64f);
-
-        public void vnegate_blocks_128x8i()
-            => vnegate_blocks_check<sbyte>(n128);
-
-        public void vnegate_blocks_128x8u()
-            => vnegate_blocks_check<byte>(n128);
-
-        public void vnegate_blocks_128x16i()
-            => vnegate_blocks_check<short>(n128);
-
-        public void vnegate_blocks_128x16u()
-            => vnegate_blocks_check<ushort>(n128);
-
-        public void vnegate_blocks_128x32i()
-            => vnegate_blocks_check<int>(n128);
-
-        public void vnegate_blocks_128x32u()
-            => vnegate_blocks_check<uint>(n128);
-
-        public void vnegate_blocks_128x64i()
-            => vnegate_blocks_check<long>(n128);
-
-        public void vnegate_blocks_128x64u()
-            => vnegate_blocks_check<ulong>(n128);
-
-        public void vnegate_blocks_256x8i()
-            => vnegate_blocks_check(n256,z8i);
-
-        public void vnegate_blocks_256x8u()
-            => vnegate_blocks_check<byte>(n256);
-
-        public void vnegate_blocks_256x16i()
-            => vnegate_blocks_check<short>(n256);
-
-        public void vnegate_blocks_256x16u()
-            => vnegate_blocks_check<ushort>(n256);
-
-        public void vnegate_blocks_256x32i()
-            => vnegate_blocks_check<int>(n256);
-
-        public void vnegate_blocks_256x32u()
-            => vnegate_blocks_check<uint>(n256);
-
-        public void vnegate_blocks_256x64i()
-            => vnegate_blocks_check<long>(n256);
-
-        public void vnegate_blocks_256x64u()
-            => vnegate_blocks_check<ulong>(n256);
    }
 }

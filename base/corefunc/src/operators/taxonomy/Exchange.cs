@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Characterizes a parametric, pointwise transport
+    /// Characterizes parametric pointwise transport
     /// </summary>
     /// <typeparam name="A">The point type</typeparam>
     [SuppressUnmanagedCodeSecurity]
@@ -20,6 +20,7 @@ namespace Z0
     {
         
     }
+    
 
     /// <summary>
     /// Characterizes a point exchange with predetermined capacity

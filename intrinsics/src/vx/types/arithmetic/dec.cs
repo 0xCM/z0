@@ -43,7 +43,5 @@ namespace Z0
             [MethodImpl(Inline)]
             public T InvokeScalar(T a) => gmath.dec(a);
         }
-
     }
-
 }

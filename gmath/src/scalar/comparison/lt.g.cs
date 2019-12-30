@@ -31,6 +31,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static T ltz<T>(T a, T b)
+            where T : unmanaged
+                => gmath.mul(convert<T>((uint)gmath.lt(a,b)),gmath.ones<T>());
+
+        [MethodImpl(Inline)]
         public static bit lteq<T>(T a, T b)
             where T : unmanaged
         {
