@@ -23,7 +23,6 @@ namespace Z0
             return (x,y);
         }
 
-
         /// <summary>
         /// Permutes 4 128-bit source lanes from 2 256-bit vectors as described by the perm spec
         /// </summary>

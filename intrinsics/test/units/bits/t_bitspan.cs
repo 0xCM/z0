@@ -15,7 +15,7 @@ namespace Z0
         {
             var src = uint.MaxValue;
             Span<uint> buffer = new uint[32];
-            BitPack.unpack(src, buffer.AsBytes());
+            BitPack.unpack32x8(src, buffer.AsBytes());
             Trace(buffer.AsBytes().FormatList());        
         }
 
@@ -39,7 +39,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)            
             {
                 Random.Fill(packed);
-                BitPack.unpack(packed, buffer, unpacked);
+                BitPack.unpack8x32(packed, buffer, unpacked);
                 var bitspan = BitSpan.load(unpacked.As<bit>());
                 bitspan_check(packed,bitspan);
             }
@@ -170,114 +170,72 @@ namespace Z0
             }
         }
 
-
-        public void bitspan_from_scalar8()
+        public void bitspan_from_scalar()
         {
-            var length = 8;
-            var t = z8;
-
-            for(var i=0; i<RepCount; i++)
-            {
-                var src = Random.Bytes(length).ToSpan();
-                var bitspan = src.ToBitSpan();                
-                bitspan_check(src,bitspan);
-            }
-
-            for(var i=0; i<RepCount; i++)
-            {
-                var src = Random.Next(t);                
-                var bitspan = src.ToBitSpan();                
-                bitspan_check(new byte[]{src},bitspan);
-            }
-
-        }    
-
-        public void bitspan_from_scalar16()
-        {        
-            var t = z16;
-            for(var i=0; i<RepCount; i++)
-            {
-                var src = Random.Next(t);                
-                var bitspan = src.ToBitSpan();                
-                bitspan_check(src.AsBytes(),bitspan);
-            }
+            bitspan_from_scalar_check(z8);
+            bitspan_from_scalar_check(z8i);
+            bitspan_from_scalar_check(z16);
+            bitspan_from_scalar_check(z16i);
+            bitspan_from_scalar_check(z32);
+            bitspan_from_scalar_check(z32i);
+            bitspan_from_scalar_check(z64);
+            bitspan_from_scalar_check(z64i);
         }
 
-        public void bitspan_from_scalar32()
-        {        
-            var t = z32;
-            for(var i=0; i<RepCount; i++)
-            {
-                var src = Random.Next(t);                
-                var bitspan = src.ToBitSpan();                
-                bitspan_check(src.AsBytes(), bitspan);
-            }
-        }
-
-        public void bitspan_from_scalar64()
-        {        
-            var t = z64;
-            for(var i=0; i<RepCount; i++)
-            {
-                var src = Random.Next(t);                
-                var bitspan = src.ToBitSpan();                
-                bitspan_check(src.AsBytes(), bitspan);
-            }
-        }
-
-
-        public void bitspan_to_scalar8()
-            => bitspan_to_scalar(z8);
-
-        public void bitspan_to_scalar16()
-            => bitspan_to_scalar(z16);
-
-        public void bitspan_to_scalar32()
-            => bitspan_to_scalar(z32);
-
-        public void bitspan_to_scalar64()
-            => bitspan_to_scalar(z64);
-
-        public void ones_check()
+        public void bitspan_to_scalar()
         {
-            ones_check(z8);   
-            ones_check(z8i);   
-            ones_check(z16);   
-            ones_check(z16i);   
-            ones_check(z32);   
-            ones_check(z32i);   
-            ones_check(z64);   
-            ones_check(z64i);   
+            bitspan_to_scalar_check(z8);
+            bitspan_to_scalar_check(z8i);
+            bitspan_to_scalar_check(z16);
+            bitspan_to_scalar_check(z16i);
+            bitspan_to_scalar_check(z32);
+            bitspan_to_scalar_check(z32i);
+            bitspan_to_scalar_check(z64);
+            bitspan_to_scalar_check(z64i);
         }
 
-        static void ones_check<T>(T t = default)
+        void bitspan_from_scalar_check<T>(T t = default)
             where T : unmanaged
         {
-            var length = bitsize(t);
-            var ones = gmath.ones(t);
-            var bs = BitPack.bitspan(ones);
-            Claim.eq(length, bs.Length);
-            Claim.eq(length, bs.Pop());
+            void check()
+            {
+                Span<byte> bytes = stackalloc byte[size(t)];
+                for(var i=0; i < RepCount; i++)
+                {
+                    var src = Random.Single(t);                
+                    var bitspan = BitPack.bitspan(src);
+                    BitConvert.GetBytes(src,bytes);
+                    bitspan_check(bytes, bitspan);
+                }
+            }
 
+            CheckAction<T>(check, "bitspan_from_scalar");
         }
 
-        void bitspan_to_scalar<T>(T t = default)
+            
+        void bitspan_to_scalar_check<T>(T t = default)
             where T : unmanaged
         {
-            for(var i=0; i< RepCount; i++)
+            void check()
             {
-                var x = Random.Next<T>();
-                var y = BitPack.bitspan(x);
-                var z = BitPack.scalar<T>(y);
-                Claim.eq(x,z);
-            }            
+                for(var i=0; i< RepCount; i++)
+                {
+                    var x = Random.Single<T>();
+                    var y = BitPack.bitspan(x);
+                    var z = BitPack.scalar<T>(y);
+                    Claim.eq(x,z);
+                }
+            }  
+
+            CheckAction<T>(check, "bitspan_to_scalar");
+
         }
 
-        protected static void bitspan_check(Span<byte> packed, BitSpan bitspan)
+        void bitspan_check(Span<byte> packed, BitSpan bitspan)
         {
             var bitcount = bitspan.Length;
             for(int i=0, k = 0; i < packed.Length; i++, k += 8)
-            for(var j=0; j< 8; j++)
+            for(var j=0; j < 8; j++)
                 Claim.eq(BitMask.testbit(packed[i], j), bitspan[k + j]);
         }
     }

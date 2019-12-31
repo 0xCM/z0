@@ -57,7 +57,5 @@ namespace Z0
         public static Units256<T> vunits<T>(N256 w, T t = default)
             where T : unmanaged
                 => Units256<T>.Op;
-
     }
-
 }

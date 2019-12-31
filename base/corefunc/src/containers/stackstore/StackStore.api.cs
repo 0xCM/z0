@@ -16,7 +16,25 @@ namespace Z0
     public static class StackStore
     {
         /// <summary>
-        /// Stack allocates 128-bits of storage over 2 64-bit segments
+        /// Stack allocates 64 bits of storage over 1 64-bit segment
+        /// </summary>
+        /// <param name="w">The storage width</param>
+        /// <param name="seg">The segment width</param>
+        [MethodImpl(Inline)]
+        public static Stack64 alloc(N64 w, N64 seg = default)
+            => default;
+
+        /// <summary>
+        /// Stack allocates 64 bits of storage over 8 8-bit segments
+        /// </summary>
+        /// <param name="w">The storage width</param>
+        /// <param name="seg">The segment width</param>
+        [MethodImpl(Inline)]
+        public static Stack64 alloc(N64 w, N8 seg)
+            => default;
+
+        /// <summary>
+        /// Stack allocates 128 bits of storage over 2 64-bit segments
         /// </summary>
         /// <param name="w">The storage width</param>
         /// <param name="seg">The segment width</param>
@@ -25,7 +43,7 @@ namespace Z0
             => default;
 
         /// <summary>
-        /// Stack allocates 128-bits of storage over 8 16-bit segments
+        /// Stack allocates 128 bits of storage over 8 16-bit segments
         /// </summary>
         /// <param name="w">The storage width</param>
         /// <param name="seg">The segment width</param>
@@ -65,6 +83,22 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline)]
+        public static ref ulong head(ref Stack64 src)
+            => ref src.X0;
+
+        /// <summary>
+        /// Retrieves the leading element from the storage source
+        /// </summary>
+        /// <param name="src">The storage source</param>
+        [MethodImpl(Inline)]
+        public static ref byte head(ref Stack64x8 src)
+            => ref src.X0;
+
+        /// <summary>
+        /// Retrieves the leading element from the storage source
+        /// </summary>
+        /// <param name="src">The storage source</param>
+        [MethodImpl(Inline)]
         public static ref ulong head(ref Stack128 src)
             => ref src.X0;
 
@@ -85,6 +119,10 @@ namespace Z0
             => ref src.X0.X0;
 
         [MethodImpl(Inline)]
+        public static unsafe Span<byte> bytes(ref Stack64 src)
+            => new Span<ulong>(ptr(ref src.X0), 1).AsBytes();
+
+        [MethodImpl(Inline)]
         public static unsafe Span<byte> bytes(ref Stack128 src)
             => new Span<ulong>(ptr(ref src.X0), 2).AsBytes();
 
@@ -99,6 +137,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe Span<byte> bytes(ref Stack1024 src)
             => new Span<ulong>(ptr(ref src.X0), 16).AsBytes();
+
+        [MethodImpl(Inline)]
+        public static ref T head<T>(ref Stack64 src)
+            where T : unmanaged
+                => ref Unsafe.As<ulong,T>(ref src.X0);
 
         [MethodImpl(Inline)]
         public static ref T head<T>(ref Stack128 src)

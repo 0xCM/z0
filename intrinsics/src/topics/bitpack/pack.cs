@@ -35,14 +35,14 @@ namespace Z0
         public static T pack<T>(Span<bit> src)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte))
-                return generic<T>(pack(src, n8));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(pack(src, n16));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(pack(src, n32));
-            else if(typeof(T) == typeof(ulong))
-                return generic<T>(pack(src, n64));
+            if(bitsize<T>() == 8)
+                return convert<T>(pack(src, n8));
+            else if(bitsize<T>() == 16)
+                return convert<T>(pack(src, n16));
+            else if(bitsize<T>() == 32)
+                return convert<T>(pack(src, n32));
+            else if(bitsize<T>() == 64)
+                return convert<T>(pack(src, n64));
             else
                 throw unsupported<T>();            
         }

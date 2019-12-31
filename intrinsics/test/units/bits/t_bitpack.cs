@@ -8,7 +8,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_bitpack : t_sinx<t_bitpack>
+    public class t_bitpack : t_vinx<t_bitpack>
     {
         public void unpack_16()
         {
@@ -17,7 +17,7 @@ namespace Z0
                 var src = Random.Next<ushort>();
                 var dst = DataBlocks.single<byte>(n128);
 
-                BitPack.unpack(src, dst);            
+                BitPack.unpack16x8(src, dst);            
                 unpack_check(src,dst);
 
                 var rebound = BitPack.pack(dst);
@@ -31,7 +31,7 @@ namespace Z0
             {
                 var src = Random.Next<uint>();
                 var dst = DataBlocks.single<byte>(n256);
-                BitPack.unpack(src, dst);
+                BitPack.unpack32x8(src, dst);
 
                 unpack_check(src,dst);
                 
@@ -46,7 +46,7 @@ namespace Z0
             {
                 var src = Random.Next<ulong>();
                 var dst = DataBlocks.single<byte>(n512);
-                BitPack.unpack(src, dst);
+                BitPack.unpack64x8(src, dst);
 
                 unpack_check(src,dst);
                 
@@ -56,7 +56,7 @@ namespace Z0
 
         }
 
-        public void bitpack_32x4()
+        public void pack_32x4()
         {
             var count = n4;
             var block = n32;
@@ -69,8 +69,21 @@ namespace Z0
             }
         }
 
+        public void unpack_64x32()
+        {
+            var dst = new uint[64];
+            var tmp = DataBlocks.single<byte>(n64);
 
-        public void sb_pack_8x1_256()
+            for(var rep = 0; rep < RepCount; rep++)
+            {
+                var src = Random.Single(z64);
+                BitPack.unpack64x32(src,tmp,dst);
+                for(var i=0; i< dst.Length; i++)
+                    Claim.eq((uint)bit.test(src,i), dst[i]);
+            }
+        }
+
+        public void pack_8x1_256()
         {
             var count = n32;
             var block = n256;
@@ -85,7 +98,7 @@ namespace Z0
             }
         }
 
-        public void sb_pack_8x1_basecase()
+        public void pack_8x1_basecase()
         {
             void case1()
             {
@@ -107,7 +120,6 @@ namespace Z0
             case1();
             case2();
         }
-
 
         void unpack_check<T>(T src, in ReadOnlySpan<byte> y)
             where T : unmanaged

@@ -77,11 +77,6 @@ namespace Z0
             return a;
         }
 
-        public static Vector256<uint> op_shift_specific(Vector256<uint> src)
-            => apply(VX.vsll<uint>(n256),src,3);
-        
-        public static Vector256<uint> op_shift(Vector256<uint> src, byte amount)
-            => apply(VX.vsll<uint>(n256),src,amount);
         
         [MethodImpl(Inline)]
         public static Vector256<T> apply<F,T>(F op, Vector256<T> src, byte amount)

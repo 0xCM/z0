@@ -11,59 +11,62 @@ namespace Z0
 
     public class t_vsrlv : t_vinx<t_vsrlv>
     {
-        public void vsrlv_128x8u()
-            => vsrlv_check(n128,z8);
-
-        public void vsrlv_128x16u()
-            => vsrlv_check(n128,z16);
-
-        public void vsrlv_128x32u()
-            => vsrlv_check(n128,z32);
-
-        public void vsrlv_128x64u()
-            => vsrlv_check(n128,z64);
-
-        public void vsrlv_256x8u()
-            => vsrlv_check(n256,z8);
-
-        public void vsrlv_256x16u()
-            => vsrlv_check(n256,z16);
-
-        public void vsrlv_256x32u()
-            => vsrlv_check(n256,z32);
-
-        public void vsrlv_256x64u()
-            => vsrlv_check(n256,z64);
-
-        protected void vsrlv_check<T>(N128 w, T t = default)
-            where T : unmanaged
+        public void vsrlv_check()
         {
-            var shiftrange = (default(T),convert<int,T>(bitsize(t) - 1));
-            var buffer = DataBlocks.single<T>(w);
-            for(var sample = 0; sample < RepCount; sample++)
-            {
-                var x = Random.CpuVector<T>(w);
-                var offsets = Random.CpuVector<T>(w, shiftrange);
-                var actual = ginx.vsrlv(x,offsets);
-                var expect = CpuVector.vload(w,mathspan.srlv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
-                Claim.eq(expect, actual);
-            }
+            vsrlv_check(n128);
+            vsrlv_check(n256);
         }
 
-        protected void vsrlv_check<T>(N256 w, T t = default)
-            where T : unmanaged
+        void vsrlv_check(N128 w)
         {
-            var shiftrange = (default(T),convert<int,T>(bitsize(t) - 1));
-            var buffer = DataBlocks.single<T>(w);
-            for(var sample = 0; sample < RepCount; sample++)
-            {
-                var x = Random.CpuVector<T>(w);
-                var offsets = Random.CpuVector<T>(w, shiftrange);
-                var actual = ginx.vsrlv(x,offsets);
-                var expect = CpuVector.vload(w,mathspan.srlv<T>(x.ToSpan(), offsets.ToSpan(), buffer));
-                Claim.eq(expect, actual);
-            }
+            vsrlv_check(w, z8);
+            vsrlv_check(w, z16);
+            vsrlv_check(w, z32);
+            vsrlv_check(w, z32i);
+            vsrlv_check(w, z64);
+            vsrlv_check(w, z64i);
         }
 
+        void vsrlv_check(N256 w)
+        {
+            vsrlv_check(w, z8);
+            vsrlv_check(w, z16);
+            vsrlv_check(w, z32);
+            vsrlv_check(w, z32i);
+            vsrlv_check(w, z64);
+            vsrlv_check(w, z64i);
+        }
+
+        void vsrlv_check<T>(N128 w, T t = default)
+            where T : unmanaged        
+        {
+            var min = gmath.zero(t);
+            var max = convert<int,T>(bitsize(t) - 1);
+            
+            Pair<Vector128<T>> @case(int i)
+            {
+                var x = Random.CpuVector(w,t);
+                var offsets = Random.CpuVector(w, min, max);
+                return (x,offsets);
+            }
+
+            CheckScalarMatch(VX.vsrlv(w,t),@case);            
+        }
+
+        void vsrlv_check<T>(N256 w, T t = default)
+            where T : unmanaged        
+        {
+            var min = gmath.zero(t);
+            var max = convert<int,T>(bitsize(t) - 1);
+            
+            Pair<Vector256<T>> @case(int i)
+            {
+                var x = Random.CpuVector(w,t);
+                var offsets = Random.CpuVector(w, min, max);
+                return (x,offsets);
+            }
+
+            CheckScalarMatch(VX.vsrlv(w,t),@case);            
+        }
     }
 }

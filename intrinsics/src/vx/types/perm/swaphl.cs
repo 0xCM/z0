@@ -12,36 +12,32 @@ namespace Z0
 
     partial class VXTypes
     {
-        public readonly struct NonZ128<T> : IVUnaryPred128D<T>
+        public readonly struct SwapHiLo128<T> : IVUnaryOp128<T>
             where T : unmanaged
         {
-            public static NonZ128<T> Op => default;
+            public static SwapHiLo128<T> Op => default;
 
-            public const string Name = "vnonz";
+            public const string Name = "vswaphl";
 
             public string Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
-            public bit Invoke(Vector128<T> x) => ginx.vnonz(x);
-
-            [MethodImpl(Inline)]
-            public bit InvokeScalar(T a) => gmath.nonz(a);
+            public Vector128<T> Invoke(Vector128<T> x) => ginx.vswaphl(x);
+            
         }
 
-        public readonly struct NonZ256<T> : IVUnaryPred256D<T>
+        public readonly struct SwapHiLo256<T> : IVUnaryOp256<T>
             where T : unmanaged
         {
-            public static NonZ256<T> Op => default;
+            public static SwapHiLo256<T> Op => default;
 
-            public const string Name = "vnonz";
+            public const string Name = "vswaphl";
 
             public string Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
-            public bit Invoke(Vector256<T> x) => ginx.vnonz(x);
-
-            [MethodImpl(Inline)]
-            public bit InvokeScalar(T a) => gmath.nonz(a);
+            public Vector256<T> Invoke(Vector256<T> x) => ginx.vswaphl(x);
         }
     }
+
 }

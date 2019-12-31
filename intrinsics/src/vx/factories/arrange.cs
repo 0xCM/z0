@@ -136,6 +136,5 @@ namespace Z0
         public static Lo256<T> vlo<T>(N256 w, T t = default)
             where T : unmanaged
                 => Lo256<T>.Op;
-
     }
 }

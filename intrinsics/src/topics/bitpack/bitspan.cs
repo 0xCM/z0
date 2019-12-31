@@ -21,13 +21,13 @@ namespace Z0
              var n = bitsize<T>();
              Span<bit> bits = stackalloc bit[n];
              src.Bits.Slice(offset, count ?? n).CopyTo(bits);
-             return BitPack.pack<T>(bits);             
+             return pack<T>(bits);             
          }
 
          [MethodImpl(Inline)]
          public static T scalar<T>(in BitSpan src)
             where T : unmanaged
-                => BitPack.pack<T>(src.Bits.Slice(0, bitsize<T>()));             
+                => pack<T>(src.Bits.Slice(0, bitsize<T>()));             
 
         [MethodImpl(Inline)]
         public static BitSpan bitspan<T>(T packed)        
@@ -104,7 +104,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitSpan bitspan(byte packed, in Block64<byte> buffer, in Block256<uint> unpacked, int block = 0)
         {
-            unpack(packed,buffer,block); 
+            unpack8x8(packed,buffer,block); 
             dinx.vconvert(buffer,n256).StoreTo(unpacked);
             return BitSpan.load(unpacked.As<bit>());
         }
@@ -118,7 +118,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitSpan bitspan(in Block16<byte> packed, in Block64<byte> buffer, in Block256<uint> unpacked)
         {
-            unpackblocks(2, in packed.Head, buffer, unpacked);            
+            unpack8x32(2, in packed.Head, buffer, unpacked);            
             return BitSpan.load(unpacked.As<bit>());            
         }
 
@@ -131,7 +131,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitSpan bitspan(in Block32<byte> packed, in Block64<byte> buffer, in Block256<uint> unpacked)
         {
-            unpackblocks(4, in packed.Head, buffer, unpacked);            
+            unpack8x32(4, in packed.Head, buffer, unpacked);            
             return BitSpan.load(unpacked.As<bit>());            
         }
 
@@ -144,7 +144,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitSpan bitspan(in Block64<byte> packed, in Block64<byte> buffer, in Block256<uint> unpacked)
         {
-            unpackblocks(8, in packed.Head, buffer, unpacked);                        
+            unpack8x32(8, in packed.Head, buffer, unpacked);                        
             return BitSpan.load(unpacked.As<bit>());            
         }
 
@@ -160,14 +160,14 @@ namespace Z0
             var buffer = DataBlocks.single(n64,z8);
             var unpacked = DataBlocks.alloc(n256, blockcount, z32);
             for(var block=0; block < blockcount; block++)
-                unpacksingle(packed, buffer, unpacked,block);
+                unpack8x32(packed, buffer, unpacked,block);
             return BitSpan.load(unpacked.As<bit>());
         }
 
         [MethodImpl(Inline)]
         public static BitSpan bitspan(ulong packed, ref byte unpacked)
         {
-            unpack(packed, ref unpacked);
+            unpack64x8(packed, ref unpacked);
             return BitSpan.load(ref Unsafe.As<byte,bit>(ref unpacked), 64);
         }
 

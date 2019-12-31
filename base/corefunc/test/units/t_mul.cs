@@ -15,7 +15,7 @@ namespace Z0
     {
         protected override int RepCount => Pow2.T12;
         
-        public void mul_32()
+        public void mul_2x32u()
         {
             const uint MAX = uint.MaxValue;
             for(var i=0; i< RepCount; i++)
@@ -40,8 +40,16 @@ namespace Z0
 
                 var c2 = (uint)(((ulong)z) * ((ulong)(MAX)));
                 Claim.eq(c2, c);
-
             }
+
+            for(var i=0; i< RepCount; i++)
+            {
+                var xi = Random.Next<uint>();
+                var yi = Random.Next<uint>();
+                var z = (ulong)xi * (ulong)yi;
+                Claim.eq(z, Math128.mul(xi,yi));
+            }
+
         }        
 
         public void mod_32()
@@ -66,7 +74,7 @@ namespace Z0
             }
         }
 
-        public void mul_64()
+        public void mul_2x64u()
         {
             const ulong MAX = ulong.MaxValue;
             for(var i=0; i< RepCount; i++)
@@ -93,7 +101,7 @@ namespace Z0
             }
         }        
 
-        public void mul_64_lo()
+        public void mullo_2x64u()
         {
 
             for(var i=0; i< RepCount; i++)
@@ -104,6 +112,8 @@ namespace Z0
             }
 
         }
+
+
 
     }
 }

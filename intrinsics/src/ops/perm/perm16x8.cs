@@ -160,8 +160,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ulong> vperm16x8(Vector256<ulong> src, Vector256<byte> spec)
             => v64u(Shuffle(v8u(src), spec));
-
-
     }
-
 }

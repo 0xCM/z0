@@ -233,6 +233,5 @@ namespace Z0
         public static CNonImpl256<T> vcnonimpl<T>(N256 w, T t = default)
             where T : unmanaged
                 => CNonImpl256<T>.Op;
-
    }
 }

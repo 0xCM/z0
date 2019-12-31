@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vreverse<T>(Vector128<T> x)
             where T : unmanaged
-                => vreverse_1(x);
+                => vreverse_u(x);
 
         /// <summary>
         /// Reverses the source vector components
@@ -32,72 +32,70 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vreverse<T>(Vector256<T> x)
             where T : unmanaged
-                => vreverse_1(x);
+                => vreverse_u(x);
 
         [MethodImpl(Inline)]
-        static Vector256<T> vreverse_1<T>(Vector256<T> x)
+        static Vector256<T> vreverse_u<T>(Vector256<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vreverse(vcast8u(x)));
+                return vgeneric<T>(dinx.vreverse(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vreverse(vcast16u(x)));
+                return vgeneric<T>(dinx.vreverse(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vreverse(vcast32u(x)));
+                return vgeneric<T>(dinx.vreverse(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vreverse(vcast64u(x)));
+                return vgeneric<T>(dinx.vreverse(v64u(x)));
             else
-                return vreverse_2(x);
+                return vreverse_i(x);
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vreverse_2<T>(Vector256<T> x)
+        static Vector256<T> vreverse_i<T>(Vector256<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vreverse(vcast8i(x)));
+                return vgeneric<T>(dinx.vreverse(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vreverse(vcast16i(x)));
+                return vgeneric<T>(dinx.vreverse(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vreverse(vcast32i(x)));
+                return vgeneric<T>(dinx.vreverse(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dinx.vreverse(vcast64i(x)));
+                return vgeneric<T>(dinx.vreverse(v64i(x)));
             else
                 throw unsupported<T>();
         }
 
-
         [MethodImpl(Inline)]
-        static Vector128<T> vreverse_1<T>(Vector128<T> x)
+        static Vector128<T> vreverse_u<T>(Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vreverse(vcast8u(x)));
+                return vgeneric<T>(dinx.vreverse(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vreverse(vcast16u(x)));
+                return vgeneric<T>(dinx.vreverse(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vreverse(vcast32u(x)));
+                return vgeneric<T>(dinx.vreverse(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vreverse(vcast64u(x)));
+                return vgeneric<T>(dinx.vreverse(v64u(x)));
             else
-                return vreverse_2(x);
+                return vreverse_i(x);
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vreverse_2<T>(Vector128<T> x)
+        static Vector128<T> vreverse_i<T>(Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vreverse(vcast8i(x)));
+                return vgeneric<T>(dinx.vreverse(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vreverse(vcast16i(x)));
+                return vgeneric<T>(dinx.vreverse(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vreverse(vcast32i(x)));
+                return vgeneric<T>(dinx.vreverse(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dinx.vreverse(vcast64i(x)));
+                return vgeneric<T>(dinx.vreverse(v64i(x)));
             else
                 throw unsupported<T>();
         }
     }
-
 }

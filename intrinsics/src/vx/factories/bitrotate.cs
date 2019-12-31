@@ -100,7 +100,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Rotr256<T> vrotr<T>(N256 w, T t = default)
             where T : unmanaged
-                => Rotr256<T>.Op;
- 
+                => Rotr256<T>.Op; 
     }
 }

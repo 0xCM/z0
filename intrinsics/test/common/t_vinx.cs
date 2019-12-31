@@ -29,7 +29,13 @@ namespace Z0
         static void CheckFailed()
             => throw new Exception();
 
-
+        /// <summary>
+        /// Verifies that a vectorized pattern source produces the expected pattern
+        /// </summary>
+        /// <param name="f">The pattern source</param>
+        /// <param name="expect">The expected pattern</param>
+        /// <typeparam name="F">The pattern source type</typeparam>
+        /// <typeparam name="T">The component type</typeparam>
         protected void CheckPattern<F,T>(F f, Vector128<T> expect)
             where T : unmanaged
             where F : IVPatternSource128<T>
@@ -43,6 +49,13 @@ namespace Z0
             CheckAction(exec, TestCaseName(f));            
         }
 
+        /// <summary>
+        /// Verifies that a vectorized pattern source produces the expected pattern
+        /// </summary>
+        /// <param name="f">The pattern source</param>
+        /// <param name="expect">The expected pattern</param>
+        /// <typeparam name="F">The pattern source type</typeparam>
+        /// <typeparam name="T">The component type</typeparam>
         protected void CheckPattern<F,T>(F f, Vector256<T> expect)
             where T : unmanaged
             where F : IVPatternSource256<T>
@@ -74,6 +87,7 @@ namespace Z0
             where F : IVFactoryOp128<S,T>
             where C : IVChecker128<S,T>
         {
+            var casename = TestCaseName(f);
             void exec()
             {
                 for(var i=0; i < RepCount; i++)
@@ -85,7 +99,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(exec, TestCaseName(f));
+            CheckAction(exec, casename);
         }
 
         /// <summary>
@@ -106,6 +120,8 @@ namespace Z0
             where F : IVFactoryOp256<S,T>
             where C : IVChecker256<S,T>
         {
+            var casename = TestCaseName(f);
+
             void exec()
             {
                 for(var i=0; i< RepCount; i++)
@@ -117,7 +133,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(exec, TestCaseName(f));
+            CheckAction(exec, casename);
         }
 
         protected void CheckUnaryScalarMatch<F,T>(F f, N128 w, T t = default, SystemCounter count = default)
@@ -126,6 +142,7 @@ namespace Z0
         {
             var cells = vcount(w,t);
             var succeeded = true;
+            var casename = TestCaseName(f);
             
             count.Start();
             try
@@ -140,12 +157,12 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, TestCaseName(f));
+                error(e, casename);
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(f),succeeded,count);
+                ReportOutcome(casename,succeeded,count);
             }
         }
 
@@ -155,7 +172,8 @@ namespace Z0
         {
             var cells = vcount(w,t);
             var succeeded = true;
-            
+            var casename = TestCaseName(f);
+
             count.Start();
             try
             {
@@ -169,12 +187,12 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, TestCaseName(f));
+                error(e, casename);
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(f),succeeded,count);
+                ReportOutcome(casename,succeeded,count);
             }
         }
     
@@ -248,6 +266,7 @@ namespace Z0
         {
             var cells = vcount(w,t);
             var succeeded = true;
+            var casename = TestCaseName(f);
             
             count.Start();
             try
@@ -263,12 +282,12 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, TestCaseName(f));
+                error(e, casename);
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(f),succeeded,count);
+                ReportOutcome(casename,succeeded,count);
             }
         }
 
@@ -278,6 +297,7 @@ namespace Z0
         {
             var len = vcount(w,t);
             var succeeded = true;
+            var casename = TestCaseName(f);
 
             count.Start();
             try
@@ -293,12 +313,12 @@ namespace Z0
             }
             catch(Exception e)
             {                
-                error(e,TestCaseName(f));
+                error(e,casename);
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(f),succeeded,count);
+                ReportOutcome(casename,succeeded,count);
             }
         }
 
@@ -308,6 +328,7 @@ namespace Z0
         {
             var cells = vcount(w,t);
             var succeeded = true;
+            var casename = TestCaseName(f);
             
             count.Start();
             try
@@ -324,12 +345,12 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, TestCaseName(f));
+                error(e, casename);
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(f),succeeded,count);
+                ReportOutcome(casename,succeeded,count);
             }
         }
 
@@ -339,6 +360,7 @@ namespace Z0
         {
             var cells = vcount(w,t);
             var succeeded = true;
+            var casename = TestCaseName(f);
             
             count.Start();
             try
@@ -355,12 +377,12 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, TestCaseName(f));
+                error(e, casename);
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(f),succeeded,count);
+                ReportOutcome(casename,succeeded,count);
             }
         }
 
@@ -370,6 +392,7 @@ namespace Z0
         {
             var cells = vcount<T>(n128);
             var succeeded = true;
+            var casename = TestCaseName(f);
             
             count.Start();
             try
@@ -384,12 +407,12 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, TestCaseName(f));
+                error(e, casename);
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(f),succeeded,count);
+                ReportOutcome(casename,succeeded,count);
             }
         }
 
@@ -399,6 +422,7 @@ namespace Z0
         {
             var cells = vcount<T>(n256);
             var succeeded = true;
+            var casename = TestCaseName(f);
             
             count.Start();
             try
@@ -413,50 +437,13 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, TestCaseName(f));
+                error(e, casename);
                 succeeded = false;
             }
             finally
             {
-                ReportOutcome(TestCaseName(f),succeeded,count);
+                ReportOutcome(casename,succeeded,count);
             }
         }       
-
-        protected void vextract_check<T>(N128 w, T t = default)
-            where T : unmanaged
-        {
-
-            var len = zfunc.vcount<T>(w);
-            var src = Random.CpuVector<T>(w);
-            var actual = src.ToSpan();
-            var expect = span<T>(len);
-            src.StoreTo(expect);
-            for(byte i = 0; i< len; i++)
-                Claim.eq(expect[i], actual[i]);
-        }
-        
-
-        protected void vinsert_check<T>(N128 w, T t = default)
-            where T : unmanaged
-        {
-            for(var i=0; i < RepCount; i++)
-            {
-                var v128Src = Random.CpuVector<T>(w);
-                var srcSpan = v128Src.ToSpan();
-
-                var dst = CpuVector.vzero(n256,t);
-                
-                var vLo = ginx.vinsert(v128Src, dst,0);
-                var vLoSpan = vLo.ToSpan().Slice(0, vLo.Length()/2);
-
-                var vHi = ginx.vinsert(v128Src, dst, 1);
-                var vHiSpan = vHi.ToSpan().Slice(vLo.Length()/2);
-
-                Claim.eq(srcSpan, vLoSpan);
-                Claim.eq(srcSpan, vHiSpan);
-            }
-        }
-
-
     }
 }

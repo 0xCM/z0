@@ -48,7 +48,6 @@ namespace Z0
         public static unsafe Span<byte> AsBytes(this in short src)
             => new Span<byte>(constptr(in src), 2);
 
-
         /// <summary>
         /// Converts a bool to a byte quickly
         /// </summary>

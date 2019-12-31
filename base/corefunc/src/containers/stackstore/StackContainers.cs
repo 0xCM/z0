@@ -12,6 +12,36 @@ namespace Z0
 
     public static class StackContainers
     {
+        public ref struct Stack64
+        {
+            internal ulong X0;
+        }
+
+        /// <summary>
+        /// Stack-allocated storage that covers 64-bits with 8 8-bit segments
+        /// </summary>
+        public ref struct Stack64x8
+        {
+            internal byte X0;
+
+            byte X1;
+
+            byte X2;
+
+            byte X3;
+
+            byte X4;
+
+            byte X5;
+
+            byte X6;
+
+            byte X7;
+        }
+
+        /// <summary>
+        /// Stack-allocated storage that covers 128 bits with 2 64-bit segments
+        /// </summary>
         public ref struct Stack128
         {
             public ulong X0;

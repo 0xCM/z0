@@ -17,6 +17,7 @@ namespace Z0.OpCodes
     public static class bitpack
     {                
 
+
         public static byte pack_8(BitSpan src)
             => BitPack.pack<byte>(src);
 
@@ -28,6 +29,12 @@ namespace Z0.OpCodes
 
         public static ulong pack_64(BitSpan src)
             => BitPack.pack<ulong>(src);
+
+        public static void unpack_64x32(ulong src, in Block64<byte> buffer, Span<uint> dst)
+            => BitPack.unpack64x32(src,buffer,dst);
+
+        public static void unpack_64x32_aloc(ulong src, Span<uint> dst)
+            => BitPack.unpack64x32(src,dst);
 
     }
 

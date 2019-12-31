@@ -20,6 +20,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="spec">The perm spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
         public static Vector128<T> vperm16x8<T>(Vector128<T> src, Vector128<byte> spec)        
             where T : unmanaged
                 => vperm16x8_u(src,spec);
@@ -30,10 +31,12 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="spec">The perm spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
         public static Vector256<T> vperm16x8<T>(Vector256<T> src, Vector256<byte> spec)        
             where T : unmanaged
                 => vperm16x8_u(src,spec);
 
+        [MethodImpl(Inline)]
         static Vector128<T> vperm16x8_u<T>(Vector128<T> src, Vector128<byte> spec)        
             where T : unmanaged
         {
@@ -49,6 +52,7 @@ namespace Z0
                 return vperm16x8_i(src,spec);
         }
 
+        [MethodImpl(Inline)]
         static Vector128<T> vperm16x8_i<T>(Vector128<T> src, Vector128<byte> spec)        
             where T : unmanaged
         {
@@ -64,6 +68,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
+        [MethodImpl(Inline)]
         static Vector256<T> vperm16x8_u<T>(Vector256<T> src, Vector256<byte> spec)        
             where T : unmanaged
         {
@@ -79,6 +84,7 @@ namespace Z0
                 return vperm16x8_i(src,spec);
         }
 
+        [MethodImpl(Inline)]
         static Vector256<T> vperm16x8_i<T>(Vector256<T> src, Vector256<byte> spec)        
             where T : unmanaged
         {

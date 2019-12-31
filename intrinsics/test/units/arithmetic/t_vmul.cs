@@ -83,7 +83,7 @@ namespace Z0
             var s = z16;
             var t = z32;
         
-            for(var i=0; i< RepCount; i++)
+            for(var rep=0; rep< RepCount; rep++)
             {
                 var x = Random.CpuVector(ws,s);
                 var y = Random.CpuVector(ws,s);
@@ -97,6 +97,40 @@ namespace Z0
             }
         }
 
+        void vmul_128x32u()
+        {
+            var ws = n128;
+            var wt = n256;
+            var s = z32;
+            var t = z64;
+            var count = vcount(ws,s);
+        
+            var a0 = VPattern.vincrements(ws,1u);
+            var a1 = VPattern.vincrements(ws,a0.LastCell() + 1);
+            var b0 = dinx.vmul(a0,a1);
+            //var b1 = dinx.vmul(dinx.vperm4x32(a0, Perm4L.BADC), dinx.vperm4x32(a1, Perm4L.BADC));
+            var b1 = dinx.vmul(dinx.vswaphl(a0), dinx.vswaphl(a1));
+            Trace("x",a0.Format());
+            Trace("y",a1.Format());
+            Trace("lo", b0.Format());
+            Trace("hi", b1.Format());
+
+            for(var rep=0; rep< RepCount; rep++)
+            {
+                var x = Random.CpuVector(ws,s);
+                var y = Random.CpuVector(ws,s);
+                var x0 = Math128.mul(vcell(x,0), vcell(y,0));
+                var x1 = Math128.mul(vcell(x,1), vcell(y,1));
+                var x2 = Math128.mul(vcell(x,2), vcell(y,2));
+                var x3 = Math128.mul(vcell(x,3), vcell(y,3));
+                var expect = CpuVector.vparts(wt, x0,x1,x2,x3);
+                var actual = dinx.vmul(x,y);
+
+                Claim.eq(expect,actual);
+
+
+            }
+        }
 
         public void vmul_256x8u()
         {
@@ -119,8 +153,7 @@ namespace Z0
             }
         }
 
-        //problem?
-        void vmul_256x16u()
+        public void vmul_256x16u()
         {
             var w = n256;
             var t = z32;
@@ -144,18 +177,6 @@ namespace Z0
                     eb[j] = uint32(xs[j] * ys[j]);
                 
                 Claim.eq(eb,zb);
-            }
-        }
-
-
-        public void mul_64u()
-        {
-            for(var i=0; i< RepCount; i++)
-            {
-                var xi = Random.Next<uint>();
-                var yi = Random.Next<uint>();
-                var z = (ulong)xi * (ulong)yi;
-                Claim.eq(z, Math128.mul(xi,yi));
             }
         }
     }

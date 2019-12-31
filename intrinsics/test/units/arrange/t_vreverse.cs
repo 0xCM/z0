@@ -67,27 +67,35 @@ namespace Z0
 
         void vreverse_check(N128 w)
         {
-            vreverse_check(VX.vreverse(w,z8), w, z8);
-            vreverse_check(VX.vreverse(w,z8i), w, z8i);
-            vreverse_check(VX.vreverse(w,z16), w, z16);
-            vreverse_check(VX.vreverse(w,z16i), w, z16i);
-            vreverse_check(VX.vreverse(w,z32), w, z32);
-            vreverse_check(VX.vreverse(w,z32i), w, z32i);
-            vreverse_check(VX.vreverse(w,z64), w, z64);
-            vreverse_check(VX.vreverse(w,z64i), w, z64i);
+            vreverse_check(w, z8);
+            vreverse_check(w, z8i);
+            vreverse_check(w, z16);
+            vreverse_check(w, z16i);
+            vreverse_check(w, z32);
+            vreverse_check(w, z32i);
+            vreverse_check(w, z64);
+            vreverse_check(w, z64i);
         }
 
         void vreverse_check(N256 w)
         {
-            vreverse_check(VX.vreverse(w,z8), w, z8);
-            vreverse_check(VX.vreverse(w,z8i), w, z8i);
-            vreverse_check(VX.vreverse(w,z16), w, z16);
-            vreverse_check(VX.vreverse(w,z16i), w, z16i);
-            vreverse_check(VX.vreverse(w,z32), w, z32);
-            vreverse_check(VX.vreverse(w,z32i), w, z32i);
-            vreverse_check(VX.vreverse(w,z64), w, z64);
-            vreverse_check(VX.vreverse(w,z64i), w, z64i);
+            vreverse_check(w, z8);
+            vreverse_check(w, z8i);
+            vreverse_check(w, z16);
+            vreverse_check(w, z16i);
+            vreverse_check(w, z32);
+            vreverse_check(w, z32i);
+            vreverse_check(w, z64);
+            vreverse_check(w, z64i);
         }
+
+        void vreverse_check<T>(N128 w, T t = default)
+            where T : unmanaged
+                => vreverse_check(VX.vreverse(w,t),w,t);
+
+        void vreverse_check<T>(N256 w, T t = default)
+            where T : unmanaged
+                => vreverse_check(VX.vreverse(w,t),w,t);
 
         void check_invariant<T>(N128 w, T t = default)
             where T : unmanaged
