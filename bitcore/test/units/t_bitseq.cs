@@ -11,34 +11,51 @@ namespace Z0
 
     public class t_bitseq : t_bitcore<t_bitseq>
     {
-        public void sb_bitseq_8u()
-            => sb_bitseq_check<byte>();
+        public void bitseq_8u()
+            => bitseq_check(z8);
 
-        public void sb_bitseq_8i()
-            => sb_bitseq_check<sbyte>();
+        public void bitseq_8i()
+            => bitseq_check(z8i);
 
-        public void sb_bitseq_16u()
-            => sb_bitseq_check<ushort>();
+        public void bitseq_16u()
+            => bitseq_check(z16);
 
-        public void sb_bitseq_16i()
-            => sb_bitseq_check<short>();
+        public void bitseq_16i()
+            => bitseq_check(z16i);
 
-        public void sb_bitseq_32()
-            => sb_bitseq_check<uint>();
+        public void bitseq_32()
+            => bitseq_check(z32);
 
-        public void sb_bitseq_32i()
-            => sb_bitseq_check<int>();
+        public void bitseq_32i()
+            => bitseq_check(z32i);
 
-        public void sb_bitseq_64u()
-            => sb_bitseq_check<ulong>();
+        public void bitseq_64u()
+            => bitseq_check(z64);
 
-        public void sb_bitseq_64i()
-            => sb_bitseq_check<long>();
+        public void bitseq_64i()
+            => bitseq_check(z64i);
 
-        public void sb_bitseq_32f()
-            => sb_bitseq_check<float>();
+        public void bitseq_32f()
+            => bitseq_check(z32f);
 
-        public void sb_bitseq_64f()
-            => sb_bitseq_check<double>();
+        public void bitseq_64f()
+            => bitseq_check(z64f);
+
+        void bitseq_check<T>(T t = default)
+            where T : unmanaged
+        {
+            Span<byte> s0 = stackalloc byte[bitsize<T>()];
+            Span<byte> s1 = stackalloc byte[bitsize<T>()];
+            ReadOnlySpan<byte> s2 = default;
+            for(var i=0; i<RepCount; i++)
+            {
+                var a = Random.Next<T>();
+                gbits.bitseq(a,s0);
+                gbits.bitseq(a,s1);
+                s2 = gbits.bitseq(a);
+                Claim.eq(s0, s1);
+                Claim.eq(s1, s2);
+            }
+        }
     }
 }

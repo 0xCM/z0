@@ -19,6 +19,11 @@ namespace Z0
         string Moniker {get;}        
     }
 
+    public interface IAction<A> : IFunc
+    {
+        void Invoke(A a);
+    }
+
     /// <summary>
     /// Characterizes an emitter
     /// </summary>
@@ -182,6 +187,7 @@ namespace Z0
     /// Characterizes a function that produces a 128-bit vector from a 256-bit vector
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
     public interface IVReducer256<T> : IVFunc<N256,N128,Vector256<T>,Vector128<T>,T,T>
         where T : unmanaged
     {

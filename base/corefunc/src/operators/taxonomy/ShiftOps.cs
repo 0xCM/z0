@@ -15,7 +15,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IShiftOp<A> : IFunc<A,byte,A>
+    public interface IShiftOp<A> : IUnaryOpImm8<A>
     {
 
     }
@@ -25,11 +25,12 @@ namespace Z0
     /// </summary>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOp<V> :  IShiftOp<V>
+    public interface IVShiftOp<V> : IShiftOp<V>
         where V : struct
     {
         
     }
+
 
     /// <summary>
     /// Characterizes a vectorized shift operator parameterized by operand bit-width
@@ -75,7 +76,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOp128<T> : IVShiftOp<N128,Vector128<T>,T>
+    public interface IVShiftOp128<T> : IVUnaryOp128Imm8<T>
         where T : unmanaged
     {
     }
@@ -85,7 +86,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOp256<T> : IVShiftOp<N256,Vector256<T>,T>
+    public interface IVShiftOp256<T> : IVUnaryOp256Imm8<T>
         where T : unmanaged
     {
         
@@ -96,7 +97,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOp128D<T> : IVShiftOp128<T>, IVShiftOpD<T>
+    public interface IVShiftOp128D<T> : IVUnaryOp128Imm8D<T>
         where T : unmanaged
     {
     }
@@ -106,7 +107,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOp256D<T> : IVShiftOp256<T>, IVShiftOpD<T>
+    public interface IVShiftOp256D<T>  : IVUnaryOp256Imm8D<T>
         where T : unmanaged
     {
         

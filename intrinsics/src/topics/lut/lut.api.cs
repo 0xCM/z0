@@ -18,7 +18,7 @@ namespace Z0
             => new Lut16(src);
 
         [MethodImpl(Inline)]
-        public static Lut16 define(ConstBlock128<byte> src)
+        public static Lut16 define(Block128<byte> src)
             => new Lut16(src);
 
         [MethodImpl(Inline)]
@@ -26,7 +26,7 @@ namespace Z0
             => new Lut32(src);
 
         [MethodImpl(Inline)]
-        public static Lut32 define(ConstBlock256<byte> src)
+        public static Lut32 define(Block256<byte> src)
             => new Lut32(src);
     }
 }

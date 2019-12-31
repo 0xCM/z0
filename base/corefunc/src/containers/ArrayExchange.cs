@@ -64,20 +64,20 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public T Point(int index)
+        public T Slot(int index)
             => skip(Head, index);
 
         [MethodImpl(Inline)]
-        public void Point(int index, T point)
+        public void Slot(int index, T point)
             => seek(ref Head, index) = point;
 
         public T this[int index]
         {
             [MethodImpl(Inline)]            
-            get => Point(index);
+            get => Slot(index);
 
             [MethodImpl(Inline)]            
-            set => Point(index, value);
+            set => Slot(index, value);
         }
 
     }

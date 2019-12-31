@@ -26,18 +26,18 @@ namespace Z0
         }
 
         public void gather_8()
-            => sb_gather_check<byte>();
+            => gather_check<byte>();
 
         public void gather_16()
-            => sb_gather_check<ushort>();
+            => gather_check<ushort>();
 
         public void gather_32()
-            => sb_gather_check<uint>();
+            => gather_check<uint>();
 
         public void gather_64()
-            => sb_gather_check<ulong>();        
+            => gather_check<ulong>();        
 
-        void sb_gather_check<T>(T t = default)
+        void gather_check<T>(T t = default)
             where T : unmanaged
         {
             for(var i=0; i<RepCount; i++)

@@ -44,9 +44,18 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
+        public static uint pop<T>(T x0, T x1, T x2)
+            where T : unmanaged
+                => Bits.pop(convert<T,ulong>(x0), convert<T,ulong>(x1), convert<T,ulong>(x2));
+
+        /// <summary>
+        /// Counts the number of enabled primal operand bits
+        /// </summary>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
         public static uint pop<T>(T x0, T x1, T x2, T x3)
             where T : unmanaged
-                => Bits.pop(convert<T,ulong>(x0),convert<T,ulong>(x1), convert<T,ulong>(x2), convert<T,ulong>(x3));
+                => Bits.pop(convert<T,ulong>(x0), convert<T,ulong>(x1), convert<T,ulong>(x2), convert<T,ulong>(x3));
 
         /// <summary>
         /// Counts the number of enabled primal operand bits

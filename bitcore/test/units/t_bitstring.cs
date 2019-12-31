@@ -92,13 +92,11 @@ namespace Z0
             => bs_parse_check<ushort>();
 
         public void bs_parse()
-        {
-            
+        {            
             bs_parse_check<uint>();
             bs_parse_check<int>();
             bs_parse_check<ulong>();
             bs_parse_check<long>();
-
         }
 
         public void bs_pow2()
@@ -154,7 +152,6 @@ namespace Z0
             Claim.eq(1,z.Length);            
             Claim.eq(x, z[0]);
         }
-
 
         public void bs_nlz()
         {
@@ -309,7 +306,7 @@ namespace Z0
 
         }
 
-        protected void bs_seq_check<T>()
+        void bs_seq_check<T>()
             where T : unmanaged
         {
 
@@ -333,7 +330,7 @@ namespace Z0
 
         }
  
-        protected void bs_convert_check<T>()
+        void bs_convert_check<T>()
             where T : unmanaged
         {
             var src = Random.Span<T>(RepCount);
@@ -358,10 +355,10 @@ namespace Z0
 
         }
 
-        protected void TraceError(string msg)
+        void TraceError(string msg)
             => Trace(errorMsg(msg));
 
-        protected void bs_parse_range_check(int minlen, int maxlen)
+        void bs_parse_range_check(int minlen, int maxlen)
         {
             for(var cycle=0; cycle< CycleCount; cycle++)
             {            
@@ -378,5 +375,32 @@ namespace Z0
                 Claim.eq(x,z);
             }
         }
+
+        void bs_rep_check<T>()
+            where T : unmanaged
+        {
+            var src = Random.Span<T>(RepCount);
+            for(var i=0; i<src.Length; i++)
+            {
+                var x = src[i];
+                var bs = BitString.scalar(src[i]);
+                var y = bs.TakeScalar<T>();
+                Claim.eq(x,y);
+                Claim.eq(bs.Format(), BitString.scalar(y).Format());
+            }
+        }
+
+        void bs_fromscalar_check<T>(T t = default)
+            where T : unmanaged
+        {
+            var src = Random.Span<T>(RepCount);
+            for(var i=0; i<src.Length; i++)
+            {
+                var bc1 =  BitString.scalar(src[i]).Format();
+                var bc3 = BitString.scalar(src[i]);
+                Claim.eq(bc1,bc3);
+            }
+        }
+
     }
 }

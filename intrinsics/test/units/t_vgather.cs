@@ -233,8 +233,8 @@ namespace Z0
             var A = DataBlocks.alloc(w,blocks, t);                
             var B = DataBlocks.alloc(w,blocks, t);
 
-            var pattern0 = CpuVector.vlsbmask(w,n2,n1,t);
-            var pattern1 = CpuVector.vmsbmask(w,n2,n1,t);
+            var pattern0 = VMask.vlsb(w,n2,n1,t);
+            var pattern1 = VMask.vmsb(w,n2,n1,t);
 
             for(var block = 0; block < blocks; block++)
             {

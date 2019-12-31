@@ -83,6 +83,20 @@ namespace Z0
                 => src.Hi;       
 
         [MethodImpl(Inline)]
+        static Vector128<T> vhi_u<T>(Vector256<T> src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return vgeneric<T>(dinx.vhi(vcast8u(src)));
+            else if(typeof(T) == typeof(ushort))
+                return vgeneric<T>(dinx.vhi(vcast16u(src)));
+            else if(typeof(T) == typeof(uint))
+                return vgeneric<T>(dinx.vhi(vcast32u(src)));
+            else 
+                return vgeneric<T>(dinx.vhi(vcast64u(src)));
+        }
+
+        [MethodImpl(Inline)]
         static Vector128<T> vhi_i<T>(Vector256<T> src)
             where T : unmanaged
         {
@@ -96,19 +110,6 @@ namespace Z0
                 return vgeneric<T>(dinx.vhi(vcast64i(src)));
         }
 
-        [MethodImpl(Inline)]
-        static Vector128<T> vhi_u<T>(Vector256<T> src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vhi(vcast8u(src)));
-            else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vhi(vcast16u(src)));
-            else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vhi(vcast32u(src)));
-            else 
-                return vgeneric<T>(dinx.vhi(vcast64u(src)));
-        }
 
         [MethodImpl(Inline)]
         static Vector128<T> vhi_f<T>(Vector256<T> src)

@@ -19,7 +19,7 @@ namespace Z0
             clearbits_check<ulong>(21,11);
         }
         
-        protected void clearbits_check<T>(int first, int count)        
+        void clearbits_check<T>(int first, int count)        
             where T : unmanaged
         {
             var n = bitsize<T>();

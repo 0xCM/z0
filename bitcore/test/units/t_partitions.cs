@@ -12,7 +12,6 @@ namespace Z0
 
     public class t_partitions : t_bitcore<t_partitions>    
     {            
-
         public void bitpart_16x4()
         {
             var n = n4;
@@ -39,7 +38,6 @@ namespace Z0
             for(var i=0; i<n; i++)
                 Claim.eq(dst[i],(byte)7);
         }
-
 
         public void bitpart_27x3()
         {

@@ -58,14 +58,14 @@ namespace Z0
 
             // Store every component
             storage.Clear();
-            mask = CpuVector.vmsbmask(n256, n8, n1, z8);
+            mask = VMask.vmsb(n256, n8, n1, z8);
             ginx.vmaskstore8(x,mask,storage);
             stored = storage.LoadVector();
             Claim.eq(x,stored);
 
             // Store odd components
             storage.Clear();
-            mask = CpuVector.vmsbmask(n256, n16, n1, z8);
+            mask = VMask.vmsb(n256, n16, n1, z8);
             ginx.vmaskstore8(x,mask,storage);
             stored = storage.LoadVector();
 
@@ -78,7 +78,7 @@ namespace Z0
 
             // Store even components
             storage.Clear();
-            mask = ginx.vbsrl(CpuVector.vmsbmask(n256,n16,n1,z8),1);
+            mask = ginx.vbsrl(VMask.vmsb(n256,n16,n1,z8),1);
             ginx.vmaskstore8(x, mask, storage);
             stored = storage.LoadVector();
 

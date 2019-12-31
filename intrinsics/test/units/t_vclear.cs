@@ -40,7 +40,7 @@ namespace Z0
                 byte length = (byte)(bitsize<T>() - start);
                 var cellcount = n/bitsize(t);
                 var x = Random.CpuVector<T>(n);
-                var x1 = ginx.vclearbits(x, start, length);                                    
+                var x1 = ginx.vbitclear(x, start, length);                                    
                 var x2 = ginx.vsrl(x1,start);
                 Claim.nea(ginx.vnonz(x2));
             }
@@ -55,7 +55,7 @@ namespace Z0
                 byte length = (byte)(bitsize<T>() - start);
                 var cellcount = n/bitsize(t);
                 var x = Random.CpuVector<T>(n);
-                var x1 = ginx.vclearbits(x, start, length);                                    
+                var x1 = ginx.vbitclear(x, start, length);                                    
                 var x2 = ginx.vsrl(x1,start);
                 Claim.nea(ginx.vnonz(x2));
             }

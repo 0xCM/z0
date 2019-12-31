@@ -16,19 +16,19 @@ namespace Z0.OpCodes
     public static class vpattern
     {
         public static Vector128<byte> ones_128x8u()
-            => CpuVector.vones<byte>(n128);
+            => VPattern.vones<byte>(n128);
 
         public static Vector128<ulong> ones_128x64u()
-            => CpuVector.vones<ulong>(n128);
+            => VPattern.vones<ulong>(n128);
 
         public static Vector256<byte> ones_256x8u()
-            => CpuVector.vones<byte>(n256);
+            => VPattern.vones<byte>(n256);
 
         public static Vector256<ulong> ones_256x64u()
-            => CpuVector.vones<ulong>(n256);
+            => VPattern.vones<ulong>(n256);
 
         public static Vector256<double> ones_256x64f()
-            => CpuVector.vones<double>(n256);
+            => VPattern.vones<double>(n256);
 
         public static Vector256<byte> pattern_lanemerge_256x8u()            
             => CpuVector.vlanemerge<byte>();

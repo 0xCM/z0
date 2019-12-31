@@ -63,10 +63,10 @@ namespace Z0
     public interface IIndexedSource<A> : IExchangeSource<A>, ICountedExchange<A>
     {
         /// <summary>
-        /// Emits a point from an index-identified slot
+        /// Emits a value from an index-identified slot
         /// </summary>
-        /// <param name="index">The point index</param>
-        A Point(int index);        
+        /// <param name="index">The slot index</param>
+        A Slot(int index);        
     }
 
     /// <summary>
@@ -80,6 +80,27 @@ namespace Z0
 
     }
 
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVIndexedSource<W,V,T> : IIndexedSource<V>
+        where W : unmanaged, ITypeNat
+        where V : struct
+        where T : unmanaged
+    {
+
+    }
+
+    public interface IVIndexedSource128<T> : IVIndexedSource<N128,Vector128<T>,T>
+        where T : unmanaged
+    {
+
+    }
+
+    public interface IVIndexedSource256<T> : IVIndexedSource<N256,Vector256<T>,T>
+        where T : unmanaged
+    {
+        
+    }
+
     /// <summary>
     /// Characterizes a receiver of index-identified points
     /// </summary>
@@ -90,9 +111,9 @@ namespace Z0
         /// <summary>
         /// Receives a point in an index-identified slot
         /// </summary>
-        /// <param name="index">The point index</param>
-        /// <param name="point">The point value</param>
-        void Point(int index, A point);        
+        /// <param name="index">The slot index</param>
+        /// <param name="value">The slot value</param>
+        void Slot(int index, A value);        
     }
 
     /// <summary>
@@ -108,10 +129,10 @@ namespace Z0
         A this[int index]
         {
             [MethodImpl(Inline)]            
-            get => Point(index);
+            get => Slot(index);
 
             [MethodImpl(Inline)]            
-            set => Point(index, value);
+            set => Slot(index, value);
         }
     }
 

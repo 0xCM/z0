@@ -16,42 +16,58 @@ namespace Z0
     /// </summary>
     public static class Rng
     {
+        /// <summary>
+        /// Creates a 128-bit vectorized emitter predicated an a specified random source
+        /// </summary>
+        /// <param name="w">The vector bit width</param>
+        /// <param name="random">The random source</param>
+        /// <param name="t">A vector component type representative</param>
+        /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        static T TypeMin<T>()
+        public static VRandom128<T> VEmitter<T>(N128 w, IPolyrand random, T t = default)  
             where T : unmanaged
-                => gmath.minval<T>();
-        
-        static T TypeMax<T>()
-            where T : unmanaged
-                => gmath.maxval<T>();
+                => new VRandom128<T>(random);
 
+        /// <summary>
+        /// Creates a 256-bit vectorized emitter predicated an a specified random source
+        /// </summary>
+        /// <param name="w">The vector bit width</param>
+        /// <param name="random">The random source</param>
+        /// <param name="t">A vector component type representative</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static VRandom256<T> VEmitter<T>(N256 w, IPolyrand random, T t = default)  
+            where T : unmanaged
+                => new VRandom256<T>(random);
+
+        /// <summary>
+        /// Defines a T-valued interval that covers the full T-domain
+        /// </summary>
+        /// <typeparam name="T">The domain type</typeparam>
         public static Interval<T> TypeDomain<T>()
             where T : unmanaged
         {
             var min = signedint<T>()
-                ? gmath.negate(gmath.sar(TypeMax<T>(), 1)) 
+                ? gmath.negate(gmath.sar(gmath.maxval<T>(), 1)) 
                 : gmath.zero<T>();
             
             var max = 
                 signedint<T>() && !floating<T>()
-                ? gmath.sar(TypeMax<T>(), 1)
+                ? gmath.sar(gmath.maxval<T>(), 1)
                 : gmath.maxval<T>();
             return (min,max);
-
         }
 
         /// <summary>
-        /// Retrieves a non-deterministic seed
+        /// Produces a non-deterministic seed
         /// </summary>
         /// <typeparam name="T">The seed type</typeparam>
-        [MethodImpl(Inline)]
         public static T EntropicSeed<T>()            
             where T : unmanaged
                 => Entropy.Value<T>();
         
         /// <summary>
-        /// Retrieves a seeed from embedded application resources that, for a given
-        /// index, remanins fixed
+        /// Produces a seed from embedded application resources that, for a given index, remanins fixed
         /// </summary>
         /// <typeparam name="T">The seed type</typeparam>
         [MethodImpl(Inline)]
@@ -60,36 +76,22 @@ namespace Z0
                 => RngSeed.TakeSingle<T>(convert<T,int>(index));
 
         /// <summary>
-        /// Retrieves descriptive information for fixed seed data
-        /// </summary>
-        /// <param name="ByteCount">The total number of bytes available</param>
-        /// <param name="MaxIndex">The maximum index for one value of the parametric type</param>
-        /// <typeparam name="T">The type relative to which the maximum index is computed</typeparam>
-        [MethodImpl(Inline)]
-        public static (ByteSize ByteCount, int MaxIndex) FixedSeedStats<T>()
-            where T : unmanaged
-                => (RngSeed.SourceLength, RngSeed.MaxOffset<T>());
-
-        /// <summary>
         /// Creates a new WyHash16 generator
         /// </summary>
         /// <param name="seed">An optional seed; if unspecified, seed is taken from the system entropy source</param>
-        [MethodImpl(Inline)]
         public static IPolyrand WyHash64(ulong? seed = null)
             => new WyHash64(seed ?? Seed64.Seed00).ToPolyrand();        
 
         /// <summary>
-        /// Creates a 128-bit xorshift rng initialezed with a specified seed
+        /// Creates a 128-bit xorshift rng initialized with a specified seed
         /// </summary>
         /// <param name="s0">The first seed value</param>
         /// <param name="s1">The second seed value</param>
         /// <param name="s2">The third seed value</param>
         /// <param name="s3">The fourth seed value</param>
-        [MethodImpl(Inline)]
         public static IPointSource<uint> XOr128(uint? s0 = null, uint? s1 = null, uint? s2 = null, uint? s3 = null)
             => new XOrShift128(s0 ?? Seed32.Seed00,s1 ?? Seed32.Seed01, s2 ?? Seed32.Seed02, s3 ?? Seed32.Seed03);
 
-        [MethodImpl(Inline)]
         public static IPointSource<uint> XOr128(ReadOnlySpan<uint> state, int offset = 0)
             => new XOrShift128(state.Slice(offset));
 
@@ -97,17 +99,12 @@ namespace Z0
         /// Creates an XOrShift 1024 rng
         /// </summary>
         /// <param name="seed">The initial state</param>
-        [MethodImpl(Inline)]
         public static IPolyrand XOrShift1024(ulong[] seed = null)
             => new XOrShift1024(seed ?? Seed1024.Default).ToPolyrand();
 
-        static RowVector<N6,uint> Seed6x32 = new uint[]{0xFA243, 0xAD941, 0xBC883, 0xDB193, 0xAA137, 0xB1B39};
-
-        [MethodImpl(Inline)]
         public static IPointSource<uint> Mrg32k3a()
-            => new Mrg32K3A(Seed6x32);
+            => new Mrg32K3A(new uint[]{0xFA243, 0xAD941, 0xBC883, 0xDB193, 0xAA137, 0xB1B39});
 
-        [MethodImpl(Inline)]
         public static IPointSource<uint> Mrg32k3a(RowVector<N6,uint> seed)
             => new Mrg32K3A(seed);
 
@@ -115,7 +112,6 @@ namespace Z0
         /// Creates an XOrShift 1024 rng
         /// </summary>
         /// <param name="seed">The initial state</param>
-        [MethodImpl(Inline)]
         public static IPolyrand XOrStarStar256(ulong[] seed = null)
             => XOrShift256.Define(seed ?? Seed256.Default).ToPolyrand();
  
@@ -124,7 +120,6 @@ namespace Z0
         /// </summary>
         /// <param name="seed">The initial state of the generator, if specified; 
         /// otherwise, the seed is obtained from an entropy source</param>
-        [MethodImpl(Inline)]
         public static IPolyrand SplitMix(ulong? seed = null)
             => SplitMix64.Define(seed ?? Seed64.Seed00).ToPolyrand();
 
@@ -168,7 +163,6 @@ namespace Z0
         /// <param name="indices">A span of index values</param>
         public static IRngSuite<N> Pcg64Suite<N>(Span<ulong> seeds, Span<ulong> indices)        
             where N : unmanaged, ITypeNat
-
         {
             var count = length(seeds,indices);
             var members = new IPolyrand[count];
@@ -186,17 +180,17 @@ namespace Z0
         public static IRngSuite<N> WyHash64Suite<N>(N n = default, params ulong[] seed)
             where N : unmanaged, ITypeNat
         {
-            NatSpan<N,ulong> _seed;
+            NatSpan<N,ulong> states;
             if(seed.Length == 0)
-                _seed = Entropy.Values<N,ulong>();
+                states = Entropy.Values<N,ulong>();
             else if(seed.Length == (int)n.NatValue)
-                _seed = NatSpan.load(ref seed[0], n);
+                states = NatSpan.load(ref seed[0], n);
             else
                 throw Errors.LengthMismatch((int)n.NatValue, seed.Length);
 
             var members = new IPolyrand[n.NatValue];
             for(var i=0; i<members.Length; i++)
-                members[i] = WyHash64(_seed[i]);
+                members[i] = WyHash64(states[i]);
 
             return new RngSuite<N>(members);
         }

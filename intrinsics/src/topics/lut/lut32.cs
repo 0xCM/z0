@@ -27,7 +27,7 @@ namespace Z0
             => this.data = data;
 
         [MethodImpl(Inline)]
-        internal Lut32(in ConstBlock256<byte> data)
+        internal Lut32(in Block256<byte> data)
             => this.data = data.LoadVector();
 
         public byte this[int i]

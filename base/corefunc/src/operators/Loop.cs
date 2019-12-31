@@ -33,6 +33,13 @@ namespace Z0
                 seek(ref dst, i) = f.Invoke(skip(src, i));                
         }
 
+        [MethodImpl(Inline)]
+        public static void run<F>(F f, int count)
+            where F : IAction<int>
+        {                        
+            for(var i=0; i<count; i++)
+                f.Invoke(i);
+        }
 
         [MethodImpl(Inline)]
         public static void run<F,T>(F f, ArrayExchange<T> src, ArrayExchange<T> dst)

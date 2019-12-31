@@ -24,8 +24,8 @@ namespace Z0
             var t = z32;
             var count = CpuVector.vcount(w,t);
 
-            var x = CpuVector.vincrements(w,t);
-            var y = CpuVector.vincrements(w, (x.LastCell() + 1));
+            var x = VPattern.vincrements(w,t);
+            var y = VPattern.vincrements(w, (x.LastCell() + 1));
             var z = dinx.vmergelo(x,y);
             var fmt = $"({x.Format()},{y.Format()}) -> {z.Format()}";
             Trace(fmt);
@@ -65,7 +65,7 @@ namespace Z0
 
             void report()
             {
-                var x = CpuVector.vincrements<byte>(n128);
+                var x = VPattern.vincrements<byte>(n128);
                 var y = dinx.vadd(x, CpuVector.vbroadcast(n128, (byte)16));
 
                 var lo = ginx.vmergelo(x,y);
@@ -81,8 +81,8 @@ namespace Z0
             {
                 var w = n256;
                 var t = z8;
-                var x = CpuVector.vincrements(w,t);
-                var y = CpuVector.vincrements(w, (byte)(x.LastCell() + 1));
+                var x = VPattern.vincrements(w,t);
+                var y = VPattern.vincrements(w, (byte)(x.LastCell() + 1));
                 var z = dinx.vmergehi(x,y);
                 Trace($"mergehi");
                 Trace(x.Format(pad:2));
@@ -94,8 +94,8 @@ namespace Z0
             {
                 var w = n256;
                 var t = z8;
-                var x = CpuVector.vincrements(w,t);
-                var y = CpuVector.vincrements(w, (byte)(x.LastCell() + 1));
+                var x = VPattern.vincrements(w,t);
+                var y = VPattern.vincrements(w, (byte)(x.LastCell() + 1));
                 var z = dinx.vmerge(x,y);
                 Trace(x.Format(pad:2));
                 Trace(y.Format(pad:2));

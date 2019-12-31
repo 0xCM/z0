@@ -92,5 +92,50 @@ namespace Z0
         public static ByteSwap256<T> vbyteswap<T>(N256 w, T t = default)
             where T : unmanaged
                 => ByteSwap256<T>.Op;
+
+        /// <summary>
+        /// Operator factory for vhi_128xT
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="t">A component type representative</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Hi128<T> vhi<T>(N128 w, T t = default)
+            where T : unmanaged
+                => Hi128<T>.Op;
+
+        /// <summary>
+        /// Operator factory for vhi_256xT
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="t">A component type representative</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Hi256<T> vhi<T>(N256 w, T t = default)
+            where T : unmanaged
+                => Hi256<T>.Op;
+
+        /// <summary>
+        /// Operator factory for vlo_256xT
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="t">A component type representative</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Lo128<T> vlo<T>(N128 w, T t = default)
+            where T : unmanaged
+                => Lo128<T>.Op;
+
+        /// <summary>
+        /// Operator factory for vlo_256xT
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="t">A component type representative</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Lo256<T> vlo<T>(N256 w, T t = default)
+            where T : unmanaged
+                => Lo256<T>.Op;
+
     }
 }

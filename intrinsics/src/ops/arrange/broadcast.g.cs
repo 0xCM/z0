@@ -11,7 +11,7 @@ namespace Z0
     
     using static zfunc;    
     
-    partial class ginxs
+    partial class ginx
     {
         /// <summary>
         /// Expands a bit-level S-pattern to a block-level T-pattern
@@ -63,5 +63,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
                 => vfirst<S,T>(CpuVector.vbroadcast(n128, src));       
+         
     }
+
 }

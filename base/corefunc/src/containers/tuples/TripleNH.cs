@@ -10,45 +10,45 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// An non-homogenous mutable 3-tuple
+    /// A non-homogenous mutable 3-tuple
     /// </summary>
-    /// <typeparam name="X">The type of the first member</typeparam>
-    /// <typeparam name="Y">The type of the second member</typeparam>
-    /// <typeparam name="Z">The type of the third member</typeparam>
-   public struct Triple<X,Y,Z>
-        where X: unmanaged
-        where Y : unmanaged
-        where Z : unmanaged
+    /// <typeparam name="T0">The type of the first member</typeparam>
+    /// <typeparam name="T1">The type of the second member</typeparam>
+    /// <typeparam name="T2">The type of the third member</typeparam>
+   public struct Triple<T0,T1,T2> : IMutableTuple<Triple<T0,T1,T2>,T0,T1,T2>
+        where T0: unmanaged
+        where T1 : unmanaged
+        where T2 : unmanaged
     {
         /// <summary>
         /// The first member
         /// </summary>
-        public X A;
+        public T0 A;
         
         /// <summary>
         /// The second member
         /// </summary>
-        public Y B;
+        public T1 B;
 
         /// <summary>
         /// The third member
         /// </summary>
-        public Z C;
+        public T2 C;
 
         [MethodImpl(Inline)]
-        public static implicit operator Triple<X,Y,Z>((X a, Y b, Z c) src)
-            => new Triple<X, Y, Z>(src.a, src.b, src.c);
+        public static implicit operator Triple<T0,T1,T2>((T0 a, T1 b, T2 c) src)
+            => new Triple<T0, T1, T2>(src.a, src.b, src.c);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(Triple<X,Y,Z> x, Triple<X,Y,Z> y)        
+        public static bool operator ==(Triple<T0,T1,T2> x, Triple<T0,T1,T2> y)        
             => x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(Triple<X,Y,Z> x, Triple<X,Y,Z> y)        
+        public static bool operator !=(Triple<T0,T1,T2> x, Triple<T0,T1,T2> y)        
             => x.Equals(y);
 
         [MethodImpl(Inline)]
-        public Triple(X a, Y b, Z c)
+        public Triple(T0 a, T1 b, T2 c)
         {
             this.A = a;
             this.B = b;
@@ -56,12 +56,36 @@ namespace Z0
         }                
 
         [MethodImpl(Inline)]
-        public void Deconstruct(out X a, out Y b, out Z c)
+        public void Deconstruct(out T0 a, out T1 b, out T2 c)
         {
             a = this.A;
             b = this.B;
             c = this.C;
         }
+
+        [MethodImpl(Inline)]
+        public T0 Get(N0 n)
+            => A;
+
+        [MethodImpl(Inline)]
+        public T1 Get(N1 n)
+            => B;
+
+        [MethodImpl(Inline)]
+        public T2 Get(N2 n)
+            => C;
+
+        [MethodImpl(Inline)]
+        public void Set(N0 n, T0 a)
+            => this.A = a;
+
+        [MethodImpl(Inline)]
+        public void Set(N1 n, T1 b)
+            => this.B = b;
+
+        [MethodImpl(Inline)]
+        public void Set(N2 n, T2 c)
+            => this.C = c;
 
         /// <summary>
         /// Interprets the pair over alternate domains
@@ -72,20 +96,20 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged        
             where U : unmanaged                      
-                => Unsafe.As<Triple<X,Y,Z>,Triple<S,T,U>>(ref this);
+                => Unsafe.As<Triple<T0,T1,T2>,Triple<S,T,U>>(ref this);
 
         [MethodImpl(Inline)]
-        public bool Equals(Triple<X,Y,Z> rhs)
+        public bool Equals(Triple<T0,T1,T2> rhs)
             => A.Equals(rhs.A) && B.Equals(rhs.B);
 
-        public string Format()
-            => $"({A},{B},{C})";
+        public string Format(TupleFormat style = TupleFormat.Coordinate)
+            => style == TupleFormat.Coordinate ? $"({A},{B},{C})" : $"{A}x{B}x{C}";
 
         public override int GetHashCode()
             => HashCode.Combine(A,B);
         
         public override bool Equals(object obj)
-            => obj is Pair<X,Y> x && Equals(x);
+            => obj is Pair<T0,T1> x && Equals(x);
 
         public override string ToString()
             => Format();

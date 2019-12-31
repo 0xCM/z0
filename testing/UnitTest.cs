@@ -12,13 +12,19 @@ namespace Z0
     public abstract class UnitTest<U> : TestContext<U>, IUnitTest
         where U : UnitTest<U>
     {
-
         protected UnitTest(ITestConfig config = null, IPolyrand random = null)
             : base(config, random)
             {
 
             }        
 
+        protected IFunc<Vector128<T>> vemitter<T>(N128 w, T t = default)
+            where T : unmanaged
+                => Rng.VEmitter(w,Random,t);
+        
+        protected IFunc<Vector256<T>> vemitter<T>(N256 w, T t = default)
+            where T : unmanaged
+                => Rng.VEmitter(w,Random,t);
 
         /// <summary>
         /// Produces the name of the test case for the specified function

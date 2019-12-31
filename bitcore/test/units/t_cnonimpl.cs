@@ -10,16 +10,16 @@ namespace Z0
  
     public class t_cnonimpl : t_bitcore<t_cnonimpl>
     {
-        public void sb_cnonimpl_8u()
+        public void cnonimpl_8u()
             => cnonimpl_check<byte>();
 
-        public void sb_cnonimpl_16u()
+        public void cnonimpl_16u()
             => cnonimpl_check<ushort>();
 
-        public void sb_cnonimpl_32u()
+        public void cnonimpl_32u()
             => cnonimpl_check<uint>();
 
-        public void sb_cnonimpl_64u()
+        public void cnonimpl_64u()
             => cnonimpl_check<ulong>();
 
         protected void cnonimpl_check<T>(T t = default)

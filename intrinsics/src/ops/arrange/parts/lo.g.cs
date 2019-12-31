@@ -23,6 +23,28 @@ namespace Z0
                 =>  vgeneric<T>(vzerohi(v64u(src)));
 
         /// <summary>
+        /// Extracts the lo 128-bit lane of the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vlo<T>(Vector256<T> src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return vlo_u(src);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return vlo_i(src);
+            else 
+                return vlo_f(src);
+        }
+
+        /// <summary>
         /// Extracts the lo 128-bit lane of the source vector to scalar targets
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -57,29 +79,6 @@ namespace Z0
         public static Vector512<T> vlo<T>(Vector1024<T> src)
             where T : unmanaged
                 => src.Lo;       
-
-
-        /// <summary>
-        /// Extracts the lo 128-bit lane of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<T> vlo<T>(Vector256<T> src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vlo_u(src);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vlo_i(src);
-            else 
-                return vlo_f(src);
-        }
 
         [MethodImpl(Inline)]
         public static Vector128<T> vlo_i<T>(Vector256<T> src)

@@ -12,26 +12,26 @@ namespace Z0
     /// <summary>
     /// An homogenous immutable 4-tuple
     /// </summary>
-    public readonly struct ConstQuad<T>
+    public readonly struct ConstQuad<T> : ITuple<ConstQuad<T>,T,T,T,T>
         where T : unmanaged
     {
         /// <summary>
-        /// The first member of the pair
+        /// The first member
         /// </summary>
         public readonly T A;
         
         /// <summary>
-        /// The second member of the pair
+        /// The second member
         /// </summary>
         public readonly T B;
 
         /// <summary>
-        /// The first member of the pair
+        /// The third member
         /// </summary>
         public readonly T C;
         
         /// <summary>
-        /// The second member of the pair
+        /// The fourth member
         /// </summary>
         public readonly T D;
 
@@ -65,6 +65,18 @@ namespace Z0
             a = A; b = B; c = C; d = D;
         }
 
+        [MethodImpl(Inline)]
+        public T Get(N0 n) => A;
+
+        [MethodImpl(Inline)]
+        public T Get(N1 n) => B;
+
+        [MethodImpl(Inline)]
+        public T Get(N2 n) => C;
+
+        [MethodImpl(Inline)]
+        public T Get(N3 n) => D;
+
         /// <summary>
         /// Interprets the pair over an alternate domain
         /// </summary>
@@ -82,7 +94,7 @@ namespace Z0
             => style == TupleFormat.Coordinate ? $"({A},{B},{C},{D})" : $"{A}x{B}x{C}x{D}";
 
         public override int GetHashCode()
-            => HashCode.Combine(A,B);
+            => HashCode.Combine(A,B,C);
         
         public override bool Equals(object obj)
             => obj is ConstQuad<T> x && Equals(x);

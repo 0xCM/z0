@@ -10,7 +10,7 @@ namespace Z0
         
     public class t_bitwidth : t_bitcore<t_bitwidth>
     {
-        public void sb_width_base_case()
+        public void bitwidth_outline()
         {
             var x = (byte)0b0;
             var w = gbits.width(x);
@@ -30,16 +30,30 @@ namespace Z0
 
         }
 
-        public void sb_width_8u()
+        public void bitwidth_8u()
             => sb_width_check<byte>();
 
-        public void sb_width_16u()
+        public void bitwidth_16u()
             => sb_width_check<ushort>();
 
-        public void sb_width_32u()
+        public void bitwidth_32u()
             => sb_width_check<uint>();
 
-        public void sb_width_64u()
+        public void bitwidth_64u() 
             => sb_width_check<ulong>();
+
+        protected void sb_width_check<T>(T t = default)
+            where T : unmanaged
+        {
+            for(var sample = 0; sample < RepCount; sample++)
+            {
+                var x = Random.Next<T>();
+                var actual = gbits.width(x);
+                var expect = bitsize<T>() - gbits.nlz(x);
+                Claim.eq(expect, actual);
+
+            }
+        }
+
     }
 }

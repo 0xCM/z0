@@ -40,7 +40,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => ginxs.broadcast<T,uint>(cell);
+                => ginx.broadcast<T,uint>(cell);
 
         /// <summary>
         /// Transmits the content of a single cell to all cells in a grid
@@ -55,7 +55,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => ginxs.broadcast<T,ulong>(cell);
+                => ginx.broadcast<T,ulong>(cell);
 
         /// <summary>
         /// Transmits the content of a single cell to all cells in a grid

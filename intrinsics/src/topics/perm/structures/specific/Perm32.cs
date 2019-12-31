@@ -31,14 +31,14 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static Perm32 identity()
-            => new Perm32(CpuVector.vincrements<byte>(w));
+            => new Perm32(VPattern.vincrements<byte>(w));
 
         /// <summary>
         /// Creates the reversal of the identity permutation
         /// </summary>
         [MethodImpl(Inline)]
         public static Perm32 reverse()
-            => new Perm32(CpuVector.vdecrements<byte>(w));
+            => new Perm32(VPattern.vdecrements<byte>(w));
 
         Perm32(Vector256<byte> data)
             => this.data = data;

@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid16<T> init<T>(N16 w, int m, int n, T d = default)
             where T : unmanaged
-                => new BitGrid16<T>(ginxs.broadcast<T,ushort>(d), m, n);
+                => new BitGrid16<T>(ginx.broadcast<T,ushort>(d), m, n);
 
         /// <summary>
         /// Creates a populated 32-bit generic bitgrid 
@@ -37,7 +37,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid32<T> init<T>(N32 w, int m, int n, T d = default)
             where T : unmanaged
-                => new BitGrid32<T>(ginxs.broadcast<T,uint>(d), m, n);
+                => new BitGrid32<T>(ginx.broadcast<T,uint>(d), m, n);
 
         /// <summary>
         /// Creates a populated 64-bit generic bitgrid
@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitGrid64<T> init<T>(N64 w, int m, int n, T d = default)
             where T : unmanaged
-                => new BitGrid64<T>(ginxs.broadcast<T,ulong>(d), m, n);
+                => new BitGrid64<T>(ginx.broadcast<T,ulong>(d), m, n);
 
         /// <summary>
         /// Creates a populated 1x16 grid
@@ -589,7 +589,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged  
-                => new BitGrid16<M, N, T>(ginxs.broadcast<T,ushort>(d));
+                => new BitGrid16<M, N, T>(ginx.broadcast<T,ushort>(d));
 
         /// <summary>
         /// Initializes a 32-bit grid of natural dimensions
@@ -605,7 +605,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged            
-                => new BitGrid32<M, N, T>(ginxs.broadcast<T,uint>(d));
+                => new BitGrid32<M, N, T>(ginx.broadcast<T,uint>(d));
 
         /// <summary>
         /// Initializes a 64-bit grid of natural dimensions
@@ -621,7 +621,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged            
-                => new BitGrid64<M, N, T>(ginxs.broadcast<T,ulong>(d));
+                => new BitGrid64<M, N, T>(ginx.broadcast<T,ulong>(d));
 
         /// <summary>
         /// Initializes a 128-bit grid of natural dimensions

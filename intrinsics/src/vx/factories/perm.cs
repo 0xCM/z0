@@ -36,5 +36,4 @@ namespace Z0
             where T : unmanaged
                 => Reverse256<T>.Op;
     }
-
 }

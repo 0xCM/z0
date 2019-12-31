@@ -26,7 +26,7 @@ namespace Z0
             => this.data = data;
 
         [MethodImpl(Inline)]
-        internal Lut16(in ConstBlock128<byte> data)
+        internal Lut16(in Block128<byte> data)
             => this.data = data.LoadVector();
 
         public byte this[int i]

@@ -6,13 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
     using static zfunc;
 
     /// <summary>
     /// An homogenous immutable 2-tuple
     /// </summary>
-    public readonly struct ConstPair<T>
+    public readonly struct ConstPair<T> : ITuple<ConstPair<T>, T,T>
         where T : unmanaged
     {
         /// <summary>
@@ -57,6 +56,14 @@ namespace Z0
             b = this.B;
         }
 
+        [MethodImpl(Inline)]
+        public T Get(N0 n)
+            => A;
+
+        [MethodImpl(Inline)]
+        public T Get(N1 n)
+            => B;
+
         /// <summary>
         /// Interprets the pair over an alternate domain
         /// </summary>
@@ -67,7 +74,7 @@ namespace Z0
                 => Unsafe.As<ConstPair<T>,ConstPair<U>>(ref Unsafe.AsRef(in this));
 
         [MethodImpl(Inline)]
-        public bool Equals(in ConstPair<T> rhs)
+        public bool Equals(ConstPair<T> rhs)
             => A.Equals(rhs.A) && B.Equals(rhs.B);
 
         public string Format(TupleFormat style = TupleFormat.Coordinate)
@@ -81,6 +88,8 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+
     }
 
 }

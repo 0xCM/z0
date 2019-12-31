@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> Next<T>(this Vector128<T> src)
             where T : unmanaged
-                => ginx.vnext(src);
+                => ginx.vinc(src);
 
         /// <summary>
         /// Increments each source vector component by a unit
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> Next<T>(this Vector256<T> src)
             where T : unmanaged
-                => ginx.vnext(src);
+                => ginx.vinc(src);
 
         /// <summary>
         /// Decrements each source vector component by a unit
@@ -52,7 +52,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> Prior<T>(this Vector128<T> src)
             where T : unmanaged
-                => ginx.vprior<T>(src);
+                => ginx.vdec<T>(src);
 
         /// <summary>
         /// Decrements each source vector component by a unit
@@ -62,7 +62,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> Prior<T>(this Vector256<T> src)
             where T : unmanaged
-                => ginx.vprior<T>(src);
+                => ginx.vdec<T>(src);
 
         /// <summary>
         /// Returns the number of source vector components

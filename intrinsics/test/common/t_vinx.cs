@@ -435,33 +435,6 @@ namespace Z0
                 Claim.eq(expect[i], actual[i]);
         }
         
-        protected void vhi_check<T>(N128 w, T t = default)
-            where T : unmanaged
-        {
-            var count = zfunc.vcount<T>(w);
-            for(var sample=0; sample< RepCount; sample++)
-            {                
-                var x = Random.CpuVector<T>(w,t);
-                var h = ginx.vhi(x);
-
-                for(int i=0, j = count/2; j < count; i++, j++)
-                    Claim.eq(x.Item(j), h.Item(i));
-            }
-        }
-
-        protected void vhi_check<T>(N256 w, T t = default)
-            where T : unmanaged
-        {
-            var count = zfunc.vcount<T>(w);
-            for(var sample=0; sample< RepCount; sample++)
-            {                
-                var x = Random.CpuVector<T>(w,t);
-                var h = ginx.vhi(x);
-
-                for(int i=0, j = count/2; j < count; i++, j++)
-                    Claim.eq(vcell(x,j), h.Item(i));
-            }
-        }
 
         protected void vinsert_check<T>(N128 w, T t = default)
             where T : unmanaged

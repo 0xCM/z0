@@ -233,30 +233,29 @@ namespace Z0
         // ~ ------------------------------------------------------------------
 
         /// <summary>
-        /// [00000001]
+        /// 0x01 = [00000001]
         /// </summary>
         public const byte Lsb8x1x1 = 1;
 
         /// <summary>
-        /// [00000001 00000001]
+        /// 0x0101 = [00000001 00000001]
         /// </summary>
         public const ushort Lsb16x8x1 = (ushort)Lsb8x1x1 | 1 << 8;
         
         /// <summary>
-        /// [00000001 00000001 00000001]
+        /// 0x010101 = [00000001 00000001 00000001]
         /// </summary>
         public const uint Lsb24x8x1 = (uint)Lsb16x8x1 | (uint)Lsb8x1x1 << 16;
 
         /// <summary>
-        /// [00000001 00000001 00000001 00000001]
+        /// 0x01010101 = [00000001 00000001 00000001 00000001]
         /// </summary>
         public const uint Lsb32x8x1 = (uint)Lsb16x8x1 | (uint) Lsb16x8x1 << 16;
 
         /// <summary>
-        /// [00000001 00000001 00000001 00000001 00000001 00000001 00000001 00000001]
+        /// 0x0101010101010101 = [00000001 00000001 00000001 00000001 00000001 00000001 00000001 00000001]
         /// </summary>
         public const ulong Lsb64x8x1 = (ulong)Lsb32x8x1 | (ulong)Lsb32x8x1 << 32;
-
 
         // ~ 16x1: The least bit of each 16-bit segment is enabled
         // ~ ------------------------------------------------------------------
@@ -349,25 +348,25 @@ namespace Z0
         // ~ ------------------------------------------------------------------
 
         /// <summary>
-        /// [00001111]
+        /// 0x0f = [00001111]
         /// </summary>
         public const byte Lsb8x8x4 = Lsb8x8x3 << 1 | 1;
 
         /// <summary>
-        /// [00001111 00001111]
+        /// 0x0f0f = [00001111 00001111]
         /// </summary>
         public const ushort Lsb16x8x4 = (ushort)Lsb8x8x4 | (ushort)Lsb8x8x4 << 8;
 
         /// <summary>
-        /// [00001111 00001111 00001111 00001111]
+        /// 0x0f0f0f0f = [00001111 ... 00001111]
         /// </summary>
         public const uint Lsb32x8x4 = (uint)Lsb16x8x4 | (uint)Lsb16x8x4 << 16;
 
         /// <summary>
-        /// [00001111 00001111 00001111 00001111 00001111 000011110 0001111 00001111]
+        /// 0x0f0f0f0f0f0f0f0f = [00001111 ... 00001111]
         /// </summary>
         public const ulong Lsb64x8x4 = (ulong)Lsb32x8x4 | (ulong)Lsb32x8x4 << 32;
-
+                
         // ~ 8x5: The least 5 bits of each 8-bit segment are enabled
         // ~ ------------------------------------------------------------------
 

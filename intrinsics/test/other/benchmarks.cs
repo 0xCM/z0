@@ -154,29 +154,36 @@ namespace Z0
         }
 
         public void vsrl_bench()
-        {
-            void bench_256(N256 w)
-            {
-                vshift_bench(w,VX.vsrl(w, z8), z8);
-                vshift_bench(w,VX.vsrl(w, z16), z16);
-                vshift_bench(w,VX.vsrl(w, z32), z32);
-                vshift_bench(w,VX.vsrl(w, z64), z64);            
-
-            }
-
-            void bench_128(N128 w)
-            {
-                vshift_bench(w,VX.vsrl(w, z8), z8);
-                vshift_bench(w,VX.vsrl(w, z16), z16);
-                vshift_bench(w,VX.vsrl(w, z32), z32);
-                vshift_bench(w,VX.vsrl(w, z64), z64);            
-            }
-         
-            bench_128(n128);
-            bench_256(n256);
+        {         
+            vsrl_bench(n128);
+            vsrl_bench(n256);
         }
 
-        protected void vbinop_bench<F,T>(N128 w, F f, T t = default, SystemCounter clock = default)
+        void vsrl_bench(N256 w)
+        {
+            vshift_bench(w,VX.vsrl(w, z8), z8);
+            vshift_bench(w,VX.vsrl(w, z16), z16);
+            vshift_bench(w,VX.vsrl(w, z32), z32);
+            vshift_bench(w,VX.vsrl(w, z64), z64);            
+
+        }
+
+        void vsrl_bench(N128 w)
+        {
+            vshift_bench(w,VX.vsrl(w, z8), z8);
+            vshift_bench(w,VX.vsrl(w, z16), z16);
+            vshift_bench(w,VX.vsrl(w, z32), z32);
+            vshift_bench(w,VX.vsrl(w, z64), z64);            
+        }
+
+        public void vpop_bench()
+        {
+            vpop_bench_ref();
+            vpop_bench(n128);
+            vpop_bench(n256);
+        }
+
+        void vbinop_bench<F,T>(N128 w, F f, T t = default, SystemCounter clock = default)
             where F : IVBinOp128<T>
             where T : unmanaged
         {
@@ -200,7 +207,7 @@ namespace Z0
             ReportBenchmark(f.Moniker, ops, clock);
         }
 
-        protected void vbinop_bench<F,T>(N256 w, F f, T t = default, SystemCounter clock = default)
+        void vbinop_bench<F,T>(N256 w, F f, T t = default, SystemCounter clock = default)
             where F : IVBinOp256<T>
             where T : unmanaged
         {
@@ -224,8 +231,8 @@ namespace Z0
             ReportBenchmark(f.Moniker, ops, clock);
         }
 
-        protected void vshift_bench<F,T>(N128 w, F f, T t = default, SystemCounter clock = default)
-            where F : IVShiftOp<Vector128<T>>
+        void vshift_bench<F,T>(N128 w, F f, T t = default, SystemCounter clock = default)
+            where F : IVUnaryOp128Imm8<T>
             where T : unmanaged
         {
             var last = vzero(w,t);
@@ -248,8 +255,8 @@ namespace Z0
             ReportBenchmark(f.Moniker,  ops, clock);
         }
 
-        protected void vshift_bench<F,T>(N256 w, F f, T t = default, SystemCounter clock = default)
-            where F : IVShiftOp<Vector256<T>>
+        void vshift_bench<F,T>(N256 w, F f, T t = default, SystemCounter clock = default)
+            where F : IVUnaryOp256Imm8<T>
             where T : unmanaged
         {
             var last = vzero(w,t);
@@ -272,7 +279,7 @@ namespace Z0
             ReportBenchmark(f.Moniker,  ops, clock);
         }
 
-        public void bitspan_to_scalar32_bench()
+        public void bitspan_scalar32_bench()
         {
             var clock = counter();
             var last = 0u;
@@ -290,7 +297,7 @@ namespace Z0
             ReportBenchmark("bitspan_scalar/32", ops, clock);
         }
 
-        public void bitpack_bench<T>(T t = default)
+        void bitpack_bench<T>(T t = default)
             where T : unmanaged
         {
             var n = bitsize(t);
@@ -313,6 +320,59 @@ namespace Z0
             ReportBenchmark($"bitspan_pack/{n}", ops, clock);
         }
 
-    }
 
+        void vpop_bench(N256 n, SystemCounter counter = default)
+        {            
+            var total = 0ul;
+            var opcount = 0;
+            for(var cycle = 0; cycle < CycleCount; cycle++)
+            {
+                var x = Random.CpuVector<ulong>(n);
+                var y = Random.CpuVector<ulong>(n);
+                var z = Random.CpuVector<ulong>(n);
+                counter.Start();
+                for(var i=0; i<RepCount; i++)
+                    total += dinx.vpop(x,y,z);
+                counter.Stop();
+                opcount += (4 * 3 * RepCount);
+            }
+            ReportBenchmark($"vpop_3x256", opcount,counter);
+        }
+
+        void vpop_bench(N128 n, SystemCounter counter = default)
+        {            
+            var total = 0ul;
+            var opcount = 0;
+            for(var cycle = 0; cycle < CycleCount; cycle++)
+            {
+                var x = Random.CpuVector<ulong>(n);
+                var y = Random.CpuVector<ulong>(n);
+                var z = Random.CpuVector<ulong>(n);
+                counter.Start();
+                for(var i=0; i<RepCount; i++)
+                    total += dinx.vpop(x,y,z);
+                counter.Stop();
+                opcount += (2 * 3 * RepCount);
+            }
+            ReportBenchmark($"vpop_3x128", opcount,counter);
+        }
+
+        void vpop_bench_ref(SystemCounter counter = default)
+        {            
+            var total = 0u;
+            var opcount = 0;
+            Span<ulong> samples = stackalloc ulong[RepCount];
+            ref readonly var src = ref head(samples);
+            for(var cycle = 0; cycle < CycleCount; cycle++)
+            {
+                Random.Fill(RepCount, ref head(samples));
+                counter.Start();
+                for(var i=0; i< RepCount; i++)
+                    total += Bits.pop(skip(in head(samples), i));
+                counter.Stop();
+                opcount += RepCount;
+            }
+            ReportBenchmark($"vpop_1x64_ref", opcount, counter);
+        }
+    }
 }

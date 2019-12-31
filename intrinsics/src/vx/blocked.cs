@@ -135,26 +135,6 @@ namespace Z0
                 => ref vzip(xb,yb,zb,dst, VX.vselect<T>(n256));
 
         [MethodImpl(Inline)]
-        public static ref readonly Block128<T> vsrl<T>(in Block128<T> xb, byte offset, in Block128<T> zb)
-            where T : unmanaged
-                => ref vzip(xb,offset,zb,VX.vsrl<T>(n128));
-
-        [MethodImpl(Inline)]
-        public static ref readonly Block256<T> vsrl<T>(in Block256<T> xb, byte offset, in Block256<T> zb)
-            where T : unmanaged
-                => ref vzip(xb,offset,zb,VX.vsrl<T>(n256));
-
-        [MethodImpl(Inline)]
-        public static ref readonly Block128<T> vsll<T>(in Block128<T> xb, byte offset, in Block128<T> zb)
-            where T : unmanaged
-                => ref vzip(xb,offset,zb,VX.vsll<T>(n128));
-
-        [MethodImpl(Inline)]
-        public static ref readonly Block256<T> vsll<T>(in Block256<T> xb, byte offset, in Block256<T> zb)
-            where T : unmanaged
-                => ref vzip(xb,offset,zb,VX.vsll<T>(n256));
-
-        [MethodImpl(Inline)]
         public static ref readonly Block128<T> vnot<T>(in Block128<T> xb, in Block128<T> zb)
             where T : unmanaged
                 => ref vmap(xb, zb,VX.vnot<T>(n128));

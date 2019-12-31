@@ -10,16 +10,33 @@ namespace Z0
         
     public class t_bitview : t_bitcore<t_bitview>
     {
-        public void gsb_bitview_8()
-            => sb_bitview_check<byte>();
+        public void bitview_8()
+            => bitview_check<byte>();
 
-        public void gsb_bitview_16()
-            => sb_bitview_check<ushort>();
+        public void bitview_16()
+            => bitview_check<ushort>();
 
-        public void gsb_bitview_32()
-            => sb_bitview_check<uint>();
+        public void bitview_32()
+            => bitview_check<uint>();
 
-        public void gsb_bitview_64()
-            => sb_bitview_check<ulong>();
+        public void bitview_64()
+            => bitview_check<ulong>();
+
+        void bitview_check<T>(T t = default)
+            where T : unmanaged
+        {
+            var src = gmath.maxval<T>();
+            var view = BitView.Over(ref src);
+            var bytecount = size<T>();
+
+            for(var i=0; i<bytecount; i++)
+            for(byte j=0; j<8; j++)
+                view[i,j] = j % 2 == 0;
+            
+            var bs = BitString.scalar(src);
+            for(var i=0; i< bytecount*8; i++)
+                Claim.yea(bs[i] == (i%2 == 0));
+        }
+
     }
 }

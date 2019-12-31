@@ -10,19 +10,19 @@ namespace Z0
 
     public class t_lsboff : t_bitcore<t_lsboff>
     {
-        public void sb_lsboff_8()
-            => sb_lsboff_check<byte>();
+        public void lsboff_8()
+            => lsboff_check<byte>();
 
-        public void sb_lsboff_16()
-            => sb_lsboff_check<ushort>();
+        public void lsboff_16()
+            => lsboff_check<ushort>();
 
-        public void sb_lsboff_32()
-            => sb_lsboff_check<uint>();
+        public void lsboff_32()
+            => lsboff_check<uint>();
 
-        public void sb_lsboff_64()
-            => sb_lsboff_check<ulong>();
+        public void lsboff_64()
+            => lsboff_check<ulong>();
 
-        protected void sb_lsboff_check<T>(T t = default)
+        protected void lsboff_check<T>(T t = default)
             where T : unmanaged
         {
             for(var i=0; i<RepCount; i++)

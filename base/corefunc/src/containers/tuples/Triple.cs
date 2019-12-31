@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// An homogenous mutable 3-tuple
     /// </summary>
-    public struct Triple<T>
+    public struct Triple<T> : IMutableTuple<Triple<T>,T,T,T>
         where T : unmanaged
     {
         /// <summary>
@@ -50,6 +50,38 @@ namespace Z0
             this.C = c;
         }                
 
+        [MethodImpl(Inline)]
+        public void Deconstruct(out T a, out T b, out T c)
+        {
+            a = this.A;
+            b = this.B;
+            c = this.C;
+        }
+
+        [MethodImpl(Inline)]
+        public T Get(N0 n)
+            => A;
+
+        [MethodImpl(Inline)]
+        public T Get(N1 n)
+            => B;
+
+        [MethodImpl(Inline)]
+        public T Get(N2 n)
+            => C;
+
+        [MethodImpl(Inline)]
+        public void Set(N0 n, T a)
+            => this.A = a;
+
+        [MethodImpl(Inline)]
+        public void Set(N1 n, T b)
+            => this.B = b;
+
+        [MethodImpl(Inline)]
+        public void Set(N2 n, T c)
+            => this.C = c;
+
         public T this[int i]
         {
             [MethodImpl(Inline)]
@@ -65,16 +97,6 @@ namespace Z0
                 else
                     C = value;
             }
-
-        }
-
-
-        [MethodImpl(Inline)]
-        public void Deconstruct(out T a, out T b, out T c)
-        {
-            a = this.A;
-            b = this.B;
-            c = this.C;
         }
 
         /// <summary>
@@ -90,8 +112,8 @@ namespace Z0
         public bool Equals(Triple<T> rhs)
             => A.Equals(rhs.A) && B.Equals(rhs.B) && C.Equals(rhs.C);
 
-        public string Format()
-            => $"({A},{B},{C})";
+        public string Format(TupleFormat style = TupleFormat.Coordinate)
+            => style == TupleFormat.Coordinate ? $"({A},{B},{C})" : $"{A}x{B}x{C}";
 
         public override int GetHashCode()
             => HashCode.Combine(A,B,C);

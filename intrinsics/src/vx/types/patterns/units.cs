@@ -22,7 +22,7 @@ namespace Z0
             public string Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke() => CpuVector.vunits<T>(n128);            
+            public Vector128<T> Invoke() => VPattern.vunits<T>(n128);            
         }
 
         public readonly struct Units256<T> : IVPatternSource256<T>
@@ -35,7 +35,7 @@ namespace Z0
             public string Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke() => CpuVector.vunits<T>(n256);
+            public Vector256<T> Invoke() => VPattern.vunits<T>(n256);
 
         }
     }

@@ -12,16 +12,16 @@ namespace Z0
     /// <summary>
     /// An homogenous mutable 2-tuple
     /// </summary>
-    public struct Pair<T>
+    public struct Pair<T> : IMutableTuple<Pair<T>, T ,T>
         where T : unmanaged
     {
         /// <summary>
-        /// The first/left/lo member of the pair
+        /// The first member
         /// </summary>
         public T A;
         
         /// <summary>
-        /// The second/right/hi member of the pair
+        /// The second member
         /// </summary>
         public T B;
 
@@ -51,6 +51,22 @@ namespace Z0
             b = this.B;
         }
 
+        [MethodImpl(Inline)]
+        public T Get(N0 n)
+            => A;
+
+        [MethodImpl(Inline)]
+        public T Get(N1 n)
+            => B;
+
+        [MethodImpl(Inline)]
+        public void Set(N0 n, T a)
+            => this.A = a;
+
+        [MethodImpl(Inline)]
+        public void Set(N1 n, T b)
+            => this.B = b;
+
         public T this[int i]
         {
             [MethodImpl(Inline)]
@@ -65,7 +81,6 @@ namespace Z0
                     B = value;
             }
         }
-
 
         /// <summary>
         /// Interprets the pair over an alternate domain
