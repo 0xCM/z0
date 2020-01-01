@@ -145,6 +145,7 @@ namespace Z0
                 where T : unmanaged
                     => src.ReadOnly().FormatBits(maxbits,tlz, specifier, blockWidth, blocksep, rowWidth);
 
+
         /// <summary>
         /// Formats span cells as bitstrings
         /// </summary>
@@ -258,8 +259,6 @@ namespace Z0
             where T : unmanaged        
                 => bracket(src.ToBitString(maxbits).Format(false, false, blocksize ?? bitsize<T>(), AsciSym.Space,null));
 
-
-
         /// <summary>
         /// Formats the content as a bitstring
         /// </summary>
@@ -269,9 +268,8 @@ namespace Z0
         /// <param name="blockWidth">The number of binary digits per block, if specified</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static string Format(this ReadOnlySpan<bit> src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
-            char? blocksep = null, int? rowWidth = null)
-                => src.ToBitString().Format(tlz, specifier, blockWidth, blocksep, rowWidth);
+        public static string Format(this ReadOnlySpan<bit> src, BitFormat? fmt = null)
+            => src.ToBitString().Format(fmt);
             
         /// <summary>
         /// Formats the content as a bitstring
@@ -282,23 +280,7 @@ namespace Z0
         /// <param name="blockWidth">The number of binary digits per block, if specified</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static string Format(this Span<bit> src,  bool tlz = false, bool specifier = false, int? blockWidth = null, 
-            char? blocksep = null, int? rowWidth = null)
-                => src.ReadOnly().Format(tlz, specifier, blockWidth, blocksep, rowWidth);
-
-        /// <summary>
-        /// Formats the content as a bitstring
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
-        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
-        /// <param name="blockWidth">The number of binary digits per block, if specified</param>
-        /// <typeparam name="N">The natural length type</typeparam>
-        [MethodImpl(Inline)]
-        public static string Format<N>(this NatSpan<N,bit> src, bool tlz = false, bool specifier = false, int? blockWidth = null, 
-            char? blocksep = null, int? rowWidth = null)
-                where N : unmanaged, ITypeNat
-                    => src.Data.Format(tlz, specifier, blockWidth, blocksep, rowWidth);
-
+        public static string Format(this Span<bit> src,  BitFormat? fmt = null)
+            => src.ReadOnly().Format(fmt);
     }
 }

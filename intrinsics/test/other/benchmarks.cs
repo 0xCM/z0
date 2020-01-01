@@ -290,7 +290,7 @@ namespace Z0
                 var data = Random.BitSpan(Pow2.T10);
                 clock.Start();
                 for(var i=0; i<data.Length; i+= 32, ops++)
-                    last = data.Scalar<uint>(i);
+                    last = BitSpan.extract<uint>(data, i);
                 clock.Stop();
             }
             
@@ -311,7 +311,7 @@ namespace Z0
                 clock.Start();
                 var bs =  BitSpan.load(packed);
                 for(var j=0; j < bs.Length; j+= n, ops++)
-                    gmath.or(composite, BitSpan.scalar<T>(bs,j));
+                    gmath.or(composite, BitSpan.extract<T>(bs,j));
                 clock.Stop();
                 
                 Random.Fill(packed);

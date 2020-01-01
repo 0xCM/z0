@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct BitSpan
     {
-       /// <summary>
+        /// <summary>
         /// Obliterates all bitspan content
         /// </summary>
         /// <param name="src">The source bits</param>
@@ -20,6 +20,21 @@ namespace Z0
         public static ref readonly BitSpan clear(in BitSpan src)
         {
             src.bits.Clear();
+            return ref src;
+        }
+
+        /// <summary>
+        /// Obliterates bitspan content higher than a specified maximum
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]
+        public ref readonly BitSpan clear(in BitSpan src, int maxbits)
+        {
+            if(Length <= maxbits)
+                return ref src;
+            
+            src.Bits.Slice(maxbits).Clear();
+            
             return ref src;
         }
 
@@ -36,5 +51,4 @@ namespace Z0
             return ref src;
         }
     }
-
 }

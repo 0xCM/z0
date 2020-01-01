@@ -31,43 +31,43 @@ namespace Z0
 
          [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this byte src)
-            => BitSpan.load(src);
+            => BitSpan.create<byte>(src);
 
          [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this sbyte src)
-            => BitSpan.load((byte)src);
+            => BitSpan.create<byte>((byte)src);
 
          [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this ushort src)
-            => BitSpan.load(src);
+            => BitSpan.create<ushort>(src);
 
          [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this short src)
-            => BitSpan.load((ushort)src);
+            => BitSpan.create<ushort>((ushort)src);
 
          [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this int src)
-            => BitSpan.load((uint)src);
+            => BitSpan.create<uint>((uint)src);
 
          [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this uint src)
-            => BitSpan.load(src);
+            => BitSpan.create<uint>(src);
 
          [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this long src)
-            => BitSpan.load((ulong)src);
+            => BitSpan.create<ulong>((ulong)src);
 
          [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this ulong src)
-            => BitSpan.load(src);
+            => BitSpan.create<ulong>(src);
 
          [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this float src)
-            => BitSpan.load(BitConvert.ToUInt32(src));
+            => BitSpan.create<uint>(BitConvert.ToUInt32(src));
 
          [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this double src)
-            => BitSpan.load(BitConvert.ToUInt64(src));
+            => BitSpan.create<ulong>(BitConvert.ToUInt64(src));
 
          [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this Span<byte> src)

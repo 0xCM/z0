@@ -116,6 +116,5 @@ namespace Z0
                 enabled += (int)src[i];
             return enabled;                            
         }
-
     }
 }

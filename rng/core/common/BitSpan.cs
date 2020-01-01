@@ -26,8 +26,11 @@ namespace Z0
         /// </summary>
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
-        public static void BitSpan(this IPolyrand random, in BitSpan dst)
-            => random.TakeBits(dst.Length).CopyTo(dst.Bits);
+        public static ref readonly BitSpan BitSpan(this IPolyrand random, in BitSpan dst)
+        {
+            random.TakeBits(dst.Length).CopyTo(dst.Bits);
+            return ref dst;
+        }
 
         /// <summary>
         /// Produces a bitspan with randomized length

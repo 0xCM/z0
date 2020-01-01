@@ -16,7 +16,7 @@ namespace Z0
     partial class BitPack
     {
         [MethodImpl(Inline)]
-        public static T pack<T>(Span<bit> src)
+        public static T pack<T>(Span<bit> src, T t = default)
             where T : unmanaged
                 => pack_u<T>(src);
 

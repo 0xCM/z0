@@ -26,12 +26,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public BitSpan Truncate(in BitSpan src, int maxlen)
+        public static ref readonly BitSpan reverse(in BitSpan src)
         {
-            if(Length <= maxlen)
-                return src;
-            
-            return load(src.bits.Slice(0, maxlen));            
+            src.Bits.Reverse();
+            return ref src;
         }
 
         /// <summary>

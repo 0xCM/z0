@@ -37,6 +37,14 @@ namespace Z0
             => not(x);
 
         [MethodImpl(Inline)]
+        public static bit operator ==(in BitSpan x, in BitSpan y)
+            => same(x,y);
+
+        [MethodImpl(Inline)]
+        public static bit operator !=(in BitSpan x, in BitSpan y)
+            => !same(x,y);
+
+        [MethodImpl(Inline)]
         public BitSpan(Span<bit> bits)
             => this.bits = bits;
         
@@ -67,13 +75,54 @@ namespace Z0
             get => ref seek(ref Head, index);
         }        
 
+        /// <summary>
+        /// Packs a segment selection of at most 8 bits
+        /// </summary>
+        public byte this[int offset, int count, byte t]
+        {
+            [MethodImpl(Inline)]
+            get => BitSpan.bitslice<byte>(this, offset, count);
+        }        
+
+        /// <summary>
+        /// Packs a segment selection of at most 16 bits
+        /// </summary>
+        public ushort this[int offset, int count, ushort t]
+        {
+            [MethodImpl(Inline)]
+            get => BitSpan.bitslice<ushort>(this, offset, count);
+        }        
+
+        /// <summary>
+        /// Packs a segment selection of at most 32 bits
+        /// </summary>
+        public uint this[int offset, int count, uint t]
+        {
+            [MethodImpl(Inline)]
+            get => BitSpan.bitslice<uint>(this, offset, count);
+        }        
+
+        /// <summary>
+        /// Packs a segment selection of at most 64 bits
+        /// </summary>
+        public ulong this[int offset, int count, ulong t]
+        {
+            [MethodImpl(Inline)]
+            get => BitSpan.bitslice<ulong>(this, offset, count);
+        }        
+
         [MethodImpl(Inline)]
         public string Format(BitFormat? fmt = null)
             => format(this, fmt);
 
         [MethodImpl(Inline)]
         public bool Equals(in BitSpan rhs)
-            => same(this,rhs);
+            => same(this, rhs);
+    
+        public override int GetHashCode()
+            => throw new NotSupportedException();
 
+        public override bool Equals(object rhs)
+            => throw new NotSupportedException();
     }
 }

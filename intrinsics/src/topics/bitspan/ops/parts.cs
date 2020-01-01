@@ -12,15 +12,12 @@ namespace Z0
 
     partial struct BitSpan
     {
-
         /// <summary>
         /// Creates a bitspan from a parameter array
         /// </summary>
         /// <param name="src">The sorce bits</param>
         [MethodImpl(Inline)]
         public static BitSpan parts(params bit[] src)
-            => new BitSpan(src);
- 
+            => new BitSpan(src); 
     }
-
 }

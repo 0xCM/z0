@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
     
     using static zfunc;
 
@@ -87,6 +88,7 @@ namespace Z0
         {
             var count = n32;
             var block = n256;
+            
             for(var sample = 0; sample < RepCount; sample++)
             {
                 var bs = Random.BitString(count);
@@ -94,6 +96,26 @@ namespace Z0
                 uint packed = BitPack.pack(bitseq);
                 for(var i=0; i< count; i++)
                     Claim.eq(bs[i], BitMask.testbit(packed, i));
+            }
+        }
+
+        public void pack_32()
+        {
+            var n = 32;
+            Span<bit> buffer = new bit[n];
+            for(var i=0; i<RepCount; i++)
+            {
+                var bits = Random.Bits().Take(Random.Next<uint>(5,25)).ToSpan();
+                
+                var expect = 0u;
+                for(var j=0; j<bits.Length; j++)
+                    expect |= (uint)bits[j] << j;
+
+                buffer.Clear();
+                bits.CopyTo(buffer);
+                var result = BitPack.pack<uint>(buffer);
+                
+                Claim.eq(expect, result);
 
             }
         }

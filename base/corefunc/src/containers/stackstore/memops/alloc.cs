@@ -21,7 +21,7 @@ namespace Z0
             => default;
 
         /// <summary>
-        /// Stack allocates 128 bits of storage
+        /// Stack allocates 16 bytes = 128 bits of storage
         /// </summary>
         /// <param name="w">The storage width</param>
         /// <param name="seg">The segment width</param>
@@ -30,7 +30,7 @@ namespace Z0
             => default;
 
         /// <summary>
-        /// Stack allocates 256-bits of storage
+        /// Stack allocates 32 bytes = 256-bits of storage
         /// </summary>
         /// <param name="w">The storage width</param>
         /// <param name="seg">The segment width</param>
@@ -39,7 +39,7 @@ namespace Z0
             => default;
 
         /// <summary>
-        /// Stack allocates 512-bits of storage
+        /// Stack allocates 64 bytes = 512-bits of storage
         /// </summary>
         /// <param name="w">The storage width</param>
         /// <param name="seg">The segment width</param>
@@ -48,7 +48,7 @@ namespace Z0
             => default;
 
         /// <summary>
-        /// Stack allocates 1024-bits of storage
+        /// Stack allocates 128 bytes = 1024-bits of storage
         /// </summary>
         /// <param name="w">The storage width</param>
         [MethodImpl(Inline)]

@@ -72,9 +72,9 @@ namespace Z0
                 => math.min(count ?? bitsize<T>(), src.Length - offset - bitsize<T>());            
 
          [MethodImpl(Inline)]
-         public static T Scalar<T>(this in BitSpan src, int offset = 0)
+         public static T Scalar<T>(this in BitSpan src, T t = default)
             where T : unmanaged
-               => BitSpan.scalar<T>(src,offset);
+               => BitSpan.extract<T>(src);
     
     }
 

@@ -9,20 +9,15 @@ namespace Z0
 
     using static zfunc;
 
-
     partial struct BitSpan
     {
         public static string format(in BitSpan src, BitFormat? fmt = null)
         {
             var options = fmt ?? BitFormat.Default;
-
             var bitcount = src.Length;
-
             var blocked = options.BlockWidth != 0;
-            var blocks = blocked ? src.Length / options.BlockWidth : 0;
-            
-            //Add space for block separators
-            bitcount += blocks;
+            var blocks = blocked ? src.Length / options.BlockWidth : 0;                        
+            bitcount += blocks; // space for block separators
 
             Span<char> buffer = stackalloc char[bitcount];
             ref var dst = ref head(buffer);
@@ -39,7 +34,5 @@ namespace Z0
             
             return new string(buffer);
         }
-
     }
-
 }

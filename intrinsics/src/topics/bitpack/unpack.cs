@@ -15,6 +15,58 @@ namespace Z0
     partial class BitPack
     {
         /// <summary>
+        /// Distributes each packed source bit to the least significant bit of 8 corresponding target bytes
+        /// </summary>
+        /// <param name="packed">The packed source bits</param>
+        /// <param name="unpacked">A reference to the target buffer</param>
+        [MethodImpl(Inline)]
+        public static void unpack8x8(byte packed, ref byte unpacked)
+        {
+            var m = BitMask.lsb<ulong>(n8,n1);
+            seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
+        }
+
+        /// <summary>
+        /// Distributes each packed source bit to the least significant bit of 16 corresponding target bytes
+        /// </summary>
+        /// <param name="packed">The packed source bits</param>
+        /// <param name="unpacked">The target buffer</param>
+        [MethodImpl(Inline)]
+        public static void unpack16x8(ushort packed, ref byte unpacked)
+        {
+            var m = BitMask.lsb<ulong>(n8,n1);
+            seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
+            seek64(ref unpacked, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
+        }
+
+        /// <summary>
+        /// Distributes each packed source bit to the least significant bit of 32 corresponding target bytes
+        /// </summary>
+        /// <param name="packed">The packed source bits</param>
+        /// <param name="unpacked">The target buffer</param>
+        [MethodImpl(Inline)]
+        public static void unpack32x8(uint packed, ref byte unpacked)
+        {
+            var m = BitMask.lsb<ulong>(n8,n1);
+            seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
+            seek64(ref unpacked, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
+            seek64(ref unpacked, 2) = Bits.scatter((ulong)((byte)(packed >> 16)), m);
+            seek64(ref unpacked, 3) = Bits.scatter((ulong)((byte)(packed >> 24)), m);
+        }
+
+        /// <summary>
+        /// Distributes each packed source bit to the least significant bit of 64 corresponding target bytes
+        /// </summary>
+        /// <param name="packed">The packed source bits</param>
+        /// <param name="unpacked">The target buffer</param>
+        [MethodImpl(Inline)]
+        public static void unpack64x8(ulong packed, ref byte unpacked)        
+        {
+            unpack32x8((uint)packed, ref unpacked);
+            unpack32x8((uint)(packed >> 32), ref seek(ref unpacked, 32));
+        }
+
+        /// <summary>
         /// Distributes each packed source bit to the least significant bit of the corresponding target byte
         /// </summary>
         /// <param name="packed">The packed source bits</param>
@@ -45,18 +97,6 @@ namespace Z0
         /// Distributes each packed source bit to the least significant bit of the corresponding target byte
         /// </summary>
         /// <param name="packed">The packed source bits</param>
-        /// <param name="unpacked">A reference to the target buffer</param>
-        [MethodImpl(Inline)]
-        public static void unpack8x8(byte packed, ref byte unpacked)
-        {
-            var m = BitMask.lsb<ulong>(n8,n1);
-            seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
-        }
-
-        /// <summary>
-        /// Distributes each packed source bit to the least significant bit of the corresponding target byte
-        /// </summary>
-        /// <param name="packed">The packed source bits</param>
         /// <param name="unpacked">The target buffer</param>
         [MethodImpl(Inline)]
         public static void unpack16x8(ushort packed, Span<byte> unpacked)
@@ -79,34 +119,6 @@ namespace Z0
         {
             unpack16x8(packed, unpacked.Block(block));
             return ref unpacked;
-        }
-
-        /// <summary>
-        /// Distributes each packed source bit to the least significant bit of the corresponding target byte
-        /// </summary>
-        /// <param name="packed">The packed source bits</param>
-        /// <param name="unpacked">The target buffer</param>
-        [MethodImpl(Inline)]
-        public static void unpack16x8(ushort packed, ref byte unpacked)
-        {
-            var m = BitMask.lsb<ulong>(n8,n1);
-            seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
-            seek64(ref unpacked, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
-        }
-
-        /// <summary>
-        /// Distributes each packed source bit to the least significant bit of the corresponding target byte
-        /// </summary>
-        /// <param name="packed">The packed source bits</param>
-        /// <param name="unpacked">The target buffer</param>
-        [MethodImpl(Inline)]
-        public static void unpack32x8(uint packed, ref byte unpacked)
-        {
-            var m = BitMask.lsb<ulong>(n8,n1);
-            seek64(ref unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
-            seek64(ref unpacked, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
-            seek64(ref unpacked, 2) = Bits.scatter((ulong)((byte)(packed >> 16)), m);
-            seek64(ref unpacked, 3) = Bits.scatter((ulong)((byte)(packed >> 24)), m);
         }
 
         /// <summary>
@@ -146,18 +158,6 @@ namespace Z0
         /// <param name="packed">The packed source bits</param>
         /// <param name="unpacked">The target buffer</param>
         [MethodImpl(Inline)]
-        public static void unpack64x8(ulong packed, ref byte unpacked)        
-        {
-            unpack32x8((uint)packed, ref unpacked);
-            unpack32x8((uint)(packed >> 32), ref seek(ref unpacked, 32));
-        }
-
-        /// <summary>
-        /// Distributes each packed source bit to the least significant bit of the corresponding target byte
-        /// </summary>
-        /// <param name="packed">The packed source bits</param>
-        /// <param name="unpacked">The target buffer</param>
-        [MethodImpl(Inline)]
         public static void unpack64x8(ulong packed, Span<byte> unpacked)        
         {
             unpack32x8((uint)packed, unpacked.Slice(0,32));
@@ -183,7 +183,6 @@ namespace Z0
         /// </summary>
         /// <param name="count">The number of bytes to pack</param>
         /// <param name="src">The source reference</param>
-        /// <param name="buffer">The intermediate buffer</param>
         /// <param name="target">The target buffer</param>
         [MethodImpl(Inline)]
         public static void unpack8x32(int count, in byte src, in Block256<uint> target)
@@ -195,6 +194,25 @@ namespace Z0
             {
                 unpack8x8(skip(in src, block), ref tmp); 
                 dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref target.BlockRef(block));
+            }
+        }
+
+        /// <summary>
+        /// Unpacks a specified number source bytes to a corresponding count of 32-bit target values
+        /// </summary>
+        /// <param name="count">The number of bytes to pack</param>
+        /// <param name="src">The source reference</param>
+        /// <param name="target">The target reference, of size at least 256*count bits</param>
+        [MethodImpl(Inline)]
+        public static void unpack8x32(int count, in byte src, ref uint target)        
+        {
+            var buffer = z64;
+            ref var tmp = ref uint8(ref buffer);
+
+            for(var i = 0; i < count; i++)
+            {
+                unpack8x8(skip(in src, i), ref tmp); 
+                dinx.vconvert(n64, in tmp, n256, n32).StoreTo(ref seek(ref target, i*8));
             }
         }
     }
