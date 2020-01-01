@@ -16,7 +16,6 @@ namespace Z0
  
     partial class VPattern
     {
-
         /// <summary>
         /// Creates a 128-bit vector with component values k - 1, ..., 1, 0  where k is the length of the target vector
         /// </summary>

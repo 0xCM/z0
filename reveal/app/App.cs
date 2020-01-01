@@ -102,7 +102,10 @@ namespace Z0
             Disassemble(typeof(OC.bitmat));    
             Disassemble(typeof(OC.bitstore));
             Disassemble(typeof(OC.bitpack));    
+            Disassemble(typeof(OC.bitspan));    
             Disassemble(typeof(OC.bitconvert));    
+            Disassemble(typeof(OC.stacked));    
+
 
             Disassemble(typeof(OC.natoc));    
 

@@ -10,17 +10,11 @@ namespace Z0.OpCodes
 
     using static zfunc;
     using static As;
-    using static StackContainers;
+    using static Stacked;
 
     [OpCodeProvider]
     public static class bitstore
     {
-        public static void datablock_store(in byte src, uint count, ref Stack128 dst)
-            => StackStore.store(in src, count, ref dst);
-
-        public static void datablock_bytes(ref Stack128 src)
-            => StackStore.bytes(ref src);
-
         public static ReadOnlySpan<byte> bitseq(byte value)
             => BitStore.select(value);
 
@@ -56,7 +50,5 @@ namespace Z0.OpCodes
 
         public static void bitchars_64u(ulong value, Span<char> dst)
             => BitStore.bitchars(value, dst);            
-
     }
-
 }

@@ -11,7 +11,7 @@ namespace Z0.OpCodes
     using static zfunc;
     using static As;
     using static FixedContainers;
-    using static StackContainers;
+    using static Stacked;
     
     [OpCodeProvider]
     public static class bitconvert

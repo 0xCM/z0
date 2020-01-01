@@ -129,6 +129,16 @@ partial class zfunc
         => ref seek(ref head(src), count);
 
     /// <summary>
+    /// Adds an offset to the head of a span, measured relative to the reference type
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <param name="bytes">The number of elements to advance</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly T skip<T>(Span<T> src, int count)
+        => ref seek(ref head(src), count);
+
+    /// <summary>
     /// Adds an offset to a reference, measured in bytes
     /// </summary>
     /// <param name="src">The soruce reference</param>

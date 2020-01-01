@@ -9,6 +9,7 @@ namespace Z0
  
     using static zfunc;
     using static AsIn;     
+    using static Stacks;
 
     public static class Hex
     {
@@ -85,12 +86,12 @@ namespace Z0
         public static ReadOnlySpan<char> digits(byte value)
         {
             ref readonly var codes = ref head(HexCodes);
-            var storage = StackStore.chars(n2);
+            var storage = Stacks.chars(n2);
             ref var dst = ref storage.C0;
             
             seek(ref dst,0) = (char)skip(in codes, 0xF & value);
             seek(ref dst,1) = (char)skip(in codes, (value >> 4) & 0xF);
-            return StackStore.charspan(ref storage);
+            return Stacks.charspan(ref storage);
         }
 
 
@@ -103,12 +104,12 @@ namespace Z0
         {
             const int count = 4;
             ref readonly var codes = ref head(HexCodes);
-            var storage = StackStore.chars(n4);
+            var storage = Stacks.chars(n4);
             ref var dst = ref storage.C0;
 
             for(var i=0; i < count; i++)
-                seek(ref dst, i) = (char)skip(in codes, (value >> i*4) & 0xF);
-            return StackStore.charspan(ref storage);
+                @char(ref dst, i) = (char)skip(in codes, (value >> i*4) & 0xF);
+            return Stacks.charspan(ref storage);
         }
 
         /// <summary>
@@ -120,12 +121,12 @@ namespace Z0
         {
             const int count = 8;
             ref readonly var codes = ref head(HexCodes);
-            var storage = StackStore.chars(n8);
+            var storage = Stacks.chars(n8);
             ref var dst = ref storage.C0;
 
             for(var i=0; i < count; i++)
-                seek(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
-            return StackStore.charspan(ref storage);
+                @char(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
+            return Stacks.charspan(ref storage);
         }
 
         /// <summary>
@@ -137,12 +138,12 @@ namespace Z0
         {
             const int count = 16;
             ref readonly var codes = ref head(HexCodes);
-            var storage = StackStore.chars(n16);
+            var storage = Stacks.chars(n16);
             ref var dst = ref storage.C0;
 
             for(var i=0; i < count; i++)
-                seek(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
-            return StackStore.charspan(ref storage);
+                @char(ref dst, i) = (char)skip(in codes, (int) ((value >> i*4) & 0xF));
+            return Stacks.charspan(ref storage);
         }
 
         [MethodImpl(Inline)]

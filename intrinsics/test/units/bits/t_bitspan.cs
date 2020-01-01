@@ -22,7 +22,7 @@ namespace Z0
         public void bitspan_format_direction()
         {
             byte src = 1;
-            var bitspan = BitPack.bitspan(src);
+            var bitspan = BitSpan.load(src);
             var fmt = bitspan.Format();
             Claim.eq(8,fmt.Length);
             Claim.eq(bit.One, fmt[7]);
@@ -39,7 +39,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)            
             {
                 Random.Fill(packed);
-                BitPack.unpack8x32(packed, buffer, unpacked);
+                BitPack.unpack32(packed, unpacked);
                 var bitspan = BitSpan.load(unpacked.As<bit>());
                 bitspan_check(packed,bitspan);
             }
@@ -50,7 +50,7 @@ namespace Z0
         {
             const int length = 16;
             var src = BitMask.even(n2, n1, z16);
-            var bitspan = BitPack.bitspan(src);
+            var bitspan = BitSpan.load(src);
             var format = bitspan.Format();
             Trace(format);
 
@@ -74,7 +74,7 @@ namespace Z0
         {
             const int length = 32;
             var src = BitMask.even(n2, n1, z32);
-            var bitspan = BitPack.bitspan(src);
+            var bitspan = BitSpan.load(src);
             var format = bitspan.Format();
 
             Claim.eq(length, bitspan.Length);
@@ -97,7 +97,7 @@ namespace Z0
         {
             const int length = 64;
             var src = BitMask.even(n2, n1, z64);
-            var bitspan = BitPack.bitspan(src);
+            var bitspan = BitSpan.load(src);
             var format = bitspan.Format();
 
             Claim.eq(length, bitspan.Length);
@@ -203,7 +203,7 @@ namespace Z0
                 for(var i=0; i < RepCount; i++)
                 {
                     var src = Random.Single(t);                
-                    var bitspan = BitPack.bitspan(src);
+                    var bitspan = BitSpan.load(src);
                     BitConvert.GetBytes(src,bytes);
                     bitspan_check(bytes, bitspan);
                 }
@@ -221,8 +221,8 @@ namespace Z0
                 for(var i=0; i< RepCount; i++)
                 {
                     var x = Random.Single<T>();
-                    var y = BitPack.bitspan(x);
-                    var z = BitPack.scalar<T>(y);
+                    var y = BitSpan.load(x);
+                    var z = BitSpan.scalar<T>(y);
                     Claim.eq(x,z);
                 }
             }  

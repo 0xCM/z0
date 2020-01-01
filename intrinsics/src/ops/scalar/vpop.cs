@@ -72,7 +72,7 @@ namespace Z0
             
             odd = vadd(vadd(maj, maj), odd);
 
-            var dst = StackStore.alloc(n128);
+            var dst = Stacks.alloc(n128);
             ginx.vstore(odd, ref dst.X0);
             var total = 0ul;
 
@@ -113,8 +113,8 @@ namespace Z0
             
             odd = vadd(vadd(maj, maj), odd);
 
-            var dst = StackStore.alloc(n256);
-            ref var X = ref StackStore.head(ref dst);
+            var dst = Stacks.alloc(n256);
+            ref var X = ref Stacks.head(ref dst, z64);
             vstore(odd, ref X);
             
             var total = 0ul;

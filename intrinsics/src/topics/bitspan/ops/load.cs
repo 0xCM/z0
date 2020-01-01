@@ -5,108 +5,120 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
-    
-    using static zfunc;    
-    using static dinx;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
-    public static partial class BitPack
+    using static zfunc;
+    using static As;
+
+    partial struct BitSpan
     {
-         [MethodImpl(Inline)]
-         public static T scalar<T>(in BitSpan src, int offset = 0, int? count = null)
-            where T : unmanaged
-         {
-             var n = bitsize<T>();
-             Span<bit> bits = stackalloc bit[n];
-             src.Bits.Slice(offset, count ?? n).CopyTo(bits);
-             return pack<T>(bits);             
-         }
-
-         [MethodImpl(Inline)]
-         public static T scalar<T>(in BitSpan src)
-            where T : unmanaged
-                => pack<T>(src.Bits.Slice(0, bitsize<T>()));             
-
+        /// <summary>
+        /// Creates a bitspan from a primal source
+        /// </summary>
+        /// <param name="src">The packed source bits</param>
         [MethodImpl(Inline)]
-        public static BitSpan bitspan<T>(T packed)        
+        public static BitSpan load<T>(T src)
             where T : unmanaged
         {
             if(bitsize<T>() == 8)
-                return bitspan(convert<T,byte>(packed));
+                return load(convert<T,byte>(src));
             else if(bitsize<T>() == 16)
-                return bitspan(convert<T,ushort>(packed));
+                return load(convert<T,ushort>(src));
             else if(bitsize<T>() == 32)
-                return bitspan(convert<T,uint>(packed));
-            else    
-                return bitspan(convert<T,ulong>(packed));
+                return load(convert<T,uint>(src));
+            else if(bitsize<T>() == 64)
+                return load(convert<T,ulong>(src));
+            else
+                throw unsupported<T>();            
         }
+
+        /// <summary>
+        /// Creates a bitspan from an arbitrary number of packed values
+        /// </summary>
+        /// <param name="packed">The packed data source</param>
+        [MethodImpl(Inline)]
+        public static BitSpan load<T>(Span<T> packed)
+            where T : unmanaged
+                => load(packed.AsBytes());
+
+        /// <summary>
+        /// Creates a bitspan from an arbitrary number of packed values
+        /// </summary>
+        /// <param name="packed">The packed data source</param>
+        [MethodImpl(Inline)]
+        public static BitSpan load<T>(ReadOnlySpan<T> packed)
+            where T : unmanaged
+                => load(packed.AsBytes());
 
         /// <summary>
         /// Creates a bitspan from 8 packed source bits
         /// </summary>
         /// <param name="packed">The packed source bits</param>
-        public static BitSpan bitspan(byte packed)
+        [MethodImpl(Inline)]
+        static BitSpan load(byte packed)
         {
-            var buffer = DataBlocks.single(n64,z8);
             var target = DataBlocks.single(n256,z32);
-            return bitspan(packed, buffer,target);
+            return load(packed, DataBlocks.single(n256,z32));
         }
 
         /// <summary>
         /// Creates a bitspan from 16 packed source bits
         /// </summary>
         /// <param name="packed">The packed source bits</param>
-        public static BitSpan bitspan(ushort packed)
+        [MethodImpl(Inline)]
+        static BitSpan load(ushort packed)
         {
             const int blocks = 2;
             var bytes = BitConvert.GetBytes(packed, DataBlocks.single(n16,z8));
             var buffer = DataBlocks.single(n64,z8);
             var target = DataBlocks.alloc(n256,blocks,z32);
-            return bitspan(bytes, buffer, target);
+            return load(bytes, target);
         }
 
         /// <summary>
         /// Creates a bitspan from 32 packed source bits
         /// </summary>
         /// <param name="packed">The packed source bits</param>
-        public static BitSpan bitspan(uint packed)
+        [MethodImpl(Inline)]
+        static BitSpan load(uint packed)
         {
             const int blocks = 4;
             var bytes = BitConvert.GetBytes(packed, DataBlocks.single(n32,z8));
             var buffer = DataBlocks.single(n64,z8);
             var target = DataBlocks.alloc(n256,blocks,z32);
-            return bitspan(bytes, buffer, target);
+            return load(bytes,  target);
         }
 
         /// <summary>
         /// Creates a bitspan from 64 packed source bits
         /// </summary>
         /// <param name="packed">The packed source bits</param>
-        public static BitSpan bitspan(ulong packed)
+        [MethodImpl(Inline)]
+        static BitSpan load(ulong packed)
         {
             const int blocks = 8;
-            ref var _bytes = ref ref8(ref packed);
+
             var bytes = BitConvert.GetBytes(packed, DataBlocks.single(n64,z8));
             var buffer = DataBlocks.single(n64,z8);
             var target = DataBlocks.alloc(n256,blocks,z32);
-            return bitspan(bytes, buffer, target);
+            return load(bytes, target);
         }        
          
         /// <summary>
         /// Creates a bitspan from 8 packed bits
         /// </summary>
         /// <param name="packed">The packed source bits</param>
-        /// <param name="buffer">The staging buffer</param>
         /// <param name="unpacked">The bitspan content receiver</param>
-        /// <param name="block">The receiving block index</param>
         [MethodImpl(Inline)]
-        public static BitSpan bitspan(byte packed, in Block64<byte> buffer, in Block256<uint> unpacked, int block = 0)
+        static BitSpan load(byte packed, in Block256<uint> unpacked)
         {
-            unpack8x8(packed,buffer,block); 
-            dinx.vconvert(buffer,n256).StoreTo(unpacked);
-            return BitSpan.load(unpacked.As<bit>());
+            var buffer = z64;
+            ref var tmp = ref uint8(ref buffer);
+
+            BitPack.unpack8x8(packed, ref tmp); 
+            dinx.vconvert(n64, in tmp, n256, n32).StoreTo(unpacked);
+            return load(unpacked.As<bit>());
         }
 
         /// <summary>
@@ -116,9 +128,9 @@ namespace Z0
         /// <param name="buffer">The staging buffer</param>
         /// <param name="unpacked">The bitspan content buffer which must cover at least 2 blocks</param>
         [MethodImpl(Inline)]
-        public static BitSpan bitspan(in Block16<byte> packed, in Block64<byte> buffer, in Block256<uint> unpacked)
+        static BitSpan load(in Block16<byte> packed, in Block256<uint> unpacked)
         {
-            unpack8x32(2, in packed.Head, buffer, unpacked);            
+            BitPack.unpack8x32(2, in packed.Head, unpacked);            
             return BitSpan.load(unpacked.As<bit>());            
         }
 
@@ -129,9 +141,9 @@ namespace Z0
         /// <param name="buffer">The staging buffer</param>
         /// <param name="unpacked">The bitspan content buffer which must cover at least 4 blocks</param>
         [MethodImpl(Inline)]
-        public static BitSpan bitspan(in Block32<byte> packed, in Block64<byte> buffer, in Block256<uint> unpacked)
+        static BitSpan load(in Block32<byte> packed, in Block256<uint> unpacked)
         {
-            unpack8x32(4, in packed.Head, buffer, unpacked);            
+            BitPack.unpack8x32(4, in packed.Head, unpacked);            
             return BitSpan.load(unpacked.As<bit>());            
         }
 
@@ -142,9 +154,9 @@ namespace Z0
         /// <param name="buffer">The staging buffer</param>
         /// <param name="unpacked">The bitspan content buffer which must cover at least 8 blocks</param>
         [MethodImpl(Inline)]
-        public static BitSpan bitspan(in Block64<byte> packed, in Block64<byte> buffer, in Block256<uint> unpacked)
+        static BitSpan load(in Block64<byte> packed, in Block256<uint> unpacked)
         {
-            unpack8x32(8, in packed.Head, buffer, unpacked);                        
+            BitPack.unpack8x32(8, in packed.Head, unpacked);                        
             return BitSpan.load(unpacked.As<bit>());            
         }
 
@@ -152,22 +164,21 @@ namespace Z0
         /// Creates a bitspan from an arbitrary number of packed bytes
         /// </summary>
         /// <param name="packed">The packed data source</param>
-        public static BitSpan bitspan(ReadOnlySpan<byte> packed)
+        static BitSpan load(ReadOnlySpan<byte> packed)
         {            
             const int blocklen = 8;
 
             var blockcount = packed.Length;
-            var buffer = DataBlocks.single(n64,z8);
             var unpacked = DataBlocks.alloc(n256, blockcount, z32);
             for(var block=0; block < blockcount; block++)
-                unpack8x32(packed, buffer, unpacked,block);
+                BitPack.unpack32(packed, unpacked,block);
             return BitSpan.load(unpacked.As<bit>());
         }
 
         [MethodImpl(Inline)]
-        public static BitSpan bitspan(ulong packed, ref byte unpacked)
+        static BitSpan load(ulong packed, ref byte unpacked)
         {
-            unpack64x8(packed, ref unpacked);
+            BitPack.unpack64x8(packed, ref unpacked);
             return BitSpan.load(ref Unsafe.As<byte,bit>(ref unpacked), 64);
         }
 
@@ -175,26 +186,33 @@ namespace Z0
         /// Creates a bitspan from an arbitrary number of packed bytes
         /// </summary>
         /// <param name="packed">The packed data source</param>
-        public static BitSpan bitspan(Span<byte> packed)
-            => bitspan(packed.ReadOnly());
+        static BitSpan load(Span<byte> packed)
+            => load(packed.ReadOnly());
                     
-        /// <summary>
-        /// Creates a bitspan from an arbitrary number of packed values
-        /// </summary>
-        /// <param name="packed">The packed data source</param>
-        [MethodImpl(Inline)]
-        public static BitSpan bitspan<T>(Span<T> packed)
-            where T : unmanaged
-                => bitspan(packed.AsBytes());
 
         /// <summary>
-        /// Creates a bitspan from an arbitrary number of packed values
+        /// Wraps a bitspan over a span of extant bits
         /// </summary>
-        /// <param name="packed">The packed data source</param>
+        /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
-        public static BitSpan bitspan<T>(ReadOnlySpan<T> packed)
-            where T : unmanaged
-                => bitspan(packed.AsBytes());
+        public static BitSpan load(Span<bit> src)
+            => new BitSpan(src);
 
-   }
+        /// <summary>
+        /// Loads a bitspan from an array
+        /// </summary>
+        /// <param name="src">The source array</param>
+        [MethodImpl(Inline)]
+        public static BitSpan load(bit[] src)
+            => new BitSpan(src);
+        
+        /// <summary>
+        /// Loads a bitspan from a reference
+        /// </summary>
+        /// <param name="bits">The bit source</param>
+        /// <param name="count">The number of bits to load</param>
+        [MethodImpl(Inline)]
+        public static BitSpan load(ref bit bits, int count)        
+            => new BitSpan(MemoryMarshal.CreateSpan(ref bits,count));         
+    }
 }

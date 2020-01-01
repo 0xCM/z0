@@ -69,15 +69,15 @@ namespace Z0
             }
         }
 
+
         public void unpack_64x32()
         {
             var dst = new uint[64];
-            var tmp = DataBlocks.single<byte>(n64);
 
             for(var rep = 0; rep < RepCount; rep++)
             {
                 var src = Random.Single(z64);
-                BitPack.unpack64x32(src,tmp,dst);
+                BitPack.unpack32(src,dst);
                 for(var i=0; i< dst.Length; i++)
                     Claim.eq((uint)bit.test(src,i), dst[i]);
             }

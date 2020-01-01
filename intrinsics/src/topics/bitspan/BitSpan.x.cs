@@ -10,15 +10,8 @@ namespace Z0
     using static zfunc;
     using static BitSpan;
 
-    public static class BitSpanX
+    public static partial class BitSpanX
     {
-        /// <summary>
-        /// Wraps a bitspan over a span of extant bits
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
-        public static BitSpan ToBitSpan(this Span<bit> src)
-            => load(src);
 
         /// <summary>
         /// Loads a natspan from a bitspan (nonallocating)
@@ -30,14 +23,6 @@ namespace Z0
         public static NatSpan<N,bit> ToNatSpan<N>(this in BitSpan src, N n = default)
             where N : unmanaged, ITypeNat
                 => NatSpan.load(src.Bits,n);
-
-        /// <summary>
-        /// Loads a bitspan from an array
-        /// </summary>
-        /// <param name="src">The source array</param>
-        [MethodImpl(Inline)]
-        public static BitSpan ToBitSpan(this bit[] src)
-            => load(src);
 
         /// <summary>
         /// Obliterates all bitspan content
@@ -79,6 +64,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int Pop(this in BitSpan src)
             => pop(src);
+    
+         
+        [MethodImpl(Inline)]
+        static int length<T>(in BitSpan src, int offset, int? count = null)
+            where T : unmanaged
+                => math.min(count ?? bitsize<T>(), src.Length - offset - bitsize<T>());            
+
+         [MethodImpl(Inline)]
+         public static T Scalar<T>(this in BitSpan src, int offset = 0)
+            where T : unmanaged
+               => BitSpan.scalar<T>(src,offset);
+    
     }
 
 }
