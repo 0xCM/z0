@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Mkl
@@ -28,7 +28,7 @@ namespace Z0.Mkl
                     sum++;
 
             var pActual = sum / ((double)count);
-            var radius = closed(pTarget - tolerance, pTarget + tolerance);
+            var radius = domain(pTarget - tolerance, pTarget + tolerance);
             Claim.yea(radius.Contains(pActual));
         }
 
@@ -44,7 +44,7 @@ namespace Z0.Mkl
             var bufferF64 = new double[samplesize];
             var bufferU32 = new uint[samplesize];
             var bufferI32 = new int[samplesize];
-            var ufRange = closed(1.0, 250.0);
+            var ufRange = domain(1.0, 250.0);
             for(var i=0; i<gencount; i++)
             {
                 var stream = streams[i];

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="rhs">The result of the second calculation</param>
         [MethodImpl(Inline)]
         public static float relerr(float lhs, float rhs)
-            => math.abs((lhs - rhs)/lhs);
+            => fmath.abs((lhs - rhs)/lhs);
 
         /// <summary>
         /// Computes the relative error between a one floating-point calculation and another
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="rhs">The result of the second calculation</param>
         [MethodImpl(Inline)]
         public static double relerr(double lhs, double rhs)
-            => math.abs((lhs - rhs)/lhs);
+            => fmath.abs((lhs - rhs)/lhs);
         
         /// <summary>
         /// Computes the relative error between one floating-point calculation and another

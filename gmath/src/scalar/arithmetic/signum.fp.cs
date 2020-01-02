@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -43,5 +43,4 @@ namespace Z0
         public static Sign signum(double src)
             => (Sign)Math.Sign(src);            
     }
-
 }

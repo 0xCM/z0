@@ -1,4 +1,4 @@
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0

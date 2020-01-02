@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -63,7 +63,7 @@ namespace Z0
             var storage = Stacks.alloc(n256);
             ref var target = ref Stacks.head<uint>(ref storage);
 
-            BitPack.unpack8x8(src, ref tmp); 
+            BitPack.unpack8(src, ref tmp); 
             distribute(in tmp, 0, ref target);
             return load(Stacks.span<uint>(ref storage).As<bit>());
         }
@@ -77,7 +77,7 @@ namespace Z0
             var storage = Stacks.alloc(n512);
             ref var target = ref Stacks.head<uint>(ref storage);            
             
-            BitPack.unpack16x8(src, ref tmp); 
+            BitPack.unpack8(src, ref tmp); 
             distribute(in tmp, 0, ref target);
             distribute(in tmp, 1, ref target);
             return load(Stacks.span<uint>(ref storage).As<bit>());
@@ -92,7 +92,7 @@ namespace Z0
             var storage = Stacks.alloc(n1024);
             ref var target = ref Stacks.head<uint>(ref storage);            
             
-            BitPack.unpack32x8(src, ref tmp); 
+            BitPack.unpack8(src, ref tmp); 
             distribute(in tmp, 0, ref target);
             distribute(in tmp, 1, ref target);
             distribute(in tmp, 2, ref target);
@@ -109,7 +109,7 @@ namespace Z0
             Span<uint> storage = new uint[64];
             ref var target = ref head(storage);
 
-            BitPack.unpack64x8(src, ref tmp); 
+            BitPack.unpack8(src, ref tmp); 
             distribute(in tmp, 0, ref target);
             distribute(in tmp, 1, ref target);
             distribute(in tmp, 2, ref target);

@@ -1,5 +1,5 @@
  //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -10,7 +10,6 @@ namespace Z0
     using static zfunc;    
     using static As;
     using static AsIn;
-
 
     partial class gmath
     {
@@ -37,7 +36,6 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
 
         [MethodImpl(Inline)]
         static T sll_i<T>(T a, int offset)
@@ -66,6 +64,5 @@ namespace Z0
             else 
                 return generic<T>(math.sll(uint64(a), offset));
         }
-
     }
 }

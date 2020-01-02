@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -13,7 +13,7 @@ namespace Z0
     partial class gfp
     {
         /// <summary>
-        /// Decrements the source value
+        /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal type</typeparam>
@@ -27,25 +27,7 @@ namespace Z0
                 return generic<T>(fmath.inc(float64(src)));
             else            
                 throw unsupported<T>();
-        }           
-
-        /// <summary>
-        /// Decrements the source value in-place
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T inc<T>(ref T src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                fmath.inc(ref float32(ref src));
-            else if(typeof(T) == typeof(double))
-                fmath.inc(ref float64(ref src));
-            else            
-                throw unsupported<T>();
-            return ref src;
-        }           
+        }
     }
 
     partial class fmath
@@ -65,27 +47,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static double inc(double src)
             => src + 1;
-
-        /// <summary>
-        /// Increments the source value in-place
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static ref float inc(ref float src)
-        {
-            src++;
-            return ref src;
-        }
-
-        /// <summary>
-        /// Increments the source value in-place
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static ref double inc(ref double src)
-        {
-            src++;
-            return ref src;
-        }
     }    
 }

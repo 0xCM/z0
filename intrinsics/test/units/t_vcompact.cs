@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -78,8 +78,8 @@ namespace Z0
         public void vcompact_2x128x64u_128x32u_outline()
         {
             var n = n128;
-            var x0 = CpuVector.parts(n, 25, 50);
-            var x1 = CpuVector.parts(n, 75, 10);
+            var x0 = CpuVector.vparts(n, 25, 50);
+            var x1 = CpuVector.vparts(n, 75, 10);
             var dst = dinx.vcompact(x0,x1,n128,z32);
             var expect = CpuVector.vparts(n,25,50,75,10);
             Claim.eq(expect,dst);

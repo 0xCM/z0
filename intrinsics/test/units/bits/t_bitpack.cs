@@ -1,11 +1,10 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
-    using System.Linq;
     
     using static zfunc;
 
@@ -18,10 +17,10 @@ namespace Z0
                 var src = Random.Next<ushort>();
                 var dst = DataBlocks.single<byte>(n128);
 
-                BitPack.unpack16x8(src, dst);            
+                BitPack.unpack8(src, dst);            
                 unpack_check(src,dst);
 
-                var rebound = BitPack.pack(dst);
+                var rebound = BitPack.pack8(dst);
                 Claim.eq(src,rebound);
             }
         }
@@ -32,11 +31,11 @@ namespace Z0
             {
                 var src = Random.Next<uint>();
                 var dst = DataBlocks.single<byte>(n256);
-                BitPack.unpack32x8(src, dst);
+                BitPack.unpack8(src, dst);
 
                 unpack_check(src,dst);
                 
-                var rebound = BitPack.pack(dst);
+                var rebound = BitPack.pack8(dst);
                 Claim.eq(src,rebound);
             }
         }
@@ -47,11 +46,11 @@ namespace Z0
             {
                 var src = Random.Next<ulong>();
                 var dst = DataBlocks.single<byte>(n512);
-                BitPack.unpack64x8(src, dst);
+                BitPack.unpack8(src, dst);
 
                 unpack_check(src,dst);
                 
-                var rebound = BitPack.pack(dst);
+                var rebound = BitPack.pack8(dst);
                 Claim.eq(src,rebound);
             }
 
@@ -65,7 +64,7 @@ namespace Z0
             {
                 var bs = Random.BitString(count);
                 var bitseq = bs.BitSeq.Blocked(block);
-                var packed = BitPack.pack(bitseq);
+                var packed = BitPack.pack8(bitseq);
                 Claim.eq(bs.TakeScalar<byte>(), packed);
             }
         }
@@ -93,7 +92,7 @@ namespace Z0
             {
                 var bs = Random.BitString(count);
                 var bitseq = bs.BitSeq.Blocked(block);
-                uint packed = BitPack.pack(bitseq);
+                uint packed = BitPack.pack8(bitseq);
                 for(var i=0; i< count; i++)
                     Claim.eq(bs[i], BitMask.testbit(packed, i));
             }
@@ -126,7 +125,7 @@ namespace Z0
             {
                 var src = DataBlocks.single<byte>(n256);
                 VPattern.vones<byte>(n256).StoreTo(src);
-                var dst = BitPack.pack(src);
+                var dst = BitPack.pack8(src);
                 Claim.eq(dst,uint.MaxValue);
 
             }
@@ -135,7 +134,7 @@ namespace Z0
             {
                 var src = DataBlocks.single<byte>(n128);
                 VPattern.vones<byte>(n128).StoreTo(src);
-                var dst = BitPack.pack(src);
+                var dst = BitPack.pack8(src);
                 Claim.eq(dst,ushort.MaxValue);
             }
 

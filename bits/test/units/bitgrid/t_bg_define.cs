@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -115,7 +115,7 @@ namespace Z0
             var row126 = CpuVector.vload(n, g32.BlockRef(126*cpr));
             var row127 = CpuVector.vload(n, g32.BlockRef(127*cpr));
             
-            var diagA = CpuVector.vgather(n, ref g32src, CpuVector.vpartsi(n, 496, 501, 506, 511));
+            var diagA = dinx.vgather(n, in g32src, CpuVector.vparts(n, 496, 501, 506, 511));
             var diagB = CpuVector.vparts(n, g32[496], g32[501], g32[506], g32[511]);
             Claim.eq(diagA,diagB);
         }

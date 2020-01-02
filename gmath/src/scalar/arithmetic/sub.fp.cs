@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -24,19 +24,6 @@ namespace Z0
             else            
                 throw unsupported<T>();
         }
-
-        [MethodImpl(Inline)]
-        public static ref T sub<T>(ref T lhs, T rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                fmath.sub(ref float32(ref lhs), float32(rhs));
-            else if(typeof(T) == typeof(double))
-                fmath.sub(ref float64(ref lhs), float64(rhs));
-            else            
-                throw unsupported<T>();
-            return ref lhs;
-        }
     }
 
     partial class fmath
@@ -48,20 +35,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static double sub(double lhs, double rhs)
             => lhs - rhs;
-
-        [MethodImpl(Inline)]
-        public static ref float sub(ref float lhs, float rhs)
-        {
-            lhs = lhs - rhs;
-            return ref lhs;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref double sub(ref double lhs, double rhs)
-        {
-            lhs = lhs - rhs;
-            return ref lhs;
-        }
     }    
-
 }

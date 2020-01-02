@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -17,22 +17,12 @@ namespace Z0
             where T :unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(BitConvert.ToSingle(float32(a).ToBits() ^ float32(b).ToBits()));
+                return generic<T>(fmath.xor(float32(a), float32(b)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(BitConvert.ToDouble(float64(a).ToBits() ^  float64(b).ToBits()));
+                return generic<T>(fmath.xor(float64(a), float64(b)));
             else
                 throw unsupported<T>();
         }
-
-       [MethodImpl(Inline)]
-       public static ref T xor<T>(ref T a, T b)
-            where T :unmanaged
-        {
-            a = xor(a,b);
-            return ref a;
-        }
- 
-
     }
 
     partial class fmath
@@ -43,8 +33,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static double xor(double a, double b)
-            => BitConvert.ToDouble(a.ToBits() ^ b.ToBits());         
-        
+            => BitConvert.ToDouble(a.ToBits() ^ b.ToBits());                 
     }
-
 }

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -26,7 +26,6 @@ namespace Z0
                 if(domain.Contains(sample))
                     counter++;
             return new Ratio<double>(counter, count);
-
         }    
 
         /// <summary>
@@ -36,7 +35,7 @@ namespace Z0
         /// <param name="samples">The sample count</param>
         public static double SignRatio(IPolyrand random, long samples, long radius)
         {
-            var domain = closed(0 - math.abs(radius), 0 + math.abs(radius));
+            var domain = zfunc.domain(0 - math.abs(radius), 0 + math.abs(radius));
             var pos = 0L;
             var neg = 0L;
             var zed = 0L;
@@ -61,7 +60,5 @@ namespace Z0
 
             return metric.Round(6);
         }
-
     }
-
 }

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -11,10 +11,9 @@ namespace Z0
 
     public class t_vcover : t_vinx<t_vcover>
     {
-
         public void vcover_basecase()
         {            
-            var x1 = CpuVector.parts(n128,4,8);
+            var x1 = CpuVector.vparts(n128,4,8);
             var y1 = CpuVector.vparts(n128,4,4,4,4, 4,4,4,4, 8,8,8,8, 8,8,8,8);
             var z1 = dinx.vcover(x1, out Vector128<byte> _);
             Claim.eq(y1,z1);
@@ -29,7 +28,7 @@ namespace Z0
             var z3 = dinx.vcover(x3, out Vector128<ushort> _);
             Claim.eq(y3,z3);
 
-            var x4 = CpuVector.parts(n128,4,5);
+            var x4 = CpuVector.vparts(n128,4,5);
             var y4 = CpuVector.vparts(n128,4,4, 5,5);
             var z4 = dinx.vcover(x4, out Vector128<uint> _);
             Claim.eq(y4,z4);

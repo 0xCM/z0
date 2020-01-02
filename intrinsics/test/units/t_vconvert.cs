@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -37,8 +37,8 @@ namespace Z0
         public void block_32x8u_to_2x128x64u()
         {
             var block = DataBlocks.parts<byte>(n32,1,2,3,4);
-            var xE = CpuVector.parts(n128,1,2);
-            var yE = CpuVector.parts(n128,3,4);
+            var xE = CpuVector.vparts(n128,1,2);
+            var yE = CpuVector.vparts(n128,3,4);
 
             var z = dinx.vconvert(block,n256,z64);
             Claim.eq(xE, dinx.vlo(z));

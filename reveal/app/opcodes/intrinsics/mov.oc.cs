@@ -1,8 +1,8 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.OpCodes
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -11,7 +11,8 @@ namespace Z0
     using static zfunc;    
 
 
-    partial class inxoc
+    [OpCodeProvider]
+    public static class vmov
     {
         public static Vector128<byte> vmov_idx3_128x8u(byte src,  Vector128<byte> dst)
             => ginx.vputcell(src, 3, dst);

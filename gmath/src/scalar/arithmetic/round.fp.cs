@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -16,7 +16,6 @@ namespace Z0
         public static T round<T>(T src, int scale)
             where T : unmanaged
         {
-
             if(typeof(T) == typeof(float))
                 return generic<T>(fmath.round(float32(src), scale));
             else if(typeof(T) == typeof(double))
@@ -35,19 +34,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static double round(double src, int scale)
             => Math.Round(src, scale);
-
-        [MethodImpl(Inline)]
-        public static ref float round(ref float src, int scale)
-        {
-            src = MathF.Round(src, scale);
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref double round(ref double src, int scale)
-        {
-            src = Math.Round(src, scale);
-            return ref src;
-        }
     }    
 }

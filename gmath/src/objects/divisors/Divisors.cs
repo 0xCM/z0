@@ -1,18 +1,16 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
-    using System.Numerics;
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
 
     using static zfunc;
         
-
     public readonly struct Divisors<T> 
         where T : unmanaged
     {
@@ -57,7 +55,7 @@ namespace Z0
             {
                 var divMin = gmath.add(i, One);
                 var divMax = gmath.add(i, step);
-                var next = closed(divMin, divMax);
+                var next = domain(divMin, divMax);
                 yield return Compute(next);
             }
         }

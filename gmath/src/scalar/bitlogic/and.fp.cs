@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -12,7 +12,6 @@ namespace Z0
 
     partial class gfp
     {
-
        [MethodImpl(Inline)]
        public static T and<T>(T a, T b)
             where T :unmanaged
@@ -28,20 +27,6 @@ namespace Z0
 
     partial class fmath
     {
-        [MethodImpl(Inline)]
-        public static ref float and(ref float a, float b)
-        {
-            a = and(a,b);
-            return ref a;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref double and(ref double a, double b)
-        {
-            a = and(a,b);
-            return ref a;
-        }
-
         [MethodImpl(Inline)]
         public static float and(float a, float b)
             => BitConvert.ToSingle(a.ToBits() &  b.ToBits());

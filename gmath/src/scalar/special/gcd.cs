@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -11,6 +11,7 @@ namespace Z0
 
     partial class math
     {
+        [MethodImpl(Inline)]
         public static sbyte gcd(sbyte a, sbyte b)
         {
             var x = math.abs(a);
@@ -24,6 +25,7 @@ namespace Z0
             return x;
         }
 
+        [MethodImpl(Inline)]
         public static byte gcd(byte a, byte b)
         {
             while (b != 0)
@@ -35,6 +37,7 @@ namespace Z0
             return a;
         }
 
+        [MethodImpl(Inline)]
         public static short gcd(short a, short b)
         {
             var x = math.abs(a);
@@ -48,6 +51,7 @@ namespace Z0
             return x;
         }
 
+        [MethodImpl(Inline)]
         public static ushort gcd(ushort a, ushort b)
         {
             while (b != 0)
@@ -59,6 +63,7 @@ namespace Z0
             return a;
         }
 
+        [MethodImpl(Inline)]
         public static int gcd(int a, int b)
         {
             var x = math.abs(a);
@@ -73,11 +78,12 @@ namespace Z0
             return x;
         }
 
+        [MethodImpl(Inline)]
         public static uint gcd(uint a, uint b)
         {
             while (b != 0)
             {
-                var rem = math.mod(a,b);
+                var rem = a % b;
                 a = b;
                 b = rem;
             }
@@ -85,6 +91,7 @@ namespace Z0
             return a;
         }
 
+        [MethodImpl(Inline)]
         public static long gcd(long a, long b)
         {
             var x = math.abs(a);
@@ -99,19 +106,17 @@ namespace Z0
             return x;
         }
 
+        [MethodImpl(Inline)]
         public static ulong gcd(ulong a, ulong b)
         {
             while (b != 0)
             {
-                var rem = math.mod(a,b);
+                var rem = a % b;
                 a = b;
                 b = rem;
             }
 
             return a;
         }
-
-
     }
-
 }

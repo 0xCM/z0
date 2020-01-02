@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -48,8 +48,8 @@ namespace Z0
         
         Interval<T> PartitionDomain(int ix)
             => ix == Partitions.Length - 1 
-             ? closed(Partitions[ix-1], Partitions[ix]) 
-             : leftclosed(Partitions[ix-1], Partitions[ix]);
+             ? domain(Partitions[ix-1], Partitions[ix]) 
+             : ldomain(Partitions[ix-1], Partitions[ix]);
 
         /// <summary>
         /// Returns the least bin count

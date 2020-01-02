@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.OpCodes
@@ -11,7 +11,7 @@ namespace Z0.OpCodes
     using static zfunc;    
 
     [OpCodeProvider]
-    public static class kops
+    public static class gxops
     {
         public static bit eq_d16u(ushort a, ushort b)
             => math.eq(a,b);

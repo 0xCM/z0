@@ -1,11 +1,10 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
@@ -107,7 +106,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static IRandomStream<T> Stream<T>(this IPolyrand random, T max, Func<T,bool> filter = null)
             where T : unmanaged
-                => stream(random.UniformStream(closed(gmath.minval<T>(), max),filter), random.RngKind);
+                => stream(random.UniformStream(domain(gmath.minval<T>(), max),filter), random.RngKind);
 
         /// <summary>
         /// Produces a stream values from the source subject to a specified range and optional filter
@@ -118,7 +117,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static IRandomStream<T> Stream<T>(this IPolyrand random, T min, T max, Func<T,bool> filter = null)
             where T : unmanaged
-                => stream(random.UniformStream(closed(min,max),filter), random.RngKind);
+                => stream(random.UniformStream(domain(min,max),filter), random.RngKind);
 
         /// <summary>
         /// Produces a stream of values from the random source

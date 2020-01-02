@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -15,29 +15,15 @@ namespace Z0
         /// Allocates and fills specified number of 16-bit blocks
         /// </summary>
         /// <param name="random">The random source</param>
-        /// <param name="n">The block width selector</param>
-        /// <param name="blocks">The number of blocks to allocate and fill</param>
-        /// <param name="domain">An optional domain to which values are constrained</param>
-        /// <param name="filter">An optional filter that refines the domain</param>
-        /// <typeparam name="T">The primal random value type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block16<T> Blocks<T>(this IPolyrand random, N16 n, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
-            where T : unmanaged
-                => random.Stream(domain,filter).ToSpan(DataBlocks.blockedcells<T>(n,blocks)).Blocked(n); 
-
-        /// <summary>
-        /// Allocates and fills specified number of 16-bit blocks
-        /// </summary>
-        /// <param name="random">The random source</param>
         /// <param name="w">The block width selector</param>
-        /// <param name="blocks">The number of blocks to allocate and fill</param>
+        /// <param name="count">The number of blocks to allocate and fill</param>
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static Block16<T> Blocks<T>(this IPolyrand random, N16 w, Interval<T> domain, int blocks = 1, Func<T,bool> filter = null)
+        public static Block16<T> Blocks<T>(this IPolyrand random, N16 w, int count, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => random.Stream(domain,filter).ToSpan(DataBlocks.blockedcells<T>(w,blocks)).Blocked(w); 
+                => random.Stream(domain,filter).ToSpan(DataBlocks.blockedcells<T>(w,count)).Blocked(w); 
 
         /// <summary>
         /// Allocates and fills specified number of 16-bit blocks
@@ -48,9 +34,9 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static Block16<T> Blocks<T>(this IPolyrand random, N16 w, T min, T max, int blocks = 1, Func<T,bool> filter = null)
+        public static Block16<T> Blocks<T>(this IPolyrand random, N16 w, int count, T min, T max)
             where T : unmanaged
-                => random.Blocks(w, (min,max), blocks, filter);
+                => random.Stream<T>((min,max)).ToSpan(DataBlocks.blockedcells<T>(w,count)).Blocked(w); 
 
         /// <summary>
         /// Allocates and fills a specified number of 128-bit blocks
@@ -61,9 +47,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block16<T> Blocks<T>(this IPolyrand random, N16 w, int count, T t)
+        public static Block16<T> Blocks<T>(this IPolyrand random, N16 w, int count, T t = default)
             where T : unmanaged
-                => random.Blocks<T>(w,count);
+                => random.Stream<T>().ToSpan(DataBlocks.blockedcells<T>(w,count)).Blocked(w); 
 
         /// <summary>
         /// Allocates and fills specified number of 32-bit blocks

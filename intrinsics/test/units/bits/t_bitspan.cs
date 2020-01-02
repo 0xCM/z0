@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -8,7 +8,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_bitspan : t_sinx<t_bitspan>
+    public class t_bitspan : t_vinx<t_bitspan>
     {
         public void equality()
         {

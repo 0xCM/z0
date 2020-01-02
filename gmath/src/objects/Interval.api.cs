@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -83,14 +83,14 @@ namespace Z0
                     if(src.Open || src.LeftOpen)
                         dst[i] = open(left,right);
                     else
-                        dst[i] = leftclosed(left,right);
+                        dst[i] = ldomain(left,right);
                 else if(i == lastCycleIx)
                     if(src.Closed || src.RightClosed)
-                        dst[i] = closed(left, right);
+                        dst[i] = domain(left, right);
                     else
-                        dst[i] = leftclosed(left,right);
+                        dst[i] = ldomain(left,right);
                 else
-                    dst[i] = leftclosed(left, right);
+                    dst[i] = ldomain(left, right);
             }
             return dst;            
         }
@@ -218,6 +218,7 @@ namespace Z0
             var max = src.Right;
             var current = min;
             var increments = new List<T>(convert<T,int>(src.Length()) + 1);
+            
             while(gmath.lteq(current,max))
             {
                 increments.Add(current);
@@ -228,9 +229,8 @@ namespace Z0
                     break;
 
             }
+            
             return increments.ToArray();
-
         }
-
     }
 }

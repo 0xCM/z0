@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Logix
@@ -9,6 +9,7 @@ namespace Z0.Logix
 
     using static zfunc;    
     using static TernaryOpKind;
+    using static As;
 
     public static class ScalarOps
     {        
@@ -72,13 +73,13 @@ namespace Z0.Logix
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.generic<T>(math.xor1(As.uint8(a)));
+                return As.generic<T>((byte)(uint8(a) ^ byte.MaxValue));
             else if(typeof(T) == typeof(ushort))
-                return As.generic<T>(math.xor1(As.uint16(a)));
+                return As.generic<T>(uint16(a)^ ushort.MaxValue);
             else if(typeof(T) == typeof(uint))
-                return As.generic<T>(math.xor1(As.uint32(a)));
+                return As.generic<T>(uint32(a)^ uint.MaxValue);
             else if(typeof(T) == typeof(ulong))
-                return As.generic<T>(math.xor1(As.uint64(a)));
+                return As.generic<T>(uint64(a)^ ulong.MaxValue);
             else
                 throw unsupported<T>();
         }

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -118,12 +118,12 @@ namespace Z0
         {
             var n = n128;
             var w = n64;
-            var left =  CpuVector.parts(n,0,1);
-            var right = CpuVector.parts(n,4,5);
-            Claim.eq(CpuVector.parts(n, 0, 5),dinx.vblend(left, right, Blend2x64.LR));
-            Claim.eq(CpuVector.parts(n, 4, 1),dinx.vblend(left, right, Blend2x64.RL));
-            Claim.eq(CpuVector.parts(n, 0, 1),dinx.vblend(left, right, Blend2x64.LL));
-            Claim.eq(CpuVector.parts(n, 4, 5),dinx.vblend(left, right, Blend2x64.RR));
+            var left =  CpuVector.vparts(n,0,1);
+            var right = CpuVector.vparts(n,4,5);
+            Claim.eq(CpuVector.vparts(n, 0, 5),dinx.vblend(left, right, Blend2x64.LR));
+            Claim.eq(CpuVector.vparts(n, 4, 1),dinx.vblend(left, right, Blend2x64.RL));
+            Claim.eq(CpuVector.vparts(n, 0, 1),dinx.vblend(left, right, Blend2x64.LL));
+            Claim.eq(CpuVector.vparts(n, 4, 5),dinx.vblend(left, right, Blend2x64.RR));
         }
 
         public void vblend_4x32_basecases()

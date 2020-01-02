@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -51,53 +51,6 @@ namespace Z0
         public static ulong avgz(ulong a, ulong b)
             => (a & b) + ((a ^ b) >> 1);
 
-        /// <summary>
-        /// Takes the average of the operands, rounding toward zero, and ovwriting the left operand with the result
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        [MethodImpl(Inline)]
-        public static ref byte avgz(ref byte a, in byte b)
-        {
-            a = avgz(a,b);
-            return ref a;
-        }
-
-        /// <summary>
-        /// Computes average of the operands, rounding toward zero, and ovwriting the first operand with the result
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        [MethodImpl(Inline)]
-        public static ref ushort avgz(ref ushort a, in ushort b)
-        {
-            a = avgz(a,b);
-            return ref a;
-        }
-
-        /// <summary>
-        /// Computes average of the operands, rounding toward zero, and ovwriting the first operand with the result
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        [MethodImpl(Inline)]
-        public static ref uint avgz(ref uint a, in uint b)
-        {
-            a = avgz(a,b);
-            return ref a;
-        }
-
-        /// <summary>
-        /// Computes average of the operands, rounding toward zero, and ovwriting the first operand with the result
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        [MethodImpl(Inline)]
-        public static ref ulong avgz(ref ulong a, in ulong b)
-        {
-            a = avgz(a,b);
-            return ref a;
-        }
 
         /// <summary>
         /// Takes the average of the operands, rounding toward infinity
@@ -138,53 +91,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong avgi(ulong a, ulong b)
             => (a | b) - ((a ^ b) >> 1);
-
-        /// <summary>
-        /// Takes the average of the operands, rounding toward zero, and ovwriting the left operand with the result
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        [MethodImpl(Inline)]
-        public static ref byte avgi(ref byte a, in byte b)
-        {
-            a = avgi(a,b);
-            return ref a;
-        }
-
-        /// <summary>
-        /// Computes average of the operands, rounding toward zero, and ovwriting the first operand with the result
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        [MethodImpl(Inline)]
-        public static ref ushort avgi(ref ushort a, in ushort b)
-        {
-            a = avgi(a,b);
-            return ref a;
-        }
-
-        /// <summary>
-        /// Computes average of the operands, rounding toward zero, and ovwriting the first operand with the result
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        [MethodImpl(Inline)]
-        public static ref uint avgi(ref uint a, in uint b)
-        {
-            a = avgi(a,b);
-            return ref a;
-        }
-
-        /// <summary>
-        /// Computes average of the operands, rounding toward zero, and ovwriting the first operand with the result
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        [MethodImpl(Inline)]
-        public static ref ulong avgi(ref ulong a, in ulong b)
-        {
-            a = avgi(a,b);
-            return ref a;
-        }
     }
 }

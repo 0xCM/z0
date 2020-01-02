@@ -1,71 +1,55 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Diagnostics;
 
 using Z0;
 
 partial class zfunc
 {
-
     /// <summary>
-    /// Constructs the closed interval [left,right]
+    /// Defines a closed interval [min,max]
     /// </summary>
-    /// <param name="left">The left end point</param>
-    /// <param name="right">The right endpoint</param>
+    /// <param name="min">The inclusive left endpoint</param>
+    /// <param name="max">The inclusive right endpoint</param>
     /// <typeparam name="T">The underlying type</typeparam>
     [MethodImpl(Inline)]
-    public static Interval<T> closed<T>(T left, T right)
+    public static Interval<T> domain<T>(T min, T max)
         where T : unmanaged
-            => new Interval<T>(left,right, IntervalKind.Closed);
+            => new Interval<T>(min,max, IntervalKind.Closed);
 
     /// <summary>
-    /// Constructs the left-open(or right-closed interval) interval (left,right]
+    /// Constructs the (left-closed | right-open) interval [min,max)
     /// </summary>
-    /// <param name="left">The left end point</param>
-    /// <param name="right">The right endpoint</param>
+    /// <param name="min">The inclusive left endpoint</param>
+    /// <param name="max">The exclusive right endpoint</param>
     /// <typeparam name="T">The underlying type</typeparam>
     [MethodImpl(Inline)]
-    public static Interval<T> leftopen<T>(T left, T right)
+    public static Interval<T> ldomain<T>(T min, T max)
         where T : unmanaged
-            => new Interval<T>(left,right, IntervalKind.LeftOpen);
+            => new Interval<T>(min,max, IntervalKind.LeftClosed);
 
     /// <summary>
-    /// Constructs the left-closed (or right-open interval) interval [left,right)
+    /// Constructs the (right-closed | left-open) interval (min,max]
     /// </summary>
-    /// <param name="left">The left end point</param>
-    /// <param name="right">The right endpoint</param>
+    /// <param name="min">The exclusive left endpoint</param>
+    /// <param name="max">The inclusive right endpoint</param>
     /// <typeparam name="T">The underlying type</typeparam>
     [MethodImpl(Inline)]
-    public static Interval<T> leftclosed<T>(T left, T right)
+    public static Interval<T> rdomain<T>(T min, T max)
         where T : unmanaged
-            => new Interval<T>(left,right, IntervalKind.LeftClosed);
+            => new Interval<T>(min,max, IntervalKind.RightClosed);
 
     /// <summary>
-    /// Constructs the left-closed (or right-open interval) interval [left,right)
+    /// Constructs the open interval (min,max)
     /// </summary>
-    /// <param name="left">The left end point</param>
-    /// <param name="right">The right endpoint</param>
+    /// <param name="min">The exclusive left endpoint</param>
+    /// <param name="max">The exclusive right endpoint</param>
     /// <typeparam name="T">The underlying type</typeparam>
     [MethodImpl(Inline)]
-    public static Interval<T> rightclosed<T>(T left, T right)
+    public static Interval<T> open<T>(T min, T max)
         where T : unmanaged
-            => new Interval<T>(left,right, IntervalKind.RightClosed);
-
-    /// <summary>
-    /// Constructs the open interval (left,right)
-    /// </summary>
-    /// <param name="left">The left end point</param>
-    /// <param name="right">The right endpoint</param>
-    /// <typeparam name="T">The underlying type</typeparam>
-    [MethodImpl(Inline)]
-    public static Interval<T> open<T>(T left, T right)
-        where T : unmanaged
-            => new Interval<T>(left,right, IntervalKind.Open);
+            => new Interval<T>(min,max, IntervalKind.Open);
 }

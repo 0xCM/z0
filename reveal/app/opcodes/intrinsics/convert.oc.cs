@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.OpCodes
@@ -72,8 +72,5 @@ namespace Z0.OpCodes
         [MethodImpl(Inline)]
         public static Vector128<double> vmovelo_32x128x64f(Vector128<float> src, Vector128<double> dst)
             => dinx.vmovelo(src,dst);
-
-
     }
-
 }

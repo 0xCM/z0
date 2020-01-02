@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -25,7 +25,7 @@ namespace Z0
             IEnumerable<E> produce()
             {
                 var names = Enum.GetNames(typeof(E)).Mapi((index, name) => (index, name)).ToDictionary();
-                var domain = closed(0, names.Count);
+                var domain = zfunc.domain(0, names.Count);
                 var stream = random.Stream(domain);
 
                 while(true)
@@ -60,7 +60,7 @@ namespace Z0
                 var excluded = exclusions.Select(x => x.ToString()).ToHashSet();
                 var available = Enum.GetNames(typeof(E)).Where(n => !excluded.Contains(n)).ToArray();
                 var names = available.Mapi((index, name) => (index, name)).ToDictionary();
-                var stream = random.Stream(closed(0, names.Count));
+                var stream = random.Stream(domain(0, names.Count));
 
                 while(true)
                     yield return Enum.Parse<E>(names[stream.Next()]);

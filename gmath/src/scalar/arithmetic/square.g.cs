@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -30,25 +30,6 @@ namespace Z0
                 return gfp.square(src);
         }           
 
-        [MethodImpl(Inline)]
-        public static ref T square<T>(ref T src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                square_u(ref src);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                square_i(ref src);
-            else 
-                gfp.square(ref src);
-            
-            return ref src;
-        }           
 
         [MethodImpl(Inline)]
         static T square_i<T>(T src)
@@ -76,36 +57,6 @@ namespace Z0
                 return generic<T>(math.square(uint32(src)));
             else 
                 return generic<T>(math.square(uint64(src)));
-        }
-
-        [MethodImpl(Inline)]
-        static ref T square_i<T>(ref T src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                 math.square(ref int8(ref src));
-            else if(typeof(T) == typeof(short))
-                 math.square(ref int16(ref src));
-            else if(typeof(T) == typeof(int))
-                 math.square(ref int32(ref src));
-            else
-                 math.square(ref int64(ref src));
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        static ref T square_u<T>(ref T src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                 math.square(ref uint8(ref src));
-            else if(typeof(T) == typeof(ushort))
-                 math.square(ref uint16(ref src));
-            else if(typeof(T) == typeof(uint))
-                 math.square(ref uint32(ref src));
-            else
-                 math.square(ref uint64(ref src));
-            return ref src;
         }
     }
 }

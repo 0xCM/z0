@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -35,7 +35,7 @@ namespace Z0
         {
             var n = Pow2.T12;
             var positions = Random.BitPositions<uint>(512,1024).TakeArray(n);
-            var additions = Random.Stream(closed(0u, 100u)).TakeArray(n);
+            var additions = Random.Stream(domain(0u, 100u)).TakeArray(n);
             for(var i=0; i<n; i++)
             {
                 var posX = positions[i];

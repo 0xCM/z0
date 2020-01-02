@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Mkl
@@ -69,7 +69,7 @@ namespace Z0.Mkl
             
             Span<int> pivots = new int[math.max(m,n)*2];
 
-            var A = RMat<M,N,double>(closed(1,250.0)).Apply(x => x.Truncate());
+            var A = RMat<M,N,double>(domain(1,250.0)).Apply(x => x.Truncate());
             var X = Matrix.blockalloc<M,N,double>();
             mkl.getrf(A, pivots, ref X);
             X.Apply(x => x.Round(4));

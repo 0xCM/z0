@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -114,7 +114,7 @@ namespace Z0
             where T : unmanaged
         {
             var tol = .001;
-            var radius = closed(1 - tol,1 + tol);   
+            var radius = domain(1 - tol,1 + tol);   
             for(var r = 0; r < (int)n.NatValue; r ++)
             {
                 var row = src.Row(r);
@@ -130,7 +130,7 @@ namespace Z0
         static void MarkovSpan(this IPolyrand random, Span<float> dst)
         {            
             var length = dst.Length;
-            random.Fill(closed(1.0f,length << 4), length, ref dst[0]);
+            random.Fill(domain(1.0f,length << 4), length, ref dst[0]);
             mathspan.fdiv(dst, dst.Avg()*length);
         }
 
@@ -138,7 +138,7 @@ namespace Z0
         static void MarkovSpan(this IPolyrand random, Span<double> dst)
         {            
             var length = dst.Length;
-            random.Fill(closed(1.0, length << 4), length, ref dst[0]);
+            random.Fill(domain(1.0, length << 4), length, ref dst[0]);
             mathspan.fdiv(dst, dst.Avg()*length);
         }
 
@@ -146,7 +146,7 @@ namespace Z0
         static RowVector256<float> MarkovBlock(this IPolyrand random, int length, float min, float max)
         {            
             var dst = DataBlocks.alloc<float>(n256, DataBlocks.blockcount<float>(n256,length));
-            random.Fill(closed(min,max), length, ref dst[0]);
+            random.Fill(domain(min,max), length, ref dst[0]);
             mathspan.fdiv(dst.Data, dst.Avg() * length);
             return dst; 
         }
@@ -155,7 +155,7 @@ namespace Z0
         static RowVector256<double> MarkovBlock(this IPolyrand random, int length, double min, double max)
         {                        
             var dst = DataBlocks.alloc<double>(n256, DataBlocks.blockcount<double>(n256,length));
-            random.Fill(closed(min,max), length, ref dst[0]);
+            random.Fill(domain(min,max), length, ref dst[0]);
             mathspan.fdiv(dst.Data, dst.Avg() * length);
             return dst; 
         }

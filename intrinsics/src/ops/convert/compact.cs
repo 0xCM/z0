@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -69,6 +69,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<short> vinflate(Vector128<byte> src, N256 w, short t = default)
             => vconvert(src, w, t);
+
 
         /// <summary>
         /// 16x8i -> 16x16i

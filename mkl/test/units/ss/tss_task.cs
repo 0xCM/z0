@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Mkl
@@ -17,7 +17,7 @@ namespace Z0.Mkl
         {
             var obs = Pow2.T10;
             var dim = Pow2.T08;
-            var range = closed(-20f,20f);
+            var range = domain(-20f,20f);
             
             var src = Random.Array<float>(dim*obs, range);
             var sample = Dataset.Load(src,dim);

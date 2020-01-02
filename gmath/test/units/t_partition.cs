@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -51,7 +51,7 @@ namespace Z0
 
         public void part0()
         {
-            var src = leftclosed(5,12);
+            var src = ldomain(5,12);
             var dst = src.PartPoints();
             var fmt = dst.Map(x => x.ToString()).Concat(", ");
             Claim.eq(src.Length() + 1, dst.Length);            
@@ -60,23 +60,23 @@ namespace Z0
 
         public void part1()
         {
-            var src = leftclosed(5,20);
+            var src = ldomain(5,20);
             var dst = src.Partition();
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
-            Claim.eq(leftclosed(5,6), dst.First());
-            Claim.eq(leftclosed(19,20), dst.Last());
+            Claim.eq(ldomain(5,6), dst.First());
+            Claim.eq(ldomain(19,20), dst.Last());
 
         }
 
         public void part2()
         {
-            var src = closed(5,20);
+            var src = domain(5,20);
             var dst = src.Partition();
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
-            Claim.eq(leftclosed(5,6), dst.First());
-            Claim.eq(closed(19,20), dst.Last());
+            Claim.eq(ldomain(5,6), dst.First());
+            Claim.eq(domain(19,20), dst.Last());
         }
 
         public void part3()
@@ -86,13 +86,13 @@ namespace Z0
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
             Claim.eq(open(5,6), dst.First());
-            Claim.eq(leftclosed(19,20), dst.Last());
+            Claim.eq(ldomain(19,20), dst.Last());
         }
 
 
         public void part4()
         {
-            var src = leftopen(1,100);
+            var src = rdomain(1,100);
             var dst = src.PartPointByCount(10);
             Claim.eq(10,dst.Length);
             Claim.eq(1, dst.First());
@@ -101,7 +101,7 @@ namespace Z0
         
         public void part6()
         {
-            var src = closed(1,103);
+            var src = domain(1,103);
             var dst = src.Partition(13);            
             var fmt = dst.Map(x => x.Format()).Concat(" + ");  
             Claim.yea(dst.Last().Closed);

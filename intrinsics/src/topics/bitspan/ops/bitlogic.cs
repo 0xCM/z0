@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static As;
+
     partial struct BitSpan
     {
-
         [MethodImpl(Inline)]
         public static ref readonly BitSpan and(in BitSpan x, in BitSpan y, in BitSpan z)
         {

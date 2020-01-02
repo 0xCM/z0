@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -23,14 +23,6 @@ namespace Z0
             else
                 throw unsupported<T>();
         }        
-
-        [MethodImpl(Inline)]
-        public static ref T min<T>(ref T a, T b)
-            where T : unmanaged
-        {
-            a = min(a,b);
-            return ref a;
-        }        
     }
 
     partial class fmath
@@ -42,19 +34,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static double min(double a, double b)
             => a < b ? a : b;
-
-        [MethodImpl(Inline)]
-        public static ref float min(ref float a, float b)
-        {
-            a = a < b ? a : b;
-            return ref a;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref double min(ref double a, double b)
-        {
-            a = a < b ? a : b;
-            return ref a;
-        }
     }    
 }

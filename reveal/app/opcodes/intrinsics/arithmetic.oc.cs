@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -13,7 +13,6 @@ namespace Z0
     partial class inxoc
     {                
         
-
         public static Vector256<short> add_d256x16i(Vector256<short> x, Vector256<short> y)
             => dinx.vadd(x,y);
 

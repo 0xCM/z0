@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Mkl
@@ -47,20 +47,20 @@ namespace Z0.Mkl
 
         [MethodImpl(Inline)]
         protected RowVector256<float> RVecF32(int len, int? min = null, int? max = null)
-            => Random.VectorBlock<int,float>(len, closed(min ?? -25, max ?? 25));
+            => Random.VectorBlock<int,float>(len, domain(min ?? -25, max ?? 25));
 
         [MethodImpl(Inline)]
         protected RowVector256<double> RVecF64(int len, long? min = null, long? max = null)
-            => Random.VectorBlock<long,double>(len, closed(min ?? -25L, max ?? 25L));
+            => Random.VectorBlock<long,double>(len, domain(min ?? -25L, max ?? 25L));
 
         [MethodImpl(Inline)]
         protected RowVector256<float> RVecF32<N>(N len = default, int? min = null, int? max = null)
             where N : unmanaged, ITypeNat
-                => Random.VectorBlock<N,int,float>(closed(min ?? -25, max ?? 25));
+                => Random.VectorBlock<N,int,float>(domain(min ?? -25, max ?? 25));
 
         [MethodImpl(Inline)]
         protected RowVector256<double> RVecF64<N>(N len = default, long? min = null, long? max = null)
             where N : unmanaged, ITypeNat
-                => Random.VectorBlock<N,long,double>(closed(min ?? -25L, max ?? 25L));
+                => Random.VectorBlock<N,long,double>(domain(min ?? -25L, max ?? 25L));
     }
 }

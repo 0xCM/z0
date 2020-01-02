@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -12,15 +12,14 @@ namespace Z0
 
     partial class gfp
     {
-
         [MethodImpl(Inline)]
-        public static bit nonzero<T>(T lhs)
+        public static bit nonzero<T>(T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return math.nonzero(float32(lhs));
+                return math.nonzero(float32(a));
             else if(typeof(T) == typeof(double))
-                return math.nonzero(float64(lhs));
+                return math.nonzero(float64(a));
             else            
                 throw unsupported<T>();
         }

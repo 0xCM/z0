@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -234,8 +234,8 @@ namespace Z0
             abs_check(unary(math.abs, name, z16i));
             abs_check(unary(math.abs, name, z32i));
             abs_check(unary(math.abs, name, z64i));
-            abs_check(unary(math.abs, name, z32f));
-            abs_check(unary(math.abs, name, z64f));
+            abs_check(unary(fmath.abs, name, z32f));
+            abs_check(unary(fmath.abs, name, z64f));
 
         }
 

@@ -1,6 +1,6 @@
-; 2020-01-01 04:39:45:880
+; 2020-01-01 21:58:46:412
 ; function: Vector512<uint> add_512x32u(Vector512<uint> x, Vector512<uint> y)
-; location: [7FF7C7BA6FE0h, 7FF7C7BA7008h]
+; location: [7FF7C7BCB400h, 7FF7C7BCB428h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rdx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 02
@@ -15,7 +15,7 @@
 ; static ReadOnlySpan<byte> add_512x32uBytes => new byte[41]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x02,0xC4,0xC1,0x7D,0xFE,0x00,0xC5,0xFD,0x10,0x4A,0x20,0xC4,0xC1,0x75,0xFE,0x48,0x20,0xC5,0xFD,0x11,0x01,0xC5,0xFD,0x11,0x49,0x20,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void add_2x256x32u(Vector256<uint> x0, Vector256<uint> y0, Vector256<uint> x1, Vector256<uint> y1, out Vector256<uint> z0, out Vector256<uint> z1)
-; location: [7FF7C7BA7020h, 7FF7C7BA704Ch]
+; location: [7FF7C7BCB440h, 7FF7C7BCB46Ch]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Mkl.Test
@@ -41,42 +41,42 @@ namespace Z0.Mkl.Test
 
         public void gemm16u()
         {
-            gemm_check(closed((ushort)0, (ushort)1024));
+            gemm_check(domain((ushort)0, (ushort)1024));
         }
         
         public void gemm32i()
         {
-            gemm_check(closed(-Pow2.T10, Pow2.T10));
+            gemm_check(domain(-Pow2.T10, Pow2.T10));
         }
 
         public void gemm32u()
         {
-            gemm_check(closed(0u, 1024u));
+            gemm_check(domain(0u, 1024u));
         }
 
         public void gemm64i()
         {
-            gemm_check(closed((long)-Pow2.T21, (long)Pow2.T21));
+            gemm_check(domain((long)-Pow2.T21, (long)Pow2.T21));
         }
 
         public void gemm64u()
         {
-            gemm_check(closed(0ul, (ulong)Pow2.T21));
+            gemm_check(domain(0ul, (ulong)Pow2.T21));
         }
 
         public void gemm32f()
         {
-            gemm_check(closed(-1024f, 1024f),5f);
+            gemm_check(domain(-1024f, 1024f),5f);
         }
 
         public void gemm64f()
         {
-            gemm_check(closed(-(double)Pow2.T21, (double)Pow2.T21),2d);
+            gemm_check(domain(-(double)Pow2.T21, (double)Pow2.T21),2d);
         }
 
         void gemm32f_direct()
         {
-            var src = Random.Stream(closed(-Pow2.T21, Pow2.T21)).Select(x => (float)x);
+            var src = Random.Stream(domain(-Pow2.T21, Pow2.T21)).Select(x => (float)x);
 
             gemm_direct_check<N64,N64,N64>(src);
             gemm_direct_check<N3, N3, N3>(src);
@@ -93,7 +93,7 @@ namespace Z0.Mkl.Test
 
         void gemm64f_direct()
         {
-            var src = Random.Stream(closed(-Pow2.T21, Pow2.T21)).Select(x => (double)x);
+            var src = Random.Stream(domain(-Pow2.T21, Pow2.T21)).Select(x => (double)x);
 
             gemm_direct_check<N64,N64,N64>(src);
             gemm_direct_check<N3, N3, N3>(src);
@@ -357,7 +357,7 @@ namespace Z0.Mkl.Test
 
         void GemmInt32Format()
         {
-            var domain = closed(-32768, 32768);
+            var domain = zfunc.domain(-32768, 32768);
             var n = n5;
             var m = n5;
             var m1 = Random.MatrixBlock(domain, m, n);

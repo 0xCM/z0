@@ -1,21 +1,16 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static As;
-    using static nfunc;
 
     partial class RngX
     {
-
         /// <summary>
         /// Allocates and fills a matrix of natural dimensions with random values
         /// </summary>
@@ -119,7 +114,7 @@ namespace Z0
          public static Matrix<N,float> MatrixF32<N,S>(this IPolyrand random, S? min = null, S? max = null, N n = default)
             where S : unmanaged
             where N : unmanaged, ITypeNat
-                => random.Matrix<N,S, float>(closed(min ?? TypeMin<S>(), max ?? TypeMax<S>()));
+                => random.Matrix<N,S, float>(domain(min ?? TypeMin<S>(), max ?? TypeMax<S>()));
 
         /// <summary>
         /// Samples source values of type S to populate a matrix of natural dimensions with 64-bit floating point entries
@@ -134,7 +129,7 @@ namespace Z0
         public static  Matrix<N,double> MatrixF64<N,S>(this IPolyrand random, S? min = null, S? max = null, N n = default)
             where S : unmanaged
             where N : unmanaged, ITypeNat
-                => random.Matrix<N,S, double>(closed(min ?? TypeMin<S>(), max ?? TypeMax<S>()));
+                => random.Matrix<N,S, double>(domain(min ?? TypeMin<S>(), max ?? TypeMax<S>()));
 
         /// <summary>
         /// Samples source values of type S to populate a matrix of natural dimensions with 32-bit floating point entries
@@ -152,7 +147,7 @@ namespace Z0
             where S : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => random.Matrix<M,N,S, float>(closed(min ?? TypeMin<S>(), max ?? TypeMax<S>()));
+                => random.Matrix<M,N,S, float>(domain(min ?? TypeMin<S>(), max ?? TypeMax<S>()));
 
         /// <summary>
         /// Samples source values of type S to populate a matrix of natural dimensions with 64-bit floating point entries
@@ -170,6 +165,6 @@ namespace Z0
             where S : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => random.Matrix<M,N,S, double>(closed(min ?? TypeMin<S>(), max ?? TypeMax<S>()));
+                => random.Matrix<M,N,S, double>(domain(min ?? TypeMin<S>(), max ?? TypeMax<S>()));
     }
 }

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width selector</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> parts(N128 w, ulong x0, ulong x1)
+        public static Vector128<ulong> vparts(N128 w, ulong x0, ulong x1)
             => Vector128.Create(x0,x1);
 
         /// <summary>

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -23,19 +23,6 @@ namespace Z0
             else            
                 throw unsupported<T>();
         }
-
-        [MethodImpl(Inline)]
-        public static ref T negate<T>(ref T lhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                fmath.negate(ref float32(ref lhs));
-            else if(typeof(T) == typeof(double))
-                fmath.negate(ref float64(ref lhs));
-            else            
-                throw unsupported<T>();
-            return ref lhs;
-        }
     }
 
     partial class fmath
@@ -55,27 +42,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static double negate(double src)
             => -src;
- 
-        /// <summary>
-        /// Negates the source value in-place
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static ref float negate(ref float src)
-        {
-            src = - src;
-            return ref src;
-        }
-
-        /// <summary>
-        /// Negates the source value in-place
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static ref double negate(ref double src)
-        {
-            src = - src;
-            return ref src;
-        } 
     }    
 }

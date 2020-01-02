@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -17,7 +17,7 @@ namespace Z0
             
             var m = nati<N4>();
             var n = nati<N3>();
-            var src = Random.NatSpan(n4, n5, closed(1,1000));
+            var src = Random.NatSpan(n4, n5, domain(1,1000));
             Claim.eq(src.Dim.I, m);
             Claim.eq(src.Dim.J, n);            
 

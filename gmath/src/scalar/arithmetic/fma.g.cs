@@ -1,13 +1,10 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
         
     using static zfunc;    
@@ -32,7 +29,6 @@ namespace Z0
             else
                 return gfp.fma(x,a,b);
         }
-
 
         [MethodImpl(Inline)]
         static T fma_i<T>(T x, T a, T b)
@@ -61,7 +57,5 @@ namespace Z0
             else 
                 return generic<T>(math.fma(uint64(x), uint64(a), uint64(b)));
         }
-
     }
-
 }

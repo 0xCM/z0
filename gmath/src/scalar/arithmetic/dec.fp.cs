@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -28,24 +28,6 @@ namespace Z0
             else            
                 throw unsupported<T>();
         }           
-
-        /// <summary>
-        /// Decrements the source value in-place
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T dec<T>(ref T src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                fmath.dec(ref float32(ref src));
-            else if(typeof(T) == typeof(double))
-                fmath.dec(ref float64(ref src));
-            else            
-                throw unsupported<T>();
-            return ref src;
-        }           
     }
 
     partial class fmath
@@ -65,27 +47,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static double dec(double src)
             => --src;
-
-        /// <summary>
-        /// Decrements the source value in-place
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static ref float dec(ref float src)
-        {
-            src--;
-            return ref src;
-        }
-
-        /// <summary>
-        /// Decrements the source value in-place
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static ref double dec(ref double src)
-        {
-            src--;
-            return ref src;
-        }
     }    
 }

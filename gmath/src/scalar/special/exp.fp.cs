@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -28,24 +28,6 @@ namespace Z0
             else
                 throw unsupported<T>();
         }        
-
-        /// <summary>
-        /// Raises e to a specified exponent
-        /// </summary>
-        /// <param name="src">The soruce value to be overwritten by the computed value</param>
-        /// <typeparam name="T">The FP type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T exp<T>(ref T src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                fmath.exp(ref float32(ref src));
-            else if(typeof(T) == typeof(double))
-                fmath.exp(ref float64(ref src));
-            else
-                throw unsupported<T>();
-            return ref src;
-        }         
     }
 
     partial class fmath
@@ -63,30 +45,8 @@ namespace Z0
         /// </summary>
         /// <param name="pow">The exponent</param>
         [MethodImpl(Inline)]
-        public static ref float exp(ref float pow)
-        {
-            pow = MathF.Exp(pow);
-            return ref pow;
-        }
-
-        /// <summary>
-        /// Raises e to a specified exponent
-        /// </summary>
-        /// <param name="pow">The exponent</param>
-        [MethodImpl(Inline)]
         public static double exp(double pow)
             => Math.Exp(pow);
-
-        /// <summary>
-        /// Raises e to a specified exponent
-        /// </summary>
-        /// <param name="pow">The exponent</param>
-        [MethodImpl(Inline)]
-        public static ref double exp(ref double pow)
-        {
-            pow = Math.Exp(pow);
-            return ref pow;
-        }
 
     }
 

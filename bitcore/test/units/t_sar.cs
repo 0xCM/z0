@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -38,7 +38,7 @@ namespace Z0
         public void sb_sal_8i()
         {
             var src = Random.Array<sbyte>(RepCount);            
-            var offset = Random.Array<int>(RepCount, closed(0, (int)bitsize<sbyte>()));            
+            var offset = Random.Array<int>(RepCount, domain(0, (int)bitsize<sbyte>()));            
 
             iter(RepCount, i => Claim.eq((sbyte)(src[i] << offset[i]), gmath.sal(src[i], offset[i])));    
         }
@@ -46,28 +46,28 @@ namespace Z0
         public void sb_sar_8i()
         {
             var src = Random.Array<sbyte>(RepCount);            
-            var offset = Random.Array<int>(RepCount, closed(0, (int)bitsize<sbyte>()));                
+            var offset = Random.Array<int>(RepCount, domain(0, (int)bitsize<sbyte>()));                
             iter(RepCount, i => Claim.eq((sbyte)(src[i] >> offset[i]), gmath.sar(src[i], offset[i])));    
         }
 
         public void sb_sal_32i()
         {
             var src = Random.Array<int>(RepCount);            
-            var offset = Random.Array<int>(RepCount, closed(0, (int)bitsize<int>()));            
+            var offset = Random.Array<int>(RepCount, domain(0, (int)bitsize<int>()));            
             iter(RepCount, i => Claim.eq(src[i] << offset[i], gmath.sal(src[i], offset[i])));    
         }
 
         public void sb_sar_32i()
         {
             var src = Random.Array<int>(RepCount);            
-            var offset = Random.Array<int>(RepCount, closed(0, (int)bitsize<int>()));            
+            var offset = Random.Array<int>(RepCount, domain(0, (int)bitsize<int>()));            
             iter(RepCount, i => Claim.eq(src[i] >> offset[i], gmath.sar(src[i], offset[i])));
         }
 
         public void sb_sal_64i()
         {
             var src = Random.Array<long>(RepCount);            
-            var offset = Random.Array<int>(RepCount, closed(0, (int)bitsize<ulong>()));            
+            var offset = Random.Array<int>(RepCount, domain(0, (int)bitsize<ulong>()));            
 
             iter(RepCount, i => Claim.eq(src[i] << offset[i], gmath.sal(src[i], offset[i])));    
         }
@@ -75,7 +75,7 @@ namespace Z0
         public void sb_sar_64i()
         {
             var src = Random.Array<long>(RepCount);            
-            var offset = Random.Array<int>(RepCount, closed(0, (int)bitsize<long>()));            
+            var offset = Random.Array<int>(RepCount, domain(0, (int)bitsize<long>()));            
 
             iter(RepCount, i => Claim.eq(src[i] >> offset[i], gmath.sar(src[i], offset[i])));
         }
@@ -97,9 +97,6 @@ namespace Z0
                 Claim.eq(x11, y);
             else
                 Claim.eq(x01, y);
-
         }
-
     }
-
 }

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -100,6 +100,5 @@ namespace Z0
          [MethodImpl(Inline)]
          public static BitSpan ToBitSpan(this ReadOnlySpan<ulong> src)
             => BitSpan.load(src);
-
     }
 }

@@ -1,12 +1,10 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
@@ -60,7 +58,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var dst = Z0.RowVector.alloc<N,T>();
-            random.Fill(closed(min,max), ref dst);
+            random.Fill(domain(min,max), ref dst);
             return dst;
         }
 
@@ -140,4 +138,3 @@ namespace Z0
                 => random.Fill<T>(nati<N>(), ref vector.Data[0]);
     }
 }
-

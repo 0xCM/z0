@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -11,7 +11,7 @@ namespace Z0
     
     partial class math
     {
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static sbyte sub(sbyte a, sbyte b)
             => (sbyte)(a - b);
 
@@ -42,61 +42,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong sub(ulong a, ulong b)
             => a - b;
-
-        [MethodImpl(Inline)]
-        public static ref sbyte sub(ref sbyte a, sbyte b)
-        {
-            a -= b;
-            return ref a;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref byte sub(ref byte a, byte b)
-        {
-            a -= b;
-            return ref a;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref short sub(ref short a, short b)
-        {
-            a -= b;
-            return ref a;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref ushort sub(ref ushort a, ushort b)
-        {
-            a -= b;
-            return ref a;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref int sub(ref int a, int b)
-        {
-            a -= b;
-            return ref a;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref uint sub(ref uint a, uint b)
-        {
-            a -= b;
-            return ref a;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref long sub(ref long a, long b)
-        {
-            a -= b;
-            return ref a;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref ulong sub(ref ulong a, ulong b)
-        {
-            a -= b;
-            return ref a;
-        }
     }
 }

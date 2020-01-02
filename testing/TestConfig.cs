@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -128,7 +128,7 @@ namespace Z0
 
         const sbyte Int8Max = sbyte.MaxValue;
 
-        static readonly Interval<sbyte> Int8Domain = closed(Int8Min,Int8Max);
+        static readonly Interval<sbyte> Int8Domain = domain(Int8Min,Int8Max);
 
         Interval<sbyte> ISampleDefaults<sbyte>.SampleDomain 
             => Int8Domain;
@@ -137,7 +137,7 @@ namespace Z0
 
         const byte UInt8Max = byte.MaxValue;
 
-        static readonly Interval<byte> UInt8Domain = closed(UInt8Min,UInt8Max);
+        static readonly Interval<byte> UInt8Domain = domain(UInt8Min,UInt8Max);
 
         Interval<byte> ISampleDefaults<byte>.SampleDomain 
             => UInt8Domain;
@@ -146,7 +146,7 @@ namespace Z0
         
         const short Int16Max = short.MaxValue;
 
-        static readonly Interval<short> Int16Domain = closed(Int16Min,Int16Max);
+        static readonly Interval<short> Int16Domain = domain(Int16Min,Int16Max);
 
         Interval<short> ISampleDefaults<short>.SampleDomain 
             => Int16Domain;
@@ -155,7 +155,7 @@ namespace Z0
         
         const ushort UInt16Max = 30000;
 
-        static readonly Interval<ushort> UInt16Range = closed(UInt16Min,UInt16Max);
+        static readonly Interval<ushort> UInt16Range = domain(UInt16Min,UInt16Max);
 
         Interval<ushort> ISampleDefaults<ushort>.SampleDomain 
             => UInt16Range;
@@ -164,7 +164,7 @@ namespace Z0
         
         const int Int32Max = 250000;
 
-        static readonly Interval<int> Int32Domain = closed(Int32Min,Int32Max);
+        static readonly Interval<int> Int32Domain = domain(Int32Min,Int32Max);
 
         Interval<int> ISampleDefaults<int>.SampleDomain 
             => Int32Domain;
@@ -173,7 +173,7 @@ namespace Z0
         
         const uint UInt32Max = 500000;
 
-        static readonly Interval<uint> UInt32Domain = closed(UInt32Min,UInt32Max);
+        static readonly Interval<uint> UInt32Domain = domain(UInt32Min,UInt32Max);
 
         Interval<uint> ISampleDefaults<uint>.SampleDomain 
             => UInt32Domain;
@@ -182,7 +182,7 @@ namespace Z0
         
         const long Int64Max = 250000;
 
-        static readonly Interval<long> Int64Domain = closed(Int64Min,Int64Max);
+        static readonly Interval<long> Int64Domain = domain(Int64Min,Int64Max);
 
         Interval<long> ISampleDefaults<long>.SampleDomain 
             => Int64Domain;
@@ -191,7 +191,7 @@ namespace Z0
         
         const ulong UInt64Max = 500000;
 
-        static readonly Interval<ulong> UInt64Domaim = closed(UInt64Min,UInt64Max);
+        static readonly Interval<ulong> UInt64Domaim = domain(UInt64Min,UInt64Max);
 
         Interval<ulong> ISampleDefaults<ulong>.SampleDomain 
             => UInt64Domaim;
@@ -201,7 +201,7 @@ namespace Z0
         
         const float Float32Max = 250000.00f;
 
-        static readonly Interval<float> Float32Domain = closed(Float32Min,Float32Max);
+        static readonly Interval<float> Float32Domain = domain(Float32Min,Float32Max);
 
         Interval<float> ISampleDefaults<float>.SampleDomain 
             => Float32Domain;
@@ -211,7 +211,7 @@ namespace Z0
         
         const double Float64Max = 250000.00;
 
-        static readonly Interval<double> Float64Domain = closed(Float64Min,Float64Max);
+        static readonly Interval<double> Float64Domain = domain(Float64Min,Float64Max);
 
         Interval<double> ISampleDefaults<double>.SampleDomain 
             => Float64Domain;

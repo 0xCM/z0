@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -13,13 +13,13 @@ namespace Z0
     partial class gfp
     {
         [MethodImpl(Inline)]
-        public static bit within<T>(T lhs, T rhs, T epsilon)    
+        public static bit within<T>(T a, T b, T delta)    
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return fmath.within(float32(lhs),float32(rhs), float32(epsilon));
+                return fmath.within(float32(a),float32(b), float32(delta));
             else if(typeof(T) == typeof(double))
-                return fmath.within(float64(lhs), float64(rhs), float64(epsilon));
+                return fmath.within(float64(a), float64(b), float64(delta));
             else            
                 throw unsupported<T>();
         }        
@@ -28,14 +28,14 @@ namespace Z0
     partial class fmath
     {
         [MethodImpl(Inline)]
-        public static bit within(float lhs, float rhs, float epsilon)
-            => lhs > rhs ? lhs - rhs <= epsilon 
-              : rhs - lhs <= epsilon;
+        public static bit within(float a, float b, float delta)
+            => a > b ? a - b <= delta 
+              : b - a <= delta;
 
         [MethodImpl(Inline)]
-        public static bit within(double lhs, double rhs, double epsilon)
-            => lhs > rhs ? lhs - rhs <= epsilon 
-              : rhs - lhs <= epsilon;
+        public static bit within(double a, double b, double delta)
+            => a > b ? a - b <= delta 
+              : b - a <= delta;
     }
 
 }

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -42,21 +42,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static long abs(long a)
             => (a + (a >> 63)^(a >> 63));         
-
-        /// <summary>
-        /// Computes the absolute value of the source
-        /// </summary>
-        /// <param name="a">The source value</param>
-        [MethodImpl(Inline)]
-        public static float abs(float a)
-            => MathF.Abs(a);
-
-        /// <summary>
-        /// Computes the absolute value of the source
-        /// </summary>
-        /// <param name="a">The source value</param>
-        [MethodImpl(Inline)]
-        public static double abs(double a)
-            => Math.Abs(a);
    }
 }

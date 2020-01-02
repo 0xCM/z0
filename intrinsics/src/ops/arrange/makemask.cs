@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -24,7 +24,7 @@ namespace Z0
             const ulong m = BitMasks.Msb64x8x1;
             var m0 = Bits.scatter((ulong)(byte)src, m);
             var m1 = Bits.scatter((ulong)((byte)(src >> 8)), m);
-            return v8u(CpuVector.parts(n128,m0,m1));
+            return v8u(CpuVector.vparts(n128,m0,m1));
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
             var m = BitMasks.Lsb64x8x1 << index;
             var m0 = Bits.scatter((ulong)(byte)src, m);
             var m1 = Bits.scatter((ulong)((byte)(src >> 8)), m);
-            return v8u(CpuVector.parts(n128,m0,m1));
+            return v8u(CpuVector.vparts(n128,m0,m1));
         }
 
         /// <summary>

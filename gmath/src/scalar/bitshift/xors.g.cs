@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -21,6 +21,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T xors<T>(T a, int offset)
             where T : unmanaged
+                => xors_u(a,offset);
+
+        [MethodImpl(Inline)]
+        static T xors_u<T>(T a, int offset)
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(math.xors(uint8(a), offset));
@@ -31,8 +36,23 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.xors(uint64(a), offset));
             else            
-                throw unsupported<T>();
+                return xors_i(a,offset);
         }           
 
+        [MethodImpl(Inline)]
+        static T xors_i<T>(T a, int offset)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(math.xors(int8(a), offset));
+            else if(typeof(T) == typeof(short))
+                return generic<T>(math.xors(int16(a), offset));
+            else if(typeof(T) == typeof(int))
+                return generic<T>(math.xors(int32(a), offset));
+            else if(typeof(T) == typeof(long))
+                return generic<T>(math.xors(int64(a), offset));
+            else            
+                throw unsupported<T>();
+        }           
     }
 }

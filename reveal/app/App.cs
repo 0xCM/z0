@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -117,24 +117,25 @@ namespace Z0
             Disassemble(typeof(OC.logixmat));
             Disassemble(typeof(OC.rowbits));
 
+            Disassemble(typeof(inxoc));    
+            Disassemble(typeof(vxops));    
             Disassemble(typeof(OC.v512));    
             Disassemble(typeof(OC.vblend));
             Disassemble(typeof(OC.vblocks));    
             Disassemble(typeof(OC.vconvert));    
             Disassemble(typeof(OC.vcompare));    
-            Disassemble(typeof(OC.vshift));  
+            Disassemble(typeof(OC.vload));    
+            Disassemble(typeof(OC.vmov));    
             Disassemble(typeof(OC.vpattern));    
             Disassemble(typeof(OC.vpermoc));    
-            Disassemble(typeof(OC.v512));    
+            Disassemble(typeof(OC.vshift));  
 
-            Disassemble(typeof(OC.kops));    
+            Disassemble(typeof(gmathops));    
+            Disassemble(typeof(OC.gxops));    
 
             Disassemble(typeof(zfoc));    
-            Disassemble(typeof(gmathops));    
             Disassemble(typeof(bvoc));    
             Disassemble(typeof(bgoc));   
-            Disassemble(typeof(inxoc));    
-            Disassemble(typeof(vxops));    
 
         }
 

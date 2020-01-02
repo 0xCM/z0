@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2019
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -94,7 +94,7 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
             where N : unmanaged, ITypeNat
-                => random.MatrixBlock<N,int, float>(closed(min ?? -25, max ?? 25));
+                => random.MatrixBlock<N,int, float>(domain(min ?? -25, max ?? 25));
 
         /// <summary>
         /// Samples 64-bit integers that are converted to 64-bit floats to populate a square matrix
@@ -111,6 +111,6 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
             where N : unmanaged, ITypeNat
-                => random.MatrixBlock<N,long, double>(closed(min ?? -25L, max ?? 25L));
+                => random.MatrixBlock<N,long, double>(domain(min ?? -25L, max ?? 25L));
     }
 }
