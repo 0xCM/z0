@@ -22,9 +22,9 @@ namespace Z0
         /// <typeparam name="F">The operator type</typeparam>
         /// <typeparam name="T">The operator domain type</typeparam>
         [MethodImpl(Inline)]
-        public static C.UnaryOp<F,T> unary<F,T>(F f, T t = default)
+        public static C.UnaryRep<F,T> unary<F,T>(F f, T t = default)
             where F : IUnaryOp<T>
-                => new C.UnaryOp<F,T>(f);
+                => new C.UnaryRep<F,T>(f);
 
         /// <summary>
         /// Captures a binary operator
@@ -34,9 +34,9 @@ namespace Z0
         /// <typeparam name="F">The operator type</typeparam>
         /// <typeparam name="T">The operator domain type</typeparam>
         [MethodImpl(Inline)]
-        public static C.BinaryOp<F,T> binary<F,T>(F f, T t = default)
+        public static C.BinaryRep<F,T> binary<F,T>(F f, T t = default)
             where F : IBinaryOp<T>
-                => new C.BinaryOp<F,T>(f);
+                => new C.BinaryRep<F,T>(f);
 
         /// <summary>
         /// Captures a vectorized 128-bit binary operator
@@ -46,10 +46,10 @@ namespace Z0
         /// <typeparam name="F">The operator type</typeparam>
         /// <typeparam name="T">The operator domain type</typeparam>
         [MethodImpl(Inline)]
-        public static C.BinaryOp<F,Vector128<T>> vbinary<F,T>(N128 w, F f, T t = default)
+        public static C.BinaryRep<F,Vector128<T>> vbinary<F,T>(N128 w, F f, T t = default)
             where F : IBinaryOp<Vector128<T>>
             where T : unmanaged
-                => new C.BinaryOp<F,Vector128<T>>(f);
+                => new C.BinaryRep<F,Vector128<T>>(f);
 
         /// <summary>
         /// Captures a vectorized 128-bit binary operator
@@ -59,9 +59,9 @@ namespace Z0
         /// <typeparam name="F">The operator type</typeparam>
         /// <typeparam name="T">The operator domain type</typeparam>
         [MethodImpl(Inline)]
-        public static C.BinaryOp<F,Vector256<T>> vbinary<F,T>(N256 w, F f, T t = default)
+        public static C.BinaryRep<F,Vector256<T>> vbinary<F,T>(N256 w, F f, T t = default)
             where F : IBinaryOp<Vector256<T>>
             where T : unmanaged
-                => new C.BinaryOp<F,Vector256<T>>(f);
+                => new C.BinaryRep<F,Vector256<T>>(f);
     }
 }

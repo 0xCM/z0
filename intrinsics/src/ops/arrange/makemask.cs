@@ -20,26 +20,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vmakemask(ushort src)
-        {
-            const ulong m = BitMasks.Msb64x8x1;
-            var m0 = Bits.scatter((ulong)(byte)src, m);
-            var m1 = Bits.scatter((ulong)((byte)(src >> 8)), m);
-            return v8u(CpuVector.vparts(n128,m0,m1));
-        }
-
-        /// <summary>
-        /// Distributes each bit of the source to a specified bit of each byte in a 128-bit target vector
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <param name="index">The byte-relative bit position index in the range [0,7]</param>
-        [MethodImpl(Inline)]
-        public static Vector128<byte> vmakemask(ushort src, byte index)
-        {
-            var m = BitMasks.Lsb64x8x1 << index;
-            var m0 = Bits.scatter((ulong)(byte)src, m);
-            var m1 = Bits.scatter((ulong)((byte)(src >> 8)), m);
-            return v8u(CpuVector.vparts(n128,m0,m1));
-        }
+            => v8u(CpuVector.vparts(n128,maskpart(src,0), maskpart(src,8)));
 
         /// <summary>
         /// Distributes each bit of the source to the hi bit of each byte a 256-bit target vector
@@ -47,7 +28,19 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static Vector256<byte> vmakemask(uint src)
-           => dinx.vconcat(vmakemask((ushort)src), vmakemask(((ushort)(src >> 16))));
+            => vconcat(vmakemask((ushort)src), vmakemask((ushort)(src >> 16)));
+
+        /// <summary>
+        /// Distributes each source bit to an index-identified bit of each byte in a 128-bit target vector
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="index">The bit position index, an integer in the range [0,7]</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vmakemask(ushort src, byte index)
+        {
+            var m = BitMasks.Lsb64x8x1 << index;
+            return v8u(CpuVector.vparts(n128, maskpart(src,0, m), maskpart(src,8, m)));
+        }
 
         /// <summary>
         /// Distributes each bit of the source to to a specified bit of each byte in a 256-bit target vector
@@ -55,7 +48,19 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static Vector256<byte> vmakemask(uint src, byte index)
-           => dinx.vconcat(vmakemask((ushort)src, index), vmakemask(((ushort)(src >> 16)), index));
+        {
+            var m = BitMasks.Lsb64x8x1 << index;
+            var lo = v8u(CpuVector.vparts(n128, maskpart(src, 0, m), maskpart(src, 8, m)));
+            var hi = v8u(CpuVector.vparts(n128, maskpart(src, 16, m), maskpart(src, 24, m)));
+            return vconcat(lo,hi);            
+        }
 
+        [MethodImpl(Inline)]
+        static ulong maskpart(uint src, int offset)
+            => Bits.scatter((ulong)((byte)(src >> offset)), BitMasks.Msb64x8x1);
+
+        [MethodImpl(Inline)]
+        static ulong maskpart(uint src, int offset, ulong mask)
+            => Bits.scatter((ulong)((byte)(src >> offset)), mask);
     }
 }

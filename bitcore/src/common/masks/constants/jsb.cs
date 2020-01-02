@@ -78,8 +78,6 @@ namespace Z0
         /// [11100111 11100111 11100111 11100111]
         /// </summary>
         public const ulong Jsb64x8x3 = (ulong)Jsb32x8x3 | (ulong)Jsb32x8x3 << 32;
-
-
     }
 
 }

@@ -125,7 +125,6 @@ namespace Z0
             return true;
         }
 
-
         [MethodImpl(Inline)]
         static void MarkovSpan(this IPolyrand random, Span<float> dst)
         {            

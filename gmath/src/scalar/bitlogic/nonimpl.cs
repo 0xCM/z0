@@ -14,7 +14,7 @@ namespace Z0
  
     using static zfunc;
     
-    public static partial class math
+    partial class math
     {                
         /// <summary>
         /// Computes the material nonimplication z := ~a & b for operands a and b
@@ -51,6 +51,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ushort nonimpl(ushort a, ushort b)
             => (ushort)AndNot((uint)a,(uint)b);
+
+        /// <summary>
+        /// Computes the material nonimplication z := ~a & b for operands a and b
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline)]
+        public static int nonimpl(int a, int b)
+            => (int)AndNot((uint)a,(uint)b);
 
         /// <summary>
         /// Computes the material nonimplication z := ~a & b for operands a and b

@@ -46,7 +46,7 @@ namespace Z0
                 Claim.eq(expect,actual);
             }
 
-            CheckAction(exec, TestCaseName(f));            
+            CheckAction(exec, CaseName(f));            
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Z0
                 Claim.eq(expect,actual);
             }
             
-            CheckAction(exec, TestCaseName(f));            
+            CheckAction(exec, CaseName(f));            
         }
 
         /// <summary>
@@ -84,10 +84,10 @@ namespace Z0
         protected void CheckFactory<F,C,S,T>(N128 w, F f, C check, S s = default, T t = default)
             where S : unmanaged
             where T : unmanaged
-            where F : IVFactoryOp128<S,T>
+            where F : IVFactory128<S,T>
             where C : IVChecker128<S,T>
         {
-            var casename = TestCaseName(f);
+            var casename = CaseName(f);
             void exec()
             {
                 for(var i=0; i < RepCount; i++)
@@ -117,10 +117,10 @@ namespace Z0
         protected void CheckFactory<F,C,S,T>(N256 w, F f, C check, S s = default, T t = default)
             where S : unmanaged
             where T : unmanaged
-            where F : IVFactoryOp256<S,T>
+            where F : IVFactory256<S,T>
             where C : IVChecker256<S,T>
         {
-            var casename = TestCaseName(f);
+            var casename = CaseName(f);
 
             void exec()
             {
@@ -142,7 +142,7 @@ namespace Z0
         {
             var cells = vcount(w,t);
             var succeeded = true;
-            var casename = TestCaseName(f);
+            var casename = CaseName(f);
             
             count.Start();
             try
@@ -172,7 +172,7 @@ namespace Z0
         {
             var cells = vcount(w,t);
             var succeeded = true;
-            var casename = TestCaseName(f);
+            var casename = CaseName(f);
 
             count.Start();
             try
@@ -200,7 +200,7 @@ namespace Z0
             where T : unmanaged
             where F : IVShiftOp128D<T>
         {
-            var casename = TestCaseName(f);
+            var casename = CaseName(f);
             var cells = vcount(w,t);
             var succeeded = true;
             var bounds = ((byte)0, (byte)(bitsize(t) - 1));
@@ -232,7 +232,7 @@ namespace Z0
             where T : unmanaged
             where F : IVShiftOp256D<T>
         {
-            var casename = TestCaseName(f);
+            var casename = CaseName(f);
             var cells = vcount(w,t);
             var succeeded = true;
             var bounds = ((byte)0, (byte)(bitsize(t) - 1));
@@ -266,7 +266,7 @@ namespace Z0
         {
             var cells = vcount(w,t);
             var succeeded = true;
-            var casename = TestCaseName(f);
+            var casename = CaseName(f);
             
             count.Start();
             try
@@ -297,7 +297,7 @@ namespace Z0
         {
             var len = vcount(w,t);
             var succeeded = true;
-            var casename = TestCaseName(f);
+            var casename = CaseName(f);
 
             count.Start();
             try
@@ -328,7 +328,7 @@ namespace Z0
         {
             var cells = vcount(w,t);
             var succeeded = true;
-            var casename = TestCaseName(f);
+            var casename = CaseName(f);
             
             count.Start();
             try
@@ -360,7 +360,7 @@ namespace Z0
         {
             var cells = vcount(w,t);
             var succeeded = true;
-            var casename = TestCaseName(f);
+            var casename = CaseName(f);
             
             count.Start();
             try
@@ -392,7 +392,7 @@ namespace Z0
         {
             var cells = vcount<T>(n128);
             var succeeded = true;
-            var casename = TestCaseName(f);
+            var casename = CaseName(f);
             
             count.Start();
             try
@@ -422,7 +422,7 @@ namespace Z0
         {
             var cells = vcount<T>(n256);
             var succeeded = true;
-            var casename = TestCaseName(f);
+            var casename = CaseName(f);
             
             count.Start();
             try

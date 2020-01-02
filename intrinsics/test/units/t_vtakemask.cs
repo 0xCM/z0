@@ -65,7 +65,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check, TestCaseName(f));            
+            CheckAction(check, CaseName(f));            
         }
 
         void vtakemask_check<T>(N256 w, T t = default)
@@ -87,7 +87,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check, TestCaseName(f));
+            CheckAction(check, CaseName(f));
         }
     }
 }

@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static zfunc;
     using static As;
@@ -61,7 +60,6 @@ namespace Z0
         IPolyrand Select(int index);
     }
 
-
     /// <summary>
     /// Characterizes source capable of producing an interminable sequence of N-dimensional points/vectors
     /// </summary>
@@ -72,5 +70,4 @@ namespace Z0
     {
         NatSpan<N,T> Next();
     }
-
 }

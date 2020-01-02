@@ -11,7 +11,7 @@ namespace Z0.OpCodes
     using static zfunc;
 
     [OpCodeProvider]
-    public static class natoc
+    public static class nats
     {
         public static ulong nat_add()
             => NatMath2.add(n12,n16);

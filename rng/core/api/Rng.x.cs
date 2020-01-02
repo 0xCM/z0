@@ -6,11 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static zfunc;
     using static As;
-
 
     public static partial class RngX
     {
@@ -66,29 +64,12 @@ namespace Z0
                 var count = 0ul;
                 while(count < widths[i])
                 {
-                    src.StreamTo(bufferlen, ref head(buffer));
+                    src.Fill(bufferlen, ref head(buffer));
                     count += Math.Min(widths[i],(ulong)bufferlen);
                 }
                 subseq[i] = (count, buffer.Last());                
             }
             return subseq;
-
         }
-
-        public static Span<(ulong count, T value)> SubSeq<T>(this IPointSource<T> src, int batchsize, params ulong[] widths)        
-            where T : unmanaged
-                => src.SubSeq(batchsize, widths.ToSpan());
-              
-        public static Span<(ulong count, T value)> SubSeq<T>(this IPointSource<T> src, int batchsize, ulong width, int count)        
-            where T : unmanaged
-        {
-            Span<ulong> widths = new ulong[count];
-            widths.Fill(width);
-            return src.SubSeq(batchsize, widths);
-
-        }
-
     }
-
-
 }

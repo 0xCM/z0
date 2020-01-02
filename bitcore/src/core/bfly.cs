@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static byte bfly(N1 n, byte x)
-            => bfly(x,x66,1);
+            => bfly(x,BitMasks.Mirror8x4x2,1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static ushort bfly(N1 n, ushort x)
-            => bfly(x,x6666,1);
+            => bfly(x,BitMasks.Mirror16x4x2,1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static uint bfly(N1 n, uint x)
-            => bfly(x,x66666666,1);
+            => bfly(x,BitMasks.Mirror32x4x2,1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static ulong bfly(N1 n, ulong x)
-            => bfly(x,x6666666666666666,1);
+            => bfly(x,BitMasks.Mirror64x4x2,1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior 2-bit segments
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static byte bfly(N2 n, byte x)
-            => bfly(x,x3C,2);
+            => bfly(x,BitMasks.Central8x8x4,2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static ushort bfly(N2 n, ushort x)
-            => bfly(x,x3C3C,2);
+            => bfly(x,BitMasks.Central16x8x4,2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
@@ -77,7 +77,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static uint bfly(N2 n, uint x)
-            => bfly(x,x3C3C3C3C,2);
+            => bfly(x, BitMasks.Central32x8x4,2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
@@ -86,7 +86,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static ulong bfly(N2 n, ulong x)
-            => bfly(x,x3C3C3C3C3C3C3C3C,2);
+            => bfly(x,BitMasks.Central64x8x4,2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments
@@ -96,7 +96,7 @@ namespace Z0
         /// <remarks> [0 1 2 3 ] -> [0 2 1 3] </remarks>
         [MethodImpl(Inline)]
         public static ushort bfly(N4 n, ushort x)
-            => bfly(x,x0FF0,4);
+            => bfly(x,BitMasks.Mirror16x16x8,4);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
@@ -109,7 +109,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline)]
         public static uint bfly(N4 n, uint x)
-            => bfly(x,x0FF00FF0,4);
+            => bfly(x,BitMasks.Mirror32x16x8,4);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
@@ -122,7 +122,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline)]
         public static ulong bfly(N4 n, ulong x)
-            => bfly(x,x0FF00FF00FF00FF0,4);
+            => bfly(x,BitMasks.Mirror64x16x8,4);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments
@@ -132,7 +132,7 @@ namespace Z0
         /// <remarks>[0 1 2 3] -> [0 2 1 3]</remarks>
         [MethodImpl(Inline)]
         public static uint bfly(N8 n, uint x)
-            => bfly(x,x00FFFF00,8);
+            => bfly(x,BitMasks.Mirror32x32x16,8);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments of each 32-bit segment.
@@ -142,7 +142,7 @@ namespace Z0
         /// <remarks> [0 1 2 3 | 4 5 6 7] -> [0 2 1 3 | 4 6 5 7]</remarks>
         [MethodImpl(Inline)]
         public static ulong bfly(N8 n, ulong x)
-            => bfly(x,x00FFFF0000FFFF00,8);
+            => bfly(x,BitMasks.Mirror64x32x16,8);
  
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior 16-bit segments
@@ -152,7 +152,7 @@ namespace Z0
         /// <remarks>[0 1 2 3] -> [0 2 1 3]</remarks>
         [MethodImpl(Inline)]
         public static ulong bfly(N16 n, ulong x)
-            => bfly(x,x0000FFFFFFFF0000,16);
+            => bfly(x,BitMasks.Mirror64x64x32,16);
 
         /// <summary>
         /// Effects a butterfly permutation on the source value, predicated on a supplied mask and shift amount

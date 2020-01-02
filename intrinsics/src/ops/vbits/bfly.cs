@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vbfly(N1 n, Vector128<byte> x)
-            => vbutterfly(x,v66(n128),1);
+            => vbutterfly(x,v666(n128,n8),1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector128<ushort> vbfly(N1 n, Vector128<ushort> x)
-            => vbutterfly(x,v6666(n128),1);
+            => vbutterfly(x,v666(n128,n16),1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector128<uint> vbfly(N1 n, Vector128<uint> x)
-            => vbutterfly(x,v66666666(n128),1);
+            => vbutterfly(x,v666(n128,n32),1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector128<ulong> vbfly(N1 n, Vector128<ulong> x)
-            => vbutterfly(x,v6666666666666666(n128),1);
+            => vbutterfly(x,v666(n128,n64),1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior 2-bit segments
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vbfly(N2 n, Vector128<byte> x)
-            => vbutterfly(x,v3C(n128),2);
+            => vbutterfly(x,v3C(n128,n8),2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector128<ushort> vbfly(N2 n, Vector128<ushort> x)
-            => vbutterfly(x,v3C3C(n128),2);
+            => vbutterfly(x,v3C(n128,n16),2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector128<uint> vbfly(N2 n, Vector128<uint> x)
-            => vbutterfly(x,v3C3C3C3C(n128),2);
+            => vbutterfly(x,v3C(n128,n32),2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
@@ -85,7 +85,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector128<ulong> vbfly(N2 n, Vector128<ulong> x)
-            => vbutterfly(x,v3C3C3C3C3C3C3C3C(n128),2);
+            => vbutterfly(x,v3C(n128,n64),2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments
@@ -95,7 +95,7 @@ namespace Z0
         /// <remarks> [0 1 2 3 ] -> [0 2 1 3] </remarks>
         [MethodImpl(Inline)]
         public static Vector128<ushort> vbfly(N4 n, Vector128<ushort> x)
-            => vbutterfly(x,v0FF0(n128),4);
+            => vbutterfly(x,v0FF0(n128,n16),4);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
@@ -108,7 +108,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline)]
         public static Vector128<uint> vbfly(N4 n, Vector128<uint> x)
-            => vbutterfly(x,v0FF00FF0(n128),4);
+            => vbutterfly(x,v0FF0(n128,n32),4);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
@@ -121,7 +121,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline)]
         public static Vector128<ulong> vbfly(N4 n, Vector128<ulong> x)
-            => vbutterfly(x,v0FF00FF00FF00FF0(n128),4);
+            => vbutterfly(x,v0FF0(n128,n64),4);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments
@@ -160,7 +160,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector256<byte> vbfly(N1 n, Vector256<byte> x)
-            => vbutterfly(x,v66(n256),1);
+            => vbutterfly(x,v66(n256,n8),1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -169,7 +169,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector256<ushort> vbfly(N1 n, Vector256<ushort> x)
-            => vbutterfly(x,v6666(n256),1);
+            => vbutterfly(x,v66(n256,n16),1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -178,7 +178,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector256<uint> vbfly(N1 n, Vector256<uint> x)
-            => vbutterfly(x,v66666666(n256),1);
+            => vbutterfly(x,v66(n256,n32),1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -187,7 +187,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vbfly(N1 n, Vector256<ulong> x)
-            => vbutterfly(x,v6666666666666666(n256),1);
+            => vbutterfly(x,v66(n256,n64),1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior 2-bit segments
@@ -196,7 +196,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector256<byte> vbfly(N2 n, Vector256<byte> x)
-            => vbutterfly(x,v3C(n256),2);
+            => vbutterfly(x,v3C(n256,n8),2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
@@ -205,7 +205,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector256<ushort> vbfly(N2 n, Vector256<ushort> x)
-            => vbutterfly(x,v3C3C(n256),2);
+            => vbutterfly(x,v3C(n256,n16),2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
@@ -214,7 +214,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector256<uint> vbfly(N2 n, Vector256<uint> x)
-            => vbutterfly(x,v3C3C3C3C(n256),2);
+            => vbutterfly(x,v3C(n256,n32),2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
@@ -223,7 +223,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vbfly(N2 n, Vector256<ulong> x)
-            => vbutterfly(x,v3C3C3C3C3C3C3C3C(n256),2);
+            => vbutterfly(x,v3C(n256,n64),2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments
@@ -233,7 +233,7 @@ namespace Z0
         /// <remarks> [0 1 2 3 ] -> [0 2 1 3] </remarks>
         [MethodImpl(Inline)]
         public static Vector256<ushort> vbfly(N4 n, Vector256<ushort> x)
-            => vbutterfly(x,v0FF0(n256),4);
+            => vbutterfly(x,v0FF0(n256,n16),4);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
@@ -246,7 +246,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline)]
         public static Vector256<uint> vbfly(N4 n, Vector256<uint> x)
-            => vbutterfly(x,v0FF00FF0(n256),4);
+            => vbutterfly(x,v0FF0(n256,n32),4);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
@@ -259,7 +259,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vbfly(N4 n, Vector256<ulong> x)
-            => vbutterfly(x,v0FF00FF00FF00FF0(n256),4);
+            => vbutterfly(x,v0FF0(n256,n64),4);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments
@@ -324,116 +324,116 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector128<byte> v66(N128 n)
-            => CpuVector.vbroadcast(n,x66);
+        static Vector128<byte> v666(N128 w, N8 n)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror8x4x2);
 
         [MethodImpl(Inline)]
-        static Vector128<ushort> v6666(N128 n)
-            => CpuVector.vbroadcast(n,x6666);
+        static Vector128<ushort> v666(N128 w, N16 n)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror16x4x2);
 
         [MethodImpl(Inline)]
-        static Vector128<uint> v66666666(N128 n)
-            => CpuVector.vbroadcast(n,x66666666);
+        static Vector128<uint> v666(N128 w, N32 n)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror32x4x2);
 
         [MethodImpl(Inline)]
-        static Vector128<ulong> v6666666666666666(N128 n)
-            => CpuVector.vbroadcast(n,x6666666666666666);
+        static Vector128<ulong> v666(N128 w, N64 n)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror64x4x2);
 
         [MethodImpl(Inline)]
-        static Vector128<byte> v3C(N128 n)
-            => CpuVector.vbroadcast(n,x3C);
+        static Vector128<byte> v3C(N128 w, N8 f)
+            => CpuVector.vbroadcast(w,BitMasks.Central8x8x4);
 
         [MethodImpl(Inline)]
-        static Vector128<ushort> v3C3C(N128 n)
-            => CpuVector.vbroadcast(n,x3C3C);
+        static Vector128<ushort> v3C(N128 w, N16 n)
+            => CpuVector.vbroadcast(w,BitMasks.Central16x8x4);
 
         [MethodImpl(Inline)]
-        static Vector128<uint> v3C3C3C3C(N128 n)
-            => CpuVector.vbroadcast(n,x3C3C3C3C);
+        static Vector128<uint> v3C(N128 w, N32 n)
+            => CpuVector.vbroadcast(w,BitMasks.Central32x8x4);
 
         [MethodImpl(Inline)]
-        static Vector128<ulong> v3C3C3C3C3C3C3C3C(N128 n)
-            => CpuVector.vbroadcast(n,x3C3C3C3C3C3C3C3C);
+        static Vector128<ulong> v3C(N128 w, N64 n)
+            => CpuVector.vbroadcast(w, BitMasks.Central64x8x4);
 
         [MethodImpl(Inline)]
-        static Vector128<ushort> v0FF0(N128 n)
-            => CpuVector.vbroadcast(n,x0FF0);
+        static Vector128<ushort> v0FF0(N128 w, N16 n)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror16x16x8);
 
         [MethodImpl(Inline)]
-        static Vector128<uint> v0FF00FF0(N128 n)
-            => CpuVector.vbroadcast(n,x0FF00FF0);
+        static Vector128<uint> v0FF0(N128 w, N32 n)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror32x16x8);
 
         [MethodImpl(Inline)]
-        static Vector128<ulong> v0FF00FF00FF00FF0(N128 n)
-            => CpuVector.vbroadcast(n,x0FF00FF00FF00FF0);
+        static Vector128<ulong> v0FF0(N128 w, N64 n)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror64x16x8);
 
         [MethodImpl(Inline)]
-        static Vector128<uint> v00FFFF00(N128 n)
-            => CpuVector.vbroadcast(n,x00FFFF00);
+        static Vector128<uint> v00FFFF00(N128 w)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror32x32x16);
 
         [MethodImpl(Inline)]
-        static Vector128<ulong> v00FFFF0000FFFF00(N128 n)
-            => CpuVector.vbroadcast(n,x00FFFF0000FFFF00);
+        static Vector128<ulong> v00FFFF0000FFFF00(N128 w)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror64x32x16);
 
         [MethodImpl(Inline)]
-        static Vector128<ulong> v0000FFFFFFFF0000(N128 n)
-            => CpuVector.vbroadcast(n,x0000FFFFFFFF0000);
+        static Vector128<ulong> v0000FFFFFFFF0000(N128 w)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror64x64x32);
 
         [MethodImpl(Inline)]
-        static Vector256<byte> v66(N256 n)
-            => CpuVector.vbroadcast(n,x66);
+        static Vector256<byte> v66(N256 w, N8 n)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror8x4x2);
 
         [MethodImpl(Inline)]
-        static Vector256<ushort> v6666(N256 n)
-            => CpuVector.vbroadcast(n,x6666);
+        static Vector256<ushort> v66(N256 w, N16 n)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror16x4x2);
 
         [MethodImpl(Inline)]
-        static Vector256<uint> v66666666(N256 n)
-            => CpuVector.vbroadcast(n,x66666666);
+        static Vector256<uint> v66(N256 w, N32 n)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror32x4x2);
 
         [MethodImpl(Inline)]
-        static Vector256<ulong> v6666666666666666(N256 n)
-            => CpuVector.vbroadcast(n,x6666666666666666);
+        static Vector256<ulong> v66(N256 w, N64 n)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror64x4x2);
 
         [MethodImpl(Inline)]
-        static Vector256<byte> v3C(N256 n)
-            => CpuVector.vbroadcast(n,x3C);
+        static Vector256<byte> v3C(N256 w, N8 n)
+            => CpuVector.vbroadcast(w,BitMasks.Central8x8x4);
 
         [MethodImpl(Inline)]
-        static Vector256<ushort> v3C3C(N256 n)
-            => CpuVector.vbroadcast(n,x3C3C);
+        static Vector256<ushort> v3C(N256 w, N16 n)
+            => CpuVector.vbroadcast(w,BitMasks.Central16x8x4);
 
         [MethodImpl(Inline)]
-        static Vector256<uint> v3C3C3C3C(N256 n)
-            => CpuVector.vbroadcast(n,x3C3C3C3C);
+        static Vector256<uint> v3C(N256 w, N32 n)
+            => CpuVector.vbroadcast(w,BitMasks.Central32x8x4);
 
         [MethodImpl(Inline)]
-        static Vector256<ulong> v3C3C3C3C3C3C3C3C(N256 n)
-            => CpuVector.vbroadcast(n,x3C3C3C3C3C3C3C3C);
+        static Vector256<ulong> v3C(N256 w, N64 n)
+            => CpuVector.vbroadcast(w,BitMasks.Central64x8x4);
 
         [MethodImpl(Inline)]
-        static Vector256<ushort> v0FF0(N256 n)
-            => CpuVector.vbroadcast(n,x0FF0);
+        static Vector256<ushort> v0FF0(N256 w, N16 n)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror16x16x8);
 
         [MethodImpl(Inline)]
-        static Vector256<uint> v0FF00FF0(N256 n)
-            => CpuVector.vbroadcast(n,x0FF00FF0);
+        static Vector256<uint> v0FF0(N256 w, N32 n)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror32x16x8);
 
         [MethodImpl(Inline)]
-        static Vector256<ulong> v0FF00FF00FF00FF0(N256 n)
-            => CpuVector.vbroadcast(n,x0FF00FF00FF00FF0);
+        static Vector256<ulong> v0FF0(N256 w, N64 n)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror64x16x8);
 
         [MethodImpl(Inline)]
-        static Vector256<uint> v00FFFF00(N256 n)
-            => CpuVector.vbroadcast(n,x00FFFF00);
+        static Vector256<uint> v00FFFF00(N256 w)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror32x32x16);
 
         [MethodImpl(Inline)]
-        static Vector256<ulong> v00FFFF0000FFFF00(N256 n)
-            => CpuVector.vbroadcast(n,x00FFFF0000FFFF00);
+        static Vector256<ulong> v00FFFF0000FFFF00(N256 w)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror64x32x16);
 
         [MethodImpl(Inline)]
-        static Vector256<ulong> v0000FFFFFFFF0000(N256 n)
-            => CpuVector.vbroadcast(n,x0000FFFFFFFF0000);
+        static Vector256<ulong> v0000FFFFFFFF0000(N256 w)
+            => CpuVector.vbroadcast(w,BitMasks.Mirror64x64x32);
 
     }
 

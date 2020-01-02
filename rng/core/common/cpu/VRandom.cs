@@ -20,7 +20,7 @@ namespace Z0
         public string Moniker => moniker<N128,T>(Name);
 
         [MethodImpl(Inline)]
-        public VRandom128(IPolyrand random)            
+        internal VRandom128(IPolyrand random)            
             => this.Random = random;
         
         [MethodImpl(Inline)]
@@ -37,7 +37,7 @@ namespace Z0
         public string Moniker => moniker<N256,T>(Name);
 
         [MethodImpl(Inline)]
-        public VRandom256(IPolyrand random)            
+        internal VRandom256(IPolyrand random)            
             => this.Random = random;
         
         [MethodImpl(Inline)]

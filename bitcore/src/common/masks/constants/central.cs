@@ -39,22 +39,22 @@ namespace Z0
         // ~ ------------------------------------------------------------------
 
         /// <summary>
-        /// [00111100]
+        /// 0x3C = [00111100]
         /// </summary>
         public const byte Central8x8x4 = 0b00111100;
 
         /// <summary>
-        /// [00111100 00111100]
+        /// 0x3C3C = [00111100 00111100]
         /// </summary>
         public const ushort Central16x8x4 = (ushort)Central8x8x4 | (ushort)Central8x8x4 << 8;
 
         /// <summary>
-        /// [00111100 00111100 00111100 00111100]
+        /// 0x3C3C3C3C = [00111100 00111100 00111100 00111100]
         /// </summary>
         public const uint Central32x8x4 = (uint)Central16x8x4 | (uint)Central16x8x4 << 8;
 
         /// <summary>
-        /// [00111100 00111100 00111100 00111100 00111100 00111100 00111100 00111100]
+        /// 0x3C3C3C3C3C3C3C3C = [00111100 00111100 00111100 00111100 00111100 00111100 00111100 00111100]
         /// </summary>
         public const ulong Central64x8x4 = (ulong)Central32x8x4 | (ulong)Central32x8x4 << 8;
 
@@ -141,5 +141,7 @@ namespace Z0
         /// [00000000 00000001 10000000 00000000]
         /// </summary>
         public const uint Central32x2 = (uint) Msb16x16x1 | (uint)Lsb16x16x1 << 8;
+
+
     }
 }

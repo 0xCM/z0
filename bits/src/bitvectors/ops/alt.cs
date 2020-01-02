@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;    
-    using static HexConst;
 
     partial class BitVector
     {
@@ -20,7 +19,7 @@ namespace Z0
         /// <param name="parity">The state of the first bit</param>
         [MethodImpl(Inline)]
         public static BitVector8 alt(N8 n, bit parity)
-            => parity ? x55 : AA;        
+            => parity ? BitMasks.Even8 : BitMasks.Odd8;        
 
         /// <summary>
         /// Creates a bitvector with uniformly alternating states where the state of the
@@ -30,7 +29,7 @@ namespace Z0
         /// <param name="parity">The state of the first bit</param>
         [MethodImpl(Inline)]
         public static BitVector16 alt(N16 n, bit parity)
-            => parity ? x5555 : xAAAA;        
+            => parity ? BitMasks.Even16 : BitMasks.Odd16;        
 
         /// <summary>
         /// Creates a bitvector with uniformly alternating states where the state of the
@@ -40,7 +39,7 @@ namespace Z0
         /// <param name="parity">The state of the first bit</param>
         [MethodImpl(Inline)]
         public static BitVector32 alt(N32 n, bit parity)
-            => parity ? x55555555 : xAAAAAAAA;        
+            => parity ? BitMasks.Even32 : BitMasks.Odd32;        
 
         /// <summary>
         /// Creates a bitvector with uniformly alternating states where the state of the
@@ -50,7 +49,7 @@ namespace Z0
         /// <param name="parity">The state of the first bit</param>
         [MethodImpl(Inline)]
         public static BitVector64 alt(N64 n, bit parity)
-            => parity ? x5555555555555555 : xAAAAAAAAAAAAAAAA;
+            => parity ? BitMasks.Even64 : BitMasks.Odd64;
 
         /// <summary>
         /// Creates a bitvector with uniformly alternating states where the state of 
@@ -60,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> alt<T>(bit parity)
             where T : unmanaged
-                => parity ? convert<T>(x5555555555555555) : convert<T>(xAAAAAAAAAAAAAAAA);        
+                => parity ? convert<T>(BitMasks.Even64) : convert<T>(BitMasks.Odd64);        
 
         /// <summary>
         /// Creates a bitvector with uniformly alternating states where the state of 
@@ -72,7 +71,6 @@ namespace Z0
         public static BitVector<N,T> alt<N,T>(bit parity, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => natural<N,T>(parity ? convert<T>(x5555555555555555) : convert<T>(xAAAAAAAAAAAAAAAA));        
-
+                => natural<N,T>(parity ? convert<T>(BitMasks.Even64) : convert<T>(BitMasks.Odd64));
     }
 }

@@ -10,6 +10,9 @@ namespace Z0
 
     using static zfunc;
 
+    using static OpSkeleta;
+
+
     partial class VXTypes
     {
         public abstract class CAnd<W,V,T> : VBinOpD<W,V,T>
@@ -42,7 +45,6 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public override Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vand(x,y);
-
         }
 
         public readonly struct And128<T> : IVBinOp128D<T>

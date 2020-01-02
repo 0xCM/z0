@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Runtime.Intrinsics;
 
     using static zfunc;
@@ -172,7 +171,7 @@ namespace Z0
         /// <param name="filter">If specified, component values for which the predicate returns false are excluded</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector512<T> CpuVector<T>(this IPolyrand random, N512 n, T min, T max, Func<T,bool> filter = null)        
+        public static Vector512<T> CpuVector<T>(this IPolyrand random, N512 n, T min, T max, Func<T,bool> filter)        
             where T : unmanaged
                 => CpuVecX.LoadVector(random.Blocks(n,1, (min, max), filter));
 

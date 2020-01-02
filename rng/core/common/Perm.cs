@@ -73,8 +73,6 @@ namespace Z0
         {
             while(true)
                 yield return random.Perm(n);
-        }
-                
+        }                
     }
-
 }

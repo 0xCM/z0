@@ -12,7 +12,6 @@ namespace Z0
 
     partial class VXTypes
     {
-
         public readonly struct TakeIMask128<T> : IVUnaryScalar128Imm8<T,ushort>
             where T : unmanaged
         {

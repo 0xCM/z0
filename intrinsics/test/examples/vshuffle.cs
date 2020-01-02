@@ -12,7 +12,7 @@ namespace Z0
     using static HexConst;
     using static As;
     
-    public class t_vshuffle : t_vinx<t_vshuffle>
+    partial class vexamples
     {        
         static ReadOnlySpan<byte> perm_add_data 
             => new byte[32]{0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,14,14,15,15,16};
@@ -93,7 +93,7 @@ namespace Z0
         public static Vector256<ushort> vshuf16x16(Vector256<ushort> a, Vector256<ushort> spec)
             => v16u(dinx.vshuf32x8(v8u(a), ToShuffleSpec(spec)));
 
-        public void vshuf16x16_check()
+        public void vshuf16x16()
         {
             var w = n256;
             var x = VPattern.vincrements(w,z16);            
@@ -111,7 +111,7 @@ namespace Z0
             Claim.eq(pairswap,y3);
         }
 
-        public void shuffle_16x8_128x8u_outline()
+        public void vshuf16x8_128x8u()
         {
             var n = n128;
             var x0 = VPattern.vincrements<byte>(n);
@@ -144,33 +144,10 @@ namespace Z0
             var x5Spec = CpuVector.vbroadcast(n,(byte)0b10000000);
             var x5Dst = dinx.vshuf16x8(x5, x5Spec);
             Claim.eq(x5Dst,CpuVector.vbroadcast(n,(byte)0));                        
-
         }
 
-        public void vperm_4x32_128x32u_outline()
-        {
-            var n = n128;
-            var src = CpuVector.vparts(n128,1,2,3,4);
-            var spec = Perm4L.ABCD;
-            var y = CpuVector.vparts(n128,4,3,2,1);
-            var x = dinx.vperm4x32(src, Perm4L.ABCD);
-            Claim.eq(x, src);
 
-            y = CpuVector.vparts(n128,4,3,2,1);
-            spec = Perm4L.DCBA;
-            x = dinx.vperm4x32(src,spec);
-            Claim.eq(x, y); 
-
-            y = CpuVector.vparts(4u,3u,2u,1u);
-            spec = Perm4L.DCBA;
-            x = dinx.vperm4x32(src,spec);
-            Claim.eq(x, y); 
-
-            Claim.eq(dinx.vperm4x32(CpuVector.vparts(0,1,2,3), Perm4L.ADCB), CpuVector.vparts(0,3,2,1));
-            Claim.eq(dinx.vperm4x32(CpuVector.vparts(0,1,2,3), Perm4L.DBCA), CpuVector.vparts(3,1,2,0));
-        }
-
-        public void vshuf_16x8()
+        public void vshuf16x8()
         {
             var src = VPattern.vincrements<byte>(n128);
             var perm = Perms.natural(Perms.reversed(n16));
@@ -191,13 +168,13 @@ namespace Z0
             }
         }
 
-        public void vperm_4x16_basecase()
+        public void vperm4x16()
         {
             var id = CpuVector.vparts(n128,0,1,2,3,6,7,8,9);
             Claim.eq(dinx.vperm4x16(CpuVector.vparts(n128,0,1,2,3,6,7,8,9), Perm4L.ADCB, Perm4L.ADCB), CpuVector.vparts(n128,0,3,2,1,6,9,8,7));
         }
 
-        public void vperm_4x32_128x32u()
+        public void vperm4x32_128x32u_example1()
         {
             var trace = false;
             var pSrc = Random.EnumValues<Perm4L>(x => (byte)x > 5);
@@ -236,6 +213,29 @@ namespace Z0
                     Trace("perm(v1,p)", v2.FormatHex());
                 }                                
             }
+        }
+
+        public void vperm4x32_128x32u_example2()
+        {
+            var n = n128;
+            var src = CpuVector.vparts(n128,1,2,3,4);
+            var spec = Perm4L.ABCD;
+            var y = CpuVector.vparts(n128,4,3,2,1);
+            var x = dinx.vperm4x32(src, Perm4L.ABCD);
+            Claim.eq(x, src);
+
+            y = CpuVector.vparts(n128,4,3,2,1);
+            spec = Perm4L.DCBA;
+            x = dinx.vperm4x32(src,spec);
+            Claim.eq(x, y); 
+
+            y = CpuVector.vparts(4u,3u,2u,1u);
+            spec = Perm4L.DCBA;
+            x = dinx.vperm4x32(src,spec);
+            Claim.eq(x, y); 
+
+            Claim.eq(dinx.vperm4x32(CpuVector.vparts(0,1,2,3), Perm4L.ADCB), CpuVector.vparts(0,3,2,1));
+            Claim.eq(dinx.vperm4x32(CpuVector.vparts(0,1,2,3), Perm4L.DBCA), CpuVector.vparts(3,1,2,0));
         }
 
         static Vector256<byte> ShuffleIdentityMask()

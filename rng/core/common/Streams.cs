@@ -54,20 +54,6 @@ namespace Z0
 
             return stream(produce(), src.RngKind);            
         }
-
-        /// <summary>
-        /// Fills a caller-allocated target with a specified number of values from a source
-        /// </summary>
-        /// <param name="src">The random source</param>
-        /// <param name="count">The number of values to send to the target</param>
-        /// <param name="dst">A reference to the target location</param>
-        /// <typeparam name="T">The element type</typeparam>
-        public static void StreamTo<T>(this IPointSource<T> src, int count, ref T dst)
-            where T : unmanaged
-        {
-            for(var i=0; i<count; i++)
-                Unsafe.Add(ref dst, i) = src.Next();
-        }
         
         /// <summary>
         /// Produces a random stream of unfiltered/unbounded points from a source
@@ -98,17 +84,6 @@ namespace Z0
                 => stream(random.UniformStream(domain,filter), random.RngKind);
 
         /// <summary>
-        /// Produces a stream values from the source subject to a specified maximum value and optional filter
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="max">The random variable's upper bound</param>
-        /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
-        /// <typeparam name="T">The element type</typeparam>
-        public static IRandomStream<T> Stream<T>(this IPolyrand random, T max, Func<T,bool> filter = null)
-            where T : unmanaged
-                => stream(random.UniformStream(domain(gmath.minval<T>(), max),filter), random.RngKind);
-
-        /// <summary>
         /// Produces a stream values from the source subject to a specified range and optional filter
         /// </summary>
         /// <param name="random">The random source</param>
@@ -126,10 +101,21 @@ namespace Z0
         /// <param name="domain">The domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IRandomStream<T> Stream<T>(this IPolyrand random, Interval<T> domain, Func<T,bool> filter = null)
+        public static IRandomStream<T> Stream<T>(this IPolyrand random, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => stream(random.UniformStream(domain,filter), random.RngKind);
-        
+
+        /// <summary>
+        /// Produces a stream of values from the random source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="domain">The domain of the random variable</param>
+        /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
+        /// <typeparam name="T">The element type</typeparam>
+        public static IRandomStream<T> Stream<T>(this IPolyrand random, Interval<T> domain)
+            where T : unmanaged
+                => stream(random.UniformStream(domain), random.RngKind);
+
         /// <summary>
         /// Produces a stream of nonzero uniformly random values
         /// </summary>

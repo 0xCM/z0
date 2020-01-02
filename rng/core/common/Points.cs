@@ -100,5 +100,4 @@ namespace Z0
             where T : unmanaged
                 => random.Stream().Take(count);
     }
-
 }

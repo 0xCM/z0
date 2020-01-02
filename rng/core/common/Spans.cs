@@ -15,6 +15,30 @@ namespace Z0
     partial class RngX
     {
         /// <summary>
+        /// Fills a caller-allocated span with random values
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="dst">The target span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static void Fill<T>(this IPolyrand random, Span<T> dst)
+            where T : unmanaged
+                => random.Fill(Rng.TypeDomain<T>(), dst.Length, ref head(dst));
+
+        /// <summary>
+        /// Fills a caller-allocated span with random values
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="dst">The target span</param>
+        /// <param name="min">The inclusive lower bound</param>
+        /// <param name="max">The exclusive upper bound</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static void Fill<T>(this IPolyrand random, T min, T max, Span<T> dst)
+            where T : unmanaged
+                => random.Fill((min,max), dst.Length, ref head(dst));
+
+        /// <summary>
         /// Produces a span of random values
         /// </summary>
         /// <param name="random">The random source</param>

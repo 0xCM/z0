@@ -15,22 +15,22 @@ namespace Z0.OpCodes
     public static class vload
     {
         public static Vector128<byte> vgather_128x8u(Span<byte> src, Vector128<byte> vix)
-            => vgather(n128, in head(src), vix);
+            => vgather(in head(src), vix);
 
         public static Vector128<ushort> vgather_128x16u(Span<ushort> src, Vector128<ushort> vix)
-            => vgather(n128, in head(src), vix);
+            => vgather(in head(src), vix);
 
         public static Vector256<byte> vgather_256x8u(Span<byte> src, Vector256<byte> vix)
-            => vgather(n256, in head(src), vix);
+            => vgather(in head(src), vix);
 
         public static Vector256<short> vgather_256x16i(Span<short> src, Vector256<short> vix)
-            => vgather(n256, in head(src), vix);
+            => vgather(in head(src), vix);
 
         public static Vector256<ushort> vgather_256x16u(Span<ushort> src, Vector256<ushort> vix)
-            => vgather(n256, in head(src), vix);
+            => vgather(in head(src), vix);
 
         public static Vector256<int> vgather_256x32i(Span<int> src, Vector256<int> vix)
-            => vgather(n256, in head(src), vix);
+            => vgather(in head(src), vix);
 
         public static Vector128<ushort> vpackus_2x128x32(Vector128<uint> x, Vector128<uint> y)
             => dinx.vpackus(x,y);

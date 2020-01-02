@@ -74,7 +74,7 @@ namespace Z0
         void veq_basecase<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var name = TestCaseName(moniker(MethodInfo.GetCurrentMethod().Name,w,t));
+            var name = CaseName(moniker(MethodInfo.GetCurrentMethod().Name,w,t));
             var f = VX.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
             var result = DataBlocks.alloc<T>(w, x.BlockCount);
@@ -85,7 +85,7 @@ namespace Z0
         void veq_basecase<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var name = TestCaseName(moniker(MethodInfo.GetCurrentMethod().Name,w,t));
+            var name = CaseName(moniker(MethodInfo.GetCurrentMethod().Name,w,t));
             var f = VX.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/vcount(w,t));
             var result = DataBlocks.alloc<T>(w, x.BlockCount);

@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class bvoc
+    partial class bitvectors
     {
         public static BitVector32 and_bv_32u(BitVector32 x, BitVector32 y)
             => BitVector.and(x,y);

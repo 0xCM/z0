@@ -31,9 +31,9 @@ namespace Z0
     /// Charcterizes an operator that produces a 128-bit target vector predicated on a source value
     /// </summary>
     /// <typeparam name="S">The source value type</typeparam>
-    /// <typeparam name="T">The vector componnet type</typeparam>
+    /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVFactoryOp128<S,T> : IVFactory<N128,S,Vector128<T>,T>
+    public interface IVFactory128<S,T> : IVFactory<N128,S,Vector128<T>,T>
         where T : unmanaged
     {
 
@@ -43,12 +43,13 @@ namespace Z0
     /// Charcterizes an operator that produces a 256-bit target vector predicated on a source value
     /// </summary>
     /// <typeparam name="S">The source value type</typeparam>
-    /// <typeparam name="T">The vector componnet type</typeparam>
+    /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVFactoryOp256<S,T> : IVFactory<N256,S,Vector256<T>,T>
+    public interface IVFactory256<S,T> : IVFactory<N256,S,Vector256<T>,T>
         where T : unmanaged
     {
 
     }
+
 
 }

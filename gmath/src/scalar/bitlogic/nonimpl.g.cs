@@ -22,6 +22,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T nonimpl<T>(T a, T b)
             where T : unmanaged
+                => nonimpl_u(a,b);
+
+        [MethodImpl(Inline)]
+        static T nonimpl_u<T>(T a, T b)
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(math.nonimpl(uint8(a), uint8(b)));
@@ -32,8 +37,23 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.nonimpl(uint64(a), uint64(b)));
             else
+                return nonimpl_i(a,b);
+        }
+
+        [MethodImpl(Inline)]
+        static T nonimpl_i<T>(T a, T b)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(math.nonimpl(int8(a), int8(b)));
+            else if(typeof(T) == typeof(short))
+                return generic<T>(math.nonimpl(int16(a), int16(b)));
+            else if(typeof(T) == typeof(int))
+                return generic<T>(math.nonimpl(int32(a), int32(b)));
+            else if(typeof(T) == typeof(long))
+                return generic<T>(math.nonimpl(int64(a), int64(b)));
+            else
                 throw unsupported<T>();
         }
     }
-
 }

@@ -36,27 +36,24 @@ namespace Z0.OpCodes
         public static Vector256<ushort> pattern_lanemerge_256x16u()            
             => CpuVector.vlanemerge<ushort>();
 
-        public static Vector128<byte> makemask_128x8u(BitVector16 src)
+
+        public static Vector128<byte> makemask_d128x8u(ushort src)
             => dinx.vmakemask(src);
 
-        public static Vector128<byte> makemask_128x8u_literal()
+        public static Vector256<byte> makemask_d256x8u(uint src)
+            => dinx.vmakemask(src);
+
+        public static Vector128<byte> maskmask_d128x8u_index4(ushort src)
+            => dinx.vmakemask(src, 4);
+
+        public static Vector256<byte> maskmask_d256x8u_index3(uint src)
+            => dinx.vmakemask(src, 3);
+
+        public static Vector128<byte> makemask_d128x8u_FCFC()
             => dinx.vmakemask(0xFCFC);
 
-        public static Vector256<byte> makemask_256x8u(BitVector32 src)
-            => dinx.vmakemask(src);
-
-        public static Vector256<byte> makemask_256x8u_literal()
-            => dinx.vmakemask(0xF0F0F0C0u);
-
-        public static Vector128<byte> makemask_g128x8u(BitVector16 src)
-            => ginx.vmakemask<byte>(src);
-
-        public static Vector128<ushort> makemask_g128x16u(BitVector16 src)
-            => ginx.vmakemask<ushort>(src);
-
-        public static Vector256<uint> makemask_g256x32u(BitVector32 src)
-            => ginx.vmakemask<uint>(src);
-
+        public static Vector256<byte> makemask_d256x8u_FAFAFAFA()
+            => dinx.vmakemask(0xFAFAFAFAu);
 
     }
 

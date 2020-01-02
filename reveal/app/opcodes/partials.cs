@@ -12,7 +12,7 @@ namespace Z0
     /// Opcodes for scalar bit-level operations
     /// </summary>
     [OpCodeProvider]
-    public static partial class bvoc
+    public static partial class bitvectors
     {
 
     }
@@ -26,11 +26,6 @@ namespace Z0
 
     }
 
-    [OpCodeProvider]
-    public static partial class bgoc
-    {
-        
-    }
 
     /// <summary>
     /// Floating-point op codes

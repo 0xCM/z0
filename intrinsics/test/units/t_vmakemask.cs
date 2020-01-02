@@ -28,7 +28,6 @@ namespace Z0
                 var x = Random.BitVector(n32);
                 var z = dinx.vtakemask(dinx.vmakemask(x));
                 Claim.eq(z,x);
-
             }
         }
     }

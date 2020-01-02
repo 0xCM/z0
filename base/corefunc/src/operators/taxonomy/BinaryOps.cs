@@ -35,7 +35,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Defines trait for a vecorized binary operator that supports componentwise decomposition/evaluation
+    /// Defines trait for vecorized binary operators that are accompanied by componentwise decomposition/evaluation
     /// </summary>
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
@@ -68,7 +68,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a vectorized binary operator over 128-bit operands that also supports componentwise decomposition/evaluation
+    /// Characterizes a vectorized binary operator over 128-bit operands that is accompanied by componentwise decomposition/evaluation
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
@@ -79,7 +79,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a vectorized binary operator over 256-bit operands that also supports componentwise decomposition/evaluation
+    /// Characterizes a vectorized binary operator over 256-bit operands that is accompanied by componentwise decomposition/evaluation
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]

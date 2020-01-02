@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The function</param>
         [MethodImpl(Inline)]
-        protected string TestCaseName(IFunc f)
+        protected string CaseName(IFunc f)
             => $"{GetType().Name}/{f.Moniker}";
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="fullname">The full name of the test</param>
         [MethodImpl(Inline)]
-        protected string TestCaseName(string fullname)
+        protected string CaseName(string fullname)
             => $"{GetType().Name}/{fullname}";
 
         /// <summary>
@@ -47,8 +47,14 @@ namespace Z0
         /// </summary>
         /// <param name="root">The root name</param>
         [MethodImpl(Inline)]
-        protected string TestCaseName<T>(string root, T t = default)
+        protected string CaseName<T>(string root, T t = default)
             => $"{GetType().Name}/{root}_{moniker(t)}";
+
+        [MethodImpl(Inline)]
+        protected string CaseName<W,T>(string root, W w = default, T t = default)
+            where W : unmanaged, ITypeNat
+            where T : unmanaged
+                => $"{GetType().Name}/{moniker(root,w,t)}";
 
         /// <summary>
         /// Manages the execution of an action test case
@@ -87,7 +93,7 @@ namespace Z0
         /// <typeparam name="T">The discriminator type</typeparam>
         protected void CheckAction<T>(Action f, string name, T t = default, SystemCounter clock = default)
         {
-            var casename = TestCaseName(name,t);
+            var casename = CaseName(name,t);
             var succeeded = true;
             
             clock.Start();
@@ -111,7 +117,7 @@ namespace Z0
             where T : unmanaged
             where F : IVBinOp128<T>
         {
-            var casename = name ?? TestCaseName(f);
+            var casename = name ?? CaseName(f);
             var w = n128;
             var t = default(T);
             var cells = vcount(w,t);
@@ -145,7 +151,7 @@ namespace Z0
             where T : unmanaged
             where F : IVBinOp256<T>
         {
-            var casename = name ?? TestCaseName(f);
+            var casename = name ?? CaseName(f);
             var w = n256;
             var t = default(T);
             var cells = vcount(w,t);
@@ -190,7 +196,7 @@ namespace Z0
             where F : IUnaryOp<T>
             where G : IUnaryOp<T>
         {
-            var casename = TestCaseName(actual);
+            var casename = CaseName(actual);
             var succeeded = true;
             var next = nozero ? new Func<T>(Random.NonZero<T>) : new Func<T>(Random.Next<T>);
             
@@ -230,7 +236,7 @@ namespace Z0
             where F : IBinaryPred<T>
             where G : IBinaryPred<T>
         {
-            var casename = TestCaseName(actual);
+            var casename = CaseName(actual);
             var succeeded = true;
             
             clock.Start();
@@ -268,7 +274,7 @@ namespace Z0
             where F : IBinaryOp<T>
             where G : IBinaryOp<T>
         {
-            var casename = TestCaseName(actual);
+            var casename = CaseName(actual);
             var succeeded = true;
             var next = nozero ? new Func<T>(Random.NonZero<T>) : new Func<T>(Random.Next<T>);
             
@@ -308,7 +314,7 @@ namespace Z0
             where F : ITernaryOp<T>
             where G : ITernaryOp<T>
         {
-            var casename = TestCaseName(actual);
+            var casename = CaseName(actual);
             var succeeded = true;
             var next = nozero ? new Func<T>(Random.NonZero<T>) : new Func<T>(Random.Next<T>);
             

@@ -14,308 +14,78 @@ namespace Z0
     {
         const int BufferSize = 1024*8;
 
-        public void vgather_128x8u()
-        {            
-            const int N = BufferSize;
-
-            var w = n128;
-            var t = z8;
-            var d = bounds(N,t);
-
-            var data = gmath.increments(span(N,t));
-            ref readonly var src = ref head(data);
-
-            for(var rep = 0; rep < RepCount; rep++)
-            {
-                var vidx = Random.CpuVector(w,d);            
-                var x = ginx.vgather(w, in src, vidx);
-                Claim.eq(vidx,x);
-            }
-        }
-
-        public void vgather_128x8i()
-        {            
-            const int N = BufferSize;
-
-            var w = n128;
-            var t = z8i;
-            var d = bounds(N,t);
-
-            var data = gmath.increments(span(N,t));
-            ref readonly var src = ref head(data);
-
-            for(var rep = 0; rep < RepCount; rep++)
-            {
-                var vidx = Random.CpuVector(w,d);            
-                var x = ginx.vgather(w, in src, vidx);
-                Claim.eq(vidx,x);
-            }
-        }
-
-        public void vgather_128x16u()
-        {            
-            const int N = BufferSize/2;
-
-            var w = n128;
-            var t = z16;
-            var d = bounds(N,t);
-
-            var data = gmath.increments(span(N,t));
-            ref readonly var src = ref head(data);
-
-            for(var rep = 0; rep < RepCount; rep++)
-            {
-                var vidx = Random.CpuVector(w,d);            
-                var x = ginx.vgather(w, in src, vidx);
-                Claim.eq(vidx,x);
-            }
-        }
-
-        public void vgather_128x16i()
-        {            
-            const int N = BufferSize/2;
-
-            var w = n128;
-            var t = z16i;
-            var d = bounds(N,t);
-
-            var data = gmath.increments(span(N,t));
-            ref readonly var src = ref head(data);
-
-            for(var rep = 0; rep < RepCount; rep++)
-            {
-                var vidx = Random.CpuVector(w,d);            
-                var x = ginx.vgather(w, in src, vidx);
-                Claim.eq(vidx,x);
-            }
-        }
-
-        public void vgather_128x32u()
+        public void vgather_check()
         {
-            const int N = BufferSize;
-
-            var w = n128;
-            var t = z32;
-            var d = bounds(N,t);
-
-            var data = gmath.increments(span(N,t));
-            ref readonly var src = ref head(data);
-
-            for(var rep = 0; rep < RepCount; rep++)
-            {
-                var vidx = Random.CpuVector(w,d);            
-                var x = ginx.vgather(w, in src, vidx);
-                Claim.eq(vidx,x);
-            }
+            vgather_check(n128);
+            vgather_check(n256);
         }
 
-        public void vgather_128x32i()
+        void vgather_check(N128 w)
         {
-            const int N = BufferSize;
-
-            var w = n128;
-            var t = z32i;
-            var d = bounds(N,t);
-
-            var data = gmath.increments(span(N,t));
-            ref readonly var src = ref head(data);
-
-            for(var rep = 0; rep < RepCount; rep++)
-            {
-                var vidx = Random.CpuVector(w,d);            
-                var x = ginx.vgather(w, in src, vidx);
-                Claim.eq(vidx,x);
-            }
+            vgather_check(w,z8);
+            vgather_check(w,z8i);
+            vgather_check(w,z16);
+            vgather_check(w,z16i);
+            vgather_check(w,z32);
+            vgather_check(w,z32i);
+            vgather_check(w,z64);
+            vgather_check(w,z64i);
         }
 
-        public void vgather_128x64i()
+        void vgather_check(N256 w)
         {
-            const int N = BufferSize;
-
-            var w = n128;
-            var t = z64i;
-            var d = bounds(N,t);
-
-            var data = gmath.increments(span(N,t));
-            ref readonly var src = ref head(data);
-
-            for(var rep = 0; rep < RepCount; rep++)
-            {
-                var vidx = Random.CpuVector(w,d);            
-                var x = ginx.vgather(w, in src, vidx);
-                Claim.eq(vidx,x);
-            }
+            vgather_check(w,z8);
+            vgather_check(w,z8i);
+            vgather_check(w,z16);
+            vgather_check(w,z16i);
+            vgather_check(w,z32);
+            vgather_check(w,z32i);
+            vgather_check(w,z64);
+            vgather_check(w,z64i);
         }
 
-        public void vgather_128x64u()
+        void vgather_check<T>(N128 w, T t = default)
+            where T : unmanaged
         {
-            const int N = BufferSize;
-
-            var w = n128;
-            var t = z64;
-            var d = bounds(N,t);
-
-            var data = gmath.increments(span(N,t));
-            ref readonly var src = ref head(data);
-
-            for(var rep = 0; rep < RepCount; rep++)
+            void check()
             {
-                var vidx = Random.CpuVector(w,d);            
-                var x = ginx.vgather(w, in src, vidx);
-                Claim.eq(vidx,x);
+                var N = BufferSize/size<T>();
+                var d = bounds(N,t);
+                
+                var data = gmath.increments(span(N,t));
+                ref readonly var src = ref head(data);
+
+                for(var rep = 0; rep < RepCount; rep++)
+                {
+                    var vidx = Random.CpuVector(w,d);            
+                    var x = ginx.vgather(in src, vidx);
+                    Claim.eq(vidx,x);
+                }
             }
+
+            CheckAction(check, CaseName("vgather", w, t));
         }
 
-        public void vgather_256x8i()
-        {            
-            const int N = BufferSize;
-
-            var w = n256;
-            var t = z8i;
-            var d = bounds(N,t);
-
-            var data = gmath.increments(span(N,t));
-            ref readonly var src = ref head(data);
-
-            for(var rep = 0; rep < RepCount; rep++)
-            {
-                var vidx = Random.CpuVector(w,d);            
-                var x = ginx.vgather(w, in src, vidx);
-                Claim.eq(vidx,x);
-            }
-        }
-
-        public void vgather_256x8u()
-        {            
-            const int N = BufferSize;
-
-            var w = n256;
-            var t = z8;
-            var d = bounds(N,t);
-
-            var data = gmath.increments(span(N,t));
-            ref readonly var src = ref head(data);
-
-            for(var rep = 0; rep < RepCount; rep++)
-            {
-                var vidx = Random.CpuVector(w,d);            
-                var x = ginx.vgather(w, in src, vidx);
-                Claim.eq(vidx,x);
-            }
-        }
-
-        public void vgather_256x16i()
-        {            
-            const int N = BufferSize/2;
-
-            var w = n256;
-            var t = z16i;
-            var d = bounds(N,t);
-
-            var data = gmath.increments(span(N,t));
-            ref readonly var src = ref head(data);
-
-            for(var rep = 0; rep < RepCount; rep++)
-            {
-                var vidx = Random.CpuVector(w,d);            
-                var x = ginx.vgather(w, in src, vidx);
-                Claim.eq(vidx,x);
-            }
-        }
-
-        public void vgather_256x16u()
-        {            
-            const int N = BufferSize/2;
-
-            var w = n256;
-            var t = z16;
-            var d = bounds(N,t);
-
-            var data = gmath.increments(span(N,t));
-            ref readonly var src = ref head(data);
-
-            for(var rep = 0; rep < RepCount; rep++)
-            {
-                var vidx = Random.CpuVector(w,d);            
-                var x = ginx.vgather(w, in src, vidx);
-                Claim.eq(vidx,x);
-            }
-        }
-
-        public void vgather_256x32i()
-        {            
-            const int N = BufferSize/2;
-
-            var w = n256;
-            var t = z32i;
-            var d = bounds(N,t);
-
-            var data = gmath.increments(span(N,t));
-            ref readonly var src = ref head(data);
-
-            for(var rep = 0; rep < RepCount; rep++)
-            {
-                var vidx = Random.CpuVector(w,d);            
-                var x = ginx.vgather(w, in src, vidx);
-                Claim.eq(vidx,x);
-            }
-        }
-
-        public void vgather_256x32u()
-        {            
-            const int N = BufferSize/4;
-
-            var w = n256;
-            var t = z32;
-            var d = bounds(N,t);
-
-            var data = gmath.increments(span(N,t));
-            ref readonly var src = ref head(data);
-
-            for(var rep = 0; rep < RepCount; rep++)
-            {
-                var vidx = Random.CpuVector(w,d);            
-                var x = ginx.vgather(w, in src, vidx);
-                Claim.eq(vidx,x);
-            }
-        }
-
-        public void vgather_256x64i()
+        void vgather_check<T>(N256 w, T t = default)
+            where T : unmanaged
         {
-            const int N = BufferSize/8;
-         
-            var w = n256;
-            var t = z64i;
-            var d = bounds(N,t);
-
-            var data = gmath.increments(span(N,t));
-            ref readonly var src = ref head(data);
-
-            for(var rep = 0; rep < RepCount; rep++)
+            void check()
             {
-                var vidx = Random.CpuVector(w,d);            
-                var x = ginx.vgather(w, in src, vidx);
-                Claim.eq(vidx,x);
-            }            
-        }
+                var N = BufferSize/size<T>();
+                var d = bounds(N,t);
+                
+                var data = gmath.increments(span(N,t));
+                ref readonly var src = ref head(data);
 
-        public void vgather_256x64u()
-        {
-            const int N = BufferSize/8;
-         
-            var w = n256;
-            var t = z64;
-            var d = bounds(N,t);
+                for(var rep = 0; rep < RepCount; rep++)
+                {
+                    var vidx = Random.CpuVector(w,d);            
+                    var x = ginx.vgather(in src, vidx);
+                    Claim.eq(vidx,x);
+                }
+            }
 
-            var data = gmath.increments(span(N,t));
-            ref readonly var src = ref head(data);
-
-            for(var rep = 0; rep < RepCount; rep++)
-            {
-                var vidx = Random.CpuVector(w,d);            
-                var x = ginx.vgather(w, in src, vidx);
-                Claim.eq(vidx,x);
-            }            
+            CheckAction(check, CaseName("vgather", w, t));
         }
 
         [MethodImpl(Inline)]

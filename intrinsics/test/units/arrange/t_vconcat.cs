@@ -28,7 +28,7 @@ namespace Z0
 
         void vconcat_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckAction(() => vconcat_checker(w,t), TestCaseName(VX.vconcat(w,t)));
+                => CheckAction(() => vconcat_checker(w,t), CaseName(VX.vconcat(w,t)));
 
         Action<N128,T> vconcat_checker<T>(N128 w, T t = default)
             where T : unmanaged

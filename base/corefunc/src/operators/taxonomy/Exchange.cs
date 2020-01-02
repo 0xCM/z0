@@ -21,7 +21,6 @@ namespace Z0
         
     }
     
-
     /// <summary>
     /// Characterizes a point exchange with predetermined capacity
     /// </summary>

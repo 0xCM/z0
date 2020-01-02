@@ -17,14 +17,24 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vgather<T>(N128 w, in T src, Vector128<T> vidx)
+        public static Vector128<T> vgather<T>(in T src, Vector128<T> vidx)
             where T : unmanaged        
-                => vgather_u(w,src,vidx);
+                => vgather_u(n128,src,vidx);
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vgather<T>(N256 w, in T src, Vector256<T> vidx)
+        public static Vector256<T> vgather<T>(in T src, Vector256<T> vidx)
             where T : unmanaged        
-                => vgather_u(w,src,vidx);
+                => vgather_u(n256,src,vidx);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> vgather<T>(ReadOnlySpan<T> src, Vector128<T> vidx)
+            where T : unmanaged        
+                => vgather_u(n128, head(src),vidx);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vgather<T>(ReadOnlySpan<T> src, Vector256<T> vidx)
+            where T : unmanaged        
+                => vgather_u(n256, head(src), vidx);
 
         [MethodImpl(Inline)]
         static Vector128<T> vgather_u<T>(N128 w, in T src, Vector128<T> vidx)

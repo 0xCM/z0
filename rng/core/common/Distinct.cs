@@ -14,7 +14,6 @@ namespace Z0
 
     partial class RngX
     {
-
         /// <summary>
         /// Samples the source values without replacement
         /// </summary>

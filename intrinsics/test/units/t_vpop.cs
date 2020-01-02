@@ -38,38 +38,50 @@ namespace Z0
             where T : unmanaged
         {
             var f = VX.vpop(w,t);
-            var zero = gmath.zero(t);
-            var src = Random.Blocks<T>(w, 3, (zero, gmath.maxval<T>()));
 
-            (var x0, var x1, var x2) = src.LoadVectors(0,1,2);
+            void check()
+            {
+                var zero = gmath.zero(t);
+                var src = Random.Blocks<T>(w, 3, (zero, gmath.maxval<T>()));
 
-            var vlen = vcount(w,t);
-            var expect = 0u;
+                (var x0, var x1, var x2) = src.LoadVectors(0,1,2);
 
-            for(var i=0; i<vlen; i++)
-                expect += f.InvokeScalar(vcell(x0,i),vcell(x1,i),vcell(x2,i));
+                var vlen = vcount(w,t);
+                var expect = 0u;
 
-            var result = f.Invoke(x0,x1,x2);
-            Claim.eq(expect,result);
+                for(var i=0; i<vlen; i++)
+                    expect += f.InvokeScalar(vcell(x0,i),vcell(x1,i),vcell(x2,i));
+
+                var result = f.Invoke(x0,x1,x2);
+                Claim.eq(expect,result);
+            }
+
+            CheckAction(check, CaseName(f));            
         }
 
         void vpop_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
             var f = VX.vpop(w,t);
-            var zero = gmath.zero(t);
-            var src = Random.Blocks<T>(w, 3, (zero, gmath.maxval<T>()));
 
-            (var x0, var x1, var x2) = src.LoadVectors(0,1,2);
+            void check()
+            {
+                var zero = gmath.zero(t);
+                var src = Random.Blocks<T>(w, 3, (zero, gmath.maxval<T>()));
 
-            var vlen = vcount(w,t);
-            var expect = 0u;
+                (var x0, var x1, var x2) = src.LoadVectors(0,1,2);
 
-            for(var i=0; i<vlen; i++)
-                expect += f.InvokeScalar(vcell(x0,i),vcell(x1,i),vcell(x2,i));
+                var vlen = vcount(w,t);
+                var expect = 0u;
 
-            var result = f.Invoke(x0,x1,x2);
-            Claim.eq(expect,result);
+                for(var i=0; i<vlen; i++)
+                    expect += f.InvokeScalar(vcell(x0,i),vcell(x1,i),vcell(x2,i));
+
+                var result = f.Invoke(x0,x1,x2);
+                Claim.eq(expect,result);
+            }
+
+            CheckAction(check, CaseName(f));            
         }
     }
 }

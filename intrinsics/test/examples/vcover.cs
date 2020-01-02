@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vcover : t_vinx<t_vcover>
+    partial class vexamples
     {
         public void vcover_basecase()
         {            
@@ -51,10 +51,6 @@ namespace Z0
             dinx.vcover(x6, out Vector256<byte> z6);
             Claim.eq(y6,z6);
 
-            var x7 = CpuVector.vparts(n128,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
-            var y7 = CpuVector.vparts(n256,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
-            //var z7 = dinx.vinflate(x7, n256, z32);
-            //Claim.eq(y7,z7);
         }
     }
 }

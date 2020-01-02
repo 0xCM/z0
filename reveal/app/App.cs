@@ -99,7 +99,7 @@ namespace Z0
             Disassemble(new ExperimentalScenarios());
             Disassemble(typeof(OC.butterfly));    
             Disassemble(typeof(OC.bitmask));
-            Disassemble(typeof(OC.bitmat));    
+            Disassemble(typeof(OC.bitmatrix));    
             Disassemble(typeof(OC.bitstore));
             Disassemble(typeof(OC.bitpack));    
             Disassemble(typeof(OC.bitspan));    
@@ -107,7 +107,7 @@ namespace Z0
             Disassemble(typeof(OC.stacked));    
 
 
-            Disassemble(typeof(OC.natoc));    
+            Disassemble(typeof(OC.nats));    
 
             Disassemble(typeof(OC.memory));    
             Disassemble(typeof(OC.sconvert));   
@@ -134,8 +134,8 @@ namespace Z0
             Disassemble(typeof(OC.gxops));    
 
             Disassemble(typeof(zfoc));    
-            Disassemble(typeof(bvoc));    
-            Disassemble(typeof(bgoc));   
+            Disassemble(typeof(bitvectors));    
+            Disassemble(typeof(bitgrid));   
 
         }
 

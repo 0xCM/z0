@@ -30,7 +30,6 @@ namespace Z0
 
     }
 
-
     /// <summary>
     /// Characterizes a unary operator that accepts two integral values that define a range
     /// </summary>
@@ -225,5 +224,4 @@ namespace Z0
     {
         
     }
-
 }

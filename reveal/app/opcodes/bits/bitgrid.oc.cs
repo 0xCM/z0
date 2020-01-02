@@ -15,9 +15,9 @@ namespace Z0
     /// <summary>
     /// Opcodes for bitgrid operations
     /// </summary>
-    partial class bgoc
+    [OpCodeProvider]
+    public static class bitgrid
     {        
-
         public static void part63x3(ulong src, NatSpan<N21,byte> dst)            
             => Bits.part63x3(src, dst);
 

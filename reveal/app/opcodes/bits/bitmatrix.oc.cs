@@ -16,9 +16,8 @@ namespace Z0.OpCodes
     /// Opcodes for bitmatrix operations
     /// </summary>
     [OpCodeProvider]
-    public static class bitmat
+    public static class bitmatrix
     {        
-
         public static int cell_count_32x64x8()
             =>  BitMatrix.totalcells(n32,n64, z8);
 
@@ -27,7 +26,6 @@ namespace Z0.OpCodes
 
         public static ref readonly BitMatrix<uint> and(in BitMatrix<uint> A, in BitMatrix<uint> B, in BitMatrix<uint> Z)
             => ref BitMatrix.and(A,B,Z);
-
 
     }
 

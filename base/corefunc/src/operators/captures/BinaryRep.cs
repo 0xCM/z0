@@ -14,13 +14,13 @@ namespace Z0
         /// <summary>
         /// Captures a binary operator for which it is a surrogate 
         /// </summary>
-        public readonly struct BinaryOp<F,T> : IBinaryOp<T>
+        public readonly struct BinaryRep<F,T> : IBinaryOp<T>
             where F : IBinaryOp<T>
         {
             readonly F f;
 
             [MethodImpl(Inline)]
-            internal BinaryOp(F f) => this.f = f;
+            internal BinaryRep(F f) => this.f = f;
             
             public string Moniker => f.Moniker;
 

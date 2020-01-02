@@ -61,7 +61,7 @@ namespace Z0
         public void CheckFactory<F,C,S,T>(N128 w, F f, C check, S s = default, T t = default)
             where S : unmanaged
             where T : unmanaged
-            where F : IVFactoryOp128<S,T>
+            where F : IVFactory128<S,T>
             where C : IVChecker128<S,T>
         {
             for(var i=0; i < RepCount; i++)
@@ -76,7 +76,7 @@ namespace Z0
         public void CheckFactory<F,C,S,T>(N256 w, F f, C check, S s = default, T t = default)
             where S : unmanaged
             where T : unmanaged
-            where F : IVFactoryOp256<S,T>
+            where F : IVFactory256<S,T>
             where C : IVChecker256<S,T>
         {
             for(var i=0; i< RepCount; i++)

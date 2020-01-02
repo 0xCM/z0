@@ -10,9 +10,9 @@ namespace Z0
     using static zfunc;
     using static HexConst;
 
-    public class t_vduplicate : t_vinx<t_vduplicate>
+    partial class vexamples
     {     
-        public void vduplicate32x0_256x32u_outline()
+        public void vduplicate_example()
         {
             var n = n256;
             var width = n32;

@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
@@ -62,7 +60,5 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
                 => Z0.TableSpan.load<M, N, T>(random.Span(nfunc.muli(rows, cols), domain), rows, cols);
-
     }
-
 }

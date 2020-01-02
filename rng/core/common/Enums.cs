@@ -54,7 +54,6 @@ namespace Z0
         public static IEnumerable<E> EnumValues<E>(this IPolyrand random, params E[] exclusions)
             where E : unmanaged, Enum
         {
-
             IEnumerable<E> produce()
             {
                 var excluded = exclusions.Select(x => x.ToString()).ToHashSet();
@@ -68,9 +67,6 @@ namespace Z0
 
             return stream(produce(), random.RngKind);
         }
-
-
     }
-
 }
 

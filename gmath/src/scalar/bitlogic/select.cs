@@ -11,7 +11,15 @@ namespace Z0
     partial class math
     {
         [MethodImpl(Inline)]
+        public static sbyte select(sbyte a, sbyte b, sbyte c)
+            => or(and(a,b), nonimpl(a,c));
+
+        [MethodImpl(Inline)]
         public static byte select(byte a, byte b, byte c)
+            => or(and(a,b), nonimpl(a,c));
+
+        [MethodImpl(Inline)]
+        public static short select(short a, short b, short c)
             => or(and(a,b), nonimpl(a,c));
 
         [MethodImpl(Inline)]
@@ -19,29 +27,51 @@ namespace Z0
             => or(and(a,b), nonimpl(a,c));
 
         [MethodImpl(Inline)]
+        public static int select(int a, int b, int c)
+            => or(and(a,b), nonimpl(a,c));
+
+        [MethodImpl(Inline)]
         public static uint select(uint a, uint b, uint c)
             => or(and(a,b), nonimpl(a,c));
-        
+
+        [MethodImpl(Inline)]
+        public static long select(long a, long b, long c)
+            => or(and(a,b), nonimpl(a,c)); 
+
         [MethodImpl(Inline)]
         public static ulong select(ulong a, ulong b, ulong c)
             => or(and(a,b), nonimpl(a,c)); 
 
         [MethodImpl(Inline)]
+        public static sbyte blend(sbyte a, sbyte b, sbyte mask)
+            => xor(a, and(xor(a,b), mask));
+
+        [MethodImpl(Inline)]
         public static byte blend(byte a, byte b, byte mask)
-            =>  xor(a, and(xor(a,b), mask));
+            => xor(a, and(xor(a,b), mask));
+
+        [MethodImpl(Inline)]
+        public static short blend(short a, short b, short mask)
+            => xor(a, and(xor(a,b), mask));
 
         [MethodImpl(Inline)]
         public static ushort blend(ushort a, ushort b, ushort mask)
-            =>  xor(a, and(xor(a,b), mask));
+            => xor(a, and(xor(a,b), mask));
+
+        [MethodImpl(Inline)]
+        public static int blend(int a, int b, int mask)
+            => xor(a, and(xor(a,b), mask));
 
         [MethodImpl(Inline)]
         public static uint blend(uint a, uint b, uint mask)
-            =>  xor(a, and(xor(a,b), mask));
-        
+            => xor(a, and(xor(a,b), mask));
+
+        [MethodImpl(Inline)]
+        public static long blend(long a, long b, long mask)
+            => xor(a, and(xor(a,b), mask));
+
         [MethodImpl(Inline)]
         public static ulong blend(ulong a, ulong b,ulong mask)
-            =>  xor(a, and(xor(a,b), mask));
-
+            => xor(a, and(xor(a,b), mask));
     }
-
 }

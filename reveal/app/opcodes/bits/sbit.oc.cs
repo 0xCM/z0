@@ -13,8 +13,6 @@ namespace Z0.OpCodes
     [OpCodeProvider]
     public static class sbits
     {
-
-
         public static void split_g64(ulong src, int index, out ulong x0, out ulong x1)
             => gbits.split(src, index, out x0, out x1);
 

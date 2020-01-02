@@ -5,13 +5,16 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.Intrinsics;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics.X86;
     
     using static zfunc;
-    using static HexConst;
+    using static CpuVector;
+    using static dinx;
 
-    public class t_vmerge : t_vinx<t_vmerge>
+    partial class vexamples
     {
-        
         public void vmergehi_256x32u()
         {
             /*
@@ -28,9 +31,6 @@ namespace Z0
             var y = VPattern.vincrements(w, (x.LastCell() + 1));
             var z = dinx.vmergelo(x,y);
             var fmt = $"({x.Format()},{y.Format()}) -> {z.Format()}";
-            Trace(fmt);
-
-
         }
         
 
@@ -52,16 +52,6 @@ namespace Z0
 
         public void vunpack_lo_8()
         {
-
-
-
-            /*
-            mergehi
-            [ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
-            [32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63]
-            [16, 48, 17, 49, 18, 50, 19, 51, 20, 52, 21, 53, 22, 54, 23, 55, 24, 56, 25, 57, 26, 58, 27, 59, 28, 60, 29, 61, 30, 62, 31, 63]
-
-            */
 
             void report()
             {
@@ -101,7 +91,8 @@ namespace Z0
                 Trace(y.Format(pad:2));
                 Trace(z.Format(pad:2));
             }
-            merge_hi();
         }
+
     }
+
 }
