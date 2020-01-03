@@ -13,43 +13,6 @@ namespace Z0
 
     partial class RngX
     {
-        [MethodImpl(Inline)]
-        public static IRandomStream<bit> ToBitStream<T>(this IPointSource<T> src)
-            where T : unmanaged
-                => BitSource<T>.From(src);    
-        
-        /// <summary>
-        /// Produces an interminable stream of random bits
-        /// </summary>
-        /// <param name="random">The random source</param>
-        public static IEnumerable<bit> Bits(this IPolyrand random)
-        {
-            while(true)
-            {
-                var scalar = random.Next<ulong>();
-                var bs = Z0.BitString.scalar(scalar);
-                for(var i=0; i<bs.Length; i++)
-                {
-                    yield return bs[i];
-                }
-            }
-        }
-
-        /// <summary>
-        /// Produces a specified number of random bits
-        /// </summary>
-        /// <param name="random">The random source</param>
-        [MethodImpl(Inline)]
-        public static IEnumerable<bit> Bits(this IPolyrand random, int count)
-            => random.Bits().Take(count);
-
-        /// <summary>
-        /// Produces a span populated with a specified number of random bits
-        /// </summary>
-        /// <param name="random">The random source</param>
-        [MethodImpl(Inline)]
-        public static Span<bit> TakeBits(this IPolyrand random, int count)
-            => random.Bits().Take(count).ToArray();
 
         /// <summary>
         /// Produces a bitstring with a specified length

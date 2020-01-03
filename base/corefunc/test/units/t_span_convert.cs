@@ -75,7 +75,7 @@ namespace Z0
 
         public void VerifyNonPrimal()
         {
-            var bits = Random.Bits().ToSpan(Pow2.T08);
+            var bits = Random.BitStream().ToSpan(Pow2.T08);
             var bytes = bits.AsUInt32();
             Claim.eq(bits.Length, bytes.Length);
             for(var i = 0; i<bits.Length; i++)

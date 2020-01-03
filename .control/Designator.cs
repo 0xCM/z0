@@ -16,51 +16,56 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class Controller : AssemblyDesignator<Controller>
+    public sealed class Control : AssemblyDesignator<Control>
     {
-        public override IEnumerable<Assembly> Dependencies 
-            => items(
-            typeof(ITypeNat).Assembly,
-            D.NatTest.Assembly,            
-            D.CoreData.Assembly,            
-            D.CoreFunc.Assembly, 
-            D.CoreFuncTest.Assembly, 
+
+        public override IEnumerable<IAssemblyDesignator> Designates
+            => items<IAssemblyDesignator>(            
+            D.NatTest.Designated,            
+            D.CoreData.Designated,            
+            D.CoreFunc.Designated, 
+            D.CoreFuncTest.Designated, 
             
-            D.GMath.Assembly,
-            D.GMathTest.Assembly,
+            D.GMath.Designated,
+            D.GMathTest.Designated,
 
-            D.Matrix.Assembly,
+            D.Matrix.Designated,
 
-            D.BitCore.Assembly,
-            D.BitCoreTest.Assembly,
+            D.BitCore.Designated,
+            D.BitCoreTest.Designated,
 
-            D.Intrinsics.Assembly,
-            D.IntrinsicsTest.Assembly,            
+            D.BitVectors.Designated,
+            D.BitVectorTest.Designated,
 
-            D.RngCore.Assembly,
+            D.Intrinsics.Designated,
+            D.IntrinsicsTest.Designated,            
 
-            D.Bits.Assembly,
-            D.BitTest.Assembly,
+            D.RngCore.Designated,
 
-            D.CpuFunc.Assembly,
-            D.CpuTest.Assembly,
+            D.Bits.Designated,
+            D.BitTest.Designated,
 
-            D.MklApi.Assembly,
-            D.MklTest.Assembly,
+            D.CpuFunc.Designated,
+            D.CpuTest.Designated,
 
-            D.LinearOps.Assembly,
-            D.LinearTest.Assembly,
+            D.MklApi.Designated,
+            D.MklTest.Designated,
 
-            D.Machines.Assembly,
-            D.MachineTest.Assembly,
+            D.LinearOps.Designated,
+            D.LinearTest.Designated,
 
-            D.LibM.Assembly,            
-            D.LibMTest.Assembly,
+            D.Machines.Designated,
+            D.MachineTest.Designated,
 
-            D.StatDist.Assembly,
+            D.LibM.Designated,            
+            D.LibMTest.Designated,
 
-            D.RevealLib.Assembly,
-            D.RevealApp.Assembly
+            D.StatDist.Designated,
+
+            D.RevealLib.Designated,
+            D.RevealApp.Designated
             );
-    }
+         
+        
+   }
 }

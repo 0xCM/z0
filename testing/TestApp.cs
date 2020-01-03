@@ -205,7 +205,7 @@ namespace Z0
             }
         }
 
-        protected static void Run(params string[] args)
+        public static void Run(params string[] args)
             => new A().RunTests();
     }
 }

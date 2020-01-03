@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
     
     using static zfunc;
 
@@ -15,7 +16,7 @@ namespace Z0
         {            
             for(var i=0; i< RepCount; i++)
             {
-                var input = Random.TakeBits(4);
+                var input = Random.BitStream().Take(4).ToArray();
                 bit i0 = input[0], i1 = input[1], i2 = input[2], i3 = input[3];
 
                 var out0 = Mux.mux(i0, i1, i2, i3, off, off);

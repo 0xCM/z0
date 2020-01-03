@@ -30,6 +30,9 @@ dotnet sln add rng/system/z0.rng.system.csproj
 dotnet sln add bitcore/src/z0.bitcore.csproj
 dotnet sln add bitcore/test/z0.bitcore.test.csproj
 
+dotnet sln add bitvectors/src/z0.bitvectors.csproj
+dotnet sln add bitvectors/test/z0.bitvectors.test.csproj
+
 dotnet sln add bits/src/z0.bits.csproj
 dotnet sln add bits/test/z0.bits.test.csproj
 

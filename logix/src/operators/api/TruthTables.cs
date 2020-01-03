@@ -186,6 +186,7 @@ namespace Z0.Logix
             for(var i=0; i< 16; i++)
             {
                 BitVector4 result = (byte)i;
+                var bbResult = BitBlocks.from(result);
 
 
                 var table = BitMatrix.alloc<N4,N3,byte>();
@@ -193,7 +194,7 @@ namespace Z0.Logix
                 table[1] = BitBlocks.literal<N3,byte>((byte)Bits.bitpack(result[1], off, on));
                 table[2] = BitBlocks.literal<N3,byte>((byte)Bits.bitpack(result[2], on, off));
                 table[3] = BitBlocks.literal<N3,byte>((byte)Bits.bitpack(result[3], on, on));
-                require(table.GetCol(2) == result);                
+                require(table.GetCol(2) == bbResult);                
                 table.emit(dst);
             }
         }
@@ -203,6 +204,8 @@ namespace Z0.Logix
             for(var i=0; i< 256; i++)
             {
                 BitVector8 result = (byte)i;
+                var bbResult = BitBlocks.from(result);
+
                 var table = BitMatrix.alloc<N8,N4,byte>();
                 table[0] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(result[0], off, off, off));
                 table[1] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(result[1], off, off, on));
@@ -212,9 +215,8 @@ namespace Z0.Logix
                 table[5] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(result[5], on, off, on));
                 table[6] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(result[6], on, on, off));
                 table[7] = BitBlocks.literal<N4,byte>((byte)Bits.bitpack(result[7], on, on, on));
-                require(table.GetCol(3) == result);                
+                require(table.GetCol(3) == bbResult);                
                 table.emit(dst);
-
             }
         }
 

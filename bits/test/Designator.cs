@@ -10,6 +10,8 @@ namespace Z0.Designators
     /// </summary>
     public sealed class BitTest : AssemblyDesignator<BitTest>
     {
+        public override void Run(params string[] args)
+            => App.Run(args);
 
     }
 

@@ -13,6 +13,17 @@ namespace Z0
     public static class BitBlocks
     {
         /// <summary>
+        /// Computes the Euclidean scalar product between two generic bitvectors using modular arithmetic
+        /// </summary>
+        /// <param name="x">The first vector</param>
+        /// <param name="y">The second vector</param>
+        /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
+        [MethodImpl(Inline)]
+        public static bit modprod<T>(BitVector<T> x, BitVector<T> y)
+            where T : unmanaged
+                => BitBlocks.modprod(x.ToBitCells(), y.ToBitCells());
+
+        /// <summary>
         /// Allocates a bitblock filled with a specified value
         /// </summary>
         /// <param name="n">The natural length of the vector in bits</param>
@@ -182,13 +193,38 @@ namespace Z0
                 => new BitBlock<N,T>(src.As<byte,T>());    
 
         /// <summary>
-        /// Loads an bitvector of minimal size from a source bitstring
+        /// Loads a bitblock from a bitstring
         /// </summary>
         /// <param name="src">The bitstring source</param>
         [MethodImpl(Inline)]
         public static BitBlock<T> from<T>(BitString src)
             where T : unmanaged
                 => load<T>(src.ToPackedBytes(), src.Length);
+
+        /// <summary>
+        /// Loads a bitblock from a bitvector
+        /// </summary>
+        /// <param name="src">The source bitvector</param>
+        [MethodImpl(Inline)]
+        public static BitBlock<T> from <T>(BitVector<T> src)
+            where T : unmanaged
+                => new BitBlock<T>((T)src, bitsize<T>());
+
+        /// <summary>
+        /// Loads a bitblock from a bitvector
+        /// </summary>
+        /// <param name="src">The source bitvector</param>
+        [MethodImpl(Inline)]
+        public static BitBlock<N4,byte> from(BitVector4 src)
+            => new BitBlock<N4,byte>(src);
+
+        /// <summary>
+        /// Loads a bitblock from a bitvector
+        /// </summary>
+        /// <param name="src">The source bitvector</param>
+        [MethodImpl(Inline)]
+        public static BitBlock<N8,byte> from(BitVector8 src)
+            => new BitBlock<N8,byte>(src);
 
         /// <summary>
         /// Computes the Euclidean scalar product between two bitvectors using modular arithmetic

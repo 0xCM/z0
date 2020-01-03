@@ -41,8 +41,7 @@ namespace Z0
             if(start)
                 counter.Start();
             return counter;
-        }
-        
+        }        
 
         [MethodImpl(Inline)]
         public void Start()
@@ -51,11 +50,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Stop()
+        public TimeSpan Stop()
         {
             var stopped = 0L;
             OS.GetCount(ref stopped);
             total += (stopped - started);
+            return Time;
         }
 
         /// <summary>

@@ -18,6 +18,18 @@ partial class zfunc
         => default;
 
     /// <summary>
+    /// Allocates and optionally starts a system counter
+    /// </summary>
+    [MethodImpl(Inline)]   
+    public static SystemCounter counter(bool start) 
+    {
+        var clock = counter();
+        if(start)
+            clock.Start();
+        return clock;
+    }
+
+    /// <summary>
     /// Creates a new stopwatch and optionally start it
     /// </summary>
     /// <param name="start">Whether to start the new stopwatch</param>
@@ -75,13 +87,14 @@ partial class zfunc
     /// <param name="right">THe second function</param>
     public static OpTimePair measure(long n, string leftLabel, string rightLabel, Action<long> left, Action<long> right)
     {
-        var lTimer = stopwatch();
+        var lclock = counter(true);
         left(n);
-        var lTime = BenchmarkRecord.Define(n, snapshot(lTimer),leftLabel);
-        var rTimer = stopwatch();
+        var lTime = BenchmarkRecord.Define(n, lclock.Stop(),leftLabel);
+        
+        var rclock = counter(true);
         right(n);
-        var rTime = BenchmarkRecord.Define(n, snapshot(rTimer),rightLabel);
-        OpTimePair result = (lTime, rTime);
-        return result;
+        var rTime = BenchmarkRecord.Define(n, rclock.Stop(),rightLabel);
+        
+        return (lTime, rTime);
     }
 }

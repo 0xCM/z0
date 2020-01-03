@@ -104,7 +104,7 @@ namespace Z0
             Span<bit> buffer = new bit[n];
             for(var i=0; i<RepCount; i++)
             {
-                var bits = Random.Bits().Take(Random.Next<uint>(5,25)).ToSpan();
+                var bits = Random.BitStream().Take(Random.Next<uint>(5,25)).ToSpan();
                 
                 var expect = 0u;
                 for(var j=0; j<bits.Length; j++)

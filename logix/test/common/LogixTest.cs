@@ -25,12 +25,12 @@ namespace Z0.Logix
     {
         protected void logic_op_check(BL kind, Func<bit,bit,bit> rule)
         {
-            var lhsBits = Random.TakeBits(RepCount);
-            var rhsBits = Random.TakeBits(RepCount);
+            var lhs = Random.BitStream().Take(RepCount).ToArray();
+            var rhs = Random.BitStream().Take(RepCount).ToArray();
             for(var i=0; i<RepCount; i++)
             {
-                var a = lhsBits[i];
-                var b = rhsBits[i];
+                var a = lhs[i];
+                var b = rhs[i];
                 var expect = rule(a,b);
                 var actual = LogicOpApi.eval(kind, a,b);
                 Claim.eq(expect, actual);
@@ -59,8 +59,8 @@ namespace Z0.Logix
         {
             var opname = $"ops/logical/lookup[{lookup}]";
 
-            var lhsSamples = Random.Bits().Take(RepCount).ToArray();
-            var rhsSamples = Random.Bits().Take(RepCount).ToArray();
+            var lhsSamples = Random.BitStream().Take(RepCount).ToArray();
+            var rhsSamples = Random.BitStream().Take(RepCount).ToArray();
             var result = bit.Off;
             var kinds = LogicOpApi.BinaryOpKinds;
             var opcount = 0;

@@ -20,7 +20,7 @@ namespace Z0
             
             var u = fill.ToBitVector();
             var v = fill.ToBitVector();
-            var z = BitVector.oprod(u,v).ToNatural();
+            var z = BitMatrix.oprod(u,v).ToNatural();
 
             Span<uint> ys = new uint[v];            
 

@@ -10,6 +10,11 @@ namespace Z0.Designators
     /// </summary>
     public sealed class BitCoreTest : AssemblyDesignator<BitCoreTest>
     {
+        public override AssemblyRole Role 
+            => AssemblyRole.Test;
+
+        public override void Run(params string[] args)
+            => App.Run(args);
 
     }
 

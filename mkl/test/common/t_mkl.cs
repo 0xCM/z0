@@ -11,8 +11,6 @@ namespace Z0.Mkl
     using static zfunc;
     using static nfunc;
     
-    using Z0.Test;
-
     public abstract class t_mkl<U> : UnitTest<U>
         where U : t_mkl<U>
     {

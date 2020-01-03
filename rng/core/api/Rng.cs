@@ -15,30 +15,6 @@ namespace Z0
     public static class Rng
     {
         /// <summary>
-        /// Creates a 128-bit vectorized emitter predicated an a specified random source
-        /// </summary>
-        /// <param name="w">The vector bit width</param>
-        /// <param name="random">The random source</param>
-        /// <param name="t">A vector component type representative</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
-        public static VRandom128<T> VEmitter<T>(N128 w, IPolyrand random, T t = default)  
-            where T : unmanaged
-                => new VRandom128<T>(random);
-
-        /// <summary>
-        /// Creates a 256-bit vectorized emitter predicated an a specified random source
-        /// </summary>
-        /// <param name="w">The vector bit width</param>
-        /// <param name="random">The random source</param>
-        /// <param name="t">A vector component type representative</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
-        public static VRandom256<T> VEmitter<T>(N256 w, IPolyrand random, T t = default)  
-            where T : unmanaged
-                => new VRandom256<T>(random);
-
-        /// <summary>
         /// Defines a T-valued interval that covers the full T-domain
         /// </summary>
         /// <typeparam name="T">The domain type</typeparam>

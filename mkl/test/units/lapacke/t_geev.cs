@@ -10,7 +10,6 @@ namespace Z0.Mkl.Test
     using static zfunc;
     using static nfunc;
     
-    using Z0.Test;
     using static Examples;
 
     public class t_geev : UnitTest<t_geev>
@@ -23,7 +22,5 @@ namespace Z0.Mkl.Test
             Claim.eq(5,eigen.Values.Length);
                     
         }
-
     }
-
 }

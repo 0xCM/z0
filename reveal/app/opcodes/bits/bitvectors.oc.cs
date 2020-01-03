@@ -84,22 +84,22 @@ namespace Z0
 
         public static BitMatrix<uint> oprod_1(BitVector32 x, BitVector32 y)
         {
-            return BitVector.oprod(x,y);
+            return BitMatrix.oprod(x,y);
         }
 
         public static BitMatrix<uint> oprod_2(BitVector<uint> x, BitVector<uint> y)
         {
-            return BitVector.oprod(x,y);
+            return BitMatrix.oprod(x,y);
         }
 
         public static ref BitMatrix<uint> oprod_3(BitVector<uint> x, BitVector<uint> y, ref BitMatrix<uint> z)
         {
-            return ref BitVector.oprod(x,y, ref z);
+            return ref BitMatrix.oprod(x,y, ref z);
         }
 
         public static ref BitMatrix<ulong> oprod_4(BitVector<ulong> x, BitVector<ulong> y, ref BitMatrix<ulong> z)
         {
-            return ref BitVector.oprod(x,y, ref z);
+            return ref BitMatrix.oprod(x,y, ref z);
         }
 
 

@@ -9,9 +9,6 @@ namespace Z0.Mkl.Test
 
     using static zfunc;
     using static nfunc;
-    
-    using Z0.Test;
-
 
     public class tvml_add : t_mkl<tvml_add>
     {

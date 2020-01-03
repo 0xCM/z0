@@ -18,14 +18,6 @@ namespace Z0
 
             }        
 
-        protected IFunc<Vector128<T>> vemitter<T>(N128 w, T t = default)
-            where T : unmanaged
-                => Rng.VEmitter(w,Random,t);
-        
-        protected IFunc<Vector256<T>> vemitter<T>(N256 w, T t = default)
-            where T : unmanaged
-                => Rng.VEmitter(w,Random,t);
-
         /// <summary>
         /// Produces the name of the test case for the specified function
         /// </summary>

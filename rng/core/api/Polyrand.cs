@@ -343,12 +343,21 @@ namespace Z0
         uint NextU32(uint min, uint max)
             => math.add(min, (uint)Points.Next((ulong)(max - min)));
 
+        /// <summary>
+        /// Enables a specified source bit
+        /// </summary>
+        /// <param name="src">The source value to manipulate</param>
+        /// <param name="pos">The position of the bit to enable</param>
+        [MethodImpl(Inline)]
+        static long enable(long src, int pos)
+            =>  src |= (1L << pos);
+
         [MethodImpl(Inline)]
         long IPointSource<long>.Next()
         {
             var next = (long)Points.Next(Int64.MaxValue);
-            var negative = BitMask.testbit(next, 7);
-            var result = BitMask.testbit(next, 7) ? BitMask.enable(next, 63) : next;
+            var negative = bit.test(next, 7);
+            var result = bit.test(next, 7) ? enable(next, 63) : next;
             return result;
         }
 

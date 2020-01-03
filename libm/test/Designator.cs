@@ -16,6 +16,8 @@ namespace Z0.Designators
     /// </summary>
     public sealed class LibMTest : AssemblyDesignator<LibMTest>
     {
+        public override void Run(params string[] args)
+            => App.Run(args);
 
     }
 

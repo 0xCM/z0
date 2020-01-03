@@ -13,34 +13,25 @@ namespace Z0
 
     partial class RngX
     {
-        /// <summary>
-        /// Produces a random bitspan of specified length
-        /// </summary>
-        /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
-        public static BitSpan BitSpan(this IPolyrand random, int length)
-            => Z0.BitSpan.load(random.Bits().Take(length).ToArray());
+        static IRandomStream<bit> ToBitStream<T>(this IPointSource<T> src)
+            where T : unmanaged
+                => BitSource<T>.From(src);    
 
         /// <summary>
-        /// Fills a caller-supplied bitspan with random bits
+        /// Produces an interminable stream of random bits
         /// </summary>
         /// <param name="random">The random source</param>
-        [MethodImpl(Inline)]
-        public static ref readonly BitSpan BitSpan(this IPolyrand random, in BitSpan dst)
+        public static IEnumerable<bit> BitStream(this IPolyrand random)
         {
-            random.TakeBits(dst.Length).CopyTo(dst.Bits);
-            return ref dst;
+            const int w = 64;
+            while(true)
+            {
+                var data = random.Next<ulong>();
+                for(var i=0; i<w; i++)
+                    yield return bit.test(data,i);
+            }
         }
-
-        /// <summary>
-        /// Produces a bitspan with randomized length
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="minlen">The mininimum bitspan length</param>
-        /// <param name="maxlen">The maximum bitspan length</param>
-        [MethodImpl(Inline)]
-        public static BitSpan BitSpan(this IPolyrand random, int minlen, int maxlen)
-            => random.BitSpan(random.Next<int>(minlen, maxlen + 1));
 
         /// <summary>
         /// Fills a caller-supplied target with random bits
@@ -48,6 +39,20 @@ namespace Z0
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
         public static void Fill(this IPolyrand random, Span<bit> dst)
-            => random.TakeBits(dst.Length).CopyTo(dst);
+        {
+            const int w = 64;
+            var pos = -1;
+            var last = dst.Length - 1;
+
+            while(pos <= last)
+            {
+                var data = random.Next<ulong>();
+                
+                var i = -1;
+                while(++pos <= last && ++i < w)
+                    dst[pos] = bit.test(data,i);
+            }
+        }
+
     }
 }

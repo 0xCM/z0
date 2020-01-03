@@ -2,14 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {       
     using System.Linq;
     using static zfunc;
 
     public class App : TestApp<App>
     {           
-        
         
         protected override void RunTests(params string[] filters)
         {            
