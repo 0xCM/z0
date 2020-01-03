@@ -18,7 +18,6 @@ namespace Z0
     public abstract class t_vinx<X> : t_inx<X>
         where X : t_vinx<X>
     {
-
         protected t_vinx()
         {
             Check = new CheckExec(Config);

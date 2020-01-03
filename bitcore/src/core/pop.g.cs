@@ -94,7 +94,6 @@ namespace Z0
                  return Bits.pop(uint32(src));
             else 
                  return Bits.pop(uint64(src));
-        }
- 
+        } 
     }
 }

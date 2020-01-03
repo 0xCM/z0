@@ -12,7 +12,6 @@ namespace Z0
 
     public static partial class BitSpanX
     {
-
         /// <summary>
         /// Loads a natspan from a bitspan (nonallocating)
         /// </summary>
@@ -62,20 +61,61 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static int Pop(this in BitSpan src)
+        public static int PopCount(this in BitSpan src)
             => pop(src);
-    
-         
+            
+        /// <summary>
+        /// Extracts and packs bitsize[T] source bits; will fail if data are insufficent
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="t">A target scalar type representative</param>
+        /// <typeparam name="T">The target scalar type</typeparam>
         [MethodImpl(Inline)]
-        static int length<T>(in BitSpan src, int offset, int? count = null)
+        public static T Extract<T>(this in BitSpan src, T t = default)
             where T : unmanaged
-                => math.min(count ?? bitsize<T>(), src.Length - offset - bitsize<T>());            
-
-         [MethodImpl(Inline)]
-         public static T Scalar<T>(this in BitSpan src, T t = default)
+                => BitSpan.extract<T>(src);
+        
+        /// <summary>
+        /// Extracts a T-valued scalar (or portion thereof) from the source segment [0,..,bitsize[T] - 1]
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <typeparam name="T">The scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public static T BitSlice<T>(this in BitSpan src)
             where T : unmanaged
-               => BitSpan.extract<T>(src);
+                => BitSpan.bitslice<T>(src);
     
-    }
+        /// <summary>
+        /// Extracts a T-valued scalar (or portion thereof) from the source segment [offset,..,offset - (bitsize[T] - 1)]
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="offset">The index of the first bit</param>
+        /// <typeparam name="T">The scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public static T BitSlice<T>(this in BitSpan src, int offset)
+            where T : unmanaged
+                => BitSpan.bitslice<T>(src, offset);
 
+        [MethodImpl(Inline)]
+        public static T BitSlice<T>(this in BitSpan src, int offset, int count)
+            where T : unmanaged 
+                => BitSpan.bitslice<T>(src, offset, count);
+
+        /// <summary>
+        /// Eliminates leading zeroes, if any, from the source
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static BitSpan Trim(this in BitSpan src)
+            => BitSpan.trim(src);
+
+        /// <summary>
+        /// Concatenates two bitspans
+        /// </summary>
+        /// <param name="head">The leading bits</param>
+        /// <param name="tail">The trailing bits</param>
+        [MethodImpl(Inline)]
+        public static BitSpan Concat(this in BitSpan head, in BitSpan tail)
+            => BitSpan.concat(head,tail);
+    }
 }

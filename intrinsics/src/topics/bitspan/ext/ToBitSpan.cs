@@ -69,36 +69,60 @@ namespace Z0
          public static BitSpan ToBitSpan(this double src)
             => BitSpan.create<ulong>(BitConvert.ToUInt64(src));
 
-         [MethodImpl(Inline)]
-         public static BitSpan ToBitSpan(this Span<byte> src)
+        /// <summary>
+        /// Loads a bitspan from a packed span of scalars
+        /// </summary>
+        /// <param name="src">The packed source</param>
+        public static BitSpan ToBitSpan(this ReadOnlySpan<byte> src)
             => BitSpan.load(src);
 
-         [MethodImpl(Inline)]
-         public static BitSpan ToBitSpan(this ReadOnlySpan<byte> src)
+        /// <summary>
+        /// Loads a bitspan from a packed span of scalars
+        /// </summary>
+        /// <param name="src">The packed source</param>
+        public static BitSpan ToBitSpan(this ReadOnlySpan<ushort> src)
             => BitSpan.load(src);
 
-         [MethodImpl(Inline)]
-         public static BitSpan ToBitSpan(this Span<ushort> src)
+        /// <summary>
+        /// Loads a bitspan from a packed span of scalars
+        /// </summary>
+        /// <param name="src">The packed source</param>
+        public static BitSpan ToBitSpan(this ReadOnlySpan<uint> src)
             => BitSpan.load(src);
 
-         [MethodImpl(Inline)]
-         public static BitSpan ToBitSpan(this ReadOnlySpan<ushort> src)
+        /// <summary>
+        /// Loads a bitspan from a packed span of scalars
+        /// </summary>
+        /// <param name="src">The packed source</param>
+        public static BitSpan ToBitSpan(this ReadOnlySpan<ulong> src)
             => BitSpan.load(src);
 
-         [MethodImpl(Inline)]
-         public static BitSpan ToBitSpan(this Span<uint> src)
+        /// <summary>
+        /// Loads a bitspan from a packed span of scalars
+        /// </summary>
+        /// <param name="src">The packed source</param>
+        public static BitSpan ToBitSpan(this Span<byte> src)
             => BitSpan.load(src);
 
-         [MethodImpl(Inline)]
-         public static BitSpan ToBitSpan(this ReadOnlySpan<uint> src)
+        /// <summary>
+        /// Loads a bitspan from a packed span of scalars
+        /// </summary>
+        /// <param name="src">The packed source</param>
+        public static BitSpan ToBitSpan(this Span<ushort> src)
             => BitSpan.load(src);
 
-         [MethodImpl(Inline)]
-         public static BitSpan ToBitSpan(this Span<ulong> src)
+        /// <summary>
+        /// Loads a bitspan from a packed span of scalars
+        /// </summary>
+        /// <param name="src">The packed source</param>
+        public static BitSpan ToBitSpan(this Span<uint> src)
             => BitSpan.load(src);
 
-         [MethodImpl(Inline)]
-         public static BitSpan ToBitSpan(this ReadOnlySpan<ulong> src)
+        /// <summary>
+        /// Loads a bitspan from a packed span of scalars
+        /// </summary>
+        /// <param name="src">The packed source</param>
+        public static BitSpan ToBitSpan(this Span<ulong> src)
             => BitSpan.load(src);
-    }
+   }
 }

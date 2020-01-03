@@ -25,7 +25,19 @@ namespace Z0
             where T : unmanaged
                 => VRng.VEmitter(w,Random,t);
 
-
+        /// <summary>
+        /// Asserts the equality of two bitspans
+        /// </summary>
+        /// <param name="a">The left bitspan</param>
+        /// <param name="b">The right bitspan</param>
+        protected void ClaimEqual(in BitSpan a, in BitSpan b)
+        {
+            if(a != b)
+            {
+                Trace(a.Format());
+                Trace(b.Format());
+                Claim.fail();
+            }
+        }
     }
-
 }

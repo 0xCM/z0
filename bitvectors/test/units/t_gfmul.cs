@@ -10,9 +10,9 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_bvgfmul : t_bv<t_bvgfmul>
+    public class t_gfmul : t_bv<t_gfmul>
     {
-        public void bvgfmul_256()
+        public void gfmul_256()
         {
             for(var i=0; i<RepCount; i++)
             {
@@ -37,7 +37,7 @@ namespace Z0
             Claim.eq(p1.Format(),p2.Format());                
         }
 
-        public void bvgfmul_8()
+        public void gfmul_8()
         {
             var expect =  new byte[,]
             {
@@ -73,9 +73,9 @@ namespace Z0
         {            
             gfpoly_check(GfPoly.Lookup<N3,byte>(), BitString.parse("1011"));            
             gfpoly_check(GfPoly.Lookup<N8,ushort>(), BitString.parse("100011101"));
+            gfpoly_check(GfPoly.Lookup<N16,uint>(), BitString.parse("10000001111011101"));            
             Claim.eq((ushort)0b100011101, GfPoly.Lookup<N8,ushort>().Scalar);
             
-            gfpoly_check(GfPoly.Lookup<N16,uint>(), BitString.parse("10000001111011101"));            
         }
 
         void gfpoly_check<N,T>(GfPoly<N,T> p, BitString match)

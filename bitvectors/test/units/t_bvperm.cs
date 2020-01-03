@@ -28,7 +28,6 @@ namespace Z0
             var bsy2 =  BitString.load(bsx2.BitSeq.Permute(p2));
             var bsz2 = bsx2.Permute(p2);            
             Claim.eq(bsy2, bsz2);
-
         }
 
         public void pbv_perm_32()

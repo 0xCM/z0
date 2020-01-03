@@ -122,25 +122,6 @@ namespace Z0
             }
         }
 
-        public void bs_to_u32()
-        {
-            var x0 = 0b_01011000_00001000_11111010_01100101u;
-            var x1 = x0.ToBitString();
-            var x2 = x1.TakeScalar<uint>();
-            Claim.eq(x0,x2);            
-
-            var x = 0b10100001100101010001u;
-            var bsSrc = "0000010100001100101010001";
-            var bs1 = BitString.parse(bsSrc);
-            Claim.eq((int)bs1.Length, bsSrc.Length);
-
-            var bs2 = BitString.scalar(x);
-            var y = bs1.TakeScalar<uint>();
-            Claim.eq(x,y);
-            Claim.yea(bs1.Equals(bs2));
-
-        }
-
         public void bs_to_u8()
         {
             var x = (byte)0b10110110;

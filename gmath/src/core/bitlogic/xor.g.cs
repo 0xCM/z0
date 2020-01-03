@@ -50,7 +50,7 @@ namespace Z0
                 return convert<T>(math.xor(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(int))
                  return generic<T>(math.xor(int32(a), int32(b)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typeof(T) == typeof(long))
                  return generic<T>(math.xor(int64(a), int64(b)));
             else
                 return gfp.xor(a,b);

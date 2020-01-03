@@ -18,119 +18,6 @@ namespace Z0
         // ~ ------------------------------------------------------------------
 
         /// <summary>
-        /// Partitions the first 4 bits of a 32-bit source into 4 8-bit targets of effective width 1 
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target memory location</param>
-        [MethodImpl(Inline)]
-        public static void part4x1(uint src, ref byte dst)
-        {
-            const uint M = 1;
-
-            seek(ref dst, 0) = (byte)(src >> 0 & M);
-            seek(ref dst, 1) = (byte)(src >> 1 & M);
-            seek(ref dst, 2) = (byte)(src >> 2 & M);
-            seek(ref dst, 3) = (byte)(src >> 3 & M);
-        }
-
-        /// <summary>
-        /// Partitions the first 5 bits of a 32-bit source into 5 8-bit targets of effective width 1 
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target memory location</param>
-        [MethodImpl(Inline)]
-        public static void part5x1(uint src, ref byte dst)
-        {
-            const uint M = 1;
-
-            seek(ref dst, 0) = (byte)(src >> 0 & M);
-            seek(ref dst, 1) = (byte)(src >> 1 & M);
-            seek(ref dst, 2) = (byte)(src >> 2 & M);
-            seek(ref dst, 3) = (byte)(src >> 3 & M);
-            seek(ref dst, 4) = (byte)(src >> 4 & M);
-        }
-
-        /// <summary>
-        /// Partitions the first 6 bits of a 32-bit source into 6 8-bit targets of effective width 1 
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target memory location</param>
-        [MethodImpl(Inline)]
-        public static void part6x1(uint src, ref byte dst)
-        {
-            const uint M = 1;
-
-            seek(ref dst, 0) = (byte)(src >> 0 & M);
-            seek(ref dst, 1) = (byte)(src >> 1 & M);
-            seek(ref dst, 2) = (byte)(src >> 2 & M);
-            seek(ref dst, 3) = (byte)(src >> 3 & M);
-            seek(ref dst, 4) = (byte)(src >> 4 & M);
-            seek(ref dst, 5) = (byte)(src >> 5 & M);
-        }
-
-        /// <summary>
-        /// Partitions the first 7 bits of a 32-bit source into 7 8-bit targets of effective width 1 
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target memory location</param>
-        [MethodImpl(Inline)]
-        public static void part7x1(uint src, ref byte dst)
-        {
-            const uint M = 1;
-
-            seek(ref dst, 0) = (byte)(src >> 0 & M);
-            seek(ref dst, 1) = (byte)(src >> 1 & M);
-            seek(ref dst, 2) = (byte)(src >> 2 & M);
-            seek(ref dst, 3) = (byte)(src >> 3 & M);
-            seek(ref dst, 4) = (byte)(src >> 4 & M);
-            seek(ref dst, 5) = (byte)(src >> 5 & M);
-            seek(ref dst, 6) = (byte)(src >> 6 & M);
-        }
-
-        /// <summary>
-        /// Partitions the first 8 bits of a 32-bit source into 8 8-bit targets of effective width 1 
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target memory location</param>
-        [MethodImpl(Inline)]
-        public static void part8x1(uint src, ref byte dst)
-        {
-            part4x1(src, ref dst);
-            part4x1(src >> 4, ref seek(ref dst, 4));
-        }
-
-        /// <summary>
-        /// Partitions the first 9 bits of a 32-bit source into 9 8-bit targets of effective width 1 
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target memory location</param>
-        [MethodImpl(Inline)]
-        public static void part9x1(uint src, ref byte dst)
-        {
-            const uint M = 1;
-            part8x1(src, ref dst);
-            seek(ref dst, 8) = (byte)(src >> 8 & M);
-        }
-
-        /// <summary>
-        /// Partitions the first 10 bits of a 32-bit source into 10 8-bit targets of effective width 1 
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target memory location</param>
-        [MethodImpl(Inline)]
-        public static void part10x1(uint src, ref byte dst)
-        {
-            const uint M = 1;
-
-            part9x1(src, ref dst);
-            seek(ref dst, 9) = (byte)(src >> 9 & M);
-        }
-
-        [MethodImpl(Inline)]
-        public static void part10x1(uint src, Span<byte> dst)
-            => part10x1(src, ref head(dst));
-        
-        /// <summary>
         /// Partitions a 64-bit source into 64 8-bit targets of effective width 1
         /// </summary>
         /// <param name="src">The source value</param>
@@ -357,7 +244,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline)]
-        public static void part8x4(uint src, ref byte dst)
+        static void part4x2(uint src, ref byte dst)
         {
             const uint M = BitMasks.Lsb8x8x4;
 
@@ -371,8 +258,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline)]
-        public static void part8x4(uint src, Span<byte> dst)
-            => part8x4(src, ref head(dst));
+        public static void part4x2(uint src, NatSpan<N2,byte> dst)
+            => part4x2(src, ref head(dst));
 
         /// <summary>
         /// Partitions the first 12 bits of a 32-bit source value into 3 target segments each with an effective width of 4
@@ -380,7 +267,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline)]
-        public static void part12x4(uint src, ref byte dst)
+        static void part4x3(uint src, ref byte dst)
         {
             const uint M = BitMasks.Lsb8x8x4;
 
@@ -395,9 +282,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline)]
-        public static void part12x4(uint src, Span<byte> dst)
-            => part12x4(src, ref head(dst));
-
+        public static void part4x3(uint src, NatSpan<N3,byte> dst)
+            => part4x3(src, ref head(dst));
 
         /// <summary>
         /// Partitions a 16-bit source value into 4 8-bit target segments
@@ -405,7 +291,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline)]
-        public static void part16x4(ushort src, NatSpan<N4,byte> dst)
+        public static void part4x4(ushort src, NatSpan<N4,byte> dst)
         {
             const uint M = BitMasks.Lsb32x8x4;
             dst.Cell<uint>(0) = Bits.scatter(src, M); 
@@ -417,7 +303,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline)]
-        public static void part32x4(uint src, NatSpan<N8,byte> dst)
+        public static void part8x4(uint src, NatSpan<N8,byte> dst)
         {
             const ulong M = BitMasks.Lsb64x8x4;
             dst.Cell<ulong>(0) = Bits.scatter(src, M); 
@@ -426,19 +312,17 @@ namespace Z0
         // ~ Nx5
         // ~ ------------------------------------------------------------------
 
-
         /// <summary>
         /// Partitions the first 20 bits of a 32-bit source value into 4 8-bit segments of width 5
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="dst">The partition target</param>
         [MethodImpl(Inline)]
-        public static void Part20x5(uint src, NatSpan<N4,byte> dst)
+        public static void Part4x5(uint src, NatSpan<N4,byte> dst)
         {
             const uint M = BitMasks.Lsb32x8x5;
             dst.Cell<uint>(0) = Bits.scatter(src, M);            
         }
-
 
         // ~ Nx8
         // ~ ------------------------------------------------------------------
@@ -449,7 +333,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="dst">The partition target</param>
         [MethodImpl(Inline)]
-        public static void part16x8(ushort src, NatSpan<N2,byte> dst)
+        public static void part2x8(ushort src, NatSpan<N2,byte> dst)
             => dst.Cell<ushort>(0) = src; 
 
         /// <summary>
@@ -458,7 +342,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The partition target</param>
         [MethodImpl(Inline)]
-        public static void part32x8(uint src, NatSpan<N4,byte> dst)
+        public static void part4x8(uint src, NatSpan<N4,byte> dst)
             => dst.Cell<uint>(0) = src; 
 
         /// <summary>
@@ -467,7 +351,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The partition target</param>
         [MethodImpl(Inline)]
-        public static void part64x8(ulong src, NatSpan<N8,byte> dst)
+        public static void part8x8(ulong src, NatSpan<N8,byte> dst)
             => dst.Cell<ulong>(0) = src; 
 
         // ~ Nx16

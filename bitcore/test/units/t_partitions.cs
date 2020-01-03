@@ -18,7 +18,7 @@ namespace Z0
             var t = z8;
             var src = BitMask.msb(n2,n1,z16);
             var dst = NatSpan.alloc(n,t);
-            Bits.part16x4(src, dst);
+            Bits.part4x4(src, dst);
             var segment = uint8(0b1010).ToBitSpan();
             var expect = segment.Replicate(4);
             var actual = dst.Data.ToBitSpan();

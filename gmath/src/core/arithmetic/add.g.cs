@@ -49,7 +49,7 @@ namespace Z0
                 return convert<T>(math.add(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(int))
                  return generic<T>(math.add(int32(a), int32(b)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typeof(T) == typeof(long))
                  return generic<T>(math.add(int64(a), int64(b)));
             else
                 return gfp.add(a,b);

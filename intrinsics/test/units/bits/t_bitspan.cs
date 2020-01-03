@@ -10,7 +10,7 @@ namespace Z0
 
     public class t_bitspan : t_vinx<t_bitspan>
     {
-        public void equality()
+        public void bsequals()
         {
             for(var i=0; i<RepCount; i++)
             {
@@ -22,76 +22,71 @@ namespace Z0
             }
         }
 
-        public void and()
-        {            
-            var t = z64;
-            var n = bitsize(t);
-            
-            var xb = BitSpan.alloc(n);
-            var yb = BitSpan.alloc(n);
-            var zb = BitSpan.alloc(n);
-
-            for(var rep = 0; rep <= RepCount; rep++)
-            {
-                var x = Random.BitSpan(n);
-                var y = Random.BitSpan(n);
-                var z = x & y;
-                var xs = x.Scalar(t);
-                var ys = y.Scalar(t);
-                var zs = xs & ys;
-                Claim.eq(zs, z.Scalar(t));
-            }
-        }
-
-        public void or()
-        {            
-            var t = z64;
-            var n = bitsize(t);
-            
-            var xb = BitSpan.alloc(n);
-            var yb = BitSpan.alloc(n);
-            var zb = BitSpan.alloc(n);
-
-            for(var rep = 0; rep <= RepCount; rep++)
-            {
-                var x = Random.BitSpan(n);
-                var y = Random.BitSpan(n);
-                var z = x | y;
-                var xs = x.Scalar(t);
-                var ys = y.Scalar(t);
-                var zs = xs | ys;
-                Claim.eq(zs, z.Scalar(t));
-            }
-        }
-
-        public void xor()
-        {            
-            var t = z64;
-            var n = bitsize(t);
-
-            for(var rep = 0; rep <= RepCount; rep++)
-            {
-                var x = Random.BitSpan(n);
-                var y = Random.BitSpan(n);
-                var z = x ^ y;
-                var xs = x.Scalar(t);
-                var ys = y.Scalar(t);
-                var zs = xs ^ ys;
-                Claim.eq(zs, z.Scalar(t));
-            }
-        }
-
-        public void format_direction()
+        public void bsparse()
         {
-            byte src = 1;
-            var bitspan = BitSpan.create<byte>(src);
-            var fmt = bitspan.Format();
-            Claim.eq(8,fmt.Length);
-            Claim.eq(bit.One, fmt[7]);
+            bsparse_check(z8);
+            bsparse_check(z16);
+            bsparse_check(z32);
+            bsparse_check(z64);
+        }
+
+        public void bstrim()
+        {
+            var x0 = 0b_01011000_00001000_11111010_01100101u;
+            var x1 = x0.ToBitSpan();
+            var x2 = x1.Extract<uint>();
+            Claim.eq(x0,x2);            
+
+            var x = 0b10100001100101010001u;
+            var bsSrc = "0000010100001100101010001";
+            
+            var bs1 = BitSpan.parse(bsSrc);
+            Claim.eq((int)bs1.Length, bsSrc.Length);
+
+            var bs2 = BitSpan.create(x);
+            ClaimEqual(bs1.Trim(),bs2.Trim());
+
+            var y = bs1.BitSlice<uint>();
+            Claim.eq(x,y);
 
         }
 
-        public void loadbits()
+        public void bsand_8()
+            => bsand_check(z8);
+        
+        public void bsand_16()
+            => bsand_check(z16);
+
+        public void bsand_32()
+            => bsand_check(z32);
+
+        public void bsand_64()
+            => bsand_check(z64);
+
+        public void bsor_8()
+            => bsor_check(z8);
+        
+        public void bsor_16()
+            => bsor_check(z16);
+
+        public void bsor_32()
+            => bsor_check(z32);
+
+        public void bsor_64()
+            => bsor_check(z64);
+
+        public void bsxor_8()
+            => bsxor_check(z8);
+        public void bsxor_16()
+            => bsxor_check(z16);
+
+        public void bsxor_32()
+            => bsxor_check(z32);
+
+        public void bsxor_64()
+            => bsxor_check(z64);
+
+        public void bsbitload_check()
         {            
             var bytecount = RepCount;
             Block256<uint> unpacked = DataBlocks.alloc(n256,bytecount,z32);
@@ -107,127 +102,29 @@ namespace Z0
             }            
         }
 
-        public void format_16()
-        {
-            const int length = 16;
-            var src = BitMask.even(n2, n1, z16);
-            var bitspan = BitSpan.create<ushort>(src);
-            var format = bitspan.Format();
-            Trace(format);
+        public void bsformat_8()
+            => bsformat_check(z8);
 
-            Claim.eq(length, bitspan.Length);
-            for(int i=0, j= length - 1; i< length; i++, j--)
-            {
-                if(even(i))
-                {
-                    Claim.yea(bitspan[i]);
-                    Claim.eq(bit.One, format[j]);
-                }
-                else
-                {
-                    Claim.nea(bitspan[i]);
-                    Claim.eq(bit.Zero, format[j]);
-                }
-            }            
-        }
+        public void bsformat_16()
+            => bsformat_check(z16);
 
-        public void format_32()
-        {
-            const int length = 32;
-            var src = BitMask.even(n2, n1, z32);
-            var bitspan = BitSpan.create<uint>(src);
-            var format = bitspan.Format();
+        public void bsformat_32()
+            => bsformat_check(z32);
 
-            Claim.eq(length, bitspan.Length);
-            for(int i=0, j= length - 1; i< length; i++, j--)
-            {
-                if(even(i))
-                {
-                    Claim.yea(bitspan[i]);
-                    Claim.eq(bit.One, format[j]);
-                }
-                else
-                {
-                    Claim.nea(bitspan[i]);
-                    Claim.eq(bit.Zero, format[j]);
-                }
-            }            
-        }
+        public void bsformat_64()
+            => bsformat_check(z64);
 
-        public void format_64()
-        {
-            const int length = 64;
-            var src = BitMask.even(n2, n1, z64);
-            var bitspan = BitSpan.create<ulong>(src);
-            var format = bitspan.Format();
+        public void bsload_scalars_8()
+            => bsload_scalars_check(z8);
 
-            Claim.eq(length, bitspan.Length);
-            for(int i=0, j= length - 1; i< length; i++, j--)
-            {
-                if(even(i))
-                {
-                    Claim.yea(bitspan[i]);
-                    Claim.eq(bit.One, format[j]);
-                }
-                else
-                {
-                    Claim.nea(bitspan[i]);
-                    Claim.eq(bit.Zero, format[j]);
-                }
-            }            
-        }
+        public void bsload_scalars_16()
+            => bsload_scalars_check(z16);
 
-        public void loadscalars_8()
-        {
-            var length = 64;
-            Span<byte> buffer = stackalloc byte[length];
+        public void bsload_scalars_32()
+            => bsload_scalars_check(z32);
 
-            for(var i=0; i<RepCount; i++)
-            {
-                Random.Fill(buffer);
-                var bitspan = BitSpan.load(buffer);
-                bitspan_check(buffer,bitspan);
-            }
-        }
-
-        public void loadscalars_16()
-        {
-            var length = 64;
-            Span<ushort> buffer = stackalloc ushort[length];
-
-            for(var i=0; i<RepCount; i++)
-            {
-                Random.Fill(buffer);
-                var bitspan = BitSpan.load(buffer);
-                bitspan_check(buffer.AsBytes(),bitspan);
-            }
-        }
-
-        public void loadscalars_32()
-        {
-            var length = 64;
-            Span<uint> buffer = stackalloc uint[length];
-
-            for(var i=0; i<RepCount; i++)
-            {
-                Random.Fill(buffer);
-                var bitspan = BitSpan.load(buffer);
-                bitspan_check(buffer.AsBytes(),bitspan);
-            }
-        }
-
-        public void loadscalars_64()
-        {
-            var length = 64;
-            Span<ulong> buffer = stackalloc ulong[length];
-
-            for(var i=0; i<RepCount; i++)
-            {
-                Random.Fill(buffer);
-                var bitspan = BitSpan.load(buffer);
-                bitspan_check(buffer.AsBytes(),bitspan);
-            }
-        }
+        public void bsload_scalars_64()
+            => bsload_scalars_check(z64);
 
         public void bitslice_32()
         {
@@ -242,35 +139,123 @@ namespace Z0
             var z2 = y[4,2,t];
             Claim.eq(0b11,z2);
             var z3 = y[6,2,t];
-            Claim.eq(0b00,z3);
-        
+            Claim.eq(0b00,z3);    
         }
 
         public void loadscalar()
         {
-            loadscalar_check(z8);
-            loadscalar_check(z8i);
-            loadscalar_check(z16);
-            loadscalar_check(z16i);
-            loadscalar_check(z32);
-            loadscalar_check(z32i);
-            loadscalar_check(z64);
-            loadscalar_check(z64i);
+            bscreate_check(z8);
+            bscreate_check(z8i);
+            bscreate_check(z16);
+            bscreate_check(z16i);
+            bscreate_check(z32);
+            bscreate_check(z32i);
+            bscreate_check(z64);
+            bscreate_check(z64i);
         }
 
         public void extract()
         {
-            extract_check(z8);
-            extract_check(z8i);
-            extract_check(z16);
-            extract_check(z16i);
-            extract_check(z32);
-            extract_check(z32i);
-            extract_check(z64);
-            extract_check(z64i);
+            bsextract_check(z8);
+            bsextract_check(z8i);
+            bsextract_check(z16);
+            bsextract_check(z16i);
+            bsextract_check(z32);
+            bsextract_check(z32i);
+            bsextract_check(z64);
+            bsextract_check(z64i);
         }
 
-        void loadscalar_check<T>(T t = default)
+        void bsand_check<T>(T t = default)
+            where T : unmanaged
+        {            
+            var n = bitsize(t);
+
+            for(var rep = 0; rep <= RepCount; rep++)
+            {
+                var x = Random.BitSpan(n);
+                var y = Random.BitSpan(n);
+                var z = x & y;
+                var a = x.Extract(t);
+                var b = y.Extract(t);
+                var c = gmath.and(a, b);
+                Claim.eq(c, z.Extract(t));
+            }
+        }
+
+        void bsor_check<T>(T t = default)
+            where T : unmanaged
+        {            
+            var n = bitsize(t);
+
+            for(var rep = 0; rep <= RepCount; rep++)
+            {
+                var x = Random.BitSpan(n);
+                var y = Random.BitSpan(n);
+                var z = x | y;
+                var a = x.Extract(t);
+                var b = y.Extract(t);
+                var c = gmath.or(a, b);
+                Claim.eq(c, z.Extract(t));
+            }
+        }
+
+        void bsxor_check<T>(T t = default)
+            where T : unmanaged
+        {            
+            var n = bitsize(t);
+
+            for(var rep = 0; rep <= RepCount; rep++)
+            {
+                var x = Random.BitSpan(n);
+                var y = Random.BitSpan(n);
+                var z = x ^ y;
+                var a = x.Extract(t);
+                var b = y.Extract(t);
+                var c = gmath.xor(a, b);
+                Claim.eq(c, z.Extract(t));
+            }
+        }
+
+        void bsformat_check<T>(T t = default)
+            where T : unmanaged
+        {
+            var length = bitsize<T>();
+            var src = BitMask.even(n2, n1, t);
+            var bitspan = BitSpan.create<T>(src);
+            var format = bitspan.Format();
+
+            Claim.eq(length, bitspan.Length);
+            for(int i=0, j = length - 1; i< length; i++, j--)
+            {
+                if(even(i))
+                {
+                    Claim.yea(bitspan[i]);
+                    Claim.eq(bit.One, format[j]);
+                }
+                else
+                {
+                    Claim.nea(bitspan[i]);
+                    Claim.eq(bit.Zero, format[j]);
+                }
+            }            
+        }
+
+        void bsload_scalars_check<T>(T t = default)
+            where T : unmanaged
+        {
+            var length = 64;
+            Span<T> buffer = stackalloc T[length];
+
+            for(var i=0; i<RepCount; i++)
+            {
+                Random.Fill(buffer);
+                var bitspan = BitSpan.load(buffer);
+                bitspan_check(buffer.AsBytes(),bitspan);
+            }
+        }
+
+        void bscreate_check<T>(T t = default)
             where T : unmanaged
         {
             void check()
@@ -285,10 +270,10 @@ namespace Z0
                 }
             }
 
-            CheckAction<T>(check, "loadscalar");
+            CheckAction<T>(check, "bscreate");
         }
             
-        void extract_check<T>(T t = default)
+        void bsextract_check<T>(T t = default)
             where T : unmanaged
         {
             void check()
@@ -302,8 +287,26 @@ namespace Z0
                 }
             }  
 
-            CheckAction<T>(check, "extract");
+            CheckAction<T>(check, "bsextract");
+        }
 
+        void bsparse_check<T>(T t = default)
+            where T : unmanaged
+        {
+            void check()
+            {
+                for(var i=0; i<RepCount; i++)
+                {
+                    var x0 = Random.Next<T>();
+                    var x1 = BitSpan.create(x0);
+                    var x2 = x1.Format();
+                    var x3 = BitSpan.parse(x2);
+                    var x4 = x3.BitSlice<T>();
+                    Claim.eq(x0,x4);
+                }
+            }
+
+            CheckAction(check,CaseName(moniker<T>("bsparse")));
         }
 
         void bitspan_check(Span<byte> packed, BitSpan bitspan)
@@ -313,5 +316,6 @@ namespace Z0
             for(var j=0; j < 8; j++)
                 Claim.eq(BitMask.testbit(packed[i], j), bitspan[k + j]);
         }
+
     }
 }

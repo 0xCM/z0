@@ -11,9 +11,13 @@ namespace Z0
 
     public class t_intrinsic_bench : t_vinx<t_intrinsic_bench>
     {
+        
         protected override int CycleCount => Pow2.T08;
 
         protected override int RepCount => Pow2.T10;
+
+        public override bool Enabled 
+            => false;
 
         public void bitpack_bench()
         {
@@ -27,6 +31,43 @@ namespace Z0
         {
             vand_bench(n128);
             vand_bench(n256);
+        }
+
+        public void vxor_bench()
+        {
+            vxor_bench(n128);
+            vxor_bench(n256);
+        }
+
+        public void vrotl_bench()
+        {
+            rotl_bench(n128);
+            rotl_bench(n256);
+        }
+
+        public void vrotr_bench()
+        {
+            vrotr_bench(n128);
+            vrotr_bench(n256);
+        }
+
+        public void vsll_bench()
+        {
+            vsll_bench(n128);
+            vsll_bench(n256);
+        }
+
+        public void vsrl_bench()
+        {         
+            vsrl_bench(n128);
+            vsrl_bench(n256);
+        }
+
+        public void vpop_bench()
+        {
+            vpop_bench_ref();
+            vpop_bench(n128);
+            vpop_bench(n256);
         }
 
         void vand_bench(N128 w)
@@ -53,12 +94,6 @@ namespace Z0
             where T : unmanaged
                 => vbinop_bench(w, VX.vand(w,t),t);
 
-        public void vxor_bench()
-        {
-            vxor_bench(n128);
-            vxor_bench(n256);
-        }
-
         void vxor_bench(N128 w)
         {
             vxor_bench(w, z8);
@@ -83,12 +118,6 @@ namespace Z0
             where T : unmanaged
                 => vbinop_bench(w, VX.vxor(w,t),t);
 
-        public void vrotl_bench()
-        {
-            rotl_bench(n128);
-            rotl_bench(n256);
-        }
-
         void rotl_bench(N128 w)
         {
             vshift_bench(w, VX.vrotl(w, z8), z8);
@@ -103,12 +132,6 @@ namespace Z0
             vshift_bench(w, VX.vrotl(w, z16),z16);
             vshift_bench(w, VX.vrotl(w, z32), z32);
             vshift_bench(w, VX.vrotl(w, z64), z64);
-        }
-
-        public void vrotr_bench()
-        {
-            vrotr_bench(n128);
-            vrotr_bench(n256);
         }
 
         void vrotr_bench(N128 w)
@@ -127,21 +150,12 @@ namespace Z0
             vshift_bench(w, VX.vrotr(w, z64), z64);
         }
 
-
-        void vsll_bench()
-        {
-
-            vsll_bench(n128);
-            vsll_bench(n256);
-        }
-
         void vsll_bench(N128 w)
         {
             vshift_bench(w,VX.vsll(w, z8), z8);
             vshift_bench(w,VX.vsll(w, z16), z16);
             vshift_bench(w,VX.vsll(w, z32), z32);
             vshift_bench(w,VX.vsll(w, z64), z64);            
-
         }
 
         void vsll_bench(N256 w)
@@ -153,19 +167,12 @@ namespace Z0
             vshift_bench(w,VX.vsll(w, z64), z64);            
         }
 
-        public void vsrl_bench()
-        {         
-            vsrl_bench(n128);
-            vsrl_bench(n256);
-        }
-
         void vsrl_bench(N256 w)
         {
             vshift_bench(w,VX.vsrl(w, z8), z8);
             vshift_bench(w,VX.vsrl(w, z16), z16);
             vshift_bench(w,VX.vsrl(w, z32), z32);
             vshift_bench(w,VX.vsrl(w, z64), z64);            
-
         }
 
         void vsrl_bench(N128 w)
@@ -174,13 +181,6 @@ namespace Z0
             vshift_bench(w,VX.vsrl(w, z16), z16);
             vshift_bench(w,VX.vsrl(w, z32), z32);
             vshift_bench(w,VX.vsrl(w, z64), z64);            
-        }
-
-        public void vpop_bench()
-        {
-            vpop_bench_ref();
-            vpop_bench(n128);
-            vpop_bench(n256);
         }
 
         void vbinop_bench<F,T>(N128 w, F f, T t = default, SystemCounter clock = default)

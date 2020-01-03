@@ -16,28 +16,28 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<BitVector4> partition(BitVector16 src, Span<BitVector4> dst)
         {
-            Bits.part16x4(src, bytes(dst,n4));
+            Bits.part4x4(src, bytes(dst,n4));
             return dst;
         }
 
         [MethodImpl(Inline)]
         public static Span<BitVector8> partition(BitVector16 src, Span<BitVector8> dst)
         {
-            Bits.part16x8(src, bytes(dst,n2));
+            Bits.part2x8(src, bytes(dst,n2));
             return dst;
         }
 
         [MethodImpl(Inline)]
         public static Span<BitVector4> partition(BitVector32 src, Span<BitVector4> dst)
         {
-            Bits.part32x4(src, bytes(dst,n8));
+            Bits.part8x4(src, bytes(dst,n8));
             return dst;
         }
 
         [MethodImpl(Inline)]
         public static Span<BitVector8> partition(BitVector32 src, Span<BitVector8> dst)
         {
-            Bits.part32x8(src, bytes(dst,n4));
+            Bits.part4x8(src, bytes(dst,n4));
             return dst;
         }
 
@@ -51,14 +51,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<BitVector8> partition(BitVector64 src, Span<BitVector8> dst)
         {            
-            Bits.part64x8(src, bytes(dst,n8));
+            Bits.part8x8(src, bytes(dst,n8));
             return dst;
         }
 
         [MethodImpl(Inline)]
         public static Span<BitVector<byte>> partition(BitVector<ushort> src, Span<BitVector<byte>> dst)
         {
-            Bits.part16x8(src, bytes(dst,n2));
+            Bits.part2x8(src, bytes(dst,n2));
             return dst;
         }
 
@@ -66,7 +66,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<BitVector<byte>> partition(BitVector<uint> src, Span<BitVector<byte>> dst)
         {
-            Bits.part32x8(src, bytes(dst,n4));
+            Bits.part4x8(src, bytes(dst,n4));
             return dst;
         }
 
@@ -80,7 +80,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<BitVector<byte>> partition(BitVector<ulong> src, Span<BitVector<byte>> dst)
         {            
-            Bits.part64x8(src, bytes(dst,n8));
+            Bits.part8x8(src, bytes(dst,n8));
             return dst;
         }
 

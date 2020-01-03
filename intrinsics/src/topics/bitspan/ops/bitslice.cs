@@ -29,6 +29,36 @@ namespace Z0
             return BitPack.pack<T>(dst);
         }
 
+        /// <summary>
+        /// Materializes a bitspan segment as a scalar value
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <typeparam name="T">The scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public static T bitslice<T>(in BitSpan src, int offset)
+            where T : unmanaged
+        {            
+            Span<bit> dst = new bit[bitsize<T>()];
+            var len = math.min(dst.Length, src.Length - offset);
+            PolyData.copy(src.Bits, offset, len, dst);
+            return BitPack.pack<T>(dst);
+        }
+
+        /// <summary>
+        /// Materializes a bitspan segment as a scalar value
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <typeparam name="T">The scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public static T bitslice<T>(in BitSpan src)
+            where T : unmanaged
+        {            
+            Span<bit> dst = new bit[bitsize<T>()];
+            var len = math.min(dst.Length, src.Length);
+            PolyData.copy(src.Bits, 0, len, dst);
+            return BitPack.pack<T>(dst);
+        }
+
         [MethodImpl(Inline)]
         static T bitslice_u<T>(in BitSpan src, int offset, int count)
             where T : unmanaged
