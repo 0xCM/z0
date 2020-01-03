@@ -95,32 +95,32 @@ namespace Z0
         public const uint Lsb18x3x1 = (uint)Lsb15x3x1 | 1u << 15;
         
         /// <summary>
-        /// [00100_10010010_01001001]
+        /// [00100 10010010 01001001]
         /// </summary>
         public const uint Lsb21x3x1 = (uint)Lsb18x3x1 | 1u << 18;        
 
         /// <summary>
-        /// [00100100_10010010_01001001]
+        /// [00100100 10010010 01001001]
         /// </summary>
         public const uint Lsb24x3x1 = (uint)Lsb21x3x1 | 1u << 21;   
 
         /// <summary>
-        /// [001_00100100_10010010_01001001]
+        /// [001 00100100 10010010 01001001]
         /// </summary>
         public const uint Lsb27x3x1 = (uint)Lsb24x3x1 | 1u << 24;   
 
         /// <summary>
-        /// [001001_00100100_10010010_01001001]
+        /// [001001 00100100 10010010 01001001]
         /// </summary>
         public const uint Lsb30x3x1 = (uint)Lsb27x3x1 | 1u << 27;           
 
         /// <summary>
-        /// [0_01001001_00100100_10010010_01001001]
+        /// [0 01001001 00100100 10010010 01001001]
         /// </summary>
         public const ulong Lsb33x3x1 = (ulong)Lsb30x3x1 | 1ul << 30;           
 
         /// <summary>
-        /// [0010_01001001_00100100_10010010_01001001]
+        /// [0010 01001001 00100100 10010010 01001001]
         /// </summary>
         public const ulong Lsb36x3x1 = Lsb33x3x1 | 1ul << 33;           
 

@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Agent that manages a collection of servers
     /// </summary>
-    public class ServerComplex : ServiceAgent
+    public class ServerComplex : SystemAgent
     {
         static Option<ServerComplex> Complex {get; set;}
 
@@ -36,7 +36,7 @@ namespace Z0
             
             for(uint i = 0, corenum = 1; i <= servers; i++, corenum++)
             {
-                var sid = IdentityPools.NextServerId();
+                var sid = ServiceIdentityPool.NextServerId();
                 var config = new ServerConfig(sid, $"Server{sid}", corenum);
                 babble(appMsg($"Defined configuration for {config}"));
                 configs.Add(config);
@@ -63,7 +63,7 @@ namespace Z0
             Servers = new SystemServer[]{};
         }
 
-        public void Configure(IEnumerable<ServerConfig> Configs, IServiceAgent EventSink)
+        public void Configure(IEnumerable<ServerConfig> Configs, ISysemAgent EventSink)
         {
             var configs = Configs.ToArray();
             Servers = new SystemServer[configs.Length];
@@ -75,7 +75,7 @@ namespace Z0
 
         SystemServer[] Servers;
 
-        IServiceAgent EventSink;
+        ISysemAgent EventSink;
 
         protected override async void OnStart()
         {

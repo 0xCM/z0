@@ -12,9 +12,9 @@ namespace Z0
     using Microsoft.Diagnostics.Tracing.Session;
     using static zfunc;
 
-    public sealed class TraceEventSink : ServiceAgent
+    public sealed class TraceEventSink : SystemAgent
     {        
-        public static IServiceAgent Define(AgentContext Context, AgentIdentity Identity)
+        public static ISysemAgent Define(AgentContext Context, AgentIdentity Identity)
             => new TraceEventSink(Context, Identity);
 
         TraceEventSink(AgentContext Context, AgentIdentity Identity)

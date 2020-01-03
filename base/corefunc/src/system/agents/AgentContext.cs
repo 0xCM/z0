@@ -14,24 +14,23 @@ namespace Z0
     /// </summary>
     public class AgentContext : Context, IAgentContext
     {
-        ConcurrentDictionary<ulong, IServiceAgent> Agents {get;}
-            = new ConcurrentDictionary<ulong, IServiceAgent>();
+        ConcurrentDictionary<ulong, ISysemAgent> Agents {get;}
+            = new ConcurrentDictionary<ulong, ISysemAgent>();
 
-        public AgentContext(IPolyrand random, ISystemEvents EventLog)
+        public AgentContext(IPolyrand random, IAgentEventSink EventLog)
             : base(random)
         {
             this.EventLog = EventLog;
         }
 
-        public ISystemEvents EventLog {get;}
+        public IAgentEventSink EventLog {get;}
 
-        public void Register(IServiceAgent agent)
+        public void Register(ISysemAgent agent)
         {
             Agents.TryAdd(agent.Identity, agent);
         }
         
-
-        IEnumerable<IServiceAgent> IAgentContext.Memberhsip 
+        IEnumerable<ISysemAgent> IAgentContext.Memberhsip 
             => Agents.Values;        
     }
 }

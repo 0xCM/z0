@@ -15,6 +15,17 @@ namespace Z0
     public readonly struct EventOrigin
     {
         /// <summary>
+        /// Uniquely identifies the logical event source
+        /// </summary>
+        public readonly ulong Location;
+
+        /// <summary>
+        /// The time of occurrence, expressed as number of elapsed ticks 
+        /// from some fixed point in time
+        /// </summary>
+        public readonly ulong Timestamp;
+
+        /// <summary>
         /// Constructs an origin from an ordered pair of location and timestamp
         /// </summary>
         /// <param name="loc">The location of occurence</param>
@@ -47,17 +58,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Uniquely identifies the logical event source
-        /// </summary>
-        public readonly ulong Location;
-
-        /// <summary>
-        /// The time of occurrence, expressed as number of elapsed ticks 
-        /// from some fixed point in time
-        /// </summary>
-        public readonly ulong Timestamp;
-
-        /// <summary>
         /// The originating server
         /// </summary>
         public uint Server
@@ -74,7 +74,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (uint) Location;
         }
-
 
         [MethodImpl(Inline)]
         public void Deconstruct(out ulong location, out ulong time)

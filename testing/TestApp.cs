@@ -13,6 +13,7 @@ namespace Z0
     
     using static zfunc;    
 
+
     /// <summary>
     /// Base type for test applications
     /// </summary>

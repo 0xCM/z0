@@ -6,15 +6,16 @@ namespace Z0
 {
     using System;
     using System.Threading.Tasks;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    
-    public abstract class ServiceAgent : IServiceAgent
+
+    /// <summary>
+    /// Defines base system agent abstraction
+    /// </summary>    
+    public abstract class SystemAgent : ISysemAgent
     {
-        protected ServiceAgent(AgentContext Context, AgentIdentity Identity)
+        protected SystemAgent(AgentContext Context, AgentIdentity Identity)
         {
             this.ServerId = Identity.ServerId;
             this.AgentId = Identity.AgentId;
@@ -52,7 +53,6 @@ namespace Z0
 
         public bool IsComplex
             => AgentId == UInt32.MaxValue;
-
             
         /// <summary>
         /// Specifies the current agent status
@@ -160,46 +160,13 @@ namespace Z0
         protected virtual void OnStop() {}
 
         /// <summary>
-        /// Overridden to perform service-specific initialization for startup
+        /// May be specialized to perform service-specific initialization/precondition operations
         /// </summary>
         protected virtual void OnStart(){}
 
         /// <summary>
-        /// Overridden to perform service-specific disposal/cleanup
+        /// May be specialized to perform service-specific cleanup/postcondition operations
         /// </summary>
         protected virtual void OnTerminate(){}
-
     }
-
-    /// <summary>
-    /// Defines an agent with a type-specific configuration
-    /// </summary>
-    /// <typeparam name="C"></typeparam>
-    public abstract class ServiceAgent<C> : ServiceAgent, IServiceAgent<C>
-    {
-        protected ServiceAgent(AgentContext Context, AgentIdentity Identity)
-            : base(Context, Identity)
-        {
-
-        }
-        
-        protected abstract Task Configure(C config);
-
-        async Task IAppService<C>.Configure(C config)
-        {
-            await Configure(config);
-            OnConfigured(config);
-        }
-
-        void OnConfigured(C config)
-        {
-            Configured?.BeginInvoke(config, new AsyncCallback(x => {}), this);
-        }
-
-        public event Action<C> Configured;
-
-        protected override sealed void OnConfigure(dynamic config)
-            => (this as IServiceAgent<C>).Configure((C)config);
-    }
-
 }

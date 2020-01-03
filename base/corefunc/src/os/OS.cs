@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     using System.Security;
-    using static zfunc;
-    using static As;
 
+    using static zfunc;
 
     /// <summary>
     /// Defines API for directly accessing OS resources
@@ -55,8 +54,7 @@ namespace Z0
         /// Gets the current value of the counter
         /// </summary>
         public static long Counter
-        {
-            
+        {            
             [MethodImpl(Inline)]
             get
             {
@@ -166,7 +164,6 @@ namespace Z0
         [DllImport(kernel)]
         static extern void QueryInterruptTime(ref ulong time);
 
-
         [DllImport(kernel)]
         static extern void QueryInterruptTimePrecise(ref ulong time);
 
@@ -176,7 +173,6 @@ namespace Z0
         [DllImport("kernel32.dll")]
         public static extern bool VirtualProtectEx(IntPtr hProc, IntPtr pCode, UIntPtr codelen, uint flags, out uint oldFlags); 
 
-
         [MethodImpl(Inline)]
         public static T* Liberate<T>(T* pBuffer, ulong length)
             where T : unmanaged
@@ -185,7 +181,6 @@ namespace Z0
             if (!OS.VirtualProtectEx(CurrentProcess, buffer, (UIntPtr)length, 0x40, out uint _))
                 ThrowLiberationError(buffer, length);
             return pBuffer;
-        }
-              
+        }             
     }
 }

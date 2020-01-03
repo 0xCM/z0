@@ -13,14 +13,12 @@ namespace Z0
 
     public class SystemTime
     {
-        static readonly ulong TimerTicksPerSecond = (ulong)Stopwatch.Frequency;
-
-        static ulong NsPerTimerTick = 1_000_000_000/TimerTicksPerSecond;
-
-        static readonly DateTime TimeOrigin = new DateTime(2019,01,01);
-        
         [MethodImpl(Inline)]
         public static ulong Timestamp(uint ServerId = 0)        
             => (ulong)(now().Ticks - TimeOrigin.Ticks);                
+
+        static ulong NsPerTimerTick => 1_000_000_000/(ulong)Stopwatch.Frequency;
+
+        static DateTime TimeOrigin => new DateTime(2019,01,01);        
     }
 }

@@ -4,16 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Threading.Tasks;
+    using System.Runtime.InteropServices;
 
     /// <summary>
-    /// Characterizes an event orignator
+    /// Defines identifiers for intrinsic system events
     /// </summary>
-    public interface IEventEmitter : IServiceAgent
-    {        
-
+    public static class IntrinsicEvents
+    {
+        public const ulong Pulse = 10;
     }
-
-
 }

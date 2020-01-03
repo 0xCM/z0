@@ -11,11 +11,11 @@ namespace Z0
 
     
     [EventSource(Name = SourceName)]    
-    public sealed class SystemEventWriter : EventWriter, ISystemEvents
+    public sealed class SystemEventWriter : EventWriter, IAgentEventSink
     {
         public const string SourceName = "zsyn/system-events";
 
-        public static readonly ISystemEvents Log = new SystemEventWriter();
+        public static readonly IAgentEventSink Log = new SystemEventWriter();
                 
         SystemEventWriter()
         {
@@ -35,10 +35,10 @@ namespace Z0
         /// Writes a system heartbeat event
         /// </summary>
         /// <param name="e">The event to write</param>    
-        void ISystemEvents.Pulse(PulseEvent e)
+        void IAgentEventSink.Pulse(PulseEvent e)
             => Pulse(e.Identity.EventKind, e.Identity.ServerId, e.Identity.AgentId, e.Identity.Timestamp);
 
-        void ISystemEvents.AgentTransitioned(AgentTransition data)        
+        void IAgentEventSink.AgentTransitioned(AgentTransition data)        
             => AgentTransitioned(2, data.Agent.ServerId, data.Agent.AgentId, data.Timestamp, BitConvert.GetBytes(data).ToArray());               
     }
 

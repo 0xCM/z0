@@ -3,18 +3,20 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    
     using static zfunc;
 
-    using static Registers;
+    public abstract class Context<T> : Context
+        where T : Context<T>
+    {                
+        protected Context(IPolyrand randomizer)
+            : base(randomizer)            
+        {
 
-    class App : TestApp<App>
-    {            
-        public static void Main(params string[] args)
-            => Run(args);
-    }
-
+        }
+    }   
 }

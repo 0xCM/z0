@@ -5,13 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Threading.Tasks;
-    using System.Collections.Generic;
     
+    using static zfunc;
+
     /// <summary>
-    /// Defines a server within a complex
+    /// Defines a logical server
     /// </summary>
-    public class SystemServer : ServiceAgent
+    public class SystemServer : SystemAgent
     {        
         public static SystemServer Define(AgentContext Context, ServerConfig Config)
             => new SystemServer(Context, Config);
@@ -25,9 +25,9 @@ namespace Z0
         {
             this.Config = Config;
             var hearbeat = PulseEmitter.Define(Context, 
-                IdentityPools.NextAgentId(ServerId), 
+                ServiceIdentityPool.NextAgentId(ServerId), 
                 new PulseEmitterConfig(new TimeSpan(0,0,1)));            
-            this.Worker = ServerProcess.Define(Context, ServerId, Config.CoreNumber, new IServiceAgent[]{hearbeat});
+            this.Worker = ServerProcess.Define(Context, ServerId, Config.CoreNumber, new ISysemAgent[]{hearbeat});
         }
 
         protected override async void OnStart()

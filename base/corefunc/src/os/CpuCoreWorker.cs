@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Runtime.CompilerServices;
@@ -14,8 +13,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Eccompasses a worker routine and bits of runtime state that
-    /// are scheduled to be executed on a specific core
+    /// Embodies an asynchrounous thread of execution that is assigned to a specific CPU core
     /// </summary>
     public class CpuCoreWorker<T>
     {        
@@ -133,42 +131,5 @@ namespace Z0
             var msg = appMsg(msgText, SeverityLevel.HiliteML);
             return msg;            
         }    
-    }
-
-    public static class CpuCoreWorker
-    {
-        static int WorkerId;
-        
-        static string WorkerName(uint cpucore)
-            => $"{Interlocked.Increment(ref WorkerId)}/{cpucore}";
-
-
-        static CpuCoreWorker<ulong> Example(IContext context)
-        {
-            ulong Sum(ulong max)
-            {
-                var sum = 0ul;
-                for(var i=0; i<(int)max; i++)
-                    sum += (ulong)i;
-                return sum;
-            }
-            
-            return Start(context, 1, Sum, (ulong)Pow2.T20, new TimeSpan(0,0,1));
-            
-        }
-
-        public static CpuCoreWorker<T> Start<T>(IContext context, uint cpucore, Func<T,T> worker, T state, TimeSpan frequency, ulong? MaxCycles = null)
-        {
-            var cpuWorker = new CpuCoreWorker<T>(context, cpucore, worker, state, frequency, MaxCycles);
-            var workerThread = new Thread(new ThreadStart(cpuWorker.Control))
-            {
-                IsBackground = true,
-                Name = WorkerName(cpucore)
-            };
-
-            workerThread.Start();
-            return cpuWorker;
-        }
-
     }
 }

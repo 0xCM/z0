@@ -160,7 +160,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector256<byte> vbfly(N1 n, Vector256<byte> x)
-            => vbutterfly(x,v66(n256,n8),1);
+            => vbutterfly(x,v666(n256,n8),1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -169,7 +169,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector256<ushort> vbfly(N1 n, Vector256<ushort> x)
-            => vbutterfly(x,v66(n256,n16),1);
+            => vbutterfly(x,v666(n256,n16),1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -178,7 +178,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector256<uint> vbfly(N1 n, Vector256<uint> x)
-            => vbutterfly(x,v66(n256,n32),1);
+            => vbutterfly(x,v666(n256,n32),1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -187,7 +187,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vbfly(N1 n, Vector256<ulong> x)
-            => vbutterfly(x,v66(n256,n64),1);
+            => vbutterfly(x,v666(n256,n64),1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior 2-bit segments
@@ -325,19 +325,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector128<byte> v666(N128 w, N8 n)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror8x4x2);
+            => CpuVector.vbroadcast(w,BitMasks.Central8x4x2);
 
         [MethodImpl(Inline)]
         static Vector128<ushort> v666(N128 w, N16 n)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror16x4x2);
+            => CpuVector.vbroadcast(w,BitMasks.Central16x4x2);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v666(N128 w, N32 n)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror32x4x2);
+            => CpuVector.vbroadcast(w,BitMasks.Central32x4x2);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v666(N128 w, N64 n)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror64x4x2);
+            => CpuVector.vbroadcast(w,BitMasks.Central64x4x2);
 
         [MethodImpl(Inline)]
         static Vector128<byte> v3C(N128 w, N8 f)
@@ -357,43 +357,43 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector128<ushort> v0FF0(N128 w, N16 n)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror16x16x8);
+            => CpuVector.vbroadcast(w,BitMasks.Central16x16x8);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v0FF0(N128 w, N32 n)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror32x16x8);
+            => CpuVector.vbroadcast(w,BitMasks.Central32x16x8);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v0FF0(N128 w, N64 n)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror64x16x8);
+            => CpuVector.vbroadcast(w,BitMasks.Central64x16x8);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v00FFFF00(N128 w)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror32x32x16);
+            => CpuVector.vbroadcast(w,BitMasks.Central32x32x16);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v00FFFF0000FFFF00(N128 w)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror64x32x16);
+            => CpuVector.vbroadcast(w,BitMasks.Central64x32x16);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v0000FFFFFFFF0000(N128 w)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror64x64x32);
+            => CpuVector.vbroadcast(w,BitMasks.Central64x64x32);
 
         [MethodImpl(Inline)]
-        static Vector256<byte> v66(N256 w, N8 n)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror8x4x2);
+        static Vector256<byte> v666(N256 w, N8 n)
+            => CpuVector.vbroadcast(w,BitMasks.Central8x4x2);
 
         [MethodImpl(Inline)]
-        static Vector256<ushort> v66(N256 w, N16 n)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror16x4x2);
+        static Vector256<ushort> v666(N256 w, N16 n)
+            => CpuVector.vbroadcast(w,BitMasks.Central16x4x2);
 
         [MethodImpl(Inline)]
-        static Vector256<uint> v66(N256 w, N32 n)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror32x4x2);
+        static Vector256<uint> v666(N256 w, N32 n)
+            => CpuVector.vbroadcast(w,BitMasks.Central32x4x2);
 
         [MethodImpl(Inline)]
-        static Vector256<ulong> v66(N256 w, N64 n)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror64x4x2);
+        static Vector256<ulong> v666(N256 w, N64 n)
+            => CpuVector.vbroadcast(w,BitMasks.Central64x4x2);
 
         [MethodImpl(Inline)]
         static Vector256<byte> v3C(N256 w, N8 n)
@@ -413,29 +413,26 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector256<ushort> v0FF0(N256 w, N16 n)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror16x16x8);
+            => CpuVector.vbroadcast(w,BitMasks.Central16x16x8);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v0FF0(N256 w, N32 n)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror32x16x8);
+            => CpuVector.vbroadcast(w,BitMasks.Central32x16x8);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v0FF0(N256 w, N64 n)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror64x16x8);
+            => CpuVector.vbroadcast(w,BitMasks.Central64x16x8);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v00FFFF00(N256 w)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror32x32x16);
+            => CpuVector.vbroadcast(w,BitMasks.Central32x32x16);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v00FFFF0000FFFF00(N256 w)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror64x32x16);
+            => CpuVector.vbroadcast(w,BitMasks.Central64x32x16);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v0000FFFFFFFF0000(N256 w)
-            => CpuVector.vbroadcast(w,BitMasks.Mirror64x64x32);
-
+            => CpuVector.vbroadcast(w,BitMasks.Central64x64x32);
     }
-
-
 }

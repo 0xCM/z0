@@ -4,6 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+
+    using static zfunc;
+
     /// <summary>
     /// Bears witness to an occurence of something of identifiable interest 
     /// at a unique point in spacetime. The (Location,Timestamp,EventKind) triplet
@@ -15,48 +21,53 @@ namespace Z0
     public interface IEvent
     {
         /// <summary>
-        /// Specifies an event classifer that can be used to agregate/distinguish 
-        /// sorts of events
+        /// Identifies a system event with respect to time/space/subject
         /// </summary>
-        /// <remarks>
-        /// Note that the intent is not to provide a means of payload type classification
-        /// The kind and payload are orthogonal from the abstraction POV, but may
-        /// indeed be related at the implementation level.
-        /// </remarks>
-        ulong EventKind {get;}
+        EventIdentity Identity {get;}   
+
+        /// <summary>
+        /// Specifies an event classifer that can be used to agregate/distinguish sorts of events
+        /// </summary>
+        ulong EventKind => Identity.EventKind;
 
         /// <summary>
         /// Identifies the server that originated the event
         /// </summary>
-        uint ServerId {get;}
+        uint ServerId => Identity.ServerId;
 
         /// <summary>
         /// Identifies the server-owned agent that originated the event
         /// </summary>
-        uint AgentId {get;}
+        uint AgentId  => Identity.AgentId;
         
         /// <summary>
         /// A value that uniquely identifies the logical event source, predicated
         /// on server and agent identity
         /// </summary>
-        ulong LocationId {get;}
+        ulong LocationId  => Identity.Location;
 
         /// <summary>
         /// The time of occurrence, expressed as number of elapsed units
         /// from some fixed point in time
         /// </summary>
-        ulong Timestamp {get;}
-
+        ulong Timestamp  => Identity.Timestamp;
     }
 
     /// <summary>
-    /// Bears witness to an occurence of something of interest 
-    /// at unique point in spacetime along with a data payload
-    /// that describes what occurred
+    /// Characterizes a system event with a type-specific payload
     /// </summary>
+    /// <typeparam name="T">The payload type</typeparam>
     public interface IEvent<T> : IEvent
     {
         T Payload {get;}
-    
     }
+
+    /// <summary>
+    /// Characterizes an event orignator
+    /// </summary>
+    public interface IEventEmitter : ISysemAgent
+    {        
+
+    }
+
 }

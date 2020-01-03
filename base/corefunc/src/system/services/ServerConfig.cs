@@ -19,7 +19,6 @@ namespace Z0
             this.ServerId = ServerId;
             this.ServerName = ServerName;
             this.CoreNumber = CoreNumber;
-
         }
 
         /// <summary>
@@ -40,5 +39,4 @@ namespace Z0
         public override string ToString()
             => $"Server {ServerId}, Core={CoreNumber}";
     }
-
 }

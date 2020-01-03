@@ -5,17 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
         
     using static zfunc;
 
     /// <summary>
-    /// Represents an application-level/logical event that contains
-    /// only identifying/classifing information in the form
-    /// of an event identifier
+    /// Identifies an application-level/logical event
     /// </summary>
     public readonly struct AppEvent
     {
@@ -36,8 +32,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Represents an application-level/logical event with which data
-    /// specific to an event class is associated
+    /// Represents an application-level/logical event with which data specific to an event class is associated
     /// </summary>
     public readonly struct AppEvent<T>
         where T : unmanaged
@@ -72,7 +67,6 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public Span<byte> Serialize()
-            => BitConvert.GetBytes(this);
-        
+            => BitConvert.GetBytes(this);       
     }
 }

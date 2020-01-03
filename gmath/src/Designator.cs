@@ -12,11 +12,10 @@ namespace Z0.Designators
 
     using static zfunc;
 
-
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class PrimalMath : AssemblyDesignator<PrimalMath>
+    public sealed class GMath : AssemblyDesignator<GMath>
     {
 
     }

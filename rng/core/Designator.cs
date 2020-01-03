@@ -4,15 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
 {
-
-
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class Rng : AssemblyDesignator<Rng>
+    public sealed class RngCore : AssemblyDesignator<RngCore>
     {
 
     }
-
-
 }

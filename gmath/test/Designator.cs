@@ -9,7 +9,7 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class PrimalMathTest : AssemblyDesignator<PrimalMathTest>
+    public sealed class GMathTest : AssemblyDesignator<GMathTest>
     {
 
     }

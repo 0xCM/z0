@@ -10,20 +10,19 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Originates events
+    /// Defines base type for event originators
     /// </summary>
-    public abstract class EventEmitter : ServiceAgent, IEventEmitter
+    public abstract class EventEmitter : SystemAgent, IEventEmitter
     {        
         protected EventEmitter(AgentContext Context, AgentIdentity Identity)
             :base(Context,Identity)
         {
             
         }
-
     }
 
     /// <summary>
-    /// Originates events of a specific type
+    /// Base type for event type-specific event originators
     /// </summary>
     public abstract class EventEmitter<E> : EventEmitter
     {
@@ -32,6 +31,5 @@ namespace Z0
         {
             
         }
-
     }
 }

@@ -47,4 +47,4 @@ dotnet sln add machines/test/z0.machines.test.csproj
 dotnet sln add testing/z0.testing.csproj
 dotnet sln add devops/z0.devops.csproj
 
-dotnet sln add test/z0.test.csproj
+dotnet sln add .control/z0.control.csproj

@@ -7,10 +7,12 @@ namespace Z0
     using System;
     using System.Timers;
     using System.Threading.Tasks;
-    using System.Collections.Generic;
 
     using static zfunc;
 
+    /// <summary>
+    /// Produces a periodic pulse event
+    /// </summary>
     public class PulseEmitter : EventEmitter<PulseEvent>
     {        
         public static PulseEmitter Define(AgentContext Context, AgentIdentity Identity, PulseEmitterConfig Config)  

@@ -20,7 +20,6 @@ namespace Z0
             : base(Context)
         {
 
-
         }
 
         IAgentContext AgentContext;        

@@ -5,14 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Timers;
-    using System.Threading.Tasks;
-    using System.Collections.Generic;
 
     using static zfunc;
 
     /// <summary>
-    /// Defines configuration parameters for the <see cref='PulseEmitter'/> service
+    /// Defines configuration parameters for pulse emission
     /// </summary>
     public sealed class PulseEmitterConfig
     {

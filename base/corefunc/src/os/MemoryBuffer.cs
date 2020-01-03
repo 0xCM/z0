@@ -46,15 +46,6 @@ namespace Z0
             Clear();
         }
 
-        // [MethodImpl(Inline)]
-        // MemoryBuffer(ByteSize size)
-        // {
-        //     this.source = Marshal.AllocHGlobal(size + 8);         
-        //     this.aligned =new IntPtr(16 * ((long)source + 15)/16);
-        //     this.content = new Span<byte>(aligned.ToPointer(), size);
-        //     Clear();
-        // }
-
         [MethodImpl(Inline)]
         MemoryBuffer(ReadOnlySpan<byte> content)
             : this(content.Length)
@@ -147,9 +138,5 @@ namespace Z0
         {
             Marshal.FreeHGlobal(pMem);
         }
-
-
     }
-
-
 }

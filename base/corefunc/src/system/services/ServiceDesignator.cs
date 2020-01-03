@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Threading.Tasks;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Identifies a service implementation
@@ -41,8 +39,5 @@ namespace Z0
          
          public override bool Equals(object obj)
             => obj is ServiceDesignator k ? Equals(k) : false;
-
     }        
-
-
 }

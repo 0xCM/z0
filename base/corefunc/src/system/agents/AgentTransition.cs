@@ -47,5 +47,4 @@ namespace Z0
         public override string ToString()
             => $"Agent {Agent}: {SourceState} -> {TargetState}";
     }
-
 }

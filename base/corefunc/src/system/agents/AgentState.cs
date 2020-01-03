@@ -49,6 +49,4 @@ namespace Z0
         Error = uint.MaxValue
 
     }
-
-
 }

@@ -4,29 +4,23 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Runtime.InteropServices;
-
-    public enum CommonEventKinds : ulong
-    {
-        PulseEvent = 10,
-    }
+    using System;
 
     /// <summary>
     /// Represents a pulse/tick/heartbeat relative to some frequency
     /// </summary>
-    public readonly struct PulseEvent
+    public readonly struct PulseEvent : IEvent
     {
-        public const CommonEventKinds Kind = CommonEventKinds.PulseEvent;
-
+        public const ulong SystemId = IntrinsicEvents.Pulse;
     
         public static PulseEvent Define(uint ServerId, uint AgentId, ulong Timestamp)
-            => new PulseEvent(new EventIdentity(ServerId, AgentId, Timestamp, (ulong)Kind));
+            => new PulseEvent(new EventIdentity(ServerId, AgentId, Timestamp, SystemId));
 
         PulseEvent(EventIdentity Identity)
         {
             this.Identity = Identity;
         }
 
-        public readonly EventIdentity Identity;
+        public EventIdentity Identity {get;}
     }
 }

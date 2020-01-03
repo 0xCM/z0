@@ -5,14 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Threading;
-    using System.Threading.Tasks;
     using System.Collections.Concurrent;
+    using System.Threading;
     using System.Runtime.CompilerServices;
-
-    using static zfunc;
     
-    public class IdentityPools
+    using static zfunc;
+
+    public class ServiceIdentityPool
     {
         const uint FirstAgentId = 111;
 
@@ -33,18 +32,15 @@ namespace Z0
             => (uint)Interlocked.Increment(ref TheOnly.LastServerId);
 
         int LastServerId = (int)(FirstServerId - 1);
-
         
-        static IdentityPools TheOnly = new IdentityPools();
-
+        static ServiceIdentityPool TheOnly = new ServiceIdentityPool();
 
         ConcurrentDictionary<uint,uint> Agents {get;}
             = new ConcurrentDictionary<uint, uint>();
         
-        IdentityPools()
+        ServiceIdentityPool()
         {
 
         }
-
     }
 }
