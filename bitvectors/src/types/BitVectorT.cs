@@ -85,7 +85,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator <<(BitVector<T> x, int offset)
-            => BitVector.sll(x,offset);
+            => BitVector.sll(x,(byte)offset);
 
         /// <summary>
         /// Shifts the source bits rightwards
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator >>(BitVector<T> x, int offset)
-            => BitVector.srl(x,offset);
+            => BitVector.srl(x,(byte)offset);
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -268,7 +268,7 @@ namespace Z0
         public BitVector<T> this[int first, int last]
         {
             [MethodImpl(Inline)]
-            get => BitVector.between(this, first, last);
+            get => BitVector.seg(this, first, last);
         }
 
         [MethodImpl(Inline)]

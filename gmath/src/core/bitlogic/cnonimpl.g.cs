@@ -5,11 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
+    
     using static zfunc;
-    using static As;
+
     using static AsIn;
 
     partial class gmath
@@ -29,9 +28,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.cnonimpl(uint8(a), uint8(b)));
+                return convert<T>(math.cnonimpl(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.cnonimpl(uint16(a), uint16(b)));
+                return convert<T>(math.cnonimpl(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(math.cnonimpl(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
@@ -45,9 +44,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(math.cnonimpl(int8(a), int8(b)));
+                return convert<T>(math.cnonimpl(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(math.cnonimpl(int16(a), int16(b)));
+                return convert<T>(math.cnonimpl(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(int))
                 return generic<T>(math.cnonimpl(int32(a), int32(b)));
             else if(typeof(T) == typeof(long))

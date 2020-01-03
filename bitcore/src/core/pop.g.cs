@@ -15,7 +15,6 @@ namespace Z0
 
     partial class gbits
     {
-
         /// <summary>
         /// Counts the number enabled source bits
         /// </summary>

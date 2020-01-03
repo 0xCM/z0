@@ -29,6 +29,19 @@ namespace Z0
             else            
                 throw unsupported<T>();
         }
+
+        [MethodImpl(Inline)]
+        public static T modmul<T>(T a, T b, T m)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return generic<T>(math.modmul(float32(a), float32(b), float32(m)));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(math.modmul(float64(a), float64(b), float64(m)));
+            else
+                throw unsupported<T>();
+        }
+
     }
 
     partial class fmath

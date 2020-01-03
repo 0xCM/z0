@@ -5,16 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+
     using static zfunc;
+
     using static As;
     using static AsIn;
 
     partial class gbits
     {
-
         /// <summary>
         /// Isolate least set bit and complement, computed by dst := ~src | (src - 1),
         /// where all bits in the target are set except for the least set bit in the source
@@ -36,8 +36,5 @@ namespace Z0
             else            
                 throw unsupported<T>();
         }           
-
-
     }
-
 }

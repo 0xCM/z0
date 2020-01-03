@@ -8,13 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static zfunc;    
-    using static As;
+
     using static AsIn;
 
     partial class gmath
     {
         /// <summary>
-        /// Computes the bitwise nor c := ~(a | b) for unsigned integers a and b
+        /// Computes the bitwise nor c := ~(a | b) for integral values a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
@@ -28,9 +28,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.nor(uint8(a), uint8(b)));
+                return convert<T>(math.nor(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.nor(uint16(a), uint16(b)));
+                return convert<T>(math.nor(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(math.nor(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
@@ -44,9 +44,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(math.nor(int8(a), int8(b)));
+                return convert<T>(math.nor(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(math.nor(int16(a), int16(b)));
+                return convert<T>(math.nor(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(int))
                 return generic<T>(math.nor(int32(a), int32(b)));
             else if(typeof(T) == typeof(long))

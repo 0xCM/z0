@@ -8,14 +8,6 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    /// <summary>
-    /// Opcodes for scalar bit-level operations
-    /// </summary>
-    [OpCodeProvider]
-    public static partial class bitvectors
-    {
-
-    }
 
     /// <summary>
     /// Primal math op codes

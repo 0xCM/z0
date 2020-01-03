@@ -22,18 +22,6 @@ namespace Z0.OpCodes
         public static void split_exact(ulong src, out uint x0, out uint x1)
             => Bits.split(src, out x0, out x1);
 
-        public static byte inject_8u(byte src, byte dst, int start, int len)
-            => gbits.bitmap(src,dst,start,len);
-
-        public static ushort inject_16u(ushort src, ushort dst, int start, int len)
-            => gbits.bitmap(src,dst,start,len);
-
-        public static uint inject_32u(uint src, uint dst, int start, int len)
-            => gbits.bitmap(src,dst,start,len);
-
-        public static ulong inject_64u(ulong src, ulong dst, int start, int len)
-            => gbits.bitmap(src,dst,start,len);
-
 
         public static ulong pow2_20() => NatMath.pow2(n20);
 

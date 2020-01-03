@@ -29,9 +29,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.nand(uint8(a), uint8(b)));
+                return convert<T>(math.nand(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.nand(uint16(a), uint16(b)));
+                return convert<T>(math.nand(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(math.nand(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
@@ -45,9 +45,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(math.nand(int8(a), int8(b)));
+                return convert<T>(math.nand(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(math.nand(int16(a), int16(b)));
+                return convert<T>(math.nand(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(int))
                 return generic<T>(math.nand(int32(a), int32(b)));
             else if(typeof(T) == typeof(long))

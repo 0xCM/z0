@@ -23,20 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vblend<T>(Vector128<T> x, Vector128<T> y, Vector128<byte> spec)        
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vblend_u(x, y, spec);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vblend_i(x, y, spec);
-            else 
-                throw unsupported<T>();
-        }
+                => vblend_u(x,y,spec);
 
         /// <summary>
         /// Forms a vector z[i] = testbit(spec[i],7) ? x[i] : y[i] where i = 0,...31
@@ -47,33 +34,44 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vblend<T>(Vector256<T> x, Vector256<T> y, Vector256<byte> spec)        
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vblend_u(x, y, spec);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vblend_i(x, y, spec);
-            else 
-                throw unsupported<T>();
-        }
+                => vblend_u(x,y,spec);
+
+        /// <summary>
+        /// Forms a vector z[i] = testbit(spec,i) ? x[i] : y[i] where i = 0,...15
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vblend<T>(Vector128<T> x, Vector128<T> y, ushort spec)
+            where T : unmanaged
+                => vblend(x,y,dinx.vmakemask(spec));
+
+        /// <summary>
+        /// Forms a vector z[i] = testbit(spec,i) ? x[i] : y[i] where i = 0,...31
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector256<T> vblend<T>(Vector256<T> x, Vector256<T> y, uint spec)        
+            where T : unmanaged
+                => vblend(x,y,dinx.vmakemask(spec));
 
         [MethodImpl(Inline)]
         static Vector256<T> vblend_u<T>(Vector256<T> x, Vector256<T> y, Vector256<byte> spec)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vblend(vcast8u(x), vcast8u(y), spec));
+                return vgeneric<T>(dinx.vblend(v8u(x), v8u(y), spec));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vblend(vcast16u(x), vcast16u(y), spec));
+                return vgeneric<T>(dinx.vblend(v16u(x), v16u(y), spec));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vblend(vcast32u(x), vcast32u(y), spec));
+                return vgeneric<T>(dinx.vblend(v32u(x), v32u(y), spec));
+            else if(typeof(T) == typeof(ulong))
+                return vgeneric<T>(dinx.vblend(v64u(x), v64u(y), spec));
             else
-                return vgeneric<T>(dinx.vblend(vcast64u(x), vcast64u(y), spec));
+                return vblend_i(x,y,spec);
         }
 
         [MethodImpl(Inline)]
@@ -81,13 +79,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vblend(vcast8i(x), vcast8i(y), spec));
+                return vgeneric<T>(dinx.vblend(v8i(x), v8i(y), spec));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vblend(vcast16i(x), vcast16i(y), spec));
+                return vgeneric<T>(dinx.vblend(v16i(x), v16i(y), spec));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vblend(vcast32i(x), vcast32i(y), spec));
+                return vgeneric<T>(dinx.vblend(v32i(x), v32i(y), spec));
+            else if(typeof(T) == typeof(long))
+                return vgeneric<T>(dinx.vblend(v64i(x), v64i(y), spec));
             else
-                return vgeneric<T>(dinx.vblend(vcast64i(x), vcast64i(y), spec));
+                throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
@@ -95,13 +95,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vblend(vcast8u(x), vcast8u(y), spec));
+                return vgeneric<T>(dinx.vblend(v8u(x), v8u(y), spec));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vblend(vcast16u(x), vcast16u(y), spec));
+                return vgeneric<T>(dinx.vblend(v16u(x), v16u(y), spec));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vblend(vcast32u(x), vcast32u(y), spec));
+                return vgeneric<T>(dinx.vblend(v32u(x), v32u(y), spec));
+            else if(typeof(T) == typeof(ulong))
+                return vgeneric<T>(dinx.vblend(v64u(x), v64u(y), spec));
             else
-                return vgeneric<T>(dinx.vblend(vcast64u(x), vcast64u(y), spec));
+                return vblend_i(x,y,spec);
         }
 
         [MethodImpl(Inline)]
@@ -109,17 +111,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return As.vgeneric<T>(dinx.vblend(vcast8i(x), vcast8i(y), spec));
+                return vgeneric<T>(dinx.vblend(v8i(x), v8i(y), spec));
             else if(typeof(T) == typeof(short))
-                return As.vgeneric<T>(dinx.vblend(vcast16i(x), vcast16i(y), spec));
+                return vgeneric<T>(dinx.vblend(v16i(x), v16i(y), spec));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vblend(vcast32i(x), vcast32i(y), spec));
+                return vgeneric<T>(dinx.vblend(v32i(x), v32i(y), spec));
+            else if(typeof(T) == typeof(long))
+                return vgeneric<T>(dinx.vblend(v64i(x), v64i(y), spec));
             else
-                return vgeneric<T>(dinx.vblend(vcast64i(x), vcast64i(y), spec));
+                throw unsupported<T>();
         }
-
-
-
     }
-
 }

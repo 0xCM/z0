@@ -11,7 +11,7 @@ namespace Z0
 
     partial class BCTypes
     {
-        public readonly struct Between<T> : IPrimalUnaryRange8Op<T>
+        public readonly struct Between<T> : IUnaryOpImm8x2<T>
             where T : unmanaged        
         {
             public static Between<T> Op => default;

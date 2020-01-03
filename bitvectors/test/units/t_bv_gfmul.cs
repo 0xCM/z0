@@ -10,9 +10,9 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_bv_gfmul : t_bv<t_bv_gfmul>
+    public class t_bvgfmul : t_bv<t_bvgfmul>
     {
-        public void pbv_gfmul_8()
+        public void bvgfmul_256()
         {
             for(var i=0; i<RepCount; i++)
             {
@@ -26,8 +26,6 @@ namespace Z0
                 Claim.eq(p1,p4);
             }
         }
-
-
         public void gfpoly_format()
         {
             var p1 = GfPoly.Gfp_8_4_3_2_0;
@@ -39,7 +37,7 @@ namespace Z0
             Claim.eq(p1.Format(),p2.Format());                
         }
 
-        public void gfmul_8()
+        public void bvgfmul_8()
         {
             var expect =  new byte[,]
             {

@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="src">The source bitstring</param>
         [MethodImpl(Inline)]
         public static BitVector8 from(N8 n, bit b0, bit b1, bit b2, bit b3)
-            => (byte)Bits.bitpack(b0, b1, b2, b3);
+            => (byte)Bits.pack(b0, b1, b2, b3);
 
         /// <summary>
         /// Creates an 8-bit bitvector from 8 explicit bits
@@ -100,7 +100,7 @@ namespace Z0
         /// <param name="src">The source bitstring</param>
         [MethodImpl(Inline)]
         public static BitVector8 from(N8 n, bit b0, bit b1, bit b2, bit b3, bit b4, bit b5, bit b6, bit b7)
-            => (byte)Bits.bitpack(b0, b1, b2, b3, b4, b5, b6, b7);
+            => (byte)Bits.pack(b0, b1, b2, b3, b4, b5, b6, b7);
 
         /// <summary>
         /// Creates an 8-bit bitvector from 8 explicit bits
@@ -108,7 +108,7 @@ namespace Z0
         /// <param name="src">The source bitstring</param>
         [MethodImpl(Inline)]
         public static BitVector8 from(N8 n, int b0, int b1, int b2, int b3, int b4, int b5, int b6, int b7)
-            => (byte)Bits.bitpack((bit)b0, (bit)b1, (bit)b2, (bit)b3, (bit)b4, (bit)b5, (bit)b6, (bit)b7);
+            => (byte)Bits.pack((bit)b0, (bit)b1, (bit)b2, (bit)b3, (bit)b4, (bit)b5, (bit)b6, (bit)b7);
 
         /// <summary>
         /// Creates an 8-bit bitvector from a byte
@@ -190,16 +190,6 @@ namespace Z0
         public static BitVector32 from(N32 n, byte x0, byte x1, byte x2, byte x3)
             => new BitVector32(Bits.concat(x0,x1,x2,x3));
 
-        /// <summary>
-        /// Creates a vector from a bit parameter array
-        /// </summary>
-        /// <param name="src">The source bitstring</param>
-        [MethodImpl(Inline)]
-        public static BitVector32 from(N32 n, params bit[] src)
-        {
-            var data = 0u;
-            return Bits.bitpack(src, ref data);
-        }
 
         /// <summary>
         /// Creates a vector from two unsigned 16-bit integers

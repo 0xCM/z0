@@ -40,7 +40,7 @@ namespace Z0
             var len = bitsize<T>();
             var one = gmath.one<T>();
             for(var i=0; i < len; i++)
-                dst[i] = gmath.sll(one,i);
+                dst[i] = gmath.sll(one,(byte)i);
             return dst;
         }
 

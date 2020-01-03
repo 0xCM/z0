@@ -46,5 +46,4 @@ namespace Z0
                 => TakeIMask256<T>.Op;
 
     }
-
 }

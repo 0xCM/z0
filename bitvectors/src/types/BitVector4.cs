@@ -111,11 +111,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitVector4 operator >>(BitVector4 x, int shift)
-            => BitVector.srl(x,shift);
+            => BitVector.srl(x,(byte)shift);
 
         [MethodImpl(Inline)]
         public static BitVector4 operator <<(BitVector4 x, int shift)
-            => BitVector.sll(x,shift);
+            => BitVector.sll(x,(byte)shift);
 
         /// <summary>
         /// Determines whether operand content is identical
@@ -233,7 +233,7 @@ namespace Z0
         public BitVector4 this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get => BitVector.between(this,first,last);
+            get => BitVector.seg(this,first,last);
         }
 
         [MethodImpl(Inline)]

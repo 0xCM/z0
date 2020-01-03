@@ -36,7 +36,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         /// <remarks>See https://stackoverflow.com/questions/17803889/set-or-reset-a-given-bit-without-branching</remarks>
         [MethodImpl(Inline)]
-        public static T setnb<T>(T src, int pos, bit value)
+        public static T setnb<T>(T src, byte pos, bit value)
             where T : unmanaged
         {
             var x = gmath.negate(gmath.sll(gmath.one<T>(), pos));            
@@ -44,6 +44,5 @@ namespace Z0
             var z = gmath.and(src, x);
             return gmath.and(z, y);
         }
-
     }
 }

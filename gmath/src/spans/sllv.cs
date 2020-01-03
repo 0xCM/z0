@@ -17,7 +17,7 @@ namespace Z0
         {
             var count = length(src,offsets);
             for(var i=0; i<count; i++)
-                dst[i] = gmath.sll(src[i], convert<T,int>(offsets[i]));
+                dst[i] = gmath.sll(src[i], convert<T,byte>(offsets[i]));
             return dst;
         }
 

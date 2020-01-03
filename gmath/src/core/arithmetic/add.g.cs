@@ -21,22 +21,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T add<T>(T a, T b)
             where T : unmanaged
-                => unsigned<T>() ? add_u(a,b) 
-                 : signedint<T>() ? add_i(a,b) 
-                 : gfp.add(a,b);
+                => add_u(a,b);
 
         [MethodImpl(Inline)]
         static T add_u<T>(T a, T b)
             where T : unmanaged                
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.add(uint8(a), uint8(b)));
+                return convert<T>(math.add(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.add(uint16(a), uint16(b)));
+                return convert<T>(math.add(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(math.add(uint32(a), uint32(b)));
-            else 
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.add(uint64(a),  uint64(b)));
+            else    
+                return add_i(a,b);
         }
 
         [MethodImpl(Inline)]
@@ -44,13 +44,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(math.add(int8(a), int8(b)));
+                return convert<T>(math.add(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(math.add(int16(a), int16(b)));
+                return convert<T>(math.add(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(int))
                  return generic<T>(math.add(int32(a), int32(b)));
-            else 
+            else if(typeof(T) == typeof(ulong))
                  return generic<T>(math.add(int64(a), int64(b)));
+            else
+                return gfp.add(a,b);
         }
 
     }

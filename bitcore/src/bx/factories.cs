@@ -34,6 +34,14 @@ namespace Z0
             where T : unmanaged        
                 => BitSlice<T>.Op;
 
+        [MethodImpl(Inline)]
+        public static PopCount<T> pop<T>(T t = default)
+            where T : unmanaged        
+                => PopCount<T>.Op;
 
+        [MethodImpl(Inline)]
+        public static Dot<T> dot<T>(T t = default)
+            where T : unmanaged        
+                => Dot<T>.Op;
     }
 }

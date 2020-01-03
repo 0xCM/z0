@@ -224,7 +224,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static T sll<T>(T a, int offset)
             where T : unmanaged
-                => gmath.sll(a,offset);
+                => gmath.sll(a,(byte)offset);
 
         [MethodImpl(Inline)]
         public static T srl<T>(T a, int offset)

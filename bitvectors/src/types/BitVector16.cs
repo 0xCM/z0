@@ -124,7 +124,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector16 operator <<(BitVector16 x, int shift)
-            => BitVector.sll(x,shift);
+            => BitVector.sll(x,(byte)shift);
 
         /// <summary>
         /// Right-shifts the bits in the source
@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector16 operator >>(BitVector16 x, int shift)
-            => BitVector.srl(x,shift);
+            => BitVector.srl(x,(byte)shift);
 
         /// <summary>
         /// Arithmetically increments the source vector 
@@ -320,7 +320,7 @@ namespace Z0
         public BitVector16 this[int first, int last]
         {
             [MethodImpl(Inline)]
-            get => BitVector.between(this, first, last);
+            get => BitVector.seg(this, first, last);
         }
 
         [MethodImpl(Inline)]

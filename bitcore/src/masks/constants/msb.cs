@@ -333,14 +333,13 @@ namespace Z0
         /// </summary>
         public const ulong Msb64x8x7 = (ulong)Msb32x8x7 | (ulong)Msb32x8x7 << 32;
 
-
         /// <summary>
         /// [0b1100]
         /// </summary>
         public const byte Msb4x1x2 = 0b1100;
 
         /// <summary>
-        /// [0b1100_1100]
+        /// [11001100]
         /// </summary>
         public const byte Msb8x2x2 = Msb4x1x2 | Msb4x1x2 << 4;
 

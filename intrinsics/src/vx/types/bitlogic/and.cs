@@ -12,7 +12,6 @@ namespace Z0
 
     using static OpSkeleta;
 
-
     partial class VXTypes
     {
         public abstract class CAnd<W,V,T> : VBinOpD<W,V,T>

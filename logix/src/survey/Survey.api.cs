@@ -5,10 +5,8 @@
 namespace Z0.Logix
 {        
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Threading;
+
     using static zfunc;
 
     public static class Survey
@@ -24,7 +22,6 @@ namespace Z0.Logix
         public static Survey<T> Template<T>(uint id, string name, int length, int width)
             where T : unmanaged
         {
-
             var questions = new Question<T>[length];
 
             for(uint i=0u, questionId = 1; i< length; i++, questionId++)
@@ -34,7 +31,7 @@ namespace Z0.Logix
                 for(var j = 0u; j< width; j++)
                 {                    
                     choices[j] = Choice(choiceId, ChoiceLabel(j));
-                    choiceId = gmath.sll(choiceId, 1);                    
+                    choiceId = gmath.sll(choiceId, (byte)1);                    
                 }
                 questions[i] = Question(questionId, $"Question {questionId}", 1, choices);
             }
@@ -223,7 +220,6 @@ namespace Z0.Logix
             for(var i=0; i< rowcount; i++)
                 dst[i] = Vector(src.Answered[i]);
             return dst;
-
         }
 
         static string ChoiceLabel(uint index)
@@ -244,6 +240,5 @@ namespace Z0.Logix
         /// </summary>
         static ReadOnlySpan<byte> ChoiceCodes 
             => new byte[26]{65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90};
-
     }
 }

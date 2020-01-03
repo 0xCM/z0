@@ -11,12 +11,12 @@ namespace Z0
 
     partial class BCTypes
     {
-        public readonly struct BitSlice<T> : IPrimalUnaryRange8Op<T>
+        public readonly struct BitSlice<T> : IUnaryOpImm8x2<T>
             where T : unmanaged        
         {
             public static BitSlice<T> Op => default;
 
-            public const string Name = "between";
+            public const string Name = "bitslice";
 
             public string Moniker => moniker<T>(Name);
 

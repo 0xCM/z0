@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector128<N,T> operator <<(in BitVector128<N,T> x, int s)
-            => BitVector.sll(x,s);
+            => BitVector.sll(x,(byte)s);
 
         /// <summary>
         /// Shifts the source bits rightwards
@@ -115,8 +115,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector128<N,T> operator >>(in BitVector128<N,T> x, int s)
-            => BitVector.srl(x,s);
-
+            => BitVector.srl(x,(byte)s);
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise

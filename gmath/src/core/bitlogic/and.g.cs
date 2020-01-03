@@ -8,9 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static zfunc;    
-    using static As;
     using static AsIn;
-
 
     partial class gmath
     {
@@ -30,7 +28,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.and(uint8(a), uint8(b)));
+                return convert<T>(math.and(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(math.and(uint16(a), uint16(b)));
             else if(typeof(T) == typeof(uint))

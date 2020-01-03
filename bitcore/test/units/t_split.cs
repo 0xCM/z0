@@ -96,37 +96,6 @@ namespace Z0
         }
 
 
-        public void sb_pack_span_32()
-        {
-            var x0 = BitVector.from(n32,0b00001010110000101001001111011001u);
-            var x1 = BitVector.from(n32,0b00001010110110101001001111000001u);
-            var src = Random.Span<byte>(Pow2.T04).ReadOnly();
-            var packed = span<uint>(src.Length / 4);
-            gbits.pack(src, packed);
-
-            for(var i = 0; i<packed.Length; i++)
-            {
-                 var x = BitVector.from(n32,BitConverter.ToUInt32(src.Slice(4*i)));
-                 var y = BitVector.from(n32,packed[i]);
-                Claim.eq((uint)x, (uint)y, AppMsg.Error($"{x.ToBitString()} != {y.ToBitString()}"));
-            }        
-        }
-
-        public void sb_pack_span_64()
-        {
-            var x0 = BitVector.from(n32,0b00001010110000101001001111011001u);
-            var x1 = BitVector.from(n32,0b00001010110110101001001111000001u);
-            var src = Random.Span<byte>(Pow2.T04).ReadOnly();
-            var packed = span<ulong>(src.Length / 8);
-            gbits.pack(src, packed);
-
-            for(var i = 0; i<packed.Length; i++)
-            {
-                 var x = BitVector.from(n64, BitConverter.ToUInt64(src.Slice(8*i)));
-                 var y = BitVector.from(n64, packed[i]);
-                Claim.eq((ulong)x, (ulong)y, AppMsg.Error($"{x.ToBitString()} != {y.ToBitString()}"));
-            }        
-        }
 
         public void sb_pack_split_16()
         {

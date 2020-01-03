@@ -53,19 +53,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(math.modmul(int64(a), int64(b), int64(m)));
             else
-                return modmul_f(a,b,m);            
-        }
-
-        [MethodImpl(Inline)]
-        static T modmul_f<T>(T a, T b, T m)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return generic<T>(math.modmul(float32(a), float32(b), float32(m)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(math.modmul(float64(a), float64(b), float64(m)));
-            else
-                throw unsupported<T>();
+                return gfp.modmul(a,b,m);            
         }
     }
 }

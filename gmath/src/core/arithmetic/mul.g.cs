@@ -42,9 +42,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(math.mul(int8(a), int8(b)));
+                return convert<T>(math.mul(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(math.mul(int16(a), int16(b)));
+                return convert<T>(math.mul(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(int))
                  return generic<T>(math.mul(int32(a), int32(b)));
             else
@@ -56,9 +56,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.mul(uint8(a), uint8(b)));
+                return convert<T>(math.mul(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.mul(uint16(a), uint16(b)));
+                return convert<T>(math.mul(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(math.mul(uint32(a), uint32(b)));
             else 

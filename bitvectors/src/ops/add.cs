@@ -59,7 +59,7 @@ namespace Z0
 
 
         /// <summary>
-        /// Computes the arithmetic difference z := x - y for generic bitvectors x and y
+        /// Computes the arithmetic sum z := x + y for generic bitvectors x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>

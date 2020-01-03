@@ -34,7 +34,6 @@ namespace Z0
             where T : unmanaged
                 => BitStore.bitseq(src, dst, offset);
 
-
         /// <summary>
         /// Calculates a bit sequence
         /// </summary>

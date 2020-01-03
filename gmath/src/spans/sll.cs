@@ -12,7 +12,7 @@ namespace Z0
     partial class mathspan
     {
         [MethodImpl(Inline)]
-        public static Span<T> sll<T>(ReadOnlySpan<T> src, int shift, Span<T> dst)
+        public static Span<T> sll<T>(ReadOnlySpan<T> src, byte shift, Span<T> dst)
             where T : unmanaged
         {            
             for(var i=0; i<src.Length; i++)
@@ -20,7 +20,7 @@ namespace Z0
             return dst;
         }
 
-        public static Span<T> sll<T>(ReadOnlySpan<T> src, int shift)
+        public static Span<T> sll<T>(ReadOnlySpan<T> src, byte shift)
             where T : unmanaged
                 => sll(src, shift, span<T>(src.Length));
     }

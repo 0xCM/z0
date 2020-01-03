@@ -22,7 +22,6 @@ namespace Z0
         public static bit dot<T>(T x, T y)
             where T : unmanaged
                 => odd(pop(gmath.and(x,y)));
-
     }
 
 }

@@ -13,50 +13,41 @@ namespace Z0
     partial class gmath
     {
         [MethodImpl(Inline)]
-        public static T square<T>(T src)
+        public static T square<T>(T a)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return square_u(src);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return square_i(src);
-            else 
-                return gfp.square(src);
-        }           
-
-
+                => square_u(a);
+                
         [MethodImpl(Inline)]
-        static T square_i<T>(T src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                 return generic<T>(math.square(int8(src)));
-            else if(typeof(T) == typeof(short))
-                 return generic<T>(math.square(int16(src)));
-            else if(typeof(T) == typeof(int))
-                 return generic<T>(math.square(int32(src)));
-            else
-                 return generic<T>(math.square(int64(src)));
-        }
-
-        [MethodImpl(Inline)]
-        static T square_u<T>(T src)
+        static T square_u<T>(T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.square(uint8(src)));
+                return convert<T>(math.square(convert<T,uint>(a)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.square(uint16(src)));
+                return convert<T>(math.square(convert<T,uint>(a)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(math.square(uint32(src)));
-            else 
-                return generic<T>(math.square(uint64(src)));
+                return generic<T>(math.square(uint32(a)));
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>(math.square(uint64(a)));
+            else
+                return square_i(a);
         }
+
+        [MethodImpl(Inline)]
+        static T square_i<T>(T a)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return convert<T>(math.square(convert<T,int>(a)));
+            else if(typeof(T) == typeof(short))
+                return convert<T>(math.square(convert<T,int>(a)));
+            else if(typeof(T) == typeof(int))
+                 return generic<T>(math.square(int32(a)));
+            else if(typeof(T) == typeof(long))
+                 return generic<T>(math.square(int64(a)));
+            else
+                return gfp.square(a);
+        }
+
     }
 }

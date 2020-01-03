@@ -14,26 +14,6 @@ namespace Z0
     
     partial class Bits
     {
-        /// <summary>
-        /// [00000001 ... 00000001]
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
-        static T lsb8x1<T>(T src)
-            where T : unmanaged
-                => convert<ulong,T>(Bits.scatter(convert<T,ulong>(src), BitMasks.Lsb64x8x1));
-
-        /// <summary>
-        /// [00000000 00000000 00000000 0000001 00000000 00000000 00000000 0000001]
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
-        static T lsb32x1<T>(T src)
-            where T : unmanaged
-                => convert<ulong,T>(Bits.scatter(convert<T,ulong>(src), BitMasks.Lsb64x32x1));
-
         // ~ Nx1
         // ~ ------------------------------------------------------------------
 
@@ -45,11 +25,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void part4x1(uint src, ref byte dst)
         {
-            const uint M1 = 1;
-            seek(ref dst, 0) = (byte)(src >> 0 & M1);
-            seek(ref dst, 1) = (byte)(src >> 1 & M1);
-            seek(ref dst, 2) = (byte)(src >> 2 & M1);
-            seek(ref dst, 3) = (byte)(src >> 3 & M1);
+            const uint M = 1;
+
+            seek(ref dst, 0) = (byte)(src >> 0 & M);
+            seek(ref dst, 1) = (byte)(src >> 1 & M);
+            seek(ref dst, 2) = (byte)(src >> 2 & M);
+            seek(ref dst, 3) = (byte)(src >> 3 & M);
         }
 
         /// <summary>
@@ -60,12 +41,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void part5x1(uint src, ref byte dst)
         {
-            const uint M1 = 1;
-            seek(ref dst, 0) = (byte)(src >> 0 & M1);
-            seek(ref dst, 1) = (byte)(src >> 1 & M1);
-            seek(ref dst, 2) = (byte)(src >> 2 & M1);
-            seek(ref dst, 3) = (byte)(src >> 3 & M1);
-            seek(ref dst, 4) = (byte)(src >> 4 & M1);
+            const uint M = 1;
+
+            seek(ref dst, 0) = (byte)(src >> 0 & M);
+            seek(ref dst, 1) = (byte)(src >> 1 & M);
+            seek(ref dst, 2) = (byte)(src >> 2 & M);
+            seek(ref dst, 3) = (byte)(src >> 3 & M);
+            seek(ref dst, 4) = (byte)(src >> 4 & M);
         }
 
         /// <summary>
@@ -76,13 +58,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void part6x1(uint src, ref byte dst)
         {
-            const uint M1 = 1;
-            seek(ref dst, 0) = (byte)(src >> 0 & M1);
-            seek(ref dst, 1) = (byte)(src >> 1 & M1);
-            seek(ref dst, 2) = (byte)(src >> 2 & M1);
-            seek(ref dst, 3) = (byte)(src >> 3 & M1);
-            seek(ref dst, 4) = (byte)(src >> 4 & M1);
-            seek(ref dst, 5) = (byte)(src >> 5 & M1);
+            const uint M = 1;
+
+            seek(ref dst, 0) = (byte)(src >> 0 & M);
+            seek(ref dst, 1) = (byte)(src >> 1 & M);
+            seek(ref dst, 2) = (byte)(src >> 2 & M);
+            seek(ref dst, 3) = (byte)(src >> 3 & M);
+            seek(ref dst, 4) = (byte)(src >> 4 & M);
+            seek(ref dst, 5) = (byte)(src >> 5 & M);
         }
 
         /// <summary>
@@ -93,14 +76,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void part7x1(uint src, ref byte dst)
         {
-            const uint M1 = 1;
-            seek(ref dst, 0) = (byte)(src >> 0 & M1);
-            seek(ref dst, 1) = (byte)(src >> 1 & M1);
-            seek(ref dst, 2) = (byte)(src >> 2 & M1);
-            seek(ref dst, 3) = (byte)(src >> 3 & M1);
-            seek(ref dst, 4) = (byte)(src >> 4 & M1);
-            seek(ref dst, 5) = (byte)(src >> 5 & M1);
-            seek(ref dst, 6) = (byte)(src >> 6 & M1);
+            const uint M = 1;
+
+            seek(ref dst, 0) = (byte)(src >> 0 & M);
+            seek(ref dst, 1) = (byte)(src >> 1 & M);
+            seek(ref dst, 2) = (byte)(src >> 2 & M);
+            seek(ref dst, 3) = (byte)(src >> 3 & M);
+            seek(ref dst, 4) = (byte)(src >> 4 & M);
+            seek(ref dst, 5) = (byte)(src >> 5 & M);
+            seek(ref dst, 6) = (byte)(src >> 6 & M);
         }
 
         /// <summary>
@@ -123,9 +107,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void part9x1(uint src, ref byte dst)
         {
-            const uint M1 = 1;
+            const uint M = 1;
             part8x1(src, ref dst);
-            seek(ref dst, 8) = (byte)(src >> 8 & M1);
+            seek(ref dst, 8) = (byte)(src >> 8 & M);
         }
 
         /// <summary>
@@ -136,9 +120,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void part10x1(uint src, ref byte dst)
         {
-            const uint M1 = 1;
+            const uint M = 1;
+
             part9x1(src, ref dst);
-            seek(ref dst, 9) = (byte)(src >> 9 & M1);
+            seek(ref dst, 9) = (byte)(src >> 9 & M);
         }
 
         [MethodImpl(Inline)]
@@ -187,11 +172,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void part8x2(uint src, ref byte dst)
         {
-            const uint M2 = 0b11;
-            seek(ref dst, 0) = (byte)(src >> 0 & M2);
-            seek(ref dst, 1) = (byte)(src >> 2 & M2);
-            seek(ref dst, 2) = (byte)(src >> 4 & M2);
-            seek(ref dst, 3) = (byte)(src >> 6 & M2);
+            const uint M = BitMasks.Lsb8x8x2;
+
+            seek(ref dst, 0) = (byte)(src >> 0 & M);
+            seek(ref dst, 1) = (byte)(src >> 2 & M);
+            seek(ref dst, 2) = (byte)(src >> 4 & M);
+            seek(ref dst, 3) = (byte)(src >> 6 & M);
         }
 
         // ~ Nx2
@@ -249,9 +235,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void part6x3(uint src, ref byte dst)
         {
-            const uint M3 = 0b111;
-            seek(ref dst, 0) = (byte)(src >> 0 & M3);
-            seek(ref dst, 1) = (byte)(src >> 3 & M3);
+            const uint M = BitMasks.Lsb8x8x3;
+
+            seek(ref dst, 0) = (byte)(src >> 0 & M);
+            seek(ref dst, 1) = (byte)(src >> 3 & M);
         }
 
         [MethodImpl(Inline)]
@@ -266,9 +253,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void part9x3(uint src, ref byte dst)
         {
-            const uint M3 = 0b111;
+            const uint M = BitMasks.Lsb8x8x3;
+
             part6x3(src, ref dst);
-            seek(ref dst, 2) = (byte)(src >> 6 & M3);
+            seek(ref dst, 2) = (byte)(src >> 6 & M);
         }
 
         [MethodImpl(Inline)]
@@ -283,11 +271,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void part12x3(uint src, ref byte dst)
         {
-            const uint M3 = 0b111;
-            part9x3(src, ref dst);
-            seek(ref dst, 3) = (byte)(src >> 9 & M3);
-        }
+            const uint M = BitMasks.Lsb8x8x3;
 
+            part9x3(src, ref dst);
+            seek(ref dst, 3) = (byte)(src >> 9 & M);
+        }
 
         /// <summary>
         /// Partitions the first 15 bits of a 16-bit source into 6 target segments each with an effective width of 3
@@ -298,6 +286,7 @@ namespace Z0
         public static void part15x3(ushort src, in NatSpan<N5,byte> dst)
         {
             const uint M = BitMasks.Lsb32x8x3;
+
             dst.Cell<uint>(0) = Bits.scatter(src, BitMasks.Lsb32x8x3); 
             dst.Cell<byte>(4) = (byte)Bits.scatter((byte)(src >> 12), BitMasks.Lsb8x8x3);
         }
@@ -311,6 +300,7 @@ namespace Z0
         public static void part24x3(uint src, in NatSpan<N8,byte> dst)
         {
             const ulong M = BitMasks.Lsb64x8x3;
+
             dst.Cell<ulong>(0) = Bits.scatter(src, M); 
         }
 
@@ -323,6 +313,7 @@ namespace Z0
         public static void part27x3(uint src, in NatSpan<N9,byte> dst)
         {
             const ulong M = BitMasks.Lsb64x8x3;
+
             dst.Cell<ulong>(0) = Bits.scatter(src, M); 
             dst.Cell<ushort>(4) = (byte)Bits.scatter(src >> 24, M); 
         }
@@ -336,6 +327,7 @@ namespace Z0
         public static void part30x3(uint src, in NatSpan<N10,byte> dst)
         {
             const ulong M = BitMasks.Lsb64x8x3;
+
             dst.Cell<ulong>(0) = Bits.scatter(src, M); 
             dst.Cell<ushort>(4) = (ushort)Bits.scatter(src >> 24, M); 
         }
@@ -349,6 +341,7 @@ namespace Z0
         public static void part63x3(ulong src, in NatSpan<N21,byte> dst)
         {
             const ulong M = BitMasks.Lsb64x8x3;
+            
             var x = BitMask.lo(n63) & src;
             dst.Cell<ulong>(0) = Bits.scatter(x, M); 
             dst.Cell<ulong>(1) = Bits.scatter(x >> 24, M); 
@@ -366,9 +359,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void part8x4(uint src, ref byte dst)
         {
-            const uint M4 = 0b1111;
-            seek(ref dst, 0) = (byte)((src >> 0) & M4);
-            seek(ref dst, 1) = (byte)((src >> 4) & M4);
+            const uint M = BitMasks.Lsb8x8x4;
+
+            seek(ref dst, 0) = (byte)((src >> 0) & M);
+            seek(ref dst, 1) = (byte)((src >> 4) & M);
         }
 
         /// <summary>
@@ -388,10 +382,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void part12x4(uint src, ref byte dst)
         {
-            const uint M4 = 0b1111;
-            seek(ref dst, 0) = (byte)((src >> 0) & M4);
-            seek(ref dst, 1) = (byte)((src >> 4) & M4);
-            seek(ref dst, 2) = (byte)((src >> 8) & M4);
+            const uint M = BitMasks.Lsb8x8x4;
+
+            seek(ref dst, 0) = (byte)((src >> 0) & M);
+            seek(ref dst, 1) = (byte)((src >> 4) & M);
+            seek(ref dst, 2) = (byte)((src >> 8) & M);
         }
 
         /// <summary>
@@ -507,6 +502,26 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void part64x32(ulong src, NatSpan<N2,uint> dst)
             => dst.Cell<ulong>(0) = src;
+
+        /// <summary>
+        /// [00000001 ... 00000001]
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        static T lsb8x1<T>(T src)
+            where T : unmanaged
+                => convert<ulong,T>(Bits.scatter(convert<T,ulong>(src), BitMasks.Lsb64x8x1));
+
+        /// <summary>
+        /// [00000000 00000000 00000000 0000001 00000000 00000000 00000000 0000001]
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        static T lsb32x1<T>(T src)
+            where T : unmanaged
+                => convert<ulong,T>(Bits.scatter(convert<T,ulong>(src), BitMasks.Lsb64x32x1));
 
     }
 }

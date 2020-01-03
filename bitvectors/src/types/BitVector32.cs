@@ -174,7 +174,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector32 operator <<(BitVector32 x, int shift)
-            => BitVector.sll(x,shift);
+            => BitVector.sll(x,(byte)shift);
 
         /// <summary>
         /// Right-shifts the bits in the source
@@ -182,7 +182,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector32 operator >>(BitVector32 x, int shift)
-            => BitVector.srl(x,shift);
+            => BitVector.srl(x,(byte)shift);
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise

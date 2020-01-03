@@ -97,7 +97,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector8 operator <<(BitVector8 x, int shift)
-            => BitVector.sll(x,shift);
+            => BitVector.sll(x,(byte)shift);
 
         /// <summary>
         /// Right-shifts the bits in the source
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector8 operator >>(BitVector8 x, int shift)
-            => BitVector.srl(x,shift);
+            => BitVector.srl(x,(byte)shift);
 
         /// <summary>
         /// Computes the one's complement of the operand. 
@@ -359,7 +359,7 @@ namespace Z0
         public BitVector8 this[int first, int last]
         {
             [MethodImpl(Inline)]
-            get => BitVector.between(this,first,last);
+            get => BitVector.seg(this,first,last);
         }
             
         [MethodImpl(Inline)]

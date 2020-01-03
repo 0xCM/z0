@@ -14,45 +14,21 @@ namespace Z0
 
     partial class VX
     {
-        /// <summary>
-        /// Operator factory for vreverse_128xT
-        /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="t">A component type representative</param>
-        /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static Reverse128<T> vreverse<T>(N128 w, T t = default)
             where T : unmanaged
                 => Reverse128<T>.Op;
 
-        /// <summary>
-        /// Operator factory for vreverse_256xT
-        /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="t">A component type representative</param>
-        /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static Reverse256<T> vreverse<T>(N256 w, T t = default)
             where T : unmanaged
                 => Reverse256<T>.Op;
 
-        /// <summary>
-        /// Operator factory for vreverse_128xT
-        /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="t">A component type representative</param>
-        /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static SwapHiLo128<T> vswaphl<T>(N128 w, T t = default)
             where T : unmanaged
                 => SwapHiLo128<T>.Op;
 
-        /// <summary>
-        /// Operator factory for vreverse_256xT
-        /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="t">A component type representative</param>
-        /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static SwapHiLo256<T> vswaphl<T>(N256 w, T t = default)
             where T : unmanaged

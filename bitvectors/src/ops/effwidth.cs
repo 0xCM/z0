@@ -12,52 +12,51 @@ namespace Z0
 
     partial class BitVector
     {
-
         /// <summary>
-        /// Counts the number of leading zero bits
+        /// Computes the effective width of the bitvector as determined by the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline)]
-        public static int effwidth(BitVector4 x)
+        public static int width(BitVector4 x)
             => x.Width - nlz(x);
 
         /// <summary>
-        /// Counts the number of leading zero bits
+        /// Computes the effective width of the bitvector as determined by the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline)]
-        public static int effwidth(BitVector8 x)
+        public static int width(BitVector8 x)
             => x.Width - nlz(x);
 
         /// <summary>
-        /// Counts the number of leading zero bits
+        /// Computes the effective width of the bitvector as determined by the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline)]
-        public static int effwidth(BitVector16 x)
+        public static int width(BitVector16 x)
             => x.Width - nlz(x);
 
         /// <summary>
-        /// Counts the number of leading zero bits
+        /// Computes the effective width of the bitvector as determined by the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline)]
-        public static int effwidth(BitVector64 x)
+        public static int width(BitVector64 x)
             => x.Width - nlz(x);
  
         /// <summary>
-        /// Computes the effective width of the vector
+        /// Computes the effective width of the bitvector as determined by the number of leading zero bits
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static int effwidth<T>(BitVector<T> x)
+        public static int width<T>(BitVector<T> x)
             where T : unmanaged
                 => bitsize<T>() - nlz(x);
 
         /// <summary>
-        /// Computes the effective width of the vector
+        /// Computes the effective width of the bitvector as determined by the number of leading zero bits
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static int effwidth<N,T>(BitVector<N,T> x)
+        public static int width<N,T>(BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => x.Width - nlz(x);

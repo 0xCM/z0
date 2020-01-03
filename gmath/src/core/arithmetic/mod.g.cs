@@ -41,9 +41,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(math.mod(int8(a), int8(m)));
+                return convert<T>(math.mod(convert<T,int>(a), convert<T,int>(m)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(math.mod(int16(a), int16(m)));
+                return convert<T>(math.mod(convert<T,int>(a), convert<T,int>(m)));
             else if(typeof(T) == typeof(int))
                  return generic<T>(math.mod(int32(a), int32(m)));
             else
@@ -55,9 +55,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.mod(uint8(a), uint8(m)));
+                return convert<T>(math.mod(convert<T,uint>(a), convert<T,uint>(m)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.mod(uint16(a), uint16(m)));
+                return convert<T>(math.mod(convert<T,uint>(a), convert<T,uint>(m)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(math.mod(uint32(a), uint32(m)));
             else 

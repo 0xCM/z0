@@ -9,27 +9,46 @@ namespace Z0
 
     using static zfunc;
 
-    partial class bitvectors
+    [OpCodeProvider]
+    public static class bitvectors
     {
-        public static BitVector32 and_bv_32u(BitVector32 x, BitVector32 y)
+        public static BitVector<byte> bvand_8(BitVector<byte> x, BitVector<byte> y)
+            => BV.bvand(z8).Invoke(x,y);
+
+        public static BitVector8 bvand_d8(BitVector8 x, BitVector8 y)
             => BitVector.and(x,y);
 
-        public static BitVector32 and_bv_o32u(BitVector32 x, BitVector32 y)
-            => x & y;
+        public static BitVector<uint> bvand_32(BitVector<uint> x, BitVector<uint> y)
+            => BV.bvand(z32).Invoke(x,y);
 
-        public static BitVector32 or_bv_32u(BitVector32 x, BitVector32 y)
-            => BitVector.or(x,y);
+        public static BitVector32 bvand_d32(BitVector32 x, BitVector32 y)
+            => BitVector.and(x,y);
 
-        public static BitVector32 or_bv_o32u(BitVector32 x, BitVector32 y)
-            => x | y;
-        
-        public static BitVector32 xor_bv_32u(BitVector32 x, BitVector32 y)
+        public static BitVector<ulong> bvand_64(BitVector<ulong> x, BitVector<ulong> y)
+            => BV.bvand(z64).Invoke(x,y);
+
+        public static BitVector64 bvand_d64(BitVector64 x, BitVector64 y)
+            => BitVector.and(x,y);
+
+        public static BitVector<byte> bvxor_8(BitVector<byte> x, BitVector<byte> y)
+            => BV.bvxor(z8).Invoke(x,y);
+
+        public static BitVector<byte> bvxor_g8(BitVector<byte> x, BitVector<byte> y)
             => BitVector.xor(x,y);
 
-        public static BitVector32 xor_bv_o32u(BitVector32 x, BitVector32 y)
-            => x ^ y;
+        public static BitVector8 bvxor_d8(BitVector8 x, BitVector8 y)
+            => BitVector.xor(x,y);
+        
+        public static byte xor_d8(byte x, byte y)
+            => (byte)(x ^ y);
 
-        public static BitVector32 sll_bv_32u(BitVector32 x, int offset)
+        public static byte xor_g8(byte x, byte y)
+            => gmath.xor(x,y);
+
+        public static byte xor_d82(byte x, byte y)
+            => math.xor(x,y);
+
+        public static BitVector32 sll_bv_32u(BitVector32 x, byte offset)
             => BitVector.sll(x,offset);
 
         public static BitVector32 sll_bv_o32u(BitVector32 x, int offset)

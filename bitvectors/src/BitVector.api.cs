@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> ones<T>()
             where T : unmanaged
-                => gmath.maxval<T>();           
+                => gmath.ones<T>();           
 
         /// <summary>
         /// Returns a generic vector with all bits disabled

@@ -31,13 +31,11 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a unary operator that accepts two integral values that define a range
+    /// Characterizes a unary operator that accepts two 8-bit immediates
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
-    /// <typeparam name="K">The integral value type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IUnaryRangeOp<A,K> : IFunc<A,K,K,A>
-        where K : unmanaged
+    public interface IUnaryOpImm8x2<A> : IFunc<A,byte,byte,A>
     {
 
     }
@@ -53,17 +51,6 @@ namespace Z0
         where T : unmanaged
     {
         N Discrimintator => default(N);
-    }
-
-    /// <summary>
-    /// Characterizes a primal unary operator that accepts two unsigned 8-bit values that define a range
-    /// </summary>
-    /// <typeparam name="T">The operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IPrimalUnaryRange8Op<T> : IUnaryRangeOp<T,byte>
-        where T : unmanaged
-    {
-
     }
 
     /// <summary>
@@ -106,7 +93,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Defines trait for a vecorized unary operator that supports componentwise decomposition/evaluation
+    /// Defines trait for a vectorized unary operator that supports componentwise decomposition/evaluation
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
@@ -117,14 +104,25 @@ namespace Z0
     }
 
     /// <summary>
-    /// Defines trait for a vecorized unary operator that supports componentwise decomposition/evaluation
+    /// Defines trait for a vectorized unary immediate operator that supports componentwise decomposition/evaluation
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOpImm8D<T>
         where T : unmanaged
     {
-        T InvokeScalar(T a, byte imm8);
+        T InvokeScalar(T a, byte b);
+    }
+
+    /// <summary>
+    /// Defines trait for a vectorized unary doubly-immediate operator that supports componentwise decomposition/evaluation
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVUnaryOpImm8x2D<T>
+        where T : unmanaged
+    {
+        T InvokeScalar(T a, byte b, byte c);
     }
 
     /// <summary>
@@ -182,11 +180,34 @@ namespace Z0
     }
 
     /// <summary>
+    /// Characterizes a unary vectorized operator that accepts two 8-bit immediates
+    /// </summary>
+    /// <typeparam name="W">The bit-width type</typeparam>
+    /// <typeparam name="V">The operand type</typeparam>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVUnaryOpImm8x2<W,V,T> : IUnaryOpImm8x2<V>
+    {
+
+    }
+
+    /// <summary>
     /// Characterizes a vectorized unary operator over 128-bit operands that acepts an 8-bit immediate
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOp128Imm8<T> : IVUnaryOpImm8<N128,Vector128<T>,T>
+        where T : unmanaged
+    {
+        
+    }
+
+    /// <summary>
+    /// Characterizes a vectorized unary operator over 128-bit operands that acepts two 8-bit immediates
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVUnaryOp128Imm8x2<T> : IVUnaryOpImm8x2<N128,Vector128<T>,T>
         where T : unmanaged
     {
         
@@ -204,11 +225,33 @@ namespace Z0
     }
 
     /// <summary>
+    /// Characterizes a vectorized unary operator over 256-bit operands that acepts two 8-bit immediates
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVUnaryOp256Imm8x2<T> : IVUnaryOpImm8x2<N256,Vector256<T>,T>
+        where T : unmanaged
+    {
+        
+    }
+
+    /// <summary>
     /// Characterizes a vectorized unary operator over 128-bit operands that acepts an 8-bit immediate
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOp128Imm8D<T> : IVUnaryOp128Imm8<T>, IVUnaryOpImm8D<T>
+        where T : unmanaged
+    {
+        
+    }
+
+    /// <summary>
+    /// Characterizes a vectorized unary operator over 128-bit operands that acepts two 8-bit immediates
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVUnaryOp128Imm8x2D<T> : IVUnaryOp128Imm8x2<T>, IVUnaryOpImm8x2D<T>
         where T : unmanaged
     {
         
@@ -224,4 +267,16 @@ namespace Z0
     {
         
     }
+
+    /// <summary>
+    /// Characterizes a vectorized unary operator over 256-bit operands that acepts an 8-bit immediate
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVUnaryOp256Imm8x2D<T> : IVUnaryOp256Imm8x2<T>, IVUnaryOpImm8x2D<T>
+        where T : unmanaged
+    {
+        
+    }
+
 }
