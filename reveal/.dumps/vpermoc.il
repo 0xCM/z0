@@ -1,4 +1,4 @@
-// 2020-01-05 02:30:52:282
+// 2020-01-05 15:03:46:099
 Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> vand_delgate()
 {
     IL_0000: ldtoken System.Runtime.Intrinsics.X86.Avx2

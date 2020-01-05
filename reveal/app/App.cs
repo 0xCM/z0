@@ -97,8 +97,8 @@ namespace Z0
 
         void Disassemble(bool asm, bool cil)
         {
-            Deconstructor.Shred(typeof(fmath));
-            //Deconstructor.Shred(typeof(math), typeof(fmath), typeof(Bits),typeof(dinx));
+            //Deconstructor.Shred(typeof(fmath));
+            Deconstructor.Shred(typeof(math), typeof(fmath), typeof(Bits),typeof(dinx));
             
             Disassemble(new ExperimentalScenarios());
             Disassemble(typeof(OC.butterfly));    
