@@ -18,12 +18,6 @@ namespace Z0.OpCodes
 
         static N64 n64 => default;
 
-        public static bit iskind_16u()
-            => Primitive.iskind(PrimalKind.Integral,z16);
-
-
-        public static PrimalKind getkind_16u()
-            => Primitive.kind(z16);
 
         public static int blockalign_64x8u_var(int cellcount)
             => DataBlocks.minblocks<byte>(n64,cellcount);

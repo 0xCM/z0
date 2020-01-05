@@ -38,15 +38,6 @@ namespace Z0
             => $"{Primitive.bitsize(k)}{Primitive.indicator(k)}";
 
         /// <summary>
-        /// Produces a vectorized/segmented suffix {w}X{bitsize(k)}{u | i | f} for bit width w and primal kind k
-        /// </summary>
-        /// <param name="w">The bit width representative</param>
-        /// <param name="t">A primal type representative</param>
-        [MethodImpl(Inline)]   
-        static string suffix(int w, PrimalKind k)
-            => $"{w}{SegSep}{suffix(k)}";
-
-        /// <summary>
         /// Produces a canonical designator of the form {op}_{bitsize[T]}{u | i | f} for an operation over a primal type
         /// </summary>
         /// <param name="opname">The base operator name</param>
@@ -64,8 +55,9 @@ namespace Z0
         /// <param name="w">The bit width</param>
         /// <param name="k">The primal cell kind</param>
         [MethodImpl(Inline)]   
-        public static Moniker define(string opname, int w, PrimalKind k)
-            => new Moniker($"{opname}_{suffix(w,k)}");
+        public static Moniker define<W>(string opname, PrimalKind k, W w)
+            where W : unmanaged, ITypeNat
+                => new Moniker($"{opname}_{w}{SegSep}{suffix(k)}");
 
         /// <summary>
         /// Makes a best-guess at defining an appropriate moniker for a specified method
@@ -97,17 +89,23 @@ namespace Z0
                         where p.ParameterType.IsIntrinsicVector()
                         select p.ParameterType).FirstOrDefault() ?? m.ReturnType;
                 
-                var kind = v.GenericTypeArguments.FirstOrDefault().Kind();
-                
-                var width = 0;
+                var kind = v.GenericTypeArguments.FirstOrDefault().Kind();                
                 var typedef = v.GetGenericTypeDefinition();
-                if(typedef == typeof(Vector128<>))
-                    width = 128;
-                else if(typedef == typeof(Vector256<>))
-                    width = 256;
 
-                return Moniker.define(opname, width, kind);
+                if(typedef == typeof(Vector64<>))
+                    return Moniker.define(opname, kind, n64);
+                else if(typedef == typeof(Vector128<>))
+                    return Moniker.define(opname, kind, n128);
+                else if(typedef == typeof(Vector256<>))
+                    return Moniker.define(opname, kind, n256);                
+                else if(typedef == typeof(Vector512<>))
+                    return Moniker.define(opname, kind, n512);                
+                else if(typedef == typeof(Vector1024<>))
+                    return Moniker.define(opname, kind, n1024);                
+                else 
+                    return Moniker.define(opname, kind, n0);
             }
+            
             return Moniker.Empty;
         }
 

@@ -15,6 +15,10 @@ partial class zfunc
     public static IntPtr intptr(long i)
         => new IntPtr(i);
 
+    [MethodImpl(Inline)]
+    public static unsafe IntPtr intptr(void* p)
+        => new IntPtr(p);
+
     /// <summary>
     /// Presents generic reference as a generic pointer
     /// </summary>

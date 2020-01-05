@@ -23,7 +23,8 @@ namespace Z0
 
         }
 
-        protected abstract string OpName {get;}
+        protected virtual string OpName 
+            => "anon";
 
         protected virtual FolderName AsmFolder
             => FolderName.Empty;

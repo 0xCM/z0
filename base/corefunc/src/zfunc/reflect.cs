@@ -139,7 +139,8 @@ partial class zfunc
         => Moniker.suffix(k);
 
     /// <summary>
-    /// Produces a canonical designator of the form {op}_{bitsize[T]}{u | i | f} for an operation over a primal type
+    /// Defines a moniker with rendering {op}_{bitsize[T]}{u | i | f} that identifies an
+    /// operation over a primal type of kind k and bit width N := bitsize(k)
     /// </summary>
     /// <param name="name">The base operator name</param>
     /// <param name="t">A primal type representative</param>
@@ -149,7 +150,20 @@ partial class zfunc
         => Moniker.define(name,k);
 
     /// <summary>
-    /// Produces a canonical designator of the form {op}_{W}X{bitsize[T]}{u | i | f} for an operation over a segmented WxT type or classification
+    /// Defines a moniker with rendering {opname}_N{u | i | f} that identifies an
+    /// operation over a primal type of bit width N := bitsize[T]
+    /// </summary>
+    /// <param name="opname">The base operator name</param>
+    /// <param name="t">A primal type representative</param>
+    /// <typeparam name="T">The primal type</typeparam>
+    [MethodImpl(Inline)]   
+    public static Moniker moniker<T>(string opname, T t = default)
+        => Moniker.define(opname,typeof(T).Kind());
+
+    /// <summary>
+    /// Defines a moniker with rendering {opname}_WxN{u | i | f} that identifies 
+    /// an operation over intrinsic vectors or other segmented type of bit-width W
+    /// defined over segments of kind k and bit-width N := bitsize(k)
     /// </summary>
     /// <param name="opname">The base operator name</param>
     /// <param name="w">The covering bit width representative</param>
@@ -157,31 +171,14 @@ partial class zfunc
     /// <typeparam name="W">The bit width type</typeparam>
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(Inline)]   
-    public static Moniker moniker(string opname, int w, PrimalKind k)
-        => Moniker.define(opname,w,k);
+    public static Moniker moniker<W>(string opname, PrimalKind k, W w)
+        where W : unmanaged, ITypeNat
+            => Moniker.define(opname, k, w);
 
     /// <summary>
-    /// Produces a canonical designator of the form {op}_{bitsize[T]}{u | i | f} for an operation over a primal type
-    /// </summary>
-    /// <param name="name">The base operator name</param>
-    /// <param name="t">A primal type representative</param>
-    /// <typeparam name="T">The primal type</typeparam>
-    [MethodImpl(Inline)]   
-    public static Moniker moniker<T>(string name, T t = default)
-        => Moniker.define(name,typeof(T).Kind());
-
-    /// <summary>
-    /// Produces a canonical designator of the form {op}_{bitsize[T]}{u | i | f} for an operation over a primal type
-    /// </summary>
-    /// <param name="name">The base operator name</param>
-    /// <param name="t">A primal type representative</param>
-    /// <typeparam name="T">The primal type</typeparam>
-    [MethodImpl(Inline)]   
-    public static Moniker moniker(string name, Type t)
-        => Moniker.define(name,t.Kind());
-
-    /// <summary>
-    /// Produces a canonical designator of the form {op}_{W}X{bitsize[T]}{u | i | f} for an operation over a segmented WxT type or classification
+    /// Defines a moniker with rendering {opname}_WxN{u | i | f} that identifies 
+    /// an operation over intrinsic vectors or other segmented types of bit-width W
+    /// with segments of bit-width N := bitsize[T]
     /// </summary>
     /// <param name="opname">The base operator name</param>
     /// <param name="w">The covering bit width representative</param>
@@ -192,7 +189,7 @@ partial class zfunc
     public static Moniker moniker<W,T>(string opname, W w = default, T t = default)
         where W : unmanaged, ITypeNat
         where T : unmanaged
-            => Moniker.define(opname,natval(w),Primitive.kind<T>());
+            => Moniker.define(opname,Primitive.kind<T>(),w);
 
     /// <summary>
     /// Returns the System.Type of the supplied parametric type
