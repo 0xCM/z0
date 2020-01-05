@@ -14,6 +14,10 @@ namespace Z0
 
     public static class AsmFormat
     {
+        const string BeginComment = "; ";
+
+        const int IPad = 30;
+
         /// <summary>
         /// Formats an assembly function specifier
         /// </summary>
@@ -79,7 +83,6 @@ namespace Z0
             return (address + AsciSym.Space + content + "; " + title + " " + operands).PadRight(90, AsciSym.Space) + encoding;
         }
 
-        const int IPad = 30;
         
         public static string FormatInstructions(this AsmFuncInfo src, int? pad = null)
         {
@@ -108,11 +111,11 @@ namespace Z0
                    );
 
         /// <summary>
-        /// Formats the function body encoding
+        /// Formats the function body encoding as a comma-separated list of hex values
         /// </summary>
         /// <param name="src">The source function</param>
         public static string FormatEncoding(this AsmFuncInfo src)
-            =>  embrace(src.Encoding.FormatHex(AsciSym.Comma, true, true, true));
+            => src.Encoding.FormatHex(AsciSym.Comma, true, true, true);
 
         /// <summary>
         /// Formats the encoded bytes as a comment
@@ -121,19 +124,14 @@ namespace Z0
         public static string FormatFooter(this AsmFuncInfo src)
         {
             var propdecl = $"static ReadOnlySpan<byte> {src.FunctionName}Bytes";
-            return concat(BeginComment, $"{propdecl} => new byte[{src.Encoding.Length}]", src.FormatEncoding(),AsciSym.Semicolon);              
+            return concat(BeginComment, $"{propdecl} => new byte[{src.Encoding.Length}]", embrace(src.FormatEncoding()), AsciSym.Semicolon);              
         }
-
-
-        const string BeginComment = "; ";
 
         static string HexFormat(this ulong src)
             => src.FormatHex(false,true,true,false);
 
-
         static string GlobalHexRange(this ulong start, ulong end)
             => bracket(concat(start.HexFormat(),AsciSym.Comma, AsciSym.Space, end.HexFormat()));
-
 
         static string Format(this AsmBranchInfo src)
         {
@@ -170,7 +168,6 @@ namespace Z0
             
             }
             return "mem" + parenthetical(sb.ToString());
-
         }
     }
 }

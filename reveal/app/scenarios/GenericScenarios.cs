@@ -30,13 +30,23 @@ namespace Z0
                 let gm = def.MakeGenericMethod(t)
                 select gm;
 
+        /// <summary>
+        /// Specifies the set of unsigned primal integer types
+        /// </summary>
+        public static Type[] Primitives =>
+            new Type[]{
+                typeof(byte), typeof(ushort), typeof(uint), typeof(ulong),
+                typeof(sbyte), typeof(short), typeof(int), typeof(long),
+                typeof(float),typeof(double)
+                };
+
         public static MethodDisassembly[] Gmath()
         {
             var opnames = set("add", "sub", "mul", "idiv", "mod");
             var unopnames = set("negate","inc","dec");
 
-            var closedBinOps = CloseOpenGenerics(gmath.BinOps().Where(m => opnames.Contains(m.Name)), PrimalTypes.All);
-            var closedUnaryOps = CloseOpenGenerics(gmath.UnaryOps().Where(m => unopnames.Contains(m.Name)), PrimalTypes.All);
+            var closedBinOps = CloseOpenGenerics(gmath.BinOps().Where(m => opnames.Contains(m.Name)), Primitives);
+            var closedUnaryOps = CloseOpenGenerics(gmath.UnaryOps().Where(m => unopnames.Contains(m.Name)), Primitives);
             var closedOps = closedBinOps.Union(closedUnaryOps);
             
             var deconstructed = Deconstructor.Deconstruct(closedOps);

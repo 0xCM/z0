@@ -101,6 +101,14 @@ namespace Z0
             get => natval<N>();
         }
 
+        /// <summary>
+        /// The number of allocated storage cells
+        /// </summary>
+        public readonly int CellCount
+        {
+            [MethodImpl(Inline)]
+            get => data.Length;
+        }
 
         /// <summary>
         /// Queries/manipulates a bit at a specified row/col
@@ -122,6 +130,12 @@ namespace Z0
            }
         }            
 
+        int RowCellCount
+        {
+            [MethodImpl(Inline)]
+            get => BitCalcs.mincells<N,T>();
+        }
+
         /// <summary>
         /// Queries mainpulates a row
         /// </summary>
@@ -131,26 +145,16 @@ namespace Z0
             get => ReadRow(row);
             
             [MethodImpl(Inline)]
-            set 
-            {
-                var index = BitMatrix.tableindex(row, 0, RowDim, ColDim, default(T));                
-                value.Data.CopyTo(Data.Slice(index.RowIndex), index.RowCellCount);
-            }
+            set  => value.Data.Slice(0, RowCellCount).CopyTo(data,row);
         }
                 
         [MethodImpl(Inline)]
         public BitBlock<N,T> ReadRow(int row)  
-        {                              
-            var index = BitMatrix.tableindex(row, 0, RowDim, ColDim, default(T)); 
-            return new BitBlock<N,T>(data.Slice(index.RowIndex, index.RowCellCount),true);
-        }
+            => new BitBlock<N,T>(data.Slice(row*RowCellCount, RowCellCount));
 
         [MethodImpl(Inline)]
         public readonly BitBlock<N,T> CopyRow(int row)                    
-        {
-            var index = BitMatrix.tableindex(row, 0, RowDim, ColDim, default(T));                
-            return new BitBlock<N,T>(data.Slice(index.RowIndex, index.RowCellCount).Replicate(),true);
-        }
+            => new BitBlock<N,T>(data.Slice(row*RowCellCount, RowCellCount).Replicate());
 
         /// <summary>
         /// Replaces an index-identied column of data with the content of a column vector

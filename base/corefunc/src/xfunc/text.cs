@@ -336,6 +336,24 @@ namespace Z0
         }
 
         /// <summary>
+        /// Removes a substring from the source string if it exists
+        /// </summary>
+        /// <param name="s">The string to manipulate</param>
+        /// <param name="substring">The substring to remove</param>
+        public static string Remove(this string s, string substring)
+            => s.Replace(substring,string.Empty);
+
+        /// <summary>
+        /// Removes all occurences of a substring from the source strings where extant
+        /// </summary>
+        /// <param name="s">The strings to manipulate</param>
+        /// <param name="substring">The substring to remove</param>
+        public static IEnumerable<string> RemoveSubstring(this IEnumerable<string> src, string substring)
+            => from s in src
+                let r = s.Remove(substring)
+                select r;
+
+        /// <summary>
         /// Erases a specified set of character occurrences in a string
         /// </summary>
         /// <param name="s">The string to manipulate</param>
@@ -363,6 +381,46 @@ namespace Z0
         {
             var idx = s.IndexOf(c);
             return idx != -1 ? some(idx) : none<int>();
+        }
+
+        /// <summary>
+        /// Selects the substring prior to the first occurrence of a specified character if it is found in the string; otherwise, 
+        /// returns the original string
+        /// </summary>
+        /// <param name="s">The string to search</param>
+        /// <param name="c">The marking character</param>
+        public static string TakeBefore(this string s, char c)
+        {
+            var found = -1;
+            for(var i=0; i<s.Length; i++)
+            {
+                if(s[i] == c)
+                {
+                    found = i;
+                    break;
+                }
+            }
+            return found != -1 ? s.Substring(0, found) : s;
+        }
+
+        /// <summary>
+        /// Selects the substring after the first ocurrence of a specified character it is found in the string; otherwise, 
+        /// returns the original string
+        /// </summary>
+        /// <param name="s">The string to search</param>
+        /// <param name="c">The marking character</param>
+        public static string TakeAfter(this string s, char c)
+        {
+            var found = -1;
+            for(var i=0; i<s.Length; i++)
+            {
+                if(s[i] == c)
+                {
+                    found = i;
+                    break;
+                }
+            }
+            return found != -1 ? s.Substring(found + 1) : s;
         }
 
         /// <summary>

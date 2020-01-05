@@ -10,12 +10,14 @@ namespace Z0
 
     using static zfunc;
 
+    /// <summary>
+    /// Encapsulates metrics that characterize a grid of natural rectangular dimensions
+    /// </summary>
     public readonly struct GridDim<M,N,T> : IGridDim<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-
         /// <summary>
         /// The total number gb of grid bits determined by gb := MxN
         /// </summary>
@@ -69,7 +71,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => BitCalcs.tablecells<M,N,T>();
         }
-
+        
         /// <summary>
         /// The number of bytes required to cover a grid
         /// </summary>
@@ -94,7 +96,7 @@ namespace Z0
         /// <param name="row">The 0-based row index</param>
         /// <param name="col">The 0-based col index</param>
         [MethodImpl(Inline)]
-        public int Pos(int row, int col)
+        public int BitIndex(int row, int col)
             => BitCalcs.bitindex<N>(row, col);
 
         /// <summary>

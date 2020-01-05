@@ -5,12 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
+
     using static zfunc;
-    using static As;
-    using static AsIn;
 
     partial class gbits
     {
@@ -45,5 +42,19 @@ namespace Z0
         public static bit test<T>(T src, byte pos)
             where T : unmanaged
                 => BitMask.testbit(src, pos);
+
+        /// <summary>
+        /// Tests a bit value in a T-sequence predicated on a linear index
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="index">The linear index of the target bit, relative to the sequence head</param>
+        /// <typeparam name="T">The sequence type</typeparam>
+        [MethodImpl(Inline)]
+        public static bit test<T>(in Block256<T> src, int index)
+            where T : unmanaged
+        {
+            var loc = bitpos<T>(index);
+            return BitMask.testbit(src[loc.CellIndex], loc.BitOffset);
+        }
     }
 }

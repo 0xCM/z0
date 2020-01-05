@@ -38,7 +38,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector64(BitVector24 src)
-            => BitVector.from(n64,src.data);
+            => BitVector.create(n64,src.data);
 
         [MethodImpl(Inline)]
         public static explicit operator BitVector4(BitVector24 src)

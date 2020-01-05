@@ -9,7 +9,6 @@ namespace Z0
 
     using static zfunc;
 
-
     public static class AsmCallFactory
     {
         /// <summary>

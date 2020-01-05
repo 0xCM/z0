@@ -28,6 +28,20 @@ namespace Z0
         }
 
         /// <summary>
+        /// Sets a bit value in a T-sequence predicated on a linear index
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="index">The linear index of the target bit, relative to the sequence head</param>
+        /// <typeparam name="T">The sequence type</typeparam>
+        [MethodImpl(Inline)]
+        public static void set<T>(in Block256<T> src, int index, bit value)
+            where T : unmanaged
+        {
+            var loc = bitpos<T>(index);
+            src[loc.CellIndex] = gbits.set(src[loc.CellIndex], (byte)loc.BitOffset, value);
+        }
+
+        /// <summary>
         /// Calculates z := (src & ~(1 << pos)) | (value << pos) with the intent of enabling/disabling a bit without branching
         /// </summary>
         /// <param name="src">The source value</param>

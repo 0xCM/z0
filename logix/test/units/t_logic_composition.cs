@@ -5,17 +5,14 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     
     using static zfunc;
+
     using static BitLogicSpec;
     using static LogicEngine;
 
     public class t_logic_composition : UnitTest<t_logic_composition>
     {
-
         public void test1()
         {
             
@@ -28,5 +25,4 @@ namespace Z0.Logix
         }
         
     }
-
 }

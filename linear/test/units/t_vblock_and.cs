@@ -9,11 +9,9 @@ namespace Z0
     using System.IO;
     
     using static zfunc;
-    using VecLen = N64;
 
     public class t_vblock_and : UnitTest<t_vblock_and>
     {
-
         public void vblock_and_n64x8u()
             => vblock_and_check(n64, z8);
 

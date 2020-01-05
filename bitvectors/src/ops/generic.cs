@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitVector<byte> generic(N8 n, bit b0, bit b1, bit b2, bit b3)
-            => from(n, b0, b1, b2, b3);
+            => create(n, b0, b1, b2, b3);
 
         /// <summary>
         /// Creates a byte-generic bitvector from 4 explicit bytes

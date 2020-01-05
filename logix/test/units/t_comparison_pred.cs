@@ -5,18 +5,16 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
+    
     using static LogicEngine;
     using static PredicateSpec;
     using static ComparisonKind;
     using static ScalarOps;
     using static LogicOps;
     
-
     public class t_comparison_pred : TypedLogixTest<t_comparison_pred>
     {
         public void trichotomy_check()

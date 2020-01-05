@@ -92,7 +92,6 @@ namespace Z0
         /// <param name="length">The number of bits that should be extracted</param>
         [MethodImpl(Inline)]
         public static ulong bitslice(ulong src, byte start, byte length)
-            => BitFieldExtract(src, start, length);            
-
+            => BitFieldExtract(src, start, length);
      }
 }

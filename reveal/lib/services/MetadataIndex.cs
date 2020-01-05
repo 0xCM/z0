@@ -28,6 +28,15 @@ namespace Z0
         public static MetadataIndex Create(params Module[] modules)
             => new MetadataIndex(modules);
 
+        ConcurrentDictionary<int, ModuleDefMD> ModuleIndex 
+            = new ConcurrentDictionary<int, ModuleDefMD>();
+        ConcurrentDictionary<int, TypeDef> TypeIndex 
+            = new ConcurrentDictionary<int, TypeDef>();
+        ConcurrentDictionary<int, MethodDef> MethodIndex 
+            = new ConcurrentDictionary<int, MethodDef>();
+        ConcurrentDictionary<int, CilFuncSpec> CilIndex 
+            = new ConcurrentDictionary<int, CilFuncSpec>();
+
         MetadataIndex(params Module[] modules)
         {
             iter(modules, IndexModule);
@@ -77,15 +86,6 @@ namespace Z0
         public Option<MethodDef> FindMethod(MethodInfo mi)
             => FindMethod(mi.MetadataToken);
 
-        ConcurrentDictionary<int, ModuleDefMD> ModuleIndex 
-            = new ConcurrentDictionary<int, ModuleDefMD>();
-        ConcurrentDictionary<int, TypeDef> TypeIndex 
-            = new ConcurrentDictionary<int, TypeDef>();
-        ConcurrentDictionary<int, MethodDef> MethodIndex 
-            = new ConcurrentDictionary<int, MethodDef>();
-        ConcurrentDictionary<int, CilFuncSpec> CilIndex 
-            = new ConcurrentDictionary<int, CilFuncSpec>();
-
         TypeDef ResolveType(ModuleDefMD mod, string fullName)
         {
             var def =  new TypeRefUser(mod, fullName).Resolve();
@@ -131,7 +131,6 @@ namespace Z0
             Claim.yea(MethodIndex.TryAdd(mid, md));
             if(md.HasBody && md.Body.HasInstructions)
                 IndexCil(md);
-
         }
         
         void IndexType(TypeDef t)
@@ -139,7 +138,6 @@ namespace Z0
             Claim.yea(TypeIndex.TryAdd((int)t.MDToken.Raw, t));
             foreach(var md in t.Methods)
                 IndexMethod(md);
-
         }
         
         void IndexModule(Module mod)

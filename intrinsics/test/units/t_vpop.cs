@@ -42,7 +42,7 @@ namespace Z0
             void check()
             {
                 var zero = gmath.zero(t);
-                var src = Random.Blocks<T>(w, 3, (zero, gmath.maxval<T>()));
+                var src = Random.Blocks<T>(w, domain(zero, gmath.maxval<T>()),3);
 
                 (var x0, var x1, var x2) = src.LoadVectors(0,1,2);
 
@@ -67,7 +67,7 @@ namespace Z0
             void check()
             {
                 var zero = gmath.zero(t);
-                var src = Random.Blocks<T>(w, 3, (zero, gmath.maxval<T>()));
+                var src = Random.Blocks<T>(w, domain(zero, gmath.maxval<T>()),3);
 
                 (var x0, var x1, var x2) = src.LoadVectors(0,1,2);
 

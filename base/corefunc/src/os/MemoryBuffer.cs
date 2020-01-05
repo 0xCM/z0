@@ -14,7 +14,7 @@ namespace Z0
     using static As;
 
     /// <summary>
-    /// Defines an immovable and unmanaged buffer that requires explicit allocation as disposal
+    /// Defines an unmanaged/immovable buffer that requires explicit allocation as disposal
     /// </summary>
     public unsafe readonly ref struct MemoryBuffer
     {
@@ -49,8 +49,7 @@ namespace Z0
         [MethodImpl(Inline)]
         MemoryBuffer(ReadOnlySpan<byte> content)
             : this(content.Length)
-        {
-            
+        {            
             Fill(content);
         }
 

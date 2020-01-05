@@ -6,8 +6,7 @@ namespace Z0
     using static zfunc;
 
     public class AsmRdRand
-    {
-        
+    {        
         /// <summary>
         /// Finds the first method declared by a type that matches a specified name
         /// and returns a pointer to the method definition
@@ -30,15 +29,9 @@ namespace Z0
             Marshal.Copy(rdrand, 0, methodPtr<AsmRdRand>(nameof(RandNative)), rdrand.Length);
         
             
-            var code = AsmCode.FromBytes<uint>(rdrand);
-            var emitter = code.CreateEmitter();
+            var code = AsmCode.Load(rdrand, moniker<uint>("rdrand"));
+            var emitter = code.CreateEmitter<uint>();
             emitter();
-
-            //var il = code.CreateEmitter().Method.GetMethodBody().GetILAsByteArray();
-            //var emitter = code.CreateEmitter();
-            //var il = emitter.Method.GetMethodBody().GetILAsByteArray();
-            //var dst = methodPtr<AsmRdRand>(nameof(Next));
-            //Marshal.Copy(il, 0, dst, il.Length);
 
         }
 

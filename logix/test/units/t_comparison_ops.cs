@@ -8,13 +8,14 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static zfunc;
+
+    using static CpuOps;
+    
     using P = Predicates;    
     using S = ScalarOps;
-    using static CpuOps;
 
     public class t_comparison_ops : TypedLogixTest<t_comparison_ops>
     {
-
         public void scalar_eq_op_check()
         {
             scalar_eq_op_check<byte>();

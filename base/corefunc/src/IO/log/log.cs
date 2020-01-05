@@ -15,13 +15,19 @@ namespace Z0
         static LogPaths Paths 
             => LogPaths.The;
             
+
+        public static void WriteAsmInfo(string data, FolderName subfolder, Moniker m)            
+            => Paths.AsmInfoPath(subfolder, m).Overwrite(data);
+        
+        public static string ReadAsmInfo(FolderName subfolder, Moniker m)            
+            => Paths.AsmInfoPath(subfolder, m).ReadText();
+
         public static FilePath LogBenchmarks<R>(string basename, R[] records, LogWriteMode mode = LogWriteMode.Create, bool header = true, char delimiter = AsciSym.Pipe)
             where R : IRecord
         {
             if(records.Length == 0)
                 return FilePath.Empty;
                         
-
             return Log.Get(LogTarget.Define(LogArea.Bench)).Write(records,FolderName.Empty, basename, mode, delimiter, header, FileExtension.Define("csv"));
         }
 
@@ -119,9 +125,7 @@ namespace Z0
             {
                 lock(locker)
                     LogPath.Append(text);
-            }
-
-            
+            }            
         }
 
         sealed class AppLog : Logger<AppLog>

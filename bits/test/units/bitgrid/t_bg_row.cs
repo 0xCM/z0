@@ -27,7 +27,7 @@ namespace Z0
                 {                
                     var r1 = BitGrid.row(bg,row);
                     var r2 = bs.Slice(row*n,n);
-                    var r4 = BitVector.from(n, r2);
+                    var r4 = BitVector.create(n, r2);
                     Claim.eq(r1, r4);
                 }
             }
@@ -48,7 +48,7 @@ namespace Z0
                 {                
                     var r1 = BitGrid.row(bg,row);
                     var r2 = bs.Slice(row*n,n);
-                    var r4 = BitVector.from(n, r2);
+                    var r4 = BitVector.create(n, r2);
                     Claim.eq(r1, r4);
                 }
             }

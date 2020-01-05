@@ -203,6 +203,11 @@ namespace Z0
             }
         }
 
+        public bool NonEmpty
+        {
+            get => !IsZero;
+        }
+
         public bool Equals(Matrix256<M,N,T> rhs)
         {
             for(var r = 0; r < (int)RowCount; r ++)

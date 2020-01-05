@@ -12,11 +12,29 @@ namespace Z0
     public abstract class UnitTest<U> : TestContext<U>, IUnitTest
         where U : UnitTest<U>
     {
-        protected UnitTest(ITestConfig config = null, IPolyrand random = null)
+        protected UnitTest()
+            : base(null,null)
+        {
+
+        }
+
+        protected UnitTest(ITestConfig config)
+            : base(config, null)
+            {
+
+            }        
+
+        protected UnitTest(ITestConfig config, IPolyrand random)
             : base(config, random)
             {
 
             }        
+
+        protected UnitTest(IPolyrand random)
+            : base(null, random)
+        {
+
+        }        
 
         /// <summary>
         /// Produces the name of the test case for the specified function
@@ -40,7 +58,7 @@ namespace Z0
         /// <param name="root">The root name</param>
         [MethodImpl(Inline)]
         protected string CaseName<T>(string root, T t = default)
-            => $"{GetType().Name}/{root}_{moniker(t)}";
+            => $"{GetType().Name}/{root}_{suffix(t)}";
 
         [MethodImpl(Inline)]
         protected string CaseName<W,T>(string root, W w = default, T t = default)

@@ -5,21 +5,19 @@
 namespace Z0
 {
     using System;
-	using System.Linq;
+	using System.Runtime.CompilerServices;
+
+	using static zfunc;
 
 	/// <summary>
 	/// Represents a native code block
 	/// </summary>
 	public readonly struct CodeBlock 
     {
-    	public CodeBlock(ulong address, byte[] data) 
-        {
-			Address = address;
-			Data = data;
-		}
+		public static CodeBlock Empty => new CodeBlock(0, new byte[]{0});
 
 		/// <summary>
-		/// The location of the block head
+		/// The location of the leading segment
 		/// </summary>
 		public readonly ulong Address;
 	
@@ -27,11 +25,20 @@ namespace Z0
 		/// The block data
 		/// </summary>
     	public readonly byte[] Data;
-	
-        string FormatData()
-            => Data.FormatHex(true, false, false, true);//.Select(x => x.ToString()).Concat(" ");
 
+    	public CodeBlock(ulong address, byte[] data) 
+        {
+			Address = address;
+			Data = data;
+		}	
+
+		public bool IsEmpty
+		{
+			[MethodImpl(Inline)]
+			get => Address == 0 && Data.Length == 1 && Data[0] == 0;
+		}
+		
 		public override string ToString() 
-			=> $"{Address.FormatHex()}: {FormatData()}";
+			=> $"{Address.FormatHex()}: {Data.FormatHex(true, false, false, true)}";
 	}
 }

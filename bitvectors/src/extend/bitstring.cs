@@ -110,7 +110,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitVector4 ToBitVector(this BitString src, N4 n)
-            => BitVector.from(n,src);
+            => BitVector.create(n,src);
 
         /// <summary>
         /// Creates an 8-bit bitvector from bitstring
@@ -118,7 +118,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static BitVector8 ToBitVector(this BitString src, N8 n)
-            => BitVector.from(n,src);
+            => BitVector.create(n,src);
 
         /// <summary>
         /// Creates a 16-bit bitvector from bitstring
@@ -146,7 +146,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static BitVector32 ToBitVector(this BitString src, N32 n)
-            => BitVector.from(n, src); 
+            => BitVector.create(n, src); 
 
         /// <summary>
         /// Creates a 64-bit bitvector from bitstring
@@ -154,7 +154,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static BitVector64 ToBitVector(this BitString src, N64 n)
-            => BitVector.from(n,src);
+            => BitVector.create(n,src);
 
         /// <summary>
         /// Constructs a generic bitvector from bitstring
@@ -170,5 +170,12 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => BitVector.natural<N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> ToBitVector<N,T>(this BitString src, N128 n, T t = default)
+            where T : unmanaged   
+            where N : unmanaged, ITypeNat
+                => DataBlocks.safeload(n,src.Pack().As<byte, T>()).LoadVector();
+
     }
 }

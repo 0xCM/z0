@@ -6,13 +6,26 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+
     using static zfunc;
     using static AsIn;     
     using static Stacks;
 
     public static class Hex
     {
+        /// <summary>
+        /// Standard hex specifier that leads the numeric content
+        /// </summary>
+        public const string PreSpec = "0x";
+
+        /// <summary>
+        /// Standard hex specifier that trails the numeric content
+        /// </summary>
+        public const string PostSpec = "h";         
+
         /// <summary>
         /// Determines whether a character is a hex digit
         /// </summary>
@@ -40,8 +53,7 @@ namespace Z0
         /// <summary>
         /// Presuming a source value int the range [0,15], returns the corresponding hex 
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">The value to interpret</param>
         [MethodImpl(Inline)]
         public static char digit(byte value)
             => (char)skip(in head(HexCodes), 0xF & value);
@@ -93,7 +105,6 @@ namespace Z0
             seek(ref dst,1) = (char)skip(in codes, (value >> 4) & 0xF);
             return Stacks.charspan(ref storage);
         }
-
 
         /// <summary>
         /// Returns the 4-character hex representation of an unsigned 16-bit integer
@@ -184,11 +195,26 @@ namespace Z0
                 return Errors.ThrowArgException<char,byte>(c);
         }
 
+        /// <summary>
+        /// Parses a hex byte
+        /// </summary>
+        /// <param name="src">hex text</param>
+        public static byte parsebyte(string src)    
+            => byte.Parse(src.Remove(PreSpec), NumberStyles.HexNumber);
+
+        /// <summary>
+        /// Parses a delimited sequence of hex bytes
+        /// </summary>
+        /// <param name="src">The delimited hex</param>
+        /// <param name="sep">The delimiter</param>
+        public static IEnumerable<byte> parsebytes(string src, char sep = AsciSym.Comma)
+            => src.Split(sep).RemoveSubstring(PreSpec).Select(s => byte.Parse(s, NumberStyles.HexNumber));
+               
         [MethodImpl(Inline)]
         static string format_hex_digits<T>(string digits, bool zpad = true, bool specifier = true)
             where T : unmanaged
         {
-            var spec = specifier ? "0x" : string.Empty;
+            var spec = specifier ? PreSpec : string.Empty;
             return zpad ?  (spec + digits.PadLeft(size<T>() * 2, '0')) : (spec + digits);
         }
 
@@ -204,7 +230,6 @@ namespace Z0
                 return As.int32(src).HexDigits(uppercase);
             else 
                 return As.int64(src).HexDigits(uppercase);
-
         } 
 
         [MethodImpl(Inline)]

@@ -15,6 +15,15 @@ namespace Z0
     partial class Reflections
     {
         /// <summary>
+        /// Creates a binary operator delegate from a conforming method
+        /// </summary>
+        /// <param name="src">The methodd that defines a binary operator</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static Func<T,T,T> ToBinaryOp<T>(this MethodInfo src)
+            => binop<T>(src);
+
+        /// <summary>
         /// Creates a delegate via dynamic method emit via that is invoked via the Call opcode
         /// </summary>
         /// <param name="target">The method for which a binary operator delegate will be created</param>

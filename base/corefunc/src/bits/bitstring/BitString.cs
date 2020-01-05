@@ -143,7 +143,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T TakeScalar<T>()
             where T : unmanaged
-                => PackSingle<T>(0);
+                => PackOne<T>(0);
 
         /// <summary>
         /// Renders a segment as a packed primal value
@@ -153,7 +153,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T TakeScalar<T>(int offset)
             where T : unmanaged
-                => PackSingle<T>(offset);
+                => PackOne<T>(offset);
 
         /// <summary>
         /// Renders a bitstring segment as a packed byte value
@@ -576,7 +576,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        readonly T PackSingle<T>(int offset)
+        readonly T PackOne<T>(int offset)
             where T : unmanaged
         {                        
             var src = data.ToReadOnlySpan();

@@ -25,7 +25,5 @@ namespace Z0
 
         public static string Format(this GridStats stats, int? colpad = null, char? delimiter = null)
             => GridStats.Format(stats, colpad, delimiter);
-
     }
-
 }

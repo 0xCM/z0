@@ -5,11 +5,6 @@
 namespace Z0.Designators
 {        
     using System;
-    using System.Reflection;
-    using System.Linq;
-    using System.Collections.Generic;
-
-    using D = Z0.Designators;
 
     /// <summary>
     /// Represents the assembly

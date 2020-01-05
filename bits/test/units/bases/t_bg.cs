@@ -114,7 +114,7 @@ namespace Z0
                 counter.Stop();
             }
 
-            ReportBenchmark($"gbg_read_{moniker<T>()}", CycleCount*M*N, counter);
+            ReportBenchmark($"gbg_read_{suffix<T>()}", CycleCount*M*N, counter);
         }
 
         protected void bm_bitread_bench<T>(SystemCounter counter = default)
@@ -134,7 +134,7 @@ namespace Z0
                 counter.Stop();
             }
 
-            ReportBenchmark($"gbm_bitread_{moniker<T>()}", CycleCount*M*N, counter);
+            ReportBenchmark($"gbm_bitread_{suffix<T>()}", CycleCount*M*N, counter);
         }
 
         protected void bg_bitwrite_bench<T>(ushort M, ushort N, SystemCounter counter = default)
@@ -153,7 +153,7 @@ namespace Z0
                 counter.Stop();
             }
 
-            ReportBenchmark($"gbg_bitwrite_{moniker<T>()}", CycleCount*M*N, counter);
+            ReportBenchmark($"gbg_bitwrite_{suffix<T>()}", CycleCount*M*N, counter);
         }
 
         void emit_grid_maps()

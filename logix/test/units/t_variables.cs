@@ -7,10 +7,10 @@ namespace Z0.Logix
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     using System.Reflection;
+
     using static zfunc;
+
     using static TypedLogicSpec;
 
     public class t_variables : UnitTest<t_variables>
@@ -38,10 +38,8 @@ namespace Z0.Logix
             var expr2 = y;
             var result = solve(expr1, expr2,(1,0xFF));
             Trace($"Expression is satisfied by {result.Count} values");
-            Claim.nea(result.IsEmpty());
-                                                
+            Claim.nea(result.IsEmpty());                                                
         }
-
 
         public void minimize()
         {
@@ -51,9 +49,7 @@ namespace Z0.Logix
             var expr2 = literal(32u);
             var result = solve(expr1, expr2, (1,0xFF));
             Trace($"Expression is satisfied by {result.Count} values");
-
         }
-
 
         IReadOnlyList<T> solve<T>(VariedExpr<N1,T> expr, LiteralExpr<T> match, Interval<T> domain)
             where T : unmanaged
@@ -90,9 +86,7 @@ namespace Z0.Logix
                 }
             }
             return sln;
-
         }
-
 
         void check_4x2(BinaryBitwiseOpKind k0, BinaryBitwiseOpKind k1)
         {
@@ -162,12 +156,7 @@ namespace Z0.Logix
                 var actual = LogicEngine.eval(expr).Value;
                 Claim.eq(expect,actual);          
             }
-
         }
-
-
-
     }
 
- 
 }

@@ -1,4 +1,4 @@
-// 2020-01-03 03:16:00:276
+// 2020-01-05 02:30:50:630
 Span<byte> GetBytes(in int src)
 {
     IL_0000: ldarg.1
@@ -461,25 +461,6 @@ int IfElse10(int x)
     IL_0050: ret
     IL_0051: ldc.i4.0
     IL_0052: ret
-
-}
-ReadOnlySpan<byte> get_U8Data()
-{
-    IL_0000: ldsflda <PrivateImplementationDetails>/__StaticArrayInitTypeSize=64 <PrivateImplementationDetails>::2200B7EF12949ECB22F56D4DF64AB0E703A54F6FD54AAF957AA00481B278B097
-    IL_0005: ldc.i4.s 64
-    IL_0007: newobj System.Void System.ReadOnlySpan`1<System.Byte>::.ctor(System.Void*,System.Int32)
-    IL_000C: ret
-
-}
-ReadOnlySpan<uint> get_U32Data()
-{
-    IL_0000: ldc.i4.s 16
-    IL_0002: newarr System.UInt32
-    IL_0007: dup
-    IL_0008: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=64 <PrivateImplementationDetails>::F07C764B5810DE9E742AEE3E47E28F8A7AA453D2B90055C49ABB405761497C17
-    IL_000D: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
-    IL_0012: call System.ReadOnlySpan`1<System.UInt32> System.ReadOnlySpan`1<System.UInt32>::op_Implicit(System.UInt32[])
-    IL_0017: ret
 
 }
 uint Or8Inline(uint x0, uint x1, uint x2, uint x3, uint x4, uint x5, uint x6, uint x7)

@@ -82,6 +82,97 @@ namespace Z0
             || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong);
 
+        /// <summary>
+        /// Returns a primal type's kind classifier
+        /// </summary>
+        /// <typeparam name="T">The type to test</typeparam>
+        [MethodImpl(Inline)]
+        public static PrimalKind kind(Type t)
+            => Type.GetTypeCode(t) switch{
+                TypeCode.Byte => PrimalKind.U8,
+                TypeCode.SByte => PrimalKind.I8,
+                TypeCode.Int16 => PrimalKind.I16,
+                TypeCode.UInt16 => PrimalKind.U16,
+                TypeCode.Int32 => PrimalKind.I32,
+                TypeCode.UInt32 => PrimalKind.U32,
+                TypeCode.Int64 => PrimalKind.I64,
+                TypeCode.UInt64 => PrimalKind.U64,
+                TypeCode.Single => PrimalKind.F32,
+                TypeCode.Double => PrimalKind.F64,
+                _ => PrimalKind.None
+            };
+
+        [MethodImpl(Inline)]
+        public static int size(PrimalKind kind)
+            => kind switch{
+                PrimalKind.U8 => 1,
+                PrimalKind.I8 => 1,
+                PrimalKind.U16 => 2,
+                PrimalKind.I16 => 2,
+                PrimalKind.I32 => 4,
+                PrimalKind.U32 => 4,
+                PrimalKind.F32 => 4,
+                PrimalKind.I64 => 8,
+                PrimalKind.U64 => 8,
+                PrimalKind.F64 => 8,
+                _ => 0
+             };
+
+        [MethodImpl(Inline)]
+        public static int size(Type t)
+            => size(kind(t));
+            
+        [MethodImpl(Inline)]
+        public static int bitsize(PrimalKind kind)
+            => size(kind) * 8;
+
+        [MethodImpl(Inline)]
+        public static int bitsize(Type t)
+            => size(t) * 8;
+
+        /// <summary>
+        /// Determines whether a kind is one of the signed integer types
+        /// </summary>
+        /// <typeparam name="T">The type to test</typeparam>
+        [MethodImpl(Inline)]
+        public static bit signedint(PrimalKind k)
+            => (k & PrimalKind.SignedIntegral) != 0;
+
+        /// <summary>
+        /// Determines whether a kind is one of the signed integer types
+        /// </summary>
+        /// <typeparam name="T">The type to test</typeparam>
+        [MethodImpl(Inline)]
+        public static bit unsignedint(PrimalKind k)
+            => (k & PrimalKind.UnsignedIntegral) != 0;
+
+        /// <summary>
+        /// Determines whether a type is a primal integer
+        /// </summary>
+        /// <typeparam name="T">The type to test</typeparam>
+        [MethodImpl(Inline)]
+        public static bit integral(PrimalKind k)
+            => (k & PrimalKind.Integral) != 0;
+
+        /// <summary>
+        /// Determines whether a type is a primal float
+        /// </summary>
+        /// <typeparam name="T">The type to test</typeparam>
+        [MethodImpl(Inline)]
+        public static bit floating(PrimalKind k)
+            => (k & PrimalKind.Float) != 0;
+        
+        /// <summary>
+        /// Produces a character {i | u | f} indicating whether the source type is signed, unsigned or float
+        /// </summary>
+        /// <param name="t">A type representative</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]   
+        public static char indicator(PrimalKind k)
+            => floating(k) ? AsciLower.f 
+            : signedint(k) ? AsciLower.i
+            : unsignedint(k) ? AsciLower.u
+            : AsciDigits.A0;
 
         [MethodImpl(Inline)]
         static PrimalKind kind_u<T>(T t = default)
@@ -124,7 +215,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return PrimalKind.F64;
             else
-                throw unsupported<T>();
+                return PrimalKind.None;
             
         }
 

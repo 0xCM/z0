@@ -17,6 +17,21 @@ namespace Z0
 
     partial class Reflections
     {
+        /// <summary>
+        /// Returns the number of bytes occupied by a type if it is primal and 0 otherwise
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static int PrimalSize(this Type t)
+            => Primitive.size(t);
+
+        /// <summary>
+        /// Returns the number of bits occupied by a type if it is primal and 0 otherwise
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static int PrimalBitSize(this Type t)
+            => Primitive.bitsize(t);
+       
         [MethodImpl(Inline)]
         public static bool IsStatic(this PropertyInfo p)
             => p.GetGetMethod()?.IsStatic == true 

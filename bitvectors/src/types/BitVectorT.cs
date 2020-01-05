@@ -213,6 +213,24 @@ namespace Z0
         }
 
         /// <summary>
+        /// Extracts the lower bits
+        /// </summary>
+        public readonly T Lo
+        {
+            [MethodImpl(Inline)]
+            get => gbits.lo(data);
+        }
+
+        /// <summary>
+        /// Extracts the upper bits
+        /// </summary>
+        public readonly T Hi
+        {
+            [MethodImpl(Inline)]
+            get => gbits.hi(data);
+        }
+
+        /// <summary>
         /// The number of bits represented by the vector
         /// </summary>
         public readonly int Width 

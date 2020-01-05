@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
     using static OpDelegate;
-    using static OpDelegates;
+    using static DelegateSurrogates;
 
     public class t_compare : t_gmath<t_compare>
     {     
@@ -163,7 +163,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void max_check<T>(BinaryDelegate<T> expect, T t = default)
+        void max_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckBinaryPredMatch(expect, GX.max(t), t);
 
@@ -185,7 +185,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void min_check<T>(BinaryDelegate<T> expect, T t = default)
+        void min_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckBinaryPredMatch(expect, GX.min(t), t);
 

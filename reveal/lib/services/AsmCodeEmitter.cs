@@ -101,7 +101,5 @@ namespace Z0
                     dst.WriteLine(AsmSeparator);
             }
         }
-
     }
-
 }

@@ -47,5 +47,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static double dec(double src)
             => --src;
+
+        /// <summary>
+        /// Computes the nonnegative distance between two values
+        /// </summary>
+        /// <param name="a">The first number</param>
+        /// <param name="b">The second number</param>
+        [MethodImpl(Inline)]
+        public static ulong dist(double a, double b)
+            => a >= b ? (ulong)(a - b) : (ulong)(b - a);
+
     }    
 }

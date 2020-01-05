@@ -5,20 +5,17 @@
 namespace Z0.Designators
 {        
     using System;
-    using System.Reflection;
-    using System.Linq;
-    using System.Collections.Generic;
 
-    using D = Z0.Designators;
 
     /// <summary>
     /// Represents the assembly
     /// </summary>
     public sealed class LinearTest : AssemblyDesignator<LinearTest>
     {
+        public override AssemblyRole Role 
+            => AssemblyRole.Test;
+
         public override void Run(params string[] args)
             => App.Run(args);
-
     }
-
 }

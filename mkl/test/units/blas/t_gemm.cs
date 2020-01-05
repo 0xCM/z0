@@ -114,16 +114,16 @@ namespace Z0.Mkl.Test
             
             var src = Random.Stream(domain);
             gemm_check(src, epsilon, n64,  n64, n64);
-            gemm_check(src,epsilon, n3,  n3, n3);
-            gemm_check(src,epsilon, n3,  n5, n4);
-            gemm_check(src,epsilon, n5,  n5, n7);
-            gemm_check(src,epsilon, n10, n10, n10);
-            gemm_check(src,epsilon, n17, n3, n17);
-            gemm_check(src,epsilon, n2,  n2, n2);
-            gemm_check(src,epsilon, n4,  n4, n4);
-            gemm_check(src,epsilon, n8,  n8, n8);
-            gemm_check(src,epsilon, n16, n16, n16);
-            gemm_check(src,epsilon, n32, n32, n32);
+            gemm_check(src, epsilon, n3,  n3, n3);
+            gemm_check(src, epsilon, n3,  n5, n4);
+            gemm_check(src, epsilon, n5,  n5, n7);
+            gemm_check(src, epsilon, n10, n10, n10);
+            gemm_check(src, epsilon, n17, n3, n17);
+            gemm_check(src, epsilon, n2,  n2, n2);
+            gemm_check(src, epsilon, n4,  n4, n4);
+            gemm_check(src, epsilon, n8,  n8, n8);
+            gemm_check(src, epsilon, n16, n16, n16);
+            gemm_check(src, epsilon, n32, n32, n32);
         }
     
         BenchmarkRecord gemm_check<M,K,N,T>(IEnumerable<T> src, T epsilon = default, M m = default, K k = default, N n = default, bool trace = false)
@@ -146,11 +146,13 @@ namespace Z0.Mkl.Test
             for(var i=0; i<CycleCount; i++)
             {
                 src.StreamTo(A.Unblocked);
-                src.StreamTo(B.Unblocked);
+                src.StreamTo(B.Unblocked);                
+
                 var sw = stopwatch();
                 mkl.gemm(A, B, ref X);            
                 runtime += snapshot(sw);
                 
+
                 Matrix.mul(A, B, ref E);
 
                 if(trace)       
@@ -160,14 +162,15 @@ namespace Z0.Mkl.Test
                     Trace($"E = {E.Format()}");
                 }
                 
-                for(var j=0; j< X.Unblocked.Length; j++)
-                {
-                    if(!gmath.within(EU[j],XU[j],epsilon))
-                    {
-                        Trace($"{label} is a problem");
-                        break;
-                    }
-                }
+                // for(var j=0; j< X.Unblocked.Length; j++)
+                // {
+                //     if(!gmath.within(EU[j],XU[j],epsilon))
+                //     {
+                //         var delta = gmath.abs(gmath.sub(EU[j],XU[j]));
+                //         Trace($"{label} is a problem: |{EU[j]} - {XU[j]}| = {delta} > {epsilon} ");
+                //         break;
+                //     }
+                // }
 
                 Claim.close(E.Unblocked, X.Unblocked, epsilon);
             }

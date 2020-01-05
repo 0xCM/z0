@@ -14,6 +14,8 @@ namespace Z0.OpCodes
     [OpCodeProvider]
     public static class memory
     {
+
+
         static N64 n64 => default;
 
         public static bit iskind_16u()

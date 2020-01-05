@@ -7,11 +7,8 @@ namespace Z0.Logix
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     
     using static zfunc;
-
 
     public class t_ternary_logic : UnitTest<t_ternary_logic>
     {
@@ -21,7 +18,7 @@ namespace Z0.Logix
         IEnumerable<TernaryOpKind> TernaryKinds
             => ScalarOpApi.TernaryBitwiseKinds;
         
-        public void check_op_identities()
+        public void op_identities()
         {                         
             foreach(var kind in TernaryKinds)
             {
@@ -32,7 +29,7 @@ namespace Z0.Logix
             }
         }
 
-        public void check_op_equivalence()
+        public void op_equivalence()
         {
             foreach(var kind in TernaryKinds)
             {
@@ -43,7 +40,7 @@ namespace Z0.Logix
             }
         }
 
-        public void check_select()
+        public void op_select()
         {
             check_select<byte>();
             check_select<ushort>();
@@ -151,7 +148,7 @@ namespace Z0.Logix
                 BitVector<T> v = ScalarOpApi.eval(kind, a.Scalar, b.Scalar, c.Scalar);
 
                 if(u != v)
-                    Trace($"Equivalence failed for ternary op {kind}:{moniker<T>()}");
+                    Trace($"Equivalence failed for ternary op {kind}:{suffix<T>()}");
 
                 Claim.eq(u,v);
 

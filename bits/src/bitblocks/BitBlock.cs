@@ -91,13 +91,6 @@ namespace Z0
             this.BitCount = n;
         }
 
-        [MethodImpl(Inline)]
-        internal BitBlock(Block256<T> src)
-        {            
-            this.data = src;
-            this.BitCount = src.BlockCount * 256;
-        }
-
         /// <summary>
         /// The underlying cell data
         /// </summary>
@@ -105,15 +98,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => data;
-        }
-
-        /// <summary>
-        /// Specifies a reference to the leading cell
-        /// </summary>
-        public ref T Head
-        {
-            [MethodImpl(Inline)]
-            get => ref data.Head;
         }
 
         /// <summary>
@@ -126,15 +110,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Is true if no bits are enabled, false otherwise
-        /// </summary>
-        public bit IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Pop() == 0;
-        }
-
-        /// <summary>
         /// Is true if at least one enabled bit; false otherwise
         /// </summary>
         public readonly bit NonEmpty
@@ -144,49 +119,15 @@ namespace Z0
         }
 
         /// <summary>
-        /// The number of allocated blocks
-        /// </summary>
-        public int BlockCount
-        {
-            [MethodImpl(Inline)]
-            get => data.BlockCount;
-        }
-
-        /// <summary>
-        /// The number of allocated cells
-        /// </summary>
-        public int CellCount
-        {
-            [MethodImpl(Inline)]
-            get => data.CellCount;
-        }
-
-        /// <summary>
-        /// Gets the mapped bit location
-        /// </summary>
-        /// <param name="index">The bit position</param>
-        [MethodImpl(Inline)]
-        public readonly BitPos<T> Pos(int index)
-            => BitPos.FromBitIndex<T>((uint)index);
-
-        /// <summary>
         /// A bit-level accessor/manipulator
         /// </summary>
         public bit this[int index]
         {
             [MethodImpl(Inline)]
-            get 
-            {
-                var loc = Pos(index);
-                return BitMask.testbit(data[loc.CellIndex], loc.BitOffset);
-            }
+            get => gbits.test(data,index);
             
             [MethodImpl(Inline)]
-            set
-            {
-                var loc = Pos(index);
-                data[loc.CellIndex] = gbits.set(data[loc.CellIndex], (byte)loc.BitOffset, value);
-            }
+            set => gbits.set(data, index,value);
         }
 
         /// <summary>
@@ -195,26 +136,15 @@ namespace Z0
         /// <param name="first">The linear index of the first bit</param>
         /// <param name="last">The linear index of the last bit</param>
         [MethodImpl(Inline)]
-        public T Slice(int first, int last)
-            => Extract(Pos(first), Pos(last));
-
-        /// <summary>
-        /// Retrieves, at most, one cell's worth of bits defined by an inclusive bit index range
-        /// </summary>
-        /// <param name="first">The linear index of the first bit</param>
-        /// <param name="last">The linear index of the last bit</param>
-        public T this[int first, int last]
-        {
-            [MethodImpl(Inline)]
-            get => Slice(first,last);
-        }
+        public T TakeScalarBits(int first, int last)
+            => gbits.bitseg(data, first,last);
 
         /// <summary>
         /// Extracts the represented data as a bitstring
         /// </summary>
         [MethodImpl(Inline)]
         public readonly BitString ToBitString()
-            => BitString.scalars<T>(data, BitCount); 
+            => data.ToBitString(BitCount);
 
         /// <summary>
         /// Counts the enabled bits
@@ -227,58 +157,6 @@ namespace Z0
                 count += gbits.pop(data[i]);
             return count;
         }
-
-        /// <summary>
-        /// Counts the number of bits set up to and including an index-identified bit
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="index">The 0-based linear bit index</param>
-        public uint Pop(int index)
-        {
-            var rank = 0u;
-            var segments = Cells(index);
-            for(var i=0; i < segments.Length; i++)
-                rank += (uint)gbits.pop(segments[i]);            
-            return rank;
-        }
-
-        /// <summary>
-        /// Returns a reference to the cell in which a specified bit is defined
-        /// </summary>
-        /// <param name="pos">The segmented bit position</param>
-        [MethodImpl(Inline)]
-        public ref T Cell(BitPos<T> pos)
-            => ref data[pos.CellIndex];
-
-        /// <summary>
-        /// Retrieves the cells up to and including an index-identified bit
-        /// </summary>
-        /// <param name="index">The bit position</param>
-        [MethodImpl(Inline)]
-        public readonly Span<T> Cells(int index)
-            => data.Slice(0, Pos(index).CellIndex - 1);
-
-        [MethodImpl(Inline)]
-        T Extract(BitPos<T> first, BitPos<T> last)
-        {
-            var wantedCount = last - first;
-            if(wantedCount > CellWidth)
-                return gmath.maxval<T>();
-
-            var sameSeg = first.CellIndex == last.CellIndex;
-            var firstCount = uint8(sameSeg ? wantedCount : CellWidth - first.BitOffset);
-            var lastCount = uint8(wantedCount - firstCount);
-            var part1 = gbits.bitslice(Cell(first), (byte)first.BitOffset, firstCount);
-            
-            if(sameSeg)
-                return part1;
-
-            var part2 = gmath.sal(gbits.bitslice(Cell(last), 0, lastCount), firstCount);
-            return gmath.or(part1, part2);              
-        }
-
-        public BitBlock<T> Replicate()
-            => new BitBlock<T>(data.Replicate());
                     
         [MethodImpl(Inline)]
         public bool Equals(in BitBlock<T> y)

@@ -87,7 +87,7 @@ namespace Z0
                 bit a = x % y;
                 var b = BitBlocks.modprod(x,y);
                 if(a != b)
-                    Trace($"nbc {n}x{moniker<T>()} is a problem");
+                    Trace($"nbc {n}x{suffix<T>()} is a problem");
                 Claim.yea(a == b);            
             }
         }
@@ -128,7 +128,7 @@ namespace Z0
             for(var i=0; i<RepCount; i+= segcount)
             {
                 var bcSrc = src.Slice(i,segcount);
-                var bc = bcSrc.ToBitBlock(rep);
+                var bc = bcSrc.ToNatBits(rep);
                 ClaimEqual(bc,bc.ToBitString());
                 Claim.eq(n, bc.Width);
                 Claim.eq(segcap * segcount, totalcap);                

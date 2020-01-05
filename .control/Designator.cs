@@ -57,6 +57,9 @@ namespace Z0.Designators
             D.Machines.Designated,
             D.MachineTest.Designated,
 
+            D.Logix.Designated,
+            D.LogixTest.Designated,
+
             D.LibM.Designated,            
             D.LibMTest.Designated,
 

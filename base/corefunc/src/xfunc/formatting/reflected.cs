@@ -16,7 +16,7 @@ namespace Z0
     partial class Reflections
     {        
         [MethodImpl(Inline)]
-        public static string PrialNumericName(this Type src)
+        public static string TypeKeyword(this Type src)
         {
             if(src == typeof(sbyte) || src.GetUnderlyingType() == typeof(sbyte))
                 return "sbyte";
@@ -41,6 +41,20 @@ namespace Z0
             else 
                 return string.Empty;
         }
+
+        /// <summary>
+        /// Specifies the set of all primal numeric types
+        /// </summary>
+        static readonly HashSet<Type> _PrimalNumericCache = 
+            new HashSet<Type>(new Type[]{
+                typeof(byte), typeof(ushort), typeof(uint), typeof(ulong),
+                typeof(sbyte), typeof(short), typeof(int), typeof(long),
+                typeof(float),typeof(double)
+                });
+
+        [MethodImpl(Inline)]
+        static bool IsPrimalNumeric(this Type src)
+            => _PrimalNumericCache.Contains(src) || _PrimalNumericCache.Contains(src.GetUnderlyingType());
 
         /// <summary>
         /// Constructs a display name for a type
@@ -146,7 +160,7 @@ namespace Z0
                 return attrib.DisplayName;
 
             if(src.IsPrimalNumeric())
-                return src.PrialNumericName();
+                return src.TypeKeyword();
             
             if(src.IsBool())
                 return "bool";
@@ -177,9 +191,6 @@ namespace Z0
                 name += ">";
             }
             return name;
-
         }
-
     }
-
 }

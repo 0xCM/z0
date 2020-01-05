@@ -5,16 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
 
     public class t_full_adder : UnitTest<t_full_adder>
     {
-
-        public void full_adder_logical()
+        public void fulladder_logical()
         {
             FullAdder.Compute(off, off, off, out bit s0, out bit c0);
             Claim.eq(s0, off);
@@ -35,10 +32,9 @@ namespace Z0
             FullAdder.Compute(off, off, on, out bit s4, out bit c4);
             Claim.eq(s4, on);
             Claim.eq(c4, off);
-
         }
 
-        public void fa_256x64u_check()
+        public void vfulladder_256x64u()
         {
             var x = Random.CpuVector<ulong>(n256);
             var y = Random.CpuVector<ulong>(n256);
@@ -58,7 +54,7 @@ namespace Z0
             }
         }
 
-        public void fa_32x32x64_bv()
+        public void bvfulladder_32x32x64()
         {
             var x = Random.BitVector(n32);
             var y = Random.BitVector(n32);
@@ -74,7 +70,6 @@ namespace Z0
                 Claim.eq(expect.y, cout[i]);
             }
         }
-
     }
 
 }

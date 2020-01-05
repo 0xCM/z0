@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
+
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse41;
@@ -106,12 +107,14 @@ namespace Z0
         public static Vector128<double> vblend(Vector128<double> x, Vector128<double> y, Blend2x64 spec)        
             => Blend(x, y, (byte)spec);
 
-
+        /// <summary>
+        /// __m128d _mm_blend_pd (__m128d a, __m128d b, const int imm8)BLENDPD xmm, xmm/m128, imm8
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
         public static Vector128<ulong> vblend(Vector128<ulong> x, Vector128<ulong> y, byte spec)        
             => v64u(Blend(v64f(x), v64f(y), spec));
-
-
     }
-
 }

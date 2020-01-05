@@ -72,11 +72,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitVector4 Row(int index)
-            => BitVector.direct(n4, Bits.bitslice((ulong)this, (byte)(index*4), (byte)4));
+            => BitVector.create(n4, Bits.bitslice((ulong)this, (byte)(index*4), (byte)4));
 
         [MethodImpl(Inline)]
         public BitVector16 Col(int index)
-            => BitVector.from(n16, Bits.gather(this,(C0 << index)));
+            => BitVector.create(n16, Bits.gather(this,(C0 << index)));
 
         // C0 = [0001 0001 ... 0001]
         // C1 = C0 << 1 = [0010 0010 ... 0010]

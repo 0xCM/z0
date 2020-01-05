@@ -38,6 +38,7 @@ namespace Z0
 
         }
 
+
         static void EmitAsm(Type[] types, FilePath dst)
         {
             var emitter = AsmCodeEmitter.Create(dst);
@@ -82,7 +83,7 @@ namespace Z0
         }
 
         void Disassemble(Type t)
-            => Disassemble(true, false, t);
+            => Disassemble(true, true, t);
 
         /// <summary>
         /// Emits assembly for an entire assembly. Heh.
@@ -96,6 +97,9 @@ namespace Z0
 
         void Disassemble(bool asm, bool cil)
         {
+            Deconstructor.Shred(typeof(fmath));
+            //Deconstructor.Shred(typeof(math), typeof(fmath), typeof(Bits),typeof(dinx));
+            
             Disassemble(new ExperimentalScenarios());
             Disassemble(typeof(OC.butterfly));    
             Disassemble(typeof(OC.bitmask));
@@ -105,6 +109,7 @@ namespace Z0
             Disassemble(typeof(OC.bitspan));    
             Disassemble(typeof(OC.bitconvert));    
             Disassemble(typeof(OC.stacked));    
+            Disassemble(typeof(OC.loops));    
 
 
             Disassemble(typeof(OC.nats));    

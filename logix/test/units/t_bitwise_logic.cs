@@ -16,7 +16,6 @@ namespace Z0.Logix
     /// </summary>
     public class t_bitwise_logic : LogixTest<t_bitwise_logic>
     {
-
         public void bwl_and_check()
         {
             var op = And;

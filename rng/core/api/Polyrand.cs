@@ -48,6 +48,33 @@ namespace Z0
                 return Next_i<T>();
         }
 
+        T Next_i<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(Int8Source.Next());                
+            else if(typeof(T) == typeof(short))
+                return generic<T>(Int16Source.Next());                
+            else if(typeof(T) == typeof(int))
+                return generic<T>(Int32Source.Next());                
+            else if(typeof(T) == typeof(long))
+                return generic<T>(Int64Source.Next());                
+            else 
+                return Next_f<T>();
+
+        }
+
+        T Next_f<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return generic<T>(Float32Source.Next());                
+            else if(typeof(T) == typeof(double))
+                return generic<T>(Float64Source.Next());                
+            else 
+                throw unsupported<T>();                
+        }
+
         [MethodImpl(Inline)]
         public T Next<T>(T max)
             where T : unmanaged
@@ -62,61 +89,6 @@ namespace Z0
                 return generic<T>(UInt64Source.Next(uint64(max)));                
             else 
                 return Next_i(max);
-        }
-
-        [MethodImpl(Inline)]
-        public T Next<T>(T min, T max)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return generic<T>(UInt8Source.Next(uint8(min), uint8(max)));                
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(UInt16Source.Next(uint16(min), uint16(max)));                
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(UInt32Source.Next(uint32(min), uint32(max)));                
-            else if(typeof(T) == typeof(ulong))
-                return generic<T>(UInt64Source.Next(uint64(min), uint64(max)));                
-            else 
-                return Next_i(min,max);
-        }
-
-        [MethodImpl(Inline)]
-        public T Next<T>(Interval<T> domain)
-            where T : unmanaged
-                => domain.Empty ? Next<T>() :  Next(domain.Left, domain.Right);
-
-        public IEnumerable<T> Take<T>(int count)
-            where T : unmanaged
-        {
-            var counter = 0;
-            while(counter++ < count)
-                yield return Next<T>();
-        } 
-
-        T Next_i<T>()
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(Int8Source.Next());                
-            else if(typeof(T) == typeof(short))
-                return generic<T>(Int16Source.Next());                
-            else if(typeof(T) == typeof(int))
-                return generic<T>(Int32Source.Next());                
-            else if(typeof(T) == typeof(long))
-                return generic<T>(Int64Source.Next());                
-            else 
-                return Next_f<T>();
-        }
-
-        T Next_f<T>()
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return generic<T>(Float32Source.Next());                
-            else if(typeof(T) == typeof(double))
-                return generic<T>(Float64Source.Next());                
-            else 
-                throw unsupported<T>();                
         }
 
         [MethodImpl(Inline)]
@@ -148,6 +120,23 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public T Next<T>(T min, T max)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(UInt8Source.Next(uint8(min), uint8(max)));                
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(UInt16Source.Next(uint16(min), uint16(max)));                
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(UInt32Source.Next(uint32(min), uint32(max)));                
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>(UInt64Source.Next(uint64(min), uint64(max)));                
+            else 
+                return Next_i(min,max);
+        }
+
+
+        [MethodImpl(Inline)]
         T Next_i<T>(T min, T max)
             where T : unmanaged
         {
@@ -175,6 +164,19 @@ namespace Z0
                 throw unsupported<T>();                
         }
 
+        [MethodImpl(Inline)]
+        public T Next<T>(Interval<T> domain)
+            where T : unmanaged
+                => domain.Empty ? Next<T>() :  Next(domain.Left, domain.Right);
+
+        public IEnumerable<T> Take<T>(int count)
+            where T : unmanaged
+        {
+            var counter = 0;
+            while(counter++ < count)
+                yield return Next<T>();
+        } 
+
         IBoundPointSource<sbyte> Int8Source
         {
             [MethodImpl(Inline)]
@@ -192,6 +194,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => this;
         }
+        
 
         IBoundPointSource<ushort> UInt16Source
         {
@@ -395,11 +398,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         float IBoundPointSource<float>.Next(float max)
-            => (float)Int32Source.Next((int)max) + NextF32();
+        {
+            var whole = (float)Int32Source.Next((int)max);
+            return whole + NextF32();
+        }
 
         [MethodImpl(Inline)]
         float IBoundPointSource<float>.Next(float min, float max)
-            => (float)Int32Source.Next((int)min, (int)max) + NextF32();
+        {
+            var whole = (float)Int32Source.Next((int)min, (int)max);
+            return whole + NextF32();
+        }
 
         [MethodImpl(Inline)]
         double IPointSource<double>.Next()
@@ -407,11 +416,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         double IBoundPointSource<double>.Next(double min, double max)
-            => (double)Int64Source.Next((long)min, (long)max) + NextF64();
+        {
+            var whole = (double)Int64Source.Next((long)min, (long)max);
+            return whole + NextF64();
+        }
 
         [MethodImpl(Inline)]
         double IBoundPointSource<double>.Next(double max)
-            => (double)Int64Source.Next((long)max) + NextF64();
+        {
+            var whole = (double)Int64Source.Next((long)max);
+            return whole + NextF64();
+        }
 
         [MethodImpl(Inline)]
         float NextF32()
@@ -419,6 +434,8 @@ namespace Z0
 
         [MethodImpl(Inline)]
         double NextF64()
-            => ((double)Points.Next())/double.MaxValue;     
+            => ((double)Points.Next())/double.MaxValue;
+
+
     }
 }

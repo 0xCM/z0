@@ -5,10 +5,7 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static zfunc;
 
@@ -58,5 +55,4 @@ namespace Z0
         /// </summary>
         public Option<AsmBranchInfo> Branch {get;}
     }
-
 }

@@ -27,7 +27,7 @@ namespace Z0
                 => default;
 
         public override string ToString()
-            => $"jsb, f:{natval<F>()}, d:{natval<D>()}, t:{moniker<T>()}";
+            => $"jsb, f:{natval<F>()}, d:{natval<D>()}, t:{suffix<T>()}";
     }
 
 }

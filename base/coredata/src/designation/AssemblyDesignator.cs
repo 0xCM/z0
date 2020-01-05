@@ -18,15 +18,20 @@ namespace Z0
         /// <summary>
         /// The assembly in which the concrete subtype is defined
         /// </summary>
-        public static Assembly Assembly => typeof(T).Assembly;
+        public static Assembly Assembly 
+            => typeof(T).Assembly;
 
-        public static T Designated => new T();
+        public static T Designated 
+            => new T();
 
         public Assembly DeclaringAssembly 
             => typeof(T).Assembly;
 
         public virtual AssemblyRole Role 
             => AssemblyRole.Library;
+
+        public virtual string Name
+            => Assembly.GetName().Name;
 
         public virtual IEnumerable<IAssemblyDesignator> Designates {get;}
 

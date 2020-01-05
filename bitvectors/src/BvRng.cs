@@ -15,6 +15,7 @@ namespace Z0
 
     public static class BvRng
     {   
+
         /// <summary>
         /// Produces a 4-bit primal bitvector predicated on a random source
         /// </summary>

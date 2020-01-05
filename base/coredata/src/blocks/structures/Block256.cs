@@ -75,7 +75,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// The number of allocated cells 
+        /// The number of covered cells 
         /// </summary>
         public int CellCount 
         {
@@ -90,6 +90,15 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => blockcount<T>(N,CellCount);
+        }
+
+        /// <summary>
+        /// The number of covered bits
+        /// </summary>
+        public int BitCount
+        {
+            [MethodImpl(Inline)]
+            get => CellCount * Unsafe.SizeOf<T>()*8;
         }
 
         /// <summary>

@@ -59,6 +59,16 @@ namespace Z0
         }
 
         /// <summary>
+        /// Clears the counter's state
+        /// </summary>
+        [MethodImpl(Inline)]
+        public void Reset()
+        {
+            total = 0;
+            started = 0;
+        }
+
+        /// <summary>
         /// Gets the total number of timer ticks
         /// </summary>
         public readonly long Count

@@ -37,6 +37,9 @@ namespace Z0
         public static FileName Define(string Name, string Ext)
             => new FileName(Name,Ext);
 
+        public static FileName Define(string Name, FileExtension Ext)
+            => new FileName(Name,Ext.Name);
+
         public static FileName operator + (FileName lhs, FileExtension rhs)
             => FileName.Define($"{lhs.Name}.{rhs.Name}");
 

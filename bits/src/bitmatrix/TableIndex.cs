@@ -14,7 +14,6 @@ namespace Z0
     /// </summary>
     public readonly struct TableIndex
     {           
-
         [MethodImpl(Inline)]
         public static TableIndex Define(ushort CellIndex, ushort RowCellCount, byte BitOffset, uint BitIndex, int RowIndex, int ColIndex)
             => new TableIndex(CellIndex, RowCellCount, BitOffset, BitIndex, RowIndex, ColIndex);        
@@ -61,6 +60,6 @@ namespace Z0
         public readonly int ColIndex;
 
         public string Format()
-            => $"(Bit = {BitIndex}, Segment = {CellIndex}, Row = {RowIndex}, Col = {ColIndex}, Offset = {BitOffset})";
+            => $"(RowCellcount = {RowCellCount}, BitIndex = {BitIndex}, CellIndex = {CellIndex}, Row = {RowIndex}, Col = {ColIndex}, BitOffset = {BitOffset})";
     }
 }

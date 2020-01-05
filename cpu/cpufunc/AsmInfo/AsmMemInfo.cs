@@ -5,17 +5,13 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Describes a block of memory the context of an asm instruction operand
     /// </summary>
     public class AsmMemInfo
-    {
-        
+    {        
         public string BaseRegister {get;set;}
         
         public uint? Displacement {get; set;}

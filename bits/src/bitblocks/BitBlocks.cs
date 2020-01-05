@@ -13,17 +13,6 @@ namespace Z0
     public static class BitBlocks
     {
         /// <summary>
-        /// Computes the Euclidean scalar product between two generic bitvectors using modular arithmetic
-        /// </summary>
-        /// <param name="x">The first vector</param>
-        /// <param name="y">The second vector</param>
-        /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
-        [MethodImpl(Inline)]
-        public static bit modprod<T>(BitVector<T> x, BitVector<T> y)
-            where T : unmanaged
-                => BitBlocks.modprod(x.ToBitCells(), y.ToBitCells());
-
-        /// <summary>
         /// Allocates a bitblock filled with a specified value
         /// </summary>
         /// <param name="n">The natural length of the vector in bits</param>
@@ -92,7 +81,7 @@ namespace Z0
                 => BitBlocks.load<N,T>(src);
 
         /// <summary>
-        /// Creates a natural cell container over a single cell
+        /// Creates a block over a single cell
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="n">The bitblock width representative</param>
@@ -130,23 +119,13 @@ namespace Z0
                 => new BitBlock<N,T>(src.ToSpan());
 
         /// <summary>
-        /// Allocates a bitblock over a specified number of 256-bit blocks
-        /// </summary>
-        /// <param name="blocks">The block count</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(NotInline)]
-        public static BitBlock<T> blockalloc<T>(int blocks)        
-            where T : unmanaged
-                => new BitBlock<T>(DataBlocks.alloc<T>(n256,blocks));
-
-        /// <summary>
         /// Creates a bitblock over a single cell
         /// </summary>
         /// <param name="src">The source segment</param>
         [MethodImpl(Inline)]
-        public static BitBlock<T> literal<T>(T src, int? bitsize = null)
+        public static BitBlock<T> literal<T>(T src, int bitcount)
             where T : unmanaged
-                => new BitBlock<T>(src, bitsize ?? bitsize<T>());
+                => new BitBlock<T>(src, bitcount);
 
         /// <summary>
         /// Creates a bitblock over an arbitrary number of segments

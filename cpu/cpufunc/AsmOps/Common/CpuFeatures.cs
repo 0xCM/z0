@@ -50,7 +50,6 @@ namespace Z0
 
         uint data;
 
-
         BitView<uint> bits;
         
         public static CpuFeatureSet<T> Define(uint data)

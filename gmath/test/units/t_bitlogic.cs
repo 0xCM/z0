@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
     using static OpDelegate;
-    using static OpDelegates;
+    using static DelegateSurrogates;
 
     public class t_bitlogic : t_gmath<t_bitlogic>
     {
@@ -30,7 +30,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void and_check<T>(BinaryDelegate<T> expect, T t = default)
+        void and_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckBinaryPredMatch(expect, GX.and(t), t);
 
@@ -50,7 +50,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void nand_check<T>(BinaryDelegate<T> expect, T t = default)
+        void nand_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckBinaryPredMatch(expect, GX.nand(t), t);
 
@@ -70,7 +70,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void or_check<T>(BinaryDelegate<T> expect, T t = default)
+        void or_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckBinaryPredMatch(expect, GX.or(t), t);
 
@@ -90,7 +90,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void nor_check<T>(BinaryDelegate<T> expect, T t = default)
+        void nor_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckBinaryPredMatch(expect, GX.nor(t), t);
 
@@ -110,7 +110,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void xor_check<T>(BinaryDelegate<T> expect, T t = default)
+        void xor_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckBinaryPredMatch(expect, GX.xor(t), t);
 
@@ -130,7 +130,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void xnor_check<T>(BinaryDelegate<T> expect, T t = default)
+        void xnor_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckBinaryPredMatch(expect, GX.xnor(t), t);
 
@@ -150,7 +150,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void not_check<T>(UnaryDelegate<T> expect, T t = default)
+        void not_check<T>(DelegateSurrogates.UnaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckUnaryMatch(expect, GX.not(t), t);
 

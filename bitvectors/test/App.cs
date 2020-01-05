@@ -7,7 +7,7 @@ namespace Z0
     class App : TestApp<App>
     {                    
 
-        protected override void  RunTests(params string[] filters)
+        protected override void RunTests(params string[] filters)
         {
             base.RunTests(filters);
         }

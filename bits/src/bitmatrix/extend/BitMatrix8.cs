@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitVector64 ToBitVector(this BitMatrix8 A)
-            => BitVector.from(n64,(ulong)A);
+            => BitVector.create(n64,(ulong)A);
 
         /// <summary>
         /// Creates a generic matrix from the primal source data

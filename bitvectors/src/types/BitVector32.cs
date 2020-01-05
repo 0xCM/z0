@@ -40,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector64(BitVector32 src)
-            => BitVector.from(n64,src.data);
+            => BitVector.create(n64,src.data);
 
         [MethodImpl(Inline)]
         public static explicit operator BitVector4(BitVector32 src)
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector32(byte src)
-            => BitVector.from(N,src);
+            => BitVector.create(N,src);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 32-bit bitvector
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector32(ushort src)
-            => BitVector.from(N,src);
+            => BitVector.create(N,src);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 32-bit bitvector

@@ -43,6 +43,5 @@ namespace Z0
         public static bit readbit<T>(int width, in T src, int row, int col)
             where T : unmanaged
                 => readbit(in src, width*row + col);
-
     }
 }

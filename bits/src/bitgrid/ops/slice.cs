@@ -14,7 +14,6 @@ namespace Z0
 
     partial class BitGrid
     {        
-
         /// <summary>
         /// Extracts a sequence of bits
         /// </summary>
@@ -38,6 +37,5 @@ namespace Z0
         public static BitVector<T> slice<T>(BitGrid64<T> g, byte index, byte length)
             where T : unmanaged
                 => generic<T>(gbits.bitslice(g.Data, uint8(index*length), length));
-
     }
 }

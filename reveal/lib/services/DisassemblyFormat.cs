@@ -36,7 +36,6 @@ namespace Z0
             return format.ToString();
         }
 
-
         public static string Format(this MethodAsmBody src)
         {
             if(src.Instructions.Length == 0)

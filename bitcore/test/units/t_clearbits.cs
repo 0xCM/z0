@@ -19,11 +19,11 @@ namespace Z0
             clearbits_check<ulong>(21,11);
         }
         
-        void clearbits_check<T>(int first, int count)        
+        void clearbits_check<T>(byte first, byte count)        
             where T : unmanaged
         {
             var n = bitsize<T>();
-            var dst = gbits.clear(gmath.maxval<T>(), first, count);           
+            var dst = gbits.bitclear(gmath.maxval<T>(), first, count);           
             var bs = BitString.scalar(dst);
             Claim.eq(bs.Length, n);
             for(var i=0; i<bs.Length; i++)

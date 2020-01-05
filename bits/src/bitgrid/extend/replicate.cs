@@ -52,5 +52,4 @@ namespace Z0
             where T : unmanaged
                 => src.Data;
     }
-
 }

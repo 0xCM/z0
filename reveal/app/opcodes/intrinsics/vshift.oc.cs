@@ -47,16 +47,16 @@ namespace Z0.OpCodes
         public static Vector256<uint> vsrlv_256x32u(Vector256<uint> x, Vector256<uint> offsets)
             => ginx.vsrlv(x,offsets);
 
-        public static Vector128<byte> vsllx_128x8u(Vector128<byte> x)
+        public static Vector128<byte> vsllx_128x8u_F(Vector128<byte> x)
             => ginx.vsllx(x, 15);
 
-        public static Vector128<ushort> vsllx_128x16u(Vector128<ushort> x)
+        public static Vector128<ushort> vsllx_128x16u_F(Vector128<ushort> x)
             => ginx.vsllx(x, 15);
 
-        public static Vector128<uint> vsllx_128x32u(Vector128<uint> x)
+        public static Vector128<uint> vsllx_128x32u_F(Vector128<uint> x)
             => ginx.vsllx(x, 15);
 
-        public static Vector128<ulong> vsllx_128x64u(Vector128<ulong> x)
+        public static Vector128<ulong> vsllx_128x64u_8(Vector128<ulong> x)
             => ginx.vsllx(x, 8);
 
         public static Vector256<byte> vsllx_256x8u(Vector256<byte> x)

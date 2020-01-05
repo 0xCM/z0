@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Defines API for directly accessing OS resources
+    /// Defines OS api surface
     /// </summary>
     [SuppressUnmanagedCodeSecurity]
     public static unsafe class OS

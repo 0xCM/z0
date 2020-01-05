@@ -52,5 +52,4 @@ namespace Z0
             where T : unmanaged
                 => setbit(BitCalcs.bitindex(natval(width),row,col), state, ref dst);
     }
-
 }

@@ -21,9 +21,7 @@ namespace Z0
         /// <summary>
         /// The number of columns in the grid
         /// </summary>
-        int ColCount {get;}
-        
-
+        int ColCount {get;}    
     }
 
     /// <summary>
@@ -64,7 +62,5 @@ namespace Z0
         where T : unmanaged
     {
         
-
     }
-
 }

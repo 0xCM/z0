@@ -16,6 +16,9 @@ namespace Z0.Designators
     /// </summary>
     public sealed class MachineTest : AssemblyDesignator<MachineTest>
     {
+        public override AssemblyRole Role 
+            => AssemblyRole.Test;
+
         public override void Run(params string[] args)
             => App.Run(args);
 

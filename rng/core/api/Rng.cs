@@ -15,21 +15,28 @@ namespace Z0
     public static class Rng
     {
         /// <summary>
-        /// Defines a T-valued interval that covers the full T-domain
+        /// Defines a default T-valued domain
         /// </summary>
         /// <typeparam name="T">The domain type</typeparam>
         public static Interval<T> TypeDomain<T>()
             where T : unmanaged
-        {
-            var min = signedint<T>()
+        {            
+            if(typeof(T) == typeof(double))
+                return (convert<T>(long.MinValue/2), convert<T>(long.MaxValue/2));
+            else if(typeof(T) == typeof(float))
+                return (convert<T>(int.MinValue/2), convert<T>(int.MaxValue/2));
+            else
+            {
+                var min = signedint<T>()
                 ? gmath.negate(gmath.sar(gmath.maxval<T>(), 1)) 
-                : gmath.zero<T>();
-            
-            var max = 
-                signedint<T>() && !floating<T>()
-                ? gmath.sar(gmath.maxval<T>(), 1)
-                : gmath.maxval<T>();
-            return (min,max);
+                : gmath.minval<T>();
+                        
+                var max = 
+                    signedint<T>()
+                    ? gmath.sar(gmath.maxval<T>(), 1)
+                    : gmath.maxval<T>();                
+                return (min,max);
+            }            
         }
 
         /// <summary>

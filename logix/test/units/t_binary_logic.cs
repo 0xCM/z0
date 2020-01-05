@@ -6,12 +6,12 @@ namespace Z0.Logix
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     
     using static zfunc;
+
     using static BitLogicSpec;
     using static LogicEngine;
+    
     using BL = BinaryLogicOpKind;
 
     public class t_binary_logic : LogixTest<t_binary_logic>
@@ -65,6 +65,7 @@ namespace Z0.Logix
             var expr4 = nand(expr2, expr3);
             var expr5 = nor(expr3, expr4);
             var expr6 = xnor(expr4, expr5);
+
             foreach(var seq in bitcombo(n2))
             {
                 var s0 = seq[0];
@@ -82,8 +83,7 @@ namespace Z0.Logix
                 b.Set(s1);
                 var actual = eval(expr6);
                 Claim.eq(expect,actual);        
-            }
-            
+            }            
         }
 
         public void t_sop_expr()
@@ -107,13 +107,13 @@ namespace Z0.Logix
                 Claim.eq(expect,actual);
             }
         }
-
         
         public void t_andnot_expr()
         {
             var v1 = lvar(1);
             var v2 = lvar(2);
             var expr = and(v1,not(v2));
+
             foreach(var seq in bitcombo(n2))
             {
                 var s1 = seq[0];
@@ -123,7 +123,6 @@ namespace Z0.Logix
                 var actual = eval(expr);
                 var expect = s1 & ~s2;
                 Claim.eq(expect,actual);
-
             }
         }
 
@@ -155,8 +154,7 @@ namespace Z0.Logix
                 matrix[j] = actual;
             
                 Trace(actual.Format(8));
-            }
-            
+            }            
         }
 
         public void t_bitseq_check()
@@ -165,7 +163,7 @@ namespace Z0.Logix
             {
                 var bs = Random.BitString(2,7);
                 var x = bs.ToLogicSeq();
-                var y = BitVector.from(n8,bs);
+                var y = BitVector.create(n8,bs);
                 for(var i=0; i<bs.Length; i++)
                 {
                     Claim.eq(bs[i],x[i]);

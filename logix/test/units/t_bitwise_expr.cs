@@ -7,7 +7,6 @@ namespace Z0.Logix
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
     using static zfunc;
@@ -53,7 +52,6 @@ namespace Z0.Logix
             check_scalar_expr<ulong>(op);
         }
 
-
         public void check_nand_scalar_expr()
         {
             var op = BinaryBitwiseOpKind.Nand;
@@ -63,7 +61,6 @@ namespace Z0.Logix
             check_scalar_expr<uint>(op);
             check_scalar_expr<ulong>(op);
         }
-
 
         public void check_nor_scalar_expr()
         {
@@ -225,7 +222,6 @@ namespace Z0.Logix
             check_cpu_expr<ulong>(n, op);
         }
         
-
         public void check_ternary_ops()
         {
             var common =  CpuOpApi.TernaryBitwiseKinds.Intersect(ScalarOpApi.TernaryBitwiseKinds).ToArray();
@@ -238,7 +234,6 @@ namespace Z0.Logix
             check_ternary_ops<ushort>(op);
             check_ternary_ops<uint>(op);
             check_ternary_ops<ulong>(op);
-
         }
 
         void check_op_identity<T>(TernaryOpKind id)
@@ -307,8 +302,7 @@ namespace Z0.Logix
                 v1.Set(a);
                 BitVector<T> actual = LogicEngine.eval(expr).Value;
                 BitVector<T> expect = ScalarOpApi.eval(kind,a);
-                Claim.eq(actual,expect);  
-                                          
+                Claim.eq(actual,expect);                                            
             }
         }
 
@@ -403,8 +397,5 @@ namespace Z0.Logix
                 Claim.eq(actual,expect);                            
             }
         }
-
-
     }
-
 }

@@ -5,12 +5,9 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Reflection;
+
     using static zfunc;
+
     using static TypedLogicSpec;
 
     public class t_solve : UnitTest<t_solve>
@@ -35,7 +32,6 @@ namespace Z0.Logix
         public void solve_not_over_xor_u8_2vars()
             => check_identity_sln(TypedIdentities.NotOverXOr<byte>(), (byte)0,(byte)30);
 
-
         void check_identity_sln<T>(ComparisonExpr<T> identity, T min, T max)
             where T : unmanaged
         {
@@ -44,7 +40,5 @@ namespace Z0.Logix
             var sln = LogicEngine.solve(identity, (min,max));
             Claim.eq(expect,sln.Count);            
         }
-
     }
-
 }

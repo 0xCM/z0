@@ -12,8 +12,7 @@ namespace Z0
     using static zfunc;
 
     partial class BitVectorX
-    {
-     
+    {    
         /// <summary>
         /// Converts the source bitvector to an equivalent natural bitvector
         /// </summary>
@@ -56,8 +55,6 @@ namespace Z0
         public static BitVector<N,T> ToNatural<N,T>(this BitVector<T> src, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BitVector.natural<N,T>(src.Scalar);
-
-     
+                => BitVector.natural<N,T>(src.Scalar);     
     }
 }

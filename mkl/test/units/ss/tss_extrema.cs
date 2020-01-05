@@ -28,10 +28,10 @@ namespace Z0.Mkl
 
         public void sumvals()
         {
-            var src = Random.Array<double>(Pow2.T14);
+            var src = Random.Stream<double>().Take(16000).ToArray();
             var expect = src.Sum().Round(4);
             var actual = Dataset.Load(src).Sum()[0].Round(4);
-            Claim.eq(expect,actual);
+            Claim.yea(gmath.within(expect,actual,.01));
         }
 
         public void mean_bench()

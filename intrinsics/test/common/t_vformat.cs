@@ -49,9 +49,9 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var srcType = moniker<S>();
+            var srcType = suffix<S>();
             var srcCount = x.Length();
-            var dstType = moniker<T>();
+            var dstType = suffix<T>();
             var dstCount = y.Length();
             var srcWidth = srcCount * bitsize<S>();
             var dstWidth = dstCount * bitsize<T>();
@@ -66,9 +66,9 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var srcType = moniker<S>();
+            var srcType = suffix<S>();
             var srcCount = x.CellCount;
-            var dstType = moniker<T>();
+            var dstType = suffix<T>();
             var dstCount = y.Length();
             var srcWidth = srcCount * bitsize<S>();
             var dstWidth = dstCount * bitsize<T>();

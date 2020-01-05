@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
     using static OpDelegate;
-    using static OpDelegates;
+    using static DelegateSurrogates;
     
     public class t_arithmetic : t_gmath<t_arithmetic>
     {
@@ -30,7 +30,7 @@ namespace Z0
         }        
 
         [MethodImpl(Inline)]
-        void add_check<T>(BinaryDelegate<T> expect, T t = default)
+        void add_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckBinaryPredMatch(expect, GX.add(t), t);
         
@@ -53,7 +53,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        void sub_check<T>(BinaryDelegate<T> expect, T t = default)
+        void sub_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckBinaryPredMatch(expect, GX.sub(t), t);
 
@@ -74,7 +74,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void mul_check<T>(BinaryDelegate<T> expect, T t = default)
+        void mul_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckBinaryPredMatch(expect, GX.mul(t), t);
 
@@ -95,7 +95,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void div_check<T>(BinaryDelegate<T> expect, T t = default)
+        void div_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckBinaryPredMatch(expect, GX.div(t), t,true);
 
@@ -116,7 +116,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void mod_check<T>(BinaryDelegate<T> expect, T t = default)
+        void mod_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckBinaryPredMatch(expect, GX.mod(t), t,true);
 
@@ -137,7 +137,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void modmul_check<T>(TernaryDelegate<T> expect, T t = default)
+        void modmul_check<T>(DelegateSurrogates.TernaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckTernaryMatch(expect, GX.modmul(t), t, true);
 
@@ -159,7 +159,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void clamp_check<T>(BinaryDelegate<T> expect, T t = default)
+        void clamp_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckBinaryPredMatch(expect, GX.clamp(t), t);
 
@@ -180,7 +180,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void inc_check<T>(UnaryDelegate<T> expect, T t = default)
+        void inc_check<T>(DelegateSurrogates.UnaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckUnaryMatch(expect, GX.inc(t), t);
 
@@ -201,7 +201,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void dec_check<T>(UnaryDelegate<T> expect, T t = default)
+        void dec_check<T>(DelegateSurrogates.UnaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckUnaryMatch(expect, GX.dec(t), t);
 
@@ -222,7 +222,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void negate_check<T>(UnaryDelegate<T> expect, T t = default)
+        void negate_check<T>(DelegateSurrogates.UnaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckUnaryMatch(expect, GX.negate(t), t);
 
@@ -240,7 +240,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void abs_check<T>(UnaryDelegate<T> expect, T t = default)
+        void abs_check<T>(DelegateSurrogates.UnaryOp<T> expect, T t = default)
             where  T : unmanaged
                 => CheckUnaryMatch(expect, GX.abs(t), t);
 

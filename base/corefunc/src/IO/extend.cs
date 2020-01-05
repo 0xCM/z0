@@ -22,6 +22,20 @@ namespace Z0
             => new StreamReader(src.FullPath);
 
         /// <summary>
+        /// Reads the full content of a text file
+        /// </summary>
+        /// <param name="src">The file path</param>
+        public static string ReadText(this FilePath src)
+            => src.Exists() ? File.ReadAllText(src.ToString()) : string.Empty;
+
+        /// <summary>
+        /// Reads the full content of a file into a byte array
+        /// </summary>
+        /// <param name="src">The file path</param>
+        public static byte[] ReadBytes(this FilePath src)
+            => src.Exists() ? File.ReadAllBytes(src.ToString()) : new byte[]{0};
+
+        /// <summary>
         /// Creates a writer initialized with the source file; caller-disposal required
         /// </summary>
         /// <param name="dst">The file path</param>

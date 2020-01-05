@@ -59,6 +59,85 @@ namespace Z0
         public FolderPath LogDir(LogArea target, FolderName subdir)        
             => Settings.LogDir(target, subdir);
 
+        public FileExtension AsmHexExt
+            => FileExtension.Define("hex");
+
+        public FileExtension CilExt
+            => FileExtension.Define("il");
+
+        public FileExtension AsmInfoExt
+            => FileExtension.Define("asm");
+
+        public FileName AsmInfoFile(string opcode)
+            => FileName.Define(opcode, AsmInfoExt);
+
+        public FileName AsmHexFile(string opcode)
+            => FileName.Define(opcode, AsmHexExt);
+
+        public FileName CilFile(string opcode)
+            => FileName.Define(opcode, CilExt);
+
+        public FolderPath AsmDataRoot
+            => Settings.DataDir(FolderName.Define("asm"));
+
+        public FolderPath AsmDataDir(FolderName subfolder)
+            => Settings.DataDir(FolderName.Define("asm")) + subfolder;
+
+        /// <summary>
+        /// Returns the path to the dissasembly folder for a specified type
+        /// </summary>
+        /// <param name="t">The source type</param>
+        public FolderPath AsmDataDir(Type t)
+            => AsmDataDir(FolderName.Define(t.DisplayName().ToLower()));
+
+        /// <summary>
+        /// Returns the path to the primary dissasembly file for a specified type and operation name
+        /// </summary>
+        /// <param name="t">The source type</param>
+        /// <param name="m">The operation identifier</param>
+        public FilePath AsmInfoPath(Type t, Moniker m)
+            => AsmDataDir(t) + AsmInfoFile(m);
+
+        /// <summary>
+        /// Returns the path to the hex data file for a specified type and operation name
+        /// </summary>
+        /// <param name="t">The source type</param>
+        /// <param name="opcode">The operation identifier</param>
+        public FilePath AsmHexPath(Type t, string opcode)
+            => AsmDataDir(t) + AsmHexFile(opcode);
+
+        /// <summary>
+        /// Returns the path to the hex data file for a specified type and operation name
+        /// </summary>
+        /// <param name="t">The source type</param>
+        /// <param name="opcode">The operation identifier</param>
+        public FilePath CilPath(Type t, string opcode)
+            => AsmDataDir(t) + CilFile(opcode);
+
+        /// <summary>
+        /// Returns the path to the asm info file for an identified operation
+        /// </summary>
+        /// <param name="subfolder">The assembly log subfolder</param>
+        /// <param name="m">The operation moniker</param>
+        public FilePath AsmInfoPath(FolderName subfolder, Moniker m)
+            => AsmDataDir(subfolder) + AsmInfoFile(m);
+
+        /// <summary>
+        /// Returns the path to the hex data file for an identified operation
+        /// </summary>
+        /// <param name="subfolder">The assembly log subfolder</param>
+        /// <param name="opcode">The operation identifier</param>
+        public FilePath AsmHexPath(FolderName subfolder, string opcode)
+            => AsmDataDir(subfolder) + AsmHexFile(opcode);
+
+        /// <summary>
+        /// Returns the path to the cil file for an identified operation
+        /// </summary>
+        /// <param name="subfolder">The assembly log subfolder</param>
+        /// <param name="m">The operation moniker</param>
+        public FilePath CilPath(FolderName subfolder, Moniker m)
+            => AsmDataDir(subfolder) + CilFile(m);
+
         public FilePath LogPath(LogArea area, string basename, FileExtension ext = null)
             => LogDir(area) + FileName.Define($"{basename}.{ext ?? DefaultExtension}");
 

@@ -13,7 +13,6 @@ namespace Z0
 
     partial class BitGrid
     {
-
         [MethodImpl(Inline)]
         public static BitGrid16<M,N,T> srl<M,N,T>(BitGrid16<M,N,T> g, byte shift)
             where T : unmanaged
@@ -49,5 +48,4 @@ namespace Z0
             where M : unmanaged, ITypeNat
                 => ginx.vsrl<T>(g,shift);
     }
-
 }

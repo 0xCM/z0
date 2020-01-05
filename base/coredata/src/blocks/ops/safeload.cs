@@ -117,6 +117,26 @@ namespace Z0
             }
         }
 
+        [MethodImpl(Inline)]
+        public static Block16<T> literals<T>(N16 n, params T[] src)
+            where T : unmanaged
+                => safeload(n,src.ToSpan());        
+
+        [MethodImpl(Inline)]
+        public static Block32<T> literals<T>(N32 n, params T[] src)
+            where T : unmanaged
+                => safeload(n,src.ToSpan());        
+
+        [MethodImpl(Inline)]
+        public static Block64<T> literals<T>(N64 n, params T[] src)
+            where T : unmanaged
+                => safeload(n,src.ToSpan());        
+
+        [MethodImpl(Inline)]
+        public static Block256<T> literals<T>(N256 n, params T[] src)
+            where T : unmanaged
+                => safeload(n,src.ToSpan());        
+
         /// <summary>
         /// Loads 512-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked
         /// </summary>

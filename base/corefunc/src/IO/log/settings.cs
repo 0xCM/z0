@@ -23,8 +23,14 @@ namespace Z0
         public FolderPath RootFolder
             => FolderPath.Define(@"J:\dev\projects\z0-logs");
 
+        public FolderPath RootDataFolder
+            => RootFolder + FolderName.Define("data");
+
         public FilePath TestLogPath(FileName filename)
             => LogDir(LogArea.Test) + filename;
+
+        public FolderPath DataDir(FolderName subfolder)
+            => RootDataFolder + subfolder;
 
         public FolderPath LogDir(LogArea target)        
             => RootFolder + FolderName.Define(target.ToString().ToLower());

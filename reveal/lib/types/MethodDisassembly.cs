@@ -13,7 +13,7 @@ namespace Z0
     
     public class MethodDisassembly
     {
-        public MethodBase MethodInfo {get; set;}
+        public MethodInfo MethodInfo {get; set;}
 
         public ulong NativeAddress {get;set;}
 

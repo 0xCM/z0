@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static explicit operator BitVector4(BitVector64 src)
-            => BitVector.from(n4,(byte)src.data);        
+            => BitVector.create(n4,(byte)src.data);        
 
         /// <summary>
         /// Explicitly converts a a 64-bit bitvector to an 8-bit bitvector
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static explicit operator BitVector32(BitVector64 src)
-            => BitVector.from(n32, (uint)src.data);        
+            => BitVector.create(n32, (uint)src.data);        
 
         /// <summary>
         /// Implicitly converts a scalar value to a 64-bit bitvector
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector64(byte src)
-            => BitVector.from(N,src);
+            => BitVector.create(N,src);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 64-bit bitvector
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector64(ushort src)
-            => BitVector.from(N,src);
+            => BitVector.create(N,src);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 64-bit bitvector
@@ -100,7 +100,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector64(uint src)
-            => BitVector.from(N,src);
+            => BitVector.create(N,src);
 
         /// <summary>
         /// Computes the bitwise XOR of the source operands
@@ -350,7 +350,7 @@ namespace Z0
         public readonly BitVector32 Lo
         {
             [MethodImpl(Inline)]
-            get => BitVector.from(n32, (uint)data);
+            get => BitVector.create(n32, (uint)data);
         }
 
         /// <summary>
@@ -359,7 +359,7 @@ namespace Z0
         public readonly BitVector32 Hi
         {
             [MethodImpl(Inline)]
-            get => BitVector.from(n32,(uint)(data >> 32));
+            get => BitVector.create(n32,(uint)(data >> 32));
         }        
 
         /// <summary>

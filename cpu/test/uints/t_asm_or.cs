@@ -11,8 +11,48 @@ namespace Z0
     using static zfunc;
 
 
-    public class t_asm_or : AsmOpTest<t_asm_or>
+    public class t_or_asm : AsmOpTest<t_or_asm>
     {        
+        protected override string OpName 
+            => "or";
+
+        public void asmor_check()
+        {
+            using var buffer = AsmExecBuffer.Create();
+            asmor_check(buffer);
+        }
+
+        public void asmor_bench()
+        {
+            using var buffer = AsmExecBuffer.Create();
+            asmor_bench(buffer);
+        }
+
+        void asmor_check(in AsmExecBuffer buffer)
+        {
+            or_check(buffer, Or32uCode, z32);
+            or_check(buffer, Or64uCode, z64);            
+        }
+
+        void or_check<T>(in AsmExecBuffer buffer, ReadOnlySpan<byte> code,  T t = default)
+            where T : unmanaged
+        {
+            buffer.Load(code, TestOpName(t));
+            CheckMatch(gmath.or<T>, buffer.BinOp<T>());
+        }
+
+        void asmor_bench(in AsmExecBuffer buffer)        
+        {
+            buffer.Load(Or32uCode, TestOpName(z32));            
+            asmor_bench<uint>(buffer);
+
+            buffer.Load(Or64uCode, TestOpName(z64));            
+            asmor_bench<ulong>(buffer);
+        }
+    
+        void asmor_bench<T>(in AsmExecBuffer buffer)
+            where T : unmanaged
+                => RunBench(buffer.BinOp<T>(), gmath.or<T>);
 
         static ReadOnlySpan<byte> Or64uCode 
             => new byte[12]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x48,0x0B,0xC2,0xC3};
@@ -20,72 +60,7 @@ namespace Z0
         static ReadOnlySpan<byte> Or32uCode
             => new byte[]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x0B,0xC2,0xC3};
 
-        protected override int CycleCount => Pow2.T03;
 
-        public void asm_or_64u_check()
-        {
-            using var asm = AsmBuffer.Create(Or64uCode);         
-            var or = asm.BinOp<ulong>();
-            for(var i=0; i< RepCount; i++)
-            {
-                var x = Random.Next<ulong>();
-                var y = Random.Next<ulong>();
-                var z = or(x,y);
-                Claim.eq(x | y, z);
-
-            }
-        }
-
-        public void asm_or_32u_check()
-        {
-            using var asm = AsmBuffer.Create(Or32uCode);         
-            var or = asm.BinOp<uint>();
-            for(var i=0; i< RepCount; i++)
-            {
-                var x = Random.Next<uint>();
-                var y = Random.Next<uint>();
-                var z = or(x,y);
-                Claim.eq(x | y, z);
-            }            
-        }
-
-        public void asm_or_64u_bench()
-        {
-            using var asm = AsmBuffer.Create(Or64uCode);
-            asm_binop_bench(asm.BinOp<ulong>());
-            or64u_bench();
-        }
-
-        void or64u_bench(SystemCounter counter = default)
-        {
-            var last = 0ul;
-            for(var i=0; i<OpCount; i++)
-            {
-                var x = Random.Next<ulong>();
-                var y = Random.Next<ulong>();
-                counter.Start();
-                last = x | y;
-                counter.Stop();
-            }
-
-            ReportBenchmark("or_cs_64u",OpCount,counter);
-        }
-
-        void asm_binop_bench<T>(BinaryOp<T> op, SystemCounter counter = default)
-            where T :unmanaged
-        {
-            var last = default(T);
-            for(var i=0; i<OpCount; i++)
-            {
-                var x = Random.Next<T>();
-                var y = Random.Next<T>();
-                counter.Start();
-                last = op(x,y);
-                counter.Stop();
-            }
-
-            ReportBenchmark("or_asm_64u",OpCount,counter);
-        }
     }
 }
 

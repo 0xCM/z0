@@ -11,6 +11,32 @@ namespace Z0
 
     public class t_bm_create : t_bm<t_bm_create>
     {
+        public void bm_cellcount()
+        {
+            Claim.eq(BitMatrix.totalcells<N2,N1,byte>(),2);
+            Claim.eq(BitMatrix.totalcells<N2,N2,byte>(),2);
+            Claim.eq(BitMatrix.totalcells<N4,N4,byte>(),4);
+            Claim.eq(BitMatrix.totalcells<N8,N3,byte>(),8);
+            Claim.eq(BitMatrix.totalcells<N8,N4,byte>(),8);
+            Claim.eq(BitMatrix.totalcells<N8,N5,byte>(),8);
+        }
+
+        public void bm_create_4x3x8g()
+        {
+            var bm = BitMatrix.alloc<N4,N3,byte>();
+            Claim.eq(4, bm.RowCount);
+            Claim.eq(4, bm.CellCount);
+
+            byte p0 = 0b101;
+            byte p1 = 0b010;
+
+            for(var row=0; row < bm.RowCount; row++)
+                bm[row] = BitBlocks.literal<N3,byte>(even(row) ? p0 : p1);
+
+            for(var row=0; row < bm.RowCount; row++)
+            for(var col=0; col < bm.ColCount; col++)
+                Claim.eq(bm[row,col], even(row) ? bit.test(p0,col) : bit.test(p1,col));
+        }
 
         public void bm_create_fromfixed_16x16x16()
         {
@@ -43,7 +69,6 @@ namespace Z0
             var fmt = m1.Format().RemoveWhitespace();
 
             Claim.eq(7*9, fmt.Length);    
-
         }
 
         public void bm_init_n7x9x8()

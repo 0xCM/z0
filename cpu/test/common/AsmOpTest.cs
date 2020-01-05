@@ -11,44 +11,198 @@ namespace Z0
     using System.IO;
     
     using static zfunc;
-    public abstract class AsmOpTest<U> : UnitTest<U>
+    public abstract class AsmOpTest<U> : UnitTest<U>, IDisposable
         where U : AsmOpTest<U>
     {
-        protected void VerifyOp<T>(BinaryOp<T> asmop, Func<T,T,T> refop, int? n = null)
-            where T : unmanaged
+        protected override int RepCount => Pow2.T12;
+
+        protected override int CycleCount => Pow2.T08;
+
+        public virtual void Dispose()
         {
-            var lhs = Random.Array<T>(n ?? RepCount);
-            var rhs = Random.Array<T>(n ?? RepCount);
-            var setup = from args in lhs.Zip(rhs)
-                          let expect = refop(args.First, args.Second)
-                          let actual = asmop(args.First, args.Second) 
-                          select (expect, actual, success: expect.Equals(actual));
-            var execute = from r in setup
-                          where !r.success
-                          select (r.expect, r.actual);
-            Claim.eq(0, execute.Count());            
+
         }
 
-        protected void VerifyOp<T>(UnaryOp<T> asmop, Func<T,T> refop, int? n = null)
+        protected abstract string OpName {get;}
+
+        protected virtual FolderName AsmFolder
+            => FolderName.Empty;
+
+        protected Moniker TestOpMoniker(PrimalKind kind)
+            => Moniker.define($"{OpName}_asm",kind);
+
+        protected Moniker RefOpName<T>(T t = default)
             where T : unmanaged
+                => moniker<T>(OpName);
+
+        protected Moniker TestOpName<T>(T t = default)
+            where T : unmanaged
+                => TestOpMoniker(Primitive.kind<T>());
+
+        protected static AsmCode ReadAsm(FolderName folder, Moniker m)
+            => AsmCode.Read(folder, m);
+
+        protected static AsmCode ReadAsm(FolderName folder, string opname, PrimalKind kind)
+            => AsmCode.Read(folder, Moniker.define(opname,kind));
+
+        protected AsmCode ReadAsm(Moniker m)
+            => ReadAsm(AsmFolder, m);
+
+        protected AsmCode ReadAsm(PrimalKind kind)
+            => ReadAsm(AsmFolder, OpName, kind);
+
+        protected AsmCode<T> ReadAsm<T>()
+            where T : unmanaged
+                => new AsmCode<T>(ReadAsm(AsmFolder, OpName, typeof(T).Kind()));
+
+        protected void RunBench<T>(UnaryOp<T> f, UnaryOp<T> cf, SystemCounter clock = default)
+            where T :unmanaged
         {
-            var src = Random.Array<T>(n ?? RepCount);
-            var setup = from arg in src
-                          let expect = refop(arg)
-                          let actual = asmop(arg) 
-                          select (expect, actual, success: expect.Equals(actual));
-            var execute = from r in setup
-                          where !r.success
-                          select (r.expect, r.actual);
-            Claim.eq(0, execute.Count());            
+            const int SampleSize = 256;
+            var last = default(T);
+            
+            void run_f()
+            {
+                var src = Random.Span<T>(SampleSize);
+                byte j = 0;
+                var oc = 0;
+
+                clock.Start();
+                for(var cycle = 0; cycle < CycleCount; cycle++)
+                for(int rep=0; rep < RepCount; rep++, j++, oc++)
+                {
+                    ref readonly var x = ref skip(src,j);
+                    last = f(x);
+                }
+                clock.Stop();
+
+                ReportBenchmark(TestOpName<T>(),oc,clock);
+
+            }
+
+            void run_cf()
+            {
+                var src = Random.Span<T>(SampleSize);
+                byte j = 0;
+                var oc = 0;
+
+                clock.Start();
+                for(var cycle = 0; cycle < CycleCount; cycle++)
+                for(int rep=0; rep < RepCount; rep++, j++, oc++)
+                {
+                    ref readonly var x = ref skip(src,j);
+                    last = cf(x);
+                }            
+                clock.Stop();
+
+                ReportBenchmark(RefOpName<T>(),oc,clock);            
+            }
+
+            run_cf();            
+            
+            clock.Reset();
+            
+            run_f();
         }
 
-        protected void VerifyOp<T>(AsmCode<T> code, Func<T,T,T> refop)
-            where T : unmanaged
-                => VerifyOp(code.CreateBinOp<T>(), refop, RepCount);
+        protected void RunBench<T>(BinaryOp<T> f, BinaryOp<T> cf, SystemCounter clock = default)
+            where T :unmanaged
+        {
+            const int SampleSize = 256;
+            var last = default(T);
+            
+            void run_f()
+            {
+                var lhs = Random.Span<T>(SampleSize);
+                var rhs = Random.Span<T>(SampleSize);
+                byte j = 0;
+                var oc = 0;
 
-        protected void VerifyOp<T>(AsmCode<T> code, Func<T,T> refop, int n)
-            where T : unmanaged
-                => VerifyOp(code.CreateUnaryOp<T>(),refop,n);
+                clock.Start();
+                for(var cycle = 0; cycle < CycleCount; cycle++)
+                for(int rep=0; rep < RepCount; rep++, j++, oc++)
+                {
+                    ref readonly var x = ref skip(lhs,j);
+                    ref readonly var y = ref skip(rhs,j);                
+                    last = f(x,y);
+                }
+                clock.Stop();
+
+                ReportBenchmark(TestOpName<T>(),oc,clock);
+
+            }
+
+            void run_cf()
+            {
+                var lhs = Random.Span<T>(SampleSize);
+                var rhs = Random.Span<T>(SampleSize);
+                byte j = 0;
+                var oc = 0;
+
+                clock.Start();
+                for(var cycle = 0; cycle < CycleCount; cycle++)
+                for(int rep=0; rep < RepCount; rep++, j++, oc++)
+                {
+                    ref readonly var x = ref skip(lhs,j);
+                    ref readonly var y = ref skip(rhs,j);                
+                    last = cf(x,y);
+                }            
+                clock.Stop();
+
+                ReportBenchmark(RefOpName<T>(),oc,clock);            
+            }
+
+            run_cf();            
+            
+            clock.Reset();
+            
+            run_f();
+
+        }
+
+        /// <summary>
+        /// Evaluates a pair of binary operators and asserts their equality over a random sequence
+        /// </summary>
+        /// <param name="f">The first operator, often interpreted as the reference implementation</param>
+        /// <param name="g">The second operator, often interpreted as the operator under test</param>
+        /// <param name="name">The operator name</param>
+        /// <typeparam name="T">The operator domain type</typeparam>
+        protected void CheckMatch<T>(BinaryOp<T> f, BinaryOp<T> g)
+            where T :unmanaged
+        {
+            void check()
+            {
+                for(var i=0; i<RepCount; i++)
+                {
+                    (var x, var y) = Random.NextPair<T>();
+                    Claim.eq(f(x,y),g(x,y));
+                }
+            }
+
+            CheckAction(check, CaseName(TestOpName<T>()));
+        }
+
+        /// <summary>
+        /// Evaluates a pair of unary operators and asserts their equality over a random sequence
+        /// </summary>
+        /// <param name="f">The first operator, often interpreted as the reference implementation</param>
+        /// <param name="g">The second operator, often interpreted as the operator under test</param>
+        /// <param name="name">The operator name</param>
+        /// <typeparam name="T">The operator domain type</typeparam>
+        protected void CheckMatch<T>(UnaryOp<T> f, UnaryOp<T> g)
+            where T :unmanaged
+        {
+            void check()
+            {
+                for(var i=0; i<RepCount; i++)
+                {
+                    var x = Random.Next<T>();
+                    Claim.eq(f(x),g(x));
+                }
+            }
+
+            CheckAction(check, CaseName(TestOpName<T>()));
+        }
+    
     }
 }

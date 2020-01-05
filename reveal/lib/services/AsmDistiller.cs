@@ -14,8 +14,8 @@ namespace Z0
     
 
     using AsmOpKind = Iced.Intel.OpKind;
+    
     using static Iced.Intel.OpKind;
-
     using static zfunc;
     
     public static class AsmDistiller
@@ -41,7 +41,6 @@ namespace Z0
                 var mnemonic = inx.Mnemonic.ToString().ToUpper();
                 var opcode = inx.Code.ToString();
                 var enckind = inx.Encoding == EncodingKind.Legacy ? string.Empty : inx.Encoding.ToString();
-
                 inxs[i] = new AsmInstructionInfo(offset, inxsfmt[i], mnemonic, opcode, operands, enckind, encoded);
             }
 
@@ -143,24 +142,24 @@ namespace Z0
             return info;
         }
 
-        static Option<AsmBranchInfo> BranchInfo(this Instruction inx, int operand, ulong baseAddress)
+        static Option<AsmBranchInfo> BranchInfo(this Instruction instruction, int operand, ulong baseAddress)
         {
             var result = none<AsmBranchInfo>();
-            var kind = inx.GetOpKind(operand);
+            var kind = instruction.GetOpKind(operand);
             if(kind.IsBranch())
             {
                 switch(kind)
                 {
                     case AsmOpKind.NearBranch16:
-                        return new AsmBranchInfo(BitSize.x16, inx.NearBranch16, true, baseAddress);
+                        return new AsmBranchInfo(BitSize.x16, instruction.NearBranch16, true, baseAddress);
                     case AsmOpKind.NearBranch32:
-                        return new AsmBranchInfo(BitSize.x32, inx.NearBranch32, true, baseAddress);
+                        return new AsmBranchInfo(BitSize.x32, instruction.NearBranch32, true, baseAddress);
                     case AsmOpKind.NearBranch64:
-                        return new AsmBranchInfo(BitSize.x64, inx.NearBranch64, true, baseAddress);
+                        return new AsmBranchInfo(BitSize.x64, instruction.NearBranch64, true, baseAddress);
                     case AsmOpKind.FarBranch16:
-                        return new AsmBranchInfo(BitSize.x16, inx.FarBranch16, false, baseAddress);
+                        return new AsmBranchInfo(BitSize.x16, instruction.FarBranch16, false, baseAddress);
                     case AsmOpKind.FarBranch32:
-                        return new AsmBranchInfo(BitSize.x32, inx.FarBranch32, false, baseAddress);
+                        return new AsmBranchInfo(BitSize.x32, instruction.FarBranch32, false, baseAddress);
                 }
             }
 
@@ -170,36 +169,36 @@ namespace Z0
         /// <summary>
         /// Extracts immediate information, if applicable, from an instruction operand
         /// </summary>
-        /// <param name="inx">The source instruction</param>
+        /// <param name="instruction">The source instruction</param>
         /// <param name="operand">The operand index</param>
-        static Option<ImmInfo> ImmediateInfo(this Instruction inx, int operand)
+        static Option<ImmInfo> ImmediateInfo(this Instruction instruction, int operand)
         {
             var result = none<ImmInfo>();
-            var kind = inx.GetOpKind(operand);
+            var kind = instruction.GetOpKind(operand);
             int size = kind.GetImmediateSize();
             if(size != 0)
             {
                 var sinx = kind.IsSignExtendedImmediate();
-                var immval = inx.GetImmediate(operand);
+                var imm = instruction.GetImmediate(operand);
                 switch(size)
                 {
                     case Pow2.T03:
-                        return Imm8.Define((byte)immval).Description;
+                        return Imm8.Define((byte)imm).Description;
                     case Pow2.T04:
                         if(sinx)
-                            return Imm16i.Define((short)immval).Description;
+                            return Imm16i.Define((short)imm).Description;
                         else 
-                            return Imm16.Define((ushort)immval).Description;
+                            return Imm16.Define((ushort)imm).Description;
                     case Pow2.T05:
                         if(sinx)
-                            return Imm32i.Define((int)immval).Description;
+                            return Imm32i.Define((int)imm).Description;
                         else 
-                            return Imm32.Define((uint)immval).Description;                    
+                            return Imm32.Define((uint)imm).Description;                    
                     case Pow2.T06:
                         if(sinx)
-                            return Imm64i.Define((long)immval).Description;
+                            return Imm64i.Define((long)imm).Description;
                         else 
-                            return Imm64.Define(immval).Description;                    
+                            return Imm64.Define(imm).Description;                    
                 }
 
             }
@@ -295,7 +294,6 @@ namespace Z0
             else
                 return BitSize.Zero;
         }
-
         
         /// <summary>
         /// Determines whether the classified operand is a segment of the form 

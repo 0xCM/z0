@@ -169,8 +169,8 @@ namespace Z0
                 var b = modprod(x,y);
                 Claim.yea(a == b);            
 
-                var zx = x.ToBitCells();
-                var zy = y.ToBitCells();
+                var zx = x.ToNatBits();
+                var zy = y.ToNatBits();
                 var c = zx % zy;
                 Claim.yea(a == c);
             }            
@@ -186,8 +186,8 @@ namespace Z0
                 var b = modprod(x,y);
                 Claim.yea(a == b);   
 
-                var zx = x.ToBitCells();
-                var zy = y.ToBitCells();
+                var zx = x.ToNatBits();
+                var zy = y.ToNatBits();
                 var c = zx % zy;
                 Claim.yea(a == c);
             }
@@ -220,8 +220,8 @@ namespace Z0
                 var b = modprod(x,y);
                 Claim.yea(a == b);
 
-                var zx = x.ToBitCells();
-                var zy = y.ToBitCells();
+                var zx = x.ToNatBits();
+                var zy = y.ToNatBits();
                 bit c = zx % zy;
                 Claim.yea(a == c);            
             }
@@ -231,8 +231,8 @@ namespace Z0
                 var x32 = Random.BitVector(n32);
                 var y32 = Random.BitVector(n32);
                 var dot32 = BitVector.dot(x32,y32);
-                var x64 = x32.Expand(n64);
-                var y64 = y32.Expand(n64);
+                var x64 = x32.Extend(n64);
+                var y64 = y32.Extend(n64);
                 var dot64 = BitVector.dot(x64,y64);
                 Claim.eq(dot32,dot64);
             }
@@ -292,7 +292,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {            
-            var opname = $"bvdot_n{n}x{moniker<T>()}";
+            var opname = $"bvdot_n{n}x{suffix<T>()}";
 
             void check()
             {

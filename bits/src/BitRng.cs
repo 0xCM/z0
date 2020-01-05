@@ -584,31 +584,6 @@ namespace Z0
             where T : unmanaged
                 => BS.load<T>(random.Stream<T>().ToSpan(BS.cellcount<T>(bitcount)), bitcount);
 
-        /// <summary>
-        /// Produces a bitblock over a random number of bits
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="minbits">The minimum bit count</param>
-        /// <param name="maxbits">The maximum bit count</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitBlock<T> BitBlock<T>(this IPolyrand random, int minbits, int maxbits)
-            where T : unmanaged
-        {
-            var len = random.Next<int>(minbits,++maxbits);
-            return BS.literals<T>(random.Stream<T>().TakeArray(BS.cellcount<T>(len),len));
-        }
-
-        /// <summary>
-        /// Produces a bitblock over a random number of bits
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="range">The range of potential bitvector lengths</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitBlock<T> BitBlock<T>(this IPolyrand random, Interval<int> range)
-            where T : unmanaged
-                => random.BitBlock<T>(range.Left, range.Right);                    
 
         /// <summary>
         /// Produces a generic bitmatrix predicated on a primal type

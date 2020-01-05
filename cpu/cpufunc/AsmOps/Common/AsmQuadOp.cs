@@ -10,14 +10,14 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static zfunc;
-
+    
+    [SuppressUnmanagedCodeSecurity]
     public delegate T AsmQuadOp<T>(T x, T y, out T a, out T b)
         where T : unmanaged;
 
     [SuppressUnmanagedCodeSecurity]
     public static unsafe class AsmQuadOp
     {
-
         [MethodImpl(Inline)]
         public static AsmQuadOp<T> Create<T>(AsmCode<T> code)
             where T : unmanaged
@@ -28,7 +28,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)] 
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity] 
         delegate void QuadOpI32(int x, int y, out int a, out int b);
 
         [MethodImpl(Inline)]
@@ -36,13 +36,10 @@ namespace Z0
             where S : Delegate
             where T : unmanaged
                 => Unsafe.As<S, AsmQuadOp<T>>(ref specific);
-
         
         [MethodImpl(Inline)]
         static QuadOpI32 OpI32(AsmCode code)
             => code.CreateDelegate<QuadOpI32>();
 
     }
-
-
 }

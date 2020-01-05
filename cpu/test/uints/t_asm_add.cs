@@ -5,92 +5,58 @@
 namespace Z0
 {
     using System;
-    
+    using System.Collections.Generic;
+    using System.Linq;
+
     using static zfunc;
 
     public class t_asm_add : AsmOpTest<t_asm_add>
-    {        
+    {
+        protected override string OpName 
+            => "add";
 
-        public void add8i_check()
-            => VerifyOp(AsmOps.Add<sbyte>(), math.add);
+        protected override FolderName AsmFolder
+            => FolderName.Define(nameof(math));
 
-        public void add8i_bench()
-            => add_bench<sbyte>();
-
-        public void add8u_check()
-            => VerifyOp(AsmOps.Add<byte>(), math.add);
-
-        public void add8u_bench()
-            => add_bench<byte>();
-
-        public void add16i_check()
-            => VerifyOp(AsmOps.Add<short>(), math.add);
-
-        public void add16i_bench()
-            => add_bench<short>();
-
-        public void add16u_check()
-            => VerifyOp(AsmOps.Add<ushort>(), math.add);
-
-        public void add_asm16u_bench()
-            => add_bench<ushort>();
-
-        public void add32i_check()
-            => VerifyOp(AsmOps.Add<int>(), math.add);
-
-        public void add32i_bench()
-            => add_bench<int>();
-
-        public void add32u_check()
-            => VerifyOp(AsmOps.Add<uint>(), math.add);
-
-        public void add32u_bench()
-            => add_bench<uint>();
-
-        public void add64i_check()
-            => VerifyOp(AsmOps.Add<long>(), math.add);
-
-        public void add64i_bench()        
-            => add_bench<long>();
-
-        public void add64u_check()
-            => VerifyOp(AsmOps.Add<ulong>(), math.add);
-
-        public void add64u_bench()
-            => add_bench<ulong>();
-
-        public void add64f_check()
-            => VerifyOp(AsmOps.Add<double>(), fmath.add);
-
-        public void add_asm64f_bench()
-            => add_bench<double>();
-
-        void add_bench<T>(SystemCounter subject = default, SystemCounter compare = default)
-            where T : unmanaged
+        public void add_bench()
         {
-            var last = default(T);
-            var asmop = AsmOps.Add<T>();
-            
-            for(var i=0; i<OpCount; i++)
-            {
-                var a = Random.Next<T>();
-                var b = Random.Next<T>();                
-                subject.Start();
-                last = asmop(a,b);
-                subject.Stop();
+            using var buffer = AsmExecBuffer.Create();            
 
-                compare.Start();
-                last = gmath.add(a,b);
-                compare.Stop();
-
-            }
-
-            ReportBenchmark($"add{moniker<T>()}_asm", OpCount,subject);
-            ReportBenchmark($"add{moniker<T>()}", OpCount,compare);
+            add_bench(buffer, z8);
+            add_bench(buffer, z8i);
+            add_bench(buffer, z16);
+            add_bench(buffer, z16i);
+            add_bench(buffer, z32);
+            add_bench(buffer, z32i);
+            add_bench(buffer, z64);
         }
 
+        public void add_check()
+        {
+            using var buffer = AsmExecBuffer.Create();            
 
+            add_check(buffer, z8);
+            add_check(buffer, z8i);
+            add_check(buffer, z16);
+            add_check(buffer, z16i);
+            add_check(buffer, z32);
+            add_check(buffer, z32i);
+            add_check(buffer, z64);
+            add_check(buffer, z64i);            
+        }
+
+        void add_check<T>(AsmExecBuffer buffer, T t = default)
+            where T : unmanaged
+        {
+            buffer.Load(ReadAsm<T>());
+            CheckMatch(buffer.BinOp<T>(),gmath.add);
+        }
+
+        void add_bench<T>(AsmExecBuffer buffer, T t = default)
+            where T : unmanaged
+        {
+            buffer.Load(ReadAsm<T>());
+            RunBench(buffer.BinOp<T>(), gmath.add<T>);
+        }
     }
-
-
 }

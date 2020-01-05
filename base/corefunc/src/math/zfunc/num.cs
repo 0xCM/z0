@@ -12,83 +12,6 @@ using static Z0.As;
 
 partial class zfunc
 {
-    /// <summary>
-    /// Returns true if the primal source type is signed, false otherwise
-    /// </summary>
-    /// <typeparam name="T">The primal source type</typeparam>
-    [MethodImpl(Inline)]
-    public static bool signed<T>()
-        where T : unmanaged
-        => typeof(T) == typeof(sbyte) 
-        || typeof(T) == typeof(short) 
-        || typeof(T) == typeof(int) 
-        || typeof(T) == typeof(long)
-        || typeof(T) == typeof(float) 
-        || typeof(T) == typeof(double);
-
-
-    /// <summary>
-    /// Returns true if the specified type is an unsigned primal integral type
-    /// </summary>
-    /// <typeparam name="T">The type to evaluate</typeparam>
-    [MethodImpl(Inline)]
-    public static bool unsigned<T>()
-        where T : unmanaged
-        => typeof(T) == typeof(byte) 
-        || typeof(T) == typeof(ushort) 
-        || typeof(T) == typeof(uint) 
-        || typeof(T) == typeof(ulong);
-
-    /// <summary>
-    /// Returns true if the specified type is a signed primal integral type
-    /// </summary>
-    /// <typeparam name="T">The type to evaluate</typeparam>
-    [MethodImpl(Inline)]
-    public static bool signedint<T>()
-        where T : unmanaged
-        => typeof(T) == typeof(sbyte) 
-        || typeof(T) == typeof(short) 
-        || typeof(T) == typeof(int) 
-        || typeof(T) == typeof(long);
-
-    /// <summary>
-    /// Returns true if the specified type is a primal integer
-    /// </summary>
-    /// <typeparam name="T">The type to evaluate</typeparam>
-    [MethodImpl(Inline)]
-    public static bool integral<T>()
-        where T : unmanaged
-        => typeof(T) == typeof(byte) 
-        || typeof(T) == typeof(ushort) 
-        || typeof(T) == typeof(uint) 
-        || typeof(T) == typeof(ulong)
-        || typeof(T) == typeof(sbyte) 
-        || typeof(T) == typeof(short) 
-        || typeof(T) == typeof(int) 
-        || typeof(T) == typeof(long);
-
-    /// <summary>
-    /// Returns true if the spedified type is a 32-bit or 64-bit floating point
-    /// </summary>
-    /// <typeparam name="T">The type to evaluate</typeparam>
-    [MethodImpl(Inline)]
-    public static bool floating<T>()
-        where T : unmanaged
-            => typeof(T) == typeof(float) 
-            || typeof(T) == typeof(double);
-
-    /// <summary>
-    /// Returns the types numeric suffix character, if any; either i, u or f
-    /// which respectively denote signed integers, unsigned integers and floating-point
-    /// </summary>
-    /// <typeparam name="T">The type to evaluate</typeparam>
-    [MethodImpl(Inline)]
-    public static char suffix<T>(bool general = true)
-        where T : unmanaged
-            =>  floating<T>() ? AsciLower.f  
-              : signedint<T>() ? AsciLower.i  
-              : unsigned<T>() ?  AsciLower.u 
-              : AsciSym.Question;
 
     /// <summary>
     /// Creates an enumerable sequence that ranges between inclusive upper and lower bounds
@@ -100,7 +23,6 @@ partial class zfunc
     public static IEnumerable<T> range<T>(T x0, T x1)
         where T : unmanaged
             => range_1(x0,x1,null);
-
 
     /// <summary>
     /// Creates an enumerable sequence that ranges between inclusive upper and lower bounds

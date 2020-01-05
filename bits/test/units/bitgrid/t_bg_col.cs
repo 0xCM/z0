@@ -44,7 +44,7 @@ namespace Z0
                 for(var col=0; col<n; col++)
                 {
                     var bv1 = BitGrid.col(xg,col);     
-                    var bv2 = BitVector.from(m,xs.Slice(col*m, m));
+                    var bv2 = BitVector.create(m,xs.Slice(col*m, m));
                     Claim.eq(bv1, bv2);
                 }
             }            
@@ -64,7 +64,7 @@ namespace Z0
                 for(var col=0; col<n; col++)
                 {
                     var bv1 = BitGrid.col(xg,col);     
-                    var bv2 = BitVector.from(m,xs.Slice(col*m, m));
+                    var bv2 = BitVector.create(m,xs.Slice(col*m, m));
                     Claim.eq(bv1, bv2);
                 }            
             }
@@ -84,7 +84,7 @@ namespace Z0
                 for(var col=0; col<n; col++)
                 {
                     var bv1 = BitGrid.col(xg,col);     
-                    var bv2 = BitVector.from(m,xs.Slice(col*m, m));
+                    var bv2 = BitVector.create(m,xs.Slice(col*m, m));
                     Claim.eq(bv1, bv2);
                 }            
             }
@@ -104,7 +104,7 @@ namespace Z0
                 for(var col=0; col<n; col++)
                 {
                     var bv1 = BitGrid.col(xg,col);     
-                    var bv2 = BitVector.from(m,xs.Slice(col*m, m));
+                    var bv2 = BitVector.create(m,xs.Slice(col*m, m));
                     Claim.eq(bv1, bv2);
                 }            
             }
@@ -124,7 +124,7 @@ namespace Z0
                 for(var col=0; col<n; col++)
                 {
                     var bv1 = BitGrid.col(xg,col);     
-                    var bv2 = BitVector.from(m,xs.Slice(col*m, m));
+                    var bv2 = BitVector.create(m,xs.Slice(col*m, m));
                     Claim.eq(bv1, bv2);
                 }
             }            
@@ -144,7 +144,7 @@ namespace Z0
                 for(var col=0; col<n; col++)
                 {
                     var bv1 = BitGrid.col(xg,col);     
-                    var bv2 = BitVector.from(m,xs.Slice(col*m, m));
+                    var bv2 = BitVector.create(m,xs.Slice(col*m, m));
                     Claim.eq(bv1, bv2);
                 }
             }            

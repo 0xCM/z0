@@ -16,6 +16,8 @@ namespace Z0
         Bench,
 
         App,
+
+        Data,
     }
 
     public enum LogWriteMode

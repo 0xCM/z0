@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="hi">The upper bits of the new vector</param>
         [MethodImpl(Inline)]
         public static BitVector8 concat(BitVector4 lo, BitVector4 hi)
-            => from(n8,hi.data << 4 | lo.data);
+            => create(n8,hi.data << 4 | lo.data);
 
         /// <summary>
         /// Creates a 16-bit vector by concatenating 4 4-bit vectors
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="hi">The upper bits of the new vector</param>
         [MethodImpl(Inline)]
         public static BitVector16 concat(BitVector8 lo, BitVector8 hi)
-            => from(n16, lo.data, hi.data);
+            => create(n16, lo.data, hi.data);
 
         /// <summary>
         /// Creates a 32-bit vector by concatenating a pair of 16-bit vectors
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="hi">The upper bits of the new vector</param>
         [MethodImpl(Inline)]
         public static BitVector32 concat(BitVector16 lo, BitVector16 hi)
-            => from(n32, lo.data, hi.data);
+            => create(n32, lo.data, hi.data);
 
         /// <summary>
         /// Creates a 32-bit vector by concatenating 4 8-bit vectors
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="x3">The last segment that forms the most significant bits of the new vector</param>
         [MethodImpl(Inline)]
         public static BitVector32 concat(BitVector8 x0, BitVector8 x1, BitVector8 x2,  BitVector8 x3)
-            => from(n32, x0.data, x1.data, x2.data, x3.data);
+            => create(n32, x0.data, x1.data, x2.data, x3.data);
 
         /// <summary>
         /// Creates a 64-bit vector by concatenating 8 8-bit vectors
@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="x3">The last segment that forms the most significant bits of the new vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 concat(BitVector16 x0, BitVector16 x1, BitVector16 x2, BitVector16 x3)
-            => from(n64, x0.data, x1.data, x2.data, x3.data);
+            => create(n64, x0.data, x1.data, x2.data, x3.data);
 
         /// <summary>
         /// Creates a 64-bit vector by concatenating a pair of 32-bit vectors
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="hi">The upper bits of the new vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 concat(BitVector32 lo, BitVector32 hi)
-            => from(n64, lo.data, hi.data);
+            => create(n64, lo.data, hi.data);
 
     }
 

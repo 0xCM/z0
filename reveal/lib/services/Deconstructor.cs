@@ -47,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         public static MethodDisassembly[] Deconstruct(Type src)
-            => Deconstruct(src.DeclaredMethods().NonGeneric().Concrete().ToArray()).ToArray();
+            => Deconstruct(src.DeclaredMethods().NonGeneric().Concrete().NonSpecial().ToArray()).ToArray();
 
         public static Option<MethodDisassembly> Deconstruct(MethodInfo method, bool jit)
         {
@@ -76,6 +76,65 @@ namespace Z0
 
         public static MethodDisassembly[] Deconstruct(params MethodInfo[] methods)
             => Disassemble(x => error(x), methods).ToArray();
+
+        // public static Moniker moniker(MethodInfo method)
+        // {
+        //     var type = method.GetParameters().FirstOrDefault()?.ParameterType ?? method.ReturnType; 
+        //     return Moniker.define(method.Name,type.Kind());
+        // }
+
+        /// <summary>
+        /// Disassasembles non-generic functions defined by a type to individual files in the appropriate assembly data folder
+        /// </summary>
+        /// <param name="target">The type to disassemble</param>
+        public static void Shred(Type target)
+        {            
+            var typename = target.DisplayName().ToLower();
+            var subfolder = FolderName.Define(typename);
+            var paths = LogPaths.The;
+            var datadir = paths.AsmDataDir(subfolder);
+            var deconstructed = Deconstruct(target);
+            foreach(var d in deconstructed)
+            {
+                var m = Moniker.define(d.MethodInfo);
+                var asmfile = paths.AsmInfoPath(target,m);
+                var hexfile = paths.AsmHexPath(target,m);
+                var cilfile = paths.CilPath(target,m);
+                var asm = d.DistillAsm();
+                asmfile.Overwrite(asm.Format());
+                hexfile.Overwrite(asm.FormatEncoding());                
+                cilfile.Overwrite(d.FormatCil());
+            }            
+        }
+
+        public static void Shred(params Type[] targets)
+        {
+            for(var i=0; i<targets.Length; i++)
+                Shred(targets[i]);
+        }
+          
+		public static Instruction[] Decode(AsmCode src)
+		{
+            var dst = new InstructionList();
+            var reader = new ByteArrayCodeReader(src.Data.ToArray());
+			var decoder = Decoder.Create(IntPtr.Size * 8, reader);
+			decoder.IP = 0;			
+			while (reader.CanReadByte) 
+			{
+				ref var instruction = ref dst.AllocUninitializedElement();
+				decoder.Decode(out instruction);                
+			}
+            return dst.ToArray();
+        }
+
+        /// <summary>
+        /// Disassasembles non-generic functions defined by a type to individual files in the appropriate
+        /// assembly data folder
+        /// </summary>
+        /// <param name="cil">Specifies whether also emit CIL</param>
+        /// <typeparam name="T">The type to disassembly</typeparam>
+        public static void Shred<T>()
+            => Shred(typeof(T));
 
         static IEnumerable<MethodDisassembly> Disassemble(Action<string> onError, params MethodInfo[] methods)
         {
@@ -168,6 +227,7 @@ namespace Z0
                 instructions.AddRange(DecodeAsm(block));
                 blocks.Add(block);
             }
+            
             return new MethodAsmBody(method, blocks.ToArray(), instructions.ToArray());
         }
 
@@ -230,14 +290,10 @@ namespace Z0
 			=> ReadNativeContent(GetRuntimeMethod(method));
 
  		CodeBlocks ReadNativeContent(ClrMethod method) 
-		{			
-            var blocks = new List<CodeBlock>();
-			iter(ReadNativeBlocks(method), nb => blocks.Add(nb));
-			return new CodeBlocks(
+			=> new CodeBlocks(
                 MethodId: (int)method.MetadataToken,
-                Blocks: blocks.ToArray()
+                Blocks: ReadNativeBlock(method).MapValueOrDefault(b => new CodeBlock[]{b}, new CodeBlock[]{})
             );
-		}
 
 		/// <summary>
 		/// Reads a continuous block of memory
@@ -259,6 +315,12 @@ namespace Z0
 
 			return new CodeBlock(address, dst);
 		}
+
+        Option<CodeBlock> ReadNativeBlock(ClrMethod method)
+        {
+			var codeInfo = method.HotColdInfo;			
+            return ReadNativeBlock(codeInfo.HotStart, codeInfo.HotSize);
+        }
 
         /// <summary>
         /// Reads the native code blocks that have been Jitted for a specified method

@@ -5,15 +5,12 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static zfunc;
 
     /// <summary>
-    /// Represents an assembly instruction in the context of an <see cref='AsmFuncInfo' />
+    /// Describes an assembly instruction
     /// </summary>
     public class AsmInstructionInfo
     {
