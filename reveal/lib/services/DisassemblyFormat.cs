@@ -6,6 +6,7 @@ namespace Z0
 {        
     using System;
     using System.Linq;
+    using System.Collections.Generic;
     using System.Reflection;
     using System.Runtime.CompilerServices;
 	using Iced.Intel;
@@ -41,7 +42,7 @@ namespace Z0
             if(src.Instructions.Length == 0)
                 return string.Empty;
 
-            Span<byte> nativeData = src.NativeBlocks.Single().Data;
+            Span<byte> nativeData = src.NativeBlock.Data;
 
             var baseAddress = src.Instructions[0].IP;
 
@@ -53,11 +54,12 @@ namespace Z0
             for(var j = 0; j< src.Instructions.Length; j++)
             {
                 ref var i = ref src.Instructions[j];
+                
                 var startAddress = i.IP;
                 var relAddress = (int)(startAddress - baseAddress);
                 var relAddressFmt = relAddress.ToString("x4");            
-
                 sb.Append($"{relAddressFmt}h  ");
+
                 formatter.Format(ref i, output);
 
                 var padding = "   ";
@@ -72,30 +74,53 @@ namespace Z0
             return sb.ToString();
         }
 
-        public static ReadOnlySpan<string> FormatInstructions(this MethodAsmBody src)
+        static string comment(string src)
+            => $"{AsciSym.Semicolon}{AsciSym.Space}{src}";
+
+        public static ReadOnlySpan<string> FormatAsm(this InstructionBlock src, bool lineaddresses, bool rawbytes, bool header)
         {
-            var inxcount = src.Instructions.Length;
-            if(inxcount == 0)
+            const string RelAddresSpec = "x4";
+
+            if(src.InstructionCount == 0)
                 return ReadOnlySpan<string>.Empty;
             
-            Span<string> dst = new string[inxcount];
+            var linecount = header ? src.InstructionCount + 1 : src.InstructionCount;
+            var line = 0;
+            Span<string> dst = new string[linecount];
+            if(header)
+                dst[line++] = comment(src.Name);
 
             var formatter = new MasmFormatter(FormatOptions);
-            var baseAddress = src.Instructions.First().IP;
+            var baseAddress = src.BaseAddress;
 
             var sb = text();
             var writer = new StringWriter(sb);
             var output = new AsmFormatterOutput(writer, baseAddress);
-            for(var j = 0; j< src.Instructions.Length; j++)
+            for(var current = 0; current < src.InstructionCount; line++, current++)
             {
-                ref var i = ref src.Instructions[j];
-                formatter.Format(ref i, output);
-                dst[j] = sb.ToString();
+                ref var instruction = ref src[current];
+
+                formatter.Format(ref instruction, output);
+                var relAddress = (int)(instruction.IP - baseAddress);                
+                
+                dst[line] = lineaddresses 
+                    ?  concat(relAddress.ToString(RelAddresSpec), Hex.PostSpec, AsciSym.Space, sb.ToString())
+                    :   sb.ToString();
+
+                if(rawbytes)
+                    dst[line] = dst[line].PadRight(40) 
+                          + concat(AsciSym.Semicolon, AsciSym.Space) 
+                          + src.Encoded.Slice(relAddress, instruction.ByteLength)
+                                .FormatHexBytes(sep:AsciSym.Space, zpad:true, specifier:false, uppercase:false);
+
                 sb.Clear();
             }
 
             return dst;
         }
+
+        public static ReadOnlySpan<string> FormatAsm(this MethodAsmBody src, bool lineaddresses, bool rawbytes, bool header)
+            => InstructionBlock.Define(src.Method.MethodSig().Format(), src.NativeBlock.Data, src.Instructions).FormatAsm(lineaddresses, rawbytes, header);
 
         class AsmFormatterOutput : FormatterOutput
         {

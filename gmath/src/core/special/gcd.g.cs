@@ -13,7 +13,7 @@ namespace Z0
     
     partial class gmath
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static T gcd<T>(T a, T b)
             where T : unmanaged
         {
@@ -29,6 +29,22 @@ namespace Z0
                 return gcd_i(a,b);
             else 
                 return gcd_f(a,b);
+        }           
+
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
+        public static T gcdbin<T>(T a, T b)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>((math.gcdbin(uint8(a), uint8(b))));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>((math.gcdbin(uint16(a), uint16(b))));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>((math.gcdbin(uint32(a), uint32(b))));
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>((math.gcdbin(uint64(a), uint64(b))));
+            else            
+                throw unsupported<T>();
         }           
 
         [MethodImpl(Inline)]
@@ -71,21 +87,6 @@ namespace Z0
                 throw unsupported<T>();
         }           
 
-        [MethodImpl(Inline)]
-        public static T gcdbin<T>(T a, T b)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return generic<T>((math.gcdbin(uint8(a), uint8(b))));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>((math.gcdbin(uint16(a), uint16(b))));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>((math.gcdbin(uint32(a), uint32(b))));
-            else if(typeof(T) == typeof(ulong))
-                return generic<T>((math.gcdbin(uint64(a), uint64(b))));
-            else            
-                throw unsupported<T>();
-        }           
 
    }
 

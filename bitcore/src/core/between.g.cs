@@ -22,23 +22,10 @@ namespace Z0
         /// <param name="rhs">The left bit position</param>
         /// <param name="dst">The right bit position</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static T between<T>(T src, byte p0, byte p1)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-                || typeof(T) == typeof(ushort) 
-                || typeof(T) == typeof(uint) 
-                || typeof(T) == typeof(ulong))
-                return between_u(src,p0,p1);
-            else if(typeof(T) == typeof(sbyte) 
-                || typeof(T) == typeof(short)
-                || typeof(T) == typeof(int) 
-                || typeof(T) == typeof(long))
-                return between_i(src,p0,p1);
-            else
-                return between_f(src,p0,p1);
-        }
+                => between_u(src,p0,p1);
 
         /// <summary>
         /// Extracts a contiguous sequence of bits from a source and deposits the result to a caller-supplied target
@@ -49,11 +36,10 @@ namespace Z0
         /// <param name="dst">The target that receives the sequence</param>
         /// <param name="offset">The target offset</param>
         /// <typeparam name="T">The primal bit source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static void between<T>(T a, byte first, byte last, Span<byte> dst, int offset)
             where T : unmanaged
                 => bytes(gbits.between(a,first,last)).Slice(0, BitCalcs.minbytes(last - first + 1)).CopyTo(dst,offset);
-
 
         [MethodImpl(Inline)]
         static T between_i<T>(T src, byte p0, byte p1)
@@ -65,8 +51,10 @@ namespace Z0
                  return generic<T>(Bits.between(int16(src), p0, p1));
             else if(typeof(T) == typeof(int))
                  return generic<T>(Bits.between(int32(src), p0, p1));
-            else 
+            else if(typeof(T) == typeof(long))
                  return generic<T>(Bits.between(int64(src), p0, p1));
+            else
+                return between_f(src,p0,p1);
         }
 
         [MethodImpl(Inline)]
@@ -79,8 +67,10 @@ namespace Z0
                  return generic<T>(Bits.between(uint16(src), p0, p1));
             else if(typeof(T) == typeof(uint))
                  return generic<T>(Bits.between(uint32(src), p0, p1));
-            else 
+            else if(typeof(T) == typeof(ulong))
                  return generic<T>(Bits.between(uint64(src), p0, p1));
+            else 
+                return between_i(src,p0,p1);
         }
 
         [MethodImpl(Inline)]

@@ -1,8 +1,12 @@
 namespace Z0
 {
     using System;
+    using System.Security;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Intrinsics;
+    using System.Reflection;
+    using System.Reflection.Emit;
     using static zfunc;
 
     public class AsmRdRand
@@ -30,9 +34,28 @@ namespace Z0
         
             
             var code = AsmCode.Load(rdrand, moniker<uint>("rdrand"));
-            var emitter = code.CreateEmitter<uint>();
+            var emitter = CreateEmitter<uint>(code);
             emitter();
 
+        }
+
+        /// <summary>
+        /// Creates a value-producing operator that accepts no arguments
+        /// </summary>
+        /// <param name="code">The code to execute</param>
+        /// <typeparam name="T">The emission type</typeparam>
+        static Emitter<T> CreateEmitter<T>(AsmCode code)
+            where T : unmanaged
+        {
+            var t = typeof(T);
+            var argTypes = new Type[]{};
+            var returnType = t;
+            var method = new DynamicMethod(code.Name, returnType, argTypes, t.Module);            
+            var g = method.GetILGenerator();
+            g.Emit(OpCodes.Ldc_I8, (long)code.Pointer);
+            g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, returnType, argTypes);
+            g.Emit(OpCodes.Ret);            
+            return (Emitter<T>)method.CreateDelegate(typeof(Emitter<T>));
         }
 
 

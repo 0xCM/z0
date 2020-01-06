@@ -14,14 +14,13 @@ namespace Z0
     
     partial class gbits
     {                       
-
         /// <summary>
         /// Scatters contiguous low bits from the source across a target according to a mask
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The scatter spec</param>
         /// <typeparam name="T">The identifiying mask</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
         public static T scatter<T>(T src, T mask)
             where T : unmanaged
         {

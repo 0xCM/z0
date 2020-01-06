@@ -21,7 +21,7 @@ namespace Z0
         /// For example, [11101010] |> blisc = [11111101]
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
         public static T blsic<T>(T src)
             where T : unmanaged
         {

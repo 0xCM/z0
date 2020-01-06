@@ -16,7 +16,6 @@ namespace Z0
 
     partial class Reflections
     {        
-
         /// <summary>
         /// Attempts to determine whether a method is sporting the "new" keyword
         /// </summary>

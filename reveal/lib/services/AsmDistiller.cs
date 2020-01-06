@@ -27,20 +27,20 @@ namespace Z0
         {
             var asm = src.AsmBody;
             var inxcount = asm.Instructions.Length;
-            var code = asm.NativeBlocks.Single().Data;
+            var code = asm.NativeBlock.Data;
             Span<byte> codespan = code;
             var inxs = new AsmInstructionInfo[inxcount];
-            var inxsfmt = asm.FormatInstructions();
+            var inxsfmt = asm.FormatAsm(false,false,false);
 
             for(var i=0; i<asm.Instructions.Length; i++)
             {
-                var inx = asm.Instructions[i];
-                var operands = inx.DistillOperands(asm);                
-                var offset = (ushort)(inx.IP - asm.StartAddress);
-                var encoded = codespan.Slice(offset, inx.ByteLength).ToArray();
-                var mnemonic = inx.Mnemonic.ToString().ToUpper();
-                var opcode = inx.Code.ToString();
-                var enckind = inx.Encoding == EncodingKind.Legacy ? string.Empty : inx.Encoding.ToString();
+                var instruction = asm.Instructions[i];
+                var offset = (ushort)(instruction.IP - asm.StartAddress);
+                var encoded = codespan.Slice(offset, instruction.ByteLength).ToArray();
+                var operands = instruction.DistillOperands(asm);                
+                var mnemonic = instruction.Mnemonic.ToString().ToUpper();
+                var opcode = instruction.Code.ToString();
+                var enckind = instruction.Encoding == EncodingKind.Legacy ? string.Empty : instruction.Encoding.ToString();
                 inxs[i] = new AsmInstructionInfo(offset, inxsfmt[i], mnemonic, opcode, operands, enckind, encoded);
             }
 

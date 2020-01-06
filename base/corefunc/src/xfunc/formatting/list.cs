@@ -19,6 +19,25 @@ namespace Z0
     partial class xfunc
     {
         /// <summary>
+        /// Formats each source element on a new line
+        /// </summary>
+        /// <param name="src">The source span</param>
+        public static string FormatLines<T>(this ReadOnlySpan<T> src)
+        {
+            var lines = text();
+            for(var i=0; i<src.Length; i++)
+                lines.AppendLine(src[i].ToString());
+            return lines.ToString();
+        }
+
+        /// <summary>
+        /// Formats each source element on a new line
+        /// </summary>
+        /// <param name="src">The source span</param>
+        public static string FormatLines<T>(this Span<T> src)
+            => src.ReadOnly().FormatLines();
+
+        /// <summary>
         /// Formats a span as a delimited list
         /// </summary>
         /// <param name="src">The source span</param>

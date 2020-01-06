@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="a">The value to shift</param>
         /// <param name="offset">The number of bits to shift</param>
         /// <typeparam name="T">The primal integer type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static T srl<T>(T a, int offset)
             where T : unmanaged
         {

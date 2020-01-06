@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source segment</param>
         /// <param name="pos">The 0-based index of the bit to change</param>
         /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static T disable<T>(T src, int pos)
             where T : unmanaged
         {
@@ -65,7 +65,6 @@ namespace Z0
                  return generic<T>(BitMask.disable(uint64(src), pos));
         }
 
-
         [MethodImpl(Inline)]
         static T disable_f<T>(T src, int pos)
             where T : unmanaged
@@ -77,7 +76,6 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
-
          
         /// <summary>
         /// Disables a specified source bit

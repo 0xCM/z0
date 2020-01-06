@@ -77,11 +77,30 @@ namespace Z0
         public static MethodDisassembly[] Deconstruct(params MethodInfo[] methods)
             => Disassemble(x => error(x), methods).ToArray();
 
-        // public static Moniker moniker(MethodInfo method)
-        // {
-        //     var type = method.GetParameters().FirstOrDefault()?.ParameterType ?? method.ReturnType; 
-        //     return Moniker.define(method.Name,type.Kind());
-        // }
+        /// <summary>
+        /// Decodes encoded assembly instructions
+        /// </summary>
+        /// <param name="data">The encoded instructions</param>
+        public static InstructionBlock Decode(string name, ReadOnlySpan<byte> data)
+		{
+            var dst = new InstructionList();
+            var reader = new ByteArrayCodeReader(data.ToArray());
+			var decoder = Decoder.Create(IntPtr.Size * 8, reader);
+			decoder.IP = 0;
+			while (reader.CanReadByte) 
+			{
+				ref var instruction = ref dst.AllocUninitializedElement();
+				decoder.Decode(out instruction);                
+			}
+            return InstructionBlock.Define(name, data, dst.ToArray());
+		}
+
+        /// <summary>
+        /// Decodes an assembly code block
+        /// </summary>
+        /// <param name="src">The source assembly block</param>
+		public static InstructionBlock Decode(AsmCode src)
+            => Decode(src.Name, src.Data);
 
         /// <summary>
         /// Disassasembles non-generic functions defined by a type to individual files in the appropriate assembly data folder
@@ -113,20 +132,6 @@ namespace Z0
                 Shred(targets[i]);
         }
           
-		public static Instruction[] Decode(AsmCode src)
-		{
-            var dst = new InstructionList();
-            var reader = new ByteArrayCodeReader(src.Data.ToArray());
-			var decoder = Decoder.Create(IntPtr.Size * 8, reader);
-			decoder.IP = 0;			
-			while (reader.CanReadByte) 
-			{
-				ref var instruction = ref dst.AllocUninitializedElement();
-				decoder.Decode(out instruction);                
-			}
-            return dst.ToArray();
-        }
-
         /// <summary>
         /// Disassasembles non-generic functions defined by a type to individual files in the appropriate
         /// assembly data folder
@@ -168,7 +173,7 @@ namespace Z0
         /// </summary>
         /// <param name="rt">The source runtime</param>
         /// <param name="src">The represented method</param>
-        ClrMethod GetRuntimeMethod(MethodBase src)
+        ClrMethod GetRuntimeMethod(MethodInfo src)
             =>  Runtime.GetMethodByHandle((ulong)src.MethodHandle.Value.ToInt64());
             
         Option<MethodDisassembly> Disassemble(MethodInfo method, Action<string> onError)
@@ -197,7 +202,7 @@ namespace Z0
                     CilBody = MdIx.FindCil(method),
                     CilMap = MapCilToNative(clrMethod),
                     AsmBody =  asmBody,
-                    NativeBody = asmBody.NativeBlocks
+                    NativeBody = asmBody.NativeBlock
                 };
 
                 return d;            
@@ -214,7 +219,7 @@ namespace Z0
             }
         }
 
-        MethodAsmBody DecodeAsm(MethodBase method)
+        MethodAsmBody DecodeAsm(MethodInfo method)
         {
             var data = ReadNativeContent(method);
             if(data.NativeCode.Length == 0)
@@ -228,15 +233,15 @@ namespace Z0
                 blocks.Add(block);
             }
             
-            return new MethodAsmBody(method, blocks.ToArray(), instructions.ToArray());
+            return new MethodAsmBody(method, blocks.Single(), instructions.ToArray());
         }
 
         void IDisposable.Dispose()
         {
             Target?.Dispose();
         }
-
-		static InstructionList DecodeAsm(CodeBlock src)
+		
+        static InstructionList DecodeAsm(CodeBlock src)
 		{
             var dst = new InstructionList();
             var reader = new ByteArrayCodeReader(src.Data);
@@ -286,7 +291,7 @@ namespace Z0
             return ilBytes;
         }
 
-        CodeBlocks ReadNativeContent(MethodBase method) 
+        CodeBlocks ReadNativeContent(MethodInfo method) 
 			=> ReadNativeContent(GetRuntimeMethod(method));
 
  		CodeBlocks ReadNativeContent(ClrMethod method) 
@@ -301,7 +306,7 @@ namespace Z0
 		/// <param name="target">The (source!) target </param>
 		/// <param name="address">The starting address</param>
 		/// <param name="size">The number of bytes to read</param>
-		Option<CodeBlock> ReadNativeBlock(ulong address, ByteSize size)
+		Option<CodeBlock> ReadNativeBlock(ulong address, uint size)
 		{
 			if (address == 0 || size == 0)
 				return zfunc.none<CodeBlock>();
@@ -311,34 +316,21 @@ namespace Z0
 				throw new Exception($"Memory access failure at address {address.FormatHex()}");
             
             if (dst.Length != size)
-                throw Errors.LengthMismatch(size, dst.Length);
+                throw Errors.LengthMismatch((int)size, dst.Length);
 
 			return new CodeBlock(address, dst);
 		}
-
-        Option<CodeBlock> ReadNativeBlock(ClrMethod method)
-        {
-			var codeInfo = method.HotColdInfo;			
-            return ReadNativeBlock(codeInfo.HotStart, codeInfo.HotSize);
-        }
 
         /// <summary>
         /// Reads the native code blocks that have been Jitted for a specified method
         /// </summary>
         /// <param name="target">The diagnostic target</param>
         /// <param name="method">The runtime method</param>
-        /// <remarks>The content of this method was derived from https://github.com/0xd4d/JitDasm</remarks>
-        IEnumerable<CodeBlock> ReadNativeBlocks(ClrMethod method)
+        Option<CodeBlock> ReadNativeBlock(ClrMethod method)
         {
-			var codeInfo = method.HotColdInfo;
-			
-            var hot = ReadNativeBlock(codeInfo.HotStart, codeInfo.HotSize);
-            if(hot.IsSome())
-                yield return hot.Value();        
-			
-            var cold = ReadNativeBlock(codeInfo.ColdStart, codeInfo.ColdSize);
-            if(cold.IsSome())
-                yield return cold.Value();                  
-        }       
+			var codeInfo = method.HotColdInfo;			
+            return ReadNativeBlock(codeInfo.HotStart, codeInfo.HotSize);
+        }
+
     }
 }

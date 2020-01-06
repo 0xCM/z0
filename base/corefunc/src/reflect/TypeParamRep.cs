@@ -44,8 +44,7 @@ namespace Z0
 
         public static implicit operator TypeParamReps(TypeParamRep[] src)
             => new TypeParamReps(src);
-        
-        
+                
         public TypeParamReps(TypeParamRep[] reps)
             => this.reps = reps;
 

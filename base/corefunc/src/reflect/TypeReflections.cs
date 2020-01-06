@@ -661,7 +661,6 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         /// <param name="InstanceType">The instance type classification</param>
-        /// <returns></returns>
         public static IEnumerable<MethodInfo> PublicMethods(this Type t, MemberInstanceType InstanceType)
             => t.InheritedPublicMethods(InstanceType).Concat(t.DeclaredPublicMethods(InstanceType));
             

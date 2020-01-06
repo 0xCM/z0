@@ -316,7 +316,6 @@ namespace Z0
             var p1 = paramX<X>("p1");
             var eval = f(p1);            
             return lambda<Func<X, Y>>(items(p1), eval);
-
         }
 
         /// <summary>

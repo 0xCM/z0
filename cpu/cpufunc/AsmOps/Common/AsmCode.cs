@@ -117,7 +117,7 @@ namespace Z0
                 => Marshal.GetDelegateForFunctionPointer<T>(Pointer);
 
         public string Format()
-            => Data.FormatHex();
+            => Data.FormatHexBytes();
 
         [MethodImpl(Inline)]
         unsafe IntPtr GetPointer()        

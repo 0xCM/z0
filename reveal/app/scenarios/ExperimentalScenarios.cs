@@ -18,11 +18,26 @@ namespace Z0
 
     class ExperimentalScenarios : Deconstructable<ExperimentalScenarios>
     {
+
+
         public ExperimentalScenarios()
             : base(callerfile())
         {
 
         }
+
+
+        public Vector256<uint> add_test()
+        {
+            var v1 = CpuVector.vparts(n256,0,1,2,3,4,5,6,7);
+            var v2 = CpuVector.vparts(n256,8,9,10,11,12,13,14,15);
+            var v3 = add(v1,v2);
+            return v3;
+        }
+
+        [MethodImpl(NotInline)]
+        public Vector256<uint> add(Vector256<uint> x, Vector256<uint> y)
+            => Avx2.Add(x,y);
 
         public Span<byte> GetBytes(in int src)
             => src.AsBytes();

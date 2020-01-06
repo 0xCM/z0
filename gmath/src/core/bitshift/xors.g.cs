@@ -18,13 +18,13 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source value</param>
         /// <param name="offset">The number of bits to shift the source value leftwards</param>
-        [MethodImpl(Inline)]
-        public static T xors<T>(T a, int offset)
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
+        public static T xors<T>(T a, byte offset)
             where T : unmanaged
                 => xors_u(a,offset);
 
         [MethodImpl(Inline)]
-        static T xors_u<T>(T a, int offset)
+        static T xors_u<T>(T a, byte offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -40,7 +40,7 @@ namespace Z0
         }           
 
         [MethodImpl(Inline)]
-        static T xors_i<T>(T a, int offset)
+        static T xors_i<T>(T a, byte offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

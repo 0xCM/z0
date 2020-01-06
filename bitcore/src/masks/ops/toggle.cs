@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The bit position</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static T toggle<T>(T src, int pos)
             where T : unmanaged
         {

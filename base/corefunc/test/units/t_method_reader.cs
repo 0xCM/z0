@@ -134,7 +134,6 @@ namespace Z0
             MethodReader.generic(def, typeof(uint), (m,data) => Trace(data.Format()));
         }
 
-
         public void write_generic_methods_1()
         {
             var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define("intrinsics"), "test_1", FileExtension.Define("asm"));
@@ -144,7 +143,9 @@ namespace Z0
                 typeof(sbyte), typeof(short), typeof(int), typeof(long), 
                 typeof(float), typeof(double)
                 };
-            typeof(InstrinsicHost).CaptureX86Generics(writer,types);        
+            foreach(var t in types)
+                typeof(InstrinsicHost).CaptureGenericAsm(t,writer);
+                    
 
         }
 
@@ -152,16 +153,13 @@ namespace Z0
         {
             var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define("intrinsics"), "test_2", FileExtension.Define("asm"));
             using var writer = dst.Writer();
-            typeof(InstrinsicHost).StaticMethods().OpenGeneric().CaptureX86Generics(writer, typeof(int));
+            typeof(InstrinsicHost).StaticMethods().OpenGeneric().CaptureGenericAsm(typeof(int), writer);
 
         }
         public void read_generic_methods()
         {                        
 
-            foreach(var m in typeof(GenericMethodHost).CaptureX86Generic<uint>())
-                Trace(m.Format(8));
-            
-            foreach(var m in typeof(InstrinsicHost).CaptureX86Generic(typeof(uint)))
+            foreach(var m in typeof(InstrinsicHost).CaptureGenericAsm(typeof(uint)))
                 Trace(m.Format(8));
         }
 
@@ -194,7 +192,7 @@ namespace Z0
             var methods = typeof(math).StaticMethods().NonGeneric();
             var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define("math"), "test_1", FileExtension.Define("asm"));
             using var dst = path.Writer();
-            methods.CaptureX86(dst);
+            methods.CaptureAsm(dst);
             dst.Flush();
             
         }
@@ -209,29 +207,30 @@ namespace Z0
         {
 
             Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> dAnd = Avx2.And;
-            var dAndData = dAnd.CaptureX86Delegate();
+            var dAndData = dAnd.CaptureDelegateAsm(100);
             Trace("And:delegate");
             Trace(dAndData.Format());
 
             var mAnd = typeof(Avx2).GetMethod(nameof(Avx2.And), new Type[] { typeof(Vector256<uint>), typeof(Vector256<uint>) });
-            var mAndData = mAnd.CaptureX86();
+            var mAndData = mAnd.CaptureAsm();
             Trace("And:Method");
             Trace(mAndData.Format());
 
             var dShuffle = shuffler(4);
-            var dShuffleData = dShuffle.CaptureX86Delegate(100);
+            var dShuffleData = dShuffle.CaptureDelegateAsm(100);
+            
             Trace("Shuffle:Delegate");
             Trace(dShuffleData.Format());
 
             var dShift = shifter(4);
-            var dShiftData = dShift.CaptureX86Delegate(100);
+            var dShiftData = dShift.CaptureDelegateAsm(100);
             Trace("Shift:Delegate");
             Trace(dShiftData.Format());
 
             var mgAnds = typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName(nameof(ginx.vand));
             foreach(var mgAnd in mgAnds)
             {
-                var mgAndData = mgAnd.CaptureX86Generic<uint>();
+                var mgAndData = mgAnd.CaptureGenericAsm(typeof(uint));
                 Trace($"{mgAnd.MethodSig()}");                
                 Trace(mgAndData.Format());
             }

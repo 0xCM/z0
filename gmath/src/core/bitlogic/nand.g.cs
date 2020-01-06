@@ -19,13 +19,13 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static T nand<T>(T a, T b)
             where T : unmanaged
                 => nand_u(a,b);
 
         [MethodImpl(Inline)]
-        public static T nand_u<T>(T a, T b)
+        static T nand_u<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -41,7 +41,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static T nand_i<T>(T a, T b)
+        static T nand_i<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

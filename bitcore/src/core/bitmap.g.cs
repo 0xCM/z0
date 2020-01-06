@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="start">The target-relative index at which to begin the overwrite</param>
         /// <param name="length">The number bits to read from the source an replace in the target</param>
         /// <typeparam name="T">The primal scalar type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
         public static T bitmap<T>(T src, T dst, byte start, byte length)
             where T : unmanaged
         {

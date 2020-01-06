@@ -15,6 +15,9 @@ namespace Z0
 
     partial class Reflections
     {        
+        public static ParameterDirection Direction(this ParameterInfo src)
+            => src.IsIn ? ParameterDirection.In : src.IsOut ? ParameterDirection.Out : ParameterDirection.Default;
+
         /// <summary>
         /// Determines whether the type is a (memory) reference
         /// </summary>
@@ -280,6 +283,28 @@ namespace Z0
         public static IEnumerable<T> WithNameLike<T>(this IEnumerable<T> src, string search)
             where T : MemberInfo
             => src.Where(x => x.Name.Contains(search)); 
+
+        /// <summary>
+        /// Selects the members with names that contain the supplied search field
+        /// </summary>
+        /// <param name="src">The members to examine</param>
+        /// <param name="search">The name to match</param>
+        public static IEnumerable<T> WithNameLike<T>(this IEnumerable<T> src, params string[] search)
+            where T : MemberInfo
+            => from m in src
+                where search.Any(match => m.Name.Contains(match))
+                select m;
+
+        /// <summary>
+        /// Selects the members with names that contain the supplied search field
+        /// </summary>
+        /// <param name="src">The members to examine</param>
+        /// <param name="search">The name to match</param>
+        public static IEnumerable<T> WithNameStartingWith<T>(this IEnumerable<T> src, params string[] search)
+            where T : MemberInfo
+            => from m in src
+                where search.Any(match => m.Name.StartsWith(match))
+                select m;
 
         /// <summary>
         /// Attempts to retrieve the value of an instance or static property

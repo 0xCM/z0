@@ -18,8 +18,8 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source value</param>
         /// <param name="offset">The number of bits to shift the source value rightwards</param>
-        [MethodImpl(Inline)]
-        public static T xorsr<T>(T a, int offset)
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
+        public static T xorsr<T>(T a, byte offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

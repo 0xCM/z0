@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="pos">The sequence-relative position of the target bit</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
         public static ref T cell<T>(Span<T> src, BitPos<T> pos)
             where T : unmanaged
                 => ref seek(src, pos.CellIndex);
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="pos">The sequence-relative position of the target bit</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
         public static ref readonly T cell<T>(ReadOnlySpan<T> src, BitPos<T> pos)
             where T : unmanaged
                 => ref skip(src, pos.CellIndex);
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The sequence-relative index of the target bit</param>
         /// <typeparam name="T">The sequence element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
         public static BitPos<T> bitpos<T>(int index)
             where T : unmanaged
                 => BitPos.FromBitIndex<T>((uint)index);

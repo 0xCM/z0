@@ -9,11 +9,30 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Reflection;
+    using System.Linq.Expressions;
+    using System.Linq;
 
     using static zfunc;
 
     partial class Reflections
     {
+        /// <summary>
+        /// Creates a delegate for a static method via the expression api
+        /// </summary>
+        /// <typeparam name="D">The type of the constructed delegate</typeparam>
+        /// <param name="m">The method that will be invoked when delegate is activated</param>
+        public static D CreateDelegate<D>(this MethodInfo m)
+            where D : Delegate
+        {
+            var argTypes = m.ParameterTypes().ToArray();
+            var dType
+                = m.IsAction()
+                ? Expression.GetActionType(argTypes)
+                : Expression.GetFuncType(argTypes.Concat(items(m.ReturnType)).ToArray());
+            var d = Delegate.CreateDelegate(typeof(D), null, m);
+            return cast<D>(d);
+        }
+
         /// <summary>
         /// Creates a binary operator delegate from a conforming method
         /// </summary>

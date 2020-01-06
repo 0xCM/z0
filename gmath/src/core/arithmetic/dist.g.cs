@@ -13,12 +13,12 @@ namespace Z0
     partial class gmath
     {        
         /// <summary>
-        /// Computes the distance between two values
+        /// Computes the nonnegative distance between two values
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <typeparam name="T"></typeparam>
-        [MethodImpl(Inline)]
+        /// <param name="a">The first value</param>
+        /// <param name="b">The second value</param>
+        /// <typeparam name="T">The value type</typeparam>
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static ulong dist<T>(T a, T b)
             where T : unmanaged
         {

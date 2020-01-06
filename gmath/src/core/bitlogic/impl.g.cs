@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static T impl<T>(T a, T b)
             where T : unmanaged
                 => impl_u(a,b);

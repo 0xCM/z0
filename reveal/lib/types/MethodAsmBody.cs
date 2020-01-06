@@ -18,16 +18,16 @@ namespace Z0
     /// </summary>
     public class MethodAsmBody
     {
-        public MethodAsmBody(MethodBase Method, CodeBlock[] NativeBlocks, Instruction[] Instructions)
+        public MethodAsmBody(MethodInfo method, CodeBlock block, Instruction[] instructions)
         {
-            this.Method = Method;
-            this.NativeBlocks = NativeBlocks;
-            this.Instructions = Instructions;
-            this.StartAddress = Instructions.First().IP;
-            this.EndAddress = Instructions.Last().IP;
+            this.Method = method;
+            this.NativeBlock = block;
+            this.Instructions = instructions;
+            this.StartAddress = instructions.First().IP;
+            this.EndAddress = instructions.Last().IP;
         }
         
-        public MethodBase Method {get;}
+        public MethodInfo Method {get;}
 
         public ulong StartAddress {get;}
             
@@ -35,7 +35,7 @@ namespace Z0
 
         public Instruction[] Instructions {get;}
         
-        public CodeBlock[] NativeBlocks {get;}
+        public CodeBlock NativeBlock {get;}
 
         public int MethodId
             => Method.MetadataToken;

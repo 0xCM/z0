@@ -143,22 +143,55 @@ partial class zfunc
         => c + concat(items);
 
     /// <summary>
-    /// Concatenates a character with an array of strings
+    /// Concatenates a character a string and a character
     /// </summary>
-    /// <param name="c">The leading character</param>
+    /// <param name="c1">The first character</param>
     /// <param name="items">The trailing content</param>
     [MethodImpl(Inline)]
-    public static string concat(char c1, string s, char c2)
-        => c1 + concat(s,c2);
+    public static string concat(char c1, string s1, char c2)
+        => $"{c1}{s1}{c2}";
 
     /// <summary>
-    /// Concatenates a character with an array of strings
+    /// Concatenates two characters and a string
     /// </summary>
-    /// <param name="c">The leading character</param>
-    /// <param name="items">The trailing content</param>
+    /// <param name="c1">The first character</param>
+    /// <param name="c2">The second character</param>
+    /// <param name="s1">The string</param>
     [MethodImpl(Inline)]
-    public static string concat(string s1, string c, char s2)
-        => concat(s1,c) + s2;
+    public static string concat(char c1, char c2, string s1)
+        => $"{c1}{c2}{s1}";
+
+    /// <summary>
+    /// Concatenates two strings and a character
+    /// </summary>
+    /// <param name="s1">The first string</param>
+    /// <param name="s2">The second string</param>
+    /// <param name="c1">The character</param>
+    [MethodImpl(Inline)]
+    public static string concat(string s1, string s2, char c1)
+        => $"{s1}{s2}{c1}";
+
+    /// <summary>
+    /// Concatenates two strings and two characters
+    /// </summary>
+    /// <param name="s1">The first string</param>
+    /// <param name="s2">The second string</param>
+    /// <param name="c1">The first character</param>
+    /// <param name="c2">The second character</param>
+    [MethodImpl(Inline)]
+    public static string concat(string s1, string s2, char c1, char c2)
+        => $"{s1}{s2}{c1}{c2}";
+
+    /// <summary>
+    /// Concatenates two strings, a character and a string
+    /// </summary>
+    /// <param name="s1">The first string</param>
+    /// <param name="s2">The second string</param>
+    /// <param name="c1">The first character</param>
+    /// <param name="s3">The third string</param>
+    [MethodImpl(Inline)]
+    public static string concat(string s1, string s2, char c1, string s3)
+        => $"{s1}{s2}{c1}{s3}";
 
     [MethodImpl(Inline)]
     public static string concat(char c1, string s1, char c2, string s2, char c3)
@@ -207,6 +240,10 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static string concat(string s1, char c1, char c2, char c3, params string[] items)
         => $"{s1}{c1}{c2}{c3}" + concat(items);
+
+    [MethodImpl(Inline)]
+    public static string concat(string s1, char c1, char c2, string s2)
+        => $"{s1}{c1}{c2}{s2}";
 
     [MethodImpl(Inline)]
     public static string concat(char c1, string s, char c2, params string[] items)

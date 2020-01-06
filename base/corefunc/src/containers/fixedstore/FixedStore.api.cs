@@ -110,7 +110,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<byte> bytes(in Fixed4096 src)
             => BitConvert.GetBytes(src);
- 
+
+        /// <summary>
+        /// Returns a generic reference to the leading storage cell of a fixed storage block
+        /// </summary>
+        /// <param name="src">The storage block</param>
+        /// <typeparam name="T">The reference cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T head<T>(ref Fixed64 src)
+            where T : unmanaged
+                => ref Unsafe.As<ulong,T>(ref src.X0);
+
         /// <summary>
         /// Returns a generic reference to the leading storage cell of a fixed storage block
         /// </summary>

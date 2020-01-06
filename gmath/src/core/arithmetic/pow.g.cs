@@ -13,7 +13,7 @@ namespace Z0
 
     partial class gmath
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static T pow<T>(T b, uint exp)
             where T : unmanaged
         {

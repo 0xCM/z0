@@ -1,4 +1,45 @@
-// 2020-01-05 15:03:44:474
+// 2020-01-05 20:14:01:571
+Vector256<uint> add_test()
+{
+    IL_0000: call Z0.N256 zfunc::get_n256()
+    IL_0005: ldc.i4.0
+    IL_0006: ldc.i4.1
+    IL_0007: ldc.i4.2
+    IL_0008: ldc.i4.3
+    IL_0009: ldc.i4.4
+    IL_000A: ldc.i4.5
+    IL_000B: ldc.i4.6
+    IL_000C: ldc.i4.7
+    IL_000D: call System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.CpuVector::vparts(Z0.N256,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32)
+    IL_0012: stloc.0
+    IL_0013: call Z0.N256 zfunc::get_n256()
+    IL_0018: ldc.i4.8
+    IL_0019: ldc.i4.s 9
+    IL_001B: ldc.i4.s 10
+    IL_001D: ldc.i4.s 11
+    IL_001F: ldc.i4.s 12
+    IL_0021: ldc.i4.s 13
+    IL_0023: ldc.i4.s 14
+    IL_0025: ldc.i4.s 15
+    IL_0027: call System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.CpuVector::vparts(Z0.N256,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32)
+    IL_002C: stloc.1
+    IL_002D: ldarg.0
+    IL_002E: ldloc.0
+    IL_002F: ldloc.1
+    IL_0030: call System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.ExperimentalScenarios::add(System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
+    IL_0035: stloc.2
+    IL_0036: ldloc.2
+    IL_0037: ret
+
+}
+Vector256<uint> add(Vector256<uint> x, Vector256<uint> y)
+{
+    IL_0000: ldarg.1
+    IL_0001: ldarg.2
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt32> System.Runtime.Intrinsics.X86.Avx2::Add(System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
+    IL_0007: ret
+
+}
 Span<byte> GetBytes(in int src)
 {
     IL_0000: ldarg.1

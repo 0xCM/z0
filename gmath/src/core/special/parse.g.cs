@@ -12,16 +12,7 @@ namespace Z0
 
     partial class gmath
     {
-        static T ParseError<T>(string src)
-            where T : unmanaged
-        {
-            var msg = $"Attempted to parse '{src}':{typename<T>()} but failed";
-            Errors.Throw(msg);
-
-            return default;
-        }
-
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static T parse<T>(string src)
             where T : unmanaged
         {
@@ -165,5 +156,14 @@ namespace Z0
             }
             return false;
         }    
+
+        static T ParseError<T>(string src)
+            where T : unmanaged
+        {
+            var msg = $"Attempted to parse '{src}':{typename<T>()} but failed";
+            Errors.Throw(msg);
+
+            return default;
+        }
     }
 }

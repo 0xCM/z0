@@ -95,8 +95,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong sal(ulong src, int offset)
             => src << offset;
- 
-
     }
-
 }

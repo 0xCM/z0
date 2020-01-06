@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="b">The right operand</param>
         /// <param name="delta">The tolerance</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static bit within<T>(T a, T b, T delta)
             where T : unmanaged
                 => within_u(a,b,delta);

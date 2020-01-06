@@ -20,7 +20,7 @@ namespace Z0
             ref var src = ref Unsafe.As<R,byte>(ref register);
             Span<byte> dst = stackalloc byte[register.ByteSize];
             Unsafe.CopyBlock(ref head(dst), ref src, register.ByteSize);
-            return dst.FormatHex();
+            return dst.FormatHexBytes();
         }
 
         /// <summary>

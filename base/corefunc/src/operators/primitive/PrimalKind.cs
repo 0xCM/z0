@@ -20,7 +20,7 @@ namespace Z0
         None = 0,
         
         /// <summary>
-        /// When nonzero, indicates a signed type
+        /// Defines a classification for signed primal types
         /// </summary>
         Signed = 1u << 31,
 
@@ -74,10 +74,34 @@ namespace Z0
         /// </summary>
         F32 = 256 | (32 << 16) | Signed | Floating,
         
- 
         /// <summary>
         /// Identifies a 64-bit floating-point type
         /// </summary>
-        F64 = 512 | (64 << 16) | Signed | Floating,                        
+        F64 = 512 | (64 << 16) | Signed | Floating, 
+        
+        /// <summary>
+        /// Defines a classification that includes all signed primal integral types and no others
+        /// </summary>
+        SignedInt = I8 | I16 | I32 | I64,
+
+        /// <summary>
+        /// Defines a classification that includes all unsigned primal integral types and no others
+        /// </summary>
+        UnsignedInt = U8 | U16 | U32 | U64,
+
+        /// <summary>
+        /// Defines a classification that includes all primal integral types and no others
+        /// </summary>
+        Integral = SignedInt | UnsignedInt,
+
+        /// <summary>
+        /// Defines a classification that includes all primal floating-point types and no others
+        /// </summary>
+        Float = F32 | F64,
+
+        /// <summary>
+        /// Defines a classification that includes all kinds
+        /// </summary>
+        All = Integral | Float,
     }
 }

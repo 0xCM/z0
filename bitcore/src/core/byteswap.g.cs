@@ -14,7 +14,7 @@ namespace Z0
     
     partial class gbits
     {    
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.U16 | PrimalKind.U32 | PrimalKind.U64)]
         public static T byteswap<T>(T src)
             where T : unmanaged
         {

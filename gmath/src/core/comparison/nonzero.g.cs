@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static bit nonz<T>(T a)
             where T : unmanaged
         {
@@ -32,7 +32,8 @@ namespace Z0
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
                 return nonz_i(a);
-            else return gfp.nonzero(a);
+            else 
+                return gfp.nonzero(a);
         }
 
         [MethodImpl(Inline)]

@@ -13,7 +13,7 @@ namespace Z0
 
     partial class gmath
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static T xnor<T>(T a, T b)
             where T : unmanaged
                 => xnor_u(a,b);

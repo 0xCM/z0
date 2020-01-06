@@ -38,6 +38,7 @@ dotnet sln add bits/test/z0.bits.test.csproj
 
 dotnet sln add reveal/lib/z0.reveal.lib.csproj
 dotnet sln add reveal/app/z0.reveal.app.csproj
+dotnet sln add reveal/test/z0.reveal.test.csproj
 
 dotnet sln add logix/src/z0.logix.csproj
 dotnet sln add logix/test/z0.logix.test.csproj

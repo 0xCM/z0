@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="a">The left value</param>
         /// <param name="b">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static T max<T>(T a, T b)
             where T : unmanaged
         {

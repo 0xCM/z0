@@ -21,24 +21,12 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="start">The bit posiion within the source where extraction should begin</param>
         /// <param name="length">The number of bits that should be extracted</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static T bitslice<T>(T a, byte start, byte length)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-                || typeof(T) == typeof(ushort) 
-                || typeof(T) == typeof(uint) 
-                || typeof(T) == typeof(ulong))
-                    return bitslice_u(a,start,length);
-            else if(typeof(T) == typeof(sbyte) 
-                || typeof(T) == typeof(short)
-                || typeof(T) == typeof(int) 
-                || typeof(T) == typeof(long))
-                    return bitslice_i(a,start,length);
-            else
-                throw unsupported<T>();
-        }           
+                => bitslice_u(a,start,length);
 
+        [MethodImpl(Inline)]
         static T bitslice_i<T>(T lhs, byte start, byte length)
             where T : unmanaged
         {
@@ -48,8 +36,10 @@ namespace Z0
                 return generic<T>(Bits.bitslice(int16(lhs), start, length));
             else if(typeof(T) == typeof(int))
                 return generic<T>(Bits.bitslice(int32(lhs), start, length));
-            else 
+            else if(typeof(T) == typeof(long))
                 return generic<T>(Bits.bitslice(int64(lhs), start, length));
+            else
+                throw unsupported<T>();
         }           
 
         [MethodImpl(Inline)]
@@ -62,9 +52,10 @@ namespace Z0
                 return generic<T>(Bits.bitslice(uint16(lhs), start, length));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(Bits.bitslice(uint32(lhs), start, length));
-            else 
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.bitslice(uint64(lhs), start, length));
+            else
+                return bitslice_i(lhs,start,length);
         }           
-
     }
 }

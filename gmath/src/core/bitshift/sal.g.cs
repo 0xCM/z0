@@ -20,50 +20,41 @@ namespace Z0
         /// <param name="src">The value to shift</param>
         /// <param name="offset">The number of bits to shift</param>
         /// <typeparam name="T">The primal integer type</typeparam>
-        [MethodImpl(Inline)]
-        public static T sal<T>(T src, int offset)
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
+        public static T sal<T>(T src, byte offset)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return salu(src,offset);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return sali(src,offset);
-            else throw unsupported<T>();
-        }
-
+                => sal_u(src,offset);
 
         [MethodImpl(Inline)]
-        static T sali<T>(T lhs, int offset)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                 return generic<T>(math.sal(int8(lhs), offset));
-            else if(typeof(T) == typeof(short))
-                 return generic<T>(math.sal(int16(lhs), offset));
-            else if(typeof(T) == typeof(int))
-                 return generic<T>(math.sal(int32(lhs), offset));
-            else
-                 return generic<T>(math.sal(int64(lhs), offset));
-        }
-
-        [MethodImpl(Inline)]
-        static T salu<T>(T lhs, int offset)
+        static T sal_u<T>(T src, byte offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.sal(uint8(lhs), offset));
+                return generic<T>(math.sal(uint8(src), offset));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.sal(uint16(lhs), offset));
+                return generic<T>(math.sal(uint16(src), offset));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(math.sal(uint32(lhs), offset));
-            else 
-                return generic<T>(math.sal(uint64(lhs), offset));
+                return generic<T>(math.sal(uint32(src), offset));
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>(math.sal(uint64(src), offset));
+            else
+                return sal_i(src,offset);
+        }
+
+        [MethodImpl(Inline)]
+        static T sal_i<T>(T src, byte offset)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                 return generic<T>(math.sal(int8(src), offset));
+            else if(typeof(T) == typeof(short))
+                 return generic<T>(math.sal(int16(src), offset));
+            else if(typeof(T) == typeof(int))
+                 return generic<T>(math.sal(int32(src), offset));
+            else if(typeof(T) == typeof(long))
+                 return generic<T>(math.sal(int64(src), offset));
+            else
+                throw unsupported<T>();
         }
     }
 }

@@ -3,25 +3,23 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{        
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
+    using System.Collections.Generic;
 
     using static zfunc;
 
+    class App : TestApp<App>
+    {                    
 
-    public class ClrModuleRep : ClrItemRep
-    {
-        public ClrModuleRep(string Name, int Id, ClrRepTag? Tag = null)
-            : base(Name, Id)
+        protected override void  RunTests(params string[] filters)
         {
-
+            base.RunTests(filters);
         }
+        
+        public static void Main(params string[] args)
+            => Run(args);
+    
     }
-
-
-
 }

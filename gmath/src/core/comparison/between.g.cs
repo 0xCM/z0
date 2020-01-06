@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="t">The test value</param>
         /// <param name="a">The lower bound</param>
         /// <param name="b">The uppper bound</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static bit between<T>(T t, T min, T max)
             where T : unmanaged
         {

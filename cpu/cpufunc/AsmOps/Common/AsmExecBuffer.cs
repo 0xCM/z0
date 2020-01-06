@@ -65,6 +65,24 @@ namespace Z0
             where T : unmanaged
                 => AsmDelegate.CreateUnaryOp<T>(pBuffer, Code.Name);
 
+        [MethodImpl(Inline)]
+        public UnaryOp128 UnaryOp128()
+            => AsmDelegate.CreateUnaryOp128(pBuffer, Code.Name);
+
+        [MethodImpl(Inline)]
+        public UnaryOp256 UnaryOp256()
+            => AsmDelegate.CreateUnaryOp256(pBuffer, Code.Name);
+
+        [MethodImpl(Inline)]
+        public BinaryOp128 BinOp128()
+            => AsmDelegate.CreateBinOp128(pBuffer, Code.Name);
+
+        [MethodImpl(Inline)]
+        public BinaryOp256 BinOp256()
+            => AsmDelegate.CreateBinOp256(pBuffer, Code.Name);
+
+
+
         public void Dispose()
             => Buffer.Dispose();
     }

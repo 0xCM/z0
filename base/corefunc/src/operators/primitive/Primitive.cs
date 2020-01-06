@@ -14,6 +14,30 @@ namespace Z0
     public static class Primitive
     {
         /// <summary>
+        /// Specifies the unsigned primal integer types
+        /// </summary>
+        public static Type[] UnsignedIntegral
+            => new Type[]{typeof(byte),typeof(ushort),typeof(uint),typeof(ulong)};
+
+        /// <summary>
+        /// Specifies the signed primal integer types
+        /// </summary>
+        public static Type[] SignedIntegral
+            => new Type[]{typeof(sbyte),typeof(short),typeof(int),typeof(long)};
+
+        /// <summary>
+        /// Specifies the primal integer types
+        /// </summary>
+        public static Type[] Integral
+            => new Type[]{typeof(byte),typeof(sbyte),typeof(ushort),typeof(short),typeof(uint),typeof(ulong),typeof(long)};
+
+        /// <summary>
+        /// Specifies the primal floating-point types
+        /// </summary>
+        public static Type[] Floating
+            => new Type[]{typeof(float),typeof(double)};
+
+        /// <summary>
         /// Determines the primal kind (if any) of a parametrically-identifed type
         /// </summary>
         /// <param name="t">A type value representative</param>
@@ -69,22 +93,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int size(PrimalKind kind)
             => bitsize(kind)/8;
-
-        // [MethodImpl(Inline)]
-        // public static int size(PrimalKind kind)
-        //     => kind switch{
-        //         PrimalKind.U8 => 1,
-        //         PrimalKind.I8 => 1,
-        //         PrimalKind.U16 => 2,
-        //         PrimalKind.I16 => 2,
-        //         PrimalKind.I32 => 4,
-        //         PrimalKind.U32 => 4,
-        //         PrimalKind.F32 => 4,
-        //         PrimalKind.I64 => 8,
-        //         PrimalKind.U64 => 8,
-        //         PrimalKind.F64 => 8,
-        //         _ => 0
-        //      };
 
         /// <summary>
         /// Determines the byte-size of a metadata-identified type if primal; otherwise, returns 0

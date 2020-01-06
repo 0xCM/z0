@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     using System.Security;
+    using static FixedContainers;
 
     using static zfunc;
 
@@ -28,6 +29,16 @@ namespace Z0
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public delegate T BinaryOp<T>(T a, T b);
+
+    /// <summary>
+    /// Defines the canonical shape of a binary operator
+    /// </summary>
+    /// <param name="a">The left operand</param>
+    /// <param name="b">The right operand</param>
+    /// <typeparam name="T">The operand type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public unsafe delegate T* BinaryPtrOp<T>(T* a, T* b)
+        where T : unmanaged;
 
     /// <summary>
     /// Defines the canonical shape of a tenary operator

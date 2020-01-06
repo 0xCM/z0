@@ -12,17 +12,17 @@ namespace Z0
 
     partial class gmath
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static bit gt<T>(T a, T b)
             where T : unmanaged
                 => gt_u(a,b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static T gtz<T>(T a, T b)
             where T : unmanaged
                 => gmath.mul(convert<T>((uint)gmath.gt(a,b)),gmath.ones<T>());
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static bit gteq<T>(T a, T b)
             where T : unmanaged
                 => gteq_u(a,b);

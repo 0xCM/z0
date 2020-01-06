@@ -35,7 +35,6 @@ namespace Z0
                 if(cil)
                     Deconstructor.Deconstruct(t).EmitCil(t.DisplayName());
             }
-
         }
 
 

@@ -158,7 +158,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         /// <remarks>The algorithm follows that of Arndt's Matters Computational, bitbutterfly.h.</remarks>
         [MethodImpl(Inline)]
-        static T bfly<T>(T x, T mask, int shift)
+        static T bfly<T>(T x, T mask, byte shift)
             where T : unmanaged
         {
             var y = gmath.and(x, mask);

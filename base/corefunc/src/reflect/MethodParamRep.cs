@@ -12,22 +12,6 @@ namespace Z0
 
     using static zfunc;
 
-    public enum ParameterDirection
-    {
-        Default,
-
-        In = 1,
-
-        Out = 2
-    }
-
-    public static class ClrRepX
-    {
-        public static ParameterDirection Direction(this ParameterInfo src)
-            => src.IsIn ? ParameterDirection.In : src.IsOut ? ParameterDirection.Out : ParameterDirection.Default;
-
-    }
-
     /// <summary>
     /// Represents a method (value, not type) parameter 
     /// </summary>
@@ -52,9 +36,7 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
     }
-
 
     public class MethodParamReps : ClrItemReps<MethodParamReps, MethodParamRep>
     {

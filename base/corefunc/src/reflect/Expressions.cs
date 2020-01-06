@@ -17,27 +17,9 @@ namespace Z0
     using static zfunc;
 
     using XPR = System.Linq.Expressions.Expression;
-    using PX = System.Linq.Expressions.ParameterExpression;
 
     public static class expressX
     {
-        /// <summary>
-        /// Creates a delegate for a (static) method
-        /// </summary>
-        /// <typeparam name="D">The type of the constructed delegate</typeparam>
-        /// <param name="m">The method that will be invoked when delegate is activated</param>
-        public static D CreateDelegate<D>(this MethodInfo m)
-            where D : Delegate
-        {
-            var argTypes = m.ParameterTypes().ToArray();
-            var dType
-                = m.IsAction()
-                ? Expression.GetActionType(argTypes)
-                : Expression.GetFuncType(argTypes.Concat(items(m.ReturnType)).ToArray());
-            var d = Delegate.CreateDelegate(typeof(D), null, m);
-            return cast<D>(d);
-        }
-
         /// <summary>
         /// Tests whether an expression is a conversion
         /// </summary>
