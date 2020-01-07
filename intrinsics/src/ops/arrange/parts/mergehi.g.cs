@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector128<T> vmergehi<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector256<T> vmergehi<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -104,7 +104,6 @@ namespace Z0
             else
                  return vgeneric<T>(dinx.vmergehi(vcast64i(x), vcast64i(y)));
         }    
-
 
         [MethodImpl(Inline)]
         static Vector256<T> vmergehi_u<T>(Vector256<T> x, Vector256<T> y)

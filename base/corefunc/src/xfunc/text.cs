@@ -441,13 +441,35 @@ namespace Z0
         /// Returns true if a string is null or whitespace; otherwise, returns false
         /// </summary>
         /// <param name="s">The string to evaluate</param>
-        static bool IsBlank(string s)
-            => string.IsNullOrWhiteSpace(s);
+        [MethodImpl(Inline)]
+        public static bool IsBlank(this string s)
+            =>  String.IsNullOrWhiteSpace(s);
 
         /// <summary>
-        /// Returns true if not blank as determined by <see cref="IsBlank(string)"/>, false otherwise
+        /// Returns true if a string has at least one character that is not considered whitespace
         /// </summary>
-        /// <param name="s"></param>
+        /// <param name="s">The string to evaluate</param>
+        [MethodImpl(Inline)]
+        public static bool IsNonEmpty(this string s)
+            => !s.IsBlank();
+
+        /// <summary>
+        /// Invokes an action if the source string is nonempty
+        /// </summary>
+        /// <param name="s">The string to evaluate</param>
+        /// <param name="f">The action to conditionally invoke</param>
+        [MethodImpl(Inline)]
+        public static void OnSome(this string s, Action<string> f)
+        {
+            if(s.IsNonEmpty())
+                f(s);
+        }
+
+        /// <summary>
+        /// Returns true if not blank
+        /// </summary>
+        /// <param name="s">The string to evaluate</param>
+        [MethodImpl(Inline)]
         static bool HasValue(string s)
             => !IsBlank(s);
 
@@ -764,6 +786,7 @@ namespace Z0
         public static string RemoveWhitespace(this string src)
             => src.RemoveAny(items(AsciSym.Space, AsciEscape.LineFeed, AsciEscape.NewLine, AsciEscape.Tab));
  
+        
 
         public static StringBuilder WithLabeled(this StringBuilder sb, object label, object content, int? labelWidth = null)
         {

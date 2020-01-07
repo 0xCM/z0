@@ -14,17 +14,17 @@ namespace Z0
         protected ConsoleApp(IPolyrand random)
             : base(random)
         {
-
+            
 
         }
 
-        protected abstract void OnExecute(params string[] args);
+        protected abstract void Execute(params string[] args);
 
         protected virtual void RunApp(params string[] args)
         {
             try
             {            
-                OnExecute(args);
+                Execute(args);
 
             }
             catch (Exception e)

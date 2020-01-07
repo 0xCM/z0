@@ -15,46 +15,6 @@ namespace Z0
 
     partial class Reflections
     {        
-        [MethodImpl(Inline)]
-        public static string TypeKeyword(this Type src)
-        {
-            if(src == typeof(sbyte) || src.GetUnderlyingType() == typeof(sbyte))
-                return "sbyte";
-            else if(src == typeof(byte) || src.GetUnderlyingType() == typeof(byte))
-                return "byte";
-            else if(src == typeof(ushort)|| src.GetUnderlyingType() == typeof(ushort))
-                return "ushort";
-            else if(src == typeof(short)|| src.GetUnderlyingType() == typeof(short))
-                return "short";
-            else if(src == typeof(int)|| src.GetUnderlyingType() == typeof(int))
-                return "int";
-            else if(src == typeof(uint)|| src.GetUnderlyingType() == typeof(uint))
-                return "uint";
-            else if(src == typeof(long)|| src.GetUnderlyingType() == typeof(long))
-                return "long";
-            else if(src == typeof(ulong) || src.GetUnderlyingType() == typeof(ulong))
-                return "ulong";
-            else if(src == typeof(float)|| src.GetUnderlyingType() == typeof(float))
-                return "float";
-            else if(src == typeof(double)|| src.GetUnderlyingType() == typeof(double))
-                return "double";
-            else 
-                return string.Empty;
-        }
-
-        /// <summary>
-        /// Specifies the set of all primal numeric types
-        /// </summary>
-        static readonly HashSet<Type> _PrimalNumericCache = 
-            new HashSet<Type>(new Type[]{
-                typeof(byte), typeof(ushort), typeof(uint), typeof(ulong),
-                typeof(sbyte), typeof(short), typeof(int), typeof(long),
-                typeof(float),typeof(double)
-                });
-
-        [MethodImpl(Inline)]
-        static bool IsPrimalNumeric(this Type src)
-            => _PrimalNumericCache.Contains(src) || _PrimalNumericCache.Contains(src.GetUnderlyingType());
 
         /// <summary>
         /// Constructs a display name for a type
@@ -68,7 +28,7 @@ namespace Z0
             if(src.IsEnum)
                 return src.Name + AsciSym.Colon + src.GetEnumUnderlyingType().DisplayName();
 
-            if(src.IsSimpleName())
+            if(src.HasSimpleName())
                 return src.FormatSimple();
 
             if(src.IsGenericType && !src.IsRef())
@@ -143,15 +103,6 @@ namespace Z0
             return typeName + (args.Count != 0 ? angled(argFmt) : string.Empty);
         }
 
-        static bool IsSimpleName(this Type src)
-        {
-            return 
-                Attribute.IsDefined(src, typeof(DisplayNameAttribute))
-                || src.IsPrimalNumeric()
-                || src.IsBool()
-                || src.IsVoid()
-                || src.IsString();                            
-        }
 
         static string FormatSimple(this Type src)
         {

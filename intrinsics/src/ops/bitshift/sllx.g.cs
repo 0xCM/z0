@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
         public static Vector128<T> vsllx<T>(Vector128<T> src, byte shift)        
             where T : unmanaged
                 => vgeneric<T>(dinx.vsllx(v64u(src), shift));
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="shift">The number of bits to shift</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
         public static Vector256<T> vsllx<T>(Vector256<T> src, byte shift)        
             where T : unmanaged
                 => vgeneric<T>(dinx.vsllx(v64u(src), shift));

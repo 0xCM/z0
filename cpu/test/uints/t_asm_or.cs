@@ -18,49 +18,34 @@ namespace Z0
 
         public void asmor_check()
         {
-            using var buffer = AsmExecBuffer.Create();
-            asmor_check(buffer);
+            or_check(Or32u);
+            or_check(Or64u);            
         }
 
-        public void asmor_bench()
+        public void or_bench()
         {
-            using var buffer = AsmExecBuffer.Create();
-            asmor_bench(buffer);
+            using var buffer = AsmExecBuffer.Create();            
+            or_bench(buffer,Or32u);
+            or_bench(buffer,Or64u);
         }
 
-        void asmor_check(in AsmExecBuffer buffer)
-        {
-            or_check(buffer, Or32uCode, z32);
-            or_check(buffer, Or64uCode, z64);            
-        }
+        void or_check<T>(in AsmCode<T> code)
+            where T : unmanaged
+                => CheckAsmMatch(gmath.or, code);
 
-        void or_check<T>(in AsmExecBuffer buffer, ReadOnlySpan<byte> code,  T t = default)
+        void or_bench<T>(in AsmExecBuffer buffer, in AsmCode<T> code)
             where T : unmanaged
         {
-            buffer.Load(code, TestOpName(t));
-            CheckMatch(gmath.or<T>, buffer.BinOp<T>());
+            RunBench(gmath.or<T>, buffer.BinOp(code));
         }
 
-        void asmor_bench(in AsmExecBuffer buffer)        
-        {
-            buffer.Load(Or32uCode, TestOpName(z32));            
-            asmor_bench<uint>(buffer);
+        AsmCode<uint> Or32u
+            => AsmCode.Load<uint>(new byte[]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x0B,0xC2,0xC3}, 
+                    Moniker.define(OpName, PrimalKind.U32));
 
-            buffer.Load(Or64uCode, TestOpName(z64));            
-            asmor_bench<ulong>(buffer);
-        }
-    
-        void asmor_bench<T>(in AsmExecBuffer buffer)
-            where T : unmanaged
-                => RunBench(buffer.BinOp<T>(), gmath.or<T>);
-
-        static ReadOnlySpan<byte> Or64uCode 
-            => new byte[12]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x48,0x0B,0xC2,0xC3};
-
-        static ReadOnlySpan<byte> Or32uCode
-            => new byte[]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x0B,0xC2,0xC3};
-
-
+        AsmCode<ulong> Or64u
+            => AsmCode.Load<ulong>(new byte[]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x48,0x0B,0xC2,0xC3}, 
+                    Moniker.define(OpName, PrimalKind.U64));
     }
 }
 

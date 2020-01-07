@@ -13,7 +13,6 @@ namespace Z0
     /// An homogenous mutable 3-tuple
     /// </summary>
     public struct Triple<T> : IMutableTuple<Triple<T>,T,T,T>
-        where T : unmanaged
     {
         /// <summary>
         /// The first member

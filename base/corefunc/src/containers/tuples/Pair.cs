@@ -13,7 +13,6 @@ namespace Z0
     /// An homogenous mutable 2-tuple
     /// </summary>
     public struct Pair<T> : IMutableTuple<Pair<T>, T ,T>
-        where T : unmanaged
     {
         /// <summary>
         /// The first member

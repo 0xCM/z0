@@ -19,79 +19,6 @@ namespace Z0
 
     class Controller : ConsoleApp<Controller>
     {
-        static IEnumerable<IAssemblyDesignator> TestHosts
-            => C.Designated.Designates.Where(d => d.Role == AssemblyRole.Test).Select(x => x);
-
-        static double RunTests(IAssemblyDesignator host)
-        {
-            var clock = counter(true);
-            var runtime = 0.0;
-            print(ExecutingHost(host));
-
-            try
-            {
-                host.Run();
-            }
-            catch(Exception e)
-            {
-                error(e);
-            }
-            finally
-            {
-                clock.Stop();
-                runtime = clock.Time.TotalMilliseconds;
-                print(FinishedHostExecution(host,runtime));
-            }
-            
-            return runtime;
-        }
-        
-        static string[] ConcurrentTests
-            => new string[]{
-                D.NatTest.Designated.Name,
-                D.CoreFuncTest.Designated.Name,     
-                D.GMathTest.Designated.Name,
-                D.IntrinsicsTest.Designated.Name,
-                D.BitCoreTest.Designated.Name,
-                D.BitVectorTest.Designated.Name,
-                D.BitTest.Designated.Name,
-                D.LogixTest.Designated.Name,
-                D.LinearTest.Designated.Name,
-                
-            };
-
-        static string[] SequentialTests
-            => new string[]
-        {
-            D.MklTest.Designated.Name,
-            D.LibMTest.Designated.Name
-        };
-
-
-        public static T[] freeze<T>(IEnumerable<T> src)
-            => src.ToArray();
-
-        static long RunTests()
-        {
-            var runtime = 0L;
-
-            var concurrent =  freeze(from h in TestHosts where ConcurrentTests.Contains(h.Name) select h);
-            var sequential = freeze(from h in TestHosts where SequentialTests.Contains(h.Name) select h);
-            try
-            {            
-                concurrent.AsParallel().ForAll(h => Interlocked.Add(ref runtime, (long)RunTests(h)));            
-                
-                foreach(var host in sequential)
-                     runtime += (long)RunTests(host);
-
-            }
-            catch(Exception e)
-            {
-                error(e);
-            }
-            
-            return runtime;
-        }
 
         public Controller()
             : base(Rng.WyHash64(Seed64.Seed00))
@@ -99,14 +26,10 @@ namespace Z0
 
         }
 
-        protected override void OnExecute(params string[] args)
+        protected override void Execute(params string[] args)
         {
-           print(ExecutingSuites());
-           
-           var runtime = RunTests();
-           
-           print(FinishedSuiteExecution(runtime));
-
+            //(new TestController()).Execute();
+            (new ArchiveControl()).Execute();
         }
 
         static void Main(params string[] args)

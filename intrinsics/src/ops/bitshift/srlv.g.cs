@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="offsets">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector128<T> vsrlv<T>(Vector128<T> x, Vector128<T> offsets)
             where T : unmanaged
                 => vsrlv_u(x,offsets);
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="offsets">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector256<T> vsrlv<T>(Vector256<T> x, Vector256<T> offsets)
             where T : unmanaged
                 => vsrlv_u(x,offsets);
@@ -65,7 +65,6 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
-
 
         [MethodImpl(Inline)]
         static Vector256<T> vsrlv_u<T>(Vector256<T> x, Vector256<T> offsets)

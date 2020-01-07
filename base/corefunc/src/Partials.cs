@@ -24,7 +24,7 @@ namespace Z0
     }
 
 
-    public static partial class OpCaptures
+    public static partial class OpSurrogates
     {
 
     }

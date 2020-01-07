@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
         public static Vector128<T> vrotl<T>(Vector128<T> x, byte offset)
             where T : unmanaged
         {
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
         public static Vector256<T> vrotl<T>(Vector256<T> x, byte offset)
             where T : unmanaged
         {

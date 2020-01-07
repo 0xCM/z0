@@ -14,6 +14,34 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     
     using static zfunc;    
+    using static As;
+
+    partial class ginxfp
+    {
+       [MethodImpl(Inline)]
+       public static Vector128<T> vsub<T>(Vector128<T> x, Vector128<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return vgeneric<T>(dinxfp.vsub(v32f(x), v32f(y)));
+            else if(typeof(T) == typeof(double))
+                return vgeneric<T>(dinxfp.vsub(v64f(x), v64f(y)));
+            else 
+                throw unsupported<T>();
+        }        
+
+       [MethodImpl(Inline)]
+       public static Vector256<T> vsub<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return vgeneric<T>(dinxfp.vsub(v32f(x), v32f(y)));
+            else if(typeof(T) == typeof(double))
+                return vgeneric<T>(dinxfp.vsub(v64f(x), v64f(y)));
+            else 
+                throw unsupported<T>();
+        }        
+    }
 
     partial class dinxfp
     {

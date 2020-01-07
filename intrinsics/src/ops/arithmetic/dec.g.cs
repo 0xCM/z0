@@ -14,7 +14,7 @@ namespace Z0
     
     partial class ginx
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector128<T> vdec<T>(Vector128<T> src)
             where T : unmanaged
         {
@@ -32,7 +32,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector256<T> vdec<T>(Vector256<T> src)
             where T : unmanaged
         {
@@ -49,20 +49,19 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
                     
         [MethodImpl(Inline)]
         static Vector128<T> vdec_i<T>(Vector128<T> lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return As.vgeneric<T>(dinx.vdec(vcast8i(lhs)));
+                 return vgeneric<T>(dinx.vdec(v8i(lhs)));
             else if(typeof(T) == typeof(short))
-                 return As.vgeneric<T>(dinx.vdec(vcast16i(lhs)));
+                 return vgeneric<T>(dinx.vdec(v16i(lhs)));
             else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(dinx.vdec(vcast32i(lhs)));
+                 return vgeneric<T>(dinx.vdec(v32i(lhs)));
             else
-                 return vgeneric<T>(dinx.vdec(vcast64i(lhs)));
+                 return vgeneric<T>(dinx.vdec(v64i(lhs)));
         }
 
         [MethodImpl(Inline)]
@@ -70,13 +69,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vdec(vcast8u(lhs)));
+                return vgeneric<T>(dinx.vdec(v8u(lhs)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vdec(vcast16u(lhs)));
+                return vgeneric<T>(dinx.vdec(v16u(lhs)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vdec(vcast32u(lhs)));
+                return vgeneric<T>(dinx.vdec(v32u(lhs)));
             else 
-                return vgeneric<T>(dinx.vdec(vcast64u(lhs)));
+                return vgeneric<T>(dinx.vdec(v64u(lhs)));
         }
 
         [MethodImpl(Inline)]
@@ -84,13 +83,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return vgeneric<T>(dinx.vdec(vcast8i(lhs)));
+                 return vgeneric<T>(dinx.vdec(v8i(lhs)));
             else if(typeof(T) == typeof(short))
-                 return vgeneric<T>(dinx.vdec(vcast16i(lhs)));
+                 return vgeneric<T>(dinx.vdec(v16i(lhs)));
             else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(dinx.vdec(vcast32i(lhs)));
+                 return vgeneric<T>(dinx.vdec(v32i(lhs)));
             else
-                 return vgeneric<T>(dinx.vdec(vcast64i(lhs)));
+                 return vgeneric<T>(dinx.vdec(v64i(lhs)));
         }
 
         [MethodImpl(Inline)]
@@ -98,14 +97,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vdec(vcast8u(lhs)));
+                return vgeneric<T>(dinx.vdec(v8u(lhs)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vdec(vcast16u(lhs)));
+                return vgeneric<T>(dinx.vdec(v16u(lhs)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vdec(vcast32u(lhs)));
+                return vgeneric<T>(dinx.vdec(v32u(lhs)));
             else 
-                return vgeneric<T>(dinx.vdec(vcast64u(lhs)));
+                return vgeneric<T>(dinx.vdec(v64u(lhs)));
         }
-
     }
 }

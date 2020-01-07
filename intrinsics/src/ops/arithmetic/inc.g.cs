@@ -14,7 +14,7 @@ namespace Z0
     
     partial class ginx
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector128<T> vinc<T>(Vector128<T> src)
             where T : unmanaged
         {
@@ -22,16 +22,17 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vincu(src);
+                return vinc_u(src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vinci(src);
-            else throw unsupported<T>();
+                return vinc_i(src);
+            else 
+                throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector256<T> vinc<T>(Vector256<T> src)
             where T : unmanaged
         {
@@ -39,71 +40,70 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vincu(src);
+                return vinc_u(src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vinci(src);
-            else throw unsupported<T>();
+                return vinc_i(src);
+            else 
+                throw unsupported<T>();
         }
 
-
         [MethodImpl(Inline)]
-        static Vector128<T> vinci<T>(Vector128<T> lhs)
+        static Vector128<T> vinc_i<T>(Vector128<T> lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return As.vgeneric<T>(dinx.vinc(vcast8i(lhs)));
+                 return As.vgeneric<T>(dinx.vinc(v8i(lhs)));
             else if(typeof(T) == typeof(short))
-                 return As.vgeneric<T>(dinx.vinc(vcast16i(lhs)));
+                 return As.vgeneric<T>(dinx.vinc(v16i(lhs)));
             else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(dinx.vinc(vcast32i(lhs)));
+                 return vgeneric<T>(dinx.vinc(v32i(lhs)));
             else
-                 return vgeneric<T>(dinx.vinc(vcast64i(lhs)));
+                 return vgeneric<T>(dinx.vinc(v64i(lhs)));
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vincu<T>(Vector128<T> lhs)
+        static Vector128<T> vinc_u<T>(Vector128<T> lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vinc(vcast8u(lhs)));
+                return As.vgeneric<T>(dinx.vinc(v8u(lhs)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vinc(vcast16u(lhs)));
+                return vgeneric<T>(dinx.vinc(v16u(lhs)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vinc(vcast32u(lhs)));
+                return vgeneric<T>(dinx.vinc(v32u(lhs)));
             else 
-                return vgeneric<T>(dinx.vinc(vcast64u(lhs)));
+                return vgeneric<T>(dinx.vinc(v64u(lhs)));
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vinci<T>(Vector256<T> lhs)
+        static Vector256<T> vinc_i<T>(Vector256<T> lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return vgeneric<T>(dinx.vinc(vcast8i(lhs)));
+                 return vgeneric<T>(dinx.vinc(v8i(lhs)));
             else if(typeof(T) == typeof(short))
-                 return vgeneric<T>(dinx.vinc(vcast16i(lhs)));
+                 return vgeneric<T>(dinx.vinc(v16i(lhs)));
             else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(dinx.vinc(vcast32i(lhs)));
+                 return vgeneric<T>(dinx.vinc(v32i(lhs)));
             else
-                 return vgeneric<T>(dinx.vinc(vcast64i(lhs)));
+                 return vgeneric<T>(dinx.vinc(v64i(lhs)));
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vincu<T>(Vector256<T> lhs)
+        static Vector256<T> vinc_u<T>(Vector256<T> lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vinc(vcast8u(lhs)));
+                return vgeneric<T>(dinx.vinc(v8u(lhs)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vinc(vcast16u(lhs)));
+                return vgeneric<T>(dinx.vinc(v16u(lhs)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vinc(vcast32u(lhs)));
+                return vgeneric<T>(dinx.vinc(v32u(lhs)));
             else 
-                return vgeneric<T>(dinx.vinc(vcast64u(lhs)));
+                return vgeneric<T>(dinx.vinc(v64u(lhs)));
         }
-
     }
 }

@@ -131,7 +131,7 @@ namespace Z0
         {
 
             var def = typedef(typeof(TestMethods<>));
-            MethodReader.generic(def, typeof(uint), (m,data) => Trace(data.Format()));
+            NativeReader.generic(def, typeof(uint), (m,data) => Trace(data.Format()));
         }
 
         public void write_generic_methods_1()
@@ -166,13 +166,13 @@ namespace Z0
         public void read_by_name()
         {
             Span<byte> buffer = new byte[128];
-            var m1 = MethodReader.read<TestMethods>(nameof(TestMethods.and_ng),buffer);            
+            var m1 = NativeReader.read<TestMethods>(nameof(TestMethods.and_ng),buffer);            
 
             buffer.Clear();
-            var m2 = MethodReader.read<TestMethods>(nameof(TestMethods.or_ng),buffer);
+            var m2 = NativeReader.read<TestMethods>(nameof(TestMethods.or_ng),buffer);
             
             buffer.Clear();
-            var m3 = MethodReader.read<TestMethods>(nameof(TestMethods.test_writeline),buffer);            
+            var m3 = NativeReader.read<TestMethods>(nameof(TestMethods.test_writeline),buffer);            
         }
 
         public void read_non_generic()
@@ -181,7 +181,7 @@ namespace Z0
             Span<byte> buffer = new byte[128];
             for(var i=0; i<methods.Length; i++)
             {
-                var m = MethodReader.read(methods[i], buffer);
+                var m = NativeReader.read(methods[i], buffer);
                 Trace(m.Format());
                 buffer.Clear();
             }
@@ -231,7 +231,7 @@ namespace Z0
             foreach(var mgAnd in mgAnds)
             {
                 var mgAndData = mgAnd.CaptureGenericAsm(typeof(uint));
-                Trace($"{mgAnd.MethodSig()}");                
+                Trace($"{mgAnd.Signature()}");                
                 Trace(mgAndData.Format());
             }
 
@@ -243,7 +243,7 @@ namespace Z0
             Span<byte> buffer = new byte[128];
             for(var i=0; i<methods.Length; i++)
             {
-                var m = MethodReader.read(methods[i], buffer);
+                var m = NativeReader.read(methods[i], buffer);
                 Trace(m.Format());
                 buffer.Clear();
             }

@@ -88,7 +88,9 @@ namespace Z0
             var line = 0;
             Span<string> dst = new string[linecount];
             if(header)
-                dst[line++] = comment(src.Name);
+            {
+                dst[line++] = comment(src.Identity);
+            }
 
             var formatter = new MasmFormatter(FormatOptions);
             var baseAddress = src.BaseAddress;
@@ -108,7 +110,7 @@ namespace Z0
                     :   sb.ToString();
 
                 if(rawbytes)
-                    dst[line] = dst[line].PadRight(40) 
+                    dst[line] = dst[line].PadRight(50) 
                           + concat(AsciSym.Semicolon, AsciSym.Space) 
                           + src.Encoded.Slice(relAddress, instruction.ByteLength)
                                 .FormatHexBytes(sep:AsciSym.Space, zpad:true, specifier:false, uppercase:false);
@@ -120,7 +122,7 @@ namespace Z0
         }
 
         public static ReadOnlySpan<string> FormatAsm(this MethodAsmBody src, bool lineaddresses, bool rawbytes, bool header)
-            => InstructionBlock.Define(src.Method.MethodSig().Format(), src.NativeBlock.Data, src.Instructions).FormatAsm(lineaddresses, rawbytes, header);
+            => InstructionBlock.Define(Moniker.define(src.Method), src.NativeBlock.Data, src.Instructions).FormatAsm(lineaddresses, rawbytes, header);
 
         class AsmFormatterOutput : FormatterOutput
         {
@@ -139,10 +141,18 @@ namespace Z0
                 switch(kind)
                 {
                     case FormatterOutputTextKind.LabelAddress:
-                        var address = ulong.Parse($"{text.Substring(0, text.Length - 1)}", System.Globalization.NumberStyles.HexNumber);
-                        var ra = (address - BaseAddress).ToString("x4");
-                        var label = $"{ra}h";
-                        Writer.Write(label);
+                        var ss = text.Substring(0, text.Length - 1);
+                        if(ulong.TryParse(ss, System.Globalization.NumberStyles.HexNumber,null, out var address))
+                        {
+                            var ra = (address - BaseAddress).ToString("x4");
+                            var label = $"{ra}h";
+                            Writer.Write(label);
+                        }
+                        else
+                        {
+                            Writer.Write($"{ss}?");
+                        }
+                        //var address = ulong.Parse($"{text.Substring(0, text.Length - 1)}", System.Globalization.NumberStyles.HexNumber);
                     break;
                     default:
                         Writer.Write(text);    

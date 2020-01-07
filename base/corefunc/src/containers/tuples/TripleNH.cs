@@ -15,10 +15,7 @@ namespace Z0
     /// <typeparam name="T0">The type of the first member</typeparam>
     /// <typeparam name="T1">The type of the second member</typeparam>
     /// <typeparam name="T2">The type of the third member</typeparam>
-   public struct Triple<T0,T1,T2> : IMutableTuple<Triple<T0,T1,T2>,T0,T1,T2>
-        where T0: unmanaged
-        where T1 : unmanaged
-        where T2 : unmanaged
+    public struct Triple<T0,T1,T2> : IMutableTuple<Triple<T0,T1,T2>,T0,T1,T2>
     {
         /// <summary>
         /// The first member
@@ -114,5 +111,4 @@ namespace Z0
         public override string ToString()
             => Format();
     }
-
 }

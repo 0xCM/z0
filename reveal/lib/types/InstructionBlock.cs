@@ -11,6 +11,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using Iced.Intel;
+    
     using static zfunc;
         
     /// <summary>
@@ -23,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="encoded">The encoded instructions</param>
         /// <param name="decoded">The decoded instructions</param>
-        public static InstructionBlock Define(string name, ReadOnlySpan<byte> encoded, Instruction[] decoded)
+        public static InstructionBlock Define(Moniker name, ReadOnlySpan<byte> encoded, Instruction[] decoded)
             => new InstructionBlock(name,encoded,decoded);
 
         /// <summary>
@@ -31,19 +32,19 @@ namespace Z0
         /// </summary>
         /// <param name="encoded">The encoded instructions</param>
         /// <param name="decoded">The decoded instructions</param>
-        public static InstructionBlock Define(string name, byte[] encoded, Instruction[] decoded)
+        public static InstructionBlock Define(Moniker name, byte[] encoded, Instruction[] decoded)
             => new InstructionBlock(name,encoded,decoded);
 
-        InstructionBlock(string name, byte[] encoded, Instruction[] decoded)
+        InstructionBlock(Moniker name, byte[] encoded, Instruction[] decoded)
         {
-            this.Name = name;
+            this.Identity = name;
             this.EncodedData = encoded;
             this.Decoded = decoded;
         }
 
-        InstructionBlock(string name, ReadOnlySpan<byte> encoded, Instruction[] decoded)
+        InstructionBlock(Moniker name, ReadOnlySpan<byte> encoded, Instruction[] decoded)
         {
-            this.Name = name;
+            this.Identity = name;
             this.EncodedData = encoded.ToArray();
             this.Decoded = decoded;
         }
@@ -51,9 +52,9 @@ namespace Z0
         byte[] EncodedData; 
 
         /// <summary>
-        /// The name given to the block
+        /// The identity given to the block
         /// </summary>
-        public string Name {get;}
+        public Moniker Identity {get;}
 
         /// <summary>
         /// The encoded instructions
@@ -79,7 +80,6 @@ namespace Z0
             => EncodedData.Length;
     
         public ulong BaseAddress
-            => Decoded[0].IP;
-       
+            => Decoded[0].IP;       
     }
 }

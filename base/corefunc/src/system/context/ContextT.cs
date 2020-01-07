@@ -13,8 +13,8 @@ namespace Z0
     public abstract class Context<T> : Context
         where T : Context<T>
     {                
-        protected Context(IPolyrand randomizer)
-            : base(randomizer)            
+        protected Context(IPolyrand random)
+            : base(random)            
         {
 
         }

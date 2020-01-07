@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static zfunc;
+    
     using static As;
     
     partial class ginx
@@ -20,18 +21,18 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         /// <typeparam name="T">THe primal component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
         public static Vector128<T> vbsll<T>(Vector128<T> x, byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vbsll(vcast8u(x), count));
+                return vgeneric<T>(dinx.vbsll(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vbsll(vcast16u(x), count));
+                return vgeneric<T>(dinx.vbsll(v16u(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dinx.vbsll(vcast32u(x), count));
+                return vgeneric<T>(dinx.vbsll(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vbsll(vcast64u(x), count));
+                return vgeneric<T>(dinx.vbsll(v64u(x), count));
             else
                 throw unsupported<T>();
         }
@@ -42,18 +43,18 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         /// <typeparam name="T">THe primal component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
         public static Vector256<T> vbsll<T>(Vector256<T> x, byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vbsll(vcast8u(x), count));
+                return vgeneric<T>(dinx.vbsll(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vbsll(vcast16u(x), count));
+                return vgeneric<T>(dinx.vbsll(v16u(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dinx.vbsll(vcast32u(x), count));
+                return vgeneric<T>(dinx.vbsll(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vbsll(vcast64u(x), count));
+                return vgeneric<T>(dinx.vbsll(v64u(x), count));
             else
                 throw unsupported<T>();
         }

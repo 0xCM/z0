@@ -67,7 +67,8 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential, Size = 64)]
     public readonly struct Vector512<T>
         where T : unmanaged
-    {
+    {        
+
         /// <summary>
         /// The lo 256 bits 
         /// </summary>

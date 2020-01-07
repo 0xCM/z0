@@ -13,8 +13,6 @@ namespace Z0
     /// A non-homogenous mutable 2-tuple
     /// </summary>
     public struct Pair<T0,T1> : IMutableTuple<Pair<T0,T1>, T0 ,T1>
-        where T0: unmanaged
-        where T1 : unmanaged
     {
         /// <summary>
         /// The first member
@@ -25,6 +23,9 @@ namespace Z0
         /// The second member
         /// </summary>
         public T1 B;
+
+        public static Pair<T0,T1> Empty => default;
+
 
         [MethodImpl(Inline)]
         public static implicit operator Pair<T0,T1>((T0 a, T1 b) src)
@@ -51,6 +52,18 @@ namespace Z0
             a = this.A;
             b = this.B;
         }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Object.Equals(A, default(T0)) && Object.Equals(B, default(T1));
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
+        }        
 
         [MethodImpl(Inline)]
         public T0 Get(N0 n)

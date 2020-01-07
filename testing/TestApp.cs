@@ -116,7 +116,7 @@ namespace Z0
             => false;
         
         IEnumerable<MethodInfo> Tests(Type host)
-            =>  host.DeclaredMethods().Public().NonGeneric().WithParameterCount(0);
+            =>  host.DeclaredMethods().Public().NonGeneric().WithArity(0);
 
         Duration Run(IUnitTest unit, string hostpath, MethodInfo test, IList<TestCaseRecord> results)
         {

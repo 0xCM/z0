@@ -21,20 +21,7 @@ namespace Z0
         [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static bit odd<T>(T a)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return odd_u(a);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return odd_i(a);
-            else            
-                throw unsupported<T>();
-        }           
+                => odd_u(a);
 
         /// <summary>
         /// Returns true if a primal integer is even; false otherwise
@@ -47,20 +34,6 @@ namespace Z0
                 => !odd<T>(a);    
 
         [MethodImpl(Inline)]
-        static bit odd_i<T>(T a)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return zfunc.odd(int8(a));  
-            else if(typeof(T) == typeof(short))
-                return zfunc.odd(int16(a));  
-            else if(typeof(T) == typeof(int))
-                return zfunc.odd(int32(a));  
-            else 
-                return zfunc.odd(int64(a));  
-        }           
-
-        [MethodImpl(Inline)]
         static bit odd_u<T>(T a)
             where T : unmanaged
         {
@@ -70,10 +43,26 @@ namespace Z0
                 return zfunc.odd(uint16(a));  
             else if(typeof(T) == typeof(uint))
                 return zfunc.odd(uint32(a));  
-            else 
+            else if(typeof(T) == typeof(ulong))
                 return zfunc.odd(uint64(a));  
+            else
+                return odd_i(a);
         }           
 
+        [MethodImpl(Inline)]
+        static bit odd_i<T>(T a)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return zfunc.odd(int8(a));  
+            else if(typeof(T) == typeof(short))
+                return zfunc.odd(int16(a));  
+            else if(typeof(T) == typeof(int))
+                return zfunc.odd(int32(a));  
+            else if(typeof(T) == typeof(long))
+                return zfunc.odd(int64(a)); 
+            else
+                throw unsupported<T>(); 
+        }           
     }
-
 }

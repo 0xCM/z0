@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static T vmovelo<T>(Vector128<T> src)
             where T : unmanaged
                 => vmovelo_u(src);

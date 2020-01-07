@@ -62,32 +62,45 @@ namespace Z0
         public static ReadOnlySpan<byte> Data64u(int i0, int i1)
             => Bytes64u.Slice(i0*8, (i1 - i0)*8);
 
-        public static IEnumerable<(int b, ulong p)> All
+        public static IEnumerable<Pair<int,ulong>> All
             => typeof(Pow2M1).LiteralValues<ulong>();
 
-        public static IEnumerable<(int b, T p)> Values<T>()
+        [MethodImpl(Inline)]
+        public static IEnumerable<Pair<int,T>> Values<T>()
+            where T : unmanaged
+                => values_u<T>();
+
+        [MethodImpl(Inline)]
+        static IEnumerable<Pair<int,T>> values_u<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))                
+                return typeof(Pow2M1).LiteralValues<T>(8);
+            else if(typeof(T) == typeof(ushort))                
+                return typeof(Pow2M1).LiteralValues<T>(16);
+            else if(typeof(T) == typeof(uint))                
+                return typeof(Pow2M1).LiteralValues<T>(33);
+            else if(typeof(T) == typeof(ulong))
+                return typeof(Pow2M1).LiteralValues<T>(64);
+            else
+                return values_i<T>();
+        }
+
+        [MethodImpl(Inline)]
+        static IEnumerable<Pair<int,T>> values_i<T>()
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))                
                 return typeof(Pow2M1).LiteralValues<T>(7);
-            else if(typeof(T) == typeof(byte))                
-                return typeof(Pow2M1).LiteralValues<T>(8);
             else if(typeof(T) == typeof(short))                
                 return typeof(Pow2M1).LiteralValues<T>(15);
-            else if(typeof(T) == typeof(ushort))                
-                return typeof(Pow2M1).LiteralValues<T>(16);
             else if(typeof(T) == typeof(int))                
                 return typeof(Pow2M1).LiteralValues<T>(32);
-            else if(typeof(T) == typeof(uint))                
-                return typeof(Pow2M1).LiteralValues<T>(33);
             else if(typeof(T) == typeof(long))                
                 return typeof(Pow2M1).LiteralValues<T>(63);
-            else if(typeof(T) == typeof(ulong))
-                return typeof(Pow2M1).LiteralValues<T>(64);
             else
                 throw unsupported<T>();
         }
-
 
         public const ulong P2M1_00 = T00 - 1;
 

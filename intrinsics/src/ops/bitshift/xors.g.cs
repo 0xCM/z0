@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="offset">The shift offset</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector128<T> vxors<T>(Vector128<T> x, byte offset)
             where T : unmanaged
                 => vxor(x,vxor(vsll(x, offset),vsrl(x,offset)));
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="offset">The shift offset</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector256<T> vxors<T>(Vector256<T> x, byte offset)
             where T : unmanaged
                 => vxor(x,vxor(vsll(x, offset),vsrl(x,offset)));
@@ -43,8 +43,8 @@ namespace Z0
         /// <param name="offset">The shift offset</param>
         /// <param name="dst">The blocked computation target</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static void vxors<T>(in ConstBlock128<T> x, byte offset, in Block128<T> dst)
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
+        public static void vxors<T>(in Block128<T> x, byte offset, in Block128<T> dst)
             where T : unmanaged
         {
             var count = dst.BlockCount;
@@ -59,8 +59,8 @@ namespace Z0
         /// <param name="offset">The shift offset</param>
         /// <param name="dst">The blocked computation target</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static void vxors<T>(in ConstBlock256<T> x, byte shift, in Block256<T> dst)
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
+        public static void vxors<T>(in Block256<T> x, byte shift, in Block256<T> dst)
             where T : unmanaged
         {
             var count = dst.BlockCount;

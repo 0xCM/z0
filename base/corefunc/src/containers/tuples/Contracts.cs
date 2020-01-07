@@ -34,8 +34,7 @@ namespace Z0
     /// <typeparam name="T0">The first member type</typeparam>
     /// <typeparam name="T1">The second member type</typeparam>
     public interface ITuple<T,T0,T1> : ITuple<T>
-        where T : ITuple<T,T0,T1>
-        
+        where T : ITuple<T,T0,T1>        
     {
         void Deconstruct(out T0 x0, out T1 x1);    
 
@@ -86,7 +85,6 @@ namespace Z0
         void Set(N1 n, T1 x);
 
         void Set(N2 n, T2 x);
-
     }
 
     public interface IMutableTuple<T,T0,T1,T2,T3> : ITuple<T,T0,T1,T2,T3>
@@ -125,6 +123,5 @@ namespace Z0
         /// Indicates a tuple text representation of the form "{x1,...xn}"
         /// </summary>
         Record,
-
     }    
 }

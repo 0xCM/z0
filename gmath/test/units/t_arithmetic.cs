@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static OpDelegate;
-    using static DelegateSurrogates;
+    using static SurrogateD;
     
     public class t_arithmetic : t_gmath<t_arithmetic>
     {

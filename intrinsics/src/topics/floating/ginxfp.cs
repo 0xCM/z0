@@ -20,9 +20,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vhadd(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinxfp.vhadd(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vhadd(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinxfp.vhadd(v64f(x), v64f(y)));
             else 
                 throw unsupported<T>();
         }
@@ -32,9 +32,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vhadd(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinxfp.vhadd(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vhadd(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinxfp.vhadd(v64f(x), v64f(y)));
             else 
                 throw unsupported<T>();
         }
@@ -44,9 +44,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vdiv(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinxfp.vdiv(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vdiv(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinxfp.vdiv(v64f(x), v64f(y)));
             else 
                 throw unsupported<T>();
         }
@@ -56,9 +56,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vdiv(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinxfp.vdiv(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vdiv(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinxfp.vdiv(v64f(x), v64f(y)));
             else 
                 throw unsupported<T>();
         }
@@ -69,9 +69,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vand(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinxfp.vand(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vand(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinxfp.vand(v64f(x), v64f(y)));
             else 
                 throw unsupported<T>();
                     
@@ -82,9 +82,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vand(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinxfp.vand(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vand(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinxfp.vand(v64f(x), v64f(y)));
             else 
                 throw unsupported<T>();
                     
@@ -95,9 +95,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vor(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinxfp.vor(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vor(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinxfp.vor(v64f(x), v64f(y)));
             else 
                 throw unsupported<T>();                    
         }
@@ -107,9 +107,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vor(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinxfp.vor(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vor(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinxfp.vor(v64f(x), v64f(y)));
             else 
                 throw unsupported<T>();                    
         }
@@ -119,9 +119,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vxor(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinxfp.vxor(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vxor(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinxfp.vxor(v64f(x), v64f(y)));
             else 
                 throw unsupported<T>();                    
         }
@@ -131,9 +131,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vxor(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinxfp.vxor(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vxor(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinxfp.vxor(v64f(x), v64f(y)));
             else 
                 throw unsupported<T>();                    
         }
@@ -143,9 +143,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vxornot(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinxfp.vxornot(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vxornot(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinxfp.vxornot(v64f(x), v64f(y)));
             else 
                 throw unsupported<T>();                    
         }
@@ -155,9 +155,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vxornot(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinxfp.vxornot(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vxornot(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinxfp.vxornot(v64f(x), v64f(y)));
             else 
                 throw unsupported<T>();                    
         }
@@ -167,12 +167,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vmin(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinxfp.vmin(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vmin(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinxfp.vmin(v64f(x), v64f(y)));
             else 
                 throw unsupported<T>();
-
         }
          
         [MethodImpl(Inline)]
@@ -180,12 +179,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vmin(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinxfp.vmin(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vmin(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinxfp.vmin(v64f(x), v64f(y)));
             else 
                 throw unsupported<T>();
-
         }
 
        [MethodImpl(Inline)]
@@ -193,9 +191,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vmax(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinxfp.vmax(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vmax(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinxfp.vmax(v64f(x), v64f(y)));
             else 
                 throw unsupported<T>();
         }        
@@ -205,46 +203,21 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vmax(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinxfp.vmax(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vmax(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinxfp.vmax(v64f(x), v64f(y)));
             else 
                 throw unsupported<T>();
         }        
-
-       [MethodImpl(Inline)]
-       public static Vector128<T> vadd<T>(Vector128<T> x, Vector128<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vadd(vcast32f(x), vcast32f(y)));
-            else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vadd(vcast64f(x), vcast64f(y)));
-            else 
-                throw unsupported<T>();
-        }        
-
-       [MethodImpl(Inline)]
-       public static Vector256<T> vadd<T>(Vector256<T> x, Vector256<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vadd(vcast32f(x), vcast32f(y)));
-            else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vadd(vcast64f(x), vcast64f(y)));
-            else 
-                throw unsupported<T>();
-        }        
-
 
         [MethodImpl(Inline)]
         public static Vector128<T> vnegate<T>(Vector128<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vnegate(vcast32f(src)));
+                return vgeneric<T>(dinxfp.vnegate(v32f(src)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vnegate(vcast64f(src)));
+                return vgeneric<T>(dinxfp.vnegate(v64f(src)));
             else 
                 throw unsupported<T>();
         }
@@ -254,9 +227,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vnegate(vcast32f(src)));
+                return vgeneric<T>(dinxfp.vnegate(v32f(src)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vnegate(vcast64f(src)));
+                return vgeneric<T>(dinxfp.vnegate(v64f(src)));
             else 
                 throw unsupported<T>();
         }

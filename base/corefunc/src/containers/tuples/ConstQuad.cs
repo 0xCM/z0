@@ -13,7 +13,6 @@ namespace Z0
     /// An homogenous immutable 4-tuple
     /// </summary>
     public readonly struct ConstQuad<T> : ITuple<ConstQuad<T>,T,T,T,T>
-        where T : unmanaged
     {
         /// <summary>
         /// The first member

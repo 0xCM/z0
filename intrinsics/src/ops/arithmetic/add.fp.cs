@@ -7,11 +7,41 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
+
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
     
     using static zfunc;    
+
+    using static As;
+
+    partial class ginxfp
+    {
+       [MethodImpl(Inline)]
+       public static Vector128<T> vadd<T>(Vector128<T> x, Vector128<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return vgeneric<T>(dinxfp.vadd(v32f(x), v32f(y)));
+            else if(typeof(T) == typeof(double))
+                return vgeneric<T>(dinxfp.vadd(v64f(x), v64f(y)));
+            else 
+                throw unsupported<T>();
+        }        
+
+       [MethodImpl(Inline)]
+       public static Vector256<T> vadd<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return vgeneric<T>(dinxfp.vadd(v32f(x), v32f(y)));
+            else if(typeof(T) == typeof(double))
+                return vgeneric<T>(dinxfp.vadd(v64f(x), v64f(y)));
+            else 
+                throw unsupported<T>();
+        }        
+    }
 
     partial class dinxfp
     {
@@ -49,7 +79,6 @@ namespace Z0
         /// <param name="y"></param>
         [MethodImpl(Inline)]
         public static Vector256<double> vadd(Vector256<double> x, Vector256<double> y)
-            => Add(x, y);             
-
+            => Add(x, y);
     }
 }

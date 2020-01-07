@@ -29,8 +29,7 @@ partial class zfunc
     /// <typeparam name="T">The member type</typeparam>
     [MethodImpl(Inline)]
     public static Triple<T> triple<T>(T a, T b, T c)
-        where T : unmanaged
-            => Tuples.triple<T>(a,b,c);
+        => Tuples.triple<T>(a,b,c);
 
     /// <summary>
     /// Defines a non-homogenous pair
@@ -41,9 +40,7 @@ partial class zfunc
     /// <typeparam name="T1">The second member type</typeparam>
     [MethodImpl(Inline)]
     public static Pair<T0,T1> paired<T0,T1>(T0 a, T1 b)
-        where T0 : unmanaged
-        where T1 : unmanaged
-            => Tuples.pair(a,b);
+        => Tuples.pair(a,b);
 
     /// <summary>
     /// Defines a non-homogenous triple
@@ -56,10 +53,7 @@ partial class zfunc
     /// <typeparam name="Z">The type of the third member</typeparam>
     [MethodImpl(Inline)]
     public static Triple<X,Y,Z> tripled<X,Y,Z>(X a, Y b, Z c)
-        where X: unmanaged
-        where Y : unmanaged
-        where Z : unmanaged
-            => Tuples.triple(a,b,c);
+        => Tuples.triple(a,b,c);
 
     /// <summary>
     /// Maps a function over a 2-tuple
@@ -103,7 +97,6 @@ partial class zfunc
     /// Determines the tuple's style, if possible; otherwise, returns None
     /// </summary>
     /// <param name="text">The putative tuple representation</param>
-    /// <returns></returns>
     static Option<TupleFormat> style(string text)
         => text.EnclosedBy(lparen(), rparen()) ? some(TupleFormat.Coordinate)
         : text.EnclosedBy(lbracket(), rbracket()) ? some(TupleFormat.List)

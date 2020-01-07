@@ -10,24 +10,31 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     using System.Runtime.InteropServices;
     using System.Collections.Generic;
- 
+    using System.Linq;
+
     using static zfunc;
     
     public class t_reveal_delegates: UnitTest<t_reveal_delegates>
     {
 
         [MethodImpl(Inline)]
-        static Func<Vector256<uint>,Vector256<uint>> shuffler2()
-            => x => Avx2.Shuffle(x,2);
+        static Func<Vector256<T>,Vector256<T>> shuffler<T>(N2 n)
+            where T : unmanaged
+            => x => ginx.vshuf4x32<T>(x, Arrange4L.AABB);
 
 
-
-        public void shuffle_test()
+        public void immtest_1()
         {
             var x = Random.CpuVector<uint>(n256);
-            var f = shuffler2();
+            var f = shuffler<uint>(n2);
             var decode = f.CaptureDelegateAsm(100).Instructions();
             Trace(decode.Format());        
+        }
+
+        public void immtest_2()
+        {
+            var method = GetType().DeclaredMethods().WithNameLike(nameof(shuffler)).Single().CaptureGenericAsm(typeof(uint)).Instructions().Format();
+            Trace(method);
         }
 
         public void generic_test()

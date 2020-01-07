@@ -6,6 +6,7 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
     
     using static zfunc;
     
@@ -14,9 +15,12 @@ namespace Z0.Logix
 
     public class t_truthtable : UnitTest<t_truthtable>
     {
+        static StreamWriter writer(FileName filename)
+            => datasink(FolderName.Define("truth"), filename);
+        
         public void unary_truth_emit()
         {
-            using var dst = LogArea.Test.LogWriter(FileName.Define("UnaryTruth.txt"));
+            using var dst = writer(FileName.Define("UnaryTruth.txt"));
             var ops = LogicOpApi.UnaryOpKinds;
             TruthTables.emit(dst,ops);
             TruthTables.emit(dst,OpArityKind.Unary);
@@ -24,7 +28,7 @@ namespace Z0.Logix
 
         public void binary_truth_emit()
         {
-            using var dst = LogArea.Test.LogWriter(FileName.Define("BinaryTruth.txt"));
+            using var dst = writer(FileName.Define("BinaryTruth.txt"));
             var ops = LogicOpApi.BinaryOpKinds;
             TruthTables.emit(dst,ops);
             TruthTables.emit(dst,OpArityKind.Binary);
@@ -32,7 +36,7 @@ namespace Z0.Logix
 
         public void ternary_truth_emit()
         {
-            using var dst = LogArea.Test.LogWriter(FileName.Define("TernaryTruth.txt"));
+            using var dst = writer(FileName.Define("TernaryTruth.txt"));
             var ops = LogicOpApi.TernaryOpKinds;
             TruthTables.emit(dst,ops);
             TruthTables.emit(dst,OpArityKind.Ternary);

@@ -14,96 +14,78 @@ namespace Z0
     
     partial class ginx
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static Vector128<T> vnegate<T>(Vector128<T> src)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vnegate_u(src);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vnegate_i(src);
-            else 
-                return ginxfp.vnegate(src);
-        }
+                => vnegate_u(src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static Vector256<T> vnegate<T>(Vector256<T> src)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vnegate_u(src);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vnegate_i(src);
-            else 
-                return ginxfp.vnegate(src);
-        }                    
+                => vnegate_u(src);
  
         [MethodImpl(Inline)]
-        static Vector128<T> vnegate_i<T>(Vector128<T> lhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                 return As.vgeneric<T>(dinx.vnegate(vcast8i(lhs)));
-            else if(typeof(T) == typeof(short))
-                 return As.vgeneric<T>(dinx.vnegate(vcast16i(lhs)));
-            else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(dinx.vnegate(vcast32i(lhs)));
-            else
-                 return vgeneric<T>(dinx.vnegate(vcast64i(lhs)));
-        }
-
-        [MethodImpl(Inline)]
-        static Vector128<T> vnegate_u<T>(Vector128<T> lhs)
+        static Vector128<T> vnegate_u<T>(Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vnegate(vcast8u(lhs)));
+                return As.vgeneric<T>(dinx.vnegate(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vnegate(vcast16u(lhs)));
+                return vgeneric<T>(dinx.vnegate(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vnegate(vcast32u(lhs)));
+                return vgeneric<T>(dinx.vnegate(v32u(x)));
+            else if(typeof(T) == typeof(ulong))
+                return vgeneric<T>(dinx.vnegate(v64u(x)));
             else 
-                return vgeneric<T>(dinx.vnegate(vcast64u(lhs)));
+                return vnegate_i(x);
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vnegate_i<T>(Vector256<T> lhs)
+        static Vector128<T> vnegate_i<T>(Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return vgeneric<T>(dinx.vnegate(vcast8i(lhs)));
+                 return As.vgeneric<T>(dinx.vnegate(v8i(x)));
             else if(typeof(T) == typeof(short))
-                 return vgeneric<T>(dinx.vnegate(vcast16i(lhs)));
+                 return As.vgeneric<T>(dinx.vnegate(v16i(x)));
             else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(dinx.vnegate(vcast32i(lhs)));
+                 return vgeneric<T>(dinx.vnegate(v32i(x)));
+            else if(typeof(T) == typeof(long))
+                 return vgeneric<T>(dinx.vnegate(v64i(x)));
             else
-                 return vgeneric<T>(dinx.vnegate(vcast64i(lhs)));
+                return ginxfp.vnegate(x);
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vnegate_u<T>(Vector256<T> lhs)
+        static Vector256<T> vnegate_i<T>(Vector256<T> x)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                 return vgeneric<T>(dinx.vnegate(v8i(x)));
+            else if(typeof(T) == typeof(short))
+                 return vgeneric<T>(dinx.vnegate(v16i(x)));
+            else if(typeof(T) == typeof(int))
+                 return vgeneric<T>(dinx.vnegate(v32i(x)));
+            else if(typeof(T) == typeof(long))
+                 return vgeneric<T>(dinx.vnegate(v64i(x)));
+            else
+                return ginxfp.vnegate(x);
+        }
+
+        [MethodImpl(Inline)]
+        static Vector256<T> vnegate_u<T>(Vector256<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vnegate(vcast8u(lhs)));
+                return vgeneric<T>(dinx.vnegate(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vnegate(vcast16u(lhs)));
+                return vgeneric<T>(dinx.vnegate(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vnegate(vcast32u(lhs)));
+                return vgeneric<T>(dinx.vnegate(v32u(x)));
+            else if(typeof(T) == typeof(ulong))
+                return vgeneric<T>(dinx.vnegate(v64u(x)));
             else 
-                return vgeneric<T>(dinx.vnegate(vcast64u(lhs)));
+                return vnegate_i(x);
         }
 
     }

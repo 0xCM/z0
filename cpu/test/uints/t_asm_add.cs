@@ -20,43 +20,38 @@ namespace Z0
 
         public void add_bench()
         {
-            using var buffer = AsmExecBuffer.Create();            
-
-            add_bench(buffer, z8);
-            add_bench(buffer, z8i);
-            add_bench(buffer, z16);
-            add_bench(buffer, z16i);
-            add_bench(buffer, z32);
-            add_bench(buffer, z32i);
-            add_bench(buffer, z64);
+            add_bench(z8);
+            add_bench(z8i);
+            add_bench(z16);
+            add_bench(z16i);
+            add_bench(z32);
+            add_bench(z32i);
+            add_bench(z64);
         }
 
         public void add_check()
         {
-            using var buffer = AsmExecBuffer.Create();            
-
-            add_check(buffer, z8);
-            add_check(buffer, z8i);
-            add_check(buffer, z16);
-            add_check(buffer, z16i);
-            add_check(buffer, z32);
-            add_check(buffer, z32i);
-            add_check(buffer, z64);
-            add_check(buffer, z64i);            
+            add_check(z8);
+            add_check(z8i);
+            add_check(z16);
+            add_check(z16i);
+            add_check(z32);
+            add_check(z32i);
+            add_check(z64);
+            add_check(z64i);            
         }
 
-        void add_check<T>(AsmExecBuffer buffer, T t = default)
+        void add_check<T>(T t = default)
             where T : unmanaged
         {
-            buffer.Load(ReadAsm<T>());
-            CheckMatch(buffer.BinOp<T>(),gmath.add);
+            CheckAsmMatch(gmath.add, ReadAsm(t));
         }
 
-        void add_bench<T>(AsmExecBuffer buffer, T t = default)
+        void add_bench<T>(T t = default)
             where T : unmanaged
         {
-            buffer.Load(ReadAsm<T>());
-            RunBench(buffer.BinOp<T>(), gmath.add<T>);
+            using var buffer = AsmExecBuffer.Create();        
+            RunBench(gmath.add, buffer.BinOp(ReadAsm(t)));            
         }
     }
 }

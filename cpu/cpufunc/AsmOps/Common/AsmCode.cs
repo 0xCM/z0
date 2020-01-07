@@ -44,21 +44,14 @@ namespace Z0
             => new AsmCode(Hex.parsebytes(data).ToArray(),moniker);
 
         /// <summary>
-        /// Materializes an untyped code block from hex data contained in the assembly log archive
+        /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
         /// </summary>
-        /// <param name="subfolder">The asm log subfolder</param>
-        /// <param name="m">The identifying moniker</param>
-        public static AsmCode Read(FolderName subfolder, Moniker m)
-            => AsmCode.Parse(Paths.AsmHexPath(subfolder, m).ReadText(),m);
-
-        /// <summary>
-        /// Returns the assembly hex file paths with filenames that satisfy a substring match predicate
-        /// </summary>
-        /// <param name="subfolder">The asm log subfolder to search</param>
-        /// <param name="match">The match predicate</param>
-        public static IEnumerable<FilePath> Files(FolderName subfolder, string match)        
-            => Paths.AsmDataDir(subfolder).Files(Paths.AsmHexExt, match);
-
+        /// <param name="data">The encoded assembly</param>
+        /// <param name="moniker">The identity to confer</param>
+        public static AsmCode<T> Parse<T>(string data, Moniker moniker, T t = default)
+            where T : unmanaged
+                => new AsmCode<T>(Hex.parsebytes(data).ToArray(),moniker);
+                
         /// <summary>
         /// Loads an untyped code block from span content
         /// </summary>
@@ -74,9 +67,9 @@ namespace Z0
         /// <param name="src">The code source</param>
         /// <param name="opcode">The identity to confer</param>
         [MethodImpl(Inline)]
-        public static AsmCode<T> Load<T>(ReadOnlySpan<byte> src)
+        public static AsmCode<T> Load<T>(ReadOnlySpan<byte> src, Moniker m)
             where T:unmanaged
-                => new AsmCode<T>(src, Moniker.Empty);        
+                => new AsmCode<T>(src, m);        
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(AsmCode code)
@@ -115,9 +108,17 @@ namespace Z0
         public T CreateDelegate<T>()
             where T : Delegate        
                 => Marshal.GetDelegateForFunctionPointer<T>(Pointer);
-
+        
+        /// <summary>
+        /// Formats the encapsulated data as a sequence of comma-delimited hex bytes
+        /// </summary>
         public string Format()
             => Data.FormatHexBytes();
+
+        [MethodImpl(Inline)]
+        public AsmCode<T> As<T>()
+            where T : unmanaged
+                => new AsmCode<T>(this);
 
         [MethodImpl(Inline)]
         unsafe IntPtr GetPointer()        
@@ -130,17 +131,17 @@ namespace Z0
     public readonly ref struct AsmCode<T>
         where T : unmanaged
     {
-        readonly AsmCode Untyped;
+        readonly AsmCode Code;
 
         public Moniker Name
-            => Untyped.Name;
+            => Code.Name;
 
         public ReadOnlySpan<byte> Data
-            => Untyped.Data;
+            => Code.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator AsmCode(AsmCode<T> src)
-            => src.Untyped;
+            => src.Code;
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(AsmCode<T> src)
@@ -149,13 +150,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public AsmCode(AsmCode src)
         {
-            this.Untyped = src;
+            this.Code = src;
         }
 
         [MethodImpl(Inline)]
         public AsmCode(ReadOnlySpan<byte> data, Moniker m)
         {
-            Untyped = new AsmCode(data,m);
+            Code = new AsmCode(data,m);
         }
 
         /// <summary>
@@ -164,7 +165,7 @@ namespace Z0
         public readonly IntPtr Pointer
         {
             [MethodImpl(Inline)]
-            get => Untyped.Pointer;
+            get => Code.Pointer;
         }
 
         /// <summary>
@@ -173,7 +174,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Untyped.IsEmpty;
+            get => Code.IsEmpty;
         }
 
         /// <summary>
@@ -183,14 +184,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public S CreateDelegate<S>()
             where S : Delegate        
-                => Untyped.CreateDelegate<S>();
+                => Code.CreateDelegate<S>();
 
         [MethodImpl(Inline)]
         public AsmCode<S> As<S>()
             where S : unmanaged
-                => new AsmCode<S>(Untyped);
+                => new AsmCode<S>(Code);
     
+        public AsmCode Untyped  
+        {
+            [MethodImpl(Inline)]
+            get => Code;
+        }
         public string Format()
-            => Untyped.Format();
+            => Code.Format();
     }
 }

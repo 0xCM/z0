@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
         public static Vector128<T> vrotlx<T>(Vector128<T> src, byte offset)        
             where T : unmanaged
                 => vgeneric<T>(dinx.vrotlx(v64u(src), offset));
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
         public static Vector256<T> vrotlx<T>(Vector256<T> src, byte offset)        
             where T : unmanaged
                 => vgeneric<T>(dinx.vrotlx(v64u(src), offset));

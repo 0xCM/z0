@@ -8,6 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     using System.IO;
     
     using static zfunc;
@@ -41,10 +42,11 @@ namespace Z0
                 => TestOpMoniker(Primitive.kind<T>());
 
         protected static AsmCode ReadAsm(FolderName folder, Moniker m)
-            => AsmCode.Read(folder, m);
+            => AsmLib.Read(folder, m);
 
         protected static AsmCode ReadAsm(FolderName folder, string opname, PrimalKind kind)
-            => AsmCode.Read(folder, Moniker.define(opname,kind));
+            => AsmLib.Read(folder, Moniker.define(opname,kind));
+
 
         protected AsmCode ReadAsm(Moniker m)
             => ReadAsm(AsmFolder, m);
@@ -52,9 +54,35 @@ namespace Z0
         protected AsmCode ReadAsm(PrimalKind kind)
             => ReadAsm(AsmFolder, OpName, kind);
 
-        protected AsmCode<T> ReadAsm<T>()
+        protected AsmCode<T> ReadAsm<T>(T t = default)
             where T : unmanaged
                 => new AsmCode<T>(ReadAsm(AsmFolder, OpName, typeof(T).Kind()));
+
+        protected void CheckMatch<T>(BinaryOp<Vector128<T>> f, BinaryOp128 g)
+            where T : unmanaged
+        {
+            var w = n128;
+            var t = default(T);
+            for(var i=0; i<RepCount; i++)
+            {
+                var x = Random.CpuVector(w,t);
+                var y = Random.CpuVector(w,t);
+                Claim.eq(f(x,y), g.Apply(x,y));
+            }            
+        }
+
+        protected void CheckMatch<T>(BinaryOp<Vector256<T>> f, BinaryOp256 g)
+            where T : unmanaged
+        {
+            var w = n256;
+            var t = default(T);
+            for(var i=0; i<RepCount; i++)
+            {
+                var x = Random.CpuVector(w,t);
+                var y = Random.CpuVector(w,t);
+                Claim.eq(f(x,y), g.Apply(x,y));
+            }            
+        }
 
         protected void RunBench<T>(UnaryOp<T> f, UnaryOp<T> cf, SystemCounter clock = default)
             where T :unmanaged
@@ -106,7 +134,7 @@ namespace Z0
             run_f();
         }
 
-        protected void RunBench<T>(BinaryOp<T> f, BinaryOp<T> cf, SystemCounter clock = default)
+        protected void RunBench<T>(BinaryOp<T> cf, BinaryOp<T> f, SystemCounter clock = default)
             where T :unmanaged
         {
             const int SampleSize = 256;
@@ -182,6 +210,50 @@ namespace Z0
 
             CheckAction(check, CaseName(TestOpName<T>()));
         }
+
+        protected void CheckAsmMatch<T>(BinaryOp<T> f, AsmCode asm)
+            where T : unmanaged
+        {
+            using var buffer = AsmExecBuffer.Create();            
+            var g = buffer.BinOp(asm.As<T>());
+
+            void check()
+            {
+                for(var i=0; i<RepCount; i++)
+                {
+                    (var x, var y) = Random.NextPair<T>();
+                    Claim.eq(f(x,y),g(x,y));
+                }
+            }
+
+            CheckAction(check, CaseName(asm.Name));
+        }
+
+        protected void CheckAsmMatch<T>(BinaryOp<T> f, AsmCode<T> asm)
+            where T : unmanaged
+                => CheckAsmMatch(f,asm.Untyped);
+        
+        protected void CheckAsmMatch<T>(UnaryOp<T> f, AsmCode asm)
+            where T : unmanaged
+        {
+            using var buffer = AsmExecBuffer.Create();            
+            var g = buffer.UnaryOp(asm.As<T>());
+
+            void check()
+            {
+                for(var i=0; i<RepCount; i++)
+                {
+                    (var x, var y) = Random.NextPair<T>();
+                    Claim.eq(f(x),g(x));
+                }
+            }
+
+            CheckAction(check, CaseName(asm.Name));
+        }
+
+        protected void CheckAsmMatch<T>(UnaryOp<T> f, AsmCode<T> asm)
+            where T : unmanaged
+                => CheckAsmMatch(f, asm.Untyped);
 
         /// <summary>
         /// Evaluates a pair of unary operators and asserts their equality over a random sequence

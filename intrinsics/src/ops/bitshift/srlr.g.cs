@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset vector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector128<T> vsrlr<T>(Vector128<T> x, Vector128<T> offset)
             where T : unmanaged
                 => vsrlr_u(x,offset);
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset vector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector256<T> vsrlr<T>(Vector256<T> x, Vector256<T> offset)
             where T : unmanaged
                 => vsrlr_u(x,offset);
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset amount</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector128<T> vsrlr<T>(Vector128<T> x, T offset)
             where T : unmanaged
                 => vsrlr_u(x,offset);
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset amount</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector256<T> vsrlr<T>(Vector256<T> x, T offset)
             where T : unmanaged
                 => vsrlr_u(x,offset);
@@ -156,7 +156,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-
         [MethodImpl(Inline)]
         static Vector256<T> vsrlr_u<T>(Vector256<T> x, Vector256<T> offset)
             where T : unmanaged
@@ -188,7 +187,5 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
-
-
     }
 }

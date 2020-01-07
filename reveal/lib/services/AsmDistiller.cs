@@ -20,6 +20,13 @@ namespace Z0
     
     public static class AsmDistiller
     {        
+        /// <summary>
+        /// Decodes an assembly code block
+        /// </summary>
+        /// <param name="src">The source assembly block</param>
+		public static InstructionBlock Decode(this AsmCode src)
+            => Deconstructor.Decode(src.Name, src.Data);
+
         public static IEnumerable<AsmFuncInfo> DistillAsm(this IEnumerable<MethodDisassembly> src)
             => src.Select(DistillAsm);
 

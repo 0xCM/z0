@@ -5,8 +5,6 @@
 namespace Z0.Designators
 {
     using System;
-    using System.Reflection;
-    using System.Linq;
     using System.Collections.Generic;
 
     using D = Z0.Designators;
@@ -18,7 +16,6 @@ namespace Z0.Designators
     /// </summary>
     public sealed class Control : AssemblyDesignator<Control>
     {
-
         public override IEnumerable<IAssemblyDesignator> Designates
             => items<IAssemblyDesignator>(            
             D.NatTest.Designated,            
@@ -67,8 +64,6 @@ namespace Z0.Designators
 
             D.RevealLib.Designated,
             D.RevealApp.Designated
-            );
-         
-        
+            );                 
    }
 }

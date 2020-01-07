@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The shift offset</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector128<T> vsll<T>(Vector128<T> x, byte offset)
             where T : unmanaged
         {
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The shift offset</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector256<T> vsll<T>(Vector256<T> x, byte offset)
             where T : unmanaged
         {

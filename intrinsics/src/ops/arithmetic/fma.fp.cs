@@ -38,7 +38,6 @@ namespace Z0
         public static Vector128<double> vfnmadd(Vector128<double> x, Vector128<double> y, Vector128<double> z)
             => MultiplyAddNegated(x,y,z);
 
-
         /// <summary>
         /// __m128 _mm_fmaddsub_ps (__m128 a, __m128 b, __m128 c) VFMADDSUBPS xmm, xmm, xmm/m128
         /// dst = x*y - z

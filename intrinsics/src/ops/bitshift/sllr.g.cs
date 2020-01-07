@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset vector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector128<T> vsllr<T>(Vector128<T> x, Vector128<T> offset)
             where T : unmanaged
                 => vsllr_u(x,offset);
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset vector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector256<T> vsllr<T>(Vector256<T> x, Vector256<T> offset)
             where T : unmanaged
                 => vsllr_u(x,offset);
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset amount</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector128<T> vsllr<T>(Vector128<T> x, T offset)
             where T : unmanaged
                 => vsllr_u(x,offset);
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset amount</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector256<T> vsllr<T>(Vector256<T> x, T offset)
             where T : unmanaged
                 => vsllr_u(x,offset);
@@ -65,13 +65,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vsllr(vcast8u(x), vcast8u(offset)));
+                return vgeneric<T>(dinx.vsllr(v8u(x), v8u(offset)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vsllr(vcast16u(x), vcast16u(offset)));
+                return vgeneric<T>(dinx.vsllr(v16u(x), v16u(offset)));
             else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dinx.vsllr(vcast32u(x), vcast32u(offset)));
+                return vgeneric<T>(dinx.vsllr(v32u(x), v32u(offset)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vsllr(vcast64u(x), vcast64u(offset)));
+                return vgeneric<T>(dinx.vsllr(v64u(x), v64u(offset)));
             else 
                 return vsllr_i(x,offset);
         }
@@ -81,13 +81,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vsllr(vcast8i(x), vcast8i(offset)));
+                return vgeneric<T>(dinx.vsllr(v8i(x), v8i(offset)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vsllr(vcast16i(x), vcast16i(offset)));
+                return vgeneric<T>(dinx.vsllr(v16i(x), v16i(offset)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vsllr(vcast32i(x), vcast32i(offset)));
+                return vgeneric<T>(dinx.vsllr(v32i(x), v32i(offset)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dinx.vsllr(vcast64i(x), vcast64i(offset)));  
+                return vgeneric<T>(dinx.vsllr(v64i(x), v64i(offset)));  
             else
                 throw unsupported<T>();          
         }
@@ -97,13 +97,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vsllr(vcast8u(x), uint8(offset)));
+                return vgeneric<T>(dinx.vsllr(v8u(x), uint8(offset)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vsllr(vcast16u(x), uint16(offset)));
+                return vgeneric<T>(dinx.vsllr(v16u(x), uint16(offset)));
             else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dinx.vsllr(vcast32u(x), uint32(offset)));
+                return vgeneric<T>(dinx.vsllr(v32u(x), uint32(offset)));
             else if(typeof(T) == typeof(ulong)) 
-                return vgeneric<T>(dinx.vsllr(vcast64u(x), uint64(offset)));
+                return vgeneric<T>(dinx.vsllr(v64u(x), uint64(offset)));
             else 
                 return vsllr_i(x,offset);                
         }
@@ -113,13 +113,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vsllr(vcast8i(x), int8(offset)));
+                return vgeneric<T>(dinx.vsllr(v8i(x), int8(offset)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vsllr(vcast16i(x), int16(offset)));
+                return vgeneric<T>(dinx.vsllr(v16i(x), int16(offset)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vsllr(vcast32i(x), int32(offset)));
+                return vgeneric<T>(dinx.vsllr(v32i(x), int32(offset)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dinx.vsllr(vcast64i(x), int64(offset)));            
+                return vgeneric<T>(dinx.vsllr(v64i(x), int64(offset)));            
             else
                 throw unsupported<T>();
         }
@@ -129,13 +129,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vsllr(vcast8u(x), uint8(offset)));
+                return vgeneric<T>(dinx.vsllr(v8u(x), uint8(offset)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vsllr(vcast16u(x), uint16(offset)));
+                return vgeneric<T>(dinx.vsllr(v16u(x), uint16(offset)));
             else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dinx.vsllr(vcast32u(x), uint32(offset)));
+                return vgeneric<T>(dinx.vsllr(v32u(x), uint32(offset)));
             else if(typeof(T) == typeof(ulong)) 
-                return vgeneric<T>(dinx.vsllr(vcast64u(x), uint64(offset)));
+                return vgeneric<T>(dinx.vsllr(v64u(x), uint64(offset)));
             else
                 return vsllr_i(x,offset);
         }
@@ -145,30 +145,29 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vsllr(vcast8i(x), int8(offset)));
+                return vgeneric<T>(dinx.vsllr(v8i(x), int8(offset)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vsllr(vcast16i(x), int16(offset)));
+                return vgeneric<T>(dinx.vsllr(v16i(x), int16(offset)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vsllr(vcast32i(x), int32(offset)));
+                return vgeneric<T>(dinx.vsllr(v32i(x), int32(offset)));
             else if(typeof(T) == typeof(long)) 
-                return vgeneric<T>(dinx.vsllr(vcast64i(x), int64(offset)));            
+                return vgeneric<T>(dinx.vsllr(v64i(x), int64(offset)));            
             else
                 throw unsupported<T>();
         }
-
 
         [MethodImpl(Inline)]
         static Vector256<T> vsllr_u<T>(Vector256<T> x, Vector256<T> offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vsllr(vcast8u(x), v8u(vlo(offset))));
+                return vgeneric<T>(dinx.vsllr(v8u(x), v8u(vlo(offset))));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vsllr(vcast16u(x), v16u(vlo(offset))));
+                return vgeneric<T>(dinx.vsllr(v16u(x), v16u(vlo(offset))));
             else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dinx.vsllr(vcast32u(x), v32u(vlo(offset))));
+                return vgeneric<T>(dinx.vsllr(v32u(x), v32u(vlo(offset))));
             else if(typeof(T) == typeof(ulong)) 
-                return vgeneric<T>(dinx.vsllr(vcast64u(x), v64u(vlo(offset))));
+                return vgeneric<T>(dinx.vsllr(v64u(x), v64u(vlo(offset))));
             else
                 return vsllr_i(x,offset);
         }
@@ -178,13 +177,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vsllr(vcast8i(x), v8i(vlo(offset))));
+                return vgeneric<T>(dinx.vsllr(v8i(x), v8i(vlo(offset))));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vsllr(vcast16i(x), v16i(vlo(offset))));
+                return vgeneric<T>(dinx.vsllr(v16i(x), v16i(vlo(offset))));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vsllr(vcast32i(x), v32i(vlo(offset))));
+                return vgeneric<T>(dinx.vsllr(v32i(x), v32i(vlo(offset))));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dinx.vsllr(vcast64i(x), v64i(vlo(offset))));
+                return vgeneric<T>(dinx.vsllr(v64i(x), v64i(vlo(offset))));
             else
                 throw unsupported<T>();
         }

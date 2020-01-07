@@ -19,14 +19,8 @@ namespace Z0
         /// <param name="src">The source document path</param>
         /// <param name="format">The document format</param>
         /// <param name="observer">An optional observer to witness intersting events</param>
-        public static Option<TextDoc> ParseDocument(this FilePath src, TextFormat? format = null, Action<AppMsg> observer = null)
-        {
-            if(!src.Exists())
-            {
-                observer?.Invoke(ErrorMessages.FileDoesNotExist(src));
-                return default;
-            }
-            
+        public static Option<TextDoc> ParseDocument(this StreamReader reader, TextFormat? format = null, Action<AppMsg> observer = null)
+        {            
             var rows = new List<TextRow>();
             var counter = 1u;
             var fmt = format ?? TextFormat.Default;
@@ -34,7 +28,6 @@ namespace Z0
             
             try
             {
-                using var reader = src.Reader();
                 while(true)
                 {
                     var text = reader.ParseLine(counter);
@@ -106,12 +99,15 @@ namespace Z0
             }
         }
 
-        /// <summary>
-        /// Reads a file to produce a <see cref='TextDoc'/>
-        /// </summary>
-        /// <param name="src">The soruce file path</param>
-        /// <param name="format">The file format</param>
         public static Option<TextDoc> ReadTextDoc(this FilePath src, TextFormat? format = null)
+        {
+            if(!src.Exists())
+                return default;
+            using var reader = new StreamReader(src.ToString());
+            return src.ReadTextDoc(format);
+        }
+
+        public static Option<TextDoc> ReadTextDoc(this StreamReader src, TextFormat? format = null)
             => src.ParseDocument(format, message => print(message));
 
         static Option<TextLine> ParseLine(this StreamReader reader, uint lineNumber)

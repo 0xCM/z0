@@ -81,7 +81,7 @@ namespace Z0
         /// Decodes encoded assembly instructions
         /// </summary>
         /// <param name="data">The encoded instructions</param>
-        public static InstructionBlock Decode(string name, ReadOnlySpan<byte> data)
+        public static InstructionBlock Decode(Moniker m, ReadOnlySpan<byte> data)
 		{
             var dst = new InstructionList();
             var reader = new ByteArrayCodeReader(data.ToArray());
@@ -92,7 +92,7 @@ namespace Z0
 				ref var instruction = ref dst.AllocUninitializedElement();
 				decoder.Decode(out instruction);                
 			}
-            return InstructionBlock.Define(name, data, dst.ToArray());
+            return InstructionBlock.Define(m, data, dst.ToArray());
 		}
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace Z0
                 {
                     MethodInfo = method,
                     NativeAddress = clrMethod.NativeCode,
-                    MethodSig = method.MethodSig(),
+                    MethodSig = method.Signature(),
                     CilData = ilBytes,
                     CilBody = MdIx.FindCil(method),
                     CilMap = MapCilToNative(clrMethod),

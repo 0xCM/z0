@@ -19,18 +19,20 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="shift">The amount by which to shift each component</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
         public static Vector128<T> vxorsr<T>(Vector128<T> x, byte shift)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vxorsr(vcast8u(x), shift));
+                return As.vgeneric<T>(dinx.vxorsr(v8u(x), shift));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vxorsr(vcast16u(x), shift));
+                return vgeneric<T>(dinx.vxorsr(v16u(x), shift));
             else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dinx.vxorsr(vcast32u(x), shift));
-            else 
-                return vgeneric<T>(dinx.vxorsr(vcast64u(x), shift));
+                return vgeneric<T>(dinx.vxorsr(v32u(x), shift));
+            else if(typeof(T) == typeof(ulong)) 
+                return vgeneric<T>(dinx.vxorsr(v64u(x), shift));
+            else
+                throw unsupported<T>();
         }
 
         /// <summary>
@@ -38,19 +40,20 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="shift">The amount by which to shift each component</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
         public static Vector256<T> vxorsr<T>(Vector256<T> x, byte shift)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vxorsr(vcast8u(x), shift));
+                return vgeneric<T>(dinx.vxorsr(v8u(x), shift));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vxorsr(vcast16u(x), shift));
+                return vgeneric<T>(dinx.vxorsr(v16u(x), shift));
             else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dinx.vxorsr(vcast32u(x), shift));
-            else 
-                return vgeneric<T>(dinx.vxorsr(vcast64u(x), shift));
+                return vgeneric<T>(dinx.vxorsr(v32u(x), shift));
+            else if(typeof(T) == typeof(ulong)) 
+                return vgeneric<T>(dinx.vxorsr(v64u(x), shift));
+            else
+                throw unsupported<T>();
         }
-
     }
 }

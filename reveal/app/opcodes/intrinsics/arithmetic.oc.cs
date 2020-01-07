@@ -36,9 +36,6 @@ namespace Z0
 
         public static Vector256<short> sub_g256x16i(Vector256<short> x, Vector256<short> y)
             => ginx.vsub(x,y);
-
-        public static Vector256<short> sub_o256x16i(Vector256<short> x, Vector256<short> y)
-            => OpCapture.vbinary(n256,VX.vsub(n256,z16i),z16i).Invoke(x,y);
     }
 
 }

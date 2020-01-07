@@ -16,15 +16,13 @@ namespace Z0
         protected override string OpName 
             => "sqrt";
 
+        AsmCode<double> Sqrt64f
+            => AsmCode.Parse("0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFB,0x51,0xC0,0xC3", moniker(OpName, z64f), z64f);
+
         public void Verify()
         {
-            var data = "0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFB,0x51,0xC0,0xC3";
-            var code = AsmCode.Parse(data, moniker<double>(OpName));
-            using var buffer = AsmExecBuffer.Create();
-            buffer.Load(code);
-            CheckMatch(buffer.UnaryOp<double>(),fmath.sqrt);                        
+            CheckAsmMatch(fmath.sqrt, Sqrt64f);
         }
-
              
     }
 

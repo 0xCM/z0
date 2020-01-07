@@ -13,7 +13,7 @@ namespace Z0
     public static class Deconstructions
     {
         public static InstructionBlock Instructions(this INativeMemberData src)
-            => Deconstructor.Decode(src.Method.MethodSig().Format(), src.Body);
+            => Deconstructor.Decode(src.Identity, src.Content);
 
         public static IEnumerable<InstructionBlock> Instructions<T>(this IEnumerable<T> src)
             where T : INativeMemberData

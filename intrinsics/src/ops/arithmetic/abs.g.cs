@@ -15,7 +15,7 @@ namespace Z0
 
     partial class ginx
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.SignedInt)]
         public static Vector128<T> vabs<T>(Vector128<T> x)
             where T : unmanaged
         {
@@ -31,7 +31,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.SignedInt)]
         public static Vector256<T> vabs<T>(Vector256<T> x)
             where T : unmanaged
         {

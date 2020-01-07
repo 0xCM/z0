@@ -78,12 +78,6 @@ partial class zfunc
         => terminal.WriteMessage(AppMsg.Define(msg?.ToString() ?? string.Empty, SeverityLevel.Info, caller, file, line));
 
     /// <summary>
-    /// Renders the supplied value to the console with no carriage return
-    /// </summary>
-    public static void write(object x)
-        => terminal.Write(x);
-
-    /// <summary>
     /// Renders terminal content at a specified severiy level
     /// </summary>
     /// <param name="content">The content to print</param>    

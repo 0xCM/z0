@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static Vector128<T> vadd<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vadd_u(x,y);
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static Vector256<T> vadd<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vadd_u(x,y);
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static Vector512<T> vadd<T>(Vector512<T> x, Vector512<T> y)
             where T : unmanaged
                 => (vadd(x.Lo,y.Lo),vadd(x.Hi, y.Hi));
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="a">The value to add to each component</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static Vector128<T> vadd<T>(Vector128<T> x, T a)
             where T : unmanaged
                 => vadd(x, CpuVector.vbroadcast(n128,a));
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="a">The value to add to each component</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static Vector256<T> vadd<T>(Vector256<T> x, T a)
             where T : unmanaged
                 => vadd(x, CpuVector.vbroadcast(n256,a));
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="a">The value to add to each component</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static Vector512<T> vadd<T>(Vector512<T> x, T a)
             where T : unmanaged
                 => vadd(x, CpuVector.vbroadcast(n512,a));

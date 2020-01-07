@@ -12,7 +12,6 @@ namespace Z0
     /// An homogenous immutable 2-tuple
     /// </summary>
     public readonly struct ConstPair<T> : ITuple<ConstPair<T>, T,T>
-        where T : unmanaged
     {
         /// <summary>
         /// The first/left/lo member of the pair

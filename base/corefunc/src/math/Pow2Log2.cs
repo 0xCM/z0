@@ -13,7 +13,7 @@ namespace Z0
     
     public static class Pow2Log2    
     {                
-        public static IEnumerable<(int b, byte p)> Enumerate
+        public static IEnumerable<Pair<int,byte>> Enumerate
             => typeof(Pow2Log2).LiteralValues<byte>();
 
         public const byte L2_T00 = 2*0 >> 1;
