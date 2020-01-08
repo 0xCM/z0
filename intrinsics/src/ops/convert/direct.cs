@@ -69,7 +69,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe Vector256<uint> vconvert(N64 srcbits, in ulong src, N256 w, N32 n)
             => v32u(ConvertToVector256Int32(constptr(in uint8(in src))));
-
     }
-
 }

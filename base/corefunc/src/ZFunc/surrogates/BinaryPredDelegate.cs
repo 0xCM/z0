@@ -11,7 +11,7 @@ namespace Z0
     
     partial class DelegateSurrogates
     {
-        public readonly struct BinaryPred<T> : IBinaryPred<T>
+        public readonly struct BinaryPredSurrogate<T> : IBinaryPred<T>
         {
             public readonly string Name;
 
@@ -19,7 +19,7 @@ namespace Z0
 
 
             [MethodImpl(Inline)]
-            internal BinaryPred(Func<T,T,bit> f, string name)            
+            internal BinaryPredSurrogate(Func<T,T,bit> f, string name)            
             {
                 this.F = f;
                 this.Name = name;

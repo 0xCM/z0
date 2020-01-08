@@ -10,11 +10,23 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
+    /// Characterizes a binary function
+    /// </summary>
+    /// <typeparam name="A">The left operand type</typeparam>
+    /// <typeparam name="B">The right operand type</typeparam>
+    /// <typeparam name="C">The target type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IBinaryFunc<A,B,C> : IFunc<A,B,C>
+    {
+        
+    }
+
+    /// <summary>
     /// Characterizes a binary operator
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IBinaryOp<A> : IFunc<A,A,A>
+    public interface IBinaryOp<A> : IBinaryFunc<A,A,A>
     {
     
     }

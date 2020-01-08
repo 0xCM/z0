@@ -8,24 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static zfunc;    
+    
+    public static partial class mathspan
+    {    
 
-    partial class mathspan
-    {
 
-        public static T min<T>(ReadOnlySpan<T> src)
+
+        [MethodImpl(Inline)]
+        public static Span<T> sqrt<T>(Span<T> src)
             where T : unmanaged
         {
-            if(src.IsEmpty)
-                return default(T);
-            
-            var result = src[0];
-            for(var i = 1; i< src.Length; i++)
-                if(gmath.lt(src[i], result))
-                    result = src[i];
-
-            return result;
+            for(var i=0; i< src.Length; i++)
+                gfp.sqrt(ref src[i]);
+            return src;
         }
 
     }
-
 }

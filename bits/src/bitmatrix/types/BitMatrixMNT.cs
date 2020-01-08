@@ -216,11 +216,11 @@ namespace Z0
 
         public bool Equals(BitMatrix<M,N,T> rhs)        
         {
-            var eq = mathspan.eq<T>(Data, rhs.Data);
-            for(var i = 0; i< eq.Length; i++)
-                if(!eq[i])
+            for(var row = 0; row < RowCount; row++)
+                if(!this[row].Equals(rhs[row]))
                     return false;
-            return true;
+                    
+            return true;            
         }
 
         public override bool Equals(object obj)

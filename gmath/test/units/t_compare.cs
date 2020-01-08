@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
+
     using static SurrogateD;
     using static DelegateSurrogates;
 
@@ -31,9 +32,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void eq_check<T>(BinaryPred<T> expect, T t = default)
+        void eq_check<T>(BinaryPredSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.eq(t), t);
+        {
+            var g = GX.eq(t);
+            CheckBinPredMatch(f, g, t);
+            CheckBinPredSpan(f, g, t);
+        }
 
         public void neq()
         {
@@ -53,9 +58,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void neq_check<T>(BinaryPred<T> expect, T t = default)
+        void neq_check<T>(BinaryPredSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.neq(t), t);
+        {
+            var g = GX.neq(t);
+            CheckBinPredMatch(f, g, t);
+            CheckBinPredSpan(f, g, t);
+
+        }
 
         public void gt()
         {
@@ -75,9 +85,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void gt_check<T>(BinaryPred<T> expect, T t = default)
+        void gt_check<T>(BinaryPredSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.gt(t), t);
+        {
+            var g = GX.gt(t);
+            CheckBinPredMatch(f, g, t);
+            CheckBinPredSpan(f, g, t);
+
+        }
 
         public void gteq()
         {
@@ -92,15 +107,17 @@ namespace Z0
             gteq_check(predicate(math.gteq, name, z64));
             gteq_check(predicate(math.gteq, name, z64i));
             gteq_check(predicate(fmath.gteq, name, z32f));
-            gteq_check(predicate(fmath.gteq, name, z64f));
-
+            gteq_check(predicate(fmath.gteq, name, z64f));            
         }
 
-
-        [MethodImpl(Inline)]
-        void gteq_check<T>(BinaryPred<T> expect, T t = default)
+        void gteq_check<T>(BinaryPredSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.gteq(t), t);
+        {
+            var g = GX.gteq(t);
+            CheckBinPredMatch(f, g, t);
+            CheckBinPredSpan(f, g, t);
+
+        }
 
         public void lt()
         {
@@ -119,10 +136,13 @@ namespace Z0
 
         }
 
-        [MethodImpl(Inline)]
-        void lt_check<T>(BinaryPred<T> expect, T t = default)
+        void lt_check<T>(BinaryPredSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.lt(t), t);
+        {
+            var g = GX.lt(t);
+            CheckBinPredMatch(f, g, t);
+            CheckBinPredSpan(f, g, t);
+        }
 
         public void lteq()
         {
@@ -141,10 +161,13 @@ namespace Z0
 
         }
 
-        [MethodImpl(Inline)]
-        void lteq_check<T>(BinaryPred<T> expect, T t = default)
+        void lteq_check<T>(BinaryPredSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.lteq(t), t);
+        {
+            var g = GX.lteq(t);
+            CheckBinPredMatch(f, g, t);
+            CheckBinPredSpan(f, g, t);
+        }
 
         public void max_check()
         {
@@ -162,11 +185,13 @@ namespace Z0
             max_check(binary(fmath.max, name, z64f));
         }
 
-        [MethodImpl(Inline)]
-        void max_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
+        void max_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.max(t), t);
-
+        {
+            var g = GX.max(t);
+            CheckBinOpMatch(f, g, t);
+            CheckBinOpSpan(f, g, t);
+        }
 
         public void min_check()
         {
@@ -184,10 +209,12 @@ namespace Z0
             min_check(binary(fmath.min, name, z64f));
         }
 
-        [MethodImpl(Inline)]
-        void min_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
+        void min_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.min(t), t);
-
+        {
+            var g = GX.min(t);
+            CheckBinOpMatch(f, g, t);
+            CheckBinOpSpan(f, g, t);
+        }
     }
 }

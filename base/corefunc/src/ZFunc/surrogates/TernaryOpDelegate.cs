@@ -11,14 +11,14 @@ namespace Z0
     
     partial class DelegateSurrogates
     {
-        public readonly struct TernaryOp<T> : ITernaryOp<T>
+        public readonly struct TernaryOpSurrogate<T> : ITernaryOp<T>
         {
             public readonly string Name;
 
             readonly Func<T,T,T,T> F;
 
             [MethodImpl(Inline)]
-            internal TernaryOp(Func<T,T,T,T> f, string name)            
+            internal TernaryOpSurrogate(Func<T,T,T,T> f, string name)            
             {
                 this.F = f;
                 this.Name = name;

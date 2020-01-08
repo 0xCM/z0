@@ -444,5 +444,73 @@ namespace Z0
                 ReportOutcome(casename,succeeded,count);
             }
         }       
+
+        protected void CheckExplicit<F,T>(F f, Block128<T> left, Block128<T> right, Block128<T> dst, string name = null, SystemCounter count = default) 
+            where T : unmanaged
+            where F : IVBinOp128<T>
+        {
+            var casename = name ?? CaseName(f);
+            var w = n128;
+            var t = default(T);
+            var cells = vcount(w,t);
+            var succeeded = true;
+            var blocks = left.BlockCount;
+
+            count.Start();
+            try
+            {
+                for(var block=0; block<blocks; block++)
+                {
+                    var x = left.LoadVector(block);
+                    var y = right.LoadVector(block);
+                    var actual = f.Invoke(x,y);
+                    var expect = dst.LoadVector(block);
+                    Claim.yea(ginx.vsame(actual,expect));
+                }
+            }
+            catch(Exception e)
+            {
+                error(e, casename);
+                succeeded = false;
+            }
+            finally
+            {
+                ReportOutcome(casename, succeeded,count);
+            }
+        }
+
+        protected void CheckExplicit<F,T>(F f, Block256<T> left, Block256<T> right, Block256<T> dst, string name = null, SystemCounter count = default) 
+            where T : unmanaged
+            where F : IVBinOp256<T>
+        {
+            var casename = name ?? CaseName(f);
+            var w = n256;
+            var t = default(T);
+            var cells = vcount(w,t);
+            var succeeded = true;
+            var blocks = left.BlockCount;
+            
+            count.Start();
+            try
+            {
+                for(var block=0; block<blocks; block++)
+                {
+                    var x = left.LoadVector(block);
+                    var y = right.LoadVector(block);
+                    var actual = f.Invoke(x,y);
+                    var expect = dst.LoadVector(block);
+                    Claim.yea(ginx.vsame(actual,expect));
+                }
+            }
+            catch(Exception e)
+            {
+                error(e,casename);
+                succeeded = false;
+            }
+            finally
+            {
+                ReportOutcome(casename,succeeded,count);
+            }
+        }
     }
 }

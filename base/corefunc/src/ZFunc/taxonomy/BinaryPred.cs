@@ -16,7 +16,7 @@ namespace Z0
     /// <typeparam name="A">The first operand type</typeparam>
     /// <typeparam name="B">The second operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IBinaryPred<A,B> : IFunc<A,B,bit>
+    public interface IBinaryPred<A,B> : IBinaryFunc<A,B,bit>
     {
         
     }

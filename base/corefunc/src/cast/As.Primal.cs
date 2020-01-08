@@ -9,59 +9,12 @@ namespace Z0
     
     using static zfunc;
     
-    public static partial class AsIn
-    {
-        [MethodImpl(Inline)]
-        static ref T asRef<T>(in T src)
-            => ref Unsafe.AsRef(in src);
-
-        [MethodImpl(Inline)]
-        public static ref sbyte int8<T>(in T src)
-            => ref Unsafe.As<T,sbyte>(ref asRef(in src));
-
-        [MethodImpl(Inline)]
-        public static ref byte uint8<T>(in T src)
-            => ref Unsafe.As<T,byte>(ref asRef(in src));            
-
-        [MethodImpl(Inline)]
-        public static ref short int16<T>(in T src)
-            => ref Unsafe.As<T,short>(ref asRef(in src));
-
-        [MethodImpl(Inline)]
-        public static ref ushort uint16<T>(in T src)
-            => ref Unsafe.As<T,ushort>(ref asRef(in src));
-
-        [MethodImpl(Inline)]
-        public static ref int int32<T>(in T src)
-            => ref Unsafe.As<T,int>(ref asRef(in src));
-
-        [MethodImpl(Inline)]
-        public static ref uint uint32<T>(in T src)
-            => ref Unsafe.As<T,uint>(ref asRef(in src));
-
-        [MethodImpl(Inline)]
-        public static ref long int64<T>(in T src)
-            => ref Unsafe.As<T,long>(ref asRef(in src));
-
-        [MethodImpl(Inline)]
-        public static ref ulong uint64<T>(in T src)
-            => ref Unsafe.As<T,ulong>(ref asRef(in src));
-
-        [MethodImpl(Inline)]
-        public static ref float float32<T>(in T src)
-            => ref Unsafe.As<T,float>(ref asRef(in src));
-
-        [MethodImpl(Inline)]
-        public static ref double float64<T>(in T src)
-            => ref Unsafe.As<T,double>(ref asRef(in src));
-
-        [MethodImpl(Inline)]
-        public static ref char char16<T>(in T src)
-            => ref Unsafe.As<T,char>(ref asRef(in src));        
-    }
-
     partial class As
     {
+        [MethodImpl(Inline)]
+        public static bit bitval<T>(T src)
+            => Unsafe.As<T,bit>(ref src);        
+
         [MethodImpl(Inline)]
         public static sbyte int8<T>(T src)
             => Unsafe.As<T,sbyte>(ref src);        
@@ -146,7 +99,6 @@ namespace Z0
         public static ref double float64<T>(ref T src)
             => ref Unsafe.As<T,double>(ref src);
 
-
         [MethodImpl(Inline)]
         public static sbyte? int8<T>(T? src)
             where T : unmanaged
@@ -192,7 +144,80 @@ namespace Z0
             where T : unmanaged
                 => Unsafe.As<T?, double?>(ref src);
 
+        [MethodImpl(Inline)]
+        public static T generic<T>(sbyte src)
+            => Unsafe.As<sbyte,T>(ref src);
 
+        [MethodImpl(Inline)]
+        public static ref T generic<T>(ref sbyte src)
+            => ref Unsafe.As<sbyte,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static T generic<T>(byte src)
+            => Unsafe.As<byte,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static ref T generic<T>(ref byte src)
+            => ref Unsafe.As<byte,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static T generic<T>(short src)
+            => Unsafe.As<short,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static ref T generic<T>(ref short src)
+            => ref Unsafe.As<short,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static T generic<T>(ushort src)
+            => Unsafe.As<ushort,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static ref T generic<T>(ref ushort src)
+            => ref Unsafe.As<ushort,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static T generic<T>(int src)
+            => Unsafe.As<int,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static ref T generic<T>(ref int src)
+            => ref Unsafe.As<int,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static T generic<T>(uint src)
+            => Unsafe.As<uint,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static ref T generic<T>(ref uint src)
+            => ref Unsafe.As<uint,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static T generic<T>(long src)
+            => Unsafe.As<long,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static T generic<T>(ulong src)
+            => Unsafe.As<ulong,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static ref T generic<T>(ref long src)
+            => ref Unsafe.As<long,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static ref T generic<T>(ref ulong src)
+            => ref Unsafe.As<ulong,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static T generic<T>(float src)
+            => Unsafe.As<float,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static T generic<T>(double src)
+            => Unsafe.As<double,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static T generic<T>(char src)
+            => Unsafe.As<char,T>(ref src);                 
     }
-
 }

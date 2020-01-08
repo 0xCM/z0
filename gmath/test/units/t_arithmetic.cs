@@ -8,10 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
+
     using static SurrogateD;
+    using static DelegateSurrogates;
     
     public class t_arithmetic : t_gmath<t_arithmetic>
     {
+        
         public void add_check()
         {
             const string name = "add";
@@ -29,11 +32,15 @@ namespace Z0
         }        
 
         [MethodImpl(Inline)]
-        void add_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
+        void add_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.add(t), t);
+        {
+            var g = GX.add(t);
+            var validator = this.BinaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
+        }
         
-
         public void sub_check()
         {
             const string name = "sub";
@@ -50,11 +57,15 @@ namespace Z0
             sub_check(binary(fmath.sub, name, z64f));
         }
 
-
         [MethodImpl(Inline)]
-        void sub_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
+        void sub_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.sub(t), t);
+        {
+            var g = GX.sub(t);
+            var validator = this.BinaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
+        }
 
         public void mul_check()
         {
@@ -73,9 +84,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void mul_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
+        void mul_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.mul(t), t);
+        {
+            var g = GX.mul(t);
+            var validator = this.BinaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
+        }
 
         public void div_check()
         {
@@ -94,9 +110,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void div_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
+        void div_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.div(t), t,true);
+        {
+            var g = GX.div(t);
+            CheckBinOpMatch(f, g, t, true);
+            CheckBinOpSpan(f, g, t,true);
+
+        }
 
         public void mod_check()
         {
@@ -115,9 +136,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void mod_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
+        void mod_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.mod(t), t,true);
+        {
+            var g = GX.mod(t);
+            CheckBinOpMatch(f, g, t,true);
+            CheckBinOpSpan(f, g, t,true);
+        }
 
         public void modmul_check()
         {
@@ -136,9 +161,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void modmul_check<T>(DelegateSurrogates.TernaryOp<T> expect, T t = default)
+        void modmul_check<T>(TernaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckTernaryMatch(expect, GX.modmul(t), t, true);
+        {
+            var g = GX.modmul(t);
+            CheckTernaryOpMatch(f, g, t, true);
+        }
 
 
         public void clamp_check()
@@ -158,9 +186,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void clamp_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
+        void clamp_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.clamp(t), t);
+        {
+            var g = GX.clamp(t);
+            var validator = this.BinaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
+        }
 
         public void inc_check()
         {
@@ -179,9 +212,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void inc_check<T>(DelegateSurrogates.UnaryOp<T> expect, T t = default)
+        void inc_check<T>(UnaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckUnaryMatch(expect, GX.inc(t), t);
+        {
+            var g = GX.inc(t);
+            var validator = this.UnaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);            
+        }
 
         public void dec_check()
         {
@@ -200,9 +238,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void dec_check<T>(DelegateSurrogates.UnaryOp<T> expect, T t = default)
+        void dec_check<T>(UnaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckUnaryMatch(expect, GX.dec(t), t);
+        {
+            var g = GX.dec(t);
+            var validator = this.UnaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);            
+        }
 
         public void negate_check()
         {
@@ -221,9 +264,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void negate_check<T>(DelegateSurrogates.UnaryOp<T> expect, T t = default)
+        void negate_check<T>(UnaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckUnaryMatch(expect, GX.negate(t), t);
+        {
+            var g = GX.negate(t);
+            var validator = this.UnaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);            
+        }
 
         public void abs_check()
         {
@@ -235,13 +283,17 @@ namespace Z0
             abs_check(unary(math.abs, name, z64i));
             abs_check(unary(fmath.abs, name, z32f));
             abs_check(unary(fmath.abs, name, z64f));
-
         }
 
         [MethodImpl(Inline)]
-        void abs_check<T>(DelegateSurrogates.UnaryOp<T> expect, T t = default)
+        void abs_check<T>(UnaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckUnaryMatch(expect, GX.abs(t), t);
+        {
+            var g = GX.abs(t);
+            var validator = this.UnaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);            
+        }
 
         public void check_increments()
         {

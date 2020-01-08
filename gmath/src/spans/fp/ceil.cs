@@ -12,7 +12,6 @@ namespace Z0
 
     partial class mathspan
     {
-
         public static Span<T> ceil<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
         {

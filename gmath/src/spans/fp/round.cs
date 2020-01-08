@@ -22,8 +22,5 @@ namespace Z0
             return dst;
         }
 
-        public static Span<T> round<T>(ReadOnlySpan<T> src, int scale)
-            where T : unmanaged
-                => round(src, scale, span<T>(src.Length));
     }
 }

@@ -27,17 +27,17 @@ namespace Z0.Mkl
 
         public void dot32f()
         {
-            for(var i=0; i< DefaltCycleCount; i++)
+            for(var i=0; i< CycleCount; i++)
             {
-                var x = RVecF32(DefaultRepCount);
-                var y = RVecF32(DefaultRepCount);
+                var x = RVecF32(RepCount);
+                var y = RVecF32(RepCount);
                 Claim.eq(mkl.dot(x,y),dot(x,y));
             }
         }
 
         public void dot32fn()
         {
-            for(var i=0; i< DefaltCycleCount; i++)
+            for(var i=0; i< CycleCount; i++)
             {
                 var x = RVecF32(n256);
                 var y = RVecF32(n256);
@@ -47,17 +47,17 @@ namespace Z0.Mkl
 
         public void dot64f()
         {
-            for(var i=0; i< DefaltCycleCount; i++)
+            for(var i=0; i< CycleCount; i++)
             {
-                var x = RVecF64(DefaultRepCount);
-                var y = RVecF64(DefaultRepCount);
+                var x = RVecF64(RepCount);
+                var y = RVecF64(RepCount);
                 Claim.eq(mkl.dot(x,y),dot(x,y));
             }
         }
 
         public void dot64fn()
         {
-            for(var i=0; i< DefaltCycleCount; i++)
+            for(var i=0; i< CycleCount; i++)
             {
                 var x = RVecF64(n256);
                 var y = RVecF64(n256);                

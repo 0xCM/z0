@@ -19,14 +19,5 @@ namespace Z0
                 dst[i] = gfp.abs(src[i]);
             return dst;
         }
-
-        public static Span<T> abs<T>(ReadOnlySpan<T> src, Span<T> dst)
-            where T : unmanaged
-        {
-            var len = length(src,dst);
-            for(var i=0; i< len; i++)
-                dst[i] = gmath.abs(src[i]);
-            return dst;
-        }
     }
 }

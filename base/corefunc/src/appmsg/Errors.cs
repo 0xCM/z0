@@ -76,9 +76,8 @@ namespace Z0
         public static IndexOutOfRangeException OutOfRange<T>(T value, T min, T max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
                 => new IndexOutOfRangeException($"Value {value} is not between {min} and {max}: line {line}, member {caller} in file {file}");
 
-        [MethodImpl(NotInline)]
-        public static T Throw<T>(string reason, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw AppException.Define(reason, caller,file,line);
+        public static T ThrowNotEqual<T>(T lhs, T rhs)
+            => throw AppException.Define(appMsg($"Equality failed: {lhs} != {rhs}", SeverityLevel.Error));
 
         [MethodImpl(NotInline)]
         public static T ThrowArgException<A,T>(A arg)

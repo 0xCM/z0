@@ -9,11 +9,22 @@ namespace Z0
     using System.Security;
 
     /// <summary>
+    /// Characterizes a unary function
+    /// </summary>
+    /// <typeparam name="A">The source operand type</typeparam>
+    /// <typeparam name="B">The target type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IUnaryFunc<A,B> : IFunc<A,B>
+    {
+
+    }
+
+    /// <summary>
     /// Characterizes a unary operator
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IUnaryOp<A> : IFunc<A,A>
+    public interface IUnaryOp<A> : IUnaryFunc<A,A>
     {
 
     }

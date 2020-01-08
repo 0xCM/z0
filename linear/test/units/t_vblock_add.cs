@@ -72,6 +72,14 @@ namespace Z0
         public void vblock_add_123x64f_bench()
             => vblock_add_bench(L,z64f);
 
+        public static Span<T> add<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
+            where T : unmanaged        
+        {
+            for(var i=0; i< length(lhs,rhs); i++)
+                lhs[i] = gmath.add(lhs[i], rhs[i]);
+            return lhs;
+        }
+
         protected void vblock_add_check<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -81,7 +89,7 @@ namespace Z0
             {
                 var v1 = Random.VectorBlock<N,T>();
                 var v2 = Random.VectorBlock<N,T>();
-                var v3 = RowVector.blockload(mathspan.add(v1.Unsized,v2.Unsized), n);
+                var v3 = RowVector.blockload(add(v1.Unsized,v2.Unsized), n);
                 Linear.add(ref v1, v2);
                 Claim.yea(v3 == v1);
             }

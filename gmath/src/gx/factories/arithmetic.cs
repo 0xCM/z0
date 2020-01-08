@@ -81,6 +81,11 @@ namespace Z0
         public static Abs<T> abs<T>(T t = default)
             where T : unmanaged        
                 => Abs<T>.Op;
+
+        [MethodImpl(Inline)]
+        public static Dist<T> dist<T>(T t = default)
+            where T : unmanaged        
+                => Dist<T>.Op;                 
     }
 
 }

@@ -18,9 +18,41 @@ namespace Z0
     using static As;
     using static zfunc;    
 
-
     partial class dinxfp
     {
+        /// <summary>
+        /// __int64 _mm_cvtss_si64 (__m128 a) CVTSS2SI r64, xmm/m32
+        /// src[0..31] -> r64
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target width</param>
+        /// <param name="t">A target type representative</param>
+        [MethodImpl(Inline)]
+        public static long convert(Vector128<float> src, N64 w, long t = default)
+            => ConvertToInt64(src);
+
+        /// <summary>
+        /// int _mm_cvtss_si32 (__m128 a) CVTSS2SI r32, xmm/m32
+        /// src[0..31] -> r32
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target width</param>
+        /// <param name="t">A target type representative</param>
+        [MethodImpl(Inline)]
+        public static int convert(Vector128<float> src, N32 w, int t = default)
+            => ConvertToInt32(src);
+
+        /// <summary>
+        ///  __int64 _mm_cvtsd_si64 (__m128d a) CVTSD2SI r64, xmm/m64
+        /// src[0..63] -> r64
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target width</param>
+        /// <param name="t">A target type representative</param>
+        [MethodImpl(Inline)]
+        public static long convert(Vector128<double> src, N64 w, long t = default)
+            => ConvertToInt64(src);            
+
         /// <summary>
         /// __m128i _mm_cvttps_epi32 (__m128 a) CVTTPS2DQ xmm, xmm/m128
         /// Converts a floating-point source vector to an 32-bit integer target vector with a loss of precision
@@ -93,7 +125,6 @@ namespace Z0
         public static Vector256<int> convert(Vector256<float> src, N256 w, int t = default)
             =>  ConvertToVector256Int32(src);
 
-
         /// <summary>
         /// __m128i _mm256_cvtpd_epi32 (__m256d a) VCVTPD2DQ xmm, ymm/m256
         /// </summary>
@@ -113,7 +144,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<float> convert(Vector256<double> src, N128 w, float t = default)
             => ConvertToVector128Single(src);
-
     }
-
 }

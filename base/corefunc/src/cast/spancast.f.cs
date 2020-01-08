@@ -32,7 +32,6 @@ partial class zfunc
         where N : unmanaged, ITypeNat
             => NatSpan.load(MemoryMarshal.AsBytes(src),n);
 
-
     /// <summary>
     /// Presents a span of generic values as a span of bytes
     /// </summary>

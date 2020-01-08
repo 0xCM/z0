@@ -195,5 +195,19 @@ namespace Z0
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.abs(a);
         }
+
+        public readonly struct Dist<T> : IFunc<T,T,ulong>
+            where T : unmanaged        
+        {
+            public static Dist<T> Op => default;
+
+            public const string Name = "dist";
+
+            public string Moniker => moniker<T>(Name);
+
+            [MethodImpl(Inline)]
+            public readonly ulong Invoke(T a, T b) => gmath.dist(a,b);
+        }
+
     }
 }

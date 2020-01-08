@@ -100,6 +100,7 @@ namespace Z0
             //Deconstructor.Shred(typeof(math), typeof(fmath), typeof(Bits),typeof(dinx));
             
             Disassemble(new ExperimentalScenarios());
+            Disassemble(typeof(OC.msops));    
             Disassemble(typeof(OC.butterfly));    
             Disassemble(typeof(OC.bitmask));
             Disassemble(typeof(OC.bitmatrix));    

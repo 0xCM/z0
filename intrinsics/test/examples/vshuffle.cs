@@ -160,7 +160,7 @@ namespace Z0
             Claim.eq(expect, dst);
 
             var identity = ShuffleIdentityMask();
-            for(var i=0; i<DefaltCycleCount; i++)
+            for(var i=0; i<CycleCount; i++)
             {
                 var x = Random.CpuVector<byte>(n256);
                 var y = dinx.vshuf16x8(x, identity);

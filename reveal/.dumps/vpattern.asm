@@ -1,4 +1,4 @@
-; 2020-01-05 20:14:03:036
+; 2020-01-08 01:52:29:575
 ; function: Vector128<byte> ones_128x8u()
 ; static ReadOnlySpan<byte> ones_128x8uBytes => new byte[25]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF8,0x57,0xC0,0xC5,0xF0,0x57,0xC9,0xC5,0xF9,0x74,0xC1,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
@@ -58,10 +58,10 @@
 001ch ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<byte> pattern_lanemerge_256x8u()
-; static ReadOnlySpan<byte> pattern_lanemerge_256x8uBytes => new byte[30]{0xC5,0xF8,0x77,0x66,0x90,0x48,0xB8,0x69,0xEF,0xDD,0x7E,0x3C,0x01,0x00,0x00,0xC5,0xFF,0xF0,0x00,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
+; static ReadOnlySpan<byte> pattern_lanemerge_256x8uBytes => new byte[30]{0xC5,0xF8,0x77,0x66,0x90,0x48,0xB8,0x1D,0xE0,0xF0,0xFD,0x8C,0x02,0x00,0x00,0xC5,0xFF,0xF0,0x00,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
-0005h mov rax,13C7EDDEF69h                    ; MOV(Mov_r64_imm64) [RAX,13c7eddef69h:imm64] encoding(10 bytes) = 48 b8 69 ef dd 7e 3c 01 00 00
+0005h mov rax,28CFDF0E01Dh                    ; MOV(Mov_r64_imm64) [RAX,28cfdf0e01dh:imm64] encoding(10 bytes) = 48 b8 1d e0 f0 fd 8c 02 00 00
 000fh vlddqu ymm0,ymmword ptr [rax]           ; VLDDQU(VEX_Vlddqu_ymm_m256) [YMM0,mem(UInt256,RAX:br,:sr)] encoding(VEX, 4 bytes) = c5 ff f0 00
 0013h vmovupd [rcx],ymm0                      ; VMOVUPD(VEX_Vmovupd_ymmm256_ymm) [mem(Packed256_Float64,RCX:br,:sr),YMM0] encoding(VEX, 4 bytes) = c5 fd 11 01
 0017h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
@@ -69,10 +69,10 @@
 001dh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Vector256<ushort> pattern_lanemerge_256x16u()
-; static ReadOnlySpan<byte> pattern_lanemerge_256x16uBytes => new byte[30]{0xC5,0xF8,0x77,0x66,0x90,0x48,0xB8,0x39,0xF1,0xDD,0x7E,0x3C,0x01,0x00,0x00,0xC5,0xFF,0xF0,0x00,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
+; static ReadOnlySpan<byte> pattern_lanemerge_256x16uBytes => new byte[30]{0xC5,0xF8,0x77,0x66,0x90,0x48,0xB8,0xED,0xE1,0xF0,0xFD,0x8C,0x02,0x00,0x00,0xC5,0xFF,0xF0,0x00,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
-0005h mov rax,13C7EDDF139h                    ; MOV(Mov_r64_imm64) [RAX,13c7eddf139h:imm64] encoding(10 bytes) = 48 b8 39 f1 dd 7e 3c 01 00 00
+0005h mov rax,28CFDF0E1EDh                    ; MOV(Mov_r64_imm64) [RAX,28cfdf0e1edh:imm64] encoding(10 bytes) = 48 b8 ed e1 f0 fd 8c 02 00 00
 000fh vlddqu ymm0,ymmword ptr [rax]           ; VLDDQU(VEX_Vlddqu_ymm_m256) [YMM0,mem(UInt256,RAX:br,:sr)] encoding(VEX, 4 bytes) = c5 ff f0 00
 0013h vmovupd [rcx],ymm0                      ; VMOVUPD(VEX_Vmovupd_ymmm256_ymm) [mem(Packed256_Float64,RCX:br,:sr),YMM0] encoding(VEX, 4 bytes) = c5 fd 11 01
 0017h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1

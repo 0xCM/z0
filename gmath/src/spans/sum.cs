@@ -25,6 +25,6 @@ namespace Z0
 
         public static T sum<T>(Span<T> src)
             where T : unmanaged
-            => sum(src.ReadOnly());
+                => sum(src.ReadOnly());
     }
 }

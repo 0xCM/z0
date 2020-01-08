@@ -25,37 +25,44 @@ namespace Z0
         // ~ Scalar conversions
 
         /// <summary>
-        /// __int64 _mm_cvtss_si64 (__m128 a) CVTSS2SI r64, xmm/m32
-        /// src[0..31] -> r64
+        /// int _mm_cvtsi128_si32 (__m128i a)MOVD reg/m32, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline)]
-        public static long convert(Vector128<float> src, N64 w, long t = default)
-            => ConvertToInt64(src);
-
-        /// <summary>
-        /// int _mm_cvtss_si32 (__m128 a) CVTSS2SI r32, xmm/m32
-        /// src[0..31] -> r32
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="w">The target width</param>
-        /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
-        public static int convert(Vector128<float> src, N32 w, int t = default)
+        public static int convert(Vector128<int> src, N32 w, int t = default)
             => ConvertToInt32(src);
 
         /// <summary>
-        ///  __int64 _mm_cvtsd_si64 (__m128d a) CVTSD2SI r64, xmm/m64
-        /// src[0..63] -> r64
+        /// int _mm_cvtsi128_si32 (__m128i a)MOVD reg/m32, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline)]
-        public static long convert(Vector128<double> src, N64 w, long t = default)
-            => ConvertToInt64(src);            
+        public static uint convert(Vector128<uint> src, N32 w, uint t = default)
+            => ConvertToUInt32(src);
+
+        /// <summary>
+        /// __int64 _mm_cvtsi128_si64 (__m128i a)MOVQ reg/m64, xmm
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target width</param>
+        /// <param name="t">A target type representative</param>
+        [MethodImpl(Inline)]
+        public static long convert(Vector128<long> src, N64 w, long t = default)
+            => ConvertToInt64(src);
+
+        /// <summary>
+        /// __int64 _mm_cvtsi128_si64 (__m128i a)MOVQ reg/m64, xmm
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target width</param>
+        /// <param name="t">A target type representative</param>
+        [MethodImpl(Inline)]
+        public static ulong convert(Vector128<ulong> src, N64 w, ulong t = default)
+            => ConvertToUInt64(src);
 
         /// <summary>
         /// __m128i _mm256_cvtpd_epi32 (__m256d a) VCVTPD2DQ xmm, ymm/m256
@@ -88,7 +95,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ulong> convert(Vector128<uint> src, N256 w, ulong t = default)
             => v64u(ConvertToVector256Double(v32i(src)));
-
 
         // ~ 128x8i -> X
         // ~ ------------------------------------------------------------------
@@ -167,7 +173,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<uint> vconvert(Vector128<byte> src, N512 w, uint t = default)        
             => (vmaplo(src, n256, t), vmaphi(src, n256, t));
-
 
         // ~ 128x16i -> X
         // ~ ------------------------------------------------------------------        
@@ -251,7 +256,6 @@ namespace Z0
         
         // ~ 256
         // ~ ------------------------------------------------------------------     
-
 
         /// <summary>
         /// src[i] -> lo[i], i = 1,..,15
@@ -376,6 +380,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<long> vconvert(Vector256<short> src, N512 w, long t = default)
             => (ConvertToVector256Int64(vlo(src)), ConvertToVector256Int64(vhi(src)));
-
     }
 }

@@ -1,4 +1,4 @@
-// 2020-01-05 20:14:02:260
+// 2020-01-08 01:52:28:794
 int convert_g32f_to_g32i(float src)
 {
     IL_0000: ldarg.0
@@ -578,27 +578,6 @@ float convert_g16i_to_g32f(short src)
 {
     IL_0000: ldarg.0
     IL_0001: call System.Single Z0.Converter::convert<System.Int16,System.Single>(System.Int16)
-    IL_0006: ret
-
-}
-double convert_g16i_to_g64f(short src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Double Z0.Converter::convert<System.Int16,System.Double>(System.Int16)
-    IL_0006: ret
-
-}
-Char convert_g16i_to_gch16(short src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Char Z0.Converter::convert<System.Int16,System.Char>(System.Int16)
-    IL_0006: ret
-
-}
-sbyte convert_16u_to_g8i(ushort src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.SByte Z0.Converter::convert<System.UInt16,System.SByte>(System.UInt16)
     IL_0006: ret
 
 }

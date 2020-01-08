@@ -8,11 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
+
     using static SurrogateD;
+    using static DelegateSurrogates;
 
     public class t_bitlogic : t_gmath<t_bitlogic>
     {
-
         public void and_check()
         {
             const string name = "and";
@@ -25,33 +26,16 @@ namespace Z0
             and_check(binary(math.and, name, z32i));
             and_check(binary(math.and, name, z64));
             and_check(binary(math.and, name, z64i));
-
         }
 
-        [MethodImpl(Inline)]
-        void and_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
+        void and_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.and(t), t);
-
-        public void nand_check()
         {
-            const string name = "nand";
-
-            nand_check(binary(math.nand, name, z8));
-            nand_check(binary(math.nand, name, z8i));
-            nand_check(binary(math.nand, name, z16));
-            nand_check(binary(math.nand, name, z16i));
-            nand_check(binary(math.nand, name, z32));
-            nand_check(binary(math.nand, name, z32i));
-            nand_check(binary(math.nand, name, z64));
-            nand_check(binary(math.nand, name, z64i));
-
+            var g = GX.and(t);
+            var validator = this.BinaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
         }
-
-        [MethodImpl(Inline)]
-        void nand_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
-            where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.nand(t), t);
 
         public void or_check()
         {
@@ -65,33 +49,16 @@ namespace Z0
             or_check(binary(math.or, name, z32i));
             or_check(binary(math.or, name, z64));
             or_check(binary(math.or, name, z64i));
-
         }
 
-        [MethodImpl(Inline)]
-        void or_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
+        void or_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.or(t), t);
-
-        public void nor_check()
         {
-            const string name = "nor";
-
-            nor_check(binary(math.nor, name, z8));
-            nor_check(binary(math.nor, name, z8i));
-            nor_check(binary(math.nor, name, z16));
-            nor_check(binary(math.nor, name, z16i));
-            nor_check(binary(math.nor, name, z32));
-            nor_check(binary(math.nor, name, z32i));
-            nor_check(binary(math.nor, name, z64));
-            nor_check(binary(math.nor, name, z64i));
-
+            var g = GX.or(t);
+            var validator = this.BinaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
         }
-
-        [MethodImpl(Inline)]
-        void nor_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
-            where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.nor(t), t);
 
         public void xor_check()
         {
@@ -108,10 +75,60 @@ namespace Z0
 
         }
 
-        [MethodImpl(Inline)]
-        void xor_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
+        void xor_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.xor(t), t);
+        {
+            var g = GX.xor(t);
+            var validator = this.BinaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
+        }
+
+        public void nand_check()
+        {
+            const string name = "nand";
+
+            nand_check(binary(math.nand, name, z8));
+            nand_check(binary(math.nand, name, z8i));
+            nand_check(binary(math.nand, name, z16));
+            nand_check(binary(math.nand, name, z16i));
+            nand_check(binary(math.nand, name, z32));
+            nand_check(binary(math.nand, name, z32i));
+            nand_check(binary(math.nand, name, z64));
+            nand_check(binary(math.nand, name, z64i));
+        }
+
+        void nand_check<T>(BinaryOpSurrogate<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = GX.nand(t);
+            var validator = this.BinaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
+        }
+
+        public void nor_check()
+        {
+            const string name = "nor";
+
+            nor_check(binary(math.nor, name, z8));
+            nor_check(binary(math.nor, name, z8i));
+            nor_check(binary(math.nor, name, z16));
+            nor_check(binary(math.nor, name, z16i));
+            nor_check(binary(math.nor, name, z32));
+            nor_check(binary(math.nor, name, z32i));
+            nor_check(binary(math.nor, name, z64));
+            nor_check(binary(math.nor, name, z64i));
+        }
+
+        void nor_check<T>(BinaryOpSurrogate<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = GX.nor(t);
+            var validator = this.BinaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
+        }
 
         public void xnor_check()
         {
@@ -125,13 +142,16 @@ namespace Z0
             xnor_check(binary(math.xnor, name, z32i));
             xnor_check(binary(math.xnor, name, z64));
             xnor_check(binary(math.xnor, name, z64i));
-
         }
 
-        [MethodImpl(Inline)]
-        void xnor_check<T>(DelegateSurrogates.BinaryOp<T> expect, T t = default)
+        void xnor_check<T>(BinaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckBinaryPredMatch(expect, GX.xnor(t), t);
+        {
+            var g = GX.xnor(t);
+            var validator = this.BinaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
+        }
 
         public void not_check()
         {
@@ -145,14 +165,107 @@ namespace Z0
             not_check(unary(math.not, name, z32i));
             not_check(unary(math.not, name, z64));
             not_check(unary(math.not, name, z64i));
-
         }
 
-        [MethodImpl(Inline)]
-        void not_check<T>(DelegateSurrogates.UnaryOp<T> expect, T t = default)
+        void not_check<T>(UnaryOpSurrogate<T> f, T t = default)
             where  T : unmanaged
-                => CheckUnaryMatch(expect, GX.not(t), t);
+        {
+            var g = GX.not(t);            
+            var validator = this.UnaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);            
+        }
 
+        public void impl_check()
+        {
+            const string name = "impl";
 
+            impl_check(binary(math.impl, name, z8));
+            impl_check(binary(math.impl, name, z8i));
+            impl_check(binary(math.impl, name, z16));
+            impl_check(binary(math.impl, name, z16i));
+            impl_check(binary(math.impl, name, z32));
+            impl_check(binary(math.impl, name, z32i));
+            impl_check(binary(math.impl, name, z64));
+            impl_check(binary(math.impl, name, z64i));
+        }
+
+        void impl_check<T>(BinaryOpSurrogate<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = GX.impl(t);
+            var validator = this.BinaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
+        }
+
+        public void nonimpl_check()
+        {
+            const string name = "nonimpl";
+
+            nonimpl_check(binary(math.nonimpl, name, z8));
+            nonimpl_check(binary(math.nonimpl, name, z8i));
+            nonimpl_check(binary(math.nonimpl, name, z16));
+            nonimpl_check(binary(math.nonimpl, name, z16i));
+            nonimpl_check(binary(math.nonimpl, name, z32));
+            nonimpl_check(binary(math.nonimpl, name, z32i));
+            nonimpl_check(binary(math.nonimpl, name, z64));
+            nonimpl_check(binary(math.nonimpl, name, z64i));
+        }
+
+        void nonimpl_check<T>(BinaryOpSurrogate<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = GX.nonimpl(t);
+            var validator = this.BinaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
+        }
+
+        public void cimpl_check()
+        {
+            const string name = "cimpl";
+
+            cimpl_check(binary(math.cimpl, name, z8));
+            cimpl_check(binary(math.cimpl, name, z8i));
+            cimpl_check(binary(math.cimpl, name, z16));
+            cimpl_check(binary(math.cimpl, name, z16i));
+            cimpl_check(binary(math.cimpl, name, z32));
+            cimpl_check(binary(math.cimpl, name, z32i));
+            cimpl_check(binary(math.cimpl, name, z64));
+            cimpl_check(binary(math.cimpl, name, z64i));
+        }
+
+        void cimpl_check<T>(BinaryOpSurrogate<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = GX.cimpl(t);
+            var validator = this.BinaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
+        }
+
+        public void cnonimpl_check()
+        {
+            const string name = "cnonimpl";
+
+            cnonimpl_check(binary(math.cnonimpl, name, z8));
+            cnonimpl_check(binary(math.cnonimpl, name, z8i));
+            cnonimpl_check(binary(math.cnonimpl, name, z16));
+            cnonimpl_check(binary(math.cnonimpl, name, z16i));
+            cnonimpl_check(binary(math.cnonimpl, name, z32));
+            cnonimpl_check(binary(math.cnonimpl, name, z32i));
+            cnonimpl_check(binary(math.cnonimpl, name, z64));
+            cnonimpl_check(binary(math.cnonimpl, name, z64i));
+        }
+
+        void cnonimpl_check<T>(BinaryOpSurrogate<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = GX.cnonimpl(t);
+            var validator = this.BinaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
+        }
     }
 }

@@ -11,14 +11,14 @@ namespace Z0
     
     partial class DelegateSurrogates
     {
-        public readonly struct UnaryPred<T> : IUnaryPred<T>
+        public readonly struct UnaryPredSurrogate<T> : IUnaryPred<T>
         {
             public readonly string Name;
 
             readonly Func<T,bit> F;
 
             [MethodImpl(Inline)]
-            internal UnaryPred(Func<T,bit> f, string name)            
+            internal UnaryPredSurrogate(Func<T,bit> f, string name)            
             {
                 this.F = f;
                 this.Name = name;

@@ -9,7 +9,7 @@ namespace Z0
  
     using static zfunc;
 
-    partial class OpSurrogates
+    partial class OpReps
     {                
         /// <summary>
         /// Captures a binary operator for which it is a surrogate 

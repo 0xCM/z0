@@ -36,6 +36,14 @@ namespace Z0
         public void vblock_and_n64x64u()
             => vblock_and_check(n64, z64);
 
+        static Block256<T> and<T>(Block256<T> lhs, Block256<T> rhs)
+            where T : unmanaged
+        {
+            var dst = DataBlocks.alloc<T>(n256,lhs.BlockCount);
+            mathspan.and(lhs,rhs, dst.Data);
+            return dst;
+        }            
+
         protected void vblock_and_check<N,T>(N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
@@ -44,7 +52,7 @@ namespace Z0
             var u = Random.VectorBlock(n,t);
             var v = Random.VectorBlock(n,t);
             var result = Linear.and(u, v);            
-            var expect = mathspan.and(u.Data, v.Data);
+            var expect = and(u.Data, v.Data);
             
             Claim.eq(expect.Data, result.Data);
         }

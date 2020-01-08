@@ -370,7 +370,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vector512<T> vgeneric<T>(in Vector512<double> src)
             where T : unmanaged        
-                => ref Unsafe.As<Vector512<double>,Vector512<T>>(ref mutable(in src));
- 
+                => ref Unsafe.As<Vector512<double>,Vector512<T>>(ref mutable(in src)); 
     }
 }

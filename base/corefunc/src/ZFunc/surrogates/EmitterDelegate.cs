@@ -14,14 +14,14 @@ namespace Z0
         /// <summary>
         /// Captures a delegate that is exposed as an emitter
         /// </summary>
-        public readonly struct Emitter<T> : IEmitter<T>
+        public readonly struct EmitterSurrogate<T> : IEmitter<T>
         {
             public readonly string Name;
 
             readonly Func<T> f;
 
             [MethodImpl(Inline)]
-            internal Emitter(Func<T> f, string name)            
+            internal EmitterSurrogate(Func<T> f, string name)            
             {
                 this.f = f;
                 this.Name = name;

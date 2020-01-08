@@ -40,6 +40,13 @@ namespace Z0
         void Configure(ITestConfig config);
 
         bool Enabled {get;}
+
+        string CaseName(IFunc f);
+
+        string CaseName(string fullname);
+
+        int RepCount {get;}
+
     }
 
     public interface IUnitTest : ITestContext

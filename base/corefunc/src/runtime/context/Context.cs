@@ -22,9 +22,6 @@ namespace Z0
         /// </summary>
         public virtual IPolyrand Random {get;}
 
-        protected virtual bool TraceEnabled {get;}
-            = true;
-
         List<AppMsg> Messages {get;} 
             = new List<AppMsg>();
 
@@ -58,15 +55,13 @@ namespace Z0
 
         protected void Trace(string msg, SeverityLevel? severity = null)
         {
-            if(TraceEnabled)
-                Notify(AppMsg.Define($"{msg}", severity ?? SeverityLevel.Babble));
+            Notify(AppMsg.Define($"{msg}", severity ?? SeverityLevel.Babble));
         }
 
         protected void Trace(string title, string msg, int? tpad = null, SeverityLevel? severity = null)
         {
             var titleFmt = tpad.Map(pad => title.PadRight(pad), () => title.PadRight(20));        
-            if(TraceEnabled)
-                Notify(AppMsg.Define($"{titleFmt}: {msg}", severity ?? SeverityLevel.Babble));
+            Notify(AppMsg.Define($"{titleFmt}: {msg}", severity ?? SeverityLevel.Babble));
         }
 
         /// <summary>
@@ -77,8 +72,7 @@ namespace Z0
         /// replaces the exising source message severity prior to queue submission</param>
         protected void Trace(AppMsg msg, SeverityLevel? severity = null)
         {
-            if(TraceEnabled)
-                Notify(msg.WithLevel(severity ?? SeverityLevel.Babble));
+            Notify(msg.WithLevel(severity ?? SeverityLevel.Babble));
         }
 
         /// <summary>
@@ -87,8 +81,7 @@ namespace Z0
         /// <param name="msg">The message to submit</param>
         protected void TracePerf(string msg)
         {
-            if(TraceEnabled)
-                Notify(AppMsg.Define($"{msg}", SeverityLevel.Benchmark));
+            Notify(AppMsg.Define($"{msg}", SeverityLevel.Benchmark));
         }
     }
 }

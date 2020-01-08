@@ -84,7 +84,6 @@ namespace Z0
         public static Vector256<int> vmaphi(Vector128<sbyte> src, N256 w, int t = default)
             => ConvertToVector256Int32(vhi(src));
 
-
         // ~ 128x8u -> X
         // ~ ------------------------------------------------------------------
 
@@ -212,7 +211,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<long> vmaphi(Vector128<short> src, N256 w, long t = default)
             => ConvertToVector256Int64(vhi(src));
-
 
         // ~ 128x16u -> X
         // ~ ------------------------------------------------------------------
@@ -476,7 +474,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ulong> vmaphi(Vector256<uint> src, N256 w, ulong t = default)
             => v64u(ConvertToVector256Int64(vhi(src)));
-
     }
-
 }

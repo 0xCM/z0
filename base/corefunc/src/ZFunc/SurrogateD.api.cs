@@ -27,8 +27,8 @@ namespace Z0
         /// <param name="t">A point representative</param>
         /// <typeparam name="T">The delegate domain/codomain type</typeparam>
         [MethodImpl(Inline)]
-        public static S.UnaryOp<T> unary<T>(Func<T,T> f, string name, T t = default)
-            => new S.UnaryOp<T>(f, name);
+        public static S.UnaryOpSurrogate<T> unary<T>(Func<T,T> f, string name, T t = default)
+            => new S.UnaryOpSurrogate<T>(f, name);
 
         /// <summary>
         /// Captures a delegate and presents it as a binary operator
@@ -38,8 +38,8 @@ namespace Z0
         /// <param name="t">A point representative</param>
         /// <typeparam name="T">The delegate domain/codomain type</typeparam>
         [MethodImpl(Inline)]
-        public static S.BinaryOp<T> binary<T>(Func<T,T,T> f, string name, T t = default)
-            => new S.BinaryOp<T>(f,name);
+        public static S.BinaryOpSurrogate<T> binary<T>(Func<T,T,T> f, string name, T t = default)
+            => new S.BinaryOpSurrogate<T>(f,name);
 
         /// <summary>
         /// Captures a delegate and presents it as a ternary operator
@@ -49,8 +49,8 @@ namespace Z0
         /// <param name="t">A point representative</param>
         /// <typeparam name="T">The delegate domain/codomain type</typeparam>
         [MethodImpl(Inline)]
-        public static S.TernaryOp<T> ternary<T>(Func<T,T,T,T> f, string name, T t = default)
-            => new S.TernaryOp<T>(f, name);
+        public static S.TernaryOpSurrogate<T> ternary<T>(Func<T,T,T,T> f, string name, T t = default)
+            => new S.TernaryOpSurrogate<T>(f, name);
 
         /// <summary>
         /// Captures a delegate and presents it as a unary predicate
@@ -60,8 +60,8 @@ namespace Z0
         /// <param name="t">A point representative</param>
         /// <typeparam name="T">The delegate domain type</typeparam>
         [MethodImpl(Inline)]
-        public static S.UnaryPred<T> predicate<T>(Func<T,bit> f, string name, T t = default)
-            => new S.UnaryPred<T>(f,name);
+        public static S.UnaryPredSurrogate<T> predicate<T>(Func<T,bit> f, string name, T t = default)
+            => new S.UnaryPredSurrogate<T>(f,name);
             
         /// <summary>
         /// Captures a delegate and presents it as a binary predicate
@@ -71,8 +71,8 @@ namespace Z0
         /// <param name="t">A point representative</param>
         /// <typeparam name="T">The delegate domain type</typeparam>
         [MethodImpl(Inline)]
-        public static S.BinaryPred<T> predicate<T>(Func<T,T,bit> f, string name, T t = default)
-            => new S.BinaryPred<T>(f,name);
+        public static S.BinaryPredSurrogate<T> predicate<T>(Func<T,T,bit> f, string name, T t = default)
+            => new S.BinaryPredSurrogate<T>(f,name);
         
         /// <summary>
         /// Captures a delegate and presents it as a binary predicate
@@ -82,8 +82,8 @@ namespace Z0
         /// <param name="t">A point representative</param>
         /// <typeparam name="T">The delegate domain type</typeparam>
         [MethodImpl(Inline)]
-        public static S.Emitter<T> emitter<T>(Func<T> f, string name, T t = default)
-            => new S.Emitter<T>(f,name);        
+        public static S.EmitterSurrogate<T> emitter<T>(Func<T> f, string name, T t = default)
+            => new S.EmitterSurrogate<T>(f,name);        
     }
 
  

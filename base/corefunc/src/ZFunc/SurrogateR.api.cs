@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static zfunc;
-    using C = OpSurrogates;
+    using C = OpReps;
     
     /// <summary>
     /// Defines api surface for creating surrogate operator (R)epresentations

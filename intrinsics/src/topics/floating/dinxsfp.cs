@@ -11,6 +11,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
+    using static System.Runtime.Intrinsics.X86.Sse2.X64;
     using static System.Runtime.Intrinsics.X86.Sse41;    
     using static System.Runtime.Intrinsics.X86.Fma;        
     using static System.Runtime.Intrinsics.X86.Sse.X64;
@@ -23,7 +24,26 @@ namespace Z0
     /// </summary>
     partial class dinxsfp
     {
+        /// <summary>
+        ///  __m128 _mm_load_ss (float const* mem_address) MOVSS xmm, m32
+        /// </summary>
+        /// <param name="x">The source value</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<float> load(float x)
+            => LoadScalarVector128(constptr(x));
 
+        /// <summary>
+        ///  __m128d _mm_load_sd (double const* mem_address) MOVSD xmm, m64
+        /// </summary>
+        /// <param name="x">The source value</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<double> load(double x)
+            => LoadScalarVector128(constptr(x));
+
+        /// <summary>
+        /// void _mm_store_ss (float* mem_addr, __m128 a) MOVSS m32, xmm
+        /// </summary>
+        /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static unsafe float store(Vector128<float> src)
         {
@@ -35,7 +55,7 @@ namespace Z0
         /// <summary>
         /// void _mm_store_sd (double* mem_addr, __m128d a)MOVSD m64, xmm
         /// </summary>
-        /// <param name="src"></param>
+        /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static unsafe double store(Vector128<double> src)
         {
@@ -45,28 +65,12 @@ namespace Z0
         }
 
         /// <summary>
-        ///  __m128 _mm_load_ss (float const* mem_address) MOVSS xmm, m32
-        /// </summary>
-        /// <param name="x"></param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<float> load(float x)
-            => LoadScalarVector128(constptr(x));
-
-        /// <summary>
-        ///  __m128d _mm_load_sd (double const* mem_address) MOVSD xmm, m64
-        /// </summary>
-        /// <param name="x"></param>
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<double> load(double x)
-            => LoadScalarVector128(constptr(x));
-
-        /// <summary>
         ///  __m128d _mm_cvtsi32_sd (__m128d a, int b)CVTSI2SD xmm, reg/m32
         /// </summary>
         /// <param name="x"></param>
         /// <param name="dst"></param>
         [MethodImpl(Inline)]
-        public static ref Vector128<double> load(int x, out Vector128<double> dst)
+        public static ref Vector128<double> convert(int x, out Vector128<double> dst)
         {
             dst = ConvertScalarToVector128Double(default, x);
             return ref dst;
@@ -78,7 +82,7 @@ namespace Z0
         /// <param name="src"></param>
         /// <param name="src"></param>
         [MethodImpl(Inline)]
-        public static ref Vector128<float> load(int src, out Vector128<float> dst)
+        public static ref Vector128<float> convert(int src, out Vector128<float> dst)
         {
             dst = ConvertScalarToVector128Single(default, src);
             return ref dst;
@@ -90,32 +94,44 @@ namespace Z0
         /// <param name="src"></param>
         /// <param name="dst"></param>
         [MethodImpl(Inline)]
-        public static ref Vector128<float> load(long src, out Vector128<float> dst)
+        public static ref Vector128<float> convert(long src, out Vector128<float> dst)
         {
             dst = ConvertScalarToVector128Single(default, src);
             return ref dst;
         }
 
-
-        [MethodImpl(Inline)]
-        public static float to32f(int x)        
-            => ConvertScalarToVector128Single(default, x).GetElement(0);
-
+        /// <summary>
+        /// int _mm_cvtss_si32 (__m128 a) CVTSS2SI r32, xmm/m32
+        /// </summary>
+        /// <param name="x"></param>
         [MethodImpl(Inline)]
         public static unsafe int to32i(float x)
-            => ConvertToInt32WithTruncation(LoadScalarVector128(ptr(ref x)));
+            => ConvertToInt32(LoadScalarVector128(ptr(ref x)));
 
+        /// <summary>
+        /// int _mm_cvtsd_si32 (__m128d a) CVTSD2SI r32, xmm/m64
+        /// </summary>
+        /// <param name="x"></param>
         [MethodImpl(Inline)]
         public static unsafe int to32i(double x)
-            => ConvertToInt32WithTruncation(LoadScalarVector128(ptr(ref x)));
+            => ConvertToInt32(LoadScalarVector128(ptr(ref x)));
 
-        [MethodImpl(Inline)]
-        public static float to32f(long x)        
-            => ConvertScalarToVector128Single(default, x).GetElement(0);
-
+        /// <summary>
+        /// __int64 _mm_cvtss_si64 (__m128 a) CVTSS2SI r64, xmm/m32
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
         [MethodImpl(Inline)]
         public static unsafe long to64i(float x)
-            => ConvertToInt64WithTruncation(LoadScalarVector128(ptr(ref x)));
+            => ConvertToInt64(LoadScalarVector128(ptr(ref x)));
+
+        /// <summary>
+        /// __int64 _mm_cvtsd_si64 (__m128d a) CVTSD2SI r64, xmm/m64
+        /// </summary>
+        /// <param name="x"></param>
+        [MethodImpl(Inline)]
+        public static unsafe long to64i(double x)
+            => ConvertToInt64(LoadScalarVector128(ptr(ref x)));
 
         /// <summary>
         /// __m128 _mm_add_ss (__m128 a, __m128 b)ADDSS xmm, xmm/m32

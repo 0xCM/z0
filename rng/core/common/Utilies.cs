@@ -70,6 +70,11 @@ namespace Z0
                 => domain.ValueOrElse(() => Rng.TypeDomain<T>());
 
         [MethodImpl(Inline)]
+        internal static Interval<T> DefaultDomain<T>()        
+            where T : unmanaged
+                => Rng.TypeDomain<T>();
+
+        [MethodImpl(Inline)]
         static T TypeMin<T>()
             where T : unmanaged
                 => gmath.minval<T>();

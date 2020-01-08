@@ -14,14 +14,14 @@ namespace Z0
         /// <summary>
         /// Captures a delegate that is exposed as a unary operator
         /// </summary>
-        public readonly struct UnaryOp<T> : IUnaryOp<T>
+        public readonly struct UnaryOpSurrogate<T> : IUnaryOp<T>
         {
             public readonly string Name;
 
             readonly Func<T,T> f;
 
             [MethodImpl(Inline)]
-            internal UnaryOp(Func<T,T> f, string name)            
+            internal UnaryOpSurrogate(Func<T,T> f, string name)            
             {
                 this.f = f;
                 this.Name = name;

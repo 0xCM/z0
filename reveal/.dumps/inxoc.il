@@ -1,4 +1,4 @@
-// 2020-01-05 20:14:02:614
+// 2020-01-08 01:52:29:124
 Vector256<short> add_d256x16i(Vector256<short> x, Vector256<short> y)
 {
     IL_0000: ldarg.0
@@ -64,22 +64,6 @@ Vector256<short> sub_g256x16i(Vector256<short> x, Vector256<short> y)
     IL_0001: ldarg.1
     IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.ginx::vsub<System.Int16>(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
     IL_0007: ret
-
-}
-Vector256<short> sub_o256x16i(Vector256<short> x, Vector256<short> y)
-{
-    IL_0000: call Z0.N256 zfunc::get_n256()
-    IL_0005: call Z0.N256 zfunc::get_n256()
-    IL_000A: ldc.i4.0
-    IL_000B: call Z0.VXTypes/Sub256`1<System.Int16> Z0.VX::vsub<System.Int16>(Z0.N256,System.Int16)
-    IL_0010: ldc.i4.0
-    IL_0011: call Z0.OpCaptures/BinaryRep`2<Z0.VXTypes/Sub256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>> Z0.OpCapture::vbinary<Z0.VXTypes/Sub256`1<System.Int16>,System.Int16>(Z0.N256,Z0.VXTypes/Sub256`1<System.Int16>,System.Int16)
-    IL_0016: stloc.0
-    IL_0017: ldloca.s V_0
-    IL_0019: ldarg.0
-    IL_001A: ldarg.1
-    IL_001B: call System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.OpCaptures/BinaryRep`2<Z0.VXTypes/Sub256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>>::Invoke(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
-    IL_0020: ret
 
 }
 ulong vcell_0_256x64u(Vector256<ulong> src)

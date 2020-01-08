@@ -24,7 +24,7 @@ namespace Z0
     }
 
 
-    public static partial class OpSurrogates
+    public static partial class OpReps
     {
 
     }
@@ -33,7 +33,17 @@ namespace Z0
     {
 
     }
+
+    public static partial class As    
+    {
+
+    }
     
+    public static partial class AsIn    
+    {
+
+        
+    }
 
 }
 

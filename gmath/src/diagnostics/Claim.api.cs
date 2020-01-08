@@ -232,12 +232,29 @@ namespace Z0
 
         public static bool eq(double lhs, double rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
+
         public static bool eq(char lhs, char rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs == rhs ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs, rhs, caller, file, line));
 
-        public static bool numeq<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        /// <summary>
+        /// Asserts the equality of two primal values
+        /// </summary>
+        /// <param name="lhs">The first value</param>
+        /// <param name="rhs">The second value</param>
+        /// <typeparam name="T">The primal value type</typeparam>
+        [MethodImpl(Inline)]
+        public static bit numeq<T>(T lhs, T rhs)
             where T : unmanaged 
-                => gmath.eq(lhs,rhs) ? true : throw Errors.Equal(lhs,rhs);
+        {
+            if(typeof(T) == typeof(bit))
+                return As.bitval(lhs) == As.bitval(rhs);
+            else
+            {                
+                if(gmath.neq(lhs,rhs))
+                    Errors.ThrowNotEqual(lhs,rhs);
+                return bit.On;
+            }
+        }
 
         /// <summary>
         /// Asserts content equality for two spans

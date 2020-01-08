@@ -78,6 +78,7 @@ namespace Z0
             }
         }
 
+
         public void bm_and_32x32x32()
         {
             for(var i=0; i<RepCount; i++)
@@ -86,7 +87,7 @@ namespace Z0
                 var B = Random.BitMatrix32();
                 var C = A & B;
 
-                var D = BitMatrix.from(n32,mathspan.and(A.Bytes, B.Bytes));
+                var D = BitMatrix.from(n32,and(A.Bytes, B.Bytes));
                 Claim.yea(C == D);
             }
         }
@@ -99,7 +100,7 @@ namespace Z0
                 var B = Random.BitMatrix64();
                 var C = A & B;
 
-                var D = BitMatrix.primal(n64,mathspan.and(A.Bytes, B.Bytes));
+                var D = BitMatrix.primal(n64,and(A.Bytes, B.Bytes));
                 Claim.yea(C == D);
             }
         }

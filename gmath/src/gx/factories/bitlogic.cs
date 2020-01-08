@@ -51,5 +51,26 @@ namespace Z0
         public static Not<T> not<T>(T t = default)
             where T : unmanaged        
                 => Not<T>.Op;
+
+        [MethodImpl(Inline)]
+        public static Impl<T> impl<T>(T t = default)
+            where T : unmanaged        
+                => Impl<T>.Op;
+
+        [MethodImpl(Inline)]
+        public static NonImpl<T> nonimpl<T>(T t = default)
+            where T : unmanaged        
+                => NonImpl<T>.Op;
+
+        [MethodImpl(Inline)]
+        public static CImpl<T> cimpl<T>(T t = default)
+            where T : unmanaged        
+                => CImpl<T>.Op;
+
+        [MethodImpl(Inline)]
+        public static CNonImpl<T> cnonimpl<T>(T t = default)
+            where T : unmanaged        
+                => CNonImpl<T>.Op;
+
     }
 }

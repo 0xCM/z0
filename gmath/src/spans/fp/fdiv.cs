@@ -28,15 +28,6 @@ namespace Z0
             return lhs;
         }
 
-        public static Span<T> idiv<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-            where T : unmanaged
-        {
-            var len = length(lhs,rhs);
-            for(var i = 0; i< len; i++)
-                dst[i] = gmath.div(lhs[i], rhs[i]);
-            return dst;
-        }
-
         /// <summary>
         /// Computes in-place the quotient of each source element in the left operand and the right operand
         /// </summary>
@@ -51,21 +42,6 @@ namespace Z0
             return src;
         }
 
-        /// <summary>
-        /// Computes integer division between cells in the left and right operands,
-        /// overwriting the left operand cell with the result, i.e., lhs[i] = lhs[i] / rhs[i]
-        /// </summary>
-        /// <param name="lhs">The left integer source</param>
-        /// <param name="rhs">The right integer source</param>
-        /// <typeparam name="T">The primal integer type</typeparam>
-        public static Span<T> idiv<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
-            where T : unmanaged
-        {
-            var len = length(lhs,rhs);
-            for(var i = 0; i< len; i++)
-                lhs[i] = gmath.div(lhs[i], rhs[i]);
-            return lhs;
-        }
 
         /// <summary>
         /// Computes the floating-point quotient of cells in the left and right operands,

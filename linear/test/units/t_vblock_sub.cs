@@ -111,6 +111,15 @@ namespace Z0
             vblock_sub_bench<VecLen,double>();
         }
 
+        static Span<T> sub<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
+            where T : unmanaged
+        {
+            var count = length(lhs,rhs);
+            for(var i = 0; i< count; i++)
+                lhs[i] = gmath.sub(lhs[i], rhs[i]);
+            return lhs;
+        }
+
         void vblock_sub_check<N,T>()
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -121,7 +130,9 @@ namespace Z0
             {
                 var v1 = Random.VectorBlock<N,T>();
                 var v2 = Random.VectorBlock<N,T>();
-                var v3 = RowVector.blockload(mathspan.sub(v1.Unsized,v2.Unsized), n);                
+
+
+                var v3 = RowVector.blockload(sub(v1.Unsized,v2.Unsized), n);                
                 Linear.sub(v1, v2, ref v1);
                 Claim.yea(v3 == v1);
             } 

@@ -103,7 +103,7 @@ namespace Z0
             Claim.yea(permA == permB);
         }
 
-        void perm_invert_check<N>(N n = default, int cycles = DefaltCycleCount)
+        void perm_invert_check<N>(N n = default)
             where N: unmanaged, ITypeNat
         {
             for(var i=0; i<(int)n.NatValue; i++)

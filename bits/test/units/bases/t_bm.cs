@@ -24,7 +24,7 @@ namespace Z0
                 var A = Random.BitMatrix(n,t);
                 var B = Random.BitMatrix(n,t);
                 var C1 = BitMatrix.and(A,B).Data;
-                var C2 = mathspan.and(A.Data, B.Data);
+                var C2 = and(A.Data, B.Data);
                 Claim.eq(A.Order, natval<N>());
                 Claim.eq(B.Order, natval<N>());                
                 Claim.eq(C1,C2);
@@ -49,6 +49,18 @@ namespace Z0
             }
         }
 
+        static Span<T> xor<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+            where T : unmanaged
+        {
+            for(var i=0; i< length(lhs,rhs); i++)
+                dst[i] = gmath.xor(lhs[i], rhs[i]);
+           return dst;        
+        }
+
+        static Span<T> xor<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
+            where T : unmanaged
+                => xor(lhs,rhs, lhs);
+
         protected void bm_xor_check<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -58,7 +70,7 @@ namespace Z0
                 var A = Random.BitMatrix(n,t);
                 var B = Random.BitMatrix(n,t);
                 var C1 = BitMatrix.xor(A, B).Data;
-                var C2 = mathspan.xor(A.Data, B.Data);
+                var C2 = xor(A.Data, B.Data);
                 Claim.eq(A.Order, natval<N>());
                 Claim.eq(B.Order, natval<N>());                
                 Claim.eq(C1,C2);
