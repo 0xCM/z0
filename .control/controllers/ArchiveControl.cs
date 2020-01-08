@@ -90,6 +90,13 @@ namespace Z0
                 archive.Save(m.Descriptor().NativeData.Instructions());
         }
 
+        void Emit(FolderName subject, IEnumerable<MethodInfo> methods)
+        {
+            var archive = AsmArchive.Define(subject);   
+            foreach(var m in methods)   
+                archive.Save(m.Descriptor().NativeData.Instructions());
+        }
+
         void ReifyIntrinsics()
         {
             var host = typeof(ginx);
@@ -129,8 +136,7 @@ namespace Z0
 
         public override void Execute()
         {
-            Emit(typeof(math));
-            
+            Emit(FolderName.Define(nameof(math)),typeof(math).StaticMethods().Concrete().Public().Operators());            
 
         }
 

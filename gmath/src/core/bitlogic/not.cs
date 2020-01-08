@@ -44,62 +44,6 @@ namespace Z0
         public static ulong not(ulong src)
             => ~ src;
 
-        [MethodImpl(Inline)]
-        public static ref sbyte not(ref sbyte src)
-        {
-            src = (sbyte) ~src;
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref byte not(ref byte src)
-        {
-            src = (byte) ~src;
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref short not(ref short src)
-        {
-            src = (short) ~src;
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref ushort not(ref ushort src)
-        {
-            src = (ushort) ~src;
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref int not(ref int src)
-        {
-            src = ~src;
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref uint not(ref uint src)
-        {
-            src = ~src;
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref long not(ref long src)
-        {
-            src = ~src;
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref ulong not(ref ulong src)
-        {
-            src = ~src;
-            return ref src;
-        }
- 
  
     }
 }

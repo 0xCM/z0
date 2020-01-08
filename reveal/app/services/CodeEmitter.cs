@@ -48,7 +48,6 @@ namespace Z0
                 var filename = FileName.Define(asm.FunctionName, "asm");
                 asm.EmitAsm(dst + filename,append);
             }
-
         }
 
         public static void EmitAsm(this IEnumerable<MethodDisassembly> disassembly, FilePath dst)        
@@ -128,7 +127,6 @@ namespace Z0
                     dst.WriteLine(AsmSeparator);
             }
         }
-
 
         static void EmitCil(this IEnumerable<MethodDisassembly> disassembly, StreamWriter dst)
         {

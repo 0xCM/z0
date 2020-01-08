@@ -141,8 +141,8 @@ namespace Z0
                 switch(kind)
                 {
                     case FormatterOutputTextKind.LabelAddress:
-                        var ss = text.Substring(0, text.Length - 1);
-                        if(ulong.TryParse(ss, System.Globalization.NumberStyles.HexNumber,null, out var address))
+                        var x = text.EndsWith(AsciLower.h) ? text.Substring(0, text.Length - 1)  : text;
+                        if(ulong.TryParse(x, System.Globalization.NumberStyles.HexNumber,null, out var address))
                         {
                             var ra = (address - BaseAddress).ToString("x4");
                             var label = $"{ra}h";
@@ -150,9 +150,8 @@ namespace Z0
                         }
                         else
                         {
-                            Writer.Write($"{ss}?");
+                            Writer.Write($"{text}{AsciSym.Question}");
                         }
-                        //var address = ulong.Parse($"{text.Substring(0, text.Length - 1)}", System.Globalization.NumberStyles.HexNumber);
                     break;
                     default:
                         Writer.Write(text);    

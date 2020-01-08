@@ -600,7 +600,6 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static ISet<T> ToSet<T>(this ReadOnlySpan<T> src)        
             => new HashSet<T>(src.ToEnumerable());
-
                 
         /// <summary>
         /// Constructs a span from an array selection
