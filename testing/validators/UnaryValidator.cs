@@ -5,19 +5,7 @@
 namespace Z0
 {
     using System;
-
     using static zfunc;
-
-    public interface IUnaryValidator<T1,T2>
-    {
-        void CheckMatch<F, G>(F baseline, G subject)
-            where F : IUnaryFunc<T1,T2>
-            where G : IUnaryFunc<T1,T2>;        
-
-        void CheckSpan<F, G>(F baseline, G subject)
-            where F : IUnaryFunc<T1,T2>
-            where G : IUnaryFunc<T1,T2>;        
-    }
 
     sealed class UnaryValidator<T1,T2> : Validator, IUnaryValidator<T1,T2>
         where T1 : unmanaged
@@ -45,7 +33,7 @@ namespace Z0
             
             clock.Start();
             try
-            {                
+            {
                 UnaryFunc.apply(subject, lhs, dst);
                 for(var i=0; i<count; i++)
                     Claim.numeq(baseline.Invoke(skip(in leftIn, i)), skip(in target, i));
@@ -90,8 +78,4 @@ namespace Z0
             }
         }
     }
-
-
-
-
 }

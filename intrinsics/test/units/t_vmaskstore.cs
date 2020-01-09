@@ -90,8 +90,6 @@ namespace Z0
                     Claim.eq(z8, storage[i]);
 
 
-
-
             void report()
             {
                 Trace("input", x.Format());            

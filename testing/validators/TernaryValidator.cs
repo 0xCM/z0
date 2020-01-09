@@ -8,18 +8,6 @@ namespace Z0
 
     using static zfunc;
 
-    public interface ITernaryValidator<T1,T2,T3,T4>
-    {
-        void CheckMatch<F, G>(F baseline, G subject)
-            where F : ITernaryFunc<T1,T2,T3,T4>
-            where G : ITernaryFunc<T1,T2,T3,T4>;
-
-        void CheckSpan<F, G>(F baseline, G subject)
-            where F : ITernaryFunc<T1,T2,T3,T4>
-            where G : ITernaryFunc<T1,T2,T3,T4>;        
-    }
-
-
     class TernaryValidator<T1,T2,T3,T4> : Validator, ITernaryValidator<T1,T2,T3,T4>
         where T1 : unmanaged
         where T2 : unmanaged

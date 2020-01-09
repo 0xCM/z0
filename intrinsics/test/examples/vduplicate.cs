@@ -36,8 +36,6 @@ namespace Z0
                 ulong.MaxValue & 0x2222222244444444);
             var y2 = dinx.vduplicate(n0, n64, x2);
             var z2 = dinx.vduplicate(n1,n64, x2);
-        }
-        
-
+        }    
     }
 }

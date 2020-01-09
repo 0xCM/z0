@@ -217,7 +217,6 @@ namespace Z0
             bits[2] = double.IsNaN(vresult[2]);
             bits[3] = double.IsNaN(vresult[3]);
             return bits;
-        }
- 
+        } 
     }
 }

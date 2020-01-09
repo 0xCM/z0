@@ -80,6 +80,5 @@ namespace Z0
                 Claim.eq(xt,y);
             }
         }
-
     }
 }

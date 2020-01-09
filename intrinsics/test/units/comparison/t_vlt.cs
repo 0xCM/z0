@@ -48,7 +48,6 @@ namespace Z0
 
         void v_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VX.vlt(w,t), w, t);            
- 
+                => CheckBinaryScalarMatch(VX.vlt(w,t), w, t); 
     }
 }

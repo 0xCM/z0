@@ -100,7 +100,6 @@ namespace Z0
             Claim.eq(dinx.vcompact(i4x128, n128, z32i), v32i(v4x128));            
         }
 
-
         public void vgather_256()
         {
             Span<uint> data = new uint[Pow2.T09];
@@ -117,9 +116,7 @@ namespace Z0
             var v512Expect = CpuVector.vparts(n256, 0, Pow2.T03 - 1, Pow2.T04 - 1, Pow2.T05 - 1, Pow2.T06 - 1, Pow2.T07 - 1, Pow2.T08 - 1, Pow2.T09 - 1);
             var v512Actual = vgather(n256, in src, VGather256x32x512Index);
             Claim.eq(v512Expect,v512Actual);
-
         }
-
 
         public void vgather_128x32u_blocks()
         {                
@@ -215,5 +212,4 @@ namespace Z0
         };
 
     }
-
 }

@@ -8,17 +8,6 @@ namespace Z0
 
     using static zfunc;
 
-    public interface IBinaryValidator<T1,T2,T3>
-    {
-        void CheckMatch<F, G>(F baseline, G subject)
-            where F : IBinaryFunc<T1,T2,T3>
-            where G : IBinaryFunc<T1,T2,T3>;        
-
-        void CheckSpan<F, G>(F baseline, G subject)
-            where F : IBinaryFunc<T1,T2,T3>
-            where G : IBinaryFunc<T1,T2,T3>;        
-    }
-
     class BinaryValidator<T1,T2,T3> : Validator, IBinaryValidator<T1,T2,T3>
         where T1 : unmanaged
         where T2 : unmanaged
@@ -96,8 +85,5 @@ namespace Z0
                 Context.ReportOutcome(casename, succeeded, clock);
             }
         }
-
     }
-
-
 }

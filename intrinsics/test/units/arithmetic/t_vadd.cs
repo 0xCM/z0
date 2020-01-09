@@ -43,10 +43,14 @@ namespace Z0
 
         void vadd_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VX.vadd(w,t),w,t);
+        {
+            CheckBinaryScalarMatch(VX.vadd(w,t),w,t);
+        }
             
         void vadd_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckBinaryScalarMatch(VX.vadd(w,t),w,t);
+        {
+            CheckBinaryScalarMatch(VX.vadd(w,t),w,t);
+        }
     }
 }

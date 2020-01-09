@@ -90,8 +90,6 @@ namespace Z0
                 
                 Claim.yea(ginx.vtestz(x,mask));
             }
-        }
-            
-
+        }            
     }
 }

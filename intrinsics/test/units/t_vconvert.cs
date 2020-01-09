@@ -23,7 +23,6 @@ namespace Z0
             Claim.eq(blockB,blockC);            
         }
 
-
         public void block_64x8u_to_2x128x32u()
         {
             var block = DataBlocks.parts<byte>(n64,1,2,3,4,5,6,7,8);
@@ -131,7 +130,6 @@ namespace Z0
                 for(var j = 0; j < tb.BlockLength; j++, i++)
                     Claim.eq(sb[i],convert(tb[block,j],st));
             }
-
         }
 
         public void vconvert_128x8u_2x128x16u()
