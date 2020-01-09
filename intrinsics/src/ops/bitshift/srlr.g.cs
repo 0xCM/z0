@@ -19,61 +19,61 @@ namespace Z0
         /// by an amount specified in the first component of the offset vector
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The offset vector</param>
+        /// <param name="count">The offset vector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
-        public static Vector128<T> vsrlr<T>(Vector128<T> x, Vector128<T> offset)
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        public static Vector128<T> vsrlr<T>(Vector128<T> x, Vector128<T> count)
             where T : unmanaged
-                => vsrlr_u(x,offset);
+                => vsrlr_u(x,count);
 
         /// <summary>
         /// A register-based shift (as opposed to immediate-based) that shifts each source vector component rightwards 
         /// by an amount specified in the first component of the offset vector
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The offset vector</param>
+        /// <param name="count">The offset vector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
-        public static Vector256<T> vsrlr<T>(Vector256<T> x, Vector256<T> offset)
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        public static Vector256<T> vsrlr<T>(Vector256<T> x, Vector256<T> count)
             where T : unmanaged
-                => vsrlr_u(x,offset);
+                => vsrlr_u(x,count);
 
         /// <summary>
         /// Shifts each source vector component rightwards by a specified offset via the register-based shift-right instruction
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The offset amount</param>
+        /// <param name="count">The offset amount</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
-        public static Vector128<T> vsrlr<T>(Vector128<T> x, T offset)
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        public static Vector128<T> vsrlr<T>(Vector128<T> x, T count)
             where T : unmanaged
-                => vsrlr_u(x,offset);
+                => vsrlr_u(x,count);
 
         /// <summary>
         /// Shifts each source vector component rightwards by a specified offset via the register-based shift-right instruction
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The offset amount</param>
+        /// <param name="count">The offset amount</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
-        public static Vector256<T> vsrlr<T>(Vector256<T> x, T offset)
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        public static Vector256<T> vsrlr<T>(Vector256<T> x, T count)
             where T : unmanaged
-                => vsrlr_u(x,offset);
+                => vsrlr_u(x,count);
 
         [MethodImpl(Inline)]
-        static Vector128<T> vsrlr_u<T>(Vector128<T> x, Vector128<T> offset)
+        static Vector128<T> vsrlr_u<T>(Vector128<T> x, Vector128<T> count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vsrlr(vcast8u(x), vcast8u(offset)));
+                return vgeneric<T>(dinx.vsrlr(vcast8u(x), vcast8u(count)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vsrlr(vcast16u(x), vcast16u(offset)));
+                return vgeneric<T>(dinx.vsrlr(vcast16u(x), vcast16u(count)));
             else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dinx.vsrlr(vcast32u(x), vcast32u(offset)));
+                return vgeneric<T>(dinx.vsrlr(vcast32u(x), vcast32u(count)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vsrlr(vcast64u(x), vcast64u(offset)));
+                return vgeneric<T>(dinx.vsrlr(vcast64u(x), vcast64u(count)));
             else 
-                return vsrlr_i(x,offset);
+                return vsrlr_i(x,count);
         }
 
         [MethodImpl(Inline)]

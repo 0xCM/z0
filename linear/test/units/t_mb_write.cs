@@ -33,7 +33,7 @@ namespace Z0.Test
             where T : unmanaged    
         {
             var folder = FolderName.Define("matrices");
-            var isFp = floating<T>();
+            var isFp = Classified.floating<T>();
             for(var i=0; i< count; i++)
             {
                                 

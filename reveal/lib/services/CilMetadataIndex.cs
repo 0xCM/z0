@@ -15,9 +15,9 @@ namespace Z0
     
     using static zfunc;
     
-    public class MetadataIndex
+    public class CilMetadataIndex
     {                            
-        public static MetadataIndex Create(params Assembly[] assemblies)
+        public static CilMetadataIndex Create(params Assembly[] assemblies)
         {
             var modules = from a in assemblies
                           from m in a.Modules
@@ -25,8 +25,8 @@ namespace Z0
             return Create(modules.ToArray());
         }
         
-        public static MetadataIndex Create(params Module[] modules)
-            => new MetadataIndex(modules);
+        public static CilMetadataIndex Create(params Module[] modules)
+            => new CilMetadataIndex(modules);
 
         ConcurrentDictionary<int, ModuleDefMD> ModuleIndex 
             = new ConcurrentDictionary<int, ModuleDefMD>();
@@ -37,19 +37,23 @@ namespace Z0
         ConcurrentDictionary<int, CilFuncSpec> CilIndex 
             = new ConcurrentDictionary<int, CilFuncSpec>();
 
-        MetadataIndex(params Module[] modules)
+        CilMetadataIndex(params Module[] modules)
         {
             iter(modules, IndexModule);
         }
 
-        public Option<CilFuncSpec> FindCil(int methodId)
+        Option<CilFuncSpec> FindCil(int methodId)
             => CilIndex.TryFind(methodId);
 
         public Option<CilFuncSpec> FindCil(MethodInfo mi)
-            => FindCil(mi.MetadataToken);
+            => from m in FindCil(mi.MetadataToken)
+                let result = m.WithSig(mi.Signature())
+                select result;
+
+            //=> FindCil(mi.MetadataToken);
 
         [MethodImpl(Inline)]
-        public Option<TypeDef> FindType(int typeId)
+        Option<TypeDef> FindType(int typeId)
         {
             if(TypeIndex.TryGetValue(typeId, out TypeDef td))
                 return td;
@@ -113,7 +117,7 @@ namespace Z0
         {
             var mid = (int)md.MDToken.Raw;
             var instructions = md.Body.Instructions.ToReadOnlyList();
-            var mcil = new CilFuncSpec(mid, md.FullName, instructions);
+            var mcil = new CilFuncSpec(mid, md.FullName, md.ImplAttributes, instructions);
             return mcil;
         }
         
@@ -126,7 +130,7 @@ namespace Z0
         }
 
         void IndexMethod(MethodDef md)
-        {
+        {            
             var mid = (int)md.MDToken.Raw;
             Claim.yea(MethodIndex.TryAdd(mid, md));
             if(md.HasBody && md.Body.HasInstructions)

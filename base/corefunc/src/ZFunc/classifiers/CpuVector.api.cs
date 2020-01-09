@@ -8,11 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
+    using System.Reflection;
+    using System.Linq;
 
     using static zfunc;
 
     partial class Classified
     {
+
         [MethodImpl(Inline)]
         public static CpuVectorKind vectorkind<T>(T t = default)
             where T : struct

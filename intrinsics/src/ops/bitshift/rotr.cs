@@ -13,76 +13,76 @@ namespace Z0
     partial class dinx
     {                
         /// <summary>
-        /// Rotates each component the source vector rightwards by a constant shift
+        /// Rotates each component the source vector rightwards by a constant count
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The magnitude of the rotation</param>
+        /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vrotr(Vector128<byte> src, byte shift)
-            => dinx.vor(dinx.vsrl(src, shift),dinx.vsll(src, (byte)(8 - shift)));             
+        public static Vector128<byte> vrotr(Vector128<byte> src, [Imm] byte count)
+            => dinx.vor(dinx.vsrl(src, count),dinx.vsll(src, (byte)(8 - count)));             
 
         /// <summary>
-        /// Rotates each component the source vector rightwards by a constant shift
+        /// Rotates each component the source vector rightwards by a constant count
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The magnitude of the rotation</param>
+        /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vrotr(Vector128<ushort> src, byte shift)
-            => dinx.vor(dinx.vsrl(src, shift),dinx.vsll(src, (byte)(16 - shift)));             
+        public static Vector128<ushort> vrotr(Vector128<ushort> src, [Imm] byte count)
+            => dinx.vor(dinx.vsrl(src, count),dinx.vsll(src, (byte)(16 - count)));             
 
         /// <summary>
-        /// Rotates each component the source vector rightwards by a constant shift
+        /// Rotates each component the source vector rightwards by a constant count
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The magnitude of the rotation</param>
+        /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vrotr(Vector128<uint> src, byte shift)
-            => dinx.vor(dinx.vsrl(src, shift),dinx.vsll(src, (byte)(32 - shift)));             
+        public static Vector128<uint> vrotr(Vector128<uint> src, [Imm] byte count)
+            => dinx.vor(dinx.vsrl(src, count),dinx.vsll(src, (byte)(32 - count)));             
 
         /// <summary>
-        /// Rotates each component the source vector rightwards by a constant shift
+        /// Rotates each component the source vector rightwards by a constant count
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The magnitude of the rotation</param>
+        /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vrotr(Vector128<ulong> src, byte shift)
-            => dinx.vor(dinx.vsrl(src, shift),dinx.vsll(src, (byte)(64 - shift)));             
+        public static Vector128<ulong> vrotr(Vector128<ulong> src, [Imm] byte count)
+            => dinx.vor(dinx.vsrl(src, count),dinx.vsll(src, (byte)(64 - count)));             
 
         /// <summary>
-        /// Rotates each component the source vector rightwards by a specified shift
+        /// Rotates each component the source vector rightwards by a specified count
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The magnitude of the rotation</param>
+        /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> vrotr(Vector256<byte> src, byte shift)
-            => dinx.vor(dinx.vsrl(src, shift),dinx.vsll(src, (byte)(8 - shift)));             
+        public static Vector256<byte> vrotr(Vector256<byte> src, [Imm] byte count)
+            => dinx.vor(dinx.vsrl(src, count),dinx.vsll(src, (byte)(8 - count)));             
 
         /// <summary>
-        /// Rotates each component the source vector rightwards by a specified shift
+        /// Rotates each component the source vector rightwards by a specified count
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The magnitude of the rotation</param>
+        /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vrotr(Vector256<ushort> src, byte shift)
-            => dinx.vor(dinx.vsrl(src, shift),dinx.vsll(src, (byte)(16 - shift)));             
+        public static Vector256<ushort> vrotr(Vector256<ushort> src, [Imm] byte count)
+            => dinx.vor(dinx.vsrl(src, count),dinx.vsll(src, (byte)(16 - count)));             
 
         /// <summary>
-        /// Rotates each component the source vector rightwards by a constant shift
+        /// Rotates each component the source vector rightwards by a constant count
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The magnitude of the rotation</param>
+        /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vrotr(Vector256<uint> src, byte shift)
-            => dinx.vor(dinx.vsrl(src, shift),dinx.vsll(src, (byte)(32 - shift)));             
+        public static Vector256<uint> vrotr(Vector256<uint> src, [Imm] byte count)
+            => dinx.vor(dinx.vsrl(src, count),dinx.vsll(src, (byte)(32 - count)));             
 
         /// <summary>
-        /// Rotates each component the source vector rightwards by a constant shift
+        /// Rotates each component the source vector rightwards by a constant count
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The magnitude of the rotation</param>
+        /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vrotr(Vector256<ulong> src, byte shift)
-            => dinx.vor(dinx.vsrl(src, shift),dinx.vsll(src, (byte)(64 - shift)));             
+        public static Vector256<ulong> vrotr(Vector256<ulong> src, [Imm] byte count)
+            => dinx.vor(dinx.vsrl(src, count),dinx.vsll(src, (byte)(64 - count)));             
 
         static Vector256<ulong> Vector256u64 
         {

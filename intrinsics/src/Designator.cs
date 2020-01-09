@@ -22,8 +22,7 @@ namespace Z0.Designators
                 nameof(vadd), nameof(vsub), nameof(vnegate), nameof(vinc), nameof(vdec), 
                 nameof(vgt), nameof(vlt),
                 
-                nameof(vand), nameof(vor), nameof(vxor),
-                nameof(vnand), nameof(vnor), nameof(vxnor),
+                nameof(vand), nameof(vor), nameof(vxor), nameof(vnand), nameof(vnor), nameof(vxnor),
                 nameof(vxornot),
                 nameof(vimpl), nameof(vnonimpl), nameof(vcimpl), nameof(vcnonimpl), 
                 nameof(vnot),
@@ -32,6 +31,12 @@ namespace Z0.Designators
                 nameof(vselect) 
                 );
             
+        public override IEnumerable<Type> ApiProviders
+            => items(
+                typeof(ginx), typeof(dinx), 
+                typeof(dinxfp), typeof(ginxfp), 
+                typeof(ginxsfp), typeof(dinxsfp)
+                );
 
     }
 

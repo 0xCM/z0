@@ -40,7 +40,7 @@ namespace Z0
 
         readonly ClrRuntime Runtime;
 
-        readonly MetadataIndex MdIx;
+        readonly CilMetadataIndex MdIx;
 
         /// <summary>
         /// Disassembles reified methods declared by the source type
@@ -152,7 +152,7 @@ namespace Z0
         {
             Target = DataTarget.AttachToProcess(Process.GetCurrentProcess().Id, uint.MaxValue, AttachFlag.Passive);
             Runtime = CreateRuntime(Target);
-            MdIx = MetadataIndex.Create(modules.ToArray());
+            MdIx = CilMetadataIndex.Create(modules.ToArray());
         }
 
         /// <summary>

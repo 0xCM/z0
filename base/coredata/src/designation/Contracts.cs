@@ -52,6 +52,11 @@ namespace Z0
         Assembly DeclaringAssembly {get;}
 
         /// <summary>
+        /// The types in the assembly that define the public api surface
+        /// </summary>
+        IEnumerable<Type> ApiProviders {get;}
+
+        /// <summary>
         /// The assembly role
         /// </summary>
         AssemblyRole Role

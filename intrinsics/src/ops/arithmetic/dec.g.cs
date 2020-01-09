@@ -14,7 +14,7 @@ namespace Z0
     
     partial class ginx
     {
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
         public static Vector128<T> vdec<T>(Vector128<T> src)
             where T : unmanaged
         {
@@ -32,7 +32,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
         public static Vector256<T> vdec<T>(Vector256<T> src)
             where T : unmanaged
         {

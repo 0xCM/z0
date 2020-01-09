@@ -83,7 +83,7 @@ namespace Z0
         public bool IsSignExtended
         {
             [MethodImpl(Inline)]
-            get => signed<T>();
+            get => Classified.signed<T>();
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Z0
         public Imm<S> SignExtend<S>()
             where S : unmanaged
         {
-            if (this.IsSignExtended || !signed<S>())
+            if (this.IsSignExtended || !Classified.signed<S>())
                 throw new NotSupportedException();
             return new Imm<S>(convert<T,S>(Value, out S dst));
         }

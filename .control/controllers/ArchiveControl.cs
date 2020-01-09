@@ -29,13 +29,30 @@ namespace Z0
 
         FolderPath Location {get;}
 
-        public void Save(AsmCode asm)
+        public void SaveAsm(AsmCode asm)
             => Paths.AsmHexPath(Subject, asm.Name).WriteText(asm.Format());
         
-        public void Save(InstructionBlock block, Moniker m)
+        public void SaveAsm(InstructionBlock block, Moniker m)
         {
             Paths.AsmDetailPath(Subject, m).WriteText(block.Format());
-            Save(AsmCode.Load(block.Encoded, m));
+            SaveAsm(AsmCode.Load(block.Encoded, m));
+        }
+
+        void SaveCil(CilFuncSpec cil, Moniker m)
+        {
+            Paths.CilPath(Subject,m).WriteText(cil.Format());
+        }
+
+        public void Save(Operation op, CilFuncSpec cil = null)
+        {
+            SaveAsm(op.NativeData.Instructions(), op.Moniker);
+            if(cil != null)
+                SaveCil(cil, op.Moniker);            
+        }
+
+        public void Clear()
+        {
+            Location.DeleteFiles();
         }
 
         public AsmCode ReadCode(Moniker m)
@@ -47,71 +64,35 @@ namespace Z0
 
     class ArchiveControl : Controller<ArchiveControl>
     {        
-        static IEnumerable<Operation> GenericOperators(int w, Type arg)
-            => typeof(ginx).StaticMethods().OpenGeneric().Operators().Vectorized(w).Select(m => m.Descriptor(arg));
-
-        void DisplayIntrinsics(int w, Type arg)        
+        void Reify(IAssemblyDesignator designator)
         {
-            foreach(var opsig in GenericOperators(w,arg))
-                print(appMsg($"{opsig.FormatMapping()} (moniker: {opsig.Moniker})"));
-        }
-
-        void ReifyIntrinsics(Type host, IEnumerable<string> opnames, IEnumerable<int> widths, IEnumerable<Type> args)
-        {            
-            var archive = AsmArchive.Define(FolderName.Define(host.Name));
-            foreach(var opname in opnames)
+            var metadata = CilMetadataIndex.Create(designator.DeclaringAssembly);
+            foreach(var api in designator.ApiProviders)
             {
-                foreach(var w in widths)
+                var archive = AsmArchive.Define(FolderName.Define(api.Name));
+                archive.Clear();
+                foreach(var opname in designator.OpNames)
                 {
-                    var methods = host.StaticMethods().WithName(opname).OpenGeneric().Vectorized(w,true).ToArray();
+                    var methods = api.StaticMethods().WithName(opname).ToArray();
                     foreach(var method in methods)
-                    foreach(var arg in args)
                     {
-                        var descriptor = method.Descriptor(arg);
-                        archive.Save(descriptor.NativeData.Instructions(), descriptor.Moniker);
+                        if(method.IsOpenGeneric())
+                        {
+                            var args = method.SupportedPrimals().Select(x => x.PrimalType()).ToArray();
+                            if(args.Length == 0)
+                                args = Classified.IntegralKinds.Select(k => k.PrimalType()).ToArray();
+                            foreach(var arg in args)
+                            {
+                                var d = method.Descriptor(arg);
+                                archive.Save(d,metadata.FindCil(d.Method).ValueOrDefault());
+                            }
+                        }
+                        else
+                        {
+                            var d = method.Descriptor();
+                            archive.Save(d,metadata.FindCil(d.Method).ValueOrDefault());
+                        }
                     }
-                }
-            }
-        }
-
-        void ReifyIntrinsics()
-        {            
-            var gArchive = AsmArchive.Define(FolderName.Define(typeof(ginx).Name));
-            var dArchive = AsmArchive.Define(FolderName.Define(typeof(dinx).Name));
-            var opnames = Designate("z0.intrinsics").Require().OpNames.ToHashSet();
-            var generics = typeof(ginx).StaticMethods().WithName(opnames).Operators().Unblocked().Public().OpenGeneric().ToArray();
-
-            foreach(var g in generics)
-            {
-                var args = g.SupportedPrimals().ToArray();
-                if(args.Length == 0)
-                    args = Classified.IntegralKinds.ToArray();
-                
-                foreach(var arg in args)
-                {
-                    var descriptor = g.Descriptor(arg.PrimalType());
-                    gArchive.Save(descriptor.NativeData.Instructions(), descriptor.Moniker);                                        
-                }
-            }
-
-            foreach(var direct in typeof(dinx).StaticMethods().Public().WithName(opnames).ToArray())
-            {
-                var descriptor = direct.Descriptor();
-                dArchive.Save(descriptor.NativeData.Instructions(), descriptor.Moniker);
-            }
-        }
-
-        void ReifyPrimal(Type host, IEnumerable<string> opnames, IEnumerable<Type> args)
-        {
-            var archive = AsmArchive.Define(FolderName.Define(host.Name));
-            foreach(var opname in opnames)
-            {
-                var methods = host.StaticMethods().WithName(opname).OpenGeneric().ToArray();
-                foreach(var method in methods)
-                foreach(var arg in args)
-                {
-                    var d = method.Descriptor(arg);
-                    archive.Save(d.NativeData.Instructions(),d.Moniker);
                 }
             }
         }
@@ -122,59 +103,20 @@ namespace Z0
             foreach(var method in methods)
             {
                 foreach(var arg in args)
-                {
-                    
+                {                    
                     var d = method.Descriptor(arg);
-                    archive.Save(d.NativeData.Instructions(),d.Moniker);
+                    archive.SaveAsm(d.NativeData.Instructions(),d.Moniker);
                 }
             }
-        }
-
-        void Emit(Type host)
-        {
-            var archive = AsmArchive.Define(FolderName.Define(host.Name));
-            foreach(var m in host.StaticMethods())   
-            {
-                var d = m.Descriptor();
-                archive.Save(d.NativeData.Instructions(),d.Moniker);
-            }
-        }
-
-        void Emit(FolderName subject, IEnumerable<MethodInfo> methods)
-        {
-            var archive = AsmArchive.Define(subject);   
-            foreach(var m in methods)   
-            {
-                var d = m.Descriptor();
-                archive.Save(d.NativeData.Instructions(), d.Moniker);
-            }
-        }
-
-        void EmitPrimal()
-        {                    
-            
-            var opnames = Designate("z0.gmath").Require().OpNames.ToHashSet();
-            ReifyGeneric(FolderName.Define(nameof(gmath)), typeof(gmath).StaticMethods().Public().WithName(opnames).OpenGeneric(), Classified.IntegralTypes);
-            Emit(FolderName.Define(nameof(math)), typeof(math).StaticMethods().Public().Concrete().WithName(opnames));
-                        
-
-        }
-
-        void ReifyPrimalBits()
-        {
-            var host = typeof(gbits);
-            var opnames = new string[]{
-                nameof(gbits.ntz),nameof(gbits.nlz),
-                };
-            ReifyPrimal(host, opnames, Classified.UnsignedTypes);
-
         }
 
 
         public override void Execute()
         {
-            ReifyIntrinsics();
-            //Emit(FolderName.Define(nameof(math)),typeof(math).StaticMethods().Concrete().Public().Operators());            
+            Reify(Designate("z0.intrinsics").Require());
+            Reify(Designate("z0.gmath").Require());
+            
+
 
         }
 

@@ -16,6 +16,56 @@ using static Z0.ReflectionFlags;
 partial class zfunc
 {
     /// <summary>
+    /// Returns the System.Type of the supplied parametric type
+    /// </summary>
+    /// <param name="t">A representative value</param>
+    /// <typeparam name="T">The source type</typeparam>
+    [MethodImpl(Inline)]
+    public static Type type<T>(T t = default) 
+        => typeof(T);
+
+    /// <summary>
+    /// Gets the assembly in which a parametric type is defined
+    /// </summary>
+    /// <typeparam name="T">The type to be examined</typeparam>
+    [MethodImpl(Inline)]
+    public static Assembly assembly<T>(T t = default)
+        => typeof(T).Assembly;
+
+    /// <summary>
+    /// Returns 1 if the two parameteric types are the same, 0 otherwise
+    /// </summary>
+    /// <typeparam name="S">The first type</typeparam>
+    /// <typeparam name="T">The second type</typeparam>
+    [MethodImpl(Inline)]
+    public static bit typematch<S,T>(S s = default, T t = default)
+        => typeof(S) == typeof(T);
+
+    /// <summary>
+    /// Specifies the generic type definition for a specified generic type
+    /// </summary>
+    [MethodImpl(Inline)]   
+    public static Type typedef(Type t)
+        => t.GetGenericTypeDefinition();
+
+    /// <summary>
+    /// Returns the display name of the supplied type
+    /// </summary>
+    /// <param name="full">Whether the full name should be returned</param>
+    /// <typeparam name="T">The source type</typeparam>
+    [MethodImpl(Inline)]   
+    public static string typename<T>(T t = default)
+        => typeof(T).DisplayName();
+
+    /// <summary>
+    /// Returns the display name of the source type
+    /// </summary>
+    /// <typeparam name="T">The source type</typeparam>
+    [MethodImpl(Inline)]   
+    public static string label<T>(T t = default)
+        => typeof(T).DisplayName();
+
+    /// <summary>
     /// Creates an instance of a specified type
     /// </summary>
     /// <param name="t">The type of the instance to create</param>

@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="pos">The position of the bit for which rank will be calculated</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
         public static uint rank<T>(T src, int pos)
             where T : unmanaged
         {

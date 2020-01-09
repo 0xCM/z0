@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="value">The value to be applied</param>
         /// <typeparam name="T">The source element type</typeparam>
         /// <remarks>See https://stackoverflow.com/questions/17803889/set-or-reset-a-given-bit-without-branching</remarks>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
         public static T setnb<T>(T src, byte pos, bit value)
             where T : unmanaged
         {

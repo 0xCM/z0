@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gmath
     {
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
         public static T square<T>(T a)
             where T : unmanaged
                 => square_u(a);

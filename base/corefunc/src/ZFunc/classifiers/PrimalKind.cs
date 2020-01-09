@@ -11,6 +11,30 @@ namespace Z0
 
     using static zfunc;
 
+    public enum PrimalId : uint
+    {
+        U8 = (1u << 16),
+
+        I8 = (2u << 16),
+
+        U16 = (4u << 16),
+
+        I16 = (8u << 16),
+
+        U32 = (16u << 16),
+
+        I32 = (32u << 16),
+
+        U64 = (64u << 16),
+
+        I64 = (128u << 16),
+        
+        F32 = (512u << 16),
+
+        F64 = (1024u << 16)
+
+    }
+
     /// <summary>
     /// Clasifies primitive types
     /// </summary>
@@ -20,88 +44,93 @@ namespace Z0
         None = 0,
         
         /// <summary>
-        /// Defines a classification for signed primal types
+        /// When enabled, indicates a signed integral type
         /// </summary>
         Signed = 1u << 31,
 
         /// <summary>
-        /// When nonzero, indicates a floating-point type
+        /// When enabled, indicates a floating-point type
         /// </summary>
-        Floating = (1u << 30),
+        Fractional = 1u << 30,
+
+        /// <summary>
+        /// When enabled, indicates an unsigned integral type
+        /// </summary>
+        Unsigned = 1u << 29,
 
         /// <summary>
         /// Identifies an unsigned 8-bit integral type
         /// </summary>
-        U8 = PrimalWidth.w8,
+        U8 = PrimalId.U8 | PrimalWidth.w8 | Unsigned,
 
         /// <summary>
         /// Identifies a signed 8-bit integral type
         /// </summary>
-        I8 = PrimalWidth.w8 | Signed,
+        I8 = PrimalId.I8 | PrimalWidth.w8 | Signed,
 
         /// <summary>
         /// Identifies an usigned 16-bit integral type
         /// </summary>
-        U16 = PrimalWidth.w16,
+        U16 = PrimalId.U16 | PrimalWidth.w16 | Unsigned,
 
         /// <summary>
         /// Identifies a signed 16-bit integral type
         /// </summary>
-        I16 = PrimalWidth.w16 | Signed,
+        I16 = PrimalId.I16 | PrimalWidth.w16 | Signed,
 
         /// <summary>
         /// Identifies an usigned 32-bit integral type
         /// </summary>
-        U32 = PrimalWidth.w32, 
+        U32 = PrimalId.U32 | PrimalWidth.w32 | Unsigned, 
 
         /// <summary>
         /// Identifies a signed 32-bit integral type
         /// </summary>
-        I32 = PrimalWidth.w32 | Signed,
+        I32 = PrimalId.I32 | PrimalWidth.w32 | Signed,
 
         /// <summary>
         /// Identifies an usigned 64-bit integral type
         /// </summary>
-        U64 = PrimalWidth.w64,
+        U64 = PrimalId.U64 | PrimalWidth.w64 | Unsigned,
 
         /// <summary>
         /// Identifies a signed 64-bit integral type
         /// </summary>
-        I64 = PrimalWidth.w64 | Signed,
+        I64 = PrimalId.I64 | PrimalWidth.w64 | Signed,
 
         /// <summary>
         /// Identifies a 32-bit floating-point type
         /// </summary>
-        F32 = PrimalWidth.w32 | Signed | Floating,
+        F32 = PrimalId.F32 | PrimalWidth.w32 | Fractional,
         
         /// <summary>
         /// Identifies a 64-bit floating-point type
         /// </summary>
-        F64 = PrimalWidth.w64 | Signed | Floating, 
+        F64 = PrimalId.F64 | PrimalWidth.w64 | Fractional, 
         
         /// <summary>
         /// Defines a classification that includes all signed primal integral types and no others
         /// </summary>
-        SignedInt = I8 | I16 | I32 | I64,
+        SignedInts = I8 | I16 | I32 | I64,
 
         /// <summary>
         /// Defines a classification that includes all unsigned primal integral types and no others
         /// </summary>
-        UnsignedInt = U8 | U16 | U32 | U64,
+        UnsignedInts = U8 | U16 | U32 | U64,
 
         /// <summary>
         /// Defines a classification that includes all primal integral types and no others
         /// </summary>
-        Integral = SignedInt | UnsignedInt,
+        Integers = SignedInts | UnsignedInts,
 
         /// <summary>
         /// Defines a classification that includes all primal floating-point types and no others
         /// </summary>
-        Float = F32 | F64,
+        Floats = PrimalId.F32 | PrimalId.F64,
 
         /// <summary>
         /// Defines a classification that includes all kinds
         /// </summary>
-        All = Integral | Float,
+        All = Integers | Floats,
     }
 }

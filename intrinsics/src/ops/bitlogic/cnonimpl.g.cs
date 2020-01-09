@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
         public static Vector128<T> vcnonimpl<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vcnonimpl_u(x,y);
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
         public static Vector256<T> vcnonimpl<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vcnonimpl_u(x,y);

@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="index">The index at which to begin clearing bits</param>
         /// <param name="count">The number of bits to clear</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
         public static T bitclear<T>(T src, byte index, byte count)
             where T : unmanaged
         {
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="index">The index at which to begin clearing bits</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
         public static T clearbyte<T>(T src, byte index)
             where T : unmanaged
         {

@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
         public static T ones<T>(T t = default)
             where T : unmanaged
                 => zfunc.ones<T>();
@@ -62,7 +62,7 @@ namespace Z0
         /// Defines an alternating bit pattern 01 01...01
         /// </summary>
         /// <typeparam name="T">The primal unsigned type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
         public static T altodd<T>()
             where T : unmanaged
         {
@@ -82,7 +82,7 @@ namespace Z0
         /// Defines an alternating bit pattern 10 10...10
         /// </summary>
         /// <typeparam name="T">The primal unsigned type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
         public static T alteven<T>()
             where T : unmanaged
         {

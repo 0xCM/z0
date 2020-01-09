@@ -31,7 +31,7 @@ namespace Z0
                 return gcd_f(a,b);
         }           
 
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
         public static T gcdbin<T>(T a, T b)
             where T : unmanaged
         {

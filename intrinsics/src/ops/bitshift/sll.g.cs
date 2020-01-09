@@ -19,22 +19,22 @@ namespace Z0
         /// Shifts each source vector component leftwards by a specified number of bits
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The shift offset</param>
+        /// <param name="count">The shift offset</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
-        public static Vector128<T> vsll<T>(Vector128<T> x, byte offset)
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        public static Vector128<T> vsll<T>(Vector128<T> x, byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vsll_u(x,offset);
+                return vsll_u(x,count);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vsll_i(x,offset);
+                return vsll_i(x,count);
             else
                 throw unsupported<T>();
         }
@@ -43,22 +43,22 @@ namespace Z0
         /// Shifts each source vector component leftwards by a specified number of bits
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="offset">The shift offset</param>
+        /// <param name="count">The shift offset</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
-        public static Vector256<T> vsll<T>(Vector256<T> x, byte offset)
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        public static Vector256<T> vsll<T>(Vector256<T> x, byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vsll_u(x,offset);
+                return vsll_u(x,count);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vsll_i(x,offset);
+                return vsll_i(x,count);
             else
                 throw unsupported<T>();
         }

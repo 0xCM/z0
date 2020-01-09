@@ -16,32 +16,6 @@ namespace Z0
 
     using static As;
 
-    partial class ginxfp
-    {
-       [MethodImpl(Inline)]
-       public static Vector128<T> vadd<T>(Vector128<T> x, Vector128<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vadd(v32f(x), v32f(y)));
-            else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vadd(v64f(x), v64f(y)));
-            else 
-                throw unsupported<T>();
-        }        
-
-       [MethodImpl(Inline)]
-       public static Vector256<T> vadd<T>(Vector256<T> x, Vector256<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vadd(v32f(x), v32f(y)));
-            else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vadd(v64f(x), v64f(y)));
-            else 
-                throw unsupported<T>();
-        }        
-    }
 
     partial class dinxfp
     {

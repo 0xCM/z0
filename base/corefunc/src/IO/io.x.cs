@@ -82,7 +82,17 @@ namespace Z0
                 Directory.CreateDirectory(dst.Name);
             return dst;
         }
-                
+
+        /// <summary>
+        /// Deletes all files in a specified directory
+        /// </summary>
+        /// <param name="dst">The target path</param>
+        public static void DeleteFiles(this FolderPath dst)
+        {   
+            if(Directory.Exists(dst.Name)) 
+                iter(Directory.EnumerateFiles(dst.Name), File.Delete);
+        }
+
         public static int Overwrite(this FilePath dst, params string[] lines)
         {
             dst.FolderPath.CreateIfMissing();

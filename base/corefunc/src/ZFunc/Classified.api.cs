@@ -166,7 +166,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static bit floating(uint k)
-            => (k & ((uint)PrimalKind.Floating)) != 0;
+            => (k & ((uint)PrimalKind.Fractional)) != 0;
 
         [MethodImpl(Inline)]
         static bit signedint(uint k)

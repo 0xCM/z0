@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal operand type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
         public static T nand<T>(T a, T b)
             where T : unmanaged
                 => nand_u(a,b);

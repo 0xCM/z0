@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
         public static Vector128<T> vimpl<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
         public static Vector256<T> vimpl<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {

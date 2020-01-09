@@ -27,6 +27,9 @@ namespace Z0
         public Assembly DeclaringAssembly 
             => typeof(T).Assembly;
 
+        public virtual IEnumerable<Type> ApiProviders
+            => new Type[]{};
+
         public virtual AssemblyRole Role 
             => AssemblyRole.Library;
 

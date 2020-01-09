@@ -67,8 +67,8 @@ namespace Z0
             return sb.ToString();
         }
 
-        static string comment(string src, string ts)
-            => $"{AsciSym.Semicolon}{AsciSym.Space}{src}{ts}";
+        static string comment(string src)
+            => $"{AsciSym.Semicolon}{AsciSym.Space}{src}";
 
         public static ReadOnlySpan<string> FormatAsm(this InstructionBlock src, AsmFormatConfig config)
         {
@@ -77,11 +77,21 @@ namespace Z0
             if(src.InstructionCount == 0)
                 return ReadOnlySpan<string>.Empty;
             
-            var linecount = config.EmitHeader ? src.InstructionCount + 1 : src.InstructionCount;
+            var linecount = src.InstructionCount;
+            if(config.EmitHeader)
+            {
+                linecount++;
+                if(config.TimestampHeader)
+                    linecount++;
+            }
+
             var line = 0;
             Span<string> dst = new string[linecount];
             if(config.EmitHeader)                
-                dst[line++] = comment(src.Identity, config.TimestampHeader ? $" {now().ToLexicalString()}" : string.Empty);
+                dst[line++] = comment(src.Identity);
+            if(config.TimestampHeader)
+                dst[line++] = comment(now().ToLexicalString());
+
 
             var formatter = new MasmFormatter(FormatOptions);
             var baseAddress = src.BaseAddress;

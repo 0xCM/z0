@@ -21,7 +21,7 @@ namespace Z0
         protected AsmCode<T> ReadAsm<W,T>(W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeNat
-                => AsmLib.Intrinsic<T>(moniker(OpName, kind<T>(), n256));
+                => AsmLib.Intrinsic<T>(moniker(OpName, Classified.primalkind<T>(), n256));
 
         public void vadd()
         {

@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="shift">The shift offset</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
         public static Vector128<T> vxorsl<T>(Vector128<T> x, byte shift)
             where T : unmanaged
         {
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="shift">The shift offset</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
         public static Vector256<T> vxorsl<T>(Vector256<T> x, byte shift)
             where T : unmanaged
         {

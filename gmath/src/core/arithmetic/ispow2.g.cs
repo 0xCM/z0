@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gmath
     {
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
         public static bit ispow2<T>(T src)
             where T : unmanaged
                 => math.ispow2(convert<T,ulong>(src));

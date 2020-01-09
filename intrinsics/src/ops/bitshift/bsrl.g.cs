@@ -21,8 +21,8 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         /// <typeparam name="T">THe primal component type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
-        public static Vector128<T> vbsrl<T>(Vector128<T> x, byte count)
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
+        public static Vector128<T> vbsrl<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -43,8 +43,8 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         /// <typeparam name="T">THe primal component type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
-        public static Vector256<T> vbsrl<T>(Vector256<T> x, byte count)
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
+        public static Vector256<T> vbsrl<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

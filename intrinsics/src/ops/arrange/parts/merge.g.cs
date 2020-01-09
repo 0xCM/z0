@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
         public static Vector256<T> vmerge<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -42,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
         public static Vector512<T> vmerge<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {

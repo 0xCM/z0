@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="a">The left value</param>
         /// <param name="b">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
         public static T xornot<T>(T a, T b)
             where T : unmanaged
                 => xor(a,not(b));

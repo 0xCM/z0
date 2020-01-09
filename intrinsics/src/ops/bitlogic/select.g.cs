@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <param name="z">The third vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
         public static Vector128<T> vselect<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T : unmanaged
                 => vor(vand(x,y), vnonimpl(x,z));
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <param name="z">The third vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
         public static Vector256<T> vselect<T>(Vector256<T> x, Vector256<T> y, Vector256<T> z)
             where T : unmanaged
                 => vor(vand(x,y), vnonimpl(x,z));

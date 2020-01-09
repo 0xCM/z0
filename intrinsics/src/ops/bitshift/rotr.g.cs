@@ -18,19 +18,19 @@ namespace Z0
         /// Rotates each component in the source vector rightwards by a constant offset
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="offset">The magnitude of the rotation</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
-        public static Vector128<T> vrotr<T>(Vector128<T> x, byte offset)
+        /// <param name="count">The magnitude of the rotation</param>
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
+        public static Vector128<T> vrotr<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vrotr(vcast8u(x), offset));
+                return As.vgeneric<T>(dinx.vrotr(vcast8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vrotr(vcast16u(x), offset));
+                return vgeneric<T>(dinx.vrotr(vcast16u(x), count));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vrotr(vcast32u(x), offset));
+                return vgeneric<T>(dinx.vrotr(vcast32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vrotr(vcast64u(x), offset));
+                return vgeneric<T>(dinx.vrotr(vcast64u(x), count));
             else
                 throw unsupported<T>();
         }
@@ -39,19 +39,19 @@ namespace Z0
         /// Rotates each component in the source vector rightwards by a constant offset
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="offset">The magnitude of the rotation</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
-        public static Vector256<T> vrotr<T>(Vector256<T> x, byte offset)
+        /// <param name="count">The magnitude of the rotation</param>
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
+        public static Vector256<T> vrotr<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vrotr(vcast8u(x), offset));
+                return vgeneric<T>(dinx.vrotr(vcast8u(x), count));
             if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vrotr(vcast16u(x), offset));
+                return vgeneric<T>(dinx.vrotr(vcast16u(x), count));
             if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vrotr(vcast32u(x), offset));
+                return vgeneric<T>(dinx.vrotr(vcast32u(x), count));
             if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vrotr(vcast64u(x), offset));
+                return vgeneric<T>(dinx.vrotr(vcast64u(x), count));
             else
                 throw unsupported<T>();
         }     

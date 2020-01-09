@@ -16,43 +16,43 @@ namespace Z0
     partial class ginx
     {
         /// <summary>
-        /// Rotates each component the source vector leftwards by a constant offset
+        /// Rotates each component the source vector leftwards by a constant amount
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="offset">The magnitude of the rotation</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
-        public static Vector128<T> vrotl<T>(Vector128<T> x, byte offset)
+        /// <param name="count">The magnitude of the rotation</param>
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
+        public static Vector128<T> vrotl<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vrotl(v8u(x), offset));
+                return As.vgeneric<T>(dinx.vrotl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vrotl(v16u(x), offset));
+                return vgeneric<T>(dinx.vrotl(v16u(x), count));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vrotl(v32u(x), offset));
+                return vgeneric<T>(dinx.vrotl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vrotl(v64u(x), offset));
+                return vgeneric<T>(dinx.vrotl(v64u(x), count));
             else
                 throw unsupported<T>();
         }
 
         /// <summary>
-        /// Rotates each component the source vector leftwards by a constant offset
+        /// Rotates each component the source vector leftwards by a constant count
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="offset">The magnitude of the rotation</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
-        public static Vector256<T> vrotl<T>(Vector256<T> x, byte offset)
+        /// <param name="count">The magnitude of the rotation</param>
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
+        public static Vector256<T> vrotl<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vrotl(v8u(x), offset));
+                return vgeneric<T>(dinx.vrotl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vrotl(v16u(x), offset));
+                return vgeneric<T>(dinx.vrotl(v16u(x), count));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vrotl(v32u(x), offset));
+                return vgeneric<T>(dinx.vrotl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vrotl(v64u(x), offset));
+                return vgeneric<T>(dinx.vrotl(v64u(x), count));
             else
                 throw unsupported<T>();
         }

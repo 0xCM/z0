@@ -13,111 +13,111 @@ namespace Z0
     partial class dinx
     {
         /// <summary>
-        /// Computes x^(x >> shift)
+        /// Computes x^(x >> count)
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="shift">The amount by which to shift each component</param>
+        /// <param name="count">The amount by which to count each component</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vxorsr(Vector128<byte> x, byte shift)
-            => dinx.vxor(x, vsrl(x,shift));
+        public static Vector128<byte> vxorsr(Vector128<byte> x, [Imm] byte count)
+            => dinx.vxor(x, vsrl(x,count));
 
         /// <summary>
-        /// Computes x^(x >> shift)
+        /// Computes x^(x >> count)
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="shift">The amount by which to shift each component</param>
+        /// <param name="count">The amount by which to count each component</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vxorsr(Vector128<ushort> x, byte shift)
-            => dinx.vxor(x, vsrl(x,shift));
+        public static Vector128<ushort> vxorsr(Vector128<ushort> x, [Imm] byte count)
+            => dinx.vxor(x, vsrl(x,count));
 
         /// <summary>
-        /// Computes x^(x >> shift)
+        /// Computes x^(x >> count)
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="shift">The amount by which to shift each component</param>
+        /// <param name="count">The amount by which to count each component</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vxorsr(Vector128<uint> x, byte shift)
-            => dinx.vxor(x,vsrl(x,shift));
+        public static Vector128<uint> vxorsr(Vector128<uint> x, [Imm] byte count)
+            => dinx.vxor(x,vsrl(x,count));
 
         /// <summary>
-        /// Computes x^(x >> shift)
+        /// Computes x^(x >> count)
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="shift">The amount by which to shift each component</param>
+        /// <param name="count">The amount by which to count each component</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vxorsr(Vector128<ulong> x, byte shift)
-            => dinx.vxor(x, vsrl(x,shift));
+        public static Vector128<ulong> vxorsr(Vector128<ulong> x, [Imm] byte count)
+            => dinx.vxor(x, vsrl(x,count));
 
         /// <summary>
-        /// Computes x^(x >> shift)
+        /// Computes x^(x >> count)
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="shift">The amount by which to shift each component</param>
+        /// <param name="count">The amount by which to count each component</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> vxorsr(Vector256<byte> x, byte shift)
-            => dinx.vxor(x, vsrl(x,shift));
+        public static Vector256<byte> vxorsr(Vector256<byte> x, [Imm] byte count)
+            => dinx.vxor(x, vsrl(x,count));
 
         /// <summary>
-        /// Computes x^(x >> shift)
+        /// Computes x^(x >> count)
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="shift">The amount by which to shift each component</param>
+        /// <param name="count">The amount by which to count each component</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vxorsr(Vector256<ushort> x, byte shift)
-            => dinx.vxor(x, vsrl(x,shift));
+        public static Vector256<ushort> vxorsr(Vector256<ushort> x, [Imm] byte count)
+            => dinx.vxor(x, vsrl(x,count));
 
         /// <summary>
-        /// Computes x^(x >> shift)
+        /// Computes x^(x >> count)
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="shift">The amount by which to shift each component</param>
+        /// <param name="count">The amount by which to count each component</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vxorsr(Vector256<uint> x, byte shift)
-            => dinx.vxor(x, vsrl(x,shift));
+        public static Vector256<uint> vxorsr(Vector256<uint> x, [Imm] byte count)
+            => dinx.vxor(x, vsrl(x,count));
 
         /// <summary>
-        /// Computes x^(x >> shift)
+        /// Computes x^(x >> count)
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="shift">The amount by which to shift each component</param>
+        /// <param name="count">The amount by which to count each component</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vxorsr(Vector256<ulong> x, byte shift)
-            => dinx.vxor(x, vsrl(x,shift));
+        public static Vector256<ulong> vxorsr(Vector256<ulong> x, [Imm] byte count)
+            => dinx.vxor(x, vsrl(x,count));
 
         /// <summary>
-        /// Computes x^(x >> shifts)
+        /// Computes x^(x >> counts)
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="shift">Specifies the shift shift for each corresponding component</param>
+        /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vxorsrv(Vector128<uint> x, Vector128<uint> shifts)
-            => dinx.vxor(x, dinx.vsrlv(x,shifts));
+        public static Vector128<uint> vxorsrv(Vector128<uint> x, Vector128<uint> counts)
+            => dinx.vxor(x, dinx.vsrlv(x,counts));
 
         /// <summary>
-        /// Computes x^(x >> shifts)
+        /// Computes x^(x >> counts)
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="shift">Specifies the shift shift for each corresponding component</param>
+        /// <param name="counts">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vxorsrv(Vector128<ulong> x, Vector128<ulong> shift)
-            => dinx.vxor(x, dinx.vsrlv(x, shift));
+        public static Vector128<ulong> vxorsrv(Vector128<ulong> x, Vector128<ulong> counts)
+            => dinx.vxor(x, dinx.vsrlv(x, counts));
 
         /// <summary>
-        /// Computes x^(x >> shifts)
+        /// Computes x^(x >> counts)
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="shift">Specifies the shift shift for each corresponding component</param>
+        /// <param name="counts">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vxorsrv(Vector256<uint> x, Vector256<uint> shift)
-            => dinx.vxor(x, dinx.vsrlv(x, shift));
+        public static Vector256<uint> vxorsrv(Vector256<uint> x, Vector256<uint> counts)
+            => dinx.vxor(x, dinx.vsrlv(x, counts));
 
         /// <summary>
-        /// Computes x^(x >> shifts)
+        /// Computes x^(x >> counts)
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="shift">Specifies the shift shift for each corresponding component</param>
+        /// <param name="counts">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vxorsrv(Vector256<ulong> x, Vector256<ulong> shift)
-            => dinx.vxor(x, dinx.vsrlv(x, shift));
+        public static Vector256<ulong> vxorsrv(Vector256<ulong> x, Vector256<ulong> counts)
+            => dinx.vxor(x, dinx.vsrlv(x, counts));
     }
 }

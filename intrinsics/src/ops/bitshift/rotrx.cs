@@ -17,90 +17,90 @@ namespace Z0
         /// Rotates the full 128 bits of a vector rightward a bit-level resolution
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to rotate</param>
+        /// <param name="count">The number of bits to rotate</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vrotrx(Vector128<ulong> src, byte shift)
-            => vor(vsrlx(src, shift), vsllx(src, (byte)(128 - shift)));             
+        public static Vector128<ulong> vrotrx(Vector128<ulong> src, [Imm] byte count)
+            => vor(vsrlx(src, count), vsllx(src, (byte)(128 - count)));             
 
         /// <summary>
         /// Rotates each 128 bit lane rightward a bit-level resolution
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The number of bits to rotate</param>
+        /// <param name="count">The number of bits to rotate</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vrotrx(Vector256<ulong> src, byte shift)
-            => vor(vsrlx(src, shift), vsllx(src, (byte)(128 - shift)));             
+        public static Vector256<ulong> vrotrx(Vector256<ulong> src, [Imm] byte count)
+            => vor(vsrlx(src, count), vsllx(src, (byte)(128 - count)));             
 
         /// <summary>
         /// Rotates the full 128-bit vector content leftward by 8 bits
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The shift selector</param>
+        /// <param name="count">The count selector</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vrotlx(Vector128<byte> src, N8 shift)
-            => vshuf16x8(src, VData.rotl(n128, shift));   
+        public static Vector128<byte> vrotlx(Vector128<byte> src, N8 count)
+            => vshuf16x8(src, VData.rotl(n128, count));   
 
         /// <summary>
         /// Rotates the full 128-bit vector content leftward by 16 bits
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The shift selector</param>
+        /// <param name="count">The count selector</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vrotlx(Vector128<byte> src, N16 shift)
-            => vshuf16x8(src, VData.rotl(n128, shift));
+        public static Vector128<byte> vrotlx(Vector128<byte> src, N16 count)
+            => vshuf16x8(src, VData.rotl(n128, count));
 
         /// <summary>
         /// Rotates the full 128-bit vector content leftward by 24 bits
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The shift selector</param>
+        /// <param name="count">The count selector</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vrotlx(Vector128<byte> src, N24 shift)
-            => vshuf16x8(src, VData.rotl(n128, shift));
+        public static Vector128<byte> vrotlx(Vector128<byte> src, N24 count)
+            => vshuf16x8(src, VData.rotl(n128, count));
 
         /// <summary>
         /// Rotates the full 128-bit vector content leftward by 32 bits
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The shift selector</param>
+        /// <param name="count">The count selector</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vrotlx(Vector128<byte> src, N32 shift)
-            => vshuf16x8(src, VData.rotl(n128, shift));
+        public static Vector128<byte> vrotlx(Vector128<byte> src, N32 count)
+            => vshuf16x8(src, VData.rotl(n128, count));
 
         /// <summary>
         /// Rotates the full 128-bit vector content rightward by 8 bits
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The shift selector</param>
+        /// <param name="count">The count selector</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vrotrx(Vector128<byte> src, N8 shift)
-            => vshuf16x8(src, VData.rotr(n128, shift));
+        public static Vector128<byte> vrotrx(Vector128<byte> src, N8 count)
+            => vshuf16x8(src, VData.rotr(n128, count));
 
         /// <summary>
         /// Rotates the full 128-bit vector content rightward by 16 bits
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The shift selector</param>
+        /// <param name="count">The count selector</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vrotrx(Vector128<byte> src, N16 shift)
-            => vshuf16x8(src, VData.rotr(n128, shift));
+        public static Vector128<byte> vrotrx(Vector128<byte> src, N16 count)
+            => vshuf16x8(src, VData.rotr(n128, count));
 
         /// <summary>
         /// Rotates the full 128-bit vector content rightward by 24 bits
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The shift selector</param>
+        /// <param name="count">The count selector</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vrotrx(Vector128<byte> src, N24 shift)
-            => vshuf16x8(src, VData.rotr(n128, shift));
+        public static Vector128<byte> vrotrx(Vector128<byte> src, N24 count)
+            => vshuf16x8(src, VData.rotr(n128, count));
 
         /// <summary>
         /// Rotates the full 128-bit vector content rightward by 32 bits
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="shift">The shift selector</param>
+        /// <param name="count">The count selector</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vrotrx(Vector128<byte> src, N32 shift)
-            => vshuf16x8(src, VData.rotr(n128, shift));
+        public static Vector128<byte> vrotrx(Vector128<byte> src, N32 count)
+            => vshuf16x8(src, VData.rotr(n128, count));
     }
 }

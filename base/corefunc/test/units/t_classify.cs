@@ -12,6 +12,18 @@ namespace Z0
 
     public sealed class t_classify : UnitTest<t_classify>
     {
+        public void classify_primal()
+        {
+            var floats = PrimalKind.Floats;
+            Claim.yea(floats.Is(PrimalKind.F32));
+            Claim.yea(floats.Is(PrimalKind.F64));
+            Claim.nea(floats.Is(PrimalKind.I32));
+            Claim.nea(floats.Is(PrimalKind.U32));
+            Claim.nea(floats.Is(PrimalKind.I64));
+            Claim.nea(floats.Is(PrimalKind.U64));
+
+        }
+        
         public void classify_vector_generic()
         {
             Claim.eq(Classified.vectorkind<Vector128<sbyte>>(), CpuVectorKind.v16x8i);

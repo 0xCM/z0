@@ -57,13 +57,14 @@ namespace Z0
         public static bool IsIntrinsic(this Type t)
             => ZFunc.intrinsic(t);
 
+
         /// <summary>
         /// Determines whether a type is blocked memory store
         /// </summary>
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
         public static bool IsDataBlock(this Type t)
-            => DataBlocks.isblocked(t);
+            => Classified.blocked(t);
 
         /// <summary>
         /// Determines whether a type is an intrinsic vector of specified width
@@ -234,7 +235,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsBlocked(this MethodInfo m)
-            => m.ReturnType.IsDataBlock() || m.ParameterTypes().Any(t => t.IsDataBlock());
+            => Classified.blocked(m);
 
         /// <summary>
         /// Selects the parameters for a method, if any, that accept an intrinsic vector
@@ -263,9 +264,6 @@ namespace Z0
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> Operators(this IEnumerable<MethodInfo> src)
             => src.Where(x => x.IsOperator());
-
-
-
 
         /// <summary>
         /// Selects unary operators from a stream

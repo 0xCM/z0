@@ -19,20 +19,20 @@ namespace Z0
         /// Rotates the full 128 bits of a vector rightward at bit-level resolution
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="bits">The number of bits to shift</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
-        public static Vector128<T> vrotrx<T>(Vector128<T> src, byte bits)        
+        /// <param name="count">The number of bits to shift</param>
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
+        public static Vector128<T> vrotrx<T>(Vector128<T> src, [Imm] byte count)        
             where T : unmanaged
-                => vgeneric<T>(dinx.vrotrx(v64u(src), bits));
+                => vgeneric<T>(dinx.vrotrx(v64u(src), count));
 
         /// <summary>
         /// Rotates the each 128-bit lane rightward at bit-level resolution
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="bits">The number of bits to shift</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
-        public static Vector256<T> vrotrx<T>(Vector256<T> src, byte bits)        
+        /// <param name="count">The number of bits to shift</param>
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
+        public static Vector256<T> vrotrx<T>(Vector256<T> src, [Imm] byte count)        
             where T : unmanaged
-                => vgeneric<T>(dinx.vrotrx(v64u(src), bits));
+                => vgeneric<T>(dinx.vrotrx(v64u(src), count));
     }
 }

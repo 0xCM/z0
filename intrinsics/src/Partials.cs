@@ -57,30 +57,7 @@ namespace Z0
     }
 
 
-    /// <summary>
-    /// Generic vectorized intrinsics over floating-point domains
-    /// </summary>
-    public static partial class ginxfp
-    {
-        
-    }
 
-    /// <summary>
-    /// Generic scalar intrinsics over floating-point domains
-    /// </summary>
-    public static partial class ginxsfp
-    {
-
-
-    }
-
-    /// <summary>
-    /// Generic scalar intrinsics
-    /// </summary>
-    public static partial class ginxs
-    {
-
-    }
 
     /// <summary>
     /// Vectorized operators

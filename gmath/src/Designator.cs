@@ -25,9 +25,7 @@ namespace Z0.Designators
                 nameof(gmath.odd), nameof(gmath.even),nameof(gmath.negate), nameof(gmath.inc), nameof(gmath.dec), 
                 
                 nameof(gmath.and), nameof(gmath.or), nameof(gmath.xor),
-                nameof(gmath.nand), nameof(gmath.nor), nameof(gmath.xnor),
-                nameof(gmath.xornot),
-
+                nameof(gmath.nand), nameof(gmath.nor), nameof(gmath.xnor),nameof(gmath.xornot),
                 nameof(gmath.impl), nameof(gmath.nonimpl), nameof(gmath.cimpl), nameof(gmath.cnonimpl), 
                 nameof(gmath.not),
 
@@ -35,6 +33,10 @@ namespace Z0.Designators
                 
                 nameof(gmath.select), nameof(gmath.blend)
                 );
+
+        public override IEnumerable<Type> ApiProviders
+            => items(typeof(math), typeof(gmath));
+
 
     }
 

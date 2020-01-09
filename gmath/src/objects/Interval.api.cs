@@ -103,7 +103,7 @@ namespace Z0
         /// <typeparam name="T">The interval primal type</typeparam>
         public static Span<T> partpoints<T>(Interval<T> src, T width)
             where T : unmanaged
-                => floating<T>() ? partpointsf(src,width) : partpointsi(src,width);
+                => Classified.floating<T>() ? partpointsf(src,width) : partpointsi(src,width);
 
         /// <summary>
         /// Computes the points that determine a partitioning predicated on partition width

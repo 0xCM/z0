@@ -181,6 +181,40 @@ namespace Z0
         public static char sign(PrimalKind k)
             => sign((uint)k);
 
+        /// <summary>
+        /// Returns true if the primal source type is signed, false otherwise
+        /// </summary>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline)]
+        public static bool signed<T>()
+            where T : unmanaged
+            => typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long);
+
+        /// <summary>
+        /// Returns true if the specified type is an unsigned primal integral type
+        /// </summary>
+        /// <typeparam name="T">The type to evaluate</typeparam>
+        [MethodImpl(Inline)]
+        public static bool unsigned<T>()
+            where T : unmanaged
+            => typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong);
+
+        /// <summary>
+        /// Returns true if the spedified type is a 32-bit or 64-bit floating point
+        /// </summary>
+        /// <typeparam name="T">The type to evaluate</typeparam>
+        [MethodImpl(Inline)]
+        public static bool floating<T>()
+            where T : unmanaged
+                => typeof(T) == typeof(float) 
+                || typeof(T) == typeof(double);
+
         [MethodImpl(Inline)]
         static PrimalKind primalkind_u<T>(T t = default)
             where T : unmanaged

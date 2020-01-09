@@ -44,7 +44,7 @@ namespace Z0
         bool IsSignExtended
         {
             [MethodImpl(Inline)]
-            get => signed<T>();
+            get => Classified.signed<T>();
         }
 
         /// <summary>

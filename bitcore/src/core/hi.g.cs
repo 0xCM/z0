@@ -19,7 +19,7 @@ namespace Z0
         /// Extracts the upper source bits
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
         public static T hi<T>(T src)
             where T : unmanaged
         {

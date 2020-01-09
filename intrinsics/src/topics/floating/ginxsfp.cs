@@ -14,11 +14,11 @@ namespace Z0
     using static zfunc;    
     
     /// <summary>
-    /// Generic scalar floating-point intrinsics
+    /// Generic scalar intrinsics over floating-point domains
     /// </summary>
-    public static partial class ginxsfp
+    public static class ginxsfp
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static Vector128<T> load<T>(T src)
             where T : unmanaged
         {
@@ -30,7 +30,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static T store<T>(Vector128<T> src)
             where T : unmanaged
         {
@@ -42,7 +42,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static Vector128<T> add<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -54,7 +54,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static Vector128<T> sub<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -66,7 +66,7 @@ namespace Z0
                 unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static Vector128<T> mul<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -78,7 +78,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static Vector128<T> div<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -90,7 +90,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static Vector128<T> min<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -102,7 +102,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static Vector128<T> max<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -114,7 +114,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static Vector128<T> ceil<T>(Vector128<T> x)
             where T : unmanaged
         {
@@ -126,7 +126,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static Vector128<T> floor<T>(Vector128<T> x)
             where T : unmanaged
         {
@@ -138,7 +138,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static Vector128<T> sqrt<T>(Vector128<T> x)
             where T : unmanaged
         {
@@ -150,7 +150,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static Vector128<T> fmadd<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T : unmanaged
         {
@@ -162,7 +162,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static Vector128<T> fmsub<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T : unmanaged
         {
@@ -174,7 +174,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static Vector128<T> fnmadd<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T : unmanaged
         {
@@ -186,7 +186,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static bool eq<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -198,7 +198,7 @@ namespace Z0
                 unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static bool neq<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -210,7 +210,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static bool lteq<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -222,7 +222,7 @@ namespace Z0
                 throw unsupported<T>();
         }
  
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static bool ngt<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -234,7 +234,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static bool nlt<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -246,7 +246,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static bool gt<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -258,7 +258,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static bool gteq<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -270,7 +270,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static bool lt<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -281,7 +281,7 @@ namespace Z0
             throw unsupported<T>();
         }   
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Floats)]
         public static Vector128<T> cmp<T>(Vector128<T> x, Vector128<T> y, FpCmpMode mode)
             where T : unmanaged
         {
@@ -291,6 +291,5 @@ namespace Z0
                 return vgeneric<T>(dinxsfp.cmp(v64f(x), v64f(y),mode));
             throw unsupported<T>();
         }   
-
     }
 }
