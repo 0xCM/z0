@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="offset">The offset</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static sbyte sal(sbyte src, int offset)        
+        public static sbyte sal(sbyte src, byte offset)        
             => (sbyte)(src << offset);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="offset">The offset</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static byte sal(byte src, int offset)
+        public static byte sal(byte src, byte offset)
             => (byte)(src << offset);
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="offset">The offset</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static short sal(short src, int offset)
+        public static short sal(short src, byte offset)
             => (short)(src << offset);
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="offset">The offset</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ushort sal(ushort src, int offset)
+        public static ushort sal(ushort src, byte offset)
             => (ushort)(src << offset);
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="offset">The offset</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static int sal(int src, int offset)
+        public static int sal(int src, byte offset)
             => src << offset;
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="offset">The offset</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static uint sal(uint src, int offset)
+        public static uint sal(uint src, byte offset)
             => src << offset;
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="offset">The offset</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static long sal(long src, int offset)
+        public static long sal(long src, byte offset)
             => src << offset;
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="offset">The offset</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ulong sal(ulong src, int offset)
+        public static ulong sal(ulong src, byte offset)
             => src << offset;
     }
 }

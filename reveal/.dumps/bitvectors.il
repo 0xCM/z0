@@ -1,4 +1,4 @@
-// 2020-01-08 01:52:30:227
+// 2020-01-08 22:54:02:243
 BitVector<byte> bvand_8(BitVector<byte> x, BitVector<byte> y)
 {
     IL_0000: ldc.i4.0
@@ -121,7 +121,7 @@ BitVector32 sll_bv_32u(BitVector32 x, byte offset)
     IL_0007: ret
 
 }
-BitVector32 sll_bv_o32u(BitVector32 x, int offset)
+BitVector32 sll_bv_o32u(BitVector32 x, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -129,15 +129,15 @@ BitVector32 sll_bv_o32u(BitVector32 x, int offset)
     IL_0007: ret
 
 }
-BitVector32 srl_bv_32u(BitVector32 x, int offset)
+BitVector32 srl_bv_32u(BitVector32 x, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector32 Z0.BitVector::srl(Z0.BitVector32,System.Int32)
+    IL_0002: call Z0.BitVector32 Z0.BitVector::srl(Z0.BitVector32,System.Byte)
     IL_0007: ret
 
 }
-BitVector32 srl_bv_o32u(BitVector32 x, int offset)
+BitVector32 srl_bv_o32u(BitVector32 x, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -205,7 +205,7 @@ BitVector32 dec_bv_o32u(BitVector32 x)
     IL_0009: ret
 
 }
-BitVector32 rotl_bv_32u(BitVector32 x, int offset)
+BitVector32 rotl_bv_32u(BitVector32 x, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -213,7 +213,7 @@ BitVector32 rotl_bv_32u(BitVector32 x, int offset)
     IL_0007: ret
 
 }
-BitVector32 rotr_bv_32u(BitVector32 x, int offset)
+BitVector32 rotr_bv_32u(BitVector32 x, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1

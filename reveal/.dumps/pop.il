@@ -1,4 +1,4 @@
-// 2020-01-08 01:52:28:888
+// 2020-01-08 22:54:00:851
 void part64x1_byte(ulong src, Span<byte> dst)
 {
     IL_0000: ldarg.0

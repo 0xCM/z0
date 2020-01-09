@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static Vector128<T> vnand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -42,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static Vector256<T> vnand<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -66,13 +66,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vnand(vcast8u(x), vcast8u(y)));
+                return As.vgeneric<T>(dinx.vnand(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vnand(vcast16u(x), vcast16u(y)));
+                return vgeneric<T>(dinx.vnand(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vnand(vcast32u(x), vcast32u(y)));
+                return vgeneric<T>(dinx.vnand(v32u(x), v32u(y)));
             else
-                return vgeneric<T>(dinx.vnand(vcast64u(x), vcast64u(y)));
+                return vgeneric<T>(dinx.vnand(v64u(x), v64u(y)));
         }
 
         [MethodImpl(Inline)]
@@ -80,13 +80,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return As.vgeneric<T>(dinx.vnand(vcast8i(x), vcast8i(y)));
+                return As.vgeneric<T>(dinx.vnand(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                return As.vgeneric<T>(dinx.vnand(vcast16i(x), vcast16i(y)));
+                return As.vgeneric<T>(dinx.vnand(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vnand(vcast32i(x), vcast32i(y)));
+                return vgeneric<T>(dinx.vnand(v32i(x), v32i(y)));
             else
-                return vgeneric<T>(dinx.vnand(vcast64i(x), vcast64i(y)));
+                return vgeneric<T>(dinx.vnand(v64i(x), v64i(y)));
         }
 
         [MethodImpl(Inline)]
@@ -94,9 +94,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinx.vnand(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinx.vnand(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinx.vnand(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinx.vnand(v64f(x), v64f(y)));
             else
                 throw unsupported<T>();
         }
@@ -106,13 +106,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vnand(vcast8u(x), vcast8u(y)));
+                return vgeneric<T>(dinx.vnand(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vnand(vcast16u(x), vcast16u(y)));
+                return vgeneric<T>(dinx.vnand(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vnand(vcast32u(x), vcast32u(y)));
+                return vgeneric<T>(dinx.vnand(v32u(x), v32u(y)));
             else
-                return vgeneric<T>(dinx.vnand(vcast64u(x), vcast64u(y)));
+                return vgeneric<T>(dinx.vnand(v64u(x), v64u(y)));
         }
 
         [MethodImpl(Inline)]
@@ -120,13 +120,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vnand(vcast8i(x), vcast8i(y)));
+                return vgeneric<T>(dinx.vnand(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vnand(vcast16i(x), vcast16i(y)));
+                return vgeneric<T>(dinx.vnand(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vnand(vcast32i(x), vcast32i(y)));
+                return vgeneric<T>(dinx.vnand(v32i(x), v32i(y)));
             else
-                return vgeneric<T>(dinx.vnand(vcast64i(x), vcast64i(y)));
+                return vgeneric<T>(dinx.vnand(v64i(x), v64i(y)));
         }
 
         [MethodImpl(Inline)]
@@ -134,9 +134,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinx.vnand(vcast32f(x), vcast32f(y)));
+                return vgeneric<T>(dinx.vnand(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinx.vnand(vcast64f(x), vcast64f(y)));
+                return vgeneric<T>(dinx.vnand(v64f(x), v64f(y)));
             else
                 throw unsupported<T>();
         }

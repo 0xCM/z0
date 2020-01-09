@@ -233,10 +233,10 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case ShiftOpKind.Sll: return sll(a,offset);
-                case ShiftOpKind.Srl: return srl(a,offset);
-                case ShiftOpKind.Rotl: return rotl(a,offset);
-                case ShiftOpKind.Rotr: return rotr(a,offset);
+                case ShiftOpKind.Sll: return sll(a,(byte)offset);
+                case ShiftOpKind.Srl: return srl(a,(byte)offset);
+                case ShiftOpKind.Rotl: return rotl(a,(byte)offset);
+                case ShiftOpKind.Rotr: return rotr(a,(byte)offset);
                 default: return dne<ShiftOpKind,T>(kind);
             }
         }

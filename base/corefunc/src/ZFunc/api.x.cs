@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="src">The source method</param>
         /// <param name="args">The arguments over which to close the method, if generic</param>
         [MethodImpl(Inline)]
-        public static OpDescriptor Descriptor(this MethodInfo src, params Type[] args)
+        public static Operation Descriptor(this MethodInfo src, params Type[] args)
             => ZFunc.descriptor(src, args);
 
         /// <summary>
@@ -39,23 +39,15 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
         public static PrimalKind Kind(this Type t)
-            => Primitive.kind(t);
+            => Classified.primalkind(t);
 
         /// <summary>
-        /// Specifies the number of bits occupied by a kind-identified primitive
+        /// Returns a kind-identified system type if possible; throws an exception otherwise
         /// </summary>
-        /// <param name="t">The type to examine</param>
+        /// <param name="k">The identifying kind</param>
         [MethodImpl(Inline)]
-        public static int BitWidth(this PrimalKind k)
-            => Primitive.bitsize(k);
-
-        /// <summary>
-        /// Specifies the canonical indicator i := {'u' | 'i' | 'f'} of a kind-identified primitive
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static char Indicator(this PrimalKind k)
-            => Primitive.indicator(k);
+        public static Type PrimalType(this PrimalKind k)
+            => Classified.primaltype(k);
 
         /// <summary>
         /// Determines whether a type is an intrinsic vector
@@ -97,32 +89,90 @@ namespace Z0
             => ZFunc.bitwidth(t);
 
         /// <summary>
+        /// Determines whether a method is an action
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsAction(this MethodInfo m)
+            => m.ReturnType == typeof(void);
+
+        /// <summary>
+        /// Determines whether a method is an action with specified arity
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        /// <param name="arity">The arity to match</param>
+        public static bool IsAction(this MethodInfo m, int arity)
+            => m.IsAction() && m.HasArity(arity);
+
+        /// <summary>
+        /// Determines whether a method is a function
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsFunction(this MethodInfo m)
+            => m.ReturnType != typeof(void);
+
+        /// <summary>
+        /// Determines whether a method is a function with specified arity
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        /// <param name="arity">The arith to match</param>
+        public static bool IsFunction(this MethodInfo m, int arity)
+            => m.IsFunction() && m.HasArity(arity);
+
+        /// <summary>
+        /// Determines whether a method is an emitter, i.e. a method that returns a value but accepts no input
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsEmitter(this MethodInfo m)
+            => m.IsFunction() && m.HasArity(0);
+
+        /// <summary>
+        /// Determines whether a method defines a unary function
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsUnaryFunc(this MethodInfo m)
+            => m.IsFunction() && m.HasArity(1);
+
+        /// <summary>
+        /// Determines whether a method defines a binary function
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsBinaryFunc(this MethodInfo m)
+            => m.IsFunction() && m.HasArity(2);
+
+        /// <summary>
+        /// Determines whether a method defines a binary function
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsTernaryFunc(this MethodInfo m)
+            => m.IsFunction() && m.HasArity(3);
+
+        /// <summary>
         /// Determines whether a method defines an operator over a (common) domain
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsOperator(this MethodInfo m)
-            => m.IsHomogenous() && m.Arity() >= 1 && !m.ReturnType.IsVoid();
+            => m.IsFunction() && m.IsHomogenous() && m.Arity() >= 1;
 
         /// <summary>
         /// Determines whether a method is a unary operator
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsUnaryOp(this MethodInfo m)
-            => m.IsOperator() && m.HasArity(1);
+            => m.IsHomogenous() && m.IsUnaryFunc();
 
         /// <summary>
         /// Determines whether a method is a unary operator
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsBinaryOp(this MethodInfo m)
-            => m.IsOperator() && m.HasArity(2);
+            => m.IsHomogenous() && m.IsBinaryFunc();
 
         /// <summary>
         /// Determines whether a method is a unary operator
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsTernaryOp(this MethodInfo m)
-            => m.IsOperator() && m.HasArity(3);
+            => m.IsHomogenous() && m.IsTernaryFunc();
 
         /// <summary>
         /// Determines whether a method has intrinsic parameters or return type
@@ -144,6 +194,31 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static bool IsPrimalOp(this MethodInfo m)        
             => m.IsOperator() && m.ReturnType.Kind() != PrimalKind.None;
+
+        /// <summary>
+        /// Determines whether a method defines a predicate that returns a bit value
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsBitPredicate(this MethodInfo m)        
+            => m.ParameterTypes().Distinct().Count() == 1 
+            && (m.ReturnType == typeof(bit));
+
+        /// <summary>
+        /// Determines whether a method defines a predicate that returns a bit or bool value
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsPredicate(this MethodInfo m)        
+            => m.ParameterTypes().Distinct().Count() == 1 
+            && (m.ReturnType == typeof(bit) || m.ReturnType == typeof(bool));
+
+        /// <summary>
+        /// Determines whether a method is a primal shift operator
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsPrimalShift(this MethodInfo m)        
+            => m.IsBinaryFunc() 
+            && m.ReturnType == m.ParameterTypes().First() 
+            && m.ParameterTypes().Second() == typeof(byte);
 
         /// <summary>
         /// Determines whether a method has intrinsic paremeters or return type of specified width
@@ -188,6 +263,9 @@ namespace Z0
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> Operators(this IEnumerable<MethodInfo> src)
             => src.Where(x => x.IsOperator());
+
+
+
 
         /// <summary>
         /// Selects unary operators from a stream
@@ -250,12 +328,10 @@ namespace Z0
             => src.Where(m => m.IsBlocked());
 
         /// <summary>
-        /// Selects methods from a stream that neither accept nor return any memory block parameters
+        /// Selects unblocked operations from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> NonBlocked(this IEnumerable<MethodInfo> src)
-            => src.Where(m => !m.IsBlocked());
-
-
+        public static IEnumerable<MethodInfo> Unblocked(this IEnumerable<MethodInfo> src)
+            => src.Where(x => !x.IsBlocked());
     }
 }

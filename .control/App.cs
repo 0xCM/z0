@@ -30,6 +30,7 @@ namespace Z0
         {
             //(new TestController()).Execute();
             (new ArchiveControl()).Execute();
+            //iter(C.Designated.Designates, d => print(d.Name));
         }
 
         static void Main(params string[] args)

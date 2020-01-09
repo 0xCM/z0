@@ -29,7 +29,7 @@ partial class zfunc
     /// <param name="k">The primal kind</param>
     [MethodImpl(Inline)]
     public static int size(PrimalKind k)
-        => Primitive.size(k);
+        => Classified.size(k);
 
     /// <summary>
     /// Computes the byte-size of a parametrically-identified type
@@ -54,7 +54,7 @@ partial class zfunc
     /// <param name="k">The primal kind</param>
     [MethodImpl(Inline)]
     public static int bitsize(PrimalKind k)
-        => Primitive.bitsize(k);
+        => Classified.width(k);
 
     /// <summary>
     /// Computes the bit-width of a type

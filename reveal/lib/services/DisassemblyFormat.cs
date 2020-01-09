@@ -16,16 +16,9 @@ namespace Z0
     
     public static class DisassemblyFormat
     {
-        static readonly MasmFormatterOptions FormatOptions = new MasmFormatterOptions
-        {
-            DecimalDigitGroupSize = 4,
-            BranchLeadingZeroes = false,
-            HexDigitGroupSize = 4,
-            UpperCaseRegisters = false, 
-            LeadingZeroes = false,
-            DisplInBrackets = true,
-            
-        };
+        public static string Format(this InstructionBlock src, AsmFormatConfig config = null)
+            => src.FormatAsm(config ?? AsmFormatConfig.Default).FormatLines();
+
 
         public static string FormatCil(this MethodDisassembly src)
         {
@@ -74,23 +67,21 @@ namespace Z0
             return sb.ToString();
         }
 
-        static string comment(string src)
-            => $"{AsciSym.Semicolon}{AsciSym.Space}{src}";
+        static string comment(string src, string ts)
+            => $"{AsciSym.Semicolon}{AsciSym.Space}{src}{ts}";
 
-        public static ReadOnlySpan<string> FormatAsm(this InstructionBlock src, bool lineaddresses, bool rawbytes, bool header)
+        public static ReadOnlySpan<string> FormatAsm(this InstructionBlock src, AsmFormatConfig config)
         {
             const string RelAddresSpec = "x4";
 
             if(src.InstructionCount == 0)
                 return ReadOnlySpan<string>.Empty;
             
-            var linecount = header ? src.InstructionCount + 1 : src.InstructionCount;
+            var linecount = config.EmitHeader ? src.InstructionCount + 1 : src.InstructionCount;
             var line = 0;
             Span<string> dst = new string[linecount];
-            if(header)
-            {
-                dst[line++] = comment(src.Identity);
-            }
+            if(config.EmitHeader)                
+                dst[line++] = comment(src.Identity, config.TimestampHeader ? $" {now().ToLexicalString()}" : string.Empty);
 
             var formatter = new MasmFormatter(FormatOptions);
             var baseAddress = src.BaseAddress;
@@ -105,11 +96,11 @@ namespace Z0
                 formatter.Format(ref instruction, output);
                 var relAddress = (int)(instruction.IP - baseAddress);                
                 
-                dst[line] = lineaddresses 
+                dst[line] = config.ShowLineAddresses
                     ?  concat(relAddress.ToString(RelAddresSpec), Hex.PostSpec, AsciSym.Space, sb.ToString())
                     :   sb.ToString();
 
-                if(rawbytes)
+                if(config.ShowRawBytes)
                     dst[line] = dst[line].PadRight(50) 
                           + concat(AsciSym.Semicolon, AsciSym.Space) 
                           + src.Encoded.Slice(relAddress, instruction.ByteLength)
@@ -121,8 +112,8 @@ namespace Z0
             return dst;
         }
 
-        public static ReadOnlySpan<string> FormatAsm(this MethodAsmBody src, bool lineaddresses, bool rawbytes, bool header)
-            => InstructionBlock.Define(Moniker.define(src.Method), src.NativeBlock.Data, src.Instructions).FormatAsm(lineaddresses, rawbytes, header);
+        public static ReadOnlySpan<string> FormatAsm(this MethodAsmBody src, AsmFormatConfig config = null)
+            => InstructionBlock.Define(src.Method.Signature().Format(), src.NativeBlock.Data, src.Instructions).FormatAsm(config ?? AsmFormatConfig.Default);
 
         class AsmFormatterOutput : FormatterOutput
         {
@@ -159,5 +150,17 @@ namespace Z0
                 }
             }                
         }
+
+        static MasmFormatterOptions FormatOptions => new MasmFormatterOptions
+        {
+            DecimalDigitGroupSize = 4,
+            BranchLeadingZeroes = false,
+            HexDigitGroupSize = 4,
+            UpperCaseRegisters = false, 
+            LeadingZeroes = false,
+            DisplInBrackets = true,
+            
+        };
+
     }
 }

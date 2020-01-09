@@ -37,7 +37,7 @@ namespace Z0
             var code = asm.NativeBlock.Data;
             Span<byte> codespan = code;
             var inxs = new AsmInstructionInfo[inxcount];
-            var inxsfmt = asm.FormatAsm(false,false,false);
+            var inxsfmt = asm.FormatAsm(AsmFormatConfig.Default.Invert());
 
             for(var i=0; i<asm.Instructions.Length; i++)
             {

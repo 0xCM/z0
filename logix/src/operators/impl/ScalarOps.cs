@@ -229,17 +229,17 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static T srl<T>(T a, int offset)
             where T : unmanaged
-                => gmath.srl(a,offset);
+                => gmath.srl(a,(byte)offset);
 
         [MethodImpl(Inline)]
         public static T rotl<T>(T a, int offset)
             where T : unmanaged
-                => gbits.rotl(a,offset);
+                => gbits.rotl(a,(byte)offset);
 
         [MethodImpl(Inline)]
         public static T rotr<T>(T a, int offset)
             where T : unmanaged
-                => gbits.rotr(a,offset);
+                => gbits.rotr(a,(byte)offset);
 
         [MethodImpl(Inline)]
         public static T add<T>(T a, T b)

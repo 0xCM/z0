@@ -15,82 +15,46 @@ namespace Z0
 
     partial class ginx
     {        
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static Vector128<T> vmin<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vmin_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vmin_i(x,y);
-            else 
-                return ginxfp.vmin(x,y);
-        }
+                => vmin_u(x,y);
          
-       [MethodImpl(Inline)]
-       public static Vector256<T> vmin<T>(Vector256<T> x, Vector256<T> y)
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        public static Vector256<T> vmin<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vmin_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vmin_i(x,y);
-            else 
-                return ginxfp.vmin(x,y);
-        }        
-
-        [MethodImpl(Inline)]
-        static Vector128<T> vmin_i<T>(Vector128<T> x, Vector128<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                 return As.vgeneric<T>(dinx.vmin(vcast8i(x), vcast8i(y)));
-            else if(typeof(T) == typeof(short))
-                 return As.vgeneric<T>(dinx.vmin(vcast16i(x), vcast16i(y)));
-            else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(dinx.vmin(vcast32i(x), vcast32i(y)));
-            else
-                 return vgeneric<T>(dinx.vmin(vcast64i(x), vcast64i(y)));
-        }
+                => vmin_u(x,y);
 
         [MethodImpl(Inline)]
         static Vector128<T> vmin_u<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vmin(vcast8u(x), vcast8u(y)));
+                return vgeneric<T>(dinx.vmin(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vmin(vcast16u(x), vcast16u(y)));
+                return vgeneric<T>(dinx.vmin(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vmin(vcast32u(x), vcast32u(y)));
+                return vgeneric<T>(dinx.vmin(v32u(x), v32u(y)));
+            else if(typeof(T) == typeof(ulong))
+                return vgeneric<T>(dinx.vmin(v64u(x), v64u(y)));
             else 
-                return vgeneric<T>(dinx.vmin(vcast64u(x), vcast64u(y)));
+                return vmin_i(x,y);
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vmin_i<T>(Vector256<T> x, Vector256<T> y)
+        static Vector128<T> vmin_i<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return vgeneric<T>(dinx.vmin(vcast8i(x), vcast8i(y)));
+                 return vgeneric<T>(dinx.vmin(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                 return vgeneric<T>(dinx.vmin(vcast16i(x), vcast16i(y)));
+                 return vgeneric<T>(dinx.vmin(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(dinx.vmin(vcast32i(x), vcast32i(y)));
-            else
-                 return vgeneric<T>(dinx.vmin(vcast64i(x), vcast64i(y)));
+                 return vgeneric<T>(dinx.vmin(v32i(x), v32i(y)));
+            else if(typeof(T) == typeof(long))
+                 return vgeneric<T>(dinx.vmin(v64i(x), v64i(y)));
+            else 
+                return ginxfp.vmin(x,y);
         }
 
         [MethodImpl(Inline)]
@@ -98,13 +62,31 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vmin(vcast8u(x), vcast8u(y)));
+                return vgeneric<T>(dinx.vmin(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vmin(vcast16u(x), vcast16u(y)));
+                return vgeneric<T>(dinx.vmin(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vmin(vcast32u(x), vcast32u(y)));
+                return vgeneric<T>(dinx.vmin(v32u(x), v32u(y)));
+            else if(typeof(T) == typeof(ulong))
+                return vgeneric<T>(dinx.vmin(v64u(x), v64u(y)));
             else 
-                return vgeneric<T>(dinx.vmin(vcast64u(x), vcast64u(y)));
+                return vmin_i(x,y);
         } 
+
+        [MethodImpl(Inline)]
+        static Vector256<T> vmin_i<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                 return vgeneric<T>(dinx.vmin(v8i(x), v8i(y)));
+            else if(typeof(T) == typeof(short))
+                 return vgeneric<T>(dinx.vmin(v16i(x), v16i(y)));
+            else if(typeof(T) == typeof(int))
+                 return vgeneric<T>(dinx.vmin(v32i(x), v32i(y)));
+            else if(typeof(T) == typeof(long))
+                 return vgeneric<T>(dinx.vmin(v64i(x), v64i(y)));
+            else 
+                return ginxfp.vmin(x,y);
+        }
     }
 }

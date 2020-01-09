@@ -15,54 +15,30 @@ namespace Z0
 
     partial class ginx
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector128<T> vnot<T>(Vector128<T> x)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vnot_u(x);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vnot_i(x);
-            else 
-                throw unsupported<T>();
-        }
+                => vnot_u(x);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector256<T> vnot<T>(Vector256<T> x)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vnot_u(x);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vnot_i(x);
-            else 
-                throw unsupported<T>();
-        }
+                => vnot_u(x);
 
         [MethodImpl(Inline)]
         static Vector128<T> vnot_u<T>(Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vnot(vcast8u(x)));
+                return vgeneric<T>(dinx.vnot(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vnot(vcast16u(x)));
+                return vgeneric<T>(dinx.vnot(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vnot(vcast32u(x)));
+                return vgeneric<T>(dinx.vnot(v32u(x)));
+            else if(typeof(T) == typeof(ulong))
+                return vgeneric<T>(dinx.vnot(v64u(x)));
             else
-                return vgeneric<T>(dinx.vnot(vcast64u(x)));
+                return vnot_i(x);
         }
 
         [MethodImpl(Inline)]
@@ -70,13 +46,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return As.vgeneric<T>(dinx.vnot(vcast8i(x)));
+                return vgeneric<T>(dinx.vnot(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return As.vgeneric<T>(dinx.vnot(vcast16i(x)));
+                return vgeneric<T>(dinx.vnot(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vnot(vcast32i(x)));
+                return vgeneric<T>(dinx.vnot(v32i(x)));
+            else if(typeof(T) == typeof(long))
+                return vgeneric<T>(dinx.vnot(v64i(x)));
             else
-                return vgeneric<T>(dinx.vnot(vcast64i(x)));
+                throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
@@ -84,27 +62,31 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vnot(vcast8u(x)));
+                return vgeneric<T>(dinx.vnot(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vnot(vcast16u(x)));
+                return vgeneric<T>(dinx.vnot(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vnot(vcast32u(x)));
+                return vgeneric<T>(dinx.vnot(v32u(x)));
+            else if(typeof(T) == typeof(ulong))
+                return vgeneric<T>(dinx.vnot(v64u(x)));
             else
-                return vgeneric<T>(dinx.vnot(vcast64u(x)));
+                return vnot_i(x);
         }
 
         [MethodImpl(Inline)]
         static Vector256<T> vnot_i<T>(Vector256<T> x)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dinx.vnot(vcast8i(x)));
+             if(typeof(T) == typeof(sbyte))
+                return vgeneric<T>(dinx.vnot(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dinx.vnot(vcast16i(x)));
+                return vgeneric<T>(dinx.vnot(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vnot(vcast32i(x)));
+                return vgeneric<T>(dinx.vnot(v32i(x)));
+            else if(typeof(T) == typeof(long))
+                return vgeneric<T>(dinx.vnot(v64i(x)));
             else
-                return vgeneric<T>(dinx.vnot(vcast64i(x)));
-        }
+                throw unsupported<T>();
+       }
     }
 }

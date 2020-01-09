@@ -17,7 +17,7 @@ namespace Z0
     public static class OpFormatX
     {
         public static string Format(this PrimalKind k)
-            => $"{k.BitWidth()}{k.Indicator()}";
+            => $"{k.BitWidth()}{k.Sign()}";
 
         public static string FormatParam(this Pair<ParameterInfo,int> src)
         {
@@ -27,11 +27,11 @@ namespace Z0
                 var typewidth = ZFunc.bitwidth(t);
                 var segkind = ZFunc.segtype(t).Require().Kind();
                 var segwidth = segkind.BitWidth();
-                var indicator = segkind.Indicator();
+                var indicator = segkind.Sign();
                 return $"{typewidth}x{segwidth}{indicator}".PadLeft(7);
             }
             else
-                return $"{src.B}{t.Kind().Indicator()}";
+                return $"{src.B}{t.Kind().Sign()}";
         }
 
         public static string FormatParams(this IEnumerable<Pair<ParameterInfo,int>> src)

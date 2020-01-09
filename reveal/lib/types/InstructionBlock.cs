@@ -24,25 +24,11 @@ namespace Z0
         /// </summary>
         /// <param name="encoded">The encoded instructions</param>
         /// <param name="decoded">The decoded instructions</param>
-        public static InstructionBlock Define(Moniker name, ReadOnlySpan<byte> encoded, Instruction[] decoded)
+        public static InstructionBlock Define(string name, ReadOnlySpan<byte> encoded, Instruction[] decoded)
             => new InstructionBlock(name,encoded,decoded);
 
-        /// <summary>
-        /// Defines an instruction sequence, in both encoded and decoded form
-        /// </summary>
-        /// <param name="encoded">The encoded instructions</param>
-        /// <param name="decoded">The decoded instructions</param>
-        public static InstructionBlock Define(Moniker name, byte[] encoded, Instruction[] decoded)
-            => new InstructionBlock(name,encoded,decoded);
 
-        InstructionBlock(Moniker name, byte[] encoded, Instruction[] decoded)
-        {
-            this.Identity = name;
-            this.EncodedData = encoded;
-            this.Decoded = decoded;
-        }
-
-        InstructionBlock(Moniker name, ReadOnlySpan<byte> encoded, Instruction[] decoded)
+        InstructionBlock(string name, ReadOnlySpan<byte> encoded, Instruction[] decoded)
         {
             this.Identity = name;
             this.EncodedData = encoded.ToArray();
@@ -54,7 +40,7 @@ namespace Z0
         /// <summary>
         /// The identity given to the block
         /// </summary>
-        public Moniker Identity {get;}
+        public string Identity {get;}
 
         /// <summary>
         /// The encoded instructions

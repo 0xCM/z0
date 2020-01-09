@@ -1,4 +1,4 @@
-// 2020-01-08 01:52:30:071
+// 2020-01-08 22:54:02:047
 Sign:int signum_d64u(ulong x)
 {
     IL_0000: ldarg.0
@@ -181,131 +181,131 @@ double square_g64f(double x)
     IL_0006: ret
 
 }
-sbyte srl_d8i(sbyte lhs, int offset)
+sbyte srl_d8i(sbyte lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.SByte Z0.math::srl(System.SByte,System.Int32)
+    IL_0002: call System.SByte Z0.math::srl(System.SByte,System.Byte)
     IL_0007: ret
 
 }
-sbyte srl_g8i(sbyte lhs, int offset)
+sbyte srl_g8i(sbyte lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.SByte Z0.gmath::srl<System.SByte>(System.SByte,System.Int32)
+    IL_0002: call System.SByte Z0.gmath::srl<System.SByte>(System.SByte,System.Byte)
     IL_0007: ret
 
 }
-byte srl_d8u(byte lhs, int offset)
+byte srl_d8u(byte lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Byte Z0.math::srl(System.Byte,System.Int32)
+    IL_0002: call System.Byte Z0.math::srl(System.Byte,System.Byte)
     IL_0007: ret
 
 }
-byte srl_g8u(byte lhs, int offset)
+byte srl_g8u(byte lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Byte Z0.gmath::srl<System.Byte>(System.Byte,System.Int32)
+    IL_0002: call System.Byte Z0.gmath::srl<System.Byte>(System.Byte,System.Byte)
     IL_0007: ret
 
 }
-short srl_d16i(short lhs, int offset)
+short srl_d16i(short lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Int16 Z0.math::srl(System.Int16,System.Int32)
+    IL_0002: call System.Int16 Z0.math::srl(System.Int16,System.Byte)
     IL_0007: ret
 
 }
-short srl_g16i(short lhs, int offset)
+short srl_g16i(short lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Int16 Z0.gmath::srl<System.Int16>(System.Int16,System.Int32)
+    IL_0002: call System.Int16 Z0.gmath::srl<System.Int16>(System.Int16,System.Byte)
     IL_0007: ret
 
 }
-ushort srl_d16u(ushort lhs, int offset)
+ushort srl_d16u(ushort lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt16 Z0.math::srl(System.UInt16,System.Int32)
+    IL_0002: call System.UInt16 Z0.math::srl(System.UInt16,System.Byte)
     IL_0007: ret
 
 }
-ushort srl_g16u(ushort lhs, int offset)
+ushort srl_g16u(ushort lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt16 Z0.gmath::srl<System.UInt16>(System.UInt16,System.Int32)
+    IL_0002: call System.UInt16 Z0.gmath::srl<System.UInt16>(System.UInt16,System.Byte)
     IL_0007: ret
 
 }
-int srl_d32i(int lhs, int offset)
+int srl_d32i(int lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Int32 Z0.math::srl(System.Int32,System.Int32)
+    IL_0002: call System.Int32 Z0.math::srl(System.Int32,System.Byte)
     IL_0007: ret
 
 }
-int srl_g32i(int lhs, int offset)
+int srl_g32i(int lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Int32 Z0.gmath::srl<System.Int32>(System.Int32,System.Int32)
+    IL_0002: call System.Int32 Z0.gmath::srl<System.Int32>(System.Int32,System.Byte)
     IL_0007: ret
 
 }
-uint srl_d32u(uint lhs, int offset)
+uint srl_d32u(uint lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt32 Z0.math::srl(System.UInt32,System.Int32)
+    IL_0002: call System.UInt32 Z0.math::srl(System.UInt32,System.Byte)
     IL_0007: ret
 
 }
-uint srl_g32u(uint lhs, int offset)
+uint srl_g32u(uint lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt32 Z0.gmath::srl<System.UInt32>(System.UInt32,System.Int32)
+    IL_0002: call System.UInt32 Z0.gmath::srl<System.UInt32>(System.UInt32,System.Byte)
     IL_0007: ret
 
 }
-long srl_d64i(long lhs, int offset)
+long srl_d64i(long lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Int64 Z0.math::srl(System.Int64,System.Int32)
+    IL_0002: call System.Int64 Z0.math::srl(System.Int64,System.Byte)
     IL_0007: ret
 
 }
-long srl_g64i(long lhs, int offset)
+long srl_g64i(long lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Int64 Z0.gmath::srl<System.Int64>(System.Int64,System.Int32)
+    IL_0002: call System.Int64 Z0.gmath::srl<System.Int64>(System.Int64,System.Byte)
     IL_0007: ret
 
 }
-ulong srl_d64u(ulong lhs, int offset)
+ulong srl_d64u(ulong lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.math::srl(System.UInt64,System.Int32)
+    IL_0002: call System.UInt64 Z0.math::srl(System.UInt64,System.Byte)
     IL_0007: ret
 
 }
-ulong srl_g64u(ulong lhs, int offset)
+ulong srl_g64u(ulong lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.gmath::srl<System.UInt64>(System.UInt64,System.Int32)
+    IL_0002: call System.UInt64 Z0.gmath::srl<System.UInt64>(System.UInt64,System.Byte)
     IL_0007: ret
 
 }
@@ -1405,7 +1405,7 @@ sbyte sar_d8i(sbyte lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.SByte Z0.math::sar(System.SByte,System.Int32)
+    IL_0002: call System.SByte Z0.math::sar(System.SByte,System.Byte)
     IL_0007: ret
 
 }
@@ -1421,7 +1421,7 @@ byte sar_d8u(byte lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Byte Z0.math::sar(System.Byte,System.Int32)
+    IL_0002: call System.Byte Z0.math::sar(System.Byte,System.Byte)
     IL_0007: ret
 
 }
@@ -1437,7 +1437,7 @@ short sar_d16i(short lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Int16 Z0.math::sar(System.Int16,System.Int32)
+    IL_0002: call System.Int16 Z0.math::sar(System.Int16,System.Byte)
     IL_0007: ret
 
 }
@@ -1453,7 +1453,7 @@ ushort sar_d16u(ushort lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt16 Z0.math::sar(System.UInt16,System.Int32)
+    IL_0002: call System.UInt16 Z0.math::sar(System.UInt16,System.Byte)
     IL_0007: ret
 
 }
@@ -1469,7 +1469,7 @@ int sar_d32i(int lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Int32 Z0.math::sar(System.Int32,System.Int32)
+    IL_0002: call System.Int32 Z0.math::sar(System.Int32,System.Byte)
     IL_0007: ret
 
 }
@@ -1485,7 +1485,7 @@ uint sar_d32u(uint lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt32 Z0.math::sar(System.UInt32,System.Int32)
+    IL_0002: call System.UInt32 Z0.math::sar(System.UInt32,System.Byte)
     IL_0007: ret
 
 }
@@ -1501,7 +1501,7 @@ long sar_d64i(long lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Int64 Z0.math::sar(System.Int64,System.Int32)
+    IL_0002: call System.Int64 Z0.math::sar(System.Int64,System.Byte)
     IL_0007: ret
 
 }
@@ -1517,7 +1517,7 @@ ulong sar_d64u(ulong lhs, byte offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.math::sar(System.UInt64,System.Int32)
+    IL_0002: call System.UInt64 Z0.math::sar(System.UInt64,System.Byte)
     IL_0007: ret
 
 }

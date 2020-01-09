@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     [Flags]
-    public enum OpKind : ulong
+    public enum FunctionKind : ulong
     {
         Action = Pow2.T03,
 

@@ -167,7 +167,7 @@ namespace Z0
         {
             var v = random.Next<T>();
             var clamp = bitsize<T>() - math.min(bitsize<T>(), wmax);
-            return gmath.srl(v,clamp);
+            return gmath.srl(v,(byte)clamp);
         }    
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var v = random.Next<T>();
-            int clamp = bitsize<T>() - math.min(bitsize<T>(), natval(n));
+            var clamp = (byte)(bitsize<T>() - math.min(bitsize<T>(), natval(n)));
             return gmath.srl(v,clamp);
         }    
 

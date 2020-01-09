@@ -114,9 +114,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = GX.div(t);
-            CheckBinOpMatch(f, g, t, true);
-            CheckBinOpSpan(f, g, t,true);
-
+            var validator = this.BinaryValidator(true,t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
         }
 
         public void mod_check()
@@ -140,8 +140,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = GX.mod(t);
-            CheckBinOpMatch(f, g, t,true);
-            CheckBinOpSpan(f, g, t,true);
+            var validator = this.BinaryValidator(true,t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
         }
 
         public void modmul_check()
@@ -165,9 +166,10 @@ namespace Z0
             where  T : unmanaged
         {
             var g = GX.modmul(t);
-            CheckTernaryOpMatch(f, g, t, true);
+            var validator = this.TernaryValidator(true,t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
         }
-
 
         public void clamp_check()
         {

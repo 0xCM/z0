@@ -16,22 +16,22 @@ namespace Z0
     partial class ginx
     {
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector128<T> vgather<T>(in T src, Vector128<T> vidx)
             where T : unmanaged        
                 => vgather_u(n128,src,vidx);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector256<T> vgather<T>(in T src, Vector256<T> vidx)
             where T : unmanaged        
                 => vgather_u(n256,src,vidx);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector128<T> vgather<T>(ReadOnlySpan<T> src, Vector128<T> vidx)
             where T : unmanaged        
                 => vgather_u(n128, head(src),vidx);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static Vector256<T> vgather<T>(ReadOnlySpan<T> src, Vector256<T> vidx)
             where T : unmanaged        
                 => vgather_u(n256, head(src), vidx);

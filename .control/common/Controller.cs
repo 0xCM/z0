@@ -30,5 +30,11 @@ namespace Z0
         public abstract void Execute();
        
 
+        protected IEnumerable<IAssemblyDesignator> Designates
+            => Designators.Control.Designated.Designates;
+
+        protected Option<IAssemblyDesignator> Designate(string name)
+            => Designates.Designate(name);
+
     }
 }

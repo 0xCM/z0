@@ -109,7 +109,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static int PrimalSize(this Type t)
-            => Primitive.size(t);
+            => Classified.size(t);
 
         /// <summary>
         /// Returns the number of bits occupied by a type if it is primal and 0 otherwise
@@ -117,7 +117,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
         public static int PrimalBitWidth(this Type t)
-            => Primitive.bitsize(t);
+            => Classified.width(t);
        
         [MethodImpl(Inline)]
         public static bool IsStatic(this PropertyInfo p)

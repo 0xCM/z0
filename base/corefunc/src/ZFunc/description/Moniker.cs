@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="k">The primal kind</param>
         [MethodImpl(Inline)]   
         public static string suffix(PrimalKind k)
-            => $"{Primitive.bitsize(k)}{Primitive.indicator(k)}";
+            => $"{Classified.width(k)}{Classified.sign(k)}";
 
         /// <summary>
         /// Produces a canonical designator of the form {op}_{bitsize[T]}{u | i | f} for an operation over a primal type
@@ -78,10 +78,13 @@ namespace Z0
                 return Segmented(method);
             else if(method.IsPrimalOp())
                 return Primal(method);
+            else if(method.IsPredicate())
+                return Predicate(method);
+            else if(method.IsPrimalShift())
+                return PrimalShift(method);
             else
-                return new Moniker(method.ToString());
+                return new Moniker($"{method.Name}_{method.GetHashCode()}");
         }
-
 
         public static implicit operator string(Moniker src)
             => src.Text;
@@ -153,6 +156,20 @@ namespace Z0
         /// <param name="method">The operation method</param>
         static Moniker Primal(MethodInfo method)
             => Moniker.define(method.Name, method.ReturnType.Kind(), method.IsConstructedGenericMethod);
+
+        /// <summary>
+        /// Derives a moniker for a predicate
+        /// </summary>
+        /// <param name="method">The operation method</param>
+        static Moniker Predicate(MethodInfo method)
+            => Moniker.define(method.Name, method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
+
+        /// <summary>
+        /// Derives a moniker for a predicate
+        /// </summary>
+        /// <param name="method">The operation method</param>
+        static Moniker PrimalShift(MethodInfo method)
+            => Moniker.define(method.Name, method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
 
         /// <summary>
         /// Derives a moniker for an operation over segmented domain(s)

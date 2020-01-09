@@ -145,6 +145,14 @@ partial class zfunc
         => Moniker.define(name,k);
 
     /// <summary>
+    /// Derives a moniker from method metadata
+    /// </summary>
+    /// <param name="m">The source method</param>
+    [MethodImpl(Inline)]   
+    public static Moniker moniker(MethodInfo m)
+        => Moniker.define(m);
+
+    /// <summary>
     /// Defines a moniker with rendering {opname}_N{u | i | f} that identifies an
     /// operation over a primal type of bit width N := bitsize[T]
     /// </summary>
@@ -184,7 +192,7 @@ partial class zfunc
     public static Moniker moniker<W,T>(string opname, W w = default, T t = default)
         where W : unmanaged, ITypeNat
         where T : unmanaged
-            => Moniker.define(opname,Primitive.kind<T>(),w);
+            => Moniker.define(opname,Classified.primalkind<T>(),w);
 
     /// <summary>
     /// Returns the System.Type of the supplied parametric type
@@ -203,5 +211,5 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static PrimalKind kind<T>(T t = default)
         where T : unmanaged
-            => Primitive.kind(t);
+            => Classified.primalkind(t);
 }

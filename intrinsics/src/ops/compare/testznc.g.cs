@@ -14,7 +14,7 @@ namespace Z0
 
     partial class ginx
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static bit vtestznc<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
         {
@@ -32,7 +32,7 @@ namespace Z0
                 return vtestznc_f(src,mask);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static bit vtestznc<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
         {
@@ -56,13 +56,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dinx.vtestznc(vcast8i(src), vcast8i(mask));
+                return dinx.vtestznc(v8i(src), v8i(mask));
             else if(typeof(T) == typeof(short))
-                return dinx.vtestznc(vcast16i(src), vcast16i(mask));
+                return dinx.vtestznc(v16i(src), v16i(mask));
             else if(typeof(T) == typeof(int))
-                return dinx.vtestznc(vcast32i(src), vcast32i(mask));
+                return dinx.vtestznc(v32i(src), v32i(mask));
             else 
-                return dinx.vtestznc(vcast64i(src), vcast64i(mask));
+                return dinx.vtestznc(v64i(src), v64i(mask));
         }
 
         [MethodImpl(Inline)]
@@ -70,13 +70,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return dinx.vtestznc(vcast8u(src), vcast8u(mask));
+                return dinx.vtestznc(v8u(src), v8u(mask));
             else if(typeof(T) == typeof(ushort))
-                return dinx.vtestznc(vcast16u(src), vcast16u(mask));
+                return dinx.vtestznc(v16u(src), v16u(mask));
             else if(typeof(T) == typeof(uint))
-                return dinx.vtestznc(vcast32u(src), vcast32u(mask));
+                return dinx.vtestznc(v32u(src), v32u(mask));
             else 
-                return dinx.vtestznc(vcast64u(src), vcast64u(mask));
+                return dinx.vtestznc(v64u(src), v64u(mask));
         }
 
         [MethodImpl(Inline)]
@@ -84,9 +84,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dinx.vtestznc(vcast32f(src), vcast32f(mask));
+                return dinx.vtestznc(v32f(src), v32f(mask));
             else if(typeof(T) == typeof(double))
-                return dinx.vtestznc(vcast64f(src), vcast64f(mask));
+                return dinx.vtestznc(v64f(src), v64f(mask));
             else 
                 throw unsupported<T>();
         }
@@ -96,13 +96,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dinx.vtestznc(vcast8i(src), vcast8i(mask));
+                return dinx.vtestznc(v8i(src), v8i(mask));
             else if(typeof(T) == typeof(short))
-                return dinx.vtestznc(vcast16i(src), vcast16i(mask));
+                return dinx.vtestznc(v16i(src), v16i(mask));
             else if(typeof(T) == typeof(int))
-                return dinx.vtestznc(vcast32i(src), vcast32i(mask));
+                return dinx.vtestznc(v32i(src), v32i(mask));
             else 
-                return dinx.vtestznc(vcast64i(src), vcast64i(mask));
+                return dinx.vtestznc(v64i(src), v64i(mask));
         }
 
         [MethodImpl(Inline)]
@@ -110,13 +110,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return dinx.vtestznc(vcast8u(src), vcast8u(mask));
+                return dinx.vtestznc(v8u(src), v8u(mask));
             else if(typeof(T) == typeof(ushort))
-                return dinx.vtestznc(vcast16u(src), vcast16u(mask));
+                return dinx.vtestznc(v16u(src), v16u(mask));
             else if(typeof(T) == typeof(uint))
-                return dinx.vtestznc(vcast32u(src), vcast32u(mask));
+                return dinx.vtestznc(v32u(src), v32u(mask));
             else 
-                return dinx.vtestznc(vcast64u(src), vcast64u(mask));
+                return dinx.vtestznc(v64u(src), v64u(mask));
         }
 
         [MethodImpl(Inline)]
@@ -124,9 +124,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dinx.vtestznc(vcast32f(src), vcast32f(mask));
+                return dinx.vtestznc(v32f(src), v32f(mask));
             else if(typeof(T) == typeof(double))
-                return dinx.vtestznc(vcast64f(src), vcast64f(mask));
+                return dinx.vtestznc(v64f(src), v64f(mask));
             else 
                 throw unsupported<T>();
         }

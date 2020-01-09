@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="a">The source value</param>
         /// <param name="offset">The number of bits to shift the source value leftwards</param>
         [MethodImpl(Inline)]
-        public static byte xors(byte a, int offset)
+        public static byte xors(byte a, byte offset)
             => (byte)xors((uint)a,offset);
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="a">The source value</param>
         /// <param name="offset">The number of bits to shift the source value leftwards</param>
         [MethodImpl(Inline)]
-        public static sbyte xors(sbyte a, int offset)
+        public static sbyte xors(sbyte a, byte offset)
             => (sbyte)xors((byte)a,offset);
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="a">The source value</param>
         /// <param name="offset">The number of bits to shift the source value leftwards</param>
         [MethodImpl(Inline)]
-        public static ushort xors(ushort a, int offset)
+        public static ushort xors(ushort a, byte offset)
             => (ushort)xors((uint)a,offset);
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="a">The source value</param>
         /// <param name="offset">The number of bits to shift the source value leftwards</param>
         [MethodImpl(Inline)]
-        public static short xors(short a, int offset)
+        public static short xors(short a, byte offset)
             => (short)xors((ushort)a,offset);
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="a">The source value</param>
         /// <param name="offset">The number of bits to shift the source value leftwards</param>
         [MethodImpl(Inline)]
-        public static uint xors(uint a, int offset)
+        public static uint xors(uint a, byte offset)
             => a^((a << offset) ^ (a >> offset));
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="a">The source value</param>
         /// <param name="offset">The number of bits to shift the source value leftwards</param>
         [MethodImpl(Inline)]
-        public static int xors(int a, int offset)
+        public static int xors(int a, byte offset)
             => a^((a << offset) ^ (a >> offset));
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift the source value leftwards</param>
         [MethodImpl(Inline)]
-        public static long xors(long src, int offset)
+        public static long xors(long src, byte offset)
             => src^((src << offset) ^ (src >> offset));
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift the source value leftwards</param>
         [MethodImpl(Inline)]
-        public static ulong xors(ulong src, int offset)
+        public static ulong xors(ulong src, byte offset)
             => src^((src << offset) ^ (src >> offset));
     }
 }

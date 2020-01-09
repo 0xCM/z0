@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift leftwards</param>
         [MethodImpl(Inline)]
-        public static sbyte sll(sbyte src, int offset)
+        public static sbyte sll(sbyte src, byte offset)
             => (sbyte)(src << offset);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift leftwards</param>
         [MethodImpl(Inline)]
-        public static byte sll(byte src, int offset)
+        public static byte sll(byte src, byte offset)
             => (byte)(src << offset);
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift leftwards</param>
         [MethodImpl(Inline)]
-        public static short sll(short src, int offset)
+        public static short sll(short src, byte offset)
             => (short)(src << offset);
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift leftwards</param>
         [MethodImpl(Inline)]
-        public static ushort sll(ushort src, int offset)
+        public static ushort sll(ushort src, byte offset)
             => (ushort)(src << offset);
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift leftwards</param>
         [MethodImpl(Inline)]
-        public static int sll(int src, int offset)
+        public static int sll(int src, byte offset)
             => src << offset;
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift leftwards</param>
         [MethodImpl(Inline)]
-        public static uint sll(uint src, int offset)
+        public static uint sll(uint src, byte offset)
             => src << offset;
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift leftwards</param>
         [MethodImpl(Inline)]
-        public static long sll(long src, int offset)
+        public static long sll(long src, byte offset)
             => src << offset;
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift leftwards</param>
         [MethodImpl(Inline)]
-        public static ulong sll(ulong src, int offset)
+        public static ulong sll(ulong src, byte offset)
             => src << offset;
    }
 }

@@ -35,28 +35,6 @@ namespace Z0
                 => xb.Data.Identical(yb.Data);
 
         /// <summary>
-        /// Returns 1 if left and right blocks cover identical cells and 0 otherwise
-        /// </summary>
-        /// <param name="xb">The left block</param>
-        /// <param name="yb">The right block</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static bit Identical<T>(this ConstBlock128<T> xb, ConstBlock128<T> yb)        
-            where T : unmanaged        
-                => xb.Data.Identical(yb.Data);
-
-        /// <summary>
-        /// Returns 1 if left and right blocks cover identical cells and 0 otherwise
-        /// </summary>
-        /// <param name="xb">The left block</param>
-        /// <param name="yb">The right block</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static bit Identical<T>(this ConstBlock256<T> xb, ConstBlock256<T> yb)        
-            where T : unmanaged        
-                => xb.Data.Identical(yb.Data);
-
-        /// <summary>
         /// Returns 1 if the left and right spans contain identical content and 0 otherwise
         /// </summary>
         /// <param name="xs">The left span</param>

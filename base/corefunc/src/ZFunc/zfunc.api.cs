@@ -28,8 +28,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source method</param>
         /// <param name="args">The arguments over which to close the method, if generic</param>
-        public static OpDescriptor descriptor(MethodInfo m, params Type[] args)
-            => OpDescriptor.Define(m,args);
+        public static Operation descriptor(MethodInfo m, params Type[] args)
+            => Operation.Define(m,args);
 
         /// <summary>
         /// Determines whether a type is an intrinsic vector of specified width

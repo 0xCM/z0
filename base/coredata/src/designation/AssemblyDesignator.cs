@@ -33,6 +33,9 @@ namespace Z0
         public virtual string Name
             => Assembly.GetName().Name;
 
+        public virtual IEnumerable<string> OpNames
+            => new string[]{};
+
         public virtual IEnumerable<IAssemblyDesignator> Designates {get;}
 
         public virtual void Run(params string[] args)

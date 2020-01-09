@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static zfunc;    
+    using static As;
 
     partial class gmath
     {
@@ -19,11 +20,17 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         /// <typeparam name="T">The primal type</typeparam>
-        /// <remarks>Code generation for this is good; type-specific specializations exist for convenience.</remarks>
         [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
         public static T select<T>(T a, T b, T c)
             where T : unmanaged
-                => or(and(a,b), nonimpl(a,c));
+        {            
+            if(typeof(T) == typeof(byte))    
+                return generic<T>(math.select(uint8(a), uint8(b), uint8(c)));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(math.select(uint16(a), uint16(b), uint16(c)));
+            else 
+                return or(and(a,b), nonimpl(a,c));
+        }
 
         /// <summary>
         ///  This operator is equivalent to select, but is implemented xor(b, and(xor(b,a),  mask))

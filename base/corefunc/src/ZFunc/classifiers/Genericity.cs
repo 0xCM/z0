@@ -9,26 +9,27 @@ namespace Z0
     using static zfunc;
 
     public enum Genericity : byte
-    {
+    {        
+        /// <summary>
+        /// Classifies artifacts that are not type-parametric
+        /// </summary>
         NonGeneric = 0,
         
         /// <summary>
-        /// Classifies non-executable generic type/members
+        /// Classifies non-executable type-parametric artifacts
         /// </summary>
         Open = 1,
 
         /// <summary>
-        /// Classifies generic type/member definitions that can be used to produce concrete/executable artifacts
-        /// when supplied with required type arguments
+        /// Classifies a definitions of a type-parametric artifacts that can be used to produce 
+        /// concrete/executable artifacts when supplied with required type arguments
         /// </summary>
-        Spec = 4,
+        Definition = 4,
 
         /// <summary>
-        /// Classifies concrete generic type/member definitions that have been closed over their type arguments
+        /// Classifies executable/concrete type-parametric artifacts that have been closed with required type arguments
         /// </summary>
         Closed = 2,
-
     }
 
- 
 }

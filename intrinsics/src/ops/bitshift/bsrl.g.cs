@@ -26,7 +26,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vbsrl(v8u(x), count));
+                return vgeneric<T>(dinx.vbsrl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
                 return vgeneric<T>(dinx.vbsrl(v16u(x), count));
             else if(typeof(T) == typeof(uint)) 

@@ -76,12 +76,12 @@ namespace Z0
 
         public static MethodDisassembly[] Deconstruct(params MethodInfo[] methods)
             => Disassemble(x => error(x), methods).ToArray();
-
+        
         /// <summary>
         /// Decodes encoded assembly instructions
         /// </summary>
         /// <param name="data">The encoded instructions</param>
-        public static InstructionBlock Decode(Moniker m, ReadOnlySpan<byte> data)
+        public static InstructionBlock Decode(string name, ReadOnlySpan<byte> data)
 		{
             var dst = new InstructionList();
             var reader = new ByteArrayCodeReader(data.ToArray());
@@ -92,15 +92,9 @@ namespace Z0
 				ref var instruction = ref dst.AllocUninitializedElement();
 				decoder.Decode(out instruction);                
 			}
-            return InstructionBlock.Define(m, data, dst.ToArray());
+            return InstructionBlock.Define(name, data, dst.ToArray());
 		}
 
-        /// <summary>
-        /// Decodes an assembly code block
-        /// </summary>
-        /// <param name="src">The source assembly block</param>
-		public static InstructionBlock Decode(AsmCode src)
-            => Decode(src.Name, src.Data);
 
         /// <summary>
         /// Disassasembles non-generic functions defined by a type to individual files in the appropriate assembly data folder

@@ -39,7 +39,7 @@ namespace Z0
 
         protected Moniker TestOpName<T>(T t = default)
             where T : unmanaged
-                => TestOpMoniker(Primitive.kind<T>());
+                => TestOpMoniker(Classified.primalkind<T>());
 
         protected static AsmCode ReadAsm(FolderName folder, Moniker m)
             => AsmLib.Read(folder, m);

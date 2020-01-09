@@ -16,15 +16,15 @@ namespace Z0
     /// <summary>
     /// Encapsulates operator information
     /// </summary>
-    public sealed class OpDescriptor
+    public sealed class Operation
     {        
-        public static bool operator==(OpDescriptor a, OpDescriptor b)
+        public static bool operator==(Operation a, Operation b)
             => a.Equals(b);
 
-        public static bool operator!=(OpDescriptor a, OpDescriptor b)
+        public static bool operator!=(Operation a, Operation b)
             => !a.Equals(b);
 
-        internal static OpDescriptor Define(MethodInfo method, params Type[] args)
+        internal static Operation Define(MethodInfo method, params Type[] args)
         {            
             var dst = Init(method,args);
             dst.Name = dst.Method.Name;
@@ -36,7 +36,7 @@ namespace Z0
             dst.NativeData = dst.Method.CaptureAsm();
             dst.Input = dst.Method.InputWidths();
             dst.Output = dst.Method.OutputWidth();
-            dst.Moniker = Z0.Moniker.define(dst.Method);
+            dst.Moniker = moniker(dst.Method);
             return dst;
         }
 
@@ -74,15 +74,15 @@ namespace Z0
         public override int GetHashCode()
             => Method.GetHashCode();
 
-        public bool Equals(OpDescriptor a)
+        public bool Equals(Operation a)
             => Method.Equals(a.Method);
 
         public override bool Equals(object obj)                    
-            => obj is OpDescriptor s && Equals(s);
+            => obj is Operation s && Equals(s);
             
-        static OpDescriptor Init(MethodInfo method, params Type[] args)
+        static Operation Init(MethodInfo method, params Type[] args)
         {
-            var dst = new OpDescriptor();
+            var dst = new Operation();
 
             if(method.IsConstructedGenericMethod)
             {
@@ -110,6 +110,5 @@ namespace Z0
             }
             return dst;
         }
-
     }
 }

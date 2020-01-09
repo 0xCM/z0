@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="offset">The number of bits to shift</param>
         /// <typeparam name="T">The primal integer type</typeparam>
         [MethodImpl(Inline), ZFunc(PrimalKind.Integral)]
-        public static T srl<T>(T a, int offset)
+        public static T srl<T>(T a, byte offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -39,7 +39,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        static T srl_i<T>(T a, int offset)
+        static T srl_i<T>(T a, byte offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -53,7 +53,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T srl_u<T>(T a, int offset)
+        static T srl_u<T>(T a, byte offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

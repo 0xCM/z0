@@ -5,16 +5,20 @@
 namespace Z0
 {
     using System;
-    using System.ComponentModel;
-    using static zfunc;
 
-    public enum ParamDirection
+    public enum BlockWidth : uint
     {
-        Default,
+        w16 = 16,
 
-        In = 1,
+        w32 = 32,
 
-        Out = 2
+        w64 = 64,
+
+        w128 = 128,
+
+        w256 = 256,
+
+        w512 = 512
     }
 
 }

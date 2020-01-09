@@ -1,1 +1,0 @@
-math\Pow2Log2.cs(17,16): error CS0266: Cannot implicitly convert type 'System.Collections.Generic.IEnumerable<Z0.Pair<int, byte>>' to 'System.Collections.Generic.IEnumerable<(int b, byte p)>'. An explicit conversion exists (are you missing a cast?) [J:\dev\projects\z0\base\corefunc\src\z0.corefunc.csproj]

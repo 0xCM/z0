@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         /// <param name="s">The shift amount</param>
         [MethodImpl(Inline)]
-        public static BitVector4 srl(BitVector4 x, int s)
+        public static BitVector4 srl(BitVector4 x, byte s)
             => gmath.srl(x.data,s);
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         /// <param name="s">The shift amount</param>
         [MethodImpl(Inline)]
-        public static BitVector8 srl(BitVector8 x, int s)
+        public static BitVector8 srl(BitVector8 x, byte s)
             => gmath.srl(x.data,s);
             
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         /// <param name="s">The shift amount</param>
         [MethodImpl(Inline)]
-        public static BitVector16 srl(BitVector16 x, int s)
+        public static BitVector16 srl(BitVector16 x, byte s)
             => gmath.srl(x.data,s);
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         /// <param name="s">The shift amount</param>
         [MethodImpl(Inline)]
-        public static BitVector32 srl(BitVector32 x, int s)
+        public static BitVector32 srl(BitVector32 x, byte s)
             => gmath.srl(x.data, s);
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         /// <param name="s">The shift amount</param>
         [MethodImpl(Inline)]
-        public static BitVector64 srl(BitVector64 x, int s)
+        public static BitVector64 srl(BitVector64 x, byte s)
             => gmath.srl(x.data,s);            
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         /// <param name="s">The shift amount</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> srl<T>(BitVector<T> x, int s)
+        public static BitVector<T> srl<T>(BitVector<T> x, byte s)
             where T : unmanaged
                 => gmath.srl(x.Scalar,s);
 
@@ -77,7 +77,7 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         /// <param name="s">The shift amount</param>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> srl<N,T>(BitVector<N,T> x, int s)
+        public static BitVector<N,T> srl<N,T>(BitVector<N,T> x, byte s)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => gmath.srl(x.Scalar,s);
@@ -88,10 +88,10 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         /// <param name="s">The shift amount</param>
         [MethodImpl(Inline)]
-        public static BitVector128<N,T> srl<N,T>(in BitVector128<N,T> x, int s)
+        public static BitVector128<N,T> srl<N,T>(in BitVector128<N,T> x, byte s)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => ginx.vsrlx(x.data,(byte)s);
+                => ginx.vsrlx(x.data,s);
 
     }
 }

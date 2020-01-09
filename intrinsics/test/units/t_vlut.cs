@@ -11,8 +11,7 @@ namespace Z0
     using static zfunc;
 
     public class t_vlut : UnitTest<t_vlut>
-    {
-     
+    {     
         public void lut16_rep_check()
         {
             var n = n128;

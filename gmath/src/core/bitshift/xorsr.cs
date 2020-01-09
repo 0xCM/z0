@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="a">The source value</param>
         /// <param name="offset">The number of bits to shift the source value rightwards</param>
         [MethodImpl(Inline)]
-        public static byte xorsr(byte a, int offset)
+        public static byte xorsr(byte a, byte offset)
             => (byte)xorsr((uint)a, offset);
 
         /// <summary>
@@ -27,7 +27,25 @@ namespace Z0
         /// <param name="a">The source value</param>
         /// <param name="offset">The number of bits to shift the source value rightwards</param>
         [MethodImpl(Inline)]
-        public static ushort xorsr(ushort a, int offset)
+        public static sbyte xorsr(sbyte a, byte offset)
+            => (sbyte)xorsr((int)a, offset);
+
+        /// <summary>
+        /// Computes a^(a >> offset)
+        /// </summary>
+        /// <param name="a">The source value</param>
+        /// <param name="offset">The number of bits to shift the source value rightwards</param>
+        [MethodImpl(Inline)]
+        public static short xorsr(short a, byte offset)
+            => (short)xorsr((int)a, offset);
+
+        /// <summary>
+        /// Computes a^(a >> offset)
+        /// </summary>
+        /// <param name="a">The source value</param>
+        /// <param name="offset">The number of bits to shift the source value rightwards</param>
+        [MethodImpl(Inline)]
+        public static ushort xorsr(ushort a, byte offset)
             => (ushort)xorsr((uint)a, offset);
 
         /// <summary>
@@ -36,7 +54,7 @@ namespace Z0
         /// <param name="a">The source value</param>
         /// <param name="offset">The number of bits to shift the source value rightwards</param>
         [MethodImpl(Inline)]
-        public static uint xorsr(uint a, int offset)
+        public static int xorsr(int a, byte offset)
             => a^(a >> offset);
 
         /// <summary>
@@ -45,7 +63,25 @@ namespace Z0
         /// <param name="a">The source value</param>
         /// <param name="offset">The number of bits to shift the source value rightwards</param>
         [MethodImpl(Inline)]
-        public static ulong xorsr(ulong a, int offset)
+        public static uint xorsr(uint a, byte offset)
+            => a^(a >> offset);
+
+        /// <summary>
+        /// Computes a^(a >> offset)
+        /// </summary>
+        /// <param name="a">The source value</param>
+        /// <param name="offset">The number of bits to shift the source value rightwards</param>
+        [MethodImpl(Inline)]
+        public static long xorsr(long a, byte offset)
+            => a^(a >> offset);
+
+        /// <summary>
+        /// Computes a^(a >> offset)
+        /// </summary>
+        /// <param name="a">The source value</param>
+        /// <param name="offset">The number of bits to shift the source value rightwards</param>
+        [MethodImpl(Inline)]
+        public static ulong xorsr(ulong a, byte offset)
             => a^(a >> offset);
 
     }

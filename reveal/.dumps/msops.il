@@ -1,4 +1,4 @@
-// 2020-01-08 01:52:28:076
+// 2020-01-08 22:54:00:009
 Span<uint> msand_32u(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs, Span<uint> dst)
 {
     IL_0000: ldarg.0

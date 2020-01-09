@@ -108,7 +108,6 @@ namespace Z0
         public void ngteq_256xf32()
             => cmp_256xf32_check(FpCmpMode.NGE_UQ);
 
-
         protected void cmp_128x64_check(FpCmpMode mode)
         {
             for(var i = 0; i<RepCount; i++)
@@ -117,16 +116,15 @@ namespace Z0
                 var rhs = Random.CpuVector<double>(n128);
 
                 Span<double> lDst = stackalloc double[2];
-                lhs.StoreTo(ref head(lDst));
+                lhs.StoreTo(lDst);
 
                 Span<double> rDst = stackalloc double[2];
-                rhs.StoreTo(ref head(rDst));
+                rhs.StoreTo(rDst);
 
                 var expect = fmath.fcmp(lDst, rDst, mode);
                 var actual = vcmpf(lhs, rhs, mode);
                 Claim.eq(expect,actual);
             }
-
         }
 
         protected void cmp_256xf32_check(FpCmpMode mode)
@@ -137,10 +135,10 @@ namespace Z0
                 var y = Random.CpuVector<float>(n256);
 
                 Span<float> xDst = stackalloc float[8];
-                x.StoreTo(ref head(xDst));
+                x.StoreTo(xDst);
 
                 Span<float> yDst = stackalloc float[8];
-                y.StoreTo(ref head(yDst));
+                y.StoreTo(yDst);
 
                 var expect = fmath.fcmp(xDst, yDst, mode);
                 var actual = cmpf(x, y, mode);
@@ -189,7 +187,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static bool[] vcmpf(Vector128<double> x, Vector128<double> y, FpCmpMode mode)
             => TestNaN(Compare(x, y, fpmode(mode)));
-
 
         [MethodImpl(Inline)]
         static bool[] cmpf(Vector256<float> x, Vector256<float> y, FpCmpMode mode)

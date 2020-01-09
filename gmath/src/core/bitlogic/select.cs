@@ -12,19 +12,19 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static sbyte select(sbyte a, sbyte b, sbyte c)
-            => or(and(a,b), nonimpl(a,c));
+            => (sbyte)select((int)a, (int)b, (int)c);
 
         [MethodImpl(Inline)]
         public static byte select(byte a, byte b, byte c)
-            => or(and(a,b), nonimpl(a,c));
+            => (byte)select((uint)a, (uint)b, (uint)c);
 
         [MethodImpl(Inline)]
         public static short select(short a, short b, short c)
-            => or(and(a,b), nonimpl(a,c));
+            => (short)select((int)a, (int)b, (int)c);
 
         [MethodImpl(Inline)]
         public static ushort select(ushort a, ushort b, ushort c)
-            => or(and(a,b), nonimpl(a,c));
+            => (ushort)select((uint)a, (uint)b, (uint)c);
 
         [MethodImpl(Inline)]
         public static int select(int a, int b, int c)

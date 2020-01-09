@@ -36,8 +36,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = GX.eq(t);
-            CheckBinPredMatch(f, g, t);
-            CheckBinPredSpan(f, g, t);
+            var validator = this.BinaryPredicateValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
         }
 
         public void neq()
@@ -62,8 +63,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = GX.neq(t);
-            CheckBinPredMatch(f, g, t);
-            CheckBinPredSpan(f, g, t);
+            var validator = this.BinaryPredicateValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
 
         }
 
@@ -89,8 +91,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = GX.gt(t);
-            CheckBinPredMatch(f, g, t);
-            CheckBinPredSpan(f, g, t);
+            var validator = this.BinaryPredicateValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
 
         }
 
@@ -114,9 +117,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = GX.gteq(t);
-            CheckBinPredMatch(f, g, t);
-            CheckBinPredSpan(f, g, t);
-
+            var validator = this.BinaryPredicateValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
         }
 
         public void lt()
@@ -140,8 +143,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = GX.lt(t);
-            CheckBinPredMatch(f, g, t);
-            CheckBinPredSpan(f, g, t);
+            var validator = this.BinaryPredicateValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
         }
 
         public void lteq()
@@ -165,8 +169,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = GX.lteq(t);
-            CheckBinPredMatch(f, g, t);
-            CheckBinPredSpan(f, g, t);
+            var validator = this.BinaryPredicateValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
         }
 
         public void max_check()
@@ -189,8 +194,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = GX.max(t);
-            CheckBinOpMatch(f, g, t);
-            CheckBinOpSpan(f, g, t);
+            var validator = this.BinaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
         }
 
         public void min_check()
@@ -213,8 +219,9 @@ namespace Z0
             where  T : unmanaged
         {
             var g = GX.min(t);
-            CheckBinOpMatch(f, g, t);
-            CheckBinOpSpan(f, g, t);
+            var validator = this.BinaryValidator(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpan(f,g);
         }
     }
 }

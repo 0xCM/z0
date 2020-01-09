@@ -50,43 +50,6 @@ namespace Z0
             => m.Arity() == arity;
 
         /// <summary>
-        /// Determines whether a method is an action
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsAction(this MethodInfo m)
-            => m.ReturnType == typeof(void);
-
-        /// <summary>
-        /// Determines whether a method is an action with specified arity
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        /// <param name="arity">The arity to match</param>
-        public static bool IsAction(this MethodInfo m, int arity)
-            => m.IsAction() && m.HasArity(arity);
-
-        /// <summary>
-        /// Determines whether a method is a function
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsFunction(this MethodInfo m)
-            => m.ReturnType != typeof(void);
-
-        /// <summary>
-        /// Determines whether a method is a function with specified arity
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        /// <param name="arity">The arith to match</param>
-        public static bool IsFunction(this MethodInfo m, int arity)
-            => m.IsFunction() && m.HasArity(arity);
-
-        /// <summary>
-        /// Determines whether a method is an emitter, i.e. a method that returns a value but accepts no input
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsEmitter(this MethodInfo m)
-            => m.IsFunction() && m.HasArity(0);
-
-        /// <summary>
         /// Determines the number of parameters defined by a method
         /// </summary>
         /// <param name="m">The method to examine</param>
@@ -161,6 +124,13 @@ namespace Z0
         }
        
         /// <summary>
+        /// Returns true if the method has unspecified generic parameters, false otherwise
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsOpenGeneric(this MethodInfo m)
+            => m.ContainsGenericParameters;
+
+        /// <summary>
         /// Selects the concrete (not abstract) methods from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
@@ -202,12 +172,13 @@ namespace Z0
         public static IEnumerable<MethodInfo> Public(this IEnumerable<MethodInfo> src)
             => src.Where(t => t.IsPublic);
 
+
         /// <summary>
         /// Selects the open generic methods from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> OpenGeneric(this IEnumerable<MethodInfo> src)
-            => src.Where(t => t.ContainsGenericParameters);
+            => src.Where(IsOpenGeneric);
 
         /// <summary>
         /// Selects the open generic methods from a stream with a specified argument count

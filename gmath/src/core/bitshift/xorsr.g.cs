@@ -21,6 +21,11 @@ namespace Z0
         [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInt)]
         public static T xorsr<T>(T a, byte offset)
             where T : unmanaged
+                => xorsr_u(a,offset);
+
+        [MethodImpl(Inline)]
+        static T xorsr_u<T>(T a, byte offset)
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(math.xorsr(uint8(a), offset));
@@ -31,8 +36,23 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.xorsr(uint64(a), offset));
             else            
-                throw unsupported<T>();
+                return xorsr_i(a,offset);
         }           
 
+        [MethodImpl(Inline)]
+        static T xorsr_i<T>(T a, byte offset)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(math.xorsr(int8(a), offset));
+            else if(typeof(T) == typeof(short))
+                return generic<T>(math.xorsr(int16(a), offset));                
+            else if(typeof(T) == typeof(int))
+                return generic<T>(math.xorsr(int32(a), offset));
+            else if(typeof(T) == typeof(long))
+                return generic<T>(math.xorsr(int64(a), offset));
+            else            
+                throw unsupported<T>();
+        }           
     }
 }

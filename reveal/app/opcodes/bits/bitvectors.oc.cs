@@ -51,13 +51,13 @@ namespace Z0
         public static BitVector32 sll_bv_32u(BitVector32 x, byte offset)
             => BitVector.sll(x,offset);
 
-        public static BitVector32 sll_bv_o32u(BitVector32 x, int offset)
+        public static BitVector32 sll_bv_o32u(BitVector32 x, byte offset)
             => x << offset;
         
-        public static BitVector32 srl_bv_32u(BitVector32 x, int offset)
+        public static BitVector32 srl_bv_32u(BitVector32 x, byte offset)
             => BitVector.srl(x,offset);
 
-        public static BitVector32 srl_bv_o32u(BitVector32 x, int offset)
+        public static BitVector32 srl_bv_o32u(BitVector32 x, byte offset)
             => x >> offset;
 
         public static BitVector32 flip_bv_32u(BitVector32 x)
@@ -84,10 +84,10 @@ namespace Z0
         public static BitVector32 dec_bv_o32u(BitVector32 x)
             => --x;
 
-        public static BitVector32 rotl_bv_32u(BitVector32 x, int offset)
+        public static BitVector32 rotl_bv_32u(BitVector32 x, byte offset)
             => BitVector.rotl(x,offset);
 
-        public static BitVector32 rotr_bv_32u(BitVector32 x, int offset)
+        public static BitVector32 rotr_bv_32u(BitVector32 x, byte offset)
             => BitVector.rotr(x, offset);
 
         public static BitVector32 alt_32()

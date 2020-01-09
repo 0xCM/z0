@@ -12,8 +12,6 @@ namespace Z0
     public static partial class mathspan
     {    
 
-
-
         [MethodImpl(Inline)]
         public static Span<T> sqrt<T>(Span<T> src)
             where T : unmanaged

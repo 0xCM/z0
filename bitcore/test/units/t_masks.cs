@@ -88,7 +88,7 @@ namespace Z0
                 
                 Claim.eq(count, gbits.pop(mask));
 
-                var lowered = gmath.srl(mask, bitsize(t) -  count);
+                var lowered = gmath.srl(mask, (byte)(bitsize(t) -  count));
                 var width = gbits.width(lowered);
                 if(count != width)
                 {

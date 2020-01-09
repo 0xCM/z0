@@ -1,4 +1,4 @@
-// 2020-01-08 01:52:28:296
+// 2020-01-08 22:54:00:232
 ReadOnlySpan<byte> bitseq(byte value)
 {
     IL_0000: ldarg.0

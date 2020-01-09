@@ -18,7 +18,6 @@ namespace Z0
     /// </summary>
     public static partial class ginxsfp
     {
-
         [MethodImpl(Inline)]
         public static Vector128<T> load<T>(T src)
             where T : unmanaged

@@ -68,6 +68,8 @@ namespace Z0
         /// </summary>
         /// <param name="args">Arguments passed to the execution controller</param>
         void Run(params string[] args);
+
+        IEnumerable<string> OpNames {get;}        
     }
 
     /// <summary>

@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift rightwards</param>
         [MethodImpl(Inline)]
-        public static sbyte srl(sbyte src, int offset)
+        public static sbyte srl(sbyte src, byte offset)
             => (sbyte)srl32i(src,offset);
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift rightwards</param>
         [MethodImpl(Inline)]
-        public static byte srl(byte src, int offset)
+        public static byte srl(byte src, byte offset)
             => (byte)srl32u(src,offset);
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift rightwards</param>
         [MethodImpl(Inline)]
-        public static short srl(short src, int offset)
+        public static short srl(short src, byte offset)
             => (short) srl32i(src,offset);
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift rightwards</param>
         [MethodImpl(Inline)]
-        public static ushort srl(ushort src, int offset)
+        public static ushort srl(ushort src, byte offset)
             => (ushort) srl32u(src,offset);
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift rightwards</param>
         [MethodImpl(Inline)]
-        public static int srl(int src, int offset)
+        public static int srl(int src, byte offset)
             => srl32i(src,offset);
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift rightwards</param>
         [MethodImpl(Inline)]
-        public static uint srl(uint src, int offset)
+        public static uint srl(uint src, byte offset)
             => srl32u(src,offset);
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift rightwards</param>
         [MethodImpl(Inline)]
-        public static long srl(long src, int offset)
+        public static long srl(long src, byte offset)
             => srl64i(src,offset);
 
         /// <summary>
@@ -83,24 +83,24 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift rightwards</param>
         [MethodImpl(Inline)]
-        public static ulong srl(ulong src, int offset)
+        public static ulong srl(ulong src, byte offset)
             => srl64u(src,offset);
 
 
         [MethodImpl(Inline)]
-        static int srl32i(int src, int offset)
+        static int srl32i(int src, byte offset)
             => (int)((uint)src >> offset);
 
         [MethodImpl(Inline)]
-        static uint srl32u(uint src, int offset)
+        static uint srl32u(uint src, byte offset)
             => src >> offset;
 
         [MethodImpl(Inline)]
-        static long srl64i(long src, int offset)
+        static long srl64i(long src, byte offset)
             => (long)((ulong)src >> offset);
 
         [MethodImpl(Inline)]
-        static ulong srl64u(ulong src, int offset)
+        static ulong srl64u(ulong src, byte offset)
             => src >> offset;
 
     }

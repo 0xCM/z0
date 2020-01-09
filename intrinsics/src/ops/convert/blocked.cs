@@ -16,6 +16,7 @@ namespace Z0
     using static zfunc;   
     using static AsIn;
 
+
     partial class dinx
     {                
         // ~ 8i -> X
@@ -27,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_2x8i_2x64i")]
         public static unsafe Vector128<long> vconvert(in Block16<sbyte> src, N128 w, long t = default)
             => ConvertToVector128Int64(constptr(in src.Head));
 
@@ -37,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_4x8i_4x32i")]
         public static unsafe Vector128<int> vconvert(in Block32<sbyte> src, N128 w, int t  = default)
             => ConvertToVector128Int32(constptr(in src.Head));
 
@@ -47,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_4x8i_4x64i")]
         public static unsafe Vector256<long> vconvert(in Block32<sbyte> src, N256 w, long t = default)
             => ConvertToVector256Int64(constptr(in src.Head));
 
@@ -57,7 +58,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_8x8i_8x16i")]
         public static unsafe Vector128<short> vconvert(in Block64<sbyte> src, N128 w, short t = default)
             => ConvertToVector128Int16(constptr(in src.Head));
 
@@ -67,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_8x8i_8x32i")]
         public static unsafe Vector256<int> vconvert(in Block64<sbyte> src, N256 w, int t = default)
             => ConvertToVector256Int32(constptr(in src.Head));
 
@@ -77,7 +78,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_16x8i_16x16i")]
         public static unsafe Vector256<short> vconvert(in Block128<sbyte> src, N256 w, short t = default)
             => ConvertToVector256Int16(constptr(in src.Head));
 
@@ -86,22 +87,22 @@ namespace Z0
         
         /// <summary>
         /// PMOVZXBQ xmm, m16
-        /// 2x8u -> 2x64u
+        /// 2x8u -> 2x64i
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_2x8u_2x64i")]
         public static unsafe Vector128<long> vconvert(in Block16<byte> src, N128 w, long t = default)
             => ConvertToVector128Int64(constptr(in src.Head));
 
         /// <summary>
         /// PMOVZXBQ xmm, m16
-        /// 2x8u -> 2x64u
+        /// 2x8u -> 2x64i
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="block">The block index</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_2x8u_2x64i")]
         public static unsafe Vector128<long> vconvert(in Block16<byte> src, int block, N128 w, long t = default)
             => ConvertToVector128Int64(constptr(in src.BlockRef(block)));
 
@@ -111,7 +112,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_2x8u_2x64u")]
         public static unsafe Vector128<ulong> vconvert(in Block16<byte> src, N128 w, ulong t = default)
             => v64u(ConvertToVector128Int64(constptr(in src.Head)));
 
@@ -121,7 +122,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_4x8u_4x32i")]
         public static unsafe Vector128<int> vconvert(in Block32<byte> src, N128 w, int t = default)
             => ConvertToVector128Int32(constptr(in src.Head));
 
@@ -131,7 +132,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_4x8u_4x32u")]
         public static unsafe Vector128<uint> vconvert(in Block32<byte> src, N128 w, uint t = default)
             => v32u(ConvertToVector128Int32(constptr(in src.Head)));
 
@@ -142,10 +143,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_4x8u_4x64u")]
         public static unsafe Vector256<ulong> vconvert(in Block32<byte> src, N256 w, ulong t = default)
             => v64u(ConvertToVector256Int64(constptr(in src.Head)));
-
 
         /// <summary>
         /// VPMOVZXBQ ymm, m32
@@ -153,7 +153,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_4x8u_4x64i")]
         public static unsafe Vector256<long> vconvert(in Block32<byte> src, N256 w, long t = default)
             => ConvertToVector256Int64(constptr(in src.Head));
 
@@ -163,7 +163,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_8x8u_8x16u")]
         public static unsafe Vector128<short> vconvert(in Block64<byte> src, N128 w, short t = default)
             => ConvertToVector128Int16(constptr(in src.Head));
 
@@ -173,10 +173,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_8x8u_8x16u")]
         public static unsafe Vector128<ushort> vconvert(in Block64<byte> src, N128 w, ushort t = default)
             => v16u(ConvertToVector128Int16(constptr(in src.Head)));
-
 
         /// <summary>
         /// VPMOVZXBD ymm, m64
@@ -184,7 +183,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_8x8u_8x32u")]
         public static unsafe Vector256<uint> vconvert(in Block64<byte> src, N256 w, uint t = default)
             => v32u(ConvertToVector256Int32(constptr(in src.Head)));
 
@@ -194,7 +193,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline), ZFunc("vconvert_16x8u_16x16i")]        
         public static unsafe Vector256<short> vconvert(in Block128<byte> src, N256 w, short t = default)
             => ConvertToVector256Int16(constptr(in src.Head));
 
@@ -204,7 +203,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         /// <param name="w">The target width</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_16x8u_16x16u")]
         public static unsafe Vector256<ushort> vconvert(in Block128<byte> src, N256 w, ushort t = default)
             => v16u(ConvertToVector256Int16(constptr(in src.Head)));
 
@@ -213,20 +212,21 @@ namespace Z0
 
         /// <summary>
         /// PMOVSXWQ xmm, m32
+        /// 2x16i -> 2x64u
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_2x16i_2x64i")]
         public static unsafe Vector128<long> vconvert(in Block32<short> src, N128 w, long t = default)
             => ConvertToVector128Int64(constptr(in src.Head));
 
         /// <summary>
         /// PMOVSXWD xmm, m64
-        /// 4x16u -> 4x32u
+        /// 4x16i -> 4x32i
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_4x16i_4x32i")]
         public static unsafe Vector128<int> vconvert(in Block64<short> src, N128 w, int t = default)
             => ConvertToVector128Int32(constptr(in src.Head));
 
@@ -238,17 +238,17 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_2x16u_2x64i")]
         public static unsafe Vector128<long> vconvert(in Block32<ushort> src, N128 w, long t = default)
             => ConvertToVector128Int64(constptr(in src.Head));
 
         /// <summary>
         /// PMOVZXWQ xmm, m32
-        /// 2x16 -> 2x64
+        /// 2x16u -> 2x64u
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_2x16u_2x64u")]
         public static unsafe Vector128<ulong> vconvert(in Block32<ushort> src, N128 w, ulong t = default)
             => v64u(ConvertToVector128Int64(constptr(in src.Head)));
 
@@ -258,7 +258,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_4x16u_4x64u")]
         public static unsafe Vector256<ulong> vconvert(in Block64<ushort> src, N256 w, ulong t = default)
             => v64u(ConvertToVector256Int64(constptr(in src.Head)));
 
@@ -268,7 +268,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_4x16u_4x32u")]
         public static unsafe Vector128<uint> vconvert(in Block64<ushort> src, N128 w, uint t = default)
             => v32u(ConvertToVector128Int32(constptr(in src.Head)));
 
@@ -278,17 +278,17 @@ namespace Z0
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_8x16u_8x32u")]
         public static unsafe Vector256<uint> vconvert(in Block128<ushort> src, uint t = default)
             => v32u(ConvertToVector256Int32(constptr(in src.Head)));
 
         /// <summary>
         /// VPMOVZXWD ymm, m128
-        /// 16x16u -> 
+        /// 8x16u -> 8x32i
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_8x16u_8x32i")]
         public static unsafe Vector256<int> vconvert(in Block128<ushort> src, int t = default)
             => ConvertToVector256Int32(constptr(in src.Head));
 
@@ -298,7 +298,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_4x16u_4x64i")]
         public static unsafe Vector256<long> vconvert(in Block64<ushort> src, N256 w, long t = default)
             => ConvertToVector256Int64(constptr(in src.Head));
 
@@ -311,7 +311,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_4x32u_4x64i")]
         public static unsafe Vector256<long> vconvert(in Block128<uint> src, N256 w, long t = default)
             => ConvertToVector256Int64(constptr(in src.Head));
 
@@ -321,7 +321,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_4x32u_4x64u")]
         public static unsafe Vector256<ulong> vconvert(in Block128<uint> src, ulong t = default)
             => v64u(ConvertToVector256Int64(constptr(in src.Head)));
 
@@ -331,7 +331,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_2x32u_2x64u")]
         public static unsafe Vector128<long> vconvert(in Block64<uint> src, N128 w, ulong t = default)
             => ConvertToVector128Int64(constptr(in src.Head));
 
@@ -344,7 +344,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_2x32i_2x64i")]
         public static unsafe Vector128<long> vconvert(in Block64<int> src, N128 w, long t = default)
             => ConvertToVector128Int64(constptr(in src.Head));
 
@@ -354,7 +354,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_4x32i_4x64i")]
         public static unsafe Vector256<long> vconvert(in Block128<int> src, N256 w, long t = default)
             => ConvertToVector256Int64(constptr(in src.Head));
 
@@ -366,7 +366,7 @@ namespace Z0
         /// 16x16u ->16x32u
         /// </summary>
         /// <param name="src">The blocked memory source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_16x16u_16x32u")]
         public static unsafe Vector512<uint> vconvert(in Block256<ushort> src, N512 w, uint t = default)
             => (v32u(ConvertToVector256Int32(constptr(in src.Head))),
                 v32u(ConvertToVector256Int32(constptr(in src.Head, 8))));
@@ -377,7 +377,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_16x16i_16x32i")]
         public static unsafe Vector512<int> vconvert(in Block128<short> src, N512 w, int t = default)
             => (ConvertToVector256Int32(constptr(in src.Head)),
                 ConvertToVector256Int32(constptr(in src.Head, 8)));
@@ -389,7 +389,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="lo">The lo target</param>
         /// <param name="hi">The hi target</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_32x8u_32x16u")]
         public static unsafe Vector512<ushort> vconvert(in Block256<byte> src, N512 w, ushort t = default)
             => (v16u(ConvertToVector256Int16(constptr(in src.Head))),
                 v16u(ConvertToVector256Int16(constptr(in src.Head,16))));
@@ -401,7 +401,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="lo">The lower taret</param>
         /// <param name="hi">The upper taret</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_8x16u_8x64u")]
         public static unsafe Vector512<ulong> vconvert(in Block128<ushort> src, N512 w, ulong t = default)
             => (v64u(ConvertToVector256Int64(constptr(in src.Head))),
                 v64u(ConvertToVector256Int64(constptr(in src.Head,4))));
@@ -413,7 +413,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="lo">The lower taret</param>
         /// <param name="hi">The upper taret</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc("vconvert_8x32u_8x64u")]
         public static unsafe Vector512<ulong> vconvert(in Block256<uint> src, N512 w, ulong t = default)
             => (v64u(ConvertToVector256Int64(constptr(in src.Head))),
                 v64u(ConvertToVector256Int64(constptr(in src.Head,4)))); 

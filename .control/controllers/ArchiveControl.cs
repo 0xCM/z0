@@ -32,10 +32,10 @@ namespace Z0
         public void Save(AsmCode asm)
             => Paths.AsmHexPath(Subject, asm.Name).WriteText(asm.Format());
         
-        public void Save(InstructionBlock block)
+        public void Save(InstructionBlock block, Moniker m)
         {
-            Paths.AsmDetailPath(Subject, block.Identity).WriteText(block.Format());
-            Save(AsmCode.Load(block.Encoded, block.Identity));
+            Paths.AsmDetailPath(Subject, m).WriteText(block.Format());
+            Save(AsmCode.Load(block.Encoded, m));
         }
 
         public AsmCode ReadCode(Moniker m)
@@ -47,7 +47,7 @@ namespace Z0
 
     class ArchiveControl : Controller<ArchiveControl>
     {        
-        static IEnumerable<OpDescriptor> GenericOperators(int w, Type arg)
+        static IEnumerable<Operation> GenericOperators(int w, Type arg)
             => typeof(ginx).StaticMethods().OpenGeneric().Operators().Vectorized(w).Select(m => m.Descriptor(arg));
 
         void DisplayIntrinsics(int w, Type arg)        
@@ -66,8 +66,38 @@ namespace Z0
                     var methods = host.StaticMethods().WithName(opname).OpenGeneric().Vectorized(w,true).ToArray();
                     foreach(var method in methods)
                     foreach(var arg in args)
-                        archive.Save(method.Descriptor(arg).NativeData.Instructions());
+                    {
+                        var descriptor = method.Descriptor(arg);
+                        archive.Save(descriptor.NativeData.Instructions(), descriptor.Moniker);
+                    }
                 }
+            }
+        }
+
+        void ReifyIntrinsics()
+        {            
+            var gArchive = AsmArchive.Define(FolderName.Define(typeof(ginx).Name));
+            var dArchive = AsmArchive.Define(FolderName.Define(typeof(dinx).Name));
+            var opnames = Designate("z0.intrinsics").Require().OpNames.ToHashSet();
+            var generics = typeof(ginx).StaticMethods().WithName(opnames).Operators().Unblocked().Public().OpenGeneric().ToArray();
+
+            foreach(var g in generics)
+            {
+                var args = g.SupportedPrimals().ToArray();
+                if(args.Length == 0)
+                    args = Classified.IntegralKinds.ToArray();
+                
+                foreach(var arg in args)
+                {
+                    var descriptor = g.Descriptor(arg.PrimalType());
+                    gArchive.Save(descriptor.NativeData.Instructions(), descriptor.Moniker);                                        
+                }
+            }
+
+            foreach(var direct in typeof(dinx).StaticMethods().Public().WithName(opnames).ToArray())
+            {
+                var descriptor = direct.Descriptor();
+                dArchive.Save(descriptor.NativeData.Instructions(), descriptor.Moniker);
             }
         }
 
@@ -79,7 +109,24 @@ namespace Z0
                 var methods = host.StaticMethods().WithName(opname).OpenGeneric().ToArray();
                 foreach(var method in methods)
                 foreach(var arg in args)
-                    archive.Save(method.Descriptor(arg).NativeData.Instructions());
+                {
+                    var d = method.Descriptor(arg);
+                    archive.Save(d.NativeData.Instructions(),d.Moniker);
+                }
+            }
+        }
+
+        void ReifyGeneric(FolderName subject, IEnumerable<MethodInfo> methods, IEnumerable<Type> args)
+        {
+            var archive = AsmArchive.Define(subject);
+            foreach(var method in methods)
+            {
+                foreach(var arg in args)
+                {
+                    
+                    var d = method.Descriptor(arg);
+                    archive.Save(d.NativeData.Instructions(),d.Moniker);
+                }
             }
         }
 
@@ -87,39 +134,29 @@ namespace Z0
         {
             var archive = AsmArchive.Define(FolderName.Define(host.Name));
             foreach(var m in host.StaticMethods())   
-                archive.Save(m.Descriptor().NativeData.Instructions());
+            {
+                var d = m.Descriptor();
+                archive.Save(d.NativeData.Instructions(),d.Moniker);
+            }
         }
 
         void Emit(FolderName subject, IEnumerable<MethodInfo> methods)
         {
             var archive = AsmArchive.Define(subject);   
             foreach(var m in methods)   
-                archive.Save(m.Descriptor().NativeData.Instructions());
+            {
+                var d = m.Descriptor();
+                archive.Save(d.NativeData.Instructions(), d.Moniker);
+            }
         }
 
-        void ReifyIntrinsics()
-        {
-            var host = typeof(ginx);
-            var opnames = new string[]{
-                nameof(ginx.vadd), nameof(ginx.vsub),
-                nameof(ginx.vand), nameof(ginx.vor), nameof(ginx.vxor),
-                nameof(ginx.vnand), nameof(ginx.vnor), nameof(ginx.vxnor)
-                };
-            var widths = items(128,256);
-
-            ReifyIntrinsics(host, opnames, widths, Primitive.Integral);            
-        }
-
-        void ReifyPrimal()
-        {
-            var host = typeof(gmath);
-            var opnames = new string[]{
-                nameof(gmath.add), nameof(gmath.sub), nameof(gmath.odd), nameof(gmath.even),
-                nameof(gmath.and), nameof(gmath.or), nameof(gmath.xor),
-                nameof(gmath.nand), nameof(gmath.nor), nameof(gmath.xnor),
-                nameof(gmath.select),nameof(gmath.blend),
-                };
-            ReifyPrimal(host, opnames, Primitive.Integral);
+        void EmitPrimal()
+        {                    
+            
+            var opnames = Designate("z0.gmath").Require().OpNames.ToHashSet();
+            ReifyGeneric(FolderName.Define(nameof(gmath)), typeof(gmath).StaticMethods().Public().WithName(opnames).OpenGeneric(), Classified.IntegralTypes);
+            Emit(FolderName.Define(nameof(math)), typeof(math).StaticMethods().Public().Concrete().WithName(opnames));
+                        
 
         }
 
@@ -129,14 +166,15 @@ namespace Z0
             var opnames = new string[]{
                 nameof(gbits.ntz),nameof(gbits.nlz),
                 };
-            ReifyPrimal(host, opnames, Primitive.UnsignedIntegral);
+            ReifyPrimal(host, opnames, Classified.UnsignedTypes);
 
         }
 
 
         public override void Execute()
         {
-            Emit(FolderName.Define(nameof(math)),typeof(math).StaticMethods().Concrete().Public().Operators());            
+            ReifyIntrinsics();
+            //Emit(FolderName.Define(nameof(math)),typeof(math).StaticMethods().Concrete().Public().Operators());            
 
         }
 

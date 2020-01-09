@@ -71,7 +71,7 @@ namespace Z0
         public static BitVector<N,T> reverse<N,T>(BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gmath.srl(gbits.rev(x.Scalar), bitsize<T>() - x.Width);       
+                => gmath.srl(gbits.rev(x.Scalar), (byte)(bitsize<T>() - x.Width));       
  
  
     }
