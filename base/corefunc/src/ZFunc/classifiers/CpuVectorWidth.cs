@@ -8,12 +8,10 @@ namespace Z0
 
     public enum CpuVectorWidth : uint
     {
-
         w128 = 128,
 
         w256 = 256,
 
         w512 = 512
     }
-
 }

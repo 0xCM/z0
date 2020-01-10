@@ -31,5 +31,4 @@ namespace Z0
         /// </summary>
         Closed = 2,
     }
-
 }

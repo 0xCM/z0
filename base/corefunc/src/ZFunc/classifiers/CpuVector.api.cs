@@ -15,7 +15,6 @@ namespace Z0
 
     partial class Classified
     {
-
         [MethodImpl(Inline)]
         public static CpuVectorKind vectorkind<T>(T t = default)
             where T : struct
@@ -27,21 +26,31 @@ namespace Z0
                 )
               :  CpuVectorKind.None;
 
-        /// <summary>
-        /// Determines whether a parametric type is of a specified kind
-        /// </summary>
-        /// <param name="kind">The kind</param>
-        /// <param name="t">A type value representative</param>
-        /// <typeparam name="T">The type to test</typeparam>
-        [MethodImpl(Inline)]
-        public static bit iskind<T>(CpuVectorKind kind, T t = default)
-            where T : struct
-                => vectorkind<T>() == kind;
 
         [MethodImpl(Inline)]
-        public static bit isvector<T>(T t = default)
-            where T : unmanaged
-                => vectorkind<T>() != CpuVectorKind.None;
+        public static int vectorwidth(Type t)
+        {
+            if(t.IsVector())
+            {
+                var def = t.GetGenericTypeDefinition();
+
+                if(def == typeof(Vector64<>))
+                    return 64;
+                else if(def == typeof(Vector128<>))
+                    return 128;
+                else if (def == typeof(Vector256<>))
+                    return 256;
+                else if (def == typeof(Vector512<>))
+                    return 512;
+                else if (def == typeof(Vector1024<>))
+                    return 1024;
+                else
+                    return 0;
+            }
+            else 
+                return 0;
+        }
+
 
         [MethodImpl(Inline)]
         public static CpuVectorKind vectorkind(Type t)
@@ -95,9 +104,162 @@ namespace Z0
                 return CpuVectorKind.None;
         }
 
-        [MethodImpl(Inline)]
-        public static bit isvector(Type t)
-            => vectorkind(t) != CpuVectorKind.None;
+        /// <summary>
+        /// Determines whether a type is an intrinsic vector of specified width
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static bool vector(Type t, int? width)        
+        {
+            if(t.IsGenericType && width != null)
+            {
+                var def = t.GetGenericTypeDefinition();
+                if(def == typeof(Vector64<>) && width == 64)
+                    return true;
+                else if(def == typeof(Vector128<>) && width == 128)
+                    return true;
+                else if (def == typeof(Vector256<>) && width == 256)
+                    return true;
+                else if (def == typeof(Vector512<>) && width == 512)
+                    return true;
+                else if (def == typeof(Vector1024<>) && width == 1024)
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return t.IsVector();
+        }
+
+        /// <summary>
+        /// Determines whether a type is an intrinsic vector
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static bool vector(Type t)
+        {
+            if(t.IsGenericType)
+            {
+                var def = t.GetGenericTypeDefinition();
+                if(
+                    def == typeof(Vector64<>)
+                 || def == typeof(Vector128<>) 
+                 || def == typeof(Vector256<>) 
+                 || def == typeof(Vector1024<>) 
+                 || def == typeof(Vector512<>)
+                 )
+                    return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Determines whether a method defines a unary function
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool unaryfunc(MethodInfo m)
+            => m.IsFunction() && m.HasArity(1);
+
+        /// <summary>
+        /// Determines whether a method defines a binary function
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool binaryfunc(MethodInfo m)
+            => m.IsFunction() && m.HasArity(2);
+
+        /// <summary>
+        /// Determines whether a method defines a binary function
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool ternaryfunc(MethodInfo m)
+            => m.IsFunction() && m.HasArity(3);
+
+        /// <summary>
+        /// Determines whether a method is homogenous with respect to input/output values
+        /// </summary>
+        /// <param name="src">The source stream</param>
+        public static bool homogenous(MethodInfo m)
+        {
+            var inputs = m.ParameterTypes().ToSet();
+            if(inputs.Count == 1)
+                return inputs.Single() == m.ReturnType;
+            else if(inputs.Count == 0)
+                return m.ReturnType == typeof(void);
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// Determines whether a method is a unary operator
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool unaryop(MethodInfo m)
+            => homogenous(m) && unaryfunc(m);
+
+        /// <summary>
+        /// Determines whether a method is a unary operator
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool binaryop(MethodInfo m)
+            => homogenous(m) && binaryfunc(m);
+
+        /// <summary>
+        /// Determines whether a method is a unary operator
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool ternaryop(MethodInfo m)
+            => homogenous(m) && ternaryfunc(m);
+
+        /// <summary>
+        /// Determines whether a method defines a vectorized operator
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool isvectorop(MethodInfo m)        
+            => isoperator(m) && vectorized(m,true);
+
+        /// <summary>
+        /// Determines whether a method has intrinsic parameters or return type
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool vectorized(MethodInfo m, bool total = false)        
+            => total ? (vector(m.ReturnType) && m.ParameterTypes().All(vector)) 
+                     : (vector(m.ReturnType) || m.ParameterTypes().Any(vector));
+
+        /// <summary>
+        /// Determines whether a method has intrinsic paremeters or return type of specified width
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        /// <param name="width">The required vector width</param>
+        /// <param name="total">Whether all parameters and return type must be intrinsic</param>
+        public static bool vectorized(MethodInfo m, int? width, bool total)        
+            => total ? (vector(m.ReturnType,width) && m.ParameterTypes().All(t => vector(t,width))) 
+                     : (vector(m.ReturnType,width) || m.ParameterTypes().Any(t => vector(t,width)));
+
+        /// <summary>
+        /// Determines the bit-width of each intrinsic or primal method parameter
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static Pair<ParameterInfo,int>[] inputwidths(MethodInfo m)
+            => m.GetParameters().Select(p => paired(p, bitwidth(p.ParameterType))).ToArray();
+
+        /// <summary>
+        /// Determines the bit-width of an intrinsic or primal return type
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static Pair<ParameterInfo,int> outputwidth(MethodInfo m)
+            => paired(m.ReturnParameter, m.ReturnType.BitWidth());
+
+        /// <summary>
+        /// Returns true if the source type is intrinsic or blocked
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static bool segmented(Type t)
+            => t.IsBlocked() || vector(t);
+
+        /// <summary>
+        /// If type is intrinsic or blocked, returns the primal type over which the segmentation is defined; otherwise, returns none
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static Option<Type> segtype(Type t)
+            => segmented(t) ? t.GenericTypeArguments[0] : default;        
 
         /// <summary>
         /// Determines the number of bits covered by a k-kinded vector
@@ -251,5 +413,4 @@ namespace Z0
                 return CpuVectorKind.None;            
         }
     }
-
 }

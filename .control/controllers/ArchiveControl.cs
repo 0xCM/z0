@@ -84,7 +84,7 @@ namespace Z0
                             foreach(var arg in args)
                             {
                                 var d = method.Descriptor(arg);
-                                archive.Save(d,metadata.FindCil(d.Method).ValueOrDefault());
+                                archive.Save(d, metadata.FindCil(d.Method).ValueOrDefault());
                             }
                         }
                         else

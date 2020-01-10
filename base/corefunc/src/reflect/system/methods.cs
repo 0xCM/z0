@@ -40,7 +40,6 @@ namespace Z0
             return baseMethodDefinition.DeclaringType != thisMethodDefinition.DeclaringType;
         }
 
-
         /// <summary>
         /// Determines whether a method has a speicied arity
         /// </summary>
@@ -79,13 +78,6 @@ namespace Z0
             => string.Equals(m.Name, "op_Explicit", StringComparison.InvariantCultureIgnoreCase);
 
         /// <summary>
-        /// Returns a method's parameter types
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static IEnumerable<Type> ParameterTypes(this MethodInfo m)
-            => m.GetParameters().Select(p => p.ParameterType);
-
-        /// <summary>
         /// Searches a type for any method that matches the supplied signature
         /// </summary>
         /// <param name="declarer">The type to search</param>
@@ -107,21 +99,6 @@ namespace Z0
                : m.IsConstructedGenericMethod
                ? m.GetGenericArguments()
                : m.GetGenericMethodDefinition().GetGenericArguments();
-
-        /// <summary>
-        /// Determines whether a method is homogenous with respect to input/output values
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        public static bool IsHomogenous(this MethodInfo m)
-        {
-            var inputs = m.ParameterTypes().ToSet();
-            if(inputs.Count == 1)
-                return inputs.Single() == m.ReturnType;
-            else if(inputs.Count == 0)
-                return m.ReturnType == typeof(void);
-            else
-                return false;
-        }
        
         /// <summary>
         /// Returns true if the method has unspecified generic parameters, false otherwise

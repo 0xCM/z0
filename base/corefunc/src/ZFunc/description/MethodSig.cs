@@ -19,26 +19,20 @@ namespace Z0
     {
         internal static MethodSig Define(MethodInfo method)
         {            
-            var asmname = method.Module.Assembly.GetSimpleName();
-            var nsname = method.DeclaringType.Namespace;
-            var returnType = TypeRep.FromType(method.ReturnType);
             var valparams = method.GetParameters().Select(p => new MethodParamRep(TypeRep.FromParameter(p), p.Direction(), p.Name, p.Position)).ToArray();
-            var typeparams = method.GenericSlots().Mapi((i,t) => new TypeParamRep(t.DisplayName(), i, t.IsGenericType));
-            var delclarer = TypeRep.FromType(method.DeclaringType);
-            
+            var typeparams = method.GenericSlots().Mapi((i,t) => new TypeParamRep(t.DisplayName(), i, t.IsGenericType));            
             return new MethodSig(
                 MethodId: method.MetadataToken,
-                DefiningAssembly: asmname,
+                DefiningAssembly: method.Module.Assembly.GetSimpleName(),
                 DefiningModule: method.Module.Name,
-                DeclaringNamespace: nsname,
-                DeclaringType: delclarer,
+                DeclaringType: TypeRep.FromType(method.DeclaringType),
                 MethodName: method.DisplayName(),
-                ReturnType: returnType,
+                ReturnType: TypeRep.FromType(method.ReturnType),
                 ValueParams: valparams,
                 TypeParams: typeparams);
         }
 
-        MethodSig(int MethodId, string DefiningAssembly, string DefiningModule, string DeclaringNamespace, 
+        MethodSig(int MethodId, string DefiningAssembly, string DefiningModule,
             TypeRep DeclaringType, string MethodName, TypeRep ReturnType, MethodParamReps ValueParams, TypeParamReps TypeParams)
         {
             this.MethodId = MethodId;
@@ -58,8 +52,6 @@ namespace Z0
         public string DefiningAssembly {get;}
 
         public string DefiningModule {get;}
-
-        public string DeclaringNamespace {get;}
 
         public TypeRep DeclaringType {get;}
 

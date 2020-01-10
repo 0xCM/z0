@@ -148,6 +148,7 @@ namespace Z0
                 return size(vectorkind(t));
         }
             
+            
         /// <summary>
         /// Determines the bit-size of a metadata-identified type if primal; otherwise, returns 0
         /// </summary>

@@ -14,8 +14,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;    
      
     using static zfunc;   
-    using static AsIn;
-
 
     partial class dinx
     {                
@@ -135,7 +133,6 @@ namespace Z0
         [MethodImpl(Inline), ZFunc("vconvert_4x8u_4x32u")]
         public static unsafe Vector128<uint> vconvert(in Block32<byte> src, N128 w, uint t = default)
             => v32u(ConvertToVector128Int32(constptr(in src.Head)));
-
 
         /// <summary>
         /// VPMOVZXBQ ymm, m32

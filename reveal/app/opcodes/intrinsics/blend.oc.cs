@@ -19,6 +19,7 @@ namespace Z0.OpCodes
     public static class vblend
     {
 
+
         [MethodImpl(Inline)]
         static byte makespec<A,B,C,D>(A a = default, B b = default, C c = default, D d = default)
             where A : unmanaged, ITypeNat

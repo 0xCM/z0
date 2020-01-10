@@ -38,7 +38,7 @@ namespace Z0
             vand_check(w, z32);
             vand_check(w, z32i);
             vand_check(w, z64);
-            vand_check(w, z64i);
+            vand_check(w, z64i);            
         }            
 
         void vand_check<T>(N128 w, T t = default)

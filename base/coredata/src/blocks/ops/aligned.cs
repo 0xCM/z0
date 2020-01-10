@@ -10,7 +10,7 @@ namespace Z0
         
     using static zfunc;
 
-    partial class DataBlocks
+    public static partial class DataBlocks
     {
         /// <summary>
         /// Determines whether a specified number of elements can be evenly covered by 8-bit blocks

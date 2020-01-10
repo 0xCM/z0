@@ -10,8 +10,10 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     using static zfunc;
+
 
     partial class Classified
     {
@@ -97,6 +99,25 @@ namespace Z0
                 PrimalKind.U64 => typeof(ulong),
                 PrimalKind.F32 => typeof(float),
                 PrimalKind.F64 => typeof(double),
+                _ => throw unsupported(k)
+            };
+
+        /// <summary>
+        /// Returns the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static string keyword(PrimalKind k)
+            => k switch {
+                PrimalKind.U8 => "byte",
+                PrimalKind.I8 => "sbyte",
+                PrimalKind.U16 => "ushort",
+                PrimalKind.I16 => "short",
+                PrimalKind.U32 => "uint",
+                PrimalKind.I32 => "int",
+                PrimalKind.I64 => "long",
+                PrimalKind.U64 => "ulong",
+                PrimalKind.F32 => "float",
+                PrimalKind.F64 => "double",
                 _ => throw unsupported(k)
             };
 
@@ -214,6 +235,103 @@ namespace Z0
             where T : unmanaged
                 => typeof(T) == typeof(float) 
                 || typeof(T) == typeof(double);
+
+        /// <summary>
+        /// If the source type is primal, intrinsic, or blocked, returns the bit-width; otherwise, returns 0
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static int bitwidth(Type t)
+        {
+            if(vector(t))
+                return vectorwidth(t);
+            else if(blocked(t))
+                return blockwidth(t);
+            else
+                return t.PrimalBitWidth();
+        }
+
+        /// <summary>
+        /// Determines whether a method is a primal shift operator
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool primalshift(MethodInfo m)        
+            => m.IsBinaryFunc() 
+            && m.ReturnType == m.ParameterTypes().First() 
+            && m.ParameterTypes().Second() == typeof(byte);
+
+        /// <summary>
+        /// Determines whether a method defines a predicate that returns a bit or bool value
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool predicate(MethodInfo m)
+            => m.ParameterTypes().Distinct().Count() == 1 
+            && (m.ReturnType == typeof(bit) || m.ReturnType == typeof(bool));
+
+        /// <summary>
+        /// Determines whether a method is an action
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool action(MethodInfo m)
+            => m.ReturnType == typeof(void);
+
+        /// <summary>
+        /// Determines whether a method is an action with specified arity
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        /// <param name="arity">The arity to match</param>
+        public static bool action(MethodInfo m, int arity)
+            => action(m) && m.HasArity(arity);
+
+        /// <summary>
+        /// Determines whether a method is a function
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool function(MethodInfo m)
+            => m.ReturnType != typeof(void);
+
+        /// <summary>
+        /// Determines whether a method is a function with specified arity
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        /// <param name="arity">The arith to match</param>
+        public static bool function(this MethodInfo m, int arity)
+            => function(m) && m.HasArity(arity);
+
+        /// <summary>
+        /// Determines whether a method defines a predicate that returns a bit value
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool bitpredicate(MethodInfo m)        
+            => m.ParameterTypes().Distinct().Count() == 1 
+            && (m.ReturnType == typeof(bit));
+
+        /// <summary>
+        /// Determines whether a method defines an operator over a (common) domain
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool isoperator(MethodInfo m)
+            => m.IsFunction() && homogenous(m) && m.Arity() >= 1;
+    
+        /// <summary>
+        /// Determines whether a method is an emitter, i.e. a method that returns a value but accepts no input
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool emitter(MethodInfo m)
+            => m.IsFunction() && m.HasArity(0);
+
+        /// <summary>
+        /// Determines whether a method defines a parameter that requires an immediate
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool immrequired(MethodInfo m)        
+            => m.GetParameters().Where(p => p.Attributed<ImmAttribute>()).Any();
+
+        /// <summary>
+        /// Returns a method's parameter types
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static IEnumerable<Type> immediates(MethodInfo m)
+            => m.GetParameters().Select(p => p.ParameterType);
 
         [MethodImpl(Inline)]
         static PrimalKind primalkind_u<T>(T t = default)

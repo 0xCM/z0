@@ -21,7 +21,37 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool blocked(MethodInfo m)
-            => m.ReturnType.IsDataBlock() || m.ParameterTypes().Any(t => t.IsDataBlock());
+            => m.ReturnType.IsBlocked() || m.ParameterTypes().Any(t => t.IsBlocked());        
+
+        /// <summary>
+        /// If the source type is primal, intrinsic, or blocked, returns the bit-width; otherwise, returns 0
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static int blockwidth(Type t)
+        {
+
+            if(t.IsBlocked())
+            {
+                var def = t.GetGenericTypeDefinition();
+
+                if(def == typeof(Block16<>))
+                    return 16;
+                else if(def == typeof(Block32<>))
+                    return 32;
+                else if (def == typeof(Block64<>))
+                    return 64;
+                else if (def == typeof(Block128<>))
+                    return 128;
+                else if (def == typeof(Block256<>))
+                    return 256;
+                else if (def == typeof(Block512<>))
+                    return 512;
+                else
+                    return 0;
+            }
+            else
+                return 0;
+        }
 
         /// <summary>
         /// Enumerates the blocked data types
@@ -40,6 +70,21 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static bool blocked(Type t)
-            => BlockTypeNames.Where(n => t.Name.StartsWith(n)).Any();
+        {
+            if(t.IsGenericType)
+            {
+                var tdef = t.GetGenericTypeDefinition();
+                if(
+                    tdef == typeof(Block16<>) 
+                 || tdef == typeof(Block32<>) 
+                 || tdef == typeof(Block64<>)
+                 || tdef == typeof(Block128<>)
+                 || tdef == typeof(Block256<>)
+                 || tdef == typeof(Block512<>)
+                )
+                    return true;                
+            }
+            return false;
+        }
     }
 }

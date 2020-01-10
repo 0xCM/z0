@@ -22,13 +22,14 @@ namespace Z0.Designators
                 nameof(vadd), nameof(vsub), nameof(vnegate), nameof(vinc), nameof(vdec), 
                 nameof(vgt), nameof(vlt),
                 
-                nameof(vand), nameof(vor), nameof(vxor), nameof(vnand), nameof(vnor), nameof(vxnor),
-                nameof(vxornot),
+                nameof(vand), nameof(vor), nameof(vxor), nameof(vnand), nameof(vnor), nameof(vxnor),nameof(vxornot),
                 nameof(vimpl), nameof(vnonimpl), nameof(vcimpl), nameof(vcnonimpl), 
+                nameof(vcsa),
                 nameof(vnot),
 
                 nameof(vsll), nameof(vsrl), nameof(vxors),                
                 nameof(vselect) 
+
                 );
             
         public override IEnumerable<Type> ApiProviders

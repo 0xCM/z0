@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-
     /// <summary>
     /// Clasifies concrete storage blocks of total width w over segments of width t and sign indicator s where:
     /// w = kind[0..15]

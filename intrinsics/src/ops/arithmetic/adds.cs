@@ -45,6 +45,11 @@ namespace Z0
         public static Vector128<short> vadds(Vector128<short> x, Vector128<short> y)        
             => AddSaturate(x,y);
 
+        /// <summary>
+        /// __m128i _mm_adds_epu16 (__m128i a, __m128i b) PADDUSW xmm, xmm/m128
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static Vector128<ushort> vadds(Vector128<ushort> x, Vector128<ushort> y)        
             => AddSaturate(x,y);
@@ -59,7 +64,7 @@ namespace Z0
             => AddSaturate(x,y);
         
         /// <summary>
-        ///  __m256i _mm256_adds_epi8 (__m256i a, __m256i b)VPADDSB ymm, ymm, ymm/m256
+        ///  __m256i _mm256_adds_epi8 (__m256i a, __m256i b) VPADDSB ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>

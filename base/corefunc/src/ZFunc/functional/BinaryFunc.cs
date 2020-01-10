@@ -25,6 +25,10 @@ namespace Z0
                 seek(ref target, i) = f.Invoke(skip(in lSrc, i), skip(in rSrc, i));
             return dst;
         }        
-    }
 
+        [MethodImpl(Inline)]
+        public static Span<T2> Apply<F,T0,T1,T2>(this F f, ReadOnlySpan<T0> lhs, ReadOnlySpan<T1> rhs, Span<T2> dst)
+            where F : IBinaryFunc<T0,T1,T2>
+                => apply(f,lhs,rhs,dst);        
+    }
 }

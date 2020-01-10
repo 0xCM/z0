@@ -17,7 +17,6 @@ namespace Z0
     [Flags]
     public enum PrimalWidth : uint
     {    
-
         w8 = 8,
 
         w16 = 16,
@@ -25,7 +24,5 @@ namespace Z0
         w32 = 32,
 
         w64 = 64
-
     }
-
 }

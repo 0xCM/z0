@@ -86,7 +86,6 @@ namespace Z0
             => new S.EmitterSurrogate<T>(f,name);        
     }
 
- 
     public static partial class DelegateSurrogates
     {
 

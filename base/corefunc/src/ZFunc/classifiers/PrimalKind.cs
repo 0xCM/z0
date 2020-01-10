@@ -111,12 +111,12 @@ namespace Z0
         /// <summary>
         /// Defines a classification that includes all signed primal integral types and no others
         /// </summary>
-        SignedInts = I8 | I16 | I32 | I64,
+        SignedInts = PrimalId.I8 | PrimalId.I16 | PrimalId.I32 | PrimalId.I64,
 
         /// <summary>
         /// Defines a classification that includes all unsigned primal integral types and no others
         /// </summary>
-        UnsignedInts = U8 | U16 | U32 | U64,
+        UnsignedInts = PrimalId.U8 | PrimalId.U16 | PrimalId.U32 | PrimalId.U64,
 
         /// <summary>
         /// Defines a classification that includes all primal integral types and no others

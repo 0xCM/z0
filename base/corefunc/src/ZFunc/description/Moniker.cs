@@ -75,8 +75,12 @@ namespace Z0
         public static Moniker define(MethodInfo method)
         {
             if(method.IsVectorOp())
-                return Segmented(method);
-            else if(method.IsPrimalOp())
+                return FromVectorOp(method);            
+            else if(method.IsVectorized())
+                return FromVectorized(method);
+            else if(method.IsBlocked())
+                return FromBlocked(method);
+            else if(method.IsOperator())
                 return Primal(method);
             else if(method.IsPredicate())
                 return Predicate(method);
@@ -175,11 +179,64 @@ namespace Z0
         /// Derives a moniker for an operation over segmented domain(s)
         /// </summary>
         /// <param name="method">The operation method</param>
-        static Moniker Segmented(MethodInfo method)
+        static Moniker FromVectorOp(MethodInfo method)
         {
             var v = method.ParameterTypes().First();       
             var segkind = v.GenericTypeArguments.FirstOrDefault().Kind();         
             return define(method.Name, v.BitWidth(), segkind, method.IsConstructedGenericMethod);                            
+        }
+
+        /// <summary>
+        /// Derives a moniker for an operation over segmented domain(s)
+        /// </summary>
+        /// <param name="method">The operation method</param>
+        static Moniker FromBlocked(MethodInfo method)
+        {
+            var type = method.ParameterTypes().First();       
+            var segkind = type.GenericTypeArguments.FirstOrDefault().Kind();     
+            var generic = method.IsConstructedGenericMethod;
+            var w = type.BitWidth();
+            var opname = method.Name;
+            if(generic)
+                return new Moniker($"{opname}_gb{w}{SegSep}{suffix(segkind)}") ;
+            else 
+                return  new Moniker($"{opname}_b{w}{SegSep}{suffix(segkind)}");                            
+        }
+
+        /// <summary>
+        /// Derives a moniker for an operation over segmented domain(s)
+        /// </summary>
+        /// <param name="method">The operation method</param>
+        static Moniker FromVectorized(MethodInfo method)
+        {
+            var input = method.ParameterTypes().ToArray();
+            var name = method.Name + AsciSym.Underscore;
+            
+            if(method.IsConstructedGenericMethod)
+                name += "g";
+
+            for(var i=0; i<input.Length; i++)
+            {
+                var segment = input[i];
+                var w = segment.BitWidth();
+                if(w == 0)
+                    continue;
+                
+                if(i != 0)
+                    name += AsciSym.Underscore;
+
+                if(segment.IsVector())
+                {
+                    var segtype = segment.GetGenericArguments().Single();
+                    var segwidth = segtype.BitWidth();
+                    name += ($"{w}x{segwidth}" + segtype.Kind().Sign());
+                }
+                else
+                {
+                    name += ($"{w}" + segment.Kind().Sign());
+                }                
+            }
+            return new Moniker(name);            
         }
 
         string Metrics

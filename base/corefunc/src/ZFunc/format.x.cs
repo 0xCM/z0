@@ -22,10 +22,10 @@ namespace Z0
         public static string FormatParam(this Pair<ParameterInfo,int> src)
         {
             var t = src.A.ParameterType;
-            if(ZFunc.segmented(t))
+            if(Classified.segmented(t))
             {
-                var typewidth = ZFunc.bitwidth(t);
-                var segkind = ZFunc.segtype(t).Require().Kind();
+                var typewidth = Classified.bitwidth(t);
+                var segkind = Classified.segtype(t).Require().Kind();
                 var segwidth = segkind.BitWidth();
                 var indicator = segkind.Sign();
                 return $"{typewidth}x{segwidth}{indicator}".PadLeft(7);

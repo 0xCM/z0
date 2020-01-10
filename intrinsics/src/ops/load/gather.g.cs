@@ -15,7 +15,6 @@ namespace Z0
     
     partial class ginx
     {
-
         [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
         public static Vector128<T> vgather<T>(in T src, Vector128<T> vidx)
             where T : unmanaged        

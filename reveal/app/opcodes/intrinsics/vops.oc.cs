@@ -69,7 +69,8 @@ namespace Z0
             var f = GX.and(x);
             return Pipes.compose(x,f,g);
         }
-        public static uint vxor_128x32u(Vector128<uint> x, Vector128<uint> y)
+        
+        public static uint vxor_128x32u_1(Vector128<uint> x, Vector128<uint> y)
         {
             var ops = VX.vxor(n128,z32);
             var z = ops.Invoke(x,y);
