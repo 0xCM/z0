@@ -109,14 +109,24 @@ namespace Z0
             return pCode;
         }
 
+        [MethodImpl(Inline)]
+        public static IntPtr Liberate(IntPtr ptr, int length)
+        {
+            if (!OS.VirtualProtectEx(CurrentProcess, ptr, (UIntPtr)(ulong)length, 0x40, out uint _))
+                ThrowLiberationError(ptr, length);
+            return ptr;
+        }
+
 
         [MethodImpl(Inline)]
-        public static IntPtr Liberate(MemoryBuffer buffer)
-        {
-            if (!OS.VirtualProtectEx(CurrentProcess, buffer.Pointer, (UIntPtr)(ulong)buffer.Length, 0x40, out uint _))
-                ThrowLiberationError(buffer.Pointer, buffer.Length);
-            return buffer.Pointer;
-        }
+        public static IntPtr Liberate(SpanBuffer buffer)
+            => Liberate(buffer.Pointer, buffer.Length);
+
+        // {
+        //     if (!OS.VirtualProtectEx(CurrentProcess, buffer.Pointer, (UIntPtr)(ulong)buffer.Length, 0x40, out uint _))
+        //         ThrowLiberationError(buffer.Pointer, buffer.Length);
+        //     return buffer.Pointer;
+        // }
 
         static OS()
         {

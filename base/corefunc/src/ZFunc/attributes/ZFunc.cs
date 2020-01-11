@@ -17,7 +17,6 @@ namespace Z0
 
     }
 
-
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class ZFuncAttribute : Attribute
     {

@@ -22,6 +22,11 @@ partial class zfunc
     public static Span<T> span<T>(int length, T t = default)
         => new Span<T>(new T[length]);
 
+    [MethodImpl(Inline)]
+    public static unsafe Span<T> span<T>(T* pSrc, int length)
+        where T : unmanaged
+            => new Span<T>(pSrc, length);
+
     /// <summary>
     /// Creates a span from an array
     /// </summary>

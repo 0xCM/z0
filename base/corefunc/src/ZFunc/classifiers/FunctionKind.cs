@@ -6,10 +6,13 @@ namespace Z0
 {        
     using System;
 
+    /// <summary>
+    /// Defines function classification scheme
+    /// </summary>
     [Flags]
     public enum FunctionKind : ulong
     {
-        Action = Pow2.T03,
+        None = 0,
 
         Function = Pow2.T04,
 
@@ -29,10 +32,5 @@ namespace Z0
 
         TernaryOp = Pow2.T14 | TernaryFunc,
 
-        PartiallyVectorized = Pow2.T59,
-
-        TotallyVectorized = Pow2.T60,
-
-        Vectorized = PartiallyVectorized | TotallyVectorized
     }
 }

@@ -27,12 +27,12 @@ namespace Z0
                 return (convert<T>(int.MinValue/2), convert<T>(int.MaxValue/2));
             else
             {
-                var min = Classified.signed<T>()
+                var min = PrimalType.signed<T>()
                 ? gmath.negate(gmath.sar(gmath.maxval<T>(), 1)) 
                 : gmath.minval<T>();
                         
                 var max = 
-                    Classified.signed<T>()
+                    PrimalType.signed<T>()
                     ? gmath.sar(gmath.maxval<T>(), 1)
                     : gmath.maxval<T>();                
                 return (min,max);

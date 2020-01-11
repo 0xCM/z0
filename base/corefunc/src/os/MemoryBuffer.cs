@@ -16,8 +16,23 @@ namespace Z0
     /// <summary>
     /// Defines an unmanaged/immovable buffer that requires explicit allocation as disposal
     /// </summary>
-    public unsafe readonly ref struct MemoryBuffer
+    public unsafe readonly struct MemoryBuffer : IDisposable
     {
+        /// <summary>
+        /// The global memory reference
+        /// </summary>
+        public readonly IntPtr Handle;
+
+        /// <summary>
+        /// The global memory reference as a byte pointer
+        /// </summary>
+        readonly byte* pContent;
+
+        /// <summary>
+        /// The length, in bytes, of the allocated buffer
+        /// </summary>
+        public readonly int Length;
+
         /// <summary>
         /// Allocates a a zero-filled unmanged buffer of specified size
         /// </summary>
@@ -34,15 +49,12 @@ namespace Z0
         public static MemoryBuffer Alloc(ReadOnlySpan<byte> content)
             => new MemoryBuffer(content);        
 
-        readonly IntPtr pMem;
-
-        readonly Span<byte> content;
-
         [MethodImpl(Inline)]
-        MemoryBuffer(ByteSize size)
+        MemoryBuffer(int length)
         {
-            this.pMem = Marshal.AllocHGlobal(size);         
-            this.content = new Span<byte>(pMem.ToPointer(), size);
+            this.Handle = OS.Liberate(Marshal.AllocHGlobal(length), length);
+            this.pContent =  (byte*)Handle.ToPointer();
+            this.Length = length;
             Clear();
         }
 
@@ -53,17 +65,11 @@ namespace Z0
             Fill(content);
         }
 
-        /// <summary>
-        /// Specifies the size of the buffer
-        /// </summary>
-        public readonly ByteSize Length
+        Span<byte> Content
         {
             [MethodImpl(Inline)]
-            get => content.Length;
+            get => span(pContent, Length);
         }
-
-        public IntPtr Pointer
-            => pMem;
 
         /// <summary>
         /// Presents buffer content as span of specified cell type
@@ -72,22 +78,23 @@ namespace Z0
         [MethodImpl(Inline)]
         public Span<T> As<T>()
             where T : unmanaged
-                => content.As<T>();
+                => Content.As<T>();
 
         /// <summary>
         /// Zero-fills the buffer
         /// </summary>
         [MethodImpl(Inline)]
         public void Clear()
-            => content.Clear();
+            => Content.Clear();
 
         /// <summary>
         /// The first memory cell in the buffer, presented as a specified type
         /// </summary>
         /// <typeparam name="T">The cell type</typeparam>
-        public ref T Head<T>()
+        [MethodImpl(Inline)]
+        ref T Head<T>()
             where T :unmanaged
-                => ref As<T>()[0];
+                => ref head(As<T>());
 
         /// <summary>
         /// Replaces the buffer content with content from a source span
@@ -98,44 +105,28 @@ namespace Z0
             where T : unmanaged
         {
             var src = content.AsBytes();
-            if(src.Length <=  this.content.Length)
+            if(src.Length <=  this.Length)
             {
-                if(src.Length < this.content.Length)
+                if(src.Length < this.Length)
                     Clear();
-                src.CopyTo(this.content);
+                src.CopyTo(this.Content);
             }
             else
-                src.Slice(Length).CopyTo(this.content);        
+                src.Slice(Length).CopyTo(this.Content);        
         }
 
         /// <summary>
-        /// Copies buffer content to a target span
+        /// Replaces buffer content with content from supplied source
         /// </summary>
-        /// <param name="dst">The target span</param>
+        /// <param name="content">The source content</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public void CopyTo<T>(Span<T> dst)
+        public void Fill<T>(T[] content)
             where T : unmanaged
-        {
-            var src = As<T>();
-            var len = Math.Min(dst.Length,src.Length);
-            src.CopyTo(dst);
-        }
-
-        /// <summary>
-        /// Allocates a clone
-        /// </summary>
-        [MethodImpl(Inline)]
-        public MemoryBuffer Replicate()
-        {
-            var dst = Alloc(Length);
-            content.CopyTo(dst.content);
-            return dst;
-        }
-
+                => Fill(content.AsSpan().ReadOnly());
+        
         public void Dispose()
         {
-            Marshal.FreeHGlobal(pMem);
+            Marshal.FreeHGlobal(Handle);
         }
     }
 }

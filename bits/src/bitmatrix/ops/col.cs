@@ -20,7 +20,7 @@ namespace Z0
         {
             byte col = 0;
             for(var r = 0; r < BitMatrix4.N; r++)
-                col = BitMask.set(col, (byte)r, BitMask.testbit(A[r].Scalar, index));
+                col = bit.set(col, (byte)r, bit.test(A[r].Scalar, index));
             return col;
         }
 

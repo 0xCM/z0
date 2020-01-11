@@ -227,7 +227,7 @@ namespace Z0
             get => (data & (1 << pos)) != 0;
             
             [MethodImpl(Inline)]
-            set => data = BitMask.set(data, pos, value);
+            set => data = bit.set(data, pos, value);
         }
 
         public BitVector4 this[byte first, byte last]

@@ -10,37 +10,13 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
 
     using static zfunc;
 
+    public static partial class Classifiers{}
 
-    partial class Classified
+    public static partial class Classified
     {
-        /// <summary>
-        /// Specifies the unsigned primal integer types
-        /// </summary>
-        public static Type[] UnsignedTypes
-            => new Type[]{typeof(byte),typeof(ushort),typeof(uint),typeof(ulong)};
-
-        /// <summary>
-        /// Specifies the signed primal integer types
-        /// </summary>
-        public static Type[] SignedTypes
-            => new Type[]{typeof(sbyte),typeof(short),typeof(int),typeof(long)};
-
-        /// <summary>
-        /// Specifies the primal integer types
-        /// </summary>
-        public static Type[] IntegralTypes
-            => new Type[]{typeof(byte),typeof(sbyte),typeof(ushort),typeof(short),typeof(uint),typeof(ulong),typeof(long)};
-
-        /// <summary>
-        /// Specifies the primal floating-point types
-        /// </summary>
-        public static Type[] FloatingTypes
-            => new Type[]{typeof(float),typeof(double)};
-
         public static IEnumerable<PrimalKind> UnsignedKinds
             => items(PrimalKind.U8, PrimalKind.U16, PrimalKind.U32, PrimalKind.U64);
 
@@ -52,55 +28,6 @@ namespace Z0
 
         public static IEnumerable<PrimalKind> IntegralKinds
             => UnsignedKinds.Union(SignedKinds);
-
-        /// <summary>
-        /// Determines the primal kind (if any) of a parametrically-identifed type
-        /// </summary>
-        /// <param name="t">A type value representative</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static PrimalKind primalkind<T>(T t = default)
-            where T : unmanaged
-                => primalkind_u(t);
-
-        /// <summary>
-        /// Returns a primal type's kind classifier
-        /// </summary>
-        /// <typeparam name="T">The type to test</typeparam>
-        [MethodImpl(Inline)]
-        public static PrimalKind primalkind(Type t)
-            => Type.GetTypeCode(t) switch{
-                TypeCode.Byte => PrimalKind.U8,
-                TypeCode.SByte => PrimalKind.I8,
-                TypeCode.Int16 => PrimalKind.I16,
-                TypeCode.UInt16 => PrimalKind.U16,
-                TypeCode.Int32 => PrimalKind.I32,
-                TypeCode.UInt32 => PrimalKind.U32,
-                TypeCode.Int64 => PrimalKind.I64,
-                TypeCode.UInt64 => PrimalKind.U64,
-                TypeCode.Single => PrimalKind.F32,
-                TypeCode.Double => PrimalKind.F64,
-                _ => PrimalKind.None
-            };
-
-        /// <summary>
-        /// Returns a kind-identified system type if possible; throws an exception otherwise
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static Type primaltype(PrimalKind k)
-            => k switch {
-                PrimalKind.U8 => typeof(byte),
-                PrimalKind.I8 => typeof(sbyte),
-                PrimalKind.U16 => typeof(ushort),
-                PrimalKind.I16 => typeof(short),
-                PrimalKind.U32 => typeof(uint),
-                PrimalKind.I32 => typeof(int),
-                PrimalKind.I64 => typeof(long),
-                PrimalKind.U64 => typeof(ulong),
-                PrimalKind.F32 => typeof(float),
-                PrimalKind.F64 => typeof(double),
-                _ => throw unsupported(k)
-            };
 
         /// <summary>
         /// Returns the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
@@ -122,28 +49,12 @@ namespace Z0
             };
 
         /// <summary>
-        /// Determines whether a parametric type is of a specified kind
-        /// </summary>
-        /// <param name="kind">The kind</param>
-        /// <param name="t">A type value representative</param>
-        /// <typeparam name="T">The type to test</typeparam>
-        [MethodImpl(Inline)]
-        public static bit iskind<T>(PrimalKind kind, T t = default)
-            where T : unmanaged
-                => primalkind<T>() == kind;
-
-        [MethodImpl(Inline)]
-        public static bit isprimal<T>(T t = default)
-            where T : unmanaged
-                => primalkind<T>() != PrimalKind.None;
-
-        /// <summary>
         /// Determines the number of bits covered by a k-kinded type
         /// </summary>
         /// <param name="k">The type kine</param>
         [MethodImpl(Inline)]
         public static int width(PrimalKind k)
-            => width((uint)k);
+            => (ushort)k;
 
         /// <summary>
         /// Determines the number of bytes covered by a k-kinded type
@@ -153,13 +64,21 @@ namespace Z0
         public static int size(PrimalKind kind)
             => width(kind)/8;
 
-        /// <summary>
-        /// Determines whether a kind identifies a signed type
-        /// </summary>
-        /// <typeparam name="T">The type to test</typeparam>
+        public static int width(Type t)
+        {
+            if(PrimalType.test(t))
+                return (int)PrimalType.width(t);
+            else if(VectorType.test(t))
+                return (int)VectorType.width(t);
+            else if(BlockedType.test(t))
+                return (int)BlockedType.width(t);
+            else
+                return 0;
+        }
+
         [MethodImpl(Inline)]
-        public static bit signed(PrimalKind k)
-            => signed((uint)k);
+        public static int size(Type t)
+            => width(t)/8;
 
         /// <summary>
         /// Determines whether a type is a primal float
@@ -167,23 +86,23 @@ namespace Z0
         /// <typeparam name="T">The type to test</typeparam>
         [MethodImpl(Inline)]
         public static bit floating(PrimalKind k)
-            => floating((uint)k);
+            => (k & PrimalKind.Fractional) != 0;
 
         /// <summary>
         /// Determines whether a kind is one of the signed integer types
         /// </summary>
         /// <typeparam name="T">The type to test</typeparam>
         [MethodImpl(Inline)]
-        public static bit signedint(PrimalKind k)
-            => signedint((uint)k);
+        public static bit signed(PrimalKind k)
+            => (k & PrimalKind.Signed) != 0;
 
         /// <summary>
         /// Determines whether a kind is one of the signed integer types
         /// </summary>
         /// <typeparam name="T">The type to test</typeparam>
         [MethodImpl(Inline)]
-        public static bit unsignedint(PrimalKind k)
-            => unsignedint((uint)k);
+        public static bit unsigned(PrimalKind k)
+            => (k & PrimalKind.Unsigned) != 0;
 
         /// <summary>
         /// Determines whether a type is a primal integer
@@ -191,7 +110,7 @@ namespace Z0
         /// <typeparam name="T">The type to test</typeparam>
         [MethodImpl(Inline)]
         public static bit integral(PrimalKind k)
-            => integral((uint)k);
+            => signed(k) || unsigned(k);
         
         /// <summary>
         /// Produces a character {i | u | f} indicating whether the source type is signed, unsigned or float
@@ -199,182 +118,118 @@ namespace Z0
         /// <param name="k">The primal classifier</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]   
-        public static char sign(PrimalKind k)
-            => sign((uint)k);
-
+        public static char indicator(PrimalKind k)
+        {
+            if(unsigned(k))
+                return AsciLower.u;
+            else if(signed(k))
+                return AsciLower.i;
+            else if(floating(k))
+                return AsciLower.f;
+            else
+                return AsciLower.x;
+        }
+                        
         /// <summary>
-        /// Returns true if the primal source type is signed, false otherwise
+        /// Determines the number of bits covered by a k-kinded vector
         /// </summary>
-        /// <typeparam name="T">The primal source type</typeparam>
+        /// <param name="k">The type kine</param>
         [MethodImpl(Inline)]
-        public static bool signed<T>()
-            where T : unmanaged
-            => typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long);
+        public static int width(VectorKind k)
+            => (ushort)k;
 
         /// <summary>
-        /// Returns true if the specified type is an unsigned primal integral type
+        /// Determines the component width of a k-kinded vector
         /// </summary>
-        /// <typeparam name="T">The type to evaluate</typeparam>
+        /// <param name="k">The vector kind</param>
         [MethodImpl(Inline)]
-        public static bool unsigned<T>()
-            where T : unmanaged
-            => typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong);
+        public static int segwidth(VectorKind k)
+            => (byte)((uint)k >> 16);
 
         /// <summary>
-        /// Returns true if the spedified type is a 32-bit or 64-bit floating point
+        /// Determines the number of bytes covered by a k-kinded type
         /// </summary>
-        /// <typeparam name="T">The type to evaluate</typeparam>
+        /// <param name="k">The type kine</param>
         [MethodImpl(Inline)]
-        public static bool floating<T>()
-            where T : unmanaged
-                => typeof(T) == typeof(float) 
-                || typeof(T) == typeof(double);
+        public static int size(VectorKind kind)
+            => width(kind)/8;
 
         /// <summary>
-        /// If the source type is primal, intrinsic, or blocked, returns the bit-width; otherwise, returns 0
+        /// Determines whether a classfied vector is defined over primal unsigned integer components
+        /// </summary>
+        /// <param name="k">The vector classifier</param>
+        [MethodImpl(Inline)]
+        public static bit unsigned(VectorKind k)
+            => (k & VectorKind.Unsigned) != 0;
+
+        /// <summary>
+        /// Determines whether a classfied vector is defined over primal signed integer components
+        /// </summary>
+        /// <param name="k">The vector classifier</param>
+        [MethodImpl(Inline)]
+        public static bit signed(VectorKind k)
+            => (k & VectorKind.Signed) != 0;
+
+        /// <summary>
+        /// Determines whether a classfied vector is defined over floating-point components
+        /// </summary>
+        /// <param name="k">The vector classifier</param>
+        [MethodImpl(Inline)]
+        public static bit floating(VectorKind k)
+            => (k & VectorKind.Fractional) != 0;
+
+        /// <summary>
+        /// Determines whether a classfied vector is defined over primal integer components
+        /// </summary>
+        /// <param name="k">The vector classifier</param>
+        [MethodImpl(Inline)]
+        public static bit integral(VectorKind k)
+            => signed(k) || unsigned(k);
+
+        /// <summary>
+        /// Determines whether the unsigned facet of a block classification is enabled
+        /// </summary>
+        /// <param name="k">The vector classifier</param>
+        [MethodImpl(Inline)]
+        public static bit unsigned(BlockKind k)
+            => (k & BlockKind.Unsigned) != 0;
+
+        /// <summary>
+        /// Determines whether the signed facet of a block classification is enabled
+        /// </summary>
+        /// <param name="k">The vector classifier</param>
+        [MethodImpl(Inline)]
+        public static bit signed(BlockKind k)
+            => (k & BlockKind.Signed) != 0;
+
+        /// <summary>
+        /// Determines whether the floating facet of a block classification is enabled
+        /// </summary>
+        /// <param name="k">The vector classifier</param>
+        [MethodImpl(Inline)]
+        public static bit floating(BlockKind k)
+            => (k & BlockKind.Fractional) != 0;
+
+        /// <summary>
+        /// Determines whether the signed or unsigned facet of a block classification is enabled
+        /// </summary>
+        /// <param name="k">The vector classifier</param>
+        [MethodImpl(Inline)]
+        public static bit integral(BlockKind k)
+            => signed(k) || unsigned(k);
+
+        /// <summary>
+        /// Returns true if the source type is intrinsic or blocked
         /// </summary>
         /// <param name="t">The type to examine</param>
-        public static int bitwidth(Type t)
-        {
-            if(vector(t))
-                return vectorwidth(t);
-            else if(blocked(t))
-                return blockwidth(t);
-            else
-                return t.PrimalBitWidth();
-        }
+        public static bool segmented(Type t)
+            => BlockedType.test(t) || VectorType.test(t);
 
         /// <summary>
-        /// Determines whether a method is a primal shift operator
+        /// If type is intrinsic or blocked, returns the primal type over which the segmentation is defined; otherwise, returns none
         /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool primalshift(MethodInfo m)        
-            => m.IsBinaryFunc() 
-            && m.ReturnType == m.ParameterTypes().First() 
-            && m.ParameterTypes().Second() == typeof(byte);
-
-        /// <summary>
-        /// Determines whether a method defines a predicate that returns a bit or bool value
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool predicate(MethodInfo m)
-            => m.ParameterTypes().Distinct().Count() == 1 
-            && (m.ReturnType == typeof(bit) || m.ReturnType == typeof(bool));
-
-        /// <summary>
-        /// Determines whether a method is an action
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool action(MethodInfo m)
-            => m.ReturnType == typeof(void);
-
-        /// <summary>
-        /// Determines whether a method is an action with specified arity
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        /// <param name="arity">The arity to match</param>
-        public static bool action(MethodInfo m, int arity)
-            => action(m) && m.HasArity(arity);
-
-        /// <summary>
-        /// Determines whether a method is a function
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool function(MethodInfo m)
-            => m.ReturnType != typeof(void);
-
-        /// <summary>
-        /// Determines whether a method is a function with specified arity
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        /// <param name="arity">The arith to match</param>
-        public static bool function(this MethodInfo m, int arity)
-            => function(m) && m.HasArity(arity);
-
-        /// <summary>
-        /// Determines whether a method defines a predicate that returns a bit value
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool bitpredicate(MethodInfo m)        
-            => m.ParameterTypes().Distinct().Count() == 1 
-            && (m.ReturnType == typeof(bit));
-
-        /// <summary>
-        /// Determines whether a method defines an operator over a (common) domain
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool isoperator(MethodInfo m)
-            => m.IsFunction() && homogenous(m) && m.Arity() >= 1;
-    
-        /// <summary>
-        /// Determines whether a method is an emitter, i.e. a method that returns a value but accepts no input
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool emitter(MethodInfo m)
-            => m.IsFunction() && m.HasArity(0);
-
-        /// <summary>
-        /// Determines whether a method defines a parameter that requires an immediate
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool immrequired(MethodInfo m)        
-            => m.GetParameters().Where(p => p.Attributed<ImmAttribute>()).Any();
-
-        /// <summary>
-        /// Returns a method's parameter types
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static IEnumerable<Type> immediates(MethodInfo m)
-            => m.GetParameters().Select(p => p.ParameterType);
-
-        [MethodImpl(Inline)]
-        static PrimalKind primalkind_u<T>(T t = default)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return PrimalKind.U8;
-            else if(typeof(T) == typeof(ushort))
-                return PrimalKind.U16;
-            else if(typeof(T) == typeof(uint))
-                return PrimalKind.U32;
-            else if(typeof(T) == typeof(ulong))
-                return PrimalKind.U64;
-            else
-                return primalkind_i(t);
-        }
-
-        [MethodImpl(Inline)]
-        static PrimalKind primalkind_i<T>(T t = default)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return PrimalKind.I8;
-            else if(typeof(T) == typeof(short))
-                return PrimalKind.I16;
-            else if(typeof(T) == typeof(int))
-                return PrimalKind.I32;
-            else if(typeof(T) == typeof(long))
-                return PrimalKind.I64;
-            else
-                return primalkind_f(t);
-        }
-
-        [MethodImpl(Inline)]
-        static PrimalKind primalkind_f<T>(T t = default)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return PrimalKind.F32;
-            else if(typeof(T) == typeof(double))
-                return PrimalKind.F64;
-            else
-                return PrimalKind.None;            
-        }
+        /// <param name="t">The type to examine</param>
+        public static Option<Type> segtype(Type t)
+            => segmented(t) ? t.GenericTypeArguments[0] : default;        
     }
 }

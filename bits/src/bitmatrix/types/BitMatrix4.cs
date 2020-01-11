@@ -127,10 +127,10 @@ namespace Z0
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => BitMask.testbit(data, row*4 + col);
+            get => bit.test(data, row*4 + col);
 
             [MethodImpl(Inline)]
-            set => data = BitMask.set(data, (byte)(row*4 + col), value);
+            set => data = bit.set(data, (byte)(row*4 + col), value);
         }            
 
         public BitVector4 this[int row]

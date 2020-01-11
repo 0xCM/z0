@@ -16,11 +16,11 @@ namespace Z0
 
     public readonly struct ParamImmInfo
     {
-        public ParamImmInfo(string ParamName, int ParamIndex, PrimalKind ImmediateType)
+        public ParamImmInfo(string ParamName, int ParamIndex, PrimalKind ImmType)
         {
             this.ParamName = ParamName;
             this.ParamIndex = ParamIndex;
-            this.ImmediateType = ImmediateType;
+            this.ImmediateType = ImmType;
         }
 
         public readonly string ParamName;

@@ -80,10 +80,10 @@ namespace Z0
         public bit this[ByteSize offset, byte pos]        
         {
             [MethodImpl(Inline)]
-            get => BitMask.testbit(Bytes[offset], pos);
+            get => bit.test(Bytes[offset], pos);
             
             [MethodImpl(Inline)]
-            set => Bytes[offset] = BitMask.set(Bytes[offset], pos, value);
+            set => Bytes[offset] = bit.set(Bytes[offset], pos, value);
                 
         }
 

@@ -87,5 +87,5 @@ partial class zfunc
     public static Moniker moniker<W,T>(string opname, W w = default, T t = default)
         where W : unmanaged, ITypeNat
         where T : unmanaged
-            => Moniker.define(opname,Classified.primalkind<T>(),w);
+            => Moniker.define(opname,PrimalType.kind<T>(),w);
 }

@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />
+    <ProjectReference Include="$(TopDir)asm/src/z0.asm.csproj" />
+    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
+  </ItemGroup>
+
+</Project>

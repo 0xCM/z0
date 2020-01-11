@@ -29,7 +29,7 @@ namespace Z0
                 return generic<T>(math.abs(int32(src)));
             else if(typeof(T) == typeof(long))
                 return generic<T>(math.abs(int64(src)));
-            else if(Classified.unsigned<T>())
+            else if(PrimalType.unsigned<T>())
                 return src;
             else 
                 return gfp.abs(src);

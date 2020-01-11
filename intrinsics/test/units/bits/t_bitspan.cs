@@ -314,7 +314,7 @@ namespace Z0
             var bitcount = bitspan.Length;
             for(int i=0, k = 0; i < packed.Length; i++, k += 8)
             for(var j=0; j < 8; j++)
-                Claim.eq(BitMask.testbit(packed[i], j), bitspan[k + j]);
+                Claim.eq(bit.test(packed[i], j), bitspan[k + j]);
         }
 
     }

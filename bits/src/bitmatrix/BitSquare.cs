@@ -40,7 +40,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-
         [MethodImpl(Inline)]
         public static void select<T>(in T A, in T B, in T C, ref T Z)
             where T : unmanaged

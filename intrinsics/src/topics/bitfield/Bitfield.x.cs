@@ -11,7 +11,6 @@ namespace Z0
 
     public static class BitFieldX
     {
-
         public static string Format(this BitField64 src)
         {
             var fmt = text();
@@ -26,8 +25,5 @@ namespace Z0
             }
             return fmt.ToString();
         }
-
-
     }
-
 }

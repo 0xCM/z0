@@ -11,7 +11,6 @@ namespace Z0
 
     partial class BitMatrix
     {        
-
         /// <summary>
         /// Overwrites each row of a generic bitmatrix with a specified source vector
         /// </summary>

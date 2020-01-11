@@ -368,10 +368,10 @@ namespace Z0
         public bit this[int index]
         {
             [MethodImpl(Inline)]
-            get => BitMask.testbit(data, index);
+            get => bit.test(data, index);
             
             [MethodImpl(Inline)]
-            set => data = BitMask.set(data, (byte)index, value);
+            set => data = bit.set(data, (byte)index, value);
         }
 
         /// <summary>

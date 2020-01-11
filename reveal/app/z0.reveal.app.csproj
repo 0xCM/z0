@@ -12,13 +12,11 @@
     <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
     <ProjectReference Include="$(TopDir)bitcore/src/z0.bitcore.csproj" />
     <ProjectReference Include="$(TopDir)bitvectors/src/z0.bitvectors.csproj" />
-
     <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
-    <ProjectReference Include="$(TopDir)cpu/cpufunc/z0.cpufunc.csproj" />
+    <ProjectReference Include="$(TopDir)asm/src/z0.asm.csproj" />
     <ProjectReference Include="$(TopDir)bits/src/z0.bits.csproj" />
     <ProjectReference Include="$(TopDir)logix/src/z0.logix.csproj" />
     <ProjectReference Include="$(TopDir)reveal/lib/z0.reveal.lib.csproj" />
-
   </ItemGroup>
 
   <ItemGroup>

@@ -112,7 +112,7 @@ namespace Z0.Logix
             var v3_name = v3.Format(false);
             var method = MethodInfo.GetCurrentMethod().SpecializeName<T>();
             var msg = appMsg($"{method}");
-            Notify(msg);
+            Post(msg);
                         
 
             var expr = binary(k1, binary(k0, v0,v1), binary(k0, v2,v3));            

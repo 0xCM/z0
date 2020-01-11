@@ -29,7 +29,7 @@ namespace Z0
             }
             catch (Exception e)
             {
-                NotifyError(e);
+                PostError(e);
             }
         }
 

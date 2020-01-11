@@ -27,7 +27,7 @@ namespace Z0
 
         public IReadOnlyList<AppMsg> DequeueMessages(params AppMsg[] addenda)
         {
-            Notify(addenda);
+            Post(addenda);
             var messages = Messages.ToArray();
             Messages.Clear();
             return messages;
@@ -37,31 +37,38 @@ namespace Z0
         /// Enqueues an application message
         /// </summary>
         /// <param name="msg">The timings to enqueue</param>
-        protected void Notify(AppMsg msg)
+        protected void Post(AppMsg msg)
             => Messages.Add(msg);
 
         /// <summary>
         /// Enqueues application messages
         /// </summary>
         /// <param name="msg">The messages to enqueue</param>
-        protected void Notify(params AppMsg[] messages)
+        protected void Post(params AppMsg[] messages)
             => Messages.AddRange(messages);
 
-        protected void NotifyError(Exception e)
+        protected void PostError(Exception e)
         {
             var msg = AppMsg.Define($"{e}", SeverityLevel.Error);
             (this as IContext).EmitMessages(msg);
         }
+        
+        protected virtual bool TraceEnabled
+            => true;
 
         protected void Trace(string msg, SeverityLevel? severity = null)
         {
-            Notify(AppMsg.Define($"{msg}", severity ?? SeverityLevel.Babble));
+            if(TraceEnabled)
+                Post(AppMsg.Define($"{msg}", severity ?? SeverityLevel.Babble));
         }
 
         protected void Trace(string title, string msg, int? tpad = null, SeverityLevel? severity = null)
         {
-            var titleFmt = tpad.Map(pad => title.PadRight(pad), () => title.PadRight(20));        
-            Notify(AppMsg.Define($"{titleFmt}: {msg}", severity ?? SeverityLevel.Babble));
+            if(TraceEnabled)
+            {
+                var titleFmt = tpad.Map(pad => title.PadRight(pad), () => title.PadRight(20));        
+                Post(AppMsg.Define($"{titleFmt}: {msg}", severity ?? SeverityLevel.Babble));
+            }
         }
 
         /// <summary>
@@ -72,7 +79,8 @@ namespace Z0
         /// replaces the exising source message severity prior to queue submission</param>
         protected void Trace(AppMsg msg, SeverityLevel? severity = null)
         {
-            Notify(msg.WithLevel(severity ?? SeverityLevel.Babble));
+            if(TraceEnabled)
+                Post(msg.WithLevel(severity ?? SeverityLevel.Babble));
         }
 
         /// <summary>
@@ -81,7 +89,8 @@ namespace Z0
         /// <param name="msg">The message to submit</param>
         protected void TracePerf(string msg)
         {
-            Notify(AppMsg.Define($"{msg}", SeverityLevel.Benchmark));
+            if(TraceEnabled)
+                Post(AppMsg.Define($"{msg}", SeverityLevel.Benchmark));
         }
     }
 }

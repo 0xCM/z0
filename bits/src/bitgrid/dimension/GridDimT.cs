@@ -21,7 +21,6 @@ namespace Z0
             this.BlockWidth = blockwidth ?? CellWidth;
         }
 
-
         public int RowCount {get;}
 
         public int ColCount {get;}
@@ -83,6 +82,5 @@ namespace Z0
         /// </summary>
         public string Format()
             => $"{RowCount}x{ColCount}x{CellWidth}w";
-
     }
 }

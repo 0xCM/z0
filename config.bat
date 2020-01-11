@@ -14,8 +14,8 @@ dotnet sln add intrinsics/test/z0.intrinsics.test.csproj
 dotnet sln add libm/src/z0.libm.csproj
 dotnet sln add libm/test/z0.libm.test.csproj
 
-dotnet sln add cpu/cpufunc/z0.cpufunc.csproj
-dotnet sln add cpu/test/z0.cpu.test.csproj
+dotnet sln add asm/src/z0.asm.csproj
+dotnet sln add asm/test/z0.asm.test.csproj
 
 dotnet sln add linear/matrix/src/z0.matrix.csproj
 dotnet sln add linear/ops/z0.linops.csproj

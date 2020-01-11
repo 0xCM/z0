@@ -94,7 +94,7 @@ namespace Z0
                 var bitseq = bs.BitSeq.Blocked(block);
                 uint packed = BitPack.pack8(bitseq);
                 for(var i=0; i< count; i++)
-                    Claim.eq(bs[i], BitMask.testbit(packed, i));
+                    Claim.eq(bs[i], bit.test(packed, i));
             }
         }
 

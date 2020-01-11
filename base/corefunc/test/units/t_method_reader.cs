@@ -127,6 +127,8 @@ namespace Z0
 
     public sealed class t_method_reader : UnitTest<t_method_reader>
     {
+        protected override bool TraceEnabled => false;
+        
         public void read_generic_type()
         {
 
@@ -205,7 +207,7 @@ namespace Z0
 
         public void read_delegate()
         {
-
+            
             Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> dAnd = Avx2.And;
             var dAndData = dAnd.CaptureDelegateAsm(100);
             Trace("And:delegate");

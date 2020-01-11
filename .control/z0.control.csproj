@@ -25,8 +25,8 @@
     <ProjectReference Include="$(TopDir)bitvectors/src/z0.bitvectors.csproj" />
     <ProjectReference Include="$(TopDir)bitvectors/test/z0.bitvectors.test.csproj" />
 
-    <ProjectReference Include="$(TopDir)cpu/cpufunc/z0.cpufunc.csproj" />
-    <ProjectReference Include="$(TopDir)cpu/test/z0.cpu.test.csproj" />
+    <ProjectReference Include="$(TopDir)asm/src/z0.asm.csproj" />
+    <ProjectReference Include="$(TopDir)asm/test/z0.asm.test.csproj" />
 
     <ProjectReference Include="$(TopDir)stats/dist/z0.statdist.csproj" />
     <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />    

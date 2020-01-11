@@ -44,7 +44,6 @@ namespace Z0
         public static Perm8L ToPerm(this SubGrid32<N8,N3,uint> src)
             => (Perm8L)src.Data;
 
-
         [MethodImpl(Inline)]
         public static BitGrid64<N16,N4,ulong> ToBitGrid(this NatPerm<N16> src)
             => BitGrid.from(src);

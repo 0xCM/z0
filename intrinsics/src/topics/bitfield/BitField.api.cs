@@ -30,7 +30,6 @@ namespace Z0
         public static BitField64 init(ulong data, params BitSegment[] fields)
             => new BitField64(data, fields);
 
-
         static Span<Pair<E,byte>> parts<E>(BitField256<E> bf)
             where E : unmanaged, Enum
         {
@@ -89,6 +88,5 @@ namespace Z0
         internal static byte getwidth<E>(Vector256<byte> widths, E field)
             where E : unmanaged, Enum
                 => (byte)Bits.width(widths.GetElement(eint(field)));
-
     }
 }

@@ -78,9 +78,9 @@ namespace Z0
                     {
                         if(method.IsOpenGeneric())
                         {
-                            var args = method.SupportedPrimals().Select(x => x.PrimalType()).ToArray();
+                            var args = method.SupportedPrimals().Select(x => x.ToPrimalType()).ToArray();
                             if(args.Length == 0)
-                                args = Classified.IntegralKinds.Select(k => k.PrimalType()).ToArray();
+                                args = Classified.IntegralKinds.Select(k => k.ToPrimalType()).ToArray();
                             foreach(var arg in args)
                             {
                                 var d = method.Descriptor(arg);

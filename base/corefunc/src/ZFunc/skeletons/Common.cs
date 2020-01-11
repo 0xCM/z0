@@ -18,7 +18,6 @@ namespace Z0
             public virtual string Moniker => moniker<A>(GetOpName());
         }
 
-
         /// <summary>
         /// Base type for homogenous vectorized operators
         /// </summary>
@@ -36,6 +35,5 @@ namespace Z0
 
             public override string Moniker => moniker<W,T>(GetOpName());
         }
-
     }
 }

@@ -24,7 +24,7 @@ namespace Z0
             var t = src.A.ParameterType;
             if(Classified.segmented(t))
             {
-                var typewidth = Classified.bitwidth(t);
+                var typewidth = Classified.width(t);
                 var segkind = Classified.segtype(t).Require().Kind();
                 var segwidth = segkind.BitWidth();
                 var indicator = segkind.Sign();
@@ -54,5 +54,4 @@ namespace Z0
             return parenthetical(fmt.ToString());            
         }
     }
-
 }

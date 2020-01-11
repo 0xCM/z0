@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="k">The primal kind</param>
         [MethodImpl(Inline)]   
         public static string suffix(PrimalKind k)
-            => $"{Classified.width(k)}{Classified.sign(k)}";
+            => $"{Classified.width(k)}{Classified.indicator(k)}";
 
         /// <summary>
         /// Produces a canonical designator of the form {op}_{bitsize[T]}{u | i | f} for an operation over a primal type

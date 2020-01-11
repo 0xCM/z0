@@ -12,7 +12,6 @@ namespace Z0
 
     using static zfunc;
 
-
     /// <summary>
     /// Defines a file name along with the extension in isolation 
     /// and without ascribing additional path content
