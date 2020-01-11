@@ -32,11 +32,11 @@ namespace Z0
         }
 
         public static string GenAccessor()
-            => InlineData.GenAccessor(GenData(), $"{BasePropName}{suffix<ulong>()}");
+            => InlineData.GenAccessor(GenData(), $"{BasePropName}{primalsig<ulong>()}");
 
         public static string GenAccessor<T>()
             where T : unmanaged
-                => InlineData.GenAccessor(GenData<T>(), $"{BasePropName}{suffix<T>()}");
+                => InlineData.GenAccessor(GenData<T>(), $"{BasePropName}{primalsig<T>()}");
 
         public static void GenToFile()
         {

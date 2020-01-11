@@ -54,13 +54,22 @@ namespace Z0
             => (T)m.MemberValue(o);
 
         /// <summary>
-        /// Determines whether an attribute is applied to a member
+        /// Determines whether an attribute is applied to a subject
         /// </summary>
-        /// <param name="m">The member to examine</param>
+        /// <param name="m">The subject to examine</param>
         /// <typeparam name="T">The type of attribute for which to check</typeparam>
-        public static bool IsAttributed<T>(this MemberInfo m) 
+        public static bool Attributed<T>(this MemberInfo m) 
             where T : Attribute
                 => System.Attribute.IsDefined(m, typeof(T));
+
+        /// <summary>
+        /// Returns true if a parametrically-identified attribute is not applied to the subject
+        /// </summary>
+        /// <param name="m">The subject to examine</param>
+        /// <typeparam name="T">The type of attribute for which to check</typeparam>
+        public static bool Unattributed<T>(this MemberInfo m) 
+            where T : Attribute
+                => !m.Attributed<T>();
 
         /// <summary>
         /// Determines whether an attribute of specified type is attached to a member
@@ -68,7 +77,7 @@ namespace Z0
         /// <param name="m">The member to test</param>
         /// <param name="t">The target attribute type</param>
         [MethodImpl(Inline)]
-        public static bool IsAttributed(this MemberInfo m, Type t)
+        public static bool Attributed(this MemberInfo m, Type t)
             => Attribute.IsDefined(m,t);
 
         /// <summary>

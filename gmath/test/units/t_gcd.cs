@@ -65,8 +65,8 @@ namespace Z0
                 compare.Stop();
             }
 
-            ReportBenchmark($"gcdbin{suffix<T>()}", OpCount,subject);
-            ReportBenchmark($"gcd{suffix<T>()}", OpCount,compare);
+            ReportBenchmark($"gcdbin{primalsig<T>()}", OpCount,subject);
+            ReportBenchmark($"gcd{primalsig<T>()}", OpCount,compare);
         }
 
         /// <summary>

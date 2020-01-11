@@ -5,17 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Security;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
-    using System.Reflection;
-    using System.Reflection.Emit;
 
     using static zfunc;
-    
-    public static unsafe class AsmDelegateX
-    {
+    using static As;
+    using static AsIn;
+    using static FixedContainers;
+
+    public static class FixedX
+    {    
         [MethodImpl(Inline)]
         public static Vector128<T> ToVector<T>(this in Fixed128 src)
             where T : unmanaged
@@ -35,7 +35,7 @@ namespace Z0
         public static Fixed256 ToFixed<T>(this Vector256<T> x)
             where T : unmanaged
                 => Unsafe.As<Vector256<T>,Fixed256>(ref x);
-        
+
         [MethodImpl(Inline)]
         public static Vector256<T> Apply<T>(this UnaryOp256 f, Vector256<T> x)
            where T : unmanaged
@@ -58,6 +58,7 @@ namespace Z0
         public static Vector128<T> Apply<T>(this BinaryOp128 f, Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => f(x.ToFixed(), y.ToFixed()).ToVector<T>();
+
     }
 
 }

@@ -24,16 +24,10 @@ namespace Z0
             where T : unmanaged
                 => or_u(a,b);
 
-        /// <summary>
-        /// Computes the bitwise or between three primal values
-        /// </summary>
-        /// <param name="a">The left value</param>
-        /// <param name="b">The right value</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
-        public static T or<T>(T a, T b, T c)
-            where T : unmanaged
-                => or_u(a,b,c);
+        // [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        // public static T or<T>(T a, T b, T c)
+        //     where T : unmanaged
+        //         => or_u(a,b,c);
 
         [MethodImpl(Inline)]
         static T or_u<T>(T a, T b)

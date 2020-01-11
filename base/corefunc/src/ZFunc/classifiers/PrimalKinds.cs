@@ -33,6 +33,16 @@ namespace Z0
 
         public readonly struct Primal64f : IPrimalKind { public const PrimalKind Kind = PrimalKind.F64; public PrimalKind Classifier => Kind;}
 
+        public readonly struct PrimalKind<T> : IPrimalKind<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public static implicit operator PrimalKind(PrimalKind<T> src)
+                => src.Classifier;
+
+            public PrimalKind Classifier {[MethodImpl(Inline)] get  => PrimalType.kind<T>();}
+        }
+
         public static Primal8u u8
         {
             [MethodImpl(Inline)]
@@ -92,6 +102,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => default;
         }
+
+        [MethodImpl(Inline)]
+        public static PrimalKind<T> pkind<T>(T t = default)
+            where T : unmanaged
+                => default;
     }
 }
 

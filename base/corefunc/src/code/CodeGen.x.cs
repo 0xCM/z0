@@ -40,7 +40,7 @@ namespace Z0
             where T : unmanaged
         {
             var bytes = src.AsBytes();
-            var decl = $"public static ReadOnlySpan<byte> {name}{bitsize<T>()}{suffix(PrimalType.kind<T>())}";
+            var decl = $"public static ReadOnlySpan<byte> {name}{bitsize<T>()}{Classified.primalsig(PrimalType.kind<T>())}";
             var data = embrace(bytes.FormatHexBytes(sep: AsciSym.Comma, specifier:true));
             var rhs = $"new byte[{bytes.Length}]" + data;
             return $"{decl} => {rhs};";

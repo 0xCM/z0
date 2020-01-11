@@ -11,32 +11,110 @@ namespace Z0
 
     using static zfunc;
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed64 UnaryOp64(Fixed64 a);
+    public struct Fixed8
+    {
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed8(byte x0)
+            => new Fixed8(x0);
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed128 UnaryOp128(Fixed128 a);
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed8(sbyte x0)
+            => new Fixed8((byte)x0);
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed256 UnaryOp256(Fixed256 a);
+        [MethodImpl(Inline)]
+        internal Fixed8(byte x0)
+            => X0 = x0;
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed64 BinaryOp64(Fixed64 a, Fixed64 b);
+        internal byte X0;
+    }
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed128 BinaryOp128(Fixed128 a, Fixed128 b);
+    public struct Fixed16
+    {
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed16(ushort x0)
+            => new Fixed16(x0);
 
-    [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed256 BinaryOp256(Fixed256 a, Fixed256 b);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed16(short x0)
+            => new Fixed16((ushort)x0);
+
+        [MethodImpl(Inline)]
+        internal Fixed16(ushort x0)
+            => X0 = x0;
+
+        internal ushort X0;
+    }
+
+    public struct Fixed32
+    {
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed32(uint x0)
+            => new Fixed32(x0);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed32(int x0)
+            => new Fixed32((uint)x0);
+
+        [MethodImpl(Inline)]
+        public static explicit operator uint(Fixed32 x)
+            => x.X0;
+
+        [MethodImpl(Inline)]
+        public static explicit operator int(Fixed32 x)
+            => (int)x.X0;
+
+        [MethodImpl(Inline)]
+        internal Fixed32(uint x0)
+            => X0 = x0;
+
+        internal uint X0;
+    }
 
     public struct Fixed64
     {
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed64(long x0)
+            => new Fixed64((ulong)x0);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed64(ulong x0)
+            => new Fixed64(x0);
+
+        [MethodImpl(Inline)]
+        public static explicit operator ulong(Fixed64 x)
+            => x.X0;
+
+        [MethodImpl(Inline)]
+        public static explicit operator long(Fixed64 x)
+            => (long)x.X0;
+
+        [MethodImpl(Inline)]
+        internal Fixed64(ulong x0)
+            => X0 = x0;
+
         internal ulong X0;
+        
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct Fixed128
     {
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed128((ulong x0, ulong x1) x)
+            => new Fixed128(x.x0,x.x1);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed128(in Pair<ulong> x)
+            => new Fixed128(x.A,x.B);
+
+        [MethodImpl(Inline)]
+        internal Fixed128(ulong x0, ulong x1)
+        {
+            this.X0 = x0;
+            this.X1 = x1;
+        }
+        
         internal ulong X0;
 
         ulong X1;        
@@ -45,6 +123,17 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct Fixed256
     {
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed256((Fixed128 x0, Fixed128 x1) x)
+            => new Fixed256(x.x0,x.x1);
+
+        [MethodImpl(Inline)]
+        internal Fixed256(Fixed128 x0, Fixed128 x1)
+        {
+            this.X0 = x0;
+            this.X1 = x1;
+        }
+
         internal Fixed128 X0;
 
         Fixed128 X1;

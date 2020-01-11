@@ -13,11 +13,11 @@ namespace Z0
     /// <summary>
     /// Wraps an executable non-GC'd buffer to hold assembly instruction code
     /// </summary>
-    public ref struct AsmExecBuffer
+    public struct AsmExecBuffer : IDisposable
     {
-        public const int DefaultSize = 256;
+        public const int DefaultSize = 512;
 
-        readonly SpanBuffer Buffer;
+        readonly MemoryBuffer Buffer;
 
         readonly long pBuffer;
 
@@ -28,8 +28,8 @@ namespace Z0
 
         AsmExecBuffer(int size)
         {
-            Buffer = SpanBuffer.Alloc(size);
-            pBuffer = (long)OS.Liberate(this.Buffer);                        
+            Buffer = MemoryBuffer.Alloc(size);
+            pBuffer = (long)Buffer.Handle;
             Code = AsmCode.Empty;
         }
 
@@ -45,22 +45,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public BinaryOp<T> BinOp<T>()
-            where T : unmanaged
-                => AsmDelegate.CreateBinOp<T>(pBuffer, Code.Name);
-
-        [MethodImpl(Inline)]
         public BinaryOp<T> BinOp<T>(in AsmCode<T> code)
             where T : unmanaged
         {
             Load(code);
             return AsmDelegate.CreateBinOp<T>(pBuffer, Code.Name);
         }
-
-        [MethodImpl(Inline)]
-        public UnaryOp<T> UnaryOp<T>()
-            where T : unmanaged
-                => AsmDelegate.CreateUnaryOp<T>(pBuffer, Code.Name);
 
         [MethodImpl(Inline)]
         public UnaryOp<T> UnaryOp<T>(in AsmCode<T> code)
@@ -71,16 +61,32 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public UnaryOp128 UnaryOp128()
-            => AsmDelegate.CreateUnaryOp128(pBuffer, Code.Name);
+        public BinaryOp8 BinOp8(in AsmCode code)
+        {
+            Load(code);
+            return AsmDelegate.CreateBinOp8(pBuffer, Code.Name);
+        }
 
         [MethodImpl(Inline)]
-        public UnaryOp256 UnaryOp256()
-            => AsmDelegate.CreateUnaryOp256(pBuffer, Code.Name);
+        public BinaryOp16 BinOp16(in AsmCode code)
+        {
+            Load(code);
+            return AsmDelegate.CreateBinOp16(pBuffer, Code.Name);
+        }
 
         [MethodImpl(Inline)]
-        public BinaryOp128 BinOp128()
-            => AsmDelegate.CreateBinOp128(pBuffer, Code.Name);
+        public BinaryOp32 BinOp32(in AsmCode code)
+        {
+            Load(code);
+            return AsmDelegate.CreateBinOp32(pBuffer, Code.Name);
+        }
+
+        [MethodImpl(Inline)]
+        public BinaryOp64 BinOp64(in AsmCode code)
+        {
+            Load(code);
+            return AsmDelegate.CreateBinOp64(pBuffer, Code.Name);
+        }
 
         [MethodImpl(Inline)]
         public BinaryOp128 BinOp128(in AsmCode code)
@@ -88,10 +94,6 @@ namespace Z0
             Load(code);
             return AsmDelegate.CreateBinOp128(pBuffer, Code.Name);
         }
-
-        [MethodImpl(Inline)]
-        public BinaryOp256 BinOp256()
-            => AsmDelegate.CreateBinOp256(pBuffer, Code.Name);
 
         [MethodImpl(Inline)]
         public BinaryOp256 BinOp256(in AsmCode code)

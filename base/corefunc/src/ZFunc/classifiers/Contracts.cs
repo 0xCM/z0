@@ -22,9 +22,36 @@ namespace Z0
 
     }
 
+    public interface IVectorKind<V> : IVectorKind
+        where V : struct
+    {
+
+    }
+
+    public interface IVectorKind<W,T> : IVectorKind
+        where W : unmanaged, ITypeNat
+        where T : unmanaged
+    {
+
+    }
+
     public interface IBlockKind : IKind<BlockKind>
     {
 
+
+    }
+
+    public interface IBlockKind<B> : IBlockKind
+        where B : struct
+    {
+
+
+    }
+
+    public interface IBlockKind<W,T> : IBlockKind
+        where W : unmanaged, ITypeNat
+        where T : unmanaged
+    {
 
     }
 
@@ -33,4 +60,9 @@ namespace Z0
 
     }
 
+    public interface IPrimalKind<T> : IPrimalKind
+        where T : unmanaged
+    {
+
+    }
 }

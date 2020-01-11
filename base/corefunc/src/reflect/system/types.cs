@@ -26,6 +26,13 @@ namespace Z0
             || src.IsString();                            
 
         /// <summary>
+        /// Returns true if the source type is either non-generic or a generic type that has been closed over all parameters
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        public static bool Reified(this Type src)
+            => !src.ContainsGenericParameters && !src.IsGenericParameter;
+
+        /// <summary>
         /// Determines whether the type is a (memory) reference
         /// </summary>
         /// <param name="src">The type to examine</param>

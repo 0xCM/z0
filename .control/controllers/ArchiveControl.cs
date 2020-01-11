@@ -73,7 +73,7 @@ namespace Z0
                 archive.Clear();
                 foreach(var opname in designator.OpNames)
                 {
-                    var methods = api.StaticMethods().WithName(opname).ToArray();
+                    var methods = api.StaticMethods().Public().WithName(opname).ToArray();
                     foreach(var method in methods)
                     {
                         if(method.IsOpenGeneric())
@@ -81,6 +81,7 @@ namespace Z0
                             var args = method.SupportedPrimals().Select(x => x.ToPrimalType()).ToArray();
                             if(args.Length == 0)
                                 args = Classified.IntegralKinds.Select(k => k.ToPrimalType()).ToArray();
+                            
                             foreach(var arg in args)
                             {
                                 var d = method.Descriptor(arg);
@@ -97,26 +98,12 @@ namespace Z0
             }
         }
 
-        void ReifyGeneric(FolderName subject, IEnumerable<MethodInfo> methods, IEnumerable<Type> args)
-        {
-            var archive = AsmArchive.Define(subject);
-            foreach(var method in methods)
-            {
-                foreach(var arg in args)
-                {                    
-                    var d = method.Descriptor(arg);
-                    archive.SaveAsm(d.NativeData.Instructions(),d.Moniker);
-                }
-            }
-        }
-
-
         public override void Execute()
         {
-            Reify(Designate("z0.intrinsics").Require());
+
+            //Reify(Designate("z0.intrinsics").Require());
             Reify(Designate("z0.gmath").Require());
             
-
 
         }
 

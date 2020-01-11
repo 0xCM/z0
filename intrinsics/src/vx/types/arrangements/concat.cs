@@ -19,7 +19,7 @@ namespace Z0
 
             public const string Name = "vconcat";
 
-            public string Moniker => $"{Name}_2x128x{suffix<T>()}";
+            public string Moniker => $"{Name}_2x128x{primalsig<T>()}";
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vconcat(x,y);

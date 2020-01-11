@@ -27,6 +27,9 @@ namespace Z0
         protected void Enqueue(IEnumerable<TestCaseRecord> outcomes)
             => TestResultQueue.Enqueue(outcomes);
 
+        protected void Enqueue(TestCaseRecord outcome)
+            => TestResultQueue.Enqueue(outcome);
+
         ConcurrentQueue<BenchmarkRecord> BenchmarkQueue {get;}
             = new ConcurrentQueue<BenchmarkRecord>();
 
@@ -54,7 +57,9 @@ namespace Z0
         }
 
         IEnumerable<Type> CandidateTypes()
-            => typeof(A).Assembly.Types().Realize<IUnitTest>().Where(t => t.ContainsGenericParameters == false);        
+            =>  from t in typeof(A).Assembly.Types().Realize<IUnitTest>()
+                where t.Reified() && t.Unattributed<SkipAttribute>()
+                select t;
         
         IEnumerable<Type> Hosts()
             => CandidateTypes().Concrete().OrderBy(t => t.DisplayName());
@@ -76,7 +81,7 @@ namespace Z0
         /// </summary>
         /// <param name="host">The host type</param>
         /// <param name="filters">Filters the host's test if nonempty</param>
-        void Run(Type host, string[] filters)
+        public void Run(Type host, string[] filters)
         {        
 
             if(!HasAny(host,filters))
@@ -87,14 +92,14 @@ namespace Z0
             {
                 var execTime = Duration.Zero;
                 var runtimer = stopwatch();
+                var name = host.DisplayName();
 
                 Trace(AppMsg.Define($"Creating unit {host.Name}", SeverityLevel.Babble));
                 var instance = host.CreateInstance<IUnitTest>();
                 instance.Configure(Config);                
 
-                var hostpath = host.DisplayName();
                 if(instance.Enabled)
-                    iter(Tests(host), t =>  execTime += Run(instance, hostpath, t, results));                
+                    iter(Tests(host), t =>  execTime += Run(instance, name, t, results));                
                 Enqueue(instance.TakeBenchmarks().ToArray());
                 
                 print(AppMsg.Define($"{host.Name} exectime {execTime.Ms} ms, runtime = {snapshot(runtimer).Ms} ms", SeverityLevel.Info));
@@ -105,8 +110,46 @@ namespace Z0
                 error($"Host execution failed: {e}", this);
             }  
 
-            Enqueue(results);
+            Enqueue(results);            
+        }
+
+        public Duration RunAction(IUnitTest unit, Action exec)
+        {
+            var messages = new List<AppMsg>();
+            var clock = counter(false);
+            var testName = $"{unit.GetType().DisplayName()}/action";
             
+            try
+            {                
+                unit.Configure(Config);                  
+                messages.Add(AppMsg.Define($"{testName} executing", SeverityLevel.HiliteBL));                
+                
+                clock.Start();
+                exec();
+                clock.Stop();
+
+                messages.AddRange(unit.DequeueMessages());
+                messages.Add(AppMsg.Define($"{testName} executed. {clock.Time.TotalMilliseconds}ms", SeverityLevel.Info));
+
+                var outcomes = unit.TakeOutcomes().ToArray();                
+                if(outcomes.Length != 0)
+                    Enqueue(outcomes);
+                else
+                    Enqueue(TestCaseRecord.Define(testName,true,clock.Time));                              
+
+            }
+            catch(Exception e)
+            {
+                clock.Stop();
+                messages.AddRange(unit.DequeueMessages());                
+                messages.AddRange(GetErrorMessages(testName,e));
+                Enqueue(TestCaseRecord.Define(testName,false,clock.Time));                
+            }
+            finally
+            {            
+                print(messages);
+            }
+            return clock.Time;
         }
 
         void Run(bool concurrent, params string[] filters)
@@ -117,6 +160,21 @@ namespace Z0
         
         IEnumerable<MethodInfo> Tests(Type host)
             =>  host.DeclaredMethods().Public().NonGeneric().WithArity(0);
+
+
+        IEnumerable<AppMsg> GetErrorMessages(string name, Exception e)
+        {
+            if(e.InnerException is ClaimException claim)
+                yield return claim.Message;
+            
+            else if(e.InnerException is AppException app)
+                yield return app.Message;
+            else
+                yield return ErrorMessages.Unanticipated(e ?? e.InnerException);
+
+            yield return AppMsg.Define($"{name} failed.", SeverityLevel.Error);                
+
+        }
 
         Duration Run(IUnitTest unit, string hostpath, MethodInfo test, IList<TestCaseRecord> results)
         {
@@ -143,15 +201,16 @@ namespace Z0
             {                
                 exectime = snapshot(sw);
                 messages.AddRange(unit.DequeueMessages());                
-                
-                if(e.InnerException is ClaimException claim)
-                    messages.Add(claim.Message);
-                else if(e.InnerException is AppException app)
-                    messages.Add(app.Message);
-                else
-                    messages.Add(ErrorMessages.Unanticipated(e ?? e.InnerException));
+                messages.AddRange(GetErrorMessages(testName,e));
 
-                messages.Add(AppMsg.Define($"{testName} failed. {exectime.Ms}ms", SeverityLevel.Error));  
+                // if(e.InnerException is ClaimException claim)
+                //     messages.Add(claim.Message);
+                // else if(e.InnerException is AppException app)
+                //     messages.Add(app.Message);
+                // else
+                //     messages.Add(ErrorMessages.Unanticipated(e ?? e.InnerException));
+
+                // messages.Add(AppMsg.Define($"{testName} failed. {exectime.Ms}ms", SeverityLevel.Error));  
                 results.Add(TestCaseRecord.Define(testName,false,exectime));
                               
             }
@@ -169,6 +228,8 @@ namespace Z0
 
         protected virtual string AppName
             => GetType().Assembly.GetSimpleName();
+
+        protected virtual void RunCustom(){}
 
         void EmitLogs()
         {
@@ -195,6 +256,7 @@ namespace Z0
         {
             try
             {            
+                RunCustom();
                 Run(false,filters);
                 EmitLogs();
 

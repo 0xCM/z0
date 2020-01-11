@@ -34,7 +34,7 @@ namespace Z0
             dst.NativeData = dst.Method.CaptureAsm();
             dst.Input = dst.Method.InputWidths();
             dst.Output = dst.Method.OutputWidth();
-            dst.Moniker = moniker(dst.Method);
+            dst.Moniker = Moniker.define(dst.Method);
             return dst;
         }
 

@@ -16,6 +16,38 @@ namespace Z0
     public static class FixedStore
     {
         /// <summary>
+        /// Allocates 8 bits = 1 byte of fixed storage
+        /// </summary>
+        /// <param name="n">The width selector</param>
+        [MethodImpl(Inline)]
+        public static Fixed8 alloc(N8 n)
+            => default;
+
+        /// <summary>
+        /// Allocates 16 bits = 2 bytes of fixed storage
+        /// </summary>
+        /// <param name="n">The width selector</param>
+        [MethodImpl(Inline)]
+        public static Fixed16 alloc(N16 n)
+            => default;
+
+        /// <summary>
+        /// Allocates 32 bits = 4 bytes of fixed storage
+        /// </summary>
+        /// <param name="n">The width selector</param>
+        [MethodImpl(Inline)]
+        public static Fixed32 alloc(N32 n)
+            => default;
+
+        /// <summary>
+        /// Allocates 64 bits = 8 bytes of fixed storage
+        /// </summary>
+        /// <param name="n">The width selector</param>
+        [MethodImpl(Inline)]
+        public static Fixed64 alloc(N64 n)
+            => default;
+
+        /// <summary>
         /// Allocates 128 bits = 16 bytes of fixed storage
         /// </summary>
         /// <param name="n">The width selector</param>

@@ -109,6 +109,17 @@ namespace Z0
 
         public readonly struct Block512x64f : IBlockKind { public const BlockKind Kind = BlockKind.Block512x64f; public BlockKind Classifier => Kind;}
 
+        public readonly struct BlockKind<W,T> : IBlockKind<W,T>
+            where W : unmanaged, ITypeNat
+            where T : unmanaged            
+        {
+            [MethodImpl(Inline)]
+            public static implicit operator BlockKind(BlockKind<W,T> b)
+                => b.Classifier;
+
+            public BlockKind Classifier { [MethodImpl(Inline)] get=> BlockedType.kind<W,T>();}
+        }
+
         public static Block16x8u b16x8u
         {
             [MethodImpl(Inline)]
@@ -396,6 +407,42 @@ namespace Z0
             [MethodImpl(Inline)]
             get => default;
         }
+
+        [MethodImpl(Inline)]
+        public static BlockKind<N16,T> bkind<T>(N16 w, T t = default)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static BlockKind<N32,T> bkind<T>(N32 w, T t = default)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static BlockKind<N64,T> bkind<T>(N64 w, T t = default)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static BlockKind<N128,T> bkind<T>(N128 w, T t = default)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static BlockKind<N256,T> bkind<T>(N256 w, T t = default)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static BlockKind<N512,T> bkind<T>(N512 w, T t = default)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static BlockKind<W,T> bkind<W,T>(W w = default, T t = default)
+            where W : unmanaged, ITypeNat
+            where T : unmanaged
+                => default;
 
     }
 }

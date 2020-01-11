@@ -38,6 +38,7 @@ namespace Z0
         public static bool unary(MethodInfo m)
             => m.IsFunction() && m.HasArity(1);
 
+
         /// <summary>
         /// Determines whether a method defines a binary function
         /// </summary>
@@ -75,18 +76,39 @@ namespace Z0
             => homogenous(m) && unary(m);
 
         /// <summary>
-        /// Determines whether a method is a unary operator
+        /// Determines whether a method is a unary operator over a domain of specified kind
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool unaryop(MethodInfo m, PrimalKind k)
+            => homogenous(m) && unary(m) && m.ReturnType.Kind() == k;
+
+        /// <summary>
+        /// Determines whether a method is a binary operator
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool binaryop(MethodInfo m)
             => homogenous(m) && binary(m);
 
         /// <summary>
-        /// Determines whether a method is a unary operator
+        /// Determines whether a method is a binary operator over a domain of specified kind
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool binaryop(MethodInfo m, PrimalKind k)
+            => homogenous(m) && binary(m) && m.ReturnType.Kind() == k;
+
+        /// <summary>
+        /// Determines whether a method is a ternary operator
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool ternaryop(MethodInfo m)
             => homogenous(m) && ternary(m);
+
+        /// <summary>
+        /// Determines whether a method is a ternary operator over a domain of specified kind
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool ternaryop(MethodInfo m, PrimalKind k)
+            => homogenous(m) && ternary(m) && m.ReturnType.Kind() == k;
 
         /// <summary>
         /// Determines whether a method defines an operator over a (common) domain
@@ -94,7 +116,14 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static bool isoperator(MethodInfo m)
             => m.IsFunction() && homogenous(m) && m.Arity() >= 1;
-    
+
+        /// <summary>
+        /// Determines whether a method defines an operator over a domain of specified kind
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool isoperator(MethodInfo m, PrimalKind k)
+            => m.IsFunction() && homogenous(m) && m.Arity() >= 1 && m.ReturnType.Kind() == k;
+
         /// <summary>
         /// Determines whether a method is an emitter, i.e. a method that returns a value but accepts no input
         /// </summary>
@@ -165,5 +194,4 @@ namespace Z0
         public static Pair<ParameterInfo,int> outputwidth(MethodInfo m)
             => paired(m.ReturnParameter, m.ReturnType.BitWidth());
     }
-
 }

@@ -62,6 +62,15 @@ namespace Z0
             => new AsmCode(src, m);
 
         /// <summary>
+        /// Loads an untyped code block from span content
+        /// </summary>
+        /// <param name="src">The code source</param>
+        /// <param name="m">The identifying moniker</param>
+        [MethodImpl(Inline)]
+        public static AsmCode Load(ReadOnlySpan<byte> src, Moniker m)
+            => new AsmCode(src.ToArray(), m);
+
+        /// <summary>
         /// Loads a typed code block from span content
         /// </summary>
         /// <param name="src">The code source</param>

@@ -1,4 +1,4 @@
-; 2020-01-08 22:54:01:295
+; 2020-01-11 03:38:50:129
 ; function: ReadOnlySpan<short> spanconvert(Span<short> src)
 ; static ReadOnlySpan<byte> spanconvertBytes => new byte[21]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0x02,0x8B,0x52,0x08,0x48,0x89,0x01,0x89,0x51,0x08,0x48,0x8B,0xC1,0xC3};
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00

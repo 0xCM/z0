@@ -73,6 +73,59 @@ namespace Z0
 
         public readonly struct Vector512x64f : IVectorKind { public const VectorKind Kind = VectorKind.Vector512x64f; public VectorKind Classifier => Kind;}
 
+
+        public readonly struct VectorKind128<T> : IVectorKind<N128,T>
+            where T : unmanaged
+             
+        {
+            public static VectorKind128<T> TheOnly => default;
+
+            [MethodImpl(Inline)]
+            public static implicit operator VectorKind(VectorKind128<T> v)
+                => v.Classifier;
+
+            public VectorKind Classifier 
+            {
+                [MethodImpl(Inline)]
+                get => VectorType.kind<N128,T>();
+            }
+        }
+
+        public readonly struct VectorKind256<T> : IVectorKind<N256,T>
+            where T : unmanaged
+             
+        {
+            public static VectorKind256<T> TheOnly => default;
+
+            [MethodImpl(Inline)]
+            public static implicit operator VectorKind(VectorKind256<T> v)
+                => v.Classifier;
+
+            public VectorKind Classifier 
+            {
+                [MethodImpl(Inline)]
+                get => VectorType.kind<N256,T>();
+            }
+        }
+
+        public readonly struct VectorKind<W,T> : IVectorKind<W,T>
+            where W : unmanaged, ITypeNat
+            where T : unmanaged
+             
+        {
+            public static VectorKind<W,T> TheOnly => default;
+
+            [MethodImpl(Inline)]
+            public static implicit operator VectorKind(VectorKind<W,T> v)
+                => v.Classifier;
+
+            public VectorKind Classifier 
+            {
+                [MethodImpl(Inline)]
+                get => VectorType.kind<W,T>();
+            }
+        }
+
         public static Vector128x8u v128x8u
         {
             [MethodImpl(Inline)]
@@ -253,5 +306,20 @@ namespace Z0
             get => default;
         }
 
+        [MethodImpl(Inline)]
+        public static VectorKind128<T> vkind<T>(N128 w)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static VectorKind256<T> vkind<T>(N256 w)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static VectorKind<W,T> vkind<W,T>(W w = default, T t = default)
+            where W : unmanaged, ITypeNat
+            where T : unmanaged
+                => default;
     }
 }

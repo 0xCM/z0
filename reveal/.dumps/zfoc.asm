@@ -1,9 +1,9 @@
-; 2020-01-08 22:54:02:141
+; 2020-01-11 03:38:51:110
 ; function: byte hexcode_parse(Char c)
-; static ReadOnlySpan<byte> hexcode_parseBytes => new byte[21]{0x0F,0x1F,0x44,0x00,0x00,0x0F,0xB7,0xC9,0x48,0xB8,0x28,0x67,0x80,0xB6,0xF7,0x7F,0x00,0x00,0x48,0xFF,0xE0};
+; static ReadOnlySpan<byte> hexcode_parseBytes => new byte[21]{0x0F,0x1F,0x44,0x00,0x00,0x0F,0xB7,0xC9,0x48,0xB8,0xD8,0x3C,0xE6,0xC7,0xF7,0x7F,0x00,0x00,0x48,0xFF,0xE0};
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h movzx ecx,cx                            ; MOVZX(Movzx_r32_rm16) [ECX,CX]             encoding(3 bytes) = 0f b7 c9
-0008h mov rax,7FF7B6806728h                   ; MOV(Mov_r64_imm64) [RAX,7ff7b6806728h:imm64] encoding(10 bytes) = 48 b8 28 67 80 b6 f7 7f 00 00
+0008h mov rax,7FF7C7E63CD8h                   ; MOV(Mov_r64_imm64) [RAX,7ff7c7e63cd8h:imm64] encoding(10 bytes) = 48 b8 d8 3c e6 c7 f7 7f 00 00
 0012h jmp rax                                 ; JMP(Jmp_rm64) [RAX]                        encoding(3 bytes) = 48 ff e0
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Pair<ulong> sub_128u_a(Pair<ulong> a, Pair<ulong> b)

@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="root">The root name</param>
         [MethodImpl(Inline)]
         protected string CaseName<C>(string root, C t = default)
-            => $"{GetType().Name}/{root}_{suffix(t)}";
+            => $"{GetType().Name}/{root}_{primalsig(t)}";
 
         [MethodImpl(Inline)]
         protected string CaseName<W,C>(string root, W w = default, C t = default)

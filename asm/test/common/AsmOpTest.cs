@@ -47,7 +47,6 @@ namespace Z0
         protected static AsmCode ReadAsm(FolderName folder, string opname, PrimalKind kind)
             => AsmLib.Read(folder, Moniker.define(opname,kind));
 
-
         protected AsmCode ReadAsm(Moniker m)
             => ReadAsm(AsmFolder, m);
 
@@ -215,24 +214,6 @@ namespace Z0
             where T : unmanaged
         {
             using var buffer = AsmExecBuffer.Create();            
-            var g = buffer.BinOp(asm.As<T>());
-
-            void check()
-            {
-                for(var i=0; i<RepCount; i++)
-                {
-                    (var x, var y) = Random.NextPair<T>();
-                    Claim.eq(f(x,y),g(x,y));
-                }
-            }
-
-            CheckAction(check, CaseName(asm.Name));
-        }
-
-        protected void CheckAsmMatch2<T>(BinaryOp<T> f, AsmCode<T> asm)
-            where T : unmanaged
-        {
-            using var buffer = AsmExecBuffer2.Create();            
             var g = buffer.BinOp(asm.As<T>());
 
             void check()

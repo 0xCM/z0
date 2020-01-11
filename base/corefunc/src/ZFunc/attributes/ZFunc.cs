@@ -56,7 +56,7 @@ namespace Z0
         public PrimalKind Closures {get;}
 
         public override string ToString()
-            =>  string.IsNullOrEmpty(Name) ? Moniker.suffix(Closures) : Moniker.define(Name,Closures);
+            =>  string.IsNullOrEmpty(Name) ? Moniker.primalsig(Closures) : Moniker.define(Name,Closures);
     }
 
 }

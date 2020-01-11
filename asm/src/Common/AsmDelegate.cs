@@ -51,10 +51,42 @@ namespace Z0
         /// <typeparam name="T">The primal operand type</typeparam>
         public static BinaryOp<T> CreateBinOp<T>(long pCode, Moniker m)
             where T : unmanaged
-                => (BinaryOp<T>)CreateBinOp(pCode,m,typeof(T), typeof(BinaryOp<T>));
+                => (BinaryOp<T>)CreateBinOp(pCode, m, typeof(T), typeof(BinaryOp<T>));
 
         /// <summary>
-        /// Creates a 128-bit binary operator defined by supplied asm code
+        /// Creates a 8-bit binary operator over a specified executable memory location
+        /// </summary>
+        /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
+        /// <param name="name">Identity conferred to the manufactured operator</param>
+        public static BinaryOp8 CreateBinOp8(long pCode, Moniker m)
+            => (BinaryOp8)CreateBinOp(pCode, m, typeof(Fixed8), typeof(BinaryOp8));
+
+        /// <summary>
+        /// Creates a 32-bit binary operator over a specified executable memory location
+        /// </summary>
+        /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
+        /// <param name="name">Identity conferred to the manufactured operator</param>
+        public static BinaryOp16 CreateBinOp16(long pCode, Moniker m)
+            => (BinaryOp16)CreateBinOp(pCode, m, typeof(Fixed16), typeof(BinaryOp16));
+
+        /// <summary>
+        /// Creates a 32-bit binary operator over a specified executable memory location
+        /// </summary>
+        /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
+        /// <param name="name">Identity conferred to the manufactured operator</param>
+        public static BinaryOp32 CreateBinOp32(long pCode, Moniker m)
+            => (BinaryOp32)CreateBinOp(pCode, m, typeof(Fixed32), typeof(BinaryOp32));
+
+        /// <summary>
+        /// Creates a 64-bit binary operator over a specified executable memory location
+        /// </summary>
+        /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
+        /// <param name="name">Identity conferred to the manufactured operator</param>
+        public static BinaryOp64 CreateBinOp64(long pCode, Moniker m)
+            => (BinaryOp64)CreateBinOp(pCode, m, typeof(Fixed64), typeof(BinaryOp64));
+
+        /// <summary>
+        /// Creates a 128-bit binary operator over a specified executable memory location
         /// </summary>
         /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
@@ -62,7 +94,7 @@ namespace Z0
             => (BinaryOp128)CreateBinOp(pCode, m, typeof(Fixed128), typeof(BinaryOp128));
 
         /// <summary>
-        /// Creates a 256-bit binary operator defined by supplied asm code
+        /// Creates a 256-bit binary operator over a specified executable memory location
         /// </summary>
         /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>

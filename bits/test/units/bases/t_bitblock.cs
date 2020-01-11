@@ -87,7 +87,7 @@ namespace Z0
                 bit a = x % y;
                 var b = BitBlocks.modprod(x,y);
                 if(a != b)
-                    Trace($"nbc {n}x{suffix<T>()} is a problem");
+                    Trace($"nbc {n}x{primalsig<T>()} is a problem");
                 Claim.yea(a == b);            
             }
         }

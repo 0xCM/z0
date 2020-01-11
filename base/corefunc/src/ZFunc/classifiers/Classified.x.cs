@@ -149,6 +149,13 @@ namespace Z0
             => FunctionType.isoperator(m);
 
         /// <summary>
+        /// Determines whether a method defines an operator over a domain of specified kind
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsOperator(this MethodInfo m, PrimalKind kind)
+            => FunctionType.isoperator(m, kind);
+
+        /// <summary>
         /// Determines whether a method is homogenous with respect to input/output values
         /// </summary>
         /// <param name="src">The source stream</param>
@@ -208,8 +215,16 @@ namespace Z0
             => BlockedType.test(t);
 
         [MethodImpl(Inline)]
-        public static PrimalWidth Width(this PrimalKind kind)
-            => (PrimalWidth)((ushort)kind);
+        public static int Width(this PrimalKind kind)
+            => (ushort)kind;
+
+        [MethodImpl(Inline)]
+        public static PrimalKind WidthKind(this PrimalKind kind)
+            => (PrimalKind)(ushort)kind;
+
+        [MethodImpl(Inline)]
+        public static char Indicator(this PrimalKind kind)
+            => Classified.indicator(kind);
 
         [MethodImpl(Inline)]
         public static VectorWidth Width(this VectorKind kind)
@@ -361,18 +376,39 @@ namespace Z0
             => FunctionType.unaryop(m);
 
         /// <summary>
-        /// Determines whether a method is a unary operator
+        /// Determines whether a method is a unary operator over a domain of specified kind
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsUnaryOp(this MethodInfo m, PrimalKind k)
+            => FunctionType.unaryop(m,k);
+
+        /// <summary>
+        /// Determines whether a method is a binary operator
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsBinaryOp(this MethodInfo m)
             => FunctionType.binaryop(m);
 
         /// <summary>
-        /// Determines whether a method is a unary operator
+        /// Determines whether a method is a binary operator over a domain of specified kind
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsBinaryOp(this MethodInfo m, PrimalKind k)
+            => FunctionType.binaryop(m,k);
+
+        /// <summary>
+        /// Determines whether a method is a ternary operator
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsTernaryOp(this MethodInfo m)
             => FunctionType.ternaryop(m);
+
+        /// <summary>
+        /// Determines whether a method is a ternary operator over a domain of specified kind
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsTernaryOp(this MethodInfo m, PrimalKind k)
+            => FunctionType.ternaryop(m,k);
 
         /// <summary>
         /// Selects operators from a stream
@@ -389,6 +425,13 @@ namespace Z0
             => src.Where(x => x.IsUnaryOp());
 
         /// <summary>
+        /// Selects kind-specific unary operators from a stream
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static IEnumerable<MethodInfo> UnaryOps(this IEnumerable<MethodInfo> src, PrimalKind k)
+            => src.Where(x => x.IsUnaryOp(k));
+
+        /// <summary>
         /// Selects binary operators from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
@@ -396,11 +439,25 @@ namespace Z0
             => src.Where(x => x.IsBinaryOp());
 
         /// <summary>
+        /// Selects kind-specific binary operators from a stream
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static IEnumerable<MethodInfo> BinaryOps(this IEnumerable<MethodInfo> src, PrimalKind k)
+            => src.Where(x => x.IsBinaryOp(k));
+
+        /// <summary>
         /// Selects ternary operators from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> TernaryOps(this IEnumerable<MethodInfo> src)
             => src.Where(x => x.IsTernaryOp());
+
+        /// <summary>
+        /// Selects kind-specific ternary operators from a stream
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static IEnumerable<MethodInfo> TernaryOps(this IEnumerable<MethodInfo> src, PrimalKind k)
+            => src.Where(x => x.IsTernaryOp(k));
 
         /// <summary>
         /// Selects methods from a stream that accept and/or return intrinsic vectors
@@ -447,5 +504,33 @@ namespace Z0
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> Unblocked(this IEnumerable<MethodInfo> src)
             => src.Where(x => !x.IsBlocked());
+
+        /// <summary>
+        /// Returns an identified unary operator if it exists
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        /// <param name="name">The name of the operator</param>
+        /// <param name="k">The primal kind over which the operator is defined</param>
+        public static Option<MethodInfo> UnaryOp(this Type t, string name, PrimalKind k)
+            => t.DeclaredMethods().WithName(name).UnaryOps(k).FirstOrDefault();
+
+        /// <summary>
+        /// Returns an identified binary operator if it exists
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        /// <param name="name">The name of the operator</param>
+        /// <param name="k">The primal kind over which the operator is defined</param>
+        public static Option<MethodInfo> BinaryOp(this Type t, string name, PrimalKind k)
+            => t.DeclaredMethods().WithName(name).BinaryOps(k).FirstOrDefault();
+
+        /// <summary>
+        /// Returns an identified binary operator if it exists
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        /// <param name="name">The name of the operator</param>
+        /// <param name="k">The primal kind over which the operator is defined</param>
+        public static Option<MethodInfo> TernaryOp(this Type t, string name, PrimalKind k)
+            => t.DeclaredMethods().WithName(name).TernaryOps(k).FirstOrDefault();
+
     }
 }

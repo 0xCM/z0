@@ -15,7 +15,6 @@ namespace Z0
 
     partial class Reflections
     {        
-
         /// <summary>
         /// Determines whether a property is an indexer
         /// </summary>

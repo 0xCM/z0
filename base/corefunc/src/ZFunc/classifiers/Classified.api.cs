@@ -64,22 +64,6 @@ namespace Z0
         public static int size(PrimalKind kind)
             => width(kind)/8;
 
-        public static int width(Type t)
-        {
-            if(PrimalType.test(t))
-                return (int)PrimalType.width(t);
-            else if(VectorType.test(t))
-                return (int)VectorType.width(t);
-            else if(BlockedType.test(t))
-                return (int)BlockedType.width(t);
-            else
-                return 0;
-        }
-
-        [MethodImpl(Inline)]
-        public static int size(Type t)
-            => width(t)/8;
-
         /// <summary>
         /// Determines whether a type is a primal float
         /// </summary>
@@ -111,7 +95,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit integral(PrimalKind k)
             => signed(k) || unsigned(k);
-        
+
         /// <summary>
         /// Produces a character {i | u | f} indicating whether the source type is signed, unsigned or float
         /// </summary>
@@ -129,7 +113,24 @@ namespace Z0
             else
                 return AsciLower.x;
         }
-                        
+
+        /// <summary>
+        /// Produces an identifier {bitsize(k)}{u | i | f} for a primal kind k
+        /// </summary>
+        /// <param name="k">The primal kind</param>
+        [MethodImpl(Inline)]   
+        public static string primalsig(PrimalKind k)
+            => $"{width(k)}{indicator(k)}";        
+
+        /// <summary>
+        /// Produces a canonical designator of the form {bitsize[T]}{u | i | f} for a primal type
+        /// </summary>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]   
+        public static string primalsig<T>(T t = default)
+            => primalsig(typeof(T).Kind());
+
         /// <summary>
         /// Determines the number of bits covered by a k-kinded vector
         /// </summary>
@@ -224,6 +225,22 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         public static bool segmented(Type t)
             => BlockedType.test(t) || VectorType.test(t);
+
+        public static int width(Type t)
+        {
+            if(PrimalType.test(t))
+                return (int)PrimalType.width(t);
+            else if(VectorType.test(t))
+                return (int)VectorType.width(t);
+            else if(BlockedType.test(t))
+                return (int)BlockedType.width(t);
+            else
+                return 0;
+        }
+
+        [MethodImpl(Inline)]
+        public static int size(Type t)
+            => width(t)/8;
 
         /// <summary>
         /// If type is intrinsic or blocked, returns the primal type over which the segmentation is defined; otherwise, returns none

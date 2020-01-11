@@ -17,9 +17,39 @@ namespace Z0
     public static class VectorType
     {
         [MethodImpl(Inline)]
-        public static VectorKind kind<T>(T t = default)
-            where T : struct
-                => vkind128_u<T>();
+        public static VectorKind kind<V>(V v = default)
+            where V : struct
+                => vkind128_u<V>();
+
+        [MethodImpl(Inline)]
+        public static VectorKind kind<W,T>(W w = default, T t = default)
+            where W : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            if(typeof(W) == typeof(N128))
+                return kind<T>(n128);
+            else if(typeof(W) == typeof(N256))
+                return kind<T>(n256);
+            else if(typeof(W) == typeof(N512))
+                return kind<T>(n512);
+            else
+                return VectorKind.None;
+        }
+
+        [MethodImpl(Inline)]
+        public static VectorKind kind<T>(N128 w, T t = default)
+            where T : unmanaged
+                => kind_u(w,t);
+
+        [MethodImpl(Inline)]
+        public static VectorKind kind<T>(N256 w, T t = default)
+            where T : unmanaged
+                => kind_u(w,t);
+
+        [MethodImpl(Inline)]
+        public static VectorKind kind<T>(N512 w, T t = default)
+            where T : unmanaged
+                => kind_u(w,t);
 
         [MethodImpl(Inline)]
         public static VectorKind kind(Type t)
@@ -143,6 +173,139 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        static VectorKind kind_u<T>(N128 w, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return VectorKind.Vector128x8u;
+            else if(typeof(T) == typeof(ushort))
+                return VectorKind.Vector128x16u;
+            else if(typeof(T) == typeof(uint))
+                return VectorKind.Vector128x32u;
+            else if(typeof(T) == typeof(ulong))
+                return VectorKind.Vector128x64u;
+            else
+                return kind_i(w,t);
+        }
+
+        [MethodImpl(Inline)]
+        static VectorKind kind_i<T>(N128 w, T t = default)
+            where T : struct
+        {
+            if(typeof(T) == typeof(sbyte))
+                return VectorKind.Vector128x8i;
+            else if(typeof(T) == typeof(short))
+                return VectorKind.Vector128x16i;
+            else if(typeof(T) == typeof(int))
+                return VectorKind.Vector128x32i;
+            else if(typeof(T) == typeof(long))
+                return VectorKind.Vector128x64i;
+            else
+                return kind_f(w, t);
+        }
+
+        [MethodImpl(Inline)]
+        static VectorKind kind_f<T>(N128 w, T t = default)
+            where T : struct
+        {
+            if(typeof(T) == typeof(float))
+                return VectorKind.Vector128x32f;
+            else if(typeof(T) == typeof(double))
+                return VectorKind.Vector128x64f;
+            else
+                return VectorKind.None;
+        }
+
+        [MethodImpl(Inline)]
+        static VectorKind kind_u<T>(N256 w, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return VectorKind.Vector256x8u;
+            else if(typeof(T) == typeof(ushort))
+                return VectorKind.Vector256x16u;
+            else if(typeof(T) == typeof(uint))
+                return VectorKind.Vector256x32u;
+            else if(typeof(T) == typeof(ulong))
+                return VectorKind.Vector256x64u;
+            else
+                return kind_i(w,t);
+        }
+
+        [MethodImpl(Inline)]
+        static VectorKind kind_i<T>(N256 w, T t = default)
+            where T : struct
+        {
+            if(typeof(T) == typeof(sbyte))
+                return VectorKind.Vector256x8i;
+            else if(typeof(T) == typeof(short))
+                return VectorKind.Vector256x16i;
+            else if(typeof(T) == typeof(int))
+                return VectorKind.Vector256x32i;
+            else if(typeof(T) == typeof(long))
+                return VectorKind.Vector256x64i;
+            else
+                return kind_f(w, t);
+        }
+
+        [MethodImpl(Inline)]
+        static VectorKind kind_f<T>(N256 w, T t = default)
+            where T : struct
+        {
+            if(typeof(T) == typeof(float))
+                return VectorKind.Vector256x32f;
+            else if(typeof(T) == typeof(double))
+                return VectorKind.Vector256x64f;
+            else
+                return VectorKind.None;
+        }
+
+        [MethodImpl(Inline)]
+        static VectorKind kind_u<T>(N512 w, T t = default)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return VectorKind.Vector512x8u;
+            else if(typeof(T) == typeof(ushort))
+                return VectorKind.Vector512x16u;
+            else if(typeof(T) == typeof(uint))
+                return VectorKind.Vector512x32u;
+            else if(typeof(T) == typeof(ulong))
+                return VectorKind.Vector512x64u;
+            else
+                return kind_i(w,t);
+        }
+
+        [MethodImpl(Inline)]
+        static VectorKind kind_i<T>(N512 w, T t = default)
+            where T : struct
+        {
+            if(typeof(T) == typeof(sbyte))
+                return VectorKind.Vector512x8i;
+            else if(typeof(T) == typeof(short))
+                return VectorKind.Vector512x16i;
+            else if(typeof(T) == typeof(int))
+                return VectorKind.Vector512x32i;
+            else if(typeof(T) == typeof(long))
+                return VectorKind.Vector512x64i;
+            else
+                return kind_f(w, t);
+        }
+
+        [MethodImpl(Inline)]
+        static VectorKind kind_f<T>(N512 w, T t = default)
+            where T : struct
+        {
+            if(typeof(T) == typeof(float))
+                return VectorKind.Vector512x32f;
+            else if(typeof(T) == typeof(double))
+                return VectorKind.Vector512x64f;
+            else
+                return VectorKind.None;
+        }
+
+
+        [MethodImpl(Inline)]
         static VectorKind vkind128_u<T>(T t = default)
             where T : struct
         {
@@ -186,6 +349,7 @@ namespace Z0
                 return vkind256_u<T>();
         }
 
+
         [MethodImpl(Inline)]
         static VectorKind vkind256_u<T>(T t = default)
             where T : struct
@@ -226,6 +390,50 @@ namespace Z0
                 return VectorKind.Vector256x32f;
             else if(typeof(T) == typeof(Vector256<double>))
                 return VectorKind.Vector256x64f;
+            else
+                return vkind512_u<T>();
+        }
+
+        [MethodImpl(Inline)]
+        static VectorKind vkind512_u<T>(T t = default)
+            where T : struct
+        {
+            if(typeof(T) == typeof(Vector512<byte>))
+                return VectorKind.Vector512x8u;
+            else if(typeof(T) == typeof(Vector512<ushort>))
+                return VectorKind.Vector512x16u;
+            else if(typeof(T) == typeof(Vector512<uint>))
+                return VectorKind.Vector512x32u;
+            else if(typeof(T) == typeof(Vector512<ulong>))
+                return VectorKind.Vector512x64u;
+            else
+                return vkind512_i(t);
+        }
+
+        [MethodImpl(Inline)]
+        static VectorKind vkind512_i<T>(T t = default)
+            where T : struct
+        {
+            if(typeof(T) == typeof(Vector512<sbyte>))
+                return VectorKind.Vector512x8i;
+            else if(typeof(T) == typeof(Vector512<short>))
+                return VectorKind.Vector512x16i;
+            else if(typeof(T) == typeof(Vector512<int>))
+                return VectorKind.Vector512x32i;
+            else if(typeof(T) == typeof(Vector512<long>))
+                return VectorKind.Vector512x64i;
+            else
+                return vkind512_f(t);
+        }
+
+        [MethodImpl(Inline)]
+        static VectorKind vkind512_f<T>(T t = default)
+            where T : struct
+        {
+            if(typeof(T) == typeof(Vector512<float>))
+                return VectorKind.Vector512x32f;
+            else if(typeof(T) == typeof(Vector512<double>))
+                return VectorKind.Vector512x64f;
             else
                 return VectorKind.None;            
         }

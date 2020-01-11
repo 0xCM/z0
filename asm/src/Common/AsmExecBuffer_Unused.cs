@@ -13,23 +13,23 @@ namespace Z0
     /// <summary>
     /// Wraps an executable non-GC'd buffer to hold assembly instruction code
     /// </summary>
-    public struct AsmExecBuffer2 : IDisposable
+    ref struct AsmExecBuffer_Unused
     {
         public const int DefaultSize = 256;
 
-        readonly MemoryBuffer Buffer;
+        readonly SpanBuffer Buffer;
 
         readonly long pBuffer;
 
         AsmCode Code;
         
-        public static AsmExecBuffer2 Create(int? size = null)
-            => new AsmExecBuffer2(size ?? DefaultSize);
+        public static AsmExecBuffer_Unused Create(int? size = null)
+            => new AsmExecBuffer_Unused(size ?? DefaultSize);
 
-        AsmExecBuffer2(int size)
+        AsmExecBuffer_Unused(int size)
         {
-            Buffer = MemoryBuffer.Alloc(size);
-            pBuffer = (long)Buffer.Handle;
+            Buffer = SpanBuffer.Alloc(size);
+            pBuffer = (long)OS.Liberate(this.Buffer);                        
             Code = AsmCode.Empty;
         }
 
