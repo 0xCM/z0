@@ -29,7 +29,7 @@ namespace Z0
         {
             uint col = 0;
             for(var r = 0; r < A.Order; r++)
-                col = BitMask.setif(A[r], index, col, r);
+                col = Bits.setif(A[r], index, col, r);
             return col;
         }
 

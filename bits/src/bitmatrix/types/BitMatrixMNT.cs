@@ -119,7 +119,7 @@ namespace Z0
             get 
             {
                 var index = BitMatrix.tableindex(row, col, RowDim, ColDim, default(T));
-                return BitMask.testbit(data[index.CellIndex], index.BitOffset);
+                return gbits.testbit(data[index.CellIndex], index.BitOffset);
             }
 
             [MethodImpl(Inline)]

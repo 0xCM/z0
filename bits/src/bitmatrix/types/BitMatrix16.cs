@@ -163,7 +163,7 @@ namespace Z0
         {
             ushort col = 0;
             for(var r = 0; r < N; r++)
-                col = BitMask.setif(data[r], index, col, r);
+                col = Bits.setif(data[r], index, col, r);
             return col;
         }
 

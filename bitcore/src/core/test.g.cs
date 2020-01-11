@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static bit test<T>(T src, int pos)
             where T : unmanaged
-                => BitMask.testbit(src, (byte)pos);
+                => gbits.testbit(src, (byte)pos);
 
         /// <summary>
         /// Determines whether a position-identified bit in value is enabled
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static bit test<T>(T src, uint pos)
             where T : unmanaged
-                => BitMask.testbit(src, (byte)pos);
+                => gbits.testbit(src, (byte)pos);
 
         /// <summary>
         /// Determines whether a bit in a specified position is enabled
@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static bit test<T>(T src, byte pos)
             where T : unmanaged
-                => BitMask.testbit(src, pos);
+                => gbits.testbit(src, pos);
 
         /// <summary>
         /// Tests a bit value in a T-sequence predicated on a linear index
@@ -54,7 +54,7 @@ namespace Z0
             where T : unmanaged
         {
             var loc = bitpos<T>(index);
-            return BitMask.testbit(src[loc.CellIndex], loc.BitOffset);
+            return gbits.testbit(src[loc.CellIndex], loc.BitOffset);
         }
     }
 }

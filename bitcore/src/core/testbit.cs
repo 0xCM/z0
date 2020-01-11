@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;
     using static As;
 
-    partial class BitMask
+    partial class gbits
     {        
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, false otherwise

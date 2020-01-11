@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
         public static BitVector4 enable(BitVector4 x, int index)
-            => BitMask.enable(x.data, index);
+            => Bits.enable(x.data, index);
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="index">The position of the bit to enable</param>
         [MethodImpl(Inline)]
         public static BitVector8 enable(BitVector8 x, int index)
-            => BitMask.enable(x.data, index);
+            => Bits.enable(x.data, index);
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="index">The position of the bit to enable</param>
         [MethodImpl(Inline)]
         public static BitVector16 enable(BitVector16 x, int index)
-            => BitMask.enable(x.data, index);
+            => Bits.enable(x.data, index);
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="index">The position of the bit to enable</param>
         [MethodImpl(Inline)]
         public static BitVector32 enable(BitVector32 x, int index)
-            => BitMask.enable(x.data, index);
+            => Bits.enable(x.data, index);
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="index">The position of the bit to enable</param>
         [MethodImpl(Inline)]
         public static BitVector64 enable(BitVector64 x, int index)
-            => BitMask.enable(x.data, index);
+            => Bits.enable(x.data, index);
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> enable<T>(BitVector<T> x, int index)
             where T : unmanaged
-                => BitMask.enable(x.data,index);
+                => gbits.enable(x.data,index);
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -69,7 +69,6 @@ namespace Z0
         public static BitVector<N,T> enable<N,T>(BitVector<N,T> x, int index)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BitMask.enable(x.data,index);
-
+                => gbits.enable(x.data,index);
     }
 }

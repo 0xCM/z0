@@ -12,7 +12,6 @@ namespace Z0
 
     partial class GX
     {
-
         [MethodImpl(Inline)]
         public static Sll<T> sll<T>(T t = default)
             where T : unmanaged        

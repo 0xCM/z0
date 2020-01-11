@@ -52,10 +52,10 @@ namespace Z0
                 for(byte j =0; j< tLen; j++)
                 {
                     var before = gbits.test(x, j);
-                    x = BitMask.toggle(x, j);
+                    x = gbits.toggle(x, j);
                     var after = gbits.test(x, j);
                     Claim.neq(before, after);
-                    x = BitMask.toggle(x, j);
+                    x = gbits.toggle(x, j);
                     Claim.eq(x, src[i]);
                 }
             }
@@ -90,13 +90,13 @@ namespace Z0
         public void enable_outline()
         {
             var x1 = (sbyte)0;
-            var y1 = BitMask.enable(x1, 7);
+            var y1 = Bits.enable(x1, 7);
             Claim.eq(SByte.MinValue, y1);
             Claim.eq("10000000", y1.ToBitString());
 
 
             var x2 = (byte)0;
-            var y2 = BitMask.enable(x2, 7);
+            var y2 = Bits.enable(x2, 7);
             Claim.eq(SByte.MinValue, (sbyte)y1);
             Claim.eq("10000000", y1.ToBitString());
 

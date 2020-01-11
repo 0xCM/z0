@@ -28,7 +28,7 @@ namespace Z0
         {
             var length = math.min(dst.CellCount, bitsize<S>());
             for(var i=0; i< length; i++)
-                dst[i] = BitMask.testbit(src,i) ? enabled : default;
+                dst[i] = gbits.testbit(src,i) ? enabled : default;
             return ref dst;
         }
 
@@ -47,7 +47,7 @@ namespace Z0
         {
             var length = math.min(dst.CellCount, bitsize<S>());
             for(var i=0; i< length; i++)
-                dst[i] = BitMask.testbit(src,i) ? enabled : default;
+                dst[i] = gbits.testbit(src,i) ? enabled : default;
             return ref dst;
         }
 

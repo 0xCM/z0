@@ -43,7 +43,7 @@ namespace Z0
             var n = bitsize<T>();
             ref var loc = ref seek(ref head(dst), offset);
             for(var i=0; i<n; i++)
-                seek(ref loc, i) = (byte)BitMask.testbit(src,i);
+                seek(ref loc, i) = (byte)gbits.testbit(src,i);
             return dst;
         }
 

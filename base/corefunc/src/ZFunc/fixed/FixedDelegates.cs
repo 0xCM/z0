@@ -11,6 +11,8 @@ namespace Z0
 
     using static zfunc;
 
+    
+
     [SuppressUnmanagedCodeSecurity]
     public delegate Fixed8 UnaryOp8(Fixed8 a);
 

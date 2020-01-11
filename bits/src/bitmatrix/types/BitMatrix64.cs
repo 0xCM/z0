@@ -148,7 +148,7 @@ namespace Z0
         {
             var col = 0ul;
             for(var r = 0; r < N; r++)
-                col = BitMask.setif(data[r], index, col, r);
+                col = Bits.setif(data[r], index, col, r);
             return col;
         }        
 

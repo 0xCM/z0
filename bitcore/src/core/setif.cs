@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class BitMask
+    partial class Bits
     {        
         /// <summary>
         /// Enaables a bit in the target if it is enabled in the source
@@ -23,7 +23,7 @@ namespace Z0
         public static byte setif(byte src, int srcpos, byte dst, int dstpos)        
         {
             if(bit.test(src, srcpos))
-                return enable(dst, srcpos);
+                return Bits.enable(dst, srcpos);
             return dst;
         }
 
@@ -37,8 +37,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ushort setif(ushort src, int srcpos, ushort dst, int dstpos)        
         {
-            if(testbit(src, srcpos))
-                return enable(dst, dstpos);
+            if(bit.test(src, srcpos))
+                return Bits.enable(dst, dstpos);
             return dst;            
         }
 
@@ -53,7 +53,7 @@ namespace Z0
         public static uint setif(uint src, int srcpos, uint dst, int dstpos)        
         {
             if(bit.test(src, srcpos))
-                return enable(dst, dstpos);
+                return Bits.enable(dst, dstpos);
             return dst;
         }
 
@@ -68,7 +68,7 @@ namespace Z0
         public static ulong setif(ulong src, int srcpos, ulong dst, int dstpos)        
         {
             if(bit.test(src, srcpos))
-                return enable(dst, dstpos);                
+                return Bits.enable(dst, dstpos);                
             return dst;
         }
     }

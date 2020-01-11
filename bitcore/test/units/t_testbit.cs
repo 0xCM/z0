@@ -41,7 +41,7 @@ namespace Z0
             {
                 var src = gmath.maxval<T>();
                 for(var i=0; i< bitsize<T>(); i++)
-                    Claim.yea(BitMask.testbit(src,i));
+                    Claim.yea(gbits.testbit(src,i));
             }            
         }
     }
