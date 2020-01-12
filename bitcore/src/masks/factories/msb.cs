@@ -13,13 +13,6 @@ namespace Z0
 
     partial class BitMask
     {                
-        [MethodImpl(Inline)]
-        public static MsbMask<F,D,T> msbspec<F,D,T>(F f = default, D d = default, T t = default) 
-            where F : unmanaged, ITypeNat
-            where D : unmanaged, ITypeNat
-            where T : unmanaged
-                => default;
-
         /// <summary>
         /// [1000...0000]
         /// The greatest bit, relative to the data type, is enabled   
@@ -135,7 +128,6 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
 
         /// <summary>
         /// [11000000]
@@ -282,7 +274,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(MsbMask<N2,N1,T> spec)
+        public static T mask<T>(MsbMask<N2,N1,T> spec)
             where T : unmanaged
                 => msb(spec.f,spec.d,spec.t);
 
@@ -292,7 +284,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(MsbMask<N4,N1,T> spec)
+        public static T mask<T>(MsbMask<N4,N1,T> spec)
             where T : unmanaged
                 => msb(spec.f,spec.d,spec.t);
 
@@ -302,7 +294,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(MsbMask<N8,N1,T> spec)
+        public static T mask<T>(MsbMask<N8,N1,T> spec)
             where T : unmanaged
                 => msb(spec.f,spec.d,spec.t);
 
@@ -312,7 +304,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(MsbMask<N16,N1,T> spec)
+        public static T mask<T>(MsbMask<N16,N1,T> spec)
             where T : unmanaged
                 => msb(spec.f,spec.d,spec.t);
 
@@ -322,7 +314,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(MsbMask<N8,N2,T> spec)
+        public static T mask<T>(MsbMask<N8,N2,T> spec)
             where T : unmanaged
                 => msb(spec.f,spec.d,spec.t);
 
@@ -332,7 +324,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(MsbMask<N8,N3,T> spec)
+        public static T mask<T>(MsbMask<N8,N3,T> spec)
             where T : unmanaged
                 => msb(spec.f,spec.d,spec.t);
 
@@ -342,7 +334,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(MsbMask<N8,N4,T> spec)
+        public static T mask<T>(MsbMask<N8,N4,T> spec)
             where T : unmanaged
                 => msb(spec.f,spec.d,spec.t);
 
@@ -352,7 +344,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(MsbMask<N8,N5,T> spec)
+        public static T mask<T>(MsbMask<N8,N5,T> spec)
             where T : unmanaged
                 => msb(spec.f,spec.d,spec.t);
 
@@ -362,7 +354,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(MsbMask<N8,N6,T> spec)
+        public static T mask<T>(MsbMask<N8,N6,T> spec)
             where T : unmanaged
                 => msb(spec.f,spec.d,spec.t);
 
@@ -372,7 +364,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T msb<T>(MsbMask<N8,N7,T> spec)
+        public static T mask<T>(MsbMask<N8,N7,T> spec)
             where T : unmanaged
                 => msb(spec.f,spec.d,spec.t);
 
@@ -402,7 +394,7 @@ namespace Z0
             => Msb64x32x1;
         
         [MethodImpl(Inline)]
-        static ulong msb<W>(W w, N2 f, N1 d)
+        static ulong msb_2x1_a<W>(W w, N2 f, N1 d)
             where W : unmanaged, ITypeNat
         {
             if(typeof(W) == typeof(N4))

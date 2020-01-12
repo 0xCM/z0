@@ -30,12 +30,14 @@ namespace Z0
     /// </summary>
     public class BinaryLiteralAttribute : LiteralAttribute
     {
-        public BinaryLiteralAttribute(object value)
+        public BinaryLiteralAttribute(string value)
             : base(value)
         {
 
             
         }
+
+        public string Text => (string)Value;
     }
 
     /// <summary>

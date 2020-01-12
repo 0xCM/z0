@@ -7,12 +7,38 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+    using System.Linq;
+    using System.Collections.Generic;
 
     using static zfunc;
     using static As;
 
     public class t_masks : t_bitcore<t_masks>
     {                    
+        public void verify_mask_literals()
+        {
+            verify_mask_literals(z8);
+            verify_mask_literals(z16);
+            verify_mask_literals(z32);
+            verify_mask_literals(z64);
+        }
+
+        void verify_mask_literals<T>(T t = default)
+            where T : unmanaged
+        {
+
+            var literals = typeof(BitMasks).BinaryLiterals<T>();
+            var masks = literals.ToArray();            
+            foreach(var m in masks)
+            {
+                var bits = BitSpan.parse(m.Text);
+                var bitval = bits.Convert<T>();
+                if(gmath.neq(bitval,m.Value))
+                    Claim.failwith($"{m.Name}:{BitString.normalize(m.Text)} != {BitString.scalar(m.Value)}");
+                
+            }
+        }
+
         public void lomask_outline()
         {
 

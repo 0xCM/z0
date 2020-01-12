@@ -81,7 +81,7 @@ namespace Z0
                     var pos = (byte)(Pow2.pow(i) - 1);
                     pack(x0, x1, x2, x3, x4, x5, x6, x7, pos, ref dst);
                     
-                    var j = 0;
+                    byte j = 0;
                     Claim.yea(gbits.bitmatch(dst, j++, x0, pos));
                     Claim.yea(gbits.bitmatch(dst, j++, x1, pos));
                     Claim.yea(gbits.bitmatch(dst, j++, x2, pos));

@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="caller">The caller member name</param>
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
-        public static void failmsg(string msg, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void failwith(string msg, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw failed(ClaimOpKind.Fail, AppMsg.Error(msg, caller, file,line));
 
         /// <summary>

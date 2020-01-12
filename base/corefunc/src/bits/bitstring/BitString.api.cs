@@ -13,6 +13,15 @@ namespace Z0
     partial struct BitString
     {
         /// <summary>
+        /// Removes characters related to formating/presentation that do not impact the value of the bitstring literal;
+        /// leading zeroes, however, are considered part of the literal and are not removed
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static string normalize(string src)        
+            => src.RemoveAny(AsciSym.LBracket, AsciSym.RBracket, AsciSym.Space, AsciSym.Underscore, AsciLower.b);
+
+        /// <summary>
         /// Assembles a bistring given parts ordered from lo to hi
         /// </summary>
         /// <param name="parts">The source parts</param>

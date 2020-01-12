@@ -45,6 +45,13 @@ namespace Z0
         public static bool IsSome(this PrimalKind k)
             => k != PrimalKind.None;
 
+        /// <summary>
+        /// Specifies the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static string Keyword(this PrimalKind k)
+            => Classified.keyword(k);
+
         [MethodImpl(Inline)]
         public static bool IsSome(this VectorKind k)
             => k != VectorKind.None;
@@ -300,6 +307,10 @@ namespace Z0
         public static bit Is(this PrimalKind k, PrimalKind match)        
             => (k & match) != 0;
 
+        /// <summary>
+        /// Selects the distinct primal kinds represented by a classifier
+        /// </summary>
+        /// <param name="k"></param>
         public static IEnumerable<PrimalKind> Distinct(this PrimalKind k)       
         {
             if(k.Is(PrimalKind.U8))
@@ -531,6 +542,28 @@ namespace Z0
         /// <param name="k">The primal kind over which the operator is defined</param>
         public static Option<MethodInfo> TernaryOp(this Type t, string name, PrimalKind k)
             => t.DeclaredMethods().WithName(name).TernaryOps(k).FirstOrDefault();
+
+        /// <summary>
+        /// Selects the binary literals declared by a type that are of a specified parametric primal type
+        /// </summary>
+        /// <param name="src">The source type</param>
+        /// <typeparam name="T">The primal literal type</typeparam>
+        public static IEnumerable<BinaryLiteral<T>> BinaryLiterals<T>(this Type src)
+            where T : unmanaged
+            => from f in src.Literals()
+                where f.FieldType == typeof(T) && f.Attributed<BinaryLiteralAttribute>()
+               let a = f.CustomAttribute<BinaryLiteralAttribute>().Require()
+                select BinaryLiteral.Define(f.Name, (T)f.GetValue(null), a.Text);
+
+        /// <summary>
+        /// Selects the binary literals declared by a type
+        /// </summary>
+        /// <param name="src">The source type</param>
+        public static IEnumerable<BinaryLiteral> BinaryLiterals(this Type src)
+            => from f in src.Literals()
+                where f.Attributed<BinaryLiteralAttribute>()
+               let a = f.CustomAttribute<BinaryLiteralAttribute>().Require()
+                select BinaryLiteral.Define(f.Name, f.GetValue(null), a.Text);
 
     }
 }

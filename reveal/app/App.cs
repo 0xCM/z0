@@ -120,6 +120,8 @@ namespace Z0
             Disassemble(typeof(OC.logix));
             Disassemble(typeof(OC.logixmat));
             Disassemble(typeof(OC.rowbits));
+            Disassemble(typeof(OC.bitcore));    
+
 
             Disassemble(typeof(inxoc));    
             Disassemble(typeof(vxops));    

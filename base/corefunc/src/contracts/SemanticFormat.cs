@@ -5,23 +5,17 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
 
-    using static zfunc;
-
-    public interface IMaskSpec<F,D,T>
-        where F : unmanaged, ITypeNat
-        where D : unmanaged, ITypeNat
-        where T : unmanaged
+    public interface ISemanticFormat
     {
-        public F f => default;
-
-        public D d => default;
-
-        public T t => default;
-
+        string Format();
     }
 
+    public interface ISemanticFormat<T> : ISemanticFormat
+    {
+        string Format(T options);
+    }
 
 }

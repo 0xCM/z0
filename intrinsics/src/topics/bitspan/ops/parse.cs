@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         public static BitSpan parse(string src)                
         {            
-            var data = src.RemoveWhitespace().Replace("0b",string.Empty);
+            var data = BitString.normalize(src);
             var len = data.Length;
             var lastix = len - 1;
             Span<bit> bits = new bit[len];

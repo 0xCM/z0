@@ -50,9 +50,9 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var a = Random.Next<T>();
-                gbits.bitseq(a,s0);
-                gbits.bitseq(a,s1);
-                s2 = gbits.bitseq(a);
+                gbits.storeseq(a,s0);
+                gbits.storeseq(a,s1);
+                s2 = gbits.storeseq(a);
                 Claim.eq(s0, s1);
                 Claim.eq(s1, s2);
             }

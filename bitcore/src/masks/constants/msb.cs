@@ -18,23 +18,26 @@ namespace Z0
         /// <summary>
         /// [10000000]
         /// </summary>
+        [BinaryLiteral("[10000000]")]
         public const byte Msb8x8x1 = 1 << 7;
 
         /// <summary>
         /// [10000000 10000000]
         /// </summary>
+        [BinaryLiteral("[10000000 10000000]")]
         public const ushort Msb16x8x1 = (ushort)Msb8x8x1 | (ushort)Msb8x8x1 << 8 ; 
 
         /// <summary>
         /// [10000000 10000000 10000000 10000000]
         /// </summary>
+        [BinaryLiteral("[10000000 10000000 10000000 10000000]")]
         public const uint Msb32x8x1 = (uint)Msb16x8x1 | (uint)Msb16x8x1 << 16;
 
         /// <summary>
         /// [10000000 10000000 10000000 10000000 10000000 10000000 10000000 10000000]
         /// </summary>
+        [BinaryLiteral("[10000000 10000000 10000000 10000000 10000000 10000000 10000000 10000000]")]
         public const ulong Msb64x8x1 = (ulong)Msb32x8x1 | (ulong)Msb32x8x1 << 32;
-
 
         // ~ Msb16x1: The greatest bit of each 16-bit segment is enabled
         // ~ ------------------------------------------------------------------

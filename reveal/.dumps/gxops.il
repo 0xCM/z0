@@ -1,7 +1,7 @@
-// 2020-01-11 03:38:51:083
+// 2020-01-11 17:55:32:045
 bit eq_d16u(ushort a, ushort b)
 {
-//  Id := 100664613, Name := Z0.bit Z0.OpCodes.gxops::eq_d16u(System.UInt16,System.UInt16)
+//  Id := 100664617, Name := Z0.bit Z0.OpCodes.gxops::eq_d16u(System.UInt16,System.UInt16)
 //  bit eq_d16u(ushort a, ushort b)
 //  Managed
 {
@@ -14,7 +14,7 @@ bit eq_d16u(ushort a, ushort b)
 }
 bit eq_g16u(ushort a, ushort b)
 {
-//  Id := 100664614, Name := Z0.bit Z0.OpCodes.gxops::eq_g16u(System.UInt16,System.UInt16)
+//  Id := 100664618, Name := Z0.bit Z0.OpCodes.gxops::eq_g16u(System.UInt16,System.UInt16)
 //  bit eq_g16u(ushort a, ushort b)
 //  Managed
 {
@@ -27,7 +27,7 @@ bit eq_g16u(ushort a, ushort b)
 }
 bit eq_o16u(ushort a, ushort b)
 {
-//  Id := 100664615, Name := Z0.bit Z0.OpCodes.gxops::eq_o16u(System.UInt16,System.UInt16)
+//  Id := 100664619, Name := Z0.bit Z0.OpCodes.gxops::eq_o16u(System.UInt16,System.UInt16)
 //  bit eq_o16u(ushort a, ushort b)
 //  Managed
 {
@@ -44,7 +44,7 @@ bit eq_o16u(ushort a, ushort b)
 }
 string eq_moniker()
 {
-//  Id := 100664616, Name := System.String Z0.OpCodes.gxops::eq_moniker()
+//  Id := 100664620, Name := System.String Z0.OpCodes.gxops::eq_moniker()
 //  string eq_moniker()
 //  Managed
 {
@@ -59,7 +59,7 @@ string eq_moniker()
 }
 string the_name()
 {
-//  Id := 100664617, Name := System.String Z0.OpCodes.gxops::the_name()
+//  Id := 100664621, Name := System.String Z0.OpCodes.gxops::the_name()
 //  string the_name()
 //  Managed
 {

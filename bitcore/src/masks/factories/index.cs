@@ -21,6 +21,12 @@ namespace Z0
                 => index_lo<N,T>();
 
         [MethodImpl(Inline)]
+        public static T mask<N,T>(IndexMask<N,T> spec)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => index<N,T>();
+
+        [MethodImpl(Inline)]
         static T index_lo<N,T>()
             where N : unmanaged, ITypeNat
             where T : unmanaged

@@ -1,7 +1,7 @@
-// 2020-01-11 03:38:50:490
+// 2020-01-11 17:55:31:513
 Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> vand_delgate()
 {
-//  Id := 100664695, Name := System.Func`3<System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>> Z0.OpCodes.vpermoc::vand_delgate()
+//  Id := 100664699, Name := System.Func`3<System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>> Z0.OpCodes.vpermoc::vand_delgate()
 //  Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> vand_delgate()
 //  NoInlining
 {
@@ -35,7 +35,7 @@ Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> vand_delgate()
 }
 Vector256<uint> vand_dynamic(Vector256<uint> a, Vector256<uint> b)
 {
-//  Id := 100664696, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.OpCodes.vpermoc::vand_dynamic(System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
+//  Id := 100664700, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.OpCodes.vpermoc::vand_dynamic(System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
 //  Vector256<uint> vand_dynamic(Vector256<uint> a, Vector256<uint> b)
 //  Managed
 {
@@ -49,7 +49,7 @@ Vector256<uint> vand_dynamic(Vector256<uint> a, Vector256<uint> b)
 }
 Vector512<ulong> vperm2x128(Vector512<ulong> src)
 {
-//  Id := 100664697, Name := Z0.Vector512`1<System.UInt64> Z0.OpCodes.vpermoc::vperm2x128(Z0.Vector512`1<System.UInt64>)
+//  Id := 100664701, Name := Z0.Vector512`1<System.UInt64> Z0.OpCodes.vpermoc::vperm2x128(Z0.Vector512`1<System.UInt64>)
 //  Vector512<ulong> vperm2x128(Vector512<ulong> src)
 //  Managed
 {
@@ -63,7 +63,7 @@ Vector512<ulong> vperm2x128(Vector512<ulong> src)
 }
 Vector128<ushort> vbswap_128x16u(Vector128<ushort> x)
 {
-//  Id := 100664698, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.OpCodes.vpermoc::vbswap_128x16u(System.Runtime.Intrinsics.Vector128`1<System.UInt16>)
+//  Id := 100664702, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.OpCodes.vpermoc::vbswap_128x16u(System.Runtime.Intrinsics.Vector128`1<System.UInt16>)
 //  Vector128<ushort> vbswap_128x16u(Vector128<ushort> x)
 //  Managed
 {
@@ -75,7 +75,7 @@ Vector128<ushort> vbswap_128x16u(Vector128<ushort> x)
 }
 Vector256<int> vpermvar8x32_256x32i(Vector256<int> src, Vector256<uint> spec)
 {
-//  Id := 100664699, Name := System.Runtime.Intrinsics.Vector256`1<System.Int32> Z0.OpCodes.vpermoc::vpermvar8x32_256x32i(System.Runtime.Intrinsics.Vector256`1<System.Int32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
+//  Id := 100664703, Name := System.Runtime.Intrinsics.Vector256`1<System.Int32> Z0.OpCodes.vpermoc::vpermvar8x32_256x32i(System.Runtime.Intrinsics.Vector256`1<System.Int32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
 //  Vector256<int> vpermvar8x32_256x32i(Vector256<int> src, Vector256<uint> spec)
 //  Managed
 {
@@ -88,7 +88,7 @@ Vector256<int> vpermvar8x32_256x32i(Vector256<int> src, Vector256<uint> spec)
 }
 Vector256<uint> vpermvar8x32_256x32u(Vector256<uint> src, Vector256<uint> spec)
 {
-//  Id := 100664700, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.OpCodes.vpermoc::vpermvar8x32_256x32u(System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
+//  Id := 100664704, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.OpCodes.vpermoc::vpermvar8x32_256x32u(System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
 //  Vector256<uint> vpermvar8x32_256x32u(Vector256<uint> src, Vector256<uint> spec)
 //  Managed
 {
@@ -101,7 +101,7 @@ Vector256<uint> vpermvar8x32_256x32u(Vector256<uint> src, Vector256<uint> spec)
 }
 Vector256<byte> vpermvar32x8_256x8u(Vector256<byte> a, Vector256<byte> spec)
 {
-//  Id := 100664701, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpermoc::vpermvar32x8_256x8u(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Runtime.Intrinsics.Vector256`1<System.Byte>)
+//  Id := 100664705, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpermoc::vpermvar32x8_256x8u(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Runtime.Intrinsics.Vector256`1<System.Byte>)
 //  Vector256<byte> vpermvar32x8_256x8u(Vector256<byte> a, Vector256<byte> spec)
 //  Managed
 {
@@ -114,7 +114,7 @@ Vector256<byte> vpermvar32x8_256x8u(Vector256<byte> a, Vector256<byte> spec)
 }
 Vector128<byte> vshuffle_128x8u(Vector128<byte> src, Vector128<byte> spec)
 {
-//  Id := 100664702, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpermoc::vshuffle_128x8u(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Runtime.Intrinsics.Vector128`1<System.Byte>)
+//  Id := 100664706, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpermoc::vshuffle_128x8u(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Runtime.Intrinsics.Vector128`1<System.Byte>)
 //  Vector128<byte> vshuffle_128x8u(Vector128<byte> src, Vector128<byte> spec)
 //  Managed
 {
@@ -127,7 +127,7 @@ Vector128<byte> vshuffle_128x8u(Vector128<byte> src, Vector128<byte> spec)
 }
 Vector128<sbyte> vshuffle_128x8i(Vector128<sbyte> src, Vector128<sbyte> spec)
 {
-//  Id := 100664703, Name := System.Runtime.Intrinsics.Vector128`1<System.SByte> Z0.OpCodes.vpermoc::vshuffle_128x8i(System.Runtime.Intrinsics.Vector128`1<System.SByte>,System.Runtime.Intrinsics.Vector128`1<System.SByte>)
+//  Id := 100664707, Name := System.Runtime.Intrinsics.Vector128`1<System.SByte> Z0.OpCodes.vpermoc::vshuffle_128x8i(System.Runtime.Intrinsics.Vector128`1<System.SByte>,System.Runtime.Intrinsics.Vector128`1<System.SByte>)
 //  Vector128<sbyte> vshuffle_128x8i(Vector128<sbyte> src, Vector128<sbyte> spec)
 //  Managed
 {
@@ -140,7 +140,7 @@ Vector128<sbyte> vshuffle_128x8i(Vector128<sbyte> src, Vector128<sbyte> spec)
 }
 Vector256<byte> vshuffle_256x8u(Vector256<byte> src, Vector256<byte> spec)
 {
-//  Id := 100664704, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpermoc::vshuffle_256x8u(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Runtime.Intrinsics.Vector256`1<System.Byte>)
+//  Id := 100664708, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpermoc::vshuffle_256x8u(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Runtime.Intrinsics.Vector256`1<System.Byte>)
 //  Vector256<byte> vshuffle_256x8u(Vector256<byte> src, Vector256<byte> spec)
 //  Managed
 {
@@ -153,7 +153,7 @@ Vector256<byte> vshuffle_256x8u(Vector256<byte> src, Vector256<byte> spec)
 }
 Vector256<sbyte> vshuffle_256x8i(Vector256<sbyte> src, Vector256<sbyte> spec)
 {
-//  Id := 100664705, Name := System.Runtime.Intrinsics.Vector256`1<System.SByte> Z0.OpCodes.vpermoc::vshuffle_256x8i(System.Runtime.Intrinsics.Vector256`1<System.SByte>,System.Runtime.Intrinsics.Vector256`1<System.SByte>)
+//  Id := 100664709, Name := System.Runtime.Intrinsics.Vector256`1<System.SByte> Z0.OpCodes.vpermoc::vshuffle_256x8i(System.Runtime.Intrinsics.Vector256`1<System.SByte>,System.Runtime.Intrinsics.Vector256`1<System.SByte>)
 //  Vector256<sbyte> vshuffle_256x8i(Vector256<sbyte> src, Vector256<sbyte> spec)
 //  Managed
 {
@@ -166,7 +166,7 @@ Vector256<sbyte> vshuffle_256x8i(Vector256<sbyte> src, Vector256<sbyte> spec)
 }
 void vtranspose(ref Vector128<uint> row0, ref Vector128<uint> row1, ref Vector128<uint> row2, ref Vector128<uint> row3)
 {
-//  Id := 100664706, Name := System.Void Z0.OpCodes.vpermoc::vtranspose(System.Runtime.Intrinsics.Vector128`1<System.UInt32>&,System.Runtime.Intrinsics.Vector128`1<System.UInt32>&,System.Runtime.Intrinsics.Vector128`1<System.UInt32>&,System.Runtime.Intrinsics.Vector128`1<System.UInt32>&)
+//  Id := 100664710, Name := System.Void Z0.OpCodes.vpermoc::vtranspose(System.Runtime.Intrinsics.Vector128`1<System.UInt32>&,System.Runtime.Intrinsics.Vector128`1<System.UInt32>&,System.Runtime.Intrinsics.Vector128`1<System.UInt32>&,System.Runtime.Intrinsics.Vector128`1<System.UInt32>&)
 //  void vtranspose(ref Vector128<uint> row0, ref Vector128<uint> row1, ref Vector128<uint> row2, ref Vector128<uint> row3)
 //  Managed
 {

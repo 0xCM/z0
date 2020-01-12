@@ -1,7 +1,7 @@
-// 2020-01-11 03:38:49:103
+// 2020-01-11 17:55:30:131
 BitSpan load_scalar_8(byte src)
 {
-//  Id := 100664624, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_8(System.Byte)
+//  Id := 100664628, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_8(System.Byte)
 //  BitSpan load_scalar_8(byte src)
 //  Managed
 {
@@ -13,7 +13,7 @@ BitSpan load_scalar_8(byte src)
 }
 BitSpan load_scalar_8_fill(byte src, in BitSpan dst)
 {
-//  Id := 100664625, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_8_fill(System.Byte,Z0.BitSpan&)
+//  Id := 100664629, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_8_fill(System.Byte,Z0.BitSpan&)
 //  BitSpan load_scalar_8_fill(byte src, in BitSpan dst)
 //  Managed
 {
@@ -27,7 +27,7 @@ BitSpan load_scalar_8_fill(byte src, in BitSpan dst)
 }
 BitSpan load_scalar_16(ushort src)
 {
-//  Id := 100664626, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_16(System.UInt16)
+//  Id := 100664630, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_16(System.UInt16)
 //  BitSpan load_scalar_16(ushort src)
 //  Managed
 {
@@ -39,7 +39,7 @@ BitSpan load_scalar_16(ushort src)
 }
 BitSpan load_scalar_16_fill(ushort src, in BitSpan dst)
 {
-//  Id := 100664627, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_16_fill(System.UInt16,Z0.BitSpan&)
+//  Id := 100664631, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_16_fill(System.UInt16,Z0.BitSpan&)
 //  BitSpan load_scalar_16_fill(ushort src, in BitSpan dst)
 //  Managed
 {
@@ -53,7 +53,7 @@ BitSpan load_scalar_16_fill(ushort src, in BitSpan dst)
 }
 BitSpan load_scalar_32(uint src)
 {
-//  Id := 100664628, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_32(System.UInt32)
+//  Id := 100664632, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_32(System.UInt32)
 //  BitSpan load_scalar_32(uint src)
 //  Managed
 {
@@ -65,7 +65,7 @@ BitSpan load_scalar_32(uint src)
 }
 BitSpan load_scalar_32_fill(uint src, in BitSpan dst)
 {
-//  Id := 100664629, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_32_fill(System.UInt32,Z0.BitSpan&)
+//  Id := 100664633, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_32_fill(System.UInt32,Z0.BitSpan&)
 //  BitSpan load_scalar_32_fill(uint src, in BitSpan dst)
 //  Managed
 {
@@ -79,7 +79,7 @@ BitSpan load_scalar_32_fill(uint src, in BitSpan dst)
 }
 BitSpan load_scalar_64(ulong src)
 {
-//  Id := 100664630, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_64(System.UInt64)
+//  Id := 100664634, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_64(System.UInt64)
 //  BitSpan load_scalar_64(ulong src)
 //  Managed
 {
@@ -91,7 +91,7 @@ BitSpan load_scalar_64(ulong src)
 }
 BitSpan load_scalar_64_fill(ulong src, in BitSpan dst)
 {
-//  Id := 100664631, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_64_fill(System.UInt64,Z0.BitSpan&)
+//  Id := 100664635, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_64_fill(System.UInt64,Z0.BitSpan&)
 //  BitSpan load_scalar_64_fill(ulong src, in BitSpan dst)
 //  Managed
 {
@@ -105,7 +105,7 @@ BitSpan load_scalar_64_fill(ulong src, in BitSpan dst)
 }
 byte scalar_8(BitSpan src)
 {
-//  Id := 100664632, Name := System.Byte Z0.OpCodes.bitspan::scalar_8(Z0.BitSpan)
+//  Id := 100664636, Name := System.Byte Z0.OpCodes.bitspan::scalar_8(Z0.BitSpan)
 //  byte scalar_8(BitSpan src)
 //  Managed
 {
@@ -118,7 +118,7 @@ byte scalar_8(BitSpan src)
 }
 ushort extract_16(BitSpan src)
 {
-//  Id := 100664633, Name := System.UInt16 Z0.OpCodes.bitspan::extract_16(Z0.BitSpan)
+//  Id := 100664637, Name := System.UInt16 Z0.OpCodes.bitspan::extract_16(Z0.BitSpan)
 //  ushort extract_16(BitSpan src)
 //  Managed
 {
@@ -131,7 +131,7 @@ ushort extract_16(BitSpan src)
 }
 uint extract_32(BitSpan src)
 {
-//  Id := 100664634, Name := System.UInt32 Z0.OpCodes.bitspan::extract_32(Z0.BitSpan)
+//  Id := 100664638, Name := System.UInt32 Z0.OpCodes.bitspan::extract_32(Z0.BitSpan)
 //  uint extract_32(BitSpan src)
 //  Managed
 {
@@ -144,7 +144,7 @@ uint extract_32(BitSpan src)
 }
 ulong extract_64(BitSpan src)
 {
-//  Id := 100664635, Name := System.UInt64 Z0.OpCodes.bitspan::extract_64(Z0.BitSpan)
+//  Id := 100664639, Name := System.UInt64 Z0.OpCodes.bitspan::extract_64(Z0.BitSpan)
 //  ulong extract_64(BitSpan src)
 //  Managed
 {
@@ -157,7 +157,7 @@ ulong extract_64(BitSpan src)
 }
 byte bitslice_8(BitSpan src, int offset, int count)
 {
-//  Id := 100664636, Name := System.Byte Z0.OpCodes.bitspan::bitslice_8(Z0.BitSpan,System.Int32,System.Int32)
+//  Id := 100664640, Name := System.Byte Z0.OpCodes.bitspan::bitslice_8(Z0.BitSpan,System.Int32,System.Int32)
 //  byte bitslice_8(BitSpan src, int offset, int count)
 //  Managed
 {
@@ -171,7 +171,7 @@ byte bitslice_8(BitSpan src, int offset, int count)
 }
 ushort bitslice_16(BitSpan src, int offset, int count)
 {
-//  Id := 100664637, Name := System.UInt16 Z0.OpCodes.bitspan::bitslice_16(Z0.BitSpan,System.Int32,System.Int32)
+//  Id := 100664641, Name := System.UInt16 Z0.OpCodes.bitspan::bitslice_16(Z0.BitSpan,System.Int32,System.Int32)
 //  ushort bitslice_16(BitSpan src, int offset, int count)
 //  Managed
 {
@@ -185,7 +185,7 @@ ushort bitslice_16(BitSpan src, int offset, int count)
 }
 uint bitslice_32(BitSpan src, int offset, int count)
 {
-//  Id := 100664638, Name := System.UInt32 Z0.OpCodes.bitspan::bitslice_32(Z0.BitSpan,System.Int32,System.Int32)
+//  Id := 100664642, Name := System.UInt32 Z0.OpCodes.bitspan::bitslice_32(Z0.BitSpan,System.Int32,System.Int32)
 //  uint bitslice_32(BitSpan src, int offset, int count)
 //  Managed
 {
@@ -199,7 +199,7 @@ uint bitslice_32(BitSpan src, int offset, int count)
 }
 ulong bitslice_64(BitSpan src, int offset, int count)
 {
-//  Id := 100664639, Name := System.UInt64 Z0.OpCodes.bitspan::bitslice_64(Z0.BitSpan,System.Int32,System.Int32)
+//  Id := 100664643, Name := System.UInt64 Z0.OpCodes.bitspan::bitslice_64(Z0.BitSpan,System.Int32,System.Int32)
 //  ulong bitslice_64(BitSpan src, int offset, int count)
 //  Managed
 {
@@ -213,7 +213,7 @@ ulong bitslice_64(BitSpan src, int offset, int count)
 }
 ref BitSpan and(in BitSpan x, in BitSpan y, in BitSpan z)
 {
-//  Id := 100664640, Name := Z0.BitSpan& modreq(System.Runtime.InteropServices.InAttribute) Z0.OpCodes.bitspan::and(Z0.BitSpan&,Z0.BitSpan&,Z0.BitSpan&)
+//  Id := 100664644, Name := Z0.BitSpan& modreq(System.Runtime.InteropServices.InAttribute) Z0.OpCodes.bitspan::and(Z0.BitSpan&,Z0.BitSpan&,Z0.BitSpan&)
 //  ref BitSpan and(in BitSpan x, in BitSpan y, in BitSpan z)
 //  Managed
 {
@@ -227,7 +227,7 @@ ref BitSpan and(in BitSpan x, in BitSpan y, in BitSpan z)
 }
 ref BitSpan xor(in BitSpan x, in BitSpan y, in BitSpan z)
 {
-//  Id := 100664641, Name := Z0.BitSpan& modreq(System.Runtime.InteropServices.InAttribute) Z0.OpCodes.bitspan::xor(Z0.BitSpan&,Z0.BitSpan&,Z0.BitSpan&)
+//  Id := 100664645, Name := Z0.BitSpan& modreq(System.Runtime.InteropServices.InAttribute) Z0.OpCodes.bitspan::xor(Z0.BitSpan&,Z0.BitSpan&,Z0.BitSpan&)
 //  ref BitSpan xor(in BitSpan x, in BitSpan y, in BitSpan z)
 //  Managed
 {

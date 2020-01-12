@@ -1,4 +1,4 @@
-; 2020-01-11 03:38:49:130
+; 2020-01-11 17:55:30:160
 ; function: void deposit(in ulong src, ref Fixed128 dst)
 ; static ReadOnlySpan<byte> depositBytes => new byte[14]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFA,0x6F,0x01,0xC5,0xFA,0x7F,0x02,0xC3};
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77

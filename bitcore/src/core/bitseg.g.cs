@@ -80,14 +80,5 @@ namespace Z0
             where T : unmanaged
                 => bitseg(src.Data, bitpos<T>(firstidx), bitpos<T>(lastidx)); 
 
-        /// <summary>
-        /// Retrieves, at most, one cell's worth of bits defined by an inclusive bit index range
-        /// </summary>
-        /// <param name="first">The linear index of the first bit</param>
-        /// <param name="last">The linear index of the last bit</param>
-        [MethodImpl(Inline)]
-        public static T bitseg<T>(Block256<T> src, int first, int last)
-            where T : unmanaged
-                => gbits.bitseg(src.Data, first,last);
     }
 }

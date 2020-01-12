@@ -14,13 +14,6 @@ namespace Z0
 
     partial class BitMask
     {                
-        [MethodImpl(Inline)]
-        public static JsbMask<F,D,T> jsbspec<F,D,T>(F f = default, D d = default, T t = default) 
-            where F : unmanaged, ITypeNat
-            where D : unmanaged, ITypeNat
-            where T : unmanaged
-                => default;
-
         /// <summary>
         /// [10000001]
         /// </summary>
@@ -44,17 +37,6 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
-        /// <summary>
-        /// [10000001]
-        /// </summary>
-        /// <param name="spec">The mask spec</param>
-        /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline)]
-        public static T jsb<T>(JsbMask<N8,N1,T> spec)
-            where T : unmanaged
-                => jsb(spec.f,spec.d,spec.t);
-
 
         /// <summary>
         /// [11000011]
@@ -81,16 +63,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// [11000011]
-        /// </summary>
-        /// <param name="spec">The mask spec</param>
-        /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline)]
-        public static T jsb<T>(JsbMask<N8,N2,T> spec)
-            where T : unmanaged
-                => jsb(spec.f,spec.d,spec.t);
-
-        /// <summary>
         /// [11100111]
         /// </summary>
         /// <param name="f">The repetition frequency</param>
@@ -115,12 +87,32 @@ namespace Z0
         }
 
         /// <summary>
+        /// [10000001]
+        /// </summary>
+        /// <param name="spec">The mask spec</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T mask<T>(JsbMask<N8,N1,T> spec)
+            where T : unmanaged
+                => jsb(spec.f,spec.d,spec.t);
+
+        /// <summary>
+        /// [11000011]
+        /// </summary>
+        /// <param name="spec">The mask spec</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T mask<T>(JsbMask<N8,N2,T> spec)
+            where T : unmanaged
+                => jsb(spec.f,spec.d,spec.t);
+
+        /// <summary>
         /// [11100111]
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T jsb<T>(JsbMask<N8,N3,T> spec)
+        public static T mask<T>(JsbMask<N8,N3,T> spec)
             where T : unmanaged
                 => jsb(spec.f,spec.d,spec.t);
     }

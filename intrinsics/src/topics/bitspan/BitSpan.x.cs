@@ -76,12 +76,12 @@ namespace Z0
                 => BitSpan.extract<T>(src);
         
         /// <summary>
-        /// Extracts a T-valued scalar (or portion thereof) from the source segment [0,..,bitsize[T] - 1]
+        /// Extracts a T-valued scalar (or portion thereof) from the source
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static T BitSlice<T>(this in BitSpan src)
+        public static T Convert<T>(this in BitSpan src)
             where T : unmanaged
                 => BitSpan.bitslice<T>(src);
     

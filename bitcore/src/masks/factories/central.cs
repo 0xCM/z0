@@ -16,12 +16,28 @@ namespace Z0
 
     partial class BitMask
     {                
+        /// <summary>
+        /// Defines a central bitmask over 8-bit segments with a parametric bit density
+        /// D:[N2 | N4 | N6]
+        /// </summary>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="t">A mask type representative</param>
+        /// <typeparam name="D">The bit density type</typeparam>
+        /// <typeparam name="T">The primal mask type</typeparam>
         [MethodImpl(Inline)]
-        public static CentralMask<F,D,T> centralspec<F,D,T>(F f = default, D d = default, T t = default) 
-            where F : unmanaged, ITypeNat
-            where D : unmanaged, ITypeNat
+        public static T central<D,T>(N8 f, D d = default, T t = default)
             where T : unmanaged
-                => default;
+            where D : unmanaged, ITypeNat
+        {
+            if(typeof(D) == typeof(N2))
+                return central<T>(f,n2);        
+            else if(typeof(D) == typeof(N4))
+                return central<T>(f,n4);
+            else if(typeof(D) == typeof(N6))
+                return central<T>(f,n6);
+            else
+                throw unsupported<D>();        
+        }
 
         /// <summary>
         /// [00011000]
@@ -47,16 +63,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// [00011000]
-        /// </summary>
-        /// <param name="spec">The mask spec</param>
-        /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline)]
-        public static T central<T>(CentralMask<N8,N2,T> spec)
-            where T : unmanaged
-                => central(spec.f,spec.d, spec.t);
-
-        /// <summary>
         /// [00111100]
         /// </summary>
         /// <param name="f">The repetition frequency</param>
@@ -78,16 +84,6 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
-        /// <summary>
-        /// [00111100]
-        /// </summary>
-        /// <param name="spec">The mask spec</param>
-        /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline)]
-        public static T central<T>(CentralMask<N8,N4,T> spec)
-            where T : unmanaged
-                => central(spec.f,spec.d, spec.t);
 
         /// <summary>
         /// [01111110]
@@ -113,15 +109,14 @@ namespace Z0
         }
 
         /// <summary>
-        /// [01111110]
+        /// [00011000]
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T central<T>(CentralMask<N8,N6,T> spec)
+        public static T mask<D,T>(CentralMask<N8,D,T> spec)
             where T : unmanaged
-                => central(spec.f,spec.d, spec.t);
-
-
+            where D : unmanaged, ITypeNat
+                => central(spec.f, spec.d, spec.t);
     }
 }

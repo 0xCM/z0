@@ -63,6 +63,15 @@ namespace Z0
                 => System.Attribute.IsDefined(m, typeof(T));
 
         /// <summary>
+        /// Retrieves the value of an attached attribute paired with the subject
+        /// </summary>
+        /// <param name="m">The member to query</param>
+        /// <typeparam name="A">The attribute type</typeparam>
+        public static Pair<MemberInfo,A> Attribution<A>(this MemberInfo m)
+            where A : Attribute
+                => (m,(A)m.GetCustomAttribute(typeof(A)));
+
+        /// <summary>
         /// Returns true if a parametrically-identified attribute is not applied to the subject
         /// </summary>
         /// <param name="m">The subject to examine</param>

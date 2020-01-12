@@ -9,31 +9,10 @@ namespace Z0
 
     using static zfunc;
     using static As;
+    using static Classifiers;
 
     partial class gbits
     {
-        /// <summary>
-        /// Queries/manipulates a source cell that covers a position-identified bit
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="pos">The sequence-relative position of the target bit</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
-        public static ref T cell<T>(Span<T> src, BitPos<T> pos)
-            where T : unmanaged
-                => ref seek(src, pos.CellIndex);
-
-        /// <summary>
-        /// Queries/manipulates a source cell that covers a position-identified bit
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="pos">The sequence-relative position of the target bit</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
-        public static ref readonly T cell<T>(ReadOnlySpan<T> src, BitPos<T> pos)
-            where T : unmanaged
-                => ref skip(src, pos.CellIndex);
-
         /// <summary>
         /// Defines a bit position, relative to a T-valued sequence, predicated on a linear index
         /// </summary>
@@ -43,5 +22,11 @@ namespace Z0
         public static BitPos<T> bitpos<T>(int index)
             where T : unmanaged
                 => BitPos.FromBitIndex<T>((uint)index);
+
+        [MethodImpl(Inline)]
+        public static BitPos<T> bitpos<T>(int index, PrimalKind<T> k)
+            where T : unmanaged
+                => bitpos<T>(index);
+
     }
 }

@@ -1,7 +1,7 @@
-// 2020-01-11 03:38:48:998
+// 2020-01-11 17:55:30:030
 byte pack_8x8(Span<uint> src)
 {
-//  Id := 100664619, Name := System.Byte Z0.OpCodes.bitpack::pack_8x8(System.Span`1<System.UInt32>)
+//  Id := 100664623, Name := System.Byte Z0.OpCodes.bitpack::pack_8x8(System.Span`1<System.UInt32>)
 //  byte pack_8x8(Span<uint> src)
 //  Managed
 {
@@ -15,7 +15,7 @@ byte pack_8x8(Span<uint> src)
 }
 ushort pack_16x8(Span<uint> src)
 {
-//  Id := 100664620, Name := System.UInt16 Z0.OpCodes.bitpack::pack_16x8(System.Span`1<System.UInt32>)
+//  Id := 100664624, Name := System.UInt16 Z0.OpCodes.bitpack::pack_16x8(System.Span`1<System.UInt32>)
 //  ushort pack_16x8(Span<uint> src)
 //  Managed
 {
@@ -29,7 +29,7 @@ ushort pack_16x8(Span<uint> src)
 }
 uint pack_32x8(Span<uint> src)
 {
-//  Id := 100664621, Name := System.UInt32 Z0.OpCodes.bitpack::pack_32x8(System.Span`1<System.UInt32>)
+//  Id := 100664625, Name := System.UInt32 Z0.OpCodes.bitpack::pack_32x8(System.Span`1<System.UInt32>)
 //  uint pack_32x8(Span<uint> src)
 //  Managed
 {
@@ -43,7 +43,7 @@ uint pack_32x8(Span<uint> src)
 }
 ulong pack_64x8(Span<uint> src)
 {
-//  Id := 100664622, Name := System.UInt64 Z0.OpCodes.bitpack::pack_64x8(System.Span`1<System.UInt32>)
+//  Id := 100664626, Name := System.UInt64 Z0.OpCodes.bitpack::pack_64x8(System.Span`1<System.UInt32>)
 //  ulong pack_64x8(Span<uint> src)
 //  Managed
 {
@@ -58,7 +58,7 @@ ulong pack_64x8(Span<uint> src)
 }
 void unpack_64x32(ulong src, Span<uint> dst)
 {
-//  Id := 100664623, Name := System.Void Z0.OpCodes.bitpack::unpack_64x32(System.UInt64,System.Span`1<System.UInt32>)
+//  Id := 100664627, Name := System.Void Z0.OpCodes.bitpack::unpack_64x32(System.UInt64,System.Span`1<System.UInt32>)
 //  void unpack_64x32(ulong src, Span<uint> dst)
 //  Managed
 {

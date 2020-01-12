@@ -1,4 +1,4 @@
-// 2020-01-11 03:38:49:887
+// 2020-01-11 17:55:30:946
 Vector256<short> add_d256x16i(Vector256<short> x, Vector256<short> y)
 {
 //  Id := 100664129, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.inxoc::add_d256x16i(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)

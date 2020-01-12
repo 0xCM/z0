@@ -46,7 +46,7 @@ namespace Z0
             var bs2 = BitSpan.create(x);
             ClaimEqual(bs1.Trim(),bs2.Trim());
 
-            var y = bs1.BitSlice<uint>();
+            var y = bs1.Convert<uint>();
             Claim.eq(x,y);
 
         }
@@ -301,7 +301,7 @@ namespace Z0
                     var x1 = BitSpan.create(x0);
                     var x2 = x1.Format();
                     var x3 = BitSpan.parse(x2);
-                    var x4 = x3.BitSlice<T>();
+                    var x4 = x3.Convert<T>();
                     Claim.eq(x0,x4);
                 }
             }

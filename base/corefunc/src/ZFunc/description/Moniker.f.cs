@@ -11,13 +11,21 @@ using Z0;
 partial class zfunc
 {   
     /// <summary>
-    /// Produces a canonical designator of the form {bitsize[T]}{u | i | f} for a primal type
+    /// Produces an identifier of the form {bitsize[T]}{u | i | f} for a primal type
     /// </summary>
     /// <param name="t">A primal type representative</param>
     /// <typeparam name="T">The primal type</typeparam>
     [MethodImpl(Inline)]   
     public static string primalsig<T>(T t = default)
         => Classified.primalsig(t);
+
+    /// <summary>
+    /// Produces an identifier of the form {bitsize(k)}{u | i | f} for a primal kind k
+    /// </summary>
+    /// <param name="k">The primal kind</param>
+    [MethodImpl(Inline)]   
+    public static string primalsig(PrimalKind k)
+        => Classified.primalsig(k);
 
     /// <summary>
     /// Defines a moniker with rendering {opname}_N{u | i | f} that identifies an

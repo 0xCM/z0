@@ -1,79 +1,94 @@
-// 2020-01-11 03:38:50:439
+// 2020-01-11 17:55:31:458
 VectorKind:uint vkind_128x32u()
 {
-//  Id := 100664762, Name := Z0.VectorKind Z0.OpCodes.vpattern::vkind_128x32u()
+//  Id := 100664766, Name := Z0.VectorKind Z0.OpCodes.vpattern::vkind_128x32u()
 //  VectorKind:uint vkind_128x32u()
 //  Managed
 {
-  IL_0000: call Z0.Classifiers/VectorKind`2<Z0.N128,System.UInt32> Z0.Classifiers::vkind<Z0.N128,System.UInt32>()
-  IL_0005: call Z0.VectorKind Z0.Classifiers/VectorKind`2<Z0.N128,System.UInt32>::op_Implicit(Z0.Classifiers/VectorKind`2<Z0.N128,System.UInt32>)
-  IL_000A: ret
+  IL_0000: ldloca.s V_0
+  IL_0002: initobj Z0.N128
+  IL_0008: ldloc.0
+  IL_0009: ldc.i4.0
+  IL_000A: call Z0.Classifiers/VectorKind`2<Z0.N128,System.UInt32> Z0.Classifiers::vkind<Z0.N128,System.UInt32>(Z0.N128,System.UInt32)
+  IL_000F: call Z0.VectorKind Z0.Classifiers/VectorKind`2<Z0.N128,System.UInt32>::op_Implicit(Z0.Classifiers/VectorKind`2<Z0.N128,System.UInt32>)
+  IL_0014: ret
 }
 
 }
 VectorKind:uint vkind_256x32u()
 {
-//  Id := 100664763, Name := Z0.VectorKind Z0.OpCodes.vpattern::vkind_256x32u()
+//  Id := 100664767, Name := Z0.VectorKind Z0.OpCodes.vpattern::vkind_256x32u()
 //  VectorKind:uint vkind_256x32u()
 //  Managed
 {
-  IL_0000: call Z0.Classifiers/VectorKind`2<Z0.N256,System.UInt32> Z0.Classifiers::vkind<Z0.N256,System.UInt32>()
-  IL_0005: call Z0.VectorKind Z0.Classifiers/VectorKind`2<Z0.N256,System.UInt32>::op_Implicit(Z0.Classifiers/VectorKind`2<Z0.N256,System.UInt32>)
-  IL_000A: ret
+  IL_0000: ldloca.s V_0
+  IL_0002: initobj Z0.N256
+  IL_0008: ldloc.0
+  IL_0009: ldc.i4.0
+  IL_000A: call Z0.Classifiers/VectorKind`2<Z0.N256,System.UInt32> Z0.Classifiers::vkind<Z0.N256,System.UInt32>(Z0.N256,System.UInt32)
+  IL_000F: call Z0.VectorKind Z0.Classifiers/VectorKind`2<Z0.N256,System.UInt32>::op_Implicit(Z0.Classifiers/VectorKind`2<Z0.N256,System.UInt32>)
+  IL_0014: ret
 }
 
 }
 BlockKind:uint bkind_256x32u()
 {
-//  Id := 100664764, Name := Z0.BlockKind Z0.OpCodes.vpattern::bkind_256x32u()
+//  Id := 100664768, Name := Z0.BlockKind Z0.OpCodes.vpattern::bkind_256x32u()
 //  BlockKind:uint bkind_256x32u()
 //  Managed
 {
-  IL_0000: call Z0.Classifiers/BlockKind`2<Z0.N256,System.UInt32> Z0.Classifiers::bkind<Z0.N256,System.UInt32>()
-  IL_0005: call Z0.BlockKind Z0.Classifiers/BlockKind`2<Z0.N256,System.UInt32>::op_Implicit(Z0.Classifiers/BlockKind`2<Z0.N256,System.UInt32>)
-  IL_000A: ret
+  IL_0000: ldloca.s V_0
+  IL_0002: initobj Z0.N256
+  IL_0008: ldloc.0
+  IL_0009: ldc.i4.0
+  IL_000A: call Z0.Classifiers/BlockKind`2<Z0.N256,System.UInt32> Z0.Classifiers::bkind<Z0.N256,System.UInt32>(Z0.N256,System.UInt32)
+  IL_000F: call Z0.BlockKind Z0.Classifiers/BlockKind`2<Z0.N256,System.UInt32>::op_Implicit(Z0.Classifiers/BlockKind`2<Z0.N256,System.UInt32>)
+  IL_0014: ret
 }
 
 }
 PrimalKind:uint pkind_8u()
 {
-//  Id := 100664765, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_8u()
+//  Id := 100664769, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_8u()
 //  PrimalKind:uint pkind_8u()
 //  Managed
 {
-  IL_0000: call Z0.Classifiers/PrimalKind`1<System.Byte> Z0.Classifiers::pkind<System.Byte>()
-  IL_0005: call Z0.PrimalKind Z0.Classifiers/PrimalKind`1<System.Byte>::op_Implicit(Z0.Classifiers/PrimalKind`1<System.Byte>)
-  IL_000A: ret
+  IL_0000: ldc.i4.0
+  IL_0001: call Z0.Classifiers/PrimalKind`1<System.Byte> Z0.Classifiers::pkind<System.Byte>(System.Byte)
+  IL_0006: call Z0.PrimalKind Z0.Classifiers/PrimalKind`1<System.Byte>::op_Implicit(Z0.Classifiers/PrimalKind`1<System.Byte>)
+  IL_000B: ret
 }
 
 }
 PrimalKind:uint pkind_32u()
 {
-//  Id := 100664766, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_32u()
+//  Id := 100664770, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_32u()
 //  PrimalKind:uint pkind_32u()
 //  Managed
 {
-  IL_0000: call Z0.Classifiers/PrimalKind`1<System.UInt32> Z0.Classifiers::pkind<System.UInt32>()
-  IL_0005: call Z0.PrimalKind Z0.Classifiers/PrimalKind`1<System.UInt32>::op_Implicit(Z0.Classifiers/PrimalKind`1<System.UInt32>)
-  IL_000A: ret
+  IL_0000: ldc.i4.0
+  IL_0001: call Z0.Classifiers/PrimalKind`1<System.UInt32> Z0.Classifiers::pkind<System.UInt32>(System.UInt32)
+  IL_0006: call Z0.PrimalKind Z0.Classifiers/PrimalKind`1<System.UInt32>::op_Implicit(Z0.Classifiers/PrimalKind`1<System.UInt32>)
+  IL_000B: ret
 }
 
 }
 PrimalKind:uint pkind_32i()
 {
-//  Id := 100664767, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_32i()
+//  Id := 100664771, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_32i()
 //  PrimalKind:uint pkind_32i()
 //  Managed
 {
-  IL_0000: call Z0.Classifiers/PrimalKind`1<System.Int32> Z0.Classifiers::pkind<System.Int32>()
-  IL_0005: call Z0.PrimalKind Z0.Classifiers/PrimalKind`1<System.Int32>::op_Implicit(Z0.Classifiers/PrimalKind`1<System.Int32>)
-  IL_000A: ret
+  IL_0000: ldc.i4.0
+  IL_0001: call Z0.Classifiers/PrimalKind`1<System.Int32> Z0.Classifiers::pkind<System.Int32>(System.Int32)
+  IL_0006: call Z0.PrimalKind Z0.Classifiers/PrimalKind`1<System.Int32>::op_Implicit(Z0.Classifiers/PrimalKind`1<System.Int32>)
+  IL_000B: ret
 }
 
 }
 Vector128<byte> ones_128x8u()
 {
-//  Id := 100664768, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::ones_128x8u()
+//  Id := 100664772, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::ones_128x8u()
 //  Vector128<byte> ones_128x8u()
 //  Managed
 {
@@ -86,7 +101,7 @@ Vector128<byte> ones_128x8u()
 }
 Vector128<ulong> ones_128x64u()
 {
-//  Id := 100664769, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.OpCodes.vpattern::ones_128x64u()
+//  Id := 100664773, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.OpCodes.vpattern::ones_128x64u()
 //  Vector128<ulong> ones_128x64u()
 //  Managed
 {
@@ -100,7 +115,7 @@ Vector128<ulong> ones_128x64u()
 }
 Vector256<byte> ones_256x8u()
 {
-//  Id := 100664770, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::ones_256x8u()
+//  Id := 100664774, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::ones_256x8u()
 //  Vector256<byte> ones_256x8u()
 //  Managed
 {
@@ -113,7 +128,7 @@ Vector256<byte> ones_256x8u()
 }
 Vector256<ulong> ones_256x64u()
 {
-//  Id := 100664771, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.OpCodes.vpattern::ones_256x64u()
+//  Id := 100664775, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.OpCodes.vpattern::ones_256x64u()
 //  Vector256<ulong> ones_256x64u()
 //  Managed
 {
@@ -127,7 +142,7 @@ Vector256<ulong> ones_256x64u()
 }
 Vector256<double> ones_256x64f()
 {
-//  Id := 100664772, Name := System.Runtime.Intrinsics.Vector256`1<System.Double> Z0.OpCodes.vpattern::ones_256x64f()
+//  Id := 100664776, Name := System.Runtime.Intrinsics.Vector256`1<System.Double> Z0.OpCodes.vpattern::ones_256x64f()
 //  Vector256<double> ones_256x64f()
 //  Managed
 {
@@ -140,7 +155,7 @@ Vector256<double> ones_256x64f()
 }
 Vector256<byte> pattern_lanemerge_256x8u()
 {
-//  Id := 100664773, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::pattern_lanemerge_256x8u()
+//  Id := 100664777, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::pattern_lanemerge_256x8u()
 //  Vector256<byte> pattern_lanemerge_256x8u()
 //  Managed
 {
@@ -151,7 +166,7 @@ Vector256<byte> pattern_lanemerge_256x8u()
 }
 Vector256<ushort> pattern_lanemerge_256x16u()
 {
-//  Id := 100664774, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.OpCodes.vpattern::pattern_lanemerge_256x16u()
+//  Id := 100664778, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.OpCodes.vpattern::pattern_lanemerge_256x16u()
 //  Vector256<ushort> pattern_lanemerge_256x16u()
 //  Managed
 {
@@ -162,7 +177,7 @@ Vector256<ushort> pattern_lanemerge_256x16u()
 }
 Vector128<byte> makemask_d128x8u(ushort src)
 {
-//  Id := 100664775, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::makemask_d128x8u(System.UInt16)
+//  Id := 100664779, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::makemask_d128x8u(System.UInt16)
 //  Vector128<byte> makemask_d128x8u(ushort src)
 //  Managed
 {
@@ -174,7 +189,7 @@ Vector128<byte> makemask_d128x8u(ushort src)
 }
 Vector256<byte> makemask_d256x8u(uint src)
 {
-//  Id := 100664776, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::makemask_d256x8u(System.UInt32)
+//  Id := 100664780, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::makemask_d256x8u(System.UInt32)
 //  Vector256<byte> makemask_d256x8u(uint src)
 //  Managed
 {
@@ -186,7 +201,7 @@ Vector256<byte> makemask_d256x8u(uint src)
 }
 Vector128<byte> maskmask_d128x8u_index4(ushort src)
 {
-//  Id := 100664777, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::maskmask_d128x8u_index4(System.UInt16)
+//  Id := 100664781, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::maskmask_d128x8u_index4(System.UInt16)
 //  Vector128<byte> maskmask_d128x8u_index4(ushort src)
 //  Managed
 {
@@ -199,7 +214,7 @@ Vector128<byte> maskmask_d128x8u_index4(ushort src)
 }
 Vector256<byte> maskmask_d256x8u_index3(uint src)
 {
-//  Id := 100664778, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::maskmask_d256x8u_index3(System.UInt32)
+//  Id := 100664782, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::maskmask_d256x8u_index3(System.UInt32)
 //  Vector256<byte> maskmask_d256x8u_index3(uint src)
 //  Managed
 {
@@ -212,7 +227,7 @@ Vector256<byte> maskmask_d256x8u_index3(uint src)
 }
 Vector128<byte> makemask_d128x8u_FCFC()
 {
-//  Id := 100664779, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::makemask_d128x8u_FCFC()
+//  Id := 100664783, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::makemask_d128x8u_FCFC()
 //  Vector128<byte> makemask_d128x8u_FCFC()
 //  Managed
 {
@@ -224,7 +239,7 @@ Vector128<byte> makemask_d128x8u_FCFC()
 }
 Vector256<byte> makemask_d256x8u_FAFAFAFA()
 {
-//  Id := 100664780, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::makemask_d256x8u_FAFAFAFA()
+//  Id := 100664784, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::makemask_d256x8u_FAFAFAFA()
 //  Vector256<byte> makemask_d256x8u_FAFAFAFA()
 //  Managed
 {

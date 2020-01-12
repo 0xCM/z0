@@ -12,19 +12,19 @@ namespace Z0
     partial class gbits
     {
         /// <summary>
-        /// Maps a sequence of lower source bits over a target segment
+        /// Maps bits from a source segment src[0..(count-1)] to a target segment dst[index..(index+count)]
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="dst">The target</param>
-        /// <param name="start">The target-relative index at which to begin the overwrite</param>
-        /// <param name="length">The number bits to read from the source an replace in the target</param>
+        /// <param name="count">The number bits to read from the source an replace in the target</param>
+        /// <param name="index">The target-relative index at which to begin the overwrite</param>
         /// <typeparam name="T">The primal scalar type</typeparam>
         [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
-        public static T bitmap<T>(T src, T dst, byte start, byte length)
+        public static T bitmap<T>(T src, T dst, byte count, byte index)
             where T : unmanaged
         {
-            var dstPrep = bitclear(dst,start,length);
-            var srcPrep = gmath.sll(gmath.and(BitMask.lo<T>(length), src), start);
+            var dstPrep = bitclear(dst,index,count);
+            var srcPrep = gmath.sll(gmath.and(BitMask.lo<T>(count), src), index);
             return gmath.or(dstPrep, srcPrep);
         }                
     }

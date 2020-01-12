@@ -60,15 +60,15 @@ namespace Z0
         {
             var w = n512;
             var t = z64;
-            var maskspec = BitMask.msbspec(n2,n1,t);
+            var maskspec = MaskSpecs.msb(n2,n1,t);
 
             var source = VPattern.vincrements(w,t);
-            var blendspec = CpuVector.vbroadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var blendspec = CpuVector.vbroadcast(n256, BitMask.mask(maskspec), gmath.maxval(t));
             var target = ginx.vblendp(source, blendspec);
             var expect = CpuVector.vparts(w,0,5,2,7,4,1,6,3);
             Claim.yea(ginx.vsame(expect,target));
 
-            var descrition = describe(maskspec, maskspec.As(z8).Mask(), source,target);
+            var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
                 Trace(descrition);
             
@@ -83,15 +83,15 @@ namespace Z0
         {
             var w = n512;
             var t = z64;
-            var maskspec = BitMask.msbspec(n4,n1,t);
+            var maskspec = MaskSpecs.msb(n4,n1,t);
 
             var source = VPattern.vincrements(w,t);
-            var blendspec = CpuVector.vbroadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var blendspec = CpuVector.vbroadcast(n256, BitMask.mask(maskspec), gmath.maxval(t));
             var target = ginx.vblendp(source, blendspec);
             var expect = CpuVector.vparts(w,0,1,2,7,4,5,6,3);
             Claim.yea(ginx.vsame(expect,target));
 
-            var descrition = describe(maskspec, maskspec.As(z8).Mask(), source,target);
+            var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
                 Trace(descrition);
             
@@ -106,15 +106,15 @@ namespace Z0
         {
             var w = n512;
             var t = z64;
-            var maskspec = BitMask.lsbspec(n2,n1,t);
+            var maskspec = MaskSpecs.lsb(n2,n1,t);
 
             var source = VPattern.vincrements(w,t);
-            var blendspec = CpuVector.vbroadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var blendspec = CpuVector.vbroadcast(n256, BitMask.mask(maskspec), gmath.maxval(t));
             var target = ginx.vblendp(source, blendspec);
             var expect = CpuVector.vparts(w,4,1,6,3,0,5,2,7);
             Claim.yea(ginx.vsame(expect,target));
 
-            var descrition = describe(maskspec, maskspec.As(z8).Mask(), source,target);
+            var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
                 Trace(descrition);            
         }
@@ -128,15 +128,15 @@ namespace Z0
         {
             var w = n512;
             var t = z64;
-            var maskspec = BitMask.jsbspec(n8,n2,t);
+            var maskspec = MaskSpecs.jsb(n8,n2,t);
 
             var source = VPattern.vincrements(w,t);
-            var blendspec = CpuVector.vbroadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var blendspec = CpuVector.vbroadcast(n256, BitMask.mask(maskspec), gmath.maxval(t));
             var target = ginx.vblendp(source, blendspec);
             var expect = CpuVector.vparts(w,4,5,2,3,0,1,6,7);
             Claim.yea(ginx.vsame(expect,target));
 
-            var descrition = describe(maskspec, maskspec.As(z8).Mask(), source,target);
+            var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
                 Trace(descrition);            
         }
@@ -150,16 +150,16 @@ namespace Z0
         {
             var w = n512;
             var t = z32;
-            var maskspec = BitMask.jsbspec(n8,n2,t);
+            var maskspec = MaskSpecs.jsb(n8,n2,t);
 
             var source = VPattern.vincrements(w,t);
-            var blendspec = CpuVector.vbroadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var blendspec = CpuVector.vbroadcast(n256, BitMask.mask(maskspec), gmath.maxval(t));
             var target = ginx.vblendp(source, blendspec);
             var expect = CpuVector.vparts(w,8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7);
             
             Claim.yea(ginx.vsame(expect,target));
 
-            var descrition = describe(maskspec, maskspec.As(z16).Mask(), source,target);
+            var descrition = describe(maskspec, BitMask.mask(maskspec.As(z16)), source,target);
             if(EmitInfo)
                 Trace(descrition);            
         }
@@ -173,15 +173,15 @@ namespace Z0
         {
             var w = n512;
             var t = z16;
-            var maskspec = BitMask.jsbspec(n8,n2,t);
+            var maskspec = MaskSpecs.jsb(n8,n2,t);
 
             var source = VPattern.vincrements(w,t);
-            var blendspec = CpuVector.vbroadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var blendspec = CpuVector.vbroadcast(n256, BitMask.mask(maskspec), gmath.maxval(t));
             var target = ginx.vblendp(source, blendspec);
             var expect = CpuVector.vparts(w,16, 17,  2,  3,  4,  5, 22, 23, 24, 25, 10, 11, 12, 13, 30, 31,  0,  1, 18, 19, 20, 21,  6,  7,  8,  9, 26, 27, 28, 29, 14, 15);
             Claim.eq(expect,target);
 
-            var descrition = describe(maskspec, maskspec.As(z32).Mask(), source,target);
+            var descrition = describe(maskspec, BitMask.mask(maskspec.As(z32)), source,target);
             if(EmitInfo)
                 Trace(descrition);            
         }
@@ -195,13 +195,13 @@ namespace Z0
         {
             var w = n512;
             var t = z8;
-            var maskspec = BitMask.jsbspec(n8,n2,t);
+            var maskspec = MaskSpecs.jsb(n8,n2,t);
 
             var source = VPattern.vincrements(w,t);
-            var blendspec = CpuVector.vbroadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var blendspec = CpuVector.vbroadcast(n256, BitMask.mask(maskspec), gmath.maxval(t));
             var target = ginx.vblendp(source, blendspec);
 
-            var descrition = describe(maskspec, maskspec.As(z64).Mask(), source,target);
+            var descrition = describe(maskspec, BitMask.mask(maskspec.As(z64)), source,target);
             if(EmitInfo)
                 Trace(descrition);            
         }
@@ -210,10 +210,10 @@ namespace Z0
         {
             var w = n512;
             var t = z8;
-            var maskspec = BitMask.jsbspec(n8,n2,t);
-            var blendspec = CpuVector.vbroadcast(n256, maskspec.Mask(), gmath.maxval(t));
+            var maskspec = MaskSpecs.jsb(n8,n2,t);
+            var blendspec = CpuVector.vbroadcast(n256, BitMask.mask(maskspec), gmath.maxval(t));
 
-            var maskbits = maskspec.As(z64).Mask();
+            var maskbits = BitMask.mask(maskspec.As(z64));
 
             for(var samples=0; samples< RepCount; samples++)
             {

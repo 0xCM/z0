@@ -1,7 +1,7 @@
-// 2020-01-11 03:38:48:888
+// 2020-01-11 17:55:29:923
 int cell_count_32x64x8()
 {
-//  Id := 100664304, Name := System.Int32 Z0.OpCodes.bitmatrix::cell_count_32x64x8()
+//  Id := 100664308, Name := System.Int32 Z0.OpCodes.bitmatrix::cell_count_32x64x8()
 //  int cell_count_32x64x8()
 //  Managed
 {
@@ -15,7 +15,7 @@ int cell_count_32x64x8()
 }
 TableIndex tableindex_32x64x8(int row, int col)
 {
-//  Id := 100664305, Name := Z0.TableIndex Z0.OpCodes.bitmatrix::tableindex_32x64x8(System.Int32,System.Int32)
+//  Id := 100664309, Name := Z0.TableIndex Z0.OpCodes.bitmatrix::tableindex_32x64x8(System.Int32,System.Int32)
 //  TableIndex tableindex_32x64x8(int row, int col)
 //  Managed
 {
@@ -31,7 +31,7 @@ TableIndex tableindex_32x64x8(int row, int col)
 }
 ref BitMatrix<uint> and(in BitMatrix<uint> A, in BitMatrix<uint> B, in BitMatrix<uint> Z)
 {
-//  Id := 100664306, Name := Z0.BitMatrix`1<System.UInt32>& modreq(System.Runtime.InteropServices.InAttribute) Z0.OpCodes.bitmatrix::and(Z0.BitMatrix`1<System.UInt32>&,Z0.BitMatrix`1<System.UInt32>&,Z0.BitMatrix`1<System.UInt32>&)
+//  Id := 100664310, Name := Z0.BitMatrix`1<System.UInt32>& modreq(System.Runtime.InteropServices.InAttribute) Z0.OpCodes.bitmatrix::and(Z0.BitMatrix`1<System.UInt32>&,Z0.BitMatrix`1<System.UInt32>&,Z0.BitMatrix`1<System.UInt32>&)
 //  ref BitMatrix<uint> and(in BitMatrix<uint> A, in BitMatrix<uint> B, in BitMatrix<uint> Z)
 //  Managed
 {

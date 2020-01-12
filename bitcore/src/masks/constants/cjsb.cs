@@ -12,28 +12,31 @@ namespace Z0
 
     partial class BitMasks
     {            
-
         // ~ CJsb8x2x1 [10011001]
         // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// [10011001]
         /// </summary>
+        [BinaryLiteral("[10011001]")]
         public const byte CJsb8x8x2x1 = Central8x8x2 | Jsb8x8x1;
 
         /// <summary>
         /// [10011001 10011001]
         /// </summary>
+        [BinaryLiteral("[10011001 10011001]")]
         public const ushort CJsb16x8x2x1 = (ushort)CJsb8x8x2x1 | (ushort)CJsb8x8x2x1 << 8;
 
         /// <summary>
         /// [10011001 10011001 10011001 10011001]
         /// </summary>
+        [BinaryLiteral("[10011001 10011001 10011001 10011001]")]
         public const uint CJsb32x8x2x1 = (uint)CJsb16x8x2x1 | (uint)CJsb16x8x2x1 << 16;
 
         /// <summary>
         /// [10011001 10011001 10011001 10011001 10011001 10011001 10011001 10011001]
         /// </summary>
+        [BinaryLiteral("[10011001 10011001 10011001 10011001 10011001 10011001 10011001 10011001]")]
         public const ulong CJsb64x8x2x1 = (ulong)CJsb32x8x2x1 | (ulong)CJsb32x8x2x1 << 32;
 
         // ~ CJsb8x2x2 [11011011]

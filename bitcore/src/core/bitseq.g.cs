@@ -12,52 +12,53 @@ namespace Z0
     partial class gbits
     {        
         /// <summary>
-        /// Employs the bitstore for bitsequence construction
+        /// Constructs a bitsequence via the bitstore and populates an allocated target with the result
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<byte> bitseq<T>(T src)
+        public static ReadOnlySpan<byte> storeseq<T>(T src)
             where T : unmanaged
                 => BitStore.bitseq(src);
 
         /// <summary>
-        /// Employs the bitstore for bitsequence construction
+        /// Constructs a bitsequence via the bitstore and populates a caller-supplied target with the result
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
-        public static void bitseq<T>(T src, Span<byte> dst, int offset = 0)
+        public static void storeseq<T>(T src, Span<byte> dst, int offset = 0)
             where T : unmanaged
                 => BitStore.bitseq(src, dst, offset);
 
         /// <summary>
-        /// Calculates a bit sequence
+        /// Constructs a bitsequence via calculation and populates a caller-supplied target with the result
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<byte> bitseq_calc<T>(T src, Span<byte> dst, int offset = 0)
+        public static Span<byte> bitseq<T>(T src, Span<byte> dst, int offset = 0)
             where T : unmanaged
         {
             var n = bitsize<T>();
             ref var loc = ref seek(ref head(dst), offset);
+
             for(var i=0; i<n; i++)
-                seek(ref loc, i) = (byte)gbits.testbit(src,i);
+                seek(ref loc, i) = (byte)testbit(src,i);
             return dst;
         }
 
         /// <summary>
-        /// Calculates a bit sequence
+        /// Calculates a bit sequence and populates an allocated target with the result
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<byte> bitseq_calc<T>(T src)
+        public static Span<byte> bitseq<T>(T src)
             where T : unmanaged
         {
             Span<byte> dst = new byte[bitsize<T>()];
-            bitseq_calc(src,dst);
+            bitseq(src,dst);
             return dst;
         }
     }

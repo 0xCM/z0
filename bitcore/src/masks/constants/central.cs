@@ -18,31 +18,31 @@ namespace Z0
         /// <summary>
         /// 0x6 = [0110]
         /// </summary>
-        [HexLiteral(0x6), BinaryLiteral("[0110]")]
+        [BinaryLiteral("[0110]")]
         public const byte Central4x4x2 = 0x6;
 
         /// <summary>
         /// 0x66 = [01100110]
         /// </summary>
-        [HexLiteral(0x66), BinaryLiteral("[01100110]")]
+        [BinaryLiteral("[01100110]")]
         public const byte Central8x4x2 = 0x66;
 
         /// <summary>
         /// 0x6666 = [01100110 01100110]
         /// </summary>
-        [HexLiteral(0x6666), BinaryLiteral("[01100110 01100110]")]
+        [BinaryLiteral("[01100110 01100110]")]
         public const ushort Central16x4x2 = 0x6666;
 
         /// <summary>
         /// 0x66666666 = [01100110 01100110 01100110 01100110]
         /// </summary>
-        [HexLiteral(0x66666666), BinaryLiteral("[01100110 01100110 01100110 01100110]")]
+        [BinaryLiteral("[01100110 01100110 01100110 01100110]")]
         public const uint Central32x4x2 = 0x66666666;
 
         /// <summary>
         /// 0x6666666666666666 = [01100110 01100110 01100110 01100110 01100110 01100110 01100110 01100110 01100110 01100110]
         /// </summary>
-        [HexLiteral(0x6666666666666666), BinaryLiteral("[01100110 01100110 01100110 01100110 01100110 01100110 01100110 01100110 01100110 01100110]")]
+        [BinaryLiteral("[01100110 01100110 01100110 01100110 01100110 01100110 01100110 01100110 01100110 01100110]")]
         public const ulong Central64x4x2 = 0x6666666666666666;
 
         // ~ Central8x2 [00011000]
@@ -51,25 +51,25 @@ namespace Z0
         /// <summary>
         /// 0x18 = [00011000] 
         /// </summary>
-        [HexLiteral(0x18), BinaryLiteral("[00011000]")]
+        [BinaryLiteral("[00011000]")]
         public const byte Central8x8x2 = 0b00011000;
 
         /// <summary>
         /// 0x1818 = [00011000 00011000]
         /// </summary>
-        [HexLiteral(0x1818), BinaryLiteral("[00011000 00011000]")]
+        [BinaryLiteral("[00011000 00011000]")]
         public const ushort Central16x8x2 = (ushort)Central8x8x2 | (ushort)Central8x8x2 << 8;
 
         /// <summary>
         /// 0x18181818 = [00011000 00011000 00011000 00011000]
         /// </summary>
-        [HexLiteral(0x18181818), BinaryLiteral("[00011000 00011000 00011000 00011000]")]
+        [BinaryLiteral("[00011000 00011000 00011000 00011000]")]
         public const uint Central32x8x2 = (uint)Central16x8x2 | (uint)Central16x8x2 << 16;
 
         /// <summary>
         /// 0x1818181818181818 = [00011000 00011000 00011000 00011000 00011000 00011000 00011000 00011000]
         /// </summary>
-        [HexLiteral(0x1818181818181818), BinaryLiteral("[00011000 00011000 00011000 00011000 00011000 00011000 00011000 00011000]")]
+        [BinaryLiteral("[00011000 00011000 00011000 00011000 00011000 00011000 00011000 00011000]")]
         public const ulong Central64x8x2 = (ulong)Central32x8x2 | (ulong)Central32x8x2 << 32;
 
         // ~ Central8x4 [00111100]
@@ -78,26 +78,26 @@ namespace Z0
         /// <summary>
         /// 0x3C = [00111100]
         /// </summary>
-        [HexLiteral(0x3C), BinaryLiteral("[00111100]")]
+        [BinaryLiteral("[00111100]")]
         public const byte Central8x8x4 = 0b00111100;
 
         /// <summary>
         /// 0x3C3C = [00111100 00111100]
         /// </summary>
-        [HexLiteral(0x3C3C), BinaryLiteral("[00111100 00111100]")]
+        [BinaryLiteral("[00111100 00111100]")]
         public const ushort Central16x8x4 = (ushort)Central8x8x4 | (ushort)Central8x8x4 << 8;
 
         /// <summary>
         /// 0x3C3C3C3C = [00111100 00111100 00111100 00111100]
         /// </summary>
-        [HexLiteral(0x3C3C3C3C), BinaryLiteral("[00111100 00111100 00111100 00111100]")]
-        public const uint Central32x8x4 = (uint)Central16x8x4 | (uint)Central16x8x4 << 8;
+        [BinaryLiteral("[00111100 00111100 00111100 00111100]")]
+        public const uint Central32x8x4 = (uint)Central16x8x4 | (uint)Central16x8x4 << 16;
 
         /// <summary>
         /// 0x3C3C3C3C3C3C3C3C = [00111100 00111100 00111100 00111100 00111100 00111100 00111100 00111100]
         /// </summary>
-        [HexLiteral(0x3C3C3C3C3C3C3C3C), BinaryLiteral("[00111100 00111100 00111100 00111100 00111100 00111100 00111100 00111100]")]
-        public const ulong Central64x8x4 = (ulong)Central32x8x4 | (ulong)Central32x8x4 << 8;
+        [BinaryLiteral("[00111100 00111100 00111100 00111100 00111100 00111100 00111100 00111100]")]
+        public const ulong Central64x8x4 = (ulong)Central32x8x4 | (ulong)Central32x8x4 << 32;
 
         // ~ Central16x8
         // ~ ------------------------------------------------------------------
@@ -105,19 +105,19 @@ namespace Z0
         /// <summary>
         /// 0x0FF0 = [00001111 11110000]
         /// </summary>
-        [HexLiteral(0x0FF0), BinaryLiteral("[00001111 11110000]")]
+        [BinaryLiteral("[00001111 11110000]")]
         public const ushort Central16x16x8 = (ushort) Msb8x8x4 | (ushort)Lsb8x8x4 << 8; 
 
         /// <summary>
         /// 0x0FF00FF0 = [00001111 11110000 00001111 11110000]
         /// </summary>
-        [HexLiteral(0x0FF00FF0), BinaryLiteral("[00001111 11110000 00001111 11110000]")]
+        [BinaryLiteral("[00001111 11110000 00001111 11110000]")]
         public const uint Central32x16x8 = (uint) Central16x16x8 | (uint)Central16x16x8 << 16; 
 
         /// <summary>
-        /// 0x0FF00FF00FF00FF0 = [00001111 11110000 00001111 11110000]
+        /// 0x0FF00FF00FF00FF0 = [00001111 11110000 00001111 11110000 00001111 11110000 00001111 11110000]
         /// </summary>
-        [HexLiteral(0x0FF00FF00FF00FF0), BinaryLiteral("[00001111 11110000 00001111 11110000]")]
+        [BinaryLiteral("[00001111 11110000 00001111 11110000 00001111 11110000 00001111 11110000]")]
         public const ulong Central64x16x8 = (ulong) Central32x16x8 | (ulong)Central32x16x8 << 32; 
 
         // ~ Central8x6 [01111110]
@@ -199,24 +199,21 @@ namespace Z0
         /// [00000000 00000001 10000000 00000000]
         /// </summary>
         [BinaryLiteral("[00000000 00000001 10000000 00000000]")]
-        public const uint Central32x2 = (uint) Msb16x16x1 | (uint)Lsb16x16x1 << 8;
+        public const uint Central32x2 = (uint) Msb16x16x1 | (uint)Lsb16x16x1 << 16;
 
         /// <summary>
         /// 0x00FFFF00
         /// </summary>
-        [HexLiteral(0x00FFFF00)]
         public const uint Central32x32x16 = 0x00FFFF00;
 
         /// <summary>
         /// 0x00FFFF0000FFFF00
         /// </summary>
-        [HexLiteral(0x00FFFF0000FFFF00)]
         public const ulong Central64x32x16 = 0x00FFFF0000FFFF00;
 
         /// <summary>
         /// 0x0000FFFFFFFF0000
         /// </summary>
-        [HexLiteral(0x0000FFFFFFFF0000)]
         public const ulong Central64x64x32 = 0x0000FFFFFFFF0000;
 
     }

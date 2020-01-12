@@ -13,12 +13,37 @@ namespace Z0
 
     partial class BitMask
     {                
+        /// <summary>
+        /// [01 01 ... 01]
+        /// Defines a width-variant LSB pattern that repeats every 2 bits with density 1
+        /// </summary>
+        /// <param name="w">The pattern width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
+        /// <typeparam name="W">The width type</typeparam>
+        /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static LsbMask<F,D,T> lsbspec<F,D,T>(F f = default, D d = default, T t = default) 
-            where F : unmanaged, ITypeNat
-            where D : unmanaged, ITypeNat
+        public static T lsb<W,T>(W w, N2 f, N1 d, T t = default)
+            where W : unmanaged, ITypeNat
             where T : unmanaged
-                => default;
+                => convert<ulong,T>(lsb(w,f,d));
+
+        /// <summary>
+        /// [001 001 ... 001]
+        /// Defines a width-variant LSB pattern that repeats every 3 bits with density 1
+        /// </summary>
+        /// <param name="w">The pattern width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <param name="t">A mask type representative</param>
+        /// <typeparam name="W">The width type</typeparam>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T lsb<W,T>(W w, N3 f, N1 d, T t = default)
+            where W : unmanaged, ITypeNat
+            where T : unmanaged
+                => convert<ulong,T>(lsb_3x1_a(w,f,d));
 
         /// <summary>
         /// [00....01]    
@@ -43,22 +68,6 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
-        /// <summary>
-        /// [01 01 ... 01]
-        /// </summary>
-        /// <param name="w">The pattern width</param>
-        /// <param name="f">The repetition frequency</param>
-        /// <param name="d">The bit density</param>
-        /// <param name="t">A mask type representative</param>
-        /// <typeparam name="W">The width type</typeparam>
-        /// <typeparam name="T">The mask data type</typeparam>
-        /// <remarks>Creates a width-variant LSB pattern that repeats every 2 bits with density 1</remarks>
-        [MethodImpl(Inline)]
-        public static T lsb<W,T>(W w, N2 f, N1 d, T t = default)
-            where W : unmanaged, ITypeNat
-            where T : unmanaged
-                => convert<ulong,T>(lsb(w,f,d));
 
         /// <summary>
         /// [01]
@@ -335,7 +344,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(LsbMask<N1,N1,T> spec)
+        public static T mask<T>(LsbMask<N1,N1,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
 
@@ -345,7 +354,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(LsbMask<N2,N1,T> spec)
+        public static T mask<T>(LsbMask<N2,N1,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
 
@@ -356,7 +365,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(LsbMask<N4,N1,T> spec)
+        public static T mask<T>(LsbMask<N4,N1,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
 
@@ -367,7 +376,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(LsbMask<N8,N1,T> spec)
+        public static T mask<T>(LsbMask<N8,N1,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
 
@@ -378,7 +387,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(LsbMask<N16,N1,T> spec)
+        public static T mask<T>(LsbMask<N16,N1,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
 
@@ -388,17 +397,17 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(LsbMask<N8,N2,T> spec)
+        public static T mask<T>(LsbMask<N8,N2,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
  
-         /// <summary>
+        /// <summary>
         /// [000000111]
         /// </summary>
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(LsbMask<N8,N3,T> spec)
+        public static T mask<T>(LsbMask<N8,N3,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
 
@@ -408,7 +417,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(LsbMask<N8,N4,T> spec)
+        public static T mask<T>(LsbMask<N8,N4,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
 
@@ -418,7 +427,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(LsbMask<N8,N5,T> spec)
+        public static T mask<T>(LsbMask<N8,N5,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
 
@@ -428,7 +437,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(LsbMask<N8,N6,T> spec)
+        public static T mask<T>(LsbMask<N8,N6,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
 
@@ -438,7 +447,7 @@ namespace Z0
         /// <param name="spec">The mask spec</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline)]
-        public static T lsb<T>(LsbMask<N8,N7,T> spec)
+        public static T mask<T>(LsbMask<N8,N7,T> spec)
             where T : unmanaged
                 => lsb(spec.f,spec.d,spec.t);
 
@@ -475,7 +484,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ulong lsb_1<W>(W w, N3 f, N1 d)
+        static ulong lsb_3x1_a<W>(W w, N3 f, N1 d)
             where W : unmanaged, ITypeNat
         {
             if(typeof(W) == typeof(N6))
@@ -497,11 +506,11 @@ namespace Z0
             else if(typeof(W) == typeof(N30))
                 return BitMasks.Lsb30x3x1;
             else 
-                return lsb_2(w,f,d);
+                return lsb_3x1_b(w,f,d);
         }
 
         [MethodImpl(Inline)]
-        static ulong lsb_2<W>(W w, N3 f, N1 d)
+        static ulong lsb_3x1_b<W>(W w, N3 f, N1 d)
             where W : unmanaged, ITypeNat
         {
             if(typeof(W) == typeof(N33))
@@ -519,10 +528,23 @@ namespace Z0
             else if(typeof(W) == typeof(N51))
                 return BitMasks.Lsb51x3x1;
             else 
-                throw unsupported<W>();                
+                return lsb_3x1_c(w,f,d);
         }
 
-
+        [MethodImpl(Inline)]
+        static ulong lsb_3x1_c<W>(W w, N3 f, N1 d)
+            where W : unmanaged, ITypeNat
+        {
+            if(typeof(W) == typeof(N54))
+                return BitMasks.Lsb54x3x1;
+            else if(typeof(W) == typeof(N57))
+                return BitMasks.Lsb57x3x1;
+            else if(typeof(W) == typeof(N60))
+                return BitMasks.Lsb60x3x1;
+            else if(typeof(W) == typeof(N63))
+                return BitMasks.Lsb63x3x1;
+            else 
+                throw unsupported<W>();                
+        }
     }
-
 }

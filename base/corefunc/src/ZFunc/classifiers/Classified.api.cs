@@ -30,7 +30,7 @@ namespace Z0
             => UnsignedKinds.Union(SignedKinds);
 
         /// <summary>
-        /// Returns the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
+        /// Specifies the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
         /// </summary>
         [MethodImpl(Inline)]
         public static string keyword(PrimalKind k)

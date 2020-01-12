@@ -14,7 +14,6 @@ namespace Z0
 
     public static partial class BitMask
     {                
-
         /// <summary>
         /// [01010101]    
         /// </summary>
@@ -106,5 +105,41 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
+
+        /// <summary>
+        /// [01010101]    
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static T mask<T>(ParityMask<N2,N1,T> spec, N0 e)
+            where T : unmanaged
+                => even(spec.f, spec.d, spec.t);
+        
+        /// <summary>
+        /// [10101010]    
+        /// </summary>
+        /// <param name="spec">The mask spec</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T mask<T>(ParityMask<N2,N1,T> spec, N1 o)
+            where T : unmanaged
+                => odd(spec. f,spec.d, spec.t);
+
+        /// <summary>
+        /// [00110011]    
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static T mask<T>(ParityMask<N2,N2,T> spec, N0 e)
+            where T : unmanaged
+                => even(spec.f, spec.d, spec.t);
+        
+        /// <summary>
+        /// [11001100]    
+        /// </summary>
+        /// <param name="spec">The mask spec</param>
+        /// <typeparam name="T">The mask data type</typeparam>
+        [MethodImpl(Inline)]
+        public static T mask<T>(ParityMask<N2,N2,T> spec, N1 o)
+            where T : unmanaged
+                => odd(spec.f, spec.d, spec.t);
     }
 }

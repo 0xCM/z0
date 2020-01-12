@@ -255,7 +255,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BitString ToBitString()
-            => BitString.load(gbits.bitseq(data).Slice(0,BitWidth));
+            => BitString.load(gbits.storeseq(data).Slice(0,BitWidth));
 
         [MethodImpl(Inline)]
         public bool Equals(UInt4 rhs)

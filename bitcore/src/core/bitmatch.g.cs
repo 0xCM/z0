@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="S">The left operand type</typeparam>
         /// <typeparam name="T">The right operand type</typeparam>
         [MethodImpl(Inline)]
-        public static bit bitmatch<S,T>(S a, int i, T b, int j)
+        public static bit bitmatch<S,T>(S a, byte i, T b, byte j)
             where S : unmanaged
             where T : unmanaged
                 => test(a,i) == test(b,j);     

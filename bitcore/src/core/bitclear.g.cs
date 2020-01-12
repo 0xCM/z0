@@ -24,6 +24,11 @@ namespace Z0
         [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
         public static T bitclear<T>(T src, byte index, byte count)
             where T : unmanaged
+                => bitclear_u(src,index,count);
+
+        [MethodImpl(Inline)]
+        static T bitclear_u<T>(T src, byte index, byte count)
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.bitclear(uint8(src), index, count));
@@ -33,6 +38,22 @@ namespace Z0
                 return generic<T>(Bits.bitclear(uint32(src), index, count));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.bitclear(uint64(src), index, count));
+            else
+                return bitclear_i(src,index,count);
+        }
+
+        [MethodImpl(Inline)]
+        static T bitclear_i<T>(T src, byte index, byte count)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(Bits.bitclear(int8(src), index, count));
+            else if(typeof(T) == typeof(short))
+                return generic<T>(Bits.bitclear(int16(src), index, count));
+            else if(typeof(T) == typeof(int))
+                return generic<T>(Bits.bitclear(int32(src), index, count));
+            else if(typeof(T) == typeof(long))
+                return generic<T>(Bits.bitclear(int64(src), index, count));
             else
                 throw unsupported<T>();
         }

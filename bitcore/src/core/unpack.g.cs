@@ -25,7 +25,7 @@ namespace Z0
             var len = bitsize<S>();
             require(dst.Length - offset >= len);
             for(var i=0; i< len; i++)
-                dst[offset + i]  = test(src, i) == bit.On ? one<T>() : zero<T>();            
+                seek(dst,offset + i)  = test(src, (byte)i) == bit.On ? one<T>() : zero<T>();            
             return dst;
         }
 
@@ -49,9 +49,9 @@ namespace Z0
                 require(dst.Length >= bitcount);
 
                 var k = 0;
-                for(var i=0; i< src.Length; i++)
-                for(var j=0; j< srcsize; j++)
-                    dst[k++]  = test(src[i], j) == bit.On ? one<T>() : zero<T>();            
+                for(var i=0; i < src.Length; i++)
+                for(byte j=0; j < srcsize; j++)
+                    seek(dst,k++)  = test(skip(src,i), j) == bit.On ? one<T>() : zero<T>();            
                 return dst;
             }
         }
@@ -70,9 +70,9 @@ namespace Z0
 
             ref var target = ref head(dst);
             var k = 0;
-            for(var i=0; i< src.Length; i++)
-            for(var j=0; j< srcsize; j++, k++)
-                seek(ref target, k) = test(src[i], j);
+            for(var i=0; i < src.Length; i++)
+            for(byte j=0; j < srcsize; j++, k++)
+                seek(ref target, k) = test(skip(src,i), j);
             return dst;
         }
 
@@ -101,8 +101,8 @@ namespace Z0
 
             ref var target = ref head(dst);
             var k = 0;
-            for(var i=0; i< src.Length; i++)
-            for(var j=0; j< srcsize; j++, k++)
+            for(var i=0; i < src.Length; i++)
+            for(byte j=0; j< srcsize; j++, k++)
                 seek(ref target, k) = test(src[i], j);
             return dst;
         }

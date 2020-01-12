@@ -40,73 +40,78 @@ namespace Z0
             public static implicit operator PrimalKind(PrimalKind<T> src)
                 => src.Classifier;
 
+            [MethodImpl(Inline)]
+            public static implicit operator PrimalKind<T>(T src)
+                => default;
+
             public PrimalKind Classifier {[MethodImpl(Inline)] get  => PrimalType.kind<T>();}
-        }
-
-        public static Primal8u u8
-        {
-            [MethodImpl(Inline)]
-            get => default;
-        }
-
-        public static Primal8i i8
-        {
-            [MethodImpl(Inline)]
-            get => default;
-        }
-
-        public static Primal16u u16
-        {
-            [MethodImpl(Inline)]
-            get => default;
-        }
-
-        public static Primal16i i16
-        {
-            [MethodImpl(Inline)]
-            get => default;
-        }
-
-        public static Primal32u u32
-        {
-            [MethodImpl(Inline)]
-            get => default;
-        }
-
-        public static Primal32i i32
-        {
-            [MethodImpl(Inline)]
-            get => default;
-        }
-
-        public static Primal64u u64
-        {
-            [MethodImpl(Inline)]
-            get => default;
-        }
-
-        public static Primal64i i64
-        {
-            [MethodImpl(Inline)]
-            get => default;
-        }
-
-        public static Primal32f f32
-        {
-            [MethodImpl(Inline)]
-            get => default;
-        }
-
-        public static Primal64f f64
-        {
-            [MethodImpl(Inline)]
-            get => default;
         }
 
         [MethodImpl(Inline)]
         public static PrimalKind<T> pkind<T>(T t = default)
             where T : unmanaged
                 => default;
+
+        public static PrimalKind<byte> u8
+        {
+            [MethodImpl(Inline)]
+            get => default;
+        }
+
+        public static PrimalKind<sbyte> i8
+        {
+            [MethodImpl(Inline)]
+            get => default;
+        }
+
+        public static PrimalKind<ushort> u16
+        {
+            [MethodImpl(Inline)]
+            get => default;
+        }
+
+        public static PrimalKind<short> i16
+        {
+            [MethodImpl(Inline)]
+            get => default;
+        }
+
+        public static PrimalKind<uint> u32
+        {
+            [MethodImpl(Inline)]
+            get => default;
+        }
+
+        public static PrimalKind<int> i32
+        {
+            [MethodImpl(Inline)]
+            get => default;
+        }
+
+        public static PrimalKind<ulong> u64
+        {
+            [MethodImpl(Inline)]
+            get => default;
+        }
+
+        public static PrimalKind<long> i64
+        {
+            [MethodImpl(Inline)]
+            get => default;
+        }
+
+        public static PrimalKind<float> f32
+        {
+            [MethodImpl(Inline)]
+            get => default;
+        }
+
+        public static PrimalKind<double> f64
+        {
+            [MethodImpl(Inline)]
+            get => default;
+        }
+
     }
 }
 

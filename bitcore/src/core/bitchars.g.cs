@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static void bitchars<T>(T src, Span<char> dst, int offset = 0)
             where T : unmanaged
                 => BitStore.bitchars(src,dst,offset);
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static ReadOnlySpan<char> bitchars<T>(in T src)
             where T : unmanaged
         {
@@ -44,32 +44,24 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static Span<char> bitchars<T>(ReadOnlySpan<T> src, int? maxlen = null)
             where T : unmanaged
         {
             var seglen = bitsize<T>();
-            Span<char> dst = new char[src.Length * seglen];
-            for(var i=0; i<src.Length; i++)
-                bitchars(src[i]).CopyTo(dst, i*seglen);
+            var srclen = src.Length;
+            Span<char> dst = new char[srclen * seglen];
+            ref readonly var input = ref head(src);
+
+            for(var i=0; i<srclen; i++)
+                bitchars(skip(input,i)).CopyTo(dst, i*seglen);
             return maxlen != null && dst.Length >= maxlen ?  dst.Slice(0,maxlen.Value) :  dst;
         }
         
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static Span<char> bitchars<T>(Span<T> src, int? maxlen = null)
             where T : unmanaged
                 => bitchars(src.ReadOnly(), maxlen);    
         
-        public static ref T parse<T>(ReadOnlySpan<char> src, int offset, out T dst)
-            where T : unmanaged
-        {            
-            var last = math.min(bitsize<T>(), src.Length) - 1;
-            ref readonly var input = ref head(src);            
-            dst = default;
-
-            for(int i=offset, pos = 0; i<= last; i++, pos++)
-                if(skip(input,i) == bit.One)
-                    dst = gbits.enable(dst, pos);                        
-            return ref dst;
-        }
     }
 }

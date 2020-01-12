@@ -297,7 +297,7 @@ namespace Z0
                 for(var i=0; i<src.Length; i++)
                 {
                     var x0 = src[i];
-                    var x1 = gbits.bitseq(x0);
+                    var x1 = gbits.storeseq(x0);
                     var seqlen = x1.Length;
                     Claim.eq(seqlen, bitsize<T>());
 

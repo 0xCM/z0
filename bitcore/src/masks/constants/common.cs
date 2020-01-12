@@ -12,7 +12,6 @@ namespace Z0
 
     partial class BitMasks
     {            
-
         /// <summary>
         /// [10000000]
         /// </summary>
