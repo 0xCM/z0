@@ -92,7 +92,8 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a vectorized binary predicate over 128-bit operands that also supports componentwise decomposition/evaluation
+    /// Characterizes a vectorized binary predicate over 128-bit operands that 
+    /// also supports componentwise decomposition/evaluation
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
@@ -103,7 +104,8 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a vectorized binary predicate over 128-bit operands that also supports componentwise decomposition/evaluation
+    /// Characterizes a vectorized binary predicate over 128-bit operands that 
+    /// also supports componentwise decomposition/evaluation
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]

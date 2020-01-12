@@ -11,8 +11,8 @@ namespace Z0
     
     using static zfunc;
 
-    public abstract class TestContext<T> : Context<T>, ITestContext
-        where T : TestContext<T>
+    public abstract class TestContext<U> : Context<U>, ITestContext
+        where U : TestContext<U>
     {
         protected TestContext(ITestConfig config = null, IPolyrand random = null)
             : base(random ?? Rng.WyHash64(Seed64.Seed00))
@@ -71,15 +71,20 @@ namespace Z0
         /// Produces the name of the test case for the specified function
         /// </summary>
         /// <param name="f">The function</param>
-        [MethodImpl(Inline)]
         public string CaseName(IFunc f)
             => $"{GetType().Name}/{f.Moniker}";
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name
         /// </summary>
+        /// <param name="m">Moniker that identifies the operation under test</param>
+        public string CaseName(Moniker m)
+            => $"{GetType().Name}/{m}";
+
+        /// <summary>
+        /// Produces the name of the test case predicated on fully-specified name, exluding the host name
+        /// </summary>
         /// <param name="fullname">The full name of the test</param>
-        [MethodImpl(Inline)]
         public string CaseName(string fullname)
             => $"{GetType().Name}/{fullname}";
 
@@ -87,15 +92,24 @@ namespace Z0
         /// Produces the name of the test case predicated on a root name and parametric type
         /// </summary>
         /// <param name="root">The root name</param>
-        [MethodImpl(Inline)]
         protected string CaseName<C>(string root, C t = default)
             => $"{GetType().Name}/{root}_{primalsig(t)}";
 
-        [MethodImpl(Inline)]
         protected string CaseName<W,C>(string root, W w = default, C t = default)
             where W : unmanaged, ITypeNat
             where C : unmanaged
                 => $"{GetType().Name}/{moniker(root,w,t)}";
+
+        protected static Moniker SubjectId(string opname, PrimalKind kind)
+            => Moniker.define($"{opname}_subject",kind);
+
+        protected static Moniker SubjectId<T>(string opname, T t = default)
+            where T : unmanaged
+                => SubjectId(opname, PrimalType.kind<T>());
+
+        protected static Moniker BaselineId<K>(string opname,K t = default)
+            where K : unmanaged
+                => moniker<K>($"{opname}_baseline");
 
         public IEnumerable<TestCaseRecord> TakeOutcomes()
         {

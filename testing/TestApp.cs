@@ -88,6 +88,7 @@ namespace Z0
                 return;
 
             var results = new List<TestCaseRecord>();
+            var unit = default(IUnitTest);
             try
             {
                 var execTime = Duration.Zero;
@@ -95,12 +96,12 @@ namespace Z0
                 var name = host.DisplayName();
 
                 Trace(AppMsg.Define($"Creating unit {host.Name}", SeverityLevel.Babble));
-                var instance = host.CreateInstance<IUnitTest>();
-                instance.Configure(Config);                
+                unit = host.CreateInstance<IUnitTest>();
+                unit.Configure(Config);                
 
-                if(instance.Enabled)
-                    iter(Tests(host), t =>  execTime += Run(instance, name, t, results));                
-                Enqueue(instance.TakeBenchmarks().ToArray());
+                if(unit.Enabled)
+                    iter(Tests(host), t =>  execTime += Run(unit, name, t, results));                
+                Enqueue(unit.TakeBenchmarks().ToArray());
                 
                 print(AppMsg.Define($"{host.Name} exectime {execTime.Ms} ms, runtime = {snapshot(runtimer).Ms} ms", SeverityLevel.Info));
 
@@ -109,8 +110,12 @@ namespace Z0
             {
                 error($"Host execution failed: {e}", this);
             }  
-
-            Enqueue(results);            
+            finally
+            {
+                Enqueue(results);
+                if(unit is IDisposable d)
+                    d.Dispose();
+            }
         }
 
         public Duration RunAction(IUnitTest unit, Action exec)
@@ -161,7 +166,6 @@ namespace Z0
         IEnumerable<MethodInfo> Tests(Type host)
             =>  host.DeclaredMethods().Public().NonGeneric().WithArity(0);
 
-
         IEnumerable<AppMsg> GetErrorMessages(string name, Exception e)
         {
             if(e.InnerException is ClaimException claim)
@@ -172,8 +176,7 @@ namespace Z0
             else
                 yield return ErrorMessages.Unanticipated(e ?? e.InnerException);
 
-            yield return AppMsg.Define($"{name} failed.", SeverityLevel.Error);                
-
+            yield return AppMsg.Define($"{name} failed.", SeverityLevel.Error);
         }
 
         Duration Run(IUnitTest unit, string hostpath, MethodInfo test, IList<TestCaseRecord> results)
@@ -202,15 +205,6 @@ namespace Z0
                 exectime = snapshot(sw);
                 messages.AddRange(unit.DequeueMessages());                
                 messages.AddRange(GetErrorMessages(testName,e));
-
-                // if(e.InnerException is ClaimException claim)
-                //     messages.Add(claim.Message);
-                // else if(e.InnerException is AppException app)
-                //     messages.Add(app.Message);
-                // else
-                //     messages.Add(ErrorMessages.Unanticipated(e ?? e.InnerException));
-
-                // messages.Add(AppMsg.Define($"{testName} failed. {exectime.Ms}ms", SeverityLevel.Error));  
                 results.Add(TestCaseRecord.Define(testName,false,exectime));
                               
             }

@@ -21,7 +21,7 @@ namespace Z0
 
             var fmt = text();
             var dataType = typeof(T).DisplayName();
-            fmt.AppendLine(new string(AsciSym.Minus, 80));
+            fmt.AppendLine(new string(AsciSym.Dash, 80));
             fmt.AppendLine($"shuffle256:Vec256<{dataType}> -> spec:byte -> {specFmt}");
             fmt.AppendLine(xFmt);
             fmt.AppendLine(dstFmt);
@@ -37,7 +37,7 @@ namespace Z0
             var specFmt = spec.ToBitString();
             var fmt = text();
             var dataType = typeof(T).DisplayName();
-            fmt.AppendLine(new string(AsciSym.Minus, 80));
+            fmt.AppendLine(new string(AsciSym.Dash, 80));
             fmt.AppendLine($"permute2x128:Vec256<{dataType}> -> Vec256<{dataType}> -> {specFmt}");
             fmt.AppendLine(xFmt);
             fmt.AppendLine($"{yFmt}");

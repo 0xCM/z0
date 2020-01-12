@@ -16,7 +16,7 @@ namespace Z0
             _Symbols = new Symbol<AsciAlphabet>[]
             {
                 Amp, At, Bang, BSlash, Caret, Colon, Comma,Dollar, Dot, Eq,
-                FSlash, Gt, Hash, LBrace, LBracket, LParen, Lt, Minus, Pipe, Plus,
+                FSlash, Gt, Hash, LBrace, LBracket, LParen, Lt, Dash, Pipe, Plus,
                 Percent, Quote, RParen, RBrace, RBracket, Semicolon, Space,
                 SQuote, Star, Tilde,
             };            
@@ -56,6 +56,11 @@ namespace Z0
         /// Defines the ',' symbol
         /// </summary>
         public const char Comma = ',';
+
+        /// <summary>
+        /// Defines the '-' character
+        /// </summary>
+        public const char Dash = '-';
 
         /// <summary>
         /// Defines the '$' symbol
@@ -106,11 +111,6 @@ namespace Z0
         /// Defines the '<' character
         /// </summary>
         public const char Lt = '<';
-
-        /// <summary>
-        /// Defines the '-' character
-        /// </summary>
-        public const char Minus = '-';
 
         /// <summary>
         /// Defines the '%' character

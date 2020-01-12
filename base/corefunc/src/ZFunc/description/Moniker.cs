@@ -13,7 +13,7 @@ namespace Z0
 
     using static zfunc;
 
-    public readonly struct Moniker
+    public readonly partial struct Moniker
     {
         /// <summary>
         /// The moniker text
@@ -24,92 +24,6 @@ namespace Z0
         /// The zero moniker
         /// </summary>
         public static Moniker Empty => new Moniker(string.Empty);
-
-        [MethodImpl(Inline)]   
-        public static Moniker define(string text)
-            => new Moniker(text);
-
-        /// <summary>
-        /// Produces an identifier {bitsize(k)}{u | i | f} for a primal kind k
-        /// </summary>
-        /// <param name="k">The primal kind</param>
-        [MethodImpl(Inline)]   
-        public static string primalsig(PrimalKind k)
-            => $"{Classified.width(k)}{Classified.indicator(k)}";
-
-        /// <summary>
-        /// Produces an identifier of the form {opname}_{g}{bitsize(kind)}{u | i | f}
-        /// </summary>
-        /// <param name="opname">The base operator name</param>
-        /// <param name="k">The primal kind over which the identifier is deined</param>
-        [MethodImpl(Inline)]   
-        public static Moniker define(string opname, PrimalKind k, bool generic)
-            => define(opname, 0, k, generic, false);
-
-        /// <summary>
-        /// Produces an identifier of the form {opname}_{bitsize(kind)}{u | i | f}
-        /// </summary>
-        /// <param name="opname">The base operator name</param>
-        /// <param name="k">The primal kind over which the identifier is deined</param>
-        [MethodImpl(Inline)]   
-        public static Moniker define(string opname, PrimalKind k)
-            => define(opname, 0, k, false, false);
-
-        /// <summary>
-        /// Produces an identifier of the form {opname}_g{bitsize(kind)}{u | i | f}
-        /// </summary>
-        /// <param name="opname">The base operator name</param>
-        /// <param name="k">The primal kind over which the identifier is deined</param>
-        [MethodImpl(Inline)]   
-        public static Moniker generic(string opname, PrimalKind k)
-            => define(opname, 0, k, true, false);
-
-        /// <summary>
-        /// Defines an identifier of the form {opname}_{w}X{bitsize(k)}{u | i | f}
-        /// </summary>
-        /// <param name="opname">The base operator name/operator classifier</param>
-        /// <param name="w">The bit width</param>
-        /// <param name="k">The primal cell kind</param>
-        [MethodImpl(Inline)]   
-        public static Moniker define<W>(string opname, PrimalKind k, W w)
-            where W : unmanaged, ITypeNat
-                => new Moniker($"{opname}_{w}{SegSep}{Classified.primalsig(k)}");
-
-        /// <summary>
-        /// Defines a moniker of the form {opname}_{w}X{bitsize(k)}{u | i | f}{_asm} to identify an operation over a segmented type of bitwidth w over a primal kind k
-        /// </summary>
-        /// <param name="opname">The base operator name/operator classifier</param>
-        /// <param name="w">For segmented types, the total bit-width; otherwise 0</param>
-        /// <param name="k">The primal kind</param>
-        public static Moniker define(string opname, int w, PrimalKind k, bool generic, bool asm)
-        {
-            var g = generic ? $"{GenericIndicator}" : string.Empty;
-            var asmPart = asm ? $"{OpSep}{AsmIndicator}" : string.Empty;
-            if(w != 0)
-                return new Moniker($"{opname}{OpSep}{g}{w}{SegSep}{Classified.primalsig(k)}{asmPart}");
-            else
-                return new Moniker($"{opname}_{g}{Classified.primalsig(k)}{asmPart}");
-        }
-
-        /// <summary>
-        /// Makes a best-guess at defining an appropriate moniker for a specified method
-        /// </summary>
-        /// <param name="method">The operation method</param>
-        public static Moniker define(MethodInfo method)
-        {
-            if(method.IsVectorized())
-                return FromVectorized(method);
-            else if(method.IsBlocked())
-                return FromBlocked(method);
-            else if(method.IsOperator())
-                return FromPrimalOp(method);
-            else if(method.IsPredicate())
-                return FromPredicate(method);
-            else if(method.IsPrimalShift())
-                return FromShift(method);
-            else
-                return new Moniker($"{method.Name}_{method.GetHashCode()}");
-        }
 
         public static implicit operator string(Moniker src)
             => src.Text;
@@ -142,6 +56,12 @@ namespace Z0
             => Text.TakeBefore(OpSep);
 
         /// <summary>
+        /// The moniker's suffix, if any
+        /// </summary>
+        public string Suffix
+            => HasSuffix ? Text.TakeAfter(SuffixSep) : string.Empty;
+
+        /// <summary>
         /// Indicates whether the moniker is emtpy
         /// </summary>
         public bool IsEmpty
@@ -151,7 +71,7 @@ namespace Z0
         /// Indicates whether the operation is defined over a blocked or vectorized type
         /// </summary>
         public bool IsSegmented
-            => Text.Contains(SegSep);
+            => Metrics.Contains(SegSep);
 
         /// <summary>
         /// Indicates whether the operation is defined over a vectorized type
@@ -193,7 +113,13 @@ namespace Z0
         /// Specifies whether the operation was reified from assembly language
         /// </summary>
         public bool IsAsm
-            => Text.EndsWith($"{OpSep}{AsmIndicator}");
+            => Suffix == AsmIndicator; //Text.EndsWith(SuffixSep + AsmIndicator);
+
+        /// <summary>
+        /// Specifies whether the moniker has a suffix
+        /// </summary>
+        public bool HasSuffix
+            => Text.Contains(SuffixSep);
 
         /// <summary>
         /// Specifies the operation name
@@ -205,7 +131,7 @@ namespace Z0
         /// Enables the assembly indicator
         /// </summary>
         public Moniker WithAsm()
-            => define(Name, SegmentedWidth, PrimalKind, IsGeneric, true);
+            => IsAsm ? this : define(Name, SegmentedWidth, PrimalKind, IsGeneric, true);
         
         /// <summary>
         /// Enables the generic indicator
@@ -240,7 +166,7 @@ namespace Z0
         char NumericIndicator
         {
             [MethodImpl(Inline)]
-            get => Text.Last();
+            get => (HasSuffix ? Text.TakeBefore(SuffixSep) : Text).Last();
         }
 
         PrimalKind ParsePrimalKind()
@@ -254,9 +180,10 @@ namespace Z0
 
         int ParsePrimalWidth()
         {
-            var t = (IsSegmented ? Metrics.Split(SegSep)[1] : Metrics);
-            var ss = t.Substring(0, t.Length - 1);
-            if(int.TryParse(ss, out var n))
+            var s0 = (IsSegmented ? Metrics.Split(SegSep)[1] : Metrics);
+            var s1 = HasSuffix ? s0.TakeBefore(SuffixSep) : s0;
+            var s2 = s1.Substring(0, s1.Length - 1);
+            if(int.TryParse(s2, out var n))
                 return n;
             else 
                 return 0;
@@ -281,97 +208,11 @@ namespace Z0
             return n;
         }
 
-        /// <summary>
-        /// Derives a moniker for a primal operator
-        /// </summary>
-        /// <param name="method">The operation method</param>
-        static Moniker FromPrimalOp(MethodInfo method)
-            => Moniker.define(method.Name, method.ReturnType.Kind(), method.IsConstructedGenericMethod);
-
-        /// <summary>
-        /// Derives a moniker for a primal predicate
-        /// </summary>
-        /// <param name="method">The operation method</param>
-        static Moniker FromPredicate(MethodInfo method)
-            => Moniker.define(method.Name, method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
-
-        /// <summary>
-        /// Derives a moniker for primal shift/rot operator
-        /// </summary>
-        /// <param name="method">The operation method</param>
-        static Moniker FromShift(MethodInfo method)
-            => Moniker.define(method.Name, method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
-
-        /// <summary>
-        /// Derives a moniker for an operation over blocked domain(s)
-        /// </summary>
-        /// <param name="method">The operation method</param>
-        static Moniker FromBlocked(MethodInfo method)
-        {
-            var type = method.ParameterTypes().First();       
-            var segkind = type.GenericTypeArguments.FirstOrDefault().Kind();     
-            var generic = method.IsConstructedGenericMethod;
-            var w = type.BitWidth();
-            var opname = method.Name;
-            if(generic)
-                return new Moniker($"{opname}_gb{w}{SegSep}{Classified.primalsig(segkind)}") ;
-            else 
-                return  new Moniker($"{opname}_b{w}{SegSep}{Classified.primalsig(segkind)}");                            
-        }
-
-        /// <summary>
-        /// Derives a moniker for an operation over segmented domain(s)
-        /// </summary>
-        /// <param name="method">The operation method</param>
-        static Moniker FromVectorOp(MethodInfo method)
-        {
-            var v = method.ParameterTypes().First();       
-            var segkind = v.GenericTypeArguments.FirstOrDefault().Kind();         
-            return define(method.Name, v.BitWidth(), segkind, method.IsConstructedGenericMethod,false);                            
-        }
-
-        /// <summary>
-        /// Derives a moniker for an operation over intrinsic vector domain(s)
-        /// </summary>
-        /// <param name="method">The operation method</param>
-        static Moniker FromVectorized(MethodInfo method)
-        {
-            var input = method.ParameterTypes().ToArray();
-            var name = method.Name + AsciSym.Underscore;
-            
-            if(method.IsOperator())
-                return FromVectorOp(method);
-            
-            if(method.IsConstructedGenericMethod)
-                name += GenericIndicator;
-
-            for(var i=0; i<input.Length; i++)
-            {
-                var segment = input[i];
-                var w = segment.BitWidth();
-                if(w == 0)
-                    continue;
-                
-                if(i != 0)
-                    name += AsciSym.Underscore;
-
-                if(segment.IsVector())
-                {
-                    var segtype = segment.GetGenericArguments().Single();
-                    var segwidth = segtype.BitWidth();
-                    name += ($"{w}x{segwidth}" + segtype.Kind().Sign());
-                }
-                else
-                {
-                    name += ($"{w}" + segment.Kind().Sign());
-                }                
-            }
-            return new Moniker(name);            
-        }
-
         const char SegSep = AsciLower.x;
 
         const char OpSep = AsciSym.Underscore;
+
+        const char SuffixSep = AsciSym.Dash;
 
         const char UIntIndicator = AsciLower.u;
 

@@ -270,7 +270,7 @@ namespace Z0
                 }
             }
 
-            CheckAction<T>(check, "bscreate");
+            CheckAction(check, CaseName<T>("bscreate"));
         }
             
         void bsextract_check<T>(T t = default)
@@ -287,7 +287,7 @@ namespace Z0
                 }
             }  
 
-            CheckAction<T>(check, "bsextract");
+            CheckAction(check, CaseName<T>("bsextract"));
         }
 
         void bsparse_check<T>(T t = default)

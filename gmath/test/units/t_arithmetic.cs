@@ -300,14 +300,14 @@ namespace Z0
         public void check_increments()
         {
             const string name = "increments";
-            CheckAction(() => check_increments(z8), name, z8);
-            CheckAction(() => check_increments(z8i), name, z8i);
-            CheckAction(() => check_increments(z16), name, z16);
-            CheckAction(() => check_increments(z16i), name, z16i);
-            CheckAction(() => check_increments(z32), name, z32);
-            CheckAction(() => check_increments(z32i), name, z32i);
-            CheckAction(() => check_increments(z64), name, z64);
-            CheckAction(() => check_increments(z64i), name, z64i);
+            CheckAction(() => check_increments(z8), CaseName(name, z8));
+            CheckAction(() => check_increments(z8i), CaseName(name, z8i));
+            CheckAction(() => check_increments(z16), CaseName(name, z16));
+            CheckAction(() => check_increments(z16i), CaseName(name, z16i));
+            CheckAction(() => check_increments(z32), CaseName(name, z32));
+            CheckAction(() => check_increments(z32i), CaseName(name, z32i));
+            CheckAction(() => check_increments(z64), CaseName(name, z64));
+            CheckAction(() => check_increments(z64i), CaseName(name, z64i));
         }
 
         void check_increments<T>(T first = default)

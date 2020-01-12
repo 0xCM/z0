@@ -118,8 +118,6 @@ namespace Z0
             Claim.eq(VectorType.kind(typeof(Vector256<long>)), VectorKind.Vector256x64i);
             Claim.eq(VectorType.kind(typeof(Vector256<float>)), VectorKind.Vector256x32f);
             Claim.eq(VectorType.kind(typeof(Vector256<double>)), VectorKind.Vector256x64f);
-
-
         }
 
         public void classify_vector_type()

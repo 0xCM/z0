@@ -137,7 +137,7 @@ namespace Z0
     /// <summary>
     /// Encapsulates a block of encoded assembly
     /// </summary>
-    public readonly ref struct AsmCode<T>
+    public readonly struct AsmCode<T>
         where T : unmanaged
     {
         readonly AsmCode Code;

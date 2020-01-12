@@ -14,16 +14,7 @@ namespace Z0
     using static zfunc;
 
     public readonly struct BinaryLiteral
-    {                        
-        public static IEnumerable<BinaryLiteral<T>> From<T>(Type src)
-            where T : unmanaged
-                => from f in src.Literals()
-                    where f.FieldType == typeof(T)
-                    let a = src.CustomAttribute<BinaryLiteralAttribute>()
-                    where a.IsSome()
-                    select Define<T>(f.Name,(T)f.GetValue(null), a.Require().Text);
-
-                    
+    {                                            
         [MethodImpl(Inline)]
         public static BinaryLiteral Define(string name, object value, string text)
             => new BinaryLiteral(name,value,text);
@@ -57,7 +48,6 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
     }
 
     public readonly struct BinaryLiteral<T>

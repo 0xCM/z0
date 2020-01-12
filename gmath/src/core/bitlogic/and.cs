@@ -11,6 +11,7 @@ namespace Z0
 
     partial class math
     {
+        
         [MethodImpl(Inline)]
         public static sbyte and(sbyte a, sbyte b)
             => (sbyte)(a & b);

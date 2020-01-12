@@ -46,7 +46,6 @@ namespace Z0
     public interface IVEmitter256<T> : IVEmitter<N256,Vector256<T>,T>
         where T : unmanaged
     {
-
         
     }    
 }

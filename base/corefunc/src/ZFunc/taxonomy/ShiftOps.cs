@@ -31,7 +31,6 @@ namespace Z0
         
     }
 
-
     /// <summary>
     /// Characterizes a vectorized shift operator parameterized by operand bit-width
     /// </summary>

@@ -34,7 +34,6 @@ namespace Z0
         K InvokeScalar(T a, T b);
     }
 
-
     /// <summary>
     /// Defines trait for a vecorized binary scalar funnction that supports componentwise decomposition/evaluation
     /// </summary>
