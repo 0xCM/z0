@@ -16,11 +16,13 @@ namespace Z0
         public readonly struct Sub128<T> : IVBinOp128D<T>
             where T : unmanaged
         {
-            public static Sub128<T> Op => default;
-
             public const string Name = "vsub";
 
-            public Moniker Moniker => moniker<N128,T>(Name);
+            public static Sub128<T> Op => default;
+
+            static N128 w => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vsub(x,y);
@@ -33,11 +35,13 @@ namespace Z0
         public readonly struct Sub256<T> : IVBinOp256D<T>
             where T : unmanaged
         {
-            public static Sub256<T> Op => default;
-
             public const string Name = "vsub";
 
-            public Moniker Moniker => moniker<N256,T>(Name);
+            public static Sub256<T> Op => default;
+
+            static N256 w => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vsub(x,y);

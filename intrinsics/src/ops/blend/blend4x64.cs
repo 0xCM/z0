@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector256<sbyte> vblend(Vector256<sbyte> x, Vector256<sbyte> y, Blend4x64 spec)        
+        public static Vector256<sbyte> vblend(Vector256<sbyte> x, Vector256<sbyte> y, [Imm] Blend4x64 spec)        
             => v8i(Blend(v64f(x), v64f(y), (byte)spec));
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> vblend(Vector256<byte> x, Vector256<byte> y, Blend4x64 spec)        
+        public static Vector256<byte> vblend(Vector256<byte> x, Vector256<byte> y, [Imm] Blend4x64 spec)        
             => v8u(Blend(v64f(x), v64f(y), (byte)spec));
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector256<short> vblend(Vector256<short> x, Vector256<short> y, Blend4x64 spec)        
+        public static Vector256<short> vblend(Vector256<short> x, Vector256<short> y, [Imm] Blend4x64 spec)        
             => v16i(Blend(v64f(x), v64f(y), (byte)spec));
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vblend(Vector256<ushort> x, Vector256<ushort> y, Blend4x64 spec)        
+        public static Vector256<ushort> vblend(Vector256<ushort> x, Vector256<ushort> y, [Imm] Blend4x64 spec)        
             => v16u(Blend(v64f(x), v64f(y), (byte)spec));
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector256<int> vblend(Vector256<int> x, Vector256<int> y, Blend4x64 spec)        
+        public static Vector256<int> vblend(Vector256<int> x, Vector256<int> y, [Imm] Blend4x64 spec)        
             => v32i(Blend(v64f(x), v64f(y), (byte)spec));
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vblend(Vector256<uint> x, Vector256<uint> y, Blend4x64 spec)        
+        public static Vector256<uint> vblend(Vector256<uint> x, Vector256<uint> y, [Imm] Blend4x64 spec)        
             => v32u(Blend(v64f(x), v64f(y), (byte)spec));
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector256<long> vblend(Vector256<long> x, Vector256<long> y, Blend4x64 spec)        
+        public static Vector256<long> vblend(Vector256<long> x, Vector256<long> y, [Imm] Blend4x64 spec)        
             => v64i(Blend(v64f(x), v64f(y), (byte)spec));
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vblend(Vector256<ulong> x, Vector256<ulong> y, Blend4x64 spec)        
+        public static Vector256<ulong> vblend(Vector256<ulong> x, Vector256<ulong> y, [Imm] Blend4x64 spec)        
             => v64u(Blend(v64f(x), v64f(y), (byte)spec));
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector256<double> vblend(Vector256<double> x, Vector256<double> y, Blend4x64 spec)        
+        public static Vector256<double> vblend(Vector256<double> x, Vector256<double> y, [Imm] Blend4x64 spec)        
             => Blend(x, y, (byte)spec);
 
 

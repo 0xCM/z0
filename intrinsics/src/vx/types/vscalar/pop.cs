@@ -15,11 +15,13 @@ namespace Z0
         public readonly struct Pop128<T> : IVTernaryScalar128D<T,uint>
             where T : unmanaged
         {
-            public static Pop128<T> Op => default;
-
             public const string Name = "vpop";
 
-            public Moniker Moniker => moniker<N128,T>(Name);
+            public static Pop128<T> Op => default;
+
+            static N128 w => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public uint Invoke(Vector128<T> x,Vector128<T> y,Vector128<T> z) => ginx.vpop(x,y,z);
@@ -31,11 +33,13 @@ namespace Z0
         public readonly struct Pop256<T> : IVTernaryScalar256D<T,uint>
             where T : unmanaged
         {
-            public static Pop256<T> Op => default;
-
             public const string Name = "vpop";
 
-            public Moniker Moniker => moniker<N256,T>(Name);
+            public static Pop256<T> Op => default;
+
+            static N256 w => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public uint Invoke(Vector256<T> x,Vector256<T> y,Vector256<T> z) => ginx.vpop(x,y,z);

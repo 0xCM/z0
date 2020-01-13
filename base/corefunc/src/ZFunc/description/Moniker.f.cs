@@ -47,9 +47,7 @@ partial class zfunc
         => Moniker.define(opname,typeof(T).Kind());
 
     /// <summary>
-    /// Defines a moniker with rendering {opname}_WxN{u | i | f} that identifies 
-    /// an operation over intrinsic vectors or other segmented types of bit-width W
-    /// with segments of bit-width N := bitsize[T]
+    /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
     /// </summary>
     /// <param name="opname">The base operator name</param>
     /// <param name="w">The covering bit width representative</param>
@@ -61,4 +59,31 @@ partial class zfunc
         where W : unmanaged, ITypeNat
         where T : unmanaged
             => Moniker.define(opname,PrimalType.kind<T>(),w);
+
+    /// <summary>
+    /// Defines an identifier of the form {opname}_128xN{u | i | f} where N := bitsize[T]
+    /// </summary>
+    /// <param name="opname">The base operator name</param>
+    /// <param name="w">The covering bit width representative</param>
+    /// <param name="t">A primal cell type representative</param>
+    /// <typeparam name="W">The bit width type</typeparam>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]   
+    public static Moniker moniker<T>(string opname, N128 w, T t = default)
+        where T : unmanaged
+            => Moniker.define(opname,PrimalType.kind<T>(),w);
+
+    /// <summary>
+    /// Defines an identifier of the form {opname}_256xN{u | i | f} where N := bitsize[T]
+    /// </summary>
+    /// <param name="opname">The base operator name</param>
+    /// <param name="w">The covering bit width representative</param>
+    /// <param name="t">A primal cell type representative</param>
+    /// <typeparam name="W">The bit width type</typeparam>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]   
+    public static Moniker moniker<T>(string opname, N256 w, T t = default)
+        where T : unmanaged
+            => Moniker.define(opname,PrimalType.kind<T>(),w);
+
 }

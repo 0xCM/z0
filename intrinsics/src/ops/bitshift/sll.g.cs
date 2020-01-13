@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="count">The shift offset</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
-        public static Vector128<T> vsll<T>(Vector128<T> x, byte count)
+        public static Vector128<T> vsll<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="count">The shift offset</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
-        public static Vector256<T> vsll<T>(Vector256<T> x, byte count)
+        public static Vector256<T> vsll<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -68,9 +68,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return As.vgeneric<T>(dinx.vsll(v8i(x), offset));
+                return vgeneric<T>(dinx.vsll(v8i(x), offset));
             else if(typeof(T) == typeof(short))
-                return As.vgeneric<T>(dinx.vsll(v16i(x), offset));
+                return vgeneric<T>(dinx.vsll(v16i(x), offset));
             else if(typeof(T) == typeof(int))
                 return vgeneric<T>(dinx.vsll(v32i(x), offset));
             else 
@@ -82,7 +82,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vsll(v8u(x), offset));
+                return vgeneric<T>(dinx.vsll(v8u(x), offset));
             else if(typeof(T) == typeof(ushort))
                 return vgeneric<T>(dinx.vsll(v16u(x), offset));
             else if(typeof(T) == typeof(uint)) 

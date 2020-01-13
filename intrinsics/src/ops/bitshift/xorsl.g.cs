@@ -18,20 +18,20 @@ namespace Z0
         /// Computes z := x^(x << offset)
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="shift">The shift offset</param>
+        /// <param name="count">The shift offset</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
-        public static Vector128<T> vxorsl<T>(Vector128<T> x, byte shift)
+        public static Vector128<T> vxorsl<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vxorsl(v8u(x), shift));
+                return vgeneric<T>(dinx.vxorsl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vxorsl(v16u(x), shift));
+                return vgeneric<T>(dinx.vxorsl(v16u(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dinx.vxorsl(v32u(x), shift));
+                return vgeneric<T>(dinx.vxorsl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vxorsl(v64u(x), shift));
+                return vgeneric<T>(dinx.vxorsl(v64u(x), count));
             else
                 throw unsupported<T>();
         }
@@ -40,20 +40,20 @@ namespace Z0
         /// Computes z := x^(x << offset)
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <param name="shift">The shift offset</param>
+        /// <param name="count">The shift offset</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
-        public static Vector256<T> vxorsl<T>(Vector256<T> x, byte shift)
+        public static Vector256<T> vxorsl<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vxorsl(v8u(x), shift));
+                return vgeneric<T>(dinx.vxorsl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vxorsl(v16u(x), shift));
+                return vgeneric<T>(dinx.vxorsl(v16u(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return vgeneric<T>(dinx.vxorsl(v32u(x), shift));
+                return vgeneric<T>(dinx.vxorsl(v32u(x), count));
             else if(typeof(T) == typeof(ulong)) 
-                return vgeneric<T>(dinx.vxorsl(v64u(x), shift));
+                return vgeneric<T>(dinx.vxorsl(v64u(x), count));
             else
                 throw unsupported<T>();
         }

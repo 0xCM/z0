@@ -15,9 +15,13 @@ namespace Z0
         public readonly struct TestZ128<T> : IVBinPred128D<T>
             where T : unmanaged
         {
+            public const string Name = "vtestz";
+
+            static N128 w => default;
+
             public static TestZ128<T> Op => default;
 
-            public Moniker Moniker => moniker<N128,T>("vtestz");
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector128<T> x,Vector128<T> y) => ginx.vtestz(x,y);
@@ -29,9 +33,13 @@ namespace Z0
         public readonly struct TestZ256<T> : IVBinPred256<T>
             where T : unmanaged
         {
+            public const string Name = "vtestz";
+
+            static N256 w => default;
+
             public static TestZ256<T> Op => default;
 
-            public Moniker Moniker => moniker<N256,T>("vtestz");
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector256<T> x,Vector256<T> y) => ginx.vtestz(x,y);

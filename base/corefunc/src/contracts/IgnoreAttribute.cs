@@ -13,8 +13,7 @@ namespace Z0
     
     using static zfunc;    
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-    public class SkipAttribute : Attribute
+    public class IgnoreAttribute : Attribute
     {
 
     }

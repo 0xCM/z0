@@ -113,7 +113,6 @@ namespace Z0
                 return ginxfp.vsub(x,y);
         }
 
-
         [MethodImpl(Inline)]
         static Vector256<T> vsub_u<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
@@ -145,6 +144,5 @@ namespace Z0
             else
                 return ginxfp.vsub(x,y);
         }    
-
     }
 }

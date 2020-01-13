@@ -19,7 +19,9 @@ namespace Z0
 
             public static TakeIMask128<T> Op => default;
 
-            public Moniker Moniker => moniker<N128,T>(Name);
+            static N128 w => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public ushort Invoke(Vector128<T> x, byte index) => ginx.vtakemask(x,index);            
@@ -32,7 +34,9 @@ namespace Z0
 
             public static TakeIMask256<T> Op => default;
 
-            public Moniker Moniker => moniker<N256,T>(Name);
+            static N256 w => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public uint Invoke(Vector256<T> x,byte index) => ginx.vtakemask(x,index);

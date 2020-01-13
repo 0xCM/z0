@@ -15,11 +15,13 @@ namespace Z0
         public readonly struct Select128<T> : IVTernaryOp128D<T>
             where T : unmanaged
         {
-            public static Select128<T> Op => default;
-
             public const string Name = "vselect";
 
-            public Moniker Moniker => moniker<N128,T>(Name);            
+            public static Select128<T> Op => default;
+
+            static N128 w => default;
+ 
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, Vector128<T> z) => ginx.vselect(x,y,z);
@@ -31,11 +33,13 @@ namespace Z0
         public readonly struct Select256<T> : IVTernaryOp256D<T>
             where T : unmanaged
         {
-            public static Select256<T> Op => default;
-
             public const string Name = "vselect";
 
-            public Moniker Moniker => moniker<N256,T>(Name);
+            public static Select256<T> Op => default;
+
+            static N256 w => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, Vector256<T> z) => ginx.vselect(x,y,z);

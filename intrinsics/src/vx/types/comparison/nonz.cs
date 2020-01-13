@@ -19,7 +19,9 @@ namespace Z0
 
             public const string Name = "vnonz";
 
-            public Moniker Moniker => moniker<N128,T>(Name);
+            static N128 w => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector128<T> x) => ginx.vnonz(x);
@@ -31,11 +33,13 @@ namespace Z0
         public readonly struct NonZ256<T> : IVUnaryPred256D<T>
             where T : unmanaged
         {
-            public static NonZ256<T> Op => default;
-
             public const string Name = "vnonz";
 
-            public Moniker Moniker => moniker<N256,T>(Name);
+            static N256 w => default;
+
+            public static NonZ256<T> Op => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector256<T> x) => ginx.vnonz(x);

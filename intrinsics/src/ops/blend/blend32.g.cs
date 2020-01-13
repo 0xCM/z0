@@ -67,7 +67,7 @@ namespace Z0
             else if(typeof(T) == typeof(ushort))
                 return vgeneric<T>(v16u(dinx.vblend(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vblend(vcast32u(x), vcast32u(y), spec));
+                return vgeneric<T>(dinx.vblend(v32u(x), v32u(y), spec));
             else
                 return vgeneric<T>(v64u(dinx.vblend(v32u(x), v32u(y), spec)));
         }
@@ -81,7 +81,7 @@ namespace Z0
             else if(typeof(T) == typeof(short))
                 return vgeneric<T>(v16i(dinx.vblend(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vblend(vcast32i(x), vcast32i(y), spec));
+                return vgeneric<T>(dinx.vblend(v32i(x), v32i(y), spec));
             else
                 return vgeneric<T>(v64i(dinx.vblend(v32u(x), v32u(y), spec)));
         }
@@ -95,7 +95,7 @@ namespace Z0
             else if(typeof(T) == typeof(short))
                 return As.vgeneric<T>(v16i(dinx.vblend(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dinx.vblend(vcast32i(x), vcast32i(y), spec));
+                return vgeneric<T>(dinx.vblend(v32i(x), v32i(y), spec));
             else
                 return vgeneric<T>(v64u(dinx.vblend(v32u(x), v32u(y), spec)));
         }
@@ -109,7 +109,7 @@ namespace Z0
             else if(typeof(T) == typeof(ushort))
                 return vgeneric<T>(v16u(dinx.vblend(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vblend(vcast32u(x), vcast32u(y), spec));
+                return vgeneric<T>(dinx.vblend(v32u(x), v32u(y), spec));
             else
                 return vgeneric<T>(v64u(dinx.vblend(v32u(x), v32u(y), spec)));
         }

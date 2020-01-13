@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="index">An integer between 0 and 7</param>
         [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
-        public static ushort vtakemask<T>(Vector128<T> src, byte index)
+        public static ushort vtakemask<T>(Vector128<T> src, [Imm] byte index)
             where T : unmanaged
                 => (ushort)MoveMask(v8u(dinx.vsll(v64u(src), (byte)(7 - index))));
 
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="index">An integer between 0 and 7</param>
         [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
-        public static uint vtakemask<T>(Vector256<T> src, byte index)
+        public static uint vtakemask<T>(Vector256<T> src, [Imm] byte index)
             where T : unmanaged
                 => (uint)MoveMask(v8u(dinx.vsll(v64u(src), (byte)(7 - index))));
     }

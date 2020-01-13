@@ -26,21 +26,25 @@ namespace Z0
             this.Closures = PrimalKind.None;
         }
 
-        public ZFuncAttribute(string name)
+        public ZFuncAttribute(string name, bool full = true)
         {
             this.Name = name;
+            if(full)
+                this.FullName = name;
             this.Closures = PrimalKind.None;
         }
         
         public ZFuncAttribute(string name, PrimalKind closures)
         {
             this.Name = name;
+            this.FullName = string.Empty;
             this.Closures = closures;
         }
 
         public ZFuncAttribute(PrimalKind closures)
         {
             this.Name = string.Empty;
+            this.FullName = string.Empty;
             this.Closures = closures;
         }
 
@@ -48,6 +52,11 @@ namespace Z0
         /// The root operation name
         /// </summary>
         public string Name {get;}
+
+        /// <summary>
+        /// The complete operation name
+        /// </summary>
+        public string FullName {get;}
 
         /// <summary>
         /// Specifies the primal types over which the associated method can be closed, if generic;

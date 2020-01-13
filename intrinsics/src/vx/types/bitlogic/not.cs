@@ -15,9 +15,13 @@ namespace Z0
         public readonly struct Not128<T> : IVUnaryOp128D<T>
             where T : unmanaged
         {
+            public const string Name = "vnot";
+
             public static Not128<T> Op => default;
 
-            public Moniker Moniker => moniker<N128,T>("vnot");
+            static N128 w => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => ginx.vnot(x);
@@ -29,9 +33,13 @@ namespace Z0
         public readonly struct Not256<T> : IVUnaryOp256D<T>
             where T : unmanaged
         {
+            public const string Name = "vnot";
+
             public static Not256<T> Op => default;
 
-            public Moniker Moniker => moniker<N256,T>("vnot");
+            static N256 w => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) => ginx.vnot(x);

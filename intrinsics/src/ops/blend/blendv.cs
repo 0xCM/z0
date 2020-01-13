@@ -27,7 +27,7 @@ namespace Z0
             =>  BlendVariable(x, y, spec);
 
         /// <summary>
-        /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask)PBLENDVB xmm, xmm/m128, xmm
+        /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask) PBLENDVB xmm, xmm/m128, xmm
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>

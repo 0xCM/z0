@@ -23,7 +23,7 @@ namespace Z0
 
             static N128 w => default;
 
-            public Moniker Moniker => moniker<N128,T>(Name);
+            public Moniker Moniker => moniker<T>(Name,w);
 
             public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte imm8)
                 => gApiMethod(w,Name).Reify(typeof(T)).UnaryOpImm8<T>(w,imm8);
@@ -42,7 +42,7 @@ namespace Z0
 
             static N256 w => default;
 
-            public Moniker Moniker => moniker<N256,T>(Name);
+            public Moniker Moniker => moniker<T>(Name,w);
 
             public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte imm8)
                 => gApiMethod(w,Name).Reify(typeof(T)).UnaryOpImm8<T>(w,imm8);

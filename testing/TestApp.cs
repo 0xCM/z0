@@ -58,7 +58,7 @@ namespace Z0
 
         IEnumerable<Type> CandidateTypes()
             =>  from t in typeof(A).Assembly.Types().Realize<IUnitTest>()
-                where t.Reified() && t.Unattributed<SkipAttribute>()
+                where t.Reified() && t.Unattributed<IgnoreAttribute>()
                 select t;
         
         IEnumerable<Type> Hosts()

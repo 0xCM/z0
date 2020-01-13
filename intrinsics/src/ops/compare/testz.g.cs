@@ -22,20 +22,7 @@ namespace Z0
         [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static bit vtestz<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vtestz_u(src,mask);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vtestz_i(src,mask);
-            else 
-                return vtestz_f<T>(src,mask);
-         }
+                => vtestz_u(src,mask);
 
         /// <summary>
         /// Returns 1 if all mask-identified source bits are disabled, 0 otherwise
@@ -45,20 +32,7 @@ namespace Z0
         [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static bit vtestz<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
-        {
-             if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vtestz_u(src,mask);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vtestz_i(src,mask);
-            else 
-                return vtestz_f<T>(src,mask);
-       }
+                => vtestz_u(src,mask);
 
         /// <summary>
         /// Returns 1 if all mask-identified source bits are disabled, 0 otherwise
@@ -80,8 +54,10 @@ namespace Z0
                 return dinx.vtestz(v16u(src), v16u(mask));
             else if(typeof(T) == typeof(uint))
                 return dinx.vtestz(v32u(src), v32u(mask));
-            else
+            else if(typeof(T) == typeof(ulong))
                 return dinx.vtestz(v64u(src), v64u(mask));
+            else
+                return vtestz_i(src,mask);
         }
 
         [MethodImpl(Inline)]
@@ -94,8 +70,10 @@ namespace Z0
                 return dinx.vtestz(v16i(src), v16i(mask));
             else if(typeof(T) == typeof(int))
                 return dinx.vtestz(v32i(src), v32i(mask));
-            else
+            else if(typeof(T) == typeof(long))
                 return dinx.vtestz(v64i(src), v64i(mask));
+            else 
+                return vtestz_f<T>(src,mask);
         }
 
         [MethodImpl(Inline)]
@@ -120,8 +98,10 @@ namespace Z0
                 return dinx.vtestz(v16u(src), v16u(mask));
             else if(typeof(T) == typeof(uint))
                 return dinx.vtestz(v32u(src), v32u(mask));
-            else
+            else if(typeof(T) == typeof(ulong))
                 return dinx.vtestz(v64u(src), v64u(mask));
+            else
+                return vtestz_i(src,mask);
         }
 
         [MethodImpl(Inline)]
@@ -134,8 +114,11 @@ namespace Z0
                 return dinx.vtestz(v16i(src), v16i(mask));
             else if(typeof(T) == typeof(int))
                 return dinx.vtestz(v32i(src), v32i(mask));
-            else
+            else if(typeof(T) == typeof(long))
                 return dinx.vtestz(v64i(src), v64i(mask));
+            else 
+                return vtestz_f<T>(src,mask);
+
         }
 
         [MethodImpl(Inline)]
@@ -149,6 +132,5 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
     }
 }

@@ -19,28 +19,27 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
-        /// identifing low or hi</param>
+        /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively identifing low or hi</param>
         [MethodImpl(Inline), ZFunc(PrimalKind.All)]
-        public static Vector256<T> vinsert<T>(Vector128<T> src, Vector256<T> dst, int index)        
+        public static Vector256<T> vinsert<T>(Vector128<T> src, Vector256<T> dst, [Imm] byte index)        
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vinsert_u(src,dst,index);
+                return vinsert_u(src,dst,(byte)index);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vinsert_i(src,dst,index);
+                return vinsert_i(src,dst,(byte)index);
             else 
-                return vinsert_f(src,dst,index);
+                return vinsert_f(src,dst,(byte)index);
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vinsert_i<T>(Vector128<T> src, Vector256<T> dst, int index)        
+        static Vector256<T> vinsert_i<T>(Vector128<T> src, Vector256<T> dst, byte index)        
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -54,7 +53,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vinsert_u<T>(Vector128<T> src, Vector256<T> dst, int index)        
+        static Vector256<T> vinsert_u<T>(Vector128<T> src, Vector256<T> dst, byte index)        
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -68,7 +67,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vinsert_f<T>(Vector128<T> src, Vector256<T> dst, int index)        
+        static Vector256<T> vinsert_f<T>(Vector128<T> src, Vector256<T> dst, byte index)        
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

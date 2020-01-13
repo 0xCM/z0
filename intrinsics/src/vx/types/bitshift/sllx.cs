@@ -21,10 +21,10 @@ namespace Z0
 
             public static Sllx128<T> Op => default;
 
+            public Moniker Moniker => moniker<T>(Name,w);
+
             public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte imm8)
                 => gApiMethod(w,Name).Reify(typeof(T)).UnaryOpImm8<T>(w,imm8);
-
-            public Moniker Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte offset)
@@ -40,7 +40,7 @@ namespace Z0
 
             public static Sllx256<T> Op => default;
             
-            public Moniker Moniker => moniker<N256,T>(Name);
+            public Moniker Moniker => moniker<T>(Name,w);
 
             public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte imm8)
                 => gApiMethod(w,Name).Reify(typeof(T)).UnaryOpImm8<T>(w,imm8);

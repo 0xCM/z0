@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="offset">The rightward shift amount, in bytes</param>
         [MethodImpl(Inline), ZFunc(PrimalKind.All)]
-        public static Vector128<T> valignr<T>(Vector128<T> x, Vector128<T> y, byte offset)        
+        public static Vector128<T> valignr<T>(Vector128<T> x, Vector128<T> y, [Imm] byte offset)        
             where T : unmanaged
                 => vgeneric<T>(dinx.valignr(v64u(x), v64u(y),offset));
 
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="offset">The rightward shift amount, in bytes</param>
         [MethodImpl(Inline), ZFunc(PrimalKind.All)]
-        public static Vector256<T> valignr<T>(Vector256<T> x, Vector256<T> y, byte offset)        
+        public static Vector256<T> valignr<T>(Vector256<T> x, Vector256<T> y, [Imm] byte offset)        
             where T : unmanaged
                 => vgeneric<T>(dinx.valignr(v64u(x), v64u(y),offset));
     }

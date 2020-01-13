@@ -15,11 +15,13 @@ namespace Z0
         public readonly struct SwapHiLo128<T> : IVUnaryOp128<T>
             where T : unmanaged
         {
-            public static SwapHiLo128<T> Op => default;
-
             public const string Name = "vswaphl";
 
-            public Moniker Moniker => moniker<N128,T>(Name);
+            public static SwapHiLo128<T> Op => default;
+
+            static N128 w => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => ginx.vswaphl(x);
@@ -33,7 +35,9 @@ namespace Z0
 
             public const string Name = "vswaphl";
 
-            public Moniker Moniker => moniker<N256,T>(Name);
+            static N256 w => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) => ginx.vswaphl(x);

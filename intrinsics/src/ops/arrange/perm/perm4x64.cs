@@ -15,7 +15,7 @@ namespace Z0
     partial class dinx    
     {        
         /// <summary>
-        /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8)VPERMQ ymm, ymm/m256, imm8
+        /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8) VPERMQ ymm, ymm/m256, imm8
         /// Permutes vector content across lanes at 64-bit granularity
         /// </summary>
         /// <param name="x">The source vector</param>
@@ -25,7 +25,7 @@ namespace Z0
             => v8i(Permute4x64(v64i(x), (byte)spec)); 
 
         /// <summary>
-        /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8)VPERMQ ymm, ymm/m256, imm8
+        /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8) VPERMQ ymm, ymm/m256, imm8
         /// Permutes vector content across lanes at 64-bit granularity
         /// </summary>
         /// <param name="x">The source vector</param>
@@ -35,7 +35,7 @@ namespace Z0
             => v8u(Permute4x64(v64u(x), (byte)spec));
 
         /// <summary>
-        /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8)VPERMQ ymm, ymm/m256, imm8
+        /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8) VPERMQ ymm, ymm/m256, imm8
         /// Permutes vector content across lanes at 64-bit granularity
         /// </summary>
         /// <param name="x">The source vector</param>
@@ -45,7 +45,7 @@ namespace Z0
             => v16i(Permute4x64(v64i(x), (byte)spec).AsInt16());
 
         /// <summary>
-        /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8)VPERMQ ymm, ymm/m256, imm8
+        /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8) VPERMQ ymm, ymm/m256, imm8
         /// Permutes vector content across lanes at 64-bit granularity
         /// </summary>
         /// <param name="x">The source vector</param>
@@ -65,7 +65,7 @@ namespace Z0
             => v32i(Permute4x64(v64i(x), (byte)spec)); 
 
         /// <summary>
-        /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8)VPERMQ ymm, ymm/m256, imm8
+        /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8) VPERMQ ymm, ymm/m256, imm8
         /// Permutes vector content across lanes at 64-bit granularity
         /// </summary>
         /// <param name="x">The source vector</param>
@@ -75,7 +75,7 @@ namespace Z0
             => v32u(Permute4x64(v64u(x), (byte)spec));
 
         /// <summary>
-        /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8)VPERMQ ymm, ymm/m256, imm8
+        /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8) VPERMQ ymm, ymm/m256, imm8
         /// Permutes vector content across lanes at 64-bit granularity
         /// </summary>
         /// <param name="x">The source vector</param>
@@ -85,7 +85,7 @@ namespace Z0
             => Permute4x64(x, (byte)spec); 
 
         /// <summary>
-        /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8)VPERMQ ymm, ymm/m256, imm8
+        /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8) VPERMQ ymm, ymm/m256, imm8
         /// Permutes vector content across lanes at 64-bit granularity
         /// </summary>
         /// <param name="x">The source vector</param>
@@ -93,6 +93,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<long> vperm4x64(Vector256<long> x, Perm4L spec)
             => Permute4x64(x, (byte)spec);
-
     }
 }

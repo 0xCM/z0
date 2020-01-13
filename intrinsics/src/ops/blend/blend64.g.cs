@@ -15,12 +15,12 @@ namespace Z0
     partial class ginx
     {
         [MethodImpl(Inline)]
-        public static Vector128<T> vblend<T>(Vector128<T> x, Vector128<T> y, Blend2x64 spec)        
+        public static Vector128<T> vblend<T>(Vector128<T> x, Vector128<T> y, [Imm] Blend2x64 spec)        
             where T : unmanaged
                 => vgeneric<T>(dinx.vblend(v64u(x), v64u(y), spec));
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vblend<T>(Vector256<T> x, Vector256<T> y, Blend4x64 spec)        
+        public static Vector256<T> vblend<T>(Vector256<T> x, Vector256<T> y, [Imm] Blend4x64 spec)        
             where T : unmanaged
                 => vgeneric<T>(dinx.vblend(v64u(x), v64u(y), spec));
     }

@@ -15,11 +15,13 @@ namespace Z0
         public readonly struct Eq128<T> : IVBinOp128D<T>
             where T : unmanaged
         {
-            public static Eq128<T> Op => default;
-
             public const string Name = "veq";
 
-            public Moniker Moniker => moniker<N128,T>(Name);
+            static N128 w => default;
+
+            public static Eq128<T> Op => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.veq(x,y);
@@ -31,11 +33,13 @@ namespace Z0
         public readonly struct Eq256<T> : IVBinOp256D<T>
             where T : unmanaged
         {
-            public static Eq256<T> Op => default;
-
             public const string Name = "veq";
 
-            public Moniker Moniker => moniker<N256,T>(Name);
+            static N256 w => default;
+
+            public static Eq256<T> Op => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.veq(x,y);

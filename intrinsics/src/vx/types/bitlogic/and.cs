@@ -49,11 +49,13 @@ namespace Z0
         public readonly struct And128<T> : IVBinOp128D<T>
             where T : unmanaged
         {
-            public static And128<T> Op => default;
-
             public const string Name = "vand";
 
-            public Moniker Moniker => moniker<N128,T>(Name);
+            public static And128<T> Op => default;
+            
+            static N128 w => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vand(x,y);
@@ -65,11 +67,13 @@ namespace Z0
         public readonly struct And256<T> : IVBinOp256D<T>
             where T : unmanaged
         {
-            public static And256<T> Op => default;
-
             public const string Name = "vand";
 
-            public Moniker Moniker => moniker<N256,T>(Name);
+            public static And256<T> Op => default;
+
+            static N256 w => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vand(x,y);

@@ -46,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static Vector256<T> veq<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {

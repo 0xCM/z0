@@ -15,9 +15,13 @@ namespace Z0
         public readonly struct BitClear128<T> : IVUnaryOp128Imm8x2D<T>
             where T : unmanaged
         {
+            public const string Name = "vbitclear";
+
             public static BitClear128<T> Op => default;
 
-            public Moniker Moniker => moniker<N128,T>("vbitclear");
+            static N128 w => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte offset, byte count) => ginx.vbitclear(x,offset,count);
@@ -29,9 +33,13 @@ namespace Z0
         public readonly struct BitClear256<T> : IVUnaryOp256Imm8x2D<T>
             where T : unmanaged
         {
+            public const string Name = "vbitclear";
+             
             public static BitClear256<T> Op => default;
 
-            public Moniker Moniker => moniker<N256,T>("vbitclear");
+            static N256 w => default;
+
+            public Moniker Moniker => moniker<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte offset, byte count) => ginx.vbitclear(x,offset, count);

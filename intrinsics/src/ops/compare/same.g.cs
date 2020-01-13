@@ -45,6 +45,5 @@ namespace Z0
         public static bit vsame<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged   
                 => vtestc(veq(x,y));
-
     }
 }
