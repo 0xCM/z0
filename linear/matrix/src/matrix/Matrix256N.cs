@@ -52,14 +52,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(Matrix256<N,T> src)
-            => src.Unsized.ReadOnly();
-
-        [MethodImpl(Inline)]
-        public static implicit operator Block256<T>(Matrix256<N,T> src)
             => src.Unsized;
 
         [MethodImpl(Inline)]
-        public static implicit operator ConstBlock256<T>(Matrix256<N,T> src)
+        public static implicit operator Block256<T>(Matrix256<N,T> src)
             => src.Unsized;
 
         [MethodImpl(Inline)]
@@ -243,7 +239,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public Matrix256<N,T> Replicate()
-            => new Matrix256<N,T>(data.ReadOnly().Replicate());
+            => new Matrix256<N,T>(data.Replicate());
 
         public override bool Equals(object other)
             => throw new NotSupportedException();

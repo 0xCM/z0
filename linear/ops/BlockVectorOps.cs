@@ -28,7 +28,7 @@ namespace Z0
             return dst;
         }
 
-        public static Block256<T> and<T>(ConstBlock256<T> lhs, ConstBlock256<T> rhs, Block256<T> dst)
+        public static Block256<T> and<T>(in Block256<T> lhs, in Block256<T> rhs, Block256<T> dst)
             where T : unmanaged
         {
             for(var i=0; i< lhs.BlockCount; i++)

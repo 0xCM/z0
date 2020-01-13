@@ -29,9 +29,6 @@ namespace Z0
         public static implicit operator ReadOnlySpan<T>(in Block32<T> src)
             => src.data;
 
-        [MethodImpl(Inline)]
-        public static implicit operator ConstBlock32<T>(in Block32<T> src)
-            => new ConstBlock32<T>(src.data);
                     
         [MethodImpl(Inline)]
         internal Block32(Span<T> src)

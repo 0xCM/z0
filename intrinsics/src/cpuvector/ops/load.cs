@@ -19,7 +19,6 @@ namespace Z0
     using static zfunc;
     using static As;
     
-
     partial class CpuVector
     {
         /// <summary>
@@ -251,37 +250,6 @@ namespace Z0
                 => vload(w, in skip(src, offset));
 
         /// <summary>
-        /// Loads a 128-bit vector from the leading source block
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<T> vload<T>(in ConstBlock128<T> src)
-            where T : unmanaged
-                =>  vload(n128,src.Data);
-
-        /// <summary>
-        /// Loads a 256-bit vector from the leading source block
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<T> vload<T>(in ConstBlock256<T> src)
-            where T : unmanaged
-                => vload(n256,src.Data);
-
-        /// <summary>
-        /// Loads a 512-bit vector from the leading source block
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector512<T> vload<T>(in ConstBlock512<T> src)
-            where T : unmanaged
-                => vload(n512,src.Data);
-
-        /// <summary>
         /// Loads a 128-bit vector from the first 128-bit source block
         /// </summary>
         /// <param name="src">The source span</param>
@@ -310,39 +278,6 @@ namespace Z0
         public static Vector512<T> vload<T>(in Block512<T> src)
             where T : unmanaged
                 => vload(n512,src.Data);
-
-        /// <summary>
-        /// Loads a block-identified 128-bit vector
-        /// </summary>
-        /// <param name="src">The blocked source</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<T> vload<T>(in ConstBlock128<T> src, int block)            
-            where T : unmanaged      
-                => vload(in src.BlockRef(block), out Vector128<T> x);
-
-        /// <summary>
-        /// Loads a block-identified 256-bit vector
-        /// </summary>
-        /// <param name="src">The blocked source</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<T> vload<T>(in ConstBlock256<T> src, int block)            
-            where T : unmanaged      
-                => vload(in src.BlockRef(block), out Vector256<T> x);
-
-        /// <summary>
-        /// Loads a block-identified 256-bit vector
-        /// </summary>
-        /// <param name="src">The blocked source</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector512<T> vload<T>(in ConstBlock512<T> src, int block)            
-            where T : unmanaged      
-                => vload(in src.BlockRef(block), out Vector512<T> x);
 
         /// <summary>
         /// Loads a block-identified 128-bit vector
@@ -513,7 +448,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-
         [MethodImpl(Inline)]
         static unsafe void vloadu_u<T>(T* pSrc, out Vector128<T> dst)
             where T : unmanaged
@@ -555,10 +489,5 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }         
-
-
     }
-
-
-
 }

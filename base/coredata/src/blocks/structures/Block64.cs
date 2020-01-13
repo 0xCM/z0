@@ -28,11 +28,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(in Block64<T> src)
             => src.data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ConstBlock64<T>(in Block64<T> src)
-            => new ConstBlock64<T>(src.data);
-
                     
         [MethodImpl(Inline)]
         internal Block64(Span<T> src)

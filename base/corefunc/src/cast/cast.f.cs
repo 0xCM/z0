@@ -55,17 +55,6 @@ partial class zfunc
         where T : unmanaged
             => src.As<T>();
 
-    /// <summary>
-    /// Reimagines a readonly span of one element type as a readonly span of another element type
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="S">The source element type</typeparam>
-    /// <typeparam name="T">The target element type</typeparam>
-    [MethodImpl(Inline)]
-    internal static ConstBlock64<T> cast<S,T>(in ConstBlock64<S> src)                
-        where S : unmanaged
-        where T : unmanaged
-            => src.As<T>();
 
     /// <summary>
     /// Presents a blocked span of S-cells as a blocked span of T-cells
@@ -79,17 +68,6 @@ partial class zfunc
         where T : unmanaged
             => src.As<T>();
 
-    /// <summary>
-    /// Presents a readonly blocked span of S-cells as a readonly blocked span of T-cells
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="S">The source element type</typeparam>
-    /// <typeparam name="T">The target element type</typeparam>
-    [MethodImpl(Inline)]
-    internal static ConstBlock128<T> cast<S,T>(in ConstBlock128<S> src)                
-        where S : unmanaged
-        where T : unmanaged
-            => src.As<T>();
 
     /// <summary>
     /// Presents a blocked span of S-cells as a blocked span of T-cells
@@ -103,17 +81,6 @@ partial class zfunc
         where T : unmanaged
             => src.As<T>();
 
-    /// <summary>
-    /// Presents a readonly blocked span of S-cells as a readonly blocked span of T-cells
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="S">The source element type</typeparam>
-    /// <typeparam name="T">The target element type</typeparam>
-    [MethodImpl(Inline)]
-    internal static ConstBlock256<T> cast<S,T>(in ConstBlock256<S> src)                
-        where S : unmanaged
-        where T : unmanaged
-            => src.As<T>();               
 
     [MethodImpl(Inline)]   
     public static ref T cast<S,T>(ref S src)

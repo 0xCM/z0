@@ -11,7 +11,6 @@ namespace Z0.Logix
 
     using static zfunc;
 
-    using static Predicates;
     using static OpHelpers;
 
     public static class PredicateApi
@@ -31,12 +30,12 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case ComparisonKind.Eq: return equals(a,b);
-                case ComparisonKind.Neq: return neq(a,b);
-                case ComparisonKind.Lt: return lt(a,b);
-                case ComparisonKind.LtEq: return lteq(a,b);
-                case ComparisonKind.Gt: return gt(a,b);
-                case ComparisonKind.GtEq: return gteq(a,b);
+                case ComparisonKind.Eq: return gmath.eq(a,b);
+                case ComparisonKind.Neq: return gmath.neq(a,b);
+                case ComparisonKind.Lt: return gmath.lt(a,b);
+                case ComparisonKind.LtEq: return gmath.lteq(a,b);
+                case ComparisonKind.Gt: return gmath.gt(a,b);
+                case ComparisonKind.GtEq: return gmath.gteq(a,b);
                 default: return dne<ComparisonKind,bit>(kind);
             }
         }
@@ -46,12 +45,12 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case ComparisonKind.Eq: return equals;
-                case ComparisonKind.Neq: return neq;
-                case ComparisonKind.Lt: return lt;
-                case ComparisonKind.LtEq: return lteq;
-                case ComparisonKind.Gt: return gt;
-                case ComparisonKind.GtEq: return gteq;
+                case ComparisonKind.Eq: return gmath.eq;
+                case ComparisonKind.Neq: return gmath.neq;
+                case ComparisonKind.Lt: return gmath.lt;
+                case ComparisonKind.LtEq: return gmath.lteq;
+                case ComparisonKind.Gt: return gmath.gt;
+                case ComparisonKind.GtEq: return gmath.gteq;
                 default: return dne<ComparisonKind,BinaryPred<T>>(kind);
             }
         }

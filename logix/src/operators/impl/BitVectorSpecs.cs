@@ -152,7 +152,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal scalar upon which the bitvector is predicated</typeparam>
-        public static BitVector<T> imply<T>(BitVector<T> x, BitVector<T> y)
+        public static BitVector<T> impl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
             var len = x.Width;
@@ -168,7 +168,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal scalar upon which the bitvector is predicated</typeparam>
-        public static BitVector<T> notimply<T>(BitVector<T> x, BitVector<T> y)
+        public static BitVector<T> nonimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
             var len = x.Width;
@@ -184,7 +184,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal scalar upon which the bitvector is predicated</typeparam>
-        public static BitVector<T> cimply<T>(BitVector<T> x, BitVector<T> y)
+        public static BitVector<T> cimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
             var len = x.Width;
@@ -200,7 +200,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal scalar upon which the bitvector is predicated</typeparam>
-        public static BitVector<T> cnotimply<T>(BitVector<T> x, BitVector<T> y)
+        public static BitVector<T> cnonimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
             var len = x.Width;

@@ -84,11 +84,11 @@ namespace Z0.Logix
             => !(a ^ b);
 
         [MethodImpl(Inline), BinaryLogicOp(Implication)]
-        public static bit imply(bit a, bit b)
+        public static bit impl(bit a, bit b)
             => a | ~b;
 
         [MethodImpl(Inline), BinaryLogicOp(Nonimplication)]
-        public static bit notimply(bit a, bit b)
+        public static bit nonimpl(bit a, bit b)
             => ~a & b;
 
         [MethodImpl(Inline), BinaryLogicOp(LeftProject)]
@@ -108,17 +108,16 @@ namespace Z0.Logix
             => ~b;
 
         [MethodImpl(Inline), BinaryLogicOp(ConverseImplication)]
-        public static bit cimply(bit a, bit b)
+        public static bit cimpl(bit a, bit b)
             => ~a | b;
 
         [MethodImpl(Inline), BinaryLogicOp(ConverseNonimplication)]
-        public static bit cnotimply(bit a, bit b)
+        public static bit cnonimpl(bit a, bit b)
             => a & ~b;
 
         [MethodImpl(Inline)]
         public static bit same(bit a, bit b)
             => a == b;
-
 
         [MethodImpl(Inline)]
         public static bit select(bit a, bit b, bit c)
@@ -287,7 +286,7 @@ namespace Z0.Logix
         //((not b) and a) and C
         [MethodImpl(Inline),TernaryOp(X20)]
         public static bit f20(bit a, bit b, bit c)
-            => and(cnotimply(a,b),c);
+            => and(cnonimpl(a,b),c);
 
         // b nor (a xor c)
         [MethodImpl(Inline),TernaryOp(X21)]
@@ -297,7 +296,7 @@ namespace Z0.Logix
         // c and (not b)
         [MethodImpl(Inline),TernaryOp(X22)]
         public static bit f22(bit a, bit b, bit c)
-            => cnotimply(c,b);
+            => cnonimpl(c,b);
 
         // not (B) and ((A xor 1) or C)
         [MethodImpl(Inline),TernaryOp(X23)]
@@ -367,7 +366,7 @@ namespace Z0.Logix
         // a and not(b)
         [MethodImpl(Inline),TernaryOp(X30)]
         public static bit f30(bit a, bit b, bit c)
-            => cnotimply(a,b);
+            => cnonimpl(a,b);
 
         // not (B) and (A or (C xor 1))
         [MethodImpl(Inline),TernaryOp(X31)]
@@ -467,7 +466,7 @@ namespace Z0.Logix
         // B and not (C)
         [MethodImpl(Inline),TernaryOp(X44)]
         public static bit f44(bit a, bit b, bit c)
-            => cnotimply(b,c);
+            => cnonimpl(b,c);
 
         // not (C) and ((A xor 1) or B)
         [MethodImpl(Inline),TernaryOp(X45)]
@@ -522,12 +521,12 @@ namespace Z0.Logix
         // not (A) or (B and not (C))
         [MethodImpl(Inline),TernaryOp(X4F)]
         public static bit f4f(bit a, bit b, bit c)
-            => or(not(a),cnotimply(b,c));
+            => or(not(a),cnonimpl(b,c));
 
         // A and not (C)
         [MethodImpl(Inline),TernaryOp(X50)]
         public static bit f50(bit a, bit b, bit c)
-            => cnotimply(a,c);
+            => cnonimpl(a,c);
 
         // not (C) and (A or (B xor 1))
         [MethodImpl(Inline),TernaryOp(X51)]

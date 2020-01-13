@@ -153,7 +153,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void imply<T>(in T A, in T B, ref T Z)
+        public static void impl<T>(in T A, in T B, ref T Z)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -169,7 +169,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void notimply<T>(in T A, in T B, ref T Z)
+        public static void nonimpl<T>(in T A, in T B, ref T Z)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -185,7 +185,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void cimply<T>(in T A, in T B, ref T Z)
+        public static void cimpl<T>(in T A, in T B, ref T Z)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

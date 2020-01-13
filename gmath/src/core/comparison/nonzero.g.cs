@@ -21,23 +21,11 @@ namespace Z0
         [MethodImpl(Inline), ZFunc(PrimalKind.All)]
         public static bit nonz<T>(T a)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return nonz_u(a);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return nonz_i(a);
-            else 
-                return gfp.nonzero(a);
-        }
+                => nonz_u(a);
 
         [MethodImpl(Inline)]
         static bit nonz_u<T>(T a)
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                  return math.nonzero(uint8(a));
@@ -45,12 +33,15 @@ namespace Z0
                  return math.nonzero(uint16(a));
             else if(typeof(T) == typeof(uint))
                  return math.nonzero(uint32(a));
-            else
+            else if(typeof(T) == typeof(ulong))
                  return math.nonzero(uint64(a));
+            else 
+                return nonz_i(a);
         }
 
         [MethodImpl(Inline)]
         static bit nonz_i<T>(T a)
+            where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
                  return math.nonzero(int8(a));
@@ -58,8 +49,10 @@ namespace Z0
                  return math.nonzero(int16(a));
             else if(typeof(T) == typeof(int))
                  return math.nonzero(int32(a));
-            else
+            else if(typeof(T) == typeof(long))
                  return math.nonzero(int64(a));
+            else 
+                return gfp.nonzero(a);
         }
     }
 }

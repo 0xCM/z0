@@ -87,7 +87,7 @@ namespace Z0
  
         [MethodImpl(Inline)]
         public static BitMatrix8 AndNot(this BitMatrix8 A, in BitMatrix8 B)
-            => BitMatrix.cnotimply(A, B);
+            => BitMatrix.cnonimpl(A, B);
 
         /// <summary>
         /// Retrives the bitvector determined by the matrix diagonal

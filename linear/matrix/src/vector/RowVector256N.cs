@@ -60,9 +60,6 @@ namespace Z0
         public static implicit operator RowVector256<T>(RowVector256<N,T> src)
             => src.Denaturalize();
 
-        [MethodImpl(Inline)]   
-        public static implicit operator ConstBlock256<T>(RowVector256<N,T> src)
-            => src.data;
 
         [MethodImpl(Inline)]   
         public static implicit operator RowVector256<N,T>(T[] src)

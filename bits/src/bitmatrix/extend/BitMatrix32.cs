@@ -55,7 +55,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix32 AndNot(this BitMatrix32 A, in BitMatrix32 B)
-            => BitMatrix.cnotimply(A, B);
+            => BitMatrix.cnonimpl(A, B);
 
         /// <summary>
         /// Determines whether this matrix is equivalent to the canonical 0 matrix

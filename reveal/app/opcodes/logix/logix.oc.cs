@@ -76,51 +76,51 @@ namespace Z0.OpCodes
             => xnor(a,b);
 
         public static bit imply_logic(bit a, bit b)
-            => imply(a,b);
+            => impl(a,b);
 
         public static ulong imply_scalar(ulong a, ulong b)
-            => imply(a,b);
+            => impl(a,b);
 
         public static Vector128<ulong> imply_v128(Vector128<ulong> a, Vector128<ulong> b)
-            => imply(a,b);
+            => impl(a,b);
 
         public static Vector256<ulong> imply_v256(Vector256<ulong> a, Vector256<ulong> b)
-            => imply(a,b);
+            => impl(a,b);
 
         public static bit notimply_logic(bit a, bit b)
-            => notimply(a,b);
+            => nonimpl(a,b);
 
         public static ulong notimply_scalar(ulong a, ulong b)
-            => notimply(a,b);
+            => nonimpl(a,b);
 
         public static Vector128<ulong> notimply_v128(Vector128<ulong> a, Vector128<ulong> b)
-            => notimply(a,b);
+            => nonimpl(a,b);
 
         public static Vector256<ulong> notimply_v256(Vector256<ulong> a, Vector256<ulong> b)
-            => notimply(a,b);
+            => nonimpl(a,b);
 
         public static bit cimply_logic(bit a, bit b)
-            => cimply(a,b);
+            => cimpl(a,b);
 
         public static ulong cimply_scalar(ulong a, ulong b)
-            => cimply(a,b);
+            => cimpl(a,b);
 
         public static Vector128<ulong> cimply_v128(Vector128<ulong> a, Vector128<ulong> b)
-            => cimply(a,b);
+            => cimpl(a,b);
 
         public static Vector256<ulong> cimply_v256(Vector256<ulong> a, Vector256<ulong> b)
-            => cimply(a,b);
+            => cimpl(a,b);
 
         public static bit cnotimply_logic(bit a, bit b)
-            => cnotimply(a,b);
+            => cnonimpl(a,b);
 
         public static ulong cnotimply_scalar(ulong a, ulong b)
-            => cnotimply(a,b);
+            => cnonimpl(a,b);
 
         public static Vector128<ulong> cnotimply_v128(Vector128<ulong> a, Vector128<ulong> b)
-            => cnotimply(a,b);
+            => cnonimpl(a,b);
 
         public static Vector256<ulong> cnotimply_v256(Vector256<ulong> a, Vector256<ulong> b)
-            => cnotimply(a,b);
+            => cnonimpl(a,b);
     }
 }

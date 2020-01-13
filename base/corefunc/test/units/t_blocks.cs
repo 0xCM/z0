@@ -108,7 +108,7 @@ namespace Z0.Test
 
             var blocks = Pow2.T08;   
                         
-            var src = Random.Blocks<int>(n128,blocks).ReadOnly();
+            var src = Random.Blocks<int>(n128,blocks);
             var dst = DataBlocks.alloc<int>(n128,blocks);
 
             Claim.eq(src.CellCount, dst.CellCount);

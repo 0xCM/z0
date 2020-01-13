@@ -41,10 +41,10 @@ namespace Z0.Logix
                 case BinaryBitwiseOpKind.RightProject: return right(x,y);
                 case BinaryBitwiseOpKind.LeftNot: return lnot(x,y);
                 case BinaryBitwiseOpKind.RightNot: return rnot(x,y);
-                case BinaryBitwiseOpKind.Implication: return imply(x,y);                    
-                case BinaryBitwiseOpKind.Nonimplication: return notimply(x,y);
-                case BinaryBitwiseOpKind.ConverseImplication: return cimply(x,y);                    
-                case BinaryBitwiseOpKind.ConverseNonimplication: return cnotimply(x,y);
+                case BinaryBitwiseOpKind.Implication: return impl(x,y);                    
+                case BinaryBitwiseOpKind.Nonimplication: return nonimpl(x,y);
+                case BinaryBitwiseOpKind.ConverseImplication: return cimpl(x,y);                    
+                case BinaryBitwiseOpKind.ConverseNonimplication: return cnonimpl(x,y);
                 default: return dne<BinaryBitwiseOpKind,T>(kind);
             }
         }
@@ -66,10 +66,10 @@ namespace Z0.Logix
                 case BinaryBitwiseOpKind.RightProject: return y;
                 case BinaryBitwiseOpKind.LeftNot: return BitVectorOpSpecs.lnot(x,y);
                 case BinaryBitwiseOpKind.RightNot: return BitVectorOpSpecs.rnot(x,y);
-                case BinaryBitwiseOpKind.Implication: return BitVectorOpSpecs.imply(x,y);                    
-                case BinaryBitwiseOpKind.Nonimplication: return BitVectorOpSpecs.notimply(x,y);
-                case BinaryBitwiseOpKind.ConverseImplication: return BitVectorOpSpecs.cimply(x,y);                    
-                case BinaryBitwiseOpKind.ConverseNonimplication: return BitVectorOpSpecs.cnotimply(x,y);
+                case BinaryBitwiseOpKind.Implication: return BitVectorOpSpecs.impl(x,y);                    
+                case BinaryBitwiseOpKind.Nonimplication: return BitVectorOpSpecs.nonimpl(x,y);
+                case BinaryBitwiseOpKind.ConverseImplication: return BitVectorOpSpecs.cimpl(x,y);                    
+                case BinaryBitwiseOpKind.ConverseNonimplication: return BitVectorOpSpecs.cnonimpl(x,y);
                 default: return dne<BinaryBitwiseOpKind,T>(kind);
             }
         }
@@ -91,10 +91,10 @@ namespace Z0.Logix
                 case BinaryBitwiseOpKind.RightProject: return right;
                 case BinaryBitwiseOpKind.LeftNot: return lnot;
                 case BinaryBitwiseOpKind.RightNot: return rnot;
-                case BinaryBitwiseOpKind.Implication: return imply;
-                case BinaryBitwiseOpKind.Nonimplication: return notimply;
-                case BinaryBitwiseOpKind.ConverseImplication: return cimply;
-                case BinaryBitwiseOpKind.ConverseNonimplication: return cnotimply;
+                case BinaryBitwiseOpKind.Implication: return impl;
+                case BinaryBitwiseOpKind.Nonimplication: return nonimpl;
+                case BinaryBitwiseOpKind.ConverseImplication: return cimpl;
+                case BinaryBitwiseOpKind.ConverseNonimplication: return cnonimpl;
                 default: return dne<BitVector<T>>(kind);
             }
         }

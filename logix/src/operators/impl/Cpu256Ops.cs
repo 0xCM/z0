@@ -68,7 +68,6 @@ namespace Z0.Logix
             where T : unmanaged
                 => ginx.vand(a,b);
 
-
         [MethodImpl(Inline)]
         public static Vector256<T> nand<T>(Vector256<T> a, Vector256<T> b)
             where T : unmanaged
@@ -94,7 +93,6 @@ namespace Z0.Logix
             where T : unmanaged
                 => ginx.vxnor(a,b);
 
-
         [MethodImpl(Inline)]
         public static Vector256<T> left<T>(Vector256<T> a, Vector256<T> b)
             where T : unmanaged
@@ -116,22 +114,22 @@ namespace Z0.Logix
                 => not(b);
 
         [MethodImpl(Inline)]
-        public static Vector256<T> imply<T>(Vector256<T> a, Vector256<T> b)
+        public static Vector256<T> impl<T>(Vector256<T> a, Vector256<T> b)
             where T : unmanaged
                 => ginx.vimpl(a,b);
 
         [MethodImpl(Inline)]
-        public static Vector256<T> notimply<T>(Vector256<T> a, Vector256<T> b)
+        public static Vector256<T> nonimpl<T>(Vector256<T> a, Vector256<T> b)
             where T : unmanaged
                 => ginx.vnonimpl(a,b); 
 
         [MethodImpl(Inline)]
-        public static Vector256<T> cimply<T>(Vector256<T> a, Vector256<T> b)
+        public static Vector256<T> cimpl<T>(Vector256<T> a, Vector256<T> b)
             where T : unmanaged
                 => ginx.vcimpl(a,b);
 
         [MethodImpl(Inline)]
-        public static Vector256<T> cnotimply<T>(Vector256<T> a, Vector256<T> b)
+        public static Vector256<T> cnonimpl<T>(Vector256<T> a, Vector256<T> b)
             where T : unmanaged
                 => ginx.vcnonimpl(a,b);
 
@@ -205,7 +203,6 @@ namespace Z0.Logix
             where T : unmanaged
                 => ginx.vgt(a,b);
 
-
         [MethodImpl(Inline)]
         public static Vector256<T> max<T>(Vector256<T> a, Vector256<T> b)
             where T : unmanaged
@@ -219,8 +216,7 @@ namespace Z0.Logix
         [MethodImpl(Inline),TernaryOp(X00)]
         public static Vector256<T> f00<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-            => default;
-
+                => default;
 
         [MethodImpl(Inline),TernaryOp(X01)]
         public static Vector256<T> f01<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)

@@ -39,7 +39,7 @@ namespace Z0
                 var A = Random.BitMatrix<T>();
                 var B = Random.BitMatrix<T>();
                 var C = BitMatrix.alloc<T>();                
-                BitMatrix.and(A,B, C);
+                BitMatrix.and(A,B, ref C);
 
                 var rbA = A.ToRowBits();
                 var rbB = B.ToRowBits();
@@ -140,7 +140,7 @@ namespace Z0
                 Random.BitMatrix<T>(ref A);
                 Random.BitMatrix<T>(ref B);
                 clock.Start();
-                BitMatrix.and(A,B,C);
+                BitMatrix.and(A,B,ref C);
                 clock.Stop();
             }
 

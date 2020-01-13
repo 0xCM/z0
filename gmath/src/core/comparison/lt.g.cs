@@ -28,22 +28,6 @@ namespace Z0
                 => lteq_u(a,b);
 
         [MethodImpl(Inline)]
-        static bit lt_i<T>(T a, T b)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return math.lt(convert<T,int>(a), convert<T,int>(b));
-            else if(typeof(T) == typeof(short))
-                return math.lt(convert<T,int>(a), convert<T,int>(b));
-            else if(typeof(T) == typeof(int))
-                 return math.lt(int32(a), int32(b));
-            else if(typeof(T) == typeof(long))
-                 return math.lt(int64(a), int64(b));
-            else
-                return gfp.lt(a,b);
-        }
-
-        [MethodImpl(Inline)]
         static bit lt_u<T>(T a, T b)
             where T : unmanaged
         {
@@ -57,6 +41,22 @@ namespace Z0
                 return math.lt(uint64(a), uint64(b));
             else
                 return lt_i(a,b);
+        }
+
+        [MethodImpl(Inline)]
+        static bit lt_i<T>(T a, T b)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return math.lt(convert<T,int>(a), convert<T,int>(b));
+            else if(typeof(T) == typeof(short))
+                return math.lt(convert<T,int>(a), convert<T,int>(b));
+            else if(typeof(T) == typeof(int))
+                 return math.lt(int32(a), int32(b));
+            else if(typeof(T) == typeof(long))
+                 return math.lt(int64(a), int64(b));
+            else
+                return gfp.lt(a,b);
         }
 
         [MethodImpl(Inline)]

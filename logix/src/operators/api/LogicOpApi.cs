@@ -85,8 +85,8 @@ namespace Z0.Logix
                 case BinaryLogicOpKind.XOr: return xor(a,b);
                 case BinaryLogicOpKind.Xnor: return xnor(a,b);
 
-                case BinaryLogicOpKind.Implication: return imply(a,b); 
-                case BinaryLogicOpKind.Nonimplication: return notimply(a,b);
+                case BinaryLogicOpKind.Implication: return impl(a,b); 
+                case BinaryLogicOpKind.Nonimplication: return nonimpl(a,b);
 
                 case BinaryLogicOpKind.LeftProject: return left(a,b);
                 case BinaryLogicOpKind.RightProject: return right(a,b);
@@ -94,8 +94,8 @@ namespace Z0.Logix
                 case BinaryLogicOpKind.LeftNot: return lnot(a,b);
                 case BinaryLogicOpKind.RightNot: return rnot(a,b);
                 
-                case BinaryLogicOpKind.ConverseImplication: return cimply(a,b);
-                case BinaryLogicOpKind.ConverseNonimplication: return cnotimply(a,b);
+                case BinaryLogicOpKind.ConverseImplication: return cimpl(a,b);
+                case BinaryLogicOpKind.ConverseNonimplication: return cnonimpl(a,b);
 
                 default: return dne(kind);
             }
@@ -138,10 +138,10 @@ namespace Z0.Logix
                 case BinaryLogicOpKind.RightProject: return right;
                 case BinaryLogicOpKind.LeftNot: return lnot;
                 case BinaryLogicOpKind.RightNot: return rnot;
-                case BinaryLogicOpKind.Implication: return imply;
-                case BinaryLogicOpKind.Nonimplication: return notimply;
-                case BinaryLogicOpKind.ConverseImplication: return cimply;
-                case BinaryLogicOpKind.ConverseNonimplication: return cnotimply;
+                case BinaryLogicOpKind.Implication: return impl;
+                case BinaryLogicOpKind.Nonimplication: return nonimpl;
+                case BinaryLogicOpKind.ConverseImplication: return cimpl;
+                case BinaryLogicOpKind.ConverseNonimplication: return cnonimpl;
                 default: return dne<bit>(kind);
             }
         }

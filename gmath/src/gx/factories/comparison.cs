@@ -12,6 +12,32 @@ namespace Z0
 
     partial class GX
     {
+        // public static IBinaryOp<T> lookup<T>(BinaryBitwiseOpKind kind)
+        //     where T : unmanaged
+        // {
+        //     switch(kind)
+        //     {
+        //         case BinaryBitwiseOpKind.True: return @true;
+        //         case BinaryBitwiseOpKind.False: return @false;
+        //         case BinaryBitwiseOpKind.And: return and<T>();
+        //         case BinaryBitwiseOpKind.Nand: return nand<T>();
+        //         case BinaryBitwiseOpKind.Or: return or<T>();
+        //         case BinaryBitwiseOpKind.Nor: return nor<T>();
+        //         case BinaryBitwiseOpKind.XOr: return xor<T>();
+        //         case BinaryBitwiseOpKind.Xnor: return xnor<T>();
+        //         case BinaryBitwiseOpKind.LeftProject: return left();
+        //         case BinaryBitwiseOpKind.RightProject: return right;
+        //         case BinaryBitwiseOpKind.LeftNot: return lnot;
+        //         case BinaryBitwiseOpKind.RightNot: return rnot;
+        //         case BinaryBitwiseOpKind.Implication: return imply<T>();
+        //         case BinaryBitwiseOpKind.Nonimplication: return notimply<T>();
+        //         case BinaryBitwiseOpKind.ConverseImplication: return cimply<T>();
+        //         case BinaryBitwiseOpKind.ConverseNonimplication: return cnotimply<T>();
+        //         default: return dne<T>(kind);
+        //     }
+        // }
+
+
         [MethodImpl(Inline)]
         public static Eq<T> eq<T>(T t = default)
             where T : unmanaged        

@@ -82,19 +82,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(this in Block128<T> src)            
             where T : unmanaged            
-                => CpuVector.vload(src.ReadOnly());
-
-
-        /// <summary>
-        /// Loads a 128-bit vector from the first 128-bit block
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<T> LoadVector<T>(this in ConstBlock128<T> src)            
-            where T : unmanaged      
-                => CpuVector.vload(src);
+                => CpuVector.vload(src, 0);
 
         /// <summary>
         /// Loads a block-identified 128-bit vector
@@ -178,27 +166,6 @@ namespace Z0
             where T : unmanaged            
                 => CpuVector.vload(src);
 
-        /// <summary>
-        /// Loads a 256-bit vector from the first 256-bit block
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<T> LoadVector<T>(this in ConstBlock256<T> src)            
-            where T : unmanaged      
-                => CpuVector.vload(src);
-
-        /// <summary>
-        /// Loads a 512-bit vector from the first 512-bit block
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector512<T> LoadVector<T>(this in ConstBlock512<T> src)            
-            where T : unmanaged      
-                => CpuVector.vload(src);
 
         /// <summary>
         /// Loads a 256-bit vector from an index-identified block
@@ -222,37 +189,7 @@ namespace Z0
             where T : unmanaged            
                 => CpuVector.vload(src,block);
 
-        /// <summary>
-        /// Loads a 128-bit vector from an index-identified block
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<T> LoadVector<T>(this in ConstBlock128<T> src, int block)            
-            where T : unmanaged      
-                => CpuVector.vload(src,block);
 
-        /// <summary>
-        /// Loads a 256-bit vector from an index-identified block
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<T> LoadVector<T>(this in ConstBlock256<T> src, int block)            
-            where T : unmanaged      
-                => CpuVector.vload(src,block);
 
-        /// <summary>
-        /// Loads a 512-bit vector from an index-identified block
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector512<T> LoadVector<T>(this in ConstBlock512<T> src, int block)            
-            where T : unmanaged      
-                => CpuVector.vload(src,block);
     }
 }

@@ -116,15 +116,15 @@ namespace Z0.Logix
                 var b = vb.Set(Random);
                 var c = vc.Set(Random);
                 
-                var ab = Predicates.lt(a,b);
+                var ab = gmath.lt(a,b);
                 var abx = eval(x);
                 Claim.yea(same(ab, abx));
                 
-                var bc = Predicates.lt(b,c);
+                var bc = gmath.lt(b,c);
                 var bcy = eval(y);                
                 Claim.yea(same(bc, bcy));
 
-                var ca = Predicates.lt(c,a);
+                var ca = gmath.lt(c,a);
                 var caz = eval(z);
                 Claim.yea(same(ca, caz));
             }

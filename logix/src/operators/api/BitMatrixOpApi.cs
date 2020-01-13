@@ -80,10 +80,10 @@ namespace Z0.Logix
                 case BinaryBitwiseOpKind.RightProject: return right(A,B);
                 case BinaryBitwiseOpKind.LeftNot: return lnot(A,B);
                 case BinaryBitwiseOpKind.RightNot: return rnot(A,B);
-                case BinaryBitwiseOpKind.Implication: return imply(A,B);
-                case BinaryBitwiseOpKind.Nonimplication: return notimply(A,B);
-                case BinaryBitwiseOpKind.ConverseImplication: return cimply(A,B);
-                case BinaryBitwiseOpKind.ConverseNonimplication: return cnotimply(A,B);
+                case BinaryBitwiseOpKind.Implication: return impl(A,B);
+                case BinaryBitwiseOpKind.Nonimplication: return nonimpl(A,B);
+                case BinaryBitwiseOpKind.ConverseImplication: return cimpl(A,B);
+                case BinaryBitwiseOpKind.ConverseNonimplication: return cnonimpl(A,B);
                 default: return dne(kind,A,B);
             }
         }
@@ -102,13 +102,13 @@ namespace Z0.Logix
                 case BinaryBitwiseOpKind.XOr: return xor(A, B, ref Z);
                 case BinaryBitwiseOpKind.Xnor: return xnor(A, B, ref Z);
                 case BinaryBitwiseOpKind.LeftProject: return left(A,B, ref Z);
-                case BinaryBitwiseOpKind.LeftNot: return leftnot(A,B, ref Z);
+                case BinaryBitwiseOpKind.LeftNot: return lnot(A,B, ref Z);
                 case BinaryBitwiseOpKind.RightProject: return right(A,B, ref Z);
-                case BinaryBitwiseOpKind.RightNot: return rightnot(A, B, ref Z);
-                case BinaryBitwiseOpKind.Implication: return imply(A,B, ref Z);
-                case BinaryBitwiseOpKind.Nonimplication: return notimply(A,B, ref Z);
-                case BinaryBitwiseOpKind.ConverseImplication: return cimply(A,B, ref Z);
-                case BinaryBitwiseOpKind.ConverseNonimplication: return cnotimply(A,B, ref Z);
+                case BinaryBitwiseOpKind.RightNot: return rnot(A, B, ref Z);
+                case BinaryBitwiseOpKind.Implication: return impl(A,B, ref Z);
+                case BinaryBitwiseOpKind.Nonimplication: return nonimpl(A,B, ref Z);
+                case BinaryBitwiseOpKind.ConverseImplication: return cimpl(A,B, ref Z);
+                case BinaryBitwiseOpKind.ConverseNonimplication: return cnonimpl(A,B, ref Z);
                 default: return dne(kind,A,B);
             }
 
@@ -128,13 +128,13 @@ namespace Z0.Logix
                 case BinaryBitwiseOpKind.XOr: return xor;
                 case BinaryBitwiseOpKind.Xnor: return xnor;
                 case BinaryBitwiseOpKind.LeftProject: return left;
-                case BinaryBitwiseOpKind.LeftNot: return leftnot;
+                case BinaryBitwiseOpKind.LeftNot: return lnot;
                 case BinaryBitwiseOpKind.RightProject: return right;
-                case BinaryBitwiseOpKind.RightNot: return rightnot;
-                case BinaryBitwiseOpKind.Implication: return imply;
-                case BinaryBitwiseOpKind.Nonimplication: return notimply;
-                case BinaryBitwiseOpKind.ConverseImplication: return cimply;
-                case BinaryBitwiseOpKind.ConverseNonimplication: return cnotimply;
+                case BinaryBitwiseOpKind.RightNot: return rnot;
+                case BinaryBitwiseOpKind.Implication: return impl;
+                case BinaryBitwiseOpKind.Nonimplication: return nonimpl;
+                case BinaryBitwiseOpKind.ConverseImplication: return cimpl;
+                case BinaryBitwiseOpKind.ConverseNonimplication: return cnonimpl;
                 default: return nomareftop<T>(kind);
             }
 

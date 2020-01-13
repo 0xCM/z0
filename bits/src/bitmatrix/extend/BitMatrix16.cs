@@ -69,7 +69,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix16 AndNot(this BitMatrix16 A, in BitMatrix16 B)
-            => BitMatrix.cnotimply(A, B);
+            => BitMatrix.cnonimpl(A, B);
 
     }
 

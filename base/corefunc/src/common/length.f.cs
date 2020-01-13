@@ -127,20 +127,6 @@ partial class zfunc
             => lhs.Length == rhs.Length ? lhs.Length 
                 : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
 
-    /// <summary>
-    /// Returns the common length of the operands if they are the same; otherwise, raises an error
-    /// </summary>
-    /// <param name="lhs">The left span</param>
-    /// <param name="rhs">The right span</param>
-    /// <typeparam name="T">The element type of the first operand</typeparam>
-    /// <typeparam name="S">The element type of the second operand</typeparam>
-    [MethodImpl(Inline)]   
-    public static int length<S,T>(ConstBlock128<S> lhs, ConstBlock128<T> rhs,  [CallerMemberName] string caller = null, 
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where S : unmanaged
-            where T : unmanaged
-            => lhs.CellCount == rhs.CellCount ? lhs.CellCount 
-                : throw Errors.LengthMismatch(lhs.CellCount, rhs.CellCount, caller, file, line);
 
     /// <summary>
     /// Returns the length of spans of equal length; otherwise raises an error
@@ -154,19 +140,6 @@ partial class zfunc
             where S : unmanaged
                 => lhs.CellCount == rhs.CellCount ? lhs.CellCount : throw Errors.LengthMismatch(lhs.CellCount, rhs.CellCount, caller, file, line);
 
-    /// <summary>
-    /// Returns the common length of the operands if they are the same; otherwise, raises an error
-    /// </summary>
-    /// <param name="lhs">The left span</param>
-    /// <param name="rhs">The right span</param>
-    /// <typeparam name="T">The element type of the first operand</typeparam>
-    /// <typeparam name="S">The element type of the second operand</typeparam>
-    [MethodImpl(Inline)]   
-    public static int length<S,T>(ConstBlock256<S> lhs, ConstBlock256<T> rhs,[CallerMemberName] string caller = null, 
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where T : unmanaged
-            where S : unmanaged
-                =>  lhs.CellCount == rhs.CellCount ? lhs.CellCount : throw Errors.LengthMismatch(lhs.CellCount, rhs.CellCount, caller, file, line);
 
 
 

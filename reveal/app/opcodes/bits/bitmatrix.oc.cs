@@ -24,8 +24,6 @@ namespace Z0.OpCodes
         public static TableIndex tableindex_32x64x8(int row, int col)
             => BitMatrix.tableindex(row,col,n32,n64,z8);
 
-        public static ref readonly BitMatrix<uint> and(in BitMatrix<uint> A, in BitMatrix<uint> B, in BitMatrix<uint> Z)
-            => ref BitMatrix.and(A,B,Z);
 
     }
 

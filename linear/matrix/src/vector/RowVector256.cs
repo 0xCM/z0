@@ -18,17 +18,11 @@ namespace Z0
         public RowVector256(in Block256<T> src)
             => this.data = src;
 
-        [MethodImpl(Inline)]
-        public RowVector256(in ConstBlock256<T> src)
-            => this.data = src.Replicate();
 
         [MethodImpl(Inline)]
         public static implicit operator RowVector256<T>(in Block256<T> src)
             =>  new RowVector256<T>(src);
 
-        [MethodImpl(Inline)]
-        public static implicit operator RowVector256<T>(in ConstBlock256<T> src)
-            =>  new RowVector256<T>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator Block256<T>(in RowVector256<T> src)
@@ -40,7 +34,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(in RowVector256<T> src)
-            =>  src.Data.ReadOnly();
+            =>  src.Data;
 
         [MethodImpl(Inline)]
         public static bool operator == (RowVector256<T> lhs, in RowVector256<T> rhs) 
@@ -53,7 +47,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T operator *(RowVector256<T> lhs, in RowVector256<T> rhs)
-            => mathspan.dot<T>(lhs.Data.ReadOnly(), rhs.Data.ReadOnly());
+            => mathspan.dot<T>(lhs.Data, rhs.Data);
 
         public ref T this[int i]
         {

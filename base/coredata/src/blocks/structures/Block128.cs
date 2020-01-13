@@ -31,10 +31,6 @@ namespace Z0
             => src.data;
 
         [MethodImpl(Inline)]
-        public static implicit operator ConstBlock128<T>(in Block128<T> src)
-            => new ConstBlock128<T>(src.data);
-
-        [MethodImpl(Inline)]
         internal Block128(Span<T> src)
             => this.data = src;
 

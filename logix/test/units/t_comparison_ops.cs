@@ -11,7 +11,6 @@ namespace Z0.Logix
 
     using static CpuOps;
     
-    using P = Predicates;    
     using S = ScalarOps;
 
     public class t_comparison_ops : TypedLogixTest<t_comparison_ops>
@@ -117,13 +116,13 @@ namespace Z0.Logix
                 var x = Random.Next<T>();
                 var y = gmath.inc(x);
 
-                var y0 = P.equals(x,x);
+                var y0 = gmath.eq(x,x);
                 Claim.yea(y0);
 
                 var y1 = S.equals(x,x);
                 Claim.eq(gmath.maxval<T>(), y1);
 
-                var y2 = P.equals(x,y);
+                var y2 = gmath.eq(x,y);
                 Claim.nea(y2);
 
                 var y3 = S.equals(x,y);

@@ -316,13 +316,13 @@ namespace Z0
         /// <summary>
         /// Asserts content equality for two 128-bit blocked spans
         /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
+        /// <param name="xb">The left span</param>
+        /// <param name="yb">The right span</param>
         /// <param name="caller">The invoking function</param>
         /// <param name="file">The file in which the invoking function is defined </param>
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>        
-        public static void eq<T>(ConstBlock128<T> lhs, ConstBlock128<T> rhs,  [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void eq<T>(Block128<T> lhs, Block128<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
         {
             for(var i = 0; i< lhs.CellCount; i++)
@@ -330,18 +330,6 @@ namespace Z0
                     throw Errors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
         }
 
-        /// <summary>
-        /// Asserts content equality for two 128-bit blocked spans
-        /// </summary>
-        /// <param name="xb">The left span</param>
-        /// <param name="yb">The right span</param>
-        /// <param name="caller">The invoking function</param>
-        /// <param name="file">The file in which the invoking function is defined </param>
-        /// <param name="line">The file line number of invocation</param>
-        /// <typeparam name="T">The element type</typeparam>        
-        public static void eq<T>(Block128<T> xb, Block128<T> yb, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : unmanaged 
-                => eq(xb.ReadOnly(), yb.ReadOnly(), caller,file,line);
 
         /// <summary>
         /// Asserts content equality for two 256-bit blocked spans

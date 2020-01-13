@@ -68,61 +68,6 @@ namespace Z0
             where T : unmanaged
                 => src.Data.Slice(offset,length);             
 
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock16<T> src, int offset)
-            where T : unmanaged
-                => src.Data.Slice(offset);
-            
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock16<T> src, int offset, int length)
-            where T : unmanaged
-                => src.Data.Slice(offset,length);            
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock32<T> src, int offset)
-            where T : unmanaged
-                => src.Data.Slice(offset);
-            
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock32<T> src, int offset, int length)
-            where T : unmanaged
-                => src.Data.Slice(offset,length);            
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock64<T> src, int offset)
-            where T : unmanaged
-                => src.Data.Slice(offset);
-            
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock64<T> src, int offset, int length)
-            where T : unmanaged
-                => src.Data.Slice(offset,length);            
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock128<T> src, int offset)
-            where T : unmanaged
-                => src.Data.Slice(offset);
-            
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock128<T> src, int offset, int length)
-            where T : unmanaged
-                => src.Data.Slice(offset,length);            
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock256<T> src, int offset)
-            where T : unmanaged
-                => src.Data.Slice(offset);
-            
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock256<T> src, int offset, int length)
-            where T : unmanaged
-                => src.Data.Slice(offset,length);             
-
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> Slice<T>(this in ConstBlock512<T> src, int offset, int length)
-            where T : unmanaged
-                => src.Data.Slice(offset,length);             
 
 
     }

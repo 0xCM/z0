@@ -20,7 +20,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BitVector<T> @true<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => BitVector.ones<T>();
+                => BitVector.@true<T>(x,y);
 
         /// <summary>
         /// Computes the bitwise FALSE operator
@@ -31,7 +31,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BitVector<T> @false<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => BitVector.zero<T>();
+                => BitVector.@false<T>(x,y);
 
         /// <summary>
         /// Computes the bitwise AND of the source vectors via delegation to external bitvector API
@@ -42,7 +42,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BitVector<T> and<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => x & y;
+                => BitVector.and(x,y);
 
         /// <summary>
         /// Computes the bitwise NAND of the source vectors via delegation to external bitvector API
@@ -64,7 +64,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BitVector<T> or<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => x | y;
+                =>  BitVector.or(x,y);
 
         /// <summary>
         /// Computes the bitwise NOR of the source vectors via delegation to external bitvector API
@@ -75,7 +75,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BitVector<T> nor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => ~ (x | y);
+                =>  BitVector.nor(x,y);
 
         /// <summary>
         /// Computes the bitwise XOR of the source vectors via delegation to external bitvector API
@@ -86,7 +86,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BitVector<T> xor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => x ^ y;
+                =>  BitVector.xor(x,y);
 
         /// <summary>
         /// Computes the bitwise Xnor of the source vectors via delegation to external bitvector API
@@ -97,7 +97,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BitVector<T> xnor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => ~(x ^ y);
+                => BitVector.xnor(x,y);
 
         /// <summary>
         /// Defines the bitwise LeftProject operator
@@ -108,7 +108,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BitVector<T> left<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => x;
+                => BitVector.left(x,y);
 
         /// <summary>
         /// Defines the bitwise RightProject operator
@@ -119,7 +119,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BitVector<T> right<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => y;
+                => BitVector.right(x,y);
 
         /// <summary>
         /// Defines the bitwise LeftNot operator
@@ -130,7 +130,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BitVector<T> lnot<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => ~x;
+                => BitVector.lnot(x,y);
 
         /// <summary>
         /// Defines the bitwise RightNot operator
@@ -141,7 +141,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BitVector<T> rnot<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => ~y;
+                => BitVector.rnot(x,y);
 
         /// <summary>
         /// Computes the bitwise implication of the source vectors via delegation to external bitvector API
@@ -150,9 +150,9 @@ namespace Z0.Logix
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal scalar upon which the bitvector is predicated</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> imply<T>(BitVector<T> x, BitVector<T> y)
+        public static BitVector<T> impl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => x | ~y;
+                => BitVector.impl(x,y);
 
         /// <summary>
         /// Computes the bitwise nonimplication of the source vectors via delegation to external bitvector API
@@ -161,7 +161,7 @@ namespace Z0.Logix
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal scalar upon which the bitvector is predicated</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> notimply<T>(BitVector<T> x, BitVector<T> y)
+        public static BitVector<T> nonimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BitVector.nonimpl(x,y);
 
@@ -172,9 +172,9 @@ namespace Z0.Logix
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal scalar upon which the bitvector is predicated</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> cimply<T>(BitVector<T> x, BitVector<T> y)
+        public static BitVector<T> cimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => ~x | y;
+                => BitVector.cimpl(x,y);
 
         /// <summary>
         /// Computes the bitwise converse nonimplication of the source vectors via delegation to external bitvector API
@@ -183,7 +183,7 @@ namespace Z0.Logix
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal scalar upon which the bitvector is predicated</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> cnotimply<T>(BitVector<T> x, BitVector<T> y)
+        public static BitVector<T> cnonimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BitVector.cnonimpl(x,y);
 

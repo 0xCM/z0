@@ -13,6 +13,71 @@ namespace Z0
 
     partial class gmath
     {
+        [MethodImpl(Inline)]
+        public static T left<T>(T a, T b)
+            where T : unmanaged
+                => a;
+
+        [MethodImpl(Inline)]
+        public static T right<T>(T a, T b)
+            where T : unmanaged
+                => b;
+
+        [MethodImpl(Inline)]
+        public static T lnot<T>(T a, T b)
+            where T : unmanaged
+                => not(a);
+
+        [MethodImpl(Inline)]
+        public static T rnot<T>(T a, T b)
+            where T : unmanaged
+                => not(b);
+
+        [MethodImpl(Inline)]
+        public static T @false<T>()
+            where T:unmanaged
+                => zero<T>();
+
+        [MethodImpl(Inline)]
+        public static T @false<T>(T a)
+            where T:unmanaged
+                => @false<T>();
+
+        [MethodImpl(Inline)]
+        public static T @false<T>(T a, T b, T c)
+            where T:unmanaged
+                => @false<T>();
+
+        [MethodImpl(Inline)]
+        public static T @true<T>()
+            where T:unmanaged
+                => ones<T>();
+
+        [MethodImpl(Inline)]
+        public static T @true<T>(T a)
+            where T:unmanaged
+                => @true<T>();
+
+        [MethodImpl(Inline)]
+        public static T @true<T>(T a, T b)
+            where T:unmanaged
+                => @true<T>();
+
+        [MethodImpl(Inline)]
+        public static T @false<T>(T a, T b)
+            where T:unmanaged
+                => @false<T>();
+
+        [MethodImpl(Inline)]
+        public static T @true<T>(T a, T b, T c)
+            where T:unmanaged
+                => @true<T>();
+
+        [MethodImpl(Inline)]
+        public static T identity<T>(T a)
+            where T : unmanaged
+                => a;
+
         /// <summary>
         /// Computes the material implication c := a | ~b for integral values a and b
         /// </summary>

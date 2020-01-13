@@ -41,36 +41,5 @@ namespace Z0
         public static void CopyTo<T>(this in Block512<T> src, Span<T> dst)
             where T : unmanaged
                 => src.Data.CopyTo(dst);
-
-        [MethodImpl(Inline)]
-        public static void CopyTo<T>(this in ConstBlock16<T> src, Span<T> dst)
-            where T : unmanaged
-                => src.Data.CopyTo(dst);
-
-        [MethodImpl(Inline)]
-        public static void CopyTo<T>(this in ConstBlock32<T> src, Span<T> dst)
-            where T : unmanaged
-                => src.Data.CopyTo(dst);
-
-        [MethodImpl(Inline)]
-        public static void CopyTo<T>(this in ConstBlock64<T> src, Span<T> dst)
-            where T : unmanaged
-                => src.Data.CopyTo(dst);
-
-        [MethodImpl(Inline)]
-        public static void CopyTo<T>(this in ConstBlock128<T> src, Span<T> dst)
-            where T : unmanaged
-                => src.Data.CopyTo(dst);
-
-        [MethodImpl(Inline)]
-        public static void CopyTo<T>(this in ConstBlock256<T> src, Span<T> dst)
-            where T : unmanaged
-                => src.Data.CopyTo(dst);
-
-        [MethodImpl(Inline)]
-        public static void CopyTo<T>(this in ConstBlock512<T> src, Span<T> dst)
-            where T : unmanaged
-                => src.Data.CopyTo(dst);
-
     }
 }

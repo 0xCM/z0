@@ -24,45 +24,6 @@ namespace Z0
             where T : unmanaged
                 => vcell(src,index);
 
-        /// <summary>
-        /// Increments each source vector component by a unit
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<T> Next<T>(this Vector128<T> src)
-            where T : unmanaged
-                => ginx.vinc(src);
-
-        /// <summary>
-        /// Increments each source vector component by a unit
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<T> Next<T>(this Vector256<T> src)
-            where T : unmanaged
-                => ginx.vinc(src);
-
-        /// <summary>
-        /// Decrements each source vector component by a unit
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<T> Prior<T>(this Vector128<T> src)
-            where T : unmanaged
-                => ginx.vdec<T>(src);
-
-        /// <summary>
-        /// Decrements each source vector component by a unit
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<T> Prior<T>(this Vector256<T> src)
-            where T : unmanaged
-                => ginx.vdec<T>(src);
 
         /// <summary>
         /// Returns the number of source vector components

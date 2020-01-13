@@ -50,16 +50,16 @@ namespace Z0.OpCodes
             => nand(b,or(and(a,b), xor(a,b)));
     
         public static bit comp3_logic(bit a, bit b)
-            => select(a,nand(b,or(and(a,b), xor(a,b))), cnotimply(nor(a,b), xor(b,a)));
+            => select(a,nand(b,or(and(a,b), xor(a,b))), cnonimpl(nor(a,b), xor(b,a)));
 
         public static ulong comp3_scalar(ulong a, ulong b)
-            => select(a,nand(b,or(and(a,b), xor(a,b))), cnotimply(nor(a,b), xor(b,a)));
+            => select(a,nand(b,or(and(a,b), xor(a,b))), cnonimpl(nor(a,b), xor(b,a)));
 
         public static Vector128<ulong> comp3_v128(Vector128<ulong> a, Vector128<ulong> b)
-            => select(a,nand(b,or(and(a,b), xor(a,b))), cnotimply(nor(a,b), xor(b,a)));
+            => select(a,nand(b,or(and(a,b), xor(a,b))), cnonimpl(nor(a,b), xor(b,a)));
 
         public static Vector256<ulong> comp3_v256(Vector256<ulong> a, Vector256<ulong> b)
-            => select(a,nand(b,or(and(a,b), xor(a,b))), cnotimply(nor(a,b), xor(b,a)));
+            => select(a,nand(b,or(and(a,b), xor(a,b))), cnonimpl(nor(a,b), xor(b,a)));
 
     }
 
