@@ -18,7 +18,7 @@ namespace Z0
 
             public const string Name = "between";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             public T Invoke(T a, byte k1, byte k2) => gbits.between(a,k1,k2);
         }

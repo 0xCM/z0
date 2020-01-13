@@ -23,7 +23,7 @@ namespace Z0
             internal TernaryRep(F f)            
                 => this.f = f;
             
-            public string Moniker => f.Moniker;
+            public Moniker Moniker => f.Moniker;
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b, T c) => f.Invoke(a,b,c);

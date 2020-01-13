@@ -19,7 +19,7 @@ namespace Z0
 
             public const string Name = "bvnand";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b) => BitVector.nand(a,b);

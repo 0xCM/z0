@@ -18,7 +18,7 @@ namespace Z0
 
             public const string Name = "parse";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(string a) => gmath.parse<T>(a);

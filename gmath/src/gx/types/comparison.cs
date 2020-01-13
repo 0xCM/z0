@@ -18,7 +18,7 @@ namespace Z0
 
             public const string Name = "eq";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) => gmath.eq(x,y);
@@ -31,7 +31,7 @@ namespace Z0
 
             public const string Name = "neq";
             
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) => gmath.neq(x,y);
@@ -44,7 +44,7 @@ namespace Z0
 
             public const string Name = "lt";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) => gmath.lt(x,y);
@@ -57,7 +57,7 @@ namespace Z0
 
             public const string Name = "lteq";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) => gmath.lteq(x,y);
@@ -70,7 +70,7 @@ namespace Z0
 
             public const string Name = "gt";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a, T b) => gmath.gt(a,b);
@@ -83,7 +83,7 @@ namespace Z0
 
             public const string Name = "gteq";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a, T b) => gmath.gteq(a,b);
@@ -96,7 +96,7 @@ namespace Z0
 
             public const string Name = "between";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T a, T b) => gmath.between(x,a,b);
@@ -109,7 +109,7 @@ namespace Z0
 
             public const string Name = "nonz";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a) => gmath.nonz(a);
@@ -122,7 +122,7 @@ namespace Z0
 
             public const string Name = "negative";
 
-            public string Moniker => moniker<T>("negative");
+            public Moniker Moniker => moniker<T>("negative");
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a) => gmath.negative(a);
@@ -135,7 +135,7 @@ namespace Z0
 
             public const string Name = "positive";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a) => gmath.positive(a);
@@ -148,7 +148,7 @@ namespace Z0
 
             public const string Name = "min";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.min(a, b);
@@ -161,7 +161,7 @@ namespace Z0
 
             public const string Name = "max";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.max(a, b);

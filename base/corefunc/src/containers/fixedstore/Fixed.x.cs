@@ -59,6 +59,20 @@ namespace Z0
             where T : unmanaged
                 => f(x.ToFixed(), y.ToFixed()).ToVector<T>();
 
+        /// <summary>
+        /// Formats a fixed-width type S as a list of T-segments
+        /// </summary>
+        /// <param name="src">The fixed-width value</param>
+        /// <typeparam name="S">The fixed-width type</typeparam>
+        /// <typeparam name="T">The segment type</typeparam>
+        public static string Format<S,T>(this S src, PrimalKind<T> t = default)
+            where S : unmanaged, IFixed
+            where T : unmanaged
+        {
+            Span<T> dst = stackalloc T[bitsize<S>() / bitsize<T>()];
+            return dst.FormatList();
+        }
+
     }
 
 }

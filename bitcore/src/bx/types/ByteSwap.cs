@@ -19,7 +19,7 @@ namespace Z0
 
             public const string Name = "byteswap";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a) => gbits.byteswap(a);

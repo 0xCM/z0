@@ -95,5 +95,8 @@ namespace Z0
             gen.Emit(OpCodes.Ret);
             return (Func<T,T,T>) method.CreateDelegate(typeof(Func<T,T,T>));
         }
+
+
+
     }
 }

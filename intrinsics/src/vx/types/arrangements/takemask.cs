@@ -19,7 +19,7 @@ namespace Z0
 
             public const string Name = "vtakemask";
 
-            public string Moniker => moniker<N128,T>(Name);
+            public Moniker Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public ushort Invoke(Vector128<T> x) => ginx.vtakemask(x);            
@@ -33,7 +33,7 @@ namespace Z0
 
             public const string Name = "vtakemask";
 
-            public string Moniker => moniker<N256,T>(Name);
+            public Moniker Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public uint Invoke(Vector256<T> x) => ginx.vtakemask(x);

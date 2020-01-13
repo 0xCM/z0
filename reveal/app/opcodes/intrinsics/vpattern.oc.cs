@@ -16,22 +16,22 @@ namespace Z0.OpCodes
     public static class vpattern
     {
         public static VectorKind vkind_128x32u()
-            => Classifiers.vkind<N128,uint>();
+            => Classifiers.vector<N128,uint>();
 
         public static VectorKind vkind_256x32u()
-            => Classifiers.vkind<N256,uint>();
+            => Classifiers.vector<N256,uint>();
 
         public static BlockKind bkind_256x32u()
-            => Classifiers.bkind<N256,uint>();
+            => Classifiers.block<N256,uint>();
 
         public static PrimalKind pkind_8u()
-            => Classifiers.pkind<byte>();
+            => Classifiers.primal<byte>();
 
         public static PrimalKind pkind_32u()
-            => Classifiers.pkind<uint>();
+            => Classifiers.primal<uint>();
 
         public static PrimalKind pkind_32i()
-            => Classifiers.pkind<int>();
+            => Classifiers.primal<int>();
 
         public static Vector128<byte> ones_128x8u()
             => VPattern.vones<byte>(n128);

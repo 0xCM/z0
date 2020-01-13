@@ -17,7 +17,7 @@ namespace Z0
 
             public const string Name = "bvdot";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(BitVector<T> a, BitVector<T> b) => BitVector.dot(a,b);

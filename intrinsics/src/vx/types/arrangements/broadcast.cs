@@ -19,7 +19,7 @@ namespace Z0
 
             public const string Name = "vbroadcast";
 
-            public string Moniker => moniker<N128,T>(Name);
+            public Moniker Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(T a) => CpuVector.vbroadcast(n128, a);            
@@ -33,7 +33,7 @@ namespace Z0
 
             public const string Name = "vbroadcast";
 
-            public string Moniker => moniker<N128,T>($"{Name}_{primalsig<S>()}");
+            public Moniker Moniker => moniker<N128,T>($"{Name}_{primalsig<S>()}");
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(S a) => CpuVector.vbroadcast(n128, convert<S,T>(a));
@@ -47,7 +47,7 @@ namespace Z0
 
             public const string Name = "vbroadcast";
 
-            public string Moniker => moniker<N256,T>(Name);
+            public Moniker Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(T a) => CpuVector.vbroadcast(n256, a);            
@@ -61,7 +61,7 @@ namespace Z0
 
             public const string Name = "vbroadcast";
 
-            public string Moniker => moniker<N256,T>($"{Name}_{primalsig<S>()}");
+            public Moniker Moniker => moniker<N256,T>($"{Name}_{primalsig<S>()}");
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(S a) => CpuVector.vbroadcast(n256, convert<S,T>(a));

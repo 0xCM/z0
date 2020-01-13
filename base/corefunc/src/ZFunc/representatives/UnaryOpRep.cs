@@ -22,7 +22,7 @@ namespace Z0
             [MethodImpl(Inline)]
             internal UnaryRep(F f) => this.f = f;
             
-            public string Moniker => f.Moniker;
+            public Moniker Moniker => f.Moniker;
 
             [MethodImpl(Inline)]
             public T Invoke(T a) => f.Invoke(a);

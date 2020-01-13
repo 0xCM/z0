@@ -1,4 +1,134 @@
-; 2020-01-11 17:55:29:622
+; 2020-01-12 17:49:13:897
+; function: Vector128<uint> vbsrl_128x32u_0(Vector128<uint> x)
+; static ReadOnlySpan<byte> vbsrl_128x32u_0Bytes => new byte[22]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC5,0xF9,0x73,0xD8,0x00,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
+0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
+0005h vmovupd xmm0,[rdx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
+0009h vpsrldq xmm0,xmm0,0                     ; VPSRLDQ(VEX_Vpsrldq_xmm_xmm_imm8) [XMM0,XMM0,0h:imm8] encoding(VEX, 5 bytes) = c5 f9 73 d8 00
+000eh vmovupd [rcx],xmm0                      ; VMOVUPD(VEX_Vmovupd_xmmm128_xmm) [mem(Packed128_Float64,RCX:br,:sr),XMM0] encoding(VEX, 4 bytes) = c5 f9 11 01
+0012h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
+0015h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+; function: Vector128<uint> vbsrl_128x32u_1(Vector128<uint> x)
+; static ReadOnlySpan<byte> vbsrl_128x32u_1Bytes => new byte[22]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC5,0xF9,0x73,0xD8,0x01,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
+0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
+0005h vmovupd xmm0,[rdx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
+0009h vpsrldq xmm0,xmm0,1                     ; VPSRLDQ(VEX_Vpsrldq_xmm_xmm_imm8) [XMM0,XMM0,1h:imm8] encoding(VEX, 5 bytes) = c5 f9 73 d8 01
+000eh vmovupd [rcx],xmm0                      ; VMOVUPD(VEX_Vmovupd_xmmm128_xmm) [mem(Packed128_Float64,RCX:br,:sr),XMM0] encoding(VEX, 4 bytes) = c5 f9 11 01
+0012h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
+0015h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+; function: Vector128<uint> vbsrl_128x32u_2(Vector128<uint> x)
+; static ReadOnlySpan<byte> vbsrl_128x32u_2Bytes => new byte[22]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC5,0xF9,0x73,0xD8,0x02,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
+0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
+0005h vmovupd xmm0,[rdx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
+0009h vpsrldq xmm0,xmm0,2                     ; VPSRLDQ(VEX_Vpsrldq_xmm_xmm_imm8) [XMM0,XMM0,2h:imm8] encoding(VEX, 5 bytes) = c5 f9 73 d8 02
+000eh vmovupd [rcx],xmm0                      ; VMOVUPD(VEX_Vmovupd_xmmm128_xmm) [mem(Packed128_Float64,RCX:br,:sr),XMM0] encoding(VEX, 4 bytes) = c5 f9 11 01
+0012h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
+0015h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+; function: Vector128<uint> vbsrl_128x32u_3(Vector128<uint> x)
+; static ReadOnlySpan<byte> vbsrl_128x32u_3Bytes => new byte[22]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC5,0xF9,0x73,0xD8,0x03,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
+0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
+0005h vmovupd xmm0,[rdx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
+0009h vpsrldq xmm0,xmm0,3                     ; VPSRLDQ(VEX_Vpsrldq_xmm_xmm_imm8) [XMM0,XMM0,3h:imm8] encoding(VEX, 5 bytes) = c5 f9 73 d8 03
+000eh vmovupd [rcx],xmm0                      ; VMOVUPD(VEX_Vmovupd_xmmm128_xmm) [mem(Packed128_Float64,RCX:br,:sr),XMM0] encoding(VEX, 4 bytes) = c5 f9 11 01
+0012h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
+0015h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+; function: Vector128<uint> vbsrl_128x32u_4(Vector128<uint> x)
+; static ReadOnlySpan<byte> vbsrl_128x32u_4Bytes => new byte[22]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC5,0xF9,0x73,0xD8,0x04,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
+0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
+0005h vmovupd xmm0,[rdx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
+0009h vpsrldq xmm0,xmm0,4                     ; VPSRLDQ(VEX_Vpsrldq_xmm_xmm_imm8) [XMM0,XMM0,4h:imm8] encoding(VEX, 5 bytes) = c5 f9 73 d8 04
+000eh vmovupd [rcx],xmm0                      ; VMOVUPD(VEX_Vmovupd_xmmm128_xmm) [mem(Packed128_Float64,RCX:br,:sr),XMM0] encoding(VEX, 4 bytes) = c5 f9 11 01
+0012h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
+0015h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+; function: Vector128<uint> vbsrl_128x32u_5(Vector128<uint> x)
+; static ReadOnlySpan<byte> vbsrl_128x32u_5Bytes => new byte[22]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC5,0xF9,0x73,0xD8,0x05,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
+0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
+0005h vmovupd xmm0,[rdx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
+0009h vpsrldq xmm0,xmm0,5                     ; VPSRLDQ(VEX_Vpsrldq_xmm_xmm_imm8) [XMM0,XMM0,5h:imm8] encoding(VEX, 5 bytes) = c5 f9 73 d8 05
+000eh vmovupd [rcx],xmm0                      ; VMOVUPD(VEX_Vmovupd_xmmm128_xmm) [mem(Packed128_Float64,RCX:br,:sr),XMM0] encoding(VEX, 4 bytes) = c5 f9 11 01
+0012h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
+0015h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+; function: Vector128<uint> vbsrl_128x32u_6(Vector128<uint> x)
+; static ReadOnlySpan<byte> vbsrl_128x32u_6Bytes => new byte[22]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC5,0xF9,0x73,0xD8,0x06,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
+0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
+0005h vmovupd xmm0,[rdx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
+0009h vpsrldq xmm0,xmm0,6                     ; VPSRLDQ(VEX_Vpsrldq_xmm_xmm_imm8) [XMM0,XMM0,6h:imm8] encoding(VEX, 5 bytes) = c5 f9 73 d8 06
+000eh vmovupd [rcx],xmm0                      ; VMOVUPD(VEX_Vmovupd_xmmm128_xmm) [mem(Packed128_Float64,RCX:br,:sr),XMM0] encoding(VEX, 4 bytes) = c5 f9 11 01
+0012h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
+0015h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+; function: Vector128<uint> vbsrl_128x32u_7(Vector128<uint> x)
+; static ReadOnlySpan<byte> vbsrl_128x32u_7Bytes => new byte[22]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC5,0xF9,0x73,0xD8,0x07,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
+0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
+0005h vmovupd xmm0,[rdx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
+0009h vpsrldq xmm0,xmm0,7                     ; VPSRLDQ(VEX_Vpsrldq_xmm_xmm_imm8) [XMM0,XMM0,7h:imm8] encoding(VEX, 5 bytes) = c5 f9 73 d8 07
+000eh vmovupd [rcx],xmm0                      ; VMOVUPD(VEX_Vmovupd_xmmm128_xmm) [mem(Packed128_Float64,RCX:br,:sr),XMM0] encoding(VEX, 4 bytes) = c5 f9 11 01
+0012h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
+0015h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+; function: Vector128<uint> vbsrl_128x32u_8(Vector128<uint> x)
+; static ReadOnlySpan<byte> vbsrl_128x32u_8Bytes => new byte[22]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC5,0xF9,0x73,0xD8,0x08,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
+0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
+0005h vmovupd xmm0,[rdx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
+0009h vpsrldq xmm0,xmm0,8                     ; VPSRLDQ(VEX_Vpsrldq_xmm_xmm_imm8) [XMM0,XMM0,8h:imm8] encoding(VEX, 5 bytes) = c5 f9 73 d8 08
+000eh vmovupd [rcx],xmm0                      ; VMOVUPD(VEX_Vmovupd_xmmm128_xmm) [mem(Packed128_Float64,RCX:br,:sr),XMM0] encoding(VEX, 4 bytes) = c5 f9 11 01
+0012h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
+0015h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+; function: Vector128<uint> vbsrl_128x32u_9(Vector128<uint> x)
+; static ReadOnlySpan<byte> vbsrl_128x32u_9Bytes => new byte[22]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC5,0xF9,0x73,0xD8,0x09,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
+0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
+0005h vmovupd xmm0,[rdx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
+0009h vpsrldq xmm0,xmm0,9                     ; VPSRLDQ(VEX_Vpsrldq_xmm_xmm_imm8) [XMM0,XMM0,9h:imm8] encoding(VEX, 5 bytes) = c5 f9 73 d8 09
+000eh vmovupd [rcx],xmm0                      ; VMOVUPD(VEX_Vmovupd_xmmm128_xmm) [mem(Packed128_Float64,RCX:br,:sr),XMM0] encoding(VEX, 4 bytes) = c5 f9 11 01
+0012h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
+0015h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+; function: Vector128<uint> vbsrl_128x32u_11(Vector128<uint> x)
+; static ReadOnlySpan<byte> vbsrl_128x32u_11Bytes => new byte[22]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC5,0xF9,0x73,0xD8,0x0B,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
+0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
+0005h vmovupd xmm0,[rdx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
+0009h vpsrldq xmm0,xmm0,0Bh                   ; VPSRLDQ(VEX_Vpsrldq_xmm_xmm_imm8) [XMM0,XMM0,bh:imm8] encoding(VEX, 5 bytes) = c5 f9 73 d8 0b
+000eh vmovupd [rcx],xmm0                      ; VMOVUPD(VEX_Vmovupd_xmmm128_xmm) [mem(Packed128_Float64,RCX:br,:sr),XMM0] encoding(VEX, 4 bytes) = c5 f9 11 01
+0012h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
+0015h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+; function: Vector128<uint> vbsrl_128x32u_23(Vector128<uint> x)
+; static ReadOnlySpan<byte> vbsrl_128x32u_23Bytes => new byte[22]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC5,0xF9,0x73,0xD8,0x17,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
+0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
+0005h vmovupd xmm0,[rdx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
+0009h vpsrldq xmm0,xmm0,17h                   ; VPSRLDQ(VEX_Vpsrldq_xmm_xmm_imm8) [XMM0,XMM0,17h:imm8] encoding(VEX, 5 bytes) = c5 f9 73 d8 17
+000eh vmovupd [rcx],xmm0                      ; VMOVUPD(VEX_Vmovupd_xmmm128_xmm) [mem(Packed128_Float64,RCX:br,:sr),XMM0] encoding(VEX, 4 bytes) = c5 f9 11 01
+0012h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
+0015h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+; function: Vector128<uint> vbsrl_128x32u_200(Vector128<uint> x)
+; static ReadOnlySpan<byte> vbsrl_128x32u_200Bytes => new byte[22]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC5,0xF9,0x73,0xD8,0xC8,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
+0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
+0005h vmovupd xmm0,[rdx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
+0009h vpsrldq xmm0,xmm0,0C8h                  ; VPSRLDQ(VEX_Vpsrldq_xmm_xmm_imm8) [XMM0,XMM0,c8h:imm8] encoding(VEX, 5 bytes) = c5 f9 73 d8 c8
+000eh vmovupd [rcx],xmm0                      ; VMOVUPD(VEX_Vmovupd_xmmm128_xmm) [mem(Packed128_Float64,RCX:br,:sr),XMM0] encoding(VEX, 4 bytes) = c5 f9 11 01
+0012h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
+0015h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: byte opA_8u(byte dl, byte r8b, byte r9b, byte rsp28)
 ; static ReadOnlySpan<byte> opA_8uBytes => new byte[40]{0x0F,0x1F,0x44,0x00,0x00,0x0F,0xB6,0xC2,0x41,0x0F,0xB6,0xD0,0x0F,0xAF,0xC2,0x0F,0xB6,0xC0,0x41,0x0F,0xB6,0xD1,0x33,0xC2,0x0F,0xB6,0xC0,0x8B,0x54,0x24,0x28,0x0F,0xB6,0xD2,0x0B,0xD0,0x0F,0xB6,0xC2,0xC3};
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00

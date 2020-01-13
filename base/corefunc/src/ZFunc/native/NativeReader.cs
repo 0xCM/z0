@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.Reflection.Emit;
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
@@ -69,6 +70,18 @@ namespace Z0
             }
         }
 
+
+        public static unsafe INativeMemberData read(DynamicDelegate d, Span<byte> dst)
+        {
+            var pSrc = d.Jit().Pointer;
+            var pSrcCurrent = pSrc;
+            var start = (ulong)pSrc;         
+            var end = Capture(pSrc, dst);   
+            var bytesRead = (int)(end - start);
+            var code = dst.Slice(0, bytesRead).ToArray();
+            return new NativeMethodData(d.SourceMethod, start, end, code);
+        }
+        
         /// <summary>
         /// Runs the jitter on a delegate and captures the emitted binary assembly data
         /// </summary>

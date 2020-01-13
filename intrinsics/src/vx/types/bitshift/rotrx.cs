@@ -15,9 +15,13 @@ namespace Z0
         public readonly struct Rotrx128<T> : IVShiftOp128<T>
             where T : unmanaged
         {
+            public const string Name = "vrotrx";
+
             public static Rotrx128<T> Op => default;
 
-            public string Moniker => moniker<N128,T>("vrotrx");
+            static N128 w => default;
+
+            public Moniker Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte offset) => ginx.vrotrx(x,offset);
@@ -27,9 +31,13 @@ namespace Z0
         public readonly struct Rotrx256<T> : IVShiftOp256<T>
             where T : unmanaged
         {
+            public const string Name = "vrotrx";            
+
+            static N256 w => default;
+
             public static Rotrx256<T> Op => default;
 
-            public string Moniker => moniker<N256,T>("vrotrx");
+            public Moniker Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte offset) => ginx.vrotrx(x,offset);

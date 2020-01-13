@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     using System.Reflection;
+    using System.Reflection.Emit;
     using System.Linq;
     using System.Collections.Generic;
 
@@ -290,6 +291,13 @@ namespace Z0
             => Classified.width(k);
 
         /// <summary>
+        /// Returns the number of bytes occupied by a type if it is primal and 0 otherwise
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static int Size(this Type t)
+            => Classified.size(t);
+
+        /// <summary>
         /// Determines a sub-classification c := {'u' | 'i' | 'f'} according to whether a classified primal type
         /// is unsigned integral, signed integral or floating-point
         /// </summary>
@@ -357,7 +365,7 @@ namespace Z0
                     yield return k;
             }
         }            
- 
+    
         /// <summary>
         /// Determines whether a method defines a unary function
         /// </summary>
@@ -517,6 +525,14 @@ namespace Z0
             => src.Where(x => !x.IsBlocked());
 
         /// <summary>
+        /// Selects (or filters) the methods that define parameters that require immediate values
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        /// <param name="required">Whether an immediate is required</param>
+        public static IEnumerable<MethodInfo> RequiresImmediate(this IEnumerable<MethodInfo> src, bool required)
+            => required ? src.Where(RequiresImmediate) : src;
+
+        /// <summary>
         /// Returns an identified unary operator if it exists
         /// </summary>
         /// <param name="t">The type to examine</param>
@@ -564,6 +580,50 @@ namespace Z0
                 where f.Attributed<BinaryLiteralAttribute>()
                let a = f.CustomAttribute<BinaryLiteralAttribute>().Require()
                 select BinaryLiteral.Define(f.Name, f.GetValue(null), a.Text);
+
+        public static DynamicDelegate<UnaryOp<Vector128<T>>> UnaryOpImm8<T>(this MethodInfo src, N128 w, byte imm8)
+            where T :  unmanaged
+        {
+            var operand = typeof(Vector128<T>);                        
+            var method = new DynamicMethod(name: src.Name, 
+                attributes: MethodAttributes.Public | MethodAttributes.Static,  
+                callingConvention: CallingConventions.Standard,
+                returnType: operand, 
+                parameterTypes: new Type[]{operand}, 
+                owner: src.DeclaringType,
+                skipVisibility: false);       
+            
+            var gen = method.GetILGenerator();
+            gen.Emit(OpCodes.Ldarg_0);
+            gen.Emit(OpCodes.Ldc_I4_S, imm8);
+            gen.EmitCall(OpCodes.Call, src, null);
+            gen.Emit(OpCodes.Ret);
+
+            var op = (UnaryOp<Vector128<T>>)method.CreateDelegate(typeof(UnaryOp<Vector128<T>>));                
+            return DynamicDelegate.Define(src, method, op);
+        }
+
+        public static DynamicDelegate<UnaryOp<Vector256<T>>> UnaryOpImm8<T>(this MethodInfo src, N256 w, byte imm8)
+            where T :  unmanaged
+        {
+            var operand = typeof(Vector256<T>);                        
+            var method = new DynamicMethod(name: src.Name, 
+                attributes: MethodAttributes.Public | MethodAttributes.Static,  
+                callingConvention: CallingConventions.Standard,
+                returnType: operand, 
+                parameterTypes: new Type[]{operand}, 
+                owner: src.DeclaringType,
+                skipVisibility: false);       
+            
+            var gen = method.GetILGenerator();
+            gen.Emit(OpCodes.Ldarg_0);
+            gen.Emit(OpCodes.Ldc_I4_S, imm8);
+            gen.EmitCall(OpCodes.Call, src, null);
+            gen.Emit(OpCodes.Ret);
+
+            var op = (UnaryOp<Vector256<T>>)method.CreateDelegate(typeof(UnaryOp<Vector256<T>>));                
+            return DynamicDelegate.Define(src, method, op);
+        }
 
     }
 }

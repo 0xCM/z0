@@ -173,7 +173,7 @@ partial class zfunc
     /// <param name="member">The field</param>
     /// <param name="instance">The object instance, if applicable</param>
     public static Option<V> value<V>(FieldInfo member, object instance = null)
-        => from o in member.TryGetValue(instance)
+        => from o in member.FieldValue(instance)
            from v in tryCast<V>(o)
            select v;
 

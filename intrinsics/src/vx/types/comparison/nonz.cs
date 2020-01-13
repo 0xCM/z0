@@ -19,7 +19,7 @@ namespace Z0
 
             public const string Name = "vnonz";
 
-            public string Moniker => moniker<N128,T>(Name);
+            public Moniker Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector128<T> x) => ginx.vnonz(x);
@@ -35,7 +35,7 @@ namespace Z0
 
             public const string Name = "vnonz";
 
-            public string Moniker => moniker<N256,T>(Name);
+            public Moniker Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector256<T> x) => ginx.vnonz(x);

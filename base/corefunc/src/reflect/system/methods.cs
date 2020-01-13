@@ -149,7 +149,6 @@ namespace Z0
         public static IEnumerable<MethodInfo> Public(this IEnumerable<MethodInfo> src)
             => src.Where(t => t.IsPublic);
 
-
         /// <summary>
         /// Selects the open generic methods from a stream
         /// </summary>
@@ -178,6 +177,25 @@ namespace Z0
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> NonGeneric(this IEnumerable<MethodInfo> src)
             => src.Where(t => !t.ContainsGenericParameters && !t.IsConstructedGenericMethod);        
+
+        /// <summary>
+        /// Reifies a method if it is open generic; otherwise, returns the original method
+        /// </summary>
+        /// <param name="m"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public static MethodInfo Reify(this MethodInfo m, params Type[] args)
+        {
+            if(m.IsGenericMethodDefinition)
+                return m.MakeGenericMethod(args);            
+            else if(m.IsConstructedGenericMethod)
+                return m;
+            else if(m.IsGenericMethod)
+                return m.GetGenericMethodDefinition().MakeGenericMethod(args);
+            else
+                return m;                
+        }
+            
 
         /// <summary>
         /// Selects functions from a stream
@@ -223,7 +241,13 @@ namespace Z0
         public static IEnumerable<MethodInfo> WithParameterType(this IEnumerable<MethodInfo> src, Type t)
             => src.Where(m => m.GetParameters().Length != 0 && m.GetParameters().Any(p => p.ParameterType == t));
 
+        /// <summary>
+        /// Selects generic methods from a stream that have a specified generic type definition parameter
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        /// <param name="typedef">The type definition to match</param>
         public static IEnumerable<MethodInfo> WithGenericParameterType(this IEnumerable<MethodInfo> src, Type typedef)
-            => src.Where(m => m.GetParameters().Length != 0 && m.GetParameters().Any(p => p.ParameterType.IsGenericTypeDefinition && p.ParameterType == typedef));
+            => src.Where(m => m.GetParameters().Length != 0 && m.GetParameters()
+                  .Any(p => p.ParameterType.IsGenericTypeDefinition && p.ParameterType == typedef));
     }
 }

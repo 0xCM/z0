@@ -10,6 +10,8 @@ namespace Z0
     using System.Linq;
     using System.Threading;
     using System.Reflection;
+    using System.Runtime.Intrinsics;
+    using System.Reflection.Emit;
 
     using static ControlMessages;
     using static zfunc;
@@ -38,6 +40,12 @@ namespace Z0
             SaveAsm(AsmCode.Load(block.Encoded, m));
         }
 
+        public void Save(OpData src)
+        {
+            Paths.AsmDetailPath(Subject, src.Moniker).WriteText(src.Asm.Format());
+            SaveAsm(AsmCode.Load(src.Asm.Encoded, src.Moniker));
+        }
+
         void SaveCil(CilFuncSpec cil, Moniker m)
         {
             Paths.CilPath(Subject,m).WriteText(cil.Format());
@@ -62,8 +70,65 @@ namespace Z0
             => ReadCode(m).Decode();                    
     }
 
+    public class OpData
+    {
+        public static OpData Define(Moniker moniker, InstructionBlock asm, CilFunction cil)
+            => new OpData(moniker, asm,cil);
+
+        public OpData(Moniker moniker, InstructionBlock asm, CilFunction cil)
+        {
+            this.Moniker = moniker;
+            this.Asm = asm;
+            this.Cil = cil;
+        }
+
+        public Moniker Moniker {get;}        
+
+        public InstructionBlock Asm {get;}
+
+        public CilFunction Cil {get;}
+
+        public string Format()
+            => Asm.Format();
+    }
+
     class ArchiveControl : Controller<ArchiveControl>
     {        
+        byte[] AsmBuffer = new byte[500];
+
+        OpData vbsll_dynamic<T>(byte imm8)
+            where T : unmanaged
+        {
+            var svc = VX.vbsll<T>(n128);
+            var moniker = svc.Moniker;
+            var f = svc.@delegate(imm8);
+            
+            AsmBuffer.Fill(byte.MinValue);
+            var x86 = NativeReader.read(f,AsmBuffer).Instructions();
+            return OpData.Define(moniker, x86, f.CilFunc());
+        }
+
+
+        OpData vsrl_dynamic<T>(byte imm8)
+            where T : unmanaged
+        {
+            var svc = VX.vsrl<T>(n128);
+            var moniker = svc.Moniker;
+            var f = svc.@delegate(imm8);
+            
+            AsmBuffer.Fill(byte.MinValue);
+            var x86 = NativeReader.read(f, AsmBuffer).Instructions();
+            return OpData.Define(moniker, x86, f.CilFunc());
+            
+        }
+
+        void Save(string subject, params OpData[] ops)
+        {
+            var archive = AsmArchive.Define(FolderName.Define(subject));
+            for(var i=0; i<ops.Length; i++)
+                archive.Save(ops[i]);
+        }
+
         void Reify(IAssemblyDesignator designator)
         {
             var metadata = CilMetadataIndex.Create(designator.DeclaringAssembly);
@@ -76,7 +141,11 @@ namespace Z0
                     var methods = api.StaticMethods().Public().WithName(opname).ToArray();
                     foreach(var method in methods)
                     {
-                        if(method.IsOpenGeneric())
+                        if(method.RequiresImmediate())
+                        {
+
+                        }
+                        else if(method.IsOpenGeneric())
                         {
                             var args = method.SupportedPrimals().Select(x => x.ToPrimalType()).ToArray();
                             if(args.Length == 0)
@@ -101,8 +170,13 @@ namespace Z0
         public override void Execute()
         {
 
-            //Reify(Designate("z0.intrinsics").Require());
-            Reify(Designate("z0.gmath").Require());
+            Save(nameof(ginx) + "_dynamic", vbsll_dynamic<ulong>(14), vsrl_dynamic<ulong>(18));
+
+            // print(vbsll_dynamic().Format());
+            // print(vsrl_dynamic().Format());
+
+            // Reify(Designate("z0.intrinsics").Require());
+            // Reify(Designate("z0.gmath").Require());
             
 
         }

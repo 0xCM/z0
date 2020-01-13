@@ -19,7 +19,7 @@ namespace Z0
 
             public const string Name = "vpop";
 
-            public string Moniker => moniker<N128,T>(Name);
+            public Moniker Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public uint Invoke(Vector128<T> x,Vector128<T> y,Vector128<T> z) => ginx.vpop(x,y,z);
@@ -35,7 +35,7 @@ namespace Z0
 
             public const string Name = "vpop";
 
-            public string Moniker => moniker<N256,T>(Name);
+            public Moniker Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public uint Invoke(Vector256<T> x,Vector256<T> y,Vector256<T> z) => ginx.vpop(x,y,z);

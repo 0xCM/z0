@@ -17,7 +17,7 @@ namespace Z0
         {
             public static TestZ128<T> Op => default;
 
-            public string Moniker => moniker<N128,T>("vtestz");
+            public Moniker Moniker => moniker<N128,T>("vtestz");
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector128<T> x,Vector128<T> y) => ginx.vtestz(x,y);
@@ -31,7 +31,7 @@ namespace Z0
         {
             public static TestZ256<T> Op => default;
 
-            public string Moniker => moniker<N256,T>("vtestz");
+            public Moniker Moniker => moniker<N256,T>("vtestz");
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector256<T> x,Vector256<T> y) => ginx.vtestz(x,y);

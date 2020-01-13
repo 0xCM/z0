@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool test(MethodInfo m)
-            => m.ReturnType.IsBlocked() || m.ParameterTypes().Any(t => t.IsBlocked());        
+            => test(m.ReturnType) || m.ParameterTypes().Any(test);
 
         /// <summary>
         /// Determines whether a type is classified as a blocked type
@@ -35,20 +35,15 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         public static bool test(Type t)
         {
-            if(t.IsGenericType)
-            {
-                var tdef = t.GetGenericTypeDefinition();
-                if(
-                    tdef == typeof(Block16<>) 
-                 || tdef == typeof(Block32<>) 
-                 || tdef == typeof(Block64<>)
-                 || tdef == typeof(Block128<>)
-                 || tdef == typeof(Block256<>)
-                 || tdef == typeof(Block512<>)
-                )
-                    return true;                
-            }
-            return false;
+            var tdef = t.GenericDefinition();
+            return tdef.IsSome() && 
+                (tdef == typeof(Block16<>)  || 
+                 tdef == typeof(Block32<>)  || 
+                 tdef == typeof(Block64<>)  || 
+                 tdef == typeof(Block128<>) || 
+                 tdef == typeof(Block256<>) || 
+                 tdef == typeof(Block512<>)
+                 );
         }
 
         /// <summary>
@@ -59,7 +54,7 @@ namespace Z0
         {
             if(t.IsBlocked())
             {
-                var def = t.GetGenericTypeDefinition();
+                var def = t.GenericDefinition();
 
                 if(def == typeof(Block16<>))
                     return BlockWidth.W16;
@@ -98,7 +93,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static PrimalKind segment(Type t)
-            => test(t) ? t.GetGenericArguments().Single().Kind() : PrimalKind.None;
+            => test(t) ? t.GenericArguments().First().Kind() : PrimalKind.None;
 
         [MethodImpl(Inline)]
         public static BlockKind kind<B>(B b = default)

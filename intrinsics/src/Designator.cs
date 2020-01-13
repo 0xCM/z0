@@ -27,7 +27,7 @@ namespace Z0.Designators
                 nameof(vcsa),
                 nameof(vnot),
 
-                nameof(vsll), nameof(vsrl), nameof(vxors),                
+                nameof(vsll), nameof(vsrl), nameof(vxors), nameof(vbsll), nameof(vbsrl),
                 nameof(vselect) 
 
                 );

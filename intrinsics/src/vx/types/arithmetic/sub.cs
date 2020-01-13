@@ -20,7 +20,7 @@ namespace Z0
 
             public const string Name = "vsub";
 
-            public string Moniker => moniker<N128,T>(Name);
+            public Moniker Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vsub(x,y);
@@ -37,7 +37,7 @@ namespace Z0
 
             public const string Name = "vsub";
 
-            public string Moniker => moniker<N256,T>(Name);
+            public Moniker Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vsub(x,y);

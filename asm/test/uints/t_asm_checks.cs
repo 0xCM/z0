@@ -15,7 +15,9 @@ namespace Z0
     using static Classifiers;
 
     public class t_asm_checks : t_asm<t_asm_checks>, IDisposable
-    {                
+    {           
+
+
         internal void RunExplicit()
         {
 

@@ -16,7 +16,7 @@ namespace Z0
         /// <summary>
         /// A name that uniquely identifies a function reification
         /// </summary>
-        string Moniker {get;}        
+        Moniker Moniker {get;}        
     }
 
     public interface IAction<A> : IFunc

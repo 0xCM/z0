@@ -15,11 +15,11 @@ namespace Z0
         public readonly struct Concat2x128<T> : IVMergeOp2x128x256<T>
             where T : unmanaged
         {
-            public static Concat2x128<T> Op => default;
-
             public const string Name = "vconcat";
 
-            public string Moniker => $"{Name}_2x128x{primalsig<T>()}";
+            public static Concat2x128<T> Op => default;
+
+            public Moniker Moniker => moniker($"{Name}_2x128x{primalsig<T>()}");
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vconcat(x,y);

@@ -1,4 +1,4 @@
-; 2020-01-11 17:55:29:781
+; 2020-01-12 17:49:14:025
 ; function: uint bfly_1x32(uint src)
 ; static ReadOnlySpan<byte> bfly_1x32Bytes => new byte[30]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x25,0x66,0x66,0x66,0x66,0x8B,0xD0,0xD1,0xE2,0x33,0xD0,0xD1,0xE8,0x33,0xC2,0x25,0x66,0x66,0x66,0x66,0x33,0xC1,0xC3};
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
@@ -28,30 +28,30 @@
 001dh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: uint bfly_2x32(uint src)
-; static ReadOnlySpan<byte> bfly_2x32Bytes => new byte[32]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x25,0x3C,0x3C,0x3C,0x00,0x8B,0xD0,0xC1,0xE2,0x02,0x33,0xD0,0xC1,0xE8,0x02,0x33,0xC2,0x25,0x3C,0x3C,0x3C,0x00,0x33,0xC1,0xC3};
+; static ReadOnlySpan<byte> bfly_2x32Bytes => new byte[32]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x25,0x3C,0x3C,0x3C,0x3C,0x8B,0xD0,0xC1,0xE2,0x02,0x33,0xD0,0xC1,0xE8,0x02,0x33,0xC2,0x25,0x3C,0x3C,0x3C,0x3C,0x33,0xC1,0xC3};
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                             ; MOV(Mov_r32_rm32) [EAX,ECX]                encoding(2 bytes) = 8b c1
-0007h and eax,3C3C3Ch                         ; AND(And_EAX_imm32) [EAX,3c3c3ch:imm32]     encoding(5 bytes) = 25 3c 3c 3c 00
+0007h and eax,3C3C3C3Ch                       ; AND(And_EAX_imm32) [EAX,3c3c3c3ch:imm32]   encoding(5 bytes) = 25 3c 3c 3c 3c
 000ch mov edx,eax                             ; MOV(Mov_r32_rm32) [EDX,EAX]                encoding(2 bytes) = 8b d0
 000eh shl edx,2                               ; SHL(Shl_rm32_imm8) [EDX,2h:imm8]           encoding(3 bytes) = c1 e2 02
 0011h xor edx,eax                             ; XOR(Xor_r32_rm32) [EDX,EAX]                encoding(2 bytes) = 33 d0
 0013h shr eax,2                               ; SHR(Shr_rm32_imm8) [EAX,2h:imm8]           encoding(3 bytes) = c1 e8 02
 0016h xor eax,edx                             ; XOR(Xor_r32_rm32) [EAX,EDX]                encoding(2 bytes) = 33 c2
-0018h and eax,3C3C3Ch                         ; AND(And_EAX_imm32) [EAX,3c3c3ch:imm32]     encoding(5 bytes) = 25 3c 3c 3c 00
+0018h and eax,3C3C3C3Ch                       ; AND(And_EAX_imm32) [EAX,3c3c3c3ch:imm32]   encoding(5 bytes) = 25 3c 3c 3c 3c
 001dh xor eax,ecx                             ; XOR(Xor_r32_rm32) [EAX,ECX]                encoding(2 bytes) = 33 c1
 001fh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: uint bfly_2x32_op(uint src)
-; static ReadOnlySpan<byte> bfly_2x32_opBytes => new byte[32]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x25,0x3C,0x3C,0x3C,0x00,0x8B,0xD0,0xC1,0xE2,0x02,0x33,0xD0,0xC1,0xE8,0x02,0x33,0xC2,0x25,0x3C,0x3C,0x3C,0x00,0x33,0xC1,0xC3};
+; static ReadOnlySpan<byte> bfly_2x32_opBytes => new byte[32]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x25,0x3C,0x3C,0x3C,0x3C,0x8B,0xD0,0xC1,0xE2,0x02,0x33,0xD0,0xC1,0xE8,0x02,0x33,0xC2,0x25,0x3C,0x3C,0x3C,0x3C,0x33,0xC1,0xC3};
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                             ; MOV(Mov_r32_rm32) [EAX,ECX]                encoding(2 bytes) = 8b c1
-0007h and eax,3C3C3Ch                         ; AND(And_EAX_imm32) [EAX,3c3c3ch:imm32]     encoding(5 bytes) = 25 3c 3c 3c 00
+0007h and eax,3C3C3C3Ch                       ; AND(And_EAX_imm32) [EAX,3c3c3c3ch:imm32]   encoding(5 bytes) = 25 3c 3c 3c 3c
 000ch mov edx,eax                             ; MOV(Mov_r32_rm32) [EDX,EAX]                encoding(2 bytes) = 8b d0
 000eh shl edx,2                               ; SHL(Shl_rm32_imm8) [EDX,2h:imm8]           encoding(3 bytes) = c1 e2 02
 0011h xor edx,eax                             ; XOR(Xor_r32_rm32) [EDX,EAX]                encoding(2 bytes) = 33 d0
 0013h shr eax,2                               ; SHR(Shr_rm32_imm8) [EAX,2h:imm8]           encoding(3 bytes) = c1 e8 02
 0016h xor eax,edx                             ; XOR(Xor_r32_rm32) [EAX,EDX]                encoding(2 bytes) = 33 c2
-0018h and eax,3C3C3Ch                         ; AND(And_EAX_imm32) [EAX,3c3c3ch:imm32]     encoding(5 bytes) = 25 3c 3c 3c 00
+0018h and eax,3C3C3C3Ch                       ; AND(And_EAX_imm32) [EAX,3c3c3c3ch:imm32]   encoding(5 bytes) = 25 3c 3c 3c 3c
 001dh xor eax,ecx                             ; XOR(Xor_r32_rm32) [EAX,ECX]                encoding(2 bytes) = 33 c1
 001fh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------

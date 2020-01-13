@@ -1,7 +1,7 @@
-// 2020-01-11 17:55:30:178
+// 2020-01-12 17:49:14:390
 void deposit(in ulong src, ref Fixed128 dst)
 {
-//  Id := 100664363, Name := System.Void Z0.OpCodes.bitconvert::deposit(System.UInt64&,Z0.Fixed128&)
+//  Id := 100664376, Name := System.Void Z0.OpCodes.bitconvert::deposit(System.UInt64&,Z0.Fixed128&)
 //  void deposit(in ulong src, ref Fixed128 dst)
 //  Managed
 {
@@ -14,7 +14,7 @@ void deposit(in ulong src, ref Fixed128 dst)
 }
 void deposit_4_0(in uint src, ref Fixed128 dst)
 {
-//  Id := 100664364, Name := System.Void Z0.OpCodes.bitconvert::deposit_4_0(System.UInt32&,Z0.Fixed128&)
+//  Id := 100664377, Name := System.Void Z0.OpCodes.bitconvert::deposit_4_0(System.UInt32&,Z0.Fixed128&)
 //  void deposit_4_0(in uint src, ref Fixed128 dst)
 //  Managed
 {
@@ -29,7 +29,7 @@ void deposit_4_0(in uint src, ref Fixed128 dst)
 }
 void deposit_2_2(in uint src, ref Fixed128 dst)
 {
-//  Id := 100664365, Name := System.Void Z0.OpCodes.bitconvert::deposit_2_2(System.UInt32&,Z0.Fixed128&)
+//  Id := 100664378, Name := System.Void Z0.OpCodes.bitconvert::deposit_2_2(System.UInt32&,Z0.Fixed128&)
 //  void deposit_2_2(in uint src, ref Fixed128 dst)
 //  Managed
 {
@@ -44,7 +44,7 @@ void deposit_2_2(in uint src, ref Fixed128 dst)
 }
 Span<byte> bc_bytes_16u(ushort a)
 {
-//  Id := 100664366, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_16u(System.UInt16)
+//  Id := 100664379, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_16u(System.UInt16)
 //  Span<byte> bc_bytes_16u(ushort a)
 //  Managed
 {
@@ -56,7 +56,7 @@ Span<byte> bc_bytes_16u(ushort a)
 }
 Span<byte> bc_bytes_64u(ulong a)
 {
-//  Id := 100664367, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_64u(System.UInt64)
+//  Id := 100664380, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_64u(System.UInt64)
 //  Span<byte> bc_bytes_64u(ulong a)
 //  Managed
 {
@@ -68,7 +68,7 @@ Span<byte> bc_bytes_64u(ulong a)
 }
 Span<byte> bc_bytes_fixed256(Fixed256 a)
 {
-//  Id := 100664368, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed256(Z0.Fixed256)
+//  Id := 100664381, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed256(Z0.Fixed256)
 //  Span<byte> bc_bytes_fixed256(Fixed256 a)
 //  Managed
 {
@@ -80,7 +80,7 @@ Span<byte> bc_bytes_fixed256(Fixed256 a)
 }
 Span<byte> bc_bytes_fixed512(Fixed512 a)
 {
-//  Id := 100664369, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed512(Z0.Fixed512)
+//  Id := 100664382, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed512(Z0.Fixed512)
 //  Span<byte> bc_bytes_fixed512(Fixed512 a)
 //  Managed
 {
@@ -92,7 +92,7 @@ Span<byte> bc_bytes_fixed512(Fixed512 a)
 }
 Span<byte> bc_bytes_fixed1024(Fixed1024 a)
 {
-//  Id := 100664370, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed1024(Z0.Fixed1024)
+//  Id := 100664383, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed1024(Z0.Fixed1024)
 //  Span<byte> bc_bytes_fixed1024(Fixed1024 a)
 //  Managed
 {
@@ -104,7 +104,7 @@ Span<byte> bc_bytes_fixed1024(Fixed1024 a)
 }
 Span<byte> bc_bytes_fixed2048(Fixed2048 a)
 {
-//  Id := 100664371, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed2048(Z0.Fixed2048)
+//  Id := 100664384, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed2048(Z0.Fixed2048)
 //  Span<byte> bc_bytes_fixed2048(Fixed2048 a)
 //  Managed
 {
@@ -116,7 +116,7 @@ Span<byte> bc_bytes_fixed2048(Fixed2048 a)
 }
 Span<byte> bc_bytes_fixed4096(Fixed4096 a)
 {
-//  Id := 100664372, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed4096(Z0.Fixed4096)
+//  Id := 100664385, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed4096(Z0.Fixed4096)
 //  Span<byte> bc_bytes_fixed4096(Fixed4096 a)
 //  Managed
 {

@@ -50,8 +50,6 @@ namespace Z0
                 let result = m.WithSig(mi.Signature())
                 select result;
 
-            //=> FindCil(mi.MetadataToken);
-
         [MethodImpl(Inline)]
         Option<TypeDef> FindType(int typeId)
         {
@@ -68,6 +66,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Option<MethodDef> FindMethod(int methodId)
         {
+            var m = default(MethodInfo);
             if(MethodIndex.TryGetValue(methodId, out MethodDef md))
                 return md;
             else

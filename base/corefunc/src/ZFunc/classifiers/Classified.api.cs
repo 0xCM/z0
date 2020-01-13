@@ -248,5 +248,22 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         public static Option<Type> segtype(Type t)
             => segmented(t) ? t.GenericTypeArguments[0] : default;        
+
+        /// <summary>
+        /// Classifies the source type
+        /// </summary>
+        /// <param name="t">The type to classify</param>
+        public static ITypeKind kind(Type t)            
+        {
+            if(PrimalType.test(t))
+                return new TypeKind<PrimalKind>(TypeKind.Primal, PrimalType.kind(t));
+            else if(VectorType.test(t))
+                return new TypeKind<VectorKind>(TypeKind.Vector, VectorType.kind(t));
+            else if(BlockedType.test(t))
+                return new TypeKind<BlockKind>(TypeKind.Block, BlockedType.kind(t));
+            else 
+                return TypeKind<TypeKind>.None;
+        }
+
     }
 }

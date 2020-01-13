@@ -1,7 +1,176 @@
-// 2020-01-11 17:55:29:652
+// 2020-01-12 17:49:13:914
+Vector128<uint> vbsrl_128x32u_0(Vector128<uint> x)
+{
+//  Id := 100664173, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ExperimentalScenarios::vbsrl_128x32u_0(System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+//  Vector128<uint> vbsrl_128x32u_0(Vector128<uint> x)
+//  Managed
+{
+  IL_0000: ldarg.0
+  IL_0001: ldc.i4.0
+  IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vbsrl(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Byte)
+  IL_0007: ret
+}
+
+}
+Vector128<uint> vbsrl_128x32u_1(Vector128<uint> x)
+{
+//  Id := 100664174, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ExperimentalScenarios::vbsrl_128x32u_1(System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+//  Vector128<uint> vbsrl_128x32u_1(Vector128<uint> x)
+//  Managed
+{
+  IL_0000: ldarg.0
+  IL_0001: ldc.i4.1
+  IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vbsrl(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Byte)
+  IL_0007: ret
+}
+
+}
+Vector128<uint> vbsrl_128x32u_2(Vector128<uint> x)
+{
+//  Id := 100664175, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ExperimentalScenarios::vbsrl_128x32u_2(System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+//  Vector128<uint> vbsrl_128x32u_2(Vector128<uint> x)
+//  Managed
+{
+  IL_0000: ldarg.0
+  IL_0001: ldc.i4.2
+  IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vbsrl(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Byte)
+  IL_0007: ret
+}
+
+}
+Vector128<uint> vbsrl_128x32u_3(Vector128<uint> x)
+{
+//  Id := 100664176, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ExperimentalScenarios::vbsrl_128x32u_3(System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+//  Vector128<uint> vbsrl_128x32u_3(Vector128<uint> x)
+//  Managed
+{
+  IL_0000: ldarg.0
+  IL_0001: ldc.i4.3
+  IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vbsrl(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Byte)
+  IL_0007: ret
+}
+
+}
+Vector128<uint> vbsrl_128x32u_4(Vector128<uint> x)
+{
+//  Id := 100664177, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ExperimentalScenarios::vbsrl_128x32u_4(System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+//  Vector128<uint> vbsrl_128x32u_4(Vector128<uint> x)
+//  Managed
+{
+  IL_0000: ldarg.0
+  IL_0001: ldc.i4.4
+  IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vbsrl(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Byte)
+  IL_0007: ret
+}
+
+}
+Vector128<uint> vbsrl_128x32u_5(Vector128<uint> x)
+{
+//  Id := 100664178, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ExperimentalScenarios::vbsrl_128x32u_5(System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+//  Vector128<uint> vbsrl_128x32u_5(Vector128<uint> x)
+//  Managed
+{
+  IL_0000: ldarg.0
+  IL_0001: ldc.i4.5
+  IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vbsrl(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Byte)
+  IL_0007: ret
+}
+
+}
+Vector128<uint> vbsrl_128x32u_6(Vector128<uint> x)
+{
+//  Id := 100664179, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ExperimentalScenarios::vbsrl_128x32u_6(System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+//  Vector128<uint> vbsrl_128x32u_6(Vector128<uint> x)
+//  Managed
+{
+  IL_0000: ldarg.0
+  IL_0001: ldc.i4.6
+  IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vbsrl(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Byte)
+  IL_0007: ret
+}
+
+}
+Vector128<uint> vbsrl_128x32u_7(Vector128<uint> x)
+{
+//  Id := 100664180, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ExperimentalScenarios::vbsrl_128x32u_7(System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+//  Vector128<uint> vbsrl_128x32u_7(Vector128<uint> x)
+//  Managed
+{
+  IL_0000: ldarg.0
+  IL_0001: ldc.i4.7
+  IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vbsrl(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Byte)
+  IL_0007: ret
+}
+
+}
+Vector128<uint> vbsrl_128x32u_8(Vector128<uint> x)
+{
+//  Id := 100664181, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ExperimentalScenarios::vbsrl_128x32u_8(System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+//  Vector128<uint> vbsrl_128x32u_8(Vector128<uint> x)
+//  Managed
+{
+  IL_0000: ldarg.0
+  IL_0001: ldc.i4.8
+  IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vbsrl(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Byte)
+  IL_0007: ret
+}
+
+}
+Vector128<uint> vbsrl_128x32u_9(Vector128<uint> x)
+{
+//  Id := 100664182, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ExperimentalScenarios::vbsrl_128x32u_9(System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+//  Vector128<uint> vbsrl_128x32u_9(Vector128<uint> x)
+//  Managed
+{
+  IL_0000: ldarg.0
+  IL_0001: ldc.i4.s 9
+  IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vbsrl(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Byte)
+  IL_0008: ret
+}
+
+}
+Vector128<uint> vbsrl_128x32u_11(Vector128<uint> x)
+{
+//  Id := 100664183, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ExperimentalScenarios::vbsrl_128x32u_11(System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+//  Vector128<uint> vbsrl_128x32u_11(Vector128<uint> x)
+//  Managed
+{
+  IL_0000: ldarg.0
+  IL_0001: ldc.i4.s 11
+  IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vbsrl(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Byte)
+  IL_0008: ret
+}
+
+}
+Vector128<uint> vbsrl_128x32u_23(Vector128<uint> x)
+{
+//  Id := 100664184, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ExperimentalScenarios::vbsrl_128x32u_23(System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+//  Vector128<uint> vbsrl_128x32u_23(Vector128<uint> x)
+//  Managed
+{
+  IL_0000: ldarg.0
+  IL_0001: ldc.i4.s 23
+  IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vbsrl(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Byte)
+  IL_0008: ret
+}
+
+}
+Vector128<uint> vbsrl_128x32u_200(Vector128<uint> x)
+{
+//  Id := 100664185, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ExperimentalScenarios::vbsrl_128x32u_200(System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+//  Vector128<uint> vbsrl_128x32u_200(Vector128<uint> x)
+//  Managed
+{
+  IL_0000: ldarg.0
+  IL_0001: ldc.i4 200
+  IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vbsrl(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Byte)
+  IL_000B: ret
+}
+
+}
 byte opA_8u(byte dl, byte r8b, byte r9b, byte rsp28)
 {
-//  Id := 100664173, Name := System.Byte Z0.ExperimentalScenarios::opA_8u(System.Byte,System.Byte,System.Byte,System.Byte)
+//  Id := 100664186, Name := System.Byte Z0.ExperimentalScenarios::opA_8u(System.Byte,System.Byte,System.Byte,System.Byte)
 //  byte opA_8u(byte dl, byte r8b, byte r9b, byte rsp28)
 //  Managed
 {
@@ -27,7 +196,7 @@ byte opA_8u(byte dl, byte r8b, byte r9b, byte rsp28)
 }
 ushort opA_16u(ushort dx, ushort r8w, ushort r9w, ushort rsp28)
 {
-//  Id := 100664174, Name := System.UInt16 Z0.ExperimentalScenarios::opA_16u(System.UInt16,System.UInt16,System.UInt16,System.UInt16)
+//  Id := 100664187, Name := System.UInt16 Z0.ExperimentalScenarios::opA_16u(System.UInt16,System.UInt16,System.UInt16,System.UInt16)
 //  ushort opA_16u(ushort dx, ushort r8w, ushort r9w, ushort rsp28)
 //  Managed
 {
@@ -53,7 +222,7 @@ ushort opA_16u(ushort dx, ushort r8w, ushort r9w, ushort rsp28)
 }
 uint opA_32u(uint edx, uint r8d, uint r9d, uint rsp28)
 {
-//  Id := 100664175, Name := System.UInt32 Z0.ExperimentalScenarios::opA_32u(System.UInt32,System.UInt32,System.UInt32,System.UInt32)
+//  Id := 100664188, Name := System.UInt32 Z0.ExperimentalScenarios::opA_32u(System.UInt32,System.UInt32,System.UInt32,System.UInt32)
 //  uint opA_32u(uint edx, uint r8d, uint r9d, uint rsp28)
 //  Managed
 {
@@ -76,7 +245,7 @@ uint opA_32u(uint edx, uint r8d, uint r9d, uint rsp28)
 }
 ulong opA_64u(ulong rdx, ulong r8, ulong r9, ulong rsp28)
 {
-//  Id := 100664176, Name := System.UInt64 Z0.ExperimentalScenarios::opA_64u(System.UInt64,System.UInt64,System.UInt64,System.UInt64)
+//  Id := 100664189, Name := System.UInt64 Z0.ExperimentalScenarios::opA_64u(System.UInt64,System.UInt64,System.UInt64,System.UInt64)
 //  ulong opA_64u(ulong rdx, ulong r8, ulong r9, ulong rsp28)
 //  Managed
 {
@@ -99,7 +268,7 @@ ulong opA_64u(ulong rdx, ulong r8, ulong r9, ulong rsp28)
 }
 byte opB_8u(byte dl, byte r8b, byte r9b, byte rsp28, byte rsp30)
 {
-//  Id := 100664177, Name := System.Byte Z0.ExperimentalScenarios::opB_8u(System.Byte,System.Byte,System.Byte,System.Byte,System.Byte)
+//  Id := 100664190, Name := System.Byte Z0.ExperimentalScenarios::opB_8u(System.Byte,System.Byte,System.Byte,System.Byte,System.Byte)
 //  byte opB_8u(byte dl, byte r8b, byte r9b, byte rsp28, byte rsp30)
 //  Managed
 {
@@ -130,7 +299,7 @@ byte opB_8u(byte dl, byte r8b, byte r9b, byte rsp28, byte rsp30)
 }
 byte opC_8u(byte dl, byte r8b, byte r9b, byte rsp28, byte rsp30, byte rsp38)
 {
-//  Id := 100664178, Name := System.Byte Z0.ExperimentalScenarios::opC_8u(System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte)
+//  Id := 100664191, Name := System.Byte Z0.ExperimentalScenarios::opC_8u(System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte)
 //  byte opC_8u(byte dl, byte r8b, byte r9b, byte rsp28, byte rsp30, byte rsp38)
 //  Managed
 {
@@ -166,7 +335,7 @@ byte opC_8u(byte dl, byte r8b, byte r9b, byte rsp28, byte rsp30, byte rsp38)
 }
 void opD_8u(byte dl, byte r8b, out byte r9, out byte rdx)
 {
-//  Id := 100664179, Name := System.Void Z0.ExperimentalScenarios::opD_8u(System.Byte,System.Byte,System.Byte&,System.Byte&)
+//  Id := 100664192, Name := System.Void Z0.ExperimentalScenarios::opD_8u(System.Byte,System.Byte,System.Byte&,System.Byte&)
 //  void opD_8u(byte dl, byte r8b, out byte r9, out byte rdx)
 //  Managed
 {
@@ -188,7 +357,7 @@ void opD_8u(byte dl, byte r8b, out byte r9, out byte rdx)
 }
 void opD_64u(ulong rdx, ulong r8, out ulong r9, out ulong rax)
 {
-//  Id := 100664180, Name := System.Void Z0.ExperimentalScenarios::opD_64u(System.UInt64,System.UInt64,System.UInt64&,System.UInt64&)
+//  Id := 100664193, Name := System.Void Z0.ExperimentalScenarios::opD_64u(System.UInt64,System.UInt64,System.UInt64&,System.UInt64&)
 //  void opD_64u(ulong rdx, ulong r8, out ulong r9, out ulong rax)
 //  Managed
 {
@@ -210,7 +379,7 @@ void opD_64u(ulong rdx, ulong r8, out ulong r9, out ulong rax)
 }
 void opE_64u(ulong rdx, out ulong r8, out ulong r9)
 {
-//  Id := 100664181, Name := System.Void Z0.ExperimentalScenarios::opE_64u(System.UInt64,System.UInt64&,System.UInt64&)
+//  Id := 100664194, Name := System.Void Z0.ExperimentalScenarios::opE_64u(System.UInt64,System.UInt64&,System.UInt64&)
 //  void opE_64u(ulong rdx, out ulong r8, out ulong r9)
 //  Managed
 {
@@ -232,7 +401,7 @@ void opE_64u(ulong rdx, out ulong r8, out ulong r9)
 }
 void opF_64u(ulong rdx, out ulong r8, out ulong r9, out ulong rax)
 {
-//  Id := 100664182, Name := System.Void Z0.ExperimentalScenarios::opF_64u(System.UInt64,System.UInt64&,System.UInt64&,System.UInt64&)
+//  Id := 100664195, Name := System.Void Z0.ExperimentalScenarios::opF_64u(System.UInt64,System.UInt64&,System.UInt64&,System.UInt64&)
 //  void opF_64u(ulong rdx, out ulong r8, out ulong r9, out ulong rax)
 //  Managed
 {

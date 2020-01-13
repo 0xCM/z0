@@ -18,7 +18,7 @@ namespace Z0
 
             public const string Name = "popcount";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public uint Invoke(T a) => gbits.pop(a);

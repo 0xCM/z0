@@ -15,9 +15,16 @@ namespace Z0
         public readonly struct Rotlx128<T> : IVShiftOp128<T>
             where T : unmanaged
         {
+            public const string Name = "vrotlx";
+
             public static Rotlx128<T> Op => default;
 
-            public string Moniker => moniker<N128,T>("vrotlx");
+            static N128 w => default;
+
+            public Moniker Moniker => moniker<N128,T>(Name);
+
+            public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte imm8)
+                => gApiMethod(w,Name).Reify(typeof(T)).UnaryOpImm8<T>(w,imm8);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte offset)
@@ -28,9 +35,16 @@ namespace Z0
         public readonly struct Rotlx256<T> : IVShiftOp256<T>
             where T : unmanaged
         {
+            public const string Name = "vrotlx";
+
+            static N256 w => default;
+
             public static Rotlx256<T> Op => default;
 
-            public string Moniker => moniker<N256,T>("vrotlx");
+            public Moniker Moniker => moniker<N256,T>(Name);
+
+            public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte imm8)
+                => gApiMethod(w,Name).Reify(typeof(T)).UnaryOpImm8<T>(w,imm8);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte offset) => ginx.vrotlx(x,offset);

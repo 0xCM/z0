@@ -19,7 +19,7 @@ namespace Z0
 
             public const string Name = "vloadspan";
 
-            public string Moniker => moniker<N128,T>(Name);
+            public Moniker Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(ReadOnlySpan<T> x, int offset) => CpuVector.vload(n128,x,offset);
@@ -33,7 +33,7 @@ namespace Z0
 
             public const string Name = "vloadspan";
 
-            public string Moniker => moniker<N256,T>(Name);
+            public Moniker Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(ReadOnlySpan<T> x, int offset) => CpuVector.vload(n256,x,offset);

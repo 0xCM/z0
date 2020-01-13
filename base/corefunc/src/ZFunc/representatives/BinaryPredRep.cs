@@ -24,7 +24,7 @@ namespace Z0
             [MethodImpl(Inline)]
             internal BinaryPred(F f) => this.f = f;
             
-            public string Moniker => f.Moniker;
+            public Moniker Moniker => f.Moniker;
 
             [MethodImpl(Inline)]
             public bit Invoke(T a, T b) => f.Invoke(a,b);
@@ -41,7 +41,7 @@ namespace Z0
             [MethodImpl(Inline)]
             internal BinaryPred(F f) => this.f = f;
             
-            public string Moniker => f.Moniker;
+            public Moniker Moniker => f.Moniker;
 
             [MethodImpl(Inline)]
             public bit Invoke(S a, T b) => f.Invoke(a,b);

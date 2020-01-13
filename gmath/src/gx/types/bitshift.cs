@@ -18,7 +18,7 @@ namespace Z0
 
             public const string Name = "srl";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, byte offset) => gmath.srl(a, offset);
@@ -31,7 +31,7 @@ namespace Z0
 
             public const string Name = "sll";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, byte offset) => gmath.sll(a, offset);

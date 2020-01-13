@@ -15,9 +15,13 @@ namespace Z0
         public readonly struct Sllv128<T> : IVBinOp128D<T>
             where T : unmanaged
         {
+            public const string Name = "vsllv";
+             
+            static N128 w => default;
+
             public static Sllv128<T> Op => default;
 
-            public string Moniker => moniker<N128,T>("vsllv");
+            public Moniker Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> offsets) => ginx.vsllv(x,offsets);
@@ -30,9 +34,13 @@ namespace Z0
         public readonly struct Sllv256<T> : IVBinOp256D<T>
             where T : unmanaged
         {
+            public const string Name = "vsllv";
+             
+            static N256 w => default;
+
             public static Sllv256<T> Op => default;
 
-            public string Moniker => moniker<N256,T>("vsllv");
+            public Moniker Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> offsets) => ginx.vsllv(x,offsets);

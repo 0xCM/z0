@@ -76,48 +76,6 @@ namespace Z0
             => from x in a.TryGetAttribute<AssemblyDefaultAliasAttribute>() select x.DefaultAlias;
 
         /// <summary>
-        /// Gets the type attributions for the specified assembly
-        /// </summary>
-        /// <param name="a">The source assembly</param>
-        /// <typeparam name="A">The attribute type</typeparam>
-        public static IDictionary<Type, A> GetTypeAttributions<A>(this Assembly a, Func<Type,bool> pred = null)
-            where A : Attribute
-        {
-            var f = pred ?? (t => true);
-            var q = from t in a.GetTypes()
-                    where Attribute.IsDefined(t, typeof(A)) && f(t)
-                    let attrib = t.GetCustomAttribute<A>()
-                    select new
-                    {
-                        Type = t,
-                        Attribute = attrib
-                    };
-            return q.ToDictionary(x => x.Type, x => x.Attribute);
-        }
-
-        /// <summary>
-        /// Gets the type attributions for the specified assembly
-        /// </summary>
-        /// <param name="a">The source assembly</param>
-        /// <param name="fullAttributeTypeName">The full type name of the attribute</param>
-        public static IDictionary<Type, dynamic> GetTypeAttributions(this Assembly a, string fullAttributeTypeName)
-        {
-            var attributions = new Dictionary<Type, dynamic>();
-            foreach (var t in a.GetTypes())
-            {
-                foreach (var attrib in t.GetCustomAttributes())
-                {
-                    if (attrib.GetType().FullName == fullAttributeTypeName)
-                    {
-                        attributions[t] = attrib;
-                        continue;
-                    }
-                }
-            }
-            return attributions;
-        }
-
-        /// <summary>
         /// Gets the simple name of an assembly
         /// </summary>
         /// <param name="a">The source assembly</param>

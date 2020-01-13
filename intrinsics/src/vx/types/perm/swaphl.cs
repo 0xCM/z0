@@ -19,7 +19,7 @@ namespace Z0
 
             public const string Name = "vswaphl";
 
-            public string Moniker => moniker<N128,T>(Name);
+            public Moniker Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => ginx.vswaphl(x);
@@ -33,7 +33,7 @@ namespace Z0
 
             public const string Name = "vswaphl";
 
-            public string Moniker => moniker<N256,T>(Name);
+            public Moniker Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) => ginx.vswaphl(x);

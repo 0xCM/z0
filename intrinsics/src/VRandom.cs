@@ -17,7 +17,7 @@ namespace Z0
 
         public const string Name = "vrandom";
 
-        public string Moniker => moniker<N128,T>(Name);
+        public Moniker Moniker => moniker<N128,T>(Name);
 
         [MethodImpl(Inline)]
         internal VRandom128(IPolyrand random)            
@@ -34,7 +34,7 @@ namespace Z0
 
         public const string Name = "vrandom";
 
-        public string Moniker => moniker<N256,T>(Name);
+        public Moniker Moniker => moniker<N256,T>(Name);
 
         [MethodImpl(Inline)]
         internal VRandom256(IPolyrand random)            

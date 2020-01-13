@@ -11,8 +11,14 @@ namespace Z0
 
     using static zfunc;
 
+
     partial class Classifiers
     {
+        [MethodImpl(Inline)]
+        public static PrimalKind<T> primal<T>(T t = default)
+            where T : unmanaged
+                => default;
+
         public readonly struct Primal8u : IPrimalKind { public const PrimalKind Kind = PrimalKind.U8; public PrimalKind Classifier => Kind;}
         
         public readonly struct Primal8i : IPrimalKind { public const PrimalKind Kind = PrimalKind.I8; public PrimalKind Classifier => Kind;}
@@ -33,24 +39,7 @@ namespace Z0
 
         public readonly struct Primal64f : IPrimalKind { public const PrimalKind Kind = PrimalKind.F64; public PrimalKind Classifier => Kind;}
 
-        public readonly struct PrimalKind<T> : IPrimalKind<T>
-            where T : unmanaged
-        {
-            [MethodImpl(Inline)]
-            public static implicit operator PrimalKind(PrimalKind<T> src)
-                => src.Classifier;
 
-            [MethodImpl(Inline)]
-            public static implicit operator PrimalKind<T>(T src)
-                => default;
-
-            public PrimalKind Classifier {[MethodImpl(Inline)] get  => PrimalType.kind<T>();}
-        }
-
-        [MethodImpl(Inline)]
-        public static PrimalKind<T> pkind<T>(T t = default)
-            where T : unmanaged
-                => default;
 
         public static PrimalKind<byte> u8
         {

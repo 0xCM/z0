@@ -52,6 +52,7 @@ namespace Z0
         public bool IsIn {get;}
 
         public bool IsOut {get;}
+        
 
         string Modifier
             => IsIn ? "in " : IsOut ? "out " : IsByRef ? "ref " : string.Empty;

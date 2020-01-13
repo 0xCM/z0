@@ -16,6 +16,10 @@ namespace Z0
     using static zfunc;
     using static NatMath;
 
+
+
+
+
     class ExperimentalScenarios : Deconstructable<ExperimentalScenarios>
     {
 
@@ -24,6 +28,46 @@ namespace Z0
         {
 
         }
+
+
+        public static Vector128<uint> vbsrl_128x32u_0(Vector128<uint> x)
+            =>  dinx.vbsrl(x, 0);
+
+        public static Vector128<uint> vbsrl_128x32u_1(Vector128<uint> x)
+            =>  dinx.vbsrl(x, 1);
+
+        public static Vector128<uint> vbsrl_128x32u_2(Vector128<uint> x)
+            =>  dinx.vbsrl(x, 2);
+
+        public static Vector128<uint> vbsrl_128x32u_3(Vector128<uint> x)
+            =>  dinx.vbsrl(x, 3);
+
+        public static Vector128<uint> vbsrl_128x32u_4(Vector128<uint> x)
+            =>  dinx.vbsrl(x, 4);
+
+        public static Vector128<uint> vbsrl_128x32u_5(Vector128<uint> x)
+            =>  dinx.vbsrl(x, 5);
+
+        public static Vector128<uint> vbsrl_128x32u_6(Vector128<uint> x)
+            =>  dinx.vbsrl(x, 6);
+
+        public static Vector128<uint> vbsrl_128x32u_7(Vector128<uint> x)
+            =>  dinx.vbsrl(x, 7);
+
+        public static Vector128<uint> vbsrl_128x32u_8(Vector128<uint> x)
+            =>  dinx.vbsrl(x, 8);
+
+        public static Vector128<uint> vbsrl_128x32u_9(Vector128<uint> x)
+            =>  dinx.vbsrl(x, 9);
+
+        public static Vector128<uint> vbsrl_128x32u_11(Vector128<uint> x)
+            =>  dinx.vbsrl(x, 11);
+
+        public static Vector128<uint> vbsrl_128x32u_23(Vector128<uint> x)
+            =>  dinx.vbsrl(x, 23);
+
+        public static Vector128<uint> vbsrl_128x32u_200(Vector128<uint> x)
+            =>  dinx.vbsrl(x, 200);
 
         public byte opA_8u(byte dl, byte r8b, byte r9b, byte rsp28)
         {

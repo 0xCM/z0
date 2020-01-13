@@ -37,7 +37,28 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         public static bool IsRef(this Type src)
-            =>  src.UnderlyingSystemType.IsByRef;
+            => src.UnderlyingSystemType.IsByRef;
+
+        /// <summary>
+        /// Determines whether a type is a reference to a generic type
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static bool IsGenericRef(this Type t)
+            => t.IsRef() && t.GetElementType().IsGenericType;
+        
+        /// <summary>
+        /// For a generic type or reference to a generic type, retrieves the generic type definition;
+        /// otherwise, returns none
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static Option<Type> GenericDefinition(this Type t)
+        {
+            var x = t.IsRef() ? t.GetElementType() : t;
+            return x.IsGenericType ? x.GetGenericTypeDefinition() : default;                
+        }
+                
+        public static IEnumerable<Type> GenericArguments(this Type t)
+            => t.GenericDefinition().MapValueOrElse(x => x.GetGenericArguments(), () => new Type[]{});
 
         /// <summary>
         /// Selects the types from a stream that implement a specific interface
@@ -98,6 +119,18 @@ namespace Z0
         }
 
         /// <summary>
+        /// If a type is non-generic, returns an emtpy list.
+        /// If a type is open generic, returns a list describing the open parameters
+        /// If a type is closed generic, returns a list describing the closed parameters
+        /// </summary>
+        /// <param name="src">The type from which to extract existing closed/open generic parameters</param>
+        public static IReadOnlyList<Type> GetGenericSlots(this Type src)
+            => (!src.IsGenericType && !src.IsGenericTypeDefinition) ? new Type[]{} 
+               : src.IsConstructedGenericType 
+               ? src.GenericTypeArguments 
+               : src.GetGenericTypeDefinition().GetGenericArguments();    
+
+        /// <summary>
         /// Selects the public types from a stream
         /// </summary>
         /// <param name="src">The source stream</param>
@@ -111,21 +144,6 @@ namespace Z0
         public static IEnumerable<Type> NonPublic(this IEnumerable<Type> src)
             => src.Where(t => !t.IsPublic);
 
-        /// <summary>
-        /// Returns the number of bytes occupied by a type if it is primal and 0 otherwise
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static int PrimalSize(this Type t)
-            => Classified.size(t);
-
-        /// <summary>
-        /// Returns the number of bits occupied by a type if it is primal and 0 otherwise
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static int PrimalBitWidth(this Type t)
-            => Classified.width(t);
-       
         [MethodImpl(Inline)]
         public static bool IsStatic(this PropertyInfo p)
             => p.GetGetMethod()?.IsStatic == true 
@@ -378,7 +396,6 @@ namespace Z0
         static readonly ConcurrentDictionary<Type, IReadOnlyList<ValueMember>> ValueMemberCache
             = new ConcurrentDictionary<Type, IReadOnlyList<ValueMember>>();
 
-
         /// <summary>
         /// Selects the types from a specified namespace
         /// </summary>
@@ -397,8 +414,20 @@ namespace Z0
         /// Selects all instance/static and public/non-public fields declared by a type
         /// </summary>
         /// <param name="src">The type to examine</param>
-        public static IEnumerable<FieldInfo> Fields(this Type src, bool declared = true)
+        public static IEnumerable<FieldInfo> Fields(this Type src, bool declared = false)
             => src.GetFields(declared ? BF_Declared : BF_All);
+
+        /// <summary>
+        /// Attempts to retrieve a name-identified field from a type
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        /// <param name="name">The name of the field</param>
+        /// <param name="declared"></param>
+        public static Option<FieldInfo> Field(this Type src, string name, bool declared = false)
+            => src.Fields(declared).FirstOrDefault(f => f.Name == name);
+
+        public static object FieldValue(this Type src, string name, object instance = null)
+            => src.Fields(false).FirstOrDefault(f => f.Name == name)?.GetValue(instance);
 
         /// <summary>
         /// Selects the public immutable  fields defined by the type
@@ -438,7 +467,6 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         public static IEnumerable<FieldInfo> InheritedFields(this Type t)
             => t.Fields(false).Except(t.Fields(true));
-
 
         /// <summary>
         /// Selects the public fields declared by a type
@@ -522,6 +550,14 @@ namespace Z0
             => src.GetProperties(declared ? BF_Declared : BF_All);
 
         /// <summary>
+        /// Selects the first method found on the type, if any, that has a specified name
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        /// <param name="name">The name to match</param>
+        public static Option<MethodInfo> Method(this Type src, string name)
+            => src.DeclaredMethods().WithName(name).FirstOrDefault();
+
+        /// <summary>
         /// Selects the public/non-public static/instance methods declared by a type
         /// </summary>
         /// <param name="src">The type to examine</param>
@@ -549,7 +585,7 @@ namespace Z0
         public static IEnumerable<MethodInfo> DeclaredMethods(this IEnumerable<Type> src)
             => src.Select(x => x.DeclaredMethods()).SelectMany(x => x);
 
-        public static IEnumerable<MethodInfo> Methods(this IEnumerable<Type> src, bool declared = true)
+        public static IEnumerable<MethodInfo> Methods(this IEnumerable<Type> src, bool declared)
             => src.Select(x => x.Methods(declared)).SelectMany(x => x);
 
         public static IEnumerable<object> Values(this IEnumerable<FieldInfo> src, object o = null)
@@ -633,7 +669,6 @@ namespace Z0
                     ? t.GetProperties(BF_DeclaredPublicInstance) 
                     : t.GetProperties(BF_DeclaredPublicStatic)
                     ).Where(p => !p.IsIndexer() && (requireSetters ? p.HasSetter() : true));
-
         
         /// <summary>
         /// Retrieves the public instance properties declared by a type
@@ -702,7 +737,7 @@ namespace Z0
         /// <param name="requireSetters"></param>
         public static IEnumerable<PropertyInfo> PublicPropertySearch(this Type t, bool deduplicate, bool requireSetters = false)
         {
-            //TODO: this approach is good enough for most cases but fails miserably in the general 
+            //This approach is good enough for most cases but fails miserably in the general 
             //case because it doesn't deal with properties declared with new nor does it deal
             //properly with properties that have been overridden
             var props = new List<PropertyInfo>();
@@ -758,19 +793,6 @@ namespace Z0
         public static IEnumerable<MethodInfo> PublicMethods(this Type t, MemberInstanceType InstanceType)
             => t.InheritedPublicMethods(InstanceType).Concat(t.DeclaredPublicMethods(InstanceType));
             
-        /// <summary>
-        /// Retrieves a type's public and read-only fields of a specific type
-        /// </summary>
-        /// <typeparam name="T">The field value type</typeparam>
-        /// <param name="declaringType"></param>
-        public static IReadOnlyDictionary<string, T> FieldIndex<T>(this Type declaringType)
-            => declaringType.DeclaredPublicImmutableFields(MemberInstanceType.Static).Where(f => f.FieldType == typeof(T))
-                    .Select(field =>
-                        (
-                            field.Name,
-                            field.MemberValue<T>(null)
-                        )).ToReadOnlyDictionary();
-
         /// <summary>
         /// Retrieves the public and not public methods declared by a type
         /// </summary>
@@ -913,7 +935,6 @@ namespace Z0
                 return members;
             });
 
-
         /// <summary>
         /// If non-nullable, returns the supplied type. If nullable, returns the underlying type
         /// </summary>
@@ -929,87 +950,6 @@ namespace Z0
         public static IReadOnlyDictionary<string, object> PropertyValues(this Type t, object o)
             => map(props(o), p => (p.Name, p.GetValue(o))).ToReadOnlyDictionary();
 
-
-        /// <summary>
-        /// Retrieves type attribution values from a stream of types
-        /// </summary>
-        /// <typeparam name="A"></typeparam>
-        /// <param name="types"></param>
-        public static IReadOnlyDictionary<Type, Option<A>> TypeAttributions<A>(this IEnumerable<Type> types)
-            where A : Attribute
-            => (from type in types
-                let attrib = type.GetCustomAttribute<A>(true)
-                select (type, attrib != null
-                        ? some(attrib)
-                        : none<A>())).ToReadOnlyDictionary();
-
-        /// <summary>
-        /// Retrieves the type's properties together with applied attributes
-        /// </summary>
-        /// <typeparam name="A">The attribute type</typeparam>
-        /// <param name="t">The type to examine</param>
-        public static IReadOnlyDictionary<PropertyInfo, A> PropertyAttributions<A>(this Type t) where A : Attribute
-        {
-            var q = from p in t.GetProperties(BF_Instance)
-                    where Attribute.IsDefined(p, typeof(A))
-                    let attrib = p.GetCustomAttribute<A>()
-                    select new
-                    {
-                        Member = p,
-                        Attribute = attrib
-                    };
-            return q.ToDictionary(x => x.Member, x => x.Attribute);
-        }
-
-        /// <summary>
-        /// Retrieves the type's fields together with applied attributes
-        /// </summary>
-        /// <typeparam name="A">The attribute type</typeparam>
-        /// <param name="t">The type to examine</param>
-        public static IDictionary<FieldInfo, A> DeclaredFieldAttributions<A>(this Type t)
-            where A : Attribute
-        {
-            var q = from p in t.DeclaredFields()
-                    where Attribute.IsDefined(p, typeof(A))
-                    let attrib = p.GetCustomAttribute<A>()
-                    select new
-                    {
-                        Member = p,
-                        Attribute = attrib
-                    };
-            return q.ToDictionary(x => x.Member, x => x.Attribute);
-        }
-
-        /// <summary>
-        /// Retrieves the attribution index for the identified methods declared by the type
-        /// </summary>
-        /// <typeparam name="A">The attribute type</typeparam>
-        /// <param name="t">The type to examine</param>
-        /// <param name="InstanceType">The member instance type</param>
-        public static IDictionary<MethodInfo, A> MethodAttributions<A>(this Type t,
-                MemberInstanceType InstanceType = MemberInstanceType.Instance)
-                    where A : Attribute
-        {
-            var q = from m in t.DeclaredMethods(InstanceType)
-                    where Attribute.IsDefined(m, typeof(A))
-                    let attrib = m.GetCustomAttribute<A>()
-                    select new
-                    {
-                        Member = m,
-                        Attribute = attrib
-                    };
-            return q.ToDictionary(x => x.Member, x => x.Attribute);
-        }
-
-        /// <summary>
-        /// Gets the value of a member attribute if it exists 
-        /// </summary>
-        /// <typeparam name="A">The attribute type</typeparam>
-        /// <param name="m">The member</param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Option<A> CustomAttribute<A>(this MemberInfo m) where A : Attribute
-            => m.GetCustomAttribute<A>();
 
 
         /// <summary>
@@ -1063,7 +1003,6 @@ namespace Z0
         public static T CreateInstance<T>(this Type t, params object[] args)
             => (T)Activator.CreateInstance(t, args);
  
-        [MethodImpl(Inline)]
         public static string TypeKeyword(this Type src)
         {
             if(src == typeof(sbyte) || src.GetUnderlyingType() == typeof(sbyte))

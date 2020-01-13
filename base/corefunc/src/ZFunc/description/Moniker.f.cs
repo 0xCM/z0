@@ -28,6 +28,14 @@ partial class zfunc
         => Classified.primalsig(k);
 
     /// <summary>
+    /// Defines a moniker predicated on supplied text
+    /// </summary>
+    /// <param name="text">The source text</param>
+    [MethodImpl(Inline)]   
+    public static Moniker moniker(string text)
+        => Moniker.define(text);
+
+    /// <summary>
     /// Defines a moniker with rendering {opname}_N{u | i | f} that identifies an
     /// operation over a primal type of bit width N := bitsize[T]
     /// </summary>

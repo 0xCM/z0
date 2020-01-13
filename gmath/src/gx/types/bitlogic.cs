@@ -18,7 +18,7 @@ namespace Z0
 
             public const string Name = "and";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
 
             [MethodImpl(Inline)]
@@ -32,7 +32,7 @@ namespace Z0
 
             public const string Name = "or";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.or(a,b);
@@ -45,7 +45,7 @@ namespace Z0
 
             public const string Name = "xor";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
 
             [MethodImpl(Inline)]
@@ -59,7 +59,7 @@ namespace Z0
 
             public const string Name = "nand";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.nand(a,b);
@@ -72,7 +72,7 @@ namespace Z0
 
             public const string Name = "not";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.nor(a,b);
@@ -85,7 +85,7 @@ namespace Z0
 
             public const string Name = "xnor";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.xnor(a, b);
@@ -98,7 +98,7 @@ namespace Z0
 
             public const string Name = "select";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b, T c) => gmath.select(a, b, c);
@@ -111,7 +111,7 @@ namespace Z0
 
             public const string Name = "not";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.not(a);
@@ -124,7 +124,7 @@ namespace Z0
 
             public const string Name = "cimpl";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.cimpl(a,b);
@@ -137,7 +137,7 @@ namespace Z0
 
             public const string Name = "cnonimpl";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.cnonimpl(a,b);
@@ -150,7 +150,7 @@ namespace Z0
 
             public const string Name = "impl";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.impl(a,b);
@@ -163,7 +163,7 @@ namespace Z0
 
             public const string Name = "impl";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.nonimpl(a,b);

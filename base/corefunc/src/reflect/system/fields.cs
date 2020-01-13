@@ -85,7 +85,7 @@ namespace Z0
         /// </summary>
         /// <param name="field">The field</param>
         /// <param name="instance">The object instance, if applicable</param>
-        public static Option<object> TryGetValue(this FieldInfo field, object instance = null)
+        public static Option<object> FieldValue(this FieldInfo field, object instance = null)
             => Try(() => field.GetValue(instance));
 
     }

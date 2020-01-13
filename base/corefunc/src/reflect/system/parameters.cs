@@ -22,16 +22,6 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static IEnumerable<Type> ParameterTypes(this MethodInfo m)
             => m.GetParameters().Select(p => p.ParameterType);
-
-        /// <summary>
-        /// Determines whether a parameter has a parametrically-identified attribute
-        /// </summary>
-        /// <param name="p">The parameter to examine</param>
-        /// <typeparam name="A">The attribute type to check</typeparam>
-        public static bool Attributed<A>(this ParameterInfo p)
-            where A : Attribute
-                => Attribute.IsDefined(p,typeof(A));
-
     }
 
 }

@@ -15,11 +15,11 @@ namespace Z0
         public readonly struct CNonImpl128<T> : IVBinOp128D<T>
             where T : unmanaged
         {
-            public static CNonImpl128<T> Op => default;
-
             public const string Name = "vcnonimpl";
 
-            public string Moniker => moniker<N128,T>(Name);
+            public static CNonImpl128<T> Op => default;
+
+            public Moniker Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vcnonimpl(x,y);
@@ -31,11 +31,11 @@ namespace Z0
         public readonly struct CNonImpl256<T> : IVBinOp256D<T>
             where T : unmanaged
         {
-            public static CNonImpl256<T> Op => default;
-
             public const string Name = "vcnonimpl";
 
-            public string Moniker => moniker<N256,T>(Name);
+            public static CNonImpl256<T> Op => default;
+
+            public Moniker Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vcnonimpl(x,y);

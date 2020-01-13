@@ -17,7 +17,7 @@ namespace Z0
         {
             public static BitClear128<T> Op => default;
 
-            public string Moniker => moniker<N128,T>("vbitclear");
+            public Moniker Moniker => moniker<N128,T>("vbitclear");
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte offset, byte count) => ginx.vbitclear(x,offset,count);
@@ -31,7 +31,7 @@ namespace Z0
         {
             public static BitClear256<T> Op => default;
 
-            public string Moniker => moniker<N256,T>("vbitclear");
+            public Moniker Moniker => moniker<N256,T>("vbitclear");
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte offset, byte count) => ginx.vbitclear(x,offset, count);

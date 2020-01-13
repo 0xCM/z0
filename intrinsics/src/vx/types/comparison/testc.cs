@@ -19,7 +19,7 @@ namespace Z0
 
             public const string Name = "vtestc";
              
-            public string Moniker => moniker<N128,T>(Name);
+            public Moniker Moniker => moniker<N128,T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector128<T> x, Vector128<T> y) => ginx.vtestc(x,y);
@@ -35,7 +35,7 @@ namespace Z0
 
             public const string Name = "vtestc";
 
-            public string Moniker => moniker<N256,T>(Name);
+            public Moniker Moniker => moniker<N256,T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(Vector256<T> x, Vector256<T> y) => ginx.vtestc(x,y);

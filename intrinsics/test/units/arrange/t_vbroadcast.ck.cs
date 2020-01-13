@@ -43,7 +43,7 @@ namespace Z0
             
             static T t => default;
 
-            public string Moniker => moniker(Name,w,t);
+            public Moniker Moniker => moniker(Name,w,t);
 
 
             public bit Invoke(S a, Vector128<T> x)
@@ -71,7 +71,7 @@ namespace Z0
 
             public const string Name = "vbroadcast_check";
 
-            public string Moniker => moniker<N256,T>(Name);
+            public Moniker Moniker => moniker<N256,T>(Name);
 
             public bit Invoke(S a, Vector256<T> x)
             {

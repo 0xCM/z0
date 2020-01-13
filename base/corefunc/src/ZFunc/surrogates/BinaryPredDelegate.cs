@@ -25,7 +25,7 @@ namespace Z0
                 this.Name = name;
             }
             
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a, T b) => F(a, b);

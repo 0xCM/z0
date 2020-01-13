@@ -17,7 +17,7 @@ namespace Z0
         {
             public static Not128<T> Op => default;
 
-            public string Moniker => moniker<N128,T>("vnot");
+            public Moniker Moniker => moniker<N128,T>("vnot");
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => ginx.vnot(x);
@@ -31,7 +31,7 @@ namespace Z0
         {
             public static Not256<T> Op => default;
 
-            public string Moniker => moniker<N256,T>("vnot");
+            public Moniker Moniker => moniker<N256,T>("vnot");
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) => ginx.vnot(x);

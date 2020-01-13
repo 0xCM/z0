@@ -1,4 +1,4 @@
-// 2020-01-11 17:55:32:095
+// 2020-01-12 17:49:16:386
 byte hexcode_parse(Char c)
 {
 //  Id := 100663386, Name := System.Byte Z0.zfoc::hexcode_parse(System.Char)

@@ -18,7 +18,7 @@ namespace Z0
 
             public const string Name = "add";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.add(a, b);
@@ -31,7 +31,7 @@ namespace Z0
 
             public const string Name = "sub";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.sub(a,b);
@@ -44,7 +44,7 @@ namespace Z0
 
             public const string Name = "mul";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
 
             [MethodImpl(Inline)]
@@ -58,7 +58,7 @@ namespace Z0
 
             public const string Name = "div";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.div(a, b);
@@ -71,7 +71,7 @@ namespace Z0
 
             public const string Name = "mod";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.mod(a,b);
@@ -84,7 +84,7 @@ namespace Z0
 
             public const string Name = "modmul";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b, T m) => gmath.modmul(a,b,m);
@@ -98,7 +98,7 @@ namespace Z0
 
             public const string Name = "even";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a) => gmath.even(a);
@@ -111,7 +111,7 @@ namespace Z0
 
             public const string Name = "odd";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a) => gmath.odd(a);
@@ -124,7 +124,7 @@ namespace Z0
 
             public const string Name = "clamp";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.clamp(a,b);
@@ -137,7 +137,7 @@ namespace Z0
 
             public const string Name = "square";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.square(a);
@@ -150,7 +150,7 @@ namespace Z0
 
             public const string Name = "negate";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.negate(a);
@@ -164,7 +164,7 @@ namespace Z0
 
             public const string Name = "dec";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.dec(a);
@@ -177,7 +177,7 @@ namespace Z0
 
             public const string Name = "inc";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.inc(a);
@@ -190,7 +190,7 @@ namespace Z0
 
             public const string Name = "abs";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.abs(a);
@@ -203,7 +203,7 @@ namespace Z0
 
             public const string Name = "dist";
 
-            public string Moniker => moniker<T>(Name);
+            public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly ulong Invoke(T a, T b) => gmath.dist(a,b);

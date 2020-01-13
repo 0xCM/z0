@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;
     using static As;
@@ -289,6 +290,28 @@ namespace Z0
         public static unsafe void deposit<S>(in S src, ref Fixed128 dst)
             where S : unmanaged
                 => store(src, ref dst);
+
+        /// <summary>
+        /// Writes the content of a 128-bit intrinsic vector to a fixed target
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="dst">The target</param>
+        /// <typeparam name="S">The source cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static unsafe void deposit<S>(Vector128<S> src, ref Fixed128 dst)
+            where S : unmanaged
+                => vstore(src, ref head<S>(ref dst));
+
+        /// <summary>
+        /// Writes the content of a 256-bit intrinsic vector to a fixed target
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="dst">The target</param>
+        /// <typeparam name="S">The source cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static unsafe void deposit<S>(Vector256<S> src, ref Fixed256 dst)
+            where S : unmanaged
+                => vstore(src, ref head<S>(ref dst));
 
         /// <summary>
         /// Writes a specified number of elements from the source to the target beginning at an element-relative offset
