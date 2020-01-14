@@ -12,6 +12,7 @@ namespace Z0
 
     partial class GX
     {
+        
        [MethodImpl(Inline)]
        public static And<T> and<T>(T t = default)
             where T : unmanaged        

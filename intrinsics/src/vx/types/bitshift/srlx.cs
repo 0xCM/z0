@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VXTypes
     {
-        public readonly struct Srlx128<T> : IVShiftOp128<T>
+        public readonly struct Srlx128<T> : IVShiftOp128<T>, IVUnaryImm8Resolver128<T>
             where T : unmanaged
         {
             public const string Name = "vsrlx";
@@ -31,7 +31,7 @@ namespace Z0
             
         }
 
-        public readonly struct Srlx256<T> : IVShiftOp256<T>
+        public readonly struct Srlx256<T> : IVShiftOp256<T>, IVUnaryImm8Resolver256<T>
             where T : unmanaged
         {
             public const string Name = "vsrlx";

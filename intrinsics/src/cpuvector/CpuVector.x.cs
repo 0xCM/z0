@@ -24,7 +24,6 @@ namespace Z0
             where T : unmanaged
                 => vcell(src,index);
 
-
         /// <summary>
         /// Returns the number of source vector components
         /// </summary>

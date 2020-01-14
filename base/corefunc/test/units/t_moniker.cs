@@ -47,6 +47,22 @@ namespace Z0
             Claim.eq("asm", m2.Suffix);
             Claim.eq(kind, m2.PrimalKind);
 
+            byte imm = 32;
+            var m3 = m0.WithImm(imm);
+            Claim.yea(m3.HasImm);
+            Claim.eq(imm, m3.Imm);
+            Claim.eq(name, m3.Name);
+            Claim.eq(8,m3.PrimalWidth);
+            Claim.nea(m3.IsSegmented);
+            Claim.nea(m3.IsGeneric);
+            Claim.nea(m3.IsAsm);
+            Claim.eq(kind, m3.PrimalKind);
+            m3 = m3.WithoutImm();
+            Claim.nea(m3.HasImm);
+
+
+
+
         }
 
     }

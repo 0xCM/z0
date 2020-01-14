@@ -58,7 +58,8 @@ namespace Z0
         }
                 
         public static IEnumerable<Type> GenericArguments(this Type t)
-            => t.GenericDefinition().MapValueOrElse(x => x.GetGenericArguments(), () => new Type[]{});
+            => t.IsGenericType ? t.GetGenericArguments() 
+             : t.GenericDefinition().MapValueOrElse(x => x.GetGenericArguments(), () => new Type[]{});
 
         /// <summary>
         /// Selects the types from a stream that implement a specific interface

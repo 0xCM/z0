@@ -24,14 +24,12 @@ namespace Z0
             for(var i=0; i< table.Count; i++)
                 Claim.eq(table[i], (byte)i);
 
-
             var x = VPattern.vincrements<byte>(n);
             Claim.eq(x,table.Data);   
 
             var items = VPattern.vincrements<byte>(n, 64);
             var selected = dinx.vshuf16x8(items, table);
             Claim.eq(items,selected);
-
         }
 
         public void lut32_rep_check()

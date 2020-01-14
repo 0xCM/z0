@@ -15,10 +15,14 @@ namespace Z0
         public static InstructionBlock Instructions(this INativeMemberData src)
             => Deconstructor.Decode(src.Method.Signature().Format(), src.Content);
 
+        public static AsmCodeSet CodeSet(this INativeMemberData src, Moniker moniker, CilFunction cil)
+        {
+            var label = src.Method.Signature().Format();
+            return AsmCodeSet.Define(moniker, Deconstructor.Decode(label, src.Content), cil);
+        }
+
         public static IEnumerable<InstructionBlock> Instructions<T>(this IEnumerable<T> src)
             where T : INativeMemberData
                 => from member in src select member.Instructions();
-
     }
-
 }

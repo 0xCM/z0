@@ -8,123 +8,37 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading;
-    using System.Reflection;
-    using System.Runtime.Intrinsics;
-    using System.Reflection.Emit;
 
-    using static ControlMessages;
     using static zfunc;
-
-    public class AsmArchive
-    {
-        public static AsmArchive Define(FolderName subject)
-            => new AsmArchive(subject);
-
-        public AsmArchive(FolderName subject)
-        {
-            this.Subject = subject;
-            this.Location = LogPaths.The.AsmDataDir(subject);
-        }
-
-        FolderName Subject {get;}
-
-        FolderPath Location {get;}
-
-        public void SaveAsm(AsmCode asm)
-            => Paths.AsmHexPath(Subject, asm.Name).WriteText(asm.Format());
-        
-        public void SaveAsm(InstructionBlock block, Moniker m)
-        {
-            Paths.AsmDetailPath(Subject, m).WriteText(block.Format());
-            SaveAsm(AsmCode.Load(block.Encoded, m));
-        }
-
-        public void Save(OpData src)
-        {
-            Paths.AsmDetailPath(Subject, src.Moniker).WriteText(src.Asm.Format());
-            SaveAsm(AsmCode.Load(src.Asm.Encoded, src.Moniker));
-        }
-
-        void SaveCil(CilFuncSpec cil, Moniker m)
-        {
-            Paths.CilPath(Subject,m).WriteText(cil.Format());
-        }
-
-        public void Save(Operation op, CilFuncSpec cil = null)
-        {
-            SaveAsm(op.NativeData.Instructions(), op.Moniker);
-            if(cil != null)
-                SaveCil(cil, op.Moniker);            
-        }
-
-        public void Clear()
-        {
-            Location.DeleteFiles();
-        }
-
-        public AsmCode ReadCode(Moniker m)
-            => AsmCode.Parse(Paths.AsmHexPath(Subject, m).ReadText(),m);
-
-        public InstructionBlock ReadDetail(Moniker m)
-            => ReadCode(m).Decode();                    
-    }
-
-    public class OpData
-    {
-        public static OpData Define(Moniker moniker, InstructionBlock asm, CilFunction cil)
-            => new OpData(moniker, asm,cil);
-
-        public OpData(Moniker moniker, InstructionBlock asm, CilFunction cil)
-        {
-            this.Moniker = moniker;
-            this.Asm = asm;
-            this.Cil = cil;
-        }
-
-        public Moniker Moniker {get;}        
-
-        public InstructionBlock Asm {get;}
-
-        public CilFunction Cil {get;}
-
-        public string Format()
-            => Asm.Format();
-    }
 
     class ArchiveControl : Controller<ArchiveControl>
     {        
         byte[] AsmBuffer = new byte[500];
 
-        OpData vbsll_dynamic<T>(byte imm8)
+        AsmCodeSet Resolve<T>(IVUnaryImm8Resolver128<T> svc, byte imm8)
             where T : unmanaged
         {
-            var svc = VX.vbsll<T>(n128);
             var moniker = svc.Moniker;
             var f = svc.@delegate(imm8);
-            
             AsmBuffer.Fill(byte.MinValue);
-            var x86 = NativeReader.read(f,AsmBuffer).Instructions();
-            return OpData.Define(moniker, x86, f.CilFunc());
+            return NativeReader.read(f, AsmBuffer).CodeSet(moniker.WithImm(imm8), f.CilFunc());
         }
 
-
-        OpData vsrl_dynamic<T>(byte imm8)
+        AsmCodeSet Resolve<T>(IVBinaryImm8Resolver128<T> svc, byte imm8)
             where T : unmanaged
         {
-            var svc = VX.vsrl<T>(n128);
             var moniker = svc.Moniker;
-            var f = svc.@delegate(imm8);
-            
+            var f = svc.@delegate(imm8);            
             AsmBuffer.Fill(byte.MinValue);
-            var x86 = NativeReader.read(f, AsmBuffer).Instructions();
-            return OpData.Define(moniker, x86, f.CilFunc());
-            
+            return NativeReader.read(f, AsmBuffer).CodeSet(moniker.WithImm(imm8), f.CilFunc());
         }
 
-        void Save(string subject, params OpData[] ops)
+        void Clear(string subject)
+            => AsmArchive.Define(subject).Clear();
+
+        void Append(string subject, params AsmCodeSet[] ops)
         {
-            var archive = AsmArchive.Define(FolderName.Define(subject));
+            var archive = AsmArchive.Define(subject);
             for(var i=0; i<ops.Length; i++)
                 archive.Save(ops[i]);
         }
@@ -134,7 +48,7 @@ namespace Z0
             var metadata = CilMetadataIndex.Create(designator.DeclaringAssembly);
             foreach(var api in designator.ApiProviders)
             {
-                var archive = AsmArchive.Define(FolderName.Define(api.Name));
+                var archive = AsmArchive.Define(api.Name);
                 archive.Clear();
                 foreach(var opname in designator.OpNames)
                 {
@@ -166,18 +80,44 @@ namespace Z0
                 }
             }
         }
+        
+        public IEnumerable<AsmCodeSet> Resolve<T>(IVUnaryImm8Resolver128<T> svc, params byte[] immediates)
+            where T : unmanaged
+                => from imm in immediates select Resolve(svc,imm);
+
+        public IEnumerable<AsmCodeSet> Resolve<T>(IVBinaryImm8Resolver128<T> svc, params byte[] immediates)
+            where T : unmanaged
+                => from imm in immediates select Resolve(svc,imm);
+
+        public IEnumerable<AsmCodeSet> Resolve<T>(IEnumerable<IVUnaryImm8Resolver128<T>> services, params byte[] immediates)
+            where T : unmanaged
+                =>  from svc in services
+                    from imm in immediates 
+                    select Resolve(svc,imm);
+
+        string DynamicSubject
+            => nameof(ginx) + "_dynamic";
+
+        void ResolveDynamic<T>(N128 w, T t = default)
+            where T : unmanaged
+        {
+            var imm = new byte[]{3, 13, 25, 28, 30};
+            var r1 = Resolve(VX.vbsll(w,t),imm);
+            var r2 = Resolve(VX.vsrl(w,t),imm);
+            var r3 = Resolve(VX.vblend8x16(w,t),imm);
+            var resolutions = r1.Union(r2).Union(r3).ToArray();
+            Append(DynamicSubject, resolutions);
+
+        }
 
         public override void Execute()
         {
+            Clear(DynamicSubject);
+            ResolveDynamic(n128,z32);
 
-            Save(nameof(ginx) + "_dynamic", vbsll_dynamic<ulong>(14), vsrl_dynamic<ulong>(18));
-
-            // print(vbsll_dynamic().Format());
-            // print(vsrl_dynamic().Format());
-
-            // Reify(Designate("z0.intrinsics").Require());
-            // Reify(Designate("z0.gmath").Require());
-            
+            var archive = AsmArchive.Define(nameof(dinx));
+            var f = archive.ReadFunction(Moniker.define("vadd", PrimalKind.U8, n128));
+            print(f.Format());
 
         }
 

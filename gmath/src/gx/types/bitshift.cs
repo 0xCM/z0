@@ -14,9 +14,9 @@ namespace Z0
         public readonly struct Srl<T> : IShiftOp<T>
             where T : unmanaged        
         {
-            public static Srl<T> Op => default;
-
             public const string Name = "srl";
+
+            public static Srl<T> Op => default;
 
             public Moniker Moniker => moniker<T>(Name);
 
@@ -27,9 +27,9 @@ namespace Z0
         public readonly struct Sll<T> : IShiftOp<T>
             where T : unmanaged        
         {
-            public static Sll<T> Op => default;
-
             public const string Name = "sll";
+
+            public static Sll<T> Op => default;
 
             public Moniker Moniker => moniker<T>(Name);
 

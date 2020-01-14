@@ -17,6 +17,142 @@ namespace Z0
 
     public static class OpApiX
     {
+        [MethodImpl(Inline)]
+        public static bool IsSigned(this PrimalKind k)
+            => (k & PrimalKind.Signed) != 0;
+
+        [MethodImpl(Inline)]
+        public static bool IsUnsigned(this PrimalKind k)
+            => (k & PrimalKind.Unsigned) != 0;
+
+        [MethodImpl(Inline)]
+        public static bool IsFractional(this PrimalKind k)
+            => (k & PrimalKind.Fractional) != 0;
+
+        [MethodImpl(Inline)]
+        public static bool IsSome(this PrimalKind k)
+            => k != PrimalKind.None;
+
+        /// <summary>
+        /// Specifies the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static string Keyword(this PrimalKind k)
+            => Classified.keyword(k);
+
+        /// <summary>
+        /// Returns a kind-identified system type if possible; throws an exception otherwise
+        /// </summary>
+        /// <param name="k">The identifying kind</param>
+        [MethodImpl(Inline)]
+        public static Type ToPrimalType(this PrimalKind k)
+            => PrimalType.fromkind(k);
+
+        /// <summary>
+        /// Returns the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
+        /// </summary>
+        /// <param name="k">The identifying kind</param>
+        [MethodImpl(Inline)]
+        public static string TypeKeyword(this PrimalKind k)
+            => Classified.keyword(k);
+
+
+        /// <summary>
+        /// Specifies the bit-width of a classified primitive
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static int BitWidth(this PrimalKind k)
+            => Classified.width(k);
+
+        /// <summary>
+        /// Specifies the bit-width of a classified cpu vector
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static int BitWidth(this VectorKind k)
+            => Classified.width(k);
+
+
+        /// <summary>
+        /// Determines the kind identifier
+        /// </summary>
+        /// <param name="k">The primal classifier</param>
+        [MethodImpl(Inline)]
+        public static PrimalId Id(this PrimalKind kind)
+            => Classified.id(kind);
+
+        /// <summary>
+        /// Determines a sub-classification c := {'u' | 'i' | 'f'} according to whether a classified primal type
+        /// is unsigned integral, signed integral or floating-point
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static char Indicator(this PrimalKind k)
+            => Classified.indicator(k);
+
+        /// <summary>
+        /// Determines whether a specified kind is included within a classification
+        /// </summary>
+        /// <param name="k">The classification</param>
+        /// <param name="match">The kind to check</param>
+        [MethodImpl(Inline)]
+        public static bit Is(this PrimalKind k, PrimalKind match)        
+            => (k & match) != 0;
+
+        /// <summary>
+        /// Selects the distinct primal kinds represented by a classifier
+        /// </summary>
+        /// <param name="k"></param>
+        public static IEnumerable<PrimalKind> Distinct(this PrimalKind k)       
+        {
+            if(k.Is(PrimalKind.U8))
+                yield return PrimalKind.U8;
+
+            if(k.Is(PrimalKind.I8))
+                yield return PrimalKind.I8;
+
+            if(k.Is(PrimalKind.U16))
+                yield return PrimalKind.U16;
+
+            if(k.Is(PrimalKind.I16))
+                yield return PrimalKind.I16;
+
+            if(k.Is(PrimalKind.U32))
+                yield return PrimalKind.U32;
+
+            if(k.Is(PrimalKind.I32))
+                yield return PrimalKind.I32;
+
+            if(k.Is(PrimalKind.U64))
+                yield return PrimalKind.U64;
+
+            if(k.Is(PrimalKind.I64))
+                yield return PrimalKind.I64;
+
+            if(k.Is(PrimalKind.F32))
+                yield return PrimalKind.F32;
+
+            if(k.Is(PrimalKind.F64))
+                yield return PrimalKind.F64;
+        }
+
+        [MethodImpl(Inline)]
+        public static bool IsSome(this VectorKind k)
+            => k != VectorKind.None;
+
+        [MethodImpl(Inline)]
+        public static bool IsSome(this BlockKind k)
+            => k != BlockKind.None;
+
+        [MethodImpl(Inline)]
+        public static VectorWidth Width(this VectorKind kind)
+            => (VectorWidth)((ushort)kind);
+
+        [MethodImpl(Inline)]
+        public static BlockWidth Width(this BlockKind kind)
+            => (BlockWidth)((ushort)kind);
+
         /// <summary>
         /// Derives a signature from reflected method metadata
         /// </summary>
@@ -43,43 +179,8 @@ namespace Z0
             => PrimalType.kind(t);
 
         [MethodImpl(Inline)]
-        public static bool IsSome(this PrimalKind k)
-            => k != PrimalKind.None;
-
-        /// <summary>
-        /// Specifies the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static string Keyword(this PrimalKind k)
-            => Classified.keyword(k);
-
-        [MethodImpl(Inline)]
-        public static bool IsSome(this VectorKind k)
-            => k != VectorKind.None;
-
-        [MethodImpl(Inline)]
-        public static bool IsSome(this BlockKind k)
-            => k != BlockKind.None;
-
-        [MethodImpl(Inline)]
         public static bool IsPrimal(this Type t)
             => PrimalType.kind(t) != PrimalKind.None;
-
-        /// <summary>
-        /// Returns a kind-identified system type if possible; throws an exception otherwise
-        /// </summary>
-        /// <param name="k">The identifying kind</param>
-        [MethodImpl(Inline)]
-        public static Type ToPrimalType(this PrimalKind k)
-            => PrimalType.fromkind(k);
-
-        /// <summary>
-        /// Returns the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
-        /// </summary>
-        /// <param name="k">The identifying kind</param>
-        [MethodImpl(Inline)]
-        public static string TypeKeyword(this PrimalKind k)
-            => Classified.keyword(k);
 
         /// <summary>
         /// Determines whether a type is an intrinsic vector
@@ -222,29 +323,6 @@ namespace Z0
         public static bool IsBlocked(this Type t)
             => BlockedType.test(t);
 
-        [MethodImpl(Inline)]
-        public static int Width(this PrimalKind kind)
-            => (ushort)kind;
-
-        [MethodImpl(Inline)]
-        public static PrimalKind WidthKind(this PrimalKind kind)
-            => (PrimalKind)(ushort)kind;
-
-        [MethodImpl(Inline)]
-        public static char Indicator(this PrimalKind kind)
-            => Classified.indicator(kind);
-
-        [MethodImpl(Inline)]
-        public static VectorWidth Width(this VectorKind kind)
-            => (VectorWidth)((ushort)kind);
-
-        [MethodImpl(Inline)]
-        public static BlockWidth Width(this BlockKind kind)
-            => (BlockWidth)((ushort)kind);
-
-        [MethodImpl(Inline)]
-        public static PrimalId Id(this PrimalKind kind)
-            => (PrimalId)((uint)kind >> 16);
 
         /// <summary>
         /// Determines whether a method accepts and/or returns at least one memory block parameter
@@ -275,82 +353,12 @@ namespace Z0
             => FunctionType.outputwidth(m);
 
         /// <summary>
-        /// Specifies the bit-width of a classified primitive
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static int BitWidth(this PrimalKind k)
-            => Classified.width(k);
-
-        /// <summary>
-        /// Specifies the bit-width of a classified cpu vector
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static int BitWidth(this VectorKind k)
-            => Classified.width(k);
-
-        /// <summary>
         /// Returns the number of bytes occupied by a type if it is primal and 0 otherwise
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static int Size(this Type t)
             => Classified.size(t);
 
-        /// <summary>
-        /// Determines a sub-classification c := {'u' | 'i' | 'f'} according to whether a classified primal type
-        /// is unsigned integral, signed integral or floating-point
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static char Sign(this PrimalKind k)
-            => Classified.indicator(k);
-
-        /// <summary>
-        /// Determines whether a specified kind is included within a classification
-        /// </summary>
-        /// <param name="k">The classification</param>
-        /// <param name="match">The kind to check</param>
-        [MethodImpl(Inline)]
-        public static bit Is(this PrimalKind k, PrimalKind match)        
-            => (k & match) != 0;
-
-        /// <summary>
-        /// Selects the distinct primal kinds represented by a classifier
-        /// </summary>
-        /// <param name="k"></param>
-        public static IEnumerable<PrimalKind> Distinct(this PrimalKind k)       
-        {
-            if(k.Is(PrimalKind.U8))
-                yield return PrimalKind.U8;
-
-            if(k.Is(PrimalKind.I8))
-                yield return PrimalKind.I8;
-
-            if(k.Is(PrimalKind.U16))
-                yield return PrimalKind.U16;
-
-            if(k.Is(PrimalKind.I16))
-                yield return PrimalKind.I16;
-
-            if(k.Is(PrimalKind.U32))
-                yield return PrimalKind.U32;
-
-            if(k.Is(PrimalKind.I32))
-                yield return PrimalKind.I32;
-
-            if(k.Is(PrimalKind.U64))
-                yield return PrimalKind.U64;
-
-            if(k.Is(PrimalKind.I64))
-                yield return PrimalKind.I64;
-
-            if(k.Is(PrimalKind.F32))
-                yield return PrimalKind.F32;
-
-            if(k.Is(PrimalKind.F64))
-                yield return PrimalKind.F64;
-        }
                     
         [MethodImpl(Inline)]
         public static bool IsZFunc(this MethodInfo m)
@@ -580,50 +588,5 @@ namespace Z0
                 where f.Attributed<BinaryLiteralAttribute>()
                let a = f.CustomAttribute<BinaryLiteralAttribute>().Require()
                 select BinaryLiteral.Define(f.Name, f.GetValue(null), a.Text);
-
-        public static DynamicDelegate<UnaryOp<Vector128<T>>> UnaryOpImm8<T>(this MethodInfo src, N128 w, byte imm8)
-            where T :  unmanaged
-        {
-            var operand = typeof(Vector128<T>);                        
-            var method = new DynamicMethod(name: src.Name, 
-                attributes: MethodAttributes.Public | MethodAttributes.Static,  
-                callingConvention: CallingConventions.Standard,
-                returnType: operand, 
-                parameterTypes: new Type[]{operand}, 
-                owner: src.DeclaringType,
-                skipVisibility: false);       
-            
-            var gen = method.GetILGenerator();
-            gen.Emit(OpCodes.Ldarg_0);
-            gen.Emit(OpCodes.Ldc_I4_S, imm8);
-            gen.EmitCall(OpCodes.Call, src, null);
-            gen.Emit(OpCodes.Ret);
-
-            var op = (UnaryOp<Vector128<T>>)method.CreateDelegate(typeof(UnaryOp<Vector128<T>>));                
-            return DynamicDelegate.Define(src, method, op);
-        }
-
-        public static DynamicDelegate<UnaryOp<Vector256<T>>> UnaryOpImm8<T>(this MethodInfo src, N256 w, byte imm8)
-            where T :  unmanaged
-        {
-            var operand = typeof(Vector256<T>);                        
-            var method = new DynamicMethod(name: src.Name, 
-                attributes: MethodAttributes.Public | MethodAttributes.Static,  
-                callingConvention: CallingConventions.Standard,
-                returnType: operand, 
-                parameterTypes: new Type[]{operand}, 
-                owner: src.DeclaringType,
-                skipVisibility: false);       
-            
-            var gen = method.GetILGenerator();
-            gen.Emit(OpCodes.Ldarg_0);
-            gen.Emit(OpCodes.Ldc_I4_S, imm8);
-            gen.EmitCall(OpCodes.Call, src, null);
-            gen.Emit(OpCodes.Ret);
-
-            var op = (UnaryOp<Vector256<T>>)method.CreateDelegate(typeof(UnaryOp<Vector256<T>>));                
-            return DynamicDelegate.Define(src, method, op);
-        }
-
     }
 }

@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="t">A vector component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static VRandom128<T> VEmitter<T>(N128 w, IPolyrand random, T t = default)  
+        public static VRandom128<T> vemitter<T>(N128 w, IPolyrand random, T t = default)  
             where T : unmanaged
                 => new VRandom128<T>(random);
 
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="t">A vector component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static VRandom256<T> VEmitter<T>(N256 w, IPolyrand random, T t = default)  
+        public static VRandom256<T> vemitter<T>(N256 w, IPolyrand random, T t = default)  
             where T : unmanaged
                 => new VRandom256<T>(random);
 
@@ -43,6 +43,28 @@ namespace Z0
 
     public static class VRngX
     {
+
+        /// <summary>
+        /// Creates a 128-bit vectorized emitter predicated a random source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="w">The vector bit width</param>
+        /// <param name="t">A vector component type representative</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        public static VRandom128<T> VectorEmitter<T>(this IPolyrand random, N128 w, T t = default)
+            where T : unmanaged
+                => VRng.vemitter(w,random,t);
+
+        /// <summary>
+        /// Creates a 256-bit vectorized emitter predicated a random source
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="w">The vector bit width</param>
+        /// <param name="t">A vector component type representative</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        public static VRandom256<T> VectorEmitter<T>(this IPolyrand random, N256 w, T t = default)
+            where T : unmanaged
+                => VRng.vemitter(w,random,t);
 
         /// <summary>
         /// Produces a random 128-bit cpu vector

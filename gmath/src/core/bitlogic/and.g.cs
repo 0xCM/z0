@@ -10,6 +10,7 @@ namespace Z0
     using static zfunc;    
     using static AsIn;
 
+
     partial class gmath
     {
         /// <summary>

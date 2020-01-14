@@ -38,6 +38,33 @@ namespace Z0
         /// <summary>
         /// Computes the number of T-components covered by a 128-bit vector
         /// </summary>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static int vcount<T>(Vector128<T> src)
+            where T : unmanaged
+                => Vector128<T>.Count;
+
+        /// <summary>
+        /// Computes the number of T-components covered by a 256-bit vector
+        /// </summary>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static int vcount<T>(Vector256<T> src)
+            where T : unmanaged
+                => Vector256<T>.Count;
+
+        /// <summary>
+        /// Computes the number of T-components covered by a 512-bit vector
+        /// </summary>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static int vcount<T>(Vector512<T> src)
+            where T : unmanaged
+                => Vector512<T>.Count;
+
+        /// <summary>
+        /// Computes the number of T-components covered by a 128-bit vector
+        /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <param name="t">The component type representative</param>
         /// <typeparam name="T">The component type</typeparam>

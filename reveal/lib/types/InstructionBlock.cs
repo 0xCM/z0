@@ -24,13 +24,12 @@ namespace Z0
         /// </summary>
         /// <param name="encoded">The encoded instructions</param>
         /// <param name="decoded">The decoded instructions</param>
-        public static InstructionBlock Define(string name, ReadOnlySpan<byte> encoded, Instruction[] decoded)
-            => new InstructionBlock(name,encoded,decoded);
+        public static InstructionBlock Define(string label, ReadOnlySpan<byte> encoded, Instruction[] decoded)
+            => new InstructionBlock(label,encoded,decoded);
 
-
-        InstructionBlock(string name, ReadOnlySpan<byte> encoded, Instruction[] decoded)
+        InstructionBlock(string label, ReadOnlySpan<byte> encoded, Instruction[] decoded)
         {
-            this.Identity = name;
+            this.Label = label;
             this.EncodedData = encoded.ToArray();
             this.Decoded = decoded;
         }
@@ -38,9 +37,9 @@ namespace Z0
         byte[] EncodedData; 
 
         /// <summary>
-        /// The identity given to the block
+        /// A description for the block
         /// </summary>
-        public string Identity {get;}
+        public string Label {get;}
 
         /// <summary>
         /// The encoded instructions

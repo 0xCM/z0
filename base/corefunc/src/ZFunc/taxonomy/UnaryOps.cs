@@ -39,6 +39,7 @@ namespace Z0
 
     }
 
+
     /// <summary>
     /// Characterizes a unary operator that accepts two 8-bit immediates
     /// </summary>

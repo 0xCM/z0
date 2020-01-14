@@ -19,8 +19,6 @@ namespace Z0
 
         readonly MemoryBuffer Buffer;
 
-        readonly long pBuffer;
-
         AsmCode Code;
         
         public static AsmExecBuffer Create(int? size = null)
@@ -29,7 +27,6 @@ namespace Z0
         AsmExecBuffer(int size)
         {
             Buffer = MemoryBuffer.Alloc(size);
-            pBuffer = (long)Buffer.Handle;
             Code = AsmCode.Empty;
         }
 
@@ -49,7 +46,7 @@ namespace Z0
             where T : unmanaged
         {
             Load(code);
-            return AsmDelegate.CreateBinOp<T>(pBuffer, Code.Name);
+            return AsmDelegate.CreateBinOp<T>(Buffer.Handle, Code.Name);
         }
 
         [MethodImpl(Inline)]
@@ -57,51 +54,50 @@ namespace Z0
             where T : unmanaged
         {
             Load(code);
-            return AsmDelegate.CreateUnaryOp<T>(pBuffer, Code.Name);
+            return AsmDelegate.CreateUnaryOp<T>(Buffer.Handle, Code.Name);
         }
 
         [MethodImpl(Inline)]
         public BinaryOp8 BinOp8(in AsmCode code)
         {
             Load(code);
-            return AsmDelegate.CreateBinOp8(pBuffer, Code.Name);
+            return AsmDelegate.CreateBinOp8(Buffer.Handle, Code.Name);
         }
 
         [MethodImpl(Inline)]
         public BinaryOp16 BinOp16(in AsmCode code)
         {
             Load(code);
-            return AsmDelegate.CreateBinOp16(pBuffer, Code.Name);
+            return AsmDelegate.CreateBinOp16(Buffer.Handle, Code.Name);
         }
 
         [MethodImpl(Inline)]
         public BinaryOp32 BinOp32(in AsmCode code)
         {
             Load(code);
-            return AsmDelegate.CreateBinOp32(pBuffer, Code.Name);
+            return AsmDelegate.CreateBinOp32(Buffer.Handle, Code.Name);
         }
 
         [MethodImpl(Inline)]
         public BinaryOp64 BinOp64(in AsmCode code)
         {
             Load(code);
-            return AsmDelegate.CreateBinOp64(pBuffer, Code.Name);
+            return AsmDelegate.CreateBinOp64(Buffer.Handle, Code.Name);
         }
 
         [MethodImpl(Inline)]
         public BinaryOp128 BinOp128(in AsmCode code)
         {
             Load(code);
-            return AsmDelegate.CreateBinOp128(pBuffer, Code.Name);
+            return AsmDelegate.CreateBinOp128(Buffer.Handle, Code.Name);
         }
 
         [MethodImpl(Inline)]
         public BinaryOp256 BinOp256(in AsmCode code)
         {
             Load(code);
-            return AsmDelegate.CreateBinOp256(pBuffer, Code.Name);
+            return AsmDelegate.CreateBinOp256(Buffer.Handle, Code.Name);
         }
-
         public void Dispose()
             => Buffer.Dispose();
     }

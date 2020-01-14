@@ -12,6 +12,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using dnlib.DotNet;
+
+    using DN = dnlib.DotNet;
+    using DNE = dnlib.DotNet.Emit;
     
     using static zfunc;
     

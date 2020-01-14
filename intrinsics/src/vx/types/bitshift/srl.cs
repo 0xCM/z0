@@ -10,9 +10,11 @@ namespace Z0
 
     using static zfunc;
 
+
     partial class VXTypes
     {
-        public readonly struct Srl128<T> : IVShiftOp128D<T>
+        
+        public readonly struct Srl128<T> : IVShiftOp128D<T>, IVUnaryImm8Resolver128<T>
             where T : unmanaged
         {
             public const string Name = "vsrl";
@@ -34,7 +36,7 @@ namespace Z0
             public T InvokeScalar(T a, byte offset) => gmath.srl(a,offset);
         }
 
-        public readonly struct Srl256<T> : IVShiftOp256D<T>
+        public readonly struct Srl256<T> : IVShiftOp256D<T>, IVUnaryImm8Resolver256<T>
             where T : unmanaged
         {
             public const string Name = "vsrl";

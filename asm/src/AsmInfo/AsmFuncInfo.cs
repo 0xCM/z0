@@ -14,11 +14,21 @@ namespace Z0
     /// </summary>
     public class AsmFuncInfo
     {   
+        public AsmFuncInfo(ulong StartAddress, ulong EndAddress, Moniker Name, AsmInstructionInfo[] Instructions, byte[] Encoding)
+        {
+            this.StartAddress = StartAddress;
+            this.EndAddress = EndAddress;
+            this.Name = Name;
+            this.Instructions = Instructions;
+            this.Encoding = Encoding;
+        }
+
         public AsmFuncInfo(ulong StartAddress, ulong EndAddress, MethodSig Signature, AsmInstructionInfo[] Instructions, byte[] Encoding)
         {
             this.StartAddress = StartAddress;
             this.EndAddress = EndAddress;
             this.Signature = Signature;
+            this.Name = Moniker.define(Signature.MethodName);
             this.Instructions = Instructions;
             this.Encoding = Encoding;
         }
@@ -36,10 +46,12 @@ namespace Z0
         /// <summary>
         /// The signature of the defined function
         /// </summary>
-        public MethodSig Signature {get;}
+        public Option<MethodSig> Signature {get;}
+
+        public Moniker Name {get;}
 
         public string FunctionName
-            => Signature.MethodName;
+            => Signature.MapValueOrElse(s => s.MethodName, () => Name.Text);
         
         /// <summary>
         /// The number of encoded instructions

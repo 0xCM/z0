@@ -81,7 +81,6 @@ namespace Z0
             var title = concat(src.Mnemonic, AsciSym.LParen, src.OpCode, AsciSym.RParen);
             return (address + AsciSym.Space + content + "; " + title + " " + operands).PadRight(90, AsciSym.Space) + encoding;
         }
-
         
         public static string FormatInstructions(this AsmFuncInfo src, int pad)
         {
@@ -106,7 +105,8 @@ namespace Z0
         /// <param name="location">Specifies whether to include the assembly-relative function location address</param>
         public static string FormatHeader(this AsmFuncInfo src, bool encoding = true,  bool location = false)
         {
-            var header = line(concat(BeginComment, $"function: {src.Signature.Format()}")); 
+            var namefmt = src.Signature.MapValueOrElse(s => s.Format(), () => src.Name.Text);
+            var header = line(concat(BeginComment, $"function: {namefmt}")); 
             if(encoding)           
                 header += src.FormatEncodingProp();
             if(location)

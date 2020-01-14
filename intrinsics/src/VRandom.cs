@@ -13,34 +13,38 @@ namespace Z0
     public readonly struct VRandom128<T> : IVEmitter128<T>
         where T : unmanaged
     {
-        readonly IPolyrand Random;
-
         public const string Name = "vrandom";
 
-        public Moniker Moniker => moniker<N128,T>(Name);
+        static N128 w => default;
+
+        readonly IPolyrand Random;
+
+        public Moniker Moniker => moniker(Name,w);
 
         [MethodImpl(Inline)]
         internal VRandom128(IPolyrand random)            
             => this.Random = random;
         
         [MethodImpl(Inline)]
-        public Vector128<T> Invoke() => Random.CpuVector<T>(n128);
+        public Vector128<T> Invoke() => Random.CpuVector<T>(w);
     }
 
     public readonly struct VRandom256<T> : IVEmitter256<T>
         where T : unmanaged
     {
-        readonly IPolyrand Random;
-
         public const string Name = "vrandom";
 
-        public Moniker Moniker => moniker<N256,T>(Name);
+        readonly IPolyrand Random;
+
+        static N256 w => default;
+
+        public Moniker Moniker => moniker(Name,w);
 
         [MethodImpl(Inline)]
         internal VRandom256(IPolyrand random)            
             => this.Random = random;
         
         [MethodImpl(Inline)]
-        public Vector256<T> Invoke() => Random.CpuVector<T>(n256);
+        public Vector256<T> Invoke() => Random.CpuVector<T>(w);
     }
 }

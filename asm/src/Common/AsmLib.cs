@@ -9,24 +9,31 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
-    using System.Globalization;
 
     using static zfunc;
 
     /// <summary>
     /// Defines lookup capability over the asm archive logs
     /// </summary>
-    public readonly ref struct AsmLib
+    public readonly struct AsmLib
     {
+        readonly FolderName Subject;
+
+        public static AsmLib Create(string subject)
+            => new AsmLib(subject);
+
+        public AsmLib(string subject)
+        {
+            this.Subject = FolderName.Define(subject);
+        }
+
         /// <summary>
         /// Materializes an untyped code block from hex data contained in the assembly log archive
         /// </summary>
         /// <param name="subfolder">The asm log subfolder</param>
         /// <param name="m">The identifying moniker</param>
-        public static AsmCode Read(FolderName subfolder, Moniker m)
-            => AsmCode.Parse(Paths.AsmHexPath(subfolder, m).ReadText(),m);
+        public AsmCode Read(Moniker m)
+            => AsmCode.Parse(Paths.AsmHexPath(Subject, m).ReadText(),m);
 
         /// <summary>
         /// Materializes a typed code block (per user's insistence as the type is not checkeed in any way) 
@@ -34,28 +41,16 @@ namespace Z0
         /// </summary>
         /// <param name="subfolder">The asm log subfolder</param>
         /// <param name="m">The identifying moniker</param>
-        public static AsmCode<T> Read<T>(FolderName subfolder, Moniker m, T t = default)
+        public AsmCode<T> Read<T>(Moniker m, T t = default)
             where T : unmanaged
-                => AsmCode.Parse(Paths.AsmHexPath(subfolder, m).ReadText(),m,t);
+                => AsmCode.Parse(Paths.AsmHexPath(Subject, m).ReadText(),m,t);
 
         /// <summary>
         /// Returns the assembly hex file paths with filenames that satisfy a substring match predicate
         /// </summary>
-        /// <param name="subfolder">The asm log subfolder to search</param>
         /// <param name="match">The match predicate</param>
-        public static IEnumerable<FilePath> Files(FolderName subfolder, string match)        
-            => Paths.AsmDataDir(subfolder).Files(Paths.AsmHexExt, match);
-
-        /// <summary>
-        /// Reads a block of intrinsic assembly code
-        /// </summary>
-        /// <param name="m">The identifying moniker</param>
-        /// <param name="t">A primal type representative</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        public static AsmCode<T> Intrinsic<T>(Moniker m, T t = default)
-            where T : unmanaged
-                => AsmLib.Read<T>(FolderName.Define("dinx"), m);
+        public IEnumerable<FilePath> HexFiles(string match)        
+            => Paths.AsmDataDir(Subject).Files(Paths.AsmHexExt, match);
 
     }
-
 }

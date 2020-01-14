@@ -10,6 +10,7 @@ namespace Z0
 
     using static zfunc;
 
+
     [AttributeUsage(AttributeTargets.Parameter)]
     public class ImmAttribute : Attribute
     {

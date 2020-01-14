@@ -27,35 +27,12 @@ namespace Z0
         protected virtual string OpName 
             => "anon";
 
-        protected virtual FolderName AsmFolder
-            => FolderName.Empty;
-
         protected Moniker TestOpMoniker(PrimalKind kind)
             => Moniker.define($"{OpName}_asm",kind);
-
-        protected Moniker RefOpName<T>(T t = default)
-            where T : unmanaged
-                => moniker<T>(OpName);
 
         protected Moniker TestOpName<T>(T t = default)
             where T : unmanaged
                 => TestOpMoniker(PrimalType.kind<T>());
-
-        protected static AsmCode ReadAsm(FolderName folder, Moniker m)
-            => AsmLib.Read(folder, m);
-
-        protected static AsmCode ReadAsm(FolderName folder, string opname, PrimalKind kind)
-            => AsmLib.Read(folder, Moniker.define(opname,kind));
-
-        protected AsmCode ReadAsm(Moniker m)
-            => ReadAsm(AsmFolder, m);
-
-        protected AsmCode ReadAsm(PrimalKind kind)
-            => ReadAsm(AsmFolder, OpName, kind);
-
-        protected AsmCode<T> ReadAsm<T>(T t = default)
-            where T : unmanaged
-                => new AsmCode<T>(ReadAsm(AsmFolder, OpName, typeof(T).Kind()));
 
         protected void CheckMatch<T>(BinaryOp<Vector128<T>> f, BinaryOp128 g)
             where T : unmanaged

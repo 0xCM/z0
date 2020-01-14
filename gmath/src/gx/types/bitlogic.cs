@@ -11,12 +11,13 @@ namespace Z0
 
     partial class GXTypes
     {
+
         public readonly struct And<T> : IBinaryOp<T>
             where T : unmanaged        
         {    
-            public static And<T> Op => default;
-
             public const string Name = "and";
+
+            public static And<T> Op => default;
 
             public Moniker Moniker => moniker<T>(Name);
 
@@ -28,9 +29,9 @@ namespace Z0
         public readonly struct Or<T> : IBinaryOp<T>
             where T : unmanaged        
         {    
-            public static Or<T> Op => default;
-
             public const string Name = "or";
+
+            public static Or<T> Op => default;
 
             public Moniker Moniker => moniker<T>(Name);
 
@@ -41,9 +42,9 @@ namespace Z0
         public readonly struct Xor<T> : IBinaryOp<T>
             where T : unmanaged        
         {    
-            public static Xor<T> Op => default;
-
             public const string Name = "xor";
+
+            public static Xor<T> Op => default;
 
             public Moniker Moniker => moniker<T>(Name);
 
@@ -55,9 +56,9 @@ namespace Z0
         public readonly struct Nand<T> : IBinaryOp<T>
             where T : unmanaged        
         {    
-            public static Nand<T> Op => default;
-
             public const string Name = "nand";
+
+            public static Nand<T> Op => default;
 
             public Moniker Moniker => moniker<T>(Name);
 
@@ -68,9 +69,9 @@ namespace Z0
         public readonly struct Nor<T> : IBinaryOp<T>
             where T : unmanaged        
         {    
-            public static Nor<T> Op => default;
-
             public const string Name = "not";
+
+            public static Nor<T> Op => default;
 
             public Moniker Moniker => moniker<T>(Name);
 
@@ -81,9 +82,9 @@ namespace Z0
         public readonly struct Xnor<T> : IBinaryOp<T>
             where T : unmanaged        
         {    
-            public static Xnor<T> Op => default;
-
             public const string Name = "xnor";
+
+            public static Xnor<T> Op => default;
 
             public Moniker Moniker => moniker<T>(Name);
 
@@ -94,9 +95,9 @@ namespace Z0
         public readonly struct Select<T> : ITernaryOp<T>
             where T : unmanaged        
         {    
-            public static Select<T> Op => default;
-
             public const string Name = "select";
+
+            public static Select<T> Op => default;
 
             public Moniker Moniker => moniker<T>(Name);
 
@@ -107,9 +108,9 @@ namespace Z0
         public readonly struct Not<T> : IUnaryOp<T>
             where T : unmanaged        
         {
-            public static Not<T> Op => default;
-
             public const string Name = "not";
+
+            public static Not<T> Op => default;
 
             public Moniker Moniker => moniker<T>(Name);
 
@@ -120,9 +121,9 @@ namespace Z0
         public readonly struct CImpl<T> : IBinaryOp<T>
             where T : unmanaged        
         {    
-            public static CImpl<T> Op => default;
-
             public const string Name = "cimpl";
+
+            public static CImpl<T> Op => default;
 
             public Moniker Moniker => moniker<T>(Name);
 
@@ -133,9 +134,9 @@ namespace Z0
         public readonly struct CNonImpl<T> : IBinaryOp<T>
             where T : unmanaged        
         {    
-            public static CNonImpl<T> Op => default;
-
             public const string Name = "cnonimpl";
+
+            public static CNonImpl<T> Op => default;
 
             public Moniker Moniker => moniker<T>(Name);
 
@@ -146,9 +147,9 @@ namespace Z0
         public readonly struct Impl<T> : IBinaryOp<T>
             where T : unmanaged        
         {    
-            public static Impl<T> Op => default;
-
             public const string Name = "impl";
+
+            public static Impl<T> Op => default;
 
             public Moniker Moniker => moniker<T>(Name);
 
@@ -159,16 +160,14 @@ namespace Z0
         public readonly struct NonImpl<T> : IBinaryOp<T>
             where T : unmanaged        
         {    
-            public static NonImpl<T> Op => default;
-
             public const string Name = "impl";
+
+            public static NonImpl<T> Op => default;
 
             public Moniker Moniker => moniker<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.nonimpl(a,b);
         }
-
     }
-
 }

@@ -12,6 +12,7 @@ namespace Z0
 
     partial class VXTypes
     {
+
         public readonly struct Nand128<T> : IVBinOp128D<T>
             where T : unmanaged
         {
@@ -47,6 +48,5 @@ namespace Z0
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b) => gmath.nand(a,b);
         }
-
     }
 }

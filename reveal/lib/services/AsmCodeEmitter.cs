@@ -40,7 +40,7 @@ namespace Z0
         {
             using var writer = Writer();
 
-            var asm = disassembly.DistillAsm().ToArray();
+            var asm = disassembly.DistillAsmFunctions().ToArray();
             if(asm.Length != 0)
             {
                 if(append)
@@ -57,7 +57,7 @@ namespace Z0
 
             foreach(var t in types)
             {
-                var asm = t.DistillAsm();
+                var asm = t.DistillAsmFunctions();
                 if(asm.Length == 0)
                     continue;
 

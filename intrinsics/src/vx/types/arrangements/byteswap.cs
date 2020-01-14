@@ -15,9 +15,9 @@ namespace Z0
         public readonly struct ByteSwap128<T> : IVUnaryOp128D<T>
             where T : unmanaged
         {
-            public static ByteSwap128<T> Op => default;
-
             public const string Name = "vbyteswap";
+
+            public static ByteSwap128<T> Op => default;
 
             static N128 w => default;
 
@@ -33,9 +33,9 @@ namespace Z0
         public readonly struct ByteSwap256<T> : IVUnaryOp256D<T>
             where T : unmanaged
         {
-            public static ByteSwap256<T> Op => default;
-
             public const string Name = "vbyteswap";
+
+            public static ByteSwap256<T> Op => default;
 
             static N256 w => default;
 

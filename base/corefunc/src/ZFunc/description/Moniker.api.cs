@@ -179,11 +179,11 @@ namespace Z0
                 {
                     var segtype = segment.GetGenericArguments().Single();
                     var segwidth = segtype.BitWidth();
-                    name += ($"{w}x{segwidth}" + segtype.Kind().Sign());
+                    name += ($"{w}x{segwidth}" + segtype.Kind().Indicator());
                 }
                 else
                 {
-                    name += ($"{w}" + segment.Kind().Sign());
+                    name += ($"{w}" + segment.Kind().Indicator());
                 }                
             }
             return new Moniker(name);            

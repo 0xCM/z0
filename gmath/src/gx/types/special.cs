@@ -14,9 +14,9 @@ namespace Z0
         public readonly struct Parse<T>  : IParser<T>
             where T : unmanaged        
         {
-            public static Parse<T> Op => default;
-
             public const string Name = "parse";
+
+            public static Parse<T> Op => default;
 
             public Moniker Moniker => moniker<T>(Name);
 

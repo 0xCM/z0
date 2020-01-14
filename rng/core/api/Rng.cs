@@ -15,6 +15,18 @@ namespace Z0
     public static class Rng
     {
         /// <summary>
+        /// Creates a primal emitter predicated an a random source
+        /// </summary>
+        /// <param name="w">The vector bit width</param>
+        /// <param name="random">The random source</param>
+        /// <param name="t">A vector component type representative</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static PrimalEmitter<T> Emitter<T>(IPolyrand random, T t = default)  
+            where T : unmanaged
+                => new PrimalEmitter<T>(random);
+
+        /// <summary>
         /// Defines a default T-valued domain
         /// </summary>
         /// <typeparam name="T">The domain type</typeparam>

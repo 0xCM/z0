@@ -1,4 +1,32 @@
-; 2020-01-12 17:49:16:302
+; 2020-01-13 21:43:23:166
+; function: uint bl_and32(uint a, uint b)
+; static ReadOnlySpan<byte> bl_and32Bytes => new byte[10]{0x0F,0x1F,0x44,0x00,0x00,0x23,0xD1,0x8B,0xC2,0xC3};
+0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
+0005h and edx,ecx                             ; AND(And_r32_rm32) [EDX,ECX]                encoding(2 bytes) = 23 d1
+0007h mov eax,edx                             ; MOV(Mov_r32_rm32) [EAX,EDX]                encoding(2 bytes) = 8b c2
+0009h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+; function: uint logic_machine(uint a, uint b)
+; static ReadOnlySpan<byte> logic_machineBytes => new byte[12]{0x0F,0x1F,0x44,0x00,0x00,0x23,0xCA,0x33,0xD1,0x8B,0xC2,0xC3};
+0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
+0005h and ecx,edx                             ; AND(And_r32_rm32) [ECX,EDX]                encoding(2 bytes) = 23 ca
+0007h xor edx,ecx                             ; XOR(Xor_r32_rm32) [EDX,ECX]                encoding(2 bytes) = 33 d1
+0009h mov eax,edx                             ; MOV(Mov_r32_rm32) [EAX,EDX]                encoding(2 bytes) = 8b c2
+000bh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+; function: Vector128<uint> vlogic_machine(Vector128<uint> a, Vector128<uint> b)
+; static ReadOnlySpan<byte> vlogic_machineBytes => new byte[34]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC5,0xF8,0x28,0xD1,0xC5,0xF9,0xDB,0xC2,0xC5,0xF9,0xEF,0xC1,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
+0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
+0005h vmovupd xmm0,[rdx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
+0009h vmovupd xmm1,[r8]                       ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM1,mem(Packed128_Float64,R8:br,:sr)] encoding(VEX, 5 bytes) = c4 c1 79 10 08
+000eh vmovaps xmm2,xmm1                       ; VMOVAPS(VEX_Vmovaps_xmm_xmmm128) [XMM2,XMM1] encoding(VEX, 4 bytes) = c5 f8 28 d1
+0012h vpand xmm0,xmm0,xmm2                    ; VPAND(VEX_Vpand_xmm_xmm_xmmm128) [XMM0,XMM0,XMM2] encoding(VEX, 4 bytes) = c5 f9 db c2
+0016h vpxor xmm0,xmm0,xmm1                    ; VPXOR(VEX_Vpxor_xmm_xmm_xmmm128) [XMM0,XMM0,XMM1] encoding(VEX, 4 bytes) = c5 f9 ef c1
+001ah vmovupd [rcx],xmm0                      ; VMOVUPD(VEX_Vmovupd_xmmm128_xmm) [mem(Packed128_Float64,RCX:br,:sr),XMM0] encoding(VEX, 4 bytes) = c5 f9 11 01
+001eh mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
+0021h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bit eq_d16u(ushort a, ushort b)
 ; static ReadOnlySpan<byte> eq_d16uBytes => new byte[20]{0x0F,0x1F,0x44,0x00,0x00,0x0F,0xB7,0xC1,0x0F,0xB7,0xD2,0x3B,0xC2,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0xC3};
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
@@ -41,15 +69,15 @@
 0015h movsx rcx,byte ptr [rsp+28h]            ; MOVSX(Movsx_r64_rm8) [RCX,mem(8i,RSP:br,:sr)] encoding(6 bytes) = 48 0f be 4c 24 28
 001bh mov [rsp+30h],cl                        ; MOV(Mov_rm8_r8) [mem(8u,RSP:br,:sr),CL]    encoding(4 bytes) = 88 4c 24 30
 001fh lea rcx,[rsp+30h]                       ; LEA(Lea_r64_m) [RCX,mem(Unknown,RSP:br,:sr)] encoding(5 bytes) = 48 8d 4c 24 30
-0024h call 7FF7C7E65138h                      ; CALL(Call_rel32_64) [FFFFFFFFFFFFFBF8h:jmp64] encoding(5 bytes) = e8 cf fb ff ff
+0024h call 7FF7C6A96CE8h                      ; CALL(Call_rel32_64) [FFFFFFFFFFFFFBF8h:jmp64] encoding(5 bytes) = e8 cf fb ff ff
 0029h nop                                     ; NOP(Nopd)                                  encoding(1 byte ) = 90
 002ah add rsp,38h                             ; ADD(Add_rm64_imm8) [RSP,38h:imm64]         encoding(4 bytes) = 48 83 c4 38
 002eh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: string the_name()
-; static ReadOnlySpan<byte> the_nameBytes => new byte[19]{0x0F,0x1F,0x44,0x00,0x00,0x48,0xB8,0x10,0xA2,0xF4,0xAC,0x41,0x02,0x00,0x00,0x48,0x8B,0x00,0xC3};
+; static ReadOnlySpan<byte> the_nameBytes => new byte[19]{0x0F,0x1F,0x44,0x00,0x00,0x48,0xB8,0x20,0xA2,0x41,0x11,0x03,0x02,0x00,0x00,0x48,0x8B,0x00,0xC3};
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
-0005h mov rax,241ACF4A210h                    ; MOV(Mov_r64_imm64) [RAX,241acf4a210h:imm64] encoding(10 bytes) = 48 b8 10 a2 f4 ac 41 02 00 00
+0005h mov rax,2031141A220h                    ; MOV(Mov_r64_imm64) [RAX,2031141a220h:imm64] encoding(10 bytes) = 48 b8 20 a2 41 11 03 02 00 00
 000fh mov rax,[rax]                           ; MOV(Mov_r64_rm64) [RAX,mem(64u,RAX:br,:sr)] encoding(3 bytes) = 48 8b 00
 0012h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------

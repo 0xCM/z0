@@ -1,4 +1,4 @@
-; 2020-01-12 17:49:14:704
+; 2020-01-13 21:43:21:431
 ; function: int convert_g32f_to_g32i(float src)
 ; static ReadOnlySpan<byte> convert_g32f_to_g32iBytes => new byte[10]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFA,0x2C,0xC0,0xC3};
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
@@ -21,11 +21,11 @@
 000ah ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ulong convert_g32f_to_g64u(float src)
-; static ReadOnlySpan<byte> convert_g32f_to_g64uBytes => new byte[22]{0x48,0x83,0xEC,0x28,0xC5,0xF8,0x77,0xC5,0xFA,0x5A,0xC0,0xE8,0xB0,0x74,0x55,0x5F,0x90,0x48,0x83,0xC4,0x28,0xC3};
+; static ReadOnlySpan<byte> convert_g32f_to_g64uBytes => new byte[22]{0x48,0x83,0xEC,0x28,0xC5,0xF8,0x77,0xC5,0xFA,0x5A,0xC0,0xE8,0xE0,0x7C,0x56,0x5F,0x90,0x48,0x83,0xC4,0x28,0xC3};
 0000h sub rsp,28h                             ; SUB(Sub_rm64_imm8) [RSP,28h:imm64]         encoding(4 bytes) = 48 83 ec 28
 0004h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0007h vcvtss2sd xmm0,xmm0,xmm0                ; VCVTSS2SD(VEX_Vcvtss2sd_xmm_xmm_xmmm32) [XMM0,XMM0,XMM0] encoding(VEX, 4 bytes) = c5 fa 5a c0
-000bh call 7FF82738D940h                      ; CALL(Call_rel32_64) [5F5574C0h:jmp64]      encoding(5 bytes) = e8 b0 74 55 5f
+000bh call 7FF825FCD940h                      ; CALL(Call_rel32_64) [5F567CF0h:jmp64]      encoding(5 bytes) = e8 e0 7c 56 5f
 0010h nop                                     ; NOP(Nopd)                                  encoding(1 byte ) = 90
 0011h add rsp,28h                             ; ADD(Add_rm64_imm8) [RSP,28h:imm64]         encoding(4 bytes) = 48 83 c4 28
 0015h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
@@ -153,10 +153,10 @@
 000ah ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ulong convert_g64f_to_g64u(double src)
-; static ReadOnlySpan<byte> convert_g64f_to_g64uBytes => new byte[18]{0x48,0x83,0xEC,0x28,0xC5,0xF8,0x77,0xE8,0x64,0x6E,0x55,0x5F,0x90,0x48,0x83,0xC4,0x28,0xC3};
+; static ReadOnlySpan<byte> convert_g64f_to_g64uBytes => new byte[18]{0x48,0x83,0xEC,0x28,0xC5,0xF8,0x77,0xE8,0x94,0x76,0x56,0x5F,0x90,0x48,0x83,0xC4,0x28,0xC3};
 0000h sub rsp,28h                             ; SUB(Sub_rm64_imm8) [RSP,28h:imm64]         encoding(4 bytes) = 48 83 ec 28
 0004h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
-0007h call 7FF82738D940h                      ; CALL(Call_rel32_64) [5F556E70h:jmp64]      encoding(5 bytes) = e8 64 6e 55 5f
+0007h call 7FF825FCD940h                      ; CALL(Call_rel32_64) [5F5676A0h:jmp64]      encoding(5 bytes) = e8 94 76 56 5f
 000ch nop                                     ; NOP(Nopd)                                  encoding(1 byte ) = 90
 000dh add rsp,28h                             ; ADD(Add_rm64_imm8) [RSP,28h:imm64]         encoding(4 bytes) = 48 83 c4 28
 0011h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
@@ -481,25 +481,25 @@
 0008h movzx eax,ax                            ; MOVZX(Movzx_r32_rm16) [EAX,AX]             encoding(3 bytes) = 0f b7 c0
 000bh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: int convert_g8u_to_g32i(byte src)
-; static ReadOnlySpan<byte> convert_g8u_to_g32iBytes => new byte[9]{0x0F,0x1F,0x44,0x00,0x00,0x0F,0xB6,0xC1,0xC3};
+; function: long convert_g8u_to_g64i(byte src)
+; static ReadOnlySpan<byte> convert_g8u_to_g64iBytes => new byte[9]{0x0F,0x1F,0x44,0x00,0x00,0x0F,0xB6,0xC1,0xC3};
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h movzx eax,cl                            ; MOVZX(Movzx_r32_rm8) [EAX,CL]              encoding(3 bytes) = 0f b6 c1
 0008h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: uint convert_g8u_to_g32u(byte src)
-; static ReadOnlySpan<byte> convert_g8u_to_g32uBytes => new byte[9]{0x0F,0x1F,0x44,0x00,0x00,0x0F,0xB6,0xC1,0xC3};
+; function: ulong convert_g8u_to_g64u(byte src)
+; static ReadOnlySpan<byte> convert_g8u_to_g64uBytes => new byte[9]{0x0F,0x1F,0x44,0x00,0x00,0x0F,0xB6,0xC1,0xC3};
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h movzx eax,cl                            ; MOVZX(Movzx_r32_rm8) [EAX,CL]              encoding(3 bytes) = 0f b6 c1
 0008h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: float convert_g8u_to_g32f(byte src)
-; static ReadOnlySpan<byte> convert_g8u_to_g32fBytes => new byte[17]{0xC5,0xF8,0x77,0x66,0x90,0x0F,0xB6,0xC1,0xC5,0xF8,0x57,0xC0,0xC5,0xFA,0x2A,0xC0,0xC3};
-0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
-0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
-0005h movzx eax,cl                            ; MOVZX(Movzx_r32_rm8) [EAX,CL]              encoding(3 bytes) = 0f b6 c1
-0008h vxorps xmm0,xmm0,xmm0                   ; VXORPS(VEX_Vxorps_xmm_xmm_xmmm128) [XMM0,XMM0,XMM0] encoding(VEX, 4 bytes) = c5 f8 57 c0
-000ch vcvtsi2ss xmm0,xmm0,eax                 ; VCVTSI2SS(VEX_Vcvtsi2ss_xmm_xmm_rm32) [XMM0,XMM0,EAX] encoding(VEX, 4 bytes) = c5 fa 2a c0
+; static ReadOnlySpan<byte> convert_g8u_to_g32fBytes => new byte[17]{0x48,0x83,0xEC,0x28,0x90,0xFF,0x15,0xAD,0x23,0xC2,0xFF,0x90,0x48,0x83,0xC4,0x28,0xC3};
+0000h sub rsp,28h                             ; SUB(Sub_rm64_imm8) [RSP,28h:imm64]         encoding(4 bytes) = 48 83 ec 28
+0004h nop                                     ; NOP(Nopd)                                  encoding(1 byte ) = 90
+0005h call qword ptr [7FF824BAF6C8h]          ; CALL(Call_rm64) [mem(QwordOffset,RIP:br,:sr)] encoding(6 bytes) = ff 15 ad 23 c2 ff
+000bh nop                                     ; NOP(Nopd)                                  encoding(1 byte ) = 90
+000ch add rsp,28h                             ; ADD(Add_rm64_imm8) [RSP,28h:imm64]         encoding(4 bytes) = 48 83 c4 28
 0010h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: double convert_g8u_to_g64f(byte src)
@@ -512,13 +512,11 @@
 0010h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Char convert_g8u_to_gch16(byte src)
-; static ReadOnlySpan<byte> convert_g8u_to_gch16Bytes => new byte[17]{0x48,0x83,0xEC,0x28,0x90,0xFF,0x15,0xAD,0x23,0xC2,0xFF,0x90,0x48,0x83,0xC4,0x28,0xC3};
-0000h sub rsp,28h                             ; SUB(Sub_rm64_imm8) [RSP,28h:imm64]         encoding(4 bytes) = 48 83 ec 28
-0004h nop                                     ; NOP(Nopd)                                  encoding(1 byte ) = 90
-0005h call qword ptr [7FF8259BF6C8h]          ; CALL(Call_rm64) [mem(QwordOffset,RIP:br,:sr)] encoding(6 bytes) = ff 15 ad 23 c2 ff
-000bh nop                                     ; NOP(Nopd)                                  encoding(1 byte ) = 90
-000ch add rsp,28h                             ; ADD(Add_rm64_imm8) [RSP,28h:imm64]         encoding(4 bytes) = 48 83 c4 28
-0010h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
+; static ReadOnlySpan<byte> convert_g8u_to_gch16Bytes => new byte[12]{0x0F,0x1F,0x44,0x00,0x00,0x0F,0xB6,0xC1,0x0F,0xB7,0xC0,0xC3};
+0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
+0005h movzx eax,cl                            ; MOVZX(Movzx_r32_rm8) [EAX,CL]              encoding(3 bytes) = 0f b6 c1
+0008h movzx eax,ax                            ; MOVZX(Movzx_r32_rm16) [EAX,AX]             encoding(3 bytes) = 0f b7 c0
+000bh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: byte convert_g16i_to_g8u(short src)
 ; static ReadOnlySpan<byte> convert_g16i_to_g8uBytes => new byte[13]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x0F,0xBF,0xC1,0x0F,0xB6,0xC0,0xC3};
@@ -1077,7 +1075,7 @@
 0009h vcvtsi2sd xmm0,xmm0,rcx                 ; VCVTSI2SD(VEX_Vcvtsi2sd_xmm_xmm_rm64) [XMM0,XMM0,RCX] encoding(VEX, 5 bytes) = c4 e1 fb 2a c1
 000eh test rcx,rcx                            ; TEST(Test_rm64_r64) [RCX,RCX]              encoding(3 bytes) = 48 85 c9
 0011h jge short 001bh                         ; JGE(Jge_rel8_64) [1Bh:jmp64]               encoding(2 bytes) = 7d 08
-0013h vaddsd xmm0,xmm0,qword ptr [7FF7C7E3A1D8h]; VADDSD(VEX_Vaddsd_xmm_xmm_xmmm64) [XMM0,XMM0,mem(Float64,RIP:br,:sr)] encoding(VEX, 8 bytes) = c5 fb 58 05 0d 00 00 00
+0013h vaddsd xmm0,xmm0,qword ptr [7FF7C6A69978h]; VADDSD(VEX_Vaddsd_xmm_xmm_xmmm64) [XMM0,XMM0,mem(Float64,RIP:br,:sr)] encoding(VEX, 8 bytes) = c5 fb 58 05 0d 00 00 00
 001bh vcvtsd2ss xmm0,xmm0,xmm0                ; VCVTSD2SS(VEX_Vcvtsd2ss_xmm_xmm_xmmm64) [XMM0,XMM0,XMM0] encoding(VEX, 4 bytes) = c5 fb 5a c0
 001fh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------

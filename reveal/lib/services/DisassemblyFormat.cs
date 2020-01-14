@@ -88,7 +88,7 @@ namespace Z0
             var line = 0;
             Span<string> dst = new string[linecount];
             if(config.EmitHeader)                
-                dst[line++] = comment(src.Identity);
+                dst[line++] = comment(src.Label);
             if(config.TimestampHeader)
                 dst[line++] = comment(now().ToLexicalString());
 

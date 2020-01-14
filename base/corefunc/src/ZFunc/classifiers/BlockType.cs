@@ -80,13 +80,102 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static BlockKind kind(Type t)
-            => test(t) ? kind(width(t), segment(t)) : BlockKind.None;
+            => test(t) ? kind(width(t), segment(t).Id()) : BlockKind.None;
 
         public static BlockKind kind<B>()
             where B :struct
                 => kind(typeof(B));
-        public static BlockKind kind(BlockWidth width, PrimalKind seg)            
-            => (BlockKind)((uint)width | (((uint)seg >> 16) << 16));
+        
+        public static BlockKind kind(BlockWidth width, PrimalId id)            
+        {
+            var k = width switch 
+                    { BlockWidth.W16 => 
+                        id switch {
+                            PrimalId.U8 => BlockKind.Block16x8u,
+                            PrimalId.I8 => BlockKind.Block16x8i,
+                            PrimalId.I16 => BlockKind.Block16x16i,
+                            PrimalId.U16 => BlockKind.Block16x16u,
+                            _ => BlockKind.None
+                            }, 
+
+                        BlockWidth.W32 => 
+                        id switch {
+                            PrimalId.U8 => BlockKind.Block32x8u,
+                            PrimalId.I8 => BlockKind.Block32x8i,
+                            PrimalId.I16 => BlockKind.Block32x16i,
+                            PrimalId.U16 => BlockKind.Block32x16u,
+                            PrimalId.I32 => BlockKind.Block32x32i,
+                            PrimalId.U32 => BlockKind.Block32x32u,
+                            PrimalId.F32 => BlockKind.Block32x32f,
+                            _ => BlockKind.None
+                            }, 
+
+                        BlockWidth.W64 => 
+                        id switch {
+                            PrimalId.U8 => BlockKind.Block64x8u,
+                            PrimalId.I8 => BlockKind.Block64x8i,
+                            PrimalId.U16 => BlockKind.Block64x16u,
+                            PrimalId.I16 => BlockKind.Block64x16i,
+                            PrimalId.U32 => BlockKind.Block64x32i,
+                            PrimalId.I32 => BlockKind.Block64x32i,
+                            PrimalId.U64 => BlockKind.Block64x64u,
+                            PrimalId.I64 => BlockKind.Block64x64i,
+                            PrimalId.F32 => BlockKind.Block64x32f,
+                            PrimalId.F64 => BlockKind.Block64x64f,
+                            _ => BlockKind.None
+                            }, 
+
+                        BlockWidth.W128 => 
+                        id switch {
+                            PrimalId.U8 => BlockKind.Block128x8u,
+                            PrimalId.I8 => BlockKind.Block128x8i,
+                            PrimalId.U16 => BlockKind.Block128x16u,
+                            PrimalId.I16 => BlockKind.Block128x16i,
+                            PrimalId.U32 => BlockKind.Block128x32i,
+                            PrimalId.I32 => BlockKind.Block128x32i,
+                            PrimalId.U64 => BlockKind.Block128x64u,
+                            PrimalId.I64 => BlockKind.Block128x64i,
+                            PrimalId.F32 => BlockKind.Block128x32f,
+                            PrimalId.F64 => BlockKind.Block128x64f,
+                            _ => BlockKind.None
+                            }, 
+
+
+                        BlockWidth.W256 => 
+                        id switch {
+                            PrimalId.U8 => BlockKind.Block256x8u,
+                            PrimalId.I8 => BlockKind.Block256x8i,
+                            PrimalId.U16 => BlockKind.Block256x16u,
+                            PrimalId.I16 => BlockKind.Block256x16i,
+                            PrimalId.U32 => BlockKind.Block256x32i,
+                            PrimalId.I32 => BlockKind.Block256x32i,
+                            PrimalId.U64 => BlockKind.Block256x64u,
+                            PrimalId.I64 => BlockKind.Block256x64i,
+                            PrimalId.F32 => BlockKind.Block256x32f,
+                            PrimalId.F64 => BlockKind.Block256x64f,
+                            _ => BlockKind.None
+                            }, 
+
+                        BlockWidth.W512 => 
+                        id switch {
+                            PrimalId.U8 => BlockKind.Block512x8u,
+                            PrimalId.I8 => BlockKind.Block512x8i,
+                            PrimalId.U16 => BlockKind.Block512x16u,
+                            PrimalId.I16 => BlockKind.Block512x16i,
+                            PrimalId.U32 => BlockKind.Block512x32i,
+                            PrimalId.I32 => BlockKind.Block512x32i,
+                            PrimalId.U64 => BlockKind.Block512x64u,
+                            PrimalId.I64 => BlockKind.Block512x64i,
+                            PrimalId.F32 => BlockKind.Block512x32f,
+                            PrimalId.F64 => BlockKind.Block512x64f,
+                            _ => BlockKind.None
+                            }, 
+
+                        _ => BlockKind.None                    
+                    };
+
+            return k;
+        }
 
         /// <summary>
         /// Determines the segment kind classifier for a blocked type

@@ -1,7 +1,7 @@
-// 2020-01-12 17:49:14:578
+// 2020-01-13 21:43:21:297
 ulong nat_add()
 {
-//  Id := 100664870, Name := System.UInt64 Z0.OpCodes.nats::nat_add()
+//  Id := 100664875, Name := System.UInt64 Z0.OpCodes.nats::nat_add()
 //  ulong nat_add()
 //  Managed
 {
@@ -14,7 +14,7 @@ ulong nat_add()
 }
 ulong nat_sub()
 {
-//  Id := 100664871, Name := System.UInt64 Z0.OpCodes.nats::nat_sub()
+//  Id := 100664876, Name := System.UInt64 Z0.OpCodes.nats::nat_sub()
 //  ulong nat_sub()
 //  Managed
 {
@@ -27,7 +27,7 @@ ulong nat_sub()
 }
 ulong nat_mul()
 {
-//  Id := 100664872, Name := System.UInt64 Z0.OpCodes.nats::nat_mul()
+//  Id := 100664877, Name := System.UInt64 Z0.OpCodes.nats::nat_mul()
 //  ulong nat_mul()
 //  Managed
 {
@@ -40,7 +40,7 @@ ulong nat_mul()
 }
 ulong nat_div()
 {
-//  Id := 100664873, Name := System.UInt64 Z0.OpCodes.nats::nat_div()
+//  Id := 100664878, Name := System.UInt64 Z0.OpCodes.nats::nat_div()
 //  ulong nat_div()
 //  Managed
 {
@@ -53,7 +53,7 @@ ulong nat_div()
 }
 ulong nat_mod()
 {
-//  Id := 100664874, Name := System.UInt64 Z0.OpCodes.nats::nat_mod()
+//  Id := 100664879, Name := System.UInt64 Z0.OpCodes.nats::nat_mod()
 //  ulong nat_mod()
 //  Managed
 {
@@ -66,7 +66,7 @@ ulong nat_mod()
 }
 ulong digits_encode_1_0()
 {
-//  Id := 100664875, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_1_0()
+//  Id := 100664880, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_1_0()
 //  ulong digits_encode_1_0()
 //  Managed
 {
@@ -78,7 +78,7 @@ ulong digits_encode_1_0()
 }
 ulong digits_encode_1()
 {
-//  Id := 100664876, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_1()
+//  Id := 100664881, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_1()
 //  ulong digits_encode_1()
 //  Managed
 {
@@ -90,7 +90,7 @@ ulong digits_encode_1()
 }
 ulong digits_encode_2()
 {
-//  Id := 100664877, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_2()
+//  Id := 100664882, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_2()
 //  ulong digits_encode_2()
 //  Managed
 {
@@ -102,7 +102,7 @@ ulong digits_encode_2()
 }
 ulong digits_encode_3()
 {
-//  Id := 100664878, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_3()
+//  Id := 100664883, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_3()
 //  ulong digits_encode_3()
 //  Managed
 {
@@ -114,7 +114,7 @@ ulong digits_encode_3()
 }
 ulong digits_encode_10()
 {
-//  Id := 100664879, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_10()
+//  Id := 100664884, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_10()
 //  ulong digits_encode_10()
 //  Managed
 {
@@ -127,7 +127,7 @@ ulong digits_encode_10()
 }
 ulong digits_encode_210()
 {
-//  Id := 100664880, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_210()
+//  Id := 100664885, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_210()
 //  ulong digits_encode_210()
 //  Managed
 {
@@ -141,7 +141,7 @@ ulong digits_encode_210()
 }
 ulong digits_encode_3210()
 {
-//  Id := 100664881, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_3210()
+//  Id := 100664886, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_3210()
 //  ulong digits_encode_3210()
 //  Managed
 {
@@ -156,7 +156,7 @@ ulong digits_encode_3210()
 }
 ulong digits_encode_43210()
 {
-//  Id := 100664882, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_43210()
+//  Id := 100664887, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_43210()
 //  ulong digits_encode_43210()
 //  Managed
 {
@@ -172,7 +172,7 @@ ulong digits_encode_43210()
 }
 ulong digits_encode_76543210()
 {
-//  Id := 100664883, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_76543210()
+//  Id := 100664888, Name := System.UInt64 Z0.OpCodes.nats::digits_encode_76543210()
 //  ulong digits_encode_76543210()
 //  Managed
 {
@@ -191,7 +191,7 @@ ulong digits_encode_76543210()
 }
 ulong digit_extract_9()
 {
-//  Id := 100664884, Name := System.UInt64 Z0.OpCodes.nats::digit_extract_9()
+//  Id := 100664889, Name := System.UInt64 Z0.OpCodes.nats::digit_extract_9()
 //  ulong digit_extract_9()
 //  Managed
 {
@@ -205,7 +205,7 @@ ulong digit_extract_9()
 }
 ulong digit_extract_4()
 {
-//  Id := 100664885, Name := System.UInt64 Z0.OpCodes.nats::digit_extract_4()
+//  Id := 100664890, Name := System.UInt64 Z0.OpCodes.nats::digit_extract_4()
 //  ulong digit_extract_4()
 //  Managed
 {
@@ -219,7 +219,7 @@ ulong digit_extract_4()
 }
 ulong digit_extract_8()
 {
-//  Id := 100664886, Name := System.UInt64 Z0.OpCodes.nats::digit_extract_8()
+//  Id := 100664891, Name := System.UInt64 Z0.OpCodes.nats::digit_extract_8()
 //  ulong digit_extract_8()
 //  Managed
 {
@@ -233,7 +233,7 @@ ulong digit_extract_8()
 }
 ulong digit_extract_5()
 {
-//  Id := 100664887, Name := System.UInt64 Z0.OpCodes.nats::digit_extract_5()
+//  Id := 100664892, Name := System.UInt64 Z0.OpCodes.nats::digit_extract_5()
 //  ulong digit_extract_5()
 //  Managed
 {
@@ -247,7 +247,7 @@ ulong digit_extract_5()
 }
 void digits_extract_5849(out byte d3, out byte d2, out byte d1, out byte d0)
 {
-//  Id := 100664888, Name := System.Void Z0.OpCodes.nats::digits_extract_5849(System.Byte&,System.Byte&,System.Byte&,System.Byte&)
+//  Id := 100664893, Name := System.Void Z0.OpCodes.nats::digits_extract_5849(System.Byte&,System.Byte&,System.Byte&,System.Byte&)
 //  void digits_extract_5849(out byte d3, out byte d2, out byte d1, out byte d0)
 //  Managed
 {
@@ -264,7 +264,7 @@ void digits_extract_5849(out byte d3, out byte d2, out byte d1, out byte d0)
 }
 void digits_extract_5489_ref(ref byte dst)
 {
-//  Id := 100664889, Name := System.Void Z0.OpCodes.nats::digits_extract_5489_ref(System.Byte&)
+//  Id := 100664894, Name := System.Void Z0.OpCodes.nats::digits_extract_5489_ref(System.Byte&)
 //  void digits_extract_5489_ref(ref byte dst)
 //  Managed
 {
@@ -279,7 +279,7 @@ void digits_extract_5489_ref(ref byte dst)
 }
 void digits_extract_80352178(out byte d7, out byte d6, out byte d5, out byte d4, out byte d3, out byte d2, out byte d1, out byte d0)
 {
-//  Id := 100664890, Name := System.Void Z0.OpCodes.nats::digits_extract_80352178(System.Byte&,System.Byte&,System.Byte&,System.Byte&,System.Byte&,System.Byte&,System.Byte&,System.Byte&)
+//  Id := 100664895, Name := System.Void Z0.OpCodes.nats::digits_extract_80352178(System.Byte&,System.Byte&,System.Byte&,System.Byte&,System.Byte&,System.Byte&,System.Byte&,System.Byte&)
 //  void digits_extract_80352178(out byte d7, out byte d6, out byte d5, out byte d4, out byte d3, out byte d2, out byte d1, out byte d0)
 //  Managed
 {
@@ -303,7 +303,7 @@ void digits_extract_80352178(out byte d7, out byte d6, out byte d5, out byte d4,
 }
 void chars_5489(out Char c3, out Char c2, out Char c1, out Char c0)
 {
-//  Id := 100664891, Name := System.Void Z0.OpCodes.nats::chars_5489(System.Char&,System.Char&,System.Char&,System.Char&)
+//  Id := 100664896, Name := System.Void Z0.OpCodes.nats::chars_5489(System.Char&,System.Char&,System.Char&,System.Char&)
 //  void chars_5489(out Char c3, out Char c2, out Char c1, out Char c0)
 //  Managed
 {
@@ -319,7 +319,7 @@ void chars_5489(out Char c3, out Char c2, out Char c1, out Char c0)
 }
 void chars_80352178(out Char c7, out Char c6, out Char c5, out Char c4, out Char c3, out Char c2, out Char c1, out Char c0)
 {
-//  Id := 100664892, Name := System.Void Z0.OpCodes.nats::chars_80352178(System.Char&,System.Char&,System.Char&,System.Char&,System.Char&,System.Char&,System.Char&,System.Char&)
+//  Id := 100664897, Name := System.Void Z0.OpCodes.nats::chars_80352178(System.Char&,System.Char&,System.Char&,System.Char&,System.Char&,System.Char&,System.Char&,System.Char&)
 //  void chars_80352178(out Char c7, out Char c6, out Char c5, out Char c4, out Char c3, out Char c2, out Char c1, out Char c0)
 //  Managed
 {
@@ -340,7 +340,7 @@ void chars_80352178(out Char c7, out Char c6, out Char c5, out Char c4, out Char
 }
 ReadOnlySpan<Char> charspan_5489()
 {
-//  Id := 100664893, Name := System.ReadOnlySpan`1<System.Char> Z0.OpCodes.nats::charspan_5489()
+//  Id := 100664898, Name := System.ReadOnlySpan`1<System.Char> Z0.OpCodes.nats::charspan_5489()
 //  ReadOnlySpan<Char> charspan_5489()
 //  Managed
 {
@@ -352,7 +352,7 @@ ReadOnlySpan<Char> charspan_5489()
 }
 Char digit_decode_0()
 {
-//  Id := 100664894, Name := System.Char Z0.OpCodes.nats::digit_decode_0()
+//  Id := 100664899, Name := System.Char Z0.OpCodes.nats::digit_decode_0()
 //  Char digit_decode_0()
 //  Managed
 {
@@ -365,7 +365,7 @@ Char digit_decode_0()
 }
 Char digit_decode_1()
 {
-//  Id := 100664895, Name := System.Char Z0.OpCodes.nats::digit_decode_1()
+//  Id := 100664900, Name := System.Char Z0.OpCodes.nats::digit_decode_1()
 //  Char digit_decode_1()
 //  Managed
 {
@@ -378,7 +378,7 @@ Char digit_decode_1()
 }
 Char digit_decode_2()
 {
-//  Id := 100664896, Name := System.Char Z0.OpCodes.nats::digit_decode_2()
+//  Id := 100664901, Name := System.Char Z0.OpCodes.nats::digit_decode_2()
 //  Char digit_decode_2()
 //  Managed
 {
@@ -391,7 +391,7 @@ Char digit_decode_2()
 }
 Char digit_decode_3()
 {
-//  Id := 100664897, Name := System.Char Z0.OpCodes.nats::digit_decode_3()
+//  Id := 100664902, Name := System.Char Z0.OpCodes.nats::digit_decode_3()
 //  Char digit_decode_3()
 //  Managed
 {
@@ -404,7 +404,7 @@ Char digit_decode_3()
 }
 Char digit_decode_4()
 {
-//  Id := 100664898, Name := System.Char Z0.OpCodes.nats::digit_decode_4()
+//  Id := 100664903, Name := System.Char Z0.OpCodes.nats::digit_decode_4()
 //  Char digit_decode_4()
 //  Managed
 {
@@ -417,7 +417,7 @@ Char digit_decode_4()
 }
 Char digit_decode_n4()
 {
-//  Id := 100664899, Name := System.Char Z0.OpCodes.nats::digit_decode_n4()
+//  Id := 100664904, Name := System.Char Z0.OpCodes.nats::digit_decode_n4()
 //  Char digit_decode_n4()
 //  Managed
 {
@@ -428,7 +428,7 @@ Char digit_decode_n4()
 }
 Char digit_decode_5()
 {
-//  Id := 100664900, Name := System.Char Z0.OpCodes.nats::digit_decode_5()
+//  Id := 100664905, Name := System.Char Z0.OpCodes.nats::digit_decode_5()
 //  Char digit_decode_5()
 //  Managed
 {
@@ -441,7 +441,7 @@ Char digit_decode_5()
 }
 Char digit_decode_n5()
 {
-//  Id := 100664901, Name := System.Char Z0.OpCodes.nats::digit_decode_n5()
+//  Id := 100664906, Name := System.Char Z0.OpCodes.nats::digit_decode_n5()
 //  Char digit_decode_n5()
 //  Managed
 {

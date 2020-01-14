@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;
 
@@ -14,7 +15,16 @@ namespace Z0
         {            
             vand_check(n128);
             vand_check(n256);
+
+            
+            for(var i=0; i<RepCount; i++)
+            {
+                var x = Random.CpuVector(n128,z32);
+                var y = Random.CpuVector(n128,z32);
+                Claim.yea(Checks.vand(x,y));
+            }
         }
+
 
         void vand_check(N128 w)
         {

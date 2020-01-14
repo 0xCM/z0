@@ -37,6 +37,5 @@ namespace Z0
 
         public MethodInfo DynamicMethod
             => Op.DynamicMethod;
-
     }
 }

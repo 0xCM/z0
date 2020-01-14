@@ -27,7 +27,6 @@ namespace Z0
         public FolderPath DataRoot
             => Settings.RootDataFolder;
 
-
         /// <summary>
         /// Gets the log folder for a specific area
         /// </summary>

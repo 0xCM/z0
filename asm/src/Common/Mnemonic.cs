@@ -581,144 +581,144 @@ namespace Z0
         DIVPS, // Divide Packed Single-Precision Floating-Point Values
 
         /// <summary>
-        ///
+        /// Divide Scalar Double-Precision Floating-Point Value
         /// </summary>     
-        DIVSD, // Divide Scalar Double-Precision Floating-Point Value
+        DIVSD, 
 
         /// <summary>
-        ///
+        /// Divide Scalar Single-Precision Floating-Point Values
         /// </summary>     
-        DIVSS, // Divide Scalar Single-Precision Floating-Point Values
+        DIVSS, 
 
         /// <summary>
-        ///
+        /// Dot Product of Packed Double Precision Floating-Point Values
         /// </summary>     
-        DPPD, // Dot Product of Packed Double Precision Floating-Point Values
+        DPPD, 
 
         /// <summary>
-        ///
+        /// Dot Product of Packed Single Precision Floating-Point Values
         /// </summary>     
-        DPPS, // Dot Product of Packed Single Precision Floating-Point Values
+        DPPS, 
 
         /// <summary>
-        ///
+        /// Empty MMX Technology State
         /// </summary>     
-        EMMS, // Empty MMX Technology State
+        EMMS, 
 
         /// <summary>
-        ///
+        /// Make Stack Frame for Procedure Parameters
         /// </summary>     
-        ENTER, // Make Stack Frame for Procedure Parameters
+        ENTER, 
 
         /// <summary>
-        ///
+        /// Extract Packed Floating-Point Values
         /// </summary>     
-        EXTRACTPS, // Extract Packed Floating-Point Values
+        EXTRACTPS, 
 
         /// <summary>
-        ///
+        /// Compute 2x–1
         /// </summary>     
-        F2XM1, // Compute 2x–1
+        F2XM1, 
         
         /// <summary>
-        ///
+        /// Absolute Value
         /// </summary>     
-        FABS, // Absolute Value
+        FABS, 
 
         /// <summary>
-        ///
+        /// Add
         /// </summary>     
-        FADD, // Add
+        FADD, 
 
         /// <summary>
-        ///
+        /// Add
         /// </summary>     
-        FADDP, // Add
+        FADDP, 
         
         /// <summary>
-        ///
+        /// Load Binary Coded Decimal
         /// </summary>     
-        FBLD, // Load Binary Coded Decimal
+        FBLD,  
 
         /// <summary>
-        ///
+        /// Store BCD Integer and Pop
         /// </summary>     
-        FBSTP, // Store BCD Integer and Pop
+        FBSTP,  
 
         /// <summary>
-        ///
+        /// Change Sign
         /// </summary>     
-        FCHS, // Change Sign
+        FCHS,  
 
         /// <summary>
-        ///
+        /// Clear Exceptions
         /// </summary>     
-        FCLEX, // Clear Exceptions
+        FCLEX,
 
         /// <summary>
-        ///
+        /// Floating-Point Conditional Move
         /// </summary>     
-        FCMOVcc, // Floating-Point Conditional Move
+        FCMOVcc,
 
         /// <summary>
-        ///
+        /// Compare Floating Point Values
         /// </summary>     
-        FCOM, // Compare Floating Point Values
+        FCOM,  
 
         /// <summary>
-        ///
+        /// Compare Floating Point Values and Set EFLAGS
         /// </summary>     
-        FCOMI, // Compare Floating Point Values and Set EFLAGS
+        FCOMI, 
 
         /// <summary>
-        ///
+        /// Compare Floating Point Values and Set EFLAGS
         /// </summary>     
-        FCOMIP, // Compare Floating Point Values and Set EFLAGS
+        FCOMIP, 
 
         /// <summary>
-        ///
+        /// Compare Floating Point Values
         /// </summary>     
-        FCOMP, // Compare Floating Point Values
+        FCOMP,  
 
         /// <summary>
-        ///
+        /// Compare Floating Point Values
         /// </summary>     
-        FCOMPP, // Compare Floating Point Values
+        FCOMPP,  
 
         /// <summary>
-        ///
+        /// Cosine
         /// </summary>     
-        FCOS, // Cosine
+        FCOS,  
 
         /// <summary>
-        ///
+        /// Decrement Stack-Top Pointer
         /// </summary>     
-        FDECSTP, // Decrement Stack-Top Pointer
+        FDECSTP,  
 
         /// <summary>
-        ///
+        /// Divide
         /// </summary>     
-        FDIV, // Divide
+        FDIV,  
 
         /// <summary>
-        ///
+        /// Divide
         /// </summary>     
-        FDIVP, // Divide
+        FDIVP, 
 
         /// <summary>
-        ///
+        /// Reverse Divide
         /// </summary>     
-        FDIVR, // Reverse Divide
+        FDIVR,  
 
         /// <summary>
-        ///
+        /// Reverse Divide
         /// </summary>     
-        FDIVRP, // Reverse Divide
+        FDIVRP, 
 
         /// <summary>
-        ///
+        /// Free Floating-Point Register
         /// </summary>     
-        FFREE, // Free Floating-Point Register
+        FFREE, 
 
         /// <summary>
         ///
@@ -2074,12 +2074,37 @@ namespace Z0
         ///
         /// </summary>     
         PBLENDVB, // Variable Blend Packed Bytes
+
+        /// <summary>
+        ///
+        /// </summary>     
         PBLENDW, // Blend Packed Words
+
+        /// <summary>
+        ///
+        /// </summary>     
         PCLMULQDQ, // Carry-Less Multiplication Quadword
+
+        /// <summary>
+        ///
+        /// </summary>     
         PCMPEQB, // Compare Packed Data for Equal
+
+        /// <summary>
+        ///
+        /// </summary>     
         PCMPEQD, // Compare Packed Data for Equal
+
+        /// <summary>
+        ///
+        /// </summary>     
         PCMPEQQ, // Compare Packed Qword Data for Equal
+
+        /// <summary>
+        ///
+        /// </summary>     
         PCMPEQW, // Compare Packed Data for Equal
+
         PCMPESTRI, // Packed Compare Explicit Length Strings, Return Index
         PCMPESTRM, // Packed Compare Explicit Length Strings, Return Mask
         PCMPGTB, // Compare Packed Signed Integers for Greater Than
@@ -2095,41 +2120,185 @@ namespace Z0
         PEXTRQ, // Extract Byte/Dword/Qword
         PEXTRW, // Extract Word
         PHADDD, // Packed Horizontal Add
+ 
+        /// <summary>
+        ///
+        /// </summary>      
         PHADDSW, // Packed Horizontal Add and Saturate
+        
+        /// <summary>
+        ///
+        /// </summary>     
         PHADDW, // Packed Horizontal Add
+
+        /// <summary>
+        ///
+        /// </summary>     
         PHMINPOSUW, // Packed Horizontal Word Minimum
+
+        /// <summary>
+        ///
+        /// </summary>     
         PHSUBD, // Packed Horizontal Subtract
+
+        /// <summary>
+        ///
+        /// </summary>     
         PHSUBSW, // Packed Horizontal Subtract and Saturate
+
+        /// <summary>
+        ///
+        /// </summary>     
         PHSUBW, // Packed Horizontal Subtract
+
+        /// <summary>
+        ///
+        /// </summary>     
         PINSRB, // Insert Byte/Dword/Qword
+
+        /// <summary>
+        ///
+        /// </summary>     
         PINSRD, // Insert Byte/Dword/Qword
+
+        /// <summary>
+        ///
+        /// </summary>     
         PINSRQ, // Insert Byte/Dword/Qword
+
+        /// <summary>
+        ///
+        /// </summary>     
         PINSRW, // Insert Word
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMADDUBSW, // Multiply and Add Packed Signed and Unsigned Bytes
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMADDWD, // Multiply and Add Packed Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMAXSB, // Maximum of Packed Signed Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMAXSD, // Maximum of Packed Signed Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMAXSQ, // Maximum of Packed Signed Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMAXSW, // Maximum of Packed Signed Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMAXUB, // Maximum of Packed Unsigned Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMAXUD, // Maximum of Packed Unsigned Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMAXUQ, // Maximum of Packed Unsigned Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMAXUW, // Maximum of Packed Unsigned Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMINSB, // Minimum of Packed Signed Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMINSD, // Minimum of Packed Signed Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMINSQ, // Minimum of Packed Signed Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMINSW, // Minimum of Packed Signed Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMINUB, // Minimum of Packed Unsigned Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMINUD, // Minimum of Packed Unsigned Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMINUQ, // Minimum of Packed Unsigned Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMINUW, // Minimum of Packed Unsigned Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMOVMSKB, // Move Byte Mask
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMOVSX, // Packed Move with Sign Extend
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMOVZX, // Packed Move with Zero Extend
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMULDQ, // Multiply Packed Doubleword Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMULHRSW, // Packed Multiply High with Round and Scale
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMULHUW, // Multiply Packed Unsigned Integers and Store High Result
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMULHW, // Multiply Packed Signed Integers and Store High Result
+
+        /// <summary>
+        ///
+        /// </summary>     
         PMULLD, // Multiply Packed Integers and Store Low Result
         PMULLQ, // Multiply Packed Integers and Store Low Result
         PMULLW, // Multiply Packed Signed Integers and Store Low Result
@@ -2167,20 +2336,80 @@ namespace Z0
         PSUBB, // Subtract Packed Integers
         PSUBD, // Subtract Packed Integers
         PSUBQ, // Subtract Packed Quadword Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PSUBSB, // Subtract Packed Signed Integers with Signed Saturation
+
+        /// <summary>
+        ///
+        /// </summary>     
         PSUBSW, // Subtract Packed Signed Integers with Signed Saturation
+
+        /// <summary>
+        ///
+        /// </summary>     
         PSUBUSB, // Subtract Packed Unsigned Integers with Unsigned Saturation
+
+        /// <summary>
+        ///
+        /// </summary>     
         PSUBUSW, // Subtract Packed Unsigned Integers with Unsigned Saturation
+
+        /// <summary>
+        ///
+        /// </summary>     
         PSUBW, // Subtract Packed Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         PTEST, // Logical Compare
+
+        /// <summary>
+        ///
+        /// </summary>     
         PTWRITE, // Write Data to a Processor Trace Packet
+
+        /// <summary>
+        ///
+        /// </summary>     
         PUNPCKHBW, // Unpack High Data
+
+        /// <summary>
+        ///
+        /// </summary>     
         PUNPCKHDQ, // Unpack High Data
+
+        /// <summary>
+        ///
+        /// </summary>     
         PUNPCKHQDQ, // Unpack High Data
+
+        /// <summary>
+        ///
+        /// </summary>     
         PUNPCKHWD, // Unpack High Data
+
+        /// <summary>
+        ///
+        /// </summary>     
         PUNPCKLBW, // Unpack Low Data
+
+        /// <summary>
+        ///
+        /// </summary>     
         PUNPCKLDQ, // Unpack Low Data
+
+        /// <summary>
+        ///
+        /// </summary>     
         PUNPCKLQDQ, // Unpack Low Data
+
+        /// <summary>
+        ///
+        /// </summary>     
         PUNPCKLWD, // Unpack Low Data
         PUSH, // Push Word, Doubleword or Quadword Onto the Stack
         PUSHA, // Push All General-Purpose Registers
@@ -2190,49 +2419,226 @@ namespace Z0
         PUSHFQ, // Push EFLAGS Register onto the Stack
         PXOR, // Logical Exclusive OR
         RCL, // Rotate
+        
+        /// <summary>
+        ///
+        /// </summary>     
         RCPPS, // Compute Reciprocals of Packed Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         RCPSS, // Compute Reciprocal of Scalar Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         RCR, // Rotate
+
+        /// <summary>
+        ///
+        /// </summary>     
         RDFSBASE, // Read FS/GS Segment Base
+
+        /// <summary>
+        ///
+        /// </summary>     
+
         RDGSBASE, // Read FS/GS Segment Base
+
+        /// <summary>
+        ///
+        /// </summary>     
         RDMSR, // Read from Model Specific Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         RDPID, // Read Processor ID
+
+        /// <summary>
+        ///
+        /// </summary>     
         RDPKRU, // Read Protection Key Rights for User Pages
+
+        /// <summary>
+        ///
+        /// </summary>     
         RDPMC, // Read Performance-Monitoring Counters
+
+        /// <summary>
+        ///
+        /// </summary>     
         RDRAND, // Read Random Number
+
+        /// <summary>
+        ///
+        /// </summary>     
         RDSEED, // Read Random SEED
+
+        /// <summary>
+        ///
+        /// </summary>     
         RDTSC, // Read Time-Stamp Counter
+
+        /// <summary>
+        ///
+        /// </summary>     
         RDTSCP, // Read Time-Stamp Counter and Processor ID
+
+        /// <summary>
+        ///
+        /// </summary>     
         REP, // Repeat String Operation Prefix
+
+        /// <summary>
+        ///
+        /// </summary>     
         REPE, // Repeat String Operation Prefix
+
+        /// <summary>
+        ///
+        /// </summary>     
         REPNE, // Repeat String Operation Prefix
+
+        /// <summary>
+        ///
+        /// </summary>     
         REPNZ, // Repeat String Operation Prefix
+
+        /// <summary>
+        ///
+        /// </summary>     
         REPZ, // Repeat String Operation Prefix
+
+        /// <summary>
+        ///
+        /// </summary>     
         RET, // Return from Procedure
+
+        /// <summary>
+        ///
+        /// </summary>     
         ROL, // Rotate
+
+        /// <summary>
+        ///
+        /// </summary>     
         ROR, // Rotate
+
+        /// <summary>
+        ///
+        /// </summary>     
         RORX, // Rotate Right Logical Without Affecting Flags
+
+        /// <summary>
+        ///
+        /// </summary>     
         ROUNDPD, // Round Packed Double Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         ROUNDPS, // Round Packed Single Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         ROUNDSD, // Round Scalar Double Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         ROUNDSS, // Round Scalar Single Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         RSM, // Resume from System Management Mode
+
+        /// <summary>
+        ///
+        /// </summary>     
         RSQRTPS, // Compute Reciprocals of Square Roots of Packed Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         RSQRTSS, // Compute Reciprocal of Square Root of Scalar Single-Precision Floating-Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         SAHF, // Store AH into Flags
+
+        /// <summary>
+        ///
+        /// </summary>     
         SAL, // Shift
+
+        /// <summary>
+        ///
+        /// </summary>     
         SAR, // Shift
+
+        /// <summary>
+        ///
+        /// </summary>     
         SARX, // Shift Without Affecting Flags
+
+        /// <summary>
+        ///
+        /// </summary>     
         SBB, // Integer Subtraction with Borrow
+
+        /// <summary>
+        ///
+        /// </summary>     
         SCAS, // Scan String
+
+        /// <summary>
+        ///
+        /// </summary>     
         SCASB, // Scan String
+
+        /// <summary>
+        ///
+        /// </summary>     
         SCASD, // Scan String
+
+        /// <summary>
+        ///
+        /// </summary>     
         SCASW, // Scan String
+
+        /// <summary>
+        ///
+        /// </summary>     
         SETcc, // Set Byte on Condition
+
+        /// <summary>
+        ///
+        /// </summary>     
         SFENCE, // Store Fence
+
+        /// <summary>
+        ///
+        /// </summary>     
         SGDT, // Store Global Descriptor Table Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         SHA1MSG1, // Perform an Intermediate Calculation for the Next Four SHA1 Message Dwords
+
+        /// <summary>
+        ///
+        /// </summary>     
         SHA1MSG2, // Perform a Final Calculation for the Next Four SHA1 Message Dwords
+
+        /// <summary>
+        ///
+        /// </summary>     
         SHA1NEXTE, // Calculate SHA1 State Variable E after Four Rounds
         SHA1RNDS4, // Perform Four Rounds of SHA1 Operation
         SHA256MSG1, // Perform an Intermediate Calculation for the Next Four SHA256 Message Dwords
@@ -2464,33 +2870,142 @@ namespace Z0
         VPERMD, // Permute Packed Doublewords/Words Elements
         VPERMI2B, // Full Permute of Bytes from Two Tables Overwriting the Index
         VPERMI2D, // Full Permute From Two Tables Overwriting the Index
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPERMI2PD, // Full Permute From Two Tables Overwriting the Index
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPERMI2PS, // Full Permute From Two Tables Overwriting the Index
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPERMI2Q, // Full Permute From Two Tables Overwriting the Index
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPERMI2W, // Full Permute From Two Tables Overwriting the Index
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPERMILPD, // Permute In-Lane of Pairs of Double-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPERMILPS, // Permute In-Lane of Quadruples of Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPERMPD, // Permute Double-Precision Floating-Point Elements
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPERMPS, // Permute Single-Precision Floating-Point Elements
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPERMQ, // Qwords Element Permutation
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPERMT2B, // Full Permute of Bytes from Two Tables Overwriting a Table
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPERMT2D, // Full Permute from Two Tables Overwriting one Table
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPERMT2PD, // Full Permute from Two Tables Overwriting one Table
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPERMT2PS, // Full Permute from Two Tables Overwriting one Table
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPERMT2Q, // Full Permute from Two Tables Overwriting one Table
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPERMT2W, // Full Permute from Two Tables Overwriting one Table
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPERMW, // Permute Packed Doublewords/Words Elements
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPEXPANDD, // Load Sparse Packed Doubleword Integer Values from Dense Memory / Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPEXPANDQ, // Load Sparse Packed Quadword Integer Values from Dense Memory / Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPGATHERDD, // Gather Packed Dword Values Using Signed Dword/Qword Indices
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPGATHERDD_1, // Gather Packed Dword, Packed Qword with Signed Dword Indices
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPGATHERDQ, // Gather Packed Dword, Packed Qword with Signed Dword Indices
-        VPGATHERDQ_1, // Gather Packed Qword Values Using Signed Dword/Qword Indices
-        VPGATHERQD, // Gather Packed Dword Values Using Signed Dword/Qword Indices
-        VPGATHERQD_1, // Gather Packed Dword, Packed Qword with Signed Qword Indices
-        VPGATHERQQ, // Gather Packed Qword Values Using Signed Dword/Qword Indices
-        VPGATHERQQ_1, // Gather Packed Dword, Packed Qword with Signed Qword Indices
-        VPLZCNTD, // Count the Number of Leading Zero Bits for Packed Dword, Packed Qword Values
+ 
+        /// <summary>
+        /// Gather Packed Qword Values Using Signed Dword/Qword Indices
+        /// </summary>     
+        VPGATHERDQ_1, 
+ 
+        /// <summary>
+        /// Gather Packed Dword Values Using Signed Dword/Qword Indices
+        /// </summary>     
+        VPGATHERQD, 
+ 
+        /// <summary>
+        /// Gather Packed Dword, Packed Qword with Signed Qword Indices
+        /// </summary>     
+        VPGATHERQD_1,
+ 
+        /// <summary>
+        /// Gather Packed Qword Values Using Signed Dword/Qword Indices
+        /// </summary>     
+        VPGATHERQQ, 
+ 
+        /// <summary>
+        /// Gather Packed Dword, Packed Qword with Signed Qword Indices
+        /// </summary>      
+        VPGATHERQQ_1,
+        
+        /// <summary>
+        /// Count the Number of Leading Zero Bits for Packed Dword, Packed Qword Values
+        /// </summary>     
+        VPLZCNTD, 
+
         VPLZCNTQ, // Count the Number of Leading Zero Bits for Packed Dword, Packed Qword Values
         VPMADD52HUQ, // Packed Multiply of Unsigned 52-bit Unsigned Integers and Add High 52-bit Products to 64-bit Accumulators
         VPMADD52LUQ, // Packed Multiply of Unsigned 52-bit Integers and Add the Low 52-bit Products to Qword Accumulators

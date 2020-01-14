@@ -1,20 +1,20 @@
-// 2020-01-12 17:49:15:104
+// 2020-01-13 21:43:21:855
 BitPos<uint> bitpos_u32(int index)
 {
-//  Id := 100664281, Name := Z0.BitPos`1<System.UInt32> Z0.OpCodes.bitcore::bitpos_u32(System.Int32)
+//  Id := 100664284, Name := Z0.BitPos`1<System.UInt32> Z0.OpCodes.bitcore::bitpos_u32(System.Int32)
 //  BitPos<uint> bitpos_u32(int index)
 //  Managed
 {
   IL_0000: ldarg.0
-  IL_0001: call Z0.Classifiers/PrimalKind`1<System.UInt32> Z0.Classifiers::get_u32()
-  IL_0006: call Z0.BitPos`1<System.UInt32> Z0.gbits::bitpos<System.UInt32>(System.Int32,Z0.Classifiers/PrimalKind`1<System.UInt32>)
+  IL_0001: call Z0.PrimalKind`1<System.UInt32> Z0.Classifiers::get_u32()
+  IL_0006: call Z0.BitPos`1<System.UInt32> Z0.gbits::bitpos<System.UInt32>(System.Int32,Z0.PrimalKind`1<System.UInt32>)
   IL_000B: ret
 }
 
 }
 BitPos<uint> bitpos_u32_x(int index)
 {
-//  Id := 100664282, Name := Z0.BitPos`1<System.UInt32> Z0.OpCodes.bitcore::bitpos_u32_x(System.Int32)
+//  Id := 100664285, Name := Z0.BitPos`1<System.UInt32> Z0.OpCodes.bitcore::bitpos_u32_x(System.Int32)
 //  BitPos<uint> bitpos_u32_x(int index)
 //  Managed
 {
@@ -26,7 +26,7 @@ BitPos<uint> bitpos_u32_x(int index)
 }
 bit bitmatch_32_32(uint a, byte i, uint b, byte j)
 {
-//  Id := 100664283, Name := Z0.bit Z0.OpCodes.bitcore::bitmatch_32_32(System.UInt32,System.Byte,System.UInt32,System.Byte)
+//  Id := 100664286, Name := Z0.bit Z0.OpCodes.bitcore::bitmatch_32_32(System.UInt32,System.Byte,System.UInt32,System.Byte)
 //  bit bitmatch_32_32(uint a, byte i, uint b, byte j)
 //  Managed
 {
@@ -41,7 +41,7 @@ bit bitmatch_32_32(uint a, byte i, uint b, byte j)
 }
 void bitseg_u32(Span<uint> src, int firstidx, int lastidx)
 {
-//  Id := 100664284, Name := System.Void Z0.OpCodes.bitcore::bitseg_u32(System.Span`1<System.UInt32>,System.Int32,System.Int32)
+//  Id := 100664287, Name := System.Void Z0.OpCodes.bitcore::bitseg_u32(System.Span`1<System.UInt32>,System.Int32,System.Int32)
 //  void bitseg_u32(Span<uint> src, int firstidx, int lastidx)
 //  Managed
 {

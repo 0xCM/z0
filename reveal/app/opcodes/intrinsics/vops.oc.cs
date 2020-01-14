@@ -14,6 +14,17 @@ namespace Z0
 
     public static class vxops
     {
+        public static bit check_and_1(Vector128<uint> x, Vector128<uint> y)
+        {
+            var svc = GX.bitlogic<uint>();
+            var v1 = VX.vbitlogic<uint>(n128).and(x,y);
+            var a0 = svc.and(vcell(x,0), vcell(y,0));
+            var a1 = svc.and(vcell(x,1), vcell(y,1));
+            var a2 = svc.and(vcell(x,2), vcell(y,2));
+            var a3 = svc.and(vcell(x,3), vcell(y,3));
+            var v2 = CpuVector.vparts(n128,a0,a1,a2,a3);
+            return ginx.vsame(v1,v2);
+        }
 
         public static Vector128<uint> and_class(Vector128<uint> x, Vector128<uint> y)
             =>  VXTypes.CAnd128<uint>.Op.Invoke(x,y);

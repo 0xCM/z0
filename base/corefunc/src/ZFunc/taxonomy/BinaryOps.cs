@@ -32,6 +32,28 @@ namespace Z0
     }
 
     /// <summary>
+    /// Characterizes a binary operator that accepts an 8-bit immediate
+    /// </summary>
+    /// <typeparam name="A">The operand type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IBinOpImm8<A> : IFunc<A,A,byte,A>
+    {
+
+    }
+
+    /// <summary>
+    /// Characterizes a binary vectorized operator that accepts an 8-bit immediate
+    /// </summary>
+    /// <typeparam name="W">The bit-width type</typeparam>
+    /// <typeparam name="V">The operand type</typeparam>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVBinOpImm8<W,V,T> : IBinOpImm8<V>
+    {
+
+    }
+
+    /// <summary>
     /// Characterizes a vectorized binary operator parameterized by operand bit width and component type
     /// </summary>
     /// <typeparam name="W">The bit-width type</typeparam>
@@ -96,6 +118,28 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IVBinOp256D<T> : IVBinOp256<T>, IVBinOpD<T>
+        where T : unmanaged
+    {
+        
+    }
+
+    /// <summary>
+    /// Characterizes a vectorized binary operator over 128-bit operands that accepts an 8-bit immediate
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVBinOp128Imm8<T> : IVBinOpImm8<N128,Vector128<T>,T>
+        where T : unmanaged
+    {
+        
+    }
+
+    /// <summary>
+    /// Characterizes a vectorized binary operator over 256-bit operands that accepts an 8-bit immediate
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVBinOp256Imm8<T> : IVBinOpImm8<N256,Vector256<T>,T>
         where T : unmanaged
     {
         

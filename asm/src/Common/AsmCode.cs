@@ -92,15 +92,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Returns a pointer to the endoded bytes
-        /// </summary>
-        public readonly IntPtr Pointer
-        {
-            [MethodImpl(Inline)]
-            get => GetPointer();
-        }
-
-        /// <summary>
         /// Specifies whether to block is emtpy
         /// </summary>
         public bool IsEmpty
@@ -108,16 +99,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.Length == 1 && Data[0] == 0;
         }
-        
-        /// <summary>
-        /// Creates a delegate to execute the encapsulated code
-        /// </summary>
-        /// <typeparam name="T">The delegate type</typeparam>
-        [MethodImpl(Inline)]
-        public T CreateDelegate<T>()
-            where T : Delegate        
-                => Marshal.GetDelegateForFunctionPointer<T>(Pointer);
-        
+                
         /// <summary>
         /// Formats the encapsulated data as a sequence of comma-delimited hex bytes
         /// </summary>
@@ -128,10 +110,6 @@ namespace Z0
         public AsmCode<T> As<T>()
             where T : unmanaged
                 => new AsmCode<T>(this);
-
-        [MethodImpl(Inline)]
-        unsafe IntPtr GetPointer()        
-            => (IntPtr)Unsafe.AsPointer(ref mutable(in head(Data)));
     }
 
     /// <summary>
@@ -169,15 +147,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Returns a pointer to the endoded bytes
-        /// </summary>
-        public readonly IntPtr Pointer
-        {
-            [MethodImpl(Inline)]
-            get => Code.Pointer;
-        }
-
-        /// <summary>
         /// Specifies whether to block is emtpy
         /// </summary>
         public bool IsEmpty
@@ -185,15 +154,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Code.IsEmpty;
         }
-
-        /// <summary>
-        /// Creates a delegate to execute the encapsulated code
-        /// </summary>
-        /// <typeparam name="T">The delegate type</typeparam>
-        [MethodImpl(Inline)]
-        public S CreateDelegate<S>()
-            where S : Delegate        
-                => Code.CreateDelegate<S>();
 
         [MethodImpl(Inline)]
         public AsmCode<S> As<S>()
@@ -205,6 +165,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Code;
         }
+
         public string Format()
             => Code.Format();
     }

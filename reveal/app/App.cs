@@ -29,7 +29,7 @@ namespace Z0
                 {
                     var dstPath = AsmCodeEmitter.OutPath(DumpFolder, t.DisplayName());
                     var emitter = AsmCodeEmitter.Create(dstPath);
-                    emitter.EmitAsm(t.DistillAsm(),false);                    
+                    emitter.EmitAsm(t.DistillAsmFunctions(),false);                    
                 }
 
                 if(cil)

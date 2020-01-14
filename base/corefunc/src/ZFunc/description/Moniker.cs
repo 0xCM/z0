@@ -113,13 +113,31 @@ namespace Z0
         /// Specifies whether the operation was reified from assembly language
         /// </summary>
         public bool IsAsm
-            => Suffix == AsmIndicator; //Text.EndsWith(SuffixSep + AsmIndicator);
+            => Suffix.Contains(AsmIndicator);
+
+        /// <summary>
+        /// Specifies whether the operation is specialized for an immediate value
+        /// </summary>
+        public bool HasImm
+            => Suffix.Contains(ImmIndicator);
+
+        /// <summary>
+        /// Specifies the immediate value attached to the moniker, if any
+        /// </summary>
+        public byte Imm
+            => ParseImm();
 
         /// <summary>
         /// Specifies whether the moniker has a suffix
         /// </summary>
         public bool HasSuffix
             => Text.Contains(SuffixSep);
+
+        /// <summary>
+        /// Specifies the suffixes supported by the moniker, if any
+        /// </summary>
+        public string[] Suffixes
+            => HasSuffix ? Suffix.Split(SuffixSep) : new string[]{};
 
         /// <summary>
         /// Specifies the operation name
@@ -157,6 +175,25 @@ namespace Z0
         public Moniker WithKind(PrimalKind k)
             => define(Name, SegmentedWidth, k, IsGeneric, IsAsm);
 
+        /// <summary>
+        /// Clears the immediate attached to the moniker, if any
+        /// </summary>
+        public Moniker WithoutImm()
+        {
+            if(HasImm)
+            {
+                var immval = Text.RightOfLast(ImmIndicator);
+                var cleared = Text.Remove($"{SuffixSep}{ImmIndicator}{immval}");
+                return define(cleared);                
+            }
+            else
+                return this;
+        }
+
+        public Moniker WithImm(byte imm)
+            => define(concat(WithoutImm().Text, $"{SuffixSep}{ImmIndicator}{imm}"));
+
+
         public override string ToString()
             => Text;
 
@@ -177,6 +214,17 @@ namespace Z0
                 64 => IsFloat ? PrimalKind.F64 : (IsUnsignedInt ? PrimalKind.U64 : PrimalKind.I64),
                 _ => PrimalKind.None
             };
+
+        byte ParseImm()
+        {
+            if(HasImm)
+            {
+                var immtext = Text.RightOfLast(ImmIndicator);
+                if(byte.TryParse(immtext, out var imm))
+                    return imm;
+            }
+            return 0;
+        }                
 
         int ParsePrimalWidth()
         {
@@ -225,5 +273,7 @@ namespace Z0
         const char VectorIndicator = AsciLower.v;
 
         const string AsmIndicator = "asm";
+
+        const string ImmIndicator = "imm";
     }
 }

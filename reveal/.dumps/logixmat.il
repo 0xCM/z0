@@ -1,7 +1,7 @@
-// 2020-01-12 17:49:14:989
+// 2020-01-13 21:43:21:725
 ref BitMatrix<ulong> or_and_xor_bm(in BitMatrix<ulong> a, in BitMatrix<ulong> b, ref BitMatrix<ulong> C)
 {
-//  Id := 100664856, Name := Z0.BitMatrix`1<System.UInt64>& Z0.OpCodes.logixmat::or_and_xor_bm(Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&)
+//  Id := 100664861, Name := Z0.BitMatrix`1<System.UInt64>& Z0.OpCodes.logixmat::or_and_xor_bm(Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&)
 //  ref BitMatrix<ulong> or_and_xor_bm(in BitMatrix<ulong> a, in BitMatrix<ulong> b, ref BitMatrix<ulong> C)
 //  Managed
 {
@@ -21,7 +21,7 @@ ref BitMatrix<ulong> or_and_xor_bm(in BitMatrix<ulong> a, in BitMatrix<ulong> b,
 }
 ref BitMatrix<ulong> nand_or_and_xor_bm(in BitMatrix<ulong> A, in BitMatrix<ulong> B, ref BitMatrix<ulong> C)
 {
-//  Id := 100664857, Name := Z0.BitMatrix`1<System.UInt64>& Z0.OpCodes.logixmat::nand_or_and_xor_bm(Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&)
+//  Id := 100664862, Name := Z0.BitMatrix`1<System.UInt64>& Z0.OpCodes.logixmat::nand_or_and_xor_bm(Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&)
 //  ref BitMatrix<ulong> nand_or_and_xor_bm(in BitMatrix<ulong> A, in BitMatrix<ulong> B, ref BitMatrix<ulong> C)
 //  Managed
 {
@@ -44,7 +44,7 @@ ref BitMatrix<ulong> nand_or_and_xor_bm(in BitMatrix<ulong> A, in BitMatrix<ulon
 }
 bit comp1_logic(bit a, bit b)
 {
-//  Id := 100664858, Name := Z0.bit Z0.OpCodes.logixmat::comp1_logic(Z0.bit,Z0.bit)
+//  Id := 100664863, Name := Z0.bit Z0.OpCodes.logixmat::comp1_logic(Z0.bit,Z0.bit)
 //  bit comp1_logic(bit a, bit b)
 //  Managed
 {
@@ -61,7 +61,7 @@ bit comp1_logic(bit a, bit b)
 }
 ulong comp1_scalar(ulong a, ulong b)
 {
-//  Id := 100664859, Name := System.UInt64 Z0.OpCodes.logixmat::comp1_scalar(System.UInt64,System.UInt64)
+//  Id := 100664864, Name := System.UInt64 Z0.OpCodes.logixmat::comp1_scalar(System.UInt64,System.UInt64)
 //  ulong comp1_scalar(ulong a, ulong b)
 //  Managed
 {
@@ -78,7 +78,7 @@ ulong comp1_scalar(ulong a, ulong b)
 }
 Vector128<ulong> comp1_v128(Vector128<ulong> a, Vector128<ulong> b)
 {
-//  Id := 100664860, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.OpCodes.logixmat::comp1_v128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+//  Id := 100664865, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.OpCodes.logixmat::comp1_v128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
 //  Vector128<ulong> comp1_v128(Vector128<ulong> a, Vector128<ulong> b)
 //  Managed
 {
@@ -95,7 +95,7 @@ Vector128<ulong> comp1_v128(Vector128<ulong> a, Vector128<ulong> b)
 }
 Vector256<ulong> comp1_v256(Vector256<ulong> a, Vector256<ulong> b)
 {
-//  Id := 100664861, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.OpCodes.logixmat::comp1_v256(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+//  Id := 100664866, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.OpCodes.logixmat::comp1_v256(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
 //  Vector256<ulong> comp1_v256(Vector256<ulong> a, Vector256<ulong> b)
 //  Managed
 {
@@ -112,7 +112,7 @@ Vector256<ulong> comp1_v256(Vector256<ulong> a, Vector256<ulong> b)
 }
 bit comp2_logic(bit a, bit b)
 {
-//  Id := 100664862, Name := Z0.bit Z0.OpCodes.logixmat::comp2_logic(Z0.bit,Z0.bit)
+//  Id := 100664867, Name := Z0.bit Z0.OpCodes.logixmat::comp2_logic(Z0.bit,Z0.bit)
 //  bit comp2_logic(bit a, bit b)
 //  Managed
 {
@@ -131,7 +131,7 @@ bit comp2_logic(bit a, bit b)
 }
 ulong comp2_scalar(ulong a, ulong b)
 {
-//  Id := 100664863, Name := System.UInt64 Z0.OpCodes.logixmat::comp2_scalar(System.UInt64,System.UInt64)
+//  Id := 100664868, Name := System.UInt64 Z0.OpCodes.logixmat::comp2_scalar(System.UInt64,System.UInt64)
 //  ulong comp2_scalar(ulong a, ulong b)
 //  Managed
 {
@@ -150,7 +150,7 @@ ulong comp2_scalar(ulong a, ulong b)
 }
 Vector128<ulong> comp2_v128(Vector128<ulong> a, Vector128<ulong> b)
 {
-//  Id := 100664864, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.OpCodes.logixmat::comp2_v128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+//  Id := 100664869, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.OpCodes.logixmat::comp2_v128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
 //  Vector128<ulong> comp2_v128(Vector128<ulong> a, Vector128<ulong> b)
 //  Managed
 {
@@ -169,7 +169,7 @@ Vector128<ulong> comp2_v128(Vector128<ulong> a, Vector128<ulong> b)
 }
 Vector256<ulong> comp2_v256(Vector256<ulong> a, Vector256<ulong> b)
 {
-//  Id := 100664865, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.OpCodes.logixmat::comp2_v256(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+//  Id := 100664870, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.OpCodes.logixmat::comp2_v256(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
 //  Vector256<ulong> comp2_v256(Vector256<ulong> a, Vector256<ulong> b)
 //  Managed
 {
@@ -188,7 +188,7 @@ Vector256<ulong> comp2_v256(Vector256<ulong> a, Vector256<ulong> b)
 }
 bit comp3_logic(bit a, bit b)
 {
-//  Id := 100664866, Name := Z0.bit Z0.OpCodes.logixmat::comp3_logic(Z0.bit,Z0.bit)
+//  Id := 100664871, Name := Z0.bit Z0.OpCodes.logixmat::comp3_logic(Z0.bit,Z0.bit)
 //  bit comp3_logic(bit a, bit b)
 //  Managed
 {
@@ -208,7 +208,7 @@ bit comp3_logic(bit a, bit b)
   IL_0021: ldarg.1
   IL_0022: ldarg.0
   IL_0023: call Z0.bit Z0.Logix.LogicOps::xor(Z0.bit,Z0.bit)
-  IL_0028: call Z0.bit Z0.Logix.LogicOps::cnotimply(Z0.bit,Z0.bit)
+  IL_0028: call Z0.bit Z0.Logix.LogicOps::cnonimpl(Z0.bit,Z0.bit)
   IL_002D: call Z0.bit Z0.Logix.LogicOps::select(Z0.bit,Z0.bit,Z0.bit)
   IL_0032: ret
 }
@@ -216,7 +216,7 @@ bit comp3_logic(bit a, bit b)
 }
 ulong comp3_scalar(ulong a, ulong b)
 {
-//  Id := 100664867, Name := System.UInt64 Z0.OpCodes.logixmat::comp3_scalar(System.UInt64,System.UInt64)
+//  Id := 100664872, Name := System.UInt64 Z0.OpCodes.logixmat::comp3_scalar(System.UInt64,System.UInt64)
 //  ulong comp3_scalar(ulong a, ulong b)
 //  Managed
 {
@@ -236,7 +236,7 @@ ulong comp3_scalar(ulong a, ulong b)
   IL_0021: ldarg.1
   IL_0022: ldarg.0
   IL_0023: call System.UInt64 Z0.Logix.ScalarOps::xor<System.UInt64>(System.UInt64,System.UInt64)
-  IL_0028: call System.UInt64 Z0.Logix.ScalarOps::cnotimply<System.UInt64>(System.UInt64,System.UInt64)
+  IL_0028: call System.UInt64 Z0.Logix.ScalarOps::cnonimpl<System.UInt64>(System.UInt64,System.UInt64)
   IL_002D: call System.UInt64 Z0.Logix.ScalarOps::select<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
   IL_0032: ret
 }
@@ -244,7 +244,7 @@ ulong comp3_scalar(ulong a, ulong b)
 }
 Vector128<ulong> comp3_v128(Vector128<ulong> a, Vector128<ulong> b)
 {
-//  Id := 100664868, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.OpCodes.logixmat::comp3_v128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+//  Id := 100664873, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.OpCodes.logixmat::comp3_v128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
 //  Vector128<ulong> comp3_v128(Vector128<ulong> a, Vector128<ulong> b)
 //  Managed
 {
@@ -264,7 +264,7 @@ Vector128<ulong> comp3_v128(Vector128<ulong> a, Vector128<ulong> b)
   IL_0021: ldarg.1
   IL_0022: ldarg.0
   IL_0023: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::xor<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
-  IL_0028: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::cnotimply<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+  IL_0028: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::cnonimpl<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
   IL_002D: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::select<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
   IL_0032: ret
 }
@@ -272,7 +272,7 @@ Vector128<ulong> comp3_v128(Vector128<ulong> a, Vector128<ulong> b)
 }
 Vector256<ulong> comp3_v256(Vector256<ulong> a, Vector256<ulong> b)
 {
-//  Id := 100664869, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.OpCodes.logixmat::comp3_v256(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+//  Id := 100664874, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.OpCodes.logixmat::comp3_v256(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
 //  Vector256<ulong> comp3_v256(Vector256<ulong> a, Vector256<ulong> b)
 //  Managed
 {
@@ -292,7 +292,7 @@ Vector256<ulong> comp3_v256(Vector256<ulong> a, Vector256<ulong> b)
   IL_0021: ldarg.1
   IL_0022: ldarg.0
   IL_0023: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::xor<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
-  IL_0028: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::cnotimply<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+  IL_0028: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::cnonimpl<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
   IL_002D: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::select<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
   IL_0032: ret
 }

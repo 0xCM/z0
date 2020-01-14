@@ -115,6 +115,14 @@ namespace Z0
         }
 
         /// <summary>
+        /// Determines the kind identifier
+        /// </summary>
+        /// <param name="k">The primal classifier</param>
+        [MethodImpl(Inline)]   
+        public static PrimalId id(PrimalKind k)
+            => (PrimalId)((((uint)k << 8) >> 24) << 16);
+
+        /// <summary>
         /// Produces an identifier {bitsize(k)}{u | i | f} for a primal kind k
         /// </summary>
         /// <param name="k">The primal kind</param>

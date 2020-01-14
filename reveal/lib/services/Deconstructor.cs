@@ -81,7 +81,7 @@ namespace Z0
         /// Decodes encoded assembly instructions
         /// </summary>
         /// <param name="data">The encoded instructions</param>
-        public static InstructionBlock Decode(string name, ReadOnlySpan<byte> data)
+        public static InstructionBlock Decode(string label, ReadOnlySpan<byte> data)
 		{
             var dst = new InstructionList();
             var reader = new ByteArrayCodeReader(data.ToArray());
@@ -92,9 +92,8 @@ namespace Z0
 				ref var instruction = ref dst.AllocUninitializedElement();
 				decoder.Decode(out instruction);                
 			}
-            return InstructionBlock.Define(name, data, dst.ToArray());
+            return InstructionBlock.Define(label, data, dst.ToArray());
 		}
-
 
         /// <summary>
         /// Disassasembles non-generic functions defined by a type to individual files in the appropriate assembly data folder
@@ -113,7 +112,7 @@ namespace Z0
                 var asmfile = paths.AsmInfoPath(target,m);
                 var hexfile = paths.AsmHexPath(target,m);
                 var cilfile = paths.CilPath(target,m);
-                var asm = d.DistillAsm();
+                var asm = d.DistillAsmFunction();
                 asmfile.Overwrite(asm.Format());
                 hexfile.Overwrite(asm.FormatEncoding());                
                 cilfile.Overwrite(d.FormatCil());

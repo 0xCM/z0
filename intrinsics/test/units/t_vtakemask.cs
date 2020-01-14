@@ -11,7 +11,6 @@ namespace Z0
 
     public class t_vtakemask : t_vinx<t_vtakemask>
     {
-
         public void vtakemask_check()
         {
             vtakemask_check(n128);
@@ -51,7 +50,7 @@ namespace Z0
         {
             const int count = 16;
             var f = VX.vtakemask(w,t);
-            var r = vemitter(w,t);
+            var r = Random.VectorEmitter(w,t);
 
             void check()
             {
@@ -73,7 +72,7 @@ namespace Z0
         {
             const int count = 32;
             var f = VX.vtakemask(w,t);
-            var r = vemitter(w,t);
+            var r = Random.VectorEmitter(w,t);
             
             void check()
             {                                

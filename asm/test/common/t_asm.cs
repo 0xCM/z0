@@ -30,11 +30,11 @@ namespace Z0
             AsmBuffer.Dispose();
         }
 
-        protected FolderName MathFolder
-            => FolderName.Define(nameof(math));
+        protected string Math
+            => nameof(math);
         
-        protected FolderName GMathFolder
-            => FolderName.Define(nameof(gmath));
+        protected string GMath
+            => nameof(gmath);
 
         protected void CheckAsmMatch<T>(BinaryOp<T> f, AsmCode asm)
             where T : unmanaged
@@ -79,21 +79,20 @@ namespace Z0
             where T : unmanaged
                 => CheckAsmMatch(f, asm.Untyped);
 
-        protected AsmCode ReadAsm(FolderName subject, Moniker m)
-            => AsmLib.Read(subject, m);
+        protected AsmCode ReadAsm(string subject, Moniker m)
+            => AsmLib.Create(subject).Read(m);
 
-        protected AsmCode ReadAsm(FolderName subject, string opname, PrimalKind kind)
-            => AsmLib.Read(subject, Moniker.define(opname,kind));
+        protected AsmCode ReadAsm(string subject, string opname, PrimalKind kind)
+            => AsmLib.Create(subject).Read(Moniker.define(opname,kind));
 
-        protected AsmCode<T> ReadAsm<T>(FolderName subject, string opname, T t = default)
+        protected AsmCode<T> ReadAsm<T>(string subject, string opname, T t = default)
             where T : unmanaged
                 => new AsmCode<T>(ReadAsm(subject, opname, typeof(T).Kind()));
 
         protected AsmCode<T> ReadAsm<W,T>(string opname, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeNat
-                => AsmLib.Intrinsic<T>(Moniker.define(opname, PrimalType.kind<T>(), w));
-
+                => AsmLib.Create("dinx").Read<T>(Moniker.define(opname, PrimalType.kind<T>(), w)); 
 
         protected void megacheck(string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, PrimalKind<byte> kind)
         {
@@ -103,10 +102,10 @@ namespace Z0
             var f1 = FixedDelegate.from(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = AsmBuffer.BinOp8(ReadAsm(MathFolder, moniker));
+            var f2 = AsmBuffer.BinOp8(ReadAsm(Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = AsmBuffer.BinOp8(ReadAsm(GMathFolder, moniker.WithGeneric()));
+            var f3 = AsmBuffer.BinOp8(ReadAsm(GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
@@ -118,10 +117,10 @@ namespace Z0
             var f1 = FixedDelegate.from(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = AsmBuffer.BinOp8(ReadAsm(MathFolder, moniker));
+            var f2 = AsmBuffer.BinOp8(ReadAsm(Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = AsmBuffer.BinOp8(ReadAsm(GMathFolder, moniker.WithGeneric()));
+            var f3 = AsmBuffer.BinOp8(ReadAsm(GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
@@ -133,10 +132,10 @@ namespace Z0
             var f1 = FixedDelegate.from(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = AsmBuffer.BinOp16(ReadAsm(MathFolder, moniker));
+            var f2 = AsmBuffer.BinOp16(ReadAsm(Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = AsmBuffer.BinOp16(ReadAsm(GMathFolder, moniker.WithGeneric()));
+            var f3 = AsmBuffer.BinOp16(ReadAsm(GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
@@ -148,10 +147,10 @@ namespace Z0
             var f1 = FixedDelegate.from(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = AsmBuffer.BinOp16(ReadAsm(MathFolder, moniker));
+            var f2 = AsmBuffer.BinOp16(ReadAsm(Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = AsmBuffer.BinOp16(ReadAsm(GMathFolder, moniker.WithGeneric()));
+            var f3 = AsmBuffer.BinOp16(ReadAsm(GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
@@ -163,10 +162,10 @@ namespace Z0
             var f1 = FixedDelegate.from(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = AsmBuffer.BinOp32(ReadAsm(MathFolder, moniker));
+            var f2 = AsmBuffer.BinOp32(ReadAsm(Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = AsmBuffer.BinOp32(ReadAsm(GMathFolder, moniker.WithGeneric()));
+            var f3 = AsmBuffer.BinOp32(ReadAsm(GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
@@ -178,10 +177,10 @@ namespace Z0
             var f1 = FixedDelegate.from(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = AsmBuffer.BinOp32(ReadAsm(MathFolder, moniker));
+            var f2 = AsmBuffer.BinOp32(ReadAsm(Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = AsmBuffer.BinOp32(ReadAsm(GMathFolder, moniker.WithGeneric()));
+            var f3 = AsmBuffer.BinOp32(ReadAsm(GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
@@ -193,10 +192,10 @@ namespace Z0
             var f1 = FixedDelegate.from(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = AsmBuffer.BinOp64(ReadAsm(MathFolder, moniker));
+            var f2 = AsmBuffer.BinOp64(ReadAsm(Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = AsmBuffer.BinOp64(ReadAsm(GMathFolder, moniker.WithGeneric()));
+            var f3 = AsmBuffer.BinOp64(ReadAsm(GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
@@ -209,12 +208,11 @@ namespace Z0
             var f1 = FixedDelegate.from(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = AsmBuffer.BinOp64(ReadAsm(MathFolder, moniker));
+            var f2 = AsmBuffer.BinOp64(ReadAsm(Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = AsmBuffer.BinOp64(ReadAsm(GMathFolder, moniker.WithGeneric()));
+            var f3 = AsmBuffer.BinOp64(ReadAsm(GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
-
     }
 }

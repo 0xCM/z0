@@ -72,7 +72,7 @@ namespace Z0
             where F : IVUnaryOp128<T>
         {
             var n = vcount(w,t);
-            var r = vemitter(w,t);
+            var r = Random.VectorEmitter(w,t);
 
             void check()
             {
@@ -93,7 +93,7 @@ namespace Z0
             where F : IVUnaryOp256<T>
         {
             var n = vcount(w,t);
-            var r = vemitter(w,t);
+            var r = Random.VectorEmitter(w,t);
 
             void check()
             {

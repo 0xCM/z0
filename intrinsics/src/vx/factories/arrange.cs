@@ -14,6 +14,7 @@ namespace Z0
 
     partial class VX
     {
+
         [MethodImpl(Inline)]
         public static Concat2x128<T> vconcat<T>(N128 w, T t = default)
             where T : unmanaged

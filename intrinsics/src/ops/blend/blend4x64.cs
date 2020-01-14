@@ -53,8 +53,18 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
+        public static Vector256<ushort> vblend4x64(Vector256<ushort> x, Vector256<ushort> y, [Imm] byte spec)        
+            => v16u(Blend(v64f(x), v64f(y), spec));
+
+        /// <summary>
+        /// __m256d _mm256_blend_pd (__m256d a, __m256d b, const int imm8) VBLENDPD ymm, ymm, ymm/m256, imm8
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
         public static Vector256<ushort> vblend(Vector256<ushort> x, Vector256<ushort> y, [Imm] Blend4x64 spec)        
-            => v16u(Blend(v64f(x), v64f(y), (byte)spec));
+            => vblend4x64(x,y,(byte)spec);
 
         /// <summary>
         /// __m256d _mm256_blend_pd (__m256d a, __m256d b, const int imm8) VBLENDPD ymm, ymm, ymm/m256, imm8
@@ -73,8 +83,28 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
+        public static Vector256<uint> vblend4x64(Vector256<uint> x, Vector256<uint> y, [Imm] byte spec)        
+            => v32u(Blend(v64f(x), v64f(y), spec));
+
+        /// <summary>
+        /// __m256d _mm256_blend_pd (__m256d a, __m256d b, const int imm8) VBLENDPD ymm, ymm, ymm/m256, imm8
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector256<ulong> vblend4x64(Vector256<ulong> x, Vector256<ulong> y, [Imm] byte spec)        
+            => v64u(Blend(v64f(x), v64f(y), spec));
+
+        /// <summary>
+        /// __m256d _mm256_blend_pd (__m256d a, __m256d b, const int imm8) VBLENDPD ymm, ymm, ymm/m256, imm8
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
         public static Vector256<uint> vblend(Vector256<uint> x, Vector256<uint> y, [Imm] Blend4x64 spec)        
-            => v32u(Blend(v64f(x), v64f(y), (byte)spec));
+            => vblend4x64(x,y,(byte)spec);
 
         /// <summary>
         /// __m256d _mm256_blend_pd (__m256d a, __m256d b, const int imm8) VBLENDPD ymm, ymm, ymm/m256, imm8
@@ -94,7 +124,7 @@ namespace Z0
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vblend(Vector256<ulong> x, Vector256<ulong> y, [Imm] Blend4x64 spec)        
-            => v64u(Blend(v64f(x), v64f(y), (byte)spec));
+            => vblend4x64(x,y,(byte)spec);
 
         /// <summary>
         /// __m256d _mm256_blend_pd (__m256d a, __m256d b, const int imm8) VBLENDPD ymm, ymm, ymm/m256, imm8
