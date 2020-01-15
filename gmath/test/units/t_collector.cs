@@ -69,8 +69,8 @@ namespace Z0
                 c.Collect(skip(in src,i));
             
             var avg = mathspan.avg(data);
-            var min = data.Min();
-            var max = data.Max();
+            var min = mathspan.min(data.ReadOnly());
+            var max = mathspan.max(data.ReadOnly());
 
             Claim.eq(min, c.Min);
             Claim.eq(max, c.Max);
@@ -88,8 +88,8 @@ namespace Z0
                 c.Collect(skip(in src,i));
             
             var msAvg = mathspan.avg(data);
-            var min = data.Min();
-            var max = data.Max();
+            var min = mathspan.min(data.ReadOnly());
+            var max = mathspan.max(data.ReadOnly());
             
             var usAvg1 = mathspan.avgz(data);
             var usAvg2 = avg(data);
@@ -112,8 +112,8 @@ namespace Z0
                 c.Collect(skip(in src,i));
             
             var msAvg = mathspan.avg(data);
-            var min = data.Min();
-            var max = data.Max();
+            var min = mathspan.min(data.ReadOnly());
+            var max = mathspan.max(data.ReadOnly());
             
             var usAvg1 = mathspan.avgz(data);
             var usAvg2 = avg(data);
@@ -136,8 +136,8 @@ namespace Z0
                 c.Collect(skip(in src,i));
             
             var msAvg = mathspan.avg(data);
-            var min = data.Min();
-            var max = data.Max();            
+            var min = mathspan.min(data.ReadOnly());
+            var max = mathspan.max(data.ReadOnly());
 
             Claim.eq(min, c.Min);
             Claim.eq(max, c.Max);

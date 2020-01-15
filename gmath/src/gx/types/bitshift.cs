@@ -26,26 +26,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> src, byte count, Span<T> dst)
-            {            
-                var len = dst.Length;
-                ref readonly var input = ref head(src);
-                ref var target = ref head(dst);
-                for(var i = 0; i<len; i++) 
-                    seek(ref target,i) = gmath.srl(skip(input,i), count);                
-                return dst;
-            }                
+                => mathspan.srl(src,count,dst);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> src, ReadOnlySpan<T> counts, Span<T> dst)
-            {
-                var len = dst.Length;
-                ref readonly var input = ref head(src);
-                ref readonly var count = ref head(counts);
-                ref var target = ref head(dst);
-                for(var i=0; i < len; i++)
-                    seek(ref target,i) = gmath.srl(skip(input,i), convert<T,byte>(skip(count,i)));
-                return dst;
-            }
+                => mathspan.srlv(src,counts,dst);
         }
 
         [PrimalClosures(PrimalKind.Integers)]
@@ -63,27 +48,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> src, byte count, Span<T> dst)
-            {            
-                var len = dst.Length;
-                ref readonly var input = ref head(src);
-                ref var target = ref head(dst);
-                for(var i = 0; i<len; i++) 
-                    seek(ref target,i) = gmath.sll(skip(input,i), count);                
-                return dst;
-            }                
+                => mathspan.sll(src,count,dst);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> src, ReadOnlySpan<T> counts, Span<T> dst)
-            {
-                var len = dst.Length;
-                ref readonly var input = ref head(src);
-                ref readonly var count = ref head(counts);
-                ref var target = ref head(dst);
-
-                for(var i=0; i < len; i++)
-                    seek(ref target,i) = gmath.sll(skip(input,i), convert<T,byte>(skip(count,i)));
-                return dst;
-            }
+                => mathspan.sllv(src,counts,dst);
         }
     }
 }

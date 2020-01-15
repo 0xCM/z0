@@ -26,7 +26,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+                => SpanFunc.apply(this, lhs,rhs,dst);
 
         }
 
@@ -45,7 +45,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+                => SpanFunc.apply(this, lhs,rhs,dst);
 
         }
 
@@ -64,7 +64,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+                => SpanFunc.apply(this, lhs,rhs,dst);
         }
 
         [PrimalClosures(PrimalKind.All)]
@@ -82,7 +82,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+                => SpanFunc.apply(this, lhs,rhs,dst);
         }
 
         [PrimalClosures(PrimalKind.All)]
@@ -100,7 +100,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+                => SpanFunc.apply(this, lhs,rhs,dst);
         }
 
         [PrimalClosures(PrimalKind.All)]
@@ -118,7 +118,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+                => SpanFunc.apply(this, lhs,rhs,dst);
         }
 
         [PrimalClosures(PrimalKind.All)]
@@ -150,7 +150,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
-                => UnaryFunc.apply(this, src, dst);
+                => SpanFunc.apply(this, src, dst);
 
         }
 
@@ -169,7 +169,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
-                => UnaryFunc.apply(this, src, dst);
+                => SpanFunc.apply(this, src, dst);
         }
 
         [PrimalClosures(PrimalKind.All)]
@@ -187,7 +187,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
-                => UnaryFunc.apply(this, src, dst);
+                => SpanFunc.apply(this, src, dst);
         }
 
         [PrimalClosures(PrimalKind.All)]
@@ -205,7 +205,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+                => SpanFunc.apply(this, lhs,rhs,dst);
 
         }
 
@@ -224,7 +224,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+                => SpanFunc.apply(this, lhs,rhs,dst);
 
         }
 

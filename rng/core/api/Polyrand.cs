@@ -255,7 +255,7 @@ namespace Z0
             var delta = math.sub(max, min);
             return delta > 0 
                 ? math.add(min, (sbyte)Points.Next((ulong)delta)) 
-                : math.add(min, (sbyte)Points.Next((ulong)delta.Negate()));
+                : math.add(min, (sbyte)Points.Next((ulong)math.negate(delta)));
         }
 
         [MethodImpl(Inline)]
@@ -287,7 +287,7 @@ namespace Z0
             var delta = math.sub(max, min);
             return delta > 0 
                 ? math.add(min, (short)Points.Next((ulong)delta)) 
-                : math.add(min, (short)Points.Next((ulong)delta.Negate()));
+                : math.add(min, (short)Points.Next((ulong)math.negate(delta)));
         }
 
         [MethodImpl(Inline)]
@@ -323,7 +323,7 @@ namespace Z0
             var delta = math.sub(max, min);
             return delta > 0 
                 ? min + (int)Points.Next((ulong)delta) 
-                : min + (int)Points.Next((ulong)delta.Negate());
+                : min + (int)Points.Next((ulong)math.negate(delta));
         }
 
         [MethodImpl(Inline)]
@@ -377,7 +377,7 @@ namespace Z0
             var delta = math.sub(max, min);
             return delta > 0 
                 ? min + (long)Points.Next((ulong)delta) 
-                : min + (long)Points.Next((ulong)delta.Negate());
+                : min + (long)Points.Next((ulong)math.negate(delta));
         }
 
         [MethodImpl(Inline)]

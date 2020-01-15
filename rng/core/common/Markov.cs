@@ -130,7 +130,7 @@ namespace Z0
         {            
             var length = dst.Length;
             random.Fill(domain(1.0f,length << 4), length, ref dst[0]);
-            mathspan.fdiv(dst, dst.Avg()*length);
+            fspan.div(dst, dst.Avg()*length);
         }
 
         [MethodImpl(Inline)]
@@ -138,7 +138,7 @@ namespace Z0
         {            
             var length = dst.Length;
             random.Fill(domain(1.0, length << 4), length, ref dst[0]);
-            mathspan.fdiv(dst, dst.Avg()*length);
+            fspan.div(dst, dst.Avg()*length);
         }
 
         [MethodImpl(Inline)]
@@ -146,7 +146,7 @@ namespace Z0
         {            
             var dst = DataBlocks.alloc<float>(n256, DataBlocks.blockcount<float>(n256,length));
             random.Fill(domain(min,max), length, ref dst[0]);
-            mathspan.fdiv(dst.Data, dst.Avg() * length);
+            fspan.div(dst.Data, dst.Avg() * length);
             return dst; 
         }
 
@@ -155,7 +155,7 @@ namespace Z0
         {                        
             var dst = DataBlocks.alloc<double>(n256, DataBlocks.blockcount<double>(n256,length));
             random.Fill(domain(min,max), length, ref dst[0]);
-            mathspan.fdiv(dst.Data, dst.Avg() * length);
+            fspan.div(dst.Data, dst.Avg() * length);
             return dst; 
         }
     }

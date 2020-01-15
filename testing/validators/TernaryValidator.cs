@@ -79,7 +79,7 @@ namespace Z0
             clock.Start();
             try
             {                
-                TernaryFunc.apply(subject, inA, inB, inC, dst);
+                SpanFunc.apply(subject, inA, inB, inC, dst);
                 for(var i=0; i<count; i++)
                     Claim.numeq(baseline.Invoke(skip(in inATarget, i), skip(in inBTarget, i), skip(in inCTarget, i)), skip(in target, i));
             }

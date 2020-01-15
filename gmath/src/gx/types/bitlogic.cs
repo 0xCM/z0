@@ -27,8 +27,8 @@ namespace Z0
             public readonly T Invoke(T a, T b) => gmath.and(a,b);
 
             [MethodImpl(Inline)]
-            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+            public Span<T> Invoke(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
+                => mathspan.and(l,r,dst);
         }
 
         [PrimalClosures(PrimalKind.Integers)]
@@ -45,8 +45,8 @@ namespace Z0
             public readonly T Invoke(T a, T b) => gmath.or(a,b);
 
             [MethodImpl(Inline)]
-            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+            public Span<T> Invoke(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
+                => mathspan.or(l,r,dst);
         }
 
         [PrimalClosures(PrimalKind.Integers)]
@@ -64,8 +64,8 @@ namespace Z0
             public readonly T Invoke(T a, T b) => gmath.xor(a,b);
 
             [MethodImpl(Inline)]
-            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+            public Span<T> Invoke(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
+                => mathspan.xor(l,r,dst);
         }
 
         [PrimalClosures(PrimalKind.Integers)]
@@ -82,8 +82,8 @@ namespace Z0
             public readonly T Invoke(T a, T b) => gmath.nand(a,b);
 
             [MethodImpl(Inline)]
-            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+            public Span<T> Invoke(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
+                => mathspan.nand(l,r,dst);
         }
 
         [PrimalClosures(PrimalKind.Integers)]
@@ -100,8 +100,8 @@ namespace Z0
             public readonly T Invoke(T a, T b) => gmath.nor(a,b);
 
             [MethodImpl(Inline)]
-            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+            public Span<T> Invoke(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
+                => mathspan.nor(l,r,dst);
         }
 
         [PrimalClosures(PrimalKind.Integers)]
@@ -118,8 +118,8 @@ namespace Z0
             public readonly T Invoke(T a, T b) => gmath.xnor(a, b);
 
             [MethodImpl(Inline)]
-            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+            public Span<T> Invoke(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
+                => mathspan.nor(l,r,dst);
         }
 
         [PrimalClosures(PrimalKind.Integers)]
@@ -137,7 +137,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst)
-                => TernaryFunc.apply(this, a,b,c,dst);
+                => mathspan.select(a,b,c,dst);
 
         }
 
@@ -156,7 +156,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst)
-                => UnaryFunc.apply(this, src, dst);
+                => mathspan.not(src,dst);
         }    
 
         [PrimalClosures(PrimalKind.Integers)]
@@ -174,7 +174,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+                => mathspan.impl(lhs,rhs,dst);
         }
 
         [PrimalClosures(PrimalKind.Integers)]
@@ -192,7 +192,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+                => mathspan.nonimpl(lhs,rhs,dst);
 
         }
 
@@ -211,7 +211,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+                => mathspan.cimpl(lhs,rhs,dst);
 
         }
 
@@ -230,7 +230,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => BinaryFunc.apply(this, lhs,rhs,dst);
+                => mathspan.cnonimpl(lhs,rhs,dst);
 
         }
     }

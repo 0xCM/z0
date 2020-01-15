@@ -43,13 +43,13 @@ namespace Z0
 
         public static void loop_1(ReadOnlySpan<uint> src, Span<uint> dst)
         {
-            Loop.run(GX.negate(z32), src, dst);
+            SpanFunc.run(GX.negate(z32), src, dst);
         }
 
 
         public static void loop_2(ArrayExchange<uint> src, ArrayExchange<uint> dst)
         {
-            Loop.run(GX.negate(z32), src, dst);   
+            SpanFunc.run(GX.negate(z32), src, dst);   
         }
 
         public static void pipeline_1(ReadOnlySpan<uint> src, Span<uint> dst)

@@ -18,7 +18,7 @@ namespace Z0.Mkl.Test
             var dst1 = src.Replicate();
             mkl.abs(src, ref dst1);
             var dst2 = src.Replicate();
-            mathspan.fabs(src,dst2.Unblocked);
+            fspan.fabs(src,dst2.Unblocked);
             Claim.yea(dst1 == dst2);
         }
 
@@ -28,7 +28,7 @@ namespace Z0.Mkl.Test
             var dst1 = src.Replicate();
             mkl.abs(src, ref dst1);
             var dst2 = src.Replicate();
-            mathspan.fabs(src,dst2.Unblocked);
+            fspan.fabs(src,dst2.Unblocked);
             Claim.yea(dst1 == dst2);
         }
     }

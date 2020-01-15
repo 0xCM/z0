@@ -280,7 +280,7 @@ namespace Z0
             var ilSize = method.IL.Length;
             var ilBytes = new byte[ilSize];
             Target.ReadProcessMemory(ilAddress,ilBytes, ilSize, out int ilRead);
-            Claim.eq(ilRead, ilSize);                    
+            require(ilRead == ilSize);                    
             return ilBytes;
         }
 

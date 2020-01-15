@@ -27,5 +27,46 @@ namespace Z0
         [MethodImpl(Inline)]
         public static double Truncate(this double src)
             => (long)src;
+
+        [MethodImpl(Inline)]
+        public static int ToBits(this float src)
+            => BitConvert.ToInt32(src);
+
+        [MethodImpl(Inline)]
+        public static long ToBits(this double src)
+            => BitConvert.ToInt64(src);
+
+        [MethodImpl(Inline)]
+        public static double Sum(this ReadOnlySpan<double> src)
+            => mathspan.sum(src);
+
+        [MethodImpl(Inline)]
+        public static double Sum(this Span<double> src)
+            => src.ReadOnly().Sum();
+ 
+        [MethodImpl(Inline)]
+        public static float Avg(this Span<float> src)
+            => fspan.avg<float>(src);
+
+        [MethodImpl(Inline)]
+        public static double Avg(this Span<double> src)
+            => fspan.avg<double>(src);
+
+        [MethodImpl(Inline)]
+        public static float Avg(this ReadOnlySpan<float> src)
+            => fspan.avg(src);
+
+        [MethodImpl(Inline)]
+        public static double Avg(this ReadOnlySpan<double> src)
+            => fspan.avg(src);
+
+        [MethodImpl(Inline)]
+        public static float Avg(this Block256<float> src)
+            => fspan.avg<float>(src);
+
+        [MethodImpl(Inline)]
+        public static double Avg(this Block256<double> src)
+            => fspan.avg<double>(src);
+            
     }
 }

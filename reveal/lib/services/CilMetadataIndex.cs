@@ -124,21 +124,21 @@ namespace Z0
         {
             var mid = (int)md.MDToken.Raw;
             var mcil = ExtractCil(md);
-            Claim.yea(CilIndex.TryAdd(mid, mcil));
+            require(CilIndex.TryAdd(mid, mcil));
             md.FreeMethodBody();
         }
 
         void IndexMethod(MethodDef md)
         {            
             var mid = (int)md.MDToken.Raw;
-            Claim.yea(MethodIndex.TryAdd(mid, md));
+            require(MethodIndex.TryAdd(mid, md));
             if(md.HasBody && md.Body.HasInstructions)
                 IndexCil(md);
         }
         
         void IndexType(TypeDef t)
         {
-            Claim.yea(TypeIndex.TryAdd((int)t.MDToken.Raw, t));
+            require(TypeIndex.TryAdd((int)t.MDToken.Raw, t));
             foreach(var md in t.Methods)
                 IndexMethod(md);
         }
