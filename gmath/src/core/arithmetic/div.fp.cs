@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal floating-point type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static T div<T>(T a, T b)
             where T : unmanaged
         {
@@ -30,7 +30,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool divides<T>(T a, T b)
             where T : unmanaged
         {
@@ -45,19 +45,19 @@ namespace Z0
 
     partial class fmath
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float div(float a, float b)
             => a / b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double div(double a, double b)
             => a / b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit divides(float a, float b)
             => b % a == 0;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit divides(double a, double b)
             => b % a == 0;
     }    

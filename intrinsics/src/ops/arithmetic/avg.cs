@@ -21,7 +21,7 @@ namespace Z0
           /// </summary>
           /// <param name="lhs"></param>
           /// <param name="rhs"></param>
-          [MethodImpl(Inline)]          
+          [MethodImpl(Inline), Op]          
           public static Vector128<byte> vavg(Vector128<byte> lhs, Vector128<byte> rhs)
                => Average(lhs,rhs);
 
@@ -30,7 +30,7 @@ namespace Z0
           /// </summary>
           /// <param name="lhs"></param>
           /// <param name="rhs"></param>
-          [MethodImpl(Inline)]          
+          [MethodImpl(Inline), Op]          
           public static Vector128<ushort> vavg(Vector128<ushort> lhs,Vector128<ushort> rhs)
                => Average(lhs,rhs);
 
@@ -40,7 +40,7 @@ namespace Z0
           /// <param name="lhs"></param>
           /// <param name="rhs"></param>
           /// <returns></returns>
-          [MethodImpl(Inline)]          
+          [MethodImpl(Inline), Op]          
           public static Vector256<byte> vavg(Vector256<byte> lhs,Vector256<byte> rhs)
                => Average(lhs,rhs);
 
@@ -49,7 +49,7 @@ namespace Z0
           /// </summary>
           /// <param name="lhs"></param>
           /// <param name="rhs"></param>
-          [MethodImpl(Inline)]          
+          [MethodImpl(Inline), Op]          
           public static Vector256<ushort> vavg(Vector256<ushort> lhs,Vector256<ushort> rhs)
                => Average(lhs,rhs);
      }

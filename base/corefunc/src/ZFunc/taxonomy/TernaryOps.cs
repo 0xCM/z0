@@ -38,7 +38,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryOp<V> : ITernaryOp<V>
+    public interface IVTernaryOp<V> : IVFunc, ITernaryOp<V>
         where V : struct
     {
         
@@ -91,6 +91,8 @@ namespace Z0
     public interface IVTernaryOp128<T> : IVTernaryOp<N128,Vector128<T>,T>
         where T : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.TernaryOp | FunctionKind.V128;
+
     }
 
     /// <summary>
@@ -101,6 +103,7 @@ namespace Z0
     public interface IVTernaryOp256<T> : IVTernaryOp<N256,Vector256<T>,T>
         where T : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.TernaryOp | FunctionKind.V256;
         
     }
 

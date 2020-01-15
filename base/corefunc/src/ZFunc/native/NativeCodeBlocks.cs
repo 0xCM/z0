@@ -1,15 +1,15 @@
 //-----------------------------------------------------------------------------
-// This source is a shuffling of the https://github.com/0xd4d/JitDasm source
-// See License.txt
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
     using System.Collections.Generic;
 	
-	public sealed class CodeBlocks 
+	public sealed class NativeCodeBlocks 
     {
-		public CodeBlocks(int MethodId, CodeBlock[] Blocks)
+		public NativeCodeBlocks(int MethodId, NativeCodeBlock[] Blocks)
 		{
 			this.MethodId = MethodId;
 			this.NativeCode = Blocks;
@@ -18,7 +18,7 @@ namespace Z0
     	public int MethodId;
 				
 
-    	public CodeBlock[] NativeCode {get;}
+    	public NativeCodeBlock[] NativeCode {get;}
 	
 	}
 }

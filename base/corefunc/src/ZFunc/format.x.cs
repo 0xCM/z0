@@ -53,5 +53,40 @@ namespace Z0
             }
             return parenthetical(fmt.ToString());            
         }
+
+        static string MethodSep => new string('_',80);
+
+        public static string Format<T>(this T data, int linebytes = 8, bool linelabels = true)
+            where T : INativeMemberData
+        {
+            if(data.IsEmpty)
+                return "<no_data>";
+
+            var format = text();
+            var range = bracket(concat(data.StartAddress.FormatHex(false,true), AsciSym.Comma, data.EndAddress.FormatHex(false,true)));
+            format.AppendLine($"; function: {data.Method.Signature().Format()}");
+            format.AppendLine($"; location: {range}, code length: {data.Length} bytes");
+
+            for(ushort i=0; i< data.Length; i++)
+            {
+                if(i % linebytes == 0)
+                {
+                    if(i != 0)
+                        format.AppendLine();
+
+                    if(linelabels)
+                    {
+                        format.Append(i.FormatHex(true,false));
+                        format.Append(AsciLower.h);
+                        format.Append(AsciSym.Space);
+                    }
+                }
+                format.Append(data.Content[i].FormatHex(true, true));
+                format.Append(AsciSym.Space);
+            }
+            format.AppendLine();   
+            format.AppendLine(MethodSep);
+            return format.ToString();
+        }         
     }
 }

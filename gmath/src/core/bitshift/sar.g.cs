@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The value to shift</param>
         /// <param name="offset">The number of bits to shift</param>
         /// <typeparam name="T">The primal integer type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static T sar<T>(T src, byte offset)
             where T : unmanaged
                 => sar_u(src,offset);

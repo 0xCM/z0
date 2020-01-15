@@ -13,7 +13,7 @@ namespace Z0
 
     partial class gfp
     {
-       [MethodImpl(Inline)]
+       [MethodImpl(Inline), Op]
        public static T xor<T>(T a, T b)
             where T :unmanaged
         {
@@ -28,11 +28,11 @@ namespace Z0
 
     partial class fmath
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float xor(float a, float b)
             => BitConvert.ToSingle(a.ToBits() ^ b.ToBits());
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double xor(double a, double b)
             => BitConvert.ToDouble(a.ToBits() ^ b.ToBits());                 
     }

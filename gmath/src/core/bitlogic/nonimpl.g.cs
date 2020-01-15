@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
         public static T nonimpl<T>(T a, T b)
             where T : unmanaged
                 => nonimpl_u(a,b);

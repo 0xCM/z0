@@ -18,7 +18,7 @@ namespace Z0
     /// </summary>
     public class MethodAsmBody
     {
-        public MethodAsmBody(MethodInfo method, CodeBlock block, Instruction[] instructions)
+        public MethodAsmBody(MethodInfo method, NativeCodeBlock block, Instruction[] instructions)
         {
             this.Method = method;
             this.NativeBlock = block;
@@ -35,7 +35,7 @@ namespace Z0
 
         public Instruction[] Instructions {get;}
         
-        public CodeBlock NativeBlock {get;}
+        public NativeCodeBlock NativeBlock {get;}
 
         public int MethodId
             => Method.MetadataToken;

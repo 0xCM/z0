@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="mask">The scatter spec</param>
         /// <typeparam name="T">The identifiying mask</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.UnsignedInts)]
         public static T scatter<T>(T src, T mask)
             where T : unmanaged
         {

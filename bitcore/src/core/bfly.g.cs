@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.UnsignedInts)]
         public static T bfly<T>(N1 n, T x)
             where T : unmanaged
         {
@@ -59,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.UnsignedInts)]
         public static T bfly<T>(N2 n, T x)
             where T : unmanaged
         {

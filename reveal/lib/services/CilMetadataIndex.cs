@@ -13,9 +13,6 @@ namespace Z0
 
     using dnlib.DotNet;
 
-    using DN = dnlib.DotNet;
-    using DNE = dnlib.DotNet.Emit;
-    
     using static zfunc;
     
     public class CilMetadataIndex

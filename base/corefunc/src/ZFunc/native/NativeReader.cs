@@ -58,7 +58,7 @@ namespace Z0
                 var pSrc = (byte*)m.Prepare().ToPointer();            
                 var pSrcCurrent = pSrc;            
                 var start = (ulong)pSrc;
-                var end = Capture(pSrc, dst);            
+                var end = capture(pSrc, dst);            
                 var bytesRead = (int)(end - start);
                 var code = dst.Slice(0, bytesRead).ToArray();
                 return new NativeMethodData(m, start, end, code);         
@@ -70,13 +70,17 @@ namespace Z0
             }
         }
 
-
+        /// <summary>
+        /// Captures native code produced by the JIT for a dynamic delegate
+        /// </summary>
+        /// <param name="d">The dynamic delegate</param>
+        /// <param name="dst">The target buffer</param>
         public static unsafe INativeMemberData read(DynamicDelegate d, Span<byte> dst)
         {
             var pSrc = d.Jit().Pointer;
             var pSrcCurrent = pSrc;
             var start = (ulong)pSrc;         
-            var end = Capture(pSrc, dst);   
+            var end = capture(pSrc, dst);   
             var bytesRead = (int)(end - start);
             var code = dst.Slice(0, bytesRead).ToArray();
             return new NativeMethodData(d.SourceMethod, start, end, code);
@@ -93,7 +97,7 @@ namespace Z0
             {
                 var pSrc = d.Jit();
                 var pSrcCurrent = pSrc;            
-                var start = Capture(pSrc, dst);            
+                var start = capture(pSrc, dst);            
                 var end = (ulong)pSrc;
                 var bytesRead = (int)(start - end);
                 var code = dst.Slice(0, bytesRead).ToArray();
@@ -232,7 +236,14 @@ namespace Z0
                 where argcount == 1
                 select m.GetGenericMethodDefinition();
 
-        internal static unsafe ulong Capture(byte* pSrc, Span<byte> dst)
+        [MethodImpl(Inline)]
+        static unsafe ref byte Read(byte* pByte, ref byte dst)
+        {
+            dst = Unsafe.Read<byte>(pByte);
+            return ref dst;
+        }
+
+        internal static unsafe ulong capture(byte* pSrc, Span<byte> dst)
         {
             const byte ZED = 0;
             const byte RET = 0xc3;
@@ -253,8 +264,12 @@ namespace Z0
                     var x0 = dst[offset - 3];
                     var x1 = dst[offset - 2];
                     var x2 = dst[offset - 1];
+                    var x3 = dst[offset];
 
                     if(x0 == RET && x1 == SBB)
+                        return (ulong)pSrcCurrent - 2;
+
+                    if(x0 == RET && x1 == INTR)
                         return (ulong)pSrcCurrent - 2;
 
                     if((x0 == RET && x1 == INTR && x2 == INTR))
@@ -263,24 +278,21 @@ namespace Z0
                     if((x0 == RET && x1 == ZED && x2 == SBB))
                         return (ulong)pSrcCurrent - 2;
 
+                    if(x0 == RET && x1 == ZED && x2 == ZED && x3 == ZED)
+                        return (ulong)pSrcCurrent - 2;
+
                     if((x0 == INTR && x1 == INTR))
                         return (ulong)pSrcCurrent - 2;
 
                     if((x0 == ZED && x1 == ZED && x2 == SBB))
                         return (ulong)pSrcCurrent - 3;                    
 
-                    if((x0 == ZED && x1 == ZED && x2 == ZED))
-                        return (ulong)pSrcCurrent - 3;
+                    // if((x0 == ZED && x1 == ZED && x2 == ZED && x3 == ZED))
+                    //     return (ulong)pSrcCurrent - 3;
                 }                    
             }
             return (ulong)pSrcCurrent;
         }
 
-        [MethodImpl(Inline)]
-        static unsafe ref byte Read(byte* pByte, ref byte dst)
-        {
-            dst = Unsafe.Read<byte>(pByte);
-            return ref dst;
-        }
     }
 }

@@ -108,6 +108,13 @@ namespace Z0
             => m.ContainsGenericParameters;
 
         /// <summary>
+        /// Returns true if the method has unspecified generic parameters, false otherwise
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsNonGeneric(this MethodInfo m)
+            => !m.IsGenericMethod && !m.IsConstructedGenericMethod;
+
+        /// <summary>
         /// Selects the concrete (not abstract) methods from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
@@ -177,6 +184,15 @@ namespace Z0
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> NonGeneric(this IEnumerable<MethodInfo> src)
             => src.Where(t => !t.ContainsGenericParameters && !t.IsConstructedGenericMethod);        
+
+        /// <summary>
+        /// Selects the methods that are adorned with parametrically-identified attribute
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        /// <typeparam name="A">The attribute type</typeparam>
+        public static IEnumerable<MethodInfo> Attributed<A>(this IEnumerable<MethodInfo> src)
+            where A : Attribute
+                => src.Where(m => m.Attributed<A>());
 
         /// <summary>
         /// Reifies a method if it is open generic; otherwise, returns the original method

@@ -11,35 +11,35 @@ namespace Z0
     
     partial class math
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static sbyte square(sbyte src)
             => mul(src,src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte square(byte src)
             => mul(src,src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static short square(short src)
             => mul(src,src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort square(ushort src)
             => mul(src,src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int square(int src)
             => src*src;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint square(uint src)
             => src*src;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static long square(long src)
             => src*src;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong square(ulong src)
             => src*src;                 
     }

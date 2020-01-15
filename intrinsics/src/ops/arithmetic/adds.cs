@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vadds(Vector128<byte> x, Vector128<byte> y)        
             => AddSaturate(x,y);
 
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vadds(Vector128<sbyte> x, Vector128<sbyte> y)        
             => AddSaturate(x,y);
 
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<short> vadds(Vector128<short> x, Vector128<short> y)        
             => AddSaturate(x,y);
 
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ushort> vadds(Vector128<ushort> x, Vector128<ushort> y)        
             => AddSaturate(x,y);
 
@@ -59,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vadds(Vector256<byte> x, Vector256<byte> y)        
             => AddSaturate(x,y);
         
@@ -68,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vadds(Vector256<sbyte> x, Vector256<sbyte> y)        
             => AddSaturate(x,y);
 
@@ -77,7 +77,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vadds(Vector256<short> x, Vector256<short> y)        
             => AddSaturate(x,y);
 
@@ -86,7 +86,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vadds(Vector256<ushort> x, Vector256<ushort> y)        
             =>  AddSaturate(x,y);
     }

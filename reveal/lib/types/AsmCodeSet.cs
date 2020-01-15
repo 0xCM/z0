@@ -22,8 +22,7 @@ namespace Z0
             this.Label = instructions.Label;
             this.Decoded = instructions;
             this.Cil = cil;
-            this.Encoded = AsmCode.Load(instructions.Encoded, moniker);
-            
+            this.Encoded = AsmCode.Load(instructions.Encoded, moniker);            
         }
 
         public Moniker Moniker {get;}    
@@ -48,5 +47,4 @@ namespace Z0
         public string Format()
             => Decoded.Format();
     }
-
 }

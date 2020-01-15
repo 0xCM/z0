@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gmath
     {        
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static T max<T>(T a, T b)
             where T : unmanaged
                 => max_u(a,b);

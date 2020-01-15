@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="index">The index at which to begin disabling target bits</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.UnsignedInts)]
         public static T zerohi<T>(T src, int index)
             where T : unmanaged
         {

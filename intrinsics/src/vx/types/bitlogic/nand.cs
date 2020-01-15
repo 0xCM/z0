@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VXTypes
     {
-
+        [PrimalClosures(PrimalKind.Integers)]
         public readonly struct Nand128<T> : IVBinOp128D<T>
             where T : unmanaged
         {
@@ -31,6 +31,7 @@ namespace Z0
             public T InvokeScalar(T a, T b) => gmath.nand(a,b);
         }
 
+        [PrimalClosures(PrimalKind.Integers)]
         public readonly struct Nand256<T> : IVBinOp256D<T>
             where T : unmanaged
         {

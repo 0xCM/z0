@@ -37,7 +37,7 @@ namespace Z0
     /// <typeparam name="W">The natural type</typeparam>
     /// <typeparam name="V">The non-primal operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryPred<W,V> : IBinaryPred<V>
+    public interface IVBinaryPred<W,V> : IVFunc, IBinaryPred<V>
         where W : unmanaged, ITypeNat
         where V : struct
     {
@@ -78,6 +78,8 @@ namespace Z0
     public interface IVBinPred128<T> : IVBinaryPred<N128,Vector128<T>,T>
         where T : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.BinaryPred | FunctionKind.V128;
+
     }
 
     /// <summary>
@@ -88,6 +90,7 @@ namespace Z0
     public interface IVBinPred256<T> : IVBinaryPred<N256,Vector256<T>,T>
         where T : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.BinaryPred | FunctionKind.V256;
         
     }
 

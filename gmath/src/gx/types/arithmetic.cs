@@ -11,7 +11,8 @@ namespace Z0
 
     partial class GXTypes
     {
-        public readonly struct Add<T> : IBinaryOp<T>
+        [PrimalClosures(PrimalKind.All)]
+        public readonly struct Add<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "add";
@@ -22,9 +23,15 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.add(a, b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+                => BinaryFunc.apply(this, lhs,rhs,dst);
+
         }
 
-        public readonly struct Sub<T> : IBinaryOp<T>
+        [PrimalClosures(PrimalKind.All)]
+        public readonly struct Sub<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "sub";
@@ -35,9 +42,15 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.sub(a,b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+                => BinaryFunc.apply(this, lhs,rhs,dst);
+
         }
 
-        public readonly struct Mul<T> : IBinaryOp<T>
+        [PrimalClosures(PrimalKind.All)]
+        public readonly struct Mul<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
             public const string Name = "mul";
@@ -49,9 +62,15 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.mul(a, b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+                => BinaryFunc.apply(this, lhs,rhs,dst);
+
         }
 
-        public readonly struct Div<T> : IBinaryOp<T>
+        [PrimalClosures(PrimalKind.All)]
+        public readonly struct Div<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "div";
@@ -62,9 +81,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.div(a, b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+                => BinaryFunc.apply(this, lhs,rhs,dst);
         }
 
-        public readonly struct ModOp<T> : IBinaryOp<T>
+        [PrimalClosures(PrimalKind.All)]
+        public readonly struct ModOp<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "mod";
@@ -75,9 +99,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.mod(a,b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+                => BinaryFunc.apply(this, lhs,rhs,dst);
         }
 
-        public readonly struct ModMul<T> : ITernaryOp<T>
+        [PrimalClosures(PrimalKind.All)]
+        public readonly struct ModMul<T> : ITernaryOp<T>, ITernarySpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "modmul";
@@ -88,10 +117,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b, T m) => gmath.modmul(a,b,m);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst)
+                => TernaryFunc.apply(this, a,b,c,dst);
         }
 
-
-        public readonly struct Even<T> : IUnaryPred<T>
+        [PrimalClosures(PrimalKind.Integers)]
+        public readonly struct Even<T> : IUnaryPred<T>, IUnarySpanPred<T>
             where T : unmanaged        
         {
             public const string Name = "even";
@@ -102,9 +135,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a) => gmath.even(a);
+
+            [MethodImpl(Inline)]
+            public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
+                => UnaryPred.apply(this, src,dst);
         }
 
-        public readonly struct Odd<T> : IUnaryPred<T>
+        [PrimalClosures(PrimalKind.Integers)]
+        public readonly struct Odd<T> : IUnaryPred<T>, IUnarySpanPred<T>
             where T : unmanaged        
         {
             public const string Name = "odd";
@@ -115,9 +153,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a) => gmath.odd(a);
+
+            [MethodImpl(Inline)]
+            public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
+                => UnaryPred.apply(this, src,dst);
         }
 
-        public readonly struct Clamp<T> : IBinaryOp<T>
+        [PrimalClosures(PrimalKind.All)]
+        public readonly struct Clamp<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "clamp";
@@ -128,9 +171,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.clamp(a,b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+                => BinaryFunc.apply(this, lhs,rhs,dst);
         }
 
-        public readonly struct Square<T> : IUnaryOp<T>
+        [PrimalClosures(PrimalKind.All)]
+        public readonly struct Square<T> : IUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "square";
@@ -141,9 +189,15 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.square(a);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst)
+                => UnaryFunc.apply(this, src,dst);
+
         }
     
-        public readonly struct Negate<T> : IUnaryOp<T>
+        [PrimalClosures(PrimalKind.All)]
+        public readonly struct Negate<T> : IUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "negate";
@@ -154,10 +208,15 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.negate(a);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst)
+                => UnaryFunc.apply(this, src,dst);
         }
     
 
-        public readonly struct Dec<T> : IUnaryOp<T>
+        [PrimalClosures(PrimalKind.All)]
+        public readonly struct Dec<T> : IUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "dec";
@@ -168,9 +227,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.dec(a);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst)
+                => UnaryFunc.apply(this, src,dst);
         }
 
-        public readonly struct Inc<T> : IUnaryOp<T>
+        [PrimalClosures(PrimalKind.All)]
+        public readonly struct Inc<T> : IUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {        
             public const string Name = "inc";
@@ -181,9 +245,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.inc(a);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst)
+                => UnaryFunc.apply(this, src,dst);
         }
 
-        public readonly struct Abs<T>  : IUnaryOp<T>
+        [PrimalClosures(PrimalKind.All)]
+        public readonly struct Abs<T>  : IUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "abs";
@@ -194,8 +263,13 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.abs(a);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst)
+                => UnaryFunc.apply(this, src,dst);
         }
 
+        [PrimalClosures(PrimalKind.All)]
         public readonly struct Dist<T> : IFunc<T,T,ulong>
             where T : unmanaged        
         {

@@ -13,23 +13,35 @@ namespace Z0
     using static zfunc;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IUnaryImm8Resolver<T> : IFunc
-        where T :struct
+    public interface Imm8Resolver : IFunc
     {
-        DynamicDelegate<UnaryOp<T>>  @delegate(byte imm8);        
+            
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IBinaryImm8Resolver<T> : IFunc
+    public interface IUnaryImm8Resolver<T> : Imm8Resolver
         where T :struct
     {
-        DynamicDelegate<BinaryOp<T>>  @delegate(byte imm8);        
+        DynamicDelegate<UnaryOp<T>>  @delegate(byte imm8); 
+
+        
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface IBinaryImm8Resolver<T> : Imm8Resolver
+        where T :struct
+    {
+        DynamicDelegate<BinaryOp<T>>  @delegate(byte imm8);  
+
+        
+
     }
 
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryImm8Resolver128<T> : IUnaryImm8Resolver<Vector128<T>>
         where T : unmanaged
     {
+
 
     }
 
@@ -38,12 +50,14 @@ namespace Z0
         where T : unmanaged
     {
 
+
     }
 
     [SuppressUnmanagedCodeSecurity]
     public interface IVBinaryImm8Resolver128<T> : IBinaryImm8Resolver<Vector128<T>>
         where T : unmanaged
     {
+        
 
     }
 
@@ -51,6 +65,7 @@ namespace Z0
     public interface IVBinaryImm8Resolver256<T> : IBinaryImm8Resolver<Vector256<T>>
         where T : unmanaged
     {
+        
 
     }
 

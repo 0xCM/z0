@@ -11,23 +11,63 @@ namespace Z0
 
     using static zfunc;
 
-    public abstract class OpAttribute : Attribute
+    public class OpAttribute : Attribute
     {
-        protected OpAttribute(uint opId, string opName)        
+        public OpAttribute()
         {
-            this.OpId = opId;
-            this.OpName = opName;
+            this.Name = string.Empty;
+        }
+
+        public OpAttribute(string name)
+        {
+            this.Name = name;
+        }
+
+        public string Name {get;}
+
+        public override string ToString()
+            => Name;
+
+    }
+
+    /// <summary>
+    /// Identifies operations that accept one or more spans and computes a result that is stored in a caller-supplied target span
+    /// </summary>
+    public class SpanOpAttribute : Attribute
+    {
+        public SpanOpAttribute()
+        {
+            this.Name = string.Empty;
+        }
+
+        public SpanOpAttribute(string name)
+        {
+            this.Name = name;
+        }
+
+        public string Name {get;}
+
+        public override string ToString()
+            => Name;        
+    }
+
+    public abstract class OpKindAttribute : Attribute
+    {
+        protected OpKindAttribute(uint id, string name)        
+        {
+            this.Id = id;
+            this.Name = name;
         }
 
         public abstract string KindName {get;}
         
-        public uint OpId {get;}
+        public uint Id {get;}
 
-        public string OpName {get;}
+        public string Name {get;}
 
     }
 
-    public class UnaryBitwiseOpAttribute : OpAttribute
+    public class UnaryBitwiseOpAttribute : OpKindAttribute
     {
         static readonly string kindName = typeof(UnaryBitwiseOpKind).DisplayName();
 
@@ -39,12 +79,12 @@ namespace Z0
 
         public UnaryBitwiseOpKind Kind {get;}
 
-        public override string KindName => kindName;
-
+        public override string KindName 
+            => kindName;
 
     }
 
-    public class BinaryBitwiseOpAttribute : OpAttribute
+    public class BinaryBitwiseOpAttribute : OpKindAttribute
     {
         static readonly string kindName = typeof(BinaryBitwiseOpAttribute).DisplayName();
 
@@ -58,10 +98,9 @@ namespace Z0
 
         public override string KindName => kindName;
 
-
     }
 
-    public class TernaryOpAttribute : OpAttribute
+    public class TernaryOpAttribute : OpKindAttribute
     {
         static readonly string kindName = typeof(TernaryOpKind).DisplayName();
         
@@ -77,7 +116,7 @@ namespace Z0
     }
 
 
-    public class BinaryLogicOpAttribute : OpAttribute
+    public class BinaryLogicOpAttribute : OpKindAttribute
     {
         static readonly string kindName = typeof(BinaryLogicOpKind).DisplayName();
 
@@ -93,7 +132,7 @@ namespace Z0
 
     }
 
-    public class ComparisonOpAttribute : OpAttribute
+    public class ComparisonOpAttribute : OpKindAttribute
     {
         static readonly string kindName = typeof(ComparisonKind).DisplayName();
 
@@ -108,5 +147,5 @@ namespace Z0
         public override string KindName => kindName;
     }
 
- 
+    
 }

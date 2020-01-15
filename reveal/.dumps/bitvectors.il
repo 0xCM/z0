@@ -1,4 +1,4 @@
-// 2020-01-13 21:43:23:318
+// 2020-01-15 03:58:00:439
 BitVector<byte> bvand_8(BitVector<byte> x, BitVector<byte> y)
 {
 //  Id := 100663353, Name := Z0.BitVector`1<System.Byte> Z0.bitvectors::bvand_8(Z0.BitVector`1<System.Byte>,Z0.BitVector`1<System.Byte>)

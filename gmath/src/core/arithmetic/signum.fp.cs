@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Sign signum<T>(T src)
             where T : unmanaged
         {
@@ -31,7 +31,7 @@ namespace Z0
         /// Computes the sign of the operand
         /// </summary>
         /// <param name="src">The operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Sign signum(float src)
             => (Sign)MathF.Sign(src);
 
@@ -39,7 +39,7 @@ namespace Z0
         /// Computes the sign of the operand
         /// </summary>
         /// <param name="src">The operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Sign signum(double src)
             => (Sign)Math.Sign(src);            
     }

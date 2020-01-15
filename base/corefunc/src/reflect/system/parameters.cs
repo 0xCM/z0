@@ -20,8 +20,13 @@ namespace Z0
         /// Returns a method's parameter types
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static IEnumerable<Type> ParameterTypes(this MethodInfo m)
-            => m.GetParameters().Select(p => p.ParameterType);
+        public static IEnumerable<Type> ParameterTypes(this MethodInfo m, bool returntype = false)
+        {
+            var parameters = m.GetParameters().Select(p => p.ParameterType);
+            if(returntype && !m.ReturnType.IsVoid()) 
+                return array(m.ReturnType).Union(parameters);
+            else
+                return parameters;
+        }                    
     }
-
 }

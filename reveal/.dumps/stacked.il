@@ -1,7 +1,7 @@
-// 2020-01-13 21:43:21:195
+// 2020-01-15 03:57:58:457
 MemStack64 ss_alloc_64()
 {
-//  Id := 100664596, Name := Z0.Stacked/MemStack64 Z0.OpCodes.stacked::ss_alloc_64()
+//  Id := 100664603, Name := Z0.Stacked/MemStack64 Z0.OpCodes.stacked::ss_alloc_64()
 //  MemStack64 ss_alloc_64()
 //  Managed
 {
@@ -13,7 +13,7 @@ MemStack64 ss_alloc_64()
 }
 MemStack128 ss_alloc_128()
 {
-//  Id := 100664597, Name := Z0.Stacked/MemStack128 Z0.OpCodes.stacked::ss_alloc_128()
+//  Id := 100664604, Name := Z0.Stacked/MemStack128 Z0.OpCodes.stacked::ss_alloc_128()
 //  MemStack128 ss_alloc_128()
 //  Managed
 {
@@ -25,7 +25,7 @@ MemStack128 ss_alloc_128()
 }
 MemStack256 ss_alloc_256()
 {
-//  Id := 100664598, Name := Z0.Stacked/MemStack256 Z0.OpCodes.stacked::ss_alloc_256()
+//  Id := 100664605, Name := Z0.Stacked/MemStack256 Z0.OpCodes.stacked::ss_alloc_256()
 //  MemStack256 ss_alloc_256()
 //  Managed
 {
@@ -37,7 +37,7 @@ MemStack256 ss_alloc_256()
 }
 MemStack512 ss_alloc_512()
 {
-//  Id := 100664599, Name := Z0.Stacked/MemStack512 Z0.OpCodes.stacked::ss_alloc_512()
+//  Id := 100664606, Name := Z0.Stacked/MemStack512 Z0.OpCodes.stacked::ss_alloc_512()
 //  MemStack512 ss_alloc_512()
 //  Managed
 {
@@ -49,7 +49,7 @@ MemStack512 ss_alloc_512()
 }
 MemStack1024 ss_alloc_1024()
 {
-//  Id := 100664600, Name := Z0.Stacked/MemStack1024 Z0.OpCodes.stacked::ss_alloc_1024()
+//  Id := 100664607, Name := Z0.Stacked/MemStack1024 Z0.OpCodes.stacked::ss_alloc_1024()
 //  MemStack1024 ss_alloc_1024()
 //  Managed
 {
@@ -61,7 +61,7 @@ MemStack1024 ss_alloc_1024()
 }
 void ss_store_128(in byte src, uint count, ref MemStack128 dst)
 {
-//  Id := 100664601, Name := System.Void Z0.OpCodes.stacked::ss_store_128(System.Byte&,System.UInt32,Z0.Stacked/MemStack128&)
+//  Id := 100664608, Name := System.Void Z0.OpCodes.stacked::ss_store_128(System.Byte&,System.UInt32,Z0.Stacked/MemStack128&)
 //  void ss_store_128(in byte src, uint count, ref MemStack128 dst)
 //  Managed
 {
@@ -75,7 +75,7 @@ void ss_store_128(in byte src, uint count, ref MemStack128 dst)
 }
 Span<byte> ss_span_128x8(ref MemStack128 src)
 {
-//  Id := 100664602, Name := System.Span`1<System.Byte> Z0.OpCodes.stacked::ss_span_128x8(Z0.Stacked/MemStack128&)
+//  Id := 100664609, Name := System.Span`1<System.Byte> Z0.OpCodes.stacked::ss_span_128x8(Z0.Stacked/MemStack128&)
 //  Span<byte> ss_span_128x8(ref MemStack128 src)
 //  Managed
 {
@@ -88,7 +88,7 @@ Span<byte> ss_span_128x8(ref MemStack128 src)
 }
 Span<byte> ss_span_256x8(ref MemStack256 src)
 {
-//  Id := 100664603, Name := System.Span`1<System.Byte> Z0.OpCodes.stacked::ss_span_256x8(Z0.Stacked/MemStack256&)
+//  Id := 100664610, Name := System.Span`1<System.Byte> Z0.OpCodes.stacked::ss_span_256x8(Z0.Stacked/MemStack256&)
 //  Span<byte> ss_span_256x8(ref MemStack256 src)
 //  Managed
 {
@@ -101,7 +101,7 @@ Span<byte> ss_span_256x8(ref MemStack256 src)
 }
 ref byte ss_head_128x8(ref MemStack128 src)
 {
-//  Id := 100664604, Name := System.Byte& Z0.OpCodes.stacked::ss_head_128x8(Z0.Stacked/MemStack128&)
+//  Id := 100664611, Name := System.Byte& Z0.OpCodes.stacked::ss_head_128x8(Z0.Stacked/MemStack128&)
 //  ref byte ss_head_128x8(ref MemStack128 src)
 //  Managed
 {
@@ -114,7 +114,7 @@ ref byte ss_head_128x8(ref MemStack128 src)
 }
 ref ushort ss_head_128x16(ref MemStack128 src)
 {
-//  Id := 100664605, Name := System.UInt16& Z0.OpCodes.stacked::ss_head_128x16(Z0.Stacked/MemStack128&)
+//  Id := 100664612, Name := System.UInt16& Z0.OpCodes.stacked::ss_head_128x16(Z0.Stacked/MemStack128&)
 //  ref ushort ss_head_128x16(ref MemStack128 src)
 //  Managed
 {
@@ -127,7 +127,7 @@ ref ushort ss_head_128x16(ref MemStack128 src)
 }
 ref uint ss_head_128x32(ref MemStack128 src)
 {
-//  Id := 100664606, Name := System.UInt32& Z0.OpCodes.stacked::ss_head_128x32(Z0.Stacked/MemStack128&)
+//  Id := 100664613, Name := System.UInt32& Z0.OpCodes.stacked::ss_head_128x32(Z0.Stacked/MemStack128&)
 //  ref uint ss_head_128x32(ref MemStack128 src)
 //  Managed
 {
@@ -140,7 +140,7 @@ ref uint ss_head_128x32(ref MemStack128 src)
 }
 ref ulong ss_head_128x64(ref MemStack128 src)
 {
-//  Id := 100664607, Name := System.UInt64& Z0.OpCodes.stacked::ss_head_128x64(Z0.Stacked/MemStack128&)
+//  Id := 100664614, Name := System.UInt64& Z0.OpCodes.stacked::ss_head_128x64(Z0.Stacked/MemStack128&)
 //  ref ulong ss_head_128x64(ref MemStack128 src)
 //  Managed
 {
@@ -154,7 +154,7 @@ ref ulong ss_head_128x64(ref MemStack128 src)
 }
 ref byte ss_value_128x8(ref MemStack128 src, int index)
 {
-//  Id := 100664608, Name := System.Byte& Z0.OpCodes.stacked::ss_value_128x8(Z0.Stacked/MemStack128&,System.Int32)
+//  Id := 100664615, Name := System.Byte& Z0.OpCodes.stacked::ss_value_128x8(Z0.Stacked/MemStack128&,System.Int32)
 //  ref byte ss_value_128x8(ref MemStack128 src, int index)
 //  Managed
 {
@@ -168,7 +168,7 @@ ref byte ss_value_128x8(ref MemStack128 src, int index)
 }
 ref ushort ss_value_128x16(ref MemStack128 src, int index)
 {
-//  Id := 100664609, Name := System.UInt16& Z0.OpCodes.stacked::ss_value_128x16(Z0.Stacked/MemStack128&,System.Int32)
+//  Id := 100664616, Name := System.UInt16& Z0.OpCodes.stacked::ss_value_128x16(Z0.Stacked/MemStack128&,System.Int32)
 //  ref ushort ss_value_128x16(ref MemStack128 src, int index)
 //  Managed
 {
@@ -182,7 +182,7 @@ ref ushort ss_value_128x16(ref MemStack128 src, int index)
 }
 ref uint ss_value_128x32(ref MemStack128 src, int index)
 {
-//  Id := 100664610, Name := System.UInt32& Z0.OpCodes.stacked::ss_value_128x32(Z0.Stacked/MemStack128&,System.Int32)
+//  Id := 100664617, Name := System.UInt32& Z0.OpCodes.stacked::ss_value_128x32(Z0.Stacked/MemStack128&,System.Int32)
 //  ref uint ss_value_128x32(ref MemStack128 src, int index)
 //  Managed
 {
@@ -196,7 +196,7 @@ ref uint ss_value_128x32(ref MemStack128 src, int index)
 }
 ref ulong ss_value_128x64(ref MemStack128 src, int index)
 {
-//  Id := 100664611, Name := System.UInt64& Z0.OpCodes.stacked::ss_value_128x64(Z0.Stacked/MemStack128&,System.Int32)
+//  Id := 100664618, Name := System.UInt64& Z0.OpCodes.stacked::ss_value_128x64(Z0.Stacked/MemStack128&,System.Int32)
 //  ref ulong ss_value_128x64(ref MemStack128 src, int index)
 //  Managed
 {
@@ -211,7 +211,7 @@ ref ulong ss_value_128x64(ref MemStack128 src, int index)
 }
 ref byte ss_value_256x8(ref MemStack256 src, int index)
 {
-//  Id := 100664612, Name := System.Byte& Z0.OpCodes.stacked::ss_value_256x8(Z0.Stacked/MemStack256&,System.Int32)
+//  Id := 100664619, Name := System.Byte& Z0.OpCodes.stacked::ss_value_256x8(Z0.Stacked/MemStack256&,System.Int32)
 //  ref byte ss_value_256x8(ref MemStack256 src, int index)
 //  Managed
 {
@@ -225,7 +225,7 @@ ref byte ss_value_256x8(ref MemStack256 src, int index)
 }
 ref ushort ss_value_256x16(ref MemStack256 src, int index)
 {
-//  Id := 100664613, Name := System.UInt16& Z0.OpCodes.stacked::ss_value_256x16(Z0.Stacked/MemStack256&,System.Int32)
+//  Id := 100664620, Name := System.UInt16& Z0.OpCodes.stacked::ss_value_256x16(Z0.Stacked/MemStack256&,System.Int32)
 //  ref ushort ss_value_256x16(ref MemStack256 src, int index)
 //  Managed
 {
@@ -239,7 +239,7 @@ ref ushort ss_value_256x16(ref MemStack256 src, int index)
 }
 ref uint ss_value_256x32(ref MemStack256 src, int index)
 {
-//  Id := 100664614, Name := System.UInt32& Z0.OpCodes.stacked::ss_value_256x32(Z0.Stacked/MemStack256&,System.Int32)
+//  Id := 100664621, Name := System.UInt32& Z0.OpCodes.stacked::ss_value_256x32(Z0.Stacked/MemStack256&,System.Int32)
 //  ref uint ss_value_256x32(ref MemStack256 src, int index)
 //  Managed
 {
@@ -253,7 +253,7 @@ ref uint ss_value_256x32(ref MemStack256 src, int index)
 }
 ref ulong ss_value_256x64(ref MemStack256 src, int index)
 {
-//  Id := 100664615, Name := System.UInt64& Z0.OpCodes.stacked::ss_value_256x64(Z0.Stacked/MemStack256&,System.Int32)
+//  Id := 100664622, Name := System.UInt64& Z0.OpCodes.stacked::ss_value_256x64(Z0.Stacked/MemStack256&,System.Int32)
 //  ref ulong ss_value_256x64(ref MemStack256 src, int index)
 //  Managed
 {
@@ -268,7 +268,7 @@ ref ulong ss_value_256x64(ref MemStack256 src, int index)
 }
 CharStack4 ss_alloc_c4()
 {
-//  Id := 100664616, Name := Z0.Stacked/CharStack4 Z0.OpCodes.stacked::ss_alloc_c4()
+//  Id := 100664623, Name := Z0.Stacked/CharStack4 Z0.OpCodes.stacked::ss_alloc_c4()
 //  CharStack4 ss_alloc_c4()
 //  Managed
 {
@@ -280,7 +280,7 @@ CharStack4 ss_alloc_c4()
 }
 CharStack8 ss_alloc_c8()
 {
-//  Id := 100664617, Name := Z0.Stacked/CharStack8 Z0.OpCodes.stacked::ss_alloc_c8()
+//  Id := 100664624, Name := Z0.Stacked/CharStack8 Z0.OpCodes.stacked::ss_alloc_c8()
 //  CharStack8 ss_alloc_c8()
 //  Managed
 {
@@ -292,7 +292,7 @@ CharStack8 ss_alloc_c8()
 }
 CharStack32 ss_alloc_c32()
 {
-//  Id := 100664618, Name := Z0.Stacked/CharStack32 Z0.OpCodes.stacked::ss_alloc_c32()
+//  Id := 100664625, Name := Z0.Stacked/CharStack32 Z0.OpCodes.stacked::ss_alloc_c32()
 //  CharStack32 ss_alloc_c32()
 //  Managed
 {
@@ -304,7 +304,7 @@ CharStack32 ss_alloc_c32()
 }
 CharStack64 ss_alloc_c64()
 {
-//  Id := 100664619, Name := Z0.Stacked/CharStack64 Z0.OpCodes.stacked::ss_alloc_c64()
+//  Id := 100664626, Name := Z0.Stacked/CharStack64 Z0.OpCodes.stacked::ss_alloc_c64()
 //  CharStack64 ss_alloc_c64()
 //  Managed
 {
@@ -316,7 +316,7 @@ CharStack64 ss_alloc_c64()
 }
 CharStack8 ss_concat_8x8(CharStack4 head, CharStack4 tail)
 {
-//  Id := 100664620, Name := Z0.Stacked/CharStack8 Z0.OpCodes.stacked::ss_concat_8x8(Z0.Stacked/CharStack4,Z0.Stacked/CharStack4)
+//  Id := 100664627, Name := Z0.Stacked/CharStack8 Z0.OpCodes.stacked::ss_concat_8x8(Z0.Stacked/CharStack4,Z0.Stacked/CharStack4)
 //  CharStack8 ss_concat_8x8(CharStack4 head, CharStack4 tail)
 //  Managed
 {
@@ -329,7 +329,7 @@ CharStack8 ss_concat_8x8(CharStack4 head, CharStack4 tail)
 }
 ref CharStack32 ss_concat_2x16_buffered(in CharStack16 head, in CharStack16 tail, ref CharStack32 dst)
 {
-//  Id := 100664621, Name := Z0.Stacked/CharStack32& Z0.OpCodes.stacked::ss_concat_2x16_buffered(Z0.Stacked/CharStack16&,Z0.Stacked/CharStack16&,Z0.Stacked/CharStack32&)
+//  Id := 100664628, Name := Z0.Stacked/CharStack32& Z0.OpCodes.stacked::ss_concat_2x16_buffered(Z0.Stacked/CharStack16&,Z0.Stacked/CharStack16&,Z0.Stacked/CharStack32&)
 //  ref CharStack32 ss_concat_2x16_buffered(in CharStack16 head, in CharStack16 tail, ref CharStack32 dst)
 //  Managed
 {
@@ -343,7 +343,7 @@ ref CharStack32 ss_concat_2x16_buffered(in CharStack16 head, in CharStack16 tail
 }
 ref CharStack32 ss_concat_2x32_buffered(in CharStack16 head, in CharStack16 tail, ref CharStack32 dst)
 {
-//  Id := 100664622, Name := Z0.Stacked/CharStack32& Z0.OpCodes.stacked::ss_concat_2x32_buffered(Z0.Stacked/CharStack16&,Z0.Stacked/CharStack16&,Z0.Stacked/CharStack32&)
+//  Id := 100664629, Name := Z0.Stacked/CharStack32& Z0.OpCodes.stacked::ss_concat_2x32_buffered(Z0.Stacked/CharStack16&,Z0.Stacked/CharStack16&,Z0.Stacked/CharStack32&)
 //  ref CharStack32 ss_concat_2x32_buffered(in CharStack16 head, in CharStack16 tail, ref CharStack32 dst)
 //  Managed
 {
@@ -357,7 +357,7 @@ ref CharStack32 ss_concat_2x32_buffered(in CharStack16 head, in CharStack16 tail
 }
 MemStack64 init_64x8(in byte src)
 {
-//  Id := 100664623, Name := Z0.Stacked/MemStack64 Z0.OpCodes.stacked::init_64x8(System.Byte&)
+//  Id := 100664630, Name := Z0.Stacked/MemStack64 Z0.OpCodes.stacked::init_64x8(System.Byte&)
 //  MemStack64 init_64x8(in byte src)
 //  Managed
 {
@@ -370,7 +370,7 @@ MemStack64 init_64x8(in byte src)
 }
 MemStack64 init_64x16(in ushort src)
 {
-//  Id := 100664624, Name := Z0.Stacked/MemStack64 Z0.OpCodes.stacked::init_64x16(System.UInt16&)
+//  Id := 100664631, Name := Z0.Stacked/MemStack64 Z0.OpCodes.stacked::init_64x16(System.UInt16&)
 //  MemStack64 init_64x16(in ushort src)
 //  Managed
 {
@@ -383,7 +383,7 @@ MemStack64 init_64x16(in ushort src)
 }
 MemStack64 init_64x32(in uint src)
 {
-//  Id := 100664625, Name := Z0.Stacked/MemStack64 Z0.OpCodes.stacked::init_64x32(System.UInt32&)
+//  Id := 100664632, Name := Z0.Stacked/MemStack64 Z0.OpCodes.stacked::init_64x32(System.UInt32&)
 //  MemStack64 init_64x32(in uint src)
 //  Managed
 {
@@ -396,7 +396,7 @@ MemStack64 init_64x32(in uint src)
 }
 MemStack64 init_64x64(in ulong src)
 {
-//  Id := 100664626, Name := Z0.Stacked/MemStack64 Z0.OpCodes.stacked::init_64x64(System.UInt64&)
+//  Id := 100664633, Name := Z0.Stacked/MemStack64 Z0.OpCodes.stacked::init_64x64(System.UInt64&)
 //  MemStack64 init_64x64(in ulong src)
 //  Managed
 {
@@ -409,7 +409,7 @@ MemStack64 init_64x64(in ulong src)
 }
 MemStack128 init_128x8(in byte src)
 {
-//  Id := 100664627, Name := Z0.Stacked/MemStack128 Z0.OpCodes.stacked::init_128x8(System.Byte&)
+//  Id := 100664634, Name := Z0.Stacked/MemStack128 Z0.OpCodes.stacked::init_128x8(System.Byte&)
 //  MemStack128 init_128x8(in byte src)
 //  Managed
 {
@@ -422,7 +422,7 @@ MemStack128 init_128x8(in byte src)
 }
 MemStack256 init_256x8(in byte src)
 {
-//  Id := 100664628, Name := Z0.Stacked/MemStack256 Z0.OpCodes.stacked::init_256x8(System.Byte&)
+//  Id := 100664635, Name := Z0.Stacked/MemStack256 Z0.OpCodes.stacked::init_256x8(System.Byte&)
 //  MemStack256 init_256x8(in byte src)
 //  Managed
 {
@@ -435,7 +435,7 @@ MemStack256 init_256x8(in byte src)
 }
 MemStack256 init_256x32(in uint src)
 {
-//  Id := 100664629, Name := Z0.Stacked/MemStack256 Z0.OpCodes.stacked::init_256x32(System.UInt32&)
+//  Id := 100664636, Name := Z0.Stacked/MemStack256 Z0.OpCodes.stacked::init_256x32(System.UInt32&)
 //  MemStack256 init_256x32(in uint src)
 //  Managed
 {
@@ -448,7 +448,7 @@ MemStack256 init_256x32(in uint src)
 }
 MemStack512 init_512x8(in byte src)
 {
-//  Id := 100664630, Name := Z0.Stacked/MemStack512 Z0.OpCodes.stacked::init_512x8(System.Byte&)
+//  Id := 100664637, Name := Z0.Stacked/MemStack512 Z0.OpCodes.stacked::init_512x8(System.Byte&)
 //  MemStack512 init_512x8(in byte src)
 //  Managed
 {
@@ -461,7 +461,7 @@ MemStack512 init_512x8(in byte src)
 }
 MemStack1024 init_1024x8(in byte src)
 {
-//  Id := 100664631, Name := Z0.Stacked/MemStack1024 Z0.OpCodes.stacked::init_1024x8(System.Byte&)
+//  Id := 100664638, Name := Z0.Stacked/MemStack1024 Z0.OpCodes.stacked::init_1024x8(System.Byte&)
 //  MemStack1024 init_1024x8(in byte src)
 //  Managed
 {

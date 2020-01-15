@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The result of the first calculation</param>
         /// <param name="rhs">The result of the second calculation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float relerr(float lhs, float rhs)
             => fmath.abs((lhs - rhs)/lhs);
 
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The result of the first calculation</param>
         /// <param name="rhs">The result of the second calculation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double relerr(double lhs, double rhs)
             => fmath.abs((lhs - rhs)/lhs);
         
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The result of the first calculation</param>
         /// <param name="rhs">The result of the second calculation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float relerr(ComplexF32 lhs, ComplexF32 rhs)
         {
             var re = relerr(lhs.re, rhs.re);
@@ -47,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The result of the first calculation</param>
         /// <param name="rhs">The result of the second calculation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double relerr(ComplexF64 lhs, ComplexF64 rhs)
         {
             var re = relerr(lhs.re, rhs.re);

@@ -31,4 +31,23 @@ namespace Z0
             where F : IBinaryFunc<T0,T1,T2>
                 => apply(f,lhs,rhs,dst);        
     }
+
+    public static class BinaryPred
+    {
+        [MethodImpl(Inline)]
+        public static Span<bit> apply<F,T>(F f, ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
+            where F : IBinaryPred<T>
+        {
+            var count = dst.Length;
+            ref readonly var lSrc = ref head(lhs);
+            ref readonly var rSrc = ref head(rhs);
+            ref var target = ref head(dst);
+
+            for(var i=0; i<count; i++)
+                seek(ref target, i) = f.Invoke(skip(in lSrc, i), skip(in rSrc, i));
+            return dst;
+        }
+
+    }
+
 }

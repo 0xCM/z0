@@ -19,7 +19,7 @@ namespace Z0
     /// <typeparam name="Y">The second operand component type</typeparam>
     /// <typeparam name="Z">The the target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVMergeFunc<X,Y,Z> 
+    public interface IVMergeFunc<X,Y,Z> : IVFunc
         where X : unmanaged
         where Y : unmanaged
         where Z : unmanaged

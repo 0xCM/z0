@@ -15,7 +15,6 @@ namespace Z0
 
     public static partial class Reg
     {
-
         /// <summary>
         /// Moves source vector content to a 128-bit register target
         /// </summary>
@@ -71,7 +70,5 @@ namespace Z0
             dst = YMEM.From(src);
             return ref dst;
         }
-
     }
-
 }

@@ -14,12 +14,12 @@ namespace Z0
     
     partial class ginx
     {            
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
         public static Vector128<T> vsrl<T>(Vector128<T> x, byte count)
             where T : unmanaged
                 => vsrl_u(x,count);
 
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
         public static Vector256<T> vsrl<T>(Vector256<T> x, byte count)
             where T : unmanaged
                 => vsrl_u(x,count);

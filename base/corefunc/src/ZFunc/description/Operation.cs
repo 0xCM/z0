@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Linq;
     using System.Reflection;
+    using System.Collections.Generic;
 
     using static zfunc;
 
@@ -25,18 +26,26 @@ namespace Z0
         internal static Operation Define(MethodInfo method, params Type[] args)
         {            
             var dst = Init(method,args);
-            dst.Name = dst.Method.Name;
-            var attrib = method.CustomAttribute<ZFuncAttribute>();
-            attrib.OnSome(z => z.Name.OnSome(n => dst.Name = n));
-            dst.Homogenous = dst.Method.IsHomogenous();
-            dst.Vectorized = dst.Method.IsVectorized();   
-            dst.Signature = dst.Method.Signature();   
-            dst.NativeData = dst.Method.CaptureAsm();
-            dst.Input = dst.Method.InputWidths();
-            dst.Output = dst.Method.OutputWidth();
             dst.Moniker = Moniker.define(dst.Method);
+            method.CustomAttribute<OpAttribute>()
+                .OnSome(z => z.Name.OnSome(n => dst.Name = n))
+                .OnNone(() => dst.Name = dst.Method.Name);
+            dst.NativeData = dst.Method.CaptureAsm();
             return dst;
         }
+
+        internal static Operation Define(MethodInfo method, Moniker m)
+        {            
+            var dst = Init(method);
+            dst.Moniker = m;
+            method.CustomAttribute<OpAttribute>()
+                .OnSome(z => z.Name.OnSome(n => dst.Name = n))
+                .OnNone(() => dst.Name = dst.Method.Name);
+            dst.NativeData = dst.Method.CaptureAsm();
+            return dst;
+        }
+
+        public string Name {get; private set;}
 
         public MethodInfo Method {get; private set;}
 
@@ -44,30 +53,30 @@ namespace Z0
 
         public Option<MethodInfo> GenericDefinition {get; private set;}
 
-        public Pair<ParameterInfo,int>[] Input {get; private set;}
-
-        public Pair<ParameterInfo,int> Output {get; private set;}
-                
         public Type[] TypeArgs {get; private set;}
 
-        public MethodSig Signature {get; private set;}
+        public IEnumerable<Pair<ParameterInfo,int>> Input 
+            => Method.InputWidths();
+
+        public Pair<ParameterInfo,int> Output 
+            => Method.OutputWidth();
+                
+        public MethodSig Signature 
+            => Method.Signature();
 
         public INativeMemberData NativeData {get; private set;}
         
-        public bool Homogenous {get; private set;}
+        public bool Homogenous 
+            => Method.IsHomogenous();
 
-        public bool Vectorized {get; private set;}
-
-        public string Name {get; private set;}
-
-        public string FormatSig()
-            => Signature.Format();
+        public bool Vectorized 
+            => Method.IsVectorized();   
         
         public string FormatMapping()
             => $"{Name}:{Input.FormatParams()} -> {Output.FormatParam()}";
         
         public override string ToString()
-            => FormatSig();
+            => Signature.Format();
 
         public override int GetHashCode()
             => Method.GetHashCode();

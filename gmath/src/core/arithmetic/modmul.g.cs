@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="b">The second factor</param>
         /// <param name="m">The modulus</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), Op,PrimalClosures(PrimalKind.Integers)]
         public static T modmul<T>(T a, T b, T m)
             where T : unmanaged
                 => modmul_u(a,b,m);
@@ -29,9 +29,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.modmul(uint8(a), uint8(b), uint8(m)));
+                return generic<T>(math.modmul(convert<T,uint>(a), convert<T,uint>(b), convert<T,uint>(m)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.modmul(uint16(a), uint16(b), uint16(m)));
+                return generic<T>(math.modmul(convert<T,uint>(a), convert<T,uint>(b), convert<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(math.modmul(uint32(a), uint32(b), uint32(m)));
             else if(typeof(T) == typeof(ulong))
@@ -45,9 +45,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(math.modmul(int8(a), int8(b), int8(m)));
+                return generic<T>(math.modmul(convert<T,int>(a), convert<T,int>(b), convert<T,int>(m)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(math.modmul(int16(a), int16(b), int16(m)));
+                return generic<T>(math.modmul(convert<T,int>(a), convert<T,int>(b), convert<T,int>(m)));
             else if(typeof(T) == typeof(int))
                 return generic<T>(math.modmul(int32(a), int32(b), int32(m)));
             else if(typeof(T) == typeof(long))

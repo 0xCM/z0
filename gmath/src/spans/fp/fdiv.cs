@@ -42,7 +42,6 @@ namespace Z0
             return src;
         }
 
-
         /// <summary>
         /// Computes the floating-point quotient of cells in the left and right operands,
         /// and writes the result in the target operand

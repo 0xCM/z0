@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The soruce value</param>
         /// <typeparam name="T">The FP type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Floats)]
         public static T abs<T>(T src)
             where T : unmanaged
         {
@@ -37,7 +37,7 @@ namespace Z0
         /// Computes the absolute value of the source
         /// </summary>
         /// <param name="a">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float abs(float a)
             => MathF.Abs(a);
 
@@ -45,7 +45,7 @@ namespace Z0
         /// Computes the absolute value of the source
         /// </summary>
         /// <param name="a">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double abs(double a)
             => Math.Abs(a);
 

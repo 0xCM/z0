@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public class AsmBranchInfo
     {
-        public AsmBranchInfo(BitSize size, ulong value, bool near, ulong @base)
+        public AsmBranchInfo(int size, ulong value, bool near, ulong @base)
         {
             this.Size = size;
             this.Target = value;
@@ -22,7 +22,7 @@ namespace Z0
             this.Base = @base;
         }
 
-        public AsmBranchInfo(BitSize size, long value, bool near, ulong @base)
+        public AsmBranchInfo(int size, long value, bool near, ulong @base)
         {
             this.Size = size;
             this.Target = (ulong)value;
@@ -30,7 +30,7 @@ namespace Z0
             this.Base = @base;
         }
 
-        public BitSize Size {get;}
+        public int Size {get;}
 
         public bool Near {get;}
 

@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static Vector128<T> vxornot<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vxornot_u(x,y);
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static Vector256<T> vxornot<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vxornot_u(x,y);

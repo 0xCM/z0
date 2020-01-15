@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gmath
     {
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
         public static T not<T>(T a)
             where T : unmanaged
                 => not_u(a);

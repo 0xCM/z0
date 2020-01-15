@@ -44,14 +44,6 @@ namespace Z0
         /// </summary>
         public static BitSize Zero => default;
          
-        public static BitSize x8 => 8;
-
-        public static BitSize x16 => 16;
-
-        public static BitSize x32 => 32;
-
-        public static BitSize x64 => 64;
-
         /// <summary>
         /// Returns the minimum number of bytes required to apprehend 
         /// the size of the source bits.

@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static T inc<T>(T src)
             where T : unmanaged
         {
@@ -36,7 +36,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float inc(float src)
             => src + 1;
 
@@ -44,7 +44,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double inc(double src)
             => src + 1;
     }    

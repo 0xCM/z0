@@ -14,12 +14,12 @@ namespace Z0
     
     partial class ginx
     {
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static Vector128<T> vnegate<T>(Vector128<T> src)
             where T : unmanaged
                 => vnegate_u(src);
 
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static Vector256<T> vnegate<T>(Vector256<T> src)
             where T : unmanaged
                 => vnegate_u(src);

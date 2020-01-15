@@ -219,7 +219,7 @@ namespace Z0
                 throw new NoCodeException(method.ToString());
                 
             var instructions = new List<Instruction>();
-            var blocks = new List<CodeBlock>();
+            var blocks = new List<NativeCodeBlock>();
             foreach(var block in data.NativeCode)
             {
                 instructions.AddRange(DecodeAsm(block));
@@ -234,7 +234,7 @@ namespace Z0
             Target?.Dispose();
         }
 		
-        static InstructionList DecodeAsm(CodeBlock src)
+        static InstructionList DecodeAsm(NativeCodeBlock src)
 		{
             var dst = new InstructionList();
             var reader = new ByteArrayCodeReader(src.Data);
@@ -284,13 +284,13 @@ namespace Z0
             return ilBytes;
         }
 
-        CodeBlocks ReadNativeContent(MethodInfo method) 
+        NativeCodeBlocks ReadNativeContent(MethodInfo method) 
 			=> ReadNativeContent(GetRuntimeMethod(method));
 
- 		CodeBlocks ReadNativeContent(ClrMethod method) 
-			=> new CodeBlocks(
+ 		NativeCodeBlocks ReadNativeContent(ClrMethod method) 
+			=> new NativeCodeBlocks(
                 MethodId: (int)method.MetadataToken,
-                Blocks: ReadNativeBlock(method).MapValueOrDefault(b => new CodeBlock[]{b}, new CodeBlock[]{})
+                Blocks: ReadNativeBlock(method).MapValueOrDefault(b => new NativeCodeBlock[]{b}, new NativeCodeBlock[]{})
             );
 
 		/// <summary>
@@ -299,10 +299,10 @@ namespace Z0
 		/// <param name="target">The (source!) target </param>
 		/// <param name="address">The starting address</param>
 		/// <param name="size">The number of bytes to read</param>
-		Option<CodeBlock> ReadNativeBlock(ulong address, uint size)
+		Option<NativeCodeBlock> ReadNativeBlock(ulong address, uint size)
 		{
 			if (address == 0 || size == 0)
-				return zfunc.none<CodeBlock>();
+				return zfunc.none<NativeCodeBlock>();
 
 			var dst = new byte[(int)size];
 			if (!Target.ReadProcessMemory(address, dst, dst.Length, out int bytesRead))
@@ -311,19 +311,19 @@ namespace Z0
             if (dst.Length != size)
                 throw Errors.LengthMismatch((int)size, dst.Length);
 
-			return new CodeBlock(address, dst);
+			return new NativeCodeBlock(address, dst);
 		}
+
 
         /// <summary>
         /// Reads the native code blocks that have been Jitted for a specified method
         /// </summary>
         /// <param name="target">The diagnostic target</param>
         /// <param name="method">The runtime method</param>
-        Option<CodeBlock> ReadNativeBlock(ClrMethod method)
+        Option<NativeCodeBlock> ReadNativeBlock(ClrMethod method)
         {
 			var codeInfo = method.HotColdInfo;			
             return ReadNativeBlock(codeInfo.HotStart, codeInfo.HotSize);
         }
-
     }
 }

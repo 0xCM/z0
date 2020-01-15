@@ -88,7 +88,6 @@ namespace Z0
                 disassembly.EmitCil(name); 
         }
 
-
         public static void Emit(this AsmFuncInfo[] src, FilePath dstfile)
         {
             using var dst = EmissionWriter(dstfile);
@@ -106,7 +105,6 @@ namespace Z0
         
         public static void EmitCil(this IEnumerable<MethodInfo> methods, FilePath name)
             => Deconstructor.Deconstruct(methods).EmitCil(name);
-
 
         static readonly string AsmSeparator = new string('-', 160);
 

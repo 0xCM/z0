@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static T dec<T>(T src)
             where T : unmanaged
         {
@@ -36,7 +36,7 @@ namespace Z0
         /// Decrements the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float dec(float src)
             => --src;
 
@@ -44,7 +44,7 @@ namespace Z0
         /// Decrements the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double dec(double src)
             => --src;
 
@@ -53,7 +53,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The first number</param>
         /// <param name="b">The second number</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong dist(double a, double b)
             => a >= b ? (ulong)(a - b) : (ulong)(b - a);
 

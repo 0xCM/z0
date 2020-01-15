@@ -17,7 +17,7 @@ namespace Z0
 
         public ulong NativeAddress {get;set;}
 
-        public CodeBlock NativeBody {get;set;}
+        public NativeCodeBlock NativeBody {get;set;}
 
         public MethodSig MethodSig {get; set;}
     

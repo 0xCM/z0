@@ -11,6 +11,7 @@ namespace Z0
 
     partial class fmath
     {
+        [MethodImpl(Inline), Op]
         public static float gcd(float a, float b)
         {
             var x = abs(a);
@@ -25,6 +26,7 @@ namespace Z0
             return x;
         }
 
+        [MethodImpl(Inline), Op]
         public static double gcd(double a, double b)
         {
             var x = abs(a);

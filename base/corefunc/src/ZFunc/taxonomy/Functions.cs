@@ -16,9 +16,16 @@ namespace Z0
         /// <summary>
         /// A name that uniquely identifies a function reification
         /// </summary>
-        Moniker Moniker {get;}        
+        Moniker Moniker {get;} 
+
+        /// <summary>
+        /// Specifies the function kind classification
+        /// </summary>
+        FunctionKind Kind => FunctionKind.None;       
     }
 
+
+    [SuppressUnmanagedCodeSecurity]
     public interface IAction<A> : IFunc
     {
         void Invoke(A a);
@@ -32,6 +39,9 @@ namespace Z0
     public interface IFunc<A> : IFunc
     {
         A Invoke();
+
+        FunctionKind IFunc.Kind => FunctionKind.Emitter;
+        
     }
 
     /// <summary>
@@ -43,6 +53,8 @@ namespace Z0
     public interface IFunc<A,B> : IFunc
     {
         B Invoke(A a);
+
+        FunctionKind IFunc.Kind => FunctionKind.UnaryFunc;
     }
 
     /// <summary>
@@ -61,6 +73,9 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         C Invoke(A a, B b);
+
+        FunctionKind IFunc.Kind => FunctionKind.BinaryFunc;
+
     }
 
     /// <summary>
@@ -80,26 +95,28 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         D Invoke(A a, B b, C c);
+
+        FunctionKind IFunc.Kind => FunctionKind.TernaryFunc;
+
     }
 
     /// <summary>
-    /// Characterizes a 4-operand function
+    /// Common base interface for vectorized functions
     /// </summary>
-    /// <typeparam name="A">The first operand type</typeparam>
-    /// <typeparam name="B">The second operand type</typeparam>
-    /// <typeparam name="C">The third operand type</typeparam>
-    /// <typeparam name="D">The result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IFunc<A1,A2,A3,A4,A5> : IFunc
+    public interface IVFunc : IFunc
     {
-        /// <summary>
-        /// Invokes the reified function over supplied operands
-        /// </summary>
-        /// <param name="a1">The first operand</param>
-        /// <param name="a2">The second operand</param>
-        /// <param name="a3">The third operand</param>
-        /// <param name="a4">The fourth operand</param>
-        A5 Invoke(A1 a1, A2 a2, A3 a3, A4 a4);
+        FunctionKind IFunc.Kind => FunctionKind.Vectorized;
+
+    }
+
+    /// <summary>
+    /// Common base interface vectorized decomposition facets
+    /// </summary>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVDecompositionFacet
+    {
+
     }
 
     /// <summary>
@@ -112,7 +129,7 @@ namespace Z0
     /// <typeparam name="T1">The component type of the first vector</typeparam>
     /// <typeparam name="T2">The component type of the second vector</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVFunc<W1,W2,V1,V2,T1,T2> : IFunc<V1,V2>
+    public interface IVFunc<W1,W2,V1,V2,T1,T2> : IVFunc, IFunc<V1,V2>
         where W1 : unmanaged, ITypeNat
         where W2 : unmanaged, ITypeNat
         where V1 : struct
@@ -120,6 +137,7 @@ namespace Z0
         where T1 : unmanaged
         where T2 : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.UnaryFunc | FunctionKind.Vectorized;
 
     }
 
@@ -136,7 +154,7 @@ namespace Z0
     /// <typeparam name="T2">The component type of the second vector</typeparam>
     /// <typeparam name="T3">The component type of the result vector</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVFunc<W1,W2,W3,V1,V2,V3,T1,T2,T3> : IFunc<V1,V2,V3>
+    public interface IVFunc<W1,W2,W3,V1,V2,V3,T1,T2,T3> : IVFunc, IFunc<V1,V2,V3>
         where W1 : unmanaged, ITypeNat
         where W2 : unmanaged, ITypeNat
         where W3 : unmanaged, ITypeNat
@@ -147,6 +165,7 @@ namespace Z0
         where T2 : unmanaged
         where T3 : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.BinaryFunc | FunctionKind.Vectorized;
 
     }
 
@@ -166,7 +185,7 @@ namespace Z0
     /// <typeparam name="T3">The component type of the third vector</typeparam>
     /// <typeparam name="T4">The component type of the result vector</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVFunc<W1,W2,W3,W4,V1,V2,V3,V4,T1,T2,T3,T4> : IFunc<V1,V2,V3,V4>
+    public interface IVFunc<W1,W2,W3,W4,V1,V2,V3,V4,T1,T2,T3,T4> : IVFunc, IFunc<V1,V2,V3,V4>
         where W1 : unmanaged, ITypeNat
         where W2 : unmanaged, ITypeNat
         where W3 : unmanaged, ITypeNat
@@ -180,6 +199,7 @@ namespace Z0
         where T3 : unmanaged
         where T4 : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.TernaryFunc | FunctionKind.Vectorized;
 
     }
 
@@ -192,6 +212,7 @@ namespace Z0
         where T : unmanaged
     {
 
+        FunctionKind IFunc.Kind => FunctionKind.V256 | FunctionKind.UnaryConverter;
 
     }
 }

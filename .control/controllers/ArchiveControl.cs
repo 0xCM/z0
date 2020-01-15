@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     using static zfunc;
 
@@ -43,6 +44,7 @@ namespace Z0
                 archive.Save(ops[i]);
         }
 
+
         void Reify(IAssemblyDesignator designator)
         {
             var metadata = CilMetadataIndex.Create(designator.DeclaringAssembly);
@@ -55,6 +57,7 @@ namespace Z0
                     var methods = api.StaticMethods().Public().WithName(opname).ToArray();
                     foreach(var method in methods)
                     {
+                        var moniker = method.DeriveMoniker();
                         if(method.RequiresImmediate())
                         {
 
@@ -110,14 +113,141 @@ namespace Z0
 
         }
 
+        void EmitDirect(IOperationCatalog c, CilMetadataIndex metadata, bool clear = true)
+        {
+            var archive = AsmArchive.Define(c.Name);
+            if(clear)
+                archive.Clear();
+
+            foreach(var op in c.Direct)
+            {
+                var d = op.Method.Descriptor();
+                archive.Save(d, metadata.FindCil(d.Method).ValueOrDefault());
+            }
+        }
+
+        void LogError(string opname, Exception e)
+            => error(concat(opname,AsciSym.Colon,e.ToString()));
+
+
+        void Emit(DirectOpInfo op, CilMetadataIndex metadata, AsmArchive archive)
+        {
+            try
+            {
+                var method = op.Method;
+                archive.Save(method.Descriptor(), metadata.FindCil(method).ValueOrDefault());
+            }
+            catch(Exception e)
+            {
+                LogError(op.Name, e);
+            }
+        }
+
+        void Emit(GenericOpInfo op, CilMetadataIndex metadata, AsmArchive archive)
+        {
+            try
+            {
+                foreach(var r in op.Reifications)
+                {
+                    var arg = r.PrimalKind.ToPrimalType();
+                    var method = op.Method.MakeGenericMethod(arg);
+                    archive.Save(method.Descriptor(), metadata.FindCil(method).ValueOrDefault());
+                }
+            }
+            catch(Exception e)
+            {
+                LogError(op.Name, e);
+            }
+
+
+        }
+
+        void Emit(IEnumerable<GenericOpInfo> ops, CilMetadataIndex metadata, AsmArchive archive)
+        {
+            foreach(var op in ops)
+                Emit(op,metadata,archive);
+        }
+
+        void Emit(IEnumerable<DirectOpInfo> ops, CilMetadataIndex metadata, AsmArchive archive)
+        {
+            foreach(var op in ops)
+                Emit(op,metadata,archive);
+        }
+
+        void Emit(IEnumerable<GenericOpInfo> ops, CilMetadataIndex metadata, string subject)
+        {
+            var archive = AsmArchive.Define(subject);
+            foreach(var op in ops)
+                Emit(op,metadata,archive);
+        }
+
+        void Emit(IEnumerable<DirectOpInfo> ops, CilMetadataIndex metadata, string subject)
+        {
+            var archive = AsmArchive.Define(subject);
+            foreach(var op in ops)
+                Emit(op,metadata,archive);
+        }
+
+        void EmitGeneric(IOperationCatalog c, CilMetadataIndex metadata, bool clear = true)
+        {
+            var archive = AsmArchive.Define(c.Name);
+            if(clear)
+                archive.Clear();
+                
+            foreach(var op in c.Generic)
+            {
+                foreach(var r in op.Reifications)
+                {
+                    if(r.PrimalKind == PrimalKind.None)
+                    {
+                        error(errorMsg($"{op.Name} reification has no primal"));
+                    }
+                    else
+                    {
+                        try
+                        {
+                            var arg = r.PrimalKind.ToPrimalType();
+                            var method = op.Method.MakeGenericMethod(arg);
+                            archive.Save(method.Descriptor(), metadata.FindCil(method).ValueOrDefault());
+                        }
+                        catch(Exception e)
+                        {
+                            error($"{op.Name}: {e}");
+                        }
+                    }
+                }
+            }
+        }
+
+        void Emit()
+        {
+            foreach(var c in Catalogs)
+            {
+                var metadata = CilMetadataIndex.Create(c.DeclaringAssembly);
+                EmitDirect(c, metadata,true);
+                EmitGeneric(c, metadata,false);
+            }                
+
+
+        }
+
         public override void Execute()
         {
-            Clear(DynamicSubject);
-            ResolveDynamic(n128,z32);
+            // Clear(DynamicSubject);
+            // ResolveDynamic(n128,z32);
 
-            var archive = AsmArchive.Define(nameof(dinx));
-            var f = archive.ReadFunction(Moniker.define("vadd", PrimalKind.U8, n128));
-            print(f.Format());
+            // var archive = AsmArchive.Define(nameof(dinx));
+            // var f = archive.ReadFunction(Moniker.define("vadd", PrimalKind.U8, n128));
+            // print(f.Format());
+
+            foreach(var c in Catalogs)
+            {
+                var metadata = CilMetadataIndex.Create(c.DeclaringAssembly);                
+                var archive = AsmArchive.Define(c.Name);
+                archive.Clear();
+                Emit(c.Generic, metadata, archive);
+                Emit(c.Direct, metadata, archive);
+            }
 
         }
 

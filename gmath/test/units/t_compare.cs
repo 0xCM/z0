@@ -66,7 +66,6 @@ namespace Z0
             var validator = this.BinaryPredicateValidator(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
-
         }
 
         public void gt()
@@ -94,7 +93,6 @@ namespace Z0
             var validator = this.BinaryPredicateValidator(t);
             validator.CheckMatch(f,g);
             validator.CheckSpan(f,g);
-
         }
 
         public void gteq()

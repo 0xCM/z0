@@ -13,7 +13,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static T pow<T>(T b, uint exp)
             where T : unmanaged
         {
@@ -29,11 +29,11 @@ namespace Z0
     partial class fmath
     {
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float pow(float src, float exp)
             => MathF.Pow(src,exp);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double pow(double src, double exp)
             => Math.Pow(src,exp);
     }

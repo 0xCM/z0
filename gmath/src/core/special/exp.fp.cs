@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The soruce value</param>
         /// <typeparam name="T">The FP type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static T exp<T>(T src)
             where T : unmanaged
         {
@@ -36,7 +36,7 @@ namespace Z0
         /// Raises e to a specified exponent
         /// </summary>
         /// <param name="pow">The exponent</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float exp(float pow)
             => MathF.Exp(pow);
 
@@ -44,7 +44,7 @@ namespace Z0
         /// Raises e to a specified exponent
         /// </summary>
         /// <param name="pow">The exponent</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double exp(double pow)
             => Math.Exp(pow);
 

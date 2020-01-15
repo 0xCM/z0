@@ -15,6 +15,17 @@ namespace Z0.OpCodes
     [OpCodeProvider]
     public static class gxops
     {
+     
+        public static Span<uint> and_32u_span(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs, Span<uint> dst)
+            => GX.and<uint>().Invoke(lhs,rhs,dst);
+
+        public static Span<uint> nand_32u_span(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs, Span<uint> dst)
+            => GX.nand<uint>().Invoke(lhs,rhs,dst);
+
+
+        public static Span<ulong> select_64u_span(ReadOnlySpan<ulong> a, ReadOnlySpan<ulong> b, ReadOnlySpan<ulong> c, Span<ulong> dst)
+            => GX.select<ulong>().Invoke(a,b,c,dst);
+
         public static uint bl_and32(uint a, uint b)
             => GX.bitlogic<uint>().and(a,b);
 

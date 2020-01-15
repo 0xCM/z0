@@ -30,6 +30,9 @@ namespace Z0
         public abstract void Execute();
        
 
+        protected IEnumerable<IOperationCatalog> Catalogs
+            => Designators.Control.Designated.Catalogs;
+
         protected IEnumerable<IAssemblyDesignator> Designates
             => Designators.Control.Designated.Designates;
 

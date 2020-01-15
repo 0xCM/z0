@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vhadd(Vector128<sbyte> x, Vector128<sbyte> y)
         {
             var a = vinflate(x, n256, z16i);
@@ -36,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vhadd(Vector128<byte> x, Vector128<byte> y)
         {
             var z0 = vinflate(x, n256, z16i);
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<short> vhadd(Vector128<short> x, Vector128<short> y)
             => HorizontalAdd(x, y);
 
@@ -58,7 +58,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<int> vhadd(Vector128<int> x, Vector128<int> y)
             => HorizontalAdd(x, y);
 
@@ -67,7 +67,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vhadd(Vector256<sbyte> x, Vector256<sbyte> y)
         {
             (var x0, var x1) = vinflate(x,n512, z16i);
@@ -80,7 +80,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vhadd(Vector256<short> x, Vector256<short> y)
             => HorizontalAdd(x, y);
 
@@ -90,7 +90,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vhadd(Vector256<int> x, Vector256<int> y)
             => HorizontalAdd(x, y);
    }

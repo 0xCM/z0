@@ -48,7 +48,7 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinOpImm8<W,V,T> : IBinOpImm8<V>
+    public interface IVBinOpImm8<W,V,T> : IVFunc, IBinOpImm8<V>
     {
 
     }
@@ -60,12 +60,12 @@ namespace Z0
     /// <typeparam name="V">The operand type</typeparam>
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinOp<W,V,T> : IBinaryOp<V>
+    public interface IVBinOp<W,V,T> : IVFunc, IBinaryOp<V>
         where W : unmanaged, ITypeNat
         where V : struct
         where T : unmanaged
     {
-
+        FunctionKind IFunc.Kind => FunctionKind.BinaryOp | FunctionKind.Vectorized;
     }
 
     /// <summary>
@@ -73,7 +73,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVBinOpD<T>
+    public interface IVBinOpD<T> : IVDecompositionFacet
         where T : unmanaged
     {
         T InvokeScalar(T a, T b);
@@ -87,7 +87,7 @@ namespace Z0
     public interface IVBinOp128<T> : IVBinOp<N128,Vector128<T>,T>
         where T : unmanaged
     {
-    
+        FunctionKind IFunc.Kind => FunctionKind.BinaryOp | FunctionKind.V128;
     }
 
     /// <summary>
@@ -98,6 +98,7 @@ namespace Z0
     public interface IVBinOp256<T> : IVBinOp<N256,Vector256<T>,T>
         where T : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.BinaryOp | FunctionKind.V256;
         
     }
 
@@ -131,6 +132,7 @@ namespace Z0
     public interface IVBinOp128Imm8<T> : IVBinOpImm8<N128,Vector128<T>,T>
         where T : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.TernaryImm | FunctionKind.V256;
         
     }
 
@@ -142,6 +144,6 @@ namespace Z0
     public interface IVBinOp256Imm8<T> : IVBinOpImm8<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        
+        FunctionKind IFunc.Kind => FunctionKind.TernaryImm | FunctionKind.V256;
     }
 }

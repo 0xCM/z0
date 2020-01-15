@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The value to test</param>
         /// <typeparam name="T">The primal integer type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static bit odd<T>(T a)
             where T : unmanaged
                 => odd_u(a);
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The value to test</param>
         /// <typeparam name="T">The primal integer type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static bit even<T>(T a)
             where T : unmanaged
                 => !odd<T>(a);    

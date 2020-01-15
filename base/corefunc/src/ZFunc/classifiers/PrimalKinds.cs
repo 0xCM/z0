@@ -11,7 +11,6 @@ namespace Z0
 
     using static zfunc;
 
-
     partial class Classifiers
     {
         [MethodImpl(Inline)]
@@ -38,8 +37,6 @@ namespace Z0
         public readonly struct Primal32f : IPrimalKind { public const PrimalKind Kind = PrimalKind.F32; public PrimalKind Classifier => Kind;}
 
         public readonly struct Primal64f : IPrimalKind { public const PrimalKind Kind = PrimalKind.F64; public PrimalKind Classifier => Kind;}
-
-
 
         public static PrimalKind<byte> u8
         {
@@ -100,7 +97,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => default;
         }
-
     }
 }
 

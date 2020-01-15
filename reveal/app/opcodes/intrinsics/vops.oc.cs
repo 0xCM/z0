@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static zfunc;    
-
+    using static AndSkeleton;
 
 
     public static class vxops
@@ -27,12 +27,12 @@ namespace Z0
         }
 
         public static Vector128<uint> and_class(Vector128<uint> x, Vector128<uint> y)
-            =>  VXTypes.CAnd128<uint>.Op.Invoke(x,y);
+            =>  CAnd128<uint>.Op.Invoke(x,y);
 
         public static uint and_class_scalar(uint x, uint y)
-            =>  VXTypes.CAnd128<uint>.Op.InvokeScalar(x,y);
+            =>  CAnd128<uint>.Op.InvokeScalar(x,y);
 
-        public static uint and_class_scalar(VXTypes.CAnd128<uint> f, uint x, uint y)
+        public static uint and_class_scalar(CAnd128<uint> f, uint x, uint y)
             =>  f.InvokeScalar(x,y);
 
         public static Vector128<uint> and_struct(Vector128<uint> x, Vector128<uint> y)

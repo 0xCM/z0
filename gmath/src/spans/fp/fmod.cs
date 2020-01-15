@@ -12,17 +12,7 @@ namespace Z0
     partial class mathspan
     {
 
-        [MethodImpl(Inline)]
-        public static Span<T> fmod<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
-            where T : unmanaged
-        {
-            var count = length(lhs,rhs);
-            for(var i = 0; i< count; i++)
-                lhs[i] = gfp.mod(lhs[i], rhs[i]);
-            return lhs;
-        }
-
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), SpanOp]
         public static Span<T> fmod<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {

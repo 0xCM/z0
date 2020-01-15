@@ -19,7 +19,7 @@ namespace Z0
         /// Disables the least set bit in the source and is logically equivalent to the composite operation (src - 1) & src
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.UnsignedInts)]
         public static T lsboff<T>(T src)
             where T : unmanaged
         {

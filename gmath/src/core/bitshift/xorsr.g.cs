@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source value</param>
         /// <param name="offset">The number of bits to shift the source value rightwards</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op,PrimalClosures(PrimalKind.UnsignedInts)]
         public static T xorsr<T>(T a, byte offset)
             where T : unmanaged
                 => xorsr_u(a,offset);

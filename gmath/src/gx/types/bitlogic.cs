@@ -12,7 +12,8 @@ namespace Z0
     partial class GXTypes
     {
 
-        public readonly struct And<T> : IBinaryOp<T>
+        [PrimalClosures(PrimalKind.Integers)]
+        public readonly struct And<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
             public const string Name = "and";
@@ -24,9 +25,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.and(a,b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+                => BinaryFunc.apply(this, lhs,rhs,dst);
         }
 
-        public readonly struct Or<T> : IBinaryOp<T>
+        [PrimalClosures(PrimalKind.Integers)]
+        public readonly struct Or<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
             public const string Name = "or";
@@ -37,9 +43,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.or(a,b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+                => BinaryFunc.apply(this, lhs,rhs,dst);
         }
 
-        public readonly struct Xor<T> : IBinaryOp<T>
+        [PrimalClosures(PrimalKind.Integers)]
+        public readonly struct Xor<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
             public const string Name = "xor";
@@ -51,9 +62,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.xor(a,b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+                => BinaryFunc.apply(this, lhs,rhs,dst);
         }
 
-        public readonly struct Nand<T> : IBinaryOp<T>
+        [PrimalClosures(PrimalKind.Integers)]
+        public readonly struct Nand<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
             public const string Name = "nand";
@@ -64,9 +80,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.nand(a,b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+                => BinaryFunc.apply(this, lhs,rhs,dst);
         }
 
-        public readonly struct Nor<T> : IBinaryOp<T>
+        [PrimalClosures(PrimalKind.Integers)]
+        public readonly struct Nor<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
             public const string Name = "not";
@@ -77,9 +98,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.nor(a,b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+                => BinaryFunc.apply(this, lhs,rhs,dst);
         }
 
-        public readonly struct Xnor<T> : IBinaryOp<T>
+        [PrimalClosures(PrimalKind.Integers)]
+        public readonly struct Xnor<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
             public const string Name = "xnor";
@@ -90,9 +116,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.xnor(a, b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+                => BinaryFunc.apply(this, lhs,rhs,dst);
         }
 
-        public readonly struct Select<T> : ITernaryOp<T>
+        [PrimalClosures(PrimalKind.Integers)]
+        public readonly struct Select<T> : ITernaryOp<T>, ITernarySpanOp<T>
             where T : unmanaged        
         {    
             public const string Name = "select";
@@ -103,9 +134,15 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b, T c) => gmath.select(a, b, c);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst)
+                => TernaryFunc.apply(this, a,b,c,dst);
+
         }
 
-        public readonly struct Not<T> : IUnaryOp<T>
+        [PrimalClosures(PrimalKind.Integers)]
+        public readonly struct Not<T> : IUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {
             public const string Name = "not";
@@ -116,35 +153,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a) => gmath.not(a);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst)
+                => UnaryFunc.apply(this, src, dst);
         }    
 
-        public readonly struct CImpl<T> : IBinaryOp<T>
-            where T : unmanaged        
-        {    
-            public const string Name = "cimpl";
-
-            public static CImpl<T> Op => default;
-
-            public Moniker Moniker => moniker<T>(Name);
-
-            [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.cimpl(a,b);
-        }
-
-        public readonly struct CNonImpl<T> : IBinaryOp<T>
-            where T : unmanaged        
-        {    
-            public const string Name = "cnonimpl";
-
-            public static CNonImpl<T> Op => default;
-
-            public Moniker Moniker => moniker<T>(Name);
-
-            [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.cnonimpl(a,b);
-        }
-
-        public readonly struct Impl<T> : IBinaryOp<T>
+        [PrimalClosures(PrimalKind.Integers)]
+        public readonly struct Impl<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
             public const string Name = "impl";
@@ -155,9 +171,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.impl(a,b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+                => BinaryFunc.apply(this, lhs,rhs,dst);
         }
 
-        public readonly struct NonImpl<T> : IBinaryOp<T>
+        [PrimalClosures(PrimalKind.Integers)]
+        public readonly struct NonImpl<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
             public const string Name = "impl";
@@ -168,6 +189,49 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.nonimpl(a,b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+                => BinaryFunc.apply(this, lhs,rhs,dst);
+
+        }
+
+        [PrimalClosures(PrimalKind.Integers)]
+        public readonly struct CImpl<T> : IBinaryOp<T>, IBinarySpanOp<T>
+            where T : unmanaged        
+        {    
+            public const string Name = "cimpl";
+
+            public static CImpl<T> Op => default;
+
+            public Moniker Moniker => moniker<T>(Name);
+
+            [MethodImpl(Inline)]
+            public readonly T Invoke(T a, T b) => gmath.cimpl(a,b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+                => BinaryFunc.apply(this, lhs,rhs,dst);
+
+        }
+
+        [PrimalClosures(PrimalKind.Integers)]
+        public readonly struct CNonImpl<T> : IBinaryOp<T>, IBinarySpanOp<T>
+            where T : unmanaged        
+        {    
+            public const string Name = "cnonimpl";
+
+            public static CNonImpl<T> Op => default;
+
+            public Moniker Moniker => moniker<T>(Name);
+
+            [MethodImpl(Inline)]
+            public readonly T Invoke(T a, T b) => gmath.cnonimpl(a,b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+                => BinaryFunc.apply(this, lhs,rhs,dst);
+
         }
     }
 }

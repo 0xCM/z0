@@ -12,6 +12,7 @@ namespace Z0
 
     partial class VXTypes
     {
+        [PrimalClosures(PrimalKind.Integers)]
         public readonly struct Select128<T> : IVTernaryOp128D<T>
             where T : unmanaged
         {
@@ -30,6 +31,7 @@ namespace Z0
             public T InvokeScalar(T a, T b, T c) => gmath.select(a,b,c);
         }
 
+        [PrimalClosures(PrimalKind.Integers)]
         public readonly struct Select256<T> : IVTernaryOp256D<T>
             where T : unmanaged
         {

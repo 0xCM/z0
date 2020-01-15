@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="rhs">The left bit position</param>
         /// <param name="dst">The right bit position</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static T between<T>(T src, byte p0, byte p1)
             where T : unmanaged
                 => between_u(src,p0,p1);
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="dst">The target that receives the sequence</param>
         /// <param name="offset">The target offset</param>
         /// <typeparam name="T">The primal bit source type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static void between<T>(T a, byte first, byte last, Span<byte> dst, int offset)
             where T : unmanaged
                 => bytes(gbits.between(a,first,last)).Slice(0, BitCalcs.minbytes(last - first + 1)).CopyTo(dst,offset);

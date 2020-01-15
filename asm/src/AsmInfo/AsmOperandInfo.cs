@@ -14,10 +14,13 @@ namespace Z0
     /// </summary>
     public class AsmOperandInfo
     {
-        public AsmOperandInfo(byte Index, string Kind, Option<ImmInfo> imminfo, 
+        public static AsmOperandInfo Define(byte index, string kind, Option<ImmInfo> imminfo, 
+            Option<AsmMemInfo> memory, Option<AsmRegisterInfo> register, Option<AsmBranchInfo> branch)
+                => new AsmOperandInfo(index, kind, imminfo, memory, register, branch);
+        public AsmOperandInfo(byte index, string Kind, Option<ImmInfo> imminfo, 
             Option<AsmMemInfo> Memory, Option<AsmRegisterInfo> register, Option<AsmBranchInfo> branch)
         {
-            this.Index = Index;
+            this.Index = index;
             this.Kind = Kind;
             this.ImmInfo = imminfo;
             this.Memory = Memory;

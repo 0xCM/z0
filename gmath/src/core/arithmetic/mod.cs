@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source value</param>
         /// <param name="m">The modulus</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static sbyte mod(sbyte a, sbyte m)
             => (sbyte)(a % m);
 
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source value</param>
         /// <param name="m">The modulus</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte mod(byte a, byte m)
             => (byte)(a % m);
 
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source value</param>
         /// <param name="m">The modulus</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static short mod(short a, short m)
             => (short)(a % m);
 
@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source value</param>
         /// <param name="m">The modulus</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort mod(ushort a, ushort m)
             => (ushort)(a % m);
 
@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source value</param>
         /// <param name="m">The modulus</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int mod(int a, int m)
             => a % m;
 
@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source value</param>
         /// <param name="m">The modulus</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint mod(uint a, uint m)
             => a % m;
 
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source value</param>
         /// <param name="m">The modulus</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static long mod(long a, long m)
             => a % m;
 
@@ -79,7 +79,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source value</param>
         /// <param name="m">The modulus</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong mod(ulong a, ulong m)
             => a % m;
 

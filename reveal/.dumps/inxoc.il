@@ -1,7 +1,7 @@
-// 2020-01-13 21:43:21:916
+// 2020-01-15 03:57:59:197
 Vector256<short> add_d256x16i(Vector256<short> x, Vector256<short> y)
 {
-//  Id := 100664129, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.inxoc::add_d256x16i(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
+//  Id := 100664131, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.inxoc::add_d256x16i(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
 //  Vector256<short> add_d256x16i(Vector256<short> x, Vector256<short> y)
 //  Managed
 {
@@ -14,7 +14,7 @@ Vector256<short> add_d256x16i(Vector256<short> x, Vector256<short> y)
 }
 Vector256<short> add_g256x16i(Vector256<short> x, Vector256<short> y)
 {
-//  Id := 100664130, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.inxoc::add_g256x16i(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
+//  Id := 100664132, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.inxoc::add_g256x16i(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
 //  Vector256<short> add_g256x16i(Vector256<short> x, Vector256<short> y)
 //  Managed
 {
@@ -27,7 +27,7 @@ Vector256<short> add_g256x16i(Vector256<short> x, Vector256<short> y)
 }
 Vector256<short> add_o256x16i(Vector256<short> x, Vector256<short> y)
 {
-//  Id := 100664131, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.inxoc::add_o256x16i(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
+//  Id := 100664133, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.inxoc::add_o256x16i(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
 //  Vector256<short> add_o256x16i(Vector256<short> x, Vector256<short> y)
 //  Managed
 {
@@ -43,7 +43,7 @@ Vector256<short> add_o256x16i(Vector256<short> x, Vector256<short> y)
 }
 Vector256<short> abs_d256x16i(Vector256<short> src)
 {
-//  Id := 100664132, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.inxoc::abs_d256x16i(System.Runtime.Intrinsics.Vector256`1<System.Int16>)
+//  Id := 100664134, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.inxoc::abs_d256x16i(System.Runtime.Intrinsics.Vector256`1<System.Int16>)
 //  Vector256<short> abs_d256x16i(Vector256<short> src)
 //  Managed
 {
@@ -55,7 +55,7 @@ Vector256<short> abs_d256x16i(Vector256<short> src)
 }
 Vector256<short> abs_g256x16i(Vector256<short> src)
 {
-//  Id := 100664133, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.inxoc::abs_g256x16i(System.Runtime.Intrinsics.Vector256`1<System.Int16>)
+//  Id := 100664135, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.inxoc::abs_g256x16i(System.Runtime.Intrinsics.Vector256`1<System.Int16>)
 //  Vector256<short> abs_g256x16i(Vector256<short> src)
 //  Managed
 {
@@ -67,7 +67,7 @@ Vector256<short> abs_g256x16i(Vector256<short> src)
 }
 Vector256<short> abs_o256x16i(Vector256<short> src)
 {
-//  Id := 100664134, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.inxoc::abs_o256x16i(System.Runtime.Intrinsics.Vector256`1<System.Int16>)
+//  Id := 100664136, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.inxoc::abs_o256x16i(System.Runtime.Intrinsics.Vector256`1<System.Int16>)
 //  Vector256<short> abs_o256x16i(Vector256<short> src)
 //  Managed
 {
@@ -82,7 +82,7 @@ Vector256<short> abs_o256x16i(Vector256<short> src)
 }
 Vector256<short> sub_d256x16i(Vector256<short> x, Vector256<short> y)
 {
-//  Id := 100664135, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.inxoc::sub_d256x16i(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
+//  Id := 100664137, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.inxoc::sub_d256x16i(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
 //  Vector256<short> sub_d256x16i(Vector256<short> x, Vector256<short> y)
 //  Managed
 {
@@ -95,7 +95,7 @@ Vector256<short> sub_d256x16i(Vector256<short> x, Vector256<short> y)
 }
 Vector256<short> sub_g256x16i(Vector256<short> x, Vector256<short> y)
 {
-//  Id := 100664136, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.inxoc::sub_g256x16i(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
+//  Id := 100664138, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.inxoc::sub_g256x16i(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
 //  Vector256<short> sub_g256x16i(Vector256<short> x, Vector256<short> y)
 //  Managed
 {
@@ -108,7 +108,7 @@ Vector256<short> sub_g256x16i(Vector256<short> x, Vector256<short> y)
 }
 ulong vcell_0_256x64u(Vector256<ulong> src)
 {
-//  Id := 100664137, Name := System.UInt64 Z0.inxoc::vcell_0_256x64u(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+//  Id := 100664139, Name := System.UInt64 Z0.inxoc::vcell_0_256x64u(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
 //  ulong vcell_0_256x64u(Vector256<ulong> src)
 //  Managed
 {
@@ -121,7 +121,7 @@ ulong vcell_0_256x64u(Vector256<ulong> src)
 }
 ulong vcell_1_256x64u(Vector256<ulong> src)
 {
-//  Id := 100664138, Name := System.UInt64 Z0.inxoc::vcell_1_256x64u(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+//  Id := 100664140, Name := System.UInt64 Z0.inxoc::vcell_1_256x64u(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
 //  ulong vcell_1_256x64u(Vector256<ulong> src)
 //  Managed
 {
@@ -134,7 +134,7 @@ ulong vcell_1_256x64u(Vector256<ulong> src)
 }
 ulong vcell_1_128x8u(Vector128<byte> src)
 {
-//  Id := 100664139, Name := System.UInt64 Z0.inxoc::vcell_1_128x8u(System.Runtime.Intrinsics.Vector128`1<System.Byte>)
+//  Id := 100664141, Name := System.UInt64 Z0.inxoc::vcell_1_128x8u(System.Runtime.Intrinsics.Vector128`1<System.Byte>)
 //  ulong vcell_1_128x8u(Vector128<byte> src)
 //  Managed
 {
@@ -148,7 +148,7 @@ ulong vcell_1_128x8u(Vector128<byte> src)
 }
 ulong vcell_2_256x64u(Vector256<ulong> src)
 {
-//  Id := 100664140, Name := System.UInt64 Z0.inxoc::vcell_2_256x64u(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+//  Id := 100664142, Name := System.UInt64 Z0.inxoc::vcell_2_256x64u(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
 //  ulong vcell_2_256x64u(Vector256<ulong> src)
 //  Managed
 {
@@ -161,7 +161,7 @@ ulong vcell_2_256x64u(Vector256<ulong> src)
 }
 byte vcell_3_256x64u(Vector256<byte> src)
 {
-//  Id := 100664141, Name := System.Byte Z0.inxoc::vcell_3_256x64u(System.Runtime.Intrinsics.Vector256`1<System.Byte>)
+//  Id := 100664143, Name := System.Byte Z0.inxoc::vcell_3_256x64u(System.Runtime.Intrinsics.Vector256`1<System.Byte>)
 //  byte vcell_3_256x64u(Vector256<byte> src)
 //  Managed
 {
@@ -174,7 +174,7 @@ byte vcell_3_256x64u(Vector256<byte> src)
 }
 uint vcell_256x32u_1(Vector256<uint> src)
 {
-//  Id := 100664142, Name := System.UInt32 Z0.inxoc::vcell_256x32u_1(System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
+//  Id := 100664144, Name := System.UInt32 Z0.inxoc::vcell_256x32u_1(System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
 //  uint vcell_256x32u_1(Vector256<uint> src)
 //  Managed
 {
@@ -187,7 +187,7 @@ uint vcell_256x32u_1(Vector256<uint> src)
 }
 uint vcell_256x32u_2(Vector256<uint> src)
 {
-//  Id := 100664143, Name := System.UInt32 Z0.inxoc::vcell_256x32u_2(System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
+//  Id := 100664145, Name := System.UInt32 Z0.inxoc::vcell_256x32u_2(System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
 //  uint vcell_256x32u_2(Vector256<uint> src)
 //  Managed
 {
@@ -200,7 +200,7 @@ uint vcell_256x32u_2(Vector256<uint> src)
 }
 Vector128<byte> swap_hl(Vector128<byte> src)
 {
-//  Id := 100664144, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.inxoc::swap_hl(System.Runtime.Intrinsics.Vector128`1<System.Byte>)
+//  Id := 100664146, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.inxoc::swap_hl(System.Runtime.Intrinsics.Vector128`1<System.Byte>)
 //  Vector128<byte> swap_hl(Vector128<byte> src)
 //  Managed
 {
@@ -212,7 +212,7 @@ Vector128<byte> swap_hl(Vector128<byte> src)
 }
 Vector128<ulong> hi_128x64u(Vector128<ulong> src)
 {
-//  Id := 100664145, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.inxoc::hi_128x64u(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+//  Id := 100664147, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.inxoc::hi_128x64u(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
 //  Vector128<ulong> hi_128x64u(Vector128<ulong> src)
 //  AggressiveInlining
 {
@@ -224,7 +224,7 @@ Vector128<ulong> hi_128x64u(Vector128<ulong> src)
 }
 Vector128<byte> hi_128x8u(Vector128<byte> src)
 {
-//  Id := 100664146, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.inxoc::hi_128x8u(System.Runtime.Intrinsics.Vector128`1<System.Byte>)
+//  Id := 100664148, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.inxoc::hi_128x8u(System.Runtime.Intrinsics.Vector128`1<System.Byte>)
 //  Vector128<byte> hi_128x8u(Vector128<byte> src)
 //  Managed
 {
@@ -236,7 +236,7 @@ Vector128<byte> hi_128x8u(Vector128<byte> src)
 }
 Vector128<ulong> lo_128x64u(Vector128<ulong> src)
 {
-//  Id := 100664147, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.inxoc::lo_128x64u(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+//  Id := 100664149, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.inxoc::lo_128x64u(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
 //  Vector128<ulong> lo_128x64u(Vector128<ulong> src)
 //  AggressiveInlining
 {
@@ -248,7 +248,7 @@ Vector128<ulong> lo_128x64u(Vector128<ulong> src)
 }
 Vector128<byte> lo_128x8u(Vector128<byte> src)
 {
-//  Id := 100664148, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.inxoc::lo_128x8u(System.Runtime.Intrinsics.Vector128`1<System.Byte>)
+//  Id := 100664150, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.inxoc::lo_128x8u(System.Runtime.Intrinsics.Vector128`1<System.Byte>)
 //  Vector128<byte> lo_128x8u(Vector128<byte> src)
 //  Managed
 {
@@ -260,7 +260,7 @@ Vector128<byte> lo_128x8u(Vector128<byte> src)
 }
 void vlo_256x8u_out(Vector256<byte> src, out ulong x0, out ulong x1)
 {
-//  Id := 100664149, Name := System.Void Z0.inxoc::vlo_256x8u_out(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.UInt64&,System.UInt64&)
+//  Id := 100664151, Name := System.Void Z0.inxoc::vlo_256x8u_out(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.UInt64&,System.UInt64&)
 //  void vlo_256x8u_out(Vector256<byte> src, out ulong x0, out ulong x1)
 //  Managed
 {
@@ -274,7 +274,7 @@ void vlo_256x8u_out(Vector256<byte> src, out ulong x0, out ulong x1)
 }
 ref Pair<ulong> vlo_256x8u_pair(Vector256<byte> src, ref Pair<ulong> dst)
 {
-//  Id := 100664150, Name := Z0.Pair`1<System.UInt64>& Z0.inxoc::vlo_256x8u_pair(System.Runtime.Intrinsics.Vector256`1<System.Byte>,Z0.Pair`1<System.UInt64>&)
+//  Id := 100664152, Name := Z0.Pair`1<System.UInt64>& Z0.inxoc::vlo_256x8u_pair(System.Runtime.Intrinsics.Vector256`1<System.Byte>,Z0.Pair`1<System.UInt64>&)
 //  ref Pair<ulong> vlo_256x8u_pair(Vector256<byte> src, ref Pair<ulong> dst)
 //  Managed
 {
@@ -287,7 +287,7 @@ ref Pair<ulong> vlo_256x8u_pair(Vector256<byte> src, ref Pair<ulong> dst)
 }
 void vlo_256x64u_out(Vector256<ulong> src, out ulong x0, out ulong x1)
 {
-//  Id := 100664151, Name := System.Void Z0.inxoc::vlo_256x64u_out(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.UInt64&,System.UInt64&)
+//  Id := 100664153, Name := System.Void Z0.inxoc::vlo_256x64u_out(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.UInt64&,System.UInt64&)
 //  void vlo_256x64u_out(Vector256<ulong> src, out ulong x0, out ulong x1)
 //  Managed
 {
@@ -301,7 +301,7 @@ void vlo_256x64u_out(Vector256<ulong> src, out ulong x0, out ulong x1)
 }
 ref Pair<ulong> vlo_256x64u_pair(Vector256<ulong> src, ref Pair<ulong> dst)
 {
-//  Id := 100664152, Name := Z0.Pair`1<System.UInt64>& Z0.inxoc::vlo_256x64u_pair(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.Pair`1<System.UInt64>&)
+//  Id := 100664154, Name := Z0.Pair`1<System.UInt64>& Z0.inxoc::vlo_256x64u_pair(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.Pair`1<System.UInt64>&)
 //  ref Pair<ulong> vlo_256x64u_pair(Vector256<ulong> src, ref Pair<ulong> dst)
 //  Managed
 {
@@ -314,7 +314,7 @@ ref Pair<ulong> vlo_256x64u_pair(Vector256<ulong> src, ref Pair<ulong> dst)
 }
 void vhi_256x64u_out(Vector256<ulong> src, out ulong x0, out ulong x1)
 {
-//  Id := 100664153, Name := System.Void Z0.inxoc::vhi_256x64u_out(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.UInt64&,System.UInt64&)
+//  Id := 100664155, Name := System.Void Z0.inxoc::vhi_256x64u_out(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.UInt64&,System.UInt64&)
 //  void vhi_256x64u_out(Vector256<ulong> src, out ulong x0, out ulong x1)
 //  Managed
 {
@@ -328,7 +328,7 @@ void vhi_256x64u_out(Vector256<ulong> src, out ulong x0, out ulong x1)
 }
 ref Pair<ulong> vhi_256x64u_pair(Vector256<ulong> src, ref Pair<ulong> dst)
 {
-//  Id := 100664154, Name := Z0.Pair`1<System.UInt64>& Z0.inxoc::vhi_256x64u_pair(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.Pair`1<System.UInt64>&)
+//  Id := 100664156, Name := Z0.Pair`1<System.UInt64>& Z0.inxoc::vhi_256x64u_pair(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.Pair`1<System.UInt64>&)
 //  ref Pair<ulong> vhi_256x64u_pair(Vector256<ulong> src, ref Pair<ulong> dst)
 //  Managed
 {

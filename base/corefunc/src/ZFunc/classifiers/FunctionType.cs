@@ -38,7 +38,6 @@ namespace Z0
         public static bool unary(MethodInfo m)
             => m.IsFunction() && m.HasArity(1);
 
-
         /// <summary>
         /// Determines whether a method defines a binary function
         /// </summary>
@@ -184,8 +183,8 @@ namespace Z0
         /// Determines the bit-width of each intrinsic or primal method parameter
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static Pair<ParameterInfo,int>[] inputwidths(MethodInfo m)
-            => m.GetParameters().Select(p => paired(p, Classified.width(p.ParameterType))).ToArray();
+        public static IEnumerable<Pair<ParameterInfo,int>> inputwidths(MethodInfo m)
+            => m.GetParameters().Select(p => paired(p, Classified.width(p.ParameterType)));
 
         /// <summary>
         /// Determines the bit-width of an intrinsic or primal return type

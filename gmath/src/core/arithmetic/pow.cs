@@ -12,7 +12,7 @@ namespace Z0
     partial class math
     {
         // See https://stackoverflow.com/questions/101439/the-most-efficient-way-to-implement-an-integer-based-power-function-powint-int
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static sbyte pow(sbyte b, uint exp)
         {
             if(exp == 0)
@@ -31,7 +31,7 @@ namespace Z0
             return result;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte pow(byte b, uint exp)
         {
             if(exp == 0)
@@ -50,7 +50,7 @@ namespace Z0
             return result;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static short pow(short b, uint exp)
         {
             if(exp == 0)
@@ -69,7 +69,7 @@ namespace Z0
             return result;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort pow(ushort b, uint exp)
         {
             if(exp == 0)
@@ -88,7 +88,7 @@ namespace Z0
             return result;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int pow(int b, uint exp)
         {
             if(exp == 0)
@@ -107,7 +107,7 @@ namespace Z0
             return result;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint pow(uint b, uint exp)
         {
             if(exp == 0)
@@ -126,7 +126,7 @@ namespace Z0
             return result;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static long pow(long b, uint exp)
         {
             if(exp == 0)
@@ -145,7 +145,7 @@ namespace Z0
             return result;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong pow(ulong b, uint exp)
         {
             if(exp == 0)

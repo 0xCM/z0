@@ -12,6 +12,7 @@ namespace Z0
 
     public static partial class GX
     {
-
+        public static IOperationCatalog Catalog
+            => new Catalog();
     }
 }

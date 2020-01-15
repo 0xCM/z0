@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="start">The bit posiion within the source where extraction should begin</param>
         /// <param name="length">The number of bits that should be extracted</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
         public static T bitslice<T>(T a, byte start, byte length)
             where T : unmanaged
                 => bitslice_u(a,start,length);

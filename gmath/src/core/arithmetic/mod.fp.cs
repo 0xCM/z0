@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal floating-point type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static T mod<T>(T a, T b)
             where T : unmanaged
         {
@@ -30,7 +30,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static T modmul<T>(T a, T b, T m)
             where T : unmanaged
         {
@@ -51,7 +51,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The dividend</param>
         /// <param name="b">The divisor</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float fmod(float a, float b)
             => MathF.IEEERemainder(a,b);
 
@@ -60,15 +60,15 @@ namespace Z0
         /// </summary>
         /// <param name="a">The dividend</param>
         /// <param name="b">The divisor</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double fmod(double a, double b)
             => Math.IEEERemainder(a,b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float mod(float a, float b)
             => a % b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double mod(double a, double b)
             => a % b;
     }    

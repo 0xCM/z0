@@ -12,13 +12,16 @@ namespace Z0
 
     using static zfunc;
 
+
+
     /// <summary>
     /// Characterizes a unary predicate
     /// </summary>
     /// <typeparam name="A">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IUnaryPred<A> : IFunc<A,bit>
+    public interface IUnaryPred<A> : IUnaryFunc<A,bit>
     {
+        FunctionKind IFunc.Kind => FunctionKind.UnaryPred;
         
     }
 
@@ -39,10 +42,11 @@ namespace Z0
     /// <typeparam name="W">The bit-width type</typeparam>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryPred<W,V> : IUnaryPred<V>
+    public interface IVUnaryPred<W,V> : IVFunc, IUnaryPred<V>
         where W : unmanaged, ITypeNat
         where V : struct
     {
+        FunctionKind IFunc.Kind => FunctionKind.UnaryPred | FunctionKind.Vectorized;
 
     }
 
@@ -69,6 +73,8 @@ namespace Z0
     public interface IVUnaryPred128<T> : IVUnaryPred<N128,Vector128<T>,T>
         where T : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.UnaryPred | FunctionKind.V128;
+    
     }
 
     /// <summary>
@@ -79,6 +85,7 @@ namespace Z0
     public interface IVUnaryPred256<T> : IVUnaryPred<N256,Vector256<T>,T>
         where T : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.UnaryPred | FunctionKind.V256;
         
     }
 

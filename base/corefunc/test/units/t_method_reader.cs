@@ -250,5 +250,13 @@ namespace Z0
                 buffer.Clear();
             }
         }
+
+        public void read_constants()
+        {
+            var method = typeof(gmath).Method(nameof(gmath.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
+            Span<byte> buffer = new byte[128];
+            var data = NativeReader.read(method,buffer);
+
+        }
     }
 }

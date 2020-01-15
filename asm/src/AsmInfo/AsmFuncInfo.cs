@@ -48,16 +48,10 @@ namespace Z0
         /// </summary>
         public Option<MethodSig> Signature {get;}
 
-        public Moniker Name {get;}
-
-        public string FunctionName
-            => Signature.MapValueOrElse(s => s.MethodName, () => Name.Text);
-        
         /// <summary>
-        /// The number of encoded instructions
+        /// The function identifier
         /// </summary>
-        public int InstructionCount
-            => Instructions.Length;
+        public Moniker Name {get;}
 
         /// <summary>
         /// The encoded instructions
@@ -68,5 +62,14 @@ namespace Z0
         /// The instruction encoding
         /// </summary>
         public byte[] Encoding {get;}                
+
+        public string FunctionName
+            => Signature.MapValueOrElse(s => s.MethodName, () => Name.Text);
+        
+        /// <summary>
+        /// The number of encoded instructions
+        /// </summary>
+        public int InstructionCount
+            => Instructions.Length;
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     partial class gfp
     {
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Floats)]
         public static T add<T>(T lhs, T rhs)
             where T : unmanaged
         {
@@ -28,11 +28,11 @@ namespace Z0
 
     partial class fmath
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float add(float lhs, float rhs)
             => lhs + rhs;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double add(double lhs, double rhs)
             => lhs + rhs;
     }

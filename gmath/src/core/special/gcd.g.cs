@@ -13,7 +13,7 @@ namespace Z0
     
     partial class gmath
     {
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static T gcd<T>(T a, T b)
             where T : unmanaged
         {
@@ -31,7 +31,7 @@ namespace Z0
                 return gcd_f(a,b);
         }           
 
-        [MethodImpl(Inline), ZFunc(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.UnsignedInts)]
         public static T gcdbin<T>(T a, T b)
             where T : unmanaged
         {

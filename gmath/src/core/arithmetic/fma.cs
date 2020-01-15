@@ -11,35 +11,35 @@ namespace Z0
     
     partial class math
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static sbyte fma(sbyte x, sbyte y, sbyte z)
             => (sbyte)(x*y + z);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte fma(byte x, byte y, byte z)
             => (byte)(x*y + z);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static short fma(short x, short y, short z)
             => (short)(x*y + z);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort fma(ushort x, ushort y, ushort z)
             => (ushort)(x*y + z);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int fma(int x, int y, int z)
             => x*y + z;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint fma(uint x, uint y, uint z)
             => x*y + z;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static long fma(long x, long y, long z)
             => x*y + z;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong fma(ulong x, ulong y, ulong z)
             => x*y + z;  
     }

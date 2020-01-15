@@ -14,7 +14,10 @@ namespace Z0
     /// </summary>
     public class AsmInstructionInfo
     {
-        public AsmInstructionInfo(ushort Offset, string Display, string Mnemonic, string OpCode, AsmOperandInfo[] Operands, string EncodingKind, byte[] Encoding)
+        public static AsmInstructionInfo Define(ushort Offset, string Display, string Mnemonic, string OpCode, AsmOperandInfo[] Operands, string EncodingKind, byte[] Encoding)
+            => new AsmInstructionInfo(Offset, Display, Mnemonic, OpCode, Operands, EncodingKind, Encoding);
+        
+        AsmInstructionInfo(ushort Offset, string Display, string Mnemonic, string OpCode, AsmOperandInfo[] Operands, string EncodingKind, byte[] Encoding)
         {
             this.Offset = Offset;
             this.Display = Display;

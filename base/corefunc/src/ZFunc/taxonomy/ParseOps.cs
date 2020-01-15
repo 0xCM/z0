@@ -11,7 +11,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="V">The value type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IParser<C,V> : IFunc<string,C,V>
+    public interface IParser<C,V> : IBinaryFunc<string,C,V>
         where V : struct
     {
          
@@ -22,7 +22,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The primal value type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IParser<T> : IFunc<string,T>
+    public interface IParser<T> : IUnaryFunc<string,T>
         where T : unmanaged
     {
         

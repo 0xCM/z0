@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static T mul<T>(T lhs, T rhs)
             where T : unmanaged
         {
@@ -27,11 +27,11 @@ namespace Z0
 
     partial class fmath
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float mul(float lhs, float rhs)
             => lhs * rhs;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double mul(double lhs, double rhs)
             => lhs * rhs;
     }

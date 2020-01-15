@@ -14,12 +14,12 @@ namespace Z0
     
     partial class ginx
     {
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector128<T> vdec<T>(Vector128<T> src)
             where T : unmanaged
                 => vdec_u(src);
 
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector256<T> vdec<T>(Vector256<T> src)
             where T : unmanaged
                 => vdec_u(src);

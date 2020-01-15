@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The shift offset</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
         public static Vector128<T> vxors<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
                 => vxor(x,vxor(vsll(x, count),vsrl(x,count)));
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The shift offset</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
         public static Vector256<T> vxors<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
                 => vxor(x,vxor(vsll(x, count),vsrl(x,count)));
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="count">The shift offset</param>
         /// <param name="dst">The blocked computation target</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
         public static void vxors<T>(in Block128<T> x, [Imm] byte count, in Block128<T> dst)
             where T : unmanaged
         {
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="offset">The shift offset</param>
         /// <param name="dst">The blocked computation target</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.Integers)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
         public static void vxors<T>(in Block256<T> x, [Imm] byte count, in Block256<T> dst)
             where T : unmanaged
         {

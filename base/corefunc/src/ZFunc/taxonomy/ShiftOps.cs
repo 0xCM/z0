@@ -25,7 +25,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="V">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVShiftOp<V> : IShiftOp<V>
+    public interface IVShiftOp<V> : IVFunc, IShiftOp<V>
         where V : struct
     {
         

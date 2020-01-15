@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static T negate<T>(T lhs)
             where T : unmanaged
         {
@@ -31,7 +31,7 @@ namespace Z0
         /// Negates the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float negate(float src)
             => -src;
 
@@ -39,7 +39,7 @@ namespace Z0
         /// Negates the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double negate(double src)
             => -src;
     }    

@@ -12,6 +12,7 @@ namespace Z0
 
     partial class VXTypes
     {
+        [PrimalClosures(PrimalKind.Integers)]
         public readonly struct Not128<T> : IVUnaryOp128D<T>
             where T : unmanaged
         {
@@ -30,6 +31,7 @@ namespace Z0
             public T InvokeScalar(T a) => gmath.not(a);
         }
 
+        [PrimalClosures(PrimalKind.Integers)]
         public readonly struct Not256<T> : IVUnaryOp256D<T>
             where T : unmanaged
         {

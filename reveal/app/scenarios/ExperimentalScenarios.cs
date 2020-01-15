@@ -12,13 +12,49 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     using System.Runtime.InteropServices;
     using System.Security;
+    using System.Buffers;
 
     using static zfunc;
     using static NatMath;
 
+    public readonly ref struct Pooled
+    {
+        [MethodImpl(Inline)]
+        public void Dispose()
+        {
 
+        }
 
+    }
 
+    public readonly ref struct Pooled<T>
+        where T : unmanaged
+    {
+        readonly T[] rented;
+
+        public readonly Span<T> Buffer;
+
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref head(Buffer);
+        }
+
+        [MethodImpl(NotInline)]
+        public Pooled(int count)
+        {
+            this.rented = ArrayPool<T>.Shared.Rent(count);
+            this.Buffer = rented;
+        }
+
+        [MethodImpl(NotInline)]
+        public void Dispose()
+        {
+            if(rented != null)
+                ArrayPool<T>.Shared.Return(rented);
+        }
+
+    }
 
     class ExperimentalScenarios : Deconstructable<ExperimentalScenarios>
     {
@@ -29,6 +65,11 @@ namespace Z0
 
         }
 
+        public static int devirt1()
+        {
+            return Devirt1.Test();
+        }
+        
 
         public static Vector128<uint> vbsrl_128x32u_0(Vector128<uint> x)
             =>  dinx.vbsrl(x, 0);

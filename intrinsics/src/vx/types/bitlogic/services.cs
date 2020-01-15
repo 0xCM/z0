@@ -12,6 +12,7 @@ namespace Z0
 
     partial class VXTypes
     {
+        [PrimalClosures(PrimalKind.Integers)]
         public readonly struct BitLogic128<T> : IBitLogic<Vector128<T>>
             where T : unmanaged
         {
@@ -78,6 +79,7 @@ namespace Z0
                 => ginx.vxnor(a,b);
         }
 
+        [PrimalClosures(PrimalKind.Integers)]
         public readonly struct BitLogic256<T> : IBitLogic<Vector256<T>>
             where T : unmanaged
         {

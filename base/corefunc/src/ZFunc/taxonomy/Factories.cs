@@ -19,11 +19,12 @@ namespace Z0
     /// <typeparam name="V">The target vector type</typeparam>
     /// <typeparam name="T">The target vector component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVFactory<W,S,V,T> : IFunc<S,V>
+    public interface IVFactory<W,S,V,T> : IVFunc, IFunc<S,V>
         where W : unmanaged, ITypeNat
         where T : unmanaged
         where V : struct
     {
+        FunctionKind IFunc.Kind => FunctionKind.UnaryFunc | FunctionKind.Vectorized;
 
     }
 
@@ -36,6 +37,7 @@ namespace Z0
     public interface IVFactory128<S,T> : IVFactory<N128,S,Vector128<T>,T>
         where T : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.UnaryFunc | FunctionKind.V128;
 
     }
 
@@ -48,6 +50,7 @@ namespace Z0
     public interface IVFactory256<S,T> : IVFactory<N256,S,Vector256<T>,T>
         where T : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.UnaryFunc | FunctionKind.V256;
 
     }
 }

@@ -1,7 +1,7 @@
-// 2020-01-13 21:43:21:987
+// 2020-01-15 03:57:59:254
 bit check_and_1(Vector128<uint> x, Vector128<uint> y)
 {
-//  Id := 100664156, Name := Z0.bit Z0.vxops::check_and_1(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+//  Id := 100664157, Name := Z0.bit Z0.vxops::check_and_1(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
 //  bit check_and_1(Vector128<uint> x, Vector128<uint> y)
 //  Managed
 {
@@ -67,26 +67,13 @@ bit check_and_1(Vector128<uint> x, Vector128<uint> y)
 }
 
 }
-bit check_and_2(Vector128<uint> x, Vector128<uint> y)
-{
-//  Id := 100664157, Name := Z0.bit Z0.vxops::check_and_2(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
-//  bit check_and_2(Vector128<uint> x, Vector128<uint> y)
-//  Managed
-{
-  IL_0000: ldarg.0
-  IL_0001: ldarg.1
-  IL_0002: call Z0.bit Z0.vxops::check_and<System.UInt32>(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
-  IL_0007: ret
-}
-
-}
 Vector128<uint> and_class(Vector128<uint> x, Vector128<uint> y)
 {
 //  Id := 100664158, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.vxops::and_class(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
 //  Vector128<uint> and_class(Vector128<uint> x, Vector128<uint> y)
 //  Managed
 {
-  IL_0000: call Z0.VXTypes/CAnd128`1<System.UInt32> Z0.VXTypes/CAnd128`1<System.UInt32>::get_Op()
+  IL_0000: call Z0.AndSkeleton/CAnd128`1<System.UInt32> Z0.AndSkeleton/CAnd128`1<System.UInt32>::get_Op()
   IL_0005: ldarg.0
   IL_0006: ldarg.1
   IL_0007: callvirt System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.OpSkeleta/VBinOp`3<Z0.N128,System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.UInt32>::Invoke(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
@@ -100,7 +87,7 @@ uint and_class_scalar(uint x, uint y)
 //  uint and_class_scalar(uint x, uint y)
 //  Managed
 {
-  IL_0000: call Z0.VXTypes/CAnd128`1<System.UInt32> Z0.VXTypes/CAnd128`1<System.UInt32>::get_Op()
+  IL_0000: call Z0.AndSkeleton/CAnd128`1<System.UInt32> Z0.AndSkeleton/CAnd128`1<System.UInt32>::get_Op()
   IL_0005: ldarg.0
   IL_0006: ldarg.1
   IL_0007: callvirt System.UInt32 Z0.OpSkeleta/VBinOpD`3<Z0.N128,System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.UInt32>::InvokeScalar(System.UInt32,System.UInt32)
@@ -110,7 +97,7 @@ uint and_class_scalar(uint x, uint y)
 }
 uint and_class_scalar(CAnd128<uint> f, uint x, uint y)
 {
-//  Id := 100664160, Name := System.UInt32 Z0.vxops::and_class_scalar(Z0.VXTypes/CAnd128`1<System.UInt32>,System.UInt32,System.UInt32)
+//  Id := 100664160, Name := System.UInt32 Z0.vxops::and_class_scalar(Z0.AndSkeleton/CAnd128`1<System.UInt32>,System.UInt32,System.UInt32)
 //  uint and_class_scalar(CAnd128<uint> f, uint x, uint y)
 //  Managed
 {

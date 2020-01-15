@@ -56,7 +56,6 @@ namespace Z0
         public static string TypeKeyword(this PrimalKind k)
             => Classified.keyword(k);
 
-
         /// <summary>
         /// Specifies the bit-width of a classified primitive
         /// </summary>
@@ -72,7 +71,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int BitWidth(this VectorKind k)
             => Classified.width(k);
-
 
         /// <summary>
         /// Determines the kind identifier
@@ -137,6 +135,47 @@ namespace Z0
                 yield return PrimalKind.F64;
         }
 
+        public static PrimalKind ToKind(this PrimalId id)
+            => Classified.kind(id);
+
+
+        /// <summary>
+        /// Selects the distinct primal kinds represented by a classifier
+        /// </summary>
+        /// <param name="k"></param>
+        public static IEnumerable<PrimalId> Identities(this PrimalKind k)       
+        {
+            if(k.Is(PrimalKind.U8))
+                yield return PrimalId.U8;
+
+            if(k.Is(PrimalKind.I8))
+                yield return PrimalId.I8;
+
+            if(k.Is(PrimalKind.U16))
+                yield return PrimalId.U16;
+
+            if(k.Is(PrimalKind.I16))
+                yield return PrimalId.I16;
+
+            if(k.Is(PrimalKind.U32))
+                yield return PrimalId.U32;
+
+            if(k.Is(PrimalKind.I32))
+                yield return PrimalId.I32;
+
+            if(k.Is(PrimalKind.U64))
+                yield return PrimalId.U64;
+
+            if(k.Is(PrimalKind.I64))
+                yield return PrimalId.I64;
+
+            if(k.Is(PrimalKind.F32))
+                yield return PrimalId.F32;
+
+            if(k.Is(PrimalKind.F64))
+                yield return PrimalId.F64;
+        }
+
         [MethodImpl(Inline)]
         public static bool IsSome(this VectorKind k)
             => k != VectorKind.None;
@@ -169,6 +208,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Operation Descriptor(this MethodInfo src, params Type[] args)
             => Operation.Define(src, args);
+
+        [MethodImpl(Inline)]
+        public static Operation Descriptor(this MethodInfo src, Moniker m)
+            => Operation.Define(src, m);
 
         /// <summary>
         /// Determines the primal kind of a type, possibly none
@@ -323,13 +366,12 @@ namespace Z0
         public static bool IsBlocked(this Type t)
             => BlockedType.test(t);
 
-
         /// <summary>
         /// Determines whether a method accepts and/or returns at least one memory block parameter
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsBlocked(this MethodInfo m)
-            => BlockedType.test(m);
+            => BlockedType.test(m);        
 
         /// <summary>
         /// Selects the parameters for a method, if any, that accept an intrinsic vector
@@ -342,7 +384,7 @@ namespace Z0
         /// Determines the bit-width of each intrinsic or primal method parameter
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static Pair<ParameterInfo,int>[] InputWidths(this MethodInfo m)
+        public static IEnumerable<Pair<ParameterInfo,int>> InputWidths(this MethodInfo m)
             => FunctionType.inputwidths(m);
 
         /// <summary>
@@ -364,6 +406,13 @@ namespace Z0
         public static bool IsZFunc(this MethodInfo m)
             => Attribute.IsDefined(m,typeof(ZFuncAttribute));
 
+        /// <summary>
+        /// Defines a moniker predicated on a method
+        /// </summary>
+        /// <param name="m">The source method</param>
+        public static Moniker DeriveMoniker(this MethodInfo m)
+            => Moniker.define(m);
+
         public static IEnumerable<PrimalKind> SupportedPrimals(this MethodInfo m)
         {
             if(m.IsZFunc() && m.IsOpenGeneric())
@@ -374,6 +423,20 @@ namespace Z0
             }
         }            
     
+        /// <summary>
+        /// Determines whether all operands are primal
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool HasPrimalOperands(this MethodInfo m)
+            => m.ParameterTypes().All(t => t.IsPrimal());
+
+        /// <summary>
+        /// Determines whether all operands are of the same type
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool HasHomogenousOperands(this MethodInfo m)
+            => m.ParameterTypes().Distinct().Count() == 1;
+
         /// <summary>
         /// Determines whether a method defines a unary function
         /// </summary>

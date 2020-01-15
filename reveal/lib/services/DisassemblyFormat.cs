@@ -19,7 +19,6 @@ namespace Z0
         public static string Format(this InstructionBlock src, AsmFormatConfig config = null)
             => src.FormatAsm(config ?? AsmFormatConfig.Default).FormatLines();
 
-
         public static string FormatCil(this MethodDisassembly src)
         {
             var format = text();

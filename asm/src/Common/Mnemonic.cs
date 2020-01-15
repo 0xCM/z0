@@ -101,59 +101,59 @@ namespace Z0
         AESENCLAST,
 
         /// <summary>
-        ///
+        /// Perform the AES InvMixColumn Transformation
         /// </summary>     
-        AESIMC, // Perform the AES InvMixColumn Transformation
+        AESIMC,
 
         /// <summary>
-        ///
+        /// AES Round Key Generation Assist
         /// </summary>     
-        AESKEYGENASSIST, // AES Round Key Generation Assist
+        AESKEYGENASSIST,
 
         /// <summary>
-        ///
+        /// Logical AND
         /// </summary>     
-        AND, // Logical AND
+        AND,
 
         /// <summary>
-        ///
+        /// Logical AND NOT
         /// </summary>     
-        ANDN, // Logical AND NOT
+        ANDN,
 
         /// <summary>
-        ///
+        /// Bitwise Logical AND NOT of Packed Double Precision Floating-Point Values
         /// </summary>     
-        ANDNPD, // Bitwise Logical AND NOT of Packed Double Precision Floating-Point Values
+        ANDNPD,
 
         /// <summary>
-        ///
+        /// Bitwise Logical AND NOT of Packed Single Precision Floating-Point Values
         /// </summary>     
-        ANDNPS, // Bitwise Logical AND NOT of Packed Single Precision Floating-Point Values
+        ANDNPS,
 
         /// <summary>
-        ///
+        /// Bitwise Logical AND of Packed Double Precision Floating-Point Values
         /// </summary>     
-        ANDPD, // Bitwise Logical AND of Packed Double Precision Floating-Point Values
+        ANDPD,
 
         /// <summary>
-        ///
+        /// Bitwise Logical AND of Packed Single Precision Floating-Point Values
         /// </summary>     
-        ANDPS, // Bitwise Logical AND of Packed Single Precision Floating-Point Values
+        ANDPS,
 
         /// <summary>
-        ///
+        /// Adjust RPL Field of Segment Selector
         /// </summary>     
-        ARPL, // Adjust RPL Field of Segment Selector
+        ARPL,
 
         /// <summary>
-        ///
+        /// Bit Field Extract
         /// </summary>     
-        BEXTR, // Bit Field Extract
+        BEXTR,
 
         /// <summary>
-        ///
+        /// Blend Packed Double Precision Floating-Point Values
         /// </summary>     
-        BLENDPD, // Blend Packed Double Precision Floating-Point Values
+        BLENDPD,
 
         /// <summary>
         ///
@@ -326,9 +326,9 @@ namespace Z0
         CLTS, // Clear Task-Switched Flag in CR0
 
         /// <summary>
-        ///
+        /// Cache Line Write Back
         /// </summary>     
-        CLWB, // Cache Line Write Back
+        CLWB,
 
         /// <summary>
         /// Complement Carry Flag
@@ -351,109 +351,109 @@ namespace Z0
         CMPPD,
 
         /// <summary>
-        ///
+        /// Compare Packed Single-Precision Floating-Point Values
         /// </summary>     
-        CMPPS, // Compare Packed Single-Precision Floating-Point Values
+        CMPPS,
 
         /// <summary>
-        ///
+        /// Compare String Operands
         /// </summary>     
-        CMPS, // Compare String Operands
+        CMPS,
 
         /// <summary>
-        ///
+        /// Compare String Operands
         /// </summary>     
-        CMPSB, // Compare String Operands
+        CMPSB,
 
         /// <summary>
-        ///
+        /// Compare String Operands
         /// </summary>     
-        CMPSD, // Compare String Operands
+        CMPSD,
 
         /// <summary>
-        ///
+        /// Compare Scalar Double-Precision Floating-Point Value
         /// </summary>     
-        CMPSD_1, // Compare Scalar Double-Precision Floating-Point Value
+        CMPSD_1,
 
         /// <summary>
-        ///
+        /// Compare String Operands
         /// </summary>     
-        CMPSQ, // Compare String Operands
+        CMPSQ,
 
         /// <summary>
-        ///
+        /// Compare Scalar Single-Precision Floating-Point Value
         /// </summary>     
-        CMPSS, // Compare Scalar Single-Precision Floating-Point Value
+        CMPSS,
 
         /// <summary>
-        ///
+        /// Compare String Operands
         /// </summary>     
-        CMPSW, // Compare String Operands
+        CMPSW,
 
         /// <summary>
-        ///
+        /// Compare and Exchange
         /// </summary>     
-        CMPXCHG, // Compare and Exchange
+        CMPXCHG,
 
         /// <summary>
-        ///
+        /// Compare and Exchange Bytes
         /// </summary>     
-        CMPXCHG16B, // Compare and Exchange Bytes
+        CMPXCHG16B,
 
         /// <summary>
-        ///
+        /// Compare and Exchange Bytes
         /// </summary>     
-        CMPXCHG8B, // Compare and Exchange Bytes
+        CMPXCHG8B,
 
         /// <summary>
-        ///
+        /// Compare Scalar Ordered Double-Precision Floating-Point Values and Set EFLAGS
         /// </summary>     
-        COMISD, // Compare Scalar Ordered Double-Precision Floating-Point Values and Set EFLAGS
+        COMISD,
 
         /// <summary>
-        ///
+        /// Compare Scalar Ordered Single-Precision Floating-Point Values and Set EFLAGS
         /// </summary>     
-        COMISS, // Compare Scalar Ordered Single-Precision Floating-Point Values and Set EFLAGS
+        COMISS,
 
         /// <summary>
-        ///
+        /// CPU Identification
         /// </summary>     
-        CPUID, // CPU Identification
+        CPUID,
 
         /// <summary>
-        ///
+        /// Convert Word to Doubleword/Convert Doubleword to Quadword
         /// </summary>     
-        CQO, // Convert Word to Doubleword/Convert Doubleword to Quadword
+        CQO,
 
         /// <summary>
-        ///
+        /// Accumulate CRC32 Value
         /// </summary>     
-        CRC32, // Accumulate CRC32 Value
+        CRC32, 
 
         /// <summary>
-        ///
+        /// Convert Packed Doubleword Integers to Packed Double-Precision Floating-Point Values
         /// </summary>     
-        CVTDQ2PD, // Convert Packed Doubleword Integers to Packed Double-Precision Floating-Point Values
+        CVTDQ2PD, 
 
         /// <summary>
-        ///
+        /// Convert Packed Doubleword Integers to Packed Single-Precision Floating-Point Values
         /// </summary>     
-        CVTDQ2PS, // Convert Packed Doubleword Integers to Packed Single-Precision Floating-Point Values
+        CVTDQ2PS,
 
         /// <summary>
-        ///
+        /// Convert Packed Double-Precision Floating-Point Values to Packed Doubleword Integers
         /// </summary>     
-        CVTPD2DQ, // Convert Packed Double-Precision Floating-Point Values to Packed Doubleword Integers
+        CVTPD2DQ,
 
         /// <summary>
-        ///
+        /// Convert Packed Double-Precision FP Values to Packed Dword Integers
         /// </summary>     
-        CVTPD2PI, // Convert Packed Double-Precision FP Values to Packed Dword Integers
+        CVTPD2PI,
 
         /// <summary>
-        ///
+        /// Convert Packed Double-Precision Floating-Point Values to Packed Single-Precision Floating-Point Values
         /// </summary>     
-        CVTPD2PS, // Convert Packed Double-Precision Floating-Point Values to Packed Single-Precision Floating-Point Values
+        CVTPD2PS, 
 
         /// <summary>
         ///
@@ -3006,59 +3006,274 @@ namespace Z0
         /// </summary>     
         VPLZCNTD, 
 
+        /// <summary>
+        ///
+        /// </summary>     
         VPLZCNTQ, // Count the Number of Leading Zero Bits for Packed Dword, Packed Qword Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMADD52HUQ, // Packed Multiply of Unsigned 52-bit Unsigned Integers and Add High 52-bit Products to 64-bit Accumulators
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMADD52LUQ, // Packed Multiply of Unsigned 52-bit Integers and Add the Low 52-bit Products to Qword Accumulators
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMASKMOV, // Conditional SIMD Integer Packed Loads and Stores
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVB2M, // Convert a Vector Register to a Mask
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVD2M, // Convert a Vector Register to a Mask
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVDB, // Down Convert DWord to Byte
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVDW, // Down Convert DWord to Word
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVM2B, // Convert a Mask Register to a Vector Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVM2D, // Convert a Mask Register to a Vector Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVM2Q, // Convert a Mask Register to a Vector Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVM2W, // Convert a Mask Register to a Vector Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVQ2M, // Convert a Vector Register to a Mask
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVQB, // Down Convert QWord to Byte
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVQD, // Down Convert QWord to DWord
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVQW, // Down Convert QWord to Word
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVSDB, // Down Convert DWord to Byte
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVSDW, // Down Convert DWord to Word
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVSQB, // Down Convert QWord to Byte
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVSQD, // Down Convert QWord to DWord
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVSQW, // Down Convert QWord to Word
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVSWB, // Down Convert Word to Byte
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVUSDB, // Down Convert DWord to Byte
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVUSDW, // Down Convert DWord to Word
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVUSQB, // Down Convert QWord to Byte
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVUSQD, // Down Convert QWord to DWord
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVUSQW, // Down Convert QWord to Word
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVUSWB, // Down Convert Word to Byte
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVW2M, // Convert a Vector Register to a Mask
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMOVWB, // Down Convert Word to Byte
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPMULTISHIFTQB, // Select Packed Unaligned Bytes from Quadword Sources
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPROLD, // Bit Rotate Left
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPROLQ, // Bit Rotate Left
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPROLVD, // Bit Rotate Left
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPROLVQ, // Bit Rotate Left
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPRORD, // Bit Rotate Right
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPRORQ, // Bit Rotate Right
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPRORVD, // Bit Rotate Right
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPRORVQ, // Bit Rotate Right
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPSCATTERDD, // Scatter Packed Dword, Packed Qword with Signed Dword, Signed Qword Indices
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPSCATTERDQ, // Scatter Packed Dword, Packed Qword with Signed Dword, Signed Qword Indices
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPSCATTERQD, // Scatter Packed Dword, Packed Qword with Signed Dword, Signed Qword Indices
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPSCATTERQQ, // Scatter Packed Dword, Packed Qword with Signed Dword, Signed Qword Indices
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPSLLVD, // Variable Bit Shift Left Logical
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPSLLVQ, // Variable Bit Shift Left Logical
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPSLLVW, // Variable Bit Shift Left Logical
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPSRAVD, // Variable Bit Shift Right Arithmetic
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPSRAVQ, // Variable Bit Shift Right Arithmetic
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPSRAVW, // Variable Bit Shift Right Arithmetic
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPSRLVD, // Variable Bit Shift Right Logical
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPSRLVQ, // Variable Bit Shift Right Logical
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPSRLVW, // Variable Bit Shift Right Logical
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPTERNLOGD, // Bitwise Ternary Logic
+
+        /// <summary>
+        ///
+        /// </summary>     
         VPTERNLOGQ, // Bitwise Ternary Logic
         VPTESTMB, // Logical AND and Set Mask
         VPTESTMD, // Logical AND and Set Mask
@@ -3185,8 +3400,5 @@ namespace Z0
         /// Test If In Transactional Execution
         /// </summary>     
         XTEST,
-
     }
-
-
 }

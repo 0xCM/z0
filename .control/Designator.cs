@@ -6,6 +6,7 @@ namespace Z0.Designators
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using D = Z0.Designators;
 
@@ -64,6 +65,12 @@ namespace Z0.Designators
 
             D.RevealLib.Designated,
             D.RevealApp.Designated
-            );                 
+            );               
+
+        public IEnumerable<IOperationCatalog> Catalogs
+            => from d in Designated.Designates 
+                where d is ICatalogProvider
+                select (d as ICatalogProvider).Catalog;
+
    }
 }

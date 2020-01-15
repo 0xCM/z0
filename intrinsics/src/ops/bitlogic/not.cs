@@ -23,7 +23,7 @@ namespace Z0
         /// Computes the bitwise negation of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vnot(Vector128<sbyte> x)
             => Xor(x, CompareEqual(x, x));
 
@@ -31,7 +31,7 @@ namespace Z0
         /// Computes the bitwise negation of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vnot(Vector128<byte> x)
             => Xor(x, CompareEqual(x, x));
 
@@ -39,7 +39,7 @@ namespace Z0
         /// Computes the bitwise negation of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<short> vnot(Vector128<short> x)
             => Xor(x, CompareEqual(x, x));
 
@@ -47,7 +47,7 @@ namespace Z0
         /// Computes the bitwise negation of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ushort> vnot(Vector128<ushort> x)
             => Xor(x, CompareEqual(x, x));
 
@@ -55,7 +55,7 @@ namespace Z0
         /// Computes the bitwise negation of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<int> vnot(Vector128<int> x)
             => Xor(x, CompareEqual(x, x));
 
@@ -63,7 +63,7 @@ namespace Z0
         /// Computes the bitwise negation of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<uint> vnot(Vector128<uint> x)
             => Xor(x, CompareEqual(x, x));
 
@@ -71,7 +71,7 @@ namespace Z0
         /// Computes the bitwise negation of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<long> vnot(Vector128<long> x)
             => vnot(x.AsUInt32()).AsInt64();
 
@@ -79,7 +79,7 @@ namespace Z0
         /// Computes the bitwise negation of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ulong> vnot(Vector128<ulong> x)
             => vnot(x.AsUInt32()).AsUInt64();
 
@@ -87,7 +87,7 @@ namespace Z0
         /// Computes the bitwise negation of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vnot(Vector256<sbyte> x)
             => Xor(x, CompareEqual(x, x));
 
@@ -95,7 +95,7 @@ namespace Z0
         /// Computes the bitwise negation of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vnot(Vector256<byte> x)
             => Xor(x, CompareEqual(x, x));
 
@@ -103,7 +103,7 @@ namespace Z0
         /// Computes the bitwise negation of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vnot(Vector256<short> x)
             => Xor(x, CompareEqual(x, x));
 
@@ -111,7 +111,7 @@ namespace Z0
         /// Computes the bitwise negation of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vnot(Vector256<ushort> x)
             => Xor(x, CompareEqual(x, x));
 
@@ -119,7 +119,7 @@ namespace Z0
         /// Computes the bitwise negation of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vnot(Vector256<int> x)
             => Xor(x, CompareEqual(x, x));
 
@@ -127,7 +127,7 @@ namespace Z0
         /// Computes the bitwise negation of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vnot(Vector256<uint> x)
             => Xor(x, CompareEqual(x, x));
 
@@ -135,7 +135,7 @@ namespace Z0
         /// Computes the bitwise negation of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<long> vnot(Vector256<long> x)
             => Xor(x, CompareEqual(x, x));
 
@@ -143,7 +143,7 @@ namespace Z0
         /// Computes the bitwise negation of the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> vnot(Vector256<ulong> x)
             => Xor(x, CompareEqual(x, x));
  

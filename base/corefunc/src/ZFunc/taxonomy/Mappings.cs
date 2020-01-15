@@ -29,7 +29,7 @@ namespace Z0
     /// <typeparam name="U">The source operand type</typeparam>
     /// <typeparam name="T">The target operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVectorMap<U,V> : IMap<U,V>
+    public interface IVectorMap<U,V> : IVFunc, IMap<U,V>
         where U : struct
         where V : struct
     {
@@ -54,6 +54,7 @@ namespace Z0
         where T1 : unmanaged
         where T2 : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.UnaryConverter | FunctionKind.Vectorized;
 
     }
 
@@ -67,6 +68,7 @@ namespace Z0
         where S : unmanaged
         where T : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.UnaryConverter | FunctionKind.V128;
 
     }
 
@@ -79,6 +81,7 @@ namespace Z0
     public interface IVMap128<T> : IVMap128<T,T>
         where T : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.UnaryOp | FunctionKind.V128;
 
     }
 
@@ -92,6 +95,7 @@ namespace Z0
         where S : unmanaged
         where T : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.UnaryConverter | FunctionKind.V256;
 
     }
 
@@ -105,6 +109,7 @@ namespace Z0
         where T : unmanaged
     {
 
+        FunctionKind IFunc.Kind => FunctionKind.UnaryOp | FunctionKind.V256;
 
     }
 }

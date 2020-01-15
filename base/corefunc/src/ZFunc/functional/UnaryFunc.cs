@@ -27,4 +27,21 @@ namespace Z0
 
     }
 
+    public static class UnaryPred
+    {
+        [MethodImpl(Inline)]
+        public static Span<bit> apply<F,T>(F f, ReadOnlySpan<T> src, Span<bit> dst)
+            where F : IUnaryPred<T>
+        {
+            var count = dst.Length;
+            ref readonly var input = ref head(src);
+            ref var target = ref head(dst);
+
+            for(var i=0; i<count; i++)
+                seek(ref target, i) = f.Invoke(skip(in input, i));
+            return dst;
+        }
+
+    }
+
 }

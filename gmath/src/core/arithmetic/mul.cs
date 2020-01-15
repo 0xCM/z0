@@ -12,35 +12,35 @@ namespace Z0
 
     partial class math
     {
-       [MethodImpl(Inline)]
+       [MethodImpl(Inline), Op]
         public static sbyte mul(sbyte a, sbyte rhs)
             => (sbyte)(a * rhs);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte mul(byte a, byte b)
             => (byte)(a * b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static short mul(short a, short b)
             => (short)(a * b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort mul(ushort a, ushort b)
             => (ushort)(a * b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int mul(int a, int b)
             => a * b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint mul(uint a, uint b)
             => a * b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static long mul(long a, long b)
             => a * b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong mul(ulong a, ulong b)
             => a * b;
 

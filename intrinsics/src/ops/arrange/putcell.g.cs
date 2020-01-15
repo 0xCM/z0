@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="index">The 0-based component index</param>
         /// <param name="dst">The target vector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static Vector128<T> vputcell<T>(T src, int index, Vector128<T> dst)
             where T : unmanaged
                 => dst.WithElement(index, src);
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="index">The 0-based component index</param>
         /// <param name="dst">The target vector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static Vector256<T> vputcell<T>(T src, int index, Vector256<T> dst)
             where T : unmanaged
                 => dst.WithElement(index, src);

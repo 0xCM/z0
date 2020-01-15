@@ -995,6 +995,22 @@ namespace Z0
         }
 
         /// <summary>
+        /// Gets the value of a constant field if it exists; otherwise, returns a default value
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        /// <param name="name">The name of the field</param>
+        /// <param name="@default">The value to return if the field is not found</param>
+        /// <typeparam name="T">The field value type</typeparam>
+        public static T LiteralFieldValue<T>(this Type t, string name, T @default = default)
+        {
+            var f = t.Fields().Literal().FirstOrDefault();
+            if(f != null)
+                return (T)f.GetValue(null);
+            else
+                return @default;
+        }
+
+        /// <summary>
         /// Creates an instance of a type and casts the instance value as specified by a type parameter
         /// </summary>
         /// <typeparam name="T">The cast instance type</typeparam>

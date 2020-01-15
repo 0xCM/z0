@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<short> vhadds(Vector128<short> x, Vector128<short> y)
             => HorizontalAddSaturate(x, y);
 
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vhadds(Vector256<short> x, Vector256<short> y)
             => HorizontalAddSaturate(x, y);
     }

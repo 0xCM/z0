@@ -17,7 +17,6 @@ namespace Z0
 
     public abstract class AsmExpr : IAsmExpr
     {
-        public static AsmInstrExpr Define(MnemonicKind mnemonic, params IAsmExpr[] args)
-            => new AsmInstrExpr(mnemonic, args);
+
     }
 }

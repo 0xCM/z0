@@ -49,6 +49,25 @@ namespace Z0
             };
 
         /// <summary>
+        /// Specifies the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static PrimalKind kind(PrimalId k)
+            => k switch {
+                PrimalId.U8 => PrimalKind.U8,
+                PrimalId.I8 => PrimalKind.I8,
+                PrimalId.U16 => PrimalKind.U16,
+                PrimalId.I16 => PrimalKind.I16,
+                PrimalId.U32 => PrimalKind.U32,
+                PrimalId.I32 => PrimalKind.I32,
+                PrimalId.I64 => PrimalKind.I64,
+                PrimalId.U64 => PrimalKind.U64,
+                PrimalId.F32 => PrimalKind.F32,
+                PrimalId.F64 => PrimalKind.F64,
+                _ => throw unsupported(k)
+            };
+
+        /// <summary>
         /// Determines the number of bits covered by a k-kinded type
         /// </summary>
         /// <param name="k">The type kine</param>

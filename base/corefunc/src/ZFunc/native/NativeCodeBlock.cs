@@ -12,9 +12,9 @@ namespace Z0
 	/// <summary>
 	/// Represents a native code block
 	/// </summary>
-	public readonly struct CodeBlock 
+	public readonly struct NativeCodeBlock 
     {
-		public static CodeBlock Empty => new CodeBlock(0, new byte[]{0});
+		public static NativeCodeBlock Empty => new NativeCodeBlock(0, new byte[]{0});
 
 		/// <summary>
 		/// The location of the leading segment
@@ -26,7 +26,7 @@ namespace Z0
 		/// </summary>
     	public readonly byte[] Data;
 
-    	public CodeBlock(ulong address, byte[] data) 
+    	public NativeCodeBlock(ulong address, byte[] data) 
         {
 			Address = address;
 			Data = data;

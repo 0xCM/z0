@@ -18,26 +18,23 @@ namespace Z0
 
         AsmArchive(string subject)
         {
-            this.Subject = FolderName.Define(subject);
-            this.Location = LogPaths.The.AsmDataDir(this.Subject);
+            Location = LogPaths.The.AsmDataDir(FolderName.Define(subject));
         }
-
-        FolderName Subject {get;}
-
+    
         FolderPath Location {get;}
 
         public void SaveAsm(AsmCode asm)
-            => Paths.AsmHexPath(Subject, asm.Name).WriteText(asm.Format());
+            => Paths.AsmHexPath(Location, asm.Name).WriteText(asm.Format());
         
         public void SaveAsm(InstructionBlock block, Moniker m)
         {
-            Paths.AsmDetailPath(Subject, m).WriteText(block.Format());
+            Paths.AsmDetailPath(Location, m).WriteText(block.Format());
             SaveAsm(AsmCode.Load(block.Encoded, m));
         }
 
         public void Save(AsmCodeSet src)
         {
-            Paths.AsmDetailPath(Subject, src.Moniker).WriteText(src.Decoded.Format());
+            Paths.AsmDetailPath(Location, src.Moniker).WriteText(src.Decoded.Format());
             SaveAsm(AsmCode.Load(src.Decoded.Encoded, src.Moniker));
         }
 
@@ -45,7 +42,7 @@ namespace Z0
         {
             SaveAsm(op.NativeData.Instructions(), op.Moniker);
             if(cil != null)
-                Paths.CilPath(Subject,op.Moniker).WriteText(cil.Format());                
+                Paths.CilPath(Location,op.Moniker).WriteText(cil.Format());                
         }
 
         public void Clear()
@@ -54,7 +51,7 @@ namespace Z0
         }
 
         public AsmCode ReadCode(Moniker m)
-            => AsmCode.Parse(Paths.AsmHexPath(Subject, m).ReadText(),m);
+            => AsmCode.Parse(Paths.AsmHexPath(Location, m).ReadText(),m);
 
         public InstructionBlock ReadInstructions(Moniker m)
             => ReadCode(m).DistillInstructions();          

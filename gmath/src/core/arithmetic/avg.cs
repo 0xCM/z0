@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte avgz(byte a, byte b)
             => (byte)((a & b) + ((a ^ b) >> 1));
 
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort avgz(ushort a, ushort b)
             => (ushort)((a & b) + ((a ^ b) >> 1));
 
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint avgz(uint a, uint b)
             => (a & b) + ((a ^ b) >> 1);
 
@@ -47,10 +47,9 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong avgz(ulong a, ulong b)
             => (a & b) + ((a ^ b) >> 1);
-
 
         /// <summary>
         /// Takes the average of the operands, rounding toward infinity
@@ -58,7 +57,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte avgi(byte a, byte b)
             => (byte)((a | b) - ((a ^ b) >> 1));
 
@@ -68,7 +67,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort avgi(ushort a, ushort b)
             => (ushort)((a | b) - ((a ^ b) >> 1));
 
@@ -78,7 +77,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint avgi(uint a, uint b)
             => (a | b) - ((a ^ b) >> 1);
 
@@ -88,7 +87,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong avgi(ulong a, ulong b)
             => (a | b) - ((a ^ b) >> 1);
     }

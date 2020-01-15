@@ -20,7 +20,10 @@ namespace Z0
         /// Enumerates the blocked data type definitions
         /// </summary>
         public static IEnumerable<Type> Types
-            => items(typeof(Block16<>), typeof(Block32<>), typeof(Block64<>), typeof(Block128<>), typeof(Block256<>), typeof(Block512<>));
+            => items(
+                typeof(Block16<>), typeof(Block32<>), typeof(Block64<>), typeof(Block128<>), 
+                typeof(Block256<>), typeof(Block512<>)
+                );
 
         /// <summary>
         /// Determines whether a method accepts and/or returns at least one blocked parameter
@@ -209,7 +212,6 @@ namespace Z0
             else
                 return BlockKind.None;
         }
-
 
         [MethodImpl(Inline)]
         public static BlockKind kind<T>(N16 w, T t = default)
@@ -479,8 +481,6 @@ namespace Z0
                 return BlockKind.None;
         }
 
-
-
         [MethodImpl(Inline)]
         static BlockKind kind16_u<T>(T t = default)
             where T : struct
@@ -586,7 +586,6 @@ namespace Z0
             else
                 return kind128_u<T>();
         }
-
 
         [MethodImpl(Inline)]
         static BlockKind kind128_u<T>(T t = default)
@@ -719,7 +718,5 @@ namespace Z0
             else
                 return BlockKind.None;            
         }
-
-
     }
 }

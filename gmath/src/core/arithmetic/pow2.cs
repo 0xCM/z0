@@ -11,11 +11,11 @@ namespace Z0
 
     partial class math
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong pow2(int exp)
             => 1ul << exp;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong pow2m1(int exp)
             => pow2(exp) - 1;
     }

@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Floats)]
         public static T ceil<T>(T src)
             where T : unmanaged
         {
@@ -32,7 +32,7 @@ namespace Z0
         /// Computes the smallest integral value greater than or equal to the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float ceil(float src)
             => MathF.Ceiling(src);
 
@@ -40,7 +40,7 @@ namespace Z0
         /// Computes the smallest integral value greater than or equal to the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double ceil(double src)
             => Math.Ceiling(src);
 
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="max">The maximum value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float clamp(float src, float max)
             => src > max ? max : src;
 
@@ -58,7 +58,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="max">The maximum value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double clamp(double src, double max)
             => src > max ? max : src;
 

@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static T sqrt<T>(T src)
             where T : unmanaged
         {
@@ -23,20 +23,5 @@ namespace Z0
             else            
                 throw unsupported<T>();
         }           
-
-        [MethodImpl(Inline)]
-        public static ref T sqrt<T>(ref T src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                fmath.sqrt(ref float32(ref src));
-            else if(typeof(T) == typeof(double))
-                fmath.sqrt(ref float64(ref src));
-            else 
-                throw unsupported<T>();
-            return ref src;
-        }           
-
-
     }
 }

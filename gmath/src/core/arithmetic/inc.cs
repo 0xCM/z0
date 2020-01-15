@@ -19,7 +19,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static sbyte inc(sbyte src)
             => ++src;
 
@@ -27,7 +27,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte inc(byte src)
             => ++src;
 
@@ -35,7 +35,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static short inc(short src)
             => ++src;
 
@@ -43,7 +43,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort inc(ushort src)
             => ++src;
 
@@ -51,7 +51,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int inc(int src)
             => ++src;
 
@@ -59,7 +59,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint inc(uint src)
             => ++src;
 
@@ -67,7 +67,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static long inc(long src)
             => ++src;
 
@@ -75,7 +75,7 @@ namespace Z0
         /// Increments the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong inc(ulong src)
             => ++src;
     }

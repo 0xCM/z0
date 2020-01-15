@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class ShiftOpAttribute : OpAttribute
+    public class ShiftOpAttribute : OpKindAttribute
     {
         static readonly string kindName = typeof(ShiftOpKind).DisplayName();
 

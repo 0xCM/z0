@@ -13,7 +13,7 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static ref ulong log2(ref ulong dst, ref ulong x, ulong power)
+        static ref ulong log2(ref ulong dst, ref ulong x, ulong power)
         {
             if(x >= 1ul << (int)power)
             {
@@ -23,7 +23,7 @@ namespace Z0
             return ref dst;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong log2(ulong src)
         {
             var x = 0ul;
@@ -39,19 +39,19 @@ namespace Z0
             return x;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong log2(int src)
             => log2((ulong)src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint log2(uint src)
             => (uint)log2((ulong)src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte log2(byte src)
             => (byte)log2((ulong)src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort log2(ushort src)
             => (ushort)log2((ulong)src);
 

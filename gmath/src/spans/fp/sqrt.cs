@@ -17,7 +17,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i< src.Length; i++)
-                gfp.sqrt(ref src[i]);
+                src[i] = gfp.sqrt(src[i]);
             return src;
         }
 

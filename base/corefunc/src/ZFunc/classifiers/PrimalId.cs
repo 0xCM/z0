@@ -11,7 +11,6 @@ namespace Z0
 
     using static zfunc;
 
-
     public enum PrimalId : uint
     {
         U8 = (1u << 16),

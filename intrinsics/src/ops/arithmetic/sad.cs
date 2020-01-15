@@ -22,6 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs"></param>
         /// <param name="rhs"></param>
+        [MethodImpl(Inline)]
         public static Vector128<ushort> vsad(Vector128<byte> lhs, Vector128<byte> rhs)
             => SumAbsoluteDifferences(lhs,rhs);
 
@@ -34,6 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs"></param>
         /// <param name="rhs"></param>
+        [MethodImpl(Inline)]
         public static Vector256<ushort> vsad(Vector256<byte> lhs, Vector256<byte> rhs)
             => SumAbsoluteDifferences(lhs,rhs);
     }

@@ -11,6 +11,12 @@ namespace Z0
 
     partial class gmathops
     {
+        public static byte alteven_u8()
+            => gmath.alteven<byte>();
+        
+        public static byte altodd_u8()
+            => gmath.altodd<byte>();
+
         public static ulong altodd_u64
             => gmath.altodd<ulong>();
         

@@ -12,7 +12,7 @@ namespace Z0
 
     partial class mathspan
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), SpanOp]
         public static Span<T> round<T>(ReadOnlySpan<T> src, int scale, Span<T> dst)
             where T : unmanaged
         {                        

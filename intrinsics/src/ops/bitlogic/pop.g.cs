@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="x">The first vector</param>
         /// <param name="y">The second vector</param>
         /// <param name="z">The third vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static uint vpop<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T : unmanaged
                 => dinx.vpop(v64u(x), v64u(y), v64u(z));
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="x">The first vector</param>
         /// <param name="y">The second vector</param>
         /// <param name="z">The third vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static uint vpop<T>(Vector256<T> x, Vector256<T> y, Vector256<T> z)
             where T : unmanaged
                 => dinx.vpop(v64u(x), v64u(y), v64u(z));
@@ -50,7 +50,7 @@ namespace Z0
         /// <remarks>
         /// This is a vectorization of the scalar algorithm found at https://www.chessprogramming.org/Population_Count
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint vpop(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
         {
             const ulong kf = BitMasks.Lsb64x8x1;            
@@ -91,7 +91,7 @@ namespace Z0
         /// <remarks>
         /// This is a vectorization of the scalar algorithm found at https://www.chessprogramming.org/Population_Count
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint vpop(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
         {
             const ulong kf = BitMasks.Lsb64x8x1; 

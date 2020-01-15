@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static void bitchars<T>(T src, Span<char> dst, int offset = 0)
             where T : unmanaged
                 => BitStore.bitchars(src,dst,offset);
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static ReadOnlySpan<char> bitchars<T>(in T src)
             where T : unmanaged
         {
@@ -44,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static Span<char> bitchars<T>(ReadOnlySpan<T> src, int? maxlen = null)
             where T : unmanaged
         {
@@ -58,7 +58,7 @@ namespace Z0
             return maxlen != null && dst.Length >= maxlen ?  dst.Slice(0,maxlen.Value) :  dst;
         }
         
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static Span<char> bitchars<T>(Span<T> src, int? maxlen = null)
             where T : unmanaged
                 => bitchars(src.ReadOnly(), maxlen);    

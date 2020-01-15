@@ -22,7 +22,10 @@ namespace Z0
         public static implicit operator PrimalKind<T>(T src)
             => default;
 
-        public PrimalKind Classifier {[MethodImpl(Inline)] get  => PrimalType.kind<T>();}
+        public PrimalKind Classifier 
+        {
+            [MethodImpl(Inline)] 
+            get => PrimalType.kind<T>();
+        }
     }
-
 }

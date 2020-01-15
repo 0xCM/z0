@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static sbyte nor(sbyte a, sbyte b)
             => not(or(a,b));
 
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte nor(byte a, byte b)
             => not(or(a,b));
 
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static short nor(short a, short b)
             => not(or(a,b));
 
@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort nor(ushort a, ushort b)
             => not(or(a,b));
 
@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int nor(int a, int b)
             => ~ (a | b);
 
@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint nor(uint a, uint b)
             => ~ (a | b);
 
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static long nor(long a, long b)
             => ~ (a | b);
 
@@ -79,7 +79,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong nor(ulong a, ulong b)
             => ~ (a | b);
     }

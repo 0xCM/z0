@@ -17,7 +17,7 @@ namespace Z0
         /// Creates a scalar vector from the lower 64 bits of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static Vector128<T> vlo<T>(Vector128<T> src)
             where T : unmanaged
                 =>  vgeneric<T>(vzerohi(v64u(src)));
@@ -26,7 +26,7 @@ namespace Z0
         /// Extracts the lo 128-bit lane of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static Vector128<T> vlo<T>(Vector256<T> src)
             where T : unmanaged
         {
@@ -48,7 +48,7 @@ namespace Z0
         /// Extracts the lo 128-bit lane of the source vector to scalar targets
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static void vlo<T>(Vector256<T> src, out ulong x0, out ulong x1)
             where T : unmanaged
                 => dinx.vlo(v64u(src), out x0, out x1);
@@ -57,7 +57,7 @@ namespace Z0
         /// Extracts the lo 128-bit lane of the source vector to a pair
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static ref Pair<ulong> vlo<T>(Vector256<T> src, ref Pair<ulong> dst)
             where T : unmanaged        
                 => ref dinx.vlo(v64u(src), ref dst);
@@ -66,7 +66,7 @@ namespace Z0
         /// Extracts the lower 256-bits from the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static Vector256<T> vlo<T>(Vector512<T> src)
             where T : unmanaged
                 => src.Lo;       
@@ -75,7 +75,7 @@ namespace Z0
         /// Extracts the lower 256-bits from the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static Vector512<T> vlo<T>(Vector1024<T> src)
             where T : unmanaged
                 => src.Lo;       

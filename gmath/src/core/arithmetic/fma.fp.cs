@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         /// <typeparam name="T">The floating point operand type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static T fma<T>(T x, T y, T z)
             where T : unmanaged
         {            
@@ -35,11 +35,11 @@ namespace Z0
 
     partial class fmath
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float fma(float x, float y, float z)
             => MathF.FusedMultiplyAdd(x,y,z);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double fma(double x, double y, double z)
             => Math.FusedMultiplyAdd(x, y, z);
     }    

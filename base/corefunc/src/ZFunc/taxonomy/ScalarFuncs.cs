@@ -54,13 +54,13 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVScalarFunc<W,V,T,K> : IFunc<V,K>
+    public interface IVScalarFunc<W,V,T,K> : IVFunc, IFunc<V,K>
         where W : unmanaged, ITypeNat
         where V : struct
         where T : unmanaged
         where K : unmanaged
     {
-
+        FunctionKind IFunc.Kind => FunctionKind.UnaryMeasure | FunctionKind.Vectorized;
     }
 
     /// <summary>
@@ -71,12 +71,13 @@ namespace Z0
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVScalarFuncImm8<W,V,T,K> : IFunc<V,byte,K>
+    public interface IVScalarFuncImm8<W,V,T,K> : IVFunc, IFunc<V,byte,K>
         where W : unmanaged, ITypeNat
         where V : struct
         where T : unmanaged
         where K : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.BinaryMeasure | FunctionKind.Vectorized;
 
     }
 
@@ -91,7 +92,7 @@ namespace Z0
     /// <typeparam name="T2">The component type of the second vector</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVScalarFunc<W1,W2,V1,V2,T1,T2,K> : IFunc<V1,V2,K>
+    public interface IVScalarFunc<W1,W2,V1,V2,T1,T2,K> : IVFunc, IFunc<V1,V2,K>
         where W1 : unmanaged, ITypeNat
         where W2 : unmanaged, ITypeNat
         where V1 : struct
@@ -100,6 +101,7 @@ namespace Z0
         where T2 : unmanaged
         where K : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.BinaryMeasure | FunctionKind.Vectorized;
 
     }
 
@@ -114,7 +116,7 @@ namespace Z0
     /// <typeparam name="T2">The component type of the second vector</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVScalarFuncImm8<W1,W2,V1,V2,T1,T2,K> : IFunc<V1,V2,byte,K>
+    public interface IVScalarFuncImm8<W1,W2,V1,V2,T1,T2,K> : IVFunc, IFunc<V1,V2,byte,K>
         where W1 : unmanaged, ITypeNat
         where W2 : unmanaged, ITypeNat
         where V1 : struct
@@ -123,6 +125,7 @@ namespace Z0
         where T2 : unmanaged
         where K : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.TernaryMeasure | FunctionKind.Vectorized;
 
     }
 
@@ -140,7 +143,7 @@ namespace Z0
     /// <typeparam name="T3">The component type of the third vector</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVScalarFunc<W1,W2,W3,V1,V2,V3,T1,T2,T3,K> : IFunc<V1,V2,V3,K>
+    public interface IVScalarFunc<W1,W2,W3,V1,V2,V3,T1,T2,T3,K> : IVFunc, IFunc<V1,V2,V3,K>
         where W1 : unmanaged, ITypeNat
         where W2 : unmanaged, ITypeNat
         where V1 : struct
@@ -149,6 +152,7 @@ namespace Z0
         where T2 : unmanaged
         where K : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.TernaryMeasure | FunctionKind.Vectorized;
 
     }
 
@@ -162,7 +166,7 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
-
+        FunctionKind IFunc.Kind => FunctionKind.UnaryMeasure | FunctionKind.V128;
     }
 
     /// <summary>
@@ -175,6 +179,7 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.BinaryMeasure | FunctionKind.V128;
 
     }
 
@@ -270,6 +275,7 @@ namespace Z0
         where K : unmanaged
         where T : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.UnaryMeasure | FunctionKind.V256;
 
     }
 
@@ -283,6 +289,7 @@ namespace Z0
         where K : unmanaged
         where T : unmanaged
     {
+        FunctionKind IFunc.Kind => FunctionKind.BinaryMeasure | FunctionKind.V256;
 
     }
 
@@ -324,7 +331,7 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
-
+        FunctionKind IFunc.Kind => FunctionKind.BinaryMeasure | FunctionKind.V256;
     }    
 
     /// <summary>
@@ -351,7 +358,7 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
-
+        FunctionKind IFunc.Kind => FunctionKind.TernaryMeasure | FunctionKind.V256;
     }    
 
     /// <summary>

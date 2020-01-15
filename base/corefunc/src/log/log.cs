@@ -15,11 +15,6 @@ namespace Z0
         static LogPaths Paths 
             => LogPaths.The;
             
-        public static void WriteAsmInfo(string data, FolderName subfolder, Moniker m)            
-            => Paths.AsmDetailPath(subfolder, m).Overwrite(data);
-        
-        public static string ReadAsmInfo(FolderName subfolder, Moniker m)            
-            => Paths.AsmDetailPath(subfolder, m).ReadText();
 
         public static FilePath LogBenchmarks<R>(string basename, R[] records, LogWriteMode mode = LogWriteMode.Create, bool header = true, char delimiter = AsciSym.Pipe)
             where R : IRecord

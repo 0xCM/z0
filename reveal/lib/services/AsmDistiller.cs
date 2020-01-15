@@ -12,7 +12,6 @@ namespace Z0
 
 	using Iced.Intel;
     
-
     using AsmOpKind = Iced.Intel.OpKind;
     
     using static Iced.Intel.OpKind;
@@ -65,11 +64,12 @@ namespace Z0
                 var instruction = asm.Instructions[i];
                 var offset = (ushort)(instruction.IP - asm.StartAddress);
                 var encoded = codespan.Slice(offset, instruction.ByteLength).ToArray();
-                var operands = instruction.DistillOperands(asm);                
+                //var operands = instruction.DistillOperands(asm);                
+                var operands = instruction.Operands(asm.StartAddress);
                 var mnemonic = instruction.Mnemonic.ToString().ToUpper();
                 var opcode = instruction.Code.ToString();
                 var enckind = instruction.Encoding == EncodingKind.Legacy ? string.Empty : instruction.Encoding.ToString();
-                inxs[i] = new AsmInstructionInfo(offset, inxsfmt[i], mnemonic, opcode, operands, enckind, encoded);
+                inxs[i] = AsmInstructionInfo.Define(offset, inxsfmt[i], mnemonic, opcode, operands, enckind, encoded);
             }
 
             return new AsmFuncInfo(asm.StartAddress, asm.EndAddress, src.MethodSig, inxs, code);            
@@ -89,7 +89,7 @@ namespace Z0
                 var reg = operandKind == AsmOpKind.Register ? instruction.RegisterInfo(j) : null;
                 var mem = operandKind.IsMemory() ? instruction.MemoryInfo(j) : null;
                 var branch = operandKind.IsBranch() ? instruction.BranchInfo(j, startaddress) : null;
-                args[j] = new AsmOperandInfo(j, operandKind.ToString(), imm, mem, reg, branch);
+                args[j] = AsmOperandInfo.Define(j, operandKind.ToString(), imm, mem, reg, branch);
             }
             return args;
         }
@@ -102,27 +102,23 @@ namespace Z0
             var mnemonic = instruction.Mnemonic.ToString().ToUpper();
             var opcode = instruction.Code.ToString();
             var enckind = instruction.Encoding == EncodingKind.Legacy ? string.Empty : instruction.Encoding.ToString();            
-            return new AsmInstructionInfo(offset, formatted, mnemonic, opcode, operands, enckind, encoded);
+            return AsmInstructionInfo.Define(offset, formatted, mnemonic, opcode, operands, enckind, encoded);
         }
 
-        /// <summary>
-        /// Extracts operand information from an instruction
-        /// </summary>
-        /// <param name="inx">The source instruction</param>
-        static AsmOperandInfo[] DistillOperands(this Instruction inx, MethodAsmBody asm)        
-        {
-            var args = new AsmOperandInfo[inx.OpCount];
-            for(byte j=0; j< inx.OpCount; j++)
-            {
-                var operandKind = inx.GetOpKind(j);
-                var imm = inx.ImmediateInfo(j);
-                var reg = operandKind == AsmOpKind.Register ? inx.RegisterInfo(j) : null;
-                var mem = operandKind.IsMemory() ? inx.MemoryInfo(j) : null;
-                var branch = operandKind.IsBranch() ? inx.BranchInfo(j, asm.StartAddress) : null;
-                args[j] = new AsmOperandInfo(j, operandKind.ToString(), imm, mem, reg, branch);
-            }
-            return args;
-        }
+        // static AsmOperandInfo[] DistillOperands(this Instruction inx, MethodAsmBody asm)        
+        // {
+        //     var args = new AsmOperandInfo[inx.OpCount];
+        //     for(byte j=0; j< inx.OpCount; j++)
+        //     {
+        //         var operandKind = inx.GetOpKind(j);
+        //         var imm = inx.ImmediateInfo(j);
+        //         var reg = operandKind == AsmOpKind.Register ? inx.RegisterInfo(j) : null;
+        //         var mem = operandKind.IsMemory() ? inx.MemoryInfo(j) : null;
+        //         var branch = operandKind.IsBranch() ? inx.BranchInfo(j, asm.StartAddress) : null;
+        //         args[j] = AsmOperandInfo.Define(j, operandKind.ToString(), imm, mem, reg, branch);
+        //     }
+        //     return args;
+        // }
 
         /// <summary>
         /// Extracts register information, if applicable, from an instruction operand
@@ -202,15 +198,15 @@ namespace Z0
                 switch(kind)
                 {
                     case AsmOpKind.NearBranch16:
-                        return new AsmBranchInfo(BitSize.x16, instruction.NearBranch16, true, baseAddress);
+                        return new AsmBranchInfo(16, instruction.NearBranch16, true, baseAddress);
                     case AsmOpKind.NearBranch32:
-                        return new AsmBranchInfo(BitSize.x32, instruction.NearBranch32, true, baseAddress);
+                        return new AsmBranchInfo(32, instruction.NearBranch32, true, baseAddress);
                     case AsmOpKind.NearBranch64:
-                        return new AsmBranchInfo(BitSize.x64, instruction.NearBranch64, true, baseAddress);
+                        return new AsmBranchInfo(64, instruction.NearBranch64, true, baseAddress);
                     case AsmOpKind.FarBranch16:
-                        return new AsmBranchInfo(BitSize.x16, instruction.FarBranch16, false, baseAddress);
+                        return new AsmBranchInfo(16, instruction.FarBranch16, false, baseAddress);
                     case AsmOpKind.FarBranch32:
-                        return new AsmBranchInfo(BitSize.x32, instruction.FarBranch32, false, baseAddress);
+                        return new AsmBranchInfo(32, instruction.FarBranch32, false, baseAddress);
                 }
             }
 
@@ -229,27 +225,27 @@ namespace Z0
             int size = kind.GetImmediateSize();
             if(size != 0)
             {
-                var sinx = kind.IsSignExtendedImmediate();
+                var signed = kind.IsSignExtendedImmediate();
                 var imm = instruction.GetImmediate(operand);
                 switch(size)
                 {
                     case Pow2.T03:
-                        return Imm8.Define((byte)imm).Description;
+                        return ImmInfo.Define(size, imm);
                     case Pow2.T04:
-                        if(sinx)
-                            return Imm16i.Define((short)imm).Description;
+                        if(signed)
+                            return ImmInfo.Define(size, (long)imm);
                         else 
-                            return Imm16.Define((ushort)imm).Description;
+                            return ImmInfo.Define(size, imm);
                     case Pow2.T05:
-                        if(sinx)
-                            return Imm32i.Define((int)imm).Description;
+                        if(signed)
+                            return ImmInfo.Define(size, (long)imm);
                         else 
-                            return Imm32.Define((uint)imm).Description;                    
+                            return ImmInfo.Define(size, imm);
                     case Pow2.T06:
-                        if(sinx)
-                            return Imm64i.Define((long)imm).Description;
+                        if(signed)
+                            return ImmInfo.Define(size, (long)imm);
                         else 
-                            return Imm64.Define(imm).Description;                    
+                            return ImmInfo.Define(size, imm);
                 }
             }
 

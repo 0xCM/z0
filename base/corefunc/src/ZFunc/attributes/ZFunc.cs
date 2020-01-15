@@ -18,6 +18,20 @@ namespace Z0
 
     }
 
+    /// <summary>
+    /// Applies to a generic type/method to advertise the primal types over which the type parameter(s) may be closed
+    /// </summary>
+    public class PrimalClosuresAttribute : Attribute
+    {
+        public PrimalClosuresAttribute(PrimalKind closures)
+        {
+            this.Closures = closures;
+        }
+
+        public PrimalKind Closures {get;}
+
+    }
+
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class ZFuncAttribute : Attribute
     {

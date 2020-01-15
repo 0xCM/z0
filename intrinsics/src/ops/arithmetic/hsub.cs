@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<short> vhsub(Vector128<short> x, Vector128<short> y)
             => HorizontalSubtract(x, y);
 
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<int> vhsub(Vector128<int> x, Vector128<int> y)
             => HorizontalSubtract(x, y);
 
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vhsub(Vector256<short> x, Vector256<short> y)
             => HorizontalSubtract(x, y);
 
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vhsub(Vector256<int> x, Vector256<int> y)
             => HorizontalSubtract(x, y);
     }

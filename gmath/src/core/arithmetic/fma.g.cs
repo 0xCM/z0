@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="y">The right factor</param>
         /// <param name="z">The summand</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), ZFunc(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static T fma<T>(T x, T y, T z)
             where T : unmanaged
                 => fma_u(x,y,z);

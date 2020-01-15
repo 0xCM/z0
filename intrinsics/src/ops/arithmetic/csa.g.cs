@@ -27,7 +27,7 @@ namespace Z0
         /// https://arxiv.org/pdf/1611.07612.pdf 
         /// https://github.com/WojciechMula/sse-popcount
         /// </remarks>
-        [MethodImpl(Inline),ZFunc(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector512<T> vcsa<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
         {
@@ -50,7 +50,7 @@ namespace Z0
         /// https://arxiv.org/pdf/1611.07612.pdf 
         /// https://github.com/WojciechMula/sse-popcount
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void csa<T>(T a, T b, T c, out T lo, out T hi)
             where T : unmanaged
         {

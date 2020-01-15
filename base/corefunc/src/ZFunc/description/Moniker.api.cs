@@ -54,6 +54,10 @@ namespace Z0
         public static Moniker generic(string opname, PrimalKind k)
             => define(opname, 0, k, true, false);
 
+        [MethodImpl(Inline)]   
+        public static Moniker generic(string opname)
+            => define(opname, 0, PrimalKind.None, true, false);
+
         /// <summary>
         /// Defines an identifier of the form {opname}_{w}X{bitsize(k)}{u | i | f}
         /// </summary>
@@ -75,7 +79,10 @@ namespace Z0
         {
             var g = generic ? $"{GenericIndicator}" : string.Empty;
             var asmPart = asm ? $"{SuffixSep}{AsmIndicator}" : string.Empty;
-            if(w != 0)
+
+            if(generic && k == PrimalKind.None)
+                return new Moniker(concat(opname, OpSep, GenericIndicator));            
+            else if(w != 0)
                 return new Moniker($"{opname}{OpSep}{g}{w}{SegSep}{Classified.primalsig(k)}{asmPart}");
             else
                 return new Moniker($"{opname}_{g}{Classified.primalsig(k)}{asmPart}");
@@ -87,7 +94,9 @@ namespace Z0
         /// <param name="method">The operation method</param>
         public static Moniker define(MethodInfo method)
         {
-            if(method.IsVectorized())
+            if(method.IsOpenGeneric())
+                return generic(method.Name);
+            else if(method.IsVectorized())
                 return FromVectorized(method);
             else if(method.IsBlocked())
                 return FromBlocked(method);
@@ -97,9 +106,14 @@ namespace Z0
                 return FromPredicate(method);
             else if(method.IsPrimalShift())
                 return FromShift(method);
+            else if(method.HasPrimalOperands())
+                return FromPrimalFunc(method);
             else
                 return new Moniker($"{method.Name}_{method.GetHashCode()}");
         }
+
+        static Moniker FromPrimalFunc(MethodInfo method)
+            => Moniker.define(method.Name, method.ParameterTypes(true).First().Kind(), method.IsConstructedGenericMethod);
 
         /// <summary>
         /// Derives a moniker for a primal operator
