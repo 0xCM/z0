@@ -12,14 +12,14 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline), Op]
-        public static T mul<T>(T lhs, T rhs)
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Floats)]
+        public static T negate<T>(T lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(fmath.mul(float32(lhs), float32(rhs)));
+                return generic<T>(fmath.negate(float32(lhs)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(fmath.mul(float64(lhs), float64(rhs)));
+                return generic<T>(fmath.negate(float64(lhs)));
             else            
                 throw unsupported<T>();
         }
@@ -27,12 +27,20 @@ namespace Z0
 
     partial class fmath
     {
+        /// <summary>
+        /// Negates the source value
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static float mul(float lhs, float rhs)
-            => lhs * rhs;
+        public static float negate(float src)
+            => -src;
 
+        /// <summary>
+        /// Negates the source value
+        /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static double mul(double lhs, double rhs)
-            => lhs * rhs;
-    }
+        public static double negate(double src)
+            => -src;
+    }    
 }

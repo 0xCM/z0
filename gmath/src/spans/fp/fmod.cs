@@ -12,7 +12,7 @@ namespace Z0
     partial class mathspan
     {
 
-        [MethodImpl(Inline), SpanOp]
+        [MethodImpl(Inline)]
         public static Span<T> fmod<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {

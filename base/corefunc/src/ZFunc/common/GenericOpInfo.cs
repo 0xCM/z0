@@ -13,7 +13,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class GenericOpInfo : DirectOpInfo
+    public class GenericOpInfo : FastOpInfo
     {
         public static GenericOpInfo Define(string name, MethodInfo method, IEnumerable<Moniker> reifications)
             => new GenericOpInfo(name, method,reifications);
@@ -25,5 +25,7 @@ namespace Z0
         }
 
         public IEnumerable<Moniker> Reifications {get;}
+
+        public override bool IsGeneric => true;        
     }
 }

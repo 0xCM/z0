@@ -8,6 +8,8 @@ dotnet sln add base/corefunc/test/z0.corefunc.test.csproj
 dotnet sln add gmath/src/z0.gmath.csproj
 dotnet sln add gmath/test/z0.gmath.test.csproj
 
+dotnet sln add mathobj/src/z0.mathobj.csproj
+
 dotnet sln add intrinsics/src/z0.intrinsics.csproj
 dotnet sln add intrinsics/test/z0.intrinsics.test.csproj
 

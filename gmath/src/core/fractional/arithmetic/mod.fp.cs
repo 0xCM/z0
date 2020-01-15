@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal floating-point type</typeparam>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Floats)]
         public static T mod<T>(T a, T b)
             where T : unmanaged
         {

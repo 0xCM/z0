@@ -23,15 +23,6 @@ namespace Z0
         public static long ToBits(this double src)
             => BitConvert.ToInt64(src);
 
-        public static Option<int> WriteTo<T>(this DivisorIndex<T> src, FolderPath dst)
-            where T : unmanaged
-        {
-            var filename = FileName.Define($"divisors{src.Range}.csv");
-            var outpath = dst + filename;
-            var lists = src.Lists.OrderBy(x => x.Dividend);
-            return outpath.Overwrite(lists.Select(d => d.ToString()).ToArray());
-        }
-
         [MethodImpl(Inline)]
         public static T Quotient<T>(this Ratio<T> r)        
             where T : unmanaged       

@@ -211,7 +211,7 @@ namespace Z0
             else
                 return m;                
         }
-            
+                                
 
         /// <summary>
         /// Selects functions from a stream

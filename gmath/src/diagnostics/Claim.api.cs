@@ -391,19 +391,6 @@ namespace Z0
             => !lhs.Equals(rhs) ? true : throw failed(ClaimOpKind.Eq, Equal(lhs, rhs, caller, file, line));
         
         /// <summary>
-        /// Asserts that an interval contains a specified point
-        /// </summary>
-        /// <param name="range">The interval</param>
-        /// <param name="x">The test point</param>
-        /// <param name="caller">The caller member name</param>
-        /// <param name="file">The source file of the calling function</param>
-        /// <param name="line">The source file line number where invocation ocurred</param>
-        /// <typeparam name="T">The source value type</typeparam>
-        public static bool contains<T>(Interval<T> range, T x, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : unmanaged
-                => range.Contains(x) ? true : throw failed(ClaimOpKind.Between, NotBetween(x,range.Left, range.Right, caller, file, line));
-
-        /// <summary>
         /// Asserts that a value is between inclusive upper and lower bounds
         /// </summary>
         /// <param name="x">The value to test</param>

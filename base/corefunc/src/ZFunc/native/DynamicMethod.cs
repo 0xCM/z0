@@ -61,6 +61,9 @@ namespace Z0
         public static CilFunction CilFunc(this DynamicMethod src)
             => CilFunction.From(src);
 
+        public static CilFunction CilFunc(this MethodInfo src)
+            => CilFunction.From(src);
+
         public static CilFunction CilFunc(this DynamicDelegate src)
             => src.DynamicMethod.CilFunc();
 

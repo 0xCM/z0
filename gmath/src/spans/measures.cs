@@ -11,7 +11,7 @@ namespace Z0
 
     partial class mathspan
     {
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static T sum<T>(ReadOnlySpan<T> src)
             where T : unmanaged
         {
@@ -27,7 +27,7 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static T sum<T>(Span<T> src)
             where T : unmanaged
                 => sum(src.ReadOnly());
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         /// <typeparam name="T">The primal scalar type</typeparam>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static T dot<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
         {
@@ -52,7 +52,7 @@ namespace Z0
             return dst;                
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static T min<T>(ReadOnlySpan<T> src)
             where T : unmanaged
         {
@@ -73,7 +73,7 @@ namespace Z0
             return result;
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static T max<T>(ReadOnlySpan<T> src)
             where T : unmanaged
         {
@@ -94,7 +94,7 @@ namespace Z0
             return result;
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static T max<T>(Span<T> src)
             where T : unmanaged
                 => max(src.ReadOnly());

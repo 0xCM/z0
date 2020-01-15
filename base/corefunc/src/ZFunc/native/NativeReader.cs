@@ -25,8 +25,13 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to read</param>
         /// <param name="bufferlen">The size of the target buffer</param>
-        public static INativeMemberData read(MethodInfo m, int bufferlen)
-            => read(m, new byte[bufferlen]);
+        public static INativeMemberData read(MethodInfo m)
+        {
+            
+            var data = read(m, new byte[DefaultBufferLen]);
+            return data;
+
+        }
         
         /// <summary>
         /// Runs the jitter over a named method on a type and captures the emitted binary assembly data
@@ -34,8 +39,8 @@ namespace Z0
         /// <param name="name">The name of the method</param>
         /// <param name="bufferlen">The size of the target buffer</param>
         /// <typeparam name="T">The declaring type</typeparam>
-        public static INativeMemberData read<T>(string name, int bufferlen)
-            => read(method<T>(name),new byte[bufferlen]);
+        public static INativeMemberData read<T>(string name)
+            => read(method<T>(name),new byte[DefaultBufferLen]);
 
         /// <summary>
         /// Runs the jitter over a named method on a type and captures the emitted binary assembly data
@@ -250,7 +255,7 @@ namespace Z0
             const byte INTR = 0xcc;
             const byte SBB = 0x19;
  
-            var maxcount = dst.Length;
+            var maxcount = dst.Length - 1;
             var pSrcCurrent = pSrc;    
             var offset = 0;
                        
