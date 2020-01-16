@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="offset"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ulong> valignr(Vector128<ulong> x, Vector128<ulong> y, [Imm] byte offset)
             => AlignRight(x, y, offset);
 
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="offset"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> valignr(Vector256<ulong> x, Vector256<ulong> y, [Imm] byte offset)
             => AlignRight(x, y, offset);
 
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="offset"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> valignr(Vector128<byte> x, Vector128<byte> y, [Imm] byte offset)
             => AlignRight(x, y, offset);
 
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="offset"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> valignr(Vector256<byte> x, Vector256<byte> y, [Imm] byte offset)
             => AlignRight(x, y, offset);
 

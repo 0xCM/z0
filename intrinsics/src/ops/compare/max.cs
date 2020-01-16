@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vmax(Vector128<byte> x, Vector128<byte> y)
             => Max(x, y);
 
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vmax(Vector128<sbyte> x, Vector128<sbyte> y)
             => Max(x, y);
 
@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<short> vmax(Vector128<short> x, Vector128<short> y)
             => Max(x, y);
 
@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ushort> vmax(Vector128<ushort> x, Vector128<ushort> y)
             => Max(x, y);
 
@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<int> vmax(Vector128<int> x, Vector128<int> y)
             => Max(x, y);
 
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<uint> vmax(Vector128<uint> x, Vector128<uint> y)
             => Max(x, y);
 
@@ -79,7 +79,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ulong> vmax(Vector128<ulong> x, Vector128<ulong> y)
             => vselect(vgt(x,y),x,y);
 
@@ -88,7 +88,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<long> vmax(Vector128<long> x, Vector128<long> y)
         {
             var xL = vinsert(x,default,0);
@@ -101,7 +101,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vmax(Vector256<byte> x, Vector256<byte> y)
             => Max(x, y);
 
@@ -110,7 +110,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vmax(Vector256<sbyte> x, Vector256<sbyte> y)
             => Max(x, y);
 
@@ -119,7 +119,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vmax(Vector256<short> x, Vector256<short> y)
             => Max(x, y);
 
@@ -128,7 +128,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vmax(Vector256<ushort> x, Vector256<ushort> y)
             => Max(x, y);
 
@@ -137,7 +137,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vmax(Vector256<int> x, Vector256<int> y)
             => Max(x, y);
 
@@ -146,7 +146,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vmax(Vector256<uint> x, Vector256<uint> y)
             => Max(x, y);
 
@@ -156,7 +156,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> vmax(Vector256<ulong> x, Vector256<ulong> y)
             => vselect(vgt(x,y),x,y);
 
@@ -165,7 +165,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<long> vmax(Vector256<long> x, Vector256<long> y)
             => vblend(y, x, v8u(vgt(x,y)));
     }

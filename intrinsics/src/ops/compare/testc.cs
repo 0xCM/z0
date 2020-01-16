@@ -30,7 +30,7 @@ namespace Z0
         /// ELSE
         ///     ZF := 0        
         /// <algorithm>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<sbyte> src, Vector128<sbyte> mask)
             => TestC(src, mask);        
 
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<byte> src, Vector128<byte> mask)
             => TestC(src, mask);        
 
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<short> src, Vector128<short> mask)
             => TestC(src, mask);        
 
@@ -60,7 +60,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<ushort> src, Vector128<ushort> mask)
             => TestC(src, mask);        
 
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<int> src, Vector128<int> mask)
             => TestC(src, mask);        
         
@@ -80,7 +80,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<uint> src, Vector128<uint> mask)
             => TestC(src, mask);        
 
@@ -90,10 +90,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<long> src, Vector128<long> mask)
             => TestC(src, mask);        
-
 
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
@@ -101,35 +100,35 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<ulong> src, Vector128<ulong> mask)
             => TestC(src, mask);                     
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<sbyte> src)
             => TestC(src, VPattern.vones<sbyte>(n128));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<byte> src)
             => TestC(src, VPattern.vones<byte>(n128));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<ushort> src)
             => TestC(src, VPattern.vones<ushort>(n128));
         
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<int> src)
             => TestC(src, VPattern.vones<int>(n128));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<uint> src)
             => TestC(src, VPattern.vones<uint>(n128));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<long> src)
             => TestC(src, VPattern.vones<long>(n128));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector128<ulong> src)
             => TestC(src, VPattern.vones<ulong>(n128));
 
@@ -139,7 +138,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector256<sbyte> src, Vector256<sbyte> mask)
             => TestC(src, mask);        
 
@@ -149,7 +148,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector256<byte> src, Vector256<byte> mask)
             => TestC(src, mask);        
 
@@ -159,7 +158,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector256<short> src, Vector256<short> mask)
             => TestC(src, mask);        
 
@@ -169,7 +168,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector256<ushort> src, Vector256<ushort> mask)
             => TestC(src, mask);        
 
@@ -179,7 +178,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector256<int> src, Vector256<int> mask)
             => TestC(src, mask);        
         
@@ -189,7 +188,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector256<uint> src, Vector256<uint> mask)
             => TestC(src, mask);        
 
@@ -199,7 +198,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector256<long> src, Vector256<long> mask)
             => TestC(src, mask);        
 
@@ -209,7 +208,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits the source to test</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestc(Vector256<ulong> src, Vector256<ulong> mask)
             => TestC(src, mask);                             
     }

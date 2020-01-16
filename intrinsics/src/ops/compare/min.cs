@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vmin(Vector128<byte> x, Vector128<byte> y)
             => Min(x, y);
 
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vmin(Vector128<sbyte> x, Vector128<sbyte> y)
             => Min(x, y);
 
@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<short> vmin(Vector128<short> x, Vector128<short> y)
             => Min(x, y);
 
@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ushort> vmin(Vector128<ushort> x, Vector128<ushort> y)
             => Min(x, y);
 
@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<int> vmin(Vector128<int> x, Vector128<int> y)
             => Min(x, y);
 
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<uint> vmin(Vector128<uint> x, Vector128<uint> y)
             => Min(x, y);
 
@@ -79,7 +79,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<long> vmin(Vector128<long> x, Vector128<long> y)
         {
             var xL = vinsert(x,default,0);
@@ -92,7 +92,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ulong> vmin(Vector128<ulong> x, Vector128<ulong> y)
             => vselect(vlt(x,y),x,y);
 
@@ -101,7 +101,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vmin(Vector256<byte> x, Vector256<byte> y)
             => Min(x, y);
 
@@ -110,7 +110,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vmin(Vector256<sbyte> x, Vector256<sbyte> y)
             => Min(x, y);
 
@@ -119,7 +119,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vmin(Vector256<short> x, Vector256<short> y)
             => Min(x, y);
 
@@ -128,7 +128,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vmin(Vector256<ushort> x, Vector256<ushort> y)
             => Min(x, y);
 
@@ -137,7 +137,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vmin(Vector256<int> x, Vector256<int> y)
             => Min(x, y);
 
@@ -146,7 +146,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vmin(Vector256<uint> x, Vector256<uint> y)
             => Min(x, y);
 
@@ -155,7 +155,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> vmin(Vector256<ulong> x, Vector256<ulong> y)
             => vselect(vlt(x,y),x,y);
 
@@ -164,7 +164,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<long> vmin(Vector256<long> x, Vector256<long> y)
             => vblend(y, x, v8u(vlt(x,y)));
 

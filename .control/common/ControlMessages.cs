@@ -8,13 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    using C = Z0.Designators.Control;
     
     using static zfunc;
 
     static class ControlMessages
     {
 
+        public static AppMsg EmittingHostOps(Type host)
+            => appMsg($"Emitting operations defined by {host.Name}");
+         
         public static AppMsg ExecutingHost(IAssemblyDesignator host)
             => appMsg($"{now().ToLexicalString()} Executing {host.Name}");
 
@@ -26,8 +28,5 @@ namespace Z0
 
         public static AppMsg FinishedSuiteExecution(double runtime)
             => appMsg($"{now().ToLexicalString()} Completed test suite execution after {runtime} ms");
-
-
     }
-
 }

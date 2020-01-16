@@ -229,7 +229,7 @@ namespace Z0
             Trace("Shift:Delegate");
             Trace(dShiftData.Format());
 
-            var mgAnds = typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName(nameof(ginx.vand));
+            var mgAnds = typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName("vand");
             foreach(var mgAnd in mgAnds)
             {
                 var mgAndData = mgAnd.CaptureGenericAsm(typeof(uint));

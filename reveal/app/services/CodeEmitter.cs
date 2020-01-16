@@ -15,7 +15,6 @@ namespace Z0
 
     public static class CodeEmitter
     {
-
         /// <summary>
         /// Writes asm code to a file
         /// </summary>
@@ -29,7 +28,7 @@ namespace Z0
                 writer.WriteLine(AsmSeparator);
             
             writer.WriteLine($"; {now().ToLexicalString()}");
-            writer.Write(src.Format());
+            writer.Write(src.FormatDetail());
         }
 
         public static void EmitAsm(this MethodDisassembly disassembly, FilePath dst, bool append = false)        
@@ -45,7 +44,7 @@ namespace Z0
         {
             foreach(var asm in disassembly.DistillAsmFunctions())
             {
-                var filename = FileName.Define(asm.FunctionName, "asm");
+                var filename = FileName.Define(asm.Name, "asm");
                 asm.EmitAsm(dst + filename,append);
             }
         }
@@ -120,7 +119,7 @@ namespace Z0
             for(var i=0; i< src.Length; i++)
             {   
                 var spec = src[i];             
-                dst.Write(spec.Format());
+                dst.Write(spec.FormatDetail());
                 if(i != i-1)
                     dst.WriteLine(AsmSeparator);
             }

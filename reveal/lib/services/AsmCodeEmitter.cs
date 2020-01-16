@@ -96,7 +96,7 @@ namespace Z0
             for(var i=0; i< src.Length; i++)
             {   
                 var spec = src[i];             
-                dst.Write(spec.Format());
+                dst.Write(spec.FormatDetail());
                 if(i != i-1)
                     dst.WriteLine(AsmSeparator);
             }

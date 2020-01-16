@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vblend8x32(Vector256<int> x, Vector256<int> y, [Imm] byte spec)        
             => Blend(x, y, spec);
 
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vblend8x32(Vector256<uint> x, Vector256<uint> y, [Imm] byte spec)        
             => Blend(x, y, spec);
 

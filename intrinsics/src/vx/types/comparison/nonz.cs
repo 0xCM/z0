@@ -12,7 +12,8 @@ namespace Z0
 
     partial class VXTypes
     {
-        public readonly struct NonZ128<T> : IVUnaryPred128D<T>
+        [PrimalClosures(PrimalKind.All)]
+        public readonly struct NonZ128<T> : IVUnaryPred128D<T>, IUnaryBlockedPred128<T>
             where T : unmanaged
         {
             public static NonZ128<T> Op => default;
@@ -28,9 +29,15 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public bit InvokeScalar(T a) => gmath.nonz(a);
+
+            [MethodImpl(Inline)]
+            public Span<bit> Invoke(in Block128<T> x, Span<bit> dst) 
+                => vblocks.vnonz(x,dst);
+
         }
 
-        public readonly struct NonZ256<T> : IVUnaryPred256D<T>
+        [PrimalClosures(PrimalKind.All)]
+        public readonly struct NonZ256<T> : IVUnaryPred256D<T>, IUnaryBlockedPred256<T>
             where T : unmanaged
         {
             public const string Name = "vnonz";
@@ -46,6 +53,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public bit InvokeScalar(T a) => gmath.nonz(a);
+
+            [MethodImpl(Inline)]
+            public Span<bit> Invoke(in Block256<T> x, Span<bit> dst) 
+                => vblocks.vnonz(x,dst);
+
         }
     }
 }

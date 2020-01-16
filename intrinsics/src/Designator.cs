@@ -14,30 +14,11 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class Intrinsics : AssemblyDesignator<Intrinsics>
+    public sealed class Intrinsics : AssemblyDesignator<Intrinsics>, ICatalogProvider
     {
-        public override IEnumerable<string> OpNames
-            => set(
-                
-                nameof(vadd), nameof(vsub), nameof(vnegate), nameof(vinc), nameof(vdec), 
-                nameof(vgt), nameof(vlt),
-                
-                nameof(vand), nameof(vor), nameof(vxor), nameof(vnand), nameof(vnor), nameof(vxnor),nameof(vxornot),
-                nameof(vimpl), nameof(vnonimpl), nameof(vcimpl), nameof(vcnonimpl), 
-                nameof(vcsa),
-                nameof(vnot),
-
-                nameof(vsll), nameof(vsrl), nameof(vxors), nameof(vbsll), nameof(vbsrl),
-                nameof(vselect) 
-
-                );
             
-        public override IEnumerable<Type> ApiProviders
-            => items(
-                typeof(ginx), typeof(dinx), 
-                typeof(dinxfp), typeof(ginxfp), 
-                typeof(ginxsfp), typeof(dinxsfp)
-                );
+        public IOperationCatalog Catalog 
+            => VX.Catalog;
 
     }
 

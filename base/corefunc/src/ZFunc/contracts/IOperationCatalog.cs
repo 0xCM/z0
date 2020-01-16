@@ -19,16 +19,20 @@ namespace Z0
 
     public interface IOperationCatalog
     {
-        IEnumerable<ContractedOpInfo> Contracted {get;} 
+        IEnumerable<FastOpContract> Services {get;} 
 
-        IEnumerable<GenericOpInfo> Generic {get;}   
-                    
+        IEnumerable<FastGenericOp> GenericOps {get;}                       
 
-        IEnumerable<DirectOpInfo> Direct {get;}       
+        IEnumerable<FastDirectOp> DirectOps {get;}       
+
+        IEnumerable<Type> ServiceHosts {get;}
         
+        IEnumerable<Type> GenericApiHosts {get;}
 
+        IEnumerable<Type> DirectApiHosts {get;}
+        
         Assembly DeclaringAssembly {get;}         
 
-        string Name {get;}
+        string CatalogName {get;}
     }
 }

@@ -13,12 +13,12 @@ namespace Z0
 
     using static zfunc;
 
-    public class GenericOpInfo : FastOpInfo
+    public class FastGenericOp : FastOpInfo
     {
-        public static GenericOpInfo Define(string name, MethodInfo method, IEnumerable<Moniker> reifications)
-            => new GenericOpInfo(name, method,reifications);
+        public static FastGenericOp Define(string name, MethodInfo method, IEnumerable<Moniker> reifications)
+            => new FastGenericOp(name, method,reifications);
 
-        public GenericOpInfo(string name, MethodInfo method, IEnumerable<Moniker> reifications)
+        public FastGenericOp(string name, MethodInfo method, IEnumerable<Moniker> reifications)
             : base(name,method)
         {
             this.Reifications = reifications;

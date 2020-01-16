@@ -99,6 +99,29 @@ namespace Z0
                 return VectorKind.Vector256x32f;
             else if(t == typeof(Vector256<double>))
                 return VectorKind.Vector256x64f;
+
+            else if(t == typeof(Vector512<byte>))
+                return VectorKind.Vector512x8u;
+            else if(t == typeof(Vector512<ushort>))
+                return VectorKind.Vector512x16u;
+            else if(t == typeof(Vector512<uint>))
+                return VectorKind.Vector512x32u;
+            else if(t == typeof(Vector512<ulong>))
+                return VectorKind.Vector512x64u;
+
+            else if(t == typeof(Vector512<sbyte>))
+                return VectorKind.Vector512x8i;
+            else if(t == typeof(Vector512<short>))
+                return VectorKind.Vector512x16i;
+            else if(t == typeof(Vector512<int>))
+                return VectorKind.Vector512x32i;
+            else if(t == typeof(Vector512<long>))
+                return VectorKind.Vector512x64i;
+
+            else if(t == typeof(Vector512<float>))
+                return VectorKind.Vector512x32f;
+            else if(t == typeof(Vector512<double>))
+                return VectorKind.Vector512x64f;
             else    
                 return VectorKind.None;
         }
@@ -303,7 +326,6 @@ namespace Z0
             else
                 return VectorKind.None;
         }
-
 
         [MethodImpl(Inline)]
         static VectorKind vkind128_u<T>(T t = default)

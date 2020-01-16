@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-
     public abstract class FastOpInfo
     {
         public string Name {get;}
@@ -24,23 +23,11 @@ namespace Z0
             => Method.DeriveMoniker();
 
         public abstract bool IsGeneric {get;}
+        
         public override string ToString()
             => Id;
 
-    }
-
-    public class DirectOpInfo : FastOpInfo
-    {
-        public static DirectOpInfo Define(string name, MethodInfo method)
-            => new DirectOpInfo(name,method);        
-        
-
-        public DirectOpInfo(string name, MethodInfo method)
-            : base(name,method)
-        {
-
-        }
-
-        public override bool IsGeneric => false;
+        public bool RequiresImmediate
+            => Method.RequiresImmediate();
     }
 }

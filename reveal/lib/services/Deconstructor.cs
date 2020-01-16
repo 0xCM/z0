@@ -81,10 +81,17 @@ namespace Z0
         /// Decodes encoded assembly instructions
         /// </summary>
         /// <param name="data">The encoded instructions</param>
-        public static InstructionBlock Decode(string label, ReadOnlySpan<byte> data)
+        public static InstructionBlock Decode(AsmCode code)
+            => Decode(code.Id, code.Label, code.Data);
+
+        /// <summary>
+        /// Decodes encoded assembly instructions
+        /// </summary>
+        /// <param name="data">The encoded instructions</param>
+        public static InstructionBlock Decode(Moniker id, string label, byte[] data)
 		{
             var dst = new InstructionList();
-            var reader = new ByteArrayCodeReader(data.ToArray());
+            var reader = new ByteArrayCodeReader(data);
 			var decoder = Decoder.Create(IntPtr.Size * 8, reader);
 			decoder.IP = 0;
 			while (reader.CanReadByte) 
@@ -113,7 +120,7 @@ namespace Z0
                 var hexfile = paths.AsmHexPath(target,m);
                 var cilfile = paths.CilPath(target,m);
                 var asm = d.DistillAsmFunction();
-                asmfile.Overwrite(asm.Format());
+                asmfile.Overwrite(asm.FormatDetail());
                 hexfile.Overwrite(asm.FormatEncoding());                
                 cilfile.Overwrite(d.FormatCil());
             }            

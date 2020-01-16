@@ -11,6 +11,13 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
+    /// Defines the canonical shape of a value emitter
+    /// </summary>
+    /// <typeparam name="T">The production type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public delegate T Emitter<T>();
+
+    /// <summary>
     /// Chracterizes an operation that produces a value that does not depend on arguments
     /// </summary>
     /// <typeparam name="A">The emission type</typeparam>

@@ -20,7 +20,7 @@ namespace Z0
         void list_contracted()
         {
 
-            foreach(var op in GX.Catalog.Contracted)
+            foreach(var op in GX.Catalog.Services)
             foreach(var id in op.Reifications)
                 Trace(id);
         }
@@ -28,14 +28,14 @@ namespace Z0
         public void list_nongeneric()
         {
 
-            foreach(var op in GX.Catalog.Direct)
+            foreach(var op in GX.Catalog.DirectOps)
                 Trace(op.Id);
         }
 
         void list_generic()
         {
 
-            foreach(var op in GX.Catalog.Generic)
+            foreach(var op in GX.Catalog.GenericOps)
             foreach(var id in op.Reifications)
                 Trace(op.Id);
         }

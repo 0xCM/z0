@@ -12,6 +12,7 @@ namespace Z0
 
     partial class VXTypes
     {
+        [PrimalClosures(PrimalKind.Integers)]
         public readonly struct BitClear128<T> : IVUnaryOp128Imm8x2D<T>
             where T : unmanaged
         {
@@ -30,6 +31,7 @@ namespace Z0
             public T InvokeScalar(T a, byte b, byte c) => gbits.bitclear(a, b, c);
         }
 
+        [PrimalClosures(PrimalKind.Integers)]
         public readonly struct BitClear256<T> : IVUnaryOp256Imm8x2D<T>
             where T : unmanaged
         {

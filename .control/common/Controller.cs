@@ -27,8 +27,7 @@ namespace Z0
 
         }
 
-        public abstract void Execute();
-       
+        public abstract void Execute();       
 
         protected IEnumerable<IOperationCatalog> Catalogs
             => Designators.Control.Designated.Catalogs;
@@ -38,6 +37,12 @@ namespace Z0
 
         protected Option<IAssemblyDesignator> Designate(string name)
             => Designates.Designate(name);
+
+        protected IOperationCatalog MathCatalog
+            => Designators.Control.Designated.MathCatalog;
+
+        protected IOperationCatalog IntrinsicsCatalog
+            => Designators.Control.Designated.IntrinsicsCatalog;
 
     }
 }

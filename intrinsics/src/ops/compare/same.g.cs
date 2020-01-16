@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static bit vsame<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged   
                 => vtestc(veq(x,y));
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static bit vsame<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged   
                 => vtestc(veq(x,y));
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static bit vsame<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged   
                 => vtestc(veq(x,y));

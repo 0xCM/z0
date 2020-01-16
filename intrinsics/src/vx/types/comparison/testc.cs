@@ -12,7 +12,8 @@ namespace Z0
 
     partial class VXTypes
     {
-        public readonly struct TestC128<T> : IVBinPred128D<T>
+        [PrimalClosures(PrimalKind.All)]
+        public readonly struct TestC128<T> : IVBinPred128D<T>, IBinaryBlockedPred128<T>
             where T : unmanaged
         {
             public const string Name = "vtestc";
@@ -28,9 +29,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public bit InvokeScalar(T a, T b) => default;
+
+            [MethodImpl(Inline)]
+            public Span<bit> Invoke(in Block128<T> x, in Block128<T> y, Span<bit> dst) 
+                => vblocks.vtestc(x,y,dst);
         }
 
-        public readonly struct TestC256<T> : IVBinPred256D<T>
+        [PrimalClosures(PrimalKind.All)]
+        public readonly struct TestC256<T> : IVBinPred256D<T>, IBinaryBlockedPred256<T>
             where T : unmanaged
         {
             public const string Name = "vtestc";
@@ -46,6 +52,12 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public bit InvokeScalar(T a, T b) => default;
+
+            [MethodImpl(Inline)]
+            public Span<bit> Invoke(in Block256<T> x, in Block256<T> y, Span<bit> dst) 
+                => vblocks.vtestc(x,y,dst);
+
+
         }
 
     }

@@ -1,7 +1,7 @@
-// 2020-01-15 03:57:59:693
+// 2020-01-15 19:20:39:547
 VectorKind:uint vkind_128x32u()
 {
-//  Id := 100664794, Name := Z0.VectorKind Z0.OpCodes.vpattern::vkind_128x32u()
+//  Id := 100664781, Name := Z0.VectorKind Z0.OpCodes.vpattern::vkind_128x32u()
 //  VectorKind:uint vkind_128x32u()
 //  Managed
 {
@@ -17,7 +17,7 @@ VectorKind:uint vkind_128x32u()
 }
 VectorKind:uint vkind_256x32u()
 {
-//  Id := 100664795, Name := Z0.VectorKind Z0.OpCodes.vpattern::vkind_256x32u()
+//  Id := 100664782, Name := Z0.VectorKind Z0.OpCodes.vpattern::vkind_256x32u()
 //  VectorKind:uint vkind_256x32u()
 //  Managed
 {
@@ -33,7 +33,7 @@ VectorKind:uint vkind_256x32u()
 }
 BlockKind:uint bkind_256x32u()
 {
-//  Id := 100664796, Name := Z0.BlockKind Z0.OpCodes.vpattern::bkind_256x32u()
+//  Id := 100664783, Name := Z0.BlockKind Z0.OpCodes.vpattern::bkind_256x32u()
 //  BlockKind:uint bkind_256x32u()
 //  Managed
 {
@@ -49,7 +49,7 @@ BlockKind:uint bkind_256x32u()
 }
 PrimalKind:uint pkind_8u()
 {
-//  Id := 100664797, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_8u()
+//  Id := 100664784, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_8u()
 //  PrimalKind:uint pkind_8u()
 //  Managed
 {
@@ -62,7 +62,7 @@ PrimalKind:uint pkind_8u()
 }
 PrimalKind:uint pkind_32u()
 {
-//  Id := 100664798, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_32u()
+//  Id := 100664785, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_32u()
 //  PrimalKind:uint pkind_32u()
 //  Managed
 {
@@ -75,7 +75,7 @@ PrimalKind:uint pkind_32u()
 }
 PrimalKind:uint pkind_32i()
 {
-//  Id := 100664799, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_32i()
+//  Id := 100664786, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_32i()
 //  PrimalKind:uint pkind_32i()
 //  Managed
 {
@@ -88,7 +88,7 @@ PrimalKind:uint pkind_32i()
 }
 Vector128<byte> ones_128x8u()
 {
-//  Id := 100664800, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::ones_128x8u()
+//  Id := 100664787, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::ones_128x8u()
 //  Vector128<byte> ones_128x8u()
 //  Managed
 {
@@ -101,7 +101,7 @@ Vector128<byte> ones_128x8u()
 }
 Vector128<ulong> ones_128x64u()
 {
-//  Id := 100664801, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.OpCodes.vpattern::ones_128x64u()
+//  Id := 100664788, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.OpCodes.vpattern::ones_128x64u()
 //  Vector128<ulong> ones_128x64u()
 //  Managed
 {
@@ -115,7 +115,7 @@ Vector128<ulong> ones_128x64u()
 }
 Vector256<byte> ones_256x8u()
 {
-//  Id := 100664802, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::ones_256x8u()
+//  Id := 100664789, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::ones_256x8u()
 //  Vector256<byte> ones_256x8u()
 //  Managed
 {
@@ -128,7 +128,7 @@ Vector256<byte> ones_256x8u()
 }
 Vector256<ulong> ones_256x64u()
 {
-//  Id := 100664803, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.OpCodes.vpattern::ones_256x64u()
+//  Id := 100664790, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.OpCodes.vpattern::ones_256x64u()
 //  Vector256<ulong> ones_256x64u()
 //  Managed
 {
@@ -142,7 +142,7 @@ Vector256<ulong> ones_256x64u()
 }
 Vector256<double> ones_256x64f()
 {
-//  Id := 100664804, Name := System.Runtime.Intrinsics.Vector256`1<System.Double> Z0.OpCodes.vpattern::ones_256x64f()
+//  Id := 100664791, Name := System.Runtime.Intrinsics.Vector256`1<System.Double> Z0.OpCodes.vpattern::ones_256x64f()
 //  Vector256<double> ones_256x64f()
 //  Managed
 {
@@ -155,7 +155,7 @@ Vector256<double> ones_256x64f()
 }
 Vector256<byte> pattern_lanemerge_256x8u()
 {
-//  Id := 100664805, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::pattern_lanemerge_256x8u()
+//  Id := 100664792, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::pattern_lanemerge_256x8u()
 //  Vector256<byte> pattern_lanemerge_256x8u()
 //  Managed
 {
@@ -166,7 +166,7 @@ Vector256<byte> pattern_lanemerge_256x8u()
 }
 Vector256<ushort> pattern_lanemerge_256x16u()
 {
-//  Id := 100664806, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.OpCodes.vpattern::pattern_lanemerge_256x16u()
+//  Id := 100664793, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.OpCodes.vpattern::pattern_lanemerge_256x16u()
 //  Vector256<ushort> pattern_lanemerge_256x16u()
 //  Managed
 {
@@ -177,7 +177,7 @@ Vector256<ushort> pattern_lanemerge_256x16u()
 }
 Vector128<byte> makemask_d128x8u(ushort src)
 {
-//  Id := 100664807, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::makemask_d128x8u(System.UInt16)
+//  Id := 100664794, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::makemask_d128x8u(System.UInt16)
 //  Vector128<byte> makemask_d128x8u(ushort src)
 //  Managed
 {
@@ -189,7 +189,7 @@ Vector128<byte> makemask_d128x8u(ushort src)
 }
 Vector256<byte> makemask_d256x8u(uint src)
 {
-//  Id := 100664808, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::makemask_d256x8u(System.UInt32)
+//  Id := 100664795, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::makemask_d256x8u(System.UInt32)
 //  Vector256<byte> makemask_d256x8u(uint src)
 //  Managed
 {
@@ -201,7 +201,7 @@ Vector256<byte> makemask_d256x8u(uint src)
 }
 Vector128<byte> maskmask_d128x8u_index4(ushort src)
 {
-//  Id := 100664809, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::maskmask_d128x8u_index4(System.UInt16)
+//  Id := 100664796, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::maskmask_d128x8u_index4(System.UInt16)
 //  Vector128<byte> maskmask_d128x8u_index4(ushort src)
 //  Managed
 {
@@ -214,7 +214,7 @@ Vector128<byte> maskmask_d128x8u_index4(ushort src)
 }
 Vector256<byte> maskmask_d256x8u_index3(uint src)
 {
-//  Id := 100664810, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::maskmask_d256x8u_index3(System.UInt32)
+//  Id := 100664797, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::maskmask_d256x8u_index3(System.UInt32)
 //  Vector256<byte> maskmask_d256x8u_index3(uint src)
 //  Managed
 {
@@ -227,7 +227,7 @@ Vector256<byte> maskmask_d256x8u_index3(uint src)
 }
 Vector128<byte> makemask_d128x8u_FCFC()
 {
-//  Id := 100664811, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::makemask_d128x8u_FCFC()
+//  Id := 100664798, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::makemask_d128x8u_FCFC()
 //  Vector128<byte> makemask_d128x8u_FCFC()
 //  Managed
 {
@@ -239,7 +239,7 @@ Vector128<byte> makemask_d128x8u_FCFC()
 }
 Vector256<byte> makemask_d256x8u_FAFAFAFA()
 {
-//  Id := 100664812, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::makemask_d256x8u_FAFAFAFA()
+//  Id := 100664799, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::makemask_d256x8u_FAFAFAFA()
 //  Vector256<byte> makemask_d256x8u_FAFAFAFA()
 //  Managed
 {

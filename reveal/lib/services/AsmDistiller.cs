@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source assembly block</param>
 		public static InstructionBlock DistillInstructions(this AsmCode src)
-            => Deconstructor.Decode(src.Name, src.Data);
+            => Deconstructor.Decode(src);
 
         /// <summary>
         /// Disassembles the assembly code for reified methods declared by the source type
@@ -35,7 +35,7 @@ namespace Z0
 
         public static AsmFuncInfo DistillAsmFunction(this AsmCode code)
         {
-            var src = code.DistillInstructions();
+            var src = Deconstructor.Decode(code);
             var count = src.InstructionCount;
             Span<byte> data = code.Data;
             var startaddress = src[0].IP;
@@ -44,7 +44,7 @@ namespace Z0
             var dst = new AsmInstructionInfo[count];
             for(var i=0; i<count; i++)
                 dst[i] = src[i].Summarize(data, format[i], startaddress);
-            return new AsmFuncInfo(startaddress, endaddress, code.Name, dst, code.Data);            
+            return AsmFuncInfo.Define(startaddress, endaddress, code, dst);            
         }
 
         public static IEnumerable<AsmFuncInfo> DistillAsmFunctions(this IEnumerable<MethodDisassembly> src)
@@ -64,15 +64,15 @@ namespace Z0
                 var instruction = asm.Instructions[i];
                 var offset = (ushort)(instruction.IP - asm.StartAddress);
                 var encoded = codespan.Slice(offset, instruction.ByteLength).ToArray();
-                //var operands = instruction.DistillOperands(asm);                
                 var operands = instruction.Operands(asm.StartAddress);
                 var mnemonic = instruction.Mnemonic.ToString().ToUpper();
                 var opcode = instruction.Code.ToString();
                 var enckind = instruction.Encoding == EncodingKind.Legacy ? string.Empty : instruction.Encoding.ToString();
                 inxs[i] = AsmInstructionInfo.Define(offset, inxsfmt[i], mnemonic, opcode, operands, enckind, encoded);
             }
-
-            return new AsmFuncInfo(asm.StartAddress, asm.EndAddress, src.MethodSig, inxs, code);            
+            
+            return AsmFuncInfo.Define(asm.StartAddress, asm.EndAddress, 
+                AsmCode.Define(asm.NativeBlock.Data, Moniker.define(src.MethodName), src.MethodInfo.Signature().Format()), inxs);            
         }
 
         /// <summary>
@@ -104,21 +104,6 @@ namespace Z0
             var enckind = instruction.Encoding == EncodingKind.Legacy ? string.Empty : instruction.Encoding.ToString();            
             return AsmInstructionInfo.Define(offset, formatted, mnemonic, opcode, operands, enckind, encoded);
         }
-
-        // static AsmOperandInfo[] DistillOperands(this Instruction inx, MethodAsmBody asm)        
-        // {
-        //     var args = new AsmOperandInfo[inx.OpCount];
-        //     for(byte j=0; j< inx.OpCount; j++)
-        //     {
-        //         var operandKind = inx.GetOpKind(j);
-        //         var imm = inx.ImmediateInfo(j);
-        //         var reg = operandKind == AsmOpKind.Register ? inx.RegisterInfo(j) : null;
-        //         var mem = operandKind.IsMemory() ? inx.MemoryInfo(j) : null;
-        //         var branch = operandKind.IsBranch() ? inx.BranchInfo(j, asm.StartAddress) : null;
-        //         args[j] = AsmOperandInfo.Define(j, operandKind.ToString(), imm, mem, reg, branch);
-        //     }
-        //     return args;
-        // }
 
         /// <summary>
         /// Extracts register information, if applicable, from an instruction operand

@@ -16,6 +16,9 @@ namespace Z0
     {        
         byte[] AsmBuffer = new byte[500];
 
+        static void EmittingHostOps(Type host)
+            => print(ControlMessages.EmittingHostOps(host));
+
         AsmCodeSet Resolve<T>(IVUnaryImm8Resolver128<T> svc, byte imm8)
             where T : unmanaged
         {
@@ -26,6 +29,24 @@ namespace Z0
         }
 
         AsmCodeSet Resolve<T>(IVBinaryImm8Resolver128<T> svc, byte imm8)
+            where T : unmanaged
+        {
+            var moniker = svc.Moniker;
+            var f = svc.@delegate(imm8);            
+            AsmBuffer.Fill(byte.MinValue);
+            return NativeReader.read(f, AsmBuffer).CodeSet(moniker.WithImm(imm8), f.CilFunc());
+        }
+
+        AsmCodeSet Resolve<T>(IVUnaryImm8Resolver256<T> svc, byte imm8)
+            where T : unmanaged
+        {
+            var moniker = svc.Moniker;
+            var f = svc.@delegate(imm8);
+            AsmBuffer.Fill(byte.MinValue);
+            return NativeReader.read(f, AsmBuffer).CodeSet(moniker.WithImm(imm8), f.CilFunc());
+        }
+
+        AsmCodeSet Resolve<T>(IVBinaryImm8Resolver256<T> svc, byte imm8)
             where T : unmanaged
         {
             var moniker = svc.Moniker;
@@ -87,6 +108,10 @@ namespace Z0
             where T : unmanaged
                 => from imm in immediates select Resolve(svc,imm);
 
+        public IEnumerable<AsmCodeSet> Resolve<T>(IVUnaryImm8Resolver256<T> svc, params byte[] immediates)
+            where T : unmanaged
+                => from imm in immediates select Resolve(svc,imm);
+
         public IEnumerable<AsmCodeSet> Resolve<T>(IVBinaryImm8Resolver128<T> svc, params byte[] immediates)
             where T : unmanaged
                 => from imm in immediates select Resolve(svc,imm);
@@ -112,13 +137,23 @@ namespace Z0
 
         }
 
+        void ResolveDynamic<T>(N256 w, T t = default)
+            where T : unmanaged
+        {
+            var imm = new byte[]{3, 13, 25, 28, 30};
+            var r1 = Resolve(VX.vbsll(w,t),imm);
+            var r2 = Resolve(VX.vsrl(w,t),imm);
+            var resolutions = r1.Union(r2).ToArray();
+            Append(DynamicSubject, resolutions);
+        }
+
         void EmitDirect(IOperationCatalog c, CilMetadataIndex metadata, bool clear = true)
         {
-            var archive = AsmArchive.Define(c.Name);
+            var archive = AsmArchive.Define(c.CatalogName);
             if(clear)
                 archive.Clear();
 
-            foreach(var op in c.Direct)
+            foreach(var op in c.DirectOps)
             {
                 var d = op.Method.Descriptor();
                 archive.Save(d, metadata.FindCil(d.Method).ValueOrDefault());
@@ -129,7 +164,7 @@ namespace Z0
             => error(concat(opname,AsciSym.Colon,e.ToString()));
 
 
-        void Emit(DirectOpInfo op, CilMetadataIndex metadata, AsmArchive archive)
+        void Emit(FastDirectOp op, CilMetadataIndex metadata, AsmArchive archive)
         {
             try
             {
@@ -142,7 +177,7 @@ namespace Z0
             }
         }
 
-        void Emit(GenericOpInfo op, CilMetadataIndex metadata, AsmArchive archive)
+        void Emit(FastGenericOp op, CilMetadataIndex metadata, AsmArchive archive)
         {
             try
             {
@@ -159,13 +194,13 @@ namespace Z0
             }
         }
 
-        void Emit(IEnumerable<GenericOpInfo> ops, CilMetadataIndex metadata, AsmArchive archive)
+        void Emit(IEnumerable<FastGenericOp> ops, CilMetadataIndex metadata, AsmArchive archive)
         {
             foreach(var op in ops)
                 Emit(op,metadata,archive);
         }
 
-        void Emit(IEnumerable<DirectOpInfo> ops, CilMetadataIndex metadata, AsmArchive archive)
+        void Emit(IEnumerable<FastDirectOp> ops, CilMetadataIndex metadata, AsmArchive archive)
         {
             foreach(var op in ops)
                 Emit(op,metadata,archive);
@@ -174,10 +209,10 @@ namespace Z0
         void Emit(IOperationCatalog c)
         {
             var metadata = CilMetadataIndex.Create(c.DeclaringAssembly);                
-            var archive = AsmArchive.Define(c.Name);
+            var archive = AsmArchive.Define(c.CatalogName);
             archive.Clear();
-            Emit(c.Generic, metadata, archive);
-            Emit(c.Direct, metadata, archive);
+            Emit(c.GenericOps, metadata, archive);
+            Emit(c.DirectOps, metadata, archive);
 
         }
 
@@ -190,18 +225,63 @@ namespace Z0
         {
             Clear(DynamicSubject);
             ResolveDynamic(n128,z32);
+            ResolveDynamic(n256,z32);
 
         }
-        public override void Execute()
-        {
 
-            var host = typeof(mathspan);
+        public void EmitGeneric(Type host)
+        {
+            EmittingHostOps(host);
+
             var fastops = host.FastOpGenerics();
             var closures = fastops.Closures();
             var archive = AsmArchive.Define(host.Name);
             archive.Clear();
             foreach(var (moniker,method) in closures)
-                archive.Save(NativeReader.read(method).CodeSet(moniker, method.CilFunc()));
+            {
+                var data = NativeReader.read(method);
+                archive.Save(data.Code.WithId(moniker));             
+            }
+        }
+
+        public void EmitDirect(Type host)
+        {
+            EmittingHostOps(host);
+
+            var archive = AsmArchive.Define(host.Name);
+            archive.Clear();
+
+            var fastops = host.FastOpDirect();            
+            foreach(var op in fastops)
+            {
+                if(op.RequiresImmediate)
+                {
+
+                }
+                else
+                {
+                    var data = NativeReader.read(op.Method);
+                    archive.Save(data.Code);             
+                }
+            }
+        }
+
+        public void EmitDirect(IOperationCatalog catalog)
+            => iter(catalog.DirectApiHosts,EmitDirect);
+
+        public void EmitGeneric(IOperationCatalog catalog)
+            => iter(catalog.GenericApiHosts,EmitGeneric);
+
+        public override void Execute()
+        {
+            EmitImmediates();
+            EmitDirect(IntrinsicsCatalog);
+            EmitGeneric(IntrinsicsCatalog);
+
+
+            //iter(IntrinsicsCatalog.Services, s => print(s.Name + s.Host.Name));
+            
+
         }
 
     }

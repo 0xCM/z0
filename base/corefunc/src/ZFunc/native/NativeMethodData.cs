@@ -19,8 +19,8 @@ namespace Z0
         public static NativeMethodData Empty => default;
 
         [MethodImpl(Inline)]
-        public NativeMethodData(MethodInfo source, ulong start, ulong end, byte[] content)
-            : base(source, source, (start,end), content)
+        public NativeMethodData(MethodInfo method, ulong start, ulong end, byte[] content)
+            : base(method, method, (start,end), content)
         {
 
         }

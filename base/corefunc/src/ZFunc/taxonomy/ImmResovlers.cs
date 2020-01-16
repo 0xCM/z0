@@ -13,7 +13,25 @@ namespace Z0
     using static zfunc;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface Imm8Resolver : IFunc
+    public interface ImmResolver : IFunc
+    {
+        PrimalKind ImmKind => PrimalKind.None;
+
+        OpArityKind ResolvedArity => OpArityKind.Nullary;
+
+        SegmentedWidth OperandWidth => SegmentedWidth.None;
+
+        SegmentationKind Segmentation => SegmentationKind.None;
+    }
+
+    public interface ImmResolver<T> : ImmResolver
+        where T : unmanaged
+    {
+        PrimalKind ImmResolver.ImmKind => PrimalType.kind<T>();
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface Imm8Resolver : ImmResolver<byte>
     {
             
     }
@@ -22,9 +40,9 @@ namespace Z0
     public interface IUnaryImm8Resolver<T> : Imm8Resolver
         where T :struct
     {
-        DynamicDelegate<UnaryOp<T>>  @delegate(byte imm8); 
+        DynamicDelegate<UnaryOp<T>>  @delegate(byte imm8);  
 
-        
+        OpArityKind ImmResolver.ResolvedArity => OpArityKind.Unary;
     }
 
     [SuppressUnmanagedCodeSecurity]
@@ -33,39 +51,74 @@ namespace Z0
     {
         DynamicDelegate<BinaryOp<T>>  @delegate(byte imm8);  
 
+        OpArityKind ImmResolver.ResolvedArity => OpArityKind.Binary;        
+        
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVImm8Resolver<V> : Imm8Resolver
+        where V : struct
+    {
+
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVUnaryImm8Resolver<W,V> : IVImm8Resolver<V>
+        where V : struct
+        where W : unmanaged, ITypeNat
+    {
+        DynamicDelegate<UnaryOp<V>>  @delegate(byte imm8);  
+
+        SegmentationKind ImmResolver.Segmentation => SegmentationKind.Vectorized;
+
+        SegmentedWidth ImmResolver.OperandWidth => (SegmentedWidth)nateval<W>();
+
+        OpArityKind ImmResolver.ResolvedArity => OpArityKind.Unary;           
+
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVBinaryImm8Resolver<W,V> : IVImm8Resolver<V>
+        where V : struct
+        where W : unmanaged, ITypeNat
+    {
+        DynamicDelegate<BinaryOp<V>>  @delegate(byte imm8);  
+
+        SegmentationKind ImmResolver.Segmentation => SegmentationKind.Vectorized;
+
+        SegmentedWidth ImmResolver.OperandWidth => (SegmentedWidth)nateval<W>();
+
+        OpArityKind ImmResolver.ResolvedArity => OpArityKind.Binary;           
+
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVUnaryImm8Resolver128<T> : IVUnaryImm8Resolver<N128,Vector128<T>>
+        where T : unmanaged
+    {
+
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVUnaryImm8Resolver256<T> : IVUnaryImm8Resolver<N256,Vector256<T>>
+        where T : unmanaged
+    {
+
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVBinaryImm8Resolver128<T> : IVBinaryImm8Resolver<N128,Vector128<T>>
+        where T : unmanaged
+    {
+
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVBinaryImm8Resolver256<T>  : IVBinaryImm8Resolver<N256,Vector256<T>>
+        where T : unmanaged
+    {
         
 
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryImm8Resolver128<T> : IUnaryImm8Resolver<Vector128<T>>
-        where T : unmanaged
-    {
-
-
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryImm8Resolver256<T> : IUnaryImm8Resolver<Vector256<T>>
-        where T : unmanaged
-    {
-
-
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryImm8Resolver128<T> : IBinaryImm8Resolver<Vector128<T>>
-        where T : unmanaged
-    {
-        
-
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryImm8Resolver256<T> : IBinaryImm8Resolver<Vector256<T>>
-        where T : unmanaged
-    {
-        
 
     }
 

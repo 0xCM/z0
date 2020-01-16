@@ -19,18 +19,25 @@ namespace Z0
         const int IPad = 40;
 
         /// <summary>
-        /// Formats an assembly function specifier
+        /// Formats the assembly function detail
         /// </summary>
         /// <param name="src">The source function</param>
         /// <param name="pad">The padding between each instruction and associated commentary</param>
-        public static string Format(this AsmFuncInfo src)
+        public static string FormatDetail(this AsmFuncInfo src)
             => lines(src.FormatHeader(),  src.FormatInstructions(IPad));                
+
+        /// <summary>
+        /// Formats the function body encoding as a comma-separated list of hex values
+        /// </summary>
+        /// <param name="src">The source function</param>
+        public static string FormatEncoding(this AsmFuncInfo src)
+            => src.Code.Data.FormatHex(AsciSym.Comma, true, true, true);
 
         /// <summary>
         /// Formats a single operand
         /// </summary>
         /// <param name="src">The source operand</param>
-        public static string Format(this AsmOperandInfo src)
+        static string Format(this AsmOperandInfo src)
         {
             var fmt = src.ImmInfo.Map(i => $"{i.Value.FormatHex(false,true,false,false)}:{i.Label}", () => string.Empty);
             fmt += src.Register.Map(r => r.RegisterName, () => string.Empty);
@@ -45,7 +52,7 @@ namespace Z0
         /// Formats the operands contained in an instruction
         /// </summary>
         /// <param name="src">The instruction description</param>
-        public static string FormatOperands(this AsmInstructionInfo src)
+        static string FormatOperands(this AsmInstructionInfo src)
         {
             var count = src.Operands.Length;
             if(count == 0)
@@ -66,7 +73,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source instruction</param>
         /// <param name="pad">The minimum character width of the instruction content</param>
-        public static string Format(this AsmInstructionInfo src, int pad)
+        static string Format(this AsmInstructionInfo src, int pad)
         {
             var address = src.Offset.FormatHex(true,true,false,false);
             var content = src.Display.PadRight(pad, AsciSym.Space);
@@ -82,7 +89,7 @@ namespace Z0
             return (address + AsciSym.Space + content + "; " + title + " " + operands).PadRight(90, AsciSym.Space) + encoding;
         }
         
-        public static string FormatInstructions(this AsmFuncInfo src, int pad)
+        static string FormatInstructions(this AsmFuncInfo src, int pad)
         {
             var format = text();            
             for(var i = 0; i< src.InstructionCount; i++)
@@ -103,9 +110,10 @@ namespace Z0
         /// <param name="src">The source function</param>
         /// <param name="encoding">Specifies whether to include the encoded hex bytes</param>
         /// <param name="location">Specifies whether to include the assembly-relative function location address</param>
-        public static string FormatHeader(this AsmFuncInfo src, bool encoding = true,  bool location = false)
+        static string FormatHeader(this AsmFuncInfo src, bool encoding = true,  bool location = false)
         {
-            var namefmt = src.Signature.MapValueOrElse(s => s.Format(), () => src.Name.Text);
+            //var namefmt = src.Signature.MapValueOrElse(s => s.Format(), () => src.Name.Text);
+            var namefmt = src.Code.Label;
             var header = line(concat(BeginComment, $"function: {namefmt}")); 
             if(encoding)           
                 header += src.FormatEncodingProp();
@@ -114,21 +122,15 @@ namespace Z0
             return header;
         }
 
-        /// <summary>
-        /// Formats the function body encoding as a comma-separated list of hex values
-        /// </summary>
-        /// <param name="src">The source function</param>
-        public static string FormatEncoding(this AsmFuncInfo src)
-            => src.Encoding.FormatHex(AsciSym.Comma, true, true, true);
 
         /// <summary>
         /// Formats the encoded bytes as a comment
         /// </summary>
         /// <param name="src">The source function</param>
-        public static string FormatEncodingProp(this AsmFuncInfo src)
+        static string FormatEncodingProp(this AsmFuncInfo src)
         {
-            var propdecl = $"static ReadOnlySpan<byte> {src.FunctionName}Bytes";
-            return concat(BeginComment, $"{propdecl} => new byte[{src.Encoding.Length}]", embrace(src.FormatEncoding()), AsciSym.Semicolon);              
+            var propdecl = $"static ReadOnlySpan<byte> {src.Name}Bytes";
+            return concat(BeginComment, $"{propdecl} => new byte[{src.Code.Data.Length}]", embrace(src.FormatEncoding()), AsciSym.Semicolon);              
         }
 
         static string HexFormat(this ulong src)

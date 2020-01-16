@@ -143,7 +143,7 @@ namespace Z0
         static Moniker FromBlocked(MethodInfo method)
         {
             var type = method.ParameterTypes().First();       
-            var segkind = type.GenericTypeArguments.FirstOrDefault().Kind();     
+            var segkind = type.GenericArguments().FirstOrDefault().Kind();     
             var generic = method.IsConstructedGenericMethod;
             var w = type.BitWidth();
             var opname = method.Name;
@@ -160,7 +160,7 @@ namespace Z0
         static Moniker FromVectorOp(MethodInfo method)
         {
             var v = method.ParameterTypes().First();       
-            var segkind = v.GenericTypeArguments.FirstOrDefault().Kind();         
+            var segkind = v.GenericArguments().FirstOrDefault().Kind();         
             return define(method.Name, v.BitWidth(), segkind, method.IsConstructedGenericMethod,false);                            
         }
 
@@ -170,7 +170,7 @@ namespace Z0
         /// <param name="method">The operation method</param>
         static Moniker FromVectorized(MethodInfo method)
         {
-            var input = method.ParameterTypes().ToArray();
+            var args = method.ParameterTypes().ToArray();
             var name = method.Name + AsciSym.Underscore;
             
             if(method.IsOperator())
@@ -179,25 +179,25 @@ namespace Z0
             if(method.IsConstructedGenericMethod)
                 name += GenericIndicator;
 
-            for(var i=0; i<input.Length; i++)
+            for(var i=0; i<args.Length; i++)
             {
-                var segment = input[i];
-                var w = segment.BitWidth();
+                var arg = args[i];
+                var w = arg.BitWidth();
                 if(w == 0)
                     continue;
                 
                 if(i != 0)
                     name += AsciSym.Underscore;
 
-                if(segment.IsVector())
+                if(arg.IsVector())
                 {
-                    var segtype = segment.GetGenericArguments().Single();
+                    var segtype = arg.GenericArguments().Single();
                     var segwidth = segtype.BitWidth();
                     name += ($"{w}x{segwidth}" + segtype.Kind().Indicator());
                 }
                 else
                 {
-                    name += ($"{w}" + segment.Kind().Indicator());
+                    name += ($"{w}" + arg.Kind().Indicator());
                 }                
             }
             return new Moniker(name);            

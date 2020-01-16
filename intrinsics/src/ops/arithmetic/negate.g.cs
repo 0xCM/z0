@@ -29,7 +29,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vnegate(v8u(x)));
+                return vgeneric<T>(dinx.vnegate(v8u(x)));
             else if(typeof(T) == typeof(ushort))
                 return vgeneric<T>(dinx.vnegate(v16u(x)));
             else if(typeof(T) == typeof(uint))
@@ -45,9 +45,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return As.vgeneric<T>(dinx.vnegate(v8i(x)));
+                 return vgeneric<T>(dinx.vnegate(v8i(x)));
             else if(typeof(T) == typeof(short))
-                 return As.vgeneric<T>(dinx.vnegate(v16i(x)));
+                 return vgeneric<T>(dinx.vnegate(v16i(x)));
             else if(typeof(T) == typeof(int))
                  return vgeneric<T>(dinx.vnegate(v32i(x)));
             else if(typeof(T) == typeof(long))
@@ -87,6 +87,5 @@ namespace Z0
             else 
                 return vnegate_i(x);
         }
-
     }
 }

@@ -1,4 +1,4 @@
-// 2020-01-15 03:57:59:254
+// 2020-01-15 19:20:39:148
 bit check_and_1(Vector128<uint> x, Vector128<uint> y)
 {
 //  Id := 100664157, Name := Z0.bit Z0.vxops::check_and_1(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
@@ -151,7 +151,7 @@ void loop_1(ReadOnlySpan<uint> src, Span<uint> dst)
   IL_0001: call Z0.GXTypes/Negate`1<System.UInt32> Z0.GX::negate<System.UInt32>(System.UInt32)
   IL_0006: ldarg.0
   IL_0007: ldarg.1
-  IL_0008: call System.Void Z0.Loop::run<Z0.GXTypes/Negate`1<System.UInt32>,System.UInt32>(Z0.GXTypes/Negate`1<System.UInt32>,System.ReadOnlySpan`1<System.UInt32>,System.Span`1<System.UInt32>)
+  IL_0008: call System.Void Z0.SpanFunc::run<Z0.GXTypes/Negate`1<System.UInt32>,System.UInt32>(Z0.GXTypes/Negate`1<System.UInt32>,System.ReadOnlySpan`1<System.UInt32>,System.Span`1<System.UInt32>)
   IL_000D: ret
 }
 
@@ -166,7 +166,7 @@ void loop_2(ArrayExchange<uint> src, ArrayExchange<uint> dst)
   IL_0001: call Z0.GXTypes/Negate`1<System.UInt32> Z0.GX::negate<System.UInt32>(System.UInt32)
   IL_0006: ldarg.0
   IL_0007: ldarg.1
-  IL_0008: call System.Void Z0.Loop::run<Z0.GXTypes/Negate`1<System.UInt32>,System.UInt32>(Z0.GXTypes/Negate`1<System.UInt32>,Z0.ArrayExchange`1<System.UInt32>,Z0.ArrayExchange`1<System.UInt32>)
+  IL_0008: call System.Void Z0.SpanFunc::run<Z0.GXTypes/Negate`1<System.UInt32>,System.UInt32>(Z0.GXTypes/Negate`1<System.UInt32>,Z0.ArrayExchange`1<System.UInt32>,Z0.ArrayExchange`1<System.UInt32>)
   IL_000D: ret
 }
 

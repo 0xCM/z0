@@ -81,7 +81,7 @@ namespace Z0
                         format.Append(AsciSym.Space);
                     }
                 }
-                format.Append(data.Content[i].FormatHex(true, true));
+                format.Append(data.Code[i].FormatHex(true, true));
                 format.Append(AsciSym.Space);
             }
             format.AppendLine();   

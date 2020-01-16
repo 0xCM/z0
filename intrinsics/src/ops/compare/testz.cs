@@ -16,15 +16,15 @@ namespace Z0
 
     partial class dinx
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit testz(ulong a, ulong b)
             => dinx.vtestz(CpuVector.vbroadcast(n128,a), CpuVector.vbroadcast(n128,b));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit testc(ulong a, ulong b)
             => dinx.vtestc(CpuVector.vbroadcast(n128,a), CpuVector.vbroadcast(n128,b));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit testc(ulong a)
             => dinx.vtestc(CpuVector.vbroadcast(n128,a));
 
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestz(Vector128<byte> src, Vector128<byte> mask)
             => TestZ(src, mask);        
 
@@ -44,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestz(Vector128<sbyte> src, Vector128<sbyte> mask)
             => TestZ(src, mask);        
 
@@ -54,7 +54,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestz(Vector128<short> src, Vector128<short> mask)
             => TestZ(src, mask);        
 
@@ -64,7 +64,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestz(Vector128<ushort> src, Vector128<ushort> mask)
             => TestZ(src, mask);        
 
@@ -74,7 +74,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestz(Vector128<int> src, Vector128<int> mask)
             => TestZ(src, mask);        
 
@@ -84,7 +84,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestz(Vector128<uint> src, Vector128<uint> mask)
             => TestZ(src, mask);        
 
@@ -94,7 +94,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestz(Vector128<long> src, Vector128<long> mask)
             => TestZ(src, mask);        
 
@@ -104,7 +104,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestz(Vector128<ulong> src, Vector128<ulong> mask)
             => TestZ(src, mask);        
 
@@ -114,7 +114,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestz(Vector256<sbyte> src, Vector256<sbyte> mask)
             => TestZ(src, mask);        
 
@@ -124,7 +124,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestz(Vector256<byte> src, Vector256<byte> mask)
             => TestZ(src, mask);        
 
@@ -134,7 +134,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestz(Vector256<short> src, Vector256<short> mask)
             => TestZ(src, mask);        
 
@@ -144,7 +144,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestz(Vector256<ushort> src, Vector256<ushort> mask)
             => TestZ(src, mask);        
 
@@ -154,7 +154,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestz(Vector256<int> src, Vector256<int> mask)
             => TestZ(src, mask);        
 
@@ -164,7 +164,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestz(Vector256<uint> src, Vector256<uint> mask)
             => TestZ(src, mask);        
 
@@ -174,7 +174,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestz(Vector256<long> src, Vector256<long> mask)
             => TestZ(src, mask);        
 
@@ -184,7 +184,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit vtestz(Vector256<ulong> src, Vector256<ulong> mask)
             => TestZ(src, mask);        
     }    

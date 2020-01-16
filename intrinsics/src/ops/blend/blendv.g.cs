@@ -20,8 +20,30 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static Vector128<T> vblendv<T>(Vector128<T> x, Vector128<T> y, Vector128<T> spec)        
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return vgeneric<T>(dinx.vblendv(v8u(x), v8u(y), v8u(spec)));
+            else if(typeof(T) == typeof(ushort))
+                return vgeneric<T>(dinx.vblendv(v16u(x), v16u(y), v16u(spec)));
+            else if(typeof(T) == typeof(uint))
+                return vgeneric<T>(dinx.vblendv(v32u(x), v32u(y), v32u(spec)));
+            else if(typeof(T) == typeof(ulong))
+                return vgeneric<T>(dinx.vblendv(v64u(x), v64u(y), v64u(spec)));
+            else
+                return vblendv_i(x,y,spec);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        public static Vector256<T> vblendv<T>(Vector256<T> x, Vector256<T> y, Vector256<T> spec)        
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -64,29 +86,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
-        public static Vector256<T> vblendv<T>(Vector256<T> x, Vector256<T> y, Vector256<T> spec)        
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vblendv(v8u(x), v8u(y), v8u(spec)));
-            else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vblendv(v16u(x), v16u(y), v16u(spec)));
-            else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vblendv(v32u(x), v32u(y), v32u(spec)));
-            else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vblendv(v64u(x), v64u(y), v64u(spec)));
-            else
-                return vblendv_i(x,y,spec);
-
-        }
-
         [MethodImpl(Inline)]
         static Vector256<T> vblendv_i<T>(Vector256<T> x, Vector256<T> y, Vector256<T> spec)        
             where T : unmanaged
@@ -117,5 +116,4 @@ namespace Z0
 
         }
     }
-
 }

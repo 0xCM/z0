@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
-        public static Vector512<T> vadd<T>(Vector512<T> x, Vector512<T> y)
+        public static Vector512<T> vadd<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
                 => (vadd(x.Lo,y.Lo),vadd(x.Hi, y.Hi));
         

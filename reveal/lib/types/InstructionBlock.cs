@@ -34,12 +34,12 @@ namespace Z0
             this.Decoded = decoded;
         }
 
-        byte[] EncodedData; 
-
         /// <summary>
         /// A description for the block
         /// </summary>
         public string Label {get;}
+
+        byte[] EncodedData; 
 
         /// <summary>
         /// The encoded instructions

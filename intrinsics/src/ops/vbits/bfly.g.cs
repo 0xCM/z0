@@ -19,18 +19,18 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static Vector128<T> vbfly<T>(N1 n, Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vbfly(n, vcast8u(x)));
+                return vgeneric<T>(dinx.vbfly(n, v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vbfly(n,vcast16u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vbfly(n,vcast32u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vbfly(n,vcast64u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -40,18 +40,18 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static Vector128<T> vbfly<T>(N2 n, Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vbfly(n, vcast8u(x)));
+                return vgeneric<T>(dinx.vbfly(n, v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vbfly(n,vcast16u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vbfly(n,vcast32u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vbfly(n,vcast64u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -62,18 +62,18 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         /// <remarks> [0 1 2 3 | 4 5 6 7 | 8 9 A B | C D E F] -> [0 2 1 3 | 4 6 5 7 | 8 A 9 B | C E D F]</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static Vector128<T> vbfly<T>(N4 n, Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return x;
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vbfly(n,vcast16u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vbfly(n,vcast32u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vbfly(n,vcast64u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -84,16 +84,16 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         /// <remarks> [0 1 2 3 | 4 5 6 7] -> [0 2 1 3 | 4 6 5 7]</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static Vector128<T> vbfly<T>(N8 n, Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort))
                 return x;
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vbfly(n,vcast32u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vbfly(n,vcast64u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -103,14 +103,14 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static Vector128<T> vbfly<T>(N16 n, Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort) || typeof(T) == typeof(uint))
                 return x;
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vbfly(n,vcast64u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -120,18 +120,18 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static Vector256<T> vbfly<T>(N1 n, Vector256<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vbfly(n,vcast8u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vbfly(n,vcast16u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vbfly(n,vcast32u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vbfly(n,vcast64u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -141,18 +141,18 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static Vector256<T> vbfly<T>(N2 n, Vector256<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vbfly(n,vcast8u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vbfly(n,vcast16u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vbfly(n,vcast32u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vbfly(n,vcast64u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -163,18 +163,18 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         /// <remarks> [0 1 2 3 | 4 5 6 7 | 8 9 A B | C D E F] -> [0 2 1 3 | 4 6 5 7 | 8 A 9 B | C E D F]</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static Vector256<T> vbfly<T>(N4 n, Vector256<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return x;
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vbfly(n,vcast16u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vbfly(n,vcast32u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vbfly(n,vcast64u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -185,16 +185,16 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         /// <remarks> [0 1 2 3 | 4 5 6 7] -> [0 2 1 3 | 4 6 5 7]</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static Vector256<T> vbfly<T>(N8 n, Vector256<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort))
                 return x;
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vbfly(n,vcast32u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vbfly(n,vcast64u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -204,14 +204,14 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static Vector256<T> vbfly<T>(N16 n, Vector256<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort) || typeof(T) == typeof(uint))
                 return x;
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vbfly(n,vcast64u(x)));
+                return vgeneric<T>(dinx.vbfly(n,v64u(x)));
             else            
                 throw unsupported<T>();
         }

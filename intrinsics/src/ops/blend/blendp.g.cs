@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <param name="spec">The blend spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector512<T> vblendp<T>(Vector256<T> x, Vector256<T> y, Vector256<T> spec)        
             where T : unmanaged
                 => (vblendv(x,y,spec),vblendv(x,y,vnot(spec)));
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <param name="spec">The blend spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector512<T> vblendp<T>(Vector512<T> x, Vector256<T> spec)        
             where T : unmanaged
                 => (vblendv(x.Lo,x.Hi,spec),vblendv(x.Lo,x.Hi,vnot(spec)));
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <param name="spec">The blend spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector256<T> vblendp<T>(Vector128<T> x, Vector128<T> y, Vector128<T> spec)        
             where T : unmanaged
                 => vconcat(vblendv(x,y,spec),vblendv(x,y,vnot(spec)));
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <param name="spec">The blend spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector256<T> vblendp<T>(Vector256<T> x, Vector128<T> spec)        
             where T : unmanaged
                 => vconcat(vblendv(vlo(x),vhi(x),spec),vblendv(vlo(x),vhi(x),vnot(spec)));

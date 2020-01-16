@@ -1,10 +1,10 @@
-; 2020-01-15 03:57:57:891
+; 2020-01-15 19:20:37:842
 ; function: int devirt1()
-; static ReadOnlySpan<byte> devirt1Bytes => new byte[36]{0x48,0x83,0xEC,0x28,0x90,0x48,0xB9,0xE0,0x86,0x05,0xC8,0xF7,0x7F,0x00,0x00,0xE8,0xCC,0xC2,0xAE,0x5F,0x8B,0x50,0x08,0xFF,0xC2,0x89,0x50,0x08,0x8D,0x42,0x63,0x48,0x83,0xC4,0x28,0xC3};
+; static ReadOnlySpan<byte> devirt1Bytes => new byte[36]{0x48,0x83,0xEC,0x28,0x90,0x48,0xB9,0x28,0x87,0x02,0xC8,0xF7,0x7F,0x00,0x00,0xE8,0x4C,0xC3,0xB1,0x5F,0x8B,0x50,0x08,0xFF,0xC2,0x89,0x50,0x08,0x8D,0x42,0x63,0x48,0x83,0xC4,0x28,0xC3};
 0000h sub rsp,28h                             ; SUB(Sub_rm64_imm8) [RSP,28h:imm64]         encoding(4 bytes) = 48 83 ec 28
 0004h nop                                     ; NOP(Nopd)                                  encoding(1 byte ) = 90
-0005h mov rcx,7FF7C80586E0h                   ; MOV(Mov_r64_imm64) [RCX,7ff7c80586e0h:imm64] encoding(10 bytes) = 48 b9 e0 86 05 c8 f7 7f 00 00
-000fh call 7FF827996CB0h                      ; CALL(Call_rel32_64) [5FAEC2E0h:jmp64]      encoding(5 bytes) = e8 cc c2 ae 5f
+0005h mov rcx,7FF7C8028728h                   ; MOV(Mov_r64_imm64) [RCX,7ff7c8028728h:imm64] encoding(10 bytes) = 48 b9 28 87 02 c8 f7 7f 00 00
+000fh call 7FF827996CB0h                      ; CALL(Call_rel32_64) [5FB1C360h:jmp64]      encoding(5 bytes) = e8 4c c3 b1 5f
 0014h mov edx,[rax+8]                         ; MOV(Mov_r32_rm32) [EDX,mem(32u,RAX:br,:sr)] encoding(3 bytes) = 8b 50 08
 0017h inc edx                                 ; INC(Inc_rm32) [EDX]                        encoding(2 bytes) = ff c2
 0019h mov [rax+8],edx                         ; MOV(Mov_rm32_r32) [mem(32u,RAX:br,:sr),EDX] encoding(3 bytes) = 89 50 08

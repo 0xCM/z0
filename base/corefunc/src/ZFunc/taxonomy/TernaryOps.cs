@@ -11,6 +11,16 @@ namespace Z0
     using System.Security;
 
     /// <summary>
+    /// Defines the canonical shape of a tenary operator
+    /// </summary>
+    /// <param name="a">The first operand</param>
+    /// <param name="b">The second operand</param>
+    /// <param name="c">The third operand</param>
+    /// <typeparam name="T">The operand type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public delegate T TernaryOp<T>(T a, T b, T c);
+
+    /// <summary>
     /// Characterizes a ternary function
     /// </summary>
     /// <typeparam name="A">The left operand type</typeparam>

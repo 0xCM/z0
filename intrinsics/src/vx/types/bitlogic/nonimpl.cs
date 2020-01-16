@@ -13,7 +13,7 @@ namespace Z0
     partial class VXTypes
     {
         [PrimalClosures(PrimalKind.Integers)]
-        public readonly struct NonImpl128<T> : IVBinOp128D<T>
+        public readonly struct NonImpl128<T> : IVBinOp128D<T>, IBinaryBlockedOp128<T>
             where T : unmanaged
         {
             public const string Name = "vnonimpl";
@@ -29,10 +29,15 @@ namespace Z0
             
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b) => gmath.nonimpl(a,b);
+
+            [MethodImpl(Inline)]
+            public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> b, in Block128<T> c)            
+                => ref vblocks.vcnonimpl(a,b,c);
+
         }
 
         [PrimalClosures(PrimalKind.Integers)]
-        public readonly struct NonImpl256<T> : IVBinOp256D<T>
+        public readonly struct NonImpl256<T> : IVBinOp256D<T>, IBinaryBlockedOp256<T>
             where T : unmanaged
         {
             public const string Name = "vnonimpl";
@@ -48,6 +53,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b) => gmath.cnonimpl(a,b);
+
+            [MethodImpl(Inline)]
+            public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> b, in Block256<T> c)            
+                => ref vblocks.vnonimpl(a,b,c);
+
         }
 
     }

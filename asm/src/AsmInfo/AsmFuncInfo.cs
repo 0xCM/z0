@@ -14,23 +14,27 @@ namespace Z0
     /// </summary>
     public class AsmFuncInfo
     {   
-        public AsmFuncInfo(ulong StartAddress, ulong EndAddress, Moniker Name, AsmInstructionInfo[] Instructions, byte[] Encoding)
+        public static AsmFuncInfo Define(ulong StartAddress, ulong EndAddress, AsmCode code, AsmInstructionInfo[] instructions)
+            => new AsmFuncInfo(StartAddress, EndAddress, code, instructions);
+
+        public static AsmFuncInfo Define(ulong StartAddress, ulong EndAddress, AsmCode code, MethodSig sig, AsmInstructionInfo[] instructions)
+            => new AsmFuncInfo(StartAddress, EndAddress, code, sig, instructions);
+
+        public AsmFuncInfo(ulong StartAddress, ulong EndAddress, AsmCode code, AsmInstructionInfo[] instructions)
         {
             this.StartAddress = StartAddress;
             this.EndAddress = EndAddress;
-            this.Name = Name;
-            this.Instructions = Instructions;
-            this.Encoding = Encoding;
+            this.Instructions = instructions;
+            this.Code = code;
         }
 
-        public AsmFuncInfo(ulong StartAddress, ulong EndAddress, MethodSig Signature, AsmInstructionInfo[] Instructions, byte[] Encoding)
+        public AsmFuncInfo(ulong StartAddress, ulong EndAddress, AsmCode code, MethodSig Signature,  AsmInstructionInfo[] instructions)
         {
             this.StartAddress = StartAddress;
             this.EndAddress = EndAddress;
             this.Signature = Signature;
-            this.Name = Moniker.define(Signature.MethodName);
-            this.Instructions = Instructions;
-            this.Encoding = Encoding;
+            this.Instructions = instructions;
+            this.Code = code;
         }
 
         /// <summary>
@@ -49,22 +53,29 @@ namespace Z0
         public Option<MethodSig> Signature {get;}
 
         /// <summary>
-        /// The function identifier
-        /// </summary>
-        public Moniker Name {get;}
-
-        /// <summary>
         /// The encoded instructions
         /// </summary>
         public AsmInstructionInfo[] Instructions {get;}
 
         /// <summary>
-        /// The instruction encoding
+        /// The function encoding
         /// </summary>
-        public byte[] Encoding {get;}                
+        public AsmCode Code {get;}
 
-        public string FunctionName
-            => Signature.MapValueOrElse(s => s.MethodName, () => Name.Text);
+        /// <summary>
+        /// The function identifier
+        /// </summary>
+        public Moniker Id 
+            => Code.Id;
+
+        /// <summary>
+        /// The function label
+        /// </summary>
+        public string Label
+            => Code.Label;
+
+        public string Name
+            => Signature.MapValueOrElse(s => s.MethodName, () => Id.Text);
         
         /// <summary>
         /// The number of encoded instructions

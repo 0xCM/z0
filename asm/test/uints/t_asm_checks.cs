@@ -135,14 +135,14 @@ namespace Z0
             where T : unmanaged
         {            
             var f = AsmBuffer.BinOp128(asm);            
-            CheckMatch<T>(ginx.vadd, f, asm.Name);
+            CheckMatch<T>(ginx.vadd, f, asm.Id);
         }
 
         void vadd_check<T>(N256 w, AsmCode<T> asm)
             where T : unmanaged
         {            
             var f = AsmBuffer.BinOp256(asm);
-            CheckMatch<T>(ginx.vadd, f, asm.Name);
+            CheckMatch<T>(ginx.vadd, f, asm.Id);
         }
     }
 }

@@ -7,11 +7,7 @@ namespace Z0
     using System;
     using System.Security;
     using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
-    using System.Globalization;
 
     using static zfunc;
 
@@ -21,36 +17,44 @@ namespace Z0
     public readonly struct AsmCode
     {
         /// <summary>
-        /// The name given to the code block
+        /// The assigned identity
         /// </summary>
-        public readonly Moniker Name;
+        public readonly Moniker Id;
+
+        /// <summary>
+        /// Descriptive text
+        /// </summary>
+        public readonly string Label;
 
         /// <summary>
         /// The encoded asm bytes
         /// </summary>
         public readonly byte[] Data;
         
+        public int Length
+            => Data?.Length ?? 0;
+
         /// <summary>
         /// The canonical zero
         /// </summary>
-        public static AsmCode Empty => new AsmCode(new byte[]{0}, Moniker.Empty);
+        public static AsmCode Empty => new AsmCode(new byte[]{0}, Moniker.Empty, string.Empty);
 
         /// <summary>
         /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
         /// </summary>
         /// <param name="data">The encoded assembly</param>
-        /// <param name="moniker">The identity to confer</param>
-        public static AsmCode Parse(string data, Moniker moniker)
-            => new AsmCode(Hex.parsebytes(data).ToArray(),moniker);
+        /// <param name="id">The identity to confer</param>
+        public static AsmCode Parse(string data, Moniker id)
+            => new AsmCode(Hex.parsebytes(data).ToArray(), id, null);
 
         /// <summary>
         /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
         /// </summary>
         /// <param name="data">The encoded assembly</param>
-        /// <param name="moniker">The identity to confer</param>
-        public static AsmCode<T> Parse<T>(string data, Moniker moniker, T t = default)
+        /// <param name="id">The identity to confer</param>
+        public static AsmCode<T> Parse<T>(string data, Moniker id, T t = default)
             where T : unmanaged
-                => new AsmCode<T>(Hex.parsebytes(data).ToArray(),moniker);
+                => new AsmCode<T>(Hex.parsebytes(data).ToArray(),id,null);
                 
         /// <summary>
         /// Loads an untyped code block from span content
@@ -58,8 +62,8 @@ namespace Z0
         /// <param name="src">The code source</param>
         /// <param name="m">The identifying moniker</param>
         [MethodImpl(Inline)]
-        public static AsmCode Load(byte[] src, Moniker m)
-            => new AsmCode(src, m);
+        public static AsmCode Define(byte[] src, Moniker m, string label)
+            => new AsmCode(src, m, label);
 
         /// <summary>
         /// Loads an untyped code block from span content
@@ -67,28 +71,20 @@ namespace Z0
         /// <param name="src">The code source</param>
         /// <param name="m">The identifying moniker</param>
         [MethodImpl(Inline)]
-        public static AsmCode Load(ReadOnlySpan<byte> src, Moniker m)
-            => new AsmCode(src.ToArray(), m);
+        public static AsmCode Define(ReadOnlySpan<byte> src, Moniker m, string label)
+            => new AsmCode(src.ToArray(), m, label);
 
-        /// <summary>
-        /// Loads a typed code block from span content
-        /// </summary>
-        /// <param name="src">The code source</param>
-        /// <param name="opcode">The identity to confer</param>
-        [MethodImpl(Inline)]
-        public static AsmCode<T> Load<T>(ReadOnlySpan<byte> src, Moniker m)
-            where T:unmanaged
-                => new AsmCode<T>(src.ToArray(), m);        
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(AsmCode code)
             => code.Data;
 
         [MethodImpl(Inline)]
-        internal AsmCode(byte[] Bytes, Moniker name)
+        internal AsmCode(byte[] Bytes, Moniker id, string label)
         {
             this.Data = Bytes;
-            this.Name = name;
+            this.Id = id;
+            this.Label = label ?? id;
         }
 
         /// <summary>
@@ -97,7 +93,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Data.Length == 1 && Data[0] == 0;
+            get => (Length == 0 ) || (Length == 1 && Data[0] == 0);
+        }
+
+        public ref readonly byte this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
         }
                 
         /// <summary>
@@ -110,6 +112,13 @@ namespace Z0
         public AsmCode<T> As<T>()
             where T : unmanaged
                 => new AsmCode<T>(this);
+
+        public AsmCode WithId(Moniker id)
+            => new AsmCode(Data,id, Label);
+
+        public AsmCode WithLabel(string label)
+            => new AsmCode(Data, Id, label);
+
     }
 
     /// <summary>
@@ -120,9 +129,12 @@ namespace Z0
     {
         readonly AsmCode Code;
 
-        public Moniker Name
-            => Code.Name;
+        public Moniker Id
+            => Code.Id;
 
+        public string Label
+            => Code.Label;
+         
         public ReadOnlySpan<byte> Data
             => Code.Data;
 
@@ -141,9 +153,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public AsmCode(byte[] data, Moniker m)
+        public AsmCode(byte[] data, Moniker m, string label)
         {
-            Code = new AsmCode(data,m);
+            Code = new AsmCode(data,m, label);
         }
 
         /// <summary>

@@ -156,7 +156,7 @@ namespace Z0
             var xb = Random.Blocks<T>(w, blocks);
             var yb = Random.Blocks<T>(w, blocks);
             var zb = DataBlocks.alloc<T>(w, blocks);
-            ginx.vor(xb,yb,zb);
+            vblocks.vor(xb,yb,zb);
             
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.or(xb[i],yb[i]), zb[i]);
@@ -173,7 +173,7 @@ namespace Z0
             var xb = Random.Blocks<T>(w, blocks);
             var yb = Random.Blocks<T>(w, blocks);
             var zb = DataBlocks.alloc<T>(w, blocks);
-            ginx.vor(xb,yb,zb);
+            vblocks.vor(xb,yb,zb);
             
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.or(xb[i],yb[i]), zb[i]);

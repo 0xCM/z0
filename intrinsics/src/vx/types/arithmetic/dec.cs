@@ -12,7 +12,8 @@ namespace Z0
 
     partial class VXTypes
     {
-        public readonly struct Dec128<T> : IVUnaryOp128D<T>
+        [PrimalClosures(PrimalKind.Integers)]
+        public readonly struct Dec128<T> : IVUnaryOp128D<T>, IUnaryBlockedOp128<T>
             where T : unmanaged
         {
             public const string Name = "vdec";
@@ -28,9 +29,15 @@ namespace Z0
             
             [MethodImpl(Inline)]
             public T InvokeScalar(T a) => gmath.dec(a);
+
+            [MethodImpl(Inline)]
+            public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> c)            
+                => ref vblocks.vdec(a,c);
+
         }
 
-        public readonly struct Dec256<T> : IVUnaryOp256D<T>
+        [PrimalClosures(PrimalKind.Integers)]
+        public readonly struct Dec256<T> : IVUnaryOp256D<T>, IUnaryBlockedOp256<T>
             where T : unmanaged
         {
             public const string Name = "vdec";
@@ -46,6 +53,10 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T InvokeScalar(T a) => gmath.dec(a);
+
+            [MethodImpl(Inline)]
+            public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> c)            
+                => ref vblocks.vdec(a,c);
         }
     }
 }

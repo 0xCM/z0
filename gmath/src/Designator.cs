@@ -17,9 +17,6 @@ namespace Z0.Designators
     /// </summary>
     public sealed class GMath : AssemblyDesignator<GMath>, ICatalogProvider
     {
-        public override IEnumerable<Type> ApiProviders
-            => items(typeof(gmath),typeof(math),typeof(mathspan));
-
         public IOperationCatalog Catalog 
             => GX.Catalog;
     }

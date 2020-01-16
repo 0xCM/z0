@@ -23,24 +23,33 @@ namespace Z0
     
         FolderPath Location {get;}
 
-        public void SaveAsm(AsmCode asm)
-            => Paths.AsmHexPath(Location, asm.Name).WriteText(asm.Format());
+        public void SaveCode(AsmCode code)
+            => Paths.AsmHexPath(Location, code.Id).WriteText(code.Format());
         
-        public void SaveAsm(InstructionBlock block, Moniker m)
+        public void SaveDetail(AsmCode code)
+            => Paths.AsmDetailPath(Location, code.Id).WriteText(code.DistillAsmFunction().FormatDetail());
+
+        public void Save(AsmCode code)
+        {
+            SaveCode(code);
+            SaveDetail(code);
+        }
+
+        public void Save(InstructionBlock block, Moniker m)
         {
             Paths.AsmDetailPath(Location, m).WriteText(block.Format());
-            SaveAsm(AsmCode.Load(block.Encoded, m));
+            SaveCode(AsmCode.Define(block.Encoded, m, block.Label));
         }
 
         public void Save(AsmCodeSet src)
         {
             Paths.AsmDetailPath(Location, src.Moniker).WriteText(src.Decoded.Format());
-            SaveAsm(AsmCode.Load(src.Decoded.Encoded, src.Moniker));
+            SaveCode(AsmCode.Define(src.Decoded.Encoded, src.Moniker, src.Label));
         }
 
         public void Save(Operation op, CilFuncSpec cil = null)
         {
-            SaveAsm(op.NativeData.Instructions(), op.Moniker);
+            Save(op.NativeData.Instructions(), op.Moniker);
             if(cil != null)
                 Paths.CilPath(Location,op.Moniker).WriteText(cil.Format());                
         }

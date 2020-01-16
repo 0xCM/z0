@@ -9,12 +9,12 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Collections.Generic;
 
-    public class ContractedOpInfo
+    public class FastOpContract
     {
-        public static ContractedOpInfo Define(string name, Type host, IEnumerable<Moniker> reifications)
-            => new ContractedOpInfo(name, host,reifications);
+        public static FastOpContract Define(string name, Type host, IEnumerable<Moniker> reifications)
+            => new FastOpContract(name, host, reifications);
 
-        public ContractedOpInfo(string name, Type host, IEnumerable<Moniker> reifications)
+        public FastOpContract(string name, Type host, IEnumerable<Moniker> reifications)
         {
             this.Name = name;
             this.Host = host;

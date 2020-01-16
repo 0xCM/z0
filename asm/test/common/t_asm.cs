@@ -51,7 +51,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check, asm.Name);
+            CheckAction(check, asm.Id);
         }
 
         protected void CheckAsmMatch<T>(BinaryOp<T> f, AsmCode<T> asm)
@@ -72,7 +72,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check, asm.Name);
+            CheckAction(check, asm.Id);
         }
 
         protected void CheckAsmMatch<T>(UnaryOp<T> f, AsmCode<T> asm)

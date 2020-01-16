@@ -139,7 +139,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vdec(Vector256<ulong> src)
             =>  vsub(src, VPattern.vunits<ulong>(n256));
-
-
     }
 }

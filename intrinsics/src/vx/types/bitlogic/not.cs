@@ -13,7 +13,7 @@ namespace Z0
     partial class VXTypes
     {
         [PrimalClosures(PrimalKind.Integers)]
-        public readonly struct Not128<T> : IVUnaryOp128D<T>
+        public readonly struct Not128<T> : IVUnaryOp128D<T>, IUnaryBlockedOp128<T>
             where T : unmanaged
         {
             public const string Name = "vnot";
@@ -29,10 +29,14 @@ namespace Z0
             
             [MethodImpl(Inline)]
             public T InvokeScalar(T a) => gmath.not(a);
+
+            [MethodImpl(Inline)]
+            public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> c)            
+                => ref vblocks.vnot(a,c);
         }
 
         [PrimalClosures(PrimalKind.Integers)]
-        public readonly struct Not256<T> : IVUnaryOp256D<T>
+        public readonly struct Not256<T> : IVUnaryOp256D<T>, IUnaryBlockedOp256<T>
             where T : unmanaged
         {
             public const string Name = "vnot";
@@ -48,6 +52,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T InvokeScalar(T a) => gmath.not(a);
+            [MethodImpl(Inline)]
+            public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> c)            
+                => ref vblocks.vnot(a,c);
+
+
         }
 
    }

@@ -19,8 +19,7 @@ namespace Z0
             this.Source = source;
             this.Method = method;
             this.Location = location;
-            this.Content = content;
-
+            this.Code = AsmCode.Define(content, Moniker.define(method), method.Signature().Format());
         }
 
         public S Source {get;}
@@ -29,26 +28,19 @@ namespace Z0
 
         public AddressSegment Location {get;}
 
-        public byte[] Content {get;}
+        public AsmCode Code {get;}
 
-        public int Length => (int)Location.Length;
+        // public int Length 
+        //     => (int)Location.Length;
 
-        public bool IsEmpty  => Content.Length == 0;
+        // public bool IsEmpty 
+        //     => Code.IsEmpty;
 
-        public ulong StartAddress => Location.Start;
+        // public ulong StartAddress 
+        //     => Location.Start;
 
-        public ulong EndAddress => Location.End;
-
-        public Moniker Identity => Moniker.define(Method);
-
-        /// <summary>
-        /// Queries/manipulates a content byte
-        /// </summary>
-        public ref byte this[int i]
-        {
-            [MethodImpl(Inline)]
-            get => ref Content[i];
-        }
+        // public ulong EndAddress 
+        //     => Location.End;
  
     }
 
@@ -67,15 +59,7 @@ namespace Z0
         /// <summary>
         /// The memory content
         /// </summary>
-        byte[] Content {get;}
-
-        /// <summary>
-        /// Queries/manipulates a content byte
-        /// </summary>
-        ref byte this[int i] {get;}
-
-        Moniker Identity
-            => Moniker.define(Method);
+        AsmCode Code {get;}
 
         /// <summary>
         /// Defines the inclusive lower bound of the block
@@ -94,6 +78,13 @@ namespace Z0
 
         bool IsEmpty 
             => Length == 0;
+
+        Moniker Id 
+            => Code.Id;
+
+        string Label 
+            => Code.Label;
+
     }
 
 }

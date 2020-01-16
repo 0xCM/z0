@@ -105,6 +105,36 @@ namespace Z0
                 => Select256<T>.Op;
 
         [MethodImpl(Inline)]
+        public static Impl128<T> vimpl<T>(N128 w, T t = default)
+            where T : unmanaged
+                => Impl128<T>.Op;
+
+        [MethodImpl(Inline)]
+        public static Impl256<T> vimpl<T>(N256 w, T t = default)
+            where T : unmanaged
+                => Impl256<T>.Op;
+
+        [MethodImpl(Inline)]
+        public static NonImpl128<T> vnonimpl<T>(N128 w, T t = default)
+            where T : unmanaged
+                => NonImpl128<T>.Op;
+
+        [MethodImpl(Inline)]
+        public static NonImpl256<T> vnonimpl<T>(N256 w, T t = default)
+            where T : unmanaged
+                => NonImpl256<T>.Op;
+
+        [MethodImpl(Inline)]
+        public static CImpl128<T> vcimpl<T>(N128 w, T t = default)
+            where T : unmanaged
+                => CImpl128<T>.Op;
+
+        [MethodImpl(Inline)]
+        public static CImpl256<T> vcimpl<T>(N256 w, T t = default)
+            where T : unmanaged
+                => CImpl256<T>.Op;
+
+        [MethodImpl(Inline)]
         public static CNonImpl128<T> vcnonimpl<T>(N128 w, T t = default)
             where T : unmanaged
                 => CNonImpl128<T>.Op;

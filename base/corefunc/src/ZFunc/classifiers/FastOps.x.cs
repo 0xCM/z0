@@ -35,29 +35,28 @@ namespace Z0
         /// Extracts fastop metadata from a host type for non-generic operations
         /// </summary>
         /// <param name="host">The source type</param>
-        public static IEnumerable<DirectOpInfo> FastOpDirect(this Type host)
-            => host.FastOpMethods().Where(m => m.IsNonGeneric()).Select(m => DirectOpInfo.Define(m.FastOpName(),m));
+        public static IEnumerable<FastDirectOp> FastOpDirect(this Type host)
+            => host.FastOpMethods().Where(m => m.IsNonGeneric()).Select(m => FastDirectOp.Define(m.FastOpName(),m));
 
-        public static IEnumerable<DirectOpInfo> FastOpDirect(this IEnumerable<Type> hosts)
+        public static IEnumerable<FastDirectOp> FastOpDirect(this IEnumerable<Type> hosts)
             => from host in hosts
                 from op in host.FastOpDirect()
                 select op;
-
 
         /// <summary>
         /// Extracts fastop metadata from a host type for generic operations
         /// </summary>
         /// <param name="host">The source type</param>
-        public static IEnumerable<GenericOpInfo> FastOpGenerics(this Type host) 
+        public static IEnumerable<FastGenericOp> FastOpGenerics(this Type host) 
             => from m in host.FastOpMethods().Where(m => m.IsOpenGeneric())
                 let def = m.GetGenericMethodDefinition()
                 let name = m.FastOpName()
                 let attrib = def.CustomAttribute<PrimalClosuresAttribute>()
                 let closures = attrib.MapValueOrElse(a => a.Closures, () => PrimalKind.Integers).Distinct()
                 let monikers = closures.Select(k => Moniker.define(name,k,true))
-                select GenericOpInfo.Define(name,def,monikers);
+                select FastGenericOp.Define(name,def,monikers);
 
-        public static IEnumerable<GenericOpInfo> FastOpGenerics(this IEnumerable<Type> hosts)
+        public static IEnumerable<FastGenericOp> FastOpGenerics(this IEnumerable<Type> hosts)
             => from host in hosts
                 from op in host.FastOpGenerics()
                 select op;
@@ -66,7 +65,7 @@ namespace Z0
         /// Closes generic operations over the set of primal types that each operation supports
         /// </summary>
         /// <param name="generics">Metadata for generic operations</param>
-        public static IEnumerable<Pair<Moniker,MethodInfo>> Closures(this IEnumerable<GenericOpInfo> generics)
+        public static IEnumerable<Pair<Moniker,MethodInfo>> Closures(this IEnumerable<FastGenericOp> generics)
             => from g in generics
                from r in g.Reifications
                where r.PrimalKind.IsSome()

@@ -14,12 +14,12 @@ namespace Z0
 
     partial class ginx
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector128<T> vblend8x16<T>(Vector128<T> x, Vector128<T> y, [Imm] byte spec)        
             where T : unmanaged
                 => vblend8x16_u(x, y, spec);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector256<T> vblend8x16<T>(Vector256<T> x, Vector256<T> y, [Imm] byte spec)        
             where T : unmanaged
                 => vblend8x16_u(x, y, spec);
@@ -39,7 +39,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(v8u(dinx.vblend8x16(v16u(x), v16u(y), spec)));
+                return vgeneric<T>(v8u(dinx.vblend8x16(v16u(x), v16u(y), spec)));
             else if(typeof(T) == typeof(ushort))
                 return vgeneric<T>(dinx.vblend8x16(v16u(x), v16u(y), spec));
             else if(typeof(T) == typeof(uint))

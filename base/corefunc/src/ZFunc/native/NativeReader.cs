@@ -26,11 +26,9 @@ namespace Z0
         /// <param name="m">The method to read</param>
         /// <param name="bufferlen">The size of the target buffer</param>
         public static INativeMemberData read(MethodInfo m)
-        {
-            
+        {            
             var data = read(m, new byte[DefaultBufferLen]);
             return data;
-
         }
         
         /// <summary>

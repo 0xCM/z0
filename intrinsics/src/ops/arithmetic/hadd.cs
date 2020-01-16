@@ -84,7 +84,6 @@ namespace Z0
         public static Vector256<short> vhadd(Vector256<short> x, Vector256<short> y)
             => HorizontalAdd(x, y);
 
-
         /// <summary>
         /// m256i _mm256_hadd_epi32 (__m256i a, __m256i b) VPHADDD ymm, ymm, ymm/m256
         /// </summary>

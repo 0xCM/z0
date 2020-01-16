@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="lo">The value to replicate in the lower lane</param>
         /// <param name="hi">The value to replicate in the upper lane</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vbroadcast(N256 w, byte lo, byte hi)
             => vconcat(vbroadcast(n128, lo),vbroadcast(n128, hi));            
 
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="lo">The value to replicate in the lower lane</param>
         /// <param name="hi">The value to replicate in the upper lane</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vbroadcast(N256 w, ushort lo, ushort hi)
             => vconcat(vbroadcast(n128, lo),vbroadcast(n128, hi));            
 
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="lo">The value to replicate in the lower lane</param>
         /// <param name="hi">The value to replicate in the upper lane</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vbroadcast(N256 w, uint lo, uint hi)
             => vconcat(vbroadcast(n128, lo),vbroadcast(n128, hi));            
 
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="lo">The value to replicate in the lower lane</param>
         /// <param name="hi">The value to replicate in the upper lane</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> vbroadcast(N256 w, ulong lo, ulong hi)
             => vconcat(vbroadcast(n128, lo),vbroadcast(n128, hi));            
 
@@ -68,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to broadcast</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<sbyte> vbroadcast(N128 n, sbyte src)
             => BroadcastScalarToVector128(&src);
 
@@ -77,7 +77,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to broadcast</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<byte> vbroadcast(N128 n, byte src)
             => BroadcastScalarToVector128(&src);
 
@@ -86,7 +86,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to broadcast</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<short> vbroadcast(N128 n, short src)
             => BroadcastScalarToVector128(&src);
 
@@ -95,7 +95,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to broadcast</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<ushort> vbroadcast(N128 n, ushort src)
             => BroadcastScalarToVector128(&src);
 
@@ -104,7 +104,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to broadcast</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<int> vbroadcast(N128 n, int src)
             => BroadcastScalarToVector128(&src);
 
@@ -113,7 +113,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to broadcast</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<uint> vbroadcast(N128 n, uint src)
             => BroadcastScalarToVector128(&src);
 
@@ -122,7 +122,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to broadcast</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<long> vbroadcast(N128 n, long src)
             => BroadcastScalarToVector128(&src);
 
@@ -131,7 +131,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to broadcast</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<ulong> vbroadcast(N128 n, ulong src)
             => BroadcastScalarToVector128(&src);
 
@@ -141,7 +141,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to broadcast</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<sbyte> vbroadcast(N256 n, sbyte src)
             => BroadcastScalarToVector256(&src);
 
@@ -151,7 +151,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to broadcast</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<byte> vbroadcast(N256 n,byte src)
             => BroadcastScalarToVector256(&src);
                         
@@ -161,7 +161,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to broadcast</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<short> vbroadcast(N256 n, short src)
             => BroadcastScalarToVector256(&src);
 
@@ -171,7 +171,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to broadcast</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<ushort> vbroadcast(N256 n, ushort src)
             => BroadcastScalarToVector256(&src);
 
@@ -181,7 +181,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to broadcast</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<int> vbroadcast(N256 n, int src)
             => BroadcastScalarToVector256(&src);
 
@@ -191,7 +191,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to broadcast</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vbroadcast(N256 n, uint src)
             => BroadcastScalarToVector256(&src);
 
@@ -201,7 +201,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to broadcast</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<long> vbroadcast(N256 n, long src)
             => BroadcastScalarToVector256(&src);
 
@@ -211,7 +211,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to broadcast</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<ulong> vbroadcast(N256 n, ulong src)
             => BroadcastScalarToVector256(&src);
     }

@@ -36,9 +36,9 @@ namespace Z0
         public readonly struct Bsrl256<T> : IVShiftOp256<T>, IVUnaryImm8Resolver256<T>
             where T : unmanaged
         {
-            public static Bsrl256<T> Op => default;
-
             public const string Name = "vbsrl";
+
+            public static Bsrl256<T> Op => default;
 
             static N256 w => default;
 

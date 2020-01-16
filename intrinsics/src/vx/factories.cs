@@ -25,8 +25,6 @@ namespace Z0
     {
         static Type ApiG => typeof(ginx);
 
-        static Type Api => typeof(dinx);
-
 
         static MethodInfo gApiMethod(N128 w, string name)
             => ApiG.Methods().WithName(name).Vectorized(128).Single();

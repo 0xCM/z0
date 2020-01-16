@@ -38,6 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
+        [MethodImpl(Inline), Op]
         public static Vector128<short> vmuladj(Vector128<byte> x, Vector128<sbyte> y)
             => MultiplyAddAdjacent(x,y);
 
@@ -46,6 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vmuladj(Vector256<byte> x, Vector256<sbyte> y)
             => MultiplyAddAdjacent(x,y);
 
@@ -54,6 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vmuladj(Vector256<short> x, Vector256<short> y)
             => MultiplyAddAdjacent(x,y);
     }

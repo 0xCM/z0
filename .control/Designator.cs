@@ -72,5 +72,13 @@ namespace Z0.Designators
                 where d is ICatalogProvider
                 select (d as ICatalogProvider).Catalog;
 
+        public IOperationCatalog MathCatalog
+            => (D.GMath.Designated as ICatalogProvider).Catalog;
+
+        
+        public IOperationCatalog IntrinsicsCatalog
+            => (D.Intrinsics.Designated as ICatalogProvider).Catalog;
+
+
    }
 }

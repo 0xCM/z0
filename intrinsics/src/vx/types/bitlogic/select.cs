@@ -13,7 +13,7 @@ namespace Z0
     partial class VXTypes
     {
         [PrimalClosures(PrimalKind.Integers)]
-        public readonly struct Select128<T> : IVTernaryOp128D<T>
+        public readonly struct Select128<T> : IVTernaryOp128D<T>, ITernaryBlockedOp128<T>
             where T : unmanaged
         {
             public const string Name = "vselect";
@@ -29,10 +29,15 @@ namespace Z0
             
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b, T c) => gmath.select(a,b,c);
+
+            [MethodImpl(Inline)]
+            public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> b, in Block128<T> c, in Block128<T> dst)            
+                => ref vblocks.vselect(a,b,c,dst);
+
         }
 
         [PrimalClosures(PrimalKind.Integers)]
-        public readonly struct Select256<T> : IVTernaryOp256D<T>
+        public readonly struct Select256<T> : IVTernaryOp256D<T>, ITernaryBlockedOp256<T>
             where T : unmanaged
         {
             public const string Name = "vselect";
@@ -48,6 +53,11 @@ namespace Z0
             
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T b, T c) => gmath.select(a,b,c);
+
+            [MethodImpl(Inline)]
+            public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> b, in Block256<T> c, in Block256<T> dst)            
+                => ref vblocks.vselect(a,b,c,dst);
+
         }
 
     }

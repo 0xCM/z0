@@ -127,7 +127,7 @@ namespace Z0
             Disassemble(typeof(vxops));    
             Disassemble(typeof(OC.v512));    
             Disassemble(typeof(OC.vblend));
-            Disassemble(typeof(OC.vblocks));    
+            Disassemble(typeof(OC.vblockops));    
             Disassemble(typeof(OC.vconvert));    
             Disassemble(typeof(OC.vcompare));    
             Disassemble(typeof(OC.vload));    

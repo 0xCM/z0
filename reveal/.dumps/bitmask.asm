@@ -1,4 +1,4 @@
-; 2020-01-15 03:57:58:047
+; 2020-01-15 19:20:38:023
 ; function: bit testbit_8i(sbyte src, int pos)
 ; static ReadOnlySpan<byte> testbit_8iBytes => new byte[19]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x0F,0xBE,0xC1,0x0F,0xA3,0xD0,0x0F,0x92,0xC0,0x0F,0xB6,0xC0,0xC3};
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
