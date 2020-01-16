@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory source</param>
         /// <param name="vidx">The index vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<int> vgather(N128 w, in int src, Vector128<int> index)
             => GatherVector128(constptr(in src), index, 4);         
 
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory source</param>
         /// <param name="vidx">The index vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<uint> vgather(N128 w, in uint src, Vector256<ulong> vidx)
             => GatherVector128(constptr(in src), v64i(vidx), 4);         
 
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory source</param>
         /// <param name="vidx">The index vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<long> vgather(N128 w, in long src, Vector128<long> vidx)
             => GatherVector128(constptr(in src), vidx, 8);         
 
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory source</param>
         /// <param name="vidx">The index vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<ulong> vgather(N128 w, in ulong src, Vector128<ulong> vidx)
             => GatherVector128(constptr(in src), v64i(vidx), 8);         
 
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory source</param>
         /// <param name="vidx">The index vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<int> vgather(N256 w, in int src, Vector256<int> index)
             => GatherVector256(constptr(in src), index, 4);         
 
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory source</param>
         /// <param name="vidx">The index vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<uint> vgather(N128 w, in uint src, Vector128<uint> vidx)
             => GatherVector128(constptr(in src), v32i(vidx), 4);         
 
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory source</param>
         /// <param name="vidx">The index vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vgather(N256 w, in uint src, Vector256<uint> vidx)
             => GatherVector256(constptr(in src), v32i(vidx), 4);         
 
@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory source</param>
         /// <param name="vidx">The index vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<ushort> vgather(N128 w, in ushort src, Vector128<ushort> vidx)
             => dinx.vcompact(GatherVector256(constptr(in uint32(in src)), v32i(dinx.vinflate(vidx, n256, z32)),2),n128, z16);
 
@@ -113,7 +113,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory source</param>
         /// <param name="vidx">The index vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<short> vgather(N128 w, in short src, Vector128<short> vidx)
             => v16i(dinx.vcompact(GatherVector256(constptr(in uint32(in src)), v32i(dinx.vinflate(v16u(vidx), n256, z32)),2),n128, z16));
 
@@ -123,7 +123,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory source</param>
         /// <param name="vidx">The index vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<sbyte> vgather(N128 w, in sbyte src, Vector128<sbyte> vidx)
         {
             (var v0, var v1) = dinx.vinflate(v8u(vidx), n512, z32);
@@ -138,7 +138,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory source</param>
         /// <param name="vidx">The index vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<byte> vgather(N128 w, in byte src, Vector128<byte> vidx)
         {
             (var v0, var v1) = dinx.vinflate(vidx, n512, z32);
@@ -147,26 +147,26 @@ namespace Z0
             return dinx.vcompact(x0,x1,n128, z8);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vgather(N256 w, in sbyte src, Vector256<sbyte> vidx)        
             => dinx.vconcat(
                     vgather(n128, in src, dinx.vlo(vidx)), 
                     vgather(n128, in src, dinx.vhi(vidx)));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vgather(N256 w, in byte src, Vector256<byte> vidx)        
             => dinx.vconcat(
                     vgather(n128, in src, dinx.vlo(vidx)), 
                     vgather(n128, in src, dinx.vhi(vidx)));
 
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vgather(N256 w, in short src, Vector256<short> vidx)        
             => dinx.vconcat(
                     vgather(n128, in src, dinx.vlo(vidx)), 
                     vgather(n128, in src, dinx.vhi(vidx)));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vgather(N256 w, in ushort src, Vector256<ushort> vidx)        
             => dinx.vconcat(
                     vgather(n128, in src, dinx.vlo(vidx)), 
@@ -179,7 +179,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory source, covering up to 4*1024 contiguous bytes </param>
         /// <param name="vidx">The index vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<long> vgather(N256 w, in long src, Vector256<long> index)
             => GatherVector256(constptr(in src), index, 8);         
 
@@ -190,7 +190,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory reference</param>
         /// <param name="vidx">The index vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<ulong> vgather(N256 w, in ulong src, Vector256<ulong> vidx)
             => GatherVector256(constptr(in src), v64i(vidx), 8);         
 
@@ -201,7 +201,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory source, covering up to 4*1024 contiguous bytes</param>
         /// <param name="vidx">The index vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<ulong> vgather(N256 w, in ulong src, Vector128<uint> vidx)
             => GatherVector256(constptr(in src), v32i(vidx), 8);         
 
@@ -213,7 +213,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="vidx">The index vector</param>
         /// <param name="scale">The amount by which to scale each index component value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static unsafe Vector256<long> vgather(N256 w, in long src, Vector256<long> vidx, byte scale)
             => GatherVector256(constptr(in src), vidx, scale);         
 
@@ -232,7 +232,7 @@ namespace Z0
         /// FOR j := 0 to 3, i := j*64, m := j*64
         ///	    dst[i+63:i] := MEM[base_addr + SignExtend(vindex[m+63:m])*scale]
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static unsafe Vector256<ulong> vgather(N256 w, in ulong src, Vector256<long> vidx, byte scale)
             => GatherVector256(constptr(in src), vidx, scale);         
 
@@ -251,11 +251,11 @@ namespace Z0
         /// FOR j := 0 to 3, i := j*64, m := j*32	
 	    ///     dst[i+63:i] := MEM[base_addr + SignExtend(vindex[m+31:m])*scale]  
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static unsafe Vector256<ulong> vgather(N256 w, in ulong src, Vector128<int> vidx, byte scale)
             => GatherVector256(constptr(in src), vidx, scale);          
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static unsafe Vector256<uint> vgather(N256 w, in ushort src, Vector256<uint> vidx)
             => GatherVector256(constptr(in uint32(in src)), v32i(vidx), 2);         
 

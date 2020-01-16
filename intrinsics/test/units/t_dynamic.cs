@@ -26,8 +26,8 @@ namespace Z0
 
         public void handle_test()
         {   const byte imm8 = 9;
-            var reified = typeof(ginx).Methods().WithName(nameof(ginx.vbsll)).Vectorized(128).Single().Reify(typeof(uint));
-            var op = reified.UnaryOpImm8<uint>(n128,imm8);
+            var method = typeof(ginx).Methods().WithName(nameof(ginx.vbsll)).Vectorized(128).Single();
+            var op = VectorImm.unary<uint>(n128,method,imm8);
             var handle = GetMethodHandle(op.DynamicMethod);
             Trace(handle.Value.ToString());
 

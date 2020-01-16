@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static Vector128<T> vnor<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vnor_u(x,y);
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static Vector256<T> vnor<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vnor_u(x,y);

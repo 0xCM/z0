@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotl(Vector128<byte> src, [Imm] byte count)
             => dinx.vor(dinx.vsll(src, count),dinx.vsrl(src, (byte)(8 - count)));             
         
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ushort> vrotl(Vector128<ushort> src, [Imm] byte count)
             => dinx.vor(dinx.vsll(src, count), dinx.vsrl(src, (byte)(16 - count)));             
 
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<uint> vrotl(Vector128<uint> src, [Imm] byte count)
             => dinx.vor(dinx.vsll(src, count), dinx.vsrl(src, (byte)(32-count)));
 
@@ -44,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ulong> vrotl(Vector128<ulong> src, [Imm] byte count)
             => dinx.vor(dinx.vsll(src, count),dinx.vsrl(src, (byte)(64 - count)));             
 
@@ -53,7 +53,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vrotl(Vector256<byte> src, [Imm] byte count)
             => dinx.vor(dinx.vsll(src, count),dinx.vsrl(src, (byte)(8 - count)));             
 
@@ -62,7 +62,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vrotl(Vector256<ushort> src, [Imm] byte count)
             => dinx.vor(dinx.vsll(src, count),dinx.vsrl(src, (byte)(16 - count)));             
 
@@ -71,7 +71,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vrotl(Vector256<uint> src, [Imm] byte count)
             => dinx.vor(dinx.vsll(src, count),dinx.vsrl(src, (byte)(32 - count)));             
 
@@ -80,7 +80,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> vrotl(Vector256<ulong> src, [Imm] byte count)
             => dinx.vor(dinx.vsll(src, count),dinx.vsrl(src, (byte)(64 - count)));             
 

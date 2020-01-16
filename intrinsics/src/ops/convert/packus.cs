@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vpackus(Vector128<short> x, Vector128<short> y)
             => PackUnsignedSaturate(x,y);        
 
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vpackus(Vector128<ushort> x, Vector128<ushort> y)
         {
             var mask = CpuVector.vbroadcast(n128, (ushort)(byte.MaxValue));
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static Vector128<byte> vpackus_alt(Vector128<ushort> x, Vector128<ushort> y)
             => v8u(vor(
                     vshuf16x8(x, VData.packusLo(n128,n16,n8)),
@@ -62,7 +62,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ushort> vpackus(Vector128<int> x, Vector128<int> y)
             => PackUnsignedSaturate(x,y);
 
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ushort> vpackus(Vector128<uint> x, Vector128<uint> y)
         {
             var mask = CpuVector.vbroadcast(n128, (uint)(ushort.MaxValue));
@@ -88,7 +88,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static Vector128<ushort> vpackus_alt(Vector128<uint> x, Vector128<uint> y)
         {
             var v1 = dinx.vshuf16x8(x, VData.packusLo(n128,n32,n16));
@@ -102,7 +102,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vpackus(Vector256<short> x, Vector256<short> y)
             => PackUnsignedSaturate(x,y);
 
@@ -112,7 +112,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vpackus(Vector256<ushort> x, Vector256<ushort> y)
         {
             var mask = CpuVector.vbroadcast(n256, (ushort)(byte.MaxValue));
@@ -127,7 +127,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static Vector256<byte> vpackus_alt(Vector256<ushort> x, Vector256<ushort> y)
         {
             var v1 = dinx.vshuf16x8(x,VData.packusLo(n256,n16,n8));
@@ -141,7 +141,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vpackus(Vector256<int> x, Vector256<int> y)
             => PackUnsignedSaturate(x,y);
 
@@ -152,7 +152,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vpackus(Vector256<uint> x, Vector256<uint> y)
         {
             var mask = CpuVector.vbroadcast(n256, (uint)(ushort.MaxValue));
@@ -167,7 +167,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <remarks>See https://stackoverflow.com/questions/12118910/converting-float-vector-to-16-bit-int-without-saturating</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static Vector256<ushort> vpackus_alt(Vector256<uint> x, Vector256<uint> y)
         {
             var v1 = vshuf16x8(x, VData.packusLo(n256,n32,n16));

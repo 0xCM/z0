@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vcover(Vector128<ushort> src, out Vector128<byte> dst)
             => dst = v8u(vor(vsll(src,8),src));
 
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vcover(Vector256<ushort> src, out Vector256<byte> dst)
             => dst = v8u(vor(vsll(src,8),src));
 
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ushort> vcover(Vector128<uint> src, out Vector128<ushort> dst)
             => dst = v16u(vor(vsll(src,16),src));
 
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vcover(Vector256<uint> src, out Vector256<ushort> dst)
              => dst = v16u(vor(vsll(src,16),src));
         
@@ -60,7 +60,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<uint> vcover(Vector128<ulong> src, out Vector128<uint> dst)
             => dst = v32u(vor(vsll(src,32),src));
 
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vcover(Vector256<ulong> src, out Vector256<uint> dst)
             => dst = v32u(vor(vsll(src,32),src));
 
@@ -80,7 +80,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vcover(Vector128<uint> src, out Vector128<byte> dst)
             => dst = vcover(v16u(vxor(vsll(src,16), src)), out dst);
 
@@ -90,7 +90,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vcover(Vector256<uint> src, out Vector256<byte> dst)
             => dst = vcover(v16u(vxor(vsll(src,16), src)), out dst);
 
@@ -100,7 +100,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vcover(Vector128<ulong> src, out Vector128<byte> dst)
             => dst = vcover(v32u(vxor(vsll(src,32), src)), out dst);
 
@@ -110,7 +110,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vcover(Vector256<ulong> src, out Vector256<byte> dst)
             => dst = vcover(v32u(vxor(vsll(src,32), src)), out dst);
     }

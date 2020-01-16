@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vshuf16x8(Vector128<sbyte> src, Vector128<sbyte> spec)
             => Shuffle(src, spec);
 
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vshuf16x8(Vector128<byte> src, Vector128<byte> spec)
             => Shuffle(src, spec);
 
@@ -47,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<short> vshuf16x8(Vector128<short> src, Vector128<byte> spec)
             => v16i(Shuffle(v8u(src), spec));
 
@@ -56,7 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ushort> vshuf16x8(Vector128<ushort> src, Vector128<byte> spec)
             => v16u(Shuffle(v8u(src), spec));
 
@@ -65,7 +65,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<int> vshuf16x8(Vector128<int> src, Vector128<byte> spec)
             => v32i(Shuffle(v8u(src), spec));
 
@@ -74,7 +74,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<uint> vshuf16x8(Vector128<uint> src, Vector128<byte> spec)
             => v32u(Shuffle(v8u(src), spec));
 
@@ -83,7 +83,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<long> vshuf16x8(Vector128<long> src, Vector128<byte> spec)
             => v64i(Shuffle(v8u(src), spec));
 
@@ -92,7 +92,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ulong> vshuf16x8(Vector128<ulong> src, Vector128<byte> spec)
             => v64u(Shuffle(v8u(src), spec));
 
@@ -102,7 +102,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vshuf16x8(Vector256<sbyte> src, Vector256<sbyte> spec)
             => Shuffle(src, spec);
 
@@ -112,7 +112,7 @@ namespace Z0
         ///</summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vshuf16x8(Vector256<byte> src, Vector256<byte> spec)
             => Shuffle(src, spec);
 
@@ -122,7 +122,7 @@ namespace Z0
         ///</summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vshuf16x8(Vector256<short> src, Vector256<byte> spec)
             => v16i(Shuffle(v8u(src), spec));
 
@@ -132,7 +132,7 @@ namespace Z0
         ///</summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vshuf16x8(Vector256<ushort> src, Vector256<byte> spec)
             => v16u(Shuffle(v8u(src), spec));
 
@@ -142,7 +142,7 @@ namespace Z0
         ///</summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vshuf16x8(Vector256<int> src, Vector256<byte> spec)
             => v32i(Shuffle(v8u(src), spec));
 
@@ -152,7 +152,7 @@ namespace Z0
         ///</summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vshuf16x8(Vector256<uint> src, Vector256<byte> spec)
             => v32u(Shuffle(v8u(src), spec));
 
@@ -162,7 +162,7 @@ namespace Z0
         ///</summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<long> vshuf16x8(Vector256<long> src, Vector256<byte> spec)
             => v64i(Shuffle(v8u(src), spec));
 
@@ -172,7 +172,7 @@ namespace Z0
         ///</summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> vshuf16x8(Vector256<ulong> src, Vector256<byte> spec)
             => v64u(Shuffle(v8u(src), spec));
 

@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector128<T> vmergelo<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector256<T> vmergelo<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {

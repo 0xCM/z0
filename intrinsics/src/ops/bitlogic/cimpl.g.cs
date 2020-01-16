@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector128<T> vcimpl<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vcimpl_u(x,y);
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector256<T> vcimpl<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vcimpl_u(x,y);
@@ -67,7 +67,6 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
 
         [MethodImpl(Inline)]
         static Vector256<T> vcimpl_u<T>(Vector256<T> x, Vector256<T> y)

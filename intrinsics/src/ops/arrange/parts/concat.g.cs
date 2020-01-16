@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="lo">The lo part</param>
         /// <param name="hi">The hi part</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static Vector256<T> vconcat<T>(Vector128<T> lo, Vector128<T> hi)
             where T : unmanaged
         {
@@ -50,8 +50,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return vgeneric<T>(dinx.vconcat(v64i(lo), v64i(hi)));
             else
-                return vconcat_f(lo,hi);
-                
+                return vconcat_f(lo,hi);                
         }
 
         [MethodImpl(Inline)]

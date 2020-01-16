@@ -18,14 +18,14 @@ namespace Z0
     partial class dinx
     {         
 
-       /// <summary>
+        /// <summary>
         /// _mm_srav_epi32, avx2, shift-right variable arithmetic:
         /// Applies a rightward arithmetic shift each source vector component as 
         /// specified by the amount the corresponding control vector component
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<int> vsrav(Vector128<int> src, Vector128<uint> counts)
             => ShiftRightArithmeticVariable(src, counts);
 
@@ -36,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vsrav(Vector256<int> src, Vector256<uint> counts)
             => ShiftRightArithmeticVariable(src, counts);
     }

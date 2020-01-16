@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static Vector128<T> vhi<T>(Vector128<T> src)
             where T : unmanaged
                 => vgeneric<T>(CpuVector.vscalar(n128, vcell(v64u(src),1)));
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="pos">The index of the lane to extract</param>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static Vector128<T> vhi<T>(Vector256<T> src)
             where T : unmanaged
         {
@@ -50,7 +50,7 @@ namespace Z0
         /// Extracts the hi 128-bit lane of the source vector to scalar targets
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static void vhi<T>(Vector256<T> src, out ulong x0, out ulong x1)
             where T : unmanaged
                 => dinx.vhi(v64u(src), out x0, out x1);
@@ -68,7 +68,7 @@ namespace Z0
         /// Extracts the upper 256-bits from the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static Vector256<T> vhi<T>(Vector512<T> src)
             where T : unmanaged
                 => src.Hi;       
@@ -109,7 +109,6 @@ namespace Z0
             else
                 return vgeneric<T>(dinx.vhi(vcast64i(src)));
         }
-
 
         [MethodImpl(Inline)]
         static Vector128<T> vhi_f<T>(Vector256<T> src)

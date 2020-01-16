@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vsllr(Vector128<byte> src, Vector128<byte> count)
         {
             var y = v16u(count);
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vsllr(Vector128<sbyte> src, Vector128<sbyte> count)
         {
             var y = v16i(count);
@@ -47,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<short> vsllr(Vector128<short> src, Vector128<short> count)
             => ShiftLeftLogical(src, count);
 
@@ -57,7 +57,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ushort> vsllr(Vector128<ushort> src, Vector128<ushort> count)
             => ShiftLeftLogical(src, count);
 
@@ -67,7 +67,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<int> vsllr(Vector128<int> src, Vector128<int> count)
             => ShiftLeftLogical(src, count);
 
@@ -77,7 +77,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<uint> vsllr(Vector128<uint> src, Vector128<uint> count)
             => ShiftLeftLogical(src, count);
 
@@ -87,7 +87,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<long> vsllr(Vector128<long> src, Vector128<long> count)
             => ShiftLeftLogical(src, count);
 
@@ -97,7 +97,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ulong> vsllr(Vector128<ulong> src, Vector128<ulong> count)
             => ShiftLeftLogical(src, count);
 
@@ -106,7 +106,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vsllr(Vector256<sbyte> src, Vector128<sbyte> count)
         {
             var y = v16i(count);
@@ -120,7 +120,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vsllr(Vector256<byte> src, Vector128<byte> count)
         {
             var y = v16u(count);
@@ -135,7 +135,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vsllr(Vector256<short> src, Vector128<short> count)
             => ShiftLeftLogical(src, count);
 
@@ -145,7 +145,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vsllr(Vector256<ushort> src, Vector128<ushort> count)
             => ShiftLeftLogical(src, count);
 
@@ -155,7 +155,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vsllr(Vector256<int> src, Vector128<int> count)
             => ShiftLeftLogical(src, count);
 
@@ -165,7 +165,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vsllr(Vector256<uint> src, Vector128<uint> count)
             => ShiftLeftLogical(src, count);
 
@@ -175,7 +175,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<long> vsllr(Vector256<long> src, Vector128<long> count)
             => ShiftLeftLogical(src, count);
 
@@ -185,7 +185,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> vsllr(Vector256<ulong> src, Vector128<ulong> count)
             => ShiftLeftLogical(src, count);
 
@@ -194,7 +194,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vsllr(Vector128<sbyte> src, sbyte count)
             => vsllr(src, vscalar(n128,count));
 
@@ -203,7 +203,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vsllr(Vector128<byte> src, byte count)
             => vsllr(src, vscalar(n128,count));
 
@@ -212,7 +212,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<short> vsllr(Vector128<short> src, short count)
             => vsllr(src, vscalar(n128,count));
 
@@ -221,7 +221,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ushort> vsllr(Vector128<ushort> src, ushort count)
             => vsllr(src, vscalar(n128,count));
 
@@ -230,7 +230,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<int> vsllr(Vector128<int> src, int count)
             => vsllr(src, vscalar(n128,count));
 
@@ -239,7 +239,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<uint> vsllr(Vector128<uint> src, uint count)
             => vsllr(src, vscalar(n128,count));
 
@@ -248,7 +248,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<long> vsllr(Vector128<long> src, long count)
             => vsllr(src, vscalar(n128,count));
 
@@ -257,7 +257,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ulong> vsllr(Vector128<ulong> src, ulong count)
             => vsllr(src, vscalar(n128,count));
 
@@ -266,7 +266,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vsllr(Vector256<sbyte> src, sbyte count)
             => vsllr(src, vscalar(n128,count));
 
@@ -275,7 +275,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vsllr(Vector256<byte> src, byte count)
             => vsllr(src, vscalar(n128,count));
 
@@ -284,7 +284,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vsllr(Vector256<short> src, short count)
             => vsllr(src, vscalar(n128,count));
 
@@ -293,7 +293,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vsllr(Vector256<ushort> src, ushort count)
             => vsllr(src, vscalar(n128,count));
 
@@ -302,7 +302,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vsllr(Vector256<int> src, int count)
             => vsllr(src, vscalar(n128,count));
 
@@ -311,7 +311,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vsllr(Vector256<uint> src, uint count)
             => vsllr(src, vscalar(n128,count));
 
@@ -320,7 +320,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<long> vsllr(Vector256<long> src, long count)
             => vsllr(src, vscalar(n128,count));
 
@@ -329,7 +329,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> vsllr(Vector256<ulong> src, ulong count)
             => vsllr(src, vscalar(n128,count));
     }

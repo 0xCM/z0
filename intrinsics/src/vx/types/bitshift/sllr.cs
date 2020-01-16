@@ -12,7 +12,6 @@ namespace Z0
 
     partial class VXTypes
     {
-
         public readonly struct Sllr128<T> : IVBinOp128D<T>
             where T : unmanaged
         {

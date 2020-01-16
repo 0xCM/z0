@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="spec">The control vector that defines the permutation</param>
         /// <remarks>Approach follows https://stackoverflow.com/questions/30669556/shuffle-elements-of-m256i-vector/30669632#30669632</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vshuf32x8(Vector256<byte> a, Vector256<byte> spec)
         {            
             var x = vshuf16x8(a, vadd(spec, K0V));

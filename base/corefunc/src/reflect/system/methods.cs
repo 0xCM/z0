@@ -199,7 +199,6 @@ namespace Z0
         /// </summary>
         /// <param name="m"></param>
         /// <param name="args"></param>
-        /// <returns></returns>
         public static MethodInfo Reify(this MethodInfo m, params Type[] args)
         {
             if(m.IsGenericMethodDefinition)
@@ -211,7 +210,13 @@ namespace Z0
             else
                 return m;                
         }
-                                
+
+        /// <summary>
+        /// Determines the number of parameters defined by the method
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static int ParameterCount(this MethodInfo m)          
+            => m.GetParameters().Count();
 
         /// <summary>
         /// Selects functions from a stream

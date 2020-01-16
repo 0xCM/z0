@@ -20,22 +20,25 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively identifing low or hi</param>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static Vector256<T> vinsert<T>(Vector128<T> src, Vector256<T> dst, [Imm] byte index)        
             where T : unmanaged
+                => vinsert_u(src,dst,(byte)index);
+
+        [MethodImpl(Inline)]
+        static Vector256<T> vinsert_u<T>(Vector128<T> src, Vector256<T> dst, byte index)        
+            where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vinsert_u(src,dst,(byte)index);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vinsert_i(src,dst,(byte)index);
-            else 
-                return vinsert_f(src,dst,(byte)index);
+            if(typeof(T) == typeof(byte))
+                return vgeneric<T>(dinx.vinsert(v8u(src), v8u(dst), index));
+            else if(typeof(T) == typeof(ushort))
+                return vgeneric<T>(dinx.vinsert(v16u(src), v16u(dst), index));
+            else if(typeof(T) == typeof(uint))
+                return vgeneric<T>(dinx.vinsert(v64i(src), v64i(dst), index));
+            else if(typeof(T) == typeof(ulong))
+                return vgeneric<T>(dinx.vinsert(v64u(src), v64u(dst), index));
+            else
+                return vinsert_i(src,dst,index);
         }
 
         [MethodImpl(Inline)]
@@ -48,22 +51,10 @@ namespace Z0
                 return vgeneric<T>(dinx.vinsert(v16i(src), v16i(dst), index));
             else if(typeof(T) == typeof(int))
                 return vgeneric<T>(dinx.vinsert(v32i(src), v32i(dst), index));
-            else 
-                return vgeneric<T>(dinx.vinsert(v64i(src), v64i(dst), index));
-        }
-
-        [MethodImpl(Inline)]
-        static Vector256<T> vinsert_u<T>(Vector128<T> src, Vector256<T> dst, byte index)        
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vinsert(v8u(src), v8u(dst), index));
-            else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vinsert(v16u(src), v16u(dst), index));
-            else if(typeof(T) == typeof(uint))
+            else if(typeof(T) == typeof(long))
                 return vgeneric<T>(dinx.vinsert(v64i(src), v64i(dst), index));
             else 
-                return vgeneric<T>(dinx.vinsert(v64u(src), v64u(dst), index));
+                return vinsert_f(src,dst,index);
         }
 
         [MethodImpl(Inline)]
@@ -77,6 +68,5 @@ namespace Z0
             else
                 throw unsupported<T>();
         } 
-
     }
 }

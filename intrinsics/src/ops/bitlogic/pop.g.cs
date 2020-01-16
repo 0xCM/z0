@@ -36,7 +36,6 @@ namespace Z0
         public static uint vpop<T>(Vector256<T> x, Vector256<T> y, Vector256<T> z)
             where T : unmanaged
                 => dinx.vpop(v64u(x), v64u(y), v64u(z));
-
     }
 
     partial class dinx

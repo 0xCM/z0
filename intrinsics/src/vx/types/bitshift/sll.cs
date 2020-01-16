@@ -24,7 +24,7 @@ namespace Z0
             public Moniker Moniker => moniker<T>(Name,w);
 
             public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte imm8)
-                => gApiMethod(w,Name).Reify(typeof(T)).UnaryOpImm8<T>(w,imm8);
+                => VectorImm.unary<T>(w, gApiMethod(w,Name),imm8);
             
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte offset) => ginx.vsll(x,offset);
@@ -46,7 +46,7 @@ namespace Z0
             public Moniker Moniker => moniker<T>(Name,w);
 
             public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte imm8)
-                => gApiMethod(w,Name).Reify(typeof(T)).UnaryOpImm8<T>(w,imm8);
+                => VectorImm.unary<T>(w, gApiMethod(w,Name),imm8);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte offset) => ginx.vsll(x,offset);

@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to rotate</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ulong> vrotrx(Vector128<ulong> src, [Imm] byte count)
             => vor(vsrlx(src, count), vsllx(src, (byte)(128 - count)));             
 
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to rotate</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> vrotrx(Vector256<ulong> src, [Imm] byte count)
             => vor(vsrlx(src, count), vsllx(src, (byte)(128 - count)));             
 
@@ -36,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The count selector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotlx(Vector128<byte> src, N8 count)
             => vshuf16x8(src, VData.rotl(n128, count));   
 
@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The count selector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotlx(Vector128<byte> src, N16 count)
             => vshuf16x8(src, VData.rotl(n128, count));
 
@@ -54,7 +54,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The count selector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotlx(Vector128<byte> src, N24 count)
             => vshuf16x8(src, VData.rotl(n128, count));
 
@@ -63,7 +63,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The count selector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotlx(Vector128<byte> src, N32 count)
             => vshuf16x8(src, VData.rotl(n128, count));
 
@@ -72,7 +72,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The count selector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotrx(Vector128<byte> src, N8 count)
             => vshuf16x8(src, VData.rotr(n128, count));
 
@@ -81,7 +81,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The count selector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotrx(Vector128<byte> src, N16 count)
             => vshuf16x8(src, VData.rotr(n128, count));
 
@@ -90,7 +90,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The count selector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotrx(Vector128<byte> src, N24 count)
             => vshuf16x8(src, VData.rotr(n128, count));
 
@@ -99,7 +99,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The count selector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotrx(Vector128<byte> src, N32 count)
             => vshuf16x8(src, VData.rotr(n128, count));
     }

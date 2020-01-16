@@ -18,7 +18,7 @@ namespace Z0
         /// Distributes each bit of the source to the hi bit of each byte in a 128-bit target vector
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vmakemask(ushort src)
             => v8u(CpuVector.vparts(n128,maskpart(src,0), maskpart(src,8)));
 
@@ -26,7 +26,7 @@ namespace Z0
         /// Distributes each bit of the source to the hi bit of each byte a 256-bit target vector
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vmakemask(uint src)
             => vconcat(vmakemask((ushort)src), vmakemask((ushort)(src >> 16)));
 
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="index">The bit position index, an integer in the range [0,7]</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vmakemask(ushort src, byte index)
         {
             var m = BitMasks.Lsb64x8x1 << index;
@@ -46,7 +46,7 @@ namespace Z0
         /// Distributes each bit of the source to to a specified bit of each byte in a 256-bit target vector
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vmakemask(uint src, byte index)
         {
             var m = BitMasks.Lsb64x8x1 << index;
@@ -55,11 +55,11 @@ namespace Z0
             return vconcat(lo,hi);            
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static ulong maskpart(uint src, int offset)
             => Bits.scatter((ulong)((byte)(src >> offset)), BitMasks.Msb64x8x1);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static ulong maskpart(uint src, int offset, ulong mask)
             => Bits.scatter((ulong)((byte)(src >> offset)), mask);
     }

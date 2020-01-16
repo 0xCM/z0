@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="counts">The variable shift spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<uint> vrotlv(Vector128<uint> src, Vector128<uint> counts)
             => dinx.vor(dinx.vsllv(src, counts),dinx.vsrlv(src, dinx.vsub(Vector128u32, counts)));
 
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="counts">The variable shift spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ulong> vrotlv(Vector128<ulong> src, Vector128<ulong> counts)
             => dinx.vor(dinx.vsllv(src,counts),dinx.vsrlv(src, dinx.vsub(Vector128u64,counts)));
 
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="counts">The variable shift spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vrotlv(Vector256<uint> src, Vector256<uint> counts)
             => dinx.vor(dinx.vsllv(src,counts), dinx.vsrlv(src, dinx.vsub(Vector256u32,counts)));
 
@@ -44,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="counts">The variable shift spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> vrotlv(Vector256<ulong> src, Vector256<ulong> counts)
             => dinx.vor(dinx.vsllv(src,counts),dinx.vsrlv(src, dinx.vsub(Vector256u64,counts)));
     }

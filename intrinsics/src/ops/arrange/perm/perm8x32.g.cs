@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="spec">The perm spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<T> vperm8x32<T>(Vector256<T> src, Vector256<uint> spec)        
             where T : unmanaged
                 => vperm8x32_u(src,spec);

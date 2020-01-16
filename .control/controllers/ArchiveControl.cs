@@ -14,49 +14,17 @@ namespace Z0
 
     class ArchiveControl : Controller<ArchiveControl>
     {        
-        byte[] AsmBuffer = new byte[500];
 
         static void EmittingHostOps(Type host)
             => print(ControlMessages.EmittingHostOps(host));
 
-        AsmCodeSet Resolve<T>(IVUnaryImm8Resolver128<T> svc, byte imm8)
-            where T : unmanaged
-        {
-            var moniker = svc.Moniker;
-            var f = svc.@delegate(imm8);
-            AsmBuffer.Fill(byte.MinValue);
-            return NativeReader.read(f, AsmBuffer).CodeSet(moniker.WithImm(imm8), f.CilFunc());
-        }
+        // public AsmCodeSet GetCode(Moniker id, DynamicDelegate f)
+        // {
 
-        AsmCodeSet Resolve<T>(IVBinaryImm8Resolver128<T> svc, byte imm8)
-            where T : unmanaged
-        {
-            var moniker = svc.Moniker;
-            var f = svc.@delegate(imm8);            
-            AsmBuffer.Fill(byte.MinValue);
-            return NativeReader.read(f, AsmBuffer).CodeSet(moniker.WithImm(imm8), f.CilFunc());
-        }
+        //     AsmBuffer.Clear();
+        //     return NativeReader.read(f, AsmBuffer).CodeSet(id, f.CilFunc());
+        // }
 
-        AsmCodeSet Resolve<T>(IVUnaryImm8Resolver256<T> svc, byte imm8)
-            where T : unmanaged
-        {
-            var moniker = svc.Moniker;
-            var f = svc.@delegate(imm8);
-            AsmBuffer.Fill(byte.MinValue);
-            return NativeReader.read(f, AsmBuffer).CodeSet(moniker.WithImm(imm8), f.CilFunc());
-        }
-
-        AsmCodeSet Resolve<T>(IVBinaryImm8Resolver256<T> svc, byte imm8)
-            where T : unmanaged
-        {
-            var moniker = svc.Moniker;
-            var f = svc.@delegate(imm8);            
-            AsmBuffer.Fill(byte.MinValue);
-            return NativeReader.read(f, AsmBuffer).CodeSet(moniker.WithImm(imm8), f.CilFunc());
-        }
-
-        void Clear(string subject)
-            => AsmArchive.Define(subject).Clear();
 
         void Append(string subject, params AsmCodeSet[] ops)
         {
@@ -64,105 +32,34 @@ namespace Z0
             for(var i=0; i<ops.Length; i++)
                 archive.Save(ops[i]);
         }
-
-        void Reify(IAssemblyDesignator designator)
-        {
-            var metadata = CilMetadataIndex.Create(designator.DeclaringAssembly);
-            foreach(var api in designator.ApiProviders)
-            {
-                var archive = AsmArchive.Define(api.Name);
-                archive.Clear();
-                foreach(var opname in designator.OpNames)
-                {
-                    var methods = api.StaticMethods().Public().WithName(opname).ToArray();
-                    foreach(var method in methods)
-                    {
-                        var moniker = method.DeriveMoniker();
-                        if(method.RequiresImmediate())
-                        {
-
-                        }
-                        else if(method.IsOpenGeneric())
-                        {
-                            var args = method.SupportedPrimals().Select(x => x.ToPrimalType()).ToArray();
-                            if(args.Length == 0)
-                                args = Classified.IntegralKinds.Select(k => k.ToPrimalType()).ToArray();
-                            
-                            foreach(var arg in args)
-                            {
-                                var d = method.Descriptor(arg);
-                                archive.Save(d, metadata.FindCil(d.Method).ValueOrDefault());
-                            }
-                        }
-                        else
-                        {
-                            var d = method.Descriptor();
-                            archive.Save(d,metadata.FindCil(d.Method).ValueOrDefault());
-                        }
-                    }
-                }
-            }
-        }
         
-        public IEnumerable<AsmCodeSet> Resolve<T>(IVUnaryImm8Resolver128<T> svc, params byte[] immediates)
-            where T : unmanaged
-                => from imm in immediates select Resolve(svc,imm);
 
-        public IEnumerable<AsmCodeSet> Resolve<T>(IVUnaryImm8Resolver256<T> svc, params byte[] immediates)
-            where T : unmanaged
-                => from imm in immediates select Resolve(svc,imm);
-
-        public IEnumerable<AsmCodeSet> Resolve<T>(IVBinaryImm8Resolver128<T> svc, params byte[] immediates)
-            where T : unmanaged
-                => from imm in immediates select Resolve(svc,imm);
-
-        public IEnumerable<AsmCodeSet> Resolve<T>(IEnumerable<IVUnaryImm8Resolver128<T>> services, params byte[] immediates)
-            where T : unmanaged
-                =>  from svc in services
-                    from imm in immediates 
-                    select Resolve(svc,imm);
-
-        string DynamicSubject
-            => nameof(ginx) + "_dynamic";
+        string ImmSubject
+            => nameof(ginx) + "_imm";
 
         void ResolveDynamic<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var imm = new byte[]{3, 13, 25, 28, 30};
-            var r1 = Resolve(VX.vbsll(w,t),imm);
-            var r2 = Resolve(VX.vsrl(w,t),imm);
-            var r3 = Resolve(VX.vblend8x16(w,t),imm);
+            var imm = new byte[]{199,205};
+            var r1 = VX.vbsll(w,t).EmbedImmediates(imm);
+            var r2 = VX.vsrl(w,t).EmbedImmediates(imm);            
+            var r3 = VX.vblend8x16(w,t).EmbedImmediates(imm);
             var resolutions = r1.Union(r2).Union(r3).ToArray();
-            Append(DynamicSubject, resolutions);
-
+            Append(ImmSubject, resolutions);
         }
 
         void ResolveDynamic<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var imm = new byte[]{3, 13, 25, 28, 30};
-            var r1 = Resolve(VX.vbsll(w,t),imm);
-            var r2 = Resolve(VX.vsrl(w,t),imm);
+            var imm = new byte[]{199,205};
+            var r1 = VX.vbsll(w,t).EmbedImmediates(imm);
+            var r2 = VX.vsrl(w,t).EmbedImmediates(imm);
             var resolutions = r1.Union(r2).ToArray();
-            Append(DynamicSubject, resolutions);
-        }
-
-        void EmitDirect(IOperationCatalog c, CilMetadataIndex metadata, bool clear = true)
-        {
-            var archive = AsmArchive.Define(c.CatalogName);
-            if(clear)
-                archive.Clear();
-
-            foreach(var op in c.DirectOps)
-            {
-                var d = op.Method.Descriptor();
-                archive.Save(d, metadata.FindCil(d.Method).ValueOrDefault());
-            }
+            Append(ImmSubject, resolutions);
         }
 
         void LogError(string opname, Exception e)
             => error(concat(opname,AsciSym.Colon,e.ToString()));
-
 
         void Emit(FastDirectOp op, CilMetadataIndex metadata, AsmArchive archive)
         {
@@ -223,9 +120,61 @@ namespace Z0
 
         void EmitImmediates()
         {
-            Clear(DynamicSubject);
             ResolveDynamic(n128,z32);
             ResolveDynamic(n256,z32);
+
+        }
+        
+        void EmitUnaryImmResolutions(MethodInfo method, Moniker id,  AsmArchive archive)
+        {
+            var immediates = new byte[]{5,9,13};                        
+            var parameters = method.GetParameters().ToArray();            
+            var optype = parameters[0].ParameterType;
+            var width = optype.SegmentedWidth();
+            var celltype = optype.GetGenericArguments()[0];
+            var factory = VectorImm.unaryfactory(width, method, celltype); 
+            var buffer = new byte[1024];
+            try
+            {
+                foreach(var imm in immediates)            
+                {    
+                    buffer.Clear();
+                    var @delegate = factory(imm);                    
+                    archive.Save(@delegate.ExtractCode(id.WithImm(imm), buffer));
+                }
+                    
+            }
+            catch(Exception e)
+            {
+                error(method.Signature());
+                error(e);
+            }
+        }   
+
+        void EmitUnaryImmResolutions(FastDirectOp op, AsmArchive archive)
+        {
+            EmitUnaryImmResolutions(op.Method, op.Id,archive);
+        }   
+
+        void EmitUnaryImmResolutions(FastGenericOp op, AsmArchive archive)
+        {
+            foreach(var (moniker, method) in op.Closures())
+                EmitUnaryImmResolutions(method,moniker,archive);
+        }
+
+        void Emit(FastGenericOp op, AsmArchive archive)
+        {
+            foreach(var (moniker, method) in op.Closures())
+            {
+                var data = NativeReader.read(method);
+                archive.Save(data.Code.WithId(moniker));             
+            }
+        }
+
+        void Emit(FastDirectOp op, AsmArchive archive)
+        {
+            var data = NativeReader.read(op.Method);
+            archive.Save(data.Code);             
 
         }
 
@@ -233,14 +182,21 @@ namespace Z0
         {
             EmittingHostOps(host);
 
-            var fastops = host.FastOpGenerics();
-            var closures = fastops.Closures();
             var archive = AsmArchive.Define(host.Name);
             archive.Clear();
-            foreach(var (moniker,method) in closures)
+
+            var immArchive = AsmArchive.Define(ImmSubject);
+
+            var fastops = host.FastOpGenerics();
+            foreach(var op in fastops)
             {
-                var data = NativeReader.read(method);
-                archive.Save(data.Code.WithId(moniker));             
+                if(op.RequiresImmediate)
+                {
+                    // if(op.Method.IsUnaryImmVectorOp())
+                    //     EmitUnaryImmResolutions(op,immArchive);
+                }
+                else
+                    Emit(op,archive);
             }
         }
 
@@ -251,18 +207,19 @@ namespace Z0
             var archive = AsmArchive.Define(host.Name);
             archive.Clear();
 
+            var immArchive = AsmArchive.Define(ImmSubject);
+
+
             var fastops = host.FastOpDirect();            
             foreach(var op in fastops)
             {
                 if(op.RequiresImmediate)
                 {
-
+                    if(op.Method.IsUnaryImmVectorOp())
+                        EmitUnaryImmResolutions(op,immArchive);
                 }
                 else
-                {
-                    var data = NativeReader.read(op.Method);
-                    archive.Save(data.Code);             
-                }
+                    Emit(op, archive);
             }
         }
 
@@ -274,7 +231,11 @@ namespace Z0
 
         public override void Execute()
         {
-            EmitImmediates();
+            //EmitImmediates();
+            
+            var immArchive = AsmArchive.Define(ImmSubject);
+            immArchive.Clear();
+
             EmitDirect(IntrinsicsCatalog);
             EmitGeneric(IntrinsicsCatalog);
 

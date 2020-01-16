@@ -24,7 +24,7 @@ namespace Z0
         /// Creates a scalar vector from the upper 64 bits of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vhi(Vector128<float> src)
             =>  v32f(vscalar(v64i(src).GetElement(1)));
 
@@ -32,7 +32,7 @@ namespace Z0
         /// Creates a scalar vector from the upper 64 bits of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vhi(Vector128<double> src)
             =>  vscalar(src.GetElement(1));
 

@@ -19,46 +19,20 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static Vector128<T> vxnor<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vxnor_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vxnor_i(x,y);
-            else 
-                return vxnor_f(x,y);
-        }
+                => vxnor_u(x,y);
 
         /// <summary>
         /// Computes ~ (x ^ y) for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static Vector256<T> vxnor<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vxnor_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vxnor_i(x,y);
-            else 
-                return vxnor_f(x,y);
-        }
+                => vxnor_u(x,y);
 
         [MethodImpl(Inline)]
         static Vector128<T> vxnor_u<T>(Vector128<T> x, Vector128<T> y)
@@ -70,8 +44,10 @@ namespace Z0
                 return vgeneric<T>(dinx.vxnor(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
                 return vgeneric<T>(dinx.vxnor(v32u(x), v32u(y)));
-            else
+            else if(typeof(T) == typeof(ulong))
                 return vgeneric<T>(dinx.vxnor(v64u(x), v64u(y)));
+            else
+                return vxnor_i(x,y);
         }
 
         [MethodImpl(Inline)]
@@ -84,8 +60,10 @@ namespace Z0
                 return vgeneric<T>(dinx.vxnor(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
                 return vgeneric<T>(dinx.vxnor(v32i(x), v32i(y)));
-            else
+            else if(typeof(T) == typeof(long))
                 return vgeneric<T>(dinx.vxnor(v64i(x), v64i(y)));
+            else
+                return vxnor_f(x,y);
         }
 
         [MethodImpl(Inline)]
@@ -110,8 +88,10 @@ namespace Z0
                 return vgeneric<T>(dinx.vxnor(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
                 return vgeneric<T>(dinx.vxnor(v32u(x), v32u(y)));
-            else
+            else if(typeof(T) == typeof(ulong))
                 return vgeneric<T>(dinx.vxnor(v64u(x), v64u(y)));
+            else
+                return vxnor_i(x,y);
         }
 
         [MethodImpl(Inline)]
@@ -124,8 +104,10 @@ namespace Z0
                 return vgeneric<T>(dinx.vxnor(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
                 return vgeneric<T>(dinx.vxnor(v32i(x), v32i(y)));
-            else
+            else if(typeof(T) == typeof(long))
                 return vgeneric<T>(dinx.vxnor(v64i(x), v64i(y)));
+            else
+                return vxnor_f(x,y);
         }
 
         [MethodImpl(Inline)]

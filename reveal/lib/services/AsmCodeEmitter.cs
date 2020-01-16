@@ -15,6 +15,7 @@ namespace Z0
 
     public struct AsmCodeEmitter
     {
+
         public static AsmCodeEmitter Create(FilePath target)
             => new AsmCodeEmitter(target);
 

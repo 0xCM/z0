@@ -31,7 +31,7 @@ namespace Z0
         /// If, for example, all hi bits in the mask vector are set then the corresponding target element is loaded from the index-identified cell
         /// and this operation reduces to the coresponding maskless gather function
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<uint> vmaskgather(N128 n, Vector128<uint> vsrc, ref uint msrc, Vector128<int> vidx, Vector128<uint> mask)
             => GatherMaskVector128(vsrc, ptr(ref msrc), vidx, mask, 4);
 
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="msrc">The memory-based source for taget component data as controlled by the mask vector</param>
         /// <param name="vidx">The index vector</param>
         /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<ulong> vmaskgather(N128 w, Vector128<ulong> vsrc, ref ulong msrc, Vector128<long> vidx, Vector128<ulong> mask)
             => GatherMaskVector128(vsrc, ptr(ref msrc), vidx, mask, 8);
 
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="msrc">The memory-based source for taget component data as controlled by the mask vector</param>
         /// <param name="vidx">The index vector</param>
         /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<ulong> vmaskgather(N128 w, Vector128<ulong> vsrc, ref ulong msrc, Vector128<int> vidx, Vector128<ulong> mask)
             => GatherMaskVector128(vsrc, ptr(ref msrc), vidx, mask, 8);
 
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="msrc">The memory-based source for taget component data as controlled by the mask vector</param>
         /// <param name="vidx">The index vector</param>
         /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<uint> vmaskgather(N128 w, Vector128<uint> vsrc, ref uint msrc, Vector128<long> vidx, Vector128<uint> mask)
             => GatherMaskVector128(vsrc, ptr(ref msrc), vidx, mask, 4);
 
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="msrc">The memory-based source for taget component data as controlled by the mask vector</param>
         /// <param name="vidx">The index vector</param>
         /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<uint> vmaskgather(N128 w, Vector128<uint> vsrc, ref uint msrc, Vector256<long> vidx, Vector128<uint> mask)
             => GatherMaskVector128(vsrc, ptr(ref msrc), vidx, mask, 4);
 
@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="msrc">The memory-based source for taget component data as controlled by the mask vector</param>
         /// <param name="vidx">The index vector</param>
         /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vmaskgather(N256 w, Vector256<uint> vsrc, ref uint msrc, Vector256<int> vidx, Vector256<uint> mask)
             => GatherMaskVector256(vsrc, ptr(ref msrc), vidx, mask, 4);
 
@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="msrc">The memory-based source for taget component data as controlled by the mask vector</param>
         /// <param name="vidx">The index vector</param>
         /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<ulong> vmaskgather(N256 w, Vector256<ulong> vsrc, ref ulong msrc, Vector256<long> vidx, Vector256<ulong> mask)
             => GatherMaskVector256(vsrc, ptr(ref msrc), vidx, mask, 8);
 
@@ -115,7 +115,7 @@ namespace Z0
         /// <param name="msrc">The memory-based source for taget component data as controlled by the mask vector</param>
         /// <param name="vidx">The index vector</param>
         /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<ulong> vmaskgather(N256 w, Vector256<ulong> vsrc, ref ulong msrc, Vector128<int> vidx, Vector256<ulong> mask)
             => GatherMaskVector256(vsrc, ptr(ref msrc), vidx, mask, 8);
     }

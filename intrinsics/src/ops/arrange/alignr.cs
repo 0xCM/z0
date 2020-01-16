@@ -56,7 +56,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> valignr(Vector256<byte> x, Vector256<byte> y, [Imm] byte offset)
             => AlignRight(x, y, offset);
-
     }
 
     public enum VAlignR : byte

@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector128<T> vsrlr<T>(Vector128<T> x, Vector128<T> count)
             where T : unmanaged
                 => vsrlr_u(x,count);
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset vector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector256<T> vsrlr<T>(Vector256<T> x, Vector256<T> count)
             where T : unmanaged
                 => vsrlr_u(x,count);
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector128<T> vsrlr<T>(Vector128<T> x, T count)
             where T : unmanaged
                 => vsrlr_u(x,count);
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The offset amount</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector256<T> vsrlr<T>(Vector256<T> x, T count)
             where T : unmanaged
                 => vsrlr_u(x,count);

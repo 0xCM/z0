@@ -65,6 +65,17 @@ namespace Z0
         /// Closes generic operations over the set of primal types that each operation supports
         /// </summary>
         /// <param name="generics">Metadata for generic operations</param>
+        public static IEnumerable<Pair<Moniker,MethodInfo>> Closures(this FastGenericOp op)
+            => from r in op.Reifications
+               where r.PrimalKind.IsSome()
+               let t = r.PrimalKind.ToPrimalType()
+               let m = op.Method.MakeGenericMethod(t)
+               select paired(r,m);
+
+        /// <summary>
+        /// Closes generic operations over the set of primal types that each operation supports
+        /// </summary>
+        /// <param name="generics">Metadata for generic operations</param>
         public static IEnumerable<Pair<Moniker,MethodInfo>> Closures(this IEnumerable<FastGenericOp> generics)
             => from g in generics
                from r in g.Reifications

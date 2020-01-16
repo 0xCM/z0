@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vsrlv(Vector128<sbyte> src, Vector128<sbyte> counts)
         {
             var x = vinflate(src, n256, z16i);
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vsrlv(Vector128<byte> src, Vector128<byte> counts)
         {
             var x = vinflate(src, n256, z16);
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<short> vsrlv(Vector128<short> src, Vector128<short> counts)
         {
             var x = vinflate(src, n256, z32i);
@@ -63,7 +63,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ushort> vsrlv(Vector128<ushort> src, Vector128<ushort> counts)
         {
             var x = vinflate(src, n256, z32);
@@ -78,7 +78,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<int> vsrlv(Vector128<int> x, Vector128<int> counts)
             => ShiftRightLogicalVariable(x, v32u(counts));
 
@@ -88,7 +88,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="counts">The offsets offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<uint> vsrlv(Vector128<uint> x, Vector128<uint> counts)
             => ShiftRightLogicalVariable(x, counts);
 
@@ -98,7 +98,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<long> vsrlv(Vector128<long> x, Vector128<long> counts)
             => ShiftRightLogicalVariable(x, v64u(counts));
 
@@ -108,7 +108,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ulong> vsrlv(Vector128<ulong> x, Vector128<ulong> counts)
             => ShiftRightLogicalVariable(x, counts);       
 
@@ -117,7 +117,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vsrlv(Vector256<sbyte> src, Vector256<sbyte> counts)
         {
             (var x0, var x1) = vinflate(src, n512, z16i); 
@@ -130,7 +130,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vsrlv(Vector256<byte> src, Vector256<byte> counts)
         {
             (var x0, var x1) = vinflate(src, n512, z16); 
@@ -143,7 +143,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vsrlv(Vector256<short> src, Vector256<short> counts)
         {
             (var x0, var x1) = vinflate(src, n512, z32i); 
@@ -156,7 +156,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vsrlv(Vector256<ushort> src, Vector256<ushort> counts)
         {
             (var x0, var x1) = vinflate(src, n512, z32); 
@@ -170,7 +170,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vsrlv(Vector256<int> x, Vector256<int> counts)
             => ShiftRightLogicalVariable(x, v32u(counts));
 
@@ -180,7 +180,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vsrlv(Vector256<uint> x, Vector256<uint> counts)
             => ShiftRightLogicalVariable(x, counts);
 
@@ -190,7 +190,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<long> vsrlv(Vector256<long> x, Vector256<long> counts)
             => ShiftRightLogicalVariable(x, v64u(counts));
 
@@ -200,7 +200,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> vsrlv(Vector256<ulong> x, Vector256<ulong> counts)
             => ShiftRightLogicalVariable(x, counts);     
     }

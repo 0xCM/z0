@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int convert(Vector128<int> src, N32 w, int t = default)
             => ConvertToInt32(src);
 
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint convert(Vector128<uint> src, N32 w, uint t = default)
             => ConvertToUInt32(src);
 
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static long convert(Vector128<long> src, N64 w, long t = default)
             => ConvertToInt64(src);
 
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong convert(Vector128<ulong> src, N64 w, ulong t = default)
             => ConvertToUInt64(src);
 
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="lo">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<uint> convert(Vector128<ulong> lo, Vector128<ulong> hi, N128 w, uint t = default)
             => convert(dinx.vconcat(lo,hi), w,t);
 
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<uint> convert(Vector256<ulong> src, N128 w, uint t = default)
             => v32u(ConvertToVector128Int32(v64f(src)));
 
@@ -92,7 +92,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> convert(Vector128<uint> src, N256 w, ulong t = default)
             => v64u(ConvertToVector256Double(v32i(src)));
 
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="lo">The first target vector</param>
         /// <param name="hi">The second target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vconvert(Vector128<sbyte> src, N256 w, ushort t = default)
             => v16u(ConvertToVector256Int16(src));        
 
@@ -115,7 +115,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vconvert(Vector128<sbyte> src, N256 w, short t = default)
             => ConvertToVector256Int16(src);
 
@@ -124,7 +124,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<int> vconvert(Vector128<sbyte> src, N128 w, int t = default)
             => ConvertToVector128Int32(src);
 
@@ -134,7 +134,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target cell type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector512<int> vconvert(Vector128<sbyte> src, N512 w, int t = default)
             => (vmaplo(src,n256,t),vmaphi(src,n256,t));
 
@@ -148,7 +148,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vconvert(Vector128<byte> src, N256 w, short t = default)
             => ConvertToVector256Int16(src);
 
@@ -160,7 +160,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width selector</param>
         /// <param name="t">A target cell type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vconvert(Vector128<byte> src, N256 w, ushort t = default)
             => v16u(ConvertToVector256Int16(src));        
 
@@ -170,7 +170,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width selector</param>
         /// <param name="t">A target cell type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector512<uint> vconvert(Vector128<byte> src, N512 w, uint t = default)        
             => (vmaplo(src, n256, t), vmaphi(src, n256, t));
 
@@ -183,7 +183,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vconvert(Vector128<short> src, N256 w, int t = default)
             => ConvertToVector256Int32(src);
 
@@ -193,7 +193,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vconvert(Vector128<short> src, N256 w, uint t = default)
             => v32u(ConvertToVector256Int32(src));
 
@@ -206,7 +206,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vconvert(Vector128<ushort> src, N256 w, int t = default)
             => ConvertToVector256Int32(src);
 
@@ -216,7 +216,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vconvert(Vector128<ushort> src, N256 w, uint t = default)
             => v32u(ConvertToVector256Int32(src));
 
@@ -229,7 +229,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<long> vconvert(Vector128<int> src, N256 w, long t = default)
             => ConvertToVector256Int64(src);
 
@@ -241,7 +241,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<long> vconvert(Vector128<uint> src, N256 w, long t = default)
             => ConvertToVector256Int64(src);
 
@@ -250,7 +250,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> vconvert(Vector128<uint> src, N256 w, ulong t = default)
             => v64u(ConvertToVector256Int64(src));
         
@@ -262,7 +262,7 @@ namespace Z0
         /// src[i] -> hi[i], i = 16,..,31
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector512<short> vconvert(Vector256<sbyte> src, N512 w, short t = default)
             => (vmaplo(src,n256,z16i),vmaphi(src,n256,z16i));
 
@@ -270,7 +270,7 @@ namespace Z0
         /// 32x8i -> (8x32i, 8x32i, 8x32i, 8x32i)
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector1024<int> vconvert(Vector256<sbyte> src, N1024 w, int t = default)
         {
             (var lo, var hi) = vconvert(src, n512, z16i); 
@@ -285,7 +285,7 @@ namespace Z0
         /// 32x8u -> (16x16u, 16x16u)
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector512<ushort> vconvert(Vector256<byte> src, N512 w, ushort t = default)
              => (vmaplo(src, n256, z16), vmaphi(src, n256, z16));
 
@@ -293,7 +293,7 @@ namespace Z0
         /// 32x8u -> (16x16i, 16x16i)
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector512<short> vconvert(Vector256<byte> src, N512 w, short t = default)
             => (vmaplo(src, n256, z16i),vmaphi(src, n256, z16i));
 
@@ -303,7 +303,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="x1">A target cell type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector1024<uint> vconvert(Vector256<byte> src, N1024 w, uint t = default)
         {
             (var lo, var hi) = vconvert(src, n512, z16);            
@@ -319,7 +319,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="lo">The lo target</param>
         /// <param name="hi">The hi target</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector512<long> vconvert(Vector128<short> src, N512 w, long t = default)
             => (vmaplo(src, n256, z64i), vmaphi(src, n256, z64i));
         
@@ -329,7 +329,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="lo">The lo target</param>
         /// <param name="hi">The hi target</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector512<ulong> vconvert(Vector128<ushort> src, N512 w, ulong t = default)
             => (vmaplo(src, n256, z64),vmaphi(src, n256, z64));
 
@@ -339,7 +339,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
         /// <param name="t">A target cell type representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector1024<ulong> vconvert(Vector256<ushort> src, N1024 w, ulong t = default)
             => (vconvert(vlo(src), n512, t), vconvert(vhi(src), n512, t));
 
@@ -349,7 +349,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="lo">The lo target</param>
         /// <param name="hi">The hi target</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector512<int> vconvert(Vector256<short> src, N512 w, int t = default)
             => (vmaplo(src,n256,t), vmaphi(src,n256,t));
 
@@ -357,7 +357,7 @@ namespace Z0
         /// 16x16u -> 16x32u
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector512<uint> vconvert(Vector256<ushort> src, N512 w, uint t = default)
             => (vmaplo(src,n256,t),vmaphi(src,n256,t));
 
@@ -365,7 +365,7 @@ namespace Z0
         /// 8x32i -> (4x64i, 4x64i)
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector512<long> vconvert(Vector256<int> src, N512 w, long t = default)
             => (vmaplo(src, n256, t),vmaphi(src, n256, t));
 
@@ -373,11 +373,11 @@ namespace Z0
         /// 8x32u -> (4x64u, 4x64u)
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector512<ulong> vconvert(Vector256<uint> src, N512 w, ulong t = default)
             => (vmaplo(src, n256, t),vmaphi(src, n256, t));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector512<long> vconvert(Vector256<short> src, N512 w, long t = default)
             => (ConvertToVector256Int64(vlo(src)), ConvertToVector256Int64(vhi(src)));
     }

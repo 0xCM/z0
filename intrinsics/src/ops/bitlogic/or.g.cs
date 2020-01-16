@@ -14,41 +14,16 @@ namespace Z0
 
     partial class ginx
     {
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
+        /// <summary>
+        /// Computes the bitwise AND between the operors
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector128<T> vor<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vor_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vor_i(x,y);
-            else 
-                return vor_f(x,y);
-        }
-
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
-        public static Vector256<T> vor<T>(Vector256<T> x, Vector256<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vor_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vor_i(x,y);
-            else 
-                return vor_f(x,y);
-        }
+                => vor_u(x,y);
 
         /// <summary>
         /// Computes the bitwise or
@@ -56,7 +31,18 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        public static Vector256<T> vor<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+                => vor_u(x,y);
+
+        /// <summary>
+        /// Computes the bitwise or
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector512<T> vor<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
                 => (vor(x.Lo,y.Lo), (vor(x.Hi, y.Hi)));
@@ -71,8 +57,10 @@ namespace Z0
                 return vgeneric<T>(dinx.vor(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
                 return vgeneric<T>(dinx.vor(v32u(x), v32u(y)));
-            else
+            else if(typeof(T) == typeof(ulong))
                 return vgeneric<T>(dinx.vor(v64u(x), v64u(y)));
+            else
+                return vor_i(x,y);
         }
 
         [MethodImpl(Inline)]
@@ -85,19 +73,9 @@ namespace Z0
                 return vgeneric<T>(dinx.vor(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
                 return vgeneric<T>(dinx.vor(v32i(x), v32i(y)));
-            else
+            else if(typeof(T) == typeof(long))
                 return vgeneric<T>(dinx.vor(v64i(x), v64i(y)));
-        }
- 
-        [MethodImpl(Inline)]
-        static Vector128<T> vor_f<T>(Vector128<T> x, Vector128<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vor(v32f(x), v32f(y)));
-            else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vor(v64f(x), v64f(y)));
-            else
+            else 
                 throw unsupported<T>();
         }
 
@@ -111,8 +89,10 @@ namespace Z0
                 return vgeneric<T>(dinx.vor(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
                 return vgeneric<T>(dinx.vor(v32u(x), v32u(y)));
-            else
+            else if(typeof(T) == typeof(ulong))
                 return vgeneric<T>(dinx.vor(v64u(x), v64u(y)));
+            else
+                return vor_i(x,y);
         }
 
         [MethodImpl(Inline)]
@@ -125,19 +105,9 @@ namespace Z0
                 return vgeneric<T>(dinx.vor(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
                 return vgeneric<T>(dinx.vor(v32i(x), v32i(y)));
-            else
+            else if(typeof(T) == typeof(long))
                 return vgeneric<T>(dinx.vor(v64i(x), v64i(y)));
-        }
-
-        [MethodImpl(Inline)]
-        static Vector256<T> vor_f<T>(Vector256<T> x, Vector256<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return vgeneric<T>(dinxfp.vor(v32f(x), v32f(y)));
-            else if(typeof(T) == typeof(double))
-                return vgeneric<T>(dinxfp.vor(v64f(x), v64f(y)));
-            else
+            else 
                 throw unsupported<T>();
         }
     }

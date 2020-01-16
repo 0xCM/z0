@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<float> vmovelo(int src, Vector128<float> dst)
             => ConvertScalarToVector128Single(dst,src);
 
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vmovelo(int src, Vector128<double> dst)
             => ConvertScalarToVector128Double(dst,src);
 
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vmovelo(long src, Vector128<double> dst)
             => ConvertScalarToVector128Double(dst,src);
 
@@ -63,7 +63,7 @@ namespace Z0
         /// <remarks>
         /// vmovupd xmm0,[rcx] |> vmovd eax,xmm0 |> movzx rax,al
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static sbyte vmovelo(Vector128<sbyte> src, N8 w)   
             => (sbyte)ConvertToInt32(v32i(src));
 
@@ -77,7 +77,7 @@ namespace Z0
         /// <remarks>
         /// vmovupd xmm0,[rcx] |> vmovd eax,xmm0 |> movzx eax,al
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte vmovelo(Vector128<byte> src, N8 w)   
             => (byte)ConvertToUInt32(v32u(src));
 
@@ -91,7 +91,7 @@ namespace Z0
         /// <remarks>
         /// vmovupd xmm0,[rcx] |> vmovd eax,xmm0 |> movsx rax,ax |> 
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static short vmovelo(Vector128<short> src, N16 w)   
             => (short)ConvertToInt32(v32i(src));
 
@@ -105,7 +105,7 @@ namespace Z0
         /// <remarks>
         /// vmovupd xmm0,[rcx] |> vmovd eax,xmm0 |> movsx eax,ax
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort vmovelo(Vector128<ushort> src, N16 w)   
             => (ushort)ConvertToUInt32(v32u(src));
 
@@ -119,7 +119,7 @@ namespace Z0
         /// <remarks>
         /// vmovupd xmm0,[rcx] |> vmovd eax,xmm0
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int vmovelo(Vector128<int> src, N32 w)   
             => ConvertToInt32(src);
 
@@ -133,7 +133,7 @@ namespace Z0
         /// <remarks>
         /// vmovupd xmm0,[rcx] |> vmovd eax,xmm0
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint vmovelo(Vector128<uint> src, N32 w)   
             => ConvertToUInt32(src);
 
@@ -148,7 +148,7 @@ namespace Z0
         /// <remarks>
         /// vmovupd xmm0,[rcx] |> vmovq rax,xmm0 
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static long vmovelo(Vector128<long> src, N64 w)   
             => ConvertToInt64(src);
 
@@ -163,7 +163,7 @@ namespace Z0
         /// <remarks>
         /// vmovupd xmm0,[rcx] |> vmovq rax,xmm0 
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong vmovelo(Vector128<ulong> src, N64 w)   
             => ConvertToUInt64(src);        
 
@@ -175,7 +175,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ulong> vmovelo(Vector128<uint> src, Vector128<ulong> dst)
             => v64u(ConvertScalarToVector128Double(v64f(dst),v32f(src)));
 
@@ -186,7 +186,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<long> vmovelo(Vector128<int> src, Vector128<long> dst)
             => v64i(ConvertScalarToVector128Double(v64f(dst),v32f(src)));
 
@@ -197,7 +197,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vmovelo(Vector128<float> src, Vector128<double> dst)
             => ConvertScalarToVector128Double(dst,src);
 

@@ -25,7 +25,7 @@ namespace Z0
             public Moniker Moniker => moniker<T>(Name,w);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte imm8)
-                => gApiMethod(w,Name).Reify(typeof(T)).BinaryOpImm8<T>(w,imm8);
+                => VectorImm.binary<T>(w, gApiMethod(w,Name),imm8);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, byte spec) 
@@ -44,7 +44,7 @@ namespace Z0
             public Moniker Moniker => moniker<T>(Name,w);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte imm8)
-                => gApiMethod(w,Name).Reify(typeof(T)).BinaryOpImm8<T>(w,imm8);
+                => VectorImm.binary<T>(w, gApiMethod(w,Name),imm8);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, byte spec) 
@@ -64,7 +64,7 @@ namespace Z0
             public Moniker Moniker => moniker<T>(Name,w);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte imm8)
-                => gApiMethod(w,Name).Reify(typeof(T)).BinaryOpImm8<T>(w,imm8);
+                => VectorImm.binary<T>(w, gApiMethod(w,Name),imm8);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, byte spec) 
@@ -83,7 +83,7 @@ namespace Z0
             public Moniker Moniker => moniker<T>(Name,w);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte imm8)
-                => gApiMethod(w,Name).Reify(typeof(T)).BinaryOpImm8<T>(w,imm8);
+                => VectorImm.binary<T>(w, gApiMethod(w,Name),imm8);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, byte spec) 
@@ -103,7 +103,7 @@ namespace Z0
             public Moniker Moniker => moniker<T>(Name,w);
 
             public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte imm8)
-                => gApiMethod(w,Name).Reify(typeof(T)).BinaryOpImm8<T>(w,imm8);
+                => VectorImm.binary<T>(w, gApiMethod(w,Name),imm8);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, byte spec) 
@@ -122,7 +122,7 @@ namespace Z0
             public Moniker Moniker => moniker<T>(Name,w);
 
             public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte imm8)
-                => gApiMethod(w,Name).Reify(typeof(T)).BinaryOpImm8<T>(w,imm8);
+                => VectorImm.binary<T>(w, gApiMethod(w,Name),imm8);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, byte spec) 

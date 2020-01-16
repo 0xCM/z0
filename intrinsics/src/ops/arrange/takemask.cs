@@ -22,7 +22,7 @@ namespace Z0
         /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort vtakemask(Vector128<byte> src)
             => (ushort)MoveMask(src);
 
@@ -31,7 +31,7 @@ namespace Z0
         /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort vtakemask(Vector128<ushort> src)
             => (ushort)MoveMask(v8u(src));
 
@@ -40,7 +40,7 @@ namespace Z0
         /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort vtakemask(Vector128<uint> src)
             => (ushort)MoveMask(v8u(src));
 
@@ -49,7 +49,7 @@ namespace Z0
         /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort vtakemask(Vector128<ulong> src)
             => (ushort)MoveMask(v8u(src));
 
@@ -58,7 +58,7 @@ namespace Z0
         /// Constructs an integer from the most significant bit of each 8-bit source vector segment
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint vtakemask(Vector256<byte> src)
             => (uint)MoveMask(src);
 
@@ -67,7 +67,7 @@ namespace Z0
         /// Constructs an integer from the most significant bit of each 8-bit source vector segment
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint vtakemask(Vector256<ushort> src)
             => (uint)MoveMask(v8u(src));
 
@@ -76,7 +76,7 @@ namespace Z0
         /// Constructs an integer from the most significant bit of each 8-bit source vector segment
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint vtakemask(Vector256<uint> src)
             => (uint)MoveMask(v8u(src));
 
@@ -85,7 +85,7 @@ namespace Z0
         /// Constructs an integer from the most significant bit of each 8-bit source vector segment
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint vtakemask(Vector256<ulong> src)
             => (uint)MoveMask(v8u(src));
 
@@ -94,8 +94,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="index">An integer between 0 and 7</param>
-        [MethodImpl(Inline)]
-        public static ushort vtakemask(Vector128<byte> src, byte index)
+        [MethodImpl(Inline), Op]
+        public static ushort vtakemask(Vector128<byte> src, [Imm] byte index)
             => vtakemask(vsll(v64u(src), (byte)(7 - index)));
 
         /// <summary>
@@ -103,8 +103,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="index">An integer between 0 and 7</param>
-        [MethodImpl(Inline)]
-        public static ushort vtakemask(Vector128<ushort> src, byte index)
+        [MethodImpl(Inline), Op]
+        public static ushort vtakemask(Vector128<ushort> src, [Imm] byte index)
             => vtakemask(vsll(v64u(src), (byte)(7 - index)));
 
         /// <summary>
@@ -112,8 +112,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="index">An integer between 0 and 7</param>
-        [MethodImpl(Inline)]
-        public static ushort vtakemask(Vector128<uint> src, byte index)
+        [MethodImpl(Inline), Op]
+        public static ushort vtakemask(Vector128<uint> src, [Imm] byte index)
             => vtakemask(vsll(v64u(src), (byte)(7 - index)));
 
         /// <summary>
@@ -121,8 +121,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="index">An integer between 0 and 7</param>
-        [MethodImpl(Inline)]
-        public static ushort vtakemask(Vector128<ulong> src, byte index)
+        [MethodImpl(Inline), Op]
+        public static ushort vtakemask(Vector128<ulong> src, [Imm] byte index)
             => vtakemask(vsll(v64u(src), (byte)(7 - index)));
 
         /// <summary>
@@ -130,8 +130,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="index">An integer between 0 and 7</param>
-        [MethodImpl(Inline)]
-        public static uint vtakemask(Vector256<byte> src, byte index)
+        [MethodImpl(Inline), Op]
+        public static uint vtakemask(Vector256<byte> src, [Imm] byte index)
             => vtakemask(vsll(v64u(src), (byte)(7 - index)));
 
         /// <summary>
@@ -139,8 +139,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="index">An integer between 0 and 7</param>
-        [MethodImpl(Inline)]
-        public static uint vtakemask(Vector256<ushort> src, byte index)
+        [MethodImpl(Inline), Op]
+        public static uint vtakemask(Vector256<ushort> src, [Imm] byte index)
             => vtakemask(vsll(v64u(src), (byte)(7 - index)));
 
         /// <summary>
@@ -148,8 +148,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="index">An integer between 0 and 7</param>
-        [MethodImpl(Inline)]
-        public static uint vtakemask(Vector256<uint> src, byte index)
+        [MethodImpl(Inline), Op]
+        public static uint vtakemask(Vector256<uint> src, [Imm] byte index)
             => vtakemask(vsll(src, (byte)(7 - index)));
 
         /// <summary>
@@ -157,40 +157,40 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="index">An integer between 0 and 7</param>
-        [MethodImpl(Inline)]
-        public static uint vtakemask(Vector256<ulong> src, byte index)
+        [MethodImpl(Inline), Op]
+        public static uint vtakemask(Vector256<ulong> src, [Imm] byte index)
             => vtakemask(vsll(src, (byte)(7 - index)));
 
-        [MethodImpl(Inline)]
-        public static ushort vtakemask(Vector128<byte> src, byte offset, byte index)
+        [MethodImpl(Inline), Op]
+        public static ushort vtakemask(Vector128<byte> src, byte offset, [Imm] byte index)
             => vtakemask(vsllx(src, offset), index);   
 
-        [MethodImpl(Inline)]
-        public static ushort vtakemask(Vector128<ushort> src, byte offset, byte index)
+        [MethodImpl(Inline), Op]
+        public static ushort vtakemask(Vector128<ushort> src, byte offset, [Imm] byte index)
             => vtakemask(vsllx(src, offset), index);   
 
-        [MethodImpl(Inline)]
-        public static ushort vtakemask(Vector128<uint> src, Vector128<uint> offsets, byte index)
+        [MethodImpl(Inline), Op]
+        public static ushort vtakemask(Vector128<uint> src, Vector128<uint> offsets, [Imm] byte index)
             => vtakemask(vsllv(src, offsets), index);   
 
-        [MethodImpl(Inline)]
-        public static ushort vtakemask(Vector128<ulong> src, Vector128<ulong> offsets, byte index)
+        [MethodImpl(Inline), Op]
+        public static ushort vtakemask(Vector128<ulong> src, Vector128<ulong> offsets, [Imm] byte index)
             => vtakemask(vsllv(src, offsets), index);   
 
-        [MethodImpl(Inline)]
-        public static uint vtakemask(Vector256<byte> src, byte offset, byte index)
+        [MethodImpl(Inline), Op]
+        public static uint vtakemask(Vector256<byte> src, [Imm] byte offset, [Imm] byte index)
             => vtakemask(vsllx(src, offset), index);   
 
-        [MethodImpl(Inline)]
-        public static uint vtakemask(Vector256<ushort> src, byte offset, byte index)
+        [MethodImpl(Inline), Op]
+        public static uint vtakemask(Vector256<ushort> src, [Imm] byte offset, [Imm] byte index)
             => vtakemask(vsllx(src, offset), index);   
 
-        [MethodImpl(Inline)]
-        public static uint vtakemask(Vector256<uint> src, Vector256<uint> offsets, byte index)
+        [MethodImpl(Inline), Op]
+        public static uint vtakemask(Vector256<uint> src, Vector256<uint> offsets, [Imm] byte index)
             => vtakemask(vsllv(src, offsets), index);   
 
-        [MethodImpl(Inline)]
-        public static uint vtakemask(Vector256<ulong> src, Vector256<ulong> offsets, byte index)
+        [MethodImpl(Inline), Op]
+        public static uint vtakemask(Vector256<ulong> src, Vector256<ulong> offsets, [Imm] byte index)
             => vtakemask(vsllv(src, offsets), index);   
 
     }

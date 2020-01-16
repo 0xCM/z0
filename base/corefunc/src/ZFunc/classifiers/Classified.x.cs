@@ -257,6 +257,13 @@ namespace Z0
             => Classified.width(t);
 
         /// <summary>
+        /// If the source type is primal or intrinsic, returns the bit-width; otherwise, returns 0
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static SegmentedWidth SegmentedWidth(this Type t)
+            => (SegmentedWidth)Classified.width(t);
+
+        /// <summary>
         /// Determines whether a method is an action
         /// </summary>
         /// <param name="m">The method to examine</param>
@@ -651,5 +658,34 @@ namespace Z0
                 where f.Attributed<BinaryLiteralAttribute>()
                let a = f.CustomAttribute<BinaryLiteralAttribute>().Require()
                 select BinaryLiteral.Define(f.Name, f.GetValue(null), a.Text);
+
+        /// <summary>
+        /// Determines whether a parameters is an immediate
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public static bool IsImmediate(this ParameterInfo param)
+            => param.Attributed<ImmAttribute>();
+
+        public static bool IsUnaryImmVectorOp(this MethodInfo method)
+        {
+            var parameters = method.GetParameters().ToArray();
+            return parameters.Length == 2 
+                && parameters[0].ParameterType.IsVector() 
+                && parameters[1].IsImmediate();
+        }
+
+        public static bool IsBinaryImmVectorOp(this MethodInfo method)
+        {
+            var parameters = method.GetParameters().ToArray();
+            return parameters.Length == 3 
+                && parameters[0].ParameterType.IsVector() 
+                && parameters[1].ParameterType.IsVector() 
+                && parameters[2].IsImmediate();
+        }
+
+        [MethodImpl(Inline)]
+        public static void Clear<T>(this T[] src)
+            => src?.Fill(default(T));
     }
 }

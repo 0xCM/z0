@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vpart30x8x3(uint src)
         {
             var a = src & uint.MaxValue >> 2;
@@ -69,7 +69,7 @@ namespace Z0
 
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vpart32x8x1(uint src)
         {
             var x = CpuVector.vbroadcast(n256, src);

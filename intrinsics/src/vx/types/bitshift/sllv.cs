@@ -28,7 +28,6 @@ namespace Z0
             
             [MethodImpl(Inline)]
             public T InvokeScalar(T a, T offset) => gmath.sll(a,convert<T,byte>(offset));
-
         }
 
         public readonly struct Sllv256<T> : IVBinOp256D<T>
