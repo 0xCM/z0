@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="n">The target partition count</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ConstPair<byte> split(ushort src, N2 n)
             => ((byte)src, ((byte)(src >> 8)));
 
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="n">The target partition count</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ConstPair<ushort> split(uint src, N2 n)
             => ((ushort)src, ((ushort)(src >> 16)));
 
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="n">The target partition count</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ConstQuad<byte> split(uint src, N4 n)
             => ((byte)src,(byte)(src >> 8),(byte)(src >> 16), (byte)(src >> 24));
 
@@ -44,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="n">The target partition count</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ConstPair<uint> split(ulong src, N2 n)
             => ((uint)src, (uint)(src >> 32));
 
@@ -53,7 +53,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="n">The target partition count</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ConstQuad<ushort> split(ulong src, N4 n)
             => ((ushort)src,(ushort)(src >> 16),(ushort)(src >> 32), (ushort)(src >> 48));
 
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="index">The index that partitions the source</param>
         /// <param name="x0">The lo partition</param>
         /// <param name="x1">The hi partition</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void split(byte src, int index, out byte x0, out byte x1)
         {
             x1 = (byte)(src >> index);
@@ -80,7 +80,7 @@ namespace Z0
         /// <param name="index">The index that partitions the source</param>
         /// <param name="x0">The lo partition</param>
         /// <param name="x1">The hi partition</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void split(ushort src, int index, out ushort x0, out ushort x1)
         {
             x1 = (ushort)(src >> index);
@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="index">The index that partitions the source</param>
         /// <param name="x0">The lo partition</param>
         /// <param name="x1">The hi partition</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void split(uint src, int index, out uint x0, out uint x1)
         {
             x1 = src >> index;
@@ -110,7 +110,7 @@ namespace Z0
         /// <param name="index">The index that partitions the source</param>
         /// <param name="x0">The lo partition</param>
         /// <param name="x1">The hi partition</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void split(ulong src, int index, out ulong x0, out ulong x1)
         {
             x1 = src >> index;
@@ -123,7 +123,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="x0">Receives sourc bits [0..3]</param>
         /// <param name="x1">Receives sourc bits [4..7]</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void split(byte src, out byte x0, out byte x1)
         {
             x0 = (byte)(src &0xF);
@@ -135,7 +135,7 @@ namespace Z0
         /// sending the lo part to the output parameter and returning the hi part
         /// <param name="src">The source value</param>
         /// <param name="x0">Receives source bits [0..3]</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte split(byte src, out byte x0)
         { 
             x0 = (byte)(src & 0xF);
@@ -149,7 +149,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="x0">Receives source bits [0..7]</param>
         /// <param name="x1">Receives source bits [8..15]</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void split(ushort src, out byte x0, out byte x1)
         {
             x0 = (byte)src;
@@ -161,7 +161,7 @@ namespace Z0
         /// sending the lo part to the output parameter and returning the hi part
         /// <param name="src">The source value</param>
         /// <param name="x0">Receives source bits [0..7]</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte split(ushort src, out byte x0)
         { 
             x0 = (byte)src;
@@ -174,7 +174,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="x0">Receives source bits [0..15]</param>
         /// <param name="x1">Receives source bits [16..31]</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void split(uint src, out ushort x0, out ushort x1)
         {
             x0 = (ushort)(src); 
@@ -186,7 +186,7 @@ namespace Z0
         /// sending the lo part to the output parameter and returning the hi part
         /// <param name="src">The source value</param>
         /// <param name="x0">Receives source bits [0..31]</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort split(uint src, out ushort x0)
         { 
             x0 = (ushort)src;
@@ -198,7 +198,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="x0">Receives source bits [0..31]</param>
         /// <param name="x1">Receives source bits [32..63]</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void split(ulong src, out uint x0, out uint x1)
         { 
             x0 = (uint)src;
@@ -210,7 +210,7 @@ namespace Z0
         /// sending the lo part to the output parameter and returning the hi part
         /// <param name="src">The source value</param>
         /// <param name="x0">Receives source bits [0..31]</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint split(ulong src, out uint x0)
         { 
             x0 = (uint)src;
@@ -225,7 +225,7 @@ namespace Z0
         /// <param name="x1">Receives source bits [16..31]</param>
         /// <param name="x2">Receives source bits [32..47]</param>
         /// <param name="x3">Receives source bits [48..63]</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void split(ulong src, out ushort x0, out ushort x1, out ushort x2, out ushort x3)
         { 
             x0 = (ushort)src;
@@ -242,7 +242,7 @@ namespace Z0
         /// <param name="x1">Receives source bits [8..15]</param>
         /// <param name="x2">Receives source bits [16..23]</param>
         /// <param name="x3">Receives source bits [24..31]</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void split(uint src, out byte x0, out byte x1, out byte x2, out byte x3)
         {
             x0 = (byte)(src >> 0*8);
@@ -263,7 +263,7 @@ namespace Z0
         /// <param name="x5">Receives source bits [40..47]</param>
         /// <param name="x6">Receives source bits [48..55]</param>
         /// <param name="x7">Receives source bits [56..63]</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void split(ulong src, out byte x0, out byte x1, out byte x2, out byte x3, out byte x4, out byte x5, out byte x6, out byte x7)
         {
             x0 = (byte)(src >> 0*8);

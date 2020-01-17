@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="srcpos">The source bit position</param>
         /// <param name="dst">The target value</param>
         /// <param name="dstpos">The target bit position</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte setif(byte src, int srcpos, byte dst, int dstpos)        
         {
             if(bit.test(src, srcpos))
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="srcpos">The source bit position</param>
         /// <param name="dst">The target value</param>
         /// <param name="dstpos">The target bit position</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort setif(ushort src, int srcpos, ushort dst, int dstpos)        
         {
             if(bit.test(src, srcpos))
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="srcpos">The source bit position</param>
         /// <param name="dst">The target value</param>
         /// <param name="dstpos">The target bit position</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint setif(uint src, int srcpos, uint dst, int dstpos)        
         {
             if(bit.test(src, srcpos))
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="srcpos">The source bit position</param>
         /// <param name="dst">The target value</param>
         /// <param name="dstpos">The target bit position</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong setif(ulong src, int srcpos, ulong dst, int dstpos)        
         {
             if(bit.test(src, srcpos))

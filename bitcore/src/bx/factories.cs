@@ -13,6 +13,7 @@ namespace Z0
 
     public static class BitCore
     {
+        
         [MethodImpl(Inline)]
         public static ByteSwap<T> byteswap<T>(T t = default)
             where T : unmanaged        

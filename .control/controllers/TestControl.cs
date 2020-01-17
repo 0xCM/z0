@@ -10,6 +10,8 @@ namespace Z0
     using System.Linq;
     using System.Threading;
 
+    using Z0.Designators;
+
     using C = Z0.Designators.Control;
     using D = Z0.Designators;
     

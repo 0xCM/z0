@@ -20,7 +20,7 @@ namespace Z0
         /// Extracts the least set bit and is logically equivalent to the composite operation (-src) & src
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte lsbx(byte src)
             => (byte)ExtractLowestSetBit(src);
  
@@ -29,7 +29,7 @@ namespace Z0
         /// Extracts the least set bit and is logically equivalent to the composite operation (-src) & src
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort lsbx(ushort src)
             => (ushort)ExtractLowestSetBit(src);
  
@@ -38,7 +38,7 @@ namespace Z0
         /// Extracts the least set bit and is logically equivalent to the composite operation (-src) & src
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint lsbx(uint src)
             => ExtractLowestSetBit(src);
 
@@ -47,7 +47,7 @@ namespace Z0
         /// Extracts the least set bit and is logically equivalent to the composite operation (-src) & src
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong lsbx(ulong src)
             => ExtractLowestSetBit(src);
     }

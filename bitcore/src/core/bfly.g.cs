@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op("bfly_n1"), PrimalClosures(PrimalKind.UnsignedInts)]
         public static T bfly<T>(N1 n, T x)
             where T : unmanaged
         {
@@ -59,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op("bfly_n2"), PrimalClosures(PrimalKind.UnsignedInts)]
         public static T bfly<T>(N2 n, T x)
             where T : unmanaged
         {
@@ -81,7 +81,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.U16 | PrimalKind.U32 | PrimalKind.U64)]
+        [MethodImpl(Inline), Op("bfly_n4"), PrimalClosures(PrimalKind.U16 | PrimalKind.U32 | PrimalKind.U64)]
         public static T bfly<T>(N4 n, T x)
             where T : unmanaged
         {
@@ -103,7 +103,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.U32 | PrimalKind.U64)]
+        [MethodImpl(Inline), Op("bfly_n8"), PrimalClosures(PrimalKind.U32 | PrimalKind.U64)]
         public static T bfly<T>(N8 n, T x)
             where T : unmanaged
         {
@@ -122,7 +122,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), ZFunc(PrimalKind.U64)]
+        [MethodImpl(Inline), Op("bfly_n16"), PrimalClosures(PrimalKind.U64)]
         public static T bfly<T>(N16 n, T x)
             where T : unmanaged
         {

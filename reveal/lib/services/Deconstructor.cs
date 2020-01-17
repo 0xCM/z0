@@ -15,16 +15,6 @@ namespace Z0
 
     using static zfunc;
     
-    public class NoCodeException : Exception
-    {
-        public NoCodeException(string method)
-            : base($"No code was found for the method ${method}")
-        {
-            this.MethodName = method;
-        }
-
-        public string MethodName {get;}        
-    }
 
     /// <summary>
     /// Disassembles CLR methods
@@ -40,7 +30,7 @@ namespace Z0
 
         readonly ClrRuntime Runtime;
 
-        readonly CilMetadataIndex MdIx;
+        readonly ClrMetadataIndex MdIx;
 
         /// <summary>
         /// Disassembles reified methods declared by the source type
@@ -48,25 +38,7 @@ namespace Z0
         /// <param name="src">The source type</param>
         public static MethodDisassembly[] Deconstruct(Type src)
             => Deconstruct(src.DeclaredMethods().NonGeneric().Concrete().NonSpecial().ToArray()).ToArray();
-
-        public static Option<MethodDisassembly> Deconstruct(MethodInfo method, bool jit)
-        {
-            if(jit)
-                method.Jit();
-            using var dtor = new Deconstructor(new Module[]{method.Module});
-            return dtor.Disassemble(method, x => error(x));            
-        }
-
-        public static Option<MethodDisassembly> DeconstructGeneric<T>(MethodInfo method)
-            => DeconstructGeneric(method, typeof(T));
-        
-        public static Option<MethodDisassembly> DeconstructGeneric(MethodInfo method, params Type[] typeargs)
-        {
-            RuntimeHelpers.PrepareMethod(method.MethodHandle, typeargs.Map(t => t.TypeHandle));   
-            using var dtor = new Deconstructor(new Module[]{method.Module});
-            return dtor.Disassemble(method, x => error(x));
-        }
-
+    
         /// <summary>
         /// Disassembles the source methods
         /// </summary>
@@ -75,39 +47,15 @@ namespace Z0
             => Deconstruct(src.ToArray()).ToArray();
 
         public static MethodDisassembly[] Deconstruct(params MethodInfo[] methods)
-            => Disassemble(x => error(x), methods).ToArray();
+            => Disassemble(methods).ToArray();
         
-        /// <summary>
-        /// Decodes encoded assembly instructions
-        /// </summary>
-        /// <param name="data">The encoded instructions</param>
-        public static InstructionBlock Decode(AsmCode code)
-            => Decode(code.Id, code.Label, code.Data);
-
-        /// <summary>
-        /// Decodes encoded assembly instructions
-        /// </summary>
-        /// <param name="data">The encoded instructions</param>
-        public static InstructionBlock Decode(Moniker id, string label, byte[] data)
-		{
-            var dst = new InstructionList();
-            var reader = new ByteArrayCodeReader(data);
-			var decoder = Decoder.Create(IntPtr.Size * 8, reader);
-			decoder.IP = 0;
-			while (reader.CanReadByte) 
-			{
-				ref var instruction = ref dst.AllocUninitializedElement();
-				decoder.Decode(out instruction);                
-			}
-            return InstructionBlock.Define(label, data, dst.ToArray());
-		}
-
         /// <summary>
         /// Disassasembles non-generic functions defined by a type to individual files in the appropriate assembly data folder
         /// </summary>
         /// <param name="target">The type to disassemble</param>
         public static void Shred(Type target)
         {            
+            var provider = Moniker.Provider;
             var typename = target.DisplayName().ToLower();
             var subfolder = FolderName.Define(typename);
             var paths = LogPaths.The;
@@ -115,40 +63,25 @@ namespace Z0
             var deconstructed = Deconstruct(target);
             foreach(var d in deconstructed)
             {
-                var m = Moniker.define(d.MethodInfo);
+                var m = provider.Define(d.Method);
                 var asmfile = paths.AsmInfoPath(target,m);
                 var hexfile = paths.AsmHexPath(target,m);
                 var cilfile = paths.CilPath(target,m);
-                var asm = d.DistillAsmFunction();
+                var asm = AsmFunction.from(d);
                 asmfile.Overwrite(asm.FormatDetail());
-                hexfile.Overwrite(asm.FormatEncoding());                
+                hexfile.Overwrite(asm.FormatEncoded());                
                 cilfile.Overwrite(d.FormatCil());
             }            
         }
-
-        public static void Shred(params Type[] targets)
-        {
-            for(var i=0; i<targets.Length; i++)
-                Shred(targets[i]);
-        }
           
-        /// <summary>
-        /// Disassasembles non-generic functions defined by a type to individual files in the appropriate
-        /// assembly data folder
-        /// </summary>
-        /// <param name="cil">Specifies whether also emit CIL</param>
-        /// <typeparam name="T">The type to disassembly</typeparam>
-        public static void Shred<T>()
-            => Shred(typeof(T));
-
-        static IEnumerable<MethodDisassembly> Disassemble(Action<string> onError, params MethodInfo[] methods)
+        static IEnumerable<MethodDisassembly> Disassemble(MethodInfo[] methods)
         {
             methods.JitMethods();
             var modules = methods.Select(x => x.Module).Distinct();
             using var decon = new Deconstructor(modules);
             foreach(var m in methods)
             {
-                var d = decon.Disassemble(m, onError);
+                var d = decon.Disassemble(m);
                 if(d)
                     yield return d.ValueOrDefault();
             }            
@@ -158,7 +91,7 @@ namespace Z0
         {
             Target = DataTarget.AttachToProcess(Process.GetCurrentProcess().Id, uint.MaxValue, AttachFlag.Passive);
             Runtime = CreateRuntime(Target);
-            MdIx = CilMetadataIndex.Create(modules.ToArray());
+            MdIx = ClrMetadataIndex.Create(modules.ToArray());
         }
 
         /// <summary>
@@ -176,36 +109,27 @@ namespace Z0
         ClrMethod GetRuntimeMethod(MethodInfo src)
             =>  Runtime.GetMethodByHandle((ulong)src.MethodHandle.Value.ToInt64());
             
-        Option<MethodDisassembly> Disassemble(MethodInfo method, Action<string> onError)
+        Option<MethodDisassembly> Disassemble(MethodInfo method)
         {
             try
             {
                 var clrMethod = GetRuntimeMethod(method);
                 if(clrMethod == null || clrMethod.NativeCode == 0)
                 {
-                    onError($"Method {method.Name} not found");
+                    error($"Method {method.Name} not found");
                     return null;
                 }
-                
+                var provider = Moniker.Provider;
+                var id = provider.Define(method);
                 var asmBody = DecodeAsm(method);
-                var ilBytes = ReadCilBytes(clrMethod);    
+                var cilbody = ReadCilBytes(clrMethod);    
+                var cilfunc = MdIx.FindCilFunction(method).ValueOrDefault();
+
                 var ilBytes2 = method.GetMethodBody().GetILAsByteArray();
-                if(!ilBytes.ReallyEqual(ilBytes2))
+                if(!cilbody.ReallyEqual(ilBytes2))
                     warn($"{method.DisplayName()}: IL byte mismatch");
                         
-                var d = new MethodDisassembly
-                {
-                    MethodInfo = method,
-                    NativeAddress = clrMethod.NativeCode,
-                    MethodSig = method.Signature(),
-                    CilData = ilBytes,
-                    CilBody = MdIx.FindCil(method),
-                    CilMap = MapCilToNative(clrMethod),
-                    AsmBody =  asmBody,
-                    NativeBody = asmBody.NativeBlock
-                };
-
-                return d;            
+                return MethodDisassembly.Define(id, asmBody, cilbody, cilfunc);
             }
             catch(NoCodeException)
             {
@@ -214,7 +138,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                onError(e.ToString());
+                error(e.ToString());
                 return none<MethodDisassembly>();
             }
         }
@@ -229,7 +153,7 @@ namespace Z0
             var blocks = new List<NativeCodeBlock>();
             foreach(var block in data.NativeCode)
             {
-                instructions.AddRange(DecodeAsm(block));
+                instructions.AddRange(AsmDecoder.decode(block));
                 blocks.Add(block);
             }
             
@@ -241,19 +165,24 @@ namespace Z0
             Target?.Dispose();
         }
 		
-        static InstructionList DecodeAsm(NativeCodeBlock src)
-		{
-            var dst = new InstructionList();
-            var reader = new ByteArrayCodeReader(src.Data);
-			var decoder = Decoder.Create(IntPtr.Size * 8, reader);
-			decoder.IP = src.Address;			
-			while (reader.CanReadByte) 
-			{
-				ref var instruction = ref dst.AllocUninitializedElement();
-				decoder.Decode(out instruction);                
-			}
-            return dst;
-		}
+        /// <summary>
+        /// Establishes a correlation between a block of CIL and and block of native code
+        /// </summary>
+        readonly struct CilNativeMap 
+        {
+            public CilNativeMap(int cilOffset, ulong startAddress, ulong endAddress)
+            {
+                this.CilOffset = cilOffset;
+                this.StartAddress = startAddress;
+                this.EndAddress = endAddress;
+            }
+            
+            public readonly int CilOffset; 
+            
+            public readonly ulong StartAddress;
+            
+            public readonly ulong EndAddress;
+        }
 
         static CilNativeMap[] MapCilToNative(ClrMethod method)
         {
@@ -320,7 +249,6 @@ namespace Z0
 
 			return new NativeCodeBlock(address, dst);
 		}
-
 
         /// <summary>
         /// Reads the native code blocks that have been Jitted for a specified method

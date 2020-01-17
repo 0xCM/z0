@@ -15,7 +15,7 @@ namespace Z0
         /// Computes the cube root of the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static float cbrt(float src)
             => MathF.Cbrt(src);
 
@@ -23,30 +23,9 @@ namespace Z0
         /// Computes the cube root of the source value
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static double cbrt(double src)
             => Math.Cbrt(src);
 
-        /// <summary>
-        /// Computes the cube root of the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static ref float cbrt(ref float src)
-        {
-            src = MathF.Cbrt(src);
-            return ref src;
-        }
-
-        /// <summary>
-        /// Computes the cube root of the source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static ref double cbrt(ref double src)
-        {            
-            src = Math.Cbrt(src);
-            return ref src;
-        }
     }
 }

@@ -246,7 +246,7 @@ namespace Z0
             {
                 var x = Random.BitVector(n128, n, t);
                 var y = Random.BitVector(n128,n, t);
-                Claim.lteq(BitVector.nlz(x), x.Width);
+                Claim.lteq(x.ToBitString().Nlz(), x.Width);
 
                 var a = x % y;
                 var xc = x.ToBitCells();

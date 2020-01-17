@@ -11,19 +11,19 @@ namespace Z0
     
     partial class Bits
     {       
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte project(byte src, byte spec)
             => (byte)scatter(src, (uint)spec);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte select(byte src, byte spec)
             => (byte)gather(src, (uint)spec);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort project(ushort src, ushort spec)
             => (ushort)scatter(src, (uint)spec);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort select(ushort src, ushort spec)
             => (ushort)gather(src, (uint)spec);
     }

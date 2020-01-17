@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The target span</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part64x1(ulong src, Span<byte> dst)
         {
             ref var target = ref head64(dst);
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The target span</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part64x1(ulong src, Span<bit> dst)
         {
             // each bit has a 32-bit physical width so 2 bit values = 64 bits of storage
@@ -56,7 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The target memory location</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part8x2(uint src, ref byte dst)
         {
             const uint M = BitMasks.Lsb8x8x2;
@@ -75,7 +75,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The target memory location</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part8x2(byte src, ref byte dst)
             => part8x2((uint)src, ref dst);
 
@@ -84,14 +84,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The target memory location</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part16x2(ushort src, ref byte dst)
         {
             part8x2((byte)src, ref dst);
             part8x2((byte)(src >> 8), ref seek(ref dst, 4));
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part16x2(ushort src, Block64<byte> dst)
             => part16x2(src, ref dst.Head);
 
@@ -100,14 +100,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part32x2(uint src, ref byte dst)
         {
             part16x2((ushort)src, ref dst);
             part16x2((ushort)(src >> 16), ref seek(ref dst, 8));
         }        
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part32x2(ushort src, Block128<byte> dst)
             => part16x2(src, ref dst.Head);
 
@@ -119,7 +119,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The target memory location</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part6x3(uint src, ref byte dst)
         {
             const uint M = BitMasks.Lsb8x8x3;
@@ -128,7 +128,7 @@ namespace Z0
             seek(ref dst, 1) = (byte)(src >> 3 & M);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part6x3(uint src, Span<byte> dst)
             => part6x3(src, ref head(dst));
 
@@ -137,7 +137,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The target span</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part9x3(uint src, ref byte dst)
         {
             const uint M = BitMasks.Lsb8x8x3;
@@ -146,7 +146,7 @@ namespace Z0
             seek(ref dst, 2) = (byte)(src >> 6 & M);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part9x3(uint src, Span<byte> dst)
             => part9x3(src, ref head(dst));
 
@@ -155,7 +155,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part12x3(uint src, ref byte dst)
         {
             const uint M = BitMasks.Lsb8x8x3;
@@ -169,7 +169,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part15x3(ushort src, in NatSpan<N5,byte> dst)
         {
             const uint M = BitMasks.Lsb32x8x3;
@@ -183,7 +183,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part24x3(uint src, in NatSpan<N8,byte> dst)
         {
             const ulong M = BitMasks.Lsb64x8x3;
@@ -196,7 +196,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part27x3(uint src, in NatSpan<N9,byte> dst)
         {
             const ulong M = BitMasks.Lsb64x8x3;
@@ -210,7 +210,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="dst">The receiving buffer</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part30x3(uint src, in NatSpan<N10,byte> dst)
         {
             const ulong M = BitMasks.Lsb64x8x3;
@@ -224,7 +224,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="dst">The receiving buffer</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part63x3(ulong src, in NatSpan<N21,byte> dst)
         {
             const ulong M = BitMasks.Lsb64x8x3;
@@ -243,7 +243,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static void part4x2(uint src, ref byte dst)
         {
             const uint M = BitMasks.Lsb8x8x4;
@@ -257,7 +257,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part4x2(uint src, NatSpan<N2,byte> dst)
             => part4x2(src, ref head(dst));
 
@@ -266,7 +266,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static void part4x3(uint src, ref byte dst)
         {
             const uint M = BitMasks.Lsb8x8x4;
@@ -281,7 +281,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part4x3(uint src, NatSpan<N3,byte> dst)
             => part4x3(src, ref head(dst));
 
@@ -290,7 +290,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part4x4(ushort src, NatSpan<N4,byte> dst)
         {
             const uint M = BitMasks.Lsb32x8x4;
@@ -302,7 +302,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part8x4(uint src, NatSpan<N8,byte> dst)
         {
             const ulong M = BitMasks.Lsb64x8x4;
@@ -317,7 +317,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="dst">The partition target</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void Part4x5(uint src, NatSpan<N4,byte> dst)
         {
             const uint M = BitMasks.Lsb32x8x5;
@@ -332,7 +332,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="dst">The partition target</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part2x8(ushort src, NatSpan<N2,byte> dst)
             => dst.Cell<ushort>(0) = src; 
 
@@ -341,7 +341,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The partition target</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part4x8(uint src, NatSpan<N4,byte> dst)
             => dst.Cell<uint>(0) = src; 
 
@@ -350,7 +350,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The partition target</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part8x8(ulong src, NatSpan<N8,byte> dst)
             => dst.Cell<ulong>(0) = src; 
 
@@ -362,7 +362,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part32x16(uint src, NatSpan<N2,ushort> dst)
             => dst.Cell<uint>(0) = src; 
 
@@ -371,7 +371,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part64x16(ulong src, NatSpan<N4,ushort> dst)
             => dst.Cell<ulong>(0) = src; 
  
@@ -383,7 +383,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void part64x32(ulong src, NatSpan<N2,uint> dst)
             => dst.Cell<ulong>(0) = src;
 
@@ -392,7 +392,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static T lsb8x1<T>(T src)
             where T : unmanaged
                 => convert<ulong,T>(Bits.scatter(convert<T,ulong>(src), BitMasks.Lsb64x8x1));
@@ -402,7 +402,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static T lsb32x1<T>(T src)
             where T : unmanaged
                 => convert<ulong,T>(Bits.scatter(convert<T,ulong>(src), BitMasks.Lsb64x32x1));

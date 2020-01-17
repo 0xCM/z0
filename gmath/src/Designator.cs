@@ -19,5 +19,8 @@ namespace Z0.Designators
     {
         public IOperationCatalog Catalog 
             => GX.Catalog;
+
+        public override AssemblyId Id 
+            => AssemblyId.GMath;            
     }
 }

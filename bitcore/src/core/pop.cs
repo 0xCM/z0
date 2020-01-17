@@ -27,7 +27,7 @@ namespace Z0
         /// Counts the enabled bits in the source
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint pop(sbyte src)
             => PopCount((uint)src);
 
@@ -35,7 +35,7 @@ namespace Z0
         /// Counts the enabled bits in the source
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint pop(byte src)
             => PopCount(src);
 
@@ -43,7 +43,7 @@ namespace Z0
         /// Counts the enabled bits in the source
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint pop(short src)
             => PopCount((uint)src);
 
@@ -51,7 +51,7 @@ namespace Z0
         /// Counts the enabled bits in the source
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint pop(ushort src)
             => PopCount(src);
 
@@ -59,7 +59,7 @@ namespace Z0
         /// Counts the enabled bits in the source
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint pop(int src)
             => PopCount((uint)src);
 
@@ -67,7 +67,7 @@ namespace Z0
         /// Counts the enabled bits in the source
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint pop(uint src)
             => PopCount(src);
 
@@ -75,7 +75,7 @@ namespace Z0
         /// Counts the enabled bits in the source
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint pop(long src)
             => (uint)PopCount((ulong)src);
 
@@ -83,11 +83,11 @@ namespace Z0
         /// Counts the enabled bits in the source
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint pop(ulong src)
             => (uint)PopCount(src);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint pop(ulong x0, ulong x1)
             => (uint)(PopCount(x0) + PopCount(x1));
 
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="y"></param>
         /// <param name="z"></param>
         /// <remarks>Reference: https://www.chessprogramming.org/Population_Count</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint pop(ulong x, ulong y, ulong z) 
         {
             var maj = ((x ^ y ) & z) | (x & y);
@@ -117,15 +117,15 @@ namespace Z0
             return (uint) odd;
         }        
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint pop(ulong x0, ulong x1, ulong x2, ulong x3)
             => (uint)(PopCount(x0) + PopCount(x1) + PopCount(x2) + PopCount(x3));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint pop(ulong x0, ulong x1, ulong x2, ulong x3, ulong x4, ulong x5, ulong x6, ulong x7)
             => pop(x0,x1,x2,x3) + pop(x4,x5,x6,x7);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint pop(ulong x0, ulong x1, ulong x2, ulong x3, ulong x4, ulong x5)
             => pop(x0,x1,x2) + pop(x3,x4,x5);
  
@@ -140,12 +140,12 @@ namespace Z0
             return count;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint pop<T>(ReadOnlySpan<T> src)
             where T : unmanaged
                 => pop(in head(src.AsUInt64()), src.Length);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint pop<T>(Span<T> src)
             where T : unmanaged
                 => pop(in head(src.AsUInt64()), src.Length);

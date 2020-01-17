@@ -16,7 +16,7 @@ namespace Z0
         /// Counts the number of leading zero bits the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static int nlz<T>(T src)
             where T : unmanaged
         {

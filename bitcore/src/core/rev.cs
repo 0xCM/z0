@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <reference>https://graphics.stanford.edu/~seander/bithacks.htm</reference>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte rev(byte src)
             => (byte)(((src * 0x80200802ul) & 0x0884422110ul) * 0x0101010101ul >> 32);
 
@@ -24,11 +24,11 @@ namespace Z0
         /// Reverses the bits in the source
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort rev(ushort src)
             => concat(rev(hi(src)),rev(lo(src)));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint rev(uint x)
         {
             x = (((x & 0xaaaaaaaa) >> 1) | ((x & 0x55555555) << 1));
@@ -42,7 +42,7 @@ namespace Z0
         /// Reverses the bits in the source
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong rev(ulong src)
             => concat(rev(hi(src)),rev(lo(src)));
     }

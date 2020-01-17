@@ -124,26 +124,5 @@ namespace Z0
             where T : unmanaged
                 => x.data;
 
-        /// <summary>
-        /// Creates a copy of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> replicate<N,T>(BitVector<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => x.data;
-
-        /// <summary>
-        /// Creates a copy of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector128<N,T> replicate<N,T>(in BitVector128<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => x.data;        
     }
 }

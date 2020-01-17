@@ -16,7 +16,7 @@ namespace Z0
         /// Computes the position of the highest enabled source bit, a number between 0 and 7
         /// </summary>
         /// <param name="src">The source bit</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int msbpos(byte src)            
             => bitsize<byte>() - 1 - nlz(src);
 
@@ -24,7 +24,7 @@ namespace Z0
         /// Computes the position of the highest enabled source bit, a number between 0 and 15
         /// </summary>
         /// <param name="src">The source bit</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int msbpos(ushort src)            
             => bitsize<ushort>() - 1 - nlz(src);
 
@@ -32,7 +32,7 @@ namespace Z0
         /// Computes the position of the highest enabled source bit, a number between 0 and 31
         /// </summary>
         /// <param name="src">The source bit</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int msbpos(uint src)            
             => bitsize<uint>() - 1 - nlz(src) ;
 
@@ -40,7 +40,7 @@ namespace Z0
         /// Computes the position of the highest enabled source bit, a number between 0 and 63
         /// </summary>
         /// <param name="src">The source bit</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int msbpos(ulong src)            
             => bitsize<ulong>() - 1 - nlz(src);
     }

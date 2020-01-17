@@ -18,7 +18,7 @@ namespace Z0
           /// <param name="src">The bit source</param>
           /// <param name="index">The index at which to begin clearing bits</param>
           /// <param name="count">The number of bits to clear</param>
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static byte bitclear(byte src, byte index, byte count)
           {
                var mask = (uint)ushort.MaxValue ^ ((uint)BitMask.lo64(count - 1) << index);
@@ -31,7 +31,7 @@ namespace Z0
           /// <param name="src">The bit source</param>
           /// <param name="index">The index at which to begin clearing bits</param>
           /// <param name="count">The number of bits to clear</param>
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static sbyte bitclear(sbyte src, byte index, byte count)
           {
                var mask = (int)ushort.MaxValue ^ ((int)BitMask.lo64(count - 1) << index);
@@ -44,7 +44,7 @@ namespace Z0
           /// <param name="src">The bit source</param>
           /// <param name="index">The index at which to begin clearing bits</param>
           /// <param name="count">The number of bits to clear</param>
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static ushort bitclear(ushort src, byte index, byte count)
           {
                var mask = (uint)ushort.MaxValue ^ ((uint)BitMask.lo64(count - 1) << index);
@@ -57,7 +57,7 @@ namespace Z0
           /// <param name="src">The bit source</param>
           /// <param name="index">The index at which to begin clearing bits</param>
           /// <param name="count">The number of bits to clear</param>
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static short bitclear(short src, byte index, byte count)
           {
                var mask = (int)ushort.MaxValue ^ ((int)BitMask.lo64(count - 1) << index);
@@ -70,7 +70,7 @@ namespace Z0
           /// <param name="src">The bit source</param>
           /// <param name="index">The index at which to begin clearing bits</param>
           /// <param name="count">The number of bits to clear</param>
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static uint bitclear(uint src, byte index, byte count)
           {
                var mask = uint.MaxValue ^ ((uint)BitMask.lo64(count - 1) << index);
@@ -83,7 +83,7 @@ namespace Z0
           /// <param name="src">The bit source</param>
           /// <param name="index">The index at which to begin clearing bits</param>
           /// <param name="count">The number of bits to clear</param>
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static int bitclear(int src, byte index, byte count)
                => (int)bitclear((uint)src,index,count);
 
@@ -93,7 +93,7 @@ namespace Z0
           /// <param name="src">The bit source</param>
           /// <param name="index">The index at which to begin clearing bits</param>
           /// <param name="count">The number of bits to clear</param>
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static ulong bitclear(ulong src, byte index, byte count)
           {
                var mask = ulong.MaxValue ^ (BitMask.lo64(count - 1) << index);
@@ -106,7 +106,7 @@ namespace Z0
           /// <param name="src">The bit source</param>
           /// <param name="index">The index at which to begin clearing bits</param>
           /// <param name="count">The number of bits to clear</param>
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static long bitclear(long src, byte index, byte count)
                => (long)bitclear((ulong)src, index, count);
 
@@ -115,7 +115,7 @@ namespace Z0
           /// </summary>
           /// <param name="src">The bit source</param>
           /// <param name="index">The index at which to begin clearing bits</param>
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static ushort clearbyte(ushort src, byte index)
           {
                var mask = uint.MaxValue ^ ((uint)byte.MaxValue << index);
@@ -127,7 +127,7 @@ namespace Z0
           /// </summary>
           /// <param name="src">The bit source</param>
           /// <param name="index">The index at which to begin clearing bits</param>
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static uint clearbyte(uint src, byte index)
           {
                var mask = uint.MaxValue ^ ((uint)byte.MaxValue << index);
@@ -139,7 +139,7 @@ namespace Z0
           /// </summary>
           /// <param name="src">The bit source</param>
           /// <param name="index">The index at which to begin clearing bits</param>
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static ulong clearbyte(ulong src, byte index)
           {
                var mask = ulong.MaxValue ^ ((ulong)byte.MaxValue << index);

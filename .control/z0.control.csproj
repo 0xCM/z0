@@ -51,8 +51,8 @@
     <ProjectReference Include="$(TopDir)logix/src/z0.logix.csproj" />
     <ProjectReference Include="$(TopDir)logix/test/z0.logix.test.csproj" />
 
-    <ProjectReference Include="$(TopDir)reveal/app/z0.reveal.app.csproj" />
-    <ProjectReference Include="$(TopDir)reveal/lib/z0.reveal.lib.csproj" />
+    <!-- <ProjectReference Include="$(TopDir)reveal/app/z0.reveal.app.csproj" />
+    <ProjectReference Include="$(TopDir)reveal/lib/z0.reveal.lib.csproj" /> -->
     
     <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />
 

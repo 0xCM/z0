@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op("vcompact~2x8x16i~16x8i")]
         public static Vector128<sbyte> vcompact(Vector128<short> x, Vector128<short> y, N128 w, sbyte t = default)
             => vpackss(x,y);
 
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op("vcompact~2x8x16i~16x8u")]
         public static Vector128<byte> vcompact(Vector128<short> x, Vector128<short> y, N128 w, byte t = default)
             => vpackus(x,y);
 
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op("vcompact~2x16x16i~32x8i")]
         public static Vector256<sbyte> vcompact(Vector256<short> x, Vector256<short> y, N256 w, sbyte t = default)            
             => vperm4x64(vpackss(x,y), Perm4L.ACBD);
 
@@ -48,7 +48,7 @@ namespace Z0
         /// 16x16i -> 16x8i
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op("vcompact~16x16i~16x8i")]
         public static Vector128<sbyte> vcompact(Vector256<short> src, N128 w, sbyte t = default)            
             => vpackss(vlo(src), vhi(src));
 
@@ -56,7 +56,7 @@ namespace Z0
         /// 16x16i -> 16x8u
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op("vcompact~16x16i~16x8u")]
         public static Vector128<byte> vcompact(Vector256<short> src, N128 w, byte t = default)            
             => v8u(vpackss(vlo(src), vhi(src)));
 
@@ -69,7 +69,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<short> vinflate(Vector128<byte> src, N256 w, short t = default)
             => vconvert(src, w, t);
-
 
         /// <summary>
         /// 16x8i -> 16x16i

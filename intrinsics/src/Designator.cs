@@ -20,6 +20,8 @@ namespace Z0.Designators
         public IOperationCatalog Catalog 
             => VX.Catalog;
 
+        public override AssemblyId Id 
+            => AssemblyId.Intrinsics;
     }
 
 }

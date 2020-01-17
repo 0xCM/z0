@@ -17,7 +17,7 @@ namespace Z0
             => typeof(VXTypes).GetNestedTypes().Realize<IFunc>();
 
         public override IEnumerable<Type> GenericApiHosts
-            => items(typeof(ginx));
+            => items(typeof(ginx),typeof(vblocks));
 
         public override IEnumerable<Type> DirectApiHosts
             => items(typeof(dinx));

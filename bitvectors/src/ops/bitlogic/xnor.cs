@@ -14,9 +14,20 @@ namespace Z0
         /// <summary>
         /// Computes the bitvector z := ~(x ^ y) from bitvectors x and y
         /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        public static BitVector<T> xnor<T>(BitVector<T> x, BitVector<T> y)
+            where T : unmanaged
+                => gmath.xnor(x.Scalar, y.Scalar);
+         
+        /// <summary>
+        /// Computes the bitvector z := ~(x ^ y) from bitvectors x and y
+        /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitVector4 xnor(BitVector4 x, BitVector4 y)
             => gmath.xnor(x.Scalar,y.Scalar);
 
@@ -25,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitVector8 xnor(BitVector8 x, BitVector8 y)
             => gmath.xnor(x.Scalar,y.Scalar);
 
@@ -34,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitVector16 xnor(BitVector16 x, BitVector16 y)
             => gmath.xnor(x.Scalar, y.Scalar);
 
@@ -43,7 +54,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitVector32 xnor(BitVector32 x, BitVector32 y)
             => gmath.xnor(x.Scalar, y.Scalar);
 
@@ -52,43 +63,9 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitVector64 xnor(BitVector64 x, BitVector64 y) 
             => gmath.xnor(x.Scalar, y.Scalar); 
  
-        /// <summary>
-        /// Computes the bitvector z := ~(x ^ y) from bitvectors x and y
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<T> xnor<T>(BitVector<T> x, BitVector<T> y)
-            where T : unmanaged
-                => gmath.xnor(x.Scalar, y.Scalar);
-
-        /// <summary>
-        /// Computes the bitvector z := ~(x ^ y) from bitvectors x and y
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> xnor<N,T>(BitVector<N,T> x, BitVector<N,T> y)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gmath.xor(x.Scalar, y.Scalar);
-
-        /// <summary>
-        /// Computes the bitvector z := ~(x ^ y) from bitvectors x and y
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector128<N,T> xnor<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => ginx.vxnor(x.data,y.data); 
-    }
+   }
 }

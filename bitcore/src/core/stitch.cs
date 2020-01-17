@@ -12,7 +12,7 @@ namespace Z0
     
     partial class Bits
     {                        
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte stitch(byte left, int ldx, byte right, int rdx)
         {
             var a = (uint)left << ldx;
@@ -20,7 +20,7 @@ namespace Z0
             return (byte)((a | b) >> rdx);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort stitch(ushort left, int ldx, ushort right, int rdx)
         {
             var a = (uint)left << ldx;
@@ -28,7 +28,7 @@ namespace Z0
             return (ushort)((a | b) >> rdx);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint stitch(uint left, int ldx, uint right, int rdx)
         {
             var a = left << ldx;
@@ -36,7 +36,7 @@ namespace Z0
             return (a | b) >> rdx;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong stitch(ulong left, int ldx, ulong right, int rdx)
         {
             var a = left << ldx;

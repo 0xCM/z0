@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Designators
 {
     using System;
     using System.Collections;
@@ -36,6 +36,8 @@ namespace Z0
         public virtual string Name
             => Assembly.GetName().Name;
 
+        public virtual AssemblyId Id => AssemblyId.None;
+        
         public virtual IEnumerable<string> OpNames
             => new string[]{};
 

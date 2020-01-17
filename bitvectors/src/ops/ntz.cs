@@ -17,6 +17,14 @@ namespace Z0
         /// Counts the number of trailing zero bits
         /// </summary>
         [MethodImpl(Inline)]
+        public static int ntz<T>(in BitVector<T> x)
+            where T : unmanaged
+                => gbits.ntz(x.data);
+
+        /// <summary>
+        /// Counts the number of trailing zero bits
+        /// </summary>
+        [MethodImpl(Inline)]
         public static int ntz(BitVector8 x)
             => gbits.ntz(x.data);
 
@@ -41,36 +49,6 @@ namespace Z0
         public static int ntz(BitVector64 x)
             => gbits.ntz(x.data);
 
-        /// <summary>
-        /// Counts the number of trailing zero bits
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static int ntz<T>(in BitVector<T> x)
-            where T : unmanaged
-                => gbits.ntz(x.data);
 
-        /// <summary>
-        /// Counts the number of trailing zero bits
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static int ntz<N,T>(in BitVector<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gbits.ntz(x.data);
-
-        /// <summary>
-        /// Counts the number of trailing zeros
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static int ntz<N,T>(in BitVector128<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-        {
-            var lo = x.Lo;
-            if(lo != 0)
-                return gbits.ntz(lo);
-            else
-                return gbits.ntz(x.Hi) + 64;
-        }
     }
 }

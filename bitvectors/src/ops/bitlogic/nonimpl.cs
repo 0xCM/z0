@@ -17,32 +17,11 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static BitVector<T> nonimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.nonimpl(x.Scalar, y.Scalar);
 
-        /// <summary>
-        /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
-        /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> nonimpl<N,T>(BitVector<N,T> x, BitVector<N,T> y)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gmath.nonimpl(x.Scalar, y.Scalar);
-
-        /// <summary>
-        /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
-        /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline)]
-        public static BitVector128<N,T> nonimpl<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => ginx.vnonimpl(x.data, y.data);
 
 
 

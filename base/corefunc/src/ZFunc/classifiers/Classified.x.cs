@@ -206,12 +206,12 @@ namespace Z0
         /// <param name="src">The source method</param>
         /// <param name="args">The arguments over which to close the method, if generic</param>
         [MethodImpl(Inline)]
-        public static Operation Descriptor(this MethodInfo src, params Type[] args)
-            => Operation.Define(src, args);
+        public static FastOp FastOp(this MethodInfo src, params Type[] args)
+            => Z0.FastOp.Define(src, args);
 
         [MethodImpl(Inline)]
-        public static Operation Descriptor(this MethodInfo src, Moniker m)
-            => Operation.Define(src, m);
+        public static FastOp FastOp(this MethodInfo src, Moniker m)
+            => Z0.FastOp.Define(src, m);
 
         /// <summary>
         /// Determines the primal kind of a type, possibly none
@@ -408,28 +408,6 @@ namespace Z0
         public static int Size(this Type t)
             => Classified.size(t);
 
-                    
-        [MethodImpl(Inline)]
-        public static bool IsZFunc(this MethodInfo m)
-            => Attribute.IsDefined(m,typeof(ZFuncAttribute));
-
-        /// <summary>
-        /// Defines a moniker predicated on a method
-        /// </summary>
-        /// <param name="m">The source method</param>
-        public static Moniker DeriveMoniker(this MethodInfo m)
-            => Moniker.define(m);
-
-        public static IEnumerable<PrimalKind> SupportedPrimals(this MethodInfo m)
-        {
-            if(m.IsZFunc() && m.IsOpenGeneric())
-            {
-                var a = m.GetCustomAttribute<ZFuncAttribute>();
-                foreach(var k in a.Closures.Distinct())
-                    yield return k;
-            }
-        }            
-    
         /// <summary>
         /// Determines whether all operands are primal
         /// </summary>

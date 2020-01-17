@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Floats)]
         public static bit between<T>(T x, T a, T b)    
             where T : unmanaged
         {

@@ -26,10 +26,10 @@ namespace Z0
                 let monikers = closures.Select(k => Moniker.define(name,k,true))
                 select FastOpContract.Define(name,host,monikers);
 
-        public virtual IEnumerable<FastGenericOp> GenericOps 
+        public virtual IEnumerable<FastGenericInfo> GenericOps 
             =>  GenericApiHosts.FastOpGenerics();
 
-        public virtual IEnumerable<FastDirectOp> DirectOps 
+        public virtual IEnumerable<FastDirectInfo> DirectOps 
             => DirectApiHosts.FastOpDirect();
         
         public virtual IEnumerable<Type> ServiceHosts
@@ -41,8 +41,8 @@ namespace Z0
         public virtual IEnumerable<Type> DirectApiHosts
             => items<Type>();
 
-        public virtual IEnumerable<FastGenericOp> SpanOps 
-            => items<FastGenericOp>();
+        public virtual IEnumerable<FastGenericInfo> SpanOps 
+            => items<FastGenericInfo>();
 
         public Assembly DeclaringAssembly 
             => typeof(C).Assembly;

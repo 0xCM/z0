@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="shift">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte rotr(byte src, int shift)
             => (byte)((src >> shift) | (src << (8 - shift)));
 
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="shift">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort rotr(ushort src, int shift)
             => (ushort)((src  >> shift) | (src << (16 - shift)));
 
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="shift">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint rotr(uint src, int shift)
             => (src >> shift) | (src << (32 - shift));
 
@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="shift">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong rotr(ulong src, int shift)
             => (src >> shift) | (src << (64 - shift));
 
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="shift">The magnitude of the rotation</param>
         /// <param name="width">The effective bit-width of the source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte rotr(byte src, int shift, int width)
             => (byte)((src >> shift) | (src << (width - shift)));
 
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="shift">The magnitude of the rotation</param>
         /// <param name="width">The effective bit-width of the source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort rotr(ushort src, int shift, int width)
             => (ushort)((src  >> shift) | (src << (width - shift)));
 
@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="shift">The magnitude of the rotation</param>
         /// <param name="width">The effective bit-width of the source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint rotr(uint src, int shift, int width)
             => (src >> shift) | (src << (width - shift));
 
@@ -86,7 +86,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="shift">The magnitude of the rotation</param>
         /// <param name="width">The effective bit-width of the source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong rotr(ulong src, int shift, int width)
             => (src >> shift) | (src << (width - shift));
 

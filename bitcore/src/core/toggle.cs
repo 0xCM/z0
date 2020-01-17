@@ -11,35 +11,35 @@ namespace Z0
 
      partial class Bits
      {                
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static sbyte toggle(sbyte src, int pos)
                => src ^= (sbyte)(1 << pos);
 
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static byte toggle(byte src, int pos)
                => src ^= (byte)(1 << pos);
 
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static short toggle(short src, int pos)
                => src ^= (short)(1 << pos);
 
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static ushort toggle(ushort src, int pos)
                => src ^= (ushort)(1 << pos);
 
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static int toggle(int src, int pos)
                => src ^= (1 << pos);
 
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static uint toggle(uint src, int pos)
                => src ^= (1u << pos);
 
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static long toggle(long src, int pos)
                => src ^= (1L << pos);
 
-          [MethodImpl(Inline)]
+          [MethodImpl(Inline), Op]
           public static ulong toggle(ulong src, int pos)
                => src ^= (1ul << pos);
 
@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="pos">The position of the bit to toggle</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         internal static float toggle(float src, int pos)
         {
             ref var bits = ref Unsafe.As<float,int>(ref src);
@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="pos">The position of the bit to toggle</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         internal static double toggle(double src, int pos)
         {
             ref var bits = ref Unsafe.As<double,long>(ref src);

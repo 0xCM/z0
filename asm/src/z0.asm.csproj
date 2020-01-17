@@ -14,4 +14,9 @@
     <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />    
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="dnlib" Version="3.2.0" />
+    <PackageReference Include="Iced" Version="1.3.0" />
+  </ItemGroup>
+
 </Project>

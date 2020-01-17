@@ -11,6 +11,7 @@ namespace Z0
 
     partial class fmath
     {
+        [Op]
         public static bool fcmp(float x, float y, FpCmpMode mode)
         {
             var result = mode switch
@@ -55,6 +56,7 @@ namespace Z0
             return result; 
         }
 
+        [Op]
         public static bool fcmp(double x, double y, FpCmpMode mode)
         {
             var result = mode switch

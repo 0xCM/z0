@@ -58,16 +58,16 @@ namespace Z0
             where D : Delegate
                 => src.DynamicMethod.CilBody();
 
-        public static CilFunction CilFunc(this DynamicMethod src)
-            => CilFunction.From(src);
+        public static CilFunctionBody CilFunc(this DynamicMethod src)
+            => CilFunctionBody.From(src);
 
-        public static CilFunction CilFunc(this MethodInfo src)
-            => CilFunction.From(src);
+        public static CilFunctionBody CilFunc(this MethodInfo src)
+            => CilFunctionBody.From(src);
 
-        public static CilFunction CilFunc(this DynamicDelegate src)
+        public static CilFunctionBody CilFunc(this DynamicDelegate src)
             => src.DynamicMethod.CilFunc();
 
-        public static CilFunction CilFunc<D>(this DynamicDelegate<D> src)
+        public static CilFunctionBody CilFunc<D>(this DynamicDelegate<D> src)
             where D : Delegate
                 => src.DynamicMethod.CilFunc();
 

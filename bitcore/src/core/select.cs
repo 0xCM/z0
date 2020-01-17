@@ -11,19 +11,19 @@ namespace Z0
 
     partial class Bits
     {        
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint project(uint src, uint spec)
             => scatter(src, spec);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint select(uint src, uint spec)
             => gather(src, spec);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong project(ulong src, ulong spec)
             => scatter(src, spec);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong select(ulong src, ulong spec)
             => gather(src, spec);
     }

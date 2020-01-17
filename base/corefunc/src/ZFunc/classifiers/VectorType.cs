@@ -54,6 +54,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static VectorKind kind(Type t)
         {
+            t = t.IsRef() ? t.GetElementType() : t;
             if(t == typeof(Vector128<byte>))
                 return VectorKind.Vector128x8u;
             else if(t == typeof(Vector128<ushort>))
@@ -129,9 +130,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static VectorWidth width(Type t)
         {
-            if(t.IsVector())
+            if(test(t))
             {
-                var def = t.GetGenericTypeDefinition();
+                var def = t.IsGenericRef() ? t.GetElementType().GetGenericTypeDefinition() : t.GetGenericTypeDefinition();
 
                 if(def == typeof(Vector128<>))
                     return VectorWidth.W128;
@@ -154,19 +155,22 @@ namespace Z0
         /// <param name="t">The type to test</param>
         public static bool test(Type t)
         {
+            var def = default(Type);
+
             if(t.IsGenericType)
-            {
-                var def = t.GetGenericTypeDefinition();
-                if(                    
-                    def == typeof(Vector128<>) 
-                 || def == typeof(Vector256<>) 
-                 || def == typeof(Vector1024<>) 
-                 || def == typeof(Vector512<>)
-                 || def == typeof(Vector1024<>)
-                 )
-                    return true;
-            }
-            return false;
+                def = t.GetGenericTypeDefinition();
+            else if(t.IsGenericRef())
+                def = t.GetElementType().GetGenericTypeDefinition();
+            else
+                return false;
+
+            return(        
+                def == typeof(Vector128<>) 
+             || def == typeof(Vector256<>) 
+             || def == typeof(Vector1024<>) 
+             || def == typeof(Vector512<>)
+             || def == typeof(Vector1024<>)
+             );
         }
 
         /// <summary>
@@ -175,24 +179,29 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         public static bool vector(Type t, int? width)        
         {
-            if(t.IsGenericType && width != null)
+            if(test(t))
             {
-                var def = t.GetGenericTypeDefinition();
-                if(def == typeof(Vector64<>) && width == 64)
-                    return true;
-                else if(def == typeof(Vector128<>) && width == 128)
-                    return true;
-                else if (def == typeof(Vector256<>) && width == 256)
-                    return true;
-                else if (def == typeof(Vector512<>) && width == 512)
-                    return true;
-                else if (def == typeof(Vector1024<>) && width == 1024)
+                if(width == null)                
                     return true;
                 else
-                    return false;
+                {
+                    var def = t.IsGenericRef() ? t.GetElementType().GetGenericTypeDefinition() : t.GetGenericTypeDefinition();
+                    if(def == typeof(Vector64<>) && width == 64)
+                        return true;
+                    else if(def == typeof(Vector128<>) && width == 128)
+                        return true;
+                    else if (def == typeof(Vector256<>) && width == 256)
+                        return true;
+                    else if (def == typeof(Vector512<>) && width == 512)
+                        return true;
+                    else if (def == typeof(Vector1024<>) && width == 1024)
+                        return true;
+                    else
+                        return false;
+                }
             }
-            else
-                return test(t);
+            return false;
+         
         }
 
         [MethodImpl(Inline)]

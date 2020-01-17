@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.Floats)]
         public static T round<T>(T src, int scale)
             where T : unmanaged
         {
@@ -27,11 +27,11 @@ namespace Z0
 
     partial class fmath
     {
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static float round(float src, int scale)
             => MathF.Round(src, scale);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static double round(double src, int scale)
             => Math.Round(src, scale);
     }    

@@ -32,7 +32,7 @@ namespace Z0
         }
 
         public static void EmitAsm(this MethodDisassembly disassembly, FilePath dst, bool append = false)        
-            => disassembly.DistillAsmFunction().EmitAsm(dst,append);
+            => AsmFunction.from(disassembly).EmitAsm(dst,append);
 
         /// <summary>
         /// Writes each disasesembled method to file derived from the name of the method
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="append">Whether existing files should be appended or replaced</param>
         public static void EmitAsmFiles(this IEnumerable<MethodDisassembly> disassembly, FolderPath dst, bool append = false)
         {
-            foreach(var asm in disassembly.DistillAsmFunctions())
+            foreach(var asm in AsmFunction.from(disassembly))
             {
                 var filename = FileName.Define(asm.Name, "asm");
                 asm.EmitAsm(dst + filename,append);
@@ -52,7 +52,7 @@ namespace Z0
         public static void EmitAsm(this IEnumerable<MethodDisassembly> disassembly, FilePath dst)        
         {
             using var writer = EmissionWriter(dst);
-            var asm = disassembly.DistillAsmFunctions().ToArray();
+            var asm = AsmFunction.from(disassembly).ToArray();
             asm.Emit(writer);
         }
 
@@ -66,7 +66,7 @@ namespace Z0
         public static void EmitAsm(this IEnumerable<MethodDisassembly> disassembly, string name, bool timestamped = false)
         {
             using var writer = EmissionWriter(name, "asm", timestamped);
-            var asm = disassembly.Select(d => d.DistillAsmFunction()).ToArray();
+            var asm = disassembly.Select(d => AsmFunction.from(d)).ToArray();
             asm.Emit(writer);
         }
 

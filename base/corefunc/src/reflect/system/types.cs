@@ -137,18 +137,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// If a type is non-generic, returns an emtpy list.
-        /// If a type is open generic, returns a list describing the open parameters
-        /// If a type is closed generic, returns a list describing the closed parameters
-        /// </summary>
-        /// <param name="src">The type from which to extract existing closed/open generic parameters</param>
-        public static IReadOnlyList<Type> GetGenericSlots(this Type src)
-            => (!src.IsGenericType && !src.IsGenericTypeDefinition) ? new Type[]{} 
-               : src.IsConstructedGenericType 
-               ? src.GenericTypeArguments 
-               : src.GetGenericTypeDefinition().GetGenericArguments();    
-
-        /// <summary>
         /// Selects the public types from a stream
         /// </summary>
         /// <param name="src">The source stream</param>

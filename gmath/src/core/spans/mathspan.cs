@@ -38,7 +38,7 @@ namespace Z0
             where T : unmanaged
                 => SpanFunc.apply(GX.mod<T>(), l, r, dst);
 
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
         public static Span<T> modmul<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.modmul<T>(), a,b,c, dst);

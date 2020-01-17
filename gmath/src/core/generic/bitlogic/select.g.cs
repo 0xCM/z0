@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static T select<T>(T a, T b, T c)
             where T : unmanaged
         {            

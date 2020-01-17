@@ -12,7 +12,6 @@ namespace Z0
 
     partial class BitVector
     {
-
         /// <summary>
         /// Raises a vector to a power
         /// </summary>

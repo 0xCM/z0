@@ -292,7 +292,16 @@ namespace Z0
 
                     // if((x0 == ZED && x1 == ZED && x2 == ZED && x3 == ZED))
                     //     return (ulong)pSrcCurrent - 3;
-                }                    
+                }
+
+                if(offset >= 5 
+                    && (dst[offset - 4] == ZED) 
+                    && (dst[offset - 3] == ZED) 
+                    && (dst[offset - 2] == ZED) 
+                    && (dst[offset - 1] == ZED)                     
+                    && (dst[offset - 0] == ZED)                     
+                    )
+                return (ulong)pSrcCurrent - 4;
             }
             return (ulong)pSrcCurrent;
         }

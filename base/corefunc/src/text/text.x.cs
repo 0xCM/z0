@@ -785,8 +785,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string RemoveWhitespace(this string src)
             => src.RemoveAny(items(AsciSym.Space, AsciEscape.LineFeed, AsciEscape.NewLine, AsciEscape.Tab));
- 
-        
+
+        [MethodImpl(Inline)]
+        public static string Comment(this string text, string delimiter = "//", int pad = 0)
+            => pad == 0 ? $"{delimiter} {text}" : delimiter.PadRight(pad) + text;
 
         public static StringBuilder WithLabeled(this StringBuilder sb, object label, object content, int? labelWidth = null)
         {
@@ -797,6 +799,11 @@ namespace Z0
             return sb;
         }
 
+        public static StringBuilder AppendLine(this StringBuilder sb, char c)
+        {
+            sb.AppendLine(c.ToString());
+            return sb;
+        }
 
         [MethodImpl(Inline)]
         static bool IsRowHead(int index, int rowlen)

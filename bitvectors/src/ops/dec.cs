@@ -19,6 +19,17 @@ namespace Z0
         /// Arithmetically decrements the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        public static BitVector<T> dec<T>(BitVector<T> x)
+            where T : unmanaged
+                => gmath.dec(x.data);
+         
+        /// <summary>
+        /// Arithmetically decrements the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline), Op]
         public static BitVector4 dec(BitVector4 x)
         {
             if(x.data > 0)
@@ -31,7 +42,7 @@ namespace Z0
         /// Arithmetically decrements the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitVector8 dec(BitVector8 x)        
             => gmath.dec(x.data);
         
@@ -39,7 +50,7 @@ namespace Z0
         /// Arithmetically decrements the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitVector16 dec(BitVector16 x)        
             => gmath.dec(x.data);
 
@@ -47,7 +58,7 @@ namespace Z0
         /// Arithmetically decrements the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitVector32 dec(BitVector32 x)        
             => gmath.dec(x.data);
 
@@ -55,30 +66,10 @@ namespace Z0
         /// Arithmetically decrements the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitVector64 dec(BitVector64 x)        
             => gmath.dec(x.data);
  
-        /// <summary>
-        /// Arithmetically decrements the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<T> dec<T>(BitVector<T> x)
-            where T : unmanaged
-                => gmath.dec(x.data);
-
-        /// <summary>
-        /// Arithmetically decrements the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> dec<N,T>(BitVector<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gmath.dec(x.data);
  
     }
 }

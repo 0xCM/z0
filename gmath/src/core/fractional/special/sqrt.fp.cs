@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Floats)]
         public static T sqrt<T>(T src)
             where T : unmanaged
         {

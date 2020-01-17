@@ -20,7 +20,7 @@ namespace Z0
         /// Logically equivalent to the composite operation (src - 1) & src that disables the least set bit in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte lsboff(byte src)
             => (byte)ResetLowestSetBit(src);
  
@@ -29,7 +29,7 @@ namespace Z0
         /// Logically equivalent to the composite operation (src - 1) & src that disables the least set bit in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort lsboff(ushort src)
             => (ushort)ResetLowestSetBit(src);
  
@@ -38,7 +38,7 @@ namespace Z0
         /// Logically equivalent to the composite operation (src - 1) & src that disables the least set bit in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint lsboff(uint src)
             => ResetLowestSetBit(src);
 
@@ -47,7 +47,7 @@ namespace Z0
         /// Logically equivalent to the composite operation (src - 1) & src that disables the least set bit in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong lsboff(ulong src)
             => ResetLowestSetBit(src);
     }

@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="dst">The bit target</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void unpack8x1(byte src, ref ulong dst)
             => dst = Bits.scatter(src, (ulong)BitMasks.Lsb64x8x1);
 
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="dst">The bit target</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void unpack8x1(byte src, Span<byte> dst)
             => unpack8x1(src, ref head64(dst));
 
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="dst">The bit target</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void unpack16x1(ushort src, Span<byte> dst)
             => unpack16x1(src, ref head64(dst));
 
@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="dst">The bit target</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void unpack32x1(uint src, Span<byte> dst)
             => unpack32x1(src, ref head64(dst));
 
@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="dst">The bit target</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void unpack64x1(ulong src, Span<byte> dst)
             => unpack64x1(src, ref head64(dst));
 
@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="dst">The bit target</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void unpack16x1(ushort src, in Block128<byte> dst)
             => unpack16x1(src, dst.Data);
 
@@ -70,11 +70,11 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="dst">The bit target</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void unpack32x1(uint src, in Block256<byte> dst)
             => unpack32x1(src, dst.Data);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static void unpack16x1(ushort src, ref ulong dst)
         {
             const ulong M = (ulong)BitMasks.Lsb64x8x1;
@@ -83,14 +83,14 @@ namespace Z0
             seek(ref dst, 1) = Bits.scatter(uint16(src >> 8), M);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static void unpack32x1(uint src, ref ulong dst)
         {
             unpack16x1((ushort)src, ref dst);
             unpack16x1((ushort)(src >> 16), ref seekb(ref dst, 16));
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static void unpack64x1(ulong src, ref ulong dst)
         {
             unpack32x1((uint)src, ref dst);

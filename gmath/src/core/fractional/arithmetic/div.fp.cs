@@ -30,7 +30,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.Floats)]
         public static bool divides<T>(T a, T b)
             where T : unmanaged
         {

@@ -9,14 +9,12 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     
+    using Z0.Designators;
+    
     using static zfunc;
 
     static class ControlMessages
     {
-
-        public static AppMsg EmittingHostOps(Type host)
-            => appMsg($"Emitting operations defined by {host.Name}");
-         
         public static AppMsg ExecutingHost(IAssemblyDesignator host)
             => appMsg($"{now().ToLexicalString()} Executing {host.Name}");
 

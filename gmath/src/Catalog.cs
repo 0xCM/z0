@@ -22,7 +22,7 @@ namespace Z0
             => typeof(GXTypes).GetNestedTypes().Realize<IFunc>();
 
         public override IEnumerable<Type> GenericApiHosts
-            => items(typeof(gmath));
+            => items(typeof(gmath), typeof(mathspan), typeof(gfp));
 
         public override IEnumerable<Type> DirectApiHosts
             => items(typeof(math), typeof(fmath));

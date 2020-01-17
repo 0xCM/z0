@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bit</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static int lsbpos<T>(T src)
             where T : unmanaged
                 => ntz(src);

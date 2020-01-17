@@ -35,10 +35,10 @@ namespace Z0
         /// Extracts fastop metadata from a host type for non-generic operations
         /// </summary>
         /// <param name="host">The source type</param>
-        public static IEnumerable<FastDirectOp> FastOpDirect(this Type host)
-            => host.FastOpMethods().Where(m => m.IsNonGeneric()).Select(m => FastDirectOp.Define(m.FastOpName(),m));
+        public static IEnumerable<FastDirectInfo> FastOpDirect(this Type host)
+            => host.FastOpMethods().Where(m => m.IsNonGeneric()).Select(m => FastDirectInfo.Define(m.FastOpName(),m));
 
-        public static IEnumerable<FastDirectOp> FastOpDirect(this IEnumerable<Type> hosts)
+        public static IEnumerable<FastDirectInfo> FastOpDirect(this IEnumerable<Type> hosts)
             => from host in hosts
                 from op in host.FastOpDirect()
                 select op;
@@ -47,16 +47,21 @@ namespace Z0
         /// Extracts fastop metadata from a host type for generic operations
         /// </summary>
         /// <param name="host">The source type</param>
-        public static IEnumerable<FastGenericOp> FastOpGenerics(this Type host) 
+        public static IEnumerable<FastGenericInfo> FastOpGenerics(this Type host) 
             => from m in host.FastOpMethods().Where(m => m.IsOpenGeneric())
-                let def = m.GetGenericMethodDefinition()
                 let name = m.FastOpName()
-                let attrib = def.CustomAttribute<PrimalClosuresAttribute>()
-                let closures = attrib.MapValueOrElse(a => a.Closures, () => PrimalKind.Integers).Distinct()
-                let monikers = closures.Select(k => Moniker.define(name,k,true))
-                select FastGenericOp.Define(name,def,monikers);
+                let attrib = m.CustomAttribute<PrimalClosuresAttribute>()
+                where attrib.IsSome()
+                let closures = attrib.MapRequired(a => a.Closures).Distinct().ToArray()
+                where closures.Length != 0 
+                let def = m.GetGenericMethodDefinition()                
+                let provider = Moniker.Provider
+                let moniker =   provider.Define(def.MakeGenericMethod(typeof(uint)))
+                let monikers = closures.Select(k => moniker.WithKind(k))
+                select FastGenericInfo.Define(name, def, monikers);
 
-        public static IEnumerable<FastGenericOp> FastOpGenerics(this IEnumerable<Type> hosts)
+        
+        public static IEnumerable<FastGenericInfo> FastOpGenerics(this IEnumerable<Type> hosts)
             => from host in hosts
                 from op in host.FastOpGenerics()
                 select op;
@@ -65,31 +70,12 @@ namespace Z0
         /// Closes generic operations over the set of primal types that each operation supports
         /// </summary>
         /// <param name="generics">Metadata for generic operations</param>
-        public static IEnumerable<Pair<Moniker,MethodInfo>> Closures(this FastGenericOp op)
+        public static IEnumerable<Pair<Moniker,MethodInfo>> Closures(this FastGenericInfo op)
             => from r in op.Reifications
                where r.PrimalKind.IsSome()
                let t = r.PrimalKind.ToPrimalType()
                let m = op.Method.MakeGenericMethod(t)
                select paired(r,m);
 
-        /// <summary>
-        /// Closes generic operations over the set of primal types that each operation supports
-        /// </summary>
-        /// <param name="generics">Metadata for generic operations</param>
-        public static IEnumerable<Pair<Moniker,MethodInfo>> Closures(this IEnumerable<FastGenericOp> generics)
-            => from g in generics
-               from r in g.Reifications
-               where r.PrimalKind.IsSome()
-               let t = r.PrimalKind.ToPrimalType()
-               let m = g.Method.MakeGenericMethod(t)
-               select paired(r,m);
-
-
-        /// <summary>
-        /// Extracts fastop metadata for direct and/or generic operations from a host type
-        /// </summary>
-        /// <param name="host">The source type</param>
-        public static IEnumerable<FastOpInfo> FastOps(this Type host)
-            => host.FastOpGenerics().Cast<FastOpInfo>().Union(host.FastOpDirect());
     }
 }

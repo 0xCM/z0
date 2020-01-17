@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="pos">The position of the bit for which rank will be calculated</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint rank(byte src, int pos)
             => pop(between(src,0,(byte)pos));
 
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="pos">The position of the bit for which rank will be calculated</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint rank(ushort src, int pos)
             => pop(between(src,0,(byte)pos));
 
@@ -36,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="pos">The position of the bit for which rank will be calculated</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint rank(uint src, int pos)
             => pop(between(src,0,(byte)pos));
 
@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="pos">The position of the bit for which rank will be calculated</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint rank(ulong src, int pos)
             => pop(between(src,0,(byte)pos));
     }

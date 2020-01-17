@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static sbyte enable(sbyte src, int pos)
             =>  src |= (sbyte)(1 << pos);
             
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte enable(byte src, int pos)
             =>  src |= (byte)(1 << pos);
 
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static short enable(short src, int pos)
             =>  src |= (short)(1 << pos);
             
@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort enable(ushort src, int pos)
             =>  src |= (ushort)(1 << pos);
 
@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int enable(int src, int pos)
             =>  src |= (1 << pos);
 
@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint enable(uint src, int pos)
             =>  src |= (1u << pos);
 
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static long enable(long src, int pos)
             =>  src |= (1L << pos);
 
@@ -79,7 +79,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong enable(ulong src, int pos)
             =>  src |= (1ul << pos);
  
@@ -88,7 +88,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float enable(float src, int pos)
         {
             var srcBits = BitConverter.SingleToInt32Bits(src);
@@ -102,7 +102,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double enable(double src, int pos)
         {               
             var srcBits = BitConverter.DoubleToInt64Bits(src);
@@ -116,7 +116,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static sbyte disable(sbyte src, int pos)        
             => (sbyte)(src & (byte)~((sbyte)(1 << pos)));
 
@@ -125,7 +125,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte disable(byte src, int pos)        
             => (byte)(src & (byte)~((byte)(1 << pos)));
 
@@ -134,7 +134,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static short disable(short src, int pos)        
             => (short)(src & (short)~((short)(1 << pos)));
 
@@ -143,7 +143,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort disable(ushort src, int pos)        
             => (ushort)(src & (ushort)~((ushort)(1 << pos)));
 
@@ -152,7 +152,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static int disable(int src, int pos)        
             => src & ~((1 << pos));
 
@@ -161,7 +161,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint disable(uint src, int pos)        
             => src & ~((1u << pos));
 
@@ -170,7 +170,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static long disable(long src, int pos)        
             => src & ~((1L << pos));
 
@@ -179,7 +179,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong disable(ulong src, int pos)        
             => src & ~((1ul << pos));
 
@@ -188,7 +188,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static float disable(float src, int pos)
         {
             ref var bits = ref Unsafe.As<float,int>(ref src);
@@ -202,7 +202,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static double disable(double src, int pos)
         {
             ref var bits = ref Unsafe.As<double,long>(ref src);

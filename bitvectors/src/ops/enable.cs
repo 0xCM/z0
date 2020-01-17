@@ -15,48 +15,8 @@ namespace Z0
         /// <summary>
         /// Enables a bit if it is disabled
         /// </summary>
-        /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
-        public static BitVector4 enable(BitVector4 x, int index)
-            => Bits.enable(x.data, index);
-
-        /// <summary>
-        /// Enables a bit if it is disabled
-        /// </summary>
         /// <param name="index">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
-        public static BitVector8 enable(BitVector8 x, int index)
-            => Bits.enable(x.data, index);
-
-        /// <summary>
-        /// Enables a bit if it is disabled
-        /// </summary>
-        /// <param name="index">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
-        public static BitVector16 enable(BitVector16 x, int index)
-            => Bits.enable(x.data, index);
-
-        /// <summary>
-        /// Enables a bit if it is disabled
-        /// </summary>
-        /// <param name="index">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
-        public static BitVector32 enable(BitVector32 x, int index)
-            => Bits.enable(x.data, index);
-
-        /// <summary>
-        /// Enables a bit if it is disabled
-        /// </summary>
-        /// <param name="index">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
-        public static BitVector64 enable(BitVector64 x, int index)
-            => Bits.enable(x.data, index);
-
-        /// <summary>
-        /// Enables a bit if it is disabled
-        /// </summary>
-        /// <param name="index">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static BitVector<T> enable<T>(BitVector<T> x, int index)
             where T : unmanaged
                 => gbits.enable(x.data,index);
@@ -64,11 +24,43 @@ namespace Z0
         /// <summary>
         /// Enables a bit if it is disabled
         /// </summary>
+        /// <param name="pos">The position of the bit to enable</param>
+        [MethodImpl(Inline), Op]
+        public static BitVector4 enable(BitVector4 x, int index)
+            => Bits.enable(x.data, index);
+
+        /// <summary>
+        /// Enables a bit if it is disabled
+        /// </summary>
         /// <param name="index">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> enable<N,T>(BitVector<N,T> x, int index)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gbits.enable(x.data,index);
+        [MethodImpl(Inline), Op]
+        public static BitVector8 enable(BitVector8 x, int index)
+            => Bits.enable(x.data, index);
+
+        /// <summary>
+        /// Enables a bit if it is disabled
+        /// </summary>
+        /// <param name="index">The position of the bit to enable</param>
+        [MethodImpl(Inline), Op]
+        public static BitVector16 enable(BitVector16 x, int index)
+            => Bits.enable(x.data, index);
+
+        /// <summary>
+        /// Enables a bit if it is disabled
+        /// </summary>
+        /// <param name="index">The position of the bit to enable</param>
+        [MethodImpl(Inline), Op]
+        public static BitVector32 enable(BitVector32 x, int index)
+            => Bits.enable(x.data, index);
+
+        /// <summary>
+        /// Enables a bit if it is disabled
+        /// </summary>
+        /// <param name="index">The position of the bit to enable</param>
+        [MethodImpl(Inline), Op]
+        public static BitVector64 enable(BitVector64 x, int index)
+            => Bits.enable(x.data, index);
+
+
     }
 }

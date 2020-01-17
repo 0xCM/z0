@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Designators
 {
     using System;
     using System.Reflection;
@@ -55,6 +55,8 @@ namespace Z0
         /// The types in the assembly that define the public api surface
         /// </summary>
         IEnumerable<Type> ApiProviders {get;}
+
+        AssemblyId Id {get;}
 
         /// <summary>
         /// The assembly role

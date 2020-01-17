@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte bfly(N1 n, byte x)
             => bfly(x,BitMasks.Central8x4x2,1);
 
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort bfly(N1 n, ushort x)
             => bfly(x,BitMasks.Central16x4x2,1);
 
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint bfly(N1 n, uint x)
             => bfly(x,BitMasks.Central32x4x2,1);
 
@@ -47,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong bfly(N1 n, ulong x)
             => bfly(x,BitMasks.Central64x4x2,1);
 
@@ -56,7 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte bfly(N2 n, byte x)
             => bfly(x,BitMasks.Central8x8x4,2);
 
@@ -65,7 +65,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort bfly(N2 n, ushort x)
             => bfly(x,BitMasks.Central16x8x4,2);
 
@@ -74,7 +74,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint bfly(N2 n, uint x)
             => bfly(x, BitMasks.Central32x8x4,2);
 
@@ -83,7 +83,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong bfly(N2 n, ulong x)
             => bfly(x,BitMasks.Central64x8x4,2);
 
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         /// <remarks> [0 1 2 3 ] -> [0 2 1 3] </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort bfly(N4 n, ushort x)
             => bfly(x,BitMasks.Central16x16x8,4);
 
@@ -105,7 +105,7 @@ namespace Z0
         /// <remarks> 
         /// [0 | 1 2 | 3 || 4 | 5 6 | 7] -> [0 | 2 1 | 3 || 4 | 6 5 | 7]
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint bfly(N4 n, uint x)
             => bfly(x,BitMasks.Central32x16x8,4);
 
@@ -117,7 +117,7 @@ namespace Z0
         /// <remarks> 
         /// [0 | 1 2 | 3 || 4 | 5 6 | 7 || 8 | 9 A | B || C | D E | F] -> [0 | 2 1 | 3 || 4 | 6 5 | 7 || 8 | A 9 | B || C | E D | F]
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong bfly(N4 n, ulong x)
             => bfly(x,BitMasks.Central64x16x8,4);
 
@@ -127,7 +127,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         /// <remarks>[0 1 2 3] -> [0 2 1 3]</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint bfly(N8 n, uint x)
             => bfly(x,BitMasks.Central32x32x16,8);
 
@@ -137,7 +137,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         /// <remarks> [0 1 2 3 | 4 5 6 7] -> [0 2 1 3 | 4 6 5 7]</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong bfly(N8 n, ulong x)
             => bfly(x,BitMasks.Central64x32x16,8);
  
@@ -147,7 +147,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         /// <remarks>[0 1 2 3] -> [0 2 1 3]</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong bfly(N16 n, ulong x)
             => bfly(x,BitMasks.Central64x64x32,16);
 
@@ -157,7 +157,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         /// <remarks>The algorithm follows that of Arndt's Matters Computational, bitbutterfly.h.</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static T bfly<T>(T x, T mask, byte shift)
             where T : unmanaged
         {

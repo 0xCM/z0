@@ -15,11 +15,13 @@ namespace Z0
     {
         protected NativeMemberData(S source, MethodInfo method, AddressSegment location, byte[] content)
         {
+            var provider = Moniker.Provider;
+
             require((int)location.Length == content.Length);
             this.Source = source;
             this.Method = method;
             this.Location = location;
-            this.Code = AsmCode.Define(content, Moniker.define(method), method.Signature().Format());
+            this.Code = AsmCode.Define(content, provider.Define(method), method.Signature().Format());
         }
 
         public S Source {get;}

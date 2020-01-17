@@ -15,14 +15,6 @@ namespace  Z0
     
     partial class xfunc
     {
-        public static Option<IAssemblyDesignator> Designate(this IEnumerable<IAssemblyDesignator> src, string name)
-        {
-            var found = src.Where(x => x.Name == name).FirstOrDefault();
-            if(found != null)
-                return some(found);
-            else
-                return default;
-        }
 
         /// <summary>
         /// Partitions the source into sub-arrays of a maximum length

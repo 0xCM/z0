@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="control">Specifies the output selection</param>
         /// <param name="src">The input from which a bit will be selected</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit mux(BitVector8 src,BitVector4 control)
             => src[control.Scalar];
 
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The input from which a bit will be selected</param>
         /// <param name="control">Specifies the output selection</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit mux(BitVector16 src, BitVector4 control)
             => src[control.Scalar];
 
@@ -44,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The input from which a bit will be selected</param>
         /// <param name="control">Specifies the output selection</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit mux(BitVector32 src, BitVector8 control)
             => src[control.Scalar];
 
@@ -53,10 +53,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The input from which a bit will be selected</param>
         /// <param name="control">Specifies the output selection</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit mux(BitVector64 src, BitVector8 control)
             => src[control.Scalar];
-
     }
-
 }

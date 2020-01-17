@@ -1,128 +1,108 @@
-// 2020-01-15 19:20:38:353
+// 2020-01-16 19:14:09:869
+// Id := 100664359, Name := System.Void Z0.OpCodes.bitconvert::deposit(System.UInt64&,Z0.Fixed128&)
+// void deposit(in ulong src, ref Fixed128 dst)
+// Managed
 void deposit(in ulong src, ref Fixed128 dst)
 {
-//  Id := 100664380, Name := System.Void Z0.OpCodes.bitconvert::deposit(System.UInt64&,Z0.Fixed128&)
-//  void deposit(in ulong src, ref Fixed128 dst)
-//  Managed
-{
-  IL_0000: ldarg.0
-  IL_0001: ldarg.1
-  IL_0002: call System.Void Z0.FixedStore::deposit<System.UInt64>(System.UInt64&,Z0.Fixed128&)
-  IL_0007: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void Z0.FixedStore::deposit<System.UInt64>(System.UInt64&,Z0.Fixed128&)
+    IL_0007: ret
 }
 
-}
+// Id := 100664360, Name := System.Void Z0.OpCodes.bitconvert::deposit_4_0(System.UInt32&,Z0.Fixed128&)
+// void deposit_4_0(in uint src, ref Fixed128 dst)
+// Managed
 void deposit_4_0(in uint src, ref Fixed128 dst)
 {
-//  Id := 100664381, Name := System.Void Z0.OpCodes.bitconvert::deposit_4_0(System.UInt32&,Z0.Fixed128&)
-//  void deposit_4_0(in uint src, ref Fixed128 dst)
-//  Managed
-{
-  IL_0000: ldarg.0
-  IL_0001: ldc.i4.4
-  IL_0002: ldarg.1
-  IL_0003: ldc.i4.0
-  IL_0004: call System.Void Z0.FixedStore::deposit<System.UInt32>(System.UInt32&,System.Int32,Z0.Fixed128&,System.Int32)
-  IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.4
+    IL_0002: ldarg.1
+    IL_0003: ldc.i4.0
+    IL_0004: call System.Void Z0.FixedStore::deposit<System.UInt32>(System.UInt32&,System.Int32,Z0.Fixed128&,System.Int32)
+    IL_0009: ret
 }
 
-}
+// Id := 100664361, Name := System.Void Z0.OpCodes.bitconvert::deposit_2_2(System.UInt32&,Z0.Fixed128&)
+// void deposit_2_2(in uint src, ref Fixed128 dst)
+// Managed
 void deposit_2_2(in uint src, ref Fixed128 dst)
 {
-//  Id := 100664382, Name := System.Void Z0.OpCodes.bitconvert::deposit_2_2(System.UInt32&,Z0.Fixed128&)
-//  void deposit_2_2(in uint src, ref Fixed128 dst)
-//  Managed
-{
-  IL_0000: ldarg.0
-  IL_0001: ldc.i4.2
-  IL_0002: ldarg.1
-  IL_0003: ldc.i4.2
-  IL_0004: call System.Void Z0.FixedStore::deposit<System.UInt32>(System.UInt32&,System.Int32,Z0.Fixed128&,System.Int32)
-  IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.2
+    IL_0002: ldarg.1
+    IL_0003: ldc.i4.2
+    IL_0004: call System.Void Z0.FixedStore::deposit<System.UInt32>(System.UInt32&,System.Int32,Z0.Fixed128&,System.Int32)
+    IL_0009: ret
 }
 
-}
+// Id := 100664362, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_16u(System.UInt16)
+// Span<byte> bc_bytes_16u(ushort a)
+// Managed
 Span<byte> bc_bytes_16u(ushort a)
 {
-//  Id := 100664383, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_16u(System.UInt16)
-//  Span<byte> bc_bytes_16u(ushort a)
-//  Managed
-{
-  IL_0000: ldarga.s a
-  IL_0002: call System.Span`1<System.Byte> Z0.BitConvert::GetBytes<System.UInt16>(System.UInt16&)
-  IL_0007: ret
+    IL_0000: ldarga.s a
+    IL_0002: call System.Span`1<System.Byte> Z0.BitConvert::GetBytes<System.UInt16>(System.UInt16&)
+    IL_0007: ret
 }
 
-}
+// Id := 100664363, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_64u(System.UInt64)
+// Span<byte> bc_bytes_64u(ulong a)
+// Managed
 Span<byte> bc_bytes_64u(ulong a)
 {
-//  Id := 100664384, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_64u(System.UInt64)
-//  Span<byte> bc_bytes_64u(ulong a)
-//  Managed
-{
-  IL_0000: ldarga.s a
-  IL_0002: call System.Span`1<System.Byte> Z0.BitConvert::GetBytes<System.UInt64>(System.UInt64&)
-  IL_0007: ret
+    IL_0000: ldarga.s a
+    IL_0002: call System.Span`1<System.Byte> Z0.BitConvert::GetBytes<System.UInt64>(System.UInt64&)
+    IL_0007: ret
 }
 
-}
+// Id := 100664364, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed256(Z0.Fixed256)
+// Span<byte> bc_bytes_fixed256(Fixed256 a)
+// Managed
 Span<byte> bc_bytes_fixed256(Fixed256 a)
 {
-//  Id := 100664385, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed256(Z0.Fixed256)
-//  Span<byte> bc_bytes_fixed256(Fixed256 a)
-//  Managed
-{
-  IL_0000: ldarga.s a
-  IL_0002: call System.Span`1<System.Byte> Z0.BitConvert::GetBytes<Z0.Fixed256>(Z0.Fixed256&)
-  IL_0007: ret
+    IL_0000: ldarga.s a
+    IL_0002: call System.Span`1<System.Byte> Z0.BitConvert::GetBytes<Z0.Fixed256>(Z0.Fixed256&)
+    IL_0007: ret
 }
 
-}
+// Id := 100664365, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed512(Z0.Fixed512)
+// Span<byte> bc_bytes_fixed512(Fixed512 a)
+// Managed
 Span<byte> bc_bytes_fixed512(Fixed512 a)
 {
-//  Id := 100664386, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed512(Z0.Fixed512)
-//  Span<byte> bc_bytes_fixed512(Fixed512 a)
-//  Managed
-{
-  IL_0000: ldarga.s a
-  IL_0002: call System.Span`1<System.Byte> Z0.BitConvert::GetBytes<Z0.Fixed512>(Z0.Fixed512&)
-  IL_0007: ret
+    IL_0000: ldarga.s a
+    IL_0002: call System.Span`1<System.Byte> Z0.BitConvert::GetBytes<Z0.Fixed512>(Z0.Fixed512&)
+    IL_0007: ret
 }
 
-}
+// Id := 100664366, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed1024(Z0.Fixed1024)
+// Span<byte> bc_bytes_fixed1024(Fixed1024 a)
+// Managed
 Span<byte> bc_bytes_fixed1024(Fixed1024 a)
 {
-//  Id := 100664387, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed1024(Z0.Fixed1024)
-//  Span<byte> bc_bytes_fixed1024(Fixed1024 a)
-//  Managed
-{
-  IL_0000: ldarga.s a
-  IL_0002: call System.Span`1<System.Byte> Z0.BitConvert::GetBytes<Z0.Fixed1024>(Z0.Fixed1024&)
-  IL_0007: ret
+    IL_0000: ldarga.s a
+    IL_0002: call System.Span`1<System.Byte> Z0.BitConvert::GetBytes<Z0.Fixed1024>(Z0.Fixed1024&)
+    IL_0007: ret
 }
 
-}
+// Id := 100664367, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed2048(Z0.Fixed2048)
+// Span<byte> bc_bytes_fixed2048(Fixed2048 a)
+// Managed
 Span<byte> bc_bytes_fixed2048(Fixed2048 a)
 {
-//  Id := 100664388, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed2048(Z0.Fixed2048)
-//  Span<byte> bc_bytes_fixed2048(Fixed2048 a)
-//  Managed
-{
-  IL_0000: ldarga.s a
-  IL_0002: call System.Span`1<System.Byte> Z0.BitConvert::GetBytes<Z0.Fixed2048>(Z0.Fixed2048&)
-  IL_0007: ret
+    IL_0000: ldarga.s a
+    IL_0002: call System.Span`1<System.Byte> Z0.BitConvert::GetBytes<Z0.Fixed2048>(Z0.Fixed2048&)
+    IL_0007: ret
 }
 
-}
+// Id := 100664368, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed4096(Z0.Fixed4096)
+// Span<byte> bc_bytes_fixed4096(Fixed4096 a)
+// Managed
 Span<byte> bc_bytes_fixed4096(Fixed4096 a)
 {
-//  Id := 100664389, Name := System.Span`1<System.Byte> Z0.OpCodes.bitconvert::bc_bytes_fixed4096(Z0.Fixed4096)
-//  Span<byte> bc_bytes_fixed4096(Fixed4096 a)
-//  Managed
-{
-  IL_0000: ldarga.s a
-  IL_0002: call System.Span`1<System.Byte> Z0.BitConvert::GetBytes<Z0.Fixed4096>(Z0.Fixed4096&)
-  IL_0007: ret
+    IL_0000: ldarga.s a
+    IL_0002: call System.Span`1<System.Byte> Z0.BitConvert::GetBytes<Z0.Fixed4096>(Z0.Fixed4096&)
+    IL_0007: ret
 }
 
-}

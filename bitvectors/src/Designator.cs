@@ -11,9 +11,14 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class BitVectors : AssemblyDesignator<BitVectors>
+    public sealed class BitVectors : AssemblyDesignator<BitVectors>, ICatalogProvider
     {
+        public IOperationCatalog Catalog 
+            => new Catalog();
 
+
+        public override AssemblyId Id 
+            => AssemblyId.BitVectors;
     }
 
 }

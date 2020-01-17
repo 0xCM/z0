@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="parity">The parity selector</param>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte mix(N0 parity, byte x, byte y)
         {
             var mask = BitMasks.Even8;
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="parity">The parity selector</param>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte mix(N1 parity, byte x, byte y)
         {
             var mask = BitMasks.Odd8;
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="parity">The parity selector</param>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort mix(N0 parity, ushort x, ushort y)
         {
             var mask = BitMasks.Even16;
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="parity">The parity selector</param>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort mix(N1 parity, ushort x, ushort y)
         {
             var mask = BitMasks.Odd16;
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="parity">The parity selector</param>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint mix(N0 parity, uint x, uint y)
         {
             var mask = BitMasks.Even32;
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="parity">The parity selector</param>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint mix(N1 parity, uint x, uint y)
         {
             var mask =  BitMasks.Odd32;
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="parity">The parity selector</param>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong mix(N0 parity, ulong x, ulong y)
         {
             var mask = BitMasks.Even64;
@@ -130,7 +130,7 @@ namespace Z0
         /// <param name="parity">The parity selector</param>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong mix(N1 parity, ulong x, ulong y)
         {
             var mask = BitMasks.Odd64;

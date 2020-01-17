@@ -1,4 +1,4 @@
-; 2020-01-15 19:20:38:546
+; 2020-01-16 19:14:09:975
 ; function: int blockalign_64x8u_var(int cellcount)
 ; static ReadOnlySpan<byte> blockalign_64x8u_varBytes => new byte[40]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0xC1,0xF8,0x1F,0x83,0xE0,0x07,0x03,0xC1,0xC1,0xF8,0x03,0x8B,0xD1,0xC1,0xFA,0x1F,0x83,0xE2,0x07,0x03,0xD1,0x83,0xE2,0xF8,0x2B,0xCA,0x74,0x04,0xFF,0xC0,0xEB,0x00,0xC3};
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
@@ -31,9 +31,9 @@
 000ah ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Char digit_1()
-; static ReadOnlySpan<byte> digit_1Bytes => new byte[46]{0x0F,0x1F,0x44,0x00,0x00,0x48,0xB8,0xD0,0xFB,0x00,0x10,0xED,0x01,0x00,0x00,0x48,0x8B,0x00,0x48,0x85,0xC0,0x75,0x04,0x33,0xD2,0xEB,0x0E,0x8B,0x10,0x48,0x8B,0xD0,0x39,0x12,0x48,0x83,0xC2,0x0C,0x8B,0x40,0x08,0x0F,0xB7,0x42,0x0A,0xC3};
+; static ReadOnlySpan<byte> digit_1Bytes => new byte[46]{0x0F,0x1F,0x44,0x00,0x00,0x48,0xB8,0x58,0x7B,0x7A,0xD6,0x2A,0x01,0x00,0x00,0x48,0x8B,0x00,0x48,0x85,0xC0,0x75,0x04,0x33,0xD2,0xEB,0x0E,0x8B,0x10,0x48,0x8B,0xD0,0x39,0x12,0x48,0x83,0xC2,0x0C,0x8B,0x40,0x08,0x0F,0xB7,0x42,0x0A,0xC3};
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
-0005h mov rax,1ED1000FBD0h                    ; MOV(Mov_r64_imm64) [RAX,1ed1000fbd0h:imm64] encoding(10 bytes) = 48 b8 d0 fb 00 10 ed 01 00 00
+0005h mov rax,12AD67A7B58h                    ; MOV(Mov_r64_imm64) [RAX,12ad67a7b58h:imm64] encoding(10 bytes) = 48 b8 58 7b 7a d6 2a 01 00 00
 000fh mov rax,[rax]                           ; MOV(Mov_r64_rm64) [RAX,mem(64u,RAX:br,:sr)] encoding(3 bytes) = 48 8b 00
 0012h test rax,rax                            ; TEST(Test_rm64_r64) [RAX,RAX]              encoding(3 bytes) = 48 85 c0
 0015h jne short 001bh                         ; JNE(Jne_rel8_64) [1Bh:jmp64]               encoding(2 bytes) = 75 04
@@ -48,24 +48,24 @@
 002dh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Char digit_2()
-; static ReadOnlySpan<byte> digit_2Bytes => new byte[39]{0x48,0x83,0xEC,0x28,0x90,0x48,0xB8,0xD0,0xFB,0x00,0x10,0xED,0x01,0x00,0x00,0x48,0x8B,0x00,0x83,0x78,0x08,0x05,0x76,0x09,0x0F,0xB7,0x40,0x16,0x48,0x83,0xC4,0x28,0xC3,0xE8,0xBA,0xB8,0x57,0x5F,0xCC};
+; static ReadOnlySpan<byte> digit_2Bytes => new byte[39]{0x48,0x83,0xEC,0x28,0x90,0x48,0xB8,0x58,0x7B,0x7A,0xD6,0x2A,0x01,0x00,0x00,0x48,0x8B,0x00,0x83,0x78,0x08,0x05,0x76,0x09,0x0F,0xB7,0x40,0x16,0x48,0x83,0xC4,0x28,0xC3,0xE8,0x8A,0x5E,0x50,0x5F,0xCC};
 0000h sub rsp,28h                             ; SUB(Sub_rm64_imm8) [RSP,28h:imm64]         encoding(4 bytes) = 48 83 ec 28
 0004h nop                                     ; NOP(Nopd)                                  encoding(1 byte ) = 90
-0005h mov rax,1ED1000FBD0h                    ; MOV(Mov_r64_imm64) [RAX,1ed1000fbd0h:imm64] encoding(10 bytes) = 48 b8 d0 fb 00 10 ed 01 00 00
+0005h mov rax,12AD67A7B58h                    ; MOV(Mov_r64_imm64) [RAX,12ad67a7b58h:imm64] encoding(10 bytes) = 48 b8 58 7b 7a d6 2a 01 00 00
 000fh mov rax,[rax]                           ; MOV(Mov_r64_rm64) [RAX,mem(64u,RAX:br,:sr)] encoding(3 bytes) = 48 8b 00
 0012h cmp dword ptr [rax+8],5                 ; CMP(Cmp_rm32_imm8) [mem(32u,RAX:br,:sr),5h:imm32] encoding(4 bytes) = 83 78 08 05
 0016h jbe short 0021h                         ; JBE(Jbe_rel8_64) [21h:jmp64]               encoding(2 bytes) = 76 09
 0018h movzx eax,word ptr [rax+16h]            ; MOVZX(Movzx_r32_rm16) [EAX,mem(16u,RAX:br,:sr)] encoding(4 bytes) = 0f b7 40 16
 001ch add rsp,28h                             ; ADD(Add_rm64_imm8) [RSP,28h:imm64]         encoding(4 bytes) = 48 83 c4 28
 0020h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
-0021h call 7FF827ABFDD0h                      ; CALL(Call_rel32_64) [5F57B8E0h:jmp64]      encoding(5 bytes) = e8 ba b8 57 5f
+0021h call 7FF827ABFDD0h                      ; CALL(Call_rel32_64) [5F505EB0h:jmp64]      encoding(5 bytes) = e8 8a 5e 50 5f
 0026h int 3                                   ; INT(Int3)                                  encoding(1 byte ) = cc
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Char digit(int i)
-; static ReadOnlySpan<byte> digitBytes => new byte[23]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x63,0xC1,0x48,0xBA,0xED,0xE0,0x19,0x7B,0xED,0x01,0x00,0x00,0x0F,0xB6,0x04,0x10,0xC3};
+; static ReadOnlySpan<byte> digitBytes => new byte[23]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x63,0xC1,0x48,0xBA,0xE1,0xBF,0x6A,0xC6,0x2A,0x01,0x00,0x00,0x0F,0xB6,0x04,0x10,0xC3};
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h movsxd rax,ecx                          ; MOVSXD(Movsxd_r64_rm32) [RAX,ECX]          encoding(3 bytes) = 48 63 c1
-0008h mov rdx,1ED7B19E0EDh                    ; MOV(Mov_r64_imm64) [RDX,1ed7b19e0edh:imm64] encoding(10 bytes) = 48 ba ed e0 19 7b ed 01 00 00
+0008h mov rdx,12AC66ABFE1h                    ; MOV(Mov_r64_imm64) [RDX,12ac66abfe1h:imm64] encoding(10 bytes) = 48 ba e1 bf 6a c6 2a 01 00 00
 0012h movzx eax,byte ptr [rax+rdx]            ; MOVZX(Movzx_r32_rm8) [EAX,mem(8u,RAX:br,:sr)] encoding(4 bytes) = 0f b6 04 10
 0016h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------

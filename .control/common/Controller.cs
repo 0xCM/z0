@@ -9,6 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
+    using Z0.Designators;
 
     using static zfunc;
 
@@ -35,14 +36,17 @@ namespace Z0
         protected IEnumerable<IAssemblyDesignator> Designates
             => Designators.Control.Designated.Designates;
 
-        protected Option<IAssemblyDesignator> Designate(string name)
-            => Designates.Designate(name);
-
+        protected Option<IOperationCatalog> FindCatalog(AssemblyId id)
+            =>  Designators.Control.Designated.FindCatalog(id);
+            
         protected IOperationCatalog MathCatalog
             => Designators.Control.Designated.MathCatalog;
 
         protected IOperationCatalog IntrinsicsCatalog
             => Designators.Control.Designated.IntrinsicsCatalog;
+
+        protected IOperationCatalog BitCoreCatalog
+            => Designators.Control.Designated.BitCoreCatalog;
 
     }
 }

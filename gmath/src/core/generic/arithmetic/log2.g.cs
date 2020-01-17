@@ -19,7 +19,7 @@ namespace Z0
         /// Computes log2(maxval[T] + 1)
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static uint log2<T>()
             where T : unmanaged
         {

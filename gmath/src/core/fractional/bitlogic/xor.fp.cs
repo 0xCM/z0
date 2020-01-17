@@ -13,8 +13,8 @@ namespace Z0
 
     partial class gfp
     {
-       [MethodImpl(Inline), Op]
-       public static T xor<T>(T a, T b)
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Floats)]
+        public static T xor<T>(T a, T b)
             where T :unmanaged
         {
             if(typeof(T) == typeof(float))

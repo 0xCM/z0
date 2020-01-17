@@ -61,10 +61,10 @@ namespace Z0.Designators
             D.LibM.Designated,            
             D.LibMTest.Designated,
 
-            D.StatDist.Designated,
+            D.StatDist.Designated
 
-            D.RevealLib.Designated,
-            D.RevealApp.Designated
+            // D.RevealLib.Designated,
+            // D.RevealApp.Designated
             );               
 
         public IEnumerable<IOperationCatalog> Catalogs
@@ -78,6 +78,24 @@ namespace Z0.Designators
         
         public IOperationCatalog IntrinsicsCatalog
             => (D.Intrinsics.Designated as ICatalogProvider).Catalog;
+
+
+        public IOperationCatalog BitCoreCatalog
+            => (D.BitCore.Designated as ICatalogProvider).Catalog;
+
+
+        public Option<IOperationCatalog> FindCatalog(AssemblyId id)
+        {
+            var catalog =(from d in Designated.Designates
+                where d is ICatalogProvider && d.Id == id
+                select (d as ICatalogProvider).Catalog).FirstOrDefault();
+            if(catalog != null)
+                return some(catalog);
+            else
+                return default;
+        }
+                
+
 
 
    }

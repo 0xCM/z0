@@ -16,14 +16,6 @@ namespace Z0
 
     public static class BlockedType
     {
-        /// <summary>
-        /// Enumerates the blocked data type definitions
-        /// </summary>
-        public static IEnumerable<Type> Types
-            => items(
-                typeof(Block16<>), typeof(Block32<>), typeof(Block64<>), typeof(Block128<>), 
-                typeof(Block256<>), typeof(Block512<>)
-                );
 
         /// <summary>
         /// Determines whether a method accepts and/or returns at least one blocked parameter
@@ -38,15 +30,22 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         public static bool test(Type t)
         {
-            var tdef = t.GenericDefinition();
-            return tdef.IsSome() && 
-                (tdef == typeof(Block16<>)  || 
-                 tdef == typeof(Block32<>)  || 
-                 tdef == typeof(Block64<>)  || 
-                 tdef == typeof(Block128<>) || 
-                 tdef == typeof(Block256<>) || 
-                 tdef == typeof(Block512<>)
-                 );
+            var def = default(Type);
+
+            if(t.IsGenericType)
+                def = t.GetGenericTypeDefinition();
+            else if(t.IsGenericRef())
+                def = t.GetElementType().GetGenericTypeDefinition();
+            else
+                return false;
+
+            return 
+                 def == typeof(Block16<>)  || 
+                 def == typeof(Block32<>)  || 
+                 def == typeof(Block64<>)  || 
+                 def == typeof(Block128<>) || 
+                 def == typeof(Block256<>) || 
+                 def == typeof(Block512<>);
         }
 
         /// <summary>
@@ -55,9 +54,9 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         public static BlockWidth width(Type t)
         {
-            if(t.IsBlocked())
+            if(test(t))
             {
-                var def = t.GenericDefinition();
+                var def = t.IsGenericRef() ? t.GetElementType().GetGenericTypeDefinition() : t.GetGenericTypeDefinition();
 
                 if(def == typeof(Block16<>))
                     return BlockWidth.W16;
@@ -185,7 +184,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static PrimalKind segment(Type t)
-            => test(t) ? t.GenericArguments().First().Kind() : PrimalKind.None;
+            => test(t) ?  (t.IsRef() ? t.GetElementType() : t).GenericArguments().First().Kind() : PrimalKind.None;
 
         [MethodImpl(Inline)]
         public static BlockKind kind<B>(B b = default)

@@ -21,9 +21,9 @@ namespace Z0
     {
         IEnumerable<FastOpContract> Services {get;} 
 
-        IEnumerable<FastGenericOp> GenericOps {get;}                       
+        IEnumerable<FastGenericInfo> GenericOps {get;}                       
 
-        IEnumerable<FastDirectOp> DirectOps {get;}       
+        IEnumerable<FastDirectInfo> DirectOps {get;}       
 
         IEnumerable<Type> ServiceHosts {get;}
         

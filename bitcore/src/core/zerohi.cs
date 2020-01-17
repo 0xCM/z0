@@ -22,7 +22,7 @@ namespace Z0
         /// Replicates the source bits to the target and disables the high target bits starting at a specified index.
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte zerohi(byte src, int index)
             => (byte)ZeroHighBits((uint)src, (uint)index);
 
@@ -31,7 +31,7 @@ namespace Z0
         /// Replicates the source bits to the target and disables the high target bits starting at a specified index.
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort zerohi(ushort src, int index)
             => (ushort)ZeroHighBits((uint)src, (uint)index);
 
@@ -40,7 +40,7 @@ namespace Z0
         /// Replicates the source bits to the target and disables the high target bits starting at a specified index.
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint zerohi(uint src, int index)
             => ZeroHighBits(src, (uint)index);
 
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="index">The index at which to begin disabling bits</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ulong zerohi(ulong src, int index)
             => ZeroHighBits(src, (uint)index);
     }

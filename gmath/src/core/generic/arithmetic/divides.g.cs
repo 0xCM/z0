@@ -15,7 +15,7 @@ namespace Z0
 
     partial class gmath
     {
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static bit divides<T>(T a, T b)
             where T : unmanaged
         {

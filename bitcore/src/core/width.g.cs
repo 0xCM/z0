@@ -29,7 +29,7 @@ namespace Z0
         /// Computes the maximum number of bits that can be represented by the type
         /// </summary>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
         public static int width<T>()
             where T : unmanaged
                 => Unsafe.SizeOf<T>()*8;
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static int width<T>(T src)
             where T : unmanaged
         {

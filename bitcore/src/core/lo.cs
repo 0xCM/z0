@@ -15,7 +15,7 @@ namespace Z0
         /// Extracts the lower 4 bits from the source
         /// </summary>
         /// <param name="src">The soruce value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte lo(byte src)
             => (byte)(0xF & src);
 
@@ -23,7 +23,7 @@ namespace Z0
         /// Extracts the lower 8 bits from the source
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static byte lo(ushort src)
             => (byte)src;
 
@@ -31,7 +31,7 @@ namespace Z0
         /// Extracts the lower 16 bits from the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ushort lo(uint src)
             => (ushort)src;
 
@@ -39,7 +39,7 @@ namespace Z0
         /// Extracts the lower half of the bits from the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint lo(ulong src)
             => (uint)src;
     }
