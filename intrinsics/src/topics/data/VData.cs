@@ -152,7 +152,7 @@ namespace Z0
         public static Vector128<byte> rotr(N128 n, N48 offset)
             => CpuVector.vload(n,RotR48_128x8u);
 
-        static ReadOnlySpan<byte> RotL_128x8u
+        public static ReadOnlySpan<byte> RotL_128x8u
             => new byte[16*7]
             {
                 F,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,  //8
@@ -167,13 +167,13 @@ namespace Z0
         /// <summary>
         /// Shuffle pattern that, when applied, rotates 128 bits of content rightward by 48 bits
         /// </summary>
-        static ReadOnlySpan<byte> RotR48_128x8u 
+        public static ReadOnlySpan<byte> RotR48_128x8u 
             => new byte[16]{6,7,8,9,A,B,C,E,E,F,0,1,2,4,5,6};
 
         /// <summary>
         /// Shuffle pattern that, when applied, rotates 128 bits of content leftward by 8 bits
         /// </summary>
-        static ReadOnlySpan<byte> RotL8_128x8u  
+        public static ReadOnlySpan<byte> RotL8_128x8u  
         {
             [MethodImpl(Inline)]
             get => RotL_128x8u.Slice(0*16, 16);

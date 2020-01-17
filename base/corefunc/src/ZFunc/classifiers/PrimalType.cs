@@ -17,31 +17,6 @@ namespace Z0
     public static class PrimalType
     {
         /// <summary>
-        /// Specifies the unsigned primal integer types
-        /// </summary>
-        public static Type[] Unsigned
-            => new Type[]{typeof(byte),typeof(ushort),typeof(uint),typeof(ulong)};
-
-        /// <summary>
-        /// Specifies the signed primal integer types
-        /// </summary>
-        public static Type[] Signed
-            => new Type[]{typeof(sbyte),typeof(short),typeof(int),typeof(long)};
-
-        /// <summary>
-        /// Specifies the primal integer types
-        /// </summary>
-        public static Type[] Integers
-            => new Type[]{typeof(byte),typeof(sbyte),typeof(ushort),typeof(short),typeof(uint),typeof(ulong),typeof(long)};
-
-        /// <summary>
-        /// Specifies the primal floating-point types
-        /// </summary>
-        public static Type[] Floats
-            => new Type[]{typeof(float),typeof(double)};
-
-
-        /// <summary>
         /// Returns true if the primal source type is signed, false otherwise
         /// </summary>
         /// <typeparam name="T">The primal source type</typeparam>

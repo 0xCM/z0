@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public enum SegmentedWidth : uint
+    public enum FixedWidth : uint
     {
         None = 0,
         

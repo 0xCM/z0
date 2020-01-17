@@ -29,7 +29,6 @@ namespace Z0
         /// </summary>
         public const int ByteCount = 4;
 
-
         [MethodImpl(Inline)]
         public static implicit operator uint(BitGrid32<T> src)
             => src.data;

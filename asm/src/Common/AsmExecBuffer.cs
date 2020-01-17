@@ -58,45 +58,87 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public BinaryOp8 BinOp8(in AsmCode code)
+        public UnaryOp8 UnaryOp(N8 w, in AsmCode code)
         {
             Load(code);
-            return AsmDelegate.CreateBinOp8(Buffer.Handle, Code.Id);
+            return AsmDelegate.CreateUnaryOp(w, Buffer.Handle, Code.Id);
         }
 
         [MethodImpl(Inline)]
-        public BinaryOp16 BinOp16(in AsmCode code)
+        public UnaryOp16 UnaryOp(N16 w, in AsmCode code)
         {
             Load(code);
-            return AsmDelegate.CreateBinOp16(Buffer.Handle, Code.Id);
+            return AsmDelegate.CreateUnaryOp(w, Buffer.Handle, Code.Id);
         }
 
         [MethodImpl(Inline)]
-        public BinaryOp32 BinOp32(in AsmCode code)
+        public UnaryOp32 UnaryOp(N32 w, in AsmCode code)
         {
             Load(code);
-            return AsmDelegate.CreateBinOp32(Buffer.Handle, Code.Id);
+            return AsmDelegate.CreateUnaryOp(w, Buffer.Handle, Code.Id);
         }
 
         [MethodImpl(Inline)]
-        public BinaryOp64 BinOp64(in AsmCode code)
+        public UnaryOp64 UnaryOp(N64 w, in AsmCode code)
         {
             Load(code);
-            return AsmDelegate.CreateBinOp64(Buffer.Handle, Code.Id);
+            return AsmDelegate.CreateUnaryOp(w, Buffer.Handle, Code.Id);
         }
 
         [MethodImpl(Inline)]
-        public BinaryOp128 BinOp128(in AsmCode code)
+        public UnaryOp128 UnaryOp(N128 w, in AsmCode code)
         {
             Load(code);
-            return AsmDelegate.CreateBinOp128(Buffer.Handle, Code.Id);
+            return AsmDelegate.CreateUnaryOp(w, Buffer.Handle, Code.Id);
         }
 
         [MethodImpl(Inline)]
-        public BinaryOp256 BinOp256(in AsmCode code)
+        public UnaryOp256 UnaryOp(N256 w, in AsmCode code)
         {
             Load(code);
-            return AsmDelegate.CreateBinOp256(Buffer.Handle, Code.Id);
+            return AsmDelegate.CreateUnaryOp(w, Buffer.Handle, Code.Id);
+        }
+
+        [MethodImpl(Inline)]
+        public BinaryOp8 BinOp(N8 w, in AsmCode code)
+        {
+            Load(code);
+            return AsmDelegate.CreateBinOp(w, Buffer.Handle, Code.Id);
+        }
+
+        [MethodImpl(Inline)]
+        public BinaryOp16 BinOp(N16 w, in AsmCode code)
+        {
+            Load(code);
+            return AsmDelegate.CreateBinOp(w, Buffer.Handle, Code.Id);
+        }
+
+        [MethodImpl(Inline)]
+        public BinaryOp32 BinOp(N32 w, in AsmCode code)
+        {
+            Load(code);
+            return AsmDelegate.CreateBinOp(w, Buffer.Handle, Code.Id);
+        }
+
+        [MethodImpl(Inline)]
+        public BinaryOp64 BinOp(N64 w, in AsmCode code)
+        {
+            Load(code);
+            return AsmDelegate.CreateBinOp(w, Buffer.Handle, Code.Id);
+        }
+
+        [MethodImpl(Inline)]
+        public BinaryOp128 BinOp(N128 w, in AsmCode code)
+        {
+            Load(code);
+            return AsmDelegate.CreateBinOp(w, Buffer.Handle, Code.Id);
+        }
+
+        [MethodImpl(Inline)]
+        public BinaryOp256 BinOp(N256 w, in AsmCode code)
+        {
+            Load(code);
+            return AsmDelegate.CreateBinOp(w, Buffer.Handle, Code.Id);
         }
         public void Dispose()
             => Buffer.Dispose();

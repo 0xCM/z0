@@ -57,13 +57,13 @@ namespace Z0
         public static DynamicDelegate unary(N256 w, MethodInfo src, byte imm8, Type celltype)
             => unary(typeof(Vector256<>), src, imm8,celltype);
 
-        public static Func<byte,DynamicDelegate> unaryfactory(SegmentedWidth w, MethodInfo src, Type celltype)
+        public static Func<byte,DynamicDelegate> unaryfactory(FixedWidth w, MethodInfo src, Type celltype)
         {
             switch(w)
             {
-                case SegmentedWidth.W128:
+                case FixedWidth.W128:
                     return unaryfactory(n128, src, celltype);
-                case SegmentedWidth.W256:
+                case FixedWidth.W256:
                     return unaryfactory(n256, src, celltype);
                 default:
                     throw new NotSupportedException(w.ToString());
@@ -88,13 +88,13 @@ namespace Z0
         public static Func<byte,DynamicDelegate> binaryfactory(N256 w, MethodInfo src, Type celltype)
             => imm8 => binary(w,src,imm8,celltype);
 
-        public static Func<byte,DynamicDelegate> binaryfactory(SegmentedWidth w, MethodInfo src, Type celltype)
+        public static Func<byte,DynamicDelegate> binaryfactory(FixedWidth w, MethodInfo src, Type celltype)
         {
             switch(w)
             {
-                case SegmentedWidth.W128:
+                case FixedWidth.W128:
                     return binaryfactory(n128, src, celltype);
-                case SegmentedWidth.W256:
+                case FixedWidth.W256:
                     return binaryfactory(n256, src, celltype);
                 default:
                     throw new NotSupportedException(w.ToString());

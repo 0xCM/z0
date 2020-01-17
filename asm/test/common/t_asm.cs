@@ -20,15 +20,30 @@ namespace Z0
 
         protected AsmExecBuffer AsmBuffer;
 
+        AsmExecBuffer[] AsmBuffers;
+
         public t_asm()
         {
             AsmBuffer = AsmExecBuffer.Create();
+            AsmBuffers = new AsmExecBuffer[]{
+                AsmExecBuffer.Create(),
+                AsmExecBuffer.Create()
+            };
         }
 
         public void Dispose()
         {
             AsmBuffer.Dispose();
+            AsmBuffers[0].Dispose();
+            AsmBuffers[1].Dispose();
+
         }
+
+        protected AsmExecBuffer LeftBuffer
+            => AsmBuffers[0];
+
+        protected AsmExecBuffer RightBuffer
+            => AsmBuffers[1];
 
         protected string Math
             => nameof(math);
@@ -96,122 +111,135 @@ namespace Z0
 
         protected void megacheck(string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, PrimalKind<byte> kind)
         {
+            var w = n8;
+
             var moniker = Moniker.define(name, kind);                        
             var f0 = FixedDelegate.from(primal, kind);
 
             var f1 = FixedDelegate.from(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = AsmBuffer.BinOp8(ReadAsm(Math, moniker));
+            var f2 = AsmBuffer.BinOp(w, ReadAsm(Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = AsmBuffer.BinOp8(ReadAsm(GMath, moniker.WithGeneric()));
+            var f3 = AsmBuffer.BinOp(w, ReadAsm(GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
         protected void megacheck(string name, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, PrimalKind<sbyte> kind)
         {
+            var w = n8;
+
             var moniker = Moniker.define(name, kind);                        
             var f0 = FixedDelegate.from(primal, kind);
 
             var f1 = FixedDelegate.from(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = AsmBuffer.BinOp8(ReadAsm(Math, moniker));
+            var f2 = AsmBuffer.BinOp(w, ReadAsm(Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = AsmBuffer.BinOp8(ReadAsm(GMath, moniker.WithGeneric()));
+            var f3 = AsmBuffer.BinOp(w, ReadAsm(GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
         protected void megacheck(string name, Func<ushort,ushort,ushort> primal, Func<ushort,ushort,ushort> generic, PrimalKind<ushort> kind)
         {
+            var w = n16;
+
             var moniker = Moniker.define(name, kind);                        
             var f0 = FixedDelegate.from(primal, kind);
 
             var f1 = FixedDelegate.from(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = AsmBuffer.BinOp16(ReadAsm(Math, moniker));
+            var f2 = AsmBuffer.BinOp(w, ReadAsm(Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = AsmBuffer.BinOp16(ReadAsm(GMath, moniker.WithGeneric()));
+            var f3 = AsmBuffer.BinOp(w, ReadAsm(GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
         protected void megacheck(string name, Func<short,short,short> primal, Func<short,short,short> generic, PrimalKind<short> kind)
         {
+            var w = n16;
+
             var moniker = Moniker.define(name, kind);                        
             var f0 = FixedDelegate.from(primal, kind);
 
             var f1 = FixedDelegate.from(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = AsmBuffer.BinOp16(ReadAsm(Math, moniker));
+            var f2 = AsmBuffer.BinOp(w, ReadAsm(Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = AsmBuffer.BinOp16(ReadAsm(GMath, moniker.WithGeneric()));
+            var f3 = AsmBuffer.BinOp(w, ReadAsm(GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
         protected void megacheck(string name, Func<uint,uint,uint> primal, Func<uint,uint,uint> generic, PrimalKind<uint> kind)
         {
+            var w = n32;
+
             var moniker = Moniker.define(name, kind);                        
             var f0 = FixedDelegate.from(primal, kind);
 
             var f1 = FixedDelegate.from(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = AsmBuffer.BinOp32(ReadAsm(Math, moniker));
+            var f2 = AsmBuffer.BinOp(w, ReadAsm(Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = AsmBuffer.BinOp32(ReadAsm(GMath, moniker.WithGeneric()));
+            var f3 = AsmBuffer.BinOp(w, ReadAsm(GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
         protected void megacheck(string name, Func<int,int,int> primal, Func<int,int,int> generic, PrimalKind<int> kind)
         {
+            var w = n32;
             var moniker = Moniker.define(name, kind);                        
             var f0 = FixedDelegate.from(primal, kind);
 
             var f1 = FixedDelegate.from(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = AsmBuffer.BinOp32(ReadAsm(Math, moniker));
+            var f2 = AsmBuffer.BinOp(w, ReadAsm(Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = AsmBuffer.BinOp32(ReadAsm(GMath, moniker.WithGeneric()));
+            var f3 = AsmBuffer.BinOp(w, ReadAsm(GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
         protected void megacheck(string name, Func<long,long,long> primal, Func<long,long,long> generic, PrimalKind<long> kind)
         {            
+            var w = n64;
             var moniker = Moniker.define(name, kind);                        
             var f0 = FixedDelegate.from(primal, kind);
 
             var f1 = FixedDelegate.from(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = AsmBuffer.BinOp64(ReadAsm(Math, moniker));
+            var f2 = AsmBuffer.BinOp(w, ReadAsm(Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = AsmBuffer.BinOp64(ReadAsm(GMath, moniker.WithGeneric()));
+            var f3 = AsmBuffer.BinOp(w, ReadAsm(GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-
         protected void megacheck(string name, Func<ulong,ulong,ulong> primal, Func<ulong,ulong,ulong> generic, PrimalKind<ulong> kind)
         {            
+            var w = n64;
+
             var moniker = Moniker.define(name, kind);                        
             var f0 = FixedDelegate.from(primal, kind);
 
             var f1 = FixedDelegate.from(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
-            var f2 = AsmBuffer.BinOp64(ReadAsm(Math, moniker));
+            var f2 = AsmBuffer.BinOp(w, ReadAsm(Math, moniker));
             CheckMatch(f0, moniker, f2, moniker.WithAsm());
 
-            var f3 = AsmBuffer.BinOp64(ReadAsm(GMath, moniker.WithGeneric()));
+            var f3 = AsmBuffer.BinOp(w, ReadAsm(GMath, moniker.WithGeneric()));
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
     }

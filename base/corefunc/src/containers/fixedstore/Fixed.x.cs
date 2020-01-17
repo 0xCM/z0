@@ -69,8 +69,40 @@ namespace Z0
             where S : unmanaged, IFixed
             where T : unmanaged
         {
-            Span<T> dst = stackalloc T[bitsize<S>() / bitsize<T>()];
+            //Span<T> dst = stackalloc T[bitsize<S>() / bitsize<T>()];
+            var dst = BitConvert.GetBytes(in src).As<T>();
             return dst.FormatList();
+        }
+
+        public static string Format<T>(this T src, PrimalKind kind)
+            where T : unmanaged, IFixed
+        {
+            var dst = BitConvert.GetBytes(in src);
+            switch(kind)
+            {
+                case PrimalKind.I8:
+                    return dst.As<sbyte>().FormatList();
+                case PrimalKind.U8:
+                    return dst.As<byte>().FormatList();
+                case PrimalKind.I16:
+                    return dst.As<short>().FormatList();
+                case PrimalKind.U16:
+                    return dst.As<ushort>().FormatList();
+                case PrimalKind.I32:
+                    return dst.As<int>().FormatList();
+                case PrimalKind.U32:
+                    return dst.As<uint>().FormatList();
+                case PrimalKind.I64:
+                    return dst.As<long>().FormatList();
+                case PrimalKind.U64:
+                    return dst.As<ulong>().FormatList();
+                case PrimalKind.F32:
+                    return dst.As<float>().FormatList();
+                case PrimalKind.F64:
+                    return dst.As<double>().FormatList();
+                default:
+                    throw unsupported(kind);
+            }
         }
 
     }

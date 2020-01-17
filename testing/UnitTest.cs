@@ -77,12 +77,13 @@ namespace Z0
         /// <param name="gId">The identity of the second operator</param>
         protected void CheckMatch(BinaryOp32 f, Moniker fId, BinaryOp32 g, Moniker gId)
         {
+            var w = n32;
             void check()
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Fixed(n32);
-                    var y = Random.Fixed(n32);
+                    var x = Random.Fixed(w);
+                    var y = Random.Fixed(w);
                     Claim.eq(f(x,y),g(x,y));
                 }
             }
@@ -99,12 +100,60 @@ namespace Z0
         /// <param name="gId">The identity of the second operator</param>
         protected void CheckMatch(BinaryOp64 f, Moniker fId, BinaryOp64 g, Moniker gId)
         {
+            var w = n64;
             void check()
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Fixed(n64);
-                    var y = Random.Fixed(n64);
+                    var x = Random.Fixed(w);
+                    var y = Random.Fixed(w);
+                    Claim.eq(f(x,y),g(x,y));
+                }
+            }
+
+            CheckAction(check, CaseName($"{fId}~/~{gId}"));
+        }
+
+        /// <summary>
+        /// Verifies that two 128-bit binary operators agree over a random set of points
+        /// </summary>
+        /// <param name="f">The first operator, considered as a basline</param>
+        /// <param name="fId">The identity of the first operator</param>
+        /// <param name="g">The second operator, considered as the operation under test</param>
+        /// <param name="gId">The identity of the second operator</param>
+        protected void CheckMatch(BinaryOp128 f, Moniker fId, BinaryOp128 g, Moniker gId)
+        {
+            var w = n128;
+            
+            void check()
+            {
+                for(var i=0; i < RepCount; i++)
+                {
+                    var x = Random.Fixed(w);
+                    var y = Random.Fixed(w);
+                    Claim.eq(f(x,y),g(x,y));
+                }
+            }
+
+            CheckAction(check, CaseName($"{fId}~/~{gId}"));
+        }
+
+        /// <summary>
+        /// Verifies that two 128-bit binary operators agree over a random set of points
+        /// </summary>
+        /// <param name="f">The first operator, considered as a basline</param>
+        /// <param name="fId">The identity of the first operator</param>
+        /// <param name="g">The second operator, considered as the operation under test</param>
+        /// <param name="gId">The identity of the second operator</param>
+        protected void CheckMatch(BinaryOp256 f, Moniker fId, BinaryOp256 g, Moniker gId)
+        {
+            var w = n256;
+            void check()
+            {
+                for(var i=0; i < RepCount; i++)
+                {
+                    var x = Random.Fixed(w);
+                    var y = Random.Fixed(w);
                     Claim.eq(f(x,y),g(x,y));
                 }
             }

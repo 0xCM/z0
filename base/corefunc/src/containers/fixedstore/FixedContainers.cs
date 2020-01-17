@@ -30,7 +30,7 @@ namespace Z0
         
     }
 
-    public struct Fixed8 : IFixed<Fixed8,N8>
+    public struct Fixed8 : IFixed<Fixed8,N8>, IEquatable<Fixed8>
     {
         public const int BitWidth = 8;        
 
@@ -53,9 +53,23 @@ namespace Z0
             [MethodImpl(Inline)]
             get => BitWidth;
         }
+
+        [MethodImpl(Inline)]
+        public bool Equals(Fixed8 src)
+            => X0 == src.X0;
+        
+        public override int GetHashCode()
+            => X0.GetHashCode();
+        
+        public override bool Equals(object src)
+            => src is Fixed8 x && Equals(x);
+        
+        public override string ToString() 
+            => X0.ToString();
+
     }
 
-    public struct Fixed16 : IFixed<Fixed16,N16>
+    public struct Fixed16 : IFixed<Fixed16,N16>, IEquatable<Fixed16>
     {
         public const int BitWidth = 16;
 
@@ -78,9 +92,23 @@ namespace Z0
             [MethodImpl(Inline)]
             get => BitWidth;
         }
+
+        [MethodImpl(Inline)]
+        public bool Equals(Fixed16 src)
+            => X0 == src.X0;
+        
+        public override int GetHashCode()
+            => X0.GetHashCode();
+        
+        public override bool Equals(object src)
+            => src is Fixed16 x && Equals(x);
+
+        public override string ToString() 
+            => X0.ToString();
+
     }
 
-    public struct Fixed32 : IFixed<Fixed32,N32>
+    public struct Fixed32 : IFixed<Fixed32,N32>, IEquatable<Fixed32>
     {
         public const int BitWidth = 32;        
 
@@ -111,9 +139,23 @@ namespace Z0
             [MethodImpl(Inline)]
             get => BitWidth;
         }
+
+        [MethodImpl(Inline)]
+        public bool Equals(Fixed32 src)
+            => X0 == src.X0;
+        
+        public override int GetHashCode()
+            => X0.GetHashCode();
+        
+        public override bool Equals(object src)
+            => src is Fixed32 x && Equals(x);
+
+
+        public override string ToString() 
+            => X0.ToString();
     }
 
-    public struct Fixed64 : IFixed<Fixed64,N64>
+    public struct Fixed64 : IFixed<Fixed64,N64>, IEquatable<Fixed64>
     {
         public const int BitWidth = 64;        
 
@@ -144,10 +186,23 @@ namespace Z0
             [MethodImpl(Inline)]
             get => BitWidth;
         }
+
+        [MethodImpl(Inline)]
+        public bool Equals(Fixed64 src)
+            => X0 == src.X0;
+        
+        public override int GetHashCode()
+            => X0.GetHashCode();
+        
+        public override bool Equals(object src)
+            => src is Fixed64 x && Equals(x);
+
+        public override string ToString() 
+            => X0.ToString();
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct Fixed128 : IFixed<Fixed128,N128>
+    public struct Fixed128 : IFixed<Fixed128,N128>, IEquatable<Fixed128>
     {
         internal ulong X0;
 
@@ -208,10 +263,24 @@ namespace Z0
             [MethodImpl(Inline)]
             get => BitWidth;
         }
+
+        [MethodImpl(Inline)]
+        public bool Equals(Fixed128 src)
+            => X0 == src.X0 && X1 == src.X1;
+        
+        public override int GetHashCode()
+            => HashCode.Combine(X0,X1);
+        
+        public override bool Equals(object src)
+            => src is Fixed128 x && Equals(x);
+
+        public override string ToString() 
+            => array(X0,X1).FormatList();
+
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct Fixed256  : IFixed<Fixed256,N256>
+    public struct Fixed256  : IFixed<Fixed256,N256>, IEquatable<Fixed256>
     {
         public const int BitWidth = 256;        
 
@@ -235,6 +304,20 @@ namespace Z0
             [MethodImpl(Inline)]
             get => BitWidth;
         }
+
+        [MethodImpl(Inline)]
+        public bool Equals(Fixed256 src)
+            => X0.Equals(src.X0) && X1.Equals(src.X1);
+        
+        public override int GetHashCode()
+            => HashCode.Combine(X0,X1);
+        
+        public override bool Equals(object src)
+            => src is Fixed256 x && Equals(x);
+
+        public override string ToString() 
+            => array(X0,X1).FormatList();
+
     }
 
     [StructLayout(LayoutKind.Sequential)]

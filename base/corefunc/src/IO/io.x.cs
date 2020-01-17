@@ -29,6 +29,26 @@ namespace Z0
             => File.ReadAllText(src.ToString());
 
         /// <summary>
+        /// Reads the full content of a text file
+        /// </summary>
+        /// <param name="src">The file path</param>
+        public static Option<string> TryReadText(this FilePath src)
+        {
+            try
+            {
+                if(src.Exists())
+                    return File.ReadAllText(src.ToString());
+            }
+            catch(Exception)
+            {
+                return default;
+            }
+            
+            return default;
+
+        }
+
+        /// <summary>
         /// Reads the full content of a file into a byte array
         /// </summary>
         /// <param name="src">The file path</param>

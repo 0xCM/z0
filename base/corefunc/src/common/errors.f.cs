@@ -17,16 +17,13 @@ using Z0;
 partial class zfunc
 {
     /// <summary>
-    /// Defines an exception indicating that there is no operation 
-    /// associated with a specified enumeration literal 
+    /// Defines an exception indicating that there is no operation associated with a specified kind
     /// </summary>
     /// <param name="kind">The enum type</param>
-    /// <param name="file">The source file where error condition is discerned</param>
-    /// <param name="line">The source file line number where error condition is discerned</param>
     /// <typeparam name="T">The enumeration type</typeparam>
-    public static AppException unsupported<T>(T kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+    public static AppException unsupported<T>(T kind)
         where T : Enum
-            => Errors.KindUnsupported(kind, caller, file, line);
+            => Errors.KindUnsupported(kind);
     
     public static AppException unsupported<T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         => Errors.TypeUnsupported(typeof(T), caller,file, line);

@@ -12,6 +12,7 @@ namespace Z0
     
     using static zfunc;
     using static HexConst;
+    using static Data;
 
     partial class VData
     {        
@@ -23,7 +24,7 @@ namespace Z0
         /// <param name="dst">The target cell width selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> packusLo(N128 w, N32 src, N16 dst)
-            => load(w, PackUS_32Lo_128x16);
+            => load(w, PackUS32Lo128x16);
 
         /// <summary>
         /// Produces the hi shuffle spec for packing (128x32, 128x32) -> 128x16
@@ -33,7 +34,7 @@ namespace Z0
         /// <param name="dst">The target cell width selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> packusHi(N128 w, N32 src, N16 dst)
-            => load(w,PackUS_32Hi_128x16);
+            => load(w,PackUS32Hi128x16);
 
         /// <summary>
         /// Produces the lo shuffle spec for packing (128x16,128x16) -> 128x8
@@ -43,7 +44,7 @@ namespace Z0
         /// <param name="dst">The target cell width selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> packusLo(N128 w, N16 src, N8 dst)
-            => load(w, PackUS_16Lo_128x8);
+            => load(w, PackUS16Lo128x8);
 
         /// <summary>
         /// Produces the hi shuffle spec for packing (128x16,128x16) -> 128x8
@@ -53,15 +54,15 @@ namespace Z0
         /// <param name="dst">The target cell width selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> packusHi(N128 w, N16 src, N8 dst)
-            => load(w, PackUS_16Hi_128x8);
+            => load(w, PackUS16Hi128x8);
 
         [MethodImpl(Inline)]
         public static Vector256<byte> packusLo(N256 w, N16 src, N8 dst)
-            => load(w, PackUS_16Lo_256x8);
+            => load(w, PackUS16Lo256x8);
 
         [MethodImpl(Inline)]
         public static Vector256<byte> packusHi(N256 w, N16 src, N8 dst)
-            => load(w, PackUS_16Hi_256x8);
+            => load(w, PackUS16Hi256x8);
 
         /// <summary>
         /// Retrieves the lo shuffle spec for packing 256x32x2 -> 256x16
@@ -71,7 +72,7 @@ namespace Z0
         /// <param name="dst">The target cell width selector</param>
         [MethodImpl(Inline)]
         public static Vector256<byte> packusLo(N256 w, N32 src, N16 dst)
-            => load(w,PackUS_32Lo_256x16);
+            => load(w,PackUS32Lo256x16);
 
         /// <summary>
         /// Retrieves the hi shuffle spec for packing 256x32x2 -> 256x16
@@ -81,62 +82,8 @@ namespace Z0
         /// <param name="dst">The target cell width selector</param>
         [MethodImpl(Inline)]
         public static Vector256<byte> packusHi(N256 w, N32 src, N16 dst)
-            => load(w,PackUS_32Hi_256x16);
+            => load(w,PackUS32Hi256x16);
 
-        static ReadOnlySpan<byte> PackUS_16Lo_128x8
-            => new byte[16]{
-                0, 2, 4, 6, 8, 10,12,14, 
-                FF,FF,FF,FF,FF,FF,FF,FF
-                };
 
-        static ReadOnlySpan<byte> PackUS_16Hi_128x8
-            => new byte[16]{
-                FF,FF,FF,FF,FF,FF,FF,FF, 
-                0, 2, 4, 6, 8, 10,12,14, 
-                };
-
-        static ReadOnlySpan<byte> PackUS_32Lo_128x16
-            => new byte[16]{
-                0,1, 4,5, 8,9, 12,13, 
-                FF,FF,FF,FF,FF,FF,FF,FF
-                };
-
-        static ReadOnlySpan<byte> PackUS_32Hi_128x16
-            => new byte[16]{
-                FF,FF,FF,FF,FF,FF,FF,FF, 
-                0,1,4,5,8,9,12,13
-                };
-
-        static ReadOnlySpan<byte> PackUS_16Lo_256x8
-            => new byte[32]{
-                0, 2, 4, 6, 8, 10,12,14, 
-                FF,FF,FF,FF,FF,FF,FF,FF,
-                0, 2, 4, 6, 8, 10,12,14, 
-                FF,FF,FF,FF,FF,FF,FF,FF
-                };
-
-        static ReadOnlySpan<byte> PackUS_16Hi_256x8
-            => new byte[32]{
-                FF,FF,FF,FF,FF,FF,FF,FF, 
-                0, 2, 4, 6, 8, 10,12,14, 
-                FF,FF,FF,FF,FF,FF,FF,FF, 
-                0, 2, 4, 6, 8, 10,12,14, 
-                };
-
-        static ReadOnlySpan<byte> PackUS_32Lo_256x16
-            => new byte[32]{
-                0,1,4,5,8,9,12,13, 
-                FF,FF,FF,FF,FF,FF,FF,FF,
-                0,1,4,5,8,9,12,13, 
-                FF,FF,FF,FF,FF,FF,FF,FF,
-                };
-
-        static ReadOnlySpan<byte> PackUS_32Hi_256x16
-            => new byte[32]{
-                FF,FF,FF,FF,FF,FF,FF,FF,
-                0,1,4,5,8,9,12,13,
-                FF,FF,FF,FF,FF,FF,FF,FF,
-                0,1,4,5,8,9,12,13
-                };
     }
 }

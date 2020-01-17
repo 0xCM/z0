@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     
     using static zfunc;    
+    using static Data;
  
     partial class VPattern
     {
@@ -18,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector128<T> vunits<T>(N128 w, T t = default)
             where T : unmanaged
         {
@@ -39,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static Vector256<T> vunits<T>(N256 w, T t = default)
             where T : unmanaged
         {
@@ -54,49 +55,5 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
- 
-        static ReadOnlySpan<byte> Units128x8u
-            => new byte[16]{
-                1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-                };
-
-        static ReadOnlySpan<byte> Units128x16u
-            => new byte[16]{
-                1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0
-                };
-
-        static ReadOnlySpan<byte> Units128x32u
-            => new byte[16]{
-                1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0
-                };
-
-        static ReadOnlySpan<byte> Units128x64u
-            => new byte[16]{
-                1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
-                };
-
-        static ReadOnlySpan<byte> Units256x8u
-            => new byte[32]{
-                1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-                1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-                };
-
-        static ReadOnlySpan<byte> Units256x16u
-            => new byte[32]{
-                1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,
-                1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0
-                };
-
-        static ReadOnlySpan<byte> Units256x32u
-            => new byte[32]{
-                1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,
-                1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0
-                };
-
-        static ReadOnlySpan<byte> Units256x64u
-            => new byte[32]{
-                1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
-                1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
-                }; 
     }
 }

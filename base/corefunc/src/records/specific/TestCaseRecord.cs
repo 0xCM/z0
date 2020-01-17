@@ -37,7 +37,7 @@ namespace Z0
         
         const string BOO = "failed";
 
-        const int OperationPad = 50;
+        const int OperationPad = 75;
 
         const int OutcomePad = 10;
 

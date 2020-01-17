@@ -46,7 +46,7 @@ namespace Z0
         /// <summary>
         /// The total width of the type if segmented, otherwise 0
         /// </summary>
-        public int SegmentedWidth
+        public FixedWidth SegmentedWidth
             => ParseSegmentedWidth();
 
         /// <summary>
@@ -237,12 +237,12 @@ namespace Z0
                 return 0;
         }
 
-        int ParseSegmentedWidth()
+        FixedWidth ParseSegmentedWidth()
         {
             if(IsSegmented)
             if(int.TryParse(Metrics.Split(SegSep)[0], out var n))
-                return n;
-            return 0;
+                return (FixedWidth)n;
+            return Z0.FixedWidth.None;
         }
 
         int ParseTotalWidth()

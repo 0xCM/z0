@@ -37,12 +37,45 @@ namespace Z0
             where T : unmanaged
                 => (BinaryOp<T>)CreateBinOp(pCode, m, typeof(T), typeof(BinaryOp<T>));
 
+
+        /// <summary>
+        /// Creates a 8-bit unary operator over a specified executable memory location
+        /// </summary>
+        /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
+        /// <param name="name">Identity conferred to the manufactured operator</param>
+        public static UnaryOp8 CreateUnaryOp(N8 w, IntPtr pCode, Moniker m)
+            => (UnaryOp8)CreateUnaryOp(pCode, m, typeof(Fixed8), typeof(UnaryOp8));
+
+        /// <summary>
+        /// Creates a 16-bit unary operator over a specified executable memory location
+        /// </summary>
+        /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
+        /// <param name="name">Identity conferred to the manufactured operator</param>
+        public static UnaryOp16 CreateUnaryOp(N16 w, IntPtr pCode, Moniker m)
+            => (UnaryOp16)CreateUnaryOp(pCode, m, typeof(Fixed16), typeof(UnaryOp16));
+
+        /// <summary>
+        /// Creates a 32-bit unary operator over a specified executable memory location
+        /// </summary>
+        /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
+        /// <param name="name">Identity conferred to the manufactured operator</param>
+        public static UnaryOp32 CreateUnaryOp(N32 w, IntPtr pCode, Moniker m)
+            => (UnaryOp32)CreateUnaryOp(pCode, m, typeof(Fixed32), typeof(UnaryOp32));
+
+        /// <summary>
+        /// Creates a 64-bit unary operator over a specified executable memory location
+        /// </summary>
+        /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
+        /// <param name="name">Identity conferred to the manufactured operator</param>
+        public static UnaryOp64 CreateUnaryOp(N64 w, IntPtr pCode, Moniker m)
+            => (UnaryOp64)CreateUnaryOp(pCode, m, typeof(Fixed64), typeof(UnaryOp64));
+
         /// <summary>
         /// Creates a 128-bit unary operator defined by supplied asm code
         /// </summary>
         /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
-        public static UnaryOp128 CreateUnaryOp128(IntPtr pCode, Moniker m)
+        public static UnaryOp128 CreateUnaryOp(N128 w, IntPtr pCode, Moniker m)
             => (UnaryOp128)CreateBinOp(pCode, m, typeof(Fixed128), typeof(UnaryOp128));
 
         /// <summary>
@@ -50,7 +83,7 @@ namespace Z0
         /// </summary>
         /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
-        public static UnaryOp256 CreateUnaryOp256(IntPtr pCode, Moniker m)
+        public static UnaryOp256 CreateUnaryOp(N256 w, IntPtr pCode, Moniker m)
             => (UnaryOp256)CreateBinOp(pCode, m, typeof(Fixed256), typeof(UnaryOp256));
 
         /// <summary>
@@ -58,7 +91,7 @@ namespace Z0
         /// </summary>
         /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
-        public static BinaryOp8 CreateBinOp8(IntPtr pCode, Moniker m)
+        public static BinaryOp8 CreateBinOp(N8 w,IntPtr pCode, Moniker m)
             => (BinaryOp8)CreateBinOp(pCode, m, typeof(Fixed8), typeof(BinaryOp8));
 
         /// <summary>
@@ -66,7 +99,7 @@ namespace Z0
         /// </summary>
         /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
-        public static BinaryOp16 CreateBinOp16(IntPtr pCode, Moniker m)
+        public static BinaryOp16 CreateBinOp(N16 w, IntPtr pCode, Moniker m)
             => (BinaryOp16)CreateBinOp(pCode, m, typeof(Fixed16), typeof(BinaryOp16));
 
         /// <summary>
@@ -74,7 +107,7 @@ namespace Z0
         /// </summary>
         /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
-        public static BinaryOp32 CreateBinOp32(IntPtr pCode, Moniker m)
+        public static BinaryOp32 CreateBinOp(N32 w, IntPtr pCode, Moniker m)
             => (BinaryOp32)CreateBinOp(pCode, m, typeof(Fixed32), typeof(BinaryOp32));
 
         /// <summary>
@@ -82,7 +115,7 @@ namespace Z0
         /// </summary>
         /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
-        public static BinaryOp64 CreateBinOp64(IntPtr pCode, Moniker m)
+        public static BinaryOp64 CreateBinOp(N64 w, IntPtr pCode, Moniker m)
             => (BinaryOp64)CreateBinOp(pCode, m, typeof(Fixed64), typeof(BinaryOp64));
 
         /// <summary>
@@ -90,7 +123,7 @@ namespace Z0
         /// </summary>
         /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
-        public static BinaryOp128 CreateBinOp128(IntPtr pCode, Moniker m)
+        public static BinaryOp128 CreateBinOp(N128 w, IntPtr pCode, Moniker m)
             => (BinaryOp128)CreateBinOp(pCode, m, typeof(Fixed128), typeof(BinaryOp128));
 
         /// <summary>
@@ -98,7 +131,7 @@ namespace Z0
         /// </summary>
         /// <param name="pCode">A pointer to executable memory loaded with selected code</param>
         /// <param name="name">Identity conferred to the manufactured operator</param>
-        public static BinaryOp256 CreateBinOp256(IntPtr pCode, Moniker m)
+        public static BinaryOp256 CreateBinOp(N256 w, IntPtr pCode, Moniker m)
             => (BinaryOp256)CreateBinOp(pCode, m, typeof(Fixed256), typeof(BinaryOp256));
 
         static Delegate CreateUnaryOp(IntPtr pCode, Moniker m, Type operandType, Type operatorType)

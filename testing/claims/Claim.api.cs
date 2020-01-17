@@ -115,7 +115,7 @@ namespace Z0
         /// <param name="line">The source file line number where invocation ocurred</param>        
         public static bool eq<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             => lhs.Equals(rhs) ? true : throw failed(ClaimOpKind.Eq, NotEqual(lhs,rhs, caller, file, line));
-
+        
         /// <summary>
         /// Asserts the equality of two vectors
         /// </summary>

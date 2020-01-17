@@ -43,14 +43,17 @@ namespace Z0
             Location.DeleteFiles();
         }
 
-        public AsmCode ReadCode(Moniker m)
-            => AsmCode.Parse(Paths.AsmHexPath(Location, m).ReadText(),m);
 
-        public InstructionBlock ReadInstructions(Moniker m)
-            => AsmDecoder.decode(ReadCode(m));
+        public Option<AsmCode> ReadCode(Moniker m)
+            =>  from text in Paths.AsmHexPath(Location, m).TryReadText()
+                let code = AsmCode.Parse(text,m)
+                select code;
 
-        public AsmFuncInfo ReadFunction(Moniker m)          
-            => AsmFunction.decode(ReadCode(m));
+        // public InstructionBlock ReadInstructions(Moniker m)
+        //     => AsmDecoder.decode(ReadCode(m));
+
+        // public AsmFuncInfo ReadFunction(Moniker m)          
+        //     => AsmFunction.decode(ReadCode(m));
 
     }
 }

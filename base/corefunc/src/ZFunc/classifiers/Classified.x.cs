@@ -260,8 +260,8 @@ namespace Z0
         /// If the source type is primal or intrinsic, returns the bit-width; otherwise, returns 0
         /// </summary>
         /// <param name="t">The type to examine</param>
-        public static SegmentedWidth SegmentedWidth(this Type t)
-            => (SegmentedWidth)Classified.width(t);
+        public static FixedWidth SegmentedWidth(this Type t)
+            => (FixedWidth)Classified.width(t);
 
         /// <summary>
         /// Determines whether a method is an action
@@ -320,6 +320,13 @@ namespace Z0
         /// <param name="src">The source stream</param>
         public static bool IsHomogenous(this MethodInfo m)
             => FunctionType.homogenous(m);
+
+        /// <summary>
+        /// Determines whether a method accepts natural number type values as arguments
+        /// </summary>
+        /// <param name="m">The method to test</param>
+        public static bool AcceptsNatValues(this MethodInfo m)
+            => TypeNatType.accepts(m);
 
         /// <summary>
         /// Determines whether a method has intrinsic parameters or return type

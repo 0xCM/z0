@@ -19,7 +19,7 @@ namespace Z0
 
         OpArityKind ResolvedArity => OpArityKind.Nullary;
 
-        SegmentedWidth OperandWidth => SegmentedWidth.None;
+        FixedWidth OperandWidth => FixedWidth.None;
 
         SegmentationKind Segmentation => SegmentationKind.None;
     }
@@ -71,7 +71,7 @@ namespace Z0
 
         SegmentationKind ImmResolver.Segmentation => SegmentationKind.Vectorized;
 
-        SegmentedWidth ImmResolver.OperandWidth => (SegmentedWidth)nateval<W>();
+        FixedWidth ImmResolver.OperandWidth => (FixedWidth)nateval<W>();
 
         OpArityKind ImmResolver.ResolvedArity => OpArityKind.Unary;           
 
@@ -86,7 +86,7 @@ namespace Z0
 
         SegmentationKind ImmResolver.Segmentation => SegmentationKind.Vectorized;
 
-        SegmentedWidth ImmResolver.OperandWidth => (SegmentedWidth)nateval<W>();
+        FixedWidth ImmResolver.OperandWidth => (FixedWidth)nateval<W>();
 
         OpArityKind ImmResolver.ResolvedArity => OpArityKind.Binary;           
 

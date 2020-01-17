@@ -74,6 +74,17 @@ namespace Z0
         }
 
         /// <summary>
+        /// Defines a moniker of the form {opname}_{w}X{bitsize(k)}{u | i | f}{_asm} to identify an operation over a segmented type of bitwidth w over a primal kind k
+        /// </summary>
+        /// <param name="opname">The base operator name/operator classifier</param>
+        /// <param name="w">The total bit-widht of the segmented type</param>
+        /// <param name="k">The primal cell kind</param>
+        /// <param name="generic">Whether a generic operation is identified</param>
+        /// <param name="asm">Whether the moniker has an asm suffix</param>
+        public static Moniker define(string opname, FixedWidth w, PrimalKind k, bool generic, bool asm = false)
+            => define(opname, (int)w, k, generic,asm);        
+
+        /// <summary>
         /// Makes a best-guess at defining an appropriate moniker for a specified method
         /// </summary>
         /// <param name="method">The operation method</param>

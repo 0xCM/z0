@@ -111,6 +111,7 @@ namespace Z0
             megacheck(name, math.nand, gmath.nand, i64);            
         }
 
+
         public void xnor_megacheck()
         {
             var name = nameof(math.xnor);
@@ -124,24 +125,161 @@ namespace Z0
             megacheck(name, math.xnor, gmath.xnor, i64);            
         }
 
-        void sqrt_check()
+        public void vector_bitlogic_match()
         {
-            var sqrt = AsmCode.Parse("0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFB,0x51,0xC0,0xC3", moniker("sqrt", z64f), z64f);
-            CheckAsmMatch(fmath.sqrt, sqrt);                     
+            var names = array("vxor", "vand", "vor", "vnor", "vxnor", "vnand");
+            var kinds = PrimalKind.Integers.Distinct();
+            var widths = array(FixedWidth.W128, FixedWidth.W256);
+            foreach(var n in names)
+            foreach(var w in widths)
+            foreach(var k in kinds)
+                vector_match(n, w, k);                        
         }
 
+        public void primal_bitlogic_match()
+        {
+            var names = array("and", "or", "xor", "nand", "nor", "xnor","impl","noniml");
+            var kinds = PrimalKind.Integers.Distinct();
+            var widths = array(FixedWidth.W8, FixedWidth.W16, FixedWidth.W32, FixedWidth.W64);
+            foreach(var n in names)
+            foreach(var w in widths)
+            foreach(var k in kinds)
+                primal_match(n, w, k);                        
+        }
+
+        void primal_match(string name, FixedWidth w, PrimalKind kind)
+        {
+            var dSrc = nameof(math);
+            var gSrc = nameof(gmath);
+
+            var dId = Moniker.define(name, kind, false);
+            var gId = Moniker.define(name, kind, true);
+
+            var dAsm = AsmArchive.Define(dSrc).ReadCode(dId).OnNone(() => Trace($"{dId} not found"));
+            var gAsm = AsmArchive.Define(gSrc).ReadCode(gId).OnNone(() => Trace($"{gId} not found"));;
+
+            var success = from d in dAsm
+                          from g in gAsm
+                          let result = binop_match(w,d,g)
+                          select result;
+
+            success.OnNone(() => Claim.fail());
+        }
+
+        void vector_match(string name, FixedWidth w, PrimalKind kind)
+        {
+            var dSrc = nameof(dinx);
+            var gSrc = nameof(ginx);
+
+            var dId = Moniker.define(name, w, kind, false);
+            var gId = Moniker.define(name, w, kind, true);
+
+            var dAsm = AsmArchive.Define(dSrc).ReadCode(dId);
+            var gAsm = AsmArchive.Define(gSrc).ReadCode(gId);
+
+            var success = from d in dAsm
+                          from g in gAsm
+                          let result = binop_match(w,d,g)
+                          select result;
+
+            success.OnNone(() => Claim.fail());
+        }
+
+        bit binop_match(FixedWidth w, AsmCode a, AsmCode b)
+        {
+            switch(w)
+            {
+                case FixedWidth.W8:
+                    binop_match(n8,a,b);
+                    break;
+
+                case FixedWidth.W16:
+                    binop_match(n16,a,b);
+                    break;
+
+                case FixedWidth.W32:
+                    binop_match(n32,a,b);
+                    break;
+
+                case FixedWidth.W64:
+                    binop_match(n64,a,b);
+                    break;
+
+                case FixedWidth.W128:
+                    binop_match(n128,a,b);
+                    break;
+
+                case FixedWidth.W256:
+                    binop_match(n256, a, b);
+                    break;
+
+                default:
+                    Claim.fail();
+                break;
+            }
+            return bit.On;
+        }
+
+        protected void binop_match(N8 w, AsmCode a, AsmCode b)
+        {
+            var f = LeftBuffer.BinOp(w, a);
+            var g = RightBuffer.BinOp(w, b);
+            CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+        }
+
+        protected void binop_match(N16 w, AsmCode a, AsmCode b)
+        {
+            var f = LeftBuffer.BinOp(w, a);
+            var g = RightBuffer.BinOp(w, b);
+            CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+        }
+
+        protected void binop_match(N32 w, AsmCode a, AsmCode b)
+        {
+            var f = LeftBuffer.BinOp(w, a);
+            var g = RightBuffer.BinOp(w, b);
+            CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+        }
+
+        protected void binop_match(N64 w, AsmCode a, AsmCode b)
+        {
+
+            var f = LeftBuffer.BinOp(w, a);
+            var g = RightBuffer.BinOp(w, b);
+            CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+        }
+
+        protected void binop_match(N128 w, AsmCode a, AsmCode b)
+        {
+            using var fBuffer = AsmExecBuffer.Create();
+            using var gBuffer = AsmExecBuffer.Create();
+
+            var f = fBuffer.BinOp(w, a);
+            var g = gBuffer.BinOp(w, b);
+            CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+        }
+
+        protected void binop_match(N256 w, AsmCode a, AsmCode b)
+        {
+            using var fBuffer = AsmExecBuffer.Create();
+            using var gBuffer = AsmExecBuffer.Create();
+
+            var f = fBuffer.BinOp(w, a);
+            var g = gBuffer.BinOp(w, b);
+            CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                                      
+        }
         
         void vadd_check<T>(N128 w, AsmCode<T> asm)
             where T : unmanaged
         {            
-            var f = AsmBuffer.BinOp128(asm);            
+            var f = AsmBuffer.BinOp(w,asm);            
             CheckMatch<T>(ginx.vadd, f, asm.Id);
         }
 
         void vadd_check<T>(N256 w, AsmCode<T> asm)
             where T : unmanaged
         {            
-            var f = AsmBuffer.BinOp256(asm);
+            var f = AsmBuffer.BinOp(w,asm);
             CheckMatch<T>(ginx.vadd, f, asm.Id);
         }
     }
