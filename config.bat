@@ -35,8 +35,8 @@ dotnet sln add bitcore/test/z0.bitcore.test.csproj
 dotnet sln add bitvectors/src/z0.bitvectors.csproj
 dotnet sln add bitvectors/test/z0.bitvectors.test.csproj
 
-dotnet sln add bits/src/z0.bits.csproj
-dotnet sln add bits/test/z0.bits.test.csproj
+dotnet sln add bitgrids/src/z0.bitgrids.csproj
+dotnet sln add bitgrids/test/z0.bitgrids.test.csproj
 
 dotnet sln add reveal/lib/z0.reveal.lib.csproj
 dotnet sln add reveal/app/z0.reveal.app.csproj

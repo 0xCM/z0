@@ -40,7 +40,7 @@ namespace Z0.Designators
 
             D.RngCore.Designated,
 
-            D.Bits.Designated,
+            D.BitGrids.Designated,
             D.BitTest.Designated,
 
             D.CpuFunc.Designated,

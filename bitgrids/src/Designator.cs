@@ -11,9 +11,9 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class Bits : AssemblyDesignator<Bits>
+    public sealed class BitGrids : AssemblyDesignator<BitGrids>
     {
-
+        public override AssemblyId Id => AssemblyId.BitGrids;
     }
 
 }
