@@ -397,7 +397,6 @@ namespace Z0.OpCodes
         public static int convert_g64u_to_g32i(ulong src)
             => Converter.convert<ulong,int>(src);
 
-
         public static uint convert_64u_to_32u(ulong src)
             => (uint)src;
 

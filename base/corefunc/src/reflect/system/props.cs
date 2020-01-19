@@ -37,11 +37,39 @@ namespace Z0
             => p.Getter().Exists;
 
         /// <summary>
+        /// Retrieves the public and non-public static properties declared by a type
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static IEnumerable<PropertyInfo> DeclaredStaticProperties(this Type t)
+            => t.GetProperties(BF_DeclaredStatic);
+
+        /// <summary>
         /// Selects the static properties from a stream
         /// </summary>
         /// <param name="src">The source stream</param>
         public static IEnumerable<PropertyInfo> Static(this IEnumerable<PropertyInfo> src)
             => src.Where(p => p.IsStatic());
+
+        /// <summary>
+        /// Selects the properties from a stream that have public accessesors
+        /// </summary>
+        /// <param name="src">The source stream</param>
+        public static IEnumerable<PropertyInfo> WithPublicRead(this IEnumerable<PropertyInfo> src)
+            => src.Where(p => p.CanRead && p.GetGetMethod().IsPublic);
+
+        /// <summary>
+        /// Selects the properties from a stream that have public manipulators
+        /// </summary>
+        /// <param name="src">The source stream</param>
+        public static IEnumerable<PropertyInfo> WithPublicWrite(this IEnumerable<PropertyInfo> src)
+            => src.Where(p => p.CanWrite && p.GetGetMethod().IsPublic);
+
+        /// <summary>
+        /// Selects the properties from a stream of a specified type
+        /// </summary>
+        /// <param name="src">The source stream</param>
+        public static IEnumerable<PropertyInfo> WithPropertyType(this IEnumerable<PropertyInfo> src, Type t)
+            => src.Where(p => p.PropertyType == t);
 
         /// <summary>
         /// Selects the instance properties from a stream

@@ -59,7 +59,6 @@ namespace Z0
             }
         }
 
-
         /// <summary>
         /// Decodes encoded assembly instructions
         /// </summary>
@@ -125,7 +124,5 @@ namespace Z0
 
         public static AsmCodeSet decode(DynamicDelegate f, Moniker id, byte[] buffer)
             => decode(NativeReader.read(f, buffer), id, f.CilFunc());
-
-
     }
 }

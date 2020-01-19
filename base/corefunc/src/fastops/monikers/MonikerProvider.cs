@@ -18,10 +18,20 @@ namespace Z0
     public interface IMonikerProvider
     {
         Moniker Define(MethodInfo method);
+
+        Moniker Define(MethodInfo method, PrimalKind k);
     }
 
     readonly struct MonikerProvider : IMonikerProvider
     {
+        public Moniker Define(MethodInfo method, PrimalKind k)
+        {
+            if(method.IsOpenGeneric() && k.IsSome())
+                return Define(method.MakeGenericMethod(k.ToPrimalType()));
+            else
+                return Define(method);
+        }
+
         /// <summary>
         /// Makes a best-guess at defining an appropriate moniker for a specified method
         /// </summary>
@@ -32,6 +42,10 @@ namespace Z0
                 return Moniker.define(method.Name, 0, PrimalKind.None, true, false);
             else if(method.IsNonGeneric() && method.FastOpName() != method.Name)
                 return Moniker.define(method.FastOpName());
+            else if(method.IsSpanOp())
+                return FromSpanOp(method);
+            else if(method.IsNatOp())
+                return FromNatOp(method);
             else if(method.IsVectorized())
                 return FromVectorized(method);
             else if(method.IsBlocked())
@@ -100,6 +114,25 @@ namespace Z0
             return Moniker.define(method.Name, v.BitWidth(), segkind, method.IsConstructedGenericMethod,false);                            
         }
 
+        static Moniker FromSpanOp(MethodInfo method)
+        {
+            var v = method.ParameterTypes().First();       
+            var segkind = v.GenericArguments().FirstOrDefault().Kind();         
+            return Moniker.define(method.Name, v.BitWidth(), segkind, method.IsConstructedGenericMethod, false);
+        }
+
+        static Moniker FromNatOp(MethodInfo method)
+        {
+            var natvals = from t in method.ParameterTypes()
+                        where TypeNatType.test(t)
+                        select concat(NatIndicator,TypeNatType.value(t).ToString());
+            var natspec = string.Join(SegSep, natvals);
+            var name = concat(method.Name, AsciSym.Tilde, natspec);
+            var kind = method.TypeParamKind(n1);
+            var width = kind.BitWidth();                               
+            return Moniker.define(name, width, kind, method.IsConstructedGenericMethod, false);
+        }
+
         /// <summary>
         /// Derives a moniker for an operation over intrinsic vector domain(s)
         /// </summary>
@@ -124,7 +157,7 @@ namespace Z0
 
                 if(arg.IsVector())
                 {
-                    var w = VectorType.width(arg);
+                    var w = (int)VectorType.width(arg);
                     var segtype = arg.GenericArguments().Single();
                     var segwidth = segtype.BitWidth();
                     name += ($"{w}x{segwidth}" + segtype.Kind().Indicator());

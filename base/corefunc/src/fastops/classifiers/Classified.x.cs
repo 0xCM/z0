@@ -672,5 +672,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Clear<T>(this T[] src)
             => src?.Fill(default(T));
+
+        
+        /// <summary>
+        /// Retrives the primal kind of the first type parameter, if any
+        /// </summary>
+        /// <param name="method">The method to test</param>
+        /// <param name="n">The generic parameter selector</param>
+        [MethodImpl(Inline)]
+        public static PrimalKind TypeParamKind(this MethodInfo method, N1 n)
+            => (method.IsGenericMethod ? method.GetGenericArguments() : array<Type>()).FirstOrDefault()?.Kind() ?? PrimalKind.None;
+
     }
 }

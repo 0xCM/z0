@@ -12,7 +12,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class Byte256 : CodeGenerator
+    public class Byte256 
     {
         char MakeBitChar(byte src, int pos)
             => bit.test(src, pos) ? '1' : '0';

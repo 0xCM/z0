@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The vector width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), NatOp, PrimalClosures(PrimalKind.All)]
         public static Vector128<T> vones<T>(N128 n, T t = default)
             where T : unmanaged
                 => ginx.veq(default(Vector128<T>), default(Vector128<T>));
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The vector width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), NatOp, PrimalClosures(PrimalKind.All)]
         public static Vector256<T> vones<T>(N256 n, T t = default)
             where T : unmanaged
                 => ginx.veq(default(Vector256<T>), default(Vector256<T>));

@@ -16,10 +16,18 @@ namespace Z0
 
     public class t_asm_checks : t_asm<t_asm_checks>, IDisposable
     {           
-
-
         internal void RunExplicit()
         {
+
+        }
+
+        public void datares()
+        {
+            //Verifies that the "GetBytes" function doesn't return
+            //a copy of the data but rather a refererence to the
+            //data that exists in memory as a resource
+            foreach(var d in Data.GetDescriptions())
+                Claim.eq(d.Location, location(d.GetBytes()));
 
         }
 
@@ -127,7 +135,7 @@ namespace Z0
 
         public void vector_bitlogic_match()
         {
-            var names = array("vxor", "vand", "vor", "vnor", "vxnor", "vnand");
+            var names = array("vxor", "vand", "vor", "vnor", "vxnor", "vnand", "vcimpl");
             var kinds = PrimalKind.Integers.Distinct();
             var widths = array(FixedWidth.W128, FixedWidth.W256);
             foreach(var n in names)
@@ -136,9 +144,13 @@ namespace Z0
                 vector_match(n, w, k);                        
         }
 
+        IEnumerable<string> PrimalBitLogicOps
+            => items("and", "or", "xor", "nand", "nor", "xnor",
+                "impl","nonimpl", "cimpl", "cnonimpl");
+
         public void primal_bitlogic_match()
         {
-            var names = array("and", "or", "xor", "nand", "nor", "xnor","impl","noniml");
+            var names = PrimalBitLogicOps;
             var kinds = PrimalKind.Integers.Distinct();
             var widths = array(FixedWidth.W8, FixedWidth.W16, FixedWidth.W32, FixedWidth.W64);
             foreach(var n in names)
@@ -156,7 +168,7 @@ namespace Z0
             var gId = Moniker.define(name, kind, true);
 
             var dAsm = AsmArchive.Define(dSrc).ReadCode(dId).OnNone(() => Trace($"{dId} not found"));
-            var gAsm = AsmArchive.Define(gSrc).ReadCode(gId).OnNone(() => Trace($"{gId} not found"));;
+            var gAsm = AsmArchive.Define(gSrc).ReadCode(gId).OnNone(() => Trace($"{gId} not found"));
 
             var success = from d in dAsm
                           from g in gAsm
@@ -174,8 +186,8 @@ namespace Z0
             var dId = Moniker.define(name, w, kind, false);
             var gId = Moniker.define(name, w, kind, true);
 
-            var dAsm = AsmArchive.Define(dSrc).ReadCode(dId);
-            var gAsm = AsmArchive.Define(gSrc).ReadCode(gId);
+            var dAsm = AsmArchive.Define(dSrc).ReadCode(dId).OnNone(() => Trace($"{dId} not found"));
+            var gAsm = AsmArchive.Define(gSrc).ReadCode(gId).OnNone(() => Trace($"{gId} not found"));
 
             var success = from d in dAsm
                           from g in gAsm

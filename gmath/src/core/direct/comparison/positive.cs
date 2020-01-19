@@ -15,7 +15,7 @@ namespace Z0
         /// Returns true if the source value is greater than zero, false otherwise
         /// </summary>
         /// <param name="a">The value to inspect</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit positive(sbyte a)
             => a > 0;
 
@@ -23,7 +23,7 @@ namespace Z0
         /// Returns true if the source value is greater than zero, false otherwise
         /// </summary>
         /// <param name="a">The value to inspect</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit positive(byte a)
             => a > 0;
 
@@ -31,7 +31,7 @@ namespace Z0
         /// Returns true if the source value is greater than zero, false otherwise
         /// </summary>
         /// <param name="a">The value to inspect</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit positive(short a)
             => a > 0;
 
@@ -39,7 +39,7 @@ namespace Z0
         /// Returns true if the source value is greater than zero, false otherwise
         /// </summary>
         /// <param name="a">The value to inspect</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit positive(ushort a)
             => a > 0;
 
@@ -47,7 +47,7 @@ namespace Z0
         /// Returns true if the source value is greater than zero, false otherwise
         /// </summary>
         /// <param name="a">The value to inspect</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit positive(int a)
             => a > 0;
 
@@ -55,7 +55,7 @@ namespace Z0
         /// Returns true if the source value is greater than zero, false otherwise
         /// </summary>
         /// <param name="a">The value to inspect</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit positive(uint a)
             => a > 0;
 
@@ -63,7 +63,7 @@ namespace Z0
         /// Returns true if the source value is greater than zero, false otherwise
         /// </summary>
         /// <param name="a">The value to inspect</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit positive(long a)
             => a > 0;
 
@@ -71,7 +71,7 @@ namespace Z0
         /// Returns true if the source value is greater than zero, false otherwise
         /// </summary>
         /// <param name="a">The value to inspect</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit positive(ulong a)
             => a > 0;
 
@@ -79,7 +79,7 @@ namespace Z0
         /// Returns true if the source value is greater than zero, false otherwise
         /// </summary>
         /// <param name="a">The value to inspect</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit positive(float a)
             => a > 0;
 
@@ -87,7 +87,7 @@ namespace Z0
         /// Returns true if the source value is greater than zero, false otherwise
         /// </summary>
         /// <param name="a">The value to inspect</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit positive(double a)
             => a > 0;
     }

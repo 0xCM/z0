@@ -226,16 +226,13 @@ partial class zfunc
         => $"{c1}{s1}{c2}{s2}{c3}{s3}{c4}{s4}";
 
     
-    /// <summary>
-    /// Concatenates three characters followed by an arbitrary numbe4 of strings
-    /// </summary>
-    /// <param name="c1">The first character</param>
-    /// <param name="c2">The second character</param>
-    /// <param name="c3">The third character</param>
-    /// <param name="items">The trailing content</param>
     [MethodImpl(Inline)]
     public static string concat(char c1, char c2, char c3, params string[] items)
         => $"{c1}{c2}{c3}"  + concat(items);
+
+    [MethodImpl(Inline)]
+    public static string concat(char c1, char c2, char c3, char c4, params string[] items)
+        => $"{c1}{c2}{c3}{c4}"  + concat(items);
 
     [MethodImpl(Inline)]
     public static string concat(string s1, char c1, char c2, char c3, params string[] items)
@@ -248,6 +245,10 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static string concat(char c1, string s, char c2, params string[] items)
         => $"{c1}{s}{c2}" + concat(items);
+
+    [MethodImpl(Inline)]
+    public static string concat(char c1, char c2, string s, char c3, params string[] items)
+        => $"{c1}{c2}{s}{c3}" + concat(items);
 
     [MethodImpl(Inline)]
     public static string concat(string s1, params char[] items)

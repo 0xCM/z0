@@ -1,42 +1,49 @@
-; 2020-01-16 19:14:10:563
-; function: VectorKind:uint vkind_128x32u()
+; 2020-01-18 18:18:34:489
+; VectorKind:uint vkind_128x32u()
 ; static ReadOnlySpan<byte> vkind_128x32uBytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x80,0x00,0x10,0x20,0xC3};
+; 2020-01-18 18:18:34:489
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,20100080h                       ; MOV(Mov_r32_imm32) [EAX,20100080h:imm32]   encoding(5 bytes) = b8 80 00 10 20
 000ah ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: VectorKind:uint vkind_256x32u()
+; VectorKind:uint vkind_256x32u()
 ; static ReadOnlySpan<byte> vkind_256x32uBytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x00,0x01,0x10,0x20,0xC3};
+; 2020-01-18 18:18:34:489
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,20100100h                       ; MOV(Mov_r32_imm32) [EAX,20100100h:imm32]   encoding(5 bytes) = b8 00 01 10 20
 000ah ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: BlockKind:uint bkind_256x32u()
+; BlockKind:uint bkind_256x32u()
 ; static ReadOnlySpan<byte> bkind_256x32uBytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x00,0x01,0x10,0x20,0xC3};
+; 2020-01-18 18:18:34:489
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,20100100h                       ; MOV(Mov_r32_imm32) [EAX,20100100h:imm32]   encoding(5 bytes) = b8 00 01 10 20
 000ah ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: PrimalKind:uint pkind_8u()
+; PrimalKind:uint pkind_8u()
 ; static ReadOnlySpan<byte> pkind_8uBytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x08,0x00,0x01,0x20,0xC3};
+; 2020-01-18 18:18:34:489
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,20010008h                       ; MOV(Mov_r32_imm32) [EAX,20010008h:imm32]   encoding(5 bytes) = b8 08 00 01 20
 000ah ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: PrimalKind:uint pkind_32u()
+; PrimalKind:uint pkind_32u()
 ; static ReadOnlySpan<byte> pkind_32uBytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x20,0x00,0x10,0x20,0xC3};
+; 2020-01-18 18:18:34:489
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,20100020h                       ; MOV(Mov_r32_imm32) [EAX,20100020h:imm32]   encoding(5 bytes) = b8 20 00 10 20
 000ah ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: PrimalKind:uint pkind_32i()
+; PrimalKind:uint pkind_32i()
 ; static ReadOnlySpan<byte> pkind_32iBytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x20,0x00,0x20,0x80,0xC3};
+; 2020-01-18 18:18:34:489
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,80200020h                       ; MOV(Mov_r32_imm32) [EAX,80200020h:imm32]   encoding(5 bytes) = b8 20 00 20 80
 000ah ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Vector128<byte> ones_128x8u()
+; Vector128<byte> ones_128x8u()
 ; static ReadOnlySpan<byte> ones_128x8uBytes => new byte[25]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF8,0x57,0xC0,0xC5,0xF0,0x57,0xC9,0xC5,0xF9,0x74,0xC1,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+; 2020-01-18 18:18:34:489
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
 0005h vxorps xmm0,xmm0,xmm0                   ; VXORPS(VEX_Vxorps_xmm_xmm_xmmm128) [XMM0,XMM0,XMM0] encoding(VEX, 4 bytes) = c5 f8 57 c0
@@ -46,8 +53,9 @@
 0015h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
 0018h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Vector128<ulong> ones_128x64u()
+; Vector128<ulong> ones_128x64u()
 ; static ReadOnlySpan<byte> ones_128x64uBytes => new byte[26]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF8,0x57,0xC0,0xC5,0xF0,0x57,0xC9,0xC4,0xE2,0x79,0x29,0xC1,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+; 2020-01-18 18:18:34:489
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
 0005h vxorps xmm0,xmm0,xmm0                   ; VXORPS(VEX_Vxorps_xmm_xmm_xmmm128) [XMM0,XMM0,XMM0] encoding(VEX, 4 bytes) = c5 f8 57 c0
@@ -57,8 +65,9 @@
 0016h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
 0019h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Vector256<byte> ones_256x8u()
+; Vector256<byte> ones_256x8u()
 ; static ReadOnlySpan<byte> ones_256x8uBytes => new byte[28]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFC,0x57,0xC0,0xC5,0xF4,0x57,0xC9,0xC5,0xFD,0x74,0xC1,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
+; 2020-01-18 18:18:34:489
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
 0005h vxorps ymm0,ymm0,ymm0                   ; VXORPS(VEX_Vxorps_ymm_ymm_ymmm256) [YMM0,YMM0,YMM0] encoding(VEX, 4 bytes) = c5 fc 57 c0
@@ -69,8 +78,9 @@
 0018h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 001bh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Vector256<ulong> ones_256x64u()
+; Vector256<ulong> ones_256x64u()
 ; static ReadOnlySpan<byte> ones_256x64uBytes => new byte[29]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFC,0x57,0xC0,0xC5,0xF4,0x57,0xC9,0xC4,0xE2,0x7D,0x29,0xC1,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
+; 2020-01-18 18:18:34:489
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
 0005h vxorps ymm0,ymm0,ymm0                   ; VXORPS(VEX_Vxorps_ymm_ymm_ymmm256) [YMM0,YMM0,YMM0] encoding(VEX, 4 bytes) = c5 fc 57 c0
@@ -81,8 +91,9 @@
 0019h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 001ch ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Vector256<double> ones_256x64f()
+; Vector256<double> ones_256x64f()
 ; static ReadOnlySpan<byte> ones_256x64fBytes => new byte[29]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFC,0x57,0xC0,0xC5,0xF4,0x57,0xC9,0xC5,0xFD,0xC2,0xC1,0x08,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
+; 2020-01-18 18:18:34:489
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
 0005h vxorps ymm0,ymm0,ymm0                   ; VXORPS(VEX_Vxorps_ymm_ymm_ymmm256) [YMM0,YMM0,YMM0] encoding(VEX, 4 bytes) = c5 fc 57 c0
@@ -93,30 +104,33 @@
 0019h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 001ch ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Vector256<byte> pattern_lanemerge_256x8u()
-; static ReadOnlySpan<byte> pattern_lanemerge_256x8uBytes => new byte[30]{0xC5,0xF8,0x77,0x66,0x90,0x48,0xB8,0xBD,0x92,0x77,0xC6,0x2A,0x01,0x00,0x00,0xC5,0xFF,0xF0,0x00,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
+; Vector256<byte> pattern_lanemerge_256x8u()
+; static ReadOnlySpan<byte> pattern_lanemerge_256x8uBytes => new byte[30]{0xC5,0xF8,0x77,0x66,0x90,0x48,0xB8,0xB9,0x82,0xE9,0x69,0x59,0x02,0x00,0x00,0xC5,0xFF,0xF0,0x00,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
+; 2020-01-18 18:18:34:489
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
-0005h mov rax,12AC67792BDh                    ; MOV(Mov_r64_imm64) [RAX,12ac67792bdh:imm64] encoding(10 bytes) = 48 b8 bd 92 77 c6 2a 01 00 00
+0005h mov rax,25969E982B9h                    ; MOV(Mov_r64_imm64) [RAX,25969e982b9h:imm64] encoding(10 bytes) = 48 b8 b9 82 e9 69 59 02 00 00
 000fh vlddqu ymm0,ymmword ptr [rax]           ; VLDDQU(VEX_Vlddqu_ymm_m256) [YMM0,mem(UInt256,RAX:br,:sr)] encoding(VEX, 4 bytes) = c5 ff f0 00
 0013h vmovupd [rcx],ymm0                      ; VMOVUPD(VEX_Vmovupd_ymmm256_ymm) [mem(Packed256_Float64,RCX:br,:sr),YMM0] encoding(VEX, 4 bytes) = c5 fd 11 01
 0017h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
 001ah vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 001dh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Vector256<ushort> pattern_lanemerge_256x16u()
-; static ReadOnlySpan<byte> pattern_lanemerge_256x16uBytes => new byte[30]{0xC5,0xF8,0x77,0x66,0x90,0x48,0xB8,0x8D,0x94,0x77,0xC6,0x2A,0x01,0x00,0x00,0xC5,0xFF,0xF0,0x00,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
+; Vector256<ushort> pattern_lanemerge_256x16u()
+; static ReadOnlySpan<byte> pattern_lanemerge_256x16uBytes => new byte[30]{0xC5,0xF8,0x77,0x66,0x90,0x48,0xB8,0x39,0x83,0xE9,0x69,0x59,0x02,0x00,0x00,0xC5,0xFF,0xF0,0x00,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
+; 2020-01-18 18:18:34:489
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
-0005h mov rax,12AC677948Dh                    ; MOV(Mov_r64_imm64) [RAX,12ac677948dh:imm64] encoding(10 bytes) = 48 b8 8d 94 77 c6 2a 01 00 00
+0005h mov rax,25969E98339h                    ; MOV(Mov_r64_imm64) [RAX,25969e98339h:imm64] encoding(10 bytes) = 48 b8 39 83 e9 69 59 02 00 00
 000fh vlddqu ymm0,ymmword ptr [rax]           ; VLDDQU(VEX_Vlddqu_ymm_m256) [YMM0,mem(UInt256,RAX:br,:sr)] encoding(VEX, 4 bytes) = c5 ff f0 00
 0013h vmovupd [rcx],ymm0                      ; VMOVUPD(VEX_Vmovupd_ymmm256_ymm) [mem(Packed256_Float64,RCX:br,:sr),YMM0] encoding(VEX, 4 bytes) = c5 fd 11 01
 0017h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
 001ah vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 001dh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Vector128<byte> makemask_d128x8u(ushort src)
+; Vector128<byte> makemask_d128x8u(ushort src)
 ; static ReadOnlySpan<byte> makemask_d128x8uBytes => new byte[56]{0xC5,0xF8,0x77,0x66,0x90,0x0F,0xB7,0xC2,0x0F,0xB6,0xD0,0x49,0xB8,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0xC4,0xC2,0xEB,0xF5,0xD0,0xC4,0xE1,0xF9,0x6E,0xC2,0xC1,0xE8,0x08,0x0F,0xB6,0xC0,0xC4,0xC2,0xFB,0xF5,0xC0,0xC4,0xE3,0xF9,0x22,0xC0,0x01,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+; 2020-01-18 18:18:34:489
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
 0005h movzx eax,dx                            ; MOVZX(Movzx_r32_rm16) [EAX,DX]             encoding(3 bytes) = 0f b7 c2
@@ -132,8 +146,9 @@
 0034h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
 0037h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Vector256<byte> makemask_d256x8u(uint src)
+; Vector256<byte> makemask_d256x8u(uint src)
 ; static ReadOnlySpan<byte> makemask_d256x8uBytes => new byte[112]{0xC5,0xF8,0x77,0x66,0x90,0x0F,0xB7,0xC2,0x44,0x0F,0xB6,0xC0,0x49,0xB9,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0xC4,0x42,0xBB,0xF5,0xC1,0xC4,0xC1,0xF9,0x6E,0xC0,0xC1,0xE8,0x08,0x0F,0xB6,0xC0,0xC4,0xC2,0xFB,0xF5,0xC1,0xC4,0xE3,0xF9,0x22,0xC0,0x01,0xC1,0xEA,0x10,0x0F,0xB7,0xC2,0x0F,0xB6,0xD0,0xC4,0xC2,0xEB,0xF5,0xD1,0xC4,0xE1,0xF9,0x6E,0xCA,0xC1,0xE8,0x08,0x0F,0xB6,0xC0,0xC4,0xC2,0xFB,0xF5,0xC1,0xC4,0xE3,0xF1,0x22,0xC8,0x01,0xC5,0xEC,0x57,0xD2,0xC4,0xE3,0x6D,0x38,0xC0,0x00,0xC4,0xE3,0x7D,0x38,0xC1,0x01,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
+; 2020-01-18 18:18:34:490
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
 0005h movzx eax,dx                            ; MOVZX(Movzx_r32_rm16) [EAX,DX]             encoding(3 bytes) = 0f b7 c2
@@ -162,8 +177,9 @@
 006ch vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 006fh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Vector128<byte> maskmask_d128x8u_index4(ushort src)
+; Vector128<byte> maskmask_d128x8u_index4(ushort src)
 ; static ReadOnlySpan<byte> maskmask_d128x8u_index4Bytes => new byte[56]{0xC5,0xF8,0x77,0x66,0x90,0x0F,0xB7,0xC2,0x0F,0xB6,0xD0,0x49,0xB8,0x10,0x10,0x10,0x10,0x10,0x10,0x10,0x10,0xC4,0xC2,0xEB,0xF5,0xD0,0xC4,0xE1,0xF9,0x6E,0xC2,0xC1,0xE8,0x08,0x0F,0xB6,0xC0,0xC4,0xC2,0xFB,0xF5,0xC0,0xC4,0xE3,0xF9,0x22,0xC0,0x01,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+; 2020-01-18 18:18:34:490
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
 0005h movzx eax,dx                            ; MOVZX(Movzx_r32_rm16) [EAX,DX]             encoding(3 bytes) = 0f b7 c2
@@ -179,8 +195,9 @@
 0034h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
 0037h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Vector256<byte> maskmask_d256x8u_index3(uint src)
+; Vector256<byte> maskmask_d256x8u_index3(uint src)
 ; static ReadOnlySpan<byte> maskmask_d256x8u_index3Bytes => new byte[109]{0xC5,0xF8,0x77,0x66,0x90,0x0F,0xB6,0xC2,0x49,0xB8,0x08,0x08,0x08,0x08,0x08,0x08,0x08,0x08,0xC4,0xC2,0xFB,0xF5,0xC0,0xC4,0xE1,0xF9,0x6E,0xC0,0x8B,0xC2,0xC1,0xE8,0x08,0x0F,0xB6,0xC0,0xC4,0xC2,0xFB,0xF5,0xC0,0xC4,0xE3,0xF9,0x22,0xC0,0x01,0x8B,0xC2,0xC1,0xE8,0x10,0x0F,0xB6,0xC0,0xC4,0xC2,0xFB,0xF5,0xC0,0xC4,0xE1,0xF9,0x6E,0xC8,0xC1,0xEA,0x18,0x0F,0xB6,0xC2,0xC4,0xC2,0xFB,0xF5,0xC0,0xC4,0xE3,0xF1,0x22,0xC8,0x01,0xC5,0xEC,0x57,0xD2,0xC4,0xE3,0x6D,0x38,0xC0,0x00,0xC4,0xE3,0x7D,0x38,0xC1,0x01,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
+; 2020-01-18 18:18:34:490
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
 0005h movzx eax,dl                            ; MOVZX(Movzx_r32_rm8) [EAX,DL]              encoding(3 bytes) = 0f b6 c2
@@ -209,8 +226,9 @@
 0069h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 006ch ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Vector128<byte> makemask_d128x8u_FCFC()
+; Vector128<byte> makemask_d128x8u_FCFC()
 ; static ReadOnlySpan<byte> makemask_d128x8u_FCFCBytes => new byte[54]{0xC5,0xF8,0x77,0x66,0x90,0xB8,0xFC,0x00,0x00,0x00,0x48,0xBA,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0xC4,0xE2,0xFB,0xF5,0xC2,0xC4,0xE1,0xF9,0x6E,0xC0,0xB8,0xFC,0x00,0x00,0x00,0xC4,0xE2,0xFB,0xF5,0xC2,0xC4,0xE3,0xF9,0x22,0xC0,0x01,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+; 2020-01-18 18:18:34:490
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
 0005h mov eax,0FCh                            ; MOV(Mov_r32_imm32) [EAX,fch:imm32]         encoding(5 bytes) = b8 fc 00 00 00
@@ -224,8 +242,9 @@
 0032h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
 0035h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Vector256<byte> makemask_d256x8u_FAFAFAFA()
+; Vector256<byte> makemask_d256x8u_FAFAFAFA()
 ; static ReadOnlySpan<byte> makemask_d256x8u_FAFAFAFABytes => new byte[104]{0xC5,0xF8,0x77,0x66,0x90,0xB8,0xFA,0x00,0x00,0x00,0x48,0xBA,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0xC4,0xE2,0xFB,0xF5,0xC2,0xC4,0xE1,0xF9,0x6E,0xC0,0xB8,0xFA,0x00,0x00,0x00,0xC4,0xE2,0xFB,0xF5,0xC2,0xC4,0xE3,0xF9,0x22,0xC0,0x01,0xB8,0xFA,0x00,0x00,0x00,0xC4,0xE2,0xFB,0xF5,0xC2,0xC4,0xE1,0xF9,0x6E,0xC8,0xB8,0xFA,0x00,0x00,0x00,0xC4,0xE2,0xFB,0xF5,0xC2,0xC4,0xE3,0xF1,0x22,0xC8,0x01,0xC5,0xEC,0x57,0xD2,0xC4,0xE3,0x6D,0x38,0xC0,0x00,0xC4,0xE3,0x7D,0x38,0xC1,0x01,0xC5,0xFD,0x11,0x01,0x48,0x8B,0xC1,0xC5,0xF8,0x77,0xC3};
+; 2020-01-18 18:18:34:490
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
 0005h mov eax,0FAh                            ; MOV(Mov_r32_imm32) [EAX,fah:imm32]         encoding(5 bytes) = b8 fa 00 00 00

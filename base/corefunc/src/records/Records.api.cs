@@ -23,8 +23,8 @@ namespace Z0
         /// <param name="Position">The ordinal position</param>
         /// <param name="Offset">The struct layout offset</param>
         /// <param name="FieldType">The assembly-qualified field type name</param>
-        public static FieldSpec DefineField(string FieldName, int Position, ByteSize Offset, string FieldType)
-            => new FieldSpec(FieldName, Position, Offset, FieldType);
+        public static RecordField DefineField(string FieldName, int Position, ByteSize Offset, string FieldType)
+            => new RecordField(FieldName, Position, Offset, FieldType);
 
         /// <summary>
         /// Defines a record
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="Namespace">The enclosing namespace</param>
         /// <param name="TypeName">The name of the type, i.e. the simple type name that does not include the namespece</param>
         /// <param name="Fields">The record fields</param>
-        public static RecordSpec DefineRecord(string Namespace, string TypeName, params FieldSpec[] Fields)
+        public static RecordSpec DefineRecord(string Namespace, string TypeName, params RecordField[] Fields)
             => new RecordSpec(Namespace, TypeName, Fields);
 
         public static IReadOnlyList<string> GetHeaders<T>()
@@ -71,7 +71,7 @@ namespace Z0
             return t;
         }
 
-        static FieldBuilder DefineField(this TypeBuilder tb, FieldSpec spec)
+        static FieldBuilder DefineField(this TypeBuilder tb, RecordField spec)
         {            
             
             var fb = tb.DefineField(spec.FieldName,Type.GetType(spec.FieldType), FieldAttributes.Public);

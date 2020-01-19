@@ -22,17 +22,19 @@ namespace Z0
             => DumpFolder + (FileName.Define(label) + FileExtension.Define("asm"));
 
 
-        static void Disassemble(bool asm, bool cil, params Type[] types)
+        static void Deconstruct(bool asm, bool cil, params Type[] types)
         {
             foreach(var t in types)
             {
-                var name = $"{t.DisplayName()}";
+                var deconstructed = Deconstructor.Deconstruct(t);
+
                 if(asm)
                 {
                     var dstPath = AsmCodeEmitter.OutPath(DumpFolder, t.DisplayName());
                     var emitter = AsmCodeEmitter.Create(dstPath);
-                    var functions = AsmFunction.from(Deconstructor.Deconstruct(t));
-                    emitter.EmitAsm(functions,false);                    
+                    emitter.EmitAsm(AsmFunction.from(deconstructed),false);
+                    // var functions = AsmFunction.from(Deconstructor.Deconstruct(t));
+                    // emitter.EmitAsm(functions,false);                    
                 }
 
                 if(cil)
@@ -41,7 +43,7 @@ namespace Z0
         }
 
 
-        static void Disassemble<T>(IDeconstructable<T> src)
+        static void Deconstruct<T>(IDeconstructable<T> src)
         {
             var deconstructed = Deconstructor.Deconstruct(typeof(T));
             deconstructed.EmitAsm(src.AsmTargetPath);
@@ -49,7 +51,7 @@ namespace Z0
         }
 
         void Disassemble(Type t)
-            => Disassemble(true, true, t);
+            => Deconstruct(true, true, t);
 
 
         void Disassemble(bool asm, bool cil)
@@ -57,7 +59,7 @@ namespace Z0
             
             //Deconstructor.Shred(typeof(math), typeof(fmath), typeof(Bits),typeof(dinx));
             
-            Disassemble(new ExperimentalScenarios());
+            Deconstruct(new ExperimentalScenarios());
             Disassemble(typeof(OC.msops));    
             Disassemble(typeof(OC.butterfly));    
             Disassemble(typeof(OC.bitmask));

@@ -15,7 +15,6 @@ namespace Z0
         static LogPaths Paths 
             => LogPaths.The;
             
-
         public static FilePath LogBenchmarks<R>(string basename, R[] records, LogWriteMode mode = LogWriteMode.Create, bool header = true, char delimiter = AsciSym.Pipe)
             where R : IRecord
         {

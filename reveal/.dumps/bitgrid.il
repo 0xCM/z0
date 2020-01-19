@@ -1,4 +1,4 @@
-// 2020-01-16 19:14:11:201
+// 2020-01-18 18:18:35:141
 // Id := 100663309, Name := System.Void Z0.bitgrid::part63x3(System.UInt64,Z0.NatSpan`2<Z0.N21,System.Byte>)
 // void part63x3(ulong src, NatSpan<N21,byte> dst)
 // Managed

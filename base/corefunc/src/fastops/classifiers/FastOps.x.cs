@@ -29,38 +29,34 @@ namespace Z0
         /// </summary>
         /// <param name="m">The source method</param>
         public static string FastOpName(this MethodInfo m )
-            => m.CustomAttribute<OpAttribute>().MapRequired(a => a.Name.IsBlank() ? m.Name : a.Name);
+            => m.CustomAttribute<OpAttribute>().MapValueOrElse(a => a.Name.IsBlank() ? m.Name : a.Name, () => m.Name);
 
         /// <summary>
         /// Extracts fastop metadata from a host type for non-generic operations
         /// </summary>
         /// <param name="host">The source type</param>
         public static IEnumerable<FastDirectInfo> FastOpDirect(this Type host)
-            => host.FastOpMethods().Where(m => m.IsNonGeneric()).Select(m => FastDirectInfo.Define(m.FastOpName(),m));
+            => host.FastOpMethods().NonGeneric().Select(m => FastDirectInfo.Define(m.FastOpName(),m));
 
         public static IEnumerable<FastDirectInfo> FastOpDirect(this IEnumerable<Type> hosts)
-            => from host in hosts
-                from op in host.FastOpDirect()
-                select op;
+            => hosts.SelectMany(h => h.FastOpDirect());
+
+        public static IEnumerable<PrimalKind> FastOpClosures(this MethodInfo m)
+            => m.CustomAttribute<PrimalClosuresAttribute>().MapValueOrElse(a => a.Closures.Distinct(), () => items<PrimalKind>());
 
         /// <summary>
         /// Extracts fastop metadata from a host type for generic operations
         /// </summary>
         /// <param name="host">The source type</param>
         public static IEnumerable<FastGenericInfo> FastOpGenerics(this Type host) 
-            => from m in host.FastOpMethods().Where(m => m.IsOpenGeneric())
-                let name = m.FastOpName()
-                let attrib = m.CustomAttribute<PrimalClosuresAttribute>()
-                where attrib.IsSome()
-                let closures = attrib.MapRequired(a => a.Closures).Distinct().ToArray()
+            => from m in host.FastOpMethods().OpenGeneric()
+                let closures = m.FastOpClosures().ToArray()
                 where closures.Length != 0 
                 let def = m.GetGenericMethodDefinition()                
                 let provider = Moniker.Provider
-                let moniker =   provider.Define(def.MakeGenericMethod(typeof(uint)))
-                let monikers = closures.Select(k => moniker.WithKind(k))
-                select FastGenericInfo.Define(name, def, monikers);
-
-        
+                let monikers = closures.Map(closure => provider.Define(def, closure))
+                select FastGenericInfo.Define(m.FastOpName(), def, monikers);
+                        
         public static IEnumerable<FastGenericInfo> FastOpGenerics(this IEnumerable<Type> hosts)
             => from host in hosts
                 from op in host.FastOpGenerics()
@@ -76,6 +72,15 @@ namespace Z0
                let t = r.PrimalKind.ToPrimalType()
                let m = op.Method.MakeGenericMethod(t)
                select paired(r,m);
+            
+        public static bool IsFastOp(this MethodInfo m)
+            => m.Attributed<OpAttribute>();
+        
+        public static bool IsSpanOp(this MethodInfo m)
+            => m.Attributed<SpanOpAttribute>();
+
+        public static bool IsNatOp(this MethodInfo m)
+            => m.Attributed<NatOpAttribute>();
 
     }
 }

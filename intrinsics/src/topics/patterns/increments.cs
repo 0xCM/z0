@@ -22,18 +22,18 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), NatOp, PrimalClosures(PrimalKind.Integers)]
         public static Vector128<T> vincrements<T>(N128 w)
             where T : unmanaged
        {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return load<T>(w,Inc128x8);
+                return load<T>(w,Inc128x8u);
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return load<T>(w,Inc128x16);
+                return load<T>(w,Inc128x16u);
             else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float))
-                return load<T>(w,Inc128x32);
+                return load<T>(w,Inc128x32u);
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return load<T>(w,Inc128x64);
+                return load<T>(w,Inc128x64u);
             else
                 throw unsupported<T>();
         }
@@ -43,18 +43,18 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), NatOp, PrimalClosures(PrimalKind.Integers)]
         public static Vector256<T> vincrements<T>(N256 w)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return load<T>(w,Inc256x8);
+                return load<T>(w,Inc256x8u);
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return load<T>(w,Inc256x16);
+                return load<T>(w,Inc256x16u);
             else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int)  || typeof(T) == typeof(float))
-                return load<T>(w,Inc256x32);
+                return load<T>(w,Inc256x32u);
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return load<T>(w,Inc256x64);
+                return load<T>(w,Inc256x64u);
             else
                 throw unsupported<T>();
         }
@@ -69,13 +69,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return load<T>(w,Inc512x8);
+                return load<T>(w,Inc512x8u);
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return load<T>(w,Inc512x16);
+                return load<T>(w,Inc512x16u);
             else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float))
-                return load<T>(w,Inc512x32);
+                return load<T>(w,Inc512x32u);
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return load<T>(w,Inc512x64);
+                return load<T>(w,Inc512x64u);
             else
                 throw unsupported<T>();
         }

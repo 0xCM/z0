@@ -15,36 +15,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T convert<T>(ushort src)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return converti<T>(src);
-            else if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return convertu<T>(src);
-            else
-                return convertx<T>(src);
-        }
+                => convert_u<T>(src);
 
         [MethodImpl(Inline)]
-        static T converti<T>(ushort src)
-        {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>((sbyte)src);
-            else if(typeof(T) == typeof(short))
-                return generic<T>((short)src);
-            else if(typeof(T) == typeof(int))
-                return generic<T>((int)src);
-            else  
-                return generic<T>((long)src);           
-        }
-
-        [MethodImpl(Inline)]
-        static T convertu<T>(ushort src)
+        static T convert_u<T>(ushort src)
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>((byte)src);
@@ -52,12 +27,30 @@ namespace Z0
                 return generic<T>((ushort)src);
             else if(typeof(T) == typeof(uint))
                 return generic<T>((uint)src);
-            else  
+            else if(typeof(T) == typeof(ulong)) 
                 return generic<T>((ulong)src);
+            else
+                return convert_i<T>(src);
         }
 
         [MethodImpl(Inline)]
-        static T convertx<T>(ushort src)
+        static T convert_i<T>(ushort src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>((sbyte)src);
+            else if(typeof(T) == typeof(short))
+                return generic<T>((short)src);
+            else if(typeof(T) == typeof(int))
+                return generic<T>((int)src);
+            else if(typeof(T) == typeof(long))
+                return generic<T>((long)src);           
+            else
+                return convert_x<T>(src);
+        }
+
+        [MethodImpl(Inline)]
+        static T convert_x<T>(ushort src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

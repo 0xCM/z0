@@ -1,58 +1,42 @@
-// 2020-01-16 19:14:09:573
-// Id := 100664146, Name := System.Int32 Z0.ExperimentalScenarios::devirt1()
-// int devirt1()
+// 2020-01-18 18:18:33:462
+// Id := 100664146, Name := System.UInt32 Z0.ExperimentalScenarios::xor_u32(System.UInt32,System.UInt32)
+// uint xor_u32(uint a, uint b)
 // Managed
-int devirt1()
+uint xor_u32(uint a, uint b)
 {
-    IL_0000: call System.Int32 Z0.Devirt1::Test()
-    IL_0005: ret
+    IL_0000: call Z0.OpKinds/Xor Z0.OpKinds::get_fXor()
+    IL_0005: ldarg.0
+    IL_0006: ldarg.1
+    IL_0007: call System.UInt32 Z0.GX::eval<System.UInt32,Z0.OpKinds/Xor>(Z0.OpKinds/Xor,System.UInt32,System.UInt32)
+    IL_000C: ret
 }
 
-// Id := 100664147, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ExperimentalScenarios::vbsrl_128x32u_0(System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
-// Vector128<uint> vbsrl_128x32u_0(Vector128<uint> x)
+// Id := 100664163, Name := System.Byte Z0.ExperimentalScenarios::opB_8u(System.Byte,System.Byte,System.Byte,System.Byte,System.Byte)
+// byte opB_8u(byte dl, byte r8b, byte r9b, byte rsp28, byte rsp30)
 // Managed
-Vector128<uint> vbsrl_128x32u_0(Vector128<uint> x)
+byte opB_8u(byte dl, byte r8b, byte r9b, byte rsp28, byte rsp30)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.0
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vbsrl(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Byte)
-    IL_0007: ret
-}
-
-// Id := 100664156, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.ExperimentalScenarios::vbsrl_128x32u_9(System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
-// Vector128<uint> vbsrl_128x32u_9(Vector128<uint> x)
-// Managed
-Vector128<uint> vbsrl_128x32u_9(Vector128<uint> x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.s 9
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vbsrl(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Byte)
-    IL_0008: ret
-}
-
-// Id := 100664169, Name := System.Void Z0.ExperimentalScenarios::opF_64u(System.UInt64,System.UInt64&,System.UInt64&,System.UInt64&)
-// void opF_64u(ulong rdx, out ulong r8, out ulong r9, out ulong rax)
-// Managed
-void opF_64u(ulong rdx, out ulong r8, out ulong r9, out ulong rax)
-{
-    IL_0000: ldarg.2
-    IL_0001: ldarg.1
-    IL_0002: ldc.i4.5
-    IL_0003: conv.i8
-    IL_0004: xor
-    IL_0005: stind.i8
+    IL_0000: ldarg.1
+    IL_0001: ldarg.2
+    IL_0002: mul
+    IL_0003: conv.u1
+    IL_0004: stloc.0
+    IL_0005: ldloc.0
     IL_0006: ldarg.3
-    IL_0007: ldarg.1
-    IL_0008: ldc.i4.7
-    IL_0009: conv.i8
-    IL_000A: or
-    IL_000B: stind.i8
-    IL_000C: ldarg.s rax
-    IL_000E: ldarg.1
-    IL_000F: ldc.i4.s 13
-    IL_0011: conv.i8
-    IL_0012: and
-    IL_0013: stind.i8
-    IL_0014: ret
+    IL_0007: xor
+    IL_0008: conv.u1
+    IL_0009: stloc.0
+    IL_000A: ldloc.0
+    IL_000B: ldarg.s rsp28
+    IL_000D: or
+    IL_000E: conv.u1
+    IL_000F: stloc.1
+    IL_0010: ldloc.1
+    IL_0011: ldarg.s rsp30
+    IL_0013: and
+    IL_0014: conv.u1
+    IL_0015: stloc.2
+    IL_0016: ldloc.2
+    IL_0017: ret
 }
 

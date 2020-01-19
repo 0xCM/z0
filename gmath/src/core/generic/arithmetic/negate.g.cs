@@ -22,20 +22,23 @@ namespace Z0
         [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
         public static T negate<T>(T src)
             where T : unmanaged
+            => negate_u(src);
+            
+        [MethodImpl(Inline)]
+        static T negate_u<T>(T src)
+            where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return negate_u(src);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
+            if(typeof(T) == typeof(byte))
+                return generic<T>(math.negate(uint8(src)));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(math.negate(uint16(src)));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(math.negate(uint32(src)));
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>(math.negate(uint64(src)));
+            else
                 return negate_i(src);
-            else 
-                return gfp.negate(src);
-        }           
+        }
 
         [MethodImpl(Inline)]
         static T negate_i<T>(T src)
@@ -47,23 +50,12 @@ namespace Z0
                  return generic<T>(math.negate(int16(src)));
             else if(typeof(T) == typeof(int))
                  return generic<T>(math.negate(int32(src)));
-            else
+            else if(typeof(T) == typeof(long))
                  return generic<T>(math.negate(int64(src)));
+            else 
+                return gfp.negate(src);
         }
 
-        [MethodImpl(Inline)]
-        static T negate_u<T>(T src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return generic<T>(math.negate(uint8(src)));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.negate(uint16(src)));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(math.negate(uint32(src)));
-            else 
-                return generic<T>(math.negate(uint64(src)));
-        }
 
     }
 }

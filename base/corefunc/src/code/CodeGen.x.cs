@@ -14,6 +14,84 @@ namespace Z0
 
     public static class CodeGenX
     {
+        static string FormatValue(object src)
+        {
+            if(src == null)
+                return "null";
+            
+            return src switch{
+                string x => enquote(x.ToString()),
+                char x => squote(x.ToString()),
+                object x => x.ToString()
+            };
+        }
+
+        static string Format(this FieldModel src)
+        {
+            var fmt = string.Empty;
+            var value = string.Empty;
+            
+            if(src.IsPublic())
+                fmt += "public ";
+
+            if(src.IsConst())
+                fmt += "const ";
+
+            fmt += src.Name;
+
+            if(src.IsConst())                
+                fmt += $" = {FormatValue(src.ConstValue.ValueOrDefault())}";
+
+            fmt += semicolon();
+            
+            return fmt;
+        }
+
+        public static string Format(this IMemberModel src)
+        {
+            return src switch{
+                FieldModel x => x.Format(),
+                _ => string.Empty
+            };
+        }
+        public static string Format(this ITypeModel src, int offset)
+        {
+            var indent = new string(AsciSym.Space, offset);
+            var fmt = text();
+
+            fmt.Append(indent);
+
+            if(src.IsPublic())
+                fmt.Append("public ");
+            
+            if(src.IsStatic())
+                fmt.Append("static ");
+            
+            if(src.IsConst())
+                fmt.Append("readonly ");
+            
+            if(src.IsStruct())
+                fmt.Append("struct");
+            else if(src.IsClass())
+                fmt.Append("class");            
+            else 
+                fmt.Append("unsupported");
+            
+            fmt.AppendLine();
+            fmt.Append(indent);
+            fmt.Append(lbrace());
+            
+            foreach(var m in src.Members)
+                fmt.AppendLine(concat(indent + indent, m.Format()));
+            
+            fmt.AppendLine();
+            fmt.Append(indent);
+            fmt.Append(rbrace());            
+
+            return fmt.ToString();                
+        }
+
+
         public static string FormatDataProp<T>(this Vector128<T> src, [Caller] string propname = null)
             where T : unmanaged
                 =>  InlineData.GenAccessor(src.ToSpan().AsBytes(), propname);
@@ -29,23 +107,6 @@ namespace Z0
         public static string FormatDataProp<T>(this ReadOnlySpan<T> src, [Caller] string propname = null)
             where T : unmanaged
                 =>  InlineData.GenAccessor(src.AsBytes(), propname);
-
-        /// <summary>
-        /// Formats a property declaration that specifies the span content
-        /// </summary>
-        /// <param name="src">The source data</param>
-        /// <param name="name">The property name</param>
-        /// <typeparam name="T">The serialization type</typeparam>
-        static string FormatProperty_other<T>(this ReadOnlySpan<T> src, string name)
-            where T : unmanaged
-        {
-            var bytes = src.AsBytes();
-            var decl = $"public static ReadOnlySpan<byte> {name}{bitsize<T>()}{Classified.primalsig(PrimalType.kind<T>())}";
-            var data = embrace(bytes.FormatHexBytes(sep: AsciSym.Comma, specifier:true));
-            var rhs = $"new byte[{bytes.Length}]" + data;
-            return $"{decl} => {rhs};";
-        }
-
     }
 
 }

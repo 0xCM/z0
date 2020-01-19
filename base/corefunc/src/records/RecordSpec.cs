@@ -11,10 +11,10 @@ namespace Z0
 
     public class RecordSpec
     {   
-        public static RecordSpec Define(string Namespace, string TypeName, params FieldSpec[] Fields)
+        public static RecordSpec Define(string Namespace, string TypeName, params RecordField[] Fields)
             => new RecordSpec(Namespace, TypeName, Fields);
         
-        public RecordSpec(string Namespace, string TypeName, params FieldSpec[] Fields)
+        public RecordSpec(string Namespace, string TypeName, params RecordField[] Fields)
         {
             this.Namespace = Namespace;
             this.TypeName = TypeName;
@@ -25,7 +25,7 @@ namespace Z0
         
         public string TypeName {get;}
 
-        public FieldSpec[] Fields {get;}
+        public RecordField[] Fields {get;}
 
     }
 

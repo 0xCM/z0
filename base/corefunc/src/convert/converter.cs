@@ -21,26 +21,28 @@ namespace Z0
 
     public static partial class Converter
     {
-
         [MethodImpl(Inline)]   
         public static T convert<S,T>(S src)
-            where T : unmanaged
             where S : unmanaged
-        {
-            if(typeof(S) == typeof(sbyte) ||
-                typeof(S) == typeof(short) ||
-                typeof(S) == typeof(int) ||
-                typeof(S) == typeof(long))
-                return convert_i<S,T>(src);
-            else if(typeof(S) == typeof(byte) ||
-                typeof(S) == typeof(ushort) ||
-                typeof(S) == typeof(uint) ||
-                typeof(S) == typeof(ulong))
-                return convert_u<S,T>(src);
-            else    
-                return convert_x<S,T>(src);
-        }
+            where T : unmanaged
+                => convert_u<S,T>(src);
         
+        [MethodImpl(Inline)]
+        static T convert_u<S,T>(S src)
+            where S : unmanaged
+            where T : unmanaged
+        {
+            if(typeof(S) == typeof(byte))
+                return convert<T>(uint8(src));
+            else if(typeof(S) == typeof(ushort))
+                return convert<T>(uint16(src));
+            else if(typeof(S) == typeof(uint))
+                return convert<T>(uint32(src));
+            else if(typeof(S) == typeof(ulong))
+                return convert<T>(uint64(src));
+            else
+                return convert_i<S,T>(src);
+        }
 
         [MethodImpl(Inline)]
         static T convert_i<S,T>(S src)
@@ -53,26 +55,11 @@ namespace Z0
                 return convert<T>(int16(src));
             else if(typeof(S) == typeof(int))
                 return convert<T>(int32(src));
-            else 
+            else if(typeof(S) == typeof(long))
                 return convert<T>(int64(src));
+            else 
+                return convert_x<S,T>(src);
         }
-
-
-        [MethodImpl(Inline)]
-        static T convert_u<S,T>(S src)
-            where S : unmanaged
-            where T : unmanaged
-        {
-            if(typeof(S) == typeof(byte))
-                return convert<T>(uint8(src));
-            else if(typeof(S) == typeof(ushort))
-                return convert<T>(uint16(src));
-            else if(typeof(S) == typeof(uint))
-                return convert<T>(uint32(src));
-            else
-                return convert<T>(uint64(src));
-        }
-
 
         [MethodImpl(Inline)]
         static T convert_x<S,T>(S src)
@@ -90,7 +77,7 @@ namespace Z0
         }
 
 
-        static T unhandled<S,T>(S src,[Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        static T unhandled<S,T>(S src, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
             Errors.Throw($"The conversion {typename<S>()} -> {typename<T>()} needed for the value {src} doesn't exist", caller,file,line);

@@ -29,7 +29,6 @@ namespace Z0
         public static IEnumerable<PrimalKind> IntegralKinds
             => UnsignedKinds.Union(SignedKinds);
 
-
         /// <summary>
         /// Specifies the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
         /// </summary>
@@ -292,6 +291,5 @@ namespace Z0
             else 
                 return TypeKind<TypeKind>.None;
         }
-
     }
 }

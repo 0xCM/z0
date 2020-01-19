@@ -230,11 +230,14 @@ namespace Z0
         {
             var s0 = (IsSegmented ? Metrics.Split(SegSep)[1] : Metrics);
             var s1 = HasSuffix ? s0.TakeBefore(SuffixSep) : s0;
-            var s2 = s1.Substring(0, s1.Length - 1);
-            if(int.TryParse(s2, out var n))
-                return n;
-            else 
-                return 0;
+            if(s1.Length > 0)
+            {
+                var s2 = s1.Substring(0, s1.Length - 1);
+                if(int.TryParse(s2, out var n))
+                    return n;
+            }
+            
+            return 0;
         }
 
         FixedWidth ParseSegmentedWidth()
@@ -271,6 +274,9 @@ namespace Z0
         public const char GenericIndicator = AsciLower.g;
 
         public const char VectorIndicator = AsciLower.v;
+
+        public const char NatIndicator = AsciLower.n;
+         
 
         public const string AsmIndicator = "asm";
 

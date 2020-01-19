@@ -14,9 +14,9 @@ namespace Z0
     /// <summary>
     /// Characterizes a record field
     /// </summary>
-    public class FieldSpec
+    public class RecordField
     {
-        public FieldSpec(string FieldName, int Position, ByteSize Offset, string FieldType)
+        public RecordField(string FieldName, int Position, ByteSize Offset, string FieldType)
         {
             this.FieldName = FieldName;
             this.Position = Position;
@@ -29,9 +29,6 @@ namespace Z0
         
         public ByteSize Offset {get;}
 
-        public string FieldType {get;}
-
-        
+        public string FieldType {get;}        
     }
-
 }

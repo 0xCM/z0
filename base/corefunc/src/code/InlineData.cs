@@ -10,11 +10,8 @@ namespace Z0
 
     using static zfunc;
 
-    public class InlineData : CodeGenerator
-    {
-        
-         
-
+    public class InlineData
+    {                
         public static string GenRandomData(ByteSize size)
         {
             var random = new Random();

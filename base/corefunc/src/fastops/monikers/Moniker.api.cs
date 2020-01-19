@@ -55,7 +55,8 @@ namespace Z0
                 => new Moniker($"{opname}_{w}{SegSep}{Classified.primalsig(k)}");
 
         /// <summary>
-        /// Defines a moniker of the form {opname}_{w}X{bitsize(k)}{u | i | f}{_asm} to identify an operation over a segmented type of bitwidth w over a primal kind k
+        /// Defines a moniker of the form {opname}_{w}X{bitsize(k)}{u | i | f}{_asm} to identify 
+        /// an operation over a segmented type of bitwidth w over a primal kind k
         /// </summary>
         /// <param name="opname">The base operator name/operator classifier</param>
         /// <param name="w">For segmented types, the total bit-width; otherwise 0</param>
@@ -74,7 +75,8 @@ namespace Z0
         }
 
         /// <summary>
-        /// Defines a moniker of the form {opname}_{w}X{bitsize(k)}{u | i | f}{_asm} to identify an operation over a segmented type of bitwidth w over a primal kind k
+        /// Defines a moniker of the form {opname}_{w}X{bitsize(k)}{u | i | f}{_asm} to identify 
+        /// an operation over a segmented type of bitwidth w over a primal kind k
         /// </summary>
         /// <param name="opname">The base operator name/operator classifier</param>
         /// <param name="w">The total bit-widht of the segmented type</param>

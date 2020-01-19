@@ -1,5 +1,5 @@
-// 2020-01-16 19:14:10:389
-// Id := 100664646, Name := System.Byte Z0.OpCodes.vblend::natcompute()
+// 2020-01-18 18:18:34:299
+// Id := 100664645, Name := System.Byte Z0.OpCodes.vblend::natcompute()
 // byte natcompute()
 // Managed
 byte natcompute()
@@ -12,7 +12,7 @@ byte natcompute()
     IL_0019: ret
 }
 
-// Id := 100664647, Name := Z0.Vector512`1<System.UInt16> Z0.OpCodes.vblend::vblendp_256x16u(System.Runtime.Intrinsics.Vector256`1<System.UInt16>,System.Runtime.Intrinsics.Vector256`1<System.UInt16>,System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
+// Id := 100664646, Name := Z0.Vector512`1<System.UInt16> Z0.OpCodes.vblend::vblendp_256x16u(System.Runtime.Intrinsics.Vector256`1<System.UInt16>,System.Runtime.Intrinsics.Vector256`1<System.UInt16>,System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
 // Vector512<ushort> vblendp_256x16u(Vector256<ushort> x, Vector256<ushort> y, Vector256<ushort> spec)
 // Managed
 Vector512<ushort> vblendp_256x16u(Vector256<ushort> x, Vector256<ushort> y, Vector256<ushort> spec)
@@ -24,7 +24,7 @@ Vector512<ushort> vblendp_256x16u(Vector256<ushort> x, Vector256<ushort> y, Vect
     IL_0008: ret
 }
 
-// Id := 100664648, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.OpCodes.vblend::vreverse_128x64u(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+// Id := 100664647, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.OpCodes.vblend::vreverse_128x64u(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
 // Vector128<ulong> vreverse_128x64u(Vector128<ulong> x)
 // Managed
 Vector128<ulong> vreverse_128x64u(Vector128<ulong> x)
@@ -34,7 +34,7 @@ Vector128<ulong> vreverse_128x64u(Vector128<ulong> x)
     IL_0006: ret
 }
 
-// Id := 100664649, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vblend::vreverse_128x8u(System.Runtime.Intrinsics.Vector128`1<System.Byte>)
+// Id := 100664648, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vblend::vreverse_128x8u(System.Runtime.Intrinsics.Vector128`1<System.Byte>)
 // Vector128<byte> vreverse_128x8u(Vector128<byte> x)
 // Managed
 Vector128<byte> vreverse_128x8u(Vector128<byte> x)
@@ -44,7 +44,7 @@ Vector128<byte> vreverse_128x8u(Vector128<byte> x)
     IL_0006: ret
 }
 
-// Id := 100664650, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vblend::vreverse_256x8u(System.Runtime.Intrinsics.Vector256`1<System.Byte>)
+// Id := 100664649, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vblend::vreverse_256x8u(System.Runtime.Intrinsics.Vector256`1<System.Byte>)
 // Vector256<byte> vreverse_256x8u(Vector256<byte> x)
 // Managed
 Vector256<byte> vreverse_256x8u(Vector256<byte> x)
@@ -54,7 +54,7 @@ Vector256<byte> vreverse_256x8u(Vector256<byte> x)
     IL_0006: ret
 }
 
-// Id := 100664651, Name := System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.OpCodes.vblend::vblend_128x16u_LLLLLLLL(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>)
+// Id := 100664650, Name := System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.OpCodes.vblend::vblend_128x16u_LLLLLLLL(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>)
 // Vector128<short> vblend_128x16u_LLLLLLLL(Vector128<short> x, Vector128<short> y)
 // Managed
 Vector128<short> vblend_128x16u_LLLLLLLL(Vector128<short> x, Vector128<short> y)
@@ -66,7 +66,7 @@ Vector128<short> vblend_128x16u_LLLLLLLL(Vector128<short> x, Vector128<short> y)
     IL_0008: ret
 }
 
-// Id := 100664652, Name := System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.OpCodes.vblend::vblend_128x16u_RRRRRRRR(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>)
+// Id := 100664651, Name := System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.OpCodes.vblend::vblend_128x16u_RRRRRRRR(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>)
 // Vector128<short> vblend_128x16u_RRRRRRRR(Vector128<short> x, Vector128<short> y)
 // Managed
 Vector128<short> vblend_128x16u_RRRRRRRR(Vector128<short> x, Vector128<short> y)
@@ -78,7 +78,7 @@ Vector128<short> vblend_128x16u_RRRRRRRR(Vector128<short> x, Vector128<short> y)
     IL_000C: ret
 }
 
-// Id := 100664653, Name := System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.OpCodes.vblend::vblend_128x16u_LLLLRRRR(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>)
+// Id := 100664652, Name := System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.OpCodes.vblend::vblend_128x16u_LLLLRRRR(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>)
 // Vector128<short> vblend_128x16u_LLLLRRRR(Vector128<short> x, Vector128<short> y)
 // Managed
 Vector128<short> vblend_128x16u_LLLLRRRR(Vector128<short> x, Vector128<short> y)
@@ -90,7 +90,7 @@ Vector128<short> vblend_128x16u_LLLLRRRR(Vector128<short> x, Vector128<short> y)
     IL_000C: ret
 }
 
-// Id := 100664654, Name := System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.OpCodes.vblend::vblend_128x16u_RRRRLLLL(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>)
+// Id := 100664653, Name := System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.OpCodes.vblend::vblend_128x16u_RRRRLLLL(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>)
 // Vector128<short> vblend_128x16u_RRRRLLLL(Vector128<short> x, Vector128<short> y)
 // Managed
 Vector128<short> vblend_128x16u_RRRRLLLL(Vector128<short> x, Vector128<short> y)
@@ -102,7 +102,7 @@ Vector128<short> vblend_128x16u_RRRRLLLL(Vector128<short> x, Vector128<short> y)
     IL_0009: ret
 }
 
-// Id := 100664655, Name := System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.OpCodes.vblend::vblend_128x16u_LRLRLRLR(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>)
+// Id := 100664654, Name := System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.OpCodes.vblend::vblend_128x16u_LRLRLRLR(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>)
 // Vector128<short> vblend_128x16u_LRLRLRLR(Vector128<short> x, Vector128<short> y)
 // Managed
 Vector128<short> vblend_128x16u_LRLRLRLR(Vector128<short> x, Vector128<short> y)
@@ -114,7 +114,7 @@ Vector128<short> vblend_128x16u_LRLRLRLR(Vector128<short> x, Vector128<short> y)
     IL_000C: ret
 }
 
-// Id := 100664656, Name := System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.OpCodes.vblend::vblend_128x16u_RLRLRLRL(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>)
+// Id := 100664655, Name := System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.OpCodes.vblend::vblend_128x16u_RLRLRLRL(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>)
 // Vector128<short> vblend_128x16u_RLRLRLRL(Vector128<short> x, Vector128<short> y)
 // Managed
 Vector128<short> vblend_128x16u_RLRLRLRL(Vector128<short> x, Vector128<short> y)

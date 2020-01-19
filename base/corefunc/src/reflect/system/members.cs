@@ -62,6 +62,7 @@ namespace Z0
             where T : MemberInfo
                 => src.Where(x => x.Name == name); 
 
+
         /// <summary>
         /// Selects the members with a name that exists within a supplied set
         /// </summary>

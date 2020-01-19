@@ -256,9 +256,7 @@ namespace Z0
         public static Vector256<ulong> vgt(Vector256<ulong> x, Vector256<ulong> y)
         {
             var mask = CpuVector.vbroadcast(n256,CmpMask64u);
-            var mx = vxor(x,mask).AsInt64();
-            var my = vxor(y,mask).AsInt64();
-            return CompareGreaterThan(mx,my).AsUInt64();
+            return v64u(CompareGreaterThan(v64i(vxor(x,mask)),v64i(vxor(y,mask))));
         }
 
         const byte CmpMask8u = 0x80;

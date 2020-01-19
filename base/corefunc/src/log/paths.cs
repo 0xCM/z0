@@ -12,20 +12,14 @@ namespace Z0
     {
         public static LogPaths The => default;
     
-        static LogSettings Settings
-            => LogSettings.Get();
+        static EnvConfig Settings
+            => EnvConfig.Get();
 
         long LogDate
             => Date.Today.ToDateKey();
 
         FileExtension DefaultExtension
             => FileExtension.Define("log");
-
-        /// <summary>
-        /// The root data folder
-        /// </summary>
-        public FolderPath DataRoot
-            => Settings.RootDataFolder;
 
         /// <summary>
         /// Gets the log folder for a specific area
@@ -73,6 +67,9 @@ namespace Z0
 
         public FileExtension AsmHexExt
             => FileExtension.Define("hex");
+
+        public FileExtension CsFileExt
+            => FileExtension.Define("cs");
 
         public FileExtension CilExt
             => FileExtension.Define("il");
@@ -158,41 +155,26 @@ namespace Z0
         public FilePath CilPath(Type t, Moniker m)
             => AsmDataDir(t) + CilFile(m);
 
+        public static FolderPath ApiSrcDir()
+            => Settings.ApiSrcDir();
+            
+        public static FolderPath ApiSrcDir(FolderName subject)
+            => Settings.ApiSrcDir(subject);
+
         public FilePath LogPath(LogArea area, string basename, FileExtension ext = null)
             => LogDir(area) + FileName.Define($"{basename}.{ext ?? DefaultExtension}");
 
         public FilePath LogPath(LogArea area, FolderName subdir, string basename, FileExtension ext = null)
             => LogDir(area, subdir) + FileName.Define($"{basename}.{ext ?? DefaultExtension}");
 
-        public FilePath LogPath(ILogTarget target, FileExtension ext = null)
-            => LogDir(target.Area) + FileName.Define($"{target.Name}.{ext ?? DefaultExtension}");
-
-        public FilePath LogPath(ILogTarget target, FolderName subdir, FileExtension ext = null)
-            => LogDir(target.Area,subdir) + FileName.Define($"{target.Name}.{ext ?? DefaultExtension}");
-
         public FilePath Timestamped(LogArea area, string basename, FileExtension ext = null)
             => LogDir(area) + FileName.Define($"{basename}.{LogDate}.{ext ?? DefaultExtension}");
-
-        public FilePath Timestamped(LogArea area, FolderName subdir, string basename,  FileExtension ext = null)
-            => LogDir(area,subdir) + FileName.Define($"{basename}.{LogDate}.{ext ?? DefaultExtension}");
-
-        FilePath LogPath(LogArea area, FileExtension ext, long timestamp)
-            => LogDir(area) + FileName.Define($"{area}.{timestamp}.{ext ?? DefaultExtension}");
-
-        FilePath LogPath(LogArea area, FolderName subdir, FileExtension ext, long timestamp)
-            => LogDir(area, subdir) + FileName.Define($"{timestamp}.{ext ?? DefaultExtension}");
 
         FilePath LogPath(LogArea area, string basename, FileExtension ext, long timestamp)
             => LogDir(area) + FileName.Define($"{basename}.{timestamp}.{ext ?? DefaultExtension}");
 
         FilePath LogPath(LogArea area, FolderName subdir, string basename, FileExtension ext, long timestamp)
             => LogDir(area, subdir) + FileName.Define($"{basename}.{timestamp}.{ext ?? DefaultExtension}");
-
-        FilePath LogPath(ILogTarget target, FileExtension ext, long timestamp)
-            => LogDir(target.Area) + FileName.Define($"{target.Name}.{timestamp}.{ext ?? DefaultExtension}");
-
-        FilePath LogPath(ILogTarget target, FolderName subdir,  FileExtension ext, long timestamp)
-            => LogDir(target.Area, subdir) + FileName.Define($"{target.Area}.{target.Name}.{timestamp}.{ext ?? DefaultExtension}");
 
         public FilePath UniqueLogPath(LogArea area, string basename,  FileExtension ext = null)
         {
@@ -208,38 +190,6 @@ namespace Z0
             var current = now();
             var elapsed = (long) (current - first).TotalMilliseconds;
             return LogPath(area, subdir, basename, ext, elapsed);
-        }
-
-        public FilePath UniqueLogPath(LogArea area, FileExtension ext = null)
-        {
-            var first = new DateTime(2019,1,1);
-            var current = now();
-            var elapsed = (long) (current - first).TotalMilliseconds;
-            return LogPath(area, ext, elapsed);
-        }
-
-        public FilePath UniqueLogPath(LogArea area, FolderName subdir, FileExtension ext = null)
-        {
-            var first = new DateTime(2019,1,1);
-            var current = now();
-            var elapsed = (long) (current - first).TotalMilliseconds;
-            return LogPath(area, subdir, ext, elapsed);
-        }
-
-        public FilePath UniqueLogPath(ILogTarget target, FileExtension ext = null)
-        {
-            var first = new DateTime(2019,1,1);
-            var current = now();
-            var elapsed = (long) (current - first).TotalMilliseconds;
-            return LogPath(target, ext, elapsed);
-        }
-
-        public FilePath UniqueLogPath(ILogTarget target, FolderName subdir, FileExtension ext = null)
-        {
-            var first = new DateTime(2019,1,1);
-            var current = now();
-            var elapsed = (long) (current - first).TotalMilliseconds;
-            return LogPath(target, subdir, ext, elapsed);
         }
     }
 }

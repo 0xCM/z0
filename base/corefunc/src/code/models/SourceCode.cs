@@ -9,11 +9,6 @@ namespace Z0
 
     using static zfunc;
 
-    public abstract class CodeGenerator
-    {
-
-    }
-
     public abstract class SourceCode
     {
         public string Text {get;}
@@ -26,7 +21,6 @@ namespace Z0
         
         public override string ToString()
             => Format();
-
     }
     
     public abstract class SourceCode<T> : SourceCode
@@ -38,5 +32,4 @@ namespace Z0
 
         }
     }
- 
 }

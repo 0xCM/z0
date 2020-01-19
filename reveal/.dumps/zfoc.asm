@@ -1,13 +1,15 @@
-; 2020-01-16 19:14:11:122
-; function: byte hexcode_parse(Char c)
-; static ReadOnlySpan<byte> hexcode_parseBytes => new byte[21]{0x0F,0x1F,0x44,0x00,0x00,0x0F,0xB7,0xC9,0x48,0xB8,0xD0,0x71,0x5E,0xC8,0xF7,0x7F,0x00,0x00,0x48,0xFF,0xE0};
+; 2020-01-18 18:18:35:069
+; byte hexcode_parse(Char c)
+; static ReadOnlySpan<byte> hexcode_parseBytes => new byte[21]{0x0F,0x1F,0x44,0x00,0x00,0x0F,0xB7,0xC9,0x48,0xB8,0xE0,0x85,0x5D,0xC8,0xF7,0x7F,0x00,0x00,0x48,0xFF,0xE0};
+; 2020-01-18 18:18:35:069
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h movzx ecx,cx                            ; MOVZX(Movzx_r32_rm16) [ECX,CX]             encoding(3 bytes) = 0f b7 c9
-0008h mov rax,7FF7C85E71D0h                   ; MOV(Mov_r64_imm64) [RAX,7ff7c85e71d0h:imm64] encoding(10 bytes) = 48 b8 d0 71 5e c8 f7 7f 00 00
+0008h mov rax,7FF7C85D85E0h                   ; MOV(Mov_r64_imm64) [RAX,7ff7c85d85e0h:imm64] encoding(10 bytes) = 48 b8 e0 85 5d c8 f7 7f 00 00
 0012h jmp rax                                 ; JMP(Jmp_rm64) [RAX]                        encoding(3 bytes) = 48 ff e0
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Pair<ulong> sub_128u_a(Pair<ulong> a, Pair<ulong> b)
+; Pair<ulong> sub_128u_a(Pair<ulong> a, Pair<ulong> b)
 ; static ReadOnlySpan<byte> sub_128u_aBytes => new byte[47]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0x02,0x48,0x8B,0x52,0x08,0x4C,0x8B,0xC8,0x4D,0x2B,0x08,0x49,0x3B,0xC1,0x0F,0x92,0xC0,0x0F,0xB6,0xC0,0x49,0x2B,0x50,0x08,0x8B,0xC0,0x48,0x2B,0xD0,0x4C,0x89,0x09,0x48,0x89,0x51,0x08,0x48,0x8B,0xC1,0xC3};
+; 2020-01-18 18:18:35:069
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,[rdx]                           ; MOV(Mov_r64_rm64) [RAX,mem(64u,RDX:br,:sr)] encoding(3 bytes) = 48 8b 02
 0008h mov rdx,[rdx+8]                         ; MOV(Mov_r64_rm64) [RDX,mem(64u,RDX:br,:sr)] encoding(4 bytes) = 48 8b 52 08
@@ -24,8 +26,9 @@
 002bh mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
 002eh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: void sub_128u_b(in ulong a, in ulong b, ref ulong c)
+; void sub_128u_b(in ulong a, in ulong b, ref ulong c)
 ; static ReadOnlySpan<byte> sub_128u_bBytes => new byte[47]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0x01,0x48,0x2B,0x02,0x49,0x89,0x00,0x48,0x8B,0x01,0x49,0x3B,0x00,0x0F,0x92,0xC0,0x0F,0xB6,0xC0,0x49,0x83,0xC0,0x08,0x48,0x8B,0x49,0x08,0x48,0x2B,0x4A,0x08,0x8B,0xC0,0x48,0x2B,0xC8,0x49,0x89,0x08,0xC3};
+; 2020-01-18 18:18:35:069
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,[rcx]                           ; MOV(Mov_r64_rm64) [RAX,mem(64u,RCX:br,:sr)] encoding(3 bytes) = 48 8b 01
 0008h sub rax,[rdx]                           ; SUB(Sub_r64_rm64) [RAX,mem(64u,RDX:br,:sr)] encoding(3 bytes) = 48 2b 02
@@ -42,8 +45,9 @@
 002bh mov [r8],rcx                            ; MOV(Mov_rm64_r64) [mem(64u,R8:br,:sr),RCX] encoding(3 bytes) = 49 89 08
 002eh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: void mul_128u(Pair<ulong> src, ref Pair<ulong> dst)
+; void mul_128u(Pair<ulong> src, ref Pair<ulong> dst)
 ; static ReadOnlySpan<byte> mul_128uBytes => new byte[41]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0x01,0x48,0x8B,0x49,0x08,0x48,0x89,0x54,0x24,0x10,0x4C,0x8B,0xC2,0x48,0x8B,0xD0,0xC4,0xE2,0xB3,0xF6,0xC1,0x4D,0x89,0x08,0x48,0x8B,0x54,0x24,0x10,0x48,0x89,0x42,0x08,0xC3};
+; 2020-01-18 18:18:35:069
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,[rcx]                           ; MOV(Mov_r64_rm64) [RAX,mem(64u,RCX:br,:sr)] encoding(3 bytes) = 48 8b 01
 0008h mov rcx,[rcx+8]                         ; MOV(Mov_r64_rm64) [RCX,mem(64u,RCX:br,:sr)] encoding(4 bytes) = 48 8b 49 08
@@ -56,8 +60,9 @@
 0024h mov [rdx+8],rax                         ; MOV(Mov_rm64_r64) [mem(64u,RDX:br,:sr),RAX] encoding(4 bytes) = 48 89 42 08
 0028h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Pair<ulong> add_128u(Pair<ulong> a, Pair<ulong> b)
+; Pair<ulong> add_128u(Pair<ulong> a, Pair<ulong> b)
 ; static ReadOnlySpan<byte> add_128uBytes => new byte[47]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0x02,0x48,0x8B,0x52,0x08,0x4C,0x8B,0xC8,0x4D,0x03,0x08,0x49,0x3B,0xC1,0x0F,0x97,0xC0,0x0F,0xB6,0xC0,0x49,0x03,0x50,0x08,0x8B,0xC0,0x48,0x03,0xC2,0x4C,0x89,0x09,0x48,0x89,0x41,0x08,0x48,0x8B,0xC1,0xC3};
+; 2020-01-18 18:18:35:069
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,[rdx]                           ; MOV(Mov_r64_rm64) [RAX,mem(64u,RDX:br,:sr)] encoding(3 bytes) = 48 8b 02
 0008h mov rdx,[rdx+8]                         ; MOV(Mov_r64_rm64) [RDX,mem(64u,RDX:br,:sr)] encoding(4 bytes) = 48 8b 52 08
@@ -74,8 +79,9 @@
 002bh mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
 002eh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Pair<ulong> xor_128u(Pair<ulong> a, Pair<ulong> b)
+; Pair<ulong> xor_128u(Pair<ulong> a, Pair<ulong> b)
 ; static ReadOnlySpan<byte> xor_128uBytes => new byte[30]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0x02,0x49,0x33,0x00,0x48,0x8B,0x52,0x08,0x49,0x33,0x50,0x08,0x48,0x89,0x01,0x48,0x89,0x51,0x08,0x48,0x8B,0xC1,0xC3};
+; 2020-01-18 18:18:35:069
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,[rdx]                           ; MOV(Mov_r64_rm64) [RAX,mem(64u,RDX:br,:sr)] encoding(3 bytes) = 48 8b 02
 0008h xor rax,[r8]                            ; XOR(Xor_r64_rm64) [RAX,mem(64u,R8:br,:sr)] encoding(3 bytes) = 49 33 00
@@ -86,8 +92,9 @@
 001ah mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
 001dh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Pair<ulong> xnor_128u(Pair<ulong> a, Pair<ulong> b)
+; Pair<ulong> xnor_128u(Pair<ulong> a, Pair<ulong> b)
 ; static ReadOnlySpan<byte> xnor_128uBytes => new byte[36]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0x02,0x49,0x33,0x00,0x48,0x8B,0x52,0x08,0x49,0x33,0x50,0x08,0x48,0xF7,0xD0,0x48,0xF7,0xD2,0x48,0x89,0x01,0x48,0x89,0x51,0x08,0x48,0x8B,0xC1,0xC3};
+; 2020-01-18 18:18:35:069
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,[rdx]                           ; MOV(Mov_r64_rm64) [RAX,mem(64u,RDX:br,:sr)] encoding(3 bytes) = 48 8b 02
 0008h xor rax,[r8]                            ; XOR(Xor_r64_rm64) [RAX,mem(64u,R8:br,:sr)] encoding(3 bytes) = 49 33 00
@@ -100,8 +107,9 @@
 0020h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
 0023h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Pair<ulong> negate_128u(Pair<ulong> a)
+; Pair<ulong> negate_128u(Pair<ulong> a)
 ; static ReadOnlySpan<byte> negate_128uBytes => new byte[45]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0x02,0x48,0x8B,0x52,0x08,0x48,0xF7,0xD0,0x48,0xF7,0xD2,0x4C,0x8D,0x40,0x01,0x49,0x3B,0xC0,0x0F,0x97,0xC0,0x0F,0xB6,0xC0,0x48,0x03,0xC2,0x4C,0x89,0x01,0x48,0x89,0x41,0x08,0x48,0x8B,0xC1,0xC3};
+; 2020-01-18 18:18:35:069
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,[rdx]                           ; MOV(Mov_r64_rm64) [RAX,mem(64u,RDX:br,:sr)] encoding(3 bytes) = 48 8b 02
 0008h mov rdx,[rdx+8]                         ; MOV(Mov_r64_rm64) [RDX,mem(64u,RDX:br,:sr)] encoding(4 bytes) = 48 8b 52 08
@@ -117,8 +125,9 @@
 0029h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
 002ch ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: ref Pair<ulong> inc_128u(ref Pair<ulong> a)
+; ref Pair<ulong> inc_128u(ref Pair<ulong> a)
 ; static ReadOnlySpan<byte> inc_128uBytes => new byte[41]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0x01,0x48,0x8D,0x50,0x01,0x48,0x3B,0xC2,0x0F,0x97,0xC0,0x0F,0xB6,0xC0,0x4C,0x8B,0x41,0x08,0x8B,0xC0,0x49,0x03,0xC0,0x48,0x89,0x11,0x48,0x89,0x41,0x08,0x48,0x8B,0xC1,0xC3};
+; 2020-01-18 18:18:35:069
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,[rcx]                           ; MOV(Mov_r64_rm64) [RAX,mem(64u,RCX:br,:sr)] encoding(3 bytes) = 48 8b 01
 0008h lea rdx,[rax+1]                         ; LEA(Lea_r64_m) [RDX,mem(Unknown,RAX:br,:sr)] encoding(4 bytes) = 48 8d 50 01
@@ -133,8 +142,9 @@
 0025h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
 0028h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Pair<ulong> srl_128u(Pair<ulong> a, int offset)
+; Pair<ulong> srl_128u(Pair<ulong> a, int offset)
 ; static ReadOnlySpan<byte> srl_128uBytes => new byte[106]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x4C,0x8B,0x0A,0x48,0x8B,0x52,0x08,0x41,0x83,0xF8,0x40,0x7C,0x20,0x41,0x81,0xF8,0x80,0x00,0x00,0x00,0x7C,0x08,0x45,0x33,0xD2,0x45,0x33,0xDB,0xEB,0x3C,0x41,0x8D,0x48,0xC0,0x49,0xD3,0xE9,0x4D,0x8B,0xD9,0x45,0x33,0xD2,0xEB,0x2D,0x45,0x8B,0xD0,0x41,0x83,0xE2,0x3F,0x41,0x8B,0xCA,0x4C,0x8B,0xDA,0x49,0xD3,0xEB,0x41,0x8B,0xCA,0x49,0xD3,0xE9,0x41,0x8B,0xC8,0xF7,0xD9,0x83,0xC1,0x3F,0x48,0xD1,0xE2,0x48,0xD3,0xE2,0x49,0x0B,0xD1,0x4D,0x8B,0xD3,0x4C,0x8B,0xDA,0x4C,0x89,0x10,0x4C,0x89,0x58,0x08,0xC3};
+; 2020-01-18 18:18:35:069
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
 0008h mov r9,[rdx]                            ; MOV(Mov_r64_rm64) [R9,mem(64u,RDX:br,:sr)] encoding(3 bytes) = 4c 8b 0a
@@ -170,8 +180,9 @@
 0065h mov [rax+8],r11                         ; MOV(Mov_rm64_r64) [mem(64u,RAX:br,:sr),R11] encoding(4 bytes) = 4c 89 58 08
 0069h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Pair<ulong> sll_128u(Pair<ulong> a, int offset)
+; Pair<ulong> sll_128u(Pair<ulong> a, int offset)
 ; static ReadOnlySpan<byte> sll_128uBytes => new byte[106]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x4C,0x8B,0x0A,0x48,0x8B,0x52,0x08,0x41,0x83,0xF8,0x40,0x7C,0x20,0x41,0x81,0xF8,0x80,0x00,0x00,0x00,0x7C,0x08,0x45,0x33,0xD2,0x45,0x33,0xDB,0xEB,0x3C,0x41,0x8D,0x48,0xC0,0x49,0xD3,0xE1,0x4D,0x8B,0xD1,0x45,0x33,0xDB,0xEB,0x2D,0x45,0x8B,0xD0,0x41,0x83,0xE2,0x3F,0x41,0x8B,0xCA,0x48,0xD3,0xE2,0x41,0x8B,0xC8,0xF7,0xD9,0x83,0xC1,0x3F,0x4D,0x8B,0xD9,0x49,0xD1,0xEB,0x49,0xD3,0xEB,0x49,0x0B,0xD3,0x41,0x8B,0xCA,0x4D,0x8B,0xD9,0x49,0xD3,0xE3,0x4C,0x8B,0xD2,0x4C,0x89,0x10,0x4C,0x89,0x58,0x08,0xC3};
+; 2020-01-18 18:18:35:069
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
 0008h mov r9,[rdx]                            ; MOV(Mov_r64_rm64) [R9,mem(64u,RDX:br,:sr)] encoding(3 bytes) = 4c 8b 0a
@@ -207,8 +218,9 @@
 0065h mov [rax+8],r11                         ; MOV(Mov_rm64_r64) [mem(64u,RAX:br,:sr),R11] encoding(4 bytes) = 4c 89 58 08
 0069h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: bit same_128u(Pair<ulong> a, Pair<ulong> b)
+; bit same_128u(Pair<ulong> a, Pair<ulong> b)
 ; static ReadOnlySpan<byte> same_128uBytes => new byte[35]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0x01,0x48,0x3B,0x02,0x75,0x10,0x48,0x8B,0x41,0x08,0x48,0x3B,0x42,0x08,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0xEB,0x02,0x33,0xC0,0x0F,0xB6,0xC0,0xC3};
+; 2020-01-18 18:18:35:069
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,[rcx]                           ; MOV(Mov_r64_rm64) [RAX,mem(64u,RCX:br,:sr)] encoding(3 bytes) = 48 8b 01
 0008h cmp rax,[rdx]                           ; CMP(Cmp_r64_rm64) [RAX,mem(64u,RDX:br,:sr)] encoding(3 bytes) = 48 3b 02
@@ -222,8 +234,9 @@
 001fh movzx eax,al                            ; MOVZX(Movzx_r32_rm8) [EAX,AL]              encoding(3 bytes) = 0f b6 c0
 0022h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: bit lt_128u(Pair<ulong> a, Pair<ulong> b)
+; bit lt_128u(Pair<ulong> a, Pair<ulong> b)
 ; static ReadOnlySpan<byte> lt_128uBytes => new byte[55]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0x02,0x48,0x8B,0x52,0x08,0x4C,0x8B,0x01,0x48,0x8B,0x49,0x08,0x48,0x3B,0xCA,0x41,0x0F,0x92,0xC1,0x45,0x0F,0xB6,0xC9,0x48,0x3B,0xCA,0x75,0x0B,0x4C,0x3B,0xC0,0x0F,0x92,0xC0,0x0F,0xB6,0xC0,0xEB,0x02,0x33,0xC0,0x41,0x0B,0xC1,0x0F,0xB6,0xC0,0xC3};
+; 2020-01-18 18:18:35:069
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,[rdx]                           ; MOV(Mov_r64_rm64) [RAX,mem(64u,RDX:br,:sr)] encoding(3 bytes) = 48 8b 02
 0008h mov rdx,[rdx+8]                         ; MOV(Mov_r64_rm64) [RDX,mem(64u,RDX:br,:sr)] encoding(4 bytes) = 48 8b 52 08
@@ -243,8 +256,9 @@
 0033h movzx eax,al                            ; MOVZX(Movzx_r32_rm8) [EAX,AL]              encoding(3 bytes) = 0f b6 c0
 0036h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: bit gteq_128u(Pair<ulong> a, Pair<ulong> b)
+; bit gteq_128u(Pair<ulong> a, Pair<ulong> b)
 ; static ReadOnlySpan<byte> gteq_128uBytes => new byte[60]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0x02,0x48,0x8B,0x52,0x08,0x4C,0x8B,0x01,0x48,0x8B,0x49,0x08,0x48,0x3B,0xCA,0x41,0x0F,0x92,0xC1,0x45,0x0F,0xB6,0xC9,0x48,0x3B,0xCA,0x75,0x0B,0x4C,0x3B,0xC0,0x0F,0x92,0xC0,0x0F,0xB6,0xC0,0xEB,0x02,0x33,0xC0,0x41,0x0B,0xC1,0x0F,0xB6,0xC0,0xF7,0xD0,0x83,0xE0,0x01,0xC3};
+; 2020-01-18 18:18:35:070
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,[rdx]                           ; MOV(Mov_r64_rm64) [RAX,mem(64u,RDX:br,:sr)] encoding(3 bytes) = 48 8b 02
 0008h mov rdx,[rdx+8]                         ; MOV(Mov_r64_rm64) [RDX,mem(64u,RDX:br,:sr)] encoding(4 bytes) = 48 8b 52 08
@@ -266,8 +280,9 @@
 0038h and eax,1                               ; AND(And_rm32_imm8) [EAX,1h:imm32]          encoding(3 bytes) = 83 e0 01
 003bh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: void mul_32u(Pair<uint> src, ref Pair<uint> dst)
+; void mul_32u(Pair<uint> src, ref Pair<uint> dst)
 ; static ReadOnlySpan<byte> mul_32uBytes => new byte[45]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x89,0x4C,0x24,0x08,0x8B,0x44,0x24,0x08,0x8B,0x4C,0x24,0x0C,0x48,0x89,0x54,0x24,0x10,0x4C,0x8B,0xC2,0x8B,0xD0,0xC4,0xE2,0x33,0xF6,0xC1,0x45,0x89,0x08,0x48,0x8B,0x54,0x24,0x10,0x89,0x42,0x04,0xC3};
+; 2020-01-18 18:18:35:071
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov [rsp+8],rcx                         ; MOV(Mov_rm64_r64) [mem(64u,RSP:br,:sr),RCX] encoding(5 bytes) = 48 89 4c 24 08
 000ah mov eax,[rsp+8]                         ; MOV(Mov_r32_rm32) [EAX,mem(32u,RSP:br,:sr)] encoding(4 bytes) = 8b 44 24 08
@@ -281,8 +296,9 @@
 0029h mov [rdx+4],eax                         ; MOV(Mov_rm32_r32) [mem(32u,RDX:br,:sr),EAX] encoding(3 bytes) = 89 42 04
 002ch ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: uint mod_const_16(uint a)
+; uint mod_const_16(uint a)
 ; static ReadOnlySpan<byte> mod_const_16Bytes => new byte[22]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xD1,0x48,0xC1,0xE2,0x3C,0xB8,0x10,0x00,0x00,0x00,0xC4,0xE2,0xFB,0xF6,0xC0,0xC3};
+; 2020-01-18 18:18:35:071
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov edx,ecx                             ; MOV(Mov_r32_rm32) [EDX,ECX]                encoding(2 bytes) = 8b d1
 0007h shl rdx,3Ch                             ; SHL(Shl_rm64_imm8) [RDX,3ch:imm8]          encoding(4 bytes) = 48 c1 e2 3c
@@ -290,16 +306,18 @@
 0010h mulx rax,rax,rax                        ; MULX(VEX_Mulx_r64_r64_rm64) [RAX,RAX,RAX]  encoding(VEX, 5 bytes) = c4 e2 fb f6 c0
 0015h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: uint div_const_16(uint a)
+; uint div_const_16(uint a)
 ; static ReadOnlySpan<byte> div_const_16Bytes => new byte[23]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x48,0xBA,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x10,0xC4,0xE2,0xFB,0xF6,0xC0,0xC3};
+; 2020-01-18 18:18:35:071
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                             ; MOV(Mov_r32_rm32) [EAX,ECX]                encoding(2 bytes) = 8b c1
 0007h mov rdx,1000000000000000h               ; MOV(Mov_r64_imm64) [RDX,1000000000000000h:imm64] encoding(10 bytes) = 48 ba 00 00 00 00 00 00 00 10
 0011h mulx rax,rax,rax                        ; MULX(VEX_Mulx_r64_r64_rm64) [RAX,RAX,RAX]  encoding(VEX, 5 bytes) = c4 e2 fb f6 c0
 0016h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: uint mod_const_25(uint a)
+; uint mod_const_25(uint a)
 ; static ReadOnlySpan<byte> mod_const_25Bytes => new byte[32]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xD1,0x48,0xB8,0x71,0x3D,0x0A,0xD7,0xA3,0x70,0x3D,0x0A,0x48,0x0F,0xAF,0xD0,0xB8,0x19,0x00,0x00,0x00,0xC4,0xE2,0xFB,0xF6,0xC0,0xC3};
+; 2020-01-18 18:18:35:071
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov edx,ecx                             ; MOV(Mov_r32_rm32) [EDX,ECX]                encoding(2 bytes) = 8b d1
 0007h mov rax,0A3D70A3D70A3D71h               ; MOV(Mov_r64_imm64) [RAX,a3d70a3d70a3d71h:imm64] encoding(10 bytes) = 48 b8 71 3d 0a d7 a3 70 3d 0a
@@ -308,16 +326,18 @@
 001ah mulx rax,rax,rax                        ; MULX(VEX_Mulx_r64_r64_rm64) [RAX,RAX,RAX]  encoding(VEX, 5 bytes) = c4 e2 fb f6 c0
 001fh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: uint div_const_25(uint a)
+; uint div_const_25(uint a)
 ; static ReadOnlySpan<byte> div_const_25Bytes => new byte[23]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x48,0xBA,0x71,0x3D,0x0A,0xD7,0xA3,0x70,0x3D,0x0A,0xC4,0xE2,0xFB,0xF6,0xC0,0xC3};
+; 2020-01-18 18:18:35:071
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                             ; MOV(Mov_r32_rm32) [EAX,ECX]                encoding(2 bytes) = 8b c1
 0007h mov rdx,0A3D70A3D70A3D71h               ; MOV(Mov_r64_imm64) [RDX,a3d70a3d70a3d71h:imm64] encoding(10 bytes) = 48 ba 71 3d 0a d7 a3 70 3d 0a
 0011h mulx rax,rax,rax                        ; MULX(VEX_Mulx_r64_r64_rm64) [RAX,RAX,RAX]  encoding(VEX, 5 bytes) = c4 e2 fb f6 c0
 0016h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: uint mod_const_32(uint a)
+; uint mod_const_32(uint a)
 ; static ReadOnlySpan<byte> mod_const_32Bytes => new byte[22]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xD1,0x48,0xC1,0xE2,0x3B,0xB8,0x20,0x00,0x00,0x00,0xC4,0xE2,0xFB,0xF6,0xC0,0xC3};
+; 2020-01-18 18:18:35:071
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov edx,ecx                             ; MOV(Mov_r32_rm32) [EDX,ECX]                encoding(2 bytes) = 8b d1
 0007h shl rdx,3Bh                             ; SHL(Shl_rm64_imm8) [RDX,3bh:imm8]          encoding(4 bytes) = 48 c1 e2 3b
@@ -325,8 +345,9 @@
 0010h mulx rax,rax,rax                        ; MULX(VEX_Mulx_r64_r64_rm64) [RAX,RAX,RAX]  encoding(VEX, 5 bytes) = c4 e2 fb f6 c0
 0015h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: uint div_const_32(uint a)
+; uint div_const_32(uint a)
 ; static ReadOnlySpan<byte> div_const_32Bytes => new byte[23]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x48,0xBA,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x08,0xC4,0xE2,0xFB,0xF6,0xC0,0xC3};
+; 2020-01-18 18:18:35:071
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                             ; MOV(Mov_r32_rm32) [EAX,ECX]                encoding(2 bytes) = 8b c1
 0007h mov rdx,800000000000000h                ; MOV(Mov_r64_imm64) [RDX,800000000000000h:imm64] encoding(10 bytes) = 48 ba 00 00 00 00 00 00 00 08

@@ -65,17 +65,11 @@ namespace Z0
 
         }
 
-        public static int devirt1()
-        {
-            return Devirt1.Test();
-        }
-        
+        public static uint xor_u32(uint a, uint b)
+            => GX.eval(OpKinds.fXor,a,b);
 
         public static Vector128<uint> vbsrl_128x32u_0(Vector128<uint> x)
             =>  dinx.vbsrl(x, 0);
-
-        public static Vector128<uint> vbsrl_128x32u_1(Vector128<uint> x)
-            =>  dinx.vbsrl(x, 1);
 
         public static Vector128<uint> vbsrl_128x32u_2(Vector128<uint> x)
             =>  dinx.vbsrl(x, 2);

@@ -1,4 +1,4 @@
-// 2020-01-16 19:14:11:131
+// 2020-01-18 18:18:35:079
 // Id := 100663350, Name := System.Byte Z0.zfoc::hexcode_parse(System.Char)
 // byte hexcode_parse(Char c)
 // Managed

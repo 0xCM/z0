@@ -811,7 +811,6 @@ namespace Z0
         /// Retrieves the public and non-public static methods declared by a type
         /// </summary>
         /// <param name="t">The type to examine</param>
-        /// <param name="InstanceType">Whether to selct static or instance </param>
         public static IEnumerable<MethodInfo> DeclaredStaticMethods(this Type t)
             => t.GetMethods(BF_DeclaredStatic);
 

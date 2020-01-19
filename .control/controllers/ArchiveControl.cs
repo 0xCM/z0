@@ -37,6 +37,7 @@ namespace Z0
         {
              
              FindCatalog(AssemblyId.Intrinsics).OnSome(c => c.Emit());
+             FindCatalog(AssemblyId.GMath).OnSome(c => c.Emit());
              //FindCatalog(AssemblyId.BitVectors).OnSome(c => c.Emit());
             //  IntrinsicsCatalog.Emit();
             //  BitCoreCatalog.Emit();

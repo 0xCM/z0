@@ -34,11 +34,9 @@ namespace Z0
             where T : unmanaged
                 => not(b);
 
-
         [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static T identity<T>(T a)
             where T : unmanaged
                 => a;
     }
-
 }

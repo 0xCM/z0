@@ -1,6 +1,7 @@
-; 2020-01-16 19:14:10:337
-; function: bit check_and_1(Vector128<uint> x, Vector128<uint> y)
+; 2020-01-18 18:18:34:224
+; bit check_and_1(Vector128<uint> x, Vector128<uint> y)
 ; static ReadOnlySpan<byte> check_and_1Bytes => new byte[153]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF8,0x28,0xC8,0xC5,0xF9,0x10,0x12,0xC5,0xF8,0x28,0xDA,0xC5,0xF1,0xDB,0xCB,0xC5,0xF8,0x28,0xD8,0xC5,0xF9,0x7E,0xD8,0xC5,0xF8,0x28,0xDA,0xC5,0xF9,0x7E,0xDA,0x23,0xC2,0xC5,0xF8,0x28,0xD8,0xC4,0xE3,0x79,0x16,0xDA,0x01,0xC5,0xF8,0x28,0xDA,0xC4,0xE3,0x79,0x16,0xD9,0x01,0x23,0xD1,0xC5,0xF8,0x28,0xD8,0xC4,0xE3,0x79,0x16,0xD9,0x02,0xC5,0xF8,0x28,0xDA,0xC4,0xC3,0x79,0x16,0xD8,0x02,0x41,0x23,0xC8,0xC4,0xC3,0x79,0x16,0xC0,0x03,0xC4,0xC3,0x79,0x16,0xD1,0x03,0x45,0x23,0xC1,0xC5,0xF9,0x6E,0xC0,0xC4,0xE3,0x79,0x22,0xC2,0x01,0xC4,0xE3,0x79,0x22,0xC1,0x02,0xC4,0xC3,0x79,0x22,0xC0,0x03,0xC5,0xF1,0x76,0xC0,0xC5,0xF0,0x57,0xC9,0xC5,0xE8,0x57,0xD2,0xC5,0xF1,0x76,0xCA,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x92,0xC0,0x0F,0xB6,0xC0,0xC3};
+; 2020-01-18 18:18:34:224
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -39,8 +40,9 @@
 0095h movzx eax,al                            ; MOVZX(Movzx_r32_rm8) [EAX,AL]              encoding(3 bytes) = 0f b6 c0
 0098h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Vector128<uint> and_class(Vector128<uint> x, Vector128<uint> y)
+; Vector128<uint> and_class(Vector128<uint> x, Vector128<uint> y)
 ; static ReadOnlySpan<byte> and_classBytes => new byte[32]{0x48,0x83,0xEC,0x28,0xC5,0xF8,0x77,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC5,0xF9,0xDB,0xC1,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0x48,0x83,0xC4,0x28,0xC3};
+; 2020-01-18 18:18:34:224
 0000h sub rsp,28h                             ; SUB(Sub_rm64_imm8) [RSP,28h:imm64]         encoding(4 bytes) = 48 83 ec 28
 0004h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0007h vmovupd xmm0,[rdx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
@@ -51,8 +53,9 @@
 001bh add rsp,28h                             ; ADD(Add_rm64_imm8) [RSP,28h:imm64]         encoding(4 bytes) = 48 83 c4 28
 001fh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: uint and_class_scalar(uint x, uint y)
+; uint and_class_scalar(uint x, uint y)
 ; static ReadOnlySpan<byte> and_class_scalarBytes => new byte[14]{0x48,0x83,0xEC,0x28,0x90,0x23,0xD1,0x8B,0xC2,0x48,0x83,0xC4,0x28,0xC3};
+; 2020-01-18 18:18:34:224
 0000h sub rsp,28h                             ; SUB(Sub_rm64_imm8) [RSP,28h:imm64]         encoding(4 bytes) = 48 83 ec 28
 0004h nop                                     ; NOP(Nopd)                                  encoding(1 byte ) = 90
 0005h and edx,ecx                             ; AND(And_r32_rm32) [EDX,ECX]                encoding(2 bytes) = 23 d1
@@ -60,16 +63,18 @@
 0009h add rsp,28h                             ; ADD(Add_rm64_imm8) [RSP,28h:imm64]         encoding(4 bytes) = 48 83 c4 28
 000dh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: uint and_class_scalar(CAnd128<uint> f, uint x, uint y)
+; uint and_class_scalar(CAnd128<uint> f, uint x, uint y)
 ; static ReadOnlySpan<byte> and_class_scalarBytes => new byte[13]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0x01,0x41,0x23,0xD0,0x8B,0xC2,0xC3};
+; 2020-01-18 18:18:34:224
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,[rcx]                           ; MOV(Mov_r32_rm32) [EAX,mem(32u,RCX:br,:sr)] encoding(2 bytes) = 8b 01
 0007h and edx,r8d                             ; AND(And_r32_rm32) [EDX,R8D]                encoding(3 bytes) = 41 23 d0
 000ah mov eax,edx                             ; MOV(Mov_r32_rm32) [EAX,EDX]                encoding(2 bytes) = 8b c2
 000ch ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: Vector128<uint> and_struct(Vector128<uint> x, Vector128<uint> y)
+; Vector128<uint> and_struct(Vector128<uint> x, Vector128<uint> y)
 ; static ReadOnlySpan<byte> and_structBytes => new byte[26]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC5,0xF9,0xDB,0xC1,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
+; 2020-01-18 18:18:34:224
 0000h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                              ; NOP(Nopw)                                  encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rdx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RDX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 02
@@ -79,15 +84,17 @@
 0016h mov rax,rcx                             ; MOV(Mov_r64_rm64) [RAX,RCX]                encoding(3 bytes) = 48 8b c1
 0019h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: uint and_struct_scalar(uint x, uint y)
+; uint and_struct_scalar(uint x, uint y)
 ; static ReadOnlySpan<byte> and_struct_scalarBytes => new byte[10]{0x0F,0x1F,0x44,0x00,0x00,0x23,0xD1,0x8B,0xC2,0xC3};
+; 2020-01-18 18:18:34:224
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h and edx,ecx                             ; AND(And_r32_rm32) [EDX,ECX]                encoding(2 bytes) = 23 d1
 0007h mov eax,edx                             ; MOV(Mov_r32_rm32) [EAX,EDX]                encoding(2 bytes) = 8b c2
 0009h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: void loop_1(ReadOnlySpan<uint> src, Span<uint> dst)
+; void loop_1(ReadOnlySpan<uint> src, Span<uint> dst)
 ; static ReadOnlySpan<byte> loop_1Bytes => new byte[50]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0x01,0x48,0x8B,0x0A,0x8B,0x52,0x08,0x45,0x33,0xC0,0x85,0xD2,0x7E,0x1C,0x4D,0x63,0xC8,0x4E,0x8D,0x14,0x89,0x46,0x8B,0x0C,0x88,0x41,0xF7,0xD1,0x41,0xFF,0xC1,0x45,0x89,0x0A,0x41,0xFF,0xC0,0x44,0x3B,0xC2,0x7C,0xE4,0xC3};
+; 2020-01-18 18:18:34:224
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,[rcx]                           ; MOV(Mov_r64_rm64) [RAX,mem(64u,RCX:br,:sr)] encoding(3 bytes) = 48 8b 01
 0008h mov rcx,[rdx]                           ; MOV(Mov_r64_rm64) [RCX,mem(64u,RDX:br,:sr)] encoding(3 bytes) = 48 8b 0a
@@ -106,8 +113,9 @@
 002fh jl short 0015h                          ; JL(Jl_rel8_64) [15h:jmp64]                 encoding(2 bytes) = 7c e4
 0031h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: void loop_2(ArrayExchange<uint> src, ArrayExchange<uint> dst)
+; void loop_2(ArrayExchange<uint> src, ArrayExchange<uint> dst)
 ; static ReadOnlySpan<byte> loop_2Bytes => new byte[80]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x85,0xC9,0x75,0x04,0x33,0xC0,0xEB,0x07,0x48,0x8D,0x41,0x10,0x8B,0x49,0x08,0x48,0x85,0xD2,0x75,0x04,0x33,0xC9,0xEB,0x08,0x48,0x8D,0x4A,0x10,0x44,0x8B,0x42,0x08,0x8B,0x52,0x08,0x45,0x33,0xC0,0x85,0xD2,0x7E,0x1F,0x4D,0x63,0xC8,0x4E,0x8D,0x0C,0x89,0x4D,0x63,0xD0,0x46,0x8B,0x14,0x90,0x41,0xF7,0xD2,0x41,0xFF,0xC2,0x45,0x89,0x11,0x41,0xFF,0xC0,0x44,0x3B,0xC2,0x7C,0xE1,0xC3};
+; 2020-01-18 18:18:34:224
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h test rcx,rcx                            ; TEST(Test_rm64_r64) [RCX,RCX]              encoding(3 bytes) = 48 85 c9
 0008h jne short 000eh                         ; JNE(Jne_rel8_64) [Eh:jmp64]                encoding(2 bytes) = 75 04
@@ -137,8 +145,9 @@
 004dh jl short 0030h                          ; JL(Jl_rel8_64) [30h:jmp64]                 encoding(2 bytes) = 7c e1
 004fh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: void pipeline_1(ReadOnlySpan<uint> src, Span<uint> dst)
+; void pipeline_1(ReadOnlySpan<uint> src, Span<uint> dst)
 ; static ReadOnlySpan<byte> pipeline_1Bytes => new byte[56]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0x42,0x08,0x45,0x33,0xC0,0x85,0xC0,0x7E,0x28,0x4C,0x8B,0x0A,0x4D,0x63,0xD0,0x4F,0x8D,0x0C,0x91,0x4C,0x8B,0x11,0x4D,0x63,0xD8,0x47,0x8B,0x14,0x9A,0x41,0xF7,0xD2,0x41,0xFF,0xC2,0x41,0xF7,0xD2,0x45,0x89,0x11,0x41,0xFF,0xC0,0x44,0x3B,0xC0,0x7C,0xD8,0xC3};
+; 2020-01-18 18:18:34:224
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,[rdx+8]                         ; MOV(Mov_r32_rm32) [EAX,mem(32u,RDX:br,:sr)] encoding(3 bytes) = 8b 42 08
 0008h xor r8d,r8d                             ; XOR(Xor_r32_rm32) [R8D,R8D]                encoding(3 bytes) = 45 33 c0
@@ -159,8 +168,9 @@
 0035h jl short 000fh                          ; JL(Jl_rel8_64) [Fh:jmp64]                  encoding(2 bytes) = 7c d8
 0037h ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: void pipeline_2(ReadOnlySpan<uint> src, Span<uint> dst)
+; void pipeline_2(ReadOnlySpan<uint> src, Span<uint> dst)
 ; static ReadOnlySpan<byte> pipeline_2Bytes => new byte[59]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0x42,0x08,0x45,0x33,0xC0,0x85,0xC0,0x7E,0x2B,0x4C,0x8B,0x0A,0x4D,0x63,0xD0,0x4F,0x8D,0x0C,0x91,0x4C,0x8B,0x11,0x4D,0x63,0xD8,0x47,0x8B,0x14,0x9A,0x45,0x8B,0xDA,0x41,0xF7,0xD3,0x41,0xFF,0xC3,0x45,0x23,0xD3,0x45,0x89,0x11,0x41,0xFF,0xC0,0x44,0x3B,0xC0,0x7C,0xD5,0xC3};
+; 2020-01-18 18:18:34:224
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,[rdx+8]                         ; MOV(Mov_r32_rm32) [EAX,mem(32u,RDX:br,:sr)] encoding(3 bytes) = 8b 42 08
 0008h xor r8d,r8d                             ; XOR(Xor_r32_rm32) [R8D,R8D]                encoding(3 bytes) = 45 33 c0
@@ -182,8 +192,9 @@
 0038h jl short 000fh                          ; JL(Jl_rel8_64) [Fh:jmp64]                  encoding(2 bytes) = 7c d5
 003ah ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: uint and_negate(uint x)
+; uint and_negate(uint x)
 ; static ReadOnlySpan<byte> and_negateBytes => new byte[14]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0xF7,0xD0,0xFF,0xC0,0x23,0xC1,0xC3};
+; 2020-01-18 18:18:34:224
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                             ; MOV(Mov_r32_rm32) [EAX,ECX]                encoding(2 bytes) = 8b c1
 0007h not eax                                 ; NOT(Not_rm32) [EAX]                        encoding(2 bytes) = f7 d0
@@ -191,8 +202,9 @@
 000bh and eax,ecx                             ; AND(And_r32_rm32) [EAX,ECX]                encoding(2 bytes) = 23 c1
 000dh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: uint and_negate_ops(uint x)
+; uint and_negate_ops(uint x)
 ; static ReadOnlySpan<byte> and_negate_opsBytes => new byte[14]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0xF7,0xD0,0xFF,0xC0,0x23,0xC1,0xC3};
+; 2020-01-18 18:18:34:224
 0000h nop dword ptr [rax+rax]                 ; NOP(Nop_rm32) [mem(32u,RAX:br,:sr)]        encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                             ; MOV(Mov_r32_rm32) [EAX,ECX]                encoding(2 bytes) = 8b c1
 0007h not eax                                 ; NOT(Not_rm32) [EAX]                        encoding(2 bytes) = f7 d0
@@ -200,8 +212,9 @@
 000bh and eax,ecx                             ; AND(And_r32_rm32) [EAX,ECX]                encoding(2 bytes) = 23 c1
 000dh ret                                     ; RET(Retnq)                                 encoding(1 byte ) = c3
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-; function: uint vxor_128x32u_1(Vector128<uint> x, Vector128<uint> y)
+; uint vxor_128x32u_1(Vector128<uint> x, Vector128<uint> y)
 ; static ReadOnlySpan<byte> vxor_128x32u_1Bytes => new byte[32]{0x48,0x83,0xEC,0x28,0xC5,0xF8,0x77,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x7E,0xC0,0xC5,0xF9,0x10,0x02,0xC4,0xE3,0x79,0x16,0xC2,0x03,0x33,0xC2,0x48,0x83,0xC4,0x28,0xC3};
+; 2020-01-18 18:18:34:224
 0000h sub rsp,28h                             ; SUB(Sub_rm64_imm8) [RSP,28h:imm64]         encoding(4 bytes) = 48 83 ec 28
 0004h vzeroupper                              ; VZEROUPPER(VEX_Vzeroupper)                 encoding(VEX, 3 bytes) = c5 f8 77
 0007h vmovupd xmm0,[rcx]                      ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01

@@ -38,7 +38,7 @@ namespace Z0.Test
             {
                                 
                 var file = Matrix.filename<M,N,T>();
-                var dstpath = LogSettings.Get().TestLogPath(file);
+                var dstpath = EnvConfig.Get().TestLogPath(file);
                 using var writer = datasink(folder,file);
 
                 var A = Random.MatrixBlock<M,N,T>();

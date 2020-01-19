@@ -14,6 +14,14 @@ using Z0;
 partial class zfunc
 {
     /// <summary>
+    /// Returns the memory location of the first element of the source span
+    /// </summary>
+    /// <param name="src">The source span</param>
+    [MethodImpl(Inline)]
+    public static unsafe ulong location(ReadOnlySpan<byte> src)
+        => (ulong)Unsafe.AsPointer(ref Unsafe.AsRef(in head(src)));
+
+    /// <summary>
     /// Allocates a span
     /// </summary>
     /// <param name="length">The number cells to allocate</param>

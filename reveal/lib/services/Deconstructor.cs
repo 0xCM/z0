@@ -39,42 +39,8 @@ namespace Z0
         public static MethodDisassembly[] Deconstruct(Type src)
             => Deconstruct(src.DeclaredMethods().NonGeneric().Concrete().NonSpecial().ToArray()).ToArray();
     
-        /// <summary>
-        /// Disassembles the source methods
-        /// </summary>
-        /// <param name="src">The source methods</param>
-        public static MethodDisassembly[] Deconstruct(IEnumerable<MethodInfo> src)        
-            => Deconstruct(src.ToArray()).ToArray();
-
-        public static MethodDisassembly[] Deconstruct(params MethodInfo[] methods)
-            => Disassemble(methods).ToArray();
-        
-        /// <summary>
-        /// Disassasembles non-generic functions defined by a type to individual files in the appropriate assembly data folder
-        /// </summary>
-        /// <param name="target">The type to disassemble</param>
-        public static void Shred(Type target)
-        {            
-            var provider = Moniker.Provider;
-            var typename = target.DisplayName().ToLower();
-            var subfolder = FolderName.Define(typename);
-            var paths = LogPaths.The;
-            var datadir = paths.AsmDataDir(subfolder);
-            var deconstructed = Deconstruct(target);
-            foreach(var d in deconstructed)
-            {
-                var m = provider.Define(d.Method);
-                var asmfile = paths.AsmInfoPath(target,m);
-                var hexfile = paths.AsmHexPath(target,m);
-                var cilfile = paths.CilPath(target,m);
-                var asm = AsmFunction.from(d);
-                asmfile.Overwrite(asm.FormatDetail());
-                hexfile.Overwrite(asm.FormatEncoded());                
-                cilfile.Overwrite(d.FormatCil());
-            }            
-        }
-          
-        static IEnumerable<MethodDisassembly> Disassemble(MethodInfo[] methods)
+                  
+        public static IEnumerable<MethodDisassembly> Deconstruct(IEnumerable<MethodInfo> methods)
         {
             methods.JitMethods();
             var modules = methods.Select(x => x.Module).Distinct();
@@ -117,17 +83,13 @@ namespace Z0
                 if(clrMethod == null || clrMethod.NativeCode == 0)
                 {
                     error($"Method {method.Name} not found");
-                    return null;
+                    return default;
                 }
                 var provider = Moniker.Provider;
                 var id = provider.Define(method);
                 var asmBody = DecodeAsm(method);
                 var cilbody = ReadCilBytes(clrMethod);    
                 var cilfunc = MdIx.FindCilFunction(method).ValueOrDefault();
-
-                var ilBytes2 = method.GetMethodBody().GetILAsByteArray();
-                if(!cilbody.ReallyEqual(ilBytes2))
-                    warn($"{method.DisplayName()}: IL byte mismatch");
                         
                 return MethodDisassembly.Define(id, asmBody, cilbody, cilfunc);
             }
@@ -138,7 +100,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e.ToString());
+                error(e);
                 return none<MethodDisassembly>();
             }
         }

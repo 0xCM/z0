@@ -48,8 +48,16 @@ namespace Z0
             => (long)src;
 
         [MethodImpl(Inline)]
+        public static uint to32u(float src)        
+            => (uint)((long)src);
+
+        [MethodImpl(Inline)]
         public static double to64f(float src)        
             => src;
+
+        [MethodImpl(Inline)]
+        public static ulong to64u(float src)        
+            => (ulong)((long)src);
 
         [MethodImpl(Inline)]
         public static sbyte to8i(double src)
@@ -73,7 +81,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static uint to32u(double src)
-            => (uint)src;
+            => (uint)((long)src);
 
         [MethodImpl(Inline)]
         public static long to64i(double src)
@@ -81,7 +89,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe ulong to64u(double src)
-            => (ulong)src;
+            => (ulong)((long)src);
     }
 
 }
