@@ -86,12 +86,6 @@ namespace Z0
         public static Moniker define(string opname, FixedWidth w, PrimalKind k, bool generic, bool asm = false)
             => define(opname, (int)w, k, generic,asm);        
 
-        /// <summary>
-        /// Makes a best-guess at defining an appropriate moniker for a specified method
-        /// </summary>
-        /// <param name="method">The operation method</param>
-        public static Moniker define(MethodInfo method)
-            => Provider.Define(method);
 
     }
 }

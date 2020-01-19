@@ -28,7 +28,5 @@ namespace Z0
 
         public static void Emit(this IOperationCatalog catalog)
             => catalog.Emitter().EmitCatalog();
-
     }
-
 }

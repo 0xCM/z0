@@ -19,9 +19,9 @@ namespace Z0
 
         public static void Emit(FastGenericInfo op, AsmArchive target)
         {
-            foreach(var r in op.Reifications)
+            foreach(var k in op.Kinds)
             {
-                var arg = r.PrimalKind.ToPrimalType();
+                var arg = k.ToPrimalType();
                 var method = op.Method.MakeGenericMethod(arg);
                 target.Save(method.FastOp().NativeData.Code);
             }

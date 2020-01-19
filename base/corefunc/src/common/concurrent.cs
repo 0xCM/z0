@@ -11,10 +11,8 @@ namespace Z0
     using System.Linq;
     using System.Threading.Tasks;
     using System.Runtime.CompilerServices;
-
     
     using static zfunc;
-
 
     partial class xfunc
     {

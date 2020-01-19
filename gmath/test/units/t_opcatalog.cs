@@ -32,13 +32,6 @@ namespace Z0
                 Trace(op.Id);
         }
 
-        void list_generic()
-        {
-
-            foreach(var op in GX.Catalog.GenericOps)
-            foreach(var id in op.Reifications)
-                Trace(op.Id);
-        }
 
     }
 }

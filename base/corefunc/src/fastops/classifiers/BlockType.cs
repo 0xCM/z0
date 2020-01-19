@@ -16,14 +16,6 @@ namespace Z0
 
     public static class BlockedType
     {
-
-        /// <summary>
-        /// Determines whether a method accepts and/or returns at least one blocked parameter
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool test(MethodInfo m)
-            => test(m.ReturnType) || m.ParameterTypes().Any(test);
-
         /// <summary>
         /// Determines whether a type is classified as a blocked type
         /// </summary>

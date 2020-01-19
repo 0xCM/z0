@@ -13,7 +13,7 @@ namespace Z0
     partial class Converter
     {
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op("convert8i"), PrimalClosures(PrimalKind.All)]
         public static T convert<T>(sbyte src)
             where T : unmanaged
         {

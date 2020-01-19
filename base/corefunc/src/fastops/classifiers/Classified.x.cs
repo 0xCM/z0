@@ -385,7 +385,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsBlocked(this MethodInfo m)
-            => BlockedType.test(m);        
+            => Classified.blocked(m);        
 
         /// <summary>
         /// Selects the parameters for a method, if any, that accept an intrinsic vector

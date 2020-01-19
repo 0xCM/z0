@@ -11,37 +11,27 @@ namespace Z0
     using System.Reflection;
 
     using static zfunc;
+    using static AsmServiceMessages;
 
     class ArchiveControl : Controller<ArchiveControl>
     {                
-        static AsmCodeSet[] ResolveExample<T>(N128 w, T t = default)
-            where T : unmanaged
-        {
-            var imm = new byte[]{199,205};
-            var r1 = VX.vbsll(w,t).CaptureImmediates(imm);
-            var r2 = VX.vsrl(w,t).CaptureImmediates(imm);            
-            var r3 = VX.vblend8x16(w,t).CaptureImmediates(imm);
-            return r1.Union(r2).Union(r3).ToArray();
-        }
-
-        static AsmCodeSet[] ResolveExample<T>(N256 w, T t = default)
-            where T : unmanaged
-        {
-            var imm = new byte[]{199,205};
-            var r1 = VX.vbsll(w,t).CaptureImmediates(imm);
-            var r2 = VX.vsrl(w,t).CaptureImmediates(imm);
-            return r1.Union(r2).ToArray();            
-        }
-    
-        public override void Execute()
-        {
-             
-             FindCatalog(AssemblyId.Intrinsics).OnSome(c => c.Emit());
-             FindCatalog(AssemblyId.GMath).OnSome(c => c.Emit());
-             //FindCatalog(AssemblyId.BitVectors).OnSome(c => c.Emit());
-            //  IntrinsicsCatalog.Emit();
-            //  BitCoreCatalog.Emit();
+        void Emit(AssemblyId id)
+            => FindCatalog(id).OnSome(c => c.Emit()).OnNone(() => CatalogNotFound(id));
         
+        void Emit(IEnumerable<AssemblyId> src)
+            => iter(src, Emit);
+
+        public override void Execute()
+        {             
+            Emit(AssemblyId.Intrinsics); 
+            Emit(AssemblyId.GMath);
+            Emit(AssemblyId.CoreFunc);
+            Emit(AssemblyId.BitCore);
+
+            
+
+            
+            
         }
 
     }

@@ -63,28 +63,28 @@ namespace Z0
         }
 
         static Moniker FromPrimalFunc(MethodInfo method)
-            => Moniker.define(method.Name, method.ParameterTypes(true).First().Kind(), method.IsConstructedGenericMethod);
+            => Moniker.define(method.FastOpName(), method.ParameterTypes(true).First().Kind(), method.IsConstructedGenericMethod);
 
         /// <summary>
         /// Derives a moniker for a primal operator
         /// </summary>
         /// <param name="method">The operation method</param>
         static Moniker FromPrimalOp(MethodInfo method)
-            => Moniker.define(method.Name, method.ReturnType.Kind(), method.IsConstructedGenericMethod);
+            => Moniker.define(method.FastOpName(), method.ReturnType.Kind(), method.IsConstructedGenericMethod);
 
         /// <summary>
         /// Derives a moniker for a primal predicate
         /// </summary>
         /// <param name="method">The operation method</param>
         static Moniker FromPredicate(MethodInfo method)
-            => Moniker.define(method.Name, method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
+            => Moniker.define(method.FastOpName(), method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
 
         /// <summary>
         /// Derives a moniker for primal shift/rot operator
         /// </summary>
         /// <param name="method">The operation method</param>
         static Moniker FromShift(MethodInfo method)
-            => Moniker.define(method.Name, method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
+            => Moniker.define(method.FastOpName(), method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
 
         /// <summary>
         /// Derives a moniker for an operation over blocked domain(s)
@@ -92,11 +92,11 @@ namespace Z0
         /// <param name="method">The operation method</param>
         static Moniker FromBlocked(MethodInfo method)
         {
-            var type = method.ParameterTypes().First();       
-            var segkind = type.GenericArguments().FirstOrDefault().Kind();     
+            var type = method.ParameterTypes().Where(t => t.IsBlocked()).First();
+            var segkind = type.GenericArguments().First();
             var generic = method.IsConstructedGenericMethod;
             var w = type.BitWidth();
-            var opname = method.Name;
+            var opname = method.FastOpName();
             if(generic)
                 return new Moniker($"{opname}_gb{w}{SegSep}{Classified.primalsig(segkind)}") ;
             else 
@@ -111,14 +111,14 @@ namespace Z0
         {
             var v = method.ParameterTypes().First();       
             var segkind = v.GenericArguments().FirstOrDefault().Kind();         
-            return Moniker.define(method.Name, v.BitWidth(), segkind, method.IsConstructedGenericMethod,false);                            
+            return Moniker.define(method.FastOpName(), v.BitWidth(), segkind, method.IsConstructedGenericMethod,false);                            
         }
 
         static Moniker FromSpanOp(MethodInfo method)
         {
             var v = method.ParameterTypes().First();       
             var segkind = v.GenericArguments().FirstOrDefault().Kind();         
-            return Moniker.define(method.Name, v.BitWidth(), segkind, method.IsConstructedGenericMethod, false);
+            return Moniker.define(method.FastOpName(), v.BitWidth(), segkind, method.IsConstructedGenericMethod, false);
         }
 
         static Moniker FromNatOp(MethodInfo method)
@@ -127,7 +127,7 @@ namespace Z0
                         where TypeNatType.test(t)
                         select concat(NatIndicator,TypeNatType.value(t).ToString());
             var natspec = string.Join(SegSep, natvals);
-            var name = concat(method.Name, AsciSym.Tilde, natspec);
+            var name = concat(method.FastOpName(), AsciSym.Tilde, natspec);
             var kind = method.TypeParamKind(n1);
             var width = kind.BitWidth();                               
             return Moniker.define(name, width, kind, method.IsConstructedGenericMethod, false);
@@ -140,7 +140,7 @@ namespace Z0
         static Moniker FromVectorized(MethodInfo method)
         {
             var args = method.ParameterTypes().ToArray();
-            var name = method.Name + AsciSym.Underscore;
+            var name = method.FastOpName() + AsciSym.Underscore;
             
             if(method.IsOperator())
                 return FromVectorOp(method);

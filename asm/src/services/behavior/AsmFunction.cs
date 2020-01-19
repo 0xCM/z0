@@ -26,7 +26,7 @@ namespace Z0
             Span<byte> data = code.Data;
             var startaddress = src[0].IP;
             var endaddress = src[count - 1].IP + (ulong)src[count - 1].ByteLength; 
-            var format = src.FormatAsm(AsmFormatConfig.Default.Invert());            
+            var format = src.Format(AsmFormatConfig.Default.Invert());            
             var dst = new AsmInstructionInfo[count];
             for(var i=0; i<count; i++)
                 dst[i] = src[i].Summarize(data, format[i], startaddress);
@@ -42,8 +42,8 @@ namespace Z0
             var count = asm.Instructions.Length;
             var code = asm.NativeBlock.Data;
             Span<byte> codespan = code;
-            var inxs = new AsmInstructionInfo[count];
-            var inxsfmt = asm.FormatAsm(AsmFormatConfig.Default.Invert());
+            var instructions = new AsmInstructionInfo[count];
+            var lines = asm.Format(AsmFormatConfig.Default.Invert());
 
             for(var i=0; i<count; i++)
             {
@@ -54,11 +54,11 @@ namespace Z0
                 var mnemonic = instruction.Mnemonic.ToString().ToUpper();
                 var opcode = instruction.Code.ToString();
                 var enckind = instruction.Encoding == EncodingKind.Legacy ? string.Empty : instruction.Encoding.ToString();
-                inxs[i] = AsmInstructionInfo.Define(offset, inxsfmt[i], mnemonic, opcode, operands, enckind, encoded);
+                instructions[i] = AsmInstructionInfo.Define(offset, lines[i], mnemonic, opcode, operands, enckind, encoded);
             }
             
             return AsmFuncInfo.Define(asm.StartAddress, asm.EndAddress, 
-                AsmCode.Define(asm.NativeBlock.Data, Moniker.define(src.Name), src.Method.Signature().Format()), inxs);            
+                AsmCode.Define(asm.NativeBlock.Data, Moniker.define(src.Name), src.Method.Signature().Format()), instructions);            
         }
 
         /// <summary>
@@ -70,12 +70,12 @@ namespace Z0
             var args = new AsmOperandInfo[instruction.OpCount];
             for(byte j=0; j< instruction.OpCount; j++)
             {
-                var operandKind = instruction.GetOpKind(j);
+                var opkind = instruction.GetOpKind(j);
                 var imm = instruction.ImmediateInfo(j);
-                var reg = operandKind == AsmOpKind.Register ? instruction.RegisterInfo(j) : null;
-                var mem = operandKind.IsMemory() ? instruction.MemoryInfo(j) : null;
-                var branch = operandKind.IsBranch() ? instruction.BranchInfo(j, startaddress) : null;
-                args[j] = AsmOperandInfo.Define(j, operandKind.ToString(), imm, mem, reg, branch);
+                var reg = opkind == AsmOpKind.Register ? instruction.RegisterInfo(j) : null;
+                var mem = opkind.IsMemory() ? instruction.MemoryInfo(j) : null;
+                var branch = opkind.IsBranch() ? instruction.BranchInfo(j, startaddress) : null;
+                args[j] = AsmOperandInfo.Define(j, opkind.ToString(), imm, mem, reg, branch);
             }
             return args;
         }
@@ -87,8 +87,8 @@ namespace Z0
             var operands = instruction.Operands(startaddress);
             var mnemonic = instruction.Mnemonic.ToString().ToUpper();
             var opcode = instruction.Code.ToString();
-            var enckind = instruction.Encoding == EncodingKind.Legacy ? string.Empty : instruction.Encoding.ToString();            
-            return AsmInstructionInfo.Define(offset, formatted, mnemonic, opcode, operands, enckind, encoded);
+            var encoding = instruction.Encoding == EncodingKind.Legacy ? string.Empty : instruction.Encoding.ToString();            
+            return AsmInstructionInfo.Define(offset, formatted, mnemonic, opcode, operands, encoding, encoded);
         }
 
         /// <summary>

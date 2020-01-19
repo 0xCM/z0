@@ -9,12 +9,12 @@ namespace Z0
 
     using static zfunc;
 
-    public readonly struct BlockMoniker
+    public readonly struct BlockTypeSig
     {        
-        public static BlockMoniker Define(BlockWidth width, PrimalKind cellkind)
-            => new BlockMoniker(width,cellkind);
+        public static BlockTypeSig Define(BlockWidth width, PrimalKind cellkind)
+            => new BlockTypeSig(width,cellkind);
 
-        public BlockMoniker(BlockWidth width, PrimalKind cellkind)
+        public BlockTypeSig(BlockWidth width, PrimalKind cellkind)
         {
             this.BlockWidth = width;
             this.CellKind = cellkind;

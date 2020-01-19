@@ -16,7 +16,6 @@ namespace Z0
     
     public static class AsmFormatX
     {
-
         public static string Format(this CilFunction src)
         {
             var rendered = text();
@@ -35,11 +34,15 @@ namespace Z0
             return rendered.ToString();
         }
 
-        public static string Format(this InstructionBlock src, AsmFormatConfig config = null)
-            => src.FormatAsm(config ?? AsmFormatConfig.Default).FormatLines();
-
         public static string FormatCil(this MethodDisassembly src)
             => src.CilFunction.MapValueOrElse(f => f.Format(), () => string.Empty);
+
+        public static ReadOnlySpan<string> Format(this MethodAsmBody src, AsmFormatConfig config)
+            => InstructionBlock.Define(
+                Moniker.Provider.Define(src.Method),
+                src.Method.Signature().Format(), 
+                src.NativeBlock.Data, 
+                src.Instructions).Format(config ?? AsmFormatConfig.Default);
 
         public static string Format(this MethodAsmBody src)
         {
@@ -54,7 +57,7 @@ namespace Z0
             var sb = text();
 
             var writer = new StringWriter(sb);
-            var output = new AsmFormatterOutput(writer, baseAddress);
+            var output = new AsmOutput(writer, baseAddress);
             for(var j = 0; j< src.Instructions.Length; j++)
             {
                 ref var i = ref src.Instructions[j];
@@ -81,9 +84,14 @@ namespace Z0
         static string comment(string src)
             => $"{AsciSym.Semicolon}{AsciSym.Space}{src}";
 
-        public static ReadOnlySpan<string> FormatAsm(this InstructionBlock src, AsmFormatConfig config)
+        public static string FormatLines(this InstructionBlock src, AsmFormatConfig config = null)
+            => src.Format(config ?? AsmFormatConfig.Default).FormatLines();
+
+        public static ReadOnlySpan<string> Format(this InstructionBlock src, AsmFormatConfig config = null)
         {
             const string RelAddresSpec = "x4";
+
+            config = config ?? AsmFormatConfig.Default;
 
             if(src.InstructionCount == 0)
                 return ReadOnlySpan<string>.Empty;
@@ -109,7 +117,7 @@ namespace Z0
 
             var sb = text();
             var writer = new StringWriter(sb);
-            var output = new AsmFormatterOutput(writer, baseAddress);
+            var output = new AsmOutput(writer, baseAddress);
             for(var current = 0; current < src.InstructionCount; line++, current++)
             {
                 ref var instruction = ref src[current];
@@ -133,48 +141,6 @@ namespace Z0
             return dst;
         }
 
-        public static ReadOnlySpan<string> FormatAsm(this MethodAsmBody src, AsmFormatConfig config = null)
-            => InstructionBlock.Define(
-                Moniker.Provider.Define(src.Method),
-                src.Method.Signature().Format(), 
-                src.NativeBlock.Data, 
-                src.Instructions).FormatAsm(config ?? AsmFormatConfig.Default);
-
-        class AsmFormatterOutput : FormatterOutput
-        {
-            TextWriter Writer {get;}
-            
-            ulong BaseAddress {get;}
-
-            public AsmFormatterOutput(TextWriter writer, ulong BaseAddress)
-            {
-                this.Writer = writer;
-                this.BaseAddress = BaseAddress;
-            }
-            
-            public override void Write(string text, FormatterOutputTextKind kind)
-            {
-                switch(kind)
-                {
-                    case FormatterOutputTextKind.LabelAddress:
-                        var x = text.EndsWith(AsciLower.h) ? text.Substring(0, text.Length - 1)  : text;
-                        if(ulong.TryParse(x, System.Globalization.NumberStyles.HexNumber,null, out var address))
-                        {
-                            var ra = (address - BaseAddress).ToString("x4");
-                            var label = $"{ra}h";
-                            Writer.Write(label);
-                        }
-                        else
-                        {
-                            Writer.Write($"{text}{AsciSym.Question}");
-                        }
-                    break;
-                    default:
-                        Writer.Write(text);    
-                    break;
-                }
-            }                
-        }
 
         static MasmFormatterOptions FormatOptions => new MasmFormatterOptions
         {

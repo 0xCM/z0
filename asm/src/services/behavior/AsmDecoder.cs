@@ -13,16 +13,6 @@ namespace Z0
 
     using static zfunc;
 
-    public class NoCodeException : Exception
-    {
-        public NoCodeException(string method)
-            : base($"No code was found for the method ${method}")
-        {
-            this.MethodName = method;
-        }
-
-        public string MethodName {get;}        
-    }
 
     public static class AsmDecoder
     {
@@ -49,10 +39,10 @@ namespace Z0
 
         public static IEnumerable<MethodDisassembly> decode(FastGenericInfo op, ClrMetadataIndex index)
         {
-            foreach(var moniker in op.Reifications)
+            foreach(var k in op.Kinds)
             {
-                var arg = moniker.PrimalKind.ToPrimalType();
-                var method = op.Method.MakeGenericMethod(arg);
+                var moniker = Moniker.Provider.Define(op.Method, k);
+                var method = op.Method.MakeGenericMethod(k.ToPrimalType());
                 var result = decode(method, moniker, index).ValueOrDefault();
                 if(result != null)
                     yield return result;

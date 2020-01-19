@@ -12,7 +12,7 @@ namespace Z0
 
     partial class Converter
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op("convert16i"), PrimalClosures(PrimalKind.All)]
         public static T convert<T>(short src)
             where T : unmanaged
         {

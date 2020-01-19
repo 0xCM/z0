@@ -15,17 +15,19 @@ namespace Z0
 
     public class FastGenericInfo : FastOpInfo
     {
-        public static FastGenericInfo Define(string name, MethodInfo method, IEnumerable<Moniker> reifications)
-            => new FastGenericInfo(name, method,reifications);
+        public static FastGenericInfo Define(string name, MethodInfo method, IEnumerable<PrimalKind> kinds)
+            => new FastGenericInfo(name, method,kinds);
 
-        public FastGenericInfo(string name, MethodInfo method, IEnumerable<Moniker> reifications)
+        public FastGenericInfo(string name, MethodInfo method, IEnumerable<PrimalKind> kinds)
             : base(name,method)
         {
-            this.Reifications = reifications;
+            this.Kinds= kinds.ToArray();
         }
+    
+        public PrimalKind[] Kinds {get;}
 
-        public IEnumerable<Moniker> Reifications {get;}
-
+        // public IEnumerable<MethodInfo> Reifications
+        //     =>  Kinds.Select(k => Method.MakeGenericMethod(k.ToPrimalType()));
         public override bool IsGeneric => true;        
     }
 }

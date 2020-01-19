@@ -13,15 +13,6 @@ namespace Z0
     using static zfunc;
     using static AsmServiceMessages;
 
-    public interface IAsmCatalogEmitter
-    {
-       void EmitCatalog();
-       
-       void EmitDirect();
-       
-       void EmitGeneric();
-         
-    }
 
     class AsmCatalogEmitter : IAsmCatalogEmitter
     {

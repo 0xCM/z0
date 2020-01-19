@@ -32,6 +32,9 @@ namespace Z0
         public static AppMsg EmittingImmediateResolutions(FastOpInfo op)        
             => appMsg($"Emitting immediate resolutions for {op.Name}", SeverityLevel.Babble);
 
+        public static AppMsg CatalogNotFound(AssemblyId id)        
+            => appMsg($"The operation catalog for the assembly {id} was not found", SeverityLevel.Warning);
+
     }
 
 

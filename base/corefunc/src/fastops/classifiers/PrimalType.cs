@@ -84,19 +84,21 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline | Optimize)]
         public static PrimalKind kind(Type t)
-            => Type.GetTypeCode(t) switch{
-                TypeCode.Byte => PrimalKind.U8,
-                TypeCode.SByte => PrimalKind.I8,
-                TypeCode.Int16 => PrimalKind.I16,
-                TypeCode.UInt16 => PrimalKind.U16,
-                TypeCode.Int32 => PrimalKind.I32,
-                TypeCode.UInt32 => PrimalKind.U32,
-                TypeCode.Int64 => PrimalKind.I64,
-                TypeCode.UInt64 => PrimalKind.U64,
-                TypeCode.Single => PrimalKind.F32,
-                TypeCode.Double => PrimalKind.F64,
-                _ => PrimalKind.None
-            };
+            => Type.GetTypeCode((t.IsRef() ? t.GetElementType() : t)) 
+                switch
+                {
+                    TypeCode.Byte => PrimalKind.U8,
+                    TypeCode.SByte => PrimalKind.I8,
+                    TypeCode.Int16 => PrimalKind.I16,
+                    TypeCode.UInt16 => PrimalKind.U16,
+                    TypeCode.Int32 => PrimalKind.I32,
+                    TypeCode.UInt32 => PrimalKind.U32,
+                    TypeCode.Int64 => PrimalKind.I64,
+                    TypeCode.UInt64 => PrimalKind.U64,
+                    TypeCode.Single => PrimalKind.F32,
+                    TypeCode.Double => PrimalKind.F64,
+                    _ => PrimalKind.None
+                };
 
         /// <summary>
         /// Determines whether a type is classified as primal

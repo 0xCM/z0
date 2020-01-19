@@ -29,6 +29,26 @@ namespace Z0
         static IEnumerable<IAssemblyDesignator> TestHosts
             => C.Designated.Designates.Where(d => d.Role == AssemblyRole.Test).Select(x => x);
 
+
+        static AsmCodeSet[] ResolveExample<T>(N128 w, T t = default)
+            where T : unmanaged
+        {
+            var imm = new byte[]{199,205};
+            var r1 = VX.vbsll(w,t).CaptureImmediates(imm);
+            var r2 = VX.vsrl(w,t).CaptureImmediates(imm);            
+            var r3 = VX.vblend8x16(w,t).CaptureImmediates(imm);
+            return r1.Union(r2).Union(r3).ToArray();
+        }
+
+        static AsmCodeSet[] ResolveExample<T>(N256 w, T t = default)
+            where T : unmanaged
+        {
+            var imm = new byte[]{199,205};
+            var r1 = VX.vbsll(w,t).CaptureImmediates(imm);
+            var r2 = VX.vsrl(w,t).CaptureImmediates(imm);
+            return r1.Union(r2).ToArray();            
+        }
+
         static double RunTests(IAssemblyDesignator host)
         {
             var clock = counter(true);

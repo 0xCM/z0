@@ -76,13 +76,11 @@ namespace Z0
                 return unhandled<S,T>(src);
         }
 
-
         static T unhandled<S,T>(S src, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
             Errors.Throw($"The conversion {typename<S>()} -> {typename<T>()} needed for the value {src} doesn't exist", caller,file,line);
             return default;
         }
-
     }
 }

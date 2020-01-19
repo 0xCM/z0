@@ -28,8 +28,8 @@ namespace Z0
         /// Gets the name of a method to which to Op attribute is applied
         /// </summary>
         /// <param name="m">The source method</param>
-        public static string FastOpName(this MethodInfo m )
-            => m.CustomAttribute<OpAttribute>().MapValueOrElse(a => a.Name.IsBlank() ? m.Name : a.Name, () => m.Name);
+        public static string FastOpName(this MethodInfo m)
+            => Classified.opname(m);
 
         /// <summary>
         /// Extracts fastop metadata from a host type for non-generic operations
@@ -41,21 +41,27 @@ namespace Z0
         public static IEnumerable<FastDirectInfo> FastOpDirect(this IEnumerable<Type> hosts)
             => hosts.SelectMany(h => h.FastOpDirect());
 
-        public static IEnumerable<PrimalKind> FastOpClosures(this MethodInfo m)
+        public static IEnumerable<PrimalKind> PrimalClosures(this MethodInfo m)
             => m.CustomAttribute<PrimalClosuresAttribute>().MapValueOrElse(a => a.Closures.Distinct(), () => items<PrimalKind>());
 
+        public static Option<FastGenericInfo> GenericOpInfo(this MethodInfo m) 
+            => FastGenericInfo.Define(m.FastOpName(), m.GetGenericMethodDefinition(), m.PrimalClosures());
+            // var provider = Moniker.Provider;
+            // var monikers = (from closure in m.PrimalClosures() select provider.Define(def, closure)).ToArray();
+            // if(monikers.Length != 0)
+            //     return FastGenericInfo.Define(m.FastOpName(),def, monikers);
+            // else
+            //     return default;                 
+                
         /// <summary>
         /// Extracts fastop metadata from a host type for generic operations
         /// </summary>
         /// <param name="host">The source type</param>
         public static IEnumerable<FastGenericInfo> FastOpGenerics(this Type host) 
             => from m in host.FastOpMethods().OpenGeneric()
-                let closures = m.FastOpClosures().ToArray()
-                where closures.Length != 0 
-                let def = m.GetGenericMethodDefinition()                
-                let provider = Moniker.Provider
-                let monikers = closures.Map(closure => provider.Define(def, closure))
-                select FastGenericInfo.Define(m.FastOpName(), def, monikers);
+                let g  = m.GenericOpInfo()
+                where g.IsSome()
+                select g.Value;
                         
         public static IEnumerable<FastGenericInfo> FastOpGenerics(this IEnumerable<Type> hosts)
             => from host in hosts
@@ -67,20 +73,44 @@ namespace Z0
         /// </summary>
         /// <param name="generics">Metadata for generic operations</param>
         public static IEnumerable<Pair<Moniker,MethodInfo>> Closures(this FastGenericInfo op)
-            => from r in op.Reifications
-               where r.PrimalKind.IsSome()
-               let t = r.PrimalKind.ToPrimalType()
-               let m = op.Method.MakeGenericMethod(t)
-               select paired(r,m);
+            => from k in op.Kinds
+                let m = Moniker.Provider.Define(op.Method, k)
+                select paired(m, op.Method.MakeGenericMethod(k.ToPrimalType()));
+            // => from r in op.SayBye
+            //    where r.PrimalKind.IsSome()
+            //    let t = r.PrimalKind.ToPrimalType()
+            //    let m = op.Method.MakeGenericMethod(t)
+            //    select paired(r,m);
             
+        /// <summary>
+        /// Determines whether a method defines a formalized operation
+        /// </summary>
+        /// <param name="m">The method to examine</param>
         public static bool IsFastOp(this MethodInfo m)
-            => m.Attributed<OpAttribute>();
+            => Classified.fastop(m);
         
+        /// <summary>
+        /// Determines whether a method is classified as a span op
+        /// </summary>
+        /// <param name="m">The method to examine</param>
         public static bool IsSpanOp(this MethodInfo m)
-            => m.Attributed<SpanOpAttribute>();
+            => Classified.spanned(m);
 
+        /// <summary>
+        /// Determines whether a method is classified as a nat op
+        /// </summary>
+        /// <param name="m">The method to examine</param>
         public static bool IsNatOp(this MethodInfo m)
-            => m.Attributed<NatOpAttribute>();
+            => Classified.natural(m);
+        
+        /// <summary>
+        /// Determines whether a method is classified as a blocked op
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsBlockedOp(this MethodInfo m)
+            => Classified.blocked(m);
 
+        public static IEnumerable<MethodInfo> FastOps(this IEnumerable<MethodInfo> src)
+            => src.Attributed<OpAttribute>();
     }
 }

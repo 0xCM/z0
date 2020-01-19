@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     using static zfunc;
 
@@ -17,18 +18,6 @@ namespace Z0
 
     public static partial class Classified
     {
-        public static IEnumerable<PrimalKind> UnsignedKinds
-            => items(PrimalKind.U8, PrimalKind.U16, PrimalKind.U32, PrimalKind.U64);
-
-        public static IEnumerable<PrimalKind> SignedKinds
-            => items(PrimalKind.I8, PrimalKind.I16, PrimalKind.I32, PrimalKind.I64);
-
-        public static IEnumerable<PrimalKind> FloatingKinds
-            => items(PrimalKind.F32, PrimalKind.F64);
-
-        public static IEnumerable<PrimalKind> IntegralKinds
-            => UnsignedKinds.Union(SignedKinds);
-
         /// <summary>
         /// Specifies the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
         /// </summary>
@@ -242,9 +231,43 @@ namespace Z0
         /// Determines whether the signed or unsigned facet of a block classification is enabled
         /// </summary>
         /// <param name="k">The vector classifier</param>
-        [MethodImpl(Inline)]
         public static bit integral(BlockKind k)
             => signed(k) || unsigned(k);
+
+        /// <summary>
+        /// Determines whether a method defines a formalized operation
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool fastop(MethodInfo m)
+            => m.Attributed<OpAttribute>();
+
+        /// <summary>
+        /// Determines whether a method is classified as a blocked op
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool blocked(MethodInfo m)
+            => m.Attributed<BlockedOpAttribute>();
+
+        /// <summary>
+        /// Determines whether a method is classified as a natural op
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool natural(MethodInfo m)
+            => m.Attributed<NatOpAttribute>();
+
+        /// <summary>
+        /// Determines whether a method is classified as a span op
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool spanned(MethodInfo m)
+            => m.Attributed<SpanOpAttribute>();
+
+        /// <summary>
+        /// Gets the name of a method to which an Op attribute is applied
+        /// </summary>
+        /// <param name="m">The source method</param>
+        public static string opname(MethodInfo m )
+            => m.CustomAttribute<OpAttribute>().MapValueOrElse(a => a.Name.IsBlank() ? m.Name : a.Name, () => m.Name);
 
         /// <summary>
         /// Returns true if the source type is intrinsic or blocked
