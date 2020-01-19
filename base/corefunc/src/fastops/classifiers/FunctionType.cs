@@ -166,11 +166,18 @@ namespace Z0
             && m.ParameterTypes().Second() == typeof(byte);
 
         /// <summary>
+        /// Determines whether a parameters is an immediate
+        /// </summary>
+        /// <param name="param">The parameter to examine</param>
+        public static bool immediate(ParameterInfo param)
+            => param.Attributed<ImmAttribute>();
+
+        /// <summary>
         /// Determines whether a method defines a parameter that requires an 8-bit immediate immediate
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static bool imm8required(MethodInfo m)        
-            => m.GetParameters().Where(p => p.Attributed<ImmAttribute>()).Any();
+        public static bool immrequired(MethodInfo m)        
+            => m.GetParameters().Where(immediate).Any();
 
         /// <summary>
         /// Returns a method's parameter types
@@ -192,5 +199,20 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static Pair<ParameterInfo,int> outputwidth(MethodInfo m)
             => paired(m.ReturnParameter, m.ReturnType.BitWidth());
+
+        /// <summary>
+        /// Determines whether a methods accepts one or more operands and that all operands are of the same type
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool homogenousoperands(this MethodInfo m)
+            => m.ParameterTypes().Distinct().Count() == 1;
+
+        /// <summary>
+        /// Determines whether a method accepts one ore more operands and all operands are primal
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool primaloperands(this MethodInfo m)
+            => m.ParameterCount() != 0 && m.ParameterTypes().All(t => t.IsPrimal());
+
     }
 }

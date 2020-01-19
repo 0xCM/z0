@@ -23,7 +23,7 @@ namespace Z0
         public static TypeRep FromParameter(ParameterInfo src)
         {
             var type = src.ParameterType;
-            var name = type.IsRef() ? type.GetElementType().DisplayName() : type.DisplayName();
+            var name = type.EffectiveType().DisplayName();
             
             return new TypeRep(name, 
                 type.IsConstructedGenericType, 

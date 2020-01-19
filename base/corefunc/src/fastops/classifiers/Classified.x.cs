@@ -98,11 +98,12 @@ namespace Z0
         public static bit Is(this PrimalKind k, PrimalKind match)        
             => (k & match) != 0;
 
+
         /// <summary>
         /// Selects the distinct primal kinds represented by a classifier
         /// </summary>
-        /// <param name="k"></param>
-        public static IEnumerable<PrimalKind> Distinct(this PrimalKind k)       
+        /// <param name="k">The primal classifier</param>
+        public static IEnumerable<PrimalKind> DistinctKinds(this PrimalKind k)       
         {
             if(k.Is(PrimalKind.U8))
                 yield return PrimalKind.U8;
@@ -138,9 +139,15 @@ namespace Z0
         public static PrimalKind ToKind(this PrimalId id)
             => Classified.kind(id);
 
+        /// <summary>
+        /// Computes the primal types identified by a specified kind
+        /// </summary>
+        /// <param name="k">The primal kind</param>
+        public static IEnumerable<Type> PrimalTypes(this PrimalKind k)
+            => k.DistinctKinds().Select(x => x.ToPrimalType());         
 
         /// <summary>
-        /// Selects the distinct primal kinds represented by a classifier
+        /// Computes the primal identifies of the classified kinds
         /// </summary>
         /// <param name="k"></param>
         public static IEnumerable<PrimalId> Identities(this PrimalKind k)       
@@ -206,12 +213,12 @@ namespace Z0
         /// <param name="src">The source method</param>
         /// <param name="args">The arguments over which to close the method, if generic</param>
         [MethodImpl(Inline)]
-        public static FastOp FastOp(this MethodInfo src, params Type[] args)
-            => Z0.FastOp.Define(src, args);
+        public static FastOp FastOp(this MethodInfo src)
+            => Z0.FastOp.Define(src);
 
         [MethodImpl(Inline)]
-        public static FastOp FastOp(this MethodInfo src, Moniker m)
-            => Z0.FastOp.Define(src, m);
+        public static FastOp FastOp(this MethodInfo src, Moniker m, Span<byte> buffer)
+            => Z0.FastOp.Define(src, m, buffer);
 
         /// <summary>
         /// Determines the primal kind of a type, possibly none
@@ -357,11 +364,18 @@ namespace Z0
             => FunctionType.primalshift(m);
 
         /// <summary>
+        /// Determines whether a parameters is an immediate
+        /// </summary>
+        /// <param name="param">The parameter to examine</param>
+        public static bool IsImmediate(this ParameterInfo param)
+            => FunctionType.immediate(param);
+
+        /// <summary>
         /// Determines whether a method defines a parameter that requires an immediate
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool RequiresImmediate(this MethodInfo m)        
-            => FunctionType.imm8required(m);
+            => FunctionType.immrequired(m);
 
         /// <summary>
         /// Determines whether a method has intrinsic paremeters or return type of specified width
@@ -372,6 +386,23 @@ namespace Z0
         public static bool IsVectorized(this MethodInfo m, int? width, bool total)        
             => FunctionType.vectorized(m,width,total);
 
+        public static bool IsUnaryImmVectorOp(this MethodInfo method)
+        {
+            var parameters = method.GetParameters().ToArray();
+            return parameters.Length == 2 
+                && parameters[0].ParameterType.IsVector() 
+                && parameters[1].IsImmediate();
+        }
+
+        public static bool IsBinaryImmVectorOp(this MethodInfo method)
+        {
+            var parameters = method.GetParameters().ToArray();
+            return parameters.Length == 3 
+                && parameters[0].ParameterType.IsVector() 
+                && parameters[1].ParameterType.IsVector() 
+                && parameters[2].IsImmediate();
+        }
+
         /// <summary>
         /// Determines whether a type is blocked memory store
         /// </summary>
@@ -381,17 +412,10 @@ namespace Z0
             => BlockedType.test(t);
 
         /// <summary>
-        /// Determines whether a method accepts and/or returns at least one memory block parameter
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsBlocked(this MethodInfo m)
-            => Classified.blocked(m);        
-
-        /// <summary>
         /// Selects the parameters for a method, if any, that accept an intrinsic vector
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static IEnumerable<ParameterInfo> InstrinsicParameters(this MethodInfo m, int? width = null)
+        public static IEnumerable<ParameterInfo> VectorParams(this MethodInfo m, int? width = null)
             => m.GetParameters().Where(p => p.ParameterType.IsVector(width));
             
         /// <summary>
@@ -420,14 +444,14 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool HasPrimalOperands(this MethodInfo m)
-            => m.ParameterTypes().All(t => t.IsPrimal());
+            => FunctionType.primaloperands(m);
 
         /// <summary>
         /// Determines whether all operands are of the same type
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool HasHomogenousOperands(this MethodInfo m)
-            => m.ParameterTypes().Distinct().Count() == 1;
+            => FunctionType.homogenousoperands(m);
 
         /// <summary>
         /// Determines whether a method defines a unary function
@@ -588,12 +612,12 @@ namespace Z0
             => src.Where(x => !x.IsBlocked());
 
         /// <summary>
-        /// Selects (or filters) the methods that define parameters that require immediate values
+        /// Selects the methods that define parameters that require immediate values
         /// </summary>
         /// <param name="src">The methods to examine</param>
         /// <param name="required">Whether an immediate is required</param>
-        public static IEnumerable<MethodInfo> RequiresImmediate(this IEnumerable<MethodInfo> src, bool required)
-            => required ? src.Where(RequiresImmediate) : src;
+        public static IEnumerable<MethodInfo> RequiresImmediate(this IEnumerable<MethodInfo> src)
+            => src.Where(RequiresImmediate);
 
         /// <summary>
         /// Returns an identified unary operator if it exists
@@ -644,35 +668,14 @@ namespace Z0
                let a = f.CustomAttribute<BinaryLiteralAttribute>().Require()
                 select BinaryLiteral.Define(f.Name, f.GetValue(null), a.Text);
 
-        /// <summary>
-        /// Determines whether a parameters is an immediate
-        /// </summary>
-        /// <param name="param"></param>
-        /// <returns></returns>
-        public static bool IsImmediate(this ParameterInfo param)
-            => param.Attributed<ImmAttribute>();
 
-        public static bool IsUnaryImmVectorOp(this MethodInfo method)
-        {
-            var parameters = method.GetParameters().ToArray();
-            return parameters.Length == 2 
-                && parameters[0].ParameterType.IsVector() 
-                && parameters[1].IsImmediate();
-        }
-
-        public static bool IsBinaryImmVectorOp(this MethodInfo method)
-        {
-            var parameters = method.GetParameters().ToArray();
-            return parameters.Length == 3 
-                && parameters[0].ParameterType.IsVector() 
-                && parameters[1].ParameterType.IsVector() 
-                && parameters[2].IsImmediate();
-        }
 
         [MethodImpl(Inline)]
-        public static void Clear<T>(this T[] src)
-            => src?.Fill(default(T));
-
+        public static T[] Clear<T>(this T[] src)
+        {
+            src?.Fill(default(T));
+            return src;
+        }
         
         /// <summary>
         /// Retrives the primal kind of the first type parameter, if any
@@ -682,6 +685,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static PrimalKind TypeParamKind(this MethodInfo method, N1 n)
             => (method.IsGenericMethod ? method.GetGenericArguments() : array<Type>()).FirstOrDefault()?.Kind() ?? PrimalKind.None;
-
     }
 }

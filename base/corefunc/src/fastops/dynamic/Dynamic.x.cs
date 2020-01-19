@@ -14,6 +14,41 @@ namespace Z0
 
     public static class DynamicX
     {
+        /// <summary>
+        /// Returns a pointer to the native content of a dynamic method
+        /// </summary>
+        /// <param name="method">The source method</param>
+        public static IntPtr NativePointer(this DynamicMethod method)
+            => Native.pointer(method);
+
+        /// <summary>
+        /// Returns a dynamic delegate's dynamic pointer
+        /// </summary>
+        /// <param name="src">The source delegate</param>
+        public static unsafe DynamicPointer GetDynamicPointer(this DynamicDelegate src)
+            => DynamicPointer.From(src);
+
+        /// <summary>
+        /// Returns a dynamic delegate's dynamic pointer
+        /// </summary>
+        /// <param name="src">The source delegate</param>
+        public static unsafe DynamicPointer GetDynamicPointer<D>(this DynamicDelegate<D> src)
+            where D : Delegate
+                => DynamicPointer.From(src);
+
+        public static CilFunctionBody CilFunc(this DynamicMethod src)
+            => CilFunctionBody.From(src);
+
+        public static CilFunctionBody CilFunc(this MethodInfo src)
+            => CilFunctionBody.From(src);
+
+        public static CilFunctionBody CilFunc(this DynamicDelegate src)
+            => CilFunctionBody.From(src);
+
+        public static CilFunctionBody CilFunc<D>(this DynamicDelegate<D> src)
+            where D : Delegate
+                => CilFunctionBody.From(src);
+
         internal static DynamicDelegate<D> CreateDelegate<D>(this DynamicMethod dst, MethodInfo src)
             where D : Delegate
                 => DynamicDelegate.Define(src,dst, (D)dst.CreateDelegate(typeof(D)));
@@ -42,6 +77,5 @@ namespace Z0
 
             return g;
         }
-
     }
 }

@@ -14,10 +14,7 @@ namespace Z0
     using static zfunc;
 
     public class FastGenericInfo : FastOpInfo
-    {
-        public static FastGenericInfo Define(string name, MethodInfo method, IEnumerable<PrimalKind> kinds)
-            => new FastGenericInfo(name, method,kinds);
-
+    {                        
         public FastGenericInfo(string name, MethodInfo method, IEnumerable<PrimalKind> kinds)
             : base(name,method)
         {
@@ -26,8 +23,6 @@ namespace Z0
     
         public PrimalKind[] Kinds {get;}
 
-        // public IEnumerable<MethodInfo> Reifications
-        //     =>  Kinds.Select(k => Method.MakeGenericMethod(k.ToPrimalType()));
         public override bool IsGeneric => true;        
     }
 }

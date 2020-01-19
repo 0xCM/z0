@@ -11,21 +11,6 @@ namespace Z0
 
     using static zfunc;
 
-    /// <summary>
-    /// Clasifies types
-    /// </summary>
-    [Flags]
-    public enum TypeKind : uint
-    {    
-        None = 0,
-        
-        Primal = 1,
-
-        Block = 2,
-
-        Vector = 4
-
-    }
 
     public interface ITypeKind : ISemanticFormat
     {

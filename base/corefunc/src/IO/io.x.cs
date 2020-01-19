@@ -62,7 +62,7 @@ namespace Z0
         public static StreamWriter Writer(this FilePath dst, bool append = false)
         {
             dst.FolderPath.CreateIfMissing();
-            return new StreamWriter(dst.FullPath,append);
+            return new StreamWriter(dst.FullPath, append);
         }
 
         /// <summary>

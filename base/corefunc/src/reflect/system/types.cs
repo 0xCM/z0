@@ -40,6 +40,13 @@ namespace Z0
             => src.UnderlyingSystemType.IsByRef;
 
         /// <summary>
+        /// If the source type is a type reference, returns the referenced type; otherwise, returns the original type
+        /// </summary>
+        /// <param name="src">The type to examine</param>
+        public static Type EffectiveType(this Type src)
+            =>  src.IsRef() ? src.GetElementType() : src;
+
+        /// <summary>
         /// Determines whether a type is a reference to a generic type
         /// </summary>
         /// <param name="t">The type to examine</param>
@@ -53,7 +60,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         public static Option<Type> GenericDefinition(this Type t)
         {
-            var x = t.IsRef() ? t.GetElementType() : t;
+            var x = t.EffectiveType();
             return x.IsGenericType ? x.GetGenericTypeDefinition() : default;                
         }
                 
@@ -230,7 +237,6 @@ namespace Z0
         public static IEnumerable<Type> Delegates(this IEnumerable<Type> src)
             => src.Where(t => t.IsDelegate());
 
-
         /// <summary>
         /// Returns all source types which are enums
         /// </summary>
@@ -261,84 +267,10 @@ namespace Z0
         /// Determines whether a type is nullable
         /// </summary>
         /// <param name="t">The type to examine</param>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static bool IsNullableType(this Type t)
-            => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>);
-
-        /// <summary>
-        /// Determines whether a type is a nullable or non-nullable type with a given underlying type
-        /// </summary>
-        /// <typeparam name="T">The type to match</typeparam>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        internal static bool IsTypeOf<T>(this Type t)
-            => t == typeof(T) || t.IsNullableType<T>();
-
-        /// <summary>
-        /// Determines whether a supplied type is either a <see cref="DateTime"/> or a <see cref="Nullable{DateTime}"/>
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsDateTime(this Type t)
-            => t.IsTypeOf<DateTime>();
-
-        /// <summary>
-        /// Determines whether a supplied type is DBNull
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        /// <returns></returns>
-        [MethodImpl(Inline)]
-        public static bool IsDbNull(this Type src)
-            => src == typeof(DBNull) || src.GetUnderlyingType() == typeof(DBNull);
-
-        /// <summary>
-        /// Determines whether a supplied type is either a <see cref="TimeSpan"/> or a <see cref="Nullable{TimeSpan}"/>
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsTimeSpan(this Type t)
-            => t.IsTypeOf<TimeSpan>();
-
-        /// <summary>
-        /// Determines whether a supplied type is either a <see cref="Boolean"/> or a <see cref="Nullable{Boolean}"/>
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsBool(this Type t)
-            => t.IsTypeOf<Boolean>();
-
-        /// <summary>
-        /// Determines whether a supplied type is of type string
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsString(this Type t)
-            => t == typeof(string);
-
-        /// <summary>
-        /// Determines whether a supplied type is of type Void
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsVoid(this Type t)
-            => t == typeof(void);
-
-        /// <summary>
-        /// Determines whether a supplied type is either a <see cref="Char"/> or a nullable <see cref="Nullable{Char}"/>
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsChar(this Type t)
-            => t.IsTypeOf<Char>();
-
-        /// <summary>
-        /// Determines whether a supplied type is either a <see cref="Guid"/> or a nullable <see cref="Nullable{Guid}"/>
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsGuid(this Type t)
-            => t.IsTypeOf<Guid>();
+            =>  (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>))
+              | (t.IsGenericRef() && t.GetElementType().GetGenericTypeDefinition() == typeof(Nullable<>));
 
         /// <summary>
         /// Determine whether a type is a nullable type with a given underlying type
@@ -349,8 +281,162 @@ namespace Z0
         /// Returns true if t is both a nullable type and is of type T
         /// </returns>
         [MethodImpl(Inline)]
-        public static bool IsNullableType<T>(this Type t)
+        public static bool IsNullable<T>(this Type t)
             => t.IsNullableType() && Nullable.GetUnderlyingType(t) == typeof(T);
+
+
+        public static bool IsNullable(this Type subject, Type match)
+            => subject.IsNullableType() && Nullable.GetUnderlyingType(subject) == match;
+
+        /// <summary>
+        /// Determines whether a source type is predicated on a specified match type, including nullable wrappers, references and enums
+        /// </summary>
+        /// <typeparam name="T">The type to match</typeparam>
+        /// <param name="candidate">The source type</param>
+        /// <param name="match">The type to match</param>
+        public static bool IsTypeOf(this Type candidate, Type match)
+            => candidate.EffectiveType() == match
+            || candidate.EffectiveType().IsNullable(match)
+            || candidate.EffectiveType().IsEnum && candidate.EffectiveType().GetEnumUnderlyingType() == match;
+
+        /// <summary>
+        /// Determines whether a source type is predicated on a parametric type, including nullable wrappers, references and enums
+        /// </summary>
+        /// <param name="candidate">The source type</param>
+        /// <typeparam name="T">The type to match</typeparam>
+        [MethodImpl(Inline)]
+        public static bool IsTypeOf<T>(this Type candidate)
+            => candidate.EffectiveType() == typeof(T) 
+            || candidate.EffectiveType().IsNullable<T>()
+            || candidate.EffectiveType().IsEnum && candidate.EffectiveType().GetEnumUnderlyingType() == typeof(T);
+
+        /// <summary>
+        /// Determines whether a supplied type is predicated on a bool, including nullable wrappers and references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsBool(this Type t)
+            => t.IsTypeOf<bool>();
+
+        /// <summary>
+        /// Determines whether a supplied type is predicated on a string, including references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsString(this Type t)
+            => t.IsTypeOf<string>();
+
+        /// <summary>
+        /// Determines whether a supplied type is of type Void
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsVoid(this Type t)
+            => t == typeof(void);
+
+        /// <summary>
+        /// Determines whether a supplied type is predicated on a char, including nullable wrappers and references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsChar(this Type t)
+            => t.IsTypeOf<Char>();
+
+        /// <summary>
+        /// Determines whether a supplied type is predicated on a guid, including enums, nullable wrappers and references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsGuid(this Type t)
+            => t.IsTypeOf<Guid>();
+
+        /// <summary>
+        /// Determines whether a supplied type is predicated on a byte, including enums, nullable wrappers and references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsByte(this Type t)
+            => t.IsTypeOf<byte>();
+
+        /// <summary>
+        /// Determines whether a supplied type is predicated on an sbyte, including enums, nullable wrappers and references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsSByte(this Type t)
+            => t.IsTypeOf<sbyte>();
+
+        /// <summary>
+        /// Determines whether a supplied type is predicated on a ushort, including enums, nullable wrappers and references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsUInt16(this Type t)
+            => t.IsTypeOf<ushort>();
+
+        /// <summary>
+        /// Determines whether a supplied type is predicated on a short, including enums, nullable wrappers and references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsInt16(this Type t)
+            => t.IsTypeOf<short>();
+
+        /// <summary>
+        /// Determines whether a supplied type is predicated on a uint, including enums, nullable wrappers and references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsUInt32(this Type t)
+            => t.IsTypeOf<uint>();
+
+        /// <summary>
+        /// Determines whether a supplied type is predicated on an int, including enums, nullable wrappers and references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsInt32(this Type t)
+            => t.IsTypeOf<int>();
+
+        /// <summary>
+        /// Determines whether a supplied type is predicated on a ulong, including enums, nullable wrappers and references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsUInt64(this Type t)
+            => t.IsTypeOf<ulong>();
+
+        /// <summary>
+        /// Determines whether a supplied type is predicated on a long, including enums, nullable wrappers and references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsInt64(this Type t)
+            => t.IsTypeOf<long>();
+
+        /// <summary>
+        /// Determines whether a supplied type is predicated on a float, including enums, nullable wrappers and references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsSingle(this Type t)
+            => t.IsTypeOf<float>();
+
+        /// <summary>
+        /// Determines whether a supplied type is predicated on a double, including enums, nullable wrappers and references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsDouble(this Type t)
+            => t.IsTypeOf<double>();
+
+        /// <summary>
+        /// Determines whether a supplied type is predicated on a double, including enums, nullable wrappers and references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsDecimal(this Type t)
+            => t.IsTypeOf<decimal>();
 
         /// <summary>
         /// Determines whether a type is anonymous
@@ -955,8 +1041,6 @@ namespace Z0
         public static IReadOnlyDictionary<string, object> PropertyValues(this Type t, object o)
             => map(props(o), p => (p.Name, p.GetValue(o))).ToReadOnlyDictionary();
 
-
-
         /// <summary>
         /// Recursively close an IEnumerable generic type
         /// </summary>
@@ -1026,26 +1110,36 @@ namespace Z0
  
         public static string TypeKeyword(this Type src)
         {
-            if(src == typeof(sbyte) || src.GetUnderlyingType() == typeof(sbyte))
+            if(src.IsSByte())
                 return "sbyte";
-            else if(src == typeof(byte) || src.GetUnderlyingType() == typeof(byte))
+            else if(src.IsByte())
                 return "byte";
-            else if(src == typeof(ushort)|| src.GetUnderlyingType() == typeof(ushort))
+            else if(src.IsUInt16())
                 return "ushort";
-            else if(src == typeof(short)|| src.GetUnderlyingType() == typeof(short))
+            else if(src.IsUInt16())
                 return "short";
-            else if(src == typeof(int)|| src.GetUnderlyingType() == typeof(int))
+            else if(src.IsInt32())
                 return "int";
-            else if(src == typeof(uint)|| src.GetUnderlyingType() == typeof(uint))
+            else if(src.IsUInt32())
                 return "uint";
-            else if(src == typeof(long)|| src.GetUnderlyingType() == typeof(long))
+            else if(src.IsInt64())
                 return "long";
-            else if(src == typeof(ulong) || src.GetUnderlyingType() == typeof(ulong))
+            else if(src.IsUInt64())
                 return "ulong";
-            else if(src == typeof(float)|| src.GetUnderlyingType() == typeof(float))
+            else if(src.IsSingle())
                 return "float";
-            else if(src == typeof(double)|| src.GetUnderlyingType() == typeof(double))
+            else if(src.IsDouble())
                 return "double";
+            else if(src.IsDecimal())
+                return "decimal";
+            else if(src.IsBool())
+                return "bool";
+            else if(src.IsChar())
+                return "char";
+            else if(src.IsString())
+                return "string";
+            else if(src.IsVoid())
+                return "void";
             else 
                 return string.Empty;
         }
@@ -1061,7 +1155,7 @@ namespace Z0
                 });
 
         [MethodImpl(Inline)]
-        static bool IsPrimalNumeric(this Type src)
-            => _PrimalNumericCache.Contains(src) || _PrimalNumericCache.Contains(src.GetUnderlyingType());
+        public static bool IsPrimalNumeric(this Type src)
+            => _PrimalNumericCache.Contains(src.EffectiveType()) || _PrimalNumericCache.Contains(src.EffectiveType().GetUnderlyingType());
     }
 }

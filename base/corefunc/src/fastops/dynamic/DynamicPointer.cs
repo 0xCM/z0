@@ -16,6 +16,21 @@ namespace Z0
     public unsafe readonly struct DynamicPointer
     {
         [MethodImpl(Inline)]
+        public static DynamicPointer From(DynamicDelegate src)
+        {
+            var ptr = src.DynamicMethod.NativePointer();
+            return new DynamicPointer(src, (byte*)ptr.ToPointer());
+        }
+
+        [MethodImpl(Inline)]
+        public static DynamicPointer From<D>(DynamicDelegate<D> src)
+            where D : Delegate
+        {
+            var ptr = src.DynamicMethod.NativePointer();
+            return new DynamicPointer(src, (byte*)ptr.ToPointer());
+        }
+
+        [MethodImpl(Inline)]
         public DynamicPointer(DynamicDelegate dynamicOp, byte* pointer)
         {
             Pointer = pointer;

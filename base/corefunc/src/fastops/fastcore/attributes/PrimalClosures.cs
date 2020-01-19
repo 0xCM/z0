@@ -10,14 +10,6 @@ namespace Z0
 
     using static zfunc;
 
-
-    [AttributeUsage(AttributeTargets.Parameter)]
-    public class ImmAttribute : Attribute
-    {
-
-
-    }
-
     /// <summary>
     /// Applies to a generic type/method to advertise the primal types over which the type parameter(s) may be closed
     /// </summary>
@@ -29,7 +21,5 @@ namespace Z0
         }
 
         public PrimalKind Closures {get;}
-
     }
-
 }

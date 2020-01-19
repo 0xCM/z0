@@ -41,8 +41,8 @@ namespace Z0
         void EmitUnaryImmResolutions(FastGenericInfo op, AsmArchive archive)
         {
             print(EmittingImmediateResolutions(op));
-            foreach(var (moniker, method) in op.Closures())
-                archive.Save(AsmImmCapture.unary( method,moniker, new byte[]{5,9,13}).Select(x => x.Encoded));
+            foreach(var closure in op.Closures())
+                archive.Save(AsmImmCapture.unary( closure.ClosedMethod, closure.Id, new byte[]{5,9,13}).Select(x => x.Encoded));
         }
 
         void Emit(FastGenericInfo op, AsmArchive archive)
@@ -54,16 +54,16 @@ namespace Z0
             else
                 print(EmittingOp(op));
 
-            foreach(var (moniker, method) in closures)
+            foreach(var closure in closures)
             {
-                AsmDecoder.decode(method, moniker, ClrMetadata).OnSome(x => archive.Save(x.AsmCode, x.CilFunction.ValueOrDefault()));
+                AsmDecoder.decode(closure.Id, closure.ClosedMethod, ClrMetadata).OnSome(x => archive.Save(x.AsmCode, x.CilFunction.ValueOrDefault()));
             }
         }
 
         void Emit(FastDirectInfo op, AsmArchive archive)
         {                        
             print(EmittingOp(op));
-            AsmDecoder.decode(op.Method, op.Id, ClrMetadata).OnSome(x => archive.Save(x.AsmCode, x.CilFunction.ValueOrDefault()));
+            AsmDecoder.decode(op.Id, op.Method, ClrMetadata).OnSome(x => archive.Save(x.AsmCode, x.CilFunction.ValueOrDefault()));
         }
 
         void EmitGeneric(Type host)
@@ -77,7 +77,7 @@ namespace Z0
             var immArchive = AsmArchive.Define(concat(subject, ImmSubject));
             immArchive.Clear();
 
-            var fastops = host.FastOpGenerics();
+            var fastops = host.FastOpGenericMethods();
             foreach(var op in fastops)
             {
                 if(op.RequiresImmediate)

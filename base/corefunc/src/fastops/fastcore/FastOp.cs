@@ -23,27 +23,28 @@ namespace Z0
         public static bool operator!=(FastOp a, FastOp b)
             => !a.Equals(b);
 
-        public static FastOp Define(MethodInfo method, params Type[] args)
+        public static FastOp Define(MethodInfo method)
         {            
             var provider = Moniker.Provider;
-            var dst = Init(method,args);
+            var dst = Init(method);
+            Span<byte> buffer = new byte[NativeReader.DefaultBufferLen];
             dst.Id = provider.Define(dst.Method);
             method.CustomAttribute<OpAttribute>()
                 .OnSome(z => z.Name.OnSome(n => dst.Name = n))
                 .OnNone(() => dst.Name = dst.Method.Name);
-            dst.NativeData = dst.Method.CaptureAsm();
+            dst.NativeData = dst.Method.CaptureNative(buffer);
             dst.Label = dst.Method.Signature().Format();
             return dst;
         }
 
-        public static FastOp Define(MethodInfo method, Moniker m)
+        public static FastOp Define(MethodInfo method, Moniker m, Span<byte> buffer)
         {            
             var dst = Init(method);
             dst.Id = m;
             method.CustomAttribute<OpAttribute>()
                 .OnSome(z => z.Name.OnSome(n => dst.Name = n))
                 .OnNone(() => dst.Name = dst.Method.Name);
-            dst.NativeData = dst.Method.CaptureAsm();
+            dst.NativeData = dst.Method.CaptureNative(buffer);
             dst.Label = dst.Method.Signature().Format();
             return dst;
         }

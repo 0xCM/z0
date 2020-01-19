@@ -63,7 +63,7 @@ namespace Z0
         }
 
         static Moniker FromPrimalFunc(MethodInfo method)
-            => Moniker.define(method.FastOpName(), method.ParameterTypes(true).First().Kind(), method.IsConstructedGenericMethod);
+            => Moniker.define(method.FastOpName(), method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
 
         /// <summary>
         /// Derives a moniker for a primal operator

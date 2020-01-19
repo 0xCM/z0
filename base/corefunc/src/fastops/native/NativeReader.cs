@@ -16,49 +16,20 @@ namespace Z0
     /// <summary>
     /// Defines basic capabilty to read native data for a jitted method
     /// </summary>
-    public static class NativeReader
+    public static unsafe class NativeReader
     {        
-        internal const int DefaultBufferLen = 512;
-
-        /// <summary>
-        /// Runs the jitter on a reflected method and captures the emitted binary assembly data
-        /// </summary>
-        /// <param name="m">The method to read</param>
-        /// <param name="bufferlen">The size of the target buffer</param>
-        public static INativeMemberData read(MethodInfo m)
-        {            
-            var data = read(m, new byte[DefaultBufferLen]);
-            return data;
-        }
-        
-        /// <summary>
-        /// Runs the jitter over a named method on a type and captures the emitted binary assembly data
-        /// </summary>
-        /// <param name="name">The name of the method</param>
-        /// <param name="bufferlen">The size of the target buffer</param>
-        /// <typeparam name="T">The declaring type</typeparam>
-        public static INativeMemberData read<T>(string name)
-            => read(method<T>(name),new byte[DefaultBufferLen]);
-
-        /// <summary>
-        /// Runs the jitter over a named method on a type and captures the emitted binary assembly data
-        /// </summary>
-        /// <param name="name">The name of the method</param>
-        /// <param name="dst">The target buffer</param>
-        /// <typeparam name="T">The declaring type</typeparam>
-        public static INativeMemberData read<T>(string name, Span<byte> dst)
-            => read(method<T>(name), dst);
+        public const int DefaultBufferLen = 1024;
 
         /// <summary>
         /// Runs the jitter on a reflected method and captures the emitted binary assembly data
         /// </summary>
         /// <param name="m">The method to read</param>
         /// <param name="dst">The target buffer</param>
-        public static unsafe INativeMemberData read(MethodInfo m, Span<byte> dst)
+        public static INativeMemberData read(MethodInfo m, Span<byte> dst)
         {            
             try
             {
-                var pSrc = (byte*)m.Prepare().ToPointer();            
+                var pSrc = jit(m);
                 var pSrcCurrent = pSrc;            
                 var start = (ulong)pSrc;
                 var end = capture(pSrc, dst);            
@@ -80,7 +51,7 @@ namespace Z0
         /// <param name="dst">The target buffer</param>
         public static unsafe INativeMemberData read(DynamicDelegate d, Span<byte> dst)
         {
-            var pSrc = d.Jit().Pointer;
+            var pSrc = jit(d);
             var pSrcCurrent = pSrc;
             var start = (ulong)pSrc;         
             var end = capture(pSrc, dst);   
@@ -98,7 +69,7 @@ namespace Z0
         {
             try
             {
-                var pSrc = d.Jit();
+                var pSrc = jit(d);
                 var pSrcCurrent = pSrc;            
                 var start = capture(pSrc, dst);            
                 var end = (ulong)pSrc;
@@ -124,129 +95,77 @@ namespace Z0
             => read(def.MakeGenericMethod(arg), dst);
 
         /// <summary>
-        /// Closes a generic method definition over supplied types and captures the binary assembly data emitted 
-        /// by the jitter for the reified method
-        /// </summary>
-        /// <param name="def">The generic method definition, obtained by MethodInfo.GetGenericMethodDefinition</param>
-        /// <param name="arg">The type over which to close the generic method</param>
-        /// <param name="dst">The target buffer</param>
-        public static INativeMemberData generic(MethodInfo def, Type[] args, Span<byte> dst)
-            => read(def.MakeGenericMethod(args), dst);
-
-        /// <summary>
-        /// Closes a generic method definition over a supplied type and captures the binary assembly data emitted 
-        /// by the jitter for the reified method
-        /// </summary>
-        /// <param name="def">The generic method definition, obtained by MethodInfo.GetGenericMethodDefinition</param>
-        /// <param name="arg">The type over which to close the generic method</param>
-        /// <param name="bufferlen">The length of the buffer that will be allocated to receive the data</param>
-        public static INativeMemberData generic(MethodInfo def, Type arg, int bufferlen)
-            => read(def.MakeGenericMethod(arg), new byte[bufferlen]);
-
-        /// <summary>
-        /// Closes a generic method definition over a supplied type and captures the binary assembly data emitted 
-        /// by the jitter for the reified method
-        /// </summary>
-        /// <param name="def">The generic method definition, obtained by MethodInfo.GetGenericMethodDefinition</param>
-        /// <param name="arg">The type over which to close the generic method</param>
-        /// <param name="bufferlen">The length of the buffer that will be allocated to receive the data</param>
-        public static INativeMemberData generic(MethodInfo def, Type arg)
-            => generic(def, arg, DefaultBufferLen);
-
-        /// <summary>
-        /// Closes a generic method definition over supplied type parameters and captures the binary assembly data emitted 
-        /// by the jitter for the reified method
-        /// </summary>
-        /// <param name="def">The generic method definition, obtained by MethodInfo.GetGenericMethodDefinition</param>
-        /// <param name="arg">The type over which to close the generic method</param>
-        /// <param name="bufferlen">The length of the buffer that will be allocated to receive the data</param>
-        public static INativeMemberData generic(MethodInfo def, Type[] args, int bufferlen)
-            => read(def.MakeGenericMethod(args), new byte[bufferlen]);
-
-        /// <summary>
-        /// Closes a generic method definition over a parametric type and captures the binary assembly data emitted 
-        /// by the jitter for the reified method
-        /// </summary>
-        /// <param name="def">The generic method definition, obtained by MethodInfo.GetGenericMethodDefinition</param>
-        /// <param name="bufferlen">The length of the buffer that will be allocated to receive the data</param>
-        /// <typeparam name="T">The type over which to close the method</typeparam>
-        public static INativeMemberData generic<T>(MethodInfo def, int bufferlen)
-            => read(def.MakeGenericMethod(typeof(T)), new byte[bufferlen]);
-
-        /// <summary>
-        /// Closes a generic method definition over a parametric type and captures the binary assembly data emitted 
-        /// by the jitter for the reified method
-        /// </summary>
-        /// <param name="def">The generic method definition, obtained by MethodInfo.GetGenericMethodDefinition</param>
-        /// <param name="bufferlen">The length of the buffer that will be allocated to receive the data</param>
-        /// <typeparam name="T">The type over which to close the method</typeparam>
-        public static INativeMemberData generic<T>(MethodInfo def, Span<byte> buffer)
-            => read(def.MakeGenericMethod(typeof(T)), buffer);
-
-        /// <summary>
         /// Reflects over the static generic methods declared by a type that accept one type argument, closes 
         /// the methods over the supplied parametric type and captures the binary assembly data emitted
-        /// by the gitter for the reified methods
-        /// </summary>
-        /// <param name="host">The declaring type</param>
-        /// <param name="captured">Callback to receive captured data</param>
-        /// <param name="bufferlen">The length of the staging buffer</param>
-        /// <typeparam name="T">The type over which to close the methods</typeparam>
-        public static void generic<T>(Type host, Action<MethodInfo,INativeMemberData> captured, int bufferlen)            
-            => iter(definitions(host), m => captured(m, NativeReader.generic<T>(m, bufferlen)));
-
-        /// <summary>
-        /// Reflects over the static generic methods declared by a type that accept one type argument, closes 
-        /// the methods over the supplied parametric type and captures the binary assembly data emitted
-        /// by the gitter for the reified methods
+        /// by the jitter for the reified methods
         /// </summary>
         /// <param name="host">The declaring type</param>
         /// <param name="arg">The type over which to close each method</param>
         /// <param name="buffer">The staging buffer, cleared after each iteration</param>
         /// <typeparam name="T">The type over which to close the methods</typeparam>
-        public static IEnumerable<INativeMemberData> generic(Type host, Type arg, byte[] buffer)            
+        public static IEnumerable<INativeMemberData> gmethods(Type host, Type arg)            
         {
-            foreach(var m in definitions(host))
-                yield return NativeReader.generic(m,arg, buffer);                
+            var buffer = new byte[NativeReader.DefaultBufferLen];     
+            var definitions = host.StaticMethods().OpenGeneric(1).Select(m => m.GetGenericMethodDefinition());       
+            foreach(var m in definitions)
+                yield return NativeReader.generic(m, arg, buffer.Clear());                
         }
 
         /// <summary>
         /// Closes a generic type definition over a supplied type, reflects the declared static methods, and captures 
         /// the binary assembly data emitted by the jitter for the reified methods
         /// </summary>
-        /// <param name="def">The generic type definition, obtained by typeof(generictype<>).GetGenericTypeDefinition()</param>
+        /// <param name="typedef">The generic type definition, obtained by typeof(generictype<>).GetGenericTypeDefinition()</param>
         /// <param name="arg">The type over which to close the generic type</param>
         /// <param name="captured">Callback to receive captured data</param>
         /// <param name="bufferlen">The length of the staging buffer</param>
-        public static void generic(Type def, Type arg, Action<MethodInfo,INativeMemberData> captured, int bufferlen = DefaultBufferLen)
+        public static IEnumerable<INativeMemberData> gtype(Type typedef, Type arg)
         {
-            var type = def.MakeGenericType(arg);
+            var type = typedef.MakeGenericType(arg);
             var methods = type.StaticMethods().ToArray();
-            Span<byte> buffer = new byte[bufferlen];
+            var buffer = new byte[DefaultBufferLen];
             for(var i=0; i<methods.Length; i++)
-            {
-                var method = methods[i];
-                var data = NativeReader.read(method, buffer);
-                captured(method,data);
-                
-                buffer.Clear();
-            }
-        }
-
-        static IEnumerable<MethodInfo> definitions(Type host)
-            =>  from m in host.StaticMethods().OpenGeneric()
-                let argcount = m.GetGenericArguments().Length
-                where argcount == 1
-                select m.GetGenericMethodDefinition();
+                yield return NativeReader.read(methods[i], buffer.Clear());                
+        }                
 
         [MethodImpl(Inline)]
-        static unsafe ref byte Read(byte* pByte, ref byte dst)
+        static byte* jit(MethodInfo m)
+        {   
+            RuntimeHelpers.PrepareMethod(m.MethodHandle);
+            var ptr = m.MethodHandle.GetFunctionPointer();
+            return (byte*)ptr.ToPointer();
+        }    
+
+        [MethodImpl(Inline)]
+        static byte* jit(Delegate d)
+        {   
+            RuntimeHelpers.PrepareDelegate(d);
+            return (byte*)d.Method.MethodHandle.GetFunctionPointer();
+        }    
+
+        [MethodImpl(Inline)]
+        static byte* jit(DynamicDelegate d)
+        {   
+            RuntimeHelpers.PrepareDelegate(d.DynamicOp);
+            return d.GetDynamicPointer().Pointer;
+        }
+
+        [MethodImpl(Inline)]
+        static DynamicPointer jit<D>(DynamicDelegate<D> d)
+            where D : Delegate
+        {   
+            RuntimeHelpers.PrepareDelegate(d.DynamicOp);
+            return d.GetDynamicPointer();
+        }
+
+        [MethodImpl(Inline)]
+        static ref byte Read(byte* pByte, ref byte dst)
         {
             dst = Unsafe.Read<byte>(pByte);
             return ref dst;
         }
 
-        internal static unsafe ulong capture(byte* pSrc, Span<byte> dst)
+        internal static ulong capture(byte* pSrc, Span<byte> dst)
         {
             const byte ZED = 0;
             const byte RET = 0xc3;

@@ -176,7 +176,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static PrimalKind segment(Type t)
-            => test(t) ?  (t.IsRef() ? t.GetElementType() : t).GenericArguments().First().Kind() : PrimalKind.None;
+            => test(t) ?  t.EffectiveType().GenericArguments().First().Kind() : PrimalKind.None;
 
         [MethodImpl(Inline)]
         public static BlockKind kind<B>(B b = default)

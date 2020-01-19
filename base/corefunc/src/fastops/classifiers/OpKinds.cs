@@ -6,28 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
-    using System.Reflection;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static zfunc;
 
-    public interface IOpKind
-    {
-        string Name {get;}
-    }
-
-    public interface IOpKind<K> : IOpKind
-        where K : unmanaged, IOpKind<K>
-    {
-        string IOpKind.Name => typeof(K).Name.ToLower();
-    }
-
     public static class OpKinds
-    {
-        
+    {        
         public readonly struct Add : IOpKind<Add> {}
 
         public readonly struct Sub : IOpKind<Sub> {}        
@@ -78,7 +61,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => default;
         }
-
     }
-
 }

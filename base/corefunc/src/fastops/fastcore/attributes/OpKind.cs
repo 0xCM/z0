@@ -30,57 +30,7 @@ namespace Z0
 
     }
 
-    /// <summary>
-    /// Identifies operations that accept one or more spans and computes a result that is stored in a caller-supplied target span
-    /// </summary>
-    public class SpanOpAttribute : OpAttribute
-    {
-        public SpanOpAttribute()
-        {
 
-        }
-
-        public SpanOpAttribute(string name)
-            : base(name)
-        {
-
-        }
-    }
-
-    /// <summary>
-    /// Identifies operations that accept one or more blocks and computes a result that is stored in a caller-supplied target block
-    /// </summary>
-    public class BlockedOpAttribute : OpAttribute
-    {
-        public BlockedOpAttribute()
-        {
-
-        }
-
-        public BlockedOpAttribute(string name)
-            : base(name)
-        {
-
-        }
-    }
-
-    /// <summary>
-    /// Identifies operations that have one or more natural selectors
-    /// </summary>
-    public class NatOpAttribute : OpAttribute
-    {
-        public NatOpAttribute()
-        {
-
-        }
-
-        public NatOpAttribute(string name)
-            : base(name)
-        {
-
-        }
-
-    }
     public abstract class OpKindAttribute : Attribute
     {
         protected OpKindAttribute(uint id, string name)        
@@ -175,7 +125,5 @@ namespace Z0
         public ComparisonKind Kind {get;}
 
         public override string KindName => kindName;
-    }
-
-    
+    }   
 }

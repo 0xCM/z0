@@ -49,11 +49,5 @@ namespace Z0
                 let code = AsmCode.Parse(text,m)
                 select code;
 
-        // public InstructionBlock ReadInstructions(Moniker m)
-        //     => AsmDecoder.decode(ReadCode(m));
-
-        // public AsmFuncInfo ReadFunction(Moniker m)          
-        //     => AsmFunction.decode(ReadCode(m));
-
     }
 }

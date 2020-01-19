@@ -21,8 +21,7 @@ namespace Z0
         {
             foreach(var k in op.Kinds)
             {
-                var arg = k.ToPrimalType();
-                var method = op.Method.MakeGenericMethod(arg);
+                var method = op.Method.MakeGenericMethod(k.ToPrimalType());
                 target.Save(method.FastOp().NativeData.Code);
             }
         }

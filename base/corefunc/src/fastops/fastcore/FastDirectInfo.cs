@@ -6,13 +6,11 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.Linq;
+    using System.Collections.Generic;
 
     public class FastDirectInfo : FastOpInfo
     {
-        public static FastDirectInfo Define(string name, MethodInfo method)
-            => new FastDirectInfo(name,method);        
-        
-
         public FastDirectInfo(string name, MethodInfo method)
             : base(name,method)
         {

@@ -13,14 +13,14 @@ namespace Z0
 
     using static zfunc;
 
-
     public static class AsmDecoder
     {
-        public static Option<MethodDisassembly> decode(MethodInfo method, Moniker id, ClrMetadataIndex index = null)
+        public static Option<MethodDisassembly> decode(Moniker id, MethodInfo method, ClrMetadataIndex index = null)
         {
             try
             {                
-                var asmBody =  AsmDecoder.decode(method);
+                Span<byte> buffer = new byte[NativeReader.DefaultBufferLen];
+                var asmBody =  AsmDecoder.decode(method,buffer);
                 var cilbody = CilFunctionBody.From(method).Data;
                 var cilfunc = index != null ? index.FindCilFunction(method).ValueOrDefault() : default;                        
                 return MethodDisassembly.Define(id, asmBody, cilbody,  cilfunc);                
@@ -43,7 +43,7 @@ namespace Z0
             {
                 var moniker = Moniker.Provider.Define(op.Method, k);
                 var method = op.Method.MakeGenericMethod(k.ToPrimalType());
-                var result = decode(method, moniker, index).ValueOrDefault();
+                var result = decode(moniker, method, index).ValueOrDefault();
                 if(result != null)
                     yield return result;
             }
@@ -74,9 +74,9 @@ namespace Z0
             return InstructionBlock.Define(id, label, data, dst.ToArray());
 		}
 
-        public static MethodAsmBody decode(MethodInfo method)
+        public static MethodAsmBody decode(MethodInfo method, Span<byte> buffer)
         {
-            var data = NativeReader.read(method);
+            var data = NativeReader.read(method, buffer);
             if(data.Length == 0)
                 throw new NoCodeException(method.ToString());
 

@@ -84,7 +84,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline | Optimize)]
         public static PrimalKind kind(Type t)
-            => Type.GetTypeCode((t.IsRef() ? t.GetElementType() : t)) 
+            => Type.GetTypeCode(t.EffectiveType()) 
                 switch
                 {
                     TypeCode.Byte => PrimalKind.U8,

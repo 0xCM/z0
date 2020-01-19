@@ -7,7 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+    
     using static zfunc;
+
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     public abstract class UnitTest<U> : TestContext<U>, IUnitTest
         where U : UnitTest<U>
@@ -264,5 +267,10 @@ namespace Z0
             }
         }
 
+        protected NativeWriter NativeTestWriter([Caller] string test = null)
+        {
+            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtension.Define("asm"));    
+            return path.NativeWriter();                                
+        }
     }
 }

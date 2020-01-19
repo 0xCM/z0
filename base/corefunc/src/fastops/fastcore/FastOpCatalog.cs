@@ -22,12 +22,12 @@ namespace Z0
                 let name = host.LiteralFieldValue<string>("Name",string.Empty)
                 where name.IsNonEmpty()               
                 let attrib = host.CustomAttribute<PrimalClosuresAttribute>()
-                let closures = attrib.MapValueOrElse(a => a.Closures, () => PrimalKind.Integers).Distinct()
+                let closures = attrib.MapValueOrElse(a => a.Closures, () => PrimalKind.Integers).DistinctKinds()
                 let monikers = closures.Select(k => Moniker.define(name,k,true))
                 select FastOpContract.Define(name,host,monikers);
 
         public virtual IEnumerable<FastGenericInfo> GenericOps 
-            =>  GenericApiHosts.FastOpGenerics();
+            =>  GenericApiHosts.FastOpGenericMethods();
 
         public virtual IEnumerable<FastDirectInfo> DirectOps 
             => DirectApiHosts.FastOpDirect();

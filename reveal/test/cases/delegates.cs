@@ -27,22 +27,24 @@ namespace Z0
         {
             var x = Random.CpuVector<uint>(n256);
             var f = shuffler<uint>(n2);
-            var decode = AsmDecoder.decode(f.CaptureDelegateAsm(100));
-            Trace(decode.Format());        
+            Span<byte> buffer = new byte[100];
+            var decode = AsmDecoder.decode(f.CaptureNative(buffer));
+            Trace(decode.FormatLines());        
         }
 
         public void immtest_2()
         {
-            var instructions = AsmDecoder.decode(GetType().DeclaredMethods().WithNameLike(nameof(shuffler)).Single().CaptureGenericAsm(typeof(uint)));
-            Trace(instructions.Format());
+            var instructions = AsmDecoder.decode(GetType().DeclaredMethods().WithNameLike(nameof(shuffler)).Single().CaptureNativeGeneric(typeof(uint)));
+            Trace(instructions.FormatLines());
         }
 
         public void generic_test()
         {
+            Span<byte> buffer = new byte[100];
             var methods = typeof(gmath).DeclaredMethods().Public().BinaryOps().OpenGeneric().WithNameStartingWith("nand");
-            var data = AsmDecoder.decode(methods.CaptureGenericAsm(typeof(double)));
+            var data = AsmDecoder.decode(methods.CaptureNativeGeneric(typeof(double)));
             foreach(var item in data)
-                Trace(item.Format());
+                Trace(item.FormatLines());
             
         }
  

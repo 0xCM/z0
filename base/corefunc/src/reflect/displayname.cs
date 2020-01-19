@@ -44,8 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="type">Describes the parameter type</param>
         /// <param name="name">The parameter display name</param>
-        /// <returns></returns>
-        public static (string type, string name) DisplayName(this ParameterInfo param)
+        public static string DisplayName(this ParameterInfo param)
         {
             var modifier = string.Empty;
             if(param.IsIn)
@@ -55,7 +54,7 @@ namespace Z0
             else if(param.ParameterType.IsByRef)
                 modifier = "ref ";
             var t = param.ParameterType.GetElementType();
-            return  (modifier + (t.IsGenericType ? t.FormatGeneric() : t.FormatSimple()), param.Name);
+            return concat(param.Name, colon(), modifier + (t.IsGenericType ? t.FormatGeneric() : t.FormatSimple()));
         }
 
         public static string FormatReference(this Type src, bool isIn = false, bool isOut = false)            
@@ -102,26 +101,13 @@ namespace Z0
             return typeName + (args.Count != 0 ? angled(argFmt) : string.Empty);
         }
 
-
         static string FormatSimple(this Type src)
         {
             var attrib = src.GetCustomAttribute<DisplayNameAttribute>();
             if (attrib != null)
                 return attrib.DisplayName;
-
-            if(src.IsPrimalNumeric())
-                return src.TypeKeyword();
-            
-            if(src.IsBool())
-                return "bool";
-            
-            if(src.IsVoid())
-                return "void";
-            
-            if(src.IsString())
-                return "string";  
-
-            return src.Name;          
+            else
+                return src.TypeKeyword().IfBlank(src.Name);
         }
 
         static string FormatGeneric(this Type src)

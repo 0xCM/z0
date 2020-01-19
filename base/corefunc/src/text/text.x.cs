@@ -443,7 +443,7 @@ namespace Z0
         /// <param name="s">The string to evaluate</param>
         [MethodImpl(Inline)]
         public static bool IsBlank(this string s)
-            =>  String.IsNullOrWhiteSpace(s);
+            => String.IsNullOrWhiteSpace(s);
 
         /// <summary>
         /// Returns true if a string has at least one character that is not considered whitespace
@@ -464,6 +464,15 @@ namespace Z0
             if(s.IsNonEmpty())
                 f(s);
         }
+
+        /// <summary>
+        /// Returns the source string if it is not blank; otherwise, returns an alternate string
+        /// </summary>
+        /// <param name="src">The soruce string</param>
+        /// <param name="alt">The alternate string</param>
+        [MethodImpl(Inline)]
+        public static string IfBlank(this string src, string alt)
+            => String.IsNullOrWhiteSpace(src) ? alt : src;
 
         /// <summary>
         /// Returns true if not blank

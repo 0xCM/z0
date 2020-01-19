@@ -52,9 +52,9 @@ namespace Z0
                 => kind_u(w,t);
 
         [MethodImpl(Inline)]
-        public static VectorKind kind(Type t)
+        public static VectorKind kind(Type src)
         {
-            t = t.IsRef() ? t.GetElementType() : t;
+            var t = src.EffectiveType();
             if(t == typeof(Vector128<byte>))
                 return VectorKind.Vector128x8u;
             else if(t == typeof(Vector128<ushort>))

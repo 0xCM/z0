@@ -234,40 +234,6 @@ namespace Z0
         public static bit integral(BlockKind k)
             => signed(k) || unsigned(k);
 
-        /// <summary>
-        /// Determines whether a method defines a formalized operation
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool fastop(MethodInfo m)
-            => m.Attributed<OpAttribute>();
-
-        /// <summary>
-        /// Determines whether a method is classified as a blocked op
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool blocked(MethodInfo m)
-            => m.Attributed<BlockedOpAttribute>();
-
-        /// <summary>
-        /// Determines whether a method is classified as a natural op
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool natural(MethodInfo m)
-            => m.Attributed<NatOpAttribute>();
-
-        /// <summary>
-        /// Determines whether a method is classified as a span op
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool spanned(MethodInfo m)
-            => m.Attributed<SpanOpAttribute>();
-
-        /// <summary>
-        /// Gets the name of a method to which an Op attribute is applied
-        /// </summary>
-        /// <param name="m">The source method</param>
-        public static string opname(MethodInfo m )
-            => m.CustomAttribute<OpAttribute>().MapValueOrElse(a => a.Name.IsBlank() ? m.Name : a.Name, () => m.Name);
 
         /// <summary>
         /// Returns true if the source type is intrinsic or blocked
