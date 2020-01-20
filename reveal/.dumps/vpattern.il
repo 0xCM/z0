@@ -1,7 +1,7 @@
-// 2020-01-18 18:18:34:507
-// Id := 100664759, Name := Z0.VectorKind Z0.OpCodes.vpattern::vkind_128x32u()
+// 2020-01-20 01:59:21:534
+// Id := 100664553, Name := Z0.VectorKind Z0.OpCodes.vpattern::vkind_128x32u()
 // VectorKind:uint vkind_128x32u()
-// Managed
+// IL
 VectorKind:uint vkind_128x32u()
 {
     IL_0000: ldloca.s V_0
@@ -13,9 +13,9 @@ VectorKind:uint vkind_128x32u()
     IL_0014: ret
 }
 
-// Id := 100664760, Name := Z0.VectorKind Z0.OpCodes.vpattern::vkind_256x32u()
+// Id := 100664554, Name := Z0.VectorKind Z0.OpCodes.vpattern::vkind_256x32u()
 // VectorKind:uint vkind_256x32u()
-// Managed
+// IL
 VectorKind:uint vkind_256x32u()
 {
     IL_0000: ldloca.s V_0
@@ -27,9 +27,9 @@ VectorKind:uint vkind_256x32u()
     IL_0014: ret
 }
 
-// Id := 100664761, Name := Z0.BlockKind Z0.OpCodes.vpattern::bkind_256x32u()
+// Id := 100664555, Name := Z0.BlockKind Z0.OpCodes.vpattern::bkind_256x32u()
 // BlockKind:uint bkind_256x32u()
-// Managed
+// IL
 BlockKind:uint bkind_256x32u()
 {
     IL_0000: ldloca.s V_0
@@ -41,9 +41,9 @@ BlockKind:uint bkind_256x32u()
     IL_0014: ret
 }
 
-// Id := 100664762, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_8u()
+// Id := 100664556, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_8u()
 // PrimalKind:uint pkind_8u()
-// Managed
+// IL
 PrimalKind:uint pkind_8u()
 {
     IL_0000: ldc.i4.0
@@ -52,9 +52,9 @@ PrimalKind:uint pkind_8u()
     IL_000B: ret
 }
 
-// Id := 100664763, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_32u()
+// Id := 100664557, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_32u()
 // PrimalKind:uint pkind_32u()
-// Managed
+// IL
 PrimalKind:uint pkind_32u()
 {
     IL_0000: ldc.i4.0
@@ -63,9 +63,9 @@ PrimalKind:uint pkind_32u()
     IL_000B: ret
 }
 
-// Id := 100664764, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_32i()
+// Id := 100664558, Name := Z0.PrimalKind Z0.OpCodes.vpattern::pkind_32i()
 // PrimalKind:uint pkind_32i()
-// Managed
+// IL
 PrimalKind:uint pkind_32i()
 {
     IL_0000: ldc.i4.0
@@ -74,9 +74,9 @@ PrimalKind:uint pkind_32i()
     IL_000B: ret
 }
 
-// Id := 100664765, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::ones_128x8u()
+// Id := 100664559, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::ones_128x8u()
 // Vector128<byte> ones_128x8u()
-// Managed
+// IL
 Vector128<byte> ones_128x8u()
 {
     IL_0000: call Z0.N128 zfunc::get_n128()
@@ -85,9 +85,9 @@ Vector128<byte> ones_128x8u()
     IL_000B: ret
 }
 
-// Id := 100664766, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.OpCodes.vpattern::ones_128x64u()
+// Id := 100664560, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.OpCodes.vpattern::ones_128x64u()
 // Vector128<ulong> ones_128x64u()
-// Managed
+// IL
 Vector128<ulong> ones_128x64u()
 {
     IL_0000: call Z0.N128 zfunc::get_n128()
@@ -97,9 +97,9 @@ Vector128<ulong> ones_128x64u()
     IL_000C: ret
 }
 
-// Id := 100664767, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::ones_256x8u()
+// Id := 100664561, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::ones_256x8u()
 // Vector256<byte> ones_256x8u()
-// Managed
+// IL
 Vector256<byte> ones_256x8u()
 {
     IL_0000: call Z0.N256 zfunc::get_n256()
@@ -108,9 +108,9 @@ Vector256<byte> ones_256x8u()
     IL_000B: ret
 }
 
-// Id := 100664768, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.OpCodes.vpattern::ones_256x64u()
+// Id := 100664562, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.OpCodes.vpattern::ones_256x64u()
 // Vector256<ulong> ones_256x64u()
-// Managed
+// IL
 Vector256<ulong> ones_256x64u()
 {
     IL_0000: call Z0.N256 zfunc::get_n256()
@@ -120,9 +120,9 @@ Vector256<ulong> ones_256x64u()
     IL_000C: ret
 }
 
-// Id := 100664769, Name := System.Runtime.Intrinsics.Vector256`1<System.Double> Z0.OpCodes.vpattern::ones_256x64f()
+// Id := 100664563, Name := System.Runtime.Intrinsics.Vector256`1<System.Double> Z0.OpCodes.vpattern::ones_256x64f()
 // Vector256<double> ones_256x64f()
-// Managed
+// IL
 Vector256<double> ones_256x64f()
 {
     IL_0000: call Z0.N256 zfunc::get_n256()
@@ -131,27 +131,27 @@ Vector256<double> ones_256x64f()
     IL_0013: ret
 }
 
-// Id := 100664770, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::pattern_lanemerge_256x8u()
+// Id := 100664564, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::pattern_lanemerge_256x8u()
 // Vector256<byte> pattern_lanemerge_256x8u()
-// Managed
+// IL
 Vector256<byte> pattern_lanemerge_256x8u()
 {
     IL_0000: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.CpuVector::vlanemerge<System.Byte>()
     IL_0005: ret
 }
 
-// Id := 100664771, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.OpCodes.vpattern::pattern_lanemerge_256x16u()
+// Id := 100664565, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.OpCodes.vpattern::pattern_lanemerge_256x16u()
 // Vector256<ushort> pattern_lanemerge_256x16u()
-// Managed
+// IL
 Vector256<ushort> pattern_lanemerge_256x16u()
 {
     IL_0000: call System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.CpuVector::vlanemerge<System.UInt16>()
     IL_0005: ret
 }
 
-// Id := 100664772, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::makemask_d128x8u(System.UInt16)
+// Id := 100664566, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::makemask_d128x8u(System.UInt16)
 // Vector128<byte> makemask_d128x8u(ushort src)
-// Managed
+// IL
 Vector128<byte> makemask_d128x8u(ushort src)
 {
     IL_0000: ldarg.0
@@ -159,9 +159,9 @@ Vector128<byte> makemask_d128x8u(ushort src)
     IL_0006: ret
 }
 
-// Id := 100664773, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::makemask_d256x8u(System.UInt32)
+// Id := 100664567, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::makemask_d256x8u(System.UInt32)
 // Vector256<byte> makemask_d256x8u(uint src)
-// Managed
+// IL
 Vector256<byte> makemask_d256x8u(uint src)
 {
     IL_0000: ldarg.0
@@ -169,9 +169,9 @@ Vector256<byte> makemask_d256x8u(uint src)
     IL_0006: ret
 }
 
-// Id := 100664774, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::maskmask_d128x8u_index4(System.UInt16)
+// Id := 100664568, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::maskmask_d128x8u_index4(System.UInt16)
 // Vector128<byte> maskmask_d128x8u_index4(ushort src)
-// Managed
+// IL
 Vector128<byte> maskmask_d128x8u_index4(ushort src)
 {
     IL_0000: ldarg.0
@@ -180,9 +180,9 @@ Vector128<byte> maskmask_d128x8u_index4(ushort src)
     IL_0007: ret
 }
 
-// Id := 100664775, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::maskmask_d256x8u_index3(System.UInt32)
+// Id := 100664569, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::maskmask_d256x8u_index3(System.UInt32)
 // Vector256<byte> maskmask_d256x8u_index3(uint src)
-// Managed
+// IL
 Vector256<byte> maskmask_d256x8u_index3(uint src)
 {
     IL_0000: ldarg.0
@@ -191,9 +191,9 @@ Vector256<byte> maskmask_d256x8u_index3(uint src)
     IL_0007: ret
 }
 
-// Id := 100664776, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::makemask_d128x8u_FCFC()
+// Id := 100664570, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vpattern::makemask_d128x8u_FCFC()
 // Vector128<byte> makemask_d128x8u_FCFC()
-// Managed
+// IL
 Vector128<byte> makemask_d128x8u_FCFC()
 {
     IL_0000: ldc.i4 64764
@@ -201,9 +201,9 @@ Vector128<byte> makemask_d128x8u_FCFC()
     IL_000A: ret
 }
 
-// Id := 100664777, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::makemask_d256x8u_FAFAFAFA()
+// Id := 100664571, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vpattern::makemask_d256x8u_FAFAFAFA()
 // Vector256<byte> makemask_d256x8u_FAFAFAFA()
-// Managed
+// IL
 Vector256<byte> makemask_d256x8u_FAFAFAFA()
 {
     IL_0000: ldc.i4 -84215046

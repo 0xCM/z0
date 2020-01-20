@@ -33,10 +33,10 @@ namespace Z0
         public MethodAsmBody AsmBody {get;set;}
 
         public AsmCode AsmCode 
-            => AsmCode.Define(AsmBody.NativeBlock.Data, Id, Label);
+            => AsmCode.Define(Id, Label, AsmBody.NativeBlock.Data);
         
         public InstructionBlock Instructions
-            => InstructionBlock.Define(Id, Label, AsmBody.NativeBlock.Data, AsmBody.Instructions);
+            => InstructionBlock.Define(Id, Label, AsmBody.Location, AsmBody.NativeBlock.Data, AsmBody.Instructions);
 
         public MethodInfo Method {get; set;}
     

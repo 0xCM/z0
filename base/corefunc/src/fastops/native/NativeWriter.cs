@@ -15,7 +15,7 @@ namespace Z0
     using static zfunc;
     using System.Text;
 
-    public sealed class NativeWriter : StreamWriter
+    public class NativeWriter : StreamWriter
     {
         public NativeWriter(StreamWriter stream)
             : base(stream.BaseStream)
@@ -29,14 +29,33 @@ namespace Z0
 
         }
 
+        public int BytesPerLine {get; private set;}
+            = 4;
+
+        public bool LineLabels {get; private set;}
+            = true;
+
+        byte[] Buffer {get; set;}
+            = new byte[NativeReader.DefaultBufferLen];
+
+        public byte[] TakeBuffer()
+        {
+            Buffer.Clear();
+            return Buffer;
+        }
+
         /// <summary>
         /// Writes a standard timestamped header
         /// </summary>
-        public void WriteHeader()
+        public virtual void WriteHeader()
         {
             WriteLine($"; {now().ToLexicalString()}");
             WriteLine(new string(AsciSym.Dash, 80));
+        }
 
+        public void WriteData(INativeMemberData data, NativeFormatConfig? config = null)
+        {
+            Write(data.Format(config));                            
         }
 
     }

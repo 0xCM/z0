@@ -38,7 +38,7 @@ namespace Z0
         public void Load(in AsmCode code)
         {
             Code = code;
-            Buffer.Fill(code.Data);
+            Buffer.Fill(code.Encoded);
         }
 
         [MethodImpl(Inline)]

@@ -35,7 +35,7 @@ namespace Z0
                 var end = capture(pSrc, dst);            
                 var bytesRead = (int)(end - start);
                 var code = dst.Slice(0, bytesRead).ToArray();
-                return new NativeMethodData(m, start, end, code);         
+                return NativeMethodData.Define(m, (start, end), code);         
             }
             catch(Exception e)
             {
@@ -57,7 +57,7 @@ namespace Z0
             var end = capture(pSrc, dst);   
             var bytesRead = (int)(end - start);
             var code = dst.Slice(0, bytesRead).ToArray();
-            return new NativeMethodData(d.SourceMethod, start, end, code);
+            return NativeMethodData.Define(d.SourceMethod, (start, end), code);
         }
         
         /// <summary>
@@ -71,11 +71,11 @@ namespace Z0
             {
                 var pSrc = jit(d);
                 var pSrcCurrent = pSrc;            
-                var start = capture(pSrc, dst);            
-                var end = (ulong)pSrc;
-                var bytesRead = (int)(start - end);
+                var start = (ulong)pSrc;
+                var end = capture(pSrc, dst);
+                var bytesRead = (int)(end - start);
                 var code = dst.Slice(0, bytesRead).ToArray();
-                return new NativeDelegateData(d, end, start, code);                        
+                return NativeDelegateData.Define(d, (start, end), code);
             }
             catch(Exception e)
             {
@@ -208,9 +208,6 @@ namespace Z0
 
                     if((x0 == ZED && x1 == ZED && x2 == SBB))
                         return (ulong)pSrcCurrent - 3;                    
-
-                    // if((x0 == ZED && x1 == ZED && x2 == ZED && x3 == ZED))
-                    //     return (ulong)pSrcCurrent - 3;
                 }
 
                 if(offset >= 5 
@@ -224,6 +221,5 @@ namespace Z0
             }
             return (ulong)pSrcCurrent;
         }
-
     }
 }

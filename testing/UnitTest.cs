@@ -269,8 +269,9 @@ namespace Z0
 
         protected NativeWriter NativeTestWriter([Caller] string test = null)
         {
-            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtension.Define("asm"));    
+            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, Paths.HexExt);    
             return path.NativeWriter();                                
         }
+
     }
 }

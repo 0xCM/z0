@@ -1,7 +1,7 @@
-// 2020-01-18 18:18:33:758
-// Id := 100664626, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_8(System.Byte)
+// 2020-01-20 01:59:20:870
+// Id := 100664420, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_8(System.Byte)
 // BitSpan load_scalar_8(byte src)
-// Managed
+// IL
 BitSpan load_scalar_8(byte src)
 {
     IL_0000: ldarg.0
@@ -9,9 +9,9 @@ BitSpan load_scalar_8(byte src)
     IL_0006: ret
 }
 
-// Id := 100664627, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_8_fill(System.Byte,Z0.BitSpan&)
+// Id := 100664421, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_8_fill(System.Byte,Z0.BitSpan&)
 // BitSpan load_scalar_8_fill(byte src, in BitSpan dst)
-// Managed
+// IL
 BitSpan load_scalar_8_fill(byte src, in BitSpan dst)
 {
     IL_0000: ldarg.0
@@ -21,9 +21,9 @@ BitSpan load_scalar_8_fill(byte src, in BitSpan dst)
     IL_000C: ret
 }
 
-// Id := 100664628, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_16(System.UInt16)
+// Id := 100664422, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_16(System.UInt16)
 // BitSpan load_scalar_16(ushort src)
-// Managed
+// IL
 BitSpan load_scalar_16(ushort src)
 {
     IL_0000: ldarg.0
@@ -31,9 +31,9 @@ BitSpan load_scalar_16(ushort src)
     IL_0006: ret
 }
 
-// Id := 100664629, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_16_fill(System.UInt16,Z0.BitSpan&)
+// Id := 100664423, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_16_fill(System.UInt16,Z0.BitSpan&)
 // BitSpan load_scalar_16_fill(ushort src, in BitSpan dst)
-// Managed
+// IL
 BitSpan load_scalar_16_fill(ushort src, in BitSpan dst)
 {
     IL_0000: ldarg.0
@@ -43,9 +43,9 @@ BitSpan load_scalar_16_fill(ushort src, in BitSpan dst)
     IL_000C: ret
 }
 
-// Id := 100664630, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_32(System.UInt32)
+// Id := 100664424, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_32(System.UInt32)
 // BitSpan load_scalar_32(uint src)
-// Managed
+// IL
 BitSpan load_scalar_32(uint src)
 {
     IL_0000: ldarg.0
@@ -53,9 +53,9 @@ BitSpan load_scalar_32(uint src)
     IL_0006: ret
 }
 
-// Id := 100664631, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_32_fill(System.UInt32,Z0.BitSpan&)
+// Id := 100664425, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_32_fill(System.UInt32,Z0.BitSpan&)
 // BitSpan load_scalar_32_fill(uint src, in BitSpan dst)
-// Managed
+// IL
 BitSpan load_scalar_32_fill(uint src, in BitSpan dst)
 {
     IL_0000: ldarg.0
@@ -65,9 +65,9 @@ BitSpan load_scalar_32_fill(uint src, in BitSpan dst)
     IL_000C: ret
 }
 
-// Id := 100664632, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_64(System.UInt64)
+// Id := 100664426, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_64(System.UInt64)
 // BitSpan load_scalar_64(ulong src)
-// Managed
+// IL
 BitSpan load_scalar_64(ulong src)
 {
     IL_0000: ldarg.0
@@ -75,9 +75,9 @@ BitSpan load_scalar_64(ulong src)
     IL_0006: ret
 }
 
-// Id := 100664633, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_64_fill(System.UInt64,Z0.BitSpan&)
+// Id := 100664427, Name := Z0.BitSpan Z0.OpCodes.bitspan::load_scalar_64_fill(System.UInt64,Z0.BitSpan&)
 // BitSpan load_scalar_64_fill(ulong src, in BitSpan dst)
-// Managed
+// IL
 BitSpan load_scalar_64_fill(ulong src, in BitSpan dst)
 {
     IL_0000: ldarg.0
@@ -87,9 +87,9 @@ BitSpan load_scalar_64_fill(ulong src, in BitSpan dst)
     IL_000C: ret
 }
 
-// Id := 100664634, Name := System.Byte Z0.OpCodes.bitspan::scalar_8(Z0.BitSpan)
+// Id := 100664428, Name := System.Byte Z0.OpCodes.bitspan::scalar_8(Z0.BitSpan)
 // byte scalar_8(BitSpan src)
-// Managed
+// IL
 byte scalar_8(BitSpan src)
 {
     IL_0000: ldarga.s src
@@ -98,9 +98,9 @@ byte scalar_8(BitSpan src)
     IL_0008: ret
 }
 
-// Id := 100664635, Name := System.UInt16 Z0.OpCodes.bitspan::extract_16(Z0.BitSpan)
+// Id := 100664429, Name := System.UInt16 Z0.OpCodes.bitspan::extract_16(Z0.BitSpan)
 // ushort extract_16(BitSpan src)
-// Managed
+// IL
 ushort extract_16(BitSpan src)
 {
     IL_0000: ldarga.s src
@@ -109,9 +109,9 @@ ushort extract_16(BitSpan src)
     IL_0008: ret
 }
 
-// Id := 100664636, Name := System.UInt32 Z0.OpCodes.bitspan::extract_32(Z0.BitSpan)
+// Id := 100664430, Name := System.UInt32 Z0.OpCodes.bitspan::extract_32(Z0.BitSpan)
 // uint extract_32(BitSpan src)
-// Managed
+// IL
 uint extract_32(BitSpan src)
 {
     IL_0000: ldarga.s src
@@ -120,9 +120,9 @@ uint extract_32(BitSpan src)
     IL_0008: ret
 }
 
-// Id := 100664637, Name := System.UInt64 Z0.OpCodes.bitspan::extract_64(Z0.BitSpan)
+// Id := 100664431, Name := System.UInt64 Z0.OpCodes.bitspan::extract_64(Z0.BitSpan)
 // ulong extract_64(BitSpan src)
-// Managed
+// IL
 ulong extract_64(BitSpan src)
 {
     IL_0000: ldarga.s src
@@ -131,9 +131,9 @@ ulong extract_64(BitSpan src)
     IL_0008: ret
 }
 
-// Id := 100664638, Name := System.Byte Z0.OpCodes.bitspan::bitslice_8(Z0.BitSpan,System.Int32,System.Int32)
+// Id := 100664432, Name := System.Byte Z0.OpCodes.bitspan::bitslice_8(Z0.BitSpan,System.Int32,System.Int32)
 // byte bitslice_8(BitSpan src, int offset, int count)
-// Managed
+// IL
 byte bitslice_8(BitSpan src, int offset, int count)
 {
     IL_0000: ldarga.s src
@@ -143,9 +143,9 @@ byte bitslice_8(BitSpan src, int offset, int count)
     IL_0009: ret
 }
 
-// Id := 100664639, Name := System.UInt16 Z0.OpCodes.bitspan::bitslice_16(Z0.BitSpan,System.Int32,System.Int32)
+// Id := 100664433, Name := System.UInt16 Z0.OpCodes.bitspan::bitslice_16(Z0.BitSpan,System.Int32,System.Int32)
 // ushort bitslice_16(BitSpan src, int offset, int count)
-// Managed
+// IL
 ushort bitslice_16(BitSpan src, int offset, int count)
 {
     IL_0000: ldarga.s src
@@ -155,9 +155,9 @@ ushort bitslice_16(BitSpan src, int offset, int count)
     IL_0009: ret
 }
 
-// Id := 100664640, Name := System.UInt32 Z0.OpCodes.bitspan::bitslice_32(Z0.BitSpan,System.Int32,System.Int32)
+// Id := 100664434, Name := System.UInt32 Z0.OpCodes.bitspan::bitslice_32(Z0.BitSpan,System.Int32,System.Int32)
 // uint bitslice_32(BitSpan src, int offset, int count)
-// Managed
+// IL
 uint bitslice_32(BitSpan src, int offset, int count)
 {
     IL_0000: ldarga.s src
@@ -167,9 +167,9 @@ uint bitslice_32(BitSpan src, int offset, int count)
     IL_0009: ret
 }
 
-// Id := 100664641, Name := System.UInt64 Z0.OpCodes.bitspan::bitslice_64(Z0.BitSpan,System.Int32,System.Int32)
+// Id := 100664435, Name := System.UInt64 Z0.OpCodes.bitspan::bitslice_64(Z0.BitSpan,System.Int32,System.Int32)
 // ulong bitslice_64(BitSpan src, int offset, int count)
-// Managed
+// IL
 ulong bitslice_64(BitSpan src, int offset, int count)
 {
     IL_0000: ldarga.s src
@@ -179,9 +179,9 @@ ulong bitslice_64(BitSpan src, int offset, int count)
     IL_0009: ret
 }
 
-// Id := 100664642, Name := Z0.BitSpan& modreq(System.Runtime.InteropServices.InAttribute) Z0.OpCodes.bitspan::and(Z0.BitSpan&,Z0.BitSpan&,Z0.BitSpan&)
+// Id := 100664436, Name := Z0.BitSpan& modreq(System.Runtime.InteropServices.InAttribute) Z0.OpCodes.bitspan::and(Z0.BitSpan&,Z0.BitSpan&,Z0.BitSpan&)
 // ref BitSpan and(in BitSpan x, in BitSpan y, in BitSpan z)
-// Managed
+// IL
 ref BitSpan and(in BitSpan x, in BitSpan y, in BitSpan z)
 {
     IL_0000: ldarg.0
@@ -191,9 +191,9 @@ ref BitSpan and(in BitSpan x, in BitSpan y, in BitSpan z)
     IL_0008: ret
 }
 
-// Id := 100664643, Name := Z0.BitSpan& modreq(System.Runtime.InteropServices.InAttribute) Z0.OpCodes.bitspan::xor(Z0.BitSpan&,Z0.BitSpan&,Z0.BitSpan&)
+// Id := 100664437, Name := Z0.BitSpan& modreq(System.Runtime.InteropServices.InAttribute) Z0.OpCodes.bitspan::xor(Z0.BitSpan&,Z0.BitSpan&,Z0.BitSpan&)
 // ref BitSpan xor(in BitSpan x, in BitSpan y, in BitSpan z)
-// Managed
+// IL
 ref BitSpan xor(in BitSpan x, in BitSpan y, in BitSpan z)
 {
     IL_0000: ldarg.0

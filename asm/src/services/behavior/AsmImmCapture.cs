@@ -20,12 +20,12 @@ namespace Z0
             var celltype = optype.GetGenericArguments()[0];
             var factory = VectorImm.unaryfactory(width, method, celltype); 
             var buffer = new byte[1024];
-                foreach(var imm in immediates)            
-                {    
-                    buffer.Clear();
-                    var @delegate = factory(imm);                    
-                    yield return AsmDecoder.decode(@delegate, id.WithImm(imm), buffer);
-                }
+            foreach(var imm in immediates)            
+            {    
+                buffer.Clear();
+                var @delegate = factory(imm);                    
+                yield return AsmDecoder.decode(@delegate, id.WithImm(imm), buffer);
+            }
         }                    
 
         public static AsmCodeSet capture<T>(IVUnaryImm8Resolver128<T> svc, byte imm8)

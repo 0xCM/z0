@@ -148,7 +148,7 @@ namespace Z0
             => items("and", "or", "xor", "nand", "nor", "xnor",
                 "impl","nonimpl", "cimpl", "cnonimpl");
 
-        public void primal_bitlogic_match()
+        void primal_bitlogic_match()
         {
             var names = PrimalBitLogicOps;
             var kinds = PrimalKind.Integers.DistinctKinds();

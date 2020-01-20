@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.IO;
 
-    using static Classifiers;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     using static zfunc;
     public abstract class t_asm<U> : UnitTest<U>, IDisposable
@@ -50,6 +50,12 @@ namespace Z0
         
         protected string GMath
             => nameof(gmath);
+
+        protected AsmWriter AsmTestWriter([Caller] string test = null)
+        {
+            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, Paths.AsmExt);    
+            return path.AsmWriter();                                
+        }
 
         protected void CheckAsmMatch<T>(BinaryOp<T> f, AsmCode asm)
             where T : unmanaged

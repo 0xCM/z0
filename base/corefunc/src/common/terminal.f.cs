@@ -237,7 +237,7 @@ partial class zfunc
         print(AppMsg.Define($"{nv}", SeverityLevel.HiliteCL));
     }
 
-    public static void print<T>(string name, T value)
-        => print(NamedValue.Define(name,value));
+    public static void print(string content, SeverityLevel severity)
+        => print(AppMsg.Define(content, severity));
 
 }

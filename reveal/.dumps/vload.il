@@ -1,7 +1,7 @@
-// 2020-01-18 18:18:34:441
-// Id := 100664671, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vload::vgather_128x8u(System.Span`1<System.Byte>,System.Runtime.Intrinsics.Vector128`1<System.Byte>)
+// 2020-01-20 01:59:21:476
+// Id := 100664465, Name := System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.OpCodes.vload::vgather_128x8u(System.Span`1<System.Byte>,System.Runtime.Intrinsics.Vector128`1<System.Byte>)
 // Vector128<byte> vgather_128x8u(Span<byte> src, Vector128<byte> vix)
-// Managed
+// IL
 Vector128<byte> vgather_128x8u(Span<byte> src, Vector128<byte> vix)
 {
     IL_0000: ldarg.0
@@ -11,9 +11,9 @@ Vector128<byte> vgather_128x8u(Span<byte> src, Vector128<byte> vix)
     IL_000C: ret
 }
 
-// Id := 100664672, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.OpCodes.vload::vgather_128x16u(System.Span`1<System.UInt16>,System.Runtime.Intrinsics.Vector128`1<System.UInt16>)
+// Id := 100664466, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.OpCodes.vload::vgather_128x16u(System.Span`1<System.UInt16>,System.Runtime.Intrinsics.Vector128`1<System.UInt16>)
 // Vector128<ushort> vgather_128x16u(Span<ushort> src, Vector128<ushort> vix)
-// Managed
+// IL
 Vector128<ushort> vgather_128x16u(Span<ushort> src, Vector128<ushort> vix)
 {
     IL_0000: ldarg.0
@@ -23,9 +23,9 @@ Vector128<ushort> vgather_128x16u(Span<ushort> src, Vector128<ushort> vix)
     IL_000C: ret
 }
 
-// Id := 100664673, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vload::vgather_256x8u(System.Span`1<System.Byte>,System.Runtime.Intrinsics.Vector256`1<System.Byte>)
+// Id := 100664467, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.OpCodes.vload::vgather_256x8u(System.Span`1<System.Byte>,System.Runtime.Intrinsics.Vector256`1<System.Byte>)
 // Vector256<byte> vgather_256x8u(Span<byte> src, Vector256<byte> vix)
-// Managed
+// IL
 Vector256<byte> vgather_256x8u(Span<byte> src, Vector256<byte> vix)
 {
     IL_0000: ldarg.0
@@ -35,10 +35,10 @@ Vector256<byte> vgather_256x8u(Span<byte> src, Vector256<byte> vix)
     IL_000C: ret
 }
 
-// Id := 100664674, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.OpCodes.vload::vgather_256x16i(System.Span`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
-// Vector256<short> vgather_256x16i(Span<short> src, Vector256<short> vix)
-// Managed
-Vector256<short> vgather_256x16i(Span<short> src, Vector256<short> vix)
+// Id := 100664468, Name := System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.OpCodes.vload::vgather_256x16i(System.Span`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
+// Vector256<Int16> vgather_256x16i(Span<Int16> src, Vector256<Int16> vix)
+// IL
+Vector256<Int16> vgather_256x16i(Span<Int16> src, Vector256<Int16> vix)
 {
     IL_0000: ldarg.0
     IL_0001: call System.Int16& zfunc::head<System.Int16>(System.Span`1<System.Int16>)
@@ -47,9 +47,9 @@ Vector256<short> vgather_256x16i(Span<short> src, Vector256<short> vix)
     IL_000C: ret
 }
 
-// Id := 100664675, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.OpCodes.vload::vgather_256x16u(System.Span`1<System.UInt16>,System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
+// Id := 100664469, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.OpCodes.vload::vgather_256x16u(System.Span`1<System.UInt16>,System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
 // Vector256<ushort> vgather_256x16u(Span<ushort> src, Vector256<ushort> vix)
-// Managed
+// IL
 Vector256<ushort> vgather_256x16u(Span<ushort> src, Vector256<ushort> vix)
 {
     IL_0000: ldarg.0
@@ -59,9 +59,9 @@ Vector256<ushort> vgather_256x16u(Span<ushort> src, Vector256<ushort> vix)
     IL_000C: ret
 }
 
-// Id := 100664676, Name := System.Runtime.Intrinsics.Vector256`1<System.Int32> Z0.OpCodes.vload::vgather_256x32i(System.Span`1<System.Int32>,System.Runtime.Intrinsics.Vector256`1<System.Int32>)
+// Id := 100664470, Name := System.Runtime.Intrinsics.Vector256`1<System.Int32> Z0.OpCodes.vload::vgather_256x32i(System.Span`1<System.Int32>,System.Runtime.Intrinsics.Vector256`1<System.Int32>)
 // Vector256<int> vgather_256x32i(Span<int> src, Vector256<int> vix)
-// Managed
+// IL
 Vector256<int> vgather_256x32i(Span<int> src, Vector256<int> vix)
 {
     IL_0000: ldarg.0
@@ -71,9 +71,9 @@ Vector256<int> vgather_256x32i(Span<int> src, Vector256<int> vix)
     IL_000C: ret
 }
 
-// Id := 100664677, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.OpCodes.vload::vpackus_2x128x32(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+// Id := 100664471, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.OpCodes.vload::vpackus_2x128x32(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
 // Vector128<ushort> vpackus_2x128x32(Vector128<uint> x, Vector128<uint> y)
-// Managed
+// IL
 Vector128<ushort> vpackus_2x128x32(Vector128<uint> x, Vector128<uint> y)
 {
     IL_0000: ldarg.0
@@ -82,9 +82,9 @@ Vector128<ushort> vpackus_2x128x32(Vector128<uint> x, Vector128<uint> y)
     IL_0007: ret
 }
 
-// Id := 100664678, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.OpCodes.vload::vlo_256x16u(System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
+// Id := 100664472, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.OpCodes.vload::vlo_256x16u(System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
 // Vector128<ushort> vlo_256x16u(Vector256<ushort> x)
-// Managed
+// IL
 Vector128<ushort> vlo_256x16u(Vector256<ushort> x)
 {
     IL_0000: ldarg.0
@@ -92,9 +92,9 @@ Vector128<ushort> vlo_256x16u(Vector256<ushort> x)
     IL_0006: ret
 }
 
-// Id := 100664679, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.OpCodes.vload::vconvert_128x16u_256x32u(System.Runtime.Intrinsics.Vector128`1<System.UInt16>)
+// Id := 100664473, Name := System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.OpCodes.vload::vconvert_128x16u_256x32u(System.Runtime.Intrinsics.Vector128`1<System.UInt16>)
 // Vector256<uint> vconvert_128x16u_256x32u(Vector128<ushort> src)
-// Managed
+// IL
 Vector256<uint> vconvert_128x16u_256x32u(Vector128<ushort> src)
 {
     IL_0000: ldarg.0

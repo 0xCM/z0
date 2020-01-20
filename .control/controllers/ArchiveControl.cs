@@ -24,14 +24,9 @@ namespace Z0
         public override void Execute()
         {             
             Emit(AssemblyId.Intrinsics); 
-            Emit(AssemblyId.GMath);
-            Emit(AssemblyId.CoreFunc);
-            Emit(AssemblyId.BitCore);
-
-            
-
-            
-            
+            // Emit(AssemblyId.GMath);
+            // Emit(AssemblyId.CoreFunc);
+            // Emit(AssemblyId.BitCore);            
         }
 
     }

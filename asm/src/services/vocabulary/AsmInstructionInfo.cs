@@ -14,18 +14,17 @@ namespace Z0
     /// </summary>
     public class AsmInstructionInfo
     {
-        public static AsmInstructionInfo Define(ushort Offset, string Display, string Mnemonic, string OpCode, AsmOperandInfo[] Operands, string EncodingKind, byte[] Encoding)
-            => new AsmInstructionInfo(Offset, Display, Mnemonic, OpCode, Operands, EncodingKind, Encoding);
+        public static AsmInstructionInfo Define(ushort Offset, string Display, string Instruction, string Encoding, AsmOperandInfo[] Operands, byte[] Encoded)
+            => new AsmInstructionInfo(Offset, Display, Instruction, Encoding, Operands, Encoded);
         
-        AsmInstructionInfo(ushort Offset, string Display, string Mnemonic, string OpCode, AsmOperandInfo[] Operands, string EncodingKind, byte[] Encoding)
+        AsmInstructionInfo(ushort Offset, string Display, string Instruction, string Encoding, AsmOperandInfo[] Operands, byte[] Encoded)
         {
             this.Offset = Offset;
             this.Display = Display;
-            this.Mnemonic = Mnemonic;
-            this.OpCode = OpCode;
-            this.Operands = Operands;
-            this.EncodingKind = EncodingKind;
+            this.Instruction = Instruction;
             this.Encoding = Encoding;
+            this.Operands = Operands;
+            this.Encoded = Encoded;
         }
         
         /// <summary>
@@ -38,26 +37,21 @@ namespace Z0
         /// </summary>
         public string Display {get;}
 
-        /// <summary>
-        /// The instruction mnemonic/class
-        /// </summary>
-        public string Mnemonic {get;}
         
         /// <summary>
-        /// Idenfifies the op code
+        /// The full instruction string
         /// </summary>
-        public string OpCode {get;}
+        public string Instruction {get;}
 
         /// <summary>
-        /// Identifies the type of encoding, e.g VEX, REX, etc. 
-        /// Left blank to indicate that no encoding prefix is specified
+        /// The instruction encoding
         /// </summary>
-        public string EncodingKind {get;}
+        public string Encoding {get;}
 
         /// <summary>
-        /// The bytes encoded for the instruction
+        /// The encoded bytes
         /// </summary>
-        public byte[] Encoding {get;}
+        public byte[] Encoded {get;}
 
         /// <summary>
         /// Describes the instruction operands

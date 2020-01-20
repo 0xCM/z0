@@ -366,7 +366,7 @@ namespace Z0
         /// </summary>
         /// <param name="s">The string to search</param>
         /// <param name="c">The character to match</param>
-        public static Option<int> TryGetLastIndexOf(this string s, char c)
+        public static Option<int> LastIndexOf(this string s, char c)
         {
             var idx = s.LastIndexOf(c);
             return idx != -1 ? some(idx) : none<int>();
@@ -377,12 +377,12 @@ namespace Z0
         /// </summary>
         /// <param name="s">The string to search</param>
         /// <param name="c">The marking character</param>
-        public static Option<int> TryGetFirstIndexOf(this string s, char c)
+        public static Option<int> FirstIndexOf(this string s, char c)
         {
             var idx = s.IndexOf(c);
             return idx != -1 ? some(idx) : none<int>();
         }
-
+    
         /// <summary>
         /// Selects the substring prior to the first occurrence of a specified character if it is found in the string; otherwise, 
         /// returns the original string
@@ -661,6 +661,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string Concat(this IEnumerable<string> src, string sep = null)
             => string.Join(sep ?? string.Empty, src);
+
+        [MethodImpl(Inline)]
+        public static string Concat(this IEnumerable<string> src, char sep)
+            => string.Join(sep, src);
+
+        [MethodImpl(Inline)]
+        public static IEnumerable<string> Trim(this IEnumerable<string> src)
+            => src.Select(s => s.Trim());
+
+        [MethodImpl(Inline)]
+        public static string[] Trim(this string[] src)
+            => src.Map(s => s.Trim());
 
         public static string Concat(this Span<string> src, string sep)
         {

@@ -18,21 +18,21 @@ namespace Z0
     /// </summary>
     public class MethodAsmBody
     {
+        public static MethodAsmBody Define(MethodInfo method, NativeCodeBlock block, IEnumerable<Instruction> instructions)
+            => new MethodAsmBody(method,block,instructions.ToArray());
+
         public MethodAsmBody(MethodInfo method, NativeCodeBlock block, Instruction[] instructions)
         {
             this.Method = method;
             this.NativeBlock = block;
             this.Instructions = instructions;
-            this.StartAddress = instructions.First().IP;
-            this.EndAddress = instructions.Last().IP;
+            this.Location = AddressSegment.Define(instructions.First().IP,instructions.Last().IP + (ulong)instructions.Last().ByteLength);            
         }
         
         public MethodInfo Method {get;}
 
-        public ulong StartAddress {get;}
+        public AddressSegment Location {get;}
             
-        public ulong EndAddress {get;}
-
         public Instruction[] Instructions {get;}
         
         public NativeCodeBlock NativeBlock {get;}

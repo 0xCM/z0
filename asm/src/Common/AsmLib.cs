@@ -51,7 +51,7 @@ namespace Z0
         /// </summary>
         /// <param name="match">The match predicate</param>
         public IEnumerable<FilePath> HexFiles(string match)        
-            => Paths.AsmDataDir(Subject).Files(Paths.AsmHexExt, match);
+            => Paths.AsmDataDir(Subject).Files(Paths.HexExt, match);
 
     }
 }

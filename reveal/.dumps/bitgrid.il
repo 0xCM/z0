@@ -1,7 +1,7 @@
-// 2020-01-18 18:18:35:141
+// 2020-01-20 01:59:22:130
 // Id := 100663309, Name := System.Void Z0.bitgrid::part63x3(System.UInt64,Z0.NatSpan`2<Z0.N21,System.Byte>)
 // void part63x3(ulong src, NatSpan<N21,byte> dst)
-// Managed
+// IL
 void part63x3(ulong src, NatSpan<N21,byte> dst)
 {
     IL_0000: ldarg.0
@@ -12,7 +12,7 @@ void part63x3(ulong src, NatSpan<N21,byte> dst)
 
 // Id := 100663310, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.bitgrid::bitgrid_vector256(Z0.BitGrid`1<System.Byte>,System.Int32)
 // Vector256<byte> bitgrid_vector256(BitGrid<byte> src, int block)
-// Managed
+// IL
 Vector256<byte> bitgrid_vector256(BitGrid<byte> src, int block)
 {
     IL_0000: ldarga.s src
@@ -24,7 +24,7 @@ Vector256<byte> bitgrid_vector256(BitGrid<byte> src, int block)
 
 // Id := 100663311, Name := Z0.BitGrid256`3<Z0.N16,Z0.N16,System.UInt16> Z0.bitgrid::transpose(Z0.BitGrid256`3<Z0.N16,Z0.N16,System.UInt16>)
 // BitGrid256<N16,N16,ushort> transpose(BitGrid256<N16,N16,ushort> g)
-// Managed
+// IL
 BitGrid256<N16,N16,ushort> transpose(BitGrid256<N16,N16,ushort> g)
 {
     IL_0000: ldarga.s g
@@ -34,7 +34,7 @@ BitGrid256<N16,N16,ushort> transpose(BitGrid256<N16,N16,ushort> g)
 
 // Id := 100663312, Name := Z0.bit Z0.bitgrid::read_bit_from_vector(Z0.BitBlock`2<Z0.N23,System.Byte>&)
 // bit read_bit_from_vector(in BitBlock<N23,byte> src)
-// Managed
+// IL
 bit read_bit_from_vector(in BitBlock<N23,byte> src)
 {
     IL_0000: ldarg.0
@@ -46,7 +46,7 @@ bit read_bit_from_vector(in BitBlock<N23,byte> src)
 
 // Id := 100663313, Name := System.Int32 Z0.bitgrid::segments()
 // int segments()
-// Managed
+// IL
 int segments()
 {
     IL_0000: call System.Int32 Z0.BitBlock`2<Z0.N23,System.Byte>::get_CellCount()
@@ -55,7 +55,7 @@ int segments()
 
 // Id := 100663314, Name := System.Int32 Z0.bitgrid::count_segs()
 // int count_segs()
-// Managed
+// IL
 int count_segs()
 {
     IL_0000: ldloca.s V_0
@@ -71,7 +71,7 @@ int count_segs()
 
 // Id := 100663315, Name := Z0.bit Z0.bitgrid::readbit_row_col_2(System.Int32,System.UInt64,System.Int32,System.Int32)
 // bit readbit_row_col_2(int n, ulong src, int row, int col)
-// Managed
+// IL
 bit readbit_row_col_2(int n, ulong src, int row, int col)
 {
     IL_0000: ldarg.0
@@ -84,7 +84,7 @@ bit readbit_row_col_2(int n, ulong src, int row, int col)
 
 // Id := 100663316, Name := Z0.bit Z0.bitgrid::readbit_g_position(System.UInt64&,System.Int32)
 // bit readbit_g_position(in ulong src, int pos)
-// Managed
+// IL
 bit readbit_g_position(in ulong src, int pos)
 {
     IL_0000: ldarg.0

@@ -14,32 +14,29 @@ namespace Z0
         public static AsmCodeSet Define(Moniker moniker, InstructionBlock asm, CilFunctionBody cil)
             => new AsmCodeSet(moniker, asm,cil);
 
-        AsmCodeSet(Moniker moniker, InstructionBlock instructions, CilFunctionBody cil)
+        AsmCodeSet(Moniker id, InstructionBlock instructions, CilFunctionBody cil)
         {
-            this.Moniker = moniker;
+            this.Id = id;
             this.Label = instructions.Label;
             this.Decoded = instructions;
             this.Cil = cil;
-            this.Encoded = AsmCode.Define(instructions.Encoded, moniker, instructions.Label);            
+            this.Encoded = AsmCode.Define(id, instructions.Label,instructions.Encoded);   
+            var count = instructions.InstructionCount;
+            this.Location = AddressSegment.Define(instructions[0].IP, instructions[count - 1].IP + (ulong)instructions[count - 1].ByteLength);
+         
         }
 
-        public Moniker Moniker {get;}    
+        public Moniker Id {get;}    
 
         public string Label {get;}    
 
         public AsmCode Encoded {get;}
 
+        public AddressSegment Location {get;}
+
         public InstructionBlock Decoded {get;}
 
         public CilFunctionBody Cil {get;}
 
-        public int InstructionCount 
-            => Decoded.InstructionCount;
-        
-        public int EncodedByteCount
-            => Encoded.Data.Length;
-    
-        public ulong BaseAddress
-            => Decoded[0].IP;       
     }
 }

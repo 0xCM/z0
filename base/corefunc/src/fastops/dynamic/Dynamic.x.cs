@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="method">The source method</param>
         public static IntPtr NativePointer(this DynamicMethod method)
-            => Native.pointer(method);
+            => NativeCapture.pointer(method);
 
         /// <summary>
         /// Returns a dynamic delegate's dynamic pointer

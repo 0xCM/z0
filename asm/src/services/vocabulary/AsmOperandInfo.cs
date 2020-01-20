@@ -14,16 +14,14 @@ namespace Z0
     /// </summary>
     public class AsmOperandInfo
     {
-        public static AsmOperandInfo Define(byte index, string kind, Option<ImmInfo> imminfo, 
-            Option<AsmMemInfo> memory, Option<AsmRegisterInfo> register, Option<AsmBranchInfo> branch)
+        public static AsmOperandInfo Define(int index, string kind, ImmInfo imminfo, AsmMemInfo memory, AsmRegisterInfo register, AsmBranchInfo branch)
                 => new AsmOperandInfo(index, kind, imminfo, memory, register, branch);
-        public AsmOperandInfo(byte index, string Kind, Option<ImmInfo> imminfo, 
-            Option<AsmMemInfo> Memory, Option<AsmRegisterInfo> register, Option<AsmBranchInfo> branch)
+        public AsmOperandInfo(int index, string kind, ImmInfo imminfo, AsmMemInfo meminfo, AsmRegisterInfo register, AsmBranchInfo branch)
         {
-            this.Index = index;
-            this.Kind = Kind;
+            this.Index = (byte)index;
+            this.Kind = kind;
             this.ImmInfo = imminfo;
-            this.Memory = Memory;
+            this.Memory = meminfo;
             this.Register = register;
             this.Branch = branch;
         }
@@ -51,7 +49,7 @@ namespace Z0
         /// <summary>
         /// Operand register info, if applicable
         /// </summary>
-        public Option<AsmRegisterInfo> Register;
+        public Option<AsmRegisterInfo> Register {get;}
 
         /// <summary>
         /// Instruction branching info, if applicable

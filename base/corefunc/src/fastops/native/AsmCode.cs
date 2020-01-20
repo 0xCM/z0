@@ -29,10 +29,10 @@ namespace Z0
         /// <summary>
         /// The encoded asm bytes
         /// </summary>
-        public readonly byte[] Data;
+        public readonly byte[] Encoded;
         
         public int Length
-            => Data?.Length ?? 0;
+            => Encoded?.Length ?? 0;
 
         /// <summary>
         /// The canonical zero
@@ -60,10 +60,10 @@ namespace Z0
         /// Loads an untyped code block from span content
         /// </summary>
         /// <param name="src">The code source</param>
-        /// <param name="m">The identifying moniker</param>
+        /// <param name="id">The identifying moniker</param>
         [MethodImpl(Inline)]
-        public static AsmCode Define(byte[] src, Moniker m, string label)
-            => new AsmCode(src, m, label);
+        public static AsmCode Define(Moniker id, string label, byte[] src)
+            => new AsmCode(src, id, label);
 
         /// <summary>
         /// Loads an untyped code block from span content
@@ -71,20 +71,19 @@ namespace Z0
         /// <param name="src">The code source</param>
         /// <param name="m">The identifying moniker</param>
         [MethodImpl(Inline)]
-        public static AsmCode Define(ReadOnlySpan<byte> src, Moniker m, string label)
+        public static AsmCode Define(Moniker m, string label, ReadOnlySpan<byte> src)
             => new AsmCode(src.ToArray(), m, label);
-
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(AsmCode code)
-            => code.Data;
+            => code.Encoded;
 
         [MethodImpl(Inline)]
-        internal AsmCode(byte[] Bytes, Moniker id, string label)
+        internal AsmCode(byte[] encoded, Moniker id, string label)
         {
-            this.Data = Bytes;
             this.Id = id;
             this.Label = label ?? id;
+            this.Encoded = encoded;
         }
 
         /// <summary>
@@ -93,20 +92,14 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => (Length == 0 ) || (Length == 1 && Data[0] == 0);
-        }
-
-        public ref readonly byte this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => ref Data[index];
+            get => (Length == 0 ) || (Length == 1 && Encoded[0] == 0);
         }
                 
         /// <summary>
         /// Formats the encapsulated data as a sequence of comma-delimited hex bytes
         /// </summary>
         public string Format()
-            => Data.AsSpan().FormatHexBytes();
+            => Encoded.AsSpan().FormatHexBytes();
 
         [MethodImpl(Inline)]
         public AsmCode<T> As<T>()
@@ -114,10 +107,10 @@ namespace Z0
                 => new AsmCode<T>(this);
 
         public AsmCode WithId(Moniker id)
-            => new AsmCode(Data,id, Label);
+            => new AsmCode(Encoded,id, Label);
 
         public AsmCode WithLabel(string label)
-            => new AsmCode(Data, Id, label);
+            => new AsmCode(Encoded, Id, label);
 
     }
 
@@ -136,7 +129,7 @@ namespace Z0
             => Code.Label;
          
         public ReadOnlySpan<byte> Data
-            => Code.Data;
+            => Code.Encoded;
 
         [MethodImpl(Inline)]
         public static implicit operator AsmCode(AsmCode<T> src)

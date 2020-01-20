@@ -14,8 +14,24 @@ namespace Z0
     /// <summary>
     /// Defines an inclusive address range
     /// </summary>
-    public readonly struct AddressSegment
+    public readonly struct AddressSegment : IEquatable<AddressSegment>
     {
+        /// <summary>
+        /// Attempts to parse an address segment in standard form, [start,end]
+        /// </summary>
+        /// <param name="src">The source text</param>
+        public static Option<AddressSegment> Parse(string src)    
+             => from i0 in src.FirstIndexOf(AsciSym.LBracket)
+                from i1 in src.FirstIndexOf(AsciSym.RBracket)
+                let inner = src.Substring(i0 + 1, i1 - i0 - 1)
+                let parts = inner.Split(AsciSym.Comma).Trim()
+                where parts.Length == 2
+                from start in Hex.parse(parts[0])
+                from end in Hex.parse(parts[1])
+                select Define(start, end);
+                                
+        public static AddressSegment Empty => default;
+        
         public readonly ulong Start;
 
         public readonly ulong End;
@@ -48,16 +64,31 @@ namespace Z0
             get => End - Start;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Length == 0;
+        }
+
         public string Format()
             => bracket(concat(
                 Start.FormatHex(false), 
                 AsciSym.Comma, 
                 AsciSym.Space, 
-                End.FormatHex(false,false))
+                End.FormatHex(false))
                 );
 
         public override string ToString()
             => Format();
+
+        public override int GetHashCode()
+            => HashCode.Combine(Start,End);
+
+        public bool Equals(AddressSegment src)
+            => Start == src.Start && End == src.End;
+        
+        public override bool Equals(object obj)
+            => obj is AddressSegment x && Equals(x);
     }
 
 

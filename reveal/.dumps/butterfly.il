@@ -1,7 +1,7 @@
-// 2020-01-18 18:18:33:564
-// Id := 100664306, Name := System.UInt32 Z0.OpCodes.butterfly::bfly_1x32(System.UInt32)
+// 2020-01-20 01:59:20:694
+// Id := 100664266, Name := System.UInt32 Z0.OpCodes.butterfly::bfly_1x32(System.UInt32)
 // uint bfly_1x32(uint src)
-// Managed
+// IL
 uint bfly_1x32(uint src)
 {
     IL_0000: call Z0.N1 zfunc::get_n1()
@@ -10,9 +10,9 @@ uint bfly_1x32(uint src)
     IL_000B: ret
 }
 
-// Id := 100664307, Name := System.UInt32 Z0.OpCodes.butterfly::bfly_1x32_op(System.UInt32)
+// Id := 100664267, Name := System.UInt32 Z0.OpCodes.butterfly::bfly_1x32_op(System.UInt32)
 // uint bfly_1x32_op(uint src)
-// Managed
+// IL
 uint bfly_1x32_op(uint src)
 {
     IL_0000: call Z0.N1 zfunc::get_n1()
@@ -25,9 +25,9 @@ uint bfly_1x32_op(uint src)
     IL_0014: ret
 }
 
-// Id := 100664308, Name := System.UInt32 Z0.OpCodes.butterfly::bfly_2x32(System.UInt32)
+// Id := 100664268, Name := System.UInt32 Z0.OpCodes.butterfly::bfly_2x32(System.UInt32)
 // uint bfly_2x32(uint src)
-// Managed
+// IL
 uint bfly_2x32(uint src)
 {
     IL_0000: call Z0.N2 zfunc::get_n2()
@@ -36,9 +36,9 @@ uint bfly_2x32(uint src)
     IL_000B: ret
 }
 
-// Id := 100664309, Name := System.UInt32 Z0.OpCodes.butterfly::bfly_2x32_op(System.UInt32)
+// Id := 100664269, Name := System.UInt32 Z0.OpCodes.butterfly::bfly_2x32_op(System.UInt32)
 // uint bfly_2x32_op(uint src)
-// Managed
+// IL
 uint bfly_2x32_op(uint src)
 {
     IL_0000: call Z0.N2 zfunc::get_n2()
@@ -51,9 +51,9 @@ uint bfly_2x32_op(uint src)
     IL_0014: ret
 }
 
-// Id := 100664310, Name := System.UInt32 Z0.OpCodes.butterfly::bfly_4x32(System.UInt32)
+// Id := 100664270, Name := System.UInt32 Z0.OpCodes.butterfly::bfly_4x32(System.UInt32)
 // uint bfly_4x32(uint src)
-// Managed
+// IL
 uint bfly_4x32(uint src)
 {
     IL_0000: call Z0.N4 zfunc::get_n4()
@@ -62,9 +62,9 @@ uint bfly_4x32(uint src)
     IL_000B: ret
 }
 
-// Id := 100664311, Name := System.UInt32 Z0.OpCodes.butterfly::bfly_4x32_op(System.UInt32)
+// Id := 100664271, Name := System.UInt32 Z0.OpCodes.butterfly::bfly_4x32_op(System.UInt32)
 // uint bfly_4x32_op(uint src)
-// Managed
+// IL
 uint bfly_4x32_op(uint src)
 {
     IL_0000: call Z0.N4 zfunc::get_n4()

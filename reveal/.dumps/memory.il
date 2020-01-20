@@ -1,7 +1,7 @@
-// 2020-01-18 18:18:33:890
-// Id := 100664399, Name := System.Int32 Z0.OpCodes.memory::blockalign_64x8u_var(System.Int32)
+// 2020-01-20 01:59:21:004
+// Id := 100664359, Name := System.Int32 Z0.OpCodes.memory::blockalign_64x8u_var(System.Int32)
 // int blockalign_64x8u_var(int cellcount)
-// Managed
+// IL
 int blockalign_64x8u_var(int cellcount)
 {
     IL_0000: call Z0.N64 Z0.OpCodes.memory::get_n64()
@@ -10,9 +10,9 @@ int blockalign_64x8u_var(int cellcount)
     IL_000B: ret
 }
 
-// Id := 100664400, Name := System.Int32 Z0.OpCodes.memory::blockalign_64x8u_16()
+// Id := 100664360, Name := System.Int32 Z0.OpCodes.memory::blockalign_64x8u_16()
 // int blockalign_64x8u_16()
-// Managed
+// IL
 int blockalign_64x8u_16()
 {
     IL_0000: call Z0.N64 Z0.OpCodes.memory::get_n64()
@@ -21,9 +21,9 @@ int blockalign_64x8u_16()
     IL_000C: ret
 }
 
-// Id := 100664401, Name := System.Int32 Z0.OpCodes.memory::blockalign_64x8u_17()
+// Id := 100664361, Name := System.Int32 Z0.OpCodes.memory::blockalign_64x8u_17()
 // int blockalign_64x8u_17()
-// Managed
+// IL
 int blockalign_64x8u_17()
 {
     IL_0000: call Z0.N64 Z0.OpCodes.memory::get_n64()
@@ -32,9 +32,9 @@ int blockalign_64x8u_17()
     IL_000C: ret
 }
 
-// Id := 100664406, Name := System.Char Z0.OpCodes.memory::digit_1()
+// Id := 100664366, Name := System.Char Z0.OpCodes.memory::digit_1()
 // Char digit_1()
-// Managed
+// IL
 Char digit_1()
 {
     IL_0000: call System.ReadOnlySpan`1<System.Char> Z0.OpCodes.memory::get_CharSpan()
@@ -44,9 +44,9 @@ Char digit_1()
     IL_000C: ret
 }
 
-// Id := 100664407, Name := System.Char Z0.OpCodes.memory::digit_2()
+// Id := 100664367, Name := System.Char Z0.OpCodes.memory::digit_2()
 // Char digit_2()
-// Managed
+// IL
 Char digit_2()
 {
     IL_0000: ldstr "0123456789ABCDEF"
@@ -55,9 +55,9 @@ Char digit_2()
     IL_000B: ret
 }
 
-// Id := 100664408, Name := System.Char Z0.OpCodes.memory::digit(System.Int32)
+// Id := 100664368, Name := System.Char Z0.OpCodes.memory::digit(System.Int32)
 // Char digit(int i)
-// Managed
+// IL
 Char digit(int i)
 {
     IL_0000: call System.ReadOnlySpan`1<System.Byte> Z0.OpCodes.memory::get_Bytes()
@@ -67,9 +67,9 @@ Char digit(int i)
     IL_000C: ret
 }
 
-// Id := 100664409, Name := System.Char Z0.OpCodes.memory::bdigit(Z0.bit)
+// Id := 100664369, Name := System.Char Z0.OpCodes.memory::bdigit(Z0.bit)
 // Char bdigit(bit b)
-// Managed
+// IL
 Char bdigit(bit b)
 {
     IL_0000: ldarga.s b

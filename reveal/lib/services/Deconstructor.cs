@@ -107,19 +107,10 @@ namespace Z0
 
         MethodAsmBody DecodeAsm(MethodInfo method)
         {
-            var data = ReadNativeContent(method);
-            if(data.NativeCode.Length == 0)
-                throw new NoCodeException(method.ToString());
-                
-            var instructions = new List<Instruction>();
-            var blocks = new List<NativeCodeBlock>();
-            foreach(var block in data.NativeCode)
-            {
-                instructions.AddRange(AsmDecoder.decode(block));
-                blocks.Add(block);
-            }
-            
-            return new MethodAsmBody(method, blocks.Single(), instructions.ToArray());
+            var result = from block in ReadNativeContent(method)
+                          let instructions = AsmDecoder.decode(block)
+                        select MethodAsmBody.Define(method, block, instructions);
+            return result.OnNone(() => throw new NoCodeException(method.ToString())).Value;
         }
 
         void IDisposable.Dispose()
@@ -182,14 +173,9 @@ namespace Z0
             return ilBytes;
         }
 
-        NativeCodeBlocks ReadNativeContent(MethodInfo method) 
-			=> ReadNativeContent(GetRuntimeMethod(method));
+        Option<NativeCodeBlock> ReadNativeContent(MethodInfo method) 
+			=> ReadNativeBlock(method, GetRuntimeMethod(method));
 
- 		NativeCodeBlocks ReadNativeContent(ClrMethod method) 
-			=> new NativeCodeBlocks(
-                MethodId: (int)method.MetadataToken,
-                Blocks: ReadNativeBlock(method).MapValueOrDefault(b => new NativeCodeBlock[]{b}, new NativeCodeBlock[]{})
-            );
 
 		/// <summary>
 		/// Reads a continuous block of memory
@@ -197,7 +183,7 @@ namespace Z0
 		/// <param name="target">The (source!) target </param>
 		/// <param name="address">The starting address</param>
 		/// <param name="size">The number of bytes to read</param>
-		Option<NativeCodeBlock> ReadNativeBlock(ulong address, uint size)
+		Option<NativeCodeBlock> ReadNativeBlock(string label, ulong address, uint size)
 		{
 			if (address == 0 || size == 0)
 				return zfunc.none<NativeCodeBlock>();
@@ -209,18 +195,18 @@ namespace Z0
             if (dst.Length != size)
                 throw Errors.LengthMismatch((int)size, dst.Length);
 
-			return new NativeCodeBlock(address, dst);
+			return NativeCodeBlock.Define(label, address, dst);
 		}
 
         /// <summary>
         /// Reads the native code blocks that have been Jitted for a specified method
         /// </summary>
         /// <param name="target">The diagnostic target</param>
-        /// <param name="method">The runtime method</param>
-        Option<NativeCodeBlock> ReadNativeBlock(ClrMethod method)
+        /// <param name="runtime">The runtime method</param>
+        Option<NativeCodeBlock> ReadNativeBlock(MethodInfo info, ClrMethod runtime)
         {
-			var codeInfo = method.HotColdInfo;			
-            return ReadNativeBlock(codeInfo.HotStart, codeInfo.HotSize);
+			var codeInfo = runtime.HotColdInfo;	
+            return ReadNativeBlock(info.Signature().Format(),codeInfo.HotStart, codeInfo.HotSize);
         }
     }
 }

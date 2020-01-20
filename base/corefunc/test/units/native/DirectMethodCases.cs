@@ -14,15 +14,15 @@ namespace Z0
     class DirectMethodCases
     {
         [Op]
-        public static uint and_ng(uint a, uint b)
+        public static uint and(uint a, uint b)
             => a & b;
         [Op]
-        public static uint or_ng(uint a, uint b)
+        public static uint or(uint a, uint b)
             => a | b;
 
         [Op]
-        public static uint xor_ng(uint a, uint b)
-            => a ^ b;
+        public static byte xor(byte a, byte b)
+            => (byte)(a ^ b);
     }
 
 }

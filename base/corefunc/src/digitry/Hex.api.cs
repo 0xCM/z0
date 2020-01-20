@@ -196,6 +196,17 @@ namespace Z0
         }
 
         /// <summary>
+        /// Attempts to parse a hex string as an unsigned long
+        /// </summary>
+        /// <param name="src">The source text</param>
+        public static Option<ulong> parse(string src)
+        {
+            if(ulong.TryParse(src.Remove(PreSpec),NumberStyles.HexNumber, null,  out ulong value))
+                return value;
+            return default;
+        }
+
+        /// <summary>
         /// Parses a hex byte
         /// </summary>
         /// <param name="src">hex text</param>

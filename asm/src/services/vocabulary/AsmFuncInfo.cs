@@ -14,19 +14,19 @@ namespace Z0
     /// </summary>
     public class AsmFuncInfo
     {   
-        public static AsmFuncInfo Define(ulong StartAddress, ulong EndAddress, AsmCode code, AsmInstructionInfo[] instructions)
-            => new AsmFuncInfo(StartAddress, EndAddress, code, instructions);
+        public static AsmFuncInfo Define(AddressSegment location, AsmCode code, AsmInstructionInfo[] instructions)
+            => new AsmFuncInfo(location, code, instructions);
 
-        AsmFuncInfo(ulong StartAddress, ulong EndAddress, AsmCode code, AsmInstructionInfo[] instructions)
+        AsmFuncInfo(AddressSegment address, AsmCode code, AsmInstructionInfo[] instructions)
         {
             this.Id = code.Id;
             this.Name = code.Id;
             this.Label = code.Label;
-            this.StartAddress = StartAddress;
-            this.EndAddress = EndAddress;
             this.Instructions = instructions;
             this.Code = code;
+            this.Location = address;
         }
+
 
         /// <summary>
         /// The function identifier
@@ -49,14 +49,9 @@ namespace Z0
         public AsmCode Code {get;}
 
         /// <summary>
-        /// The address at which the function definition begins
+        /// The memory location from which the code was taken
         /// </summary>
-        public ulong StartAddress {get;}
-
-        /// <summary>
-        /// The address at which the function definition ends
-        /// </summary>
-        public ulong EndAddress {get;}
+        public AddressSegment Location {get;}
 
         /// <summary>
         /// The encoded instructions

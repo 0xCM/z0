@@ -70,6 +70,18 @@ namespace Z0
             where T : unmanaged
                 => src.ReadOnly().FormatHex(bracket, sep, specifier);
 
+        public static string FormatSmallHex(this byte src)
+            => src.ToString("x4");
+
+        public static string FormatSmallHex(this ulong src)
+            => src.ToString("x4");
+
+        public static string FormatSmallHex(this uint src)
+            => src.ToString("x4");
+
+        public static string FormatSmallHex(this ushort src)
+            => src.ToString("x4");
+
         public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true, int? segwidth = null)
         {
@@ -103,6 +115,10 @@ namespace Z0
         public static string FormatHexBytes(this Span<byte> src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true, int? segwidth = null)
                 => src.ReadOnly().FormatHexBytes(sep,zpad,specifier,uppercase,prespec,segwidth);
+        
+        public static string FormatHexBytes(this byte[] src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
+            bool uppercase = false, bool prespec = true, int? segwidth = null)
+                => src.AsSpan().ReadOnly().FormatHexBytes(sep,zpad,specifier,uppercase,prespec,segwidth);
         
         [MethodImpl(Inline)]
         static string HexFmtSpec(bool upper)

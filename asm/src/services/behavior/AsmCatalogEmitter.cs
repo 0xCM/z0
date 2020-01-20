@@ -13,7 +13,6 @@ namespace Z0
     using static zfunc;
     using static AsmServiceMessages;
 
-
     class AsmCatalogEmitter : IAsmCatalogEmitter
     {
         public static AsmCatalogEmitter Create(IOperationCatalog catalog)
@@ -34,15 +33,19 @@ namespace Z0
 
         void EmitUnaryImmResolutions(FastDirectInfo op, AsmArchive archive)
         {
-            print(EmittingImmediateResolutions(op));                        
-            archive.Save(AsmImmCapture.unary(op.Method, op.Id, new byte[]{5,9,13}).Select(x => x.Encoded));
+            print(EmittingImmResolutions(op));                        
+            var resolutions = AsmImmCapture.unary(op.Method, op.Id, new byte[]{5,9,13});
+            archive.Save(resolutions);
         }   
 
         void EmitUnaryImmResolutions(FastGenericInfo op, AsmArchive archive)
         {
-            print(EmittingImmediateResolutions(op));
+            print(EmittingImmResolutions(op));
             foreach(var closure in op.Closures())
-                archive.Save(AsmImmCapture.unary( closure.ClosedMethod, closure.Id, new byte[]{5,9,13}).Select(x => x.Encoded));
+            {
+                var resolutions = AsmImmCapture.unary(closure.ClosedMethod, closure.Id, new byte[]{5,9,13});                
+                archive.Save(resolutions);
+            }
         }
 
         void Emit(FastGenericInfo op, AsmArchive archive)
@@ -52,23 +55,24 @@ namespace Z0
             if(closures.Length == 0)
                 print(NoClosures(op));
             else
-                print(EmittingOp(op));
+                print(Emitting(op));
 
             foreach(var closure in closures)
             {
-                AsmDecoder.decode(closure.Id, closure.ClosedMethod, ClrMetadata).OnSome(x => archive.Save(x.AsmCode, x.CilFunction.ValueOrDefault()));
+                Emitting(closure);
+                AsmDecoder.decode(closure.Id, closure.ClosedMethod, ClrMetadata).OnSome(x => archive.Save(x));
             }
         }
 
         void Emit(FastDirectInfo op, AsmArchive archive)
         {                        
-            print(EmittingOp(op));
-            AsmDecoder.decode(op.Id, op.Method, ClrMetadata).OnSome(x => archive.Save(x.AsmCode, x.CilFunction.ValueOrDefault()));
+            print(Emitting(op));
+            AsmDecoder.decode(op.Id, op.Method, ClrMetadata).OnSome(x => archive.Save(x));
         }
 
         void EmitGeneric(Type host)
         {
-            print(EmittingHostOps(host));
+            print(Emitting(host));
 
             var subject = host.Name.ToLower();
             var archive = AsmArchive.Define(subject);
@@ -92,7 +96,7 @@ namespace Z0
 
         void EmitDirect(Type host)
         {
-            print(EmittingHostOps(host));
+            print(Emitting(host));
 
             var subject = host.Name.ToLower();
             var archive = AsmArchive.Define(subject);
@@ -124,7 +128,6 @@ namespace Z0
         {            
             EmitDirect();
             EmitGeneric();
-
         }        
     }
 }

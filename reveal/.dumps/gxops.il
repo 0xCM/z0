@@ -1,7 +1,7 @@
-// 2020-01-18 18:18:35:054
-// Id := 100664612, Name := System.UInt32 Z0.OpCodes.gxops::bl_and32(System.UInt32,System.UInt32)
+// 2020-01-20 01:59:22:038
+// Id := 100664406, Name := System.UInt32 Z0.OpCodes.gxops::bl_and32(System.UInt32,System.UInt32)
 // uint bl_and32(uint a, uint b)
-// Managed
+// IL
 uint bl_and32(uint a, uint b)
 {
     IL_0000: ldc.i4.0
@@ -14,9 +14,9 @@ uint bl_and32(uint a, uint b)
     IL_0010: ret
 }
 
-// Id := 100664613, Name := System.UInt32 Z0.OpCodes.gxops::logic_machine(System.UInt32,System.UInt32)
+// Id := 100664407, Name := System.UInt32 Z0.OpCodes.gxops::logic_machine(System.UInt32,System.UInt32)
 // uint logic_machine(uint a, uint b)
-// Managed
+// IL
 uint logic_machine(uint a, uint b)
 {
     IL_0000: ldc.i4.0
@@ -34,9 +34,9 @@ uint logic_machine(uint a, uint b)
     IL_001E: ret
 }
 
-// Id := 100664614, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.OpCodes.gxops::vlogic_machine(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+// Id := 100664408, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.OpCodes.gxops::vlogic_machine(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
 // Vector128<uint> vlogic_machine(Vector128<uint> a, Vector128<uint> b)
-// Managed
+// IL
 Vector128<uint> vlogic_machine(Vector128<uint> a, Vector128<uint> b)
 {
     IL_0000: call Z0.N128 zfunc::get_n128()
@@ -55,9 +55,9 @@ Vector128<uint> vlogic_machine(Vector128<uint> a, Vector128<uint> b)
     IL_0023: ret
 }
 
-// Id := 100664615, Name := Z0.bit Z0.OpCodes.gxops::eq_d16u(System.UInt16,System.UInt16)
+// Id := 100664409, Name := Z0.bit Z0.OpCodes.gxops::eq_d16u(System.UInt16,System.UInt16)
 // bit eq_d16u(ushort a, ushort b)
-// Managed
+// IL
 bit eq_d16u(ushort a, ushort b)
 {
     IL_0000: ldarg.0
@@ -66,9 +66,9 @@ bit eq_d16u(ushort a, ushort b)
     IL_0007: ret
 }
 
-// Id := 100664616, Name := Z0.bit Z0.OpCodes.gxops::eq_g16u(System.UInt16,System.UInt16)
+// Id := 100664410, Name := Z0.bit Z0.OpCodes.gxops::eq_g16u(System.UInt16,System.UInt16)
 // bit eq_g16u(ushort a, ushort b)
-// Managed
+// IL
 bit eq_g16u(ushort a, ushort b)
 {
     IL_0000: ldarg.0
@@ -77,9 +77,9 @@ bit eq_g16u(ushort a, ushort b)
     IL_0007: ret
 }
 
-// Id := 100664617, Name := Z0.bit Z0.OpCodes.gxops::eq_o16u(System.UInt16,System.UInt16)
+// Id := 100664411, Name := Z0.bit Z0.OpCodes.gxops::eq_o16u(System.UInt16,System.UInt16)
 // bit eq_o16u(ushort a, ushort b)
-// Managed
+// IL
 bit eq_o16u(ushort a, ushort b)
 {
     IL_0000: ldc.i4.0
@@ -92,9 +92,9 @@ bit eq_o16u(ushort a, ushort b)
     IL_0010: ret
 }
 
-// Id := 100664618, Name := System.String Z0.OpCodes.gxops::eq_moniker()
+// Id := 100664412, Name := System.String Z0.OpCodes.gxops::eq_moniker()
 // string eq_moniker()
-// Managed
+// IL
 string eq_moniker()
 {
     IL_0000: ldc.i4.0
@@ -106,9 +106,9 @@ string eq_moniker()
     IL_0013: ret
 }
 
-// Id := 100664619, Name := System.String Z0.OpCodes.gxops::the_name()
+// Id := 100664413, Name := System.String Z0.OpCodes.gxops::the_name()
 // string the_name()
-// Managed
+// IL
 string the_name()
 {
     IL_0000: ldstr "thename"

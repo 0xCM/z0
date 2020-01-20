@@ -18,9 +18,12 @@ namespace Z0
     {        
         public static NativeDelegateData Empty => default;
 
+        public static NativeDelegateData Define(Delegate src, AddressSegment location, byte[] content)
+            => new NativeDelegateData(src, location, content);
+
         [MethodImpl(Inline)]
-        public NativeDelegateData(Delegate Delegate, ulong StartAddress, ulong EndAddress, byte[] body)
-            : base(Delegate, Delegate.Method, (StartAddress,EndAddress), body)
+        NativeDelegateData(Delegate src, AddressSegment location, byte[] content)
+            : base(src, src.Method, location, content)
         {
 
         }

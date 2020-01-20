@@ -207,8 +207,8 @@ partial class zfunc
     /// <summary>
     /// Produces a space character as a string
     /// </summary>
-    public static string space()
-        => format(AsciSym.Space);
+    public static char space()
+        => AsciSym.Space;
 
     /// <summary>
     /// Produces a line of content

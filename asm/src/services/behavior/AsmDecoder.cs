@@ -15,7 +15,7 @@ namespace Z0
 
     public static class AsmDecoder
     {
-        public static Option<MethodDisassembly> decode(Moniker id, MethodInfo method, ClrMetadataIndex index = null)
+        public static Option<MethodDisassembly> decode(Moniker id, MethodInfo method, ClrMetadataIndex index)
         {
             try
             {                
@@ -53,14 +53,14 @@ namespace Z0
         /// Decodes encoded assembly instructions
         /// </summary>
         /// <param name="data">The encoded instructions</param>
-        public static InstructionBlock decode(AsmCode code)
-            => decode(code.Id, code.Label, code.Data);
+        public static InstructionBlock decode(AsmCode code, AddressSegment location)
+            => decode(code.Id, code.Label, location, code.Encoded);
 
         /// <summary>
         /// Decodes encoded assembly instructions
         /// </summary>
         /// <param name="data">The encoded instructions</param>
-        public static InstructionBlock decode(Moniker id, string label, byte[] data)
+        public static InstructionBlock decode(Moniker id, string label, AddressSegment location, byte[] data)
 		{
             var dst = new InstructionList();
             var reader = new ByteArrayCodeReader(data);
@@ -71,7 +71,7 @@ namespace Z0
 				ref var instruction = ref dst.AllocUninitializedElement();
 				decoder.Decode(out instruction);                
 			}
-            return InstructionBlock.Define(id, label, data, dst.ToArray());
+            return InstructionBlock.Define(id, label, location, data, dst.ToArray());
 		}
 
         public static MethodAsmBody decode(MethodInfo method, Span<byte> buffer)
@@ -80,20 +80,30 @@ namespace Z0
             if(data.Length == 0)
                 throw new NoCodeException(method.ToString());
 
-            var block = new NativeCodeBlock(data.StartAddress, data.Code.Data);
-            var instructions = decode(block);                            
-            return new MethodAsmBody(method, block, instructions.ToArray());
+            var block = NativeCodeBlock.Define(data);
+            return MethodAsmBody.Define(method, block, decode(block));
         }
 
         public static InstructionBlock decode(INativeMemberData src)
-            => decode(src.Id, src.Label, src.Code.Data);
+		{
+            var dst = new InstructionList();
+            var reader = new ByteArrayCodeReader(src.Code.Encoded);
+			var decoder = Decoder.Create(IntPtr.Size * 8, reader);
+			decoder.IP = 0;
+			while (reader.CanReadByte) 
+			{
+				ref var instruction = ref dst.AllocUninitializedElement();
+				decoder.Decode(out instruction);                
+			}
+            return InstructionBlock.Define(src.Id, src.Label, src.Location, src.Code.Encoded, dst.ToArray());
+		}
 
         public static InstructionList decode(NativeCodeBlock src)
 		{
             var dst = new InstructionList();
             var reader = new ByteArrayCodeReader(src.Data);
 			var decoder = Decoder.Create(IntPtr.Size * 8, reader);
-			decoder.IP = src.Address;			
+			decoder.IP = src.Location.Start;			
 			while (reader.CanReadByte) 
 			{
 				ref var instruction = ref dst.AllocUninitializedElement();
@@ -107,10 +117,7 @@ namespace Z0
                 => from member in src select decode(member);
 
         public static AsmCodeSet decode(INativeMemberData src, Moniker moniker, CilFunctionBody cil)
-        {
-            var label = src.Method.Signature().Format();            
-            return AsmCodeSet.Define(moniker, decode(src.Code), cil);
-        }
+            => AsmCodeSet.Define(moniker, decode(src), cil);
 
         public static AsmCodeSet decode(DynamicDelegate f, Moniker id, byte[] buffer)
             => decode(NativeReader.read(f, buffer), id, f.CilFunc());

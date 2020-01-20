@@ -74,7 +74,6 @@ namespace Z0
             Disassemble(typeof(OC.nats));    
 
             Disassemble(typeof(OC.memory));    
-            Disassemble(typeof(OC.sconvert));   
             Disassemble(typeof(OC.sbits));    
             Disassemble(typeof(OC.pop));   
             Disassemble(typeof(OC.logix));

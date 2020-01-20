@@ -14,29 +14,52 @@ namespace Z0
 
     using static zfunc;
 
-    public static class Native
+    public static class NativeCapture
     {
         /// <summary>
-        /// Captures jitted x86 data for a method to a caller-supplied buffer
+        /// Emits x86 encoded assembly that reifies a delegate to a caller-supplied buffer
         /// </summary>
-        /// <param name="m">The method to deconstruct</param>
-        /// <param name="dst">The buffer to which native data will be written</param>
-        public static INativeMemberData capture(MethodInfo m, Span<byte> dst)
-            => NativeReader.read(m, dst);
+        /// <param name="src">The source delegate</param>
+        /// <param name="dst">The target buffer</param>
+        public static INativeMemberData capture(Delegate src, Span<byte> dst)
+            => NativeReader.read(src, dst);
 
         /// <summary>
-        /// Captures jitted x86 data for non-generic methods
+        /// Emits x86 encoded assembly that reifies a delegate to a caller-supplied writer
+        /// </summary>
+        /// <param name="src">The source delegate</param>
+        /// <param name="dst">The target writer</param>
+        public static void capture(Delegate src, NativeWriter dst)
+        {
+            var data = capture(src, dst.TakeBuffer());
+            dst.WriteData(data);    
+        }
+
+        /// <summary>
+        /// Emits x86 encoded assembly that reifies a method to a caller-supplied buffer
+        /// </summary>
+        /// <param name="src">The source method</param>
+        /// <param name="dst">The target buffer</param>
+        public static INativeMemberData capture(MethodInfo src, Span<byte> dst)
+            => NativeReader.read(src, dst);
+
+        /// <summary>
+        /// Emits x86 encoded assembly that reifies a method to a caller-supplied writer
+        /// </summary>
+        /// <param name="src">The source delegate</param>
+        /// <param name="dst">The target writer</param>
+        public static void capture(MethodInfo src, NativeWriter dst)
+            => dst.WriteData(capture(src,dst.TakeBuffer()));
+
+        /// <summary>
+        /// Emits x86 encoded assembly that reifies a stream of methods to a caller-supplied writer
         /// </summary>
         /// <param name="methods">The methods to capture</param>
         /// <param name="dst">The capture target</param>
-        public static void capture(IEnumerable<MethodInfo> methods, StreamWriter dst)
+        public static void capture(IEnumerable<MethodInfo> methods, NativeWriter dst)
         {
-            var buffer = new byte[NativeReader.DefaultBufferLen];
             foreach(var m in methods)
-            {                
-                var data = NativeReader.read(m,buffer);
-                dst.WriteLine(data.Format(4));                            
-            }
+                capture(m,dst);
         }
 
         /// <summary>
@@ -44,7 +67,7 @@ namespace Z0
         /// </summary>
         /// <param name="host">The type that defines the methods to deconstruct</param>
         /// <param name="dst">The path to the file</param>
-        public static void capture(Type host, StreamWriter dst)
+        public static void capture(Type host, NativeWriter dst)
             => capture(host.DeclaredMethods().Public().Static().NonGeneric(), dst);
 
         /// <summary>
@@ -53,10 +76,23 @@ namespace Z0
         /// <param name="m">The generic method (or definition)</param>
         /// <param name="arg">The type over which to close the method</typeparam>
         /// <param name="dst">The buffer to which native data will be written</param>
-        public static INativeMemberData generic(MethodInfo m, Type arg, Span<byte> dst)
+        public static INativeMemberData capture(MethodInfo m, Type arg, Span<byte> dst)
         {
             var def = m.IsGenericMethodDefinition ? m : m.GetGenericMethodDefinition();
             return NativeReader.generic(def, arg, dst);
+        }
+
+        /// <summary>
+        /// Captures jitted x86 data for a one-parameter generic method to a caller-supplied buffer
+        /// </summary>
+        /// <param name="m">The generic method (or definition)</param>
+        /// <param name="arg">The type over which to close the method</typeparam>
+        /// <param name="dst">The buffer to which native data will be written</param>
+        public static void capture(MethodInfo m, Type arg, NativeWriter dst)
+        {
+            var def = m.IsGenericMethodDefinition ? m : m.GetGenericMethodDefinition();
+            var data = NativeReader.generic(def, arg, dst.TakeBuffer());
+            dst.WriteData(data);
         }
 
         /// <summary>
@@ -75,11 +111,11 @@ namespace Z0
         /// </summary>
         /// <param name="host">The type that defines the methods to deconstruct</param>
         /// <param name="arg">The type over which to close each method</param>
-        public static IEnumerable<INativeMemberData> generic(IEnumerable<MethodInfo> methods, Type arg)
+        public static IEnumerable<INativeMemberData> capture(IEnumerable<MethodInfo> methods, Type arg)
         {
             var buffer = new byte[NativeReader.DefaultBufferLen];
             foreach(var m in methods)                
-                yield return generic(m,arg,buffer);                    
+                yield return capture(m,arg,buffer);                    
         }
 
         /// <summary>
@@ -87,7 +123,7 @@ namespace Z0
         /// </summary>
         /// <param name="host">The type that defines the methods to capture</param>
         /// <param name="arg">The type over which to close each method</param>
-        public static IEnumerable<INativeMemberData> generic(Type host, Type arg)
+        public static IEnumerable<INativeMemberData> capture(Type host, Type arg)
         {
             foreach(var m in NativeReader.gmethods(host, arg))
                 yield return m;                    
@@ -98,10 +134,10 @@ namespace Z0
         /// </summary>
         /// <param name="host">The type that defines the methods to deconstruct</param>
         /// <param name="dst">The path to the file</param>
-        public static void generic(Type host, Type arg, StreamWriter dst)
+        public static void capture(Type host, Type arg, NativeWriter dst)
         {
-            foreach(var data in generic(host,arg))
-                dst.WriteLine(data.Format(4));
+            foreach(var data in capture(host,arg))
+                dst.WriteData(data);
         }
 
         /// <summary>
@@ -110,24 +146,15 @@ namespace Z0
         /// <param name="methods">The methods to capture</param>
         /// <param name="arg">The type over which to close each method</param>
         /// <param name="dst">The capture target</param>
-        public static void generic(IEnumerable<MethodInfo> methods, Type arg, StreamWriter dst)
+        public static void capture(IEnumerable<MethodInfo> methods, Type arg, NativeWriter dst)
         {
             var buffer = new byte[NativeReader.DefaultBufferLen];
             foreach(var m in methods)
             {                
                 var def = m.IsGenericMethodDefinition ? m : m.GetGenericMethodDefinition();
                 var data = NativeReader.generic(def, arg, buffer);
-                dst.WriteLine(data.Format(4));                            
+                dst.WriteData(data);                            
             }
         }
-
-        /// <summary>
-        /// Captures jitted x86 data for a delegate
-        /// </summary>
-        /// <param name="d">The delegate to capture</param>
-        /// <param name="buffersize">The size of the buffer used to capture the nated data</param>
-        /// <typeparam name="T">The delegate type</typeparam>
-        public static INativeMemberData capture(Delegate d, Span<byte> dst)
-            => NativeReader.read(d, dst);
     }
 }

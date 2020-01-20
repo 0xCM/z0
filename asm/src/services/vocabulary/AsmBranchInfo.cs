@@ -14,25 +14,21 @@ namespace Z0
     /// </summary>
     public class AsmBranchInfo
     {
-        public AsmBranchInfo(int size, ulong value, bool near, ulong @base)
+        public static AsmBranchInfo Define(int size, ulong value, bool near)
+            => new AsmBranchInfo(size,value,near);
+        
+        AsmBranchInfo(int size, ulong value, bool near)
         {
             this.Size = size;
             this.Target = value;
             this.Near = near;
-            this.Base = @base;
-        }
-
-        public AsmBranchInfo(int size, long value, bool near, ulong @base)
-        {
-            this.Size = size;
-            this.Target = (ulong)value;
-            this.Near = near;
-            this.Base = @base;
         }
 
         public int Size {get;}
 
         public bool Near {get;}
+        
+        public ulong Target {get;}
 
         /// <summary>
         /// Specifies a label for the immedate that has the form jmp{BitWidth}
@@ -40,9 +36,6 @@ namespace Z0
         public string Label
             => $"jmp{Size}";
 
-        public ulong Base {get;}
-        
-        public ulong Target {get;}
     }
 
 }

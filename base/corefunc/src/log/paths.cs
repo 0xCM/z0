@@ -65,7 +65,7 @@ namespace Z0
         public FilePath DataPath(FolderName subject, FileName file)
             => Settings.DataDir(subject) + file;
 
-        public FileExtension AsmHexExt
+        public FileExtension HexExt
             => FileExtension.Define("hex");
 
         public FileExtension CsFileExt
@@ -74,14 +74,14 @@ namespace Z0
         public FileExtension CilExt
             => FileExtension.Define("il");
 
-        public FileExtension AsmDetailExt
+        public FileExtension AsmExt
             => FileExtension.Define("asm");
 
         public FileName AsmDetailFile(Moniker m)
-            => FileName.Define(m, AsmDetailExt);
+            => FileName.Define(m, AsmExt);
 
         public FileName AsmHexFile(Moniker m)
-            => FileName.Define(m, AsmHexExt);
+            => FileName.Define(m, HexExt);
 
         public FileName CilFile(Moniker m)
             => FileName.Define(m, CilExt);

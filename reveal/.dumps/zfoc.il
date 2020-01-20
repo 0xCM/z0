@@ -1,7 +1,7 @@
-// 2020-01-18 18:18:35:079
+// 2020-01-20 01:59:22:065
 // Id := 100663350, Name := System.Byte Z0.zfoc::hexcode_parse(System.Char)
 // byte hexcode_parse(Char c)
-// Managed
+// IL
 byte hexcode_parse(Char c)
 {
     IL_0000: ldarg.0
@@ -11,7 +11,7 @@ byte hexcode_parse(Char c)
 
 // Id := 100663351, Name := Z0.Pair`1<System.UInt64> Z0.zfoc::sub_128u_a(Z0.Pair`1<System.UInt64>,Z0.Pair`1<System.UInt64>)
 // Pair<ulong> sub_128u_a(Pair<ulong> a, Pair<ulong> b)
-// Managed
+// IL
 Pair<ulong> sub_128u_a(Pair<ulong> a, Pair<ulong> b)
 {
     IL_0000: ldarga.s a
@@ -22,7 +22,7 @@ Pair<ulong> sub_128u_a(Pair<ulong> a, Pair<ulong> b)
 
 // Id := 100663352, Name := System.Void Z0.zfoc::sub_128u_b(System.UInt64&,System.UInt64&,System.UInt64&)
 // void sub_128u_b(in ulong a, in ulong b, ref ulong c)
-// Managed
+// IL
 void sub_128u_b(in ulong a, in ulong b, ref ulong c)
 {
     IL_0000: ldarg.0
@@ -34,7 +34,7 @@ void sub_128u_b(in ulong a, in ulong b, ref ulong c)
 
 // Id := 100663353, Name := System.Void Z0.zfoc::mul_128u(Z0.Pair`1<System.UInt64>,Z0.Pair`1<System.UInt64>&)
 // void mul_128u(Pair<ulong> src, ref Pair<ulong> dst)
-// Managed
+// IL
 void mul_128u(Pair<ulong> src, ref Pair<ulong> dst)
 {
     IL_0000: ldarga.s src
@@ -46,7 +46,7 @@ void mul_128u(Pair<ulong> src, ref Pair<ulong> dst)
 
 // Id := 100663354, Name := Z0.Pair`1<System.UInt64> Z0.zfoc::add_128u(Z0.Pair`1<System.UInt64>,Z0.Pair`1<System.UInt64>)
 // Pair<ulong> add_128u(Pair<ulong> a, Pair<ulong> b)
-// Managed
+// IL
 Pair<ulong> add_128u(Pair<ulong> a, Pair<ulong> b)
 {
     IL_0000: ldarga.s a
@@ -57,7 +57,7 @@ Pair<ulong> add_128u(Pair<ulong> a, Pair<ulong> b)
 
 // Id := 100663355, Name := Z0.Pair`1<System.UInt64> Z0.zfoc::xor_128u(Z0.Pair`1<System.UInt64>,Z0.Pair`1<System.UInt64>)
 // Pair<ulong> xor_128u(Pair<ulong> a, Pair<ulong> b)
-// Managed
+// IL
 Pair<ulong> xor_128u(Pair<ulong> a, Pair<ulong> b)
 {
     IL_0000: ldarga.s a
@@ -68,7 +68,7 @@ Pair<ulong> xor_128u(Pair<ulong> a, Pair<ulong> b)
 
 // Id := 100663356, Name := Z0.Pair`1<System.UInt64> Z0.zfoc::xnor_128u(Z0.Pair`1<System.UInt64>,Z0.Pair`1<System.UInt64>)
 // Pair<ulong> xnor_128u(Pair<ulong> a, Pair<ulong> b)
-// Managed
+// IL
 Pair<ulong> xnor_128u(Pair<ulong> a, Pair<ulong> b)
 {
     IL_0000: ldarga.s a
@@ -79,7 +79,7 @@ Pair<ulong> xnor_128u(Pair<ulong> a, Pair<ulong> b)
 
 // Id := 100663357, Name := Z0.Pair`1<System.UInt64> Z0.zfoc::negate_128u(Z0.Pair`1<System.UInt64>)
 // Pair<ulong> negate_128u(Pair<ulong> a)
-// Managed
+// IL
 Pair<ulong> negate_128u(Pair<ulong> a)
 {
     IL_0000: ldarg.0
@@ -89,7 +89,7 @@ Pair<ulong> negate_128u(Pair<ulong> a)
 
 // Id := 100663358, Name := Z0.Pair`1<System.UInt64>& Z0.zfoc::inc_128u(Z0.Pair`1<System.UInt64>&)
 // ref Pair<ulong> inc_128u(ref Pair<ulong> a)
-// Managed
+// IL
 ref Pair<ulong> inc_128u(ref Pair<ulong> a)
 {
     IL_0000: ldarg.0
@@ -99,7 +99,7 @@ ref Pair<ulong> inc_128u(ref Pair<ulong> a)
 
 // Id := 100663359, Name := Z0.Pair`1<System.UInt64> Z0.zfoc::srl_128u(Z0.Pair`1<System.UInt64>,System.Int32)
 // Pair<ulong> srl_128u(Pair<ulong> a, int offset)
-// Managed
+// IL
 Pair<ulong> srl_128u(Pair<ulong> a, int offset)
 {
     IL_0000: ldarga.s a
@@ -110,7 +110,7 @@ Pair<ulong> srl_128u(Pair<ulong> a, int offset)
 
 // Id := 100663360, Name := Z0.Pair`1<System.UInt64> Z0.zfoc::sll_128u(Z0.Pair`1<System.UInt64>,System.Int32)
 // Pair<ulong> sll_128u(Pair<ulong> a, int offset)
-// Managed
+// IL
 Pair<ulong> sll_128u(Pair<ulong> a, int offset)
 {
     IL_0000: ldarga.s a
@@ -121,7 +121,7 @@ Pair<ulong> sll_128u(Pair<ulong> a, int offset)
 
 // Id := 100663361, Name := Z0.bit Z0.zfoc::same_128u(Z0.Pair`1<System.UInt64>,Z0.Pair`1<System.UInt64>)
 // bit same_128u(Pair<ulong> a, Pair<ulong> b)
-// Managed
+// IL
 bit same_128u(Pair<ulong> a, Pair<ulong> b)
 {
     IL_0000: ldarga.s a
@@ -132,7 +132,7 @@ bit same_128u(Pair<ulong> a, Pair<ulong> b)
 
 // Id := 100663362, Name := Z0.bit Z0.zfoc::lt_128u(Z0.Pair`1<System.UInt64>,Z0.Pair`1<System.UInt64>)
 // bit lt_128u(Pair<ulong> a, Pair<ulong> b)
-// Managed
+// IL
 bit lt_128u(Pair<ulong> a, Pair<ulong> b)
 {
     IL_0000: ldarga.s a
@@ -143,7 +143,7 @@ bit lt_128u(Pair<ulong> a, Pair<ulong> b)
 
 // Id := 100663363, Name := Z0.bit Z0.zfoc::gteq_128u(Z0.Pair`1<System.UInt64>,Z0.Pair`1<System.UInt64>)
 // bit gteq_128u(Pair<ulong> a, Pair<ulong> b)
-// Managed
+// IL
 bit gteq_128u(Pair<ulong> a, Pair<ulong> b)
 {
     IL_0000: ldarga.s a
@@ -154,7 +154,7 @@ bit gteq_128u(Pair<ulong> a, Pair<ulong> b)
 
 // Id := 100663364, Name := System.Void Z0.zfoc::mul_32u(Z0.Pair`1<System.UInt32>,Z0.Pair`1<System.UInt32>&)
 // void mul_32u(Pair<uint> src, ref Pair<uint> dst)
-// Managed
+// IL
 void mul_32u(Pair<uint> src, ref Pair<uint> dst)
 {
     IL_0000: ldarga.s src
@@ -166,7 +166,7 @@ void mul_32u(Pair<uint> src, ref Pair<uint> dst)
 
 // Id := 100663365, Name := System.UInt32 Z0.zfoc::mod_const_16(System.UInt32)
 // uint mod_const_16(uint a)
-// Managed
+// IL
 uint mod_const_16(uint a)
 {
     IL_0000: ldarg.0
@@ -176,7 +176,7 @@ uint mod_const_16(uint a)
 
 // Id := 100663366, Name := System.UInt32 Z0.zfoc::div_const_16(System.UInt32)
 // uint div_const_16(uint a)
-// Managed
+// IL
 uint div_const_16(uint a)
 {
     IL_0000: ldarg.0
@@ -186,7 +186,7 @@ uint div_const_16(uint a)
 
 // Id := 100663367, Name := System.UInt32 Z0.zfoc::mod_const_25(System.UInt32)
 // uint mod_const_25(uint a)
-// Managed
+// IL
 uint mod_const_25(uint a)
 {
     IL_0000: ldarg.0
@@ -196,7 +196,7 @@ uint mod_const_25(uint a)
 
 // Id := 100663368, Name := System.UInt32 Z0.zfoc::div_const_25(System.UInt32)
 // uint div_const_25(uint a)
-// Managed
+// IL
 uint div_const_25(uint a)
 {
     IL_0000: ldarg.0
@@ -206,7 +206,7 @@ uint div_const_25(uint a)
 
 // Id := 100663369, Name := System.UInt32 Z0.zfoc::mod_const_32(System.UInt32)
 // uint mod_const_32(uint a)
-// Managed
+// IL
 uint mod_const_32(uint a)
 {
     IL_0000: ldarg.0
@@ -216,7 +216,7 @@ uint mod_const_32(uint a)
 
 // Id := 100663370, Name := System.UInt32 Z0.zfoc::div_const_32(System.UInt32)
 // uint div_const_32(uint a)
-// Managed
+// IL
 uint div_const_32(uint a)
 {
     IL_0000: ldarg.0

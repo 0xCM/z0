@@ -14,31 +14,47 @@ namespace Z0
 	/// </summary>
 	public readonly struct NativeCodeBlock 
     {
-		public static NativeCodeBlock Empty => new NativeCodeBlock(0, new byte[]{0});
+		/// <summary>
+		/// Descriptive text
+		/// </summary>
+		public readonly string Label;
 
 		/// <summary>
-		/// The location of the leading segment
+		/// The source location
 		/// </summary>
-		public readonly ulong Address;
+		public readonly AddressSegment Location;
 	
 		/// <summary>
 		/// The block data
 		/// </summary>
     	public readonly byte[] Data;
 
-    	public NativeCodeBlock(ulong address, byte[] data) 
+		public static NativeCodeBlock Empty => new NativeCodeBlock(string.Empty, 0, new byte[]{0});
+
+		public static NativeCodeBlock Define(string label, ulong address, byte[] data)
+			=> new NativeCodeBlock(label, address, data);
+
+		public static NativeCodeBlock Define(INativeMemberData src)
+			=> new NativeCodeBlock(src);
+
+    	NativeCodeBlock(INativeMemberData src) 
         {
-			Address = address;
+			Label = src.Label;
+			Location = src.Location;
+			Data = src.Code.Encoded;
+		}	
+
+    	NativeCodeBlock(string label, ulong address, byte[] data) 
+        {
+			Label = label;
+			Location = AddressSegment.Define(address, address + (ulong)data.Length);
 			Data = data;
 		}	
 
 		public bool IsEmpty
 		{
 			[MethodImpl(Inline)]
-			get => Address == 0 && Data.Length == 1 && Data[0] == 0;
-		}
-		
-		public override string ToString() 
-			=> $"{Address.FormatHex()}: {Data.FormatHex(true, false, false, true)}";
+			get => Location.IsEmpty && Data.Length == 1 && Data[0] == 0;
+		}				
 	}
 }

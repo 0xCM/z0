@@ -18,11 +18,15 @@ namespace Z0
     {        
         public static NativeMethodData Empty => default;
 
+        public static NativeMethodData Define(MethodInfo method, AddressSegment location, byte[] content)
+            => new NativeMethodData(method, location, content);
+
         [MethodImpl(Inline)]
-        public NativeMethodData(MethodInfo method, ulong start, ulong end, byte[] content)
-            : base(method, method, (start,end), content)
+        public NativeMethodData(MethodInfo method, AddressSegment location, byte[] content)
+            : base(method, method, location, content)
         {
 
         }
+
     }
 }

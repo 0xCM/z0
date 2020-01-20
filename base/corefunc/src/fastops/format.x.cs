@@ -56,35 +56,53 @@ namespace Z0
 
         static string MethodSep => new string('_',80);
 
-        public static string Format<T>(this T data, int linebytes = 8, bool linelabels = true)
-            where T : INativeMemberData
+		public static string Format(this NativeCodeBlock src, NativeFormatConfig? config = null)
+		{
+			var fmt = text();
+			fmt.AppendLine($"; label   : {src.Label}");
+			fmt.AppendLine($"; location: {src.Location.Format()}, length: {src.Location.Length} bytes");
+            fmt.Append(src.Data.FormatHexLines(config));
+			return fmt.ToString();;
+		}
+
+        public static string FormatHexLines(this byte[] data, NativeFormatConfig? config = null)
         {
-            if(data.IsEmpty)
-                return "<no_data>";
-
             var format = text();
-            var range = bracket(concat(data.StartAddress.FormatHex(false,true), AsciSym.Comma, data.EndAddress.FormatHex(false,true)));
-            format.AppendLine($"; function: {data.Method.Signature().Format()}");
-            format.AppendLine($"; location: {range}, code length: {data.Length} bytes");
-
+            var configured = config ?? NativeFormatConfig.Default;            
             for(ushort i=0; i< data.Length; i++)
             {
-                if(i % linebytes == 0)
+                if(i % configured.BytesPerLine == 0)
                 {
                     if(i != 0)
                         format.AppendLine();
 
-                    if(linelabels)
+                    if(configured.LineLabels)
                     {
                         format.Append(i.FormatHex(true,false));
                         format.Append(AsciLower.h);
                         format.Append(AsciSym.Space);
                     }
                 }
-                format.Append(data.Code[i].FormatHex(true, true));
+                format.Append(data[i].FormatHex(true, true));
                 format.Append(AsciSym.Space);
             }
-            format.AppendLine();   
+            format.AppendLine();
+            return format.ToString();
+
+        }
+
+        public static string Format<T>(this T data, NativeFormatConfig? config = null)
+            where T : INativeMemberData
+        {
+            if(data.IsEmpty)
+                return "<no_data>";
+            
+            var format = text();
+            var range = bracket(concat(data.StartAddress.FormatHex(false,true), AsciSym.Comma, data.EndAddress.FormatHex(false,true)));
+            var bytes = data.Code.Encoded;
+            format.AppendLine($"; label   : {data.Method.Signature().Format()}");
+            format.AppendLine($"; location: {range}, length: {data.Length} bytes");
+            format.Append(bytes.FormatHexLines(config));
             format.AppendLine(MethodSep);
             return format.ToString();
         }         

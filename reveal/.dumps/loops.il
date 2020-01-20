@@ -1,5 +1,5 @@
-// 2020-01-18 18:18:33:840
-// Id := 100664380, Name := System.Int64 Z0.OpCodes.loops::loop_inc(System.Int32,System.Int32,System.Int64)
+// 2020-01-20 01:59:20:949
+// Id := 100664340, Name := System.Int64 Z0.OpCodes.loops::loop_inc(System.Int32,System.Int32,System.Int64)
 // long loop_inc(int start, int max, long count)
 // AggressiveInlining
 long loop_inc(int start, int max, long count)
@@ -25,7 +25,7 @@ long loop_inc(int start, int max, long count)
     IL_0014: ret
 }
 
-// Id := 100664381, Name := System.Int64 Z0.OpCodes.loops::loop_inc_test_neq(System.Int32,System.Int32,System.Int64)
+// Id := 100664341, Name := System.Int64 Z0.OpCodes.loops::loop_inc_test_neq(System.Int32,System.Int32,System.Int64)
 // long loop_inc_test_neq(int start, int test, long count)
 // AggressiveInlining
 long loop_inc_test_neq(int start, int test, long count)
@@ -51,7 +51,7 @@ long loop_inc_test_neq(int start, int test, long count)
     IL_0014: ret
 }
 
-// Id := 100664382, Name := System.Int64 Z0.OpCodes.loops::loop_dec(System.Int32,System.Int32,System.Int64)
+// Id := 100664342, Name := System.Int64 Z0.OpCodes.loops::loop_dec(System.Int32,System.Int32,System.Int64)
 // long loop_dec(int start, int min, long count)
 // AggressiveInlining
 long loop_dec(int start, int min, long count)
@@ -77,7 +77,7 @@ long loop_dec(int start, int min, long count)
     IL_0014: ret
 }
 
-// Id := 100664383, Name := System.Int64 Z0.OpCodes.loops::loop_inc_step(System.Int32,System.Int32,System.Int32,System.Int64)
+// Id := 100664343, Name := System.Int64 Z0.OpCodes.loops::loop_inc_step(System.Int32,System.Int32,System.Int32,System.Int64)
 // long loop_inc_step(int start, int max, int step, long count)
 // AggressiveInlining
 long loop_inc_step(int start, int max, int step, long count)
@@ -103,7 +103,7 @@ long loop_inc_step(int start, int max, int step, long count)
     IL_0014: ret
 }
 
-// Id := 100664384, Name := System.Int64 Z0.OpCodes.loops::loop_dec_step(System.Int32,System.Int32,System.Int32,System.Int64)
+// Id := 100664344, Name := System.Int64 Z0.OpCodes.loops::loop_dec_step(System.Int32,System.Int32,System.Int32,System.Int64)
 // long loop_dec_step(int start, int min, int step, long count)
 // AggressiveInlining
 long loop_dec_step(int start, int min, int step, long count)
@@ -129,9 +129,9 @@ long loop_dec_step(int start, int min, int step, long count)
     IL_0014: ret
 }
 
-// Id := 100664385, Name := System.Int64 Z0.OpCodes.loops::loop_inc_call(System.Int64)
+// Id := 100664345, Name := System.Int64 Z0.OpCodes.loops::loop_inc_call(System.Int64)
 // long loop_inc_call(long count)
-// Managed
+// IL
 long loop_inc_call(long count)
 {
     IL_0000: ldc.i4.s 102
@@ -141,9 +141,9 @@ long loop_inc_call(long count)
     IL_000D: ret
 }
 
-// Id := 100664386, Name := System.Int64 Z0.OpCodes.loops::loop_inc_test_neq_call(System.Int64)
+// Id := 100664346, Name := System.Int64 Z0.OpCodes.loops::loop_inc_test_neq_call(System.Int64)
 // long loop_inc_test_neq_call(long count)
-// Managed
+// IL
 long loop_inc_test_neq_call(long count)
 {
     IL_0000: ldc.i4.s 102
@@ -153,9 +153,9 @@ long loop_inc_test_neq_call(long count)
     IL_000D: ret
 }
 
-// Id := 100664387, Name := System.Int64 Z0.OpCodes.loops::loop_inc_step_call(System.Int64)
+// Id := 100664347, Name := System.Int64 Z0.OpCodes.loops::loop_inc_step_call(System.Int64)
 // long loop_inc_step_call(long count)
-// Managed
+// IL
 long loop_inc_step_call(long count)
 {
     IL_0000: ldc.i4.s 102
@@ -166,9 +166,9 @@ long loop_inc_step_call(long count)
     IL_000E: ret
 }
 
-// Id := 100664388, Name := System.Int64 Z0.OpCodes.loops::loop_dec_call(System.Int64)
+// Id := 100664348, Name := System.Int64 Z0.OpCodes.loops::loop_dec_call(System.Int64)
 // long loop_dec_call(long count)
-// Managed
+// IL
 long loop_dec_call(long count)
 {
     IL_0000: ldc.i4 1638
@@ -178,9 +178,9 @@ long loop_dec_call(long count)
     IL_000D: ret
 }
 
-// Id := 100664389, Name := System.Int64 Z0.OpCodes.loops::loop_dec_step_call(System.Int64)
+// Id := 100664349, Name := System.Int64 Z0.OpCodes.loops::loop_dec_step_call(System.Int64)
 // long loop_dec_step_call(long count)
-// Managed
+// IL
 long loop_dec_step_call(long count)
 {
     IL_0000: ldc.i4 1638
@@ -191,7 +191,7 @@ long loop_dec_step_call(long count)
     IL_000E: ret
 }
 
-// Id := 100664390, Name := System.Int32 Z0.OpCodes.loops::FindByte(System.UInt64)
+// Id := 100664350, Name := System.Int32 Z0.OpCodes.loops::FindByte(System.UInt64)
 // int FindByte(ulong src)
 // AggressiveInlining
 int FindByte(ulong src)
@@ -214,7 +214,7 @@ int FindByte(ulong src)
     IL_0018: ret
 }
 
-// Id := 100664391, Name := System.Int32 Z0.OpCodes.loops::FindByte(Z0.Block256`1<System.Byte>&)
+// Id := 100664351, Name := System.Int32 Z0.OpCodes.loops::FindByte(Z0.Block256`1<System.Byte>&)
 // int FindByte(in Block256<byte> src)
 // AggressiveInlining
 int FindByte(in Block256<byte> src)
@@ -249,9 +249,9 @@ int FindByte(in Block256<byte> src)
     IL_0027: ret
 }
 
-// Id := 100664392, Name := System.Int32 Z0.OpCodes.loops::downBy2ne(System.Int32)
+// Id := 100664352, Name := System.Int32 Z0.OpCodes.loops::downBy2ne(System.Int32)
 // int downBy2ne(int amount)
-// Managed
+// IL
 int downBy2ne(int amount)
 {
     IL_0000: ldc.i4.0
@@ -276,9 +276,9 @@ int downBy2ne(int amount)
     IL_0016: ret
 }
 
-// Id := 100664393, Name := System.Int32 Z0.OpCodes.loops::upBy1ne(System.Int32)
+// Id := 100664353, Name := System.Int32 Z0.OpCodes.loops::upBy1ne(System.Int32)
 // int upBy1ne(int amount)
-// Managed
+// IL
 int upBy1ne(int amount)
 {
     IL_0000: ldc.i4.0
@@ -303,9 +303,9 @@ int upBy1ne(int amount)
     IL_0015: ret
 }
 
-// Id := 100664394, Name := System.Int32 Z0.OpCodes.loops::downBy1ne(System.Int32)
+// Id := 100664354, Name := System.Int32 Z0.OpCodes.loops::downBy1ne(System.Int32)
 // int downBy1ne(int amount)
-// Managed
+// IL
 int downBy1ne(int amount)
 {
     IL_0000: ldc.i4.0
@@ -330,9 +330,9 @@ int downBy1ne(int amount)
     IL_0016: ret
 }
 
-// Id := 100664395, Name := System.Int32 Z0.OpCodes.loops::upBy2ne(System.Int32)
+// Id := 100664355, Name := System.Int32 Z0.OpCodes.loops::upBy2ne(System.Int32)
 // int upBy2ne(int amount)
-// Managed
+// IL
 int upBy2ne(int amount)
 {
     IL_0000: ldc.i4.0
@@ -357,9 +357,9 @@ int upBy2ne(int amount)
     IL_0016: ret
 }
 
-// Id := 100664396, Name := System.Int32 Z0.OpCodes.loops::upBy3neWrap(System.Int32)
+// Id := 100664356, Name := System.Int32 Z0.OpCodes.loops::upBy3neWrap(System.Int32)
 // int upBy3neWrap(int amount)
-// Managed
+// IL
 int upBy3neWrap(int amount)
 {
     IL_0000: ldc.i4.0
@@ -385,9 +385,9 @@ int upBy3neWrap(int amount)
     IL_0016: ret
 }
 
-// Id := 100664397, Name := System.Int32 Z0.OpCodes.loops::downBy3neWrap(System.Int32)
+// Id := 100664357, Name := System.Int32 Z0.OpCodes.loops::downBy3neWrap(System.Int32)
 // int downBy3neWrap(int amount)
-// Managed
+// IL
 int downBy3neWrap(int amount)
 {
     IL_0000: ldc.i4.0

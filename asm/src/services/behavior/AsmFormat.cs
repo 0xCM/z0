@@ -9,29 +9,111 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+	using Iced.Intel;
+    using System.IO;
 
     using static zfunc;
 
     public static class AsmFormat
     {
-        const string BeginComment = "; ";
-
-        const int IPad = 40;
+        public static string Comment(string text)
+            =>  $"; {text}";
 
         /// <summary>
         /// Formats the assembly function detail
         /// </summary>
         /// <param name="src">The source function</param>
         /// <param name="pad">The padding between each instruction and associated commentary</param>
-        public static string FormatDetail(this AsmFuncInfo src, bool encoding = true,  bool location = false, bool timestamp = true)
-            => lines(src.FormatHeader(encoding, location, timestamp),  src.FormatInstructions(IPad));                
+        public static string FormatDetail(this AsmFuncInfo src)
+            => src.FormatDetail(AsmFormatConfig.Default); 
+
+        /// <summary>
+        /// Formats the assembly function detail
+        /// </summary>
+        /// <param name="src">The source function</param>
+        /// <param name="fmt">The format configuration</param>
+        public static string FormatDetail(this AsmFuncInfo src, AsmFormatConfig fmt)
+        {            
+            var detail = text();
+
+            if(fmt.EmitFunctionDelimiter)
+                detail.AppendLine(fmt.FunctionDelimiter);
+            
+            foreach(var line in src.FormatHeader(fmt))
+                detail.AppendLine(line);            
+
+            detail.AppendLine(src.FormatInstructions(fmt));                
+            return detail.ToString();
+        }
 
         /// <summary>
         /// Formats the function body encoding as a comma-separated list of hex values
         /// </summary>
         /// <param name="src">The source function</param>
-        public static string FormatEncoded(this AsmFuncInfo src)
-            => src.Code.Data.FormatHex(AsciSym.Comma, true, true, true);
+        public static string FormatEncoded(this AsmCode src)
+            => src.Encoded.FormatHex(AsciSym.Comma, true, true, true);
+
+        public static string FormatInstructionLines(this InstructionBlock src)
+            => src.FormatInstructions(AsmFormatConfig.Default).FormatLines();
+
+        public static ReadOnlySpan<string> FormatInstructions(this InstructionBlock src, AsmFormatConfig config)
+        {
+            if(src.InstructionCount == 0)
+                return ReadOnlySpan<string>.Empty;
+            
+            var line = 0;
+            Span<string> dst = new string[src.InstructionCount];
+
+            var formatter = new MasmFormatter(MasmOptions);
+            var sb = text();
+            var writer = new StringWriter(sb);
+            var output = new AsmOutput(writer, 0);
+            for(var i = 0; i < src.InstructionCount; line++, i++)
+            {
+                ref readonly var instruction = ref src[i];
+                formatter.Format(in instruction, output);                    
+                dst[i] = config.ShowLineAddresses ?  concat(instruction.FormatLineLabel(), AsciSym.Space, sb.ToString()) :  sb.ToString();
+                sb.Clear();
+            }
+            return dst;
+        }
+
+        /// <summary>
+        /// Formats the function header
+        /// </summary>
+        /// <param name="src">The source function</param>
+        /// <param name="encoding">Specifies whether to include the encoded hex bytes</param>
+        /// <param name="location">Specifies whether to include the assembly-relative function location address</param>
+        static string[] FormatHeader(this AsmCode code, AddressSegment location,  AsmFormatConfig fmt)
+        {            
+            var lines = new List<string>();
+
+            lines.Add(Comment($"{code.Label}")); 
+            
+            if(fmt.HeaderEncodingProp)           
+                lines.Add(Comment(code.FormatEncodingProp()));
+            
+            if(fmt.HeaderLocation && fmt.HeaderEncoding)
+                lines.Add(Comment(concat(location.FormatHeaderLocation(code.Id), " = ", embrace(code.FormatHeaderEncoding()))));
+            else if(fmt.HeaderLocation)
+                lines.Add(Comment(location.FormatHeaderLocation(code.Id)));
+            else if(fmt.HeaderEncoding)
+                lines.Add(Comment(embrace(code.FormatHeaderEncoding())));
+
+            if(fmt.HeaderTimestamp)
+                lines.Add(Comment(now().ToLexicalString()));
+            
+            return lines.ToArray();
+        }
+
+        /// <summary>
+        /// Formats the function header
+        /// </summary>
+        /// <param name="src">The source function</param>
+        /// <param name="encoding">Specifies whether to include the encoded hex bytes</param>
+        /// <param name="location">Specifies whether to include the assembly-relative function location address</param>
+        static string[] FormatHeader(this AsmFuncInfo src, AsmFormatConfig fmt)
+            => src.Code.FormatHeader(src.Location,fmt);
 
         /// <summary>
         /// Formats a single operand
@@ -73,76 +155,34 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source instruction</param>
         /// <param name="pad">The minimum character width of the instruction content</param>
-        static string Format(this AsmInstructionInfo src, int pad)
+        static string FormatInstruction(this AsmInstructionInfo src, AsmFormatConfig fmt)
         {
-            var address = src.Offset.FormatHex(true,true,false,false);
-            var content = src.Display.PadRight(pad, AsciSym.Space);
-            var encodingKind = !string.IsNullOrWhiteSpace(src.EncodingKind) ? $"{src.EncodingKind}, " : string.Empty;
-            var encodingLen = concat(
-                    src.Encoding.Length.ToString(), 
-                    AsciSym.Space, 
-                    src.Encoding.Length > 1 ?  "bytes" : "byte "
-                    );
-            var encoding = $" encoding({encodingKind}{encodingLen}) = " + src.Encoding.FormatHex(AsciSym.Space, true, false);
-            var operands = src.FormatOperands();
-            var title = concat(src.Mnemonic, AsciSym.LParen, src.OpCode, AsciSym.RParen);
-            return (address + AsciSym.Space + content + "; " + title + " " + operands).PadRight(90, AsciSym.Space) + encoding;
+            var description = text();            
+            description.Append($"{src.Offset.FormatHex(true,true,false,false)}{space()}");
+            description.Append(src.Display.PadRight(fmt.InstructionPad, space()));
+            description.Append(Comment($"{src.Instruction}{fmt.InfoDelimiter}{src.Encoding}"));
+            description.Append($"{fmt.InfoDelimiter}encoded[{src.Encoded.Length}]");
+            description.Append(embrace(src.Encoded.FormatHex(space(), true, false)));
+            return description.ToString();
         }
         
-        static string FormatInstructions(this AsmFuncInfo src, int pad)
+        static string FormatInstructions(this AsmFuncInfo src, AsmFormatConfig fmt)
         {
-            var format = text();            
+            var description = text();            
             for(var i = 0; i< src.InstructionCount; i++)
             {
-                var insx = src.Instructions[i];
-                var fmt = insx.Format(pad);
+                var instruction = src.Instructions[i].FormatInstruction(fmt);
                 if(i != src.InstructionCount - 1)
-                    format.AppendLine(fmt);
+                    description.AppendLine(instruction);
                 else
-                    format.Append(fmt);
+                    description.Append(instruction);
             }
-            return format.ToString();
+            return description.ToString();
         }    
 
-        /// <summary>
-        /// Formats the function header
-        /// </summary>
-        /// <param name="src">The source function</param>
-        /// <param name="encoding">Specifies whether to include the encoded hex bytes</param>
-        /// <param name="location">Specifies whether to include the assembly-relative function location address</param>
-        static string FormatHeader(this AsmFuncInfo src, bool encoding = true,  bool location = false, bool timestamp = true)
-        {            
-            var header = line(concat(BeginComment, $"{src.Code.Label}")); 
-            if(encoding)           
-                header += line(src.FormatEncodingProp());
-            if(location)
-                header += line(concat(BeginComment, $"{src.StartAddress.AddressRange(src.EndAddress)}, {src.EndAddress - src.StartAddress} bytes"));
-            if(timestamp)
-                header += concat(BeginComment, now().ToLexicalString());
-            return header;
-        }
-
-        /// <summary>
-        /// Formats the encoded bytes as a comment
-        /// </summary>
-        /// <param name="src">The source function</param>
-        static string FormatEncodingProp(this AsmFuncInfo src)
-        {
-            var propdecl = $"static ReadOnlySpan<byte> {src.Name}Bytes";
-            return concat(BeginComment, $"{propdecl} => new byte[{src.Code.Data.Length}]", embrace(src.FormatEncoded()), AsciSym.Semicolon);              
-        }
-
-        static string HexFormat(this ulong src)
-            => src.FormatHex(false,true,true,false);
-
-        static string AddressRange(this ulong start, ulong end)
-            => bracket(concat(start.HexFormat(), AsciSym.Space, AsciSym.Colon, AsciSym.Space, end.HexFormat()));
 
         static string Format(this AsmBranchInfo src)
-        {
-            var target = src.Near ? src.Target - src.Base : src.Target;
-            return $"{target.HexFormat()}:{src.Label}";
-        }
+            => $"{src.Target.FormatHex(false,true,true,false)}:{src.Label}";
 
         static string Format(this AsmMemInfo src)
         {
@@ -174,5 +214,34 @@ namespace Z0
             }
             return "mem" + parenthetical(sb.ToString());
         }
+
+        static string FormatHeaderEncoding(this AsmCode src)
+            => src.Encoded.FormatHexBytes(sep: space(), zpad:true, specifier:false);
+
+        static string FormatEncodingProp(this AsmCode src)
+        {
+            var propdecl = $"static ReadOnlySpan<byte> {src.Id}_Bytes";
+            var alloc = $"{propdecl} => new byte[{src.Encoded.Length}]";
+            var data = embrace(src.FormatEncoded());
+            var content = items(alloc, data, AsciSym.Semicolon.ToString()).Concat();
+            return content;
+        }
+
+        static string FormatLineLabel(this Instruction src)
+            => concat(src.IP.FormatSmallHex(), Hex.PostSpec);
+
+        static string FormatHeaderLocation(this AddressSegment src, Moniker id)
+            => $"{id}{src.Format()}[{src.Length}]"; 
+
+        static MasmFormatterOptions MasmOptions => new MasmFormatterOptions
+        {
+            DecimalDigitGroupSize = 4,
+            BranchLeadingZeroes = false,
+            HexDigitGroupSize = 4,
+            UpperCaseRegisters = false, 
+            LeadingZeroes = false,
+            DisplInBrackets = true,            
+        };
+
     }
 }

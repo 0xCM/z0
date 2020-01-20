@@ -24,36 +24,36 @@ namespace Z0
         /// </summary>
         /// <param name="encoded">The encoded instructions</param>
         /// <param name="decoded">The decoded instructions</param>
-        public static InstructionBlock Define(Moniker id, string label, ReadOnlySpan<byte> encoded, Instruction[] decoded)
-            => new InstructionBlock(id,label,encoded,decoded);
+        public static InstructionBlock Define(Moniker id, string label, AddressSegment location,  ReadOnlySpan<byte> encoded, Instruction[] decoded)
+            => new InstructionBlock(id, label, location, encoded, decoded);
 
-        InstructionBlock(Moniker id, string label, ReadOnlySpan<byte> encoded, Instruction[] decoded)
+        InstructionBlock(Moniker id, string label, AddressSegment location, ReadOnlySpan<byte> encoded, Instruction[] decoded)
         {
-            this.Id = id;
             this.Label = label;
-            this.EncodedData = encoded.ToArray();
+            this.Code = AsmCode.Define(id, label, encoded);
             this.Decoded = decoded;
+            this.Location = location;
         }
-
-        public Moniker Id {get;}
 
         /// <summary>
         /// A description for the block
         /// </summary>
         public string Label {get;}
 
-        byte[] EncodedData; 
-
-        /// <summary>
-        /// The encoded instructions
-        /// </summary>
-        public ReadOnlySpan<byte> Encoded 
-            => EncodedData;
+        public AsmCode Code {get;}
 
         /// <summary>
         /// The decoded instructions
         /// </summary>
         public Instruction[] Decoded {get;}
+
+        public AddressSegment Location {get;}
+
+        /// <summary>
+        /// The encoded instructions
+        /// </summary>
+        public ReadOnlySpan<byte> Encoded 
+            => Code.Encoded;
 
         /// <summary>
         /// Queries/Manipulates an index-identified instruction
@@ -62,12 +62,6 @@ namespace Z0
             => ref Decoded[i];
 
         public int InstructionCount
-            => Decoded.Length;
-        
-        public int EncodedByteCount
-            => EncodedData.Length;
-    
-        public ulong BaseAddress
-            => Decoded[0].IP;       
+            => Decoded.Length;        
     }
 }
