@@ -5,20 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
- 
+    
     using static zfunc;
 
     /// <summary>
-    /// Attaches an anonymous hex literal value to a target
+    /// Classifies unary arithmetic operators
     /// </summary>
-    public class HexLiteralAttribute : LiteralAttribute
+    public enum UnaryArithmeticKind : byte
     {
-        public HexLiteralAttribute(object value)
-            : base(value)
-        {
+        Inc = 1,
 
-            
-        }
+        Dec = 2,
+
+        Negate = 3,
+
     }
 }

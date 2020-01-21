@@ -20,9 +20,8 @@ namespace Z0.Logix
 
         }
         
-
         public override IEnumerable<Type> GenericApiHosts
-            => items(typeof(BitMatrixOpApi), typeof(BitVectorOpApi), typeof(ScalarOpApi), typeof(VecotrizedOpApi));
+            => items(typeof(BitMatrixOpApi), typeof(BitVectorOpApi), typeof(ScalarOpApi), typeof(VectorizedOpApi));
 
         public override IEnumerable<Type> DirectApiHosts
             => items(typeof(math), typeof(fmath));

@@ -11,7 +11,7 @@ namespace Z0.Logix
     
     using static zfunc;
     using static BinaryBitLogicKind;
-    using static UnaryLogicOpKind;
+    using static UnaryBitLogicKind;
 
     public static partial class BitLogicSpec
     {

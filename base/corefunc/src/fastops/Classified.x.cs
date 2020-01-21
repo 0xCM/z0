@@ -685,5 +685,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public static PrimalKind TypeParamKind(this MethodInfo method, N1 n)
             => (method.IsGenericMethod ? method.GetGenericArguments() : array<Type>()).FirstOrDefault()?.Kind() ?? PrimalKind.None;
+
+       [MethodImpl(Inline)]
+        public static TernaryBitLogicKind Next(this TernaryBitLogicKind src)
+            => src != TernaryBitLogicKind.XFF 
+                ? (TernaryBitLogicKind)((uint)(src) + 1u)
+                : TernaryBitLogicKind.X00;
+        
+        [MethodImpl(Inline)]
+        public static BinaryBitLogicKind ToLogical(this BinaryBitLogicKind kind)
+            => (BinaryBitLogicKind)kind;
+
+        [MethodImpl(Inline)]
+        public static BinaryBitLogicKind ToBitwise(this BinaryBitLogicKind kind)
+            => (BinaryBitLogicKind)kind;
     }
 }

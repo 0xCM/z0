@@ -9,8 +9,8 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using static UnaryArithmeticOpKind;
-    using static BinaryArithmeticOpKind;
+    using static UnaryArithmeticKind;
+    using static BinaryArithmeticKind;
     using static TypedLogicSpec;
 
     public static class ArithmeticSpec
@@ -23,7 +23,7 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryAritheticOp<T> unary<T>(UnaryArithmeticOpKind op, IExpr<T> a)
+        public static UnaryAritheticOp<T> unary<T>(UnaryArithmeticKind op, IExpr<T> a)
             where T : unmanaged
                 => new UnaryAritheticOp<T>(op,a);
 
@@ -34,7 +34,7 @@ namespace Z0.Logix
         /// <param name="operand">The literal value</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryAritheticOp<T> unary<T>(UnaryArithmeticOpKind op, T a)
+        public static UnaryAritheticOp<T> unary<T>(UnaryArithmeticKind op, T a)
             where T : unmanaged
                 => new UnaryAritheticOp<T>(op, literal(a));
 
@@ -45,7 +45,7 @@ namespace Z0.Logix
         /// <param name="b">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryArithmeticOp<T> binary<T>(BinaryArithmeticOpKind op, IExpr<T> a, IExpr<T> b)
+        public static BinaryArithmeticOp<T> binary<T>(BinaryArithmeticKind op, IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => new BinaryArithmeticOp<T>(op, a, b);
 
@@ -56,7 +56,7 @@ namespace Z0.Logix
         /// <param name="b">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryArithmeticOp<T> binary<T>(BinaryArithmeticOpKind op, T a, T b)
+        public static BinaryArithmeticOp<T> binary<T>(BinaryArithmeticKind op, T a, T b)
             where T : unmanaged
                 => binary(op, literal(a), literal(b));
 

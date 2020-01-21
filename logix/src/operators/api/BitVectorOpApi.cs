@@ -21,83 +21,83 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported binary operators
         /// </summary>
-        public static ReadOnlySpan<BinaryBitwiseOpKind> BinaryBitwiseKinds
+        public static ReadOnlySpan<BinaryBitLogicKind> BinaryBitwiseKinds
             => ScalarOpApi.BinaryBitwiseKinds;
 
         [BitVectorOp, PrimalClosures(PrimalKind.Integers)]
-        public static BitVector<T> eval<T>(BinaryBitwiseOpKind kind, BitVector<T> x, BitVector<T> y)
+        public static BitVector<T> eval<T>(BinaryBitLogicKind kind, BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitwiseOpKind.True: return @true(x,y);
-                case BinaryBitwiseOpKind.False: return @false(x,y);
-                case BinaryBitwiseOpKind.And: return and(x,y);
-                case BinaryBitwiseOpKind.Nand: return nand(x,y);
-                case BinaryBitwiseOpKind.Or: return or(x,y);
-                case BinaryBitwiseOpKind.Nor: return nor(x,y);
-                case BinaryBitwiseOpKind.XOr: return xor(x,y);
-                case BinaryBitwiseOpKind.Xnor: return xnor(x,y);
-                case BinaryBitwiseOpKind.LeftProject: return left(x,y);
-                case BinaryBitwiseOpKind.RightProject: return right(x,y);
-                case BinaryBitwiseOpKind.LeftNot: return lnot(x,y);
-                case BinaryBitwiseOpKind.RightNot: return rnot(x,y);
-                case BinaryBitwiseOpKind.Implication: return impl(x,y);                    
-                case BinaryBitwiseOpKind.Nonimplication: return nonimpl(x,y);
-                case BinaryBitwiseOpKind.ConverseImplication: return cimpl(x,y);                    
-                case BinaryBitwiseOpKind.ConverseNonimplication: return cnonimpl(x,y);
-                default: return dne<BinaryBitwiseOpKind,T>(kind);
+                case BinaryBitLogicKind.True: return @true(x,y);
+                case BinaryBitLogicKind.False: return @false(x,y);
+                case BinaryBitLogicKind.And: return and(x,y);
+                case BinaryBitLogicKind.Nand: return nand(x,y);
+                case BinaryBitLogicKind.Or: return or(x,y);
+                case BinaryBitLogicKind.Nor: return nor(x,y);
+                case BinaryBitLogicKind.XOr: return xor(x,y);
+                case BinaryBitLogicKind.Xnor: return xnor(x,y);
+                case BinaryBitLogicKind.LeftProject: return left(x,y);
+                case BinaryBitLogicKind.RightProject: return right(x,y);
+                case BinaryBitLogicKind.LeftNot: return lnot(x,y);
+                case BinaryBitLogicKind.RightNot: return rnot(x,y);
+                case BinaryBitLogicKind.Implication: return impl(x,y);                    
+                case BinaryBitLogicKind.Nonimplication: return nonimpl(x,y);
+                case BinaryBitLogicKind.ConverseImplication: return cimpl(x,y);                    
+                case BinaryBitLogicKind.ConverseNonimplication: return cnonimpl(x,y);
+                default: return dne<BinaryBitLogicKind,T>(kind);
             }
         }
 
         [BitVectorOp, PrimalClosures(PrimalKind.Integers)]
-        public static BitVector<T> evalspec<T>(BinaryBitwiseOpKind kind, BitVector<T> x, BitVector<T> y)
+        public static BitVector<T> evalspec<T>(BinaryBitLogicKind kind, BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitwiseOpKind.True: return @true(x,y);
-                case BinaryBitwiseOpKind.False: return @false(x,y);
-                case BinaryBitwiseOpKind.And: return BitVectorOpSpecs.and(x,y);
-                case BinaryBitwiseOpKind.Nand: return BitVectorOpSpecs.nand(x,y);
-                case BinaryBitwiseOpKind.Or: return BitVectorOpSpecs.or(x,y);
-                case BinaryBitwiseOpKind.Nor: return BitVectorOpSpecs.nor(x,y);
-                case BinaryBitwiseOpKind.XOr: return BitVectorOpSpecs.xor(x,y);
-                case BinaryBitwiseOpKind.Xnor: return BitVectorOpSpecs.xnor(x,y);
-                case BinaryBitwiseOpKind.LeftProject: return x;
-                case BinaryBitwiseOpKind.RightProject: return y;
-                case BinaryBitwiseOpKind.LeftNot: return BitVectorOpSpecs.lnot(x,y);
-                case BinaryBitwiseOpKind.RightNot: return BitVectorOpSpecs.rnot(x,y);
-                case BinaryBitwiseOpKind.Implication: return BitVectorOpSpecs.impl(x,y);                    
-                case BinaryBitwiseOpKind.Nonimplication: return BitVectorOpSpecs.nonimpl(x,y);
-                case BinaryBitwiseOpKind.ConverseImplication: return BitVectorOpSpecs.cimpl(x,y);                    
-                case BinaryBitwiseOpKind.ConverseNonimplication: return BitVectorOpSpecs.cnonimpl(x,y);
-                default: return dne<BinaryBitwiseOpKind,T>(kind);
+                case BinaryBitLogicKind.True: return @true(x,y);
+                case BinaryBitLogicKind.False: return @false(x,y);
+                case BinaryBitLogicKind.And: return BitVectorOpSpecs.and(x,y);
+                case BinaryBitLogicKind.Nand: return BitVectorOpSpecs.nand(x,y);
+                case BinaryBitLogicKind.Or: return BitVectorOpSpecs.or(x,y);
+                case BinaryBitLogicKind.Nor: return BitVectorOpSpecs.nor(x,y);
+                case BinaryBitLogicKind.XOr: return BitVectorOpSpecs.xor(x,y);
+                case BinaryBitLogicKind.Xnor: return BitVectorOpSpecs.xnor(x,y);
+                case BinaryBitLogicKind.LeftProject: return x;
+                case BinaryBitLogicKind.RightProject: return y;
+                case BinaryBitLogicKind.LeftNot: return BitVectorOpSpecs.lnot(x,y);
+                case BinaryBitLogicKind.RightNot: return BitVectorOpSpecs.rnot(x,y);
+                case BinaryBitLogicKind.Implication: return BitVectorOpSpecs.impl(x,y);                    
+                case BinaryBitLogicKind.Nonimplication: return BitVectorOpSpecs.nonimpl(x,y);
+                case BinaryBitLogicKind.ConverseImplication: return BitVectorOpSpecs.cimpl(x,y);                    
+                case BinaryBitLogicKind.ConverseNonimplication: return BitVectorOpSpecs.cnonimpl(x,y);
+                default: return dne<BinaryBitLogicKind,T>(kind);
             }
         }
 
         [Op, PrimalClosures(PrimalKind.Integers)]
-        public static BinaryOp<BitVector<T>> lookup<T>(BinaryBitwiseOpKind kind)
+        public static BinaryOp<BitVector<T>> lookup<T>(BinaryBitLogicKind kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitwiseOpKind.True: return @true;
-                case BinaryBitwiseOpKind.False: return @false;
-                case BinaryBitwiseOpKind.And: return and;
-                case BinaryBitwiseOpKind.Nand: return nand;
-                case BinaryBitwiseOpKind.Or: return or;
-                case BinaryBitwiseOpKind.Nor: return nor;
-                case BinaryBitwiseOpKind.XOr: return xor;
-                case BinaryBitwiseOpKind.Xnor: return xnor;
-                case BinaryBitwiseOpKind.LeftProject: return left;
-                case BinaryBitwiseOpKind.RightProject: return right;
-                case BinaryBitwiseOpKind.LeftNot: return lnot;
-                case BinaryBitwiseOpKind.RightNot: return rnot;
-                case BinaryBitwiseOpKind.Implication: return impl;
-                case BinaryBitwiseOpKind.Nonimplication: return nonimpl;
-                case BinaryBitwiseOpKind.ConverseImplication: return cimpl;
-                case BinaryBitwiseOpKind.ConverseNonimplication: return cnonimpl;
+                case BinaryBitLogicKind.True: return @true;
+                case BinaryBitLogicKind.False: return @false;
+                case BinaryBitLogicKind.And: return and;
+                case BinaryBitLogicKind.Nand: return nand;
+                case BinaryBitLogicKind.Or: return or;
+                case BinaryBitLogicKind.Nor: return nor;
+                case BinaryBitLogicKind.XOr: return xor;
+                case BinaryBitLogicKind.Xnor: return xnor;
+                case BinaryBitLogicKind.LeftProject: return left;
+                case BinaryBitLogicKind.RightProject: return right;
+                case BinaryBitLogicKind.LeftNot: return lnot;
+                case BinaryBitLogicKind.RightNot: return rnot;
+                case BinaryBitLogicKind.Implication: return impl;
+                case BinaryBitLogicKind.Nonimplication: return nonimpl;
+                case BinaryBitLogicKind.ConverseImplication: return cimpl;
+                case BinaryBitLogicKind.ConverseNonimplication: return cnonimpl;
                 default: return dne<BitVector<T>>(kind);
             }
         }

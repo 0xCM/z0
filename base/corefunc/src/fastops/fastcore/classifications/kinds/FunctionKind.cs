@@ -58,7 +58,6 @@ namespace Z0
         /// </summary>
         TernaryImm = Imm | TernaryFunc,
 
-
         UnaryOp = Operator | UnaryFunc,
 
         BinaryOp = Operator | BinaryFunc,

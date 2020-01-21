@@ -6,26 +6,26 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+    using System.Linq;
+    using System.Collections.Generic;
+
     using static zfunc;
 
-    /// <summary>
-    /// Attaches a named literal value to a target
-    /// </summary>
-    [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
-    public class NamedLiteralAttribute : LiteralAttribute
+    public class OpAttribute : Attribute
     {
-        public NamedLiteralAttribute(string name, object value)
-            : base(value)
+        public OpAttribute()
+        {
+            this.Name = string.Empty;
+        }
+
+        public OpAttribute(string name)
         {
             this.Name = name;
         }
 
-        /// <summary>
-        /// The name of the literal
-        /// </summary>
         public string Name {get;}
 
-
+        public override string ToString()
+            => Name;
     }
 }

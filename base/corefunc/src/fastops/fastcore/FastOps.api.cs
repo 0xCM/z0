@@ -155,7 +155,7 @@ namespace Z0
             => m.Attributed<SpanOpAttribute>();
 
         static IEnumerable<PrimalKind> memberkinds(MemberInfo m)
-            => m.CustomAttribute<PrimalClosuresAttribute>().MapValueOrElse(a => a.Closures.DistinctKinds(), () => items<PrimalKind>());
+            => m.CustomAttribute<PrimalClosuresAttribute>().MapValueOrElse(a => a.SystemPrimitive.DistinctKinds(), () => items<PrimalKind>());
 
         static IEnumerable<PrimalKind> kinds(MethodInfo m)
             => memberkinds(m);

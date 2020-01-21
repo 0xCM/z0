@@ -8,10 +8,8 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     using System.IO;
     
-    using static zfunc;
-    
-    using BW = BinaryBitwiseOpKind;
-    using BL = BinaryBitLogicKind;
+    using static zfunc;    
+    using static BinaryBitLogicKind;
 
     public class t_truthtable : UnitTest<t_truthtable>
     {
@@ -76,66 +74,66 @@ namespace Z0.Logix
         }
 
         public void check_logical_and_truth()
-            => check_truth(BL.And);
+            => check_truth(And);
 
         public void check_typed_and_truth()
-            => check_truth(BW.And);
+            => check_typed_truth(And);
 
         public void check_logical_nand_truth()
-            => check_truth(BL.Nand);
+            => check_truth(Nand);
 
         public void check_typed_nand_truth()
-            => check_truth(BW.Nand);
+            => check_typed_truth(Nand);
 
         public void check_logical_or_truth()
-            => check_truth(BL.Or);
+            => check_truth(Or);
 
         public void check_typed_or_truth()
-            => check_truth(BW.Or);
+            => check_typed_truth(Or);
 
         public void check_logical_nor_truth()
-            => check_truth(BL.Nor);
+            => check_truth(Nor);
 
         public void check_typed_nor_truth()
-            => check_truth(BW.Nor);
+            => check_typed_truth(Nor);
 
         public void check_logical_xor_truth()
-            => check_truth(BL.XOr);
+            => check_truth(XOr);
 
         public void check_typed_xor_truth()
-            => check_truth(BW.XOr);
+            => check_typed_truth(XOr);
 
         public void check_logical_xnor_truth()
-            => check_truth(BL.Xnor);
+            => check_truth(Xnor);
 
         public void check_typed_xnor_truth()
-            => check_truth(BW.Xnor);
+            => check_typed_truth(Xnor);
 
         public void check_logical_imply_truth()
-            => check_truth(BL.Implication);
+            => check_truth(Implication);
 
         public void check_typed_imply_truth()
-            => check_truth(BW.Implication);
+            => check_typed_truth(Implication);
 
         public void check_logical_notimply_truth()
-            => check_truth(BL.Nonimplication);
+            => check_truth(Nonimplication);
 
         public void check_typed_notimply_truth()
-            => check_truth(BW.Nonimplication);
+            => check_typed_truth(Nonimplication);
 
         public void check_logical_cimply_truth()
-            => check_truth(BL.ConverseImplication);
+            => check_truth(ConverseImplication);
 
         public void check_typed_cimply_truth()
-            => check_truth(BW.ConverseImplication);
+            => check_typed_truth(ConverseImplication);
 
         public void check_logical_cnotimply_truth()
-            => check_truth(BL.ConverseNonimplication);
+            => check_truth(ConverseNonimplication);
 
         public void check_typed_cnotimply_truth()
-            => check_truth(BW.ConverseNonimplication);
+            => check_typed_truth(ConverseNonimplication);
 
-        void check_truth(BW op)
+        void check_typed_truth(BinaryBitLogicKind op)
         {               
             const byte on = 1;
             const byte off = 0;
@@ -149,7 +147,7 @@ namespace Z0.Logix
             Claim.eq(sig,dst);
         }
         
-        void check_truth(BL op)
+        void check_truth(BinaryBitLogicKind op)
         {
             var dst = BitVector.alloc(n4);
             dst[0] = LogicOpApi.eval(op, bit.Off,bit.Off);

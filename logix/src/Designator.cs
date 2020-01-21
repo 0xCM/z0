@@ -5,18 +5,18 @@
 namespace Z0.Designators
 {        
     using System;
-    using System.Reflection;
-    using System.Linq;
-    using System.Collections.Generic;
-
-    using D = Z0.Designators;
+    
+    using Z0.Logix;
 
     /// <summary>
     /// Represents the assembly
     /// </summary>
     public sealed class Logix : AssemblyDesignator<Logix>
     {
-        public override AssemblyId Id => AssemblyId.Logix;
-    }
+        public override AssemblyId Id 
+            => AssemblyId.Logix;
 
+        public override IOperationCatalog Catalog 
+            => new Catalog();
+    }
 }

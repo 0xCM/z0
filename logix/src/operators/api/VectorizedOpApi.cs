@@ -20,22 +20,21 @@ namespace Z0.Logix
     /// <summary>
     /// Defines services for 128-bit instrinsic operators
     /// </summary>
-    public static partial class VecotrizedOpApi
+    public static partial class VectorizedOpApi
     {
         /// <summary>
         /// Advertises the supported unary bitwise operators
         /// </summary>
-        public static UnaryBitwiseOpKind[] UnaryBitwiseKinds
-            => new UnaryBitwiseOpKind[]{
-                UnaryBitwiseOpKind.Not, 
-                UnaryBitwiseOpKind.Identity, 
-                UnaryBitwiseOpKind.Negate            
+        public static UnaryBitLogicKind[] UnaryBitwiseKinds
+            => new UnaryBitLogicKind[]{
+                UnaryBitLogicKind.Not, 
+                UnaryBitLogicKind.Identity                            
                 };
 
         /// <summary>
         /// Advertises the supported binary bitwise operators
         /// </summary>
-        public static ReadOnlySpan<BinaryBitwiseOpKind> BinaryBitwiseKinds
+        public static ReadOnlySpan<BinaryBitLogicKind> BinaryBitwiseKinds
             => ScalarOpApi.BinaryBitwiseKinds;
 
         /// <summary>
@@ -62,15 +61,14 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [VectorOp, PrimalClosures(PrimalKind.Integers)]
-        public static Vector128<T> eval<T>(UnaryBitwiseOpKind kind, Vector128<T> a)
+        public static Vector128<T> eval<T>(UnaryBitLogicKind kind, Vector128<T> a)
             where T : unmanaged
         {
             switch(kind)
             {
-                case UnaryBitwiseOpKind.Not: return not(a);
-                case UnaryBitwiseOpKind.Identity: return identity(a);
-                case UnaryBitwiseOpKind.Negate: return negate(a);
-                default: return dne<UnaryBitwiseOpKind,Vector128<T>>(kind);            
+                case UnaryBitLogicKind.Not: return not(a);
+                case UnaryBitLogicKind.Identity: return identity(a);
+                default: return dne<UnaryBitLogicKind,Vector128<T>>(kind);            
             }
         }
 
@@ -81,15 +79,14 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [VectorOp, PrimalClosures(PrimalKind.Integers)]
-        public static Vector256<T> eval<T>(UnaryBitwiseOpKind kind, Vector256<T> a)
+        public static Vector256<T> eval<T>(UnaryBitLogicKind kind, Vector256<T> a)
             where T : unmanaged
         {
             switch(kind)
             {
-                case UnaryBitwiseOpKind.Not: return not(a);
-                case UnaryBitwiseOpKind.Identity: return identity(a);
-                case UnaryBitwiseOpKind.Negate: return negate(a);
-                default: return dne<UnaryBitwiseOpKind,Vector256<T>>(kind);            
+                case UnaryBitLogicKind.Not: return not(a);
+                case UnaryBitLogicKind.Identity: return identity(a);
+                default: return dne<UnaryBitLogicKind,Vector256<T>>(kind);            
             }
         }
 
@@ -141,29 +138,29 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [VectorOp, PrimalClosures(PrimalKind.Integers)]
-        public static Vector128<T> eval<T>(BinaryBitwiseOpKind kind, Vector128<T> a, Vector128<T> b)
+        public static Vector128<T> eval<T>(BinaryBitLogicKind kind, Vector128<T> a, Vector128<T> b)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitwiseOpKind.True: return @true(a,b);
-                case BinaryBitwiseOpKind.False: return @false(a,b);
-                case BinaryBitwiseOpKind.And: return and(a,b);
-                case BinaryBitwiseOpKind.Nand: return nand(a,b);
-                case BinaryBitwiseOpKind.Or: return or(a,b);
-                case BinaryBitwiseOpKind.Nor: return nor(a,b);
-                case BinaryBitwiseOpKind.XOr: return xor(a,b);
-                case BinaryBitwiseOpKind.Xnor: return xnor(a,b);
-                case BinaryBitwiseOpKind.LeftProject: return left(a,b);
-                case BinaryBitwiseOpKind.RightProject: return right(a,b);
-                case BinaryBitwiseOpKind.LeftNot: return lnot(a,b);
-                case BinaryBitwiseOpKind.RightNot: return rnot(a,b);
-                case BinaryBitwiseOpKind.Implication: return impl(a,b);
-                case BinaryBitwiseOpKind.Nonimplication: return nonimpl(a,b);
-                case BinaryBitwiseOpKind.ConverseImplication: return cimpl(a,b);
-                case BinaryBitwiseOpKind.ConverseNonimplication: return cnonimpl(a,b);
+                case BinaryBitLogicKind.True: return @true(a,b);
+                case BinaryBitLogicKind.False: return @false(a,b);
+                case BinaryBitLogicKind.And: return and(a,b);
+                case BinaryBitLogicKind.Nand: return nand(a,b);
+                case BinaryBitLogicKind.Or: return or(a,b);
+                case BinaryBitLogicKind.Nor: return nor(a,b);
+                case BinaryBitLogicKind.XOr: return xor(a,b);
+                case BinaryBitLogicKind.Xnor: return xnor(a,b);
+                case BinaryBitLogicKind.LeftProject: return left(a,b);
+                case BinaryBitLogicKind.RightProject: return right(a,b);
+                case BinaryBitLogicKind.LeftNot: return lnot(a,b);
+                case BinaryBitLogicKind.RightNot: return rnot(a,b);
+                case BinaryBitLogicKind.Implication: return impl(a,b);
+                case BinaryBitLogicKind.Nonimplication: return nonimpl(a,b);
+                case BinaryBitLogicKind.ConverseImplication: return cimpl(a,b);
+                case BinaryBitLogicKind.ConverseNonimplication: return cnonimpl(a,b);
                 default:
-                    return dne<BinaryBitwiseOpKind,Vector128<T>>(kind);
+                    return dne<BinaryBitLogicKind,Vector128<T>>(kind);
             }
         }
 
@@ -175,28 +172,28 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [VectorOp, PrimalClosures(PrimalKind.Integers)]
-        public static Vector256<T> eval<T>(BinaryBitwiseOpKind kind, Vector256<T> a, Vector256<T> b)
+        public static Vector256<T> eval<T>(BinaryBitLogicKind kind, Vector256<T> a, Vector256<T> b)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitwiseOpKind.True: return @true(a,b);
-                case BinaryBitwiseOpKind.False: return @false(a,b);
-                case BinaryBitwiseOpKind.And: return and(a,b);
-                case BinaryBitwiseOpKind.Nand: return nand(a,b);
-                case BinaryBitwiseOpKind.Or: return or(a,b);
-                case BinaryBitwiseOpKind.Nor: return nor(a,b);
-                case BinaryBitwiseOpKind.XOr: return xor(a,b);
-                case BinaryBitwiseOpKind.Xnor: return xnor(a,b);
-                case BinaryBitwiseOpKind.LeftProject: return left(a,b);
-                case BinaryBitwiseOpKind.RightProject: return right(a,b);
-                case BinaryBitwiseOpKind.LeftNot: return lnot(a,b);
-                case BinaryBitwiseOpKind.RightNot: return rnot(a,b);
-                case BinaryBitwiseOpKind.Implication: return impl(a,b);
-                case BinaryBitwiseOpKind.Nonimplication: return nonimpl(a,b);
-                case BinaryBitwiseOpKind.ConverseImplication: return cimpl(a,b);
-                case BinaryBitwiseOpKind.ConverseNonimplication: return cnonimpl(a,b);
-                default: return dne<BinaryBitwiseOpKind,Vector256<T>>(kind);
+                case BinaryBitLogicKind.True: return @true(a,b);
+                case BinaryBitLogicKind.False: return @false(a,b);
+                case BinaryBitLogicKind.And: return and(a,b);
+                case BinaryBitLogicKind.Nand: return nand(a,b);
+                case BinaryBitLogicKind.Or: return or(a,b);
+                case BinaryBitLogicKind.Nor: return nor(a,b);
+                case BinaryBitLogicKind.XOr: return xor(a,b);
+                case BinaryBitLogicKind.Xnor: return xnor(a,b);
+                case BinaryBitLogicKind.LeftProject: return left(a,b);
+                case BinaryBitLogicKind.RightProject: return right(a,b);
+                case BinaryBitLogicKind.LeftNot: return lnot(a,b);
+                case BinaryBitLogicKind.RightNot: return rnot(a,b);
+                case BinaryBitLogicKind.Implication: return impl(a,b);
+                case BinaryBitLogicKind.Nonimplication: return nonimpl(a,b);
+                case BinaryBitLogicKind.ConverseImplication: return cimpl(a,b);
+                case BinaryBitLogicKind.ConverseNonimplication: return cnonimpl(a,b);
+                default: return dne<BinaryBitLogicKind,Vector256<T>>(kind);
             }
         }
 
@@ -269,27 +266,27 @@ namespace Z0.Logix
         }
 
         [VectorOp, PrimalClosures(PrimalKind.All)]
-        public static Vector128<T> eval<T>(BinaryArithmeticOpKind kind, Vector128<T> x, Vector128<T> y)
+        public static Vector128<T> eval<T>(BinaryArithmeticKind kind, Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryArithmeticOpKind.Add: return add(x,y);
-                case BinaryArithmeticOpKind.Sub: return sub(x,y);
-                default: return dne<BinaryArithmeticOpKind,Vector128<T>>(kind);
+                case BinaryArithmeticKind.Add: return add(x,y);
+                case BinaryArithmeticKind.Sub: return sub(x,y);
+                default: return dne<BinaryArithmeticKind,Vector128<T>>(kind);
             }
         }
 
 
         [VectorOp, PrimalClosures(PrimalKind.All)]
-        public static Vector256<T> eval<T>(BinaryArithmeticOpKind kind, Vector256<T> x, Vector256<T> y)
+        public static Vector256<T> eval<T>(BinaryArithmeticKind kind, Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryArithmeticOpKind.Add: return add(x,y);
-                case BinaryArithmeticOpKind.Sub: return sub(x,y);
-                default: return dne<BinaryArithmeticOpKind,Vector256<T>>(kind);
+                case BinaryArithmeticKind.Add: return add(x,y);
+                case BinaryArithmeticKind.Sub: return sub(x,y);
+                default: return dne<BinaryArithmeticKind,Vector256<T>>(kind);
             }
         }
 
@@ -298,14 +295,13 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        public static UnaryOp<Vector128<T>> lookup<T>(N128 n, UnaryBitwiseOpKind id)
+        public static UnaryOp<Vector128<T>> lookup<T>(N128 n, UnaryBitLogicKind id)
             where T : unmanaged            
         {
             switch(id)
             {
-                case UnaryBitwiseOpKind.Not: return not;
-                case UnaryBitwiseOpKind.Identity: return identity;
-                case UnaryBitwiseOpKind.Negate: return negate;
+                case UnaryBitLogicKind.Not: return not;
+                case UnaryBitLogicKind.Identity: return identity;
                 default: return dne<Vector128<T>>(id);
             }
         }
@@ -315,14 +311,13 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        public static UnaryOp<Vector256<T>> lookup<T>(N256 n, UnaryBitwiseOpKind kind)
+        public static UnaryOp<Vector256<T>> lookup<T>(N256 n, UnaryBitLogicKind kind)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case UnaryBitwiseOpKind.Not: return not;
-                case UnaryBitwiseOpKind.Identity: return identity;
-                case UnaryBitwiseOpKind.Negate: return negate;
+                case UnaryBitLogicKind.Not: return not;
+                case UnaryBitLogicKind.Identity: return identity;
                 default: return dne<Vector256<T>>(kind);            
             }
         }
@@ -393,27 +388,27 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-       public static BinaryOp<Vector128<T>> lookup<T>(N128 n, BinaryBitwiseOpKind id)
+       public static BinaryOp<Vector128<T>> lookup<T>(N128 n, BinaryBitLogicKind id)
             where T : unmanaged
         {
             switch(id)
             {
-                case BinaryBitwiseOpKind.True: return @true;
-                case BinaryBitwiseOpKind.False: return @false;
-                case BinaryBitwiseOpKind.And: return and;
-                case BinaryBitwiseOpKind.Nand: return nand;
-                case BinaryBitwiseOpKind.Or: return or;
-                case BinaryBitwiseOpKind.Nor: return nor;
-                case BinaryBitwiseOpKind.XOr: return xor;
-                case BinaryBitwiseOpKind.Xnor: return xnor;
-                case BinaryBitwiseOpKind.LeftProject: return left;
-                case BinaryBitwiseOpKind.RightProject: return right;
-                case BinaryBitwiseOpKind.LeftNot: return lnot;
-                case BinaryBitwiseOpKind.RightNot: return rnot;
-                case BinaryBitwiseOpKind.Implication: return impl;
-                case BinaryBitwiseOpKind.Nonimplication: return nonimpl;
-                case BinaryBitwiseOpKind.ConverseImplication: return cimpl;
-                case BinaryBitwiseOpKind.ConverseNonimplication: return cnonimpl;
+                case BinaryBitLogicKind.True: return @true;
+                case BinaryBitLogicKind.False: return @false;
+                case BinaryBitLogicKind.And: return and;
+                case BinaryBitLogicKind.Nand: return nand;
+                case BinaryBitLogicKind.Or: return or;
+                case BinaryBitLogicKind.Nor: return nor;
+                case BinaryBitLogicKind.XOr: return xor;
+                case BinaryBitLogicKind.Xnor: return xnor;
+                case BinaryBitLogicKind.LeftProject: return left;
+                case BinaryBitLogicKind.RightProject: return right;
+                case BinaryBitLogicKind.LeftNot: return lnot;
+                case BinaryBitLogicKind.RightNot: return rnot;
+                case BinaryBitLogicKind.Implication: return impl;
+                case BinaryBitLogicKind.Nonimplication: return nonimpl;
+                case BinaryBitLogicKind.ConverseImplication: return cimpl;
+                case BinaryBitLogicKind.ConverseNonimplication: return cnonimpl;
                 default: return dne<Vector128<T>>(id);
             }
         }
@@ -423,27 +418,27 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        public static BinaryOp<Vector256<T>> lookup<T>(N256 n, BinaryBitwiseOpKind kind)
+        public static BinaryOp<Vector256<T>> lookup<T>(N256 n, BinaryBitLogicKind kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitwiseOpKind.True: return @true;
-                case BinaryBitwiseOpKind.False: return @false;
-                case BinaryBitwiseOpKind.And: return and;
-                case BinaryBitwiseOpKind.Nand: return nand;
-                case BinaryBitwiseOpKind.Or: return or;
-                case BinaryBitwiseOpKind.Nor: return nor;
-                case BinaryBitwiseOpKind.XOr: return xor;
-                case BinaryBitwiseOpKind.Xnor: return xnor;
-                case BinaryBitwiseOpKind.LeftProject: return left;
-                case BinaryBitwiseOpKind.RightProject: return right;
-                case BinaryBitwiseOpKind.LeftNot: return lnot;
-                case BinaryBitwiseOpKind.RightNot: return rnot;
-                case BinaryBitwiseOpKind.Implication: return impl;
-                case BinaryBitwiseOpKind.Nonimplication: return nonimpl;
-                case BinaryBitwiseOpKind.ConverseImplication: return cimpl;
-                case BinaryBitwiseOpKind.ConverseNonimplication: return cnonimpl;
+                case BinaryBitLogicKind.True: return @true;
+                case BinaryBitLogicKind.False: return @false;
+                case BinaryBitLogicKind.And: return and;
+                case BinaryBitLogicKind.Nand: return nand;
+                case BinaryBitLogicKind.Or: return or;
+                case BinaryBitLogicKind.Nor: return nor;
+                case BinaryBitLogicKind.XOr: return xor;
+                case BinaryBitLogicKind.Xnor: return xnor;
+                case BinaryBitLogicKind.LeftProject: return left;
+                case BinaryBitLogicKind.RightProject: return right;
+                case BinaryBitLogicKind.LeftNot: return lnot;
+                case BinaryBitLogicKind.RightNot: return rnot;
+                case BinaryBitLogicKind.Implication: return impl;
+                case BinaryBitLogicKind.Nonimplication: return nonimpl;
+                case BinaryBitLogicKind.ConverseImplication: return cimpl;
+                case BinaryBitLogicKind.ConverseNonimplication: return cnonimpl;
                 default: return dne<Vector256<T>>(kind);            
             }
         }

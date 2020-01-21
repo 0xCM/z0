@@ -10,14 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static zfunc;
-
-
-    public interface ITypeKind : ISemanticFormat
-    {
-        TypeKind General {get;}
-
-        uint Specific {get;}
-    }
     
     public readonly struct TypeKind<T> : ITypeKind
         where T : unmanaged, Enum

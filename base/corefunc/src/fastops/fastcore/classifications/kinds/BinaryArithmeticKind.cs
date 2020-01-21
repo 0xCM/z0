@@ -5,22 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
-
+    
     using static zfunc;
 
-    public enum SegmentationKind : uint
+    /// <summary>
+    /// Classsifies (supported) arithmetic operators
+    /// </summary>
+    public enum BinaryArithmeticKind : byte
     {
-        None = 0,
 
-        Vectorized = 1,
+        Add = 1,
 
-        Blocked = 2,
-
-        Tabular = 3
+        Sub = 2,
     }
-
-
 }

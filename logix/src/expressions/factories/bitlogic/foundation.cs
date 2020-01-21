@@ -69,7 +69,7 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         [MethodImpl(Inline)]
         public static UnaryLogicOp identity(ILogicExpr a)
-            => unary(UnaryLogicOpKind.Identity, a);
+            => unary(UnaryBitLogicKind.Identity, a);
 
         /// <summary>
         /// Defines a typed logical identity expression
@@ -78,7 +78,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static UnaryLogicOp<T> identity<T>(ILogicExpr<T> a)
             where T : unmanaged
-                => unary(UnaryLogicOpKind.Identity, a);
+                => unary(UnaryBitLogicKind.Identity, a);
 
         /// <summary>
         /// Defines a unary logic operator over an expression
@@ -87,7 +87,7 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicOp unary(UnaryLogicOpKind op, ILogicExpr a)
+        public static UnaryLogicOp unary(UnaryBitLogicKind op, ILogicExpr a)
             => new UnaryLogicOp(op,a);
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicOp<T> unary<T>(UnaryLogicOpKind op, ILogicExpr<T> a)
+        public static UnaryLogicOp<T> unary<T>(UnaryBitLogicKind op, ILogicExpr<T> a)
             where T : unmanaged
                 => new UnaryLogicOp<T>(op,a);
 
@@ -108,7 +108,7 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        static UnaryLogicOp<T> unary<T>(UnaryLogicOpKind op, bit a)
+        static UnaryLogicOp<T> unary<T>(UnaryBitLogicKind op, bit a)
             where T : unmanaged
                 => new UnaryLogicOp<T>(op,literal<T>(a));
 
@@ -119,7 +119,7 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicOp unary(UnaryLogicOpKind kind, bit a)
+        public static UnaryLogicOp unary(UnaryBitLogicKind kind, bit a)
             => new UnaryLogicOp(kind,literal(a));
 
         /// <summary>

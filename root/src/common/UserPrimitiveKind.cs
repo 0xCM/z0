@@ -9,23 +9,16 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static zfunc;
-
-
     /// <summary>
-    /// Clasifies types
+    /// Clasifies user-defined primitive types
     /// </summary>
-    [Flags]
-    public enum TypeKind : uint
+    public enum UserPrimitiveKind : uint
     {    
         None = 0,
         
-        Primal = 1,
-
-        Block = 2,
-
-        Vector = 4
-
+        /// <summary>
+        /// Identifies a user-defined bit type
+        /// </summary>
+        Bit = 1,        
     }
-
 }

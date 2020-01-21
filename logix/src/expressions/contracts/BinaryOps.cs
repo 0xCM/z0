@@ -12,7 +12,7 @@ namespace Z0.Logix
 
 
 
-    public interface IBinaryBitwiseOp<T> : IBinaryOp<IExpr<T>>, IOperator<T,BinaryBitwiseOpKind>
+    public interface IBinaryBitwiseOp<T> : IBinaryOp<IExpr<T>>, IOperator<T,BinaryBitLogicKind>
         where T : unmanaged
     {
     }

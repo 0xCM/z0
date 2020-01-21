@@ -30,114 +30,114 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported unary bitwise operators
         /// </summary>
-        public static IEnumerable<UnaryBitwiseOpKind> UnaryBitwiseKinds
-            => items(UnaryBitwiseOpKind.Not, UnaryBitwiseOpKind.Identity);
+        public static IEnumerable<UnaryBitLogicKind> UnaryBitwiseKinds
+            => items(UnaryBitLogicKind.Not, UnaryBitLogicKind.Identity);
 
         /// <summary>
         /// Advertises the supported binary bitwise operators
         /// </summary>
-        public static ReadOnlySpan<BinaryBitwiseOpKind> BinaryBitwiseKinds
+        public static ReadOnlySpan<BinaryBitLogicKind> BinaryBitwiseKinds
             => ScalarOpApi.BinaryBitwiseKinds;
 
         [Op, PrimalClosures(PrimalKind.Integers)]
-        public static BitMatrix<T> eval<T>(UnaryBitwiseOpKind kind, BitMatrix<T> A)
+        public static BitMatrix<T> eval<T>(UnaryBitLogicKind kind, BitMatrix<T> A)
             where T : unmanaged
         {
             switch(kind)
             {
-                case UnaryBitwiseOpKind.Not: return not(A);
-                case UnaryBitwiseOpKind.Identity: return identity(A);
+                case UnaryBitLogicKind.Not: return not(A);
+                case UnaryBitLogicKind.Identity: return identity(A);
                 default: return dne(kind,A);
             }
         }
 
         [BitMatrixOp, PrimalClosures(PrimalKind.Integers)]
-        public static BitMatrix<T> eval<T>(UnaryBitwiseOpKind kind, BitMatrix<T> A, ref BitMatrix<T> Z)
+        public static BitMatrix<T> eval<T>(UnaryBitLogicKind kind, BitMatrix<T> A, ref BitMatrix<T> Z)
             where T : unmanaged
         {
             switch(kind)
             {
-                case UnaryBitwiseOpKind.Not: return not(A, ref Z);
-                case UnaryBitwiseOpKind.Identity: return identity(A, ref Z);
+                case UnaryBitLogicKind.Not: return not(A, ref Z);
+                case UnaryBitLogicKind.Identity: return identity(A, ref Z);
                 default: return dne(kind,A);
             }
         }
 
         [BitMatrixOp, PrimalClosures(PrimalKind.Integers)]
-        public static BitMatrix<T> eval<T>(BinaryBitwiseOpKind kind, BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> eval<T>(BinaryBitLogicKind kind, BitMatrix<T> A, BitMatrix<T> B)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitwiseOpKind.True: return @true<T>();
-                case BinaryBitwiseOpKind.False: return @false<T>();
-                case BinaryBitwiseOpKind.And: return and(A,B);
-                case BinaryBitwiseOpKind.Nand: return nand(A,B);
-                case BinaryBitwiseOpKind.Or: return or(A,B);
-                case BinaryBitwiseOpKind.Nor: return nor(A,B);
-                case BinaryBitwiseOpKind.XOr: return xor(A,B);
-                case BinaryBitwiseOpKind.Xnor: return xnor(A,B);
-                case BinaryBitwiseOpKind.LeftProject: return left(A,B);
-                case BinaryBitwiseOpKind.RightProject: return right(A,B);
-                case BinaryBitwiseOpKind.LeftNot: return lnot(A,B);
-                case BinaryBitwiseOpKind.RightNot: return rnot(A,B);
-                case BinaryBitwiseOpKind.Implication: return impl(A,B);
-                case BinaryBitwiseOpKind.Nonimplication: return nonimpl(A,B);
-                case BinaryBitwiseOpKind.ConverseImplication: return cimpl(A,B);
-                case BinaryBitwiseOpKind.ConverseNonimplication: return cnonimpl(A,B);
+                case BinaryBitLogicKind.True: return @true<T>();
+                case BinaryBitLogicKind.False: return @false<T>();
+                case BinaryBitLogicKind.And: return and(A,B);
+                case BinaryBitLogicKind.Nand: return nand(A,B);
+                case BinaryBitLogicKind.Or: return or(A,B);
+                case BinaryBitLogicKind.Nor: return nor(A,B);
+                case BinaryBitLogicKind.XOr: return xor(A,B);
+                case BinaryBitLogicKind.Xnor: return xnor(A,B);
+                case BinaryBitLogicKind.LeftProject: return left(A,B);
+                case BinaryBitLogicKind.RightProject: return right(A,B);
+                case BinaryBitLogicKind.LeftNot: return lnot(A,B);
+                case BinaryBitLogicKind.RightNot: return rnot(A,B);
+                case BinaryBitLogicKind.Implication: return impl(A,B);
+                case BinaryBitLogicKind.Nonimplication: return nonimpl(A,B);
+                case BinaryBitLogicKind.ConverseImplication: return cimpl(A,B);
+                case BinaryBitLogicKind.ConverseNonimplication: return cnonimpl(A,B);
                 default: return dne(kind,A,B);
             }
         }
 
         [BitMatrixOp, PrimalClosures(PrimalKind.Integers)]
-        public static BitMatrix<T> eval<T>(BinaryBitwiseOpKind kind, BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static BitMatrix<T> eval<T>(BinaryBitLogicKind kind, BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitwiseOpKind.True: return @true<T>();
-                case BinaryBitwiseOpKind.False: return @false<T>();
-                case BinaryBitwiseOpKind.And: return and(A, B, ref Z);
-                case BinaryBitwiseOpKind.Nand: return nand(A, B, ref Z);
-                case BinaryBitwiseOpKind.Or: return or(A, B, ref Z);
-                case BinaryBitwiseOpKind.Nor: return nor(A, B, ref Z);
-                case BinaryBitwiseOpKind.XOr: return xor(A, B, ref Z);
-                case BinaryBitwiseOpKind.Xnor: return xnor(A, B, ref Z);
-                case BinaryBitwiseOpKind.LeftProject: return left(A,B, ref Z);
-                case BinaryBitwiseOpKind.LeftNot: return lnot(A,B, ref Z);
-                case BinaryBitwiseOpKind.RightProject: return right(A,B, ref Z);
-                case BinaryBitwiseOpKind.RightNot: return rnot(A, B, ref Z);
-                case BinaryBitwiseOpKind.Implication: return impl(A,B, ref Z);
-                case BinaryBitwiseOpKind.Nonimplication: return nonimpl(A,B, ref Z);
-                case BinaryBitwiseOpKind.ConverseImplication: return cimpl(A,B, ref Z);
-                case BinaryBitwiseOpKind.ConverseNonimplication: return cnonimpl(A,B, ref Z);
+                case BinaryBitLogicKind.True: return @true<T>();
+                case BinaryBitLogicKind.False: return @false<T>();
+                case BinaryBitLogicKind.And: return and(A, B, ref Z);
+                case BinaryBitLogicKind.Nand: return nand(A, B, ref Z);
+                case BinaryBitLogicKind.Or: return or(A, B, ref Z);
+                case BinaryBitLogicKind.Nor: return nor(A, B, ref Z);
+                case BinaryBitLogicKind.XOr: return xor(A, B, ref Z);
+                case BinaryBitLogicKind.Xnor: return xnor(A, B, ref Z);
+                case BinaryBitLogicKind.LeftProject: return left(A,B, ref Z);
+                case BinaryBitLogicKind.LeftNot: return lnot(A,B, ref Z);
+                case BinaryBitLogicKind.RightProject: return right(A,B, ref Z);
+                case BinaryBitLogicKind.RightNot: return rnot(A, B, ref Z);
+                case BinaryBitLogicKind.Implication: return impl(A,B, ref Z);
+                case BinaryBitLogicKind.Nonimplication: return nonimpl(A,B, ref Z);
+                case BinaryBitLogicKind.ConverseImplication: return cimpl(A,B, ref Z);
+                case BinaryBitLogicKind.ConverseNonimplication: return cnonimpl(A,B, ref Z);
                 default: return dne(kind,A,B);
             }
 
         }
 
         [Op, PrimalClosures(PrimalKind.Integers)]
-        public static BitMatrixBinaryRefOp<T> lookup<T>(BinaryBitwiseOpKind kind)
+        public static BitMatrixBinaryRefOp<T> lookup<T>(BinaryBitLogicKind kind)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryBitwiseOpKind.True: return @true;
-                case BinaryBitwiseOpKind.False: return @false;
-                case BinaryBitwiseOpKind.And: return and;
-                case BinaryBitwiseOpKind.Nand: return nand;
-                case BinaryBitwiseOpKind.Or: return or;
-                case BinaryBitwiseOpKind.Nor: return nor;
-                case BinaryBitwiseOpKind.XOr: return xor;
-                case BinaryBitwiseOpKind.Xnor: return xnor;
-                case BinaryBitwiseOpKind.LeftProject: return left;
-                case BinaryBitwiseOpKind.LeftNot: return lnot;
-                case BinaryBitwiseOpKind.RightProject: return right;
-                case BinaryBitwiseOpKind.RightNot: return rnot;
-                case BinaryBitwiseOpKind.Implication: return impl;
-                case BinaryBitwiseOpKind.Nonimplication: return nonimpl;
-                case BinaryBitwiseOpKind.ConverseImplication: return cimpl;
-                case BinaryBitwiseOpKind.ConverseNonimplication: return cnonimpl;
+                case BinaryBitLogicKind.True: return @true;
+                case BinaryBitLogicKind.False: return @false;
+                case BinaryBitLogicKind.And: return and;
+                case BinaryBitLogicKind.Nand: return nand;
+                case BinaryBitLogicKind.Or: return or;
+                case BinaryBitLogicKind.Nor: return nor;
+                case BinaryBitLogicKind.XOr: return xor;
+                case BinaryBitLogicKind.Xnor: return xnor;
+                case BinaryBitLogicKind.LeftProject: return left;
+                case BinaryBitLogicKind.LeftNot: return lnot;
+                case BinaryBitLogicKind.RightProject: return right;
+                case BinaryBitLogicKind.RightNot: return rnot;
+                case BinaryBitLogicKind.Implication: return impl;
+                case BinaryBitLogicKind.Nonimplication: return nonimpl;
+                case BinaryBitLogicKind.ConverseImplication: return cimpl;
+                case BinaryBitLogicKind.ConverseNonimplication: return cnonimpl;
                 default: return nomareftop<T>(kind);
             }
 

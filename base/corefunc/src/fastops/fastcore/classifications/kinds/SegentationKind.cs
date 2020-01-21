@@ -5,19 +5,17 @@
 namespace Z0
 {
     using System;
-    
+
     using static zfunc;
 
-    /// <summary>
-    /// Classifies unary arithmetic operators
-    /// </summary>
-    public enum UnaryArithmeticOpKind : byte
+    public enum SegmentationKind : uint
     {
-        Inc = 1,
+        None = 0,
 
-        Dec = 2,
+        Vectorized = 1,
 
-        Negate = 3,
+        Blocked = 2,
 
+        Tabular = 3
     }
 }

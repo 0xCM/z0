@@ -48,32 +48,5 @@ namespace Z0
             => Format();
     }
 
-    public readonly struct BinaryLiteral<T>
-        where T : unmanaged
-    {                
-        [MethodImpl(Inline)]
-        public BinaryLiteral(string name, T value, string text)
-        {
-            this.Name = name;
-            this.Value = value;
-            this.Text = text;
-        }
 
-        public readonly string Name;
-        
-        public readonly T Value;
-
-        public readonly string Text;
-        
-        public PrimalKind Kind 
-        {
-            [MethodImpl(Inline)]
-            get => PrimalType.kind<T>();
-        }
-
-        public string Format() => $"{Name}({Value}:{Kind.Keyword()}) := " + enquote(Text);
-
-        public override string ToString()
-            => Format();
-    }
 }

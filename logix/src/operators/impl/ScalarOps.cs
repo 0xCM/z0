@@ -34,7 +34,7 @@ namespace Z0.Logix
             where T:unmanaged
                 => gmath.@false(a);
 
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.False)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitLogicKind.False)]
         public static T @false<T>(T a, T b)
             where T:unmanaged
                 => gmath.@false(a,b);
@@ -54,7 +54,7 @@ namespace Z0.Logix
             where T:unmanaged
                 => gmath.@true(a);
 
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.True)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitLogicKind.True)]
         public static T @true<T>(T a, T b)
             where T:unmanaged
                 => gmath.@true(a,b);
@@ -103,72 +103,72 @@ namespace Z0.Logix
                 => gbits.pop(a) == bitsize<T>();
 
 
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.And)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitLogicKind.And)]
         public static T and<T>(T a, T b)
             where T : unmanaged
                 => gmath.and(a,b);
 
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Nand)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitLogicKind.Nand)]
         public static T nand<T>(T a, T b)
             where T : unmanaged
                 => gmath.nand(a,b);
 
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Or)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitLogicKind.Or)]
         public static T or<T>(T a, T b)
             where T : unmanaged
                 => gmath.or(a,b);
 
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Nor)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitLogicKind.Nor)]
         public static T nor<T>(T a, T b)
             where T : unmanaged
                 => gmath.nor(a,b);
 
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.XOr)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitLogicKind.XOr)]
         public static T xor<T>(T a, T b)
             where T : unmanaged
                 => gmath.xor(a,b);
 
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Xnor)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitLogicKind.Xnor)]
         public static T xnor<T>(T a, T b)
             where T : unmanaged
                 => gmath.xnor(a,b);
 
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.LeftProject)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitLogicKind.LeftProject)]
         public static T left<T>(T a, T b)
             where T : unmanaged
                 => gmath.left(a,b);
 
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.RightProject)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitLogicKind.RightProject)]
         public static T right<T>(T a, T b)
             where T : unmanaged
                 => gmath.right(a,b);
 
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.LeftNot)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitLogicKind.LeftNot)]
         public static T lnot<T>(T a, T b)
             where T : unmanaged
                 => gmath.lnot(a,b);
 
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.RightNot)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitLogicKind.RightNot)]
         public static T rnot<T>(T a, T b)
             where T : unmanaged
                 => gmath.rnot(a,b);
 
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Implication)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitLogicKind.Implication)]
         public static T impl<T>(T a, T b)
             where T : unmanaged
                 => gmath.impl(a,b);
 
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Nonimplication)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitLogicKind.Nonimplication)]
         public static T nonimpl<T>(T a, T b)
             where T : unmanaged
                 => gmath.nonimpl(a,b);
 
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.ConverseImplication)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitLogicKind.ConverseImplication)]
         public static T cimpl<T>(T a, T b)
             where T : unmanaged
                 => gmath.cimpl(a,b);
         
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.ConverseNonimplication)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitLogicKind.ConverseNonimplication)]
         public static T cnonimpl<T>(T a, T b)
             where T : unmanaged
                 => gmath.cnonimpl(a,b);

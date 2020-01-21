@@ -283,5 +283,14 @@ namespace Z0.Logix
             Nat.require<N>(src.Length);
             return new LiteralLogicSeq<N>(src.ToLogicSeq().Terms);
         }
+
+        [MethodImpl(Inline)]
+        public static bool IsOperator(this LogicExprKind kind)
+            => (uint)kind >= (uint)LogicExprKind.UnaryOperator;
+
+        [MethodImpl(Inline)]
+        public static bool IsOperator(this TypedExprKind kind)
+            => (uint)kind >= (uint)TypedExprKind.UnaryOperator;
+
     }
 }

@@ -272,7 +272,7 @@ namespace Z0
         public static ITypeKind kind(Type t)            
         {
             if(PrimalType.test(t))
-                return new TypeKind<PrimalKind>(TypeKind.Primal, PrimalType.kind(t));
+                return new TypeKind<PrimalKind>(TypeKind.SystemPrimitive, PrimalType.kind(t));
             else if(VectorType.test(t))
                 return new TypeKind<VectorKind>(TypeKind.Vector, VectorType.kind(t));
             else if(BlockedType.test(t))

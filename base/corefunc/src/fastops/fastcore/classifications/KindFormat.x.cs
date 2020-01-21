@@ -14,48 +14,37 @@ namespace Z0
     public static class KindFormat
     {
         [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryLogicOpKind kind, T arg)
+        public static string Format(this UnaryBitLogicKind kind)
+            => kind.ToString().ToLower();
+
+
+        [MethodImpl(Inline)]
+        public static string Format<T>(this UnaryBitLogicKind kind, T arg)
             => $"{kind.Format()}({arg})";
 
         [MethodImpl(Inline)]
-        public static string Format(this UnaryLogicOpKind kind)
-            => kind.ToString().ToLower();
-
-        [MethodImpl(Inline)]
-        public static string Format(this UnaryBitwiseOpKind kind)
-            => kind.ToString().ToLower();
-
-        [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryBitwiseOpKind kind, T arg)
-            => $"{kind.Format()}({arg})";
-
-        [MethodImpl(Inline)]
-        public static string Format(this UnaryArithmeticOpKind kind)
+        public static string Format(this UnaryArithmeticKind kind)
             => kind switch {
-                UnaryArithmeticOpKind.Inc => "++",
-                UnaryArithmeticOpKind.Dec => "--",
-                UnaryArithmeticOpKind.Negate => "-",
+                UnaryArithmeticKind.Inc => "++",
+                UnaryArithmeticKind.Dec => "--",
+                UnaryArithmeticKind.Negate => "-",
                 _ => kind.ToString()
             };
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryArithmeticOpKind kind, T arg)
+        public static string Format<T>(this UnaryArithmeticKind kind, T arg)
             => $"{kind.Format()}({arg})";
 
         [MethodImpl(Inline)]
-        public static string Format(this BinaryArithmeticOpKind kind)
+        public static string Format(this BinaryArithmeticKind kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryArithmeticOpKind kind, T arg1, T arg2)
+        public static string Format<T>(this BinaryArithmeticKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]
         public static string Format(this BinaryBitLogicKind kind)
-            => kind.ToString().ToLower();
-
-        [MethodImpl(Inline)]
-        public static string Format(this BinaryBitwiseOpKind kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
@@ -64,10 +53,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string Format<T>(this BinaryBitLogicKind kind, T arg1, T arg2)
-            => $"{kind.Format()}({arg1}, {arg2})";
-
-        [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryBitwiseOpKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]

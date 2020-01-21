@@ -16,7 +16,7 @@ namespace Z0.Logix
     
     using static BitLogicSpec;
     using static LogicEngine;
-    using static BinaryBitwiseOpKind;
+    using static BinaryBitLogicKind;
     
     using BL = BinaryBitLogicKind;
 
@@ -87,7 +87,7 @@ namespace Z0.Logix
             ReportBenchmark(opname, opcount,clock);
         }
 
-         protected void bm_and_check<N,T>(BinaryBitwiseOpKind op = And)
+         protected void bm_and_check<N,T>(BinaryBitLogicKind op = And)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -112,7 +112,7 @@ namespace Z0.Logix
             }
         }
 
-         protected void bm_nand_check<N,T>(BinaryBitwiseOpKind op = Nand)
+         protected void bm_nand_check<N,T>(BinaryBitLogicKind op = Nand)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -137,7 +137,7 @@ namespace Z0.Logix
             }
         }
 
-         protected void bm_or_check<N,T>(BinaryBitwiseOpKind op = Or)
+         protected void bm_or_check<N,T>(BinaryBitLogicKind op = Or)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -162,7 +162,7 @@ namespace Z0.Logix
             }
         }
 
-         protected void bm_nor_check<N,T>(BinaryBitwiseOpKind op = Nor)
+         protected void bm_nor_check<N,T>(BinaryBitLogicKind op = Nor)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -187,7 +187,7 @@ namespace Z0.Logix
             }
         }
 
-        protected void bm_xor_check<N,T>(BinaryBitwiseOpKind op = XOr)
+        protected void bm_xor_check<N,T>(BinaryBitLogicKind op = XOr)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -212,7 +212,7 @@ namespace Z0.Logix
             }
         }
 
-        protected void bm_xnor_check<N,T>(BinaryBitwiseOpKind op = Xnor)
+        protected void bm_xnor_check<N,T>(BinaryBitLogicKind op = Xnor)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -238,7 +238,7 @@ namespace Z0.Logix
         }
 
 
-        protected void bm_imply_check<N,T>(BinaryBitwiseOpKind op = Implication)
+        protected void bm_imply_check<N,T>(BinaryBitLogicKind op = Implication)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -263,7 +263,7 @@ namespace Z0.Logix
             }
         }
 
-        protected void bm_notimply_check<N,T>(BinaryBitwiseOpKind op = Nonimplication)
+        protected void bm_notimply_check<N,T>(BinaryBitLogicKind op = Nonimplication)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -288,7 +288,7 @@ namespace Z0.Logix
             }
         }
 
-        protected void bm_not_check<N,T>(BinaryBitwiseOpKind op = LeftNot)
+        protected void bm_not_check<N,T>(BinaryBitLogicKind op = LeftNot)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -313,7 +313,7 @@ namespace Z0.Logix
             }
         }
 
-        protected void bm_delegate_bench<T>(BinaryBitwiseOpKind opkind, SystemCounter clock = default)
+        protected void bm_delegate_bench<T>(BinaryBitLogicKind opkind, SystemCounter clock = default)
             where T : unmanaged
         {
             var opname = $"bm_{opkind.Format()}_{primalsig<T>()}_delegate";
@@ -344,7 +344,7 @@ namespace Z0.Logix
             ReportBenchmark(opname, opcount, clock);
         }
 
-        protected void bm_api_bench<T>(BinaryBitwiseOpKind op, SystemCounter clock = default)
+        protected void bm_api_bench<T>(BinaryBitLogicKind op, SystemCounter clock = default)
             where T : unmanaged
         {
             var opname = $"bm_{op.Format()}_{primalsig<T>()}_api";
@@ -434,7 +434,7 @@ namespace Z0.Logix
             ReportBenchmark(opname, opcount, clock);
         }
 
-       protected void bitwise_logic_check<T>(BinaryBitwiseOpKind kind)
+       protected void bitwise_logic_check<T>(BinaryBitLogicKind kind)
             where T : unmanaged
         {
             for(var i=0; i< RepCount; i++)   
@@ -444,8 +444,8 @@ namespace Z0.Logix
                 var result1 = ScalarOpApi.eval(kind,a,b);    
                 var result2 = BitVectorOpApi.eval(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
                 var result3 = BitVectorOpApi.evalspec(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
-                var result4 = VecotrizedOpApi.eval(kind, CpuVector.vbroadcast(n128,a), CpuVector.vbroadcast(n128,b)).ToScalar();
-                var result5 = VecotrizedOpApi.eval(kind, CpuVector.vbroadcast(n256,a), CpuVector.vbroadcast(n256,b)).ToScalar();
+                var result4 = VectorizedOpApi.eval(kind, CpuVector.vbroadcast(n128,a), CpuVector.vbroadcast(n128,b)).ToScalar();
+                var result5 = VectorizedOpApi.eval(kind, CpuVector.vbroadcast(n256,a), CpuVector.vbroadcast(n256,b)).ToScalar();
                 Claim.eq(result1, result2);
                 Claim.eq(result2, result3);
                 Claim.eq(result3, result4);

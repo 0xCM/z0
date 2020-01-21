@@ -19,7 +19,7 @@ namespace Z0.Logix
         /// Computes a the signature, also referred to as the truth vector, for an identified unary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static BitVector4 sig(UnaryLogicOpKind kind)
+        public static BitVector4 sig(UnaryBitLogicKind kind)
         {
             var x = BitVector4.Zero;
             x[0] = Api.eval(kind, off);
@@ -87,7 +87,7 @@ namespace Z0.Logix
             return dst;
         }
 
-        public static BitMatrix<N2,N2,byte> build(UnaryLogicOpKind kind)
+        public static BitMatrix<N2,N2,byte> build(UnaryBitLogicKind kind)
         {
             var f = Api.lookup(kind);
             var table = BitMatrix.alloc<N2,N2,byte>();
@@ -122,7 +122,7 @@ namespace Z0.Logix
             return tt;
         }
 
-        public static void emit(TextWriter dst, params UnaryLogicOpKind[] kinds)
+        public static void emit(TextWriter dst, params UnaryBitLogicKind[] kinds)
             => kinds.Iterate(k => emit(k,dst));
 
         public static void emit(TextWriter dst, ReadOnlySpan<BinaryBitLogicKind> kinds)
@@ -147,7 +147,7 @@ namespace Z0.Logix
             }
         }
 
-        static BitMatrix<N2,N2,byte> emit(UnaryLogicOpKind kind, TextWriter dst)
+        static BitMatrix<N2,N2,byte> emit(UnaryBitLogicKind kind, TextWriter dst)
         {
             var table = build(kind);
             table.emit(kind,dst);

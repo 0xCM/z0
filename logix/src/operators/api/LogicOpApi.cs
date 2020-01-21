@@ -21,12 +21,12 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported unary opeators
         /// </summary>
-        public static UnaryLogicOpKind[] UnaryOpKinds
-            => new UnaryLogicOpKind[]{
-                UnaryLogicOpKind.False,
-                UnaryLogicOpKind.True,
-                UnaryLogicOpKind.Not,
-                UnaryLogicOpKind.Identity,
+        public static UnaryBitLogicKind[] UnaryOpKinds
+            => new UnaryBitLogicKind[]{
+                UnaryBitLogicKind.False,
+                UnaryBitLogicKind.True,
+                UnaryBitLogicKind.Not,
+                UnaryBitLogicKind.Identity,
             };
 
         /// <summary>
@@ -50,14 +50,14 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="op">The operator classifier</param>
         /// <param name="a">The operand</param>        
-        public static bit eval(UnaryLogicOpKind kind, bit a)
+        public static bit eval(UnaryBitLogicKind kind, bit a)
         {        
             switch(kind)
             {
-                case UnaryLogicOpKind.False: return off;
-                case UnaryLogicOpKind.Not: return bit.not(a);
-                case UnaryLogicOpKind.Identity: return a;
-                case UnaryLogicOpKind.True: return on;
+                case UnaryBitLogicKind.False: return off;
+                case UnaryBitLogicKind.Not: return bit.not(a);
+                case UnaryBitLogicKind.Identity: return a;
+                case UnaryBitLogicKind.True: return on;
                 default: return dne(kind);
             }
         }    
@@ -106,14 +106,14 @@ namespace Z0.Logix
         /// Returns a kind-indentified unary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static UnaryOp<bit> lookup(UnaryLogicOpKind kind)
+        public static UnaryOp<bit> lookup(UnaryBitLogicKind kind)
         {
             switch(kind)
             {
-                case UnaryLogicOpKind.False: return @false;
-                case UnaryLogicOpKind.Not: return not;
-                case UnaryLogicOpKind.Identity: return identity;
-                case UnaryLogicOpKind.True: return @true;
+                case UnaryBitLogicKind.False: return @false;
+                case UnaryBitLogicKind.Not: return not;
+                case UnaryBitLogicKind.Identity: return identity;
+                case UnaryBitLogicKind.True: return @true;
                 default: return dne<bit>(kind);
             }
         }

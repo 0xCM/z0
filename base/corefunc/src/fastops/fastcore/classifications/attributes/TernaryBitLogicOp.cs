@@ -13,8 +13,6 @@ namespace Z0
 
     public class TernaryBitLogicOpAttribute : OpKindAttribute
     {
-        static readonly string kindName = typeof(TernaryBitLogicKind).DisplayName();
-        
         public TernaryBitLogicOpAttribute(TernaryBitLogicKind kind)
             : base( (uint)kind,kind.Format())
         {
@@ -24,10 +22,10 @@ namespace Z0
         public TernaryBitLogicKind Kind {get;}
 
         public override string KindName 
-            => GetType().DisplayName();        
+            => nameof(TernaryBitLogicKind);
     }
 
-    public class TernaryBitwiseOpAttribute : TernaryBitLogicOpAttribute
+    public sealed class TernaryBitwiseOpAttribute : TernaryBitLogicOpAttribute
     {
         
         public TernaryBitwiseOpAttribute(TernaryBitLogicKind kind)
@@ -37,7 +35,7 @@ namespace Z0
         }
     }
 
-    public class TernaryLogicOpAttribute : TernaryBitLogicOpAttribute
+    public sealed class TernaryLogicOpAttribute : TernaryBitLogicOpAttribute
     {
         
         public TernaryLogicOpAttribute(TernaryBitLogicKind kind)

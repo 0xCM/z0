@@ -41,6 +41,4 @@ namespace Z0
         /// </summary>
         Sequence = 8
     }
-
-
 }

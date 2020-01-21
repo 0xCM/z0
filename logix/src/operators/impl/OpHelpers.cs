@@ -12,7 +12,7 @@ namespace Z0.Logix
 
     internal static class OpHelpers
     {
-       public static UnaryBitwiseOpSpec<T> nologic<T>(UnaryLogicOpKind id, T x = default)        
+       public static UnaryBitwiseOpSpec<T> nologic<T>(UnaryBitLogicKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
@@ -28,11 +28,7 @@ namespace Z0.Logix
             where K : Enum
                 => throw new NotSupportedException($"{kind}");
 
-       public static UnaryOp<T> dne<T>(UnaryLogicOpKind id, T x = default)        
-            where T : unmanaged
-                => throw new NotSupportedException($"{id}");
-
-       public static UnaryOp<T> dne<T>(UnaryBitwiseOpKind id, T x = default)        
+       public static UnaryOp<T> dne<T>(UnaryBitLogicKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
@@ -43,12 +39,8 @@ namespace Z0.Logix
        public static BinaryOp<T> dne<T>(ComparisonKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
-
-       public static BinaryOp<T> dne<T>(BinaryBitwiseOpKind id, T x = default)        
-            where T : unmanaged
-                => throw new NotSupportedException($"{id}");
-
-       public static BitMatrixBinaryRefOp<T> nomareftop<T>(BinaryBitwiseOpKind id)        
+       
+       public static BitMatrixBinaryRefOp<T> nomareftop<T>(BinaryBitLogicKind id)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 

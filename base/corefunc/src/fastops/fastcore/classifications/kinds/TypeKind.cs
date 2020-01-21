@@ -6,20 +6,28 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
     using static zfunc;
 
-    /// <summary>
-    /// Applies to a generic type/method to advertise the primal types over which the type parameter(s) may be closed
-    /// </summary>
-    public class PrimalClosuresAttribute : Attribute
-    {
-        public PrimalClosuresAttribute(PrimalKind closures)
-        {
-            this.Closures = closures;
-        }
 
-        public PrimalKind Closures {get;}
+    /// <summary>
+    /// Clasifies types
+    /// </summary>
+    [Flags]
+    public enum TypeKind : uint
+    {    
+        None = 0,
+        
+        SystemPrimitive = 1,
+
+        Block = 2,
+
+        Vector = 4,
+
+        UserPrimitive = 8
+
     }
+
 }

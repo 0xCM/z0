@@ -126,7 +126,7 @@ namespace Z0.Logix
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = eval(UnaryLogicOpKind.Not, x[i]);
+                z[i] = eval(UnaryBitLogicKind.Not, x[i]);
             return z;
         }
 
@@ -142,7 +142,7 @@ namespace Z0.Logix
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = eval(UnaryLogicOpKind.Not, y[i]);
+                z[i] = eval(UnaryBitLogicKind.Not, y[i]);
             return z;
         }
 

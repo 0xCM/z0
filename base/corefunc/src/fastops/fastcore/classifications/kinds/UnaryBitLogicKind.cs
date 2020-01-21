@@ -11,7 +11,7 @@ namespace Z0
     /// <summary>
     /// Classifies unary logic operators
     /// </summary>
-    public enum UnaryLogicOpKind : byte
+    public enum UnaryBitLogicKind : byte
     {
         /// <summary>
         /// The unary operator that always returns false

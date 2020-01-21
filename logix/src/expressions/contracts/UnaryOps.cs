@@ -11,18 +11,18 @@ namespace Z0.Logix
     using static zfunc;
 
 
-    public interface IUnaryBitwiseOp<T> : IUnaryOp<IExpr<T>>, IOperator<T, UnaryBitwiseOpKind>
+    public interface IUnaryBitwiseOp<T> : IUnaryOp<IExpr<T>>, IOperator<T, UnaryBitLogicKind>
         where T : unmanaged
     {
         
     }
 
-    public interface IUnaryLogicOp : IUnaryOp<ILogicExpr>, ILogicOp<UnaryLogicOpKind>
+    public interface IUnaryLogicOp : IUnaryOp<ILogicExpr>, ILogicOp<UnaryBitLogicKind>
     {
 
     }
 
-    public interface IUnaryLogicOp<T> :  IUnaryLogicOp, IUnaryOp<ILogicExpr<T>>, ILogicOp<T,UnaryLogicOpKind>
+    public interface IUnaryLogicOp<T> :  IUnaryLogicOp, IUnaryOp<ILogicExpr<T>>, ILogicOp<T,UnaryBitLogicKind>
         where T : unmanaged
     {
 

@@ -9,7 +9,7 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
     
     using static zfunc;
-    using static BinaryBitwiseOpKind;
+    using static BinaryBitLogicKind;
 
     public class t_bm_ops : LogixTest<t_bm_ops>
     {

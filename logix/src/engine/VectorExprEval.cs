@@ -60,13 +60,13 @@ namespace Z0.Logix
             switch(expr)               
             {
                 case IUnaryBitwiseOp<Vector128<T>> x:
-                    return VecotrizedOpApi.eval(x.OpKind, eval(x.Arg).Value);
+                    return VectorizedOpApi.eval(x.OpKind, eval(x.Arg).Value);
                 case IBinaryBitwiseOp<Vector128<T>> x:
-                    return VecotrizedOpApi.eval(x.OpKind, eval(x.LeftArg).Value, eval(x.RightArg).Value);
+                    return VectorizedOpApi.eval(x.OpKind, eval(x.LeftArg).Value, eval(x.RightArg).Value);
                 case IShiftOp<Vector128<T>> x:
-                    return VecotrizedOpApi.eval(x.OpKind, eval(x.Subject).Value, ScalarExprEval.eval(x.Offset).Value);
+                    return VectorizedOpApi.eval(x.OpKind, eval(x.Subject).Value, ScalarExprEval.eval(x.Offset).Value);
                 case ITernaryBitwiseOp<Vector128<T>> x:
-                    return VecotrizedOpApi.eval(x.OpKind, eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.ThirdArg));
+                    return VectorizedOpApi.eval(x.OpKind, eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.ThirdArg));
                 default:
                     return unhandled(expr);
             }
@@ -78,13 +78,13 @@ namespace Z0.Logix
             switch(expr)               
             {
                 case IUnaryBitwiseOp<Vector256<T>> x:
-                    return VecotrizedOpApi.eval(x.OpKind, eval(x.Arg).Value);
+                    return VectorizedOpApi.eval(x.OpKind, eval(x.Arg).Value);
                 case IBinaryBitwiseOp<Vector256<T>> x:
-                    return VecotrizedOpApi.eval(x.OpKind, eval(x.LeftArg).Value, eval(x.RightArg).Value);
+                    return VectorizedOpApi.eval(x.OpKind, eval(x.LeftArg).Value, eval(x.RightArg).Value);
                 case IShiftOp<Vector256<T>> x:
-                    return VecotrizedOpApi.eval(x.OpKind, eval(x.Subject).Value, ScalarExprEval.eval(x.Offset).Value);
+                    return VectorizedOpApi.eval(x.OpKind, eval(x.Subject).Value, ScalarExprEval.eval(x.Offset).Value);
                 case ITernaryBitwiseOp<Vector256<T>> x:
-                    return VecotrizedOpApi.eval(x.OpKind, eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.ThirdArg));
+                    return VectorizedOpApi.eval(x.OpKind, eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.ThirdArg));
                 default:
                     return unhandled(expr);
             }

@@ -18,14 +18,14 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public UnaryArithmeticOpKind OpKind {get;}
+        public UnaryArithmeticKind OpKind {get;}
 
         /// <summary>
         /// The operand
         /// </summary>
         public IExpr<T> Arg {get;}
 
-        public UnaryAritheticOp(UnaryArithmeticOpKind op, IExpr<T> operand)
+        public UnaryAritheticOp(UnaryArithmeticKind op, IExpr<T> operand)
         {
             this.OpKind = op;
             this.Arg = operand;

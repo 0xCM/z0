@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     /// <summary>
-    /// Clasifies primitive types
+    /// Clasifies system-defined primitive types
     /// </summary>
     [Flags]
     public enum PrimalKind : uint

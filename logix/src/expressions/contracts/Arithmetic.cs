@@ -47,7 +47,7 @@ namespace Z0.Logix
     }
 
 
-    public interface IUnaryArithmeticOp<T> :  IUnaryArithmeticOp, IArithmeticOp<T, UnaryArithmeticOpKind>
+    public interface IUnaryArithmeticOp<T> :  IUnaryArithmeticOp, IArithmeticOp<T, UnaryArithmeticKind>
         where T : unmanaged
     {
 
@@ -58,7 +58,7 @@ namespace Z0.Logix
 
     }
 
-    public interface IBinaryArithmeticOp<T> : IBinaryArithmeticOp, IArithmeticOp<T,BinaryArithmeticOpKind>
+    public interface IBinaryArithmeticOp<T> : IBinaryArithmeticOp, IArithmeticOp<T,BinaryArithmeticKind>
         where T : unmanaged
     {
         IExpr<T> LeftArg {get;}
