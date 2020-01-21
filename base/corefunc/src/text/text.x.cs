@@ -168,7 +168,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The string to search</param>
         /// <param name="idx">The index</param>
-        /// <returns></returns>
         public static string RightOf(this string src, int idx)
             => (idx >= src.Length - 1) ? String.Empty : src.Substring(idx + 1);
 

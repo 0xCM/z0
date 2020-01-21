@@ -17,20 +17,7 @@ namespace Z0
 
     public class t_opcatalog : t_gmath<t_opcatalog>
     {     
-        void list_contracted()
-        {
 
-            foreach(var op in GX.Catalog.Services)
-            foreach(var id in op.Reifications)
-                Trace(id);
-        }
-
-        public void list_nongeneric()
-        {
-
-            foreach(var op in GX.Catalog.DirectOps)
-                Trace(op.Id);
-        }
 
 
     }

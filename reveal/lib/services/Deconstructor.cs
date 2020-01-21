@@ -85,8 +85,7 @@ namespace Z0
                     error($"Method {method.Name} not found");
                     return default;
                 }
-                var provider = Moniker.Provider;
-                var id = provider.Define(method);
+                var id = OpIdentity.Provider.Define(method);
                 var asmBody = DecodeAsm(method);
                 var cilbody = ReadCilBytes(clrMethod);    
                 var cilfunc = MdIx.FindCilFunction(method).ValueOrDefault();

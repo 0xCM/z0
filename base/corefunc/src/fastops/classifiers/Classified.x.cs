@@ -213,12 +213,12 @@ namespace Z0
         /// <param name="src">The source method</param>
         /// <param name="args">The arguments over which to close the method, if generic</param>
         [MethodImpl(Inline)]
-        public static FastOp FastOp(this MethodInfo src)
-            => Z0.FastOp.Define(src);
+        public static OpSpec FastOp(this MethodInfo src)
+            => FastOps.specify(src);
 
         [MethodImpl(Inline)]
-        public static FastOp FastOp(this MethodInfo src, Moniker m, Span<byte> buffer)
-            => Z0.FastOp.Define(src, m, buffer);
+        public static OpSpec FastOp(this MethodInfo src, Moniker m, Span<byte> buffer)
+            => FastOps.specify(src, m, buffer);
 
         /// <summary>
         /// Determines the primal kind of a type, possibly none

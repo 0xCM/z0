@@ -10,7 +10,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using static TernaryOpKind;
+    using static TernaryBitLogicKind;
     using static ScalarOps;
     using static OpHelpers;
 
@@ -59,10 +59,11 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported ternary opeators
         /// </summary>
-        public static IEnumerable<TernaryOpKind> TernaryBitwiseKinds
-            => range((byte)1,(byte)X5F).Cast<TernaryOpKind>();
+        public static IEnumerable<TernaryBitLogicKind> TernaryBitwiseKinds
+            => range((byte)1,(byte)X5F).Cast<TernaryBitLogicKind>();
 
 
+        [Op, PrimalClosures(PrimalKind.Integers)]
         public static T eval<T>(BinaryBitwiseOpKind kind, T a, T b)
             where T : unmanaged
         {
@@ -88,6 +89,7 @@ namespace Z0.Logix
             }
         }
 
+        [Op, PrimalClosures(PrimalKind.Integers)]
         public static T eval<T>(UnaryBitwiseOpKind kind, T a)
             where T : unmanaged
         {
@@ -100,6 +102,7 @@ namespace Z0.Logix
             }
         }
 
+        [Op, PrimalClosures(PrimalKind.Integers)]
         public static T eval<T>(ComparisonKind kind, T a, T b)
             where T : unmanaged            
         {
@@ -123,7 +126,8 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
-        public static T eval<T>(TernaryOpKind kind, T a, T b, T c)
+        [Op, PrimalClosures(PrimalKind.Integers)]
+        public static T eval<T>(TernaryBitLogicKind kind, T a, T b, T c)
             where T : unmanaged
         {
             switch(kind)
@@ -223,20 +227,20 @@ namespace Z0.Logix
                 case X5D: return f5d(a, b, c);
                 case X5E: return f5e(a, b, c);
                 case X5F: return f5f(a, b, c);
-                default: return canteval<T,TernaryOpKind>(kind);
+                default: return canteval<T,TernaryBitLogicKind>(kind);
             }
         }
 
-        [MethodImpl(Inline)]
-        public static T eval<T>(ShiftOpKind kind, T a, int offset)
+        [Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        public static T eval<T>(ShiftOpKind kind, T a, byte count)
             where T : unmanaged
         {
             switch(kind)
             {
-                case ShiftOpKind.Sll: return sll(a,(byte)offset);
-                case ShiftOpKind.Srl: return srl(a,(byte)offset);
-                case ShiftOpKind.Rotl: return rotl(a,(byte)offset);
-                case ShiftOpKind.Rotr: return rotr(a,(byte)offset);
+                case ShiftOpKind.Sll: return sll(a, count);
+                case ShiftOpKind.Srl: return srl(a, count);
+                case ShiftOpKind.Rotl: return rotl(a, count);
+                case ShiftOpKind.Rotr: return rotr(a, count);
                 default: return dne<ShiftOpKind,T>(kind);
             }
         }
@@ -306,7 +310,7 @@ namespace Z0.Logix
             }
         }
 
-        public static TernaryOp<T> lookup<T>(TernaryOpKind id)
+        public static TernaryOp<T> lookup<T>(TernaryBitLogicKind id)
             where T : unmanaged
         {
             switch(id)

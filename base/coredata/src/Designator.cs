@@ -17,8 +17,10 @@ namespace Z0.Designators
     /// </summary>
     public sealed class CoreData : AssemblyDesignator<CoreData>
     {
+        public override AssemblyId Id 
+            => AssemblyId.CoreData;
 
+        public override IOperationCatalog Catalog 
+            => new Catalog();
     }
-
-
 }

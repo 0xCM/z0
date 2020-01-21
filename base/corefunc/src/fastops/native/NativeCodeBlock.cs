@@ -22,7 +22,7 @@ namespace Z0
 		/// <summary>
 		/// The source location
 		/// </summary>
-		public readonly AddressSegment Location;
+		public readonly MemoryRange Location;
 	
 		/// <summary>
 		/// The block data
@@ -47,7 +47,7 @@ namespace Z0
     	NativeCodeBlock(string label, ulong address, byte[] data) 
         {
 			Label = label;
-			Location = AddressSegment.Define(address, address + (ulong)data.Length);
+			Location = MemoryRange.Define(address, address + (ulong)data.Length);
 			Data = data;
 		}	
 

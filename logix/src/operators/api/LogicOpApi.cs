@@ -13,7 +13,7 @@ namespace Z0.Logix
     using static zfunc;
     using static LogicOps;
     using static OpHelpers;
-    using static TernaryOpKind;
+    using static TernaryBitLogicKind;
 
     public static class LogicOpApi
     {
@@ -32,8 +32,8 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported binary opeators
         /// </summary>
-        public static ReadOnlySpan<BinaryLogicOpKind> BinaryOpKinds
-            => BinaryOpKindData.As<BinaryLogicOpKind>();
+        public static ReadOnlySpan<BinaryBitLogicKind> BinaryOpKinds
+            => BinaryOpKindData.As<BinaryBitLogicKind>();
 
         static ReadOnlySpan<byte> BinaryOpKindData
             => new byte[]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
@@ -42,8 +42,8 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported ternary opeators
         /// </summary>
-        public static TernaryOpKind[] TernaryOpKinds
-            => range((byte)1,(byte)X5F).Cast<TernaryOpKind>().ToArray();
+        public static TernaryBitLogicKind[] TernaryOpKinds
+            => range((byte)1,(byte)X5F).Cast<TernaryBitLogicKind>().ToArray();
 
         /// <summary>
         /// Evaluates a unary operator directly without lookup/delegate indirection
@@ -69,33 +69,33 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
-        public static bit eval(BinaryLogicOpKind kind, bit a, bit b)
+        public static bit eval(BinaryBitLogicKind kind, bit a, bit b)
         {
             switch(kind)
             {
-                case BinaryLogicOpKind.True: return @true(a,b);
-                case BinaryLogicOpKind.False: return @false(a,b);
+                case BinaryBitLogicKind.True: return @true(a,b);
+                case BinaryBitLogicKind.False: return @false(a,b);
 
-                case BinaryLogicOpKind.And: return and(a,b);
-                case BinaryLogicOpKind.Nand: return nand(a,b);
+                case BinaryBitLogicKind.And: return and(a,b);
+                case BinaryBitLogicKind.Nand: return nand(a,b);
 
-                case BinaryLogicOpKind.Or: return or(a,b);
-                case BinaryLogicOpKind.Nor: return nor(a,b);
+                case BinaryBitLogicKind.Or: return or(a,b);
+                case BinaryBitLogicKind.Nor: return nor(a,b);
 
-                case BinaryLogicOpKind.XOr: return xor(a,b);
-                case BinaryLogicOpKind.Xnor: return xnor(a,b);
+                case BinaryBitLogicKind.XOr: return xor(a,b);
+                case BinaryBitLogicKind.Xnor: return xnor(a,b);
 
-                case BinaryLogicOpKind.Implication: return impl(a,b); 
-                case BinaryLogicOpKind.Nonimplication: return nonimpl(a,b);
+                case BinaryBitLogicKind.Implication: return impl(a,b); 
+                case BinaryBitLogicKind.Nonimplication: return nonimpl(a,b);
 
-                case BinaryLogicOpKind.LeftProject: return left(a,b);
-                case BinaryLogicOpKind.RightProject: return right(a,b);
+                case BinaryBitLogicKind.LeftProject: return left(a,b);
+                case BinaryBitLogicKind.RightProject: return right(a,b);
 
-                case BinaryLogicOpKind.LeftNot: return lnot(a,b);
-                case BinaryLogicOpKind.RightNot: return rnot(a,b);
+                case BinaryBitLogicKind.LeftNot: return lnot(a,b);
+                case BinaryBitLogicKind.RightNot: return rnot(a,b);
                 
-                case BinaryLogicOpKind.ConverseImplication: return cimpl(a,b);
-                case BinaryLogicOpKind.ConverseNonimplication: return cnonimpl(a,b);
+                case BinaryBitLogicKind.ConverseImplication: return cimpl(a,b);
+                case BinaryBitLogicKind.ConverseNonimplication: return cnonimpl(a,b);
 
                 default: return dne(kind);
             }
@@ -122,26 +122,26 @@ namespace Z0.Logix
         /// Returns a kind-indentified binary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static BinaryOp<bit> lookup(BinaryLogicOpKind kind)
+        public static BinaryOp<bit> lookup(BinaryBitLogicKind kind)
         {
             switch(kind)
             {
-                case BinaryLogicOpKind.True: return @true;
-                case BinaryLogicOpKind.False: return @false;
-                case BinaryLogicOpKind.And: return and;
-                case BinaryLogicOpKind.Nand: return nand;
-                case BinaryLogicOpKind.Or: return or;
-                case BinaryLogicOpKind.Nor: return nor;
-                case BinaryLogicOpKind.XOr: return xor;
-                case BinaryLogicOpKind.Xnor: return xnor;
-                case BinaryLogicOpKind.LeftProject: return left;
-                case BinaryLogicOpKind.RightProject: return right;
-                case BinaryLogicOpKind.LeftNot: return lnot;
-                case BinaryLogicOpKind.RightNot: return rnot;
-                case BinaryLogicOpKind.Implication: return impl;
-                case BinaryLogicOpKind.Nonimplication: return nonimpl;
-                case BinaryLogicOpKind.ConverseImplication: return cimpl;
-                case BinaryLogicOpKind.ConverseNonimplication: return cnonimpl;
+                case BinaryBitLogicKind.True: return @true;
+                case BinaryBitLogicKind.False: return @false;
+                case BinaryBitLogicKind.And: return and;
+                case BinaryBitLogicKind.Nand: return nand;
+                case BinaryBitLogicKind.Or: return or;
+                case BinaryBitLogicKind.Nor: return nor;
+                case BinaryBitLogicKind.XOr: return xor;
+                case BinaryBitLogicKind.Xnor: return xnor;
+                case BinaryBitLogicKind.LeftProject: return left;
+                case BinaryBitLogicKind.RightProject: return right;
+                case BinaryBitLogicKind.LeftNot: return lnot;
+                case BinaryBitLogicKind.RightNot: return rnot;
+                case BinaryBitLogicKind.Implication: return impl;
+                case BinaryBitLogicKind.Nonimplication: return nonimpl;
+                case BinaryBitLogicKind.ConverseImplication: return cimpl;
+                case BinaryBitLogicKind.ConverseNonimplication: return cnonimpl;
                 default: return dne<bit>(kind);
             }
         }
@@ -153,7 +153,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
-        public static bit eval(TernaryOpKind kind, bit a, bit b, bit c)
+        public static bit eval(TernaryBitLogicKind kind, bit a, bit b, bit c)
         {
             switch(kind)
             {
@@ -265,7 +265,7 @@ namespace Z0.Logix
         /// Returns a kind-indentified ternary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static TernaryOp<bit> lookup(TernaryOpKind kind)
+        public static TernaryOp<bit> lookup(TernaryBitLogicKind kind)
         {
             switch(kind)
             {

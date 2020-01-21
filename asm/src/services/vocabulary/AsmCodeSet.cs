@@ -22,7 +22,7 @@ namespace Z0
             this.Cil = cil;
             this.Encoded = AsmCode.Define(id, instructions.Label,instructions.Encoded);   
             var count = instructions.InstructionCount;
-            this.Location = AddressSegment.Define(instructions[0].IP, instructions[count - 1].IP + (ulong)instructions[count - 1].ByteLength);
+            this.Location = MemoryRange.Define(instructions[0].IP, instructions[count - 1].IP + (ulong)instructions[count - 1].ByteLength);
          
         }
 
@@ -32,7 +32,7 @@ namespace Z0
 
         public AsmCode Encoded {get;}
 
-        public AddressSegment Location {get;}
+        public MemoryRange Location {get;}
 
         public InstructionBlock Decoded {get;}
 

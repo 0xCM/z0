@@ -70,17 +70,17 @@ namespace Z0
             where T : unmanaged
                 => src.ReadOnly().FormatHex(bracket, sep, specifier);
 
-        public static string FormatSmallHex(this byte src)
-            => src.ToString("x4");
+        public static string FormatSmallHex(this ulong src, bool postspec = false)
+            => src.ToString("x4") + (postspec ? "h" : string.Empty);
 
-        public static string FormatSmallHex(this ulong src)
-            => src.ToString("x4");
+        public static string FormatSmallHex(this byte src, bool postspec = false)
+            => ((ulong)src).FormatSmallHex(postspec);
 
-        public static string FormatSmallHex(this uint src)
-            => src.ToString("x4");
+        public static string FormatSmallHex(this uint src, bool postspec = false)
+            => ((ulong)src).FormatSmallHex(postspec);
 
-        public static string FormatSmallHex(this ushort src)
-            => src.ToString("x4");
+        public static string FormatSmallHex(this ushort src, bool postspec = false)
+            => ((ulong)src).FormatSmallHex(postspec);
 
         public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true, int? segwidth = null)

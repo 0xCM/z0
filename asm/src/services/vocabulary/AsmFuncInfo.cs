@@ -14,10 +14,10 @@ namespace Z0
     /// </summary>
     public class AsmFuncInfo
     {   
-        public static AsmFuncInfo Define(AddressSegment location, AsmCode code, AsmInstructionInfo[] instructions)
+        public static AsmFuncInfo Define(MemoryRange location, AsmCode code, AsmInstructionInfo[] instructions)
             => new AsmFuncInfo(location, code, instructions);
 
-        AsmFuncInfo(AddressSegment address, AsmCode code, AsmInstructionInfo[] instructions)
+        AsmFuncInfo(MemoryRange address, AsmCode code, AsmInstructionInfo[] instructions)
         {
             this.Id = code.Id;
             this.Name = code.Id;
@@ -51,7 +51,7 @@ namespace Z0
         /// <summary>
         /// The memory location from which the code was taken
         /// </summary>
-        public AddressSegment Location {get;}
+        public MemoryRange Location {get;}
 
         /// <summary>
         /// The encoded instructions

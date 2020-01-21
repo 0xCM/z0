@@ -23,7 +23,7 @@ namespace Z0
         {
             var name = "xor";
             var kind = u8;
-            var m0 = Moniker.define(name,kind);
+            var m0 = OpIdentity.define(name,kind);
             Claim.eq("xor_8u", m0.Text);
             Claim.eq(name, m0.Name);
             Claim.eq(8,m0.PrimalWidth);

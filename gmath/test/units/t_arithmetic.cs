@@ -279,12 +279,12 @@ namespace Z0
         {
             const string name = "abs";
 
-            abs_check(unary(math.abs, name, z8i));
-            abs_check(unary(math.abs, name, z16i));
-            abs_check(unary(math.abs, name, z32i));
-            abs_check(unary(math.abs, name, z64i));
-            abs_check(unary(fmath.abs, name, z32f));
-            abs_check(unary(fmath.abs, name, z64f));
+            abs_check(unary(Math.Abs, name, z8i));
+            abs_check(unary(Math.Abs, name, z16i));
+            abs_check(unary(Math.Abs, name, z32i));
+            abs_check(unary(Math.Abs, name, z64i));
+            abs_check(unary(MathF.Abs, name, z32f));
+            abs_check(unary(Math.Abs, name, z64f));
         }
 
         [MethodImpl(Inline)]

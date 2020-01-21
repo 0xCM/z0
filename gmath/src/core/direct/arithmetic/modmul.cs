@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="m">The modulus</param>
         [MethodImpl(Inline), Op]
         public static sbyte modmul(sbyte a, sbyte b, sbyte m)
-            => (sbyte)((a*b) % m);
+            => (sbyte)modmul((long)a, (long)b, (long)m);
 
         /// <summary>
         /// Computes z := (a*b) mod m
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="m">The modulus</param>
         [MethodImpl(Inline), Op]
         public static byte modmul(byte a, byte b, byte m)
-            => (byte)((a*b) % m);
+            => (byte)modmul((ulong)a, (ulong)b, (ulong)m);
 
         /// <summary>
         /// Computes z := (a*b) mod m
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="m">The modulus</param>
         [MethodImpl(Inline), Op]
         public static short modmul(short a, short b, short m)
-            => (short)((a*b) % m);
+            => (short)modmul((long)a, (long)b, (long)m);
 
         /// <summary>
         /// Computes z := (a*b) mod m
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="m">The modulus</param>
         [MethodImpl(Inline), Op]
         public static ushort modmul(ushort a, ushort b, ushort m)
-            => (ushort)((a*b) % m);
+            => (ushort)modmul((ulong)a, (ulong)b, (ulong)m);
 
         /// <summary>
         /// Computes z := (a*b) mod m
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="m">The modulus</param>
         [MethodImpl(Inline), Op]
         public static int modmul(int a, int b, int m)
-            => (a*b) % m;
+            => (int)modmul((long)a, (long)b, (long)m);
 
         /// <summary>
         /// Computes z := (a*b) mod m
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="m">The modulus</param>
         [MethodImpl(Inline), Op]
         public static uint modmul(uint a, uint b, uint m)
-            => (a*b) % m;
+            => (uint)modmul((ulong)a, (ulong)b, (ulong)m);
 
         /// <summary>
         /// Computes z := (a*b) mod m

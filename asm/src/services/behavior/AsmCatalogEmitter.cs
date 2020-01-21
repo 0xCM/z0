@@ -31,14 +31,14 @@ namespace Z0
         static string ImmSubject
             => "_imm";
 
-        void EmitUnaryImmResolutions(FastDirectInfo op, AsmArchive archive)
+        void EmitUnaryImmResolutions(DirectOpInfo op, AsmArchive archive)
         {
             print(EmittingImmResolutions(op));                        
             var resolutions = AsmImmCapture.unary(op.Method, op.Id, new byte[]{5,9,13});
             archive.Save(resolutions);
         }   
 
-        void EmitUnaryImmResolutions(FastGenericInfo op, AsmArchive archive)
+        void EmitUnaryImmResolutions(GenericOpInfo op, AsmArchive archive)
         {
             print(EmittingImmResolutions(op));
             foreach(var closure in op.Closures())
@@ -48,7 +48,7 @@ namespace Z0
             }
         }
 
-        void Emit(FastGenericInfo op, AsmArchive archive)
+        void Emit(GenericOpInfo op, AsmArchive archive)
         {
             var closures = op.Closures().ToArray();
             
@@ -64,7 +64,7 @@ namespace Z0
             }
         }
 
-        void Emit(FastDirectInfo op, AsmArchive archive)
+        void Emit(DirectOpInfo op, AsmArchive archive)
         {                        
             print(Emitting(op));
             AsmDecoder.decode(op.Id, op.Method, ClrMetadata).OnSome(x => archive.Save(x));
@@ -84,7 +84,7 @@ namespace Z0
             var fastops = host.FastOpGenericMethods();
             foreach(var op in fastops)
             {
-                if(op.RequiresImmediate)
+                if(op.RequiresImmediate())
                 {
                     if(op.Method.IsUnaryImmVectorOp())
                         EmitUnaryImmResolutions(op,immArchive);
@@ -108,7 +108,7 @@ namespace Z0
             var fastops = host.FastOpDirect();            
             foreach(var op in fastops)
             {
-                if(op.RequiresImmediate)
+                if(op.RequiresImmediate())
                 {
                     if(op.Method.IsUnaryImmVectorOp())
                         EmitUnaryImmResolutions(op, immArchive);

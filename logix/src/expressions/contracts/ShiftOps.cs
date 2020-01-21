@@ -24,7 +24,7 @@ namespace Z0.Logix
         IExpr<T> Subject {get;}
 
 
-        IExpr<int> Offset {get;}
+        IExpr<byte> Offset {get;}
     }
 
 }

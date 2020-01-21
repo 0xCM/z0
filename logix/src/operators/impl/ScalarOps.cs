@@ -8,7 +8,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
 
     using static zfunc;    
-    using static TernaryOpKind;
+    using static TernaryBitLogicKind;
     using static As;
 
     public static class ScalarOps
@@ -214,24 +214,24 @@ namespace Z0.Logix
                 => gmath.eq(a,b);
 
         [MethodImpl(Inline)]
-        public static T sll<T>(T a, int offset)
+        public static T sll<T>(T a, byte count)
             where T : unmanaged
-                => gmath.sll(a,(byte)offset);
+                => gmath.sll(a, count);
 
         [MethodImpl(Inline)]
-        public static T srl<T>(T a, int offset)
+        public static T srl<T>(T a, byte count)
             where T : unmanaged
-                => gmath.srl(a,(byte)offset);
+                => gmath.srl(a, count);
 
         [MethodImpl(Inline)]
-        public static T rotl<T>(T a, int offset)
+        public static T rotl<T>(T a, byte count)
             where T : unmanaged
-                => gbits.rotl(a,(byte)offset);
+                => gbits.rotl(a, count);
 
         [MethodImpl(Inline)]
-        public static T rotr<T>(T a, int offset)
+        public static T rotr<T>(T a, byte count)
             where T : unmanaged
-                => gbits.rotr(a,(byte)offset);
+                => gbits.rotr(a, count);
 
         [MethodImpl(Inline)]
         public static T add<T>(T a, T b)
@@ -273,582 +273,582 @@ namespace Z0.Logix
             where T : unmanaged
                 => gmath.select(a,b,c);
 
-        [MethodImpl(Inline),TernaryOp(X00)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X00)]
         public static T f00<T>(T a, T b, T c)
             where T : unmanaged
                 => default;
 
         // a nor (b or c)
-        [MethodImpl(Inline),TernaryOp(X01)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X01)]
         public static T f01<T>(T a, T b, T c)
             where T : unmanaged
             => nor(a, or(b,c));
 
         // c and (b nor a)
-        [MethodImpl(Inline),TernaryOp(X02)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X02)]
         public static T f02<T>(T a, T b, T c)
             where T : unmanaged
                 => and(c, nor(b,a));
  
          // b nor a
-        [MethodImpl(Inline),TernaryOp(X03)]
+        [MethodImpl(Inline), TernaryBitLogicOp(X03)]
         public static T f03<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(b,a);
 
         // b and (a nor c)
-        [MethodImpl(Inline),TernaryOp(X04)]
+        [MethodImpl(Inline), TernaryBitLogicOp(X04)]
         public static T f04<T>(T a, T b, T c)
             where T : unmanaged
                 => and(b, nor(a,c));
 
         // c nor a
-        [MethodImpl(Inline),TernaryOp(X05)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X05)]
         public static T f05<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(c,a);
 
         // not a and (b xor c)
-        [MethodImpl(Inline),TernaryOp(X06)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X06)]
         public static T f06<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(a), xor(b,c));
 
         // not a and (b xor c)
-        [MethodImpl(Inline),TernaryOp(X07)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X07)]
         public static T f07<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(a, and(b,c));
 
         // (not a and b) and c
-        [MethodImpl(Inline),TernaryOp(X08)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X08)]
         public static T f08<T>(T a, T b, T c)
             where T : unmanaged
                 => and(and(not(a),b), c);
 
         // a nor (b xor c)
-        [MethodImpl(Inline),TernaryOp(X09)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X09)]
         public static T f09<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(a, xor(b,c));
 
         // c and (not a)
-        [MethodImpl(Inline),TernaryOp(X0A)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X0A)]
         public static T f0a<T>(T a, T b, T c)
             where T : unmanaged
                 => and(c, not(a));
 
         // not a and ((b xor 1) or c)
-        [MethodImpl(Inline),TernaryOp(X0B)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X0B)]
         public static T f0b<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(a), or(xor1(b),  c));   
 
         // b and (not a)
-        [MethodImpl(Inline),TernaryOp(X0C)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X0C)]
         public static T f0c<T>(T a, T b, T c)
             where T : unmanaged
                 => and(b, not(a));
 
         // not a and (b or (c xor 1))
-        [MethodImpl(Inline),TernaryOp(X0D)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X0D)]
         public static T f0d<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(a), or(b, xor1(c)));
 
         // not a and (b or c)
-        [MethodImpl(Inline),TernaryOp(X0E)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X0E)]
         public static T f0e<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(a),or(b,c));
 
         // not a
-        [MethodImpl(Inline),TernaryOp(X0F)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X0F)]
         public static T f0f<T>(T a, T b, T c)
             where T : unmanaged
                 => not(a);
 
         // a and (b nor c)
-        [MethodImpl(Inline),TernaryOp(X10)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X10)]
         public static T f10<T>(T a, T b, T c)
             where T : unmanaged
                 => and(a, nor(b, c));
         
         // c nor b
-        [MethodImpl(Inline),TernaryOp(X11)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X11)]
         public static T f11<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(c,b);
         
         // not b and (a xor c) 
-        [MethodImpl(Inline),TernaryOp(X12)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X12)]
         public static T f12<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(b), xor(a,c));
 
         // b nor (a and c)
-        [MethodImpl(Inline),TernaryOp(X13)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X13)]
         public static T f13<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(b, and(a,c));
 
         // not c and (a xor b)
-        [MethodImpl(Inline),TernaryOp(X14)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X14)]
         public static T f14<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(c), xor(a,b));
 
         // c nor (b and a)
-        [MethodImpl(Inline),TernaryOp(X15)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X15)]
         public static T f15<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(c, and(a,b));
 
         // a ? (b nor c) : (b xor c)
-        [MethodImpl(Inline),TernaryOp(X16)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X16)]
         public static T f16<T>(T a, T b, T c)
             where T : unmanaged
                 => select(a, nor(b,c), xor(b,c));
 
         // not(a ? (b or c) : (b and c))
-        [MethodImpl(Inline),TernaryOp(X17)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X17)]
         public static T f17<T>(T a, T b, T c)
             where T : unmanaged
                 => not(select(a, or(b,c), and(b,c)));
 
         // (a xor b) and (a xor c)
-        [MethodImpl(Inline),TernaryOp(X18)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X18)]
         public static T f18<T>(T a, T b, T c)
             where T : unmanaged
                 => and(xor(a,b), xor(a,c));
 
         // not(((B xor C) xor (A and (B and C))))
-        [MethodImpl(Inline),TernaryOp(X19)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X19)]
         public static T f19<T>(T a, T b, T c)
             where T : unmanaged
                 => not(xor(xor(b,c), and(a, and(b,c))));
 
         // not ((A and B)) and (A xor C)
-        [MethodImpl(Inline),TernaryOp(X1A)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X1A)]
         public static T f1a<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(and(a,b)), xor(a,c));
 
         // c ? not a : not b
-        [MethodImpl(Inline),TernaryOp(X1B)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X1B)]
         public static T f1b<T>(T a, T b, T c)
             where T : unmanaged
                 => select(c, not(a), not(b));
 
         //not ((a and c)) and (a xor b)
-        [MethodImpl(Inline),TernaryOp(X1C)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X1C)]
         public static T f1c<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(and(a,c)), xor(a,b));
 
         //b ? (not a) : (not c)
-        [MethodImpl(Inline),TernaryOp(X1D)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X1D)]
         public static T f1d<T>(T a, T b, T c)
             where T : unmanaged
                 => select(b, not(a), not(c));
 
         //a xor (b or c)
-        [MethodImpl(Inline),TernaryOp(X1E)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X1E)]
         public static T f1e<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(a, or(b,c));
 
         // a nand (b or c)
-        [MethodImpl(Inline),TernaryOp(X1F)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X1F)]
         public static T f1f<T>(T a, T b, T c)
             where T : unmanaged
                 => nand(a, or(b,c));
 
         //((not b) and a) and C
-        [MethodImpl(Inline),TernaryOp(X20)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X20)]
         public static T f20<T>(T a, T b, T c)
             where T : unmanaged
                 => and(and(not(b),a),c);
 
         // b nor (a xor c)
-        [MethodImpl(Inline),TernaryOp(X21)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X21)]
         public static T f21<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(b, xor(a,c));
 
         // c and (not b)
-        [MethodImpl(Inline),TernaryOp(X22)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X22)]
         public static T f22<T>(T a, T b, T c)
             where T : unmanaged
                 => cnonimpl(c,b);
 
         // not (B) and ((A xor 1) or C)
-        [MethodImpl(Inline),TernaryOp(X23)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X23)]
         public static T f23<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(b), or(not(a),c));
 
         // (a xor b) and (b xor c)
-        [MethodImpl(Inline),TernaryOp(X24)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X24)]
         public static T f24<T>(T a, T b, T c)
             where T : unmanaged
                 => and(xor(a,b), xor(b,c));
 
         // (not ((A and B)) and (A xor (C xor 1)))
-        [MethodImpl(Inline), TernaryOp(X25)]
+        [MethodImpl(Inline), TernaryBitLogicOp(X25)]
         public static T f25<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(and(a,b)), xor(a, not(c)));
 
         // not ((A and B)) and (B xor C)
-        [MethodImpl(Inline), TernaryOp(X26)]
+        [MethodImpl(Inline), TernaryBitLogicOp(X26)]
         public static T f26<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(and(a,b)),xor(b,c));
 
         //C ? not (B) : not (A)
-        [MethodImpl(Inline), TernaryOp(X27)]
+        [MethodImpl(Inline), TernaryBitLogicOp(X27)]
         public static T f27<T>(T a, T b, T c)
             where T : unmanaged
                 => select(c,not(b), not(a));
 
         //C and (B xor A)
-        [MethodImpl(Inline), TernaryOp(X28)]
+        [MethodImpl(Inline), TernaryBitLogicOp(X28)]
         public static T f28<T>(T a, T b, T c)
             where T : unmanaged
                 => and(c,xor(b,a));
 
         // C ? (B xor A) : (B nor A)
-        [MethodImpl(Inline), TernaryOp(X29)]
+        [MethodImpl(Inline), TernaryBitLogicOp(X29)]
         public static T f29<T>(T a, T b, T c)
             where T : unmanaged
                 => select(c, xor(b,a),nor(b,a));
 
         // C and (B nand A)
-        [MethodImpl(Inline), TernaryOp(X2A)]
+        [MethodImpl(Inline), TernaryBitLogicOp(X2A)]
         public static T f2a<T>(T a, T b, T c)
             where T : unmanaged
                 => and(c,nand(b,a));
 
         // C ? (B nand A) : (B nor A)
-        [MethodImpl(Inline), TernaryOp(X2B)]
+        [MethodImpl(Inline), TernaryBitLogicOp(X2B)]
         public static T f2b<T>(T a, T b, T c)
             where T : unmanaged
                 => select(c,nand(b,a), nor(b,a));
 
         // (B or C) and (A xor B)
-        [MethodImpl(Inline), TernaryOp(X2C)]
+        [MethodImpl(Inline), TernaryBitLogicOp(X2C)]
         public static T f2c<T>(T a, T b, T c)
             where T : unmanaged
                 => and(or(b,c), xor(a,b));
 
         // A xor (B or not (C))
-        [MethodImpl(Inline), TernaryOp(X2D)]
+        [MethodImpl(Inline), TernaryBitLogicOp(X2D)]
         public static T f2d<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(a, or(b, not(c)));
 
         // (B or C) xor (A and B)
-        [MethodImpl(Inline), TernaryOp(X2E)]
+        [MethodImpl(Inline), TernaryBitLogicOp(X2E)]
         public static T f2e<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(or(b,c),and(a,b));
 
         // not (A) or (not (B) and C)
-        [MethodImpl(Inline), TernaryOp(X2F)]
+        [MethodImpl(Inline), TernaryBitLogicOp(X2F)]
         public static T f2f<T>(T a, T b, T c)
             where T : unmanaged
                 => or(not(a),(and(not(b),c)));
 
         // a and not(b)
-        [MethodImpl(Inline),TernaryOp(X30)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X30)]
         public static T f30<T>(T a, T b, T c)
             where T : unmanaged
                 => cnonimpl(a,b);
 
         // not (B) and (A or (C xor 1))
-        [MethodImpl(Inline),TernaryOp(X31)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X31)]
         public static T f31<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(b), or(a,not(c)));
 
         //not (B) and (A or C)
-        [MethodImpl(Inline),TernaryOp(X32)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X32)]
         public static T f32<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(b),or(a,c));
 
         // not (B)
-        [MethodImpl(Inline),TernaryOp(X33)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X33)]
         public static T f33<T>(T a, T b, T c)
             where T : unmanaged
                 => not(b);
 
         // not ((B and C)) and (A xor B)
-        [MethodImpl(Inline),TernaryOp(X34)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X34)]
         public static T f34<T>(T a, T b, T c)
             where T : unmanaged
             => and(not(and(b,c)), xor(a,b));
 
         // A ? not (B) : not (C)
-        [MethodImpl(Inline),TernaryOp(X35)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X35)]
         public static T f35<T>(T a, T b, T c)
             where T : unmanaged
             => select(a,not(b),not(c));
 
         // B xor (A or C)
-        [MethodImpl(Inline),TernaryOp(X36)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X36)]
         public static T f36<T>(T a, T b, T c)
             where T : unmanaged
             => xor(b,or(a,c));
 
         // B nand (A or C)
-        [MethodImpl(Inline),TernaryOp(X37)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X37)]
         public static T f37<T>(T a, T b, T c)
             where T : unmanaged
             => nand(b,or(a,c));
 
         // (A or C) and (A xor B)
-        [MethodImpl(Inline),TernaryOp(X38)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X38)]
         public static T f38<T>(T a, T b, T c)
             where T : unmanaged
             => and(or(a,c), xor(a,b));
 
         // B xor (A or (C xor 1))
-        [MethodImpl(Inline),TernaryOp(X39)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X39)]
         public static T f39<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(b, or(a, not(c)));
 
         // A ? not (B) : C
-        [MethodImpl(Inline),TernaryOp(X3A)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X3A)]
         public static T f3a<T>(T a, T b, T c)
             where T : unmanaged
             => select(a, not(b), c);
 
         // (not (A) and C) or (B xor 1)
-        [MethodImpl(Inline),TernaryOp(X3B)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X3B)]
         public static T f3b<T>(T a, T b, T c)
             where T : unmanaged
             => or(and(not(a),c),xor1(b));
 
         // B xor A
-        [MethodImpl(Inline),TernaryOp(X3C)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X3C)]
         public static T f3c<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(b,a);
 
         // ((A xor B) or (A nor C))
-        [MethodImpl(Inline),TernaryOp(X3D)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X3D)]
         public static T f3d<T>(T a, T b, T c)
             where T : unmanaged
             => or(xor(b,a),nor(a,c));
 
         // (not (A) and C) or (A xor B)
-        [MethodImpl(Inline),TernaryOp(X3E)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X3E)]
         public static T f3e<T>(T a, T b, T c)
             where T : unmanaged
                 => or(and(not(a),c),xor(a,b));
 
         // B nand A
-        [MethodImpl(Inline),TernaryOp(X3F)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X3F)]
         public static T f3f<T>(T a, T b, T c)
             where T : unmanaged
             => nand(b,a);
 
         // (not (C) and A) and B
-        [MethodImpl(Inline),TernaryOp(X40)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X40)]
         public static T f40<T>(T a, T b, T c)
             where T : unmanaged
                 => and(and(not(c),a),b);
 
         // C nor (B xor A)
-        [MethodImpl(Inline),TernaryOp(X41)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X41)]
         public static T f41<T>(T a, T b, T c)
             where T : unmanaged
             => nor(c,xor(b,a));
 
         // (A xor C) and (B xor C)
-        [MethodImpl(Inline),TernaryOp(X42)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X42)]
         public static T f42<T>(T a, T b, T c)
             where T : unmanaged
                 => and(xor(a,c),xor(b,c));
 
         // not ((A and C)) and (A xor (B xor 1))
-        [MethodImpl(Inline),TernaryOp(X43)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X43)]
         public static T f43<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(and(a,c)), xor(a,xor1(b)));
 
         // B and not (C)
-        [MethodImpl(Inline),TernaryOp(X44)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X44)]
         public static T f44<T>(T a, T b, T c)
             where T : unmanaged
                 => cnonimpl(b,c);
 
         // not (C) and ((A xor 1) or B)
-        [MethodImpl(Inline),TernaryOp(X45)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X45)]
         public static T f45<T>(T a, T b, T c)
             where T : unmanaged
             => and(not(c), or(xor1(a), b));
 
         // not ((A and C)) and (B xor C)
-        [MethodImpl(Inline),TernaryOp(X46)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X46)]
         public static T f46<T>(T a, T b, T c)
             where T : unmanaged
             => and(not(and(a,c)),xor(b,c));
 
         // B ? not (C) : not (A)
-        [MethodImpl(Inline),TernaryOp(X47)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X47)]
         public static T f47<T>(T a, T b, T c)
             where T : unmanaged
             => select(b,not(c),not(a));
 
         // B and (A xor C)
-        [MethodImpl(Inline),TernaryOp(X48)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X48)]
         public static T f48<T>(T a, T b, T c)
             where T : unmanaged
             => and(b,xor(a,c));
 
         // B ? (A xor C) : (A nor C)
-        [MethodImpl(Inline),TernaryOp(X49)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X49)]
         public static T f49<T>(T a, T b, T c)
             where T : unmanaged
             => select(b,xor(a,c),nor(a,c));
 
         // (B or C) and (A xor C)
-        [MethodImpl(Inline),TernaryOp(X4A)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X4A)]
         public static T f4a<T>(T a, T b, T c)
             where T : unmanaged
                 => and(or(b,c), xor(a,c));
 
          // A xor (not (B) or C)
-        [MethodImpl(Inline),TernaryOp(X4B)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X4B)]
         public static T f4b<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(a, or(not(b), c));
 
         // B and (A nand C)
-        [MethodImpl(Inline),TernaryOp(X4C)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X4C)]
         public static T f4c<T>(T a, T b, T c)
             where T : unmanaged
                 => and(b, nand(a,c));
 
         // B ? (A nand C) : (A nor C)
-        [MethodImpl(Inline),TernaryOp(X4D)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X4D)]
         public static T f4d<T>(T a, T b, T c)
             where T : unmanaged
                 => select(b, nand(a,c),nor(a,c));
 
         // C ? not (A) : B
-        [MethodImpl(Inline),TernaryOp(X4E)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X4E)]
         public static T f4e<T>(T a, T b, T c)
             where T : unmanaged
                 => select(c, not(a), b);
 
         // not (A) or (B and not (C))
-        [MethodImpl(Inline),TernaryOp(X4F)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X4F)]
         public static T f4f<T>(T a, T b, T c)
             where T : unmanaged
                 => or(not(a),cnonimpl(b,c));
 
         // A and not (C)
-        [MethodImpl(Inline),TernaryOp(X50)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X50)]
         public static T f50<T>(T a, T b, T c)
             where T : unmanaged
                 => cnonimpl(a,c);
 
         // not (C) and (A or (B xor 1))
-        [MethodImpl(Inline),TernaryOp(X51)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X51)]
         public static T f51<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(c),or(a,xor1(b)));
 
         // not ((B and C)) and (A xor C)
-        [MethodImpl(Inline),TernaryOp(X52)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X52)]
         public static T f52<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(and(b,c)),xor(a,c));
 
         // A ? not (C) : not (B)
-        [MethodImpl(Inline),TernaryOp(X53)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X53)]
         public static T f53<T>(T a, T b, T c)
             where T : unmanaged
                 => select(a, not(c), not(b));
 
         // not (C) and (A or B)
-        [MethodImpl(Inline),TernaryOp(X54)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X54)]
         public static T f54<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(c), or(a,b));
 
         // not (C)
-        [MethodImpl(Inline),TernaryOp(X55)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X55)]
         public static T f55<T>(T a, T b, T c)
             where T : unmanaged
                 => not(c);
 
         // C xor (B or A)
-        [MethodImpl(Inline),TernaryOp(X56)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X56)]
         public static T f56<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(c,or(b,a));
 
         // C nand (B or A)
-        [MethodImpl(Inline),TernaryOp(X57)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X57)]
         public static T f57<T>(T a, T b, T c)
             where T : unmanaged
                 => nand(c,or(b,a));
 
         // (A or B) and (A xor C)
-        [MethodImpl(Inline),TernaryOp(X58)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X58)]
         public static T f58<T>(T a, T b, T c)
             where T : unmanaged
                 => and(or(a,b),xor(a,c));
 
         // C xor (A or (B xor 1))
-        [MethodImpl(Inline), TernaryOp(X59)]
+        [MethodImpl(Inline), TernaryBitLogicOp(X59)]
         public static T f59<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(c, or(a, not(b)));
 
         // C xor A
-        [MethodImpl(Inline), TernaryOp(X5A)]
+        [MethodImpl(Inline), TernaryBitLogicOp(X5A)]
         public static T f5a<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(c,a);
 
         //((A xor C) or ((A or B) xor 1))
-        [MethodImpl(Inline),TernaryOp(X5B)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X5B)]
         public static T f5b<T>(T a, T b, T c)
             where T : unmanaged
                 => or(xor(a,c), xor(or(a,b),ones<T>()));
 
         //(A ? not (C) : B)
-        [MethodImpl(Inline),TernaryOp(X5C)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X5C)]
         public static T f5c<T>(T a, T b, T c)
             where T : unmanaged
                 => select(a,not(c), b);
 
         // not (C) or (not (A) and B)
-        [MethodImpl(Inline),TernaryOp(X5D)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X5D)]
         public static T f5d<T>(T a, T b, T c)
             where T : unmanaged
                 => or(not(c), and(not(a), b));
 
         // (not (C) and B) or (A xor C)
-        [MethodImpl(Inline),TernaryOp(X5E)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X5E)]
         public static T f5e<T>(T a, T b, T c)
             where T : unmanaged
                 => or(and(not(c),b),(xor(a,c)));
 
-        [MethodImpl(Inline),TernaryOp(X5F)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X5F)]
         public static T f5f<T>(T a, T b, T c)
             where T : unmanaged
                 => nand(c,a);
 
         // a ? (b xnor c) : (b nand c)
-        [MethodImpl(Inline),TernaryOp(X97)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X97)]
         public static T f97<T>(T a, T b, T c)
             where T : unmanaged
                 => select(c, xnor(b,c), nand(b,c));

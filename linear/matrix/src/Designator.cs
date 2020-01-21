@@ -4,13 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
 {
-
-
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
     public sealed class Matrix : AssemblyDesignator<Matrix>
     {
+        public override AssemblyId Id 
+            => AssemblyId.Matrix;            
 
     }
 

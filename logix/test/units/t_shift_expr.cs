@@ -144,7 +144,7 @@ namespace Z0.Logix
             where T : unmanaged
         {
             var v1 = variable<T>(1);
-            var offset = 6;
+            byte offset = 6;
             var expr = shift(op,v1,offset);
             
             for(var i=0; i< RepCount; i++)
@@ -169,7 +169,7 @@ namespace Z0.Logix
                 var a = Random.CpuVector<T>(n256);
                 v1.Set(a);   
                 Vector256<T> actual = LogicEngine.eval(expr);
-                Vector256<T> expect = CpuOpApi.eval(op,a,offset);
+                Vector256<T> expect = VecotrizedOpApi.eval(op,a,offset);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -186,7 +186,7 @@ namespace Z0.Logix
                 var a = Random.CpuVector<T>(n128);
                 v1.Set(a);   
                 Vector128<T> actual = LogicEngine.eval(expr);
-                Vector128<T> expect = CpuOpApi.eval(op,a,offset);
+                Vector128<T> expect = VecotrizedOpApi.eval(op,a,offset);
                 Claim.eq(actual,expect);                            
             }
         }

@@ -24,35 +24,35 @@ namespace Z0
     
         FolderPath TargetFolder {get;}
         
-        public void Save(FastDirectInfo op)
-            => Save(op.Method.FastOp().NativeData);                
+        public void Save(DirectOpInfo op)
+            => Save(op.Method.FastOp().CaptureNative(new byte[NativeReader.DefaultBufferLen]));
 
-        public void Save(FastGenericInfo op)
+        public void Save(GenericOpInfo op)
         {
             foreach(var k in op.Kinds)
             {
                 var method = op.Method.MakeGenericMethod(k.ToPrimalType());
-                Save(method.FastOp().NativeData);
+                Save(method.FastOp().CaptureNative(new byte[NativeReader.DefaultBufferLen]));
             }
         }
 
         public void Save(MethodDisassembly src)
         {
             Paths.AsmHexPath(TargetFolder, src.Id).WriteText(src.AsmCode.Format());
-            Paths.AsmDetailPath(TargetFolder, src.Id).WriteText(AsmFunction.from(src).FormatDetail());
+            Paths.AsmDetailPath(TargetFolder, src.Id).WriteText(AsmFunction.define(src).FormatDetail());
             src.CilFunction.OnSome(cil => Paths.CilPath(TargetFolder, src.Id).WriteText(cil.Format()));
         }
 
         public void Save(AsmCodeSet src)
         {
             Paths.AsmHexPath(TargetFolder, src.Id).WriteText(src.Encoded.Format());
-            Paths.AsmDetailPath(TargetFolder, src.Id).WriteText(AsmFunction.from(src).FormatDetail());
+            Paths.AsmDetailPath(TargetFolder, src.Id).WriteText(AsmFunction.define(src).FormatDetail());
         }
 
         public void Save(INativeMemberData src)
         {
             Paths.AsmHexPath(TargetFolder, src.Id).WriteText(src.Code.Format());
-            Paths.AsmDetailPath(TargetFolder, src.Id).WriteText(AsmFunction.decode(src).FormatDetail());
+            Paths.AsmDetailPath(TargetFolder, src.Id).WriteText(AsmFunction.define(src).FormatDetail());
         }
 
         public void Save(IEnumerable<AsmCodeSet> codesets)

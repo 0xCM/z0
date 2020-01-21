@@ -14,17 +14,16 @@ namespace Z0
     /// </summary>
     public class AsmInstructionInfo
     {
-        public static AsmInstructionInfo Define(ushort Offset, string Display, string Instruction, string Encoding, AsmOperandInfo[] Operands, byte[] Encoded)
-            => new AsmInstructionInfo(Offset, Display, Instruction, Encoding, Operands, Encoded);
+        public static AsmInstructionInfo Define(ushort offset, string content, AsmInstructionSpec spec, AsmOperandInfo[] operands, byte[] encoded)
+            => new AsmInstructionInfo(offset, content, spec, operands, encoded);
         
-        AsmInstructionInfo(ushort Offset, string Display, string Instruction, string Encoding, AsmOperandInfo[] Operands, byte[] Encoded)
+        AsmInstructionInfo(ushort offset, string content, AsmInstructionSpec spec, AsmOperandInfo[] operands, byte[] encoded)
         {
-            this.Offset = Offset;
-            this.Display = Display;
-            this.Instruction = Instruction;
-            this.Encoding = Encoding;
-            this.Operands = Operands;
-            this.Encoded = Encoded;
+            this.Offset = offset;
+            this.AsmContent = content;
+            this.Operands = operands;
+            this.Encoded = encoded;
+            this.Spec = spec;
         }
         
         /// <summary>
@@ -35,28 +34,23 @@ namespace Z0
         /// <summary>
         /// The instruction content, suitable for display
         /// </summary>
-        public string Display {get;}
-
+        public string AsmContent {get;}
         
         /// <summary>
-        /// The full instruction string
+        /// The instruction string paired with the op code
         /// </summary>
-        public string Instruction {get;}
+        public AsmInstructionSpec Spec {get;}
 
         /// <summary>
-        /// The instruction encoding
+        /// Describes the instruction operands
         /// </summary>
-        public string Encoding {get;}
+        public AsmOperandInfo[] Operands {get;}
 
         /// <summary>
         /// The encoded bytes
         /// </summary>
         public byte[] Encoded {get;}
 
-        /// <summary>
-        /// Describes the instruction operands
-        /// </summary>
-        public AsmOperandInfo[] Operands {get;}
 
     }
 }

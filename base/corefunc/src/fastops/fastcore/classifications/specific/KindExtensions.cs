@@ -15,10 +15,10 @@ namespace Z0
     public static class KindExtensions
     {
        [MethodImpl(Inline)]
-        public static TernaryOpKind Next(this TernaryOpKind src)
-            => src != TernaryOpKind.XFF 
-                ? (TernaryOpKind)((uint)(src) + 1u)
-                : TernaryOpKind.X00;
+        public static TernaryBitLogicKind Next(this TernaryBitLogicKind src)
+            => src != TernaryBitLogicKind.XFF 
+                ? (TernaryBitLogicKind)((uint)(src) + 1u)
+                : TernaryBitLogicKind.X00;
         
         [MethodImpl(Inline)]
         public static bool IsOperator(this LogicExprKind kind)
@@ -29,11 +29,11 @@ namespace Z0
             => (uint)kind >= (uint)TypedExprKind.UnaryOperator;
 
         [MethodImpl(Inline)]
-        public static BinaryLogicOpKind ToLogical(this BinaryBitwiseOpKind kind)
-            => (BinaryLogicOpKind)kind;
+        public static BinaryBitLogicKind ToLogical(this BinaryBitwiseOpKind kind)
+            => (BinaryBitLogicKind)kind;
 
         [MethodImpl(Inline)]
-        public static BinaryBitwiseOpKind ToBitwise(this BinaryLogicOpKind kind)
+        public static BinaryBitwiseOpKind ToBitwise(this BinaryBitLogicKind kind)
             => (BinaryBitwiseOpKind)kind;
 
     }

@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using static zfunc;
 
-    class Catalog : FastOpCatalog<Catalog>
+    class Catalog : OpCatalog<Catalog>
     {
         public Catalog()
         {

@@ -101,7 +101,7 @@ namespace Z0
                 => $"{GetType().Name}/{moniker(root,w,t)}";
 
         protected static Moniker SubjectId(string opname, PrimalKind kind)
-            => Moniker.define($"{opname}_subject",kind);
+            => OpIdentity.define($"{opname}_subject",kind);
 
         protected static Moniker SubjectId<T>(string opname, T t = default)
             where T : unmanaged

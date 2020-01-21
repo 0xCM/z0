@@ -28,10 +28,10 @@ namespace Z0.Logix
         /// <summary>
         /// The magnitude of the shift
         /// </summary>
-        public IExpr<int> Offset {get;}
+        public IExpr<byte> Offset {get;}
 
         [MethodImpl(Inline)]
-        public ShiftOpSpec(ShiftOpKind op, IExpr<T> subject, IExpr<int> offset)
+        public ShiftOpSpec(ShiftOpKind op, IExpr<T> subject, IExpr<byte> offset)
         {
             this.OpKind = op;
             this.Subject = subject;

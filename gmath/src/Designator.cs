@@ -5,22 +5,13 @@
 namespace Z0.Designators
 {
     using System;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Collections.Generic;
 
-    using static zfunc;
-
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
-    public sealed class GMath : AssemblyDesignator<GMath>, ICatalogProvider
+    public sealed class GMath : AssemblyDesignator<GMath>
     {
-        public IOperationCatalog Catalog 
-            => GX.Catalog;
-
         public override AssemblyId Id 
             => AssemblyId.GMath;            
+
+        public override IOperationCatalog Catalog 
+            => new Catalog();
     }
 }

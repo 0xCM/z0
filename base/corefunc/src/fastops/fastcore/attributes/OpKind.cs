@@ -27,23 +27,20 @@ namespace Z0
 
         public override string ToString()
             => Name;
-
     }
 
-
-    public abstract class OpKindAttribute : Attribute
+    public abstract class OpKindAttribute : OpAttribute
     {
-        protected OpKindAttribute(uint id, string name)        
+        protected OpKindAttribute(uint id, string name)
+            : base(name)        
         {
             this.Id = id;
-            this.Name = name;
         }
 
         public abstract string KindName {get;}
         
         public uint Id {get;}
-
-        public string Name {get;}
+        
 
     }
 
@@ -64,6 +61,7 @@ namespace Z0
 
     }
 
+
     public class BinaryBitwiseOpAttribute : OpKindAttribute
     {
         static readonly string kindName = typeof(BinaryBitwiseOpAttribute).DisplayName();
@@ -80,35 +78,21 @@ namespace Z0
 
     }
 
-    public class TernaryOpAttribute : OpKindAttribute
-    {
-        static readonly string kindName = typeof(TernaryOpKind).DisplayName();
-        
-        public TernaryOpAttribute(TernaryOpKind kind)
-            : base( (uint)kind,kind.Format())
-        {
-            this.Kind = kind;
-        }
-
-        public TernaryOpKind Kind {get;}
-
-        public override string KindName => kindName;        
-    }
-
 
     public class BinaryLogicOpAttribute : OpKindAttribute
     {
-        static readonly string kindName = typeof(BinaryLogicOpKind).DisplayName();
+        static readonly string kindName = typeof(BinaryBitLogicKind).DisplayName();
 
-        public BinaryLogicOpAttribute(BinaryLogicOpKind kind)
+        public BinaryLogicOpAttribute(BinaryBitLogicKind kind)
             : base((uint)kind,kind.Format())
         {
             this.Kind = kind;
         }
 
-        public BinaryLogicOpKind Kind {get;}
+        public BinaryBitLogicKind Kind {get;}
 
-        public override string KindName => kindName;
+        public override string KindName 
+            => kindName;
 
     }
 

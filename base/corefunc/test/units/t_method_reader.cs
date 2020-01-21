@@ -26,9 +26,9 @@ namespace Z0
             {
                 var start = Random.Next(0ul, uint.MaxValue);
                 var end = Random.Next((ulong)uint.MaxValue, ulong.MaxValue);
-                var expect = AddressSegment.Define(start,end);
+                var expect = MemoryRange.Define(start,end);
                 var format = expect.Format();
-                var actual = AddressSegment.Parse(format).OnNone(() => Trace(format)).Require();
+                var actual = MemoryRange.Parse(format).OnNone(() => Trace(format)).Require();
                 Claim.eq(expect,actual);
             }
 

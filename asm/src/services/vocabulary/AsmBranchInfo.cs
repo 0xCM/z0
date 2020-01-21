@@ -14,27 +14,30 @@ namespace Z0
     /// </summary>
     public class AsmBranchInfo
     {
-        public static AsmBranchInfo Define(int size, ulong value, bool near)
-            => new AsmBranchInfo(size,value,near);
+        public static AsmBranchInfo Define(int size, ulong target, bool near, ulong baseaddress)
+            => new AsmBranchInfo(size,target,near, baseaddress);
         
-        AsmBranchInfo(int size, ulong value, bool near)
+        AsmBranchInfo(int size, ulong target, bool near, ulong baseaddress)
         {
             this.Size = size;
-            this.Target = value;
+            this.TargetAddress = target;
             this.Near = near;
+            this.BaseAddress = baseaddress;
         }
 
         public int Size {get;}
 
         public bool Near {get;}
         
-        public ulong Target {get;}
+        public ulong TargetAddress {get;}
 
-        /// <summary>
-        /// Specifies a label for the immedate that has the form jmp{BitWidth}
-        /// </summary>
+        public ulong BaseAddress {get;}
+
+        public ulong LocalAddress 
+            => Near ? TargetAddress - BaseAddress : TargetAddress;
+
         public string Label
-            => $"jmp{Size}";
+            => LocalAddress.FormatHex(false,true,false,false);
 
     }
 

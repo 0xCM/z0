@@ -456,6 +456,22 @@ namespace Z0
             => src.state;
 
         /// <summary>
+        /// Defines an explicit bit -> float conversion
+        /// </summary>
+        /// <param name="src">The source bit</param>
+        [MethodImpl(Inline)]
+        public static explicit operator float(bit src)
+            => src.state;
+
+        /// <summary>
+        /// Defines an explicit bit -> double conversion
+        /// </summary>
+        /// <param name="src">The source bit</param>
+        [MethodImpl(Inline)]
+        public static explicit operator double(bit src)
+            => src.state;
+
+        /// <summary>
         /// Defines an explicit bit -> int conversion
         /// </summary>
         /// <param name="src">The source bit</param>

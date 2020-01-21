@@ -16,7 +16,7 @@ namespace Z0.Logix
     /// Characterizes a typed ternary bitwise operator
     /// </summary>
     /// <typeparam name="T">The type over which the operator is defined</typeparam>
-    public interface ITernaryBitwiseOp<T> : ITernaryOp<IExpr<T>>, IOperator<T,TernaryOpKind> 
+    public interface ITernaryBitwiseOp<T> : ITernaryOp<IExpr<T>>, IOperator<T,TernaryBitLogicKind> 
         where T : unmanaged
     {
 
@@ -24,12 +24,12 @@ namespace Z0.Logix
     }
 
 
-    public interface ITernaryLogicOp :  ITernaryOp<ILogicExpr>,  ILogicOp<TernaryOpKind> 
+    public interface ITernaryLogicOp :  ITernaryOp<ILogicExpr>,  ILogicOp<TernaryBitLogicKind> 
     {
 
     }
 
-    public interface ITernaryLogicOp<T> : ITernaryLogicOp, ITernaryOp<ILogicExpr<T>>,ILogicOp<T,TernaryOpKind>
+    public interface ITernaryLogicOp<T> : ITernaryLogicOp, ITernaryOp<ILogicExpr<T>>,ILogicOp<T,TernaryBitLogicKind>
         where T : unmanaged
     {
 

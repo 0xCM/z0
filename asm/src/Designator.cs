@@ -5,21 +5,12 @@
 namespace Z0.Designators
 {
     using System;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
-
-    using static zfunc;
-
 
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class CpuFunc : AssemblyDesignator<CpuFunc>
+    public sealed class AsmCore : AssemblyDesignator<AsmCore>
     {
-
+        public override AssemblyId Id => AssemblyId.AsmCore;
     }
-
-
 }

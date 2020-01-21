@@ -60,10 +60,10 @@ namespace Z0
         }
 
         public void WriteAsm(MethodDisassembly src, AsmFormatConfig fmt)
-            => WriteAsm(AsmFunction.from(src),fmt);
+            => WriteAsm(AsmFunction.define(src),fmt);
 
         public void WriteAsm(INativeMemberData data, AsmFormatConfig fmt)
-            => WriteAsm(AsmFunction.decode(data),fmt);
+            => WriteAsm(AsmFunction.define(data),fmt);
 
     }
 }

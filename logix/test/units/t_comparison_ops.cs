@@ -9,7 +9,7 @@ namespace Z0.Logix
     
     using static zfunc;
 
-    using static CpuOps;
+    using static VectorizedOps;
     
     using S = ScalarOps;
 

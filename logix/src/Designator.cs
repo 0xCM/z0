@@ -16,7 +16,7 @@ namespace Z0.Designators
     /// </summary>
     public sealed class Logix : AssemblyDesignator<Logix>
     {
-
+        public override AssemblyId Id => AssemblyId.Logix;
     }
 
 }

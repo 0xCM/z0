@@ -17,7 +17,7 @@ namespace Z0.Logix
     /// <param name="offset">The shift amount, typically in bits</param>
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public delegate T Shifter<T>(T a, int offset)
+    public delegate T Shifter<T>(T a, byte offset)
         where T : unmanaged;
 
     /// <summary>

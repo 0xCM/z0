@@ -224,11 +224,11 @@ namespace Z0.Logix
         
         public void check_ternary_ops()
         {
-            var common =  CpuOpApi.TernaryBitwiseKinds.Intersect(ScalarOpApi.TernaryBitwiseKinds).ToArray();
+            var common =  VecotrizedOpApi.TernaryBitwiseKinds.Intersect(ScalarOpApi.TernaryBitwiseKinds).ToArray();
             iter(common,check_ternary_ops);
         }
 
-        void check_ternary_ops(TernaryOpKind op)
+        void check_ternary_ops(TernaryBitLogicKind op)
         {
             check_ternary_ops<byte>(op);
             check_ternary_ops<ushort>(op);
@@ -236,7 +236,7 @@ namespace Z0.Logix
             check_ternary_ops<ulong>(op);
         }
 
-        void check_op_identity<T>(TernaryOpKind id)
+        void check_op_identity<T>(TernaryBitLogicKind id)
             where T: unmanaged
         {
             var a = convert<T>(0b1111_0000);
@@ -249,13 +249,13 @@ namespace Z0.Logix
             Claim.eq(expect.FormatHex(), actual.FormatHex());
         }
 
-        void check_ternary_ops<T>(TernaryOpKind id)
+        void check_ternary_ops<T>(TernaryBitLogicKind id)
             where T : unmanaged
         {
             var BL = LogicOpApi.lookup(id);
             var SC = ScalarOpApi.lookup<T>(id);
-            var V128 = CpuOpApi.lookup<T>(n128,id);
-            var V256 = CpuOpApi.lookup<T>(n256,id);
+            var V128 = VecotrizedOpApi.lookup<T>(n128,id);
+            var V256 = VecotrizedOpApi.lookup<T>(n256,id);
             check_op_identity<T>(id);
 
             for(var sample = 0; sample< RepCount; sample++)
@@ -338,7 +338,7 @@ namespace Z0.Logix
                 var a = Random.CpuVector<T>(n128);
                 v1.Set(a);   
                 Vector128<T> actual = LogicEngine.eval(expr);
-                Vector128<T> expect = CpuOpApi.eval(op,a);
+                Vector128<T> expect = VecotrizedOpApi.eval(op,a);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -354,7 +354,7 @@ namespace Z0.Logix
                 var a = Random.CpuVector<T>(n256);
                 v1.Set(a);   
                 Vector256<T> actual = LogicEngine.eval(expr);
-                Vector256<T> expect = CpuOpApi.eval(op,a);
+                Vector256<T> expect = VecotrizedOpApi.eval(op,a);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -373,7 +373,7 @@ namespace Z0.Logix
                 v1.Set(a);   
                 v2.Set(b);
                 Vector128<T> actual = LogicEngine.eval(expr);
-                Vector128<T> expect = CpuOpApi.eval(op,a,b);
+                Vector128<T> expect = VecotrizedOpApi.eval(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -393,7 +393,7 @@ namespace Z0.Logix
                 v1.Set(a);   
                 v2.Set(b);
                 Vector256<T> actual = LogicEngine.eval(expr);
-                Vector256<T> expect = CpuOpApi.eval(op,a,b);
+                Vector256<T> expect = VecotrizedOpApi.eval(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }

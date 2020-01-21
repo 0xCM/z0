@@ -50,7 +50,7 @@ namespace Z0
         /// Formats the function body encoding as a comma-separated list of hex values
         /// </summary>
         /// <param name="src">The source function</param>
-        public static string FormatEncoded(this AsmCode src)
+        public static string FormatNativeHex(this AsmCode src)
             => src.Encoded.FormatHex(AsciSym.Comma, true, true, true);
 
         public static string FormatInstructionLines(this InstructionBlock src)
@@ -67,12 +67,12 @@ namespace Z0
             var formatter = new MasmFormatter(MasmOptions);
             var sb = text();
             var writer = new StringWriter(sb);
-            var output = new AsmOutput(writer, 0);
+            var output = new AsmOutput(writer, src.Location.Start);
             for(var i = 0; i < src.InstructionCount; line++, i++)
             {
                 ref readonly var instruction = ref src[i];
                 formatter.Format(in instruction, output);                    
-                dst[i] = config.ShowLineAddresses ?  concat(instruction.FormatLineLabel(), AsciSym.Space, sb.ToString()) :  sb.ToString();
+                dst[i] = config.ShowLineAddresses ?  concat(instruction.FormatLineLabel(), sb.ToString()) :  sb.ToString();
                 sb.Clear();
             }
             return dst;
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="src">The source function</param>
         /// <param name="encoding">Specifies whether to include the encoded hex bytes</param>
         /// <param name="location">Specifies whether to include the assembly-relative function location address</param>
-        static string[] FormatHeader(this AsmCode code, AddressSegment location,  AsmFormatConfig fmt)
+        static string[] FormatHeader(this AsmCode code, MemoryRange location,  AsmFormatConfig fmt)
         {            
             var lines = new List<string>();
 
@@ -116,52 +116,16 @@ namespace Z0
             => src.Code.FormatHeader(src.Location,fmt);
 
         /// <summary>
-        /// Formats a single operand
-        /// </summary>
-        /// <param name="src">The source operand</param>
-        static string Format(this AsmOperandInfo src)
-        {
-            var fmt = src.ImmInfo.Map(i => $"{i.Value.FormatHex(false,true,false,false)}:{i.Label}", () => string.Empty);
-            fmt += src.Register.Map(r => r.RegisterName, () => string.Empty);
-            fmt += src.Memory.Map(r => r.Format(), () => string.Empty);
-            fmt += src.Branch.Map(b => b.Format(), () => string.Empty);
-            if(string.IsNullOrWhiteSpace(fmt))
-                fmt = src.Kind;
-            return fmt;   
-        }
-
-        /// <summary>
-        /// Formats the operands contained in an instruction
-        /// </summary>
-        /// <param name="src">The instruction description</param>
-        static string FormatOperands(this AsmInstructionInfo src)
-        {
-            var count = src.Operands.Length;
-            if(count == 0)
-                return string.Empty;
-
-            var sb = text();   
-            for(var i=0; i<src.Operands.Length; i++)
-            {
-                sb.Append(src.Operands[i].Format());
-                if(i != src.Operands.Length - 1)
-                    sb.Append(AsciSym.Comma);                            
-            }
-            return bracket(sb.ToString());
-        }
-
-        /// <summary>
         /// Formats a single instruction
         /// </summary>
         /// <param name="src">The source instruction</param>
         /// <param name="pad">The minimum character width of the instruction content</param>
         static string FormatInstruction(this AsmInstructionInfo src, AsmFormatConfig fmt)
         {
-            var description = text();            
-            description.Append($"{src.Offset.FormatHex(true,true,false,false)}{space()}");
-            description.Append(src.Display.PadRight(fmt.InstructionPad, space()));
-            description.Append(Comment($"{src.Instruction}{fmt.InfoDelimiter}{src.Encoding}"));
-            description.Append($"{fmt.InfoDelimiter}encoded[{src.Encoded.Length}]");
+            var description = text();    
+            description.Append(concat(src.Offset.FormatLineLabel(), src.AsmContent.PadRight(fmt.InstructionPad, space())));
+            description.Append(Comment(src.Spec.Format(fmt)));
+            description.Append(concat(fmt.InfoDelimiter,"encoded", bracket(src.Encoded.Length.ToString())));
             description.Append(embrace(src.Encoded.FormatHex(space(), true, false)));
             return description.ToString();
         }
@@ -179,10 +143,6 @@ namespace Z0
             }
             return description.ToString();
         }    
-
-
-        static string Format(this AsmBranchInfo src)
-            => $"{src.Target.FormatHex(false,true,true,false)}:{src.Label}";
 
         static string Format(this AsmMemInfo src)
         {
@@ -222,15 +182,27 @@ namespace Z0
         {
             var propdecl = $"static ReadOnlySpan<byte> {src.Id}_Bytes";
             var alloc = $"{propdecl} => new byte[{src.Encoded.Length}]";
-            var data = embrace(src.FormatEncoded());
+            var data = embrace(src.FormatNativeHex());
             var content = items(alloc, data, AsciSym.Semicolon.ToString()).Concat();
             return content;
         }
 
-        static string FormatLineLabel(this Instruction src)
-            => concat(src.IP.FormatSmallHex(), Hex.PostSpec);
+        static string Format(this AsmInstructionSpec src, AsmFormatConfig fmt)
+            => $"{src.Definition}{fmt.InfoDelimiter}{src.OpCode}";
 
-        static string FormatHeaderLocation(this AddressSegment src, Moniker id)
+        static string Format(this AsmBranchInfo src)
+            => src.Label;
+
+        static string FormatLineLabel(this ulong src)
+            => concat(src.FormatSmallHex(), Hex.PostSpec, space());
+
+        static string FormatLineLabel(this ushort src)
+            => ((ulong)src).FormatLineLabel();
+
+        static string FormatLineLabel(this Instruction src)
+            => src.IP.FormatLineLabel();
+
+        static string FormatHeaderLocation(this MemoryRange src, Moniker id)
             => $"{id}{src.Format()}[{src.Length}]"; 
 
         static MasmFormatterOptions MasmOptions => new MasmFormatterOptions
@@ -242,6 +214,74 @@ namespace Z0
             LeadingZeroes = false,
             DisplInBrackets = true,            
         };
+
+        /// <summary>
+        /// Formats a single operand
+        /// </summary>
+        /// <param name="src">The source operand</param>
+        static string Format(this AsmOperandInfo src)
+        {
+            var fmt = src.ImmInfo.Map(i => $"{i.Value.FormatHex(false,true,false,false)}:{i.Label}", () => string.Empty);
+            fmt += src.Register.Map(r => r.RegisterName, () => string.Empty);
+            fmt += src.Memory.Map(r => r.Format(), () => string.Empty);
+            fmt += src.Branch.Map(b => b.Format(), () => string.Empty);
+            if(string.IsNullOrWhiteSpace(fmt))
+                fmt = src.Kind;
+            return fmt;   
+        }
+
+        /// <summary>
+        /// Formats the operands contained in an instruction
+        /// </summary>
+        /// <param name="src">The instruction description</param>
+        static string FormatOperands(this AsmInstructionInfo src)
+        {
+            var count = src.Operands.Length;
+            if(count == 0)
+                return string.Empty;
+
+            var sb = text();   
+            for(var i=0; i<src.Operands.Length; i++)
+            {
+                sb.Append(src.Operands[i].Format());
+                if(i != src.Operands.Length - 1)
+                    sb.Append(AsciSym.Comma);                            
+            }
+            return bracket(sb.ToString());
+        }
+
+
+        class AsmOutput : FormatterOutput
+        {
+            TextWriter Writer {get;}
+            
+            ulong BaseAddress {get;}
+
+            public AsmOutput(TextWriter writer, ulong BaseAddress)
+            {
+                this.Writer = writer;
+                this.BaseAddress = BaseAddress;
+            }
+            
+            public override void Write(string text, FormatterOutputTextKind kind)
+            {
+                switch(kind)
+                {
+                    case FormatterOutputTextKind.LabelAddress:
+                        var x = text.EndsWith(AsciLower.h) ? text.Substring(0, text.Length - 1)  : text;
+                        if(ulong.TryParse(x, System.Globalization.NumberStyles.HexNumber,null, out var address))
+                        {
+                            Writer.Write((address - BaseAddress).FormatSmallHex(true));
+                        }
+                        else
+                            Writer.Write($"{text}{AsciSym.Question}");
+                    break;
+                    default:
+                        Writer.Write(text);    
+                    break;
+                }
+            }                
+        }
 
     }
 }

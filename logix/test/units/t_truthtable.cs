@@ -11,7 +11,7 @@ namespace Z0.Logix
     using static zfunc;
     
     using BW = BinaryBitwiseOpKind;
-    using BL = BinaryLogicOpKind;
+    using BL = BinaryBitLogicKind;
 
     public class t_truthtable : UnitTest<t_truthtable>
     {
@@ -163,9 +163,9 @@ namespace Z0.Logix
         public void truth_vectors()
         {
 
-            Trace(TruthTables.definition(BinaryLogicOpKind.And).Format());
-            Trace(TruthTables.definition(BinaryLogicOpKind.Or).Format());
-            Trace(TruthTables.definition(BinaryLogicOpKind.Nand).Format());
+            Trace(TruthTables.definition(BinaryBitLogicKind.And).Format());
+            Trace(TruthTables.definition(BinaryBitLogicKind.Or).Format());
+            Trace(TruthTables.definition(BinaryBitLogicKind.Nand).Format());
         
         }
     }

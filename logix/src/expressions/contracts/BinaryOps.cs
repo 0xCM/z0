@@ -17,13 +17,13 @@ namespace Z0.Logix
     {
     }
 
-    public interface IBinaryLogicOp : IBinaryOp<ILogicExpr>, ILogicOp<BinaryLogicOpKind>
+    public interface IBinaryLogicOp : IBinaryOp<ILogicExpr>, ILogicOp<BinaryBitLogicKind>
     {
 
     }
 
 
-    public interface IBinaryLogicOp<T> : IBinaryLogicOp, IBinaryOp<ILogicExpr<T>>,  ILogicOp<T,BinaryLogicOpKind>
+    public interface IBinaryLogicOp<T> : IBinaryLogicOp, IBinaryOp<ILogicExpr<T>>,  ILogicOp<T,BinaryBitLogicKind>
         where T : unmanaged
     {
 

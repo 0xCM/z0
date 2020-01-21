@@ -17,6 +17,58 @@ namespace Z0
 
     public static class FastOps
     {
+        public static OpSpec specify(MethodInfo method)
+        {            
+            var dst = specinit(method);
+            Span<byte> buffer = new byte[NativeReader.DefaultBufferLen];
+            dst.Id = OpIdentity.Provider.Define(dst.Method);
+            method.CustomAttribute<OpAttribute>()
+                .OnSome(z => z.Name.OnSome(n => dst.Name = n))
+                .OnNone(() => dst.Name = dst.Method.Name);
+            dst.Label = dst.Method.Signature().Format();
+            return dst;
+        }
+
+        public static OpSpec specify(MethodInfo method, Moniker m, Span<byte> buffer)
+        {            
+            var dst = specinit(method);
+            dst.Id = m;
+            method.CustomAttribute<OpAttribute>()
+                .OnSome(z => z.Name.OnSome(n => dst.Name = n))
+                .OnNone(() => dst.Name = dst.Method.Name);
+            dst.Label = dst.Method.Signature().Format();
+            return dst;
+        }
+
+
+        static OpSpec specinit(MethodInfo method, params Type[] args)
+        {
+            var dst = new OpSpec();
+
+            if(method.IsConstructedGenericMethod)
+            {
+                dst.Method = method;
+                dst.TypeArgs = method.GetGenericArguments();
+            }
+            else if(method.IsGenericMethodDefinition)
+            {
+                dst.Method = method.MakeGenericMethod(args);
+                dst.TypeArgs = args;
+            }
+            else if(method.IsGenericMethod)
+            {
+                var def = method.GetGenericMethodDefinition();
+                dst.Method = def.MakeGenericMethod(args);
+                dst.TypeArgs = args;
+            }
+            else
+            {
+                dst.Method = method;
+                dst.TypeArgs = new Type[]{};
+            }
+            return dst;
+        }
+
         /// <summary>
         /// Determines whether a method defines a formalized operation
         /// </summary>
@@ -31,8 +83,8 @@ namespace Z0
         public static string opname(MethodInfo m )
             => m.CustomAttribute<OpAttribute>().MapValueOrElse(a => a.Name.IsBlank() ? m.Name : a.Name, () => m.Name);
 
-        public static FastDirectInfo direct(string name, MethodInfo method)
-            => new FastDirectInfo(name,method);        
+        public static DirectOpInfo direct(string name, MethodInfo method)
+            => new DirectOpInfo(OpIdentity.Provider.Define(method), name,method);        
 
         /// <summary>
         /// Selects the public members of a type that are identified as formalized operations
@@ -45,38 +97,38 @@ namespace Z0
         /// Extracts fastop metadata from a host type for non-generic operations
         /// </summary>
         /// <param name="host">The source type</param>
-        public static IEnumerable<FastDirectInfo> direct(Type host)
+        public static IEnumerable<DirectOpInfo> direct(Type host)
             => methods(host).NonGeneric().Select(m => direct(m.FastOpName(),m));
 
-        public static IEnumerable<FastDirectInfo> direct(IEnumerable<Type> hosts)
+        public static IEnumerable<DirectOpInfo> direct(IEnumerable<Type> hosts)
             => hosts.SelectMany(direct);
 
-        public static FastGenericInfo generics(string name, MethodInfo method, IEnumerable<PrimalKind> kinds)
-            => new FastGenericInfo(name, method,kinds);
+        public static GenericOpInfo generics(string name, MethodInfo method, IEnumerable<PrimalKind> kinds)
+            => new GenericOpInfo(OpIdentity.Provider.Define(method), name, method,kinds);
 
         /// <summary>
         /// Extracts fastop metadata from a host type for generic operations
         /// </summary>
         /// <param name="host">The source type</param>
-        public static IEnumerable<FastGenericInfo> generics(Type host) 
+        public static IEnumerable<GenericOpInfo> generics(Type host) 
             => from m in  methods(host).OpenGeneric()
                 select generics(m.FastOpName(), m.GetGenericMethodDefinition(), kinds(m));
 
-        public static IEnumerable<FastGenericInfo> generics(IEnumerable<Type> hosts)
+        public static IEnumerable<GenericOpInfo> generics(IEnumerable<Type> hosts)
             => hosts.SelectMany(h => h.FastOpGenericMethods());
 
 
-        public static FastOpClosure closure(Moniker id, PrimalKind k, MethodInfo m)
-            => new FastOpClosure(id, k, m);
+        public static OpClosure closure(Moniker id, PrimalKind k, MethodInfo m)
+            => new OpClosure(id, k, m);
 
         /// <summary>
         /// Closes generic operations over the set of primal types that each operation supports
         /// </summary>
         /// <param name="generics">Metadata for generic operations</param>
-        public static IEnumerable<FastOpClosure> closures(FastGenericInfo op)
+        public static IEnumerable<OpClosure> closures(GenericOpInfo op)
             => from k in op.Kinds
                 let definition = op.Method
-                let id = Moniker.Provider.Define(definition, k)
+                let id = OpIdentity.Provider.Define(definition, k)
                 let closed = definition.MakeGenericMethod(k.ToPrimalType())
                 select closure(id, k, closed);            
 

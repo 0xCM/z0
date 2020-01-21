@@ -15,7 +15,7 @@ namespace Z0.Logix
 
         protected override int RepCount => Pow2.T08;
         
-        IEnumerable<TernaryOpKind> TernaryKinds
+        IEnumerable<TernaryBitLogicKind> TernaryKinds
             => ScalarOpApi.TernaryBitwiseKinds;
         
         public void op_identities()
@@ -81,7 +81,7 @@ namespace Z0.Logix
                 var a = Random.CpuVector<T>(n);
                 var b = Random.CpuVector<T>(n);
                 var c = Random.CpuVector<T>(n);
-                var x = CpuOps.select(a,b,c);
+                var x = VectorizedOps.select(a,b,c);
 
                 var sa = a.ToSpan();
                 var sb = b.ToSpan();
@@ -103,7 +103,7 @@ namespace Z0.Logix
                 var a = Random.CpuVector<T>(n);
                 var b = Random.CpuVector<T>(n);
                 var c = Random.CpuVector<T>(n);
-                var x = CpuOps.select(a,b,c);
+                var x = VectorizedOps.select(a,b,c);
 
                 var sa = a.ToSpan();
                 var sb = b.ToSpan();
@@ -116,7 +116,7 @@ namespace Z0.Logix
 
         }
 
-        void check_op_identity<T>(TernaryOpKind id)
+        void check_op_identity<T>(TernaryBitLogicKind id)
             where T: unmanaged
         {
             var a = convert<T>(0b1111_0000);
@@ -130,7 +130,7 @@ namespace Z0.Logix
         }
 
 
-        void check_op_equivalence<T>(TernaryOpKind kind)
+        void check_op_equivalence<T>(TernaryBitLogicKind kind)
             where T: unmanaged
         {
             var width = bitsize<T>();

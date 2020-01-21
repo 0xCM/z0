@@ -21,7 +21,7 @@ namespace Z0
         /// <summary>
         /// The location of the member data relative to the native source
         /// </summary>
-        AddressSegment Location {get;}
+        MemoryRange Location {get;}
             
         /// <summary>
         /// The memory content

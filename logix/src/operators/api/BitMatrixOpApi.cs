@@ -39,7 +39,7 @@ namespace Z0.Logix
         public static ReadOnlySpan<BinaryBitwiseOpKind> BinaryBitwiseKinds
             => ScalarOpApi.BinaryBitwiseKinds;
 
-        [MethodImpl(Inline)]
+        [Op, PrimalClosures(PrimalKind.Integers)]
         public static BitMatrix<T> eval<T>(UnaryBitwiseOpKind kind, BitMatrix<T> A)
             where T : unmanaged
         {
@@ -51,7 +51,7 @@ namespace Z0.Logix
             }
         }
 
-        [MethodImpl(Inline)]
+        [BitMatrixOp, PrimalClosures(PrimalKind.Integers)]
         public static BitMatrix<T> eval<T>(UnaryBitwiseOpKind kind, BitMatrix<T> A, ref BitMatrix<T> Z)
             where T : unmanaged
         {
@@ -63,6 +63,7 @@ namespace Z0.Logix
             }
         }
 
+        [BitMatrixOp, PrimalClosures(PrimalKind.Integers)]
         public static BitMatrix<T> eval<T>(BinaryBitwiseOpKind kind, BitMatrix<T> A, BitMatrix<T> B)
             where T : unmanaged
         {
@@ -88,6 +89,7 @@ namespace Z0.Logix
             }
         }
 
+        [BitMatrixOp, PrimalClosures(PrimalKind.Integers)]
         public static BitMatrix<T> eval<T>(BinaryBitwiseOpKind kind, BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
@@ -114,6 +116,7 @@ namespace Z0.Logix
 
         }
 
+        [Op, PrimalClosures(PrimalKind.Integers)]
         public static BitMatrixBinaryRefOp<T> lookup<T>(BinaryBitwiseOpKind kind)
             where T : unmanaged
         {

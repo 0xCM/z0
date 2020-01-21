@@ -12,7 +12,7 @@ namespace Z0.OpCodes
     using static zfunc;
     using static Logix.LogicOps;
     using static Logix.ScalarOps;
-    using static Logix.CpuOps;
+    using static Logix.VectorizedOps;
     using static Logix.BitMatrixOps;
     using static Logix.BitVectorOps;
 

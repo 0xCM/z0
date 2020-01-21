@@ -10,8 +10,8 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static TernaryOpKind;
-    using static BinaryLogicOpKind;
+    using static TernaryBitLogicKind;
+    using static BinaryBitLogicKind;
 
     /// <summary>
     /// Defines logical operations over 1, 2 or 3 bits
@@ -123,817 +123,817 @@ namespace Z0.Logix
         public static bit select(bit a, bit b, bit c)
             => bit.select(a,b,c);
 
-        [MethodImpl(Inline),TernaryOp(X00)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X00)]
         public static bit f00(bit a, bit b, bit c)
             => off;
 
         // a nor (b or c)
-        [MethodImpl(Inline),TernaryOp(X01)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X01)]
         public static bit f01(bit a, bit b, bit c)
             => nor(a, or(b,c));
 
         // c and (b nor a)
-        [MethodImpl(Inline),TernaryOp(X02)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X02)]
         public static bit f02(bit a, bit b, bit c)
             => and(c, nor(b,a));
 
         // b nor a
-        [MethodImpl(Inline),TernaryOp(X03)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X03)]
         public static bit f03(bit a, bit b, bit c)
             => nor(b,a);
 
         // b and (a nor c)
-        [MethodImpl(Inline),TernaryOp(X04)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X04)]
         public static bit f04(bit a, bit b, bit c)
             => and(b, nor(a,c));
 
         // c nor a
-        [MethodImpl(Inline),TernaryOp(X05)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X05)]
         public static bit f05(bit a, bit b, bit c)
             => nor(c,a);
 
         // not a and (b xor c)
-        [MethodImpl(Inline),TernaryOp(X06)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X06)]
         public static bit f06(bit a, bit b, bit c)
             => and(not(a), xor(b,c));
 
         // not a and (b xor c)
-        [MethodImpl(Inline),TernaryOp(X07)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X07)]
         public static bit f07(bit a, bit b, bit c)
             => nor(a, and(b,c));
 
         // (not a and b) and c
-        [MethodImpl(Inline),TernaryOp(X08)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X08)]
         public static bit f08(bit a, bit b, bit c)
             => and(and(not(a),b), c);
 
         // a nor (b xor c)
-        [MethodImpl(Inline),TernaryOp(X09)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X09)]
         public static bit f09(bit a, bit b, bit c)
             => nor(a, xor(b,c));
 
         // c and (not a)
-        [MethodImpl(Inline),TernaryOp(X0A)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X0A)]
         public static bit f0a(bit a, bit b, bit c)
             => and(c, not(a));
 
         // not a and ((b xor 1) or c)
-        [MethodImpl(Inline),TernaryOp(X0B)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X0B)]
         public static bit f0b(bit a, bit b, bit c)
             => and(not(a), or(not(b),  c));   
 
         // b and (not a)
-        [MethodImpl(Inline),TernaryOp(X0C)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X0C)]
         public static bit f0c(bit a, bit b, bit c)
             => and(b, not(a));
 
         // not (A) and (B or (C xor 1))
-        [MethodImpl(Inline),TernaryOp(X0D)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X0D)]
         public static bit f0d(bit a, bit b, bit c)
             => and(not(a), or(b, not(c)));
 
         // not a and (b or c)
-        [MethodImpl(Inline),TernaryOp(X0E)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X0E)]
         public static bit f0e(bit a, bit b, bit c)
             => and(not(a),or(b,c));
 
         // not a
-        [MethodImpl(Inline),TernaryOp(X0F)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X0F)]
         public static bit f0f(bit a, bit b, bit c)
             => not(a);
 
         // a and (b nor c)
-        [MethodImpl(Inline),TernaryOp(X10)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X10)]
         public static bit f10(bit a, bit b, bit c)
             => and(a, nor(b, c));
         
         // c nor b
-        [MethodImpl(Inline),TernaryOp(X11)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X11)]
         public static bit f11(bit a, bit b, bit c)
             => nor(c,b);
         
         // not b and (a xor c) 
-        [MethodImpl(Inline),TernaryOp(X12)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X12)]
         public static bit f12(bit a, bit b, bit c)
             => and(not(b), xor(a,c));
 
         // b nor (a and c)
-        [MethodImpl(Inline),TernaryOp(X13)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X13)]
         public static bit f13(bit a, bit b, bit c)
             => nor(b, and(a,c));
 
         // not c and (a xor b)
-        [MethodImpl(Inline),TernaryOp(X14)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X14)]
         public static bit f14(bit a, bit b, bit c)
             => and(not(c), xor(a,b));
 
         // c nor (b and a)
-        [MethodImpl(Inline),TernaryOp(X15)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X15)]
         public static bit f15(bit a, bit b, bit c)
             => nor(c, and(a,b));
 
         // a ? (b nor c) : (b xor c)
-        [MethodImpl(Inline),TernaryOp(X16)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X16)]
         public static bit f16(bit a, bit b, bit c)
             => select(a, nor(b,c), xor(b,c));
 
         // not(a ? (b or c) : (b and c))
-        [MethodImpl(Inline),TernaryOp(X17)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X17)]
         public static bit f17(bit a, bit b, bit c)
             => not(select(a, or(b,c), and(b,c)));
 
         // (a xor b) and (a xor c)
-        [MethodImpl(Inline),TernaryOp(X18)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X18)]
         public static bit f18(bit a, bit b, bit c)
             => and(xor(a,b), xor(a,c));
 
         // not(((B xor C) xor (A and (B and C))))
-        [MethodImpl(Inline),TernaryOp(X19)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X19)]
         public static bit f19(bit a, bit b, bit c)
             => not(xor(xor(b,c), and(a, and(b,c))));
             
         // not ((a and b)) and (a xor c)
-        [MethodImpl(Inline),TernaryOp(X1A)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X1A)]
         public static bit f1a(bit a, bit b, bit c)
             => and(not(and(a,b)), xor(a,c));
             
 
         // c ? not a : not b
-        [MethodImpl(Inline),TernaryOp(X1B)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X1B)]
         public static bit f1b(bit a, bit b, bit c)
             => select(c, not(a), not(b));
 
         //not ((a and c)) and (a xor b)
-        [MethodImpl(Inline),TernaryOp(X1C)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X1C)]
         public static bit f1c(bit a, bit b, bit c)
             => and(not(and(a,c)), xor(a,b));
 
         //b ? (not a) : (not c)
-        [MethodImpl(Inline),TernaryOp(X1D)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X1D)]
         public static bit f1d(bit a, bit b, bit c)
             => select(b, not(a), not(c));
 
         //a xor (b or c)
-        [MethodImpl(Inline),TernaryOp(X1E)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X1E)]
         public static bit f1e(bit a, bit b, bit c)
             => xor(a, or(b,c));
 
         // a nand (b or c)
-        [MethodImpl(Inline),TernaryOp(X1F)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X1F)]
         public static bit f1f(bit a, bit b, bit c)
             => nand(a, or(b,c));
 
         //((not b) and a) and C
-        [MethodImpl(Inline),TernaryOp(X20)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X20)]
         public static bit f20(bit a, bit b, bit c)
             => and(cnonimpl(a,b),c);
 
         // b nor (a xor c)
-        [MethodImpl(Inline),TernaryOp(X21)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X21)]
         public static bit f21(bit a, bit b, bit c)
             => nor(b, xor(a,c));
 
         // c and (not b)
-        [MethodImpl(Inline),TernaryOp(X22)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X22)]
         public static bit f22(bit a, bit b, bit c)
             => cnonimpl(c,b);
 
         // not (B) and ((A xor 1) or C)
-        [MethodImpl(Inline),TernaryOp(X23)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X23)]
         public static bit f23(bit a, bit b, bit c)
             => and(not(b),or(not(a),c));
 
         // (a xor b) and (b xor c)
-        [MethodImpl(Inline),TernaryOp(X24)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X24)]
         public static bit f24(bit a, bit b, bit c)
             => and(xor(a,b), xor(b,c));
 
         // (not ((a and b)) and (a xor (c xor 1)))
-        [MethodImpl(Inline),TernaryOp(X25)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X25)]
         public static bit f25(bit a, bit b, bit c)
             => and(not(and(a,b)), xor(a, not(c)));
 
         //not ((a and b)) and (b xor c)
-        [MethodImpl(Inline),TernaryOp(X26)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X26)]
         public static bit f26(bit a, bit b, bit c)
             => and(not(and(a,b)), xor(b,c));
 
         // C ? not (B) : not (A)
-        [MethodImpl(Inline),TernaryOp(X27)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X27)]
         public static bit f27(bit a, bit b, bit c)
             => select(c, not(b), not(a));
 
         // C and (B xor A)
-        [MethodImpl(Inline),TernaryOp(X28)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X28)]
         public static bit f28(bit a, bit b, bit c)
             => and(c, xor(b,a));
 
         // C ? (B xor A) : (B nor A)
-        [MethodImpl(Inline),TernaryOp(X29)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X29)]
         public static bit f29(bit a, bit b, bit c)
             => select(c, xor(b,a), nor(b,a));
 
         // C and (B nand A)
-        [MethodImpl(Inline),TernaryOp(X2A)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X2A)]
         public static bit f2a(bit a, bit b, bit c)
             => and(c, nand(b,a));
 
         // C ? (B nand A) : (B nor A)
-        [MethodImpl(Inline),TernaryOp(X2B)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X2B)]
         public static bit f2b(bit a, bit b, bit c)
             => select(c, nand(b,a), nor(b,a));
 
         // (B or C) and (A xor B)
-        [MethodImpl(Inline),TernaryOp(X2C)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X2C)]
         public static bit f2c(bit a, bit b, bit c)
             => and(or(b,c), xor(a,b));
 
         // A xor (B or not (C))
-        [MethodImpl(Inline),TernaryOp(X2D)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X2D)]
         public static bit f2d(bit a, bit b, bit c)
             => xor(a,(or(b,not(c))));
             
         // (B or C) xor (A and B)
-        [MethodImpl(Inline),TernaryOp(X2E)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X2E)]
         public static bit f2e(bit a, bit b, bit c)
             => xor(or(b,c), and(a,b));
 
         // not (A) or (not (B) and C)
-        [MethodImpl(Inline),TernaryOp(X2F)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X2F)]
         public static bit f2f(bit a, bit b, bit c)
             => or(not(a), and(not(b),c));
     
         // a and not(b)
-        [MethodImpl(Inline),TernaryOp(X30)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X30)]
         public static bit f30(bit a, bit b, bit c)
             => cnonimpl(a,b);
 
         // not (B) and (A or (C xor 1))
-        [MethodImpl(Inline),TernaryOp(X31)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X31)]
         public static bit f31(bit a, bit b, bit c)
             => and(not(b), or(a,not(c)));
 
         //not (B) and (A or C)
-        [MethodImpl(Inline),TernaryOp(X32)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X32)]
         public static bit f32(bit a, bit b, bit c)
             => and(not(b),or(a,c));
 
         // not (B)
-        [MethodImpl(Inline),TernaryOp(X33)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X33)]
         public static bit f33(bit a, bit b, bit c)
             => not(b);
 
         // not ((B and C)) and (A xor B)
-        [MethodImpl(Inline),TernaryOp(X34)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X34)]
         public static bit f34(bit a, bit b, bit c)
             => and(not(and(b,c)), xor(a,b));
 
         // A ? not (B) : not (C)
-        [MethodImpl(Inline),TernaryOp(X35)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X35)]
         public static bit f35(bit a, bit b, bit c)
             => select(a,not(b),not(c));
 
         // B xor (A or C)
-        [MethodImpl(Inline),TernaryOp(X36)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X36)]
         public static bit f36(bit a, bit b, bit c)
             => xor(b,or(a,c));
 
         // B nand (A or C)
-        [MethodImpl(Inline),TernaryOp(X37)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X37)]
         public static bit f37(bit a, bit b, bit c)
             => nand(b,or(a,c));
 
         // (A or C) and (A xor B)
-        [MethodImpl(Inline),TernaryOp(X38)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X38)]
         public static bit f38(bit a, bit b, bit c)
             => and(or(a,c), xor(a,b));
 
         // B xor (A or (C xor 1))
-        [MethodImpl(Inline),TernaryOp(X39)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X39)]
         public static bit f39(bit a, bit b, bit c)
             => xor(b, or(a, not(c)));
 
         // A ? not (B) : C
-        [MethodImpl(Inline),TernaryOp(X3A)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X3A)]
         public static bit f3a(bit a, bit b, bit c)
             => select(a, not(b), c);
 
         // (not (A) and C) or (B xor 1)
-        [MethodImpl(Inline),TernaryOp(X3B)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X3B)]
         public static bit f3b(bit a, bit b, bit c)
             => or(and(not(a),c),not(b));
 
         // B xor A
-        [MethodImpl(Inline),TernaryOp(X3C)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X3C)]
         public static bit f3c(bit a, bit b, bit c)
             => xor(b,a);
 
         // ((A xor B) or (A nor C))
-        [MethodImpl(Inline),TernaryOp(X3D)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X3D)]
         public static bit f3d(bit a, bit b, bit c)
             => or(xor(b,a),nor(a,c));
 
         // (not (A) and C) or (A xor B)
-        [MethodImpl(Inline),TernaryOp(X3E)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X3E)]
         public static bit f3e(bit a, bit b, bit c)
             => or(and(not(a),c),xor(a,b));
 
         // B nand A
-        [MethodImpl(Inline),TernaryOp(X3F)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X3F)]
         public static bit f3f(bit a, bit b, bit c)
             => nand(b,a);
 
         // (not (C) and A) and B
-        [MethodImpl(Inline),TernaryOp(X40)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X40)]
         public static bit f40(bit a, bit b, bit c)
             => and(and(not(c),a),b);
 
         // C nor (B xor A)
-        [MethodImpl(Inline),TernaryOp(X41)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X41)]
         public static bit f41(bit a, bit b, bit c)
             => nor(c,xor(b,a));
 
         // (A xor C) and (B xor C)
-        [MethodImpl(Inline),TernaryOp(X42)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X42)]
         public static bit f42(bit a, bit b, bit c)
             => and(xor(a,c),xor(b,c));
 
         // not ((A and C)) and (A xor (B xor 1))
-        [MethodImpl(Inline),TernaryOp(X43)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X43)]
         public static bit f43(bit a, bit b, bit c)
             => and(not(and(a,c)), xor(a,not(b)));
 
         // B and not (C)
-        [MethodImpl(Inline),TernaryOp(X44)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X44)]
         public static bit f44(bit a, bit b, bit c)
             => cnonimpl(b,c);
 
         // not (C) and ((A xor 1) or B)
-        [MethodImpl(Inline),TernaryOp(X45)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X45)]
         public static bit f45(bit a, bit b, bit c)
             => and(not(c), or(not(a), b));
 
         // not ((A and C)) and (B xor C)
-        [MethodImpl(Inline),TernaryOp(X46)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X46)]
         public static bit f46(bit a, bit b, bit c)
             => and(not(and(a,c)),xor(b,c));
 
         // B ? not (C) : not (A)
-        [MethodImpl(Inline),TernaryOp(X47)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X47)]
         public static bit f47(bit a, bit b, bit c)
             => select(b,not(c),not(a));
 
         // B and (A xor C)
-        [MethodImpl(Inline),TernaryOp(X48)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X48)]
         public static bit f48(bit a, bit b, bit c)
             => and(b,xor(a,c));
 
         // B ? (A xor C) : (A nor C)
-        [MethodImpl(Inline),TernaryOp(X49)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X49)]
         public static bit f49(bit a, bit b, bit c)
             => select(b,xor(a,c),nor(a,c));
 
         // (B or C) and (A xor C)
-        [MethodImpl(Inline),TernaryOp(X4A)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X4A)]
         public static bit f4a(bit a, bit b, bit c)
             => and(or(b,c), xor(a,c));
 
          // A xor (not (B) or C)
-        [MethodImpl(Inline),TernaryOp(X4B)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X4B)]
         public static bit f4b(bit a, bit b, bit c)
             => xor(a, or(not(b), c));
 
         // B and (A nand C)
-        [MethodImpl(Inline),TernaryOp(X4C)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X4C)]
         public static bit f4c(bit a, bit b, bit c)
             => and(b, nand(a,c));
 
         // B ? (A nand C) : (A nor C)
-        [MethodImpl(Inline),TernaryOp(X4D)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X4D)]
         public static bit f4d(bit a, bit b, bit c)
             => select(b, nand(a,c),nor(a,c));
 
         // C ? not (A) : B
-        [MethodImpl(Inline),TernaryOp(X4E)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X4E)]
         public static bit f4e(bit a, bit b, bit c)
             => select(c, not(a), b);
 
         // not (A) or (B and not (C))
-        [MethodImpl(Inline),TernaryOp(X4F)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X4F)]
         public static bit f4f(bit a, bit b, bit c)
             => or(not(a),cnonimpl(b,c));
 
         // A and not (C)
-        [MethodImpl(Inline),TernaryOp(X50)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X50)]
         public static bit f50(bit a, bit b, bit c)
             => cnonimpl(a,c);
 
         // not (C) and (A or (B xor 1))
-        [MethodImpl(Inline),TernaryOp(X51)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X51)]
         public static bit f51(bit a, bit b, bit c)
             => and(not(c),or(a,not(b)));
 
         // not ((B and C)) and (A xor C)
-        [MethodImpl(Inline),TernaryOp(X52)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X52)]
         public static bit f52(bit a, bit b, bit c)
             => and(not(and(b,c)),xor(a,c));
 
         // A ? not (C) : not (B)
-        [MethodImpl(Inline),TernaryOp(X53)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X53)]
         public static bit f53(bit a, bit b, bit c)
             => select(a, not(c), not(b));
 
         // not (C) and (A or B)
-        [MethodImpl(Inline),TernaryOp(X54)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X54)]
         public static bit f54(bit a, bit b, bit c)
             => and(not(c), or(a,b));
 
         // not (C)
-        [MethodImpl(Inline),TernaryOp(X55)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X55)]
         public static bit f55(bit a, bit b, bit c)
             => not(c);
 
         // C xor (B or A)
-        [MethodImpl(Inline),TernaryOp(X56)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X56)]
         public static bit f56(bit a, bit b, bit c)
             => xor(c,or(b,a));
 
         // C nand (B or A)
-        [MethodImpl(Inline),TernaryOp(X57)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X57)]
         public static bit f57(bit a, bit b, bit c)
             => nand(c,or(b,a));
 
         // (A or B) and (A xor C)
-        [MethodImpl(Inline),TernaryOp(X58)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X58)]
         public static bit f58(bit a, bit b, bit c)
             => and(or(a,b),xor(a,c));
 
         // C xor (A or (B xor 1))
-        [MethodImpl(Inline),TernaryOp(X59)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X59)]
         public static bit f59(bit a, bit b, bit c)
             => xor(c, or(a, not(b)));
 
         // C xor A
-        [MethodImpl(Inline),TernaryOp(X5A)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X5A)]
         public static bit f5a(bit a, bit b, bit c)
             => xor(c,a);
 
         //((A xor C) or ((A or B) xor 1))
-        [MethodImpl(Inline),TernaryOp(X5B)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X5B)]
         public static bit f5b(bit a, bit b, bit c)
             => or(xor(a,c), xor(or(a,b),on));
 
         //(A ? not (C) : B)
-        [MethodImpl(Inline),TernaryOp(X5C)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X5C)]
         public static bit f5c(bit a, bit b, bit c)
             => select(a,not(c), b);
 
         // not (C) or (not (A) and B)
-        [MethodImpl(Inline),TernaryOp(X5D)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X5D)]
         public static bit f5d(bit a, bit b, bit c)
             => or(not(c), and(not(a), b));
 
         // (not (C) and B) or (A xor C)
-        [MethodImpl(Inline),TernaryOp(X5E)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X5E)]
         public static bit f5e(bit a, bit b, bit c)
             => or(and(not(c),b),(xor(a,c)));
 
-        [MethodImpl(Inline),TernaryOp(X5F)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X5F)]
         public static bit f5f(bit a, bit b, bit c)
             => nand(c,a);
 
-        [MethodImpl(Inline),TernaryOp(X60)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X60)]
         public static bit f60(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X61)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X61)]
         public static bit f61(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X62)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X62)]
         public static bit f62(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X63)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X63)]
         public static bit f63(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X64)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X64)]
         public static bit f64(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X65)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X65)]
         public static bit f65(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X66)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X66)]
         public static bit f66(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X67)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X67)]
         public static bit f67(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X68)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X68)]
         public static bit f68(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X69)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X69)]
         public static bit f69(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X6A)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X6A)]
         public static bit f6a(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X6B)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X6B)]
         public static bit f6b(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X6C)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X6C)]
         public static bit f6c(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X6D)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X6D)]
         public static bit f6d(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X6E)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X6E)]
         public static bit f6e(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X6F)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X6F)]
         public static bit f6f(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X70)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X70)]
         public static bit f70(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X71)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X71)]
         public static bit f71(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X72)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X72)]
         public static bit f72(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X73)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X73)]
         public static bit f73(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X74)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X74)]
         public static bit f74(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X75)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X75)]
         public static bit f75(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X76)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X76)]
         public static bit f76(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X77)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X77)]
         public static bit f77(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X78)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X78)]
         public static bit f78(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X79)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X79)]
         public static bit f79(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X7A)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X7A)]
         public static bit f7a(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X7B)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X7B)]
         public static bit f7b(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X7C)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X7C)]
         public static bit f7c(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X7D)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X7D)]
         public static bit f7d(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X7E)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X7E)]
         public static bit f7e(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X7F)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X7F)]
         public static bit f7f(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X80)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X80)]
         public static bit f80(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X81)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X81)]
         public static bit f81(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X82)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X82)]
         public static bit f82(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X83)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X83)]
         public static bit f83(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X84)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X84)]
         public static bit f84(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X85)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X85)]
         public static bit f85(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X86)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X86)]
         public static bit f86(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X87)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X87)]
         public static bit f87(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X88)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X88)]
         public static bit f88(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X89)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X89)]
         public static bit f89(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X8A)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X8A)]
         public static bit f8a(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X8B)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X8B)]
         public static bit f8b(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X8C)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X8C)]
         public static bit f8c(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X8D)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X8D)]
         public static bit f8d(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X8E)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X8E)]
         public static bit f8e(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X8F)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X8F)]
         public static bit f8f(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X90)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X90)]
         public static bit f90(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X91)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X91)]
         public static bit f91(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X92)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X92)]
         public static bit f92(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X93)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X93)]
         public static bit f93(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X94)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X94)]
         public static bit f94(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X95)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X95)]
         public static bit f95(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X96)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X96)]
         public static bit f96(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X97)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X97)]
         public static bit f97(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X98)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X98)]
         public static bit f98(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X99)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X99)]
         public static bit f99(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X9A)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X9A)]
         public static bit f9a(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X9B)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X9B)]
         public static bit f9b(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X9C)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X9C)]
         public static bit f9c(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X9D)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X9D)]
         public static bit f9d(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X9E)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X9E)]
         public static bit f9e(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(X9F)]
+        [MethodImpl(Inline),TernaryBitLogicOp(X9F)]
         public static bit f9f(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(XA0)]
+        [MethodImpl(Inline),TernaryBitLogicOp(XA0)]
         public static bit fa0(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(XA1)]
+        [MethodImpl(Inline),TernaryBitLogicOp(XA1)]
         public static bit fa1(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(XA2)]
+        [MethodImpl(Inline),TernaryBitLogicOp(XA2)]
         public static bit fa2(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(XA3)]
+        [MethodImpl(Inline),TernaryBitLogicOp(XA3)]
         public static bit fa3(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(XA4)]
+        [MethodImpl(Inline),TernaryBitLogicOp(XA4)]
         public static bit fa4(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(XA5)]
+        [MethodImpl(Inline),TernaryBitLogicOp(XA5)]
         public static bit fa5(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(XA6)]
+        [MethodImpl(Inline),TernaryBitLogicOp(XA6)]
         public static bit fa6(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(XA7)]
+        [MethodImpl(Inline),TernaryBitLogicOp(XA7)]
         public static bit fa7(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(XA8)]
+        [MethodImpl(Inline),TernaryBitLogicOp(XA8)]
         public static bit fa8(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(XA9)]
+        [MethodImpl(Inline),TernaryBitLogicOp(XA9)]
         public static bit fa9(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline), TernaryOp(XAA)]
+        [MethodImpl(Inline), TernaryBitLogicOp(XAA)]
         public static bit faa(bit a, bit b, bit c)
             => c;
 
-        [MethodImpl(Inline),TernaryOp(XAB)]
+        [MethodImpl(Inline),TernaryBitLogicOp(XAB)]
         public static bit fab(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(XAC)]
+        [MethodImpl(Inline),TernaryBitLogicOp(XAC)]
         public static bit fac(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(XAD)]
+        [MethodImpl(Inline),TernaryBitLogicOp(XAD)]
         public static bit fad(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(XAE)]
+        [MethodImpl(Inline),TernaryBitLogicOp(XAE)]
         public static bit fae(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryOp(XAF)]
+        [MethodImpl(Inline),TernaryBitLogicOp(XAF)]
         public static bit faf(bit a, bit b, bit c)
             => default;
 
         // ---
 
 
-        [MethodImpl(Inline), TernaryOp(XCA)]
+        [MethodImpl(Inline), TernaryBitLogicOp(XCA)]
         public static bit fca(bit a, bit b, bit c)
             => select(a,b,c);
 
-        [MethodImpl(Inline), TernaryOp(XCB)]
+        [MethodImpl(Inline), TernaryBitLogicOp(XCB)]
         public static bit fcb(bit a, bit b, bit c)
             => b;
 
-        [MethodImpl(Inline), TernaryOp(XFF)]
+        [MethodImpl(Inline), TernaryBitLogicOp(XFF)]
         public static bit fff(bit a, bit b, bit c)
             => on;
 

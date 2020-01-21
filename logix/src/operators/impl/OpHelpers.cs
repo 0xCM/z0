@@ -16,11 +16,11 @@ namespace Z0.Logix
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
-       public static BinaryBitwiseOp<T> nologic<T>(BinaryLogicOpKind id, T x = default)        
+       public static BinaryBitwiseOp<T> nologic<T>(BinaryBitLogicKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
-       public static TernaryBitwiseOp<T> nologic<T>(TernaryOpKind id, T x = default)        
+       public static TernaryBitwiseOp<T> nologic<T>(TernaryBitLogicKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
@@ -36,7 +36,7 @@ namespace Z0.Logix
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
-       public static BinaryOp<T> dne<T>(BinaryLogicOpKind id, T x = default)        
+       public static BinaryOp<T> dne<T>(BinaryBitLogicKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
@@ -59,7 +59,7 @@ namespace Z0.Logix
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
-       public static TernaryOp<T> dne<T>(TernaryOpKind id, T x = default)        
+       public static TernaryOp<T> dne<T>(TernaryBitLogicKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 

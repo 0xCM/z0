@@ -42,27 +42,27 @@ namespace Z0
         /// Extracts fastop metadata from a host type for non-generic operations
         /// </summary>
         /// <param name="host">The source type</param>
-        public static IEnumerable<FastDirectInfo> FastOpDirect(this Type host)
+        public static IEnumerable<DirectOpInfo> FastOpDirect(this Type host)
             => FastOps.direct(host);
 
-        public static IEnumerable<FastDirectInfo> FastOpDirect(this IEnumerable<Type> hosts)
+        public static IEnumerable<DirectOpInfo> FastDirectOps(this IEnumerable<Type> hosts)
             => FastOps.direct(hosts);
                 
         /// <summary>
         /// Extracts fastop metadata from a host type for generic operations
         /// </summary>
         /// <param name="host">The source type</param>
-        public static IEnumerable<FastGenericInfo> FastOpGenericMethods(this Type host) 
+        public static IEnumerable<GenericOpInfo> FastOpGenericMethods(this Type host) 
             => FastOps.generics(host);
                         
-        public static IEnumerable<FastGenericInfo> FastOpGenericMethods(this IEnumerable<Type> hosts)
+        public static IEnumerable<GenericOpInfo> FastGenericOps(this IEnumerable<Type> hosts)
             => FastOps.generics(hosts);
 
         /// <summary>
         /// Closes generic operations over the set of primal types that each operation supports
         /// </summary>
         /// <param name="generics">Metadata for generic operations</param>
-        public static IEnumerable<FastOpClosure> Closures(this FastGenericInfo op)
+        public static IEnumerable<OpClosure> Closures(this GenericOpInfo op)
             => FastOps.closures(op);
 
         /// <summary>
@@ -85,6 +85,18 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static bool IsBlocked(this MethodInfo m)
             => FastOps.blocked(m);        
+
+        public static bool RequiresImmediate(this OpInfo src)
+            => src.Method.RequiresImmediate();
+
+        public static INativeMemberData CaptureNative(this OpSpec src, Span<byte> buffer)
+            => src.Method.CaptureNative(buffer);
+
+        public static IEnumerable<GenericOpInfo> FindGenericOps(this IOperationCatalog src)
+            => src.GenericApiHosts.FastGenericOps();
+
+        public static IEnumerable<DirectOpInfo> FindDirectOps(this IOperationCatalog src)
+            => src.GenericApiHosts.FastDirectOps();
 
     }
 }

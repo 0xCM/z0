@@ -26,12 +26,12 @@ namespace Z0
             this.Method = method;
             this.NativeBlock = block;
             this.Instructions = instructions;
-            this.Location = AddressSegment.Define(instructions.First().IP,instructions.Last().IP + (ulong)instructions.Last().ByteLength);            
+            this.Location = MemoryRange.Define(instructions.First().IP,instructions.Last().IP + (ulong)instructions.Last().ByteLength);            
         }
         
         public MethodInfo Method {get;}
 
-        public AddressSegment Location {get;}
+        public MemoryRange Location {get;}
             
         public Instruction[] Instructions {get;}
         

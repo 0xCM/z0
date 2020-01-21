@@ -24,10 +24,10 @@ namespace Z0
         /// </summary>
         /// <param name="encoded">The encoded instructions</param>
         /// <param name="decoded">The decoded instructions</param>
-        public static InstructionBlock Define(Moniker id, string label, AddressSegment location,  ReadOnlySpan<byte> encoded, Instruction[] decoded)
+        public static InstructionBlock Define(Moniker id, string label, MemoryRange location,  ReadOnlySpan<byte> encoded, Instruction[] decoded)
             => new InstructionBlock(id, label, location, encoded, decoded);
 
-        InstructionBlock(Moniker id, string label, AddressSegment location, ReadOnlySpan<byte> encoded, Instruction[] decoded)
+        InstructionBlock(Moniker id, string label, MemoryRange location, ReadOnlySpan<byte> encoded, Instruction[] decoded)
         {
             this.Label = label;
             this.Code = AsmCode.Define(id, label, encoded);
@@ -47,7 +47,7 @@ namespace Z0
         /// </summary>
         public Instruction[] Decoded {get;}
 
-        public AddressSegment Location {get;}
+        public MemoryRange Location {get;}
 
         /// <summary>
         /// The encoded instructions

@@ -12,19 +12,6 @@ namespace Z0
     public class t_natmod : t_gmath<t_natmod>
     {                
 
-        public void mod_mul32()
-        {
-            var m = Mod.Define(Random.Single(z32),z32);            
-            for(var i=0; i<RepCount; i++)
-            {
-                var a = Random.Single(z32);
-                var b = Random.Single(z32);
-                var z1 = m.mod(a*b);
-                var z2 = math.modmul(a,b,m.n);
-                Claim.eq(z1,z2);                
-            }
-        }
-
         public void mod_mul32_n3()
             => mod_mul_check(n3);
 

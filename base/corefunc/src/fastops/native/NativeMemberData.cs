@@ -13,20 +13,20 @@ namespace Z0
 
     abstract class NativeMemberData<S> : INativeMemberData
     {
-        protected NativeMemberData(S source, MethodInfo method, AddressSegment location, byte[] content)
+        protected NativeMemberData(S source, MethodInfo method, MemoryRange location, byte[] content)
         {
             require((int)location.Length == content.Length);
             this.Source = source;
             this.Method = method;
             this.Location = location;
-            this.Code = AsmCode.Define(Moniker.Provider.Define(method), method.Signature().Format(), content);
+            this.Code = AsmCode.Define(OpIdentity.Provider.Define(method), method.Signature().Format(), content);
         }
 
         public S Source {get;}
 
         public MethodInfo Method {get;}
 
-        public AddressSegment Location {get;}
+        public MemoryRange Location {get;}
 
         public AsmCode Code {get;}
     }

@@ -31,7 +31,7 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return generic<T>(math.modmul(convert<T,uint>(a), convert<T,uint>(b), convert<T,uint>(m)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.modmul(convert<T,uint>(a), convert<T,uint>(b), convert<T,uint>(b)));
+                return generic<T>(math.modmul(convert<T,uint>(a), convert<T,uint>(b), convert<T,uint>(m)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(math.modmul(uint32(a), uint32(b), uint32(m)));
             else if(typeof(T) == typeof(ulong))

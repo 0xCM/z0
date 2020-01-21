@@ -104,7 +104,7 @@ namespace Z0
             => AsmLib.Create(subject).Read(m);
 
         protected AsmCode ReadAsm(string subject, string opname, PrimalKind kind)
-            => AsmLib.Create(subject).Read(Moniker.define(opname,kind));
+            => AsmLib.Create(subject).Read(OpIdentity.define(opname,kind));
 
         protected AsmCode<T> ReadAsm<T>(string subject, string opname, T t = default)
             where T : unmanaged
@@ -113,13 +113,13 @@ namespace Z0
         protected AsmCode<T> ReadAsm<W,T>(string opname, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeNat
-                => AsmLib.Create("dinx").Read<T>(Moniker.define(opname, PrimalType.kind<T>(), w)); 
+                => AsmLib.Create("dinx").Read<T>(OpIdentity.define(opname, PrimalType.kind<T>(), w)); 
 
         protected void megacheck(string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, PrimalKind<byte> kind)
         {
             var w = n8;
 
-            var moniker = Moniker.define(name, kind);                        
+            var moniker = OpIdentity.define(name, kind);                        
             var f0 = FixedDelegate.from(primal, kind);
 
             var f1 = FixedDelegate.from(generic, kind);
@@ -136,7 +136,7 @@ namespace Z0
         {
             var w = n8;
 
-            var moniker = Moniker.define(name, kind);                        
+            var moniker = OpIdentity.define(name, kind);                        
             var f0 = FixedDelegate.from(primal, kind);
 
             var f1 = FixedDelegate.from(generic, kind);
@@ -153,7 +153,7 @@ namespace Z0
         {
             var w = n16;
 
-            var moniker = Moniker.define(name, kind);                        
+            var moniker = OpIdentity.define(name, kind);                        
             var f0 = FixedDelegate.from(primal, kind);
 
             var f1 = FixedDelegate.from(generic, kind);
@@ -170,7 +170,7 @@ namespace Z0
         {
             var w = n16;
 
-            var moniker = Moniker.define(name, kind);                        
+            var moniker = OpIdentity.define(name, kind);                        
             var f0 = FixedDelegate.from(primal, kind);
 
             var f1 = FixedDelegate.from(generic, kind);
@@ -187,7 +187,7 @@ namespace Z0
         {
             var w = n32;
 
-            var moniker = Moniker.define(name, kind);                        
+            var moniker = OpIdentity.define(name, kind);                        
             var f0 = FixedDelegate.from(primal, kind);
 
             var f1 = FixedDelegate.from(generic, kind);
@@ -203,7 +203,7 @@ namespace Z0
         protected void megacheck(string name, Func<int,int,int> primal, Func<int,int,int> generic, PrimalKind<int> kind)
         {
             var w = n32;
-            var moniker = Moniker.define(name, kind);                        
+            var moniker = OpIdentity.define(name, kind);                        
             var f0 = FixedDelegate.from(primal, kind);
 
             var f1 = FixedDelegate.from(generic, kind);
@@ -219,7 +219,7 @@ namespace Z0
         protected void megacheck(string name, Func<long,long,long> primal, Func<long,long,long> generic, PrimalKind<long> kind)
         {            
             var w = n64;
-            var moniker = Moniker.define(name, kind);                        
+            var moniker = OpIdentity.define(name, kind);                        
             var f0 = FixedDelegate.from(primal, kind);
 
             var f1 = FixedDelegate.from(generic, kind);
@@ -236,7 +236,7 @@ namespace Z0
         {            
             var w = n64;
 
-            var moniker = Moniker.define(name, kind);                        
+            var moniker = OpIdentity.define(name, kind);                        
             var f0 = FixedDelegate.from(primal, kind);
 
             var f1 = FixedDelegate.from(generic, kind);

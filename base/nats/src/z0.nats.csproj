@@ -6,4 +6,8 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="$(TopDir)root/src/z0.root.csproj" />
+  </ItemGroup>
+
 </Project>

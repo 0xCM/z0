@@ -15,12 +15,14 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class CoreFunc : AssemblyDesignator<CoreFunc>, ICatalogProvider
+    public sealed class CoreFunc : AssemblyDesignator<CoreFunc>
     {
-        public IOperationCatalog Catalog 
+        public override AssemblyId Id 
+            => AssemblyId.CoreFunc;
+
+        public override IOperationCatalog Catalog 
             => new Catalog();
 
-        public override AssemblyId Id => AssemblyId.CoreFunc;
     }
 
 }

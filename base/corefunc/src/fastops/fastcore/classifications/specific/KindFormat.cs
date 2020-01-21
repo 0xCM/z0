@@ -51,7 +51,7 @@ namespace Z0
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]
-        public static string Format(this BinaryLogicOpKind kind)
+        public static string Format(this BinaryBitLogicKind kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
@@ -63,7 +63,7 @@ namespace Z0
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryLogicOpKind kind, T arg1, T arg2)
+        public static string Format<T>(this BinaryBitLogicKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]
@@ -75,11 +75,11 @@ namespace Z0
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]
-        public static string Format(this TernaryOpKind kind)
+        public static string Format(this TernaryBitLogicKind kind)
             => kind.ToString();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this TernaryOpKind kind, T arg1, T arg2, T arg3)
+        public static string Format<T>(this TernaryBitLogicKind kind, T arg1, T arg2, T arg3)
             => $"{kind.Format()}({arg1}, {arg2}, {arg3})";
 
         public static string Format(this ShiftOpKind kind)        

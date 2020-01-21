@@ -37,11 +37,11 @@ namespace Z0
             }
         }
 
-        public static IEnumerable<MethodDisassembly> decode(FastGenericInfo op, ClrMetadataIndex index)
+        public static IEnumerable<MethodDisassembly> decode(GenericOpInfo op, ClrMetadataIndex index)
         {
             foreach(var k in op.Kinds)
             {
-                var moniker = Moniker.Provider.Define(op.Method, k);
+                var moniker = OpIdentity.Provider.Define(op.Method, k);
                 var method = op.Method.MakeGenericMethod(k.ToPrimalType());
                 var result = decode(moniker, method, index).ValueOrDefault();
                 if(result != null)
@@ -53,14 +53,14 @@ namespace Z0
         /// Decodes encoded assembly instructions
         /// </summary>
         /// <param name="data">The encoded instructions</param>
-        public static InstructionBlock decode(AsmCode code, AddressSegment location)
+        public static InstructionBlock decode(AsmCode code, MemoryRange location)
             => decode(code.Id, code.Label, location, code.Encoded);
 
         /// <summary>
         /// Decodes encoded assembly instructions
         /// </summary>
         /// <param name="data">The encoded instructions</param>
-        public static InstructionBlock decode(Moniker id, string label, AddressSegment location, byte[] data)
+        public static InstructionBlock decode(Moniker id, string label, MemoryRange location, byte[] data)
 		{
             var dst = new InstructionList();
             var reader = new ByteArrayCodeReader(data);

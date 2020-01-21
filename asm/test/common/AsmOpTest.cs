@@ -28,7 +28,7 @@ namespace Z0
             => "anon";
 
         protected Moniker TestOpMoniker(PrimalKind kind)
-            => Moniker.define($"{OpName}_asm",kind);
+            => OpIdentity.define($"{OpName}_asm",kind);
 
         protected Moniker TestOpName<T>(T t = default)
             where T : unmanaged

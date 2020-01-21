@@ -43,7 +43,7 @@ namespace Z0.Designators
             D.BitGrids.Designated,
             D.BitTest.Designated,
 
-            D.CpuFunc.Designated,
+            D.AsmCore.Designated,
             D.CpuTest.Designated,
 
             D.MklApi.Designated,

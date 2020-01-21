@@ -55,7 +55,7 @@ namespace Z0.Logix
         void check_identity<T>(N128 n, ComparisonExpr<Vector128<T>> identity)
             where T :unmanaged
         {
-            var @true = CpuOps.@true<T>(n128);
+            var @true = VectorizedOps.@true<T>(n128);
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.CpuVector<T>(n);
@@ -70,7 +70,7 @@ namespace Z0.Logix
         void check_identity<T>(N256 n, ComparisonExpr<Vector256<T>> equality)
             where T :unmanaged
         {
-            var @true = CpuOps.@true<T>(n);
+            var @true = VectorizedOps.@true<T>(n);
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.CpuVector<T>(n);

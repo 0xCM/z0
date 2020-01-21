@@ -164,8 +164,8 @@ namespace Z0
             var dSrc = nameof(math);
             var gSrc = nameof(gmath);
 
-            var dId = Moniker.define(name, kind, false);
-            var gId = Moniker.define(name, kind, true);
+            var dId = OpIdentity.define(name, kind, false);
+            var gId = OpIdentity.define(name, kind, true);
 
             var dAsm = AsmArchive.Define(dSrc).ReadCode(dId).OnNone(() => Trace($"{dId} not found"));
             var gAsm = AsmArchive.Define(gSrc).ReadCode(gId).OnNone(() => Trace($"{gId} not found"));
@@ -183,8 +183,8 @@ namespace Z0
             var dSrc = nameof(dinx);
             var gSrc = nameof(ginx);
 
-            var dId = Moniker.define(name, w, kind, false);
-            var gId = Moniker.define(name, w, kind, true);
+            var dId = OpIdentity.define(name, w, kind, false);
+            var gId = OpIdentity.define(name, w, kind, true);
 
             var dAsm = AsmArchive.Define(dSrc).ReadCode(dId).OnNone(() => Trace($"{dId} not found"));
             var gAsm = AsmArchive.Define(gSrc).ReadCode(gId).OnNone(() => Trace($"{gId} not found"));

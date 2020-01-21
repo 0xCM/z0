@@ -24,6 +24,7 @@ namespace Z0.Logix
         public static ReadOnlySpan<BinaryBitwiseOpKind> BinaryBitwiseKinds
             => ScalarOpApi.BinaryBitwiseKinds;
 
+        [BitVectorOp, PrimalClosures(PrimalKind.Integers)]
         public static BitVector<T> eval<T>(BinaryBitwiseOpKind kind, BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
@@ -49,6 +50,7 @@ namespace Z0.Logix
             }
         }
 
+        [BitVectorOp, PrimalClosures(PrimalKind.Integers)]
         public static BitVector<T> evalspec<T>(BinaryBitwiseOpKind kind, BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
@@ -74,6 +76,7 @@ namespace Z0.Logix
             }
         }
 
+        [Op, PrimalClosures(PrimalKind.Integers)]
         public static BinaryOp<BitVector<T>> lookup<T>(BinaryBitwiseOpKind kind)
             where T : unmanaged
         {
@@ -98,8 +101,5 @@ namespace Z0.Logix
                 default: return dne<BitVector<T>>(kind);
             }
         }
-
-
     }
-
 }
