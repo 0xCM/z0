@@ -22,6 +22,9 @@ namespace Z0
         public static FilePath operator + (FolderPath lhs, FileName rhs)
             => new FilePath(Path.Join(lhs.Name, rhs.Name));
 
+        public static FolderPath operator + (FolderPath lhs, RelativeLocation rhs)
+            => FolderPath.Define(Path.Join(lhs.Name, rhs.Name));
+
         public static FolderPath Define(string Name)
             => new FolderPath(Name);
         public FolderPath(string Name)

@@ -18,17 +18,19 @@ namespace Z0
         {
             public const string Name = "vadd";
 
+            public static HK.Vec128<T> hk => default;
+
             public static Add128<T> Op => default;
              
-            static N128 w => default;
-
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => ginx.vadd(x,y);
+            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) 
+                => ginx.vadd(x,y);
             
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b) => gmath.add(a,b);
+            public T InvokeScalar(T a, T b) 
+                => gmath.add(a,b);
 
             [MethodImpl(Inline)]
             public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> b, in Block128<T> c)            
@@ -42,17 +44,19 @@ namespace Z0
         {
             public const string Name = "vadd";
 
+            public static HK.Vec256<T> hk => default;
+
             public static Add256<T> Op => default;
             
-            static N256 w => default;
-
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => ginx.vadd(x,y);
+            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) 
+                => ginx.vadd(x,y);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T b) => gmath.add(a,b);
+            public T InvokeScalar(T a, T b) 
+                => gmath.add(a,b);
 
             [MethodImpl(Inline)]
             public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> b, in Block256<T> c)            

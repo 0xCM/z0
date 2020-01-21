@@ -11,11 +11,42 @@ namespace Z0
 
     using static zfunc;
 
-    public interface ITypeKind : ISemanticFormat
-    {
-        TypeKind General {get;}
+    /// <summary>
+    /// Characterizes a higher-kind
+    /// </summary>
+    public interface ITypeKind : IKind<TypeKind>
+    {        
 
-        uint Specific {get;}
+    }
+
+    public interface ITypeKind<K> : ITypeKind
+        where K : ITypeKind<K>
+    {
+
+    }
+
+    public interface ITypeKind<K,T> : ITypeKind<K>
+        where T : unmanaged
+        where K : ITypeKind<K,T>
+    {
+
+    }
+
+    public interface ITypeKind<K,N,T> : ITypeKind<K,T>
+        where T : unmanaged
+        where K : ITypeKind<K,N,T>
+        where N : unmanaged, ITypeNat
+    {
+
+    }
+
+    public interface ITypeKind<K,M,N,T> : ITypeKind<K,T>
+        where K : ITypeKind<K,M,N,T>
+        where T : unmanaged
+        where M : unmanaged, ITypeNat
+        where N : unmanaged, ITypeNat
+    {
+
     }
 
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class DelegateSurrogates
+    partial class SurrogateTypes
     {                
         /// <summary>
         /// Captures a delegate that is exposed as an emitter

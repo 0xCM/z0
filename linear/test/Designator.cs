@@ -6,11 +6,7 @@ namespace Z0.Designators
 {        
     using System;
 
-
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
-    public sealed class LinearTest : AssemblyDesignator<LinearTest>
+    public sealed class LinearOpsTest : AssemblyDesignator<LinearOpsTest>
     {
         public override AssemblyRole Role 
             => AssemblyRole.Test;

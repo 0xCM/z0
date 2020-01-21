@@ -16,6 +16,63 @@ namespace Z0
 
     public static class VectorType
     {
+        /// <summary>
+        /// Determines the component width of a k-kinded vector
+        /// </summary>
+        /// <param name="k">The vector kind</param>
+        [MethodImpl(Inline)]
+        public static int segwidth(VectorKind k)
+            => (byte)((uint)k >> 16);
+
+        /// <summary>
+        /// Determines the number of bits covered by a k-kinded vector
+        /// </summary>
+        /// <param name="k">The type kine</param>
+        [MethodImpl(Inline)]
+        public static int width(VectorKind k)
+            => (ushort)k;
+
+        /// <summary>
+        /// Determines the number of bytes covered by a k-kinded type
+        /// </summary>
+        /// <param name="k">The type kine</param>
+        [MethodImpl(Inline)]
+        public static int size(VectorKind kind)
+            => width(kind)/8;
+
+        /// <summary>
+        /// Determines whether a classfied vector is defined over primal unsigned integer components
+        /// </summary>
+        /// <param name="k">The vector classifier</param>
+        [MethodImpl(Inline)]
+        public static bit unsigned(VectorKind k)
+            => (k & VectorKind.Unsigned) != 0;
+
+        /// <summary>
+        /// Determines whether a classfied vector is defined over primal signed integer components
+        /// </summary>
+        /// <param name="k">The vector classifier</param>
+        [MethodImpl(Inline)]
+        public static bit signed(VectorKind k)
+            => (k & VectorKind.Signed) != 0;
+
+        /// <summary>
+        /// Determines whether a classfied vector is defined over floating-point components
+        /// </summary>
+        /// <param name="k">The vector classifier</param>
+        [MethodImpl(Inline)]
+        public static bit floating(VectorKind k)
+            => (k & VectorKind.Fractional) != 0;
+
+        /// <summary>
+        /// Determines whether a classfied vector is defined over primal integer components
+        /// </summary>
+        /// <param name="k">The vector classifier</param>
+        [MethodImpl(Inline)]
+        public static bit integral(VectorKind k)
+            => signed(k) || unsigned(k);
+
+
         [MethodImpl(Inline)]
         public static VectorKind kind<V>(V v = default)
             where V : struct

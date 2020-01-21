@@ -4,11 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
 {
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
+    using System;
+
     public sealed class RngCore : AssemblyDesignator<RngCore>
     {
-
+        public override AssemblyId Id => AssemblyId.RngCore;
     }
 }

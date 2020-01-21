@@ -17,13 +17,6 @@ namespace Z0
 
     }
 
-    public interface IBlockKind<B> : IBlockKind
-        where B : struct
-    {
-
-
-    }
-
     public interface IBlockKind<W,T> : IBlockKind
         where W : unmanaged, ITypeNat
         where T : unmanaged

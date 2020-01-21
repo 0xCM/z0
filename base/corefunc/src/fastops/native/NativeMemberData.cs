@@ -22,6 +22,15 @@ namespace Z0
             this.Code = AsmCode.Define(OpIdentity.Provider.Define(method), method.Signature().Format(), content);
         }
 
+        protected NativeMemberData(Moniker id, S source, MethodInfo method, MemoryRange location, byte[] content)
+        {
+            require((int)location.Length == content.Length);
+            this.Source = source;
+            this.Method = method;
+            this.Location = location;
+            this.Code = AsmCode.Define(id, method.Signature().Format(), content);
+        }
+
         public S Source {get;}
 
         public MethodInfo Method {get;}

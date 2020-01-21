@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
-    using System.Linq;
     using System.Reflection;
 
     using static zfunc;
@@ -19,25 +15,25 @@ namespace Z0
         /// Specifies the operation name
         /// </summary>
         public static Moniker WithName(this Moniker src, string name)
-            => OpIdentity.define(name, src.SegmentedWidth, src.PrimalKind, src.IsGeneric, src.IsAsm);
+            => OpIdentity.segmented(name, src.SegmentedWidth, src.PrimalKind, src.IsGeneric, src.IsAsm);
 
         /// <summary>
         /// Enables the assembly indicator
         /// </summary>
         public static Moniker WithAsm(this Moniker src)
-            => src.IsAsm ? src : OpIdentity.define(src.Name, src.SegmentedWidth, src.PrimalKind, src.IsGeneric, true);
+            => src.IsAsm ? src : OpIdentity.segmented(src.Name, src.SegmentedWidth, src.PrimalKind, src.IsGeneric, true);
         
         /// <summary>
         /// Enables the generic indicator
         /// </summary>
         public static Moniker WithGeneric(this Moniker src)
-            => OpIdentity.define(src.Name, src.SegmentedWidth, src.PrimalKind, true, src.IsAsm);
+            => OpIdentity.segmented(src.Name, src.SegmentedWidth, src.PrimalKind, true, src.IsAsm);
 
         /// <summary>
         /// Disables the generic indicator if enabled
         /// </summary>
         public static Moniker WithoutGeneric(this Moniker src)
-            => OpIdentity.define(src.Name, src.SegmentedWidth, src.PrimalKind, false, src.IsAsm);
+            => OpIdentity.segmented(src.Name, src.SegmentedWidth, src.PrimalKind, false, src.IsAsm);
 
         /// <summary>
         /// Specifies the segmented width
@@ -49,7 +45,7 @@ namespace Z0
         /// Specifies the primal kind
         /// </summary>
         public static Moniker WithKind(this Moniker src, PrimalKind k)
-            => OpIdentity.define(src.Name, src.SegmentedWidth, k, src.IsGeneric, src.IsAsm);
+            => OpIdentity.segmented(src.Name, src.SegmentedWidth, k, src.IsGeneric, src.IsAsm);
 
         /// <summary>
         /// Clears the immediate attached to the moniker, if any
@@ -69,5 +65,4 @@ namespace Z0
         public static Moniker WithImm(this Moniker src, byte imm)
             => OpIdentity.define(concat(src.WithoutImm().Text, $"{Moniker.SuffixSep}{Moniker.ImmIndicator}{imm}"));
     }
-
 }

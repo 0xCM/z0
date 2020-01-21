@@ -25,12 +25,10 @@ namespace Z0
     {
         static Type ApiG => typeof(ginx);
 
+        static MethodInfo gApiMethod(HK.Vec128 hk, string name)
+            => ApiG.Methods().WithName(name).OfKind(hk).Single();
 
-        static MethodInfo gApiMethod(N128 w, string name)
-            => ApiG.Methods().WithName(name).Vectorized(128).Single();
-            
-        static MethodInfo gApiMethod(N256 w, string name)
-            => ApiG.Methods().WithName(name).Vectorized(256).Single();
-
+        static MethodInfo gApiMethod(HK.Vec256 hk, string name)
+            => ApiG.Methods().WithName(name).OfKind(hk).Single();
     }
 }

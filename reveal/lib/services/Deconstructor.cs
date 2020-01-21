@@ -87,10 +87,8 @@ namespace Z0
                 }
                 var id = OpIdentity.Provider.Define(method);
                 var asmBody = DecodeAsm(method);
-                var cilbody = ReadCilBytes(clrMethod);    
-                var cilfunc = MdIx.FindCilFunction(method).ValueOrDefault();
-                        
-                return MethodDisassembly.Define(id, asmBody, cilbody, cilfunc);
+                var cilfunc = MdIx.FindCilFunction(method).ValueOrDefault();                        
+                return MethodDisassembly.Define(id, asmBody, cilfunc);
             }
             catch(NoCodeException)
             {
@@ -107,7 +105,7 @@ namespace Z0
         MethodAsmBody DecodeAsm(MethodInfo method)
         {
             var result = from block in ReadNativeContent(method)
-                          let instructions = AsmDecoder.decode(block)
+                          let instructions = AsmDecoder.list(block)
                         select MethodAsmBody.Define(method, block, instructions);
             return result.OnNone(() => throw new NoCodeException(method.ToString())).Value;
         }

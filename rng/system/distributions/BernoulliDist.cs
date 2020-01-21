@@ -5,14 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Text;
     using System.Linq;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
 
     using static zfunc;
     using static As;
-
 
     /// <summary>
     /// Realizes a Bernoulli distribution
@@ -37,8 +34,6 @@ namespace Z0
                 var success = fmath.lt(Polyrand.Next<double>(), Spec.Success) ? One : Zero;
                 yield return success;
             }            
-        }
-            
+        }           
     }
-
 }

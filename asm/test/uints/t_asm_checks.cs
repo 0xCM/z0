@@ -9,7 +9,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.IO;
     
     using static zfunc;
     using static Classifiers;
@@ -28,17 +27,19 @@ namespace Z0
             //data that exists in memory as a resource
             foreach(var d in Data.GetDescriptions())
                 Claim.eq(d.Location, location(d.GetBytes()));
-
         }
 
         public void vadd_check()
         {
+            var catalog = "ginx";
+            var subject = "dinx";        
             var name = nameof(dinx.vadd);
-            vadd_check(n128, ReadAsm(name, n128, z8));            
-            vadd_check(n128, ReadAsm(name, n128,z16));
-            vadd_check(n128, ReadAsm(name, n128,z32));
-            vadd_check(n256, ReadAsm(name, n256,z16));
-            vadd_check(n256, ReadAsm(name, n256,z32));
+
+            vadd_check(n128, ReadAsm(catalog, subject, name, n128, z8));            
+            vadd_check(n128, ReadAsm(catalog, subject, name, n128,z16));
+            vadd_check(n128, ReadAsm(catalog, subject, name, n128,z32));
+            vadd_check(n256, ReadAsm(catalog, subject, name, n256,z16));
+            vadd_check(n256, ReadAsm(catalog, subject, name, n256,z32));
         }
 
         public void add_megacheck()
@@ -180,17 +181,15 @@ namespace Z0
 
         void vector_match(string name, FixedWidth w, PrimalKind kind)
         {
-            var dSrc = nameof(dinx);
-            var gSrc = nameof(ginx);
+            var catalog = nameof(ginx);        
+            var idD = OpIdentity.segmented(name, w, kind, false);
+            var idG = OpIdentity.segmented(name, w, kind, true);
 
-            var dId = OpIdentity.define(name, w, kind, false);
-            var gId = OpIdentity.define(name, w, kind, true);
+            var asmD = AsmArchive.Define(catalog, nameof(dinx)).ReadCode(idD).OnNone(() => Trace($"{idD} not found"));
+            var asmG = AsmArchive.Define(catalog, nameof(ginx)).ReadCode(idG).OnNone(() => Trace($"{idG} not found"));
 
-            var dAsm = AsmArchive.Define(dSrc).ReadCode(dId).OnNone(() => Trace($"{dId} not found"));
-            var gAsm = AsmArchive.Define(gSrc).ReadCode(gId).OnNone(() => Trace($"{gId} not found"));
-
-            var success = from d in dAsm
-                          from g in gAsm
+            var success = from d in asmD
+                          from g in asmG
                           let result = binop_match(w,d,g)
                           select result;
 

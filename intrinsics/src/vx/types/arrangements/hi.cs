@@ -15,13 +15,13 @@ namespace Z0
         public readonly struct Hi128<T> : IVUnaryOp128<T>
             where T : unmanaged
         {
-            public static Hi128<T> Op => default;
-
             public const string Name = "vhi";
 
-            static N128 w => default;
+            public static HK.Vec128<T> hk => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public static Hi128<T> Op => default;
+
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => ginx.vhi(x);
@@ -31,13 +31,13 @@ namespace Z0
         public readonly struct Hi256<T> : IVReducer256<T>
             where T : unmanaged
         {
-            public static Hi256<T> Op => default;
-
             public const string Name = "vhi";
 
-            static N256 w => default;
+            public static HK.Vec256<T> hk => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public static Hi256<T> Op => default;
+
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector256<T> x) => ginx.vhi(x);

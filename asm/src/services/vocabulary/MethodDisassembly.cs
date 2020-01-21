@@ -13,16 +13,15 @@ namespace Z0
     
     public class MethodDisassembly
     {
-        public static MethodDisassembly Define(Moniker id, MethodAsmBody asmBody, byte[] cilbody, CilFunction cilfunc = null)
-            => new MethodDisassembly(id, asmBody, cilbody, cilfunc);
+        public static MethodDisassembly Define(Moniker id, MethodAsmBody asmBody, CilFunction cilfunc)
+            => new MethodDisassembly(id, asmBody, cilfunc);
         
-        MethodDisassembly(Moniker id, MethodAsmBody asmBody, byte[] cilbody, CilFunction cilfunc = null)        
+        MethodDisassembly(Moniker id, MethodAsmBody asmBody,  CilFunction cilfunc)        
         {
             this.Id = id;
             this.Label = asmBody.Method.Signature().Format();
             this.AsmBody = asmBody;
             this.Method = asmBody.Method;
-            this.CilBody = cilbody;
             this.CilFunction = cilfunc;
         }
 
@@ -36,15 +35,10 @@ namespace Z0
             => AsmCode.Define(Id, Label, AsmBody.NativeBlock.Data);
         
         public InstructionBlock Instructions
-            => InstructionBlock.Define(Id, Label, AsmBody.Location, AsmBody.NativeBlock.Data, AsmBody.Instructions);
+            => InstructionBlock.Define(Id, AsmBody);
 
         public MethodInfo Method {get; set;}
     
-        public byte[] CilBody {get;set;}
-
         public Option<CilFunction> CilFunction {get;set;}
-
-        public string Name 
-            => Method.Name;    
     }
 }

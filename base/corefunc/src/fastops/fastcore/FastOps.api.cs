@@ -132,28 +132,6 @@ namespace Z0
                 let closed = definition.MakeGenericMethod(k.ToPrimalType())
                 select closure(id, k, closed);            
 
-
-        /// <summary>
-        /// Determines whether a method is classified as a blocked op
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool blocked(MethodInfo m)
-            => m.Attributed<BlockedOpAttribute>();
-
-        /// <summary>
-        /// Determines whether a method is classified as a natural op
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool natural(MethodInfo m)
-            => m.Attributed<NatOpAttribute>();
-
-        /// <summary>
-        /// Determines whether a method is classified as a span op
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool spanned(MethodInfo m)
-            => m.Attributed<SpanOpAttribute>();
-
         static IEnumerable<PrimalKind> memberkinds(MemberInfo m)
             => m.CustomAttribute<PrimalClosuresAttribute>().MapValueOrElse(a => a.SystemPrimitive.DistinctKinds(), () => items<PrimalKind>());
 

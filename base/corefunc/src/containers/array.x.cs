@@ -15,12 +15,23 @@ namespace Z0
     partial class xfunc
     {
         /// <summary>
+        /// Fills an array with the element type's default value
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <typeparam name="T">The array element type</typeparam>
+        [MethodImpl(Inline)]
+        public static T[] Clear<T>(this T[] src)
+        {
+            src?.Fill(default(T));
+            return src;
+        }
+
+        /// <summary>
         /// Clones an array and optionally excludes content replication
         /// </summary>
         /// <param name="src"></param>
         /// <param name="structureOnly"></param>
         /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static T[] Replicate<T>(this T[] src, bool structureOnly = false)
         {
@@ -91,7 +102,6 @@ namespace Z0
         /// <param name="src">The source array</param>
         /// <param name="offset">The position of the first element of the source array </param>
         /// <param name="length">The position of the last element of the source array</param>
-        /// <returns></returns>
         public static T[] Subset<T>(this T[] src, int offset, int length)
             => src.SubArray(offset,length);
 

@@ -17,6 +17,17 @@ namespace Z0
         public static AsmArchive Define(string subject)
             => new AsmArchive(subject);
 
+        public static AsmArchive Define(IOperationCatalog catalog, string subject)
+            => new AsmArchive(catalog.CatalogName,subject);
+
+        public static AsmArchive Define(string catalog, string subject)
+            => new AsmArchive(catalog,subject);
+
+        AsmArchive(string catalog, string subject)
+        {
+            TargetFolder = LogPaths.The.AsmDataDir(RelativeLocation.Define(catalog, subject));
+        }
+
         AsmArchive(string subject)
         {
             TargetFolder = LogPaths.The.AsmDataDir(FolderName.Define(subject));
@@ -24,17 +35,17 @@ namespace Z0
     
         FolderPath TargetFolder {get;}
         
-        public void Save(DirectOpInfo op)
-            => Save(op.Method.FastOp().CaptureNative(new byte[NativeReader.DefaultBufferLen]));
 
-        public void Save(GenericOpInfo op)
+        public void Save(AsmFuncInfo src)
         {
-            foreach(var k in op.Kinds)
-            {
-                var method = op.Method.MakeGenericMethod(k.ToPrimalType());
-                Save(method.FastOp().CaptureNative(new byte[NativeReader.DefaultBufferLen]));
-            }
+            Paths.AsmHexPath(TargetFolder, src.Id).WriteText(src.Code.Format());
+            Paths.AsmDetailPath(TargetFolder, src.Id).WriteText(src.FormatDetail());
         }
+
+        public void Save(IEnumerable<AsmFuncInfo> src)
+        {
+            iter(src,Save);
+        }   
 
         public void Save(MethodDisassembly src)
         {
@@ -43,24 +54,11 @@ namespace Z0
             src.CilFunction.OnSome(cil => Paths.CilPath(TargetFolder, src.Id).WriteText(cil.Format()));
         }
 
-        public void Save(AsmCodeSet src)
-        {
-            Paths.AsmHexPath(TargetFolder, src.Id).WriteText(src.Encoded.Format());
-            Paths.AsmDetailPath(TargetFolder, src.Id).WriteText(AsmFunction.define(src).FormatDetail());
-        }
-
         public void Save(INativeMemberData src)
         {
             Paths.AsmHexPath(TargetFolder, src.Id).WriteText(src.Code.Format());
             Paths.AsmDetailPath(TargetFolder, src.Id).WriteText(AsmFunction.define(src).FormatDetail());
         }
-
-        public void Save(IEnumerable<AsmCodeSet> codesets)
-        {
-            foreach(var cs in codesets)
-                Save(cs);
-        }
-
             
         public void Clear()
         {

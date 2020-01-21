@@ -17,15 +17,14 @@ namespace Z0
     /// </summary>
     public readonly struct AsmLib
     {
-        readonly FolderName Subject;
+        readonly FolderPath Folder;
 
+        public static AsmLib Create(string catalog, string subject)
+            => new AsmLib(catalog, subject);
 
-        public static AsmLib Create(string subject)
-            => new AsmLib(subject);
-
-        public AsmLib(string subject)
+        public AsmLib(string catalog, string subject)
         {
-            this.Subject = FolderName.Define(subject);
+            this.Folder = LogPaths.The.AsmDataDir(RelativeLocation.Define(catalog, subject));
         }
 
         /// <summary>
@@ -34,7 +33,7 @@ namespace Z0
         /// <param name="subfolder">The asm log subfolder</param>
         /// <param name="m">The identifying moniker</param>
         public AsmCode Read(Moniker m)
-            => AsmCode.Parse(Paths.AsmHexPath(Subject, m).ReadText(),m);
+            => AsmCode.Parse(Paths.AsmHexPath(Folder, m).ReadText(),m);
 
         /// <summary>
         /// Materializes a typed code block (per user's insistence as the type is not checkeed in any way) 
@@ -44,14 +43,14 @@ namespace Z0
         /// <param name="m">The identifying moniker</param>
         public AsmCode<T> Read<T>(Moniker m, T t = default)
             where T : unmanaged
-                => AsmCode.Parse(Paths.AsmHexPath(Subject, m).ReadText(),m,t);
+                => AsmCode.Parse(Paths.AsmHexPath(Folder, m).ReadText(),m,t);
 
         /// <summary>
         /// Returns the assembly hex file paths with filenames that satisfy a substring match predicate
         /// </summary>
         /// <param name="match">The match predicate</param>
         public IEnumerable<FilePath> HexFiles(string match)        
-            => Paths.AsmDataDir(Subject).Files(Paths.HexExt, match);
+            => Folder.Files(Paths.HexExt, match);
 
     }
 }

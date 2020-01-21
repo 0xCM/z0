@@ -12,7 +12,6 @@ namespace Z0
     using System.Collections.Generic;
     
     using static zfunc;
-    using static Classifiers;
 
     public class t_dynamic : t_vinx<t_dynamic>
     {   
@@ -26,22 +25,18 @@ namespace Z0
 
         public void handle_test()
         {   const byte imm8 = 9;
-            var method = typeof(ginx).Methods().WithName(nameof(ginx.vbsll)).Vectorized(128).Single();
-            var op = VectorImm.unary<uint>(n128,method,imm8);
+            var method = typeof(ginx).Methods().WithName(nameof(ginx.vbsll)).OfKind(HK.vk128()).Single();
+            var op = Dynop.unary<uint>(HK.vk128(),method,imm8);
             var handle = GetMethodHandle(op.DynamicMethod);
             Trace(handle.Value.ToString());
 
         }
          
-
         public unsafe void vbsll_128x32u()
         {
             const byte imm8 = 9;
 
-            var vbsll = VX.vbsll<uint>(n128).@delegate(imm8).DynamicOp;
-            
-
-        
+            var vbsll = VX.vbsll<uint>(n128).@delegate(imm8).DynamicOp;            
                     
             for(var i=0; i<RepCount; i++)
             {
@@ -50,9 +45,6 @@ namespace Z0
                 var z = ginx.vbsll(x,imm8);
                 Claim.eq(z,y);
             }
-
         }
-
     }
-
 }

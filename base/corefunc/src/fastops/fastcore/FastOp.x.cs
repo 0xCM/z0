@@ -65,27 +65,6 @@ namespace Z0
         public static IEnumerable<OpClosure> Closures(this GenericOpInfo op)
             => FastOps.closures(op);
 
-        /// <summary>
-        /// Determines whether a method is classified as a span op
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsSpanOp(this MethodInfo m)
-            => FastOps.spanned(m);
-
-        /// <summary>
-        /// Determines whether a method is classified as a nat op
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsNatOp(this MethodInfo m)
-            => FastOps.natural(m);
-        
-        /// <summary>
-        /// Determines whether a method accepts and/or returns at least one memory block parameter
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsBlocked(this MethodInfo m)
-            => FastOps.blocked(m);        
-
         public static bool RequiresImmediate(this OpInfo src)
             => src.Method.RequiresImmediate();
 
@@ -97,6 +76,5 @@ namespace Z0
 
         public static IEnumerable<DirectOpInfo> FindDirectOps(this IOperationCatalog src)
             => src.GenericApiHosts.FastDirectOps();
-
     }
 }

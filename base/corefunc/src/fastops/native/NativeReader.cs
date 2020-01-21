@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to read</param>
         /// <param name="dst">The target buffer</param>
-        public static INativeMemberData read(MethodInfo m, Span<byte> dst)
+        public static INativeMemberData read(Moniker id, MethodInfo m, Span<byte> dst)
         {            
             try
             {
@@ -35,7 +35,7 @@ namespace Z0
                 var end = capture(pSrc, dst);            
                 var bytesRead = (int)(end - start);
                 var code = dst.Slice(0, bytesRead).ToArray();
-                return NativeMethodData.Define(m, (start, end), code);         
+                return NativeMethodData.Define(id, m, (start, end), code);         
             }
             catch(Exception e)
             {
@@ -45,11 +45,19 @@ namespace Z0
         }
 
         /// <summary>
+        /// Runs the jitter on a reflected method and captures the emitted binary assembly data
+        /// </summary>
+        /// <param name="m">The method to read</param>
+        /// <param name="dst">The target buffer</param>
+        public static INativeMemberData read(MethodInfo m, Span<byte> dst)
+            => read(OpIdentity.Provider.Define(m), m, dst);
+
+        /// <summary>
         /// Captures native code produced by the JIT for a dynamic delegate
         /// </summary>
         /// <param name="d">The dynamic delegate</param>
         /// <param name="dst">The target buffer</param>
-        public static unsafe INativeMemberData read(DynamicDelegate d, Span<byte> dst)
+        public static unsafe INativeMemberData read(Moniker id, DynamicDelegate d, Span<byte> dst)
         {
             var pSrc = jit(d);
             var pSrcCurrent = pSrc;
@@ -57,15 +65,23 @@ namespace Z0
             var end = capture(pSrc, dst);   
             var bytesRead = (int)(end - start);
             var code = dst.Slice(0, bytesRead).ToArray();
-            return NativeMethodData.Define(d.SourceMethod, (start, end), code);
+            return NativeMethodData.Define(id, d.SourceMethod, (start, end), code);
         }
-        
+
+        /// <summary>
+        /// Captures native code produced by the JIT for a dynamic delegate
+        /// </summary>
+        /// <param name="d">The dynamic delegate</param>
+        /// <param name="dst">The target buffer</param>
+        public static unsafe INativeMemberData read(DynamicDelegate d, Span<byte> dst)
+            => read(OpIdentity.Provider.Define(d.SourceMethod), d, dst);
+            
         /// <summary>
         /// Runs the jitter on a delegate and captures the emitted binary assembly data
         /// </summary>
         /// <param name="m">The method to read</param>
         /// <param name="dst">The target buffer</param>
-        public static unsafe INativeMemberData read(Delegate d, Span<byte> dst)
+        public static unsafe INativeMemberData read(Moniker id, Delegate d, Span<byte> dst)
         {
             try
             {
@@ -75,7 +91,7 @@ namespace Z0
                 var end = capture(pSrc, dst);
                 var bytesRead = (int)(end - start);
                 var code = dst.Slice(0, bytesRead).ToArray();
-                return NativeDelegateData.Define(d, (start, end), code);
+                return NativeDelegateData.Define(id, d, (start, end), code);
             }
             catch(Exception e)
             {
@@ -83,6 +99,14 @@ namespace Z0
                 return NativeDelegateData.Empty;                    
             }
         }
+
+        /// <summary>
+        /// Runs the jitter on a delegate and captures the emitted binary assembly data
+        /// </summary>
+        /// <param name="m">The method to read</param>
+        /// <param name="dst">The target buffer</param>
+        public static unsafe INativeMemberData read(Delegate d, Span<byte> dst)
+            => read(OpIdentity.Provider.Define(d.Method), d, dst);
 
         /// <summary>
         /// Closes a generic method definition over a supplied type and captures the binary assembly data emitted 

@@ -18,17 +18,19 @@ namespace Z0
         {
             public const string Name = "vinc";
 
+            public static HK.Vec128<T> hk => default;
+
             public static Inc128<T> Op => default;
 
-            static N128 w => default;
-
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x) => ginx.vinc(x);
+            public Vector128<T> Invoke(Vector128<T> x) 
+                => ginx.vinc(x);
             
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a) => gmath.inc(a);
+            public T InvokeScalar(T a) 
+                => gmath.inc(a);
 
             [MethodImpl(Inline)]
             public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> c)            
@@ -41,18 +43,19 @@ namespace Z0
         {
             public const string Name = "vinc";
 
+            public static HK.Vec256<T> hk => default;
+
             public static Inc256<T> Op => default;
 
-            static N256 w => default;
-
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x)
                 => ginx.vinc(x);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a) => gmath.inc(a);
+            public T InvokeScalar(T a) 
+                => gmath.inc(a);
 
             [MethodImpl(Inline)]
             public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> c)            

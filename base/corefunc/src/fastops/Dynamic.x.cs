@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source delegate</param>
         public static unsafe DynamicPointer GetDynamicPointer(this DynamicDelegate src)
-            => DynamicPointer.From(src);
+            => Dynop.ptr(src);
 
         /// <summary>
         /// Returns a dynamic delegate's dynamic pointer
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The source delegate</param>
         public static unsafe DynamicPointer GetDynamicPointer<D>(this DynamicDelegate<D> src)
             where D : Delegate
-                => DynamicPointer.From(src);
+                => Dynop.ptr(src);
 
         public static CilFunctionBody CilFunc(this DynamicMethod src)
             => CilFunctionBody.From(src);
@@ -55,27 +55,5 @@ namespace Z0
 
         internal static DynamicDelegate CreateDelegate(this DynamicMethod dst, MethodInfo src, Type @delegate)
                 => DynamicDelegate.Define(src,dst, dst.CreateDelegate(@delegate));
-
-        internal static ILGenerator EmitConstLoad(this ILGenerator g, byte imm)
-        {
-            var code = imm switch {
-                0 => OpCodes.Ldc_I4_0,
-                1 => OpCodes.Ldc_I4_1,
-                2 => OpCodes.Ldc_I4_2,
-                3 => OpCodes.Ldc_I4_3,
-                4 => OpCodes.Ldc_I4_4,
-                5 => OpCodes.Ldc_I4_5,
-                6 => OpCodes.Ldc_I4_6,
-                7 => OpCodes.Ldc_I4_7,
-                8 => OpCodes.Ldc_I4_8,
-                _ => OpCodes.Ldc_I4_S
-            }; 
-            if(imm <= 8)
-                g.Emit(code);
-            else
-                g.Emit(code, imm);
-
-            return g;
-        }
     }
 }

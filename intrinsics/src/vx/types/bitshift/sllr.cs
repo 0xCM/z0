@@ -17,17 +17,19 @@ namespace Z0
         {
             public const string Name = "vsllr";
 
+            public static HK.Vec128<T> hk => default;
+
             public static Sllr128<T> Op => default;
 
-            static N128 w => default;
-
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> offsets) => ginx.vsllr(x,offsets);
+            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> offsets) 
+                => ginx.vsllr(x,offsets);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T offset) => gmath.sll(a,convert<T,byte>(offset));            
+            public T InvokeScalar(T a, T offset) 
+                => gmath.sll(a,convert<T,byte>(offset));            
         }
 
         public readonly struct Sllr256<T> : IVBinOp256D<T>
@@ -35,18 +37,19 @@ namespace Z0
         {
             public const string Name = "vsllr";
 
-            static N256 w => default;            
+            public static HK.Vec256<T> hk => default;
 
             public static Sllr256<T> Op => default;
              
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> offset) => ginx.vsllr(x,offset);
+            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> offset) 
+                => ginx.vsllr(x,offset);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, T offset) => gmath.sll(a,convert<T,byte>(offset));
-
+            public T InvokeScalar(T a, T offset) 
+                => gmath.sll(a,convert<T,byte>(offset));
         }
     }
 }

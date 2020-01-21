@@ -12,8 +12,8 @@ namespace Z0
 
     using static zfunc;
 
-    using static SurrogateD;
-    using static DelegateSurrogates;
+    using static OpSurrogates;
+    using static SurrogateTypes;
 
     public class t_opcatalog : t_gmath<t_opcatalog>
     {     

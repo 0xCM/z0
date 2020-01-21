@@ -18,17 +18,20 @@ namespace Z0
         {
             public const string Name = "vbitclear";
 
+            public static HK.Vec128<T> hk => default;
+
             public static BitClear128<T> Op => default;
 
-            static N128 w => default;
+            public Moniker Moniker => moniker(Name,hk);
 
-            public Moniker Moniker => moniker<T>(Name,w);
-
-            [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, byte offset, byte count) => ginx.vbitclear(x,offset,count);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, byte b, byte c) => gbits.bitclear(a, b, c);
+            public Vector128<T> Invoke(Vector128<T> x, byte offset, byte count) 
+                => ginx.vbitclear(x,offset,count);
+
+            [MethodImpl(Inline)]
+            public T InvokeScalar(T a, byte b, byte c) 
+                => gbits.bitclear(a, b, c);
         }
 
         [PrimalClosures(PrimalKind.Integers)]
@@ -37,17 +40,19 @@ namespace Z0
         {
             public const string Name = "vbitclear";
              
+            public static HK.Vec256<T> hk => default;
+
             public static BitClear256<T> Op => default;
 
-            static N256 w => default;
-
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, byte offset, byte count) => ginx.vbitclear(x,offset, count);
+            public Vector256<T> Invoke(Vector256<T> x, byte offset, byte count) 
+                => ginx.vbitclear(x,offset, count);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, byte b, byte c) => gbits.bitclear(a, b, c);
+            public T InvokeScalar(T a, byte b, byte c) 
+                => gbits.bitclear(a, b, c);
 
 
         }

@@ -52,7 +52,6 @@ namespace Z0
         DynamicDelegate<BinaryOp<T>>  @delegate(byte imm8);  
 
         OpArityKind ImmResolver.ResolvedArity => OpArityKind.Binary;        
-        
     }
 
     [SuppressUnmanagedCodeSecurity]
@@ -74,7 +73,6 @@ namespace Z0
         FixedWidth ImmResolver.OperandWidth => (FixedWidth)nateval<W>();
 
         OpArityKind ImmResolver.ResolvedArity => OpArityKind.Unary;           
-
     }
 
     [SuppressUnmanagedCodeSecurity]
@@ -118,8 +116,5 @@ namespace Z0
         where T : unmanaged
     {
         
-
-
     }
-
 }

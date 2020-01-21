@@ -17,11 +17,11 @@ namespace Z0
         {
             public const string Name = "vbroadcast";
 
+            public static HK.Vec128<T> hk => default;
+
             public static Broadcast128<T> Op => default;
 
-            static N128 w => default;
-
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(T a) => CpuVector.vbroadcast(n128, a);            
@@ -40,8 +40,7 @@ namespace Z0
             public Moniker Moniker => moniker<T>($"{Name}_{primalsig<S>()}",w);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(S a) => CpuVector.vbroadcast(n128, convert<S,T>(a));
-            
+            public Vector128<T> Invoke(S a) => CpuVector.vbroadcast(n128, convert<S,T>(a));            
         }
 
         public readonly struct Broadcast256<T> : IVFactory256<T,T>
@@ -49,11 +48,11 @@ namespace Z0
         {
             public const string Name = "vbroadcast";
 
+            public static HK.Vec256<T> hk => default;
+
             public static Broadcast256<T> Op => default;
 
-            static N256 w => default;
-
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(T a) => CpuVector.vbroadcast(n256, a);            

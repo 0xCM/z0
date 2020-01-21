@@ -4,16 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
 {
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
-    public sealed class CpuTest : AssemblyDesignator<CpuTest>
+    public sealed class AsmCoreTest : AssemblyDesignator<AsmCoreTest>
     {
         public override AssemblyRole Role 
             => AssemblyRole.Test;
 
         public override void Run(params string[] args)
             => App.Run(args);
-
     }
 }

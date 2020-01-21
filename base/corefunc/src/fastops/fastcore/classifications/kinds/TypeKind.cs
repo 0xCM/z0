@@ -11,7 +11,6 @@ namespace Z0
 
     using static zfunc;
 
-
     /// <summary>
     /// Clasifies types
     /// </summary>
@@ -20,14 +19,20 @@ namespace Z0
     {    
         None = 0,
         
-        SystemPrimitive = 1,
+        SystemPrimitive = Pow2.T00,
 
-        Block = 2,
+        SystemSpan = Pow2.T01,
+        
+        Block = Pow2.T10,
 
-        Vector = 4,
+        Vector = Pow2.T11,
 
-        UserPrimitive = 8
+        UserPrimitive = Pow2.T12,
 
+        BitVector = Pow2.T15,
+
+        BitMatrix = Pow2.T16,
+
+        BitGrid = Pow2.T17,
     }
-
 }

@@ -20,12 +20,12 @@ namespace Z0
 
             public static Blend2x64x128<T> Op => default;
 
-            static N128 w => default;
+            public static HK.Vec128<T> hk => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
-            public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte imm8)
-                => VectorImm.binary<T>(w, gApiMethod(w,Name),imm8);
+            public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
+                => Dynop.binary<T>(hk, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, byte spec) 
@@ -37,19 +37,18 @@ namespace Z0
         {
             public const string Name = "vblend4x64";
 
+            public static HK.Vec256<T> hk => default;
+
             public static Blend4x64x256<T> Op => default;
 
-            static N256 w => default;
+            public Moniker Moniker => moniker(Name,hk);
 
-            public Moniker Moniker => moniker<T>(Name,w);
-
-            public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte imm8)
-                => VectorImm.binary<T>(w, gApiMethod(w,Name),imm8);
+            public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
+                => Dynop.binary<T>(hk, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, byte spec) 
-                =>  ginx.vblend4x64(x,y,spec);
-
+                => ginx.vblend4x64(x,y,spec);
         }
 
         public readonly struct Blend4x32x128<T> : IVBinOp128Imm8<T>, IVBinaryImm8Resolver128<T>
@@ -59,12 +58,12 @@ namespace Z0
 
             public static Blend4x32x128<T> Op => default;
 
-            static N128 w => default;
+            public static HK.Vec128<T> hk => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
-            public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte imm8)
-                => VectorImm.binary<T>(w, gApiMethod(w,Name),imm8);
+            public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
+                => Dynop.binary<T>(hk, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, byte spec) 
@@ -78,12 +77,12 @@ namespace Z0
 
             public static Blend8x32x256<T> Op => default;
 
-            static N256 w => default;
+            public static HK.Vec256<T> hk => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
-            public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte imm8)
-                => VectorImm.binary<T>(w, gApiMethod(w,Name),imm8);
+            public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
+                => Dynop.binary<T>(hk, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, byte spec) 
@@ -98,12 +97,12 @@ namespace Z0
 
             public static Blend8x16x128<T> Op => default;
 
-            static N128 w => default;
+            public static HK.Vec128<T> hk => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
-            public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte imm8)
-                => VectorImm.binary<T>(w, gApiMethod(w,Name),imm8);
+            public DynamicDelegate<BinaryOp<Vector128<T>>> @delegate(byte spec)
+                => Dynop.binary<T>(hk, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, byte spec) 
@@ -115,20 +114,18 @@ namespace Z0
         {
             public const string Name = "vblend8x16";
 
+            public static HK.Vec256<T> hk => default;
+
             public static Blend8x16x256<T> Op => default;
 
-            static N256 w => default;
+            public Moniker Moniker => moniker(Name,hk);
 
-            public Moniker Moniker => moniker<T>(Name,w);
-
-            public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte imm8)
-                => VectorImm.binary<T>(w, gApiMethod(w,Name),imm8);
+            public DynamicDelegate<BinaryOp<Vector256<T>>> @delegate(byte spec)
+                => Dynop.binary<T>(hk, gApiMethod(hk,Name),spec);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, byte spec) 
                 =>  ginx.vblend8x16(x,y,spec);
-
         }
-
     }
 }

@@ -14,7 +14,6 @@ namespace Z0
 
     using static zfunc;    
 
-
     public static class TimeSeries
     {
         static long LastSeriesId;
@@ -106,8 +105,6 @@ namespace Z0
                     select evolve;
             
             await task(() => Task.WaitAll(variations.ToArray()));
-
         }
     }
-
 }

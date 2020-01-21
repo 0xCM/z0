@@ -17,14 +17,15 @@ namespace Z0
         {
             public const string Name = "vtakeimask";
 
+            public static HK.Vec128<T> hk => default;
+
             public static TakeIMask128<T> Op => default;
 
-            static N128 w => default;
-
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
-            public ushort Invoke(Vector128<T> x, byte index) => ginx.vtakemask(x,index);            
+            public ushort Invoke(Vector128<T> x, byte index) 
+                => ginx.vtakemask(x,index);            
         }
 
         public readonly struct TakeIMask256<T>  : IVUnaryScalar256Imm8<T,uint>
@@ -32,15 +33,15 @@ namespace Z0
         {
             public const string Name = "vtakeimask";
 
+            public static HK.Vec256<T> hk => default;
+
             public static TakeIMask256<T> Op => default;
-
-            static N256 w => default;
-
-            public Moniker Moniker => moniker<T>(Name,w);
+            
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
-            public uint Invoke(Vector256<T> x,byte index) => ginx.vtakemask(x,index);
+            public uint Invoke(Vector256<T> x,byte index) 
+                => ginx.vtakemask(x,index);
         }    
     }
-
 }

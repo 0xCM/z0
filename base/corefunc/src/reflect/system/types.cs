@@ -63,26 +63,14 @@ namespace Z0
             var x = t.EffectiveType();
             return x.IsGenericType ? x.GetGenericTypeDefinition() : default;                
         }
-                
+
         public static IEnumerable<Type> GenericArguments(this Type t)
-            => t.IsGenericType ? t.GetGenericArguments() 
-             : t.GenericDefinition().MapValueOrElse(x => x.GetGenericArguments(), () => new Type[]{});
-
-        /// <summary>
-        /// Constructs a generic type proedicated on a generic type or type definition and a parametric argument
-        /// </summary>
-        /// <param name="t">The definition or generic type</param>
-        /// <typeparam name="T">The type over which the new type will be closed</typeparam>
-        public static Type CloseGenericType<T>(this Type t)
         {
-            var def = t.IsGenericTypeDefinition ? t : t.GetGenericTypeDefinition();
-            return def.MakeGenericType(typeof(T));
-        }
-
-        public static Type CloseGenericType(this Type t, params Type[] args)
-        {
-            var def = t.IsGenericTypeDefinition ? t : t.GetGenericTypeDefinition();
-            return def.MakeGenericType(args);
+            var x = t.EffectiveType();
+            if(x.IsConstructedGenericType)
+                return x.GetGenericArguments();
+            else
+                return  items<Type>();
         }
 
         /// <summary>

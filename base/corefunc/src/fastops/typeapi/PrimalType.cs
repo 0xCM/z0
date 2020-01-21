@@ -17,6 +17,136 @@ namespace Z0
     public static class PrimalType
     {
         /// <summary>
+        /// Specifies the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static string keyword(PrimalKind k)
+            => k switch {
+                PrimalKind.U8 => "byte",
+                PrimalKind.I8 => "sbyte",
+                PrimalKind.U16 => "ushort",
+                PrimalKind.I16 => "short",
+                PrimalKind.U32 => "uint",
+                PrimalKind.I32 => "int",
+                PrimalKind.I64 => "long",
+                PrimalKind.U64 => "ulong",
+                PrimalKind.F32 => "float",
+                PrimalKind.F64 => "double",
+                _ => throw unsupported(k)
+            };
+
+        /// <summary>
+        /// Specifies the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static PrimalKind kind(PrimalId k)
+            => k switch {
+                PrimalId.U8 => PrimalKind.U8,
+                PrimalId.I8 => PrimalKind.I8,
+                PrimalId.U16 => PrimalKind.U16,
+                PrimalId.I16 => PrimalKind.I16,
+                PrimalId.U32 => PrimalKind.U32,
+                PrimalId.I32 => PrimalKind.I32,
+                PrimalId.I64 => PrimalKind.I64,
+                PrimalId.U64 => PrimalKind.U64,
+                PrimalId.F32 => PrimalKind.F32,
+                PrimalId.F64 => PrimalKind.F64,
+                _ => throw unsupported(k)
+            };
+
+        /// <summary>
+        /// Determines the number of bits covered by a k-kinded type
+        /// </summary>
+        /// <param name="k">The type kine</param>
+        [MethodImpl(Inline)]
+        public static int width(PrimalKind k)
+            => (ushort)k;
+
+        /// <summary>
+        /// Determines the number of bytes covered by a k-kinded type
+        /// </summary>
+        /// <param name="k">The type kine</param>
+        [MethodImpl(Inline)]
+        public static int size(PrimalKind kind)
+            => width(kind)/8;
+
+        /// <summary>
+        /// Determines whether a type is a primal float
+        /// </summary>
+        /// <typeparam name="T">The type to test</typeparam>
+        [MethodImpl(Inline)]
+        public static bit floating(PrimalKind k)
+            => (k & PrimalKind.Fractional) != 0;
+
+        /// <summary>
+        /// Determines whether a kind is one of the signed integer types
+        /// </summary>
+        /// <typeparam name="T">The type to test</typeparam>
+        [MethodImpl(Inline)]
+        public static bit signed(PrimalKind k)
+            => (k & PrimalKind.Signed) != 0;
+
+        /// <summary>
+        /// Determines whether a kind is one of the signed integer types
+        /// </summary>
+        /// <typeparam name="T">The type to test</typeparam>
+        [MethodImpl(Inline)]
+        public static bit unsigned(PrimalKind k)
+            => (k & PrimalKind.Unsigned) != 0;
+
+        /// <summary>
+        /// Determines whether a type is a primal integer
+        /// </summary>
+        /// <typeparam name="T">The type to test</typeparam>
+        [MethodImpl(Inline)]
+        public static bit integral(PrimalKind k)
+            => signed(k) || unsigned(k);
+
+        /// <summary>
+        /// Produces a character {i | u | f} indicating whether the source type is signed, unsigned or float
+        /// </summary>
+        /// <param name="k">The primal classifier</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]   
+        public static char indicator(PrimalKind k)
+        {
+            if(unsigned(k))
+                return AsciLower.u;
+            else if(signed(k))
+                return AsciLower.i;
+            else if(floating(k))
+                return AsciLower.f;
+            else
+                return AsciLower.x;
+        }
+
+        /// <summary>
+        /// Determines the kind identifier
+        /// </summary>
+        /// <param name="k">The primal classifier</param>
+        [MethodImpl(Inline)]   
+        public static PrimalId id(PrimalKind k)
+            => (PrimalId)((((uint)k << 8) >> 24) << 16);
+
+        /// <summary>
+        /// Produces an identifier {bitsize(k)}{u | i | f} for a primal kind k
+        /// </summary>
+        /// <param name="k">The primal kind</param>
+        [MethodImpl(Inline)]   
+        public static string primalsig(PrimalKind k)
+            => $"{width(k)}{indicator(k)}";        
+
+        /// <summary>
+        /// Produces a canonical designator of the form {bitsize[T]}{u | i | f} for a primal type
+        /// </summary>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]   
+        public static string primalsig<T>(T t = default)
+            => primalsig(typeof(T).Kind());
+
+
+        /// <summary>
         /// Returns true if the primal source type is signed, false otherwise
         /// </summary>
         /// <typeparam name="T">The primal source type</typeparam>

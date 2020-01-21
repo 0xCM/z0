@@ -24,14 +24,6 @@ partial class zfunc
         => Unsafe.SizeOf<T>();
 
     /// <summary>
-    /// Computes the byte-size of a kind-identified type
-    /// </summary>
-    /// <param name="k">The primal kind</param>
-    [MethodImpl(Inline)]
-    public static int size(PrimalKind k)
-        => Classified.size(k);
-
-    /// <summary>
     /// Computes the byte-size of a parametrically-identified type
     /// </summary>
     /// <param name="t">A type representative</param>
@@ -47,14 +39,6 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static int bitsize<T>()
         => Unsafe.SizeOf<T>()*8;
-
-    /// <summary>
-    /// Computes the bit-width of a kind-identified type
-    /// </summary>
-    /// <param name="k">The primal kind</param>
-    [MethodImpl(Inline)]
-    public static int bitsize(PrimalKind k)
-        => Classified.width(k);
 
     /// <summary>
     /// Computes the bit-width of a type

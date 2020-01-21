@@ -76,7 +76,39 @@ namespace Z0
         public static BlockKind kind<B>()
             where B :struct
                 => kind(typeof(B));
-        
+
+        /// <summary>
+        /// Determines whether the unsigned facet of a block classification is enabled
+        /// </summary>
+        /// <param name="k">The vector classifier</param>
+        [MethodImpl(Inline)]
+        public static bit unsigned(BlockKind k)
+            => (k & BlockKind.Unsigned) != 0;
+
+        /// <summary>
+        /// Determines whether the signed facet of a block classification is enabled
+        /// </summary>
+        /// <param name="k">The vector classifier</param>
+        [MethodImpl(Inline)]
+        public static bit signed(BlockKind k)
+            => (k & BlockKind.Signed) != 0;
+
+        /// <summary>
+        /// Determines whether the floating facet of a block classification is enabled
+        /// </summary>
+        /// <param name="k">The vector classifier</param>
+        [MethodImpl(Inline)]
+        public static bit floating(BlockKind k)
+            => (k & BlockKind.Fractional) != 0;
+
+        /// <summary>
+        /// Determines whether the signed or unsigned facet of a block classification is enabled
+        /// </summary>
+        /// <param name="k">The vector classifier</param>
+        [MethodImpl(Inline)]
+        public static bit integral(BlockKind k)
+            => signed(k) || unsigned(k);
+
         public static BlockKind kind(BlockWidth width, PrimalId id)            
         {
             var k = width switch 
@@ -173,7 +205,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static PrimalKind segment(Type t)
-            => test(t) ?  t.EffectiveType().GenericArguments().First().Kind() : PrimalKind.None;
+            => test(t) ?  t.GenericArguments().First().Kind() : PrimalKind.None;
 
         [MethodImpl(Inline)]
         public static BlockKind kind<B>(B b = default)

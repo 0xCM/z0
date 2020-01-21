@@ -49,7 +49,7 @@ namespace Z0
         /// The unqualified operation name
         /// </summary>
         public string Name
-            => TakeBefore(Text, OpSep);
+            => TakeBefore(Text, PartSep);
 
         /// <summary>
         /// The moniker's suffix, if any
@@ -103,7 +103,7 @@ namespace Z0
         /// Specifies whether the operation was reified from a generic definition 
         /// </summary>
         public bool IsGeneric
-            => TakeAfter(Text,OpSep)[0] == GenericIndicator;
+            => TakeAfter(Text,PartSep)[0] == GenericIndicator;
 
         /// <summary>
         /// Specifies whether the operation was reified from assembly language
@@ -140,7 +140,7 @@ namespace Z0
             => Text;
 
         string Metrics
-            => IsGeneric ? RightOfLast(Text, GenericLocator) : TakeAfter(Text,OpSep);
+            => IsGeneric ? RightOfLast(Text, GenericLocator) : TakeAfter(Text,PartSep);
 
         char NumericIndicator
         {
@@ -239,7 +239,7 @@ namespace Z0
 
         public const char SegSep = 'x';
 
-        public const char OpSep = '_';
+        public const char PartSep = '_';
 
         public const char SuffixSep = '-';
 
@@ -253,13 +253,22 @@ namespace Z0
 
         public const char VectorIndicator = 'v';
 
+        public const char BlockIndicator = 'b';
+
         public const char NatIndicator = 'n';
-         
+
         public const string AsmIndicator = "asm";
 
         public const string ImmIndicator = "imm";
 
+        public const string ImmLocator = "-imm";
+
+        public const string AsmLocator = "-asm";
+
+        public const string GenericBlockLocator = "_gb";
+
         public const string GenericLocator = "_g";
+
 
     }
 }

@@ -11,7 +11,6 @@ namespace Z0
     using System.Reflection;
 
     using static zfunc;
-    using static Classifiers;
 
     public static class FixedDelegate
     {

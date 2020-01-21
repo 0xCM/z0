@@ -6,9 +6,6 @@ namespace Z0
 {        
     using System;
     using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static zfunc;
     using static AsmServiceMessages;
@@ -34,21 +31,18 @@ namespace Z0
         void EmitUnaryImmResolutions(DirectOpInfo op, AsmArchive archive)
         {
             print(EmittingImmResolutions(op));                        
-            var resolutions = AsmImmCapture.unary(op.Method, op.Id, new byte[]{5,9,13});
-            archive.Save(resolutions);
+            archive.Save(AsmImmCapture.unary(op.Method, op.Id, new byte[]{5,9,13}));
         }   
 
-        void EmitUnaryImmResolutions(GenericOpInfo op, AsmArchive archive)
+        void EmitUnaryImmResolutions(GenericOpInfo op, AsmArchive archive, bool pll)
         {
             print(EmittingImmResolutions(op));
-            foreach(var closure in op.Closures())
-            {
-                var resolutions = AsmImmCapture.unary(closure.ClosedMethod, closure.Id, new byte[]{5,9,13});                
-                archive.Save(resolutions);
-            }
+
+            foreach(var closure in op.Closures().ToArray())
+                archive.Save(AsmImmCapture.unary(closure.ClosedMethod, closure.Id, new byte[]{5,9,13}));
         }
 
-        void Emit(GenericOpInfo op, AsmArchive archive)
+        void Emit(GenericOpInfo op, AsmArchive archive, bool pll)
         {
             var closures = op.Closures().ToArray();
             
@@ -58,55 +52,53 @@ namespace Z0
                 print(Emitting(op));
 
             foreach(var closure in closures)
-            {
-                Emitting(closure);
-                AsmDecoder.decode(closure.Id, closure.ClosedMethod, ClrMetadata).OnSome(x => archive.Save(x));
-            }
+                AsmDecoder.method(closure.Id, closure.ClosedMethod, ClrMetadata).OnSome(x => archive.Save(x));
         }
 
         void Emit(DirectOpInfo op, AsmArchive archive)
         {                        
             print(Emitting(op));
-            AsmDecoder.decode(op.Id, op.Method, ClrMetadata).OnSome(x => archive.Save(x));
+            AsmDecoder.method(op.Id, op.Method, ClrMetadata).OnSome(x => archive.Save(x));
         }
 
-        void EmitGeneric(Type host)
+        AsmArchive Archive(string subject)
+            => AsmArchive.Define(Catalog, subject);
+
+        void EmitGeneric(Type host, bool pll)
         {
             print(Emitting(host));
 
             var subject = host.Name.ToLower();
-            var archive = AsmArchive.Define(subject);
+            var archive = Archive(subject);
             archive.Clear();
 
-            var immArchive = AsmArchive.Define(concat(subject, ImmSubject));
+            var immArchive = Archive(concat(subject, ImmSubject));
             immArchive.Clear();
 
-            var fastops = host.FastOpGenericMethods();
-            foreach(var op in fastops)
+            foreach(var op in host.FastOpGenericMethods())
             {
                 if(op.RequiresImmediate())
                 {
                     if(op.Method.IsUnaryImmVectorOp())
-                        EmitUnaryImmResolutions(op,immArchive);
+                        EmitUnaryImmResolutions(op,immArchive,pll);
                 }
                 else
-                    Emit(op,archive);
+                    Emit(op,archive,pll);
             }
         }
 
-        void EmitDirect(Type host)
+        void EmitDirect(Type host, bool pll)
         {
             print(Emitting(host));
 
             var subject = host.Name.ToLower();
-            var archive = AsmArchive.Define(subject);
+            var archive = Archive(subject);
             archive.Clear();
 
-            var immArchive = AsmArchive.Define(concat(subject, ImmSubject));
+            var immArchive = Archive(concat(subject, ImmSubject));
             immArchive.Clear();
 
-            var fastops = host.FastOpDirect();            
-            foreach(var op in fastops)
+            foreach(var op in host.FastOpDirect())
             {
                 if(op.RequiresImmediate())
                 {
@@ -118,16 +110,16 @@ namespace Z0
             }
         }
 
-        public void EmitDirect()
-            => iter(Catalog.DirectApiHosts, host => EmitDirect(host));
+        public void EmitDirect(bool pll)
+            => iter(Catalog.DirectApiHosts, host => EmitDirect(host,pll));
 
-        public void EmitGeneric()
-            => iter(Catalog.GenericApiHosts, host => EmitGeneric(host));
+        public void EmitGeneric(bool pll)
+            => iter(Catalog.GenericApiHosts, host => EmitGeneric(host,pll));
 
-        public void EmitCatalog()
+        public void EmitCatalog(bool pll)
         {            
-            EmitDirect();
-            EmitGeneric();
+            EmitDirect(pll);
+            EmitGeneric(pll);
         }        
     }
 }

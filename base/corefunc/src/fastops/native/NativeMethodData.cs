@@ -18,15 +18,14 @@ namespace Z0
     {        
         public static NativeMethodData Empty => default;
 
-        public static NativeMethodData Define(MethodInfo method, MemoryRange location, byte[] content)
-            => new NativeMethodData(method, location, content);
+        public static NativeMethodData Define(Moniker id, MethodInfo method, MemoryRange location, byte[] content)
+            => new NativeMethodData(id, method, location, content);
 
         [MethodImpl(Inline)]
-        public NativeMethodData(MethodInfo method, MemoryRange location, byte[] content)
-            : base(method, method, location, content)
+        NativeMethodData(Moniker id, MethodInfo method, MemoryRange location, byte[] content)
+            : base(id, method, method, location, content)
         {
 
         }
-
     }
 }

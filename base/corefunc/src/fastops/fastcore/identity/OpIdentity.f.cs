@@ -17,7 +17,7 @@ partial class zfunc
     /// <typeparam name="T">The primal type</typeparam>
     [MethodImpl(Inline)]   
     public static string primalsig<T>(T t = default)
-        => Classified.primalsig(t);
+        => PrimalType.primalsig(t);
 
     /// <summary>
     /// Produces an identifier of the form {bitsize(k)}{u | i | f} for a primal kind k
@@ -25,7 +25,7 @@ partial class zfunc
     /// <param name="k">The primal kind</param>
     [MethodImpl(Inline)]   
     public static string primalsig(PrimalKind k)
-        => Classified.primalsig(k);
+        => PrimalType.primalsig(k);
 
     /// <summary>
     /// Defines a moniker predicated on supplied text
@@ -58,7 +58,7 @@ partial class zfunc
     public static Moniker moniker<W,T>(string opname, W w = default, T t = default)
         where W : unmanaged, ITypeNat
         where T : unmanaged
-            => OpIdentity.define(opname,PrimalType.kind<T>(),w);
+            => OpIdentity.segmented(opname,PrimalType.kind<T>(),w);
 
     /// <summary>
     /// Defines an identifier of the form {opname}_128xN{u | i | f} where N := bitsize[T]
@@ -71,7 +71,33 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static Moniker moniker<T>(string opname, N128 w, T t = default)
         where T : unmanaged
-            => OpIdentity.define(opname,PrimalType.kind<T>(),w);
+            => OpIdentity.segmented(opname,PrimalType.kind<T>(),w);
+
+    /// <summary>
+    /// Defines an identifier of the form {opname}_128xN{u | i | f} where N := bitsize[T]
+    /// </summary>
+    /// <param name="opname">The base operator name</param>
+    /// <param name="w">The covering bit width representative</param>
+    /// <param name="t">A primal cell type representative</param>
+    /// <typeparam name="W">The bit width type</typeparam>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]   
+    public static Moniker moniker<T>(string opname, HK.Vec128<T> hk)
+        where T : unmanaged
+            => OpIdentity.segmented(opname,PrimalType.kind<T>(), n128);
+
+    /// <summary>
+    /// Defines an identifier of the form {opname}_128xN{u | i | f} where N := bitsize[T]
+    /// </summary>
+    /// <param name="opname">The base operator name</param>
+    /// <param name="w">The covering bit width representative</param>
+    /// <param name="t">A primal cell type representative</param>
+    /// <typeparam name="W">The bit width type</typeparam>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]   
+    public static Moniker moniker<T>(string opname, HK.Vec128 hk, T t = default)
+        where T : unmanaged
+            => OpIdentity.segmented(opname,PrimalType.kind<T>(), n128);
 
     /// <summary>
     /// Defines an identifier of the form {opname}_256xN{u | i | f} where N := bitsize[T]
@@ -84,6 +110,31 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static Moniker moniker<T>(string opname, N256 w, T t = default)
         where T : unmanaged
-            => OpIdentity.define(opname,PrimalType.kind<T>(),w);
+            => OpIdentity.segmented(opname,PrimalType.kind<T>(),w);
 
+    /// <summary>
+    /// Defines an identifier of the form {opname}_256xN{u | i | f} where N := bitsize[T]
+    /// </summary>
+    /// <param name="opname">The base operator name</param>
+    /// <param name="w">The covering bit width representative</param>
+    /// <param name="t">A primal cell type representative</param>
+    /// <typeparam name="W">The bit width type</typeparam>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]   
+    public static Moniker moniker<T>(string opname, HK.Vec256<T> hk)
+        where T : unmanaged
+            => OpIdentity.segmented(opname,PrimalType.kind<T>(),n256);
+
+    /// <summary>
+    /// Defines an identifier of the form {opname}_256xN{u | i | f} where N := bitsize[T]
+    /// </summary>
+    /// <param name="opname">The base operator name</param>
+    /// <param name="w">The covering bit width representative</param>
+    /// <param name="t">A primal cell type representative</param>
+    /// <typeparam name="W">The bit width type</typeparam>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]   
+    public static Moniker moniker<T>(string opname, HK.Vec256 hk, T t = default)
+        where T : unmanaged
+            => OpIdentity.segmented(opname,PrimalType.kind<T>(),n256);
 }

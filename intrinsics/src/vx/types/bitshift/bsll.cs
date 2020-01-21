@@ -20,15 +20,16 @@ namespace Z0
 
             public static Bsll128<T> Op => default;
 
-            static N128 w => default;
+            public static HK.Vec128<T> hk => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
-            public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte imm8)
-                => VectorImm.unary<T>(w, gApiMethod(w,Name),imm8);
+            public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte count)
+                => Dynop.unary<T>(hk, gApiMethod(hk,Name),count);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, byte offset) => ginx.vbsll(x,offset);
+            public Vector128<T> Invoke(Vector128<T> x, byte count) 
+                => ginx.vbsll(x,count);
 
             [MethodImpl(Inline)]
             public ref readonly Block128<T> Invoke(in Block128<T> a, byte count, in Block128<T> c)            
@@ -40,22 +41,22 @@ namespace Z0
         {
             public const string Name = "vbsll";
 
-            static N256 w => default;
+            public static HK.Vec256<T> hk => default;
 
             public static Bsll256<T> Op => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
-            public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte imm8)
-                => VectorImm.unary<T>(w, gApiMethod(w,Name),imm8);
+            public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte count)
+                => Dynop.unary<T>(hk, gApiMethod(hk,Name),count);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, byte offset) => ginx.vbsll(x,offset);
+            public Vector256<T> Invoke(Vector256<T> x, byte count)  
+                => ginx.vbsll(x,count);
 
             [MethodImpl(Inline)]
             public ref readonly Block256<T> Invoke(in Block256<T> a, byte count, in Block256<T> c)            
                 => ref vblocks.vbsll(a,count,c);
-
         }    
     }
 }

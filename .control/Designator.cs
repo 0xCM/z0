@@ -19,10 +19,16 @@ namespace Z0.Designators
     {
         public override IEnumerable<IAssemblyDesignator> Designates
             => items<IAssemblyDesignator>(            
-            D.NatTest.Designated,            
+            
+            D.TypeNats.Designated,
+            D.TypeNatsTest.Designated,            
+            
             D.CoreData.Designated,            
+            
             D.CoreFunc.Designated, 
             D.CoreFuncTest.Designated, 
+            
+            D.Data.Designated,
             
             D.GMath.Designated,
             D.GMathTest.Designated,
@@ -41,16 +47,16 @@ namespace Z0.Designators
             D.RngCore.Designated,
 
             D.BitGrids.Designated,
-            D.BitTest.Designated,
+            D.BitGridsTest.Designated,
 
             D.AsmCore.Designated,
-            D.CpuTest.Designated,
+            D.AsmCoreTest.Designated,
 
             D.MklApi.Designated,
             D.MklTest.Designated,
 
             D.LinearOps.Designated,
-            D.LinearTest.Designated,
+            D.LinearOpsTest.Designated,
 
             D.Machines.Designated,
             D.MachineTest.Designated,
@@ -62,9 +68,6 @@ namespace Z0.Designators
             D.LibMTest.Designated,
 
             D.StatDist.Designated
-
-            // D.RevealLib.Designated,
-            // D.RevealApp.Designated
             );               
 
         public IEnumerable<IOperationCatalog> Catalogs

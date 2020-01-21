@@ -15,18 +15,19 @@ namespace Z0
 
     class ArchiveControl : Controller<ArchiveControl>
     {                
-        void Emit(AssemblyId id)
-            => FindCatalog(id).OnSome(c => c.Emit()).OnNone(() => CatalogNotFound(id));
+        void Emit(AssemblyId id, bool pll)
+            => FindCatalog(id).OnSome(c => c.Emit(pll)).OnNone(() => CatalogNotFound(id));
         
-        void Emit(IEnumerable<AssemblyId> src)
-            => iter(src, Emit);
+        void Emit(IEnumerable<AssemblyId> src, bool pll)
+            => iter(src, id => Emit(id,pll));
 
         public override void Execute()
         {             
-            Emit(AssemblyId.Intrinsics); 
-            Emit(AssemblyId.GMath);
-            Emit(AssemblyId.CoreFunc);
-            Emit(AssemblyId.BitCore);            
+            var pll = false;
+            Emit(AssemblyId.Intrinsics, pll); 
+            Emit(AssemblyId.GMath, pll);
+            Emit(AssemblyId.CoreFunc, pll);
+            Emit(AssemblyId.BitCore, pll);    
         }
 
     }

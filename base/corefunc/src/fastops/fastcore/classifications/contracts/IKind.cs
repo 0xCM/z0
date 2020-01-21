@@ -11,13 +11,16 @@ namespace Z0
 
     using static zfunc;
 
+    /// <summary>
+    /// Characterizes an enumeration-classified kind
+    /// </summary>
+    /// <typeparam name="K">The classifying enumeration type</typeparam>
     public interface IKind<K>
         where K : unmanaged, Enum
     {
+        /// <summary>
+        /// The classification value
+        /// </summary>
         K Classifier {get;}
     }
-
-
-
-
 }

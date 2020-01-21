@@ -17,7 +17,6 @@ namespace Z0
         where T : unmanaged
         where S : IDistributionSpec<T>
     {
-
         protected IPolyrand Polyrand {get;}
 
         public S Spec {get;}

@@ -15,33 +15,33 @@ namespace Z0
         public readonly struct TakeMask128<T> : IVUnaryScalar128<T,ushort>
             where T : unmanaged
         {
+            public const string Name = "vtakemask";
+
+            public static HK.Vec128<T> hk => default;
+
             public static TakeMask128<T> Op => default;
 
-            public const string Name = "vtakemask";
-
-            static N128 w => default;
-
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
-            public ushort Invoke(Vector128<T> x) => ginx.vtakemask(x);            
+            public ushort Invoke(Vector128<T> x) 
+                => ginx.vtakemask(x);            
         }
 
-
-        public readonly struct TakeMask256<T>  : IVUnaryScalar256<T,uint>
+        public readonly struct TakeMask256<T> : IVUnaryScalar256<T,uint>
             where T : unmanaged
         {
-            public static TakeMask256<T> Op => default;
-
             public const string Name = "vtakemask";
 
-            static N256 w => default;
+            public static HK.Vec256<T> hk => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public static TakeMask256<T> Op => default;
+
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
-            public uint Invoke(Vector256<T> x) => ginx.vtakemask(x);
+            public uint Invoke(Vector256<T> x) 
+                => ginx.vtakemask(x);
         }    
- 
     }
 }

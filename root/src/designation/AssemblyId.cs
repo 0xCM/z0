@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Defines identifiers for known system assemblies
@@ -45,7 +43,14 @@ namespace Z0
 
         Matrix,
 
-        LinearOps
-    }
+        LinearOps,
 
+        Machines,
+
+        RngCore,
+
+        MathObjects,
+        
+        MklApi
+    }
 }

@@ -30,7 +30,7 @@ namespace Z0
             => C.Designated.Designates.Where(d => d.Role == AssemblyRole.Test).Select(x => x);
 
 
-        static AsmCodeSet[] ResolveExample<T>(N128 w, T t = default)
+        static AsmFuncInfo[] ResolveExample<T>(N128 w, T t = default)
             where T : unmanaged
         {
             var imm = new byte[]{199,205};
@@ -40,7 +40,7 @@ namespace Z0
             return r1.Union(r2).Union(r3).ToArray();
         }
 
-        static AsmCodeSet[] ResolveExample<T>(N256 w, T t = default)
+        static AsmFuncInfo[] ResolveExample<T>(N256 w, T t = default)
             where T : unmanaged
         {
             var imm = new byte[]{199,205};
@@ -75,15 +75,15 @@ namespace Z0
         
         static string[] ConcurrentTests
             => new string[]{
-                D.NatTest.Designated.Name,
+                D.TypeNatsTest.Designated.Name,
                 D.CoreFuncTest.Designated.Name,     
                 D.GMathTest.Designated.Name,
                 D.IntrinsicsTest.Designated.Name,
                 D.BitCoreTest.Designated.Name,
                 D.BitVectorTest.Designated.Name,
-                D.BitTest.Designated.Name,
+                D.BitGridsTest.Designated.Name,
                 D.LogixTest.Designated.Name,
-                D.LinearTest.Designated.Name,
+                D.LinearOpsTest.Designated.Name,
                 
             };
 

@@ -17,11 +17,11 @@ namespace Z0
         {
             public const string Name = "vbyteswap";
 
+            public static HK.Vec128<T> hk => default;
+
             public static ByteSwap128<T> Op => default;
 
-            static N128 w => default;
-
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => ginx.vbyteswap(x);
@@ -35,11 +35,11 @@ namespace Z0
         {
             public const string Name = "vbyteswap";
 
+            public static HK.Vec256<T> hk => default;
+
             public static ByteSwap256<T> Op => default;
 
-            static N256 w => default;
-
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) => ginx.vbyteswap(x);

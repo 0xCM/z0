@@ -18,12 +18,12 @@ namespace Z0
     {        
         public static NativeDelegateData Empty => default;
 
-        public static NativeDelegateData Define(Delegate src, MemoryRange location, byte[] content)
-            => new NativeDelegateData(src, location, content);
+        public static NativeDelegateData Define(Moniker id, Delegate src, MemoryRange location, byte[] content)
+            => new NativeDelegateData(id, src, location, content);
 
         [MethodImpl(Inline)]
-        NativeDelegateData(Delegate src, MemoryRange location, byte[] content)
-            : base(src, src.Method, location, content)
+        NativeDelegateData(Moniker id, Delegate src, MemoryRange location, byte[] content)
+            : base(id, src, src.Method, location, content)
         {
 
         }

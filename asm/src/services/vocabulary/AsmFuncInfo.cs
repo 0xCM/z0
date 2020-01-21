@@ -62,6 +62,6 @@ namespace Z0
         /// The number of encoded instructions
         /// </summary>
         public int InstructionCount
-            => Instructions.Length;
+            => Instructions.Length;            
     }
 }

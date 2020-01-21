@@ -11,36 +11,17 @@ namespace Z0
 
     using static zfunc;
     
-    public readonly struct TypeKind<T> : ITypeKind
-        where T : unmanaged, Enum
+    public readonly struct TypeKind<T> : ITypeKind<TypeKind<T>,T>
+        where T : unmanaged
     {
         public static TypeKind<T> None => default;
 
-        TypeKind ITypeKind.General 
-            => General;
-
-        uint ITypeKind.Specific 
-            => evalue<T,uint>(Specific);
-
-        public TypeKind(TypeKind general, T specific)
+        [MethodImpl(Inline)]
+        public TypeKind(TypeKind k)
         {
-            this.General = general;
-            this.Specific = specific;
+            this.Classifier = k;
         }
 
-        public readonly TypeKind General;
-
-        public readonly T Specific;    
-
-        public TypeKind<S> As<S>()
-            where S : unmanaged, Enum
-                => Unsafe.As<TypeKind<T>,TypeKind<S>>(ref Unsafe.AsRef(in this));
-        
-        public string Format()
-            => concat(General.ToString(), AsciSym.Colon, AsciSym.Space, Specific.ToString());
-        
-        public override string ToString()
-            => Format();
-
+        public TypeKind Classifier {get;}
     }
 }

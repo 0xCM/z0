@@ -19,6 +19,7 @@ namespace Z0
         public static implicit operator BlockKind(BlockKind<W,T> b)
             => b.Classifier;
 
+
         public BlockKind Classifier { [MethodImpl(Inline)] get=> BlockedType.kind<W,T>();}
     }
 }

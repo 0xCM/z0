@@ -11,13 +11,12 @@ namespace Z0
     using System.Security;
 
     using static zfunc;
-
-    using S = DelegateSurrogates;
-
+    using static SurrogateTypes;
+    
     /// <summary>
-    /// Defines api surface for creating surrogate operator (D)elegates
+    /// Defines api surface for creating surrogate operator delegates
     /// </summary>
-    public static class SurrogateD
+    public static class OpSurrogates
     {
         /// <summary>
         /// Captures a delegate and presents it as a unary operator
@@ -27,8 +26,8 @@ namespace Z0
         /// <param name="t">A point representative</param>
         /// <typeparam name="T">The delegate domain/codomain type</typeparam>
         [MethodImpl(Inline)]
-        public static S.UnaryOpSurrogate<T> unary<T>(Func<T,T> f, string name, T t = default)
-            => new S.UnaryOpSurrogate<T>(f, name);
+        public static UnaryOpSurrogate<T> unary<T>(Func<T,T> f, string name, T t = default)
+            => new UnaryOpSurrogate<T>(f, name);
 
         /// <summary>
         /// Captures a delegate and presents it as a binary operator
@@ -38,8 +37,8 @@ namespace Z0
         /// <param name="t">A point representative</param>
         /// <typeparam name="T">The delegate domain/codomain type</typeparam>
         [MethodImpl(Inline)]
-        public static S.BinaryOpSurrogate<T> binary<T>(Func<T,T,T> f, string name, T t = default)
-            => new S.BinaryOpSurrogate<T>(f,name);
+        public static BinaryOpSurrogate<T> binary<T>(Func<T,T,T> f, string name, T t = default)
+            => new BinaryOpSurrogate<T>(f,name);
 
         /// <summary>
         /// Captures a delegate and presents it as a ternary operator
@@ -49,8 +48,8 @@ namespace Z0
         /// <param name="t">A point representative</param>
         /// <typeparam name="T">The delegate domain/codomain type</typeparam>
         [MethodImpl(Inline)]
-        public static S.TernaryOpSurrogate<T> ternary<T>(Func<T,T,T,T> f, string name, T t = default)
-            => new S.TernaryOpSurrogate<T>(f, name);
+        public static TernaryOpSurrogate<T> ternary<T>(Func<T,T,T,T> f, string name, T t = default)
+            => new TernaryOpSurrogate<T>(f, name);
 
         /// <summary>
         /// Captures a delegate and presents it as a unary predicate
@@ -60,8 +59,8 @@ namespace Z0
         /// <param name="t">A point representative</param>
         /// <typeparam name="T">The delegate domain type</typeparam>
         [MethodImpl(Inline)]
-        public static S.UnaryPredSurrogate<T> predicate<T>(Func<T,bit> f, string name, T t = default)
-            => new S.UnaryPredSurrogate<T>(f,name);
+        public static UnaryPredSurrogate<T> predicate<T>(Func<T,bit> f, string name, T t = default)
+            => new UnaryPredSurrogate<T>(f,name);
             
         /// <summary>
         /// Captures a delegate and presents it as a binary predicate
@@ -71,8 +70,8 @@ namespace Z0
         /// <param name="t">A point representative</param>
         /// <typeparam name="T">The delegate domain type</typeparam>
         [MethodImpl(Inline)]
-        public static S.BinaryPredSurrogate<T> predicate<T>(Func<T,T,bit> f, string name, T t = default)
-            => new S.BinaryPredSurrogate<T>(f,name);
+        public static BinaryPredSurrogate<T> predicate<T>(Func<T,T,bit> f, string name, T t = default)
+            => new BinaryPredSurrogate<T>(f,name);
         
         /// <summary>
         /// Captures a delegate and presents it as a binary predicate
@@ -82,11 +81,11 @@ namespace Z0
         /// <param name="t">A point representative</param>
         /// <typeparam name="T">The delegate domain type</typeparam>
         [MethodImpl(Inline)]
-        public static S.EmitterSurrogate<T> emitter<T>(Func<T> f, string name, T t = default)
-            => new S.EmitterSurrogate<T>(f,name);        
+        public static EmitterSurrogate<T> emitter<T>(Func<T> f, string name, T t = default)
+            => new EmitterSurrogate<T>(f,name);        
     }
 
-    public static partial class DelegateSurrogates
+    public static partial class SurrogateTypes
     {
 
 

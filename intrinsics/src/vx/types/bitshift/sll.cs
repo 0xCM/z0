@@ -15,22 +15,24 @@ namespace Z0
         public readonly struct Sll128<T> : IVShiftOp128D<T>, IVUnaryImm8Resolver128<T>
             where T : unmanaged
         {
-            public static Sll128<T> Op => default;
-
             public const string Name = "vsll";
 
-            static N128 w => default;
+            public static HK.Vec128<T> hk => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public static Sll128<T> Op => default;
 
-            public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte imm8)
-                => VectorImm.unary<T>(w, gApiMethod(w,Name),imm8);
+            public Moniker Moniker => moniker(Name,hk);
+
+            public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte count)
+                => Dynop.unary<T>(hk, gApiMethod(hk,Name),count);
             
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, byte offset) => ginx.vsll(x,offset);
+            public Vector128<T> Invoke(Vector128<T> x, byte count) 
+                => ginx.vsll(x,count);
             
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, byte offset) => gmath.sll(a,offset);
+            public T InvokeScalar(T a, byte count) 
+                => gmath.sll(a,count);
 
         }
 
@@ -39,21 +41,22 @@ namespace Z0
         {
             public const string Name = "vsll";            
 
-            static N256 w => default;
+            public static HK.Vec256<T> hk => default;
 
             public static Sll256<T> Op => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
-            public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte imm8)
-                => VectorImm.unary<T>(w, gApiMethod(w,Name),imm8);
-
-            [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, byte offset) => ginx.vsll(x,offset);
+            public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte count)
+                => Dynop.unary<T>(hk, gApiMethod(hk,Name),count);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, byte offset) => gmath.sll(a,offset);
+            public Vector256<T> Invoke(Vector256<T> x, byte count) 
+                => ginx.vsll(x,count);
+
+            [MethodImpl(Inline)]
+            public T InvokeScalar(T a, byte count) 
+                => gmath.sll(a,count);
         }
-
     }
 }

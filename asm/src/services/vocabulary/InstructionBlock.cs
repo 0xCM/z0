@@ -20,6 +20,14 @@ namespace Z0
     public class InstructionBlock
     {
         /// <summary>
+        /// Defines an instruction block from a method asm body
+        /// </summary>
+        /// <param name="id">The block identity</param>
+        /// <param name="body">The source body</param>
+        public static InstructionBlock Define(Moniker id, MethodAsmBody body)      
+            => Define(id, body.Method.Signature().Format(), body.Location, body.NativeBlock.Data, body.Instructions);  
+
+        /// <summary>
         /// Defines an instruction sequence, in both encoded and decoded form
         /// </summary>
         /// <param name="encoded">The encoded instructions</param>

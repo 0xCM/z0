@@ -34,15 +34,15 @@ namespace Z0
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vsub<T>(n256));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.SignedInts)]
         public static ref readonly Block128<T> vabs<T>(in Block128<T> a, in Block128<T> c)
             where T : unmanaged
                 => ref vmap(a, c,VX.vabs<T>(n128));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.SignedInts)]
         public static ref readonly Block256<T> vabs<T>(in Block256<T> a, in Block256<T> c)
             where T : unmanaged
-                => ref vmap(a, c,VX.vabs<T>(n256));
+                => ref vmap(a, c, VX.vabs<T>(n256));
 
         [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.All)]
         public static ref readonly Block128<T> vdec<T>(in Block128<T> a, in Block128<T> c)

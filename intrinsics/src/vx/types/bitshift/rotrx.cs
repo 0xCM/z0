@@ -17,19 +17,18 @@ namespace Z0
         {
             public const string Name = "vrotrx";
 
+            public static HK.Vec128<T> hk => default;
+
             public static Rotrx128<T> Op => default;
 
-            static N128 w => default;
+            public Moniker Moniker => moniker(Name,hk);
 
-            public Moniker Moniker => moniker<T>(Name,w);
-
-            public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte imm8)
-                => VectorImm.unary<T>(w, gApiMethod(w,Name),imm8);
-
+            public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte count)
+                => Dynop.unary<T>(hk, gApiMethod(hk,Name),count);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, byte offset) => ginx.vrotrx(x,offset);
-            
+            public Vector128<T> Invoke(Vector128<T> x, byte count) 
+                => ginx.vrotrx(x,count);            
         }
 
         public readonly struct Rotrx256<T> : IVShiftOp256<T>, IVUnaryImm8Resolver256<T>
@@ -37,18 +36,18 @@ namespace Z0
         {
             public const string Name = "vrotrx";            
 
-            static N256 w => default;
+            public static HK.Vec256<T> hk => default;
 
             public static Rotrx256<T> Op => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
-            public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte imm8)
-                => VectorImm.unary<T>(w, gApiMethod(w,Name),imm8);
+            public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte count)
+                => Dynop.unary<T>(hk, gApiMethod(hk,Name),count);
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, byte offset) => ginx.vrotrx(x,offset);
-
+            public Vector256<T> Invoke(Vector256<T> x, byte count) 
+                => ginx.vrotrx(x,count);
         }
     }
 }

@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Designators
 {
-
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
-    public sealed class NatTest : AssemblyDesignator<NatTest>
+    using System;
+    
+    public sealed class TypeNatsTest : AssemblyDesignator<TypeNatsTest>
     {
         public override void Run(params string[] args)
             => App.Run(args);

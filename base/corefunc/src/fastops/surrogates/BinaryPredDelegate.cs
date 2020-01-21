@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
     
-    partial class DelegateSurrogates
+    partial class SurrogateTypes
     {
         public readonly struct BinaryPredSurrogate<T> : IBinaryPred<T>
         {

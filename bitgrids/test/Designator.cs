@@ -5,18 +5,14 @@
 namespace Z0.Designators
 {        
 
-    /// <summary>
-    /// Represents the assembly
-    /// </summary>
-    public sealed class BitTest : AssemblyDesignator<BitTest>
+    using System;
+
+    public sealed class BitGridsTest : AssemblyDesignator<BitGridsTest>
     {
         public override AssemblyRole Role 
             => AssemblyRole.Test;
 
         public override void Run(params string[] args)
             => App.Run(args);
-
-
     }
-
 }

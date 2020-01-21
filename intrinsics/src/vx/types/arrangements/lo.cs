@@ -15,33 +15,34 @@ namespace Z0
         public readonly struct Lo128<T> : IVUnaryOp128<T>
             where T : unmanaged
         {
-            public static Lo128<T> Op => default;
-
             public const string Name = "vhi";
 
-            static N128 w => default;
+            public static HK.Vec128<T> hk => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public static Lo128<T> Op => default;
+
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x) => ginx.vlo(x);
-            
+            public Vector128<T> Invoke(Vector128<T> x) 
+                => ginx.vlo(x);            
         }
 
         public readonly struct Lo256<T> : IVReducer256<T>
             where T : unmanaged
         {
-            public static Lo256<T> Op => default;
-
             public const string Name = "vlo";
 
-            static N256 w => default;
+            public static HK.Vec256<T> hk => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public static Lo256<T> Op => default;
+
+            public Moniker Moniker => moniker(Name,hk);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector256<T> x) => ginx.vlo(x);
-            
+            public Vector128<T> Invoke(Vector256<T> x) 
+                => ginx.vlo(x);
+           
         }
     }
 }

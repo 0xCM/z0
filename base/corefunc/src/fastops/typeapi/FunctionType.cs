@@ -149,6 +149,27 @@ namespace Z0
                      : (VectorType.vector(m.ReturnType,width) || m.ParameterTypes().Any(t => VectorType.vector(t,width)));
 
         /// <summary>
+        /// Determines whether a method is classified as a blocked op
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool blocked(MethodInfo m)
+            => m.Attributed<BlockedOpAttribute>();
+
+        /// <summary>
+        /// Determines whether a method is classified as a natural op
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool natural(MethodInfo m)
+            => m.Attributed<NatOpAttribute>();
+
+        /// <summary>
+        /// Determines whether a method is classified as a span op
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool spanned(MethodInfo m)
+            => m.Attributed<SpanOpAttribute>();
+
+        /// <summary>
         /// Determines whether a method defines a predicate that returns a bit or bool value
         /// </summary>
         /// <param name="m">The method to examine</param>
@@ -190,29 +211,21 @@ namespace Z0
         /// Determines the bit-width of each intrinsic or primal method parameter
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static IEnumerable<Pair<ParameterInfo,int>> inputwidths(MethodInfo m)
+        public static IEnumerable<Pair<ParameterInfo,FixedWidth>> inputwidths(MethodInfo m)
             => m.GetParameters().Select(p => paired(p, Classified.width(p.ParameterType)));
 
         /// <summary>
         /// Determines the bit-width of an intrinsic or primal return type
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static Pair<ParameterInfo,int> outputwidth(MethodInfo m)
-            => paired(m.ReturnParameter, m.ReturnType.BitWidth());
-
-        /// <summary>
-        /// Determines whether a methods accepts one or more operands and that all operands are of the same type
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool homogenousoperands(this MethodInfo m)
-            => m.ParameterTypes().Distinct().Count() == 1;
+        public static Pair<ParameterInfo,FixedWidth> outputwidth(MethodInfo m)
+            => paired(m.ReturnParameter, m.ReturnType.Width());
 
         /// <summary>
         /// Determines whether a method accepts one ore more operands and all operands are primal
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static bool primaloperands(this MethodInfo m)
+        public static bool primal(this MethodInfo m)
             => m.ParameterCount() != 0 && m.ParameterTypes().All(t => t.IsPrimal());
-
     }
 }

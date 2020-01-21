@@ -17,21 +17,22 @@ namespace Z0
         {
             public const string Name = "vrotl";
 
+            public static HK.Vec128<T> hk => default;
+
             public static Rotl128<T> Op => default;
 
-            static N128 w => default;
+            public Moniker Moniker => moniker(Name,hk);
 
-            public Moniker Moniker => moniker<T>(Name,w);
-
-            public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte imm8)
-                => VectorImm.unary<T>(w, gApiMethod(w,Name),imm8);
+            public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte count)
+                => Dynop.unary<T>(hk, gApiMethod(hk,Name),count);
 
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, byte offset) => ginx.vrotl(x,offset);
+            public Vector128<T> Invoke(Vector128<T> x, byte count) 
+                => ginx.vrotl(x,count);
             
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, byte offset) => gbits.rotl(a,offset);
-
+            public T InvokeScalar(T a, byte count) 
+                => gbits.rotl(a,count);
         }
 
         public readonly struct Rotl256<T> : IVShiftOp256D<T>, IVUnaryImm8Resolver256<T>
@@ -39,20 +40,22 @@ namespace Z0
         {
             public const string Name = "vrotl";
 
-            static N256 w => default;
+            public static HK.Vec256<T> hk => default;
 
             public static Rotl256<T> Op => default;
 
-            public Moniker Moniker => moniker<T>(Name,w);
+            public Moniker Moniker => moniker(Name,hk);
 
-            public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte imm8)
-                => VectorImm.unary<T>(w, gApiMethod(w,Name),imm8);
+            public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte count)
+                => Dynop.unary<T>(hk, gApiMethod(hk,Name),count);
             
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, byte offset) => ginx.vrotl(x,offset);
+            public Vector256<T> Invoke(Vector256<T> x, byte count) 
+                => ginx.vrotl(x,count);
 
             [MethodImpl(Inline)]
-            public T InvokeScalar(T a, byte offset) => gbits.rotl(a,offset);
+            public T InvokeScalar(T a, byte count) 
+                => gbits.rotl(a,count);
         }
 
                 

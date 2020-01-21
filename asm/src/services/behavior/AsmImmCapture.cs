@@ -12,58 +12,70 @@ namespace Z0
 
     public static class AsmImmCapture
     {
-        public static IEnumerable<AsmCodeSet> unary(MethodInfo method, Moniker id, params byte[] immediates)
+        public static IEnumerable<AsmFuncInfo> unary(MethodInfo method, Moniker id, params byte[] immediates)
         {
             var parameters = method.GetParameters().ToArray();            
             var optype = parameters[0].ParameterType;
-            var width = optype.SegmentedWidth();
+            var width = optype.Width();
             var celltype = optype.GetGenericArguments()[0];
-            var factory = VectorImm.unaryfactory(width, method, celltype); 
+            var factory = unaryfactory(width, method, celltype); 
             var buffer = new byte[1024];
             foreach(var imm in immediates)            
             {    
                 buffer.Clear();
                 var @delegate = factory(imm);                    
-                yield return AsmDecoder.decode(@delegate, id.WithImm(imm), buffer);
+                yield return AsmDecoder.function(@delegate, id, buffer);
             }
         }                    
 
-        public static AsmCodeSet capture<T>(IVUnaryImm8Resolver128<T> svc, byte imm8)
+        public static AsmFuncInfo capture<T>(IVUnaryImm8Resolver128<T> svc, byte imm8)
             where T : unmanaged
         {
             var moniker = svc.Moniker;
             var f = svc.@delegate(imm8);
             Span<byte> buffer = new byte[500];
-            return AsmDecoder.decode(NativeReader.read(f, buffer), moniker.WithImm(imm8), f.CilFunc());
+            return AsmDecoder.function(NativeReader.read(moniker.WithImm(imm8), f, buffer));
         }
 
-        public static AsmCodeSet capture<T>(IVBinaryImm8Resolver128<T> svc, byte imm8)
+        public static AsmFuncInfo capture<T>(IVBinaryImm8Resolver128<T> svc, byte imm8)
             where T : unmanaged
         {
             var moniker = svc.Moniker;
             var f = svc.@delegate(imm8);            
             Span<byte> buffer = new byte[500];
-            return AsmDecoder.decode(NativeReader.read(f, buffer),moniker.WithImm(imm8), f.CilFunc());
+            return AsmDecoder.function(NativeReader.read(moniker.WithImm(imm8), f, buffer));
         }
 
-        public static AsmCodeSet capture<T>(IVUnaryImm8Resolver256<T> svc, byte imm8)
+        public static AsmFuncInfo capture<T>(IVUnaryImm8Resolver256<T> svc, byte imm8)
             where T : unmanaged
         {
             var moniker = svc.Moniker;
             var f = svc.@delegate(imm8);
             Span<byte> buffer = new byte[500];
-            return AsmDecoder.decode(NativeReader.read(f, buffer),moniker.WithImm(imm8), f.CilFunc());
+            return AsmDecoder.function(NativeReader.read(moniker.WithImm(imm8), f, buffer));
         }
 
-        public static AsmCodeSet capture<T>(IVBinaryImm8Resolver256<T> svc, byte imm8)
+        public static AsmFuncInfo capture<T>(IVBinaryImm8Resolver256<T> svc, byte imm8)
             where T : unmanaged
         {
             var moniker = svc.Moniker;
             var f = svc.@delegate(imm8);            
             Span<byte> buffer = new byte[500];
-            return AsmDecoder.decode(NativeReader.read(f, buffer),moniker.WithImm(imm8), f.CilFunc());
+            return AsmDecoder.function(NativeReader.read(moniker.WithImm(imm8), f, buffer));
+        }
+        
+        static Func<byte,DynamicDelegate> unaryfactory(FixedWidth w, MethodInfo src, Type seg)
+        {
+            switch(w)
+            {
+                case FixedWidth.W128:
+                    return Dynop.unaryfactory(HK.vk128(), src, seg);
+                case FixedWidth.W256:
+                    return Dynop.unaryfactory(HK.vk256(), src, seg);
+                default:
+                    throw new NotSupportedException(w.ToString());
+            }
         }
 
     }
-
 }

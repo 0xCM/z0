@@ -11,14 +11,7 @@ namespace Z0
 
     using static zfunc;
 
-
     public interface IVectorKind : IKind<VectorKind>
-    {
-
-    }
-
-    public interface IVectorKind<V> : IVectorKind
-        where V : struct
     {
 
     }
@@ -29,6 +22,4 @@ namespace Z0
     {
 
     }
-
-
 }

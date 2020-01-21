@@ -10,11 +10,11 @@ namespace Z0
 
     public interface IAsmCatalogEmitter
     {
-       void EmitCatalog();
+       void EmitCatalog(bool pll);
        
-       void EmitDirect();
+       void EmitDirect(bool pll);
        
-       void EmitGeneric();
+       void EmitGeneric(bool pll);
          
     }
 
