@@ -1,6 +1,6 @@
-; 2020-01-22 01:43:39:306
+; 2020-01-22 01:44:40:205
 ; ref BitMatrix<ulong> or_and_xor_bm(in BitMatrix<ulong> a, in BitMatrix<ulong> b, ref BitMatrix<ulong> C)
-; or_and_xor_bm_0x[0x7ff7c8394770, 0x7ff7c8394863][243] = {57 56 55 53 48 83 ec 58 c5 f8 77 48 8b 01 4c 8b 0a 4d 8b 10 45 33 db 33 f6 48 63 fe 48 c1 e7 03 48 8d 1c 38 49 8d 2c 39 c5 ff f0 03 c5 ff f0 4d 00 c5 fd db c1 49 03 fa c5 fe 7f 07 41 ff c3 83 c6 04 41 83 fb 10 7c d1 49 8b c0 48 8b 09 48 8b 12 48 8b 00 45 33 c9 45 33 d2 4d 63 da 49 c1 e3 03 4a 8d 34 19 4a 8d 3c 1a c5 ff f0 06 c5 ff f0 0f c5 fd ef c1 4c 03 d8 c4 c1 7e 7f 03 41 ff c1 41 83 c2 04 41 83 f9 10 7c d0 49 8b 00 33 d2 33 c9 4c 63 c9 4e 8d 0c c8 4d 8b d1 4d 8b d9 c5 fc 57 c0 c5 fd 11 44 24 20 c5 fc 57 c0 c5 fd 11 04 24 c4 c1 7f f0 02 c5 fd 11 44 24 20 c4 c1 7f f0 03 c5 fd 11 04 24 c5 fd 10 44 24 20 c5 fd 10 0c 24 c5 fd eb c1 c4 c1 7e 7f 01 ff c2 83 c1 04 83 fa 10 7c ad 49 8b c0 c5 f8 77 48 83 c4 58 5b 5d 5e 5f c3}
+; or_and_xor_bm_0x[0x7ff7c83947f0, 0x7ff7c83948e3][243] = {57 56 55 53 48 83 ec 58 c5 f8 77 48 8b 01 4c 8b 0a 4d 8b 10 45 33 db 33 f6 48 63 fe 48 c1 e7 03 48 8d 1c 38 49 8d 2c 39 c5 ff f0 03 c5 ff f0 4d 00 c5 fd db c1 49 03 fa c5 fe 7f 07 41 ff c3 83 c6 04 41 83 fb 10 7c d1 49 8b c0 48 8b 09 48 8b 12 48 8b 00 45 33 c9 45 33 d2 4d 63 da 49 c1 e3 03 4a 8d 34 19 4a 8d 3c 1a c5 ff f0 06 c5 ff f0 0f c5 fd ef c1 4c 03 d8 c4 c1 7e 7f 03 41 ff c1 41 83 c2 04 41 83 f9 10 7c d0 49 8b 00 33 d2 33 c9 4c 63 c9 4e 8d 0c c8 4d 8b d1 4d 8b d9 c5 fc 57 c0 c5 fd 11 44 24 20 c5 fc 57 c0 c5 fd 11 04 24 c4 c1 7f f0 02 c5 fd 11 44 24 20 c4 c1 7f f0 03 c5 fd 11 04 24 c5 fd 10 44 24 20 c5 fd 10 0c 24 c5 fd eb c1 c4 c1 7e 7f 01 ff c2 83 c1 04 83 fa 10 7c ad 49 8b c0 c5 f8 77 48 83 c4 58 5b 5d 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -78,7 +78,7 @@
 00f2h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ref BitMatrix<ulong> nand_or_and_xor_bm(in BitMatrix<ulong> A, in BitMatrix<ulong> B, ref BitMatrix<ulong> C)
-; nand_or_and_xor_bm_0x[0x7ff7c8394ca0, 0x7ff7c8394dd5][309] = {57 56 55 53 48 83 ec 58 c5 f8 77 48 8b 01 4c 8b 0a 4d 8b 10 45 33 db 33 f6 48 63 fe 48 c1 e7 03 48 8d 1c 38 49 8d 2c 39 c5 ff f0 03 c5 ff f0 4d 00 c5 fd db c1 49 03 fa c5 fe 7f 07 41 ff c3 83 c6 04 41 83 fb 10 7c d1 49 8b c0 48 8b 09 4c 8b 0a 48 8b 00 45 33 d2 45 33 db 49 63 f3 48 c1 e6 03 48 8d 3c 31 49 8d 1c 31 c5 ff f0 07 c5 ff f0 0b c5 fd ef c1 48 03 f0 c5 fe 7f 06 41 ff c2 41 83 c3 04 41 83 fa 10 7c d1 49 8b 00 33 c9 45 33 c9 4d 63 d1 4e 8d 14 d0 4d 8b da 49 8b f2 c5 fc 57 c0 c5 fd 11 44 24 20 c5 fc 57 c0 c5 fd 11 04 24 c4 c1 7f f0 03 c5 fd 11 44 24 20 c5 ff f0 06 c5 fd 11 04 24 c5 fd 10 44 24 20 c5 fd 10 0c 24 c5 fd eb c1 c4 c1 7e 7f 02 ff c1 41 83 c1 04 83 f9 10 7c ad 48 8b 02 49 8b 10 33 c9 45 33 c9 4d 63 d1 4e 8d 14 d0 4d 63 d9 4e 8d 1c da 49 8b f3 c4 c1 7f f0 02 c5 ff f0 0e c5 fd db c1 c4 e2 7d 29 c8 c5 fd ef c1 c4 c1 7e 7f 03 ff c1 41 83 c1 04 83 f9 10 7c c9 49 8b c0 c5 f8 77 48 83 c4 58 5b 5d 5e 5f c3}
+; nand_or_and_xor_bm_0x[0x7ff7c8394d20, 0x7ff7c8394e55][309] = {57 56 55 53 48 83 ec 58 c5 f8 77 48 8b 01 4c 8b 0a 4d 8b 10 45 33 db 33 f6 48 63 fe 48 c1 e7 03 48 8d 1c 38 49 8d 2c 39 c5 ff f0 03 c5 ff f0 4d 00 c5 fd db c1 49 03 fa c5 fe 7f 07 41 ff c3 83 c6 04 41 83 fb 10 7c d1 49 8b c0 48 8b 09 4c 8b 0a 48 8b 00 45 33 d2 45 33 db 49 63 f3 48 c1 e6 03 48 8d 3c 31 49 8d 1c 31 c5 ff f0 07 c5 ff f0 0b c5 fd ef c1 48 03 f0 c5 fe 7f 06 41 ff c2 41 83 c3 04 41 83 fa 10 7c d1 49 8b 00 33 c9 45 33 c9 4d 63 d1 4e 8d 14 d0 4d 8b da 49 8b f2 c5 fc 57 c0 c5 fd 11 44 24 20 c5 fc 57 c0 c5 fd 11 04 24 c4 c1 7f f0 03 c5 fd 11 44 24 20 c5 ff f0 06 c5 fd 11 04 24 c5 fd 10 44 24 20 c5 fd 10 0c 24 c5 fd eb c1 c4 c1 7e 7f 02 ff c1 41 83 c1 04 83 f9 10 7c ad 48 8b 02 49 8b 10 33 c9 45 33 c9 4d 63 d1 4e 8d 14 d0 4d 63 d9 4e 8d 1c da 49 8b f3 c4 c1 7f f0 02 c5 ff f0 0e c5 fd db c1 c4 e2 7d 29 c8 c5 fd ef c1 c4 c1 7e 7f 03 ff c1 41 83 c1 04 83 f9 10 7c c9 49 8b c0 c5 f8 77 48 83 c4 58 5b 5d 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -175,7 +175,7 @@
 0134h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit comp1_logic(bit a, bit b)
-; comp1_logic_0x[0x7ff7c8394e10, 0x7ff7c8394e1e][14] = {0f 1f 44 00 00 8b c1 23 c2 33 d1 0b c2 c3}
+; comp1_logic_0x[0x7ff7c8394e90, 0x7ff7c8394e9e][14] = {0f 1f 44 00 00 8b c1 23 c2 33 d1 0b c2 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c1}
@@ -185,7 +185,7 @@
 000dh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong comp1_scalar(ulong a, ulong b)
-; comp1_scalar_64u[0x7ff7c8394e30, 0x7ff7c8394e42][18] = {0f 1f 44 00 00 48 8b c1 48 23 c2 48 33 d1 48 0b c2 c3}
+; comp1_scalar_64u[0x7ff7c8394eb0, 0x7ff7c8394ec2][18] = {0f 1f 44 00 00 48 8b c1 48 23 c2 48 33 d1 48 0b c2 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,rcx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c1}
@@ -195,7 +195,7 @@
 0011h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<ulong> comp1_v128(Vector128<ulong> a, Vector128<ulong> b)
-; comp1_v128_128x64u[0x7ff7c8395260, 0x7ff7c839528b][43] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f9 db c1 c5 f9 10 0a c4 c1 79 10 10 c5 f1 ef ca c5 f9 eb c1 c5 f9 11 01 48 8b c1 c3}
+; comp1_v128_128x64u[0x7ff7c8394ee0, 0x7ff7c8394f0b][43] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f9 db c1 c5 f9 10 0a c4 c1 79 10 10 c5 f1 ef ca c5 f9 eb c1 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -211,7 +211,7 @@
 002ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<ulong> comp1_v256(Vector256<ulong> a, Vector256<ulong> b)
-; comp1_v256_256x64u[0x7ff7c83952b0, 0x7ff7c83952de][46] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c5 fd db c1 c5 fd 10 0a c4 c1 7d 10 10 c5 f5 ef ca c5 fd eb c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; comp1_v256_256x64u[0x7ff7c8394f30, 0x7ff7c8394f5e][46] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c5 fd db c1 c5 fd 10 0a c4 c1 7d 10 10 c5 f5 ef ca c5 fd eb c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -228,7 +228,7 @@
 002dh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit comp2_logic(bit a, bit b)
-; comp2_logic_0x[0x7ff7c8395300, 0x7ff7c8395315][21] = {0f 1f 44 00 00 8b c1 23 c2 33 ca 0b c1 23 c2 f7 d0 83 e0 01 c3}
+; comp2_logic_0x[0x7ff7c8394f80, 0x7ff7c8394f95][21] = {0f 1f 44 00 00 8b c1 23 c2 33 ca 0b c1 23 c2 f7 d0 83 e0 01 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c1}
@@ -241,7 +241,7 @@
 0014h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong comp2_scalar(ulong a, ulong b)
-; comp2_scalar_64u[0x7ff7c8395330, 0x7ff7c8395348][24] = {0f 1f 44 00 00 48 8b c1 48 23 c2 48 33 ca 48 0b c1 48 23 c2 48 f7 d0 c3}
+; comp2_scalar_64u[0x7ff7c83953b0, 0x7ff7c83953c8][24] = {0f 1f 44 00 00 48 8b c1 48 23 c2 48 33 ca 48 0b c1 48 23 c2 48 f7 d0 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,rcx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c1}
@@ -253,7 +253,7 @@
 0017h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<ulong> comp2_v128(Vector128<ulong> a, Vector128<ulong> b)
-; comp2_v128_128x64u[0x7ff7c8395360, 0x7ff7c839539c][60] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f9 db c1 c5 f9 10 0a c4 c1 79 10 10 c5 f1 ef ca c5 f9 eb c1 c4 c1 79 10 08 c5 f1 db c0 c5 f9 76 c8 c5 f9 ef c1 c5 f9 11 01 48 8b c1 c3}
+; comp2_v128_128x64u[0x7ff7c83953e0, 0x7ff7c839541c][60] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f9 db c1 c5 f9 10 0a c4 c1 79 10 10 c5 f1 ef ca c5 f9 eb c1 c4 c1 79 10 08 c5 f1 db c0 c5 f9 76 c8 c5 f9 ef c1 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -273,7 +273,7 @@
 003bh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<ulong> comp2_v256(Vector256<ulong> a, Vector256<ulong> b)
-; comp2_v256_256x64u[0x7ff7c83953c0, 0x7ff7c8395400][64] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c5 fd db c1 c5 fd 10 0a c4 c1 7d 10 10 c5 f5 ef ca c5 fd eb c1 c4 c1 7d 10 08 c5 f5 db c0 c4 e2 7d 29 c8 c5 fd ef c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; comp2_v256_256x64u[0x7ff7c8395440, 0x7ff7c8395480][64] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c5 fd db c1 c5 fd 10 0a c4 c1 7d 10 10 c5 f5 ef ca c5 fd eb c1 c4 c1 7d 10 08 c5 f5 db c0 c4 e2 7d 29 c8 c5 fd ef c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -294,7 +294,7 @@
 003fh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit comp3_logic(bit a, bit b)
-; comp3_logic_0x[0x7ff7c8395420, 0x7ff7c839545c][60] = {0f 1f 44 00 00 8b c1 23 c2 44 8b c1 44 33 c2 41 0b c0 23 c2 f7 d0 83 e0 01 44 8b c1 44 0b c2 41 f7 d0 41 83 e0 01 33 d1 f7 d2 83 e2 01 41 23 d0 23 c1 f7 d1 23 d1 0b c2 83 e0 01 c3}
+; comp3_logic_0x[0x7ff7c83954a0, 0x7ff7c83954dc][60] = {0f 1f 44 00 00 8b c1 23 c2 44 8b c1 44 33 c2 41 0b c0 23 c2 f7 d0 83 e0 01 44 8b c1 44 0b c2 41 f7 d0 41 83 e0 01 33 d1 f7 d2 83 e2 01 41 23 d0 23 c1 f7 d1 23 d1 0b c2 83 e0 01 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c1}
@@ -321,7 +321,7 @@
 003bh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong comp3_scalar(ulong a, ulong b)
-; comp3_scalar_64u[0x7ff7c8395470, 0x7ff7c83954a7][55] = {0f 1f 44 00 00 48 8b c1 48 23 c2 4c 8b c1 4c 33 c2 49 0b c0 48 23 c2 48 f7 d0 4c 8b c1 4c 0b c2 49 f7 d0 48 33 d1 c4 c2 e8 f2 d0 48 23 c1 c4 e2 f0 f2 d2 48 0b c2 c3}
+; comp3_scalar_64u[0x7ff7c83954f0, 0x7ff7c8395527][55] = {0f 1f 44 00 00 48 8b c1 48 23 c2 4c 8b c1 4c 33 c2 49 0b c0 48 23 c2 48 f7 d0 4c 8b c1 4c 0b c2 49 f7 d0 48 33 d1 c4 c2 e8 f2 d0 48 23 c1 c4 e2 f0 f2 d2 48 0b c2 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,rcx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c1}
@@ -342,7 +342,7 @@
 0036h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<ulong> comp3_v128(Vector128<ulong> a, Vector128<ulong> b)
-; comp3_v128_128x64u[0x7ff7c83954c0, 0x7ff7c8395532][114] = {c5 f8 77 66 90 c5 f9 10 02 c5 f8 28 c8 c4 c1 79 10 10 c5 f8 28 da c5 f1 db cb c5 f8 28 d8 c5 f8 28 e2 c5 e1 ef dc c5 f1 eb cb c5 f8 28 da c5 e1 db c9 c5 f1 76 d9 c5 f1 ef cb c5 f8 28 d8 c5 f8 28 e2 c5 e1 eb dc c5 e1 76 e3 c5 e1 ef dc c5 f8 28 e0 c5 e9 ef d4 c5 e9 df d3 c5 f8 28 d8 c5 e1 db c9 c5 f9 df c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
+; comp3_v128_128x64u[0x7ff7c8395540, 0x7ff7c83955b2][114] = {c5 f8 77 66 90 c5 f9 10 02 c5 f8 28 c8 c4 c1 79 10 10 c5 f8 28 da c5 f1 db cb c5 f8 28 d8 c5 f8 28 e2 c5 e1 ef dc c5 f1 eb cb c5 f8 28 da c5 e1 db c9 c5 f1 76 d9 c5 f1 ef cb c5 f8 28 d8 c5 f8 28 e2 c5 e1 eb dc c5 e1 76 e3 c5 e1 ef dc c5 f8 28 e0 c5 e9 ef d4 c5 e9 df d3 c5 f8 28 d8 c5 e1 db c9 c5 f9 df c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -376,7 +376,7 @@
 0071h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<ulong> comp3_v256(Vector256<ulong> a, Vector256<ulong> b)
-; comp3_v256_256x64u[0x7ff7c8395560, 0x7ff7c83955d7][119] = {c5 f8 77 66 90 c5 fd 10 02 c5 fc 28 c8 c4 c1 7d 10 10 c5 fc 28 da c5 f5 db cb c5 fc 28 d8 c5 fc 28 e2 c5 e5 ef dc c5 f5 eb cb c5 fc 28 da c5 e5 db c9 c4 e2 75 29 d9 c5 f5 ef cb c5 fc 28 d8 c5 fc 28 e2 c5 e5 eb dc c4 e2 65 29 e3 c5 e5 ef dc c5 fc 28 e0 c5 ed ef d4 c5 ed df d3 c5 fc 28 d8 c5 e5 db c9 c5 fd df c2 c5 f5 eb c0 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; comp3_v256_256x64u[0x7ff7c83955e0, 0x7ff7c8395657][119] = {c5 f8 77 66 90 c5 fd 10 02 c5 fc 28 c8 c4 c1 7d 10 10 c5 fc 28 da c5 f5 db cb c5 fc 28 d8 c5 fc 28 e2 c5 e5 ef dc c5 f5 eb cb c5 fc 28 da c5 e5 db c9 c4 e2 75 29 d9 c5 f5 ef cb c5 fc 28 d8 c5 fc 28 e2 c5 e5 eb dc c4 e2 65 29 e3 c5 e5 ef dc c5 fc 28 e0 c5 ed ef d4 c5 ed df d3 c5 fc 28 d8 c5 e5 db c9 c5 fd df c2 c5 f5 eb c0 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}

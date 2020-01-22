@@ -1,6 +1,6 @@
-; 2020-01-22 01:43:39:661
+; 2020-01-22 01:44:40:540
 ; Vector128<byte> vsllv_128x8u(Vector128<byte> x, Vector128<byte> offsets)
-; vsllv_128x8u_128x8u[0x7ff7c85ac540, 0x7ff7c85ac5ed][173] = {50 c5 f8 77 90 c5 f9 10 02 c4 c1 79 10 08 c4 e2 7d 30 c0 c4 e2 7d 30 c9 c4 e3 7d 19 c2 00 c4 e2 7d 33 d2 c4 e3 7d 19 c0 01 c4 e2 7d 33 c0 c4 e3 7d 19 cb 00 c4 e2 7d 33 db c4 e3 7d 19 c9 01 c4 e2 7d 33 c9 c4 e2 6d 47 d3 c4 e2 7d 47 c1 c7 44 24 04 ff ff 00 00 48 8d 44 24 04 c4 e2 7d 58 4c 24 04 c5 ed db d1 c5 fd db c1 c4 e2 6d 2b c0 c4 e3 fd 00 c0 d8 c4 e3 7d 19 c1 00 c4 e3 7d 19 c0 01 c7 04 24 ff 00 00 00 48 8d 04 24 c4 e2 79 79 14 24 c5 f1 db ca c5 f9 db c2 c5 f1 67 c0 c5 f9 11 01 48 8b c1 c5 f8 77 48 83 c4 08 c3}
+; vsllv_128x8u_128x8u[0x7ff7c85ac120, 0x7ff7c85ac1cd][173] = {50 c5 f8 77 90 c5 f9 10 02 c4 c1 79 10 08 c4 e2 7d 30 c0 c4 e2 7d 30 c9 c4 e3 7d 19 c2 00 c4 e2 7d 33 d2 c4 e3 7d 19 c0 01 c4 e2 7d 33 c0 c4 e3 7d 19 cb 00 c4 e2 7d 33 db c4 e3 7d 19 c9 01 c4 e2 7d 33 c9 c4 e2 6d 47 d3 c4 e2 7d 47 c1 c7 44 24 04 ff ff 00 00 48 8d 44 24 04 c4 e2 7d 58 4c 24 04 c5 ed db d1 c5 fd db c1 c4 e2 6d 2b c0 c4 e3 fd 00 c0 d8 c4 e3 7d 19 c1 00 c4 e3 7d 19 c0 01 c7 04 24 ff 00 00 00 48 8d 04 24 c4 e2 79 79 14 24 c5 f1 db ca c5 f9 db c2 c5 f1 67 c0 c5 f9 11 01 48 8b c1 c5 f8 77 48 83 c4 08 c3}
 ; Capture completion code, None
 0000h push rax                                ; PUSH r64 || 50+ro || encoded[1]{50}
 0001h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
@@ -41,7 +41,7 @@
 00ach ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<ushort> vsllv_128x16u(Vector128<ushort> x, Vector128<ushort> offsets)
-; vsllv_128x16u_128x16u[0x7ff7c85ac610, 0x7ff7c85ac669][89] = {50 c5 f8 77 90 c5 f9 10 02 c4 c1 79 10 08 c4 e2 7d 33 c0 c4 e2 7d 33 c9 c4 e2 7d 47 c1 c4 e3 7d 19 c1 00 c4 e3 7d 19 c0 01 c7 44 24 04 ff ff 00 00 48 8d 44 24 04 c4 e2 79 58 54 24 04 c5 f1 db ca c5 f9 db c2 c4 e2 71 2b c0 c5 f9 11 01 48 8b c1 c5 f8 77 48 83 c4 08 c3}
+; vsllv_128x16u_128x16u[0x7ff7c85ac1f0, 0x7ff7c85ac249][89] = {50 c5 f8 77 90 c5 f9 10 02 c4 c1 79 10 08 c4 e2 7d 33 c0 c4 e2 7d 33 c9 c4 e2 7d 47 c1 c4 e3 7d 19 c1 00 c4 e3 7d 19 c0 01 c7 44 24 04 ff ff 00 00 48 8d 44 24 04 c4 e2 79 58 54 24 04 c5 f1 db ca c5 f9 db c2 c4 e2 71 2b c0 c5 f9 11 01 48 8b c1 c5 f8 77 48 83 c4 08 c3}
 ; Capture completion code, None
 0000h push rax                                ; PUSH r64 || 50+ro || encoded[1]{50}
 0001h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
@@ -66,7 +66,7 @@
 0058h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<uint> vsllv_128x32u(Vector128<uint> x, Vector128<uint> offsets)
-; vsllv_128x32u_128x32u[0x7ff7c85ac690, 0x7ff7c85ac6ab][27] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c4 e2 79 47 c1 c5 f9 11 01 48 8b c1 c3}
+; vsllv_128x32u_128x32u[0x7ff7c85ac270, 0x7ff7c85ac28b][27] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c4 e2 79 47 c1 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -78,7 +78,7 @@
 001ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<byte> vsllv_256x8u(Vector256<byte> x, Vector256<byte> offsets)
-; vsllv_256x8u_256x8u[0x7ff7c85ac6c0, 0x7ff7c85ac7ef][303] = {48 83 ec 18 c5 f8 77 c5 fd 10 02 c4 c1 7d 10 08 c4 e3 7d 19 c2 00 c4 e2 7d 30 d2 c4 e3 7d 19 c0 01 c4 e2 7d 30 c0 c4 e3 7d 19 cb 00 c4 e2 7d 30 db c4 e3 7d 19 c9 01 c4 e2 7d 30 c9 c4 e3 7d 19 d4 00 c4 e2 7d 33 e4 c4 e3 7d 19 d2 01 c4 e2 7d 33 d2 c5 fc 28 eb c4 e3 7d 19 ed 00 c4 e2 7d 33 ed c4 e3 7d 19 db 01 c4 e2 7d 33 db c4 e2 5d 47 e5 c4 e2 6d 47 d3 c7 44 24 14 ff ff 00 00 48 8d 44 24 14 c4 e2 7d 58 5c 24 14 c5 dd db e3 c5 ed db d3 c4 e2 5d 2b d2 c4 e3 fd 00 d2 d8 c4 e3 7d 19 c3 00 c4 e2 7d 33 db c4 e3 7d 19 c0 01 c4 e2 7d 33 c0 c4 e3 7d 19 cc 00 c4 e2 7d 33 e4 c4 e3 7d 19 c9 01 c4 e2 7d 33 c9 c4 e2 65 47 dc c4 e2 7d 47 c1 c7 44 24 10 ff ff 00 00 48 8d 44 24 10 c4 e2 7d 58 4c 24 10 c5 e5 db d9 c5 fd db c1 c4 e2 65 2b c0 c4 e3 fd 00 c0 d8 c7 44 24 0c ff 00 00 00 48 8d 44 24 0c c4 e2 7d 79 4c 24 0c c5 ed db d1 c5 fd db c1 c5 ed 67 c0 c4 e3 fd 00 c0 d8 c5 fd 11 01 48 8b c1 c5 f8 77 48 83 c4 18 c3}
+; vsllv_256x8u_256x8u[0x7ff7c85ac6b0, 0x7ff7c85ac7df][303] = {48 83 ec 18 c5 f8 77 c5 fd 10 02 c4 c1 7d 10 08 c4 e3 7d 19 c2 00 c4 e2 7d 30 d2 c4 e3 7d 19 c0 01 c4 e2 7d 30 c0 c4 e3 7d 19 cb 00 c4 e2 7d 30 db c4 e3 7d 19 c9 01 c4 e2 7d 30 c9 c4 e3 7d 19 d4 00 c4 e2 7d 33 e4 c4 e3 7d 19 d2 01 c4 e2 7d 33 d2 c5 fc 28 eb c4 e3 7d 19 ed 00 c4 e2 7d 33 ed c4 e3 7d 19 db 01 c4 e2 7d 33 db c4 e2 5d 47 e5 c4 e2 6d 47 d3 c7 44 24 14 ff ff 00 00 48 8d 44 24 14 c4 e2 7d 58 5c 24 14 c5 dd db e3 c5 ed db d3 c4 e2 5d 2b d2 c4 e3 fd 00 d2 d8 c4 e3 7d 19 c3 00 c4 e2 7d 33 db c4 e3 7d 19 c0 01 c4 e2 7d 33 c0 c4 e3 7d 19 cc 00 c4 e2 7d 33 e4 c4 e3 7d 19 c9 01 c4 e2 7d 33 c9 c4 e2 65 47 dc c4 e2 7d 47 c1 c7 44 24 10 ff ff 00 00 48 8d 44 24 10 c4 e2 7d 58 4c 24 10 c5 e5 db d9 c5 fd db c1 c4 e2 65 2b c0 c4 e3 fd 00 c0 d8 c7 44 24 0c ff 00 00 00 48 8d 44 24 0c c4 e2 7d 79 4c 24 0c c5 ed db d1 c5 fd db c1 c5 ed 67 c0 c4 e3 fd 00 c0 d8 c5 fd 11 01 48 8b c1 c5 f8 77 48 83 c4 18 c3}
 ; Capture completion code, None
 0000h sub rsp,18h                             ; SUB r/m64, imm8 || REX.W 83 /5 ib || encoded[4]{48 83 ec 18}
 0004h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
@@ -141,7 +141,7 @@
 012eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<ushort> vsllv_256x16u(Vector256<ushort> x, Vector256<ushort> offsets)
-; vsllv_256x16u_256x16u[0x7ff7c85ac820, 0x7ff7c85ac89a][122] = {50 c5 f8 77 90 c5 fd 10 02 c4 c1 7d 10 08 c4 e3 7d 19 c2 00 c4 e2 7d 33 d2 c4 e3 7d 19 c0 01 c4 e2 7d 33 c0 c4 e3 7d 19 cb 00 c4 e2 7d 33 db c4 e3 7d 19 c9 01 c4 e2 7d 33 c9 c4 e2 6d 47 d3 c4 e2 7d 47 c1 c7 44 24 04 ff ff 00 00 48 8d 44 24 04 c4 e2 7d 58 4c 24 04 c5 ed db d1 c5 fd db c1 c4 e2 6d 2b c0 c4 e3 fd 00 c0 d8 c5 fd 11 01 48 8b c1 c5 f8 77 48 83 c4 08 c3}
+; vsllv_256x16u_256x16u[0x7ff7c85ac810, 0x7ff7c85ac88a][122] = {50 c5 f8 77 90 c5 fd 10 02 c4 c1 7d 10 08 c4 e3 7d 19 c2 00 c4 e2 7d 33 d2 c4 e3 7d 19 c0 01 c4 e2 7d 33 c0 c4 e3 7d 19 cb 00 c4 e2 7d 33 db c4 e3 7d 19 c9 01 c4 e2 7d 33 c9 c4 e2 6d 47 d3 c4 e2 7d 47 c1 c7 44 24 04 ff ff 00 00 48 8d 44 24 04 c4 e2 7d 58 4c 24 04 c5 ed db d1 c5 fd db c1 c4 e2 6d 2b c0 c4 e3 fd 00 c0 d8 c5 fd 11 01 48 8b c1 c5 f8 77 48 83 c4 08 c3}
 ; Capture completion code, None
 0000h push rax                                ; PUSH r64 || 50+ro || encoded[1]{50}
 0001h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
@@ -172,7 +172,7 @@
 0079h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<uint> vsllv_256x32u(Vector256<uint> x, Vector256<uint> offsets)
-; vsllv_256x32u_256x32u[0x7ff7c85ac8c0, 0x7ff7c85ac8de][30] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c4 e2 7d 47 c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; vsllv_256x32u_256x32u[0x7ff7c85ac8b0, 0x7ff7c85ac8ce][30] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c4 e2 7d 47 c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -185,7 +185,7 @@
 001dh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<byte> vsrlv_128x8u(Vector128<byte> x, Vector128<byte> offsets)
-; vsrlv_128x8u_128x8u[0x7ff7c85ac8f0, 0x7ff7c85ac99d][173] = {50 c5 f8 77 90 c5 f9 10 02 c4 c1 79 10 08 c4 e2 7d 30 c0 c4 e2 7d 30 c9 c4 e3 7d 19 c2 00 c4 e2 7d 33 d2 c4 e3 7d 19 c0 01 c4 e2 7d 33 c0 c4 e3 7d 19 cb 00 c4 e2 7d 33 db c4 e3 7d 19 c9 01 c4 e2 7d 33 c9 c4 e2 6d 45 d3 c4 e2 7d 45 c1 c7 44 24 04 ff ff 00 00 48 8d 44 24 04 c4 e2 7d 58 4c 24 04 c5 ed db d1 c5 fd db c1 c4 e2 6d 2b c0 c4 e3 fd 00 c0 d8 c4 e3 7d 19 c1 00 c4 e3 7d 19 c0 01 c7 04 24 ff 00 00 00 48 8d 04 24 c4 e2 79 79 14 24 c5 f1 db ca c5 f9 db c2 c5 f1 67 c0 c5 f9 11 01 48 8b c1 c5 f8 77 48 83 c4 08 c3}
+; vsrlv_128x8u_128x8u[0x7ff7c85ac8e0, 0x7ff7c85ac98d][173] = {50 c5 f8 77 90 c5 f9 10 02 c4 c1 79 10 08 c4 e2 7d 30 c0 c4 e2 7d 30 c9 c4 e3 7d 19 c2 00 c4 e2 7d 33 d2 c4 e3 7d 19 c0 01 c4 e2 7d 33 c0 c4 e3 7d 19 cb 00 c4 e2 7d 33 db c4 e3 7d 19 c9 01 c4 e2 7d 33 c9 c4 e2 6d 45 d3 c4 e2 7d 45 c1 c7 44 24 04 ff ff 00 00 48 8d 44 24 04 c4 e2 7d 58 4c 24 04 c5 ed db d1 c5 fd db c1 c4 e2 6d 2b c0 c4 e3 fd 00 c0 d8 c4 e3 7d 19 c1 00 c4 e3 7d 19 c0 01 c7 04 24 ff 00 00 00 48 8d 04 24 c4 e2 79 79 14 24 c5 f1 db ca c5 f9 db c2 c5 f1 67 c0 c5 f9 11 01 48 8b c1 c5 f8 77 48 83 c4 08 c3}
 ; Capture completion code, None
 0000h push rax                                ; PUSH r64 || 50+ro || encoded[1]{50}
 0001h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
@@ -226,7 +226,7 @@
 00ach ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<ushort> vsrlv_128x16u(Vector128<ushort> x, Vector128<ushort> offsets)
-; vsrlv_128x16u_128x16u[0x7ff7c85ac9c0, 0x7ff7c85aca19][89] = {50 c5 f8 77 90 c5 f9 10 02 c4 c1 79 10 08 c4 e2 7d 33 c0 c4 e2 7d 33 c9 c4 e2 7d 45 c1 c4 e3 7d 19 c1 00 c4 e3 7d 19 c0 01 c7 44 24 04 ff ff 00 00 48 8d 44 24 04 c4 e2 79 58 54 24 04 c5 f1 db ca c5 f9 db c2 c4 e2 71 2b c0 c5 f9 11 01 48 8b c1 c5 f8 77 48 83 c4 08 c3}
+; vsrlv_128x16u_128x16u[0x7ff7c85ac9b0, 0x7ff7c85aca09][89] = {50 c5 f8 77 90 c5 f9 10 02 c4 c1 79 10 08 c4 e2 7d 33 c0 c4 e2 7d 33 c9 c4 e2 7d 45 c1 c4 e3 7d 19 c1 00 c4 e3 7d 19 c0 01 c7 44 24 04 ff ff 00 00 48 8d 44 24 04 c4 e2 79 58 54 24 04 c5 f1 db ca c5 f9 db c2 c4 e2 71 2b c0 c5 f9 11 01 48 8b c1 c5 f8 77 48 83 c4 08 c3}
 ; Capture completion code, None
 0000h push rax                                ; PUSH r64 || 50+ro || encoded[1]{50}
 0001h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
@@ -251,7 +251,7 @@
 0058h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<uint> vsrlv_128x32u(Vector128<uint> x, Vector128<uint> offsets)
-; vsrlv_128x32u_128x32u[0x7ff7c85aca40, 0x7ff7c85aca5b][27] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c4 e2 79 45 c1 c5 f9 11 01 48 8b c1 c3}
+; vsrlv_128x32u_128x32u[0x7ff7c85aca30, 0x7ff7c85aca4b][27] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c4 e2 79 45 c1 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -263,7 +263,7 @@
 001ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<byte> vsrlv_256x8u(Vector256<byte> x, Vector256<byte> offsets)
-; vsrlv_256x8u_256x8u[0x7ff7c85aca70, 0x7ff7c85acb9f][303] = {48 83 ec 18 c5 f8 77 c5 fd 10 02 c4 c1 7d 10 08 c4 e3 7d 19 c2 00 c4 e2 7d 30 d2 c4 e3 7d 19 c0 01 c4 e2 7d 30 c0 c4 e3 7d 19 cb 00 c4 e2 7d 30 db c4 e3 7d 19 c9 01 c4 e2 7d 30 c9 c4 e3 7d 19 d4 00 c4 e2 7d 33 e4 c4 e3 7d 19 d2 01 c4 e2 7d 33 d2 c5 fc 28 eb c4 e3 7d 19 ed 00 c4 e2 7d 33 ed c4 e3 7d 19 db 01 c4 e2 7d 33 db c4 e2 5d 45 e5 c4 e2 6d 45 d3 c7 44 24 14 ff ff 00 00 48 8d 44 24 14 c4 e2 7d 58 5c 24 14 c5 dd db e3 c5 ed db d3 c4 e2 5d 2b d2 c4 e3 fd 00 d2 d8 c4 e3 7d 19 c3 00 c4 e2 7d 33 db c4 e3 7d 19 c0 01 c4 e2 7d 33 c0 c4 e3 7d 19 cc 00 c4 e2 7d 33 e4 c4 e3 7d 19 c9 01 c4 e2 7d 33 c9 c4 e2 65 45 dc c4 e2 7d 45 c1 c7 44 24 10 ff ff 00 00 48 8d 44 24 10 c4 e2 7d 58 4c 24 10 c5 e5 db d9 c5 fd db c1 c4 e2 65 2b c0 c4 e3 fd 00 c0 d8 c7 44 24 0c ff 00 00 00 48 8d 44 24 0c c4 e2 7d 79 4c 24 0c c5 ed db d1 c5 fd db c1 c5 ed 67 c0 c4 e3 fd 00 c0 d8 c5 fd 11 01 48 8b c1 c5 f8 77 48 83 c4 18 c3}
+; vsrlv_256x8u_256x8u[0x7ff7c85aca60, 0x7ff7c85acb8f][303] = {48 83 ec 18 c5 f8 77 c5 fd 10 02 c4 c1 7d 10 08 c4 e3 7d 19 c2 00 c4 e2 7d 30 d2 c4 e3 7d 19 c0 01 c4 e2 7d 30 c0 c4 e3 7d 19 cb 00 c4 e2 7d 30 db c4 e3 7d 19 c9 01 c4 e2 7d 30 c9 c4 e3 7d 19 d4 00 c4 e2 7d 33 e4 c4 e3 7d 19 d2 01 c4 e2 7d 33 d2 c5 fc 28 eb c4 e3 7d 19 ed 00 c4 e2 7d 33 ed c4 e3 7d 19 db 01 c4 e2 7d 33 db c4 e2 5d 45 e5 c4 e2 6d 45 d3 c7 44 24 14 ff ff 00 00 48 8d 44 24 14 c4 e2 7d 58 5c 24 14 c5 dd db e3 c5 ed db d3 c4 e2 5d 2b d2 c4 e3 fd 00 d2 d8 c4 e3 7d 19 c3 00 c4 e2 7d 33 db c4 e3 7d 19 c0 01 c4 e2 7d 33 c0 c4 e3 7d 19 cc 00 c4 e2 7d 33 e4 c4 e3 7d 19 c9 01 c4 e2 7d 33 c9 c4 e2 65 45 dc c4 e2 7d 45 c1 c7 44 24 10 ff ff 00 00 48 8d 44 24 10 c4 e2 7d 58 4c 24 10 c5 e5 db d9 c5 fd db c1 c4 e2 65 2b c0 c4 e3 fd 00 c0 d8 c7 44 24 0c ff 00 00 00 48 8d 44 24 0c c4 e2 7d 79 4c 24 0c c5 ed db d1 c5 fd db c1 c5 ed 67 c0 c4 e3 fd 00 c0 d8 c5 fd 11 01 48 8b c1 c5 f8 77 48 83 c4 18 c3}
 ; Capture completion code, None
 0000h sub rsp,18h                             ; SUB r/m64, imm8 || REX.W 83 /5 ib || encoded[4]{48 83 ec 18}
 0004h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
@@ -326,7 +326,7 @@
 012eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<ushort> vsrlv_256x16u(Vector256<ushort> x, Vector256<ushort> offsets)
-; vsrlv_256x16u_256x16u[0x7ff7c85acbd0, 0x7ff7c85acc4a][122] = {50 c5 f8 77 90 c5 fd 10 02 c4 c1 7d 10 08 c4 e3 7d 19 c2 00 c4 e2 7d 33 d2 c4 e3 7d 19 c0 01 c4 e2 7d 33 c0 c4 e3 7d 19 cb 00 c4 e2 7d 33 db c4 e3 7d 19 c9 01 c4 e2 7d 33 c9 c4 e2 6d 45 d3 c4 e2 7d 45 c1 c7 44 24 04 ff ff 00 00 48 8d 44 24 04 c4 e2 7d 58 4c 24 04 c5 ed db d1 c5 fd db c1 c4 e2 6d 2b c0 c4 e3 fd 00 c0 d8 c5 fd 11 01 48 8b c1 c5 f8 77 48 83 c4 08 c3}
+; vsrlv_256x16u_256x16u[0x7ff7c85acbc0, 0x7ff7c85acc3a][122] = {50 c5 f8 77 90 c5 fd 10 02 c4 c1 7d 10 08 c4 e3 7d 19 c2 00 c4 e2 7d 33 d2 c4 e3 7d 19 c0 01 c4 e2 7d 33 c0 c4 e3 7d 19 cb 00 c4 e2 7d 33 db c4 e3 7d 19 c9 01 c4 e2 7d 33 c9 c4 e2 6d 45 d3 c4 e2 7d 45 c1 c7 44 24 04 ff ff 00 00 48 8d 44 24 04 c4 e2 7d 58 4c 24 04 c5 ed db d1 c5 fd db c1 c4 e2 6d 2b c0 c4 e3 fd 00 c0 d8 c5 fd 11 01 48 8b c1 c5 f8 77 48 83 c4 08 c3}
 ; Capture completion code, None
 0000h push rax                                ; PUSH r64 || 50+ro || encoded[1]{50}
 0001h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
@@ -357,7 +357,7 @@
 0079h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<uint> vsrlv_256x32u(Vector256<uint> x, Vector256<uint> offsets)
-; vsrlv_256x32u_256x32u[0x7ff7c85acc70, 0x7ff7c85acc8e][30] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c4 e2 7d 45 c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; vsrlv_256x32u_256x32u[0x7ff7c85acc60, 0x7ff7c85acc7e][30] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c4 e2 7d 45 c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -370,7 +370,7 @@
 001dh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<byte> vsllx_128x8u_F(Vector128<byte> x)
-; vsllx_128x8u_F_128x8u[0x7ff7c85acca0, 0x7ff7c85acccc][44] = {c5 f8 77 66 90 c5 f9 10 02 c5 f1 73 f0 0f c5 f9 73 f8 08 b8 31 00 00 00 c5 f9 6e d0 c5 f9 d3 c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
+; vsllx_128x8u_F_128x8u[0x7ff7c85acc90, 0x7ff7c85accbc][44] = {c5 f8 77 66 90 c5 f9 10 02 c5 f1 73 f0 0f c5 f9 73 f8 08 b8 31 00 00 00 c5 f9 6e d0 c5 f9 d3 c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -386,7 +386,7 @@
 002bh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<ushort> vsllx_128x16u_F(Vector128<ushort> x)
-; vsllx_128x16u_F_128x16u[0x7ff7c85accf0, 0x7ff7c85acd1c][44] = {c5 f8 77 66 90 c5 f9 10 02 c5 f1 73 f0 0f c5 f9 73 f8 08 b8 31 00 00 00 c5 f9 6e d0 c5 f9 d3 c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
+; vsllx_128x16u_F_128x16u[0x7ff7c85acce0, 0x7ff7c85acd0c][44] = {c5 f8 77 66 90 c5 f9 10 02 c5 f1 73 f0 0f c5 f9 73 f8 08 b8 31 00 00 00 c5 f9 6e d0 c5 f9 d3 c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -402,7 +402,7 @@
 002bh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<uint> vsllx_128x32u_F(Vector128<uint> x)
-; vsllx_128x32u_F_128x32u[0x7ff7c85acd40, 0x7ff7c85acd6c][44] = {c5 f8 77 66 90 c5 f9 10 02 c5 f1 73 f0 0f c5 f9 73 f8 08 b8 31 00 00 00 c5 f9 6e d0 c5 f9 d3 c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
+; vsllx_128x32u_F_128x32u[0x7ff7c85acd30, 0x7ff7c85acd5c][44] = {c5 f8 77 66 90 c5 f9 10 02 c5 f1 73 f0 0f c5 f9 73 f8 08 b8 31 00 00 00 c5 f9 6e d0 c5 f9 d3 c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -418,7 +418,7 @@
 002bh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<ulong> vsllx_128x64u_8(Vector128<ulong> x)
-; vsllx_128x64u_8_128x64u[0x7ff7c85acd90, 0x7ff7c85acdbc][44] = {c5 f8 77 66 90 c5 f9 10 02 c5 f1 73 f0 08 c5 f9 73 f8 08 b8 38 00 00 00 c5 f9 6e d0 c5 f9 d3 c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
+; vsllx_128x64u_8_128x64u[0x7ff7c85acd80, 0x7ff7c85acdac][44] = {c5 f8 77 66 90 c5 f9 10 02 c5 f1 73 f0 08 c5 f9 73 f8 08 b8 38 00 00 00 c5 f9 6e d0 c5 f9 d3 c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -434,7 +434,7 @@
 002bh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<byte> vsllx_256x8u(Vector256<byte> x)
-; vsllx_256x8u_256x8u[0x7ff7c85ad1e0, 0x7ff7c85ad20f][47] = {c5 f8 77 66 90 c5 fd 10 02 c5 f5 73 f0 0d c5 fd 73 f8 08 b8 33 00 00 00 c5 f9 6e d0 c5 fd d3 c2 c5 f5 eb c0 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; vsllx_256x8u_256x8u[0x7ff7c85acdd0, 0x7ff7c85acdff][47] = {c5 f8 77 66 90 c5 fd 10 02 c5 f5 73 f0 0d c5 fd 73 f8 08 b8 33 00 00 00 c5 f9 6e d0 c5 fd d3 c2 c5 f5 eb c0 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -451,7 +451,7 @@
 002eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<ulong> vsllx_256x64u(Vector256<ulong> x)
-; vsllx_256x64u_256x64u[0x7ff7c85ad230, 0x7ff7c85ad25f][47] = {c5 f8 77 66 90 c5 fd 10 02 c5 f5 73 f0 0d c5 fd 73 f8 08 b8 33 00 00 00 c5 f9 6e d0 c5 fd d3 c2 c5 f5 eb c0 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; vsllx_256x64u_256x64u[0x7ff7c85ace20, 0x7ff7c85ace4f][47] = {c5 f8 77 66 90 c5 fd 10 02 c5 f5 73 f0 0d c5 fd 73 f8 08 b8 33 00 00 00 c5 f9 6e d0 c5 fd d3 c2 c5 f5 eb c0 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -468,7 +468,7 @@
 002eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<byte> vsrlx_128x8u(Vector128<byte> x)
-; vsrlx_128x8u_128x8u[0x7ff7c85ad280, 0x7ff7c85ad2ac][44] = {c5 f8 77 66 90 c5 f9 10 02 c5 f1 73 d0 08 c5 f9 73 d8 08 b8 38 00 00 00 c5 f9 6e d0 c5 f9 f3 c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
+; vsrlx_128x8u_128x8u[0x7ff7c85ace70, 0x7ff7c85ace9c][44] = {c5 f8 77 66 90 c5 f9 10 02 c5 f1 73 d0 08 c5 f9 73 d8 08 b8 38 00 00 00 c5 f9 6e d0 c5 f9 f3 c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -484,7 +484,7 @@
 002bh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<ulong> vsrlx_128x64u(Vector128<ulong> x)
-; vsrlx_128x64u_128x64u[0x7ff7c85ad2d0, 0x7ff7c85ad2fc][44] = {c5 f8 77 66 90 c5 f9 10 02 c5 f1 73 d0 08 c5 f9 73 d8 08 b8 38 00 00 00 c5 f9 6e d0 c5 f9 f3 c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
+; vsrlx_128x64u_128x64u[0x7ff7c85acec0, 0x7ff7c85aceec][44] = {c5 f8 77 66 90 c5 f9 10 02 c5 f1 73 d0 08 c5 f9 73 d8 08 b8 38 00 00 00 c5 f9 6e d0 c5 f9 f3 c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -500,7 +500,7 @@
 002bh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<ulong> vsrlx_256x64u(Vector256<ulong> x)
-; vsrlx_256x64u_256x64u[0x7ff7c85ad320, 0x7ff7c85ad34f][47] = {c5 f8 77 66 90 c5 fd 10 02 c5 f5 73 d0 0d c5 fd 73 d8 08 b8 33 00 00 00 c5 f9 6e d0 c5 fd f3 c2 c5 f5 eb c0 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; vsrlx_256x64u_256x64u[0x7ff7c85acf10, 0x7ff7c85acf3f][47] = {c5 f8 77 66 90 c5 fd 10 02 c5 f5 73 d0 0d c5 fd 73 d8 08 b8 33 00 00 00 c5 f9 6e d0 c5 fd f3 c2 c5 f5 eb c0 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -517,7 +517,7 @@
 002eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<ulong> vrotlx_128x64u(Vector128<ulong> x)
-; vrotlx_128x64u_128x64u[0x7ff7c85ad370, 0x7ff7c85ad3b1][65] = {c5 f8 77 66 90 c5 f9 10 02 c5 f8 28 c8 c5 e9 73 f1 0e c5 f1 73 f9 08 b8 32 00 00 00 c5 f9 6e d8 c5 f1 d3 cb c5 e9 eb c9 c5 f9 73 d8 08 c5 f9 6e d0 c5 f9 d3 c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
+; vrotlx_128x64u_128x64u[0x7ff7c85ad360, 0x7ff7c85ad3a1][65] = {c5 f8 77 66 90 c5 f9 10 02 c5 f8 28 c8 c5 e9 73 f1 0e c5 f1 73 f9 08 b8 32 00 00 00 c5 f9 6e d8 c5 f1 d3 cb c5 e9 eb c9 c5 f9 73 d8 08 c5 f9 6e d0 c5 f9 d3 c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -538,7 +538,7 @@
 0040h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<ulong> vrotlx_256x64u(Vector256<ulong> x)
-; vrotlx_256x64u_256x64u[0x7ff7c85ad3d0, 0x7ff7c85ad414][68] = {c5 f8 77 66 90 c5 fd 10 02 c5 fc 28 c8 c5 ed 73 f1 0e c5 f5 73 f9 08 b8 32 00 00 00 c5 f9 6e d8 c5 f5 d3 cb c5 ed eb c9 c5 fd 73 d8 08 c5 f9 6e d0 c5 fd d3 c2 c5 f5 eb c0 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; vrotlx_256x64u_256x64u[0x7ff7c85ad3c0, 0x7ff7c85ad404][68] = {c5 f8 77 66 90 c5 fd 10 02 c5 fc 28 c8 c5 ed 73 f1 0e c5 f5 73 f9 08 b8 32 00 00 00 c5 f9 6e d8 c5 f5 d3 cb c5 ed eb c9 c5 fd 73 d8 08 c5 f9 6e d0 c5 fd d3 c2 c5 f5 eb c0 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -560,7 +560,7 @@
 0043h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<byte> rotl_g128x8u(Vector128<byte> src, byte offset)
-; rotl_g128x8u_128x8u[0x7ff7c85ad430, 0x7ff7c85ad4bf][143] = {50 c5 f8 77 90 48 8b c1 c5 f9 10 02 c5 f8 28 c8 41 0f b6 c8 c5 f9 6e d1 c5 f9 f3 c2 41 0f b6 c8 f7 d9 83 c1 08 0f b6 d1 44 8b c2 41 f7 d8 41 83 c0 08 41 b9 ff 00 00 00 41 8b c8 41 d3 e1 41 0f b6 c9 88 4c 24 04 48 8d 4c 24 04 c4 e2 79 78 54 24 04 c5 f9 db c2 c5 f9 6e d2 c5 f1 d3 ca 41 0f b6 c8 f7 d9 83 c1 08 ba ff 00 00 00 d3 fa 0f b6 d2 88 14 24 48 8d 14 24 c4 e2 79 78 14 24 c5 f1 db ca c5 f9 eb c1 c5 f9 11 00 48 83 c4 08 c3}
+; rotl_g128x8u_128x8u[0x7ff7c85ad420, 0x7ff7c85ad4af][143] = {50 c5 f8 77 90 48 8b c1 c5 f9 10 02 c5 f8 28 c8 41 0f b6 c8 c5 f9 6e d1 c5 f9 f3 c2 41 0f b6 c8 f7 d9 83 c1 08 0f b6 d1 44 8b c2 41 f7 d8 41 83 c0 08 41 b9 ff 00 00 00 41 8b c8 41 d3 e1 41 0f b6 c9 88 4c 24 04 48 8d 4c 24 04 c4 e2 79 78 54 24 04 c5 f9 db c2 c5 f9 6e d2 c5 f1 d3 ca 41 0f b6 c8 f7 d9 83 c1 08 ba ff 00 00 00 d3 fa 0f b6 d2 88 14 24 48 8d 14 24 c4 e2 79 78 14 24 c5 f1 db ca c5 f9 eb c1 c5 f9 11 00 48 83 c4 08 c3}
 ; Capture completion code, None
 0000h push rax                                ; PUSH r64 || 50+ro || encoded[1]{50}
 0001h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
@@ -604,7 +604,7 @@
 008eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<ulong> rotl_g128x64u(Vector128<ulong> src, byte offset)
-; rotl_g128x64u_128x64u[0x7ff7c85ad4e0, 0x7ff7c85ad511][49] = {c5 f8 77 66 90 c5 f9 10 02 41 0f b6 c0 c5 f9 6e c8 c5 f9 f3 c9 f7 d8 83 c0 40 0f b6 c0 c5 f9 6e d0 c5 f9 d3 c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
+; rotl_g128x64u_128x64u[0x7ff7c85ad4d0, 0x7ff7c85ad501][49] = {c5 f8 77 66 90 c5 f9 10 02 41 0f b6 c0 c5 f9 6e c8 c5 f9 f3 c9 f7 d8 83 c0 40 0f b6 c0 c5 f9 6e d0 c5 f9 d3 c2 c5 f1 eb c0 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -623,7 +623,7 @@
 0030h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<byte> rotl_g256x8u(Vector256<byte> src, byte offset)
-; rotl_g256x8u_256x8u[0x7ff7c85ad530, 0x7ff7c85ad5c2][146] = {50 c5 f8 77 90 48 8b c1 c5 fd 10 02 c5 fc 28 c8 41 0f b6 c8 c5 f9 6e d1 c5 fd f3 c2 41 0f b6 c8 f7 d9 83 c1 08 0f b6 d1 44 8b c2 41 f7 d8 41 83 c0 08 41 b9 ff 00 00 00 41 8b c8 41 d3 e1 41 0f b6 c9 88 4c 24 04 48 8d 4c 24 04 c4 e2 7d 78 54 24 04 c5 fd db c2 c5 f9 6e d2 c5 f5 d3 ca 41 0f b6 c8 f7 d9 83 c1 08 ba ff 00 00 00 d3 fa 0f b6 d2 88 14 24 48 8d 14 24 c4 e2 7d 78 14 24 c5 f5 db ca c5 fd eb c1 c5 fd 11 00 c5 f8 77 48 83 c4 08 c3}
+; rotl_g256x8u_256x8u[0x7ff7c85ad520, 0x7ff7c85ad5b2][146] = {50 c5 f8 77 90 48 8b c1 c5 fd 10 02 c5 fc 28 c8 41 0f b6 c8 c5 f9 6e d1 c5 fd f3 c2 41 0f b6 c8 f7 d9 83 c1 08 0f b6 d1 44 8b c2 41 f7 d8 41 83 c0 08 41 b9 ff 00 00 00 41 8b c8 41 d3 e1 41 0f b6 c9 88 4c 24 04 48 8d 4c 24 04 c4 e2 7d 78 54 24 04 c5 fd db c2 c5 f9 6e d2 c5 f5 d3 ca 41 0f b6 c8 f7 d9 83 c1 08 ba ff 00 00 00 d3 fa 0f b6 d2 88 14 24 48 8d 14 24 c4 e2 7d 78 14 24 c5 f5 db ca c5 fd eb c1 c5 fd 11 00 c5 f8 77 48 83 c4 08 c3}
 ; Capture completion code, None
 0000h push rax                                ; PUSH r64 || 50+ro || encoded[1]{50}
 0001h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
@@ -668,7 +668,7 @@
 0091h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<ulong> rotl_g256x64u(Vector256<ulong> src, byte offset)
-; rotl_g256x64u_256x64u[0x7ff7c85ad9f0, 0x7ff7c85ada24][52] = {c5 f8 77 66 90 c5 fd 10 02 41 0f b6 c0 c5 f9 6e c8 c5 fd f3 c9 f7 d8 83 c0 40 0f b6 c0 c5 f9 6e d0 c5 fd d3 c2 c5 f5 eb c0 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; rotl_g256x64u_256x64u[0x7ff7c85ad5d0, 0x7ff7c85ad604][52] = {c5 f8 77 66 90 c5 fd 10 02 41 0f b6 c0 c5 f9 6e c8 c5 fd f3 c9 f7 d8 83 c0 40 0f b6 c0 c5 f9 6e d0 c5 fd d3 c2 c5 f5 eb c0 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}

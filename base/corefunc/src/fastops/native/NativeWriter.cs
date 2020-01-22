@@ -9,8 +9,11 @@ namespace Z0
 
     using static zfunc;
 
-    public class NativeWriter : StreamWriter
+    public class NativeWriter : StreamWriter, INativeWriter
     {
+        public static INativeWriter Create(FilePath dst, bool append = false)
+            => new NativeWriter(dst,append);
+            
         public NativeWriter(StreamWriter stream)
             : base(stream.BaseStream)
         {
@@ -47,9 +50,14 @@ namespace Z0
             WriteLine(new string(AsciSym.Dash, 80));
         }
 
-        public void WriteData(INativeMemberData data, NativeFormatConfig? config = null)
+        public void WriteData(NativeMemberCapture src, NativeFormatConfig config)
         {
-            Write(data.Format(config));                            
+            Write(src.Format(config));                            
+        }
+
+        public void WriteData(NativeMemberCapture src)
+        {
+            Write(src.Format(null));                            
         }
     }
 }

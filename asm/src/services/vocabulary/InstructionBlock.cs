@@ -5,10 +5,8 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Linq;
 
     using Iced.Intel;
     
@@ -20,27 +18,20 @@ namespace Z0
     public class InstructionBlock
     {
         /// <summary>
-        /// Defines an instruction block from a method asm body
-        /// </summary>
-        /// <param name="id">The block identity</param>
-        /// <param name="body">The source body</param>
-        public static InstructionBlock Define(Moniker id, MethodAsmBody body)      
-            => Define(id, body.Method.Signature().Format(), body.Location, body.NativeBlock.Data, body.Instructions);  
-
-        /// <summary>
         /// Defines an instruction sequence, in both encoded and decoded form
         /// </summary>
         /// <param name="encoded">The encoded instructions</param>
         /// <param name="decoded">The decoded instructions</param>
-        public static InstructionBlock Define(Moniker id, string label, MemoryRange location,  ReadOnlySpan<byte> encoded, Instruction[] decoded)
-            => new InstructionBlock(id, label, location, encoded, decoded);
+        public static InstructionBlock Define(AsmCode encoded, CaptureTermCode tc, MemoryRange origin,  IEnumerable<Instruction> decoded)
+            => new InstructionBlock(encoded, tc, origin, decoded.ToArray());
 
-        InstructionBlock(Moniker id, string label, MemoryRange location, ReadOnlySpan<byte> encoded, Instruction[] decoded)
+        InstructionBlock(AsmCode encoded, CaptureTermCode tc, MemoryRange origin, Instruction[] decoded)
         {
-            this.Label = label;
-            this.Code = AsmCode.Define(id, label, encoded);
+            this.Label = encoded.Label;
+            this.NativeCode = encoded;
             this.Decoded = decoded;
-            this.Location = location;
+            this.Origin = origin;
+            this.TermCode = tc;
         }
 
         /// <summary>
@@ -48,20 +39,25 @@ namespace Z0
         /// </summary>
         public string Label {get;}
 
-        public AsmCode Code {get;}
+        /// <summary>
+        /// The memory segment from which the code was taken
+        /// </summary>
+        public MemoryRange Origin {get;}
+
+        /// <summary>
+        /// Encoded assembly
+        /// </summary>
+        public AsmCode NativeCode {get;}
+
+        /// <summary>
+        /// The reason discerned for capture completion
+        /// </summary>
+        public CaptureTermCode TermCode {get;}
 
         /// <summary>
         /// The decoded instructions
         /// </summary>
         public Instruction[] Decoded {get;}
-
-        public MemoryRange Location {get;}
-
-        /// <summary>
-        /// The encoded instructions
-        /// </summary>
-        public ReadOnlySpan<byte> Encoded 
-            => Code.Encoded;
 
         /// <summary>
         /// Queries/Manipulates an index-identified instruction

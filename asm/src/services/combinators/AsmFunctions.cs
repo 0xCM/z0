@@ -6,9 +6,6 @@ namespace Z0
 {        
     using System;
     using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
 	using Iced.Intel;
     
@@ -21,32 +18,11 @@ namespace Z0
     {        
         public static AsmFunction define(NativeMemberCapture src)
             => AsmDecoder.function(src);
-        // {            
-        //     var instructions = AsmDecoder.block(src);
-        //     var count = instructions.InstructionCount;
-        //     var format = instructions.FormatInstructionLines(AsmFormatConfig.Default.Invert());            
-        //     var dst = new AsmInstructionInfo[count];
-        //     var offset = (ushort)0;
-        //     var root = src.Location.Start;
 
-        //     for(var i=0; i<count; i++)
-        //     {
-        //         dst[i] = instructions[i].SummarizeInstruction(src.Code, format[i], offset, root);
-        //         offset += (ushort)instructions[i].ByteLength;
-        //     }
-            
-        //     require(src.Code.Encoded.Length == instructions.Decoded.Select(i => i.ByteLength).Sum());
-
-        //     return AsmFunction.Define(src.Location, src.Code, src.CaptureInfo.TermReason, dst);            
-        // }
-
-        public static IEnumerable<AsmFunction> define(IEnumerable<MethodDisassembly> src)
-            => src.Select(define);
-
-        public static AsmFunction define(InstructionBlock src, CilFunction cil = null)
+        public static AsmFunction define(InstructionBlock src)
         {
             var count = src.InstructionCount;
-            var location = src.Location;
+            var location = src.Origin;
             var format = src.FormatInstructions(AsmFormatConfig.Default.Invert());            
             var dst = new AsmInstructionInfo[count];
             var offset = (ushort)0;
@@ -54,35 +30,37 @@ namespace Z0
 
             for(var i=0; i<count; i++)
             {
-                dst[i] = src[i].SummarizeInstruction(src.Code, format[i], offset, root);
+                dst[i] = src[i].SummarizeInstruction(src.NativeCode, format[i], offset, root);
                 offset += (ushort)src[i].ByteLength;
             }
 
-            require(src.Encoded.Length == src.Decoded.Select(i => i.ByteLength).Sum());
+            require(src.NativeCode.Length == src.Decoded.Select(i => i.ByteLength).Sum());
 
-            return AsmFunction.Define(location, src.Code, CaptureTermReason.None, dst, cil);
+            return AsmFunction.Define(location, src.NativeCode, src.TermCode, dst);
         }
 
-        public static AsmFunction define(MethodDisassembly src)
-        {
-            var offset = (ushort)0;
-            var body = src.AsmBody;
-            var instructions = src.Instructions;
-            var descriptions = new AsmInstructionInfo[instructions.InstructionCount];
-            var content = instructions.FormatInstructions(AsmFormatConfig.Default.Invert());
-            var root = src.AsmBody.Location.Start;     
+        // public static AsmFunction define(Moniker id, CaptureTermCode tc, MethodAsmBody body)
+        // {
+        //     var offset = (ushort)0;
+        //     var label = body.NativeBlock.Label;
+        //     var encoded = AsmCode.Define(id, label, body.NativeBlock.Encoded);
+        //     var instructions = InstructionBlock.Define(encoded, tc, body.Origin, body.Instructions);
+        //     var descriptions = new AsmInstructionInfo[instructions.InstructionCount];
+        //     var code = AsmCode.Define(id, body.NativeBlock.Label, body.NativeBlock.Encoded);
+        //     var root = body.Origin.Start;     
+        //     var content = instructions.FormatInstructions(AsmFormatConfig.Default.Invert());
 
-            for(var i=0; i<descriptions.Length; i++)
-            {
-                descriptions[i] = instructions[i].SummarizeInstruction(src.AsmCode, content[i], offset, root);
-                offset += (ushort)instructions[i].ByteLength;
-            }
+        //     for(var i=0; i<descriptions.Length; i++)
+        //     {             
+        //         descriptions[i] = instructions[i].SummarizeInstruction(code, content[i], offset, root);
+        //         offset += (ushort)instructions[i].ByteLength;
+        //     }
 
-            require(src.AsmCode.Length == instructions.Decoded.Select(i => i.ByteLength).Sum());            
+        //     require(code.Length == instructions.Decoded.Select(i => i.ByteLength).Sum());            
             
-            return AsmFunction.Define(body.Location, 
-                AsmCode.Define(src.Id, src.Method.Signature().Format(),body.NativeBlock.Data), CaptureTermReason.None, descriptions);            
-        }
+        //     return AsmFunction.Define(body.Origin, 
+        //         AsmCode.Define(id, code.Label, body.NativeBlock.Encoded), tc, descriptions);            
+        // }
 
         static AsmInstructionSpec InstructionSpec(this Instruction src)
         {
@@ -265,6 +243,5 @@ namespace Z0
 
             return default;
         }
-
     }
 }

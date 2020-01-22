@@ -1,4 +1,4 @@
-; 2020-01-22 01:43:39:491
+; 2020-01-22 01:44:40:354
 ; Vector128<uint> convert(Vector256<ulong> src, N128 w, uint t)
 ; convert_256x64u[0x7ff7c85a2b90, 0x7ff7c85a2ba8][24] = {c5 f8 77 66 90 c5 fd 10 02 c5 ff e6 c0 c5 f9 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
@@ -70,7 +70,7 @@
 000dh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; long vmovelo_64i(Vector128<long> src, N64 w)
-; vmovelo_64i_128x64i[0x7ff7c85a30d0, 0x7ff7c85a30df][15] = {c5 f8 77 66 90 c5 f9 10 01 c4 e1 f9 7e c0 c3}
+; vmovelo_64i_128x64i[0x7ff7c85a2cc0, 0x7ff7c85a2ccf][15] = {c5 f8 77 66 90 c5 f9 10 01 c4 e1 f9 7e c0 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -79,7 +79,7 @@
 000eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong vmovelo_64u(Vector128<ulong> src, N64 w)
-; vmovelo_64u_128x64u[0x7ff7c85a30f0, 0x7ff7c85a30ff][15] = {c5 f8 77 66 90 c5 f9 10 01 c4 e1 f9 7e c0 c3}
+; vmovelo_64u_128x64u[0x7ff7c85a2ce0, 0x7ff7c85a2cef][15] = {c5 f8 77 66 90 c5 f9 10 01 c4 e1 f9 7e c0 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}

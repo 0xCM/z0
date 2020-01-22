@@ -5,13 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.IO;
     using System.Runtime.Intrinsics;
-    using System.Reflection;
     using System.Runtime.Intrinsics.X86;
-    using System.Runtime.CompilerServices;
     
     using static zfunc;
     using static NativeTestCases;
@@ -83,7 +80,6 @@ namespace Z0
 
             var mgAnds = typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName("vand");
             mgAnds.CaptureNative(typeof(uint),dst);
-
         }
 
         public void read_library()
@@ -97,6 +93,5 @@ namespace Z0
                 buffer.Clear();
             }
         }
-
     }
 }

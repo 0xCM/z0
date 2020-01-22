@@ -12,7 +12,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static CaptureTermReason;
+    using static CaptureTermCode;
+
+    public interface INativeReader
+    {
+        
+    }
 
     /// <summary>
     /// Defines basic capabilty to read native data for a jitted method
@@ -37,7 +42,7 @@ namespace Z0
                 var end = result.End;
                 var bytesRead = (int)(end - start);
                 var code = dst.Slice(0, bytesRead).ToArray();
-                return NativeMemberCapture.Define(id, m, (start, end), code,result);         
+                return NativeMemberCapture.Define(id, m, (start, end), code, result);         
             }
             catch(Exception e)
             {
@@ -210,69 +215,70 @@ namespace Z0
 
                     if(x0 == RET && x1 == SBB)
                     {
-                        var reason = RET_SBB;
+                        var cc = RET_SBB;
                         var end = (ulong)pSrcCurrent - 2;
                         var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
-                        var result = CaptureResult.Define((ulong)pSrc, end, reason, snapshot);
+                        var result = CaptureResult.Define((ulong)pSrc, end, cc, snapshot);
                         return result;
                     }
 
                     if(x0 == RET && x1 == INTR)
                     {
-                        var reason = RET_INTR;
+                        var cc = RET_INTR;
                         var end = (ulong)pSrcCurrent - 2;
                         var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
-                        var result = CaptureResult.Define((ulong)pSrc, end, reason, snapshot);
+                        var result = CaptureResult.Define((ulong)pSrc, end, cc, snapshot);
                         return result;
                     }
 
                     if((x0 == RET && x1 == INTR && x2 == INTR))
                     {
-                        var reason = RET_INTRx2;
+                        var cc = RET_INTRx2;
                         var end = (ulong)pSrcCurrent - 2;
                         var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
-                        var result = CaptureResult.Define((ulong)pSrc, end, reason, snapshot);
+                        var result = CaptureResult.Define((ulong)pSrc, end, cc, snapshot);
                         return result;
                     }
 
                     if((x0 == RET && x1 == ZED && x2 == SBB))
                     {
-                        var reason = RET_ZED_SBB;
+                        var cc = RET_ZED_SBB;
                         var end = (ulong)pSrcCurrent - 2;
                         var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
-                        var result = CaptureResult.Define((ulong)pSrc, end, reason, snapshot);
+                        var result = CaptureResult.Define((ulong)pSrc, end, cc, snapshot);
                         return result;
                     }
 
                     if(x0 == RET && x1 == ZED && x2 == ZED && x3 == ZED)
                     {
-                        var reason = RET_ZEDx3;
+                        var cc = RET_ZEDx3;
                         var end = (ulong)pSrcCurrent - 2;
                         var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
-                        var result = CaptureResult.Define((ulong)pSrc, end, reason, snapshot);
+                        var result = CaptureResult.Define((ulong)pSrc, end, cc, snapshot);
                         return result;
                     }
 
                     if((x0 == INTR && x1 == INTR))
                     {
-                        var reason = INTRx2;
+                        var cc = INTRx2;
                         var end = (ulong)pSrcCurrent - 2;
                         var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
-                        var result = CaptureResult.Define((ulong)pSrc, end, reason, snapshot);
+                        var result = CaptureResult.Define((ulong)pSrc, end, cc, snapshot);
                         return result;
                     }
 
                     if((x0 == ZED && x1 == ZED && x2 == SBB))
                     {
-                        var reason = ZEDx2_SBB;
+                        var cc = ZEDx2_SBB;
                         var end = (ulong)pSrcCurrent - 3;
                         var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
-                        var result = CaptureResult.Define((ulong)pSrc, end, reason, snapshot);
+                        var result = CaptureResult.Define((ulong)pSrc, end, cc, snapshot);
                         return result;
                     }
                 }
 
-                if(offset >= 5 
+                if(offset >= 6 
+                    && (dst[offset - 5] == ZED) 
                     && (dst[offset - 4] == ZED) 
                     && (dst[offset - 3] == ZED) 
                     && (dst[offset - 2] == ZED) 
@@ -280,16 +286,14 @@ namespace Z0
                     && (dst[offset - 0] == ZED)                     
                     )
                 {
-                    var reason = ZEDx5;
-                    var end = (ulong)pSrcCurrent - 4;
+                    var cc = ZEDx6;
+                    var end = (ulong)pSrcCurrent - 5;
                     var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
-                    var result = CaptureResult.Define((ulong)pSrc, end, reason, snapshot);
+                    var result = CaptureResult.Define((ulong)pSrc, end, cc, snapshot);
                     return result;
                 }
             }
-            return CaptureResult.Define((ulong)pSrc, (ulong)pSrcCurrent, EOB, dst.ToArray());
-            
-            //return (ulong)pSrcCurrent;
+            return CaptureResult.Define((ulong)pSrc, (ulong)pSrcCurrent, Complete, dst.ToArray());           
         }
     }
 }

@@ -19,22 +19,16 @@ namespace Z0
             var width = optype.Width();
             var celltype = optype.GetGenericArguments()[0];
             var factory = UnaryDelegateFactory(width, id, method, celltype); 
-            var buffer = new byte[1024];
             foreach(var imm in immediates)            
-            {    
-                buffer.Clear();
                 yield return factory(imm);                    
-            }
         }                    
 
         public static IEnumerable<AsmFunction> UnaryFunctions(MethodInfo method, Moniker id, params byte[] immediates)
         {
             var builder = AsmServices.FunctionBuilder();
-            var buffer = new byte[1024];
+            var buffer = new byte[NativeReader.DefaultBufferLen];
             foreach(var d in UnaryDelegates(method, id, immediates))
-            {
-                yield return AsmDecoder.function(d.Id, d,  buffer);
-            }
+                yield return AsmDecoder.function(d.Id, d, buffer.Clear());
         }
         
         public static AsmFunction capture<T>(IVUnaryImm8Resolver128<T> svc, byte imm8)
@@ -43,7 +37,7 @@ namespace Z0
             var builder = AsmServices.FunctionBuilder();
             var moniker = svc.Moniker;
             var f = svc.@delegate(imm8);
-            Span<byte> buffer = new byte[500];
+            var buffer = new byte[NativeReader.DefaultBufferLen];
             return builder.BuildFunction(NativeReader.read(moniker.WithImm(imm8), f, buffer));
         }
 
@@ -53,7 +47,7 @@ namespace Z0
             var builder = AsmServices.FunctionBuilder();
             var moniker = svc.Moniker;
             var f = svc.@delegate(imm8);            
-            Span<byte> buffer = new byte[500];
+            var buffer = new byte[NativeReader.DefaultBufferLen];
             return builder.BuildFunction(NativeReader.read(moniker.WithImm(imm8), f, buffer));
         }
 
@@ -63,7 +57,7 @@ namespace Z0
             var builder = AsmServices.FunctionBuilder();
             var moniker = svc.Moniker;
             var f = svc.@delegate(imm8);
-            Span<byte> buffer = new byte[500];
+            var buffer = new byte[NativeReader.DefaultBufferLen];
             return builder.BuildFunction(NativeReader.read(moniker.WithImm(imm8), f, buffer));
         }
 
@@ -73,7 +67,7 @@ namespace Z0
             var builder = AsmServices.FunctionBuilder();
             var moniker = svc.Moniker;
             var f = svc.@delegate(imm8);            
-            Span<byte> buffer = new byte[500];
+            var buffer = new byte[NativeReader.DefaultBufferLen];
             return builder.BuildFunction(NativeReader.read(moniker.WithImm(imm8), f, buffer));
         }
         

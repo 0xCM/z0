@@ -23,19 +23,6 @@ namespace Z0
             => MethodSig.Define(src);
 
         /// <summary>
-        /// Derives an operation descriptor from reflected method metadata and supplied type argments, if applicable
-        /// </summary>
-        /// <param name="src">The source method</param>
-        /// <param name="args">The arguments over which to close the method, if generic</param>
-        [MethodImpl(Inline)]
-        public static OpSpec FastOp(this MethodInfo src)
-            => FastOps.specify(src);
-
-        [MethodImpl(Inline)]
-        public static OpSpec FastOp(this MethodInfo src, Moniker m, Span<byte> buffer)
-            => FastOps.specify(src, m, buffer);
-
-        /// <summary>
         /// Returns true if the source type is intrinsic or blocked
         /// </summary>
         /// <param name="t">The type to examine</param>
@@ -47,16 +34,10 @@ namespace Z0
         /// Divines the bit-width of a specified type, if possible
         /// </summary>
         /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
         public static FixedWidth Width(this Type t)
             => (FixedWidth)Classified.width(t);
-            
-        /// <summary>
-        /// Returns the number of bytes occupied by a type if it is primal and 0 otherwise
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static int Size(this Type t)
-            => Classified.size(t);
-        
+
         /// <summary>
         /// Retrives the primal kind of the first type parameter, if any
         /// </summary>
@@ -70,14 +51,6 @@ namespace Z0
         public static TernaryBitLogicKind Next(this TernaryBitLogicKind src)
             => src != TernaryBitLogicKind.XFF 
                 ? (TernaryBitLogicKind)((uint)(src) + 1u)
-                : TernaryBitLogicKind.X00;
-        
-        [MethodImpl(Inline)]
-        public static BinaryBitLogicKind ToLogical(this BinaryBitLogicKind kind)
-            => (BinaryBitLogicKind)kind;
-
-        [MethodImpl(Inline)]
-        public static BinaryBitLogicKind ToBitwise(this BinaryBitLogicKind kind)
-            => (BinaryBitLogicKind)kind;
+                : TernaryBitLogicKind.X00;        
     }
 }

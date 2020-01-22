@@ -1,6 +1,6 @@
-; 2020-01-22 01:43:39:352
+; 2020-01-22 01:44:40:239
 ; RowBits<byte> and_8u(RowBits<byte> x, RowBits<byte> y, RowBits<byte> dst)
-; and_8u_0x[0x7ff7c83970c0, 0x7ff7c8397116][86] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 33 4d 8b 11 4c 63 d9 4d 03 d3 4c 8b 1a 48 63 f1 45 0f b6 1c 33 49 8b 30 48 63 f9 40 0f b6 34 3e 45 0f b6 db 44 23 de 45 0f b6 db 45 88 1a ff c1 3b c8 7c cd 48 8b fb 49 8b f1 e8 83 ed 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
+; and_8u_0x[0x7ff7c8397150, 0x7ff7c83971a6][86] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 33 4d 8b 11 4c 63 d9 4d 03 d3 4c 8b 1a 48 63 f1 45 0f b6 1c 33 49 8b 30 48 63 f9 40 0f b6 34 3e 45 0f b6 db 44 23 de 45 0f b6 db 45 88 1a ff c1 3b c8 7c cd 48 8b fb 49 8b f1 e8 f3 ec 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -28,7 +28,7 @@
 0040h jl short 000fh                          ; JL rel8 || 7C cb || encoded[2]{7c cd}
 0042h mov rdi,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b fb}
 0045h mov rsi,r9                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b f1}
-0048h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 83 ed 5f 5f}
+0048h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 f3 ec 5f 5f}
 004dh movsq                                   ; MOVSQ || REX.W A5 || encoded[2]{48 a5}
 004fh mov rax,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c3}
 0052h pop rbx                                 ; POP r64 || 58+ro || encoded[1]{5b}
@@ -37,7 +37,7 @@
 0055h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; RowBits<ushort> and_16u(RowBits<ushort> x, RowBits<ushort> y, RowBits<ushort> dst)
-; and_16u_0x[0x7ff7c8397540, 0x7ff7c8397597][87] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 34 4d 8b 11 4c 63 d9 4f 8d 14 5a 4c 8b 1a 48 63 f1 45 0f b7 1c 73 49 8b 30 48 63 f9 0f b7 34 7e 45 0f b7 db 44 23 de 45 0f b7 db 66 45 89 1a ff c1 3b c8 7c cc 48 8b fb 49 8b f1 e8 02 e9 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
+; and_16u_0x[0x7ff7c83975d0, 0x7ff7c8397627][87] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 34 4d 8b 11 4c 63 d9 4f 8d 14 5a 4c 8b 1a 48 63 f1 45 0f b7 1c 73 49 8b 30 48 63 f9 0f b7 34 7e 45 0f b7 db 44 23 de 45 0f b7 db 66 45 89 1a ff c1 3b c8 7c cc 48 8b fb 49 8b f1 e8 72 e8 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -65,7 +65,7 @@
 0041h jl short 000fh                          ; JL rel8 || 7C cb || encoded[2]{7c cc}
 0043h mov rdi,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b fb}
 0046h mov rsi,r9                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b f1}
-0049h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 02 e9 5f 5f}
+0049h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 72 e8 5f 5f}
 004eh movsq                                   ; MOVSQ || REX.W A5 || encoded[2]{48 a5}
 0050h mov rax,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c3}
 0053h pop rbx                                 ; POP r64 || 58+ro || encoded[1]{5b}
@@ -74,7 +74,7 @@
 0056h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; RowBits<uint> and_32u(RowBits<uint> x, RowBits<uint> y, RowBits<uint> dst)
-; and_32u_0x[0x7ff7c83975b0, 0x7ff7c83975f7][71] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 24 4d 8b 11 4c 63 d9 4f 8d 14 9a 48 8b 32 42 8b 34 9e 49 8b 38 46 8b 1c 9f 44 23 de 45 89 1a ff c1 3b c8 7c dc 48 8b fb 49 8b f1 e8 a2 e8 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
+; and_32u_0x[0x7ff7c8397640, 0x7ff7c8397687][71] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 24 4d 8b 11 4c 63 d9 4f 8d 14 9a 48 8b 32 42 8b 34 9e 49 8b 38 46 8b 1c 9f 44 23 de 45 89 1a ff c1 3b c8 7c dc 48 8b fb 49 8b f1 e8 12 e8 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -98,7 +98,7 @@
 0031h jl short 000fh                          ; JL rel8 || 7C cb || encoded[2]{7c dc}
 0033h mov rdi,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b fb}
 0036h mov rsi,r9                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b f1}
-0039h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 a2 e8 5f 5f}
+0039h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 12 e8 5f 5f}
 003eh movsq                                   ; MOVSQ || REX.W A5 || encoded[2]{48 a5}
 0040h mov rax,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c3}
 0043h pop rbx                                 ; POP r64 || 58+ro || encoded[1]{5b}
@@ -107,7 +107,7 @@
 0046h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; RowBits<ulong> and_64u(RowBits<ulong> x, RowBits<ulong> y, RowBits<ulong> dst)
-; and_64u_0x[0x7ff7c8397760, 0x7ff7c83977a7][71] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 24 4d 8b 11 4c 63 d9 4f 8d 14 da 48 8b 32 4a 8b 34 de 49 8b 38 4e 8b 1c df 4c 23 de 4d 89 1a ff c1 3b c8 7c dc 48 8b fb 49 8b f1 e8 f2 e6 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
+; and_64u_0x[0x7ff7c83977f0, 0x7ff7c8397837][71] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 24 4d 8b 11 4c 63 d9 4f 8d 14 da 48 8b 32 4a 8b 34 de 49 8b 38 4e 8b 1c df 4c 23 de 4d 89 1a ff c1 3b c8 7c dc 48 8b fb 49 8b f1 e8 62 e6 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -131,7 +131,7 @@
 0031h jl short 000fh                          ; JL rel8 || 7C cb || encoded[2]{7c dc}
 0033h mov rdi,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b fb}
 0036h mov rsi,r9                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b f1}
-0039h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 f2 e6 5f 5f}
+0039h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 62 e6 5f 5f}
 003eh movsq                                   ; MOVSQ || REX.W A5 || encoded[2]{48 a5}
 0040h mov rax,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c3}
 0043h pop rbx                                 ; POP r64 || 58+ro || encoded[1]{5b}
@@ -140,7 +140,7 @@
 0046h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; RowBits<ulong> and_64u_op(RowBits<ulong> x, RowBits<ulong> y)
-; and_64u_op_0x[0x7ff7c8397bd0, 0x7ff7c8397c50][128] = {57 56 53 48 83 ec 30 c5 f8 77 33 c0 48 89 44 24 20 48 8b d9 48 8b f2 49 8b f8 48 8d 54 24 20 c5 f8 57 c0 c5 fa 7f 02 8b 56 08 48 8d 4c 24 20 e8 1c f9 ff ff 8b 46 08 33 d2 85 c0 7e 29 48 8d 4c 24 20 48 8b 09 4c 63 c2 4a 8d 0c c1 4c 8b 0e 4f 8b 0c c1 4c 8b 17 4f 8b 04 c2 4d 23 c1 4c 89 01 ff c2 3b d0 7c d7 48 8b fb 48 8d 74 24 20 e8 4d e2 5f 5f 48 a5 48 8b c3 48 83 c4 30 5b 5e 5f c3}
+; and_64u_op_0x[0x7ff7c8397c60, 0x7ff7c8397ce0][128] = {57 56 53 48 83 ec 30 c5 f8 77 33 c0 48 89 44 24 20 48 8b d9 48 8b f2 49 8b f8 48 8d 54 24 20 c5 f8 57 c0 c5 fa 7f 02 8b 56 08 48 8d 4c 24 20 e8 04 f9 ff ff 8b 46 08 33 d2 85 c0 7e 29 48 8d 4c 24 20 48 8b 09 4c 63 c2 4a 8d 0c c1 4c 8b 0e 4f 8b 0c c1 4c 8b 17 4f 8b 04 c2 4d 23 c1 4c 89 01 ff c2 3b d0 7c d7 48 8b fb 48 8d 74 24 20 e8 bd e1 5f 5f 48 a5 48 8b c3 48 83 c4 30 5b 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -157,7 +157,7 @@
 0023h vmovdqu xmmword ptr [rdx],xmm0          ; VMOVDQU xmm2/m128, xmm1 || VEX.128.F3.0F.WIG 7F /r || encoded[4]{c5 fa 7f 02}
 0027h mov edx,[rsi+8]                         ; MOV r32, r/m32 || o32 8B /r || encoded[3]{8b 56 08}
 002ah lea rcx,[rsp+20h]                       ; LEA r64, m || REX.W 8D /r || encoded[5]{48 8d 4c 24 20}
-002fh call 7FF7C8397520h                      ; CALL rel32 || E8 cd || encoded[5]{e8 1c f9 ff ff}
+002fh call 7FF7C8397598h                      ; CALL rel32 || E8 cd || encoded[5]{e8 04 f9 ff ff}
 0034h mov eax,[rsi+8]                         ; MOV r32, r/m32 || o32 8B /r || encoded[3]{8b 46 08}
 0037h xor edx,edx                             ; XOR r32, r/m32 || o32 33 /r || encoded[2]{33 d2}
 0039h test eax,eax                            ; TEST r/m32, r32 || o32 85 /r || encoded[2]{85 c0}
@@ -177,7 +177,7 @@
 0064h jl short 003dh                          ; JL rel8 || 7C cb || encoded[2]{7c d7}
 0066h mov rdi,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b fb}
 0069h lea rsi,[rsp+20h]                       ; LEA r64, m || REX.W 8D /r || encoded[5]{48 8d 74 24 20}
-006eh call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 4d e2 5f 5f}
+006eh call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 bd e1 5f 5f}
 0073h movsq                                   ; MOVSQ || REX.W A5 || encoded[2]{48 a5}
 0075h mov rax,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c3}
 0078h add rsp,30h                             ; ADD r/m64, imm8 || REX.W 83 /0 ib || encoded[4]{48 83 c4 30}
@@ -187,7 +187,7 @@
 007fh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; RowBits<byte> xor_8u(RowBits<byte> x, RowBits<byte> y, RowBits<byte> dst)
-; xor_8u_0x[0x7ff7c8397dc0, 0x7ff7c8397e16][86] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 33 4d 8b 11 4c 63 d9 4d 03 d3 4c 8b 1a 48 63 f1 45 0f b6 1c 33 49 8b 30 48 63 f9 40 0f b6 34 3e 45 0f b6 db 44 33 de 45 0f b6 db 45 88 1a ff c1 3b c8 7c cd 48 8b fb 49 8b f1 e8 83 e0 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
+; xor_8u_0x[0x7ff7c8398110, 0x7ff7c8398166][86] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 33 4d 8b 11 4c 63 d9 4d 03 d3 4c 8b 1a 48 63 f1 45 0f b6 1c 33 49 8b 30 48 63 f9 40 0f b6 34 3e 45 0f b6 db 44 33 de 45 0f b6 db 45 88 1a ff c1 3b c8 7c cd 48 8b fb 49 8b f1 e8 33 dd 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -215,7 +215,7 @@
 0040h jl short 000fh                          ; JL rel8 || 7C cb || encoded[2]{7c cd}
 0042h mov rdi,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b fb}
 0045h mov rsi,r9                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b f1}
-0048h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 83 e0 5f 5f}
+0048h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 33 dd 5f 5f}
 004dh movsq                                   ; MOVSQ || REX.W A5 || encoded[2]{48 a5}
 004fh mov rax,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c3}
 0052h pop rbx                                 ; POP r64 || 58+ro || encoded[1]{5b}
@@ -224,7 +224,7 @@
 0055h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; RowBits<ushort> xor_16u(RowBits<ushort> x, RowBits<ushort> y, RowBits<ushort> dst)
-; xor_16u_0x[0x7ff7c8397e30, 0x7ff7c8397e87][87] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 34 4d 8b 11 4c 63 d9 4f 8d 14 5a 4c 8b 1a 48 63 f1 45 0f b7 1c 73 49 8b 30 48 63 f9 0f b7 34 7e 45 0f b7 db 44 33 de 45 0f b7 db 66 45 89 1a ff c1 3b c8 7c cc 48 8b fb 49 8b f1 e8 12 e0 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
+; xor_16u_0x[0x7ff7c8398180, 0x7ff7c83981d7][87] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 34 4d 8b 11 4c 63 d9 4f 8d 14 5a 4c 8b 1a 48 63 f1 45 0f b7 1c 73 49 8b 30 48 63 f9 0f b7 34 7e 45 0f b7 db 44 33 de 45 0f b7 db 66 45 89 1a ff c1 3b c8 7c cc 48 8b fb 49 8b f1 e8 c2 dc 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -252,7 +252,7 @@
 0041h jl short 000fh                          ; JL rel8 || 7C cb || encoded[2]{7c cc}
 0043h mov rdi,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b fb}
 0046h mov rsi,r9                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b f1}
-0049h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 12 e0 5f 5f}
+0049h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 c2 dc 5f 5f}
 004eh movsq                                   ; MOVSQ || REX.W A5 || encoded[2]{48 a5}
 0050h mov rax,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c3}
 0053h pop rbx                                 ; POP r64 || 58+ro || encoded[1]{5b}
@@ -261,7 +261,7 @@
 0056h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; RowBits<uint> xor_32u(RowBits<uint> x, RowBits<uint> y, RowBits<uint> dst)
-; xor_32u_0x[0x7ff7c8397ea0, 0x7ff7c8397ee7][71] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 24 4d 8b 11 4c 63 d9 4f 8d 14 9a 48 8b 32 42 8b 34 9e 49 8b 38 46 8b 1c 9f 44 33 de 45 89 1a ff c1 3b c8 7c dc 48 8b fb 49 8b f1 e8 b2 df 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
+; xor_32u_0x[0x7ff7c83981f0, 0x7ff7c8398237][71] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 24 4d 8b 11 4c 63 d9 4f 8d 14 9a 48 8b 32 42 8b 34 9e 49 8b 38 46 8b 1c 9f 44 33 de 45 89 1a ff c1 3b c8 7c dc 48 8b fb 49 8b f1 e8 62 dc 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -285,7 +285,7 @@
 0031h jl short 000fh                          ; JL rel8 || 7C cb || encoded[2]{7c dc}
 0033h mov rdi,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b fb}
 0036h mov rsi,r9                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b f1}
-0039h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 b2 df 5f 5f}
+0039h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 62 dc 5f 5f}
 003eh movsq                                   ; MOVSQ || REX.W A5 || encoded[2]{48 a5}
 0040h mov rax,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c3}
 0043h pop rbx                                 ; POP r64 || 58+ro || encoded[1]{5b}
@@ -294,7 +294,7 @@
 0046h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; RowBits<ulong> xor_64u(RowBits<ulong> x, RowBits<ulong> y, RowBits<ulong> dst)
-; xor_64u_0x[0x7ff7c8398310, 0x7ff7c8398357][71] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 24 4d 8b 11 4c 63 d9 4f 8d 14 da 48 8b 32 4a 8b 34 de 49 8b 38 4e 8b 1c df 4c 33 de 4d 89 1a ff c1 3b c8 7c dc 48 8b fb 49 8b f1 e8 42 db 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
+; xor_64u_0x[0x7ff7c8398250, 0x7ff7c8398297][71] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 24 4d 8b 11 4c 63 d9 4f 8d 14 da 48 8b 32 4a 8b 34 de 49 8b 38 4e 8b 1c df 4c 33 de 4d 89 1a ff c1 3b c8 7c dc 48 8b fb 49 8b f1 e8 02 dc 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -318,7 +318,7 @@
 0031h jl short 000fh                          ; JL rel8 || 7C cb || encoded[2]{7c dc}
 0033h mov rdi,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b fb}
 0036h mov rsi,r9                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b f1}
-0039h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 42 db 5f 5f}
+0039h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 02 dc 5f 5f}
 003eh movsq                                   ; MOVSQ || REX.W A5 || encoded[2]{48 a5}
 0040h mov rax,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c3}
 0043h pop rbx                                 ; POP r64 || 58+ro || encoded[1]{5b}
@@ -327,7 +327,7 @@
 0046h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; RowBits<byte> xnor_8u(RowBits<byte> x, RowBits<byte> y, RowBits<byte> dst)
-; xnor_8u_0x[0x7ff7c8398370, 0x7ff7c83983c9][89] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 36 4d 8b 11 4c 63 d9 4d 03 d3 4c 8b 1a 48 63 f1 45 0f b6 1c 33 49 8b 30 48 63 f9 40 0f b6 34 3e 45 0f b6 db 44 33 de 41 f7 d3 45 0f b6 db 45 88 1a ff c1 3b c8 7c ca 48 8b fb 49 8b f1 e8 d0 da 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
+; xnor_8u_0x[0x7ff7c83986c0, 0x7ff7c8398719][89] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 36 4d 8b 11 4c 63 d9 4d 03 d3 4c 8b 1a 48 63 f1 45 0f b6 1c 33 49 8b 30 48 63 f9 40 0f b6 34 3e 45 0f b6 db 44 33 de 41 f7 d3 45 0f b6 db 45 88 1a ff c1 3b c8 7c ca 48 8b fb 49 8b f1 e8 80 d7 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -356,7 +356,7 @@
 0043h jl short 000fh                          ; JL rel8 || 7C cb || encoded[2]{7c ca}
 0045h mov rdi,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b fb}
 0048h mov rsi,r9                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b f1}
-004bh call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 d0 da 5f 5f}
+004bh call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 80 d7 5f 5f}
 0050h movsq                                   ; MOVSQ || REX.W A5 || encoded[2]{48 a5}
 0052h mov rax,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c3}
 0055h pop rbx                                 ; POP r64 || 58+ro || encoded[1]{5b}
@@ -365,7 +365,7 @@
 0058h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; RowBits<ushort> xnor_16u(RowBits<ushort> x, RowBits<ushort> y, RowBits<ushort> dst)
-; xnor_16u_0x[0x7ff7c83983f0, 0x7ff7c839844a][90] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 37 4d 8b 11 4c 63 d9 4f 8d 14 5a 4c 8b 1a 48 63 f1 45 0f b7 1c 73 49 8b 30 48 63 f9 0f b7 34 7e 45 0f b7 db 44 33 de 41 f7 d3 45 0f b7 db 66 45 89 1a ff c1 3b c8 7c c9 48 8b fb 49 8b f1 e8 4f da 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
+; xnor_16u_0x[0x7ff7c8398740, 0x7ff7c839879a][90] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 37 4d 8b 11 4c 63 d9 4f 8d 14 5a 4c 8b 1a 48 63 f1 45 0f b7 1c 73 49 8b 30 48 63 f9 0f b7 34 7e 45 0f b7 db 44 33 de 41 f7 d3 45 0f b7 db 66 45 89 1a ff c1 3b c8 7c c9 48 8b fb 49 8b f1 e8 ff d6 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -394,7 +394,7 @@
 0044h jl short 000fh                          ; JL rel8 || 7C cb || encoded[2]{7c c9}
 0046h mov rdi,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b fb}
 0049h mov rsi,r9                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b f1}
-004ch call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 4f da 5f 5f}
+004ch call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 ff d6 5f 5f}
 0051h movsq                                   ; MOVSQ || REX.W A5 || encoded[2]{48 a5}
 0053h mov rax,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c3}
 0056h pop rbx                                 ; POP r64 || 58+ro || encoded[1]{5b}
@@ -403,7 +403,7 @@
 0059h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; RowBits<uint> xnor_32u(RowBits<uint> x, RowBits<uint> y, RowBits<uint> dst)
-; xnor_32u_0x[0x7ff7c8398870, 0x7ff7c83988ba][74] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 27 4d 8b 11 4c 63 d9 4f 8d 14 9a 48 8b 32 42 8b 34 9e 49 8b 38 46 8b 1c 9f 44 33 de 41 f7 d3 45 89 1a ff c1 3b c8 7c d9 48 8b fb 49 8b f1 e8 df d5 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
+; xnor_32u_0x[0x7ff7c83987c0, 0x7ff7c839880a][74] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 27 4d 8b 11 4c 63 d9 4f 8d 14 9a 48 8b 32 42 8b 34 9e 49 8b 38 46 8b 1c 9f 44 33 de 41 f7 d3 45 89 1a ff c1 3b c8 7c d9 48 8b fb 49 8b f1 e8 8f d6 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -428,7 +428,7 @@
 0034h jl short 000fh                          ; JL rel8 || 7C cb || encoded[2]{7c d9}
 0036h mov rdi,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b fb}
 0039h mov rsi,r9                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b f1}
-003ch call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 df d5 5f 5f}
+003ch call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 8f d6 5f 5f}
 0041h movsq                                   ; MOVSQ || REX.W A5 || encoded[2]{48 a5}
 0043h mov rax,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c3}
 0046h pop rbx                                 ; POP r64 || 58+ro || encoded[1]{5b}
@@ -437,7 +437,7 @@
 0049h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; RowBits<ulong> xnor_64u(RowBits<ulong> x, RowBits<ulong> y, RowBits<ulong> dst)
-; xnor_64u_0x[0x7ff7c83988e0, 0x7ff7c839892a][74] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 27 4d 8b 11 4c 63 d9 4f 8d 14 da 48 8b 32 4a 8b 34 de 49 8b 38 4e 8b 1c df 4c 33 de 49 f7 d3 4d 89 1a ff c1 3b c8 7c d9 48 8b fb 49 8b f1 e8 6f d5 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
+; xnor_64u_0x[0x7ff7c8398830, 0x7ff7c839887a][74] = {57 56 53 48 8b d9 8b 42 08 33 c9 85 c0 7e 27 4d 8b 11 4c 63 d9 4f 8d 14 da 48 8b 32 4a 8b 34 de 49 8b 38 4e 8b 1c df 4c 33 de 49 f7 d3 4d 89 1a ff c1 3b c8 7c d9 48 8b fb 49 8b f1 e8 1f d6 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -462,7 +462,7 @@
 0034h jl short 000fh                          ; JL rel8 || 7C cb || encoded[2]{7c d9}
 0036h mov rdi,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b fb}
 0039h mov rsi,r9                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b f1}
-003ch call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 6f d5 5f 5f}
+003ch call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 1f d6 5f 5f}
 0041h movsq                                   ; MOVSQ || REX.W A5 || encoded[2]{48 a5}
 0043h mov rax,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c3}
 0046h pop rbx                                 ; POP r64 || 58+ro || encoded[1]{5b}
@@ -471,7 +471,7 @@
 0049h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; RowBits<byte> not_8u(RowBits<byte> x, RowBits<byte> dst)
-; not_8u_0x[0x7ff7c8398950, 0x7ff7c8398994][68] = {57 56 53 48 8b d9 33 c0 83 7a 08 00 7e 22 49 8b 08 4c 63 c8 49 03 c9 4c 8b 12 47 0f b6 0c 0a 41 f7 d1 45 0f b6 c9 44 88 09 ff c0 3b 42 08 7c de 48 8b fb 49 8b f0 e8 05 d5 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
+; not_8u_0x[0x7ff7c8398ca0, 0x7ff7c8398ce4][68] = {57 56 53 48 8b d9 33 c0 83 7a 08 00 7e 22 49 8b 08 4c 63 c8 49 03 c9 4c 8b 12 47 0f b6 0c 0a 41 f7 d1 45 0f b6 c9 44 88 09 ff c0 3b 42 08 7c de 48 8b fb 49 8b f0 e8 b5 d1 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -493,7 +493,7 @@
 002eh jl short 000eh                          ; JL rel8 || 7C cb || encoded[2]{7c de}
 0030h mov rdi,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b fb}
 0033h mov rsi,r8                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b f0}
-0036h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 05 d5 5f 5f}
+0036h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 b5 d1 5f 5f}
 003bh movsq                                   ; MOVSQ || REX.W A5 || encoded[2]{48 a5}
 003dh mov rax,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c3}
 0040h pop rbx                                 ; POP r64 || 58+ro || encoded[1]{5b}
@@ -502,7 +502,7 @@
 0043h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; RowBits<ushort> not_16u(RowBits<ushort> x, RowBits<ushort> dst)
-; not_16u_0x[0x7ff7c83989b0, 0x7ff7c83989f6][70] = {57 56 53 48 8b d9 33 c0 83 7a 08 00 7e 24 49 8b 08 4c 63 c8 4a 8d 0c 49 4c 8b 12 47 0f b7 0c 4a 41 f7 d1 45 0f b7 c9 66 44 89 09 ff c0 3b 42 08 7c dc 48 8b fb 49 8b f0 e8 a3 d4 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
+; not_16u_0x[0x7ff7c8398d00, 0x7ff7c8398d46][70] = {57 56 53 48 8b d9 33 c0 83 7a 08 00 7e 24 49 8b 08 4c 63 c8 4a 8d 0c 49 4c 8b 12 47 0f b7 0c 4a 41 f7 d1 45 0f b7 c9 66 44 89 09 ff c0 3b 42 08 7c dc 48 8b fb 49 8b f0 e8 53 d1 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -524,7 +524,7 @@
 0030h jl short 000eh                          ; JL rel8 || 7C cb || encoded[2]{7c dc}
 0032h mov rdi,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b fb}
 0035h mov rsi,r8                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b f0}
-0038h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 a3 d4 5f 5f}
+0038h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 53 d1 5f 5f}
 003dh movsq                                   ; MOVSQ || REX.W A5 || encoded[2]{48 a5}
 003fh mov rax,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c3}
 0042h pop rbx                                 ; POP r64 || 58+ro || encoded[1]{5b}
@@ -533,7 +533,7 @@
 0045h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; RowBits<uint> not_32u(RowBits<uint> x, RowBits<uint> dst)
-; not_32u_0x[0x7ff7c8398e20, 0x7ff7c8398e60][64] = {57 56 53 48 8b d9 33 c0 83 7a 08 00 7e 1e 49 8b 08 4c 63 c8 4a 8d 0c 89 4c 8b 12 47 8b 0c 8a 41 f7 d1 44 89 09 ff c0 3b 42 08 7c e2 48 8b fb 49 8b f0 e8 39 d0 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
+; not_32u_0x[0x7ff7c8398d60, 0x7ff7c8398da0][64] = {57 56 53 48 8b d9 33 c0 83 7a 08 00 7e 1e 49 8b 08 4c 63 c8 4a 8d 0c 89 4c 8b 12 47 8b 0c 8a 41 f7 d1 44 89 09 ff c0 3b 42 08 7c e2 48 8b fb 49 8b f0 e8 f9 d0 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -554,7 +554,7 @@
 002ah jl short 000eh                          ; JL rel8 || 7C cb || encoded[2]{7c e2}
 002ch mov rdi,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b fb}
 002fh mov rsi,r8                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b f0}
-0032h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 39 d0 5f 5f}
+0032h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 f9 d0 5f 5f}
 0037h movsq                                   ; MOVSQ || REX.W A5 || encoded[2]{48 a5}
 0039h mov rax,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c3}
 003ch pop rbx                                 ; POP r64 || 58+ro || encoded[1]{5b}
@@ -563,7 +563,7 @@
 003fh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; RowBits<ulong> not_64u(RowBits<ulong> x, RowBits<ulong> dst)
-; not_64u_0x[0x7ff7c8398e80, 0x7ff7c8398ec3][67] = {57 56 53 48 8b d9 33 c0 83 7a 08 00 7e 21 49 8b 08 4c 63 c8 4a 8d 0c c9 4c 8b 0a 4c 63 d0 4f 8b 0c d1 49 f7 d1 4c 89 09 ff c0 3b 42 08 7c df 48 8b fb 49 8b f0 e8 d6 cf 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
+; not_64u_0x[0x7ff7c8398dc0, 0x7ff7c8398e03][67] = {57 56 53 48 8b d9 33 c0 83 7a 08 00 7e 21 49 8b 08 4c 63 c8 4a 8d 0c c9 4c 8b 0a 4c 63 d0 4f 8b 0c d1 49 f7 d1 4c 89 09 ff c0 3b 42 08 7c df 48 8b fb 49 8b f0 e8 96 d0 5f 5f 48 a5 48 8b c3 5b 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}
@@ -585,7 +585,7 @@
 002dh jl short 000eh                          ; JL rel8 || 7C cb || encoded[2]{7c df}
 002fh mov rdi,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b fb}
 0032h mov rsi,r8                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b f0}
-0035h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 d6 cf 5f 5f}
+0035h call 7FF827995E90h                      ; CALL rel32 || E8 cd || encoded[5]{e8 96 d0 5f 5f}
 003ah movsq                                   ; MOVSQ || REX.W A5 || encoded[2]{48 a5}
 003ch mov rax,rbx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c3}
 003fh pop rbx                                 ; POP r64 || 58+ro || encoded[1]{5b}

@@ -1,4 +1,4 @@
-; 2020-01-22 01:43:39:536
+; 2020-01-22 01:44:40:382
 ; Vector128<int> vlt_128x32i(Vector128<int> x, Vector128<int> y)
 ; vlt_128x32i_128x32i[0x7ff7c85a3340, 0x7ff7c85a335a][26] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f1 66 c0 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
@@ -312,7 +312,7 @@
 0020h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bool vtestz_g128x16u(Vector128<ushort> src, Vector128<ushort> mask)
-; vtestz_g128x16u_128x16u_128x16u[0x7ff7c85a48e0, 0x7ff7c85a4901][33] = {c5 f8 77 66 90 c5 f9 10 01 c5 f9 10 0a c4 e2 79 17 c1 0f 94 c0 0f b6 c0 85 c0 0f 95 c0 0f b6 c0 c3}
+; vtestz_g128x16u_128x16u_128x16u[0x7ff7c85a44e0, 0x7ff7c85a4501][33] = {c5 f8 77 66 90 c5 f9 10 01 c5 f9 10 0a c4 e2 79 17 c1 0f 94 c0 0f b6 c0 85 c0 0f 95 c0 0f b6 c0 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -327,7 +327,7 @@
 0020h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bool vtestz_d128x32i(Vector128<int> src, Vector128<int> mask)
-; vtestz_d128x32i_128x32i_128x32i[0x7ff7c85a4920, 0x7ff7c85a4941][33] = {c5 f8 77 66 90 c5 f9 10 01 c5 f9 10 0a c4 e2 79 17 c1 0f 94 c0 0f b6 c0 85 c0 0f 95 c0 0f b6 c0 c3}
+; vtestz_d128x32i_128x32i_128x32i[0x7ff7c85a4520, 0x7ff7c85a4541][33] = {c5 f8 77 66 90 c5 f9 10 01 c5 f9 10 0a c4 e2 79 17 c1 0f 94 c0 0f b6 c0 85 c0 0f 95 c0 0f b6 c0 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -342,7 +342,7 @@
 0020h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bool vtestz_g128x32i(Vector128<int> src, Vector128<int> mask)
-; vtestz_g128x32i_128x32i_128x32i[0x7ff7c85a4960, 0x7ff7c85a4981][33] = {c5 f8 77 66 90 c5 f9 10 01 c5 f9 10 0a c4 e2 79 17 c1 0f 94 c0 0f b6 c0 85 c0 0f 95 c0 0f b6 c0 c3}
+; vtestz_g128x32i_128x32i_128x32i[0x7ff7c85a4560, 0x7ff7c85a4581][33] = {c5 f8 77 66 90 c5 f9 10 01 c5 f9 10 0a c4 e2 79 17 c1 0f 94 c0 0f b6 c0 85 c0 0f 95 c0 0f b6 c0 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -357,7 +357,7 @@
 0020h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bool vtestz_d128x32u(Vector128<uint> src, Vector128<uint> mask)
-; vtestz_d128x32u_128x32u_128x32u[0x7ff7c85a49a0, 0x7ff7c85a49c1][33] = {c5 f8 77 66 90 c5 f9 10 01 c5 f9 10 0a c4 e2 79 17 c1 0f 94 c0 0f b6 c0 85 c0 0f 95 c0 0f b6 c0 c3}
+; vtestz_d128x32u_128x32u_128x32u[0x7ff7c85a45a0, 0x7ff7c85a45c1][33] = {c5 f8 77 66 90 c5 f9 10 01 c5 f9 10 0a c4 e2 79 17 c1 0f 94 c0 0f b6 c0 85 c0 0f 95 c0 0f b6 c0 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -372,7 +372,7 @@
 0020h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bool vtestz_g128x32u(Vector128<uint> src, Vector128<uint> mask)
-; vtestz_g128x32u_128x32u_128x32u[0x7ff7c85a49e0, 0x7ff7c85a4a01][33] = {c5 f8 77 66 90 c5 f9 10 01 c5 f9 10 0a c4 e2 79 17 c1 0f 94 c0 0f b6 c0 85 c0 0f 95 c0 0f b6 c0 c3}
+; vtestz_g128x32u_128x32u_128x32u[0x7ff7c85a45e0, 0x7ff7c85a4601][33] = {c5 f8 77 66 90 c5 f9 10 01 c5 f9 10 0a c4 e2 79 17 c1 0f 94 c0 0f b6 c0 85 c0 0f 95 c0 0f b6 c0 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -387,7 +387,7 @@
 0020h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bool vtestz_d128x64i(Vector128<long> src, Vector128<long> mask)
-; vtestz_d128x64i_128x64i_128x64i[0x7ff7c85a4a20, 0x7ff7c85a4a41][33] = {c5 f8 77 66 90 c5 f9 10 01 c5 f9 10 0a c4 e2 79 17 c1 0f 94 c0 0f b6 c0 85 c0 0f 95 c0 0f b6 c0 c3}
+; vtestz_d128x64i_128x64i_128x64i[0x7ff7c85a4620, 0x7ff7c85a4641][33] = {c5 f8 77 66 90 c5 f9 10 01 c5 f9 10 0a c4 e2 79 17 c1 0f 94 c0 0f b6 c0 85 c0 0f 95 c0 0f b6 c0 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}

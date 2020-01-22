@@ -1,4 +1,4 @@
-// 2020-01-22 01:43:39:631
+// 2020-01-22 01:44:40:504
 // Id := 100664482, Name := System.Func`3<System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.Runtime.Intrinsics.Vector256`1<System.UInt32>> Z0.OpCodes.vpermoc::vand_delgate()
 // Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> vand_delgate()
 // NoInlining

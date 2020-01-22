@@ -15,6 +15,9 @@ namespace Z0
         public static INativeExecBuffer ExecBuffer(int? size = null)
             => NativeExecBuffer.Create(size);
 
+        public static INativeWriter Writer(FilePath dst, bool append = false)
+            => NativeWriter.Create(dst,append);
+
     }
 
 }

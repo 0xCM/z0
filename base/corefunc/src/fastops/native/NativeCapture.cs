@@ -10,7 +10,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Reflection.Emit;
-    using System.IO;
 
     using static zfunc;
 
@@ -29,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source delegate</param>
         /// <param name="dst">The target writer</param>
-        public static void capture(Delegate src, NativeWriter dst)
+        public static void capture(Delegate src, INativeWriter dst)
         {
             var data = capture(src, dst.TakeBuffer());
             dst.WriteData(data);    
@@ -48,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source delegate</param>
         /// <param name="dst">The target writer</param>
-        public static void capture(MethodInfo src, NativeWriter dst)
+        public static void capture(MethodInfo src, INativeWriter dst)
             => dst.WriteData(capture(src,dst.TakeBuffer()));
 
         /// <summary>
@@ -56,7 +55,7 @@ namespace Z0
         /// </summary>
         /// <param name="methods">The methods to capture</param>
         /// <param name="dst">The capture target</param>
-        public static void capture(IEnumerable<MethodInfo> methods, NativeWriter dst)
+        public static void capture(IEnumerable<MethodInfo> methods, INativeWriter dst)
         {
             foreach(var m in methods)
                 capture(m,dst);
@@ -67,7 +66,7 @@ namespace Z0
         /// </summary>
         /// <param name="host">The type that defines the methods to deconstruct</param>
         /// <param name="dst">The path to the file</param>
-        public static void capture(Type host, NativeWriter dst)
+        public static void capture(Type host, INativeWriter dst)
             => capture(host.DeclaredMethods().Public().Static().NonGeneric(), dst);
 
         /// <summary>
@@ -88,7 +87,7 @@ namespace Z0
         /// <param name="m">The generic method (or definition)</param>
         /// <param name="arg">The type over which to close the method</typeparam>
         /// <param name="dst">The buffer to which native data will be written</param>
-        public static void capture(MethodInfo m, Type arg, NativeWriter dst)
+        public static void capture(MethodInfo m, Type arg, INativeWriter dst)
         {
             var def = m.IsGenericMethodDefinition ? m : m.GetGenericMethodDefinition();
             var data = NativeReader.generic(def, arg, dst.TakeBuffer());
@@ -134,7 +133,7 @@ namespace Z0
         /// </summary>
         /// <param name="host">The type that defines the methods to deconstruct</param>
         /// <param name="dst">The path to the file</param>
-        public static void capture(Type host, Type arg, NativeWriter dst)
+        public static void capture(Type host, Type arg, INativeWriter dst)
         {
             foreach(var data in capture(host,arg))
                 dst.WriteData(data);
@@ -146,7 +145,7 @@ namespace Z0
         /// <param name="methods">The methods to capture</param>
         /// <param name="arg">The type over which to close each method</param>
         /// <param name="dst">The capture target</param>
-        public static void capture(IEnumerable<MethodInfo> methods, Type arg, NativeWriter dst)
+        public static void capture(IEnumerable<MethodInfo> methods, Type arg, INativeWriter dst)
         {
             var buffer = new byte[NativeReader.DefaultBufferLen];
             foreach(var m in methods)

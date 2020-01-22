@@ -1,6 +1,6 @@
-; 2020-01-22 01:43:39:275
+; 2020-01-22 01:44:40:178
 ; int work_ring_buffer()
-; work_ring_buffer_12603749[0x7ff7c83915d0, 0x7ff7c83916f6][294] = {48 83 ec 48 33 c0 48 89 44 24 28 48 89 44 24 30 48 89 44 24 38 48 89 44 24 40 48 8d 4c 24 28 ba 40 00 00 00 e8 27 fe ff ff 8b 44 24 3c 8b 54 24 38 ff ca 3b c2 7e 06 33 c0 89 44 24 3c 8b 44 24 44 3b 44 24 38 74 0a 8b 44 24 44 ff c0 89 44 24 44 48 8d 44 24 28 48 8b 00 8b 54 24 3c 8d 4a 01 89 4c 24 3c 48 63 d2 c6 04 10 03 8b 44 24 3c 8b 54 24 38 ff ca 3b c2 7e 06 33 c0 89 44 24 3c 8b 44 24 44 3b 44 24 38 74 0a 8b 44 24 44 ff c0 89 44 24 44 48 8d 44 24 28 48 8b 00 8b 54 24 3c 8d 4a 01 89 4c 24 3c 48 63 d2 c6 04 10 04 8b 44 24 40 8b 54 24 38 ff ca 3b c2 7e 06 33 c0 89 44 24 40 8b 44 24 44 ff c8 89 44 24 44 48 8d 44 24 28 48 8b 00 8b 54 24 40 8d 4a 01 89 4c 24 40 48 63 d2 0f b6 04 10 8b 54 24 40 8b 4c 24 38 ff c9 3b d1 7e 06 33 d2 89 54 24 40 8b 54 24 44 ff ca 89 54 24 44 48 8d 54 24 28 48 8b 12 8b 4c 24 40 44 8d 41 01 44 89 44 24 40 48 63 c9 0f b6 14 0a 03 c2 48 83 c4 48 c3}
+; work_ring_buffer_12603749[0x7ff7c8391650, 0x7ff7c8391776][294] = {48 83 ec 48 33 c0 48 89 44 24 28 48 89 44 24 30 48 89 44 24 38 48 89 44 24 40 48 8d 4c 24 28 ba 40 00 00 00 e8 a7 fd ff ff 8b 44 24 3c 8b 54 24 38 ff ca 3b c2 7e 06 33 c0 89 44 24 3c 8b 44 24 44 3b 44 24 38 74 0a 8b 44 24 44 ff c0 89 44 24 44 48 8d 44 24 28 48 8b 00 8b 54 24 3c 8d 4a 01 89 4c 24 3c 48 63 d2 c6 04 10 03 8b 44 24 3c 8b 54 24 38 ff ca 3b c2 7e 06 33 c0 89 44 24 3c 8b 44 24 44 3b 44 24 38 74 0a 8b 44 24 44 ff c0 89 44 24 44 48 8d 44 24 28 48 8b 00 8b 54 24 3c 8d 4a 01 89 4c 24 3c 48 63 d2 c6 04 10 04 8b 44 24 40 8b 54 24 38 ff ca 3b c2 7e 06 33 c0 89 44 24 40 8b 44 24 44 ff c8 89 44 24 44 48 8d 44 24 28 48 8b 00 8b 54 24 40 8d 4a 01 89 4c 24 40 48 63 d2 0f b6 04 10 8b 54 24 40 8b 4c 24 38 ff c9 3b d1 7e 06 33 d2 89 54 24 40 8b 54 24 44 ff ca 89 54 24 44 48 8d 54 24 28 48 8b 12 8b 4c 24 40 44 8d 41 01 44 89 44 24 40 48 63 c9 0f b6 14 0a 03 c2 48 83 c4 48 c3}
 ; Capture completion code, None
 0000h sub rsp,48h                             ; SUB r/m64, imm8 || REX.W 83 /5 ib || encoded[4]{48 83 ec 48}
 0004h xor eax,eax                             ; XOR r32, r/m32 || o32 33 /r || encoded[2]{33 c0}
@@ -10,7 +10,7 @@
 0015h mov [rsp+40h],rax                       ; MOV r/m64, r64 || REX.W 89 /r || encoded[5]{48 89 44 24 40}
 001ah lea rcx,[rsp+28h]                       ; LEA r64, m || REX.W 8D /r || encoded[5]{48 8d 4c 24 28}
 001fh mov edx,40h                             ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{ba 40 00 00 00}
-0024h call 7FF7C8391420h                      ; CALL rel32 || E8 cd || encoded[5]{e8 27 fe ff ff}
+0024h call 7FF7C8391420h                      ; CALL rel32 || E8 cd || encoded[5]{e8 a7 fd ff ff}
 0029h mov eax,[rsp+3Ch]                       ; MOV r32, r/m32 || o32 8B /r || encoded[4]{8b 44 24 3c}
 002dh mov edx,[rsp+38h]                       ; MOV r32, r/m32 || o32 8B /r || encoded[4]{8b 54 24 38}
 0031h dec edx                                 ; DEC r/m32 || o32 FF /1 || encoded[2]{ff ca}
@@ -90,7 +90,7 @@
 0125h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ref BitStack push(bit src, ref BitStack dst)
-; push_61327894[0x7ff7c8391710, 0x7ff7c8391727][23] = {0f 1f 44 00 00 48 d1 22 48 8b 02 8b c9 48 0b c1 48 89 02 48 8b c2 c3}
+; push_61327894[0x7ff7c8391790, 0x7ff7c83917a7][23] = {0f 1f 44 00 00 48 d1 22 48 8b 02 8b c9 48 0b c1 48 89 02 48 8b c2 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h shl qword ptr [rdx],1                   ; SHL r/m64, 1 || REX.W D1 /4 || encoded[3]{48 d1 22}
@@ -102,7 +102,7 @@
 0016h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit pop(ref BitStack src)
-; pop_0x[0x7ff7c8391740, 0x7ff7c839175b][27] = {0f 1f 44 00 00 48 8b 01 48 8b d0 48 83 e2 01 83 e2 01 48 d1 e8 48 89 01 8b c2 c3}
+; pop_0x[0x7ff7c83917c0, 0x7ff7c83917db][27] = {0f 1f 44 00 00 48 8b 01 48 8b d0 48 83 e2 01 83 e2 01 48 d1 e8 48 89 01 8b c2 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,[rcx]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 01}
@@ -115,7 +115,7 @@
 001ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit and_logic(bit a, bit b)
-; and_logic_0x[0x7ff7c8391e00, 0x7ff7c8391e0a][10] = {0f 1f 44 00 00 8b c1 23 c2 c3}
+; and_logic_0x[0x7ff7c8391e80, 0x7ff7c8391e8a][10] = {0f 1f 44 00 00 8b c1 23 c2 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c1}
@@ -123,7 +123,7 @@
 0009h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong and_scalar(ulong a, ulong b)
-; and_scalar_64u[0x7ff7c8392440, 0x7ff7c839244c][12] = {0f 1f 44 00 00 48 23 d1 48 8b c2 c3}
+; and_scalar_64u[0x7ff7c83924c0, 0x7ff7c83924cc][12] = {0f 1f 44 00 00 48 23 d1 48 8b c2 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h and rdx,rcx                             ; AND r64, r/m64 || REX.W 23 /r || encoded[3]{48 23 d1}
@@ -131,7 +131,7 @@
 000bh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<ulong> and_v128(Vector128<ulong> a, Vector128<ulong> b)
-; and_v128_128x64u[0x7ff7c8392880, 0x7ff7c839289a][26] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f9 db c1 c5 f9 11 01 48 8b c1 c3}
+; and_v128_128x64u[0x7ff7c8392900, 0x7ff7c839291a][26] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f9 db c1 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -143,7 +143,7 @@
 0019h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<ulong> and_v256(Vector256<ulong> a, Vector256<ulong> b)
-; and_v256_256x64u[0x7ff7c8392cc0, 0x7ff7c8392cdd][29] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c5 fd db c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; and_v256_256x64u[0x7ff7c8392930, 0x7ff7c839294d][29] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c5 fd db c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -156,7 +156,7 @@
 001ch ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit nor_logic(bit a, bit b)
-; nor_logic_0x[0x7ff7c8392cf0, 0x7ff7c8392cff][15] = {0f 1f 44 00 00 0b d1 8b c2 f7 d0 83 e0 01 c3}
+; nor_logic_0x[0x7ff7c8392960, 0x7ff7c839296f][15] = {0f 1f 44 00 00 0b d1 8b c2 f7 d0 83 e0 01 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h or edx,ecx                              ; OR r32, r/m32 || o32 0B /r || encoded[2]{0b d1}
@@ -166,7 +166,7 @@
 000eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong nor_scalar(ulong a, ulong b)
-; nor_scalar_64u[0x7ff7c8392d10, 0x7ff7c8392d1f][15] = {0f 1f 44 00 00 48 0b d1 48 8b c2 48 f7 d0 c3}
+; nor_scalar_64u[0x7ff7c8392d90, 0x7ff7c8392d9f][15] = {0f 1f 44 00 00 48 0b d1 48 8b c2 48 f7 d0 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h or rdx,rcx                              ; OR r64, r/m64 || REX.W 0B /r || encoded[3]{48 0b d1}
@@ -175,7 +175,7 @@
 000eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<ulong> nor_v128(Vector128<ulong> a, Vector128<ulong> b)
-; nor_v128_128x64u[0x7ff7c8392d30, 0x7ff7c8392d52][34] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f9 eb c1 c5 f9 76 c8 c5 f9 ef c1 c5 f9 11 01 48 8b c1 c3}
+; nor_v128_128x64u[0x7ff7c8392db0, 0x7ff7c8392dd2][34] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f9 eb c1 c5 f9 76 c8 c5 f9 ef c1 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -189,7 +189,7 @@
 0021h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<ulong> nor_v256(Vector256<ulong> a, Vector256<ulong> b)
-; nor_v256_256x64u[0x7ff7c8392d70, 0x7ff7c8392d96][38] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c5 fd eb c1 c4 e2 7d 29 c8 c5 fd ef c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; nor_v256_256x64u[0x7ff7c8392df0, 0x7ff7c8392e16][38] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c5 fd eb c1 c4 e2 7d 29 c8 c5 fd ef c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -204,7 +204,7 @@
 0025h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit xnor_logic(bit a, bit b)
-; xnor_logic_0x[0x7ff7c8392db0, 0x7ff7c8392dbf][15] = {0f 1f 44 00 00 33 d1 8b c2 f7 d0 83 e0 01 c3}
+; xnor_logic_0x[0x7ff7c8392e30, 0x7ff7c8392e3f][15] = {0f 1f 44 00 00 33 d1 8b c2 f7 d0 83 e0 01 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h xor edx,ecx                             ; XOR r32, r/m32 || o32 33 /r || encoded[2]{33 d1}
@@ -214,7 +214,7 @@
 000eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong xnor_scalar(ulong a, ulong b)
-; xnor_scalar_64u[0x7ff7c8392dd0, 0x7ff7c8392ddf][15] = {0f 1f 44 00 00 48 33 d1 48 8b c2 48 f7 d0 c3}
+; xnor_scalar_64u[0x7ff7c8392e50, 0x7ff7c8392e5f][15] = {0f 1f 44 00 00 48 33 d1 48 8b c2 48 f7 d0 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h xor rdx,rcx                             ; XOR r64, r/m64 || REX.W 33 /r || encoded[3]{48 33 d1}
@@ -223,7 +223,7 @@
 000eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<ulong> xnor_v128(Vector128<ulong> a, Vector128<ulong> b)
-; xnor_v128_128x64u[0x7ff7c8392df0, 0x7ff7c8392e12][34] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f9 ef c1 c5 f9 76 c8 c5 f9 ef c1 c5 f9 11 01 48 8b c1 c3}
+; xnor_v128_128x64u[0x7ff7c8392e70, 0x7ff7c8392e92][34] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f9 ef c1 c5 f9 76 c8 c5 f9 ef c1 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -237,7 +237,7 @@
 0021h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<ulong> xnor_v256(Vector256<ulong> a, Vector256<ulong> b)
-; xnor_v256_256x64u[0x7ff7c8392e30, 0x7ff7c8392e56][38] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c5 fd ef c1 c4 e2 7d 29 c8 c5 fd ef c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; xnor_v256_256x64u[0x7ff7c8392eb0, 0x7ff7c8392ed6][38] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c5 fd ef c1 c4 e2 7d 29 c8 c5 fd ef c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -252,7 +252,7 @@
 0025h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit imply_logic(bit a, bit b)
-; imply_logic_0x[0x7ff7c8392e70, 0x7ff7c8392e7f][15] = {0f 1f 44 00 00 8b c2 f7 d0 83 e0 01 0b c1 c3}
+; imply_logic_0x[0x7ff7c8392ef0, 0x7ff7c8392eff][15] = {0f 1f 44 00 00 8b c2 f7 d0 83 e0 01 0b c1 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,edx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c2}
@@ -262,7 +262,7 @@
 000eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong imply_scalar(ulong a, ulong b)
-; imply_scalar_64u[0x7ff7c8392e90, 0x7ff7c8392e9f][15] = {0f 1f 44 00 00 48 8b c2 48 f7 d0 48 0b c1 c3}
+; imply_scalar_64u[0x7ff7c8392f10, 0x7ff7c8392f1f][15] = {0f 1f 44 00 00 48 8b c2 48 f7 d0 48 0b c1 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,rdx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c2}
@@ -271,7 +271,7 @@
 000eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<ulong> imply_v128(Vector128<ulong> a, Vector128<ulong> b)
-; imply_v128_128x64u[0x7ff7c8392eb0, 0x7ff7c8392ed2][34] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f1 76 d1 c5 f1 ef ca c5 f9 eb c1 c5 f9 11 01 48 8b c1 c3}
+; imply_v128_128x64u[0x7ff7c8392f30, 0x7ff7c8392f52][34] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f1 76 d1 c5 f1 ef ca c5 f9 eb c1 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -285,7 +285,7 @@
 0021h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<ulong> imply_v256(Vector256<ulong> a, Vector256<ulong> b)
-; imply_v256_256x64u[0x7ff7c83932f0, 0x7ff7c8393316][38] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c4 e2 75 29 d1 c5 f5 ef ca c5 fd eb c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; imply_v256_256x64u[0x7ff7c8392f70, 0x7ff7c8392f96][38] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c4 e2 75 29 d1 c5 f5 ef ca c5 fd eb c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -300,7 +300,7 @@
 0025h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit notimply_logic(bit a, bit b)
-; notimply_logic_0x[0x7ff7c8393330, 0x7ff7c839333f][15] = {0f 1f 44 00 00 8b c1 f7 d0 83 e0 01 23 c2 c3}
+; notimply_logic_0x[0x7ff7c8392fb0, 0x7ff7c8392fbf][15] = {0f 1f 44 00 00 8b c1 f7 d0 83 e0 01 23 c2 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c1}
@@ -310,14 +310,14 @@
 000eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong notimply_scalar(ulong a, ulong b)
-; notimply_scalar_64u[0x7ff7c8393350, 0x7ff7c839335b][11] = {0f 1f 44 00 00 c4 e2 f0 f2 c2 c3}
+; notimply_scalar_64u[0x7ff7c83933e0, 0x7ff7c83933eb][11] = {0f 1f 44 00 00 c4 e2 f0 f2 c2 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h andn rax,rcx,rdx                        ; ANDN r64a, r64b, r/m64 || VEX.LZ.0F38.W1 F2 /r || encoded[5]{c4 e2 f0 f2 c2}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<ulong> notimply_v128(Vector128<ulong> a, Vector128<ulong> b)
-; notimply_v128_128x64u[0x7ff7c8393370, 0x7ff7c839338a][26] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f9 df c1 c5 f9 11 01 48 8b c1 c3}
+; notimply_v128_128x64u[0x7ff7c8393400, 0x7ff7c839341a][26] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f9 df c1 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -329,7 +329,7 @@
 0019h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<ulong> notimply_v256(Vector256<ulong> a, Vector256<ulong> b)
-; notimply_v256_256x64u[0x7ff7c83933a0, 0x7ff7c83933bd][29] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c5 fd df c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; notimply_v256_256x64u[0x7ff7c8393430, 0x7ff7c839344d][29] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c5 fd df c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -342,7 +342,7 @@
 001ch ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit cimply_logic(bit a, bit b)
-; cimply_logic_0x[0x7ff7c83933d0, 0x7ff7c83933df][15] = {0f 1f 44 00 00 8b c1 f7 d0 83 e0 01 0b c2 c3}
+; cimply_logic_0x[0x7ff7c8393460, 0x7ff7c839346f][15] = {0f 1f 44 00 00 8b c1 f7 d0 83 e0 01 0b c2 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c1}
@@ -352,7 +352,7 @@
 000eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong cimply_scalar(ulong a, ulong b)
-; cimply_scalar_64u[0x7ff7c83933f0, 0x7ff7c83933ff][15] = {0f 1f 44 00 00 48 8b c1 48 f7 d0 48 0b c2 c3}
+; cimply_scalar_64u[0x7ff7c8393480, 0x7ff7c839348f][15] = {0f 1f 44 00 00 48 8b c1 48 f7 d0 48 0b c2 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,rcx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c1}
@@ -361,7 +361,7 @@
 000eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<ulong> cimply_v128(Vector128<ulong> a, Vector128<ulong> b)
-; cimply_v128_128x64u[0x7ff7c8393410, 0x7ff7c8393432][34] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f9 76 d0 c5 f9 ef c2 c5 f9 eb c1 c5 f9 11 01 48 8b c1 c3}
+; cimply_v128_128x64u[0x7ff7c83934a0, 0x7ff7c83934c2][34] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f9 76 d0 c5 f9 ef c2 c5 f9 eb c1 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -375,7 +375,7 @@
 0021h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<ulong> cimply_v256(Vector256<ulong> a, Vector256<ulong> b)
-; cimply_v256_256x64u[0x7ff7c8393450, 0x7ff7c8393476][38] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c4 e2 7d 29 d0 c5 fd ef c2 c5 fd eb c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; cimply_v256_256x64u[0x7ff7c83934e0, 0x7ff7c8393506][38] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c4 e2 7d 29 d0 c5 fd ef c2 c5 fd eb c1 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -390,7 +390,7 @@
 0025h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit cnotimply_logic(bit a, bit b)
-; cnotimply_logic_0x[0x7ff7c8393490, 0x7ff7c839349f][15] = {0f 1f 44 00 00 8b c2 f7 d0 83 e0 01 23 c1 c3}
+; cnotimply_logic_0x[0x7ff7c8393520, 0x7ff7c839352f][15] = {0f 1f 44 00 00 8b c2 f7 d0 83 e0 01 23 c1 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,edx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c2}
@@ -400,14 +400,14 @@
 000eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong cnotimply_scalar(ulong a, ulong b)
-; cnotimply_scalar_64u[0x7ff7c83934b0, 0x7ff7c83934bb][11] = {0f 1f 44 00 00 c4 e2 e8 f2 c1 c3}
+; cnotimply_scalar_64u[0x7ff7c8393540, 0x7ff7c839354b][11] = {0f 1f 44 00 00 c4 e2 e8 f2 c1 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h andn rax,rdx,rcx                        ; ANDN r64a, r64b, r/m64 || VEX.LZ.0F38.W1 F2 /r || encoded[5]{c4 e2 e8 f2 c1}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<ulong> cnotimply_v128(Vector128<ulong> a, Vector128<ulong> b)
-; cnotimply_v128_128x64u[0x7ff7c83934d0, 0x7ff7c83934ea][26] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f1 df c0 c5 f9 11 01 48 8b c1 c3}
+; cnotimply_v128_128x64u[0x7ff7c8393560, 0x7ff7c839357a][26] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f1 df c0 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -419,7 +419,7 @@
 0019h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<ulong> cnotimply_v256(Vector256<ulong> a, Vector256<ulong> b)
-; cnotimply_v256_256x64u[0x7ff7c8393910, 0x7ff7c839392d][29] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c5 f5 df c0 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; cnotimply_v256_256x64u[0x7ff7c8393590, 0x7ff7c83935ad][29] = {c5 f8 77 66 90 c5 fd 10 02 c4 c1 7d 10 08 c5 f5 df c0 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}

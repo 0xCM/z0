@@ -13,22 +13,22 @@ namespace Z0
 
     partial class mathspan
     {
-        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.Integers)]
         public static Span<T> add<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.add<T>(), l, r, dst);
 
-        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.Integers)]
         public static Span<T> sub<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.sub<T>(), l, r, dst);
 
-        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.Integers)]
         public static Span<T> mul<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.mul<T>(), l, r, dst);
 
-        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.Integers)]
         public static Span<T> div<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.div<T>(), l, r, dst);
@@ -43,62 +43,62 @@ namespace Z0
             where T : unmanaged
                 => SpanFunc.apply(GX.modmul<T>(), a,b,c, dst);
 
-        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.Integers)]
         public static Span<T> clamp<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.clamp<T>(), l, r, dst);
 
-        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.Integers)]
         public static Span<T> negate<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.negate<T>(), src, dst);
 
-        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.Integers)]
         public static Span<T> inc<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.inc<T>(), src, dst);
 
-        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.Integers)]
         public static Span<T> dec<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.dec<T>(), src, dst);
 
-        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.Integers)]
         public static Span<T> square<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.square<T>(), src, dst);
 
-        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.Integers)]
         public static Span<T> abs<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.abs<T>(), src, dst);
 
-        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.Integers)]
         public static Span<bit> eq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.eq<T>(), l, r, dst);
 
-        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.Integers)]
         public static Span<bit> neq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.neq<T>(), l, r, dst);
 
-        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.Integers)]
         public static Span<bit> lt<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.lt<T>(), l, r, dst);
 
-        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.Integers)]
         public static Span<bit> lteq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.lteq<T>(), l, r, dst);
 
-        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.Integers)]
         public static Span<bit> gt<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.gt<T>(), l, r, dst);
 
-        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), SpanOp, PrimalClosures(PrimalKind.Integers)]
         public static Span<bit> gteq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
             where T : unmanaged
                 => SpanFunc.apply(GX.gteq<T>(), l, r, dst);

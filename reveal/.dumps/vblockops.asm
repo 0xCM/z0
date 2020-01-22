@@ -1,6 +1,6 @@
-; 2020-01-22 01:43:39:479
+; 2020-01-22 01:44:40:341
 ; ref uint reftest_1(in uint x, in uint y, ref uint z)
-; reftest_1_32u[0x7ff7c81c24c0, 0x7ff7c81c24d0][16] = {0f 1f 44 00 00 8b 01 03 02 41 89 00 49 8b c0 c3}
+; reftest_1_32u[0x7ff7c81c26b0, 0x7ff7c81c26c0][16] = {0f 1f 44 00 00 8b 01 03 02 41 89 00 49 8b c0 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,[rcx]                           ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b 01}
@@ -10,7 +10,7 @@
 000fh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ref uint reftest_2(in uint x, in uint y, ref uint z)
-; reftest_2_32u[0x7ff7c81c24e0, 0x7ff7c81c24f0][16] = {0f 1f 44 00 00 8b 01 03 02 41 89 00 49 8b c0 c3}
+; reftest_2_32u[0x7ff7c81c26d0, 0x7ff7c81c26e0][16] = {0f 1f 44 00 00 8b 01 03 02 41 89 00 49 8b c0 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,[rcx]                           ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b 01}

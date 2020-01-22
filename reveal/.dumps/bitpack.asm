@@ -1,6 +1,6 @@
-; 2020-01-22 01:43:39:082
+; 2020-01-22 01:44:39:966
 ; byte pack_8x8(Span<uint> src)
-; pack_8x8_1927776[0x7ff7c8385660, 0x7ff7c838567e][30] = {0f 1f 44 00 00 48 8b 01 48 8b 00 48 ba 01 01 01 01 01 01 01 01 c4 e2 fa f5 c2 0f b6 c0 c3}
+; pack_8x8_17349988[0x7ff7c83857a0, 0x7ff7c83857be][30] = {0f 1f 44 00 00 48 8b 01 48 8b 00 48 ba 01 01 01 01 01 01 01 01 c4 e2 fa f5 c2 0f b6 c0 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,[rcx]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 01}
@@ -11,7 +11,7 @@
 001dh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ushort pack_16x8(Span<uint> src)
-; pack_16x8_21932166[0x7ff7c8386b20, 0x7ff7c8386b39][25] = {c5 f8 77 66 90 48 8b 01 c5 fb f0 00 c5 f9 73 f0 07 c5 f9 d7 c0 0f b7 c0 c3}
+; pack_16x8_63171767[0x7ff7c8386c60, 0x7ff7c8386c79][25] = {c5 f8 77 66 90 48 8b 01 c5 fb f0 00 c5 f9 73 f0 07 c5 f9 d7 c0 0f b7 c0 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -23,7 +23,7 @@
 0018h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint pack_32x8(Span<uint> src)
-; pack_32x8_63171767[0x7ff7c8386f60, 0x7ff7c8386f79][25] = {c5 f8 77 66 90 48 8b 01 c5 ff f0 00 c5 fd 73 f0 07 c5 fd d7 c0 c5 f8 77 c3}
+; pack_32x8_31674992[0x7ff7c83870a0, 0x7ff7c83870b9][25] = {c5 f8 77 66 90 48 8b 01 c5 ff f0 00 c5 fd 73 f0 07 c5 fd d7 c0 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -35,7 +35,7 @@
 0018h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pack_64x8(Span<uint> src)
-; pack_64x8_31674992[0x7ff7c8386f90, 0x7ff7c8386fcd][61] = {c5 f8 77 66 90 48 8b 01 48 8b d0 c5 ff f0 02 c5 fd 73 f0 07 c5 fd d7 d0 8b d2 48 05 80 00 00 00 c5 ff f0 00 c5 fd 73 f0 07 c5 fd d7 c0 8b c0 48 c1 e0 20 48 0b d0 48 8b c2 c5 f8 77 c3}
+; pack_64x8_16639474[0x7ff7c83870d0, 0x7ff7c838710d][61] = {c5 f8 77 66 90 48 8b 01 48 8b d0 c5 ff f0 02 c5 fd 73 f0 07 c5 fd d7 d0 8b d2 48 05 80 00 00 00 c5 ff f0 00 c5 fd 73 f0 07 c5 fd d7 c0 8b c0 48 c1 e0 20 48 0b d0 48 8b c2 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -57,7 +57,7 @@
 003ch ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; void unpack_64x32(ulong src, Span<uint> dst)
-; unpack_64x32_16639474[0x7ff7c8387cc0, 0x7ff7c8387e03][323] = {50 c5 f8 77 90 48 8b 02 33 d2 48 89 14 24 48 89 14 24 48 8d 14 24 44 0f b6 c1 49 b9 01 01 01 01 01 01 01 01 c4 42 bb f5 c1 4c 89 02 4c 8b c2 c4 c2 7d 31 00 4c 8b c0 c4 c1 7e 7f 00 4c 8b c1 49 c1 e8 08 45 0f b6 c0 c4 42 bb f5 c1 4c 89 02 4c 8b c2 c4 c2 7d 31 00 4c 8d 40 20 c4 c1 7e 7f 00 4c 8b c1 49 c1 e8 10 45 0f b6 c0 c4 42 bb f5 c1 4c 89 02 4c 8b c2 c4 c2 7d 31 00 4c 8d 40 40 c4 c1 7e 7f 00 4c 8b c1 49 c1 e8 18 45 0f b6 c0 c4 42 bb f5 c1 4c 89 02 4c 8b c2 c4 c2 7d 31 00 4c 8d 40 60 c4 c1 7e 7f 00 4c 8b c1 49 c1 e8 20 45 0f b6 c0 c4 42 bb f5 c1 4c 89 02 4c 8b c2 c4 c2 7d 31 00 4c 8d 80 80 00 00 00 c4 c1 7e 7f 00 4c 8b c1 49 c1 e8 28 45 0f b6 c0 c4 42 bb f5 c1 4c 89 02 4c 8b c2 c4 c2 7d 31 00 4c 8d 80 a0 00 00 00 c4 c1 7e 7f 00 4c 8b c1 49 c1 e8 30 45 0f b6 c0 c4 42 bb f5 c1 4c 89 02 4c 8b c2 c4 c2 7d 31 00 4c 8d 80 c0 00 00 00 c4 c1 7e 7f 00 48 c1 e9 38 0f b6 c9 c4 c2 f3 f5 c9 48 89 0a c4 e2 7d 31 02 48 05 e0 00 00 00 c5 fe 7f 00 c5 f8 77 48 83 c4 08 c3}
+; unpack_64x32_15537542[0x7ff7c8387b90, 0x7ff7c8387cd3][323] = {50 c5 f8 77 90 48 8b 02 33 d2 48 89 14 24 48 89 14 24 48 8d 14 24 44 0f b6 c1 49 b9 01 01 01 01 01 01 01 01 c4 42 bb f5 c1 4c 89 02 4c 8b c2 c4 c2 7d 31 00 4c 8b c0 c4 c1 7e 7f 00 4c 8b c1 49 c1 e8 08 45 0f b6 c0 c4 42 bb f5 c1 4c 89 02 4c 8b c2 c4 c2 7d 31 00 4c 8d 40 20 c4 c1 7e 7f 00 4c 8b c1 49 c1 e8 10 45 0f b6 c0 c4 42 bb f5 c1 4c 89 02 4c 8b c2 c4 c2 7d 31 00 4c 8d 40 40 c4 c1 7e 7f 00 4c 8b c1 49 c1 e8 18 45 0f b6 c0 c4 42 bb f5 c1 4c 89 02 4c 8b c2 c4 c2 7d 31 00 4c 8d 40 60 c4 c1 7e 7f 00 4c 8b c1 49 c1 e8 20 45 0f b6 c0 c4 42 bb f5 c1 4c 89 02 4c 8b c2 c4 c2 7d 31 00 4c 8d 80 80 00 00 00 c4 c1 7e 7f 00 4c 8b c1 49 c1 e8 28 45 0f b6 c0 c4 42 bb f5 c1 4c 89 02 4c 8b c2 c4 c2 7d 31 00 4c 8d 80 a0 00 00 00 c4 c1 7e 7f 00 4c 8b c1 49 c1 e8 30 45 0f b6 c0 c4 42 bb f5 c1 4c 89 02 4c 8b c2 c4 c2 7d 31 00 4c 8d 80 c0 00 00 00 c4 c1 7e 7f 00 48 c1 e9 38 0f b6 c9 c4 c2 f3 f5 c9 48 89 0a c4 e2 7d 31 02 48 05 e0 00 00 00 c5 fe 7f 00 c5 f8 77 48 83 c4 08 c3}
 ; Capture completion code, None
 0000h push rax                                ; PUSH r64 || 50+ro || encoded[1]{50}
 0001h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}

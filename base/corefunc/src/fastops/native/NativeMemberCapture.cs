@@ -14,33 +14,32 @@ namespace Z0
     /// <summary>
     /// Represents a contiguous block of memory that represents the machine code for a delate
     /// </summary>
-    public sealed class NativeMemberCapture : INativeMemberData
+    public sealed class NativeMemberCapture
     {        
         public static NativeMemberCapture Empty => default;
 
-        public static NativeMemberCapture Define(Moniker id, MethodInfo src, MemoryRange location, byte[] content, CaptureResult result)
-            => new NativeMemberCapture(id, src.Signature().Format(), null, src, location, content, result);
+        public static NativeMemberCapture Define(Moniker id, MethodInfo src, MemoryRange origin, byte[] content, CaptureResult result)
+            => new NativeMemberCapture(id, src.Signature().Format(), null, src, origin, content, result);
 
-        public static NativeMemberCapture Define(Moniker id, Delegate src, MemoryRange location, byte[] content, CaptureResult result)
-            => new NativeMemberCapture(id, id, src, src.Method, location, content, result);
+        public static NativeMemberCapture Define(Moniker id, Delegate src, MemoryRange origin, byte[] content, CaptureResult result)
+            => new NativeMemberCapture(id, id, src, src.Method, origin, content, result);
 
         [MethodImpl(Inline)]
-        NativeMemberCapture(Moniker id, string label, Delegate src, MethodInfo method, MemoryRange location, byte[] content, CaptureResult result)
+        NativeMemberCapture(Moniker id, string label, Delegate src, MethodInfo method, MemoryRange origin, byte[] content, CaptureResult result)
         {
-            require((int)location.Length == content.Length);
+            require((int)origin.Length == content.Length);
             this.Delegate = src;
             this.Method = method;
-            this.Location = location;
-            this.Code = AsmCode.Define(id, label, content);
+            this.Origin = origin;
+            this.Code = AsmCode.Define(id, origin, label, content);
             this.CaptureInfo = result;
-
         }
 
         public Option<Delegate> Delegate;
 
         public MethodInfo Method {get;}
 
-        public MemoryRange Location {get;}
+        public MemoryRange Origin {get;}
 
         public AsmCode Code {get;}
 
@@ -50,16 +49,16 @@ namespace Z0
         /// Defines the inclusive lower bound of the source location
         /// </summary>
         public ulong StartAddress 
-            => Location.Start;
+            => Origin.Start;
 
         /// <summary>
         /// Defines the inclusive upper bound of source location
         /// </summary>
         public ulong EndAddress 
-            => Location.End;
+            => Origin.End;
 
         public ulong Length 
-            => Location.Length;
+            => Origin.Length;
 
         public bool IsEmpty 
             => Length == 0;
@@ -68,7 +67,6 @@ namespace Z0
             => Code.Id;
 
         public string Label 
-            => Code.Label;
-        
+            => Code.Label;       
     }
 }

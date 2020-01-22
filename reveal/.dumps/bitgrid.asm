@@ -1,6 +1,6 @@
-; 2020-01-22 01:43:39:975
+; 2020-01-22 01:44:40:950
 ; void part63x3(ulong src, NatSpan<N21,byte> dst)
-; part63x3_35977388[0x7ff7c85bfba0, 0x7ff7c85bfbfb][91] = {0f 1f 44 00 00 48 b8 ff ff ff ff ff ff ff 7f 48 23 c1 48 8b 0a 49 b8 07 07 07 07 07 07 07 07 c4 42 fb f5 c0 4c 89 01 48 8b 0a 48 83 c1 08 4c 8b c0 49 c1 e8 18 49 b9 07 07 07 07 07 07 07 07 c4 42 bb f5 c1 4c 89 01 48 8b 12 48 83 c2 10 48 c1 e8 30 c4 c2 fb f5 c1 48 89 02 c3}
+; part63x3_35977388[0x7ff7c85bfad0, 0x7ff7c85bfb2b][91] = {0f 1f 44 00 00 48 b8 ff ff ff ff ff ff ff 7f 48 23 c1 48 8b 0a 49 b8 07 07 07 07 07 07 07 07 c4 42 fb f5 c0 4c 89 01 48 8b 0a 48 83 c1 08 4c 8b c0 49 c1 e8 18 49 b9 07 07 07 07 07 07 07 07 c4 42 bb f5 c1 4c 89 01 48 8b 12 48 83 c2 10 48 c1 e8 30 c4 c2 fb f5 c1 48 89 02 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,7FFFFFFFFFFFFFFFh               ; MOV r64, imm64 || REX.W B8+ro io || encoded[10]{48 b8 ff ff ff ff ff ff ff 7f}
@@ -24,7 +24,7 @@
 005ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector256<byte> bitgrid_vector256(BitGrid<byte> src, int block)
-; bitgrid_vector256_[0x7ff7c85c10e0, 0x7ff7c85c1101][33] = {c5 f8 77 66 90 48 8b 02 41 c1 e0 05 49 63 d0 48 03 c2 c5 ff f0 00 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; bitgrid_vector256_[0x7ff7c85c1010, 0x7ff7c85c1031][33] = {c5 f8 77 66 90 48 8b 02 41 c1 e0 05 49 63 d0 48 03 c2 c5 ff f0 00 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -39,7 +39,7 @@
 0020h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; BitGrid256<N16,N16,ushort> transpose(BitGrid256<N16,N16,ushort> g)
-; transpose_0x[0x7ff7c85c1930, 0x7ff7c85c1b9d][621] = {c5 f8 77 66 90 c5 fc 57 c0 c5 fd 10 0a b8 07 00 00 00 c5 f9 6e d0 c5 f5 f3 d2 c5 fd d7 c2 ba 55 55 55 55 c4 e2 7a f5 d2 0f b7 d2 c5 fc 28 d0 c5 e9 c4 d2 00 c4 e3 7d 18 c2 00 ba aa aa aa aa c4 e2 7a f5 c2 0f b7 c0 c4 e3 7d 19 c2 01 c5 e9 c4 d0 00 c4 e3 7d 18 c2 01 b8 06 00 00 00 c5 f9 6e d0 c5 f5 f3 d2 c5 fd d7 c2 ba 55 55 55 55 c4 e2 7a f5 d2 0f b7 d2 c5 fc 28 d0 c5 e9 c4 d2 01 c4 e3 7d 18 c2 00 ba aa aa aa aa c4 e2 7a f5 c2 0f b7 c0 c4 e3 7d 19 c2 01 c5 e9 c4 d0 01 c4 e3 7d 18 c2 01 b8 05 00 00 00 c5 f9 6e d0 c5 f5 f3 d2 c5 fd d7 c2 ba 55 55 55 55 c4 e2 7a f5 d2 0f b7 d2 c5 fc 28 d0 c5 e9 c4 d2 02 c4 e3 7d 18 c2 00 ba aa aa aa aa c4 e2 7a f5 c2 0f b7 c0 c4 e3 7d 19 c2 01 c5 e9 c4 d0 02 c4 e3 7d 18 c2 01 b8 04 00 00 00 c5 f9 6e d0 c5 f5 f3 d2 c5 fd d7 c2 ba 55 55 55 55 c4 e2 7a f5 d2 0f b7 d2 c5 fc 28 d0 c5 e9 c4 d2 03 c4 e3 7d 18 c2 00 ba aa aa aa aa c4 e2 7a f5 c2 0f b7 c0 c4 e3 7d 19 c2 01 c5 e9 c4 d0 03 c4 e3 7d 18 c2 01 b8 03 00 00 00 c5 f9 6e d0 c5 f5 f3 d2 c5 fd d7 c2 ba 55 55 55 55 c4 e2 7a f5 d2 0f b7 d2 c5 fc 28 d0 c5 e9 c4 d2 04 c4 e3 7d 18 c2 00 ba aa aa aa aa c4 e2 7a f5 c2 0f b7 c0 c4 e3 7d 19 c2 01 c5 e9 c4 d0 04 c4 e3 7d 18 c2 01 b8 02 00 00 00 c5 f9 6e d0 c5 f5 f3 d2 c5 fd d7 c2 ba 55 55 55 55 c4 e2 7a f5 d2 0f b7 d2 c5 fc 28 d0 c5 e9 c4 d2 05 c4 e3 7d 18 c2 00 ba aa aa aa aa c4 e2 7a f5 c2 0f b7 c0 c4 e3 7d 19 c2 01 c5 e9 c4 d0 05 c4 e3 7d 18 c2 01 b8 01 00 00 00 c5 f9 6e d0 c5 f5 f3 d2 c5 fd d7 c2 ba 55 55 55 55 c4 e2 7a f5 d2 0f b7 d2 c5 fc 28 d0 c5 e9 c4 d2 06 c4 e3 7d 18 c2 00 ba aa aa aa aa c4 e2 7a f5 c2 0f b7 c0 c4 e3 7d 19 c2 01 c5 e9 c4 d0 06 c4 e3 7d 18 c2 01 33 c0 c5 f9 6e d0 c5 f5 f3 ca c5 fd d7 c1 ba 55 55 55 55 c4 e2 7a f5 d2 0f b7 d2 c5 fc 28 c8 c5 f1 c4 ca 07 c4 e3 7d 18 c1 00 ba aa aa aa aa c4 e2 7a f5 c2 0f b7 c0 c4 e3 7d 19 c1 01 c5 f1 c4 c8 07 c4 e3 7d 18 c1 01 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
+; transpose_0x[0x7ff7c85c1860, 0x7ff7c85c1acd][621] = {c5 f8 77 66 90 c5 fc 57 c0 c5 fd 10 0a b8 07 00 00 00 c5 f9 6e d0 c5 f5 f3 d2 c5 fd d7 c2 ba 55 55 55 55 c4 e2 7a f5 d2 0f b7 d2 c5 fc 28 d0 c5 e9 c4 d2 00 c4 e3 7d 18 c2 00 ba aa aa aa aa c4 e2 7a f5 c2 0f b7 c0 c4 e3 7d 19 c2 01 c5 e9 c4 d0 00 c4 e3 7d 18 c2 01 b8 06 00 00 00 c5 f9 6e d0 c5 f5 f3 d2 c5 fd d7 c2 ba 55 55 55 55 c4 e2 7a f5 d2 0f b7 d2 c5 fc 28 d0 c5 e9 c4 d2 01 c4 e3 7d 18 c2 00 ba aa aa aa aa c4 e2 7a f5 c2 0f b7 c0 c4 e3 7d 19 c2 01 c5 e9 c4 d0 01 c4 e3 7d 18 c2 01 b8 05 00 00 00 c5 f9 6e d0 c5 f5 f3 d2 c5 fd d7 c2 ba 55 55 55 55 c4 e2 7a f5 d2 0f b7 d2 c5 fc 28 d0 c5 e9 c4 d2 02 c4 e3 7d 18 c2 00 ba aa aa aa aa c4 e2 7a f5 c2 0f b7 c0 c4 e3 7d 19 c2 01 c5 e9 c4 d0 02 c4 e3 7d 18 c2 01 b8 04 00 00 00 c5 f9 6e d0 c5 f5 f3 d2 c5 fd d7 c2 ba 55 55 55 55 c4 e2 7a f5 d2 0f b7 d2 c5 fc 28 d0 c5 e9 c4 d2 03 c4 e3 7d 18 c2 00 ba aa aa aa aa c4 e2 7a f5 c2 0f b7 c0 c4 e3 7d 19 c2 01 c5 e9 c4 d0 03 c4 e3 7d 18 c2 01 b8 03 00 00 00 c5 f9 6e d0 c5 f5 f3 d2 c5 fd d7 c2 ba 55 55 55 55 c4 e2 7a f5 d2 0f b7 d2 c5 fc 28 d0 c5 e9 c4 d2 04 c4 e3 7d 18 c2 00 ba aa aa aa aa c4 e2 7a f5 c2 0f b7 c0 c4 e3 7d 19 c2 01 c5 e9 c4 d0 04 c4 e3 7d 18 c2 01 b8 02 00 00 00 c5 f9 6e d0 c5 f5 f3 d2 c5 fd d7 c2 ba 55 55 55 55 c4 e2 7a f5 d2 0f b7 d2 c5 fc 28 d0 c5 e9 c4 d2 05 c4 e3 7d 18 c2 00 ba aa aa aa aa c4 e2 7a f5 c2 0f b7 c0 c4 e3 7d 19 c2 01 c5 e9 c4 d0 05 c4 e3 7d 18 c2 01 b8 01 00 00 00 c5 f9 6e d0 c5 f5 f3 d2 c5 fd d7 c2 ba 55 55 55 55 c4 e2 7a f5 d2 0f b7 d2 c5 fc 28 d0 c5 e9 c4 d2 06 c4 e3 7d 18 c2 00 ba aa aa aa aa c4 e2 7a f5 c2 0f b7 c0 c4 e3 7d 19 c2 01 c5 e9 c4 d0 06 c4 e3 7d 18 c2 01 33 c0 c5 f9 6e d0 c5 f5 f3 ca c5 fd d7 c1 ba 55 55 55 55 c4 e2 7a f5 d2 0f b7 d2 c5 fc 28 c8 c5 f1 c4 ca 07 c4 e3 7d 18 c1 00 ba aa aa aa aa c4 e2 7a f5 c2 0f b7 c0 c4 e3 7d 19 c1 01 c5 f1 c4 c8 07 c4 e3 7d 18 c1 01 c5 fd 11 01 48 8b c1 c5 f8 77 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -179,7 +179,7 @@
 026ch ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit read_bit_from_vector(in BitBlock<N23,byte> src)
-; read_bit_from_vector_0x[0x7ff7c85c1d10, 0x7ff7c85c1d25][21] = {0f 1f 44 00 00 48 8b 01 0f b6 00 0f b6 c0 c1 e8 03 83 e0 01 c3}
+; read_bit_from_vector_0x[0x7ff7c85c1c40, 0x7ff7c85c1c55][21] = {0f 1f 44 00 00 48 8b 01 0f b6 00 0f b6 c0 c1 e8 03 83 e0 01 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,[rcx]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 01}
@@ -190,7 +190,7 @@
 0014h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; int segments()
-; segments_56256135[0x7ff7c85c1d40, 0x7ff7c85c1d70][48] = {48 83 ec 18 90 c6 44 24 10 00 48 8d 44 24 10 c6 00 00 c6 44 24 08 00 48 8d 44 24 08 c6 00 00 b8 01 00 00 00 83 c0 02 33 d2 03 c2 48 83 c4 18 c3}
+; segments_56256135[0x7ff7c85c1c70, 0x7ff7c85c1ca0][48] = {48 83 ec 18 90 c6 44 24 10 00 48 8d 44 24 10 c6 00 00 c6 44 24 08 00 48 8d 44 24 08 c6 00 00 b8 01 00 00 00 83 c0 02 33 d2 03 c2 48 83 c4 18 c3}
 ; Capture completion code, None
 0000h sub rsp,18h                             ; SUB r/m64, imm8 || REX.W 83 /5 ib || encoded[4]{48 83 ec 18}
 0004h nop                                     ; NOP || o32 90 || encoded[1]{90}
@@ -208,7 +208,7 @@
 002fh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; int count_segs()
-; count_segs_36543171[0x7ff7c85c1d90, 0x7ff7c85c1de3][83] = {48 83 ec 18 33 c0 48 89 44 24 10 48 89 44 24 08 48 8d 44 24 10 c6 00 00 48 8d 44 24 08 c6 00 00 33 c0 83 c0 4b 8b d0 c1 fa 1f 83 e2 03 03 d0 c1 fa 02 8b c8 c1 f9 1f 83 e1 03 03 c8 83 e1 fc 2b c1 75 04 33 c0 eb 05 b8 01 00 00 00 03 c2 48 83 c4 18 c3}
+; count_segs_36543171[0x7ff7c85c1cc0, 0x7ff7c85c1d13][83] = {48 83 ec 18 33 c0 48 89 44 24 10 48 89 44 24 08 48 8d 44 24 10 c6 00 00 48 8d 44 24 08 c6 00 00 33 c0 83 c0 4b 8b d0 c1 fa 1f 83 e2 03 03 d0 c1 fa 02 8b c8 c1 f9 1f 83 e1 03 03 c8 83 e1 fc 2b c1 75 04 33 c0 eb 05 b8 01 00 00 00 03 c2 48 83 c4 18 c3}
 ; Capture completion code, None
 0000h sub rsp,18h                             ; SUB r/m64, imm8 || REX.W 83 /5 ib || encoded[4]{48 83 ec 18}
 0004h xor eax,eax                             ; XOR r32, r/m32 || o32 33 /r || encoded[2]{33 c0}
@@ -240,7 +240,7 @@
 0052h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit readbit_row_col_2(int n, ulong src, int row, int col)
-; readbit_row_col_2_32i[0x7ff7c85c2200, 0x7ff7c85c2243][67] = {0f 1f 44 00 00 48 89 54 24 10 41 0f af c8 41 03 c9 8b c1 c1 f8 1f 83 e0 3f 03 c1 c1 f8 06 48 8d 54 24 10 48 63 c0 48 8b 04 c2 8b d1 c1 fa 1f 83 e2 3f 03 d1 83 e2 c0 2b ca 0f b6 c9 48 d3 e8 83 e0 01 c3}
+; readbit_row_col_2_32i[0x7ff7c85c2130, 0x7ff7c85c2173][67] = {0f 1f 44 00 00 48 89 54 24 10 41 0f af c8 41 03 c9 8b c1 c1 f8 1f 83 e0 3f 03 c1 c1 f8 06 48 8d 54 24 10 48 63 c0 48 8b 04 c2 8b d1 c1 fa 1f 83 e2 3f 03 d1 83 e2 c0 2b ca 0f b6 c9 48 d3 e8 83 e0 01 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov [rsp+10h],rdx                       ; MOV r/m64, r64 || REX.W 89 /r || encoded[5]{48 89 54 24 10}
@@ -266,7 +266,7 @@
 0042h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit readbit_g_position(in ulong src, int pos)
-; readbit_g_position_64u[0x7ff7c85c2260, 0x7ff7c85c2292][50] = {0f 1f 44 00 00 8b c2 c1 f8 1f 83 e0 3f 03 c2 c1 f8 06 48 63 c0 48 8b 04 c1 8b ca c1 f9 1f 83 e1 3f 03 ca 83 e1 c0 2b d1 0f b6 ca 48 d3 e8 83 e0 01 c3}
+; readbit_g_position_64u[0x7ff7c85c2190, 0x7ff7c85c21c2][50] = {0f 1f 44 00 00 8b c2 c1 f8 1f 83 e0 3f 03 c2 c1 f8 06 48 63 c0 48 8b 04 c1 8b ca c1 f9 1f 83 e1 3f 03 ca 83 e1 c0 2b d1 0f b6 ca 48 d3 e8 83 e0 01 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,edx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c2}

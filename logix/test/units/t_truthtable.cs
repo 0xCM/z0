@@ -143,7 +143,7 @@ namespace Z0.Logix
             dst[1] = (byte)(ScalarOpApi.eval(op, on,off) & on) == on;
             dst[2] = (byte)(ScalarOpApi.eval(op, off,on) & on) == on;
             dst[3] = (byte)(ScalarOpApi.eval(op, on,on) & on) == on;
-            var sig = TruthTables.sig(op.ToLogical());
+            var sig = TruthTables.sig(op);
             Claim.eq(sig,dst);
         }
         
@@ -160,11 +160,9 @@ namespace Z0.Logix
 
         public void truth_vectors()
         {
-
             Trace(TruthTables.definition(BinaryBitLogicKind.And).Format());
             Trace(TruthTables.definition(BinaryBitLogicKind.Or).Format());
-            Trace(TruthTables.definition(BinaryBitLogicKind.Nand).Format());
-        
+            Trace(TruthTables.definition(BinaryBitLogicKind.Nand).Format());        
         }
     }
 }

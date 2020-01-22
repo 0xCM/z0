@@ -33,14 +33,5 @@ namespace Z0
         /// <param name="id">The identity to confer upon the result</param>
         /// <param name="src">The source method</param>
         AsmFunction DecodeFunction(Moniker id, MethodInfo src);
-
-        /// <summary>
-        /// Decodes an instruction block
-        /// </summary>
-        /// <param name="src">The encoded assembly</param>
-        /// <param name="location">The memory location from which the code was extracted</param>
-        AsmFunction DecodeFunction(AsmCode src, MemoryRange location);
-
-
     }
 }

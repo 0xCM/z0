@@ -7,27 +7,25 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static zfunc;
-                
+    using static zfunc;                
 
     /// <summary>
     /// Describes the assembly encoding for a function
     /// </summary>
     public class AsmFunction
     {   
-        public static AsmFunction Define(MemoryRange origin, AsmCode code, CaptureTermReason reason, AsmInstructionInfo[] instructions, CilFunction cil = null)
-            => new AsmFunction(origin, code, reason, instructions,cil);
+        public static AsmFunction Define(MemoryRange origin, AsmCode code, CaptureTermCode tc, AsmInstructionInfo[] instructions)
+            => new AsmFunction(origin, code, tc, instructions);
 
-        AsmFunction(MemoryRange address, AsmCode code, CaptureTermReason reason, AsmInstructionInfo[] instructions, CilFunction cil)
+        AsmFunction(MemoryRange address, AsmCode code, CaptureTermCode tc, AsmInstructionInfo[] instructions)
         {
             this.Id = code.Id;
             this.Name = code.Id;
             this.Label = code.Label;
             this.Instructions = instructions;
             this.Code = code;
-            this.TermReason = reason;
+            this.TermCode = tc;
             this.Location = address;
-            this.Cil = cil;            
         }
 
         /// <summary>
@@ -63,17 +61,23 @@ namespace Z0
         /// <summary>
         /// The defining CIL
         /// </summary>
-        public Option<CilFunction> Cil {get;}
+        public Option<CilFunction> Cil {get; private set;}
         
         /// <summary>
         /// The reason discerned for capture completion
         /// </summary>
-        public CaptureTermReason TermReason {get;}
+        public CaptureTermCode TermCode {get;}
 
         /// <summary>
         /// The number of encoded instructions
         /// </summary>
         public int InstructionCount
             => Instructions.Length;            
+
+        public AsmFunction WithCil(CilFunction cil)            
+        {            
+            this.Cil = cil;
+            return this;
+        }
     }
 }

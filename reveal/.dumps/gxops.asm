@@ -1,6 +1,6 @@
-; 2020-01-22 01:43:39:911
+; 2020-01-22 01:44:40:884
 ; uint bl_and32(uint a, uint b)
-; bl_and32_32u[0x7ff7c85bbf30, 0x7ff7c85bbf3a][10] = {0f 1f 44 00 00 23 d1 8b c2 c3}
+; bl_and32_32u[0x7ff7c85bbf00, 0x7ff7c85bbf0a][10] = {0f 1f 44 00 00 23 d1 8b c2 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h and edx,ecx                             ; AND r32, r/m32 || o32 23 /r || encoded[2]{23 d1}
@@ -8,7 +8,7 @@
 0009h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint logic_machine(uint a, uint b)
-; logic_machine_32u[0x7ff7c85bc460, 0x7ff7c85bc46c][12] = {0f 1f 44 00 00 23 ca 33 d1 8b c2 c3}
+; logic_machine_32u[0x7ff7c85bc130, 0x7ff7c85bc13c][12] = {0f 1f 44 00 00 23 ca 33 d1 8b c2 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h and ecx,edx                             ; AND r32, r/m32 || o32 23 /r || encoded[2]{23 ca}
@@ -17,7 +17,7 @@
 000bh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<uint> vlogic_machine(Vector128<uint> a, Vector128<uint> b)
-; vlogic_machine_128x32u[0x7ff7c85bc480, 0x7ff7c85bc4a2][34] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f8 28 d1 c5 f9 db c2 c5 f9 ef c1 c5 f9 11 01 48 8b c1 c3}
+; vlogic_machine_128x32u[0x7ff7c85bc260, 0x7ff7c85bc282][34] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f8 28 d1 c5 f9 db c2 c5 f9 ef c1 c5 f9 11 01 48 8b c1 c3}
 ; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
@@ -31,7 +31,7 @@
 0021h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit eq_d16u(ushort a, ushort b)
-; eq_d16u_16u[0x7ff7c85bc4c0, 0x7ff7c85bc4d4][20] = {0f 1f 44 00 00 0f b7 c1 0f b7 d2 3b c2 0f 94 c0 0f b6 c0 c3}
+; eq_d16u_16u[0x7ff7c85bc2a0, 0x7ff7c85bc2b4][20] = {0f 1f 44 00 00 0f b7 c1 0f b7 d2 3b c2 0f 94 c0 0f b6 c0 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h movzx eax,cx                            ; MOVZX r32, r/m16 || o32 0F B7 /r || encoded[3]{0f b7 c1}
@@ -42,7 +42,7 @@
 0013h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit eq_g16u(ushort a, ushort b)
-; eq_g16u_16u[0x7ff7c85bc4f0, 0x7ff7c85bc507][23] = {0f 1f 44 00 00 0f b7 c1 0f b7 d2 0f b7 c0 3b c2 0f 94 c0 0f b6 c0 c3}
+; eq_g16u_16u[0x7ff7c85bc6d0, 0x7ff7c85bc6e7][23] = {0f 1f 44 00 00 0f b7 c1 0f b7 d2 0f b7 c0 3b c2 0f 94 c0 0f b6 c0 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h movzx eax,cx                            ; MOVZX r32, r/m16 || o32 0F B7 /r || encoded[3]{0f b7 c1}
@@ -54,7 +54,7 @@
 0016h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit eq_o16u(ushort a, ushort b)
-; eq_o16u_16u[0x7ff7c85bc920, 0x7ff7c85bc937][23] = {0f 1f 44 00 00 0f b7 c1 0f b7 d2 0f b7 c0 3b c2 0f 94 c0 0f b6 c0 c3}
+; eq_o16u_16u[0x7ff7c85bc700, 0x7ff7c85bc717][23] = {0f 1f 44 00 00 0f b7 c1 0f b7 d2 0f b7 c0 3b c2 0f 94 c0 0f b6 c0 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h movzx eax,cx                            ; MOVZX r32, r/m16 || o32 0F B7 /r || encoded[3]{0f b7 c1}
@@ -66,7 +66,7 @@
 0016h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; string eq_moniker()
-; eq_moniker_52313669[0x7ff7c85bc950, 0x7ff7c85bc97f][47] = {48 83 ec 38 33 c0 48 89 44 24 30 48 89 44 24 28 c6 44 24 28 00 48 0f be 4c 24 28 88 4c 24 30 48 8d 4c 24 30 e8 27 fa ff ff 90 48 83 c4 38 c3}
+; eq_moniker_52313669[0x7ff7c85bc730, 0x7ff7c85bc75f][47] = {48 83 ec 38 33 c0 48 89 44 24 30 48 89 44 24 28 c6 44 24 28 00 48 0f be 4c 24 28 88 4c 24 30 48 8d 4c 24 30 e8 07 fc ff ff 90 48 83 c4 38 c3}
 ; Capture completion code, None
 0000h sub rsp,38h                             ; SUB r/m64, imm8 || REX.W 83 /5 ib || encoded[4]{48 83 ec 38}
 0004h xor eax,eax                             ; XOR r32, r/m32 || o32 33 /r || encoded[2]{33 c0}
@@ -76,16 +76,16 @@
 0015h movsx rcx,byte ptr [rsp+28h]            ; MOVSX r64, r/m8 || REX.W 0F BE /r || encoded[6]{48 0f be 4c 24 28}
 001bh mov [rsp+30h],cl                        ; MOV r/m8, r8 || 88 /r || encoded[4]{88 4c 24 30}
 001fh lea rcx,[rsp+30h]                       ; LEA r64, m || REX.W 8D /r || encoded[5]{48 8d 4c 24 30}
-0024h call 7FF7C85BC3A0h                      ; CALL rel32 || E8 cd || encoded[5]{e8 27 fa ff ff}
+0024h call 7FF7C85BC360h                      ; CALL rel32 || E8 cd || encoded[5]{e8 07 fc ff ff}
 0029h nop                                     ; NOP || o32 90 || encoded[1]{90}
 002ah add rsp,38h                             ; ADD r/m64, imm8 || REX.W 83 /0 ib || encoded[4]{48 83 c4 38}
 002eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; string the_name()
-; the_name_1060976[0x7ff7c85bc9a0, 0x7ff7c85bc9b3][19] = {0f 1f 44 00 00 48 b8 b8 f7 87 bd 17 02 00 00 48 8b 00 c3}
+; the_name_1060976[0x7ff7c85bc780, 0x7ff7c85bc793][19] = {0f 1f 44 00 00 48 b8 28 f8 1f 46 c2 02 00 00 48 8b 00 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
-0005h mov rax,217BD87F7B8h                    ; MOV r64, imm64 || REX.W B8+ro io || encoded[10]{48 b8 b8 f7 87 bd 17 02 00 00}
+0005h mov rax,2C2461FF828h                    ; MOV r64, imm64 || REX.W B8+ro io || encoded[10]{48 b8 28 f8 1f 46 c2 02 00 00}
 000fh mov rax,[rax]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 00}
 0012h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------

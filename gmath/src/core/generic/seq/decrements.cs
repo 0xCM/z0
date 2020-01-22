@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="count">The number of values to populate</param>
         /// <param name="dst">The target memory reference</param>
         /// <typeparam name="T">The target value type</typeparam>    
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static void decrements<T>(int count, ref T dst)
             where T : unmanaged
         {
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="count">The number of values to populate</param>
         /// <param name="dst">The target memory reference</param>
         /// <typeparam name="T">The target value type</typeparam>    
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static void decrements<T>(T first, int count, ref T dst)
             where T : unmanaged
         {

@@ -5,19 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
     using System.Reflection;
-    using System.Reflection.Emit;
-    using System.Linq;
     using System.Collections.Generic;
 
     using static zfunc;
 
     public static class FastOpX
     {
-
         public static Moniker DefaultIdentity(this MethodInfo m)
             => OpIdentity.Provider.Define(m);
                 
@@ -71,9 +65,6 @@ namespace Z0
 
         public static bool RequiresImmediate(this OpInfo src)
             => src.Method.RequiresImmediate();
-
-        public static INativeMemberData CaptureNative(this OpSpec src, Span<byte> buffer)
-            => src.Method.CaptureNative(buffer);
 
         public static IEnumerable<GenericOpInfo> FindGenericOps(this IOperationCatalog src)
             => src.GenericApiHosts.FastGenericOps();

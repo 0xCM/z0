@@ -1,6 +1,6 @@
-; 2020-01-22 01:43:38:981
+; 2020-01-22 01:44:39:881
 ; Span<uint> msand_32u(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs, Span<uint> dst)
-; msand_32u_35912612[0x7ff7c837db00, 0x7ff7c837db47][71] = {57 56 0f 1f 00 48 8b 02 49 8b 10 4d 8b 01 45 8b 49 08 45 33 d2 45 85 c9 7e 20 4d 63 da 4f 8d 1c 98 49 63 f2 8b 34 b0 49 63 fa 8b 3c ba 23 f7 41 89 33 41 ff c2 45 3b d1 7c e0 4c 89 01 44 89 49 08 48 8b c1 5e 5f c3}
+; msand_32u_54778057[0x7ff7c837dda0, 0x7ff7c837dde7][71] = {57 56 0f 1f 00 48 8b 02 49 8b 10 4d 8b 01 45 8b 49 08 45 33 d2 45 85 c9 7e 20 4d 63 da 4f 8d 1c 98 49 63 f2 8b 34 b0 49 63 fa 8b 3c ba 23 f7 41 89 33 41 ff c2 45 3b d1 7c e0 4c 89 01 44 89 49 08 48 8b c1 5e 5f c3}
 ; Capture completion code, None
 0000h push rdi                                ; PUSH r64 || 50+ro || encoded[1]{57}
 0001h push rsi                                ; PUSH r64 || 50+ro || encoded[1]{56}

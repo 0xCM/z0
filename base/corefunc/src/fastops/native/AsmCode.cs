@@ -22,6 +22,11 @@ namespace Z0
         public readonly Moniker Id;
 
         /// <summary>
+        /// The originating memory location
+        /// </summary>
+        public readonly MemoryRange Origin;
+
+        /// <summary>
         /// Descriptive text
         /// </summary>
         public readonly string Label;
@@ -37,7 +42,18 @@ namespace Z0
         /// <summary>
         /// The canonical zero
         /// </summary>
-        public static AsmCode Empty => new AsmCode(new byte[]{0}, Moniker.Empty, string.Empty);
+        public static AsmCode Empty => new AsmCode(Moniker.Empty, MemoryRange.Empty, string.Empty,  new byte[]{0});
+
+        /// <summary>
+        /// Loads a code block from a buffer
+        /// </summary>
+        /// <param name="id">The identifying moniker</param>
+        /// <param name="origin">The originating memory location</param>
+        /// <param name="label">Descriptive text</param>
+        /// <param name="data">The code bytes</param>
+        [MethodImpl(Inline)]
+        public static AsmCode Define(Moniker id, MemoryRange origin, string label, byte[] data)
+            => new AsmCode(id, origin, label, data);
 
         /// <summary>
         /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
@@ -45,7 +61,7 @@ namespace Z0
         /// <param name="data">The encoded assembly</param>
         /// <param name="id">The identity to confer</param>
         public static AsmCode Parse(string data, Moniker id)
-            => new AsmCode(Hex.parsebytes(data).ToArray(), id, null);
+            => new AsmCode(id, MemoryRange.Empty, id.Text, Hex.parsebytes(data).ToArray());
 
         /// <summary>
         /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
@@ -54,35 +70,18 @@ namespace Z0
         /// <param name="id">The identity to confer</param>
         public static AsmCode<T> Parse<T>(string data, Moniker id, T t = default)
             where T : unmanaged
-                => new AsmCode<T>(Hex.parsebytes(data).ToArray(),id,null);
+                => new AsmCode<T>(id, MemoryRange.Empty, id.Text, Hex.parsebytes(data).ToArray());
                 
-        /// <summary>
-        /// Loads an untyped code block from span content
-        /// </summary>
-        /// <param name="src">The code source</param>
-        /// <param name="id">The identifying moniker</param>
-        [MethodImpl(Inline)]
-        public static AsmCode Define(Moniker id, string label, byte[] src)
-            => new AsmCode(src, id, label);
-
-        /// <summary>
-        /// Loads an untyped code block from span content
-        /// </summary>
-        /// <param name="src">The code source</param>
-        /// <param name="m">The identifying moniker</param>
-        [MethodImpl(Inline)]
-        public static AsmCode Define(Moniker m, string label, ReadOnlySpan<byte> src)
-            => new AsmCode(src.ToArray(), m, label);
-
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(AsmCode code)
             => code.Encoded;
 
         [MethodImpl(Inline)]
-        internal AsmCode(byte[] encoded, Moniker id, string label)
+        internal AsmCode(Moniker id, MemoryRange origin,  string label, byte[] encoded)
         {
             this.Id = id;
-            this.Label = label ?? id;
+            this.Origin = origin;
+            this.Label = label;
             this.Encoded = encoded;
         }
 
@@ -107,11 +106,10 @@ namespace Z0
                 => new AsmCode<T>(this);
 
         public AsmCode WithId(Moniker id)
-            => new AsmCode(Encoded,id, Label);
+            => new AsmCode(id,  Origin, Label, Encoded);
 
         public AsmCode WithLabel(string label)
-            => new AsmCode(Encoded, Id, label);
-
+            => new AsmCode(Id,  Origin, label, Encoded);
     }
 
     /// <summary>
@@ -124,6 +122,9 @@ namespace Z0
 
         public Moniker Id
             => Code.Id;
+
+        public MemoryRange Origin
+            => Code.Origin;
 
         public string Label
             => Code.Label;
@@ -146,9 +147,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public AsmCode(byte[] data, Moniker m, string label)
+        public AsmCode(Moniker id, MemoryRange origin, string label, byte[] data)
         {
-            Code = new AsmCode(data,m, label);
+            Code = new AsmCode(id, origin,label,data);
         }
 
         /// <summary>

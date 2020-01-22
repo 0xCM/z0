@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
         public static bit positive<T>(T a)
             where T : unmanaged 
                 => positive_u(a);

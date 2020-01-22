@@ -8,7 +8,11 @@ namespace Z0
 
     using static zfunc;
 
-    public enum CaptureTermReason
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum CaptureTermCode
     {
         None,
 
@@ -26,8 +30,17 @@ namespace Z0
 
         ZEDx2_SBB,
 
-        ZEDx5,
+        ZEDx6,
 
-        EOB
+        MSDIAG,
+
+        EOB,
+        
+        /// <summary>
+        /// Decoded all instructions
+        /// </summary>
+        DAI,
+
+        Complete
     }
 }

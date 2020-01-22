@@ -15,7 +15,6 @@ namespace Z0
 
     using static zfunc;
     
-
     /// <summary>
     /// Disassembles CLR methods
     /// </summary>
@@ -32,22 +31,11 @@ namespace Z0
 
         readonly ClrMetadataIndex MdIx;
 
+        readonly IAsmDecoder Decoder;
+
         public static AsmFunction[] Functions(Type src)
             => Functions(src.DeclaredMethods().NonGeneric().Concrete().NonSpecial().ToArray()).ToArray();
     
-        // public static IEnumerable<AsmFunction> Deconstruct(IEnumerable<MethodInfo> methods)
-        // {
-        //     methods.JitMethods();
-        //     var modules = methods.Select(x => x.Module).Distinct();
-        //     using var decon = new Deconstructor(modules);
-        //     foreach(var m in methods)
-        //     {
-        //         var d = decon.Disassemble(m);
-        //         if(d)
-        //             yield return d.ValueOrDefault();
-        //     }            
-        // }
-
         public static IEnumerable<AsmFunction> Functions(IEnumerable<MethodInfo> methods)
         {
             methods.JitMethods();
@@ -61,16 +49,12 @@ namespace Z0
             }            
         }
 
-        Option<AsmFunction> Function(MethodInfo method)
-            => from block in ReadNativeMethodData(method)
-                    let decoded = AsmDecoder.function(block, MdIx)
-                    select decoded;
-
         Deconstructor(IEnumerable<Module> modules)
-        {
+        {            
             Target = DataTarget.AttachToProcess(Process.GetCurrentProcess().Id, uint.MaxValue, AttachFlag.Passive);
             Runtime = CreateRuntime(Target);
             MdIx = ClrMetadataIndex.Create(modules.ToArray());
+            Decoder = AsmServices.Decoder(MdIx);
         }
 
         /// <summary>
@@ -88,46 +72,51 @@ namespace Z0
         Option<ClrMethod> GetRuntimeMethod(MethodInfo src)
             => Runtime.GetMethodByHandle((ulong)src.MethodHandle.Value.ToInt64());
             
-        Option<AsmFunction> Disassemble(MethodInfo method)
-        {
-            try
-            {
-                return
-                    from block in ReadNativeContent(method)
-                    let id = OpIdentity.Provider.Define(method)
-                    let cil = MdIx.FindCilFunction(method).ValueOrDefault()
-                    let instructions = AsmDecoder.list(block)
-                    let body = MethodAsmBody.Define(method, block, instructions)
-                    let mdis = MethodDisassembly.Define(id, body, cil)
-                    let f = Builder.BuildFunction(mdis)
-                    select f;
+        // Option<AsmFunction> Disassemble(Moniker id, MethodInfo method)
+        // {
+        //     var decoder = AsmServices.Decoder();
+        //     try
+        //     {
+        //         return
+        //             from block in ReadNativeContent(id,method)
+        //             let code = AsmCode.Define(id, block.Label, block.Encoded)
+        //             let cil = MdIx.FindCilFunction(method).ValueOrDefault()
+        //             let instructions = decoder.DecodeInstructions(code, block.Location)
+        //             let body = MethodAsmBody.Define(method, block, instructions.Decoded)
+        //             let f = Builder.BuildFunction(id, CaptureTermCode.MSDIAG, body).WithCil(cil)
+        //             select f;
             
-            }
-            catch(Exception e)
-            {
-                error(e);
-                return default;
-            }
-        }
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         error(e);
+        //         return default;
+        //     }
+        // }
                                
-        IAsmFunctionBuilder Builder
-            => AsmServices.FunctionBuilder();
+        // IAsmFunctionBuilder Builder
+        //     => AsmServices.FunctionBuilder();
         
         void IDisposable.Dispose()
         {
             Target?.Dispose();
         }
 		
-        Option<NativeCodeBlock> ReadNativeContent(MethodInfo method) 
-			=> from clrmethod in GetRuntimeMethod(method)
-               from block in ReadNativeBlock(method, clrmethod)
-             select block;
-             
+        // Option<NativeCodeBlock> ReadNativeContent(Moniker id, MethodInfo method) 
+		// 	=> from clrmethod in GetRuntimeMethod(method)
+        //        from block in ReadNativeBlock(id, method, clrmethod)
+        //      select block;
 
-        Option<NativeMemberCapture> ReadNativeMethodData(MethodInfo method) 
-			=> from clr in GetRuntimeMethod(method)
-                from capture in ReadNativeMethodData(method,clr)
-                select capture;
+        Option<AsmFunction> Function(MethodInfo method)
+            => from runtime in GetRuntimeMethod(method)
+               from capture in ReadNativeMethodData(method, runtime)
+               let f = Decoder.DecodeFunction(capture)
+               select f;
+
+        // Option<NativeMemberCapture> ReadNativeMethodData(MethodInfo method) 
+		// 	=> from clr in GetRuntimeMethod(method)
+        //         from capture in ReadNativeMethodData(method,clr)
+        //         select capture;
 
 		/// <summary>
 		/// Reads a continuous block of memory
@@ -135,7 +124,7 @@ namespace Z0
 		/// <param name="target">The (source!) target </param>
 		/// <param name="address">The starting address</param>
 		/// <param name="size">The number of bytes to read</param>
-		Option<NativeCodeBlock> ReadNativeBlock(string label, ulong address, uint size)
+		Option<AsmCode> ReadNativeBlock(Moniker id, string label, ulong address, uint size)
 		{
 			if (address == 0)
             {
@@ -163,7 +152,7 @@ namespace Z0
                 return default;
             }
 
-			return NativeCodeBlock.Define(label, address, buffer);
+			return AsmCode.Define(id, (address, address + size),  label, buffer);
 		}
 
 		Option<NativeMemberCapture> ReadNativeMethodData(Moniker id, MethodInfo method, ulong address, uint size)
@@ -196,7 +185,8 @@ namespace Z0
             }
 
             var location = MemoryRange.Define(address, address + size);            
-			return NativeMemberCapture.Define(id, method, location, buffer, CaptureResult.Empty);
+            var result = CaptureResult.Define(location.Start, location.End, CaptureTermCode.MSDIAG, buffer);
+			return NativeMemberCapture.Define(id, method, location, buffer, result);
 		}
 
 		Option<NativeMemberCapture> ReadNativeMethodData(MethodInfo method, ClrMethod runtime)
@@ -210,10 +200,10 @@ namespace Z0
         /// </summary>
         /// <param name="target">The diagnostic target</param>
         /// <param name="runtime">The runtime method</param>
-        Option<NativeCodeBlock> ReadNativeBlock(MethodInfo info, ClrMethod runtime)
+        Option<AsmCode> ReadNativeBlock(Moniker id, MethodInfo info, ClrMethod runtime)
         {
 			var codeInfo = runtime.HotColdInfo;	
-            return ReadNativeBlock(info.Signature().Format(), codeInfo.HotStart, codeInfo.HotSize);
+            return ReadNativeBlock(id, info.Signature().Format(), codeInfo.HotStart, codeInfo.HotSize);
         }
     }
 }

@@ -1,6 +1,6 @@
-; 2020-01-22 01:43:39:255
+; 2020-01-22 01:44:40:153
 ; void part64x1_byte(ulong src, Span<byte> dst)
-; part64x1_byte_1348700[0x7ff7c8391490, 0x7ff7c8391541][177] = {48 83 ec 28 90 48 8b 02 48 ba 01 01 01 01 01 01 01 01 c4 e2 f3 f5 d2 48 89 10 48 8d 50 08 4c 8b c1 49 c1 e8 08 49 b9 01 01 01 01 01 01 01 01 c4 42 bb f5 c1 4c 89 02 48 8d 50 10 4c 8b c1 49 c1 e8 10 c4 42 bb f5 c1 4c 89 02 48 8d 50 18 4c 8b c1 49 c1 e8 18 c4 42 bb f5 c1 4c 89 02 48 8d 50 20 4c 8b c1 49 c1 e8 20 c4 42 bb f5 c1 4c 89 02 48 8d 50 28 4c 8b c1 49 c1 e8 28 c4 42 bb f5 c1 4c 89 02 48 8d 50 30 4c 8b c1 49 c1 e8 30 c4 42 bb f5 c1 4c 89 02 48 83 c0 38 48 c1 e9 38 c4 c2 f3 f5 d1 48 89 10 48 83 c4 28 c3 e8 e0 e6 72 5f cc}
+; part64x1_byte_1348700[0x7ff7c8391510, 0x7ff7c83915c1][177] = {48 83 ec 28 90 48 8b 02 48 ba 01 01 01 01 01 01 01 01 c4 e2 f3 f5 d2 48 89 10 48 8d 50 08 4c 8b c1 49 c1 e8 08 49 b9 01 01 01 01 01 01 01 01 c4 42 bb f5 c1 4c 89 02 48 8d 50 10 4c 8b c1 49 c1 e8 10 c4 42 bb f5 c1 4c 89 02 48 8d 50 18 4c 8b c1 49 c1 e8 18 c4 42 bb f5 c1 4c 89 02 48 8d 50 20 4c 8b c1 49 c1 e8 20 c4 42 bb f5 c1 4c 89 02 48 8d 50 28 4c 8b c1 49 c1 e8 28 c4 42 bb f5 c1 4c 89 02 48 8d 50 30 4c 8b c1 49 c1 e8 30 c4 42 bb f5 c1 4c 89 02 48 83 c0 38 48 c1 e9 38 c4 c2 f3 f5 d1 48 89 10 48 83 c4 28 c3 e8 60 e6 72 5f cc}
 ; Capture completion code, None
 0000h sub rsp,28h                             ; SUB r/m64, imm8 || REX.W 83 /5 ib || encoded[4]{48 83 ec 28}
 0004h nop                                     ; NOP || o32 90 || encoded[1]{90}
@@ -45,11 +45,11 @@
 00a3h mov [rax],rdx                           ; MOV r/m64, r64 || REX.W 89 /r || encoded[3]{48 89 10}
 00a6h add rsp,28h                             ; ADD r/m64, imm8 || REX.W 83 /0 ib || encoded[4]{48 83 c4 28}
 00aah ret                                     ; RET || C3 || encoded[1]{c3}
-00abh call 7FF827ABFC20h                      ; CALL rel32 || E8 cd || encoded[5]{e8 e0 e6 72 5f}
+00abh call 7FF827ABFC20h                      ; CALL rel32 || E8 cd || encoded[5]{e8 60 e6 72 5f}
 00b0h int 3                                   ; INT3 || CC || encoded[1]{cc}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; void part64x1_bit(ulong src, Span<bit> dst)
-; part64x1_bit_43678569[0x7ff7c8391560, 0x7ff7c83915b3][83] = {48 83 ec 28 48 8b c1 4c 8b 02 8b 4a 08 48 c1 e1 02 48 c1 e9 03 48 81 f9 ff ff ff 7f 77 2f 33 d2 48 63 ca 4d 8d 0c c8 8b ca 4c 8b d0 49 d3 ea 48 b9 01 00 00 00 01 00 00 00 c4 e2 ab f5 c9 49 89 09 ff c2 83 fa 20 7c d8 48 83 c4 28 c3 e8 6e e6 72 5f cc}
+; part64x1_bit_43678569[0x7ff7c83915e0, 0x7ff7c8391633][83] = {48 83 ec 28 48 8b c1 4c 8b 02 8b 4a 08 48 c1 e1 02 48 c1 e9 03 48 81 f9 ff ff ff 7f 77 2f 33 d2 48 63 ca 4d 8d 0c c8 8b ca 4c 8b d0 49 d3 ea 48 b9 01 00 00 00 01 00 00 00 c4 e2 ab f5 c9 49 89 09 ff c2 83 fa 20 7c d8 48 83 c4 28 c3 e8 ee e5 72 5f cc}
 ; Capture completion code, None
 0000h sub rsp,28h                             ; SUB r/m64, imm8 || REX.W 83 /5 ib || encoded[4]{48 83 ec 28}
 0004h mov rax,rcx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c1}
@@ -73,6 +73,6 @@
 0046h jl short 0020h                          ; JL rel8 || 7C cb || encoded[2]{7c d8}
 0048h add rsp,28h                             ; ADD r/m64, imm8 || REX.W 83 /0 ib || encoded[4]{48 83 c4 28}
 004ch ret                                     ; RET || C3 || encoded[1]{c3}
-004dh call 7FF827ABFC20h                      ; CALL rel32 || E8 cd || encoded[5]{e8 6e e6 72 5f}
+004dh call 7FF827ABFC20h                      ; CALL rel32 || E8 cd || encoded[5]{e8 ee e5 72 5f}
 0052h int 3                                   ; INT3 || CC || encoded[1]{cc}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------

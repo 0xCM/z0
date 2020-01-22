@@ -1,4 +1,4 @@
-// 2020-01-22 01:43:38:983
+// 2020-01-22 01:44:39:883
 // Id := 100664405, Name := System.Span`1<System.UInt32> Z0.OpCodes.msops::msand_32u(System.ReadOnlySpan`1<System.UInt32>,System.ReadOnlySpan`1<System.UInt32>,System.Span`1<System.UInt32>)
 // Span<uint> msand_32u(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs, Span<uint> dst)
 // IL

@@ -9,9 +9,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Reflection.Emit;
-    using System.Runtime.Intrinsics;
-    using System.IO;
 
     using static zfunc;
 
@@ -30,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to deconstruct</param>
         /// <param name="dst">The buffer to which native data will be written</param>
-        public static void CaptureNative(this MethodInfo m, NativeWriter dst)
+        public static void CaptureNative(this MethodInfo m, INativeWriter dst)
             => NativeCapture.capture(m,dst);
 
         /// <summary>
@@ -38,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="host">The type that defines the methods to deconstruct</param>
         /// <param name="dst">The path to the file</param>
-        public static void CaptureNative(this Type host, NativeWriter dst)
+        public static void CaptureNative(this Type host, INativeWriter dst)
             => NativeCapture.capture(host, dst);
 
         /// <summary>
@@ -46,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="methods">The methods to capture</param>
         /// <param name="dst">The capture target</param>
-        public static void CaptureNative(this IEnumerable<MethodInfo> methods, NativeWriter dst)
+        public static void CaptureNative(this IEnumerable<MethodInfo> methods, INativeWriter dst)
             => NativeCapture.capture(methods,dst);
 
         /// <summary>
@@ -64,7 +61,7 @@ namespace Z0
         /// <param name="d">The delegate to capture</param>
         /// <param name="dst">The buffer to which native data will be written</param>
         /// <typeparam name="T">The delegate type</typeparam>
-        public static void CaptureNative(this Delegate d, NativeWriter dst)
+        public static void CaptureNative(this Delegate d, INativeWriter dst)
             => NativeCapture.capture(d, dst);
 
         /// <summary>
@@ -115,7 +112,7 @@ namespace Z0
         /// </summary>
         /// <param name="host">The type that defines the methods to deconstruct</param>
         /// <param name="dst">The path to the file</param>
-        public static void CaptureNative(this Type host, Type args, NativeWriter dst)
+        public static void CaptureNative(this Type host, Type args, INativeWriter dst)
             => NativeCapture.capture(host,args, dst);
 
         /// <summary>
@@ -124,7 +121,7 @@ namespace Z0
         /// <param name="methods">The methods to capture</param>
         /// <param name="arg">The types over which to close each method</param>
         /// <param name="dst">The capture target</param>
-        public static void CaptureNative(this IEnumerable<MethodInfo> methods, Type arg, NativeWriter dst)
+        public static void CaptureNative(this IEnumerable<MethodInfo> methods, Type arg, INativeWriter dst)
             => NativeCapture.capture(methods,arg,dst);
             
         public static IntPtr Jit(this MethodBase method)
@@ -145,11 +142,11 @@ namespace Z0
         /// <param name="dst">The target path</param>
         /// <param name="header">Whether to emit a header when creating a new file or overwriting an existing file</param>
         /// <param name="append">Whether to append to or overwrite an existing file</param>
-        public static NativeWriter NativeWriter(this FilePath dst, bool header = true, bool append = false)
+        public static INativeWriter NativeWriter(this FilePath dst, bool header = true, bool append = false)
         {
             dst.FolderPath.CreateIfMissing();            
             var exists = dst.Exists();
-            var writer = new NativeWriter(dst, append);
+            var writer = NativeServices.Writer(dst, append);
             if(!exists || !append && header)
                 writer.WriteHeader();
             return writer;

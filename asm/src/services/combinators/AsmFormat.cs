@@ -6,11 +6,10 @@ namespace Z0
 {        
     using System;
     using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-	using Iced.Intel;
     using System.IO;
+
+	using Iced.Intel;
 
     using static zfunc;
 
@@ -23,27 +22,20 @@ namespace Z0
         /// Formats the assembly function detail
         /// </summary>
         /// <param name="src">The source function</param>
-        /// <param name="pad">The padding between each instruction and associated commentary</param>
-        public static string FormatDetail(this AsmFunction src)
-            => src.FormatDetail(AsmFormatConfig.Default); 
-
-        /// <summary>
-        /// Formats the assembly function detail
-        /// </summary>
-        /// <param name="src">The source function</param>
         /// <param name="fmt">The format configuration</param>
-        public static string FormatDetail(this AsmFunction src, AsmFormatConfig fmt)
+        public static string FormatDetail(this AsmFunction src, AsmFormatConfig fmt = null)
         {            
-            var detail = text();
+            var dst = text();
+            fmt = fmt ?? AsmFormatConfig.Default;
 
             if(fmt.EmitFunctionDelimiter)
-                detail.AppendLine(fmt.FunctionDelimiter);
+                dst.AppendLine(fmt.FunctionDelimiter);
             
             foreach(var line in src.FormatHeader(fmt))
-                detail.AppendLine(line);            
+                dst.AppendLine(line);            
 
-            detail.AppendLine(src.FormatInstructionBlock(fmt));                
-            return detail.ToString();
+            dst.AppendLine(src.FormatInstructionBlock(fmt));                
+            return dst.ToString();
         }
 
         /// <summary>
@@ -53,29 +45,51 @@ namespace Z0
         public static string FormatNativeHex(this AsmCode src)
             => src.Encoded.FormatHex(AsciSym.Comma, true, true, true);
 
-        public static string FormatInstructionLines(this InstructionBlock src, AsmFormatConfig config = null)
-            => src.FormatInstructions(config ?? AsmFormatConfig.Default).FormatLines();
-
-        public static string FormatInstructionLines(this AsmFunction src, AsmFormatConfig config = null)
-            => src.FormatInstructionBlock(config ?? AsmFormatConfig.Default);
-
-        public static ReadOnlySpan<string> FormatInstructions(this InstructionBlock src, AsmFormatConfig config)
+        public static ReadOnlySpan<string> FormatInstructions(this AsmFunction src, AsmFormatConfig fmt = null)
         {
+            fmt = fmt ?? AsmFormatConfig.Default;         
+            var lines = new List<string>();
+            for(var i = 0; i< src.InstructionCount; i++)
+                lines.Add(src.Instructions[i].FormatInstruction(fmt));
+            return lines.ToArray();
+        }    
+
+        public static string FormatInstructionBlock(this AsmFunction src, AsmFormatConfig fmt = null)
+            => src.FormatInstructions(fmt).Concat(AsciEscape.Eol);
+        // {
+        //     fmt = fmt ?? AsmFormatConfig.Default;
+
+        //     var description = text();            
+        //     for(var i = 0; i< src.InstructionCount; i++)
+        //     {
+        //         var instruction = src.Instructions[i].FormatInstruction(fmt);
+        //         if(i != src.InstructionCount - 1)
+        //             description.AppendLine(instruction);
+        //         else
+        //             description.Append(instruction);
+        //     }
+        //     return description.ToString();
+        // }    
+
+
+        public static ReadOnlySpan<string> FormatInstructions(this InstructionBlock src, AsmFormatConfig fmt = null)
+        {
+            fmt = fmt ?? AsmFormatConfig.Default;
+
             if(src.InstructionCount == 0)
                 return ReadOnlySpan<string>.Empty;
             
+            var dst = new string[src.InstructionCount];
             var line = 0;
-            Span<string> dst = new string[src.InstructionCount];
-
             var formatter = new MasmFormatter(MasmOptions);
             var sb = text();
             var writer = new StringWriter(sb);
-            var output = new AsmOutput(writer, src.Location.Start);
+            var output = new AsmOutput(writer, src.Origin.Start);
             for(var i = 0; i < src.InstructionCount; line++, i++)
             {
                 ref readonly var instruction = ref src[i];
                 formatter.Format(in instruction, output);                    
-                dst[i] = config.ShowLineAddresses ?  concat(instruction.FormatLineLabel(), sb.ToString()) :  sb.ToString();
+                dst[i] = fmt.ShowLineAddresses ?  concat(instruction.FormatLineLabel(), sb.ToString()) :  sb.ToString();
                 sb.Clear();
             }
             return dst;
@@ -87,11 +101,12 @@ namespace Z0
         /// <param name="src">The source function</param>
         /// <param name="encoding">Specifies whether to include the encoded hex bytes</param>
         /// <param name="location">Specifies whether to include the assembly-relative function location address</param>
-        static ReadOnlySpan<string> FormatHeader(this AsmFunction src, AsmFormatConfig fmt)
+        static ReadOnlySpan<string> FormatHeader(this AsmFunction src, AsmFormatConfig fmt = null)
         {            
             var lines = new List<string>();
             var code = src.Code;
             var location = src.Location;
+            fmt = fmt ?? AsmFormatConfig.Default;
 
             lines.Add(Comment($"{code.Label}")); 
             
@@ -105,7 +120,7 @@ namespace Z0
             else if(fmt.HeaderEncoding)
                 lines.Add(Comment(embrace(code.FormatHeaderEncoding())));
 
-            lines.Add(Comment($"Capture completion code, {src.TermReason}"));
+            lines.Add(Comment($"Capture completion code, {src.TermCode}"));
 
             if(fmt.HeaderTimestamp)
                 lines.Add(Comment(now().ToLexicalString()));
@@ -118,8 +133,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source instruction</param>
         /// <param name="pad">The minimum character width of the instruction content</param>
-        static string FormatInstruction(this AsmInstructionInfo src, AsmFormatConfig fmt)
+        static string FormatInstruction(this AsmInstructionInfo src, AsmFormatConfig fmt = null)
         {
+            fmt = fmt ?? AsmFormatConfig.Default;
+
             var description = text();    
             description.Append(concat(src.Offset.FormatLineLabel(), src.AsmContent.PadRight(fmt.InstructionPad, space())));
             description.Append(Comment(src.Spec.Format(fmt)));
@@ -128,32 +145,13 @@ namespace Z0
             return description.ToString();
         }
 
-        static string FormatInstructionBlock(this AsmFunction src, AsmFormatConfig fmt)
-        {
-            var description = text();            
-            for(var i = 0; i< src.InstructionCount; i++)
-            {
-                var instruction = src.Instructions[i].FormatInstruction(fmt);
-                if(i != src.InstructionCount - 1)
-                    description.AppendLine(instruction);
-                else
-                    description.Append(instruction);
-            }
-            return description.ToString();
-        }    
 
-        static ReadOnlySpan<string> FormatInstructions(this AsmFunction src, AsmFormatConfig fmt)
+        static string Format(this AsmMemInfo src, AsmFormatConfig fmt = null)
         {
-            var lines = new List<string>();
-            for(var i = 0; i< src.InstructionCount; i++)
-                lines.Add(src.Instructions[i].FormatInstruction(fmt));
-            return lines.ToArray();
-        }    
+            fmt = fmt ?? AsmFormatConfig.Default;
 
-        static string Format(this AsmMemInfo src)
-        {
             var items = new List<(string value, string type)>();
-            
+        
             if(src.Address != 0)
                 items.Add((src.Address.FormatHex(false,true, false, false),"address"));
             
@@ -288,6 +286,5 @@ namespace Z0
                 }
             }                
         }
-
     }
 }

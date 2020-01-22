@@ -1,14 +1,14 @@
-; 2020-01-22 01:43:39:931
+; 2020-01-22 01:44:40:901
 ; byte hexcode_parse(Char c)
-; hexcode_parse_59572368[0x7ff7c85bc9d0, 0x7ff7c85bc9e5][21] = {0f 1f 44 00 00 0f b7 c9 48 b8 b8 c5 5b c8 f7 7f 00 00 48 ff e0}
+; hexcode_parse_59572368[0x7ff7c85bc7b0, 0x7ff7c85bc7c5][21] = {0f 1f 44 00 00 0f b7 c9 48 b8 b8 c4 5b c8 f7 7f 00 00 48 ff e0}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h movzx ecx,cx                            ; MOVZX r32, r/m16 || o32 0F B7 /r || encoded[3]{0f b7 c9}
-0008h mov rax,7FF7C85BC5B8h                   ; MOV r64, imm64 || REX.W B8+ro io || encoded[10]{48 b8 b8 c5 5b c8 f7 7f 00 00}
+0008h mov rax,7FF7C85BC4B8h                   ; MOV r64, imm64 || REX.W B8+ro io || encoded[10]{48 b8 b8 c4 5b c8 f7 7f 00 00}
 0012h jmp rax                                 ; JMP r/m64 || FF /4 || encoded[3]{48 ff e0}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Pair<ulong> sub_128u_a(Pair<ulong> a, Pair<ulong> b)
-; sub_128u_a_0x[0x7ff7c85bce00, 0x7ff7c85bce2f][47] = {0f 1f 44 00 00 48 8b 02 48 8b 52 08 4c 8b c8 4d 2b 08 49 3b c1 0f 92 c0 0f b6 c0 49 2b 50 08 8b c0 48 2b d0 4c 89 09 48 89 51 08 48 8b c1 c3}
+; sub_128u_a_0x[0x7ff7c85bcbe0, 0x7ff7c85bcc0f][47] = {0f 1f 44 00 00 48 8b 02 48 8b 52 08 4c 8b c8 4d 2b 08 49 3b c1 0f 92 c0 0f b6 c0 49 2b 50 08 8b c0 48 2b d0 4c 89 09 48 89 51 08 48 8b c1 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,[rdx]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 02}
@@ -27,7 +27,7 @@
 002eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; void sub_128u_b(in ulong a, in ulong b, ref ulong c)
-; sub_128u_b_64u[0x7ff7c85bce40, 0x7ff7c85bce6f][47] = {0f 1f 44 00 00 48 8b 01 48 2b 02 49 89 00 48 8b 01 49 3b 00 0f 92 c0 0f b6 c0 49 83 c0 08 48 8b 49 08 48 2b 4a 08 8b c0 48 2b c8 49 89 08 c3}
+; sub_128u_b_64u[0x7ff7c85bcc20, 0x7ff7c85bcc4f][47] = {0f 1f 44 00 00 48 8b 01 48 2b 02 49 89 00 48 8b 01 49 3b 00 0f 92 c0 0f b6 c0 49 83 c0 08 48 8b 49 08 48 2b 4a 08 8b c0 48 2b c8 49 89 08 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,[rcx]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 01}
@@ -46,7 +46,7 @@
 002eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; void mul_128u(Pair<ulong> src, ref Pair<ulong> dst)
-; mul_128u_60632485[0x7ff7c85bce80, 0x7ff7c85bcea9][41] = {0f 1f 44 00 00 48 8b 01 48 8b 49 08 48 89 54 24 10 4c 8b c2 48 8b d0 c4 e2 b3 f6 c1 4d 89 08 48 8b 54 24 10 48 89 42 08 c3}
+; mul_128u_60632485[0x7ff7c85bcc60, 0x7ff7c85bcc89][41] = {0f 1f 44 00 00 48 8b 01 48 8b 49 08 48 89 54 24 10 4c 8b c2 48 8b d0 c4 e2 b3 f6 c1 4d 89 08 48 8b 54 24 10 48 89 42 08 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,[rcx]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 01}
@@ -61,7 +61,7 @@
 0028h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Pair<ulong> add_128u(Pair<ulong> a, Pair<ulong> b)
-; add_128u_0x[0x7ff7c85bcec0, 0x7ff7c85bceef][47] = {0f 1f 44 00 00 48 8b 02 48 8b 52 08 4c 8b c8 4d 03 08 49 3b c1 0f 97 c0 0f b6 c0 49 03 50 08 8b c0 48 03 c2 4c 89 09 48 89 41 08 48 8b c1 c3}
+; add_128u_0x[0x7ff7c85bcca0, 0x7ff7c85bcccf][47] = {0f 1f 44 00 00 48 8b 02 48 8b 52 08 4c 8b c8 4d 03 08 49 3b c1 0f 97 c0 0f b6 c0 49 03 50 08 8b c0 48 03 c2 4c 89 09 48 89 41 08 48 8b c1 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,[rdx]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 02}
@@ -80,7 +80,7 @@
 002eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Pair<ulong> xor_128u(Pair<ulong> a, Pair<ulong> b)
-; xor_128u_0x[0x7ff7c85bcf00, 0x7ff7c85bcf1e][30] = {0f 1f 44 00 00 48 8b 02 49 33 00 48 8b 52 08 49 33 50 08 48 89 01 48 89 51 08 48 8b c1 c3}
+; xor_128u_0x[0x7ff7c85bcce0, 0x7ff7c85bccfe][30] = {0f 1f 44 00 00 48 8b 02 49 33 00 48 8b 52 08 49 33 50 08 48 89 01 48 89 51 08 48 8b c1 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,[rdx]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 02}
@@ -93,7 +93,7 @@
 001dh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Pair<ulong> xnor_128u(Pair<ulong> a, Pair<ulong> b)
-; xnor_128u_0x[0x7ff7c85bcf30, 0x7ff7c85bcf54][36] = {0f 1f 44 00 00 48 8b 02 49 33 00 48 8b 52 08 49 33 50 08 48 f7 d0 48 f7 d2 48 89 01 48 89 51 08 48 8b c1 c3}
+; xnor_128u_0x[0x7ff7c85bcd10, 0x7ff7c85bcd34][36] = {0f 1f 44 00 00 48 8b 02 49 33 00 48 8b 52 08 49 33 50 08 48 f7 d0 48 f7 d2 48 89 01 48 89 51 08 48 8b c1 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,[rdx]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 02}
@@ -108,7 +108,7 @@
 0023h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Pair<ulong> negate_128u(Pair<ulong> a)
-; negate_128u_0x[0x7ff7c85bcf70, 0x7ff7c85bcf9d][45] = {0f 1f 44 00 00 48 8b 02 48 8b 52 08 48 f7 d0 48 f7 d2 4c 8d 40 01 49 3b c0 0f 97 c0 0f b6 c0 48 03 c2 4c 89 01 48 89 41 08 48 8b c1 c3}
+; negate_128u_0x[0x7ff7c85bcd50, 0x7ff7c85bcd7d][45] = {0f 1f 44 00 00 48 8b 02 48 8b 52 08 48 f7 d0 48 f7 d2 4c 8d 40 01 49 3b c0 0f 97 c0 0f b6 c0 48 03 c2 4c 89 01 48 89 41 08 48 8b c1 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,[rdx]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 02}
@@ -126,7 +126,7 @@
 002ch ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ref Pair<ulong> inc_128u(ref Pair<ulong> a)
-; inc_128u_0x[0x7ff7c85bcfb0, 0x7ff7c85bcfd9][41] = {0f 1f 44 00 00 48 8b 01 48 8d 50 01 48 3b c2 0f 97 c0 0f b6 c0 4c 8b 41 08 8b c0 49 03 c0 48 89 11 48 89 41 08 48 8b c1 c3}
+; inc_128u_0x[0x7ff7c85bcd90, 0x7ff7c85bcdb9][41] = {0f 1f 44 00 00 48 8b 01 48 8d 50 01 48 3b c2 0f 97 c0 0f b6 c0 4c 8b 41 08 8b c0 49 03 c0 48 89 11 48 89 41 08 48 8b c1 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,[rcx]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 01}
@@ -143,7 +143,7 @@
 0028h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Pair<ulong> srl_128u(Pair<ulong> a, int offset)
-; srl_128u_8821459[0x7ff7c85bcff0, 0x7ff7c85bd05a][106] = {0f 1f 44 00 00 48 8b c1 4c 8b 0a 48 8b 52 08 41 83 f8 40 7c 20 41 81 f8 80 00 00 00 7c 08 45 33 d2 45 33 db eb 3c 41 8d 48 c0 49 d3 e9 4d 8b d9 45 33 d2 eb 2d 45 8b d0 41 83 e2 3f 41 8b ca 4c 8b da 49 d3 eb 41 8b ca 49 d3 e9 41 8b c8 f7 d9 83 c1 3f 48 d1 e2 48 d3 e2 49 0b d1 4d 8b d3 4c 8b da 4c 89 10 4c 89 58 08 c3}
+; srl_128u_8821459[0x7ff7c85bcdd0, 0x7ff7c85bce3a][106] = {0f 1f 44 00 00 48 8b c1 4c 8b 0a 48 8b 52 08 41 83 f8 40 7c 20 41 81 f8 80 00 00 00 7c 08 45 33 d2 45 33 db eb 3c 41 8d 48 c0 49 d3 e9 4d 8b d9 45 33 d2 eb 2d 45 8b d0 41 83 e2 3f 41 8b ca 4c 8b da 49 d3 eb 41 8b ca 49 d3 e9 41 8b c8 f7 d9 83 c1 3f 48 d1 e2 48 d3 e2 49 0b d1 4d 8b d3 4c 8b da 4c 89 10 4c 89 58 08 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,rcx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c1}
@@ -181,7 +181,7 @@
 0069h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Pair<ulong> sll_128u(Pair<ulong> a, int offset)
-; sll_128u_12284267[0x7ff7c85bd070, 0x7ff7c85bd0da][106] = {0f 1f 44 00 00 48 8b c1 4c 8b 0a 48 8b 52 08 41 83 f8 40 7c 20 41 81 f8 80 00 00 00 7c 08 45 33 d2 45 33 db eb 3c 41 8d 48 c0 49 d3 e1 4d 8b d1 45 33 db eb 2d 45 8b d0 41 83 e2 3f 41 8b ca 48 d3 e2 41 8b c8 f7 d9 83 c1 3f 4d 8b d9 49 d1 eb 49 d3 eb 49 0b d3 41 8b ca 4d 8b d9 49 d3 e3 4c 8b d2 4c 89 10 4c 89 58 08 c3}
+; sll_128u_12284267[0x7ff7c85bce50, 0x7ff7c85bceba][106] = {0f 1f 44 00 00 48 8b c1 4c 8b 0a 48 8b 52 08 41 83 f8 40 7c 20 41 81 f8 80 00 00 00 7c 08 45 33 d2 45 33 db eb 3c 41 8d 48 c0 49 d3 e1 4d 8b d1 45 33 db eb 2d 45 8b d0 41 83 e2 3f 41 8b ca 48 d3 e2 41 8b c8 f7 d9 83 c1 3f 4d 8b d9 49 d1 eb 49 d3 eb 49 0b d3 41 8b ca 4d 8b d9 49 d3 e3 4c 8b d2 4c 89 10 4c 89 58 08 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,rcx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c1}
@@ -219,7 +219,7 @@
 0069h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit same_128u(Pair<ulong> a, Pair<ulong> b)
-; same_128u_0x[0x7ff7c85bd0f0, 0x7ff7c85bd113][35] = {0f 1f 44 00 00 48 8b 01 48 3b 02 75 10 48 8b 41 08 48 3b 42 08 0f 94 c0 0f b6 c0 eb 02 33 c0 0f b6 c0 c3}
+; same_128u_0x[0x7ff7c85bced0, 0x7ff7c85bcef3][35] = {0f 1f 44 00 00 48 8b 01 48 3b 02 75 10 48 8b 41 08 48 3b 42 08 0f 94 c0 0f b6 c0 eb 02 33 c0 0f b6 c0 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,[rcx]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 01}
@@ -235,7 +235,7 @@
 0022h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit lt_128u(Pair<ulong> a, Pair<ulong> b)
-; lt_128u_0x[0x7ff7c85bd130, 0x7ff7c85bd167][55] = {0f 1f 44 00 00 48 8b 02 48 8b 52 08 4c 8b 01 48 8b 49 08 48 3b ca 41 0f 92 c1 45 0f b6 c9 48 3b ca 75 0b 4c 3b c0 0f 92 c0 0f b6 c0 eb 02 33 c0 41 0b c1 0f b6 c0 c3}
+; lt_128u_0x[0x7ff7c85bcf10, 0x7ff7c85bcf47][55] = {0f 1f 44 00 00 48 8b 02 48 8b 52 08 4c 8b 01 48 8b 49 08 48 3b ca 41 0f 92 c1 45 0f b6 c9 48 3b ca 75 0b 4c 3b c0 0f 92 c0 0f b6 c0 eb 02 33 c0 41 0b c1 0f b6 c0 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,[rdx]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 02}
@@ -257,7 +257,7 @@
 0036h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; bit gteq_128u(Pair<ulong> a, Pair<ulong> b)
-; gteq_128u_0x[0x7ff7c85bd180, 0x7ff7c85bd1bc][60] = {0f 1f 44 00 00 48 8b 02 48 8b 52 08 4c 8b 01 48 8b 49 08 48 3b ca 41 0f 92 c1 45 0f b6 c9 48 3b ca 75 0b 4c 3b c0 0f 92 c0 0f b6 c0 eb 02 33 c0 41 0b c1 0f b6 c0 f7 d0 83 e0 01 c3}
+; gteq_128u_0x[0x7ff7c85bcf60, 0x7ff7c85bcf9c][60] = {0f 1f 44 00 00 48 8b 02 48 8b 52 08 4c 8b 01 48 8b 49 08 48 3b ca 41 0f 92 c1 45 0f b6 c9 48 3b ca 75 0b 4c 3b c0 0f 92 c0 0f b6 c0 eb 02 33 c0 41 0b c1 0f b6 c0 f7 d0 83 e0 01 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,[rdx]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 02}
@@ -281,7 +281,7 @@
 003bh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; void mul_32u(Pair<uint> src, ref Pair<uint> dst)
-; mul_32u_29752153[0x7ff7c85bd1d0, 0x7ff7c85bd1fd][45] = {0f 1f 44 00 00 48 89 4c 24 08 8b 44 24 08 8b 4c 24 0c 48 89 54 24 10 4c 8b c2 8b d0 c4 e2 33 f6 c1 45 89 08 48 8b 54 24 10 89 42 04 c3}
+; mul_32u_29752153[0x7ff7c85bcfb0, 0x7ff7c85bcfdd][45] = {0f 1f 44 00 00 48 89 4c 24 08 8b 44 24 08 8b 4c 24 0c 48 89 54 24 10 4c 8b c2 8b d0 c4 e2 33 f6 c1 45 89 08 48 8b 54 24 10 89 42 04 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov [rsp+8],rcx                         ; MOV r/m64, r64 || REX.W 89 /r || encoded[5]{48 89 4c 24 08}
@@ -297,7 +297,7 @@
 002ch ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint mod_const_16(uint a)
-; mod_const_16_32u[0x7ff7c85bd210, 0x7ff7c85bd226][22] = {0f 1f 44 00 00 8b d1 48 c1 e2 3c b8 10 00 00 00 c4 e2 fb f6 c0 c3}
+; mod_const_16_32u[0x7ff7c85bcff0, 0x7ff7c85bd006][22] = {0f 1f 44 00 00 8b d1 48 c1 e2 3c b8 10 00 00 00 c4 e2 fb f6 c0 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov edx,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b d1}
@@ -307,7 +307,7 @@
 0015h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint div_const_16(uint a)
-; div_const_16_32u[0x7ff7c85bd240, 0x7ff7c85bd257][23] = {0f 1f 44 00 00 8b c1 48 ba 00 00 00 00 00 00 00 10 c4 e2 fb f6 c0 c3}
+; div_const_16_32u[0x7ff7c85bd020, 0x7ff7c85bd037][23] = {0f 1f 44 00 00 8b c1 48 ba 00 00 00 00 00 00 00 10 c4 e2 fb f6 c0 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c1}
@@ -316,7 +316,7 @@
 0016h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint mod_const_25(uint a)
-; mod_const_25_32u[0x7ff7c85bd270, 0x7ff7c85bd290][32] = {0f 1f 44 00 00 8b d1 48 b8 71 3d 0a d7 a3 70 3d 0a 48 0f af d0 b8 19 00 00 00 c4 e2 fb f6 c0 c3}
+; mod_const_25_32u[0x7ff7c85bd050, 0x7ff7c85bd070][32] = {0f 1f 44 00 00 8b d1 48 b8 71 3d 0a d7 a3 70 3d 0a 48 0f af d0 b8 19 00 00 00 c4 e2 fb f6 c0 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov edx,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b d1}
@@ -327,7 +327,7 @@
 001fh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint div_const_25(uint a)
-; div_const_25_32u[0x7ff7c85bd2a0, 0x7ff7c85bd2b7][23] = {0f 1f 44 00 00 8b c1 48 ba 71 3d 0a d7 a3 70 3d 0a c4 e2 fb f6 c0 c3}
+; div_const_25_32u[0x7ff7c85bd080, 0x7ff7c85bd097][23] = {0f 1f 44 00 00 8b c1 48 ba 71 3d 0a d7 a3 70 3d 0a c4 e2 fb f6 c0 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c1}
@@ -336,7 +336,7 @@
 0016h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint mod_const_32(uint a)
-; mod_const_32_32u[0x7ff7c85bd2d0, 0x7ff7c85bd2e6][22] = {0f 1f 44 00 00 8b d1 48 c1 e2 3b b8 20 00 00 00 c4 e2 fb f6 c0 c3}
+; mod_const_32_32u[0x7ff7c85bd0b0, 0x7ff7c85bd0c6][22] = {0f 1f 44 00 00 8b d1 48 c1 e2 3b b8 20 00 00 00 c4 e2 fb f6 c0 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov edx,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b d1}
@@ -346,7 +346,7 @@
 0015h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint div_const_32(uint a)
-; div_const_32_32u[0x7ff7c85bd300, 0x7ff7c85bd317][23] = {0f 1f 44 00 00 8b c1 48 ba 00 00 00 00 00 00 00 08 c4 e2 fb f6 c0 c3}
+; div_const_32_32u[0x7ff7c85bd0e0, 0x7ff7c85bd0f7][23] = {0f 1f 44 00 00 8b c1 48 ba 00 00 00 00 00 00 00 08 c4 e2 fb f6 c0 c3}
 ; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c1}

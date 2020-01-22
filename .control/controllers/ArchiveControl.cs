@@ -32,11 +32,11 @@ namespace Z0
         public override void Execute()
         {             
             print(EmittingAsmArchives());
-            Emit(AssemblyId.Intrinsics); 
+            //Emit(AssemblyId.Intrinsics); 
             // Emit(AssemblyId.GMath);
             // Emit(AssemblyId.CoreFunc);
             // Emit(AssemblyId.BitCore); 
-            //Emit(AssemblyId.Logix);
+            Emit(AssemblyId.Logix);
         }
 
     }

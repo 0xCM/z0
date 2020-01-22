@@ -60,7 +60,7 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        [VectorOp, PrimalClosures(PrimalKind.Integers)]
+        [VectorOp("eval_ubl"), PrimalClosures(PrimalKind.Integers)]
         public static Vector128<T> eval<T>(UnaryBitLogicKind kind, Vector128<T> a)
             where T : unmanaged
         {
@@ -78,7 +78,7 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        [VectorOp, PrimalClosures(PrimalKind.Integers)]
+        [VectorOp("eval_ubl"), PrimalClosures(PrimalKind.Integers)]
         public static Vector256<T> eval<T>(UnaryBitLogicKind kind, Vector256<T> a)
             where T : unmanaged
         {
@@ -97,7 +97,7 @@ namespace Z0.Logix
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        [VectorOp, PrimalClosures(PrimalKind.Integers)]
+        [VectorOp("eval_cmp"), PrimalClosures(PrimalKind.Integers)]
         public static Vector128<T> eval<T>(ComparisonKind kind, Vector128<T> a, Vector128<T> b)
             where T : unmanaged            
         {
@@ -117,7 +117,7 @@ namespace Z0.Logix
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        [VectorOp, PrimalClosures(PrimalKind.Integers)]
+        [VectorOp("eval_cmp"), PrimalClosures(PrimalKind.Integers)]
         public static Vector256<T> eval<T>(ComparisonKind kind, Vector256<T> a, Vector256<T> b)
             where T : unmanaged            
         {
@@ -137,7 +137,7 @@ namespace Z0.Logix
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        [VectorOp, PrimalClosures(PrimalKind.Integers)]
+        [VectorOp("eval_bbl"), PrimalClosures(PrimalKind.Integers)]
         public static Vector128<T> eval<T>(BinaryBitLogicKind kind, Vector128<T> a, Vector128<T> b)
             where T : unmanaged
         {
@@ -171,7 +171,7 @@ namespace Z0.Logix
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        [VectorOp, PrimalClosures(PrimalKind.Integers)]
+        [VectorOp("eval_bbl"), PrimalClosures(PrimalKind.Integers)]
         public static Vector256<T> eval<T>(BinaryBitLogicKind kind, Vector256<T> a, Vector256<T> b)
             where T : unmanaged
         {
@@ -205,7 +205,7 @@ namespace Z0.Logix
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        [VectorOp, PrimalClosures(PrimalKind.Integers)]
+        [VectorOp("eval_tbl"), PrimalClosures(PrimalKind.Integers)]
         public static Vector128<T> eval<T>(TernaryBitLogicKind kind, Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T : unmanaged
                 => lookup<T>(n128,kind)(x,y,z);
@@ -218,7 +218,7 @@ namespace Z0.Logix
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        [VectorOp, PrimalClosures(PrimalKind.Integers)]
+        [VectorOp("eval_tbl"), PrimalClosures(PrimalKind.Integers)]
         public static Vector256<T> eval<T>(TernaryBitLogicKind kind, Vector256<T> x, Vector256<T> y, Vector256<T> z)
             where T : unmanaged
                 => lookup<T>(n256,kind)(x,y,z);
@@ -230,7 +230,7 @@ namespace Z0.Logix
         /// <param name="a">The subject</param>
         /// <param name="count">The shift bit count</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        [VectorOp, PrimalClosures(PrimalKind.UnsignedInts)]
+        [VectorOp("eval_shift"), PrimalClosures(PrimalKind.UnsignedInts)]
         public static Vector128<T> eval<T>(ShiftOpKind kind, Vector128<T> a, [Imm] byte count)
             where T : unmanaged
         {
@@ -251,7 +251,7 @@ namespace Z0.Logix
         /// <param name="a">The subject</param>
         /// <param name="count">The shift amount</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        [VectorOp, PrimalClosures(PrimalKind.UnsignedInts)]
+        [VectorOp("eval_shift"), PrimalClosures(PrimalKind.UnsignedInts)]
         public static Vector256<T> eval<T>(ShiftOpKind kind, Vector256<T> a, [Imm] byte count)
             where T : unmanaged
         {
@@ -265,7 +265,7 @@ namespace Z0.Logix
             }
         }
 
-        [VectorOp, PrimalClosures(PrimalKind.All)]
+        [VectorOp("eval_ba"), PrimalClosures(PrimalKind.All)]
         public static Vector128<T> eval<T>(BinaryArithmeticKind kind, Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -277,8 +277,7 @@ namespace Z0.Logix
             }
         }
 
-
-        [VectorOp, PrimalClosures(PrimalKind.All)]
+        [VectorOp("eval_ba"), PrimalClosures(PrimalKind.All)]
         public static Vector256<T> eval<T>(BinaryArithmeticKind kind, Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -295,6 +294,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
+        [Op("lu_ubl"), PrimalClosures(PrimalKind.Integers)]
         public static UnaryOp<Vector128<T>> lookup<T>(N128 n, UnaryBitLogicKind id)
             where T : unmanaged            
         {
@@ -311,6 +311,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
+        [Op("lu_ubl"), PrimalClosures(PrimalKind.Integers)]
         public static UnaryOp<Vector256<T>> lookup<T>(N256 n, UnaryBitLogicKind kind)
             where T : unmanaged            
         {
@@ -322,6 +323,7 @@ namespace Z0.Logix
             }
         }
 
+        [Op("lu_cmp"), PrimalClosures(PrimalKind.Integers)]
         public static BinaryOp<Vector128<T>> lookup<T>(N128 n,ComparisonKind kind)
             where T : unmanaged
         {
@@ -334,6 +336,7 @@ namespace Z0.Logix
             }
         }
 
+        [Op("lu_cmp"), PrimalClosures(PrimalKind.Integers)]
         public static BinaryOp<Vector256<T>> lookup<T>(N256 n, ComparisonKind kind)
             where T : unmanaged
         {

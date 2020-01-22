@@ -50,9 +50,57 @@ namespace Z0
             else if(method.IsPrimal())
                 return FromPrimalFunc(method);
             else
-                return Moniker.Parse($"{method.Name}_{method.GetHashCode()}");
+                return FromAny(method);//Moniker.Parse($"{method.Name}_{method.GetHashCode()}");
         }
 
+        static Moniker FromAny(MethodInfo method)
+        {
+            var id = method.FastOpName() + PartSep;
+            if(method.IsConstructedGenericMethod)
+                id += GenericIndicator;            
+            
+            var paramtypes = method.ParameterTypes().ToArray();
+
+            for(var i=0; i<paramtypes.Length; i++)
+            {
+                var arg = paramtypes[i];                
+
+                var w = (int)arg.Width();
+                if(w != 0)
+                {
+                    if(i != 0)
+                        id += PartSep;
+
+                    if(arg.IsSegmented())
+                    {
+                       id += $"{w}{SegSep}";
+                       var segtype = arg.GenericArguments().Single();
+                       var segwidth = (int)segtype.Width();
+                       id += $"{segwidth}{segtype.Kind().Indicator()}";
+                    }
+                    else
+                    {
+                        id += PrimalType.primalsig(arg);
+                    }
+                }
+                else if(TypeNatType.test(arg))
+                {
+                    id += PartSep;
+                    id += Moniker.NatIndicator;
+                    id += TypeNatType.value(arg);
+                }
+                else if(arg.IsEnum)
+                {
+                    id += PartSep;
+                    id += $"{arg.Name}";
+                }
+
+
+            }
+            return Moniker.Parse(id);
+
+
+        }
         static Moniker FromPrimalFunc(MethodInfo method)
             => OpIdentity.define(method.FastOpName(), method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
 
@@ -92,7 +140,7 @@ namespace Z0
         {
             var param = method.ParameterTypes().First();       
             var segkind = param.GenericArguments().FirstOrDefault().Kind();         
-            return OpIdentity.segmented(method,param.Width(), segkind);
+            return OpIdentity.segmented(method, param.Width(), segkind);
         }
 
         static Moniker FromNatOp(MethodInfo method)

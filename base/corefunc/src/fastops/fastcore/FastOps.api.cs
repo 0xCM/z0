@@ -7,68 +7,12 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;    
-    using System.Runtime.Intrinsics;
     using System.Reflection;
 
     using static zfunc;
 
-
     public static class FastOps
     {            
-        public static OpSpec specify(MethodInfo method)
-        {            
-            var dst = specinit(method);
-            Span<byte> buffer = new byte[NativeReader.DefaultBufferLen];
-            dst.Id = OpIdentity.Provider.Define(dst.Method);
-            method.CustomAttribute<OpAttribute>()
-                .OnSome(z => z.Name.OnSome(n => dst.Name = n))
-                .OnNone(() => dst.Name = dst.Method.Name);
-            dst.Label = dst.Method.Signature().Format();
-            return dst;
-        }
-
-        public static OpSpec specify(MethodInfo method, Moniker m, Span<byte> buffer)
-        {            
-            var dst = specinit(method);
-            dst.Id = m;
-            method.CustomAttribute<OpAttribute>()
-                .OnSome(z => z.Name.OnSome(n => dst.Name = n))
-                .OnNone(() => dst.Name = dst.Method.Name);
-            dst.Label = dst.Method.Signature().Format();
-            return dst;
-        }
-
-
-        static OpSpec specinit(MethodInfo method, params Type[] args)
-        {
-            var dst = new OpSpec();
-
-            if(method.IsConstructedGenericMethod)
-            {
-                dst.Method = method;
-                dst.TypeArgs = method.GetGenericArguments();
-            }
-            else if(method.IsGenericMethodDefinition)
-            {
-                dst.Method = method.MakeGenericMethod(args);
-                dst.TypeArgs = args;
-            }
-            else if(method.IsGenericMethod)
-            {
-                var def = method.GetGenericMethodDefinition();
-                dst.Method = def.MakeGenericMethod(args);
-                dst.TypeArgs = args;
-            }
-            else
-            {
-                dst.Method = method;
-                dst.TypeArgs = new Type[]{};
-            }
-            return dst;
-        }
-
         /// <summary>
         /// Determines whether a method defines a formalized operation
         /// </summary>
@@ -116,7 +60,6 @@ namespace Z0
 
         public static IEnumerable<GenericOpInfo> generics(IEnumerable<Type> hosts)
             => hosts.SelectMany(h => h.FastOpGenericMethods());
-
 
         public static OpClosure closure(Moniker id, PrimalKind k, MethodInfo m)
             => new OpClosure(id, k, m);
