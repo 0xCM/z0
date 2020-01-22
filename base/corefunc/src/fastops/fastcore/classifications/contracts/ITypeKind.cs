@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Characterizes a higher-kind
+    /// Characterizes a higher-kinded type
     /// </summary>
     public interface ITypeKind : IKind<TypeKind>
     {        

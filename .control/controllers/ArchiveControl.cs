@@ -11,23 +11,32 @@ namespace Z0
     using System.Reflection;
 
     using static zfunc;
-    using static AsmServiceMessages;
+    using static ControlMessages;
+    
 
     class ArchiveControl : Controller<ArchiveControl>
     {                
-        void Emit(AssemblyId id, bool pll)
-            => FindCatalog(id).OnSome(c => c.Emit(pll)).OnNone(() => CatalogNotFound(id));
+        IOperationCatalog CheckCatalog(IOperationCatalog catalog)
+        {
+            if(catalog.IsEmpty)
+                print(CatalogEmpty(catalog));
+            else
+                print(EmittingCatalog(catalog));
+            return catalog;
+        }
+
+        void Emit(AssemblyId id)
+            => FindCatalog(id).OnSome(c => CheckCatalog(c).Emit()).OnNone(() => CatalogNotFound(id));
         
-        void Emit(IEnumerable<AssemblyId> src, bool pll)
-            => iter(src, id => Emit(id,pll));
 
         public override void Execute()
         {             
-            var pll = false;
-            Emit(AssemblyId.Intrinsics, pll); 
-            Emit(AssemblyId.GMath, pll);
-            Emit(AssemblyId.CoreFunc, pll);
-            Emit(AssemblyId.BitCore, pll);    
+            print(EmittingAsmArchives());
+            Emit(AssemblyId.Intrinsics); 
+            // Emit(AssemblyId.GMath);
+            // Emit(AssemblyId.CoreFunc);
+            // Emit(AssemblyId.BitCore); 
+            //Emit(AssemblyId.Logix);
         }
 
     }

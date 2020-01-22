@@ -30,7 +30,7 @@ namespace Z0
             => C.Designated.Designates.Where(d => d.Role == AssemblyRole.Test).Select(x => x);
 
 
-        static AsmFuncInfo[] ResolveExample<T>(N128 w, T t = default)
+        static AsmFunction[] ResolveExample<T>(N128 w, T t = default)
             where T : unmanaged
         {
             var imm = new byte[]{199,205};
@@ -40,7 +40,7 @@ namespace Z0
             return r1.Union(r2).Union(r3).ToArray();
         }
 
-        static AsmFuncInfo[] ResolveExample<T>(N256 w, T t = default)
+        static AsmFunction[] ResolveExample<T>(N256 w, T t = default)
             where T : unmanaged
         {
             var imm = new byte[]{199,205};

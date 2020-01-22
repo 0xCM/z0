@@ -16,15 +16,24 @@ namespace Z0
         {
             get 
             {
-                var name = DeclaringAssembly.GetName().Name;
-                var parts = name.Split('.');
-                if(parts.Length != 0)
-                    return parts.Last();
+                if(DeclaringAssembly.Designator(out var designator) && designator.Id != AssemblyId.None)
+                {
+                    return designator.Id.ToString().ToLower();
+                }
                 else
-                    return name;
+                {
+                    var name = DeclaringAssembly.GetName().Name;
+                    var parts = name.Split('.');
+                    if(parts.Length != 0)
+                        return parts.Last();
+                    else
+                        return name;
+                }
             }
         }
             
+        public virtual bool IsEmpty
+            => false;            
         public virtual IEnumerable<GenericOpInfo> GenericOps 
             => new GenericOpInfo[]{};
 
@@ -50,7 +59,9 @@ namespace Z0
 
     public sealed class EmptyCatalog : OpCatalog<EmptyCatalog>
     {
+        public override bool IsEmpty => true;
 
+        public override string CatalogName => "empty";
     }
 
 }

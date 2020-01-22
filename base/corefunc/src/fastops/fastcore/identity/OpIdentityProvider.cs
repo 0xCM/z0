@@ -34,7 +34,7 @@ namespace Z0
             if(method.IsOpenGeneric())
                 return OpIdentity.define(method.Name, 0, PrimalKind.None, true, false);
             else if(method.IsNonGeneric() && method.FastOpName() != method.Name)
-                return OpIdentity.define(method.FastOpName());
+                return Moniker.Parse(method.FastOpName());
             else if(method.IsSpanOp())
                 return FromSpanOp(method);
             else if(method.IsNatOp())
@@ -50,7 +50,7 @@ namespace Z0
             else if(method.IsPrimal())
                 return FromPrimalFunc(method);
             else
-                return new Moniker($"{method.Name}_{method.GetHashCode()}");
+                return Moniker.Parse($"{method.Name}_{method.GetHashCode()}");
         }
 
         static Moniker FromPrimalFunc(MethodInfo method)
@@ -143,7 +143,7 @@ namespace Z0
                 }
 
             }
-            return OpIdentity.define(id);
+            return Moniker.Parse(id);
         }
     }
 }

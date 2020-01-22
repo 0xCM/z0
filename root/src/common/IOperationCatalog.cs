@@ -50,5 +50,7 @@ namespace Z0
         /// </summary>
         Assembly DeclaringAssembly {get;}         
 
+        bool IsEmpty {get;}
+
     }
 }

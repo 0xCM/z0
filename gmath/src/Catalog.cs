@@ -25,9 +25,6 @@ namespace Z0
             => items(typeof(gmath), typeof(mathspan), typeof(gfp));
 
         public override IEnumerable<Type> DirectApiHosts
-            => items(typeof(math), typeof(fmath));
-               
-        public override string CatalogName 
-            => nameof(gmath);
+            => items(typeof(math), typeof(fmath));               
     }
 }

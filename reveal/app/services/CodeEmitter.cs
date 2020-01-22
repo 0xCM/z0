@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The assembly source</param>
         /// <param name="dst">The target path</param>
         /// <param name="append">Wheter to append content to an existing file or overwrite an existing file</param>
-        public static void EmitAsm(this AsmFuncInfo src, FilePath dst, bool append = false)
+        public static void EmitAsm(this AsmFunction src, FilePath dst, bool append = false)
         {
             using var writer = EmissionWriter(dst, append);
             if(append)
@@ -31,79 +31,35 @@ namespace Z0
             writer.Write(src.FormatDetail());
         }
 
-        public static void EmitAsm(this MethodDisassembly disassembly, FilePath dst, bool append = false)        
-            => AsmFunction.define(disassembly).EmitAsm(dst,append);
-
-        /// <summary>
-        /// Writes each disasesembled method to file derived from the name of the method
-        /// </summary>
-        /// <param name="disassembly">Disassembled methods to emit</param>
-        /// <param name="dst">The target folder</param>
-        /// <param name="append">Whether existing files should be appended or replaced</param>
-        public static void EmitAsmFiles(this IEnumerable<MethodDisassembly> disassembly, FolderPath dst, bool append = false)
+        public static void EmitAsm(this IEnumerable<AsmFunction> functions, FilePath dst)        
         {
-            foreach(var asm in AsmFunction.define(disassembly))
-            {
-                var filename = FileName.Define(asm.Name, "asm");
-                asm.EmitAsm(dst + filename,append);
+            using var writer = EmissionWriter(dst);            
+            writer.WriteLine($"; {now().ToLexicalString()}");
+            var src = functions.ToArray();
+            for(var i=0; i< src.Length; i++)
+            {   
+                var spec = src[i];             
+                writer.Write(spec.FormatDetail());
+                if(i != i-1)
+                    writer.WriteLine(AsmSeparator);
             }
         }
 
-        public static void EmitAsm(this IEnumerable<MethodDisassembly> disassembly, FilePath dst)        
+        public static void EmitCil(this IEnumerable<AsmFunction> functions, string name)
         {
-            using var writer = EmissionWriter(dst);
-            var asm = AsmFunction.define(disassembly).ToArray();
-            asm.Emit(writer);
-        }
-
-        public static void EmitCil(this IEnumerable<MethodDisassembly> disassembly, FilePath dst)
-        {
-            using var writer = EmissionWriter(dst);
+            using var writer = EmissionWriter(name, "il", false);
             writer.WriteLine($"// {now().ToLexicalString()}");
-            disassembly.EmitCil(writer);
+            foreach(var f in functions)
+                writer.WriteLine(f.Cil.MapValueOrElse(cil => cil.Format(), () => string.Empty));
         }
 
-        public static void EmitAsm(this IEnumerable<MethodDisassembly> disassembly, string name, bool timestamped = false)
+        public static void EmitCil(this IEnumerable<AsmFunction> functions, FilePath dst)
         {
-            using var writer = EmissionWriter(name, "asm", timestamped);
-            var asm = disassembly.Select(d => AsmFunction.define(d)).ToArray();
-            asm.Emit(writer);
-        }
-
-        public static void EmitCil(this IEnumerable<MethodDisassembly> disassembly, string name, bool timestamped = false)
-        {
-            using var writer = EmissionWriter(name, "il", timestamped);
+            using var writer = EmissionWriter(dst, false);
             writer.WriteLine($"// {now().ToLexicalString()}");
-            foreach(var d in disassembly)
-                writer.WriteLine(d.FormatCil());
+            foreach(var f in functions)
+                writer.WriteLine(f.Cil.MapValueOrElse(cil => cil.Format(), () => string.Empty));
         }
-        
-        public static void Emit(this IEnumerable<MethodDisassembly> disassembly, string name, bool asm = true, bool cil = false)
-        {
-            if(asm)
-                disassembly.EmitAsm(name); 
-            
-            if(cil)
-                disassembly.EmitCil(name); 
-        }
-
-        public static void Emit(this AsmFuncInfo[] src, FilePath dstfile)
-        {
-            using var dst = EmissionWriter(dstfile);
-            src.Emit(dst);
-        }
-
-        public static void Emit(this AsmFuncInfo[] src, string name)
-        {
-            using var dst = EmissionWriter(name, "asm", false);
-            src.Emit(dst);
-        }        
-
-        public static void EmitAsm(this IEnumerable<MethodInfo> methods, FilePath dst)
-            => Deconstructor.Deconstruct(methods).EmitAsm(dst);
-        
-        public static void EmitCil(this IEnumerable<MethodInfo> methods, FilePath name)
-            => Deconstructor.Deconstruct(methods).EmitCil(name);
 
         static readonly string AsmSeparator = new string('-', 160);
 
@@ -111,24 +67,6 @@ namespace Z0
         {
             dst.FolderPath.CreateIfMissing();
             return new StreamWriter(dst.FullPath, append);
-        }
-
-        static void Emit(this AsmFuncInfo[] src, StreamWriter dst)
-        {
-            dst.WriteLine($"; {now().ToLexicalString()}");
-            for(var i=0; i< src.Length; i++)
-            {   
-                var spec = src[i];             
-                dst.Write(spec.FormatDetail());
-                if(i != i-1)
-                    dst.WriteLine(AsmSeparator);
-            }
-        }
-
-        static void EmitCil(this IEnumerable<MethodDisassembly> disassembly, StreamWriter dst)
-        {
-            foreach(var d in disassembly)
-                dst.WriteLine(d.FormatCil());
         }
 
         static StreamWriter EmissionWriter(string name, string extension, bool timestamped)

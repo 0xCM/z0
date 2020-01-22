@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to deconstruct</param>
         /// <param name="dst">The buffer to which native data will be written</param>
-        public static INativeMemberData CaptureNative(this MethodInfo m, Span<byte> dst)
+        public static NativeMemberCapture CaptureNative(this MethodInfo m, Span<byte> dst)
             => NativeCapture.capture(m,dst);
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="d">The delegate to capture</param>
         /// <param name="dst">The buffer to which native data will be written</param>
         /// <typeparam name="T">The delegate type</typeparam>
-        public static INativeMemberData CaptureNative(this Delegate d, Span<byte> dst)
+        public static NativeMemberCapture CaptureNative(this Delegate d, Span<byte> dst)
             => NativeCapture.capture(d,dst);
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="m">The generic method (or definition)</param>
         /// <param name="arg">The parameter over which to close the method</typeparam>
         /// <param name="dst">The buffer to which native data will be written</param>
-        public static INativeMemberData CaptureNative(this MethodInfo m, Type arg, Span<byte> dst)
+        public static NativeMemberCapture CaptureNative(this MethodInfo m, Type arg, Span<byte> dst)
             => NativeCapture.capture(m, arg, dst);
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="m">The generic method (or definition)</param>
         /// <param name="buffersize">The size of the buffer used to capture the native data</param>
         /// <typeparam name="T">The parameter over which to close the method</typeparam>
-        public static INativeMemberData CaptureNative(this MethodInfo m, Type arg)
+        public static NativeMemberCapture CaptureNative(this MethodInfo m, Type arg)
             => NativeCapture.capture(m, arg, new byte[NativeReader.DefaultBufferLen]);
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Z0
         /// </summary>
         /// <param name="host">The type that defines the methods to capture</param>
         /// <param name="arg">The type over which to close each method</param>
-        public static IEnumerable<INativeMemberData> CaptureNative(this Type host, Type arg)
+        public static IEnumerable<NativeMemberCapture> CaptureNative(this Type host, Type arg)
             => NativeCapture.capture(host,arg);
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Z0
         /// </summary>
         /// <param name="methods">The type that defines the methods to capture</param>
         /// <param name="arg">The type over which to close each method</param>
-        public static IEnumerable<INativeMemberData> CaptureNative(this IEnumerable<MethodInfo> methods, Type arg)
+        public static IEnumerable<NativeMemberCapture> CaptureNative(this IEnumerable<MethodInfo> methods, Type arg)
             => NativeCapture.capture(methods,arg);
 
         /// <summary>

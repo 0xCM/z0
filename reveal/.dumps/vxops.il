@@ -1,5 +1,5 @@
-// 2020-01-20 01:59:21:273
-// Id := 100664081, Name := Z0.bit Z0.vxops::check_and_1(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+// 2020-01-22 01:43:39:415
+// Id := 100664082, Name := Z0.bit Z0.vxops::check_and_1(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
 // bit check_and_1(Vector128<uint> x, Vector128<uint> y)
 // IL
 bit check_and_1(Vector128<uint> x, Vector128<uint> y)
@@ -65,7 +65,7 @@ bit check_and_1(Vector128<uint> x, Vector128<uint> y)
     IL_0092: ret
 }
 
-// Id := 100664082, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.vxops::and_class(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+// Id := 100664083, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.vxops::and_class(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
 // Vector128<uint> and_class(Vector128<uint> x, Vector128<uint> y)
 // IL
 Vector128<uint> and_class(Vector128<uint> x, Vector128<uint> y)
@@ -77,7 +77,7 @@ Vector128<uint> and_class(Vector128<uint> x, Vector128<uint> y)
     IL_000C: ret
 }
 
-// Id := 100664083, Name := System.UInt32 Z0.vxops::and_class_scalar(System.UInt32,System.UInt32)
+// Id := 100664084, Name := System.UInt32 Z0.vxops::and_class_scalar(System.UInt32,System.UInt32)
 // uint and_class_scalar(uint x, uint y)
 // IL
 uint and_class_scalar(uint x, uint y)
@@ -89,7 +89,7 @@ uint and_class_scalar(uint x, uint y)
     IL_000C: ret
 }
 
-// Id := 100664084, Name := System.UInt32 Z0.vxops::and_class_scalar(Z0.AndSkeleton/CAnd128`1<System.UInt32>,System.UInt32,System.UInt32)
+// Id := 100664085, Name := System.UInt32 Z0.vxops::and_class_scalar(Z0.AndSkeleton/CAnd128`1<System.UInt32>,System.UInt32,System.UInt32)
 // uint and_class_scalar(CAnd128<uint> f, uint x, uint y)
 // IL
 uint and_class_scalar(CAnd128<uint> f, uint x, uint y)
@@ -101,7 +101,7 @@ uint and_class_scalar(CAnd128<uint> f, uint x, uint y)
     IL_0008: ret
 }
 
-// Id := 100664085, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.vxops::and_struct(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+// Id := 100664086, Name := System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.vxops::and_struct(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
 // Vector128<uint> and_struct(Vector128<uint> x, Vector128<uint> y)
 // IL
 Vector128<uint> and_struct(Vector128<uint> x, Vector128<uint> y)
@@ -115,7 +115,7 @@ Vector128<uint> and_struct(Vector128<uint> x, Vector128<uint> y)
     IL_000F: ret
 }
 
-// Id := 100664086, Name := System.UInt32 Z0.vxops::and_struct_scalar(System.UInt32,System.UInt32)
+// Id := 100664087, Name := System.UInt32 Z0.vxops::and_struct_scalar(System.UInt32,System.UInt32)
 // uint and_struct_scalar(uint x, uint y)
 // IL
 uint and_struct_scalar(uint x, uint y)
@@ -129,7 +129,7 @@ uint and_struct_scalar(uint x, uint y)
     IL_000F: ret
 }
 
-// Id := 100664087, Name := System.Void Z0.vxops::loop_1(System.ReadOnlySpan`1<System.UInt32>,System.Span`1<System.UInt32>)
+// Id := 100664088, Name := System.Void Z0.vxops::loop_1(System.ReadOnlySpan`1<System.UInt32>,System.Span`1<System.UInt32>)
 // void loop_1(ReadOnlySpan<uint> src, Span<uint> dst)
 // IL
 void loop_1(ReadOnlySpan<uint> src, Span<uint> dst)
@@ -142,7 +142,7 @@ void loop_1(ReadOnlySpan<uint> src, Span<uint> dst)
     IL_000D: ret
 }
 
-// Id := 100664088, Name := System.Void Z0.vxops::loop_2(Z0.ArrayExchange`1<System.UInt32>,Z0.ArrayExchange`1<System.UInt32>)
+// Id := 100664089, Name := System.Void Z0.vxops::loop_2(Z0.ArrayExchange`1<System.UInt32>,Z0.ArrayExchange`1<System.UInt32>)
 // void loop_2(ArrayExchange<uint> src, ArrayExchange<uint> dst)
 // IL
 void loop_2(ArrayExchange<uint> src, ArrayExchange<uint> dst)
@@ -155,7 +155,7 @@ void loop_2(ArrayExchange<uint> src, ArrayExchange<uint> dst)
     IL_000D: ret
 }
 
-// Id := 100664089, Name := System.Void Z0.vxops::pipeline_1(System.ReadOnlySpan`1<System.UInt32>,System.Span`1<System.UInt32>)
+// Id := 100664090, Name := System.Void Z0.vxops::pipeline_1(System.ReadOnlySpan`1<System.UInt32>,System.Span`1<System.UInt32>)
 // void pipeline_1(ReadOnlySpan<uint> src, Span<uint> dst)
 // IL
 void pipeline_1(ReadOnlySpan<uint> src, Span<uint> dst)
@@ -193,7 +193,7 @@ void pipeline_1(ReadOnlySpan<uint> src, Span<uint> dst)
     IL_0039: ret
 }
 
-// Id := 100664090, Name := System.Void Z0.vxops::pipeline_2(System.ReadOnlySpan`1<System.UInt32>,System.Span`1<System.UInt32>)
+// Id := 100664091, Name := System.Void Z0.vxops::pipeline_2(System.ReadOnlySpan`1<System.UInt32>,System.Span`1<System.UInt32>)
 // void pipeline_2(ReadOnlySpan<uint> src, Span<uint> dst)
 // IL
 void pipeline_2(ReadOnlySpan<uint> src, Span<uint> dst)
@@ -231,7 +231,7 @@ void pipeline_2(ReadOnlySpan<uint> src, Span<uint> dst)
     IL_0039: ret
 }
 
-// Id := 100664091, Name := System.UInt32 Z0.vxops::and_negate(System.UInt32)
+// Id := 100664092, Name := System.UInt32 Z0.vxops::and_negate(System.UInt32)
 // uint and_negate(uint x)
 // IL
 uint and_negate(uint x)
@@ -243,7 +243,7 @@ uint and_negate(uint x)
     IL_000C: ret
 }
 
-// Id := 100664092, Name := System.UInt32 Z0.vxops::and_negate_ops(System.UInt32)
+// Id := 100664093, Name := System.UInt32 Z0.vxops::and_negate_ops(System.UInt32)
 // uint and_negate_ops(uint x)
 // IL
 uint and_negate_ops(uint x)
@@ -261,7 +261,7 @@ uint and_negate_ops(uint x)
     IL_0016: ret
 }
 
-// Id := 100664093, Name := System.UInt32 Z0.vxops::vxor_128x32u_1(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+// Id := 100664094, Name := System.UInt32 Z0.vxops::vxor_128x32u_1(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
 // uint vxor_128x32u_1(Vector128<uint> x, Vector128<uint> y)
 // IL
 uint vxor_128x32u_1(Vector128<uint> x, Vector128<uint> y)

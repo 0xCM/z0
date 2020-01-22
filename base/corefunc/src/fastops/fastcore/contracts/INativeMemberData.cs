@@ -29,6 +29,11 @@ namespace Z0
         AsmCode Code {get;}
 
         /// <summary>
+        /// Encapsulates capture diagnostic information
+        /// </summary>
+        CaptureResult CaptureInfo {get;}
+
+        /// <summary>
         /// Defines the inclusive lower bound of the block
         /// </summary>
         ulong StartAddress 
@@ -51,8 +56,5 @@ namespace Z0
 
         string Label 
             => Code.Label;
-
     }
-
-
 }

@@ -1,8 +1,7 @@
-; 2020-01-20 01:59:20:939
+; 2020-01-22 01:43:39:188
 ; long loop_inc(int start, int max, long count)
-; static ReadOnlySpan<byte> loop_inc_32iBytes => new byte[25]{0x0F,0x1F,0x44,0x00,0x00,0x49,0x8B,0xC0,0x3B,0xCA,0x7D,0x0C,0x4C,0x63,0xC1,0x49,0x03,0xC0,0xFF,0xC1,0x3B,0xCA,0x7C,0xF4,0xC3};
-; [0x7ff7c838eb20, 0x7ff7c838eb39], 25 bytes
-; 2020-01-20 01:59:20:939
+; loop_inc_32i[0x7ff7c838d2f0, 0x7ff7c838d309][25] = {0f 1f 44 00 00 49 8b c0 3b ca 7d 0c 4c 63 c1 49 03 c0 ff c1 3b ca 7c f4 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,r8                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b c0}
 0008h cmp ecx,edx                             ; CMP r32, r/m32 || o32 3B /r || encoded[2]{3b ca}
@@ -15,9 +14,8 @@
 0018h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; long loop_inc_test_neq(int start, int test, long count)
-; static ReadOnlySpan<byte> loop_inc_test_neq_32iBytes => new byte[25]{0x0F,0x1F,0x44,0x00,0x00,0x49,0x8B,0xC0,0x3B,0xCA,0x74,0x0C,0x4C,0x63,0xC1,0x49,0x03,0xC0,0xFF,0xC1,0x3B,0xCA,0x75,0xF4,0xC3};
-; [0x7ff7c838eb50, 0x7ff7c838eb69], 25 bytes
-; 2020-01-20 01:59:20:939
+; loop_inc_test_neq_32i[0x7ff7c838d320, 0x7ff7c838d339][25] = {0f 1f 44 00 00 49 8b c0 3b ca 74 0c 4c 63 c1 49 03 c0 ff c1 3b ca 75 f4 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,r8                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b c0}
 0008h cmp ecx,edx                             ; CMP r32, r/m32 || o32 3B /r || encoded[2]{3b ca}
@@ -30,9 +28,8 @@
 0018h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; long loop_dec(int start, int min, long count)
-; static ReadOnlySpan<byte> loop_dec_32iBytes => new byte[25]{0x0F,0x1F,0x44,0x00,0x00,0x49,0x8B,0xC0,0x3B,0xCA,0x7C,0x0C,0x4C,0x63,0xC1,0x49,0x03,0xC0,0xFF,0xC9,0x3B,0xCA,0x7D,0xF4,0xC3};
-; [0x7ff7c838eb80, 0x7ff7c838eb99], 25 bytes
-; 2020-01-20 01:59:20:940
+; loop_dec_32i[0x7ff7c838d350, 0x7ff7c838d369][25] = {0f 1f 44 00 00 49 8b c0 3b ca 7c 0c 4c 63 c1 49 03 c0 ff c9 3b ca 7d f4 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,r8                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b c0}
 0008h cmp ecx,edx                             ; CMP r32, r/m32 || o32 3B /r || encoded[2]{3b ca}
@@ -45,9 +42,8 @@
 0018h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; long loop_inc_step(int start, int max, int step, long count)
-; static ReadOnlySpan<byte> loop_inc_step_32iBytes => new byte[26]{0x0F,0x1F,0x44,0x00,0x00,0x49,0x8B,0xC1,0x3B,0xCA,0x7D,0x0D,0x4C,0x63,0xC9,0x49,0x03,0xC1,0x41,0x03,0xC8,0x3B,0xCA,0x7C,0xF3,0xC3};
-; [0x7ff7c838ebb0, 0x7ff7c838ebca], 26 bytes
-; 2020-01-20 01:59:20:940
+; loop_inc_step_32i[0x7ff7c838d380, 0x7ff7c838d39a][26] = {0f 1f 44 00 00 49 8b c1 3b ca 7d 0d 4c 63 c9 49 03 c1 41 03 c8 3b ca 7c f3 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,r9                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b c1}
 0008h cmp ecx,edx                             ; CMP r32, r/m32 || o32 3B /r || encoded[2]{3b ca}
@@ -60,9 +56,8 @@
 0019h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; long loop_dec_step(int start, int min, int step, long count)
-; static ReadOnlySpan<byte> loop_dec_step_32iBytes => new byte[26]{0x0F,0x1F,0x44,0x00,0x00,0x49,0x8B,0xC1,0x3B,0xCA,0x7C,0x0D,0x4C,0x63,0xC9,0x49,0x03,0xC1,0x41,0x2B,0xC8,0x3B,0xCA,0x7D,0xF3,0xC3};
-; [0x7ff7c838ebe0, 0x7ff7c838ebfa], 26 bytes
-; 2020-01-20 01:59:20:940
+; loop_dec_step_32i[0x7ff7c838d3b0, 0x7ff7c838d3ca][26] = {0f 1f 44 00 00 49 8b c1 3b ca 7c 0d 4c 63 c9 49 03 c1 41 2b c8 3b ca 7d f3 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,r9                              ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{49 8b c1}
 0008h cmp ecx,edx                             ; CMP r32, r/m32 || o32 3B /r || encoded[2]{3b ca}
@@ -75,9 +70,8 @@
 0019h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; long loop_inc_call(long count)
-; static ReadOnlySpan<byte> loop_inc_call_64iBytes => new byte[30]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0xBA,0x66,0x00,0x00,0x00,0x48,0x63,0xCA,0x48,0x03,0xC1,0xFF,0xC2,0x81,0xFA,0x66,0x06,0x00,0x00,0x7C,0xF0,0xC3};
-; [0x7ff7c838ec10, 0x7ff7c838ec2e], 30 bytes
-; 2020-01-20 01:59:20:940
+; loop_inc_call_64i[0x7ff7c838d3e0, 0x7ff7c838d3fe][30] = {0f 1f 44 00 00 48 8b c1 ba 66 00 00 00 48 63 ca 48 03 c1 ff c2 81 fa 66 06 00 00 7c f0 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,rcx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c1}
 0008h mov edx,66h                             ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{ba 66 00 00 00}
@@ -89,9 +83,8 @@
 001dh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; long loop_inc_test_neq_call(long count)
-; static ReadOnlySpan<byte> loop_inc_test_neq_call_64iBytes => new byte[30]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0xBA,0x66,0x00,0x00,0x00,0x48,0x63,0xCA,0x48,0x03,0xC1,0xFF,0xC2,0x81,0xFA,0x66,0x06,0x00,0x00,0x75,0xF0,0xC3};
-; [0x7ff7c838ec40, 0x7ff7c838ec5e], 30 bytes
-; 2020-01-20 01:59:20:940
+; loop_inc_test_neq_call_64i[0x7ff7c838d410, 0x7ff7c838d42e][30] = {0f 1f 44 00 00 48 8b c1 ba 66 00 00 00 48 63 ca 48 03 c1 ff c2 81 fa 66 06 00 00 75 f0 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,rcx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c1}
 0008h mov edx,66h                             ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{ba 66 00 00 00}
@@ -103,9 +96,8 @@
 001dh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; long loop_inc_step_call(long count)
-; static ReadOnlySpan<byte> loop_inc_step_call_64iBytes => new byte[31]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0xBA,0x66,0x00,0x00,0x00,0x48,0x63,0xCA,0x48,0x03,0xC1,0x83,0xC2,0x06,0x81,0xFA,0x66,0x06,0x00,0x00,0x7C,0xEF,0xC3};
-; [0x7ff7c838ec70, 0x7ff7c838ec8f], 31 bytes
-; 2020-01-20 01:59:20:940
+; loop_inc_step_call_64i[0x7ff7c838d440, 0x7ff7c838d45f][31] = {0f 1f 44 00 00 48 8b c1 ba 66 00 00 00 48 63 ca 48 03 c1 83 c2 06 81 fa 66 06 00 00 7c ef c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,rcx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c1}
 0008h mov edx,66h                             ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{ba 66 00 00 00}
@@ -117,9 +109,8 @@
 001eh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; long loop_dec_call(long count)
-; static ReadOnlySpan<byte> loop_dec_call_64iBytes => new byte[27]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0xBA,0x66,0x06,0x00,0x00,0x48,0x63,0xCA,0x48,0x03,0xC1,0xFF,0xCA,0x83,0xFA,0x66,0x7D,0xF3,0xC3};
-; [0x7ff7c838eca0, 0x7ff7c838ecbb], 27 bytes
-; 2020-01-20 01:59:20:940
+; loop_dec_call_64i[0x7ff7c838d470, 0x7ff7c838d48b][27] = {0f 1f 44 00 00 48 8b c1 ba 66 06 00 00 48 63 ca 48 03 c1 ff ca 83 fa 66 7d f3 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,rcx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c1}
 0008h mov edx,666h                            ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{ba 66 06 00 00}
@@ -131,9 +122,8 @@
 001ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; long loop_dec_step_call(long count)
-; static ReadOnlySpan<byte> loop_dec_step_call_64iBytes => new byte[28]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0xBA,0x66,0x06,0x00,0x00,0x48,0x63,0xCA,0x48,0x03,0xC1,0x83,0xC2,0xFA,0x83,0xFA,0x66,0x7D,0xF2,0xC3};
-; [0x7ff7c838ecd0, 0x7ff7c838ecec], 28 bytes
-; 2020-01-20 01:59:20:940
+; loop_dec_step_call_64i[0x7ff7c838d4a0, 0x7ff7c838d4bc][28] = {0f 1f 44 00 00 48 8b c1 ba 66 06 00 00 48 63 ca 48 03 c1 83 c2 fa 83 fa 66 7d f2 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,rcx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c1}
 0008h mov edx,666h                            ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{ba 66 06 00 00}
@@ -145,9 +135,8 @@
 001bh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; int FindByte(ulong src)
-; static ReadOnlySpan<byte> FindByte_64uBytes => new byte[40]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x48,0xF7,0xD8,0x48,0x23,0xC1,0x48,0xC1,0xE8,0x08,0x48,0xBA,0x80,0x03,0x83,0x02,0x82,0x01,0x81,0x00,0x48,0x0F,0xAF,0xC2,0x48,0xC1,0xE8,0x37,0x83,0xE0,0x07,0xC3};
-; [0x7ff7c838ed00, 0x7ff7c838ed28], 40 bytes
-; 2020-01-20 01:59:20:940
+; FindByte_64u[0x7ff7c838d4d0, 0x7ff7c838d4f8][40] = {0f 1f 44 00 00 48 8b c1 48 f7 d8 48 23 c1 48 c1 e8 08 48 ba 80 03 83 02 82 01 81 00 48 0f af c2 48 c1 e8 37 83 e0 07 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,rcx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c1}
 0008h neg rax                                 ; NEG r/m64 || REX.W F7 /3 || encoded[3]{48 f7 d8}
@@ -160,9 +149,8 @@
 0027h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; int FindByte(in Block256<byte> src)
-; static ReadOnlySpan<byte> FindByte_14859795Bytes => new byte[71]{0x0F,0x1F,0x44,0x00,0x00,0x33,0xC0,0x48,0x8B,0x11,0x48,0x8B,0xCA,0x4C,0x63,0xC0,0x42,0x0F,0xB6,0x0C,0x01,0x48,0x85,0xC9,0x75,0x07,0xFF,0xC0,0x83,0xF8,0x21,0x7C,0xE9,0x48,0x8B,0xD1,0x48,0xF7,0xDA,0x48,0x23,0xD1,0x48,0xC1,0xEA,0x08,0x48,0xB9,0x80,0x03,0x83,0x02,0x82,0x01,0x81,0x00,0x48,0x0F,0xAF,0xD1,0x48,0xC1,0xEA,0x37,0x83,0xE2,0x07,0x8D,0x04,0xC2,0xC3};
-; [0x7ff7c838f140, 0x7ff7c838f187], 71 bytes
-; 2020-01-20 01:59:20:940
+; FindByte_14926099[0x7ff7c838d910, 0x7ff7c838d957][71] = {0f 1f 44 00 00 33 c0 48 8b 11 48 8b ca 4c 63 c0 42 0f b6 0c 01 48 85 c9 75 07 ff c0 83 f8 21 7c e9 48 8b d1 48 f7 da 48 23 d1 48 c1 ea 08 48 b9 80 03 83 02 82 01 81 00 48 0f af d1 48 c1 ea 37 83 e2 07 8d 04 c2 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h xor eax,eax                             ; XOR r32, r/m32 || o32 33 /r || encoded[2]{33 c0}
 0007h mov rdx,[rcx]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 11}
@@ -186,9 +174,8 @@
 0046h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; int downBy2ne(int amount)
-; static ReadOnlySpan<byte> downBy2ne_32iBytes => new byte[25]{0x0F,0x1F,0x44,0x00,0x00,0x33,0xC0,0xBA,0x09,0x00,0x00,0x00,0x03,0xC1,0x83,0xC2,0xFE,0x83,0xFA,0x01,0x75,0xF6,0x03,0xC2,0xC3};
-; [0x7ff7c838f1a0, 0x7ff7c838f1b9], 25 bytes
-; 2020-01-20 01:59:20:940
+; downBy2ne_32i[0x7ff7c838d970, 0x7ff7c838d989][25] = {0f 1f 44 00 00 33 c0 ba 09 00 00 00 03 c1 83 c2 fe 83 fa 01 75 f6 03 c2 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h xor eax,eax                             ; XOR r32, r/m32 || o32 33 /r || encoded[2]{33 c0}
 0007h mov edx,9                               ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{ba 09 00 00 00}
@@ -200,9 +187,8 @@
 0018h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; int upBy1ne(int amount)
-; static ReadOnlySpan<byte> upBy1ne_32iBytes => new byte[24]{0x0F,0x1F,0x44,0x00,0x00,0x33,0xC0,0xBA,0x01,0x00,0x00,0x00,0x03,0xC1,0xFF,0xC2,0x83,0xFA,0x08,0x75,0xF7,0x03,0xC2,0xC3};
-; [0x7ff7c838f1d0, 0x7ff7c838f1e8], 24 bytes
-; 2020-01-20 01:59:20:940
+; upBy1ne_32i[0x7ff7c838d9a0, 0x7ff7c838d9b8][24] = {0f 1f 44 00 00 33 c0 ba 01 00 00 00 03 c1 ff c2 83 fa 08 75 f7 03 c2 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h xor eax,eax                             ; XOR r32, r/m32 || o32 33 /r || encoded[2]{33 c0}
 0007h mov edx,1                               ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{ba 01 00 00 00}
@@ -214,9 +200,8 @@
 0017h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; int downBy1ne(int amount)
-; static ReadOnlySpan<byte> downBy1ne_32iBytes => new byte[24]{0x0F,0x1F,0x44,0x00,0x00,0x33,0xC0,0xBA,0x09,0x00,0x00,0x00,0x03,0xC1,0xFF,0xCA,0x83,0xFA,0x02,0x75,0xF7,0x03,0xC2,0xC3};
-; [0x7ff7c838f200, 0x7ff7c838f218], 24 bytes
-; 2020-01-20 01:59:20:940
+; downBy1ne_32i[0x7ff7c838d9d0, 0x7ff7c838d9e8][24] = {0f 1f 44 00 00 33 c0 ba 09 00 00 00 03 c1 ff ca 83 fa 02 75 f7 03 c2 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h xor eax,eax                             ; XOR r32, r/m32 || o32 33 /r || encoded[2]{33 c0}
 0007h mov edx,9                               ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{ba 09 00 00 00}
@@ -228,9 +213,8 @@
 0017h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; int upBy2ne(int amount)
-; static ReadOnlySpan<byte> upBy2ne_32iBytes => new byte[25]{0x0F,0x1F,0x44,0x00,0x00,0x33,0xC0,0xBA,0x01,0x00,0x00,0x00,0x03,0xC1,0x83,0xC2,0x02,0x83,0xFA,0x09,0x75,0xF6,0x03,0xC2,0xC3};
-; [0x7ff7c838f230, 0x7ff7c838f249], 25 bytes
-; 2020-01-20 01:59:20:940
+; upBy2ne_32i[0x7ff7c838da00, 0x7ff7c838da19][25] = {0f 1f 44 00 00 33 c0 ba 01 00 00 00 03 c1 83 c2 02 83 fa 09 75 f6 03 c2 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h xor eax,eax                             ; XOR r32, r/m32 || o32 33 /r || encoded[2]{33 c0}
 0007h mov edx,1                               ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{ba 01 00 00 00}
@@ -242,9 +226,8 @@
 0018h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; int upBy3neWrap(int amount)
-; static ReadOnlySpan<byte> upBy3neWrap_32iBytes => new byte[29]{0x0F,0x1F,0x44,0x00,0x00,0x33,0xC0,0xBA,0x01,0x00,0x00,0x00,0x03,0xC1,0x83,0xC2,0x03,0x48,0x0F,0xBF,0xD2,0x83,0xFA,0x08,0x75,0xF2,0x03,0xC2,0xC3};
-; [0x7ff7c838f260, 0x7ff7c838f27d], 29 bytes
-; 2020-01-20 01:59:20:940
+; upBy3neWrap_32i[0x7ff7c838da30, 0x7ff7c838da4d][29] = {0f 1f 44 00 00 33 c0 ba 01 00 00 00 03 c1 83 c2 03 48 0f bf d2 83 fa 08 75 f2 03 c2 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h xor eax,eax                             ; XOR r32, r/m32 || o32 33 /r || encoded[2]{33 c0}
 0007h mov edx,1                               ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{ba 01 00 00 00}
@@ -257,9 +240,8 @@
 001ch ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; int downBy3neWrap(int amount)
-; static ReadOnlySpan<byte> downBy3neWrap_32iBytes => new byte[29]{0x0F,0x1F,0x44,0x00,0x00,0x33,0xC0,0xBA,0x08,0x00,0x00,0x00,0x03,0xC1,0x83,0xC2,0xFD,0x48,0x0F,0xBF,0xD2,0x83,0xFA,0x01,0x75,0xF2,0x03,0xC2,0xC3};
-; [0x7ff7c838f290, 0x7ff7c838f2ad], 29 bytes
-; 2020-01-20 01:59:20:940
+; downBy3neWrap_32i[0x7ff7c838da60, 0x7ff7c838da7d][29] = {0f 1f 44 00 00 33 c0 ba 08 00 00 00 03 c1 83 c2 fd 48 0f bf d2 83 fa 01 75 f2 03 c2 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h xor eax,eax                             ; XOR r32, r/m32 || o32 33 /r || encoded[2]{33 c0}
 0007h mov edx,8                               ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{ba 08 00 00 00}

@@ -12,6 +12,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
+    using static CaptureTermReason;
 
     /// <summary>
     /// Defines basic capabilty to read native data for a jitted method
@@ -25,22 +26,23 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to read</param>
         /// <param name="dst">The target buffer</param>
-        public static INativeMemberData read(Moniker id, MethodInfo m, Span<byte> dst)
+        public static NativeMemberCapture read(Moniker id, MethodInfo m, Span<byte> dst)
         {            
             try
             {
                 var pSrc = jit(m);
                 var pSrcCurrent = pSrc;            
                 var start = (ulong)pSrc;
-                var end = capture(pSrc, dst);            
+                var result = capture(pSrc, dst);            
+                var end = result.End;
                 var bytesRead = (int)(end - start);
                 var code = dst.Slice(0, bytesRead).ToArray();
-                return NativeMethodData.Define(id, m, (start, end), code);         
+                return NativeMemberCapture.Define(id, m, (start, end), code,result);         
             }
             catch(Exception e)
             {
                 error(e);
-                return NativeMethodData.Empty;                    
+                return NativeMemberCapture.Empty;                    
             }
         }
 
@@ -49,7 +51,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to read</param>
         /// <param name="dst">The target buffer</param>
-        public static INativeMemberData read(MethodInfo m, Span<byte> dst)
+        public static NativeMemberCapture read(MethodInfo m, Span<byte> dst)
             => read(OpIdentity.Provider.Define(m), m, dst);
 
         /// <summary>
@@ -57,46 +59,40 @@ namespace Z0
         /// </summary>
         /// <param name="d">The dynamic delegate</param>
         /// <param name="dst">The target buffer</param>
-        public static unsafe INativeMemberData read(Moniker id, DynamicDelegate d, Span<byte> dst)
+        public static unsafe NativeMemberCapture read(Moniker id, DynamicDelegate d, Span<byte> dst)
         {
             var pSrc = jit(d);
             var pSrcCurrent = pSrc;
-            var start = (ulong)pSrc;         
-            var end = capture(pSrc, dst);   
+            var start = (ulong)pSrc;       
+            var result =  capture(pSrc, dst);   
+            var end = result.End;
             var bytesRead = (int)(end - start);
             var code = dst.Slice(0, bytesRead).ToArray();
-            return NativeMethodData.Define(id, d.SourceMethod, (start, end), code);
+            return NativeMemberCapture.Define(id, d, (start, end), code, result);
         }
-
-        /// <summary>
-        /// Captures native code produced by the JIT for a dynamic delegate
-        /// </summary>
-        /// <param name="d">The dynamic delegate</param>
-        /// <param name="dst">The target buffer</param>
-        public static unsafe INativeMemberData read(DynamicDelegate d, Span<byte> dst)
-            => read(OpIdentity.Provider.Define(d.SourceMethod), d, dst);
             
         /// <summary>
         /// Runs the jitter on a delegate and captures the emitted binary assembly data
         /// </summary>
         /// <param name="m">The method to read</param>
         /// <param name="dst">The target buffer</param>
-        public static unsafe INativeMemberData read(Moniker id, Delegate d, Span<byte> dst)
+        public static unsafe NativeMemberCapture read(Moniker id, Delegate d, Span<byte> dst)
         {
             try
             {
                 var pSrc = jit(d);
                 var pSrcCurrent = pSrc;            
                 var start = (ulong)pSrc;
-                var end = capture(pSrc, dst);
+                var result = capture(pSrc, dst);
+                var end =result.End;
                 var bytesRead = (int)(end - start);
                 var code = dst.Slice(0, bytesRead).ToArray();
-                return NativeDelegateData.Define(id, d, (start, end), code);
+                return NativeMemberCapture.Define(id, d, (start, end), code, result);
             }
             catch(Exception e)
             {
                 error(e);
-                return NativeDelegateData.Empty;                    
+                return NativeMemberCapture.Empty;                    
             }
         }
 
@@ -105,7 +101,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to read</param>
         /// <param name="dst">The target buffer</param>
-        public static unsafe INativeMemberData read(Delegate d, Span<byte> dst)
+        public static unsafe NativeMemberCapture read(Delegate d, Span<byte> dst)
             => read(OpIdentity.Provider.Define(d.Method), d, dst);
 
         /// <summary>
@@ -115,7 +111,7 @@ namespace Z0
         /// <param name="def">The generic method definition, obtained by MethodInfo.GetGenericMethodDefinition</param>
         /// <param name="arg">The type over which to close the generic method</param>
         /// <param name="dst">The target buffer</param>
-        public static INativeMemberData generic(MethodInfo def, Type arg, Span<byte> dst)
+        public static NativeMemberCapture generic(MethodInfo def, Type arg, Span<byte> dst)
             => read(def.MakeGenericMethod(arg), dst);
 
         /// <summary>
@@ -127,7 +123,7 @@ namespace Z0
         /// <param name="arg">The type over which to close each method</param>
         /// <param name="buffer">The staging buffer, cleared after each iteration</param>
         /// <typeparam name="T">The type over which to close the methods</typeparam>
-        public static IEnumerable<INativeMemberData> gmethods(Type host, Type arg)            
+        public static IEnumerable<NativeMemberCapture> gmethods(Type host, Type arg)            
         {
             var buffer = new byte[NativeReader.DefaultBufferLen];     
             var definitions = host.StaticMethods().OpenGeneric(1).Select(m => m.GetGenericMethodDefinition());       
@@ -143,7 +139,7 @@ namespace Z0
         /// <param name="arg">The type over which to close the generic type</param>
         /// <param name="captured">Callback to receive captured data</param>
         /// <param name="bufferlen">The length of the staging buffer</param>
-        public static IEnumerable<INativeMemberData> gtype(Type typedef, Type arg)
+        public static IEnumerable<NativeMemberCapture> gtype(Type typedef, Type arg)
         {
             var type = typedef.MakeGenericType(arg);
             var methods = type.StaticMethods().ToArray();
@@ -189,7 +185,7 @@ namespace Z0
             return ref dst;
         }
 
-        internal static ulong capture(byte* pSrc, Span<byte> dst)
+        internal static CaptureResult capture(byte* pSrc, Span<byte> dst)
         {
             const byte ZED = 0;
             const byte RET = 0xc3;
@@ -213,25 +209,67 @@ namespace Z0
                     var x3 = dst[offset];
 
                     if(x0 == RET && x1 == SBB)
-                        return (ulong)pSrcCurrent - 2;
+                    {
+                        var reason = RET_SBB;
+                        var end = (ulong)pSrcCurrent - 2;
+                        var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
+                        var result = CaptureResult.Define((ulong)pSrc, end, reason, snapshot);
+                        return result;
+                    }
 
                     if(x0 == RET && x1 == INTR)
-                        return (ulong)pSrcCurrent - 2;
+                    {
+                        var reason = RET_INTR;
+                        var end = (ulong)pSrcCurrent - 2;
+                        var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
+                        var result = CaptureResult.Define((ulong)pSrc, end, reason, snapshot);
+                        return result;
+                    }
 
                     if((x0 == RET && x1 == INTR && x2 == INTR))
-                        return (ulong)pSrcCurrent - 2;
+                    {
+                        var reason = RET_INTRx2;
+                        var end = (ulong)pSrcCurrent - 2;
+                        var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
+                        var result = CaptureResult.Define((ulong)pSrc, end, reason, snapshot);
+                        return result;
+                    }
 
                     if((x0 == RET && x1 == ZED && x2 == SBB))
-                        return (ulong)pSrcCurrent - 2;
+                    {
+                        var reason = RET_ZED_SBB;
+                        var end = (ulong)pSrcCurrent - 2;
+                        var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
+                        var result = CaptureResult.Define((ulong)pSrc, end, reason, snapshot);
+                        return result;
+                    }
 
                     if(x0 == RET && x1 == ZED && x2 == ZED && x3 == ZED)
-                        return (ulong)pSrcCurrent - 2;
+                    {
+                        var reason = RET_ZEDx3;
+                        var end = (ulong)pSrcCurrent - 2;
+                        var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
+                        var result = CaptureResult.Define((ulong)pSrc, end, reason, snapshot);
+                        return result;
+                    }
 
                     if((x0 == INTR && x1 == INTR))
-                        return (ulong)pSrcCurrent - 2;
+                    {
+                        var reason = INTRx2;
+                        var end = (ulong)pSrcCurrent - 2;
+                        var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
+                        var result = CaptureResult.Define((ulong)pSrc, end, reason, snapshot);
+                        return result;
+                    }
 
                     if((x0 == ZED && x1 == ZED && x2 == SBB))
-                        return (ulong)pSrcCurrent - 3;                    
+                    {
+                        var reason = ZEDx2_SBB;
+                        var end = (ulong)pSrcCurrent - 3;
+                        var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
+                        var result = CaptureResult.Define((ulong)pSrc, end, reason, snapshot);
+                        return result;
+                    }
                 }
 
                 if(offset >= 5 
@@ -241,9 +279,17 @@ namespace Z0
                     && (dst[offset - 1] == ZED)                     
                     && (dst[offset - 0] == ZED)                     
                     )
-                return (ulong)pSrcCurrent - 4;
+                {
+                    var reason = ZEDx5;
+                    var end = (ulong)pSrcCurrent - 4;
+                    var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
+                    var result = CaptureResult.Define((ulong)pSrc, end, reason, snapshot);
+                    return result;
+                }
             }
-            return (ulong)pSrcCurrent;
+            return CaptureResult.Define((ulong)pSrc, (ulong)pSrcCurrent, EOB, dst.ToArray());
+            
+            //return (ulong)pSrcCurrent;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source delegate</param>
         /// <param name="dst">The target buffer</param>
-        public static INativeMemberData capture(Delegate src, Span<byte> dst)
+        public static NativeMemberCapture capture(Delegate src, Span<byte> dst)
             => NativeReader.read(src, dst);
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source method</param>
         /// <param name="dst">The target buffer</param>
-        public static INativeMemberData capture(MethodInfo src, Span<byte> dst)
+        public static NativeMemberCapture capture(MethodInfo src, Span<byte> dst)
             => NativeReader.read(src, dst);
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="m">The generic method (or definition)</param>
         /// <param name="arg">The type over which to close the method</typeparam>
         /// <param name="dst">The buffer to which native data will be written</param>
-        public static INativeMemberData capture(MethodInfo m, Type arg, Span<byte> dst)
+        public static NativeMemberCapture capture(MethodInfo m, Type arg, Span<byte> dst)
         {
             var def = m.IsGenericMethodDefinition ? m : m.GetGenericMethodDefinition();
             return NativeReader.generic(def, arg, dst);
@@ -111,7 +111,7 @@ namespace Z0
         /// </summary>
         /// <param name="host">The type that defines the methods to deconstruct</param>
         /// <param name="arg">The type over which to close each method</param>
-        public static IEnumerable<INativeMemberData> capture(IEnumerable<MethodInfo> methods, Type arg)
+        public static IEnumerable<NativeMemberCapture> capture(IEnumerable<MethodInfo> methods, Type arg)
         {
             var buffer = new byte[NativeReader.DefaultBufferLen];
             foreach(var m in methods)                
@@ -123,7 +123,7 @@ namespace Z0
         /// </summary>
         /// <param name="host">The type that defines the methods to capture</param>
         /// <param name="arg">The type over which to close each method</param>
-        public static IEnumerable<INativeMemberData> capture(Type host, Type arg)
+        public static IEnumerable<NativeMemberCapture> capture(Type host, Type arg)
         {
             foreach(var m in NativeReader.gmethods(host, arg))
                 yield return m;                    

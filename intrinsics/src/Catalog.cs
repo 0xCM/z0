@@ -22,7 +22,7 @@ namespace Z0
         public override IEnumerable<Type> DirectApiHosts
             => items(typeof(dinx));
                
-        public override string CatalogName 
-            => nameof(ginx);
+        // public override string CatalogName 
+        //     => nameof(ginx);
     }
 }

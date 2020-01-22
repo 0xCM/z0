@@ -6,16 +6,14 @@ namespace Z0
 {        
     using System;
     using System.Linq;
-    using System.Reflection;
+    using System.Collections.Generic;
 
     public interface IAsmCatalogEmitter
     {
-       void EmitCatalog(bool pll);
+       IEnumerable<AsmDescriptor> EmitCatalog();
        
-       void EmitDirect(bool pll);
+       IEnumerable<AsmDescriptor> EmitDirect();
        
-       void EmitGeneric(bool pll);
-         
+       IEnumerable<AsmDescriptor> EmitGeneric();         
     }
-
 }

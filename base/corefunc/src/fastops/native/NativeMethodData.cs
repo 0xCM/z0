@@ -14,18 +14,31 @@ namespace Z0
     /// <summary>
     /// Represents a contiguous block of memory that represents native data that defines a method
     /// </summary>
-    sealed class NativeMethodData : NativeMemberData<MethodInfo>
+    public sealed class NativeMethodData :  INativeMemberData
     {        
         public static NativeMethodData Empty => default;
 
-        public static NativeMethodData Define(Moniker id, MethodInfo method, MemoryRange location, byte[] content)
-            => new NativeMethodData(id, method, location, content);
+        public static NativeMethodData Define(Moniker id, MethodInfo src, MemoryRange location, byte[] content, CaptureResult result)
+            => new NativeMethodData(id, src, location, content, result);
 
         [MethodImpl(Inline)]
-        NativeMethodData(Moniker id, MethodInfo method, MemoryRange location, byte[] content)
-            : base(id, method, method, location, content)
+        NativeMethodData(Moniker id, MethodInfo src, MemoryRange location, byte[] content, CaptureResult result)
         {
+            require((int)location.Length == content.Length);
+            this.Method = src;
+            this.Location = location;
+            this.Code = AsmCode.Define(id, src.Signature().Format(), content);
+            this.CaptureInfo = result;
 
         }
+
+        public MethodInfo Method {get;}
+
+        public MemoryRange Location {get;}
+
+        public AsmCode Code {get;}
+
+        public CaptureResult CaptureInfo {get;}
+
     }
 }

@@ -25,9 +25,6 @@ namespace Z0
             => items(typeof(gbits));
 
         public override IEnumerable<Type> DirectApiHosts
-            => items(typeof(Bits));
-               
-        public override string CatalogName 
-            => "bitcore";
+            => items(typeof(Bits));               
     }
 }

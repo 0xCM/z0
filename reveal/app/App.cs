@@ -24,28 +24,38 @@ namespace Z0
 
         static void Deconstruct(bool asm, bool cil, params Type[] types)
         {
+            var builder = AsmServices.FunctionBuilder();
             foreach(var t in types)
             {
-                var deconstructed = Deconstructor.Deconstruct(t);
+                var functions = Deconstructor.Functions(t);
 
                 if(asm)
                 {
-                    var dstPath = AsmCodeEmitter.OutPath(DumpFolder, t.DisplayName());
-                    var emitter = AsmCodeEmitter.Create(dstPath);
-                    emitter.EmitAsm(AsmFunction.define(deconstructed),false);
-                    // var functions = AsmFunction.from(Deconstructor.Deconstruct(t));
-                    // emitter.EmitAsm(functions,false);                    
+                    var emitter = AsmCodeEmitter.Create(AsmCodeEmitter.OutPath(DumpFolder, t.DisplayName()));
+                    emitter.EmitAsm(functions,false);
                 }
 
                 if(cil)
-                    Deconstructor.Deconstruct(t).EmitCil(t.DisplayName());
+                    functions.EmitCil(t.DisplayName());
             }
         }
 
+        static void Extract(params Type[] types)
+        {
+            foreach(var t in types)
+            {
+                var name = t.DisplayName();
+                var functions = Deconstructor.Functions(t);
+                var emitter = AsmCodeEmitter.Create(AsmCodeEmitter.OutPath(DumpFolder, name));
+                emitter.EmitAsm(functions);
+                functions.EmitCil(name);
+                
+            }
+        }
 
         static void Deconstruct<T>(IDeconstructable<T> src)
         {
-            var deconstructed = Deconstructor.Deconstruct(typeof(T));
+            var deconstructed = Deconstructor.Functions(typeof(T));
             deconstructed.EmitAsm(src.AsmTargetPath);
             deconstructed.EmitCil(src.CilTargetPath);            
         }
@@ -53,12 +63,8 @@ namespace Z0
         void Disassemble(Type t)
             => Deconstruct(true, true, t);
 
-
         void Disassemble(bool asm, bool cil)
-        {
-            
-            //Deconstructor.Shred(typeof(math), typeof(fmath), typeof(Bits),typeof(dinx));
-            
+        {                        
             Deconstruct(new ExperimentalScenarios());
             Disassemble(typeof(OC.msops));    
             Disassemble(typeof(OC.butterfly));    
@@ -95,7 +101,9 @@ namespace Z0
             Disassemble(typeof(OC.vpermoc));    
             Disassemble(typeof(OC.vshift));  
 
-            Disassemble(typeof(gmathops));    
+            Extract(typeof(gmathops));    
+            //Disassemble(typeof(gmathops));    
+
             Disassemble(typeof(OC.gxops));    
 
             Disassemble(typeof(zfoc));    

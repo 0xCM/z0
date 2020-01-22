@@ -17,25 +17,31 @@ namespace Z0
     public readonly struct DynamicDelegate
     {
         [MethodImpl(Inline)]
-        public static DynamicDelegate<D> Define<D>(MethodInfo src, DynamicMethod dst, D op)
+        public static DynamicDelegate<D> Define<D>(Moniker id, MethodInfo src, DynamicMethod dst, D op)
             where D : Delegate
-                => new DynamicDelegate<D>(src, dst,op);
+                => new DynamicDelegate<D>(id, src, dst,op);
 
         [MethodImpl(Inline)]
-        public static DynamicDelegate Define(MethodInfo src, DynamicMethod dst, Delegate op)
-            => new DynamicDelegate(src, dst,op);
+        public static DynamicDelegate Define(Moniker id,  MethodInfo src, DynamicMethod dst, Delegate op)
+            => new DynamicDelegate(id,src, dst,op);
 
         [MethodImpl(Inline)]
         public static implicit operator Delegate(DynamicDelegate d)
             => d.DynamicOp;
 
         [MethodImpl(Inline)]
-        public DynamicDelegate(MethodInfo src, DynamicMethod dst, Delegate op)
+        DynamicDelegate(Moniker id, MethodInfo src, DynamicMethod dst, Delegate op)
         {
+            this.Id = id;
             this.SourceMethod = src;
             this.DynamicMethod = dst;
             this.DynamicOp = op;
         }
+
+        /// <summary>
+        /// The delegate identity
+        /// </summary>
+        public readonly Moniker Id;
 
         /// <summary>
         /// The method invoked by the dynamic operator that provides the substance of the operation
@@ -59,6 +65,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public DynamicDelegate<D> As<D>()
             where D : Delegate
-                => DynamicDelegate.Define(SourceMethod, DynamicMethod, Unsafe.As<Delegate,D>(ref Unsafe.AsRef(in this.DynamicOp)));
+                => DynamicDelegate.Define(Id, SourceMethod, DynamicMethod, Unsafe.As<Delegate,D>(ref Unsafe.AsRef(in this.DynamicOp)));
     }
 }

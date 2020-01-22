@@ -22,7 +22,7 @@ namespace Z0
             this.Label = asmBody.Method.Signature().Format();
             this.AsmBody = asmBody;
             this.Method = asmBody.Method;
-            this.CilFunction = cilfunc;
+            this.Cil = cilfunc;
         }
 
         public Moniker Id {get;}
@@ -39,6 +39,6 @@ namespace Z0
 
         public MethodInfo Method {get; set;}
     
-        public Option<CilFunction> CilFunction {get;set;}
+        public Option<CilFunction> Cil {get;set;}
     }
 }

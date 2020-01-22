@@ -28,13 +28,13 @@ namespace Z0
             var x = Random.CpuVector<uint>(n256);
             var f = shuffler<uint>(n2);
             Span<byte> buffer = new byte[100];
-            var decode = AsmDecoder.block(f.CaptureNative(buffer));
+            var decode = AsmDecoder.function(f.CaptureNative(buffer));
             Trace(decode.FormatInstructionLines());        
         }
 
         public void immtest_2()
         {
-            var instructions = AsmDecoder.block(GetType().DeclaredMethods().WithNameLike(nameof(shuffler)).Single().CaptureNative(typeof(uint)));
+            var instructions = AsmDecoder.function(GetType().DeclaredMethods().WithNameLike(nameof(shuffler)).Single().CaptureNative(typeof(uint)));
             Trace(instructions.FormatInstructionLines());
         }
 
@@ -42,7 +42,7 @@ namespace Z0
         {
             Span<byte> buffer = new byte[100];
             var methods = typeof(gmath).DeclaredMethods().Public().BinaryOps().OpenGeneric().WithNameStartingWith("nand");
-            var data = AsmDecoder.blocks(methods.CaptureNative(typeof(double)));
+            var data = AsmDecoder.functions(methods.CaptureNative(typeof(double)));
             foreach(var item in data)
                 Trace(item.FormatInstructionLines());
             

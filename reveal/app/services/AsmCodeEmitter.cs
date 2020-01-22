@@ -36,17 +36,17 @@ namespace Z0
         void EmitTimestamp(StreamWriter writer)
             => writer.WriteLine($"; {now().ToLexicalString()}"); 
 
-        public void EmitAsm(IEnumerable<AsmFuncInfo> disassembly, bool append)        
+        public void EmitAsm(IEnumerable<AsmFunction> disassembly, bool append = false)        
         {
             using var writer = Writer(append);
 
             var asm = disassembly.ToArray();
             if(asm.Length != 0)
             {            
-                if(append)
+                if(!append)
                     EmitTimestamp(writer);
                 
-                Emit(asm, writer, !append);
+                Emit(asm, writer);
             }
         }
 
@@ -56,18 +56,15 @@ namespace Z0
             return new StreamWriter(TargetPath.FullPath, append);
         }
 
-        void Emit(AsmFuncInfo[] src, StreamWriter dst, bool timestamp)
+        void Emit(AsmFunction[] src, StreamWriter dst)
         {
             if(src.Length == 0)
                 return;
             
-            if(timestamp)
-                EmitTimestamp(dst);
-
             for(var i=0; i< src.Length; i++)
             {   
                 var spec = src[i];             
-                dst.Write(spec.FormatDetail());
+                dst.Write(spec.FormatDetail(AsmFormatConfig.Default.WithoutTimestamp()));
                 if(i != i-1)
                     dst.WriteLine(AsmSeparator);
             }

@@ -32,27 +32,40 @@ namespace Z0
 
         readonly ClrMetadataIndex MdIx;
 
-        /// <summary>
-        /// Disassembles reified methods declared by the source type
-        /// </summary>
-        /// <param name="src">The source type</param>
-        public static MethodDisassembly[] Deconstruct(Type src)
-            => Deconstruct(src.DeclaredMethods().NonGeneric().Concrete().NonSpecial().ToArray()).ToArray();
+        public static AsmFunction[] Functions(Type src)
+            => Functions(src.DeclaredMethods().NonGeneric().Concrete().NonSpecial().ToArray()).ToArray();
     
-                  
-        public static IEnumerable<MethodDisassembly> Deconstruct(IEnumerable<MethodInfo> methods)
+        // public static IEnumerable<AsmFunction> Deconstruct(IEnumerable<MethodInfo> methods)
+        // {
+        //     methods.JitMethods();
+        //     var modules = methods.Select(x => x.Module).Distinct();
+        //     using var decon = new Deconstructor(modules);
+        //     foreach(var m in methods)
+        //     {
+        //         var d = decon.Disassemble(m);
+        //         if(d)
+        //             yield return d.ValueOrDefault();
+        //     }            
+        // }
+
+        public static IEnumerable<AsmFunction> Functions(IEnumerable<MethodInfo> methods)
         {
             methods.JitMethods();
             var modules = methods.Select(x => x.Module).Distinct();
             using var decon = new Deconstructor(modules);
             foreach(var m in methods)
             {
-                var d = decon.Disassemble(m);
+                var d = decon.Function(m);
                 if(d)
-                    yield return d.ValueOrDefault();
+                    yield return d.Value;                    
             }            
         }
-        
+
+        Option<AsmFunction> Function(MethodInfo method)
+            => from block in ReadNativeMethodData(method)
+                    let decoded = AsmDecoder.function(block, MdIx)
+                    select decoded;
+
         Deconstructor(IEnumerable<Module> modules)
         {
             Target = DataTarget.AttachToProcess(Process.GetCurrentProcess().Id, uint.MaxValue, AttachFlag.Passive);
@@ -68,111 +81,53 @@ namespace Z0
             => target.ClrVersions.Single(x => x.Flavor == ClrFlavor.Core).CreateRuntime();
 
         /// <summary>
-        /// Queries the runtime for the runtime method corresponding to a supplied <see cref='MethodInfo'/>
+        /// Queries the runtime for the runtime method corresponding to a supplied method
         /// </summary>
         /// <param name="rt">The source runtime</param>
         /// <param name="src">The represented method</param>
-        ClrMethod GetRuntimeMethod(MethodInfo src)
-            =>  Runtime.GetMethodByHandle((ulong)src.MethodHandle.Value.ToInt64());
+        Option<ClrMethod> GetRuntimeMethod(MethodInfo src)
+            => Runtime.GetMethodByHandle((ulong)src.MethodHandle.Value.ToInt64());
             
-        Option<MethodDisassembly> Disassemble(MethodInfo method)
+        Option<AsmFunction> Disassemble(MethodInfo method)
         {
             try
             {
-                var clrMethod = GetRuntimeMethod(method);
-                if(clrMethod == null || clrMethod.NativeCode == 0)
-                {
-                    error($"Method {method.Name} not found");
-                    return default;
-                }
-                var id = OpIdentity.Provider.Define(method);
-                var asmBody = DecodeAsm(method);
-                var cilfunc = MdIx.FindCilFunction(method).ValueOrDefault();                        
-                return MethodDisassembly.Define(id, asmBody, cilfunc);
-            }
-            catch(NoCodeException)
-            {
-                warn($"{method.DisplayName()}: No code was found");
-                return none<MethodDisassembly>();
+                return
+                    from block in ReadNativeContent(method)
+                    let id = OpIdentity.Provider.Define(method)
+                    let cil = MdIx.FindCilFunction(method).ValueOrDefault()
+                    let instructions = AsmDecoder.list(block)
+                    let body = MethodAsmBody.Define(method, block, instructions)
+                    let mdis = MethodDisassembly.Define(id, body, cil)
+                    let f = Builder.BuildFunction(mdis)
+                    select f;
+            
             }
             catch(Exception e)
             {
                 error(e);
-                return none<MethodDisassembly>();
+                return default;
             }
         }
-
-        MethodAsmBody DecodeAsm(MethodInfo method)
-        {
-            var result = from block in ReadNativeContent(method)
-                          let instructions = AsmDecoder.list(block)
-                        select MethodAsmBody.Define(method, block, instructions);
-            return result.OnNone(() => throw new NoCodeException(method.ToString())).Value;
-        }
-
+                               
+        IAsmFunctionBuilder Builder
+            => AsmServices.FunctionBuilder();
+        
         void IDisposable.Dispose()
         {
             Target?.Dispose();
         }
 		
-        /// <summary>
-        /// Establishes a correlation between a block of CIL and and block of native code
-        /// </summary>
-        readonly struct CilNativeMap 
-        {
-            public CilNativeMap(int cilOffset, ulong startAddress, ulong endAddress)
-            {
-                this.CilOffset = cilOffset;
-                this.StartAddress = startAddress;
-                this.EndAddress = endAddress;
-            }
-            
-            public readonly int CilOffset; 
-            
-            public readonly ulong StartAddress;
-            
-            public readonly ulong EndAddress;
-        }
-
-        static CilNativeMap[] MapCilToNative(ClrMethod method)
-        {
-            var map = method.ILOffsetMap;
-            var result = new CilNativeMap[map.Length];
-            for (int i = 0; i < result.Length; i++) 
-            {
-                ref var m = ref map[i];
-                result[i] = new CilNativeMap 
-                (
-                    m.ILOffset,
-                    m.StartAddress,
-                    m.EndAddress
-                );
-            }
-
-            Array.Sort(result, (a, b) => 
-            {
-                int c = a.StartAddress.CompareTo(b.StartAddress);
-                if (c != 0)
-                    return c;
-                return a.EndAddress.CompareTo(b.EndAddress);
-            });
-
-            return result;
-        }
-
-        byte[] ReadCilBytes(ClrMethod method)
-        {
-            var ilAddress = method.IL.Address;
-            var ilSize = method.IL.Length;
-            var ilBytes = new byte[ilSize];
-            Target.ReadProcessMemory(ilAddress,ilBytes, ilSize, out int ilRead);
-            require(ilRead == ilSize);                    
-            return ilBytes;
-        }
-
         Option<NativeCodeBlock> ReadNativeContent(MethodInfo method) 
-			=> ReadNativeBlock(method, GetRuntimeMethod(method));
+			=> from clrmethod in GetRuntimeMethod(method)
+               from block in ReadNativeBlock(method, clrmethod)
+             select block;
+             
 
+        Option<NativeMemberCapture> ReadNativeMethodData(MethodInfo method) 
+			=> from clr in GetRuntimeMethod(method)
+                from capture in ReadNativeMethodData(method,clr)
+                select capture;
 
 		/// <summary>
 		/// Reads a continuous block of memory
@@ -182,18 +137,73 @@ namespace Z0
 		/// <param name="size">The number of bytes to read</param>
 		Option<NativeCodeBlock> ReadNativeBlock(string label, ulong address, uint size)
 		{
-			if (address == 0 || size == 0)
-				return zfunc.none<NativeCodeBlock>();
+			if (address == 0)
+            {
+				warn($"Unspecified address for {label}");
+                return default;
+            }
 
-			var dst = new byte[(int)size];
-			if (!Target.ReadProcessMemory(address, dst, dst.Length, out int bytesRead))
-				throw new Exception($"Memory access failure at address {address.FormatHex()}");
+			if (size == 0)
+            {
+				warn($"There is no code to read at address = {address.FormatHex(false)} for {label}");
+                return default;
+            }
+
+			var buffer = new byte[(int)size];
+            var actualSize = 0;
+			if (!Target.ReadProcessMemory(address, buffer, buffer.Length, out actualSize))            
+            {
+				warn($"Memory access failure at address {address.FormatHex(false)} for {label}");
+                return default;
+            }
             
-            if (dst.Length != size)
-                throw Errors.LengthMismatch((int)size, dst.Length);
+            if (size != actualSize)
+            {
+                error(Errors.LengthMismatch((int)size, actualSize));
+                return default;
+            }
 
-			return NativeCodeBlock.Define(label, address, dst);
+			return NativeCodeBlock.Define(label, address, buffer);
 		}
+
+		Option<NativeMemberCapture> ReadNativeMethodData(Moniker id, MethodInfo method, ulong address, uint size)
+		{
+			var label = method.Signature().Format();
+            if (address == 0)
+            {
+				error($"Unspecified address for {label}");
+                return default;
+            }
+
+			if (size == 0)
+            {
+				warn($"There is no code to read at address = {address.FormatHex(false)} for {label}");
+                return default;
+            }
+
+			var buffer = new byte[(int)size];
+            var actualSize = 0;
+			if (!Target.ReadProcessMemory(address, buffer, buffer.Length, out actualSize))
+            {
+				error($"Memory access failure at address {address.FormatHex(false)} for {label}");
+                return default;
+            }
+            
+            if (size != actualSize)
+            {
+                error(Errors.LengthMismatch((int)size, actualSize));
+                return default;
+            }
+
+            var location = MemoryRange.Define(address, address + size);            
+			return NativeMemberCapture.Define(id, method, location, buffer, CaptureResult.Empty);
+		}
+
+		Option<NativeMemberCapture> ReadNativeMethodData(MethodInfo method, ClrMethod runtime)
+		{
+			var codeInfo = runtime.HotColdInfo;	
+            return ReadNativeMethodData(OpIdentity.Provider.Define(method), method, codeInfo.HotStart, codeInfo.HotSize);
+        }
 
         /// <summary>
         /// Reads the native code blocks that have been Jitted for a specified method
@@ -203,7 +213,7 @@ namespace Z0
         Option<NativeCodeBlock> ReadNativeBlock(MethodInfo info, ClrMethod runtime)
         {
 			var codeInfo = runtime.HotColdInfo;	
-            return ReadNativeBlock(info.Signature().Format(),codeInfo.HotStart, codeInfo.HotSize);
+            return ReadNativeBlock(info.Signature().Format(), codeInfo.HotStart, codeInfo.HotSize);
         }
     }
 }

@@ -1,8 +1,7 @@
-; 2020-01-20 01:59:21:024
+; 2020-01-22 01:43:39:244
 ; void split_g64(ulong src, int index, out ulong x0, out ulong x1)
-; static ReadOnlySpan<byte> split_g64_64uBytes => new byte[43]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x83,0xE2,0x3F,0x8B,0xCA,0x4C,0x8B,0xD0,0x49,0xD3,0xEA,0x41,0xBB,0x01,0x00,0x00,0x00,0x8B,0xCA,0x49,0xD3,0xE3,0x49,0xFF,0xCB,0x49,0x23,0xC3,0x49,0x89,0x00,0x4D,0x89,0x11,0xC3};
-; [0x7ff7c8391f80, 0x7ff7c8391fab], 43 bytes
-; 2020-01-20 01:59:21:024
+; split_g64_64u[0x7ff7c83907e0, 0x7ff7c839080b][43] = {0f 1f 44 00 00 48 8b c1 83 e2 3f 8b ca 4c 8b d0 49 d3 ea 41 bb 01 00 00 00 8b ca 49 d3 e3 49 ff cb 49 23 c3 49 89 00 4d 89 11 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,rcx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c1}
 0008h and edx,3Fh                             ; AND r/m32, imm8 || o32 83 /4 ib || encoded[3]{83 e2 3f}
@@ -19,9 +18,8 @@
 002ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; void split_64(ulong src, int index, out ulong x0, out ulong x1)
-; static ReadOnlySpan<byte> split_64_64uBytes => new byte[43]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x83,0xE2,0x3F,0x8B,0xCA,0x4C,0x8B,0xD0,0x49,0xD3,0xEA,0x4D,0x89,0x11,0x41,0xB9,0x01,0x00,0x00,0x00,0x8B,0xCA,0x49,0xD3,0xE1,0x49,0xFF,0xC9,0x49,0x23,0xC1,0x49,0x89,0x00,0xC3};
-; [0x7ff7c8391fc0, 0x7ff7c8391feb], 43 bytes
-; 2020-01-20 01:59:21:024
+; split_64_64u[0x7ff7c8390820, 0x7ff7c839084b][43] = {0f 1f 44 00 00 48 8b c1 83 e2 3f 8b ca 4c 8b d0 49 d3 ea 4d 89 11 41 b9 01 00 00 00 8b ca 49 d3 e1 49 ff c9 49 23 c1 49 89 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,rcx                             ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b c1}
 0008h and edx,3Fh                             ; AND r/m32, imm8 || o32 83 /4 ib || encoded[3]{83 e2 3f}
@@ -38,9 +36,8 @@
 002ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; void split_exact(ulong src, out uint x0, out uint x1)
-; static ReadOnlySpan<byte> split_exact_64uBytes => new byte[17]{0x0F,0x1F,0x44,0x00,0x00,0x89,0x0A,0x48,0xC1,0xE9,0x20,0x8B,0xC1,0x41,0x89,0x00,0xC3};
-; [0x7ff7c8392000, 0x7ff7c8392011], 17 bytes
-; 2020-01-20 01:59:21:024
+; split_exact_64u[0x7ff7c8390860, 0x7ff7c8390871][17] = {0f 1f 44 00 00 89 0a 48 c1 e9 20 8b c1 41 89 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov [rdx],ecx                           ; MOV r/m32, r32 || o32 89 /r || encoded[2]{89 0a}
 0007h shr rcx,20h                             ; SHR r/m64, imm8 || REX.W C1 /5 ib || encoded[4]{48 c1 e9 20}
@@ -49,169 +46,148 @@
 0010h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2_20()
-; static ReadOnlySpan<byte> pow2_20_206039Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x00,0x00,0x10,0x00,0xC3};
-; [0x7ff7c8392030, 0x7ff7c839203b], 11 bytes
-; 2020-01-20 01:59:21:024
+; pow2_20_57895144[0x7ff7c8390890, 0x7ff7c839089b][11] = {0f 1f 44 00 00 b8 00 00 10 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,100000h                         ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 00 00 10 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2m1_20()
-; static ReadOnlySpan<byte> pow2m1_20_1854355Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0xFF,0xFF,0x0F,0x00,0xC3};
-; [0x7ff7c8392050, 0x7ff7c839205b], 11 bytes
-; 2020-01-20 01:59:21:024
+; pow2m1_20_51294256[0x7ff7c83908b0, 0x7ff7c83908bb][11] = {0f 1f 44 00 00 b8 ff ff 0f 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,0FFFFFh                         ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 ff ff 0f 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2_33()
-; static ReadOnlySpan<byte> pow2_33_16689200Bytes => new byte[16]{0x0F,0x1F,0x44,0x00,0x00,0x48,0xB8,0x00,0x00,0x00,0x00,0x02,0x00,0x00,0x00,0xC3};
-; [0x7ff7c8392070, 0x7ff7c8392080], 16 bytes
-; 2020-01-20 01:59:21:024
+; pow2_33_58995125[0x7ff7c83908d0, 0x7ff7c83908e0][16] = {0f 1f 44 00 00 48 b8 00 00 00 00 02 00 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,200000000h                      ; MOV r64, imm64 || REX.W B8+ro io || encoded[10]{48 b8 00 00 00 00 02 00 00 00}
 000fh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2m1_33()
-; static ReadOnlySpan<byte> pow2m1_33_15985080Bytes => new byte[16]{0x0F,0x1F,0x44,0x00,0x00,0x48,0xB8,0xFF,0xFF,0xFF,0xFF,0x01,0x00,0x00,0x00,0xC3};
-; [0x7ff7c8392090, 0x7ff7c83920a0], 16 bytes
-; 2020-01-20 01:59:21:025
+; pow2m1_33_61194080[0x7ff7c83908f0, 0x7ff7c8390900][16] = {0f 1f 44 00 00 48 b8 ff ff ff ff 01 00 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,1FFFFFFFFh                      ; MOV r64, imm64 || REX.W B8+ro io || encoded[10]{48 b8 ff ff ff ff 01 00 00 00}
 000fh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2_1()
-; static ReadOnlySpan<byte> pow2_1_9647994Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x02,0x00,0x00,0x00,0xC3};
-; [0x7ff7c83920b0, 0x7ff7c83920bb], 11 bytes
-; 2020-01-20 01:59:21:025
+; pow2_1_13875810[0x7ff7c8390910, 0x7ff7c839091b][11] = {0f 1f 44 00 00 b8 02 00 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,2                               ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 02 00 00 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2m1_1()
-; static ReadOnlySpan<byte> pow2m1_1_19723089Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x01,0x00,0x00,0x00,0xC3};
-; [0x7ff7c83920d0, 0x7ff7c83920db], 11 bytes
-; 2020-01-20 01:59:21:025
+; pow2m1_1_57773428[0x7ff7c8390930, 0x7ff7c839093b][11] = {0f 1f 44 00 00 b8 01 00 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,1                               ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 01 00 00 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2_2()
-; static ReadOnlySpan<byte> pow2_2_43290077Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x04,0x00,0x00,0x00,0xC3};
-; [0x7ff7c83920f0, 0x7ff7c83920fb], 11 bytes
-; 2020-01-20 01:59:21:025
+; pow2_2_50198807[0x7ff7c8390950, 0x7ff7c839095b][11] = {0f 1f 44 00 00 b8 04 00 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,4                               ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 04 00 00 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2m1_2()
-; static ReadOnlySpan<byte> pow2m1_2_54066375Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x03,0x00,0x00,0x00,0xC3};
-; [0x7ff7c8392110, 0x7ff7c839211b], 11 bytes
-; 2020-01-20 01:59:21:025
+; pow2m1_2_49136085[0x7ff7c8390970, 0x7ff7c839097b][11] = {0f 1f 44 00 00 b8 03 00 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,3                               ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 03 00 00 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2_3()
-; static ReadOnlySpan<byte> pow2_3_16835328Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x08,0x00,0x00,0x00,0xC3};
-; [0x7ff7c8392130, 0x7ff7c839213b], 11 bytes
-; 2020-01-20 01:59:21:025
+; pow2_3_39571581[0x7ff7c8390990, 0x7ff7c839099b][11] = {0f 1f 44 00 00 b8 08 00 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,8                               ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 08 00 00 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2m1_3()
-; static ReadOnlySpan<byte> pow2m1_3_17300225Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x07,0x00,0x00,0x00,0xC3};
-; [0x7ff7c8392150, 0x7ff7c839215b], 11 bytes
-; 2020-01-20 01:59:21:025
+; pow2m1_3_20599914[0x7ff7c83909b0, 0x7ff7c83909bb][11] = {0f 1f 44 00 00 b8 07 00 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,7                               ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 07 00 00 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2_4()
-; static ReadOnlySpan<byte> pow2_4_21484299Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x10,0x00,0x00,0x00,0xC3};
-; [0x7ff7c8392170, 0x7ff7c839217b], 11 bytes
-; 2020-01-20 01:59:21:025
+; pow2_4_51181499[0x7ff7c83909d0, 0x7ff7c83909db][11] = {0f 1f 44 00 00 b8 10 00 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,10h                             ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 10 00 00 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2m1_4()
-; static ReadOnlySpan<byte> pow2m1_4_59140967Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x0F,0x00,0x00,0x00,0xC3};
-; [0x7ff7c8392190, 0x7ff7c839219b], 11 bytes
-; 2020-01-20 01:59:21:025
+; pow2m1_4_57980315[0x7ff7c83909f0, 0x7ff7c83909fb][11] = {0f 1f 44 00 00 b8 0f 00 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,0Fh                             ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 0f 00 00 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2_5()
-; static ReadOnlySpan<byte> pow2_5_62506663Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x20,0x00,0x00,0x00,0xC3};
-; [0x7ff7c83921b0, 0x7ff7c83921bb], 11 bytes
-; 2020-01-20 01:59:21:025
+; pow2_5_52060794[0x7ff7c8390a10, 0x7ff7c8390a1b][11] = {0f 1f 44 00 00 b8 20 00 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,20h                             ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 20 00 00 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2m1_5()
-; static ReadOnlySpan<byte> pow2m1_5_25689059Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x1F,0x00,0x00,0x00,0xC3};
-; [0x7ff7c83921d0, 0x7ff7c83921db], 11 bytes
-; 2020-01-20 01:59:21:025
+; pow2m1_5_65893970[0x7ff7c8390a30, 0x7ff7c8390a3b][11] = {0f 1f 44 00 00 b8 1f 00 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,1Fh                             ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 1f 00 00 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2_6()
-; static ReadOnlySpan<byte> pow2_6_29874939Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x40,0x00,0x00,0x00,0xC3};
-; [0x7ff7c83921f0, 0x7ff7c83921fb], 11 bytes
-; 2020-01-20 01:59:21:025
+; pow2_6_56174818[0x7ff7c8390a50, 0x7ff7c8390a5b][11] = {0f 1f 44 00 00 b8 40 00 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,40h                             ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 40 00 00 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2m1_6()
-; static ReadOnlySpan<byte> pow2m1_6_439002Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x3F,0x00,0x00,0x00,0xC3};
-; [0x7ff7c8392210, 0x7ff7c839221b], 11 bytes
-; 2020-01-20 01:59:21:025
+; pow2m1_6_35811316[0x7ff7c8390a70, 0x7ff7c8390a7b][11] = {0f 1f 44 00 00 b8 3f 00 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,3Fh                             ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 3f 00 00 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2_7()
-; static ReadOnlySpan<byte> pow2_7_3951024Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x80,0x00,0x00,0x00,0xC3};
-; [0x7ff7c8392230, 0x7ff7c839223b], 11 bytes
-; 2020-01-20 01:59:21:025
+; pow2_7_53866394[0x7ff7c8390a90, 0x7ff7c8390a9b][11] = {0f 1f 44 00 00 b8 80 00 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,80h                             ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 80 00 00 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2m1_7()
-; static ReadOnlySpan<byte> pow2m1_7_35559222Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x7F,0x00,0x00,0x00,0xC3};
-; [0x7ff7c8392250, 0x7ff7c839225b], 11 bytes
-; 2020-01-20 01:59:21:025
+; pow2m1_7_15035499[0x7ff7c8390ab0, 0x7ff7c8390abb][11] = {0f 1f 44 00 00 b8 7f 00 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,7Fh                             ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 7f 00 00 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2_8()
-; static ReadOnlySpan<byte> pow2_8_51597550Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0x00,0x01,0x00,0x00,0xC3};
-; [0x7ff7c8392270, 0x7ff7c839227b], 11 bytes
-; 2020-01-20 01:59:21:025
+; pow2_8_1101770[0x7ff7c8390ad0, 0x7ff7c8390adb][11] = {0f 1f 44 00 00 b8 00 01 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,100h                            ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 00 01 00 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; ulong pow2m1_8()
-; static ReadOnlySpan<byte> pow2m1_8_61724767Bytes => new byte[11]{0x0F,0x1F,0x44,0x00,0x00,0xB8,0xFF,0x00,0x00,0x00,0xC3};
-; [0x7ff7c8392290, 0x7ff7c839229b], 11 bytes
-; 2020-01-20 01:59:21:025
+; pow2m1_8_9915935[0x7ff7c8390af0, 0x7ff7c8390afb][11] = {0f 1f 44 00 00 b8 ff 00 00 00 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,0FFh                            ; MOV r32, imm32 || o32 B8+rd id || encoded[5]{b8 ff 00 00 00}
 000ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint set_bit(uint src, byte pos, bit state)
-; static ReadOnlySpan<byte> set_bit_18651996Bytes => new byte[43]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x45,0x85,0xC0,0x74,0x0E,0x0F,0xB6,0xCA,0xBA,0x01,0x00,0x00,0x00,0xD3,0xE2,0x0B,0xC2,0xEB,0x10,0x0F,0xB6,0xCA,0xBA,0x01,0x00,0x00,0x00,0xD3,0xE2,0xF7,0xD2,0x23,0xD0,0x8B,0xC2,0xC3};
-; [0x7ff7c83922b0, 0x7ff7c83922db], 43 bytes
-; 2020-01-20 01:59:21:025
+; set_bit_22134555[0x7ff7c8390b10, 0x7ff7c8390b3b][43] = {0f 1f 44 00 00 8b c1 45 85 c0 74 0e 0f b6 ca ba 01 00 00 00 d3 e2 0b c2 eb 10 0f b6 ca ba 01 00 00 00 d3 e2 f7 d2 23 d0 8b c2 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c1}
 0007h test r8d,r8d                            ; TEST r/m32, r32 || o32 85 /r || encoded[3]{45 85 c0}
@@ -230,9 +206,8 @@
 002ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint set_bit_nb(uint src, byte pos, bit state)
-; static ReadOnlySpan<byte> set_bit_nb_33650236Bytes => new byte[42]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x0F,0xB6,0xD2,0x83,0xE2,0x1F,0x41,0xB9,0x01,0x00,0x00,0x00,0x8B,0xCA,0x41,0xD3,0xE1,0x41,0xF7,0xD1,0x41,0xFF,0xC1,0x8B,0xCA,0x41,0xD3,0xE0,0x41,0x23,0xC1,0x41,0x23,0xC0,0xC3};
-; [0x7ff7c8392700, 0x7ff7c839272a], 42 bytes
-; 2020-01-20 01:59:21:025
+; set_bit_nb_64993271[0x7ff7c8390f60, 0x7ff7c8390f8a][42] = {0f 1f 44 00 00 8b c1 0f b6 d2 83 e2 1f 41 b9 01 00 00 00 8b ca 41 d3 e1 41 f7 d1 41 ff c1 8b ca 41 d3 e0 41 23 c1 41 23 c0 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c1}
 0007h movzx edx,dl                            ; MOVZX r32, r/m8 || o32 0F B6 /r || encoded[3]{0f b6 d2}
@@ -249,9 +224,8 @@
 0029h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint set_bit_on(uint src, byte pos)
-; static ReadOnlySpan<byte> set_bit_on_32uBytes => new byte[20]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x0F,0xB6,0xCA,0xBA,0x01,0x00,0x00,0x00,0xD3,0xE2,0x0B,0xC2,0xC3};
-; [0x7ff7c8392740, 0x7ff7c8392754], 20 bytes
-; 2020-01-20 01:59:21:025
+; set_bit_on_32u[0x7ff7c8390fa0, 0x7ff7c8390fb4][20] = {0f 1f 44 00 00 8b c1 0f b6 ca ba 01 00 00 00 d3 e2 0b c2 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c1}
 0007h movzx ecx,dl                            ; MOVZX r32, r/m8 || o32 0F B6 /r || encoded[3]{0f b6 ca}
@@ -261,9 +235,8 @@
 0013h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint set_bit_off(uint src, byte pos)
-; static ReadOnlySpan<byte> set_bit_off_32uBytes => new byte[22]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x0F,0xB6,0xCA,0xBA,0x01,0x00,0x00,0x00,0xD3,0xE2,0xF7,0xD2,0x23,0xC2,0xC3};
-; [0x7ff7c8392770, 0x7ff7c8392786], 22 bytes
-; 2020-01-20 01:59:21:025
+; set_bit_off_32u[0x7ff7c8390fd0, 0x7ff7c8390fe6][22] = {0f 1f 44 00 00 8b c1 0f b6 ca ba 01 00 00 00 d3 e2 f7 d2 23 c2 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c1}
 0007h movzx ecx,dl                            ; MOVZX r32, r/m8 || o32 0F B6 /r || encoded[3]{0f b6 ca}

@@ -20,10 +20,6 @@ namespace Z0
        public static IOpIdentityProvider Provider
             => default(OpIdentityProvider);
 
-        [MethodImpl(Inline)]   
-        public static Moniker define(string text)
-            => new Moniker(text);
-
         /// <summary>
         /// Defines a moniker in accordance with the supplied parameters
         /// </summary>
@@ -36,11 +32,11 @@ namespace Z0
             var asmPart = asm ? $"{SuffixSep}{AsmIndicator}" : string.Empty;
 
             if(generic && k == PrimalKind.None)
-                return new Moniker(concat(opname, PartSep, GenericIndicator));            
+                return Moniker.Parse(concat(opname, PartSep, GenericIndicator));            
             else if(w != 0)
-                return new Moniker($"{opname}{PartSep}{g}{w}{SegSep}{PrimalType.primalsig(k)}{asmPart}");
+                return Moniker.Parse($"{opname}{PartSep}{g}{w}{SegSep}{PrimalType.primalsig(k)}{asmPart}");
             else
-                return new Moniker($"{opname}_{g}{PrimalType.primalsig(k)}{asmPart}");
+                return Moniker.Parse($"{opname}_{g}{PrimalType.primalsig(k)}{asmPart}");
         }
 
         /// <summary>
@@ -70,7 +66,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static Moniker segmented<W>(string opname, PrimalKind k, W w)
             where W : unmanaged, ITypeNat
-                => new Moniker($"{opname}_{w}{SegSep}{PrimalType.primalsig(k)}");
+                => Moniker.Parse($"{opname}_{w}{SegSep}{PrimalType.primalsig(k)}");
 
         /// <summary>
         /// Defines a moniker of the form {opname}_{w}X{bitsize(k)}{u | i | f}{_asm} to identify 

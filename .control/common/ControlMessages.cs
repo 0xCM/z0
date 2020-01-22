@@ -26,5 +26,18 @@ namespace Z0
 
         public static AppMsg FinishedSuiteExecution(double runtime)
             => appMsg($"{now().ToLexicalString()} Completed test suite execution after {runtime} ms");
+
+        public static AppMsg CatalogNotFound(AssemblyId id)        
+            => appMsg($"Operation catalog was not found for assembly {id}", SeverityLevel.Warning);
+
+        public static AppMsg CatalogEmpty(IOperationCatalog catalog)        
+            => appMsg($"Operation catalog {catalog.CatalogName} is empty", SeverityLevel.Warning);
+
+        public static AppMsg EmittingAsmArchives()        
+            => appMsg($"Emitting assembly archives", SeverityLevel.Babble);
+
+        public static AppMsg EmittingCatalog(IOperationCatalog catalog)        
+            => appMsg($"Emitting {catalog.CatalogName} catalog from controller", SeverityLevel.Info);
+
     }
 }

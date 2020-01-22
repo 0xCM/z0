@@ -81,7 +81,10 @@ namespace Z0
         /// <param name="a">The source assembly</param>
         public static string GetSimpleName(this Assembly a)
             => a?.GetName()?.Name ?? string.Empty;
- 
+
+        public static T Reification<T>(this Type src, params object[] args)
+            => (T)Activator.CreateInstance(src, args);
+
         public static IEnumerable<Type> Types(this Assembly a)
             => a.GetTypes();
 

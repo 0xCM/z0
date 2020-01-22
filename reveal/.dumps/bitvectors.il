@@ -1,5 +1,5 @@
-// 2020-01-20 01:59:22:104
-// Id := 100663317, Name := Z0.BitVector`1<System.Byte> Z0.bitvectors::bvand_8(Z0.BitVector`1<System.Byte>,Z0.BitVector`1<System.Byte>)
+// 2020-01-22 01:43:39:956
+// Id := 100663318, Name := Z0.BitVector`1<System.Byte> Z0.bitvectors::bvand_8(Z0.BitVector`1<System.Byte>,Z0.BitVector`1<System.Byte>)
 // BitVector<byte> bvand_8(BitVector<byte> x, BitVector<byte> y)
 // IL
 BitVector<byte> bvand_8(BitVector<byte> x, BitVector<byte> y)
@@ -14,7 +14,7 @@ BitVector<byte> bvand_8(BitVector<byte> x, BitVector<byte> y)
     IL_0010: ret
 }
 
-// Id := 100663318, Name := Z0.BitVector8 Z0.bitvectors::bvand_d8(Z0.BitVector8,Z0.BitVector8)
+// Id := 100663319, Name := Z0.BitVector8 Z0.bitvectors::bvand_d8(Z0.BitVector8,Z0.BitVector8)
 // BitVector8 bvand_d8(BitVector8 x, BitVector8 y)
 // IL
 BitVector8 bvand_d8(BitVector8 x, BitVector8 y)
@@ -25,7 +25,7 @@ BitVector8 bvand_d8(BitVector8 x, BitVector8 y)
     IL_0007: ret
 }
 
-// Id := 100663319, Name := Z0.BitVector`1<System.UInt32> Z0.bitvectors::bvand_32(Z0.BitVector`1<System.UInt32>,Z0.BitVector`1<System.UInt32>)
+// Id := 100663320, Name := Z0.BitVector`1<System.UInt32> Z0.bitvectors::bvand_32(Z0.BitVector`1<System.UInt32>,Z0.BitVector`1<System.UInt32>)
 // BitVector<uint> bvand_32(BitVector<uint> x, BitVector<uint> y)
 // IL
 BitVector<uint> bvand_32(BitVector<uint> x, BitVector<uint> y)
@@ -40,7 +40,7 @@ BitVector<uint> bvand_32(BitVector<uint> x, BitVector<uint> y)
     IL_0010: ret
 }
 
-// Id := 100663320, Name := Z0.BitVector32 Z0.bitvectors::bvand_d32(Z0.BitVector32,Z0.BitVector32)
+// Id := 100663321, Name := Z0.BitVector32 Z0.bitvectors::bvand_d32(Z0.BitVector32,Z0.BitVector32)
 // BitVector32 bvand_d32(BitVector32 x, BitVector32 y)
 // IL
 BitVector32 bvand_d32(BitVector32 x, BitVector32 y)
@@ -51,7 +51,7 @@ BitVector32 bvand_d32(BitVector32 x, BitVector32 y)
     IL_0007: ret
 }
 
-// Id := 100663321, Name := Z0.BitVector`1<System.UInt64> Z0.bitvectors::bvand_64(Z0.BitVector`1<System.UInt64>,Z0.BitVector`1<System.UInt64>)
+// Id := 100663322, Name := Z0.BitVector`1<System.UInt64> Z0.bitvectors::bvand_64(Z0.BitVector`1<System.UInt64>,Z0.BitVector`1<System.UInt64>)
 // BitVector<ulong> bvand_64(BitVector<ulong> x, BitVector<ulong> y)
 // IL
 BitVector<ulong> bvand_64(BitVector<ulong> x, BitVector<ulong> y)
@@ -67,7 +67,7 @@ BitVector<ulong> bvand_64(BitVector<ulong> x, BitVector<ulong> y)
     IL_0011: ret
 }
 
-// Id := 100663322, Name := Z0.BitVector64 Z0.bitvectors::bvand_d64(Z0.BitVector64,Z0.BitVector64)
+// Id := 100663323, Name := Z0.BitVector64 Z0.bitvectors::bvand_d64(Z0.BitVector64,Z0.BitVector64)
 // BitVector64 bvand_d64(BitVector64 x, BitVector64 y)
 // IL
 BitVector64 bvand_d64(BitVector64 x, BitVector64 y)
@@ -78,7 +78,7 @@ BitVector64 bvand_d64(BitVector64 x, BitVector64 y)
     IL_0007: ret
 }
 
-// Id := 100663323, Name := Z0.BitVector`1<System.Byte> Z0.bitvectors::bvxor_8(Z0.BitVector`1<System.Byte>,Z0.BitVector`1<System.Byte>)
+// Id := 100663324, Name := Z0.BitVector`1<System.Byte> Z0.bitvectors::bvxor_8(Z0.BitVector`1<System.Byte>,Z0.BitVector`1<System.Byte>)
 // BitVector<byte> bvxor_8(BitVector<byte> x, BitVector<byte> y)
 // IL
 BitVector<byte> bvxor_8(BitVector<byte> x, BitVector<byte> y)
@@ -93,7 +93,7 @@ BitVector<byte> bvxor_8(BitVector<byte> x, BitVector<byte> y)
     IL_0010: ret
 }
 
-// Id := 100663324, Name := Z0.BitVector`1<System.Byte> Z0.bitvectors::bvxor_g8(Z0.BitVector`1<System.Byte>,Z0.BitVector`1<System.Byte>)
+// Id := 100663325, Name := Z0.BitVector`1<System.Byte> Z0.bitvectors::bvxor_g8(Z0.BitVector`1<System.Byte>,Z0.BitVector`1<System.Byte>)
 // BitVector<byte> bvxor_g8(BitVector<byte> x, BitVector<byte> y)
 // IL
 BitVector<byte> bvxor_g8(BitVector<byte> x, BitVector<byte> y)
@@ -104,7 +104,7 @@ BitVector<byte> bvxor_g8(BitVector<byte> x, BitVector<byte> y)
     IL_0007: ret
 }
 
-// Id := 100663325, Name := Z0.BitVector8 Z0.bitvectors::bvxor_d8(Z0.BitVector8,Z0.BitVector8)
+// Id := 100663326, Name := Z0.BitVector8 Z0.bitvectors::bvxor_d8(Z0.BitVector8,Z0.BitVector8)
 // BitVector8 bvxor_d8(BitVector8 x, BitVector8 y)
 // IL
 BitVector8 bvxor_d8(BitVector8 x, BitVector8 y)
@@ -115,7 +115,7 @@ BitVector8 bvxor_d8(BitVector8 x, BitVector8 y)
     IL_0007: ret
 }
 
-// Id := 100663326, Name := System.Byte Z0.bitvectors::xor_d8(System.Byte,System.Byte)
+// Id := 100663327, Name := System.Byte Z0.bitvectors::xor_d8(System.Byte,System.Byte)
 // byte xor_d8(byte x, byte y)
 // IL
 byte xor_d8(byte x, byte y)
@@ -127,7 +127,7 @@ byte xor_d8(byte x, byte y)
     IL_0004: ret
 }
 
-// Id := 100663327, Name := System.Byte Z0.bitvectors::xor_g8(System.Byte,System.Byte)
+// Id := 100663328, Name := System.Byte Z0.bitvectors::xor_g8(System.Byte,System.Byte)
 // byte xor_g8(byte x, byte y)
 // IL
 byte xor_g8(byte x, byte y)
@@ -138,7 +138,7 @@ byte xor_g8(byte x, byte y)
     IL_0007: ret
 }
 
-// Id := 100663328, Name := System.Byte Z0.bitvectors::xor_d82(System.Byte,System.Byte)
+// Id := 100663329, Name := System.Byte Z0.bitvectors::xor_d82(System.Byte,System.Byte)
 // byte xor_d82(byte x, byte y)
 // IL
 byte xor_d82(byte x, byte y)
@@ -149,7 +149,7 @@ byte xor_d82(byte x, byte y)
     IL_0007: ret
 }
 
-// Id := 100663329, Name := Z0.BitVector32 Z0.bitvectors::sll_bv_32u(Z0.BitVector32,System.Byte)
+// Id := 100663330, Name := Z0.BitVector32 Z0.bitvectors::sll_bv_32u(Z0.BitVector32,System.Byte)
 // BitVector32 sll_bv_32u(BitVector32 x, byte offset)
 // IL
 BitVector32 sll_bv_32u(BitVector32 x, byte offset)
@@ -160,7 +160,7 @@ BitVector32 sll_bv_32u(BitVector32 x, byte offset)
     IL_0007: ret
 }
 
-// Id := 100663330, Name := Z0.BitVector32 Z0.bitvectors::sll_bv_o32u(Z0.BitVector32,System.Byte)
+// Id := 100663331, Name := Z0.BitVector32 Z0.bitvectors::sll_bv_o32u(Z0.BitVector32,System.Byte)
 // BitVector32 sll_bv_o32u(BitVector32 x, byte offset)
 // IL
 BitVector32 sll_bv_o32u(BitVector32 x, byte offset)
@@ -171,7 +171,7 @@ BitVector32 sll_bv_o32u(BitVector32 x, byte offset)
     IL_0007: ret
 }
 
-// Id := 100663331, Name := Z0.BitVector32 Z0.bitvectors::srl_bv_32u(Z0.BitVector32,System.Byte)
+// Id := 100663332, Name := Z0.BitVector32 Z0.bitvectors::srl_bv_32u(Z0.BitVector32,System.Byte)
 // BitVector32 srl_bv_32u(BitVector32 x, byte offset)
 // IL
 BitVector32 srl_bv_32u(BitVector32 x, byte offset)
@@ -182,7 +182,7 @@ BitVector32 srl_bv_32u(BitVector32 x, byte offset)
     IL_0007: ret
 }
 
-// Id := 100663332, Name := Z0.BitVector32 Z0.bitvectors::srl_bv_o32u(Z0.BitVector32,System.Byte)
+// Id := 100663333, Name := Z0.BitVector32 Z0.bitvectors::srl_bv_o32u(Z0.BitVector32,System.Byte)
 // BitVector32 srl_bv_o32u(BitVector32 x, byte offset)
 // IL
 BitVector32 srl_bv_o32u(BitVector32 x, byte offset)
@@ -193,7 +193,7 @@ BitVector32 srl_bv_o32u(BitVector32 x, byte offset)
     IL_0007: ret
 }
 
-// Id := 100663333, Name := Z0.BitVector32 Z0.bitvectors::flip_bv_32u(Z0.BitVector32)
+// Id := 100663334, Name := Z0.BitVector32 Z0.bitvectors::flip_bv_32u(Z0.BitVector32)
 // BitVector32 flip_bv_32u(BitVector32 x)
 // IL
 BitVector32 flip_bv_32u(BitVector32 x)
@@ -203,7 +203,7 @@ BitVector32 flip_bv_32u(BitVector32 x)
     IL_0006: ret
 }
 
-// Id := 100663334, Name := Z0.BitVector32 Z0.bitvectors::flip_bv_o32u(Z0.BitVector32)
+// Id := 100663335, Name := Z0.BitVector32 Z0.bitvectors::flip_bv_o32u(Z0.BitVector32)
 // BitVector32 flip_bv_o32u(BitVector32 x)
 // IL
 BitVector32 flip_bv_o32u(BitVector32 x)
@@ -213,7 +213,7 @@ BitVector32 flip_bv_o32u(BitVector32 x)
     IL_0006: ret
 }
 
-// Id := 100663335, Name := Z0.BitVector32 Z0.bitvectors::negate_bv_32u(Z0.BitVector32)
+// Id := 100663336, Name := Z0.BitVector32 Z0.bitvectors::negate_bv_32u(Z0.BitVector32)
 // BitVector32 negate_bv_32u(BitVector32 x)
 // IL
 BitVector32 negate_bv_32u(BitVector32 x)
@@ -223,7 +223,7 @@ BitVector32 negate_bv_32u(BitVector32 x)
     IL_0006: ret
 }
 
-// Id := 100663336, Name := Z0.BitVector32 Z0.bitvectors::negate_bv_o32u(Z0.BitVector32)
+// Id := 100663337, Name := Z0.BitVector32 Z0.bitvectors::negate_bv_o32u(Z0.BitVector32)
 // BitVector32 negate_bv_o32u(BitVector32 x)
 // IL
 BitVector32 negate_bv_o32u(BitVector32 x)
@@ -233,7 +233,7 @@ BitVector32 negate_bv_o32u(BitVector32 x)
     IL_0006: ret
 }
 
-// Id := 100663337, Name := Z0.BitVector32 Z0.bitvectors::inc_bv_32u(Z0.BitVector32)
+// Id := 100663338, Name := Z0.BitVector32 Z0.bitvectors::inc_bv_32u(Z0.BitVector32)
 // BitVector32 inc_bv_32u(BitVector32 x)
 // IL
 BitVector32 inc_bv_32u(BitVector32 x)
@@ -243,7 +243,7 @@ BitVector32 inc_bv_32u(BitVector32 x)
     IL_0006: ret
 }
 
-// Id := 100663338, Name := Z0.BitVector32 Z0.bitvectors::inc_bv_o32u(Z0.BitVector32)
+// Id := 100663339, Name := Z0.BitVector32 Z0.bitvectors::inc_bv_o32u(Z0.BitVector32)
 // BitVector32 inc_bv_o32u(BitVector32 x)
 // IL
 BitVector32 inc_bv_o32u(BitVector32 x)
@@ -255,7 +255,7 @@ BitVector32 inc_bv_o32u(BitVector32 x)
     IL_0009: ret
 }
 
-// Id := 100663339, Name := Z0.BitVector32 Z0.bitvectors::dec_bv_32u(Z0.BitVector32)
+// Id := 100663340, Name := Z0.BitVector32 Z0.bitvectors::dec_bv_32u(Z0.BitVector32)
 // BitVector32 dec_bv_32u(BitVector32 x)
 // IL
 BitVector32 dec_bv_32u(BitVector32 x)
@@ -265,7 +265,7 @@ BitVector32 dec_bv_32u(BitVector32 x)
     IL_0006: ret
 }
 
-// Id := 100663340, Name := Z0.BitVector32 Z0.bitvectors::dec_bv_o32u(Z0.BitVector32)
+// Id := 100663341, Name := Z0.BitVector32 Z0.bitvectors::dec_bv_o32u(Z0.BitVector32)
 // BitVector32 dec_bv_o32u(BitVector32 x)
 // IL
 BitVector32 dec_bv_o32u(BitVector32 x)
@@ -277,7 +277,7 @@ BitVector32 dec_bv_o32u(BitVector32 x)
     IL_0009: ret
 }
 
-// Id := 100663341, Name := Z0.BitVector32 Z0.bitvectors::rotl_bv_32u(Z0.BitVector32,System.Byte)
+// Id := 100663342, Name := Z0.BitVector32 Z0.bitvectors::rotl_bv_32u(Z0.BitVector32,System.Byte)
 // BitVector32 rotl_bv_32u(BitVector32 x, byte offset)
 // IL
 BitVector32 rotl_bv_32u(BitVector32 x, byte offset)
@@ -288,7 +288,7 @@ BitVector32 rotl_bv_32u(BitVector32 x, byte offset)
     IL_0007: ret
 }
 
-// Id := 100663342, Name := Z0.BitVector32 Z0.bitvectors::rotr_bv_32u(Z0.BitVector32,System.Byte)
+// Id := 100663343, Name := Z0.BitVector32 Z0.bitvectors::rotr_bv_32u(Z0.BitVector32,System.Byte)
 // BitVector32 rotr_bv_32u(BitVector32 x, byte offset)
 // IL
 BitVector32 rotr_bv_32u(BitVector32 x, byte offset)
@@ -299,7 +299,7 @@ BitVector32 rotr_bv_32u(BitVector32 x, byte offset)
     IL_0007: ret
 }
 
-// Id := 100663343, Name := Z0.BitVector32 Z0.bitvectors::alt_32()
+// Id := 100663344, Name := Z0.BitVector32 Z0.bitvectors::alt_32()
 // BitVector32 alt_32()
 // IL
 BitVector32 alt_32()
@@ -310,7 +310,7 @@ BitVector32 alt_32()
     IL_000F: ret
 }
 
-// Id := 100663344, Name := Z0.BitVector`1<System.UInt32> Z0.bitvectors::alt_32g()
+// Id := 100663345, Name := Z0.BitVector`1<System.UInt32> Z0.bitvectors::alt_32g()
 // BitVector<uint> alt_32g()
 // IL
 BitVector<uint> alt_32g()
@@ -320,7 +320,7 @@ BitVector<uint> alt_32g()
     IL_000A: ret
 }
 
-// Id := 100663345, Name := Z0.bit Z0.bitvectors::dot_32g(Z0.BitVector`1<System.UInt32>,Z0.BitVector`1<System.UInt32>)
+// Id := 100663346, Name := Z0.bit Z0.bitvectors::dot_32g(Z0.BitVector`1<System.UInt32>,Z0.BitVector`1<System.UInt32>)
 // bit dot_32g(BitVector<uint> x, BitVector<uint> y)
 // IL
 bit dot_32g(BitVector<uint> x, BitVector<uint> y)
@@ -331,7 +331,7 @@ bit dot_32g(BitVector<uint> x, BitVector<uint> y)
     IL_0007: ret
 }
 
-// Id := 100663346, Name := Z0.BitMatrix`1<System.UInt32> Z0.bitvectors::oprod_1(Z0.BitVector32,Z0.BitVector32)
+// Id := 100663347, Name := Z0.BitMatrix`1<System.UInt32> Z0.bitvectors::oprod_1(Z0.BitVector32,Z0.BitVector32)
 // BitMatrix<uint> oprod_1(BitVector32 x, BitVector32 y)
 // IL
 BitMatrix<uint> oprod_1(BitVector32 x, BitVector32 y)
@@ -342,7 +342,7 @@ BitMatrix<uint> oprod_1(BitVector32 x, BitVector32 y)
     IL_0007: ret
 }
 
-// Id := 100663347, Name := Z0.BitMatrix`1<System.UInt32> Z0.bitvectors::oprod_2(Z0.BitVector`1<System.UInt32>,Z0.BitVector`1<System.UInt32>)
+// Id := 100663348, Name := Z0.BitMatrix`1<System.UInt32> Z0.bitvectors::oprod_2(Z0.BitVector`1<System.UInt32>,Z0.BitVector`1<System.UInt32>)
 // BitMatrix<uint> oprod_2(BitVector<uint> x, BitVector<uint> y)
 // IL
 BitMatrix<uint> oprod_2(BitVector<uint> x, BitVector<uint> y)
@@ -353,7 +353,7 @@ BitMatrix<uint> oprod_2(BitVector<uint> x, BitVector<uint> y)
     IL_0007: ret
 }
 
-// Id := 100663348, Name := Z0.BitMatrix`1<System.UInt32>& Z0.bitvectors::oprod_3(Z0.BitVector`1<System.UInt32>,Z0.BitVector`1<System.UInt32>,Z0.BitMatrix`1<System.UInt32>&)
+// Id := 100663349, Name := Z0.BitMatrix`1<System.UInt32>& Z0.bitvectors::oprod_3(Z0.BitVector`1<System.UInt32>,Z0.BitVector`1<System.UInt32>,Z0.BitMatrix`1<System.UInt32>&)
 // ref BitMatrix<uint> oprod_3(BitVector<uint> x, BitVector<uint> y, ref BitMatrix<uint> z)
 // IL
 ref BitMatrix<uint> oprod_3(BitVector<uint> x, BitVector<uint> y, ref BitMatrix<uint> z)
@@ -365,7 +365,7 @@ ref BitMatrix<uint> oprod_3(BitVector<uint> x, BitVector<uint> y, ref BitMatrix<
     IL_0008: ret
 }
 
-// Id := 100663349, Name := Z0.BitMatrix`1<System.UInt64>& Z0.bitvectors::oprod_4(Z0.BitVector`1<System.UInt64>,Z0.BitVector`1<System.UInt64>,Z0.BitMatrix`1<System.UInt64>&)
+// Id := 100663350, Name := Z0.BitMatrix`1<System.UInt64>& Z0.bitvectors::oprod_4(Z0.BitVector`1<System.UInt64>,Z0.BitVector`1<System.UInt64>,Z0.BitMatrix`1<System.UInt64>&)
 // ref BitMatrix<ulong> oprod_4(BitVector<ulong> x, BitVector<ulong> y, ref BitMatrix<ulong> z)
 // IL
 ref BitMatrix<ulong> oprod_4(BitVector<ulong> x, BitVector<ulong> y, ref BitMatrix<ulong> z)

@@ -19,19 +19,25 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static implicit operator DynamicDelegate(DynamicDelegate<D> d)
-            => new DynamicDelegate(d.SourceMethod, d.DynamicMethod, d.DynamicOp);
+            => DynamicDelegate.Define(d.Id, d.SourceMethod, d.DynamicMethod, d.DynamicOp);
 
         [MethodImpl(Inline)]
         public static implicit operator D(DynamicDelegate<D> d)
             => d.DynamicOp;
 
         [MethodImpl(Inline)]
-        public DynamicDelegate(MethodInfo src, DynamicMethod dst, D op)
+        public DynamicDelegate(Moniker id, MethodInfo src, DynamicMethod dst, D op)
         {
+            this.Id = id;
             this.SourceMethod = src;
             this.DynamicOp = op;
             this.DynamicMethod = dst;
         }
+
+        /// <summary>
+        /// The delegate identity
+        /// </summary>
+        public readonly Moniker Id;
 
         /// <summary>
         /// The method invoked by the dynamic operator that provides the substance of the operation
@@ -55,6 +61,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public DynamicDelegate<S> As<S>()
             where S : Delegate
-                => DynamicDelegate.Define(SourceMethod, DynamicMethod, Unsafe.As<D,S>(ref Unsafe.AsRef(in this.DynamicOp)));
+                => DynamicDelegate.Define(Id, SourceMethod, DynamicMethod, Unsafe.As<D,S>(ref Unsafe.AsRef(in this.DynamicOp)));
     }
 }

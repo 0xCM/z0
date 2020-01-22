@@ -9,7 +9,6 @@ namespace Z0
     
     using static zfunc;
 
-
     /// <summary>
     /// Defines the canonical shape of a binary operator
     /// </summary>
@@ -18,7 +17,6 @@ namespace Z0
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public delegate T BinaryOp<T>(T a, T b);
-
 
     /// <summary>
     /// Characterizes a binary function

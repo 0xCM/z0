@@ -11,6 +11,7 @@ namespace Z0
 
     public readonly struct Moniker
     {
+            
         /// <summary>
         /// The moniker text
         /// </summary>
@@ -21,11 +22,18 @@ namespace Z0
         /// </summary>
         public static Moniker Empty => new Moniker(string.Empty);
 
+        /// <summary>
+        /// Creates a moniker directly from source text
+        /// </summary>
+        /// <param name="src">The source text</param>
+        public static Moniker Parse(string src)
+            => new Moniker(src);
+
         public static implicit operator string(Moniker src)
             => src.Text;
 
-        public Moniker(string text)
-            => this.Text = string.IsNullOrWhiteSpace(text) ? "00000" : text;
+        Moniker(string text)
+            => this.Text = text ?? 0.ToString();
         
         /// <summary>
         /// The width of the primal type over wich the identifier is constructed
@@ -268,7 +276,6 @@ namespace Z0
         public const string GenericBlockLocator = "_gb";
 
         public const string GenericLocator = "_g";
-
 
     }
 }

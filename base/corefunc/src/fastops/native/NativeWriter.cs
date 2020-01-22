@@ -5,15 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Reflection.Emit;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using System.IO;
 
     using static zfunc;
-    using System.Text;
 
     public class NativeWriter : StreamWriter
     {
@@ -57,7 +51,5 @@ namespace Z0
         {
             Write(data.Format(config));                            
         }
-
     }
-
 }

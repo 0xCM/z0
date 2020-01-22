@@ -31,8 +31,8 @@ namespace Z0
 
         public void vadd_check()
         {
-            var catalog = "ginx";
-            var subject = "dinx";        
+            var catalog = typeof(dinx).Assembly.OperationCatalog().CatalogName;
+            var subject = nameof(dinx);
             var name = nameof(dinx.vadd);
 
             vadd_check(n128, ReadAsm(catalog, subject, name, n128, z8));            
@@ -162,14 +162,18 @@ namespace Z0
 
         void primal_match(string name, FixedWidth w, PrimalKind kind)
         {
+            var catalog = nameof(gmath);
             var dSrc = nameof(math);
             var gSrc = nameof(gmath);
 
             var dId = OpIdentity.define(name, kind, false);
             var gId = OpIdentity.define(name, kind, true);
 
-            var dAsm = AsmArchive.Define(dSrc).ReadCode(dId).OnNone(() => Trace($"{dId} not found"));
-            var gAsm = AsmArchive.Define(gSrc).ReadCode(gId).OnNone(() => Trace($"{gId} not found"));
+            var dArchive = AsmServices.CodeArchive(catalog, dSrc);
+            var gArchive = AsmServices.CodeArchive(catalog, gSrc);
+
+            var dAsm = dArchive.ReadCode(dId).OnNone(() => Trace($"{dId} not found"));
+            var gAsm = gArchive.ReadCode(gId).OnNone(() => Trace($"{gId} not found"));
 
             var success = from d in dAsm
                           from g in gAsm
@@ -181,12 +185,13 @@ namespace Z0
 
         void vector_match(string name, FixedWidth w, PrimalKind kind)
         {
-            var catalog = nameof(ginx);        
+            var catalog = typeof(dinx).Assembly.OperationCatalog().CatalogName;
+            
             var idD = OpIdentity.segmented(name, w, kind, false);
             var idG = OpIdentity.segmented(name, w, kind, true);
 
-            var asmD = AsmArchive.Define(catalog, nameof(dinx)).ReadCode(idD).OnNone(() => Trace($"{idD} not found"));
-            var asmG = AsmArchive.Define(catalog, nameof(ginx)).ReadCode(idG).OnNone(() => Trace($"{idG} not found"));
+            var asmD = AsmServices.CodeArchive(catalog, nameof(dinx)).ReadCode(idD).OnNone(() => Trace($"{idD} not found"));
+            var asmG = AsmServices.CodeArchive(catalog, nameof(ginx)).ReadCode(idG).OnNone(() => Trace($"{idG} not found"));
 
             var success = from d in asmD
                           from g in asmG
@@ -233,64 +238,64 @@ namespace Z0
 
         protected void binop_match(N8 w, AsmCode a, AsmCode b)
         {
-            var f = LeftBuffer.BinOp(w, a);
-            var g = RightBuffer.BinOp(w, b);
+            var f = LeftBuffer.BinaryOp(w, a);
+            var g = RightBuffer.BinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
         protected void binop_match(N16 w, AsmCode a, AsmCode b)
         {
-            var f = LeftBuffer.BinOp(w, a);
-            var g = RightBuffer.BinOp(w, b);
+            var f = LeftBuffer.BinaryOp(w, a);
+            var g = RightBuffer.BinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
         protected void binop_match(N32 w, AsmCode a, AsmCode b)
         {
-            var f = LeftBuffer.BinOp(w, a);
-            var g = RightBuffer.BinOp(w, b);
+            var f = LeftBuffer.BinaryOp(w, a);
+            var g = RightBuffer.BinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
         protected void binop_match(N64 w, AsmCode a, AsmCode b)
         {
 
-            var f = LeftBuffer.BinOp(w, a);
-            var g = RightBuffer.BinOp(w, b);
+            var f = LeftBuffer.BinaryOp(w, a);
+            var g = RightBuffer.BinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
         protected void binop_match(N128 w, AsmCode a, AsmCode b)
         {
-            using var fBuffer = AsmExecBuffer.Create();
-            using var gBuffer = AsmExecBuffer.Create();
+            using var fBuffer = NativeServices.ExecBuffer();
+            using var gBuffer = NativeServices.ExecBuffer();
 
-            var f = fBuffer.BinOp(w, a);
-            var g = gBuffer.BinOp(w, b);
+            var f = fBuffer.BinaryOp(w, a);
+            var g = gBuffer.BinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
         }
 
         protected void binop_match(N256 w, AsmCode a, AsmCode b)
         {
-            using var fBuffer = AsmExecBuffer.Create();
-            using var gBuffer = AsmExecBuffer.Create();
+            using var fBuffer = NativeServices.ExecBuffer();
+            using var gBuffer = NativeServices.ExecBuffer();
 
-            var f = fBuffer.BinOp(w, a);
-            var g = gBuffer.BinOp(w, b);
+            var f = fBuffer.BinaryOp(w, a);
+            var g = gBuffer.BinaryOp(w, b);
             CheckMatch(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                                      
         }
         
         void vadd_check<T>(N128 w, AsmCode<T> asm)
             where T : unmanaged
         {            
-            var f = AsmBuffer.BinOp(w,asm);            
+            var f = AsmBuffer.BinaryOp(w,asm);            
             CheckMatch<T>(ginx.vadd, f, asm.Id);
         }
 
         void vadd_check<T>(N256 w, AsmCode<T> asm)
             where T : unmanaged
         {            
-            var f = AsmBuffer.BinOp(w,asm);
+            var f = AsmBuffer.BinaryOp(w,asm);
             CheckMatch<T>(ginx.vadd, f, asm.Id);
         }
     }

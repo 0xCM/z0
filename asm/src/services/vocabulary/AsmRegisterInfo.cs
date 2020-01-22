@@ -19,5 +19,4 @@ namespace Z0
         
         public string RegisterName {get;}
     }
-
 }

@@ -33,7 +33,7 @@ partial class zfunc
     /// <param name="text">The source text</param>
     [MethodImpl(Inline)]   
     public static Moniker moniker(string text)
-        => OpIdentity.define(text);
+        => Moniker.Parse(text);
 
     /// <summary>
     /// Defines a moniker with rendering {opname}_N{u | i | f} that identifies an

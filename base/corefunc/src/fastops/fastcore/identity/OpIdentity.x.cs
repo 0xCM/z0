@@ -56,13 +56,13 @@ namespace Z0
             {
                 var immval = src.Text.RightOfLast(Moniker.ImmIndicator);
                 var cleared = src.Text.Remove($"{Moniker.SuffixSep}{Moniker.ImmIndicator}{immval}");
-                return OpIdentity.define(cleared);                
+                return Moniker.Parse(cleared);                
             }
             else
                 return src;
         }
 
         public static Moniker WithImm(this Moniker src, byte imm)
-            => OpIdentity.define(concat(src.WithoutImm().Text, $"{Moniker.SuffixSep}{Moniker.ImmIndicator}{imm}"));
+            => Moniker.Parse(concat(src.WithoutImm().Text, $"{Moniker.SuffixSep}{Moniker.ImmIndicator}{imm}"));
     }
 }

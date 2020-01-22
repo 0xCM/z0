@@ -21,9 +21,6 @@ namespace Z0.Logix
         }
         
         public override IEnumerable<Type> GenericApiHosts
-            => items(typeof(BitMatrixOpApi), typeof(BitVectorOpApi), typeof(ScalarOpApi), typeof(VectorizedOpApi));
-               
-        public override string CatalogName 
-            => "logix";
+            => items(typeof(BitMatrixOpApi), typeof(BitVectorOpApi), typeof(ScalarOpApi), typeof(VectorizedOpApi));               
     }
 }

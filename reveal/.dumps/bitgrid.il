@@ -1,5 +1,5 @@
-// 2020-01-20 01:59:22:130
-// Id := 100663309, Name := System.Void Z0.bitgrid::part63x3(System.UInt64,Z0.NatSpan`2<Z0.N21,System.Byte>)
+// 2020-01-22 01:43:39:977
+// Id := 100663310, Name := System.Void Z0.bitgrid::part63x3(System.UInt64,Z0.NatSpan`2<Z0.N21,System.Byte>)
 // void part63x3(ulong src, NatSpan<N21,byte> dst)
 // IL
 void part63x3(ulong src, NatSpan<N21,byte> dst)
@@ -10,7 +10,7 @@ void part63x3(ulong src, NatSpan<N21,byte> dst)
     IL_0008: ret
 }
 
-// Id := 100663310, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.bitgrid::bitgrid_vector256(Z0.BitGrid`1<System.Byte>,System.Int32)
+// Id := 100663311, Name := System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.bitgrid::bitgrid_vector256(Z0.BitGrid`1<System.Byte>,System.Int32)
 // Vector256<byte> bitgrid_vector256(BitGrid<byte> src, int block)
 // IL
 Vector256<byte> bitgrid_vector256(BitGrid<byte> src, int block)
@@ -22,7 +22,7 @@ Vector256<byte> bitgrid_vector256(BitGrid<byte> src, int block)
     IL_000D: ret
 }
 
-// Id := 100663311, Name := Z0.BitGrid256`3<Z0.N16,Z0.N16,System.UInt16> Z0.bitgrid::transpose(Z0.BitGrid256`3<Z0.N16,Z0.N16,System.UInt16>)
+// Id := 100663312, Name := Z0.BitGrid256`3<Z0.N16,Z0.N16,System.UInt16> Z0.bitgrid::transpose(Z0.BitGrid256`3<Z0.N16,Z0.N16,System.UInt16>)
 // BitGrid256<N16,N16,ushort> transpose(BitGrid256<N16,N16,ushort> g)
 // IL
 BitGrid256<N16,N16,ushort> transpose(BitGrid256<N16,N16,ushort> g)
@@ -32,7 +32,7 @@ BitGrid256<N16,N16,ushort> transpose(BitGrid256<N16,N16,ushort> g)
     IL_0007: ret
 }
 
-// Id := 100663312, Name := Z0.bit Z0.bitgrid::read_bit_from_vector(Z0.BitBlock`2<Z0.N23,System.Byte>&)
+// Id := 100663313, Name := Z0.bit Z0.bitgrid::read_bit_from_vector(Z0.BitBlock`2<Z0.N23,System.Byte>&)
 // bit read_bit_from_vector(in BitBlock<N23,byte> src)
 // IL
 bit read_bit_from_vector(in BitBlock<N23,byte> src)
@@ -44,7 +44,7 @@ bit read_bit_from_vector(in BitBlock<N23,byte> src)
     IL_000C: ret
 }
 
-// Id := 100663313, Name := System.Int32 Z0.bitgrid::segments()
+// Id := 100663314, Name := System.Int32 Z0.bitgrid::segments()
 // int segments()
 // IL
 int segments()
@@ -53,7 +53,7 @@ int segments()
     IL_0005: ret
 }
 
-// Id := 100663314, Name := System.Int32 Z0.bitgrid::count_segs()
+// Id := 100663315, Name := System.Int32 Z0.bitgrid::count_segs()
 // int count_segs()
 // IL
 int count_segs()
@@ -69,7 +69,7 @@ int count_segs()
     IL_0018: ret
 }
 
-// Id := 100663315, Name := Z0.bit Z0.bitgrid::readbit_row_col_2(System.Int32,System.UInt64,System.Int32,System.Int32)
+// Id := 100663316, Name := Z0.bit Z0.bitgrid::readbit_row_col_2(System.Int32,System.UInt64,System.Int32,System.Int32)
 // bit readbit_row_col_2(int n, ulong src, int row, int col)
 // IL
 bit readbit_row_col_2(int n, ulong src, int row, int col)
@@ -82,7 +82,7 @@ bit readbit_row_col_2(int n, ulong src, int row, int col)
     IL_000A: ret
 }
 
-// Id := 100663316, Name := Z0.bit Z0.bitgrid::readbit_g_position(System.UInt64&,System.Int32)
+// Id := 100663317, Name := Z0.bit Z0.bitgrid::readbit_g_position(System.UInt64&,System.Int32)
 // bit readbit_g_position(in ulong src, int pos)
 // IL
 bit readbit_g_position(in ulong src, int pos)

@@ -1,8 +1,7 @@
-; 2020-01-20 01:59:21:261
+; 2020-01-22 01:43:39:413
 ; bit check_and_1(Vector128<uint> x, Vector128<uint> y)
-; static ReadOnlySpan<byte> check_and_1_128x32u_128x32uBytes => new byte[153]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF8,0x28,0xC8,0xC5,0xF9,0x10,0x12,0xC5,0xF8,0x28,0xDA,0xC5,0xF1,0xDB,0xCB,0xC5,0xF8,0x28,0xD8,0xC5,0xF9,0x7E,0xD8,0xC5,0xF8,0x28,0xDA,0xC5,0xF9,0x7E,0xDA,0x23,0xC2,0xC5,0xF8,0x28,0xD8,0xC4,0xE3,0x79,0x16,0xDA,0x01,0xC5,0xF8,0x28,0xDA,0xC4,0xE3,0x79,0x16,0xD9,0x01,0x23,0xD1,0xC5,0xF8,0x28,0xD8,0xC4,0xE3,0x79,0x16,0xD9,0x02,0xC5,0xF8,0x28,0xDA,0xC4,0xC3,0x79,0x16,0xD8,0x02,0x41,0x23,0xC8,0xC4,0xC3,0x79,0x16,0xC0,0x03,0xC4,0xC3,0x79,0x16,0xD1,0x03,0x45,0x23,0xC1,0xC5,0xF9,0x6E,0xC0,0xC4,0xE3,0x79,0x22,0xC2,0x01,0xC4,0xE3,0x79,0x22,0xC1,0x02,0xC4,0xC3,0x79,0x22,0xC0,0x03,0xC5,0xF1,0x76,0xC0,0xC5,0xF0,0x57,0xC9,0xC5,0xE8,0x57,0xD2,0xC5,0xF1,0x76,0xCA,0xC4,0xE2,0x79,0x17,0xC1,0x0F,0x92,0xC0,0x0F,0xB6,0xC0,0xC3};
-; [0x7ff7c839e9b0, 0x7ff7c839ea49], 153 bytes
-; 2020-01-20 01:59:21:262
+; check_and_1_128x32u_128x32u[0x7ff7c839d7a0, 0x7ff7c839d839][153] = {c5 f8 77 66 90 c5 f9 10 01 c5 f8 28 c8 c5 f9 10 12 c5 f8 28 da c5 f1 db cb c5 f8 28 d8 c5 f9 7e d8 c5 f8 28 da c5 f9 7e da 23 c2 c5 f8 28 d8 c4 e3 79 16 da 01 c5 f8 28 da c4 e3 79 16 d9 01 23 d1 c5 f8 28 d8 c4 e3 79 16 d9 02 c5 f8 28 da c4 c3 79 16 d8 02 41 23 c8 c4 c3 79 16 c0 03 c4 c3 79 16 d1 03 45 23 c1 c5 f9 6e c0 c4 e3 79 22 c2 01 c4 e3 79 22 c1 02 c4 c3 79 22 c0 03 c5 f1 76 c0 c5 f0 57 c9 c5 e8 57 d2 c5 f1 76 ca c4 e2 79 17 c1 0f 92 c0 0f b6 c0 c3}
+; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
 0005h vmovupd xmm0,[rcx]                      ; VMOVUPD xmm1, xmm2/m128 || VEX.128.66.0F.WIG 10 /r || encoded[4]{c5 f9 10 01}
@@ -42,9 +41,8 @@
 0098h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<uint> and_class(Vector128<uint> x, Vector128<uint> y)
-; static ReadOnlySpan<byte> and_class_128x32uBytes => new byte[32]{0x48,0x83,0xEC,0x28,0xC5,0xF8,0x77,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC5,0xF9,0xDB,0xC1,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0x48,0x83,0xC4,0x28,0xC3};
-; [0x7ff7c839ee80, 0x7ff7c839eea0], 32 bytes
-; 2020-01-20 01:59:21:262
+; and_class_128x32u[0x7ff7c839dc70, 0x7ff7c839dc90][32] = {48 83 ec 28 c5 f8 77 c5 f9 10 02 c4 c1 79 10 08 c5 f9 db c1 c5 f9 11 01 48 8b c1 48 83 c4 28 c3}
+; Capture completion code, None
 0000h sub rsp,28h                             ; SUB r/m64, imm8 || REX.W 83 /5 ib || encoded[4]{48 83 ec 28}
 0004h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0007h vmovupd xmm0,[rdx]                      ; VMOVUPD xmm1, xmm2/m128 || VEX.128.66.0F.WIG 10 /r || encoded[4]{c5 f9 10 02}
@@ -56,9 +54,8 @@
 001fh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint and_class_scalar(uint x, uint y)
-; static ReadOnlySpan<byte> and_class_scalar_32uBytes => new byte[14]{0x48,0x83,0xEC,0x28,0x90,0x23,0xD1,0x8B,0xC2,0x48,0x83,0xC4,0x28,0xC3};
-; [0x7ff7c839eec0, 0x7ff7c839eece], 14 bytes
-; 2020-01-20 01:59:21:262
+; and_class_scalar_32u[0x7ff7c839dcb0, 0x7ff7c839dcbe][14] = {48 83 ec 28 90 23 d1 8b c2 48 83 c4 28 c3}
+; Capture completion code, None
 0000h sub rsp,28h                             ; SUB r/m64, imm8 || REX.W 83 /5 ib || encoded[4]{48 83 ec 28}
 0004h nop                                     ; NOP || o32 90 || encoded[1]{90}
 0005h and edx,ecx                             ; AND r32, r/m32 || o32 23 /r || encoded[2]{23 d1}
@@ -67,9 +64,8 @@
 000dh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint and_class_scalar(CAnd128<uint> f, uint x, uint y)
-; static ReadOnlySpan<byte> and_class_scalar_25228285Bytes => new byte[13]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0x01,0x41,0x23,0xD0,0x8B,0xC2,0xC3};
-; [0x7ff7c839eef0, 0x7ff7c839eefd], 13 bytes
-; 2020-01-20 01:59:21:262
+; and_class_scalar_10983950[0x7ff7c839dce0, 0x7ff7c839dced][13] = {0f 1f 44 00 00 8b 01 41 23 d0 8b c2 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,[rcx]                           ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b 01}
 0007h and edx,r8d                             ; AND r32, r/m32 || o32 23 /r || encoded[3]{41 23 d0}
@@ -77,9 +73,8 @@
 000ch ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; Vector128<uint> and_struct(Vector128<uint> x, Vector128<uint> y)
-; static ReadOnlySpan<byte> and_struct_128x32uBytes => new byte[26]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x02,0xC4,0xC1,0x79,0x10,0x08,0xC5,0xF9,0xDB,0xC1,0xC5,0xF9,0x11,0x01,0x48,0x8B,0xC1,0xC3};
-; [0x7ff7c839f320, 0x7ff7c839f33a], 26 bytes
-; 2020-01-20 01:59:21:262
+; and_struct_128x32u[0x7ff7c839e110, 0x7ff7c839e12a][26] = {c5 f8 77 66 90 c5 f9 10 02 c4 c1 79 10 08 c5 f9 db c1 c5 f9 11 01 48 8b c1 c3}
+; Capture completion code, None
 0000h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0003h xchg ax,ax                              ; NOP || o16 90 || encoded[2]{66 90}
 0005h vmovupd xmm0,[rdx]                      ; VMOVUPD xmm1, xmm2/m128 || VEX.128.66.0F.WIG 10 /r || encoded[4]{c5 f9 10 02}
@@ -90,18 +85,16 @@
 0019h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint and_struct_scalar(uint x, uint y)
-; static ReadOnlySpan<byte> and_struct_scalar_32uBytes => new byte[10]{0x0F,0x1F,0x44,0x00,0x00,0x23,0xD1,0x8B,0xC2,0xC3};
-; [0x7ff7c839f350, 0x7ff7c839f35a], 10 bytes
-; 2020-01-20 01:59:21:262
+; and_struct_scalar_32u[0x7ff7c839e140, 0x7ff7c839e14a][10] = {0f 1f 44 00 00 23 d1 8b c2 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h and edx,ecx                             ; AND r32, r/m32 || o32 23 /r || encoded[2]{23 d1}
 0007h mov eax,edx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c2}
 0009h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; void loop_1(ReadOnlySpan<uint> src, Span<uint> dst)
-; static ReadOnlySpan<byte> loop_1_25727981Bytes => new byte[50]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0x01,0x48,0x8B,0x0A,0x8B,0x52,0x08,0x45,0x33,0xC0,0x85,0xD2,0x7E,0x1C,0x4D,0x63,0xC8,0x4E,0x8D,0x14,0x89,0x46,0x8B,0x0C,0x88,0x41,0xF7,0xD1,0x41,0xFF,0xC1,0x45,0x89,0x0A,0x41,0xFF,0xC0,0x44,0x3B,0xC2,0x7C,0xE4,0xC3};
-; [0x7ff7c839f370, 0x7ff7c839f3a2], 50 bytes
-; 2020-01-20 01:59:21:262
+; loop_1_31746690[0x7ff7c839e160, 0x7ff7c839e192][50] = {0f 1f 44 00 00 48 8b 01 48 8b 0a 8b 52 08 45 33 c0 85 d2 7e 1c 4d 63 c8 4e 8d 14 89 46 8b 0c 88 41 f7 d1 41 ff c1 45 89 0a 41 ff c0 44 3b c2 7c e4 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov rax,[rcx]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 01}
 0008h mov rcx,[rdx]                           ; MOV r64, r/m64 || REX.W 8B /r || encoded[3]{48 8b 0a}
@@ -121,9 +114,8 @@
 0031h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; void loop_2(ArrayExchange<uint> src, ArrayExchange<uint> dst)
-; static ReadOnlySpan<byte> loop_2_3591713Bytes => new byte[80]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x85,0xC9,0x75,0x04,0x33,0xC0,0xEB,0x07,0x48,0x8D,0x41,0x10,0x8B,0x49,0x08,0x48,0x85,0xD2,0x75,0x04,0x33,0xC9,0xEB,0x08,0x48,0x8D,0x4A,0x10,0x44,0x8B,0x42,0x08,0x8B,0x52,0x08,0x45,0x33,0xC0,0x85,0xD2,0x7E,0x1F,0x4D,0x63,0xC8,0x4E,0x8D,0x0C,0x89,0x4D,0x63,0xD0,0x46,0x8B,0x14,0x90,0x41,0xF7,0xD2,0x41,0xFF,0xC2,0x45,0x89,0x11,0x41,0xFF,0xC0,0x44,0x3B,0xC2,0x7C,0xE1,0xC3};
-; [0x7ff7c81b32a0, 0x7ff7c81b32f0], 80 bytes
-; 2020-01-20 01:59:21:262
+; loop_2_21345065[0x7ff7c839e5b0, 0x7ff7c839e600][80] = {0f 1f 44 00 00 48 85 c9 75 04 33 c0 eb 07 48 8d 41 10 8b 49 08 48 85 d2 75 04 33 c9 eb 08 48 8d 4a 10 44 8b 42 08 8b 52 08 45 33 c0 85 d2 7e 1f 4d 63 c8 4e 8d 0c 89 4d 63 d0 46 8b 14 90 41 f7 d2 41 ff c2 45 89 11 41 ff c0 44 3b c2 7c e1 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h test rcx,rcx                            ; TEST r/m64, r64 || REX.W 85 /r || encoded[3]{48 85 c9}
 0008h jne short 000eh                         ; JNE rel8 || 75 cb || encoded[2]{75 04}
@@ -154,9 +146,8 @@
 004fh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; void pipeline_1(ReadOnlySpan<uint> src, Span<uint> dst)
-; static ReadOnlySpan<byte> pipeline_1_32325424Bytes => new byte[56]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0x42,0x08,0x45,0x33,0xC0,0x85,0xC0,0x7E,0x28,0x4C,0x8B,0x0A,0x4D,0x63,0xD0,0x4F,0x8D,0x0C,0x91,0x4C,0x8B,0x11,0x4D,0x63,0xD8,0x47,0x8B,0x14,0x9A,0x41,0xF7,0xD2,0x41,0xFF,0xC2,0x41,0xF7,0xD2,0x45,0x89,0x11,0x41,0xFF,0xC0,0x44,0x3B,0xC0,0x7C,0xD8,0xC3};
-; [0x7ff7c85f0480, 0x7ff7c85f04b8], 56 bytes
-; 2020-01-20 01:59:21:262
+; pipeline_1_57887863[0x7ff7c839ea20, 0x7ff7c839ea58][56] = {0f 1f 44 00 00 8b 42 08 45 33 c0 85 c0 7e 28 4c 8b 0a 4d 63 d0 4f 8d 0c 91 4c 8b 11 4d 63 d8 47 8b 14 9a 41 f7 d2 41 ff c2 41 f7 d2 45 89 11 41 ff c0 44 3b c0 7c d8 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,[rdx+8]                         ; MOV r32, r/m32 || o32 8B /r || encoded[3]{8b 42 08}
 0008h xor r8d,r8d                             ; XOR r32, r/m32 || o32 33 /r || encoded[3]{45 33 c0}
@@ -178,9 +169,8 @@
 0037h ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; void pipeline_2(ReadOnlySpan<uint> src, Span<uint> dst)
-; static ReadOnlySpan<byte> pipeline_2_22493366Bytes => new byte[59]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0x42,0x08,0x45,0x33,0xC0,0x85,0xC0,0x7E,0x2B,0x4C,0x8B,0x0A,0x4D,0x63,0xD0,0x4F,0x8D,0x0C,0x91,0x4C,0x8B,0x11,0x4D,0x63,0xD8,0x47,0x8B,0x14,0x9A,0x45,0x8B,0xDA,0x41,0xF7,0xD3,0x41,0xFF,0xC3,0x45,0x23,0xD3,0x45,0x89,0x11,0x41,0xFF,0xC0,0x44,0x3B,0xC0,0x7C,0xD5,0xC3};
-; [0x7ff7c85f04d0, 0x7ff7c85f050b], 59 bytes
-; 2020-01-20 01:59:21:262
+; pipeline_2_51228725[0x7ff7c839ea70, 0x7ff7c839eaab][59] = {0f 1f 44 00 00 8b 42 08 45 33 c0 85 c0 7e 2b 4c 8b 0a 4d 63 d0 4f 8d 0c 91 4c 8b 11 4d 63 d8 47 8b 14 9a 45 8b da 41 f7 d3 41 ff c3 45 23 d3 45 89 11 41 ff c0 44 3b c0 7c d5 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,[rdx+8]                         ; MOV r32, r/m32 || o32 8B /r || encoded[3]{8b 42 08}
 0008h xor r8d,r8d                             ; XOR r32, r/m32 || o32 33 /r || encoded[3]{45 33 c0}
@@ -203,9 +193,8 @@
 003ah ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint and_negate(uint x)
-; static ReadOnlySpan<byte> and_negate_32uBytes => new byte[14]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0xF7,0xD0,0xFF,0xC0,0x23,0xC1,0xC3};
-; [0x7ff7c85f0520, 0x7ff7c85f052e], 14 bytes
-; 2020-01-20 01:59:21:262
+; and_negate_32u[0x7ff7c839eac0, 0x7ff7c839eace][14] = {0f 1f 44 00 00 8b c1 f7 d0 ff c0 23 c1 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c1}
 0007h not eax                                 ; NOT r/m32 || o32 F7 /2 || encoded[2]{f7 d0}
@@ -214,9 +203,8 @@
 000dh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint and_negate_ops(uint x)
-; static ReadOnlySpan<byte> and_negate_ops_32uBytes => new byte[14]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0xF7,0xD0,0xFF,0xC0,0x23,0xC1,0xC3};
-; [0x7ff7c85f0540, 0x7ff7c85f054e], 14 bytes
-; 2020-01-20 01:59:21:262
+; and_negate_ops_32u[0x7ff7c839eae0, 0x7ff7c839eaee][14] = {0f 1f 44 00 00 8b c1 f7 d0 ff c0 23 c1 c3}
+; Capture completion code, None
 0000h nop dword ptr [rax+rax]                 ; NOP r/m32 || o32 0F 1F /0 || encoded[5]{0f 1f 44 00 00}
 0005h mov eax,ecx                             ; MOV r32, r/m32 || o32 8B /r || encoded[2]{8b c1}
 0007h not eax                                 ; NOT r/m32 || o32 F7 /2 || encoded[2]{f7 d0}
@@ -225,9 +213,8 @@
 000dh ret                                     ; RET || C3 || encoded[1]{c3}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; uint vxor_128x32u_1(Vector128<uint> x, Vector128<uint> y)
-; static ReadOnlySpan<byte> vxor_128x32u_1_128x32u_128x32uBytes => new byte[32]{0x48,0x83,0xEC,0x28,0xC5,0xF8,0x77,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x7E,0xC0,0xC5,0xF9,0x10,0x02,0xC4,0xE3,0x79,0x16,0xC2,0x03,0x33,0xC2,0x48,0x83,0xC4,0x28,0xC3};
-; [0x7ff7c85f0970, 0x7ff7c85f0990], 32 bytes
-; 2020-01-20 01:59:21:262
+; vxor_128x32u_1_128x32u_128x32u[0x7ff7c839ef10, 0x7ff7c839ef30][32] = {48 83 ec 28 c5 f8 77 c5 f9 10 01 c5 f9 7e c0 c5 f9 10 02 c4 e3 79 16 c2 03 33 c2 48 83 c4 28 c3}
+; Capture completion code, None
 0000h sub rsp,28h                             ; SUB r/m64, imm8 || REX.W 83 /5 ib || encoded[4]{48 83 ec 28}
 0004h vzeroupper                              ; VZEROUPPER || VEX.128.0F.WIG 77 || encoded[3]{c5 f8 77}
 0007h vmovupd xmm0,[rcx]                      ; VMOVUPD xmm1, xmm2/m128 || VEX.128.66.0F.WIG 10 /r || encoded[4]{c5 f9 10 01}

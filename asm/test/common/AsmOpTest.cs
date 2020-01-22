@@ -12,6 +12,7 @@ namespace Z0
     using System.IO;
     
     using static zfunc;
+    
     public abstract class AsmOpTest<U> : UnitTest<U>, IDisposable
         where U : AsmOpTest<U>
     {
@@ -85,8 +86,8 @@ namespace Z0
         protected void CheckAsmMatch<T>(BinaryOp<T> f, AsmCode asm)
             where T : unmanaged
         {
-            using var buffer = AsmExecBuffer.Create();            
-            var g = buffer.BinOp(asm.As<T>());
+            using var buffer = NativeServices.ExecBuffer();
+            var g = buffer.BinaryOp(asm.As<T>());
 
             void check()
             {
@@ -107,7 +108,7 @@ namespace Z0
         protected void CheckAsmMatch<T>(UnaryOp<T> f, AsmCode asm)
             where T : unmanaged
         {
-            using var buffer = AsmExecBuffer.Create();            
+            using var buffer = NativeServices.ExecBuffer();
             var g = buffer.UnaryOp(asm.As<T>());
 
             void check()

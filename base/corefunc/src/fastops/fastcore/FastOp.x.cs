@@ -17,6 +17,10 @@ namespace Z0
 
     public static class FastOpX
     {
+
+        public static Moniker DefaultIdentity(this MethodInfo m)
+            => OpIdentity.Provider.Define(m);
+                
         /// <summary>
         /// Determines whether a method defines a formalized operation
         /// </summary>

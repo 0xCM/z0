@@ -16,7 +16,7 @@ namespace Z0
 
 
     public static class FastOps
-    {
+    {            
         public static OpSpec specify(MethodInfo method)
         {            
             var dst = specinit(method);
