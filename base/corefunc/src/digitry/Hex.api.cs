@@ -24,8 +24,8 @@ namespace Z0
         /// <summary>
         /// Standard hex specifier that trails the numeric content
         /// </summary>
-        public const string PostSpec = "h";         
-
+        public const char PostSpec = 'h';
+        
         /// <summary>
         /// Determines whether a character is a hex digit
         /// </summary>
@@ -180,6 +180,9 @@ namespace Z0
             where T : unmanaged
                 => format_hex_digits<T>(text(src,uppercase),zpad,specifier);
 
+        static string clean(string src)
+            => src.Remove(PreSpec).RemoveAny(AsciLower.h);
+
         /// <summary>
         /// Parses the Hex digit if possible; otherwise raises an error
         /// </summary>
@@ -195,13 +198,14 @@ namespace Z0
                 return Errors.ThrowArgException<char,byte>(c);
         }
 
+
         /// <summary>
         /// Attempts to parse a hex string as an unsigned long
         /// </summary>
         /// <param name="src">The source text</param>
         public static Option<ulong> parse(string src)
         {
-            if(ulong.TryParse(src.Remove(PreSpec),NumberStyles.HexNumber, null,  out ulong value))
+            if(ulong.TryParse(clean(src), NumberStyles.HexNumber, null,  out ulong value))
                 return value;
             return default;
         }
@@ -211,7 +215,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">hex text</param>
         public static byte parsebyte(string src)    
-            => byte.Parse(src.Remove(PreSpec), NumberStyles.HexNumber);
+            => byte.Parse(clean(src), NumberStyles.HexNumber);
 
         /// <summary>
         /// Parses a delimited sequence of hex bytes
@@ -219,7 +223,7 @@ namespace Z0
         /// <param name="src">The delimited hex</param>
         /// <param name="sep">The delimiter</param>
         public static IEnumerable<byte> parsebytes(string src, char sep = AsciSym.Comma)
-            => src.Split(sep).RemoveSubstring(PreSpec).Select(s => byte.Parse(s, NumberStyles.HexNumber));
+            => src.Split(sep).Select(parsebyte);
                
         [MethodImpl(Inline)]
         static string format_hex_digits<T>(string digits, bool zpad = true, bool specifier = true)

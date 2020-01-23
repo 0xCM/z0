@@ -11,8 +11,8 @@ namespace Z0
 
     /// <summary>
     /// Defines a 32x32 matrix of bits
-    /// </summary>
-    
+    /// </summary>    
+    [IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public readonly ref struct BitMatrix32
     {                
         readonly Span<uint> data;        

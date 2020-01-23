@@ -14,34 +14,34 @@ namespace Z0
     {
 
         public static bool IsOperator(this IFunc f)
-            => (f.Kind & FunctionKind.Operator) != 0;
+            => (f.Kind & HKFunctionKind.Operator) != 0;
 
         public static bool IsEmitter(this IFunc f)
-            => (f.Kind & FunctionKind.Emitter) != 0;
+            => (f.Kind & HKFunctionKind.Emitter) != 0;
 
         public static bool IsMeasure(this IFunc f)
-            => (f.Kind & FunctionKind.Measure) != 0;
+            => (f.Kind & HKFunctionKind.Measure) != 0;
 
         public static bool IsUnary(this IFunc f)
-            => (f.Kind & FunctionKind.UnaryFunc) != 0;
+            => (f.Kind & HKFunctionKind.UnaryFunc) != 0;
 
         public static bool IsBinary(this IFunc f)
-            => (f.Kind & FunctionKind.BinaryFunc) != 0;
+            => (f.Kind & HKFunctionKind.BinaryFunc) != 0;
 
         public static bool IsVectorized(this IFunc f)
-            => (f.Kind & FunctionKind.Vectorized) != 0;
+            => (f.Kind & HKFunctionKind.Vectorized) != 0;
 
         public static bool IsPredicate(this IFunc f)
-            => (f.Kind & FunctionKind.Predicate) != 0;
+            => (f.Kind & HKFunctionKind.Predicate) != 0;
 
         public static bool AcceptsImmediate(this IFunc f)
-            => (f.Kind & FunctionKind.Imm) != 0;
+            => (f.Kind & HKFunctionKind.Imm) != 0;
 
         public static bool AcceptsV128(this IFunc f)
-            => (f.Kind & FunctionKind.V128) != 0;
+            => (f.Kind & HKFunctionKind.V128) != 0;
 
         public static bool AcceptsV256(this IFunc f)
-            => (f.Kind & FunctionKind.V256) != 0;
+            => (f.Kind & HKFunctionKind.V256) != 0;
         
         public static bool IsImm8Resolver(this IFunc f)
             => f is Imm8Resolver;

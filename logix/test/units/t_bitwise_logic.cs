@@ -54,7 +54,7 @@ namespace Z0.Logix
 
         public void bwl_xor_check()
         {
-            var op = XOr;
+            var op = Xor;
             bitwise_logic_check<byte>(op);
             bitwise_logic_check<ushort>(op);
             bitwise_logic_check<uint>(op);
@@ -72,7 +72,7 @@ namespace Z0.Logix
 
         public void bwl_lnot_check()
         {
-            var op = LeftNot;
+            var op = LNot;
             bitwise_logic_check<byte>(op);
             bitwise_logic_check<ushort>(op);
             bitwise_logic_check<uint>(op);
@@ -81,7 +81,7 @@ namespace Z0.Logix
         
         public void bwl_rnot_check()
         {
-            var op = RightNot;
+            var op = RNot;
             bitwise_logic_check<byte>(op);
             bitwise_logic_check<ushort>(op);
             bitwise_logic_check<uint>(op);
@@ -90,7 +90,7 @@ namespace Z0.Logix
 
         public void bwl_imply_check()
         {
-            var op = Implication;
+            var op = Impl;
             bitwise_logic_check<byte>(op);
             bitwise_logic_check<ushort>(op);
             bitwise_logic_check<uint>(op);
@@ -99,7 +99,7 @@ namespace Z0.Logix
         
         public void bwl_notimply_check()
         {
-            var op = Nonimplication;
+            var op = NonImpl;
             bitwise_logic_check<byte>(op);
             bitwise_logic_check<ushort>(op);
             bitwise_logic_check<uint>(op);
@@ -108,7 +108,7 @@ namespace Z0.Logix
 
         public void bwl_cimply_check()
         {
-            var op = ConverseImplication;
+            var op = CImpl;
             bitwise_logic_check<byte>(op);
             bitwise_logic_check<ushort>(op);
             bitwise_logic_check<uint>(op);
@@ -117,7 +117,7 @@ namespace Z0.Logix
         
         public void bwl_cnotimply_check()
         {
-            var op = ConverseNonimplication;
+            var op = CNonImpl;
             bitwise_logic_check<byte>(op);
             bitwise_logic_check<ushort>(op);
             bitwise_logic_check<uint>(op);

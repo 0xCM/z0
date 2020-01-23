@@ -54,7 +54,7 @@ namespace Z0
         where T1 : unmanaged
         where T2 : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryConverter | FunctionKind.Vectorized;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryConverter | HKFunctionKind.Vectorized;
 
     }
 
@@ -68,7 +68,7 @@ namespace Z0
         where S : unmanaged
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryConverter | FunctionKind.V128;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryConverter | HKFunctionKind.V128;
 
     }
 
@@ -81,7 +81,7 @@ namespace Z0
     public interface IVMap128<T> : IVMap128<T,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryOp | FunctionKind.V128;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryOp | HKFunctionKind.V128;
 
     }
 
@@ -95,7 +95,7 @@ namespace Z0
         where S : unmanaged
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryConverter | FunctionKind.V256;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryConverter | HKFunctionKind.V256;
 
     }
 
@@ -109,7 +109,7 @@ namespace Z0
         where T : unmanaged
     {
 
-        FunctionKind IFunc.Kind => FunctionKind.UnaryOp | FunctionKind.V256;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryOp | HKFunctionKind.V256;
 
     }
 }

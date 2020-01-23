@@ -24,7 +24,7 @@ namespace Z0
         where T : unmanaged
         where V : struct
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryFunc | FunctionKind.Vectorized;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryFunc | HKFunctionKind.Vectorized;
 
     }
 
@@ -37,7 +37,7 @@ namespace Z0
     public interface IVFactory128<S,T> : IVFactory<N128,S,Vector128<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryFunc | FunctionKind.V128;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryFunc | HKFunctionKind.V128;
 
     }
 
@@ -50,7 +50,7 @@ namespace Z0
     public interface IVFactory256<S,T> : IVFactory<N256,S,Vector256<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryFunc | FunctionKind.V256;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryFunc | HKFunctionKind.V256;
 
     }
 }

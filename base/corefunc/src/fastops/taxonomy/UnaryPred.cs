@@ -21,7 +21,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IUnaryPred<A> : IUnaryFunc<A,bit>
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryPred;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryPred;
         
     }
 
@@ -46,7 +46,7 @@ namespace Z0
         where W : unmanaged, ITypeNat
         where V : struct
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryPred | FunctionKind.Vectorized;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryPred | HKFunctionKind.Vectorized;
 
     }
 
@@ -73,7 +73,7 @@ namespace Z0
     public interface IVUnaryPred128<T> : IVUnaryPred<N128,Vector128<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryPred | FunctionKind.V128;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryPred | HKFunctionKind.V128;
     
     }
 
@@ -85,7 +85,7 @@ namespace Z0
     public interface IVUnaryPred256<T> : IVUnaryPred<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryPred | FunctionKind.V256;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryPred | HKFunctionKind.V256;
         
     }
 

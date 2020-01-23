@@ -21,6 +21,53 @@ namespace Z0
             => default(OpIdentityProvider);
 
         /// <summary>
+        /// Gets the name of a method to which an Op attribute is applied
+        /// </summary>
+        /// <param name="m">The source method</param>
+        public static string opname(MethodInfo m)
+        {
+            var attrib = m.CustomAttribute<OpAttribute>();
+            if(attrib.IsNone())
+                return m.Name;
+        
+            var sep = AsciSym.Tilde;
+            var attribVal = attrib.Value;  
+            var customName = attribVal.Name;
+            var prefix = attribVal.CanonicalPrefix;
+            var modifier = attribVal.FacetModifier;
+            var byref = attribVal.ByRef ? "byref" : string.Empty;          
+            var combine = (modifier & OpFacetModifier.CombineNames) != 0;
+            
+            var name = string.Empty;
+            if(prefix.IsNotBlank())            
+            {
+                name = prefix;
+                name += sep;
+            }
+
+            if(customName.IsNotBlank())
+            {
+                name += customName;
+
+                if(combine)
+                {
+                    name += sep;
+                    name += m.Name;
+                }
+            }
+            else
+                name += m.Name;
+                
+            if(byref.IsNotBlank())                    
+            {
+                name += sep;
+                name += byref;
+            }                                        
+
+            return name;            
+        }
+
+        /// <summary>
         /// Defines a moniker in accordance with the supplied parameters
         /// </summary>
         /// <param name="opname">The base operator name/operator classifier</param>
@@ -77,7 +124,7 @@ namespace Z0
         /// <param name="k">The primal segment kind</param>
         [MethodImpl(Inline)]   
         public static Moniker segmented(MethodInfo method, FixedWidth w, PrimalKind k)
-            => segmented(method.FastOpName(), w, k, method.IsConstructedGenericMethod, false);
+            => segmented(method.OpName(), w, k, method.IsConstructedGenericMethod, false);
 
         /// <summary>
         /// Defines a moniker of the form {opname}_{w}X{bitsize(k)}{u | i | f}{_asm} to identify 

@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
 
     using static zfunc;
     using static AsmServiceMessages;
@@ -20,7 +21,7 @@ namespace Z0
         {
             this.Catalog = catalog;
             this.ClrMetadata = ClrMetadataIndex.Create(catalog.DeclaringAssembly);
-            this.Decoder = AsmServices.Decoder(ClrMetadata);
+            this.Decoder = AsmServices.Decoder(ClrMetadata, 12*1024);
         }
 
         readonly ClrMetadataIndex ClrMetadata;
@@ -29,26 +30,41 @@ namespace Z0
 
         public IAsmDecoder Decoder {get;}
 
+        public IEnumerable<AsmDescriptor> Emissions
+            => FunctionMap.Values.OrderBy(x => x.Origin);
+
         static string ImmSubject
             => "_imm";
+
+        Dictionary<AsmUri,AsmDescriptor> FunctionMap {get;}
+            = new Dictionary<AsmUri, AsmDescriptor>();
 
         ref readonly AsmDescriptor Pipe(in AsmDescriptor src)
         {
             print(Emitted(src));
+
+            FunctionMap.TryAdd(src.Uri, src);
+            // if(!FunctionMap.TryAdd(src.Uri, src))
+            // {
+            //     var other = FunctionMap[src.Uri];
+            //     if(!other.Equals(src))
+            //         print(DescriptorConflit(src));
+            // }
+
             return ref src;
         }
 
         IAsmFunctionArchive Archive(string subject)
             => AsmServices.FunctionArchive(Catalog.CatalogName, subject);
 
-        IEnumerable<AsmDescriptor> EmitUnaryImmResolutions(DirectOpInfo op, IAsmFunctionArchive archive)
+        IEnumerable<AsmDescriptor> EmitUnaryImmResolutions(DirectOpSpec op, IAsmFunctionArchive archive)
         {
             var immediates = new byte[]{5,9,13};
             var captured  =  AsmImmCapture.UnaryFunctions(op.Method, op.Id, immediates);                    
             return archive.Save(captured);            
         }   
 
-        IEnumerable<AsmDescriptor> EmitUnaryImmResolutions(GenericOpInfo op, IAsmFunctionArchive archive)
+        IEnumerable<AsmDescriptor> EmitUnaryImmResolutions(GenericOpSpec op, IAsmFunctionArchive archive)
         {
             var immediates = new byte[]{5,9,13};
             foreach(var closure in op.Closures().ToArray())
@@ -56,7 +72,7 @@ namespace Z0
                 yield return descriptor;
         }
 
-        IEnumerable<AsmDescriptor> Emit(GenericOpInfo op, IAsmFunctionArchive archive)
+        IEnumerable<AsmDescriptor> Emit(GenericOpSpec op, IAsmFunctionArchive archive)
         {
             var closures = op.Closures().ToArray();
             
@@ -67,7 +83,7 @@ namespace Z0
                 yield return archive.Save(Decoder.DecodeFunction(closure.Id, closure.ClosedMethod));
         }
 
-        IEnumerable<AsmDescriptor> Emit(DirectOpInfo op, IAsmFunctionArchive archive)
+        IEnumerable<AsmDescriptor> Emit(DirectOpSpec op, IAsmFunctionArchive archive)
         {                        
             yield return archive.Save(Decoder.DecodeFunction(op.Id, op.Method));
         }
@@ -81,7 +97,7 @@ namespace Z0
             var immArchive = Archive(concat(subject, ImmSubject));
             immArchive.Clear();
 
-            foreach(var op in host.FastOpGenericMethods())
+            foreach(var op in host.FastGenericOps())
             {
                 if(op.RequiresImmediate())
                 {
@@ -108,7 +124,7 @@ namespace Z0
             var immArchive = Archive(concat(subject, ImmSubject));
             immArchive.Clear();
 
-            foreach(var op in host.FastOpDirect())
+            foreach(var op in host.FastDirectOps())
             {
                 if(op.RequiresImmediate())
                 {
@@ -147,6 +163,6 @@ namespace Z0
             
             foreach(var emitted in EmitGeneric())
                 yield return emitted;
-        }        
+        }
     }
 }

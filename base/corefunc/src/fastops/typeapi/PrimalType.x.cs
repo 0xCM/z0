@@ -138,52 +138,11 @@ namespace Z0
             => k.DistinctKinds().Select(x => x.ToPrimalType());         
 
         /// <summary>
-        /// Computes the primal identifies of the classified kinds
-        /// </summary>
-        /// <param name="k"></param>
-        public static IEnumerable<PrimalId> Identities(this PrimalKind k)       
-        {
-            if(k.Is(PrimalKind.U8))
-                yield return PrimalId.U8;
-
-            if(k.Is(PrimalKind.I8))
-                yield return PrimalId.I8;
-
-            if(k.Is(PrimalKind.U16))
-                yield return PrimalId.U16;
-
-            if(k.Is(PrimalKind.I16))
-                yield return PrimalId.I16;
-
-            if(k.Is(PrimalKind.U32))
-                yield return PrimalId.U32;
-
-            if(k.Is(PrimalKind.I32))
-                yield return PrimalId.I32;
-
-            if(k.Is(PrimalKind.U64))
-                yield return PrimalId.U64;
-
-            if(k.Is(PrimalKind.I64))
-                yield return PrimalId.I64;
-
-            if(k.Is(PrimalKind.F32))
-                yield return PrimalId.F32;
-
-            if(k.Is(PrimalKind.F64))
-                yield return PrimalId.F64;
-        }
-
-        /// <summary>
         /// Determines the primal kind of a type, possibly none
         /// </summary>
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
         public static PrimalKind Kind(this Type t)
             => PrimalType.kind(t);
-
-        [MethodImpl(Inline)]
-        public static bool IsPrimal(this Type t)
-            => PrimalType.kind(t) != PrimalKind.None;
     }
 }

@@ -12,6 +12,13 @@ namespace Z0
     public static class OpIdentityX
     {
         /// <summary>
+        /// Gets the name of a method to which to Op attribute is applied
+        /// </summary>
+        /// <param name="m">The source method</param>
+        public static string OpName(this MethodInfo m)
+            => OpIdentity.opname(m);
+
+        /// <summary>
         /// Specifies the operation name
         /// </summary>
         public static Moniker WithName(this Moniker src, string name)
@@ -64,5 +71,11 @@ namespace Z0
 
         public static Moniker WithImm(this Moniker src, byte imm)
             => Moniker.Parse(concat(src.WithoutImm().Text, $"{Moniker.SuffixSep}{Moniker.ImmIndicator}{imm}"));
+
+        public static Option<ITypeIdentityProvider> IdentityProvider(this Type src)
+            => from a in src.CustomAttribute<IdentityProviderAttribute>()
+                let host = a.Host
+                from svc in TypeIdentityProvider.FromHost(host)
+                select svc;
     }
 }

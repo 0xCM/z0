@@ -9,8 +9,14 @@ namespace Z0
 
     public abstract class OpKindAttribute : OpAttribute
     {
-        protected OpKindAttribute(uint id, string name)
-            : base(name)        
+        protected OpKindAttribute(uint id, string name, OpFacetModifier modifier = OpFacetModifier.None)
+            : base(name, modifier)        
+        {
+            this.Id = id;
+        }
+
+        protected OpKindAttribute(uint id, string name, bool byref, OpFacetModifier modifier = OpFacetModifier.None)
+            : base(name, byref, modifier)        
         {
             this.Id = id;
         }

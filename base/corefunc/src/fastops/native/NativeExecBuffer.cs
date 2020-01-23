@@ -49,7 +49,7 @@ namespace Z0
             where T : unmanaged
         {
             Load(code);
-            return FixedDelegates.BinOp<T>(Code.Id, Buffer.Handle);
+            return Fixed.BinOp<T>(Code.Id, Buffer.Handle);
         }
 
         [MethodImpl(Inline)]
@@ -57,91 +57,92 @@ namespace Z0
             where T : unmanaged
         {
             Load(code);
-            return FixedDelegates.UnaryOp<T>(Code.Id, Buffer.Handle);
+            return Fixed.UnaryOp<T>(Code.Id, Buffer.Handle);
+
         }
 
         [MethodImpl(Inline)]
         public UnaryOp8 UnaryOp(N8 w, in AsmCode code)
         {
             Load(code);
-            return FixedDelegates.UnaryOp(w, Code.Id, Buffer.Handle);
+            return Fixed.UnaryOp(w, Code.Id, Buffer.Handle);
         }
 
         [MethodImpl(Inline)]
         public UnaryOp16 UnaryOp(N16 w, in AsmCode code)
         {
             Load(code);
-            return FixedDelegates.UnaryOp(w, Code.Id, Buffer.Handle);
+            return Fixed.UnaryOp(w, Code.Id, Buffer.Handle);
         }
 
         [MethodImpl(Inline)]
         public UnaryOp32 UnaryOp(N32 w, in AsmCode code)
         {
             Load(code);
-            return FixedDelegates.UnaryOp(w, Code.Id, Buffer.Handle);
+            return Fixed.UnaryOp(w, Code.Id, Buffer.Handle);
         }
 
         [MethodImpl(Inline)]
         public UnaryOp64 UnaryOp(N64 w, in AsmCode code)
         {
             Load(code);
-            return FixedDelegates.UnaryOp(w, Code.Id, Buffer.Handle);
+            return Fixed.UnaryOp(w, Code.Id, Buffer.Handle);
         }
 
         [MethodImpl(Inline)]
         public UnaryOp128 UnaryOp(N128 w, in AsmCode code)
         {
             Load(code);
-            return FixedDelegates.UnaryOp(w, Code.Id, Buffer.Handle);
+            return Fixed.UnaryOp(w, Code.Id, Buffer.Handle);
         }
 
         [MethodImpl(Inline)]
         public UnaryOp256 UnaryOp(N256 w, in AsmCode code)
         {
             Load(code);
-            return FixedDelegates.UnaryOp(w, Code.Id, Buffer.Handle);
+            return Fixed.UnaryOp(w, Code.Id, Buffer.Handle);
         }
 
         [MethodImpl(Inline)]
         public BinaryOp8 BinaryOp(N8 w, in AsmCode code)
         {
             Load(code);
-            return FixedDelegates.BinOp(w, Code.Id, Buffer.Handle);
+            return Fixed.BinOp(w, Code.Id, Buffer.Handle);
         }
 
         [MethodImpl(Inline)]
         public BinaryOp16 BinaryOp(N16 w, in AsmCode code)
         {
             Load(code);
-            return FixedDelegates.BinOp(w, Code.Id, Buffer.Handle);
+            return Fixed.BinOp(w, Code.Id, Buffer.Handle);
         }
 
         [MethodImpl(Inline)]
         public BinaryOp32 BinaryOp(N32 w, in AsmCode code)
         {
             Load(code);
-            return FixedDelegates.BinOp(w, Code.Id, Buffer.Handle);
+            return Fixed.BinOp(w, Code.Id, Buffer.Handle);
         }
 
         [MethodImpl(Inline)]
         public BinaryOp64 BinaryOp(N64 w, in AsmCode code)
         {
             Load(code);
-            return FixedDelegates.BinOp(w, Code.Id, Buffer.Handle);
+            return Fixed.BinOp(w, Code.Id, Buffer.Handle);
         }
 
         [MethodImpl(Inline)]
         public BinaryOp128 BinaryOp(N128 w, in AsmCode code)
         {
             Load(code);
-            return FixedDelegates.BinOp(w, Code.Id, Buffer.Handle);
+            return Fixed.BinOp(w, Code.Id, Buffer.Handle);
         }
 
         [MethodImpl(Inline)]
         public BinaryOp256 BinaryOp(N256 w, in AsmCode code)
         {
             Load(code);
-            return FixedDelegates.BinOp(w, Code.Id, Buffer.Handle);
+            return Fixed.BinOp(w, Code.Id, Buffer.Handle);
         }
         public void Dispose()
             => Buffer.Dispose();

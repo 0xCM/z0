@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="m">The method to read</param>
         /// <param name="dst">The target buffer</param>
         public static NativeMemberCapture read(MethodInfo m, Span<byte> dst)
-            => read(OpIdentity.Provider.Define(m), m, dst);
+            => read(OpIdentity.Provider.DefineIdentity(m), m, dst);
 
         /// <summary>
         /// Captures native code produced by the JIT for a dynamic delegate
@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="m">The method to read</param>
         /// <param name="dst">The target buffer</param>
         public static unsafe NativeMemberCapture read(Delegate d, Span<byte> dst)
-            => read(OpIdentity.Provider.Define(d.Method), d, dst);
+            => read(OpIdentity.Provider.DefineIdentity(d.Method), d, dst);
 
         /// <summary>
         /// Closes a generic method definition over a supplied type and captures the binary assembly data emitted 

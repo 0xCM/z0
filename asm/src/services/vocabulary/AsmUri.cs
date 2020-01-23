@@ -9,8 +9,22 @@ namespace Z0
 
     using static zfunc;
 
-    public readonly struct AsmUri
+    public readonly struct AsmUri : IEquatable<AsmUri>
     {
+        public readonly string Catalog;
+
+        public readonly string Subject;
+
+        public readonly Moniker Id;
+
+        [MethodImpl(Inline)]
+        public static bool operator==(AsmUri a, AsmUri b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(AsmUri a, AsmUri b)
+            => !a.Equals(b);
+
         public static Option<AsmUri> Parse(string src)
         {
             var parts = src.Split(fslash());
@@ -24,9 +38,11 @@ namespace Z0
             return default;
         }
         
+        [MethodImpl(Inline)]
         public static AsmUri Define(string catalog, string subject, Moniker id)        
             => new AsmUri(catalog,subject, id);
 
+        [MethodImpl(Inline)]
         AsmUri(string catalog, string subject, Moniker id)
         {
             this.Catalog = catalog;
@@ -34,17 +50,21 @@ namespace Z0
             this.Id = id;
         }
         
-        public readonly string Catalog;
-
-        public readonly string Subject;
-
-        public readonly Moniker Id;
-
         public string Format()
             => concat(Catalog, fslash(), Subject, fslash(), Id.Text);
         
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public bool Equals(AsmUri src)
+            => string.Compare(Format(), src.Format()) == 0;
+        
+        public override bool Equals(object obj)
+            => obj is AsmUri x && Equals(x);
+         
+        public override int GetHashCode()
+            => HashCode.Combine(Catalog,Subject,Id);
     }
 
 

@@ -56,20 +56,6 @@ namespace Z0
 
         public static string FormatInstructionBlock(this AsmFunction src, AsmFormatConfig fmt = null)
             => src.FormatInstructions(fmt).Concat(AsciEscape.Eol);
-        // {
-        //     fmt = fmt ?? AsmFormatConfig.Default;
-
-        //     var description = text();            
-        //     for(var i = 0; i< src.InstructionCount; i++)
-        //     {
-        //         var instruction = src.Instructions[i].FormatInstruction(fmt);
-        //         if(i != src.InstructionCount - 1)
-        //             description.AppendLine(instruction);
-        //         else
-        //             description.Append(instruction);
-        //     }
-        //     return description.ToString();
-        // }    
 
 
         public static ReadOnlySpan<string> FormatInstructions(this InstructionBlock src, AsmFormatConfig fmt = null)
@@ -216,7 +202,9 @@ namespace Z0
             HexDigitGroupSize = 4,
             UpperCaseRegisters = false, 
             LeadingZeroes = false,
-            DisplInBrackets = true,            
+            DisplInBrackets = true, 
+            UpperCaseHex = false,
+                       
         };
 
         /// <summary>
@@ -225,7 +213,7 @@ namespace Z0
         /// <param name="src">The source operand</param>
         static string Format(this AsmOperandInfo src)
         {
-            var fmt = src.ImmInfo.Map(i => $"{i.Value.FormatHex(false,true,false,false)}:{i.Label}", () => string.Empty);
+            var fmt = src.ImmInfo.Map(i => $"{i.Value.FormatAsmHex()}:{i.Label}", () => string.Empty);
             fmt += src.Register.Map(r => r.RegisterName, () => string.Empty);
             fmt += src.Memory.Map(r => r.Format(), () => string.Empty);
             fmt += src.Branch.Map(b => b.Format(), () => string.Empty);
@@ -261,10 +249,10 @@ namespace Z0
             
             ulong BaseAddress {get;}
 
-            public AsmOutput(TextWriter writer, ulong BaseAddress)
+            public AsmOutput(TextWriter writer, ulong root)
             {
                 this.Writer = writer;
-                this.BaseAddress = BaseAddress;
+                this.BaseAddress = root;
             }
             
             public override void Write(string text, FormatterOutputTextKind kind)
@@ -272,13 +260,16 @@ namespace Z0
                 switch(kind)
                 {
                     case FormatterOutputTextKind.LabelAddress:
-                        var x = text.EndsWith(AsciLower.h) ? text.Substring(0, text.Length - 1)  : text;
-                        if(ulong.TryParse(x, System.Globalization.NumberStyles.HexNumber,null, out var address))
-                        {
-                            Writer.Write((address - BaseAddress).FormatSmallHex(true));
-                        }
-                        else
-                            Writer.Write($"{text}{AsciSym.Question}");
+                        Hex.parse(text).OnSome(address => Writer.Write((address - BaseAddress).FormatSmallHex(true)))
+                                        .OnNone(() => Writer.Write($"{text}{AsciSym.Question}"));
+                        
+                        // var x = text.EndsWith(AsciLower.h) ? text.Substring(0, text.Length - 1)  : text;
+                        // if(ulong.TryParse(x, System.Globalization.NumberStyles.HexNumber,null, out var address))
+                        // {
+                        //     Writer.Write((address - BaseAddress).FormatSmallHex(true));
+                        // }
+                        // else
+                        //     Writer.Write($"{text}{AsciSym.Question}");
                     break;
                     default:
                         Writer.Write(text);    

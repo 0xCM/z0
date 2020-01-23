@@ -13,12 +13,12 @@ namespace Z0.Logix
     public static partial class VectorizedOps
     {
         [MethodImpl(Inline), VectorOp, PrimalClosures(PrimalKind.Integers)]
-        public static Vector128<T> @false<T>(N128 n)
+        public static Vector128<T> @false<T>(N128 w)
             where T : unmanaged
                 => default;
 
         [MethodImpl(Inline), VectorOp, PrimalClosures(PrimalKind.Integers)]
-        public static Vector128<T> @true<T>(N128 n)
+        public static Vector128<T> @true<T>(N128 w)
             where T:unmanaged
                 => VPattern.vones<T>(n128);
 

@@ -3,11 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Diagnostics;
 
 using Z0;
 
@@ -113,6 +109,5 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static void copy<T>(T[] src, T[] dst)
         => Array.Copy(src,dst,length(src,dst));
-
     
 }

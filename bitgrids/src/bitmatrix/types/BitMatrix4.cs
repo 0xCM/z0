@@ -12,6 +12,7 @@ namespace Z0
 
     using static zfunc;
 
+    [IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public ref struct BitMatrix4
     {        
         ushort data;

@@ -91,7 +91,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        XOr = 0b0110,
+        Xor = 0b0110,
 
         /// <summary>
         /// Classifies a binary operator xnor(a,b) := not(xor(a,b)) = bv(1001)
@@ -117,7 +117,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        LeftProject = 0b0011, 
+        LProject = 0b0011, 
 
         /// <summary>
         /// Classifies a logical binary operator right(a,b) := b = bv(1100)
@@ -130,7 +130,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 1
         /// </remarks>
-        RightProject = 0b0101,
+        RProject = 0b0101,
 
         /// <summary>
         /// Classifies a logical binary operator lnot(a,b) := not(a) = bv(0101)
@@ -143,7 +143,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        LeftNot = 0b1100, 
+        LNot = 0b1100, 
 
         /// <summary>
         /// Classifes a logical binary operator rnot(a,b) := not(b) = bv(0011)
@@ -156,7 +156,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 0
         /// </remarks>
-        RightNot = 0b1010, 
+        RNot = 0b1010, 
 
         /// <summary>
         /// Classifies a logical binary operator imply(a,b) := or(a, not(b)) = bv(1011)
@@ -169,7 +169,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        Implication = 0b1011,
+        Impl = 0b1011,
 
         /// <summary>
         /// Identifies a logical binary operator notimply(a,b) := and(~a, b) = bv(0100)
@@ -182,7 +182,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        Nonimplication = 0b0100,        
+        NonImpl = 0b0100,        
 
         /// <summary>
         /// Classifies a logical binary operator cimply(a,b) := or(not(a), b) = bv(1101)
@@ -195,7 +195,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 1
         /// </remarks>
-        ConverseImplication = 0b1101,
+        CImpl = 0b1101,
 
         /// <summary>
         /// Classifies a logical binary operator cnotimply(a,b) := and(a, ~b) = bv(0010)
@@ -208,6 +208,6 @@ namespace Z0
         /// 0 1 0
         /// 1 1 0
         /// </remarks>
-        ConverseNonimplication = 0b0010,               
+        CNonImpl = 0b0010,               
     } 
 }

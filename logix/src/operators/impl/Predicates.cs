@@ -14,10 +14,10 @@ namespace Z0.Logix
     /// Defines the canonical shape of a bitwise shift function
     /// </summary>
     /// <param name="a">The source value</param>
-    /// <param name="offset">The shift amount, typically in bits</param>
+    /// <param name="count">The shift amount, typically in bits</param>
     /// <typeparam name="T">The operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public delegate T Shifter<T>(T a, byte offset)
+    public delegate T Shifter<T>(T a, byte count)
         where T : unmanaged;
 
     /// <summary>

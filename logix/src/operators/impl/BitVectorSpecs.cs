@@ -93,7 +93,7 @@ namespace Z0.Logix
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = eval(BinaryBitLogicKind.XOr, x[i], y[i]);
+                z[i] = eval(BinaryBitLogicKind.Xor, x[i], y[i]);
             return z;
         }
 
@@ -158,7 +158,7 @@ namespace Z0.Logix
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = eval(BinaryBitLogicKind.Implication, x[i], y[i]);
+                z[i] = eval(BinaryBitLogicKind.Impl, x[i], y[i]);
             return z;
         }
 
@@ -174,7 +174,7 @@ namespace Z0.Logix
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = eval(BinaryBitLogicKind.Nonimplication, x[i], y[i]);
+                z[i] = eval(BinaryBitLogicKind.NonImpl, x[i], y[i]);
             return z;
         }
 
@@ -190,7 +190,7 @@ namespace Z0.Logix
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = eval(BinaryBitLogicKind.ConverseImplication, x[i], y[i]);
+                z[i] = eval(BinaryBitLogicKind.CImpl, x[i], y[i]);
             return z;
         }
 
@@ -206,7 +206,7 @@ namespace Z0.Logix
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = eval(BinaryBitLogicKind.ConverseNonimplication, x[i], y[i]);
+                z[i] = eval(BinaryBitLogicKind.CNonImpl, x[i], y[i]);
             return z;
         }
 

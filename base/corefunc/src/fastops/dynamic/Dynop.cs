@@ -16,7 +16,7 @@ namespace Z0
     using static As;
 
     public interface IDynOp<K> 
-        where K : ITypeKind
+        where K : IHKType
     {
         
     }
@@ -97,7 +97,7 @@ namespace Z0
             return method.CreateDelegate<UnaryBlockedOp128<T>>(id.WithImm(imm8), reified);
         }
 
-        internal static DynamicDelegate unary(HK.Vec k, Type typedef, Moniker id, MethodInfo src, byte imm8, Type seg)
+        public static DynamicDelegate unary(HK.Vec k, Type typedef, Moniker id, MethodInfo src, byte imm8, Type seg)
         {
             var reified = src.Reify(seg);
             var operand = typedef.MakeGenericType(seg); 
@@ -107,7 +107,7 @@ namespace Z0
             return method.CreateDelegate(id.WithImm(imm8), reified, target);
         }
 
-        internal static DynamicDelegate binary(HK.Vec k, Type typedef, Moniker id, MethodInfo src, byte imm8, Type seg)
+        public static DynamicDelegate binary(HK.Vec k, Type typedef, Moniker id, MethodInfo src, byte imm8, Type seg)
         {
             var reified = src.Reify(seg);
             var operand = typedef.MakeGenericType(seg); 

@@ -29,7 +29,7 @@ namespace Z0.Logix
             var lhsSamples = Random.Array<T>(RepCount);
             var rhsSamples = Random.Array<T>(RepCount);
             var result = default(T);
-            var kinds = ScalarOpApi.BinaryBitwiseKinds.ToArray();
+            var kinds = ScalarOpApi.BinaryBitLogicKinds.ToArray();
             var opcount = 0;
 
             clock.Start();

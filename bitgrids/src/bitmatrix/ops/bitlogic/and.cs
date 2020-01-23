@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>        
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BitMatrixOp, PrimalClosures(PrimalKind.Integers)]
         public static BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
         {
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         /// <param name="dst">The target matrix</param>
         /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>        
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BitMatrixOp(true), PrimalClosures(PrimalKind.Integers)]
         public static ref BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> dst)
             where T : unmanaged
         {
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BitMatrixOp]
         public static BitMatrix4 and(in BitMatrix4 A, in BitMatrix4 B)
             => BitMatrix4.From(math.and((ushort)A,(ushort)B));
 
@@ -58,7 +58,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BitMatrixOp]
         public static BitMatrix8 and(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="dst">The target matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BitMatrixOp]
         public static ref readonly BitMatrix8 and(in BitMatrix8 A, in BitMatrix8 B, in BitMatrix8 dst)
         {
             BitSquare.and(in A.Head, in B.Head, ref dst.Head);
@@ -84,7 +84,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BitMatrixOp]
         public static BitMatrix16 and(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="dst">The target matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BitMatrixOp]
         public static ref readonly BitMatrix16 and(in BitMatrix16 A, in BitMatrix16 B, in BitMatrix16 dst)
         {
             BitSquare.and(in A.Head, in B.Head, ref dst.Head);
@@ -110,7 +110,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BitMatrixOp]
         public static BitMatrix32 and(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
@@ -124,7 +124,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="Z">The target matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BitMatrixOp]
         public static ref readonly BitMatrix32 and(in BitMatrix32 A, in BitMatrix32 B, in BitMatrix32 Z)
         {
             BitSquare.and(in A.Head, in B.Head, ref Z.Head);
@@ -136,7 +136,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BitMatrixOp]
         public static BitMatrix64 and(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);
@@ -150,12 +150,11 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="dst">The target matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BitMatrixOp]
         public static ref readonly BitMatrix64 and(in BitMatrix64 A, in BitMatrix64 B, in BitMatrix64 dst)
         {
             BitSquare.and(in A.Head, in B.Head, ref dst.Head);
             return ref dst;
         }
-
     }
 }

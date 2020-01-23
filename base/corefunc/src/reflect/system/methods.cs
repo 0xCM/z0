@@ -99,7 +99,17 @@ namespace Z0
                : m.IsConstructedGenericMethod
                ? m.GetGenericArguments()
                : m.GetGenericMethodDefinition().GetGenericArguments();
-       
+
+        /// <summary>
+        /// For a non-constructed generic method or a generic method definition, returns an
+        /// array of the method's type parameters; otherwise, returns an empty array
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static Type[] OpenSlots(this MethodInfo m)
+            => m.ContainsGenericParameters ? m.GetGenericMethodDefinition().GetGenericArguments()
+             : m.IsGenericMethodDefinition ? m.GetGenericArguments()
+             : array<Type>();
+
         /// <summary>
         /// Returns true if the method has unspecified generic parameters, false otherwise
         /// </summary>

@@ -69,10 +69,10 @@ namespace Z0
         public static string FormatParam(this Pair<ParameterInfo,int> src)
         {
             var t = src.A.ParameterType;
-            if(Classified.segmented(t))
+            if(Types.segmented(t))
             {
-                var typewidth = (int)Classified.width(t);
-                var segkind = Classified.segtype(t).Require().Kind();
+                var typewidth = (int)Types.width(t);
+                var segkind = Types.segtype(t).Require().Kind();
                 var segwidth = segkind.BitWidth();
                 var indicator = segkind.Indicator();
                 return $"{typewidth}x{segwidth}{indicator}".PadLeft(7);
@@ -102,5 +102,25 @@ namespace Z0
         }
 
         static string MethodSep => new string('_',80);
+
+        public static string Format(this DataResource src, bool data = true)
+        {
+            if(src.IsEmpty)
+                return string.Empty;
+                
+            var origin = src.Location.FormatHex(false,true,true,false);
+            var datafmt = string.Empty;
+            if(data)
+            {
+                var loaded = src.GetBytes();
+                var current = parenthetical(location(loaded).FormatHex(false,true,true,false));
+                datafmt = concat(AsciSym.Colon, AsciSym.Space, embrace(loaded.FormatHexBytes()), AsciSym.Space, current);
+            }
+            
+            return concat($"{src.Id}, {origin}, {src.Length}", datafmt);            
+        }
+
    }
+
+   
 }

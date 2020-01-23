@@ -12,6 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a 16x16 matrix of bits
     /// </summary>
+    [IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public readonly ref struct BitMatrix16 
     {   
         readonly Span<ushort> data;

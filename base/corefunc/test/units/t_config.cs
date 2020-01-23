@@ -12,11 +12,9 @@ namespace Z0
 
     public sealed class t_config : UnitTest<t_config>
     {
-
         public void check_config()
         {
-
-            var index = ConfigIndex.Get(GetType().Name);
+            var index = AppSettings.Load(GetType().Name);
             Claim.eq(index["A_Number"],"400");
 
         }

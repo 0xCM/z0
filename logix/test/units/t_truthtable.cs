@@ -98,10 +98,10 @@ namespace Z0.Logix
             => check_typed_truth(Nor);
 
         public void check_logical_xor_truth()
-            => check_truth(XOr);
+            => check_truth(Xor);
 
         public void check_typed_xor_truth()
-            => check_typed_truth(XOr);
+            => check_typed_truth(Xor);
 
         public void check_logical_xnor_truth()
             => check_truth(Xnor);
@@ -110,28 +110,28 @@ namespace Z0.Logix
             => check_typed_truth(Xnor);
 
         public void check_logical_imply_truth()
-            => check_truth(Implication);
+            => check_truth(Impl);
 
         public void check_typed_imply_truth()
-            => check_typed_truth(Implication);
+            => check_typed_truth(Impl);
 
         public void check_logical_notimply_truth()
-            => check_truth(Nonimplication);
+            => check_truth(NonImpl);
 
         public void check_typed_notimply_truth()
-            => check_typed_truth(Nonimplication);
+            => check_typed_truth(NonImpl);
 
         public void check_logical_cimply_truth()
-            => check_truth(ConverseImplication);
+            => check_truth(CImpl);
 
         public void check_typed_cimply_truth()
-            => check_typed_truth(ConverseImplication);
+            => check_typed_truth(CImpl);
 
         public void check_logical_cnotimply_truth()
-            => check_truth(ConverseNonimplication);
+            => check_truth(CNonImpl);
 
         public void check_typed_cnotimply_truth()
-            => check_typed_truth(ConverseNonimplication);
+            => check_typed_truth(CNonImpl);
 
         void check_typed_truth(BinaryBitLogicKind op)
         {               

@@ -11,22 +11,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using static ReflectionFlags;
-
-    public enum ParamDirection
-    {
-        Default,
-
-        In = 1,
-
-        Out = 2
-    }
 
     partial class Reflections
     {        
-        public static ParamDirection Direction(this ParameterInfo src)
-            => src.IsIn ? ParamDirection.In : src.IsOut ? ParamDirection.Out : ParamDirection.Default;
-
         /// <summary>
         /// Gets the value of a specified field or property
         /// </summary>
@@ -61,7 +48,6 @@ namespace Z0
         public static IEnumerable<T> WithName<T>(this IEnumerable<T> src, string name)
             where T : MemberInfo
                 => src.Where(x => x.Name == name); 
-
 
         /// <summary>
         /// Selects the members with a name that exists within a supplied set

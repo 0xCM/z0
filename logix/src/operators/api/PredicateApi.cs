@@ -12,19 +12,21 @@ namespace Z0.Logix
     using static zfunc;
 
     using static OpHelpers;
+    using static LogixOpNames;
 
     public static class PredicateApi
     {
         /// <summary>
         /// Specifies the supported comparison predicates
         /// </summary>
-        public static ComparisonKind[] ComparisonKinds
-            => new ComparisonKind[]{
+        public static ReadOnlySpan<ComparisonKind> ComparisonKinds
+            => array(
                 ComparisonKind.Eq, ComparisonKind.Neq, 
                 ComparisonKind.Lt, ComparisonKind.LtEq, 
-                ComparisonKind.Gt, ComparisonKind.GtEq, 
-            };
+                ComparisonKind.Gt, ComparisonKind.GtEq );
 
+
+        [Op(cmp), PrimalClosures(PrimalKind.Integers)]
         public static bit eval<T>(ComparisonKind kind, T a, T b)
             where T : unmanaged            
         {
@@ -36,10 +38,11 @@ namespace Z0.Logix
                 case ComparisonKind.LtEq: return gmath.lteq(a,b);
                 case ComparisonKind.Gt: return gmath.gt(a,b);
                 case ComparisonKind.GtEq: return gmath.gteq(a,b);
-                default: return dne<ComparisonKind,bit>(kind);
+                default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
+        [Op(cmp), PrimalClosures(PrimalKind.Integers)]
         public static BinaryPred<T> lookup<T>(ComparisonKind kind)
             where T : unmanaged            
         {
@@ -51,11 +54,10 @@ namespace Z0.Logix
                 case ComparisonKind.LtEq: return gmath.lteq;
                 case ComparisonKind.Gt: return gmath.gt;
                 case ComparisonKind.GtEq: return gmath.gteq;
-                default: return dne<ComparisonKind,BinaryPred<T>>(kind);
+                default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
 
     }
-
 }

@@ -14,6 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines an 8x8 matrix of bits
     /// </summary>
+    [IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public readonly ref struct BitMatrix8
     {        
         internal readonly Span<byte> data;

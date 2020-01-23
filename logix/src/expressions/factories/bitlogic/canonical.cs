@@ -209,7 +209,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp xor(ILogicExpr a, ILogicExpr b)
-            => binary(XOr, a, b);
+            => binary(Xor, a, b);
 
         /// <summary>
         /// Defines a logical Xor operator over literal operands
@@ -218,7 +218,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp xor(bit a, bit b)
-            => binary(XOr, a, b);
+            => binary(Xor, a, b);
 
         /// <summary>
         /// Defines a logical Xor operator over typed expression operands
@@ -228,7 +228,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryLogicOp<T> xor<T>(ILogicExpr<T> a, ILogicExpr<T> b)
             where T : unmanaged
-                => binary(XOr, a, b);
+                => binary(Xor, a, b);
 
         /// <summary>
         /// Defines a logical Xor operator over typed expression operands
@@ -238,7 +238,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         static BinaryLogicOp<T> xor<T>(bit a, bit b)
             where T : unmanaged
-                => binary<T>(XOr, a, b);
+                => binary<T>(Xor, a, b);
 
         /// <summary>
         /// Defines an xnor operator over expression operands
@@ -285,7 +285,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp left(ILogicExpr a, ILogicExpr b)
-            => binary(LeftProject, a, b);
+            => binary(LProject, a, b);
 
         /// <summary>
         /// Defines a logical Xor operator over typed expression operands
@@ -295,7 +295,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryLogicOp<T> left<T>(ILogicExpr<T> a, ILogicExpr<T> b)
             where T : unmanaged
-                => binary(LeftProject, a, b);
+                => binary(LProject, a, b);
 
         /// <summary>
         /// Defines a left projection over literal operands
@@ -304,7 +304,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp left(bit a, bit b)
-            => binary(LeftProject, a, b);
+            => binary(LProject, a, b);
 
         /// <summary>
         /// Defines a left projection operator over typed literal operands
@@ -314,7 +314,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         static BinaryLogicOp<T> left<T>(bit a, bit b)
             where T : unmanaged
-                => binary<T>(LeftProject, a, b);
+                => binary<T>(LProject, a, b);
 
         /// <summary>
         /// Defines a right projection operator over expression operands
@@ -323,7 +323,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp right(ILogicExpr a, ILogicExpr b)
-            => binary(RightProject, a, b);
+            => binary(RProject, a, b);
 
         /// <summary>
         /// Defines a right projection over literal operands
@@ -332,7 +332,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp right(bit a, bit b)
-            => binary(RightProject, a, b);
+            => binary(RProject, a, b);
 
         /// <summary>
         /// Defines a right projection operator over typed expression operands
@@ -342,7 +342,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryLogicOp<T> right<T>(ILogicExpr<T> a, ILogicExpr<T> b)
             where T : unmanaged
-                => binary(RightProject, a, b);
+                => binary(RProject, a, b);
 
         /// <summary>
         /// Defines a right projection operator over typed literal operands
@@ -352,7 +352,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         static BinaryLogicOp<T> right<T>(bit a, bit b)
             where T : unmanaged
-                => binary<T>(RightProject, a, b);
+                => binary<T>(RProject, a, b);
 
         /// <summary>
         /// Defines a left negation operator over expression operands
@@ -361,7 +361,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp lnot(ILogicExpr a, ILogicExpr b)
-            => binary(LeftNot, a, b);
+            => binary(LNot, a, b);
 
         /// <summary>
         /// Defines a left negation operator over literal operands
@@ -370,7 +370,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp lnot(bit a, bit b)
-            => binary(LeftNot, a, b);
+            => binary(LNot, a, b);
 
         /// <summary>
         /// Defines a left negation operator over typed expression operands
@@ -380,7 +380,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryLogicOp<T> lnot<T>(ILogicExpr<T> a, ILogicExpr<T> b)
             where T : unmanaged
-                => binary(LeftNot, a, b);
+                => binary(LNot, a, b);
 
         /// <summary>
         /// Defines a left negation operator over typed literal operands
@@ -390,7 +390,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         static BinaryLogicOp<T> lnot<T>(bit a, bit b)
             where T : unmanaged
-                => binary<T>(LeftNot, a, b);
+                => binary<T>(LNot, a, b);
 
         /// <summary>
         /// Defines a right negation operator over expression operands 
@@ -399,7 +399,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp rnot(ILogicExpr a, ILogicExpr b)
-            => binary(RightNot, a, b);
+            => binary(RNot, a, b);
 
         /// <summary>
         /// Defines a right negation operator over literal operands
@@ -408,7 +408,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp rnot(bit a, bit b)
-            => binary(RightNot, a, b);
+            => binary(RNot, a, b);
 
         /// <summary>
         /// Defines a right negation operator over typed expression operands
@@ -418,7 +418,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryLogicOp<T> rnot<T>(ILogicExpr<T> a, ILogicExpr<T> b)
             where T : unmanaged
-                => binary(RightNot, a, b);
+                => binary(RNot, a, b);
 
         /// <summary>
         /// Defines a right negation operator over typed literal operands
@@ -428,7 +428,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         static BinaryLogicOp<T> rnot<T>(bit a, bit b)
             where T : unmanaged
-                => binary<T>(RightNot, a, b);
+                => binary<T>(RNot, a, b);
 
         /// <summary>
         /// Defines a material implication operator over expression operands
@@ -437,7 +437,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp imply(ILogicExpr a, ILogicExpr b)
-            => binary(Implication, a, b);
+            => binary(Impl, a, b);
 
         /// <summary>
         /// Defines a material implication operator over literal operands
@@ -446,7 +446,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp imply(bit a, bit b)
-            => binary(Implication, a, b);
+            => binary(Impl, a, b);
 
         /// <summary>
         /// Defines a material implication operator over typed expression operands
@@ -456,7 +456,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryLogicOp<T> imply<T>(ILogicExpr<T> a, ILogicExpr<T> b)
             where T : unmanaged
-                => binary(Implication, a, b);
+                => binary(Impl, a, b);
 
         /// <summary>
         /// Defines a material implication operator over typed literal operands
@@ -466,7 +466,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         static BinaryLogicOp<T> imply<T>(bit a, bit b)
             where T : unmanaged
-                => binary<T>(Implication, a, b);
+                => binary<T>(Impl, a, b);
 
         /// <summary>
         /// Defines a material nonimplication operator over expression operands
@@ -475,7 +475,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp notimply(ILogicExpr a, ILogicExpr b)
-            => binary(Nonimplication, a, b);
+            => binary(NonImpl, a, b);
 
         /// <summary>
         /// Defines a material nonimplication operator over literal operands
@@ -484,7 +484,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp notimply(bit a, bit b)
-            => binary(Nonimplication, a, b);
+            => binary(NonImpl, a, b);
 
         /// <summary>
         /// Defines a material nonimplication operator over typed expression operands
@@ -494,7 +494,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryLogicOp<T> notimply<T>(ILogicExpr<T> a, ILogicExpr<T> b)
             where T : unmanaged
-                => binary(Nonimplication, a, b);
+                => binary(NonImpl, a, b);
 
         /// <summary>
         /// Defines a material nonimplication operator over typed literal operands
@@ -504,7 +504,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         static BinaryLogicOp<T> notimply<T>(bit a, bit b)
             where T : unmanaged
-                => binary<T>(Nonimplication, a, b);
+                => binary<T>(NonImpl, a, b);
 
         /// <summary>
         /// Defines a converse implication operator over expression operands
@@ -513,7 +513,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp cimply(ILogicExpr a, ILogicExpr b)
-            => binary(ConverseImplication, a, b);
+            => binary(CImpl, a, b);
 
         /// <summary>
         /// Defines a converse implication operator over literal operands
@@ -522,7 +522,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp cimply(bit a, bit b)
-            => binary(ConverseImplication, a, b);
+            => binary(CImpl, a, b);
 
         /// <summary>
         /// Defines a converse implication operator over typed expression operands
@@ -532,7 +532,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryLogicOp<T> cimply<T>(ILogicExpr<T> a, ILogicExpr<T> b)
             where T : unmanaged
-                => binary(ConverseImplication, a, b);
+                => binary(CImpl, a, b);
 
         /// <summary>
         /// Defines a converse implication operator over typed literal operands
@@ -542,7 +542,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         static BinaryLogicOp<T> cimply<T>(bit a, bit b)
             where T : unmanaged
-                => binary<T>(ConverseImplication, a, b);
+                => binary<T>(CImpl, a, b);
 
         /// <summary>
         /// Defines a converse nonimplication operator over expression operands
@@ -551,7 +551,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp cnotimply(ILogicExpr a, ILogicExpr b)
-            => binary(ConverseNonimplication, a, b);
+            => binary(CNonImpl, a, b);
 
        /// <summary>
         /// Defines a converse nonimplication operator over literal operands
@@ -560,7 +560,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp cnotimply(bit a, bit b)
-            => binary(ConverseNonimplication, a, b);
+            => binary(CNonImpl, a, b);
 
         /// <summary>
         /// Defines a converse nonimplication operator over typed expression operands
@@ -570,7 +570,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryLogicOp<T> cnotimply<T>(ILogicExpr<T> a, ILogicExpr<T> b)
             where T : unmanaged
-                => binary(ConverseNonimplication, a, b);
+                => binary(CNonImpl, a, b);
 
         /// <summary>
         /// Defines a converse nonimplication operator over typed literal operands
@@ -580,7 +580,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         static BinaryLogicOp<T> cnotimply<T>(bit a, bit b)
             where T : unmanaged
-                => binary<T>(ConverseNonimplication, a, b);
+                => binary<T>(CNonImpl, a, b);
 
         /// <summary>
         /// Defines a ternary select operator over expression operands

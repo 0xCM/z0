@@ -449,7 +449,7 @@ namespace Z0
         /// </summary>
         /// <param name="s">The string to evaluate</param>
         [MethodImpl(Inline)]
-        public static bool IsNonEmpty(this string s)
+        public static bool IsNotBlank(this string s)
             => !s.IsBlank();
 
         /// <summary>
@@ -460,7 +460,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void OnSome(this string s, Action<string> f)
         {
-            if(s.IsNonEmpty())
+            if(s.IsNotBlank())
                 f(s);
         }
 

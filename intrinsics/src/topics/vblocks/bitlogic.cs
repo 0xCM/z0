@@ -34,7 +34,7 @@ namespace Z0
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vor<T>(n256));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
         public static ref readonly Block128<T> vxor<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vxor<T>(n128));
@@ -49,7 +49,7 @@ namespace Z0
             where T : unmanaged
                 => ref vmap(a, c,VX.vnot<T>(n128));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
         public static ref readonly Block256<T> vnot<T>(in Block256<T> a, in Block256<T> c)
             where T : unmanaged
                 => ref vmap(a, c,VX.vnot<T>(n256));
@@ -89,7 +89,7 @@ namespace Z0
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vxornot<T>(n128));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
         public static ref readonly Block256<T> vxornot<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vxornot<T>(n256));
@@ -144,24 +144,23 @@ namespace Z0
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vcnonimpl<T>(n256));
 
-
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
         public static ref readonly Block128<T> vbsll<T>(in Block128<T> a, [Imm] byte count, in Block128<T> dst)
             where T : unmanaged
                 => ref vzip(a, count, dst, VX.vbsll<T>(n128));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
         public static ref readonly Block256<T> vbsll<T>(in Block256<T> a, [Imm] byte count, in Block256<T> dst)
             where T : unmanaged
                 => ref vzip(a, count, dst, VX.vbsll<T>(n256));
 
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
         public static ref readonly Block128<T> vbsrl<T>(in Block128<T> a, [Imm] byte count, in Block128<T> dst)
             where T : unmanaged
                 => ref vzip(a, count, dst, VX.vbsrl<T>(n128));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
         public static ref readonly Block256<T> vbrll<T>(in Block256<T> a, [Imm] byte count, in Block256<T> dst)
             where T : unmanaged
                 => ref vzip(a, count, dst, VX.vbsrl<T>(n256));

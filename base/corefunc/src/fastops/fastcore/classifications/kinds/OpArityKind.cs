@@ -14,8 +14,7 @@ namespace Z0
     /// Classifies operator arities
     /// </summary>
     public enum OpArityKind : byte
-    {
-       
+    {       
         /// <summary>
         /// Classifies an operator with no arguments
         /// </summary>

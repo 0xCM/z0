@@ -13,55 +13,51 @@ namespace Z0.Logix
     using static TernaryBitLogicKind;
     using static ScalarOps;
     using static OpHelpers;
+    using static LogixOpNames;
 
     /// <summary>
     /// Services for scalar operators
     /// </summary>
     public static class ScalarOpApi
     {
-        public static IEnumerable<UnaryBitLogicKind> UnaryBitwiseKinds
-            => new UnaryBitLogicKind[]{UnaryBitLogicKind.Not, UnaryBitLogicKind.Identity};
+        /// <summary>
+        /// Advertises the supported unary bitlogic operators
+        /// </summary>
+        public static ReadOnlySpan<UnaryBitLogicKind> UnaryBitLogicKinds
+            => Enums.members<UnaryBitLogicKind>();
 
         /// <summary>
-        /// Advertises the supported binary operators
+        /// Advertises the supported binary bitlogic operators
         /// </summary>
-        public static ReadOnlySpan<BinaryBitLogicKind> BinaryBitwiseKinds
-            => BinaryOpKindData.As<BinaryBitLogicKind>();
-
-        static ReadOnlySpan<byte> BinaryOpKindData
-            => new byte[]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-
-        public static UnaryArithmeticKind[] UnaryAritmeticKinds
-            => new UnaryArithmeticKind[]{
-                UnaryArithmeticKind.Inc, UnaryArithmeticKind.Dec, UnaryArithmeticKind.Negate
-            };
-
-
-        public static BinaryArithmeticKind[] BinaryArithmeticKinds
-            => new BinaryArithmeticKind[]{
-                BinaryArithmeticKind.Add, BinaryArithmeticKind.Sub, 
-            };
-
+        public static ReadOnlySpan<BinaryBitLogicKind> BinaryBitLogicKinds
+            => Enums.members<BinaryBitLogicKind>();
 
         /// <summary>
-        /// Specifies the supported comparison operators
+        /// Advertises the supported ternary bitlogic opeators
         /// </summary>
-        public static ComparisonKind[] ComparisonKinds
-            => new ComparisonKind[]{
-                ComparisonKind.Eq, ComparisonKind.Neq, 
-                ComparisonKind.Lt, ComparisonKind.LtEq, 
-                ComparisonKind.Gt, ComparisonKind.GtEq, 
-            };
-
+        public static ReadOnlySpan<TernaryBitLogicKind> TernaryBitLogicKinds
+            => range((byte)1,(byte)X5F).Cast<TernaryBitLogicKind>().ToArray();
 
         /// <summary>
-        /// Advertises the supported ternary opeators
+        /// Advertises the supported unary arithmetic operators
         /// </summary>
-        public static IEnumerable<TernaryBitLogicKind> TernaryBitwiseKinds
-            => range((byte)1,(byte)X5F).Cast<TernaryBitLogicKind>();
+        public static ReadOnlySpan<UnaryArithmeticKind> UnaryAritmeticKinds
+            => Enums.members<UnaryArithmeticKind>();
+
+        /// <summary>
+        /// Advertises the supported binary arithmetic operators
+        /// </summary>
+        public static ReadOnlySpan<BinaryArithmeticKind> BinaryArithmeticKinds
+            => Enums.members<BinaryArithmeticKind>();
+
+        /// <summary>
+        /// Advertises the supported comparison operators
+        /// </summary>
+        public static ReadOnlySpan<ComparisonKind> ComparisonKinds
+            => Enums.members<ComparisonKind>();
 
 
-        [Op, PrimalClosures(PrimalKind.Integers)]
+        [Op(bbl), PrimalClosures(PrimalKind.Integers)]
         public static T eval<T>(BinaryBitLogicKind kind, T a, T b)
             where T : unmanaged
         {
@@ -73,21 +69,21 @@ namespace Z0.Logix
                 case BinaryBitLogicKind.Nand: return nand(a,b);
                 case BinaryBitLogicKind.Or: return or(a,b);
                 case BinaryBitLogicKind.Nor: return nor(a,b);
-                case BinaryBitLogicKind.XOr: return xor(a,b);
+                case BinaryBitLogicKind.Xor: return xor(a,b);
                 case BinaryBitLogicKind.Xnor: return xnor(a,b);
-                case BinaryBitLogicKind.LeftProject: return left(a,b);
-                case BinaryBitLogicKind.RightProject: return right(a,b);
-                case BinaryBitLogicKind.LeftNot: return lnot(a,b);
-                case BinaryBitLogicKind.RightNot: return rnot(a,b);
-                case BinaryBitLogicKind.Implication: return impl(a,b);                    
-                case BinaryBitLogicKind.Nonimplication: return nonimpl(a,b);
-                case BinaryBitLogicKind.ConverseImplication: return cimpl(a,b);                    
-                case BinaryBitLogicKind.ConverseNonimplication: return cnonimpl(a,b);
-                default: return dne<BinaryBitLogicKind,T>(kind);
+                case BinaryBitLogicKind.LProject: return left(a,b);
+                case BinaryBitLogicKind.RProject: return right(a,b);
+                case BinaryBitLogicKind.LNot: return lnot(a,b);
+                case BinaryBitLogicKind.RNot: return rnot(a,b);
+                case BinaryBitLogicKind.Impl: return impl(a,b);                    
+                case BinaryBitLogicKind.NonImpl: return nonimpl(a,b);
+                case BinaryBitLogicKind.CImpl: return cimpl(a,b);                    
+                case BinaryBitLogicKind.CNonImpl: return cnonimpl(a,b);
+                default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
-        [Op, PrimalClosures(PrimalKind.Integers)]
+        [Op(ubl), PrimalClosures(PrimalKind.Integers)]
         public static T eval<T>(UnaryBitLogicKind kind, T a)
             where T : unmanaged
         {
@@ -95,11 +91,11 @@ namespace Z0.Logix
             {
                 case UnaryBitLogicKind.Not: return not(a);
                 case UnaryBitLogicKind.Identity: return ScalarOps.identity(a);
-                default: return dne<UnaryBitLogicKind,T>(kind);            
+                default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
-        [Op, PrimalClosures(PrimalKind.Integers)]
+        [Op(cmp), PrimalClosures(PrimalKind.Integers)]
         public static T eval<T>(ComparisonKind kind, T a, T b)
             where T : unmanaged            
         {
@@ -111,7 +107,7 @@ namespace Z0.Logix
                 case ComparisonKind.LtEq: return lteq(a,b);
                 case ComparisonKind.Gt: return gt(a,b);
                 case ComparisonKind.GtEq: return gteq(a,b);
-                default: return dne<ComparisonKind,T>(kind);
+                default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
@@ -123,7 +119,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
-        [Op, PrimalClosures(PrimalKind.Integers)]
+        [Op(tbl), PrimalClosures(PrimalKind.Integers)]
         public static T eval<T>(TernaryBitLogicKind kind, T a, T b, T c)
             where T : unmanaged
         {
@@ -224,11 +220,11 @@ namespace Z0.Logix
                 case X5D: return f5d(a, b, c);
                 case X5E: return f5e(a, b, c);
                 case X5F: return f5f(a, b, c);
-                default: return canteval<T,TernaryBitLogicKind>(kind);
+                default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
-        [Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [Op(shift), PrimalClosures(PrimalKind.UnsignedInts)]
         public static T eval<T>(ShiftOpKind kind, T a, byte count)
             where T : unmanaged
         {
@@ -238,10 +234,11 @@ namespace Z0.Logix
                 case ShiftOpKind.Srl: return srl(a, count);
                 case ShiftOpKind.Rotl: return rotl(a, count);
                 case ShiftOpKind.Rotr: return rotr(a, count);
-                default: return dne<ShiftOpKind,T>(kind);
+                default: throw new NotSupportedException(sig<T>(kind));
             }
         }
             
+        [Op(shift), PrimalClosures(PrimalKind.Integers)]
         public static Shifter<T> lookup<T>(ShiftOpKind kind)
             where T : unmanaged            
         {
@@ -251,10 +248,11 @@ namespace Z0.Logix
                 case ShiftOpKind.Srl: return srl;
                 case ShiftOpKind.Rotl: return rotl;
                 case ShiftOpKind.Rotr: return rotr;
-                default: return dne<T>(kind);
+                default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
+        [Op(cmp), PrimalClosures(PrimalKind.All)]
         public static BinaryOp<T> lookup<T>(ComparisonKind kind)
             where T : unmanaged
         {
@@ -266,10 +264,11 @@ namespace Z0.Logix
                 case ComparisonKind.LtEq: return lteq;
                 case ComparisonKind.Gt: return gt;
                 case ComparisonKind.GtEq: return gteq;
-                default: return dne<T>(kind);
+                default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
+        [Op(ubl), PrimalClosures(PrimalKind.Integers)]
         public static UnaryOp<T> lookup<T>(UnaryBitLogicKind kind)
             where T : unmanaged            
         {
@@ -277,10 +276,11 @@ namespace Z0.Logix
             {
                 case UnaryBitLogicKind.Not: return not;
                 case UnaryBitLogicKind.Identity: return ScalarOps.identity;
-                default: return dne<T>(kind);            
+                default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
+        [Op(bbl), PrimalClosures(PrimalKind.Integers)]
         public static BinaryOp<T> lookup<T>(BinaryBitLogicKind kind)
             where T : unmanaged
         {
@@ -292,24 +292,25 @@ namespace Z0.Logix
                 case BinaryBitLogicKind.Nand: return nand;
                 case BinaryBitLogicKind.Or: return or;
                 case BinaryBitLogicKind.Nor: return nor;
-                case BinaryBitLogicKind.XOr: return xor;
+                case BinaryBitLogicKind.Xor: return xor;
                 case BinaryBitLogicKind.Xnor: return xnor;
-                case BinaryBitLogicKind.LeftProject: return left;
-                case BinaryBitLogicKind.RightProject: return right;
-                case BinaryBitLogicKind.LeftNot: return lnot;
-                case BinaryBitLogicKind.RightNot: return rnot;
-                case BinaryBitLogicKind.Implication: return impl;
-                case BinaryBitLogicKind.Nonimplication: return nonimpl;
-                case BinaryBitLogicKind.ConverseImplication: return cimpl;
-                case BinaryBitLogicKind.ConverseNonimplication: return cnonimpl;
-                default: return dne<T>(kind);
+                case BinaryBitLogicKind.LProject: return left;
+                case BinaryBitLogicKind.RProject: return right;
+                case BinaryBitLogicKind.LNot: return lnot;
+                case BinaryBitLogicKind.RNot: return rnot;
+                case BinaryBitLogicKind.Impl: return impl;
+                case BinaryBitLogicKind.NonImpl: return nonimpl;
+                case BinaryBitLogicKind.CImpl: return cimpl;
+                case BinaryBitLogicKind.CNonImpl: return cnonimpl;
+                default: throw new NotSupportedException(sig<T>(kind));
             }
         }
 
-        public static TernaryOp<T> lookup<T>(TernaryBitLogicKind id)
+        [Op(tbl), PrimalClosures(PrimalKind.Integers)]
+        public static TernaryOp<T> lookup<T>(TernaryBitLogicKind kind)
             where T : unmanaged
         {
-            switch(id)
+            switch(kind)
             {
                 case X01: return f01;
                 case X02: return f02;
@@ -406,9 +407,8 @@ namespace Z0.Logix
                 case X5D: return f5d;
                 case X5E: return f5e;
                 case X5F: return f5f;
-                default: return dne<T>(id);
+                default: throw new NotSupportedException(sig<T>(kind));
             }
         }
     }
-
 }

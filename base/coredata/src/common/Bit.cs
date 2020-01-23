@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Linq;
+    using System.Collections.Generic;
 
     using static zfunc;
 
@@ -22,6 +24,17 @@ namespace Z0
 
         public const char One = '1';
 
+
+        
+        static string[] OnLabels => new string[]{"on", "1", "enabled", "true", "yes"};
+        
+        [MethodImpl(Inline)]
+        public static bit Parse(char c)
+            => c == '1';
+
+        public static bit Parse(string src)
+            => OnLabels.Contains(src.Trim().ToLower());
+            
         /// <summary>
         /// Constructs a disabled bit
         /// </summary>
@@ -355,9 +368,6 @@ namespace Z0
         public static bit select(bit a, bit b, bit c)
             => SafeWrap((a.state & b.state) | (~a.state & c.state));
 
-        [MethodImpl(Inline)]
-        public static bit Parse(char c)
-            => c == '1';
 
         /// <summary>
         /// Returns true if the bit is enabled, false otherwise

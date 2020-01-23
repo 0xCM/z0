@@ -12,18 +12,31 @@ namespace Z0
 
     using static zfunc;
 
-    public class ConfigIndex
+    public interface IAppSettings
     {
-        public static ConfigIndex Get(string name)
+        Option<string> Read(string name);
+        
+        Option<T> Read<T>(string name);
+
+        string this[string name] {get;}
+
+        IEnumerable<Pair<string>> Pairs {get;}
+
+    }
+
+
+    public class AppSettings : IAppSettings
+    {
+        public static IAppSettings Load(string name)
         {
             var path = Paths.ConfigPath(name);
             path.FolderPath.CreateIfMissing();
             var builder = new ConfigurationBuilder();
             builder.AddJsonFile(path.Name,true);
-            return new ConfigIndex(builder.Build());            
+            return new AppSettings(builder.Build());            
         }
 
-        ConfigIndex(IConfigurationRoot root)
+        AppSettings(IConfigurationRoot root)
         {
             this.Root = root;
             this.Values = new Dictionary<string, string>();
@@ -49,7 +62,8 @@ namespace Z0
         int Age
             => (int)(now() - Loaded).TotalSeconds;
 
-        public string Read(string name)
+
+        public Option<string> Read(string name)
         {
             try            
             {
@@ -57,22 +71,7 @@ namespace Z0
                   Load(true);
 
                 if(Values.TryGetValue(name, out var value))
-                    return value;
-            }
-            catch(Exception e)
-            {
-                error(e);
-            }
-            return string.Empty;
-        }
-
-        public Option<T> Read<T>(string name)
-        {
-            try
-            {
-                var value = Read(name);
-                if(!string.IsNullOrWhiteSpace(value))
-                    return (T)Convert.ChangeType(value, typeof(T));
+                    return  value.IsBlank() ? none<string>() : some(value);
             }
             catch(Exception e)
             {
@@ -81,11 +80,25 @@ namespace Z0
             return default;
         }
 
+        public Option<T> Read<T>(string name)
+        {
+            try
+            {
+                return Read(name).TryMap(v => (T) Convert.ChangeType(v,typeof(T)));
+            }
+            catch(Exception e)
+            {
+                error(e);
+            }
+            return default;
+        }
 
         public string this[string name]
         {
-            get => Read(name);
+            get => Read(name).ValueOrElse(() => string.Empty);
         }
+
+        public IEnumerable<Pair<string>> Pairs => Values.Select(kvp => pair(kvp.Key, kvp.Value));
 
     }
 

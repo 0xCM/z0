@@ -196,7 +196,7 @@ namespace Z0
                 
                 var outcomes = unit.TakeOutcomes().ToArray();
                 if(outcomes.Length != 0)
-                    results.AddRange(outcomes);
+                    results.AppendRange(outcomes);
                 else
                     results.Add(TestCaseRecord.Define(testName,true,exectime));
             }

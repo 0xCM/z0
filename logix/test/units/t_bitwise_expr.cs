@@ -44,7 +44,7 @@ namespace Z0.Logix
 
         public void check_xor_scalar_expr()
         {
-            var op = BinaryBitLogicKind.XOr;
+            var op = BinaryBitLogicKind.Xor;
 
             check_scalar_expr<byte>(op);
             check_scalar_expr<ushort>(op);
@@ -115,7 +115,7 @@ namespace Z0.Logix
         public void check_xor_128_expr()
         {            
             var n = n128;
-            var op = BinaryBitLogicKind.XOr;
+            var op = BinaryBitLogicKind.Xor;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -185,7 +185,7 @@ namespace Z0.Logix
         public void check_xor_256_expr()
         {            
             var n = n256;
-            var op = BinaryBitLogicKind.XOr;
+            var op = BinaryBitLogicKind.Xor;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -224,8 +224,10 @@ namespace Z0.Logix
         
         public void check_ternary_ops()
         {
-            var common =  VectorizedOpApi.TernaryBitwiseKinds.Intersect(ScalarOpApi.TernaryBitwiseKinds).ToArray();
-            iter(common,check_ternary_ops);
+            iter(set(
+                VectorizedOpApi.TernaryBitLogicKinds, 
+                ScalarOpApi.TernaryBitLogicKinds),
+                    check_ternary_ops);
         }
 
         void check_ternary_ops(TernaryBitLogicKind op)

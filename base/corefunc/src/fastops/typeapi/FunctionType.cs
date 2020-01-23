@@ -212,7 +212,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static IEnumerable<Pair<ParameterInfo,FixedWidth>> inputwidths(MethodInfo m)
-            => m.GetParameters().Select(p => paired(p, Classified.width(p.ParameterType)));
+            => m.GetParameters().Select(p => paired(p, Types.width(p.ParameterType)));
 
         /// <summary>
         /// Determines the bit-width of an intrinsic or primal return type
@@ -226,6 +226,6 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool primal(this MethodInfo m)
-            => m.ParameterCount() != 0 && m.ParameterTypes().All(t => t.IsPrimal());
+            => m.ParameterCount() != 0 && m.ParameterTypes().All(t => t.Kind() != PrimalKind.None);
     }
 }

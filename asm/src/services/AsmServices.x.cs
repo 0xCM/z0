@@ -59,6 +59,6 @@ namespace Z0
             => AsmServices.CatalogEmitter(catalog);
 
         public static IEnumerable<AsmDescriptor> Emit(this IOperationCatalog catalog)
-            => catalog.Emitter().EmitCatalog().ToList();
+            => catalog.Emitter().EmitCatalog().Force();
     }
 }

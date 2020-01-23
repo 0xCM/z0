@@ -21,12 +21,14 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static IEnumerable<Type> ParameterTypes(this MethodInfo m)
-        {
-            var parameters = m.GetParameters().Select(p => p.ParameterType);
-            // if(returntype && !m.ReturnType.IsVoid()) 
-            //     return array(m.ReturnType).Union(parameters);
-            // else
-                return parameters;
-        }                    
+            => m.GetParameters().Select(p => p.ParameterType);
+
+        /// <summary>
+        /// Returns a method's parameter types
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static IEnumerable<Type> ParameterTypes(this MethodInfo m, bool effective)
+            => effective ? m.ParameterTypes().Select(t => t.EffectiveType()) : m.ParameterTypes();
+
     }
 }

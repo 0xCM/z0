@@ -86,13 +86,43 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The item type</typeparam>
-        public static HashSet<T> ToHashSet<T>(this Span<T> src)        
+        public static HashSet<T> ToSet<T>(this Span<T> src)        
             where T : unmanaged
+                => set(src.ReadOnly());
+
+        /// <summary>
+        /// Constructs a hash set from span content
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The item type</typeparam>
+        public static HashSet<T> ToSet<T>(this ReadOnlySpan<T> src)        
+            where T : unmanaged
+                => set(src);
+
+        /// <summary>
+        /// Constructs a hash set from span content
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The item type</typeparam>
+        public static HashSet<T> ToSet<T>(this ReadOnlySpan<T> a, ReadOnlySpan<T> b)        
+            where T : unmanaged
+                => set(a,b);
+
+        /// <summary>
+        /// Constructs a hash set from span content
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The item type</typeparam>
+        public static HashSet<T> ToSet<T>(this Span<T> src, ReadOnlySpan<T> b)        
+            where T : unmanaged
+                => src.ReadOnly().ToSet(b);
+
+        public static HashSet<T> SetUnion<T>(this HashSet<T> a, params HashSet<T>[]  sets)
         {
-            var dst = new HashSet<T>(src.Length);
-            for(var i=0; i< src.Length; i++)
-                dst.Add(src[i]);
-            return dst;
+            for(var i=0; i<sets.Length; i++)
+            foreach(var item in sets[i])
+                a.Add(item);
+            return a;
         }
 
     }

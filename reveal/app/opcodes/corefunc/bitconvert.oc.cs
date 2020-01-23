@@ -9,21 +9,18 @@ namespace Z0.OpCodes
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static As;
-    using static FixedContainers;
-    using static Stacked;
     
     [OpCodeProvider]
     public static class bitconvert
     {
         public static void deposit(in ulong src, ref Fixed128 dst)
-            => FixedStore.deposit(src, ref dst);
+            => Fixed.deposit(src, ref dst);
 
         public static void deposit_4_0(in uint src, ref Fixed128 dst)
-            => FixedStore.deposit(src, 4, ref dst, 0);
+            => Fixed.deposit(src, 4, ref dst, 0);
 
         public static void deposit_2_2(in uint src, ref Fixed128 dst)
-            => FixedStore.deposit(src, 2, ref dst, 2);
+            => Fixed.deposit(src, 2, ref dst, 2);
 
         public static Span<byte> bc_bytes_16u(ushort a)
             => BitConvert.GetBytes(a);
@@ -45,8 +42,5 @@ namespace Z0.OpCodes
 
         public static Span<byte> bc_bytes_fixed4096(Fixed4096 a)
             => BitConvert.GetBytes(a);
-
-
     }
-
 }

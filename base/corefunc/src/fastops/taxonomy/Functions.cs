@@ -21,7 +21,7 @@ namespace Z0
         /// <summary>
         /// Specifies the function kind classification
         /// </summary>
-        FunctionKind Kind => FunctionKind.None;       
+        HKFunctionKind Kind => HKFunctionKind.None;       
     }
 
 
@@ -40,7 +40,7 @@ namespace Z0
     {
         A Invoke();
 
-        FunctionKind IFunc.Kind => FunctionKind.Emitter;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.Emitter;
         
     }
 
@@ -54,7 +54,7 @@ namespace Z0
     {
         B Invoke(A a);
 
-        FunctionKind IFunc.Kind => FunctionKind.UnaryFunc;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryFunc;
     }
 
     /// <summary>
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="c">The third operand</param>
         C Invoke(A a, B b);
 
-        FunctionKind IFunc.Kind => FunctionKind.BinaryFunc;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryFunc;
 
     }
 
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="c">The third operand</param>
         D Invoke(A a, B b, C c);
 
-        FunctionKind IFunc.Kind => FunctionKind.TernaryFunc;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.TernaryFunc;
 
     }
 
@@ -106,7 +106,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IVFunc : IFunc
     {
-        FunctionKind IFunc.Kind => FunctionKind.Vectorized;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.Vectorized;
 
     }
 
@@ -137,7 +137,7 @@ namespace Z0
         where T1 : unmanaged
         where T2 : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryFunc | FunctionKind.Vectorized;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryFunc | HKFunctionKind.Vectorized;
 
     }
 
@@ -165,7 +165,7 @@ namespace Z0
         where T2 : unmanaged
         where T3 : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.BinaryFunc | FunctionKind.Vectorized;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryFunc | HKFunctionKind.Vectorized;
 
     }
 
@@ -199,7 +199,7 @@ namespace Z0
         where T3 : unmanaged
         where T4 : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.TernaryFunc | FunctionKind.Vectorized;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.TernaryFunc | HKFunctionKind.Vectorized;
 
     }
 
@@ -212,7 +212,7 @@ namespace Z0
         where T : unmanaged
     {
 
-        FunctionKind IFunc.Kind => FunctionKind.V256 | FunctionKind.UnaryConverter;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.V256 | HKFunctionKind.UnaryConverter;
 
     }
 }

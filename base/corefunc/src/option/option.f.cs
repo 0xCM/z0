@@ -50,7 +50,6 @@ partial class zfunc
     /// </summary>
     /// <typeparam name="T">The target type</typeparam>
     /// <param name="item">The object to cast</param>
-    /// <returns></returns>
     [MethodImpl(Inline)]   
     public static Option<T> tryCast<T>(object item)
         => item is T ? some((T)item) : none<T>();
@@ -61,7 +60,6 @@ partial class zfunc
     /// </summary>
     /// <typeparam name="T">The result type</typeparam>
     /// <param name="f">The function to evaluate</param>
-    /// <returns></returns>
     public static Option<T> Try<T>(Func<T> f, Action<Exception> error = null)
     {
         try

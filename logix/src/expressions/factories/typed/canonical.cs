@@ -107,7 +107,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryBitwiseOp<T> xor<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
-                => binary(BinaryBitLogicKind.XOr, lhs,rhs);
+                => binary(BinaryBitLogicKind.Xor, lhs,rhs);
 
         /// <summary>
         /// Defines a bitwise xor expression with literal operands

@@ -41,10 +41,6 @@ namespace Z0
             return dst;
         }        
 
-        // [MethodImpl(Inline)]
-        // public static Span<T2> Apply<F,T0,T1,T2>(this F f, ReadOnlySpan<T0> lhs, ReadOnlySpan<T1> rhs, Span<T2> dst)
-        //     where F : IBinaryFunc<T0,T1,T2>
-        //         => apply(f,lhs,rhs,dst);        
 
         [MethodImpl(Inline)]
         public static Span<bit> apply<F,T>(F f, ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)

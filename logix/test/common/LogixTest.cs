@@ -187,7 +187,7 @@ namespace Z0.Logix
             }
         }
 
-        protected void bm_xor_check<N,T>(BinaryBitLogicKind op = XOr)
+        protected void bm_xor_check<N,T>(BinaryBitLogicKind op = Xor)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -238,7 +238,7 @@ namespace Z0.Logix
         }
 
 
-        protected void bm_imply_check<N,T>(BinaryBitLogicKind op = Implication)
+        protected void bm_imply_check<N,T>(BinaryBitLogicKind op = Impl)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -263,7 +263,7 @@ namespace Z0.Logix
             }
         }
 
-        protected void bm_notimply_check<N,T>(BinaryBitLogicKind op = Nonimplication)
+        protected void bm_notimply_check<N,T>(BinaryBitLogicKind op = NonImpl)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -288,7 +288,7 @@ namespace Z0.Logix
             }
         }
 
-        protected void bm_not_check<N,T>(BinaryBitLogicKind op = LeftNot)
+        protected void bm_not_check<N,T>(BinaryBitLogicKind op = LNot)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 

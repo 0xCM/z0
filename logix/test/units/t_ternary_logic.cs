@@ -15,8 +15,8 @@ namespace Z0.Logix
 
         protected override int RepCount => Pow2.T08;
         
-        IEnumerable<TernaryBitLogicKind> TernaryKinds
-            => ScalarOpApi.TernaryBitwiseKinds;
+        ReadOnlySpan<TernaryBitLogicKind> TernaryKinds
+            => ScalarOpApi.TernaryBitLogicKinds;
         
         public void op_identities()
         {                         

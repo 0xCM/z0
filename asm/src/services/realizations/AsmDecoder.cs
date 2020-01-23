@@ -22,7 +22,7 @@ namespace Z0
 
         Option<ClrMetadataIndex> ClrMetadata;
 
-        AsmDecoder(ClrMetadataIndex index,int? bufferlen)
+        AsmDecoder(ClrMetadataIndex index, int? bufferlen)
         {
             this.ClrMetadata = index;
             this._Buffer = new byte[bufferlen ?? 4*1024];

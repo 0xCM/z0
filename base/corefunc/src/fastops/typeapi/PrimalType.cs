@@ -110,14 +110,16 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static char indicator(PrimalKind k)
         {
-            if(unsigned(k))
+            if(k == PrimalKind.None)
+                return AsciLower.o;
+            else if(unsigned(k))
                 return AsciLower.u;
             else if(signed(k))
                 return AsciLower.i;
             else if(floating(k))
                 return AsciLower.f;
             else
-                return AsciLower.x;
+                return AsciLower.e;
         }
 
         /// <summary>
@@ -144,7 +146,6 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static string primalsig<T>(T t = default)
             => primalsig(typeof(T).Kind());
-
 
         /// <summary>
         /// Returns true if the primal source type is signed, false otherwise
@@ -208,6 +209,9 @@ namespace Z0
         public static bool floating(Type t)
             => t == typeof(float) 
             || t == typeof(double);
+
+        public static IEnumerable<PrimalKind> closures(MemberInfo m)
+            => m.CustomAttribute<PrimalClosuresAttribute>().MapValueOrElse(a => a.SystemPrimitive.DistinctKinds(), () => items<PrimalKind>());
 
         /// <summary>
         /// Returns a primal type's kind classifier

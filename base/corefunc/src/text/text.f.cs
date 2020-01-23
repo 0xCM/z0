@@ -47,16 +47,6 @@ partial class zfunc
         => string.Join(sep,values);
 
     /// <summary>
-    /// Creates a c/c#-style single-line comment
-    /// </summary>
-    /// <param name="description">The comment text</param>
-    [MethodImpl(Inline)]   
-    public static string comment(string description)
-        => string.IsNullOrWhiteSpace(description) 
-         ? string.Empty 
-         : concat("//", description, eol());
-
-    /// <summary>
     /// Formats a tuple as one would expect
     /// </summary>
     /// <param name="x1">The first coordinate</param>
@@ -71,6 +61,7 @@ partial class zfunc
     /// Encloses text content between left and right braces
     /// </summary>
     /// <param name="content">The content to be embraced</param>
+    [MethodImpl(Inline)]
     public static string embrace(string content)      
         => $"{LBrace}{content}{RBrace}";
 
@@ -81,8 +72,8 @@ partial class zfunc
     /// <param name="width">The with of the padded string</param>
     /// <param name="c">The padding character, if specifed; otherwise, a space is used as the filler</param>
     [MethodImpl(Inline)]   
-    public static string lpad(string src, uint width, char? c = null)
-        => src.PadLeft((int)width,c ?? ' ');
+    public static string lpad(string src, int width, char? c = null)
+        => src.PadLeft(width,c ?? ' ');
 
     /// <summary>
     /// Left-Pads the input string with zeros
@@ -90,8 +81,8 @@ partial class zfunc
     /// <param name="src">The input text</param>
     /// <param name="width">The with of the padded string</param>
     [MethodImpl(Inline)]   
-    public static string zpad(string src, uint width)
-        => src.PadLeft((int)width,'0');
+    public static string zpad(string src, int width)
+        => src.PadLeft(width,AsciDigits.A0);
 
     /// <summary>
     /// Formats the source value and left-pads the result with zeros
@@ -99,8 +90,8 @@ partial class zfunc
     /// <param name="src">The input text</param>
     /// <param name="width">The with of the padded string</param>
     [MethodImpl(Inline)]   
-    public static string zpad<T>(T src, uint width)
-        => $"{src}".PadLeft((int)width, '0');
+    public static string zpad<T>(T src, int width)
+        => $"{src}".PadLeft(width, AsciDigits.A0);
 
     /// <summary>
     /// Right-Pads the input string with an optionally-specified character.
@@ -109,8 +100,8 @@ partial class zfunc
     /// <param name="width">The with of the padded string</param>
     /// <param name="c">The padding character, if specifed; otherwise, a space is used as the filler</param>
     [MethodImpl(Inline)]   
-    public static string rpad(string src, uint width, char? c = null)
-        => src.PadRight((int)width,c ?? ' ');
+    public static string rpad(string src, int width, char? c = null)
+        => src.PadRight(width,c ?? ' ');
 
     /// <summary>
     /// Right-Pads the input string with zeros
@@ -118,8 +109,8 @@ partial class zfunc
     /// <param name="src">The input text</param>
     /// <param name="width">The with of the padded string</param>
     [MethodImpl(Inline)]   
-    public static string rpadZ(string src, uint width)
-        => src.PadRight((int)width,'0');
+    public static string rpadZ(string src, int width)
+        => src.PadRight(width, AsciDigits.A0);
 
     /// <summary>
     /// Tests whether the source string is empty
@@ -173,15 +164,15 @@ partial class zfunc
     /// Produces a '[' character
     /// </summary>
     [MethodImpl(Inline)]
-    public static string lbracket()
-        => "[";
+    public static char lbracket()
+        => AsciSym.LBracket;
 
     /// <summary>
     /// Produces a ']' character
     /// </summary>
     [MethodImpl(Inline)]
-    public static string rbracket()
-        => "]";
+    public static char rbracket()
+        => AsciSym.RBracket;
 
     /// <summary>
     /// Produces a right parenthesis character
@@ -194,8 +185,8 @@ partial class zfunc
     /// Produces a quote
     /// </summary>
     [MethodImpl(Inline)]
-    public static string quote()
-        => format(AsciSym.Quote);
+    public static char quote()
+        => AsciSym.Quote;
 
     /// <summary>
     /// Produces a quote
@@ -205,10 +196,18 @@ partial class zfunc
         => $"{quote()}{content}{quote()}";
 
     /// <summary>
-    /// Produces a space character as a string
+    /// Produces a space character 
     /// </summary>
+    [MethodImpl(Inline)]
     public static char space()
         => AsciSym.Space;
+
+    /// <summary>
+    /// Produces a pipe character, i.e. '|'
+    /// </summary>
+    [MethodImpl(Inline)]
+    public static char pipe()
+        => AsciSym.Pipe;
 
     /// <summary>
     /// Produces a line of content
@@ -280,8 +279,8 @@ partial class zfunc
     /// Produces a ':' character
     /// </summary>
     [MethodImpl(Inline)]
-    public static string colon()
-        => AsciSym.Colon.ToString();
+    public static char colon()
+        => AsciSym.Colon;
 
     /// <summary>
     /// Encloses the supplied text in quotation marks
@@ -475,6 +474,10 @@ partial class zfunc
     public static string spaced(params object[] items)
         => string.Join(space(), items);
 
+    [MethodImpl(Inline)]
+    public static string spaced(char c)
+        => concat(AsciSym.Space, c, AsciSym.Space);
+
     /// <summary>
     /// Separates each item with a space
     /// </summary>
@@ -570,7 +573,6 @@ partial class zfunc
     /// <summary>
     /// Returns the substring [0,chars-1]
     /// </summary>
-    /// <returns></returns>
     [MethodImpl(Inline)]
     public static string left(string src, int chars)
         => empty(src)
@@ -635,6 +637,4 @@ partial class zfunc
 
     public static StringBuilder text(string sep, params object[] values)
         => new StringBuilder(join(sep, values));
-
-
 }

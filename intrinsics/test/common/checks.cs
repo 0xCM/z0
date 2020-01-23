@@ -18,8 +18,8 @@ namespace Z0
         {
             var svc = GX.bitlogic<T>();
             var v1 = VX.vbitlogic<T>(n128).and(x,y);
-            var buffer = FixedStore.alloc(n128);
-            ref var dst = ref FixedStore.head<T>(ref buffer);
+            var buffer = Fixed.alloc(n128);
+            ref var dst = ref Fixed.head<T>(ref buffer);
             var count = CpuVector.vcount(x);            
             for(var i=0; i< count; i++)
                 seek(ref dst, i) = svc.and(vcell(x,i), vcell(y,i));

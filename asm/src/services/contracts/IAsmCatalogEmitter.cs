@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
 
     public interface IAsmCatalogEmitter
     {
@@ -15,5 +16,7 @@ namespace Z0
        IEnumerable<AsmDescriptor> EmitDirect();
        
        IEnumerable<AsmDescriptor> EmitGeneric();         
+
+       IEnumerable<AsmDescriptor> Emissions {get;}
     }
 }

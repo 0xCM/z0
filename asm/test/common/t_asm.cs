@@ -9,6 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using static Classifiers;
 
     using static zfunc;
     public abstract class t_asm<U> : UnitTest<U>, IDisposable
@@ -109,14 +110,14 @@ namespace Z0
             where W : unmanaged, ITypeNat
                 => AsmServices.CodeArchive(catalog,subject).ReadCode<T>(OpIdentity.segmented(opname, PrimalType.kind<T>(), w)).Require(); 
 
-        protected void megacheck(string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, PrimalKind<byte> kind)
+        protected void megacheck(string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, PrimalClass<byte> kind)
         {
             var w = n8;
 
             var moniker = OpIdentity.define(name, kind);                        
-            var f0 = FixedDelegates.BinOp(primal, kind);
+            var f0 = Fixed.BinOp(primal, kind);
 
-            var f1 = FixedDelegates.BinOp(generic, kind);
+            var f1 = Fixed.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
@@ -126,14 +127,14 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, PrimalKind<sbyte> kind)
+        protected void megacheck(string name, Func<sbyte,sbyte,sbyte> primal, Func<sbyte,sbyte,sbyte> generic, PrimalClass<sbyte> kind)
         {
             var w = n8;
 
             var moniker = OpIdentity.define(name, kind);                        
-            var f0 = FixedDelegates.BinOp(primal, kind);
+            var f0 = Fixed.BinOp(primal, kind);
 
-            var f1 = FixedDelegates.BinOp(generic, kind);
+            var f1 = Fixed.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
@@ -143,14 +144,14 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<ushort,ushort,ushort> primal, Func<ushort,ushort,ushort> generic, PrimalKind<ushort> kind)
+        protected void megacheck(string name, Func<ushort,ushort,ushort> primal, Func<ushort,ushort,ushort> generic, PrimalClass<ushort> kind)
         {
             var w = n16;
 
             var moniker = OpIdentity.define(name, kind);                        
-            var f0 = FixedDelegates.BinOp(primal, kind);
+            var f0 = Fixed.BinOp(primal, kind);
 
-            var f1 = FixedDelegates.BinOp(generic, kind);
+            var f1 = Fixed.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
@@ -160,14 +161,14 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<short,short,short> primal, Func<short,short,short> generic, PrimalKind<short> kind)
+        protected void megacheck(string name, Func<short,short,short> primal, Func<short,short,short> generic, PrimalClass<short> kind)
         {
             var w = n16;
 
             var moniker = OpIdentity.define(name, kind);                        
-            var f0 = FixedDelegates.BinOp(primal, kind);
+            var f0 = Fixed.BinOp(primal, kind);
 
-            var f1 = FixedDelegates.BinOp(generic, kind);
+            var f1 = Fixed.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
@@ -177,14 +178,14 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<uint,uint,uint> primal, Func<uint,uint,uint> generic, PrimalKind<uint> kind)
+        protected void megacheck(string name, Func<uint,uint,uint> primal, Func<uint,uint,uint> generic, PrimalClass<uint> kind)
         {
             var w = n32;
 
             var moniker = OpIdentity.define(name, kind);                        
-            var f0 = FixedDelegates.BinOp(primal, kind);
+            var f0 = Fixed.BinOp(primal, kind);
 
-            var f1 = FixedDelegates.BinOp(generic, kind);
+            var f1 = Fixed.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
@@ -194,13 +195,13 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<int,int,int> primal, Func<int,int,int> generic, PrimalKind<int> kind)
+        protected void megacheck(string name, Func<int,int,int> primal, Func<int,int,int> generic, PrimalClass<int> kind)
         {
             var w = n32;
             var moniker = OpIdentity.define(name, kind);                        
-            var f0 = FixedDelegates.BinOp(primal, kind);
+            var f0 = Fixed.BinOp(primal, kind);
 
-            var f1 = FixedDelegates.BinOp(generic, kind);
+            var f1 = Fixed.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math ,moniker));
@@ -210,13 +211,13 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<long,long,long> primal, Func<long,long,long> generic, PrimalKind<long> kind)
+        protected void megacheck(string name, Func<long,long,long> primal, Func<long,long,long> generic, PrimalClass<long> kind)
         {            
             var w = n64;
             var moniker = OpIdentity.define(name, kind);                        
-            var f0 = FixedDelegates.BinOp(primal, kind);
+            var f0 = Fixed.BinOp(primal, kind);
 
-            var f1 = FixedDelegates.BinOp(generic, kind);
+            var f1 = Fixed.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math ,moniker));
@@ -226,14 +227,14 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
-        protected void megacheck(string name, Func<ulong,ulong,ulong> primal, Func<ulong,ulong,ulong> generic, PrimalKind<ulong> kind)
+        protected void megacheck(string name, Func<ulong,ulong,ulong> primal, Func<ulong,ulong,ulong> generic, PrimalClass<ulong> kind)
         {            
             var w = n64;
 
             var moniker = OpIdentity.define(name, kind);                        
-            var f0 = FixedDelegates.BinOp(primal, kind);
+            var f0 = Fixed.BinOp(primal, kind);
 
-            var f1 = FixedDelegates.BinOp(generic, kind);
+            var f1 = Fixed.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));

@@ -17,8 +17,7 @@ partial class zfunc
     /// <typeparam name="T">The member type</typeparam>
     [MethodImpl(Inline)]
     public static Pair<T> pair<T>(T a, T b)
-        where T : unmanaged
-            => Tuples.pair<T>(a,b);
+        => Tuples.pair<T>(a,b);
 
     /// <summary>
     /// Defines an homogenous triple
@@ -105,13 +104,13 @@ partial class zfunc
 
     static char leftBound(TupleFormat style)
         => (style == TupleFormat.Coordinate ? lparen()
-        : style == TupleFormat.List ? lbracket()
+        : style == TupleFormat.List ? lbracket().ToString()
         : style == TupleFormat.Record ? lbrace()
         : lparen())[0];
 
     static char rightBound(TupleFormat style)
         => (style == TupleFormat.Coordinate ? rparen()
-        : style == TupleFormat.List ? rbracket()
+        : style == TupleFormat.List ? rbracket().ToString()
         : style == TupleFormat.Record ? rbrace()
         : rparen())[0];
 

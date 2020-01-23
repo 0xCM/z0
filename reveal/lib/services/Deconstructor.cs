@@ -192,7 +192,7 @@ namespace Z0
 		Option<NativeMemberCapture> ReadNativeMethodData(MethodInfo method, ClrMethod runtime)
 		{
 			var codeInfo = runtime.HotColdInfo;	
-            return ReadNativeMethodData(OpIdentity.Provider.Define(method), method, codeInfo.HotStart, codeInfo.HotSize);
+            return ReadNativeMethodData(OpIdentity.Provider.DefineIdentity(method), method, codeInfo.HotStart, codeInfo.HotSize);
         }
 
         /// <summary>

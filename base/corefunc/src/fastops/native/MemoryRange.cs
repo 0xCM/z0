@@ -8,14 +8,57 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Diagnostics.CodeAnalysis;
  
     using static zfunc;
 
     /// <summary>
     /// Defines an inclusive address range
     /// </summary>
-    public readonly struct MemoryRange : IEquatable<MemoryRange>
+    public readonly struct MemoryRange : IEquatable<MemoryRange>, IComparable<MemoryRange>
     {
+        public static MemoryRange Empty => default;
+        
+        public readonly ulong Start;
+
+        public readonly ulong End;
+
+        public ulong Length 
+        {
+            [MethodImpl(Inline)]
+            get => End - Start;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Length == 0;
+        }
+
+        [MethodImpl(Inline)]
+        public static bool operator==(MemoryRange a, MemoryRange b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(MemoryRange a, MemoryRange b)
+            => !a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator<(MemoryRange a, MemoryRange b)
+            => a.Start < b.Start;
+
+        [MethodImpl(Inline)]
+        public static bool operator>(MemoryRange a, MemoryRange b)
+            => a.Start > b.Start;
+
+        [MethodImpl(Inline)]
+        public static bool operator<=(MemoryRange a, MemoryRange b)
+            => a.Start <= b.Start;
+
+        [MethodImpl(Inline)]
+        public static bool operator>=(MemoryRange a, MemoryRange b)
+            => a.Start >= b.Start;
+
         /// <summary>
         /// Attempts to parse an address segment in standard form, [start,end]
         /// </summary>
@@ -30,11 +73,6 @@ namespace Z0
                 from end in Hex.parse(parts[1])
                 select Define(start, end);
                                 
-        public static MemoryRange Empty => default;
-        
-        public readonly ulong Start;
-
-        public readonly ulong End;
 
         [MethodImpl(Inline)]
         public static MemoryRange Define(ulong start, ulong end)
@@ -58,25 +96,16 @@ namespace Z0
             end = this.End;
         }
 
-        public ulong Length 
-        {
-            [MethodImpl(Inline)]
-            get => End - Start;
-        }
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Length == 0;
-        }
-
         public string Format()
-            => bracket(concat(
-                Start.FormatHex(false), 
-                AsciSym.Comma, 
-                AsciSym.Space, 
-                End.FormatHex(false))
-                );
+            => bracket(concat(Start.FormatAsmHex(), AsciSym.Comma, AsciSym.Space, End.FormatAsmHex()));
+
+        // public string Format()
+        //     => bracket(concat(
+        //         Start.FormatHex(false), 
+        //         AsciSym.Comma, 
+        //         AsciSym.Space, 
+        //         End.FormatHex(false))
+        //         );
 
         public override string ToString()
             => Format();
@@ -84,10 +113,23 @@ namespace Z0
         public override int GetHashCode()
             => HashCode.Combine(Start,End);
 
+        [MethodImpl(Inline)]
         public bool Equals(MemoryRange src)
             => Start == src.Start && End == src.End;
         
         public override bool Equals(object obj)
             => obj is MemoryRange x && Equals(x);
+
+        [MethodImpl(Inline)]
+        public bool Includes(MemoryRange range)
+            => range.Start >= Start && range.End <= End;
+
+        [MethodImpl(Inline)]
+        public bool Includes(MemoryAddress address)
+            => address.Origin >= Start && address.Origin <= End;
+
+        [MethodImpl(Inline)]
+        public int CompareTo([AllowNull] MemoryRange other)
+            => this == other ? 0 : this < other ? -1 : 1;
     }
 }

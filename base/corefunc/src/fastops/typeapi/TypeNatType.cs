@@ -49,5 +49,17 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         public static ulong? value(Type t)
             => test(t) ? ((ITypeNat)Activator.CreateInstance(t)).NatValue : (ulong?)null;
+
+        /// <summary>
+        /// Returns a canonical identifier for a natural number type; otherwise, returns none
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static Option<Moniker> id(Type t)
+        {
+            if(test(t))
+                return Moniker.Parse($"{Moniker.NatIndicator}{value(t)}");
+            else
+                return default;
+        }
     }
 }

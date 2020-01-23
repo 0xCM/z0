@@ -43,10 +43,10 @@ namespace Z0.Logix
             => logic_expr_check(BL.Nor, LogicOps.nor);
 
         public void xor_op_check()
-            => logic_op_check(BL.XOr, (a,b) => a ^ b);
+            => logic_op_check(BL.Xor, (a,b) => a ^ b);
 
         public void xor_expr_check()
-            => logic_expr_check(BL.XOr, LogicOps.xor);
+            => logic_expr_check(BL.Xor, LogicOps.xor);
 
         public void xnor_op_check()
             => logic_op_check(BL.Xnor, (a,b) => !(a ^ b));

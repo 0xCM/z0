@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
     using System.Linq;
     using System.Reflection;
 
@@ -17,24 +14,28 @@ namespace Z0
 
     readonly struct OpIdentityProvider : IOpIdentityProvider
     {
-        public Moniker Define(MethodInfo method, PrimalKind k)
+        public Moniker DefineIdentity(MethodInfo method, PrimalKind k)
         {
+            var provider = this as IOpIdentityProvider;
             if(method.IsOpenGeneric() && k.IsSome())
-                return Define(method.MakeGenericMethod(k.ToPrimalType()));
+                return  provider.DefineIdentity(method.MakeGenericMethod(k.ToPrimalType()));
             else
-                return Define(method);
+                return provider.DefineIdentity(method);
         }
 
         /// <summary>
         /// Makes a best-guess at defining an appropriate moniker for a specified method
         /// </summary>
         /// <param name="method">The operation method</param>
-        public Moniker Define(MethodInfo method)
-        {
+        Moniker IOpIdentityProvider.DefineIdentity(MethodInfo method)
+        {            
+            if(method.GenericSlots().Length > 1)
+                return Moniker.Empty;
+
             if(method.IsOpenGeneric())
                 return OpIdentity.define(method.Name, 0, PrimalKind.None, true, false);
-            else if(method.IsNonGeneric() && method.FastOpName() != method.Name)
-                return Moniker.Parse(method.FastOpName());
+            else if(method.IsNonGeneric() && method.OpName() != method.Name)
+                return Moniker.Parse(method.OpName());
             else if(method.IsSpanOp())
                 return FromSpanOp(method);
             else if(method.IsNatOp())
@@ -50,80 +51,126 @@ namespace Z0
             else if(method.IsPrimal())
                 return FromPrimalFunc(method);
             else
-                return FromAny(method);//Moniker.Parse($"{method.Name}_{method.GetHashCode()}");
+                return FromAny(method);
         }
+
+        static AppMsg TooManyTypeParmeters(MethodInfo m)
+            => appMsg($"The method {m.Name} accepts parameters that require more than one generic argument and is currently unsupported", SeverityLevel.Error);
 
         static Moniker FromAny(MethodInfo method)
         {
-            var id = method.FastOpName() + PartSep;
-            if(method.IsConstructedGenericMethod)
-                id += GenericIndicator;            
-            
-            var paramtypes = method.ParameterTypes().ToArray();
+            var id = method.OpName() + PartSep;            
+            var needsGenericIndicator = method.IsConstructedGenericMethod;  
+            var needsBlockedIndicator = method.IsBlocked();
+            var needsPrimalPartSep = false;
+            var needsUncategorizedSep = false;
+            var argtypes = method.ParameterTypes(true).ToArray();
 
-            for(var i=0; i<paramtypes.Length; i++)
+            for(var i=0; i<argtypes.Length; i++)
             {
-                var arg = paramtypes[i];                
-
-                var w = (int)arg.Width();
-                if(w != 0)
+                var argtype = argtypes[i];                
+                var isNatArg = TypeNatType.test(argtype);
+                var isSegmentedArg = argtype.IsSegmented();
+                var isGenericArg = argtype.IsConstructedGenericType;
+                
+                if(isNatArg)
                 {
-                    if(i != 0)
-                        id += PartSep;
-
-                    if(arg.IsSegmented())
+                    id += PartSep;
+                    id += TypeNatType.id(argtype);
+                }
+                else if(isGenericArg)              
+                {
+                    if(needsGenericIndicator)
                     {
-                       id += $"{w}{SegSep}";
-                       var segtype = arg.GenericArguments().Single();
-                       var segwidth = (int)segtype.Width();
-                       id += $"{segwidth}{segtype.Kind().Indicator()}";
+                        id += PartSep;
+                        id += GenericIndicator;        
+                        needsGenericIndicator = false;
                     }
+
+                    var typeargs = argtype.GetGenericArguments().ToArray();
+                    if(typeargs.Length > 1)
+                        NatSpanType.id(argtype).OnSome(nsid => id += $"{PartSep}{nsid}").OnNone(() => throw AppException.Define(TooManyTypeParmeters(method)));                        
                     else
                     {
-                        id += PrimalType.primalsig(arg);
+                        var typearg = typeargs[0];
+                        if(isSegmentedArg)
+                        {
+                            var w = (int)argtype.Width();
+                            if(w != 0)
+                            {
+                                id += $"{PartSep}{w}";
+
+                                var segwidth = (int)typearg.Width();
+                                if(segwidth != 0)
+                                    id += $"{SegSep}{segwidth}{typearg.Kind().Indicator()}";
+                            }
+                            else 
+                                id += "~err1";
+                        }
+                        else
+                        {
+                            var k  = typearg.Kind();
+                            if(k.IsSome())
+                            {
+                                if(needsPrimalPartSep)
+                                    id += PartSep;                                
+
+                                id += PrimalType.primalsig(k);
+
+                                needsPrimalPartSep = true;                                
+                            }
+                            else
+                                id += typearg.Name;
+                        }
                     }
                 }
-                else if(TypeNatType.test(arg))
+                else if(PrimalType.test(argtype))
                 {
                     id += PartSep;
-                    id += Moniker.NatIndicator;
-                    id += TypeNatType.value(arg);
+                    id += PrimalType.primalsig(argtype);
                 }
-                else if(arg.IsEnum)
+                else if(argtype.IsEnum)
                 {
                     id += PartSep;
-                    id += $"{arg.Name}";
+                    id += $"enum{PrimalType.primalsig(argtype.GetEnumUnderlyingType())}";
                 }
+                else
+                {
+                    if(needsUncategorizedSep)
+                        id += AsciSym.Tilde;
 
-
+                    id += argtype.Name;
+                    
+                    needsUncategorizedSep = true;
+                }
             }
+
             return Moniker.Parse(id);
-
-
         }
+        
         static Moniker FromPrimalFunc(MethodInfo method)
-            => OpIdentity.define(method.FastOpName(), method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
+            => OpIdentity.define(method.OpName(), method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
 
         /// <summary>
         /// Derives a moniker for a primal operator
         /// </summary>
         /// <param name="method">The operation method</param>
         static Moniker FromPrimalOp(MethodInfo method)
-            => OpIdentity.define(method.FastOpName(), method.ReturnType.Kind(), method.IsConstructedGenericMethod);
+            => OpIdentity.define(method.OpName(), method.ReturnType.Kind(), method.IsConstructedGenericMethod);
 
         /// <summary>
         /// Derives a moniker for a primal predicate
         /// </summary>
         /// <param name="method">The operation method</param>
         static Moniker FromPredicate(MethodInfo method)
-            => OpIdentity.define(method.FastOpName(), method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
+            => OpIdentity.define(method.OpName(), method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
 
         /// <summary>
         /// Derives a moniker for primal shift/rot operator
         /// </summary>
         /// <param name="method">The operation method</param>
         static Moniker FromShift(MethodInfo method)
-            => OpIdentity.define(method.FastOpName(), method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
+            => OpIdentity.define(method.OpName(), method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
 
         /// <summary>
         /// Derives a moniker for an operation over segmented domain(s)
@@ -149,7 +196,7 @@ namespace Z0
                         where TypeNatType.test(t)
                         select concat(NatIndicator,TypeNatType.value(t).ToString());
             var natspec = string.Join(SegSep, natvals);
-            var name = concat(method.FastOpName(), AsciSym.Tilde, natspec);
+            var name = concat(method.OpName(), AsciSym.Tilde, natspec);
             var kind = method.TypeParameterKind(n1);
             var width = kind.BitWidth();                               
             return OpIdentity.define(name, width, kind, method.IsConstructedGenericMethod, false);
@@ -164,24 +211,44 @@ namespace Z0
             if(method.IsVectorOp())
                 return FromVectorOp(method);
 
-            var id = method.FastOpName() + PartSep;
-            var paramtypes = method.ParameterTypes().ToArray();
-                    
-            if(method.IsConstructedGenericMethod)
-                id += GenericIndicator;            
+            var id = method.OpName() + PartSep;
+            var paramtypes = method.ParameterTypes(true).Union(items(method.ReturnType.EffectiveType())).ToArray();                    
+            var needsGenericIndicator = method.IsConstructedGenericMethod;
+            var needsBlockedIndicator = method.IsBlocked();
+            var segcount = 0;
+            var paramcount = paramtypes.Length;
 
-            if(method.IsBlocked())
-                id += BlockIndicator;
 
-            for(var i=0; i<paramtypes.Length; i++)
+            for(var i=0; i<paramcount; i++)
             {
                 var arg = paramtypes[i];                
-
-                var w = arg.IsVector() ? (int)VectorType.width(arg) : (arg.IsBlocked() ? (int)BlockedType.width(arg) : 0);
-                if(w != 0)
+                var isNat = TypeNatType.test(arg);
+                var isSegmented = arg.IsSegmented();
+                if(isSegmented)
                 {
-                    if(i != 0)
+                    if(segcount == 0)
+                    {
+                        segcount++;
+                        paramcount--;
+                    }
+
+                    var w = arg.IsVector() ? (int)VectorType.width(arg) : (arg.IsBlocked() ? (int)BlockedType.width(arg) : 0);
+                    if(needsBlockedIndicator || needsGenericIndicator)
+                    {
                         id += PartSep;
+                        if(needsGenericIndicator)
+                        {
+                            needsGenericIndicator = false;
+                        }
+
+                        if(needsBlockedIndicator)
+                        {
+                            id += BlockIndicator;        
+                            needsBlockedIndicator= false;
+                        }
+                    }
+                    else 
+                        id += PartSep;                
 
                     id += $"{w}{SegSep}";
 
@@ -189,8 +256,13 @@ namespace Z0
                     var segwidth = (int)segtype.Width();
                     id += $"{segwidth}{segtype.Kind().Indicator()}";
                 }
-
+                else if(isNat)
+                {
+                    id += PartSep;
+                    id += TypeNatType.id(arg);
+                }
             }
+
             return Moniker.Parse(id);
         }
     }

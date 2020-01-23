@@ -44,7 +44,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IUnaryOpImm8<A> : IFunc<A,byte,A>
     {
-        FunctionKind IFunc.Kind => FunctionKind.BinaryImm;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryImm;
     }
 
 
@@ -55,7 +55,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IUnaryOpImm8x2<A> : IFunc<A,byte,byte,A>
     {
-        FunctionKind IFunc.Kind => FunctionKind.TernaryImm;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.TernaryImm;
 
     }
 
@@ -80,7 +80,7 @@ namespace Z0
     public interface IVUnaryOp<V> : IVFunc, IUnaryOp<V>
         where V : struct
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryOp | FunctionKind.Vectorized;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryOp | HKFunctionKind.Vectorized;
    
     }
 
@@ -153,7 +153,7 @@ namespace Z0
     public interface IVUnaryOp128<T> : IVUnaryOp<N128,Vector128<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryOp | FunctionKind.V128;    
+        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryOp | HKFunctionKind.V128;    
     }
 
     /// <summary>
@@ -164,7 +164,7 @@ namespace Z0
     public interface IVUnaryOp256<T> : IVUnaryOp<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.UnaryOp | FunctionKind.V256;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryOp | HKFunctionKind.V256;
         
     }
 
@@ -198,7 +198,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOpImm8<W,V,T> : IUnaryOpImm8<V>
     {
-        FunctionKind IFunc.Kind => FunctionKind.BinaryImm | FunctionKind.Vectorized;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryImm | HKFunctionKind.Vectorized;
     }
 
     /// <summary>
@@ -210,7 +210,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IVUnaryOpImm8x2<W,V,T> : IUnaryOpImm8x2<V>
     {
-        FunctionKind IFunc.Kind => FunctionKind.TernaryImm | FunctionKind.Vectorized;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.TernaryImm | HKFunctionKind.Vectorized;
 
     }
 
@@ -222,7 +222,7 @@ namespace Z0
     public interface IVUnaryOp128Imm8<T> : IVUnaryOpImm8<N128,Vector128<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.BinaryImm | FunctionKind.V128;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryImm | HKFunctionKind.V128;
         
     }
 
@@ -234,7 +234,7 @@ namespace Z0
     public interface IVUnaryOp128Imm8x2<T> : IVUnaryOpImm8x2<N128,Vector128<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.TernaryImm | FunctionKind.V128;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.TernaryImm | HKFunctionKind.V128;
         
     }
 
@@ -246,7 +246,7 @@ namespace Z0
     public interface IVUnaryOp256Imm8<T> : IVUnaryOpImm8<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.BinaryImm | FunctionKind.V256;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryImm | HKFunctionKind.V256;
         
     }
 
@@ -258,7 +258,7 @@ namespace Z0
     public interface IVUnaryOp256Imm8x2<T> : IVUnaryOpImm8x2<N256,Vector256<T>,T>
         where T : unmanaged
     {
-        FunctionKind IFunc.Kind => FunctionKind.TernaryImm | FunctionKind.V256;
+        HKFunctionKind IFunc.Kind => HKFunctionKind.TernaryImm | HKFunctionKind.V256;
         
     }
 

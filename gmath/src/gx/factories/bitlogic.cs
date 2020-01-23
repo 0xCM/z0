@@ -76,23 +76,23 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T eval<T,K>(K kind, T a, T b)
             where T : unmanaged  
-            where K : unmanaged, IOpKind      
+            where K : unmanaged, IOpClass      
                 => eval_1(kind,a,b);
 
         [MethodImpl(Inline)]
         public static T eval<T,K>(K kind, T a)
             where T : unmanaged  
-            where K : unmanaged, IOpKind      
+            where K : unmanaged, IOpClass      
             => eval_1(kind,a);
 
         [MethodImpl(Inline)]
         static T eval_1<T,K>(K kind, T a)
             where T : unmanaged  
-            where K : unmanaged, IOpKind      
+            where K : unmanaged, IOpClass      
         {
-            if(typeof(K) == typeof(OpKinds.Negate))
+            if(typeof(K) == typeof(Classifiers.Negate))
                 return negate<T>().Invoke(a);
-            else if(typeof(K) == typeof(OpKinds.Not))
+            else if(typeof(K) == typeof(Classifiers.Not))
                 return not<T>().Invoke(a);
             else 
                 throw unsupported<T>();
@@ -102,19 +102,19 @@ namespace Z0
         [MethodImpl(Inline)]
         static T eval_1<T,K>(K kind, T a, T b)
             where T : unmanaged  
-            where K : unmanaged, IOpKind      
+            where K : unmanaged, IOpClass      
         {
-            if(typeof(K) == typeof(OpKinds.And))
+            if(typeof(K) == typeof(Classifiers.And))
                 return and<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OpKinds.Or))
+            else if(typeof(K) == typeof(Classifiers.Or))
                 return or<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OpKinds.Xor))
+            else if(typeof(K) == typeof(Classifiers.Xor))
                 return xor<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OpKinds.Nand))
+            else if(typeof(K) == typeof(Classifiers.Nand))
                 return nand<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OpKinds.Nor))
+            else if(typeof(K) == typeof(Classifiers.Nor))
                 return nor<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OpKinds.Xnor))
+            else if(typeof(K) == typeof(Classifiers.Xnor))
                 return xnor<T>().Invoke(a,b);
             else
                 return eval_2(kind,a,b);
@@ -123,15 +123,15 @@ namespace Z0
         [MethodImpl(Inline)]
         static T eval_2<T,K>(K kind, T a, T b)
             where T : unmanaged  
-            where K : unmanaged, IOpKind      
+            where K : unmanaged, IOpClass      
         {
-            if(typeof(K) == typeof(OpKinds.Impl))
+            if(typeof(K) == typeof(Classifiers.Impl))
                 return impl<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OpKinds.NonImpl))
+            else if(typeof(K) == typeof(Classifiers.NonImpl))
                 return nonimpl<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OpKinds.CImpl))
+            else if(typeof(K) == typeof(Classifiers.CImpl))
                 return cimpl<T>().Invoke(a,b);
-            else if(typeof(K) == typeof(OpKinds.CNonImpl))
+            else if(typeof(K) == typeof(Classifiers.CNonImpl))
                 return cnonimpl<T>().Invoke(a,b);
             else
                 throw unsupported<K>();

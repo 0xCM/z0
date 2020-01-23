@@ -70,8 +70,23 @@ namespace Z0
             where T : unmanaged
                 => src.ReadOnly().FormatHex(bracket, sep, specifier);
 
+        public static string FormatAsmHex(this ulong src, int? zpad = null)
+            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;
+
+        public static string FormatAsmHex(this uint src, int? zpad = null)
+            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;
+
+        public static string FormatAsmHex(this int src, int? zpad = null)
+            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;
+
+        public static string FormatAsmHex(this ushort src, int? zpad = null)
+            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;
+
+        public static string FormatAsmHex(this byte src, int? zpad = null)
+            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;
+
         public static string FormatSmallHex(this ulong src, bool postspec = false)
-            => src.ToString("x4") + (postspec ? "h" : string.Empty);
+            => src.ToString("x4") + (postspec ? $"{Hex.PostSpec}" : string.Empty);
 
         public static string FormatSmallHex(this byte src, bool postspec = false)
             => ((ulong)src).FormatSmallHex(postspec);
@@ -81,6 +96,8 @@ namespace Z0
 
         public static string FormatSmallHex(this ushort src, bool postspec = false)
             => ((ulong)src).FormatSmallHex(postspec);
+
+
 
         public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true, int? segwidth = null)

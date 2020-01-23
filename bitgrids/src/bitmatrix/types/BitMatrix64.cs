@@ -11,6 +11,7 @@ namespace Z0
     /// <summary>
     /// Defines a 64x64 matrix of bits
     /// </summary>
+    [IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public readonly ref struct BitMatrix64
     {                
         readonly Span<ulong> data;

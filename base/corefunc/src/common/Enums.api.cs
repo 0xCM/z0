@@ -93,8 +93,8 @@ namespace Z0
         /// <param name="cased">True if casing should be respected, false to ignore case</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static E parse<E>(string name, bool cased = false, E e = default)
+        public static E parse<E>(string name, bool cased = false, E @default = default)
             where E : unmanaged, Enum
-                => Enum.Parse<E>(name, !cased);
+                => Try(() => Enum.Parse<E>(name, !cased)).ValueOrDefault(@default);
     }
 }

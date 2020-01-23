@@ -95,8 +95,8 @@ namespace Z0.Logix
         public void bm_xor_bench()
         {
             bm_xor_bench<ulong>();
-            bm_api_bench<ulong>(XOr);
-            bm_delegate_bench<ulong>(XOr);
+            bm_api_bench<ulong>(Xor);
+            bm_delegate_bench<ulong>(Xor);
         }
     }
 }

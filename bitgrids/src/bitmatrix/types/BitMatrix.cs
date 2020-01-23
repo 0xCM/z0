@@ -8,14 +8,15 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-
+    using System.Linq;
+    using System.Collections.Generic;
     using static zfunc;
 
     /// <summary>
     /// Defines a square bitmatrix with order determined by the primal type over which it is defined
     /// The intent is to provide a primal bitmatrix generalization 
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential), IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public readonly ref struct BitMatrix<T>
         where T : unmanaged
     {                        

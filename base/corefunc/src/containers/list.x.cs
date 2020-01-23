@@ -29,14 +29,7 @@ namespace  Z0
         /// <typeparam name="T">The item type</typeparam>
         /// <param name="list">The list to modify</param>
         /// <param name="items">The items to add</param>
-        public static void AddRange<T>(this IList<T> list, IEnumerable<T> items)
+        public static void AppendRange<T>(this IList<T> list, IEnumerable<T> items)
             => items.Iterate(item => list.Add(item));
-
-        [MethodImpl(Inline)]
-        public static List<T> Append<T>(this List<T> src, params T[] items)
-        {
-            src.AddRange(items);
-            return src;
-        }        
     }
 }

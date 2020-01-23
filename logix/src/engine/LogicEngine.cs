@@ -18,7 +18,7 @@ namespace Z0.Logix
         /// Evalutates an untyped expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        [MethodImpl(Inline)]
+        [Op,MethodImpl(Inline)]
         public static bit eval(ILogicExpr expr)
             => LogicExprEval.eval(expr);
 
@@ -26,7 +26,7 @@ namespace Z0.Logix
         /// Evalutates a typed logic expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        [MethodImpl(Inline)]
+        [Op("logic_eval"), MethodImpl(Inline),PrimalClosures(PrimalKind.Integers)]
         public static bit eval<T>(ILogicExpr<T> expr)
             where T : unmanaged
                 => LogicExprEval.eval(expr);
@@ -35,7 +35,7 @@ namespace Z0.Logix
         /// Evalutates a typed scalar expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        [MethodImpl(Inline)]
+        [Op("scalar_eval"), MethodImpl(Inline),PrimalClosures(PrimalKind.Integers)]
         public static LiteralExpr<T> eval<T>(IExpr<T> expr)
             where T : unmanaged                
                 => ScalarExprEval.eval(expr);
@@ -46,17 +46,17 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The predicate to evaluate</param>
         /// <typeparam name="T">The type over which the comparison is defined</typeparam>
-        [MethodImpl(Inline)]
+        [Op("cmp_eval"), MethodImpl(Inline),PrimalClosures(PrimalKind.Integers)]
         public static LiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
             where T : unmanaged
                 => CompareEval.eval(expr);
 
-        [MethodImpl(Inline)]
+        [Op("vcmp128_eval"), MethodImpl(Inline),PrimalClosures(PrimalKind.Integers)]
         public static LiteralExpr<Vector128<T>> eval<T>(IComparisonExpr<Vector128<T>> expr)
             where T : unmanaged
                 => CompareEval.eval(expr);
 
-        [MethodImpl(Inline)]
+        [Op("vcmp256_eval"), MethodImpl(Inline),PrimalClosures(PrimalKind.Integers)]
         public static LiteralExpr<Vector256<T>> eval<T>(IComparisonExpr<Vector256<T>> expr)
             where T : unmanaged
                 => CompareEval.eval(expr);

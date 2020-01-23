@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
     using System.Reflection;
-    using System.Reflection.Emit;
     using System.Linq;
     using System.Collections.Generic;
 
@@ -18,11 +14,39 @@ namespace Z0
     partial class TypeApiX
     {
         /// <summary>
+        /// Selects the parameters for a method, if any, that accept an intrinsic vector
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static IEnumerable<ParameterInfo> VectorParams(this MethodInfo m, FixedWidth width = default)
+            => m.GetParameters().Where(p => p.ParameterType.IsVector(width));
+
+        /// <summary>
+        /// Selects methods from a stream that neither accept nor return any instrinsic vector parameters
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static IEnumerable<MethodInfo> NonVectorized(this IEnumerable<MethodInfo> src)
+            => src.Where(m => !m.IsVectorized());
+
+        /// <summary>
         /// Determines whether a method accepts and/or returns at least one memory block parameter
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsBlocked(this MethodInfo m)
             => FunctionType.blocked(m);        
+
+        /// <summary>
+        /// Selects methods from a stream that accept and/or return at least one memory block  parameter
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static IEnumerable<MethodInfo> Blocked(this IEnumerable<MethodInfo> src)
+            => src.Where(m => m.IsBlocked());
+
+        /// <summary>
+        /// Selects unblocked operations from a stream
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static IEnumerable<MethodInfo> Unblocked(this IEnumerable<MethodInfo> src)
+            => src.Where(x => !x.IsBlocked());
 
         /// <summary>
         /// Determines whether a method is classified as a span op
@@ -121,7 +145,6 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static bool IsTernaryOp(this MethodInfo m, PrimalKind k)
             => FunctionType.ternaryop(m,k);
-
 
         /// <summary>
         /// Determines whether a method defines a parameter that requires an immediate
@@ -263,12 +286,7 @@ namespace Z0
         public static bool IsImmediate(this ParameterInfo param)
             => FunctionType.immediate(param);
 
-        /// <summary>
-        /// Selects the parameters for a method, if any, that accept an intrinsic vector
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static IEnumerable<ParameterInfo> VectorParams(this MethodInfo m, FixedWidth width = default)
-            => m.GetParameters().Where(p => p.ParameterType.IsVector(width));
+
 
         /// <summary>
         /// Selects unary operators from a stream
@@ -311,27 +329,6 @@ namespace Z0
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> TernaryOps(this IEnumerable<MethodInfo> src, PrimalKind k)
             => src.Where(x => x.IsTernaryOp(k));
-
-        /// <summary>
-        /// Selects methods from a stream that neither accept nor return any instrinsic vector parameters
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> NonVectorized(this IEnumerable<MethodInfo> src)
-            => src.Where(m => !m.IsVectorized());
-
-        /// <summary>
-        /// Selects methods from a stream that accept and/or return at least one memory block  parameter
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Blocked(this IEnumerable<MethodInfo> src)
-            => src.Where(m => m.IsBlocked());
-
-        /// <summary>
-        /// Selects unblocked operations from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Unblocked(this IEnumerable<MethodInfo> src)
-            => src.Where(x => !x.IsBlocked());
 
         /// <summary>
         /// Selects the methods that define parameters that require immediate values

@@ -17,7 +17,6 @@ namespace Z0
     {        
         const int IndexWidth = 8;
 
-
         const int ByteSwapIndex = 0*IndexWidth;
 
         const int DecIndex = 1*IndexWidth;
@@ -67,11 +66,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static string resid(string basename, ITypeNat w, PrimalKind kind)
-            => DataResource.Identifier(basename, w, kind);
+            => ResourceIdentity.define(basename, w, kind);
         
         [MethodImpl(Inline)]
         static string resid(string basename, ITypeNat w1, ITypeNat w2, PrimalKind kind)
-            => DataResource.Identifier(basename, w1,w2, kind);
+            => ResourceIdentity.define(basename, w1,w2, kind);
 
     }
 

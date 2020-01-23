@@ -122,8 +122,11 @@ namespace Z0.Logix
             return tt;
         }
 
-        public static void emit(TextWriter dst, params UnaryBitLogicKind[] kinds)
-            => kinds.Iterate(k => emit(k,dst));
+        public static void emit(TextWriter dst, ReadOnlySpan<UnaryBitLogicKind> kinds)
+        {
+            for(var i=0; i<kinds.Length; i++)
+                emit(kinds[i],dst);
+        }
 
         public static void emit(TextWriter dst, ReadOnlySpan<BinaryBitLogicKind> kinds)
         {
@@ -131,8 +134,11 @@ namespace Z0.Logix
                 emit(kinds[i],dst);
         }
 
-        public static void emit(TextWriter dst, params TernaryBitLogicKind[] kinds)
-            => kinds.Iterate(k => emit(k,dst));
+        public static void emit(TextWriter dst, ReadOnlySpan<TernaryBitLogicKind> kinds)
+        {
+            for(var i=0; i<kinds.Length; i++)
+                emit(kinds[i],dst);
+        }
 
         public static void emit(TextWriter dst, OpArityKind arity)
         {

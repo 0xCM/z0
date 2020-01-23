@@ -13,19 +13,19 @@ namespace Z0
 
     static class AsmServiceMessages
     {
-        public static AppMsg NoClosures(GenericOpInfo op)        
+        public static AppMsg NoClosures(GenericOpSpec op)        
             => appMsg($"No closure was found for {op.Id}", SeverityLevel.Warning);
 
         public static AppMsg Emitting(Type host)
             => appMsg($"Emitting operations defined by {host.Name}", SeverityLevel.Babble);
 
-        public static AppMsg Emitting(GenericOpInfo op)        
+        public static AppMsg Emitting(GenericOpSpec op)        
             => appMsg($"Emitting operation {op.Id}", SeverityLevel.Babble);
 
-        public static AppMsg Emitting(OpClosure closure)        
+        public static AppMsg Emitting(OpClosureSpec closure)        
             => appMsg($"Emitting operation closure {closure.Id}", SeverityLevel.Babble);
 
-        public static AppMsg Emitting(DirectOpInfo op)        
+        public static AppMsg Emitting(DirectOpSpec op)        
             => appMsg($"Emitting operation {op.Id}", SeverityLevel.Babble);
 
         public static AppMsg EmittingCatalog(IOperationCatalog catalog)        
@@ -34,7 +34,10 @@ namespace Z0
         public static AppMsg Emitted(AsmDescriptor descriptor)        
             => appMsg($"Emitted {descriptor.Uri}", SeverityLevel.Babble);
 
-        public static AppMsg EmittingImmSpecializations(OpInfo op, IEnumerable<byte> immediates)        
+        public static AppMsg DescriptorConflit(AsmDescriptor src)
+            => appMsg($"The descriptor with uri {src.Uri} conflicts with an existing descriptor", SeverityLevel.Warning);
+            
+        public static AppMsg EmittingImmSpecializations(OpSpec op, IEnumerable<byte> immediates)        
             => appMsg($"Emitting immediates specializations {immediates.FormatHexList()} for {op.Id}", SeverityLevel.Babble);
     }
 }

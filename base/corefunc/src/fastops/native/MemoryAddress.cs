@@ -8,33 +8,83 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
     using System.Runtime.CompilerServices;
- 
+    using System.Diagnostics.CodeAnalysis;
+
     using static zfunc;
 
-    public readonly struct MemoryAddress
+    public readonly struct MemoryAddress : IEquatable<MemoryAddress>, IComparable<MemoryAddress>
     {
-        public static MemoryAddress Define(ulong absolute, ulong root = 0)
-            => new MemoryAddress(absolute, root);
-            
-        MemoryAddress(ulong absolute, ulong root)
+        public static MemoryAddress Zero => default;
+
+        public readonly ulong Origin;
+
+        public readonly ushort Local;
+
+        public bool NonZero
         {
-            this.AbsoluteLocation = absolute;
-            this.RelativeLocation = root == 0 ? (ushort?)null : (ushort)(absolute - root);
+            [MethodImpl(Inline)]
+            get => Origin != 0;
         }
         
-        public readonly ulong AbsoluteLocation;
+        [MethodImpl(Inline)]
+        public static MemoryAddress Define(ulong origin, ulong local = 0)
+            => new MemoryAddress(origin, local);
 
-        public readonly ushort? RelativeLocation;
-    
-        public string Format()
-            => Format(this);
+        [MethodImpl(Inline)]
+        public static implicit operator MemoryAddress(ulong src)
+            => Define(src);
+        
+        [MethodImpl(Inline)]
+        public static bool operator==(MemoryAddress a, MemoryAddress b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(MemoryAddress a, MemoryAddress b)
+            => !a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator<(MemoryAddress a, MemoryAddress b)
+            => a.Origin < b.Origin;
+
+        [MethodImpl(Inline)]
+        public static bool operator>(MemoryAddress a, MemoryAddress b)
+            => a.Origin > b.Origin;
+
+        [MethodImpl(Inline)]
+        public static bool operator<=(MemoryAddress a, MemoryAddress b)
+            => a.Origin <= b.Origin;
+
+        [MethodImpl(Inline)]
+        public static bool operator>=(MemoryAddress a, MemoryAddress b)
+            => a.Origin >= b.Origin;
+            
+        [MethodImpl(Inline)]
+        MemoryAddress(ulong absolute, ulong relative)
+        {
+            this.Origin = absolute;
+            this.Local = relative == 0 ? (ushort)0 : (ushort)(absolute - relative);
+        }
+        
+        public string Format(bool hex = true)
+            => hex  ? concat(this.Local.FormatSmallHex(true), spaced(pipe()), this.Origin.FormatHex(false,true,false,false))
+                    : concat(this.Local.ToString().PadLeft(5, AsciDigits.A0),  spaced(pipe()), this.Origin.ToString());
 
         public override string ToString()
             => Format();         
 
+        public override int GetHashCode()
+            => Origin.GetHashCode();
+
         [MethodImpl(Inline)]
-        static string Format(MemoryAddress src)
-            => src.RelativeLocation.MapValueOrElse(x => x.FormatSmallHex(true), () => src.AbsoluteLocation.FormatHex(false,true,false,false));
+        public bool Equals(MemoryAddress src)
+            => Origin == src.Origin;
+
+        public override bool Equals(object obj)
+            => obj is MemoryAddress a && Equals(a);                    
+
+        [MethodImpl(Inline)]
+        public int CompareTo([AllowNull] MemoryAddress other)
+            => this == other ? 0 : this < other ? -1 : 1;
 
     }
 }

@@ -12,17 +12,6 @@ namespace Z0
 
     public static class AsmImmCapture
     {
-        public static IEnumerable<DynamicDelegate> UnaryDelegates(MethodInfo method, Moniker id, params byte[] immediates)
-        {
-            var parameters = method.GetParameters().ToArray();            
-            var optype = parameters[0].ParameterType;
-            var width = optype.Width();
-            var celltype = optype.GetGenericArguments()[0];
-            var factory = UnaryDelegateFactory(width, id, method, celltype); 
-            foreach(var imm in immediates)            
-                yield return factory(imm);                    
-        }                    
-
         public static IEnumerable<AsmFunction> UnaryFunctions(MethodInfo method, Moniker id, params byte[] immediates)
         {
             var builder = AsmServices.FunctionBuilder();
@@ -30,6 +19,23 @@ namespace Z0
             foreach(var d in UnaryDelegates(method, id, immediates))
                 yield return AsmDecoder.function(d.Id, d, buffer.Clear());
         }
+
+        static IEnumerable<DynamicDelegate> UnaryDelegates(MethodInfo method, Moniker id, params byte[] immediates)
+        {
+            var parameters = method.GetParameters().ToArray();            
+            var optype = parameters[0].ParameterType;
+            var width = optype.Width();
+            var celltype = optype.GetGenericArguments()[0];
+            
+            var factory = width switch{
+                FixedWidth.W128 => Dynop.unaryfactory(HK.vk128(), id, method, celltype),
+                FixedWidth.W256 => Dynop.unaryfactory(HK.vk256(), id, method, celltype),
+                _ =>throw new NotSupportedException(width.ToString())
+            };
+            
+            foreach(var imm in immediates)            
+                yield return factory(imm);                    
+        }                    
         
         public static AsmFunction capture<T>(IVUnaryImm8Resolver128<T> svc, byte imm8)
             where T : unmanaged
@@ -71,18 +77,18 @@ namespace Z0
             return builder.BuildFunction(NativeReader.read(moniker.WithImm(imm8), f, buffer));
         }
         
-        static Func<byte,DynamicDelegate> UnaryDelegateFactory(FixedWidth w, Moniker id, MethodInfo src, Type seg)
-        {
-            switch(w)
-            {
-                case FixedWidth.W128:
-                    return Dynop.unaryfactory(HK.vk128(), id, src, seg);
-                case FixedWidth.W256:
-                    return Dynop.unaryfactory(HK.vk256(), id, src, seg);
-                default:
-                    throw new NotSupportedException(w.ToString());
-            }
-        }
+        // static Func<byte,DynamicDelegate> UnaryDelegateFactory(FixedWidth w, Moniker id, MethodInfo src, Type seg)
+        // {
+        //     switch(w)
+        //     {
+        //         case FixedWidth.W128:
+        //             return Dynop.unaryfactory(HK.vk128(), id, src, seg);
+        //         case FixedWidth.W256:
+        //             return Dynop.unaryfactory(HK.vk256(), id, src, seg);
+        //         default:
+        //             throw new NotSupportedException(w.ToString());
+        //     }
+        // }
 
     }
 }
