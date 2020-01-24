@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
@@ -51,6 +49,46 @@ namespace Z0
                 PrimalId.U64 => PrimalKind.U64,
                 PrimalId.F32 => PrimalKind.F32,
                 PrimalId.F64 => PrimalKind.F64,
+                _ => throw unsupported(k)
+            };
+
+        /// <summary>
+        /// Returns a primal type's kind classifier
+        /// </summary>
+        [MethodImpl(Inline | Optimize)]
+        public static PrimalKind kind(Type t)
+            => Type.GetTypeCode(t.EffectiveType()) 
+                switch
+                {
+                    TypeCode.Byte => PrimalKind.U8,
+                    TypeCode.SByte => PrimalKind.I8,
+                    TypeCode.Int16 => PrimalKind.I16,
+                    TypeCode.UInt16 => PrimalKind.U16,
+                    TypeCode.Int32 => PrimalKind.I32,
+                    TypeCode.UInt32 => PrimalKind.U32,
+                    TypeCode.Int64 => PrimalKind.I64,
+                    TypeCode.UInt64 => PrimalKind.U64,
+                    TypeCode.Single => PrimalKind.F32,
+                    TypeCode.Double => PrimalKind.F64,
+                    _ => PrimalKind.None
+                };
+
+        /// <summary>
+        /// Returns a kind-identified system type if possible; throws an exception otherwise
+        /// </summary>
+        [MethodImpl(Inline | Optimize)]
+        public static Type type(PrimalKind k)
+            => k switch {
+                PrimalKind.U8 => typeof(byte),
+                PrimalKind.I8 => typeof(sbyte),
+                PrimalKind.U16 => typeof(ushort),
+                PrimalKind.I16 => typeof(short),
+                PrimalKind.U32 => typeof(uint),
+                PrimalKind.I32 => typeof(int),
+                PrimalKind.I64 => typeof(long),
+                PrimalKind.U64 => typeof(ulong),
+                PrimalKind.F32 => typeof(float),
+                PrimalKind.F64 => typeof(double),
                 _ => throw unsupported(k)
             };
 
@@ -135,7 +173,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The primal kind</param>
         [MethodImpl(Inline)]   
-        public static string primalsig(PrimalKind k)
+        public static string signature(PrimalKind k)
             => $"{width(k)}{indicator(k)}";        
 
         /// <summary>
@@ -144,8 +182,8 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]   
-        public static string primalsig<T>(T t = default)
-            => primalsig(typeof(T).Kind());
+        public static string signature<T>(T t = default)
+            => signature(typeof(T).Kind());
 
         /// <summary>
         /// Returns true if the primal source type is signed, false otherwise
@@ -214,27 +252,6 @@ namespace Z0
             => m.CustomAttribute<PrimalClosuresAttribute>().MapValueOrElse(a => a.SystemPrimitive.DistinctKinds(), () => items<PrimalKind>());
 
         /// <summary>
-        /// Returns a primal type's kind classifier
-        /// </summary>
-        [MethodImpl(Inline | Optimize)]
-        public static PrimalKind kind(Type t)
-            => Type.GetTypeCode(t.EffectiveType()) 
-                switch
-                {
-                    TypeCode.Byte => PrimalKind.U8,
-                    TypeCode.SByte => PrimalKind.I8,
-                    TypeCode.Int16 => PrimalKind.I16,
-                    TypeCode.UInt16 => PrimalKind.U16,
-                    TypeCode.Int32 => PrimalKind.I32,
-                    TypeCode.UInt32 => PrimalKind.U32,
-                    TypeCode.Int64 => PrimalKind.I64,
-                    TypeCode.UInt64 => PrimalKind.U64,
-                    TypeCode.Single => PrimalKind.F32,
-                    TypeCode.Double => PrimalKind.F64,
-                    _ => PrimalKind.None
-                };
-
-        /// <summary>
         /// Determines whether a type is classified as primal
         /// </summary>
         /// <param name="t">The type to test</param>
@@ -250,26 +267,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static PrimalKind kind<T>(T t = default)
             where T : unmanaged
-                => primalkind_u(t);
-
-        /// <summary>
-        /// Returns a kind-identified system type if possible; throws an exception otherwise
-        /// </summary>
-        [MethodImpl(Inline | Optimize)]
-        public static Type fromkind(PrimalKind k)
-            => k switch {
-                PrimalKind.U8 => typeof(byte),
-                PrimalKind.I8 => typeof(sbyte),
-                PrimalKind.U16 => typeof(ushort),
-                PrimalKind.I16 => typeof(short),
-                PrimalKind.U32 => typeof(uint),
-                PrimalKind.I32 => typeof(int),
-                PrimalKind.I64 => typeof(long),
-                PrimalKind.U64 => typeof(ulong),
-                PrimalKind.F32 => typeof(float),
-                PrimalKind.F64 => typeof(double),
-                _ => throw unsupported(k)
-            };
+                => kind_u(t);
         
         public static PrimalWidth width(Type t)
         {
@@ -281,7 +279,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static char indicator(Type t)
+        public static Option<char> indicator(Type t)
         {
             if(signed(t))
                 return AsciLower.i;
@@ -290,11 +288,11 @@ namespace Z0
             else if(floating(t))
                 return AsciLower.f;
             else
-                return AsciLower.x;
+                return default;
         }
 
         [MethodImpl(Inline)]
-        static PrimalKind primalkind_u<T>(T t = default)
+        static PrimalKind kind_u<T>(T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -306,11 +304,11 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return PrimalKind.U64;
             else
-                return primalkind_i(t);
+                return kind_i(t);
         }
 
         [MethodImpl(Inline)]
-        static PrimalKind primalkind_i<T>(T t = default)
+        static PrimalKind kind_i<T>(T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -322,11 +320,11 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return PrimalKind.I64;
             else
-                return primalkind_f(t);
+                return kind_f(t);
         }
 
         [MethodImpl(Inline)]
-        static PrimalKind primalkind_f<T>(T t = default)
+        static PrimalKind kind_f<T>(T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -336,8 +334,5 @@ namespace Z0
             else
                 return PrimalKind.None;            
         }
- 
-
     }
-
 }

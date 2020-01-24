@@ -54,11 +54,5 @@ namespace Z0
         public static IEnumerable<AsmFunction> CaptureImmediates<T>(this IVBinaryImm8Resolver128<T> svc, params byte[] immediates)
             where T : unmanaged
                 => from imm in immediates select AsmImmCapture.BinaryFunction<T>(svc,imm);
-    
-        public static IAsmCatalogEmitter Emitter(this IOperationCatalog catalog)
-            => AsmServices.CatalogEmitter(catalog);
-
-        public static IEnumerable<AsmDescriptor> Emit(this IOperationCatalog catalog)
-            => catalog.Emitter().EmitCatalog().Force();
     }
 }

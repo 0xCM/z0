@@ -121,7 +121,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                print(errorMsg(e));
+                print(appMsg(e));
             }
         }
 

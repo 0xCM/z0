@@ -75,7 +75,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e);
+                errout(e);
             }
             return default;
         }
@@ -88,7 +88,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e);
+                errout(e);
             }
             return default;
         }

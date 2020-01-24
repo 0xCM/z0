@@ -27,39 +27,6 @@ namespace Z0
             Claim.eq(a2,b2);
         }
 
-        public void bg_layout_249x128x64()
-        {
-            ushort M = 249;
-            ushort N = 128;
-            var moniker = GridMoniker.FromDim<ulong>(M,N);
-            int segwidth = bitsize<ulong>();
-            var segorder = (int)math.log2(segwidth);
-
-            var map = GridMap.Define<ulong>(M,N);
-            var points = M*N;
-            var segs = (points >> segorder) + (points % segwidth != 0 ? 1 : 0);
-            Claim.eq(map.SegCount, segs);
-        
-            var src = Random.Blocks<ulong>(n256,1);
-            var bg = BitGrid.load(src,M,N);
-
-            for(var row = 0; row< M; row++)
-            for(var col = 0; col< N; col++)
-            {
-                var pos = N*row + col;
-                var seg = pos >> segorder;
-                var offset = pos % segwidth;
-
-                Claim.eq(map.Pos(row,col), pos);
-                Claim.eq(map.Seg(row,col), seg);
-                Claim.eq(map.Offset(row,col), offset);
-                
-                var b1 = BitGrid.readbit(N, in head(src), row, col);
-                var b2 = bg[row,col];
-                Claim.eq(b1,b2);
-            }            
-        }
-
         public void bg_layout_32x8x8()
         {
             const ushort rows = 32;

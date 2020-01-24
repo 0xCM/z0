@@ -40,35 +40,5 @@ namespace Z0
         /// <param name="file">The name of the log file</param>
         public static StreamWriter LogWriter(this LogArea area, FolderName subfolder, FileName file)
             => new StreamWriter(Paths.TargetPath(area, subfolder, file).ToString());
-
-        /// <summary>
-        /// Logs records to a file
-        /// </summary>
-        /// <param name="dst">The data receiver</param>
-        /// <param name="data">The records to emit</param>
-        /// <param name="delimiter">The character used to demarcate record fields</param>
-        /// <param name="header">Whether to emit a header row</param>
-        /// <param name="append">Whether to append to an existing file</param>
-        /// <typeparam name="R">The record type</typeparam>
-        public static FilePath LogRecords<R>(this FilePath dst, IEnumerable<R> data, char delimiter = AsciSym.Pipe, bool? header = null, bool append = true)
-            where R : IRecord
-        {            
-            var records = data.ToArray();
-            if(records.Length == 0)
-                return FilePath.Empty;
-            
-            if(!append)
-                dst.DeleteIfExists();
-            
-            var emitHeader =  header ?? (append && !dst.Exists());
-            
-            if(emitHeader)
-                dst.Append(string.Join(delimiter, records[0].GetHeaders()));
-            
-            iter(data, r => dst.Append(r.DelimitedText(delimiter)));
-            
-            return dst;
-        }
-
     }
 }

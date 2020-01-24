@@ -22,15 +22,15 @@ namespace Z0
         /// </summary>
         /// <param name="encoded">The encoded instructions</param>
         /// <param name="decoded">The decoded instructions</param>
-        public static InstructionBlock Define(AsmCode encoded, CaptureTermCode tc, MemoryRange origin,  IEnumerable<Instruction> decoded)
-            => new InstructionBlock(encoded, tc, origin, decoded.ToArray());
+        public static InstructionBlock Define(AsmCode encoded, CaptureTermCode tc, IEnumerable<Instruction> decoded)
+            => new InstructionBlock(encoded, tc, decoded.ToArray());
 
-        InstructionBlock(AsmCode encoded, CaptureTermCode tc, MemoryRange origin, Instruction[] decoded)
+        InstructionBlock(AsmCode encoded, CaptureTermCode tc, Instruction[] decoded)
         {
             this.Label = encoded.Label;
             this.NativeCode = encoded;
             this.Decoded = decoded;
-            this.Origin = origin;
+            this.Origin = encoded.Origin;
             this.TermCode = tc;
         }
 

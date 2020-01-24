@@ -6,12 +6,8 @@ namespace Z0.Logix
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
     
-    using static zfunc;
-    
+    using static zfunc;    
 
     class Catalog : OpCatalog<Catalog>
     {
@@ -30,7 +26,7 @@ namespace Z0.Logix
                 typeof(ScalarOpApi), typeof(ScalarOps), 
                 typeof(VectorizedOpApi), typeof(VectorizedOps),
                 typeof(PredicateApi), typeof(LogicEngine),
-                typeof(OpHelpers)
+                typeof(OpHelpers), typeof(CompareEval)
                 );               
     }
 }

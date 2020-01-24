@@ -23,6 +23,24 @@ namespace Z0
                 return provider.DefineIdentity(method);
         }
 
+        public Moniker DefineIdentity(string opname, bool generic, params PrimalKind[] kinds)
+        {
+            var id = opname;
+            id += PartSep;
+            
+            if(generic)
+                id += GenericIndicator;
+            
+            for(var i=0; i<  kinds.Length; i++)
+            {
+                if(i!=0)
+                    id += PartSep;
+                
+                id += PrimalType.signature(kinds[i]);
+            }
+            return Moniker.Parse(id);
+        }
+            
         /// <summary>
         /// Makes a best-guess at defining an appropriate moniker for a specified method
         /// </summary>
@@ -57,6 +75,19 @@ namespace Z0
         static AppMsg TooManyTypeParmeters(MethodInfo m)
             => appMsg($"The method {m.Name} accepts parameters that require more than one generic argument and is currently unsupported", SeverityLevel.Error);
 
+
+        // static string FormatParameter(Type src)
+        // {
+        //     if(src.IsSegmented())
+        //     {
+
+        //     }
+        //     else if(src.IsNatSpan())
+        //     {
+
+        //     }
+        // }
+
         static Moniker FromAny(MethodInfo method)
         {
             var id = method.OpName() + PartSep;            
@@ -64,19 +95,22 @@ namespace Z0
             var needsBlockedIndicator = method.IsBlocked();
             var needsPrimalPartSep = false;
             var needsUncategorizedSep = false;
-            var argtypes = method.ParameterTypes(true).ToArray();
+            var argtypes = method.ParameterTypes(true).Union(items(method.ReturnType.EffectiveType())).ToArray(); //method.ParameterTypes(true).ToArray();
+            var paramcount = argtypes.Length;
 
-            for(var i=0; i<argtypes.Length; i++)
+
+
+            for(var i=0; i<paramcount; i++)
             {
                 var argtype = argtypes[i];                
-                var isNatArg = TypeNatType.test(argtype);
+                var isNatArg = NatType.test(argtype);
                 var isSegmentedArg = argtype.IsSegmented();
                 var isGenericArg = argtype.IsConstructedGenericType;
                 
                 if(isNatArg)
                 {
                     id += PartSep;
-                    id += TypeNatType.id(argtype);
+                    id += NatType.id(argtype);
                 }
                 else if(isGenericArg)              
                 {
@@ -89,7 +123,9 @@ namespace Z0
 
                     var typeargs = argtype.GetGenericArguments().ToArray();
                     if(typeargs.Length > 1)
+                    {
                         NatSpanType.id(argtype).OnSome(nsid => id += $"{PartSep}{nsid}").OnNone(() => throw AppException.Define(TooManyTypeParmeters(method)));                        
+                    }
                     else
                     {
                         var typearg = typeargs[0];
@@ -103,6 +139,7 @@ namespace Z0
                                 var segwidth = (int)typearg.Width();
                                 if(segwidth != 0)
                                     id += $"{SegSep}{segwidth}{typearg.Kind().Indicator()}";
+
                             }
                             else 
                                 id += "~err1";
@@ -115,7 +152,7 @@ namespace Z0
                                 if(needsPrimalPartSep)
                                     id += PartSep;                                
 
-                                id += PrimalType.primalsig(k);
+                                id += PrimalType.signature(k);
 
                                 needsPrimalPartSep = true;                                
                             }
@@ -127,20 +164,19 @@ namespace Z0
                 else if(PrimalType.test(argtype))
                 {
                     id += PartSep;
-                    id += PrimalType.primalsig(argtype);
+                    id += PrimalType.signature(argtype);
                 }
                 else if(argtype.IsEnum)
                 {
                     id += PartSep;
-                    id += $"enum{PrimalType.primalsig(argtype.GetEnumUnderlyingType())}";
+                    id += $"enum{PrimalType.signature(argtype.GetEnumUnderlyingType())}";
                 }
                 else
                 {
                     if(needsUncategorizedSep)
                         id += AsciSym.Tilde;
 
-                    id += argtype.Name;
-                    
+                    id += argtype.Name;                    
                     needsUncategorizedSep = true;
                 }
             }
@@ -193,8 +229,8 @@ namespace Z0
         static Moniker FromNatOp(MethodInfo method)
         {
             var natvals = from t in method.ParameterTypes()
-                        where TypeNatType.test(t)
-                        select concat(NatIndicator,TypeNatType.value(t).ToString());
+                        where NatType.test(t)
+                        select concat(NatIndicator,NatType.value(t).ToString());
             var natspec = string.Join(SegSep, natvals);
             var name = concat(method.OpName(), AsciSym.Tilde, natspec);
             var kind = method.TypeParameterKind(n1);
@@ -218,11 +254,10 @@ namespace Z0
             var segcount = 0;
             var paramcount = paramtypes.Length;
 
-
             for(var i=0; i<paramcount; i++)
             {
                 var arg = paramtypes[i];                
-                var isNat = TypeNatType.test(arg);
+                var isNat = NatType.test(arg);
                 var isSegmented = arg.IsSegmented();
                 if(isSegmented)
                 {
@@ -259,7 +294,7 @@ namespace Z0
                 else if(isNat)
                 {
                     id += PartSep;
-                    id += TypeNatType.id(arg);
+                    id += NatType.id(arg);
                 }
             }
 

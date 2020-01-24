@@ -61,6 +61,36 @@ namespace Z0
             return dst;
         }
 
+        public static IEnumerable<ReportFieldInfo> ReportFields(Type record)
+            => record.PublicInstanceProperties().Select(ReportFieldInfo.Define);
+
+        public static IEnumerable<ReportFieldInfo> ReportFields<T>()
+            where T : IRecord
+                => ReportFields(typeof(T));
+
+        public static IReadOnlyList<string> ReportHeaders(Type record)
+        {            
+            var fields = ReportFields(record).ToArray();
+            var count = fields.Length;
+            var headers = new string[count];
+
+            for(var i=0; i<count; i++)
+            {
+                var field = fields[i];
+                if(i == 0)
+                    headers[i] = field.Name.PadRight(field.Width ?? 0);
+                else if(i == count - 1)
+                    headers[i] = lspace(field.Name);
+                else
+                    headers[i] = lspace(field.Name.PadRight(field.Width ?? 0));        
+            }
+            return headers;
+        }
+
+        public static IReadOnlyList<string> ReportHeaders<T>()
+            where T : IRecord
+                => ReportHeaders(typeof(T));                    
+
         static Type Example()
         {
             var f1 = Record.DefineField("Field1", 0, 0, typeof(int).AssemblyQualifiedName);

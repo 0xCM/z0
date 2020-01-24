@@ -97,8 +97,6 @@ namespace Z0
         public static string FormatSmallHex(this ushort src, bool postspec = false)
             => ((ulong)src).FormatSmallHex(postspec);
 
-
-
         public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true, int? segwidth = null)
         {

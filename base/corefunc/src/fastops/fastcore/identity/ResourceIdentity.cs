@@ -15,7 +15,6 @@ namespace Z0
     /// </summary>
     public readonly struct ResourceIdentity
     {
-
         /// <summary>
         /// Defines a canonical data resource identifier
         /// </summary>
@@ -31,8 +30,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string define(string basename, ITypeNat w1, ITypeNat w2, PrimalKind kind)
             => $"{basename}{w1}x{w2}x{primalsig(kind)}";
-
-
     }
 
 }

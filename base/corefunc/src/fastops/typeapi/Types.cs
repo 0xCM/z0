@@ -30,6 +30,8 @@ namespace Z0
                 return (FixedWidth)VectorType.width(t);
             else if(BlockedType.test(t))
                 return (FixedWidth)BlockedType.width(t);
+            else if(t == typeof(bit))
+                return FixedWidth.W1;
             else
                 return FixedWidth.None;
         }

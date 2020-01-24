@@ -19,5 +19,7 @@ namespace Z0
         Moniker DefineIdentity(MethodInfo method);
 
         Moniker DefineIdentity(MethodInfo method, PrimalKind k);
+
+        Moniker DefineIdentity(string opname, bool generic, params PrimalKind[] kinds);        
     }
 }

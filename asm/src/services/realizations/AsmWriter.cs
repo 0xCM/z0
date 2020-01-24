@@ -62,7 +62,7 @@ namespace Z0
         }
 
         public void WriteFunction(NativeMemberCapture src, AsmFormatConfig fmt)
-            => WriteFunction(Builder.BuildFunction(src),fmt);
+            => WriteFunction(AsmDecoder.function(src),fmt);
 
     }
 }

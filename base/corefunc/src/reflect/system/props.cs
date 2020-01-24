@@ -9,6 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.ComponentModel;
     
     using static zfunc;
     using static ReflectionFlags;
@@ -107,6 +108,20 @@ namespace Z0
         public static Option<object> TryGetValue(this PropertyInfo prop, object instance = null)
             => Try(() => prop.GetValue(instance));
 
+        /// <summary>
+        /// Selects the property type from each source property
+        /// </summary>
+        /// <param name="src">The source properties</param>
+        public static IEnumerable<Type> PropertyTypes(this IEnumerable<PropertyInfo> src)
+            => src.Select(x => x.PropertyType);
+
+        /// <summary>
+        /// Gets the display name specified by the eponymous attribute, if attributed; otherwise, returns the reflected property name
+        /// </summary>
+        /// <param name="src">The source property</param>
+        public static string DisplayName(this PropertyInfo src)
+            => (from a in src.CustomAttribute<DisplayNameAttribute>() 
+                 select a.DisplayName).ValueOrElse(() => src.Name);
     }
 
 }

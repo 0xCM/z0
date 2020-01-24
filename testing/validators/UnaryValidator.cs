@@ -40,7 +40,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, casename);
+                errout(e, casename);
                 succeeded = false;
             }
             finally
@@ -69,7 +69,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, casename);
+                errout(e, casename);
                 succeeded = false;
             }
             finally

@@ -110,7 +110,7 @@ namespace Z0
         Option<AsmFunction> Function(MethodInfo method)
             => from runtime in GetRuntimeMethod(method)
                from capture in ReadNativeMethodData(method, runtime)
-               let f = Decoder.DecodeFunction(capture)
+               let f = Decoder.Decode(capture)
                select f;
 
         // Option<NativeMemberCapture> ReadNativeMethodData(MethodInfo method) 
@@ -148,7 +148,7 @@ namespace Z0
             
             if (size != actualSize)
             {
-                error(Errors.LengthMismatch((int)size, actualSize));
+                errout(Errors.LengthMismatch((int)size, actualSize));
                 return default;
             }
 
@@ -160,7 +160,7 @@ namespace Z0
 			var label = method.Signature().Format();
             if (address == 0)
             {
-				error($"Unspecified address for {label}");
+				errout($"Unspecified address for {label}");
                 return default;
             }
 
@@ -174,13 +174,13 @@ namespace Z0
             var actualSize = 0;
 			if (!Target.ReadProcessMemory(address, buffer, buffer.Length, out actualSize))
             {
-				error($"Memory access failure at address {address.FormatHex(false)} for {label}");
+				errout($"Memory access failure at address {address.FormatHex(false)} for {label}");
                 return default;
             }
             
             if (size != actualSize)
             {
-                error(Errors.LengthMismatch((int)size, actualSize));
+                errout(Errors.LengthMismatch((int)size, actualSize));
                 return default;
             }
 

@@ -30,139 +30,107 @@ namespace Z0
 
         public IAsmDecoder Decoder {get;}
 
-        public IEnumerable<AsmDescriptor> Emissions
-            => FunctionMap.Values.OrderBy(x => x.Origin);
-
-        static string ImmSubject
-            => "_imm";
-
-        Dictionary<AsmUri,AsmDescriptor> FunctionMap {get;}
-            = new Dictionary<AsmUri, AsmDescriptor>();
-
-        ref readonly AsmDescriptor Pipe(in AsmDescriptor src)
+        ref readonly AsmDescriptor Pipe(in AsmDescriptor src, bool warn = false)
         {
-            print(Emitted(src));
-
-            FunctionMap.TryAdd(src.Uri, src);
-            // if(!FunctionMap.TryAdd(src.Uri, src))
-            // {
-            //     var other = FunctionMap[src.Uri];
-            //     if(!other.Equals(src))
-            //         print(DescriptorConflit(src));
-            // }
-
+            print(Emitted(src));            
             return ref src;
         }
 
         IAsmFunctionArchive Archive(string subject)
             => AsmServices.FunctionArchive(Catalog.CatalogName, subject);
 
-        IEnumerable<AsmDescriptor> EmitUnaryImmResolutions(DirectOpSpec op, IAsmFunctionArchive archive)
-        {
-            var immediates = new byte[]{5,9,13};
-            var captured  =  AsmImmCapture.UnaryFunctions(op.Method, op.Id, immediates);                    
-            return archive.Save(captured);            
-        }   
+        static ReadOnlySpan<byte> ImmSelection => new byte[]{5,9,13};
 
-        IEnumerable<AsmDescriptor> EmitUnaryImmResolutions(GenericOpSpec op, IAsmFunctionArchive archive)
+        IEnumerable<AsmDescriptor> EmitUnaryImmResolutions(DirectOpSpec op, IAsmFunctionArchive dst)
+            => from capture in AsmImmCapture.UnaryFunctions(op.Method, op.Id, ImmSelection.ToArray())
+                select dst.Save(capture);
+
+        IEnumerable<AsmDescriptor> EmitUnaryImmResolutions(GenericOpSpec op, IAsmFunctionArchive dst)
+            => from closure in OpFactory.close(op)
+                from capture in AsmImmCapture.UnaryFunctions(closure.ClosedMethod, closure.Id, ImmSelection.ToArray())
+                select dst.Save(capture);
+        
+
+        IEnumerable<AsmDescriptor> ResolveImmediates(GenericOpSpec op, IAsmFunctionArchive dst)
         {
-            var immediates = new byte[]{5,9,13};
-            foreach(var closure in op.Closures().ToArray())
-            foreach(var descriptor in archive.Save(AsmImmCapture.UnaryFunctions(closure.ClosedMethod, closure.Id, immediates)))
-                yield return descriptor;
+            if(FunctionType.vunaryImm(op.Method))
+            {
+                foreach(var emitted in EmitUnaryImmResolutions(op,dst))
+                    yield return emitted;
+            }                        
         }
 
-        IEnumerable<AsmDescriptor> Emit(GenericOpSpec op, IAsmFunctionArchive archive)
+        IEnumerable<AsmDescriptor> ResolveImmediates(DirectOpSpec op, IAsmFunctionArchive dst)
         {
-            var closures = op.Closures().ToArray();
-            
-            if(closures.Length == 0)
-                print(NoClosures(op));
-            
-            foreach(var closure in closures)
-                yield return archive.Save(Decoder.DecodeFunction(closure.Id, closure.ClosedMethod));
+            if(FunctionType.vunaryImm(op.Method))
+            {
+                foreach(var emitted in EmitUnaryImmResolutions(op,dst))
+                    yield return emitted;
+            }                        
         }
 
         IEnumerable<AsmDescriptor> Emit(DirectOpSpec op, IAsmFunctionArchive archive)
-        {                        
-            yield return archive.Save(Decoder.DecodeFunction(op.Id, op.Method));
+            => items(archive.Save(Decoder.Decode(op.Id, op.Method)));
+
+
+        IEnumerable<AsmDescriptor> Emit(GenericOpSpec op, IAsmFunctionArchive archive)
+            => OpFactory.close(op).Select(closure => archive.Save(Decoder.Decode(closure.Id, closure.ClosedMethod)));
+
+        IEnumerable<AsmDescriptor> Emit2(DirectOpSpec op, IAsmFunctionArchive archive)
+            => items(archive.Save(Decoder.DecodeFunction(op.Id, op.Method)));
+
+        IEnumerable<AsmDescriptor> Emit2(GenericOpSpec op, IAsmFunctionArchive archive)
+            => OpFactory.close(op).Select(closure => archive.Save(Decoder.DecodeFunction(closure.Id, closure.ClosedMethod)));
+
+        IEnumerable<AsmDescriptor> Emit(DirectOpSpec op, IAsmFunctionArchive primary, IAsmFunctionArchive immediate)
+            => FunctionType.immneeds(op.Method) ? ResolveImmediates(op,immediate) : Emit2(op,primary);
+
+        IEnumerable<AsmDescriptor> Emit(GenericOpSpec op, IAsmFunctionArchive primary, IAsmFunctionArchive immediate)
+            => FunctionType.immneeds(op.Method) ? ResolveImmediates(op,immediate) : Emit2(op,primary);
+
+        string ArchiveSubject(Type host, bool imm)
+            => imm ? concat(host.Name.ToLower(), "_imm") : host.Name.ToLower();
+
+        Pair<IAsmFunctionArchive> OpenHostArchives(Type host)
+        {
+            var primary = Archive(ArchiveSubject(host,false)).Clear();
+            var immediate = Archive(ArchiveSubject(host,true)).Clear();
+            return pair(primary,immediate);
         }
+
+        IEnumerable<AsmDescriptor> EmitGeneric(Type host, IAsmFunctionArchive primary, IAsmFunctionArchive immediate)
+            => from op in OpSpecs.generic(host)
+               from emission in Emit(op,primary, immediate)
+                select emission;
+
+        IEnumerable<AsmDescriptor> EmitDirect(Type host, IAsmFunctionArchive primary, IAsmFunctionArchive immediate)
+            => from op in OpSpecs.direct(host)
+               from emission in Emit(op,primary, immediate)
+                select emission;
 
         IEnumerable<AsmDescriptor> EmitGeneric(Type host)
         {
-            var subject = host.Name.ToLower();
-            var archive = Archive(subject);
-            archive.Clear();
-
-            var immArchive = Archive(concat(subject, ImmSubject));
-            immArchive.Clear();
-
-            foreach(var op in host.FastGenericOps())
-            {
-                if(op.RequiresImmediate())
-                {
-                    if(op.Method.IsUnaryImmVectorOp())
-                    {
-                        foreach(var emitted in EmitUnaryImmResolutions(op,immArchive))
-                            yield return emitted;
-                    }                        
-                }
-                else
-                {
-                    foreach(var emitted in Emit(op,archive))
-                        yield return emitted;
-                }
-            }
+            (var primary, var immediate) = OpenHostArchives(host);
+            return EmitGeneric(host,primary,immediate);
         }
-
+        
         IEnumerable<AsmDescriptor> EmitDirect(Type host)
         {
-            var subject = host.Name.ToLower();
-            var archive = Archive(subject);
-            archive.Clear();
-
-            var immArchive = Archive(concat(subject, ImmSubject));
-            immArchive.Clear();
-
-            foreach(var op in host.FastDirectOps())
-            {
-                if(op.RequiresImmediate())
-                {
-                    if(op.Method.IsUnaryImmVectorOp())
-                    {
-                        foreach(var emitted in EmitUnaryImmResolutions(op, immArchive))
-                            yield return emitted;
-                    }
-                }
-                else
-                {
-                    foreach(var emitted in Emit(op,archive))
-                        yield return emitted;
-                }
-            }
+            (var primary, var immediate) = OpenHostArchives(host);            
+            return EmitDirect(host,primary,immediate);
         }
 
         public IEnumerable<AsmDescriptor> EmitDirect()
-        {
-            foreach(var h in Catalog.DirectApiHosts)
-            foreach(var emitted in EmitDirect(h))    
-                yield return Pipe(emitted);
-        }
+            => from h in Catalog.DirectApiHosts
+              from emission in EmitDirect(h)
+              select Pipe(emission);
 
         public IEnumerable<AsmDescriptor> EmitGeneric()
-        {
-            foreach(var h in Catalog.GenericApiHosts)
-            foreach(var emitted in EmitGeneric(h))    
-                yield return Pipe(emitted);            
-        }
-
+            => from h in Catalog.GenericApiHosts
+                from emission in EmitGeneric(h)
+                    select Pipe(emission);
+        
         public IEnumerable<AsmDescriptor> EmitCatalog()
-        {                        
-            foreach(var emitted in EmitDirect())
-                yield return emitted;
-            
-            foreach(var emitted in EmitGeneric())
-                yield return emitted;
-        }
+            => EmitDirect().Union(EmitGeneric());
     }
 }

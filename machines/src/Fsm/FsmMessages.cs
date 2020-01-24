@@ -28,7 +28,7 @@ namespace Z0.Machines
             => appMsg($"{machine} received event {input.ToString().PadLeft(6)} | Total Receipts: {receipts}", SeverityLevel.Babble);
 
         public static AppMsg Error(string machine, Exception error)
-            => errorMsg($"{machine} encountered an error: {error}");
+            => appMsg($"{machine} encountered an error: {error}", SeverityLevel.Error);
 
         public static AppMsg ReceiptAfterFinish(string machine)
             => appMsg($"{machine} continuing to receive input after finished has been signaled", SeverityLevel.Warning);

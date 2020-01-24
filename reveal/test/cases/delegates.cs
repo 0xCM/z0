@@ -28,7 +28,9 @@ namespace Z0
             var x = Random.CpuVector<uint>(n256);
             var f = shuffler<uint>(n2);
             Span<byte> buffer = new byte[100];
-            var decode = AsmDecoder.function(f.CaptureNative(buffer));
+            var decoder = AsmServices.Decoder();
+
+            var decode = decoder.Decode(f.CaptureNative(buffer));
             var config = AsmFormatConfig.Default;
             Trace(decode.FormatInstructions(config).Concat(AsciEscape.Eol));        
         }
@@ -44,7 +46,8 @@ namespace Z0
         {
             Span<byte> buffer = new byte[100];
             var methods = typeof(gmath).DeclaredMethods().Public().BinaryOps().OpenGeneric().WithNameStartingWith("nand");
-            var functions = AsmDecoder.functions(methods.CaptureNative(typeof(double)));
+            var decoder = AsmServices.Decoder();
+            var functions = from m in methods select decoder.Decode(m.CaptureNative(typeof(double)));
             var config = AsmFormatConfig.Default;
             foreach(var f in functions)
                 Trace(f.FormatInstructions(config).Concat(AsciEscape.Eol));

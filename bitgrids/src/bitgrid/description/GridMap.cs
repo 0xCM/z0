@@ -151,15 +151,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// A semantic identifier that characterizes/identifies a grid
-        /// </summary>
-        public GridMoniker Moniker 
-        {
-            [MethodImpl(Inline)]
-            get => GridMoniker.FromSpecs((ushort)RowCount,(ushort)ColCount, (ushort)SegWidth);
-        }
-
-        /// <summary>
         /// Computes the 0-based linear index determined by a row/col coordinate
         /// </summary>
         /// <param name="row">The 0-based row index</param>

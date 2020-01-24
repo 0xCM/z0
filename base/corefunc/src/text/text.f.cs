@@ -203,6 +203,41 @@ partial class zfunc
         => AsciSym.Space;
 
     /// <summary>
+    /// Prepends a space to the source content
+    /// </summary>
+    /// <param name="content">The source content</param>
+    [MethodImpl(Inline)]
+    public static string lspace(object content)
+        => $" {content}";
+
+    /// <summary>
+    /// Appends a space to the source content
+    /// </summary>
+    /// <param name="content">The source content</param>
+    [MethodImpl(Inline)]
+    public static string rspace(object content)
+        => $"{content} ";
+    
+    /// <summary>
+    /// Formats the content with a space on either side
+    /// </summary>
+    /// <param name="content">The source content</param>
+    [MethodImpl(Inline)]
+    public static string spaced(object content)
+        => $" {content} ";
+
+    [MethodImpl(Inline)]
+    public static string spaced(char c)
+        => concat(AsciSym.Space, c, AsciSym.Space);
+
+    /// <summary>
+    /// Separates each item with a space
+    /// </summary>
+    [MethodImpl(Inline)]
+    public static string spaced(IEnumerable<object> items)
+        => string.Join(space(), items);
+
+    /// <summary>
     /// Produces a pipe character, i.e. '|'
     /// </summary>
     [MethodImpl(Inline)]
@@ -402,14 +437,7 @@ partial class zfunc
     public static string eol(IEnumerable<object> content)
         => string.Join(eol(), content);
 
-    /// <summary>
-    /// Renders a content array as a space-separated list of values
-    /// </summary>
-    /// <param name="content">The content to enclose</param>
-    [MethodImpl(Inline)]
-    public static string space(params object[] content)
-        => string.Join(Space, content);
-    
+
     /// <summary>
     /// Encloses text between '[' and ']' characters
     /// </summary>
@@ -466,24 +494,6 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static string spaces(int count = 3)
         => new string(AsciSym.Space, count);
-
-    /// <summary>
-    /// Separates each item with a space
-    /// </summary>
-    [MethodImpl(Inline)]
-    public static string spaced(params object[] items)
-        => string.Join(space(), items);
-
-    [MethodImpl(Inline)]
-    public static string spaced(char c)
-        => concat(AsciSym.Space, c, AsciSym.Space);
-
-    /// <summary>
-    /// Separates each item with a space
-    /// </summary>
-    [MethodImpl(Inline)]
-    public static string spaced(IEnumerable<object> items)
-        => string.Join(space(), items);
 
     /// <summary>
     /// Removes a substring from the subject

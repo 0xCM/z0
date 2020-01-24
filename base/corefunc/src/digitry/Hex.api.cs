@@ -32,7 +32,10 @@ namespace Z0
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline)]
         public static bit isdigit(char c)
-            => islo(c) || ishi(c);
+        {
+            var u = Char.ToUpper(c);
+            return islo(u) || ishi(u);
+        }
         
         /// <summary>
         /// Returns the hex character code for a number in the interval [0,15]

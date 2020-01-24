@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.Threading;
-    using System.Linq;
 
     using static zfunc;
 
@@ -23,6 +20,7 @@ namespace Z0
             this.Offset = Offset;
             this.FieldType = FieldType;
         }
+
         public string FieldName {get;}
 
         public int Position {get;}

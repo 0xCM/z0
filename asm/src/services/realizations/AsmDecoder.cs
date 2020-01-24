@@ -28,14 +28,67 @@ namespace Z0
             this._Buffer = new byte[bufferlen ?? 4*1024];
         }
 
-        public AsmFunction DecodeFunction(Moniker id, MethodInfo src)
+        AsmFormatConfig FormatConfig {get;}
+            = AsmFormatConfig.Default;
+
+        public AsmFunction Decode(Moniker id, MethodInfo src)
             => function(NativeReader.read(id, src, TakeBuffer()), ClrMetadata.ValueOrDefault());
 
-        public AsmFunction DecodeFunction(NativeMemberCapture src)
-            => DecodeFunction(src.Id, src.Method);
+        public AsmFunction Decode(NativeMemberCapture src)
+            => Decode(src.Id, src.Method);
 
-        public AsmFunction DecodeFunction(Moniker id, DynamicDelegate src)
+        public AsmFunction Decode(Moniker id, DynamicDelegate src)
             => function(id, src, TakeBuffer(), ClrMetadata.ValueOrDefault());
+
+        /// <summary>
+        /// Decodes an instruction list
+        /// </summary>
+        /// <param name="src">The code source</param>
+        public AsmSpecs.AsmInstructionList DecodeList(AsmCode src)
+        {
+            var decoded = list(src);
+            var dst = new AsmSpecs.Instruction[decoded.Count];
+            var formatted = AsmSpecFormatter.CaptureBaseFormat(decoded,src.Origin.Start, FormatConfig.Invert());
+            for(var i=0; i<dst.Length; i++)
+                dst[i] = decoded[i].ToSpec(formatted[i]);
+            return AsmSpecs.AsmInstructionList.Create(dst);
+        }
+
+        /// <summary>
+        /// Decodes a function from a native capture
+        /// </summary>
+        /// <param name="src">The cource capture</param>
+        public AsmSpecs.AsmFunction DecodeFunction(NativeMemberCapture src)
+        {
+            var list = DecodeList(src.Code);
+            var block = AsmSpecs.AsmInstructionBlock.Define(src.Code, list, src.CaptureInfo.TermCode);
+            var cil = ClrMetadata.MapValueOrDefault(idx => idx.FindCilFunction(src.Method).ValueOrDefault());
+            return AsmServices.FunctionBuilder().BuildFunction(block).WithCil(cil);            
+        }
+
+        /// <summary>
+        /// Decodes a function from a method
+        /// </summary>
+        /// <param name="src">The cource capture</param>
+        public AsmSpecs.AsmFunction DecodeFunction(Moniker id, MethodInfo src)
+            => DecodeFunction(NativeReader.read(id, src, TakeBuffer()));
+
+        /// <summary>
+        /// Decodes an assembly function from a dynamic delegate
+        /// </summary>
+        /// <param name="id">The identity to confer</param>
+        /// <param name="src">The source delegate</param>
+        public AsmSpecs.AsmFunction DecodeDelegate(Moniker id, DynamicDelegate src)
+            => DecodeDelegate(id, src, TakeBuffer());
+
+        /// <summary>
+        /// Decodes an assembly function from a dynamic delegate
+        /// </summary>
+        /// <param name="src">The source delegate</param>
+        /// <param name="id">The identity to confer</param>
+        /// <param name="id">The target buffer</param>
+        AsmSpecs.AsmFunction DecodeDelegate(Moniker id, DynamicDelegate src, byte[] dst)
+            => DecodeFunction(NativeReader.read(id, src, dst));
 
         byte[] TakeBuffer()
         {
@@ -47,20 +100,12 @@ namespace Z0
         /// Decodes an assembly function from native member data
         /// </summary>
         /// <param name="src">The source data</param>
-        public static AsmFunction function(NativeMemberCapture src, ClrMetadataIndex index)
+        static AsmFunction function(NativeMemberCapture src, ClrMetadataIndex index)
 		{
-            var block = instructions(src.Code, src.CaptureInfo.TermCode, src.Origin);
+            var block = instructions(src.Code, src.CaptureInfo.TermCode);
             var cil = index?.FindCilFunction(src.Method).ValueOrDefault();            
             return AsmServices.FunctionBuilder().BuildFunction(block).WithCil(cil);
 		}
-
-        /// <summary>
-        /// Decodes a stream of instruction blocks
-        /// </summary>
-        /// <param name="src">The native source data</param>
-        /// <typeparam name="T">The native source type</typeparam>
-        public static IEnumerable<AsmFunction> functions(IEnumerable<NativeMemberCapture> src)
-            => from member in src select function(member);
 
         /// <summary>
         /// Decodes an instruction block
@@ -77,71 +122,29 @@ namespace Z0
             => function(NativeReader.read(id, src, dst), index);
 
         /// <summary>
-        /// Decodes an asm function
+        /// Decodes an instruction list from native code
         /// </summary>
-        /// <param name="id">The disassembly id</param>
-        /// <param name="src">The source method</param>
-        /// <param name="dst">The clr metadata index to use, if any</param>
-        static AsmFunction function(Moniker id, MethodInfo src, byte[] dst)
-            => function(NativeReader.read(id, src, dst));
-
-        /// <summary>
-        /// Decodes an instruction block
-        /// </summary>
-        /// <param name="id">The identity to confer upon the block</param>
-        /// <param name="label">Descriptive text</param>
-        /// <param name="origin">The memory location from which the endoded data was extracted</param>
-        /// <param name="data">The encoded data</param>
-        static AsmFunction function(Moniker id, string label, MemoryRange origin, byte[] data)
-		{
-            var dst = new InstructionList();
-            var reader = new ByteArrayCodeReader(data);
-			var decoder = Decoder.Create(IntPtr.Size * 8, reader);
-            decoder.IP = origin.Start;
-			while (reader.CanReadByte) 
-			{
-				ref var instruction = ref dst.AllocUninitializedElement();
-				decoder.Decode(out instruction);                
-			}
-            var block = InstructionBlock.Define(AsmCode.Define(id, origin, label, data), CaptureTermCode.EOB, origin, dst);
-            return AsmServices.FunctionBuilder().BuildFunction(block);
-		}
-
-        /// <summary>
-        /// Decodes an instruction sequence
-        /// </summary>
-        /// <param name="src">The native source block</param>
-        static IEnumerable<Instruction> instructions(AsmCode src)
-		{
+        /// <param name="src">The native code</param>
+        static InstructionList list(AsmCode src)
+        {
             var dst = new InstructionList();
             var reader = new ByteArrayCodeReader(src.Encoded);
 			var decoder = Decoder.Create(IntPtr.Size * 8, reader);
-			decoder.IP = src.Origin.Start;			
+            decoder.IP = src.Origin.Start;
 			while (reader.CanReadByte) 
 			{
 				ref var instruction = ref dst.AllocUninitializedElement();
-				decoder.Decode(out instruction);                
+				decoder.Decode(out instruction); 
 			}
-            return dst;
-		}
+            return dst;            
+        }
 
         /// <summary>
         /// Decodes an instruction block
         /// </summary>
         /// <param name="src">The encoded source</param>
         /// <param name="origin">The memory range from which the code was extracted</param>
-        static InstructionBlock instructions(AsmCode src, CaptureTermCode tc, MemoryRange origin)
-		{
-            var dst = new InstructionList();
-            var reader = new ByteArrayCodeReader(src.Encoded);
-			var decoder = Decoder.Create(IntPtr.Size * 8, reader);
-            decoder.IP = origin.Start;
-			while (reader.CanReadByte) 
-			{
-				ref var instruction = ref dst.AllocUninitializedElement();
-				decoder.Decode(out instruction);                
-			}
-            return InstructionBlock.Define(src, tc, origin, dst);
-        }
+        static InstructionBlock instructions(AsmCode src, CaptureTermCode tc)
+            => InstructionBlock.Define(src, tc, list(src));
     }
 }

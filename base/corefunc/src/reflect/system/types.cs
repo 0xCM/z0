@@ -61,8 +61,12 @@ namespace Z0
         public static Option<Type> GenericDefinition(this Type t)
         {
             var x = t.EffectiveType();
-            return x.IsGenericType ? x.GetGenericTypeDefinition() : default;                
+            return x.IsConstructedGenericType ? x.GetGenericTypeDefinition() 
+                : (x.IsGenericTypeDefinition ? x : default);
         }
+
+        public static bool IsConstructed(this Type t)
+            => t.EffectiveType().IsConstructedGenericType;
 
         public static IEnumerable<Type> GenericArguments(this Type t)
         {

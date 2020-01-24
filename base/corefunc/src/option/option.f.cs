@@ -111,7 +111,7 @@ partial class zfunc
             if(handler != null)
                 handler(e);
             else
-                error(e);
+                errout(e);
         }
     }
 

@@ -46,7 +46,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e);
+                errout(e);
                 return NativeMemberCapture.Empty;                    
             }
         }
@@ -96,7 +96,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e);
+                errout(e);
                 return NativeMemberCapture.Empty;                    
             }
         }

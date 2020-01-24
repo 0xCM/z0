@@ -14,10 +14,10 @@ namespace Z0
     /// </summary>
     public class AsmInstructionInfo
     {
-        public static AsmInstructionInfo Define(ushort offset, string content, AsmInstructionSpec spec, AsmOperandInfo[] operands, byte[] encoded)
+        public static AsmInstructionInfo Define(ushort offset, string content, AsmInstructionCode spec, AsmOperandInfo[] operands, byte[] encoded)
             => new AsmInstructionInfo(offset, content, spec, operands, encoded);
         
-        AsmInstructionInfo(ushort offset, string content, AsmInstructionSpec spec, AsmOperandInfo[] operands, byte[] encoded)
+        AsmInstructionInfo(ushort offset, string content, AsmInstructionCode spec, AsmOperandInfo[] operands, byte[] encoded)
         {
             this.Offset = offset;
             this.AsmContent = content;
@@ -39,7 +39,7 @@ namespace Z0
         /// <summary>
         /// The instruction string paired with the op code
         /// </summary>
-        public AsmInstructionSpec Spec {get;}
+        public AsmInstructionCode Spec {get;}
 
         /// <summary>
         /// Describes the instruction operands

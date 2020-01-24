@@ -135,7 +135,6 @@ partial class zfunc
     public static void magenta(object msg)
         => terminal.WriteMessage(AppMsg.Define( msg?.ToString() ?? string.Empty, SeverityLevel.HiliteML));
 
-
     /// <summary>
     /// Emits an information-level message with a cyan foreground
     /// </summary>
@@ -170,28 +169,28 @@ partial class zfunc
         => terminal.WriteMessage(AppMsg.Define(msg?.ToString() ?? string.Empty, SeverityLevel.Babble, $"{label<T>()}/{caller}", file, line));
 
     /// <summary>
-    /// Emits an error-level message
+    /// Emits an error-level message to the errorr output stream
     /// </summary>
     /// <param name="msg">The message to emit</param>
     /// <param name="caller">The calling member</param>
-    public static void error(object msg, [CallerName] string caller = null, [CallerFile] string file = null, [CallerLine] int? line = null)
+    public static void errout(object msg, [CallerName] string caller = null, [CallerFile] string file = null, [CallerLine] int? line = null)
         => terminal.WriteError(AppMsg.Define(msg?.ToString() ?? string.Empty, SeverityLevel.Error, caller, file, line));
 
     /// <summary>
-    /// Emits an error-level message reporting a raised exception
+    /// Emits an error-level message reporting a raised exception to the errorr output stream
     /// </summary>
     /// <param name="e">The raised exception</param>
     /// <param name="title">The name/context of the error</param>
-    public static void error(Exception e, string title, [CallerName] string caller = null, [CallerFile] string file = null, [CallerLine] int? line = null)
-        => terminal.WriteMessage(AppMsg.Define($"{title} | {e}", SeverityLevel.Error, caller, file, line));        
+    public static void errout(Exception e, string title, [CallerName] string caller = null, [CallerFile] string file = null, [CallerLine] int? line = null)
+        => terminal.WriteError(AppMsg.Define($"{title} | {e}", SeverityLevel.Error, caller, file, line));        
 
     /// <summary>
-    /// Emits an error-level message
+    /// Emits an error-level message to errorr output stream
     /// </summary>
     /// <param name="msg">The message to emit</param>
     /// <param name="host">The declaring type of the member</param>
     /// <param name="caller">The calling member</param>
-    public static void error<T>(object msg, T host, [CallerName] string caller = null, [CallerFile] string file = null, [CallerLine] int? line = null)
+    public static void errout<T>(object msg, T host, [CallerName] string caller = null, [CallerFile] string file = null, [CallerLine] int? line = null)
         => terminal.WriteError(AppMsg.Define(msg?.ToString() ?? string.Empty, SeverityLevel.Error, $"{label<T>()}/{caller}", file, line));
 
     public static AppMsg trace(string title, string msg, int? tpad = null, SeverityLevel? severity = null)
@@ -214,7 +213,6 @@ partial class zfunc
         print(msg);
         return msg;            
     }
-
 
     /// <summary>
     /// Evaluates the expression and writes the result to standard output

@@ -37,8 +37,6 @@ namespace Z0
             => Near ? TargetAddress - BaseAddress : TargetAddress;
 
         public string Label
-            => LocalAddress.FormatHex(false,true,false,false);
-
+            => LocalAddress.FormatAsmHex();
     }
-
 }

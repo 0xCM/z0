@@ -17,7 +17,7 @@ partial class zfunc
     /// <typeparam name="T">The primal type</typeparam>
     [MethodImpl(Inline)]   
     public static string primalsig<T>(T t = default)
-        => PrimalType.primalsig(t);
+        => PrimalType.signature(t);
 
     /// <summary>
     /// Produces an identifier of the form {bitsize(k)}{u | i | f} for a primal kind k
@@ -25,7 +25,7 @@ partial class zfunc
     /// <param name="k">The primal kind</param>
     [MethodImpl(Inline)]   
     public static string primalsig(PrimalKind k)
-        => PrimalType.primalsig(k);
+        => PrimalType.signature(k);
 
     /// <summary>
     /// Defines a moniker predicated on supplied text

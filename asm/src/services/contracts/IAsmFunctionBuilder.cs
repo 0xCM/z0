@@ -8,8 +8,9 @@ namespace Z0
 
     public interface IAsmFunctionBuilder
     {
-        AsmFunction BuildFunction(NativeMemberCapture src);
 
         AsmFunction BuildFunction(InstructionBlock src);
+
+        AsmSpecs.AsmFunction BuildFunction(AsmSpecs.AsmInstructionBlock src);
     }
 }

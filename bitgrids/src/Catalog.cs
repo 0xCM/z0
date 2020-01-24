@@ -25,7 +25,7 @@ namespace Z0
             => items(typeof(BitMatrix), typeof(BitGrid));
 
         public override IEnumerable<Type> DirectApiHosts
-            => array<Type>();
+            => items(typeof(BitMatrix), typeof(BitGrid));
                
         public override string CatalogName 
             => "bitgrids";

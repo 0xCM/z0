@@ -6,26 +6,29 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Collections.Generic;
 
     using static zfunc;
 
-    partial class TypeApiX
+    public static class FunctionTypeX
     {
         /// <summary>
-        /// Selects the parameters for a method, if any, that accept an intrinsic vector
+        /// Derives a signature from reflected method metadata
         /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static IEnumerable<ParameterInfo> VectorParams(this MethodInfo m, FixedWidth width = default)
-            => m.GetParameters().Where(p => p.ParameterType.IsVector(width));
+        /// <param name="src">The source method</param>
+        [MethodImpl(Inline)]
+        public static MethodSig Signature(this MethodInfo src)
+            => MethodSig.Define(src);
 
         /// <summary>
-        /// Selects methods from a stream that neither accept nor return any instrinsic vector parameters
+        /// Determines the variance of a function parameter
         /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> NonVectorized(this IEnumerable<MethodInfo> src)
-            => src.Where(m => !m.IsVectorized());
+        /// <param name="src">The source parameter</param>
+        [MethodImpl(Inline)]
+        public static ParamDirection Direction(this ParameterInfo src)
+            => FunctionType.direction(src);
 
         /// <summary>
         /// Determines whether a method accepts and/or returns at least one memory block parameter
@@ -33,20 +36,6 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static bool IsBlocked(this MethodInfo m)
             => FunctionType.blocked(m);        
-
-        /// <summary>
-        /// Selects methods from a stream that accept and/or return at least one memory block  parameter
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Blocked(this IEnumerable<MethodInfo> src)
-            => src.Where(m => m.IsBlocked());
-
-        /// <summary>
-        /// Selects unblocked operations from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Unblocked(this IEnumerable<MethodInfo> src)
-            => src.Where(x => !x.IsBlocked());
 
         /// <summary>
         /// Determines whether a method is classified as a span op
@@ -61,20 +50,6 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static bool IsNatOp(this MethodInfo m)
             => FunctionType.natural(m);
-
-        /// <summary>
-        /// Determines the bit-width of each intrinsic or primal method parameter
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static IEnumerable<Pair<ParameterInfo,FixedWidth>> InputWidths(this MethodInfo m)
-            => FunctionType.inputwidths(m);
-
-        /// <summary>
-        /// Determines the bit-width of an intrinsic or primal return type
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static Pair<ParameterInfo,FixedWidth> OutputWidth(this MethodInfo m)
-            => FunctionType.outputwidth(m);
 
         /// <summary>
         /// Determines whether all operands are primal
@@ -112,25 +87,11 @@ namespace Z0
             => FunctionType.unaryop(m);
 
         /// <summary>
-        /// Determines whether a method is a unary operator over a domain of specified kind
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsUnaryOp(this MethodInfo m, PrimalKind k)
-            => FunctionType.unaryop(m,k);
-
-        /// <summary>
         /// Determines whether a method is a binary operator
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsBinaryOp(this MethodInfo m)
             => FunctionType.binaryop(m);
-
-        /// <summary>
-        /// Determines whether a method is a binary operator over a domain of specified kind
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsBinaryOp(this MethodInfo m, PrimalKind k)
-            => FunctionType.binaryop(m,k);
 
         /// <summary>
         /// Determines whether a method is a ternary operator
@@ -140,46 +101,6 @@ namespace Z0
             => FunctionType.ternaryop(m);
 
         /// <summary>
-        /// Determines whether a method is a ternary operator over a domain of specified kind
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsTernaryOp(this MethodInfo m, PrimalKind k)
-            => FunctionType.ternaryop(m,k);
-
-        /// <summary>
-        /// Determines whether a method defines a parameter that requires an immediate
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool RequiresImmediate(this MethodInfo m)        
-            => FunctionType.immrequired(m);
-
-        /// <summary>
-        /// Determines whether a method has intrinsic paremeters or return type of specified width
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        /// <param name="width">The required vector width</param>
-        /// <param name="total">Whether all parameters and return type must be intrinsic</param>
-        public static bool IsVectorized(this MethodInfo m, int? width, bool total)        
-            => FunctionType.vectorized(m,width,total);
-
-        public static bool IsUnaryImmVectorOp(this MethodInfo method)
-        {
-            var parameters = method.GetParameters().ToArray();
-            return parameters.Length == 2 
-                && parameters[0].ParameterType.IsVector() 
-                && parameters[1].IsImmediate();
-        }
-
-        public static bool IsBinaryImmVectorOp(this MethodInfo method)
-        {
-            var parameters = method.GetParameters().ToArray();
-            return parameters.Length == 3 
-                && parameters[0].ParameterType.IsVector() 
-                && parameters[1].ParameterType.IsVector() 
-                && parameters[2].IsImmediate();
-        }
-
-        /// <summary>
         /// Determines whether a method is an action
         /// </summary>
         /// <param name="m">The method to examine</param>
@@ -187,27 +108,11 @@ namespace Z0
             => m.ReturnType == typeof(void);
 
         /// <summary>
-        /// Determines whether a method is an action with specified arity
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        /// <param name="arity">The arity to match</param>
-        public static bool IsAction(this MethodInfo m, int arity)
-            => m.IsAction() && m.Arity() == arity;
-
-        /// <summary>
         /// Determines whether a method is a function
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsFunction(this MethodInfo m)
             => FunctionType.function(m);
-
-        /// <summary>
-        /// Determines whether a method is a function with specified arity
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        /// <param name="arity">The arith to match</param>
-        public static bool IsFunction(this MethodInfo m, int arity)
-            => FunctionType.function(m,arity);
 
         /// <summary>
         /// Determines whether a method is an emitter, i.e. a method that returns a value but accepts no input
@@ -224,39 +129,11 @@ namespace Z0
             => FunctionType.isoperator(m);
 
         /// <summary>
-        /// Determines whether a method defines an operator over a domain of specified kind
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsOperator(this MethodInfo m, PrimalKind kind)
-            => FunctionType.isoperator(m, kind);
-
-        /// <summary>
-        /// Determines whether a method is homogenous with respect to input/output values
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        public static bool IsHomogenous(this MethodInfo m)
-            => FunctionType.homogenous(m);
-
-        /// <summary>
-        /// Determines whether a method accepts natural number type values as arguments
-        /// </summary>
-        /// <param name="m">The method to test</param>
-        public static bool AcceptsNatValues(this MethodInfo m)
-            => TypeNatType.accepts(m);
-
-        /// <summary>
         /// Determines whether a method has intrinsic parameters or return type
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool IsVectorized(this MethodInfo m, bool total = false)        
             => FunctionType.vectorized(m,total);
-
-        /// <summary>
-        /// Determines whether a method has intrinsic parameters or return type
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsSegmented(this MethodInfo m)        
-            => FunctionType.vectorized(m,false) || FunctionType.blocked(m);
 
         /// <summary>
         /// Determines whether a method defines a vectorized operator
@@ -284,9 +161,7 @@ namespace Z0
         /// </summary>
         /// <param name="param">The parameter to examine</param>
         public static bool IsImmediate(this ParameterInfo param)
-            => FunctionType.immediate(param);
-
-
+            => FunctionType.immneeds(param);
 
         /// <summary>
         /// Selects unary operators from a stream
@@ -296,13 +171,6 @@ namespace Z0
             => src.Where(x => x.IsUnaryOp());
 
         /// <summary>
-        /// Selects kind-specific unary operators from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> UnaryOps(this IEnumerable<MethodInfo> src, PrimalKind k)
-            => src.Where(x => x.IsUnaryOp(k));
-
-        /// <summary>
         /// Selects binary operators from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
@@ -310,40 +178,10 @@ namespace Z0
             => src.Where(x => x.IsBinaryOp());
 
         /// <summary>
-        /// Selects kind-specific binary operators from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> BinaryOps(this IEnumerable<MethodInfo> src, PrimalKind k)
-            => src.Where(x => x.IsBinaryOp(k));
-
-        /// <summary>
         /// Selects ternary operators from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> TernaryOps(this IEnumerable<MethodInfo> src)
             => src.Where(x => x.IsTernaryOp());
-
-        /// <summary>
-        /// Selects kind-specific ternary operators from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> TernaryOps(this IEnumerable<MethodInfo> src, PrimalKind k)
-            => src.Where(x => x.IsTernaryOp(k));
-
-        /// <summary>
-        /// Selects the methods that define parameters that require immediate values
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        /// <param name="required">Whether an immediate is required</param>
-        public static IEnumerable<MethodInfo> RequiresImmediate(this IEnumerable<MethodInfo> src)
-            => src.Where(RequiresImmediate);
-
-        /// <summary>
-        /// Selects operators from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Operators(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsOperator());
-
     }
 }

@@ -187,18 +187,43 @@ namespace Z0
             && m.ParameterTypes().Second() == typeof(byte);
 
         /// <summary>
+        /// Determines whether a method represents a vectorized unary operation that requires an immediate value
+        /// </summary>
+        /// <param name="method">The method to examine</param>
+        public static bool vunaryImm(MethodInfo method)
+        {
+            var parameters = method.GetParameters().ToArray();
+            return parameters.Length == 2 
+                && parameters[0].ParameterType.IsVector() 
+                && parameters[1].IsImmediate();
+        }
+
+        /// <summary>
+        /// Determines whether a method represents a vectorized binary operation that requires an immediate value
+        /// </summary>
+        /// <param name="method">The method to examine</param>
+        public static bool vbinaryImm(MethodInfo method)
+        {
+            var parameters = method.GetParameters().ToArray();
+            return parameters.Length == 3 
+                && parameters[0].ParameterType.IsVector() 
+                && parameters[1].ParameterType.IsVector() 
+                && parameters[2].IsImmediate();
+        }
+
+        /// <summary>
         /// Determines whether a parameters is an immediate
         /// </summary>
         /// <param name="param">The parameter to examine</param>
-        public static bool immediate(ParameterInfo param)
+        public static bool immneeds(ParameterInfo param)
             => param.Attributed<ImmAttribute>();
 
         /// <summary>
         /// Determines whether a method defines a parameter that requires an 8-bit immediate immediate
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static bool immrequired(MethodInfo m)        
-            => m.GetParameters().Where(immediate).Any();
+        public static bool immneeds(MethodInfo m)        
+            => m.GetParameters().Where(immneeds).Any();
 
         /// <summary>
         /// Returns a method's parameter types
@@ -227,5 +252,10 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static bool primal(this MethodInfo m)
             => m.ParameterCount() != 0 && m.ParameterTypes().All(t => t.Kind() != PrimalKind.None);
+
+
+        public static ParamDirection direction(ParameterInfo src)
+            => src.IsIn ? ParamDirection.In : src.IsOut ? ParamDirection.Out : ParamDirection.Default;
+
     }
 }

@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 using System;
 using System.Runtime.CompilerServices;
+using System.Linq;
+using System.Collections.Generic;
 
 using Z0;
 
@@ -12,6 +14,10 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static T[] array<T>(params T[] src)
         => src;
+
+    [MethodImpl(Inline)]   
+    public static T[] array<T>(IEnumerable<T> src)
+        => src.ToArray();
 
     /// <summary>
     /// Allocates an array

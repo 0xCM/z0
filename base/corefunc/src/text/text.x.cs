@@ -17,6 +17,30 @@ namespace Z0
     partial class xfunc
     {
         /// <summary>
+        /// Determines whether the source character is a decimal digit per the unicode standard
+        /// </summary>
+        /// <param name="c">The source character</param>
+        [MethodImpl(Inline)]
+        public static bool IsDecimalDigit(this char c)
+            => char.IsDigit(c);
+
+        /// <summary>
+        /// Determines whether the source character is a hex digit
+        /// </summary>
+        /// <param name="c">The source character</param>
+        [MethodImpl(Inline)]
+        public static bool IsHexDigit(this char c)
+            => Hex.isdigit(c);
+
+        /// <summary>
+        /// Determines whether the source character is a binary digit, i.e. either '0' or '1'
+        /// </summary>
+        /// <param name="c">The source character</param>
+        [MethodImpl(Inline)]
+        public static bool IsBinaryDigit(this char c)
+            => c == '0' || c == '1';
+
+        /// <summary>
         /// Encloses a string within a boundary
         /// </summary>
         /// <param name="s">The string to enclose</param>

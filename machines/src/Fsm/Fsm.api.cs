@@ -204,7 +204,7 @@ namespace Z0.Machines
             }
             catch(Exception error)
             {
-                print(errorMsg(error));
+                print(appMsg(error));
                 return default;
             }
 

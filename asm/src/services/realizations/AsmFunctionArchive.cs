@@ -16,11 +16,13 @@ namespace Z0
         
         readonly AsmArchiveConfig Config;
 
+        readonly IAsmFormatter Formatter;
+
         public string Catalog {get;}
 
         public string Subject {get;}
 
-        public static IAsmFunctionArchive Define(string catalog, string subject, AsmArchiveConfig? config = null)
+        public static IAsmFunctionArchive Create(string catalog, string subject, AsmArchiveConfig? config = null)
             => new AsmFunctionArchive(catalog,subject, config ?? AsmArchiveConfig.Default);
 
         AsmFunctionArchive(string catalog, string subject, AsmArchiveConfig config)
@@ -29,6 +31,7 @@ namespace Z0
             this.Subject = subject;
             this.TargetFolder = Paths.AsmDataDir(RelativeLocation.Define(catalog, subject));
             this.Config = config;
+            this.Formatter = AsmServices.Formatter();
         }
 
         public AsmDescriptor Save(AsmFunction src)
@@ -39,15 +42,18 @@ namespace Z0
             return AsmDescriptor.Define(AsmUri.Define(Catalog, Subject, src.Id), src.Location);            
         }
 
-        public IEnumerable<AsmDescriptor> Save(IEnumerable<AsmFunction> src)
+        public AsmDescriptor Save(AsmSpecs.AsmFunction src)
         {
-            foreach(var f in src)
-                yield return Save(f);
-        }   
-            
-        public void Clear()
+            HexPath(src.Id).WriteText(src.Code.Format());
+            DetailPath(src.Id).WriteText(Formatter.FormatDetail(src));
+            src.Cil.OnSome(cil => CilPath(src.Id).WriteText(cil.Format()));
+            return AsmDescriptor.Define(AsmUri.Define(Catalog, Subject, src.Id), src.Location);            
+        }
+
+        public IAsmFunctionArchive Clear()
         {
             TargetFolder.DeleteFiles();
+            return this;
         }
 
         FilePath HexPath(Moniker m)

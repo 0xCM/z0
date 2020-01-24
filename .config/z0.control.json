@@ -3,5 +3,5 @@
     "2:off": "GMath",
     "3:off": "CoreFunc",
     "4:off": "BitCore",
-    "5:on": "Logix"
+    "5:off": "Logix"
 }

@@ -20,17 +20,17 @@ namespace Z0
         /// <summary>
         /// When enabled, indicates a signed integral type
         /// </summary>
-        Signed = 1u << 31,
+        Signed = PrimalIndicator.Signed,
 
         /// <summary>
         /// When enabled, indicates a floating-point type
         /// </summary>
-        Fractional = 1u << 30,
+        Fractional = PrimalIndicator.Fractional,
 
         /// <summary>
         /// When enabled, indicates an unsigned integral type
         /// </summary>
-        Unsigned = 1u << 29,
+        Unsigned = PrimalIndicator.Unsigned,
 
         /// <summary>
         /// Identifies an unsigned 8-bit integral type

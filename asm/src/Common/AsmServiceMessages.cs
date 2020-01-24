@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-        
+    using Iced.Intel;    
+
     using static zfunc;
 
     static class AsmServiceMessages
@@ -22,7 +23,7 @@ namespace Z0
         public static AppMsg Emitting(GenericOpSpec op)        
             => appMsg($"Emitting operation {op.Id}", SeverityLevel.Babble);
 
-        public static AppMsg Emitting(OpClosureSpec closure)        
+        public static AppMsg Emitting(OpClosureInfo closure)        
             => appMsg($"Emitting operation closure {closure.Id}", SeverityLevel.Babble);
 
         public static AppMsg Emitting(DirectOpSpec op)        
@@ -39,5 +40,16 @@ namespace Z0
             
         public static AppMsg EmittingImmSpecializations(OpSpec op, IEnumerable<byte> immediates)        
             => appMsg($"Emitting immediates specializations {immediates.FormatHexList()} for {op.Id}", SeverityLevel.Babble);
+        
+        public static AppMsg InstructionSizeMismatch(MemoryAddress location, int offset, int actual, int reported)
+            => appMsg(concat(
+                $"The encoded instruction length does not match the reported instruction length:", 
+                $"address = {location}, datalen = {reported}, offset = {offset}, bytelen = {reported}"));
+
+        public static AppMsg InstructionBlockSizeMismatch(MemoryRange origin, int actual, int reported)
+            => appMsg(concat(
+                $"The encoded instruction block length does not match the reported total instruction length:", 
+                $"origin = {origin}, block length = {reported}, reported length = {reported}"));
+
     }
 }

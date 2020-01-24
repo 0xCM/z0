@@ -8,15 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
+    using Z0.AsmSpecs;
 
     /// <summary>
     /// Describes an operand in the context of an assembly instruction
     /// </summary>
     public class AsmOperandInfo
     {
-        public static AsmOperandInfo Define(int index, string kind, ImmInfo imminfo, AsmMemInfo memory, AsmRegisterInfo register, AsmBranchInfo branch)
+        public static AsmOperandInfo Define(int index, OpKind kind, ImmInfo imminfo, AsmMemInfo memory, AsmRegisterInfo register, AsmBranchInfo branch)
                 => new AsmOperandInfo(index, kind, imminfo, memory, register, branch);
-        public AsmOperandInfo(int index, string kind, ImmInfo imminfo, AsmMemInfo meminfo, AsmRegisterInfo register, AsmBranchInfo branch)
+        public AsmOperandInfo(int index, OpKind kind, ImmInfo imminfo, AsmMemInfo meminfo, AsmRegisterInfo register, AsmBranchInfo branch)
         {
             this.Index = (byte)index;
             this.Kind = kind;
@@ -34,7 +35,7 @@ namespace Z0
         /// <summary>
         /// Classifies the operand
         /// </summary>
-        public string Kind {get;}
+        public OpKind Kind {get;}
 
         /// <summary>
         /// Operand immediate info, if applicable

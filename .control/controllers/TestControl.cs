@@ -61,7 +61,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e);
+                errout(e);
             }
             finally
             {
@@ -112,7 +112,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e);
+                errout(e);
             }
             
             return runtime;

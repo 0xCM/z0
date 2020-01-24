@@ -18,20 +18,45 @@ namespace Z0
         /// Decodes an assembly function from native member data
         /// </summary>
         /// <param name="src">The source data</param>
-        AsmFunction DecodeFunction(NativeMemberCapture src);
+        AsmFunction Decode(NativeMemberCapture src);
 
         /// <summary>
         /// Decodes an assembly function from a dynamic delegate
         /// </summary>
         /// <param name="id">The identity to confer upon the result</param>
         /// <param name="src">The source delegate</param>
-        AsmFunction DecodeFunction(Moniker id, DynamicDelegate src);
+        AsmFunction Decode(Moniker id, DynamicDelegate src);
 
         /// <summary>
         /// Decodes an assembly function from a method
         /// </summary>
         /// <param name="id">The identity to confer upon the result</param>
         /// <param name="src">The source method</param>
-        AsmFunction DecodeFunction(Moniker id, MethodInfo src);
+        AsmFunction Decode(Moniker id, MethodInfo src);
+
+        /// <summary>
+        /// Decodes an instruction list
+        /// </summary>
+        /// <param name="src">The code source</param>
+        AsmSpecs.AsmInstructionList DecodeList(AsmCode src);
+
+        /// <summary>
+        /// Decodes a function from a native capture
+        /// </summary>
+        /// <param name="src">The cource capture</param>
+        AsmSpecs.AsmFunction DecodeFunction(NativeMemberCapture src);    
+
+        /// <summary>
+        /// Decodes a function from a method
+        /// </summary>
+        /// <param name="src">The cource capture</param>
+        AsmSpecs.AsmFunction DecodeFunction(Moniker id, MethodInfo src);      
+
+        /// <summary>
+        /// Decodes an assembly function from a dynamic delegate
+        /// </summary>
+        /// <param name="id">The identity to confer</param>
+        /// <param name="src">The source delegate</param>
+        AsmSpecs.AsmFunction DecodeDelegate(Moniker id, DynamicDelegate src);
     }
 }

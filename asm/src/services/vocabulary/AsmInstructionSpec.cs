@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using static zfunc;
 
-    public readonly struct AsmInstructionSpec
+    public readonly struct AsmInstructionCode
     {
-        public static AsmInstructionSpec Define(string def, string opcode)
-            => new AsmInstructionSpec(def,opcode);
+        public static AsmInstructionCode Define(string def, string opcode)
+            => new AsmInstructionCode(def,opcode);
 
-        AsmInstructionSpec(string def, string opcode)
+        AsmInstructionCode(string def, string opcode)
         {
             this.Definition = def;
             this.OpCode = opcode;

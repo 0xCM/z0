@@ -15,7 +15,22 @@ namespace Z0
         /// Indicates the width is not fixed or is unknown
         /// </summary>
         None = 0,
-        
+
+        /// <summary>
+        /// Indicates a bit-width of 1
+        /// </summary>
+        W1 = 1,
+
+        /// <summary>
+        /// Indicates a bit-width of 2
+        /// </summary>
+        W2 = 2,
+
+        /// <summary>
+        /// Indicates a bit-width of 4
+        /// </summary>
+        W4 = 4,
+
         /// <summary>
         /// Indicates a bit-width of 8
         /// </summary>

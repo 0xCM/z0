@@ -29,7 +29,6 @@ namespace Z0.Logix
             }
         }
 
-
         static LiteralExpr<T> eval<T>(IExpr<T> expr)
             where T : unmanaged
         {
@@ -124,7 +123,4 @@ namespace Z0.Logix
             where T : unmanaged
                 => throw new Exception($"{a} unhandled");
     }
-
 }
-
-

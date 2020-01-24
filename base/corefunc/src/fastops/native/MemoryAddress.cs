@@ -33,7 +33,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(ulong src)
             => Define(src);
-        
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong(MemoryAddress src)
+            => src.Origin;
+
         [MethodImpl(Inline)]
         public static bool operator==(MemoryAddress a, MemoryAddress b)
             => a.Equals(b);
@@ -66,8 +70,8 @@ namespace Z0
         }
         
         public string Format(bool hex = true)
-            => hex  ? concat(this.Local.FormatSmallHex(true), spaced(pipe()), this.Origin.FormatHex(false,true,false,false))
-                    : concat(this.Local.ToString().PadLeft(5, AsciDigits.A0),  spaced(pipe()), this.Origin.ToString());
+            => hex  ? (Local != 0 ? concat(this.Local.FormatSmallHex(true), spaced(pipe()), this.Origin.FormatAsmHex()) : Origin.FormatAsmHex())
+                    : (Local != 0 ? concat(this.Local.ToString().PadLeft(5, AsciDigits.A0), spaced(pipe()), this.Origin.ToString()) : this.Origin.ToString());
 
         public override string ToString()
             => Format();         

@@ -12,8 +12,11 @@ namespace Z0
         public static IAsmCatalogEmitter CatalogEmitter(IOperationCatalog catalog)
             => AsmCatalogEmitter.Create(catalog);
 
+        public static IAsmFormatter Formatter(AsmFormatConfig config = null)
+            => AsmSpecFormatter.Create(config);
+
         public static IAsmFunctionArchive FunctionArchive(string catalog, string subject, AsmArchiveConfig? config = null)
-            => AsmFunctionArchive.Define(catalog,subject,config);
+            => AsmFunctionArchive.Create(catalog,subject,config);
 
         public static IAsmCodeArchive CodeArchive(string catalog, string subject)
             => AsmCodeArchive.Create(catalog,subject);

@@ -61,7 +61,6 @@ namespace Z0
             var format = text();
             var pad = colpad ?? 10;
             var sep = delimiter ?? AsciSym.Pipe;
-            format.Append($"{stats.Moniker}".PadRight(pad));
             format.Append($" {sep} {stats.RowCount}".PadRight(pad));
             format.Append($" {sep} {stats.ColCount}".PadRight(pad));
             format.Append($" {sep} {stats.SegWidth}".PadRight(pad));
@@ -84,7 +83,6 @@ namespace Z0
                 RowCount = src.RowCount,
                 ColCount = src.ColCount,
                 SegWidth = src.SegWidth,
-                Moniker = src.Moniker,
                 SorageSegs = src.SegCount,
                 StorageBits = src.StorageBits,
                 StorageBytes = src.StorageBytes,
@@ -166,18 +164,6 @@ namespace Z0
         [ColInfo("v256/r")]
         public int Vec256Remainder {get;set;}
             
-        /// <summary>
-        /// A semantic identifier that distinguishes that grid for which statistics ar given
-        /// </summary>
-        [ColInfo("moniker")]
-        public GridMoniker Moniker {get; set;}
-
-        /// <summary>
-        /// Captures the semantic content of a moniker as an integer
-        /// </summary>
-        [ColInfo("id")]
-        public ulong Identifier
-            => Moniker.Identifier;
     }
 
 }

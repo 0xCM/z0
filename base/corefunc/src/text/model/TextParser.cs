@@ -49,7 +49,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                observer?.Invoke(errorMsg(e));
+                observer?.Invoke(appMsg(e));
             }
 
 

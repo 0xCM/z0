@@ -16,7 +16,5 @@ namespace Z0
        IEnumerable<AsmDescriptor> EmitDirect();
        
        IEnumerable<AsmDescriptor> EmitGeneric();         
-
-       IEnumerable<AsmDescriptor> Emissions {get;}
     }
 }

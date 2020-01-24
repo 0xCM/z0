@@ -232,7 +232,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, name.Text);
+                errout(e, name.Text);
                 succeeded = false;
             }
             finally
@@ -258,7 +258,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error(e, name);
+                errout(e, name);
                 succeeded = false;
             }
             finally

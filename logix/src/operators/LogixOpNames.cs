@@ -12,6 +12,16 @@ namespace Z0.Logix
     static class LogixOpNames
     {        
         /// <summary>
+        /// Scalar operations
+        /// </summary>
+        public const string scalar = "scalar";
+
+        /// <summary>
+        /// Logical operations
+        /// </summary>
+        public const string logic = "logic";
+
+        /// <summary>
         /// Unary bitlogic
         /// </summary>
         public const string ubl = "ubl";
@@ -45,6 +55,5 @@ namespace Z0.Logix
         /// Shift evaluation
         /// </summary>
         public const string shift = "shift";
-
     }
 }

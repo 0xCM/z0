@@ -81,9 +81,9 @@ namespace Z0
             if(generic && k == PrimalKind.None)
                 return Moniker.Parse(concat(opname, PartSep, GenericIndicator));            
             else if(w != 0)
-                return Moniker.Parse($"{opname}{PartSep}{g}{w}{SegSep}{PrimalType.primalsig(k)}{asmPart}");
+                return Moniker.Parse($"{opname}{PartSep}{g}{w}{SegSep}{PrimalType.signature(k)}{asmPart}");
             else
-                return Moniker.Parse($"{opname}_{g}{PrimalType.primalsig(k)}{asmPart}");
+                return Moniker.Parse($"{opname}_{g}{PrimalType.signature(k)}{asmPart}");
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static Moniker segmented<W>(string opname, PrimalKind k, W w)
             where W : unmanaged, ITypeNat
-                => Moniker.Parse($"{opname}_{w}{SegSep}{PrimalType.primalsig(k)}");
+                => Moniker.Parse($"{opname}_{w}{SegSep}{PrimalType.signature(k)}");
 
         /// <summary>
         /// Defines a moniker of the form {opname}_{w}X{bitsize(k)}{u | i | f}{_asm} to identify 

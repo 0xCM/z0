@@ -81,14 +81,6 @@ namespace Z0
             get => BitCalcs.tablesize<M,N>();
         }
 
-        /// <summary>
-        /// A semantic identifier that characterizes/identifies a grid
-        /// </summary>
-        public GridMoniker Moniker 
-        {
-            [MethodImpl(Inline)]
-            get => GridMoniker.FromTypes<M,N,T>();
-        }
 
         /// <summary>
         /// Computes the 0-based linear index determined by a row/col coordinate

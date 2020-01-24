@@ -108,7 +108,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                error($"Host execution failed: {e}", this);
+                errout($"Host execution failed: {e}", this);
             }  
             finally
             {
