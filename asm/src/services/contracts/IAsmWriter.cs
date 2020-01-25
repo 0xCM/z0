@@ -9,17 +9,25 @@ namespace Z0
 
     using static zfunc;
 
+    using Iced = Iced.Intel;
+
+    using Z0.AsmSpecs;
+
     public interface IAsmWriter : IDisposable
     {
-        byte[] TakeBuffer();   
-
-        void WriteHeader(AsmFormatConfig fmt);
-
-        void WriteSeparator(AsmFormatConfig fmt);        
 
         void WriteFunction(AsmFunction src, AsmFormatConfig fmt);
 
-        void WriteFunction(NativeMemberCapture src, AsmFormatConfig fmt);
+        void WriteFunction(MemberCapture src, AsmFormatConfig fmt);
+
+        byte[] TakeBuffer();   
+
+    }
+
+
+    interface IIcedAsmFormatter
+    {
+        ReadOnlySpan<string> CaptureBaseFormat(Iced.InstructionList src, ulong baseaddress);
     }
 
 }

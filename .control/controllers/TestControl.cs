@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Threading;
 
-    using Z0.Designators;
+    using Z0.AsmSpecs;
 
     using C = Z0.Designators.Control;
     using D = Z0.Designators;
@@ -20,7 +20,6 @@ namespace Z0
 
     class TestController : Controller<TestController>
     {        
-
         public TestController()
         {
 
@@ -29,14 +28,18 @@ namespace Z0
         static IEnumerable<IAssemblyDesignator> TestHosts
             => C.Designated.Designates.Where(d => d.Role == AssemblyRole.Test).Select(x => x);
 
-
         static AsmFunction[] ResolveExample<T>(N128 w, T t = default)
             where T : unmanaged
         {
             var imm = new byte[]{199,205};
-            var r1 = VX.vbsll(w,t).CaptureImmediates(imm);
-            var r2 = VX.vsrl(w,t).CaptureImmediates(imm);            
-            var r3 = VX.vblend8x16(w,t).CaptureImmediates(imm);
+            var c1 = AsmServices.ImmCapture(VX.vbsll(w,t));
+            var r1 = c1.Capture(imm);
+
+            var c2 = AsmServices.ImmCapture(VX.vsrl(w,t));
+            var r2 = c2.Capture(imm);
+
+            var c3 = AsmServices.ImmCapture(VX.vblend8x16(w,t));
+            var r3 = c3.Capture(imm);
             return r1.Union(r2).Union(r3).ToArray();
         }
 
@@ -44,8 +47,12 @@ namespace Z0
             where T : unmanaged
         {
             var imm = new byte[]{199,205};
-            var r1 = VX.vbsll(w,t).CaptureImmediates(imm);
-            var r2 = VX.vsrl(w,t).CaptureImmediates(imm);
+            var c1 = AsmServices.ImmCapture(VX.vbsll(w,t));
+            var r1 = c1.Capture(imm);
+
+            var c2 = AsmServices.ImmCapture(VX.vsrl(w,t));
+            var r2 = c2.Capture(imm);
+
             return r1.Union(r2).ToArray();            
         }
 

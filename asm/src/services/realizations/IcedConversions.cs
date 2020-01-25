@@ -11,168 +11,31 @@ namespace Z0
 
     using static zfunc;                
 
-    using Specs = Z0.AsmSpecs;
+    using AsmSpecs;
+
     using Iced = Iced.Intel;
+
 
     public static class AsmSpecConversion
     {
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.Code ToSpec(this Iced.Code src)
-            => (Specs.Code)src;
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.CodeSize ToSpec(this Iced.CodeSize src)
-            => (Specs.CodeSize)src;
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.ConditionCode ToSpec(this Iced.ConditionCode src)
-            => (Specs.ConditionCode)src;
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.CpuidFeature ToSpec(this Iced.CpuidFeature src)
-            => (Specs.CpuidFeature)src;
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.EncodingKind ToSpec(this Iced.EncodingKind src)
-            => (Specs.EncodingKind)src;
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.FlowControl ToSpec(this Iced.FlowControl src)
-            => (Specs.FlowControl)src;
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.FormatterOutputTextKind ToSpec(this Iced.FormatterOutputTextKind src)
-            => (Specs.FormatterOutputTextKind)src;
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.MandatoryPrefix ToSpec(this Iced.MandatoryPrefix src)
-            => (Specs.MandatoryPrefix)src;
-
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.MemoryOperand ToSpec(this Iced.MemoryOperand src)
-            => new Specs.MemoryOperand(src.Base.ToSpec(), src.Index.ToSpec(), src.Scale, src.Displacement, src.DisplSize, src.IsBroadcast, src.SegmentPrefix.ToSpec());
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.MemorySize ToSpec(this Iced.MemorySize src)
-            => (Specs.MemorySize)src;
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.Mnemonic ToSpec(this Iced.Mnemonic src)
-            => (Specs.Mnemonic)src;
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.OpCodeOperandKind ToSpec(this Iced.OpCodeOperandKind src)
-            => (Specs.OpCodeOperandKind)src;
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.OpCodeTableKind ToSpec(this Iced.OpCodeTableKind src)
-            => (Specs.OpCodeTableKind)src;
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.OpKind ToSpec(this Iced.OpKind src)
-            => (Specs.OpKind)src;
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.Register ToSpec(this Iced.Register src)
-            => (Specs.Register)src;
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.RflagsBits ToSpec(this Iced.RflagsBits src)
-            => (Specs.RflagsBits)src;
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.RoundingControl ToSpec(this Iced.RoundingControl src)
-            => (Specs.RoundingControl)src;
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline)]
-        public static Specs.TupleType ToSpec(this Iced.TupleType src)
-            => (Specs.TupleType)src;
-
-        public static AsmInstructionCode GetInstructionCode(this Iced.Instruction src)
+        public static AsmInstructionCode InstructionCode(this Iced.Instruction src)
         {
-            var opcode =   Iced.EncoderCodeExtensions.ToOpCode(src.Code);
+            var opcode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
             return AsmInstructionCode.Define(opcode.ToInstructionString(), opcode.ToOpCodeString());
         }
 
+        static AsmInstructionInfo InstructionSummary(this Iced.Instruction src, ReadOnlySpan<byte> encoded, string content, ushort offset, ulong baseaddress)
+            => AsmInstructionInfo.Define((ushort)offset, content, 
+                    src.InstructionCode(), 
+                    src.SummarizeOperands(baseaddress), 
+                    encoded.Slice(offset, src.ByteLength).ToArray());
+
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
-        public static Specs.OpCodeInfo ToSpec(this Iced.OpCodeInfo src)
-            => new Specs.OpCodeInfo
+        internal static OpCodeInfo ToSpec(this Iced.OpCodeInfo src)
+            => new OpCodeInfo
             {
                 CanSuppressAllExceptions = src.CanSuppressAllExceptions,
                 RequireNonZeroOpMaskRegister = src.RequireNonZeroOpMaskRegister,
@@ -220,11 +83,11 @@ namespace Z0
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
-        public static Specs.Instruction ToSpec(this Iced.Instruction src, string formatted)
-            => new Specs.Instruction
+        internal static Instruction ToSpec(this Iced.Instruction src, string formatted)
+            => new Instruction
             {
                 FormattedInstruction = formatted,
-                InstructionCode = src.GetInstructionCode(),
+                InstructionCode = src.InstructionCode(),
                 ConditionCode = src.ConditionCode.ToSpec(),
                 IsBroadcast = src.IsBroadcast,
                 MemorySize = src.MemorySize.ToSpec(),
@@ -320,5 +183,444 @@ namespace Z0
                 IsVsib64 = src.IsVsib64,
                 IsCallFarIndirect = src.IsCallFarIndirect,    
            };             
-    }
+ 
+        /// <summary>
+        /// Determines whether the classified operand is a 16-bit, 32-bit or 64-bit near branch
+        /// Assessed respectively via the NearBranch16, NearBranch32 and NearBranch64 instruction attributes
+        /// </summary>
+        /// <param name="src">The operand classification</param>
+        static bool IsNearBranch(this Iced.OpKind src)        
+            => src == Iced.OpKind.NearBranch16
+            || src == Iced.OpKind.NearBranch32
+            || src == Iced.OpKind.NearBranch64;
+
+        /// <summary>
+        /// Determines whether the classified operand is a 32-bit or 64-bit far branch
+        /// Assessed respectively via the FarBranch32 and FarBranch64 instruction attributes
+        /// </summary>
+        /// <param name="src">The operand classification</param>
+        static bool IsFarBranch(this Iced.OpKind src)        
+            => src == Iced.OpKind.FarBranch16
+            || src == Iced.OpKind.FarBranch32;
+
+        /// <summary>
+        /// Determines whether a classified operand is associated with a branching instruction
+        /// </summary>
+        /// <param name="src">The operand classification</param>
+        static bool IsBranch(this Iced.OpKind src)
+            => src.IsFarBranch() || src.IsNearBranch();
+
+        /// <summary>
+        /// Determines whether the classified operand is an 8-bit immediate
+        /// used by the enter, extrq, or insertq instructions
+        /// Accessed via the instruction attribute Immediate8_2nd
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
+        static bool IsSpecialImmediate8(this Iced.OpKind src)
+            => src == Iced.OpKind.Immediate8_2nd;
+        
+        /// <summary>
+        /// Determines whether the classified operand a sign-extended immediate which may include:
+        /// An 8-bit value sign extended to 16 bits, accessed via the Immediate8to16 instruction attribute
+        /// An 8-bit value sign extended to 32 bits, accessed via Immediate8to32 instruction attribute
+        /// An 8-bit value sign extended to 64 bits, accessed via the Immediate8to64 instruction attribute
+        /// A 32-bit value sign extended to 64 bits, accessed via the Immediate32to64 instruction attribute
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
+        static bool IsSignExtendedImmediate(this Iced.OpKind src)
+            => src == Iced.OpKind.Immediate8to16  
+            || src == Iced.OpKind.Immediate8to32  
+            || src == Iced.OpKind.Immediate8to64  
+            || src == Iced.OpKind.Immediate32to64 
+             ;
+
+        /// <summary>
+        /// Determines whether the classified operand is an 8-bit, 16-bit, 32-bit or 64-bit constant
+        /// which are accessed respectively through the Immediate8, Immediate16, Immediate32, and Immediate64
+        /// instruction attributes
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
+        static bool IsDirectImmediate(this Iced.OpKind src)
+            => src == Iced.OpKind.Immediate8
+            || src == Iced.OpKind.Immediate16
+            || src == Iced.OpKind.Immediate32
+            || src == Iced.OpKind.Immediate64
+            ;
+
+        /// <summary>
+        /// Determines whether the classified operand is an immediate of some sort
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
+        static bool IsImmediate(this Iced.OpKind src)
+            => src.IsSignExtendedImmediate() || src.IsDirectImmediate() || src.IsSpecialImmediate8();
+
+        /// <summary>
+        /// Determines whether the classified operand is a segment of the form 
+        /// seg:[di], seg:[edi], seg:[esi], seg:[rdi], seg:[rsi], seg:[si]
+        /// Relevant instruction attributes include: MemorySize, MemorySegment, SegmentPrefix 
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
+        static bool IsBaseSegment(this Iced.OpKind src)
+            => src == Iced.OpKind.MemorySegDI
+            || src == Iced.OpKind.MemorySegEDI
+            || src == Iced.OpKind.MemorySegESI
+            || src == Iced.OpKind.MemorySegRDI
+            || src == Iced.OpKind.MemorySegRSI
+            || src == Iced.OpKind.MemorySegSI
+            ;
+
+        /// <summary>
+        /// Determines whether the classified operand is an ES ("extra") memory segment.
+        /// Possible choices include es:[di], es:[edi], es:[rdi]
+        /// Relevant instruction attributes inlude: MemorySize
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
+        static bool IsEsSegment(this Iced.OpKind src)            
+            => src == Iced.OpKind.MemoryESDI
+            || src == Iced.OpKind.MemoryESEDI
+            || src == Iced.OpKind.MemoryESRDI;
+
+        /// <summary>
+        /// Determines whether the classified operand is a 64-bit memory offset. 
+        /// Relevant instruction attributes include:
+        /// MemoryAddress64, MemorySegment, SegmentPrefix, MemorySize
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
+        static bool IsMem64(this Iced.OpKind src)
+            =>  src == Iced.OpKind.Memory64;
+
+        /// <summary>
+        /// Determines whether the classified operand is direct memory.
+        /// Relevant instruction attributes include: 
+        /// MemoryDisplSize, MemorySize, MemoryIndexScale, MemoryDisplacement, MemoryBase, 
+        /// MemoryIndex, MemorySegment, SegmentPrefix
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
+        static bool IsDirectMemory(this Iced.OpKind src)
+            => src == Iced.OpKind.Memory;         
+        
+        /// <summary>
+        /// Determines whether the classified operand is some sort of memory
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
+        static bool IsMemory(this Iced.OpKind src)            
+            => src.IsDirectMemory() || src.IsMem64() || src.IsEsSegment() || src.IsBaseSegment();
+
+        /// <summary>
+        /// Determines whether the classified operand is a register
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
+        public static bool IsRegister(this Iced.OpKind src)
+            => src == Iced.OpKind.Register;  
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static Code ToSpec(this Iced.Code src)
+            => (Code)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static CodeSize ToSpec(this Iced.CodeSize src)
+            => (CodeSize)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static ConditionCode ToSpec(this Iced.ConditionCode src)
+            => (ConditionCode)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static CpuidFeature ToSpec(this Iced.CpuidFeature src)
+            => (CpuidFeature)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static EncodingKind ToSpec(this Iced.EncodingKind src)
+            => (EncodingKind)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static FlowControl ToSpec(this Iced.FlowControl src)
+            => (FlowControl)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static FormatterOutputTextKind ToSpec(this Iced.FormatterOutputTextKind src)
+            => (FormatterOutputTextKind)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static MandatoryPrefix ToSpec(this Iced.MandatoryPrefix src)
+            => (MandatoryPrefix)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static MemoryOperand ToSpec(this Iced.MemoryOperand src)
+            => new MemoryOperand(src.Base.ToSpec(), src.Index.ToSpec(), src.Scale, src.Displacement, src.DisplSize, src.IsBroadcast, src.SegmentPrefix.ToSpec());
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static MemorySize ToSpec(this Iced.MemorySize src)
+            => (MemorySize)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static Mnemonic ToSpec(this Iced.Mnemonic src)
+            => (Mnemonic)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static OpCodeOperandKind ToSpec(this Iced.OpCodeOperandKind src)
+            => (OpCodeOperandKind)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static OpCodeTableKind ToSpec(this Iced.OpCodeTableKind src)
+            => (OpCodeTableKind)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static OpKind ToSpec(this Iced.OpKind src)
+            => (OpKind)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static Register ToSpec(this Iced.Register src)
+            => (Register)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static RflagsBits ToSpec(this Iced.RflagsBits src)
+            => (RflagsBits)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static RoundingControl ToSpec(this Iced.RoundingControl src)
+            => (RoundingControl)src;
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [MethodImpl(Inline)]
+        static TupleType ToSpec(this Iced.TupleType src)
+            => (TupleType)src;
+
+        /// <summary>
+        /// Extracts operand information from an instruction
+        /// </summary>
+        /// <param name="src">The source instruction</param>
+        static AsmSpecs.AsmOperandInfo[] SummarizeOperands(this Iced.Instruction src, ulong baseaddress)
+        {
+            var args = new AsmSpecs.AsmOperandInfo[src.OpCount];
+            for(byte j=0; j< src.OpCount; j++)
+                args[j] = src.OperandInfo(j,baseaddress);
+            return args;
+        }
+
+        /// <summary>
+        /// Extracts immediate information, if applicable, from an instruction operand
+        /// </summary>
+        /// <param name="src">The source instruction</param>
+        /// <param name="index">The operand index</param>
+        static Option<ImmInfo> ImmediateInfo(this Iced.Instruction src, int index)
+        {
+            var kind = src.GetOpKind(index);
+            if(!kind.IsImmediate())
+                return default;
+
+            int size = kind.ImmediateSize();
+            if(size == 0)
+                return default;
+
+            var signed = kind.IsSignExtendedImmediate();
+            var imm = src.GetImmediate(index);
+            switch(size)
+            {
+                case Pow2.T03:
+                    return ImmInfo.Define(size, imm);
+                case Pow2.T04:
+                    if(signed)
+                        return ImmInfo.Define(size, (long)imm);
+                    else 
+                        return ImmInfo.Define(size, imm);
+                case Pow2.T05:
+                    if(signed)
+                        return ImmInfo.Define(size, (long)imm);
+                    else 
+                        return ImmInfo.Define(size, imm);
+                case Pow2.T06:
+                    if(signed)
+                        return ImmInfo.Define(size, (long)imm);
+                    else 
+                        return ImmInfo.Define(size, imm);
+                default:
+                    return default;
+            }
+        }
+
+        static string Format(this Iced.MemorySize src)
+            => src switch {
+                Iced.MemorySize.Int8 => "8i",
+                Iced.MemorySize.Int16 => "16i",
+                Iced.MemorySize.Int32 => "32i",
+                Iced.MemorySize.Int64 => "64i",
+                Iced.MemorySize.UInt8 => "8u",
+                Iced.MemorySize.UInt16 => "16u",
+                Iced.MemorySize.UInt32 => "32u",
+                Iced.MemorySize.UInt64 => "64u",
+                _   => src.ToString()
+            };
+
+        /// <summary>
+        /// Extracts memory information, if applicable, from an instruction operand
+        /// </summary>
+        /// <param name="src">The source instruction</param>
+        /// <param name="index">The operand index</param>
+        static Option<AsmMemInfo> MemoryInfo(this Iced.Instruction src, int index)
+        {            
+            var kind = src.GetOpKind(index);
+            
+            if(kind.IsMemory())
+            {
+                var info = new AsmMemInfo();
+                info.Size = Format(src.MemorySize);
+
+                if(kind.IsDirectMemory())
+                {
+                    info.BaseRegister = src.MemoryBase.ToString();
+                    info.Displacement = src.MemoryDisplacement;
+                    info.DisplacementSize = src.MemoryDisplSize;
+                    info.IndexScale = src.MemoryIndexScale;
+                }
+
+                if(kind.IsDirectMemory() || kind.IsBaseSegment())
+                {
+                    if(src.SegmentPrefix.IsSpecified())
+                        info.SegmentPrefix = src.SegmentPrefix.ToString();
+                    
+                    info.SegmentRegister = src.MemorySegment.ToString();
+                }
+
+                if(kind.IsMem64())
+                    info.Address = src.MemoryAddress64;                
+
+                return info;
+            }
+
+            return default;
+        }
+
+        /// <summary>
+        /// Determines the size of a classified immediate operand, if applicable; otherwise, returns 0
+        /// </summary>
+        /// <param name="src">The operand classifier</param>
+        static int ImmediateSize(this Iced.OpKind src)
+        {
+            if(src == Iced.OpKind.Immediate8 || src == Iced.OpKind.Immediate8_2nd)
+                return 8;
+            else if(src == Iced.OpKind.Immediate16 || src == Iced.OpKind.Immediate8to16)
+                return 16;
+            else if(src == Iced.OpKind.Immediate32 || src == Iced.OpKind.Immediate8to32)
+                return 32;
+            else if(src == Iced.OpKind.Immediate64 || src == Iced.OpKind.Immediate8to64 || src == Iced.OpKind.Immediate32to64)
+                return 64;
+            else
+                return 0;
+        }
+
+        static bool IsSpecified(this Iced.Register r)
+            => r != Iced.Register.None;
+
+        /// <summary>
+        /// Extracts register information, if applicable, from an instruction operand
+        /// </summary>
+        /// <param name="src">The source instruction</param>
+        /// <param name="index">The operand index</param>
+        static Option<AsmRegisterInfo> RegisterInfo(this Iced.Instruction src, int index)
+            => src.GetOpKind(index).IsRegister() ? new AsmRegisterInfo(src.GetOpRegister(index).ToString()) : default;
+
+        static AsmSpecs.AsmOperandInfo OperandInfo(this Iced.Instruction src, int index, ulong baseaddress)
+            => AsmSpecs.AsmOperandInfo.Define(index, 
+                src.GetOpKind(index).ToSpec(),
+                src.ImmediateInfo(index).ValueOrDefault(), 
+                src.MemoryInfo(index).ValueOrDefault(), 
+                src.RegisterInfo(index).ValueOrDefault(), 
+                src.BranchInfo(index,baseaddress).ValueOrDefault()
+                );
+
+        static Option<AsmBranchInfo> BranchInfo(this Iced.Instruction src, int index, ulong baseaddress)
+        {
+            var kind = src.GetOpKind(index);
+            if(kind.IsBranch())
+            {
+                switch(kind)
+                {
+                    case Iced.OpKind.NearBranch16:
+                        return AsmBranchInfo.Define(16, src.NearBranch16, true, baseaddress);
+                    case Iced.OpKind.NearBranch32:
+                        return AsmBranchInfo.Define(32, src.NearBranch32, true, baseaddress);
+                    case Iced.OpKind.NearBranch64:
+                        return AsmBranchInfo.Define(64, src.NearBranch64, true, baseaddress);
+                    case Iced.OpKind.FarBranch16:
+                        return AsmBranchInfo.Define(16, src.FarBranch16, false, baseaddress);
+                    case Iced.OpKind.FarBranch32:
+                        return AsmBranchInfo.Define(32, src.FarBranch32, false, baseaddress);
+                }
+            }
+
+            return default;
+        }
+   }
 }

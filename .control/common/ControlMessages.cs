@@ -33,11 +33,17 @@ namespace Z0
         public static AppMsg CatalogEmpty(IOperationCatalog catalog)        
             => appMsg($"Operation catalog {catalog.CatalogName} is empty", SeverityLevel.Warning);
 
-        public static AppMsg EmittingAsmArchives()        
-            => appMsg($"Emitting assembly archives", SeverityLevel.Babble);
+        public static AppMsg DispatchingCatalogWorkers()        
+            => appMsg($"Dispatching catalog workers", SeverityLevel.Babble);
 
-        public static AppMsg EmittingCatalog(IOperationCatalog catalog)        
-            => appMsg($"Emitting {catalog.CatalogName} catalog from controller", SeverityLevel.Info);
+        public static AppMsg DispatchingCatalogWorker(IOperationCatalog catalog)        
+            => appMsg($"Dispatching {catalog.CatalogName} worker", SeverityLevel.Info);
+
+        public static AppMsg CollectingStats(IOperationCatalog catalog)        
+            => appMsg($"Collecting {catalog.CatalogName} catalog statistics", SeverityLevel.Info);
+
+        public static AppMsg CollectedStats(IOperationCatalog catalog, AsmStats stats)        
+            => appMsg($"Collected {catalog.CatalogName} catalog statistics: {stats}", SeverityLevel.Info);
 
     }
 }

@@ -73,42 +73,76 @@ namespace Z0
         public static bit Is(this PrimalKind k, PrimalKind match)        
             => (k & match) != 0;
 
-        /// <summary>
-        /// Selects the distinct primal kinds represented by a classifier
-        /// </summary>
-        /// <param name="k">The primal classifier</param>
+        [MethodImpl(Inline)]
+        public static bit Is(this PrimalKind k, PrimalId match)        
+            => ((uint)k & (uint)match) != 0;
+
         public static IEnumerable<PrimalKind> DistinctKinds(this PrimalKind k)       
         {
-            if(k.Is(PrimalKind.U8))
+            if(k.Is(PrimalId.U8))
                 yield return PrimalKind.U8;
 
-            if(k.Is(PrimalKind.I8))
+            if(k.Is(PrimalId.I8))
                 yield return PrimalKind.I8;
 
-            if(k.Is(PrimalKind.U16))
+            if(k.Is(PrimalId.U16))
                 yield return PrimalKind.U16;
 
-            if(k.Is(PrimalKind.I16))
+            if(k.Is(PrimalId.I16))
                 yield return PrimalKind.I16;
 
-            if(k.Is(PrimalKind.U32))
+            if(k.Is(PrimalId.U32))
                 yield return PrimalKind.U32;
 
-            if(k.Is(PrimalKind.I32))
+            if(k.Is(PrimalId.I32))
                 yield return PrimalKind.I32;
 
-            if(k.Is(PrimalKind.U64))
+            if(k.Is(PrimalId.U64))
                 yield return PrimalKind.U64;
 
-            if(k.Is(PrimalKind.I64))
+            if(k.Is(PrimalId.I64))
                 yield return PrimalKind.I64;
 
-            if(k.Is(PrimalKind.F32))
+            if(k.Is(PrimalId.F32))
                 yield return PrimalKind.F32;
 
-            if(k.Is(PrimalKind.F64))
+            if(k.Is(PrimalId.F64))
                 yield return PrimalKind.F64;
         }
+
+
+        // public static IEnumerable<PrimalKind> DistinctKinds(this PrimalKind k)       
+        // {
+        //     if(k.Is(PrimalKind.U8))
+        //         yield return PrimalKind.U8;
+
+        //     if(k.Is(PrimalKind.I8))
+        //         yield return PrimalKind.I8;
+
+        //     if(k.Is(PrimalKind.U16))
+        //         yield return PrimalKind.U16;
+
+        //     if(k.Is(PrimalKind.I16))
+        //         yield return PrimalKind.I16;
+
+        //     if(k.Is(PrimalKind.U32))
+        //         yield return PrimalKind.U32;
+
+        //     if(k.Is(PrimalKind.I32))
+        //         yield return PrimalKind.I32;
+
+        //     if(k.Is(PrimalKind.U64))
+        //         yield return PrimalKind.U64;
+
+        //     if(k.Is(PrimalKind.I64))
+        //         yield return PrimalKind.I64;
+
+        //     if(k.Is(PrimalKind.F32))
+        //         yield return PrimalKind.F32;
+
+        //     if(k.Is(PrimalKind.F64))
+        //         yield return PrimalKind.F64;
+        // }
 
         /// <summary>
         /// Computes the primal types identified by a specified kind
@@ -131,6 +165,16 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         public static bool IsNatSpan(this Type t)
             => NatSpanType.signature(t).IsSome();
+
+        /// <summary>
+        /// Determines whether a type is parametric over the natural numbers
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsSpan(this Type t, bool includeReadOnly = true)
+            => (t.GenericDefinition() == typeof(Span<>))
+            ||(includeReadOnly 
+                && t.GenericDefinition() == typeof(ReadOnlySpan<>));
 
         /// <summary>
         /// Specifies the bit-width of a classified cpu vector

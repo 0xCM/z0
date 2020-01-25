@@ -9,12 +9,14 @@ namespace Z0
     using System.Collections.Generic;
     using System.Collections.Specialized;
 
+    using AsmSpecs;
+
     public interface IAsmCatalogEmitter
     {
-       IEnumerable<AsmDescriptor> EmitCatalog();
+       IEnumerable<AsmFileDescriptor> EmitCatalog();
        
-       IEnumerable<AsmDescriptor> EmitDirect();
+       IEnumerable<AsmFileDescriptor> EmitDirect();
        
-       IEnumerable<AsmDescriptor> EmitGeneric();         
+       IEnumerable<AsmFileDescriptor> EmitGeneric();         
     }
 }

@@ -10,7 +10,6 @@ namespace Z0
     using static zfunc;    
     using static AsIn;
 
-
     partial class gmath
     {
         /// <summary>
@@ -53,8 +52,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(math.and(int64(a), int64(b)));
             else
-                return gfp.and(a,b);
+                throw unsupported<T>();
         }
-
     }
 }

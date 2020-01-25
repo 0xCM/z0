@@ -12,19 +12,28 @@ namespace Z0
 
     public abstract class Deconstructable<T> : IDeconstructable<T>
         where T : Deconstructable<T>
-    {
-        readonly string SourcePath;
-        
+    {        
         protected Deconstructable(string SourcePath)
         {
-            this.SourcePath = SourcePath;
+            this.TargetFolder = FolderPath.Define(Path.GetDirectoryName(SourcePath));
+            this.AsmFileName = FileName.Define(Path.ChangeExtension(Path.GetFileName(SourcePath),"asm"));
+            this.CilFileName = FileName.Define(Path.ChangeExtension(Path.GetFileName(SourcePath),"il"));
         }
 
-        public FilePath AsmTargetPath
-            => FilePath.Define(Path.ChangeExtension(SourcePath, "asm"));
+        public FolderPath TargetFolder {get;}
 
-        public FilePath CilTargetPath
-            => FilePath.Define(Path.ChangeExtension(SourcePath, "il"));
+        public FileName AsmFileName {get;}
+
+        public FileName CilFileName {get;}
+
+        public void Emit()
+        {
+            using var capture = AsmProcessServices.Capture(typeof(T).Module);
+            var deconstructed = capture.CaptureFunctions(typeof(T));
+            var emitter = AsmServices.CodeEmitter(TargetFolder);
+            emitter.EmitAsm(deconstructed, AsmFileName);
+            emitter.EmitCil(deconstructed, CilFileName);
+        }
 
     }
 }

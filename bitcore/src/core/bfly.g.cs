@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op]
         public static T bfly<T>(N1 n, T x)
             where T : unmanaged
         {
@@ -59,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op]
         public static T bfly<T>(N2 n, T x)
             where T : unmanaged
         {
@@ -81,7 +81,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.U16 | PrimalKind.U32 | PrimalKind.U64)]
+        [MethodImpl(Inline)]
         public static T bfly<T>(N4 n, T x)
             where T : unmanaged
         {
@@ -103,7 +103,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.U32 | PrimalKind.U64)]
+        [MethodImpl(Inline)]
         public static T bfly<T>(N8 n, T x)
             where T : unmanaged
         {
@@ -122,7 +122,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.U64)]
+        [MethodImpl(Inline)]
         public static T bfly<T>(N16 n, T x)
             where T : unmanaged
         {

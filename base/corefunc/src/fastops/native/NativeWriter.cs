@@ -13,7 +13,9 @@ namespace Z0
     {
         public static INativeWriter Create(FilePath dst, bool append = false)
             => new NativeWriter(dst,append);
-            
+
+
+
         public NativeWriter(StreamWriter stream)
             : base(stream.BaseStream)
         {
@@ -50,12 +52,12 @@ namespace Z0
             WriteLine(new string(AsciSym.Dash, 80));
         }
 
-        public void WriteData(NativeMemberCapture src, NativeFormatConfig config)
+        public void WriteData(MemberCapture src, NativeFormatConfig config)
         {
             Write(src.Format(config));                            
         }
 
-        public void WriteData(NativeMemberCapture src)
+        public void WriteData(MemberCapture src)
         {
             Write(src.Format(null));                            
         }

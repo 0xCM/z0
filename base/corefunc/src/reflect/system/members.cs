@@ -50,6 +50,17 @@ namespace Z0
                 => src.Where(x => x.Name == name); 
 
         /// <summary>
+        /// Selects the members with a particular name
+        /// </summary>
+        /// <param name="src">The members to examine</param>
+        /// <param name="name">The name to match</param>
+        public static IEnumerable<T> WithAttributions<T>(this IEnumerable<T> src, Type attrib)
+            where T : MemberInfo
+                => src.Where(m => m.Attributed(attrib));
+
+        /// <summary>
+
+        /// <summary>
         /// Selects the members with a name that exists within a supplied set
         /// </summary>
         /// <param name="src">The members to examine</param>

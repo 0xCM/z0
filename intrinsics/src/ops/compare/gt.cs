@@ -89,7 +89,6 @@ namespace Z0
         public static Vector128<int> vgt(Vector128<int> x, Vector128<int> y)
             => CompareGreaterThan(x,y);
 
-
         /// <summary>
         /// Determines whether component values the left vector are larger than the
         /// corresponding components the right vector. When a left value is larger 
@@ -131,7 +130,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static Vector128<ulong> vgt(Vector128<ulong> x, Vector128<ulong> y)
         {
             var a = ginx.vinsert(x,default,0);
@@ -252,7 +251,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static Vector256<ulong> vgt(Vector256<ulong> x, Vector256<ulong> y)
         {
             var mask = CpuVector.vbroadcast(n256,CmpMask64u);

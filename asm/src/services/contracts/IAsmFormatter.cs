@@ -8,9 +8,11 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
+    using Z0.AsmSpecs;
+
     public interface IAsmFormatter
     {
-        string FormatDetail(AsmSpecs.AsmFunction src);        
+        string FormatDetail(AsmFunction src);        
 
     }
 

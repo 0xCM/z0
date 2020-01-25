@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
-    using System.IO;
 
     using static zfunc;
 
@@ -22,7 +20,7 @@ namespace Z0
         static FilePath OutputPath(IOperationCatalog catalog)
             => OutputFolder + FileName.Define(catalog.CatalogName, ReportExtension);
 
-        public static Option<FilePath> Create(IOperationCatalog catalog, AsmDescriptor[] emissions, bool immexclude = true)
+        public static Option<FilePath> Create(IOperationCatalog catalog, AsmFileDescriptor[] emissions, bool immexclude = true)
         {
             
             if(immexclude)
@@ -38,7 +36,7 @@ namespace Z0
             MemoryAddress @base = emissions[0].Origin.Start;
 
             for(var i =0; i<count; i++)
-                records[i] = AsmEmissionRecord.Define(@base, emissions[i], i != 0 ? emissions[i-1] : (AsmDescriptor?)null);
+                records[i] = AsmEmissionRecord.Define(@base, emissions[i], i != 0 ? emissions[i-1] : (AsmFileDescriptor?)null);
             return records.Save(OutputPath(catalog));
         }
     }

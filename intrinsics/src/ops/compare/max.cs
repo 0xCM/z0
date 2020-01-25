@@ -79,7 +79,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static Vector128<ulong> vmax(Vector128<ulong> x, Vector128<ulong> y)
             => vselect(vgt(x,y),x,y);
 
@@ -156,7 +156,7 @@ namespace Z0
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static Vector256<ulong> vmax(Vector256<ulong> x, Vector256<ulong> y)
             => vselect(vgt(x,y),x,y);
 

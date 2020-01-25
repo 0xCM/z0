@@ -85,12 +85,12 @@ namespace Z0
         /// <summary>
         /// Defines a classification that includes all signed primal integral types and no others
         /// </summary>
-        SignedInts = PrimalId.I8 | PrimalId.I16 | PrimalId.I32 | PrimalId.I64,
+        SignedInts = I8 | I16 | I32 | I64,
 
         /// <summary>
         /// Defines a classification that includes all unsigned primal integral types and no others
-        /// </summary>
-        UnsignedInts = PrimalId.U8 | PrimalId.U16 | PrimalId.U32 | PrimalId.U64,
+        /// </summary>        
+        UnsignedInts = U8 | U16 | U32 | U64,
 
         /// <summary>
         /// Defines a classification that includes all primal integral types and no others
@@ -100,7 +100,7 @@ namespace Z0
         /// <summary>
         /// Defines a classification that includes all primal floating-point types and no others
         /// </summary>
-        Floats = PrimalId.F32 | PrimalId.F64,
+        Floats = F32 | F64,
 
         /// <summary>
         /// Defines a classification that includes all kinds

@@ -54,10 +54,10 @@ namespace Z0
         /// Returns a canonical identifier for a natural number type; otherwise, returns none
         /// </summary>
         /// <param name="t">The type to examine</param>
-        public static Option<Moniker> id(Type t)
+        public static Option<string> name(Type t)
         {
             if(test(t))
-                return Moniker.Parse($"{Moniker.NatIndicator}{value(t)}");
+                return $"{Moniker.NatIndicator}{value(t)}";
             else
                 return default;
         }

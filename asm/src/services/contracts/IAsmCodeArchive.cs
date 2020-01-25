@@ -11,6 +11,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
+    using AsmSpecs;
+
 
     public interface IAsmCodeArchive : IAsmArchive
     {

@@ -30,7 +30,11 @@ namespace Z0
 
         ZEDx2_SBB,
 
-        ZEDx6,
+        ZEDx6_000,
+
+        ZEDx6_RET,
+
+        ZEDx6_JMP,
 
         MSDIAG,
 

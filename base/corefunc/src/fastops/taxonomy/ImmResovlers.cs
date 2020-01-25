@@ -55,7 +55,13 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface IVImm8Resolver<V> : Imm8Resolver
+    public interface IImm8Resolver<T> : Imm8Resolver
+    {
+
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVImm8Resolver<V> : IImm8Resolver<V>
         where V : struct
     {
 

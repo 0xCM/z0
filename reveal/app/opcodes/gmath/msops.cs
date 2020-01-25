@@ -10,7 +10,7 @@ namespace Z0.OpCodes
     using static zfunc;    
 
     [OpCodeProvider]
-    public static class msops
+    public class msops
     {
         public static Span<uint> msand_32u(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs, Span<uint> dst)
             => mathspan.and(lhs, rhs, dst);

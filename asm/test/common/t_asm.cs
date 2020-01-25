@@ -49,7 +49,7 @@ namespace Z0
         protected IAsmWriter AsmTestWriter([Caller] string test = null)
         {
             var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, Paths.AsmExt);    
-            return AsmServices.Writer(path);
+            return AsmServices.Writer(path,true);
         }
 
         protected void CheckAsmMatch<T>(BinaryOp<T> f, AsmCode asm)

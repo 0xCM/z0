@@ -106,7 +106,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static Vector128<ulong> vlt(Vector128<ulong> x, Vector128<ulong> y)
         {
             var a = vconcat(x,y);
@@ -191,7 +191,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static Vector256<ulong> vlt(Vector256<ulong> x, Vector256<ulong> y)
         {
             var mask = CpuVector.vbroadcast(n256,SignMask64);

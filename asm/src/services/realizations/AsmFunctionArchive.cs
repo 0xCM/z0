@@ -8,6 +8,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
+    using Z0.AsmSpecs;
+
+
     using static zfunc;
 
     class AsmFunctionArchive : IAsmFunctionArchive
@@ -34,20 +37,12 @@ namespace Z0
             this.Formatter = AsmServices.Formatter();
         }
 
-        public AsmDescriptor Save(AsmFunction src)
-        {
-            HexPath(src.Id).WriteText(src.Code.Format());
-            DetailPath(src.Id).WriteText(src.FormatDetail());
-            src.Cil.OnSome(cil => CilPath(src.Id).WriteText(cil.Format()));
-            return AsmDescriptor.Define(AsmUri.Define(Catalog, Subject, src.Id), src.Location);            
-        }
-
-        public AsmDescriptor Save(AsmSpecs.AsmFunction src)
+        public AsmFileDescriptor Save(AsmFunction src)
         {
             HexPath(src.Id).WriteText(src.Code.Format());
             DetailPath(src.Id).WriteText(Formatter.FormatDetail(src));
             src.Cil.OnSome(cil => CilPath(src.Id).WriteText(cil.Format()));
-            return AsmDescriptor.Define(AsmUri.Define(Catalog, Subject, src.Id), src.Location);            
+            return AsmFileDescriptor.Define(AsmUri.Define(Catalog, Subject, src.Id), src.Location);            
         }
 
         public IAsmFunctionArchive Clear()

@@ -9,9 +9,11 @@ namespace Z0
     using System.Collections.Generic;
     using System.Collections.Specialized;
 
+    using AsmSpecs;
+
     public interface IAsmAnalyzer
     {
-       IEnumerable<AsmDescriptor> AnalyzeCatalog();
+       IEnumerable<AsmFileDescriptor> AnalyzeCatalog();
        
     }
 }

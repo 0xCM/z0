@@ -7,62 +7,45 @@ namespace Z0
     using System;
     using System.IO;
 
+    using Z0.AsmSpecs;
+
     using static zfunc;
 
     sealed class AsmWriter : StreamWriter, IAsmWriter
     {
+        
         public AsmWriter(StreamWriter stream)
             : base(stream.BaseStream)
         {
 
         }
 
-        public AsmWriter(FilePath path, bool append = false)
-            : base(path.FullPath, append)
+        public AsmWriter(FilePath path)
+            : base(path.FullPath, false)
         {
 
         }
 
-        IAsmFunctionBuilder Builder {get;}
-            = AsmServices.FunctionBuilder();
+        IAsmDecoder Decoder {get;}
+            = AsmServices.Decoder();
 
         byte[] Buffer {get; set;}
             = new byte[NativeReader.DefaultBufferLen];
+
+        public void WriteFunction(AsmFunction src, AsmFormatConfig config)
+        {
+            var formatter = AsmServices.Formatter(config);
+            formatter.FormatDetail(src);
+            Write(formatter.FormatDetail(src));
+        }
+
+        public void WriteFunction(MemberCapture src, AsmFormatConfig config)
+            => WriteFunction(Decoder.DecodeFunction(src),config);
 
         public byte[] TakeBuffer()
         {
             Buffer.Clear();
             return Buffer;
         }
-
-        public void Configure(int? buffersize = null)
-        {
-            if(buffersize != null && Buffer.Length != buffersize)
-                Buffer = new byte[buffersize.Value];                
-        }
-
-        /// <summary>
-        /// Writes a standard timestamped header
-        /// </summary>
-        public void WriteHeader(AsmFormatConfig fmt)
-        {
-            WriteLine(AsmFormat.Comment(now().ToLexicalString()));
-            WriteSeparator(fmt);
-        }
-
-        public void WriteSeparator(AsmFormatConfig fmt)
-        {
-            WriteLine(fmt.FunctionDelimiter);
-
-        }
-
-        public void WriteFunction(AsmFunction src, AsmFormatConfig fmt)
-        {
-            Write(src.FormatDetail(fmt));
-        }
-
-        public void WriteFunction(NativeMemberCapture src, AsmFormatConfig fmt)
-            => WriteFunction(AsmDecoder.function(src),fmt);
-
     }
 }

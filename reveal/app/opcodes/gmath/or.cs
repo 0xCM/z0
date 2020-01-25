@@ -59,17 +59,7 @@ namespace Z0
         public static ulong or_g64u(ulong lhs, ulong rhs)
             => gmath.or(lhs,rhs);
 
-        public static float or_d32f(float lhs, float rhs)
-            => fmath.or(lhs,rhs);
 
-        public static float or_g32f(float lhs, float rhs)
-            => gfp.or(lhs,rhs);
-
-        public static double or_d64f(double lhs, double rhs)
-            => fmath.or(lhs,rhs);
-        
-        public static double or_g64f(double lhs, double rhs)
-            => gfp.or(lhs,rhs);
     }
 
 }

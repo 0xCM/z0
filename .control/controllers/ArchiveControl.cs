@@ -14,22 +14,25 @@ namespace Z0
     
     class ArchiveControl : Controller<ArchiveControl>
     {                
-        IOperationCatalog Check(IOperationCatalog catalog)
-        {
-            if(catalog.IsEmpty)
-                print(CatalogEmpty(catalog));
-            else
-                print(EmittingCatalog(catalog));
-            return catalog;
-        }
+        IEnumerable<AsmFileDescriptor> EmitArtifacts(IOperationCatalog catalog)
+            => AsmServices.CatalogEmitter(catalog).EmitCatalog();
 
-        Option<Pair<IOperationCatalog,FilePath>> Emit(AssemblyId id)
+        Option<FilePath> CreateEmissionReport(IOperationCatalog catalog, IEnumerable<AsmFileDescriptor> emitted)
+            => AsmEmissionReport.Create(catalog, emitted.ToArray());
+
+        Option<FilePath> Emit(IOperationCatalog catalog)
+            => CreateEmissionReport(catalog,EmitArtifacts(catalog));
+
+        Option<FilePath> Emit(AssemblyId id)
             => from catalog in FindCatalog(id)  
-                let emitter = AsmServices.CatalogEmitter(catalog)      
-                let descriptors = array(emitter.EmitCatalog())
-                from path in AsmEmissionReport.Create(catalog, descriptors)
-                select paired(catalog, path);
+                from path in Emit(catalog)
+                select path;
             
+        AppMsg Tell(AppMsg msg)            
+        {
+            print(msg);
+            return msg;
+        }
         IAppSettings Settings
             => AppSettings.Load(GetType().Assembly.GetSimpleName());
 
@@ -50,19 +53,58 @@ namespace Z0
             }
         }
 
-        void OnCatalogEmitted(Pair<IOperationCatalog,FilePath> result)
+        void OnCatalogEmitted(AssemblyId id, FilePath report)
+            => print($"Successfully emitted {id} catalog and wrote emission report to {report}");
+
+        void NoJoy()
+            => errout($"Something went terribly wrong and the idiot that wrote me didn't bother with saying why");
+
+        Option<AsmStats> DispatchStatsWorker(IOperationCatalog catalog)
         {
-            print($"Successfully created {result.A.CatalogName} emission report at {result.B}");
+            var emitter = AsmServices.StatsEmitter(catalog);
+            return emitter();            
         }
 
+        Option<FilePath> DispatchEmitter(AssemblyId id, IOperationCatalog catalog)
+            => Emit(catalog).OnSome(report => OnCatalogEmitted(id,report));
+
+        void DispatchEmitters()
+        {
+            foreach(var id in EnabledAssemblies)            
+            {
+                var q = from c in FindCatalog(id).OnNone(() => CatalogNotFound(id))
+                        from p in DispatchEmitter(id,c)
+                        select p;
+
+                q.OnNone(() => NoJoy());
+            }
+        }
+
+        void DispatchStatsWorkers()
+        {
+            foreach(var id in EnabledAssemblies)            
+            {                            
+                var q = from c in FindCatalog(id).OnNone(() => CatalogNotFound(id))
+                        let start = Tell(CollectingStats(c))
+                        from stats in DispatchStatsWorker(c)
+                        let end = Tell(CollectedStats(c,stats))
+                        select stats;
+
+                q.OnNone(() => NoJoy());
+            }
+        }
+
+        void CreateResourceReports()
+        {
+            FindCatalog(AssemblyId.Data).OnSome(c => DataResourceReport.Create(c));
+        }
         public override void Execute()
         {             
-            print(EmittingAsmArchives());
-
-            FindCatalog(AssemblyId.Data).OnSome(c => DataResourceReport.Create(c));
-
-            foreach(var id in EnabledAssemblies)
-                Emit(id).OnSome(OnCatalogEmitted).OnNone(() => CatalogNotFound(id));
+            print(DispatchingCatalogWorkers());
+            
+            // CreateResourceReports();
+            DispatchEmitters();
+            //DispatchStatsWorkers();                
         }
     }
 }

@@ -8,7 +8,10 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
+    using Z0.AsmSpecs;
+
     using static zfunc;
+
 
     /// <summary>
     /// Defines asm archival service operations
@@ -19,13 +22,7 @@ namespace Z0
         /// Saves a function to the archive
         /// </summary>
         /// <param name="src">The source function</param>
-        AsmDescriptor Save(AsmFunction src);
-
-        /// <summary>
-        /// Saves a function to the archive
-        /// </summary>
-        /// <param name="src">The source function</param>
-        AsmDescriptor Save(AsmSpecs.AsmFunction src);
+        AsmFileDescriptor Save(AsmFunction src);
 
         /// <summary>
         /// Purges all files from the archive

@@ -14,11 +14,6 @@ namespace Z0
     using static zfunc;
     using static CaptureTermCode;
 
-    public interface INativeReader
-    {
-        
-    }
-
     /// <summary>
     /// Defines basic capabilty to read native data for a jitted method
     /// </summary>
@@ -31,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to read</param>
         /// <param name="dst">The target buffer</param>
-        public static NativeMemberCapture read(Moniker id, MethodInfo m, Span<byte> dst)
+        public static MemberCapture read(Moniker id, MethodInfo m, Span<byte> dst)
         {            
             try
             {
@@ -42,12 +37,12 @@ namespace Z0
                 var end = result.End;
                 var bytesRead = (int)(end - start);
                 var code = dst.Slice(0, bytesRead).ToArray();
-                return NativeMemberCapture.Define(id, m, (start, end), code, result);         
+                return MemberCapture.Define(id, m, (start, end), code, result);         
             }
             catch(Exception e)
             {
                 errout(e);
-                return NativeMemberCapture.Empty;                    
+                return MemberCapture.Empty;                    
             }
         }
 
@@ -56,7 +51,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to read</param>
         /// <param name="dst">The target buffer</param>
-        public static NativeMemberCapture read(MethodInfo m, Span<byte> dst)
+        public static MemberCapture read(MethodInfo m, Span<byte> dst)
             => read(OpIdentity.Provider.DefineIdentity(m), m, dst);
 
         /// <summary>
@@ -64,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="d">The dynamic delegate</param>
         /// <param name="dst">The target buffer</param>
-        public static unsafe NativeMemberCapture read(Moniker id, DynamicDelegate d, Span<byte> dst)
+        public static unsafe MemberCapture read(Moniker id, DynamicDelegate d, Span<byte> dst)
         {
             var pSrc = jit(d);
             var pSrcCurrent = pSrc;
@@ -73,7 +68,7 @@ namespace Z0
             var end = result.End;
             var bytesRead = (int)(end - start);
             var code = dst.Slice(0, bytesRead).ToArray();
-            return NativeMemberCapture.Define(id, d, (start, end), code, result);
+            return MemberCapture.Define(id, d, (start, end), code, result);
         }
             
         /// <summary>
@@ -81,7 +76,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to read</param>
         /// <param name="dst">The target buffer</param>
-        public static unsafe NativeMemberCapture read(Moniker id, Delegate d, Span<byte> dst)
+        public static unsafe MemberCapture read(Moniker id, Delegate d, Span<byte> dst)
         {
             try
             {
@@ -92,12 +87,12 @@ namespace Z0
                 var end =result.End;
                 var bytesRead = (int)(end - start);
                 var code = dst.Slice(0, bytesRead).ToArray();
-                return NativeMemberCapture.Define(id, d, (start, end), code, result);
+                return MemberCapture.Define(id, d, (start, end), code, result);
             }
             catch(Exception e)
             {
                 errout(e);
-                return NativeMemberCapture.Empty;                    
+                return MemberCapture.Empty;                    
             }
         }
 
@@ -106,7 +101,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to read</param>
         /// <param name="dst">The target buffer</param>
-        public static unsafe NativeMemberCapture read(Delegate d, Span<byte> dst)
+        public static unsafe MemberCapture read(Delegate d, Span<byte> dst)
             => read(OpIdentity.Provider.DefineIdentity(d.Method), d, dst);
 
         /// <summary>
@@ -116,7 +111,7 @@ namespace Z0
         /// <param name="def">The generic method definition, obtained by MethodInfo.GetGenericMethodDefinition</param>
         /// <param name="arg">The type over which to close the generic method</param>
         /// <param name="dst">The target buffer</param>
-        public static NativeMemberCapture generic(MethodInfo def, Type arg, Span<byte> dst)
+        public static MemberCapture generic(MethodInfo def, Type arg, Span<byte> dst)
             => read(def.MakeGenericMethod(arg), dst);
 
         /// <summary>
@@ -128,7 +123,7 @@ namespace Z0
         /// <param name="arg">The type over which to close each method</param>
         /// <param name="buffer">The staging buffer, cleared after each iteration</param>
         /// <typeparam name="T">The type over which to close the methods</typeparam>
-        public static IEnumerable<NativeMemberCapture> gmethods(Type host, Type arg)            
+        public static IEnumerable<MemberCapture> gmethods(Type host, Type arg)            
         {
             var buffer = new byte[NativeReader.DefaultBufferLen];     
             var definitions = host.StaticMethods().OpenGeneric(1).Select(m => m.GetGenericMethodDefinition());       
@@ -144,7 +139,7 @@ namespace Z0
         /// <param name="arg">The type over which to close the generic type</param>
         /// <param name="captured">Callback to receive captured data</param>
         /// <param name="bufferlen">The length of the staging buffer</param>
-        public static IEnumerable<NativeMemberCapture> gtype(Type typedef, Type arg)
+        static IEnumerable<MemberCapture> gtype(Type typedef, Type arg)
         {
             var type = typedef.MakeGenericType(arg);
             var methods = type.StaticMethods().ToArray();
@@ -190,7 +185,29 @@ namespace Z0
             return ref dst;
         }
 
-        internal static CaptureResult capture(byte* pSrc, Span<byte> dst)
+        [MethodImpl(Inline)]
+        static bit match((byte x, byte y) a)
+            => a.x == a.y;
+
+        [MethodImpl(Inline)]
+        static bit match((byte x, byte y) a, (byte x, byte y) b)
+            => a.x == a.y 
+            && b.x == b.y;
+
+        [MethodImpl(Inline)]
+        static bit match((byte x, byte y) a, (byte x, byte y) b, (byte x, byte y) c)
+            => a.x == a.y 
+            && b.x == b.y 
+            && c.x == c.y;
+
+        [MethodImpl(Inline)]
+        static bit match((byte x, byte y) a, (byte x, byte y) b, (byte x, byte y) c, (byte x, byte y) d)
+            => a.x == a.y 
+            && b.x == b.y 
+            && c.x == c.y 
+            && d.x == d.y;
+
+        internal static NativeCaptureInfo capture(byte* pSrc, Span<byte> dst)
         {
             const byte ZED = 0;
             const byte RET = 0xc3;
@@ -200,11 +217,43 @@ namespace Z0
             var maxcount = dst.Length - 1;
             var pSrcCurrent = pSrc;    
             var offset = 0;
+            var zrun = 0;
+            
+            var ret_found = false;
+            var ret_offset = 0ul;
+
+            var int3_found = false;
+            var int3_offset = 0ul;
                        
             while(offset < maxcount)
             {
-                byte code = 0;
-                dst[offset++] = Read(pSrcCurrent++, ref code);   
+                byte code = 0;                
+                dst[offset++] = Read(pSrcCurrent++, ref code);  
+                
+                if(code == 0)
+                {
+                    if(zrun == 0)
+                        zrun = 1;
+                    else
+                        zrun++;
+                }
+                else
+                    zrun = 0;
+
+                if(!ret_found)
+                {
+                    ret_found = (code == RET);
+                    if(ret_found)
+                        ret_offset = (ulong)offset;
+                }
+
+                if(!int3_found)
+                {
+                    int3_found = (code == RET);
+                    if(int3_found)
+                        int3_offset = (ulong)offset;
+                }
+
 
                 if(offset >= 4)
                 {
@@ -212,72 +261,41 @@ namespace Z0
                     var x1 = dst[offset - 2];
                     var x2 = dst[offset - 1];
                     var x3 = dst[offset];
+                    var tc = None;
+                    var end = 0ul;
 
-                    if(x0 == RET && x1 == SBB)
-                    {
-                        var cc = RET_SBB;
-                        var end = (ulong)pSrcCurrent - 2;
-                        var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
-                        var result = CaptureResult.Define((ulong)pSrc, end, cc, snapshot);
-                        return result;
-                    }
+                    //if(x0 == RET && x1 == SBB)
+                    if(match((x0,RET), (x1, SBB)))
+                        tc = RET_SBB;
 
-                    if(x0 == RET && x1 == INTR)
-                    {
-                        var cc = RET_INTR;
-                        var end = (ulong)pSrcCurrent - 2;
-                        var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
-                        var result = CaptureResult.Define((ulong)pSrc, end, cc, snapshot);
-                        return result;
-                    }
+                    //if(x0 == RET && x1 == INTR)
+                    if(match((x0, RET), (x1, INTR)))
+                        tc = RET_INTR;
 
-                    if((x0 == RET && x1 == INTR && x2 == INTR))
-                    {
-                        var cc = RET_INTRx2;
-                        var end = (ulong)pSrcCurrent - 2;
-                        var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
-                        var result = CaptureResult.Define((ulong)pSrc, end, cc, snapshot);
-                        return result;
-                    }
+                    // if((x0 == RET && x1 == INTR && x2 == INTR))
+                    if(match((x0, RET), (x1, INTR), (x2,INTR)))
+                        tc = RET_INTRx2;
 
-                    if((x0 == RET && x1 == ZED && x2 == SBB))
-                    {
-                        var cc = RET_ZED_SBB;
-                        var end = (ulong)pSrcCurrent - 2;
-                        var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
-                        var result = CaptureResult.Define((ulong)pSrc, end, cc, snapshot);
-                        return result;
-                    }
+                    //if((x0 == RET && x1 == ZED && x2 == SBB))
+                    if(match((x0, RET), (x1, ZED), (x2,SBB)))
+                        tc = RET_ZED_SBB;
 
-                    if(x0 == RET && x1 == ZED && x2 == ZED && x3 == ZED)
-                    {
-                        var cc = RET_ZEDx3;
-                        var end = (ulong)pSrcCurrent - 2;
-                        var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
-                        var result = CaptureResult.Define((ulong)pSrc, end, cc, snapshot);
-                        return result;
-                    }
+                    //if(x0 == RET && x1 == ZED && x2 == ZED && x3 == ZED)
+                    if(match((x0, RET), (x1, ZED), (x2,ZED), (x3,ZED)))
+                        tc = RET_ZEDx3;
 
-                    if((x0 == INTR && x1 == INTR))
-                    {
-                        var cc = INTRx2;
-                        var end = (ulong)pSrcCurrent - 2;
-                        var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
-                        var result = CaptureResult.Define((ulong)pSrc, end, cc, snapshot);
-                        return result;
-                    }
+                    //if((x0 == INTR && x1 == INTR))
+                    if(match((x0,INTR), (x1, INTR)))
+                        tc = INTRx2;
 
-                    if((x0 == ZED && x1 == ZED && x2 == SBB))
+                    if(tc != None)
                     {
-                        var cc = ZEDx2_SBB;
-                        var end = (ulong)pSrcCurrent - 3;
-                        var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
-                        var result = CaptureResult.Define((ulong)pSrc, end, cc, snapshot);
-                        return result;
+                        var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();                     
+                        return NativeCaptureInfo.Define((ulong)pSrc, (ulong)pSrcCurrent - 2, tc, snapshot);
                     }
                 }
 
-                if(offset >= 6 
+                if(offset >= 9 
                     && (dst[offset - 5] == ZED) 
                     && (dst[offset - 4] == ZED) 
                     && (dst[offset - 3] == ZED) 
@@ -286,14 +304,21 @@ namespace Z0
                     && (dst[offset - 0] == ZED)                     
                     )
                 {
-                    var cc = ZEDx6;
-                    var end = (ulong)pSrcCurrent - 5;
+                    var end = 0ul;
+                    var tc = ZEDx6_000;
                     var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
-                    var result = CaptureResult.Define((ulong)pSrc, end, cc, snapshot);
-                    return result;
+
+                    if(ret_found)
+                    {
+                        end = (ulong)pSrc + ret_offset;
+                        tc = ZEDx6_RET;
+                    }
+                    else
+                        end = (ulong)pSrcCurrent - 5;
+                    return NativeCaptureInfo.Define((ulong)pSrc, end, tc, snapshot);
                 }
             }
-            return CaptureResult.Define((ulong)pSrc, (ulong)pSrcCurrent, Complete, dst.ToArray());           
+            return NativeCaptureInfo.Define((ulong)pSrc, (ulong)pSrcCurrent, Complete, dst.ToArray());           
         }
     }
 }

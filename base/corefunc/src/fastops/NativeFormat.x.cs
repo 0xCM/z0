@@ -13,6 +13,13 @@ namespace Z0
 
     public static class NativeFormatX
     {
+        /// <summary>
+        /// Formats the function body encoding as a comma-separated list of hex values
+        /// </summary>
+        /// <param name="src">The source function</param>
+        public static string FormatNativeHex(this AsmCode src)
+            => src.Encoded.FormatHex(AsciSym.Comma, true, true, true);
+
 		public static string FormatHexLines(this AsmCode src, NativeFormatConfig? fmt = null)
 		{
 			var dst = text();
@@ -45,10 +52,9 @@ namespace Z0
             }
             dst.AppendLine();
             return dst.ToString();
-
         }
 
-        public static string Format(this NativeMemberCapture data, NativeFormatConfig? fmt = null)
+        public static string Format(this MemberCapture data, NativeFormatConfig? fmt = null)
         {
             if(data.IsEmpty)
                 return "<no_data>";

@@ -92,6 +92,9 @@ namespace Z0
         public FolderPath AsmDataDir(FolderName subject)
             => AsmDataRoot + subject; 
 
+        public FolderPath AsmDumpDir
+            => AsmDataDir(FolderName.Define(".dumps"));
+
         public FolderPath AsmDataDir(RelativeLocation location)
             => AsmDataRoot +  location;
 

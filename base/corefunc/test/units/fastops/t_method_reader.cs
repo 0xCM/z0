@@ -31,28 +31,18 @@ namespace Z0
 
         }
 
-        public void capture_generic_type()
-        {
-            using var writer = NativeTestWriter();
-            var def = typedef(typeof(GenericTypeCases<>));
-            var types = PrimalKind.Integers.PrimalTypes();
-            foreach(var t in types)
-            foreach(var captured in NativeReader.gtype(def,t))
-                writer.WriteLine(captured.Format());
-        }
-
         public void capture_vectorized_generics()
         {
             using var writer = NativeTestWriter();
             var types = PrimalKind.All.PrimalTypes();
             foreach(var t in types)
-                typeof(VectorizedCases).CaptureNative(t,writer);                    
+                NativeCapture.capture(typeof(VectorizedCases),t, writer);
         }
 
         public void capture_direct()
         {
-            using var writer = NativeTestWriter();
-            typeof(DirectMethodCases).CaptureNative(writer);
+            using var target = NativeTestWriter();
+            NativeCapture.capture(typeof(DirectMethodCases), target);
         }
 
         static Func<Vector256<uint>, Vector256<uint>> shuffler(byte imm)
@@ -63,23 +53,23 @@ namespace Z0
 
         public void capture_delegates()
         {
-            using var dst = NativeTestWriter();
+            using var target = NativeTestWriter();
 
             Span<byte> buffer = new byte[100];
             Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> dAnd = Avx2.And;
-            dAnd.CaptureNative(dst);
+            NativeCapture.capture(dAnd,target);
 
             var mAnd = typeof(Avx2).GetMethod(nameof(Avx2.And), new Type[] { typeof(Vector256<uint>), typeof(Vector256<uint>) });
-            mAnd.CaptureNative(dst);
+            NativeCapture.capture(mAnd,target);
 
             var dShuffle = shuffler(4);
-            dShuffle.CaptureNative(dst);
+            NativeCapture.capture(dShuffle,target);
 
             var dShift = shifter(4);
-            dShift.CaptureNative(dst);
+            NativeCapture.capture(dShift,target);
 
             var mgAnds = typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName("vand");
-            mgAnds.CaptureNative(typeof(uint),dst);
+            NativeCapture.capture(mgAnds, typeof(uint),target);
         }
 
         public void read_library()

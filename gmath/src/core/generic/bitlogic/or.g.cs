@@ -53,7 +53,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(math.or(int64(a), int64(b)));
             else
-                return gfp.or(a,b);
+                throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]

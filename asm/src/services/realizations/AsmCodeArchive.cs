@@ -10,6 +10,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
+    using Z0.AsmSpecs;
+
+
     using static zfunc;
 
     /// <summary>
