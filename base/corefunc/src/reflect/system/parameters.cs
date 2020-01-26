@@ -12,7 +12,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static zfunc;
-    using static ReflectionFlags;
 
     partial class Reflections
     {        
@@ -29,6 +28,5 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static IEnumerable<Type> ParameterTypes(this MethodInfo m, bool effective)
             => effective ? m.ParameterTypes().Select(t => t.EffectiveType()) : m.ParameterTypes();
-
     }
 }

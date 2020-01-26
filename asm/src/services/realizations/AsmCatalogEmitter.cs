@@ -171,7 +171,7 @@ namespace Z0
         }
 
         IAsmFunctionArchive Archive(string subject)
-            => AsmServices.FunctionArchive(Catalog.CatalogName, subject, AsmArchiveConfig.Default);
+            => AsmServices.FunctionArchive(Catalog.CatalogName, subject);
 
         static byte[] ImmSelection => new byte[]{5,9,13};
 

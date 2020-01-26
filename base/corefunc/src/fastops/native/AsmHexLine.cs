@@ -20,6 +20,8 @@ namespace Z0
 
         public const char DefaultByteSep = AsciSym.Space;
 
+        public static FileExtension FileExt => Paths.HexExt;
+
         /// <summary>
         /// Parses a row of identified hex text
         /// </summary>
@@ -31,7 +33,7 @@ namespace Z0
             try
             {
                 var id = Moniker.Parse(formatted.TakeBefore(idsep).Trim());
-                var encoded = array(formatted.TakeAfter(idsep).Split(bytesep).Select(Hex.parsebyte));
+                var encoded = array(formatted.TakeAfter(idsep).Split(bytesep, StringSplitOptions.RemoveEmptyEntries).Select(Hex.parsebyte));
                 return Define(id,encoded);
                 
             }
@@ -55,8 +57,14 @@ namespace Z0
         
         public readonly Moniker Id;
 
-
         public readonly byte[] Encoded;
+
+        public string Format(int idpad = 0)
+            => concat(Id.Text.PadRight(idpad), space(), Encoded.FormatAsmHex());
+        
+        public override string ToString()
+            => Format();
+
     }
 
 }

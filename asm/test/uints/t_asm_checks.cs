@@ -17,6 +17,39 @@ namespace Z0
     {           
         internal void RunExplicit()
         {
+            CheckMathArchive();
+            CheckIntrinsicArchive();
+        }
+
+        void CheckMathArchive()
+        {
+            var src = AssemblyId.GMath;
+            var subject = nameof(math);
+            var op = nameof(math.and);
+            var index = AsmCodeIndex.Create(src.CodeArchive(subject).Read(Moniker.Parse(op)));
+
+            index.PrimalOp(op, PrimalKind.U32, false)
+                    .OnSome(code => Trace(code,SeverityLevel.HiliteCD))
+                    .OnNone(() => Claim.fail());
+
+            index.PrimalOp(op, z32)
+                    .OnSome(code => Trace(code,SeverityLevel.HiliteCD))
+                    .OnNone(() => Claim.fail());
+
+        }
+
+        void CheckIntrinsicArchive()
+        {
+            var archive = AssemblyId.Intrinsics.CodeArchive(nameof(dinx));
+            var index = AsmCodeIndex.Create(archive.Read(Moniker.Parse(nameof(dinx.vadd))));
+
+            index.VectorOp(nameof(dinx.vadd), FixedWidth.W256, PrimalKind.U32, false)
+                    .OnSome(code => Trace(code,SeverityLevel.HiliteCD))
+                    .OnNone(() => Claim.fail());
+
+            index.VectorOp(nameof(dinx.vadd), n256, z32)
+                    .OnSome(code => Trace(code,SeverityLevel.HiliteCD))
+                    .OnNone(() => Claim.fail());
 
         }
 

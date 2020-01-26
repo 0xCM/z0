@@ -45,7 +45,7 @@ namespace Z0
         /// <summary>
         /// Specifies the segmented width
         /// </summary>
-        public static Moniker WithSegmentedWidth(this Moniker src, int w)
+        public static Moniker WithWidth(this Moniker src, int w)
             => OpIdentity.define(src.Name, w, src.PrimalKind, src.IsGeneric, src.IsAsm);
 
         /// <summary>

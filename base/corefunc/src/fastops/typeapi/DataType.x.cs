@@ -232,6 +232,9 @@ namespace Z0
         public static FixedWidth Width(this Type t)
             => Types.width(t);
 
+        public static string TypeKeyword(this Type src)
+            => DataTypes.keyword(src).ValueOrDefault(string.Empty);
+
         /// <summary>
         /// Retrives the primal kind of the first type parameter, if any
         /// </summary>

@@ -98,13 +98,6 @@ namespace Z0
         protected AsmCode ReadAsm(string catalog, string subject, Moniker m)
             => AsmServices.CodeArchive(catalog,subject).ReadBlock(m).Require();
 
-        protected AsmCode ReadAsm(string catalog, string subject, string opname, PrimalKind kind)
-            => AsmServices.CodeArchive(catalog,subject).ReadBlock(OpIdentity.define(opname,kind)).Require();
-
-        protected AsmCode<T> ReadAsm<T>(string catalog, string subject, string opname, T t = default)
-            where T : unmanaged
-                => new AsmCode<T>(ReadAsm(catalog, subject, opname, typeof(T).Kind()));
-
         protected AsmCode<T> ReadAsm<W,T>(string catalog, string subject, string opname, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeNat

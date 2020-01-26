@@ -32,8 +32,14 @@ namespace Z0
 
         public string Subject {get;}
 
-        public static IAsmFunctionArchive Create(string catalog, string subject, AsmArchiveConfig config)
-            => new AsmFunctionArchive(catalog,subject, config);
+        public static IAsmFunctionArchive Create(string catalog, string subject)
+            => new AsmFunctionArchive(catalog,subject, AsmArchiveConfig.Default);
+
+        public static IAsmFunctionArchive Create(AssemblyId id, string subject)
+            => Create(id.ToString().ToLower(),subject);
+
+        public static IAsmFunctionArchive Create(AssemblyId id, Type subject)
+            => Create(id.ToString().ToLower(),subject.Name.ToLower());
 
         static AsmFormatConfig ConfigureGroupFormatting()
             => AsmFormatConfig.Default.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
@@ -68,8 +74,8 @@ namespace Z0
                 dst.WriteLine(GroupFormatConfig.SectionDelimiter);
         }
 
-        string FormatHexLine(AsmFunction f, int idpad)
-            => concat(f.Id.Text.PadRight(idpad), space(), f.Code.Encoded.FormatAsmHexBytes());
+        // string FormatHexLine(AsmFunction f, int idpad)
+        //     => concat(f.Id.Text.PadRight(idpad), space(), f.Code.Encoded.FormatAsmHex());
 
         Option<Exception> WriteAsmHex(AsmFunctionGroup src)
         {
@@ -78,7 +84,7 @@ namespace Z0
                 var idpad = src.Members.Select(f => f.Id.Text.Length).Max() + 1;
                 using var hexwriter = new StreamWriter(HexPath(src.Id).FullPath, false);
                 foreach(var f in src.Members)
-                    hexwriter.WriteLine(FormatHexLine(f,idpad));
+                    hexwriter.WriteLine(f.Code.Format(idpad));
                 return default;
             }
             catch(Exception e)

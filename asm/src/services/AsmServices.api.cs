@@ -80,8 +80,8 @@ namespace Z0
         /// <param name="subject">The subject</param>
         /// <param name="config">The archive configuration</param>
         [MethodImpl(Inline)]
-        public static IAsmFunctionArchive FunctionArchive(string catalog, string subject, AsmArchiveConfig archiveConfig)
-            => AsmFunctionArchive.Create(catalog,subject,archiveConfig);
+        public static IAsmFunctionArchive FunctionArchive(string catalog, string subject)
+            => AsmFunctionArchive.Create(catalog,subject);
 
         /// <summary>
         /// Instantiates a subject-specific code catalog archive service

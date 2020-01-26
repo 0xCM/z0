@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Security;
     using System.Linq;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-
 
     /// <summary>
     /// Encapsulates a block of encoded assembly
@@ -104,22 +104,17 @@ namespace Z0
             get => (Length == 0 ) || (Length == 1 && Encoded[0] == 0);
         }
                 
-        /// <summary>
-        /// Formats the encapsulated data as a sequence of comma-delimited hex bytes
-        /// </summary>
-        public string Format()
-            => Encoded.AsSpan().FormatHexBytes();
+        public string Format(int idpad = 0)
+            => AsmHexLine.Define(Id,Encoded).Format(idpad);
 
+        public override string ToString()
+            => Format();
+         
         [MethodImpl(Inline)]
         public AsmCode<T> As<T>()
             where T : unmanaged
                 => new AsmCode<T>(this);
 
-        public AsmCode WithId(Moniker id)
-            => new AsmCode(id,  Origin, Label, Encoded);
-
-        public AsmCode WithLabel(string label)
-            => new AsmCode(Id,  Origin, label, Encoded);
     }
 
     /// <summary>

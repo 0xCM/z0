@@ -71,32 +71,6 @@ namespace Z0
                 => src.ReadOnly().FormatHex(bracket, sep, specifier);
 
          
-        public static string FormatAsmHex(this ulong src, int? zpad = null)
-            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;    
-
-        public static string FormatAsmHex(this uint src, int? zpad = null)        
-            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;
-
-        public static string FormatAsmHex(this int src, int? zpad = null)
-            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;
-
-        public static string FormatAsmHex(this ushort src, int? zpad = null)
-            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;
-
-        public static string FormatAsmHex(this byte src, int? zpad = null)
-            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;
-
-        public static string FormatSmallHex(this ulong src, bool postspec = false)
-            => src.ToString("x4") + (postspec ? $"{Hex.PostSpec}" : string.Empty);
-
-        public static string FormatSmallHex(this byte src, bool postspec = false)
-            => ((ulong)src).FormatSmallHex(postspec);
-
-        public static string FormatSmallHex(this uint src, bool postspec = false)
-            => ((ulong)src).FormatSmallHex(postspec);
-
-        public static string FormatSmallHex(this ushort src, bool postspec = false)
-            => ((ulong)src).FormatSmallHex(postspec);
 
         public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
             bool uppercase = false, bool prespec = true, int? segwidth = null)
@@ -127,17 +101,40 @@ namespace Z0
             }
             return sb.ToString();
         }
+        
+        // public static string FormatHexBytes(this byte[] src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
+        //     bool uppercase = false, bool prespec = true, int? segwidth = null)
+        //         => src.AsSpan().ReadOnly().FormatHexBytes(sep,zpad,specifier,uppercase,prespec,segwidth);
 
-        public static string FormatHexBytes(this Span<byte> src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
-            bool uppercase = false, bool prespec = true, int? segwidth = null)
-                => src.ReadOnly().FormatHexBytes(sep,zpad,specifier,uppercase,prespec,segwidth);
-        
-        public static string FormatHexBytes(this byte[] src, char sep = AsciSym.Comma, bool zpad = true, bool specifier = true, 
-            bool uppercase = false, bool prespec = true, int? segwidth = null)
-                => src.AsSpan().ReadOnly().FormatHexBytes(sep,zpad,specifier,uppercase,prespec,segwidth);
-        
-        public static string FormatAsmHexBytes(this byte[] src, char sep = AsciSym.Space)
-            => src.FormatHexBytes(sep: sep, zpad:true, specifier:false);
+        public static string FormatAsmHex(this ulong src, int? zpad = null)
+            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;    
+
+        public static string FormatAsmHex(this uint src, int? zpad = null)        
+            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;
+
+        public static string FormatAsmHex(this int src, int? zpad = null)
+            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;
+
+        public static string FormatAsmHex(this ushort src, int? zpad = null)
+            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;
+
+        public static string FormatAsmHex(this byte src, int? zpad = null)
+            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;
+
+        public static string FormatSmallHex(this ulong src, bool postspec = false)
+            => src.ToString("x4") + (postspec ? $"{Hex.PostSpec}" : string.Empty);
+
+        public static string FormatSmallHex(this byte src, bool postspec = false)
+            => ((ulong)src).FormatSmallHex(postspec);
+
+        public static string FormatSmallHex(this uint src, bool postspec = false)
+            => ((ulong)src).FormatSmallHex(postspec);
+
+        public static string FormatSmallHex(this ushort src, bool postspec = false)
+            => ((ulong)src).FormatSmallHex(postspec);
+
+        public static string FormatAsmHex(this byte[] src, char sep = AsciSym.Space)
+            => src.AsSpan().ReadOnly().FormatHexBytes(sep:sep, zpad:true, specifier:false, uppercase: false);  //src.FormatHexBytes(sep: sep, zpad:true, specifier:false);
 
         [MethodImpl(Inline)]
         static string HexFmtSpec(bool upper)

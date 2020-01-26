@@ -223,7 +223,11 @@ namespace Z0
         protected virtual string AppName
             => GetType().Assembly.GetSimpleName();
 
-        protected virtual void RunCustom(){}
+        /// <summary>
+        /// When overriding, return true to signal that standard tests should also be executed
+        /// </summary>
+        protected virtual bool RunCustom()
+            => true;
 
         void EmitLogs()
         {
@@ -250,8 +254,10 @@ namespace Z0
         {
             try
             {            
-                RunCustom();
-                Run(false,filters);
+                if(RunCustom())
+                {
+                    Run(false,filters);
+                }
                 EmitLogs();
 
             }

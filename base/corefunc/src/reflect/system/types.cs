@@ -23,6 +23,7 @@ namespace Z0
             || src.IsPrimalNumeric()
             || src.IsBool()
             || src.IsVoid()
+            || src.IsChar()
             || src.IsString();                            
 
         /// <summary>
@@ -118,11 +119,11 @@ namespace Z0
             => src.Where(p => p.IsStatic());
 
         /// <summary>
-        /// Selects the literals defined by a type
+        /// Selects the literal fields defined by a type
         /// </summary>
         /// <param name="src">The source type</param>
         /// <param name="declared">Whether a literal is rquired to be declared by the type</param>
-        public static IEnumerable<FieldInfo> Literals(this Type src, bool declared = true)
+        public static IEnumerable<FieldInfo> LiteralFields(this Type src, bool declared = true)
             => src.Fields(declared).Literal();
 
         /// <summary>
@@ -133,10 +134,26 @@ namespace Z0
         public static IEnumerable<Pair<int,T>> LiteralValues<T>(this Type src, int? maxcount = null)  
             where T : unmanaged  
         {
-            var literals = src.Literals().ToArray();
+            var literals = src.LiteralFields().ToArray();
             var count = Math.Min(maxcount ?? literals.Length, literals.Length);
             for(var i=0; i<count; i++)
                 yield return (i, (T)Convert.ChangeType(literals[i].GetValue(null), typeof(T)));
+        }
+
+        /// <summary>
+        /// Gets the value of a constant field if it exists; otherwise, returns a default value
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        /// <param name="name">The name of the field</param>
+        /// <param name="@default">The value to return if the field is not found</param>
+        /// <typeparam name="T">The field value type</typeparam>
+        public static T LiteralFieldValue<T>(this Type t, string name, T @default = default)
+        {
+            var f = t.Fields().Literal().FirstOrDefault();
+            if(f != null)
+                return (T)f.GetValue(null);
+            else
+                return @default;
         }
 
         /// <summary>
@@ -1078,21 +1095,6 @@ namespace Z0
             return null;
         }
 
-        /// <summary>
-        /// Gets the value of a constant field if it exists; otherwise, returns a default value
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        /// <param name="name">The name of the field</param>
-        /// <param name="@default">The value to return if the field is not found</param>
-        /// <typeparam name="T">The field value type</typeparam>
-        public static T LiteralFieldValue<T>(this Type t, string name, T @default = default)
-        {
-            var f = t.Fields().Literal().FirstOrDefault();
-            if(f != null)
-                return (T)f.GetValue(null);
-            else
-                return @default;
-        }
 
         /// <summary>
         /// Creates an instance of a type and casts the instance value as specified by a type parameter
@@ -1104,42 +1106,6 @@ namespace Z0
         public static T CreateInstance<T>(this Type t, params object[] args)
             => (T)Activator.CreateInstance(t, args);
  
-        public static string TypeKeyword(this Type src)
-        {
-            if(src.IsSByte())
-                return "sbyte";
-            else if(src.IsByte())
-                return "byte";
-            else if(src.IsUInt16())
-                return "ushort";
-            else if(src.IsUInt16())
-                return "short";
-            else if(src.IsInt32())
-                return "int";
-            else if(src.IsUInt32())
-                return "uint";
-            else if(src.IsInt64())
-                return "long";
-            else if(src.IsUInt64())
-                return "ulong";
-            else if(src.IsSingle())
-                return "float";
-            else if(src.IsDouble())
-                return "double";
-            else if(src.IsDecimal())
-                return "decimal";
-            else if(src.IsBool())
-                return "bool";
-            else if(src.IsChar())
-                return "char";
-            else if(src.IsString())
-                return "string";
-            else if(src.IsVoid())
-                return "void";
-            else 
-                return string.Empty;
-        }
-
         /// <summary>
         /// Specifies the set of all primal numeric types
         /// </summary>

@@ -30,6 +30,12 @@ namespace Z0
         public static IAsmCodeArchive Create(string catalog, string subject)
             => new AsmCodeArchive(catalog, subject);
 
+        public static IAsmCodeArchive Create(AssemblyId assembly, string subject)
+            => Create(assembly.ToString().ToLower(), subject);
+
+        public static IAsmCodeArchive Create(AssemblyId assembly, Type subject)
+            => Create(assembly.ToString().ToLower(), subject.Name.ToLower());
+
         AsmCodeArchive(string catalog, string subject)
         {
             this.Catalog = catalog;
@@ -50,7 +56,7 @@ namespace Z0
         /// <param name="src">The source file path</param>
         /// <param name="idsep">The id delimiter</param>
         /// <param name="bytesep">The hex byte delimiter</param>
-        public IEnumerable<AsmCode> ReadFile(FilePath src, char idsep, char bytesep)
+        public IEnumerable<AsmCode> Read(FilePath src, char idsep, char bytesep)
         {
             foreach(var line in src.ReadLines())
             {
@@ -61,13 +67,20 @@ namespace Z0
         }
 
         /// <summary>
-        /// Reads a hex-line formatted file
+        /// Reads a default-formatted hex-line file
         /// </summary>
         /// <param name="src">The source file path</param>
         /// <param name="idsep">The id delimiter</param>
         /// <param name="bytesep">The hex byte delimiter</param>
-        public IEnumerable<AsmCode> ReadFile(FilePath src)
-            => ReadFile(src, AsmHexLine.DefaultIdSep, AsmHexLine.DefaultByteSep);
+        public IEnumerable<AsmCode> Read(FilePath src)
+            => Read(src, AsmHexLine.DefaultIdSep, AsmHexLine.DefaultByteSep);
+
+        /// <summary>
+        /// Reads a moniker-identified, default-formatted hex-line file
+        /// </summary>
+        /// <param name="id">The identifying moniker</param>
+        public IEnumerable<AsmCode> Read(Moniker id)
+            => Read(Folder + FileName.Define(id, AsmHexLine.FileExt));
 
         /// <summary>
         /// Materializes a typed code block (per user's insistence as the type is not checkeed in any way) 
@@ -83,7 +96,7 @@ namespace Z0
         /// Returns the assembly hex file paths with filenames that satisfy a substring match predicate
         /// </summary>
         /// <param name="match">The match predicate</param>
-        public IEnumerable<FilePath> CodeFiles(string match)        
+        public IEnumerable<FilePath> Files(string match)        
             => Folder.Files(Paths.HexExt, match);
 
         static Option<AsmCode<T>> Read<T>(FolderPath location, Moniker m, T t = default)

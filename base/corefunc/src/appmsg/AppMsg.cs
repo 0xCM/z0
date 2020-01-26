@@ -22,7 +22,7 @@ namespace Z0
         public static AppMsg Define(string content, SeverityLevel level)
             => new AppMsg(content, level, string.Empty, string.Empty,null);
 
-        public static AppMsg Define(string content, SeverityLevel? level = null,  [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static AppMsg Define(string content, SeverityLevel? level = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new AppMsg(content, level ?? SeverityLevel.Info, caller, file, line);
         
         public static AppMsg Error(string content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

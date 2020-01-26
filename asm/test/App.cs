@@ -7,18 +7,18 @@ namespace Z0
 
     class App : TestApp<App>
     {            
-        bool CustomEnabled = false;
+        bool CustomEnabled = true;
 
-        protected override void RunCustom()
+        protected override bool RunCustom()
         {
             if(CustomEnabled)
             {
                 using(var check = new t_asm_checks())
-                {
                     RunAction(check, () => check.RunExplicit());
-                }
+                return false;
             }
-
+            else
+                return true;
         }
         
         public static void Main(params string[] args)

@@ -135,7 +135,7 @@ namespace Z0
             dataline += bracket(code.Origin.Length);
 
             if(Config.EmitFunctionEncoding)
-                dataline += concat(spaced(AsciSym.Eq), embrace(code.Encoded.FormatAsmHexBytes()));            
+                dataline += concat(spaced(AsciSym.Eq), embrace(code.Encoded.FormatAsmHex()));            
             return dataline;
         }
 

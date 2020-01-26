@@ -18,7 +18,7 @@ namespace Z0
         /// <typeparam name="T">The primal literal type</typeparam>
         public static IEnumerable<BinaryLiteral<T>> BinaryLiterals<T>(this Type src)
             where T : unmanaged
-            => from f in src.Literals()
+            => from f in src.LiteralFields()
                 where f.FieldType == typeof(T) && f.Attributed<BinaryLiteralAttribute>()
                let a = f.CustomAttribute<BinaryLiteralAttribute>().Require()
                 select BinaryLiteral.Define(f.Name, (T)f.GetValue(null), a.Text);
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         public static IEnumerable<BinaryLiteral> BinaryLiterals(this Type src)
-            => from f in src.Literals()
+            => from f in src.LiteralFields()
                 where f.Attributed<BinaryLiteralAttribute>()
                let a = f.CustomAttribute<BinaryLiteralAttribute>().Require()
                 select BinaryLiteral.Define(f.Name, f.GetValue(null), a.Text);

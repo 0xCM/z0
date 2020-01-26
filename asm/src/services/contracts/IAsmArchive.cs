@@ -60,19 +60,25 @@ namespace Z0
         /// Returns the assembly hex file paths with filenames that satisfy a substring match predicate
         /// </summary>
         /// <param name="match">The match predicate</param>
-        IEnumerable<FilePath> CodeFiles(string match);  
+        IEnumerable<FilePath> Files(string match);  
 
         /// <summary>
         /// Reads the content of a hexline default-formatted file
         /// </summary>
         /// <param name="src">The source path</param>
-        IEnumerable<AsmCode> ReadFile(FilePath src); 
+        IEnumerable<AsmCode> Read(Moniker src); 
+
+        /// <summary>
+        /// Reads the content of a hexline default-formatted file
+        /// </summary>
+        /// <param name="src">The source path</param>
+        IEnumerable<AsmCode> Read(FilePath src); 
 
         /// <summary>
         /// Reads the content of a hexline-formatted file with specified identity and byte separators
         /// </summary>
         /// <param name="src">The source path</param>
-        IEnumerable<AsmCode> ReadFile(FilePath src, char idsep, char bytesep);
+        IEnumerable<AsmCode> Read(FilePath src, char idsep, char bytesep);
     }    
 
     /// <summary>
