@@ -13,18 +13,22 @@ namespace Z0
 
     sealed class AsmWriter : StreamWriter, IAsmWriter
     {
-        
-        public AsmWriter(StreamWriter stream)
+        public static IAsmWriter Create(FilePath dst, AsmFormatConfig config)
+            => new AsmWriter(dst, config);
+            
+        AsmWriter(StreamWriter stream, AsmFormatConfig config)
             : base(stream.BaseStream)
         {
-
+            this.FormatConfig = config;
         }
-
-        public AsmWriter(FilePath path)
+    
+        AsmWriter(FilePath path, AsmFormatConfig config)
             : base(path.FullPath, false)
         {
-
+            this.FormatConfig = config;
         }
+
+        readonly AsmFormatConfig FormatConfig;
 
         IAsmDecoder Decoder {get;}
             = AsmServices.Decoder();
@@ -32,20 +36,28 @@ namespace Z0
         byte[] Buffer {get; set;}
             = new byte[NativeReader.DefaultBufferLen];
 
-        public void WriteFunction(AsmFunction src, AsmFormatConfig config)
+        public void Write(AsmFunction src)
         {
-            var formatter = AsmServices.Formatter(config);
+            var formatter = AsmServices.Formatter(FormatConfig);
             formatter.FormatDetail(src);
             Write(formatter.FormatDetail(src));
         }
 
-        public void WriteFunction(MemberCapture src, AsmFormatConfig config)
-            => WriteFunction(Decoder.DecodeFunction(src),config);
+        public void Write(MemberCapture src)
+            => Write(Decoder.DecodeFunction(src));
+
+        public void WriteFileHeader()
+        {
+            WriteLine($"; {now().ToLexicalString()}");
+            WriteLine(FormatConfig.SectionDelimiter);
+        }
 
         public byte[] TakeBuffer()
         {
             Buffer.Clear();
             return Buffer;
         }
+
+        public void Write(AsmFunctionGroup src) {}
     }
 }

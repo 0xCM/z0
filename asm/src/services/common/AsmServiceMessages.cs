@@ -8,9 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    using Iced.Intel;    
+    using System.Reflection;
 
     using static zfunc;
+    using Z0.AsmSpecs;
 
     static class AsmServiceMessages
     {
@@ -32,10 +33,19 @@ namespace Z0
         public static AppMsg EmittingCatalog(IOperationCatalog catalog)        
             => appMsg($"Emitting catalog {catalog.CatalogName} from catalog emitter", SeverityLevel.Info);
 
-        public static AppMsg Emitted(AsmFileDescriptor descriptor)        
+        public static AppMsg Emitted(AsmEmissionToken descriptor)        
             => appMsg($"Emitted {descriptor.Uri}", SeverityLevel.Babble);
 
-        public static AppMsg DescriptorConflit(AsmFileDescriptor src)
+        public static AppMsg CapturingImmediates(GenericOpSpec op)        
+            => appMsg($"Capturing {op.Id} generic immediates for kinds {op.Kinds.Select(k => k.ToString()).Concat(comma())}", SeverityLevel.Babble);
+
+        public static AppMsg Decoded(AsmFunction f)        
+            => appMsg($"Decoded function {f.Id}", SeverityLevel.Babble);
+
+        public static AppMsg Decoding(Moniker id, MethodInfo m)        
+            => appMsg($"Decoding  method {m.DisplayName()} with identity {id}", SeverityLevel.Babble);
+
+        public static AppMsg DescriptorConflit(AsmEmissionToken src)
             => appMsg($"The descriptor with uri {src.Uri} conflicts with an existing descriptor", SeverityLevel.Warning);
             
         public static AppMsg EmittingImmSpecializations(OpSpec op, IEnumerable<byte> immediates)        

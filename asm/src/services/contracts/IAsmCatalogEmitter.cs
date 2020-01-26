@@ -13,10 +13,10 @@ namespace Z0
 
     public interface IAsmCatalogEmitter
     {
-       IEnumerable<AsmFileDescriptor> EmitCatalog();
+       IEnumerable<AsmEmissionToken> EmitCatalog();
        
-       IEnumerable<AsmFileDescriptor> EmitDirect();
+       IEnumerable<AsmEmissionToken> EmitDirect();
        
-       IEnumerable<AsmFileDescriptor> EmitGeneric();         
+       IEnumerable<AsmEmissionToken> EmitGeneric();         
     }
 }

@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public sealed class DirectOpSpec : OpSpec
     {        
@@ -18,4 +20,5 @@ namespace Z0
 
         }
     }
+
 }

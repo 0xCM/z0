@@ -30,7 +30,7 @@ namespace Z0
         {
             using var capture = AsmProcessServices.Capture(typeof(T).Module);
             var deconstructed = capture.CaptureFunctions(typeof(T));
-            var emitter = AsmServices.CodeEmitter(TargetFolder);
+            var emitter = AsmServices.CodeEmitter(TargetFolder, AsmFormatConfig.Default.WithSectionDelimiter());
             emitter.EmitAsm(deconstructed, AsmFileName);
             emitter.EmitCil(deconstructed, CilFileName);
         }

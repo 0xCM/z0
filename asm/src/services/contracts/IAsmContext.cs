@@ -5,17 +5,16 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
     using System.Collections.Generic;
 
-    using Z0.AsmSpecs;
+    using AsmSpecs;
 
-    public interface IAsmFormatter
+    using static zfunc;
+
+
+    public interface IAsmContext : IOpContext
     {
-        string FormatDetail(AsmFunction src);        
-
+        AsmFormatConfig FormatConfig {get;}
     }
 
 }
-
-

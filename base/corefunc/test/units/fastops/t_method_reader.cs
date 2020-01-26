@@ -25,7 +25,7 @@ namespace Z0
                 var end = Random.Next((ulong)uint.MaxValue, ulong.MaxValue);
                 var expect = MemoryRange.Define(start,end);
                 var format = expect.Format();
-                var actual = MemoryRange.Parse(format).OnNone(() => Trace(format)).Require();
+                var actual = MemoryRange.Parse(format).OnNone(() => PostMessage(format)).Require();
                 Claim.eq(expect,actual);
             }
 
@@ -79,7 +79,7 @@ namespace Z0
             for(var i=0; i<methods.Length; i++)
             {
                 var m = NativeReader.read(methods[i], buffer);
-                Trace(m.Format());
+                PostMessage(m.Format());
                 buffer.Clear();
             }
         }

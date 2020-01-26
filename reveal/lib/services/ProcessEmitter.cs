@@ -26,8 +26,8 @@ namespace Z0
             using var capture = AsmProcessServices.Capture(host.Module);
             var functions = capture.CaptureFunctions(host);
             var outpath = outdir + FileName.Define(name, Paths.AsmExt);
-            var emitter = AsmServices.CodeEmitter(outdir);
-            emitter.EmitAsm(functions,FileName.Define(name, Paths.AsmExt));
+            var emitter = AsmServices.CodeEmitter(outdir, AsmFormatConfig.Default.WithSectionDelimiter());
+            emitter.EmitAsm(functions, FileName.Define(name, Paths.AsmExt));
             EmitCil(functions, name);                
         }
 

@@ -11,6 +11,7 @@ namespace Z0
 
     using static zfunc;
 
+
     /// <summary>
     /// Encapsulates a block of encoded assembly
     /// </summary>
@@ -45,7 +46,7 @@ namespace Z0
         public static AsmCode Empty => new AsmCode(Moniker.Empty, MemoryRange.Empty, string.Empty,  new byte[]{0});
 
         /// <summary>
-        /// Loads a code block from a buffer
+        /// Defines a fully-specified code block
         /// </summary>
         /// <param name="id">The identifying moniker</param>
         /// <param name="origin">The originating memory location</param>
@@ -56,12 +57,21 @@ namespace Z0
             => new AsmCode(id, origin, label, data);
 
         /// <summary>
+        /// Defines a minimally-specified code block
+        /// </summary>
+        /// <param name="id">The identifying moniker</param>
+        /// <param name="data">The code bytes</param>
+        [MethodImpl(Inline)]
+        public static AsmCode Define(Moniker id, byte[] data)
+            => new AsmCode(id, MemoryRange.Empty, id, data);
+
+        /// <summary>
         /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes
         /// </summary>
         /// <param name="data">The encoded assembly</param>
         /// <param name="id">The identity to confer</param>
         public static AsmCode Parse(string data, Moniker id)
-            => new AsmCode(id, MemoryRange.Empty, id.Text, Hex.parsebytes(data).ToArray());
+            => Define(id, Hex.parsebytes(data).ToArray());
 
         /// <summary>
         /// Materializes an untyped assembly code block from comma-delimited hex-encoded bytes

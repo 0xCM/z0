@@ -133,7 +133,7 @@ namespace Z0
                 exec();
                 clock.Stop();
 
-                messages.AddRange(unit.DequeueMessages());
+                messages.AddRange(unit.DequeuePosts());
                 messages.Add(AppMsg.Define($"{testName} executed. {clock.Time.TotalMilliseconds}ms", SeverityLevel.Info));
 
                 var outcomes = unit.TakeOutcomes().ToArray();                
@@ -146,7 +146,7 @@ namespace Z0
             catch(Exception e)
             {
                 clock.Stop();
-                messages.AddRange(unit.DequeueMessages());                
+                messages.AddRange(unit.DequeuePosts());                
                 messages.AddRange(GetErrorMessages(testName,e));
                 Enqueue(TestCaseRecord.Define(testName,false,clock.Time));                
             }
@@ -191,7 +191,7 @@ namespace Z0
                 sw.Start();
                 test.Invoke(unit,null);                    
                 exectime = snapshot(sw);
-                messages.AddRange(unit.DequeueMessages());
+                messages.AddRange(unit.DequeuePosts());
                 messages.Add(AppMsg.Define($"{testName} executed. {exectime.Ms}ms", SeverityLevel.Info));
                 
                 var outcomes = unit.TakeOutcomes().ToArray();
@@ -203,7 +203,7 @@ namespace Z0
             catch(Exception e)
             {                
                 exectime = snapshot(sw);
-                messages.AddRange(unit.DequeueMessages());                
+                messages.AddRange(unit.DequeuePosts());                
                 messages.AddRange(GetErrorMessages(testName,e));
                 results.Add(TestCaseRecord.Define(testName,false,exectime));
                               

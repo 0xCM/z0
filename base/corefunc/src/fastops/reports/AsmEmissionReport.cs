@@ -20,7 +20,7 @@ namespace Z0
         static FilePath OutputPath(IOperationCatalog catalog)
             => OutputFolder + FileName.Define(catalog.CatalogName, ReportExtension);
 
-        public static Option<FilePath> Create(IOperationCatalog catalog, AsmFileDescriptor[] emissions, bool immexclude = true)
+        public static Option<FilePath> Create(IOperationCatalog catalog, AsmEmissionToken[] emissions, bool immexclude = true)
         {
             
             if(immexclude)
@@ -36,7 +36,7 @@ namespace Z0
             MemoryAddress @base = emissions[0].Origin.Start;
 
             for(var i =0; i<count; i++)
-                records[i] = AsmEmissionRecord.Define(@base, emissions[i], i != 0 ? emissions[i-1] : (AsmFileDescriptor?)null);
+                records[i] = AsmEmissionRecord.Define(@base, emissions[i], i != 0 ? emissions[i-1] : (AsmEmissionToken?)null);
             return records.Save(OutputPath(catalog));
         }
     }

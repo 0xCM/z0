@@ -52,15 +52,6 @@ namespace Z0
         /// <summary>
         /// The dynamically-generated method that backs the dynamic operator
         /// </summary>
-        public readonly DynamicMethod DynamicMethod;
-           
-        /// <summary>
-        /// Imagines a D-delegate as an S-delegate
-        /// </summary>
-        /// <typeparam name="S">The target delegate type</typeparam>
-        [MethodImpl(Inline)]
-        public DynamicDelegate<S> As<S>()
-            where S : Delegate
-                => DynamicDelegate.Define(Id, SourceMethod, DynamicMethod, Unsafe.As<D,S>(ref Unsafe.AsRef(in this.DynamicOp)));
+        public readonly DynamicMethod DynamicMethod;           
     }
 }

@@ -189,8 +189,7 @@ namespace Z0
         {
             if(test(t))
             {
-                var def = t.IsGenericRef() ? t.GetElementType().GetGenericTypeDefinition() : t.GetGenericTypeDefinition();
-
+                var def = t.GenericDefinition();
                 if(def == typeof(Vector128<>))
                     return VectorWidth.W128;
                 else if (def == typeof(Vector256<>))
@@ -212,13 +211,9 @@ namespace Z0
         /// <param name="t">The type to test</param>
         public static bool test(Type t)
         {
-            var def = default(Type);
-
-            if(t.IsGenericType)
-                def = t.GetGenericTypeDefinition();
-            else if(t.IsGenericRef())
-                def = t.GetElementType().GetGenericTypeDefinition();
-            else
+            var eff = t.EffectiveType();
+            var def = eff.IsGenericType ? eff.GetGenericTypeDefinition() : (eff.IsGenericTypeDefinition ? eff : null);
+            if(def == null)
                 return false;
 
             return(        
@@ -234,31 +229,15 @@ namespace Z0
         /// Determines whether a type is an intrinsic vector of specified width
         /// </summary>
         /// <param name="t">The type to examine</param>
-        public static bool vector(Type t, int? width)        
+        public static bool vector(Type t, int? w)        
         {
-            if(test(t))
-            {
-                if(width == null)                
-                    return true;
-                else
-                {
-                    var def = t.IsGenericRef() ? t.GetElementType().GetGenericTypeDefinition() : t.GetGenericTypeDefinition();
-                    if(def == typeof(Vector64<>) && width == 64)
-                        return true;
-                    else if(def == typeof(Vector128<>) && width == 128)
-                        return true;
-                    else if (def == typeof(Vector256<>) && width == 256)
-                        return true;
-                    else if (def == typeof(Vector512<>) && width == 512)
-                        return true;
-                    else if (def == typeof(Vector1024<>) && width == 1024)
-                        return true;
-                    else
-                        return false;
-                }
-            }
-            return false;
-         
+            if(!test(t))
+                return false;
+
+            if(w == null)                
+                return true;
+
+            return ((int)width(t) == w);
         }
 
         [MethodImpl(Inline)]

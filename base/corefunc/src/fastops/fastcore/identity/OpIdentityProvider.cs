@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Reflection;
+    using System.Collections.Generic;
 
     using static zfunc;
 
@@ -41,6 +42,48 @@ namespace Z0
             return Moniker.Parse(id);
         }
             
+        public Option<Moniker> GenericIdentity(MethodInfo method)            
+        {
+            if(!method.IsGenericMethod)
+                return default;
+                
+            var id = method.OpName();
+            id += Moniker.PartSep; 
+            id += Moniker.GenericIndicator;
+
+            var parameters = new List<Type>();
+            if(method.IsVectorized())  
+            {
+                parameters.AddRange(method.ParameterTypes(true).Where(t => t.IsVector()));                
+                if(parameters.Count == 0 && method.ReturnType.IsVector())
+                    parameters.Add(method.ReturnType);   
+            }
+            else if(method.IsBlocked())
+            {
+                id += Moniker.BlockIndicator;
+                parameters.AddRange(method.ParameterTypes(true).Where(t => t.IsBlocked()));                
+                if(parameters.Count == 0 && method.ReturnType.IsBlocked())
+                    parameters.Add(method.ReturnType);
+            }
+            else if(method.IsSpanOp())
+            {
+                id += "span";
+                id += Moniker.SegSep;
+                id += method.ParameterTypes(true).Where(t => t.EffectiveType().IsSpan()).Count().ToString();
+                return Moniker.Parse(id);
+            }
+            
+            var widths = parameters.Select(p => p.Width()).Where(w => w != FixedWidth.None).ToList();
+            for(var i=0; i<widths.Count; i++)
+            {
+                if(i != 0)
+                    id += Moniker.SegSep;
+                
+                id += ((int)widths[i]).ToString();
+            }
+            return Moniker.Parse(id);                        
+        }
+
         /// <summary>
         /// Makes a best-guess at defining an appropriate moniker for a specified method
         /// </summary>
@@ -51,22 +94,24 @@ namespace Z0
                 return Moniker.Empty;
 
             if(method.IsOpenGeneric())
-                return OpIdentity.define(method.Name, 0, PrimalKind.None, true, false);
+                return OpIdentity.define(method.OpName(), 0, PrimalKind.None, true, false);
             else if(method.IsNonGeneric() && method.OpName() != method.Name)
                 return Moniker.Parse(method.OpName());
             else if(method.IsSpanOp())
                 return FromSpanOp(method);
             else if(method.IsNatOp())
                 return FromNatOp(method);
-            else if(method.IsVectorized() || method.IsBlocked())
-                return FromSegmented(method);
+            else if(method.IsVectorized())
+                return FromVectorized(method);
+            else if(method.IsBlocked())
+                return FromAny(method);
             else if(method.IsOperator())
                 return FromPrimalOp(method);
             else if(method.IsPredicate())
                 return FromPredicate(method);
             else if(method.IsPrimalShift())
                 return FromShift(method);
-            else if(method.IsPrimal())
+            else if(method.IsPrimalOp())
                 return FromPrimalFunc(method);
             else
                 return FromAny(method);
@@ -78,16 +123,12 @@ namespace Z0
         static Moniker FromAny(MethodInfo method)
         {
             var id = method.OpName();
-            var needsUncategorizedSep = false;
             var argtypes = method.ParameterTypes(true).ToList();
-            if(!method.ReturnType.IsVoid())
-                argtypes.Add(method.ReturnType.EffectiveType());
-
             var paramcount = argtypes.Count;
 
             for(var i=0; i<paramcount; i++)
             {
-                var argtype = argtypes[i];                
+                var arg = argtypes[i];                
                 id += PartSep;
 
                 if(i == 0)
@@ -99,19 +140,22 @@ namespace Z0
                         id += BlockIndicator;
                 }
 
-                if(NatType.test(argtype))
-                    id += NatType.name(argtype);                    
-                else if(argtype.IsConstructedGenericType)              
+                if(NatType.test(arg))
+                    id += NatType.name(arg);                    
+                else if(arg.IsConstructedGenericType)              
                 {
-                    var typeargs = argtype.GetGenericArguments().ToArray();
+                    var typeargs = arg.SuppliedGenericArguments().ToArray();
                     if(typeargs.Length > 1)
-                        NatSpanType.id(argtype).OnSome(nsid => id += nsid).OnNone(() => print(TooManyTypeParmeters(method)));                        
+                        NatSpanType.id(arg).OnSome(nsid => id += nsid).OnNone(() => print(TooManyTypeParmeters(method)));     
+                    var typearg = typeargs[0];
+                    
+                    if(arg.IsSpan())
+                        id += $"span{PrimalType.signature(typearg)}";
                     else
                     {
-                        var typearg = typeargs[0];
-                        if(argtype.IsSegmented())
+                        if(arg.IsSegmented())
                         {
-                            var w = (int)argtype.Width();
+                            var w = (int)arg.Width();
                             if(w != 0)
                             {
                                 id += $"{w}";
@@ -122,7 +166,7 @@ namespace Z0
 
                             }
                             else 
-                                id += "~err1";
+                                id += "~~err~~";
                         }
                         else
                         {
@@ -134,18 +178,12 @@ namespace Z0
                         }
                     }
                 }
-                else if(PrimalType.test(argtype))
-                    id += PrimalType.signature(argtype);
-                else if(argtype.IsEnum)
-                    id += $"enum{PrimalType.signature(argtype.GetEnumUnderlyingType())}";
+                else if(PrimalType.test(arg))
+                    id += PrimalType.signature(arg);
+                else if(arg.IsEnum)
+                    id += $"enum{PrimalType.signature(arg.GetEnumUnderlyingType())}";
                 else
-                {
-                    if(needsUncategorizedSep)
-                        id += AsciSym.Tilde;
-
-                    id += argtype.Name;                    
-                    needsUncategorizedSep = true;
-                }
+                    id += arg.Name;                    
             }
 
             return Moniker.Parse(id);
@@ -182,14 +220,14 @@ namespace Z0
         static Moniker FromVectorOp(MethodInfo method)
         {
             var param = method.ParameterTypes().First();       
-            var segkind = param.GenericArguments().FirstOrDefault().Kind();         
+            var segkind = param.SuppliedGenericArguments().FirstOrDefault().Kind();         
             return OpIdentity.segmented(method, param.Width(), segkind);
         }
 
         static Moniker FromSpanOp(MethodInfo method)
         {
             var param = method.ParameterTypes().First();       
-            var segkind = param.GenericArguments().FirstOrDefault().Kind();         
+            var segkind = param.SuppliedGenericArguments().FirstOrDefault().Kind();         
             return OpIdentity.segmented(method, param.Width(), segkind);
         }
 
@@ -209,60 +247,45 @@ namespace Z0
         /// Derives a moniker for an operation over segmented types
         /// </summary>
         /// <param name="method">The operation method</param>
-        static Moniker FromSegmented(MethodInfo method)
+        static Moniker FromVectorized(MethodInfo method)
         {
             if(method.IsVectorOp())
                 return FromVectorOp(method);
 
             var id = method.OpName() + PartSep;
-            var paramtypes = method.ParameterTypes(true).Union(items(method.ReturnType.EffectiveType())).ToArray();                    
-            var needsGenericIndicator = method.IsConstructedGenericMethod;
-            var needsBlockedIndicator = method.IsBlocked();
-            var segcount = 0;
-            var paramcount = paramtypes.Length;
-
-            for(var i=0; i<paramcount; i++)
+            var paramtypes = method.ParameterTypes(true).Select(t => t.EffectiveType()).ToArray();
+            
+            if(method.IsConstructedGenericMethod)
             {
-                var arg = paramtypes[i];                
-                var isNat = NatType.test(arg);
-                var isSegmented = arg.IsSegmented();
-                if(isSegmented)
-                {
-                    if(segcount == 0)
-                    {
-                        segcount++;
-                        paramcount--;
-                    }
-
-                    var w = arg.IsVector() ? (int)VectorType.width(arg) : (arg.IsBlocked() ? (int)BlockedType.width(arg) : 0);
-                    if(needsBlockedIndicator || needsGenericIndicator)
-                    {
-                        id += PartSep;
-                        if(needsGenericIndicator)
-                        {
-                            needsGenericIndicator = false;
-                        }
-
-                        if(needsBlockedIndicator)
-                        {
-                            id += BlockIndicator;        
-                            needsBlockedIndicator= false;
-                        }
-                    }
-                    else 
-                        id += PartSep;                
-
-                    id += $"{w}{SegSep}";
-
-                    var segtype = arg.GenericArguments().Single();
-                    var segwidth = (int)segtype.Width();
-                    id += $"{segwidth}{segtype.Kind().Indicator()}";
-                }
-                else if(isNat)
-                {
+                id += PartSep;
+                id += Moniker.GenericIndicator;
+            }
+            
+            for(var i=0; i<paramtypes.Length; i++)
+            {
+                if(i != 0)                    
                     id += PartSep;
-                    id += NatType.name(arg);
+             
+                var arg = paramtypes[i];                
+                if(arg.IsSegmented())
+                {
+                    var celltype = arg.SuppliedGenericArguments().Single();
+                    var w = (int)arg.Width();
+                    id += $"{w}{SegSep}{(int)celltype.Width()}{celltype.Kind().Indicator()}";
                 }
+                else if(NatType.test(arg))
+                    id += NatType.name(arg);                
+                else if(PrimalType.test(arg))
+                    id += PrimalType.signature(arg);
+                else if(arg.IsEnum)
+                    id += $"enum{PrimalType.signature(arg.GetEnumUnderlyingType())}";
+                else if(arg.IsSpan())
+                {
+                    var celltype = arg.SuppliedGenericArguments().Single();
+                    id += $"span{PrimalType.signature(celltype)}";
+                }
+                else
+                    id += arg.Name;                    
             }
 
             return Moniker.Parse(id);

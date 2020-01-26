@@ -31,34 +31,6 @@ namespace Z0
             => FunctionType.direction(src);
 
         /// <summary>
-        /// Determines whether a method accepts and/or returns at least one memory block parameter
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsBlocked(this MethodInfo m)
-            => FunctionType.blocked(m);        
-
-        /// <summary>
-        /// Determines whether a method is classified as a span op
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsSpanOp(this MethodInfo m)
-            => FunctionType.spanned(m);
-
-        /// <summary>
-        /// Determines whether a method is classified as a nat op
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsNatOp(this MethodInfo m)
-            => FunctionType.natural(m);
-
-        /// <summary>
-        /// Determines whether all operands are primal
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsPrimal(this MethodInfo m)
-            => FunctionType.primal(m);
-
-        /// <summary>
         /// Determines whether a method defines a unary function
         /// </summary>
         /// <param name="m">The method to examine</param>
@@ -132,8 +104,8 @@ namespace Z0
         /// Determines whether a method has intrinsic parameters or return type
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static bool IsVectorized(this MethodInfo m, bool total = false)        
-            => FunctionType.vectorized(m,total);
+        public static bool IsVectorized(this MethodInfo m)        
+            => FunctionType.vectorized(m, false);
 
         /// <summary>
         /// Determines whether a method defines a vectorized operator
@@ -141,6 +113,41 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static bool IsVectorOp(this MethodInfo m)        
             => FunctionType.vectorized(m) && FunctionType.isoperator(m);
+
+        /// <summary>
+        /// Determines whether a method accepts and/or returns at least one memory block parameter
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsBlocked(this MethodInfo m)
+            => FunctionType.blocked(m);        
+
+        /// <summary>
+        /// Determines whether a method is segmentation-centric
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsSegmented(this MethodInfo m)
+            => m.IsVectorized() || m.IsBlocked();
+
+        /// <summary>
+        /// Determines whether a method is classified as a span op
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsSpanOp(this MethodInfo m)
+            => FunctionType.spanned(m);
+
+        /// <summary>
+        /// Determines whether a method is classified as a nat op
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsNatOp(this MethodInfo m)
+            => FunctionType.natural(m);
+
+        /// <summary>
+        /// Determines whether all operands are primal
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsPrimalOp(this MethodInfo m)
+            => FunctionType.primal(m);
 
         /// <summary>
         /// Determines whether a method defines a predicate that returns a bit or bool value

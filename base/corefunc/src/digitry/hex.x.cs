@@ -70,10 +70,11 @@ namespace Z0
             where T : unmanaged
                 => src.ReadOnly().FormatHex(bracket, sep, specifier);
 
+         
         public static string FormatAsmHex(this ulong src, int? zpad = null)
-            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;
+            => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;    
 
-        public static string FormatAsmHex(this uint src, int? zpad = null)
+        public static string FormatAsmHex(this uint src, int? zpad = null)        
             => zpad.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + Hex.PostSpec;
 
         public static string FormatAsmHex(this int src, int? zpad = null)
@@ -135,6 +136,9 @@ namespace Z0
             bool uppercase = false, bool prespec = true, int? segwidth = null)
                 => src.AsSpan().ReadOnly().FormatHexBytes(sep,zpad,specifier,uppercase,prespec,segwidth);
         
+        public static string FormatAsmHexBytes(this byte[] src, char sep = AsciSym.Space)
+            => src.FormatHexBytes(sep: sep, zpad:true, specifier:false);
+
         [MethodImpl(Inline)]
         static string HexFmtSpec(bool upper)
             => upper ? "X" : "x";

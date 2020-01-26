@@ -13,7 +13,7 @@ namespace Z0
 
     public interface IAsmAnalyzer
     {
-       IEnumerable<AsmFileDescriptor> AnalyzeCatalog();
+       IEnumerable<AsmEmissionToken> AnalyzeCatalog();
        
     }
 }

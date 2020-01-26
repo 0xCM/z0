@@ -48,7 +48,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            vblocks.vadd<T>(x,y,x);
+            vblocks.add<T>(x,y,x);
             return ref x;
         }
 

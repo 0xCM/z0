@@ -108,7 +108,7 @@ namespace Z0
                         Emit(records, delimiter, header, path);
                 else
                 {
-                    path.DeleteIfExists();
+                    path.Delete();
                     Emit(records, delimiter, header, path);
                 }
                 return path;

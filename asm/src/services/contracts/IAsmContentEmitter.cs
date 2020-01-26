@@ -3,16 +3,18 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{        
     using System;
-    using System.Security;
-    using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
 
-    using static zfunc;
     using AsmSpecs;
 
+    using static zfunc;
+    
+    public interface IAsmContentEmitter
+    {
+        void EmitCil(IEnumerable<AsmFunction> functions, FileName file);            
 
-
+        void EmitAsm(IEnumerable<AsmFunction> disassembly, FileName file);        
+    }
 }

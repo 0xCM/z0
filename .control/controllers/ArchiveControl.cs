@@ -14,10 +14,10 @@ namespace Z0
     
     class ArchiveControl : Controller<ArchiveControl>
     {                
-        IEnumerable<AsmFileDescriptor> EmitArtifacts(IOperationCatalog catalog)
+        IEnumerable<AsmEmissionToken> EmitArtifacts(IOperationCatalog catalog)
             => AsmServices.CatalogEmitter(catalog).EmitCatalog();
 
-        Option<FilePath> CreateEmissionReport(IOperationCatalog catalog, IEnumerable<AsmFileDescriptor> emitted)
+        Option<FilePath> CreateEmissionReport(IOperationCatalog catalog, IEnumerable<AsmEmissionToken> emitted)
             => AsmEmissionReport.Create(catalog, emitted.ToArray());
 
         Option<FilePath> Emit(IOperationCatalog catalog)
@@ -102,7 +102,7 @@ namespace Z0
         {             
             print(DispatchingCatalogWorkers());
             
-            // CreateResourceReports();
+            CreateResourceReports();
             DispatchEmitters();
             //DispatchStatsWorkers();                
         }

@@ -11,31 +11,37 @@ namespace Z0
 
     public class AsmFormatConfig
     {
-        static readonly AsmFormatConfig _Default
-            = new AsmFormatConfig();
-
         public static AsmFormatConfig Default
-            => _Default;
+            => new AsmFormatConfig();
 
         public AsmFormatConfig()
         {
 
         }
 
-        public bool EmitHeader {get; set;}
+        public bool EmitCaptureTermCode {get; set;}
             = true;
 
-        public bool HeaderEncodingProp {get; set;}
+        public bool EmitFileHeader {get; set;}
+            = true;
+
+        public bool EmitFunctionEncoding {get;set;}
+            = true;
+
+        public bool EmitFunctionOrigin {get;set;}
             = false;
-        
-        public bool HeaderEncoding {get;set;}
-            = true;
-         
-        public bool HeaderTimestamp {get;set;}
+
+        public bool EmitFunctionHeader {get; set;}
             = true;
 
-        public bool HeaderLocation {get;set;}
-            = true;
+        public bool EmitFunctionTimestamp {get;set;}
+            = false;
+
+        public bool EmitSectionDelimiter {get;set;}
+            = false;
+
+        public bool EmitEncodingProp {get; set;}
+            = false;                 
 
         public int InstructionPad {get;set;}
             = 40;
@@ -43,58 +49,57 @@ namespace Z0
         public bool ShowLineAddresses {get; set;}
             = true;
 
-        public string InfoDelimiter {get;set;}
+        public string FieldDelimiter {get;set;}
             = " || ";
 
         public string SectionDelimiter {get;set;}
             = new string(AsciSym.Dash, 120);        
 
-        public bool EmitSectionDelimiter {get;set;}
-            = false;
-
-        public AsmFormatConfig Replicate()
-            => new AsmFormatConfig
-            {   
-                EmitHeader = EmitHeader,
-                HeaderEncodingProp = HeaderEncodingProp,
-                HeaderEncoding = HeaderEncoding,                   
-                HeaderLocation = HeaderLocation,
-                HeaderTimestamp = HeaderTimestamp,
-                InfoDelimiter = InfoDelimiter,
-                SectionDelimiter = SectionDelimiter,
-                InstructionPad = InstructionPad,
-                EmitSectionDelimiter = EmitSectionDelimiter,
-                ShowLineAddresses = ShowLineAddresses, 
-
-            };
-        public AsmFormatConfig Invert()
-            => new AsmFormatConfig{
-                ShowLineAddresses = !ShowLineAddresses,
-                HeaderEncodingProp = !HeaderEncodingProp,
-                EmitHeader = !EmitHeader,
-                HeaderTimestamp = !HeaderTimestamp,
-                EmitSectionDelimiter = !EmitSectionDelimiter
-            };
+        // public AsmFormatConfig Replicate()
+        //     => new AsmFormatConfig
+        //     {   
+        //         EmitCaptureTermCode = EmitCaptureTermCode,
+        //         EmitEncodingProp = EmitEncodingProp,
+        //         EmitFunctionEncoding = EmitFunctionEncoding,                   
+        //         EmitFunctionHeader = EmitFunctionHeader,
+        //         EmitFunctionOrigin = EmitFunctionOrigin,
+        //         EmitFunctionTimestamp = EmitFunctionTimestamp,
+        //         EmitSectionDelimiter = EmitSectionDelimiter,
+        //         EmitFileHeader = EmitFileHeader,                
+        //         InstructionPad = InstructionPad,
+        //         FieldDelimiter = FieldDelimiter,
+        //         SectionDelimiter = SectionDelimiter,
+        //         ShowLineAddresses = ShowLineAddresses, 
+        //     };
         
-        public AsmFormatConfig WithSeparator()
+        public AsmFormatConfig WithSectionDelimiter()
         {
-            var config = Replicate();
-            config.EmitSectionDelimiter = true;
-            return config;
+            EmitSectionDelimiter = true;
+            return this;
         }
 
-        public AsmFormatConfig WithoutHeaderTimestamp()
+        public AsmFormatConfig WithoutFunctionTimestamp()
         {
-            var config = Replicate();
-            config.HeaderTimestamp = false;
-            return config;
+            EmitFunctionTimestamp = false;
+            return this;
         }
 
-        public AsmFormatConfig WithHeaderTimestamp()
+        public AsmFormatConfig WithoutFunctionOrigin()
         {
-            var config = Replicate();
-            config.HeaderTimestamp = true;
-            return config;
+            EmitFunctionOrigin = false;
+            return this;
+        }
+
+        public AsmFormatConfig WithFunctionOrigin()
+        {
+            EmitFunctionOrigin = true;
+            return this;
+        }
+
+        public AsmFormatConfig WithFunctionTimestamp()
+        {
+            EmitFunctionTimestamp = true;
+            return this;
         }
 
     }

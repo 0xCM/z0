@@ -16,6 +16,23 @@ namespace Z0
     public class t_dynamic : t_vinx<t_dynamic>
     {   
 
+        public void check_blocks()
+        {
+            var methods = typeof(vblocks).Methods().Attributed<OpAttribute>().WithName("add");
+            var provider = FastOps.IdentityProvider();
+            foreach(var method in methods)
+            {                
+                foreach(var t in method.ParameterTypes())
+                {
+                    Claim.yea(t.IsBlocked());
+                    Claim.yea(t.Width() == FixedWidth.W128 || t.Width() == FixedWidth.W256);
+                }
+                    
+                var id = provider.GenericIdentity(method);
+                Trace(id);
+            }
+        }
+
         static RuntimeMethodHandle GetMethodHandle(DynamicMethod method)
         {
             var getMethodDescriptorInfo = typeof(DynamicMethod).GetMethod("GetMethodDescriptor", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -28,7 +45,7 @@ namespace Z0
             var method = typeof(ginx).Methods().WithName(nameof(ginx.vbsll)).OfKind(HK.vk128()).Single();
             var op = Dynop.unary<uint>(HK.vk128(), OpIdentity.Provider.DefineIdentity(method), method,imm8);
             var handle = GetMethodHandle(op.DynamicMethod);
-            Trace(handle.Value.ToString());
+            PostMessage(handle.Value.ToString());
 
         }
          

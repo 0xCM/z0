@@ -23,7 +23,7 @@ namespace Z0.Mkl
             Claim.neq(s1Max,0.0);
 
             var zeroCount = s1.Count(x => x == 0);
-            Trace($"Found {zeroCount} zeroes");
+            PostMessage($"Found {zeroCount} zeroes");
         }
 
         public void sumvals()

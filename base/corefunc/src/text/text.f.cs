@@ -238,11 +238,18 @@ partial class zfunc
         => string.Join(space(), items);
 
     /// <summary>
-    /// Produces a pipe character, i.e. '|'
+    /// Produces a '|' character
     /// </summary>
     [MethodImpl(Inline)]
     public static char pipe()
         => AsciSym.Pipe;
+
+    /// <summary>
+    /// Produces a ',' character
+    /// </summary>
+    [MethodImpl(Inline)]
+    public static char comma()
+        => AsciSym.Comma;
 
     /// <summary>
     /// Produces a line of content
@@ -276,12 +283,6 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static string rbrace() => "}";
 
-    /// <summary>
-    /// Produces a ',' character
-    /// </summary>
-    [MethodImpl(Inline)]
-    public static string comma()
-        => ",";
 
     /// <summary>
     /// Produces a '/' character
@@ -320,10 +321,10 @@ partial class zfunc
     /// <summary>
     /// Encloses the supplied text in quotation marks
     /// </summary>
-    /// <param name="text">The text to be quoted</param>
+    /// <param name="content">The content to be quoted</param>
     [MethodImpl(Inline)]
-    public static string enquote(string text)
-        => $"{AsciSym.Quote}{text}{AsciSym.Quote}";
+    public static string enquote(object content)
+        => $"{AsciSym.Quote}{content}{AsciSym.Quote}";
 
     /// <summary>
     /// Encloses text within (possibly distinct) left and right boundaries
@@ -332,8 +333,8 @@ partial class zfunc
     /// <param name="left">The text on the left</param>
     /// <param name="right">The text on the right</param>
     [MethodImpl(Inline)]
-    public static string enclose(string content, string left, string right)
-        => concat(left,content,right);
+    public static string enclose(object content, string left, string right)
+        => concat(left, $"{content}", right);
 
     /// <summary>
     /// Encloses text within (possibly distinct) left and right boundaries
@@ -342,8 +343,8 @@ partial class zfunc
     /// <param name="left">The left delimiter</param>
     /// <param name="right">The right delimiter</param>
     [MethodImpl(Inline)]
-    public static string enclose(string content, char left, char right)
-        => concat(left,content,right);
+    public static string enclose(object content, char left, char right)
+        => concat(left, $"{content}", right);
 
     /// <summary>
     /// Encloses text within a bounding string
@@ -351,8 +352,8 @@ partial class zfunc
     /// <param name="content">The text to enclose</param>
     /// <param name="sep">The left and right boundary</param>
     [MethodImpl(Inline)]
-    public static string enclose(string content, string sep)
-        => concat(sep,content,sep);
+    public static string enclose(object content, string sep)
+        => concat(sep,$"{content}",sep);
 
     /// <summary>
     /// Encloses a character within uniform left/right bounding string
@@ -378,7 +379,7 @@ partial class zfunc
     /// </summary>
     /// <param name="src">The text to enclose</param>
     [MethodImpl(Inline)]
-    public static string squote(string src)
+    public static string squote(object src)
         => enclose(src, AsciSym.SQuote.ToString());
 
     /// <summary>
@@ -437,14 +438,13 @@ partial class zfunc
     public static string eol(IEnumerable<object> content)
         => string.Join(eol(), content);
 
-
     /// <summary>
     /// Encloses text between '[' and ']' characters
     /// </summary>
     /// <param name="content">The content to enclose</param>
     [MethodImpl(Inline)]
-    public static string bracket(string content)
-        => enclose(content, lbracket(), rbracket());
+    public static string bracket(object content)
+        => enclose($"{content}", lbracket(), rbracket());
 
     /// <summary>
     /// Encloses text between less than and greater than characters
@@ -510,16 +510,6 @@ partial class zfunc
     static string toString(string subject, string ifBlank = null)
         => nonempty(subject) ? subject : ifBlank ?? String.Empty;
 
-    /// <summary>
-    /// If subject is not null, invokes its ToString() method; otherwise, returns an empty string or a supplied marker
-    /// </summary>
-    /// <typeparam name="T">The subject type</typeparam>
-    /// <param name="subject">The subject</param>
-    [MethodImpl(Inline)]
-    public static string toString<T>(T subject, string ifMissing)
-        => (subject is string)
-            ? toString(subject as string, ifMissing)
-            : (subject != null ? subject.ToString() : ifMissing ?? string.Empty);
 
     /// <summary>
     /// Defines a symbol

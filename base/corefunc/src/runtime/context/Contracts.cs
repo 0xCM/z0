@@ -13,27 +13,30 @@ namespace Z0
     public interface IContext
     {
         /// <summary>
-        /// Takes messages from the context queue, and appends an optional number of messages to the result
+        /// Removes the messages accumulated by the context and returns these messages to the caller
         /// </summary>
-        /// <param name="addenda">The messages to append, if any</param>
-        /// <returns>Returns the dequeued messages concatenated with any addenda</returns>
-        IReadOnlyList<AppMsg> DequeueMessages(params AppMsg[] addenda);
+        IReadOnlyList<AppMsg> DequeuePosts();
 
         /// <summary>
-        /// Takes messages from the context queue, appends an optional number of messages to the result, 
-        /// and finally, pushes the joined messages through the context output channel(s) as a a transactional
-        /// block
+        /// Posts a message to the context queue
         /// </summary>
-        /// <param name="addenda">Additional mesages to enqueue prior to emission</param>
-        void EmitMessages(params AppMsg[] addenda)
-        {
-            var messages = DequeueMessages(addenda);
-            Terminal.Get().WriteMessages(messages);
-            log(messages, LogArea.Test);            
-        }
+        /// <param name="msg">The message to post</param>
+        void PostMessage(AppMsg msg);
 
         /// <summary>
-        /// Defines the context-specific RNG
+        /// Posts a text message to the context queue with optional severity
+        /// </summary>
+        /// <param name="msg">The message to post</param>
+        void PostMessage(string msg, SeverityLevel? severity = null);
+
+        /// <summary>
+        /// Posts an exception, from wich a message is derived, to the context queue
+        /// </summary>
+        /// <param name="msg">The message to post</param>
+        void PostError(Exception e);        
+
+        /// <summary>
+        /// Specifies context RNG
         /// </summary>
         IPolyrand Random {get;}
     }

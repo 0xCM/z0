@@ -99,13 +99,6 @@ namespace Z0
         public string Format()
             => bracket(concat(Start.FormatAsmHex(), AsciSym.Comma, AsciSym.Space, End.FormatAsmHex()));
 
-        // public string Format()
-        //     => bracket(concat(
-        //         Start.FormatHex(false), 
-        //         AsciSym.Comma, 
-        //         AsciSym.Space, 
-        //         End.FormatHex(false))
-        //         );
 
         public override string ToString()
             => Format();

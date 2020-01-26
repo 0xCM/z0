@@ -3,27 +3,19 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{        
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
 
-    public enum BlockWidth : uint
+    using Z0.AsmSpecs;
+
+    public interface IAsmContentFormatter
     {
-        None = 0,
-        
-        W16 = 16,
+        string FormatDetail(AsmFunction src);        
 
-        W32 = 32,
-
-        W64 = 64,
-
-        W128 = 128,
-
-        W256 = 256,
-
-        W512 = 512,
-
-
-        W666 = 666,
     }
 
 }
+
+

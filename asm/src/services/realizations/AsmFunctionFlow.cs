@@ -35,7 +35,7 @@ namespace Z0
         static ReadOnlySpan<byte> ImmSelection => new byte[]{5,9,13};
 
         IAsmImmCapture ImmCaptureSvc(MethodInfo src, Moniker baseid)
-            => AsmServices.ImmCapture(src,baseid);
+            => AsmServices.UnaryImmCapture(src,baseid);
 
         AsmFunction Flow(AsmFunction src, IAsmFunctionPipe dst)
         {

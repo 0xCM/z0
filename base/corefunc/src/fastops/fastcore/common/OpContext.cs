@@ -5,14 +5,22 @@
 namespace Z0
 {
     using System;
-    using System.Security;
-    using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-
+    
     using static zfunc;
-    using AsmSpecs;
 
+    public interface IOpContext : IContext
+    {
+        
+    }
+    public abstract class OpContext<T> : Context<T>, IOpContext
+        where T : OpContext<T>
+    {                
+        protected OpContext(IPolyrand random)
+            : base(random)            
+        {
 
-
+        }
+    }   
 }

@@ -29,6 +29,13 @@ namespace Z0
             => File.ReadAllText(src.ToString());
 
         /// <summary>
+        /// Reads the line-partitioned content of a text file
+        /// </summary>
+        /// <param name="src">The file path</param>
+        public static IEnumerable<string> ReadLines(this FilePath src)
+            => File.ReadAllLines(src.ToString());
+
+        /// <summary>
         /// Reads the full content of a text file
         /// </summary>
         /// <param name="src">The file path</param>
@@ -87,7 +94,7 @@ namespace Z0
         /// Deletes the file if it exists
         /// </summary>
         /// <param name="src">The path to the file</param>
-        public static void DeleteIfExists(this FilePath src)
+        public static void Delete(this FilePath src)
         {
             if(File.Exists(src.FullPath))
                 File.Delete(src.FullPath);

@@ -12,24 +12,24 @@ namespace Z0
 
     using static zfunc;
 
-    readonly struct AsmCodeEmitter : IAsmCodeEmitter
+    readonly struct AsmContentEmitter : IAsmContentEmitter
     {
         readonly FolderPath RootDir;
 
         readonly AsmFormatConfig Config;
 
-        public static AsmCodeEmitter Create(FolderPath root, AsmFormatConfig config)
-            => new AsmCodeEmitter(root,config);
+        public static AsmContentEmitter Create(FolderPath root, AsmFormatConfig config)
+            => new AsmContentEmitter(root,config);
 
-        AsmCodeEmitter(FolderPath dst, AsmFormatConfig config)
+        AsmContentEmitter(FolderPath dst, AsmFormatConfig config)
         {
-            this.RootDir = dst.CreateIfMissing();
+            this.RootDir = dst;
             this.Config = config;
         }
 
         public void EmitCil(IEnumerable<AsmFunction> functions, FileName file)
         {
-            using var writer = Writer(RootDir + file);
+            using var writer = Writer(RootDir.CreateIfMissing() + file);
             EmitTimestamp(writer);                
             foreach(var f in functions)
                 writer.WriteLine(f.Cil.MapValueOrElse(cil => cil.Format(), () => string.Empty));
@@ -42,17 +42,10 @@ namespace Z0
                 return;
 
             var formatter = AsmServices.Formatter(Config);
-            using var dst = Writer(RootDir + file);
-            
-            if(Config.HeaderTimestamp)
-                EmitTimestamp(dst);                
-            
+            using var dst = Writer(RootDir.CreateIfMissing() + file);
+                        
             for(var i=0; i< src.Length; i++)
-            {   
                 dst.Write(formatter.FormatDetail(src[i]));
-                if(i != i-1 && Config.EmitSectionDelimiter)
-                    dst.WriteLine(Config.SectionDelimiter);                            
-            }
         }
 
         void EmitTimestamp(StreamWriter writer)

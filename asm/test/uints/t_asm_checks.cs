@@ -172,8 +172,8 @@ namespace Z0
             var dArchive = AsmServices.CodeArchive(catalog, dSrc);
             var gArchive = AsmServices.CodeArchive(catalog, gSrc);
 
-            var dAsm = dArchive.ReadCode(dId).OnNone(() => Trace($"{dId} not found"));
-            var gAsm = gArchive.ReadCode(gId).OnNone(() => Trace($"{gId} not found"));
+            var dAsm = dArchive.ReadBlock(dId).OnNone(() => PostMessage($"{dId} not found"));
+            var gAsm = gArchive.ReadBlock(gId).OnNone(() => PostMessage($"{gId} not found"));
 
             var success = from d in dAsm
                           from g in gAsm
@@ -190,8 +190,8 @@ namespace Z0
             var idD = OpIdentity.segmented(name, w, kind, false);
             var idG = OpIdentity.segmented(name, w, kind, true);
 
-            var asmD = AsmServices.CodeArchive(catalog, nameof(dinx)).ReadCode(idD).OnNone(() => Trace($"{idD} not found"));
-            var asmG = AsmServices.CodeArchive(catalog, nameof(ginx)).ReadCode(idG).OnNone(() => Trace($"{idG} not found"));
+            var asmD = AsmServices.CodeArchive(catalog, nameof(dinx)).ReadBlock(idD).OnNone(() => PostMessage($"{idD} not found"));
+            var asmG = AsmServices.CodeArchive(catalog, nameof(ginx)).ReadBlock(idG).OnNone(() => PostMessage($"{idG} not found"));
 
             var success = from d in asmD
                           from g in asmG

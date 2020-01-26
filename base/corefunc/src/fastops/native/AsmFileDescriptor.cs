@@ -10,30 +10,30 @@ namespace Z0
 
     using static zfunc;
 
-    public readonly struct AsmFileDescriptor : IEquatable<AsmFileDescriptor>, IComparable<AsmFileDescriptor>
+    public readonly struct AsmEmissionToken : IEquatable<AsmEmissionToken>, IComparable<AsmEmissionToken>
     {
         public readonly AsmUri Uri;
 
         public readonly MemoryRange Origin;
 
         [MethodImpl(Inline)]
-        public static bool operator==(AsmFileDescriptor a, AsmFileDescriptor b)
+        public static bool operator==(AsmEmissionToken a, AsmEmissionToken b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator!=(AsmFileDescriptor a, AsmFileDescriptor b)
+        public static bool operator!=(AsmEmissionToken a, AsmEmissionToken b)
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static AsmFileDescriptor Define(AsmUri uri, MemoryRange origin)        
-            => new AsmFileDescriptor(uri, origin);
+        public static AsmEmissionToken Define(AsmUri uri, MemoryRange origin)        
+            => new AsmEmissionToken(uri, origin);
 
         [MethodImpl(Inline)]
-        public static AsmFileDescriptor Define(string catalog, string subject, Moniker id, MemoryRange origin)        
-            => new AsmFileDescriptor(AsmUri.Define(catalog,subject, id), origin);
+        public static AsmEmissionToken Define(string catalog, string subject, Moniker id, MemoryRange origin)        
+            => new AsmEmissionToken(AsmUri.Define(catalog,subject, id), origin);
 
         [MethodImpl(Inline)]
-        AsmFileDescriptor(AsmUri uri, MemoryRange origin)
+        AsmEmissionToken(AsmUri uri, MemoryRange origin)
         {
             this.Uri = uri;
             this.Origin = origin;
@@ -49,14 +49,14 @@ namespace Z0
             => HashCode.Combine(Uri,Origin);
 
         [MethodImpl(Inline)]
-        public bool Equals(AsmFileDescriptor src)
+        public bool Equals(AsmEmissionToken src)
             => Uri == src.Uri && Origin == src.Origin;
         
         public override bool Equals(object src)
-            => src is AsmFileDescriptor d && Equals(d);
+            => src is AsmEmissionToken d && Equals(d);
 
         [MethodImpl(Inline)]
-        public int CompareTo(AsmFileDescriptor rhs)
+        public int CompareTo(AsmEmissionToken rhs)
             => Origin.CompareTo(rhs.Origin);
     }
 

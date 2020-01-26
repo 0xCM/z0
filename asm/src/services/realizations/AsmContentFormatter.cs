@@ -17,23 +17,21 @@ namespace Z0
 
     using Iced = Iced.Intel;
 
-
-    readonly struct AsmSpecFormatter : IAsmFormatter, IIcedAsmFormatter
+    readonly struct AsmContentFormatter : IAsmContentFormatter, IIcedAsmFormatter
     {
         readonly AsmFormatConfig Config;
-
         
         [MethodImpl(Inline)]
-        public static IIcedAsmFormatter BaseFormatter()
-            => new AsmSpecFormatter();
+        public static IIcedAsmFormatter BaseFormatter(AsmFormatConfig config)
+            => new AsmContentFormatter(config);
 
         [MethodImpl(Inline)]
-        public static IAsmFormatter Create(AsmFormatConfig config = null)
-            => new AsmSpecFormatter(config);
+        public static IAsmContentFormatter Create(AsmFormatConfig config)
+            => new AsmContentFormatter(config);
         
-        AsmSpecFormatter(AsmFormatConfig config = null)
+        AsmContentFormatter(AsmFormatConfig config)
         {
-            this.Config = config ?? AsmFormatConfig.Default;
+            this.Config = config;
         }
         
         /// <summary>
@@ -48,8 +46,8 @@ namespace Z0
             if(Config.EmitSectionDelimiter)
                 dst.AppendLine(Config.SectionDelimiter);
             
-            if(Config.EmitHeader)        
-                foreach(var line in FormatHeader(src,Config))
+            if(Config.EmitFunctionHeader)        
+                foreach(var line in FormatHeader(src))
                     dst.AppendLine(line);            
 
             dst.AppendLine(FormatInstructions(src).Concat(AsciEscape.Eol));
@@ -124,55 +122,49 @@ namespace Z0
             return dst;
         }
 
+        static string FormatEncodingProp(AsmCode src)
+            => Comment($"static ReadOnlySpan<byte> {src.Id}_Bytes => new byte[{src.Encoded.Length}]{embrace(src.FormatNativeHex())};");
+
+
+        string FormatHeaderCode(AsmCode code)
+        {
+            var dataline = Comment(code.Id);
+            if(Config.EmitFunctionOrigin)
+                dataline += code.Origin.Format();
+
+            dataline += bracket(code.Origin.Length);
+
+            if(Config.EmitFunctionEncoding)
+                dataline += concat(spaced(AsciSym.Eq), embrace(code.Encoded.FormatAsmHexBytes()));            
+            return dataline;
+        }
+
         /// <summary>
         /// Formats the function header
         /// </summary>
         /// <param name="src">The source function</param>
-        /// <param name="encoding">Specifies whether to include the encoded hex bytes</param>
-        /// <param name="location">Specifies whether to include the assembly-relative function location address</param>
-        ReadOnlySpan<string> FormatHeader(AsmFunction src, AsmFormatConfig fmt = null)
+        ReadOnlySpan<string> FormatHeader(AsmFunction src)
         {            
             var lines = new List<string>();
-            var code = src.Code;
-            var location = src.Location;
 
-            lines.Add(Comment($"{code.Label}")); 
+            lines.Add(Comment($"{src.Label}")); 
             
-            if(Config.HeaderEncodingProp)           
-                lines.Add(Comment(FormatEncodingProp(code)));
-            
-            if(Config.HeaderLocation && Config.HeaderEncoding)
-                lines.Add(Comment(concat(FormatHeaderLocation(location,code.Id), " = ", embrace(FormatHeaderEncoding(code)))));
-            else if(Config.HeaderLocation)
-                lines.Add(Comment(FormatHeaderLocation(location,code.Id)));
-            else if(Config.HeaderEncoding)
-                lines.Add(Comment(embrace(FormatHeaderEncoding(code))));
+            if(Config.EmitEncodingProp)           
+                lines.Add(FormatEncodingProp(src.Code));
 
-            lines.Add(Comment($"Capture completion code, {src.TermCode}"));
+            lines.Add(FormatHeaderCode(src.Code));
+                
+            if(Config.EmitCaptureTermCode)
+                lines.Add(Comment(concat("Capture completion code", spaced(AsciSym.Eq), src.TermCode.ToString())));
 
-            if(Config.HeaderTimestamp)
+            if(Config.EmitFunctionTimestamp)
                 lines.Add(Comment(now().ToLexicalString()));
             
             return lines.ToArray();
         }
 
-        string FormatHeaderEncoding(AsmCode src)
-            => src.Encoded.FormatHexBytes(sep: space(), zpad:true, specifier:false);
-
-        string FormatHeaderLocation( MemoryRange src, Moniker id)
-            => $"{id}{src.Format()}[{src.Length}]"; 
-
-        string FormatEncodingProp(AsmCode src)
-        {
-            var propdecl = $"static ReadOnlySpan<byte> {src.Id}_Bytes";
-            var alloc = $"{propdecl} => new byte[{src.Encoded.Length}]";
-            var data = embrace(src.FormatNativeHex());
-            var content = items(alloc, data, AsciSym.Semicolon.ToString()).Concat();
-            return content;
-        }
-
         string Format(AsmInstructionCode src, AsmFormatConfig fmt)
-            => $"{src.Definition}{fmt.InfoDelimiter}{src.OpCode}";
+            => $"{src.Definition}{fmt.FieldDelimiter}{src.OpCode}";
 
         static string FormatLineLabel(ulong src)
             => concat(src.FormatSmallHex(), Hex.PostSpec, space());
@@ -185,11 +177,10 @@ namespace Z0
             var description = text();    
             description.Append(concat(FormatLineLabel(src.Offset), src.AsmContent.PadRight(Config.InstructionPad, space())));
             description.Append(Comment(Format(src.Spec, Config)));
-            description.Append(concat(Config.InfoDelimiter,"encoded", bracket(src.Encoded.Length.ToString())));
+            description.Append(concat(Config.FieldDelimiter,"encoded", bracket(src.Encoded.Length.ToString())));
             description.Append(embrace(src.Encoded.FormatHex(space(), true, false)));
             return description.ToString();
         }
-
 
         [MethodImpl(Inline)]
         static string FormatLabelAddress(string text, ulong baseaddress)

@@ -31,6 +31,13 @@ namespace Z0
                 select DirectOpSpec.Define(id, m.OpName(), m);                        
 
         /// <summary>
+        /// Queries a specified type for groups of related direct operations
+        /// </summary>
+        /// <param name="host">The source type</param>
+        public static IEnumerable<DirectOpGroup> directGroups(Type host)
+            => direct(host).GroupBy(op => op.Id.Name).Select(g => DirectOpGroup.Define(Moniker.Parse(g.Key), g));
+
+        /// <summary>
         /// Queries a sequence of types for formalized concrete/non-generic operation implementations
         /// </summary>
         /// <param name="host">The source type</param>
@@ -42,12 +49,12 @@ namespace Z0
         /// </summary>
         /// <param name="host">The source type</param>
         public static IEnumerable<GenericOpSpec> generic(Type host) 
-            => from m in  declared(host).OpenGeneric()
-                let id = identity(m)
-                where !id.IsEmpty
+            => from m in declared(host).OpenGeneric()
+                let id = genericid(m)
+                where id.IsSome()
                 let closures = PrimalType.closures(m).ToArray()
                 where closures.Length != 0
-                select GenericOpSpec.Define(id, m.OpName(), m.GetGenericMethodDefinition(), closures);
+                select GenericOpSpec.Define(id.Require(), m.OpName(), m.GetGenericMethodDefinition(), closures);
 
         /// <summary>
         /// Queries a sequence of types for formalized generic operation definitions
@@ -58,5 +65,9 @@ namespace Z0
 
         static Moniker identity(MethodInfo m)
             => OpIdentity.Provider.DefineIdentity(m);
+        
+        static Option<Moniker> genericid(MethodInfo m)
+            => OpIdentity.Provider.GenericIdentity(m);
+
     }
 }

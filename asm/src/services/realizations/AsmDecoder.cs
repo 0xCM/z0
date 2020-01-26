@@ -19,21 +19,21 @@ namespace Z0
 
     public class AsmDecoder : IAsmDecoder
     {
-        internal static IAsmDecoder Create(ClrMetadataIndex index = null, int? bufferlen = null)
-            => new AsmDecoder(index,bufferlen);
+        internal static IAsmDecoder Create(AsmFormatConfig config, ClrMetadataIndex index = null, int? bufferlen = null)
+            => new AsmDecoder(config, index, bufferlen);
 
         byte[] _Buffer;
 
         Option<ClrMetadataIndex> ClrMetadata;
 
-        AsmDecoder(ClrMetadataIndex index, int? bufferlen)
+        AsmDecoder(AsmFormatConfig config, ClrMetadataIndex index, int? bufferlen)
         {
+            this.FormatConfig = config;
             this.ClrMetadata = index;
             this._Buffer = new byte[bufferlen ?? 4*1024];
         }
 
         AsmFormatConfig FormatConfig {get;}
-            = AsmFormatConfig.Default;
         
         IAsmSpecBuilder SpecBuilder
             => AsmServices.SpecBuilder();

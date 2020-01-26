@@ -160,9 +160,9 @@ namespace Z0.Logix
 
         public void truth_vectors()
         {
-            Trace(TruthTables.definition(BinaryBitLogicKind.And).Format());
-            Trace(TruthTables.definition(BinaryBitLogicKind.Or).Format());
-            Trace(TruthTables.definition(BinaryBitLogicKind.Nand).Format());        
+            PostMessage(TruthTables.definition(BinaryBitLogicKind.And).Format());
+            PostMessage(TruthTables.definition(BinaryBitLogicKind.Or).Format());
+            PostMessage(TruthTables.definition(BinaryBitLogicKind.Nand).Format());        
         }
     }
 }

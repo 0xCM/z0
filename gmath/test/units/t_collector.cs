@@ -93,7 +93,7 @@ namespace Z0
             
             var usAvg1 = mathspan.avgz(data);
             var usAvg2 = avg(data);
-            Trace($"{usAvg1} vs {usAvg2}");
+            PostMessage($"{usAvg1} vs {usAvg2}");
 
 
             Claim.eq(min, c.Min);
@@ -117,7 +117,7 @@ namespace Z0
             
             var usAvg1 = mathspan.avgz(data);
             var usAvg2 = avg(data);
-            Trace($"{usAvg1} vs {usAvg2}");
+            PostMessage($"{usAvg1} vs {usAvg2}");
 
 
             Claim.eq(min, c.Min);

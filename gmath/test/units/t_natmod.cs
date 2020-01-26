@@ -235,10 +235,10 @@ namespace Z0
         }
 
         protected void TypeCaseStart<C>([Caller] string caller = null)
-            => Post(AppMsg.Define($"{GetType().DisplayName()}/{caller}<{typename<C>()}> executing", SeverityLevel.HiliteCL));
+            => PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}<{typename<C>()}> executing", SeverityLevel.HiliteCL));
 
         protected void TypeCaseEnd<C>([Caller] string caller = null)
-            => Post(AppMsg.Define($"{GetType().DisplayName()}/{caller}<{typename<C>()}> succeeded", SeverityLevel.HiliteCL));
+            => PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}<{typename<C>()}> succeeded", SeverityLevel.HiliteCL));
 
     }
 }

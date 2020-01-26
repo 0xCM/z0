@@ -16,9 +16,13 @@ namespace Z0
     public interface IAsmWriter : IDisposable
     {
 
-        void WriteFunction(AsmFunction src, AsmFormatConfig fmt);
+        void Write(AsmFunction src);
 
-        void WriteFunction(MemberCapture src, AsmFormatConfig fmt);
+        void Write(MemberCapture src);
+
+        void Write(AsmFunctionGroup src);
+        
+        void WriteFileHeader();
 
         byte[] TakeBuffer();   
 

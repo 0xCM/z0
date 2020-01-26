@@ -5,25 +5,17 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Reflection;        
 
-    public enum BlockWidth : uint
+    using static zfunc;
+
+    public static class FastOps
     {
-        None = 0,
-        
-        W16 = 16,
 
-        W32 = 32,
+        public static IOpIdentityProvider IdentityProvider()
+            => default(OpIdentityProvider);
 
-        W64 = 64,
-
-        W128 = 128,
-
-        W256 = 256,
-
-        W512 = 512,
-
-
-        W666 = 666,
     }
 
 }

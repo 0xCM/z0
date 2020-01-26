@@ -9,6 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using Z0.AsmSpecs;
 
@@ -40,16 +41,41 @@ namespace Z0
         /// Materializes an untyped code block
         /// </summary>
         /// <param name="id">The identifying moniker</param>
-        public Option<AsmCode> ReadCode(Moniker id)
+        public Option<AsmCode> ReadBlock(Moniker id)
             => Read(Folder, id);
     
+        /// <summary>
+        /// Reads a hex-line formatted file
+        /// </summary>
+        /// <param name="src">The source file path</param>
+        /// <param name="idsep">The id delimiter</param>
+        /// <param name="bytesep">The hex byte delimiter</param>
+        public IEnumerable<AsmCode> ReadFile(FilePath src, char idsep, char bytesep)
+        {
+            foreach(var line in src.ReadLines())
+            {
+                var hex = AsmHexLine.Parse(line,idsep,bytesep);
+                if(hex.OnNone(() => errout($"Could not parse the line {line} from {src}")))
+                    yield return hex.MapRequired(h => AsmCode.Define(h.Id, h.Encoded));
+            }
+        }
+
+        /// <summary>
+        /// Reads a hex-line formatted file
+        /// </summary>
+        /// <param name="src">The source file path</param>
+        /// <param name="idsep">The id delimiter</param>
+        /// <param name="bytesep">The hex byte delimiter</param>
+        public IEnumerable<AsmCode> ReadFile(FilePath src)
+            => ReadFile(src, AsmHexLine.DefaultIdSep, AsmHexLine.DefaultByteSep);
+
         /// <summary>
         /// Materializes a typed code block (per user's insistence as the type is not checkeed in any way) 
         /// from hex data contained in the assembly log archive
         /// </summary>
         /// <param name="subfolder">The asm log subfolder</param>
         /// <param name="id">The identifying moniker</param>
-        public Option<AsmCode<T>> ReadCode<T>(Moniker id, T t = default)
+        public Option<AsmCode<T>> ReadBlock<T>(Moniker id, T t = default)
             where T : unmanaged
                 => Read(Folder,id, t);
 
@@ -67,5 +93,10 @@ namespace Z0
         static Option<AsmCode> Read(FolderPath location, Moniker m)
             => Try(() => AsmCode.Parse(Paths.AsmHexPath(location, m).ReadText(),m));
 
+        public IAsmCodeArchive Clear()
+        {
+            iter(Folder.Files(Paths.HexExt), f => f.Delete());
+            return this;
+        }
     }
 }

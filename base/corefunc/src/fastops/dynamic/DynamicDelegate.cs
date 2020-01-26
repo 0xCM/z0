@@ -22,7 +22,7 @@ namespace Z0
                 => new DynamicDelegate<D>(id, src, dst,op);
 
         [MethodImpl(Inline)]
-        public static DynamicDelegate Define(Moniker id,  MethodInfo src, DynamicMethod dst, Delegate op)
+        public static DynamicDelegate Define(Moniker id, MethodInfo src, DynamicMethod dst, Delegate op)
             => new DynamicDelegate(id,src, dst,op);
 
         [MethodImpl(Inline)]
@@ -57,14 +57,5 @@ namespace Z0
         /// The dynamically-generated method that backs the dynamic operator
         /// </summary>
         public readonly DynamicMethod DynamicMethod;
-
-        /// <summary>
-        /// Imagines an untyped delegate as a D-delegate
-        /// </summary>
-        /// <typeparam name="D">The target delegate type</typeparam>
-        [MethodImpl(Inline)]
-        public DynamicDelegate<D> As<D>()
-            where D : Delegate
-                => DynamicDelegate.Define(Id, SourceMethod, DynamicMethod, Unsafe.As<Delegate,D>(ref Unsafe.AsRef(in this.DynamicOp)));
     }
 }

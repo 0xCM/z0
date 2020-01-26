@@ -158,8 +158,8 @@ namespace Z0.Mkl.Test
                 if(trace)       
                 {
                     var padlen = Int32.MinValue.ToString().Length + 2;
-                    Trace($"X = {X.Format()}");
-                    Trace($"E = {E.Format()}");
+                    PostMessage($"X = {X.Format()}");
+                    PostMessage($"E = {E.Format()}");
                 }
                 
                 // for(var j=0; j< X.Unblocked.Length; j++)

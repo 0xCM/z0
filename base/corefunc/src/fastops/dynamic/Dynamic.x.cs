@@ -54,6 +54,6 @@ namespace Z0
                 => DynamicDelegate.Define(id, src,dst, (D)dst.CreateDelegate(typeof(D)));
 
         internal static DynamicDelegate CreateDelegate(this DynamicMethod dst, Moniker id, MethodInfo src, Type @delegate)
-            => DynamicDelegate.Define(id, src,dst, dst.CreateDelegate(@delegate));
+            => DynamicDelegate.Define(id, src, dst, dst.CreateDelegate(@delegate));
     }
 }

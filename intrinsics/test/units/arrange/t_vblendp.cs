@@ -70,7 +70,7 @@ namespace Z0
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
-                Trace(descrition);
+                PostMessage(descrition);
             
         }
 
@@ -93,7 +93,7 @@ namespace Z0
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
-                Trace(descrition);
+                PostMessage(descrition);
             
         }
 
@@ -116,7 +116,7 @@ namespace Z0
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
-                Trace(descrition);            
+                PostMessage(descrition);            
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace Z0
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
-                Trace(descrition);            
+                PostMessage(descrition);            
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace Z0
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z16)), source,target);
             if(EmitInfo)
-                Trace(descrition);            
+                PostMessage(descrition);            
         }
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace Z0
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z32)), source,target);
             if(EmitInfo)
-                Trace(descrition);            
+                PostMessage(descrition);            
         }
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace Z0
 
             var descrition = describe(maskspec, BitMask.mask(maskspec.As(z64)), source,target);
             if(EmitInfo)
-                Trace(descrition);            
+                PostMessage(descrition);            
         }
 
         public void vblendp_512x8_Jsb8x2()
@@ -330,11 +330,11 @@ namespace Z0
 
             if(EmitInfo)
             {
-                Trace($"* {title}: vector width = {w}, swap count = {tc}, cell type = {typename(t)}, perm length = {pn}");
-                Trace($"left:  {left.Format(pad:2)}");
-                Trace($"right: {right.Format(pad:2)}");
-                Trace(perm.Format());  
-                Trace(string.Empty);  
+                PostMessage($"* {title}: vector width = {w}, swap count = {tc}, cell type = {typename(t)}, perm length = {pn}");
+                PostMessage($"left:  {left.Format(pad:2)}");
+                PostMessage($"right: {right.Format(pad:2)}");
+                PostMessage(perm.Format());  
+                PostMessage(string.Empty);  
             }
         }
 

@@ -15,10 +15,10 @@ namespace Z0
     /// </summary>
     public class AsmEmissionRecord : IRecord<AsmEmissionRecord>
     {    
-        public static AsmEmissionRecord Define(MemoryAddress @base, AsmFileDescriptor src, AsmFileDescriptor? prior = null)
+        public static AsmEmissionRecord Define(MemoryAddress @base, AsmEmissionToken src, AsmEmissionToken? prior = null)
             => new AsmEmissionRecord(@base, src, prior);
 
-        AsmEmissionRecord(MemoryAddress @base, AsmFileDescriptor src)
+        AsmEmissionRecord(MemoryAddress @base, AsmEmissionToken src)
         {
             this.Offset = src.Origin.Start != 0 ? src.Origin.Start - @base : 0ul;
             this.Origin = src.Origin;
@@ -26,7 +26,7 @@ namespace Z0
             this.Uri = src.Uri;
         }
 
-        AsmEmissionRecord(MemoryAddress @base, AsmFileDescriptor src, AsmFileDescriptor? prior)
+        AsmEmissionRecord(MemoryAddress @base, AsmEmissionToken src, AsmEmissionToken? prior)
             : this(@base,src)
         {
             var gap = prior.Map(p =>  src.Origin.Start - p.Origin.End);

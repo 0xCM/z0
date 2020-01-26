@@ -164,7 +164,7 @@ namespace Z0
             {
                 var x = CpuVector.vparts(n128,127,0,127,0,127,0,127,0);
                 var y = dinx.vpackus(x,x);
-                Trace(y.Format());
+                PostMessage(y.Format());
             }        
             case1();
             case2();

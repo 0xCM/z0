@@ -20,7 +20,7 @@ namespace Z0
         public static Option<NatSpanSig> signature(Type t)
             => from def in t.GenericDefinition() 
                 where def == typeof(NatSpan<,>) && t.IsConstructed()
-                let args = t.GenericArguments().ToArray()
+                let args = t.SuppliedGenericArguments().ToArray()
                 let pair = (nat: args[0], cell: args[1])
                 from n in NatType.value(pair.nat)
                 from w in DataTypes.width(pair.cell)

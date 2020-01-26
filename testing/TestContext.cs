@@ -9,11 +9,13 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using static zfunc;
 
     public abstract class TestContext<U> : Context<U>, ITestContext
         where U : TestContext<U>
     {
+
         protected TestContext(ITestConfig config = null, IPolyrand random = null)
             : base(random ?? Rng.WyHash64(Seed64.Seed00))
         {
@@ -110,6 +112,64 @@ namespace Z0
         protected static Moniker BaselineId<K>(string opname,K t = default)
             where K : unmanaged
                 => moniker<K>($"{opname}_baseline");
+
+        protected virtual bool TraceEnabled
+            => true;
+
+        protected void Trace(string title, string msg, int? tpad = null, SeverityLevel? severity = null)
+        {
+            if(TraceEnabled)
+            {
+                var titleFmt = tpad.Map(pad => title.PadRight(pad), () => title.PadRight(20));        
+                PostMessage(AppMsg.Define($"{titleFmt}: {msg}", severity ?? SeverityLevel.Babble));
+            }
+        }
+
+        /// <summary>
+        /// Submits a diagnostic message to the message queue
+        /// </summary>
+        /// <param name="msg">The source message</param>
+        /// <param name="severity">The diagnostic severity level that, if specified, 
+        /// replaces the exising source message severity prior to queue submission</param>
+        protected void Trace(AppMsg msg, SeverityLevel? severity = null)
+        {
+            if(TraceEnabled)
+                PostMessage(msg.WithLevel(severity ?? SeverityLevel.Babble));
+        }
+
+        /// <summary>
+        /// Submits a diagnostic message to the message queue
+        /// </summary>
+        /// <param name="msg">The source message</param>
+        /// <param name="severity">The diagnostic severity level that, if specified, 
+        /// replaces the exising source message severity prior to queue submission</param>
+        protected void Trace(object msg, [Caller] string caller = null)
+        {
+            if(TraceEnabled)
+                PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}: {msg}",SeverityLevel.Info));
+        }
+
+        /// <summary>
+        /// Submits a diagnostic message to the message queue
+        /// </summary>
+        /// <param name="msg">The source message</param>
+        /// <param name="severity">The diagnostic severity level that, if specified, 
+        /// replaces the exising source message severity prior to queue submission</param>
+        protected void Trace(string title, object msg, [Caller] string caller = null)
+        {
+            if(TraceEnabled)
+                PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}/{title}: {msg}",SeverityLevel.Info));
+        }
+
+        /// <summary>
+        /// Submits a diagnostic message to the queue related to performance/benchmarking
+        /// </summary>
+        /// <param name="msg">The message to submit</param>
+        protected void TracePerf(string msg)
+        {
+            if(TraceEnabled)
+                PostMessage(AppMsg.Define($"{msg}", SeverityLevel.Benchmark));
+        }
 
         public IEnumerable<TestCaseRecord> TakeOutcomes()
         {

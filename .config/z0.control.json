@@ -1,7 +1,7 @@
 {
-    "1:off": "Intrinsics",
-    "2:off": "GMath",
-    "3:off": "CoreFunc",
-    "4:off": "BitCore",
+    "1:on": "Intrinsics",
+    "2:on": "GMath",
+    "3:on": "CoreFunc",
+    "4:on": "BitCore",
     "5:on": "Logix"
 }

@@ -28,11 +28,11 @@ namespace Z0
 
                 if(r1 != r2)
                 {
-                    Trace($"v1 = {v1.ToBitString()}");
-                    Trace($"v2 = {v2.ToBitString()}");
+                    PostMessage($"v1 = {v1.ToBitString()}");
+                    PostMessage($"v2 = {v2.ToBitString()}");
 
-                    Trace($"v1[{lower[i]}, {upper[i]}] = {r1.ToBitString()}");
-                    Trace($"v2[{lower[i]}, {upper[i]}] = {r2.ToBitString()}");
+                    PostMessage($"v1[{lower[i]}, {upper[i]}] = {r1.ToBitString()}");
+                    PostMessage($"v2[{lower[i]}, {upper[i]}] = {r2.ToBitString()}");
                 }
                 Claim.eq(r1,r2);                
             }

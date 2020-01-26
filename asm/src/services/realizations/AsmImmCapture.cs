@@ -47,19 +47,19 @@ namespace Z0
 
         IEnumerable<DynamicDelegate> UnaryDelegates(params byte[] immediates)
         {
-            var parameters = Method.GetParameters().ToArray();            
-            var optype = parameters[0].ParameterType;
-            var width = optype.Width();
-            var celltype = optype.GetGenericArguments()[0];
-            
+            (var celltype, var width) = Method.ParameterTypes()
+                    .Where(p => p.IsVector())
+                    .Select(x => (x.SuppliedGenericArguments().Single(),x.Width()))
+                    .FirstOrDefault();            
+
             var factory = width switch{
                 FixedWidth.W128 => Dynop.unaryfactory(HK.vk128(), BaseId, Method, celltype),
                 FixedWidth.W256 => Dynop.unaryfactory(HK.vk256(), BaseId, Method, celltype),
                 _ =>throw new NotSupportedException(width.ToString())
             };
-            
+                
             foreach(var imm in immediates)            
-                yield return factory(imm);                    
+                yield return factory(imm);    
         }                    
     }
 }

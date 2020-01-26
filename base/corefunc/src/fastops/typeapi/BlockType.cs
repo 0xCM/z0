@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Linq;
+    using System.Reflection;
 
     using static zfunc;
 
@@ -19,22 +20,17 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         public static bool test(Type t)
         {
-            var def = default(Type);
-
-            if(t.IsGenericType)
-                def = t.GetGenericTypeDefinition();
-            else if(t.IsGenericRef())
-                def = t.GetElementType().GetGenericTypeDefinition();
-            else
+            var eff = t.EffectiveType();
+            var def = eff.IsGenericType ? eff.GetGenericTypeDefinition() : (eff.IsGenericTypeDefinition ? eff : null);
+            if(def == null)
                 return false;
-
-            return 
+            return( 
                  def == typeof(Block16<>)  || 
                  def == typeof(Block32<>)  || 
                  def == typeof(Block64<>)  || 
                  def == typeof(Block128<>) || 
                  def == typeof(Block256<>) || 
-                 def == typeof(Block512<>);
+                 def == typeof(Block512<>));
         }
 
         /// <summary>
@@ -43,27 +39,24 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         public static BlockWidth width(Type t)
         {
-            if(test(t))
-            {
-                var def = t.IsGenericRef() ? t.GetElementType().GetGenericTypeDefinition() : t.GetGenericTypeDefinition();
+            if(!test(t))
+                return BlockWidth.None;
 
-                if(def == typeof(Block16<>))
-                    return BlockWidth.W16;
-                else if(def == typeof(Block32<>))
-                    return BlockWidth.W32;
-                else if (def == typeof(Block64<>))
-                    return BlockWidth.W64;
-                else if (def == typeof(Block128<>))
-                    return BlockWidth.W128;
-                else if (def == typeof(Block256<>))
-                    return BlockWidth.W256;
-                else if (def == typeof(Block512<>))
-                    return BlockWidth.W512;
-                else
-                    return 0;
-            }
+            var def = t.GenericDefinition();
+            if(def == typeof(Block16<>))
+                return BlockWidth.W16;
+            else if(def == typeof(Block32<>))
+                return BlockWidth.W32;
+            else if (def == typeof(Block64<>))
+                return BlockWidth.W64;
+            else if (def == typeof(Block128<>))
+                return BlockWidth.W128;
+            else if (def == typeof(Block256<>))
+                return BlockWidth.W256;
+            else if (def == typeof(Block512<>))
+                return BlockWidth.W512;
             else
-                return 0;
+                return BlockWidth.W666;
         }
 
         /// <summary>
@@ -205,7 +198,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static PrimalKind segment(Type t)
-            => test(t) ?  t.GenericArguments().First().Kind() : PrimalKind.None;
+            => test(t) ?  t.SuppliedGenericArguments().First().Kind() : PrimalKind.None;
 
         [MethodImpl(Inline)]
         public static BlockKind kind<B>(B b = default)

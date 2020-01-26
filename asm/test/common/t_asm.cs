@@ -46,10 +46,10 @@ namespace Z0
         protected string GMath
             => nameof(gmath);
 
-        protected IAsmWriter AsmTestWriter([Caller] string test = null)
+        protected IAsmWriter AsmTestWriter(AsmFormatConfig format, [Caller] string test = null)
         {
             var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, Paths.AsmExt);    
-            return AsmServices.Writer(path,true);
+            return AsmServices.Writer(path,format);
         }
 
         protected void CheckAsmMatch<T>(BinaryOp<T> f, AsmCode asm)
@@ -96,10 +96,10 @@ namespace Z0
                 => CheckAsmMatch(f, asm.Untyped);
 
         protected AsmCode ReadAsm(string catalog, string subject, Moniker m)
-            => AsmServices.CodeArchive(catalog,subject).ReadCode(m).Require();
+            => AsmServices.CodeArchive(catalog,subject).ReadBlock(m).Require();
 
         protected AsmCode ReadAsm(string catalog, string subject, string opname, PrimalKind kind)
-            => AsmServices.CodeArchive(catalog,subject).ReadCode(OpIdentity.define(opname,kind)).Require();
+            => AsmServices.CodeArchive(catalog,subject).ReadBlock(OpIdentity.define(opname,kind)).Require();
 
         protected AsmCode<T> ReadAsm<T>(string catalog, string subject, string opname, T t = default)
             where T : unmanaged
@@ -108,7 +108,7 @@ namespace Z0
         protected AsmCode<T> ReadAsm<W,T>(string catalog, string subject, string opname, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeNat
-                => AsmServices.CodeArchive(catalog,subject).ReadCode<T>(OpIdentity.segmented(opname, PrimalType.kind<T>(), w)).Require(); 
+                => AsmServices.CodeArchive(catalog,subject).ReadBlock<T>(OpIdentity.segmented(opname, PrimalType.kind<T>(), w)).Require(); 
 
         protected void megacheck(string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, PrimalClass<byte> kind)
         {

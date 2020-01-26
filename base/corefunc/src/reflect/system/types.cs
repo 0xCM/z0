@@ -60,15 +60,19 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         public static Option<Type> GenericDefinition(this Type t)
         {
-            var x = t.EffectiveType();
-            return x.IsConstructedGenericType ? x.GetGenericTypeDefinition() 
-                : (x.IsGenericTypeDefinition ? x : default);
+            var effective = t.EffectiveType();
+            if(effective.IsConstructedGenericType)
+                return effective.GetGenericTypeDefinition();
+            else if(effective.IsGenericTypeDefinition)
+                return effective;
+            else
+                return default;            
         }
 
         public static bool IsConstructed(this Type t)
             => t.EffectiveType().IsConstructedGenericType;
 
-        public static IEnumerable<Type> GenericArguments(this Type t)
+        public static IEnumerable<Type> SuppliedGenericArguments(this Type t)
         {
             var x = t.EffectiveType();
             if(x.IsConstructedGenericType)

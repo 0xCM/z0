@@ -24,12 +24,12 @@ namespace Z0
 
         public static FixedWidth width(Type t)
         {
-            if(PrimalType.test(t))
-                return (FixedWidth)PrimalType.width(t);
-            else if(VectorType.test(t))
+            if(VectorType.test(t))
                 return (FixedWidth)VectorType.width(t);
             else if(BlockedType.test(t))
                 return (FixedWidth)BlockedType.width(t);
+            if(PrimalType.test(t))
+                return (FixedWidth)PrimalType.width(t);
             else if(t == typeof(bit))
                 return FixedWidth.W1;
             else

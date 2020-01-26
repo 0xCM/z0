@@ -12,7 +12,6 @@ namespace Z0
 
     class App
     {                
-
         void EmitFunctions(Type host)
             => AsmProcessServices.Emitter().EmitFunctions(host);
 
@@ -49,5 +48,4 @@ namespace Z0
 
 
     }
-
 }

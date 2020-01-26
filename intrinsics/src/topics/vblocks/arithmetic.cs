@@ -15,12 +15,12 @@ namespace Z0
     partial class vblocks
     {
         [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
-        public static ref readonly Block128<T> vadd<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
+        public static ref readonly Block128<T> add<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vadd<T>(n128));
 
         [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
-        public static ref readonly Block256<T> vadd<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
+        public static ref readonly Block256<T> add<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vadd<T>(n256));
 

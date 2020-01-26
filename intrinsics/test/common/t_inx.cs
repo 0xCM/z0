@@ -26,8 +26,8 @@ namespace Z0
         {
             if(a != b)
             {
-                Trace(a.Format());
-                Trace(b.Format());
+                PostMessage(a.Format());
+                PostMessage(b.Format());
                 Claim.fail();
             }
         }

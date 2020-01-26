@@ -59,8 +59,6 @@ namespace Z0
                 => src.Where(m => m.Attributed(attrib));
 
         /// <summary>
-
-        /// <summary>
         /// Selects the members with a name that exists within a supplied set
         /// </summary>
         /// <param name="src">The members to examine</param>

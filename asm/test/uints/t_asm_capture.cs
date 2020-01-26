@@ -31,63 +31,62 @@ namespace Z0
             => v => Avx2.ShiftLeftLogical(v,imm);
 
         AsmFormatConfig AsmFormat
-            => AsmFormatConfig.Default.WithoutHeaderTimestamp();
+            => AsmFormatConfig.Default.WithoutFunctionTimestamp();
 
         public void capture_and()
         {
             using var target = NativeTestWriter();
-            using var asm = AsmTestWriter();
+            using var asm = AsmTestWriter(AsmFormat);
             
             var fmt = AsmFormat;
 
             Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> f = Avx2.And;
             NativeCapture.capture(f,target);
-            f.CaptureAsm(asm,fmt);       
+            f.CaptureAsm(asm);       
             
 
             var g = typeof(Avx2).GetMethod(nameof(Avx2.And), new Type[] { typeof(Vector256<uint>), typeof(Vector256<uint>) });
             NativeCapture.capture(g,target);            
-            g.CaptureAsm(asm,fmt.WithSeparator());       
+            g.CaptureAsm(asm);       
 
             var many = typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName("vand");
             NativeCapture.capture(many,typeof(uint),target);
-            many.CaptureAsm(typeof(uint), asm, fmt.WithSeparator());
+            many.CaptureAsm(typeof(uint), asm);
 
         }
 
         public void capture_constants()
         {
-            using var asm = AsmTestWriter();            
+            using var asm = AsmTestWriter(AsmFormat);            
             var f = typeof(gmath).Method(nameof(gmath.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
-            f.CaptureAsm(asm, AsmFormat);
+            f.CaptureAsm(asm);
         }
 
         public void capture_shifter()
         {
             using var native = NativeTestWriter();
-            using var asm = AsmTestWriter();
+            using var asm = AsmTestWriter(AsmFormat);
             var fmt = AsmFormat;
 
 
             var f = shifter(4);
             NativeCapture.capture(f,native);
-            f.CaptureAsm(asm,fmt);       
+            f.CaptureAsm(asm);       
         }
 
         public void capture_shuffler()
         {
             using var native = NativeTestWriter();
-            using var asm = AsmTestWriter();
+            using var asm = AsmTestWriter(AsmFormat);
             var fmt = AsmFormat;
 
             var f = shuffler<uint>(n2);
             NativeCapture.capture(f,native);
-            f.CaptureAsm(asm,fmt);       
+            f.CaptureAsm(asm);       
 
             var g = shuffler(n3);
             NativeCapture.capture(g,native);
-            g.CaptureAsm(asm,fmt.WithSeparator());       
-
+            g.CaptureAsm(asm);       
         }
 
     }
