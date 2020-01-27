@@ -26,9 +26,9 @@ namespace Z0
             var src = AssemblyId.GMath;
             var subject = nameof(math);
             var op = nameof(math.and);
-            var index = AsmCodeIndex.Create(src.CodeArchive(subject).Read(Moniker.Parse(op)));
+            var index = src.CodeArchive(subject).Read(Moniker.Parse(op)).ToCodeIndex(false); 
 
-            index.PrimalOp(op, PrimalKind.U32, false)
+            index.PrimalOp(op, PrimalKind.U32)
                     .OnSome(code => Trace(code,SeverityLevel.HiliteCD))
                     .OnNone(() => Claim.fail());
 
@@ -41,9 +41,9 @@ namespace Z0
         void CheckIntrinsicArchive()
         {
             var archive = AssemblyId.Intrinsics.CodeArchive(nameof(dinx));
-            var index = AsmCodeIndex.Create(archive.Read(Moniker.Parse(nameof(dinx.vadd))));
+            var index = archive.Read(Moniker.Parse(nameof(dinx.vadd))).ToCodeIndex(false);
 
-            index.VectorOp(nameof(dinx.vadd), FixedWidth.W256, PrimalKind.U32, false)
+            index.VectorOp(nameof(dinx.vadd), FixedWidth.W256, PrimalKind.U32)
                     .OnSome(code => Trace(code,SeverityLevel.HiliteCD))
                     .OnNone(() => Claim.fail());
 

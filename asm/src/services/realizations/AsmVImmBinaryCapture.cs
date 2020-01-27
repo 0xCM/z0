@@ -18,14 +18,13 @@ namespace Z0
         where T : unmanaged
     {
 
-        [MethodImpl(Inline)]
-        public static IAsmImmCapture<T> Create(IAsmContext context, IVBinaryImm8Resolver128<T> resolver)
-            => new AsmV128ImmBinaryCapture<T>(context, resolver);
-
         readonly IAsmContext Context;
 
         readonly IVBinaryImm8Resolver128<T> Resolver;
 
+        [MethodImpl(Inline)]
+        public static IAsmImmCapture<T> Create(IAsmContext context, IVBinaryImm8Resolver128<T> resolver)
+            => new AsmV128ImmBinaryCapture<T>(context, resolver);
 
         [MethodImpl(Inline)]
         AsmV128ImmBinaryCapture(IAsmContext context, IVBinaryImm8Resolver128<T> resolver)
@@ -47,9 +46,10 @@ namespace Z0
     readonly struct AsmV256ImmBinaryCapture<T> : IAsmImmCapture<T>
         where T : unmanaged
     {
+        readonly IAsmContext Context;
+
         readonly IVBinaryImm8Resolver256<T> Resolver;
 
-        readonly IAsmContext Context;
 
         [MethodImpl(Inline)]
         public static IAsmImmCapture<T> Create(IAsmContext context, IVBinaryImm8Resolver256<T> resolver)

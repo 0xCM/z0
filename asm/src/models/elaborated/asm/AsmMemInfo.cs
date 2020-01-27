@@ -12,7 +12,7 @@ namespace Z0.AsmSpecs
     /// </summary>
     public class AsmMemInfo
     {        
-        public string BaseRegister {get;set;}
+        public Register BaseRegister {get;set;}
         
         public uint? Displacement {get; set;}
         
@@ -20,13 +20,15 @@ namespace Z0.AsmSpecs
         
         public int? DisplacementSize {get;set;}
         
-        public string SegmentRegister {get; set;}
+        public Register SegmentRegister {get; set;}
         
-        public string SegmentPrefix {get; set;}
+        public Register SegmentPrefix {get; set;}
         
         public ulong Address {get; set;}
 
-        public string Size {get; set;}
+        public MemorySize Size {get; set;}
+
+        public string SizeFormat {get;set;}
         
     }
 

@@ -16,7 +16,7 @@ namespace Z0
 
     using static zfunc;
     
-    static class AsmOpTests
+    static partial class AsmExtend
     {        
         /// <summary>
         /// Determines whether the classified operand is a 16-bit, 32-bit or 64-bit near branch
@@ -193,11 +193,12 @@ namespace Z0
             if(kind.IsMemory())
             {
                 var info = new AsmMemInfo();
-                info.Size = src.MemorySize.Format();
+                info.Size = src.MemorySize;
+                info.SizeFormat = src.MemorySize.Format();
 
                 if(kind.IsDirectMemory())
                 {
-                    info.BaseRegister = src.MemoryBase.ToString();
+                    info.BaseRegister = src.MemoryBase;
                     info.Displacement = src.MemoryDisplacement;
                     info.DisplacementSize = src.MemoryDisplSize;
                     info.IndexScale = src.MemoryIndexScale;
@@ -206,9 +207,9 @@ namespace Z0
                 if(kind.IsDirectMemory() || kind.IsBaseSegment())
                 {
                     if(src.SegmentPrefix.IsSpecified())
-                        info.SegmentPrefix = src.SegmentPrefix.ToString();
+                        info.SegmentPrefix = src.SegmentPrefix;
                     
-                    info.SegmentRegister = src.MemorySegment.ToString();
+                    info.SegmentRegister = src.MemorySegment;
                 }
 
                 if(kind.IsMem64())

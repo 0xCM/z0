@@ -13,7 +13,6 @@ namespace Z0
 
     using Z0.AsmSpecs;
 
-
     using static zfunc;
 
     /// <summary>
@@ -29,12 +28,6 @@ namespace Z0
 
         public static IAsmCodeArchive Create(string catalog, string subject)
             => new AsmCodeArchive(catalog, subject);
-
-        public static IAsmCodeArchive Create(AssemblyId assembly, string subject)
-            => Create(assembly.ToString().ToLower(), subject);
-
-        public static IAsmCodeArchive Create(AssemblyId assembly, Type subject)
-            => Create(assembly.ToString().ToLower(), subject.Name.ToLower());
 
         AsmCodeArchive(string catalog, string subject)
         {

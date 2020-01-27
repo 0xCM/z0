@@ -98,6 +98,15 @@ namespace Z0
             => AsmCodeArchive.Create(catalog,subject);
 
         /// <summary>
+        /// Instantiates a code archive service specific to an an assembly and subject
+        /// </summary>
+        /// <param name="assembly">The originating assembly</param>
+        /// <param name="subject">The subject</param>
+        [MethodImpl(Inline)]
+        public static IAsmCodeArchive CodeArchive(AssemblyId assembly, string subject)
+            => AsmCodeArchive.Create(assembly.ToString().ToLower(), subject);
+
+        /// <summary>
         /// Instantiates an asm decoder service
         /// </summary>
         /// <param name="metadata">If specified, defines the clr metadata index that the decoder can use to associate native code with cil code</param>
@@ -114,6 +123,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static IAsmDecoder Decoder(IAsmContext context, int? bufferlen = null)
             => AsmDecoder.Create(context);
+        
 
         /// <summary>
         /// Allocates a caller-disposed asm text writer and, as determined by the configuration, emits a file header

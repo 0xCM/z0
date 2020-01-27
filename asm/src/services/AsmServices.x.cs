@@ -12,7 +12,7 @@ namespace Z0
 
     using static zfunc;
 
-    public static class AsmServicesX
+    public static partial class AsmExtend
     {
         public static void CaptureAsm(this Delegate src, IAsmWriter dst)
             => dst.Write(NativeCapture.capture(src,dst.TakeBuffer()));
@@ -27,7 +27,10 @@ namespace Z0
             => iter(methods, m => m.CaptureAsm(arg, dst));
 
         public static IAsmCodeArchive CodeArchive(this AssemblyId assembly, string subject)
-            => AsmCodeArchive.Create(assembly, subject);
+            => AsmServices.CodeArchive(assembly,subject);
 
+        public static IAsmCodeIndex ToCodeIndex(this IEnumerable<AsmCode> code, bool generic)
+            => AsmCodeIndex.Create(code,generic);
     }
+
 }

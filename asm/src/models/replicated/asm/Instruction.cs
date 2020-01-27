@@ -5,6 +5,8 @@
 namespace Z0.AsmSpecs
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Diagnostics;
 
     public class Instruction
     {
@@ -451,6 +453,28 @@ namespace Z0.AsmSpecs
         // Summary:
         //     Checks if it's a call far [mem] instruction
         public bool IsCallFarIndirect {get; set;}
+
+		/// <summary>
+		/// Creates an instruction
+		/// </summary>
+		/// <param name="code">Code value</param>
+		/// <param name="memory">Memory operand</param>
+		public static Instruction Create(Code code, in MemoryOperand memory) {
+			Instruction instruction = default;
+			instruction.Code = code;
+
+			instruction.Op0Kind = OpKind.Memory;
+			instruction.MemoryBase = memory.Base;
+			instruction.MemoryIndex = memory.Index;
+			instruction.MemoryIndexScale = memory.Scale;
+			instruction.MemoryDisplSize = memory.DisplSize;
+			instruction.MemoryDisplacement = (uint)memory.Displacement;
+			instruction.IsBroadcast = memory.IsBroadcast;
+			instruction.SegmentPrefix = memory.SegmentPrefix;
+
+			Debug.Assert(instruction.OpCount == 1);
+			return instruction;
+		}
 
 		/// <summary>
 		/// Gets an operand's kind if it exists (see <see cref="OpCount"/>)
