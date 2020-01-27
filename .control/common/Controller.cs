@@ -30,23 +30,10 @@ namespace Z0
 
         public abstract void Execute();       
 
-        protected IEnumerable<IOperationCatalog> Catalogs
-            => Designators.Control.Designated.Catalogs;
-
-        protected IEnumerable<IAssemblyDesignator> Designates
-            => Designators.Control.Designated.Designates;
-
         protected Option<IOperationCatalog> FindCatalog(AssemblyId id)
             =>  Designators.Control.Designated.FindCatalog(id);
             
-        protected IOperationCatalog MathCatalog
-            => Designators.Control.Designated.MathCatalog;
 
-        protected IOperationCatalog IntrinsicsCatalog
-            => Designators.Control.Designated.IntrinsicsCatalog;
-
-        protected IOperationCatalog BitCoreCatalog
-            => Designators.Control.Designated.BitCoreCatalog;
 
     }
 }

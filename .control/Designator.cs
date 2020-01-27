@@ -17,6 +17,14 @@ namespace Z0.Designators
     /// </summary>
     public sealed class Control : AssemblyDesignator<Control>
     {
+        const AssemblyId Identity = AssemblyId.Control;
+
+        public override AssemblyId Id
+            => Identity;
+
+        public override AssemblyRole Role
+            => AssemblyRole.Controller;
+            
         public override IEnumerable<IAssemblyDesignator> Designates
             => items<IAssemblyDesignator>(            
             
@@ -75,18 +83,6 @@ namespace Z0.Designators
                 where d is ICatalogProvider
                 select (d as ICatalogProvider).Catalog;
 
-        public IOperationCatalog MathCatalog
-            => (D.GMath.Designated as ICatalogProvider).Catalog;
-
-        
-        public IOperationCatalog IntrinsicsCatalog
-            => (D.Intrinsics.Designated as ICatalogProvider).Catalog;
-
-
-        public IOperationCatalog BitCoreCatalog
-            => (D.BitCore.Designated as ICatalogProvider).Catalog;
-
-
         public Option<IOperationCatalog> FindCatalog(AssemblyId id)
         {
             var catalog =(from d in Designated.Designates
@@ -96,10 +92,6 @@ namespace Z0.Designators
                 return some(catalog);
             else
                 return default;
-        }
-                
-
-
-
+        }            
    }
 }

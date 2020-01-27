@@ -8,10 +8,12 @@ namespace Z0.Designators
 
     public sealed class Intrinsics : AssemblyDesignator<Intrinsics>
     {        
+        const AssemblyId Identity = AssemblyId.Intrinsics;
+
         public override AssemblyId Id 
-            => AssemblyId.Intrinsics;
+            => Identity;
 
         public override IOperationCatalog Catalog 
-            => new Catalog();
+            => new Catalog(Identity);
     }
 }

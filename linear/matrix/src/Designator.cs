@@ -6,10 +6,9 @@ namespace Z0.Designators
 {
     public sealed class Matrix : AssemblyDesignator<Matrix>
     {
+        const AssemblyId Identity = AssemblyId.Matrix;
+
         public override AssemblyId Id 
-            => AssemblyId.Matrix;            
-
+            => Identity;
     }
-
-
 }

@@ -17,18 +17,19 @@ namespace Z0
 
     class AsmCatalogEmitter : IAsmCatalogEmitter
     {
-        public static AsmCatalogEmitter Create(IOperationCatalog catalog)
-            => new AsmCatalogEmitter(catalog);
+        public static AsmCatalogEmitter Create(IAsmContext context, IOperationCatalog catalog)
+            => new AsmCatalogEmitter(context,catalog);
 
-        AsmCatalogEmitter(IOperationCatalog catalog)
+        AsmCatalogEmitter(IAsmContext context, IOperationCatalog catalog)
         {
+            this.Context = context;
             this.Catalog = catalog;
-            this.ClrMetadata = ClrMetadataIndex.Create(catalog.DeclaringAssembly);
-            this.Decoder = AsmServices.Decoder(ClrMetadata, 12*1024);
+            this.Decoder = AsmServices.Decoder(context, 12*1024);
             this.UseGroups = true;
         }
 
-        readonly ClrMetadataIndex ClrMetadata;
+        readonly IAsmContext Context;
+
 
         public IOperationCatalog Catalog {get;}
 
@@ -171,12 +172,12 @@ namespace Z0
         }
 
         IAsmFunctionArchive Archive(string subject)
-            => AsmServices.FunctionArchive(Catalog.CatalogName, subject);
+            => AsmServices.FunctionArchive(Context, Catalog.CatalogName, subject);
 
         static byte[] ImmSelection => new byte[]{5,9,13};
 
         IAsmImmCapture ImmCaptureSvc(MethodInfo src, Moniker baseid)
-            => AsmServices.UnaryImmCapture(src, baseid);
+            => AsmServices.UnaryImmCapture(Context,src, baseid);
 
         string ArchiveSubject(Type host, bool imm)
             => imm ? concat(host.Name.ToLower(), "_imm") : host.Name.ToLower();

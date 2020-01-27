@@ -11,9 +11,9 @@ namespace Z0.Designators
     /// </summary>
     public sealed class LinearOps : AssemblyDesignator<LinearOps>
     {
+        const AssemblyId Identity = AssemblyId.LinearOps;
+
         public override AssemblyId Id 
-            => AssemblyId.LinearOps;            
-
+            => Identity;            
     }
-
 }

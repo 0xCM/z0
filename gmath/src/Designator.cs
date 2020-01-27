@@ -8,10 +8,12 @@ namespace Z0.Designators
 
     public sealed class GMath : AssemblyDesignator<GMath>
     {
+        const AssemblyId Identity = AssemblyId.GMath;
+
         public override AssemblyId Id 
-            => AssemblyId.GMath;            
+            => Identity;
 
         public override IOperationCatalog Catalog 
-            => new Catalog();
+            => new Catalog(Identity);
     }
 }

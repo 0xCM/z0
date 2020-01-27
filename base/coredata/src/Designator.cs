@@ -5,10 +5,6 @@
 namespace Z0.Designators
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    using System.IO;
     
     using static zfunc;
 
@@ -17,10 +13,12 @@ namespace Z0.Designators
     /// </summary>
     public sealed class CoreData : AssemblyDesignator<CoreData>
     {
+        const AssemblyId Identity = AssemblyId.CoreData;
+
         public override AssemblyId Id 
-            => AssemblyId.CoreData;
+            => Identity;
 
         public override IOperationCatalog Catalog 
-            => new Catalog();
+            => new Catalog(Identity);
     }
 }

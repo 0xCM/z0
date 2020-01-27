@@ -18,42 +18,31 @@ namespace Z0
     {
         readonly FolderPath TargetFolder;
         
-        readonly AsmArchiveConfig ArchiveConfig;
-
-        readonly AsmFormatConfig FormatConfig;
 
         readonly AsmFormatConfig GroupFormatConfig;
 
-        readonly IAsmContentFormatter DefaultFormatter;
+        readonly IAsmFunctionFormatter DefaultFormatter;
 
-        readonly IAsmContentFormatter GroupFormatter;
+        readonly IAsmFunctionFormatter GroupFormatter;
+
+        readonly IAsmContext Context;
 
         public string Catalog {get;}
 
         public string Subject {get;}
 
-        public static IAsmFunctionArchive Create(string catalog, string subject)
-            => new AsmFunctionArchive(catalog,subject, AsmArchiveConfig.Default);
+        public static IAsmFunctionArchive Create(IAsmContext context, string catalog, string subject)
+            => new AsmFunctionArchive(context, catalog,subject);
 
-        public static IAsmFunctionArchive Create(AssemblyId id, string subject)
-            => Create(id.ToString().ToLower(),subject);
-
-        public static IAsmFunctionArchive Create(AssemblyId id, Type subject)
-            => Create(id.ToString().ToLower(),subject.Name.ToLower());
-
-        static AsmFormatConfig ConfigureGroupFormatting()
-            => AsmFormatConfig.Default.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
-
-        AsmFunctionArchive(string catalog, string subject, AsmArchiveConfig archiveConfig)
+        AsmFunctionArchive(IAsmContext context, string catalog, string subject)
         {
+            this.Context = context;
             this.Catalog = catalog;
             this.Subject = subject;
             this.TargetFolder = Paths.AsmDataDir(RelativeLocation.Define(catalog, subject));
-            this.ArchiveConfig = archiveConfig;
-            this.FormatConfig = AsmFormatConfig.Default;
-            this.DefaultFormatter = AsmServices.Formatter(FormatConfig);
-            this.GroupFormatConfig = ConfigureGroupFormatting();
-            this.GroupFormatter = AsmServices.Formatter(GroupFormatConfig);
+            this.DefaultFormatter = AsmServices.Formatter(context);
+            this.GroupFormatConfig = AsmFormatConfig.Default.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
+            this.GroupFormatter = AsmServices.Formatter(context.WithFormat(GroupFormatConfig));
         }
 
         public AsmEmissionToken Save(AsmFunction src)
@@ -74,9 +63,6 @@ namespace Z0
                 dst.WriteLine(GroupFormatConfig.SectionDelimiter);
         }
 
-        // string FormatHexLine(AsmFunction f, int idpad)
-        //     => concat(f.Id.Text.PadRight(idpad), space(), f.Code.Encoded.FormatAsmHex());
-
         Option<Exception> WriteAsmHex(AsmFunctionGroup src)
         {
             try
@@ -95,13 +81,14 @@ namespace Z0
 
         Option<Exception> WriteCilDetail(AsmFunctionGroup src)
         {
-            if(!src.Members.Select(f => f.Cil.IsSome()).Any())
+            var emittable = src.Members.Where(f => f.Cil.IsSome()).ToArray();
+            if(emittable.Length == 0)
                 return default;
             try
-            {
+            {                
                 using var cilwriter = new StreamWriter(CilPath(src.Id).FullPath,false);
                 foreach(var f in src.Members)
-                    f.Cil.OnSome(cil => Write(cil,cilwriter));
+                    f.Cil.OnSome(cil => Write(cil, cilwriter));
                 return default;
             }
             catch(Exception e)
@@ -130,27 +117,12 @@ namespace Z0
         }
 
         FilePath HexPath(Moniker m)
-        {
-            if(ArchiveConfig.SingleFile)
-                return Paths.AsmDataDir(FolderName.Define(Catalog)).CreateIfMissing() + FileName.Define(Subject, Paths.HexExt);
-            else
-                return Paths.AsmDataDir(RelativeLocation.Define(Catalog, Subject)).CreateIfMissing() + Paths.AsmHexFile(m);
-        }
+            => Paths.AsmDataDir(RelativeLocation.Define(Catalog, Subject)).CreateIfMissing() + Paths.AsmHexFile(m);
 
         FilePath DetailPath(Moniker m)
-        {
-            if(ArchiveConfig.SingleFile)
-                return Paths.AsmDataDir(FolderName.Define(Catalog)).CreateIfMissing() + FileName.Define(Subject, Paths.AsmExt);
-            else
-                return Paths.AsmDataDir(RelativeLocation.Define(Catalog, Subject)).CreateIfMissing() + Paths.AsmDetailFile(m);
-        }
+            => Paths.AsmDataDir(RelativeLocation.Define(Catalog, Subject)).CreateIfMissing() + Paths.AsmDetailFile(m);
 
         FilePath CilPath(Moniker m)
-        {
-            if(ArchiveConfig.SingleFile)
-                return Paths.AsmDataDir(FolderName.Define(Catalog)).CreateIfMissing() + FileName.Define(Subject, Paths.CilExt);
-            else
-                return Paths.AsmDataDir(RelativeLocation.Define(Catalog, Subject)).CreateIfMissing() + Paths.CilFile(m);
-        }
+            => Paths.AsmDataDir(RelativeLocation.Define(Catalog, Subject)).CreateIfMissing() + Paths.CilFile(m);
     }
 }

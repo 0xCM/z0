@@ -6,28 +6,21 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
+
     using static zfunc;
 
     class Catalog : OpCatalog<Catalog>
     {
-        public Catalog()
+        public Catalog(AssemblyId id)
+            : base(id)
         {
 
         }
         
-        public override IEnumerable<Type> ServiceHosts
-            => array<Type>();
-
         public override IEnumerable<Type> GenericApiHosts
             => items(typeof(BitMatrix), typeof(BitGrid));
 
         public override IEnumerable<Type> DirectApiHosts
-            => items(typeof(BitMatrix), typeof(BitGrid));
-               
-        public override string CatalogName 
-            => "bitgrids";
+            => items(typeof(BitMatrix), typeof(BitGrid));               
     }
 }

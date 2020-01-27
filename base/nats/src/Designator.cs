@@ -5,9 +5,6 @@
 namespace Z0.Designators
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using System.IO;
     
     /// <summary>
@@ -15,10 +12,12 @@ namespace Z0.Designators
     /// </summary>
     public sealed class TypeNats : AssemblyDesignator<TypeNats>
     {
+        const AssemblyId Identity = AssemblyId.TypeNats;
+
         public override AssemblyId Id 
-            => AssemblyId.TypeNats;
+            => Identity;
 
         public override IOperationCatalog Catalog 
-            => new Catalog();
+            => new Catalog(Identity);
     }
 }

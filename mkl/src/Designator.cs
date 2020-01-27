@@ -11,7 +11,10 @@ namespace Z0.Designators
     /// </summary>
     public sealed class MklApi : AssemblyDesignator<MklApi>
     {
-        public override AssemblyId Id => AssemblyId.MklApi;
+        const AssemblyId Identity = AssemblyId.MklApi;
+        
+        public override AssemblyId Id 
+            => Identity;
 
     }
 

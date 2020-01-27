@@ -11,7 +11,8 @@ namespace Z0.Logix
 
     class Catalog : OpCatalog<Catalog>
     {
-        public Catalog()
+        public Catalog(AssemblyId id)
+             : base(id)
         {
 
         }

@@ -51,9 +51,9 @@ namespace Z0
 
         MathObjects,
         
-        MklApi
-    }
+        MklApi,
 
+        Control
+    }
     
-     
 }

@@ -11,10 +11,12 @@ namespace Z0.Designators
     /// </summary>
     public sealed class BitCore : AssemblyDesignator<BitCore>
     {
+        const AssemblyId Identity = AssemblyId.BitCore;
+
         public override AssemblyId Id 
-            => AssemblyId.BitCore;
+            => Identity;
 
         public override IOperationCatalog Catalog 
-            => new Catalog();
+            => new Catalog(Identity);
     }
 }

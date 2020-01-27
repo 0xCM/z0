@@ -8,12 +8,12 @@ namespace Z0.Designators
 
     public sealed class Data : AssemblyDesignator<Data>
     {
+        const AssemblyId Identity = AssemblyId.Data;
+
         public override AssemblyId Id 
-            => AssemblyId.Data;
+            => Identity;
 
         public override IOperationCatalog Catalog 
-            => new Catalog();
-
+            => new Catalog(Identity);
     }
-
 }

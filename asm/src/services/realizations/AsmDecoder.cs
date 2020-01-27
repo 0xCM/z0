@@ -17,27 +17,22 @@ namespace Z0
     
     using Iced = Iced.Intel;
 
-    public class AsmDecoder : IAsmDecoder
+
+    class AsmDecoder : IAsmDecoder
     {
-        internal static IAsmDecoder Create(AsmFormatConfig config, ClrMetadataIndex index = null, int? bufferlen = null)
-            => new AsmDecoder(config, index, bufferlen);
+        public static IAsmDecoder Create(IAsmContext context, int? bufferlen = null)
+            => new AsmDecoder(context, bufferlen);
 
         byte[] _Buffer;
 
-        Option<ClrMetadataIndex> ClrMetadata;
+        readonly IAsmContext Context;
 
-        AsmDecoder(AsmFormatConfig config, ClrMetadataIndex index, int? bufferlen)
+        AsmDecoder(IAsmContext context, int? bufferlen)
         {
-            this.FormatConfig = config;
-            this.ClrMetadata = index;
+            this.Context = context;
             this._Buffer = new byte[bufferlen ?? 4*1024];
         }
-
-        AsmFormatConfig FormatConfig {get;}
         
-        IAsmSpecBuilder SpecBuilder
-            => AsmServices.SpecBuilder();
-
         /// <summary>
         /// Decodes an instruction list
         /// </summary>
@@ -55,9 +50,9 @@ namespace Z0
 			}
 
             var dst = new AsmSpecs.Instruction[decoded.Count];
-            var formatted = AsmServices.BaseFormatter().CaptureBaseFormat(decoded,src.Origin.Start);
+            var formatted = AsmServices.BaseFormatter(Context).CaptureBaseFormat(decoded,src.Origin.Start);
             for(var i=0; i<dst.Length; i++)
-                dst[i] =  SpecBuilder.Instruction(decoded[i],formatted[i]);
+                dst[i] =  decoded[i].ToSpec(formatted[i]);
             return AsmInstructionList.Create(dst);
         }
 
@@ -69,7 +64,7 @@ namespace Z0
         {
             var list = DecodeList(src.Code);
             var block = AsmSpecs.AsmInstructionBlock.Define(src.Code, list, src.CaptureInfo.TermCode);
-            var cil = ClrMetadata.MapValueOrDefault(idx => idx.FindCilFunction(src.Method).ValueOrDefault());
+            var cil = Context.ClrIndex.FincCil(src.Method).ValueOrDefault();
             return BuildFunction(block).WithCil(cil);            
         }
 

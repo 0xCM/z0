@@ -15,9 +15,9 @@ namespace Z0
  
     public static class DataResourceReport
     {
-        public static void Create(IOperationCatalog catalog)
+        public static DataResourceIndex Create(DataResourceIndex resources, string subject)
         {            
-            var dst = Paths.AsmDataDir(FolderName.Define(catalog.CatalogName)) + FileName.Define("data", "csv");
+            var dst = Paths.AsmDataRoot + FileName.Define(subject, "csv");
             dst.FolderPath.CreateIfMissing();
             var delimter = spaced(pipe());
             var header = concat(
@@ -29,13 +29,12 @@ namespace Z0
             var start = 0ul;
             using var writer = new StreamWriter(dst.Name, false);  
             writer.WriteLine(header);         
-            foreach(var r in catalog.Resources.OrderBy(x => x.Location))
+            foreach(var r in resources.Indexed.OrderBy(x => x.Location))
             {
                 if(start == 0)
                     start = r.Location;
                     
                 var offset = r.Location - start;
-
                 
                 var description = concat(
                         offset.FormatAsmHex(4).PadRight(8), delimter,
@@ -44,6 +43,7 @@ namespace Z0
                         r.Id);
                 writer.WriteLine(description);
             }
+            return resources;
         }
     }
 }

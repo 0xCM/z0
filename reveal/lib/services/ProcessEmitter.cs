@@ -16,17 +16,24 @@ namespace Z0
 
     readonly struct AsmProcessEmitter : IAsmProcessEmitter
     {
-        public static IAsmProcessEmitter Create()
-            => default(AsmProcessEmitter);
+        readonly IAsmContext Context;
+
+        public static IAsmProcessEmitter Create(IAsmContext context)
+            => new AsmProcessEmitter(context);
+
+        AsmProcessEmitter(IAsmContext context)
+        {
+            Context = context;
+        }
             
         public void EmitFunctions(Type host)
         {
             var outdir = Paths.AsmDumpDir.CreateIfMissing();         
             var name = host.DisplayName();
-            using var capture = AsmProcessServices.Capture(host.Module);
+            using var capture = AsmProcessServices.Capture(Context);
             var functions = capture.CaptureFunctions(host);
             var outpath = outdir + FileName.Define(name, Paths.AsmExt);
-            var emitter = AsmServices.CodeEmitter(outdir, AsmFormatConfig.Default.WithSectionDelimiter());
+            var emitter = AsmServices.CodeEmitter(Context, outdir);
             emitter.EmitAsm(functions, FileName.Define(name, Paths.AsmExt));
             EmitCil(functions, name);                
         }

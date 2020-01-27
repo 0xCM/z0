@@ -11,7 +11,9 @@ namespace Z0.Designators
     /// </summary>
     public sealed class MathObjects : AssemblyDesignator<MathObjects>
     {
-        public override AssemblyId Id => AssemblyId.MathObjects;
+        const AssemblyId Identity = AssemblyId.MathObjects;
 
+        public override AssemblyId Id 
+            => Identity;
     }
 }

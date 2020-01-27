@@ -12,25 +12,25 @@ namespace Z0
 
     class App
     {                
-        void EmitFunctions(Type host)
-            => AsmProcessServices.Emitter().EmitFunctions(host);
-
-        void EmitFunctions<T>()
-            => EmitFunctions(typeof(T));
-
-        void Extract()
+        void EmitAll()
         {                        
             new ExperimentalScenarios().Emit();
             new PrimalScenarios().Emit();
-            iter(GetType().Assembly.Types().WithAttributions(typeof(OpCodeProvider)), EmitFunctions);
+            var a = GetType().Assembly;
+            var clridx = ClrMetadataIndex.Create(a);
+            var context = AsmServices.Context(clridx, DataResourceIndex.Empty, AsmFormatConfig.Default);
+            foreach(var t in a.GetTypes().WithAttributions(typeof(OpCodeProvider)))
+            {
+                var emitter = AsmProcessServices.Emitter(context);
+                emitter.EmitFunctions(t);                
+            }
         }
 
         void Run()
-        {
-
+        {                
             try
             {
-                Extract();
+                EmitAll();
             }
             catch(Exception e)
             {

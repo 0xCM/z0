@@ -18,6 +18,8 @@ namespace Z0.Designators
     /// </summary>
     public sealed class CpuData : AssemblyDesignator<CpuData>
     {
+        public override AssemblyRole Role 
+            => AssemblyRole.Library;
 
     }
 

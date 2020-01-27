@@ -17,14 +17,17 @@ namespace Z0
 
         private EnvConfig()
         {
-
-        }
         
+        }
+
         FolderPath OutputFolder
-            => FolderPath.Define(@"J:\dev\projects\z0-logs");
+            =>  FolderPath.Define(Settings.LogDir);
+
+        // FolderPath OutputFolder
+        //     =>  FolderPath.Define(@"J:\dev\projects\z0-logs");
 
         FolderPath DevRoot
-            => FolderPath.Define(@"J:\dev\projects\z0");
+            => FolderPath.Define(Settings.DevRoot);
 
         FolderPath ApiFolder
             => DevRoot + FolderName.Define("api");
@@ -36,7 +39,7 @@ namespace Z0
             => OutputFolder + FolderName.Define("test");
 
         FolderPath ConfigFolder
-            => DevRoot + FolderName.Define(".config");
+            => DevRoot + FolderName.Define(".settings");
 
         public FilePath ConfigPath(FileName file)
             => ConfigFolder + file;

@@ -11,11 +11,13 @@ namespace Z0.Designators
     /// </summary>
     public sealed class BitVectors : AssemblyDesignator<BitVectors>, ICatalogProvider
     {
+        const AssemblyId Identity = AssemblyId.BitVectors;
+
         public override AssemblyId Id 
-            => AssemblyId.BitVectors;
+            => Identity;
 
         public override IOperationCatalog Catalog 
-            => new Catalog();
+            => new Catalog(Identity);
     }
 }
 

@@ -6,11 +6,6 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-
-  <ItemGroup>
-    <Compile Include="../.settings/Settings.cs" />
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="../base/corefunc/src/z0.corefunc.csproj" />
   </ItemGroup>

@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-
     public abstract class Deconstructable<T> : IDeconstructable<T>
         where T : Deconstructable<T>
     {        
@@ -28,9 +27,12 @@ namespace Z0
 
         public void Emit()
         {
-            using var capture = AsmProcessServices.Capture(typeof(T).Module);
-            var deconstructed = capture.CaptureFunctions(typeof(T));
-            var emitter = AsmServices.CodeEmitter(TargetFolder, AsmFormatConfig.Default.WithSectionDelimiter());
+            var host = typeof(T);
+            var clridx = ClrMetadataIndex.Create(host.Assembly);
+            var context = AsmServices.Context(clridx, DataResourceIndex.Empty, AsmFormatConfig.Default.WithSectionDelimiter());
+            using var capture = AsmProcessServices.Capture(context);
+            var deconstructed = capture.CaptureFunctions(host);
+            var emitter = AsmServices.CodeEmitter(context,TargetFolder);
             emitter.EmitAsm(deconstructed, AsmFileName);
             emitter.EmitCil(deconstructed, CilFileName);
         }

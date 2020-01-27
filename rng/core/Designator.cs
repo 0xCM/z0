@@ -8,6 +8,9 @@ namespace Z0.Designators
 
     public sealed class RngCore : AssemblyDesignator<RngCore>
     {
-        public override AssemblyId Id => AssemblyId.RngCore;
+        const AssemblyId Identity = AssemblyId.RngCore;
+
+        public override AssemblyId Id 
+            => AssemblyId.RngCore;
     }
 }

@@ -14,7 +14,17 @@ namespace Z0
 
     public interface IAsmContext : IOpContext
     {
-        AsmFormatConfig FormatConfig {get;}
+        IClrIndex ClrIndex {get;}
+
+        AsmFormatConfig AsmFormat {get;}
+
+        DataResourceIndex Resources {get;}
+
+
+        IAsmContext WithFormat(AsmFormatConfig config);
+
+        IAsmContext WithEmptyClrIndex();
+
     }
 
 }

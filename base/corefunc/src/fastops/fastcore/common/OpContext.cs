@@ -14,6 +14,8 @@ namespace Z0
     {
         
     }
+
+    
     public abstract class OpContext<T> : Context<T>, IOpContext
         where T : OpContext<T>
     {                

@@ -18,23 +18,26 @@ namespace Z0
     
     class ProcessCapture : IAsmProcessCapture
     {
-        public static IAsmProcessCapture Create(params Module[] modules)
-            => new ProcessCapture(modules);
+        public static IAsmProcessCapture Create(IAsmContext context)
+            => new ProcessCapture(context);
+
+        readonly IAsmContext Context;
+        
+        readonly IClrIndex ClrIndex;
 
         readonly DataTarget Target;
 
         readonly ClrRuntime Runtime;
 
-        readonly ClrMetadataIndex MdIx;
-
         readonly IAsmDecoder Decoder;
 
-        ProcessCapture(IEnumerable<Module> modules)
+        ProcessCapture(IAsmContext context)
         {            
+            Context = context;
+            ClrIndex = context.ClrIndex;;
             Target = DataTarget.AttachToProcess(Process.GetCurrentProcess().Id, uint.MaxValue, AttachFlag.Passive);
             Runtime = CreateRuntime(Target);
-            MdIx = ClrMetadataIndex.Create(modules.ToArray());
-            Decoder = AsmServices.Decoder(MdIx);
+            Decoder = AsmServices.Decoder(context, 12*1024);
         }
             
         void IDisposable.Dispose()
@@ -61,7 +64,6 @@ namespace Z0
                     yield return d.Value;                    
             }            
         }
-
         public AsmFunction[] CaptureFunctions(Type src)
             => CaptureFunctions(src.DeclaredMethods().NonGeneric().Concrete().NonSpecial()).ToArray();
 
@@ -78,17 +80,14 @@ namespace Z0
         /// <param name="rt">The source runtime</param>
         /// <param name="src">The represented method</param>
         Option<ClrMethod> GetRuntimeMethod(MethodInfo src)
-        {
-            return Runtime.GetMethodByHandle((ulong)src.MethodHandle.Value.ToInt64());
-        }
+            => Runtime.GetMethodByHandle((ulong)src.MethodHandle.Value.ToInt64());
 
 		Option<MemberCapture> CaptureNative(MethodInfo method, ClrMethod runtime)
 		{
 			var codeInfo = runtime.HotColdInfo;	
             var id = OpIdentity.Provider.DefineIdentity(method);
             var address = codeInfo.HotStart;
-            var size = codeInfo.HotSize;
-            
+            var size = codeInfo.HotSize;            
 
 			var label = method.Signature().Format();
             if (address == 0)

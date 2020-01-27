@@ -5,19 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
     
     using static zfunc;
 
     class Catalog : OpCatalog<Catalog>
     {
-        public override string CatalogName 
-            => "data";
-        
-        public override IEnumerable<DataResource> Resources
-            => Data.GetDescriptions();        
+        public Catalog(AssemblyId id)
+            : base(id, DataResourceIndex.Create(Data.Resources))
+        {
+
+        }
     }
 }

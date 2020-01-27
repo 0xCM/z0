@@ -45,15 +45,26 @@ namespace Z0
         /// </summary>
         IEnumerable<Type> DirectApiHosts {get;}
 
-        IEnumerable<DataResource> Resources {get;}
+        /// <summary>
+        /// Th global data resource index
+        /// </summary>
+        DataResourceIndex Resources {get;}
 
         /// <summary>
         /// The assembly that implements the operations described by the catalog
         /// </summary>
         Assembly DeclaringAssembly {get;}    
-                 
+                         
+        /// <summary>
+        /// Identifies the declaring assembly
+        /// </summary>
+        AssemblyId AssemblyId {get;}
 
+        /// <summary>
+        /// Specifies whether the catalog is vacuous
+        /// </summary>
         bool IsEmpty {get;}
+
 
     }
 }

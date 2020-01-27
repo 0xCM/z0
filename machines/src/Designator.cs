@@ -8,6 +8,9 @@ namespace Z0.Designators
 
     public sealed class Machines : AssemblyDesignator<Machines>
     {
-        public override AssemblyId Id => AssemblyId.Machines;
+        const AssemblyId Identity = AssemblyId.Machines;
+
+        public override AssemblyId Id 
+            => Identity;
     }
 }

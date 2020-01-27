@@ -12,15 +12,28 @@ namespace Z0
 
     public sealed class AsmContext : OpContext<AsmContext>, IAsmContext
     {   
-        public static AsmContext Define(AsmFormatConfig format)             
-            => new AsmContext(format,Rng.WyHash64(Seed64.Seed10));
+        public static IAsmContext Define(IClrIndex clrindex, DataResourceIndex resources,  AsmFormatConfig format)             
+            => new AsmContext(clrindex, resources, format, Rng.WyHash64(Seed64.Seed10));
         
-        AsmContext(AsmFormatConfig format, IPolyrand random)
+        AsmContext(IClrIndex clrIndex, DataResourceIndex resources, AsmFormatConfig format, IPolyrand random)
             : base(random)            
         {
-            this.FormatConfig = format;
+            this.ClrIndex = clrIndex;
+            this.Resources = resources;
+            this.AsmFormat = format;
         }
 
-        public AsmFormatConfig FormatConfig {get;}
+        public IClrIndex ClrIndex {get;}
+
+        public DataResourceIndex Resources {get;}
+        
+        public AsmFormatConfig AsmFormat {get;}
+
+        public IAsmContext WithFormat(AsmFormatConfig config)
+            => new AsmContext(ClrIndex, Resources, config, Random);
+
+        public IAsmContext WithEmptyClrIndex()
+            => new AsmContext(ClrMetadataIndex.Empty, Resources, AsmFormat, Random);
+
     }   
 }

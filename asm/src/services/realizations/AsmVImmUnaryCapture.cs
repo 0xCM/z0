@@ -19,15 +19,18 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static IAsmImmCapture<T> Create(IVUnaryImm8Resolver128<T> resolver)
-            => new AsmV128ImmUnaryCapture<T>(resolver);
+        public static IAsmImmCapture<T> Create(IAsmContext context, IVUnaryImm8Resolver128<T> resolver)
+            => new AsmV128ImmUnaryCapture<T>(context, resolver);
 
         readonly IVUnaryImm8Resolver128<T> Resolver;
 
+        readonly IAsmContext Context;
+
         [MethodImpl(Inline)]
-        AsmV128ImmUnaryCapture(IVUnaryImm8Resolver128<T> resolver)
+        AsmV128ImmUnaryCapture(IAsmContext context, IVUnaryImm8Resolver128<T> resolver)
         {
             this.Resolver = resolver;
+            this.Context = context;
 
         }
         
@@ -44,17 +47,20 @@ namespace Z0
     readonly struct AsmV256ImmUnaryCapture<T> : IAsmImmCapture<T>
         where T : unmanaged
     {
+        readonly IAsmContext Context;
+
         readonly IVUnaryImm8Resolver256<T> Resolver;
 
         [MethodImpl(Inline)]
-        public static IAsmImmCapture<T> Create(IVUnaryImm8Resolver256<T> resolver)
-            => new AsmV256ImmUnaryCapture<T>(resolver);
+        public static IAsmImmCapture<T> Create(IAsmContext context, IVUnaryImm8Resolver256<T> resolver)
+            => new AsmV256ImmUnaryCapture<T>(context,resolver);
 
 
         [MethodImpl(Inline)]
-        AsmV256ImmUnaryCapture(IVUnaryImm8Resolver256<T> resolver)
+        AsmV256ImmUnaryCapture(IAsmContext context, IVUnaryImm8Resolver256<T> resolver)
         {
             this.Resolver = resolver;
+            this.Context = context;
         }
 
         public AsmFunction Capture(byte imm8)

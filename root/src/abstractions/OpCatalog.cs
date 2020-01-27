@@ -12,28 +12,56 @@ namespace Z0
     public abstract class OpCatalog<C> : IOperationCatalog
         where C : OpCatalog<C>
     {
-        public virtual string CatalogName
+        // {
+        //     get 
+        //     {
+        //         if(AssemblyId != AssemblyId.None)
+        //             return AssemblyId.ToString().ToLower();
+        //         else
+        //         {
+        //             var name = DeclaringAssembly.GetName().Name;
+        //             var parts = name.Split('.');
+        //             if(parts.Length != 0)
+        //                 return parts.Last();
+        //             else
+        //                 return name;
+        //         }
+        //     }
+        // }
+
+        protected OpCatalog()
         {
-            get 
-            {
-                if(DeclaringAssembly.Designator(out var designator) && designator.Id != AssemblyId.None)
-                {
-                    return designator.Id.ToString().ToLower();
-                }
-                else
-                {
-                    var name = DeclaringAssembly.GetName().Name;
-                    var parts = name.Split('.');
-                    if(parts.Length != 0)
-                        return parts.Last();
-                    else
-                        return name;
-                }
-            }
-        }
+            if(DeclaringAssembly.Designator(out var designator))
+                AssemblyId = designator.Id;
+            else
+                AssemblyId = AssemblyId.None;
+            this.CatalogName = AssemblyId.ToString().ToLower();
             
-        public virtual bool IsEmpty
-            => false;            
+        }
+
+        protected OpCatalog(AssemblyId id)
+        {
+            AssemblyId = id;
+            CatalogName = id.ToString().ToLower();
+
+        }
+        
+        protected OpCatalog(AssemblyId id, DataResourceIndex resources)
+            : this(id)
+        {
+            Resources = resources;
+        }
+
+        public Assembly DeclaringAssembly {get;} 
+            = typeof(C).Assembly;
+
+        public virtual AssemblyId AssemblyId {get;}
+
+        public virtual string CatalogName {get;}
+
+        public virtual bool IsEmpty {get;}
+            = false;
+
         public virtual IEnumerable<GenericOpSpec> GenericOps 
             => new GenericOpSpec[]{};
 
@@ -52,11 +80,19 @@ namespace Z0
         public virtual IEnumerable<Type> DirectApiHosts
             => new Type[]{};
 
-        public Assembly DeclaringAssembly 
-            => typeof(C).Assembly;
+        public DataResourceIndex Resources  {get; private set;}
+            = DataResourceIndex.Empty;
 
-        public virtual IEnumerable<DataResource> Resources 
-            => new DataResource[]{};
+        public void Share(DataResourceIndex resources)
+        {
+            if(Resources.IsEmpty)
+                Resources = resources;
+            else
+                Merge(resources);
+        }
+        
+        void Merge(DataResourceIndex src)        
+            => Resources.Merge(src);
     }
 
     public sealed class EmptyCatalog : OpCatalog<EmptyCatalog>
@@ -64,6 +100,10 @@ namespace Z0
         public override bool IsEmpty => true;
 
         public override string CatalogName => "empty";
+
+        public override AssemblyId AssemblyId => AssemblyId.None;
+
+        
     }
 
 }

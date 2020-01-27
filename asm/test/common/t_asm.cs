@@ -17,16 +17,20 @@ namespace Z0
     {
         protected INativeExecBuffer AsmBuffer;
 
-        INativeExecBuffer[] AsmBuffers;
+        protected IAsmContext AsmContext;
 
+        INativeExecBuffer[] AsmBuffers;
+        
         public t_asm()
         {
+            AsmContext = AsmServices.Context(ClrMetadataIndex.Empty, DataResourceIndex.Empty, AsmFormatConfig.Default);
             AsmBuffer = NativeServices.ExecBuffer();
             AsmBuffers = new INativeExecBuffer[]{
                 NativeServices.ExecBuffer(),
                 NativeServices.ExecBuffer()
             };
         }
+
         public void Dispose()
         {
             AsmBuffer.Dispose();
@@ -49,7 +53,7 @@ namespace Z0
         protected IAsmWriter AsmTestWriter(AsmFormatConfig format, [Caller] string test = null)
         {
             var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, Paths.AsmExt);    
-            return AsmServices.Writer(path,format);
+            return AsmServices.Writer(AsmContext.WithFormat(format), path);
         }
 
         protected void CheckAsmMatch<T>(BinaryOp<T> f, AsmCode asm)

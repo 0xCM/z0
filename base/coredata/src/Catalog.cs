@@ -6,21 +6,13 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
 
     class Catalog : OpCatalog<Catalog>
     {
-        public Catalog()
+        public Catalog(AssemblyId id)
+            : base(id)
         {
 
-        }
-        
-        public override IEnumerable<Type> GenericApiHosts
-            => new Type[]{};
-               
-        public override string CatalogName 
-            => "coredata";
+        }        
     }
 }

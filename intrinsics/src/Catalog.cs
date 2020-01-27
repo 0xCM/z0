@@ -6,13 +6,17 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
+
     using static zfunc;
 
     class Catalog : OpCatalog<Catalog>
     {
+        public Catalog(AssemblyId id)
+            : base(id)
+        {
+
+        }
+
         public override IEnumerable<Type> ServiceHosts
             => typeof(VXTypes).GetNestedTypes().Realize<IFunc>();
 
@@ -20,9 +24,6 @@ namespace Z0
             => items(typeof(ginx),typeof(vblocks),typeof(VPattern));
 
         public override IEnumerable<Type> DirectApiHosts
-            => items(typeof(dinx));
-               
-        // public override string CatalogName 
-        //     => nameof(ginx);
+            => items(typeof(dinx));               
     }
 }

@@ -11,10 +11,12 @@ namespace Z0.Designators
     /// </summary>
     public sealed class BitGrids : AssemblyDesignator<BitGrids>
     {
-        public override AssemblyId Id 
-            => AssemblyId.BitGrids;
+        const AssemblyId Identity = AssemblyId.BitGrids;
 
+        public override AssemblyId Id 
+            => Identity;
+        
         public override IOperationCatalog Catalog 
-            => new Catalog();        
+            => new Catalog(Identity);        
     }
 }

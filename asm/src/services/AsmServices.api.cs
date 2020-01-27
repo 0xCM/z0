@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using AsmSpecs;
 
@@ -14,64 +16,67 @@ namespace Z0
 
     public static class AsmServices
     {        
-        public static AsmContext Context(AsmFormatConfig format = null)
-            => AsmContext.Define(format);
+        public static IClrIndex IndexAssembly(Assembly assembly)
+            => ClrMetadataIndex.Create(assembly.Modules.ToArray());
+            
+        public static IAsmContext Context()
+            => Context(ClrMetadataIndex.Empty, DataResourceIndex.Empty, AsmFormatConfig.Default);
+            
+        public static IAsmContext Context(IClrIndex index, DataResourceIndex residx, AsmFormatConfig format)
+            => AsmContext.Define(index, residx, format);
 
-        public static IAsmSpecBuilder SpecBuilder()
-            => default(AsmSpecBuilder);
-
-        public static IAsmImmCapture<T> ImmCapture<T>(IImm8Resolver<T> resolver)
+        public static IAsmImmCapture<T> ImmCapture<T>(IAsmContext context, IImm8Resolver<T> resolver)
             where T : unmanaged        
             => resolver switch {
-                IVUnaryImm8Resolver128<T> r => AsmV128ImmUnaryCapture<T>.Create(r),
-                IVUnaryImm8Resolver256<T> r => AsmV256ImmUnaryCapture<T>.Create(r),
-                IVBinaryImm8Resolver128<T> r => AsmV128ImmBinaryCapture<T>.Create(r),
-                IVBinaryImm8Resolver256<T> r => AsmV256ImmBinaryCapture<T>.Create(r),
+                IVUnaryImm8Resolver128<T> r => AsmV128ImmUnaryCapture<T>.Create(context,r),
+                IVUnaryImm8Resolver256<T> r => AsmV256ImmUnaryCapture<T>.Create(context,r),
+                IVBinaryImm8Resolver128<T> r => AsmV128ImmBinaryCapture<T>.Create(context,r),
+                IVBinaryImm8Resolver256<T> r => AsmV256ImmBinaryCapture<T>.Create(context,r),
                 _ => throw unsupported(resolver.GetType())
             };   
 
         [MethodImpl(Inline)]
-        public static IAsmImmCapture UnaryImmCapture(MethodInfo src, Moniker baseid)
-            => AsmImmUnaryCapture.Create(src,baseid);
+        public static IAsmImmCapture UnaryImmCapture(IAsmContext context, MethodInfo src, Moniker baseid)
+            => AsmImmUnaryCapture.Create(context, src,baseid);
 
         /// <summary>
         /// Instantiates a catalog emitter service
         /// </summary>
-        /// <param name="src">The catalog over which the emitter will be created</param>
+        /// <param name="context">The context that specifies the catalog over which the emitter will be created</param>
         [MethodImpl(Inline)]
-        public static IAsmCatalogEmitter CatalogEmitter(IOperationCatalog src)
-            => AsmCatalogEmitter.Create(src);
+        public static IAsmCatalogEmitter CatalogEmitter(IAsmContext context, IOperationCatalog catalog)
+            => AsmCatalogEmitter.Create(context,catalog);
 
         /// <summary>
         /// Instantiates a code emitter service over a target folder
         /// </summary>
         /// <param name="dst">The target folder</param>
         [MethodImpl(Inline)]
-        public static IAsmContentEmitter CodeEmitter(FolderPath dst, AsmFormatConfig config)
-            => AsmContentEmitter.Create(dst, config);
+        public static IAsmFunctionEmitter CodeEmitter(IAsmContext context, FolderPath dst)
+            => AsmFunctionEmitter.Create(context, dst);
 
         /// <summary>
         /// Instantiates a function flow service over a source catalog
         /// </summary>
         /// <param name="src">The source catalog</param>
-        public static IAsmFunctionFlow Flow(IOperationCatalog src)
-            => AsmFunctionFlow.Create(src);        
+        public static IAsmFunctionFlow Flow(IAsmContext src, IOperationCatalog catalog)
+            => AsmFunctionFlow.Create(src,catalog);        
 
         /// <summary>
         /// Instantiates an asm formatter service with a specified configuration
         /// </summary>
         /// <param name="config">The configuration to use</param>
         [MethodImpl(Inline)]
-        public static IAsmContentFormatter Formatter(AsmFormatConfig config)
-            => AsmContentFormatter.Create(config);
+        public static IAsmFunctionFormatter Formatter(IAsmContext context)
+            => AsmContentFormatter.Create(context);
         
         /// <summary>
         /// Instantiates an internal/first-round asm formatter service
         /// </summary>
         /// <param name="config">The configuration to use</param>
         [MethodImpl(Inline)]
-        internal static IIcedAsmFormatter BaseFormatter()
-            => AsmContentFormatter.BaseFormatter(AsmFormatConfig.Default);
+        internal static IIcedAsmFormatter BaseFormatter(IAsmContext context)
+            => AsmContentFormatter.BaseFormatter(context);
 
         /// <summary>
         /// Instantiates a subject-specific function catalog archive service
@@ -80,8 +85,8 @@ namespace Z0
         /// <param name="subject">The subject</param>
         /// <param name="config">The archive configuration</param>
         [MethodImpl(Inline)]
-        public static IAsmFunctionArchive FunctionArchive(string catalog, string subject)
-            => AsmFunctionArchive.Create(catalog,subject);
+        public static IAsmFunctionArchive FunctionArchive(IAsmContext context, string catalog, string subject)
+            => AsmFunctionArchive.Create(context, catalog,subject);
 
         /// <summary>
         /// Instantiates a subject-specific code catalog archive service
@@ -98,39 +103,39 @@ namespace Z0
         /// <param name="metadata">If specified, defines the clr metadata index that the decoder can use to associate native code with cil code</param>
         /// <param name="bufferlen">If specified, the lenght of the decoder's buffer; if unspecified a default value will be chosen</param>
         [MethodImpl(Inline)]
-        public static IAsmDecoder Decoder(ClrMetadataIndex metadata = null, int? bufferlen = null)
-            => AsmDecoder.Create(AsmFormatConfig.Default, metadata, bufferlen);
+        public static IAsmDecoder Decoder()
+            => AsmDecoder.Create(Context(ClrMetadataIndex.Empty, DataResourceIndex.Empty, AsmFormatConfig.Default));
 
         /// <summary>
         /// Instantiates an asm decoder service
         /// </summary>
-        /// <param name="metadata">If specified, defines the clr metadata index that the decoder can use to associate native code with cil code</param>
+        /// <param name="clridx">If specified, defines the clr metadata index that the decoder can use to associate native code with cil code</param>
         /// <param name="bufferlen">If specified, the lenght of the decoder's buffer; if unspecified a default value will be chosen</param>
         [MethodImpl(Inline)]
-        public static IAsmDecoder Decoder(AsmFormatConfig config, ClrMetadataIndex metadata = null, int? bufferlen = null)
-            => AsmDecoder.Create(config, metadata, bufferlen);
+        public static IAsmDecoder Decoder(IAsmContext context, int? bufferlen = null)
+            => AsmDecoder.Create(context);
 
         /// <summary>
         /// Allocates a caller-disposed asm text writer and, as determined by the configuration, emits a file header
         /// </summary>
         /// <param name="dst">The target path</param>
         /// <param name="header">Whether to emit a header when creating a new file or overwriting an existing file</param>
-        public static IAsmWriter Writer(FilePath dst, AsmFormatConfig config)
+        public static IAsmWriter Writer(IAsmContext context, FilePath dst)
         {
             dst.FolderPath.CreateIfMissing();            
-            var writer = AsmWriter.Create(dst,config);            
-            if(config.EmitFileHeader)
+            var writer = AsmWriter.Create(context, dst);            
+            if(context.AsmFormat.EmitFileHeader)
                 writer.WriteFileHeader();
             return writer;
         }
 
-        public static Func<AsmStats> StatsEmitter(IOperationCatalog catalog)
+        public static Func<AsmStats> StatsEmitter(IAsmContext context, IOperationCatalog catalog)
         {
             AsmStats collect()
             {
                 var collector = new  AsmStatsCollector();
                 var pipe = AsmStatsPipe.Create(collector);
-                var flow = Flow(catalog);
+                var flow = Flow(context,catalog);
                 flow.Flow(pipe).Force();
                 return collector.Collected;
             }

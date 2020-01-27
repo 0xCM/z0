@@ -4,6 +4,12 @@ namespace Z0
 
     public class Settings
     {
+        public static string DevRoot
+            => @"J:\dev\projects\z0";
+
+        public static string LogDir
+            => @"J:\dev\projects\z0-logs"; 
+
         /// <summary>
         /// Gets the root development directory where the topmost solution resides
         /// </summary>

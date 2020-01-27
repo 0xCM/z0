@@ -11,9 +11,6 @@ namespace Z0
     partial class VX
     {
 
-        public static IOperationCatalog Catalog
-            => new Catalog();
-
     }
 
 }

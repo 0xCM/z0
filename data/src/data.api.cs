@@ -31,38 +31,40 @@ namespace Z0
 
         const int ResCount = LastIndex;
 
-        static readonly DataResource[] Descriptions = new DataResource[ResCount];
+        static readonly DataResource[] Described = new DataResource[ResCount];
         
         static bool Initialized = false;
 
-        public static IEnumerable<DataResource> GetDescriptions()
+        public static IEnumerable<DataResource> Resources
         {
-            lock(Descriptions)
+            get 
             {
-                if(!Initialized)
+                lock(Described)
                 {
-                    try
+                    if(!Initialized)
                     {
-                        iter(typeof(Data).DeclaredStaticMethods().Attributed<DataRegistryAttribute>(), m => m.Invoke(null, new object[]{}));
-                        Initialized = true;
-                    }
-                    catch(Exception e)
-                    {
-                        errout(e);
+                        try
+                        {
+                            iter(typeof(Data).DeclaredStaticMethods().Attributed<DataRegistryAttribute>(), m => m.Invoke(null, new object[]{}));
+                            Initialized = true;
+                        }
+                        catch(Exception e)
+                        {
+                            errout(e);
+                        }
                     }
                 }
+
+                if(Initialized)
+                    foreach(var d in Described)
+                        if(!d.IsEmpty)
+                            yield return d;                        
             }
-
-            if(Initialized)
-                foreach(var d in Descriptions)
-                    if(!d.IsEmpty)
-                        yield return d;                        
         }
-
 
         [MethodImpl(Inline)]
         static unsafe void Register(int index, string name, ReadOnlySpan<byte> src)
-            => Descriptions[index] = DataResource.Define(name, src);
+            => Described[index] = DataResource.Define(name, src);
 
         [MethodImpl(Inline)]
         static string resid(string basename, ITypeNat w, PrimalKind kind)

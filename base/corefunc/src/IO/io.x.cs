@@ -66,10 +66,10 @@ namespace Z0
         /// Creates a writer initialized with the source file; caller-disposal required
         /// </summary>
         /// <param name="dst">The file path</param>
-        public static StreamWriter Writer(this FilePath dst, bool append = false)
+        public static StreamWriter Writer(this FilePath dst)
         {
             dst.FolderPath.CreateIfMissing();
-            return new StreamWriter(dst.FullPath, append);
+            return new StreamWriter(dst.FullPath, false);
         }
 
         /// <summary>
@@ -79,8 +79,11 @@ namespace Z0
         /// <param name="src">The source text</param>
         public static void WriteText(this FilePath dst, string src)
         {
-            dst.FolderPath.CreateIfMissing();
-            File.WriteAllText(dst.ToString(), src);
+            if(!string.IsNullOrWhiteSpace(src))
+            {
+                dst.FolderPath.CreateIfMissing();
+                File.WriteAllText(dst.ToString(), src);
+            }
         }
 
         /// <summary>

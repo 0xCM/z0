@@ -31,7 +31,13 @@ namespace Z0
         /// <summary>
         /// Classifies an assembly as an api library
         /// </summary>
-        Library
+        Library,
+
+        
+        /// <summary>
+        /// Classifies an assembly with an entry point that directs/orchestrates operations
+        /// </summary>
+        Controller
     }
 
 

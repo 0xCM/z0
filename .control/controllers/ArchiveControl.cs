@@ -8,39 +8,31 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     using static zfunc;
     using static ControlMessages;
     
     class ArchiveControl : Controller<ArchiveControl>
     {                
-        IEnumerable<AsmEmissionToken> EmitArtifacts(IOperationCatalog catalog)
-            => AsmServices.CatalogEmitter(catalog).EmitCatalog();
-
-        Option<FilePath> CreateEmissionReport(IOperationCatalog catalog, IEnumerable<AsmEmissionToken> emitted)
-            => AsmEmissionReport.Create(catalog, emitted.ToArray());
-
-        Option<FilePath> Emit(IOperationCatalog catalog)
-            => CreateEmissionReport(catalog,EmitArtifacts(catalog));
-
-        Option<FilePath> Emit(AssemblyId id)
-            => from catalog in FindCatalog(id)  
-                from path in Emit(catalog)
-                select path;
-            
-        AppMsg Tell(AppMsg msg)            
+        public ArchiveControl()
         {
-            print(msg);
-            return msg;
-        }
-        IAppSettings Settings
-            => AppSettings.Load(GetType().Assembly.GetSimpleName());
+            
 
-        IEnumerable<AssemblyId> EnabledAssemblies
+        }
+
+        Option<AsmStats> DispatchStatsWorker(IAsmContext context, IOperationCatalog catalog)
+        {
+            var emitter = AsmServices.StatsEmitter(context, catalog);
+            return emitter();            
+        }
+                        
+        static IEnumerable<AssemblyId> EnabledAssemblies
         {
             get
             {
-                foreach(var (key,value) in Settings.Pairs)
+                var settings = AppSettings.Load(typeof(ArchiveControl).Assembly.GetSimpleName()).Pairs;
+                foreach(var (key,value) in settings)
                 {
                     var index = key.Split(colon());            
                     if(index.Length == 2 && bit.Parse(index[1]))
@@ -53,58 +45,38 @@ namespace Z0
             }
         }
 
-        void OnCatalogEmitted(AssemblyId id, FilePath report)
+        void CatalogEmitted(string id, FilePath report)
             => print($"Successfully emitted {id} catalog and wrote emission report to {report}");
 
-        void NoJoy()
-            => errout($"Something went terribly wrong and the idiot that wrote me didn't bother with saying why");
 
-        Option<AsmStats> DispatchStatsWorker(IOperationCatalog catalog)
+        void CatalogEmissionFailed(string id)
+            => errout($"Error occurred while emitting catalog {id}");
+
+        DataResourceIndex CreateResourceIndex()
+            => FindCatalog(AssemblyId.Data).MapRequired(c =>  DataResourceReport.Create(c.Resources,"data"));
+
+        Option<FilePath> Emit(IAsmContext context, IOperationCatalog catalog)
         {
-            var emitter = AsmServices.StatsEmitter(catalog);
-            return emitter();            
+            var emitted = AsmServices.CatalogEmitter(context,catalog).EmitCatalog();
+            return AsmEmissionReport.Create(catalog, emitted.ToArray());
         }
 
-        Option<FilePath> DispatchEmitter(AssemblyId id, IOperationCatalog catalog)
-            => Emit(catalog).OnSome(report => OnCatalogEmitted(id,report));
-
-        void DispatchEmitters()
-        {
-            foreach(var id in EnabledAssemblies)            
-            {
-                var q = from c in FindCatalog(id).OnNone(() => CatalogNotFound(id))
-                        from p in DispatchEmitter(id,c)
-                        select p;
-
-                q.OnNone(() => NoJoy());
-            }
-        }
-
-        void DispatchStatsWorkers()
-        {
-            foreach(var id in EnabledAssemblies)            
-            {                            
-                var q = from c in FindCatalog(id).OnNone(() => CatalogNotFound(id))
-                        let start = Tell(CollectingStats(c))
-                        from stats in DispatchStatsWorker(c)
-                        let end = Tell(CollectedStats(c,stats))
-                        select stats;
-
-                q.OnNone(() => NoJoy());
-            }
-        }
-
-        void CreateResourceReports()
-        {
-            FindCatalog(AssemblyId.Data).OnSome(c => DataResourceReport.Create(c));
-        }
         public override void Execute()
         {             
-            print(DispatchingCatalogWorkers());
+            var resources = CreateResourceIndex();
+            var assemblies = 
+                (from d in Designators.Control.Designated.Designates
+                where EnabledAssemblies.Contains(d.Id) && d.Catalog != null && !d.Catalog.IsEmpty
+                    select (d.Id, d.DeclaringAssembly, d.Catalog)).ToArray();                                    
             
-            CreateResourceReports();
-            DispatchEmitters();
-            //DispatchStatsWorkers();                
+            foreach(var a in assemblies)
+            {
+                var clrindex = AsmServices.IndexAssembly(a.DeclaringAssembly);
+                var catalog = a.Catalog;
+                var context =  AsmServices.Context(clrindex, resources, AsmFormatConfig.Default);
+                Emit(context, a.Catalog).OnSome(path => CatalogEmitted(catalog.CatalogName, path))
+                             .OnNone(() => CatalogEmissionFailed(catalog.CatalogName));
+            }
         }
     }
 }

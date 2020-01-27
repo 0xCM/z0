@@ -12,10 +12,11 @@ namespace Z0
 
     public static class AsmProcessServices
     {
-        public static IAsmProcessEmitter Emitter()
-            => AsmProcessEmitter.Create();
+        public static IAsmProcessEmitter Emitter(IAsmContext context)
+            => AsmProcessEmitter.Create(context);
 
-        public static IAsmProcessCapture Capture(params Module[] modules)
-            => ProcessCapture.Create(modules);
+        public static IAsmProcessCapture Capture(IAsmContext context)
+            => ProcessCapture.Create(context);
+
     }
 }

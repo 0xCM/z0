@@ -15,18 +15,22 @@ namespace Z0
     using static zfunc;
 
     readonly struct AsmImmUnaryCapture : IAsmImmCapture
-    {
+    {        
         [MethodImpl(Inline)]
-        public static IAsmImmCapture Create(MethodInfo src, Moniker baseid)
-            => new AsmImmUnaryCapture(src,baseid);
+        public static IAsmImmCapture Create(IAsmContext context, MethodInfo src, Moniker baseid)
+            => new AsmImmUnaryCapture(context.WithEmptyClrIndex(), src,baseid);
+
+        readonly IAsmContext Context;
         
         readonly MethodInfo Method;
 
         readonly Moniker BaseId;
 
         [MethodImpl(Inline)]
-        AsmImmUnaryCapture(MethodInfo method, Moniker baseid)
+        AsmImmUnaryCapture(IAsmContext context, MethodInfo method, Moniker baseid)
         {
+            
+            this.Context = context;
             this.Method = method;
             this.BaseId = baseid;
         }

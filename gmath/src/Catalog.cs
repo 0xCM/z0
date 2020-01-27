@@ -13,7 +13,8 @@ namespace Z0
 
     class Catalog : OpCatalog<Catalog>
     {
-        public Catalog()
+        public Catalog(AssemblyId id)
+            : base(id)
         {
 
         }

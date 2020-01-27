@@ -12,23 +12,17 @@ namespace Z0
     using static zfunc;
 
     sealed class AsmWriter : StreamWriter, IAsmWriter
-    {
-        public static IAsmWriter Create(FilePath dst, AsmFormatConfig config)
-            => new AsmWriter(dst, config);
-            
-        AsmWriter(StreamWriter stream, AsmFormatConfig config)
-            : base(stream.BaseStream)
-        {
-            this.FormatConfig = config;
-        }
-    
-        AsmWriter(FilePath path, AsmFormatConfig config)
+    {        
+        public static IAsmWriter Create(IAsmContext context, FilePath dst)
+            => new AsmWriter(context, dst);
+                    
+        AsmWriter(IAsmContext context, FilePath path)
             : base(path.FullPath, false)
         {
-            this.FormatConfig = config;
+            this.Context = context;
         }
-
-        readonly AsmFormatConfig FormatConfig;
+    
+        readonly IAsmContext Context;
 
         IAsmDecoder Decoder {get;}
             = AsmServices.Decoder();
@@ -38,7 +32,7 @@ namespace Z0
 
         public void Write(AsmFunction src)
         {
-            var formatter = AsmServices.Formatter(FormatConfig);
+            var formatter = AsmServices.Formatter(Context);
             formatter.FormatDetail(src);
             Write(formatter.FormatDetail(src));
         }
@@ -49,7 +43,7 @@ namespace Z0
         public void WriteFileHeader()
         {
             WriteLine($"; {now().ToLexicalString()}");
-            WriteLine(FormatConfig.SectionDelimiter);
+            WriteLine(Context.AsmFormat.SectionDelimiter);
         }
 
         public byte[] TakeBuffer()
