@@ -312,7 +312,6 @@ namespace Z0
             return (x0,x1,x2,x3);
         }
 
-
         /// <summary>
         /// 8x16x -> (4x64u,4x64u)
         /// </summary>

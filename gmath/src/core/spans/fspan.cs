@@ -13,7 +13,7 @@ namespace Z0
     public static class fspan
     {
         
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Floats)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
         public static Span<T> sqrt<T>(Span<T> src)
             where T : unmanaged
         {
@@ -22,7 +22,7 @@ namespace Z0
             return src;
         }
         
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Floats)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
         public static T avg<T>(ReadOnlySpan<T> src)
             where T : unmanaged
         {
@@ -82,7 +82,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline),Op, PrimalClosures(PrimalKind.Floats)]
+        [MethodImpl(Inline),Op, PrimalClosures(NumericKind.Floats)]
         public static Span<T> round<T>(ReadOnlySpan<T> src, int scale, Span<T> dst)
             where T : unmanaged
         {                        
@@ -92,7 +92,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline),Op, PrimalClosures(PrimalKind.Floats)]
+        [MethodImpl(Inline),Op, PrimalClosures(NumericKind.Floats)]
         public static Span<T> fabs<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
         {

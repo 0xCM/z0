@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Floats)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
         public static bit within<T>(T a, T b, T delta)    
             where T : unmanaged
         {

@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static unsafe Vector128<T> vload<T>(N128 w, in T src)
             where T : unmanaged                    
                 => vload(constptr(in src), out Vector128<T> _);
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static unsafe Vector256<T> vload<T>(N256 w, in T src)
             where T : unmanaged
                 => vload(constptr(in src), out Vector256<T> _);
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static unsafe Vector512<T> vload<T>(N512 w, in T src)
             where T : unmanaged
                 => vload(constptr(in src), out Vector512<T> _);
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="src">The memory reference</param>
         /// <param name="offset">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static unsafe Vector128<T> vload<T>(N128 w, in T src, int offset)
             where T : unmanaged                    
                 => vload(constptr(in src, offset), out Vector128<T> _);
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="src">The memory reference</param>
         /// <param name="offset">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static unsafe Vector256<T> vload<T>(N256 w, in T src, int offset)
             where T : unmanaged
                 => vload(constptr(in src, offset), out Vector256<T> _);
@@ -85,7 +85,7 @@ namespace Z0
         /// <param name="src">The memory reference</param>
         /// <param name="offset">The memory reference</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static unsafe Vector512<T> vload<T>(N512 w, in T src, int offset)
             where T : unmanaged
                 => vload(constptr(in src, offset), out Vector512<T> _);
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="src">The memory reference</param>
         /// <param name="dst">The target vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static unsafe ref Vector128<T> vload<T>(in T src, out Vector128<T> dst)
             where T : unmanaged
                 => ref vload(constptr(in src), out dst);
@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="src">The memory reference</param>
         /// <param name="dst">The target vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static unsafe ref Vector256<T> vload<T>(in T src, out Vector256<T> dst)
             where T : unmanaged
                 => ref vload(constptr(in src), out dst);
@@ -118,7 +118,7 @@ namespace Z0
         /// <param name="src">The memory reference</param>
         /// <param name="dst">The target vector</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static unsafe ref Vector512<T> vload<T>(in T src, out Vector512<T> dst)
             where T : unmanaged
                 => ref vload(constptr(in src), out dst);
@@ -128,7 +128,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The source span</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector128<T> vload<T>(N128 w, Span<T> src)
             where T : unmanaged
                 => vload(w, in head(src));
@@ -138,7 +138,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The source span</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector256<T> vload<T>(N256 w, Span<T> src)
             where T : unmanaged
                 => vload(w, in head(src));
@@ -148,7 +148,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The source span</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector512<T> vload<T>(N512 w, Span<T> src)
             where T : unmanaged
                 => vload(w, in head(src));
@@ -159,7 +159,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The source span</param>
         /// <param name="offset">The position of the fist source element</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector128<T> vload<T>(N128 w, Span<T> src, int offset)
             where T : unmanaged            
                 => vload(w, in seek(src, offset));
@@ -170,7 +170,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The source span</param>
         /// <param name="offset">The position of the fist source element</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector256<T> vload<T>(N256 w, Span<T> src, int offset)
             where T : unmanaged            
                 => vload(w, in seek(src, offset));
@@ -181,7 +181,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The source span</param>
         /// <param name="offset">The position of the fist source element</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector512<T> vload<T>(N512 w, Span<T> src, int offset)
             where T : unmanaged            
                 => vload(w, in seek(src, offset));
@@ -191,7 +191,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The source span</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector128<T> vload<T>(N128 w, ReadOnlySpan<T> src)
             where T : unmanaged
                 => vload(w, in head(src));
@@ -201,7 +201,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The source span</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector256<T> vload<T>(N256 w, ReadOnlySpan<T> src)
             where T : unmanaged
                 => vload(w, in head(src));
@@ -211,7 +211,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <param name="src">The source span</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector512<T> vload<T>(N512 w, ReadOnlySpan<T> src)
             where T : unmanaged
                 => vload(w, in head(src));
@@ -222,7 +222,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The source span</param>
         /// <param name="offset">The position of the fist source element </param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector128<T> vload<T>(N128 w, ReadOnlySpan<T> src, int offset)
             where T : unmanaged            
                 => vload(w, in skip(src, offset));
@@ -233,7 +233,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The source span</param>
         /// <param name="offset">The position of the fist source element </param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector256<T> vload<T>(N256 w, ReadOnlySpan<T> src, int offset)
             where T : unmanaged            
                 => vload(w, in skip(src, offset));
@@ -244,7 +244,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="src">The source span</param>
         /// <param name="offset">The position of the fist source element </param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector512<T> vload<T>(N512 w, ReadOnlySpan<T> src, int offset)
             where T : unmanaged            
                 => vload(w, in skip(src, offset));
@@ -254,7 +254,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector128<T> vload<T>(in Block128<T> src)
             where T : unmanaged
                 => vload(n128,src.Data);
@@ -264,7 +264,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector256<T> vload<T>(in Block256<T> src)
             where T : unmanaged
                 => vload(n256,src.Data);
@@ -274,7 +274,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector512<T> vload<T>(in Block512<T> src)
             where T : unmanaged
                 => vload(n512,src.Data);
@@ -285,7 +285,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector128<T> vload<T>(in Block128<T> src, int block)            
             where T : unmanaged      
                 => vload(in src.BlockRef(block), out Vector128<T> x);
@@ -296,7 +296,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector256<T> vload<T>(in Block256<T> src, int block)            
             where T : unmanaged      
                 => vload(in src.BlockRef(block), out Vector256<T> x);
@@ -307,7 +307,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector512<T> vload<T>(in Block512<T> src, int block)            
             where T : unmanaged      
                 => vload(in src.BlockRef(block), out Vector512<T> x);
@@ -318,7 +318,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="pSrc">The source memory location</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static unsafe Vector128<T> vload<T>(N128 w, T* pSrc)
             where T : unmanaged
                 => vload(pSrc, out Vector128<T> _);
@@ -329,7 +329,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="pSrc">The source memory location</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static unsafe Vector256<T> vload<T>(N256 w, T* pSrc)
             where T : unmanaged
                 => vload(pSrc, out Vector256<T> _);
@@ -340,7 +340,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="pSrc">The source memory location</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static unsafe Vector512<T> vload<T>(N512 w, T* pSrc)
             where T : unmanaged
                 => vload(pSrc, out Vector512<T> _);        
@@ -351,7 +351,7 @@ namespace Z0
         /// <param name="pSrc">The source memory location</param>
         /// <param name="dst">The target vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static unsafe ref Vector128<T> vload<T>(T* pSrc, out Vector128<T> dst)
             where T : unmanaged
         {
@@ -376,7 +376,7 @@ namespace Z0
         /// <param name="pSrc">The source memory location</param>
         /// <param name="dst">The target vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static unsafe ref Vector256<T> vload<T>(T* pSrc, out Vector256<T> dst)
             where T : unmanaged
         {
@@ -396,7 +396,7 @@ namespace Z0
             return ref dst;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static unsafe ref Vector512<T> vload<T>(T* pSrc, out Vector512<T> dst)
             where T : unmanaged
         {

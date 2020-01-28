@@ -18,10 +18,10 @@ namespace Z0
         /// <param name="id">The assigned identity</param>
         /// <param name="kind">The primal kind over which the subject was closed</param>
         /// <param name="closed">The closed method</param>
-        public static OpClosureInfo Define(Moniker id, PrimalKind kind, MethodInfo closed)
+        public static OpClosureInfo Define(Moniker id, NumericKind kind, MethodInfo closed)
             => new OpClosureInfo(id,kind,closed);
 
-        OpClosureInfo(Moniker id, PrimalKind kind, MethodInfo method)
+        OpClosureInfo(Moniker id, NumericKind kind, MethodInfo method)
         {
             this.Id = id;
             this.Kind = kind;
@@ -36,14 +36,14 @@ namespace Z0
         /// <summary>
         /// The primal kind over which the subject operation was closed
         /// </summary>
-        public PrimalKind Kind {get;}
+        public NumericKind Kind {get;}
 
         /// <summary>
         /// The closed method
         /// </summary>
         public MethodInfo ClosedMethod {get;}
 
-        public void Deconstruct(out Moniker id, out PrimalKind k, out MethodInfo closed)
+        public void Deconstruct(out Moniker id, out NumericKind k, out MethodInfo closed)
         {
             id = Id;
             k = Kind;

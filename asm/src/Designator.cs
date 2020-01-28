@@ -11,6 +11,13 @@ namespace Z0.Designators
     /// </summary>
     public sealed class AsmCore : AssemblyDesignator<AsmCore>
     {
-        public override AssemblyId Id => AssemblyId.AsmCore;
+        const AssemblyId Identity = AssemblyId.AsmCore;        
+
+        public override AssemblyId Id 
+            => Identity;
+
+        public override IOperationCatalog Catalog 
+            => new Catalog(Identity);
+
     }
 }

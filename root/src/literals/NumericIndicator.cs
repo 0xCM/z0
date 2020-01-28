@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a fundamental primitive type partitioning
     /// </summary>
-    public enum PrimalIndicator : ushort
+    public enum NumericIndicator : ushort
     {
         None = 0,        
         

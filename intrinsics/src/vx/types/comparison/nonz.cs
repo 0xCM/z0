@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VXTypes
     {
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct NonZ128<T> : IVUnaryPred128D<T>, IUnaryBlockedPred128<T>
             where T : unmanaged
         {
@@ -36,7 +36,7 @@ namespace Z0
 
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct NonZ256<T> : IVUnaryPred256D<T>, IUnaryBlockedPred256<T>
             where T : unmanaged
         {

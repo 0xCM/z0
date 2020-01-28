@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="lo">The lo part</param>
         /// <param name="hi">The hi part</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector256<T> vconcat<T>(Vector128<T> lo, Vector128<T> hi)
             where T : unmanaged
         {

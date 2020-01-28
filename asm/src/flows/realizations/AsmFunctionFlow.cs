@@ -23,7 +23,7 @@ namespace Z0
         {
             this.Context = context;
             this.Catalog = catalog;
-            this.Decoder = AsmServices.Decoder(context, NativeServices.DefaultBufferLen);
+            this.Decoder = Context.Decoder();
         }
 
         readonly IAsmContext Context;
@@ -38,7 +38,7 @@ namespace Z0
         static ReadOnlySpan<byte> ImmSelection => new byte[]{5,9,13};
 
         IAsmImmCapture ImmCaptureSvc(MethodInfo src, Moniker baseid)
-            => AsmServices.UnaryImmCapture(Context,src, baseid);
+            => Context.UnaryImmCapture(src, baseid);
 
         AsmFunction Flow(AsmFunction src, IAsmFunctionPipe dst)
         {

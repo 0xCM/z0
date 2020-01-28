@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static Vector128<T> vblend<T>(Vector128<T> x, Vector128<T> y, Vector128<byte> spec)        
             where T : unmanaged
                 => vblend_u(x,y,spec);
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static Vector256<T> vblend<T>(Vector256<T> x, Vector256<T> y, Vector256<byte> spec)        
             where T : unmanaged
                 => vblend_u(x,y,spec);
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static Vector128<T> vblend<T>(Vector128<T> x, Vector128<T> y, ushort spec)
             where T : unmanaged
                 => vblend(x,y,dinx.vmakemask(spec));
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static Vector256<T> vblend<T>(Vector256<T> x, Vector256<T> y, uint spec)        
             where T : unmanaged
                 => vblend(x,y,dinx.vmakemask(spec));

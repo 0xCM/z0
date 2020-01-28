@@ -51,7 +51,7 @@ namespace Z0
         /// <summary>
         /// Specifies the primal kind
         /// </summary>
-        public static Moniker WithKind(this Moniker src, PrimalKind k)
+        public static Moniker WithKind(this Moniker src, NumericKind k)
             => OpIdentity.segmented(src.Name, src.SegmentedWidth, k, src.IsGeneric, src.IsAsm);
 
         /// <summary>

@@ -12,17 +12,17 @@ namespace Z0
 
     partial class gmath
     {
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static bit lt<T>(T a, T b)
             where T : unmanaged
                 => lt_u(a,b);
 
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T ltz<T>(T a, T b)
             where T : unmanaged
                 => gmath.mul(convert<T>((uint)gmath.lt(a,b)),gmath.ones<T>());
 
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static bit lteq<T>(T a, T b)
             where T : unmanaged
                 => lteq_u(a,b);

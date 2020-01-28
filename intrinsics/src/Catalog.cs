@@ -21,9 +21,9 @@ namespace Z0
             => typeof(VXTypes).GetNestedTypes().Realize<IFunc>();
 
         public override IEnumerable<Type> GenericApiHosts
-            => items(typeof(ginx),typeof(vblocks),typeof(VPattern));
+            => items(typeof(ginx),typeof(vblocks),typeof(VPattern), typeof(BitPack), typeof(CpuVector));
 
         public override IEnumerable<Type> DirectApiHosts
-            => items(typeof(dinx));               
+            => items(typeof(dinx), typeof(BitPack), typeof(CpuVector));
     }
 }

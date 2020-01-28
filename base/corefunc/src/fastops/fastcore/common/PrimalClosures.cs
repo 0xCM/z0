@@ -15,7 +15,7 @@ namespace Z0
     /// </summary>
     public class PrimalClosuresAttribute : Attribute
     {
-        public PrimalClosuresAttribute(PrimalKind system)
+        public PrimalClosuresAttribute(NumericKind system)
         {
             this.SystemPrimitive = system;
             this.UserPrimitive = UserPrimitiveKind.None;
@@ -23,17 +23,17 @@ namespace Z0
 
         public PrimalClosuresAttribute(UserPrimitiveKind user)
         {
-            this.SystemPrimitive = PrimalKind.None;
+            this.SystemPrimitive = NumericKind.None;
             this.UserPrimitive = user;
         }
 
-        public PrimalClosuresAttribute(PrimalKind system, UserPrimitiveKind user)
+        public PrimalClosuresAttribute(NumericKind system, UserPrimitiveKind user)
         {
             this.SystemPrimitive = system;
             this.UserPrimitive = user;
         }
 
-        public PrimalKind SystemPrimitive {get;}
+        public NumericKind SystemPrimitive {get;}
 
         public UserPrimitiveKind UserPrimitive{get;}         
     }

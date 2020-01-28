@@ -73,12 +73,12 @@ namespace Z0
         /// <param name="opname">The base operator name/operator classifier</param>
         /// <param name="w">For segmented types, the total bit-width; otherwise 0</param>
         /// <param name="k">The primal kind</param>
-        public static Moniker define(string opname, int w, PrimalKind k, bool generic, bool asm)
+        public static Moniker define(string opname, int w, NumericKind k, bool generic, bool asm)
         {
             var g = generic ? $"{GenericIndicator}" : string.Empty;
             var asmPart = asm ? $"{SuffixSep}{AsmIndicator}" : string.Empty;
 
-            if(generic && k == PrimalKind.None)
+            if(generic && k == NumericKind.None)
                 return Moniker.Parse(concat(opname, PartSep, GenericIndicator));            
             else if(w != 0)
                 return Moniker.Parse($"{opname}{PartSep}{g}{w}{SegSep}{PrimalType.signature(k)}{asmPart}");
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="opname">The base operator name</param>
         /// <param name="k">The primal kind over which the identifier is deined</param>
         [MethodImpl(Inline)]   
-        public static Moniker define(string opname, PrimalKind k, bool generic)
+        public static Moniker define(string opname, NumericKind k, bool generic)
             => define(opname, 0, k, generic, false);
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Z0
         /// <param name="opname">The base operator name</param>
         /// <param name="k">The primal kind over which the identifier is deined</param>
         [MethodImpl(Inline)]   
-        public static Moniker define(string opname, PrimalKind k)
+        public static Moniker define(string opname, NumericKind k)
             => define(opname, 0, k, false, false);
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="w">The bit width</param>
         /// <param name="k">The primal cell kind</param>
         [MethodImpl(Inline)]   
-        public static Moniker segmented<W>(string opname, PrimalKind k, W w)
+        public static Moniker segmented<W>(string opname, NumericKind k, W w)
             where W : unmanaged, ITypeNat
                 => Moniker.Parse($"{opname}_{w}{SegSep}{PrimalType.signature(k)}");
 
@@ -123,7 +123,7 @@ namespace Z0
         /// <param name="w">The total width of the type</param>
         /// <param name="k">The primal segment kind</param>
         [MethodImpl(Inline)]   
-        public static Moniker segmented(MethodInfo method, FixedWidth w, PrimalKind k)
+        public static Moniker segmented(MethodInfo method, FixedWidth w, NumericKind k)
             => segmented(method.OpName(), w, k, method.IsConstructedGenericMethod, false);
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Z0
         /// <param name="k">The primal cell kind</param>
         /// <param name="generic">Whether a generic operation is identified</param>
         /// <param name="asm">Whether the moniker has an asm suffix</param>
-        public static Moniker segmented(string opname, FixedWidth w, PrimalKind k, bool generic, bool asm = false)
+        public static Moniker segmented(string opname, FixedWidth w, NumericKind k, bool generic, bool asm = false)
             => define(opname, (int)w, k, generic,asm);
     }
 }

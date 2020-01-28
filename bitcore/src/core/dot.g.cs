@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="x">The left scalar</param>
         /// <param name="y">The right scalar</param>
         /// <typeparam name="T">The primal unsigned integral type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static bit dot<T>(T x, T y)
             where T : unmanaged
                 => odd(pop(gmath.and(x,y)));

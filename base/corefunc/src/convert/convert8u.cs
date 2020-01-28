@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to convert</param>
         /// <typeparam name="T">The target conversion type</typeparam>
-        [MethodImpl(Inline), Op("convert8u"), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op("convert8u"), PrimalClosures(NumericKind.All)]
         public static T convert<T>(byte src)
             where T : unmanaged
         {

@@ -35,7 +35,7 @@ namespace Z0
     {        
         MaskKind M {get;}
 
-        PrimalKind K {get;}
+        NumericKind K {get;}
 
     }
 

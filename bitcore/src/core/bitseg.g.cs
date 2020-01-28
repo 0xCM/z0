@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="firstpos">The sequence-relative position of the first bit</param>
         /// <param name="lastpos">The sequence-relative position of the last bit</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static T bitseg<T>(Span<T> src, BitPos<T> firstpos, BitPos<T> lastpos)
             where T : unmanaged
         {
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="firstpos">The sequence-relative position of the first bit</param>
         /// <param name="lastpos">The sequence-relative position of the last bit</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static T bitseg<T>(in Block256<T> src, BitPos<T> firstpos, BitPos<T> lastpos)
             where T : unmanaged
                 => bitseg(src.Data, firstpos,lastpos);
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="firstidx">The sequence-relative index of the first bit</param>
         /// <param name="lastidx">The sequence-relative index of the last bit</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static T bitseg<T>(Span<T> src, int firstidx, int lastidx)
             where T : unmanaged
                 => bitseg(src, bitpos<T>(firstidx), bitpos<T>(lastidx)); 
@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="firstidx">The sequence-relative index of the first bit</param>
         /// <param name="lastidx">The sequence-relative index of the last bit</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static T bitseg<T>(in Block256<T> src, int firstidx, int lastidx)
             where T : unmanaged
                 => bitseg(src.Data, bitpos<T>(firstidx), bitpos<T>(lastidx)); 

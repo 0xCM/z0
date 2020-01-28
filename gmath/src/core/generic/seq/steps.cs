@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="count">The number of values to produce</param>
         /// <param name="dst">The memory target</param>
         /// <typeparam name="T">The target value type</typeparam>    
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static void steps<T>(T first, T step, int count, ref T dst)
             where T : unmanaged
         {

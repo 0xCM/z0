@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The identifying kind</param>
         [MethodImpl(Inline)]
-        public static Type ToPrimalType(this PrimalKind k)
+        public static Type ToPrimalType(this NumericKind k)
             => PrimalType.type(k);
 
         /// <summary>
@@ -29,14 +29,14 @@ namespace Z0
         /// </summary>
         /// <param name="k">The kind to examine</param>
         [MethodImpl(Inline)]
-        public static bool IsSome(this PrimalKind k)
-            => k != PrimalKind.None;
+        public static bool IsSome(this NumericKind k)
+            => k != NumericKind.None;
 
         /// <summary>
         /// Specifies the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
         /// </summary>
         [MethodImpl(Inline)]
-        public static string Keyword(this PrimalKind k)
+        public static string Keyword(this NumericKind k)
             => PrimalType.keyword(k);
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
-        public static int BitWidth(this PrimalKind k)
+        public static int BitWidth(this NumericKind k)
             => PrimalType.width(k);
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The primal classifier</param>
         [MethodImpl(Inline)]
-        public static PrimalId Id(this PrimalKind kind)
+        public static PrimalId Id(this NumericKind kind)
             => PrimalType.id(kind);
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
-        public static char Indicator(this PrimalKind k)
+        public static char Indicator(this NumericKind k)
             => PrimalType.indicator(k);
 
         /// <summary>
@@ -70,85 +70,53 @@ namespace Z0
         /// <param name="k">The classification</param>
         /// <param name="match">The kind to check</param>
         [MethodImpl(Inline)]
-        public static bit Is(this PrimalKind k, PrimalKind match)        
+        public static bit Is(this NumericKind k, NumericKind match)        
             => (k & match) != 0;
 
         [MethodImpl(Inline)]
-        public static bit Is(this PrimalKind k, PrimalId match)        
+        public static bit Is(this NumericKind k, PrimalId match)        
             => ((uint)k & (uint)match) != 0;
 
-        public static IEnumerable<PrimalKind> DistinctKinds(this PrimalKind k)       
+        public static IEnumerable<NumericKind> DistinctKinds(this NumericKind k)       
         {
             if(k.Is(PrimalId.U8))
-                yield return PrimalKind.U8;
+                yield return NumericKind.U8;
 
             if(k.Is(PrimalId.I8))
-                yield return PrimalKind.I8;
+                yield return NumericKind.I8;
 
             if(k.Is(PrimalId.U16))
-                yield return PrimalKind.U16;
+                yield return NumericKind.U16;
 
             if(k.Is(PrimalId.I16))
-                yield return PrimalKind.I16;
+                yield return NumericKind.I16;
 
             if(k.Is(PrimalId.U32))
-                yield return PrimalKind.U32;
+                yield return NumericKind.U32;
 
             if(k.Is(PrimalId.I32))
-                yield return PrimalKind.I32;
+                yield return NumericKind.I32;
 
             if(k.Is(PrimalId.U64))
-                yield return PrimalKind.U64;
+                yield return NumericKind.U64;
 
             if(k.Is(PrimalId.I64))
-                yield return PrimalKind.I64;
+                yield return NumericKind.I64;
 
             if(k.Is(PrimalId.F32))
-                yield return PrimalKind.F32;
+                yield return NumericKind.F32;
 
             if(k.Is(PrimalId.F64))
-                yield return PrimalKind.F64;
+                yield return NumericKind.F64;
         }
 
 
-        // public static IEnumerable<PrimalKind> DistinctKinds(this PrimalKind k)       
-        // {
-        //     if(k.Is(PrimalKind.U8))
-        //         yield return PrimalKind.U8;
-
-        //     if(k.Is(PrimalKind.I8))
-        //         yield return PrimalKind.I8;
-
-        //     if(k.Is(PrimalKind.U16))
-        //         yield return PrimalKind.U16;
-
-        //     if(k.Is(PrimalKind.I16))
-        //         yield return PrimalKind.I16;
-
-        //     if(k.Is(PrimalKind.U32))
-        //         yield return PrimalKind.U32;
-
-        //     if(k.Is(PrimalKind.I32))
-        //         yield return PrimalKind.I32;
-
-        //     if(k.Is(PrimalKind.U64))
-        //         yield return PrimalKind.U64;
-
-        //     if(k.Is(PrimalKind.I64))
-        //         yield return PrimalKind.I64;
-
-        //     if(k.Is(PrimalKind.F32))
-        //         yield return PrimalKind.F32;
-
-        //     if(k.Is(PrimalKind.F64))
-        //         yield return PrimalKind.F64;
-        // }
 
         /// <summary>
         /// Computes the primal types identified by a specified kind
         /// </summary>
         /// <param name="k">The primal kind</param>
-        public static IEnumerable<Type> PrimalTypes(this PrimalKind k)
+        public static IEnumerable<Type> PrimalTypes(this NumericKind k)
             => k.DistinctKinds().Select(x => x.ToPrimalType());         
 
         /// <summary>
@@ -156,7 +124,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
-        public static PrimalKind Kind(this Type t)
+        public static NumericKind Kind(this Type t)
             => PrimalType.kind(t);
          
         /// <summary>
@@ -241,8 +209,8 @@ namespace Z0
         /// <param name="method">The method to test</param>
         /// <param name="n">The generic parameter selector</param>
         [MethodImpl(Inline)]
-        public static PrimalKind TypeParameterKind(this MethodInfo method, N1 n)
-            => (method.IsGenericMethod ? method.GetGenericArguments() : array<Type>()).FirstOrDefault()?.Kind() ?? PrimalKind.None;
+        public static NumericKind TypeParameterKind(this MethodInfo method, N1 n)
+            => (method.IsGenericMethod ? method.GetGenericArguments() : array<Type>()).FirstOrDefault()?.Kind() ?? NumericKind.None;
 
         [MethodImpl(Inline)]
         public static TernaryBitLogicKind Next(this TernaryBitLogicKind src)

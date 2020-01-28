@@ -12,7 +12,7 @@ namespace Z0
 
     partial class Converter
     {
-        [MethodImpl(Inline), Op("convert32i"), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op("convert32i"), PrimalClosures(NumericKind.All)]
         public static T convert<T>(int src)
             where T : unmanaged
         {

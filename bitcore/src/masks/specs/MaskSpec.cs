@@ -16,7 +16,7 @@ namespace Z0
     public readonly struct MaskSpec : IMaskSpec
     {
         [MethodImpl(Inline)]
-        public static MaskSpec Define(MaskKind m, PrimalKind k, uint f, uint d)
+        public static MaskSpec Define(MaskKind m, NumericKind k, uint f, uint d)
             => new MaskSpec(m,k,f,d);
 
         [MethodImpl(Inline)]
@@ -27,7 +27,7 @@ namespace Z0
                 => new MaskSpec(m, PrimalType.kind<T>(), (uint)nateval<F>(),(uint)nateval<D>());
 
         [MethodImpl(Inline)]
-        MaskSpec(MaskKind m, PrimalKind k, uint f, uint d)
+        MaskSpec(MaskKind m, NumericKind k, uint f, uint d)
         {
             M = m;
             K = k;
@@ -41,7 +41,7 @@ namespace Z0
 
         public uint D {get;}
 
-        public PrimalKind K {get;}
+        public NumericKind K {get;}
 
         public string Format()
             => primalsig(K);

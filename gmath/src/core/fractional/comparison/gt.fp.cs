@@ -13,7 +13,7 @@ namespace Z0
     partial class gfp
     {
 
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Floats)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
         public static bit gt<T>(T a, T b)
             where T : unmanaged
         {
@@ -25,7 +25,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Floats)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
         public static bit gteq<T>(T a, T b)
             where T : unmanaged
         {

@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source segment</param>
         /// <param name="pos">The 0-based index of the bit to change</param>
         /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static T enable<T>(T src, int pos)
             where T : unmanaged
         {

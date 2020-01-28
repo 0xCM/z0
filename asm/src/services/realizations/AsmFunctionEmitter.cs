@@ -25,7 +25,7 @@ namespace Z0
         }
 
         public Option<Exception> EmitCil(IEnumerable<AsmFunction> functions, FilePath dst)
-            => AsmServices.CilWriter(Context, dst).WriteCil(functions);
+            => Context.CilWriter(dst).WriteCil(functions);
 
         public Option<Exception> EmitAsm(IEnumerable<AsmFunction> src, FilePath file)        
         {            
@@ -34,7 +34,7 @@ namespace Z0
                 return default;
             try
             {
-                var formatter = AsmServices.Formatter(Context);
+                var formatter = Context.AsmFormatter();
                 using var dst = new StreamWriter(file.FullPath, false);
                 for(var i=0; i< functions.Length; i++)
                     dst.Write(formatter.FormatDetail(functions[i]));

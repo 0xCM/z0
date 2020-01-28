@@ -130,12 +130,13 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),Op]
         public static Vector128<ulong> vgt(Vector128<ulong> x, Vector128<ulong> y)
         {
-            var a = ginx.vinsert(x,default,0);
-            var b = ginx.vinsert(y,default,0);
-            return ginx.vlo(vgt(a,b));
+            var mask = CpuVector.vbroadcast(n128,CmpMask64u);
+            var mx = v64i(vxor(x,mask));
+            var my = v64i(vxor(y,mask));
+            return v64u(vgt(mx,my));
         }
 
         /// <summary>
@@ -251,7 +252,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> vgt(Vector256<ulong> x, Vector256<ulong> y)
         {
             var mask = CpuVector.vbroadcast(n256,CmpMask64u);

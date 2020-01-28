@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The soruce value</param>
         /// <typeparam name="T">The FP type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Floats)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
         public static T abs<T>(T src)
             where T : unmanaged
         {

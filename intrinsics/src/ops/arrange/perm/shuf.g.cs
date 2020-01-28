@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static Vector128<T> vshuf4x32<T>(Vector128<T> src, [Imm] byte spec)
             where T : unmanaged
                 => vgeneric<T>(dinx.vshuf4x32(v32u(src), spec));
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static Vector256<T> vshuf4x32<T>(Vector256<T> src, [Imm] byte spec)
             where T : unmanaged
                 => vgeneric<T>(dinx.vshuf4x32(v32u(src), spec));
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static Vector128<T> vshuf16x8<T>(Vector128<T> src, Vector128<byte> spec)
             where T : unmanaged
                 => vgeneric<T>(dinx.vshuf16x8(v8u(src), spec));
@@ -74,7 +74,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static Vector256<T> vshuf16x8<T>(Vector256<T> src, Vector256<byte> spec)
             where T : unmanaged
                 => vgeneric<T>(dinx.vshuf16x8(v8u(src), spec));
@@ -84,7 +84,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static Vector256<T> vshuf32x8<T>(Vector256<T> src, Vector256<byte> spec)
             where T : unmanaged
                 => vgeneric<T>(dinx.vshuf32x8(v8u(src), spec));

@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="x">The test value</param>
         /// <param name="a">The lower bound</param>
         /// <param name="b">The uppper bound</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static bit between<T>(T x, T min, T max)
             where T : unmanaged
                 => between_u(x,min,max);

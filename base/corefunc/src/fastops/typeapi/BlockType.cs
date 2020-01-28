@@ -197,8 +197,8 @@ namespace Z0
         /// Determines the segment kind classifier for a blocked type
         /// </summary>
         /// <param name="t">The type to examine</param>
-        public static PrimalKind segment(Type t)
-            => test(t) ?  t.SuppliedGenericArguments().First().Kind() : PrimalKind.None;
+        public static NumericKind segment(Type t)
+            => test(t) ?  t.SuppliedGenericArguments().First().Kind() : NumericKind.None;
 
         [MethodImpl(Inline)]
         public static BlockKind kind<B>(B b = default)

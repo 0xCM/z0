@@ -28,7 +28,7 @@ namespace Z0
 
         public readonly string Text;
         
-        public PrimalKind Kind 
+        public NumericKind Kind 
         {
             [MethodImpl(Inline)]
             get => PrimalType.kind<T>();

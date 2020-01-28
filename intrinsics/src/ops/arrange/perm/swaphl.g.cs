@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector128<T> vswaphl<T>(Vector128<T> x)
             where T : unmanaged
                 => vgeneric<T>(dinx.vswaphl(v64u(x)));        
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector256<T> vswaphl<T>(Vector256<T> x)
             where T : unmanaged
                 => vperm2x128(x,x,Perm2x4.DA);

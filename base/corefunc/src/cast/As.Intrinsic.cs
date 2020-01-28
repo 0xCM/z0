@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         /// <remarks>This operation should be dissolved when the method is closed over a concrete type
         /// and should not impact instruction generation</remarks>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static ref Vector128<T> vgeneric<T>(in Vector128<sbyte> src)
             where T : unmanaged        
                 => ref Unsafe.As<Vector128<sbyte>,Vector128<T>>(ref mutable(in src));
@@ -31,7 +31,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         /// <remarks>This operation should be dissolved when the method is closed over a concrete type
         /// and should not impact instruction generation</remarks>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static ref Vector128<T> vgeneric<T>(in Vector128<byte> src)
             where T : unmanaged        
                 => ref Unsafe.As<Vector128<byte>,Vector128<T>>(ref mutable(in src));

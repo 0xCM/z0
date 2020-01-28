@@ -20,11 +20,11 @@ namespace Z0
 
     class TestController : Controller<TestController>
     {       
-        readonly IAsmContext AsmContext;
+        readonly IAsmContext Context;
         
         public TestController()
         {
-            this.AsmContext = AsmServices.Context();
+            this.Context = AsmContext.New();
         }
 
         static IEnumerable<IAssemblyDesignator> TestHosts
@@ -34,13 +34,13 @@ namespace Z0
             where T : unmanaged
         {
             var imm = new byte[]{199,205};
-            var c1 = AsmServices.ImmCapture(AsmContext, VX.vbsll(w,t));
+            var c1 = Context.ImmCapture(VX.vbsll(w,t));
             var r1 = c1.Capture(imm);
 
-            var c2 = AsmServices.ImmCapture(AsmContext, VX.vsrl(w,t));
+            var c2 = Context.ImmCapture(VX.vsrl(w,t));
             var r2 = c2.Capture(imm);
 
-            var c3 = AsmServices.ImmCapture(AsmContext, VX.vblend8x16(w,t));
+            var c3 = Context.ImmCapture(VX.vblend8x16(w,t));
             var r3 = c3.Capture(imm);
             return r1.Union(r2).Union(r3).ToArray();
         }
@@ -49,10 +49,10 @@ namespace Z0
             where T : unmanaged
         {
             var imm = new byte[]{199,205};
-            var c1 = AsmServices.ImmCapture(AsmContext,VX.vbsll(w,t));
+            var c1 = Context.ImmCapture(VX.vbsll(w,t));
             var r1 = c1.Capture(imm);
 
-            var c2 = AsmServices.ImmCapture(AsmContext,VX.vsrl(w,t));
+            var c2 = Context.ImmCapture(VX.vsrl(w,t));
             var r2 = c2.Capture(imm);
 
             return r1.Union(r2).ToArray();            

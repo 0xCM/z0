@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<short> vmaplo(Vector128<sbyte> src, N128 w, short t = default)
             => ConvertToVector128Int16(src);
 
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<short> vmaphi(Vector128<sbyte> src, N128 w, short t = default)
             => ConvertToVector128Int16(vhi(src));
 
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ushort> vmaplo(Vector128<sbyte> src, N128 w, ushort t =  default)
             => v16u(ConvertToVector128Int16(src));
 
@@ -60,7 +60,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ushort> vmaphi(Vector128<sbyte> src, N128 w, ushort t = default)
             => v16u(ConvertToVector128Int16(vhi(src)));
 
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vmaplo(Vector128<sbyte> src, N256 w, int t = default)
             => ConvertToVector256Int32(src);
 
@@ -80,7 +80,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vmaphi(Vector128<sbyte> src, N256 w, int t = default)
             => ConvertToVector256Int32(vhi(src));
 
@@ -94,7 +94,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<short> vmaplo(Vector128<byte> src, N128 w, short t = default)
             => ConvertToVector128Int16(src);
 
@@ -105,7 +105,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<short> vmaphi(Vector128<byte> src, N128 w, short t = default)
             =>  ConvertToVector128Int16(vhi(src));
 
@@ -116,7 +116,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ushort> vmaplo(Vector128<byte> src, N128 w, ushort t = default)
             => v16u(ConvertToVector128Int16(src));
 
@@ -127,7 +127,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ushort> vmaphi(Vector128<byte> src, N128 w, ushort t = default)
             => v16u(ConvertToVector128Int16(vhi(src)));
 
@@ -137,7 +137,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vmaplo(Vector128<byte> src, N256 w, uint t = default)
             => v32u(ConvertToVector256Int32(src));
 
@@ -147,7 +147,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vmaphi(Vector128<byte> src, N256 w, uint t = default)
             => v32u(ConvertToVector256Int32(vhi(src)));
 
@@ -157,7 +157,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vmaplo(Vector128<byte> src, N256 w, int t = default)
             => ConvertToVector256Int32(src);
 
@@ -167,7 +167,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vmaphi(Vector128<byte> src, N256 w, int t = default)
             => ConvertToVector256Int32(vhi(src));
 
@@ -179,7 +179,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<int> vmaplo(Vector128<short> src, N128 w, int t = default)
             => ConvertToVector128Int32(src);
 
@@ -188,7 +188,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<int> vmaphi(Vector128<short> src, N128 w, int t = default)
             => ConvertToVector128Int32(vhi(src));
 
@@ -198,7 +198,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<long> vmaplo(Vector128<short> src, N256 w, long t = default)
             => ConvertToVector256Int64(src);
 
@@ -208,7 +208,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<long> vmaphi(Vector128<short> src, N256 w, long t = default)
             => ConvertToVector256Int64(vhi(src));
 
@@ -220,7 +220,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<uint> vmaplo(Vector128<ushort> src, N128 w, uint t = default)
             => v32u(ConvertToVector128Int32(src));
 
@@ -229,7 +229,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<uint> vmaphi(Vector128<ushort> src, N128 w, uint t = default)
             => v32u(ConvertToVector128Int32(vhi(src)));
 
@@ -239,7 +239,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<long> vmaplo(Vector128<ushort> src, N256 w, long t = default)
             => ConvertToVector256Int64(src);
 
@@ -248,7 +248,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<long> vmaphi(Vector128<ushort> src, N256 w, long t = default)
             => ConvertToVector256Int64(vhi(src));
 
@@ -257,7 +257,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> vmaplo(Vector128<ushort> src, N256 w, ulong t = default)
             => v64u(ConvertToVector256Int64(src));
 
@@ -266,7 +266,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> vmaphi(Vector128<ushort> src, N256 w, ulong t = default)
             => v64u(ConvertToVector256Int64(vhi(src)));
 
@@ -280,7 +280,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<long> vmaplo(Vector128<uint> src, N128 w, long t = default)
             => ConvertToVector128Int64(src);
 
@@ -291,7 +291,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<long> vmaphi(Vector128<uint> src, N128 w, long t = default)
             => ConvertToVector128Int64(vhi(src));
 
@@ -302,7 +302,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ulong> vmaplo(Vector128<uint> src, N128 w, ulong t = default)
             => v64u(ConvertToVector128Int64(src));
 
@@ -313,7 +313,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<ulong> vmaphi(Vector128<uint> src, N128 w, ulong t = default)
             => v64u(ConvertToVector128Int64(vhi(src)));
 
@@ -326,7 +326,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vmaplo(Vector256<sbyte> src, N256 w, short t = default)
             => ConvertToVector256Int16(vlo(src));
 
@@ -336,7 +336,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vmaphi(Vector256<sbyte> src, N256 w, short t = default)
             => ConvertToVector256Int16(vhi(src));
 
@@ -349,7 +349,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vmaplo(Vector256<byte> src, N256 w, ushort t = default)
             => v16u(ConvertToVector256Int16(vlo(src)));
 
@@ -359,7 +359,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vmaphi(Vector256<byte> src, N256 w, ushort t = default)
             => v16u(ConvertToVector256Int16(vhi(src)));
 
@@ -369,7 +369,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vmaplo(Vector256<byte> src, N256 w, short t = default)
             => ConvertToVector256Int16(vlo(src));
 
@@ -379,7 +379,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<short> vmaphi(Vector256<byte> src, N256 w, short t = default)
             => ConvertToVector256Int16(vhi(src));
 
@@ -392,7 +392,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vmaplo(Vector256<short> src, N256 w, int t = default)
             => ConvertToVector256Int32(vlo(src));
 
@@ -402,7 +402,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<int> vmaphi(Vector256<short> src, N256 w, int t = default)
             => ConvertToVector256Int32(vhi(src));
 
@@ -415,7 +415,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vmaplo(Vector256<ushort> src, N256 w, uint t = default)
             => v32u(ConvertToVector256Int32(vlo(src)));
 
@@ -425,7 +425,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<uint> vmaphi(Vector256<ushort> src, N256 w, uint t = default)
             => v32u(ConvertToVector256Int32(vhi(src)));
 
@@ -438,7 +438,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<long> vmaplo(Vector256<int> src, N256 w, long t = default)
             => ConvertToVector256Int64(vlo(src));
 
@@ -448,7 +448,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<long> vmaphi(Vector256<int> src, N256 w, long t = default)
             => ConvertToVector256Int64(vhi(src));
 
@@ -461,7 +461,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> vmaplo(Vector256<uint> src, N256 w, ulong t = default)
             => v64u(ConvertToVector256Int64(vlo(src)));
 
@@ -471,7 +471,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ulong> vmaphi(Vector256<uint> src, N256 w, ulong t = default)
             => v64u(ConvertToVector256Int64(vhi(src)));
     }

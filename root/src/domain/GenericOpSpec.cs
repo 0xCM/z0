@@ -13,15 +13,15 @@ namespace Z0
 
     public class GenericOpSpec : OpSpec
     {            
-        public static GenericOpSpec Define(Moniker id, string name, MethodInfo method, PrimalKind[] kinds)            
+        public static GenericOpSpec Define(Moniker id, string name, MethodInfo method, NumericKind[] kinds)            
             => new GenericOpSpec(id,name,method, kinds);
 
-        GenericOpSpec(Moniker id, string name, MethodInfo method, PrimalKind[] kinds)
+        GenericOpSpec(Moniker id, string name, MethodInfo method, NumericKind[] kinds)
             : base(id, name,method)
         {
             this.Kinds = kinds;
         }
     
-        public PrimalKind[] Kinds {get;}       
+        public NumericKind[] Kinds {get;}       
     }
 }

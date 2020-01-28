@@ -15,10 +15,9 @@ namespace Z0
         void EmitAll()
         {                        
             new ExperimentalScenarios().Emit();
-            new PrimalScenarios().Emit();
             var a = GetType().Assembly;
             var clridx = ClrMetadataIndex.Create(a);
-            var context = AsmServices.Context(clridx, DataResourceIndex.Empty, AsmFormatConfig.Default);
+            var context = AsmContext.New(clridx, DataResourceIndex.Empty, AsmFormatConfig.Default);
             foreach(var t in a.GetTypes().WithAttributions(typeof(OpCodeProvider)))
             {
                 var emitter = AsmProcessServices.Emitter(context);

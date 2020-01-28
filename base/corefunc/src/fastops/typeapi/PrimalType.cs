@@ -18,18 +18,18 @@ namespace Z0
         /// Specifies the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
         /// </summary>
         [MethodImpl(Inline)]
-        public static string keyword(PrimalKind k)
+        public static string keyword(NumericKind k)
             => k switch {
-                PrimalKind.U8 => "byte",
-                PrimalKind.I8 => "sbyte",
-                PrimalKind.U16 => "ushort",
-                PrimalKind.I16 => "short",
-                PrimalKind.U32 => "uint",
-                PrimalKind.I32 => "int",
-                PrimalKind.I64 => "long",
-                PrimalKind.U64 => "ulong",
-                PrimalKind.F32 => "float",
-                PrimalKind.F64 => "double",
+                NumericKind.U8 => "byte",
+                NumericKind.I8 => "sbyte",
+                NumericKind.U16 => "ushort",
+                NumericKind.I16 => "short",
+                NumericKind.U32 => "uint",
+                NumericKind.I32 => "int",
+                NumericKind.I64 => "long",
+                NumericKind.U64 => "ulong",
+                NumericKind.F32 => "float",
+                NumericKind.F64 => "double",
                 _ => throw unsupported(k)
             };
 
@@ -37,18 +37,18 @@ namespace Z0
         /// Specifies the keyword used to designate a kind-identified primal type, if possible; throws an exception otherwise
         /// </summary>
         [MethodImpl(Inline)]
-        public static PrimalKind kind(PrimalId k)
+        public static NumericKind kind(PrimalId k)
             => k switch {
-                PrimalId.U8 => PrimalKind.U8,
-                PrimalId.I8 => PrimalKind.I8,
-                PrimalId.U16 => PrimalKind.U16,
-                PrimalId.I16 => PrimalKind.I16,
-                PrimalId.U32 => PrimalKind.U32,
-                PrimalId.I32 => PrimalKind.I32,
-                PrimalId.I64 => PrimalKind.I64,
-                PrimalId.U64 => PrimalKind.U64,
-                PrimalId.F32 => PrimalKind.F32,
-                PrimalId.F64 => PrimalKind.F64,
+                PrimalId.U8 => NumericKind.U8,
+                PrimalId.I8 => NumericKind.I8,
+                PrimalId.U16 => NumericKind.U16,
+                PrimalId.I16 => NumericKind.I16,
+                PrimalId.U32 => NumericKind.U32,
+                PrimalId.I32 => NumericKind.I32,
+                PrimalId.I64 => NumericKind.I64,
+                PrimalId.U64 => NumericKind.U64,
+                PrimalId.F32 => NumericKind.F32,
+                PrimalId.F64 => NumericKind.F64,
                 _ => throw unsupported(k)
             };
 
@@ -56,39 +56,39 @@ namespace Z0
         /// Returns a primal type's kind classifier
         /// </summary>
         [MethodImpl(Inline | Optimize)]
-        public static PrimalKind kind(Type t)
+        public static NumericKind kind(Type t)
             => Type.GetTypeCode(t.EffectiveType()) 
                 switch
                 {
-                    TypeCode.Byte => PrimalKind.U8,
-                    TypeCode.SByte => PrimalKind.I8,
-                    TypeCode.Int16 => PrimalKind.I16,
-                    TypeCode.UInt16 => PrimalKind.U16,
-                    TypeCode.Int32 => PrimalKind.I32,
-                    TypeCode.UInt32 => PrimalKind.U32,
-                    TypeCode.Int64 => PrimalKind.I64,
-                    TypeCode.UInt64 => PrimalKind.U64,
-                    TypeCode.Single => PrimalKind.F32,
-                    TypeCode.Double => PrimalKind.F64,
-                    _ => PrimalKind.None
+                    TypeCode.Byte => NumericKind.U8,
+                    TypeCode.SByte => NumericKind.I8,
+                    TypeCode.Int16 => NumericKind.I16,
+                    TypeCode.UInt16 => NumericKind.U16,
+                    TypeCode.Int32 => NumericKind.I32,
+                    TypeCode.UInt32 => NumericKind.U32,
+                    TypeCode.Int64 => NumericKind.I64,
+                    TypeCode.UInt64 => NumericKind.U64,
+                    TypeCode.Single => NumericKind.F32,
+                    TypeCode.Double => NumericKind.F64,
+                    _ => NumericKind.None
                 };
 
         /// <summary>
         /// Returns a kind-identified system type if possible; throws an exception otherwise
         /// </summary>
         [MethodImpl(Inline | Optimize)]
-        public static Type type(PrimalKind k)
+        public static Type type(NumericKind k)
             => k switch {
-                PrimalKind.U8 => typeof(byte),
-                PrimalKind.I8 => typeof(sbyte),
-                PrimalKind.U16 => typeof(ushort),
-                PrimalKind.I16 => typeof(short),
-                PrimalKind.U32 => typeof(uint),
-                PrimalKind.I32 => typeof(int),
-                PrimalKind.I64 => typeof(long),
-                PrimalKind.U64 => typeof(ulong),
-                PrimalKind.F32 => typeof(float),
-                PrimalKind.F64 => typeof(double),
+                NumericKind.U8 => typeof(byte),
+                NumericKind.I8 => typeof(sbyte),
+                NumericKind.U16 => typeof(ushort),
+                NumericKind.I16 => typeof(short),
+                NumericKind.U32 => typeof(uint),
+                NumericKind.I32 => typeof(int),
+                NumericKind.I64 => typeof(long),
+                NumericKind.U64 => typeof(ulong),
+                NumericKind.F32 => typeof(float),
+                NumericKind.F64 => typeof(double),
                 _ => throw unsupported(k)
             };
 
@@ -97,18 +97,18 @@ namespace Z0
         /// </summary>
         /// <param name="k">The type kine</param>
         [MethodImpl(Inline)]
-        public static int width(PrimalKind k)
+        public static int width(NumericKind k)
             => k switch {
-                PrimalKind.U8 => 8,
-                PrimalKind.I8 => 8,
-                PrimalKind.U16 => 16,
-                PrimalKind.I16 => 16,
-                PrimalKind.U32 => 32,
-                PrimalKind.I32 => 32,
-                PrimalKind.I64 => 64,
-                PrimalKind.U64 => 64,
-                PrimalKind.F32 => 32,
-                PrimalKind.F64 => 64,
+                NumericKind.U8 => 8,
+                NumericKind.I8 => 8,
+                NumericKind.U16 => 16,
+                NumericKind.I16 => 16,
+                NumericKind.U32 => 32,
+                NumericKind.I32 => 32,
+                NumericKind.I64 => 64,
+                NumericKind.U64 => 64,
+                NumericKind.F32 => 32,
+                NumericKind.F64 => 64,
                 _ => 0
             };
 
@@ -117,7 +117,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The type kine</param>
         [MethodImpl(Inline)]
-        public static int size(PrimalKind kind)
+        public static int size(NumericKind kind)
             => width(kind)/8;
 
         /// <summary>
@@ -125,31 +125,31 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The type to test</typeparam>
         [MethodImpl(Inline)]
-        public static bit floating(PrimalKind k)
-            => (k & PrimalKind.Fractional) != 0;
+        public static bit floating(NumericKind k)
+            => (k & NumericKind.Fractional) != 0;
 
         /// <summary>
         /// Determines whether a kind is one of the signed integer types
         /// </summary>
         /// <typeparam name="T">The type to test</typeparam>
         [MethodImpl(Inline)]
-        public static bit signed(PrimalKind k)
-            => (k & PrimalKind.Signed) != 0;
+        public static bit signed(NumericKind k)
+            => (k & NumericKind.Signed) != 0;
 
         /// <summary>
         /// Determines whether a kind is one of the signed integer types
         /// </summary>
         /// <typeparam name="T">The type to test</typeparam>
         [MethodImpl(Inline)]
-        public static bit unsigned(PrimalKind k)
-            => (k & PrimalKind.Unsigned) != 0;
+        public static bit unsigned(NumericKind k)
+            => (k & NumericKind.Unsigned) != 0;
 
         /// <summary>
         /// Determines whether a type is a primal integer
         /// </summary>
         /// <typeparam name="T">The type to test</typeparam>
         [MethodImpl(Inline)]
-        public static bit integral(PrimalKind k)
+        public static bit integral(NumericKind k)
             => signed(k) || unsigned(k);
 
         /// <summary>
@@ -158,9 +158,9 @@ namespace Z0
         /// <param name="k">The primal classifier</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]   
-        public static char indicator(PrimalKind k)
+        public static char indicator(NumericKind k)
         {
-            if(k == PrimalKind.None)
+            if(k == NumericKind.None)
                 return AsciLower.o;
             else if(unsigned(k))
                 return AsciLower.u;
@@ -177,7 +177,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The primal classifier</param>
         [MethodImpl(Inline)]   
-        public static PrimalId id(PrimalKind k)
+        public static PrimalId id(NumericKind k)
             => (PrimalId)((((uint)k << 8) >> 24) << 16);
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The primal kind</param>
         [MethodImpl(Inline)]   
-        public static string signature(PrimalKind k)
+        public static string signature(NumericKind k)
             => $"{width(k)}{indicator(k)}";        
 
         /// <summary>
@@ -194,8 +194,8 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]   
-        public static string signature<T>(T t = default)
-            => signature(typeof(T).Kind());
+        public static string signature(Type t)
+            => signature(t.Kind());
 
         /// <summary>
         /// Returns true if the primal source type is signed, false otherwise
@@ -260,8 +260,8 @@ namespace Z0
             => t == typeof(float) 
             || t == typeof(double);
 
-        public static IEnumerable<PrimalKind> closures(MemberInfo m)
-            => m.CustomAttribute<PrimalClosuresAttribute>().MapValueOrElse(a => a.SystemPrimitive.DistinctKinds(), () => items<PrimalKind>());
+        public static IEnumerable<NumericKind> closures(MemberInfo m)
+            => m.CustomAttribute<PrimalClosuresAttribute>().MapValueOrElse(a => a.SystemPrimitive.DistinctKinds(), () => items<NumericKind>());
 
         /// <summary>
         /// Determines whether a type is classified as primal
@@ -269,7 +269,7 @@ namespace Z0
         /// <param name="t">The type to test</param>
         [MethodImpl(Inline)]
         public static bool test(Type t)
-            => kind(t) != PrimalKind.None;
+            => kind(t) != NumericKind.None;
 
         /// <summary>
         /// Determines the primal kind (if any) of a parametrically-identifed type
@@ -277,7 +277,7 @@ namespace Z0
         /// <param name="t">A type value representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static PrimalKind kind<T>(T t = default)
+        public static NumericKind kind<T>(T t = default)
             where T : unmanaged
                 => kind_u(t);
         
@@ -285,7 +285,7 @@ namespace Z0
         public static FixedWidth width(Type t)
         {
             var k = kind(t);
-            if(k != PrimalKind.None)
+            if(k != NumericKind.None)
                 return (FixedWidth)(ushort)k;
             else
                 return FixedWidth.None;            
@@ -305,47 +305,47 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static PrimalKind kind_u<T>(T t = default)
+        static NumericKind kind_u<T>(T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return PrimalKind.U8;
+                return NumericKind.U8;
             else if(typeof(T) == typeof(ushort))
-                return PrimalKind.U16;
+                return NumericKind.U16;
             else if(typeof(T) == typeof(uint))
-                return PrimalKind.U32;
+                return NumericKind.U32;
             else if(typeof(T) == typeof(ulong))
-                return PrimalKind.U64;
+                return NumericKind.U64;
             else
                 return kind_i(t);
         }
 
         [MethodImpl(Inline)]
-        static PrimalKind kind_i<T>(T t = default)
+        static NumericKind kind_i<T>(T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return PrimalKind.I8;
+                return NumericKind.I8;
             else if(typeof(T) == typeof(short))
-                return PrimalKind.I16;
+                return NumericKind.I16;
             else if(typeof(T) == typeof(int))
-                return PrimalKind.I32;
+                return NumericKind.I32;
             else if(typeof(T) == typeof(long))
-                return PrimalKind.I64;
+                return NumericKind.I64;
             else
                 return kind_f(t);
         }
 
         [MethodImpl(Inline)]
-        static PrimalKind kind_f<T>(T t = default)
+        static NumericKind kind_f<T>(T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return PrimalKind.F32;
+                return NumericKind.F32;
             else if(typeof(T) == typeof(double))
-                return PrimalKind.F64;
+                return NumericKind.F64;
             else
-                return PrimalKind.None;            
+                return NumericKind.None;            
         }
     }
 }

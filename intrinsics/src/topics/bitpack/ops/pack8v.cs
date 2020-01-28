@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit soure</param>
         /// <param name="index">The byte-relative index from which the bit will be extracted, an integer in the range [0,7]</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static ushort pack8<T>(Vector128<T> src, byte index)
             where T : unmanaged
                 => ginx.vtakemask(src,index);
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit soure</param>
         /// <param name="index">The byte-relative index from which the bit will be extracted, an integer in the range [0,7]</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static uint pack8<T>(Vector256<T> src, byte index)
             where T : unmanaged
                 => ginx.vtakemask(src,index);
@@ -39,7 +39,7 @@ namespace Z0
         /// Packs 16 1-bit values taken from the most significant bit of each source byte
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static ushort packmsb8<T>(Vector128<T> src)
             where T : unmanaged
                 => ginx.vtakemask(src);
@@ -48,7 +48,7 @@ namespace Z0
         /// Packs 32 1-bit values taken from the most significant bit of each source byte
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static ulong packmsb8<T>(Vector256<T> src)
             where T : unmanaged
                 => ginx.vtakemask(src);
@@ -57,7 +57,7 @@ namespace Z0
         /// Packs 16 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static ushort packlsb8<T>(Vector128<T> src)
             where T : unmanaged
                 => pack8(src,0);
@@ -66,7 +66,7 @@ namespace Z0
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static uint packlsb8<T>(Vector256<T> src)
             where T : unmanaged
                 => pack8(src,0);

@@ -12,7 +12,7 @@ namespace Z0
 
     partial class Converter
     {
-        [MethodImpl(Inline), Op("convert64u"), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op("convert64u"), PrimalClosures(NumericKind.All)]
         public static T convert<T>(ulong src)
             where T : unmanaged
         {

@@ -11,7 +11,7 @@ namespace Z0
 
     partial class GXTypes
     {
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Add<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
@@ -29,7 +29,7 @@ namespace Z0
                 => mathspan.add(lhs,rhs,dst);
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Sub<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
@@ -48,7 +48,7 @@ namespace Z0
 
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Mul<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
@@ -68,7 +68,7 @@ namespace Z0
 
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Div<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
@@ -86,7 +86,7 @@ namespace Z0
                 => mathspan.div(lhs,rhs,dst);
         }
 
-        [PrimalClosures(PrimalKind.Integers)]
+        [PrimalClosures(NumericKind.Integers)]
         public readonly struct ModOp<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
@@ -104,7 +104,7 @@ namespace Z0
                 => mathspan.mod(lhs,rhs,dst);
         }
 
-        [PrimalClosures(PrimalKind.Integers)]
+        [PrimalClosures(NumericKind.Integers)]
         public readonly struct ModMul<T> : ITernaryOp<T>, ITernarySpanOp<T>
             where T : unmanaged        
         {
@@ -122,7 +122,7 @@ namespace Z0
                 => mathspan.modmul(a,b,c,dst);
         }
 
-        [PrimalClosures(PrimalKind.Integers)]
+        [PrimalClosures(NumericKind.Integers)]
         public readonly struct Even<T> : IUnaryPred<T>, IUnarySpanPred<T>
             where T : unmanaged        
         {
@@ -140,7 +140,7 @@ namespace Z0
                 => mathspan.even(src,dst);
         }
 
-        [PrimalClosures(PrimalKind.Integers)]
+        [PrimalClosures(NumericKind.Integers)]
         public readonly struct Odd<T> : IUnaryPred<T>, IUnarySpanPred<T>
             where T : unmanaged        
         {
@@ -158,7 +158,7 @@ namespace Z0
                 => mathspan.odd(src,dst);
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Clamp<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
@@ -176,7 +176,7 @@ namespace Z0
                 => mathspan.clamp(l,r,dst);
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Square<T> : IUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {
@@ -195,7 +195,7 @@ namespace Z0
 
         }
     
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Negate<T> : IUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {
@@ -214,7 +214,7 @@ namespace Z0
         }
     
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Dec<T> : IUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {
@@ -232,7 +232,7 @@ namespace Z0
                 => mathspan.dec(src,dst);
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Inc<T> : IUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {        
@@ -250,7 +250,7 @@ namespace Z0
                 => mathspan.inc(src,dst);
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Abs<T>  : IUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {
@@ -268,7 +268,7 @@ namespace Z0
                 => mathspan.inc(src,dst);
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Dist<T> : IFunc<T,T,ulong>
             where T : unmanaged        
         {

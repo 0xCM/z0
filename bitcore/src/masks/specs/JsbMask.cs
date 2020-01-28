@@ -35,7 +35,7 @@ namespace Z0
 
         MaskKind IMaskSpec.M => M;
 
-        PrimalKind IMaskSpec.K 
+        NumericKind IMaskSpec.K 
         {
             [MethodImpl(Inline)]
             get => PrimalType.kind<T>();

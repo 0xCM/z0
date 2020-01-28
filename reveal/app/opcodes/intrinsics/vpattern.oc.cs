@@ -24,13 +24,13 @@ namespace Z0.OpCodes
         public static BlockKind bkind_256x32u()
             => Classifiers.block<N256,uint>();
 
-        public static PrimalKind pkind_8u()
+        public static NumericKind pkind_8u()
             => Classifiers.primal<byte>();
 
-        public static PrimalKind pkind_32u()
+        public static NumericKind pkind_32u()
             => Classifiers.primal<uint>();
 
-        public static PrimalKind pkind_32i()
+        public static NumericKind pkind_32i()
             => Classifiers.primal<int>();
 
         public static Vector128<byte> ones_128x8u()

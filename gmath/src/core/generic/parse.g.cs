@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gmath
     {
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static T parse<T>(string src)
             where T : unmanaged
         {

@@ -67,11 +67,11 @@ namespace Z0
             => Described[index] = DataResource.Define(name, src);
 
         [MethodImpl(Inline)]
-        static string resid(string basename, ITypeNat w, PrimalKind kind)
+        static string resid(string basename, ITypeNat w, NumericKind kind)
             => ResourceIdentity.define(basename, w, kind);
         
         [MethodImpl(Inline)]
-        static string resid(string basename, ITypeNat w1, ITypeNat w2, PrimalKind kind)
+        static string resid(string basename, ITypeNat w1, ITypeNat w2, NumericKind kind)
             => ResourceIdentity.define(basename, w1,w2, kind);
 
     }

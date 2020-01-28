@@ -16,22 +16,22 @@ namespace Z0.Logix
 
     public static class CompareEval
     {
-        [Op("cmpexpr"), PrimalClosures(PrimalKind.Integers & ~PrimalKind.U64)]
+        [Op("cmpexpr"), PrimalClosures(NumericKind.Integers & ~NumericKind.U64)]
         public static LiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
             where T : unmanaged
                 => ScalarOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
-        [Op("cmppred"), PrimalClosures(PrimalKind.Integers & ~PrimalKind.U64)]
+        [Op("cmppred"), PrimalClosures(NumericKind.Integers & ~NumericKind.U64)]
         public static bit eval<T>(IComparisonPred<T> expr)
             where T : unmanaged
                 => PredicateApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
-        [Op(vcmp128), PrimalClosures(PrimalKind.Integers & ~PrimalKind.U64)]
+        [Op(vcmp128), PrimalClosures(NumericKind.Integers & ~NumericKind.U64)]
         public static LiteralExpr<Vector128<T>> eval<T>(IComparisonExpr<Vector128<T>> expr)
             where T : unmanaged
                 => VectorizedOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
-        [Op(vcmp256), PrimalClosures(PrimalKind.Integers & ~PrimalKind.U64)]
+        [Op(vcmp256), PrimalClosures(NumericKind.Integers & ~NumericKind.U64)]
         public static LiteralExpr<Vector256<T>> eval<T>(IComparisonExpr<Vector256<T>> expr)
             where T : unmanaged
                 => VectorizedOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);

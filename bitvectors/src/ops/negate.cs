@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> negate<T>(BitVector<T> x)
             where T : unmanaged
                 => gmath.negate(x.Scalar);

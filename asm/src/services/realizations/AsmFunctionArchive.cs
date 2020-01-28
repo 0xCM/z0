@@ -39,9 +39,9 @@ namespace Z0
             this.Catalog = catalog;
             this.Subject = subject;
             this.TargetFolder = Paths.AsmDataDir(RelativeLocation.Define(catalog, subject));
-            this.DefaultFormatter = AsmServices.Formatter(context);
+            this.DefaultFormatter = context.AsmFormatter();
             this.GroupFormatConfig = AsmFormatConfig.Default.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
-            this.GroupFormatter = AsmServices.Formatter(context.WithFormat(GroupFormatConfig));
+            this.GroupFormatter = context.WithFormat(GroupFormatConfig).AsmFormatter();
         }
 
         public AsmEmissionToken Save(AsmFunction src)

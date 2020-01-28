@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static bit nonz<T>(T a)
             where T : unmanaged
                 => nonz_u(a);

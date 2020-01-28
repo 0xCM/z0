@@ -65,7 +65,7 @@ namespace Z0
     }    
 
 
-    public interface IPrimalClass : IKind<PrimalKind>
+    public interface IPrimalClass : IKind<NumericKind>
     {
 
     }

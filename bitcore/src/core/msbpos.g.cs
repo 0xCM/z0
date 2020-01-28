@@ -16,7 +16,7 @@ namespace Z0
         /// Computes the position of the highest enabled source bit, a number in the inclusive range [0 , bitsize[T] - 1]
         /// </summary>
         /// <param name="src">The source bit</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static int msbpos<T>(T src)
             where T : unmanaged
         {

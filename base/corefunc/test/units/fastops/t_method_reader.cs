@@ -34,7 +34,7 @@ namespace Z0
         public void capture_vectorized_generics()
         {
             using var writer = NativeTestWriter();
-            var types = PrimalKind.All.PrimalTypes();
+            var types = NumericKind.All.PrimalTypes();
             foreach(var t in types)
                 NativeCapture.capture(typeof(VectorizedCases),t, writer);
         }

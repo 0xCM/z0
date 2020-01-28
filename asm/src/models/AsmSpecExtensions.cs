@@ -320,9 +320,9 @@ namespace Z0
                 src.BranchInfo(index,baseaddress).ValueOrDefault()
                 );
         
-        const PrimalIndicator f = PrimalIndicator.Float;
-        const PrimalIndicator i = PrimalIndicator.Signed;
-        const PrimalIndicator u = PrimalIndicator.Unsigned;
+        const NumericIndicator f = NumericIndicator.Float;
+        const NumericIndicator i = NumericIndicator.Signed;
+        const NumericIndicator u = NumericIndicator.Unsigned;
 
         public static MonikerSegment ToMonikerSegment(this MemorySize src)
             => src switch {

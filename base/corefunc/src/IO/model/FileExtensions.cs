@@ -14,9 +14,13 @@ namespace Z0
     {
         public const string Csv = "csv";
 
-        public const string Asm = "asm";
+        public static FileExtension Asm =>  FileExtension.Define("asm");
 
-        public const string Hex = "hex";
+        public static FileExtension Il =>  FileExtension.Define("il");
+
+        public static FileExtension Hex =>  FileExtension.Define("hex");
+
+        public static FileExtension Cs =>  FileExtension.Define("cs");
         
 
     }

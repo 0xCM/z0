@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="b">The second factor</param>
         /// <param name="m">The modulus</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T modmul<T>(T a, T b, T m)
             where T : unmanaged
                 => modmul_u(a,b,m);

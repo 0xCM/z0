@@ -14,58 +14,58 @@ namespace Z0
 
     partial class vblocks
     {
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers & (~PrimalKind.U64))]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(NumericKind.Integers & (~NumericKind.U64))]
         public static ref readonly Block128<T> vmax<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vmax<T>(n128));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers & (~PrimalKind.U64))]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(NumericKind.Integers & (~NumericKind.U64))]
         public static ref readonly Block256<T> vmax<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vmax<T>(n256));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers & (~PrimalKind.U64))]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(NumericKind.Integers & (~NumericKind.U64))]
         public static ref readonly Block128<T> vmin<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vmin<T>(n128));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers & (~PrimalKind.U64))]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(NumericKind.Integers & (~NumericKind.U64))]
         public static ref readonly Block256<T> vmin<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vmin<T>(n256));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(NumericKind.Integers)]
         public static ref readonly Block128<T> veq<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.veq<T>(n128));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(NumericKind.Integers)]
         public static ref readonly Block256<T> veq<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.veq<T>(n256));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers & (~PrimalKind.U64))]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(NumericKind.Integers & (~NumericKind.U64))]
         public static ref readonly Block128<T> vlt<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vlt<T>(n128));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers& (~PrimalKind.U64))]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(NumericKind.Integers& (~NumericKind.U64))]
         public static ref readonly Block256<T> vlt<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vlt<T>(n256));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers & (~PrimalKind.U64))]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(NumericKind.Integers & (~NumericKind.U64))]
         public static ref readonly Block128<T> vgt<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vgt<T>(n128));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers& (~PrimalKind.U64))]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(NumericKind.Integers& (~NumericKind.U64))]
         public static ref readonly Block256<T> vgt<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vgt<T>(n256));
 
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(NumericKind.Integers)]
         public static Span<bit> vnonz<T>(in Block128<T> a, Span<bit> dst)
             where T : unmanaged
         {
@@ -77,7 +77,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(NumericKind.Integers)]
         public static Span<bit> vnonz<T>(in Block256<T> a, Span<bit> dst)
             where T : unmanaged
         {
@@ -89,7 +89,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(NumericKind.Integers)]
         public static Span<bit> vtestc<T>(in Block128<T> a, in Block128<T> b, Span<bit> dst)
             where T : unmanaged
         {            
@@ -102,7 +102,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(NumericKind.Integers)]
         public static Span<bit> vtestc<T>(in Block256<T> a, in Block256<T> b, Span<bit> dst)
             where T : unmanaged
         {
@@ -114,7 +114,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(NumericKind.Integers)]
         public static Span<bit> vtestz<T>(in Block128<T> a, in Block128<T> b, Span<bit> dst)
             where T : unmanaged
         {
@@ -126,7 +126,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(NumericKind.Integers)]
         public static Span<bit> vtestz<T>(in Block256<T> a, in Block256<T> b, Span<bit> dst)
             where T : unmanaged
         {

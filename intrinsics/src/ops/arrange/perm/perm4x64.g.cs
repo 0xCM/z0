@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="spec">The perm spec</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector256<T> vperm4x64<T>(Vector256<T> x, [Imm] byte spec)
             where T : unmanaged
                 => vperm4x64_u(x,spec);
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="spec">The perm spec</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), PrimalClosures(NumericKind.All)]
         public static Vector256<T> vperm4x64<T>(Vector256<T> x, Perm4L spec)
             where T : unmanaged
                 => vperm4x64_u(x, (byte)spec);

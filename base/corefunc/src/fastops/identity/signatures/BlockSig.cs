@@ -11,10 +11,10 @@ namespace Z0
 
     public readonly struct BlockSig
     {        
-        public static BlockSig Define(BlockWidth width, PrimalKind cellkind)
+        public static BlockSig Define(BlockWidth width, NumericKind cellkind)
             => new BlockSig(width,cellkind);
 
-        public BlockSig(BlockWidth width, PrimalKind cellkind)
+        public BlockSig(BlockWidth width, NumericKind cellkind)
         {
             this.BlockWidth = width;
             this.CellKind = cellkind;
@@ -22,7 +22,7 @@ namespace Z0
         
         public readonly BlockWidth BlockWidth;
 
-        public readonly PrimalKind CellKind;
+        public readonly NumericKind CellKind;
 
         public string Format()
             => $"{(uint)BlockWidth}x{CellKind.Format()}";

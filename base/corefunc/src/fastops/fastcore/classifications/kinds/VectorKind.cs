@@ -20,17 +20,17 @@ namespace Z0
         /// <summary>
         /// A vector defined over signed integers
         /// </summary>        
-        Signed = PrimalKind.Signed,
+        Signed = NumericKind.Signed,
 
         /// <summary>
         /// A vector defined over unsigned integers
         /// </summary>        
-        Unsigned = PrimalKind.Unsigned,
+        Unsigned = NumericKind.Unsigned,
 
         /// <summary>
         /// A vector defined over floating points
         /// </summary>        
-        Fractional = PrimalKind.Fractional,
+        Fractional = NumericKind.Fractional,
 
         /// <summary>
         /// A 128-bit vector

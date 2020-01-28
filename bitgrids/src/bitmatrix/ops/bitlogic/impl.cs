@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), BitMatrixOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), BitMatrixOp, PrimalClosures(NumericKind.Integers)]
         public static unsafe BitMatrix<T> impl<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
         {
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), BitMatrixOp(true), PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), BitMatrixOp(true), PrimalClosures(NumericKind.Integers)]
         public static unsafe ref BitMatrix<T> impl<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {

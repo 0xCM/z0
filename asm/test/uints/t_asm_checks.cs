@@ -52,7 +52,7 @@ namespace Z0
             var op = nameof(math.and);
             var index = src.CodeArchive(subject).Read(Moniker.Parse(op)).ToCodeIndex(false); 
 
-            index.PrimalOp(op, PrimalKind.U32)
+            index.PrimalOp(op, NumericKind.U32)
                     .OnSome(code => Trace(code,SeverityLevel.HiliteCD))
                     .OnNone(() => Claim.fail());
 
@@ -86,7 +86,7 @@ namespace Z0
             var archive = AssemblyId.Intrinsics.CodeArchive(nameof(dinx));
             var index = archive.Read(Moniker.Parse(nameof(dinx.vadd))).ToCodeIndex(false);
 
-            index.VectorOp(nameof(dinx.vadd), FixedWidth.W256, PrimalKind.U32)
+            index.VectorOp(nameof(dinx.vadd), FixedWidth.W256, NumericKind.U32)
                     .OnSome(code => Trace(code,SeverityLevel.HiliteCD))
                     .OnNone(() => Claim.fail());
 
@@ -213,7 +213,7 @@ namespace Z0
         public void vector_bitlogic_match()
         {
             var names = array("vxor", "vand", "vor", "vnor", "vxnor", "vnand", "vcimpl");
-            var kinds = PrimalKind.Integers.DistinctKinds();
+            var kinds = NumericKind.Integers.DistinctKinds();
             var widths = array(FixedWidth.W128, FixedWidth.W256);
             foreach(var n in names)
             foreach(var w in widths)
@@ -228,7 +228,7 @@ namespace Z0
         void primal_bitlogic_match()
         {
             var names = PrimalBitLogicOps;
-            var kinds = PrimalKind.Integers.DistinctKinds();
+            var kinds = NumericKind.Integers.DistinctKinds();
             var widths = array(FixedWidth.W8, FixedWidth.W16, FixedWidth.W32, FixedWidth.W64);
             foreach(var n in names)
             foreach(var w in widths)
@@ -236,7 +236,7 @@ namespace Z0
                 primal_match(n, w, k);                        
         }
 
-        void primal_match(string name, FixedWidth w, PrimalKind kind)
+        void primal_match(string name, FixedWidth w, NumericKind kind)
         {
             var catalog = nameof(gmath);
             var dSrc = nameof(math);
@@ -245,8 +245,8 @@ namespace Z0
             var dId = OpIdentity.define(name, kind, false);
             var gId = OpIdentity.define(name, kind, true);
 
-            var dArchive = AsmServices.CodeArchive(catalog, dSrc);
-            var gArchive = AsmServices.CodeArchive(catalog, gSrc);
+            var dArchive = Context.CodeArchive(catalog, dSrc);
+            var gArchive = Context.CodeArchive(catalog, gSrc);
 
             var dAsm = dArchive.ReadBlock(dId).OnNone(() => PostMessage($"{dId} not found"));
             var gAsm = gArchive.ReadBlock(gId).OnNone(() => PostMessage($"{gId} not found"));
@@ -259,15 +259,15 @@ namespace Z0
             success.OnNone(() => Claim.fail());
         }
 
-        void vector_match(string name, FixedWidth w, PrimalKind kind)
+        void vector_match(string name, FixedWidth w, NumericKind kind)
         {
             var catalog = typeof(dinx).Assembly.OperationCatalog().CatalogName;
             
             var idD = OpIdentity.segmented(name, w, kind, false);
             var idG = OpIdentity.segmented(name, w, kind, true);
 
-            var asmD = AsmServices.CodeArchive(catalog, nameof(dinx)).ReadBlock(idD).OnNone(() => PostMessage($"{idD} not found"));
-            var asmG = AsmServices.CodeArchive(catalog, nameof(ginx)).ReadBlock(idG).OnNone(() => PostMessage($"{idG} not found"));
+            var asmD = Context.CodeArchive(catalog, nameof(dinx)).ReadBlock(idD).OnNone(() => PostMessage($"{idD} not found"));
+            var asmG = Context.CodeArchive(catalog, nameof(ginx)).ReadBlock(idG).OnNone(() => PostMessage($"{idG} not found"));
 
             var success = from d in asmD
                           from g in asmG

@@ -78,7 +78,7 @@ namespace Z0
         /// Determines whether a method is a unary operator over a domain of specified kind
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static bool unaryop(MethodInfo m, PrimalKind k)
+        public static bool unaryop(MethodInfo m, NumericKind k)
             => homogenous(m) && unary(m) && m.ReturnType.Kind() == k;
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Z0
         /// Determines whether a method is a binary operator over a domain of specified kind
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static bool binaryop(MethodInfo m, PrimalKind k)
+        public static bool binaryop(MethodInfo m, NumericKind k)
             => homogenous(m) && binary(m) && m.ReturnType.Kind() == k;
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Z0
         /// Determines whether a method is a ternary operator over a domain of specified kind
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static bool ternaryop(MethodInfo m, PrimalKind k)
+        public static bool ternaryop(MethodInfo m, NumericKind k)
             => homogenous(m) && ternary(m) && m.ReturnType.Kind() == k;
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Z0
         /// Determines whether a method defines an operator over a domain of specified kind
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static bool isoperator(MethodInfo m, PrimalKind k)
+        public static bool isoperator(MethodInfo m, NumericKind k)
             => m.IsFunction() && homogenous(m) && m.Arity() >= 1 && m.ReturnType.Kind() == k;
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static bool primal(this MethodInfo m)
-            => m.ParameterCount() != 0 && m.ParameterTypes().All(t => t.Kind() != PrimalKind.None);
+            => m.ParameterCount() != 0 && m.ParameterTypes().All(t => t.Kind() != NumericKind.None);
 
 
         public static ParamDirection direction(ParameterInfo src)

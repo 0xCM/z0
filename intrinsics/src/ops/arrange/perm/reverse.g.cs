@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static Vector128<T> vreverse<T>(Vector128<T> x)
             where T : unmanaged
                 => vreverse_u(x);
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static Vector256<T> vreverse<T>(Vector256<T> x)
             where T : unmanaged
                 => vreverse_u(x);

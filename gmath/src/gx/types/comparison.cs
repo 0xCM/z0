@@ -11,7 +11,7 @@ namespace Z0
 
     partial class GXTypes
     {
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Eq<T> : IBinaryPred<T>, IBinarySpanPred<T>
             where T : unmanaged        
         {
@@ -30,7 +30,7 @@ namespace Z0
 
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Neq<T> : IBinaryPred<T>, IBinarySpanPred<T>
             where T : unmanaged        
         {
@@ -49,7 +49,7 @@ namespace Z0
 
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Lt<T> : IBinaryPred<T>, IBinarySpanPred<T>
             where T : unmanaged        
         {
@@ -67,7 +67,7 @@ namespace Z0
                 => SpanFunc.apply(this, lhs,rhs,dst);
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct LtEq<T> : IBinaryPred<T>, IBinarySpanPred<T>
             where T : unmanaged        
         {
@@ -85,7 +85,7 @@ namespace Z0
                 => SpanFunc.apply(this, lhs,rhs,dst);
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Gt<T> : IBinaryPred<T>, IBinarySpanPred<T>
             where T : unmanaged        
         {
@@ -103,7 +103,7 @@ namespace Z0
                 => SpanFunc.apply(this, lhs,rhs,dst);
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct GtEq<T> : IBinaryPred<T>, IBinarySpanPred<T>
             where T : unmanaged        
         {
@@ -121,7 +121,7 @@ namespace Z0
                 => SpanFunc.apply(this, lhs,rhs,dst);
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Between<T> : ITernaryPred<T>
             where T : unmanaged        
         {
@@ -135,7 +135,7 @@ namespace Z0
             public readonly bit Invoke(T x, T a, T b) => gmath.between(x,a,b);
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Nonz<T> : IUnaryPred<T>, IUnarySpanPred<T>
             where T : unmanaged        
         {
@@ -154,7 +154,7 @@ namespace Z0
 
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct NegativeOp<T> : IUnaryPred<T>, IUnarySpanPred<T>
             where T : unmanaged        
         {
@@ -172,7 +172,7 @@ namespace Z0
                 => SpanFunc.apply(this, src, dst);
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct PositiveOp<T> : IUnaryPred<T>, IUnarySpanPred<T>
             where T : unmanaged        
         {
@@ -190,7 +190,7 @@ namespace Z0
                 => SpanFunc.apply(this, src, dst);
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Min<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
@@ -209,7 +209,7 @@ namespace Z0
 
         }
 
-        [PrimalClosures(PrimalKind.All)]
+        [PrimalClosures(NumericKind.All)]
         public readonly struct Max<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {

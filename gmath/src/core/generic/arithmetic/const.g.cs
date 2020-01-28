@@ -16,7 +16,7 @@ namespace Z0
         /// Returns the additive identity for a primal type
         /// </summary>
         /// <typeparam name="T">The type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static T zero<T>(T t = default)
             where T : unmanaged
                 => default;
@@ -25,7 +25,7 @@ namespace Z0
         /// Returns the multiplicative identity for a primal type
         /// </summary>
         /// <typeparam name="T">The type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static T one<T>(T t = default)
             where T : unmanaged
                 => zfunc.one<T>();
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T ones<T>(T t = default)
             where T : unmanaged
                 => zfunc.ones<T>();
@@ -44,7 +44,7 @@ namespace Z0
         /// Returns the minimum value that can be represented by a primal type
         /// </summary>
         /// <typeparam name="T">The type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static T minval<T>(T t = default)
             where T : unmanaged
                 => zfunc.minval<T>();
@@ -53,7 +53,7 @@ namespace Z0
         /// Returns the maximum value that can be represented by a primal type
         /// </summary>
         /// <typeparam name="T">The type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static T maxval<T>(T t = default)
             where T : unmanaged
                 => zfunc.maxval<T>();
@@ -62,7 +62,7 @@ namespace Z0
         /// Defines an alternating bit pattern 01 01...01
         /// </summary>
         /// <typeparam name="T">The primal unsigned type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static T altodd<T>()
             where T : unmanaged
         {
@@ -82,7 +82,7 @@ namespace Z0
         /// Defines an alternating bit pattern 10 10...10
         /// </summary>
         /// <typeparam name="T">The primal unsigned type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static T alteven<T>()
             where T : unmanaged
         {

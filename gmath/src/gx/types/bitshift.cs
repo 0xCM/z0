@@ -11,7 +11,7 @@ namespace Z0
 
     partial class GXTypes
     {
-        [PrimalClosures(PrimalKind.Integers)]
+        [PrimalClosures(NumericKind.Integers)]
         public readonly struct Srl<T> : IShiftOp<T>, IUnarySpanOpImm8<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {
@@ -33,7 +33,7 @@ namespace Z0
                 => mathspan.srlv(src,counts,dst);
         }
 
-        [PrimalClosures(PrimalKind.Integers)]
+        [PrimalClosures(NumericKind.Integers)]
         public readonly struct Sll<T> : IShiftOp<T>, IUnarySpanOpImm8<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {

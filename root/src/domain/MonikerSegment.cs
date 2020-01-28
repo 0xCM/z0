@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct MonikerSegment
     {        
-        public static MonikerSegment Empty => Define(FixedWidth.None, FixedWidth.None, PrimalIndicator.None);
+        public static MonikerSegment Empty => Define(FixedWidth.None, FixedWidth.None, NumericIndicator.None);
 
         public static bool TryParse(string src, out MonikerSegment dst)
         {
@@ -32,7 +32,7 @@ namespace Z0
                         {                                
                             if(Enum.IsDefined(typeof(FixedWidth), by))
                             {
-                                dst = Define((FixedWidth)n, (FixedWidth)by, (PrimalIndicator)part1.Last());
+                                dst = Define((FixedWidth)n, (FixedWidth)by, (NumericIndicator)part1.Last());
                                 return true;
                             }
                         }
@@ -46,21 +46,21 @@ namespace Z0
         {
             if( Enum.IsDefined(typeof(FixedWidth),(uint)src.w) &&
                 Enum.IsDefined(typeof(FixedWidth),(uint)src.t) &&
-                Enum.IsDefined(typeof(PrimalIndicator), (ushort)src.i))
+                Enum.IsDefined(typeof(NumericIndicator), (ushort)src.i))
                 return Define((FixedWidth)src.w, 
                     (FixedWidth)src.t, 
-                    (PrimalIndicator)src.i);
+                    (NumericIndicator)src.i);
                 else
                     return Empty;
         }
 
-        public static implicit operator MonikerSegment((FixedWidth w, FixedWidth t, PrimalIndicator i) src)                
+        public static implicit operator MonikerSegment((FixedWidth w, FixedWidth t, NumericIndicator i) src)                
             => new MonikerSegment(src.w, src.t,src.i);
 
-        public static MonikerSegment Define(FixedWidth dominant, FixedWidth segwidth, PrimalIndicator indicator)
+        public static MonikerSegment Define(FixedWidth dominant, FixedWidth segwidth, NumericIndicator indicator)
             => new MonikerSegment(dominant,segwidth,indicator);
 
-        MonikerSegment(FixedWidth dominant, FixedWidth segwidth, PrimalIndicator indicator)
+        MonikerSegment(FixedWidth dominant, FixedWidth segwidth, NumericIndicator indicator)
         {
             this.DominantWidth = dominant;
             this.SegmentWidth = segwidth;
@@ -71,12 +71,12 @@ namespace Z0
 
         public readonly FixedWidth SegmentWidth;
 
-        public readonly PrimalIndicator Indicator;
+        public readonly NumericIndicator Indicator;
 
         public bool IsEmpty
             => DominantWidth == FixedWidth.None &&
                 SegmentWidth == FixedWidth.None &&
-                Indicator == PrimalIndicator.None;
+                Indicator == NumericIndicator.None;
 
         public override string ToString()
             => $"{(int)DominantWidth}{Moniker.SegSep}{(int)SegmentWidth}{(char)Indicator}";

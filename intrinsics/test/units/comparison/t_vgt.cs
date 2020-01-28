@@ -12,8 +12,7 @@ namespace Z0
     public class t_vgt : t_vinx<t_vgt>
     {        
         public void vgt_check()
-        {
-            
+        {            
             vgt_check(n128);
             vgt_check(n256);
         }

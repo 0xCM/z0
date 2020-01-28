@@ -37,14 +37,14 @@ namespace Z0
 
         public AsmFunction Capture(byte imm)
         {
-            var decoder = AsmServices.Decoder(Context);
+            var decoder = Context.Decoder();
             var d = UnaryDelegates(imm).Single();
             return decoder.DecodeFunction(d);
         }
 
         public IEnumerable<AsmFunction> Capture(params byte[] immediates)
         {
-            var decoder = AsmServices.Decoder(Context);
+            var decoder = Context.Decoder();
             foreach(var d in UnaryDelegates(immediates))
                 yield return decoder.DecodeFunction(d);
         }

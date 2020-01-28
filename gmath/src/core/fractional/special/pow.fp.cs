@@ -13,7 +13,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.Floats)]
+        [MethodImpl(Inline), PrimalClosures(NumericKind.Floats)]
         public static T pow<T>(T b, uint exp)
             where T : unmanaged
         {

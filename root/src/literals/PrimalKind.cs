@@ -10,10 +10,10 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     /// <summary>
-    /// Clasifies system-defined primitive types
+    /// Clasifies system-defined numeric primitive types
     /// </summary>
     [Flags]
-    public enum PrimalKind : uint
+    public enum NumericKind : uint
     {    
         None = 0,
         

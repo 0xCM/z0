@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The sequence-relative index of the target bit</param>
         /// <typeparam name="T">The sequence element type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitPos<T> bitpos<T>(int index)
             where T : unmanaged
                 => BitPos.FromBitIndex<T>((uint)index);

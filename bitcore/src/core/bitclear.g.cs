@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="index">The index at which to begin clearing bits</param>
         /// <param name="count">The number of bits to clear</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T bitclear<T>(T src, byte index, byte count)
             where T : unmanaged
                 => bitclear_u(src,index,count);
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="index">The index at which to begin clearing bits</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static T clearbyte<T>(T src, byte index)
             where T : unmanaged
         {

@@ -15,7 +15,7 @@ namespace Z0
     partial class ginx
     {
 
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static Vector128<T> vblend4x32<T>(Vector128<T> x, Vector128<T> y, [Imm] byte spec)        
             where T : unmanaged
                 => vblend4x32_u(x,y,spec);
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static Vector256<T> vblend8x32<T>(Vector256<T> x, Vector256<T> y, [Imm] byte spec)        
             where T : unmanaged
                 => vblend8x32_u(x,y,spec);

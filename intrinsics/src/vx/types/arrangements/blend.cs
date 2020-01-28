@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VXTypes
     {
-        [PrimalClosures(PrimalKind.Integers)]
+        [PrimalClosures(NumericKind.Integers)]
         public readonly struct Blend2x64x128<T> : IVBinOp128Imm8<T>, IVBinaryImm8Resolver128<T>
             where T : unmanaged
         {

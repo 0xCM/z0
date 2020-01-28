@@ -19,7 +19,7 @@ namespace Z0
         /// Reverses the bits in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static T rev<T>(T src)
             where T : unmanaged
         {

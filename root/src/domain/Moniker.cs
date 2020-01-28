@@ -54,7 +54,7 @@ namespace Z0
         /// <summary>
         /// The primal kind over which the the identifier is constructed
         /// </summary>
-        public PrimalKind PrimalKind
+        public NumericKind PrimalKind
             => ParsePrimalKind();
 
         /// <summary>
@@ -196,13 +196,13 @@ namespace Z0
             get => (HasSuffix ? TakeBefore(Text,SuffixSep) : Text).Last();
         }
 
-        PrimalKind ParsePrimalKind()
+        NumericKind ParsePrimalKind()
             => PrimalWidth switch{
-                8 => IsUnsignedInt ? PrimalKind.U8 : PrimalKind.I8,
-                16 => IsUnsignedInt ? PrimalKind.U16 : PrimalKind.I16,
-                32 => IsFloat ? PrimalKind.F32 : (IsUnsignedInt ? PrimalKind.U32 : PrimalKind.I32),
-                64 => IsFloat ? PrimalKind.F64 : (IsUnsignedInt ? PrimalKind.U64 : PrimalKind.I64),
-                _ => PrimalKind.None
+                8 => IsUnsignedInt ? NumericKind.U8 : NumericKind.I8,
+                16 => IsUnsignedInt ? NumericKind.U16 : NumericKind.I16,
+                32 => IsFloat ? NumericKind.F32 : (IsUnsignedInt ? NumericKind.U32 : NumericKind.I32),
+                64 => IsFloat ? NumericKind.F64 : (IsUnsignedInt ? NumericKind.U64 : NumericKind.I64),
+                _ => NumericKind.None
             };
 
         static string RightOfLast(string s, string match)

@@ -14,7 +14,7 @@ namespace Z0
     {
         IEnumerable<AsmCode> Entries {get;}
 
-        Option<AsmCode> Find(string name, FixedWidth width, PrimalKind kind);
+        Option<AsmCode> Find(string name, FixedWidth width, NumericKind kind);
 
         Option<AsmCode> Find<W,T>(string name,  W w = default, T t = default)
             where W : unmanaged, ITypeNat
@@ -27,9 +27,9 @@ namespace Z0
 
         Option<AsmCode> Lookup(Moniker id);        
 
-        Option<AsmCode> PrimalOp(string name, PrimalKind kind);
+        Option<AsmCode> PrimalOp(string name, NumericKind kind);
 
-        Option<AsmCode> VectorOp(string name, FixedWidth width, PrimalKind kind);
+        Option<AsmCode> VectorOp(string name, FixedWidth width, NumericKind kind);
 
         Option<AsmCode> PrimalOp<T>(string name, T t = default)
             where T : unmanaged;

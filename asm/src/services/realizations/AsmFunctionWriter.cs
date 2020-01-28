@@ -29,9 +29,7 @@ namespace Z0
 
         public void Write(AsmFunction src)
         {
-            var formatter = AsmServices.Formatter(Context);
-            var formatted = formatter.FormatDetail(src);
-            Write(formatted);
+            Write(Context.AsmFormatter().FormatDetail(src));
         }
 
         public byte[] TakeBuffer()

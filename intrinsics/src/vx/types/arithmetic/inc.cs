@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VXTypes
     {
-        [PrimalClosures(PrimalKind.Integers)]
+        [PrimalClosures(NumericKind.Integers)]
         public readonly struct Inc128<T> : IVUnaryOp128D<T>, IUnaryBlockedOp128<T>
             where T : unmanaged
         {
@@ -37,7 +37,7 @@ namespace Z0
                 => ref vblocks.vinc(a,c);
         }
 
-        [PrimalClosures(PrimalKind.Integers)]
+        [PrimalClosures(NumericKind.Integers)]
         public readonly struct Inc256<T> : IVUnaryOp256D<T>, IUnaryBlockedOp256<T>
             where T : unmanaged
         {

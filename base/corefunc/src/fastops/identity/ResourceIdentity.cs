@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         [MethodImpl(Inline)]
-        public static string define(string basename, ITypeNat w, PrimalKind kind)
+        public static string define(string basename, ITypeNat w, NumericKind kind)
             => $"{basename}{w}x{primalsig(kind)}";
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         [MethodImpl(Inline)]
-        public static string define(string basename, ITypeNat w1, ITypeNat w2, PrimalKind kind)
+        public static string define(string basename, ITypeNat w1, ITypeNat w2, NumericKind kind)
             => $"{basename}{w1}x{w2}x{primalsig(kind)}";
     }
 

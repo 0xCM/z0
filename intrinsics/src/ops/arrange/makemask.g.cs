@@ -19,7 +19,7 @@ namespace Z0
         /// Distributes each bit of the source to the hi bit of each byte in a 128-bit target vector
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> vmakemask<T>(ushort src)
             where T : unmanaged
                 => vgeneric<T>(v8u(dinx.vmakemask(src)));
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="index">The byte-relative bit position index in the range [0,7]</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> vmakemask<T>(ushort src, byte index)
             where T : unmanaged
                 => vgeneric<T>(v8u(dinx.vmakemask(src, index)));
@@ -38,7 +38,7 @@ namespace Z0
         /// Distributes each bit of the source to the hi bit of each byte a 256-bit target vector
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static Vector256<T> vmakemask<T>(uint src)
             where T : unmanaged
                 => vgeneric<T>(v8u(dinx.vmakemask(src)));
@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="index">The byte-relative bit position index in the range [0,7]</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static Vector256<T> vmakemask<T>(uint src, byte index)
             where T : unmanaged
                 => vgeneric<T>(v8u(dinx.vmakemask(src,index)));

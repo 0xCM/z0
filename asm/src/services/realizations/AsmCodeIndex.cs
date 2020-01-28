@@ -36,7 +36,7 @@ namespace Z0
         public Option<AsmCode> Lookup(Moniker id)
             => index.TryFind(id);
 
-        public Option<AsmCode> VectorOp(string name, FixedWidth width, PrimalKind kind)
+        public Option<AsmCode> VectorOp(string name, FixedWidth width, NumericKind kind)
             => Lookup(OpIdentity.segmented(name, width, kind, generic));
 
         public Option<AsmCode> VectorOp<W,T>(string name, W w = default, T t = default)
@@ -44,14 +44,14 @@ namespace Z0
             where T : unmanaged
                 => Lookup(OpIdentity.segmented(name, (FixedWidth)nateval<W>(), typeof(T).Kind(), generic));
 
-        public Option<AsmCode> PrimalOp(string name, PrimalKind kind)
+        public Option<AsmCode> PrimalOp(string name, NumericKind kind)
             => Lookup(OpIdentity.define(name, kind, generic));
 
         public Option<AsmCode> PrimalOp<T>(string name, T t = default)
             where T : unmanaged
                 => Lookup(OpIdentity.define(name, typeof(T).Kind()));
 
-        Option<AsmCode> IAsmVCodeIndex.Find(string name, FixedWidth width, PrimalKind kind)
+        Option<AsmCode> IAsmVCodeIndex.Find(string name, FixedWidth width, NumericKind kind)
             => VectorOp(name,width,kind);
 
         Option<AsmCode> IAsmVCodeIndex.Find<W, T>(string name, W w, T t)

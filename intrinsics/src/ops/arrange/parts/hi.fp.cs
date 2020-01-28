@@ -35,9 +35,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<double> vhi(Vector128<double> src)
             =>  vscalar(src.GetElement(1));
-
-
-
     }
-
 }

@@ -16,17 +16,17 @@ namespace Z0
     partial class ginx
     {
 
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers& (~PrimalKind.U64))]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers& (~NumericKind.U64))]
         public static Vector128<T> vgt<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vgt_u(x,y);
 
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers& (~PrimalKind.U64))]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers& (~NumericKind.U64))]
         public static Vector256<T> vgt<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vgt_u(x,y);
 
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers& (~PrimalKind.U64))]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers& (~NumericKind.U64))]
         public static Vector512<T> vgt<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
                 => (vgt(x.Lo, y.Lo), vgt(x.Hi, y.Hi));

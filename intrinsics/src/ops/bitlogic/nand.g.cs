@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector128<T> vnand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -42,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
         public static Vector256<T> vnand<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {

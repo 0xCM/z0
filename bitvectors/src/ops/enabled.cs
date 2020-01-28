@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="first">The first bit position</param>
         /// <param name="last">The last bit position</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static bit enabled<T>(BitVector<T> x, int index)
             where T : unmanaged
                 => gbits.testbit(x.data, index);

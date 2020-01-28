@@ -7,27 +7,43 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    
+    using System.Threading;
+    using System.Reflection;
+    using System.Linq;
+
     using static zfunc;
 
     public sealed class AsmContext : OpContext<AsmContext>, IAsmContext
     {   
-        public static IAsmContext Define(IClrIndex clrindex, DataResourceIndex resources,  AsmFormatConfig format)             
+        static int LastId = 0;
+
+
+        public static IAsmContext New()
+            => New(ClrMetadataIndex.Empty, DataResourceIndex.Empty, AsmFormatConfig.Default);
+
+        public static IAsmContext New(IClrIndex clrindex, DataResourceIndex resources,  AsmFormatConfig format)             
             => new AsmContext(clrindex, resources, format, CilFormatConfig.Default, Rng.WyHash64(Seed64.Seed10));
         
         AsmContext(IClrIndex clrIndex, DataResourceIndex resources, AsmFormatConfig format, CilFormatConfig cilFormat, IPolyrand random)
             : base(random)            
         {
             this.Data = ContextData.Create(clrIndex, resources,format,cilFormat);
+            this.ContextId = Interlocked.Increment(ref LastId);
         }
 
-        AsmContext(ContextData data, IPolyrand random)
+        AsmContext(int parent, ContextData data, IPolyrand random)
             : base(random)            
         {
+            this.ParentId = parent;
             this.Data = data;
+            this.ContextId = Interlocked.Increment(ref LastId);
         }
 
         ContextData Data;
+
+        public int ContextId {get;}
+
+        public int ParentId {get;}
 
         public IClrIndex ClrIndex 
             => Data.ClrIndex;
@@ -62,8 +78,16 @@ namespace Z0
             return copy;
         }
 
+        public IAsmContext WithClrIndex(Assembly src)
+        {
+            var copy = Replicate();            
+            copy.Data.WithClrIndex(ClrMetadataIndex.Create(src.Modules.ToArray()));
+            return copy;
+
+        }
+
         AsmContext Replicate()
-            => new AsmContext(Data,Random);
+            => new AsmContext(ContextId, Data,Random);
 
         struct ContextData
         {
@@ -103,6 +127,13 @@ namespace Z0
                 this.ClrIndex = ClrMetadataIndex.Empty;
                 return this;
             }                
+
+            public ContextData WithClrIndex(IClrIndex index)
+            {
+                this.ClrIndex = index;
+                return this;
+            }                
+
         }
     }   
 }

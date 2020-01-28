@@ -17,14 +17,14 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public static implicit operator PrimalKind(PrimalClass<T> src)
+            public static implicit operator NumericKind(PrimalClass<T> src)
                 => src.Classifier;
 
             [MethodImpl(Inline)]
             public static implicit operator PrimalClass<T>(T src)
                 => default;
 
-            public PrimalKind Classifier 
+            public NumericKind Classifier 
             {
                 [MethodImpl(Inline)] 
                 get => PrimalType.kind<T>();
@@ -36,25 +36,25 @@ namespace Z0
             where T : unmanaged
                 => default;
 
-        public readonly struct Primal8u : IPrimalClass { public const PrimalKind Kind = PrimalKind.U8; public PrimalKind Classifier => Kind;}
+        public readonly struct Primal8u : IPrimalClass { public const NumericKind Kind = NumericKind.U8; public NumericKind Classifier => Kind;}
         
-        public readonly struct Primal8i : IPrimalClass { public const PrimalKind Kind = PrimalKind.I8; public PrimalKind Classifier => Kind;}
+        public readonly struct Primal8i : IPrimalClass { public const NumericKind Kind = NumericKind.I8; public NumericKind Classifier => Kind;}
         
-        public readonly struct Primal16u : IPrimalClass { public const PrimalKind Kind = PrimalKind.U16; public PrimalKind Classifier => Kind;}
+        public readonly struct Primal16u : IPrimalClass { public const NumericKind Kind = NumericKind.U16; public NumericKind Classifier => Kind;}
 
-        public readonly struct Primal16i : IPrimalClass { public const PrimalKind Kind = PrimalKind.I16; public PrimalKind Classifier => Kind;}
+        public readonly struct Primal16i : IPrimalClass { public const NumericKind Kind = NumericKind.I16; public NumericKind Classifier => Kind;}
 
-        public readonly struct Primal32u : IPrimalClass { public const PrimalKind Kind = PrimalKind.U32; public PrimalKind Classifier => Kind;}
+        public readonly struct Primal32u : IPrimalClass { public const NumericKind Kind = NumericKind.U32; public NumericKind Classifier => Kind;}
 
-        public readonly struct Primal32i : IPrimalClass { public const PrimalKind Kind = PrimalKind.I32; public PrimalKind Classifier => Kind;}
+        public readonly struct Primal32i : IPrimalClass { public const NumericKind Kind = NumericKind.I32; public NumericKind Classifier => Kind;}
 
-        public readonly struct Primal64u : IPrimalClass { public const PrimalKind Kind = PrimalKind.U64; public PrimalKind Classifier => Kind;}
+        public readonly struct Primal64u : IPrimalClass { public const NumericKind Kind = NumericKind.U64; public NumericKind Classifier => Kind;}
 
-        public readonly struct Primal64i : IPrimalClass { public const PrimalKind Kind = PrimalKind.I64; public PrimalKind Classifier => Kind;}
+        public readonly struct Primal64i : IPrimalClass { public const NumericKind Kind = NumericKind.I64; public NumericKind Classifier => Kind;}
 
-        public readonly struct Primal32f : IPrimalClass { public const PrimalKind Kind = PrimalKind.F32; public PrimalKind Classifier => Kind;}
+        public readonly struct Primal32f : IPrimalClass { public const NumericKind Kind = NumericKind.F32; public NumericKind Classifier => Kind;}
 
-        public readonly struct Primal64f : IPrimalClass { public const PrimalKind Kind = PrimalKind.F64; public PrimalKind Classifier => Kind;}
+        public readonly struct Primal64f : IPrimalClass { public const NumericKind Kind = NumericKind.F64; public NumericKind Classifier => Kind;}
 
         public static PrimalClass<byte> u8
         {

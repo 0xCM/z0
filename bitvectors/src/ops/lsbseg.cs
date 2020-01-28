@@ -15,7 +15,7 @@ namespace Z0
         /// Constructs a bitvector formed from the n lest significant bits of the source vector
         /// </summary>
         /// <param name="n">The count of least significant bits</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> lsbseg<T>(BitVector<T> x, byte n)                
             where T : unmanaged
                 => seg(x, 0, n - 1);                

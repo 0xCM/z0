@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), NatOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), NatOp, PrimalClosures(NumericKind.Integers)]
         public static Vector128<T> vunits<T>(N128 w, T t = default)
             where T : unmanaged
         {
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), NatOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), NatOp, PrimalClosures(NumericKind.Integers)]
         public static Vector256<T> vunits<T>(N256 w, T t = default)
             where T : unmanaged
         {

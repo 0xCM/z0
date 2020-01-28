@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="fmt">Optional formatting style</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static string format<T>(BitVector<T> x, BitFormat? fmt = null)
             where T : unmanaged
                 => bitstring(x).Format(fmt);

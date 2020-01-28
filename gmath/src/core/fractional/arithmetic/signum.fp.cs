@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Floats)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
         public static Sign signum<T>(T src)
             where T : unmanaged
         {

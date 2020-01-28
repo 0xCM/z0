@@ -34,10 +34,10 @@ namespace Z0
         ProcessCapture(IAsmContext context)
         {            
             Context = context;
-            ClrIndex = context.ClrIndex;;
+            ClrIndex = context.ClrIndex;
             Target = DataTarget.AttachToProcess(Process.GetCurrentProcess().Id, uint.MaxValue, AttachFlag.Passive);
             Runtime = CreateRuntime(Target);
-            Decoder = AsmServices.Decoder(context, NativeServices.DefaultBufferLen);
+            Decoder = Context.Decoder();
         }
             
         void IDisposable.Dispose()

@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         /// <typeparam name="T">The floating point operand type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Floats)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
         public static T fma<T>(T x, T y, T z)
             where T : unmanaged
         {            

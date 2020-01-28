@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="n">The count of least significant bits</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> msbseg<T>(BitVector<T> x, byte n)                
             where T : unmanaged
                 => seg(x, x.Width - n, x.Width - 1);                

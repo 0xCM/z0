@@ -15,28 +15,28 @@ namespace Z0
     {
         public void adjudicate_primal()
         {
-            var floats = PrimalKind.Floats;
-            Claim.yea(floats.Is(PrimalKind.F32));
-            Claim.yea(floats.Is(PrimalKind.F64));
-            Claim.nea(floats.Is(PrimalKind.I32));
-            Claim.nea(floats.Is(PrimalKind.U32));
-            Claim.nea(floats.Is(PrimalKind.I64));
-            Claim.nea(floats.Is(PrimalKind.U64));
+            var floats = NumericKind.Floats;
+            Claim.yea(floats.Is(NumericKind.F32));
+            Claim.yea(floats.Is(NumericKind.F64));
+            Claim.nea(floats.Is(NumericKind.I32));
+            Claim.nea(floats.Is(NumericKind.U32));
+            Claim.nea(floats.Is(NumericKind.I64));
+            Claim.nea(floats.Is(NumericKind.U64));
 
         }
         
         public void classify_primal_width()
         {
-            Claim.eq(8, PrimalKind.U8.BitWidth());
-            Claim.eq(8, PrimalKind.I8.BitWidth());
-            Claim.eq(16, PrimalKind.U16.BitWidth());
-            Claim.eq(16, PrimalKind.I16.BitWidth());
-            Claim.eq(32, PrimalKind.U32.BitWidth());
-            Claim.eq(32, PrimalKind.I32.BitWidth());
-            Claim.eq(32, PrimalKind.F32.BitWidth());
-            Claim.eq(64, PrimalKind.I64.BitWidth());
-            Claim.eq(64, PrimalKind.U64.BitWidth());
-            Claim.eq(64, PrimalKind.F64.BitWidth());
+            Claim.eq(8, NumericKind.U8.BitWidth());
+            Claim.eq(8, NumericKind.I8.BitWidth());
+            Claim.eq(16, NumericKind.U16.BitWidth());
+            Claim.eq(16, NumericKind.I16.BitWidth());
+            Claim.eq(32, NumericKind.U32.BitWidth());
+            Claim.eq(32, NumericKind.I32.BitWidth());
+            Claim.eq(32, NumericKind.F32.BitWidth());
+            Claim.eq(64, NumericKind.I64.BitWidth());
+            Claim.eq(64, NumericKind.U64.BitWidth());
+            Claim.eq(64, NumericKind.F64.BitWidth());
         }
 
         public void adjudicate_block()
@@ -58,38 +58,38 @@ namespace Z0
 
         public void classify_block_segment_16()
         {
-            Claim.eq(BlockedType.segment(typeof(Block16<byte>)), PrimalKind.U8);
-            Claim.eq(BlockedType.segment(typeof(Block16<sbyte>)), PrimalKind.I8);
-            Claim.eq(BlockedType.segment(typeof(Block16<ushort>)), PrimalKind.U16);
-            Claim.eq(BlockedType.segment(typeof(Block16<short>)), PrimalKind.I16);
+            Claim.eq(BlockedType.segment(typeof(Block16<byte>)), NumericKind.U8);
+            Claim.eq(BlockedType.segment(typeof(Block16<sbyte>)), NumericKind.I8);
+            Claim.eq(BlockedType.segment(typeof(Block16<ushort>)), NumericKind.U16);
+            Claim.eq(BlockedType.segment(typeof(Block16<short>)), NumericKind.I16);
         }
 
         public void classify_block_segment_64()
         {
-            Claim.eq(BlockedType.segment(typeof(Block64<byte>)), PrimalKind.U8);
-            Claim.eq(BlockedType.segment(typeof(Block64<sbyte>)), PrimalKind.I8);
-            Claim.eq(BlockedType.segment(typeof(Block64<ushort>)), PrimalKind.U16);
-            Claim.eq(BlockedType.segment(typeof(Block64<short>)), PrimalKind.I16);
-            Claim.eq(BlockedType.segment(typeof(Block64<uint>)), PrimalKind.U32);
-            Claim.eq(BlockedType.segment(typeof(Block64<int>)), PrimalKind.I32);
-            Claim.eq(BlockedType.segment(typeof(Block64<ulong>)), PrimalKind.U64);
-            Claim.eq(BlockedType.segment(typeof(Block64<long>)), PrimalKind.I64);
-            Claim.eq(BlockedType.segment(typeof(Block64<float>)), PrimalKind.F32);
-            Claim.eq(BlockedType.segment(typeof(Block64<double>)), PrimalKind.F64);
+            Claim.eq(BlockedType.segment(typeof(Block64<byte>)), NumericKind.U8);
+            Claim.eq(BlockedType.segment(typeof(Block64<sbyte>)), NumericKind.I8);
+            Claim.eq(BlockedType.segment(typeof(Block64<ushort>)), NumericKind.U16);
+            Claim.eq(BlockedType.segment(typeof(Block64<short>)), NumericKind.I16);
+            Claim.eq(BlockedType.segment(typeof(Block64<uint>)), NumericKind.U32);
+            Claim.eq(BlockedType.segment(typeof(Block64<int>)), NumericKind.I32);
+            Claim.eq(BlockedType.segment(typeof(Block64<ulong>)), NumericKind.U64);
+            Claim.eq(BlockedType.segment(typeof(Block64<long>)), NumericKind.I64);
+            Claim.eq(BlockedType.segment(typeof(Block64<float>)), NumericKind.F32);
+            Claim.eq(BlockedType.segment(typeof(Block64<double>)), NumericKind.F64);
         }
 
         public void classify_block_segment_128()
         {
-            Claim.eq(BlockedType.segment(typeof(Block128<byte>)), PrimalKind.U8);
-            Claim.eq(BlockedType.segment(typeof(Block128<sbyte>)), PrimalKind.I8);
-            Claim.eq(BlockedType.segment(typeof(Block128<ushort>)), PrimalKind.U16);
-            Claim.eq(BlockedType.segment(typeof(Block128<short>)), PrimalKind.I16);
-            Claim.eq(BlockedType.segment(typeof(Block128<uint>)), PrimalKind.U32);
-            Claim.eq(BlockedType.segment(typeof(Block128<int>)), PrimalKind.I32);
-            Claim.eq(BlockedType.segment(typeof(Block128<ulong>)), PrimalKind.U64);
-            Claim.eq(BlockedType.segment(typeof(Block128<long>)), PrimalKind.I64);
-            Claim.eq(BlockedType.segment(typeof(Block128<float>)), PrimalKind.F32);
-            Claim.eq(BlockedType.segment(typeof(Block128<double>)), PrimalKind.F64);
+            Claim.eq(BlockedType.segment(typeof(Block128<byte>)), NumericKind.U8);
+            Claim.eq(BlockedType.segment(typeof(Block128<sbyte>)), NumericKind.I8);
+            Claim.eq(BlockedType.segment(typeof(Block128<ushort>)), NumericKind.U16);
+            Claim.eq(BlockedType.segment(typeof(Block128<short>)), NumericKind.I16);
+            Claim.eq(BlockedType.segment(typeof(Block128<uint>)), NumericKind.U32);
+            Claim.eq(BlockedType.segment(typeof(Block128<int>)), NumericKind.I32);
+            Claim.eq(BlockedType.segment(typeof(Block128<ulong>)), NumericKind.U64);
+            Claim.eq(BlockedType.segment(typeof(Block128<long>)), NumericKind.I64);
+            Claim.eq(BlockedType.segment(typeof(Block128<float>)), NumericKind.F32);
+            Claim.eq(BlockedType.segment(typeof(Block128<double>)), NumericKind.F64);
         }
 
         public void classify_block_width()
@@ -144,10 +144,10 @@ namespace Z0
 
         public void check_primal_identity()
         {
-            Claim.eq(PrimalId.U8, PrimalKind.U8.Id());
-            Claim.eq(PrimalId.I8, PrimalKind.I8.Id());
-            Claim.eq(PrimalId.U16, PrimalKind.U16.Id());
-            Claim.eq(PrimalId.I16, PrimalKind.I16.Id());
+            Claim.eq(PrimalId.U8, NumericKind.U8.Id());
+            Claim.eq(PrimalId.I8, NumericKind.I8.Id());
+            Claim.eq(PrimalId.U16, NumericKind.U16.Id());
+            Claim.eq(PrimalId.I16, NumericKind.I16.Id());
 
         }
         public void classify_block_16()

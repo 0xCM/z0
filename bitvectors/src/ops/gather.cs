@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">Identifies the source bits of interest</param>
         /// <param name="dst">Receives the identified bits</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> gather<T>(BitVector<T> src, BitVector<T> spec)
             where T : unmanaged
                 => gbits.gather(src.data, spec.data);

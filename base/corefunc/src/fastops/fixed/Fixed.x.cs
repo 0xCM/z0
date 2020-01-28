@@ -56,31 +56,31 @@ namespace Z0
             where T : unmanaged
                 => f(x.ToFixed(), y.ToFixed()).ToVector<T>();
 
-        public static string Format<T>(this T src, PrimalKind kind)
+        public static string Format<T>(this T src, NumericKind kind)
             where T : unmanaged, IFixed
         {
             var dst = BitConvert.GetBytes(in src);
             switch(kind)
             {
-                case PrimalKind.I8:
+                case NumericKind.I8:
                     return dst.As<sbyte>().FormatList();
-                case PrimalKind.U8:
+                case NumericKind.U8:
                     return dst.As<byte>().FormatList();
-                case PrimalKind.I16:
+                case NumericKind.I16:
                     return dst.As<short>().FormatList();
-                case PrimalKind.U16:
+                case NumericKind.U16:
                     return dst.As<ushort>().FormatList();
-                case PrimalKind.I32:
+                case NumericKind.I32:
                     return dst.As<int>().FormatList();
-                case PrimalKind.U32:
+                case NumericKind.U32:
                     return dst.As<uint>().FormatList();
-                case PrimalKind.I64:
+                case NumericKind.I64:
                     return dst.As<long>().FormatList();
-                case PrimalKind.U64:
+                case NumericKind.U64:
                     return dst.As<ulong>().FormatList();
-                case PrimalKind.F32:
+                case NumericKind.F32:
                     return dst.As<float>().FormatList();
-                case PrimalKind.F64:
+                case NumericKind.F64:
                     return dst.As<double>().FormatList();
                 default:
                     throw unsupported(kind);

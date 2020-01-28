@@ -15,7 +15,7 @@ namespace Z0
 
     readonly struct OpIdentityProvider : IOpIdentityProvider
     {
-        public Moniker DefineIdentity(MethodInfo method, PrimalKind k)
+        public Moniker DefineIdentity(MethodInfo method, NumericKind k)
         {
             var provider = this as IOpIdentityProvider;
             if(method.IsOpenGeneric() && k.IsSome())
@@ -24,7 +24,7 @@ namespace Z0
                 return provider.DefineIdentity(method);
         }
 
-        public Moniker DefineIdentity(string opname, bool generic, params PrimalKind[] kinds)
+        public Moniker DefineIdentity(string opname, bool generic, params NumericKind[] kinds)
         {
             var id = opname;
             id += PartSep;
@@ -94,7 +94,7 @@ namespace Z0
                 return Moniker.Empty;
 
             if(method.IsOpenGeneric())
-                return OpIdentity.define(method.OpName(), 0, PrimalKind.None, true, false);
+                return OpIdentity.define(method.OpName(), 0, NumericKind.None, true, false);
             else if(method.IsNonGeneric() && method.OpName() != method.Name)
                 return Moniker.Parse(method.OpName());
             else if(method.IsSpanOp())
@@ -122,6 +122,43 @@ namespace Z0
         static AppMsg TooManyTypeParmeters(MethodInfo m)
             => appMsg($"The method {m.Name} accepts parameters that require more than one generic argument and is currently unsupported", SeverityLevel.Warning);
 
+
+        static string ConsructedParameter(Type arg)
+        {
+            var id = string.Empty;
+            var typeargs = arg.SuppliedGenericArguments().ToArray();
+            if(typeargs.Length > 1)
+                NatSpanType.id(arg).OnSome(nsid => id += nsid);
+            var typearg = typeargs[0];
+            
+            if(arg.IsSpan())
+                id += $"span{PrimalType.signature(typearg)}";
+            else
+            {
+                if(arg.IsSegmented())
+                {
+                    var w = (int)arg.Width();
+                    if(w != 0)
+                    {
+                        id += $"{w}";
+                        var segwidth = (int)typearg.Width();
+                        if(segwidth != 0)
+                            id += $"{SegSep}{segwidth}{typearg.Kind().Indicator()}";
+                    }
+                    else 
+                        id += "~~err~~";
+                }
+                else
+                {
+                    var k  = typearg.Kind();
+                    if(k.IsSome())
+                        id += PrimalType.signature(k);
+                    else
+                        id += typearg.Name;
+                }
+            }
+            return id;
+        }
         static Moniker FromAny(MethodInfo method)
         {
             var id = method.OpName();
@@ -145,41 +182,7 @@ namespace Z0
                 if(NatType.test(arg))
                     id += NatType.name(arg);                    
                 else if(arg.IsConstructedGenericType)              
-                {
-                    var typeargs = arg.SuppliedGenericArguments().ToArray();
-                    if(typeargs.Length > 1)
-                        NatSpanType.id(arg).OnSome(nsid => id += nsid).OnNone(() => print(TooManyTypeParmeters(method)));     
-                    var typearg = typeargs[0];
-                    
-                    if(arg.IsSpan())
-                        id += $"span{PrimalType.signature(typearg)}";
-                    else
-                    {
-                        if(arg.IsSegmented())
-                        {
-                            var w = (int)arg.Width();
-                            if(w != 0)
-                            {
-                                id += $"{w}";
-
-                                var segwidth = (int)typearg.Width();
-                                if(segwidth != 0)
-                                    id += $"{SegSep}{segwidth}{typearg.Kind().Indicator()}";
-
-                            }
-                            else 
-                                id += "~~err~~";
-                        }
-                        else
-                        {
-                            var k  = typearg.Kind();
-                            if(k.IsSome())
-                                id += PrimalType.signature(k);
-                            else
-                                id += typearg.Name;
-                        }
-                    }
-                }
+                    id += ConsructedParameter(arg);
                 else if(PrimalType.test(arg))
                     id += PrimalType.signature(arg);
                 else if(arg.IsEnum)

@@ -36,10 +36,10 @@ namespace Z0
         
         public readonly string Text;
 
-        public PrimalKind Kind 
+        public NumericKind Kind 
         {
             [MethodImpl(Inline)]
-            get => Value?.GetType()?.Kind() ?? PrimalKind.None;
+            get => Value?.GetType()?.Kind() ?? NumericKind.None;
         }
 
         public string Format() => $"{Name}({Value}:{Kind.Keyword()}) := " + enquote(Text);

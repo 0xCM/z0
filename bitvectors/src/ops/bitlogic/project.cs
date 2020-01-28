@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal scalar upon which the bitvector is predicated</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> left<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => x;
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal scalar upon which the bitvector is predicated</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> right<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => y;
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal scalar upon which the bitvector is predicated</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> lnot<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => ~x;
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal scalar upon which the bitvector is predicated</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> rnot<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => ~y;

@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> impl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.impl(x.Scalar, y.Scalar);

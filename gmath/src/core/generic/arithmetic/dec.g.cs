@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gmath
     {
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T dec<T>(T a)
             where T : unmanaged
                 => dec_u(a);

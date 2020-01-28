@@ -71,7 +71,7 @@ namespace Z0
             return dst.ToString();
         }         
  
-        public static string Format(this PrimalKind k)
+        public static string Format(this NumericKind k)
             => $"{k.BitWidth()}{k.Indicator()}";
 
         public static string FormatParam(this Pair<ParameterInfo,int> src)
@@ -137,11 +137,17 @@ namespace Z0
             if(src == null)
                 throw new ArgumentNullException(nameof(src));
                 
+            if(Attribute.IsDefined(src, typeof(DisplayNameAttribute)))
+                return src.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
+
             if(src.IsEnum)
                 return src.Name + AsciSym.Colon + src.GetEnumUnderlyingType().DisplayName();
 
-            if(src.HasSimpleName())
-                return src.FormatSimple();
+            if(src.IsPointer)
+                return $"{src.GetElementType().DisplayName()}*";
+            
+            if(src.IsPrimalNumeric() || src.IsBool() || src.IsVoid() || src.IsChar() || src.IsString())                            
+                return src.TypeKeyword().IfBlank(src.Name);
 
             if(src.IsGenericType && !src.IsRef())
                 return src.FormatGeneric();

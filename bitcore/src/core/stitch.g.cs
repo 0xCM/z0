@@ -27,7 +27,7 @@ namespace Z0
         /// This composite is then displaced downwards the same amount by which the
         /// right value was displaced upwards, removing the zeros that were shifted in.
         /// </remarks>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static T stitch<T>(T left, int ldx, T right, int rdx)
             where T : unmanaged
         {

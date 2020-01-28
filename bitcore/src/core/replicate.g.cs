@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="i1">The index of the last bit to include in the pattern</param>
         /// <param name="reps">The number of times to repeat the pattern</param>
         /// <typeparam name="T">The source/target type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static T replicate<T>(T src, byte i0, byte i1, int reps)
             where T : unmanaged
                 => convert<T>(Bits.replicate(convert<T,ulong>(src), i0, i1, reps));
@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value defining the pattern to replicate</param>
         /// <typeparam name="T">The source/target type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static T replicate<T>(T src)
             where T : unmanaged
         {         
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="t">A target type representative</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static T replicate<T>(byte src)
             where T : unmanaged
                 => convert<T>(Bits.replicate((ulong)src, 0, 7, bitsize<T>() / 8));

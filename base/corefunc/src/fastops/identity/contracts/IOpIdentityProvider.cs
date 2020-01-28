@@ -20,7 +20,7 @@ namespace Z0
 
         Option<Moniker> GenericIdentity(MethodInfo method);                    
 
-        Moniker DefineIdentity(MethodInfo method, PrimalKind k);
+        Moniker DefineIdentity(MethodInfo method, NumericKind k);
 
     }
 }

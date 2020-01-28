@@ -34,6 +34,14 @@ partial class zfunc
         => terminal.WriteLine(msg, severity ?? SeverityLevel.Info);
 
     /// <summary>
+    /// Writes a single line to the terminal
+    /// </summary>
+    /// <param name="msg">The message to print</param>    
+    public static void print(object msg, SeverityLevel? severity = null)
+        => terminal.WriteLine(msg, severity ?? SeverityLevel.Info);
+
+
+    /// <summary>
     /// Writes an empty line to the console
     /// </summary>
     public static void print()

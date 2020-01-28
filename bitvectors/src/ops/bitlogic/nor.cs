@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         /// <typeparam name="T">The primal bitvector type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> nor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.nor(x.Scalar, y.Scalar);

@@ -13,6 +13,8 @@ namespace Z0
 
     public interface IAsmContext : IOpContext
     {
+        int ContextId {get;}
+        
         IClrIndex ClrIndex {get;}
 
         AsmFormatConfig AsmFormat {get;}

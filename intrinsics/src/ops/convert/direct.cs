@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="w">The target vector width</param>
         /// <param name="n">The target component width</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vconvert(N64 srcbits, in byte src, N256 w, N32 n)
             => v32u(ConvertToVector256Int32(constptr(in src)));
 
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="w">The target vector width</param>
         /// <param name="n">The target component width</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vconvert(N64 srcbits, in ushort src, N256 w, N32 n)
             => v32u(ConvertToVector256Int32(constptr(in uint8(in src))));
 
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="w">The target vector width</param>
         /// <param name="n">The target component width</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vconvert(N64 srcbits, in uint src, N256 w, N32 n)
             => v32u(ConvertToVector256Int32(constptr(in uint8(in src))));
 
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="w">The target vector width</param>
         /// <param name="n">The target component width</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vconvert(N64 srcbits, in ulong src, N256 w, N32 n)
             => v32u(ConvertToVector256Int32(constptr(in uint8(in src))));
     }

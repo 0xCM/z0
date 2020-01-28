@@ -18,7 +18,7 @@ namespace Z0
         /// Effects the reversal of the byte-level representation of each component in the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.U16 | PrimalKind.U32 | PrimalKind.U64)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.U16 | NumericKind.U32 | NumericKind.U64)]
         public static Vector128<T> vbyteswap<T>(Vector128<T> x)
             where T : unmanaged
         {
@@ -38,7 +38,7 @@ namespace Z0
         /// Effects the reversal of the byte-level representation of each component in the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.U16 | PrimalKind.U32 | PrimalKind.U64)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.U16 | NumericKind.U32 | NumericKind.U64)]
         public static Vector256<T> vbyteswap<T>(Vector256<T> x)
             where T : unmanaged
         {

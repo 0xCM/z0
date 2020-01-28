@@ -282,30 +282,21 @@ namespace Z0
 
                     if(match((x0,RET), (x1, SBB)))
                         tc = RET_SBB;
-
-                    if(match((x0, RET), (x1, INTR)))
+                    else if(match((x0, RET), (x1, INTR)))
                         tc = RET_INTR;
-
-                    if(match((x0, RET), (x1, INTR), (x2,INTR)))
+                    else if(match((x0, RET), (x1, INTR), (x2,INTR)))
                         tc = RET_INTRx2;
-
-                    if(match((x0, RET), (x1, ZED), (x2,SBB)))
+                    else if(match((x0, RET), (x1, ZED), (x2,SBB)))
                         tc = RET_ZED_SBB;
-
-                    if(match((x0, RET), (x1, ZED), (x2,ZED), (x3,ZED)))
+                    else if(match((x0, RET), (x1, ZED), (x2,ZED), (x3,ZED)))
                         tc = RET_ZEDx3;
-
-                    if(match((x0,INTR), (x1, INTR)))
+                    else if(match((x0,INTR), (x1, INTR)))
                         tc = INTRx2;
 
                     if(tc != None)
                         return Capture(lookback, -2);
                 }
             
-
-                // if(CheckJmpRax(lookback, out tc))
-                //     return Capture(lookback, -Lookback_Count);
-
                 if(CheckJmpRax(lookback, out tc, out int takeback))
                     return Capture(lookback, takeback);
 

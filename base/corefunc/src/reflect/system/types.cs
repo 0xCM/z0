@@ -18,13 +18,6 @@ namespace Z0
 
     partial class Reflections
     {        
-        public static bool HasSimpleName(this Type src)
-            => Attribute.IsDefined(src, typeof(DisplayNameAttribute))
-            || src.IsPrimalNumeric()
-            || src.IsBool()
-            || src.IsVoid()
-            || src.IsChar()
-            || src.IsString();                            
 
         /// <summary>
         /// Returns true if the source type is either non-generic or a generic type that has been closed over all parameters

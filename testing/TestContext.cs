@@ -95,6 +95,7 @@ namespace Z0
         /// </summary>
         /// <param name="root">The root name</param>
         protected string CaseName<C>(string root, C t = default)
+            where C : unmanaged
             => $"{GetType().Name}/{root}_{primalsig(t)}";
 
         protected string CaseName<W,C>(string root, W w = default, C t = default)
@@ -102,7 +103,7 @@ namespace Z0
             where C : unmanaged
                 => $"{GetType().Name}/{moniker(root,w,t)}";
 
-        protected static Moniker SubjectId(string opname, PrimalKind kind)
+        protected static Moniker SubjectId(string opname, NumericKind kind)
             => OpIdentity.define($"{opname}_subject",kind);
 
         protected static Moniker SubjectId<T>(string opname, T t = default)

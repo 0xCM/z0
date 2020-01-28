@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="a">The first value</param>
         /// <param name="b">The second value</param>
         /// <typeparam name="T">The value type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static ulong dist<T>(T a, T b)
             where T : unmanaged
                 => dist_u(a,b);

@@ -18,22 +18,22 @@ namespace Z0
     public class TypeSig
     {        
         public static TypeSig FromType(Type src)
-            => new TypeSig(src.DisplayName(), src.IsConstructedGenericType,  src.IsGenericType && !src.IsConstructedGenericType, src.IsByRef);
+            => new TypeSig(src.DisplayName(), src.IsConstructedGenericType,  src.IsGenericType && !src.IsConstructedGenericType, src.IsByRef, src.IsPointer);
 
         public static TypeSig FromParameter(ParameterInfo src)
-        {
+        {            
             var type = src.ParameterType;
-            var name = type.EffectiveType().DisplayName();
-            
+            var name = type.EffectiveType().DisplayName();            
             return new TypeSig(name, 
                 type.IsConstructedGenericType, 
                 type.IsGenericType && !type.IsConstructedGenericType,
                 type.IsRef(),
                 src.IsIn,
-                src.IsOut);
+                src.IsOut,
+                type.IsPointer);
         }
 
-        public TypeSig(string Name, bool IsOpenGeneric, bool IsClosedGeneric, bool IsByRef, bool IsIn = false, bool IsOut = false)
+        public TypeSig(string Name, bool IsOpenGeneric, bool IsClosedGeneric, bool IsByRef, bool IsIn = false, bool IsOut = false, bool IsPointer = false)
         {
             this.Name = Name;
             this.IsOpenGeneric = IsOpenGeneric;
@@ -41,6 +41,7 @@ namespace Z0
             this.IsByRef = IsByRef;
             this.IsIn = IsIn;
             this.IsOut = IsOut;
+            this.IsPointer = IsPointer;
         }
 
         public string Name {get;}
@@ -54,15 +55,19 @@ namespace Z0
         public bool IsIn {get;}
 
         public bool IsOut {get;}
+
+        public bool IsPointer {get;}
         
+
         string Modifier
             => IsIn ? "in " : IsOut ? "out " : IsByRef ? "ref " : string.Empty;
 
         public string Format()
             => $"{Modifier}{Name}";        
  
- 
         public override string ToString()
             => Format();
+
+
     }
 }

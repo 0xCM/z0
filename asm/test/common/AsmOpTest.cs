@@ -28,7 +28,7 @@ namespace Z0
         protected virtual string OpName 
             => "anon";
 
-        protected Moniker TestOpMoniker(PrimalKind kind)
+        protected Moniker TestOpMoniker(NumericKind kind)
             => OpIdentity.define($"{OpName}_asm",kind);
 
         protected Moniker TestOpName<T>(T t = default)

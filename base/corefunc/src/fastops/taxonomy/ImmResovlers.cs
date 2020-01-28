@@ -15,7 +15,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface ImmResolver : IFunc
     {
-        PrimalKind ImmKind => PrimalKind.None;
+        NumericKind ImmKind => NumericKind.None;
 
         OpArityKind ResolvedArity => OpArityKind.Nullary;
 
@@ -27,7 +27,7 @@ namespace Z0
     public interface ImmResolver<T> : ImmResolver
         where T : unmanaged
     {
-        PrimalKind ImmResolver.ImmKind => PrimalType.kind<T>();
+        NumericKind ImmResolver.ImmKind => PrimalType.kind<T>();
     }
 
     [SuppressUnmanagedCodeSecurity]

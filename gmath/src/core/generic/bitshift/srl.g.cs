@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="a">The value to shift</param>
         /// <param name="count">The number of bits to shift</param>
         /// <typeparam name="T">The primal integer type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T srl<T>(T a, byte count)
             where T : unmanaged
                 => srl_u(a,count);

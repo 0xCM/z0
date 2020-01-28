@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="count">The number of values to populate</param>
         /// <param name="dst">The target memory reference</param>
         /// <typeparam name="T">The target value type</typeparam>    
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static void increments<T>(int count, ref T dst)
             where T : unmanaged
         {
@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The target value type</typeparam>    
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static Span<T> increments<T>(Span<T> dst)
             where T : unmanaged
         {

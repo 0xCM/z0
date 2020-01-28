@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static bit negative<T>(T src)
             where T : unmanaged
         {                        

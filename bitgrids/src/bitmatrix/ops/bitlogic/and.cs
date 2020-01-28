@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>        
-        [MethodImpl(Inline), BitMatrixOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), BitMatrixOp, PrimalClosures(NumericKind.Integers)]
         public static BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
         {
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         /// <param name="dst">The target matrix</param>
         /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>        
-        [MethodImpl(Inline), BitMatrixOp(true), PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), BitMatrixOp(true), PrimalClosures(NumericKind.Integers)]
         public static ref BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> dst)
             where T : unmanaged
         {

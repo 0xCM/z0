@@ -24,7 +24,7 @@ namespace Z0
         {
             this.Context = context;
             this.Catalog = catalog;
-            this.Decoder = AsmServices.Decoder(context, NativeServices.DefaultBufferLen);
+            this.Decoder = Context.Decoder();
         }
 
         readonly IAsmContext Context;
@@ -156,12 +156,12 @@ namespace Z0
         }
 
         IAsmFunctionArchive Archive(string subject)
-            => AsmServices.FunctionArchive(Context, Catalog.CatalogName, subject);
+            => Context.FunctionArchive(Catalog.CatalogName, subject);
 
         static byte[] ImmSelection => new byte[]{5,9,13};
 
         IAsmImmCapture ImmCaptureSvc(MethodInfo src, Moniker baseid)
-            => AsmServices.UnaryImmCapture(Context,src, baseid);
+            => Context.UnaryImmCapture(src, baseid);
 
         string ArchiveSubject(Type host, bool imm)
             => imm ? concat(host.Name.ToLower(), "_imm") : host.Name.ToLower();
