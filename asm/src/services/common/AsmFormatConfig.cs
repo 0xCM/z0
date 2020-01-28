@@ -22,6 +22,9 @@ namespace Z0
         public bool EmitCaptureTermCode {get; set;}
             = true;
 
+        public bool EmitCaptureLookback {get; set;}
+            = false;
+
         public bool EmitFileHeader {get; set;}
             = true;
 
@@ -54,23 +57,6 @@ namespace Z0
 
         public string SectionDelimiter {get;set;}
             = new string(AsciSym.Dash, 120);        
-
-        // public AsmFormatConfig Replicate()
-        //     => new AsmFormatConfig
-        //     {   
-        //         EmitCaptureTermCode = EmitCaptureTermCode,
-        //         EmitEncodingProp = EmitEncodingProp,
-        //         EmitFunctionEncoding = EmitFunctionEncoding,                   
-        //         EmitFunctionHeader = EmitFunctionHeader,
-        //         EmitFunctionOrigin = EmitFunctionOrigin,
-        //         EmitFunctionTimestamp = EmitFunctionTimestamp,
-        //         EmitSectionDelimiter = EmitSectionDelimiter,
-        //         EmitFileHeader = EmitFileHeader,                
-        //         InstructionPad = InstructionPad,
-        //         FieldDelimiter = FieldDelimiter,
-        //         SectionDelimiter = SectionDelimiter,
-        //         ShowLineAddresses = ShowLineAddresses, 
-        //     };
         
         public AsmFormatConfig WithSectionDelimiter()
         {

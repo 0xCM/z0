@@ -108,6 +108,13 @@ namespace Z0
             => FunctionType.vectorized(m, false);
 
         /// <summary>
+        /// Determines whether a method produces, but does not accept, vector values
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static bool IsVectorFactory(this MethodInfo m)        
+            => FunctionType.vectorfactory(m);
+
+        /// <summary>
         /// Determines whether a method defines a vectorized operator
         /// </summary>
         /// <param name="m">The method to examine</param>

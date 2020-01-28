@@ -111,7 +111,6 @@ namespace Z0.Logix
             }
         }
 
-
         /// <summary>
         /// Evaluates an identified ternary operator
         /// </summary>

@@ -68,5 +68,9 @@ namespace Z0
             var renamed = FileName.Define($"{newName}{ext}");
             return renamed;            
         }
+
+        public FileName WithExtension(FileExtension ext)
+            => Define(NameBody,ext);
+
     }
 }

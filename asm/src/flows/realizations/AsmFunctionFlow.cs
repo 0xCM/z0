@@ -23,7 +23,7 @@ namespace Z0
         {
             this.Context = context;
             this.Catalog = catalog;
-            this.Decoder = AsmServices.Decoder(context, 12*1024);
+            this.Decoder = AsmServices.Decoder(context, NativeServices.DefaultBufferLen);
         }
 
         readonly IAsmContext Context;

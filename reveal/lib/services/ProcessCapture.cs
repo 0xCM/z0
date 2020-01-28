@@ -37,7 +37,7 @@ namespace Z0
             ClrIndex = context.ClrIndex;;
             Target = DataTarget.AttachToProcess(Process.GetCurrentProcess().Id, uint.MaxValue, AttachFlag.Passive);
             Runtime = CreateRuntime(Target);
-            Decoder = AsmServices.Decoder(context, 12*1024);
+            Decoder = AsmServices.Decoder(context, NativeServices.DefaultBufferLen);
         }
             
         void IDisposable.Dispose()

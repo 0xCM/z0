@@ -153,12 +153,20 @@ namespace Z0
         /// Submits a diagnostic message to the message queue
         /// </summary>
         /// <param name="msg">The source message</param>
-        /// <param name="severity">The diagnostic severity level that, if specified, 
-        /// replaces the exising source message severity prior to queue submission</param>
         protected void Trace(object msg, [Caller] string caller = null)
         {
             if(TraceEnabled)
                 PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}: {msg}",SeverityLevel.Info));
+        }
+
+        /// <summary>
+        /// Submits a diagnostic message to the message queue without including caller information
+        /// </summary>
+        /// <param name="msg">The source message</param>
+        protected void TraceInfo(object msg)
+        {
+            if(TraceEnabled)
+                PostMessage(AppMsg.Define($"{msg}",SeverityLevel.Info));
         }
 
         /// <summary>

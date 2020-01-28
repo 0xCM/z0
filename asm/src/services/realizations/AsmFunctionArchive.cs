@@ -18,7 +18,6 @@ namespace Z0
     {
         readonly FolderPath TargetFolder;
         
-
         readonly AsmFormatConfig GroupFormatConfig;
 
         readonly IAsmFunctionFormatter DefaultFormatter;
@@ -79,7 +78,7 @@ namespace Z0
             }
         }
 
-        Option<Exception> WriteCilDetail(AsmFunctionGroup src)
+        Option<Exception> WriteCil(AsmFunctionGroup src)
         {
             var emittable = src.Members.Where(f => f.Cil.IsSome()).ToArray();
             if(emittable.Length == 0)
@@ -102,7 +101,7 @@ namespace Z0
             
             using var asmwriter = new StreamWriter(DetailPath(src.Id).FullPath,false);
             WriteAsmHex(src).OnSome(e => errout(e));
-            WriteCilDetail(src).OnSome(e => errout(e));
+            WriteCil(src).OnSome(e => errout(e));
             foreach(var f in src.Members)
             {
                 asmwriter.Write(GroupFormatter.FormatDetail(f));

@@ -27,7 +27,7 @@ namespace Z0
         {
             var src = 0b111000u;
             var actual = gbits.replicate(src);
-            var width = gbits.width(src);
+            var width = gbits.effwidth(src);
             Claim.eq(6,width);
 
             var expect = BitVector.alloc(n32);
@@ -44,7 +44,7 @@ namespace Z0
             var src = 0b111000ul;
             var actual = gbits.replicate(src);
 
-            var width = gbits.width(src);
+            var width = gbits.effwidth(src);
             Claim.eq(6,width);
             
             var expect = BitVector.alloc(n64);

@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Reflection;
+    using System.Collections.Generic;
+
 
     public readonly struct Moniker : IEquatable<Moniker>
     {            
@@ -146,11 +148,32 @@ namespace Z0
             => Text.Contains(SuffixSep);
 
         /// <summary>
+        /// The moniker parts, as determined by part delimiters
+        /// </summary>
+        public IEnumerable<string> Parts
+            => Text.Split(PartSep, StringSplitOptions.RemoveEmptyEntries);
+
+        public IEnumerable<MonikerSegment> Segments
+        {
+            get
+            {
+                var parts = Parts.ToArray();
+                if(parts.Length > 1)
+                {
+                    foreach(var part in Parts.Skip(1))                
+                    {
+                        if(MonikerSegment.TryParse(part, out var seg))
+                            yield return seg;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Specifies the suffixes supported by the moniker, if any
         /// </summary>
         public string[] Suffixes
             => HasSuffix ? Suffix.Split(SuffixSep) : new string[]{};
-
 
         public override string ToString()
             => Text;

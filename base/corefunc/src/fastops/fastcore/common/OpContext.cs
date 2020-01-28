@@ -15,6 +15,19 @@ namespace Z0
         
     }
 
+    /// <summary>
+    ///  Characterizes absolutely nothing
+    /// </summary>
+    public interface IOpService
+    {
+        
+    }
+
+    public interface IOpService<T> : IOpService
+        where T : IOpContext
+    {
+        T Context {get;}
+    }
     
     public abstract class OpContext<T> : Context<T>, IOpContext
         where T : OpContext<T>

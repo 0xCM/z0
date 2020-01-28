@@ -154,7 +154,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static Vector256<ulong> vmin(Vector256<ulong> x, Vector256<ulong> y)
             => vselect(vlt(x,y),x,y);
 

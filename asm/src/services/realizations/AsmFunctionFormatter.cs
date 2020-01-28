@@ -17,7 +17,7 @@ namespace Z0
 
     using Iced = Iced.Intel;
 
-    readonly struct AsmContentFormatter : IAsmFunctionFormatter, IIcedAsmFormatter
+    readonly struct AsmContentFormatter : IAsmFunctionFormatter, IBaseAsmFormatter
     {
         
         public AsmFormatConfig Config {get;}
@@ -26,7 +26,7 @@ namespace Z0
 
         
         [MethodImpl(Inline)]
-        public static IIcedAsmFormatter BaseFormatter(IAsmContext config)
+        public static IBaseAsmFormatter BaseFormatter(IAsmContext config)
             => new AsmContentFormatter(config);
 
         [MethodImpl(Inline)]
@@ -158,8 +158,17 @@ namespace Z0
 
             lines.Add(FormatHeaderCode(src.Code));
                 
-            if(Config.EmitCaptureTermCode)
-                lines.Add(Comment(concat("Capture completion code", spaced(AsciSym.Eq), src.TermCode.ToString())));
+            if(Config.EmitCaptureTermCode || Config.EmitCaptureLookback)
+            {
+                var ci = src.CaptureInfo;
+                var cidesc = string.Empty;
+                if(Config.EmitCaptureTermCode)
+                    cidesc += concat(nameof(ci.TermCode), spaced(AsciSym.Eq), ci.TermCode.ToString());
+                if(Config.EmitCaptureLookback)
+                    cidesc += concat(rspace(comma()), nameof(ci.Lookback), spaced(AsciSym.Eq), embrace(ci.Lookback.FormatAsmHex()));
+
+                lines.Add(Comment(cidesc));
+            }
 
             if(Config.EmitFunctionTimestamp)
                 lines.Add(Comment(now().ToLexicalString()));

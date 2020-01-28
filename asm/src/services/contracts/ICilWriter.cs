@@ -5,18 +5,19 @@
 namespace Z0
 {        
     using System;
+    using System.Linq;
     using System.Collections.Generic;
-
+    using System.IO;
     using AsmSpecs;
+    using System.Runtime.CompilerServices;
 
     using static zfunc;
-    
-    public interface IAsmFunctionEmitter
+
+    public interface ICilWriter
     {
+        Option<Exception> WriteCil(IEnumerable<AsmFunction> functions);     
 
-        Option<Exception> EmitCil(IEnumerable<AsmFunction> functions, FilePath dst);
-
-
-        Option<Exception> EmitAsm(IEnumerable<AsmFunction> disassembly, FilePath file);
+        Option<Exception> WriteCil(AsmFunctionGroup src);           
     }
+
 }

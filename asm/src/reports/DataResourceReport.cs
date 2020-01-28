@@ -15,9 +15,8 @@ namespace Z0
  
     public static class DataResourceReport
     {
-        public static DataResourceIndex Create(DataResourceIndex resources, string subject)
+        public static DataResourceIndex Save(DataResourceIndex resources, FilePath dst)
         {            
-            var dst = Paths.AsmDataRoot + FileName.Define(subject, "csv");
             dst.FolderPath.CreateIfMissing();
             var delimter = spaced(pipe());
             var header = concat(

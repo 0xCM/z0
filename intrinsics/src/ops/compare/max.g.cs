@@ -15,7 +15,7 @@ namespace Z0
 
     partial class ginx
     {        
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All& (~PrimalKind.U64))]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All & (~PrimalKind.U64))]
         public static Vector128<T> vmax<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vmax_u(x,y);

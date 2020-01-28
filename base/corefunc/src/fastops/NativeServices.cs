@@ -12,6 +12,8 @@ namespace Z0
 
     public static class NativeServices
     {
+        public const int DefaultBufferLen = 1024*8;
+        
         public static INativeExecBuffer ExecBuffer(int? size = null)
             => NativeExecBuffer.Create(size);
 

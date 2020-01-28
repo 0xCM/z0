@@ -12,24 +12,26 @@ namespace Z0
     /// <summary>
     /// Defines a fundamental primitive type partitioning
     /// </summary>
-    public enum PrimalIndicator : uint
+    public enum PrimalIndicator : ushort
     {
-        None = 0,
+        None = 0,        
         
         /// <summary>
         /// Indicates a signed integral type
         /// </summary>
-        Signed = 1u << 31,
+        Signed = (ushort)'i',
 
         /// <summary>
         /// Indicates a floating-point type
         /// </summary>
-        Fractional = 1u << 30,
+        Float = (ushort)'f',
 
         /// <summary>
         /// Indicates an unsigned integral type
         /// </summary>
-        Unsigned = 1u << 29,
+        Unsigned =  (ushort)'u',
 
     }
+
+ 
 }

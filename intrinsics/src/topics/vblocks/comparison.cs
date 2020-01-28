@@ -14,22 +14,22 @@ namespace Z0
 
     partial class vblocks
     {
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers & (~PrimalKind.U64))]
         public static ref readonly Block128<T> vmax<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vmax<T>(n128));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers & (~PrimalKind.U64))]
         public static ref readonly Block256<T> vmax<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vmax<T>(n256));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers & (~PrimalKind.U64))]
         public static ref readonly Block128<T> vmin<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vmin<T>(n128));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers & (~PrimalKind.U64))]
         public static ref readonly Block256<T> vmin<T>(in Block256<T> a, in Block256<T> b, in Block256<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vmin<T>(n256));
@@ -54,7 +54,7 @@ namespace Z0
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vlt<T>(n256));
 
-        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers& (~PrimalKind.U64))]
+        [MethodImpl(Inline), BlockedOp, PrimalClosures(PrimalKind.Integers & (~PrimalKind.U64))]
         public static ref readonly Block128<T> vgt<T>(in Block128<T> a, in Block128<T> b, in Block128<T> c)
             where T : unmanaged
                 => ref vzip(a,b,c,VX.vgt<T>(n128));

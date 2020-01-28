@@ -11,39 +11,27 @@ namespace Z0
 
     using static zfunc;
 
-    sealed class AsmWriter : StreamWriter, IAsmWriter
+    sealed class AsmFunctionWriter : StreamWriter, IAsmFunctionWriter
     {        
-        public static IAsmWriter Create(IAsmContext context, FilePath dst)
-            => new AsmWriter(context, dst);
+        public static IAsmFunctionWriter Create(IAsmContext context, FilePath dst)
+            => new AsmFunctionWriter(context, dst);
                     
-        AsmWriter(IAsmContext context, FilePath path)
+        AsmFunctionWriter(IAsmContext context, FilePath path)
             : base(path.FullPath, false)
         {
             this.Context = context;
         }
     
-        readonly IAsmContext Context;
-
-        IAsmDecoder Decoder {get;}
-            = AsmServices.Decoder();
+        public IAsmContext Context {get;}
 
         byte[] Buffer {get; set;}
-            = new byte[NativeReader.DefaultBufferLen];
+            = new byte[NativeServices.DefaultBufferLen];
 
         public void Write(AsmFunction src)
         {
             var formatter = AsmServices.Formatter(Context);
-            formatter.FormatDetail(src);
-            Write(formatter.FormatDetail(src));
-        }
-
-        public void Write(MemberCapture src)
-            => Write(Decoder.DecodeFunction(src));
-
-        public void WriteFileHeader()
-        {
-            WriteLine($"; {now().ToLexicalString()}");
-            WriteLine(Context.AsmFormat.SectionDelimiter);
+            var formatted = formatter.FormatDetail(src);
+            Write(formatted);
         }
 
         public byte[] TakeBuffer()

@@ -24,18 +24,14 @@ namespace Z0
         {
             this.Context = context;
             this.Catalog = catalog;
-            this.Decoder = AsmServices.Decoder(context, 12*1024);
-            this.UseGroups = true;
+            this.Decoder = AsmServices.Decoder(context, NativeServices.DefaultBufferLen);
         }
 
         readonly IAsmContext Context;
 
+        readonly IOperationCatalog Catalog;
 
-        public IOperationCatalog Catalog {get;}
-
-        public IAsmDecoder Decoder {get;}
-
-        public bool UseGroups {get;}
+        readonly IAsmDecoder Decoder;
 
         public IEnumerable<AsmEmissionToken> EmitDirect()
             => from h in Catalog.DirectApiHosts
@@ -57,10 +53,7 @@ namespace Z0
         }
                         
         GenericOpSpec ImmPrecapture(GenericOpSpec op)
-        {
-            //print(CapturingImmediates(op));
-            return op;
-        }
+            => op;
 
         IEnumerable<AsmFunction> ResolveImmediates(GenericOpSpec op)                        
             => OpFactory.close(ImmPrecapture(op))
@@ -76,15 +69,11 @@ namespace Z0
         {
             if(FunctionType.vunaryImm(op.Method))
             {
-                var resolutions = ResolveImmediates(op).ToArray();
+                
+                var resolutions = ResolveImmediates(op).ToArray();                
                 if(resolutions.Length != 0)
-                {
-                    var tokens = (UseGroups)
-                ? dst.Save(AsmFunctionGroup.Define(op.Id, resolutions))         
-                : dst.Save(resolutions); 
-                foreach(var token in tokens)
-                    yield return token;
-                }
+                    foreach(var token in dst.Save(AsmFunctionGroup.Define(op.Id, resolutions)))
+                        yield return token;
             }
         }
 
@@ -94,9 +83,9 @@ namespace Z0
         IEnumerable<AsmEmissionToken> SaveImmResolutions(DirectOpGroup g, IAsmFunctionArchive dst)
         {
             var resolutions = ResolveImmediates(g).ToArray();
-            if(resolutions.Length != 0)
-                foreach(var token in dst.Save(AsmFunctionGroup.Define(g.Id, resolutions)))
-                    yield return token;
+            return resolutions.Length != 0 
+                ? dst.Save(AsmFunctionGroup.Define(g.Id, resolutions)) 
+                : items<AsmEmissionToken>();
         }
 
         AsmFunction Decode(Moniker id, MethodInfo method)
@@ -118,11 +107,8 @@ namespace Z0
             var functions = OpFactory.close(op).Map(closure => Decoder.DecodeFunction(closure.Id, closure.ClosedMethod));
             if(functions.Length != 0)
             {
-                var tokens = UseGroups 
-                    ? dst.Save(AsmFunctionGroup.Define(op.Id, functions)) 
-                    : dst.Save(functions);             
-                foreach(var token in tokens)
-                yield return token;
+                foreach(var token in dst.Save(AsmFunctionGroup.Define(op.Id, functions)))
+                    yield return token;
             }            
         }
 
@@ -166,9 +152,7 @@ namespace Z0
         IEnumerable<AsmEmissionToken> EmitDirect(Type host)
         {
             (var primary, var immediate) = OpenHostArchives(host);            
-            return UseGroups 
-                ? EmitDirectGroups(host, primary, immediate) 
-                : EmitDirect(host, primary,immediate);
+            return EmitDirectGroups(host, primary, immediate);
         }
 
         IAsmFunctionArchive Archive(string subject)

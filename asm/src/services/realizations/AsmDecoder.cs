@@ -23,21 +23,21 @@ namespace Z0
         public static IAsmDecoder Create(IAsmContext context, int? bufferlen = null)
             => new AsmDecoder(context, bufferlen);
 
-        byte[] _Buffer;
+        readonly byte[] _Buffer;
 
         readonly IAsmContext Context;
 
         AsmDecoder(IAsmContext context, int? bufferlen)
         {
             this.Context = context;
-            this._Buffer = new byte[bufferlen ?? 4*1024];
+            this._Buffer = new byte[bufferlen ?? NativeServices.DefaultBufferLen];
         }
         
         /// <summary>
         /// Decodes an instruction list
         /// </summary>
         /// <param name="src">The code source</param>
-        public AsmInstructionList DecodeList(AsmCode src)
+        public AsmInstructionList DecodeInstructions(AsmCode src)
         {
             var decoded = new Iced.InstructionList();
             var reader = new Iced.ByteArrayCodeReader(src.Encoded);
@@ -62,8 +62,8 @@ namespace Z0
         /// <param name="src">The cource capture</param>
         public AsmFunction DecodeFunction(MemberCapture src)
         {
-            var list = DecodeList(src.Code);
-            var block = AsmSpecs.AsmInstructionBlock.Define(src.Code, list, src.CaptureInfo.TermCode);
+            var list = DecodeInstructions(src.Code);
+            var block = AsmSpecs.AsmInstructionBlock.Define(src.Code, list, src.CaptureInfo);
             var cil = Context.ClrIndex.FincCil(src.Method).ValueOrDefault();
             return BuildFunction(block).WithCil(cil);            
         }
@@ -103,7 +103,7 @@ namespace Z0
             if(blocklen != src.NativeCode.Length)
                 throw error(InstructionBlockSizeMismatch(src.Origin, src.NativeCode.Length, blocklen));
 
-            return AsmFunction.Define(src.Origin, src.NativeCode, src.TermCode, src.Decoded);
+            return AsmFunction.Define(src.Origin, src.NativeCode, src.CaptureInfo, src.Decoded);
         }
 
         byte[] TakeBuffer()

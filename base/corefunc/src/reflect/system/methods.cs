@@ -78,6 +78,14 @@ namespace Z0
             => string.Equals(m.Name, "op_Explicit", StringComparison.InvariantCultureIgnoreCase);
 
         /// <summary>
+        /// Determines whether a method is an implict or explicit conversion operation
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public static bool IsConversionOp(this MethodInfo m)
+            => m.IsExplicitConverter() || m.IsImplicitConverter();
+
+        /// <summary>
         /// Searches a type for any method that matches the supplied signature
         /// </summary>
         /// <param name="declarer">The type to search</param>
@@ -180,7 +188,21 @@ namespace Z0
         /// <param name="args">The target argument count</param>
         public static IEnumerable<MethodInfo> OpenGeneric(this IEnumerable<MethodInfo> src, int args)
             => src.OpenGeneric().Where(m => m.GetGenericArguments().Length == args);
-                
+
+        /// <summary>
+        /// Selects the conversion operators from a stream
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static IEnumerable<MethodInfo> ConversionOps(this IEnumerable<MethodInfo> src)
+            => src.Where(IsConversionOp);
+
+        /// <summary>
+        /// Reomoves any conversion operations from the stream
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static IEnumerable<MethodInfo> WithoutConversionOps(this IEnumerable<MethodInfo> src)
+            => src.Where(m => !m.IsConversionOp());
+
         /// <summary>
         /// Selects the closed generic methods from a stream
         /// </summary>

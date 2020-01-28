@@ -17,6 +17,30 @@ namespace Z0
     {           
         internal void RunExplicit()
         {
+            var decoder = Context.Decoder();
+            var code = asm.dinx.vtestz.find(n128, z32).Require();
+            var instructions = decoder.DecodeInstructions(code);
+            var @base = instructions[0].IP;
+            for(int j = 0; j< instructions.Length; j++)
+            {
+                var i = instructions[j];
+                var operands = i.SummarizeOperands(@base);
+                for(var k = 0; k< operands.Length; k++)
+                {
+                    var operand = operands[k];                    
+                    operand.Register.OnSome(x => TraceInfo(x));
+                    operand.Memory.OnSome(x => TraceInfo(x));
+                }
+
+
+                
+            }
+            
+
+        }
+
+        void CheckArchives()
+        {
             CheckMathArchive();
             CheckIntrinsicArchive();
         }
@@ -38,6 +62,25 @@ namespace Z0
 
         }
 
+        static class asm
+        {
+            public static class dinx
+            {
+                public static IAsmCodeArchive archive
+                    => AssemblyId.Intrinsics.CodeArchive(nameof(dinx));
+                
+                public static class vtestz
+                {
+                    public static IAsmVCodeIndex index
+                        => archive.Read(Moniker.Parse(nameof(vtestz))).ToCodeIndex(false);
+
+                    public static Option<AsmCode> find<N,T>(N n = default, T t = default)
+                        where N : unmanaged, ITypeNat
+                        where T : unmanaged
+                            => index.Find<N,T>(nameof(vtestz));
+                }
+            }
+        }
         void CheckIntrinsicArchive()
         {
             var archive = AssemblyId.Intrinsics.CodeArchive(nameof(dinx));

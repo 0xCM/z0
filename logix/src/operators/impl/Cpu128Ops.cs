@@ -192,17 +192,17 @@ namespace Z0.Logix
             where T : unmanaged
                 => ginx.vtestc(equals(a,b));
 
-        [MethodImpl(Inline), VectorOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), VectorOp, PrimalClosures(PrimalKind.Integers& (~PrimalKind.U64))]
         public static Vector128<T> lt<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
                 => ginx.vlt(a,b);
 
-        [MethodImpl(Inline), VectorOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), VectorOp, PrimalClosures(PrimalKind.Integers& (~PrimalKind.U64))]
         public static Vector128<T> gt<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
                 => ginx.vgt(a,b);
 
-        [MethodImpl(Inline), VectorOp, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), VectorOp, PrimalClosures(PrimalKind.Integers& (~PrimalKind.U64))]
         public static Vector128<T> max<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
                 => ginx.vmax(a,b);

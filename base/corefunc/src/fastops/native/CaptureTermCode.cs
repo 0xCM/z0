@@ -30,21 +30,19 @@ namespace Z0
 
         ZEDx2_SBB,
 
-        ZEDx6_000,
+        ZEDx7_000,
 
-        ZEDx6_RET,
+        ZEDx7_RET,
 
-        ZEDx6_JMP,
+        JMP_RAX,
 
         MSDIAG,
-
-        EOB,
         
         /// <summary>
         /// Decoded all instructions
         /// </summary>
         DAI,
 
-        Complete
+        BUFFER_OUT
     }
 }

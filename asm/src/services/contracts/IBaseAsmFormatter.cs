@@ -3,19 +3,17 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
+    using System.IO;
 
-    using Z0.AsmSpecs;
+    using static zfunc;
 
-    public interface IAsmFunctionFormatter
+    using Iced = Iced.Intel;
+
+    interface IBaseAsmFormatter
     {
-        AsmFormatConfig Config {get;}        
-        
-        string FormatDetail(AsmFunction src);        
+        ReadOnlySpan<string> CaptureBaseFormat(Iced.InstructionList src, ulong baseaddress);
     }
+
 }
-
-

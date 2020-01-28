@@ -17,15 +17,7 @@ namespace Z0
     /// </summary>
     public interface IAsmArchive
     {
-        /// <summary>
-        /// The top-level organization segment
-        /// </summary>
-        string Catalog {get;}
 
-        /// <summary>
-        /// The sub-level organization segment
-        /// </summary>
-        string Subject {get;}
     }
 
     public interface IAsmArchive<T> : IAsmArchive
@@ -79,30 +71,5 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source path</param>
         IEnumerable<AsmCode> Read(FilePath src, char idsep, char bytesep);
-    }    
-
-    /// <summary>
-    /// Defines asm archival service operations
-    /// </summary>
-    public interface IAsmFunctionArchive : IAsmArchive<IAsmFunctionArchive>
-    {
-        /// <summary>
-        /// Saves a function to the archive
-        /// </summary>
-        /// <param name="src">The source function</param>
-        AsmEmissionToken Save(AsmFunction src);
-
-        /// <summary>
-        /// Saves a stream of functions to the archive
-        /// </summary>
-        /// <param name="src">The source function</param>
-        IEnumerable<AsmEmissionToken> Save(IEnumerable<AsmFunction> src);
-
-        /// <summary>
-        /// Saves a group of related functtions to the archive
-        /// </summary>
-        /// <param name="group">The source group</param>
-        IEnumerable<AsmEmissionToken> Save(AsmFunctionGroup group);
-
     }    
 }

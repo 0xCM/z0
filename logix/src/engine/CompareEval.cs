@@ -12,29 +12,30 @@ namespace Z0.Logix
     
     using static zfunc;
 
+    using static LogixOpNames;
+
     public static class CompareEval
     {
-        [Op("cmpexpr"), PrimalClosures(PrimalKind.U64)]
+        [Op("cmpexpr"), PrimalClosures(PrimalKind.Integers & ~PrimalKind.U64)]
         public static LiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
             where T : unmanaged
                 => ScalarOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
-        [Op("cmppred"), PrimalClosures(PrimalKind.U64)]
+        [Op("cmppred"), PrimalClosures(PrimalKind.Integers & ~PrimalKind.U64)]
         public static bit eval<T>(IComparisonPred<T> expr)
             where T : unmanaged
                 => PredicateApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
-        [Op("vcmpexpr128"), PrimalClosures(PrimalKind.U64)]
+        [Op(vcmp128), PrimalClosures(PrimalKind.Integers & ~PrimalKind.U64)]
         public static LiteralExpr<Vector128<T>> eval<T>(IComparisonExpr<Vector128<T>> expr)
             where T : unmanaged
                 => VectorizedOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
-        [Op("vcmpexpr256"), PrimalClosures(PrimalKind.U64)]
+        [Op(vcmp256), PrimalClosures(PrimalKind.Integers & ~PrimalKind.U64)]
         public static LiteralExpr<Vector256<T>> eval<T>(IComparisonExpr<Vector256<T>> expr)
             where T : unmanaged
                 => VectorizedOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
-        [Op("expr"), PrimalClosures(PrimalKind.U64)]
         static LiteralExpr<T> eval<T>(IExpr<T> expr)
             where T : unmanaged
         {
@@ -45,12 +46,10 @@ namespace Z0.Logix
             }
         }
 
-        [Op("vexpr128"), PrimalClosures(PrimalKind.U64)]
         static LiteralExpr<Vector128<T>> eval<T>(IExpr<Vector128<T>> expr)
             where T : unmanaged
                 => LogicEngine.eval(expr);
 
-        [Op("vexpr256"), PrimalClosures(PrimalKind.U64)]
         static LiteralExpr<Vector256<T>> eval<T>(IExpr<Vector256<T>> expr)
             where T : unmanaged
                 => LogicEngine.eval(expr);

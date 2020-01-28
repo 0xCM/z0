@@ -42,16 +42,16 @@ namespace Z0
 
             Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> f = Avx2.And;
             NativeCapture.capture(f,target);
-            f.CaptureAsm(asm);       
+            Context.CaptureDelegate(f,asm);
             
 
             var g = typeof(Avx2).GetMethod(nameof(Avx2.And), new Type[] { typeof(Vector256<uint>), typeof(Vector256<uint>) });
             NativeCapture.capture(g,target);            
-            g.CaptureAsm(asm);       
+            Context.CaptureMethod(g, asm);
 
             var many = typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName("vand");
             NativeCapture.capture(many,typeof(uint),target);
-            many.CaptureAsm(typeof(uint), asm);
+            Context.CaptureMethods(many,typeof(uint), asm);
 
         }
 
@@ -59,7 +59,7 @@ namespace Z0
         {
             using var asm = AsmTestWriter(AsmFormat);            
             var f = typeof(gmath).Method(nameof(gmath.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
-            f.CaptureAsm(asm);
+            Context.CaptureMethod(f, asm);
         }
 
         public void capture_shifter()
@@ -71,7 +71,8 @@ namespace Z0
 
             var f = shifter(4);
             NativeCapture.capture(f,native);
-            f.CaptureAsm(asm);       
+            Context.CaptureDelegate(f,asm);
+
         }
 
         public void capture_shuffler()
@@ -82,11 +83,12 @@ namespace Z0
 
             var f = shuffler<uint>(n2);
             NativeCapture.capture(f,native);
-            f.CaptureAsm(asm);       
+            Context.CaptureDelegate(f,asm);
 
             var g = shuffler(n3);
             NativeCapture.capture(g,native);
-            g.CaptureAsm(asm);       
+            Context.CaptureDelegate(g,asm);
+
         }
 
     }

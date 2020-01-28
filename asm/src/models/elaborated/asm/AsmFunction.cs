@@ -14,18 +14,18 @@ namespace Z0.AsmSpecs
     /// </summary>
     public class AsmFunction
     {   
-        public static AsmFunction Define(MemoryRange origin, AsmCode code, CaptureTermCode tc, AsmInstructionList instructions)
-            => new AsmFunction(origin, code, tc, instructions);
+        public static AsmFunction Define(MemoryRange origin, AsmCode code, NativeCaptureInfo ci, AsmInstructionList instructions)
+            => new AsmFunction(origin, code, ci, instructions);
 
-        AsmFunction(MemoryRange address, AsmCode code, CaptureTermCode tc, AsmInstructionList instructions)
+        AsmFunction(MemoryRange address, AsmCode code, NativeCaptureInfo ci, AsmInstructionList instructions)
         {
             this.Id = code.Id;
             this.Name = code.Id;
             this.Label = code.Label;
             this.Instructions = instructions;
-            this.Code = code;
-            this.TermCode = tc;
+            this.Code = code;            
             this.Location = address;
+            this.CaptureInfo = ci;
         }
 
         /// <summary>
@@ -64,9 +64,9 @@ namespace Z0.AsmSpecs
         public Option<CilFunction> Cil {get; private set;}
         
         /// <summary>
-        /// The reason discerned for capture completion
+        /// Describes the capture outcome
         /// </summary>
-        public CaptureTermCode TermCode {get;}
+        public NativeCaptureInfo CaptureInfo {get;}
 
         /// <summary>
         /// The number of encoded instructions

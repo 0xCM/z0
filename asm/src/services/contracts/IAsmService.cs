@@ -10,13 +10,10 @@ namespace Z0
     using AsmSpecs;
 
     using static zfunc;
-    
-    public interface IAsmFunctionEmitter
+
+    public interface IAsmService : IOpService
     {
 
-        Option<Exception> EmitCil(IEnumerable<AsmFunction> functions, FilePath dst);
 
-
-        Option<Exception> EmitAsm(IEnumerable<AsmFunction> disassembly, FilePath file);
     }
 }

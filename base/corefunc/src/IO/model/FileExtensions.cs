@@ -3,17 +3,22 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
-    using System.Linq;
     using System.Collections.Generic;
-    using System.Collections.Specialized;
 
-    using AsmSpecs;
+    using static zfunc;
 
-    public interface IAsmAnalyzer
+
+    public static class FileExtensions
     {
-       IEnumerable<AsmEmissionToken> AnalyzeCatalog();
-       
+        public const string Csv = "csv";
+
+        public const string Asm = "asm";
+
+        public const string Hex = "hex";
+        
+
     }
+
 }

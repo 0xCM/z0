@@ -11,7 +11,7 @@ namespace Z0
 
     using AsmSpecs;
 
-    public interface IAsmCatalogEmitter
+    public interface IAsmCatalogEmitter : IAsmService
     {
        IEnumerable<AsmEmissionToken> EmitCatalog();
        

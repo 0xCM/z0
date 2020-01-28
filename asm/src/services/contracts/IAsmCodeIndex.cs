@@ -10,9 +10,20 @@ namespace Z0
 
     using AsmSpecs;
 
-    public interface IAsmCodeIndex
+    public interface IAsmVCodeIndex
     {
         IEnumerable<AsmCode> Entries {get;}
+
+        Option<AsmCode> Find(string name, FixedWidth width, PrimalKind kind);
+
+        Option<AsmCode> Find<W,T>(string name,  W w = default, T t = default)
+            where W : unmanaged, ITypeNat
+            where T : unmanaged;
+
+    }
+    
+    public interface IAsmCodeIndex : IAsmVCodeIndex
+    {
 
         Option<AsmCode> Lookup(Moniker id);        
 
@@ -27,4 +38,6 @@ namespace Z0
             where W : unmanaged, ITypeNat
             where T : unmanaged;
     }
+
+
 }

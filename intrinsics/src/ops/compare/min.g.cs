@@ -15,12 +15,12 @@ namespace Z0
 
     partial class ginx
     {        
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All& (~PrimalKind.U64))]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All & (~PrimalKind.U64))]
         public static Vector128<T> vmin<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vmin_u(x,y);
          
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All& (~PrimalKind.U64))]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All & (~PrimalKind.U64))]
         public static Vector256<T> vmin<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vmin_u(x,y);

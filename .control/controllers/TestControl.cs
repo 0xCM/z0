@@ -21,6 +21,7 @@ namespace Z0
     class TestController : Controller<TestController>
     {       
         readonly IAsmContext AsmContext;
+        
         public TestController()
         {
             this.AsmContext = AsmServices.Context();

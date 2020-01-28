@@ -20,7 +20,7 @@ namespace Z0
         /// Decodes an instruction list
         /// </summary>
         /// <param name="src">The code source</param>
-        AsmInstructionList DecodeList(AsmCode src);
+        AsmInstructionList DecodeInstructions(AsmCode src);
 
         /// <summary>
         /// Decodes a function from a native capture

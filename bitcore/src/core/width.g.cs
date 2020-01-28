@@ -16,31 +16,12 @@ namespace Z0
     partial class gbits
     {
         /// <summary>
-        /// Creates a bitview over a source value
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitView<T> view<T>(ref T src)
-            where T: unmanaged
-                => new BitView<T>(ref src);
-
-        /// <summary>
-        /// Computes the maximum number of bits that can be represented by the type
-        /// </summary>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), PrimalClosures(PrimalKind.All)]
-        public static int width<T>()
-            where T : unmanaged
-                => Unsafe.SizeOf<T>()*8;
-
-        /// <summary>
         /// Computes the minimal number of bits required to represent the source value
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.All)]
-        public static int width<T>(T src)
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
+        public static int effwidth<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

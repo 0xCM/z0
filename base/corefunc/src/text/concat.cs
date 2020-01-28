@@ -242,6 +242,11 @@ partial class zfunc
     public static string concat(string s1, char c1, char c2, string s2)
         => $"{s1}{c1}{c2}{s2}";
 
+
+    [MethodImpl(Inline)]
+    public static string concat(string s1, char c1, params string[] items)
+        => $"{s1}{c1}" + concat(items);
+
     [MethodImpl(Inline)]
     public static string concat(char c1, string s, char c2, params string[] items)
         => $"{c1}{s}{c2}" + concat(items);

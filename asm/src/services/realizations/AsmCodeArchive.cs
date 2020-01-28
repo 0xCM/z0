@@ -22,9 +22,9 @@ namespace Z0
     {
         readonly FolderPath Folder;
 
-        public string Catalog {get;}
+        readonly string Catalog;
 
-        public string Subject {get;}
+        readonly string Subject;
 
         public static IAsmCodeArchive Create(string catalog, string subject)
             => new AsmCodeArchive(catalog, subject);

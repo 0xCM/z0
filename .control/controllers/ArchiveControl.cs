@@ -52,18 +52,30 @@ namespace Z0
         void CatalogEmissionFailed(string id)
             => errout($"Error occurred while emitting catalog {id}");
 
-        DataResourceIndex CreateResourceIndex()
-            => FindCatalog(AssemblyId.Data).MapRequired(c =>  DataResourceReport.Create(c.Resources,"data"));
+        DataResourceIndex EmitResourceReport()
+        {
+            var dst = Paths.AsmReportRoot + FileName.Define(AssemblyId.Data.ToString().ToLower(), "csv");            
+            return FindCatalog(AssemblyId.Data).MapRequired(c =>  DataResourceReport.Save(c.Resources, dst));
+        }
 
-        Option<FilePath> Emit(IAsmContext context, IOperationCatalog catalog)
+        Option<FilePath> EmitCatalog(IAsmContext context, IOperationCatalog catalog)
         {
             var emitted = AsmServices.CatalogEmitter(context,catalog).EmitCatalog();
-            return AsmEmissionReport.Create(catalog, emitted.ToArray());
+            var dst = (Paths.AsmReportRoot + FolderName.Define("emissions")) + FileName.Define(catalog.CatalogName, FileExtensions.Csv);            
+            return AsmEmissionReport.Save(catalog, emitted.ToArray(), dst);
+        }
+
+        void EmitLocationReport(AssemblyId id, Assembly src)
+        {
+            var subject = $"{id.ToString().ToLower()}-locations";
+            var outpath = Paths.AsmReportRoot +  FileName.Define(subject, FileExtensions.Csv);
+            var report = MemberLocationReport.Create(src.GetTypes().DeclaredMethods().Static().NonGeneric().WithoutConversionOps());
+            report.Save(outpath);
         }
 
         public override void Execute()
         {             
-            var resources = CreateResourceIndex();
+            var resources = EmitResourceReport();
             var assemblies = 
                 (from d in Designators.Control.Designated.Designates
                 where EnabledAssemblies.Contains(d.Id) && d.Catalog != null && !d.Catalog.IsEmpty
@@ -71,10 +83,12 @@ namespace Z0
             
             foreach(var a in assemblies)
             {
+                EmitLocationReport(a.Id,a.DeclaringAssembly);
+
                 var clrindex = AsmServices.IndexAssembly(a.DeclaringAssembly);
                 var catalog = a.Catalog;
                 var context =  AsmServices.Context(clrindex, resources, AsmFormatConfig.Default);
-                Emit(context, a.Catalog).OnSome(path => CatalogEmitted(catalog.CatalogName, path))
+                EmitCatalog(context, a.Catalog).OnSome(path => CatalogEmitted(catalog.CatalogName, path))
                              .OnNone(() => CatalogEmissionFailed(catalog.CatalogName));
             }
         }

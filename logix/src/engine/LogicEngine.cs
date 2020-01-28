@@ -27,7 +27,7 @@ namespace Z0.Logix
         /// Evalutates a typed logic expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        [Op(logic), PrimalClosures(PrimalKind.U64)]
+        [Op(logic), PrimalClosures(PrimalKind.Integers)]
         public static bit eval<T>(ILogicExpr<T> expr)
             where T : unmanaged
                 => LogicExprEval.eval(expr);
@@ -36,7 +36,7 @@ namespace Z0.Logix
         /// Evalutates a typed scalar expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        [Op(scalar), PrimalClosures(PrimalKind.U64)]
+        [Op(scalar), PrimalClosures(PrimalKind.Integers)]
         public static LiteralExpr<T> eval<T>(IExpr<T> expr)
             where T : unmanaged                
                 => ScalarExprEval.eval(expr);
@@ -47,17 +47,17 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The predicate to evaluate</param>
         /// <typeparam name="T">The type over which the comparison is defined</typeparam>
-        [Op(cmp), PrimalClosures(PrimalKind.U64)]
+        [Op(cmp), PrimalClosures(PrimalKind.Integers & (~PrimalKind.U64))]
         public static LiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
             where T : unmanaged
                 => CompareEval.eval(expr);
 
-        [Op("vcmp128"), PrimalClosures(PrimalKind.U64)]
+        [Op("vcmp128"), PrimalClosures(PrimalKind.Integers & (~PrimalKind.U64))]
         public static LiteralExpr<Vector128<T>> eval<T>(IComparisonExpr<Vector128<T>> expr)
             where T : unmanaged
                 => CompareEval.eval(expr);
 
-        [Op("vcmp256"), PrimalClosures(PrimalKind.U64)]
+        [Op("vcmp256"), PrimalClosures(PrimalKind.Integers & (~PrimalKind.U64))]
         public static LiteralExpr<Vector256<T>> eval<T>(IComparisonExpr<Vector256<T>> expr)
             where T : unmanaged
                 => CompareEval.eval(expr);
@@ -68,7 +68,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The predicate to evaluate</param>
         /// <typeparam name="T">The type over which the comparison is defined</typeparam>
-        [Op("cmppred"), PrimalClosures(PrimalKind.U64)]
+        [Op("cmppred"), PrimalClosures(PrimalKind.Integers & (~PrimalKind.U64))]
         public static bit eval<T>(IComparisonPred<T> expr)
             where T : unmanaged
                 => CompareEval.eval(expr);
@@ -77,7 +77,7 @@ namespace Z0.Logix
         /// Evalutates a typed scalar expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        [Op("arith"), PrimalClosures(PrimalKind.U64)]
+        [Op("arith"), PrimalClosures(PrimalKind.Integers)]
         public static LiteralExpr<T> eval<T>(IArithmeticExpr<T> expr)
             where T : unmanaged
                 => ArithExprEval.eval(expr);
@@ -86,7 +86,7 @@ namespace Z0.Logix
         /// Evalutates a typed 128-bit intrinsic expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        [Op("v128expr"), PrimalClosures(PrimalKind.U64)]
+        [Op("v128expr"), PrimalClosures(PrimalKind.Integers)]
         public static LiteralExpr<Vector128<T>> eval<T>(IExpr<Vector128<T>> expr)
             where T : unmanaged
                 => VectorExprEval.eval(expr);
@@ -95,7 +95,7 @@ namespace Z0.Logix
         /// Evalutates a typed 256-bit intrinsic expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        [Op("v256expr"), PrimalClosures(PrimalKind.U64)]
+        [Op("v256expr"), PrimalClosures(PrimalKind.Integers)]
         public static LiteralExpr<Vector256<T>> eval<T>(IExpr<Vector256<T>> expr)
             where T : unmanaged
                 => VectorExprEval.eval(expr);
@@ -121,7 +121,7 @@ namespace Z0.Logix
         /// <param name="expr">The expression to test</param>
         /// <param name="a">The first variable value</param>
         /// <param name="b">The second variable value</param>
-        [Op, PrimalClosures(PrimalKind.U64)]
+        [Op, PrimalClosures(PrimalKind.Integers)]
         public static bit satisfied<T>(ComparisonExpr<T> expr, T a, T b)
             where T :unmanaged
         {
@@ -136,7 +136,7 @@ namespace Z0.Logix
         /// <param name="expr">The expression to test</param>
         /// <param name="a">The first variable value</param>
         /// <param name="b">The second variable value</param>
-        [Op, PrimalClosures(PrimalKind.U64)]
+        [Op, PrimalClosures(PrimalKind.Integers)]
         public static bit satisfied<T>(ComparisonExpr<Vector128<T>> expr, Vector128<T> a, Vector128<T> b)
             where T :unmanaged
         {
@@ -152,7 +152,7 @@ namespace Z0.Logix
         /// <param name="expr">The expression to test</param>
         /// <param name="a">The first variable value</param>
         /// <param name="b">The second variable value</param>
-        [Op, PrimalClosures(PrimalKind.U64)]
+        [Op, PrimalClosures(PrimalKind.Integers)]
         public static bit satisfied<T>(ComparisonExpr<Vector256<T>> expr, Vector256<T> a, Vector256<T> b)
             where T :unmanaged
         {

@@ -8,12 +8,6 @@ namespace Z0
 
     public interface IDeconstructable
     {
-        FolderPath TargetFolder {get;}
-
-        FileName AsmFileName {get;}
-
-        FileName CilFileName {get;}
-
         void Emit();
 
     }

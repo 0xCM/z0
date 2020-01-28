@@ -61,6 +61,8 @@ namespace Z0
         public FilePath RenameFile(FileName src)
             => FolderPath + src;
     
+        public FilePath WithExtension(FileExtension ext)
+            => Define(Path.ChangeExtension(Path.GetFileName(FullPath), ext.Name));
         
     }
 

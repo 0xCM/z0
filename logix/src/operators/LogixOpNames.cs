@@ -34,12 +34,12 @@ namespace Z0.Logix
         /// <summary>
         /// Ternary bitlogic
         /// </summary>
-        public const string tbl = "tbl";
+        public const string tbl = nameof(tbl);
 
         /// <summary>
         /// Comparison
         /// </summary>
-        public const string cmp = "cmp";
+        public const string cmp = nameof(cmp);
 
         /// <summary>
         /// Unary arithmetic
@@ -55,5 +55,15 @@ namespace Z0.Logix
         /// Shift evaluation
         /// </summary>
         public const string shift = "shift";
+
+        public const string vcmp128 = nameof(vcmp128);
+
+        public const string vcmp256 = nameof(vcmp256);
+
+        public const string veval128 = nameof(veval128);
+
+        public const string veval256 = nameof(veval256);
+
+        
     }
 }

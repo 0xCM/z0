@@ -15,14 +15,15 @@ namespace Z0
     {
         public static NativeCaptureInfo Empty => Define(0,0, CaptureTermCode.None, new byte[]{});
 
-        public static NativeCaptureInfo Define(ulong start, ulong end,  CaptureTermCode cc, byte[] buffer)
-            => new NativeCaptureInfo(start, end, cc);
+        public static NativeCaptureInfo Define(ulong start, ulong end,  CaptureTermCode cc, byte[] lookback)
+            => new NativeCaptureInfo(start, end, cc,lookback);
 
-        NativeCaptureInfo(ulong start, ulong end, CaptureTermCode cc)
+        NativeCaptureInfo(ulong start, ulong end, CaptureTermCode cc, byte[] lookback)
         {   
             this.Start = start;
             this.End = end;
             this.TermCode = cc;
+            this.Lookback = lookback;
         }
          
         public readonly ulong Start;
@@ -31,9 +32,10 @@ namespace Z0
         
         public readonly CaptureTermCode TermCode;
 
-        //public readonly byte[] Buffer;
+        public readonly byte[] Lookback;
 
         public bool IsEmpty
             => End - Start == 0 && TermCode == CaptureTermCode.None;
+        
     }
 }

@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static int width(in byte src)
+        public static int width(byte src)
             => 8 - nlz(src);
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static int width(in ushort src)
+        public static int width(ushort src)
             => 16 - nlz(src);
 
         /// <summary>
@@ -45,5 +45,4 @@ namespace Z0
         public static int width(ulong src)
             => 64 - nlz(src);
     }
-
 }

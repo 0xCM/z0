@@ -13,17 +13,12 @@ namespace Z0
 
     public static class AsmEmissionReport
     {
-        const string ReportExtension = "csv";
+        static bool ExcludeImm => true;
 
-        static FolderPath OutputFolder => Paths.AsmDataDir(FolderName.Define("logs")).CreateIfMissing();
-
-        static FilePath OutputPath(IOperationCatalog catalog)
-            => OutputFolder + FileName.Define(catalog.CatalogName, ReportExtension);
-
-        public static Option<FilePath> Create(IOperationCatalog catalog, AsmEmissionToken[] emissions, bool immexclude = true)
+        public static Option<FilePath> Save(IOperationCatalog catalog, AsmEmissionToken[] emissions, FilePath dst)
         {
-            
-            if(immexclude)
+                    
+            if(ExcludeImm)
                 emissions = emissions.Where(e => !e.Uri.Id.HasImm).ToArray();
 
             var count = emissions.Length;
@@ -31,13 +26,16 @@ namespace Z0
                 return default;
 
             Array.Sort(emissions);
-            
+
+
             var records = new AsmEmissionRecord[count];
             MemoryAddress @base = emissions[0].Origin.Start;
 
             for(var i =0; i<count; i++)
                 records[i] = AsmEmissionRecord.Define(@base, emissions[i], i != 0 ? emissions[i-1] : (AsmEmissionToken?)null);
-            return records.Save(OutputPath(catalog));
+            
+            
+            return records.Save(dst);
         }
     }
 }

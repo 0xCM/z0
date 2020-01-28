@@ -16,46 +16,35 @@ namespace Z0
     {
         readonly IAsmContext Context;
 
-        readonly FolderPath RootDir;
+        public static AsmFunctionEmitter Create(IAsmContext context)
+            => new AsmFunctionEmitter(context);
 
-        public static AsmFunctionEmitter Create(IAsmContext context, FolderPath root)
-            => new AsmFunctionEmitter(context,root);
-
-        AsmFunctionEmitter(IAsmContext context, FolderPath dst)
+        AsmFunctionEmitter(IAsmContext context)
         {
             this.Context = context;
-            this.RootDir = dst;            
         }
 
-        public void EmitCil(IEnumerable<AsmFunction> functions, FileName file)
-        {
-            var emittable = functions.Where(f => f.Cil.IsSome()).ToList();
-            if(emittable.Count != 0)
+        public Option<Exception> EmitCil(IEnumerable<AsmFunction> functions, FilePath dst)
+            => AsmServices.CilWriter(Context, dst).WriteCil(functions);
+
+        public Option<Exception> EmitAsm(IEnumerable<AsmFunction> src, FilePath file)        
+        {            
+            var functions = src.ToArray();
+            if(functions.Length == 0)
+                return default;
+            try
             {
-                using var writer = Writer(RootDir.CreateIfMissing() + file);
-                EmitTimestamp(writer);                
-                foreach(var f in functions)
-                    f.Cil.OnSome(cil => writer.WriteLine(cil.Format()));
+                var formatter = AsmServices.Formatter(Context);
+                using var dst = new StreamWriter(file.FullPath, false);
+                for(var i=0; i< functions.Length; i++)
+                    dst.Write(formatter.FormatDetail(functions[i]));
+                return default;
+            }
+            catch(Exception e)
+            {
+                return e;
             }
         }
-
-        public void EmitAsm(IEnumerable<AsmFunction> disassembly, FileName file)        
-        {
-            var src = disassembly.ToArray();
-            if(src.Length == 0)
-                return;
-
-            var formatter = AsmServices.Formatter(Context);
-            using var dst = Writer(RootDir.CreateIfMissing() + file);
-                        
-            for(var i=0; i< src.Length; i++)
-                dst.Write(formatter.FormatDetail(src[i]));
-        }
-
-        void EmitTimestamp(StreamWriter writer)
-            => writer.WriteLine($"; {now().ToLexicalString()}"); 
         
-        StreamWriter Writer(FilePath file)   
-            => new StreamWriter(file.FullPath, false);
     }
 }

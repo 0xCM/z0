@@ -11,11 +11,9 @@ namespace Z0
 
     using static zfunc;
     
-
     public interface IAsmProcessEmitter
     {
         void EmitFunctions(Type host);
     }
-
 
 }

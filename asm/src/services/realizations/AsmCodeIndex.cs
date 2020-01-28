@@ -51,6 +51,20 @@ namespace Z0
             where T : unmanaged
                 => Lookup(OpIdentity.define(name, typeof(T).Kind()));
 
+        Option<AsmCode> IAsmVCodeIndex.Find(string name, FixedWidth width, PrimalKind kind)
+            => VectorOp(name,width,kind);
+
+        Option<AsmCode> IAsmVCodeIndex.Find<W, T>(string name, W w, T t)
+        {
+            var k = typeof(T).Kind();
+            var width = (FixedWidth)(w.NatValue);
+            var entries = from e in Entries
+                            let segments = e.Id.Segments
+                            where segments.Any(s => s.DominantWidth == width && s.PrimalKind() == k)
+                            select e;
+            return entries.Any() ? entries.First() : none<AsmCode>();
+        }
+
         public IEnumerable<AsmCode> Entries
             => index.Values;
 

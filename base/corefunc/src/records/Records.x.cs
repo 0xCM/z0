@@ -41,6 +41,7 @@ namespace Z0
                 if(records.Length == 0)
                     return FilePath.Empty;
                             
+                dst.FolderPath.CreateIfMissing();                            
                 var emitHeader = header && (overwrite || !dst.Exists());
                 using var writer = new StreamWriter(dst.Name, !overwrite);            
 
@@ -55,6 +56,11 @@ namespace Z0
                 errout(e);
                 return default;
             }
+        }
+
+        public static void AppendField(this StringBuilder sb, object content)
+        {
+            sb.Append($"{content}");
         }
 
         public static void AppendField(this StringBuilder sb, object content, int pad, char delimiter)

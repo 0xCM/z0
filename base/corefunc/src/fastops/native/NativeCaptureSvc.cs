@@ -36,7 +36,7 @@ namespace Z0
 
         NativeCaptureSvc(int? buffersize)
         {
-            buffer = new byte[buffersize ?? NativeReader.DefaultBufferLen];
+            buffer = new byte[buffersize ?? NativeServices.DefaultBufferLen];
         }
 
 

@@ -15,8 +15,9 @@ namespace Z0
     /// </summary>
     public interface IAppService : IDisposable
     {
-        Task Configure(dynamic config);        
+        
     }
+
 
     /// <summary>
     /// Characterizes an application service that supports parametric configuration

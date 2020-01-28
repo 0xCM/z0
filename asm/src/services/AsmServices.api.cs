@@ -52,8 +52,8 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The target folder</param>
         [MethodImpl(Inline)]
-        public static IAsmFunctionEmitter CodeEmitter(IAsmContext context, FolderPath dst)
-            => AsmFunctionEmitter.Create(context, dst);
+        public static IAsmFunctionEmitter AsmFunctionEmitter(IAsmContext context)
+            => Z0.AsmFunctionEmitter.Create(context);
 
         /// <summary>
         /// Instantiates a function flow service over a source catalog
@@ -75,7 +75,7 @@ namespace Z0
         /// </summary>
         /// <param name="config">The configuration to use</param>
         [MethodImpl(Inline)]
-        internal static IIcedAsmFormatter BaseFormatter(IAsmContext context)
+        internal static IBaseAsmFormatter BaseFormatter(IAsmContext context)
             => AsmContentFormatter.BaseFormatter(context);
 
         /// <summary>
@@ -109,35 +109,27 @@ namespace Z0
         /// <summary>
         /// Instantiates an asm decoder service
         /// </summary>
-        /// <param name="metadata">If specified, defines the clr metadata index that the decoder can use to associate native code with cil code</param>
-        /// <param name="bufferlen">If specified, the lenght of the decoder's buffer; if unspecified a default value will be chosen</param>
-        [MethodImpl(Inline)]
-        public static IAsmDecoder Decoder()
-            => AsmDecoder.Create(Context(ClrMetadataIndex.Empty, DataResourceIndex.Empty, AsmFormatConfig.Default));
-
-        /// <summary>
-        /// Instantiates an asm decoder service
-        /// </summary>
         /// <param name="clridx">If specified, defines the clr metadata index that the decoder can use to associate native code with cil code</param>
         /// <param name="bufferlen">If specified, the lenght of the decoder's buffer; if unspecified a default value will be chosen</param>
         [MethodImpl(Inline)]
         public static IAsmDecoder Decoder(IAsmContext context, int? bufferlen = null)
-            => AsmDecoder.Create(context);
-        
+            => AsmDecoder.Create(context, bufferlen);    
 
         /// <summary>
         /// Allocates a caller-disposed asm text writer and, as determined by the configuration, emits a file header
         /// </summary>
         /// <param name="dst">The target path</param>
         /// <param name="header">Whether to emit a header when creating a new file or overwriting an existing file</param>
-        public static IAsmWriter Writer(IAsmContext context, FilePath dst)
-        {
-            dst.FolderPath.CreateIfMissing();            
-            var writer = AsmWriter.Create(context, dst);            
-            if(context.AsmFormat.EmitFileHeader)
-                writer.WriteFileHeader();
-            return writer;
-        }
+        public static IAsmFunctionWriter AsmWriter(IAsmContext context, FilePath dst)
+            => Z0.AsmFunctionWriter.Create(context, dst);
+
+        /// <summary>
+        /// Allocates a caller-disposed asm text writer and, as determined by the configuration, emits a file header
+        /// </summary>
+        /// <param name="dst">The target path</param>
+        /// <param name="header">Whether to emit a header when creating a new file or overwriting an existing file</param>
+        public static ICilWriter CilWriter(IAsmContext context, FilePath dst)
+            => Z0.CilWriter.Create(context,dst);
 
         public static Func<AsmStats> StatsEmitter(IAsmContext context, IOperationCatalog catalog)
         {

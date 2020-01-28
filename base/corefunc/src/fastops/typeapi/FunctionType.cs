@@ -130,6 +130,9 @@ namespace Z0
         public static bool emitter(MethodInfo m)
             => m.IsFunction() && m.HasArity(0);
 
+        public static bool vectorfactory(MethodInfo m)
+            =>  m.ParameterTypes(true).Where(t => t.IsVector()).Count() == 0 && m.ReturnType.IsVector();
+        
         /// <summary>
         /// Determines whether a method has intrinsic parameters or return type
         /// </summary>

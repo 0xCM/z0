@@ -71,7 +71,7 @@ namespace Z0.Logix
             where T : unmanaged
                 => gmath.not(a);
 
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static T xor1<T>(T a)
             where T : unmanaged
         {
@@ -214,22 +214,22 @@ namespace Z0.Logix
             where T : unmanaged
                 => gmath.eq(a,b);
 
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static T sll<T>(T a, byte count)
             where T : unmanaged
                 => gmath.sll(a, count);
 
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static T srl<T>(T a, byte count)
             where T : unmanaged
                 => gmath.srl(a, count);
 
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static T rotl<T>(T a, byte count)
             where T : unmanaged
                 => gbits.rotl(a, count);
 
-        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(PrimalKind.UnsignedInts)]
         public static T rotr<T>(T a, byte count)
             where T : unmanaged
                 => gbits.rotr(a, count);

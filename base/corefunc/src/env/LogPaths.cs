@@ -89,6 +89,9 @@ namespace Z0
         public FolderPath AsmDataRoot
             => Settings.DataDir(FolderName.Define("asm"));
 
+        public FolderPath AsmReportRoot
+            => Settings.DataDir(FolderName.Define("asm-reports"));
+
         public FolderPath AsmDataDir(FolderName subject)
             => AsmDataRoot + subject; 
 

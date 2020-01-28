@@ -31,6 +31,10 @@ namespace Z0
             => new MemoryAddress(origin, local);
 
         [MethodImpl(Inline)]
+        public static MemoryAddress Define(IntPtr origin, ulong local = 0)
+            => new MemoryAddress((ulong)origin.ToInt64(), local);
+
+        [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(ulong src)
             => Define(src);
 

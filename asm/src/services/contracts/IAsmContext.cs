@@ -11,20 +11,18 @@ namespace Z0
 
     using static zfunc;
 
-
     public interface IAsmContext : IOpContext
     {
         IClrIndex ClrIndex {get;}
 
         AsmFormatConfig AsmFormat {get;}
 
-        DataResourceIndex Resources {get;}
+        CilFormatConfig CilFormat {get;}
 
+        DataResourceIndex Resources {get;}
 
         IAsmContext WithFormat(AsmFormatConfig config);
 
         IAsmContext WithEmptyClrIndex();
-
     }
-
 }

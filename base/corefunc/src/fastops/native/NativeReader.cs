@@ -19,8 +19,6 @@ namespace Z0
     /// </summary>
     public static unsafe class NativeReader
     {        
-        public const int DefaultBufferLen = 1024;
-
         /// <summary>
         /// Runs the jitter on a reflected method and captures the emitted binary assembly data
         /// </summary>
@@ -84,7 +82,7 @@ namespace Z0
                 var pSrcCurrent = pSrc;            
                 var start = (ulong)pSrc;
                 var result = capture(pSrc, dst);
-                var end =result.End;
+                var end = result.End;
                 var bytesRead = (int)(end - start);
                 var code = dst.Slice(0, bytesRead).ToArray();
                 return MemberCapture.Define(id, d, (start, end), code, result);
@@ -125,7 +123,7 @@ namespace Z0
         /// <typeparam name="T">The type over which to close the methods</typeparam>
         public static IEnumerable<MemberCapture> gmethods(Type host, Type arg)            
         {
-            var buffer = new byte[NativeReader.DefaultBufferLen];     
+            var buffer = new byte[NativeServices.DefaultBufferLen];     
             var definitions = host.StaticMethods().OpenGeneric(1).Select(m => m.GetGenericMethodDefinition());       
             foreach(var m in definitions)
                 yield return NativeReader.generic(m, arg, buffer.Clear());                
@@ -143,7 +141,7 @@ namespace Z0
         {
             var type = typedef.MakeGenericType(arg);
             var methods = type.StaticMethods().ToArray();
-            var buffer = new byte[DefaultBufferLen];
+            var buffer = new byte[NativeServices.DefaultBufferLen];
             for(var i=0; i<methods.Length; i++)
                 yield return NativeReader.read(methods[i], buffer.Clear());                
         }                
@@ -207,38 +205,58 @@ namespace Z0
             && c.x == c.y 
             && d.x == d.y;
 
+
+        static ReadOnlySpan<byte> JmpRaxCheck => new byte[]{0x0, 0x48, 0xff, 0xe0, 0x0, 0x0, 0x19};
+
+        static ReadOnlySpan<byte> RetZedSbb => new byte[]{0x0c, 0, 0x19};
+
+
+        [MethodImpl(Inline)]
+        static bit CheckJmpRax(Span<byte> lookback, out CaptureTermCode termcode, out int takeback)        
+        {            
+            const int ValidBytes = 4;
+            termcode = lookback.StartsWith(JmpRaxCheck) ? CaptureTermCode.JMP_RAX : CaptureTermCode.None;            
+            takeback = termcode != CaptureTermCode.None ? -JmpRaxCheck.Length - 1 - ValidBytes : 0;
+            return termcode != CaptureTermCode.None;
+        }
+
+        [MethodImpl(Inline)]
+        static bit CheckRetZedSbb(Span<byte> lookback, out CaptureTermCode termcode)        
+        {
+            termcode = lookback.StartsWith(RetZedSbb) ? CaptureTermCode.RET_ZED_SBB : CaptureTermCode.None;            
+            return termcode != CaptureTermCode.None;
+        }
+
         internal static NativeCaptureInfo capture(byte* pSrc, Span<byte> dst)
         {
             const byte ZED = 0;
             const byte RET = 0xc3;
             const byte INTR = 0xcc;
             const byte SBB = 0x19;
+            const int Lookback_Count = 16;
  
             var maxcount = dst.Length - 1;
             var pSrcCurrent = pSrc;    
             var offset = 0;
-            var zrun = 0;
             
             var ret_found = false;
             var ret_offset = 0ul;
 
             var int3_found = false;
             var int3_offset = 0ul;
+            var tc = None;
+            Span<byte> lookback = new byte[Lookback_Count];            
                        
+            NativeCaptureInfo Capture(Span<byte> lookback, int delta)
+                => NativeCaptureInfo.Define((ulong)pSrc, (ulong)((long)pSrcCurrent + delta), tc, lookback.ToArray());
+
             while(offset < maxcount)
             {
                 byte code = 0;                
                 dst[offset++] = Read(pSrcCurrent++, ref code);  
                 
-                if(code == 0)
-                {
-                    if(zrun == 0)
-                        zrun = 1;
-                    else
-                        zrun++;
-                }
-                else
-                    zrun = 0;
+                var lookstart = offset < Lookback_Count ? 0 : offset - Lookback_Count;
+                lookback = dst.Slice(lookstart, Lookback_Count);
 
                 if(!ret_found)
                 {
@@ -254,48 +272,45 @@ namespace Z0
                         int3_offset = (ulong)offset;
                 }
 
-
                 if(offset >= 4)
                 {
                     var x0 = dst[offset - 3];
                     var x1 = dst[offset - 2];
                     var x2 = dst[offset - 1];
                     var x3 = dst[offset];
-                    var tc = None;
                     var end = 0ul;
 
-                    //if(x0 == RET && x1 == SBB)
                     if(match((x0,RET), (x1, SBB)))
                         tc = RET_SBB;
 
-                    //if(x0 == RET && x1 == INTR)
                     if(match((x0, RET), (x1, INTR)))
                         tc = RET_INTR;
 
-                    // if((x0 == RET && x1 == INTR && x2 == INTR))
                     if(match((x0, RET), (x1, INTR), (x2,INTR)))
                         tc = RET_INTRx2;
 
-                    //if((x0 == RET && x1 == ZED && x2 == SBB))
                     if(match((x0, RET), (x1, ZED), (x2,SBB)))
                         tc = RET_ZED_SBB;
 
-                    //if(x0 == RET && x1 == ZED && x2 == ZED && x3 == ZED)
                     if(match((x0, RET), (x1, ZED), (x2,ZED), (x3,ZED)))
                         tc = RET_ZEDx3;
 
-                    //if((x0 == INTR && x1 == INTR))
                     if(match((x0,INTR), (x1, INTR)))
                         tc = INTRx2;
 
                     if(tc != None)
-                    {
-                        var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();                     
-                        return NativeCaptureInfo.Define((ulong)pSrc, (ulong)pSrcCurrent - 2, tc, snapshot);
-                    }
+                        return Capture(lookback, -2);
                 }
+            
 
-                if(offset >= 9 
+                // if(CheckJmpRax(lookback, out tc))
+                //     return Capture(lookback, -Lookback_Count);
+
+                if(CheckJmpRax(lookback, out tc, out int takeback))
+                    return Capture(lookback, takeback);
+
+                if(offset >= Lookback_Count 
+                    && (dst[offset - 6] == ZED) 
                     && (dst[offset - 5] == ZED) 
                     && (dst[offset - 4] == ZED) 
                     && (dst[offset - 3] == ZED) 
@@ -305,20 +320,20 @@ namespace Z0
                     )
                 {
                     var end = 0ul;
-                    var tc = ZEDx6_000;
-                    var snapshot = dst.Slice(0, (int)((ulong)pSrcCurrent - (ulong)pSrc)).ToArray();
+                    tc = ZEDx7_000;
 
                     if(ret_found)
                     {
                         end = (ulong)pSrc + ret_offset;
-                        tc = ZEDx6_RET;
+                        tc = ZEDx7_RET;
                     }
                     else
-                        end = (ulong)pSrcCurrent - 5;
-                    return NativeCaptureInfo.Define((ulong)pSrc, end, tc, snapshot);
+                        end = (ulong)pSrcCurrent - 6;
+                    
+                    return NativeCaptureInfo.Define((ulong)pSrc, end, tc, lookback.ToArray());
                 }
             }
-            return NativeCaptureInfo.Define((ulong)pSrc, (ulong)pSrcCurrent, Complete, dst.ToArray());           
+            return NativeCaptureInfo.Define((ulong)pSrc, (ulong)pSrcCurrent, CaptureTermCode.BUFFER_OUT, lookback.ToArray());           
         }
     }
 }

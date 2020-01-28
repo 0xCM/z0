@@ -11,7 +11,6 @@ namespace Z0.AsmSpecs
 	{
 		/// <summary>
 		/// A register (<see cref="Intel.Register"/>).
-		/// 
 		/// This operand kind uses <see cref="Instruction.Op0Register"/>, <see cref="Instruction.Op1Register"/>,
 		/// <see cref="Instruction.Op2Register"/> or <see cref="Instruction.Op3Register"/> depending on operand number.
 		/// See also <see cref="Instruction.GetOpRegister(int)"/>.

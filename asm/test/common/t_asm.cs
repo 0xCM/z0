@@ -17,13 +17,13 @@ namespace Z0
     {
         protected INativeExecBuffer AsmBuffer;
 
-        protected IAsmContext AsmContext;
+        protected IAsmContext Context;
 
         INativeExecBuffer[] AsmBuffers;
         
         public t_asm()
         {
-            AsmContext = AsmServices.Context(ClrMetadataIndex.Empty, DataResourceIndex.Empty, AsmFormatConfig.Default);
+            Context = AsmServices.Context(ClrMetadataIndex.Empty, DataResourceIndex.Empty, AsmFormatConfig.Default);
             AsmBuffer = NativeServices.ExecBuffer();
             AsmBuffers = new INativeExecBuffer[]{
                 NativeServices.ExecBuffer(),
@@ -50,10 +50,10 @@ namespace Z0
         protected string GMath
             => nameof(gmath);
 
-        protected IAsmWriter AsmTestWriter(AsmFormatConfig format, [Caller] string test = null)
+        protected IAsmFunctionWriter AsmTestWriter(AsmFormatConfig format, [Caller] string test = null)
         {
             var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, Paths.AsmExt);    
-            return AsmServices.Writer(AsmContext.WithFormat(format), path);
+            return AsmServices.AsmWriter(Context.WithFormat(format), path);
         }
 
         protected void CheckAsmMatch<T>(BinaryOp<T> f, AsmCode asm)

@@ -177,7 +177,7 @@ namespace Z0
         /// Loads a 256x64i vector from index-identified source cells
         /// </summary>
         /// <param name="w">The target vector width</param>
-        /// <param name="src">The memory source, covering up to 4*1024 contiguous bytes </param>
+        /// <param name="src">The memory source</param>
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<long> vgather(N256 w, in long src, Vector256<long> index)
@@ -199,7 +199,7 @@ namespace Z0
         /// Loads a 256x64u vector from index-identified source cells
         /// </summary>
         /// <param name="w">The target vector width</param>
-        /// <param name="src">The memory source, covering up to 4*1024 contiguous bytes</param>
+        /// <param name="src">The memory source</param>
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<ulong> vgather(N256 w, in ulong src, Vector128<uint> vidx)

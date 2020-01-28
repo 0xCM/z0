@@ -98,7 +98,19 @@ namespace Z0
         /// <param name="k">The type kine</param>
         [MethodImpl(Inline)]
         public static int width(PrimalKind k)
-            => (ushort)k;
+            => k switch {
+                PrimalKind.U8 => 8,
+                PrimalKind.I8 => 8,
+                PrimalKind.U16 => 16,
+                PrimalKind.I16 => 16,
+                PrimalKind.U32 => 32,
+                PrimalKind.I32 => 32,
+                PrimalKind.I64 => 64,
+                PrimalKind.U64 => 64,
+                PrimalKind.F32 => 32,
+                PrimalKind.F64 => 64,
+                _ => 0
+            };
 
         /// <summary>
         /// Determines the number of bytes covered by a k-kinded type
@@ -269,13 +281,14 @@ namespace Z0
             where T : unmanaged
                 => kind_u(t);
         
-        public static PrimalWidth width(Type t)
+        [MethodImpl(Inline)]
+        public static FixedWidth width(Type t)
         {
             var k = kind(t);
             if(k != PrimalKind.None)
-                return (PrimalWidth)(ushort)k;
+                return (FixedWidth)(ushort)k;
             else
-                return PrimalWidth.None;            
+                return FixedWidth.None;            
         }
 
         [MethodImpl(Inline)]

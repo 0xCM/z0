@@ -14,28 +14,23 @@ namespace Z0
     {        
         protected Deconstructable(string SourcePath)
         {
-            this.TargetFolder = FolderPath.Define(Path.GetDirectoryName(SourcePath));
-            this.AsmFileName = FileName.Define(Path.ChangeExtension(Path.GetFileName(SourcePath),"asm"));
-            this.CilFileName = FileName.Define(Path.ChangeExtension(Path.GetFileName(SourcePath),"il"));
+            this.SourcePath = FilePath.Define(SourcePath);
         }
 
-        public FolderPath TargetFolder {get;}
-
-        public FileName AsmFileName {get;}
-
-        public FileName CilFileName {get;}
-
+        public FilePath SourcePath {get;}
+        
         public void Emit()
         {
+            var dstfolder = SourcePath.FolderPath;
+            var asmfile =  SourcePath.WithExtension(FileExtension.Define("asm"));
+            var cilfile = SourcePath.WithExtension(FileExtension.Define("il"));
             var host = typeof(T);
             var clridx = ClrMetadataIndex.Create(host.Assembly);
             var context = AsmServices.Context(clridx, DataResourceIndex.Empty, AsmFormatConfig.Default.WithSectionDelimiter());
             using var capture = AsmProcessServices.Capture(context);
-            var deconstructed = capture.CaptureFunctions(host);
-            var emitter = AsmServices.CodeEmitter(context,TargetFolder);
-            emitter.EmitAsm(deconstructed, AsmFileName);
-            emitter.EmitCil(deconstructed, CilFileName);
+            var deconstructed = capture.CaptureFunctions(host);            
+            AsmServices.AsmFunctionEmitter(context).EmitAsm(deconstructed, asmfile).OnSome(e => throw e);
+            AsmServices.AsmFunctionEmitter(context).EmitCil(deconstructed, cilfile).OnSome(e => throw e);
         }
-
     }
 }

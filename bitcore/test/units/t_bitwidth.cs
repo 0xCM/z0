@@ -13,19 +13,19 @@ namespace Z0
         public void bitwidth_outline()
         {
             var x = (byte)0b0;
-            var w = gbits.width(x);
+            var w = gbits.effwidth(x);
             Claim.eq(w,0);
             
             x = (byte)0b00010000;
-            w = gbits.width(x);
+            w = gbits.effwidth(x);
             Claim.eq(w,5);
 
             x = (byte)0b00000001;
-            w = gbits.width(x);
+            w = gbits.effwidth(x);
             Claim.eq(w,1);
 
             x = (byte)0b10000000;
-            w = gbits.width(x);
+            w = gbits.effwidth(x);
             Claim.eq(w,8);    
 
         }
@@ -48,7 +48,7 @@ namespace Z0
             for(var sample = 0; sample < RepCount; sample++)
             {
                 var x = Random.Next<T>();
-                var actual = gbits.width(x);
+                var actual = gbits.effwidth(x);
                 var expect = bitsize<T>() - gbits.nlz(x);
                 Claim.eq(expect, actual);
 

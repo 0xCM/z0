@@ -20,15 +20,15 @@ namespace Z0.AsmSpecs
         /// </summary>
         /// <param name="encoded">The encoded instructions</param>
         /// <param name="decoded">The decoded instructions</param>
-        public static AsmInstructionBlock Define(AsmCode encoded, Instruction[] decoded, CaptureTermCode tc)
-            => new AsmInstructionBlock(encoded, decoded, tc);
+        public static AsmInstructionBlock Define(AsmCode encoded, Instruction[] decoded, NativeCaptureInfo captureinfo)
+            => new AsmInstructionBlock(encoded, decoded, captureinfo);
 
-        AsmInstructionBlock(AsmCode encoded, Instruction[] decoded, CaptureTermCode tc)
+        AsmInstructionBlock(AsmCode encoded, Instruction[] decoded, NativeCaptureInfo captureinfo)
         {
             this.Label = encoded.Label;
             this.NativeCode = encoded;
             this.Decoded = decoded;
-            this.TermCode = tc;
+            this.CaptureInfo = captureinfo;
         }
 
         /// <summary>
@@ -42,14 +42,14 @@ namespace Z0.AsmSpecs
         public AsmCode NativeCode {get;}
 
         /// <summary>
-        /// The reason discerned for capture completion
-        /// </summary>
-        public CaptureTermCode TermCode {get;}
-
-        /// <summary>
         /// The decoded instructions
         /// </summary>
         public Instruction[] Decoded {get;}
+
+        /// <summary>
+        /// Describes the capture outcome
+        /// </summary>
+        public NativeCaptureInfo CaptureInfo {get;}
 
         /// <summary>
         /// Queries/Manipulates an index-identified instruction

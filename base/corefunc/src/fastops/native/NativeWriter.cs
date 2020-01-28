@@ -14,14 +14,6 @@ namespace Z0
         public static INativeWriter Create(FilePath dst, bool append = false)
             => new NativeWriter(dst,append);
 
-
-
-        public NativeWriter(StreamWriter stream)
-            : base(stream.BaseStream)
-        {
-
-        }
-
         public NativeWriter(FilePath path, bool append = false)
             : base(path.FullPath, append)
         {
@@ -35,7 +27,7 @@ namespace Z0
             = true;
 
         byte[] Buffer {get; set;}
-            = new byte[NativeReader.DefaultBufferLen];
+            = new byte[NativeServices.DefaultBufferLen];
 
         public byte[] TakeBuffer()
         {

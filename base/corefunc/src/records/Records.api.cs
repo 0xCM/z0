@@ -35,9 +35,6 @@ namespace Z0
         public static RecordSpec DefineRecord(string Namespace, string TypeName, params RecordField[] Fields)
             => new RecordSpec(Namespace, TypeName, Fields);
 
-        public static IReadOnlyList<string> GetHeaders<T>()
-            => type<T>().DeclaredProperties().Select(p => p.Name).ToReadOnlyList();
-
         public static IEnumerable<string> Delimited<T>(this IEnumerable<IRecord<T>> records, char delimiter  = '|')
             => records.Select(r => r.DelimitedText(delimiter));
 

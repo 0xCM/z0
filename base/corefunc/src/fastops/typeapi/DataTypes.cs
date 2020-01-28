@@ -7,11 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
-    using System.Reflection;
-    using System.Reflection.Emit;
-    using System.Linq;
-    using System.Collections.Generic;
 
     using static zfunc;
 

@@ -101,6 +101,8 @@ namespace Z0
                 return FromSpanOp(method);
             else if(method.IsNatOp())
                 return FromNatOp(method);
+            else if(method.IsVectorFactory())
+                return FromAny(method);
             else if(method.IsVectorized())
                 return FromVectorized(method);
             else if(method.IsBlocked())
@@ -253,7 +255,8 @@ namespace Z0
                 return FromVectorOp(method);
 
             var id = method.OpName() + PartSep;
-            var paramtypes = method.ParameterTypes(true).Select(t => t.EffectiveType()).ToArray();
+            var parameters = method.GetParameters().Where(p => !p.IsImmediate());
+            var paramtypes = parameters.Select(p => p.ParameterType.EffectiveType()).ToArray();
             
             if(method.IsConstructedGenericMethod)
             {

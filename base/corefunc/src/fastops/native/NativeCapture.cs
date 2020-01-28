@@ -15,7 +15,7 @@ namespace Z0
     using static zfunc;
 
     public static class NativeCapture
-    {
+    {            
         /// <summary>
         /// Emits x86 encoded assembly that reifies a delegate to a caller-supplied buffer
         /// </summary>
@@ -136,7 +136,7 @@ namespace Z0
         /// <param name="dst">The capture target</param>
         public static void capture(IEnumerable<MethodInfo> methods, Type arg, INativeWriter dst)
         {
-            var buffer = new byte[NativeReader.DefaultBufferLen];
+            var buffer = new byte[NativeServices.DefaultBufferLen];
             foreach(var m in methods)
             {                
                 var def = m.IsGenericMethodDefinition ? m : m.GetGenericMethodDefinition();
@@ -152,7 +152,7 @@ namespace Z0
         /// <param name="arg">The type over which to close each method</param>
         static IEnumerable<MemberCapture> capture(IEnumerable<MethodInfo> methods, Type arg)
         {
-            var buffer = new byte[NativeReader.DefaultBufferLen];
+            var buffer = new byte[NativeServices.DefaultBufferLen];
             foreach(var m in methods)                
                 yield return capture(m,arg,buffer);                    
         }

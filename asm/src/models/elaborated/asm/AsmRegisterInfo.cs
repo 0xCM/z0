@@ -12,11 +12,14 @@ namespace Z0.AsmSpecs
     /// </summary>
     public class AsmRegisterInfo
     {
-        public AsmRegisterInfo(string RegisterName)
+        public AsmRegisterInfo(Register name)
         {
-            this.RegisterName = RegisterName;
+            this.Name = name;
         }
         
-        public string RegisterName {get;}
+        public Register Name {get;}
+
+        public override string ToString()
+            => Name.ToString();
     }
 }
