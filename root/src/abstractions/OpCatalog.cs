@@ -12,22 +12,6 @@ namespace Z0
     public abstract class OpCatalog<C> : IOperationCatalog
         where C : OpCatalog<C>
     {
-        // {
-        //     get 
-        //     {
-        //         if(AssemblyId != AssemblyId.None)
-        //             return AssemblyId.ToString().ToLower();
-        //         else
-        //         {
-        //             var name = DeclaringAssembly.GetName().Name;
-        //             var parts = name.Split('.');
-        //             if(parts.Length != 0)
-        //                 return parts.Last();
-        //             else
-        //                 return name;
-        //         }
-        //     }
-        // }
 
         protected OpCatalog()
         {
@@ -35,7 +19,7 @@ namespace Z0
                 AssemblyId = designator.Id;
             else
                 AssemblyId = AssemblyId.None;
-            this.CatalogName = AssemblyId.ToString().ToLower();
+            this.CatalogName = AssemblyId.Format();
             
         }
 
@@ -101,9 +85,6 @@ namespace Z0
 
         public override string CatalogName => "empty";
 
-        public override AssemblyId AssemblyId => AssemblyId.None;
-
-        
+        public override AssemblyId AssemblyId => AssemblyId.None;        
     }
-
 }

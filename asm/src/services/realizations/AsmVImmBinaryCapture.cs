@@ -18,7 +18,7 @@ namespace Z0
         where T : unmanaged
     {
 
-        readonly IAsmContext Context;
+        public IAsmContext Context {get;}
 
         readonly IVBinaryImm8Resolver128<T> Resolver;
 
@@ -45,7 +45,7 @@ namespace Z0
     readonly struct AsmV256ImmBinaryCapture<T> : IAsmImmCapture<T>
         where T : unmanaged
     {
-        readonly IAsmContext Context;
+        public IAsmContext Context {get;}
 
         readonly IVBinaryImm8Resolver256<T> Resolver;
 

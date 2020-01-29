@@ -72,7 +72,7 @@ namespace Z0
         }         
  
         public static string Format(this NumericKind k)
-            => $"{k.BitWidth()}{k.Indicator()}";
+            => $"{k.Width()}{k.Indicator()}";
 
         public static string FormatParam(this Pair<ParameterInfo,int> src)
         {
@@ -80,13 +80,13 @@ namespace Z0
             if(Types.segmented(t))
             {
                 var typewidth = (int)Types.width(t);
-                var segkind = Types.segtype(t).Require().Kind();
-                var segwidth = segkind.BitWidth();
+                var segkind = Types.segtype(t).Require().NumericKind();
+                var segwidth = segkind.Width();
                 var indicator = segkind.Indicator();
                 return $"{typewidth}x{segwidth}{indicator}".PadLeft(7);
             }
             else
-                return $"{src.B}{t.Kind().Indicator()}";
+                return $"{src.B}{t.NumericKind().Indicator()}";
         }
 
         public static string FormatParams(this IEnumerable<Pair<ParameterInfo,int>> src)

@@ -105,7 +105,7 @@ namespace Z0
         protected AsmCode<T> ReadAsm<W,T>(string catalog, string subject, string opname, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeNat
-                => Context.CodeArchive(catalog,subject).ReadBlock<T>(OpIdentity.segmented(opname, PrimalType.kind<T>(), w)).Require(); 
+                => Context.CodeArchive(catalog,subject).ReadBlock<T>(OpIdentity.segmented(opname, NumericType.kind<T>(), w)).Require(); 
 
         protected void megacheck(string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, PrimalClass<byte> kind)
         {

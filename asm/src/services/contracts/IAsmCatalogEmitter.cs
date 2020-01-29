@@ -15,8 +15,5 @@ namespace Z0
     {
        IEnumerable<AsmEmissionToken> EmitCatalog();
        
-       IEnumerable<AsmEmissionToken> EmitDirect();
-       
-       IEnumerable<AsmEmissionToken> EmitGeneric();         
     }
 }

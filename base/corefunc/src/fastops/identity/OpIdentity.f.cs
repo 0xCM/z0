@@ -18,7 +18,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static string primalsig<T>(T t = default)
         where T : unmanaged
-        => PrimalType.signature(typeof(T));
+        => NumericType.signature(typeof(T));
 
     /// <summary>
     /// Produces an identifier of the form {bitsize(k)}{u | i | f} for a primal kind k
@@ -26,7 +26,7 @@ partial class zfunc
     /// <param name="k">The primal kind</param>
     [MethodImpl(Inline)]   
     public static string primalsig(NumericKind k)
-        => PrimalType.signature(k);
+        => NumericType.signature(k);
 
     /// <summary>
     /// Defines a moniker predicated on supplied text
@@ -45,7 +45,7 @@ partial class zfunc
     /// <typeparam name="T">The primal type</typeparam>
     [MethodImpl(Inline)]   
     public static Moniker moniker<T>(string opname, T t = default)
-        => OpIdentity.define(opname,typeof(T).Kind());
+        => OpIdentity.define(opname,typeof(T).NumericKind());
 
     /// <summary>
     /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
@@ -59,7 +59,7 @@ partial class zfunc
     public static Moniker moniker<W,T>(string opname, W w = default, T t = default)
         where W : unmanaged, ITypeNat
         where T : unmanaged
-            => OpIdentity.segmented(opname,PrimalType.kind<T>(),w);
+            => OpIdentity.segmented(opname,NumericType.kind<T>(),w);
 
     /// <summary>
     /// Defines an identifier of the form {opname}_128xN{u | i | f} where N := bitsize[T]
@@ -72,7 +72,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static Moniker moniker<T>(string opname, N128 w, T t = default)
         where T : unmanaged
-            => OpIdentity.segmented(opname,PrimalType.kind<T>(),w);
+            => OpIdentity.segmented(opname,NumericType.kind<T>(),w);
 
     /// <summary>
     /// Defines an identifier of the form {opname}_128xN{u | i | f} where N := bitsize[T]
@@ -85,7 +85,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static Moniker moniker<T>(string opname, HK.Vec128<T> hk)
         where T : unmanaged
-            => OpIdentity.segmented(opname,PrimalType.kind<T>(), n128);
+            => OpIdentity.segmented(opname,NumericType.kind<T>(), n128);
 
     /// <summary>
     /// Defines an identifier of the form {opname}_128xN{u | i | f} where N := bitsize[T]
@@ -98,7 +98,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static Moniker moniker<T>(string opname, HK.Vec128 hk, T t = default)
         where T : unmanaged
-            => OpIdentity.segmented(opname,PrimalType.kind<T>(), n128);
+            => OpIdentity.segmented(opname,NumericType.kind<T>(), n128);
 
     /// <summary>
     /// Defines an identifier of the form {opname}_256xN{u | i | f} where N := bitsize[T]
@@ -111,7 +111,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static Moniker moniker<T>(string opname, N256 w, T t = default)
         where T : unmanaged
-            => OpIdentity.segmented(opname,PrimalType.kind<T>(),w);
+            => OpIdentity.segmented(opname,NumericType.kind<T>(),w);
 
     /// <summary>
     /// Defines an identifier of the form {opname}_256xN{u | i | f} where N := bitsize[T]
@@ -124,7 +124,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static Moniker moniker<T>(string opname, HK.Vec256<T> hk)
         where T : unmanaged
-            => OpIdentity.segmented(opname,PrimalType.kind<T>(),n256);
+            => OpIdentity.segmented(opname,NumericType.kind<T>(),n256);
 
     /// <summary>
     /// Defines an identifier of the form {opname}_256xN{u | i | f} where N := bitsize[T]
@@ -137,5 +137,5 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static Moniker moniker<T>(string opname, HK.Vec256 hk, T t = default)
         where T : unmanaged
-            => OpIdentity.segmented(opname,PrimalType.kind<T>(),n256);
+            => OpIdentity.segmented(opname,NumericType.kind<T>(),n256);
 }

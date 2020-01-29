@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Reflection;
-    using System.Threading;
-    using System.Linq;
 
     using static zfunc;
 
@@ -20,38 +17,28 @@ namespace Z0
         string DelimitedText(char delimiter);
 
         IReadOnlyList<string> GetHeaders();    
-    }
 
-    public class ColInfoAttribute : Attribute
-    {
-        public ColInfoAttribute(string Name, string desc = "", int Width = 0)
-        {
-            this.Name = Name;
-            this.Desc = desc;
-            this.Width = Width == 0 ? (int?)null : Width;
-        }
-        
-        public string Name {get;}
-
-        public string Desc {get;}
-        
-        public int? Width {get;}
+        IReadOnlyList<string> HeaderFields {get;}        
     }
-    
 
     public interface IRecord<T> : IRecord
+        where T : IRecord
     {
-        IReadOnlyList<string> Headers
-        {
-            get 
-            {
-                var headers = new List<string>();
-                headers.AddRange(type<T>().DeclaredFields().Instance(). Select(f => f.Name));
-                headers.AddRange(type<T>().DeclaredProperties().Instance().Select(f => f.Name));
-                return headers;                                
-            }
-        }
+        IReadOnlyList<string> IRecord.HeaderFields
+            =>  Record.ReportHeaders<T>();
     }
 
+    public interface IReport
+    {
+        IReadOnlyList<string> HeaderFields {get;}
+    }
 
+    public interface IReport<T> : IReport
+        where T : IRecord<T>
+    {
+        T[] Records {get;}
+
+        IReadOnlyList<string> IReport.HeaderFields 
+            =>  Record.ReportHeaders<T>();
+    }
 }

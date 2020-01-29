@@ -1,9 +1,9 @@
 {
-    "0:on": "AsmCore",
+    "0:off": "AsmCore",
     "1:on": "Intrinsics",
     "2:off": "GMath",
     "3:off": "CoreFunc",
     "4:off": "BitCore",
-    "5:off": "Logix",
-    "6:off": "BitGrids"
+    "5:on": "Logix",
+    "6:on": "BitGrids"
 }

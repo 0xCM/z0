@@ -24,6 +24,9 @@ namespace Z0
         public static IAsmContext New(IClrIndex clrindex, DataResourceIndex resources,  AsmFormatConfig format)             
             => new AsmContext(clrindex, resources, format, CilFormatConfig.Default, Rng.WyHash64(Seed64.Seed10));
         
+        public static IAsmContext New(IClrIndex clrindex, DataResourceIndex resources)             
+            => new AsmContext(clrindex, resources, AsmFormatConfig.Default, CilFormatConfig.Default, Rng.WyHash64(Seed64.Seed10));
+
         AsmContext(IClrIndex clrIndex, DataResourceIndex resources, AsmFormatConfig format, CilFormatConfig cilFormat, IPolyrand random)
             : base(random)            
         {

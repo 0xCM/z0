@@ -501,7 +501,7 @@ namespace Z0
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static bool yea<T>(bool src, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-            => src ? true : throw ClaimException.Define(NotTrue($"{PrimalType.signature(typeof(T).Kind()) }" + (msg ?? string.Empty) , caller, file,line));
+            => src ? true : throw ClaimException.Define(NotTrue($"{NumericType.signature(typeof(T).NumericKind()) }" + (msg ?? string.Empty) , caller, file,line));
 
         /// <summary>
         /// Asserts the operand is false

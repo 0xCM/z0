@@ -27,16 +27,16 @@ namespace Z0
         
         public void classify_primal_width()
         {
-            Claim.eq(8, NumericKind.U8.BitWidth());
-            Claim.eq(8, NumericKind.I8.BitWidth());
-            Claim.eq(16, NumericKind.U16.BitWidth());
-            Claim.eq(16, NumericKind.I16.BitWidth());
-            Claim.eq(32, NumericKind.U32.BitWidth());
-            Claim.eq(32, NumericKind.I32.BitWidth());
-            Claim.eq(32, NumericKind.F32.BitWidth());
-            Claim.eq(64, NumericKind.I64.BitWidth());
-            Claim.eq(64, NumericKind.U64.BitWidth());
-            Claim.eq(64, NumericKind.F64.BitWidth());
+            Claim.eq(8, NumericKind.U8.Width());
+            Claim.eq(8, NumericKind.I8.Width());
+            Claim.eq(16, NumericKind.U16.Width());
+            Claim.eq(16, NumericKind.I16.Width());
+            Claim.eq(32, NumericKind.U32.Width());
+            Claim.eq(32, NumericKind.I32.Width());
+            Claim.eq(32, NumericKind.F32.Width());
+            Claim.eq(64, NumericKind.I64.Width());
+            Claim.eq(64, NumericKind.U64.Width());
+            Claim.eq(64, NumericKind.F64.Width());
         }
 
         public void adjudicate_block()
@@ -144,10 +144,10 @@ namespace Z0
 
         public void check_primal_identity()
         {
-            Claim.eq(PrimalId.U8, NumericKind.U8.Id());
-            Claim.eq(PrimalId.I8, NumericKind.I8.Id());
-            Claim.eq(PrimalId.U16, NumericKind.U16.Id());
-            Claim.eq(PrimalId.I16, NumericKind.I16.Id());
+            Claim.eq(PrimalId.U8, NumericKind.U8.GetPrimalId());
+            Claim.eq(PrimalId.I8, NumericKind.I8.GetPrimalId());
+            Claim.eq(PrimalId.U16, NumericKind.U16.GetPrimalId());
+            Claim.eq(PrimalId.I16, NumericKind.I16.GetPrimalId());
 
         }
         public void classify_block_16()

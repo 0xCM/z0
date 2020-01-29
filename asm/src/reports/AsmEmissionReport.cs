@@ -11,13 +11,10 @@ namespace Z0
 
     using static zfunc;
 
-    public static class AsmEmissionReport
+    public class AsmEmissionReport : IReport<AsmEmissionRecord>
     {
-        static bool ExcludeImm => true;
-
-        public static Option<FilePath> Save(IOperationCatalog catalog, AsmEmissionToken[] emissions, FilePath dst)
+        public static AsmEmissionReport Create(AssemblyId id, AsmEmissionToken[] emissions)
         {
-                    
             if(ExcludeImm)
                 emissions = emissions.Where(e => !e.Uri.Id.HasImm).ToArray();
 
@@ -27,15 +24,34 @@ namespace Z0
 
             Array.Sort(emissions);
 
-
             var records = new AsmEmissionRecord[count];
             MemoryAddress @base = emissions[0].Origin.Start;
 
             for(var i =0; i<count; i++)
-                records[i] = AsmEmissionRecord.Define(@base, emissions[i], i != 0 ? emissions[i-1] : (AsmEmissionToken?)null);
+                records[i] = AsmEmissionRecord.Define(@base, emissions[i], i != 0 ? emissions[i-1] : (AsmEmissionToken?)null);            
             
-            
-            return records.Save(dst);
+            return new AsmEmissionReport(id, records);
         }
+
+        AsmEmissionReport(AssemblyId id, AsmEmissionRecord[] records)
+        {
+            this.id = id;
+            this.Records = records;
+        }
+
+        public readonly AssemblyId id;
+        
+        public AsmEmissionRecord[] Records {get;}
+
+        static bool ExcludeImm => true;
+
+        public string Subject
+            => "emissions";
+
+        public FileExtension Ext
+            => FileExtensions.Csv;
+
+        public Option<FilePath> Save()
+            => Records.Save(Paths.AsmReportRoot + FolderName.Define(Subject) + FileName.Define(id.Format(), Ext));
     }
 }

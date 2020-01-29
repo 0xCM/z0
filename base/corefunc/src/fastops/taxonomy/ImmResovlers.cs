@@ -27,7 +27,7 @@ namespace Z0
     public interface ImmResolver<T> : ImmResolver
         where T : unmanaged
     {
-        NumericKind ImmResolver.ImmKind => PrimalType.kind<T>();
+        NumericKind ImmResolver.ImmKind => NumericType.kind<T>();
     }
 
     [SuppressUnmanagedCodeSecurity]

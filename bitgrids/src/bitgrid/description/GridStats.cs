@@ -162,8 +162,6 @@ namespace Z0
         /// The number bytes that do not fit into a whole number of 256-bit vectors
         /// </summary>
         [ColInfo("v256/r")]
-        public int Vec256Remainder {get;set;}
-            
+        public int Vec256Remainder {get;set;}            
     }
-
 }

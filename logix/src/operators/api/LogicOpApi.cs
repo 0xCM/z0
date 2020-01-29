@@ -13,8 +13,8 @@ namespace Z0.Logix
     using static LogicOps;
     using static OpHelpers;
     using static TernaryBitLogicKind;
-    using static LogixOpNames;
 
+    [OpHost("logic.api")]
     public static class LogicOpApi
     {
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="op">The operator classifier</param>
         /// <param name="a">The operand</param>        
-        [Op(ubl)]
+        [Op]
         public static bit eval(UnaryBitLogicKind kind, bit a)
         {        
             switch(kind)
@@ -60,7 +60,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
-        [Op(bbl)]
+        [Op]
         public static bit eval(BinaryBitLogicKind kind, bit a, bit b)
         {
             switch(kind)
@@ -97,7 +97,7 @@ namespace Z0.Logix
         /// Returns a kind-indentified unary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        [Op(ubl)]
+        [Op]
         public static UnaryOp<bit> lookup(UnaryBitLogicKind kind)
         {
             switch(kind)
@@ -114,7 +114,7 @@ namespace Z0.Logix
         /// Returns a kind-indentified binary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        [Op(bbl)]
+        [Op]
         public static BinaryOp<bit> lookup(BinaryBitLogicKind kind)
         {
             switch(kind)
@@ -146,7 +146,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
-        [Op(tbl)]
+        [Op]
         public static bit eval(TernaryBitLogicKind kind, bit a, bit b, bit c)
         {
             switch(kind)
@@ -259,7 +259,6 @@ namespace Z0.Logix
         /// Returns a kind-indentified ternary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        [Op(tbl)]
         public static TernaryOp<bit> lookup(TernaryBitLogicKind kind)
         {
             switch(kind)

@@ -24,7 +24,7 @@ namespace Z0
 
         readonly IAsmFunctionFormatter GroupFormatter;
 
-        readonly IAsmContext Context;
+        public IAsmContext Context {get;}
 
         public string Catalog {get;}
 
@@ -53,7 +53,10 @@ namespace Z0
         }
 
         public IEnumerable<AsmEmissionToken> Save(IEnumerable<AsmFunction> src)
-            => src.Select(Save);
+        {
+            foreach(var f in src)
+                yield return Save(f);
+        }  
             
         void Write(CilFunction src, StreamWriter dst)
         {
@@ -62,12 +65,12 @@ namespace Z0
                 dst.WriteLine(GroupFormatConfig.SectionDelimiter);
         }
 
-        Option<Exception> WriteAsmHex(AsmFunctionGroup src)
+        Option<Exception> WriteAsmHex(AsmFunctionGroup src,bool append)
         {
             try
             {
                 var idpad = src.Members.Select(f => f.Id.Text.Length).Max() + 1;
-                using var hexwriter = new StreamWriter(HexPath(src.Id).FullPath, false);
+                using var hexwriter = new StreamWriter(HexPath(src.Id).FullPath, append);
                 foreach(var f in src.Members)
                     hexwriter.WriteLine(f.Code.Format(idpad));
                 return default;
@@ -78,14 +81,14 @@ namespace Z0
             }
         }
 
-        Option<Exception> WriteCil(AsmFunctionGroup src)
+        Option<Exception> WriteCil(AsmFunctionGroup src, bool append)
         {
             var emittable = src.Members.Where(f => f.Cil.IsSome()).ToArray();
             if(emittable.Length == 0)
                 return default;
             try
             {                
-                using var cilwriter = new StreamWriter(CilPath(src.Id).FullPath,false);
+                using var cilwriter = new StreamWriter(CilPath(src.Id).FullPath,append);
                 foreach(var f in src.Members)
                     f.Cil.OnSome(cil => Write(cil, cilwriter));
                 return default;
@@ -96,12 +99,12 @@ namespace Z0
             }
         }
 
-        public IEnumerable<AsmEmissionToken> Save(AsmFunctionGroup src)
+        public IEnumerable<AsmEmissionToken> Save(AsmFunctionGroup src, bool append)
         {
             
-            using var asmwriter = new StreamWriter(DetailPath(src.Id).FullPath,false);
-            WriteAsmHex(src).OnSome(e => errout(e));
-            WriteCil(src).OnSome(e => errout(e));
+            using var asmwriter = new StreamWriter(DetailPath(src.Id).FullPath,append);
+            WriteAsmHex(src,append).OnSome(e => errout(e));
+            WriteCil(src,append).OnSome(e => errout(e));
             foreach(var f in src.Members)
             {
                 asmwriter.Write(GroupFormatter.FormatDetail(f));

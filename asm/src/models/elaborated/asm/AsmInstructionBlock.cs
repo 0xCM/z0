@@ -13,7 +13,7 @@ namespace Z0.AsmSpecs
     /// <summary>
     /// Encapsulates a contiguous instruction sequence along with the captured bits
     /// </summary>
-    public class AsmInstructionBlock
+    public class AsmInstructionBlock 
     {
         /// <summary>
         /// Defines an instruction sequence, in both encoded and decoded form

@@ -35,8 +35,9 @@ namespace Z0
         public static RecordSpec DefineRecord(string Namespace, string TypeName, params RecordField[] Fields)
             => new RecordSpec(Namespace, TypeName, Fields);
 
-        public static IEnumerable<string> Delimited<T>(this IEnumerable<IRecord<T>> records, char delimiter  = '|')
-            => records.Select(r => r.DelimitedText(delimiter));
+        public static IEnumerable<string> Delimited<T>(this IEnumerable<IRecord<T>> records, char delimiter)
+            where T : IRecord
+                => records.Select(r => r.DelimitedText(delimiter));
 
         /// <summary>
         /// Manufactures the type that reifies a supplied record definition

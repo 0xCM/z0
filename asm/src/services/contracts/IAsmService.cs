@@ -13,7 +13,7 @@ namespace Z0
 
     public interface IAsmService : IOpService
     {
-
+        IAsmContext Context {get;}
 
     }
 }

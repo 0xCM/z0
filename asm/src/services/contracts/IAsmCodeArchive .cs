@@ -15,9 +15,9 @@ namespace Z0
     /// <summary>
     /// Defines base interface for asm archive services
     /// </summary>
-    public interface IAsmArchive
+    public interface IAsmArchive : IAsmService
     {
-
+        
     }
 
     public interface IAsmArchive<T> : IAsmArchive
@@ -49,10 +49,14 @@ namespace Z0
             where T : unmanaged;
 
         /// <summary>
-        /// Returns the assembly hex file paths with filenames that satisfy a substring match predicate
+        /// Enumerates the files in the catalog
         /// </summary>
-        /// <param name="match">The match predicate</param>
-        IEnumerable<FilePath> Files(string match);  
+        IEnumerable<FilePath> Files {get;}
+
+        /// <summary>
+        /// Enumerates the folders into which the archive is partitioned
+        /// </summary>
+        IEnumerable<FolderPath> Folders {get;}
 
         /// <summary>
         /// Reads the content of a hexline default-formatted file

@@ -10,9 +10,12 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
     
     using static zfunc;
+    using static OpHelpers;
 
+    [OpHost("expr.vector.eval")]
     static class VectorExprEval
     {
+        [Op, PrimalClosures(NumericKind.Integers)]
          public static LiteralExpr<Vector128<T>> eval<T>(IExpr<Vector128<T>> expr)
             where T : unmanaged
         {
@@ -28,12 +31,12 @@ namespace Z0.Logix
                     return eval(x);
                 case IComparisonExpr<Vector128<T>> x:
                     return ginx.vxnor(eval(x.LeftArg).Value, eval(x.RightArg).Value);
-                default:
-                    return unhandled(expr);
+                default: throw new NotSupportedException(expr.GetType().Name);
             }
 
         }
 
+        [Op, PrimalClosures(NumericKind.Integers)]
         public static LiteralExpr<Vector256<T>> eval<T>(IExpr<Vector256<T>> expr)
             where T : unmanaged
         {
@@ -49,11 +52,11 @@ namespace Z0.Logix
                     return eval(x);
                 case IComparisonExpr<Vector256<T>> x:
                     return ginx.vxnor(eval(x.LeftArg).Value, eval(x.RightArg).Value);
-                default:
-                    return unhandled(expr);
+                default: throw new NotSupportedException(expr.GetType().Name);
             }
         }
 
+        [Op, PrimalClosures(NumericKind.Integers)]
         static LiteralExpr<Vector128<T>> eval<T>(IOperator<Vector128<T>> expr)
             where T : unmanaged
         {
@@ -67,12 +70,12 @@ namespace Z0.Logix
                     return VectorizedOpApi.eval(x.OpKind, eval(x.Subject).Value, ScalarExprEval.eval(x.Offset).Value);
                 case ITernaryBitwiseOp<Vector128<T>> x:
                     return VectorizedOpApi.eval(x.OpKind, eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.ThirdArg));
-                default:
-                    return unhandled(expr);
+                default: throw new NotSupportedException(expr.GetType().Name);
             }
         }
 
-        static LiteralExpr<Vector256<T>> eval<T>(IOperator<Vector256<T>> expr)
+       [Op, PrimalClosures(NumericKind.Integers)]
+       static LiteralExpr<Vector256<T>> eval<T>(IOperator<Vector256<T>> expr)
             where T : unmanaged
         {
             switch(expr)               
@@ -85,17 +88,9 @@ namespace Z0.Logix
                     return VectorizedOpApi.eval(x.OpKind, eval(x.Subject).Value, ScalarExprEval.eval(x.Offset).Value);
                 case ITernaryBitwiseOp<Vector256<T>> x:
                     return VectorizedOpApi.eval(x.OpKind, eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.ThirdArg));
-                default:
-                    return unhandled(expr);
+                default: throw new NotSupportedException(expr.GetType().Name);
             }
         }
  
-        static LiteralExpr<Vector128<T>> unhandled<T>(IExpr<Vector128<T>> expr)       
-            where T : unmanaged
-                => throw new Exception($"{expr} unhandled");
-
-        static LiteralExpr<Vector256<T>> unhandled<T>(IExpr<Vector256<T>> expr)       
-            where T : unmanaged
-                => throw new Exception($"{expr} unhandled");
     }
 }

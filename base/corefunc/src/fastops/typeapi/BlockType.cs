@@ -64,11 +64,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static BlockKind kind(Type t)
-            => test(t) ? kind(width(t), segment(t).Id()) : BlockKind.None;
-
-        public static BlockKind kind<B>()
-            where B :struct
-                => kind(typeof(B));
+            => test(t) ? kind(width(t), segment(t).GetPrimalId()) : BlockKind.None;
 
         /// <summary>
         /// Determines whether the unsigned facet of a block classification is enabled
@@ -198,7 +194,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static NumericKind segment(Type t)
-            => test(t) ?  t.SuppliedGenericArguments().First().Kind() : NumericKind.None;
+            => test(t) ?  t.SuppliedGenericArguments().First().NumericKind() : NumericKind.None;
 
         [MethodImpl(Inline)]
         public static BlockKind kind<B>(B b = default)

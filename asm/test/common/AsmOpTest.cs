@@ -33,7 +33,7 @@ namespace Z0
 
         protected Moniker TestOpName<T>(T t = default)
             where T : unmanaged
-                => TestOpMoniker(PrimalType.kind<T>());
+                => TestOpMoniker(NumericType.kind<T>());
 
         protected void CheckMatch<T>(BinaryOp<Vector128<T>> f, BinaryOp128 g)
             where T : unmanaged

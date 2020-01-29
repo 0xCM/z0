@@ -24,7 +24,7 @@ namespace Z0
 
         readonly IVUnaryImm8Resolver128<T> Resolver;
 
-        readonly IAsmContext Context;
+        public IAsmContext Context {get;}
 
         [MethodImpl(Inline)]
         AsmV128ImmUnaryCapture(IAsmContext context, IVUnaryImm8Resolver128<T> resolver)
@@ -46,7 +46,7 @@ namespace Z0
     readonly struct AsmV256ImmUnaryCapture<T> : IAsmImmCapture<T>
         where T : unmanaged
     {
-        readonly IAsmContext Context;
+         public IAsmContext Context {get;}
 
         readonly IVUnaryImm8Resolver256<T> Resolver;
 

@@ -12,29 +12,81 @@ namespace Z0
     
     using static zfunc;
     using static Classifiers;
+    using AsmSpecs;
 
     public class t_asm_checks : t_asm<t_asm_checks>, IDisposable
     {           
+
+        // static IEnumerable<AsmInstructionList> GetInstructions(IAsmContext context, AssemblyId id)
+        // {
+        //     var archive = context.CodeArchive(id);
+        //     var decoder = context.Decoder();
+        //     foreach(var file in archive.Files)
+        //     foreach(var codeblock in archive.Read(file))
+        //         yield return decoder.DecodeInstructions(codeblock);                
+        // }
+
+        static int activations;
+        static void OnMnemonid(Instruction i)
+        {
+            //print($"{i.Op0Register},{i.Op1Register},{i.Op2Register}");
+            activations++;
+        }
+
+        static int listcount = 0;
+        
+        static AsmInstructionList Pipe(AsmInstructionList src)
+        {        
+            listcount++;
+            return src;
+        }
+
         internal void RunExplicit()
         {
-            var decoder = Context.Decoder();
-            var code = asm.dinx.vtestz.find(n128, z32).Require();
-            var instructions = decoder.DecodeInstructions(code);
-            var @base = instructions[0].IP;
-            for(int j = 0; j< instructions.Length; j++)
+            //var source = AsmInstructionSource.FromProducer(() => GetInstructions(Context, AssemblyId.Intrinsics));
+            var archive =  Context.CodeArchive(AssemblyId.Intrinsics);
+            var source = archive.ToInstructionSource();
+            var trigger = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, OnMnemonid);
+            var triggers = AsmTriggerSet.Define(trigger);
+            var flow =  Context.Flow(source, triggers);
+            var pipe = AsmInstructionPipe.From(Pipe); 
+            var results = flow.Flow(pipe).Force();
+
+            var count = 0;
+            foreach(var result in results)
             {
-                var i = instructions[j];
-                var operands = i.SummarizeOperands(@base);
-                for(var k = 0; k< operands.Length; k++)
+                foreach(var i in result)
                 {
-                    var operand = operands[k];                    
-                    operand.Register.OnSome(x => TraceInfo(x));
-                    operand.Memory.OnSome(x => TraceInfo(x));
+                    if(trigger.CanFire(i))
+                        count++;
                 }
+            }
+
+            //Trace($"Trigger should have activated {count} times");
+            
+            Trace($"{listcount} instruction lists were processed out of {source.Instructions.Count()} available");
+            Trace($"Trigger activate {activations} times");
+
+            //CheckArchives();
+
+            // var decoder = Context.Decoder();
+            // var code = asm.dinx.vtestz.find(n128, z32).Require();
+            // var instructions = decoder.DecodeInstructions(code);
+            // var @base = instructions[0].IP;
+            // for(int j = 0; j< instructions.Length; j++)
+            // {
+            //     var i = instructions[j];
+            //     var operands = i.SummarizeOperands(@base);
+            //     for(var k = 0; k< operands.Length; k++)
+            //     {
+            //         var operand = operands[k];                    
+            //         operand.Register.OnSome(x => TraceInfo(x));
+            //         operand.Memory.OnSome(x => TraceInfo(x));
+            //     }
 
 
                 
-            }
+            // }
             
 
         }
@@ -42,7 +94,7 @@ namespace Z0
         void CheckArchives()
         {
             CheckMathArchive();
-            CheckIntrinsicArchive();
+            CheckIntrinsicAdd();
         }
 
         void CheckMathArchive()
@@ -50,7 +102,7 @@ namespace Z0
             var src = AssemblyId.GMath;
             var subject = nameof(math);
             var op = nameof(math.and);
-            var index = src.CodeArchive(subject).Read(Moniker.Parse(op)).ToCodeIndex(false); 
+            var index = Context.CodeArchive(src,subject).Read(Moniker.Parse(op)).ToCodeIndex(false); 
 
             index.PrimalOp(op, NumericKind.U32)
                     .OnSome(code => Trace(code,SeverityLevel.HiliteCD))
@@ -64,26 +116,41 @@ namespace Z0
 
         static class asm
         {
-            public static class dinx
+            public class dinx
             {
-                public static IAsmCodeArchive archive
-                    => AssemblyId.Intrinsics.CodeArchive(nameof(dinx));
+                public IAsmContext Context;
                 
-                public static class vtestz
+                public dinx(IAsmContext context)
                 {
-                    public static IAsmVCodeIndex index
+                    this.Context = context;
+                }
+                
+                public IAsmCodeArchive archive
+                    => Context.CodeArchive(AssemblyId.Intrinsics, nameof(dinx));
+                
+                public class vtestz
+                {
+                    IAsmCodeArchive archive;
+                    public vtestz(IAsmCodeArchive archive)
+                    {
+                        this.archive = archive;
+                    }
+
+                    public IAsmVCodeIndex index
                         => archive.Read(Moniker.Parse(nameof(vtestz))).ToCodeIndex(false);
 
-                    public static Option<AsmCode> find<N,T>(N n = default, T t = default)
+                    public Option<AsmCode> find<N,T>(N n = default, T t = default)
                         where N : unmanaged, ITypeNat
                         where T : unmanaged
                             => index.Find<N,T>(nameof(vtestz));
                 }
             }
         }
-        void CheckIntrinsicArchive()
+
+        void CheckIntrinsicAdd()
         {
-            var archive = AssemblyId.Intrinsics.CodeArchive(nameof(dinx));
+            var archive = Context.CodeArchive(AssemblyId.Intrinsics, nameof(dinx));
+            
             var index = archive.Read(Moniker.Parse(nameof(dinx.vadd))).ToCodeIndex(false);
 
             index.VectorOp(nameof(dinx.vadd), FixedWidth.W256, NumericKind.U32)

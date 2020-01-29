@@ -27,20 +27,30 @@ namespace Z0
 
         public static FolderPath Define(string Name)
             => new FolderPath(Name);
+
         public FolderPath(string Name)
             : base(Name)
         {
 
         }
 
+        public string FullPath
+            => Name;
+
+        public IEnumerable<FolderPath> Subfolders
+            => from d in Directory.EnumerateDirectories(Name) select FolderPath.Define(d);
+
         /// <summary>
         /// Enumerates all files contained in the folder with a specified extension
         /// </summary>
-        public IEnumerable<FilePath> Files(FileExtension ext)        
-            => from f in Directory.GetFiles(Name)
-               where f.EndsWith(ext.Name)
-               select FilePath.Define(f);
-                                   
+        public IEnumerable<FilePath> Files(FileExtension ext, bool recursive = false)        
+            => recursive ? Recurse(ext) : from f in Directory.GetFiles(FullPath, $"*.{ext}") select FilePath.Define(f);
+
+        IEnumerable<FilePath> Recurse(FileExtension ext)        
+            => from d in Directory.EnumerateDirectories(FullPath)
+               from f in Directory.GetFiles(d,$"*.{ext}")
+               select FilePath.Define(f);             
+
         /// <summary>
         /// Enumerates the files contained in the folder with filenames that satisfy a substring match predicate
         /// </summary>
@@ -49,5 +59,6 @@ namespace Z0
             => from f in Files(ext)
                 where f.FileName.Name.Contains(match) 
                 select f;
+        
     }
 }

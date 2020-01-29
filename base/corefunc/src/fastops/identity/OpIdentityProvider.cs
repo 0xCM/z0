@@ -37,7 +37,7 @@ namespace Z0
                 if(i!=0)
                     id += PartSep;
                 
-                id += PrimalType.signature(kinds[i]);
+                id += NumericType.signature(kinds[i]);
             }
             return Moniker.Parse(id);
         }
@@ -122,7 +122,6 @@ namespace Z0
         static AppMsg TooManyTypeParmeters(MethodInfo m)
             => appMsg($"The method {m.Name} accepts parameters that require more than one generic argument and is currently unsupported", SeverityLevel.Warning);
 
-
         static string ConsructedParameter(Type arg)
         {
             var id = string.Empty;
@@ -132,7 +131,7 @@ namespace Z0
             var typearg = typeargs[0];
             
             if(arg.IsSpan())
-                id += $"span{PrimalType.signature(typearg)}";
+                id += $"span{NumericType.signature(typearg)}";
             else
             {
                 if(arg.IsSegmented())
@@ -143,16 +142,16 @@ namespace Z0
                         id += $"{w}";
                         var segwidth = (int)typearg.Width();
                         if(segwidth != 0)
-                            id += $"{SegSep}{segwidth}{typearg.Kind().Indicator()}";
+                            id += $"{SegSep}{segwidth}{typearg.NumericKind().Indicator()}";
                     }
                     else 
                         id += "~~err~~";
                 }
                 else
                 {
-                    var k  = typearg.Kind();
+                    var k  = typearg.NumericKind();
                     if(k.IsSome())
-                        id += PrimalType.signature(k);
+                        id += NumericType.signature(k);
                     else
                         id += typearg.Name;
                 }
@@ -183,10 +182,10 @@ namespace Z0
                     id += NatType.name(arg);                    
                 else if(arg.IsConstructedGenericType)              
                     id += ConsructedParameter(arg);
-                else if(PrimalType.test(arg))
-                    id += PrimalType.signature(arg);
+                else if(NumericType.test(arg))
+                    id += NumericType.signature(arg);
                 else if(arg.IsEnum)
-                    id += $"enum{PrimalType.signature(arg.GetEnumUnderlyingType())}";
+                    id += $"enum{NumericType.signature(arg.GetEnumUnderlyingType())}";
                 else
                     id += arg.Name;                    
             }
@@ -195,28 +194,28 @@ namespace Z0
         }
         
         static Moniker FromPrimalFunc(MethodInfo method)
-            => OpIdentity.define(method.OpName(), method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
+            => OpIdentity.define(method.OpName(), method.ParameterTypes().First().NumericKind(), method.IsConstructedGenericMethod);
 
         /// <summary>
         /// Derives a moniker for a primal operator
         /// </summary>
         /// <param name="method">The operation method</param>
         static Moniker FromPrimalOp(MethodInfo method)
-            => OpIdentity.define(method.OpName(), method.ReturnType.Kind(), method.IsConstructedGenericMethod);
+            => OpIdentity.define(method.OpName(), method.ReturnType.NumericKind(), method.IsConstructedGenericMethod);
 
         /// <summary>
         /// Derives a moniker for a primal predicate
         /// </summary>
         /// <param name="method">The operation method</param>
         static Moniker FromPredicate(MethodInfo method)
-            => OpIdentity.define(method.OpName(), method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
+            => OpIdentity.define(method.OpName(), method.ParameterTypes().First().NumericKind(), method.IsConstructedGenericMethod);
 
         /// <summary>
         /// Derives a moniker for primal shift/rot operator
         /// </summary>
         /// <param name="method">The operation method</param>
         static Moniker FromShift(MethodInfo method)
-            => OpIdentity.define(method.OpName(), method.ParameterTypes().First().Kind(), method.IsConstructedGenericMethod);
+            => OpIdentity.define(method.OpName(), method.ParameterTypes().First().NumericKind(), method.IsConstructedGenericMethod);
 
         /// <summary>
         /// Derives a moniker for an operation over segmented domain(s)
@@ -225,14 +224,14 @@ namespace Z0
         static Moniker FromVectorOp(MethodInfo method)
         {
             var param = method.ParameterTypes().First();       
-            var segkind = param.SuppliedGenericArguments().FirstOrDefault().Kind();         
+            var segkind = param.SuppliedGenericArguments().FirstOrDefault().NumericKind();         
             return OpIdentity.segmented(method, param.Width(), segkind);
         }
 
         static Moniker FromSpanOp(MethodInfo method)
         {
             var param = method.ParameterTypes().First();       
-            var segkind = param.SuppliedGenericArguments().FirstOrDefault().Kind();         
+            var segkind = param.SuppliedGenericArguments().FirstOrDefault().NumericKind();         
             return OpIdentity.segmented(method, param.Width(), segkind);
         }
 
@@ -244,7 +243,7 @@ namespace Z0
             var natspec = string.Join(SegSep, natvals);
             var name = concat(method.OpName(), AsciSym.Tilde, natspec);
             var kind = method.TypeParameterKind(n1);
-            var width = kind.BitWidth();                               
+            var width = kind.Width();                               
             return OpIdentity.define(name, width, kind, method.IsConstructedGenericMethod, false);
         }
 
@@ -277,18 +276,18 @@ namespace Z0
                 {
                     var celltype = arg.SuppliedGenericArguments().Single();
                     var w = (int)arg.Width();
-                    id += $"{w}{SegSep}{(int)celltype.Width()}{celltype.Kind().Indicator()}";
+                    id += $"{w}{SegSep}{(int)celltype.Width()}{celltype.NumericKind().Indicator()}";
                 }
                 else if(NatType.test(arg))
                     id += NatType.name(arg);                
-                else if(PrimalType.test(arg))
-                    id += PrimalType.signature(arg);
+                else if(NumericType.test(arg))
+                    id += NumericType.signature(arg);
                 else if(arg.IsEnum)
-                    id += $"enum{PrimalType.signature(arg.GetEnumUnderlyingType())}";
+                    id += $"enum{NumericType.signature(arg.GetEnumUnderlyingType())}";
                 else if(arg.IsSpan())
                 {
                     var celltype = arg.SuppliedGenericArguments().Single();
-                    id += $"span{PrimalType.signature(celltype)}";
+                    id += $"span{NumericType.signature(celltype)}";
                 }
                 else
                     id += arg.Name;                    

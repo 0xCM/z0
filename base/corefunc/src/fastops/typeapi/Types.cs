@@ -28,8 +28,8 @@ namespace Z0
                 return (FixedWidth)VectorType.width(t);
             else if(BlockedType.test(t))
                 return (FixedWidth)BlockedType.width(t);
-            if(PrimalType.test(t))
-                return (FixedWidth)PrimalType.width(t);
+            if(NumericType.test(t))
+                return (FixedWidth)NumericType.width(t);
             else if(t == typeof(bit))
                 return FixedWidth.W1;
             else

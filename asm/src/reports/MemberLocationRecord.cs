@@ -25,10 +25,8 @@ namespace Z0
             this.Member = member;
         }
 
-
         [ReportField(LocationPad)]
         public MemoryAddress Location {get;set;}
-
 
         [ReportField(GapPad)]
         public ushort Gap {get;set;}
@@ -44,8 +42,8 @@ namespace Z0
         {
             var dst = text();
             dst.AppendField(Location.Origin.FormatAsmHex(8), LocationPad);
-            dst.AppendField(Gap.ToString(), GapPad, delimiter);
-            dst.AppendField(Member, delimiter);
+            dst.DelimitField(Gap.ToString(), GapPad, delimiter);
+            dst.DelimitField(Member, delimiter);
             return dst.ToString();
         }
 

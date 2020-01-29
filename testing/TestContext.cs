@@ -108,7 +108,7 @@ namespace Z0
 
         protected static Moniker SubjectId<T>(string opname, T t = default)
             where T : unmanaged
-                => SubjectId(opname, PrimalType.kind<T>());
+                => SubjectId(opname, NumericType.kind<T>());
 
         protected static Moniker BaselineId<K>(string opname,K t = default)
             where K : unmanaged

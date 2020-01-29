@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Threading.Tasks;
     using System.Collections.Generic;
-    using System.Reflection;
-    using System.Threading;
-    using System.Linq;
 
     using static zfunc;
 
@@ -24,15 +20,9 @@ namespace Z0
             => this;
 
         IReadOnlyList<string> IRecord.GetHeaders()
-            => This.Headers;    
+            => This.HeaderFields;    
     
         protected static IReadOnlyList<string> GetHeaders()
-            => Empty.This.Headers;
-        
-        
+            => Empty.This.HeaderFields;            
     }
-
-
-
-
 }

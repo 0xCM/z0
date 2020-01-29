@@ -14,7 +14,7 @@ namespace Z0
 
     readonly struct AsmFunctionEmitter : IAsmFunctionEmitter
     {
-        readonly IAsmContext Context;
+        public IAsmContext Context {get;}
 
         public static AsmFunctionEmitter Create(IAsmContext context)
             => new AsmFunctionEmitter(context);

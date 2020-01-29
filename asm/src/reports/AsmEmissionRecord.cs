@@ -60,10 +60,10 @@ namespace Z0
         {
             var dst = text();
             dst.AppendField(Offset.FormatAsmHex(8), OffsetPad);
-            dst.AppendField(Gap.ToString(), GapPad, delimiter);
-            dst.AppendField(concat(Origin.Start.FormatAsmHex(), spaced(colon()), Origin.End.FormatAsmHex()), OriginPad, delimiter);
-            dst.AppendField(Size.ToString(), SizePad, delimiter);
-            dst.AppendField(Uri.Format(),delimiter);
+            dst.DelimitField(Gap.ToString(), GapPad, delimiter);
+            dst.DelimitField(concat(Origin.Start.FormatAsmHex(), spaced(colon()), Origin.End.FormatAsmHex()), OriginPad, delimiter);
+            dst.DelimitField(Size.ToString(), SizePad, delimiter);
+            dst.DelimitField(Uri.Format(),delimiter);
             return dst.ToString();
         }
 

@@ -63,7 +63,7 @@ namespace Z0
             sb.Append($"{content}");
         }
 
-        public static void AppendField(this StringBuilder sb, object content, int pad, char delimiter)
+        public static void DelimitField(this StringBuilder sb, object content, int pad, char delimiter)
         {
             sb.Append(rspace(delimiter));            
             sb.Append($"{content}".PadRight(pad));
@@ -74,10 +74,11 @@ namespace Z0
             sb.Append($"{content}".PadRight(pad));
         }
 
-        public static void AppendField(this StringBuilder sb, object content, char delimiter)
+        public static void DelimitField(this StringBuilder sb, object content, char delimiter)
         {
             sb.Append(rspace(delimiter));                        
             sb.Append(content);
         }
+
     }
 }

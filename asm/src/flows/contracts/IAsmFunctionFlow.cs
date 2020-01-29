@@ -9,14 +9,14 @@ namespace Z0
 
     using Z0.AsmSpecs;
 
+    public interface IAsmFunctionSource
+    {
+        IEnumerable<AsmFunction> Functions {get;}
+    }
+
     public interface IAsmFunctionPipe
     {
         AsmFunction Flow(AsmFunction f);
-    }
-
-    public interface IAsmInstructionPipe
-    {
-        Instruction Flow(Instruction instruction);
     }
 
     public interface IAsmFunctionFlow
@@ -27,5 +27,4 @@ namespace Z0
 
         IEnumerable<AsmFunction> FlowGeneric(IAsmFunctionPipe pipe);        
     }
-
 }

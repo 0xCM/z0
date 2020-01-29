@@ -10,6 +10,7 @@ namespace Z0.Logix
     
     using static zfunc;
 
+    [OpHost("expr.scalar.eval")]
     static class ScalarExprEval
     {
         public static LiteralExpr<T> eval<T>(IExpr<T> expr)
@@ -27,8 +28,7 @@ namespace Z0.Logix
                     return eval(x);
                 case IComparisonExpr<T> x:
                     return gmath.xnor(eval(x.LeftArg).Value, eval(x.RightArg).Value);
-                default:
-                    return unhandled(expr);
+                default: throw new NotSupportedException(expr.GetType().Name);
             }
         }
 
@@ -52,14 +52,8 @@ namespace Z0.Logix
                     return ScalarOpApi.eval(x.OpKind, 
                         eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.SecondArg).Value);
                         
-                default:
-                    return unhandled(expr);
+                default: throw new NotSupportedException(expr.GetType().Name);
             }
         }
-
-        static LiteralExpr<T> unhandled<T>(IExpr<T> a)
-            where T : unmanaged
-                => throw new Exception($"{a} unhandled");
     }
-
 }

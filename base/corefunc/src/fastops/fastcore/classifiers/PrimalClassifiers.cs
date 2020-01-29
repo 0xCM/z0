@@ -27,7 +27,7 @@ namespace Z0
             public NumericKind Classifier 
             {
                 [MethodImpl(Inline)] 
-                get => PrimalType.kind<T>();
+                get => NumericType.kind<T>();
             }
         }        
 

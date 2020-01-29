@@ -7,7 +7,6 @@ namespace Z0.Logix
     using System;
 
     using static zfunc;    
-    using static LogixOpNames;
     using static OpHelpers;
     using static BitMatrixOps;
 
@@ -20,6 +19,7 @@ namespace Z0.Logix
     /// <summary>
     /// Defines services for bitmatrix operators
     /// </summary>
+    [OpHost("bitmatrix.api")]
     public static class BitMatrixOpApi
     {
         /// <summary>
@@ -34,7 +34,7 @@ namespace Z0.Logix
         public static ReadOnlySpan<BinaryBitLogicKind> BinaryBitwiseKinds
             => ScalarOpApi.BinaryBitLogicKinds;
 
-        [BitMatrixOp(ubl), PrimalClosures(NumericKind.Integers)]
+        [Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitMatrix<T> eval<T>(UnaryBitLogicKind kind, BitMatrix<T> A)
             where T : unmanaged
         {
@@ -46,7 +46,7 @@ namespace Z0.Logix
             }
         }
 
-        [BitMatrixOp(ubl,true), PrimalClosures(NumericKind.Integers)]
+        [Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitMatrix<T> eval<T>(UnaryBitLogicKind kind, BitMatrix<T> A, ref BitMatrix<T> Z)
             where T : unmanaged
         {
@@ -58,7 +58,7 @@ namespace Z0.Logix
             }
         }
 
-        [BitMatrixOp(bbl), PrimalClosures(NumericKind.Integers)]
+        [Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitMatrix<T> eval<T>(BinaryBitLogicKind kind, BitMatrix<T> A, BitMatrix<T> B)
             where T : unmanaged
         {
@@ -84,7 +84,7 @@ namespace Z0.Logix
             }
         }
 
-        [BitMatrixOp(bbl,true), PrimalClosures(NumericKind.Integers)]
+        [Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitMatrix<T> eval<T>(BinaryBitLogicKind kind, BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
@@ -111,7 +111,7 @@ namespace Z0.Logix
 
         }
 
-        [BitMatrixOp(bbl), PrimalClosures(NumericKind.Integers)]
+        [Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitMatrixBinaryRefOp<T> lookup<T>(BinaryBitLogicKind kind)
             where T : unmanaged
         {

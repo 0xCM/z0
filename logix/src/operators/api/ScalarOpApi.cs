@@ -13,11 +13,11 @@ namespace Z0.Logix
     using static TernaryBitLogicKind;
     using static ScalarOps;
     using static OpHelpers;
-    using static LogixOpNames;
 
     /// <summary>
     /// Services for scalar operators
     /// </summary>
+    [OpHost("scalar.api")]
     public static class ScalarOpApi
     {
         /// <summary>
@@ -57,7 +57,7 @@ namespace Z0.Logix
             => Enums.members<ComparisonKind>();
 
 
-        [Op(bbl), PrimalClosures(NumericKind.Integers)]
+        [Op, PrimalClosures(NumericKind.Integers)]
         public static T eval<T>(BinaryBitLogicKind kind, T a, T b)
             where T : unmanaged
         {
@@ -83,7 +83,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op(ubl), PrimalClosures(NumericKind.Integers)]
+        [Op, PrimalClosures(NumericKind.Integers)]
         public static T eval<T>(UnaryBitLogicKind kind, T a)
             where T : unmanaged
         {
@@ -95,7 +95,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op(cmp), PrimalClosures(NumericKind.Integers)]
+        [Op, PrimalClosures(NumericKind.Integers)]
         public static T eval<T>(ComparisonKind kind, T a, T b)
             where T : unmanaged            
         {
@@ -118,7 +118,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
-        [Op(tbl), PrimalClosures(NumericKind.Integers)]
+        [Op, PrimalClosures(NumericKind.Integers)]
         public static T eval<T>(TernaryBitLogicKind kind, T a, T b, T c)
             where T : unmanaged
         {
@@ -223,7 +223,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op(shift), PrimalClosures(NumericKind.UnsignedInts)]
+        [Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static T eval<T>(ShiftOpKind kind, T a, byte count)
             where T : unmanaged
         {
@@ -237,7 +237,7 @@ namespace Z0.Logix
             }
         }
             
-        [Op(shift), PrimalClosures(NumericKind.Integers)]
+        [Op, PrimalClosures(NumericKind.Integers)]
         public static Shifter<T> lookup<T>(ShiftOpKind kind)
             where T : unmanaged            
         {
@@ -251,7 +251,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op(cmp), PrimalClosures(NumericKind.All)]
+        [Op, PrimalClosures(NumericKind.All)]
         public static BinaryOp<T> lookup<T>(ComparisonKind kind)
             where T : unmanaged
         {
@@ -267,7 +267,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op(ubl), PrimalClosures(NumericKind.Integers)]
+        [Op, PrimalClosures(NumericKind.Integers)]
         public static UnaryOp<T> lookup<T>(UnaryBitLogicKind kind)
             where T : unmanaged            
         {
@@ -279,7 +279,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op(bbl), PrimalClosures(NumericKind.Integers)]
+        [Op, PrimalClosures(NumericKind.Integers)]
         public static BinaryOp<T> lookup<T>(BinaryBitLogicKind kind)
             where T : unmanaged
         {
@@ -305,7 +305,6 @@ namespace Z0.Logix
             }
         }
 
-        [Op(tbl), PrimalClosures(NumericKind.Integers)]
         public static TernaryOp<T> lookup<T>(TernaryBitLogicKind kind)
             where T : unmanaged
         {

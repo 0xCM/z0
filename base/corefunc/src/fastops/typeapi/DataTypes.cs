@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Option<char> indicator(Type t)
         {
-            var i = PrimalType.indicator(t);
+            var i = NumericType.indicator(t);
             if(i.IsNone())
             {
                 if(t == typeof(bit))
@@ -30,8 +30,8 @@ namespace Z0
     
         public static Option<int> width(Type t)
         {
-            if(PrimalType.test(t))
-                return (int)PrimalType.width(t);
+            if(NumericType.test(t))
+                return (int)NumericType.width(t);
             else if(VectorType.test(t))
                 return (int)VectorType.width(t);
             else if(BlockedType.test(t))

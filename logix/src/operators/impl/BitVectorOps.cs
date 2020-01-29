@@ -9,9 +9,8 @@ namespace Z0.Logix
 
     using static zfunc;    
 
-    using static TernaryBitLogicKind;
-    using static BinaryBitLogicKind;
 
+    [OpHost("bitvector.ops")]
     public static class BitVectorOps
     {
         /// <summary>
@@ -20,7 +19,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), BitVectorOp, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> @true<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BitVector.@true<T>(x,y);
@@ -31,7 +30,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), BitVectorOp, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> @false<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BitVector.@false<T>(x,y);
@@ -42,7 +41,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), BinaryBitLogicOp(And), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> and<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BitVector.and(x,y);
@@ -53,7 +52,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), BinaryBitLogicOp(Nand), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> nand<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BitVector.nand(x,y);
@@ -64,7 +63,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), BinaryBitLogicOp(Or), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> or<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 =>  BitVector.or(x,y);
@@ -75,7 +74,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), BinaryBitLogicOp(Nor), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> nor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 =>  BitVector.nor(x,y);
@@ -86,7 +85,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), BinaryBitLogicOp(Xor), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> xor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 =>  BitVector.xor(x,y);
@@ -97,7 +96,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), BinaryBitLogicOp(Xnor), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> xnor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BitVector.xnor(x,y);
@@ -108,7 +107,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), BinaryBitLogicOp(LProject), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> left<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BitVector.left(x,y);
@@ -119,7 +118,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), BinaryBitLogicOp(RProject), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> right<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BitVector.right(x,y);
@@ -130,7 +129,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), BinaryBitLogicOp(LNot), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> lnot<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BitVector.lnot(x,y);
@@ -141,7 +140,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), BinaryBitLogicOp(RNot), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> rnot<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BitVector.rnot(x,y);
@@ -152,7 +151,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), BinaryBitLogicOp(Impl), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> impl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BitVector.impl(x,y);
@@ -163,7 +162,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), BinaryBitLogicOp(NonImpl), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> nonimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BitVector.nonimpl(x,y);
@@ -174,7 +173,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), BinaryBitLogicOp(CImpl), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> cimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BitVector.cimpl(x,y);
@@ -185,7 +184,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), BinaryBitLogicOp(CNonImpl), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> cnonimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BitVector.cnonimpl(x,y);
@@ -197,7 +196,7 @@ namespace Z0.Logix
         /// <param name="y">The first branch</param>
         /// <param name="z">The second branch</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), TernaryBitLogicOp(XCA), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> select<T>(BitVector<T> x, BitVector<T> y, BitVector<T> z)
             where T : unmanaged
             => BitVector.select(x,y,z);

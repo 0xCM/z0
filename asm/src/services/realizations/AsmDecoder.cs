@@ -25,7 +25,7 @@ namespace Z0
 
         readonly byte[] _Buffer;
 
-        readonly IAsmContext Context;
+        public IAsmContext Context {get;}
 
         AsmDecoder(IAsmContext context, int? bufferlen)
         {

@@ -28,7 +28,7 @@ namespace Z0
         NumericKind IMaskSpec.K 
         {
             [MethodImpl(Inline)]
-            get => PrimalType.kind<T>();
+            get => NumericType.kind<T>();
         }
     }
 

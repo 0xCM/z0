@@ -20,7 +20,7 @@ namespace Z0
         public static IAsmImmCapture Create(IAsmContext context, MethodInfo src, Moniker baseid)
             => new AsmImmUnaryCapture(context.WithEmptyClrIndex(), src,baseid);
 
-        readonly IAsmContext Context;
+        public IAsmContext Context {get;}
         
         readonly MethodInfo Method;
 
@@ -28,8 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         AsmImmUnaryCapture(IAsmContext context, MethodInfo method, Moniker baseid)
-        {
-            
+        {            
             this.Context = context;
             this.Method = method;
             this.BaseId = baseid;

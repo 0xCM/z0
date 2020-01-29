@@ -11,8 +11,10 @@ namespace Z0.Logix
     
     using static zfunc;
 
+    [OpHost("expr.logic.eval")]
     public static class LogicExprEval
     {
+        [Op]
         internal static bit eval(ILogicExpr expr)
         {
             switch(expr)               
@@ -27,15 +29,15 @@ namespace Z0.Logix
                     return eval(x);
                 case IComparisonExpr x:
                     return eval(x.Lhs) == eval(x.Rhs);
-                default: 
-                    return unhandled(expr);
-            }
+               default: throw new NotSupportedException(expr.GetType().Name);
+             }
         }
 
         /// <summary>
         /// Evaluates a logical operator expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
+        [Op]
         static bit eval(ILogicOp expr)
         {
             switch(expr)               
@@ -46,13 +48,9 @@ namespace Z0.Logix
                     return LogicOpApi.eval(x.OpKind, eval(x.LeftArg), eval(x.RightArg));
                 case ITernaryLogicOp x:
                     return LogicOpApi.eval(x.OpKind, eval(x.FirstArg), eval(x.SecondArg), eval(x.ThirdArg));
-                default:
-                    return unhandled(expr);
+               default: throw new NotSupportedException(expr.GetType().Name);
             }
         }
-
-        static bit unhandled(ILogicExpr expr)
-            => throw new Exception($"{expr} unhandled");
     }
 
 }

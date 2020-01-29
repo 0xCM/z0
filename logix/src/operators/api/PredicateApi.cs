@@ -12,8 +12,8 @@ namespace Z0.Logix
     using static zfunc;
 
     using static OpHelpers;
-    using static LogixOpNames;
 
+    [OpHost("predicate.api")]
     public static class PredicateApi
     {
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0.Logix
                 ComparisonKind.Gt, ComparisonKind.GtEq );
 
 
-        [Op(cmp), PrimalClosures(NumericKind.Integers)]
+        [Op, PrimalClosures(NumericKind.Integers)]
         public static bit eval<T>(ComparisonKind kind, T a, T b)
             where T : unmanaged            
         {
@@ -42,7 +42,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op(cmp), PrimalClosures(NumericKind.Integers)]
+        [Op, PrimalClosures(NumericKind.Integers)]
         public static BinaryPred<T> lookup<T>(ComparisonKind kind)
             where T : unmanaged            
         {
@@ -57,7 +57,5 @@ namespace Z0.Logix
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
-
-
     }
 }

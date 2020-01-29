@@ -31,9 +31,6 @@ namespace Z0
         public abstract void Execute();       
 
         protected Option<IOperationCatalog> FindCatalog(AssemblyId id)
-            =>  Designators.Control.Designated.FindCatalog(id);
-            
-
-
+            =>  Designators.Control.Designated.FindCatalog(id);            
     }
 }

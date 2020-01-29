@@ -9,12 +9,11 @@ namespace Z0.Logix
 
     using static zfunc;    
     using static TernaryBitLogicKind;
-    using static BinaryBitLogicKind;
     using static As;
 
+    [OpHost("scalar.ops")]
     public static class ScalarOps
     {        
-
         [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T identity<T>(T a)
             where T : unmanaged
@@ -35,7 +34,7 @@ namespace Z0.Logix
             where T:unmanaged
                 => gmath.@false(a);
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), BinaryBitLogicOp(False)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T @false<T>(T a, T b)
             where T:unmanaged
                 => gmath.@false(a,b);
@@ -55,7 +54,7 @@ namespace Z0.Logix
             where T:unmanaged
                 => gmath.@true(a);
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), BinaryBitLogicOp(True)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T @true<T>(T a, T b)
             where T:unmanaged
                 => gmath.@true(a,b);
@@ -103,73 +102,72 @@ namespace Z0.Logix
             where T : unmanaged
                 => gbits.pop(a) == bitsize<T>();
 
-
-        [MethodImpl(Inline), BinaryBitLogicOp(And), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T and<T>(T a, T b)
             where T : unmanaged
                 => gmath.and(a,b);
 
-        [MethodImpl(Inline), BinaryBitLogicOp(Nand), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T nand<T>(T a, T b)
             where T : unmanaged
                 => gmath.nand(a,b);
 
-        [MethodImpl(Inline), BinaryBitLogicOp(Or), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T or<T>(T a, T b)
             where T : unmanaged
                 => gmath.or(a,b);
 
-        [MethodImpl(Inline), BinaryBitLogicOp(Nor), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T nor<T>(T a, T b)
             where T : unmanaged
                 => gmath.nor(a,b);
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), BinaryBitLogicOp(Xor)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T xor<T>(T a, T b)
             where T : unmanaged
                 => gmath.xor(a,b);
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), BinaryBitLogicOp(Xnor)]
+        [MethodImpl(Inline),  Op, PrimalClosures(NumericKind.Integers)]
         public static T xnor<T>(T a, T b)
             where T : unmanaged
                 => gmath.xnor(a,b);
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), BinaryBitLogicOp(LProject)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T left<T>(T a, T b)
             where T : unmanaged
                 => gmath.left(a,b);
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), BinaryBitLogicOp(RProject)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T right<T>(T a, T b)
             where T : unmanaged
                 => gmath.right(a,b);
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), BinaryBitLogicOp(LNot)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T lnot<T>(T a, T b)
             where T : unmanaged
                 => gmath.lnot(a,b);
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), BinaryBitLogicOp(RNot)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T rnot<T>(T a, T b)
             where T : unmanaged
                 => gmath.rnot(a,b);
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), BinaryBitLogicOp(Impl)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T impl<T>(T a, T b)
             where T : unmanaged
                 => gmath.impl(a,b);
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), BinaryBitLogicOp(NonImpl)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T nonimpl<T>(T a, T b)
             where T : unmanaged
                 => gmath.nonimpl(a,b);
 
-        [MethodImpl(Inline), BinaryBitLogicOp(CImpl), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T cimpl<T>(T a, T b)
             where T : unmanaged
                 => gmath.cimpl(a,b);
         
-        [MethodImpl(Inline), BinaryBitLogicOp(CNonImpl), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T cnonimpl<T>(T a, T b)
             where T : unmanaged
                 => gmath.cnonimpl(a,b);
@@ -179,32 +177,32 @@ namespace Z0.Logix
             where T : unmanaged
                 => gmath.xornot(a,b);
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), ComparisonOp(ComparisonKind.Eq)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T equals<T>(T a, T b)
             where T : unmanaged
                 => promote<T>(gmath.eq(a,b));
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), ComparisonOp(ComparisonKind.Neq)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T neq<T>(T a, T b)
             where T : unmanaged
                 => promote<T>(gmath.neq(a,b));
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), ComparisonOp(ComparisonKind.Lt)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T lt<T>(T a, T b)
             where T : unmanaged
                 => promote<T>(gmath.lt(a,b));
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), ComparisonOp(ComparisonKind.LtEq)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T lteq<T>(T a, T b)
             where T : unmanaged
                 => promote<T>(gmath.lteq(a,b));
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), ComparisonOp(ComparisonKind.Gt)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T gt<T>(T a, T b)
             where T : unmanaged
                 => promote<T>(gmath.gt(a,b));
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), ComparisonOp(ComparisonKind.GtEq)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T gteq<T>(T a, T b)
             where T : unmanaged
                 => promote<T>(gmath.gteq(a,b));
@@ -274,217 +272,217 @@ namespace Z0.Logix
             where T : unmanaged
                 => gmath.select(a,b,c);
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X00)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f00<T>(T a, T b, T c)
             where T : unmanaged
                 => default;
 
         // a nor (b or c)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X01)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f01<T>(T a, T b, T c)
             where T : unmanaged
             => nor(a, or(b,c));
 
         // c and (b nor a)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X02)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f02<T>(T a, T b, T c)
             where T : unmanaged
                 => and(c, nor(b,a));
  
          // b nor a
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), TernaryBitLogicOp(X03)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f03<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(b,a);
 
         // b and (a nor c)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), TernaryBitLogicOp(X04)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f04<T>(T a, T b, T c)
             where T : unmanaged
                 => and(b, nor(a,c));
 
         // c nor a
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X05)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f05<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(c,a);
 
         // not a and (b xor c)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X06)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f06<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(a), xor(b,c));
 
         // not a and (b xor c)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X07)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f07<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(a, and(b,c));
 
         // (not a and b) and c
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X08)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f08<T>(T a, T b, T c)
             where T : unmanaged
                 => and(and(not(a),b), c);
 
         // a nor (b xor c)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X09)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f09<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(a, xor(b,c));
 
         // c and (not a)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X0A)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f0a<T>(T a, T b, T c)
             where T : unmanaged
                 => and(c, not(a));
 
         // not a and ((b xor 1) or c)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X0B)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f0b<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(a), or(xor1(b),  c));   
 
         // b and (not a)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X0C)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f0c<T>(T a, T b, T c)
             where T : unmanaged
                 => and(b, not(a));
 
         // not a and (b or (c xor 1))
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X0D)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f0d<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(a), or(b, xor1(c)));
 
         // not a and (b or c)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X0E)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f0e<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(a),or(b,c));
 
         // not a
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X0F)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f0f<T>(T a, T b, T c)
             where T : unmanaged
                 => not(a);
 
         // a and (b nor c)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X10)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f10<T>(T a, T b, T c)
             where T : unmanaged
                 => and(a, nor(b, c));
         
         // c nor b
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X11)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f11<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(c,b);
         
         // not b and (a xor c) 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X12)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f12<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(b), xor(a,c));
 
         // b nor (a and c)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X13)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f13<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(b, and(a,c));
 
         // not c and (a xor b)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X14)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f14<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(c), xor(a,b));
 
         // c nor (b and a)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X15)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f15<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(c, and(a,b));
 
         // a ? (b nor c) : (b xor c)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X16)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f16<T>(T a, T b, T c)
             where T : unmanaged
                 => select(a, nor(b,c), xor(b,c));
 
         // not(a ? (b or c) : (b and c))
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X17)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f17<T>(T a, T b, T c)
             where T : unmanaged
                 => not(select(a, or(b,c), and(b,c)));
 
         // (a xor b) and (a xor c)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X18)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f18<T>(T a, T b, T c)
             where T : unmanaged
                 => and(xor(a,b), xor(a,c));
 
         // not(((B xor C) xor (A and (B and C))))
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X19)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f19<T>(T a, T b, T c)
             where T : unmanaged
                 => not(xor(xor(b,c), and(a, and(b,c))));
 
         // not ((A and B)) and (A xor C)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X1A)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f1a<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(and(a,b)), xor(a,c));
 
         // c ? not a : not b
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X1B)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f1b<T>(T a, T b, T c)
             where T : unmanaged
                 => select(c, not(a), not(b));
 
         //not ((a and c)) and (a xor b)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X1C)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f1c<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(and(a,c)), xor(a,b));
 
         //b ? (not a) : (not c)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X1D)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f1d<T>(T a, T b, T c)
             where T : unmanaged
                 => select(b, not(a), not(c));
 
         //a xor (b or c)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X1E)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f1e<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(a, or(b,c));
 
         // a nand (b or c)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X1F)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f1f<T>(T a, T b, T c)
             where T : unmanaged
                 => nand(a, or(b,c));
 
         //((not b) and a) and C
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X20)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f20<T>(T a, T b, T c)
             where T : unmanaged
                 => and(and(not(b),a),c);
 
         // b nor (a xor c)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X21)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f21<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(b, xor(a,c));
 
         // c and (not b)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X22)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f22<T>(T a, T b, T c)
             where T : unmanaged
                 => cnonimpl(c,b);
 
         // not (B) and ((A xor 1) or C)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X23)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f23<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(b), or(not(a),c));
@@ -784,72 +782,72 @@ namespace Z0.Logix
                 => and(not(c), or(a,b));
 
         // not (C)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X55)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f55<T>(T a, T b, T c)
             where T : unmanaged
                 => not(c);
 
         // C xor (B or A)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X56)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f56<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(c,or(b,a));
 
         // C nand (B or A)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X57)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f57<T>(T a, T b, T c)
             where T : unmanaged
                 => nand(c,or(b,a));
 
         // (A or B) and (A xor C)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X58)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f58<T>(T a, T b, T c)
             where T : unmanaged
                 => and(or(a,b),xor(a,c));
 
         // C xor (A or (B xor 1))
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), TernaryBitLogicOp(X59)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f59<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(c, or(a, not(b)));
 
         // C xor A
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers), TernaryBitLogicOp(X5A)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f5a<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(c,a);
 
         //((A xor C) or ((A or B) xor 1))
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X5B)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f5b<T>(T a, T b, T c)
             where T : unmanaged
                 => or(xor(a,c), xor(or(a,b),ones<T>()));
 
         //(A ? not (C) : B)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X5C)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f5c<T>(T a, T b, T c)
             where T : unmanaged
                 => select(a,not(c), b);
 
         // not (C) or (not (A) and B)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X5D)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f5d<T>(T a, T b, T c)
             where T : unmanaged
                 => or(not(c), and(not(a), b));
 
         // (not (C) and B) or (A xor C)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X5E)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f5e<T>(T a, T b, T c)
             where T : unmanaged
                 => or(and(not(c),b),(xor(a,c)));
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X5F)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f5f<T>(T a, T b, T c)
             where T : unmanaged
                 => nand(c,a);
 
         // a ? (b xnor c) : (b nand c)
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Integers),TernaryBitLogicOp(X97)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static T f97<T>(T a, T b, T c)
             where T : unmanaged
                 => select(c, xnor(b,c), nand(b,c));

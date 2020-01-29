@@ -33,7 +33,7 @@ namespace Z0
         /// Saves a group of related functtions to the archive
         /// </summary>
         /// <param name="group">The source group</param>
-        IEnumerable<AsmEmissionToken> Save(AsmFunctionGroup group);
+        IEnumerable<AsmEmissionToken> Save(AsmFunctionGroup group, bool append);
 
     }    
 }

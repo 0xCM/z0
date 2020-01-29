@@ -13,9 +13,9 @@ namespace Z0
 
     using static zfunc;
  
-    public class MemberLocationReport
+    public class MemberLocationReport : IReport<MemberLocationRecord>
     {
-        public static MemberLocationReport Create(IEnumerable<MethodInfo> methods)
+        public static MemberLocationReport Create(AssemblyId assemblyid, IEnumerable<MethodInfo> methods)
         {   
             var identity = OpIdentity.Provider;
             var src = (from m in methods
@@ -33,41 +33,30 @@ namespace Z0
                 records[i] = MemberLocationRecord.Define(address, (ushort)gap, id);
                 lastaddress =  address;
             }
-    
 
-            return new MemberLocationReport(records);
+            return new MemberLocationReport(assemblyid, records);
         }
 
-        MemberLocationReport(MemberLocationRecord[] records)
+        MemberLocationReport(AssemblyId id, MemberLocationRecord[] records)
         {
+            this.AssemblyId = id;
             this.Records = records;
         }
 
-        IReadOnlyList<MemberLocationRecord> Records {get;}
+        public AssemblyId AssemblyId {get;}
+         
+        public MemberLocationRecord[] Records {get;}
 
         public char Delimiter {get;}
             = AsciSym.Comma;
 
-        public Option<FilePath> Save(FilePath dst)
+        public string Subject
+            => "locations";
+
+        public Option<FilePath> Save()
         {
-            if(Records.Count == 0)
-                return dst;
-            
-            try
-            {
-                using var writer = new StreamWriter(dst.FullPath, false);
-                writer.WriteLine(Record.ReportHeaders<MemberLocationRecord>().Concat(Delimiter));
-                foreach(var record in Records)
-                    writer.WriteLine(record.DelimitedText(Delimiter));
-                return dst;
-            }
-            catch(Exception e)
-            {
-                errout(e);
-                return default;
-            }
+            return Records.Save(Paths.AsmReportRoot + FolderName.Define(Subject) +  FileName.Define(AssemblyId.Format(), FileExtensions.Csv));
         }
 
     }
-
 }

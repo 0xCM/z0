@@ -12,11 +12,8 @@ namespace Z0.Logix
     using static zfunc;
     using static BitVectorOps;
     using static OpHelpers;
-    using static LogixOpNames;
 
-    /// <summary>
-    /// Services for scalar operators
-    /// </summary>
+    [OpHost("bitvector.api")]
     public static class BitVectorOpApi
     {
         /// <summary>
@@ -25,7 +22,7 @@ namespace Z0.Logix
         public static ReadOnlySpan<BinaryBitLogicKind> BinaryBitwiseKinds
             => ScalarOpApi.BinaryBitLogicKinds;
 
-        [BitVectorOp(bbl), PrimalClosures(NumericKind.Integers)]
+        [Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> eval<T>(BinaryBitLogicKind kind, BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
@@ -51,7 +48,7 @@ namespace Z0.Logix
             }
         }
 
-        [BitVectorOp, PrimalClosures(NumericKind.Integers)]
+        [Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> evalspec<T>(BinaryBitLogicKind kind, BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
@@ -77,7 +74,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op(bbl), PrimalClosures(NumericKind.Integers)]
+        [Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static BinaryOp<BitVector<T>> lookup<T>(BinaryBitLogicKind kind)
             where T : unmanaged
         {

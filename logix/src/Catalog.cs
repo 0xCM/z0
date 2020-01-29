@@ -18,7 +18,7 @@ namespace Z0.Logix
         }
         
         public override IEnumerable<Type> DirectApiHosts
-            => items(typeof(LogicOpApi), typeof(LogicOps));
+            => items(typeof(LogicOpApi), typeof(LogicExprEval), typeof(LogicOps));
 
         public override IEnumerable<Type> GenericApiHosts
             => items(
@@ -27,7 +27,9 @@ namespace Z0.Logix
                 typeof(ScalarOpApi), typeof(ScalarOps), 
                 typeof(VectorizedOpApi), typeof(VectorizedOps),
                 typeof(PredicateApi), typeof(LogicEngine),
-                typeof(OpHelpers), typeof(CompareEval)
+                typeof(CmpExprEval), typeof(ArithExprEval),
+                typeof(ScalarExprEval), 
+                typeof(VectorExprEval)
                 );               
     }
 }

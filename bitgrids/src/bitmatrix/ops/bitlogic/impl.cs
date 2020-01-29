@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), BitMatrixOp, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static unsafe BitMatrix<T> impl<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
         {
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), BitMatrixOp(true), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
         public static unsafe ref BitMatrix<T> impl<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
-        [MethodImpl(Inline), BitMatrixOp(true)]
+        [MethodImpl(Inline), Op]
         public static unsafe ref BitMatrix8 impl(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
         {
              BitSquare.impl(in A.Head, in B.Head, ref Z.Head);
@@ -60,7 +60,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline), BitMatrixOp]
+        [MethodImpl(Inline), Op]
         public static unsafe BitMatrix8 impl(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
-        [MethodImpl(Inline), BitMatrixOp(true)]
+        [MethodImpl(Inline), Op]
         public static unsafe ref BitMatrix16 impl(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 Z)
         {
             BitSquare.impl(in A.Head, in B.Head, ref Z.Head);
@@ -86,7 +86,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline), BitMatrixOp]
+        [MethodImpl(Inline), Op]
         public static unsafe BitMatrix16 impl(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
@@ -100,7 +100,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
-        [MethodImpl(Inline), BitMatrixOp(true)]
+        [MethodImpl(Inline), Op]
         public static unsafe ref BitMatrix32 impl(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 Z)
         {
             BitSquare.impl(in A.Head, in B.Head, ref Z.Head);
@@ -112,7 +112,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline), BitMatrixOp]
+        [MethodImpl(Inline), Op]
         public static unsafe BitMatrix32 impl(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
@@ -126,7 +126,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
-        [MethodImpl(Inline), BitMatrixOp(true)]
+        [MethodImpl(Inline), Op]
         public static unsafe ref BitMatrix64 impl(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 Z)
         {
             BitSquare.impl(in A.Head, in B.Head, ref Z.Head);
@@ -138,7 +138,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline), BitMatrixOp]
+        [MethodImpl(Inline), Op]
         public static unsafe BitMatrix64 impl(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);

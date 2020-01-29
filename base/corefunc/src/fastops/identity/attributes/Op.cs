@@ -19,9 +19,6 @@ namespace Z0
 
         public OpFacetModifier FacetModifier {get;}
 
-        public virtual string CanonicalPrefix 
-            => string.Empty;
-
         public OpAttribute()
         {
             this.Name = string.Empty;

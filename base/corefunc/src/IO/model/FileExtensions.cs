@@ -12,7 +12,7 @@ namespace Z0
 
     public static class FileExtensions
     {
-        public const string Csv = "csv";
+        public static FileExtension Csv => FileExtension.Define("csv");
 
         public static FileExtension Asm =>  FileExtension.Define("asm");
 

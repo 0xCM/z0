@@ -15,7 +15,7 @@ namespace Z0
 
     readonly struct CilWriter : ICilWriter
     {
-        readonly IAsmContext Context;
+        public IAsmContext Context {get;}
         
         readonly FilePath Target;
         

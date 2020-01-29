@@ -24,7 +24,7 @@ namespace Z0
             if(t.IsGenericType && t.GetGenericTypeDefinition() ==typeof(BitMatrix<>))
             {
                 id += Moniker.GenericIndicator;
-                order = PrimalType.width(t.GetGenericArguments().Single().Kind());
+                order = t.GetGenericArguments().Single().NumericKind().Width();
             }
             else
             {

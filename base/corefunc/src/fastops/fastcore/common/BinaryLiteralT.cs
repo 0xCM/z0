@@ -31,7 +31,7 @@ namespace Z0
         public NumericKind Kind 
         {
             [MethodImpl(Inline)]
-            get => PrimalType.kind<T>();
+            get => NumericType.kind<T>();
         }
 
         public string Format() => $"{Name}({Value}:{Kind.Keyword()}) := " + enquote(Text);

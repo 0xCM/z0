@@ -39,7 +39,7 @@ namespace Z0
         public NumericKind Kind 
         {
             [MethodImpl(Inline)]
-            get => Value?.GetType()?.Kind() ?? NumericKind.None;
+            get => Value?.GetType()?.NumericKind() ?? NumericKind.None;
         }
 
         public string Format() => $"{Name}({Value}:{Kind.Keyword()}) := " + enquote(Text);

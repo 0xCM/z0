@@ -16,24 +16,33 @@ namespace Z0
 
     class AsmFunctionFlow : IAsmFunctionFlow
     {
-        public static AsmFunctionFlow Create(IAsmContext context, IOperationCatalog catalog)
-            => new AsmFunctionFlow(context, catalog);
+        public static IAsmFunctionFlow Create(IAsmContext context, IOperationCatalog catalog)
+            => new AsmFunctionFlow(context, catalog, AsmTriggerSet.Empty);
 
-        AsmFunctionFlow(IAsmContext context, IOperationCatalog catalog)
+        public static AsmFunctionFlow Create(IAsmContext context, IOperationCatalog catalog, AsmTriggerSet triggers)
+            => new AsmFunctionFlow(context, catalog,triggers);
+
+        AsmFunctionFlow(IAsmContext context, IOperationCatalog catalog, AsmTriggerSet triggers)
         {
             this.Context = context;
             this.Catalog = catalog;
             this.Decoder = Context.Decoder();
+            this.Triggers = triggers;
+            this.FireTriggers = !triggers.IsEmpty;
         }
 
-        readonly IAsmContext Context;
+        readonly bool FireTriggers;
+        
+        public IAsmContext Context {get;}
 
-        IClrIndex ClrIndex
-            => Context.ClrIndex;
+        readonly AsmTriggerSet Triggers;
 
         public IOperationCatalog Catalog {get;}
 
         public IAsmDecoder Decoder {get;}
+
+        IClrIndex ClrIndex
+            => Context.ClrIndex;
 
         static ReadOnlySpan<byte> ImmSelection => new byte[]{5,9,13};
 

@@ -15,9 +15,11 @@ namespace Z0
     
     class ArchiveControl : Controller<ArchiveControl>
     {                
+        readonly IAsmContext Context;
+        
         public ArchiveControl()
         {
-            
+            Context = AsmContext.New();
 
         }
 
@@ -48,27 +50,34 @@ namespace Z0
         void CatalogEmitted(IOperationCatalog catalog)
             => print($"Successfully emitted {catalog.CatalogName} catalog");
 
-
         void CatalogEmissionFailed(IOperationCatalog catalog)
             => errout($"Error occurred while emitting catalog {catalog.CatalogName}");
 
         public override void Execute()
         {             
-            var rescat = FindCatalog(AssemblyId.Data).Require();
-            rescat.SaveResourceIndex().Require();
-            var assemblies = 
-                (from d in Designators.Control.Designated.Designates
-                where EnabledAssemblies.Contains(d.Id) && d.Catalog != null && !d.Catalog.IsEmpty
-                    select (d.Id, d.DeclaringAssembly, d.Catalog)).ToArray();                                    
-            
-            foreach(var a in assemblies)
-            {
-                var context = AsmContext.New(ClrMetadataIndex.Create(a.DeclaringAssembly),  rescat.Resources, AsmFormatConfig.Default);
-                AsmServices.EmitMemberLocations( a.Id,a.DeclaringAssembly).Require();
+            var res = FindCatalog(AssemblyId.Data).Require().Resources;
+            var rr = AsmReports.CreateResourceReport(res);
+            rr.Save().Require();
 
-                context.EmitCatalog(a.Catalog)
-                             .OnSome(_ => CatalogEmitted(a.Catalog))
-                             .OnNone(() => CatalogEmissionFailed(a.Catalog));
+            var designates = 
+                from d in Designators.Control.Designated.Designates
+                let active = Context.ActiveAssemblies()
+                where active.Contains(d.Id) && d.Catalog != null && !d.Catalog.IsEmpty
+                    select (d.Id, d.DeclaringAssembly, d.Catalog);
+            
+            foreach(var (id, a, cat) in designates)
+            {
+                var metadata = ClrMetadataIndex.Create(a);
+                var context = AsmContext.New(metadata, res);
+                var lr = AsmReports.CreateMemberLocationReport(id, a);
+                lr.Save().Require();
+
+                var emitter = context.CatalogEmitter(cat);
+                var emitted = emitter.EmitCatalog().ToArray();
+                var er = AsmReports.CreateEmissionReport(id, emitted);
+                er.Save().OnSome(_ => CatalogEmitted(cat))
+                         .OnNone(() => CatalogEmissionFailed(cat));
+
             }
         }
     }

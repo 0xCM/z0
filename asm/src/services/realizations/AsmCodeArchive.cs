@@ -22,19 +22,56 @@ namespace Z0
     {
         readonly FolderPath Folder;
 
+        public IAsmContext Context {get;}
+        
         readonly string Catalog;
 
         readonly string Subject;
 
-        public static IAsmCodeArchive Create(string catalog, string subject)
-            => new AsmCodeArchive(catalog, subject);
+        public static IAsmCodeArchive Create(IAsmContext context, string catalog, string subject)
+            => new AsmCodeArchive(context, catalog, subject);
 
-        AsmCodeArchive(string catalog, string subject)
+        public static IAsmCodeArchive Create(IAsmContext context, AssemblyId catalog)
+            => new AsmCodeArchive(context, catalog);
+
+        public static IAsmCodeArchive Create(IAsmContext context, AssemblyId catalog, string subject)
+            => new AsmCodeArchive(context, catalog, subject);
+
+        AsmCodeArchive(IAsmContext context, AssemblyId catalog, string subject)
         {
+            this.Catalog = catalog.ToString().ToLower();
+            this.Subject = subject;
+            this.Context = context;
+            this.Folder = LogPaths.The.AsmDataDir(RelativeLocation.Define(Catalog, subject));
+        }
+
+        AsmCodeArchive(IAsmContext context, AssemblyId catalog)
+        {
+            this.Catalog = catalog.ToString().ToLower();
+            this.Subject = string.Empty;
+            this.Context = context;
+            this.Folder = LogPaths.The.AsmDataDir(FolderName.Define(Catalog));
+        }
+
+        AsmCodeArchive(IAsmContext context, string catalog, string subject)
+        {
+            this.Context = context;
             this.Catalog = catalog;
             this.Subject = subject;
             this.Folder = LogPaths.The.AsmDataDir(RelativeLocation.Define(catalog, subject));
         }
+
+        bool IsRoot
+            => Subject == string.Empty;
+
+        /// <summary>
+        /// Enumerates the files in the archive
+        /// </summary>
+        public IEnumerable<FilePath> Files 
+            => Folder.Files(FileExtensions.Hex,true);
+        
+        public IEnumerable<FolderPath> Folders
+            => Folder.Subfolders;
 
         /// <summary>
         /// Materializes an untyped code block
@@ -84,13 +121,6 @@ namespace Z0
         public Option<AsmCode<T>> ReadBlock<T>(Moniker id, T t = default)
             where T : unmanaged
                 => Read(Folder,id, t);
-
-        /// <summary>
-        /// Returns the assembly hex file paths with filenames that satisfy a substring match predicate
-        /// </summary>
-        /// <param name="match">The match predicate</param>
-        public IEnumerable<FilePath> Files(string match)        
-            => Folder.Files(Paths.HexExt, match);
 
         static Option<AsmCode<T>> Read<T>(FolderPath location, Moniker m, T t = default)
             where T : unmanaged

@@ -13,10 +13,21 @@ namespace Z0
 
     using static zfunc;
  
-    public static class DataResourceReport
+    public class DataResourceReport
     {
-        public static DataResourceIndex Save(DataResourceIndex resources, FilePath dst)
+        public static DataResourceReport Create(DataResourceIndex resources)
+            => new DataResourceReport(resources);
+
+        DataResourceIndex index;
+        
+        DataResourceReport(DataResourceIndex index)
+        {
+            this.index = index;
+        }
+
+        public Option<FilePath> Save()
         {            
+            var dst = Paths.AsmReportRoot + FileName.Define(AssemblyId.Data.Format(), "csv");  
             dst.FolderPath.CreateIfMissing();
             var delimter = spaced(pipe());
             var header = concat(
@@ -28,7 +39,7 @@ namespace Z0
             var start = 0ul;
             using var writer = new StreamWriter(dst.Name, false);  
             writer.WriteLine(header);         
-            foreach(var r in resources.Indexed.OrderBy(x => x.Location))
+            foreach(var r in index.Indexed.OrderBy(x => x.Location))
             {
                 if(start == 0)
                     start = r.Location;
@@ -42,7 +53,7 @@ namespace Z0
                         r.Id);
                 writer.WriteLine(description);
             }
-            return resources;
+            return dst;
         }
     }
 }

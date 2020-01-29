@@ -17,23 +17,23 @@ namespace Z0
     {
         public PrimalClosuresAttribute(NumericKind system)
         {
-            this.SystemPrimitive = system;
+            this.NumericPrimitive = system;
             this.UserPrimitive = UserPrimitiveKind.None;
         }
 
         public PrimalClosuresAttribute(UserPrimitiveKind user)
         {
-            this.SystemPrimitive = NumericKind.None;
+            this.NumericPrimitive = NumericKind.None;
             this.UserPrimitive = user;
         }
 
         public PrimalClosuresAttribute(NumericKind system, UserPrimitiveKind user)
         {
-            this.SystemPrimitive = system;
+            this.NumericPrimitive = system;
             this.UserPrimitive = user;
         }
 
-        public NumericKind SystemPrimitive {get;}
+        public NumericKind NumericPrimitive {get;}
 
         public UserPrimitiveKind UserPrimitive{get;}         
     }

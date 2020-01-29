@@ -17,23 +17,22 @@ namespace Z0
 
     using Iced = Iced.Intel;
 
-    readonly struct AsmContentFormatter : IAsmFunctionFormatter, IBaseAsmFormatter
-    {
-        
+    readonly struct AsmFunctionFormatter : IAsmFunctionFormatter, IBaseAsmFormatter
+    {        
         public AsmFormatConfig Config {get;}
 
-        readonly IAsmContext Context;
+        public IAsmContext Context {get;}
 
         
         [MethodImpl(Inline)]
         public static IBaseAsmFormatter BaseFormatter(IAsmContext config)
-            => new AsmContentFormatter(config);
+            => new AsmFunctionFormatter(config);
 
         [MethodImpl(Inline)]
         public static IAsmFunctionFormatter Create(IAsmContext context)
-            => new AsmContentFormatter(context);
+            => new AsmFunctionFormatter(context);
         
-        AsmContentFormatter(IAsmContext context)
+        AsmFunctionFormatter(IAsmContext context)
         {
             this.Context = context;
             this.Config = context.AsmFormat;

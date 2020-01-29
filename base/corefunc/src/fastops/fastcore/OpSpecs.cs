@@ -38,13 +38,6 @@ namespace Z0
             => direct(host).GroupBy(op => op.Id.Name).Select(g => DirectOpGroup.Define(Moniker.Parse(g.Key), g));
 
         /// <summary>
-        /// Queries a sequence of types for formalized concrete/non-generic operation implementations
-        /// </summary>
-        /// <param name="host">The source type</param>
-        public static IEnumerable<DirectOpSpec> direct(IEnumerable<Type> hosts)
-            => hosts.SelectMany(direct);
-
-        /// <summary>
         /// Queries a type for formalized generic operation definitions
         /// </summary>
         /// <param name="host">The source type</param>
@@ -52,7 +45,7 @@ namespace Z0
             => from m in declared(host).OpenGeneric()
                 let id = genericid(m)
                 where id.IsSome()
-                let closures = PrimalType.closures(m).ToArray()
+                let closures = NumericType.closures(m).ToArray()
                 where closures.Length != 0
                 select GenericOpSpec.Define(id.Require(), m.OpName(), m.GetGenericMethodDefinition(), closures);
 

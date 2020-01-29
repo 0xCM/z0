@@ -20,6 +20,9 @@ namespace Z0
        public static IOpIdentityProvider Provider
             => default(OpIdentityProvider);
 
+        public static string hostname(Type t)
+            => t.CustomAttribute<OpHostAttribute>().MapValueOrDefault(a => a.Name, t.Name.ToLower());
+
         /// <summary>
         /// Gets the name of a method to which an Op attribute is applied
         /// </summary>
@@ -33,17 +36,10 @@ namespace Z0
             var sep = AsciSym.Tilde;
             var attribVal = attrib.Value;  
             var customName = attribVal.Name;
-            var prefix = attribVal.CanonicalPrefix;
             var modifier = attribVal.FacetModifier;
-            var byref = attribVal.ByRef ? "byref" : string.Empty;          
             var combine = (modifier & OpFacetModifier.CombineNames) != 0;
             
             var name = string.Empty;
-            if(prefix.IsNotBlank())            
-            {
-                name = prefix;
-                name += sep;
-            }
 
             if(customName.IsNotBlank())
             {
@@ -58,12 +54,6 @@ namespace Z0
             else
                 name += m.Name;
                 
-            if(byref.IsNotBlank())                    
-            {
-                name += sep;
-                name += byref;
-            }                                        
-
             return name;            
         }
 
@@ -81,9 +71,9 @@ namespace Z0
             if(generic && k == NumericKind.None)
                 return Moniker.Parse(concat(opname, PartSep, GenericIndicator));            
             else if(w != 0)
-                return Moniker.Parse($"{opname}{PartSep}{g}{w}{SegSep}{PrimalType.signature(k)}{asmPart}");
+                return Moniker.Parse($"{opname}{PartSep}{g}{w}{SegSep}{NumericType.signature(k)}{asmPart}");
             else
-                return Moniker.Parse($"{opname}_{g}{PrimalType.signature(k)}{asmPart}");
+                return Moniker.Parse($"{opname}_{g}{NumericType.signature(k)}{asmPart}");
         }
 
         /// <summary>
@@ -113,7 +103,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static Moniker segmented<W>(string opname, NumericKind k, W w)
             where W : unmanaged, ITypeNat
-                => Moniker.Parse($"{opname}_{w}{SegSep}{PrimalType.signature(k)}");
+                => Moniker.Parse($"{opname}_{w}{SegSep}{NumericType.signature(k)}");
 
         /// <summary>
         /// Defines a moniker of the form {opname}_{w}X{bitsize(k)}{u | i | f}{_asm} to identify 

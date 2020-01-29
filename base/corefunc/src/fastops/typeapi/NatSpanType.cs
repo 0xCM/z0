@@ -76,7 +76,7 @@ namespace Z0
                 var text = "ns";
                 text += NatType.value(typeargs[0]);
                 text += Moniker.SegSep;
-                text += PrimalType.signature(typeargs[1]);
+                text += NumericType.signature(typeargs[1]);
                 return Moniker.Parse(text);
             }
             else

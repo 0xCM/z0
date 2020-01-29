@@ -15,6 +15,13 @@ namespace Z0
         /// Gets the name of a method to which to Op attribute is applied
         /// </summary>
         /// <param name="m">The source method</param>
+        public static string HostName(this Type t)
+            => OpIdentity.hostname(t);
+        
+        /// <summary>
+        /// Gets the name of a method to which to Op attribute is applied
+        /// </summary>
+        /// <param name="m">The source method</param>
         public static string OpName(this MethodInfo m)
             => OpIdentity.opname(m);
 

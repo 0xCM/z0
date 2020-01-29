@@ -10,7 +10,9 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static zfunc;
+    using static OpHelpers;
 
+    [OpHost("expr.arith.eval")]
     public static class ArithExprEval
     {
         public static LiteralExpr<T> eval<T>(IArithmeticExpr<T> expr)
@@ -24,8 +26,7 @@ namespace Z0.Logix
                     return eval(x);
                 case IArithmeticOp<T> x:
                     return eval(x);
-                default:
-                    return unhandled(expr);
+                default: throw new NotSupportedException(expr.GetType().Name);
             }
         }
 
@@ -60,20 +61,7 @@ namespace Z0.Logix
                     return eval(x);
                 case IBinaryArithmeticOp<T> x:
                     return eval(x);
-                default:
-                    return unhandled(expr);
-            }
-        }
-
-        static LiteralExpr<T> eval<T>(IUnaryArithmeticOp<T> expr)
-            where T : unmanaged
-        {
-            switch(expr.OpKind)               
-            {
-                case UnaryArithmeticKind.Inc: return inc(expr);
-                case UnaryArithmeticKind.Dec: return dec(expr);
-                case UnaryArithmeticKind.Negate: return negate(expr);
-                default: return unhandled(expr);
+                default: throw new NotSupportedException(expr.GetType().Name);
             }
         }
 
@@ -89,38 +77,52 @@ namespace Z0.Logix
                     {
                         case BinaryArithmeticKind.Add: return add(expr);
                         case BinaryArithmeticKind.Sub: return sub(expr);
-                        default: return unhandled(expr);
+                        default: throw new NotSupportedException(sig<T>(expr.OpKind));
                     }
             }
         }
 
+        static LiteralExpr<T> eval<T>(IUnaryArithmeticOp<T> expr)
+            where T : unmanaged
+        {
+            switch(expr.OpKind)               
+            {
+                case UnaryArithmeticKind.Inc: return inc(expr);
+                case UnaryArithmeticKind.Dec: return dec(expr);
+                case UnaryArithmeticKind.Negate: return negate(expr);
+                default: throw new NotSupportedException(sig<T>(expr.OpKind));
+            }
+        }
+
+        [Op, PrimalClosures(NumericKind.Integers)]
         static LiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
             where T : unmanaged
                 => ScalarOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
+        [Op, PrimalClosures(NumericKind.Integers)]
         static LiteralExpr<T> inc<T>(IUnaryArithmeticOp<T> a)
             where T : unmanaged
                 => ScalarOps.inc(eval(a).Value);
 
+        [Op, PrimalClosures(NumericKind.Integers)]
         static LiteralExpr<T> dec<T>(IUnaryArithmeticOp<T> a)
             where T : unmanaged
                 => ScalarOps.dec(eval(a).Value);
 
+        [Op, PrimalClosures(NumericKind.Integers)]
         static LiteralExpr<T> negate<T>(IUnaryArithmeticOp<T> a)
             where T : unmanaged
                 => ScalarOps.negate(eval(a).Value);
     
-        [MethodImpl(Inline)]
+        [Op, PrimalClosures(NumericKind.Integers)]
         static LiteralExpr<T> add<T>(IBinaryArithmeticOp<T> expr)
             where T : unmanaged
                 => ScalarOps.add(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
+        [Op, PrimalClosures(NumericKind.Integers)]
         static LiteralExpr<T> sub<T>(IBinaryArithmeticOp<T> expr)
             where T : unmanaged
                 => ScalarOps.sub(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
-        static LiteralExpr<T> unhandled<T>(IExpr<T> a)
-            where T : unmanaged
-                => throw new Exception($"{a} unhandled");
     }
 }

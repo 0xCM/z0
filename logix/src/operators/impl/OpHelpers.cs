@@ -9,58 +9,55 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using static LogixOpNames;
 
     internal static class OpHelpers
     {
-        [MethodImpl(Inline), Op(ubl), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static string sig(UnaryBitLogicKind kind)
                 => $"{kind}:bit";
 
-        [MethodImpl(Inline), Op(bbl), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static string sig(BinaryBitLogicKind kind)
                 => $"{kind}:bit";
 
-        [MethodImpl(Inline), Op(tbl), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static string sig(TernaryBitLogicKind kind)
                 => $"{kind}:bit";
 
-        [MethodImpl(Inline), Op(ubl), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static string sig<T>(UnaryBitLogicKind kind)
             where T : unmanaged
-                => $"{kind}:{typeof(T).Kind().Keyword()}";
+                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op(bbl), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static string sig<T>(BinaryBitLogicKind kind)
             where T : unmanaged
-                => $"{kind}:{typeof(T).Kind().Keyword()}";    
+                => $"{kind}:{typeof(T).NumericKind().Keyword()}";    
 
-        [MethodImpl(Inline), Op(tbl), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static string sig<T>(TernaryBitLogicKind kind)
             where T : unmanaged
-                => $"{kind}:{typeof(T).Kind().Keyword()}";
+                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op(shift), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static string sig<T>(ShiftOpKind kind)
             where T : unmanaged
-                => $"{kind}:{typeof(T).Kind().Keyword()}";
+                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op(cmp), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static string sig<T>(ComparisonKind kind)
             where T : unmanaged
-                => $"{kind}:{typeof(T).Kind().Keyword()}";
+                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-
-        [MethodImpl(Inline), Op(ua), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static string sig<T>(UnaryArithmeticKind kind)
             where T : unmanaged
-                => $"{kind}:{typeof(T).Kind().Keyword()}";
+                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op(ba), PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
         public static string sig<T>(BinaryArithmeticKind kind)
             where T : unmanaged
-                => $"{kind}:{typeof(T).Kind().Keyword()}";
-
+                => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         public static void Set<T>(IVariedExpr<T> expr, params IExpr<T>[] values)
             where T : unmanaged
@@ -69,7 +66,5 @@ namespace Z0.Logix
             for(var i=0; i<n; i++)
                 expr.Vars[i].Set(values[i]);
         }
-
     }
-
 }
