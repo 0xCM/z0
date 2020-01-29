@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> add<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.add(x.Scalar, y.Scalar);

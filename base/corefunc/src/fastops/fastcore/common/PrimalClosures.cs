@@ -13,21 +13,21 @@ namespace Z0
     /// <summary>
     /// Applies to a generic type/method to advertise the primal types over which the type parameter(s) may be closed
     /// </summary>
-    public class PrimalClosuresAttribute : Attribute
+    public class NumericClosuresAttribute : Attribute
     {
-        public PrimalClosuresAttribute(NumericKind system)
+        public NumericClosuresAttribute(NumericKind system)
         {
             this.NumericPrimitive = system;
             this.UserPrimitive = UserPrimitiveKind.None;
         }
 
-        public PrimalClosuresAttribute(UserPrimitiveKind user)
+        public NumericClosuresAttribute(UserPrimitiveKind user)
         {
             this.NumericPrimitive = NumericKind.None;
             this.UserPrimitive = user;
         }
 
-        public PrimalClosuresAttribute(NumericKind system, UserPrimitiveKind user)
+        public NumericClosuresAttribute(NumericKind system, UserPrimitiveKind user)
         {
             this.NumericPrimitive = system;
             this.UserPrimitive = user;

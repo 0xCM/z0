@@ -21,6 +21,18 @@ namespace Z0
             => host.DeclaredMethods().Attributed<OpAttribute>();
 
         /// <summary>
+        /// Closes generic operations over the set of primal types that each operation supports
+        /// </summary>
+        /// <param name="generics">Metadata for generic operations</param>
+        public static IEnumerable<OpClosureInfo> close(GenericOpSpec op)
+            => from k in op.Kinds
+                let definition = op.Method
+                let id = OpIdentity.Provider.DefineIdentity(definition, k)
+                where !id.IsEmpty
+                let closed = definition.MakeGenericMethod(k.ToPrimalType())
+                select OpClosureInfo.Define(id, k, closed);            
+
+        /// <summary>
         /// Queries a specified type for formalized concrete/non-generic operation implementations
         /// </summary>
         /// <param name="host">The source type</param>

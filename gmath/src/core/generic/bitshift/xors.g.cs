@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source value</param>
         /// <param name="offset">The number of bits to shift the source value leftwards</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T xors<T>(T a, byte offset)
             where T : unmanaged
                 => xors_u(a,offset);

@@ -18,7 +18,7 @@ namespace Z0
         /// Computes floor(log(src,2))
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static uint log2<T>(in T src)
             where T : unmanaged
         {

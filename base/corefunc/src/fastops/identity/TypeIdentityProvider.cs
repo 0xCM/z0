@@ -5,37 +5,26 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-
     using static zfunc;
 
     public readonly struct TypeIdentityProvider : ITypeIdentityProvider
-    {
-        /// <summary>
-        /// Creates a type identity provider from a function
-        /// </summary>
-        /// <param name="f">A function that produces a canonical identifier for a type</param>
-        [MethodImpl(Inline)]
-        public static ITypeIdentityProvider FromFunction(Func<Type,Moniker> f)
-            => new TypeIdentityProvider(f);
+    {     
+        public static ITypeIdentityProvider Default
+            => default(DefaultTypeIdentityProvider);
 
-        /// <summary>
-        /// Creates a type identity provider from a host type that realizes the required interface, if possible;
-        /// otherwise, returns none
-        /// </summary>
-        /// <param name="host">A type that realizes an identity provider</param>
-        [MethodImpl(Inline)]
-        public static Option<ITypeIdentityProvider> FromHost(Type host)
-            => Try(() => Activator.CreateInstance(host) as ITypeIdentityProvider);
-        
-        readonly Func<Type,Moniker> f;
+        readonly Func<Type, Moniker> f;
         
         [MethodImpl(Inline)]
-        public TypeIdentityProvider(Func<Type,Moniker> f)
+        internal TypeIdentityProvider(Func<Type, Moniker> f)
             => this.f = f;
         
         [MethodImpl(Inline)]
         public Moniker DefineIdentity(Type src)
             => f(src);
     }
+
+
 }

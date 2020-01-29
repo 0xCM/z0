@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="dst">The leading target cell</param>
         /// <param name="count">The cell count</param>
         /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static void rotl<T>(in T src, int shift, ref T dst, int count)
             where T : unmanaged
         {
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="shift">The magnitude of the rotation</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static T rotl<T>(T src, int shift)
             where T : unmanaged
         {
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="shift">The magnitude of the rotation</param>
         /// <param name="width">The effective bit-width of the source value</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static T rotl<T>(T src, int shift, int width)
             where T : unmanaged
         {

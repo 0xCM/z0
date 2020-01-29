@@ -11,7 +11,7 @@ namespace Z0
     using System.Reflection;
 
     using static zfunc;
-    using static ControlMessages;
+    using static AsmServiceMessages;
     
     class ArchiveControl : Controller<ArchiveControl>
     {                
@@ -47,38 +47,21 @@ namespace Z0
             }
         }
 
-        void CatalogEmitted(IOperationCatalog catalog)
-            => print($"Successfully emitted {catalog.CatalogName} catalog");
-
-        void CatalogEmissionFailed(IOperationCatalog catalog)
-            => errout($"Error occurred while emitting catalog {catalog.CatalogName}");
 
         public override void Execute()
         {             
-            var res = FindCatalog(AssemblyId.Data).Require().Resources;
-            var rr = AsmReports.CreateResourceReport(res);
-            rr.Save().Require();
-
             var designates = 
                 from d in Designators.Control.Designated.Designates
                 let active = Context.ActiveAssemblies()
                 where active.Contains(d.Id) && d.Catalog != null && !d.Catalog.IsEmpty
                     select (d.Id, d.DeclaringAssembly, d.Catalog);
             
+            var res = FindCatalog(AssemblyId.Data).Require().Resources;
+            var rr = AsmReports.CreateResourceReport(res);
+            rr.Save().Require();
+
             foreach(var (id, a, cat) in designates)
-            {
-                var metadata = ClrMetadataIndex.Create(a);
-                var context = AsmContext.New(metadata, res);
-                var lr = AsmReports.CreateMemberLocationReport(id, a);
-                lr.Save().Require();
-
-                var emitter = context.CatalogEmitter(cat);
-                var emitted = emitter.EmitCatalog().ToArray();
-                var er = AsmReports.CreateEmissionReport(id, emitted);
-                er.Save().OnSome(_ => CatalogEmitted(cat))
-                         .OnNone(() => CatalogEmissionFailed(cat));
-
-            }
+                AsmContext.New(ClrMetadataIndex.Create(a), res).EmitCatalog(cat);
         }
     }
 }

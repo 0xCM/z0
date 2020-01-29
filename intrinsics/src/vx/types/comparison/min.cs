@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VXTypes
     {
-        [PrimalClosures(NumericKind.All)]
+        [NumericClosures(NumericKind.All)]
         public readonly struct Min128<T> : IVBinOp128D<T>, IBinaryBlockedOp128<T>
             where T : unmanaged
         {
@@ -36,7 +36,7 @@ namespace Z0
 
         }
 
-        [PrimalClosures(NumericKind.All)]
+        [NumericClosures(NumericKind.All)]
         public readonly struct Min256<T> : IVBinOp256D<T>, IBinaryBlockedOp256<T>
             where T : unmanaged
         {

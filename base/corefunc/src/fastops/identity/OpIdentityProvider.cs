@@ -23,24 +23,6 @@ namespace Z0
             else
                 return provider.DefineIdentity(method);
         }
-
-        public Moniker DefineIdentity(string opname, bool generic, params NumericKind[] kinds)
-        {
-            var id = opname;
-            id += PartSep;
-            
-            if(generic)
-                id += GenericIndicator;
-            
-            for(var i=0; i<  kinds.Length; i++)
-            {
-                if(i!=0)
-                    id += PartSep;
-                
-                id += NumericType.signature(kinds[i]);
-            }
-            return Moniker.Parse(id);
-        }
             
         public Option<Moniker> GenericIdentity(MethodInfo method)            
         {
@@ -118,46 +100,7 @@ namespace Z0
             else
                 return FromAny(method);
         }
-
-        static AppMsg TooManyTypeParmeters(MethodInfo m)
-            => appMsg($"The method {m.Name} accepts parameters that require more than one generic argument and is currently unsupported", SeverityLevel.Warning);
-
-        static string ConsructedParameter(Type arg)
-        {
-            var id = string.Empty;
-            var typeargs = arg.SuppliedGenericArguments().ToArray();
-            if(typeargs.Length > 1)
-                NatSpanType.id(arg).OnSome(nsid => id += nsid);
-            var typearg = typeargs[0];
-            
-            if(arg.IsSpan())
-                id += $"span{NumericType.signature(typearg)}";
-            else
-            {
-                if(arg.IsSegmented())
-                {
-                    var w = (int)arg.Width();
-                    if(w != 0)
-                    {
-                        id += $"{w}";
-                        var segwidth = (int)typearg.Width();
-                        if(segwidth != 0)
-                            id += $"{SegSep}{segwidth}{typearg.NumericKind().Indicator()}";
-                    }
-                    else 
-                        id += "~~err~~";
-                }
-                else
-                {
-                    var k  = typearg.NumericKind();
-                    if(k.IsSome())
-                        id += NumericType.signature(k);
-                    else
-                        id += typearg.Name;
-                }
-            }
-            return id;
-        }
+        
         static Moniker FromAny(MethodInfo method)
         {
             var id = method.OpName();
@@ -178,16 +121,7 @@ namespace Z0
                         id += BlockIndicator;
                 }
 
-                if(NatType.test(arg))
-                    id += NatType.name(arg);                    
-                else if(arg.IsConstructedGenericType)              
-                    id += ConsructedParameter(arg);
-                else if(NumericType.test(arg))
-                    id += NumericType.signature(arg);
-                else if(arg.IsEnum)
-                    id += $"enum{NumericType.signature(arg.GetEnumUnderlyingType())}";
-                else
-                    id += arg.Name;                    
+                id += TypeIdentity.Provider(arg).DefineIdentity(arg);
             }
 
             return Moniker.Parse(id);

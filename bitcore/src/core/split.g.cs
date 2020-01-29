@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="index">The index that partitions the source</param>
         /// <param name="x0">The lo partition</param>
         /// <param name="x1">The hi partition</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static void split<T>(T src, int index, out T x0, out T x1)
             where T : unmanaged
         {

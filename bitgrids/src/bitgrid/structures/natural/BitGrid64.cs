@@ -15,6 +15,7 @@ namespace Z0
     /// A grid of natural dimensions M and N such that M*N = W := 64
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
+    [IdentityProvider(typeof(BitGridIdentity))]    
     public readonly ref struct BitGrid64<M,N,T>
         where T : unmanaged
         where N : unmanaged, ITypeNat

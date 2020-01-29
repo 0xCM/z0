@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal floating-point type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static T div<T>(T a, T b)
             where T : unmanaged
         {
@@ -30,7 +30,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline), PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), NumericClosures(NumericKind.Floats)]
         public static bool divides<T>(T a, T b)
             where T : unmanaged
         {

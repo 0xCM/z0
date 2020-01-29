@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T cnonimpl<T>(T a, T b)
             where T : unmanaged
                 => cnonimpl_u(a,b);

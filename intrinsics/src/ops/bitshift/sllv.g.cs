@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> vsllv<T>(Vector128<T> x, Vector128<T> counts)
             where T : unmanaged
                 => vsllv_u(x, counts);
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector256<T> vsllv<T>(Vector256<T> x, Vector256<T> counts)
             where T : unmanaged
                 => vsllv_u(x,counts);

@@ -11,7 +11,7 @@ namespace Z0
 
     partial class GXTypes
     {
-        [PrimalClosures(NumericKind.Integers)]
+        [NumericClosures(NumericKind.Integers)]
         public readonly struct BitLogicOps<T> : IBitLogic<T>
             where T : unmanaged
         {

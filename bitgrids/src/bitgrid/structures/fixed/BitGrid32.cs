@@ -15,6 +15,7 @@ namespace Z0
     /// Defines a 32-bit grid
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
+    [IdentityProvider(typeof(BitGridIdentity))]
     public readonly ref struct BitGrid32<T>
         where T : unmanaged
     {                

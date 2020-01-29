@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static uint dist<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
             => pop(xor(x,y));

@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static int effwidth<T>(T src)
             where T : unmanaged
         {

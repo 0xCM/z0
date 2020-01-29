@@ -19,7 +19,7 @@ namespace Z0
         /// Extracts the least set source bit and is logically equivalent to the composite operation (-src) & src
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static T lsbx<T>(T src)
             where T : unmanaged
         {

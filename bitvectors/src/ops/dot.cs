@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static bit dot<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => parity(and(x,y));

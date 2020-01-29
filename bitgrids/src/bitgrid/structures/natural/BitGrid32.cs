@@ -16,6 +16,7 @@ namespace Z0
     /// </summary>
     /// <remarks>Conforming dimensions include 1x32, 32x1, 2x16, 16x2, 4x8, and 8x4</remarks>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
+    [IdentityProvider(typeof(BitGridIdentity))]
     public readonly ref struct BitGrid32<M,N,T>
         where T : unmanaged
         where N : unmanaged, ITypeNat

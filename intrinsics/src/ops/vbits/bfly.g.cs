@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> vbfly<T>(N1 n, Vector128<T> x)
             where T : unmanaged
         {
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> vbfly<T>(N2 n, Vector128<T> x)
             where T : unmanaged
         {
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         /// <remarks> [0 1 2 3 | 4 5 6 7 | 8 9 A B | C D E F] -> [0 2 1 3 | 4 6 5 7 | 8 A 9 B | C E D F]</remarks>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> vbfly<T>(N4 n, Vector128<T> x)
             where T : unmanaged
         {
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         /// <remarks> [0 1 2 3 | 4 5 6 7] -> [0 2 1 3 | 4 6 5 7]</remarks>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> vbfly<T>(N8 n, Vector128<T> x)
             where T : unmanaged
         {
@@ -103,7 +103,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector128<T> vbfly<T>(N16 n, Vector128<T> x)
             where T : unmanaged
         {
@@ -120,7 +120,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector256<T> vbfly<T>(N1 n, Vector256<T> x)
             where T : unmanaged
         {
@@ -141,7 +141,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector256<T> vbfly<T>(N2 n, Vector256<T> x)
             where T : unmanaged
         {
@@ -163,7 +163,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         /// <remarks> [0 1 2 3 | 4 5 6 7 | 8 9 A B | C D E F] -> [0 2 1 3 | 4 6 5 7 | 8 A 9 B | C E D F]</remarks>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector256<T> vbfly<T>(N4 n, Vector256<T> x)
             where T : unmanaged
         {
@@ -185,7 +185,7 @@ namespace Z0
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
         /// <remarks> [0 1 2 3 | 4 5 6 7] -> [0 2 1 3 | 4 6 5 7]</remarks>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector256<T> vbfly<T>(N8 n, Vector256<T> x)
             where T : unmanaged
         {
@@ -204,7 +204,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Vector256<T> vbfly<T>(N16 n, Vector256<T> x)
             where T : unmanaged
         {

@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="n">The bitness selector</param>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector128<T> vbroadcast<T>(N128 n, T src)
             where T : unmanaged
         {
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="n">The bitness selector</param>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector256<T> vbroadcast<T>(N256 n, T src)
             where T : unmanaged
         {
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="n">The bitness selector</param>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector512<T> vbroadcast<T>(N512 n, T src)
             where T : unmanaged
                 => (vbroadcast(n256,src), vbroadcast(n256,src));

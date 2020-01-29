@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.SignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.SignedInts)]
         public static T abs<T>(T src)
             where T : unmanaged
         {

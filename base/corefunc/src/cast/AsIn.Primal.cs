@@ -16,43 +16,43 @@ namespace Z0
         static ref T asRef<T>(in T src)
             => ref Unsafe.AsRef(in src);
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref sbyte int8<T>(in T src)
             => ref Unsafe.As<T,sbyte>(ref asRef(in src));
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref byte uint8<T>(in T src)
             => ref Unsafe.As<T,byte>(ref asRef(in src));            
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref short int16<T>(in T src)
             => ref Unsafe.As<T,short>(ref asRef(in src));
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref ushort uint16<T>(in T src)
             => ref Unsafe.As<T,ushort>(ref asRef(in src));
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref int int32<T>(in T src)
             => ref Unsafe.As<T,int>(ref asRef(in src));
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref uint uint32<T>(in T src)
             => ref Unsafe.As<T,uint>(ref asRef(in src));
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref long int64<T>(in T src)
             => ref Unsafe.As<T,long>(ref asRef(in src));
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref ulong uint64<T>(in T src)
             => ref Unsafe.As<T,ulong>(ref asRef(in src));
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref float float32<T>(in T src)
             => ref Unsafe.As<T,float>(ref asRef(in src));
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref double float64<T>(in T src)
             => ref Unsafe.As<T,double>(ref asRef(in src));
 

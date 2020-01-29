@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static T mul<T>(T lhs, T rhs)
             where T : unmanaged
         {

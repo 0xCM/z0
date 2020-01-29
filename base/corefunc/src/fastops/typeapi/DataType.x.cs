@@ -43,6 +43,14 @@ namespace Z0
                 && t.GenericDefinition() == typeof(ReadOnlySpan<>));
 
         /// <summary>
+        /// Determines whether a type is parametric over the natural numbers
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsNumericSpan(this Type t, bool includeReadOnly = true)
+            => t.IsSpan(includeReadOnly) && t.SuppliedGenericArguments().Single().NumericKind().IsSome();
+            
+        /// <summary>
         /// Specifies the bit-width of a classified cpu vector
         /// </summary>
         /// <param name="t">The type to examine</param>

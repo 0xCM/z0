@@ -15,12 +15,12 @@ namespace Z0
 
     partial class ginx
     {
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> vnot<T>(Vector128<T> x)
             where T : unmanaged
                 => vnot_u(x);
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector256<T> vnot<T>(Vector256<T> x)
             where T : unmanaged
                 => vnot_u(x);

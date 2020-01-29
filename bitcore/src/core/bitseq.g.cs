@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static ReadOnlySpan<byte> storeseq<T>(T src)
             where T : unmanaged
                 => BitStore.bitseq(src);
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static void storeseq<T>(T src, Span<byte> dst, int offset = 0)
             where T : unmanaged
                 => BitStore.bitseq(src, dst, offset);
@@ -36,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Span<byte> bitseq<T>(T src, Span<byte> dst, int offset = 0)
             where T : unmanaged
         {
@@ -53,7 +53,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static Span<byte> bitseq<T>(T src)
             where T : unmanaged
         {

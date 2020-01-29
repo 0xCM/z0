@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VXTypes
     {
-        [PrimalClosures(NumericKind.Integers)]
+        [NumericClosures(NumericKind.Integers)]
         public readonly struct Select128<T> : IVTernaryOp128D<T>, ITernaryBlockedOp128<T>
             where T : unmanaged
         {
@@ -36,7 +36,7 @@ namespace Z0
 
         }
 
-        [PrimalClosures(NumericKind.Integers)]
+        [NumericClosures(NumericKind.Integers)]
         public readonly struct Select256<T> : IVTernaryOp256D<T>, ITernaryBlockedOp256<T>
             where T : unmanaged
         {

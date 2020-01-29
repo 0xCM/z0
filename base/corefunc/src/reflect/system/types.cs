@@ -177,6 +177,15 @@ namespace Z0
             => t.IsAbstract && t.IsSealed;
 
         /// <summary>
+        /// Determines whether a type is static
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static bool IsAttributed<A>(this Type t)
+            where A : Attribute
+                => t.CustomAttribute<A>().IsSome();
+
+        /// <summary>
         /// Determines whether a type has a public default constructor
         /// </summary>
         /// <param name="t">The type to examine</param>

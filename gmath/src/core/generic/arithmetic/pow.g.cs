@@ -13,7 +13,7 @@ namespace Z0
 
     partial class gmath
     {
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T pow<T>(T b, uint exp)
             where T : unmanaged
         {

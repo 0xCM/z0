@@ -79,10 +79,5 @@ namespace Z0
         public static Moniker WithImm(this Moniker src, byte imm)
             => Moniker.Parse(concat(src.WithoutImm().Text, $"{Moniker.SuffixSep}{Moniker.ImmIndicator}{imm}"));
 
-        public static Option<ITypeIdentityProvider> IdentityProvider(this Type src)
-            => from a in src.CustomAttribute<IdentityProviderAttribute>()
-                let host = a.Host
-                from svc in TypeIdentityProvider.FromHost(host)
-                select svc;
     }
 }

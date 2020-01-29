@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="start">The cell-relative start index</param>
         /// <param name="count">The number of bits to disable</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> vbitclear<T>(Vector128<T> src, byte start, byte count)
             where T : unmanaged
         {
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="start">The cell-relative start index</param>
         /// <param name="count">The number of bits to disable</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline),Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline),Op, NumericClosures(NumericKind.Integers)]
         public static Vector256<T> vbitclear<T>(Vector256<T> src, byte start, byte count)
             where T : unmanaged
         {

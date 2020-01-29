@@ -34,7 +34,7 @@ namespace Z0.Logix
         public static ReadOnlySpan<BinaryBitLogicKind> BinaryBitwiseKinds
             => ScalarOpApi.BinaryBitLogicKinds;
 
-        [Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [Op, NumericClosures(NumericKind.UnsignedInts)]
         public static BitMatrix<T> eval<T>(UnaryBitLogicKind kind, BitMatrix<T> A)
             where T : unmanaged
         {
@@ -46,7 +46,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [Op, NumericClosures(NumericKind.UnsignedInts)]
         public static BitMatrix<T> eval<T>(UnaryBitLogicKind kind, BitMatrix<T> A, ref BitMatrix<T> Z)
             where T : unmanaged
         {
@@ -58,7 +58,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [Op, NumericClosures(NumericKind.UnsignedInts)]
         public static BitMatrix<T> eval<T>(BinaryBitLogicKind kind, BitMatrix<T> A, BitMatrix<T> B)
             where T : unmanaged
         {
@@ -84,7 +84,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [Op, NumericClosures(NumericKind.UnsignedInts)]
         public static BitMatrix<T> eval<T>(BinaryBitLogicKind kind, BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
@@ -111,7 +111,7 @@ namespace Z0.Logix
 
         }
 
-        [Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [Op, NumericClosures(NumericKind.UnsignedInts)]
         public static BitMatrixBinaryRefOp<T> lookup<T>(BinaryBitLogicKind kind)
             where T : unmanaged
         {

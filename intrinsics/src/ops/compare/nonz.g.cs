@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static bit vnonz<T>(Vector128<T> src)
             where T : unmanaged
         {
@@ -44,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static bit vnonz<T>(Vector256<T> src)
             where T : unmanaged
         {
@@ -67,7 +67,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static bit vnonz<T>(in Vector512<T> src)
             where T : unmanaged
                 => vnonz(src.Lo) || vnonz(src.Hi);       

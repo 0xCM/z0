@@ -61,7 +61,7 @@ namespace Z0
         {
             if(FunctionType.vunaryImm(op.Method))
             {
-                var functions = from closure in OpFactory.close(op)
+                var functions = from closure in OpSpecs.close(op)
                             let svc = ImmCaptureSvc(closure.ClosedMethod, closure.Id)
                             from f in svc.Capture(ImmSelection.ToArray())
                             select Flow(WithCil(f,closure.ClosedMethod),pipe);
@@ -83,7 +83,7 @@ namespace Z0
                 select Flow(WithCil(f, op.Method), pipe);
 
         IEnumerable<AsmFunction> Flow(GenericOpSpec op, IAsmFunctionPipe pipe)
-            => from closure in OpFactory.close(op)
+            => from closure in OpSpecs.close(op)
                     let f = Decoder.DecodeFunction(closure.Id, closure.ClosedMethod)
                         select Flow(WithCil(f, closure.ClosedMethod), pipe);       
        

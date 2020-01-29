@@ -14,6 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines a maximally packed data structure of natural dimensions over a primal type
     /// </summary>
+    [IdentityProvider(typeof(BitGridIdentity))]
     public readonly ref struct BitGrid<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat

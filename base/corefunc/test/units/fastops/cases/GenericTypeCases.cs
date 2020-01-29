@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    [PrimalClosures(NumericKind.Integers)]
+    [NumericClosures(NumericKind.Integers)]
     class GenericTypeCases<T>
         where T : unmanaged
     {

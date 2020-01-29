@@ -15,6 +15,7 @@ namespace Z0
     /// Defines a grid of bits over a contiguous sequence of primal values stored in blocks of 256 bits
     /// </summary>
     /// <typeparam name="T">The grid cell type</typeparam>
+    [IdentityProvider(typeof(BitGridIdentity))]
     public readonly ref struct BitGrid<T>
         where T : unmanaged
     {                

@@ -13,32 +13,29 @@ namespace Z0
     {
         public Moniker DefineIdentity(Type src)
         {
-            static string dimensions(int width)
-                => concat(width.ToString(), Moniker.SegSep, width.ToString());
-
+            var id = string.Empty;
             var t = src.EffectiveType();
-            var id = "bm";
-            id += Moniker.PartSep;
 
-            var order = 0;
-            if(t.IsGenericType && t.GetGenericTypeDefinition() ==typeof(BitMatrix<>))
-            {
-                id += Moniker.GenericIndicator;
-                order = t.GetGenericArguments().Single().NumericKind().Width();
-            }
+            var kind = NumericKind.None;
+            if(t.IsConstructedGenericType && t.GetGenericTypeDefinition() ==typeof(BitMatrix<>))
+                kind = t.GetGenericArguments().Single().NumericKind();                
+            else if(t.ContainsGenericParameters && t.GenericDefinition() == typeof(BitMatrix<>))
+                id = $"bm[T]";
             else
             {
                 if(t == typeof(BitMatrix8))
-                    order = 8;
+                    kind = NumericKind.U8;
                 else if(t == typeof(BitMatrix16))
-                    order = 16;
+                    kind = NumericKind.U16;
                 else if(t == typeof(BitMatrix32))
-                    order = 32;
+                    kind = NumericKind.U32;
                 else if(t == typeof(BitMatrix64))
-                    order = 64;            
+                    kind = NumericKind.U64;
             }
 
-            id += dimensions(order);
+            if(kind.IsSome())
+                id = concat("bm", kind.Width().ToString(), Moniker.SegSep, NumericType.signature(kind));
+            
             return Moniker.Parse(id);            
         }
     }

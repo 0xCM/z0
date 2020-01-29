@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static T floor<T>(T src)
             where T : unmanaged
         {

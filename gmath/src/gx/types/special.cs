@@ -11,7 +11,7 @@ namespace Z0
 
     partial class GXTypes
     {
-        [PrimalClosures(NumericKind.All)]
+        [NumericClosures(NumericKind.All)]
         public readonly struct Parse<T>  : IParser<T>
             where T : unmanaged        
         {

@@ -17,12 +17,12 @@ namespace Z0
 
     public static class OpIdentity
     {
-       public static IOpIdentityProvider Provider
+        public static IOpIdentityProvider Provider
             => default(OpIdentityProvider);
 
         public static string hostname(Type t)
             => t.CustomAttribute<OpHostAttribute>().MapValueOrDefault(a => a.Name, t.Name.ToLower());
-
+                
         /// <summary>
         /// Gets the name of a method to which an Op attribute is applied
         /// </summary>

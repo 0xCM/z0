@@ -13,7 +13,7 @@ namespace Z0
     partial class Converter
     {
 
-        [MethodImpl(Inline), Op("convert64i"), PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op("convert64i"), NumericClosures(NumericKind.All)]
         public static T convert<T>(long src)
             where T : unmanaged
         {

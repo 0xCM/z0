@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     public static class ginxfp
     {
-       [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+       [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
        public static Vector128<T> vadd<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -29,7 +29,7 @@ namespace Z0
                 throw unsupported<T>();
         }        
 
-       [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+       [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
        public static Vector256<T> vadd<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -41,7 +41,7 @@ namespace Z0
                 throw unsupported<T>();
         }     
 
-       [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+       [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
        public static Vector128<T> vsub<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -53,7 +53,7 @@ namespace Z0
                 throw unsupported<T>();
         }        
 
-       [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+       [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
        public static Vector256<T> vsub<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -65,7 +65,7 @@ namespace Z0
                 throw unsupported<T>();
         }        
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector128<T> vhadd<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -77,7 +77,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector256<T> vhadd<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -89,7 +89,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector128<T> vdiv<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -101,7 +101,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector256<T> vdiv<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -114,7 +114,7 @@ namespace Z0
         }
 
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector128<T> vand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -127,7 +127,7 @@ namespace Z0
                     
         }
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector256<T> vand<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -140,7 +140,7 @@ namespace Z0
                     
         }
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector128<T> vor<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -152,7 +152,7 @@ namespace Z0
                 throw unsupported<T>();                    
         }
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector256<T> vor<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -164,7 +164,7 @@ namespace Z0
                 throw unsupported<T>();                    
         }
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector128<T> vxor<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -176,7 +176,7 @@ namespace Z0
                 throw unsupported<T>();                    
         }
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector256<T> vxor<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -188,7 +188,7 @@ namespace Z0
                 throw unsupported<T>();                    
         }
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector128<T> vxornot<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -200,7 +200,7 @@ namespace Z0
                 throw unsupported<T>();                    
         }
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector256<T> vxornot<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -212,7 +212,7 @@ namespace Z0
                 throw unsupported<T>();                    
         }
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector128<T> vmin<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -224,7 +224,7 @@ namespace Z0
                 throw unsupported<T>();
         }
          
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector256<T> vmin<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -236,7 +236,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector128<T> vmax<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -248,7 +248,7 @@ namespace Z0
                 throw unsupported<T>();
         }        
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector256<T> vmax<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -260,7 +260,7 @@ namespace Z0
                 throw unsupported<T>();
         }        
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector128<T> vnegate<T>(Vector128<T> src)
             where T : unmanaged
         {
@@ -272,7 +272,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector256<T> vnegate<T>(Vector256<T> src)
             where T : unmanaged
         {

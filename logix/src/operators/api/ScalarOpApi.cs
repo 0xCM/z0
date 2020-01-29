@@ -57,7 +57,7 @@ namespace Z0.Logix
             => Enums.members<ComparisonKind>();
 
 
-        [Op, PrimalClosures(NumericKind.Integers)]
+        [Op, NumericClosures(NumericKind.Integers)]
         public static T eval<T>(BinaryBitLogicKind kind, T a, T b)
             where T : unmanaged
         {
@@ -83,7 +83,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op, PrimalClosures(NumericKind.Integers)]
+        [Op, NumericClosures(NumericKind.Integers)]
         public static T eval<T>(UnaryBitLogicKind kind, T a)
             where T : unmanaged
         {
@@ -95,7 +95,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op, PrimalClosures(NumericKind.Integers)]
+        [Op, NumericClosures(NumericKind.Integers)]
         public static T eval<T>(ComparisonKind kind, T a, T b)
             where T : unmanaged            
         {
@@ -118,7 +118,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
-        [Op, PrimalClosures(NumericKind.Integers)]
+        [Op, NumericClosures(NumericKind.Integers)]
         public static T eval<T>(TernaryBitLogicKind kind, T a, T b, T c)
             where T : unmanaged
         {
@@ -223,7 +223,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [Op, NumericClosures(NumericKind.UnsignedInts)]
         public static T eval<T>(ShiftOpKind kind, T a, byte count)
             where T : unmanaged
         {
@@ -237,7 +237,7 @@ namespace Z0.Logix
             }
         }
             
-        [Op, PrimalClosures(NumericKind.Integers)]
+        [Op, NumericClosures(NumericKind.Integers)]
         public static Shifter<T> lookup<T>(ShiftOpKind kind)
             where T : unmanaged            
         {
@@ -251,7 +251,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op, PrimalClosures(NumericKind.All)]
+        [Op, NumericClosures(NumericKind.All)]
         public static BinaryOp<T> lookup<T>(ComparisonKind kind)
             where T : unmanaged
         {
@@ -267,7 +267,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op, PrimalClosures(NumericKind.Integers)]
+        [Op, NumericClosures(NumericKind.Integers)]
         public static UnaryOp<T> lookup<T>(UnaryBitLogicKind kind)
             where T : unmanaged            
         {
@@ -279,7 +279,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op, PrimalClosures(NumericKind.Integers)]
+        [Op, NumericClosures(NumericKind.Integers)]
         public static BinaryOp<T> lookup<T>(BinaryBitLogicKind kind)
             where T : unmanaged
         {

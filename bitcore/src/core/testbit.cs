@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to chech</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static bit testbit<T>(T src, int pos)
             where T : unmanaged
         {

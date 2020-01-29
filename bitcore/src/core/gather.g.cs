@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vale</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static T gather<T>(T src, T mask)
             where T : unmanaged
         {

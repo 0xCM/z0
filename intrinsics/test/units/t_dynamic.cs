@@ -19,7 +19,7 @@ namespace Z0
         public void check_blocks()
         {
             var methods = typeof(vblocks).Methods().Attributed<OpAttribute>().WithName("add");
-            var provider = FastOps.IdentityProvider();
+            var provider = OpIdentity.Provider;
             foreach(var method in methods)
             {                
                 foreach(var t in method.ParameterTypes())

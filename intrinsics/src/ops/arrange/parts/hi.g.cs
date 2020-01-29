@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector128<T> vhi<T>(Vector128<T> src)
             where T : unmanaged
                 => vgeneric<T>(CpuVector.vscalar(n128, vcell(v64u(src),1)));
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="pos">The index of the lane to extract</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector128<T> vhi<T>(Vector256<T> src)
             where T : unmanaged
         {
@@ -50,7 +50,7 @@ namespace Z0
         /// Extracts the hi 128-bit lane of the source vector to scalar targets
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op("vhi~out", OpFacetModifier.ReplaceName), PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op("vhi~out", OpFacetModifier.ReplaceName), NumericClosures(NumericKind.All)]
         public static void vhi<T>(Vector256<T> src, out ulong x0, out ulong x1)
             where T : unmanaged
                 => dinx.vhi(v64u(src), out x0, out x1);
@@ -59,7 +59,7 @@ namespace Z0
         /// Extracts the hi 128-bit lane of the source vector to a pair
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), NumericClosures(NumericKind.All)]
         public static ref Pair<ulong> vhi<T>(Vector256<T> src, ref Pair<ulong> dst)
             where T : unmanaged
                 => ref dinx.vhi(src.AsUInt64(), ref dst);
@@ -68,7 +68,7 @@ namespace Z0
         /// Extracts the upper 256-bits from the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static Vector256<T> vhi<T>(Vector512<T> src)
             where T : unmanaged
                 => src.Hi;       
@@ -77,7 +77,7 @@ namespace Z0
         /// Extracts the lower 256-bits from the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), NumericClosures(NumericKind.All)]
         public static Vector512<T> vhi<T>(Vector1024<T> src)
             where T : unmanaged
                 => src.Hi;       

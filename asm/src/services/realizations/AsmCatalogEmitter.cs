@@ -71,7 +71,7 @@ namespace Z0
             => Context.UnaryImmCapture(src, baseid);
 
         IEnumerable<AsmFunction> ResolveImmediates(GenericOpSpec op)                        
-            => OpFactory.close(ImmPrecapture(op))
+            => OpSpecs.close(ImmPrecapture(op))
                 .Select(closure =>  ImmCaptureSvc(closure.ClosedMethod, closure.Id))
                 .SelectMany(svc => svc.Capture(ImmSelection));
 
@@ -116,7 +116,7 @@ namespace Z0
 
         IEnumerable<AsmEmissionToken> Emit(GenericOpSpec op, IAsmFunctionArchive dst)
         {
-            var functions = OpFactory.close(op).Map(closure => Decoder.DecodeFunction(closure.Id, closure.ClosedMethod));
+            var functions = OpSpecs.close(op).Map(closure => Decoder.DecodeFunction(closure.Id, closure.ClosedMethod));
             if(functions.Length != 0)
             {
                 foreach(var token in dst.Save(AsmFunctionGroup.Define(op.Id, functions),true))

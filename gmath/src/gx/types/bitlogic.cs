@@ -12,7 +12,7 @@ namespace Z0
     partial class GXTypes
     {
 
-        [PrimalClosures(NumericKind.Integers)]
+        [NumericClosures(NumericKind.Integers)]
         public readonly struct And<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
@@ -31,7 +31,7 @@ namespace Z0
                 => mathspan.and(l,r,dst);
         }
 
-        [PrimalClosures(NumericKind.Integers)]
+        [NumericClosures(NumericKind.Integers)]
         public readonly struct Or<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
@@ -49,7 +49,7 @@ namespace Z0
                 => mathspan.or(l,r,dst);
         }
 
-        [PrimalClosures(NumericKind.Integers)]
+        [NumericClosures(NumericKind.Integers)]
         public readonly struct Xor<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
@@ -68,7 +68,7 @@ namespace Z0
                 => mathspan.xor(l,r,dst);
         }
 
-        [PrimalClosures(NumericKind.Integers)]
+        [NumericClosures(NumericKind.Integers)]
         public readonly struct Nand<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
@@ -86,7 +86,7 @@ namespace Z0
                 => mathspan.nand(l,r,dst);
         }
 
-        [PrimalClosures(NumericKind.Integers)]
+        [NumericClosures(NumericKind.Integers)]
         public readonly struct Nor<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
@@ -104,7 +104,7 @@ namespace Z0
                 => mathspan.nor(l,r,dst);
         }
 
-        [PrimalClosures(NumericKind.Integers)]
+        [NumericClosures(NumericKind.Integers)]
         public readonly struct Xnor<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
@@ -122,7 +122,7 @@ namespace Z0
                 => mathspan.nor(l,r,dst);
         }
 
-        [PrimalClosures(NumericKind.Integers)]
+        [NumericClosures(NumericKind.Integers)]
         public readonly struct Select<T> : ITernaryOp<T>, ITernarySpanOp<T>
             where T : unmanaged        
         {    
@@ -141,7 +141,7 @@ namespace Z0
 
         }
 
-        [PrimalClosures(NumericKind.Integers)]
+        [NumericClosures(NumericKind.Integers)]
         public readonly struct Not<T> : IUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged        
         {
@@ -159,7 +159,7 @@ namespace Z0
                 => mathspan.not(src,dst);
         }    
 
-        [PrimalClosures(NumericKind.Integers)]
+        [NumericClosures(NumericKind.Integers)]
         public readonly struct Impl<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
@@ -177,7 +177,7 @@ namespace Z0
                 => mathspan.impl(lhs,rhs,dst);
         }
 
-        [PrimalClosures(NumericKind.Integers)]
+        [NumericClosures(NumericKind.Integers)]
         public readonly struct NonImpl<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
@@ -196,7 +196,7 @@ namespace Z0
 
         }
 
-        [PrimalClosures(NumericKind.Integers)]
+        [NumericClosures(NumericKind.Integers)]
         public readonly struct CImpl<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    
@@ -215,7 +215,7 @@ namespace Z0
 
         }
 
-        [PrimalClosures(NumericKind.Integers)]
+        [NumericClosures(NumericKind.Integers)]
         public readonly struct CNonImpl<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged        
         {    

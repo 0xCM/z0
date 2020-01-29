@@ -15,12 +15,12 @@ namespace Z0
 
     partial class ginx
     {        
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All & (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All & (~NumericKind.U64))]
         public static Vector128<T> vmax<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vmax_u(x,y);
          
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All& (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All& (~NumericKind.U64))]
         public static Vector256<T> vmax<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vmax_u(x,y);

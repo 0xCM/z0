@@ -13,8 +13,14 @@ namespace Z0
     using static zfunc;
     using Z0.AsmSpecs;
 
-    static class AsmServiceMessages
+    public static class AsmServiceMessages
     {
+        public static AppMsg CatalogEmitted(IOperationCatalog catalog)
+            => appMsg($"Successfully emitted {catalog.CatalogName} catalog");
+
+        public static AppMsg CatalogEmissionFailed(IOperationCatalog catalog)
+            => appMsg($"Error occurred while emitting catalog {catalog.CatalogName}",SeverityLevel.Error);
+
         public static AppMsg NoClosures(GenericOpSpec op)        
             => appMsg($"No closure was found for {op.Id}", SeverityLevel.Warning);
 

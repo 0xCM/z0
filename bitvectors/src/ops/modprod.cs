@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="x">The first vector</param>
         /// <param name="y">The second vector</param>
         /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static bit modprod<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {

@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VXTypes
     {
-        [PrimalClosures(NumericKind.All)]
+        [NumericClosures(NumericKind.All)]
         public readonly struct TestZ128<T> : IVBinPred128D<T>, IBinaryBlockedPred128<T>
             where T : unmanaged
         {
@@ -35,7 +35,7 @@ namespace Z0
                 => vblocks.vtestz(x,y,dst);
         }
 
-        [PrimalClosures(NumericKind.All)]
+        [NumericClosures(NumericKind.All)]
         public readonly struct TestZ256<T> : IVBinPred256<T>, IBinaryBlockedPred256<T>
             where T : unmanaged
         {

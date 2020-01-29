@@ -15,7 +15,7 @@ namespace Z0.Logix
     [OpHost("expr.vector.eval")]
     static class VectorExprEval
     {
-        [Op, PrimalClosures(NumericKind.Integers)]
+        [Op, NumericClosures(NumericKind.Integers)]
          public static LiteralExpr<Vector128<T>> eval<T>(IExpr<Vector128<T>> expr)
             where T : unmanaged
         {
@@ -36,7 +36,7 @@ namespace Z0.Logix
 
         }
 
-        [Op, PrimalClosures(NumericKind.Integers)]
+        [Op, NumericClosures(NumericKind.Integers)]
         public static LiteralExpr<Vector256<T>> eval<T>(IExpr<Vector256<T>> expr)
             where T : unmanaged
         {
@@ -56,7 +56,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op, PrimalClosures(NumericKind.Integers)]
+        [Op, NumericClosures(NumericKind.Integers)]
         static LiteralExpr<Vector128<T>> eval<T>(IOperator<Vector128<T>> expr)
             where T : unmanaged
         {
@@ -74,7 +74,7 @@ namespace Z0.Logix
             }
         }
 
-       [Op, PrimalClosures(NumericKind.Integers)]
+       [Op, NumericClosures(NumericKind.Integers)]
        static LiteralExpr<Vector256<T>> eval<T>(IOperator<Vector256<T>> expr)
             where T : unmanaged
         {

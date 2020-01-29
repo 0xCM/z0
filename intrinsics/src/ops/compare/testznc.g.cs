@@ -14,12 +14,12 @@ namespace Z0
 
     partial class ginx
     {
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static bit vtestznc<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
                 => vtestznc_u(src,mask);
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static bit vtestznc<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
                 => vtestznc_u(src,mask);

@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static BitGrid16<T> and<T>(BitGrid16<T> gx, BitGrid16<T> gy)
             where T : unmanaged
                 => init16<T>(gx.RowCount, gx.ColCount, math.and(gx,gy));
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static BitGrid32<T> and<T>(BitGrid32<T> gx, BitGrid32<T> gy)
             where T : unmanaged
                 => init32<T>(gx.RowCount, gx.ColCount, math.and(gx,gy));
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static BitGrid64<T> and<T>(BitGrid64<T> gx, BitGrid64<T> gy)
             where T : unmanaged
                 => init64<T>(gx.RowCount, gx.ColCount, math.and(gx,gy));
@@ -154,7 +154,7 @@ namespace Z0
         /// <param name="gy">The right grid</param>
         /// <param name="gz">The target grid</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static ref readonly BitGrid<T> and<T>(in BitGrid<T> gx, in BitGrid<T> gy, in BitGrid<T> gz)
             where T : unmanaged
         {
@@ -170,7 +170,7 @@ namespace Z0
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static BitGrid<T> and<T>(in BitGrid<T> gx, in BitGrid<T> gy)
             where T : unmanaged
         {

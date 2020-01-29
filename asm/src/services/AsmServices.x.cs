@@ -9,6 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using AsmSpecs;
+    using static AsmServiceMessages;
 
     using static zfunc;
 
@@ -19,8 +20,7 @@ namespace Z0
             => AsmCodeIndex.Create(code,generic);
 
         static IEnumerable<AsmInstructionList> GetInstructions(IAsmCodeArchive archive)
-        {
-            
+        {            
             var decoder = archive.Context.Decoder();
             foreach(var file in archive.Files)
             foreach(var codeblock in archive.Read(file))
@@ -29,5 +29,17 @@ namespace Z0
 
         public static IAsmInstructionSource ToInstructionSource(this IAsmCodeArchive archive)
             => AsmInstructionSource.FromProducer(() => GetInstructions(archive));
+
+        public static void EmitCatalog(this IAsmContext context, IOperationCatalog cat)
+        {
+            var emitter = context.CatalogEmitter(cat);
+            var emitted = emitter.EmitCatalog().ToArray();
+            var er = AsmReports.CreateEmissionReport(cat.AssemblyId, emitted);
+            er.Save().OnSome(_ => print(CatalogEmitted(cat)))
+                        .OnNone(() => print(CatalogEmissionFailed(cat)));
+            var lr = AsmReports.CreateMemberLocationReport(cat.AssemblyId, cat.DeclaringAssembly);
+            lr.Save().Require();
+
+        }
     }
 }

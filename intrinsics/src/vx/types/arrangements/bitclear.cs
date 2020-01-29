@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VXTypes
     {
-        [PrimalClosures(NumericKind.Integers)]
+        [NumericClosures(NumericKind.Integers)]
         public readonly struct BitClear128<T> : IVUnaryOp128Imm8x2D<T>
             where T : unmanaged
         {
@@ -34,7 +34,7 @@ namespace Z0
                 => gbits.bitclear(a, b, c);
         }
 
-        [PrimalClosures(NumericKind.Integers)]
+        [NumericClosures(NumericKind.Integers)]
         public readonly struct BitClear256<T> : IVUnaryOp256Imm8x2D<T>
             where T : unmanaged
         {

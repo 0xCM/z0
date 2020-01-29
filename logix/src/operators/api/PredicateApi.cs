@@ -26,7 +26,7 @@ namespace Z0.Logix
                 ComparisonKind.Gt, ComparisonKind.GtEq );
 
 
-        [Op, PrimalClosures(NumericKind.Integers)]
+        [Op, NumericClosures(NumericKind.Integers)]
         public static bit eval<T>(ComparisonKind kind, T a, T b)
             where T : unmanaged            
         {
@@ -42,7 +42,7 @@ namespace Z0.Logix
             }
         }
 
-        [Op, PrimalClosures(NumericKind.Integers)]
+        [Op, NumericClosures(NumericKind.Integers)]
         public static BinaryPred<T> lookup<T>(ComparisonKind kind)
             where T : unmanaged            
         {

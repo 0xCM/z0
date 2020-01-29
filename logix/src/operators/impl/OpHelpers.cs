@@ -12,49 +12,49 @@ namespace Z0.Logix
 
     internal static class OpHelpers
     {
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static string sig(UnaryBitLogicKind kind)
                 => $"{kind}:bit";
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static string sig(BinaryBitLogicKind kind)
                 => $"{kind}:bit";
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static string sig(TernaryBitLogicKind kind)
                 => $"{kind}:bit";
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static string sig<T>(UnaryBitLogicKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static string sig<T>(BinaryBitLogicKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";    
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static string sig<T>(TernaryBitLogicKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static string sig<T>(ShiftOpKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static string sig<T>(ComparisonKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static string sig<T>(UnaryArithmeticKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static string sig<T>(BinaryArithmeticKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";

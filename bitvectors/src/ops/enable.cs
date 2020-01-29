@@ -16,7 +16,7 @@ namespace Z0
         /// Enables a bit if it is disabled
         /// </summary>
         /// <param name="index">The position of the bit to enable</param>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
         public static BitVector<T> enable<T>(BitVector<T> x, int index)
             where T : unmanaged
                 => gbits.enable(x.data,index);

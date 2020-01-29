@@ -48,7 +48,7 @@ namespace Z0
         /// Computes the number of T-components covered by a 256-bit vector
         /// </summary>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static int vcount<T>(Vector256<T> src)
             where T : unmanaged
                 => Vector256<T>.Count;
@@ -57,7 +57,7 @@ namespace Z0
         /// Computes the number of T-components covered by a 512-bit vector
         /// </summary>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static int vcount<T>(Vector512<T> src)
             where T : unmanaged
                 => Vector512<T>.Count;
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <param name="t">The component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static int vcount<T>(N128 w = default, T t = default)
             where T : unmanaged
                 => Vector128<T>.Count;
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <param name="t">The component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static int vcount<T>(N256 w = default, T t = default)
             where T : unmanaged
                 => Vector256<T>.Count;
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         /// <param name="t">The component type representative</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static int vcount<T>(N512 w = default, T t = default)
             where T : unmanaged
                 => Vector512<T>.Count;

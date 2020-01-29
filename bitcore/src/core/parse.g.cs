@@ -11,7 +11,7 @@ namespace Z0
 
     partial class gbits
     {
-        [MethodImpl(Inline), Op, PrimalClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static ref T parse<T>(ReadOnlySpan<char> src, int offset, out T dst)
             where T : unmanaged
         {            
