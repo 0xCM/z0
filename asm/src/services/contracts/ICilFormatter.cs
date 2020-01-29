@@ -5,17 +5,11 @@
 namespace Z0
 {        
     using System;
-    using System.Collections.Generic;
-    using AsmSpecs;
 
     using static zfunc;
 
-    public interface ICilWriter
+    public interface ICilFormatter
     {
-        FilePath Target {get;}        
-        
-        Option<Exception> WriteCil(IEnumerable<AsmFunction> functions);     
-
-        Option<Exception> WriteCil(AsmFunctionGroup src);           
+        string Format(CilFunction f);
     }
 }

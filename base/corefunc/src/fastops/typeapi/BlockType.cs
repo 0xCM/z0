@@ -37,26 +37,26 @@ namespace Z0
         /// Determines the width of a blocked type
         /// </summary>
         /// <param name="t">The type to examine</param>
-        public static BlockWidth width(Type t)
+        public static FixedWidth width(Type t)
         {
             if(!test(t))
-                return BlockWidth.None;
+                return FixedWidth.None;
 
             var def = t.GenericDefinition();
             if(def == typeof(Block16<>))
-                return BlockWidth.W16;
+                return FixedWidth.W16;
             else if(def == typeof(Block32<>))
-                return BlockWidth.W32;
+                return FixedWidth.W32;
             else if (def == typeof(Block64<>))
-                return BlockWidth.W64;
+                return FixedWidth.W64;
             else if (def == typeof(Block128<>))
-                return BlockWidth.W128;
+                return FixedWidth.W128;
             else if (def == typeof(Block256<>))
-                return BlockWidth.W256;
+                return FixedWidth.W256;
             else if (def == typeof(Block512<>))
-                return BlockWidth.W512;
+                return FixedWidth.W512;
             else
-                return BlockWidth.W666;
+                return FixedWidth.None;
         }
 
         /// <summary>
@@ -98,10 +98,10 @@ namespace Z0
         public static bit integral(BlockKind k)
             => signed(k) || unsigned(k);
 
-        public static BlockKind kind(BlockWidth width, PrimalId id)            
+        public static BlockKind kind(FixedWidth width, PrimalId id)            
         {
             var k = width switch 
-                    { BlockWidth.W16 => 
+                    { FixedWidth.W16 => 
                         id switch {
                             PrimalId.U8 => BlockKind.Block16x8u,
                             PrimalId.I8 => BlockKind.Block16x8i,
@@ -110,7 +110,7 @@ namespace Z0
                             _ => BlockKind.None
                             }, 
 
-                        BlockWidth.W32 => 
+                        FixedWidth.W32 => 
                         id switch {
                             PrimalId.U8 => BlockKind.Block32x8u,
                             PrimalId.I8 => BlockKind.Block32x8i,
@@ -122,7 +122,7 @@ namespace Z0
                             _ => BlockKind.None
                             }, 
 
-                        BlockWidth.W64 => 
+                        FixedWidth.W64 => 
                         id switch {
                             PrimalId.U8 => BlockKind.Block64x8u,
                             PrimalId.I8 => BlockKind.Block64x8i,
@@ -137,7 +137,7 @@ namespace Z0
                             _ => BlockKind.None
                             }, 
 
-                        BlockWidth.W128 => 
+                        FixedWidth.W128 => 
                         id switch {
                             PrimalId.U8 => BlockKind.Block128x8u,
                             PrimalId.I8 => BlockKind.Block128x8i,
@@ -153,7 +153,7 @@ namespace Z0
                             }, 
 
 
-                        BlockWidth.W256 => 
+                        FixedWidth.W256 => 
                         id switch {
                             PrimalId.U8 => BlockKind.Block256x8u,
                             PrimalId.I8 => BlockKind.Block256x8i,
@@ -168,7 +168,7 @@ namespace Z0
                             _ => BlockKind.None
                             }, 
 
-                        BlockWidth.W512 => 
+                        FixedWidth.W512 => 
                         id switch {
                             PrimalId.U8 => BlockKind.Block512x8u,
                             PrimalId.I8 => BlockKind.Block512x8i,

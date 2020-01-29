@@ -21,24 +21,5 @@ namespace Z0
         {
 
         }
-
-        public NatOpAttribute(string name, OpFacetModifier modifier = OpFacetModifier.None)
-            : base(name, modifier)
-        {
-
-        }
-
-        public NatOpAttribute(bool byref, OpFacetModifier modifier = OpFacetModifier.None)
-            : base(byref, modifier)
-        {
-
-        }
-
-        public NatOpAttribute(string name, bool byref, OpFacetModifier modifier = OpFacetModifier.None)
-            : base(name,byref, modifier)
-        {
-
-        }
-
     }
 }

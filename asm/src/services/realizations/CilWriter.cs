@@ -17,7 +17,7 @@ namespace Z0
     {
         public IAsmContext Context {get;}
         
-        readonly FilePath Target;
+        public FilePath Target {get;}
         
         [MethodImpl(Inline)]
         public static CilWriter Create(IAsmContext context, FilePath dst)
@@ -48,9 +48,10 @@ namespace Z0
                     if(Context.CilFormat.EmitFileHeader)                        
                         writer.WriteLine($"; {now().ToLexicalString()}"); 
                     
+                    var formatter = Context.CilFormatter();
                     foreach(var f in cilfuncs)
                     {
-                        writer.WriteLine(f.Format());
+                        writer.WriteLine(formatter.Format(f));
                         if(Context.CilFormat.EmitSectionDelimiter)
                             writer.WriteLine(Context.CilFormat.SectionDelimiter);
                     }

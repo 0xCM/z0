@@ -40,19 +40,6 @@ namespace Z0
             this.FacetModifier = modifier;
         }
 
-        public OpAttribute(string name, bool byref, OpFacetModifier modifier = OpFacetModifier.CombineNames)
-        {
-            this.Name = name;
-            this.ByRef = byref;
-            this.FacetModifier = modifier;
-        }
-
-        public OpAttribute(bool byref, OpFacetModifier modifier = OpFacetModifier.CombineNames)
-        {
-            this.ByRef = byref;
-            this.FacetModifier = modifier;
-        }
-
         public override string ToString()
             => Name;
     }

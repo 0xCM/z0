@@ -13,30 +13,53 @@ namespace Z0
     {
         public Moniker DefineIdentity(Type src)
         {
-            var id = string.Empty;
+            const string prefix = "bm";
+            
             var t = src.EffectiveType();
-
-            var kind = NumericKind.None;
+            if(t.ContainsGenericParameters && t.GenericDefinition() == typeof(BitMatrix<>))
+                return Moniker.Parse($"{prefix}[T]");
+            
             if(t.IsConstructedGenericType && t.GetGenericTypeDefinition() ==typeof(BitMatrix<>))
-                kind = t.GetGenericArguments().Single().NumericKind();                
-            else if(t.ContainsGenericParameters && t.GenericDefinition() == typeof(BitMatrix<>))
-                id = $"bm[T]";
+            {
+                var kind = t.GetGenericArguments().Single().NumericKind();
+                return Moniker.Parse(concat(prefix, kind.Width().ToString(), Moniker.SegSep, NumericType.signature(kind)));                
+            }
             else
             {
-                if(t == typeof(BitMatrix8))
+                var width = FixedWidth.None;
+                var kind = NumericKind.None;
+                if(t == typeof(BitMatrix4))
+                {
                     kind = NumericKind.U8;
+                    width = FixedWidth.W4;
+                }
+                else if(t == typeof(BitMatrix8))
+                {
+                    kind = NumericKind.U8;
+                    width = FixedWidth.W8;
+                }
                 else if(t == typeof(BitMatrix16))
+                {
                     kind = NumericKind.U16;
+                    width = FixedWidth.W16;
+                }
                 else if(t == typeof(BitMatrix32))
+                {
                     kind = NumericKind.U32;
+                    width = FixedWidth.W32;
+                }
                 else if(t == typeof(BitMatrix64))
+                {
                     kind = NumericKind.U64;
+                    width = FixedWidth.W64;
+                }
+
+                if(kind.IsSome() && width.IsSome())
+                    return Moniker.Parse(concat(prefix, width.Format(), Moniker.SegSep, NumericType.signature(kind)));
             }
 
-            if(kind.IsSome())
-                id = concat("bm", kind.Width().ToString(), Moniker.SegSep, NumericType.signature(kind));
-            
-            return Moniker.Parse(id);            
+            return Moniker.Parse($"{prefix}err");                        
+                  
         }
     }
 

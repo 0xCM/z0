@@ -24,6 +24,8 @@ namespace Z0
 
         readonly IAsmFunctionFormatter GroupFormatter;
 
+        readonly ICilFormatter CilFormatter;
+
         public IAsmContext Context {get;}
 
         public string Catalog {get;}
@@ -42,13 +44,14 @@ namespace Z0
             this.DefaultFormatter = context.AsmFormatter();
             this.GroupFormatConfig = AsmFormatConfig.Default.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
             this.GroupFormatter = context.WithFormat(GroupFormatConfig).AsmFormatter();
+            this.CilFormatter = context.CilFormatter();
         }
 
         public AsmEmissionToken Save(AsmFunction src)
         {
             HexPath(src.Id).WriteText(src.Code.Format());
             DetailPath(src.Id).WriteText(DefaultFormatter.FormatDetail(src));
-            src.Cil.OnSome(cil => CilPath(src.Id).WriteText(cil.Format()));
+            src.Cil.OnSome(cil => CilPath(src.Id).WriteText(CilFormatter.Format(cil)));
             return AsmEmissionToken.Define(AsmUri.Define(Catalog, Subject, src.Id), src.Location);
         }
 
@@ -60,7 +63,7 @@ namespace Z0
             
         void Write(CilFunction src, StreamWriter dst)
         {
-            dst.Write(src.Format());
+            dst.Write(CilFormatter.Format(src));
             if(GroupFormatConfig.EmitSectionDelimiter)
                 dst.WriteLine(GroupFormatConfig.SectionDelimiter);
         }

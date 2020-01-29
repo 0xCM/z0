@@ -72,162 +72,43 @@ namespace Z0
         /// <param name="method">The operation method</param>
         Moniker IOpIdentityProvider.DefineIdentity(MethodInfo method)
         {            
-            if(method.GenericSlots().Length > 1)
-                return Moniker.Empty;
-
             if(method.IsOpenGeneric())
-                return OpIdentity.define(method.OpName(), 0, NumericKind.None, true, false);
-            else if(method.IsNonGeneric() && method.OpName() != method.Name)
-                return Moniker.Parse(method.OpName());
-            else if(method.IsSpanOp())
-                return FromSpanOp(method);
-            else if(method.IsNatOp())
-                return FromNatOp(method);
-            else if(method.IsVectorFactory())
-                return FromAny(method);
-            else if(method.IsVectorized())
-                return FromVectorized(method);
-            else if(method.IsBlocked())
-                return FromAny(method);
-            else if(method.IsOperator())
-                return FromPrimalOp(method);
-            else if(method.IsPredicate())
-                return FromPredicate(method);
-            else if(method.IsPrimalShift())
-                return FromShift(method);
-            else if(method.IsPrimalOp())
-                return FromPrimalFunc(method);
+                return GenericIdentity(method).Require();
             else
                 return FromAny(method);
         }
         
+        static string Variance(ParameterInfo src)
+        {
+            if(src.IsIn)
+                return parenthetical("in");
+            else if(src.IsOut)
+                return  parenthetical("out");
+            else if(src.ParameterType.IsRef())
+                return parenthetical("ref");
+            else
+                return string.Empty;
+        }
+
         static Moniker FromAny(MethodInfo method)
         {
             var id = method.OpName();
-            var argtypes = method.ParameterTypes(true).ToList();
-            var paramcount = argtypes.Count;
+            var argtypes = method.ParameterTypes(true).ToArray();
+            var args = method.GetParameters();
 
-            for(var i=0; i<paramcount; i++)
-            {
-                var arg = argtypes[i];                
+            for(var i=0; i<argtypes.Length; i++)
+            {                                
+                var argtype = argtypes[i];                
                 id += PartSep;
 
-                if(i == 0)
-                {
-                    if(method.IsConstructedGenericMethod)                 
-                        id += GenericIndicator;       
-                    
-                    if(method.IsBlocked())
-                        id += BlockIndicator;
-                }
+                if(i == 0 && method.IsConstructedGenericMethod)
+                    id += GenericIndicator;                           
 
-                id += TypeIdentity.Provider(arg).DefineIdentity(arg);
+                id += TypeIdentity.Provider(argtype).DefineIdentity(argtype);
+                id += Variance(args[i]);
             }
 
             return Moniker.Parse(id);
-        }
-        
-        static Moniker FromPrimalFunc(MethodInfo method)
-            => OpIdentity.define(method.OpName(), method.ParameterTypes().First().NumericKind(), method.IsConstructedGenericMethod);
-
-        /// <summary>
-        /// Derives a moniker for a primal operator
-        /// </summary>
-        /// <param name="method">The operation method</param>
-        static Moniker FromPrimalOp(MethodInfo method)
-            => OpIdentity.define(method.OpName(), method.ReturnType.NumericKind(), method.IsConstructedGenericMethod);
-
-        /// <summary>
-        /// Derives a moniker for a primal predicate
-        /// </summary>
-        /// <param name="method">The operation method</param>
-        static Moniker FromPredicate(MethodInfo method)
-            => OpIdentity.define(method.OpName(), method.ParameterTypes().First().NumericKind(), method.IsConstructedGenericMethod);
-
-        /// <summary>
-        /// Derives a moniker for primal shift/rot operator
-        /// </summary>
-        /// <param name="method">The operation method</param>
-        static Moniker FromShift(MethodInfo method)
-            => OpIdentity.define(method.OpName(), method.ParameterTypes().First().NumericKind(), method.IsConstructedGenericMethod);
-
-        /// <summary>
-        /// Derives a moniker for an operation over segmented domain(s)
-        /// </summary>
-        /// <param name="method">The operation method</param>
-        static Moniker FromVectorOp(MethodInfo method)
-        {
-            var param = method.ParameterTypes().First();       
-            var segkind = param.SuppliedGenericArguments().FirstOrDefault().NumericKind();         
-            return OpIdentity.segmented(method, param.Width(), segkind);
-        }
-
-        static Moniker FromSpanOp(MethodInfo method)
-        {
-            var param = method.ParameterTypes().First();       
-            var segkind = param.SuppliedGenericArguments().FirstOrDefault().NumericKind();         
-            return OpIdentity.segmented(method, param.Width(), segkind);
-        }
-
-        static Moniker FromNatOp(MethodInfo method)
-        {
-            var natvals = from t in method.ParameterTypes()
-                        where NatType.test(t)
-                        select concat(NatIndicator,NatType.value(t).ToString());
-            var natspec = string.Join(SegSep, natvals);
-            var name = concat(method.OpName(), AsciSym.Tilde, natspec);
-            var kind = method.TypeParameterKind(n1);
-            var width = kind.Width();                               
-            return OpIdentity.define(name, width, kind, method.IsConstructedGenericMethod, false);
-        }
-
-        /// <summary>
-        /// Derives a moniker for an operation over segmented types
-        /// </summary>
-        /// <param name="method">The operation method</param>
-        static Moniker FromVectorized(MethodInfo method)
-        {
-            if(method.IsVectorOp())
-                return FromVectorOp(method);
-
-            var id = method.OpName() + PartSep;
-            var parameters = method.GetParameters().Where(p => !p.IsImmediate());
-            var paramtypes = parameters.Select(p => p.ParameterType.EffectiveType()).ToArray();
-            
-            if(method.IsConstructedGenericMethod)
-            {
-                id += PartSep;
-                id += Moniker.GenericIndicator;
-            }
-            
-            for(var i=0; i<paramtypes.Length; i++)
-            {
-                if(i != 0)                    
-                    id += PartSep;
-             
-                var arg = paramtypes[i];                
-                if(arg.IsSegmented())
-                {
-                    var celltype = arg.SuppliedGenericArguments().Single();
-                    var w = (int)arg.Width();
-                    id += $"{w}{SegSep}{(int)celltype.Width()}{celltype.NumericKind().Indicator()}";
-                }
-                else if(NatType.test(arg))
-                    id += NatType.name(arg);                
-                else if(NumericType.test(arg))
-                    id += NumericType.signature(arg);
-                else if(arg.IsEnum)
-                    id += $"enum{NumericType.signature(arg.GetEnumUnderlyingType())}";
-                else if(arg.IsSpan())
-                {
-                    var celltype = arg.SuppliedGenericArguments().Single();
-                    id += $"span{NumericType.signature(celltype)}";
-                }
-                else
-                    id += arg.Name;                    
-            }
-
-            return Moniker.Parse(id);
-        }
+        }        
     }
 }

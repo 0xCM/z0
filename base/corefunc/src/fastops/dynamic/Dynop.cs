@@ -15,12 +15,6 @@ namespace Z0
     using static zfunc;    
     using static As;
 
-    public interface IDynOp<K> 
-        where K : IHKType
-    {
-        
-    }
-
     public static class Dynop
     {
         public static DynamicMethod method(string name, Type owner, Type @return, params Type[] args)

@@ -58,7 +58,6 @@ namespace Z0
 
         public bool IsPointer {get;}
         
-
         string Modifier
             => IsIn ? "in " : IsOut ? "out " : IsByRef ? "ref " : string.Empty;
 
@@ -67,7 +66,5 @@ namespace Z0
  
         public override string ToString()
             => Format();
-
-
     }
 }

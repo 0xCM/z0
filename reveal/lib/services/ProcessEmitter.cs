@@ -42,8 +42,9 @@ namespace Z0
         {
             using var writer = EmissionWriter(name, "il", false);
             writer.WriteLine($"// {now().ToLexicalString()}");
+            var formatter = Context.CilFormatter();
             foreach(var f in functions)
-                writer.WriteLine(f.Cil.MapValueOrElse(cil => cil.Format(), () => string.Empty));
+                writer.WriteLine(f.Cil.MapValueOrElse(cil => formatter.Format(cil), () => string.Empty));
         }
 
         StreamWriter EmissionWriter(string name, string extension, bool timestamped)

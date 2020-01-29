@@ -94,19 +94,19 @@ namespace Z0
 
         public void classify_block_width()
         {
-            Claim.eq(BlockWidth.W16, BlockedType.width(typeof(Block16<byte>)));
-            Claim.eq(BlockWidth.W32, BlockedType.width(typeof(Block32<byte>)));
-            Claim.eq(BlockWidth.W64, BlockedType.width(typeof(Block64<byte>)));
-            Claim.eq(BlockWidth.W128, BlockedType.width(typeof(Block128<byte>)));
-            Claim.eq(BlockWidth.W256, BlockedType.width(typeof(Block256<byte>)));
-            Claim.eq(BlockWidth.W512, BlockedType.width(typeof(Block512<byte>)));
+            Claim.eq(FixedWidth.W16, BlockedType.width(typeof(Block16<byte>)));
+            Claim.eq(FixedWidth.W32, BlockedType.width(typeof(Block32<byte>)));
+            Claim.eq(FixedWidth.W64, BlockedType.width(typeof(Block64<byte>)));
+            Claim.eq(FixedWidth.W128, BlockedType.width(typeof(Block128<byte>)));
+            Claim.eq(FixedWidth.W256, BlockedType.width(typeof(Block256<byte>)));
+            Claim.eq(FixedWidth.W512, BlockedType.width(typeof(Block512<byte>)));
 
-            Claim.eq(BlockWidth.W16, BlockedType.width(typeof(Block16<>)));
-            Claim.eq(BlockWidth.W32, BlockedType.width(typeof(Block32<>)));
-            Claim.eq(BlockWidth.W64, BlockedType.width(typeof(Block64<>)));
-            Claim.eq(BlockWidth.W128, BlockedType.width(typeof(Block128<>)));
-            Claim.eq(BlockWidth.W256, BlockedType.width(typeof(Block256<>)));
-            Claim.eq(BlockWidth.W512, BlockedType.width(typeof(Block512<>)));
+            Claim.eq(FixedWidth.W16, BlockedType.width(typeof(Block16<>)));
+            Claim.eq(FixedWidth.W32, BlockedType.width(typeof(Block32<>)));
+            Claim.eq(FixedWidth.W64, BlockedType.width(typeof(Block64<>)));
+            Claim.eq(FixedWidth.W128, BlockedType.width(typeof(Block128<>)));
+            Claim.eq(FixedWidth.W256, BlockedType.width(typeof(Block256<>)));
+            Claim.eq(FixedWidth.W512, BlockedType.width(typeof(Block512<>)));
         }
 
         public void test_block_16()

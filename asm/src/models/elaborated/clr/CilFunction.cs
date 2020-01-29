@@ -44,33 +44,5 @@ namespace Z0
             this.Sig = sig;
             return this;
         }
-
-        public string FormatBody()
-        {
-            var body = text();
-            iter(Instructions, i => body.AppendLine(i.ToString()));
-            return body.ToString();
-        }
-
-        public string Format()
-        {
-            var rendered = text();
-
-            var margin = new string(AsciSym.Space,4);
-            rendered.AppendLine($"Id := {MethodId}, Name := {FullName}".Comment());
-            Sig.TryMap(s => rendered.AppendLine(s.Format().Comment()));
-            rendered.AppendLine(ImplSpec.ToString().Comment());            
-            rendered.AppendLine(Sig.MapValueOrElse(s => s.Format(), () => string.Empty));
-            rendered.AppendLine(AsciSym.LBrace);                    
-            
-            foreach(var i in Instructions)
-                rendered.AppendLine(margin + i.ToString());
-            rendered.AppendLine(AsciSym.RBrace);                        
-            
-            return rendered.ToString();
-        }
-
-        public override string ToString()
-            => Format();
     }
 }

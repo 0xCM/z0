@@ -19,11 +19,6 @@ namespace Z0
             this.Kind = kind;
         }
 
-        public TernaryBitLogicOpAttribute(TernaryBitLogicKind kind, bool byref, OpFacetModifier modifier = OpFacetModifier.None)
-            : base( (uint)kind,kind.Format(),byref, modifier)
-        {
-            this.Kind = kind;
-        }
 
         public TernaryBitLogicKind Kind {get;}
 

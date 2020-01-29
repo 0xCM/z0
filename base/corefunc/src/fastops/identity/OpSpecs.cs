@@ -73,6 +73,5 @@ namespace Z0
         
         static Option<Moniker> genericid(MethodInfo m)
             => OpIdentity.Provider.GenericIdentity(m);
-
     }
 }

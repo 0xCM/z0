@@ -35,32 +35,32 @@ namespace Z0
         /// <summary>
         /// A 16-bit block
         /// </summary>
-        B16 = BlockWidth.W16,
+        B16 = FixedWidth.W16,
 
         /// <summary>
         /// A 32-bit block
         /// </summary>
-        B32 = BlockWidth.W32,
+        B32 = FixedWidth.W32,
 
         /// <summary>
         /// A 64-bit block
         /// </summary>
-        B64 = BlockWidth.W64,
+        B64 = FixedWidth.W64,
 
         /// <summary>
         /// A 128-bit block
         /// </summary>
-        B128 = BlockWidth.W128,
+        B128 = FixedWidth.W128,
 
         /// <summary>
         /// A 256-bit block
         /// </summary>
-        B256 = BlockWidth.W256,
+        B256 = FixedWidth.W256,
 
         /// <summary>
         /// A 512-bit block
         /// </summary>
-        B512 = BlockWidth.W512,
+        B512 = FixedWidth.W512,
 
         /// <summary>
         /// A block defined over 8-bit unsigned segments

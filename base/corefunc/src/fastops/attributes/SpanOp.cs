@@ -11,13 +11,17 @@ namespace Z0
 
     using static zfunc;
 
-    public class IdentityProviderAttribute : Attribute
+    /// <summary>
+    /// Identifies operations that accept one or more spans and computes a result that is stored in a caller-supplied target span
+    /// </summary>
+    public class SpanOpAttribute : OpAttribute
     {
-        public IdentityProviderAttribute(Type host)
+        public SpanOpAttribute(OpFacetModifier modifier = OpFacetModifier.None)
+            : base(modifier)
         {
-            this.Host = host;
+
         }
 
-        public Type Host;
     }
+
 }

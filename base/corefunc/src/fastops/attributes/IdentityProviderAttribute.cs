@@ -3,19 +3,22 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Linq;
     using System.Collections.Generic;
-    using AsmSpecs;
 
     using static zfunc;
 
-    public interface ICilWriter
+    public class IdentityProviderAttribute : Attribute
     {
-        FilePath Target {get;}        
-        
-        Option<Exception> WriteCil(IEnumerable<AsmFunction> functions);     
+        public IdentityProviderAttribute(Type host)
+        {
+            this.Host = host;
+        }
 
-        Option<Exception> WriteCil(AsmFunctionGroup src);           
+        public Type Host;
     }
+
 }

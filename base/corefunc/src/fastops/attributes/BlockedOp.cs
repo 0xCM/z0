@@ -19,24 +19,5 @@ namespace Z0
         {
 
         }
-
-        public BlockedOpAttribute(string name, OpFacetModifier modifier = OpFacetModifier.None)
-            : base(name, modifier)
-        {
-
-        }
-
-        public BlockedOpAttribute(bool byref, OpFacetModifier modifier = OpFacetModifier.None)
-            : base(byref, modifier)
-        {
-
-        }
-
-        public BlockedOpAttribute(string name, bool byref, OpFacetModifier modifier = OpFacetModifier.None)
-            : base(name,byref, modifier)
-        {
-
-        }
-
     }
 }

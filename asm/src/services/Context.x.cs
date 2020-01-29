@@ -151,6 +151,8 @@ namespace Z0
             }
         }
 
+        public static ICilFormatter CilFormatter(this IAsmContext context)
+            => Z0.CilFormatter.Create(context);
     }
 
 }

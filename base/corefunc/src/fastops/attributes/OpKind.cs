@@ -15,12 +15,6 @@ namespace Z0
             this.Id = id;
         }
 
-        protected OpKindAttribute(uint id, string name, bool byref, OpFacetModifier modifier = OpFacetModifier.None)
-            : base(name, byref, modifier)        
-        {
-            this.Id = id;
-        }
-
         public abstract string KindName {get;}
         
         public uint Id {get;}        

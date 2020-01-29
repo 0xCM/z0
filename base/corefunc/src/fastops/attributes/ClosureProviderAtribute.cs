@@ -6,18 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Collections.Generic;
 
     using static zfunc;
 
-
-    public class NumericTypeSig
+    public class ClosureProviderAttribute : Attribute
     {
-        public NumericKind Kind {get; set;}
+        public ClosureProviderAttribute(Type host)
+        {
+            this.Host = host;
+        }
 
-        public string SystemName {get; set;}
-
-        public string Keyword {get;}
-
-    }
+        public Type Host;
+    }    
 
 }

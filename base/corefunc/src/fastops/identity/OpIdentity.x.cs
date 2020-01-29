@@ -24,43 +24,7 @@ namespace Z0
         /// <param name="m">The source method</param>
         public static string OpName(this MethodInfo m)
             => OpIdentity.opname(m);
-
-        /// <summary>
-        /// Specifies the operation name
-        /// </summary>
-        public static Moniker WithName(this Moniker src, string name)
-            => OpIdentity.segmented(name, src.SegmentedWidth, src.PrimalKind, src.IsGeneric, src.IsAsm);
-
-        /// <summary>
-        /// Enables the assembly indicator
-        /// </summary>
-        public static Moniker WithAsm(this Moniker src)
-            => src.IsAsm ? src : OpIdentity.segmented(src.Name, src.SegmentedWidth, src.PrimalKind, src.IsGeneric, true);
         
-        /// <summary>
-        /// Enables the generic indicator
-        /// </summary>
-        public static Moniker WithGeneric(this Moniker src)
-            => OpIdentity.segmented(src.Name, src.SegmentedWidth, src.PrimalKind, true, src.IsAsm);
-
-        /// <summary>
-        /// Disables the generic indicator if enabled
-        /// </summary>
-        public static Moniker WithoutGeneric(this Moniker src)
-            => OpIdentity.segmented(src.Name, src.SegmentedWidth, src.PrimalKind, false, src.IsAsm);
-
-        /// <summary>
-        /// Specifies the segmented width
-        /// </summary>
-        public static Moniker WithWidth(this Moniker src, int w)
-            => OpIdentity.define(src.Name, w, src.PrimalKind, src.IsGeneric, src.IsAsm);
-
-        /// <summary>
-        /// Specifies the primal kind
-        /// </summary>
-        public static Moniker WithKind(this Moniker src, NumericKind k)
-            => OpIdentity.segmented(src.Name, src.SegmentedWidth, k, src.IsGeneric, src.IsAsm);
-
         /// <summary>
         /// Clears the immediate attached to the moniker, if any
         /// </summary>
@@ -78,6 +42,5 @@ namespace Z0
 
         public static Moniker WithImm(this Moniker src, byte imm)
             => Moniker.Parse(concat(src.WithoutImm().Text, $"{Moniker.SuffixSep}{Moniker.ImmIndicator}{imm}"));
-
     }
 }

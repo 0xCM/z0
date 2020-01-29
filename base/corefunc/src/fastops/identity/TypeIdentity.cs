@@ -57,9 +57,7 @@ namespace Z0
             => TypeIdentityProviders.TryFind(t);
         
         static void Cache(Type t, ITypeIdentityProvider provider)
-        {
-            TypeIdentityProviders.TryAdd(t,provider);
-        }
+            => TypeIdentityProviders.TryAdd(t,provider);
 
         /// <summary>
         /// Creates a type identity provider from a host type that realizes the required interface, if possible;
@@ -90,7 +88,6 @@ namespace Z0
             return Moniker.Parse(id);                        
         } 
 
-
         static bool HasDirectAlgorithm(Type t)
             => NatType.test(t) || NumericType.test(t) || t.IsEnum || t.IsSpan() || t.IsNatSpan();
 
@@ -108,7 +105,6 @@ namespace Z0
                 return NatSpanType.id(t).MapRequired(x => x.Text);                
             else
                 return $"ed_{t.Name}";
-
         }
 
         static string EnumTypeId(Type arg)
@@ -121,27 +117,26 @@ namespace Z0
             => NumericType.signature(arg);
 
         static string NumericSpanTypeId(Type arg)
-            => $"span{NumericType.signature(arg)}";
+            => $"span{NumericType.signature(arg.GetGenericArguments().Single())}";
 
         static bool HasSpecializedProvider(Type arg)
             => arg.IsAttributed<IdentityProviderAttribute>();
 
-        static string SegmentedId(Type t, Type arg)
+        static string SegIndicator(Type t)
         {
-            var id = string.Empty;
-            var w = (int)t.Width();
-            if(w != 0)
-            {
-                id += $"{w}";
-                var segwidth = (int)arg.Width();
-                if(segwidth != 0)
-                    id += $"{Moniker.SegSep}{segwidth}{arg.NumericKind().Indicator()}";
-            }
-            else 
-                id += "~ew";                
-            return id;
+            var segindicator = string.Empty;
+            if(t.IsBlocked())
+                segindicator += Moniker.BlockIndicator;
+            else if(t.IsVector())
+                segindicator += Moniker.VectorIndicator;
+            else
+                segindicator = "segerr";
+            return segindicator;
         }
-
+        
+        static string SegmentedId(Type t, Type arg)
+            => $"{SegIndicator(t)}{t.Width().Format()}{Moniker.SegSep}{arg.Width().Format()}{arg.NumericKind().Indicator()}";
+            
         static string ConsructedId(Type t)
         {
             var id = string.Empty;
@@ -155,8 +150,6 @@ namespace Z0
                 return SegmentedId(t, arg);
             else 
                 return $"~eg_{t.Name}_{arg.Name}";                
-        }
-   
+        }   
     }
-
 }

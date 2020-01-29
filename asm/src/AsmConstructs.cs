@@ -8,6 +8,23 @@ namespace Z0.AsmSpecs
     using System.Runtime.CompilerServices;
 
     using static zfunc;
+    using static ConstructIdentifier;
+
+    public static class ConstructIdentifier
+    {
+        public const string Alloc = nameof(Alloc);
+    }
+
+    public class ConstructIdAttribute : Attribute
+    {
+        public ConstructIdAttribute(string id)
+        {
+            this.Id = id;
+        }
+
+        public string Id {get;}
+
+    }
 
     public static class AsmConstructs
     {
@@ -27,9 +44,10 @@ namespace Z0.AsmSpecs
             return sum;
         }
 
-        [MethodImpl(NotInline), Op]
-        public static Span<byte> span_alloc_8u(int len)
-            => new byte[len];
+        [MethodImpl(NotInline), Op, ConstructId(Alloc)]
+        public static Span<uint> alloc_32u(int len)
+            => new uint[len];
+
 
         [MethodImpl(NotInline), Op]
         public static uint compute_32u(BinaryBitLogicKind op, uint a, uint b)            
