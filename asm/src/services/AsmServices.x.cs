@@ -22,8 +22,7 @@ namespace Z0
         static IEnumerable<AsmInstructionList> GetInstructions(IAsmCodeArchive archive)
         {            
             var decoder = archive.Context.Decoder();
-            foreach(var file in archive.Files)
-            foreach(var codeblock in archive.Read(file))
+            foreach(var codeblock in archive.Read())
                 yield return decoder.DecodeInstructions(codeblock);                
         }
 
@@ -39,7 +38,13 @@ namespace Z0
                         .OnNone(() => print(CatalogEmissionFailed(cat)));
             var lr = AsmReports.CreateMemberLocationReport(cat.AssemblyId, cat.DeclaringAssembly);
             lr.Save().Require();
-
         }
+
+        public static R Eval<X0,X1,R>(this IAsmExecBuffer buffer, AsmCode src, X0 x0, X1 x1, R r = default)
+            where X0 : unmanaged, IFixed
+            where X1 : unmanaged, IFixed
+            where R : unmanaged, IFixed         
+                => buffer.F<X0,X1,R>(src)(x0,x1);
+
     }
 }

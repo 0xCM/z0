@@ -6,20 +6,17 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
-    using static zfunc;
 
     using Z0.AsmSpecs;
 
-    readonly struct AsmV128ImmUnaryCapture<T> : IAsmImmCapture<T>
+    using static zfunc;
+
+    readonly struct AsmV128ImmUnaryCapture<T> : IAsmImmUnaryCapture<T>
         where T : unmanaged
     {
 
         [MethodImpl(Inline)]
-        public static IAsmImmCapture<T> Create(IAsmContext context, IVUnaryImm8Resolver128<T> resolver)
+        public static IAsmImmUnaryCapture<T> Create(IAsmContext context, IVUnaryImm8Resolver128<T> resolver)
             => new AsmV128ImmUnaryCapture<T>(context, resolver);
 
         readonly IVUnaryImm8Resolver128<T> Resolver;
@@ -34,7 +31,7 @@ namespace Z0
 
         }
         
-        public AsmFunction Capture(byte imm8)
+        public AsmFunction CaptureUnary(byte imm8)
         {
             var moniker = Resolver.Moniker;
             var f = Resolver.@delegate(imm8);
@@ -43,7 +40,7 @@ namespace Z0
         }
     }
 
-    readonly struct AsmV256ImmUnaryCapture<T> : IAsmImmCapture<T>
+    readonly struct AsmV256ImmUnaryCapture<T> : IAsmImmUnaryCapture<T>
         where T : unmanaged
     {
          public IAsmContext Context {get;}
@@ -51,7 +48,7 @@ namespace Z0
         readonly IVUnaryImm8Resolver256<T> Resolver;
 
         [MethodImpl(Inline)]
-        public static IAsmImmCapture<T> Create(IAsmContext context, IVUnaryImm8Resolver256<T> resolver)
+        public static IAsmImmUnaryCapture<T> Create(IAsmContext context, IVUnaryImm8Resolver256<T> resolver)
             => new AsmV256ImmUnaryCapture<T>(context,resolver);
 
 
@@ -62,7 +59,7 @@ namespace Z0
             this.Context = context;
         }
 
-        public AsmFunction Capture(byte imm8)
+        public AsmFunction CaptureUnary(byte imm8)
         {
             var moniker = Resolver.Moniker;
             var f = Resolver.@delegate(imm8);

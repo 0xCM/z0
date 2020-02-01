@@ -104,7 +104,7 @@ namespace Z0
                 => $"{GetType().Name}/{moniker(root,w,t)}";
 
         protected static Moniker SubjectId(string opname, NumericKind kind)
-            => OpIdentity.define($"{opname}_subject",kind);
+            => OpIdentities.define($"{opname}_subject",kind);
 
         protected static Moniker SubjectId<T>(string opname, T t = default)
             where T : unmanaged
@@ -116,6 +116,26 @@ namespace Z0
 
         protected virtual bool TraceEnabled
             => true;
+
+        /// <summary>
+        /// Submits a diagnostic message to the message queue without including caller information
+        /// </summary>
+        /// <param name="msg">The source message</param>
+        protected void Trace(object msg)
+        {
+            if(TraceEnabled)
+                PostMessage(AppMsg.Define($"{msg}",SeverityLevel.Info));
+        }
+
+        /// <summary>
+        /// Submits a diagnostic message to the message queue without including caller information
+        /// </summary>
+        /// <param name="msg">The source message</param>
+        protected void Trace(object title, object msg)
+        {
+            if(TraceEnabled)
+                PostMessage(AppMsg.Define($"{title} - {msg}",SeverityLevel.Info));
+        }
 
         protected void Trace(string title, string msg, int? tpad = null, SeverityLevel? severity = null)
         {
@@ -144,7 +164,7 @@ namespace Z0
         /// <param name="msg">The source message</param>
         /// <param name="severity">The diagnostic severity level that, if specified, 
         /// replaces the exising source message severity prior to queue submission</param>
-        protected void Trace(object msg, SeverityLevel severity, [Caller] string caller = null)
+        protected void TraceCaller(object msg, SeverityLevel severity, [Caller] string caller = null)
         {
             if(TraceEnabled)
                 PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}: {msg}",severity));
@@ -154,21 +174,12 @@ namespace Z0
         /// Submits a diagnostic message to the message queue
         /// </summary>
         /// <param name="msg">The source message</param>
-        protected void Trace(object msg, [Caller] string caller = null)
+        protected void TraceCaller(object msg, [Caller] string caller = null)
         {
             if(TraceEnabled)
                 PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}: {msg}",SeverityLevel.Info));
         }
 
-        /// <summary>
-        /// Submits a diagnostic message to the message queue without including caller information
-        /// </summary>
-        /// <param name="msg">The source message</param>
-        protected void TraceInfo(object msg)
-        {
-            if(TraceEnabled)
-                PostMessage(AppMsg.Define($"{msg}",SeverityLevel.Info));
-        }
 
         /// <summary>
         /// Submits a diagnostic message to the message queue
@@ -176,7 +187,7 @@ namespace Z0
         /// <param name="msg">The source message</param>
         /// <param name="severity">The diagnostic severity level that, if specified, 
         /// replaces the exising source message severity prior to queue submission</param>
-        protected void Trace(string title, object msg, [Caller] string caller = null)
+        protected void TraceCaller(string title, object msg, [Caller] string caller = null)
         {
             if(TraceEnabled)
                 PostMessage(AppMsg.Define($"{GetType().DisplayName()}/{caller}/{title}: {msg}",SeverityLevel.Info));

@@ -20,4 +20,33 @@ namespace Z0
 
     }
 
+    /// <summary>
+    /// Identifies a parameter that accepts an immediate shift count
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Parameter)]
+    public class ShiftAttribute : ImmAttribute
+    {
+
+        public ShiftAttribute(bool bits)
+        {
+            if(bits)
+            {
+                Bits = true;
+                Bytes = false;
+            }
+            else
+            {
+                Bits = false;
+                Bytes = true;
+            }
+        }
+
+        public ShiftAttribute()
+            : this(true)
+        {}
+
+        public bool Bits {get;}
+
+        public bool Bytes {get;}
+    }
 }

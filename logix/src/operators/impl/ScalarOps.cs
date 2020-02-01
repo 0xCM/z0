@@ -8,7 +8,6 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
 
     using static zfunc;    
-    using static TernaryBitLogicKind;
     using static As;
 
     [OpHost("scalar.ops")]
@@ -488,295 +487,295 @@ namespace Z0.Logix
                 => and(not(b), or(not(a),c));
 
         // (a xor b) and (b xor c)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X24)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f24<T>(T a, T b, T c)
             where T : unmanaged
                 => and(xor(a,b), xor(b,c));
 
         // (not ((A and B)) and (A xor (C xor 1)))
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers), TernaryBitLogicOp(X25)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f25<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(and(a,b)), xor(a, not(c)));
 
         // not ((A and B)) and (B xor C)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers), TernaryBitLogicOp(X26)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f26<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(and(a,b)),xor(b,c));
 
         //C ? not (B) : not (A)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers), TernaryBitLogicOp(X27)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f27<T>(T a, T b, T c)
             where T : unmanaged
                 => select(c,not(b), not(a));
 
         //C and (B xor A)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers), TernaryBitLogicOp(X28)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f28<T>(T a, T b, T c)
             where T : unmanaged
                 => and(c,xor(b,a));
 
         // C ? (B xor A) : (B nor A)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers), TernaryBitLogicOp(X29)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f29<T>(T a, T b, T c)
             where T : unmanaged
                 => select(c, xor(b,a),nor(b,a));
 
         // C and (B nand A)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers), TernaryBitLogicOp(X2A)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f2a<T>(T a, T b, T c)
             where T : unmanaged
                 => and(c,nand(b,a));
 
         // C ? (B nand A) : (B nor A)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers), TernaryBitLogicOp(X2B)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f2b<T>(T a, T b, T c)
             where T : unmanaged
                 => select(c,nand(b,a), nor(b,a));
 
         // (B or C) and (A xor B)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers), TernaryBitLogicOp(X2C)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f2c<T>(T a, T b, T c)
             where T : unmanaged
                 => and(or(b,c), xor(a,b));
 
         // A xor (B or not (C))
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers), TernaryBitLogicOp(X2D)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f2d<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(a, or(b, not(c)));
 
         // (B or C) xor (A and B)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers), TernaryBitLogicOp(X2E)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f2e<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(or(b,c),and(a,b));
 
         // not (A) or (not (B) and C)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers), TernaryBitLogicOp(X2F)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f2f<T>(T a, T b, T c)
             where T : unmanaged
                 => or(not(a),(and(not(b),c)));
 
         // a and not(b)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X30)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f30<T>(T a, T b, T c)
             where T : unmanaged
                 => cnonimpl(a,b);
 
         // not (B) and (A or (C xor 1))
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X31)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f31<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(b), or(a,not(c)));
 
         //not (B) and (A or C)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X32)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f32<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(b),or(a,c));
 
         // not (B)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X33)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f33<T>(T a, T b, T c)
             where T : unmanaged
                 => not(b);
 
         // not ((B and C)) and (A xor B)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X34)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f34<T>(T a, T b, T c)
             where T : unmanaged
             => and(not(and(b,c)), xor(a,b));
 
         // A ? not (B) : not (C)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X35)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f35<T>(T a, T b, T c)
             where T : unmanaged
             => select(a,not(b),not(c));
 
         // B xor (A or C)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X36)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f36<T>(T a, T b, T c)
             where T : unmanaged
             => xor(b,or(a,c));
 
         // B nand (A or C)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X37)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f37<T>(T a, T b, T c)
             where T : unmanaged
             => nand(b,or(a,c));
 
         // (A or C) and (A xor B)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X38)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f38<T>(T a, T b, T c)
             where T : unmanaged
             => and(or(a,c), xor(a,b));
 
         // B xor (A or (C xor 1))
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X39)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f39<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(b, or(a, not(c)));
 
         // A ? not (B) : C
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X3A)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f3a<T>(T a, T b, T c)
             where T : unmanaged
             => select(a, not(b), c);
 
         // (not (A) and C) or (B xor 1)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X3B)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f3b<T>(T a, T b, T c)
             where T : unmanaged
             => or(and(not(a),c),xor1(b));
 
         // B xor A
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X3C)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f3c<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(b,a);
 
         // ((A xor B) or (A nor C))
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X3D)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f3d<T>(T a, T b, T c)
             where T : unmanaged
             => or(xor(b,a),nor(a,c));
 
         // (not (A) and C) or (A xor B)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X3E)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f3e<T>(T a, T b, T c)
             where T : unmanaged
                 => or(and(not(a),c),xor(a,b));
 
         // B nand A
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X3F)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f3f<T>(T a, T b, T c)
             where T : unmanaged
             => nand(b,a);
 
         // (not (C) and A) and B
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X40)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f40<T>(T a, T b, T c)
             where T : unmanaged
                 => and(and(not(c),a),b);
 
         // C nor (B xor A)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X41)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f41<T>(T a, T b, T c)
             where T : unmanaged
             => nor(c,xor(b,a));
 
         // (A xor C) and (B xor C)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X42)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f42<T>(T a, T b, T c)
             where T : unmanaged
                 => and(xor(a,c),xor(b,c));
 
         // not ((A and C)) and (A xor (B xor 1))
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X43)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f43<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(and(a,c)), xor(a,xor1(b)));
 
         // B and not (C)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X44)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f44<T>(T a, T b, T c)
             where T : unmanaged
                 => cnonimpl(b,c);
 
         // not (C) and ((A xor 1) or B)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X45)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f45<T>(T a, T b, T c)
             where T : unmanaged
             => and(not(c), or(xor1(a), b));
 
         // not ((A and C)) and (B xor C)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X46)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f46<T>(T a, T b, T c)
             where T : unmanaged
             => and(not(and(a,c)),xor(b,c));
 
         // B ? not (C) : not (A)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X47)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f47<T>(T a, T b, T c)
             where T : unmanaged
             => select(b,not(c),not(a));
 
         // B and (A xor C)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X48)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f48<T>(T a, T b, T c)
             where T : unmanaged
             => and(b,xor(a,c));
 
         // B ? (A xor C) : (A nor C)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X49)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f49<T>(T a, T b, T c)
             where T : unmanaged
             => select(b,xor(a,c),nor(a,c));
 
         // (B or C) and (A xor C)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X4A)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f4a<T>(T a, T b, T c)
             where T : unmanaged
                 => and(or(b,c), xor(a,c));
 
          // A xor (not (B) or C)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X4B)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f4b<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(a, or(not(b), c));
 
         // B and (A nand C)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X4C)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f4c<T>(T a, T b, T c)
             where T : unmanaged
                 => and(b, nand(a,c));
 
         // B ? (A nand C) : (A nor C)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X4D)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f4d<T>(T a, T b, T c)
             where T : unmanaged
                 => select(b, nand(a,c),nor(a,c));
 
         // C ? not (A) : B
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X4E)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f4e<T>(T a, T b, T c)
             where T : unmanaged
                 => select(c, not(a), b);
 
         // not (A) or (B and not (C))
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X4F)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f4f<T>(T a, T b, T c)
             where T : unmanaged
                 => or(not(a),cnonimpl(b,c));
 
         // A and not (C)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X50)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f50<T>(T a, T b, T c)
             where T : unmanaged
                 => cnonimpl(a,c);
 
         // not (C) and (A or (B xor 1))
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X51)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f51<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(c),or(a,xor1(b)));
 
         // not ((B and C)) and (A xor C)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X52)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f52<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(and(b,c)),xor(a,c));
 
         // A ? not (C) : not (B)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X53)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f53<T>(T a, T b, T c)
             where T : unmanaged
                 => select(a, not(c), not(b));
 
         // not (C) and (A or B)
-        [MethodImpl(Inline), NumericClosures(NumericKind.Integers),TernaryBitLogicOp(X54)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static T f54<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(c), or(a,b));

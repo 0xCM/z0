@@ -37,11 +37,18 @@ namespace Z0
             };
 
         /// <summary>
+        /// Determines the width of the represented kind in bits
+        /// </summary>
+        /// <param name="k">The kind to examine</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static FixedWidth WidthKind(this NumericKind k)
+            => (FixedWidth)(ushort)k;
+
+        /// <summary>
         /// Returns a kind-identified system type if possible; throws an exception otherwise
         /// </summary>
         /// <param name="k">The identifying kind</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Type ToPrimalType(this NumericKind k)
+        static Type ToPrimalType(this NumericKind k)
             => k switch {
                 U8 => typeof(byte),
                 I8 => typeof(sbyte),
@@ -123,7 +130,6 @@ namespace Z0
         /// <param name="k">The primal kind</param>
         public static IEnumerable<Type> PrimalTypes(this NumericKind k)
             => k.DistinctKinds().Select(x => x.ToPrimalType());         
-
  
         /// <summary>
         /// Determines whether the type is a (memory) reference

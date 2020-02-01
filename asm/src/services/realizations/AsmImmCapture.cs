@@ -14,55 +14,75 @@ namespace Z0
 
     using static zfunc;
 
-    readonly struct AsmImmUnaryCapture : IAsmImmCapture
-    {        
-        [MethodImpl(Inline)]
-        public static IAsmImmCapture Create(IAsmContext context, MethodInfo src, Moniker baseid)
-            => new AsmImmUnaryCapture(context.WithEmptyClrIndex(), src,baseid);
 
+    static class AsmImmCapture
+    {
+        public static IAsmImmCapture UnaryCapture(IAsmContext context, MethodInfo src, Moniker baseid)
+            => AsmImmUnaryCapture.Create(context,src,baseid);
+
+        public static IAsmImmCapture BinaryCapture(IAsmContext context, MethodInfo src, Moniker baseid)
+            => AsmImmBinaryCapture.Create(context,src,baseid);
+
+    }
+
+    abstract class AsmImmCapture<T> : IAsmImmCapture
+        where T : AsmImmCapture<T>
+    {
         public IAsmContext Context {get;}
         
-        readonly MethodInfo Method;
+        protected readonly MethodInfo Method;
 
-        readonly Moniker BaseId;
+        protected readonly Moniker BaseId;
+
+        protected readonly IAsmDecoder Decoder;
+
 
         [MethodImpl(Inline)]
-        AsmImmUnaryCapture(IAsmContext context, MethodInfo method, Moniker baseid)
+        protected AsmImmCapture(IAsmContext context, MethodInfo method, Moniker baseid)
         {            
             this.Context = context;
             this.Method = method;
             this.BaseId = baseid;
+            this.Decoder = context.Decoder();
         }
 
-        public AsmFunction Capture(byte imm)
-        {
-            var decoder = Context.Decoder();
-            var d = UnaryDelegates(imm).Single();
-            return decoder.DecodeFunction(d);
+        public abstract AsmFunction Capture(byte imm8);
+    }    
+
+    sealed class AsmImmUnaryCapture : AsmImmCapture<AsmImmUnaryCapture>
+    {
+        [MethodImpl(Inline)]
+        public static IAsmImmCapture Create(IAsmContext context, MethodInfo src, Moniker baseid)
+            => new AsmImmUnaryCapture(context.WithEmptyClrIndex(), src,baseid);
+
+        [MethodImpl(Inline)]
+        AsmImmUnaryCapture(IAsmContext context, MethodInfo method, Moniker baseid)
+            : base(context,method,baseid)
+        {            
+
         }
 
-        public IEnumerable<AsmFunction> Capture(params byte[] immediates)
-        {
-            var decoder = Context.Decoder();
-            foreach(var d in UnaryDelegates(immediates))
-                yield return decoder.DecodeFunction(d);
-        }
+        public override AsmFunction Capture(byte imm)
+            => Decoder.DecodeFunction(DynopImm.UnaryOp(HK.vk(), Method, BaseId, imm));
 
-        IEnumerable<DynamicDelegate> UnaryDelegates(params byte[] immediates)
-        {
-            (var celltype, var width) = Method.ParameterTypes()
-                    .Where(p => p.IsVector())
-                    .Select(x => (x.SuppliedGenericArguments().Single(),x.Width()))
-                    .FirstOrDefault();            
-
-            var factory = width switch{
-                FixedWidth.W128 => Dynop.unaryfactory(HK.vk128(), BaseId, Method, celltype),
-                FixedWidth.W256 => Dynop.unaryfactory(HK.vk256(), BaseId, Method, celltype),
-                _ =>throw new NotSupportedException(width.ToString())
-            };
-                
-            foreach(var imm in immediates)            
-                yield return factory(imm);    
-        }                    
     }
+
+    sealed class AsmImmBinaryCapture : AsmImmCapture<AsmImmBinaryCapture>
+    {
+        [MethodImpl(Inline)]
+        public static IAsmImmCapture Create(IAsmContext context, MethodInfo src, Moniker baseid)
+            => new AsmImmBinaryCapture(context.WithEmptyClrIndex(), src,baseid);
+
+        [MethodImpl(Inline)]
+        AsmImmBinaryCapture(IAsmContext context, MethodInfo method, Moniker baseid)
+            : base(context,method,baseid)
+        {            
+
+        }
+
+        public override AsmFunction Capture(byte imm)
+            => Decoder.DecodeFunction(DynopImm.BinaryOp(HK.vk(), Method, BaseId, imm));
+
+    }
+
 }

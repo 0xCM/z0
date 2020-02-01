@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), NatOp, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector128<T> vincrements<T>(N128 w)
             where T : unmanaged
        {
@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), NatOp, NumericClosures(NumericKind.Integers)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
         public static Vector256<T> vincrements<T>(N256 w)
             where T : unmanaged
         {

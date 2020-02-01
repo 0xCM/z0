@@ -16,7 +16,7 @@ namespace Z0
 
     class AsmFunctionArchive : IAsmFunctionArchive
     {
-        readonly FolderPath TargetFolder;
+        public FolderPath Root {get;}
         
         readonly AsmFormatConfig GroupFormatConfig;
 
@@ -40,7 +40,7 @@ namespace Z0
             this.Context = context;
             this.Catalog = catalog;
             this.Subject = subject;
-            this.TargetFolder = Paths.AsmDataDir(RelativeLocation.Define(catalog, subject));
+            this.Root = Paths.AsmDataDir(RelativeLocation.Define(catalog, subject));
             this.DefaultFormatter = context.AsmFormatter();
             this.GroupFormatConfig = AsmFormatConfig.Default.WithSectionDelimiter().WithoutFunctionTimestamp().WithoutFunctionOrigin();
             this.GroupFormatter = context.WithFormat(GroupFormatConfig).AsmFormatter();
@@ -117,7 +117,7 @@ namespace Z0
 
         public IAsmFunctionArchive Clear()
         {
-            TargetFolder.DeleteFiles();
+            Root.DeleteFiles();
             return this;
         }
 

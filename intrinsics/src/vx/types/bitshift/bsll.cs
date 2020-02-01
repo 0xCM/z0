@@ -25,7 +25,7 @@ namespace Z0
             public Moniker Moniker => moniker(Name,hk);
 
             public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte count)
-                => Dynop.unary<T>(hk, Moniker, gApiMethod(hk,Name),count);
+                => DynopImm.UnaryOp<T>(hk, Moniker, gApiMethod(hk,Name),count);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte count) 
@@ -48,7 +48,7 @@ namespace Z0
             public Moniker Moniker => moniker(Name,hk);
 
             public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte count)
-                => Dynop.unary<T>(hk, Moniker, gApiMethod(hk,Name),count);
+                => DynopImm.UnaryOp<T>(hk, Moniker, gApiMethod(hk,Name),count);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte count)  

@@ -22,6 +22,40 @@ namespace Z0
         Fixed128 X1;
 
         [MethodImpl(Inline)]
+        public static implicit operator Fixed256(Vector256<byte> x)
+            => x.ToFixed();
+
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed256(Vector256<ushort> x)
+            => x.ToFixed();
+
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed256(Vector256<uint> x)
+            => x.ToFixed();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed256(Vector256<ulong> x)
+            => x.ToFixed();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector256<byte>(Fixed256 x)
+            => x.ToVector<byte>();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector256<ushort>(Fixed256 x)
+            => x.ToVector<ushort>();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector256<uint>(Fixed256 x)
+            => x.ToVector<uint>();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector256<ulong>(Fixed256 x)
+            => x.ToVector<ulong>();
+
+        [MethodImpl(Inline)]
         public static implicit operator Fixed256((Fixed128 x0, Fixed128 x1) x)
             => new Fixed256(x.x0,x.x1);
 
@@ -32,10 +66,10 @@ namespace Z0
             this.X1 = x1;
         }
         
-        public int Width
+        public FixedWidth Width
         {
             [MethodImpl(Inline)]
-            get => BitWidth;
+            get => (FixedWidth)BitWidth;
         }
 
         [MethodImpl(Inline)]

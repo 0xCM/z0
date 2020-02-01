@@ -44,6 +44,6 @@ namespace Z0
         public NumericKind K {get;}
 
         public string Format()
-            => primalsig(K);
+            => K.Signature();
     }
 }

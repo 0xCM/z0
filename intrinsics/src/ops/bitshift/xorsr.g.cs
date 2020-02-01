@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The amount by which to shift each component</param>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static Vector128<T> vxorsr<T>(Vector128<T> x, [Imm] byte count)
+        public static Vector128<T> vxorsr<T>(Vector128<T> x, [Shift] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The amount by which to shift each component</param>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static Vector256<T> vxorsr<T>(Vector256<T> x, [Imm] byte count)
+        public static Vector256<T> vxorsr<T>(Vector256<T> x, [Shift] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

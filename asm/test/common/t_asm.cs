@@ -100,21 +100,21 @@ namespace Z0
                 => CheckAsmMatch(f, asm.Untyped);
 
         protected AsmCode ReadAsm(string catalog, string subject, Moniker m)
-            => Context.CodeArchive(catalog,subject).ReadBlock(m).Require();
+            => Context.CodeArchive(catalog,subject).Read(m).Single();
 
         protected AsmCode<T> ReadAsm<W,T>(string catalog, string subject, string opname, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeNat
-                => Context.CodeArchive(catalog,subject).ReadBlock<T>(OpIdentity.segmented(opname, NumericType.kind<T>(), w)).Require(); 
+                => Context.CodeArchive(catalog,subject).Read<T>(OpIdentities.segmented(opname, NumericType.kind<T>(), w)).Require(); 
 
         protected void megacheck(string name, Func<byte,byte,byte> primal, Func<byte,byte,byte> generic, PrimalClass<byte> kind)
         {
             var w = n8;
 
-            var moniker = OpIdentity.define(name, kind);                        
-            var f0 = Fixed.BinOp(primal, kind);
+            var moniker = OpIdentities.define(name, kind);                        
+            var f0 = Dynop.BinOp(primal, kind);
 
-            var f1 = Fixed.BinOp(generic, kind);
+            var f1 = Dynop.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
@@ -128,10 +128,10 @@ namespace Z0
         {
             var w = n8;
 
-            var moniker = OpIdentity.define(name, kind);                        
-            var f0 = Fixed.BinOp(primal, kind);
+            var moniker = OpIdentities.define(name, kind);                        
+            var f0 = Dynop.BinOp(primal, kind);
 
-            var f1 = Fixed.BinOp(generic, kind);
+            var f1 = Dynop.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
@@ -145,10 +145,10 @@ namespace Z0
         {
             var w = n16;
 
-            var moniker = OpIdentity.define(name, kind);                        
-            var f0 = Fixed.BinOp(primal, kind);
+            var moniker = OpIdentities.define(name, kind);                        
+            var f0 = Dynop.BinOp(primal, kind);
 
-            var f1 = Fixed.BinOp(generic, kind);
+            var f1 = Dynop.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
@@ -158,14 +158,15 @@ namespace Z0
             CheckMatch(f0, moniker, f3, moniker.WithGeneric().WithAsm());
         }
 
+
         protected void megacheck(string name, Func<short,short,short> primal, Func<short,short,short> generic, PrimalClass<short> kind)
         {
             var w = n16;
 
-            var moniker = OpIdentity.define(name, kind);                        
-            var f0 = Fixed.BinOp(primal, kind);
+            var moniker = OpIdentities.define(name, kind);                        
+            var f0 = Dynop.BinOp(primal, kind);
 
-            var f1 = Fixed.BinOp(generic, kind);
+            var f1 = Dynop.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
@@ -179,10 +180,10 @@ namespace Z0
         {
             var w = n32;
 
-            var moniker = OpIdentity.define(name, kind);                        
-            var f0 = Fixed.BinOp(primal, kind);
+            var moniker = OpIdentities.define(name, kind);                        
+            var f0 = Dynop.BinOp(primal, kind);
 
-            var f1 = Fixed.BinOp(generic, kind);
+            var f1 = Dynop.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));
@@ -195,10 +196,10 @@ namespace Z0
         protected void megacheck(string name, Func<int,int,int> primal, Func<int,int,int> generic, PrimalClass<int> kind)
         {
             var w = n32;
-            var moniker = OpIdentity.define(name, kind);                        
-            var f0 = Fixed.BinOp(primal, kind);
+            var moniker = OpIdentities.define(name, kind);                        
+            var f0 = Dynop.BinOp(primal, kind);
 
-            var f1 = Fixed.BinOp(generic, kind);
+            var f1 = Dynop.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math ,moniker));
@@ -211,10 +212,10 @@ namespace Z0
         protected void megacheck(string name, Func<long,long,long> primal, Func<long,long,long> generic, PrimalClass<long> kind)
         {            
             var w = n64;
-            var moniker = OpIdentity.define(name, kind);                        
-            var f0 = Fixed.BinOp(primal, kind);
+            var moniker = OpIdentities.define(name, kind);                        
+            var f0 = Dynop.BinOp(primal, kind);
 
-            var f1 = Fixed.BinOp(generic, kind);
+            var f1 = Dynop.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math ,moniker));
@@ -228,10 +229,10 @@ namespace Z0
         {            
             var w = n64;
 
-            var moniker = OpIdentity.define(name, kind);                        
-            var f0 = Fixed.BinOp(primal, kind);
+            var moniker = OpIdentities.define(name, kind);                        
+            var f0 = Dynop.BinOp(primal, kind);
 
-            var f1 = Fixed.BinOp(generic, kind);
+            var f1 = Dynop.BinOp(generic, kind);
             CheckMatch(f0, moniker, f1, moniker.WithGeneric());
 
             var f2 = AsmBuffer.BinaryOp(w, ReadAsm(GMath, Math, moniker));

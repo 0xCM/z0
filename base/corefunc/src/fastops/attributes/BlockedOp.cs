@@ -14,8 +14,8 @@ namespace Z0
     /// </summary>
     public class BlockedOpAttribute : OpAttribute
     {
-        public BlockedOpAttribute(OpFacetModifier modifier = OpFacetModifier.None)
-            : base(modifier)
+        public BlockedOpAttribute()
+            : base()
         {
 
         }

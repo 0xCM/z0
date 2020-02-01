@@ -129,6 +129,13 @@ namespace Z0
         /// Returns true if the method has unspecified generic parameters, false otherwise
         /// </summary>
         /// <param name="m">The method to examine</param>
+        public static bool IsClosedGeneric(this MethodInfo m)
+            => m.IsConstructedGenericMethod;
+
+        /// <summary>
+        /// Returns true if the method has unspecified generic parameters, false otherwise
+        /// </summary>
+        /// <param name="m">The method to examine</param>
         public static bool IsNonGeneric(this MethodInfo m)
             => !m.IsGenericMethod && !m.IsConstructedGenericMethod;
 

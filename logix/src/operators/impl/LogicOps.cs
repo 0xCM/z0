@@ -354,32 +354,32 @@ namespace Z0.Logix
             => or(not(a), and(not(b),c));
     
         // a and not(b)
-        [MethodImpl(Inline),TernaryBitLogicOp(X30)]
+        [MethodImpl(Inline), Op]
         public static bit f30(bit a, bit b, bit c)
             => cnonimpl(a,b);
 
         // not (B) and (A or (C xor 1))
-        [MethodImpl(Inline),TernaryBitLogicOp(X31)]
+        [MethodImpl(Inline), Op]
         public static bit f31(bit a, bit b, bit c)
             => and(not(b), or(a,not(c)));
 
         //not (B) and (A or C)
-        [MethodImpl(Inline),TernaryBitLogicOp(X32)]
+        [MethodImpl(Inline), Op]
         public static bit f32(bit a, bit b, bit c)
             => and(not(b),or(a,c));
 
         // not (B)
-        [MethodImpl(Inline),TernaryBitLogicOp(X33)]
+        [MethodImpl(Inline), Op]
         public static bit f33(bit a, bit b, bit c)
             => not(b);
 
         // not ((B and C)) and (A xor B)
-        [MethodImpl(Inline),TernaryBitLogicOp(X34)]
+        [MethodImpl(Inline), Op]
         public static bit f34(bit a, bit b, bit c)
             => and(not(and(b,c)), xor(a,b));
 
         // A ? not (B) : not (C)
-        [MethodImpl(Inline),TernaryBitLogicOp(X35)]
+        [MethodImpl(Inline), Op]
         public static bit f35(bit a, bit b, bit c)
             => select(a,not(b),not(c));
 
@@ -434,12 +434,12 @@ namespace Z0.Logix
             => nand(b,a);
 
         // (not (C) and A) and B
-        [MethodImpl(Inline),TernaryBitLogicOp(X40)]
+        [MethodImpl(Inline), Op]
         public static bit f40(bit a, bit b, bit c)
             => and(and(not(c),a),b);
 
         // C nor (B xor A)
-        [MethodImpl(Inline),TernaryBitLogicOp(X41)]
+        [MethodImpl(Inline), Op]
         public static bit f41(bit a, bit b, bit c)
             => nor(c,xor(b,a));
 
@@ -588,337 +588,76 @@ namespace Z0.Logix
         public static bit f5e(bit a, bit b, bit c)
             => or(and(not(c),b),(xor(a,c)));
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit f5f(bit a, bit b, bit c)
             => nand(c,a);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit f60(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit f61(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit f62(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit f63(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit f64(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit f65(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit f66(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit f67(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit f68(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit f69(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit f6a(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline),TernaryBitLogicOp(X6B)]
+        [MethodImpl(Inline)]
         public static bit f6b(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit f6c(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit f6d(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit f6e(bit a, bit b, bit c)
             => default;
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bit f6f(bit a, bit b, bit c)
             => default;
 
         [MethodImpl(Inline), Op]
-        public static bit f70(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static bit f71(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X72)]
-        public static bit f72(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X73)]
-        public static bit f73(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X74)]
-        public static bit f74(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X75)]
-        public static bit f75(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X76)]
-        public static bit f76(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X77)]
-        public static bit f77(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X78)]
-        public static bit f78(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X79)]
-        public static bit f79(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X7A)]
-        public static bit f7a(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X7B)]
-        public static bit f7b(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X7C)]
-        public static bit f7c(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X7D)]
-        public static bit f7d(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X7E)]
-        public static bit f7e(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X7F)]
-        public static bit f7f(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X80)]
-        public static bit f80(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X81)]
-        public static bit f81(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X82)]
-        public static bit f82(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X83)]
-        public static bit f83(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X84)]
-        public static bit f84(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X85)]
-        public static bit f85(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X86)]
-        public static bit f86(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X87)]
-        public static bit f87(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X88)]
-        public static bit f88(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X89)]
-        public static bit f89(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X8A)]
-        public static bit f8a(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X8B)]
-        public static bit f8b(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X8C)]
-        public static bit f8c(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X8D)]
-        public static bit f8d(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X8E)]
-        public static bit f8e(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X8F)]
-        public static bit f8f(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X90)]
-        public static bit f90(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X91)]
-        public static bit f91(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X92)]
-        public static bit f92(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X93)]
-        public static bit f93(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X94)]
-        public static bit f94(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X95)]
-        public static bit f95(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X96)]
-        public static bit f96(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X97)]
-        public static bit f97(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X98)]
-        public static bit f98(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X99)]
-        public static bit f99(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X9A)]
-        public static bit f9a(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X9B)]
-        public static bit f9b(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X9C)]
-        public static bit f9c(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X9D)]
-        public static bit f9d(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X9E)]
-        public static bit f9e(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(X9F)]
-        public static bit f9f(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(XA0)]
-        public static bit fa0(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline),TernaryBitLogicOp(XA1)]
-        public static bit fa1(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static bit fa2(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static bit fa3(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static bit fa4(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static bit fa5(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static bit fa6(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static bit fa7(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static bit fa8(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static bit fa9(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static bit faa(bit a, bit b, bit c)
-            => c;
-
-        [MethodImpl(Inline), Op]
-        public static bit fab(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static bit fac(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static bit fad(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static bit fae(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static bit faf(bit a, bit b, bit c)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static bit fcb(bit a, bit b, bit c)
-            => b;
-
-        [MethodImpl(Inline), Op]
         public static bit @true(bit a, bit b, bit c)
             => on;
-
     }
 }

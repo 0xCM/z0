@@ -48,7 +48,7 @@ namespace Z0
         /// Extracts the lo 128-bit lane of the source vector to scalar targets
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op("vlo~out", OpFacetModifier.ReplaceName), NumericClosures(NumericKind.All)]
+        [MethodImpl(Inline), Op, NumericClosures(NumericKind.All)]
         public static void vlo<T>(Vector256<T> src, out ulong x0, out ulong x1)
             where T : unmanaged
                 => dinx.vlo(v64u(src), out x0, out x1);

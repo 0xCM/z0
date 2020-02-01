@@ -20,17 +20,17 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static Vector128<T> vrotr<T>(Vector128<T> x, [Imm] byte count)
+        public static Vector128<T> vrotr<T>(Vector128<T> x, [Shift] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.vgeneric<T>(dinx.vrotr(vcast8u(x), count));
+                return As.vgeneric<T>(dinx.vrotr(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vrotr(vcast16u(x), count));
+                return vgeneric<T>(dinx.vrotr(v16u(x), count));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vrotr(vcast32u(x), count));
+                return vgeneric<T>(dinx.vrotr(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vrotr(vcast64u(x), count));
+                return vgeneric<T>(dinx.vrotr(v64u(x), count));
             else
                 throw unsupported<T>();
         }
@@ -41,17 +41,17 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.UnsignedInts)]
-        public static Vector256<T> vrotr<T>(Vector256<T> x, [Imm] byte count)
+        public static Vector256<T> vrotr<T>(Vector256<T> x, [Shift] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(dinx.vrotr(vcast8u(x), count));
+                return vgeneric<T>(dinx.vrotr(v8u(x), count));
             if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(dinx.vrotr(vcast16u(x), count));
+                return vgeneric<T>(dinx.vrotr(v16u(x), count));
             if(typeof(T) == typeof(uint))
-                return vgeneric<T>(dinx.vrotr(vcast32u(x), count));
+                return vgeneric<T>(dinx.vrotr(v32u(x), count));
             if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(dinx.vrotr(vcast64u(x), count));
+                return vgeneric<T>(dinx.vrotr(v64u(x), count));
             else
                 throw unsupported<T>();
         }     

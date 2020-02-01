@@ -476,53 +476,9 @@ namespace Z0.AsmSpecs
 			return instruction;
 		}
 
-		/// <summary>
-		/// Gets an operand's kind if it exists (see <see cref="OpCount"/>)
-		/// </summary>
-		/// <param name="operand">Operand number, 0-4</param>
-		public OpKind GetOpKind(int operand) {
-			switch (operand) {
-			case 0: return Op0Kind;
-			case 1: return Op1Kind;
-			case 2: return Op2Kind;
-			case 3: return Op3Kind;
-			case 4: return Op4Kind;
-			default:
-				throw new ArgumentException($"The operand index {operand} is out of range");
-			}
-		}
 
-		public ulong GetImmediate(int operand) {
-			switch (GetOpKind(operand)) {
-			case OpKind.Immediate8:			return Immediate8;
-			case OpKind.Immediate8_2nd:		return Immediate8_2nd;
-			case OpKind.Immediate16:		return Immediate16;
-			case OpKind.Immediate32:		return Immediate32;
-			case OpKind.Immediate64:		return Immediate64;
-			case OpKind.Immediate8to16:		return (ulong)Immediate8to16;
-			case OpKind.Immediate8to32:		return (ulong)Immediate8to32;
-			case OpKind.Immediate8to64:		return (ulong)Immediate8to64;
-			case OpKind.Immediate32to64:	return (ulong)Immediate32to64;
-			default:
-				throw new ArgumentException($"Op{operand} isn't an immediate operand", nameof(operand));
-			}
-		}
-
-		/// <summary>
-		/// Gets the operand's register value. Use this property if the operand has kind <see cref="OpKind.Register"/>
-		/// </summary>
-		/// <param name="operand">Operand number, 0-4</param>
-		public Register GetOpRegister(int operand) {
-			switch (operand) {
-			case 0: return Op0Register;
-			case 1: return Op1Register;
-			case 2: return Op2Register;
-			case 3: return Op3Register;
-			case 4: return Op4Register;
-			default:
-				throw new ArgumentException($"The operand index {operand} is out of range");
-			}
-		}
+        public override string ToString()
+            => FormattedInstruction;
 
     }
 }

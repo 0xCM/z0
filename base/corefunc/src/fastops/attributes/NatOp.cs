@@ -11,15 +11,35 @@ namespace Z0
 
     using static zfunc;
 
+    public enum NatParameterIndex
+    {
+        Param0 = 0,
+        
+        Param1 = 1,
+
+        Param2 = 2,
+    }
+
     /// <summary>
     /// Identifies operations that have one or more natural selectors
     /// </summary>
     public class NatOpAttribute : OpAttribute
     {
-        public NatOpAttribute(OpFacetModifier modifier = OpFacetModifier.None)
-            : base(modifier)
+        public NatOpAttribute(params ulong[] closures)
         {
-
+            this.Closures = closures;
         }
+
+        public NatOpAttribute(NatParameterIndex parameter, params ulong[] closures)
+        {
+            this.Closures = closures;
+            this.ParameterIndex = parameter;
+        }
+
+        public ulong[] Closures{get;}                 
+
+        public NatParameterIndex ParameterIndex {get;}
+            = 0;
+
     }
 }

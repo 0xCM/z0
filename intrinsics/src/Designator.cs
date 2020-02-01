@@ -14,6 +14,6 @@ namespace Z0.Designators
             => Identity;
 
         public override IOperationCatalog Catalog 
-            => new Catalog(Identity);
+            => new Catalog();
     }
 }

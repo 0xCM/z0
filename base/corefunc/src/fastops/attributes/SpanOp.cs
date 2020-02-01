@@ -16,8 +16,8 @@ namespace Z0
     /// </summary>
     public class SpanOpAttribute : OpAttribute
     {
-        public SpanOpAttribute(OpFacetModifier modifier = OpFacetModifier.None)
-            : base(modifier)
+        public SpanOpAttribute()
+            : base()
         {
 
         }

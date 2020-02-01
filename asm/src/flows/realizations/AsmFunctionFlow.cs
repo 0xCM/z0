@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Collections.Specialized;
     using System.Reflection;
 
     using Z0.AsmSpecs;
@@ -46,7 +45,7 @@ namespace Z0
 
         static ReadOnlySpan<byte> ImmSelection => new byte[]{5,9,13};
 
-        IAsmImmCapture ImmCaptureSvc(MethodInfo src, Moniker baseid)
+        IAsmImmCapture UnaryImmCapture(MethodInfo src, Moniker baseid)
             => Context.UnaryImmCapture(src, baseid);
 
         AsmFunction Flow(AsmFunction src, IAsmFunctionPipe dst)
@@ -59,10 +58,10 @@ namespace Z0
             
         IEnumerable<AsmFunction> FlowImm(GenericOpSpec op, IAsmFunctionPipe pipe)
         {
-            if(FunctionType.vunaryImm(op.Method))
+            if(FunctionType.vunaryImm(op.Root))
             {
-                var functions = from closure in OpSpecs.close(op)
-                            let svc = ImmCaptureSvc(closure.ClosedMethod, closure.Id)
+                var functions = from closure in op.Close()
+                            let svc = UnaryImmCapture(closure.ClosedMethod, closure.Id)
                             from f in svc.Capture(ImmSelection.ToArray())
                             select Flow(WithCil(f,closure.ClosedMethod),pipe);
                 
@@ -73,33 +72,33 @@ namespace Z0
 
         IEnumerable<AsmFunction> FlowImm(DirectOpSpec op, IAsmFunctionPipe pipe)
         {
-            if(FunctionType.vunaryImm(op.Method))
-                foreach(var f in ImmCaptureSvc(op.Method, op.Id).Capture(ImmSelection.ToArray()))
-                    yield return Flow(WithCil(f,op.Method), pipe);                                
+            if(FunctionType.vunaryImm(op.Root))
+                foreach(var f in UnaryImmCapture(op.Root, op.Id).Capture(ImmSelection.ToArray()))
+                    yield return Flow(WithCil(f,op.Root), pipe);                                
         }
 
         IEnumerable<AsmFunction> Flow(DirectOpSpec op, IAsmFunctionPipe pipe)
-            => from f in items(Decoder.DecodeFunction(op.Id, op.Method))
-                select Flow(WithCil(f, op.Method), pipe);
+            => from f in items(Decoder.DecodeFunction(op.Id, op.Root))
+                select Flow(WithCil(f, op.Root), pipe);
 
         IEnumerable<AsmFunction> Flow(GenericOpSpec op, IAsmFunctionPipe pipe)
-            => from closure in OpSpecs.close(op)
+            => from closure in op.Close()
                     let f = Decoder.DecodeFunction(closure.Id, closure.ClosedMethod)
                         select Flow(WithCil(f, closure.ClosedMethod), pipe);       
        
         IEnumerable<AsmFunction> BranchImm(DirectOpSpec op, IAsmFunctionPipe pipe)
-            => FunctionType.immneeds(op.Method) ? FlowImm(op, pipe) : Flow(op,pipe);
+            => FunctionType.immneeds(op.Root) ? FlowImm(op, pipe) : Flow(op,pipe);
 
         IEnumerable<AsmFunction> BranchImm(GenericOpSpec op, IAsmFunctionPipe pipe)
-            => FunctionType.immneeds(op.Method) ? FlowImm(op,pipe) : Flow(op,pipe);
+            => FunctionType.immneeds(op.Root) ? FlowImm(op,pipe) : Flow(op,pipe);
 
         IEnumerable<AsmFunction> FlowGeneric(Type host, IAsmFunctionPipe pipe)
-            => from op in OpSpecs.generic(host)
+            => from op in OpSpecs.Generic.FromHost(host)
                from emission in BranchImm(op, pipe)
-                select emission.WithCil(ClrIndex.FincCil(op.Method));
+                select emission.WithCil(ClrIndex.FincCil(op.Root));
         
         IEnumerable<AsmFunction> FlowDirect(Type host, IAsmFunctionPipe pipe)
-            => from op in OpSpecs.direct(host)
+            => from op in OpSpecs.Direct.FromHost(host)
                from emission in BranchImm(op, pipe)
                 select emission;
 

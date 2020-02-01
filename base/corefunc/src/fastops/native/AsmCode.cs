@@ -12,6 +12,63 @@ namespace Z0
 
     using static zfunc;
 
+    public static class FixedAsm
+    {
+        public static FixedAsm<T> Define<T>(AsmCode code)
+            where T : unmanaged, IFixed
+                => new FixedAsm<T>(code);
+
+        public static FixedAsm<T> Parse<T>(Moniker id, string data)
+            where T : unmanaged, IFixed
+            => Define<T>(AsmCode.Parse(id,data));
+
+    }
+
+    public readonly struct FixedAsm<T>
+        where T : unmanaged, IFixed
+    {
+
+        internal FixedAsm(in AsmCode code)
+        {
+            this.Code = code;
+        }
+
+        public readonly AsmCode Code;        
+
+        /// <summary>
+        /// The identifying moniker
+        /// </summary>
+        public Moniker Id
+            => Code.Id;
+
+        /// <summary>
+        /// The originating memory location
+        /// </summary>
+        public MemoryRange Origin
+            => Code.Origin;
+
+        /// <summary>
+        /// The encoded asm bytes
+        /// </summary>
+        public byte[] Encoded
+        {
+            [MethodImpl(Inline)]
+            get => Code.Encoded;
+        }
+        
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Code.Length;
+        }
+
+        public string Format(int idpad = 0)
+            => Code.Format(idpad);
+
+        public override string ToString()
+            => Format();
+    }
+
     /// <summary>
     /// Encapsulates a block of encoded assembly
     /// </summary>
@@ -70,7 +127,7 @@ namespace Z0
         /// </summary>
         /// <param name="data">The encoded assembly</param>
         /// <param name="id">The identity to confer</param>
-        public static AsmCode Parse(string data, Moniker id)
+        public static AsmCode Parse(Moniker id, string data)
             => Define(id, Hex.parsebytes(data).ToArray());
 
         /// <summary>
@@ -115,6 +172,14 @@ namespace Z0
             where T : unmanaged
                 => new AsmCode<T>(this);
 
+        [MethodImpl(Inline)]
+        public FixedAsm<T> AsFixed<T>()
+            where T : unmanaged, IFixed
+                => FixedAsm.Define<T>(this);
+
+        [MethodImpl(Inline)]
+        public AsmCode WithIdentity(Moniker id)
+            => Define(id, Origin, Label, Encoded);
     }
 
     /// <summary>

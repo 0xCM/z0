@@ -159,13 +159,6 @@ namespace Z0
             => m.Attributed<BlockedOpAttribute>();
 
         /// <summary>
-        /// Determines whether a method is classified as a natural op
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool natural(MethodInfo m)
-            => m.Attributed<NatOpAttribute>();
-
-        /// <summary>
         /// Determines whether a method is classified as a span op
         /// </summary>
         /// <param name="m">The method to examine</param>

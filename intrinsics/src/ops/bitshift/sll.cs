@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to count left</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vsll(Vector128<byte> src, [Imm] byte count)
+        public static Vector128<byte> vsll(Vector128<byte> src, [Shift] byte count)
         {
             var y = v8u(dinx.vsll(v64u(src), count));
             var m = VMask.vmsb(n128, n8, (byte)(8 - count),z8);
@@ -35,8 +35,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to count each component</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<sbyte> vsll(Vector128<sbyte> src, [Imm] byte count)
-            => vsll(src.AsByte(), count).AsSByte();
+        public static Vector128<sbyte> vsll(Vector128<sbyte> src, [Shift] byte count)
+            => v8i(vsll(src.AsByte(), count));
 
         /// <summary>
         /// Shifts each component in the source vector leftwards by a specified number of bits
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to count each component</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<sbyte> vsll(Vector256<sbyte> src, [Imm] byte count)
+        public static Vector256<sbyte> vsll(Vector256<sbyte> src, [Shift] byte count)
             => vsll(src.AsByte(), count).AsSByte();
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to count</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vsll(Vector128<ushort> src, [Imm] byte count)
+        public static Vector128<ushort> vsll(Vector128<ushort> src, [Shift] byte count)
             => ShiftLeftLogical(src, (byte)count);
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to count</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<int> vsll(Vector128<int> src, [Imm] byte count)
+        public static Vector128<int> vsll(Vector128<int> src, [Shift] byte count)
             => ShiftLeftLogical(src, (byte)count);
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to count</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<uint> vsll(Vector128<uint> src, [Imm] byte count)
+        public static Vector128<uint> vsll(Vector128<uint> src, [Shift] byte count)
             => ShiftLeftLogical(src, (byte)count);
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to count</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<long> vsll(Vector128<long> src, [Imm] byte count)
+        public static Vector128<long> vsll(Vector128<long> src, [Shift] byte count)
             => ShiftLeftLogical(src, (byte)count);
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to count</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<ulong> vsll(Vector128<ulong> src, [Imm] byte count)
+        public static Vector128<ulong> vsll(Vector128<ulong> src, [Shift] byte count)
             => ShiftLeftLogical(src, (byte)count);
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bits to count left</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> vsll(Vector256<byte> src, [Imm] byte count)
+        public static Vector256<byte> vsll(Vector256<byte> src, [Shift] byte count)
         {
             var y = v8u(dinx.vsll(v64u(src), count));
             var m = VMask.vmsb(n256, n8, (byte)(8 - count),z8);
@@ -118,7 +118,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to count</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<short> vsll(Vector128<short> src, [Imm] byte count)
+        public static Vector128<short> vsll(Vector128<short> src, [Shift] byte count)
             => ShiftLeftLogical(src, (byte)count);
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to count</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<short> vsll(Vector256<short> src, [Imm] byte count)
+        public static Vector256<short> vsll(Vector256<short> src, [Shift] byte count)
             => ShiftLeftLogical(src, (byte)count);
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to count</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vsll(Vector256<ushort> src, [Imm] byte count)
+        public static Vector256<ushort> vsll(Vector256<ushort> src, [Shift] byte count)
             => ShiftLeftLogical(src, (byte)count);
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to count</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<int> vsll(Vector256<int> src, [Imm] byte count)
+        public static Vector256<int> vsll(Vector256<int> src, [Shift] byte count)
             => ShiftLeftLogical(src, (byte)count);
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to count</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<uint> vsll(Vector256<uint> src, [Imm] byte count)
+        public static Vector256<uint> vsll(Vector256<uint> src, [Shift] byte count)
             => ShiftLeftLogical(src, (byte)count);
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to count</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<long> vsll(Vector256<long> src, [Imm] byte count)
+        public static Vector256<long> vsll(Vector256<long> src, [Shift] byte count)
             => ShiftLeftLogical(src, (byte)count);
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to count</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vsll(Vector256<ulong> src, [Imm] byte count)
+        public static Vector256<ulong> vsll(Vector256<ulong> src, [Shift] byte count)
             => ShiftLeftLogical(src, (byte)count); 
     }
 }

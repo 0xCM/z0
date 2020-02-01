@@ -17,27 +17,20 @@ namespace Z0
 
         public bool ByRef {get;}
 
-        public OpFacetModifier FacetModifier {get;}
-
+        public bool CombineCustomName {get;}
+         
         public OpAttribute()
         {
             this.Name = string.Empty;
             this.ByRef = false;
-            this.FacetModifier = OpFacetModifier.CombineNames;
+            this.CombineCustomName = true;
         }
 
-        public OpAttribute(OpFacetModifier modifier = OpFacetModifier.CombineNames)
-            : this()
-        {
-            this.ByRef = false;
-            this.FacetModifier = modifier;
-        }
-
-        public OpAttribute(string name, OpFacetModifier modifier = OpFacetModifier.CombineNames)
+        public OpAttribute(string name, bool combine = true)
         {
             this.Name = name;
             this.ByRef = false;
-            this.FacetModifier = modifier;
+            this.CombineCustomName = combine;
         }
 
         public override string ToString()

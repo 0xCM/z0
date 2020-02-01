@@ -13,24 +13,82 @@ namespace Z0
     using System.Collections.Generic;
 
     using static zfunc;
-
+    using static NumericKind;
+    
     public static class DataTypeX
     {
+        /// <summary>
+        /// Returns a kind-identified system type if possible; throws an exception otherwise
+        /// </summary>
+        /// <param name="k">The identifying kind</param>
+        [MethodImpl(Inline)]
+        public static Option<Type> ToClrType(this NumericKind k)
+            => k switch {
+                U8 => typeof(byte),
+                I8 => typeof(sbyte),
+                U16 => typeof(ushort),
+                I16 => typeof(short),
+                U32 => typeof(uint),
+                I32 => typeof(int),
+                I64 => typeof(long),
+                U64 => typeof(ulong),
+                F32 => typeof(float),
+                F64 => typeof(double),
+                _ => default
+            };
+
         /// <summary>
         /// Determines a sub-classification c := {'u' | 'i' | 'f'} according to whether a classified primal type
         /// is unsigned integral, signed integral or floating-point
         /// </summary>
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
-        public static char Indicator(this NumericKind k)
-            => (char)NumericType.indicator(k);
-         
+        public static NumericIndicator Indicator(this NumericKind k)
+            => NumericType.indicator(k);
+
+        /// <summary>
+        /// Specifies the bit-width of a classified cpu vector
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline)]
+        public static string Signature(this NumericKind k)
+            => NumericType.signature(k);
+
         /// <summary>
         /// Determines whether a type is parametric over the natural numbers
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static bool IsNatSpan(this Type t)
-            => NatSpanType.signature(t).IsSome();
+            => NatSpanSig.From(t).IsSome();
+
+        /// <summary>
+        /// Determines whether a type encodes a natural number
+        /// </summary>
+        /// <param name="t">The type to test</param>
+        public static bool IsNat(this Type t)
+            => t.Realizes<ITypeNat>();
+
+        /// <summary>
+        /// For a type that encodes a natural number, returns the corresponding value; otherwise, returns null
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static Option<ulong> NatValue(this Type t)
+            => t.IsNat() ? ((ITypeNat)Activator.CreateInstance(t)).NatValue : default;
+
+        public static Option<Moniker> NatSpanIdentity(this Type src)
+        {
+            if(src.IsNatSpan())
+            {
+                var typeargs = src.GetGenericArguments().ToArray();                    
+                var text = "ns";
+                text += typeargs[0].NatValue();
+                text += Moniker.SegSep;
+                text += NumericType.signature(typeargs[1]);
+                return Moniker.Parse(text);
+            }
+            else
+                return default;
+        }
 
         /// <summary>
         /// Determines whether a type is parametric over the natural numbers
@@ -38,17 +96,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
         public static bool IsSpan(this Type t, bool includeReadOnly = true)
-            => (t.GenericDefinition() == typeof(Span<>))
-            ||(includeReadOnly 
-                && t.GenericDefinition() == typeof(ReadOnlySpan<>));
-
-        /// <summary>
-        /// Determines whether a type is parametric over the natural numbers
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsNumericSpan(this Type t, bool includeReadOnly = true)
-            => t.IsSpan(includeReadOnly) && t.SuppliedGenericArguments().Single().NumericKind().IsSome();
+            => (t.GenericDefinition() == typeof(Span<>))||(includeReadOnly && t.GenericDefinition() == typeof(ReadOnlySpan<>));
             
         /// <summary>
         /// Specifies the bit-width of a classified cpu vector
@@ -106,8 +154,13 @@ namespace Z0
         public static FixedWidth Width(this Type t)
             => Types.width(t);
 
-        public static string TypeKeyword(this Type src)
+        [MethodImpl(Inline)]
+        public static string PrimalKeyword(this Type src)
             => DataTypes.keyword(src).ValueOrDefault(string.Empty);
+
+        [MethodImpl(Inline)]
+        public static bool IsPrimal(this Type src)
+            => src.IsPrimalNumeric() || src.IsBool() || src.IsVoid() || src.IsChar() || src.IsString();
 
         /// <summary>
         /// Retrives the primal kind of the first type parameter, if any

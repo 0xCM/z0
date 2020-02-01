@@ -19,38 +19,6 @@ namespace Z0
             => ref c;
 
 
-        public void evolve()
-        {
-            var name = "xor";
-            var kind = u8;
-            var m0 = OpIdentity.define(name,kind);
-            Claim.eq("xor_8u", m0.Text);
-            Claim.eq(name, m0.Name);
-            Claim.eq(8,m0.PrimalWidth);
-            Claim.nea(m0.IsSegmented);
-            Claim.nea(m0.IsGeneric);
-            Claim.nea(m0.IsAsm);
-            Claim.eq(kind, m0.PrimalKind);
-
-
-
-            byte imm = 32;
-            var m3 = m0.WithImm(imm);
-            Claim.yea(m3.HasImm);
-            Claim.eq(imm, m3.Imm);
-            Claim.eq(name, m3.Name);
-            Claim.eq(8,m3.PrimalWidth);
-            Claim.nea(m3.IsSegmented);
-            Claim.nea(m3.IsGeneric);
-            Claim.nea(m3.IsAsm);
-            Claim.eq(kind, m3.PrimalKind);
-            m3 = m3.WithoutImm();
-            Claim.nea(m3.HasImm);
-
-
-
-
-        }
 
     }
 

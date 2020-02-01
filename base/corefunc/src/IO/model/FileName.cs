@@ -23,7 +23,7 @@ namespace Z0
             var first = new DateTime(2019,1,1);
             var current = now();
             var elapsed = (long) (current - first).TotalMilliseconds;
-            var timestamped = src.Rename($"{src.NameBody}-{elapsed}");
+            var timestamped = src.Rename($"{src.NoExtension}-{elapsed}");
             return timestamped;            
         }
 
@@ -59,7 +59,10 @@ namespace Z0
             ? FileExtension.Define(Path.GetExtension(Name)) 
             : none<FileExtension>();
 
-        public string NameBody 
+        /// <summary>
+        /// The name of the file without the extension
+        /// </summary>
+        public string NoExtension 
             => Path.GetFileNameWithoutExtension(Name);
         
         public FileName Rename(string newName)
@@ -70,7 +73,7 @@ namespace Z0
         }
 
         public FileName WithExtension(FileExtension ext)
-            => Define(NameBody,ext);
+            => Define(NoExtension,ext);
 
     }
 }

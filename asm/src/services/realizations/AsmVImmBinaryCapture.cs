@@ -6,15 +6,12 @@ namespace Z0
 {        
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
 
     using Z0.AsmSpecs;
     
     using static zfunc;
 
-    readonly struct AsmV128ImmBinaryCapture<T> : IAsmImmCapture<T>
+    readonly struct AsmV128ImmBinaryCapture<T> : IAsmImmBinaryCapture<T>
         where T : unmanaged
     {
 
@@ -23,7 +20,7 @@ namespace Z0
         readonly IVBinaryImm8Resolver128<T> Resolver;
 
         [MethodImpl(Inline)]
-        public static IAsmImmCapture<T> Create(IAsmContext context, IVBinaryImm8Resolver128<T> resolver)
+        public static IAsmImmBinaryCapture<T> Create(IAsmContext context, IVBinaryImm8Resolver128<T> resolver)
             => new AsmV128ImmBinaryCapture<T>(context, resolver);
 
         [MethodImpl(Inline)]
@@ -33,7 +30,7 @@ namespace Z0
             this.Resolver = resolver;
         }
         
-        public AsmFunction Capture(byte imm8)
+        public AsmFunction CaptureBinary(byte imm8)
         {
             var moniker = Resolver.Moniker;
             var f = Resolver.@delegate(imm8);
@@ -42,7 +39,7 @@ namespace Z0
         }
     }
 
-    readonly struct AsmV256ImmBinaryCapture<T> : IAsmImmCapture<T>
+    readonly struct AsmV256ImmBinaryCapture<T> : IAsmImmBinaryCapture<T>
         where T : unmanaged
     {
         public IAsmContext Context {get;}
@@ -51,7 +48,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static IAsmImmCapture<T> Create(IAsmContext context, IVBinaryImm8Resolver256<T> resolver)
+        public static IAsmImmBinaryCapture<T> Create(IAsmContext context, IVBinaryImm8Resolver256<T> resolver)
             => new AsmV256ImmBinaryCapture<T>(context, resolver);
 
 
@@ -62,7 +59,7 @@ namespace Z0
             this.Resolver = resolver;
         }
 
-        public AsmFunction Capture(byte imm8)
+        public AsmFunction CaptureBinary(byte imm8)
         {
             var moniker = Resolver.Moniker;
             var f = Resolver.@delegate(imm8);

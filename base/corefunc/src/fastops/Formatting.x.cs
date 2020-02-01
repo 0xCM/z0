@@ -72,7 +72,7 @@ namespace Z0
         }         
  
         public static string Format(this NumericKind k)
-            => $"{k.Width()}{k.Indicator()}";
+            => $"{k.Width()}{k.Indicator().Format()}";
 
         public static string FormatParam(this Pair<ParameterInfo,int> src)
         {
@@ -82,11 +82,11 @@ namespace Z0
                 var typewidth = (int)Types.width(t);
                 var segkind = Types.segtype(t).Require().NumericKind();
                 var segwidth = segkind.Width();
-                var indicator = segkind.Indicator();
+                var indicator = segkind.Indicator().Format();
                 return $"{typewidth}x{segwidth}{indicator}".PadLeft(7);
             }
             else
-                return $"{src.B}{t.NumericKind().Indicator()}";
+                return $"{src.B}{t.NumericKind().Indicator().Format()}";
         }
 
         public static string FormatParams(this IEnumerable<Pair<ParameterInfo,int>> src)
@@ -146,8 +146,8 @@ namespace Z0
             if(src.IsPointer)
                 return $"{src.GetElementType().DisplayName()}*";
             
-            if(src.IsPrimalNumeric() || src.IsBool() || src.IsVoid() || src.IsChar() || src.IsString())                            
-                return src.TypeKeyword().IfBlank(src.Name);
+            if(src.IsPrimal())
+                return src.PrimalKeyword().IfBlank(src.Name);
 
             if(src.IsGenericType && !src.IsRef())
                 return src.FormatGeneric();
@@ -226,7 +226,7 @@ namespace Z0
             if (attrib != null)
                 return attrib.DisplayName;
             else
-                return src.TypeKeyword().IfBlank(src.Name);
+                return src.PrimalKeyword().IfBlank(src.Name);
         }
 
         static string FormatGeneric(this Type src)

@@ -32,35 +32,36 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public static implicit operator Fixed128(Vector128<byte> x)
-        {
-            var dst = Fixed.alloc(n128);
-            Fixed.deposit(x,ref dst);
-            return dst;
-        }
+            => x.ToFixed();
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed128(Vector128<ushort> x)
-        {
-            var dst = Fixed.alloc(n128);
-            Fixed.deposit(x,ref dst);
-            return dst;
-        }
+            => x.ToFixed();
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed128(Vector128<uint> x)
-        {
-            var dst = Fixed.alloc(n128);
-            Fixed.deposit(x,ref dst);
-            return dst;
-        }
+            => x.ToFixed();
 
         [MethodImpl(Inline)]
         public static implicit operator Fixed128(Vector128<ulong> x)
-        {
-            var dst = Fixed.alloc(n128);
-            Fixed.deposit(x,ref dst);
-            return dst;
-        }
+            => x.ToFixed();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector128<byte>(Fixed128 x)
+            => x.ToVector<byte>();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector128<ushort>(Fixed128 x)
+            => x.ToVector<ushort>();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector128<uint>(Fixed128 x)
+            => x.ToVector<uint>();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector128<ulong>(Fixed128 x)
+            => x.ToVector<ulong>();
+
 
         [MethodImpl(Inline)]
         internal Fixed128(ulong x0, ulong x1)
@@ -69,11 +70,10 @@ namespace Z0
             this.X1 = x1;
         }
         
-
-        public int Width
+        public FixedWidth Width
         {
             [MethodImpl(Inline)]
-            get => BitWidth;
+            get => (FixedWidth)BitWidth;
         }
 
         [MethodImpl(Inline)]

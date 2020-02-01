@@ -12,12 +12,15 @@ namespace Z0
 
     readonly struct BitGridIdentity : ITypeIdentityProvider
     {        
-        Moniker DefineGenericIdentity(Type src)
+        Option<Moniker> DefineGenericIdentity(Type src)
         {
-            return Moniker.Empty;
+            var name = src.Name.ToLower();
+            return name.Contains('`') ? 
+                Moniker.Parse(name.LeftOf('`'))
+                : Moniker.Parse(name);            
         }
 
-        public Moniker DefineIdentity(Type src)
+        public Option<Moniker> DefineIdentity(Type src)
         {
             var prefix = string.Empty;
             var width = FixedWidth.None;
@@ -57,8 +60,8 @@ namespace Z0
             }
             else if(args.Length == 3)
             {
-                m =  NatType.value(args[0]).Require();
-                n = NatType.value(args[1]).Require();
+                m =  args[0].NatValue().Require();
+                n = args[1].NatValue().Require();
                 kind = args[2].NumericKind();
                 if(def == typeof(BitGrid<,,>))
                     prefix = "ndbg";

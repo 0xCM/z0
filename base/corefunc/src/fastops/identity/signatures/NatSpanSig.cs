@@ -5,12 +5,63 @@
 namespace Z0
 {        
     using System;
+    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
 
     public readonly struct NatSpanSig : IEquatable<NatSpanSig>
     {
+        public static Option<NatSpanSig> From(Type t)
+            => from def in t.GenericDefinition() 
+                where def == typeof(NatSpan<,>) && t.IsClosedGeneric()
+                let args = t.SuppliedGenericArguments().ToArray()
+                let pair = (nat: args[0], cell: args[1])
+                from n in pair.nat.NatValue()
+                from w in DataTypes.width(pair.cell)
+                from i in DataTypes.indicator(pair.cell)
+                select Define((int)n, w, i);
+
+        public static Option<NatSpanSig> Parse(string src)
+        {
+            var parts = src.Split(Moniker.SegSep);
+            if(parts.Length == 2)
+            {
+                var part1 = parts[0];
+                var part2 = parts[1];
+                var n = ulong.MaxValue;
+                var w = int.MaxValue;                
+                var indicator = AsciSym.Question;
+                if(part1[0] == Moniker.Nat)
+                {
+                    var number =  part1.TakeAfter(Moniker.Nat);
+                    ulong.TryParse(number, out n);
+                    
+                    var digits = string.Empty;
+                    foreach(var c in part2)
+                    {
+                        if(c.IsDecimalDigit())
+                            digits += c;
+                        else
+                        {
+                            indicator = c;
+                            break;
+                        }
+                    }
+                    
+                    if(digits.IsNotBlank())
+                        int.TryParse(digits, out w);                    
+                }         
+                     
+                if(n != ulong.MaxValue && w != int.MaxValue && indicator != AsciSym.Question) 
+                    return NatSpanSig.Define((int)n, w, indicator);
+                else 
+                    return default;             
+            }
+            else
+                return default;
+        }
+
         public static NatSpanSig Define(int length, int cellwidth, char indicator)
             => new NatSpanSig(length, cellwidth, indicator);
 
@@ -37,6 +88,6 @@ namespace Z0
             => obj is NatSpanSig s && Equals(s);
         
         public override string ToString()
-            => concat(Moniker.NatIndicator, Length.ToString(), Moniker.SegSep, CellWidth.ToString(), Indicator);
+            => concat(Moniker.Nat, Length.ToString(), Moniker.SegSep, CellWidth.ToString(), Indicator);
     }
 }

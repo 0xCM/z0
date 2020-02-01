@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     public interface IAsmArchive : IAsmService
     {
-        
+        FolderPath Root {get;}
     }
 
     public interface IAsmArchive<T> : IAsmArchive
@@ -33,30 +33,23 @@ namespace Z0
     public interface IAsmCodeArchive : IAsmArchive<IAsmCodeArchive>
     {
         /// <summary>
-        /// Materializes an untyped code block from hex data contained in the assembly log archive
-        /// </summary>
-        /// <param name="subfolder">The asm log subfolder</param>
-        /// <param name="m">The identifying moniker</param>
-        Option<AsmCode> ReadBlock(Moniker m);
-
-        /// <summary>
         /// Materializes a typed code block (per user's insistence as the type is not checkeed in any way) 
         /// from hex data contained in the assembly log archive
         /// </summary>
         /// <param name="subfolder">The asm log subfolder</param>
         /// <param name="m">The identifying moniker</param>
-        Option<AsmCode<T>> ReadBlock<T>(Moniker m, T t = default)
+        Option<AsmCode<T>> Read<T>(Moniker m, T t = default)
             where T : unmanaged;
 
         /// <summary>
-        /// Enumerates the files in the catalog
+        /// Reads all files in the archive
         /// </summary>
-        IEnumerable<FilePath> Files {get;}
+        IEnumerable<AsmCode> Read();
 
         /// <summary>
-        /// Enumerates the folders into which the archive is partitioned
+        /// Reads all files in the archive that satisfy a supplied predicate
         /// </summary>
-        IEnumerable<FolderPath> Folders {get;}
+        IEnumerable<AsmCode> Read(Func<FileName,bool> predicate);
 
         /// <summary>
         /// Reads the content of a hexline default-formatted file
@@ -69,6 +62,12 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source path</param>
         IEnumerable<AsmCode> Read(FilePath src); 
+
+        /// <summary>
+        /// Reads the content of hexline default-formatted file with a specified name
+        /// </summary>
+        /// <param name="src">The source path</param>
+        IEnumerable<AsmCode> Read(string name); 
 
         /// <summary>
         /// Reads the content of a hexline-formatted file with specified identity and byte separators

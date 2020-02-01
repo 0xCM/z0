@@ -38,7 +38,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to examine</param>
         public static Type EffectiveType(this Type src)
-            =>  src.IsRef() ? src.GetElementType() : src;
+            =>  src.IsRef()  ? src.GetElementType() : src;
+
+        public static Type Unwrap(this Type src)
+            => src.GetElementType() ?? src;
 
         /// <summary>
         /// Determines whether a type is a reference to a generic type
@@ -63,8 +66,54 @@ namespace Z0
                 return default;            
         }
 
-        public static bool IsConstructed(this Type t)
-            => t.EffectiveType().IsConstructedGenericType;
+        public static bool IsClosedGeneric(this Type t, bool effective = true)
+            => effective ? t.EffectiveType().IsConstructedGenericType : t.IsConstructedGenericType;
+
+        /// <summary>
+        /// Determines whether a type is an open generic type
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        public static bool IsOpenGeneric(this Type src, bool effective = true)
+        {
+            var t = effective ? src.EffectiveType() : src;
+            return (t.IsGenericType || t.IsGenericTypeDefinition) && !t.IsConstructedGenericType;
+        }
+
+        public static bool IsParametric(this ParameterInfo src)
+            => src.ParameterType.IsGenericParameter 
+            || src.ParameterType.IsGenericMethodParameter 
+            || src.ParameterType.IsGenericTypeParameter;
+
+        /// <summary>
+        /// If a type is non-generic, returns an emtpy list.
+        /// If a type is open generic, returns a list of generic arguments
+        /// If a type is closed generic, returns a list of the types that were supplied as arguments to construct the type
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static Type[] GenericSlots(this Type t)
+        {
+            var effective = t.EffectiveType();
+            return !(effective.IsGenericType && !effective.IsGenericTypeDefinition) ? new Type[]{} 
+               : effective.IsConstructedGenericType
+               ? effective.GetGenericArguments()
+               : effective.GetGenericTypeDefinition().GetGenericArguments();
+        }
+
+        /// <summary>
+        /// For a non-constructed generic type or a generic type definition, returns an
+        /// array of the method's type parameters; otherwise, returns an empty array
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        public static Type[] OpenSlots(this Type t)
+        {
+            var effective = t.EffectiveType();
+            return effective.ContainsGenericParameters ? effective.GetGenericTypeDefinition().GetGenericArguments()
+             : effective.IsGenericTypeDefinition ? effective.GetGenericArguments()
+             : array<Type>();
+        }
+
+        public static int GenericSlotCount(this Type t)
+            => t.GenericSlots().Length;
 
         public static IEnumerable<Type> SuppliedGenericArguments(this Type t)
         {
@@ -466,6 +515,7 @@ namespace Z0
                     && (src.Name.StartsWith("<>", StringComparison.OrdinalIgnoreCase) || src.Name.StartsWith("VB$", StringComparison.OrdinalIgnoreCase))
                     && (src.Name.Contains("AnonymousType") || src.Name.Contains("AnonType"))
                     && src.GetTypeInfo().GetCustomAttributes(typeof(CompilerGeneratedAttribute)).Any();
+
 
         /// <summary>
         /// Determines whether the type is an option type and if so returns the underlying option

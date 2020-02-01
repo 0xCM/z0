@@ -47,7 +47,7 @@ namespace Z0
             => recursive ? Recurse(ext) : from f in Directory.GetFiles(FullPath, $"*.{ext}") select FilePath.Define(f);
 
         IEnumerable<FilePath> Recurse(FileExtension ext)        
-            => from d in Directory.EnumerateDirectories(FullPath)
+            => from d in items(FullPath).Union(Directory.EnumerateDirectories(FullPath))
                from f in Directory.GetFiles(d,$"*.{ext}")
                select FilePath.Define(f);             
 

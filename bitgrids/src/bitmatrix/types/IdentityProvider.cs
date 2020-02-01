@@ -11,7 +11,7 @@ namespace Z0
 
     readonly struct BitMatrixIdentityProvider : ITypeIdentityProvider
     {
-        public Moniker DefineIdentity(Type src)
+        public Option<Moniker> DefineIdentity(Type src)
         {
             const string prefix = "bm";
             

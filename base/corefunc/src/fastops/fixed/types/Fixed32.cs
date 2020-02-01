@@ -28,6 +28,22 @@ namespace Z0
             => new Fixed32((uint)x0);
 
         [MethodImpl(Inline)]
+        public static explicit operator sbyte(Fixed32 x)
+            => (sbyte)x.X0;
+
+        [MethodImpl(Inline)]
+        public static explicit operator byte(Fixed32 x)
+            => (byte)x.X0;
+
+        [MethodImpl(Inline)]
+        public static explicit operator short(Fixed32 x)
+            => (short)x.X0;
+
+        [MethodImpl(Inline)]
+        public static explicit operator ushort(Fixed32 x)
+            => (ushort)x.X0;
+
+        [MethodImpl(Inline)]
         public static explicit operator uint(Fixed32 x)
             => x.X0;
 
@@ -36,13 +52,21 @@ namespace Z0
             => (int)x.X0;
 
         [MethodImpl(Inline)]
+        public static explicit operator long(Fixed32 x)
+            => x.X0;
+
+        [MethodImpl(Inline)]
+        public static explicit operator ulong(Fixed32 x)
+            => (ulong)x.X0;
+
+        [MethodImpl(Inline)]
         internal Fixed32(uint x0)
             => X0 = x0;
 
-        public int Width
+        public FixedWidth Width
         {
             [MethodImpl(Inline)]
-            get => BitWidth;
+            get => (FixedWidth)BitWidth;
         }
 
         [MethodImpl(Inline)]

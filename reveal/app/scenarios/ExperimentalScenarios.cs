@@ -61,6 +61,20 @@ namespace Z0
 
         }
 
+        public Vector128<uint> InvokeBinaryImmediate_1(Vector128<uint> x, Vector128<uint> y)
+        {
+
+            return dinx.vblend2x64(x,y, (byte)4);
+        }
+
+        public Vector128<uint> InvokeBinaryImmediate_2()
+        {
+            var x = CpuVector.vparts(n128,1,2,3,4);
+            var y = CpuVector.vparts(n128,1,2,3,4);
+            return dinx.vblend2x64(x,y, (byte)4);
+
+        }
+
         public static uint xor_u32(uint a, uint b)
             => GX.eval(Classifiers.fXor,a,b);
 

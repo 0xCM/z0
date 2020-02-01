@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="count">The number of bytes to shift</param>
         /// <typeparam name="T">THe primal component type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static Vector128<T> vbsll<T>(Vector128<T> x, [Imm] byte count)
+        public static Vector128<T> vbsll<T>(Vector128<T> x, [Shift] byte count)
             where T : unmanaged
                 => vbsll_u(x,count);
 
@@ -33,12 +33,12 @@ namespace Z0
         /// <param name="count">The number of bytes to shift</param>
         /// <typeparam name="T">THe primal component type</typeparam>
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Integers)]
-        public static Vector256<T> vbsll<T>(Vector256<T> x, [Imm] byte count)
+        public static Vector256<T> vbsll<T>(Vector256<T> x, [Shift] byte count)
             where T : unmanaged
                 => vbsll_u(x,count);
 
         [MethodImpl(Inline)]
-        static Vector128<T> vbsll_u<T>(Vector128<T> x, [Imm] byte count)
+        static Vector128<T> vbsll_u<T>(Vector128<T> x, [Shift] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -54,7 +54,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vbsll_i<T>(Vector128<T> x, [Imm] byte count)
+        static Vector128<T> vbsll_i<T>(Vector128<T> x, [Shift] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -70,7 +70,7 @@ namespace Z0
         }
         
         [MethodImpl(Inline)]
-        static Vector256<T> vbsll_u<T>(Vector256<T> x, [Imm] byte count)
+        static Vector256<T> vbsll_u<T>(Vector256<T> x, [Shift] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -86,7 +86,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vbsll_i<T>(Vector256<T> x, [Imm] byte count)
+        static Vector256<T> vbsll_i<T>(Vector256<T> x, [Shift] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

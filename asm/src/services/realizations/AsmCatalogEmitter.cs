@@ -7,13 +7,11 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Collections.Specialized;
     using System.Reflection;
 
     using Z0.AsmSpecs;
 
     using static zfunc;
-    using static AsmServiceMessages;
 
     class AsmCatalogEmitter : IAsmCatalogEmitter
     {
@@ -64,59 +62,69 @@ namespace Z0
             return ref src;
         }
                         
-        GenericOpSpec ImmPrecapture(GenericOpSpec op)
-            => op;
-
-       IAsmImmCapture ImmCaptureSvc(MethodInfo src, Moniker baseid)
+        IAsmImmCapture UnaryImmCaptureSvc(MethodInfo src, Moniker baseid)
             => Context.UnaryImmCapture(src, baseid);
 
-        IEnumerable<AsmFunction> ResolveImmediates(GenericOpSpec op)                        
-            => OpSpecs.close(ImmPrecapture(op))
-                .Select(closure =>  ImmCaptureSvc(closure.ClosedMethod, closure.Id))
-                .SelectMany(svc => svc.Capture(ImmSelection));
-
-        IEnumerable<AsmFunction> ResolveImmediates(DirectOpGroup g)
-            => from op in g.Members
-                where FunctionType.vunaryImm(op.Method)
-                from f in ImmCaptureSvc(op.Method, op.Id).Capture(ImmSelection) 
-                select f;
-        IEnumerable<AsmEmissionToken> SaveImmResolutions(GenericOpSpec op, IAsmFunctionArchive dst)
+        IAsmImmCapture BinaryImmCaptureSvc(MethodInfo src, Moniker baseid)
+            => Context.BinaryImmCapture(src, baseid);
+                    
+        IEnumerable<AsmEmissionToken> EmitImm(GenericOpSpec op, IAsmFunctionArchive dst)
         {
-            if(FunctionType.vunaryImm(op.Method))
+            if(FunctionType.vunaryImm(op.Root))
+            {                                                
+                var resolutions = op.Close()
+                    .Select(closure => UnaryImmCaptureSvc(closure.ClosedMethod, closure.Id))
+                    .SelectMany(svc => svc.Capture(ImmSelection)).ToArray();                
+
+                if(resolutions.Length != 0)
+                    foreach(var token in dst.Save(AsmFunctionGroup.Define(op.Id, resolutions),true))
+                        yield return token;
+            }
+            else if(FunctionType.vbinaryImm(op.Root))
             {
-                
-                var resolutions = ResolveImmediates(op).ToArray();                
+                var resolutions = op.Close()
+                    .Select(closure => BinaryImmCaptureSvc(closure.ClosedMethod, closure.Id))
+                    .SelectMany(svc => svc.Capture(ImmSelection)).ToArray();                
+
                 if(resolutions.Length != 0)
                     foreach(var token in dst.Save(AsmFunctionGroup.Define(op.Id, resolutions),true))
                         yield return token;
             }
         }
 
-        IEnumerable<AsmEmissionToken> SaveImmResolutions(DirectOpGroup g, IAsmFunctionArchive dst)
+        IEnumerable<AsmEmissionToken> EmitImm(DirectOpGroupSpec op, IAsmFunctionArchive dst)
         {
-            var resolutions = ResolveImmediates(g).ToArray();
-            return resolutions.Length != 0 
-                ? dst.Save(AsmFunctionGroup.Define(g.Id, resolutions),true) 
-                : items<AsmEmissionToken>();
-        }
+            foreach(var member in op.Members.Where(m => FunctionType.vunaryImm(m.Root)))
+            {
+                var resolutions = UnaryImmCaptureSvc(member.Root, op.Id).Capture(ImmSelection);
+                var group = AsmFunctionGroup.Define(op.Id, resolutions.ToArray());
+                foreach(var r in dst.Save(group,true))
+                    yield return r;                
+            }
+
+            foreach(var member in op.Members.Where(m => FunctionType.vbinaryImm(m.Root)))
+            {
+                var resolutions = BinaryImmCaptureSvc(member.Root, op.Id).Capture(ImmSelection);
+                var group = AsmFunctionGroup.Define(op.Id, resolutions.ToArray());
+                foreach(var r in dst.Save(group,true))
+                    yield return r;                
+            }
+        }                    
 
         AsmFunction Decode(Moniker id, MethodInfo method)
             => Decoder.DecodeFunction(id, method);            
 
-        IEnumerable<AsmEmissionToken> Emit(DirectOpSpec op, IAsmFunctionArchive dst)
-            => items(dst.Save(Decode(op.Id, op.Method)));
-
-        IEnumerable<AsmEmissionToken> Emit(DirectOpGroup group, IAsmFunctionArchive dst)
+        IEnumerable<AsmEmissionToken> Emit(DirectOpGroupSpec group, IAsmFunctionArchive dst)
         {
-            var functions = group.Members.Map(m => Decode(m.Id, m.Method));
-            if(functions.Length != 0)
+            var functions = group.Members.Map(m => Decode(m.Id, m.Root));
+            if(functions.Length != 0)            
                 foreach(var token in dst.Save(AsmFunctionGroup.Define(group.Id, functions),true))
                     yield return token;            
         }
 
         IEnumerable<AsmEmissionToken> Emit(GenericOpSpec op, IAsmFunctionArchive dst)
         {
-            var functions = OpSpecs.close(op).Map(closure => Decoder.DecodeFunction(closure.Id, closure.ClosedMethod));
+            var functions = op.Close().Map(closure => Decoder.DecodeFunction(closure.Id, closure.ClosedMethod));
             if(functions.Length != 0)
             {
                 foreach(var token in dst.Save(AsmFunctionGroup.Define(op.Id, functions),true))
@@ -125,10 +133,16 @@ namespace Z0
         }
 
         IEnumerable<AsmEmissionToken> Emit(GenericOpSpec op, IAsmFunctionArchive primary, IAsmFunctionArchive immediate)
-            => FunctionType.immneeds(op.Method) ? SaveImmResolutions(op,immediate) : Emit(op,primary);
+            => FunctionType.immneeds(op.Root) ? EmitImm(op,immediate) : Emit(op,primary);
 
-        IEnumerable<AsmEmissionToken> Emit(DirectOpGroup g, IAsmFunctionArchive primary, IAsmFunctionArchive immediate)
-            => g.Members.Any(m => FunctionType.immneeds(m.Method)) ? SaveImmResolutions(g,immediate) : Emit(g,primary);
+        DirectOpGroupSpec PrimaryGroup(DirectOpGroupSpec g)
+            => DirectOpGroupSpec.Define(g.Id, g.Members.Where(m => !FunctionType.immneeds(m.Root)));
+
+        DirectOpGroupSpec ImmGroup(DirectOpGroupSpec g)
+            => DirectOpGroupSpec.Define(g.Id, g.Members.Where(m => FunctionType.immneeds(m.Root)));
+
+        IEnumerable<AsmEmissionToken> Emit(DirectOpGroupSpec g, IAsmFunctionArchive primary, IAsmFunctionArchive immediate)
+            => Emit(PrimaryGroup(g),primary).Union(EmitImm(ImmGroup(g),immediate));
 
         string ArchiveSubject(Type host, bool imm)
             =>  host.HostName() + (imm ?  "_imm" : string.Empty);
@@ -137,12 +151,12 @@ namespace Z0
             => pair(Archive(ArchiveSubject(host,false)),Archive(ArchiveSubject(host,true)));
 
         IEnumerable<AsmEmissionToken> EmitGeneric(Type host, IAsmFunctionArchive primary, IAsmFunctionArchive immediate)
-            => from op in OpSpecs.generic(host)
+            => from op in OpSpecs.Generic.FromHost(host)
                from emission in Emit(op, primary, immediate)
                 select emission;
 
         IEnumerable<AsmEmissionToken> EmitDirect(Type host, IAsmFunctionArchive primary, IAsmFunctionArchive immediate)
-            => from g in OpSpecs.directGroups(host)
+            => from g in OpSpecs.DirectGroups.FromHost(host)
                from emission in Emit(g, primary, immediate)
                 select emission;
 

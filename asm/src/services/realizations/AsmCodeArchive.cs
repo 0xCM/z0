@@ -20,7 +20,7 @@ namespace Z0
     /// </summary>
     public readonly struct AsmCodeArchive : IAsmCodeArchive
     {
-        readonly FolderPath Folder;
+        public FolderPath Root {get;}
 
         public IAsmContext Context {get;}
         
@@ -42,7 +42,7 @@ namespace Z0
             this.Catalog = catalog.ToString().ToLower();
             this.Subject = subject;
             this.Context = context;
-            this.Folder = LogPaths.The.AsmDataDir(RelativeLocation.Define(Catalog, subject));
+            this.Root = LogPaths.The.AsmDataDir(RelativeLocation.Define(Catalog, subject));
         }
 
         AsmCodeArchive(IAsmContext context, AssemblyId catalog)
@@ -50,7 +50,7 @@ namespace Z0
             this.Catalog = catalog.ToString().ToLower();
             this.Subject = string.Empty;
             this.Context = context;
-            this.Folder = LogPaths.The.AsmDataDir(FolderName.Define(Catalog));
+            this.Root = LogPaths.The.AsmDataDir(FolderName.Define(Catalog));
         }
 
         AsmCodeArchive(IAsmContext context, string catalog, string subject)
@@ -58,28 +58,15 @@ namespace Z0
             this.Context = context;
             this.Catalog = catalog;
             this.Subject = subject;
-            this.Folder = LogPaths.The.AsmDataDir(RelativeLocation.Define(catalog, subject));
+            this.Root = LogPaths.The.AsmDataDir(RelativeLocation.Define(catalog, subject));
         }
-
-        bool IsRoot
-            => Subject == string.Empty;
 
         /// <summary>
         /// Enumerates the files in the archive
         /// </summary>
-        public IEnumerable<FilePath> Files 
-            => Folder.Files(FileExtensions.Hex,true);
-        
-        public IEnumerable<FolderPath> Folders
-            => Folder.Subfolders;
-
-        /// <summary>
-        /// Materializes an untyped code block
-        /// </summary>
-        /// <param name="id">The identifying moniker</param>
-        public Option<AsmCode> ReadBlock(Moniker id)
-            => Read(Folder, id);
-    
+        IEnumerable<FilePath> Files 
+            => Root.Files(FileExtensions.Hex,true);
+            
         /// <summary>
         /// Reads a hex-line formatted file
         /// </summary>
@@ -96,7 +83,30 @@ namespace Z0
             }
         }
 
-        /// <summary>
+        public IEnumerable<AsmCode> Read(string name)
+            => Read(fn => fn.NoExtension == name);
+        // {
+        //     foreach(var file in Files.Where(path => path.FileName.NoExtension == name))
+        //     foreach(var item in Read(file))
+        //         yield return item;
+        // }
+        
+        public IEnumerable<AsmCode> Read()
+            => Read(_ => true);
+        // {
+        //     foreach(var file in Files)
+        //     foreach(var item in Read(file))
+        //         yield return item;
+        // }
+
+        public IEnumerable<AsmCode> Read(Func<FileName,bool> predicate)
+        {
+            foreach(var file in Files.Where(f => predicate(f.FileName)))
+            foreach(var item in Read(file))
+                yield return item;
+        }
+
+        /// <summary>        
         /// Reads a default-formatted hex-line file
         /// </summary>
         /// <param name="src">The source file path</param>
@@ -110,7 +120,7 @@ namespace Z0
         /// </summary>
         /// <param name="id">The identifying moniker</param>
         public IEnumerable<AsmCode> Read(Moniker id)
-            => Read(Folder + FileName.Define(id, AsmHexLine.FileExt));
+            => Read(Root + FileName.Define(id, AsmHexLine.FileExt));
 
         /// <summary>
         /// Materializes a typed code block (per user's insistence as the type is not checkeed in any way) 
@@ -118,20 +128,17 @@ namespace Z0
         /// </summary>
         /// <param name="subfolder">The asm log subfolder</param>
         /// <param name="id">The identifying moniker</param>
-        public Option<AsmCode<T>> ReadBlock<T>(Moniker id, T t = default)
+        public Option<AsmCode<T>> Read<T>(Moniker id, T t = default)
             where T : unmanaged
-                => Read(Folder,id, t);
-
+                => Read(Root,id, t);
+        
         static Option<AsmCode<T>> Read<T>(FolderPath location, Moniker m, T t = default)
             where T : unmanaged
                 => Try(() => AsmCode.Parse(Paths.AsmHexPath(location, m).ReadText(),m,t));
 
-        static Option<AsmCode> Read(FolderPath location, Moniker m)
-            => Try(() => AsmCode.Parse(Paths.AsmHexPath(location, m).ReadText(),m));
-
         public IAsmCodeArchive Clear()
         {
-            iter(Folder.Files(Paths.HexExt), f => f.Delete());
+            iter(Root.Files(Paths.HexExt), f => f.Delete());
             return this;
         }
     }

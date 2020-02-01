@@ -20,6 +20,10 @@ namespace Z0
         internal ulong X0;
 
         [MethodImpl(Inline)]
+        public static implicit operator Fixed64(int x0)
+            => new Fixed64((ulong)(long)x0);
+
+        [MethodImpl(Inline)]
         public static implicit operator Fixed64(long x0)
             => new Fixed64((ulong)x0);
 
@@ -28,21 +32,45 @@ namespace Z0
             => new Fixed64(x0);
 
         [MethodImpl(Inline)]
-        public static explicit operator ulong(Fixed64 x)
-            => x.X0;
+        public static explicit operator sbyte(Fixed64 x)
+            => (sbyte)x.X0;
+
+        [MethodImpl(Inline)]
+        public static explicit operator byte(Fixed64 x)
+            => (byte)x.X0;
+
+        [MethodImpl(Inline)]
+        public static explicit operator short(Fixed64 x)
+            => (short)x.X0;
+
+        [MethodImpl(Inline)]
+        public static explicit operator ushort(Fixed64 x)
+            => (ushort)x.X0;
+
+        [MethodImpl(Inline)]
+        public static explicit operator uint(Fixed64 x)
+            => (uint)x.X0;
+
+        [MethodImpl(Inline)]
+        public static explicit operator int(Fixed64 x)
+            => (int)x.X0;
 
         [MethodImpl(Inline)]
         public static explicit operator long(Fixed64 x)
             => (long)x.X0;
 
         [MethodImpl(Inline)]
+        public static explicit operator ulong(Fixed64 x)
+            => x.X0;
+
+        [MethodImpl(Inline)]
         internal Fixed64(ulong x0)
             => X0 = x0;
         
-        public int Width
+        public FixedWidth Width
         {
             [MethodImpl(Inline)]
-            get => BitWidth;
+            get => (FixedWidth)BitWidth;
         }
 
         [MethodImpl(Inline)]

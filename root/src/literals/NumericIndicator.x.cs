@@ -16,5 +16,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string Format(this NumericIndicator src)
             => src.Character().ToString();
+        
+        public static bool IsValid(this NumericIndicator src)
+            => Enum.IsDefined(typeof(NumericIndicator), src);
     }
 }

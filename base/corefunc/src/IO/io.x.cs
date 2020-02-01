@@ -153,5 +153,12 @@ namespace Z0
             }
             return count;
         }
+
+        public static IEnumerable<FilePath> WithExtension(this IEnumerable<FilePath> src, FileExtension ext)
+            => src.Where(path => path.Extension == ext);
+
+        public static IEnumerable<FilePath> WithExtensions(this IEnumerable<FilePath> src, params FileExtension[] extensions)
+            => src.Where(path => extensions.Any(e => e == path.Extension));
+
     }
 }

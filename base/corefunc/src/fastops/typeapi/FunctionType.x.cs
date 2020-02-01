@@ -143,20 +143,6 @@ namespace Z0
             => FunctionType.spanned(m);
 
         /// <summary>
-        /// Determines whether a method is classified as a nat op
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsNatOp(this MethodInfo m)
-            => FunctionType.natural(m);
-
-        /// <summary>
-        /// Determines whether all operands are primal
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static bool IsPrimalOp(this MethodInfo m)
-            => FunctionType.primal(m);
-
-        /// <summary>
         /// Determines whether a method defines a predicate that returns a bit or bool value
         /// </summary>
         /// <param name="m">The method to examine</param>

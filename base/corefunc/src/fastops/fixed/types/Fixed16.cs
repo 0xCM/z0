@@ -19,21 +19,45 @@ namespace Z0
         internal ushort X0;
 
         [MethodImpl(Inline)]
-        public static implicit operator Fixed16(ushort x0)
-            => new Fixed16(x0);
+        public static implicit operator Fixed16(ushort x)
+            => new Fixed16(x);
 
         [MethodImpl(Inline)]
-        public static implicit operator Fixed16(short x0)
-            => new Fixed16((ushort)x0);
+        public static implicit operator Fixed16(short x)
+            => new Fixed16((ushort)x);
 
         [MethodImpl(Inline)]
-        internal Fixed16(ushort x0)
-            => X0 = x0;
+        public static implicit operator Fixed16(int x)
+            => new Fixed16((ushort)((short)x));
 
-        public int Width
+        [MethodImpl(Inline)]
+        public static implicit operator Fixed16(uint x)
+            => new Fixed16((ushort)x);
+
+        [MethodImpl(Inline)]
+        public static explicit operator sbyte(Fixed16 x)
+            => (sbyte)x.X0;
+
+        [MethodImpl(Inline)]
+        public static explicit operator byte(Fixed16 x)
+            => (byte)x.X0;
+        
+        [MethodImpl(Inline)]
+        public static explicit operator short(Fixed16 x)
+            => (short)x.X0;
+
+        [MethodImpl(Inline)]
+        public static explicit operator ushort(Fixed16 x)
+            => x.X0;
+
+        [MethodImpl(Inline)]
+        internal Fixed16(ushort x)
+            => X0 = x;
+
+        public FixedWidth Width
         {
             [MethodImpl(Inline)]
-            get => BitWidth;
+            get => (FixedWidth)BitWidth;
         }
 
         [MethodImpl(Inline)]
@@ -48,8 +72,5 @@ namespace Z0
 
         public override string ToString() 
             => X0.ToString();
-
     }
-
-
 }

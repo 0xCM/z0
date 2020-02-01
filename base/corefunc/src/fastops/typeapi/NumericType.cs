@@ -44,7 +44,7 @@ namespace Z0
         /// <typeparam name="T">The type to test</typeparam>
         [MethodImpl(Inline)]
         public static bit unsigned(NumericKind k)
-            => (k & NumericKind.Unsigned) != 0;
+            => (k & NumericKind.Unsigned) != 0;        
 
         /// <summary>
         /// Produces a character {i | u | f} indicating whether the source type is signed, unsigned or float
@@ -173,6 +173,36 @@ namespace Z0
             where T : unmanaged
                 => kind_u(t);
         
+        /// <summary>
+        /// Attempts to parse a numeric kind from a string in the form {width}{indicator} 
+        /// </summary>
+        /// <param name="src">The source text</param>
+        public static Option<NumericKind> ParseKind(string src)
+        {
+            var fail = none<NumericKind>();
+            var input = src.Trim();
+            if(string.IsNullOrWhiteSpace(input))
+                return fail;
+            
+            var indicator = (NumericIndicator)input.Last();
+            if(!indicator.IsLiteral() || indicator == NumericIndicator.None)
+                return fail;
+            
+            var width = 0u;
+            if(!uint.TryParse(input.Substring(0, input.Length - 1), out width))
+                return fail;
+            
+            var fw = (FixedWidth)width;
+            if(!fw.IsLiteral())
+                return fail;
+            
+            var kind = fw.ToNumericKind(indicator);
+            if(!kind.IsLiteral())
+                return fail;
+            
+            return kind;                            
+        }
+
         [MethodImpl(Inline)]
         public static FixedWidth width(Type t)
         {

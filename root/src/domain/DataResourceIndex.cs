@@ -20,7 +20,6 @@ namespace Z0
             var dst = new DataResourceIndex();
             foreach(var r in src)
                dst.Add(r);
-
             return dst;
         }   
 
@@ -49,7 +48,6 @@ namespace Z0
         public bool IsEmpty
             => Index.Count == 0;
 
-
         void Add(DataResource r)        
         {
             if(!Index.TryAdd(r.Location, r))
@@ -60,7 +58,6 @@ namespace Z0
         {
             foreach(var r in src.Indexed)
                 Add(r);
-
         }
     }
 }

@@ -9,14 +9,62 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using AsmSpecs;
+    using System.Runtime.Intrinsics;
+    using System.Runtime.CompilerServices;
 
     using static zfunc;
 
     public static partial class AsmExtend
     {
+        [MethodImpl(Inline)]
         public static IAsmDecoder Decoder(this IAsmContext context, int? bufferlen = null)
-            => AsmDecoder.Create(context, bufferlen);                
-        
+            => AsmDecoder.Create(context, bufferlen);                        
+                
+        /// <summary>
+        /// Instantiates a service that produces immediate-specific code for supported function types that require immediate values
+        /// </summary>
+        /// <param name="context">The context in which the service will be created</param>
+        /// <typeparam name="T">The primitive type over which the delegate will be instantiated</typeparam>
+        /// <typeparam name="D">The delegate type</typeparam>
+        [MethodImpl(Inline)]
+        public static IAsmImmBuilder<D> ImmProducer<T,D>(this IAsmContext context)
+            where D : Delegate
+            where T : unmanaged
+                => AsmImmFunctionBuilder.Define<T, D>(context);
+
+        [MethodImpl(Inline)]
+        public static IAsmImmBuilder ImmProducer(this IAsmContext context, HK.Vec128 vk, HK.Op<N1> opk)
+            => AsmImmFunctionBuilder.Define(context, vk, opk);
+
+        [MethodImpl(Inline)]
+        public static IAsmImmBuilder ImmProducer(this IAsmContext context, HK.Vec256 vk, HK.Op<N1> opk)
+            => AsmImmFunctionBuilder.Define(context, vk, opk);
+
+        [MethodImpl(Inline)]
+        public static IAsmImmBuilder ImmProducer(this IAsmContext context, HK.Vec128 vk, HK.Op<N2> opk)
+            => AsmImmFunctionBuilder.Define(context, vk, opk);
+
+        [MethodImpl(Inline)]
+        public static IAsmImmBuilder ImmProducer(this IAsmContext context, HK.Vec256 vk, HK.Op<N2> opk)
+            => AsmImmFunctionBuilder.Define(context, vk, opk);
+
+        [MethodImpl(Inline)]
+        public static IAsmImmBuilder ImmOpProvider(IAsmContext context, HK.Vec128 vk, HK.Op<N1> opk)
+            => AsmImmFunctionBuilder.Define(context, vk,opk);
+
+        [MethodImpl(Inline)]
+        public static IAsmImmBuilder ImmOpProvider(IAsmContext context, HK.Vec256 vk, HK.Op<N1> opk)
+            => AsmImmFunctionBuilder.Define(context, vk,opk);
+
+        [MethodImpl(Inline)]
+        public static IAsmImmBuilder ImmOpProvider(IAsmContext context, HK.Vec128 vk, HK.Op<N2> opk)
+            => AsmImmFunctionBuilder.Define(context, vk,opk);
+
+        [MethodImpl(Inline)]
+        public static IAsmImmBuilder ImmOpProvider(IAsmContext context, HK.Vec256 vk, HK.Op<N2> opk)
+            => AsmImmFunctionBuilder.Define(context, vk,opk);
+
+
         public static void CaptureDelegate(this IAsmContext context, Delegate src, IAsmFunctionWriter dst)
         {
             var capture = NativeCapture.capture(src,dst.TakeBuffer());
@@ -51,16 +99,39 @@ namespace Z0
                 _ => throw unsupported(resolver.GetType())
             };   
 
+        [MethodImpl(Inline)]
         public static IAsmImmCapture UnaryImmCapture(this IAsmContext context, MethodInfo src, Moniker baseid)
-            => AsmImmUnaryCapture.Create(context, src,baseid);
+            => AsmImmCapture.UnaryCapture(context, src,baseid);
+
+        [MethodImpl(Inline)]
+        public static IAsmImmCapture BinaryImmCapture(this IAsmContext context, MethodInfo src, Moniker baseid)
+            => AsmImmCapture.BinaryCapture(context, src, baseid);
+
+        [MethodImpl(Inline)]
+        public static IAsmImmCapture UnaryImmCapture(this IAsmContext context, MethodInfo src)
+            => AsmImmCapture.UnaryCapture(context, src, src.Identity());
+
+        [MethodImpl(Inline)]
+        public static IAsmImmCapture BinaryImmCapture(this IAsmContext context, MethodInfo src)
+            => AsmImmCapture.BinaryCapture(context, src, src.Identity());
+
+        [MethodImpl(Inline)]
+        public static AsmFunction BinaryImmCapture(this IAsmContext context, MethodInfo src, byte imm)
+            => context.BinaryImmCapture(src).Capture(imm);
+
+        [MethodImpl(Inline)]
+        public static AsmFunction UnaryImmCapture(this IAsmContext context, MethodInfo src, byte imm)
+            => context.UnaryImmCapture(src).Capture(imm);
 
         /// <summary>
         /// Instantiates an internal/first-round asm formatter service
         /// </summary>
         /// <param name="config">The configuration to use</param>
+        [MethodImpl(Inline)]
         internal static IBaseAsmFormatter BaseAsmFormatter(this IAsmContext context)
             => AsmFunctionFormatter.BaseFormatter(context);
 
+        [MethodImpl(Inline)]
         public static IAsmFunctionFormatter AsmFormatter(this IAsmContext context)
             => AsmFunctionFormatter.Create(context);
 
@@ -69,6 +140,7 @@ namespace Z0
         /// </summary>
         /// <param name="catalog">The catalog name</param>
         /// <param name="subject">The subject</param>
+        [MethodImpl(Inline)]
         public static IAsmCodeArchive CodeArchive(this IAsmContext context, AssemblyId assembly, string subject)
             => AsmCodeArchive.Create(context, assembly, subject);
 
@@ -77,6 +149,7 @@ namespace Z0
         /// </summary>
         /// <param name="catalog">The catalog name</param>
         /// <param name="subject">The subject</param>
+        [MethodImpl(Inline)]
         public static IAsmCodeArchive CodeArchive(this IAsmContext context, AssemblyId id)
             => AsmCodeArchive.Create(context,id);
 
@@ -85,6 +158,7 @@ namespace Z0
         /// </summary>
         /// <param name="catalog">The catalog name</param>
         /// <param name="subject">The subject</param>
+        [MethodImpl(Inline)]
         public static IAsmCodeArchive CodeArchive(this IAsmContext context, string catalog, string subject)
             => AsmCodeArchive.Create(context, catalog, subject);
 
@@ -94,9 +168,16 @@ namespace Z0
         /// <param name="catalog">The catalog name</param>
         /// <param name="subject">The subject</param>
         /// <param name="config">The archive configuration</param>
+        [MethodImpl(Inline)]
         public static IAsmFunctionArchive FunctionArchive(this IAsmContext context, string catalog, string subject)
             => AsmFunctionArchive.Create(context, catalog,subject);
 
+        /// <summary>
+        /// Instantiates a <cref="IAsmFunctionEmitter"/> service
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        [MethodImpl(Inline)]
         public static IAsmFunctionEmitter AsmEmitter(this IAsmContext context)
             => AsmFunctionEmitter.Create(context);
 
@@ -105,6 +186,7 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The target path</param>
         /// <param name="header">Whether to emit a header when creating a new file or overwriting an existing file</param>
+        [MethodImpl(Inline)]
         public static ICilWriter CilWriter(this IAsmContext context, FilePath dst)
             => Z0.CilWriter.Create(context,dst);
 
@@ -153,6 +235,9 @@ namespace Z0
 
         public static ICilFormatter CilFormatter(this IAsmContext context)
             => Z0.CilFormatter.Create(context);
+
+        public static IAsmExecBuffer ExecBuffer(this IAsmContext context, int? size = null)
+            => AsmExecBuffer.Create(context, size);
     }
 
 }

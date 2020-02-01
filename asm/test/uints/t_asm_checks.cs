@@ -16,20 +16,11 @@ namespace Z0
 
     public class t_asm_checks : t_asm<t_asm_checks>, IDisposable
     {           
-
-        // static IEnumerable<AsmInstructionList> GetInstructions(IAsmContext context, AssemblyId id)
-        // {
-        //     var archive = context.CodeArchive(id);
-        //     var decoder = context.Decoder();
-        //     foreach(var file in archive.Files)
-        //     foreach(var codeblock in archive.Read(file))
-        //         yield return decoder.DecodeInstructions(codeblock);                
-        // }
-
         static int activations;
+        
         static void OnMnemonid(Instruction i)
         {
-            //print($"{i.Op0Register},{i.Op1Register},{i.Op2Register}");
+            
             activations++;
         }
 
@@ -41,9 +32,10 @@ namespace Z0
             return src;
         }
 
-        internal void RunExplicit()
+
+        void RunPipe()
         {
-            //var source = AsmInstructionSource.FromProducer(() => GetInstructions(Context, AssemblyId.Intrinsics));
+
             var archive =  Context.CodeArchive(AssemblyId.Intrinsics);
             var source = archive.ToInstructionSource();
             var trigger = AsmMnemonicTrigger.Define(Mnemonic.Vinserti128, OnMnemonid);
@@ -62,105 +54,272 @@ namespace Z0
                 }
             }
 
-            //Trace($"Trigger should have activated {count} times");
             
-            Trace($"{listcount} instruction lists were processed out of {source.Instructions.Count()} available");
-            Trace($"Trigger activate {activations} times");
+            TraceCaller($"{listcount} instruction lists were processed out of {source.Instructions.Count()} available");
+            TraceCaller($"Trigger activate {activations} times");
 
-            //CheckArchives();
-
-            // var decoder = Context.Decoder();
-            // var code = asm.dinx.vtestz.find(n128, z32).Require();
-            // var instructions = decoder.DecodeInstructions(code);
-            // var @base = instructions[0].IP;
-            // for(int j = 0; j< instructions.Length; j++)
-            // {
-            //     var i = instructions[j];
-            //     var operands = i.SummarizeOperands(@base);
-            //     for(var k = 0; k< operands.Length; k++)
-            //     {
-            //         var operand = operands[k];                    
-            //         operand.Register.OnSome(x => TraceInfo(x));
-            //         operand.Memory.OnSome(x => TraceInfo(x));
-            //     }
-
-
-                
-            // }
-            
 
         }
 
-        void CheckArchives()
+        void CheckBinaryImm(IAsmExecBuffer buffer)
         {
-            CheckMathArchive();
-            CheckIntrinsicAdd();
+            var w = n256;
+            var name = nameof(dinx.vblend8x16);
+            var imm = (byte)Blend8x16.LRLRLRLR;
+
+            var provider = ImmOpProviders.provider(HK.vk256<ushort>(),HK.opk(n2));
+            var x = Random.CpuVector<ushort>(w);
+            var y = Random.CpuVector<ushort>(w);
+            
+            var method = Intrinsics.Vectorized<ushort>(w, false, name).Single();            
+            var dynop = provider.CreateOp(method,imm);
+            var f = dynop.DynamicOp;
+            var z1 = f.Invoke(x,y);
+
+            var asm = Context.Decoder().DecodeFunction(dynop);
+            iter(asm.Instructions, i => Trace(i));  
+
+            var g = buffer.BinaryOp<Fixed256>(asm.Code);
+            var z3 = g(x,y).ToVector<ushort>();
+            Claim.eq(z1,z3);
         }
 
-        void CheckMathArchive()
+        void CheckBinaryImm<T>(IAsmExecBuffer buffer, N128 w, string name, byte imm)
+            where T : unmanaged
+        {            
+            var provider = ImmOpProviders.provider(HK.vk128<T>(), HK.opk(n2));
+
+            var x = Random.CpuVector<T>(w);
+            var y = Random.CpuVector<T>(w);
+            
+            var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
+            var dynop = provider.CreateOp(method,imm);
+            var z1 = dynop.DynamicOp.Invoke(x,y);
+            
+            var asm = Context.Decoder().DecodeFunction(dynop);
+
+            Trace(asm.Id);
+            iter(asm.Instructions, i => Trace(i));  
+
+            var f = buffer.BinaryOp<Fixed128>(asm.Code);
+            var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
+            Claim.eq(z1,z2);
+        }
+
+        void CheckBinaryImm<T>(IAsmExecBuffer buffer, N256 w, string name, byte imm)
+            where T : unmanaged
+        {            
+            var provider = ImmOpProviders.provider<T>(HK.vk256<T>(), HK.opk(n2));
+
+            var x = Random.CpuVector<T>(w);
+            var y = Random.CpuVector<T>(w);
+            
+            var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
+            var dynop = provider.CreateOp(method,imm);
+            var z1 = dynop.DynamicOp.Invoke(x,y);
+            
+            var asm = Context.Decoder().DecodeFunction(dynop);
+
+            Trace(asm.Id);
+            iter(asm.Instructions, i => Trace(i));  
+
+            var f = buffer.BinaryOp<Fixed256>(asm.Code);
+            var z2 = f(x.ToFixed(),y.ToFixed()).ToVector<T>();
+            Claim.eq(z1,z2);
+        }
+
+        void CheckUnaryImm<T>(IAsmExecBuffer buffer, N256 w, string name, byte imm)
+            where T : unmanaged
+        {            
+            var method = Intrinsics.Vectorized<T>(w, false, name).Single();            
+            var provider = ImmOpProviders.provider<T>(HK.vk256<T>(), HK.opk(n1));
+
+            
+            var dynop = provider.CreateOp(method,imm);
+
+            var x = Random.CpuVector<T>(w);
+            var z1 = dynop.DynamicOp.Invoke(x);
+            
+            var capture = Context.Decoder().DecodeFunction(dynop);
+
+            Trace(capture.Id);
+            iter(capture.Instructions, i => Trace(i));  
+
+            var f = buffer.UnaryOp<Fixed256>(capture.Code);
+            var z2 = f(x.ToFixed()).ToVector<T>();
+            Claim.eq(z1,z2);
+        }
+
+        internal void RunExplicit()
         {
-            var src = AssemblyId.GMath;
+            using var buffer = Context.ExecBuffer();
+
+            CheckBinaryImm<uint>(buffer, n128, nameof(dinx.vblend4x32), (byte)Blend4x32.LRLR);    
+            CheckBinaryImm<uint>(buffer, n256, nameof(dinx.vblend8x32), (byte)Blend8x32.LRLRLRLR);    
+            CheckUnaryImm<ushort>(buffer,n256, nameof(dinx.vbsll), 3);        
+        }
+
+        void Run50()
+        {
+            using var lBuffer = Context.ExecBuffer();
+            using var rBuffer = Context.ExecBuffer();
+            var id = AssemblyId.GMath;
+            var direct = Context.CodeArchive(id, nameof(math));
+            var generic = Context.CodeArchive(id, nameof(gmath));
+
+            foreach(var a in direct.Read().Where(asm => asm.ParameterCount() == 1))
+            {                
+                if(a.AcceptsParameter(NumericKind.U8))
+                {
+                    var af = a.AsFixed<Fixed8>();
+                    var bf = a.AsFixed<Fixed8>();
+                    CheckUnaryOp(lBuffer, af, rBuffer, bf);
+                }
+                if(a.AcceptsParameter(NumericKind.U32))
+                {
+                    var af = a.AsFixed<Fixed32>();
+                    var bf = a.AsFixed<Fixed32>();
+                    CheckUnaryOp(lBuffer, af, rBuffer, bf);
+                }
+                else if(a.AcceptsParameter(NumericKind.U64))
+                {
+                    var af = a.AsFixed<Fixed64>();
+                    var bf = a.AsFixed<Fixed64>();
+                    CheckUnaryOp(lBuffer, af, rBuffer, bf);
+                }
+
+            }
+
+        }
+
+        void RunCheckers(IAsmExecBuffer buffer)
+        {
+            var id = AssemblyId.GMath;
             var subject = nameof(math);
-            var op = nameof(math.and);
-            var index = Context.CodeArchive(src,subject).Read(Moniker.Parse(op)).ToCodeIndex(false); 
+            RunChecker(id, subject, nameof(math.inc), buffer, CheckUnaryFunc);
+            RunChecker(id, subject, nameof(math.add), buffer, CheckBinaryFunc);
+        }
 
-            index.PrimalOp(op, NumericKind.U32)
-                    .OnSome(code => Trace(code,SeverityLevel.HiliteCD))
-                    .OnNone(() => Claim.fail());
+        void CheckUnaryOp<T>(IAsmExecBuffer buffer, AsmCode src, Func<T,T> f)
+            where T : unmanaged, IFixed
 
-            index.PrimalOp(op, z32)
-                    .OnSome(code => Trace(code,SeverityLevel.HiliteCD))
-                    .OnNone(() => Claim.fail());
+        {            
+            TraceCaller($"Checking {src.Id}");
+            var g = (FixedFunc<T,T>)Dynop.UnaryOp(src.Id, buffer.Load(src),typeof(FixedFunc<T,T>),typeof(T));
+            var points = Random.Fixed<T>().Take(RepCount);
+            iter(points, x => Claim.eq(f(x), g(x)));            
+            
+        }   
+
+        void RunChecker(AssemblyId id, string subject, string function, IAsmExecBuffer buffer, Action<IAsmExecBuffer,AsmCode> checker)
+        {
+            Trace($"Checking {function} group");
+            var archive = Context.CodeArchive(id, subject);
+            foreach(var entry in archive.Read(function))
+            {
+                Trace($"Checking {entry.Id} group");
+                checker(buffer,entry);
+            }
+
+        }
+        
+        void CheckUnaryOp<T>(IAsmExecBuffer lbuffer, in FixedAsm<T> a, IAsmExecBuffer rbuffer, in FixedAsm<T> b)
+            where T : unmanaged, IFixed
+        {            
+            TraceCaller($"Checking {a.Id} == {b.Id} match");
+            
+            var f = (FixedFunc<T,T>)Dynop.UnaryOp(a.Id, lbuffer.Load(a.Code),typeof(FixedFunc<T,T>),typeof(T));
+            var g = (FixedFunc<T,T>)Dynop.UnaryOp(b.Id, rbuffer.Load(b.Code),typeof(FixedFunc<T,T>),typeof(T));
+
+            var points = Random.Fixed<T>().Take(RepCount);
+            iter(points, x => Claim.eq(f(x), g(x)));            
 
         }
 
-        static class asm
-        {
-            public class dinx
+        void CheckUnaryFunc(IAsmExecBuffer buffer, AsmCode src)
+        {            
+            var nk =  NumericType.ParseKind(src.Id.TextComponents.Second()).Require();
+            switch(nk)
             {
-                public IAsmContext Context;
-                
-                public dinx(IAsmContext context)
-                {
-                    this.Context = context;
-                }
-                
-                public IAsmCodeArchive archive
-                    => Context.CodeArchive(AssemblyId.Intrinsics, nameof(dinx));
-                
-                public class vtestz
-                {
-                    IAsmCodeArchive archive;
-                    public vtestz(IAsmCodeArchive archive)
-                    {
-                        this.archive = archive;
-                    }
-
-                    public IAsmVCodeIndex index
-                        => archive.Read(Moniker.Parse(nameof(vtestz))).ToCodeIndex(false);
-
-                    public Option<AsmCode> find<N,T>(N n = default, T t = default)
-                        where N : unmanaged, ITypeNat
-                        where T : unmanaged
-                            => index.Find<N,T>(nameof(vtestz));
-                }
+                case NumericKind.I8:
+                    var f8i = buffer.UnaryOp<Fixed8>(src);
+                    Trace((sbyte)f8i((sbyte) -9));
+                    break;
+                case NumericKind.U8:
+                    var f8u = buffer.UnaryOp<Fixed8>(src);
+                    Trace(f8u((byte) 7));
+                    break;
+                case NumericKind.I16:
+                    var f16i = buffer.UnaryOp<Fixed16>(src);
+                    Trace((short)f16i((short) -17));
+                    break;
+                case NumericKind.U16:
+                    var f16u = buffer.UnaryOp<Fixed16>(src);
+                    Trace(f16u((ushort) 15));
+                    break;                    
+                case NumericKind.I32:
+                    var f32i = buffer.UnaryOp<Fixed32>(src);
+                    Trace((int)f32i((int) -33));
+                    break;
+                case NumericKind.U32:
+                    var f32u = buffer.UnaryOp<Fixed32>(src);
+                    Trace(f32u((uint) 31));
+                    break;                    
+                case NumericKind.I64:
+                    var f64i = buffer.UnaryOp<Fixed64>(src);
+                    Trace((long)f64i((long) -65));
+                    break;
+                case NumericKind.U64:
+                    var f64u = buffer.UnaryOp<Fixed64>(src);
+                    Trace(f64u((ulong) 63));
+                    break;                                    
             }
         }
 
-        void CheckIntrinsicAdd()
+        void CheckBinaryFunc(IAsmExecBuffer buffer, AsmCode src)
         {
-            var archive = Context.CodeArchive(AssemblyId.Intrinsics, nameof(dinx));
-            
-            var index = archive.Read(Moniker.Parse(nameof(dinx.vadd))).ToCodeIndex(false);
+            var kind = NumericType.ParseKind(src.Id.TextComponents.Last());
+            if(kind.IsNone())
+                return;
 
-            index.VectorOp(nameof(dinx.vadd), FixedWidth.W256, NumericKind.U32)
-                    .OnSome(code => Trace(code,SeverityLevel.HiliteCD))
-                    .OnNone(() => Claim.fail());
-
-            index.VectorOp(nameof(dinx.vadd), n256, z32)
-                    .OnSome(code => Trace(code,SeverityLevel.HiliteCD))
-                    .OnNone(() => Claim.fail());
-
+            switch(kind.Value)
+            {
+                case NumericKind.I8:
+                    var f8i = buffer.BinaryOp<Fixed8>(src);
+                    Trace(f8i(5,7));
+                    break;
+                case NumericKind.U8:
+                    var f8u = buffer.BinaryOp<Fixed8>(src);
+                    Trace(f8u(5,7));
+                    break;
+                case NumericKind.I16:
+                    var f16i = buffer.BinaryOp<Fixed16>(src);
+                    Trace(f16i(3,6));
+                    break;
+                case NumericKind.U16:
+                    var f16u = buffer.BinaryOp<Fixed16>(src);
+                    Trace(f16u(12,12));
+                    break;                    
+                case NumericKind.I32:
+                    var f32i = buffer.BinaryOp<Fixed32>(src);
+                    Trace(f32i(10,10));
+                    break;
+                case NumericKind.U32:
+                    var f32u = buffer.BinaryOp<Fixed32>(src);
+                    Trace(f32u(20,10));
+                    break;                    
+                case NumericKind.I64:
+                    var f64i = buffer.BinaryOp<Fixed64>(src);
+                    Trace(f64i(50,50));
+                    break;
+                case NumericKind.U64:
+                    var f64u = buffer.BinaryOp<Fixed64>(src);
+                    Trace(f64u(13,13));
+                    break;                    
+                default:
+                    Trace($"{kind}");
+                    break;
+            }
         }
 
         public void datares_check()
@@ -309,39 +468,32 @@ namespace Z0
             var dSrc = nameof(math);
             var gSrc = nameof(gmath);
 
-            var dId = OpIdentity.define(name, kind, false);
-            var gId = OpIdentity.define(name, kind, true);
+            var dId = OpIdentities.define(name, kind, false);
+            var gId = OpIdentities.define(name, kind, true);
 
             var dArchive = Context.CodeArchive(catalog, dSrc);
             var gArchive = Context.CodeArchive(catalog, gSrc);
 
-            var dAsm = dArchive.ReadBlock(dId).OnNone(() => PostMessage($"{dId} not found"));
-            var gAsm = gArchive.ReadBlock(gId).OnNone(() => PostMessage($"{gId} not found"));
+            var d = dArchive.Read(dId).Single();
+            var g = gArchive.Read(gId).Single();
 
-            var success = from d in dAsm
-                          from g in gAsm
-                          let result = binop_match(w,d,g)
-                          select result;
+            Claim.yea(binop_match(w,d,g));                         
 
-            success.OnNone(() => Claim.fail());
+            
         }
 
         void vector_match(string name, FixedWidth w, NumericKind kind)
         {
             var catalog = typeof(dinx).Assembly.OperationCatalog().CatalogName;
             
-            var idD = OpIdentity.segmented(name, w, kind, false);
-            var idG = OpIdentity.segmented(name, w, kind, true);
+            var idD = OpIdentities.segmented(name, w, kind, false);
+            var idG = OpIdentities.segmented(name, w, kind, true);
 
-            var asmD = Context.CodeArchive(catalog, nameof(dinx)).ReadBlock(idD).OnNone(() => PostMessage($"{idD} not found"));
-            var asmG = Context.CodeArchive(catalog, nameof(ginx)).ReadBlock(idG).OnNone(() => PostMessage($"{idG} not found"));
+            var d = Context.CodeArchive(catalog, nameof(dinx)).Read(idD).Single();
+            var g = Context.CodeArchive(catalog, nameof(ginx)).Read(idG).Single();
 
-            var success = from d in asmD
-                          from g in asmG
-                          let result = binop_match(w,d,g)
-                          select result;
+            Claim.yea(binop_match(w,d,g));
 
-            success.OnNone(() => Claim.fail());
         }
 
         bit binop_match(FixedWidth w, AsmCode a, AsmCode b)

@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<sbyte> vbsll(Vector128<sbyte> x, [Imm] byte count)
+        public static Vector128<sbyte> vbsll(Vector128<sbyte> x, [Shift(false)] byte count)
             => ShiftLeftLogical128BitLane(x, count);
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vbsll(Vector128<byte> x, [Imm] byte count)
+        public static Vector128<byte> vbsll(Vector128<byte> x, [Shift(false)] byte count)
             => ShiftLeftLogical128BitLane(x, count);
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<short> vbsll(Vector128<short> x, [Imm] byte count)
+        public static Vector128<short> vbsll(Vector128<short> x, [Shift(false)] byte count)
             => ShiftLeftLogical128BitLane(x, count);
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vbsll(Vector128<ushort> x, [Imm] byte count)
+        public static Vector128<ushort> vbsll(Vector128<ushort> x, [Shift(false)] byte count)
             => ShiftLeftLogical128BitLane(x, count);
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<int> vbsll(Vector128<int> x, [Imm] byte count)
+        public static Vector128<int> vbsll(Vector128<int> x, [Shift(false)] byte count)
             => ShiftLeftLogical128BitLane(x, count);
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<uint> vbsll(Vector128<uint> x, [Imm] byte count)
+        public static Vector128<uint> vbsll(Vector128<uint> x, [Shift(false)] byte count)
             => ShiftLeftLogical128BitLane(x, count);
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<long> vbsll(Vector128<long> x, [Imm] byte count)
+        public static Vector128<long> vbsll(Vector128<long> x, [Shift(false)] byte count)
             => ShiftLeftLogical128BitLane(x, count);
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<ulong> vbsll(Vector128<ulong> x, [Imm] byte count)
+        public static Vector128<ulong> vbsll(Vector128<ulong> x, [Shift(false)] byte count)
             => ShiftLeftLogical128BitLane(x, count);
         
         /// <summary>
@@ -102,7 +102,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<sbyte> vbsll(Vector256<sbyte> x, [Imm] byte count)
+        public static Vector256<sbyte> vbsll(Vector256<sbyte> x, [Shift(false)] byte count)
             => ShiftLeftLogical128BitLane(x, count);
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> vbsll(Vector256<byte> x, [Imm] byte count)
+        public static Vector256<byte> vbsll(Vector256<byte> x, [Shift(false)] byte count)
             => ShiftLeftLogical128BitLane(x, count);
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<short> vbsll(Vector256<short> x, [Imm] byte count)
+        public static Vector256<short> vbsll(Vector256<short> x, [Shift(false)] byte count)
             => ShiftLeftLogical128BitLane(x, count);
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vbsll(Vector256<ushort> x, [Imm] byte count)
+        public static Vector256<ushort> vbsll(Vector256<ushort> x, [Shift(false)] byte count)
             => ShiftLeftLogical128BitLane(x, count);
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<int> vbsll(Vector256<int> x, [Imm] byte count)
+        public static Vector256<int> vbsll(Vector256<int> x, [Shift(false)] byte count)
             => ShiftLeftLogical128BitLane(x, count);
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<uint> vbsll(Vector256<uint> x, [Imm] byte count)
+        public static Vector256<uint> vbsll(Vector256<uint> x, [Shift(false)] byte count)
             => ShiftLeftLogical128BitLane(x, count);
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<long> vbsll(Vector256<long> x, byte count)
+        public static Vector256<long> vbsll(Vector256<long> x, [Shift(false)] byte count)
             => ShiftLeftLogical128BitLane(x, count);
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vbsll(Vector256<ulong> x, [Imm] byte count)
+        public static Vector256<ulong> vbsll(Vector256<ulong> x, [Shift(false)] byte count)
             => ShiftLeftLogical128BitLane(x, count);          
     }
 }

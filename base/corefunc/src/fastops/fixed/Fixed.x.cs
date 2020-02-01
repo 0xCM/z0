@@ -86,6 +86,11 @@ namespace Z0
                     throw unsupported(kind);
             }
         }
+
+        public static string FormatBits<T>(this T src)
+            where T : unmanaged, IFixed
+                => BitConvert.GetBytes(in src).FormatBits();
+
     }
 
 }

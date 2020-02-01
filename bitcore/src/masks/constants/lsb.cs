@@ -320,7 +320,6 @@ namespace Z0
         /// 0x0101010101010101 = [00000001 00000001 00000001 00000001 00000001 00000001 00000001 00000001]
         /// </summary>
         [BinaryLiteral("[00000001 00000001 00000001 00000001 00000001 00000001 00000001 00000001]")]
-        [HexLiteral(0x0101010101010101)]
         public const ulong Lsb64x8x1 = (ulong)Lsb32x8x1 | (ulong)Lsb32x8x1 << 32;
 
         // ~ 16x1: The least bit of each 16-bit segment is enabled

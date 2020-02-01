@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
 
     using static zfunc;
 
@@ -13,6 +15,12 @@ namespace Z0
     {
         public Catalog(AssemblyId id)
             : base(id)
+        {
+
+        }
+
+        public Catalog()
+            : base(AssemblyId.Intrinsics)
         {
 
         }
@@ -25,5 +33,45 @@ namespace Z0
 
         public override IEnumerable<Type> DirectApiHosts
             => items(typeof(dinx), typeof(BitPack), typeof(CpuVector));
+    }
+
+    public static class Intrinsics
+    {
+        public static IOperationCatalog Catalog
+            => new Catalog();
+        
+        public static IEnumerable<MethodInfo> Vectorized<T>(N128 w)
+            where T : unmanaged
+                => from host in Catalog.GenericApiHosts.Union(Catalog.DirectApiHosts)
+                    from m in host.Methods().Vectorized<T>(w)
+                    select m;
+
+        public static IEnumerable<MethodInfo> Vectorized<T>(N256 w)
+            where T : unmanaged
+                => from host in Catalog.GenericApiHosts.Union(Catalog.DirectApiHosts)
+                    from m in host.Methods().Vectorized<T>(w)
+                    select m;
+
+        public static IEnumerable<MethodInfo> Vectorized<T>(N128 w, bool generic)
+            where T : unmanaged
+                => from host in (generic ? Catalog.GenericApiHosts : Catalog.DirectApiHosts)
+                    from m in host.Methods().Vectorized<T>(w)                    
+                    where m.IsGenericMethod == generic
+                    select m;
+
+        public static IEnumerable<MethodInfo> Vectorized<T>(N256 w, bool generic)
+            where T : unmanaged
+                => from host in (generic ? Catalog.GenericApiHosts : Catalog.DirectApiHosts)
+                    from m in host.Methods().Vectorized<T>(w)
+                    where m.IsGenericMethod == generic
+                    select m;
+
+        public static IEnumerable<MethodInfo> Vectorized<T>(N128 w, bool generic, string name)
+            where T : unmanaged
+                => Vectorized<T>(w, generic).WithName(name);
+
+        public static IEnumerable<MethodInfo> Vectorized<T>(N256 w, bool generic, string name)
+            where T : unmanaged
+                => Vectorized<T>(w, generic).WithName(name);
     }
 }
