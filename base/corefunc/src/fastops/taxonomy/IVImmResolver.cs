@@ -13,54 +13,6 @@ namespace Z0
     using static zfunc;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ImmResolver : IFunc
-    {
-        NumericKind ImmKind => NumericKind.None;
-
-        OpArityKind ResolvedArity => OpArityKind.Nullary;
-
-        FixedWidth OperandWidth => FixedWidth.None;
-
-        SegmentationKind Segmentation => SegmentationKind.None;
-    }
-
-    public interface ImmResolver<T> : ImmResolver
-        where T : unmanaged
-    {
-        NumericKind ImmResolver.ImmKind => NumericType.kind<T>();
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface Imm8Resolver : ImmResolver<byte>
-    {
-            
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface IUnaryImm8Resolver<T> : Imm8Resolver
-        where T :struct
-    {
-        DynamicDelegate<UnaryOp<T>>  @delegate(byte imm8);  
-
-        OpArityKind ImmResolver.ResolvedArity => OpArityKind.Unary;
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface IBinaryImm8Resolver<T> : Imm8Resolver
-        where T :struct
-    {
-        DynamicDelegate<BinaryOp<T>>  @delegate(byte imm8);  
-
-        OpArityKind ImmResolver.ResolvedArity => OpArityKind.Binary;        
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface IImm8Resolver<T> : Imm8Resolver
-    {
-
-    }
-
-    [SuppressUnmanagedCodeSecurity]
     public interface IVImm8Resolver<V> : IImm8Resolver<V>
         where V : struct
     {
@@ -74,11 +26,11 @@ namespace Z0
     {
         DynamicDelegate<UnaryOp<V>>  @delegate(byte imm8);  
 
-        SegmentationKind ImmResolver.Segmentation => SegmentationKind.Vectorized;
+        SegmentationKind IImmResolver.Segmentation => SegmentationKind.Vectorized;
 
-        FixedWidth ImmResolver.OperandWidth => (FixedWidth)nateval<W>();
+        FixedWidth IImmResolver.OperandWidth => (FixedWidth)nateval<W>();
 
-        OpArityKind ImmResolver.ResolvedArity => OpArityKind.Unary;           
+        OpArityKind IImmResolver.ResolvedArity => OpArityKind.Unary;           
     }
 
     [SuppressUnmanagedCodeSecurity]
@@ -88,11 +40,11 @@ namespace Z0
     {
         DynamicDelegate<BinaryOp<V>>  @delegate(byte imm8);  
 
-        SegmentationKind ImmResolver.Segmentation => SegmentationKind.Vectorized;
+        SegmentationKind IImmResolver.Segmentation => SegmentationKind.Vectorized;
 
-        FixedWidth ImmResolver.OperandWidth => (FixedWidth)nateval<W>();
+        FixedWidth IImmResolver.OperandWidth => (FixedWidth)nateval<W>();
 
-        OpArityKind ImmResolver.ResolvedArity => OpArityKind.Binary;           
+        OpArityKind IImmResolver.ResolvedArity => OpArityKind.Binary;           
 
     }
 

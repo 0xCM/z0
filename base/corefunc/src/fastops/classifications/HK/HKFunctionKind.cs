@@ -65,9 +65,11 @@ namespace Z0
 
         Blocked = Pow2.T44,
 
-        Vectorized = Pow2.T45,
+        Vectorized = Pow2.T45,        
 
         Imm = Pow2.T48,
+
+        Fixed = Pow2.T49,
 
         V128 = Vectorized | Pow2.T46,
         
@@ -108,10 +110,6 @@ namespace Z0
 
         BinaryMeasure = Measure | BinaryFunc,        
 
-        TernaryMeasure = Measure | TernaryFunc,    
-
-
-        
-
+        TernaryMeasure = Measure | TernaryFunc,
     }
 }

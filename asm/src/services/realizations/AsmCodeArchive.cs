@@ -67,6 +67,7 @@ namespace Z0
         IEnumerable<FilePath> Files 
             => Root.Files(FileExtensions.Hex,true);
             
+        
         /// <summary>
         /// Reads a hex-line formatted file
         /// </summary>
@@ -75,29 +76,20 @@ namespace Z0
         /// <param name="bytesep">The hex byte delimiter</param>
         public IEnumerable<AsmCode> Read(FilePath src, char idsep, char bytesep)
         {
-            foreach(var line in src.ReadLines())
-            {
-                var hex = AsmHexLine.Parse(line,idsep,bytesep);
-                if(hex.OnNone(() => errout($"Could not parse the line {line} from {src}")))
-                    yield return hex.MapRequired(h => AsmCode.Define(h.Id, h.Encoded));
-            }
+            return Context.HexReader(idsep,bytesep).Read(src);
+            // foreach(var line in src.ReadLines())
+            // {
+            //     var hex = AsmHexLine.Parse(line,idsep,bytesep);
+            //     if(hex.OnNone(() => errout($"Could not parse the line {line} from {src}")))
+            //         yield return hex.MapRequired(h => AsmCode.Define(h.Id, h.Encoded));
+            // }
         }
 
         public IEnumerable<AsmCode> Read(string name)
             => Read(fn => fn.NoExtension == name);
-        // {
-        //     foreach(var file in Files.Where(path => path.FileName.NoExtension == name))
-        //     foreach(var item in Read(file))
-        //         yield return item;
-        // }
         
         public IEnumerable<AsmCode> Read()
             => Read(_ => true);
-        // {
-        //     foreach(var file in Files)
-        //     foreach(var item in Read(file))
-        //         yield return item;
-        // }
 
         public IEnumerable<AsmCode> Read(Func<FileName,bool> predicate)
         {

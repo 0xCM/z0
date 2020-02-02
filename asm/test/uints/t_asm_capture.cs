@@ -33,31 +33,10 @@ namespace Z0
         AsmFormatConfig AsmFormat
             => AsmFormatConfig.Default.WithoutFunctionTimestamp();
 
-        public void capture_and()
-        {
-            using var target = NativeTestWriter();
-            using var asm = AsmTestWriter(AsmFormat);
-            
-            var fmt = AsmFormat;
-
-            Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> f = Avx2.And;
-            NativeCapture.capture(f,target);
-            Context.CaptureDelegate(f,asm);
-            
-
-            var g = typeof(Avx2).GetMethod(nameof(Avx2.And), new Type[] { typeof(Vector256<uint>), typeof(Vector256<uint>) });
-            NativeCapture.capture(g,target);            
-            Context.CaptureMethod(g, asm);
-
-            var many = typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName("vand");
-            NativeCapture.capture(many,typeof(uint),target);
-            Context.CaptureMethods(many,typeof(uint), asm);
-
-        }
 
         public void capture_constants()
         {
-            using var asm = AsmTestWriter(AsmFormat);            
+            using var asm = AsmTestWriter();            
             var f = typeof(gmath).Method(nameof(gmath.alteven)).MapRequired(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(byte)));
             Context.CaptureMethod(f, asm);
         }
@@ -65,7 +44,7 @@ namespace Z0
         public void capture_shifter()
         {
             using var native = NativeTestWriter();
-            using var asm = AsmTestWriter(AsmFormat);
+            using var asm = AsmTestWriter();
             var fmt = AsmFormat;
 
 
@@ -78,7 +57,7 @@ namespace Z0
         public void capture_shuffler()
         {
             using var native = NativeTestWriter();
-            using var asm = AsmTestWriter(AsmFormat);
+            using var asm = AsmTestWriter();
             var fmt = AsmFormat;
 
             var f = shuffler<uint>(n2);

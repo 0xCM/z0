@@ -102,21 +102,34 @@ namespace Z0
         /// If a method is closed generic, returns a list describing the closed parameters
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static Type[] GenericSlots(this MethodInfo m)
-            => !(m.IsGenericMethod && !m.IsGenericMethodDefinition) ? new Type[]{} 
-               : m.IsConstructedGenericMethod
-               ? m.GetGenericArguments()
-               : m.GetGenericMethodDefinition().GetGenericArguments();
+        /// <param name="effective">Whether to yield effective types or types as reported by the framework reflection api</param>
+        public static Type[] GenericParameters(this MethodInfo m, bool effective)
+        {
+            var dst = array<Type>();
+            if((!m.IsGenericMethod && !m.IsGenericMethodDefinition))
+                return dst;
+            else return 
+                (m.IsConstructedGenericMethod 
+                ? m.GetGenericArguments() 
+                : m.GetGenericMethodDefinition().GetGenericArguments()).Map(arg => effective ? arg.EffectiveType() : arg);                             
+        }
 
         /// <summary>
-        /// For a non-constructed generic method or a generic method definition, returns an
-        /// array of the method's type parameters; otherwise, returns an empty array
+        /// For a non-constructed generic method or a generic method definition, returns an array of the method's type parameters; otherwise, returns an empty array
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static Type[] OpenSlots(this MethodInfo m)
-            => m.ContainsGenericParameters ? m.GetGenericMethodDefinition().GetGenericArguments()
+        public static Type[] OpenTypeParameters(this MethodInfo m, bool effective)
+            => (m.ContainsGenericParameters ? m.GetGenericMethodDefinition().GetGenericArguments()
              : m.IsGenericMethodDefinition ? m.GetGenericArguments()
-             : array<Type>();
+             : array<Type>()).Map(arg => effective ? arg.EffectiveType() : arg);
+
+        /// <summary>
+        /// For a closed generic method, returns the supplied arguments; otherwise, returns an empty array
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        /// <param name="effective">Whether to yield effective types or types as reported by the framework reflection api</param>
+        public static Type[] SuppliedTypeArgs(this MethodInfo m, bool effective = true)
+            => m.IsConstructedGenericMethod ? m.GenericParameters(effective) : array<Type>();
 
         /// <summary>
         /// Returns true if the method has unspecified generic parameters, false otherwise
@@ -180,6 +193,34 @@ namespace Z0
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> Public(this IEnumerable<MethodInfo> src)
             => src.Where(t => t.IsPublic);
+
+        /// <summary>
+        /// For the generic methods in a stream, selects their respective definitions
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        public static IEnumerable<MethodInfo> GenericMethodDefinitions(this IEnumerable<MethodInfo> src)
+            => src.Where(m => m.IsOpenGeneric() || m.IsClosedGeneric()).Select(m => m.GetGenericMethodDefinition()).Distinct();
+        public static IEnumerable<MethodInfo> CloseGenericMethods(this IEnumerable<MethodInfo> src, Type arg)
+            => from def in src.GenericMethodDefinitions()
+               select def.MakeGenericMethod(arg);
+
+        public static IEnumerable<MethodInfo> CloseGenericMethods(this IEnumerable<MethodInfo> src, Type arg1, Type arg2)
+            => from def in src.GenericMethodDefinitions()
+               select def.MakeGenericMethod(arg1, arg2);
+
+        public static IEnumerable<MethodInfo> CloseGenericMethods(this IEnumerable<MethodInfo> src, Type arg1, Type arg2, Type arg3)
+            => from def in src.GenericMethodDefinitions()
+               select def.MakeGenericMethod(arg1, arg2, arg3);
+
+        /// <summary>
+        /// Closes each 1-parameter generic methods over each supplied argument
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="args"></param>
+        public static IEnumerable<MethodInfo> CloseGenericMethods(this IEnumerable<MethodInfo> src, Type[] args)
+            => from def in src.GenericMethodDefinitions()
+                from arg in args
+                select def.MakeGenericMethod(arg);
 
         /// <summary>
         /// Selects the open generic methods from a stream

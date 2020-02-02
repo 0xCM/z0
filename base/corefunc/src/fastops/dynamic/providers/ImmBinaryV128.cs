@@ -28,7 +28,7 @@ namespace Z0
 
             [MethodImpl(Inline)]            
             public DynamicDelegate<BinaryOp<Vector128<T>>> CreateOp(MethodInfo src, byte imm)
-                => DynopImm.BinaryOpProvider(HK.vk128<T>(), src.Identity(), src)(imm);
+                => DynopImm.BinaryOpProvider(HK.vk128<T>(), src.Identify(), src)(imm);
 
         }
     }

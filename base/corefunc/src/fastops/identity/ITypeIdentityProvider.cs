@@ -11,5 +11,7 @@ namespace Z0
     public interface ITypeIdentityProvider
     {
         Option<Moniker> DefineIdentity(Type src);        
+
+        
     }
 }

@@ -194,7 +194,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static NumericKind segment(Type t)
-            => test(t) ?  t.SuppliedGenericArguments().First().NumericKind() : NumericKind.None;
+            => test(t) ?  t.SuppliedTypeArgs().First().NumericKind() : NumericKind.None;
 
         [MethodImpl(Inline)]
         public static BlockKind kind<B>(B b = default)

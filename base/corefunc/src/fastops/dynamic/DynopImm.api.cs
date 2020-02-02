@@ -11,8 +11,6 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.Intrinsics.X86;
-    using System.Runtime.InteropServices;
     
     using static zfunc;    
     using static As;
@@ -20,16 +18,16 @@ namespace Z0
     public static class DynopImm
     {
         public static Func<byte,DynamicDelegate> OpBuilder(HK.Vec128 vk, HK.UnaryOp opk, MethodInfo src)
-            => imm8 => UnaryOp(vk,src.Identity(),src,imm8, src.ParameterTypes().First());
+            => imm8 => UnaryOp(vk,src.Identify(),src,imm8, src.ParameterTypes().First());
 
         public static Func<byte,DynamicDelegate> OpBuilder(HK.Vec256 vk, HK.UnaryOp opk, MethodInfo src)
-            => imm8 => UnaryOp(vk,src.Identity(),src,imm8, src.ParameterTypes().First());
+            => imm8 => UnaryOp(vk,src.Identify(),src,imm8, src.ParameterTypes().First());
 
         public static Func<byte,DynamicDelegate> OpBuilder(HK.Vec128 vk, HK.BinaryOp opk, MethodInfo src)
-            => imm8 => BinaryOp(vk,src.Identity(),src,imm8, src.ParameterTypes().First());
+            => imm8 => BinaryOp(vk,src.Identify(),src,imm8, src.ParameterTypes().First());
 
         public static Func<byte,DynamicDelegate> OpBuilder(HK.Vec256 vk, HK.BinaryOp opk, MethodInfo src)
-            => imm8 => BinaryOp(vk,src.Identity(),src,imm8, src.ParameterTypes().First());
+            => imm8 => BinaryOp(vk,src.Identify(),src,imm8, src.ParameterTypes().First());
 
         public static Func<byte,DynamicDelegate> UnaryOpProvider(HK.Vec128 k, Moniker id, MethodInfo src, Type component)
             => imm8 => UnaryOp(k,id,src,imm8,component);
@@ -177,7 +175,7 @@ namespace Z0
         {
             (var celltype, var width) = method.ParameterTypes()
                     .Where(p => p.IsVector())
-                    .Select(x => (x.SuppliedGenericArguments().Single(),x.Width()))
+                    .Select(x => (x.SuppliedTypeArgs().Single(),x.Width()))
                     .FirstOrDefault();            
 
             var factory = width switch{
@@ -192,7 +190,7 @@ namespace Z0
         {
             (var celltype, var width) = method.ParameterTypes()
                     .Where(p => p.IsVector())
-                    .Select(x => (x.SuppliedGenericArguments().Single(),x.Width()))
+                    .Select(x => (x.SuppliedTypeArgs().Single(),x.Width()))
                     .FirstOrDefault();            
 
             var factory = width switch{
@@ -212,5 +210,4 @@ namespace Z0
                 owner: owner,
                 skipVisibility: false);       
     }
-
 }

@@ -17,7 +17,16 @@ namespace Z0
         public static bool TryParse(string src, out MonikerSegment dst)
         {
             dst = default;
-            var parts = src.Split(Moniker.SegSep);
+            var startidx = 0;
+            for(var i=0; i<src.Length; i++)
+            {
+                if(Char.IsDigit(src[i]))
+                {
+                    startidx = i;
+                    break;
+                }
+            }
+            var parts = src.Substring(startidx).Split(Moniker.SegSep,StringSplitOptions.RemoveEmptyEntries);
             if(parts.Length == 2)
             {
                 var part0 = parts[0];

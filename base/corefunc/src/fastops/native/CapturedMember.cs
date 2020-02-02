@@ -14,18 +14,18 @@ namespace Z0
     /// <summary>
     ///  Encapsulates all aspects of a member capture operation
     /// </summary>
-    public sealed class MemberCapture
+    public sealed class CapturedMember
     {        
-        public static MemberCapture Empty => default;
+        public static CapturedMember Empty => default;
 
-        public static MemberCapture Define(Moniker id, MethodInfo src, MemoryRange origin, byte[] content, NativeCaptureInfo result)
-            => new MemberCapture(id, src.Signature().Format(), null, src, origin, content, result);
+        public static CapturedMember Define(Moniker id, MethodInfo src, MemoryRange origin, byte[] content, NativeCaptureInfo result)
+            => new CapturedMember(id, src.Signature().Format(), null, src, origin, content, result);
 
-        public static MemberCapture Define(Moniker id, Delegate src, MemoryRange origin, byte[] content, NativeCaptureInfo result)
-            => new MemberCapture(id, id, src, src.Method, origin, content, result);
+        public static CapturedMember Define(Moniker id, Delegate src, MemoryRange origin, byte[] content, NativeCaptureInfo result)
+            => new CapturedMember(id, id, src, src.Method, origin, content, result);
 
         [MethodImpl(Inline)]
-        MemberCapture(Moniker id, string label, Delegate src, MethodInfo method, MemoryRange origin, byte[] content, NativeCaptureInfo result)
+        CapturedMember(Moniker id, string label, Delegate src, MethodInfo method, MemoryRange origin, byte[] content, NativeCaptureInfo result)
         {
             require((int)origin.Length == content.Length);
             this.Delegate = src;
@@ -45,6 +45,10 @@ namespace Z0
 
         public NativeCaptureInfo CaptureInfo {get;}
 
+        public Moniker Id => Code.Id;
+
+        public string Label => Code.Label;
+         
         /// <summary>
         /// Defines the inclusive lower bound of the source location
         /// </summary>
@@ -62,5 +66,8 @@ namespace Z0
 
         public bool IsEmpty 
             => Length == 0;
+
+        public CapturedMember Replicate()
+            => new CapturedMember(Id, Label, Delegate.ValueOrDefault(), Method, Origin, Code.Encoded.Replicate(), CaptureInfo);
     }
 }

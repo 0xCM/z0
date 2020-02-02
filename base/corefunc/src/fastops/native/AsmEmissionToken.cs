@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct AsmEmissionToken : IEquatable<AsmEmissionToken>, IComparable<AsmEmissionToken>
     {
-        public readonly AsmUri Uri;
+        public readonly OpUri Uri;
 
         public readonly MemoryRange Origin;
 
@@ -25,15 +25,11 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static AsmEmissionToken Define(AsmUri uri, MemoryRange origin)        
+        public static AsmEmissionToken Define(OpUri uri, MemoryRange origin)        
             => new AsmEmissionToken(uri, origin);
 
         [MethodImpl(Inline)]
-        public static AsmEmissionToken Define(string catalog, string subject, Moniker id, MemoryRange origin)        
-            => new AsmEmissionToken(AsmUri.Define(catalog,subject, id), origin);
-
-        [MethodImpl(Inline)]
-        AsmEmissionToken(AsmUri uri, MemoryRange origin)
+        AsmEmissionToken(OpUri uri, MemoryRange origin)
         {
             this.Uri = uri;
             this.Origin = origin;

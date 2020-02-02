@@ -266,12 +266,5 @@ namespace Z0
                 ReportOutcome(name,succeeded,count);
             }
         }
-
-        protected INativeWriter NativeTestWriter([Caller] string test = null)
-        {
-            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, Paths.HexExt);    
-            return  NativeServices.writer(path);
-        }
-
     }
 }

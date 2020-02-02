@@ -13,23 +13,12 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Characterizes a transformation
-    /// </summary>
-    /// <typeparam name="A">The source domain type</typeparam>
-    /// <typeparam name="B">The target domain type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IMap<A,B> : IFunc<A,B>
-    {
-
-    }
-
-    /// <summary>
     /// Characterizes a vectorized transformation
     /// </summary>
     /// <typeparam name="U">The source operand type</typeparam>
     /// <typeparam name="T">The target operand type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVectorMap<U,V> : IVFunc, IMap<U,V>
+    public interface IVMap<U,V> : IVFunc, IMap<U,V>
         where U : struct
         where V : struct
     {
@@ -46,7 +35,7 @@ namespace Z0
     /// <typeparam name="T1">The source component type</typeparam>
     /// <typeparam name="T2">The target component type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IVMap<W1,W2,V1,V2,T1,T2> : IVectorMap<V1,V2>
+    public interface IVMap<W1,W2,V1,V2,T1,T2> : IVMap<V1,V2>
         where W1 : unmanaged, ITypeNat
         where W2 : unmanaged, ITypeNat
         where V1 : struct
@@ -112,4 +101,5 @@ namespace Z0
         HKFunctionKind IFunc.Kind => HKFunctionKind.UnaryOp | HKFunctionKind.V256;
 
     }
+
 }

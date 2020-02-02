@@ -29,8 +29,16 @@ namespace Z0
         public static Moniker Parse(string src)
             => new Moniker(src);
 
+        public static Moniker FromParts(params MonikerPart[] parts)
+            => new Moniker(string.Join(PartSep, parts.Select(x =>x.PartText)));
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator string(Moniker src)
             => src.Text;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static implicit operator Moniker(MonikerPart[] src)
+            => FromParts(src);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator==(Moniker a, Moniker b)

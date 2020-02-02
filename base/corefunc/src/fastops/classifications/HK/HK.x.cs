@@ -15,7 +15,6 @@ namespace Z0
 
     using static zfunc;
 
-
     public static class HKX
     {
         /// <summary>
@@ -56,8 +55,5 @@ namespace Z0
         /// <param name="src">The methods to examine</param>
         public static IEnumerable<MethodInfo> OfKind(this IEnumerable<MethodInfo> src, HK.Vec256 hk, bool total = false)
             => src.Where(m => m.IsKind(hk,total));
-
-
     }
-
 }

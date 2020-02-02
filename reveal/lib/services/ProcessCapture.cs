@@ -82,7 +82,7 @@ namespace Z0
         Option<ClrMethod> GetRuntimeMethod(MethodInfo src)
             => Runtime.GetMethodByHandle((ulong)src.MethodHandle.Value.ToInt64());
 
-		Option<MemberCapture> CaptureNative(MethodInfo method, ClrMethod runtime)
+		Option<CapturedMember> CaptureNative(MethodInfo method, ClrMethod runtime)
 		{
 			var codeInfo = runtime.HotColdInfo;	
             var id = OpIdentities.Provider.DefineIdentity(method);
@@ -118,7 +118,7 @@ namespace Z0
 
             var location = MemoryRange.Define(address, address + size);            
             var result = NativeCaptureInfo.Define(location.Start, location.End, CaptureTermCode.MSDIAG, buffer);
-			return MemberCapture.Define(id, method, location, buffer, result);                    
+			return CapturedMember.Define(id, method, location, buffer, result);                    
         }
     }
 }

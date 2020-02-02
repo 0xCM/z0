@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="dst">The target path</param>
         /// <param name="header">Whether to emit a header when creating a new file or overwriting an existing file</param>
         /// <param name="append">Whether to append to or overwrite an existing file</param>
-        public static INativeWriter writer(FilePath dst, bool header = true, bool append = false)
+        public static INativeWriter Writer(FilePath dst, bool header = true, bool append = false)
         {
             dst.FolderPath.CreateIfMissing();            
             var exists = dst.Exists();
@@ -34,6 +34,5 @@ namespace Z0
             return writer;
         }
 
-        
     }
 }

@@ -343,7 +343,6 @@ namespace Z0
             
             public Vec256<T> Promote(Vec256 hk)
                 => vk256<T>();
-
         }
 
         public readonly struct Vec128 : IHKType<Vec128>, IFixedClass

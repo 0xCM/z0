@@ -12,8 +12,6 @@ namespace Z0
 
     using static zfunc;
 
-
-
     /// <summary>
     /// Characterizes a unary predicate
     /// </summary>

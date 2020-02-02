@@ -39,30 +39,64 @@ namespace Z0
     {
         public static IOperationCatalog Catalog
             => new Catalog();
-        
-        public static IEnumerable<MethodInfo> Vectorized<T>(N128 w)
-            where T : unmanaged
-                => from host in Catalog.GenericApiHosts.Union(Catalog.DirectApiHosts)
-                    from m in host.Methods().Vectorized<T>(w)
-                    select m;
+                
+        public static IEnumerable<MethodInfo> OpenGenericMethods
+            => from host in Catalog.GenericApiHosts
+                from m in host.Methods().OpenGeneric()
+                select m;
 
-        public static IEnumerable<MethodInfo> Vectorized<T>(N256 w)
-            where T : unmanaged
-                => from host in Catalog.GenericApiHosts.Union(Catalog.DirectApiHosts)
-                    from m in host.Methods().Vectorized<T>(w)
-                    select m;
+        public static IEnumerable<MethodInfo> DirectMethods
+            => from host in Catalog.DirectApiHosts
+                from m in host.Methods().NonGeneric()
+                select m;
+
+        public static IEnumerable<MethodInfo> VectorizedGeneric(N128 w)
+            => Intrinsics.OpenGenericMethods.VectorizedGeneric(w);
+                
+        public static IEnumerable<MethodInfo> VectorizedGeneric(N256 w)
+            => Intrinsics.OpenGenericMethods.VectorizedGeneric(w);
+
+        public static IEnumerable<MethodInfo> VectorizedGeneric(N512 w)
+            => Intrinsics.OpenGenericMethods.VectorizedGeneric(w);
+
+        public static IEnumerable<MethodInfo> VectorizedGeneric(N128 w, string name)
+            => Intrinsics.OpenGenericMethods.VectorizedGeneric(w,name);
+
+        public static IEnumerable<MethodInfo> VectorizedGeneric(N256 w, string name)
+            => Intrinsics.OpenGenericMethods.VectorizedGeneric(w,name);
+
+        public static IEnumerable<MethodInfo> VectorizedGeneric(N512 w, string name)
+            => Intrinsics.OpenGenericMethods.VectorizedGeneric(w,name);
+
+        public static IEnumerable<MethodInfo> VectorizedDirect(N128 w)
+            => Intrinsics.DirectMethods.VectorizedDirect(w);
+
+        public static IEnumerable<MethodInfo> VectorizedDirect(N256 w)
+            => Intrinsics.DirectMethods.VectorizedDirect(w);
+
+        public static IEnumerable<MethodInfo> VectorizedDirect(N512 w)
+            => Intrinsics.DirectMethods.VectorizedDirect(w);
+
+        public static IEnumerable<MethodInfo> VectorizedDirect(N128 w, string name)
+            => Intrinsics.DirectMethods.VectorizedDirect(w, name);
+
+        public static IEnumerable<MethodInfo> VectorizedDirect(N256 w, string name)
+            => Intrinsics.DirectMethods.VectorizedDirect(w, name);
+
+        public static IEnumerable<MethodInfo> VectorizedDirect(N512 w, string name)
+            => Intrinsics.DirectMethods.VectorizedDirect(w, name);
 
         public static IEnumerable<MethodInfo> Vectorized<T>(N128 w, bool generic)
             where T : unmanaged
                 => from host in (generic ? Catalog.GenericApiHosts : Catalog.DirectApiHosts)
-                    from m in host.Methods().Vectorized<T>(w)                    
+                    from m in host.Methods().VectorizedDirect<T>(w)                    
                     where m.IsGenericMethod == generic
                     select m;
 
         public static IEnumerable<MethodInfo> Vectorized<T>(N256 w, bool generic)
             where T : unmanaged
                 => from host in (generic ? Catalog.GenericApiHosts : Catalog.DirectApiHosts)
-                    from m in host.Methods().Vectorized<T>(w)
+                    from m in host.Methods().VectorizedDirect<T>(w)
                     where m.IsGenericMethod == generic
                     select m;
 

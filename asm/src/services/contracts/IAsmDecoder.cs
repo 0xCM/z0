@@ -26,7 +26,7 @@ namespace Z0
         /// Decodes a function from a native capture
         /// </summary>
         /// <param name="src">The cource capture</param>
-        AsmFunction DecodeFunction(MemberCapture src);    
+        AsmFunction DecodeFunction(CapturedMember src);    
 
         /// <summary>
         /// Decodes a function from a method

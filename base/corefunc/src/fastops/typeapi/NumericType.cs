@@ -152,9 +152,6 @@ namespace Z0
             => t == typeof(float) 
             || t == typeof(double);
 
-        public static IEnumerable<NumericKind> closures(MemberInfo m)
-            => m.CustomAttribute<NumericClosuresAttribute>().MapValueOrElse(a => a.NumericPrimitive.DistinctKinds(), () => items<NumericKind>());
-
         /// <summary>
         /// Determines whether a type is classified as primal
         /// </summary>

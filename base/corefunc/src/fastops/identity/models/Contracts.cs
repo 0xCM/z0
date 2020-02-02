@@ -40,16 +40,6 @@ namespace Z0
         
     }
 
-    public enum GenericKind
-    {
-        None = 0,
-
-        Open = 1,
-
-        Closed = 2,
-
-        Definition
-    }
 
     public interface IGeneric<T> : IClrMetadata<T>
     {        

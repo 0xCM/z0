@@ -15,11 +15,15 @@ namespace Z0
     public static class DynamicX
     {
         /// <summary>
-        /// Returns a pointer to the native content of a dynamic method
+        /// Finds the magical function pointer for a dynamic method
         /// </summary>
         /// <param name="method">The source method</param>
+        /// <remarks>See https://stackoverflow.com/questions/45972562/c-sharp-how-to-get-runtimemethodhandle-from-dynamicmethod</remarks>
         public static IntPtr NativePointer(this DynamicMethod method)
-            => NativeCapture.pointer(method);
+        {
+            var descriptor = typeof(DynamicMethod).GetMethod("GetMethodDescriptor", BindingFlags.NonPublic | BindingFlags.Instance);
+            return ((RuntimeMethodHandle)descriptor.Invoke(method, null)).GetFunctionPointer();
+        }
 
         /// <summary>
         /// Returns a dynamic delegate's dynamic pointer

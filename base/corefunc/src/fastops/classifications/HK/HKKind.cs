@@ -17,7 +17,5 @@ namespace Z0
         Type = Pow2.T00,
 
         Func = Pow2.T01,
-
     }
-
 }

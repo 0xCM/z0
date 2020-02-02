@@ -647,7 +647,7 @@ namespace Z0
 
             var groupValue = m.GetGroupValue(name);
             var valueType = typeof(T);
-            if (valueType.IsString())
+            if (valueType == typeof(string))
                 result = groupValue;
             else if (valueType.IsNullableType())
                 result = System.Convert.ChangeType(groupValue, Nullable.GetUnderlyingType(valueType));

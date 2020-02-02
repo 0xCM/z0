@@ -10,12 +10,6 @@ namespace Z0
 
     using static zfunc;
 
-    /// <summary>
-    /// Defines the canonical shape of a value emitter
-    /// </summary>
-    /// <typeparam name="T">The production type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public delegate T Emitter<T>();
 
     /// <summary>
     /// Chracterizes an operation that produces a value that does not depend on arguments
@@ -26,6 +20,25 @@ namespace Z0
     {
         
     }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface IFixedEmitter : IFunc
+    {
+
+        NumericKind SegmentKind {get;}
+
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface IFixedEmitter<F,T> : IEmitter<F>, IFixedEmitter
+        where F : unmanaged, IFixed
+        where T : unmanaged
+    {
+        HKFunctionKind IFunc.Kind => HKFunctionKind.Emitter | HKFunctionKind.Fixed;
+
+        NumericKind IFixedEmitter.SegmentKind => typeof(T).NumericKind();
+    }
+
 
     /// <summary>
     /// Characterizes a vectorized emitter

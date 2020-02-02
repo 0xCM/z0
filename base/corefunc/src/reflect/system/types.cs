@@ -90,13 +90,13 @@ namespace Z0
         /// If a type is closed generic, returns a list of the types that were supplied as arguments to construct the type
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static Type[] GenericSlots(this Type t)
+        public static Type[] GenericParameters(this Type src, bool effective = true)
         {
-            var effective = t.EffectiveType();
-            return !(effective.IsGenericType && !effective.IsGenericTypeDefinition) ? new Type[]{} 
-               : effective.IsConstructedGenericType
-               ? effective.GetGenericArguments()
-               : effective.GetGenericTypeDefinition().GetGenericArguments();
+            var t = effective ? src.EffectiveType() : src;
+            return !(t.IsGenericType && !t.IsGenericTypeDefinition) ? new Type[]{} 
+               : t.IsConstructedGenericType
+               ? t.GetGenericArguments()
+               : t.GetGenericTypeDefinition().GetGenericArguments();
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Z0
         /// array of the method's type parameters; otherwise, returns an empty array
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static Type[] OpenSlots(this Type t)
+        public static Type[] OpenTypeParameters(this Type t)
         {
             var effective = t.EffectiveType();
             return effective.ContainsGenericParameters ? effective.GetGenericTypeDefinition().GetGenericArguments()
@@ -112,10 +112,13 @@ namespace Z0
              : array<Type>();
         }
 
-        public static int GenericSlotCount(this Type t)
-            => t.GenericSlots().Length;
+        public static int OpenTypeParameterCount(this Type t)
+            => t.OpenTypeParameters().Length;
 
-        public static IEnumerable<Type> SuppliedGenericArguments(this Type t)
+        public static int TypeParamerCount(this Type t)
+            => t.GenericParameters().Length;
+
+        public static IEnumerable<Type> SuppliedTypeArgs(this Type t)
         {
             var x = t.EffectiveType();
             if(x.IsConstructedGenericType)
@@ -374,37 +377,6 @@ namespace Z0
             || candidate.EffectiveType().IsNullable<T>()
             || candidate.EffectiveType().IsEnum && candidate.EffectiveType().GetEnumUnderlyingType() == typeof(T);
 
-        /// <summary>
-        /// Determines whether a supplied type is predicated on a bool, including nullable wrappers and references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsBool(this Type t)
-            => t.IsTypeOf<bool>();
-
-        /// <summary>
-        /// Determines whether a supplied type is predicated on a string, including references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsString(this Type t)
-            => t.IsTypeOf<string>();
-
-        /// <summary>
-        /// Determines whether a supplied type is of type Void
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsVoid(this Type t)
-            => t == typeof(void);
-
-        /// <summary>
-        /// Determines whether a supplied type is predicated on a char, including nullable wrappers and references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsChar(this Type t)
-            => t.IsTypeOf<Char>();
 
         /// <summary>
         /// Determines whether a supplied type is predicated on a guid, including enums, nullable wrappers and references
@@ -414,93 +386,6 @@ namespace Z0
         public static bool IsGuid(this Type t)
             => t.IsTypeOf<Guid>();
 
-        /// <summary>
-        /// Determines whether a supplied type is predicated on a byte, including enums, nullable wrappers and references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsByte(this Type t)
-            => t.IsTypeOf<byte>();
-
-        /// <summary>
-        /// Determines whether a supplied type is predicated on an sbyte, including enums, nullable wrappers and references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsSByte(this Type t)
-            => t.IsTypeOf<sbyte>();
-
-        /// <summary>
-        /// Determines whether a supplied type is predicated on a ushort, including enums, nullable wrappers and references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsUInt16(this Type t)
-            => t.IsTypeOf<ushort>();
-
-        /// <summary>
-        /// Determines whether a supplied type is predicated on a short, including enums, nullable wrappers and references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsInt16(this Type t)
-            => t.IsTypeOf<short>();
-
-        /// <summary>
-        /// Determines whether a supplied type is predicated on a uint, including enums, nullable wrappers and references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsUInt32(this Type t)
-            => t.IsTypeOf<uint>();
-
-        /// <summary>
-        /// Determines whether a supplied type is predicated on an int, including enums, nullable wrappers and references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsInt32(this Type t)
-            => t.IsTypeOf<int>();
-
-        /// <summary>
-        /// Determines whether a supplied type is predicated on a ulong, including enums, nullable wrappers and references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsUInt64(this Type t)
-            => t.IsTypeOf<ulong>();
-
-        /// <summary>
-        /// Determines whether a supplied type is predicated on a long, including enums, nullable wrappers and references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsInt64(this Type t)
-            => t.IsTypeOf<long>();
-
-        /// <summary>
-        /// Determines whether a supplied type is predicated on a float, including enums, nullable wrappers and references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsSingle(this Type t)
-            => t.IsTypeOf<float>();
-
-        /// <summary>
-        /// Determines whether a supplied type is predicated on a double, including enums, nullable wrappers and references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsDouble(this Type t)
-            => t.IsTypeOf<double>();
-
-        /// <summary>
-        /// Determines whether a supplied type is predicated on a double, including enums, nullable wrappers and references
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsDecimal(this Type t)
-            => t.IsTypeOf<decimal>();
 
         /// <summary>
         /// Determines whether a type is anonymous
@@ -796,7 +681,6 @@ namespace Z0
         /// <param name="src">The type to examine</param>
         public static IEnumerable<FieldInfo> PublicImmutableFields(this Type src, MemberInstanceType mit)
             => src.InheritedPublicImmutableFields(mit).Union(src.DeclaredPublicImmutableFields(mit));
-
 
         /// <summary>
         /// Retrieves the non-public immutable instance fields inherited by the type
@@ -1146,7 +1030,6 @@ namespace Z0
                 return CloseEnumerableType(stype.BaseType);
             return null;
         }
-
 
         /// <summary>
         /// Creates an instance of a type and casts the instance value as specified by a type parameter

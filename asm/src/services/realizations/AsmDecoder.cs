@@ -60,7 +60,7 @@ namespace Z0
         /// Decodes a function from a native capture
         /// </summary>
         /// <param name="src">The cource capture</param>
-        public AsmFunction DecodeFunction(MemberCapture src)
+        public AsmFunction DecodeFunction(CapturedMember src)
         {
             var list = DecodeInstructions(src.Code);
             var block = AsmSpecs.AsmInstructionBlock.Define(src.Code, list, src.CaptureInfo);

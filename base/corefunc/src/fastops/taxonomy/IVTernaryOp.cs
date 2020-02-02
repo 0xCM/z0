@@ -10,40 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Security;
 
-    /// <summary>
-    /// Defines the canonical shape of a tenary operator
-    /// </summary>
-    /// <param name="a">The first operand</param>
-    /// <param name="b">The second operand</param>
-    /// <param name="c">The third operand</param>
-    /// <typeparam name="T">The operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public delegate T TernaryOp<T>(T a, T b, T c);
-
-    /// <summary>
-    /// Characterizes a ternary function
-    /// </summary>
-    /// <typeparam name="A">The left operand type</typeparam>
-    /// <typeparam name="B">The right operand type</typeparam>
-    /// <typeparam name="C">The third operand type</typeparam>
-    /// <typeparam name="D">The target type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ITernaryFunc<A,B,C,D> : IFunc<A,B,C,D>
-    {
-        
-    }
-
-    /// <summary>
-    /// Characterizes a ternary operator
-    /// </summary>
-    /// <typeparam name="A">The operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ITernaryOp<A> : ITernaryFunc<A,A,A,A>
-    {
-
-    }
-
-    /// <summary>
+   /// <summary>
     /// Characterizes a vectorized ternary operator
     /// </summary>
     /// <typeparam name="V">The operand type</typeparam>
@@ -138,4 +105,5 @@ namespace Z0
     {
         
     }
+
 }

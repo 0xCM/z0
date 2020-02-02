@@ -10,20 +10,72 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static As;
+    using static Z0.As;
+
+    readonly struct FixedEmitter<F,T> : IFixedEmitter<F, T>
+        where F : unmanaged, IFixed         
+        where T :unmanaged
+    {
+        public const string Name = "fixedrand";
+
+        public static FixedWidth Width => default(F).Width;
+
+        public static NumericKind NumericKind => typeof(T).NumericKind();
+        
+        readonly IPolyrand Random;
+        readonly SurrogateTypes.EmitterSurrogate<F> f;
+
+        public Moniker Moniker => OpIdentities.define(Name,Width,NumericKind);
+
+        [MethodImpl(Inline)]
+        internal FixedEmitter(IPolyrand random, SurrogateTypes.EmitterSurrogate<F> f)      
+        {      
+            this.Random = random;
+            this.f = f;
+        }
+
+        [MethodImpl(Inline)]
+        public F Invoke()
+            => f.Invoke();
+    }
 
     partial class RngX
     {
+        static Func<F> CreateEmissionFunc<F,T>(IPolyrand random)
+            where F : unmanaged, IFixed
+            where T : unmanaged
+        {
+            return () => default;
+        }
+
+        public static IFixedEmitter<F,T> FixedEmitter<F,T>(this IPolyrand random)
+            where F : unmanaged, IFixed
+            where T : unmanaged
+                => new FixedEmitter<F,T>(random, CreateEmissionFunc<F,T>(random));
+
         public static Fixed8 Fixed(this IPolyrand random, N8 w)
             => random.Next<byte>();
+
+        public static Fixed8 Fixed(this IPolyrand random, N8 w, N1 signed)
+            => random.Next<sbyte>();
+
         public static Fixed16 Fixed(this IPolyrand random, N16 w)
             => random.Next<ushort>();
+
+        public static Fixed16 Fixed(this IPolyrand random, N16 w, N1 signed)
+            => random.Next<short>();
 
         public static Fixed32 Fixed(this IPolyrand random, N32 w)
             => random.Next<uint>();
 
+        public static Fixed32 Fixed(this IPolyrand random, N32 w, N1 signed)
+            => random.Next<int>();
+
         public static Fixed64 Fixed(this IPolyrand random, N64 w)
             => random.Next<ulong>();
+
+        public static Fixed64 Fixed(this IPolyrand random, N64 w, N1 signed)
+            => random.Next<long>();
 
         public static Fixed128 Fixed(this IPolyrand random, N128 w)
             => random.NextPair<ulong>();
@@ -88,7 +140,7 @@ namespace Z0
             while(true)
             {
                 var next = random.Fixed(w);
-                yield return Unsafe.As<Fixed8,T>(ref next);
+                yield return Unsafe.As<Fixed8, T>(ref next);
             }
         }
 
@@ -98,7 +150,7 @@ namespace Z0
             while(true)
             {
                 var next = random.Fixed(w);
-                yield return Unsafe.As<Fixed16,T>(ref next);
+                yield return Unsafe.As<Fixed16, T>(ref next);
             }
         }
 
@@ -108,7 +160,7 @@ namespace Z0
             while(true)
             {
                 var next = random.Fixed(w);
-                yield return Unsafe.As<Fixed32,T>(ref next);
+                yield return Unsafe.As<Fixed32, T>(ref next);
             }
         }
 
@@ -118,7 +170,7 @@ namespace Z0
             while(true)
             {
                 var next = random.Fixed(w);
-                yield return Unsafe.As<Fixed64,T>(ref next);
+                yield return Unsafe.As<Fixed64, T>(ref next);
             }
         }
 
@@ -128,7 +180,7 @@ namespace Z0
             while(true)
             {
                 var next = random.Fixed(w);
-                yield return Unsafe.As<Fixed128,T>(ref next);
+                yield return Unsafe.As<Fixed128, T>(ref next);
             }
         }
 
@@ -138,7 +190,7 @@ namespace Z0
             while(true)
             {
                 var next = random.Fixed(w);
-                yield return Unsafe.As<Fixed256,T>(ref next);
+                yield return Unsafe.As<Fixed256, T>(ref next);
             }
         }
 

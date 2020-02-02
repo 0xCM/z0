@@ -7,8 +7,10 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+    using System.Runtime.Intrinsics.X86;
     
     using static zfunc;
     using static Classifiers;
@@ -16,6 +18,24 @@ namespace Z0
 
     public class t_asm_checks : t_asm<t_asm_checks>, IDisposable
     {           
+
+        internal void RunExplicit()
+        {
+
+            CheckCapture();
+
+        }
+
+        void CheckImm()
+        {
+            using var buffer = Context.ExecBuffer();
+
+            CheckBinaryImm<uint>(buffer, n128, nameof(dinx.vblend4x32), (byte)Blend4x32.LRLR);    
+            CheckBinaryImm<uint>(buffer, n256, nameof(dinx.vblend8x32), (byte)Blend8x32.LRLRLRLR);    
+            CheckUnaryImm<ushort>(buffer,n256, nameof(dinx.vbsll), 3);        
+
+        }
+
         static int activations;
         
         static void OnMnemonid(Instruction i)
@@ -30,6 +50,71 @@ namespace Z0
         {        
             listcount++;
             return src;
+        }
+
+        AsmFormatConfig AsmFormat
+            => AsmFormatConfig.Default.WithoutFunctionTimestamp();
+
+        public void CheckCapture()
+        {
+            var name = nameof(ginx.vcimpl);         
+            var width = n256;                        
+            var args = NumericKind.Integers.DistinctKinds().Map(arg => arg.ToClrType().Require());
+            var generic = Intrinsics.VectorizedGeneric(width,name).CloseGenericMethods(args);
+            var direct = Intrinsics.VectorizedDirect(width,name);
+            var selected = direct.Union(generic).ToArray();            
+            var path = Capture(selected,name);
+            var hex = Context.HexReader().Read(path);
+            var hexD = hex.Where(h => !h.Id.IsGeneric).ToDictionary(x => x.Id);
+            var hexG = hex.Where(h => h.Id.IsGeneric).ToDictionary(x => x.Id);
+
+            Random.VectorEmitter()
+            foreach(var k in hexG.Keys)
+            {
+                var gHex = hexG[k];
+                var dHex = hexD[k.WithoutGeneric()];
+                var pairing = pair(gHex, dHex);
+
+                var gcell = from seg in gHex.Id.ParseSegment(1)
+                            let t = seg.NumericKind()
+                            select t;
+                var dcell = from seg in dHex.Id.ParseSegment(1)
+                            let t = seg.NumericKind()
+                            select t;
+
+                var dseg = dHex.Id.ParseSegment(1);
+                Trace($"{gcell} :: {dcell}");
+            }
+            
+        }
+
+        FilePath Capture(MethodInfo[] methods, string subject)
+        {
+            using var hex = HexTestWriter(subject);
+            using var asm = AsmTestWriter(subject);
+
+            var capture = Context.Capture();
+            
+            capture.SaveBits(methods,hex);
+            capture.SaveAsm(methods,asm);
+            return hex.TargetPath;            
+        }
+
+        FilePath Capture(MethodInfo[] defs, Type[] args, string subject)
+        {
+            using var hex = HexTestWriter(subject);
+            using var asm = AsmTestWriter(subject);
+
+            var capture = Context.Capture();
+                                    
+            var selection = from def in defs
+                            from arg in args                            
+                            select def.MakeGenericMethod(arg);
+            var selected = selection.ToArray();
+            
+            capture.SaveBits(selected,hex);
+            capture.SaveAsm(selected,asm);
+            return hex.TargetPath;            
         }
 
 
@@ -150,14 +235,6 @@ namespace Z0
             Claim.eq(z1,z2);
         }
 
-        internal void RunExplicit()
-        {
-            using var buffer = Context.ExecBuffer();
-
-            CheckBinaryImm<uint>(buffer, n128, nameof(dinx.vblend4x32), (byte)Blend4x32.LRLR);    
-            CheckBinaryImm<uint>(buffer, n256, nameof(dinx.vblend8x32), (byte)Blend8x32.LRLRLRLR);    
-            CheckUnaryImm<ushort>(buffer,n256, nameof(dinx.vbsll), 3);        
-        }
 
         void Run50()
         {

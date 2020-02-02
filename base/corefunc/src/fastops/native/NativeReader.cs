@@ -22,51 +22,43 @@ namespace Z0
         /// <summary>
         /// Runs the jitter on a reflected method and captures the emitted binary assembly data
         /// </summary>
-        /// <param name="m">The method to read</param>
+        /// <param name="src">The method to read</param>
         /// <param name="dst">The target buffer</param>
-        public static MemberCapture read(Moniker id, MethodInfo m, Span<byte> dst)
+        public static CapturedMember read(Moniker id, MethodInfo src, Span<byte> dst)
         {            
             try
             {
-                var pSrc = jit(m);
+                var pSrc = jit(src);
                 var pSrcCurrent = pSrc;            
                 var start = (ulong)pSrc;
                 var result = capture(pSrc, dst);            
                 var end = result.End;
                 var bytesRead = (int)(end - start);
                 var code = dst.Slice(0, bytesRead).ToArray();
-                return MemberCapture.Define(id, m, (start, end), code, result);         
+                return CapturedMember.Define(id, src, (start, end), code, result);         
             }
             catch(Exception e)
             {
                 errout(e);
-                return MemberCapture.Empty;                    
+                return CapturedMember.Empty;                    
             }
         }
 
         /// <summary>
-        /// Runs the jitter on a reflected method and captures the emitted binary assembly data
-        /// </summary>
-        /// <param name="m">The method to read</param>
-        /// <param name="dst">The target buffer</param>
-        public static MemberCapture read(MethodInfo m, Span<byte> dst)
-            => read(OpIdentities.Provider.DefineIdentity(m), m, dst);
-
-        /// <summary>
         /// Captures native code produced by the JIT for a dynamic delegate
         /// </summary>
-        /// <param name="d">The dynamic delegate</param>
+        /// <param name="src">The dynamic delegate</param>
         /// <param name="dst">The target buffer</param>
-        public static unsafe MemberCapture read(Moniker id, DynamicDelegate d, Span<byte> dst)
+        public static unsafe CapturedMember read(Moniker id, DynamicDelegate src, Span<byte> dst)
         {
-            var pSrc = jit(d);
+            var pSrc = jit(src);
             var pSrcCurrent = pSrc;
             var start = (ulong)pSrc;       
             var result =  capture(pSrc, dst);   
             var end = result.End;
             var bytesRead = (int)(end - start);
             var code = dst.Slice(0, bytesRead).ToArray();
-            return MemberCapture.Define(id, d, (start, end), code, result);
+            return CapturedMember.Define(id, src, (start, end), code, result);
         }
             
         /// <summary>
@@ -74,77 +66,26 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to read</param>
         /// <param name="dst">The target buffer</param>
-        public static unsafe MemberCapture read(Moniker id, Delegate d, Span<byte> dst)
+        public static unsafe CapturedMember read(Moniker id, Delegate src, Span<byte> dst)
         {
             try
             {
-                var pSrc = jit(d);
+                var pSrc = jit(src);
                 var pSrcCurrent = pSrc;            
                 var start = (ulong)pSrc;
                 var result = capture(pSrc, dst);
                 var end = result.End;
                 var bytesRead = (int)(end - start);
                 var code = dst.Slice(0, bytesRead).ToArray();
-                return MemberCapture.Define(id, d, (start, end), code, result);
+                return CapturedMember.Define(id, src, (start, end), code, result);
             }
             catch(Exception e)
             {
                 errout(e);
-                return MemberCapture.Empty;                    
+                return CapturedMember.Empty;                    
             }
         }
 
-        /// <summary>
-        /// Runs the jitter on a delegate and captures the emitted binary assembly data
-        /// </summary>
-        /// <param name="m">The method to read</param>
-        /// <param name="dst">The target buffer</param>
-        public static unsafe MemberCapture read(Delegate d, Span<byte> dst)
-            => read(OpIdentities.Provider.DefineIdentity(d.Method), d, dst);
-
-        /// <summary>
-        /// Closes a generic method definition over a supplied type and captures the binary assembly data emitted 
-        /// by the jitter for the reified method
-        /// </summary>
-        /// <param name="def">The generic method definition, obtained by MethodInfo.GetGenericMethodDefinition</param>
-        /// <param name="arg">The type over which to close the generic method</param>
-        /// <param name="dst">The target buffer</param>
-        public static MemberCapture generic(MethodInfo def, Type arg, Span<byte> dst)
-            => read(def.MakeGenericMethod(arg), dst);
-
-        /// <summary>
-        /// Reflects over the static generic methods declared by a type that accept one type argument, closes 
-        /// the methods over the supplied parametric type and captures the binary assembly data emitted
-        /// by the jitter for the reified methods
-        /// </summary>
-        /// <param name="host">The declaring type</param>
-        /// <param name="arg">The type over which to close each method</param>
-        /// <param name="buffer">The staging buffer, cleared after each iteration</param>
-        /// <typeparam name="T">The type over which to close the methods</typeparam>
-        public static IEnumerable<MemberCapture> gmethods(Type host, Type arg)            
-        {
-            var buffer = new byte[NativeServices.DefaultBufferLen];     
-            var definitions = host.StaticMethods().OpenGeneric(1).Select(m => m.GetGenericMethodDefinition());       
-            foreach(var m in definitions)
-                yield return NativeReader.generic(m, arg, buffer.Clear());                
-        }
-
-        /// <summary>
-        /// Closes a generic type definition over a supplied type, reflects the declared static methods, and captures 
-        /// the binary assembly data emitted by the jitter for the reified methods
-        /// </summary>
-        /// <param name="typedef">The generic type definition, obtained by typeof(generictype<>).GetGenericTypeDefinition()</param>
-        /// <param name="arg">The type over which to close the generic type</param>
-        /// <param name="captured">Callback to receive captured data</param>
-        /// <param name="bufferlen">The length of the staging buffer</param>
-        static IEnumerable<MemberCapture> gtype(Type typedef, Type arg)
-        {
-            var type = typedef.MakeGenericType(arg);
-            var methods = type.StaticMethods().ToArray();
-            var buffer = new byte[NativeServices.DefaultBufferLen];
-            for(var i=0; i<methods.Length; i++)
-                yield return NativeReader.read(methods[i], buffer.Clear());                
-        }                
 
         [MethodImpl(Inline)]
         static byte* jit(MethodInfo m)
@@ -166,14 +107,6 @@ namespace Z0
         {   
             RuntimeHelpers.PrepareDelegate(d.DynamicOp);
             return d.GetDynamicPointer().Pointer;
-        }
-
-        [MethodImpl(Inline)]
-        static DynamicPointer jit<D>(DynamicDelegate<D> d)
-            where D : Delegate
-        {   
-            RuntimeHelpers.PrepareDelegate(d.DynamicOp);
-            return d.GetDynamicPointer();
         }
 
         [MethodImpl(Inline)]
@@ -205,11 +138,9 @@ namespace Z0
             && c.x == c.y 
             && d.x == d.y;
 
-
         static ReadOnlySpan<byte> JmpRaxCheck => new byte[]{0x0, 0x48, 0xff, 0xe0, 0x0, 0x0, 0x19};
 
         static ReadOnlySpan<byte> RetZedSbb => new byte[]{0x0c, 0, 0x19};
-
 
         [MethodImpl(Inline)]
         static bit CheckJmpRax(Span<byte> lookback, out CaptureTermCode termcode, out int takeback)        

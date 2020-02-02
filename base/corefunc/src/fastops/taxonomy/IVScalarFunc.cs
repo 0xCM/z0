@@ -11,42 +11,6 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Defines trait for a vecorized unary scalar funnction that supports componentwise decomposition/evaluation
-    /// </summary>
-    /// <typeparam name="T">The vector component type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVUnaryScalarFuncD<T,K>
-        where T : unmanaged
-        where K : unmanaged
-    {
-        K InvokeScalar(T a);
-    }
-
-    /// <summary>
-    /// Defines trait for a vecorized binary scalar funnction that supports componentwise decomposition/evaluation
-    /// </summary>
-    /// <typeparam name="T">The vector component type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVBinaryScalarFuncD<T,K>
-        where T : unmanaged
-        where K : unmanaged
-    {
-        K InvokeScalar(T a, T b);
-    }
-
-    /// <summary>
-    /// Defines trait for a vecorized binary scalar funnction that supports componentwise decomposition/evaluation
-    /// </summary>
-    /// <typeparam name="T">The vector component type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IVTernaryScalarFuncD<T,K>
-        where T : unmanaged
-        where K : unmanaged
-    {
-        K InvokeScalar(T a, T b, T c);
-    }
-
-    /// <summary>
     /// Characterizes a unary function that accepts a vector argument and returns a scalar value
     /// </summary>
     /// <typeparam name="W">The bit width type</typeparam>
@@ -78,7 +42,6 @@ namespace Z0
         where K : unmanaged
     {
         HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryMeasure | HKFunctionKind.Vectorized;
-
     }
 
     /// <summary>
@@ -182,6 +145,43 @@ namespace Z0
         HKFunctionKind IFunc.Kind => HKFunctionKind.BinaryMeasure | HKFunctionKind.V128;
 
     }
+
+    /// <summary>
+    /// Defines trait for a vecorized unary scalar funnction that supports componentwise decomposition/evaluation
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVUnaryScalarFuncD<T,K>
+        where T : unmanaged
+        where K : unmanaged
+    {
+        K InvokeScalar(T a);
+    }
+
+    /// <summary>
+    /// Defines trait for a vecorized binary scalar funnction that supports componentwise decomposition/evaluation
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVBinaryScalarFuncD<T,K>
+        where T : unmanaged
+        where K : unmanaged
+    {
+        K InvokeScalar(T a, T b);
+    }
+
+    /// <summary>
+    /// Defines trait for a vecorized binary scalar funnction that supports componentwise decomposition/evaluation
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [SuppressUnmanagedCodeSecurity]
+    public interface IVTernaryScalarFuncD<T,K>
+        where T : unmanaged
+        where K : unmanaged
+    {
+        K InvokeScalar(T a, T b, T c);
+    }
+
 
     /// <summary>
     /// Characterizes a unary function that accepts a 128-bit vector argument and returns a scalar value

@@ -62,18 +62,12 @@ namespace Z0
             return ref src;
         }
                         
-        IAsmImmCapture UnaryImmCaptureSvc(MethodInfo src, Moniker baseid)
-            => Context.UnaryImmCapture(src, baseid);
-
-        IAsmImmCapture BinaryImmCaptureSvc(MethodInfo src, Moniker baseid)
-            => Context.BinaryImmCapture(src, baseid);
-                    
         IEnumerable<AsmEmissionToken> EmitImm(GenericOpSpec op, IAsmFunctionArchive dst)
         {
             if(FunctionType.vunaryImm(op.Root))
             {                                                
                 var resolutions = op.Close()
-                    .Select(closure => UnaryImmCaptureSvc(closure.ClosedMethod, closure.Id))
+                    .Select(closure => Context.UnaryImmCapture(closure.ClosedMethod, closure.Id))
                     .SelectMany(svc => svc.Capture(ImmSelection)).ToArray();                
 
                 if(resolutions.Length != 0)
@@ -83,7 +77,7 @@ namespace Z0
             else if(FunctionType.vbinaryImm(op.Root))
             {
                 var resolutions = op.Close()
-                    .Select(closure => BinaryImmCaptureSvc(closure.ClosedMethod, closure.Id))
+                    .Select(closure => Context.BinaryImmCapture(closure.ClosedMethod, closure.Id))
                     .SelectMany(svc => svc.Capture(ImmSelection)).ToArray();                
 
                 if(resolutions.Length != 0)
@@ -96,7 +90,7 @@ namespace Z0
         {
             foreach(var member in op.Members.Where(m => FunctionType.vunaryImm(m.Root)))
             {
-                var resolutions = UnaryImmCaptureSvc(member.Root, op.Id).Capture(ImmSelection);
+                var resolutions = Context.UnaryImmCapture(member.Root, member.Id).Capture(ImmSelection);
                 var group = AsmFunctionGroup.Define(op.Id, resolutions.ToArray());
                 foreach(var r in dst.Save(group,true))
                     yield return r;                
@@ -104,7 +98,7 @@ namespace Z0
 
             foreach(var member in op.Members.Where(m => FunctionType.vbinaryImm(m.Root)))
             {
-                var resolutions = BinaryImmCaptureSvc(member.Root, op.Id).Capture(ImmSelection);
+                var resolutions = Context.BinaryImmCapture(member.Root, member.Id).Capture(ImmSelection);
                 var group = AsmFunctionGroup.Define(op.Id, resolutions.ToArray());
                 foreach(var r in dst.Save(group,true))
                     yield return r;                

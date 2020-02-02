@@ -19,11 +19,27 @@ namespace Z0
         [MethodImpl(Inline)]
         public static IAsmDecoder Decoder(this IAsmContext context, int? bufferlen = null)
             => AsmDecoder.Create(context, bufferlen);                        
-                
+
+        [MethodImpl(Inline)]
+        public static IAsmCaptureService Capture(this IAsmContext context, int? bufferlen = null)
+            => AsmCaptureService.Create(context, bufferlen);
+
+        [MethodImpl(Inline)]
+        public static IAsmCaptureService Capture(this IAsmContext context, byte[] buffer)
+            => AsmCaptureService.Create(context, buffer);
+
+        [MethodImpl(Inline)]
+        public static IAsmHexWriter HexWriter(this IAsmContext context, FilePath dst, bool append = false)
+            => AsmHexWriter.Create(context, dst, append);
+
+        [MethodImpl(Inline)]
+        public static IAsmHexReader HexReader(this IAsmContext context, char? idsep = null, char? bytesep = null)
+            => AsmHexReader.Create(context,idsep,bytesep);
+
         /// <summary>
         /// Instantiates a service that produces immediate-specific code for supported function types that require immediate values
         /// </summary>
-        /// <param name="context">The context in which the service will be created</param>
+        /// <param name="context">The context shared with the created service</param>
         /// <typeparam name="T">The primitive type over which the delegate will be instantiated</typeparam>
         /// <typeparam name="D">The delegate type</typeparam>
         [MethodImpl(Inline)]
@@ -64,30 +80,29 @@ namespace Z0
         public static IAsmImmBuilder ImmOpProvider(IAsmContext context, HK.Vec256 vk, HK.Op<N2> opk)
             => AsmImmFunctionBuilder.Define(context, vk,opk);
 
-
         public static void CaptureDelegate(this IAsmContext context, Delegate src, IAsmFunctionWriter dst)
-        {
-            var capture = NativeCapture.capture(src,dst.TakeBuffer());
+        {            
+            var capture = NativeReader.read(src.Identify(), src,dst.TakeBuffer());
             var decoded = context.Decoder().DecodeFunction(capture);
             dst.Write(decoded);
         }
 
         public static void CaptureMethod(this IAsmContext context, MethodInfo src, IAsmFunctionWriter dst)
         {
-            var capture = NativeCapture.capture(src,dst.TakeBuffer());
+            var capture = NativeReader.read(src.Identify(), src,dst.TakeBuffer());
             var decoded = context.Decoder().DecodeFunction(capture);
             dst.Write(decoded);
         }
 
-        public static void CaptureMethod(this IAsmContext context, MethodInfo src, Type arg, IAsmFunctionWriter dst)
+        public static void CaptureMethod(this IAsmContext context, MethodInfo src, Type[] args, IAsmFunctionWriter dst)
         {
-            var capture = NativeCapture.capture(src, arg, dst.TakeBuffer());
+            var capture = Z0.NativeCapture.capture(src, args, dst.TakeBuffer());
             var decoded = context.Decoder().DecodeFunction(capture);         
             dst.Write(decoded);
         }
 
-        public static void CaptureMethods(this IAsmContext context, IEnumerable<MethodInfo> methods, Type arg, IAsmFunctionWriter dst)
-            => iter(methods, m => context.CaptureMethod(m, arg, dst));
+        public static void CaptureMethods(this IAsmContext context, IEnumerable<MethodInfo> methods, Type[] args, IAsmFunctionWriter dst)
+            => iter(methods, m => context.CaptureMethod(m, args, dst));
 
         public static IAsmImmCapture<T> ImmCapture<T>(this IAsmContext context, IImm8Resolver<T> resolver)
             where T : unmanaged        
@@ -109,11 +124,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static IAsmImmCapture UnaryImmCapture(this IAsmContext context, MethodInfo src)
-            => AsmImmCapture.UnaryCapture(context, src, src.Identity());
+            => AsmImmCapture.UnaryCapture(context, src, src.Identify());
 
         [MethodImpl(Inline)]
         public static IAsmImmCapture BinaryImmCapture(this IAsmContext context, MethodInfo src)
-            => AsmImmCapture.BinaryCapture(context, src, src.Identity());
+            => AsmImmCapture.BinaryCapture(context, src, src.Identify());
 
         [MethodImpl(Inline)]
         public static AsmFunction BinaryImmCapture(this IAsmContext context, MethodInfo src, byte imm)
@@ -176,7 +191,6 @@ namespace Z0
         /// Instantiates a <cref="IAsmFunctionEmitter"/> service
         /// </summary>
         /// <param name="context"></param>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static IAsmFunctionEmitter AsmEmitter(this IAsmContext context)
             => AsmFunctionEmitter.Create(context);

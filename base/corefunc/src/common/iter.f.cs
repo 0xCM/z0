@@ -43,6 +43,7 @@ partial class zfunc
             f(skip(input,i));
     }
 
+
     /// <summary>
     /// Inovkes an action for each element in a source span
     /// </summary>

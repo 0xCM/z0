@@ -68,9 +68,6 @@ namespace Z0
         public FileExtension HexExt
             => FileExtension.Define("hex");
 
-        public FileExtension CsFileExt
-            => FileExtension.Define("cs");
-
         public FileExtension CilExt
             => FileExtension.Define("il");
 

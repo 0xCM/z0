@@ -50,32 +50,32 @@ namespace Z0
         public AsmEmissionToken Save(AsmFunction src)
         {
             HexPath(src.Id).WriteText(src.Code.Format());
-            DetailPath(src.Id).WriteText(DefaultFormatter.FormatDetail(src));
+            AsmPath(src.Id).WriteText(DefaultFormatter.FormatDetail(src));
             src.Cil.OnSome(cil => CilPath(src.Id).WriteText(CilFormatter.Format(cil)));
-            return AsmEmissionToken.Define(AsmUri.Define(Catalog, Subject, src.Id), src.Location);
+            return AsmEmissionToken.Define(OpUri.Define(Catalog, Subject, src.Id), src.Location);
         }
 
-        public IEnumerable<AsmEmissionToken> Save(IEnumerable<AsmFunction> src)
+        public IEnumerable<AsmEmissionToken> Save(AsmFunctionGroup src, bool append)
+        {            
+            WriteHex(src,append).OnSome(e => errout(e));
+            WriteCil(src,append).OnSome(e => errout(e));
+            return WriteAsm(src,append).ValueOrDefault(array<AsmEmissionToken>());
+        }
+
+        public IAsmFunctionArchive Clear()
         {
-            foreach(var f in src)
-                yield return Save(f);
-        }  
+            Root.DeleteFiles();
+            return this;
+        }
             
-        void Write(CilFunction src, StreamWriter dst)
-        {
-            dst.Write(CilFormatter.Format(src));
-            if(GroupFormatConfig.EmitSectionDelimiter)
-                dst.WriteLine(GroupFormatConfig.SectionDelimiter);
-        }
-
-        Option<Exception> WriteAsmHex(AsmFunctionGroup src,bool append)
+        Option<Exception> WriteHex(AsmFunctionGroup src, bool append)
         {
             try
             {
                 var idpad = src.Members.Select(f => f.Id.Text.Length).Max() + 1;
-                using var hexwriter = new StreamWriter(HexPath(src.Id).FullPath, append);
+                using var writer = new StreamWriter(HexPath(src.Id).FullPath, append);
                 foreach(var f in src.Members)
-                    hexwriter.WriteLine(f.Code.Format(idpad));
+                    writer.WriteLine(f.Code.Format(idpad));
                 return default;
             }
             catch(Exception e)
@@ -86,14 +86,19 @@ namespace Z0
 
         Option<Exception> WriteCil(AsmFunctionGroup src, bool append)
         {
-            var emittable = src.Members.Where(f => f.Cil.IsSome()).ToArray();
-            if(emittable.Length == 0)
-                return default;
             try
             {                
-                using var cilwriter = new StreamWriter(CilPath(src.Id).FullPath,append);
-                foreach(var f in src.Members)
-                    f.Cil.OnSome(cil => Write(cil, cilwriter));
+                var cilfuncs = src.Members.Where(f => f.Cil.IsSome()).Select(f => f.Cil.Value).ToArray();
+                if(cilfuncs.Length == 0)
+                    return default;
+
+                using var writer = new StreamWriter(CilPath(src.Id).FullPath,append);
+                foreach(var f in cilfuncs)
+                {
+                    writer.Write(CilFormatter.Format(f));
+                    if(GroupFormatConfig.EmitSectionDelimiter)
+                        writer.WriteLine(GroupFormatConfig.SectionDelimiter);
+                }                    
                 return default;
             }
             catch(Exception e)
@@ -102,29 +107,32 @@ namespace Z0
             }
         }
 
-        public IEnumerable<AsmEmissionToken> Save(AsmFunctionGroup src, bool append)
+        Option<AsmEmissionToken[]> WriteAsm(AsmFunctionGroup src, bool append)
         {
-            
-            using var asmwriter = new StreamWriter(DetailPath(src.Id).FullPath,append);
-            WriteAsmHex(src,append).OnSome(e => errout(e));
-            WriteCil(src,append).OnSome(e => errout(e));
-            foreach(var f in src.Members)
+            try
             {
-                asmwriter.Write(GroupFormatter.FormatDetail(f));
-                yield return AsmEmissionToken.Define(AsmUri.Define(Catalog, Subject, f.Id), f.Location);
+                var tokens = new AsmEmissionToken[src.Members.Length];
+                using var writer = new StreamWriter(AsmPath(src.Id).FullPath, append);            
+                for(var i=0; i < src.Members.Length;i++)
+                {
+                    var f = src.Members[i];
+                    writer.Write(GroupFormatter.FormatDetail(f));
+                    var uri = OpUri.Define(Catalog, Subject, f.Id);
+                    tokens[i] = AsmEmissionToken.Define(uri, f.Location);
+                }
+                return tokens;
             }
-        }
-
-        public IAsmFunctionArchive Clear()
-        {
-            Root.DeleteFiles();
-            return this;
+            catch(Exception e)
+            {
+                errout(e);
+                return default;
+            }
         }
 
         FilePath HexPath(Moniker m)
             => Paths.AsmDataDir(RelativeLocation.Define(Catalog, Subject)).CreateIfMissing() + Paths.AsmHexFile(m);
 
-        FilePath DetailPath(Moniker m)
+        FilePath AsmPath(Moniker m)
             => Paths.AsmDataDir(RelativeLocation.Define(Catalog, Subject)).CreateIfMissing() + Paths.AsmDetailFile(m);
 
         FilePath CilPath(Moniker m)

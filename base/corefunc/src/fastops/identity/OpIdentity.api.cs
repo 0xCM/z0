@@ -25,6 +25,10 @@ namespace Z0
         public static Moniker define(string opname, NumericKind k, bool generic)
             => define(opname, 0, k, generic, false);
 
+        [MethodImpl(Inline)]   
+        public static Moniker define(string opname, FixedWidth w, NumericKind t)
+            => OpIdentities.segmented(opname,w,t,false,false);
+
         /// <summary>
         /// Produces an identifier of the form {opname}_{bitsize(kind)}{u | i | f}
         /// </summary>

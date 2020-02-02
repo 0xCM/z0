@@ -8,13 +8,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Security;
 
-    /// <summary>
-    /// Defines the canonical shape of a unary operator
-    /// </summary>
-    /// <param name="a">The operand</param>
-    /// <typeparam name="T">The operand type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public delegate T UnaryOp<T>(T a);
 
     /// <summary>
     /// Characterizes a unary function

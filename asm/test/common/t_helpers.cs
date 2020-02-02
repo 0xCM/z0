@@ -28,11 +28,15 @@ namespace Z0
         /// </summary>
         public static Moniker WithoutGeneric(this Moniker src)
         {
-            if(src.TextComponents.Skip(1).First()[0] != Moniker.Generic)
+            var parts = src.Parts.ToArray();
+            if(parts.Length < 2)
                 return src;
-            else
-               return Moniker.Parse(
-                   concat(src.Text.LeftOf(Moniker.PartSep), Moniker.PartSep, src.Text.RightOf(Moniker.GenericLocator)));
+            
+            if(parts[1].PartText[0] != Moniker.Generic)
+                return src;
+
+            parts[1] = parts[1].WithText(parts[1].PartText.Substring(1));
+            return parts;
         }
 
         /// <summary>

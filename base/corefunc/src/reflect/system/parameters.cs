@@ -28,5 +28,24 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         public static IEnumerable<Type> ParameterTypes(this MethodInfo m, bool effective)
             => effective ? m.ParameterTypes().Select(t => t.EffectiveType()) : m.ParameterTypes();
+ 
+        /// <summary>
+        /// Selects the method parameters that satisfy a predicate
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        /// <param name="predicate">The predicate to match</param>
+        public static IEnumerable<ParameterInfo> Parameters(this MethodInfo src, Func<ParameterInfo,bool> predicate)
+            => src.GetParameters().Where(predicate);
+
+        /// <summary>
+        /// Selects the methods from a stream where at least one parameter satisfies a specified predicate
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        /// <param name="predicate">The predicate to match</param>
+        public static IEnumerable<MethodInfo> WithParameter(this IEnumerable<MethodInfo> src, Func<ParameterInfo,bool> predicate)
+            => from m in src
+                where m.Parameters(predicate).Count() != 0
+                select m;
+
     }
 }

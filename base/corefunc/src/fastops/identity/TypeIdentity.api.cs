@@ -128,7 +128,7 @@ namespace Z0
                 text = TypeIdentities.CommonIdentity(arg);
             else if(arg.IsConstructedGenericType)              
             {
-                var typeargs = arg.SuppliedGenericArguments().ToArray();
+                var typeargs = arg.SuppliedTypeArgs().ToArray();
                 var typearg = typeargs[0];                
                 if(arg.HasCommonIdentity())
                     text = arg.CommonIdentity();

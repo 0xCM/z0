@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Reflection;
 
     using static zfunc;
@@ -17,7 +14,10 @@ namespace Z0
     /// </summary>
     public class TypeParameter : ClrArtifact
     {
-        public TypeParameter(string Name, int Position, bool IsOpen = true)
+        public static TypeParameter Define(string name, int pos, bool open)
+            => new TypeParameter(name,pos,open);
+        
+        TypeParameter(string Name, int Position, bool IsOpen)
             : base(Name, 0)
         {
             this.Position = Position;

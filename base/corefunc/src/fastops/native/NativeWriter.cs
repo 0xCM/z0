@@ -44,12 +44,12 @@ namespace Z0
             WriteLine(new string(AsciSym.Dash, 80));
         }
 
-        public void WriteData(MemberCapture src, NativeFormatConfig config)
+        public void WriteData(CapturedMember src, NativeFormatConfig config)
         {
             Write(src.Format(config));                            
         }
 
-        public void WriteData(MemberCapture src)
+        public void WriteData(CapturedMember src)
         {
             Write(src.Format(null));                            
         }

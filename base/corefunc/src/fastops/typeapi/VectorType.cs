@@ -8,9 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
-    using System.Reflection;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static zfunc;
 
@@ -71,7 +68,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit integral(VectorKind k)
             => signed(k) || unsigned(k);
-
 
         [MethodImpl(Inline)]
         public static VectorKind kind<V>(V v = default)
@@ -185,24 +181,24 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static VectorWidth width(Type t)
+        public static FixedWidth width(Type t)
         {
             if(test(t))
             {
                 var def = t.GenericDefinition();
                 if(def == typeof(Vector128<>))
-                    return VectorWidth.W128;
+                    return FixedWidth.W128;
                 else if (def == typeof(Vector256<>))
-                    return VectorWidth.W256;
+                    return FixedWidth.W256;
                 else if (def == typeof(Vector512<>))
-                    return VectorWidth.W512;
+                    return FixedWidth.W512;
                 else if (def == typeof(Vector1024<>))
-                    return VectorWidth.W1024;
+                    return FixedWidth.W1024;
                 else
-                    return VectorWidth.None;
+                    return FixedWidth.None;
             }
             else 
-                return VectorWidth.None;
+                return FixedWidth.None;
         }
 
         /// <summary>

@@ -15,11 +15,11 @@ namespace Z0
         public static Option<NatSpanSig> From(Type t)
             => from def in t.GenericDefinition() 
                 where def == typeof(NatSpan<,>) && t.IsClosedGeneric()
-                let args = t.SuppliedGenericArguments().ToArray()
+                let args = t.SuppliedTypeArgs().ToArray()
                 let pair = (nat: args[0], cell: args[1])
+                let w = (int)pair.cell.Width()
                 from n in pair.nat.NatValue()
-                from w in DataTypes.width(pair.cell)
-                from i in DataTypes.indicator(pair.cell)
+                from i in pair.cell.NumericTypeIndicator()
                 select Define((int)n, w, i);
 
         public static Option<NatSpanSig> Parse(string src)

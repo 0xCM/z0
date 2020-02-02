@@ -10,9 +10,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Security;
 
-    public static class TaxonomyX
+    partial class FastOpX
     {
-
         public static bool IsOperator(this IFunc f)
             => (f.Kind & HKFunctionKind.Operator) != 0;
 
@@ -44,9 +43,8 @@ namespace Z0
             => (f.Kind & HKFunctionKind.V256) != 0;
         
         public static bool IsImm8Resolver(this IFunc f)
-            => f is Imm8Resolver;
+            => f is IImm8Resolver;
 
     }
-
 
 }

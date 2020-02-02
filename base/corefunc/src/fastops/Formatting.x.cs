@@ -56,7 +56,7 @@ namespace Z0
             return dst.ToString();
         }
 
-        public static string Format(this MemberCapture data, NativeFormatConfig? fmt = null)
+        public static string Format(this CapturedMember data, NativeFormatConfig? fmt = null)
         {
             if(data.IsEmpty)
                 return "<no_data>";
@@ -77,10 +77,10 @@ namespace Z0
         public static string FormatParam(this Pair<ParameterInfo,int> src)
         {
             var t = src.A.ParameterType;
-            if(Types.segmented(t))
+            if(t.IsSegmented())
             {
-                var typewidth = (int)Types.width(t);
-                var segkind = Types.segtype(t).Require().NumericKind();
+                var typewidth = (int)t.Width();
+                var segkind = t.SegType().Require().NumericKind();
                 var segwidth = segkind.Width();
                 var indicator = segkind.Indicator().Format();
                 return $"{typewidth}x{segwidth}{indicator}".PadLeft(7);
@@ -192,7 +192,7 @@ namespace Z0
             var attrib = src.GetCustomAttribute<DisplayNameAttribute>();
             if(attrib != null)
                 return attrib.DisplayName;
-            var slots = src.GenericSlots();
+            var slots = src.GenericParameters(false);
             return slots.Length == 0 ? src.Name : GenericMemberDisplayName(src.Name, slots);            
         }
 

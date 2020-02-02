@@ -27,7 +27,11 @@ namespace Z0
 
         public readonly string PartText;
 
+        public MonikerPart WithText(string src)
+            => Define(PartIndex, PartKind, src);
+
         public override string ToString()
             => PartText;
+        
     }
 }

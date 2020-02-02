@@ -14,7 +14,6 @@ namespace Z0
 
     using static zfunc;
 
-
     static class AsmImmCapture
     {
         public static IAsmImmCapture UnaryCapture(IAsmContext context, MethodInfo src, Moniker baseid)

@@ -50,10 +50,25 @@ namespace Z0
         protected string GMath
             => nameof(gmath);
 
-        protected IAsmFunctionWriter AsmTestWriter(AsmFormatConfig format, [Caller] string test = null)
+        protected AsmFormatConfig DefaultAsmFormat
+            => AsmFormatConfig.Default.WithoutFunctionTimestamp();
+
+        protected IAsmHexWriter HexTestWriter([Caller] string test = null)
         {
-            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, Paths.AsmExt);    
-            return Context.WithFormat(format).AsmWriter(path);
+            var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Hex);    
+            return  Context.HexWriter(dst);
+        }
+
+        protected INativeWriter NativeTestWriter([Caller] string test = null)
+        {
+            var dst = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Hex);    
+            return  NativeServices.Writer(dst);
+        }
+
+        protected IAsmFunctionWriter AsmTestWriter([Caller] string test = null)
+        {
+            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, FileExtensions.Asm);    
+            return Context.WithFormat(DefaultAsmFormat).AsmWriter(path);
         }
 
         protected void CheckAsmMatch<T>(BinaryOp<T> f, AsmCode asm)

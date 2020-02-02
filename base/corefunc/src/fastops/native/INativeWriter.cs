@@ -13,9 +13,9 @@ namespace Z0
     {
         void WriteHeader();
 
-        void WriteData(MemberCapture src);        
+        void WriteData(CapturedMember src);        
     
-        void WriteData(MemberCapture src, NativeFormatConfig config);     
+        void WriteData(CapturedMember src, NativeFormatConfig config);     
 
         void WriteLine(string data);   
 

@@ -23,11 +23,6 @@ namespace Z0
         /// <param name="src">The source function</param>
         AsmEmissionToken Save(AsmFunction src);
 
-        /// <summary>
-        /// Saves a stream of functions to the archive
-        /// </summary>
-        /// <param name="src">The source function</param>
-        IEnumerable<AsmEmissionToken> Save(IEnumerable<AsmFunction> src);
 
         /// <summary>
         /// Saves a group of related functtions to the archive

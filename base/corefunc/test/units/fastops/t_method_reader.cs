@@ -9,14 +9,22 @@ namespace Z0
     using System.IO;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
+    using System.Reflection;
     
     using static zfunc;
     using static NativeTestCases;
-
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    
     public sealed class t_native_reader : t_fastop<t_native_reader>
     {
         protected override bool TraceEnabled => true;
         
+        INativeWriter NativeTestWriter([Caller] string test = null)
+        {
+            var path = LogPaths.The.LogPath(LogArea.Test, FolderName.Define(GetType().Name), test, Paths.HexExt);    
+            return  NativeServices.Writer(path);
+        }
+
         public void parse_address_segment()
         {
             for(var i=0; i<RepCount; i++)
@@ -28,15 +36,16 @@ namespace Z0
                 var actual = MemoryRange.Parse(format).OnNone(() => PostMessage(format)).Require();
                 Claim.eq(expect,actual);
             }
-
         }
 
         public void capture_vectorized_generics()
         {
             using var writer = NativeTestWriter();
             var types = NumericKind.All.PrimalTypes();
-            foreach(var t in types)
-                NativeCapture.capture(typeof(VectorizedCases),t, writer);
+            var methods = typeof(VectorizedCases).StaticMethods().OpenGeneric(1).Select(m => m.GetGenericMethodDefinition());
+            iter(types, 
+                t => iter(methods, 
+                    m => NativeCapture.capture(m.MakeGenericMethod(t), writer)));
         }
 
         public void capture_direct()
@@ -68,18 +77,20 @@ namespace Z0
             var dShift = shifter(4);
             NativeCapture.capture(dShift,target);
 
-            var mgAnds = typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName("vand");
-            NativeCapture.capture(mgAnds, typeof(uint),target);
+
+            iter(typeof(ginx).DeclaredStaticMethods().OpenGeneric().WithName("vand").Select(m => m.GetGenericMethodDefinition()), 
+                def => NativeCapture.capture(def.MakeGenericMethod(typeof(uint)),target));
+            
         }
 
         public void read_library()
         {
-            var methods = typeof(math).StaticMethods().Where(m => m.Name == "xor").ToArray();
+            var src = typeof(math).StaticMethods().Where(m => m.Name == "xor").ToArray();
             Span<byte> buffer = new byte[128];
-            for(var i=0; i<methods.Length; i++)
+            for(var i=0; i<src.Length; i++)
             {
-                var m = NativeReader.read(methods[i], buffer);
-                PostMessage(m.Format());
+                var capture = NativeReader.read(src[i].Identify(), src[i], buffer);
+                PostMessage(capture.Format());
                 buffer.Clear();
             }
         }

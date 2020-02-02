@@ -46,7 +46,7 @@ namespace Z0
         public ByteSize Size {get;}
 
         [ReportField]
-        public AsmUri Uri {get;}
+        public OpUri Uri {get;}
 
         const int OffsetPad = 12;
 

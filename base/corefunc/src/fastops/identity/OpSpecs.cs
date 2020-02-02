@@ -42,7 +42,7 @@ namespace Z0
             public IEnumerable<GenericOpSpec> FromHost(Type host)
                 => from m in host.DeclaredMethods().Attributed<OpAttribute>().OpenGeneric()
                     let def = m.GetGenericMethodDefinition()
-                    let closures = NumericType.closures(m).ToArray()
+                    let closures = m.NumericClosures().ToArray()
                     let id = OpIdentities.Provider.GenericIdentity(m)
                     where closures.Length != 0
                     select GenericOpSpec.Define(id, def, closures);

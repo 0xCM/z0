@@ -233,7 +233,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         public static IEnumerable<Pair<ParameterInfo,FixedWidth>> inputwidths(MethodInfo m)
-            => m.GetParameters().Select(p => paired(p, Types.width(p.ParameterType)));
+            => m.GetParameters().Select(p => paired(p, p.ParameterType.Width()));
 
         /// <summary>
         /// Determines the bit-width of an intrinsic or primal return type
