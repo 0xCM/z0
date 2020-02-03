@@ -10,9 +10,9 @@ namespace Z0
 
     public abstract class OpSpec
     {        
-        public Moniker Id {get;}            
+        public OpIdentity Id {get;}            
 
-        protected OpSpec(Moniker id)
+        protected OpSpec(OpIdentity id)
         {
             this.Id = id;
         }
@@ -24,7 +24,7 @@ namespace Z0
     public abstract class GroupOpSpec<S> : OpSpec
         where S : OpSpec
     {
-        protected GroupOpSpec(Moniker id, S[] members)
+        protected GroupOpSpec(OpIdentity id, S[] members)
             : base(id)
         {
             this.Members = members;
@@ -42,7 +42,7 @@ namespace Z0
 
     public abstract class RootedOpSpec : OpSpec
     {
-        protected RootedOpSpec(Moniker id, MethodInfo method)
+        protected RootedOpSpec(OpIdentity id, MethodInfo method)
             : base(id)
         {
             this.Root = method;

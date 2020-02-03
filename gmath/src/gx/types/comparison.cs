@@ -19,7 +19,7 @@ namespace Z0
 
             public static Eq<T> Op => default;
 
-            public Moniker Moniker => identify<T>(Name);
+            public OpIdentity Moniker => identify<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) => gmath.eq(x,y);
@@ -38,7 +38,7 @@ namespace Z0
 
             public static Neq<T> Op => default;
             
-            public Moniker Moniker => identify<T>(Name);
+            public OpIdentity Moniker => identify<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) => gmath.neq(x,y);
@@ -57,7 +57,7 @@ namespace Z0
 
             public static Lt<T> Op => default;
 
-            public Moniker Moniker => identify<T>(Name);
+            public OpIdentity Moniker => identify<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) => gmath.lt(x,y);
@@ -75,7 +75,7 @@ namespace Z0
 
             public static LtEq<T> Op => default;
 
-            public Moniker Moniker => identify<T>(Name);
+            public OpIdentity Moniker => identify<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) => gmath.lteq(x,y);
@@ -93,7 +93,7 @@ namespace Z0
 
             public static Gt<T> Op => default;
 
-            public Moniker Moniker => identify<T>(Name);
+            public OpIdentity Moniker => identify<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a, T b) => gmath.gt(a,b);
@@ -111,7 +111,7 @@ namespace Z0
 
             public static GtEq<T> Op => default;
 
-            public Moniker Moniker => identify<T>(Name);
+            public OpIdentity Moniker => identify<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a, T b) => gmath.gteq(a,b);
@@ -129,7 +129,7 @@ namespace Z0
 
             public static Between<T> Op => default;
 
-            public Moniker Moniker => identify<T>(Name);
+            public OpIdentity Moniker => identify<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T a, T b) => gmath.between(x,a,b);
@@ -143,7 +143,7 @@ namespace Z0
 
             public static Nonz<T> Op => default;
 
-            public Moniker Moniker => identify<T>(Name);
+            public OpIdentity Moniker => identify<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a) => gmath.nonz(a);
@@ -162,7 +162,7 @@ namespace Z0
 
             public static NegativeOp<T> Op => default;
 
-            public Moniker Moniker => identify<T>(Name);
+            public OpIdentity Moniker => identify<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a) => gmath.negative(a);
@@ -180,7 +180,7 @@ namespace Z0
 
             public static PositiveOp<T> Op => default;
 
-            public Moniker Moniker => identify<T>(Name);
+            public OpIdentity Moniker => identify<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly bit Invoke(T a) => gmath.positive(a);
@@ -198,7 +198,7 @@ namespace Z0
 
             public static Min<T> Op => default;
 
-            public Moniker Moniker => identify<T>(Name);
+            public OpIdentity Moniker => identify<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.min(a, b);
@@ -217,7 +217,7 @@ namespace Z0
 
             public static Max<T> Op => default;
 
-            public Moniker Moniker => identify<T>(Name);
+            public OpIdentity Moniker => identify<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly T Invoke(T a, T b) => gmath.max(a, b);

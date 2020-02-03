@@ -44,7 +44,7 @@ namespace Z0
                 var typeargs = src.GetGenericArguments().ToArray();                    
                 var text = "ns";
                 text += typeargs[0].NatValue();
-                text += Moniker.SegSep;
+                text += OpIdentity.SegSep;
                 text += NumericType.signature(typeargs[1]);
                 return text;
             }

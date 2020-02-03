@@ -21,7 +21,7 @@ namespace Z0
         AsmFunctionIndex(AsmFunctionGroup src)
         {
             Id = src.Id;
-            index = new Dictionary<Moniker, AsmFunction>();
+            index = new Dictionary<OpIdentity, AsmFunction>();
             foreach(var item in src.Members)            
             {
                 if(!index.TryAdd(item.Id, item))
@@ -29,12 +29,12 @@ namespace Z0
             }
         }
         
-        Dictionary<Moniker,AsmFunction> index;
+        Dictionary<OpIdentity,AsmFunction> index;
 
 
-        Moniker Id {get;}
+        OpIdentity Id {get;}
         
-        Option<AsmFunction> Lookup(Moniker id)
+        Option<AsmFunction> Lookup(OpIdentity id)
             => index.TryFind(id);
 
         public IEnumerable<AsmFunction> Functions

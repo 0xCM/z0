@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.Collections.Generic;
 
-    public readonly struct Moniker : IIdentity<Moniker>
+    public readonly struct OpIdentity : IIdentity<OpIdentity>
     {            
         /// <summary>
         /// The moniker text
@@ -20,36 +20,36 @@ namespace Z0
         /// <summary>
         /// The zero moniker
         /// </summary>
-        public static Moniker Empty => new Moniker(string.Empty);
+        public static OpIdentity Empty => new OpIdentity(string.Empty);
 
         /// <summary>
         /// Creates a moniker directly from source text
         /// </summary>
         /// <param name="src">The source text</param>
-        public static Moniker Define(string src)
-            => new Moniker(src);
+        public static OpIdentity Define(string src)
+            => new OpIdentity(src);
 
-        public static Moniker FromParts(params MonikerPart[] parts)
-            => new Moniker(string.Join(PartSep, parts.Select(x =>x.PartText)));
+        public static OpIdentity FromParts(params OpIdentityPart[] parts)
+            => new OpIdentity(string.Join(PartSep, parts.Select(x =>x.PartText)));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator string(Moniker src)
+        public static implicit operator string(OpIdentity src)
             => src.Identifier;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator Moniker(MonikerPart[] src)
+        public static implicit operator OpIdentity(OpIdentityPart[] src)
             => FromParts(src);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool operator==(Moniker a, Moniker b)
+        public static bool operator==(OpIdentity a, OpIdentity b)
             => a.Equals(b);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool operator!=(Moniker a, Moniker b)
+        public static bool operator!=(OpIdentity a, OpIdentity b)
             => !a.Equals(b);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        Moniker(string text)
+        OpIdentity(string text)
             => this.Identifier = text ?? 0.ToString();
 
         /// <summary>
@@ -105,11 +105,11 @@ namespace Z0
             => Identifier.GetHashCode();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(Moniker src)
+        public bool Equals(OpIdentity src)
             => string.Equals(src.Identifier, Identifier, StringComparison.InvariantCultureIgnoreCase);
 
         public override bool Equals(object obj)
-            => obj is Moniker m && Equals(m);
+            => obj is OpIdentity m && Equals(m);
 
         public IEnumerable<string> SuffixText
         {
@@ -140,7 +140,7 @@ namespace Z0
             }
         }
 
-        public IEnumerable<MonikerPart> Parts
+        public IEnumerable<OpIdentityPart> Parts
         {
             get
             {
@@ -149,21 +149,21 @@ namespace Z0
                for(;i<parts.Length; i++)
                {                   
                    var part = parts[i];
-                   var partkind = MonikerPartKind.None;
+                   var partkind = OpIdentityPartKind.None;
 
                    if(i == 0)
-                        partkind = MonikerPartKind.Name;
+                        partkind = OpIdentityPartKind.Name;
                     else
                     {
                         if(part.Contains(SegSep))
-                            partkind = MonikerPartKind.Segment;
+                            partkind = OpIdentityPartKind.Segment;
                         else
                         {
-                            partkind = MonikerPartKind.UserType;
-                            if(i == 1 && part[0] == Moniker.Generic && Char.IsDigit(TakeAfter(part, Moniker.Generic).First()))
-                                partkind = MonikerPartKind.Scalar;
+                            partkind = OpIdentityPartKind.UserType;
+                            if(i == 1 && part[0] == OpIdentity.Generic && Char.IsDigit(TakeAfter(part, OpIdentity.Generic).First()))
+                                partkind = OpIdentityPartKind.Scalar;
                             else if(Char.IsDigit(part.First()))
-                                partkind = MonikerPartKind.Scalar;                                
+                                partkind = OpIdentityPartKind.Scalar;                                
                         }
                     }
                     yield return (i, partkind, part);
@@ -171,7 +171,7 @@ namespace Z0
 
                var suffixes = SuffixText.ToArray();
                for(var j=0; j< suffixes.Length; j++, i++)
-                    yield return (i, MonikerPartKind.Suffix, suffixes[j]);
+                    yield return (i, OpIdentityPartKind.Suffix, suffixes[j]);
             }
         }
 

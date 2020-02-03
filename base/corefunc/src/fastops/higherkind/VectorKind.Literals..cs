@@ -50,52 +50,52 @@ namespace Z0
         /// <summary>
         /// A vector defined over 8-bit unsigned segments
         /// </summary>
-        v8u = PrimalId.U8 | Unsigned,
+        v8u = PrimitiveId.U8 | Unsigned,
 
         /// <summary>
         /// A vector defined over 8-bit signed segments
         /// </summary>
-        v8i = PrimalId.I8 | Signed,
+        v8i = PrimitiveId.I8 | Signed,
 
         /// <summary>
         /// A vector defined over 16-bit unsigned segments
         /// </summary>
-        v16u = PrimalId.U16 | Unsigned,
+        v16u = PrimitiveId.U16 | Unsigned,
 
         /// <summary>
         /// A vector defined over 16-bit signed segments
         /// </summary>
-        v16i = PrimalId.I16 | Signed,
+        v16i = PrimitiveId.I16 | Signed,
 
         /// <summary>
         /// A vector defined over 32-bit unsigned segments
         /// </summary>
-        v32u = PrimalId.U32 | Unsigned,
+        v32u = PrimitiveId.U32 | Unsigned,
 
         /// <summary>
         /// A vector defined over 32-bit signed segments
         /// </summary>
-        v32i = PrimalId.I32 | Signed,
+        v32i = PrimitiveId.I32 | Signed,
 
         /// <summary>
         /// A vector defined over 64-bit unsigned segments
         /// </summary>
-        v64u = PrimalId.U64 | Unsigned,
+        v64u = PrimitiveId.U64 | Unsigned,
 
         /// <summary>
         /// A vector defined over 64-bit signed segments
         /// </summary>
-        v64i = PrimalId.I64 | Signed,
+        v64i = PrimitiveId.I64 | Signed,
 
         /// <summary>
         /// A vector defined over 32-bit floating-point segments
         /// </summary>
-        v32f = PrimalId.F32 | Fractional,
+        v32f = PrimitiveId.F32 | Fractional,
 
         /// <summary>
         /// A vector defined over 64-bit floating-point segments
         /// </summary>
-        v64f = PrimalId.F64 | Fractional,
+        v64f = PrimitiveId.F64 | Fractional,
 
         /// <summary>
         /// A 128-bit vector covering 16 8-bit unsigned segments

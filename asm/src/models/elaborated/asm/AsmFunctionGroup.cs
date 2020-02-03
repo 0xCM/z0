@@ -17,20 +17,20 @@ namespace Z0
     /// </summary>
     public readonly struct AsmFunctionGroup
     {
-        public static AsmFunctionGroup Define(Moniker id, AsmFunction[] members)
+        public static AsmFunctionGroup Define(OpIdentity id, AsmFunction[] members)
         {            
             if(members.Length == 0)
                 throw error(appMsg($"{id}: Empty groups are disallowed"));            
             return new AsmFunctionGroup(id, members);
         }
         
-        AsmFunctionGroup(Moniker id, AsmFunction[] members)
+        AsmFunctionGroup(OpIdentity id, AsmFunction[] members)
         {
             this.Id = id;
             this.Members = members;            
         }
         
-        public readonly Moniker Id;
+        public readonly OpIdentity Id;
 
         public readonly AsmFunction[] Members;
     }

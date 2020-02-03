@@ -18,14 +18,14 @@ namespace Z0
     {        
         public static CapturedMember Empty => default;
 
-        public static CapturedMember Define(Moniker id, MethodInfo src, MemoryRange origin, byte[] content, NativeCaptureInfo result)
+        public static CapturedMember Define(OpIdentity id, MethodInfo src, MemoryRange origin, byte[] content, NativeCaptureInfo result)
             => new CapturedMember(id, src.Signature().Format(), null, src, origin, content, result);
 
-        public static CapturedMember Define(Moniker id, Delegate src, MemoryRange origin, byte[] content, NativeCaptureInfo result)
+        public static CapturedMember Define(OpIdentity id, Delegate src, MemoryRange origin, byte[] content, NativeCaptureInfo result)
             => new CapturedMember(id, id, src, src.Method, origin, content, result);
 
         [MethodImpl(Inline)]
-        CapturedMember(Moniker id, string label, Delegate src, MethodInfo method, MemoryRange origin, byte[] content, NativeCaptureInfo result)
+        CapturedMember(OpIdentity id, string label, Delegate src, MethodInfo method, MemoryRange origin, byte[] content, NativeCaptureInfo result)
         {
             require((int)origin.Length == content.Length);
             this.Delegate = src;
@@ -45,7 +45,7 @@ namespace Z0
 
         public NativeCaptureInfo CaptureInfo {get;}
 
-        public Moniker Id => Code.Id;
+        public OpIdentity Id => Code.Id;
 
         public string Label => Code.Label;
          

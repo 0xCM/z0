@@ -28,7 +28,7 @@ partial class zfunc
     /// <param name="t">A primal type representative</param>
     /// <typeparam name="T">The primal type</typeparam>
     [MethodImpl(Inline)]   
-    public static Moniker identify<T>(string opname, T t = default)
+    public static OpIdentity identify<T>(string opname, T t = default)
         => OpIdentities.identify<T>(opname);
 
     /// <summary>
@@ -40,7 +40,7 @@ partial class zfunc
     /// <typeparam name="W">The bit width type</typeparam>
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(Inline)]   
-    public static Moniker identify<W,T>(string opname, W w = default, T t = default)
+    public static OpIdentity identify<W,T>(string opname, W w = default, T t = default)
         where W : unmanaged, ITypeNat
         where T : unmanaged
             => OpIdentities.identify(opname,w, NumericType.kind<T>());
@@ -54,7 +54,7 @@ partial class zfunc
     /// <typeparam name="W">The bit width type</typeparam>
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(Inline)]   
-    public static Moniker identify<T>(string opname, N128 w, T t = default)
+    public static OpIdentity identify<T>(string opname, N128 w, T t = default)
         where T : unmanaged
             => OpIdentities.identify(opname,w, NumericType.kind<T>());
 
@@ -67,7 +67,7 @@ partial class zfunc
     /// <typeparam name="W">The bit width type</typeparam>
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(Inline)]   
-    public static Moniker identify<T>(string opname, HK.Vec128<T> hk)
+    public static OpIdentity identify<T>(string opname, HK.Vec128<T> hk)
         where T : unmanaged
             => OpIdentities.identify(opname, n128, NumericType.kind<T>());
 
@@ -80,7 +80,7 @@ partial class zfunc
     /// <typeparam name="W">The bit width type</typeparam>
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(Inline)]   
-    public static Moniker identify<T>(string opname, N256 w, T t = default)
+    public static OpIdentity identify<T>(string opname, N256 w, T t = default)
         where T : unmanaged
             => OpIdentities.identify(opname,w, NumericType.kind<T>());
 
@@ -93,7 +93,7 @@ partial class zfunc
     /// <typeparam name="W">The bit width type</typeparam>
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(Inline)]   
-    public static Moniker identify<T>(string opname, HK.Vec256<T> hk)
+    public static OpIdentity identify<T>(string opname, HK.Vec256<T> hk)
         where T : unmanaged
             => OpIdentities.identify(opname, n256, NumericType.kind<T>());
 

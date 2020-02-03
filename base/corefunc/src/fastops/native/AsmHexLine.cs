@@ -32,7 +32,7 @@ namespace Z0
         {
             try
             {
-                var id = Moniker.Define(formatted.TakeBefore(idsep).Trim());
+                var id = OpIdentity.Define(formatted.TakeBefore(idsep).Trim());
                 var encoded = array(formatted.TakeAfter(idsep).Split(bytesep, StringSplitOptions.RemoveEmptyEntries).Select(Hex.parsebyte));
                 return Define(id,encoded);
                 
@@ -45,17 +45,17 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static AsmHexLine Define(Moniker id, byte[] encoded)
+        public static AsmHexLine Define(OpIdentity id, byte[] encoded)
             => new AsmHexLine(id,encoded);
         
         [MethodImpl(Inline)]
-        public AsmHexLine(Moniker id, byte[] encoded)
+        public AsmHexLine(OpIdentity id, byte[] encoded)
         {
             this.Id = id;
             this.Encoded = encoded;
         }
         
-        public readonly Moniker Id;
+        public readonly OpIdentity Id;
 
         public readonly byte[] Encoded;
 

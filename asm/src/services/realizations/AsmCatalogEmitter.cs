@@ -105,7 +105,7 @@ namespace Z0
             }
         }                    
 
-        AsmFunction Decode(Moniker id, MethodInfo method)
+        AsmFunction Decode(OpIdentity id, MethodInfo method)
             => Decoder.DecodeFunction(id, method);            
 
         IEnumerable<AsmEmissionToken> Emit(DirectOpGroupSpec group, IAsmFunctionArchive dst)

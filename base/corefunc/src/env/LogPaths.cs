@@ -74,13 +74,13 @@ namespace Z0
         public FileExtension AsmExt
             => FileExtension.Define("asm");
 
-        public FileName AsmDetailFile(Moniker m)
+        public FileName AsmDetailFile(OpIdentity m)
             => FileName.Define(m, AsmExt);
 
-        public FileName AsmHexFile(Moniker m)
+        public FileName AsmHexFile(OpIdentity m)
             => FileName.Define(m, HexExt);
 
-        public FileName CilFile(Moniker m)
+        public FileName CilFile(OpIdentity m)
             => FileName.Define(m, CilExt);
 
         public FolderPath AsmDataRoot
@@ -110,7 +110,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The source type</param>
         /// <param name="m">The operation identifier</param>
-        public FilePath AsmInfoPath(Type t, Moniker m)
+        public FilePath AsmInfoPath(Type t, OpIdentity m)
             => AsmDataDir(t) + AsmDetailFile(m);
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace Z0
         /// </summary>
         /// <param name="subject">The assembly log subfolder</param>
         /// <param name="m">The operation moniker</param>
-        public FilePath AsmDetailPath(FolderPath dir, Moniker m)
+        public FilePath AsmDetailPath(FolderPath dir, OpIdentity m)
             => dir + AsmDetailFile(m);
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Z0
         /// </summary>
         /// <param name="subject">The assembly log subfolder</param>
         /// <param name="m">The operation moniker</param>
-        public FilePath CilPath(FolderPath dir, Moniker m)
+        public FilePath CilPath(FolderPath dir, OpIdentity m)
             => dir + CilFile(m);
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace Z0
         /// </summary>
         /// <param name="subject">The assembly log subfolder</param>
         /// <param name="m">The operation identifier</param>
-        public FilePath AsmHexPath(FolderName subject, Moniker m)
+        public FilePath AsmHexPath(FolderName subject, OpIdentity m)
             => AsmDataDir(subject) + AsmHexFile(m);
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Z0
         /// </summary>
         /// <param name="subject">The assembly log subfolder</param>
         /// <param name="m">The operation identifier</param>
-        public FilePath AsmHexPath(FolderPath dir, Moniker m)
+        public FilePath AsmHexPath(FolderPath dir, OpIdentity m)
             => dir + AsmHexFile(m);
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The source type</param>
         /// <param name="m">The operation identifier</param>
-        public FilePath AsmHexPath(Type t, Moniker m)
+        public FilePath AsmHexPath(Type t, OpIdentity m)
             => AsmDataDir(t) + AsmHexFile(m);
 
         public FilePath ConfigPath(string name, FileExtension ext = null)
@@ -161,7 +161,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The source type</param>
         /// <param name="m">The operation identifier</param>
-        public FilePath CilPath(Type t, Moniker m)
+        public FilePath CilPath(Type t, OpIdentity m)
             => AsmDataDir(t) + CilFile(m);
 
         public static FolderPath ApiSrcDir()

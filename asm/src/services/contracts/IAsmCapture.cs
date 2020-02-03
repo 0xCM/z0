@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to read</param>
         /// <param name="dst">The target buffer</param>
-        CapturedMember ExtractBits(Moniker id, MethodInfo src);
+        CapturedMember ExtractBits(OpIdentity id, MethodInfo src);
 
         /// <summary>
         /// Captures the native x86 encoded assembly produced by the jitter by either 
@@ -36,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to read</param>
         /// <param name="dst">The target buffer</param>
-        CapturedMember ExtractBits(Moniker id, Delegate src);
+        CapturedMember ExtractBits(OpIdentity id, Delegate src);
 
         /// <summary>
         /// Runs the jitter on a delegate and captures the emitted binary assembly data
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The source delegate</param>
         /// <param name="dst">The target buffer</param>
-        CapturedMember ExtractBits(Moniker id, DynamicDelegate src);        
+        CapturedMember ExtractBits(OpIdentity id, DynamicDelegate src);        
     }
 
     public interface IAsmExtract : IAsmService

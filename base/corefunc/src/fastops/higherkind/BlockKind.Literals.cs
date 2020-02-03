@@ -65,52 +65,52 @@ namespace Z0
         /// <summary>
         /// A block defined over 8-bit unsigned segments
         /// </summary>
-        B8u = PrimalId.U8 | Unsigned,
+        B8u = PrimitiveId.U8 | Unsigned,
 
         /// <summary>
         /// A block defined over 8-bit signed segments
         /// </summary>
-        B8i = PrimalId.I8 | Signed,
+        B8i = PrimitiveId.I8 | Signed,
 
         /// <summary>
         /// A block defined over 16-bit unsigned segments
         /// </summary>
-        B16u = PrimalId.U16 | Unsigned,
+        B16u = PrimitiveId.U16 | Unsigned,
 
         /// <summary>
         /// A block defined over 16-bit signed segments
         /// </summary>
-        B16i = PrimalId.I16 | Signed,
+        B16i = PrimitiveId.I16 | Signed,
 
         /// <summary>
         /// A block defined over 32-bit unsigned segments
         /// </summary>
-        B32u = PrimalId.U32 | Unsigned,
+        B32u = PrimitiveId.U32 | Unsigned,
 
         /// <summary>
         /// A block defined over 32-bit signed segments
         /// </summary>
-        B32i = PrimalId.I32 | Signed,
+        B32i = PrimitiveId.I32 | Signed,
 
         /// <summary>
         /// A block defined over 64-bit unsigned segments
         /// </summary>
-        B64u = PrimalId.U64 | Unsigned,
+        B64u = PrimitiveId.U64 | Unsigned,
 
         /// <summary>
         /// A block defined over 64-bit signed segments
         /// </summary>
-        B64i = PrimalId.I64 | Signed,
+        B64i = PrimitiveId.I64 | Signed,
 
         /// <summary>
         /// A block defined over 32-bit floating-point segments
         /// </summary>
-        B32f = PrimalId.F32 | Fractional,
+        B32f = PrimitiveId.F32 | Fractional,
 
         /// <summary>
         /// A block defined over 64-bit floating-point segments
         /// </summary>
-        B64f = PrimalId.F64 | Fractional,
+        B64f = PrimitiveId.F64 | Fractional,
 
         /// <summary>
         /// A 16-bit block covering 2 unsigned 8-bit segments

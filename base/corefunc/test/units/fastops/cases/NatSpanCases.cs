@@ -15,9 +15,9 @@ namespace Z0
 
     class NatSpanCases
     {        
-        public static IEnumerable<(Moniker id, Type type)> All
+        public static IEnumerable<(OpIdentity id, Type type)> All
             => from p in type<NatSpanCases>().Properties().Where(p => p.Name != nameof(All))
-                let id = Moniker.Define(p.DisplayName())
+                let id = OpIdentity.Define(p.DisplayName())
                 let type = p.PropertyType
                 select (id,type);   
 

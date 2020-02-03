@@ -10,10 +10,10 @@ namespace Z0
 
     public class GenericOpSpec : RootedOpSpec
     {            
-        public static GenericOpSpec Define(Moniker id, MethodInfo method, NumericKind[] kinds)            
+        public static GenericOpSpec Define(OpIdentity id, MethodInfo method, NumericKind[] kinds)            
             => new GenericOpSpec(id,method, kinds);
 
-        GenericOpSpec(Moniker id, MethodInfo method, NumericKind[] kinds)
+        GenericOpSpec(OpIdentity id, MethodInfo method, NumericKind[] kinds)
             : base(id, method)
         {
             this.Kinds = kinds;

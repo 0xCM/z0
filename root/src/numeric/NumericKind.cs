@@ -35,52 +35,52 @@ namespace Z0
         /// <summary>
         /// Identifies an unsigned 8-bit integral type
         /// </summary>
-        U8 = PrimalId.U8 | FixedWidth.W8 | Unsigned,
+        U8 = PrimitiveId.U8 | FixedWidth.W8 | Unsigned,
 
         /// <summary>
         /// Identifies a signed 8-bit integral type
         /// </summary>
-        I8 = PrimalId.I8 | FixedWidth.W8 | Signed,
+        I8 = PrimitiveId.I8 | FixedWidth.W8 | Signed,
 
         /// <summary>
         /// Identifies an usigned 16-bit integral type
         /// </summary>
-        U16 = PrimalId.U16 | FixedWidth.W16 | Unsigned,
+        U16 = PrimitiveId.U16 | FixedWidth.W16 | Unsigned,
 
         /// <summary>
         /// Identifies a signed 16-bit integral type
         /// </summary>
-        I16 = PrimalId.I16 | FixedWidth.W16 | Signed,
+        I16 = PrimitiveId.I16 | FixedWidth.W16 | Signed,
 
         /// <summary>
         /// Identifies an usigned 32-bit integral type
         /// </summary>
-        U32 = PrimalId.U32 | FixedWidth.W32 | Unsigned, 
+        U32 = PrimitiveId.U32 | FixedWidth.W32 | Unsigned, 
 
         /// <summary>
         /// Identifies a signed 32-bit integral type
         /// </summary>
-        I32 = PrimalId.I32 | FixedWidth.W32 | Signed,
+        I32 = PrimitiveId.I32 | FixedWidth.W32 | Signed,
 
         /// <summary>
         /// Identifies an usigned 64-bit integral type
         /// </summary>
-        U64 = PrimalId.U64 | FixedWidth.W64 | Unsigned,
+        U64 = PrimitiveId.U64 | FixedWidth.W64 | Unsigned,
 
         /// <summary>
         /// Identifies a signed 64-bit integral type
         /// </summary>
-        I64 = PrimalId.I64 | FixedWidth.W64 | Signed,
+        I64 = PrimitiveId.I64 | FixedWidth.W64 | Signed,
 
         /// <summary>
         /// Identifies a 32-bit floating-point type
         /// </summary>
-        F32 = PrimalId.F32 | FixedWidth.W32 | Fractional,
+        F32 = PrimitiveId.F32 | FixedWidth.W32 | Fractional,
         
         /// <summary>
         /// Identifies a 64-bit floating-point type
         /// </summary>
-        F64 = PrimalId.F64 | FixedWidth.W64 | Fractional, 
+        F64 = PrimitiveId.F64 | FixedWidth.W64 | Fractional, 
         
         /// <summary>
         /// Defines a classification that includes all signed primal integral types and no others

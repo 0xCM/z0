@@ -324,7 +324,7 @@ namespace Z0
         const NumericIndicator i = NumericIndicator.Signed;
         const NumericIndicator u = NumericIndicator.Unsigned;
 
-        public static MonikerSegment ToMonikerSegment(this MemorySize src)
+        public static OpIdentitySegment ToMonikerSegment(this MemorySize src)
             => src switch {
                     MemorySize.Packed128_Int8 => (W128, W8, i),
                     MemorySize.Packed128_UInt8 => (W128, W8, u),
@@ -346,7 +346,7 @@ namespace Z0
                     MemorySize.Packed256_UInt64 => (W256, W64, u),
                     MemorySize.Packed256_Float32 => (W256, W32, f),
                     MemorySize.Packed256_Float64 => (W256, W64, f),
-                    _ => MonikerSegment.Empty
+                    _ => OpIdentitySegment.Empty
             };
         
 

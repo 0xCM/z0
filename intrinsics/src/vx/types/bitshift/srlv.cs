@@ -21,7 +21,7 @@ namespace Z0
 
             public static Srlv128<T> Op => default;
 
-            public Moniker Moniker => identify(Name,hk);
+            public OpIdentity Moniker => identify(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> counts) 
@@ -41,7 +41,7 @@ namespace Z0
 
             public static Srlv256<T> Op => default;
 
-            public Moniker Moniker => identify(Name,hk);
+            public OpIdentity Moniker => identify(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> counts) 

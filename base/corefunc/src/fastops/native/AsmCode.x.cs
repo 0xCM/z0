@@ -16,7 +16,7 @@ namespace Z0
     {
         static IEnumerable<NumericKind> ParseKinds(IEnumerable<string> parts)
          => from part in parts
-            let x = part.StartsWith(Moniker.GenericLocator)
+            let x = part.StartsWith(OpIdentity.GenericLocator)
                     ? NumericType.ParseKind(part.Substring(1, part.Length - 1)) 
                     : NumericType.ParseKind(part)
             where x.IsSome()

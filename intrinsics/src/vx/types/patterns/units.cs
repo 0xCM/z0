@@ -21,7 +21,7 @@ namespace Z0
 
             static N128 w => default;
 
-            public Moniker Moniker => identify<T>(Name,w);
+            public OpIdentity Moniker => identify<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke() => VPattern.vunits<T>(w);            
@@ -35,7 +35,7 @@ namespace Z0
             public static Units256<T> Op => default;
 
             static N256 w => default;
-            public Moniker Moniker => identify<T>(Name,w);
+            public OpIdentity Moniker => identify<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke() => VPattern.vunits<T>(w);

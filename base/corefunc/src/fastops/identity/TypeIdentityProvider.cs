@@ -72,14 +72,14 @@ namespace Z0
 
         readonly struct FunctionalProvider : ITypeIdentityProvider
         {     
-            readonly Func<Type, Option<TypeIdentity>> f;
+            readonly Func<Type, TypeIdentity> f;
             
             [MethodImpl(Inline)]
-            public FunctionalProvider(Func<Type, Option<TypeIdentity>> f)
+            public FunctionalProvider(Func<Type, TypeIdentity> f)
                 => this.f = f;
             
             [MethodImpl(Inline)]
-            public Option<TypeIdentity> DefineIdentity(Type src)
+            public TypeIdentity DefineIdentity(Type src)
                 => f(src);
         }
     }

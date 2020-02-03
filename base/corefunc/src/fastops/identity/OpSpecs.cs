@@ -33,7 +33,7 @@ namespace Z0
         {
             public IEnumerable<DirectOpGroupSpec> FromHost(Type host)
                 => from d in default(DirectSvc).FromHost(host).GroupBy(op => op.Id.Name)
-                    let id = Moniker.Define(d.Key)
+                    let id = OpIdentity.Define(d.Key)
                     select DirectOpGroupSpec.Define(id, d);                    
         }
 

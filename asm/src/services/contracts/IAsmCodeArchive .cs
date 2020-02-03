@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="subfolder">The asm log subfolder</param>
         /// <param name="m">The identifying moniker</param>
-        Option<AsmCode<T>> Read<T>(Moniker m, T t = default)
+        Option<AsmCode<T>> Read<T>(OpIdentity m, T t = default)
             where T : unmanaged;
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         /// Reads the content of a hexline default-formatted file
         /// </summary>
         /// <param name="src">The source path</param>
-        IEnumerable<AsmCode> Read(Moniker src); 
+        IEnumerable<AsmCode> Read(OpIdentity src); 
 
         /// <summary>
         /// Reads the content of a hexline default-formatted file

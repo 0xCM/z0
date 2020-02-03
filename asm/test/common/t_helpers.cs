@@ -14,25 +14,25 @@ namespace Z0
         /// <summary>
         /// Enables the generic indicator
         /// </summary>
-        public static Moniker WithGeneric(this Moniker src)
+        public static OpIdentity WithGeneric(this OpIdentity src)
         {
-            if(src.TextComponents.Skip(1).First()[0] == Moniker.Generic)
+            if(src.TextComponents.Skip(1).First()[0] == OpIdentity.Generic)
                 return src;
             else
-               return Moniker.Define(
-                   concat(src.Identifier.LeftOf(Moniker.PartSep), Moniker.PartSep, Moniker.Generic,  src.Identifier.RightOf(Moniker.PartSep)));
+               return OpIdentity.Define(
+                   concat(src.Identifier.LeftOf(OpIdentity.PartSep), OpIdentity.PartSep, OpIdentity.Generic,  src.Identifier.RightOf(OpIdentity.PartSep)));
         }
 
         /// <summary>
         /// Disables the generic indicator
         /// </summary>
-        public static Moniker WithoutGeneric(this Moniker src)
+        public static OpIdentity WithoutGeneric(this OpIdentity src)
         {
             var parts = src.Parts.ToArray();
             if(parts.Length < 2)
                 return src;
             
-            if(parts[1].PartText[0] != Moniker.Generic)
+            if(parts[1].PartText[0] != OpIdentity.Generic)
                 return src;
 
             parts[1] = parts[1].WithText(parts[1].PartText.Substring(1));
@@ -42,12 +42,12 @@ namespace Z0
         /// <summary>
         /// Enables the assembly indicator
         /// </summary>
-        public static Moniker WithAsm(this Moniker src)
+        public static OpIdentity WithAsm(this OpIdentity src)
         {
-            if(src.Identifier.Contains(Moniker.AsmLocator))
+            if(src.Identifier.Contains(OpIdentity.AsmLocator))
                 return src;
             else
-                return Moniker.Define(src.Identifier + Moniker.AsmLocator);
+                return OpIdentity.Define(src.Identifier + OpIdentity.AsmLocator);
         }            
     }
 }

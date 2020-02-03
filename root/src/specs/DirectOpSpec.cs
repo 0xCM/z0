@@ -9,10 +9,10 @@ namespace Z0
 
     public sealed class DirectOpSpec : RootedOpSpec
     {        
-        public static DirectOpSpec Define(Moniker id, MethodInfo method)            
+        public static DirectOpSpec Define(OpIdentity id, MethodInfo method)            
             => new DirectOpSpec(id,method);
 
-        DirectOpSpec(Moniker id, MethodInfo method)
+        DirectOpSpec(OpIdentity id, MethodInfo method)
             : base(id, method)
         {
 

@@ -18,7 +18,7 @@ namespace Z0
             where T : unmanaged, IFixed
                 => new FixedAsm<T>(code);
 
-        public static FixedAsm<T> Parse<T>(Moniker id, string data)
+        public static FixedAsm<T> Parse<T>(OpIdentity id, string data)
             where T : unmanaged, IFixed
             => Define<T>(AsmCode.Parse(id,data));
 
@@ -38,7 +38,7 @@ namespace Z0
         /// <summary>
         /// The identifying moniker
         /// </summary>
-        public Moniker Id
+        public OpIdentity Id
             => Code.Id;
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Z0
         /// <summary>
         /// The assigned identity
         /// </summary>
-        public readonly Moniker Id;
+        public readonly OpIdentity Id;
 
         /// <summary>
         /// The originating memory location
@@ -100,7 +100,7 @@ namespace Z0
         /// <summary>
         /// The canonical zero
         /// </summary>
-        public static AsmCode Empty => new AsmCode(Moniker.Empty, MemoryRange.Empty, string.Empty,  new byte[]{0});
+        public static AsmCode Empty => new AsmCode(OpIdentity.Empty, MemoryRange.Empty, string.Empty,  new byte[]{0});
 
         /// <summary>
         /// Defines a fully-specified code block
@@ -110,7 +110,7 @@ namespace Z0
         /// <param name="label">Descriptive text</param>
         /// <param name="data">The code bytes</param>
         [MethodImpl(Inline)]
-        public static AsmCode Define(Moniker id, MemoryRange origin, string label, byte[] data)
+        public static AsmCode Define(OpIdentity id, MemoryRange origin, string label, byte[] data)
             => new AsmCode(id, origin, label, data);
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Z0
         /// <param name="id">The identifying moniker</param>
         /// <param name="data">The code bytes</param>
         [MethodImpl(Inline)]
-        public static AsmCode Define(Moniker id, byte[] data)
+        public static AsmCode Define(OpIdentity id, byte[] data)
             => new AsmCode(id, MemoryRange.Empty, id, data);
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace Z0
         /// </summary>
         /// <param name="data">The encoded assembly</param>
         /// <param name="id">The identity to confer</param>
-        public static AsmCode Parse(Moniker id, string data)
+        public static AsmCode Parse(OpIdentity id, string data)
             => Define(id, Hex.parsebytes(data).ToArray());
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Z0
         /// </summary>
         /// <param name="data">The encoded assembly</param>
         /// <param name="id">The identity to confer</param>
-        public static AsmCode<T> Parse<T>(string data, Moniker id, T t = default)
+        public static AsmCode<T> Parse<T>(string data, OpIdentity id, T t = default)
             where T : unmanaged
                 => new AsmCode<T>(id, MemoryRange.Empty, id.Identifier, Hex.parsebytes(data).ToArray());
                 
@@ -144,7 +144,7 @@ namespace Z0
             => code.Encoded;
 
         [MethodImpl(Inline)]
-        internal AsmCode(Moniker id, MemoryRange origin,  string label, byte[] encoded)
+        internal AsmCode(OpIdentity id, MemoryRange origin,  string label, byte[] encoded)
         {
             this.Id = id;
             this.Origin = origin;
@@ -178,7 +178,7 @@ namespace Z0
                 => FixedAsm.Define<T>(this);
 
         [MethodImpl(Inline)]
-        public AsmCode WithIdentity(Moniker id)
+        public AsmCode WithIdentity(OpIdentity id)
             => Define(id, Origin, Label, Encoded);
     }
 
@@ -190,7 +190,7 @@ namespace Z0
     {
         readonly AsmCode Code;
 
-        public Moniker Id
+        public OpIdentity Id
             => Code.Id;
 
         public MemoryRange Origin
@@ -217,7 +217,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public AsmCode(Moniker id, MemoryRange origin, string label, byte[] data)
+        public AsmCode(OpIdentity id, MemoryRange origin, string label, byte[] data)
         {
             Code = new AsmCode(id, origin,label,data);
         }

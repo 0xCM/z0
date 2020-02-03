@@ -53,11 +53,11 @@ namespace Z0
             where D : Delegate
                 => CilFunctionBody.From(src);
 
-        internal static DynamicDelegate<D> CreateDelegate<D>(this DynamicMethod dst, Moniker id,  MethodInfo src)
+        internal static DynamicDelegate<D> CreateDelegate<D>(this DynamicMethod dst, OpIdentity id,  MethodInfo src)
             where D : Delegate
                 => DynamicDelegate.Define(id, src,dst, (D)dst.CreateDelegate(typeof(D)));
 
-        internal static DynamicDelegate CreateDelegate(this DynamicMethod dst, Moniker id, MethodInfo src, Type @delegate)
+        internal static DynamicDelegate CreateDelegate(this DynamicMethod dst, OpIdentity id, MethodInfo src, Type @delegate)
             => DynamicDelegate.Define(id, src, dst, dst.CreateDelegate(@delegate));
     }
 }

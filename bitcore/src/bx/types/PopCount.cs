@@ -18,7 +18,7 @@ namespace Z0
 
             public const string Name = "popcount";
 
-            public Moniker Moniker => identify<T>(Name);
+            public OpIdentity Moniker => identify<T>(Name);
 
             [MethodImpl(Inline)]
             public uint Invoke(T a) => gbits.pop(a);

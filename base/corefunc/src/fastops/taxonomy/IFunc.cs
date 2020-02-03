@@ -16,7 +16,7 @@ namespace Z0
         /// <summary>
         /// A name that uniquely identifies a function reification
         /// </summary>
-        Moniker Moniker {get;} 
+        OpIdentity Moniker {get;} 
 
         /// <summary>
         /// Specifies the function kind classification

@@ -28,10 +28,10 @@ namespace Z0
         protected virtual string OpName 
             => "anon";
 
-        protected Moniker TestOpMoniker(NumericKind kind)
+        protected OpIdentity TestOpMoniker(NumericKind kind)
             => OpIdentities.identify($"{OpName}_asm",kind);
 
-        protected Moniker TestOpName<T>(T t = default)
+        protected OpIdentity TestOpName<T>(T t = default)
             where T : unmanaged
                 => TestOpMoniker(NumericType.kind<T>());
 

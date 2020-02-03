@@ -37,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source delegate</param>
         /// <param name="dst">The target writer</param>
-        public static void capture(Moniker id, MethodInfo src, INativeWriter dst)
+        public static void capture(OpIdentity id, MethodInfo src, INativeWriter dst)
             => dst.WriteData(NativeReader.read(id, src, dst.TakeBuffer()));
 
         /// <summary>

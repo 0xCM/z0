@@ -129,13 +129,13 @@ namespace Z0
             }
         }
 
-        FilePath HexPath(Moniker m)
+        FilePath HexPath(OpIdentity m)
             => Paths.AsmDataDir(RelativeLocation.Define(Catalog, Subject)).CreateIfMissing() + Paths.AsmHexFile(m);
 
-        FilePath AsmPath(Moniker m)
+        FilePath AsmPath(OpIdentity m)
             => Paths.AsmDataDir(RelativeLocation.Define(Catalog, Subject)).CreateIfMissing() + Paths.AsmDetailFile(m);
 
-        FilePath CilPath(Moniker m)
+        FilePath CilPath(OpIdentity m)
             => Paths.AsmDataDir(RelativeLocation.Define(Catalog, Subject)).CreateIfMissing() + Paths.CilFile(m);
     }
 }

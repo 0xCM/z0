@@ -16,7 +16,7 @@ namespace Z0
     {
         readonly bool generic;
         
-        readonly Dictionary<Moniker, AsmCode> index;
+        readonly Dictionary<OpIdentity, AsmCode> index;
 
         public static AsmCodeIndex Create(IEnumerable<AsmCode> src, bool generic)
             => new AsmCodeIndex(src,generic);
@@ -24,11 +24,11 @@ namespace Z0
         AsmCodeIndex(IEnumerable<AsmCode> src, bool generic)
         {
             this.generic = generic;
-            this.index = new Dictionary<Moniker, AsmCode>();
+            this.index = new Dictionary<OpIdentity, AsmCode>();
          
         }
         
-        public Option<AsmCode> Lookup(Moniker id)
+        public Option<AsmCode> Lookup(OpIdentity id)
             => index.TryFind(id);
         
 

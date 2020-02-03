@@ -18,7 +18,7 @@ namespace Z0
 
             public const string Name = "bvnot";
 
-            public Moniker Moniker => identify<T>(Name);
+            public OpIdentity Moniker => identify<T>(Name);
 
             [MethodImpl(Inline)]
             public readonly BitVector<T> Invoke(BitVector<T> a) => BitVector.not(a);

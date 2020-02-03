@@ -113,7 +113,7 @@ namespace Z0
             where T : unmanaged
                 => CheckAsmMatch(f, asm.Untyped);
 
-        protected AsmCode ReadAsm(string catalog, string subject, Moniker m)
+        protected AsmCode ReadAsm(string catalog, string subject, OpIdentity m)
             => Context.CodeArchive(catalog,subject).Read(m).Single();
 
         protected AsmCode<T> ReadAsm<W,T>(string catalog, string subject, string opname, W w = default, T t = default)

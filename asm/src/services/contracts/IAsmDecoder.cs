@@ -32,7 +32,7 @@ namespace Z0
         /// Decodes a function from a method
         /// </summary>
         /// <param name="src">The cource capture</param>
-        AsmFunction DecodeFunction(Moniker id, MethodInfo src);      
+        AsmFunction DecodeFunction(OpIdentity id, MethodInfo src);      
 
         /// <summary>
         /// Decodes an assembly function from a dynamic delegate

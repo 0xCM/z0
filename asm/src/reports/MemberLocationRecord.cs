@@ -15,10 +15,10 @@ namespace Z0
     /// </summary>
     public class MemberLocationRecord : IRecord<MemberLocationRecord>
     {    
-        public static MemberLocationRecord Define(MemoryAddress location, ushort gap, Moniker member)
+        public static MemberLocationRecord Define(MemoryAddress location, ushort gap, OpIdentity member)
             => new MemberLocationRecord(location, gap, member);
 
-        MemberLocationRecord(MemoryAddress location, ushort gap, Moniker member)
+        MemberLocationRecord(MemoryAddress location, ushort gap, OpIdentity member)
         {
             this.Location = location;
             this.Gap = gap;
@@ -32,7 +32,7 @@ namespace Z0
         public ushort Gap {get;set;}
 
         [ReportField]
-        public Moniker Member {get;set;}
+        public OpIdentity Member {get;set;}
 
         const int LocationPad = 13;
 

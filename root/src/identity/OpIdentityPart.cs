@@ -7,15 +7,15 @@ namespace Z0
     using System;
     using System.Linq;
 
-    public readonly struct MonikerPart
+    public readonly struct OpIdentityPart
     {        
-        public static MonikerPart Define(byte index, MonikerPartKind kind, string text)
-            => new MonikerPart(index, kind, text);
+        public static OpIdentityPart Define(byte index, OpIdentityPartKind kind, string text)
+            => new OpIdentityPart(index, kind, text);
 
-        public static implicit operator MonikerPart((byte index, MonikerPartKind kind, string text) src)
-            => new MonikerPart(src.index, src.kind, src.text);
+        public static implicit operator OpIdentityPart((byte index, OpIdentityPartKind kind, string text) src)
+            => new OpIdentityPart(src.index, src.kind, src.text);
 
-        MonikerPart(byte index, MonikerPartKind kind, string text)
+        OpIdentityPart(byte index, OpIdentityPartKind kind, string text)
         {
             this.PartIndex = index;
             this.PartKind = kind;
@@ -23,11 +23,11 @@ namespace Z0
         }
         public readonly byte PartIndex;
 
-        public readonly MonikerPartKind PartKind;
+        public readonly OpIdentityPartKind PartKind;
 
         public readonly string PartText;
 
-        public MonikerPart WithText(string src)
+        public OpIdentityPart WithText(string src)
             => Define(PartIndex, PartKind, src);
 
         public override string ToString()

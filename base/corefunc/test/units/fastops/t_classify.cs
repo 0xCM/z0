@@ -144,10 +144,10 @@ namespace Z0
 
         public void check_primal_identity()
         {
-            Claim.eq(PrimalId.U8, NumericKind.U8.GetPrimalId());
-            Claim.eq(PrimalId.I8, NumericKind.I8.GetPrimalId());
-            Claim.eq(PrimalId.U16, NumericKind.U16.GetPrimalId());
-            Claim.eq(PrimalId.I16, NumericKind.I16.GetPrimalId());
+            Claim.eq(PrimitiveId.U8, NumericKind.U8.GetPrimalId());
+            Claim.eq(PrimitiveId.I8, NumericKind.I8.GetPrimalId());
+            Claim.eq(PrimitiveId.U16, NumericKind.U16.GetPrimalId());
+            Claim.eq(PrimitiveId.I16, NumericKind.I16.GetPrimalId());
 
         }
         public void classify_block_16()

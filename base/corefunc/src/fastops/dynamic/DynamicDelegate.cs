@@ -17,12 +17,12 @@ namespace Z0
     public readonly struct DynamicDelegate
     {
         [MethodImpl(Inline)]
-        public static DynamicDelegate<D> Define<D>(Moniker id, MethodInfo src, DynamicMethod dst, D op)
+        public static DynamicDelegate<D> Define<D>(OpIdentity id, MethodInfo src, DynamicMethod dst, D op)
             where D : Delegate
                 => new DynamicDelegate<D>(id, src, dst,op);
 
         [MethodImpl(Inline)]
-        public static DynamicDelegate Define(Moniker id, MethodInfo src, DynamicMethod dst, Delegate op)
+        public static DynamicDelegate Define(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
             => new DynamicDelegate(id,src, dst,op);
 
         [MethodImpl(Inline)]
@@ -35,7 +35,7 @@ namespace Z0
             => d.DynamicOp;
 
         [MethodImpl(Inline)]
-        DynamicDelegate(Moniker id, MethodInfo src, DynamicMethod dst, Delegate op)
+        DynamicDelegate(OpIdentity id, MethodInfo src, DynamicMethod dst, Delegate op)
         {
             this.Id = id;
             this.SourceMethod = src;
@@ -46,7 +46,7 @@ namespace Z0
         /// <summary>
         /// The delegate identity
         /// </summary>
-        public readonly Moniker Id;
+        public readonly OpIdentity Id;
 
         /// <summary>
         /// The method invoked by the dynamic operator that provides the substance of the operation

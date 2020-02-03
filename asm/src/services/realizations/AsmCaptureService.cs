@@ -48,13 +48,13 @@ namespace Z0
 
         IAsmDecoder Decoder => Context.Decoder();        
 
-        public CapturedMember ExtractBits(Moniker id, DynamicDelegate src)
+        public CapturedMember ExtractBits(OpIdentity id, DynamicDelegate src)
             => NativeReader.read(id,src,TakeBuffer());
 
-        public CapturedMember ExtractBits(Moniker id, MethodInfo src)
+        public CapturedMember ExtractBits(OpIdentity id, MethodInfo src)
             => NativeReader.read(id, src, TakeBuffer());
 
-        public CapturedMember ExtractBits(Moniker id, Delegate src)
+        public CapturedMember ExtractBits(OpIdentity id, Delegate src)
             => NativeReader.read(id, src, TakeBuffer());
 
         public CapturedMember ExtractBits(Delegate src)

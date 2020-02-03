@@ -98,88 +98,88 @@ namespace Z0
         public static bit integral(BlockKind k)
             => signed(k) || unsigned(k);
 
-        public static BlockKind kind(FixedWidth width, PrimalId id)            
+        public static BlockKind kind(FixedWidth width, PrimitiveId id)            
         {
             var k = width switch 
                     { FixedWidth.W16 => 
                         id switch {
-                            PrimalId.U8 => BlockKind.Block16x8u,
-                            PrimalId.I8 => BlockKind.Block16x8i,
-                            PrimalId.I16 => BlockKind.Block16x16i,
-                            PrimalId.U16 => BlockKind.Block16x16u,
+                            PrimitiveId.U8 => BlockKind.Block16x8u,
+                            PrimitiveId.I8 => BlockKind.Block16x8i,
+                            PrimitiveId.I16 => BlockKind.Block16x16i,
+                            PrimitiveId.U16 => BlockKind.Block16x16u,
                             _ => BlockKind.None
                             }, 
 
                         FixedWidth.W32 => 
                         id switch {
-                            PrimalId.U8 => BlockKind.Block32x8u,
-                            PrimalId.I8 => BlockKind.Block32x8i,
-                            PrimalId.I16 => BlockKind.Block32x16i,
-                            PrimalId.U16 => BlockKind.Block32x16u,
-                            PrimalId.I32 => BlockKind.Block32x32i,
-                            PrimalId.U32 => BlockKind.Block32x32u,
-                            PrimalId.F32 => BlockKind.Block32x32f,
+                            PrimitiveId.U8 => BlockKind.Block32x8u,
+                            PrimitiveId.I8 => BlockKind.Block32x8i,
+                            PrimitiveId.I16 => BlockKind.Block32x16i,
+                            PrimitiveId.U16 => BlockKind.Block32x16u,
+                            PrimitiveId.I32 => BlockKind.Block32x32i,
+                            PrimitiveId.U32 => BlockKind.Block32x32u,
+                            PrimitiveId.F32 => BlockKind.Block32x32f,
                             _ => BlockKind.None
                             }, 
 
                         FixedWidth.W64 => 
                         id switch {
-                            PrimalId.U8 => BlockKind.Block64x8u,
-                            PrimalId.I8 => BlockKind.Block64x8i,
-                            PrimalId.U16 => BlockKind.Block64x16u,
-                            PrimalId.I16 => BlockKind.Block64x16i,
-                            PrimalId.U32 => BlockKind.Block64x32i,
-                            PrimalId.I32 => BlockKind.Block64x32i,
-                            PrimalId.U64 => BlockKind.Block64x64u,
-                            PrimalId.I64 => BlockKind.Block64x64i,
-                            PrimalId.F32 => BlockKind.Block64x32f,
-                            PrimalId.F64 => BlockKind.Block64x64f,
+                            PrimitiveId.U8 => BlockKind.Block64x8u,
+                            PrimitiveId.I8 => BlockKind.Block64x8i,
+                            PrimitiveId.U16 => BlockKind.Block64x16u,
+                            PrimitiveId.I16 => BlockKind.Block64x16i,
+                            PrimitiveId.U32 => BlockKind.Block64x32i,
+                            PrimitiveId.I32 => BlockKind.Block64x32i,
+                            PrimitiveId.U64 => BlockKind.Block64x64u,
+                            PrimitiveId.I64 => BlockKind.Block64x64i,
+                            PrimitiveId.F32 => BlockKind.Block64x32f,
+                            PrimitiveId.F64 => BlockKind.Block64x64f,
                             _ => BlockKind.None
                             }, 
 
                         FixedWidth.W128 => 
                         id switch {
-                            PrimalId.U8 => BlockKind.Block128x8u,
-                            PrimalId.I8 => BlockKind.Block128x8i,
-                            PrimalId.U16 => BlockKind.Block128x16u,
-                            PrimalId.I16 => BlockKind.Block128x16i,
-                            PrimalId.U32 => BlockKind.Block128x32i,
-                            PrimalId.I32 => BlockKind.Block128x32i,
-                            PrimalId.U64 => BlockKind.Block128x64u,
-                            PrimalId.I64 => BlockKind.Block128x64i,
-                            PrimalId.F32 => BlockKind.Block128x32f,
-                            PrimalId.F64 => BlockKind.Block128x64f,
+                            PrimitiveId.U8 => BlockKind.Block128x8u,
+                            PrimitiveId.I8 => BlockKind.Block128x8i,
+                            PrimitiveId.U16 => BlockKind.Block128x16u,
+                            PrimitiveId.I16 => BlockKind.Block128x16i,
+                            PrimitiveId.U32 => BlockKind.Block128x32i,
+                            PrimitiveId.I32 => BlockKind.Block128x32i,
+                            PrimitiveId.U64 => BlockKind.Block128x64u,
+                            PrimitiveId.I64 => BlockKind.Block128x64i,
+                            PrimitiveId.F32 => BlockKind.Block128x32f,
+                            PrimitiveId.F64 => BlockKind.Block128x64f,
                             _ => BlockKind.None
                             }, 
 
 
                         FixedWidth.W256 => 
                         id switch {
-                            PrimalId.U8 => BlockKind.Block256x8u,
-                            PrimalId.I8 => BlockKind.Block256x8i,
-                            PrimalId.U16 => BlockKind.Block256x16u,
-                            PrimalId.I16 => BlockKind.Block256x16i,
-                            PrimalId.U32 => BlockKind.Block256x32i,
-                            PrimalId.I32 => BlockKind.Block256x32i,
-                            PrimalId.U64 => BlockKind.Block256x64u,
-                            PrimalId.I64 => BlockKind.Block256x64i,
-                            PrimalId.F32 => BlockKind.Block256x32f,
-                            PrimalId.F64 => BlockKind.Block256x64f,
+                            PrimitiveId.U8 => BlockKind.Block256x8u,
+                            PrimitiveId.I8 => BlockKind.Block256x8i,
+                            PrimitiveId.U16 => BlockKind.Block256x16u,
+                            PrimitiveId.I16 => BlockKind.Block256x16i,
+                            PrimitiveId.U32 => BlockKind.Block256x32i,
+                            PrimitiveId.I32 => BlockKind.Block256x32i,
+                            PrimitiveId.U64 => BlockKind.Block256x64u,
+                            PrimitiveId.I64 => BlockKind.Block256x64i,
+                            PrimitiveId.F32 => BlockKind.Block256x32f,
+                            PrimitiveId.F64 => BlockKind.Block256x64f,
                             _ => BlockKind.None
                             }, 
 
                         FixedWidth.W512 => 
                         id switch {
-                            PrimalId.U8 => BlockKind.Block512x8u,
-                            PrimalId.I8 => BlockKind.Block512x8i,
-                            PrimalId.U16 => BlockKind.Block512x16u,
-                            PrimalId.I16 => BlockKind.Block512x16i,
-                            PrimalId.U32 => BlockKind.Block512x32i,
-                            PrimalId.I32 => BlockKind.Block512x32i,
-                            PrimalId.U64 => BlockKind.Block512x64u,
-                            PrimalId.I64 => BlockKind.Block512x64i,
-                            PrimalId.F32 => BlockKind.Block512x32f,
-                            PrimalId.F64 => BlockKind.Block512x64f,
+                            PrimitiveId.U8 => BlockKind.Block512x8u,
+                            PrimitiveId.I8 => BlockKind.Block512x8i,
+                            PrimitiveId.U16 => BlockKind.Block512x16u,
+                            PrimitiveId.I16 => BlockKind.Block512x16i,
+                            PrimitiveId.U32 => BlockKind.Block512x32i,
+                            PrimitiveId.I32 => BlockKind.Block512x32i,
+                            PrimitiveId.U64 => BlockKind.Block512x64u,
+                            PrimitiveId.I64 => BlockKind.Block512x64i,
+                            PrimitiveId.F32 => BlockKind.Block512x32f,
+                            PrimitiveId.F64 => BlockKind.Block512x64f,
                             _ => BlockKind.None
                             }, 
 

@@ -10,7 +10,7 @@ namespace Z0
 
     public interface ITypeIdentityProvider
     {
-        Option<TypeIdentity> DefineIdentity(Type src);        
+        TypeIdentity DefineIdentity(Type src);        
 
         
     }

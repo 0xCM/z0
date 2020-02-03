@@ -15,7 +15,7 @@ namespace Z0
 
         public readonly string Subject;
 
-        public readonly Moniker Id;
+        public readonly OpIdentity Id;
 
         [MethodImpl(Inline)]
         public static bool operator==(OpUri a, OpUri b)
@@ -32,18 +32,18 @@ namespace Z0
             {
                 var catalog = parts[0];
                 var subject = parts[1];
-                var id = Moniker.Define(parts[2]);
+                var id = OpIdentity.Define(parts[2]);
                 return Define(catalog, subject, id);
             }
             return none<OpUri>();
         }
         
         [MethodImpl(Inline)]
-        public static OpUri Define(string catalog, string subject, Moniker id)        
+        public static OpUri Define(string catalog, string subject, OpIdentity id)        
             => new OpUri(catalog,subject, id);
 
         [MethodImpl(Inline)]
-        OpUri(string catalog, string subject, Moniker id)
+        OpUri(string catalog, string subject, OpIdentity id)
         {
             this.Catalog = catalog;
             this.Subject = subject;

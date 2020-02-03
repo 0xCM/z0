@@ -19,14 +19,14 @@ namespace Z0
         /// Identifies the method
         /// </summary>
         /// <param name="m">The method to identify</param>
-        public static Moniker Identify(this MethodInfo m)
+        public static OpIdentity Identify(this MethodInfo m)
             => OpIdentities.Provider.DefineIdentity(m);
 
         /// <summary>
         /// Identifies the delegate
         /// </summary>
         /// <param name="m">The method to identify</param>
-        public static Moniker Identify(this Delegate m)
+        public static OpIdentity Identify(this Delegate m)
             => OpIdentities.Provider.DefineIdentity(m.Method);
 
         /// <summary>
@@ -69,71 +69,71 @@ namespace Z0
             return name;            
         }
 
-        public static Option<byte> ParseImm(this Moniker src)            
+        public static Option<byte> ParseImm(this OpIdentity src)            
         {
-            if(src.HasImm && byte.TryParse(src.Identifier.RightOfLast(Moniker.Imm), out var immval))
+            if(src.HasImm && byte.TryParse(src.Identifier.RightOfLast(OpIdentity.Imm), out var immval))
                 return immval;
             else
                 return none<byte>();
         }
 
         [MethodImpl(Inline)]   
-        public static Moniker SegmentMoniker<W>(this NumericKind k, W w = default)
+        public static OpIdentity SegmentMoniker<W>(this NumericKind k, W w = default)
             where W : unmanaged, ITypeNat
-                => Moniker.Define($"{w}{Moniker.SegSep}{NumericType.signature(k)}");
+                => OpIdentity.Define($"{w}{OpIdentity.SegSep}{NumericType.signature(k)}");
 
         [MethodImpl(Inline)]   
-        public static Moniker SegmentMoniker(this NumericKind k, FixedWidth w)
-            => Moniker.Define($"{w.Format()}{Moniker.SegSep}{NumericType.signature(k)}");
+        public static OpIdentity SegmentMoniker(this NumericKind k, FixedWidth w)
+            => OpIdentity.Define($"{w.Format()}{OpIdentity.SegSep}{NumericType.signature(k)}");
 
-        public static Option<MonikerScalar> ParseScalar(this MonikerPart part)
+        public static Option<ScalarIdentity> ParseScalar(this OpIdentityPart part)
         {
-            if(part.PartKind == MonikerPartKind.Scalar)
+            if(part.PartKind == OpIdentityPartKind.Scalar)
             {
                 return from k in NumericType.ParseKind(part.PartText)
-                    let scalar = MonikerScalar.Define((FixedWidth)k.Width(), k.Indicator())
+                    let scalar = ScalarIdentity.Define((FixedWidth)k.Width(), k.Indicator())
                     select scalar;
             }
             else
-                return none<MonikerScalar>();                
+                return none<ScalarIdentity>();                
         }
 
-        public static Option<MonikerPart> Part(this Moniker src, int partidx)
+        public static Option<OpIdentityPart> Part(this OpIdentity src, int partidx)
         {
             var parts = src.Parts.ToArray();
             if(partidx <= parts.Length - 1)
                 return parts[partidx];
             else
-                return none<MonikerPart>();
+                return none<OpIdentityPart>();
         }
 
-        public static Option<MonikerSegment> ParseSegment(this MonikerPart part)
+        public static Option<OpIdentitySegment> ParseSegment(this OpIdentityPart part)
         {
-            if(part.PartKind == MonikerPartKind.Segment)
+            if(part.PartKind == OpIdentityPartKind.Segment)
             {
-                if(MonikerSegment.TryParse(part.PartText, out var seg))
+                if(OpIdentitySegment.TryParse(part.PartText, out var seg))
                     return seg;                
             }
 
-            return none<MonikerSegment>();                
+            return none<OpIdentitySegment>();                
         }
 
-        public static Option<MonikerSegment> ParseSegment(this Moniker src, int partidx)
+        public static Option<OpIdentitySegment> ParseSegment(this OpIdentity src, int partidx)
             => from p in src.Part(partidx)
                 from s in p.ParseSegment()
                 select s;
 
         static string ImmSuffix(byte immval)            
-            => $"{Moniker.SuffixSep}{Moniker.Imm}{immval}";
+            => $"{OpIdentity.SuffixSep}{OpIdentity.Imm}{immval}";
 
         /// <summary>        
         /// Clears the immediate attached to the moniker, if any
         /// </summary>
-        public static Moniker WithoutImm(this Moniker src)
-            => src.ParseImm().MapValueOrDefault(immval => Moniker.Define(src.Identifier.Remove(ImmSuffix(immval))), src);
+        public static OpIdentity WithoutImm(this OpIdentity src)
+            => src.ParseImm().MapValueOrDefault(immval => OpIdentity.Define(src.Identifier.Remove(ImmSuffix(immval))), src);
     
-        public static Moniker WithImm(this Moniker src, byte imm)
-            => Moniker.Define(concat(src.WithoutImm().Identifier, ImmSuffix(imm)));
+        public static OpIdentity WithImm(this OpIdentity src, byte imm)
+            => OpIdentity.Define(concat(src.WithoutImm().Identifier, ImmSuffix(imm)));
 
         /// <summary>
         /// Closes generic operations over the set of primal types that each operation supports

@@ -15,7 +15,7 @@ namespace Z0
         {
             protected abstract string GetOpName();
 
-            public virtual Moniker Moniker => identify<A>(GetOpName());
+            public virtual OpIdentity Moniker => identify<A>(GetOpName());
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
 
             protected static T t => default;
 
-            public override Moniker Moniker => identify<W,T>(GetOpName());
+            public override OpIdentity Moniker => identify<W,T>(GetOpName());
         }
     }
 }

@@ -69,8 +69,8 @@ namespace Z0
         /// </summary>
         /// <param name="k">The primal classifier</param>
         [MethodImpl(Inline)]   
-        public static PrimalId id(NumericKind k)
-            => (PrimalId)((((uint)k << 8) >> 24) << 16);
+        public static PrimitiveId id(NumericKind k)
+            => (PrimitiveId)((((uint)k << 8) >> 24) << 16);
 
         /// <summary>
         /// Produces an identifier {bitsize(k)}{u | i | f} for a primal kind k

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     
-    public enum PrimalId : uint
+    public enum PrimitiveId : uint
     {
         U8 = (1u << 16),
 

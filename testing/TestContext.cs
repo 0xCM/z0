@@ -80,7 +80,7 @@ namespace Z0
         /// Produces the name of the test case predicated on fully-specified name, exluding the host name
         /// </summary>
         /// <param name="m">Moniker that identifies the operation under test</param>
-        public string CaseName(Moniker m)
+        public string CaseName(OpIdentity m)
             => $"{GetType().Name}/{m}";
 
         /// <summary>
@@ -103,14 +103,14 @@ namespace Z0
             where C : unmanaged
                 => $"{GetType().Name}/{identify(root,w,t)}";
 
-        protected static Moniker SubjectId(string opname, NumericKind kind)
+        protected static OpIdentity SubjectId(string opname, NumericKind kind)
             => OpIdentities.identify($"{opname}_subject",kind);
 
-        protected static Moniker SubjectId<T>(string opname, T t = default)
+        protected static OpIdentity SubjectId<T>(string opname, T t = default)
             where T : unmanaged
                 => SubjectId(opname, NumericType.kind<T>());
 
-        protected static Moniker BaselineId<K>(string opname,K t = default)
+        protected static OpIdentity BaselineId<K>(string opname,K t = default)
             where K : unmanaged
                 => identify<K>($"{opname}_baseline");
 

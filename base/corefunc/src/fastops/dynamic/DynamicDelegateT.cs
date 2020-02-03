@@ -26,7 +26,7 @@ namespace Z0
             => d.DynamicOp;
 
         [MethodImpl(Inline)]
-        public DynamicDelegate(Moniker id, MethodInfo src, DynamicMethod dst, D op)
+        public DynamicDelegate(OpIdentity id, MethodInfo src, DynamicMethod dst, D op)
         {
             this.Id = id;
             this.SourceMethod = src;
@@ -37,7 +37,7 @@ namespace Z0
         /// <summary>
         /// The delegate identity
         /// </summary>
-        public readonly Moniker Id;
+        public readonly OpIdentity Id;
 
         /// <summary>
         /// The method invoked by the dynamic operator that provides the substance of the operation

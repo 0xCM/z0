@@ -15,7 +15,7 @@ namespace Z0
 
     public static partial class FastOpX
     {
-        public static Moniker Identity(this IMethodMetadata src)
+        public static OpIdentity Identity(this IMethodMetadata src)
             => src.Element.Identify();
 
         public static IEnumerable<M> Generic<M>(this IEnumerable<M> src)

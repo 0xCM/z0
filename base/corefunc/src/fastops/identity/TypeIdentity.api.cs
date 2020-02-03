@@ -31,7 +31,7 @@ namespace Z0
             => TypeIdentity.Define($"{basename}{w1}x{w2}x{kind.Signature()}");   
 
         [MethodImpl(Inline)]
-        public static Option<TypeIdentity> identify(Type t)
+        public static TypeIdentity identify(Type t)
             => TypeIdentityProvider.from(t).DefineIdentity(t);
             
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         {
             if(arg.IsPointer)
                 return from id in arg.Unwrap().CommonIdentity()
-                let idptr = concat(id, parenthetical(Moniker.Pointer))
+                let idptr = concat(id, parenthetical(OpIdentity.Pointer))
                 select idptr;    
             else
             {                        
@@ -77,12 +77,12 @@ namespace Z0
 
         static Option<string> EnumIdentity(this Type arg)
             =>  TypeIdentities.EnumIdentity(arg) 
-                ? $"enum{Moniker.SegSep}{NumericType.signature(arg.GetEnumUnderlyingType())}" 
+                ? $"enum{OpIdentity.SegSep}{NumericType.signature(arg.GetEnumUnderlyingType())}" 
                 : default;
 
         static Option<string> NatIdentity(this Type arg)
             => from v in arg.NatValue() 
-                let id = concat(Moniker.Nat, v.ToString())
+                let id = concat(OpIdentity.Nat, v.ToString())
                 select id;
 
         static Option<string> NumericIdentity(this Type arg)
@@ -91,10 +91,10 @@ namespace Z0
                 : default;
 
         static Option<string> SpanIdentity(this Type arg)
-            => arg.IsSpan() ? arg.GetGenericArguments().Single().CommonIdentity().MapValueOrDefault(x => concat(Moniker.Span,x))
+            => arg.IsSpan() ? arg.GetGenericArguments().Single().CommonIdentity().MapValueOrDefault(x => concat(OpIdentity.Span,x))
              : none<string>();
                                 
-        internal static Option<TypeIdentity> DefineDefaultIdentity(this Type arg)
+        internal static TypeIdentity DefineDefaultIdentity(this Type arg)
         { 
             Option<string> text = default;
 
@@ -110,15 +110,15 @@ namespace Z0
                     text = arg.SegmentedIdentity(typearg).ValueOrDefault();
             }   
                 
-            return from t in text select TypeIdentity.Define(t);
+            return text.MapValueOrElse(t => TypeIdentity.Define(t), () => TypeIdentity.Empty);
         } 
 
         static Option<string> SegIndicator(this Type t)
         {
             if(t.IsBlocked())
-                return $"{Moniker.Block}";
+                return $"{OpIdentity.Block}";
             else if(t.IsVector())
-                return $"{Moniker.Vector}";
+                return $"{OpIdentity.Vector}";
             else return none<string>();
         }
 
@@ -128,7 +128,7 @@ namespace Z0
                 let argwidth = arg.Width()
                 let nk = arg.NumericKind()
                 where segwidth.IsSome() && argwidth.IsSome() && nk.IsSome()
-                select $"{i}{segwidth.Format()}{Moniker.SegSep}{argwidth.Format()}{nk.Indicator().Format()}";
+                select $"{i}{segwidth.Format()}{OpIdentity.SegSep}{argwidth.Format()}{nk.Indicator().Format()}";
 
     }
 }

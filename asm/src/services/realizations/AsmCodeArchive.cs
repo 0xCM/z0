@@ -111,7 +111,7 @@ namespace Z0
         /// Reads a moniker-identified, default-formatted hex-line file
         /// </summary>
         /// <param name="id">The identifying moniker</param>
-        public IEnumerable<AsmCode> Read(Moniker id)
+        public IEnumerable<AsmCode> Read(OpIdentity id)
             => Read(Root + FileName.Define(id, AsmHexLine.FileExt));
 
         /// <summary>
@@ -120,11 +120,11 @@ namespace Z0
         /// </summary>
         /// <param name="subfolder">The asm log subfolder</param>
         /// <param name="id">The identifying moniker</param>
-        public Option<AsmCode<T>> Read<T>(Moniker id, T t = default)
+        public Option<AsmCode<T>> Read<T>(OpIdentity id, T t = default)
             where T : unmanaged
                 => Read(Root,id, t);
         
-        static Option<AsmCode<T>> Read<T>(FolderPath location, Moniker m, T t = default)
+        static Option<AsmCode<T>> Read<T>(FolderPath location, OpIdentity m, T t = default)
             where T : unmanaged
                 => Try(() => AsmCode.Parse(Paths.AsmHexPath(location, m).ReadText(),m,t));
 

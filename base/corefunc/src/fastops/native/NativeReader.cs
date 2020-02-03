@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to read</param>
         /// <param name="dst">The target buffer</param>
-        public static CapturedMember read(Moniker id, MethodInfo src, Span<byte> dst)
+        public static CapturedMember read(OpIdentity id, MethodInfo src, Span<byte> dst)
         {            
             try
             {
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The dynamic delegate</param>
         /// <param name="dst">The target buffer</param>
-        public static unsafe CapturedMember read(Moniker id, DynamicDelegate src, Span<byte> dst)
+        public static unsafe CapturedMember read(OpIdentity id, DynamicDelegate src, Span<byte> dst)
         {
             var pSrc = jit(src);
             var pSrcCurrent = pSrc;
@@ -66,7 +66,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to read</param>
         /// <param name="dst">The target buffer</param>
-        public static unsafe CapturedMember read(Moniker id, Delegate src, Span<byte> dst)
+        public static unsafe CapturedMember read(OpIdentity id, Delegate src, Span<byte> dst)
         {
             try
             {

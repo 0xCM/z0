@@ -12,7 +12,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
  
     using static NumericKind;
-    using PId = PrimalId;
+    using PId = PrimitiveId;
 
     partial class RootX
     {
@@ -76,15 +76,15 @@ namespace Z0
         /// </summary>
         /// <param name="k">The primal classifier</param>
         [MethodImpl(Inline)]
-        public static PrimalId GetPrimalId(this NumericKind k)
-            => (PrimalId)((((uint)k << 8) >> 24) << 16);
+        public static PrimitiveId GetPrimalId(this NumericKind k)
+            => (PrimitiveId)((((uint)k << 8) >> 24) << 16);
 
         [MethodImpl(Inline)]
         public static bool Is(this NumericKind k, NumericKind match)        
             => ((uint)k & (uint)match) != 0;
 
         [MethodImpl(Inline)]
-        public static bool Is(this NumericKind k, PrimalId match)        
+        public static bool Is(this NumericKind k, PrimitiveId match)        
             => ((uint)k & (uint)match) != 0;
 
         /// <summary>
@@ -93,34 +93,34 @@ namespace Z0
         /// <param name="k">The kind to evaluate</param>
         public static IEnumerable<NumericKind> DistinctKinds(this NumericKind k)       
         {
-            if(k.Is(PrimalId.U8))
+            if(k.Is(PrimitiveId.U8))
                 yield return U8;
 
-            if(k.Is(PrimalId.I8))
+            if(k.Is(PrimitiveId.I8))
                 yield return I8;
 
-            if(k.Is(PrimalId.U16))
+            if(k.Is(PrimitiveId.U16))
                 yield return U16;
 
-            if(k.Is(PrimalId.I16))
+            if(k.Is(PrimitiveId.I16))
                 yield return I16;
 
-            if(k.Is(PrimalId.U32))
+            if(k.Is(PrimitiveId.U32))
                 yield return U32;
 
-            if(k.Is(PrimalId.I32))
+            if(k.Is(PrimitiveId.I32))
                 yield return I32;
 
-            if(k.Is(PrimalId.U64))
+            if(k.Is(PrimitiveId.U64))
                 yield return U64;
 
-            if(k.Is(PrimalId.I64))
+            if(k.Is(PrimitiveId.I64))
                 yield return I64;
 
-            if(k.Is(PrimalId.F32))
+            if(k.Is(PrimitiveId.F32))
                 yield return F32;
 
-            if(k.Is(PrimalId.F64))
+            if(k.Is(PrimitiveId.F64))
                 yield return F64;
         }
 

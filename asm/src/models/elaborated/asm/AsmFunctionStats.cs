@@ -18,7 +18,7 @@ namespace Z0.AsmSpecs
         /// <summary>
         /// The function identifier
         /// </summary>
-        public Moniker Id {get;}
+        public OpIdentity Id {get;}
 
 
         /// <summary>

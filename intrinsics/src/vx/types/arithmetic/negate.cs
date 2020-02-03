@@ -22,7 +22,7 @@ namespace Z0
 
             public static Negate128<T> Op => default;
 
-            public Moniker Moniker => identify(Name,hk);
+            public OpIdentity Moniker => identify(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) 
@@ -47,7 +47,7 @@ namespace Z0
 
             public static Negate256<T> Op => default;
 
-            public Moniker Moniker => identify(Name,hk);
+            public OpIdentity Moniker => identify(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) 

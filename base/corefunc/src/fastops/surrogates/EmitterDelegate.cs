@@ -25,7 +25,7 @@ namespace Z0
             this.Name = name;
         }
         
-        public Moniker Moniker => identify<T>(Name);
+        public OpIdentity Moniker => identify<T>(Name);
 
         [MethodImpl(Inline)]
         public T Invoke() => f();

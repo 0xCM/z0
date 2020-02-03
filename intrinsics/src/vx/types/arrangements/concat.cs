@@ -19,8 +19,8 @@ namespace Z0
 
             public static Concat2x128<T> Op => default;
 
-            public Moniker Moniker 
-                => Moniker.Define($"{Name}_2x128x{numericid<T>()}");
+            public OpIdentity Moniker 
+                => OpIdentity.Define($"{Name}_2x128x{numericid<T>()}");
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector128<T> x, Vector128<T> y) 

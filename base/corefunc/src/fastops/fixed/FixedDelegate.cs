@@ -15,13 +15,13 @@ namespace Z0
 
     public readonly struct FixedDelegate
     {
-        public static FixedDelegate Define(Moniker id, IntPtr src, DynamicMethod enclosure, Delegate dynop)        
+        public static FixedDelegate Define(OpIdentity id, IntPtr src, DynamicMethod enclosure, Delegate dynop)        
             => new FixedDelegate(id,src,enclosure,dynop);
 
         public static implicit operator Delegate(FixedDelegate src)            
             => src.DynamicOp;
             
-        FixedDelegate(Moniker id, IntPtr src, DynamicMethod enclosure, Delegate dynop)
+        FixedDelegate(OpIdentity id, IntPtr src, DynamicMethod enclosure, Delegate dynop)
         {
             this.Id = id;
             this.SourceAddress = src;
@@ -29,7 +29,7 @@ namespace Z0
             this.DynamicOp = dynop;
         }
 
-        public readonly Moniker Id;
+        public readonly OpIdentity Id;
 
         public readonly IntPtr SourceAddress;
 

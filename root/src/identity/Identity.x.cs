@@ -11,7 +11,27 @@ namespace Z0
  
     public static partial class RootX
     {
-        public static NumericKind NumericKind(this MonikerSegment ms)
+        [MethodImpl(Inline)]
+        public static char Character(this NumericIndicator src)
+            => src  != NumericIndicator.None ? (char)src : 'e';
+
+        [MethodImpl(Inline)]
+        public static string Format(this NumericIndicator src)
+            => src.Character().ToString();
+        
+        public static bool IsValid(this NumericIndicator src)
+            => Enum.IsDefined(typeof(NumericIndicator), src);
+
+        public static string Format(this AssemblyId id)
+            => id.ToString().ToLower();
+
+        public static bool IsSome(this IdentityIndicator kind)
+            => kind != IdentityIndicator.None;
+
+        public static string Format(this IdentityIndicator kind)
+            => kind.IsSome() ? $"{(char)kind}" : string.Empty;
+
+        public static NumericKind NumericKind(this OpIdentitySegment ms)
         {
             const NumericIndicator i = NumericIndicator.Signed;
             const NumericIndicator u = NumericIndicator.Unsigned;

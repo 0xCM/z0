@@ -72,7 +72,7 @@ namespace Z0
         /// Decodes a function from a method
         /// </summary>
         /// <param name="src">The cource capture</param>
-        public AsmFunction DecodeFunction(Moniker id, MethodInfo src)
+        public AsmFunction DecodeFunction(OpIdentity id, MethodInfo src)
             => DecodeFunction(NativeReader.read(id, src, TakeBuffer()));
 
         /// <summary>

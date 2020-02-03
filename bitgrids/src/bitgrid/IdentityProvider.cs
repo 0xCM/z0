@@ -13,17 +13,17 @@ namespace Z0
 
     readonly struct BitGridIdentity : ITypeIdentityProvider
     {        
-        public Option<TypeIdentity> DefineIdentity(Type src)
+        public TypeIdentity DefineIdentity(Type src)
         {
             var kind = src.GridKind().ValueOrDefault();
             if(!kind.IsSome())
-                return none<TypeIdentity>();
+                return TypeIdentity.Empty;
             if(src.IsOpenGeneric())
                 return TypeIdentity.Define(kind.Indicator());
             
             var closures = src.GridClosures();
             if(!closures.IsSome())
-                return none<TypeIdentity>();
+                return TypeIdentity.Empty;
             
             var segsep = TypeIdentity.SegSep.ToString();
             var count = closures.NonEmptyCount();
@@ -39,8 +39,7 @@ namespace Z0
                         closures.C.Format()
                         ));
             else 
-                return none<TypeIdentity>();
-            
+                return TypeIdentity.Empty;            
         }
     }
 

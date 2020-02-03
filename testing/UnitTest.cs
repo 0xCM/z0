@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch(BinaryOp8 f, Moniker fId, BinaryOp8 g, Moniker gId)
+        protected void CheckMatch(BinaryOp8 f, OpIdentity fId, BinaryOp8 g, OpIdentity gId)
         {
             void check()
             {
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch(BinaryOp16 f, Moniker fId, BinaryOp16 g, Moniker gId)
+        protected void CheckMatch(BinaryOp16 f, OpIdentity fId, BinaryOp16 g, OpIdentity gId)
         {
             void check()
             {
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch(BinaryOp32 f, Moniker fId, BinaryOp32 g, Moniker gId)
+        protected void CheckMatch(BinaryOp32 f, OpIdentity fId, BinaryOp32 g, OpIdentity gId)
         {
             var w = n32;
             void check()
@@ -101,7 +101,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch(BinaryOp64 f, Moniker fId, BinaryOp64 g, Moniker gId)
+        protected void CheckMatch(BinaryOp64 f, OpIdentity fId, BinaryOp64 g, OpIdentity gId)
         {
             var w = n64;
             void check()
@@ -124,7 +124,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch(BinaryOp128 f, Moniker fId, BinaryOp128 g, Moniker gId)
+        protected void CheckMatch(BinaryOp128 f, OpIdentity fId, BinaryOp128 g, OpIdentity gId)
         {
             var w = n128;
             
@@ -148,7 +148,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch(BinaryOp256 f, Moniker fId, BinaryOp256 g, Moniker gId)
+        protected void CheckMatch(BinaryOp256 f, OpIdentity fId, BinaryOp256 g, OpIdentity gId)
         {
             var w = n256;
             void check()
@@ -171,7 +171,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch<T>(BinaryOp<Vector128<T>> f, BinaryOp128 g, Moniker name)
+        protected void CheckMatch<T>(BinaryOp<Vector128<T>> f, BinaryOp128 g, OpIdentity name)
             where T : unmanaged
         {
             void check()
@@ -197,7 +197,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        protected void CheckMatch<T>(BinaryOp<Vector256<T>> f, BinaryOp256 g, Moniker name)
+        protected void CheckMatch<T>(BinaryOp<Vector256<T>> f, BinaryOp256 g, OpIdentity name)
             where T : unmanaged
         {
             void check()
@@ -221,7 +221,7 @@ namespace Z0
         /// <param name="f">The action under test</param>
         /// <param name="name">The action name</param>
         /// <param name="clock">Accumulates the test case execution time</param>
-        protected void CheckAction(Action f, Moniker name, SystemCounter count = default)
+        protected void CheckAction(Action f, OpIdentity name, SystemCounter count = default)
         {
             var succeeded = true;
             

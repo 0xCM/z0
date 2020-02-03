@@ -48,7 +48,7 @@ namespace Z0
         public static AppMsg Decoded(AsmFunction f)        
             => appMsg($"Decoded function {f.Id}", SeverityLevel.Babble);
 
-        public static AppMsg Decoding(Moniker id, MethodInfo m)        
+        public static AppMsg Decoding(OpIdentity id, MethodInfo m)        
             => appMsg($"Decoding  method {m.DisplayName()} with identity {id}", SeverityLevel.Babble);
 
         public static AppMsg DescriptorConflit(AsmEmissionToken src)

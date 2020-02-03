@@ -16,10 +16,10 @@ namespace Z0
 
     static class AsmImmCapture
     {
-        public static IAsmImmCapture UnaryCapture(IAsmContext context, MethodInfo src, Moniker baseid)
+        public static IAsmImmCapture UnaryCapture(IAsmContext context, MethodInfo src, OpIdentity baseid)
             => AsmImmUnaryCapture.Create(context,src,baseid);
 
-        public static IAsmImmCapture BinaryCapture(IAsmContext context, MethodInfo src, Moniker baseid)
+        public static IAsmImmCapture BinaryCapture(IAsmContext context, MethodInfo src, OpIdentity baseid)
             => AsmImmBinaryCapture.Create(context,src,baseid);
 
     }
@@ -31,13 +31,13 @@ namespace Z0
         
         protected readonly MethodInfo Method;
 
-        protected readonly Moniker BaseId;
+        protected readonly OpIdentity BaseId;
 
         protected readonly IAsmDecoder Decoder;
 
 
         [MethodImpl(Inline)]
-        protected AsmImmCapture(IAsmContext context, MethodInfo method, Moniker baseid)
+        protected AsmImmCapture(IAsmContext context, MethodInfo method, OpIdentity baseid)
         {            
             this.Context = context;
             this.Method = method;
@@ -51,11 +51,11 @@ namespace Z0
     sealed class AsmImmUnaryCapture : AsmImmCapture<AsmImmUnaryCapture>
     {
         [MethodImpl(Inline)]
-        public static IAsmImmCapture Create(IAsmContext context, MethodInfo src, Moniker baseid)
+        public static IAsmImmCapture Create(IAsmContext context, MethodInfo src, OpIdentity baseid)
             => new AsmImmUnaryCapture(context.WithEmptyClrIndex(), src,baseid);
 
         [MethodImpl(Inline)]
-        AsmImmUnaryCapture(IAsmContext context, MethodInfo method, Moniker baseid)
+        AsmImmUnaryCapture(IAsmContext context, MethodInfo method, OpIdentity baseid)
             : base(context,method,baseid)
         {            
 
@@ -69,11 +69,11 @@ namespace Z0
     sealed class AsmImmBinaryCapture : AsmImmCapture<AsmImmBinaryCapture>
     {
         [MethodImpl(Inline)]
-        public static IAsmImmCapture Create(IAsmContext context, MethodInfo src, Moniker baseid)
+        public static IAsmImmCapture Create(IAsmContext context, MethodInfo src, OpIdentity baseid)
             => new AsmImmBinaryCapture(context.WithEmptyClrIndex(), src,baseid);
 
         [MethodImpl(Inline)]
-        AsmImmBinaryCapture(IAsmContext context, MethodInfo method, Moniker baseid)
+        AsmImmBinaryCapture(IAsmContext context, MethodInfo method, OpIdentity baseid)
             : base(context,method,baseid)
         {            
 

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    public enum MonikerPartKind : byte
+    public enum OpIdentityPartKind : byte
     {
         None = 0,
                 

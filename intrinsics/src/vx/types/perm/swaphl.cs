@@ -21,7 +21,7 @@ namespace Z0
 
             static N128 w => default;
 
-            public Moniker Moniker => identify<T>(Name,w);
+            public OpIdentity Moniker => identify<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => ginx.vswaphl(x);
@@ -37,7 +37,7 @@ namespace Z0
 
             static N256 w => default;
 
-            public Moniker Moniker => identify<T>(Name,w);
+            public OpIdentity Moniker => identify<T>(Name,w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x) => ginx.vswaphl(x);

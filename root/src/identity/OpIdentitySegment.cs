@@ -8,15 +8,15 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    public readonly struct MonikerSegment
+    public readonly struct OpIdentitySegment
     {        
-        public static MonikerSegment Empty => Define(FixedWidth.None, FixedWidth.None, NumericIndicator.None);
+        public static OpIdentitySegment Empty => Define(FixedWidth.None, FixedWidth.None, NumericIndicator.None);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static MonikerSegment Define(FixedWidth total, FixedWidth segment, NumericIndicator indicator)
-            => new MonikerSegment(total,segment,indicator);
+        public static OpIdentitySegment Define(FixedWidth total, FixedWidth segment, NumericIndicator indicator)
+            => new OpIdentitySegment(total,segment,indicator);
 
-        public static bool TryParse(string src, out MonikerSegment dst)
+        public static bool TryParse(string src, out OpIdentitySegment dst)
         {
             dst = default;
             var startidx = 0;
@@ -28,12 +28,12 @@ namespace Z0
                     break;
                 }
             }
-            var parts = src.Substring(startidx).Split(Moniker.SegSep,StringSplitOptions.RemoveEmptyEntries);
+            var parts = src.Substring(startidx).Split(OpIdentity.SegSep,StringSplitOptions.RemoveEmptyEntries);
             if(parts.Length == 2)
             {
                 var part0 = parts[0];
                 var part1 = parts[1];
-                var segtext = part0[0] == Moniker.Generic ? part0.Substring(1, part0.Length - 1): part0;
+                var segtext = part0[0] == OpIdentity.Generic ? part0.Substring(1, part0.Length - 1): part0;
                 if(uint.TryParse(segtext, out var n))
                 {
                     if(Enum.IsDefined(typeof(FixedWidth),n))
@@ -53,7 +53,7 @@ namespace Z0
             return false;
         }
                 
-        public static MonikerSegment Define(int totalwidth, int segwidth, char indicator)
+        public static OpIdentitySegment Define(int totalwidth, int segwidth, char indicator)
         {
             if(Enum.IsDefined(typeof(FixedWidth),(uint)totalwidth) &&
                 Enum.IsDefined(typeof(FixedWidth),(uint)segwidth) &&
@@ -63,14 +63,14 @@ namespace Z0
                 return Empty;
         }
 
-        public static implicit operator MonikerSegment((int w, int t, char i) src)                
+        public static implicit operator OpIdentitySegment((int w, int t, char i) src)                
             => Define(src.w,src.t,src.i);
 
-        public static implicit operator MonikerSegment((FixedWidth w, FixedWidth t, NumericIndicator i) src)                
-            => new MonikerSegment(src.w, src.t,src.i);
+        public static implicit operator OpIdentitySegment((FixedWidth w, FixedWidth t, NumericIndicator i) src)                
+            => new OpIdentitySegment(src.w, src.t,src.i);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        MonikerSegment(FixedWidth dominant, FixedWidth segwidth, NumericIndicator indicator)
+        OpIdentitySegment(FixedWidth dominant, FixedWidth segwidth, NumericIndicator indicator)
         {
             this.TotalWidth = dominant;
             this.SegWidth = segwidth;
@@ -89,7 +89,7 @@ namespace Z0
                 Indicator == NumericIndicator.None;
 
         public string Format()
-            => $"{(int)TotalWidth}{Moniker.SegSep}{(int)SegWidth}{(char)Indicator}";
+            => $"{(int)TotalWidth}{OpIdentity.SegSep}{(int)SegWidth}{(char)Indicator}";
 
         public override string ToString()
             => Format();

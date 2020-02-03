@@ -11,12 +11,12 @@ namespace Z0
 
     public interface IOpIdentityProvider
     {
-        Moniker DefineIdentity(MethodInfo method);
+        OpIdentity DefineIdentity(MethodInfo method);
 
-        Moniker GroupIdentity(MethodInfo method);                    
+        OpIdentity GroupIdentity(MethodInfo method);                    
 
-        Moniker GenericIdentity(MethodInfo method);                    
+        OpIdentity GenericIdentity(MethodInfo method);                    
 
-        Moniker DefineIdentity(MethodInfo method, NumericKind k);
+        OpIdentity DefineIdentity(MethodInfo method, NumericKind k);
     }
 }

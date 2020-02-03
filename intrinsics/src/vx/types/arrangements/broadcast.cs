@@ -21,7 +21,7 @@ namespace Z0
 
             public static Broadcast128<T> Op => default;
 
-            public Moniker Moniker => identify(Name,hk);
+            public OpIdentity Moniker => identify(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(T a) => CpuVector.vbroadcast(n128, a);            
@@ -37,7 +37,7 @@ namespace Z0
 
             static N128 w => default;
 
-            public Moniker Moniker => identify<T>($"{Name}_{numericid<S>()}",w);
+            public OpIdentity Moniker => identify<T>($"{Name}_{numericid<S>()}",w);
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(S a) => CpuVector.vbroadcast(n128, convert<S,T>(a));            
@@ -52,7 +52,7 @@ namespace Z0
 
             public static Broadcast256<T> Op => default;
 
-            public Moniker Moniker => identify(Name,hk);
+            public OpIdentity Moniker => identify(Name,hk);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(T a) => CpuVector.vbroadcast(n256, a);            
@@ -68,7 +68,7 @@ namespace Z0
 
             static N256 w => default;
 
-            public Moniker Moniker => identify<T>($"{Name}_{numericid<S>()}",w);
+            public OpIdentity Moniker => identify<T>($"{Name}_{numericid<S>()}",w);
 
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(S a) => CpuVector.vbroadcast(n256, convert<S,T>(a));

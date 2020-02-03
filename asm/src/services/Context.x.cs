@@ -54,7 +54,7 @@ namespace Z0
 
         
         [MethodImpl(Inline)]
-        public static IAsmImmCapture ImmCapture<Arity>(this IAsmContext context, MethodInfo src, Moniker baseid, Arity arity = default)
+        public static IAsmImmCapture ImmCapture<Arity>(this IAsmContext context, MethodInfo src, OpIdentity baseid, Arity arity = default)
             where Arity : unmanaged, ITypeNat
         {
             if(typeof(Arity) == typeof(N1))

@@ -10,58 +10,61 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
+    using static RootShare;
+
     public readonly struct TypeIdentity : IIdentity<TypeIdentity>
     {
         public string Identifier {get;}
 
         public static TypeIdentity Empty => Define(string.Empty);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         public static TypeIdentity Define(string identifier)
             => new TypeIdentity(identifier);
         
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator string(TypeIdentity src)
-            => src.Identifier;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         public static TypeIdentity operator +(TypeIdentity lhs, string rhs)
             => Define($"{lhs}{rhs}");
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         public static TypeIdentity operator +(string lhs, TypeIdentity rhs)
             => Define($"{lhs}{rhs}");
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
+        public static implicit operator string(TypeIdentity src)
+            => src.Identifier;
+
+        [MethodImpl(Inline)]
         public static bool operator==(TypeIdentity a, TypeIdentity b)
             => a.Equals(b);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         public static bool operator!=(TypeIdentity a, TypeIdentity b)
             => !a.Equals(b);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(Inline)]
         TypeIdentity(string id)
             => Identifier = id;
 
         public bool IsEmpty
         {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [MethodImpl(Inline)]
             get => string.IsNullOrWhiteSpace(Identifier);
         }
 
+        [MethodImpl(Inline)]
+        public bool Equals(TypeIdentity src)
+            => IdentityEquals(this, src);
+
         public override string ToString()
             => Identifier;
-        
+ 
         public override int GetHashCode()
-            => Identifier.GetHashCode();
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(TypeIdentity src)
-            => string.Equals(src.Identifier, Identifier, StringComparison.InvariantCultureIgnoreCase);
+            => IdentityHashCode(this);
 
         public override bool Equals(object obj)
-            => obj is TypeIdentity id && Equals(id);
+            => IdentityEquals(this, obj);
 
        public const char SegSep = 'x';
 
